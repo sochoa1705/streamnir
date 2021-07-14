@@ -1,4 +1,16 @@
 # Node.js with Angular
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Microsoft Azure – EXPERTIA(f7864d4b-f7ba-4627-976f-a749d462f414)'
+    appType: 'webAppLinux'
+    WebAppName: 'NmViajesWeb'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'EXPERTIA-NMVIAJES-UAT'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'NODE|14-lts'
+    StartupCommand: 'npm install build'
 # Build a Node.js project that uses Angular.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
