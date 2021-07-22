@@ -1,0 +1,39 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.mat-toolbar{
+    background-color: #B50A27;
+    color: white;
+}
+
+ul{
+    list-style: none;
+    li{
+        display: inline-block;
+        margin: 0 10px;
+        a{
+            position: relative;
+            color: rgba(255, 255, 255, .8);
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: .5px;
+            line-height: 20px;
+            &:after {
+                content: "";
+                display: block;
+                margin: auto;
+                height: 2px;
+                width: 0px;
+                transition: all .3s;
+            }
+            &:hover{
+                color: rgba(255, 255, 255, 1);
+                &:after {
+                    width: 100%;
+                    background: #fff;
+                }
+            }
+        }
+    }
+}

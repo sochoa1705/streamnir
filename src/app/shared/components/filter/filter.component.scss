@@ -1,0 +1,79 @@
+// .example-stretched-tabs {
+//     max-width: 800px;
+// }
+$color-filter: white;
+:host ::ng-deep .mat {
+    &-tab-label{
+        background-color: $color-filter;
+        color: #4B4B4B;
+        box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+        border-radius: 7px;
+        opacity: 1;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.5px;
+        padding: 13px 20px;
+        margin: 0 4px;
+        margin-bottom: 4px;
+        min-width: 130px;
+        &-active {
+        border-radius: 7px 7px 0 0;
+        }
+    }
+    &-ink-bar{
+        height: 4px;
+        background-color: $color-filter!important;
+    }
+    &-tab-header {
+        border-bottom: 0px;
+    }
+    &-tab-body {
+        background: $color-filter;
+        box-shadow: 0px 1px 8px rgba(122, 88, 88, 0.05);
+        padding: 35px 43px;
+        border-radius: 7px;
+
+        &-wrapper{
+            overflow: inherit;
+            z-index: 0;
+        }
+    }
+}
+
+.banner{
+    width: 100%;
+    height: 540px;
+    padding: 0 !important;
+    position: relative;
+    overflow: inherit;
+    display: flex;
+    align-items: flex-end;
+    &>.content{
+        top:0;
+        height: 440px;
+        position: absolute;
+        max-width: 100%;
+        width: 100%;
+        & img {
+            position: absolute;
+            object-fit: cover;
+            -o-object-position: top;
+            object-position: top;
+            height: 100%;
+            max-width: 100%;
+            width: 100%;
+        }
+    }
+}
+
+.form-select {
+    font-style: normal;
+    font-weight: 600;
+    border: 0px;
+    font-size: 14px;
+    color: #222;
+    background-image: url(../../../../assets/arrow.svg);
+    &:focus{
+        box-shadow: none;
+    }
+}
