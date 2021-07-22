@@ -1,0 +1,38 @@
+aside {
+    .aside{
+        &__content {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            display: block;
+            border-right: 1px solid white;
+            &>img{
+                position: absolute;
+                object-fit: cover;
+                -o-object-position: top;
+                object-position: top;
+                height: 100%;
+                max-width: 100%;
+                width: 100%;
+            }
+            &_2{
+                height: 199px;
+                background: red;
+                position: relative;
+                width: 100%;
+                &:first-child{
+                    border-bottom: 1px solid white;
+                }
+                &>img{
+                    position: absolute;
+                    object-fit: cover;
+                    -o-object-position: top;
+                    object-position: top;
+                    height: 100%;
+                    max-width: 100%;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
