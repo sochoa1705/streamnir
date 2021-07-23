@@ -1,6 +1,6 @@
 import { environment } from 'src/environments/environment';
 
-var urlLogout = "http://localHost:8080/Login";
+var urlLogout = "http://localhost:8080/Login";
 
 export function CloseSession(): void {
     if (localStorage.getItem('errorNuevoMundo')) {
