@@ -5,6 +5,7 @@ import { FilterModule } from 'src/app/shared/components/filter/filter.module';
 import { AsideModule } from 'src/app/shared/components/aside/aside.module';
 import { CardModule } from 'src/app/shared/components/card/card.module';
 import { CardInfoModule } from 'src/app/shared/components/card-info/card-info.module';
+import { PackageModule } from 'src/app/shared/components/package/package.module';
 
 
 
@@ -17,6 +18,7 @@ import { CardInfoModule } from 'src/app/shared/components/card-info/card-info.mo
     AsideModule,
     CardModule,
     CardInfoModule,
+    PackageModule,
   ],
   exports: [ VuelosComponent ]
 })
