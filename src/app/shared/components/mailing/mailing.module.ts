@@ -1,15 +1,18 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FilterComponent } from './filter.component';
+import { MailingComponent } from './mailing.component';
 import { MaterialModule } from '../../material.module';
+
+
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ FilterComponent ],
+  declarations: [ MailingComponent ],
   imports: [
     CommonModule,
     MaterialModule,
   ],
-  exports: [ FilterComponent ]
+  exports: [ MailingComponent ],
+
 })
-export class FilterModule { }
+export class MailingModule { }

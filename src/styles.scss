@@ -32,9 +32,15 @@ button{
     &r-0{
         padding-right: 0px;
     }
-    &l-0{
-        padding-left: 0px;
+    &l{
+        &-0{
+            padding-left: 0px;
+        }
+        &-3{
+            padding-left: 15px;
+        }
     }
+
 }
 
 section{
