@@ -1,15 +1,15 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FilterComponent } from './filter.component';
+import { FooterComponent } from './footer.component';
 import { MaterialModule } from '../../material.module';
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ FilterComponent ],
+  declarations: [ FooterComponent ],
   imports: [
     CommonModule,
     MaterialModule,
   ],
-  exports: [ FilterComponent ]
+  exports: [ FooterComponent ],
 })
-export class FilterModule { }
+export class FooterModule { }

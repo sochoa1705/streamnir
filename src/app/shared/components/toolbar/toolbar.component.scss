@@ -5,33 +5,43 @@
 .mat-toolbar{
     background-color: #B50A27;
     color: white;
-}
-
-ul{
-    list-style: none;
-    li{
-        display: inline-block;
-        margin: 0 10px;
-        a{
-            position: relative;
-            color: rgba(255, 255, 255, .8);
-            text-decoration: none;
-            font-size: 14px;
-            letter-spacing: .5px;
-            line-height: 20px;
-            &:after {
-                content: "";
-                display: block;
-                margin: auto;
-                height: 2px;
-                width: 0px;
-                transition: all .3s;
-            }
-            &:hover{
-                color: rgba(255, 255, 255, 1);
+    &>a{
+        margin-right: 20px;
+        &:first-child{
+            border-left: 1px solid white!important;
+        }
+    }
+    ul{
+        list-style: none;
+        margin-bottom: 0;
+        li{
+            display: inline-block;
+            margin: 0 20px;
+            a{
+                display: flex;
+        flex-direction: column;
+        /* text-align: center; */
+        align-items: center;
+                position: relative;
+                color: rgba(255, 255, 255, .8);
+                text-decoration: none;
+                font-size: 14px;
+                letter-spacing: .5px;
+                line-height: 20px;
                 &:after {
-                    width: 100%;
-                    background: #fff;
+                    content: "";
+                    display: block;
+                    margin: auto;
+                    height: 2px;
+                    width: 0px;
+                    transition: all .3s;
+                }
+                &:hover{
+                    color: rgba(255, 255, 255, 1);
+                    &:after {
+                        width: 100%;
+                        background: #fff;
+                    }
                 }
             }
         }
