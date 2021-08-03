@@ -16,8 +16,27 @@ $color-filter: white;
         margin: 0 4px;
         margin-bottom: 4px;
         min-width: 130px;
+        height: auto;
+        font-weight: bold;
+        &:hover{
+            color:#DF0C30;
+        }
         &-active {
-        border-radius: 7px 7px 0 0;
+            border-radius: 7px 7px 0 0;
+            color:#DF0C30;
+            font-weight: bold;
+            .mat-tab-label-content>svg>path{
+                fill:#DF0C30;
+            }
+        }
+        &:hover>.mat-tab-label-content>svg>path{
+            fill:#DF0C30;
+        }
+        &-content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
     }
     &-ink-bar{
@@ -75,5 +94,16 @@ $color-filter: white;
     background-image: url(../../../../assets/arrow.svg);
     &:focus{
         box-shadow: none;
+    }
+    option{
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 44px;
+        margin: 10px;
+        &:hover{
+            background: red!important;
+        }
     }
 }

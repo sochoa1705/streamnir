@@ -1,24 +1,10 @@
 <div class="package">
-    <img src="./assets/package/13-RivieraMaya.jpg" alt="">
+    <img src="{{ image }}" alt="">
     <div class="shadow"></div>
-    <div class="d-flex align-items-start flex-column px-4 py-3">
-        <div class="mb-auto">
+    <div class="d-flex align-items-start flex-column pl-3 pb-3">
+        <div class="mb-auto d-flex w-100 align-items-start justify-content-between">
             <h6>Saliendo de lima</h6>
-        </div>
-        <div class="show">
-            <span class="hidden">¡Vamos! <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.22168 6.4825H14.5749M14.5749 6.4825L9.58248 0.741211M14.5749 6.4825L9.58248 12.2238" stroke="white"/>
-                </svg>
-                </span>
-            <h1>Vichayito</h1>
-
-            <span class="hidden">MEXICO</span>
-            <hr class="hidden">
-
-
-            <span>6 días / 5 noches desde $699</span>
-
-            <p>INCLUYE BOLETO <svg width="21" height="15" viewBox="0 0 21 15" fill="none"
+            <p class="py-2 px-2">{{ span }} <svg width="21" height="15" viewBox="0 0 21 15" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M20.5858 13.8564H0.414201C0.185479 13.8564 0 14.0419 0 14.2706C0 14.4994 0.185479 14.6848 0.414201 14.6848H20.5858C20.8145 14.6848 21 14.4994 21 14.2706C21 14.0419 20.8145 13.8564 20.5858 13.8564Z"
@@ -31,6 +17,22 @@
                         fill="white" />
                 </svg>
             </p>
+        </div>
+        <div class="show d-flex w-100 align-items-end justify-content-between">
+            <div>
+                <span class="hidden">¡Vamos! <svg width="16" height="13" viewBox="0 0 16 13" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.22168 6.4825H14.5749M14.5749 6.4825L9.58248 0.741211M14.5749 6.4825L9.58248 12.2238"
+                            stroke="white" />
+                    </svg>
+                </span>
+                <h1>{{ city }}</h1>
+                <span class="hidden">{{ destiny }} - </span>
+                <span class="d-inline"> {{ pack }}</span>
+            </div>
+            <div>
+                <div class="d-fle">desde<mark>${{ price }}</mark></div>
+            </div>
         </div>
     </div>
 </div>

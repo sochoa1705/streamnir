@@ -1,13 +1,14 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PackageComponent } from './package.component';
+import { TitleComponent } from './title.component';
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ PackageComponent ],
+  declarations: [ TitleComponent ],
   imports: [
     CommonModule
   ],
-  exports: [ PackageComponent ],
+  exports: [ TitleComponent ],
+
 })
-export class PackageModule { }
+export class TitleModule { }
