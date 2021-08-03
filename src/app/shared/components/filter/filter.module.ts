@@ -4,7 +4,7 @@ import { FilterComponent } from './filter.component';
 import { MaterialModule } from '../../material.module';
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ FilterComponent ],
   imports: [
     CommonModule,

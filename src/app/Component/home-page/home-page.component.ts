@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { OffersService } from 'src/app/Services/mock/offers.service';
+import { PackagesService } from 'src/app/Services/mock/packages.service';
+import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public offersService: OffersService,
+    public packagesService: PackagesService,
+    public dataPagePresenterService: DataPagePresenterService,
+  ) { }
 
   ngOnInit(): void {
   }

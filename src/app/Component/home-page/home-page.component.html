@@ -1,1 +1,73 @@
-<router-outlet></router-outlet>
+<app-filter></app-filter>
+<app-aside [slider]="dataPagePresenterService.data.aside"></app-aside>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <app-title></app-title>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3" *ngFor="let offer of offersService.offers">
+            <app-card [image]="offer.image" [label]="offer.label" [destiny]="offer.destiny" [from]="offer.from"
+                [span]="offer.span" [price]="offer.price"></app-card>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <app-title></app-title>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div *ngFor="let packb of packagesService.packages" class="col-{{ packb.banner }}">
+            <app-package *ngIf="packb.banner" [image]="packb.image" [label]="packb.label" [banner]="packb.banner"  [span]="packb.span" [pack]="packb.pack" [city]="packb.city" [price]="packb.price" [destiny]="packb.destiny"></app-package>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <app-title></app-title>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3" *ngFor="let pack of packagesService.packages">
+            <app-card  *ngIf="!pack.banner"  [image]="pack.image" [label]="pack.label" [destiny]="pack.destiny" [from]="pack.from"
+                [span]="pack.span" [price]="pack.price"></app-card>
+        </div>
+    </div>
+</div>
+
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <img width="100%" src="./assets/comprar.jpg">
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <app-card-info></app-card-info>
+                <app-card-info></app-card-info>
+                <app-card-info></app-card-info>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-mailing></app-mailing>
+<app-footer></app-footer>

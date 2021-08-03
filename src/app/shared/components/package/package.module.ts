@@ -8,6 +8,6 @@ import { PackageComponent } from './package.component';
   imports: [
     CommonModule
   ],
-  exports: [ PackageComponent ]
+  exports: [ PackageComponent ],
 })
 export class PackageModule { }
