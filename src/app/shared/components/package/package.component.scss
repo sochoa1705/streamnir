@@ -20,7 +20,9 @@
 
     }
     p{
+        background: #DF0C30;
         margin-bottom: 0;
+        border-radius: 0 5px;
     }
     // &:hover{
     //     -webkit-filter: grayscale(100%);
@@ -52,12 +54,28 @@
             font-size: 14px;
             line-height: 21px;
             letter-spacing: 1px;
+            margin-top: 10px;
         }
         &r{
             opacity: 1;
             margin-top: 5px;
             margin-bottom: 7px;
         }
+    }
+    mark{
+        display: block;
+        background-color: red;
+        padding: 0 20px;
+        border-radius: 5px 0px 0px 5px;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 38px;
+        line-height: 60px;
+        text-align: right;
+        letter-spacing: -0.5px;
+        color: #FFFFFF;
+        text-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
     }
     .show{
         width: 100%;
@@ -66,13 +84,13 @@
         display: none;
     }
     &:hover .hidden{
-        display: block;
+        display: inline-block;
     }
     &:hover hr + span{
         display: inline-block;
         margin-right: 20px;
     }
-    &:hover hr ~ p{
-        display: inline-block;
+    &:hover  p{
+        background: transparent;
     }
 }

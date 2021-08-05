@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Public/login/login.component';
@@ -17,7 +16,6 @@ import { ToolbarModule } from './shared/components/toolbar/toolbar.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule,
     ToolbarModule,

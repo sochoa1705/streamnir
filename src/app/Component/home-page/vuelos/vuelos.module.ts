@@ -8,21 +8,12 @@ import { CardInfoModule } from 'src/app/shared/components/card-info/card-info.mo
 import { PackageModule } from 'src/app/shared/components/package/package.module';
 import { FooterModule } from 'src/app/shared/components/footer/footer.module';
 import { MailingModule } from 'src/app/shared/components/mailing/mailing.module';
-
-
+import { TitleModule } from 'src/app/shared/components/title/title.module';
 
 @NgModule({
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ VuelosComponent ],
   imports: [
     CommonModule,
-    FilterModule,
-    AsideModule,
-    CardModule,
-    CardInfoModule,
-    PackageModule,
-    FooterModule,
-    MailingModule,
   ],
   exports: [ VuelosComponent ]
 })

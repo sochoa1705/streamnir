@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-package',
@@ -6,7 +6,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./package.component.scss']
 })
 export class PackageComponent implements OnInit {
-
+  @Input()
+  image!: string;
+  @Input()
+  label!: string;
+  @Input()
+  destiny!: string;
+  @Input()
+  city!: string;
+  @Input()
+  from!: string;
+  @Input()
+  span!: string;
+  @Input()
+  price!: number;
+  @Input()
+  banner!: number;
+  @Input()
+  link!: string;
+  @Input()
+  pack!: string;
   constructor() { }
 
   ngOnInit(): void {

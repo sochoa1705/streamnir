@@ -4,6 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [],
@@ -13,6 +14,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatIconModule,
     MatTabsModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
   ],
   exports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatIconModule,
     MatTabsModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
   ]
 })
 export class MaterialModule { }

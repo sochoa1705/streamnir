@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MailingComponent } from './mailing.component';
 import { MaterialModule } from '../../material.module';
 
-
-
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ MailingComponent ],
