@@ -3,57 +3,41 @@
         <div class="col-6 pr-0">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                        class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
+                    <ng-container *ngFor="let b of slider; let indice = index">
+                        <button *ngIf="b.key" type="button" data-bs-target="#carouselExampleIndicators"
+                            [attr.data-bs-slide-to]="indice" class="{{ b.class }}" aria-current="true"
+                            aria-label="Slide 1"></button>
+                    </ng-container>
                 </div>
                 <div class="carousel-inner">
-                    <div *ngFor="let slide of slider" class="aside__content carousel-item active">
-                        <img src="./assets/aside/3-PlayaDelCarmen.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="aside__content carousel-item">
-                        <img src="./assets/aside/3-PlayaDelCarmen.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="aside__content carousel-item">
-                        <img src="./assets/aside/3-PlayaDelCarmen.jpg" class="d-block w-100" alt="...">
-                    </div>
+                    <ng-container *ngFor="let i of slider">
+                        <div *ngIf="i.key" class="aside__content carousel-item {{ i.class }}">
+                            <img src="./assets/aside/{{ i.img }}" class="d-block w-100" alt="...">
+                        </div>
+                    </ng-container>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleI ndicators"
                     data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-
-            <!-- <div class="aside__content">
-                <img src="./assets/aside/3-PlayaDelCarmen.jpg">
-            </div> -->
         </div>
         <div class="col-6 pl-0">
             <div class="row">
                 <div class="col-12">
-                    <div class="aside__content_2">
-                        <img src="./assets/aside/6-Orlando.jpg">
+                    <ng-container *ngFor="let i of slider">
+                    <div *ngIf="!i.key" class="aside__content_2">
+                        <img src="./assets/aside/{{ i.img }}">
                     </div>
-                    <div class="aside__content_2">
-                        <img src="./assets/aside/6-Orlando.jpg">
-                    </div>
+</ng-container>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-
-                </div>
-            </div>
-
         </div>
     </aside>
 </section>

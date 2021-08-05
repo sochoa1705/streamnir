@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Aside } from 'src/app/Models/general/aside';
 
 @Component({
   selector: 'app-aside',
@@ -6,9 +7,10 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./aside.component.scss']
 })
 export class AsideComponent implements OnInit {
-
   @Input()
-  slider!: string;
+  slider!: Aside[];
+  @Input()
+  images!: Aside[];
 
   constructor() { }
 

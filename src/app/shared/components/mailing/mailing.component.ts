@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-mailing',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mailing.component.scss']
 })
 export class MailingComponent implements OnInit {
+  @Input() title!: string;
+  @Input() span!: string;
 
   constructor() { }
 
