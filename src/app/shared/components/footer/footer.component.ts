@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -6,7 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-
+  @Input() title1!: string;
+  @Input() list1!: any;
+  @Input() title2!: string;
+  @Input() list2!: any;
+  @Input() title3!: string;
+  @Input() span!: string;
+  @Input() addrees!: string;
+  @Input() libro!: string;
+  @Input() linkLibro!: string;
   constructor() { }
 
   ngOnInit(): void {
