@@ -1,4 +1,13 @@
 footer{
+    ._libro{
+        color: #009AED;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .bg-white{
+        background: white;
+    }
     .text {
         &-footer{
             font-family: Montserrat;
@@ -27,12 +36,17 @@ footer{
             color: white
         }
     }
-    h3{
+    h{
+        &r{
+            margin: 42px 0;
+        }
+        &3{
         font-family: Open Sans;
         font-style: normal;
         font-weight: bold;
         font-size: 24px;
         line-height: 36px;
+        }
     }
     ul {
         color: red;

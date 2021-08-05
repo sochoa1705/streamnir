@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { HomePageComponent } from './home-page.component';
-import { VuelosModule } from './vuelos/vuelos.module';
 import { FilterModule } from 'src/app/shared/components/filter/filter.module';
 import { AsideModule } from 'src/app/shared/components/aside/aside.module';
 import { CardModule } from 'src/app/shared/components/card/card.module';
@@ -14,10 +13,12 @@ import { TitleModule } from 'src/app/shared/components/title/title.module';
 import { OffersService } from 'src/app/Services/mock/offers.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PackagesService } from 'src/app/Services/mock/packages.service';
+import { AsidePresenterService } from 'src/app/Services/presenter/aside/aside-presenter.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 @NgModule({
-  declarations: [ HomePageComponent ],
+  declarations: [HomePageComponent],
   imports: [
     CommonModule,
     HomePageRoutingModule,
@@ -30,8 +31,9 @@ import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-p
     MailingModule,
     TitleModule,
     HttpClientModule,
+    GoogleMapsModule,
   ],
-  exports:[ HomePageComponent ],
-  providers: [ OffersService, PackagesService, DataPagePresenterService ]
+  exports: [HomePageComponent],
+  providers: [OffersService, PackagesService, AsidePresenterService, DataPagePresenterService]
 })
 export class HomePageModule { }

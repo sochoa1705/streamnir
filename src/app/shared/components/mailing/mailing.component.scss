@@ -1,0 +1,24 @@
+button {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+    padding: 12px 42px;
+}
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    opacity: 0.03 !important;
+    background-color: #DF0C30!important;
+}
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #DF0C30;
+}
+::ng-deep .mat-checkbox-label{
+    font-size: 14px;
+    margin-right: 20px;
+    font-weight: 600;
+}
+input {
+    font-size: 16px;
+}

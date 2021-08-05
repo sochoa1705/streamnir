@@ -11,47 +11,47 @@ export class DataPagePresenterService {
       {
         id: 0,
         img: "3-PlayaDelCarmen.jpg",
-        key: "1",
+        key: true,
         class: 'active'
       },
       {
 
         id: 1,
         img: "3-PlayaDelCarmen.jpg",
-        key: "1"
+        key: true,
       },
       {
 
         id: 2,
         img: "3-PlayaDelCarmen.jpg",
-        key: "1"
+        key: true,
       },
       {
 
         id: 3,
         img: "3-PlayaDelCarmen.jpg",
-        key: "1"
+        key: true,
       },
       {
 
         id: 4,
         img: "3-PlayaDelCarmen.jpg",
-        key: "1"
+        key: true,
       },
       {
 
         id: 5,
-        img: "3-PlayaDelCarmen.jpg",
-        key: "0"
+        img: "6-Orlando.jpg",
+        key: false,
       },
       {
 
         id: 6,
         img: "6-Orlando.jpg",
-        key: "0"
+        key: false,
       }
     ],
-    section: [
+    sections: [
       {
         id: 0,
         section: "Ofertas",
@@ -60,7 +60,6 @@ export class DataPagePresenterService {
         link: "#"
       },
       {
-
         id: 1,
         section: "Paquetes",
         title: "Paquetes turísticos ¡Elige ahora tu paquete nacional o internacional!",
@@ -68,13 +67,11 @@ export class DataPagePresenterService {
         link: "#"
       },
       {
-
         id: 2,
         section: "Mapa",
         title: "Nuestras mejores ofertas de Vuelo + Hotel saliendo de Lima"
       },
       {
-
         id: 3,
         section: "Vuelos",
         title: "¡Corre y Vuela! con estas Súper ofertas de Vuelos saiendo desde Lima",
@@ -82,7 +79,6 @@ export class DataPagePresenterService {
         link: "#"
       },
       {
-
         id: 4,
         section: "Comprar",
         title: "¿Por qué comprar en NMVIAJES?",
@@ -111,10 +107,10 @@ export class DataPagePresenterService {
       {
         id: 5,
         section: "mailing",
-        title: "Ofertas exclusivas",
+        title: "OFERTAS EXCLUSIVAS",
         span: "Se el primero en recibir nuestras ofertas de viajes"
-      }, {
-
+      },
+      {
         id: 6,
         section: "Footer",
         title1: "Productos",
@@ -122,13 +118,13 @@ export class DataPagePresenterService {
           {
             id: 0,
             text: "Paquetes",
-            link: "#"
+            link: "paquetes"
           },
           {
 
             id: 1,
             text: "Vuelos",
-            link: "#"
+            link: "vuelos"
           },
           {
 
@@ -196,7 +192,9 @@ export class DataPagePresenterService {
         ],
         title3: "Contáctanos",
         span: "Agencias de Viajes en Lima Perú",
-        adrees: "Av. José Pardo 801 Miraflores - Lima 18, Perú."
+        addrees: "Av. José Pardo 801 Miraflores - Lima 18, Perú.",
+        libro: "Libro de reclamaciones",
+        linkLibro: "#"
       }
     ],
     string: "Hello World"
