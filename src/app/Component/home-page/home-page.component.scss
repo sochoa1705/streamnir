@@ -14,3 +14,33 @@
         }
     }
 }
+.col-md-3{
+    @media (min-width: 768px) {
+        width: 25%;
+    }
+}
+
+.carousel-item{
+    @media (min-width: 768px) {
+        display: block;
+        margin-right: 0;
+        transition:none;
+    }
+}
+
+.carousel-inner{
+    @media (min-width: 768px) {
+        width: auto!important;
+    }
+}
+
+.carousel-indicators button{
+    border: 1px solid white;
+    background: red;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    &.active{
+        background: white;
+    }
+}

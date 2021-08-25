@@ -15,6 +15,7 @@ export class OffersService {
       span: 'Reserva el alojamiento ideal',
       price: 54,
       link: '#',
+      class: 'active'
     },
     {
       id:1,
