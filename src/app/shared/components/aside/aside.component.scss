@@ -17,9 +17,18 @@ aside {
             //display: block;
             border-right: 4px solid #E5E5E5;
             overflow: hidden;
+            @media (max-width: 768px) {
+                border-right: 0;
+                height: 222px;
+                margin-bottom: 20px;
+            }
             &:first-child{
                 border-radius: 10px 0 0 10px;
+                @media (max-width: 768px) {
+                    border-radius: 10px 10px 0 0;
+                }
             }
+
             &>img{
                 position: absolute;
                 object-fit: cover;
@@ -31,15 +40,23 @@ aside {
             }
             &_2{
                 height: 199px;
-                background: red;
+                // background: red;
                 position: relative;
                 width: 100%;
                 border-radius: 0 0 10px 0;
                 overflow: hidden;
+                @media (max-width: 768px) {
+                    border-radius: 0;
+                    height: 84px;
+                    margin-bottom: 20px;
+                }
                 &:first-child{
                     border-bottom: 4px solid #E5E5E5;
                     overflow: hidden;
                     border-radius: 0 10px 0 0;
+                    @media (max-width: 768px) {
+                        border-radius: 0;
+                    }
                 }
                 &>img{
                     position: absolute;

@@ -7,6 +7,10 @@ footer{
     }
     .bg-white{
         background: white;
+        & .order-2>img{
+            @media (max-width: 768px) {
+                height: 60px;            } 
+            }
     }
     .text {
         &-footer{
@@ -18,12 +22,20 @@ footer{
             letter-spacing: 0.15px;
             color: #4B4B4B;
             margin-top: 20px;
+            @media (max-width: 768px) {
+                font-size: 10px;
+                text-align: center;
+            }
             span{
                 color: #DF0C30;
             }
         }
-        &-end img {
+        &-md-end img {
             margin-right: 20px;
+            @media (max-width: 768px) {
+                height: 14px;
+                margin-bottom: 20px;
+            }
         }
     }
     button {
@@ -39,6 +51,9 @@ footer{
     h{
         &r{
             margin: 42px 0;
+            &.hr{
+                margin: 20px 0;
+            }
         }
         &3{
         font-family: Open Sans;

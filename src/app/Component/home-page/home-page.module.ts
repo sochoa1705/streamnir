@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { HomePageComponent } from './home-page.component';
-import { FilterModule } from 'src/app/shared/components/filter/filter.module';
 import { AsideModule } from 'src/app/shared/components/aside/aside.module';
 import { CardModule } from 'src/app/shared/components/card/card.module';
 import { CardInfoModule } from 'src/app/shared/components/card-info/card-info.module';
@@ -16,13 +15,15 @@ import { PackagesService } from 'src/app/Services/mock/packages.service';
 import { AsidePresenterService } from 'src/app/Services/presenter/aside/aside-presenter.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { GoogleMapsModule } from '@angular/google-maps'
+import { TabsModule } from 'src/app/shared/components/tabs/tabs.module';
+import { ComprarModule } from './comprar/comprar.module';
 
 @NgModule({
   declarations: [HomePageComponent],
   imports: [
     CommonModule,
     HomePageRoutingModule,
-    FilterModule,
+    TabsModule,
     AsideModule,
     CardModule,
     CardInfoModule,
@@ -32,6 +33,7 @@ import { GoogleMapsModule } from '@angular/google-maps'
     TitleModule,
     HttpClientModule,
     GoogleMapsModule,
+    ComprarModule,
   ],
   exports: [HomePageComponent],
   providers: [OffersService, PackagesService, AsidePresenterService, DataPagePresenterService]
