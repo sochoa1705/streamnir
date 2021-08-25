@@ -1,9 +1,6 @@
 <mat-toolbar>
-    <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-    </button> -->
     <span>
-        <svg width="128" height="30" viewBox="0 0 128 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="logo" width="128" height="30" viewBox="0 0 128 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0)">
                 <path
                     d="M15.0812 12.2672V23.112H10.75V13.2625C10.75 11.5228 10.1527 10.6826 8.64669 10.6826C7.39201 10.6826 5.97835 11.2739 4.62913 12.2991V23.112H0.235596V7.57744H4.28324V9.22363C6.04065 7.91774 7.9549 7.17334 9.9336 7.17334C13.1348 7.17121 15.0812 8.94288 15.0812 12.2672Z"
@@ -38,7 +35,7 @@
         </svg>
     </span>
     <span class="spacer"></span>
-    <ul>
+    <ul class="d-none d-sm-none d-md-block">
         <li>
             <a routerLink="home/vuelos">
                 Vuelos</a>
@@ -143,7 +140,9 @@
         </svg>
         <span>Iniciar sesión</span>
     </a>
-
+    <button mat-icon-button class="main example-icon d-block d-md-none" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
     <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>share</mat-icon>
     </button> -->

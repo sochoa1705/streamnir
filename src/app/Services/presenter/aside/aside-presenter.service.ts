@@ -17,7 +17,7 @@ export class AsidePresenterService {
         id: 1,
         img: "3-PlayaDelCarmen.jpg",
         key: true,
-        class: ""
+        class: "" 
       },
       {
 

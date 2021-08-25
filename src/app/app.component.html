@@ -1,3 +1,94 @@
 <app-toolbar></app-toolbar>
 <router-outlet></router-outlet>
 
+<ul id="cdr">
+    <li>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                    <svg class="d-inline" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.32455 0.247574C9.31378 0.247574 10.2625 0.640545 10.962 1.34004C11.6615 2.03953 12.0545 2.98825 12.0545 3.97748C12.0545 4.96671 11.6615 5.91542 10.962 6.61492C10.2625 7.31441 9.31378 7.70738 8.32455 7.70738C7.33532 7.70738 6.38661 7.31441 5.68711 6.61492C4.98762 5.91542 4.59465 4.96671 4.59465 3.97748C4.59465 2.98825 4.98762 2.03953 5.68711 1.34004C6.38661 0.640545 7.33532 0.247574 8.32455 0.247574ZM8.32455 9.57233C12.4461 9.57233 15.7844 11.2415 15.7844 13.3022V15.1672H0.864746V13.3022C0.864746 11.2415 4.20301 9.57233 8.32455 9.57233Z"
+                            fill="#DF0C30" />
+                    </svg>
+                    <div class="d-inline">
+                        <h4>Adultos</h4><span>12 o más años</span>
+                    </div>
+                </div>
+                <div class="col-6 d-flex">
+                    <button class="count" name="adultos" (click)="count(-1, $event)">
+                        -
+                    </button>
+                    <input type='text' id="adultos" value="{{ pasajeros[0].adultos }}">
+                    <button class="count" name="adultos" (click)="count(+1, $event)">
+                        +
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                    <svg class="d-inline" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.32455 0.247574C9.31378 0.247574 10.2625 0.640545 10.962 1.34004C11.6615 2.03953 12.0545 2.98825 12.0545 3.97748C12.0545 4.96671 11.6615 5.91542 10.962 6.61492C10.2625 7.31441 9.31378 7.70738 8.32455 7.70738C7.33532 7.70738 6.38661 7.31441 5.68711 6.61492C4.98762 5.91542 4.59465 4.96671 4.59465 3.97748C4.59465 2.98825 4.98762 2.03953 5.68711 1.34004C6.38661 0.640545 7.33532 0.247574 8.32455 0.247574ZM8.32455 9.57233C12.4461 9.57233 15.7844 11.2415 15.7844 13.3022V15.1672H0.864746V13.3022C0.864746 11.2415 4.20301 9.57233 8.32455 9.57233Z"
+                            fill="#DF0C30" />
+                    </svg>
+                    <div class="d-inline">
+                        <h4>Niños</h4><span>de 2 a 11 años</span>
+                    </div>
+                </div>
+                <div class="col-6 d-flex">
+                    <button class="count" name="ninos" (click)="count(-1, $event)">
+                        -
+                    </button>
+                    <input type='text' id="ninos" value="{{pasajeros[0].ninos}}">
+                    <button class="count" name="ninos" (click)="count(+1, $event)">
+                        +
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                    <svg class="d-inline" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.32455 0.247574C9.31378 0.247574 10.2625 0.640545 10.962 1.34004C11.6615 2.03953 12.0545 2.98825 12.0545 3.97748C12.0545 4.96671 11.6615 5.91542 10.962 6.61492C10.2625 7.31441 9.31378 7.70738 8.32455 7.70738C7.33532 7.70738 6.38661 7.31441 5.68711 6.61492C4.98762 5.91542 4.59465 4.96671 4.59465 3.97748C4.59465 2.98825 4.98762 2.03953 5.68711 1.34004C6.38661 0.640545 7.33532 0.247574 8.32455 0.247574ZM8.32455 9.57233C12.4461 9.57233 15.7844 11.2415 15.7844 13.3022V15.1672H0.864746V13.3022C0.864746 11.2415 4.20301 9.57233 8.32455 9.57233Z"
+                            fill="#DF0C30" />
+                    </svg>
+                    <div class="d-inline">
+                        <h4>Infantes</h4><span>menores de 2 años</span>
+                    </div>
+                </div>
+                <div class="col-6 d-flex">
+                    <button class="count" name="infantes" (click)="count(-1, $event)">
+                        -
+                    </button>
+                    <input type='text' id="infantes" value="{{pasajeros[0].infantes}}">
+                    <button class="count" name="infantes" (click)="count(+1, $event)">
+                        +
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </li>
+    <hr>
+    <li class="d-flex justify-content-between">
+      <!-- <button mat-raised-button color="primary">Cancelar</button>
+      <button mat-raised-button color="accent">Listo</button> -->
+  
+        <button class="cancel" (click)="customerClose($event)">Cancelar</button>
+        <button>Listo</button>
+    </li>
+</ul>

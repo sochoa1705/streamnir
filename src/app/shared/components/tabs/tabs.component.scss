@@ -3,11 +3,6 @@
 // }
 $color-filter: white;
 :host ::ng-deep .mat {
-    &-form-field-appearance-legacy .mat-form-field-underline{
-        display: none!important;
-        height: 0px;
-        background: white;
-    }
     &-tab-label{
         background-color: $color-filter;
         color: #4B4B4B;
@@ -23,6 +18,12 @@ $color-filter: white;
         min-width: 130px;
         height: auto;
         font-weight: bold;
+        @media (max-width: 768px) {
+            min-width: 77px;
+            height: 44px;
+            font-size: 10px;
+            padding: 7px;
+        }
         &:hover{
             color:#DF0C30;
         }
@@ -42,6 +43,11 @@ $color-filter: white;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            &>svg{
+                @media (max-width: 768px) {
+                    height: 12px;
+                }
+            }
         }
     }
     &-ink-bar{
@@ -56,7 +62,9 @@ $color-filter: white;
         box-shadow: 0px 1px 8px rgba(122, 88, 88, 0.05);
         padding: 35px 43px;
         border-radius: 7px;
-
+        @media (max-width: 768px) {
+            padding: 7px;
+        }
         &-wrapper{
             overflow: inherit;
             z-index: 0;
@@ -132,106 +140,20 @@ $color-filter: white;
     border-top-style: none;
     background-image: url(../../../../assets/arrow.svg) ;
 
-}
-
-.mat-form-field-appearance-outline .mat-form-field-outline-start{
-border-radius: 0px !important;
-border: 1px solid blue !important;
-border-right-style: none !important;
-}
-
-.mat-form-field-appearance-outline .mat-form-field-outline-end{
-border-radius: 0px !important;
-border: 1px solid blue !important;
-border-left-style: none !important;
-}
-
-.mat-select-panel ng-animating {
-visibility: hidden;
-}
-.mat-select{
-    font-family: 'Montserrat';
-    font-size: 16px;
-    @media (max-width: 768px) {
-        font-size: 10px;
-    }
-}
-
-.mat-form-field{
-    @media (max-width: 768px) {
-        display: block;
-    }
-}
-
-svg{
-    margin-right: 10px;
-    width: 30px;
-}
-input{
-    height: 30px;
-}
-.pasajeros{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    margin-bottom: 7px;
-    position: relative;
-    a{
-        font-family: 'Montserrat';
-        font-weight: bold;
-        font-size: 16px;
-        background: url(./../../../../assets/arrow.svg) no-repeat center center ;
-        @media (max-width: 768px) {
-            font-size: 10px;
-        }
-    }
-    #cdr {
-        position: absolute;
-        background: white;
-        padding: 10px;
-    }
-    ul{
-        list-style: none;
-        padding: 0px;
-    }
-    svg{
-        margin-right: 6px;
-    }
-    h4{
-        width:auto;
-        font-weight: bold;
-        font-size: 16px;
-        margin-bottom: 0;
-        line-height: 16px;
-        padding: 0;
-    }
-    span{
-        font-size: 10px;
-        line-height: 10px;
-        padding: 0;
-    }
-    input{
-        border:0;
-        text-align: center;
-        width: 30px;
-    }
-    button{
-        background: #DF0C30;
-        font-family: 'Montserrat';
-        &.cancel{
-            background: #EBEBEB;
-            color: #4B4B4B;
-        }
-        &.count{
-            border: 1px solid #E5E6E7;
-            background: white;
-            color: #009AED;
-            &:hover{
-                background: #DF0C30;
-                color: white;    
-            }
-        }
-
-    }
-}
+  }
+  
+  .mat-form-field-appearance-outline .mat-form-field-outline-start{
+    border-radius: 0px !important;
+    border: 1px solid blue !important;
+    border-right-style: none !important;
+  }
+  
+  .mat-form-field-appearance-outline .mat-form-field-outline-end{
+    border-radius: 0px !important;
+    border: 1px solid blue !important;
+    border-left-style: none !important;
+  }
+  
+  .mat-select-panel ng-animating {
+    visibility: hidden;
+  }

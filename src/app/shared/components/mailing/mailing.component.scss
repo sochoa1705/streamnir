@@ -6,6 +6,11 @@ button {
     letter-spacing: 0.5px;
     color: #FFFFFF;
     padding: 12px 42px;
+    @media (max-width: 768px) {
+        padding: 4px 12px;
+        font-size: 10px;
+        //line-height: 30px;
+    }
 }
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
     opacity: 0.03 !important;
@@ -14,11 +19,41 @@ button {
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
     background-color: #DF0C30;
 }
+::ng-deep .mat-checkbox{
+    label{
+        padding-bottom: 0px;
+    }
+}
 ::ng-deep .mat-checkbox-label{
-    font-size: 14px;
+        font-size: 14px;
     margin-right: 20px;
     font-weight: 600;
+    @media (max-width: 768px) {
+        font-size: 10px;
+        padding-bottom:0px
+    }
 }
 input {
     font-size: 16px;
+    @media (max-width: 768px) {
+        font-size: 10px!important;
+        //line-height: 30px;
+    }
+}
+h{
+    &1{
+        font-family: 'Montserrat';
+        font-size: 30px;
+        @media (max-width: 768px) {
+            font-size: 36px;
+            font-weight: bold;
+        }
+    }
+    &3{
+        font-family: 'Montserrat';
+        font-size: 16px;
+        @media (max-width: 768px) {
+            font-size: 10px;
+        }
+    }
 }
