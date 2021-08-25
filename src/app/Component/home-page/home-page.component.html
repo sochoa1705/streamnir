@@ -1,4 +1,4 @@
-<app-filter></app-filter>
+<app-tabs></app-tabs>
 <app-aside [slider]="dataPagePresenterService.data.aside" [images]="asidePresenterService.images"></app-aside>
 <!-- <app-aside [slider]="asidePresenterService.slider" [images]="asidePresenterService.images"></app-aside> -->
 
@@ -13,10 +13,47 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col-3" *ngFor="let offer of offersService.offers">
+    <!-- <div class="">123 -->
+        <!-- SLIDER -->
+        <div id="carouselExampleIndicatorsOffers" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators d-flex d-md-none">
+                <ng-container *ngFor="let b of offersService.offers; let indice = index">
+                    <button type="button" data-bs-target="#carouselExampleIndicatorsOffers" class="{{ b.class }}"
+                        [attr.data-bs-slide-to]="indice" aria-current="true" aria-label="Slide 1"></button>
+                </ng-container>
+            </div>
+            <div class="carousel-inner row">
+                <div *ngFor="let offer of offersService.offers" class=" col-md-3 col-12 {{ offer.class }} carousel-item">
+                    <app-card [image]="offer.image" [label]="offer.label" [destiny]="offer.destiny" [from]="offer.from"
+                        [span]="offer.span" [price]="offer.price"></app-card>
+                </div>
+            </div>
+            <button class="carousel-control-prev d-block d-md-none" type="button"
+                data-bs-target="#carouselExampleIndicatorsOffers" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next d-block d-md-none" type="button" data-bs-target="#carouselExampleIndicatorsOffers"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- END SLIDER -->
+        <!-- <div class="col-md-3 col-12" *ngFor="let offer of offersService.offers">
             <app-card [image]="offer.image" [label]="offer.label" [destiny]="offer.destiny" [from]="offer.from"
                 [span]="offer.span" [price]="offer.price"></app-card>
+        </div> -->
+        <div class="clearfix"></div>
+    <!-- </div> -->
+</div>
+
+<div class="container">
+    <div class="row text-end py-5">
+        <div class="col-12">
+            <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+                <button class="plus dropdown-toggle" *ngIf="section.section === 'Ofertas'">{{ section.btn }}</button>
+            </ng-container>
         </div>
     </div>
 </div>
@@ -33,7 +70,7 @@
 
 <div class="container">
     <div class="row">
-        <div *ngFor="let packb of packagesService.packages" class="col-{{ packb.banner }}">
+        <div *ngFor="let packb of packagesService.packages" class="col-12 col-md-{{ packb.banner }}">
             <app-package *ngIf="packb.banner" [image]="packb.image" [label]="packb.label" [banner]="packb.banner"
                 [span]="packb.span" [pack]="packb.pack" [city]="packb.city" [price]="packb.price"
                 [destiny]="packb.destiny"></app-package>
@@ -67,7 +104,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-3" *ngFor="let pack of packagesService.packages">
+        <div class="col-md-3 col-12" *ngFor="let pack of packagesService.packages">
             <app-card *ngIf="!pack.banner" [image]="pack.image" [label]="pack.label" [destiny]="pack.destiny"
                 [from]="pack.from" [span]="pack.span" [price]="pack.price"></app-card>
         </div>
@@ -78,10 +115,10 @@
     <div class="row">
         <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
             <app-title *ngIf="section.section === 'Comprar'" [title]="section.title"></app-title>
-            <div *ngIf="section.img" class="col-6 card__content">
+            <div *ngIf="section.img" class="col-12 col-md-6 card__content">
                 <img src="./assets/{{ section.img }}" class="d-block w-100">
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                 <ng-container *ngIf="section.section === 'Comprar'">
                     <app-card-info [title]="card.title" [description]="card.description" [image]="card.img"
                         *ngFor="let card of section.card"></app-card-info>

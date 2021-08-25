@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 
 export interface State {
   flag: string;
@@ -42,16 +42,55 @@ export class FilterComponent implements OnInit {
       flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg'
     }
   ];
-  
+  selected = 'option1';
+
+  pasajeros: any = [
+    {
+      adultos: 10,
+      ninos: 1,
+      infantes: 1
+    }
+  ];
+
   constructor() {
     this.filteredStates = this.stateCtrl.valueChanges
-    .pipe(
-      startWith(''),
-      map(state => state ? this._filterStates(state) : this.states.slice())
-    );
+      .pipe(
+        startWith(''),
+        map(state => state ? this._filterStates(state) : this.states.slice())
+      );
   }
 
   ngOnInit(): void {
+  }
+
+  count(valor: number, e: any) {
+    let item = e.target.name;
+    let pasajero = this.pasajeros[0][item];
+    if (pasajero >= 100 && valor >= 0) {
+      return pasajero = 100
+    }
+    if (pasajero <= 0 && valor < 0) {
+      return pasajero = 0
+    }
+    return pasajero = pasajero + valor
+  }
+
+  customers(e: any) {
+    let cdr: any = document.getElementById('cdr');
+    let btn: any = e.clientY;
+    let top = e.screenY;
+    let top2 = e.clientY;
+    let scrolTop = document.body.scrollHeight;
+    let scren = window.innerHeight;
+    let scrent = window.scrollY;
+    console.log(scrent);
+    console.log(btn);
+    // console.log(scren);
+    // console.log(scrent);
+    let n =   btn + scrent;
+
+    cdr.style = `display:block;top:${n}px; left: ${e.screenX}px; width:300px`;
+
   }
 
   private _filterStates(value: string): State[] {
