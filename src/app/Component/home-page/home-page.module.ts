@@ -17,6 +17,7 @@ import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-p
 import { GoogleMapsModule } from '@angular/google-maps'
 import { TabsModule } from 'src/app/shared/components/tabs/tabs.module';
 import { ComprarModule } from './comprar/comprar.module';
+import { ResultadosModule } from './resultados/resultados.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -34,6 +35,7 @@ import { ComprarModule } from './comprar/comprar.module';
     HttpClientModule,
     GoogleMapsModule,
     ComprarModule,
+    ResultadosModule,
   ],
   exports: [HomePageComponent],
   providers: [OffersService, PackagesService, AsidePresenterService, DataPagePresenterService]

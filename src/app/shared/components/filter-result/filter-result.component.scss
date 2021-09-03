@@ -1,0 +1,702 @@
+// .svg-icon {
+//     display: block;
+//     width: 2rem;
+//     height: 2rem;
+//     background-size: 2rem 2rem;
+//     padding: 0px 0.7rem 0px 0.7rem;
+//     z-index: 99;
+// }
+
+// .logo {
+//     background: url('../../../../assets/comprar/logo.svg') no-repeat;
+// }
+
+// .logo-red {
+//     background: url('../../../../assets/comprar/logo-red.svg') no-repeat;
+//     width: 9rem;
+//     height: 5rem;
+//     background-size: 9rem 5rem;
+//     padding: 0px 1rem 0px 1rem;
+// }
+
+// .contact {
+//     background: url('../../../../assets/comprar/contact.svg') no-repeat;
+// }
+
+// .schedule {
+//     background: url('../../../../assets/comprar/schedule.svg') no-repeat;
+// }
+
+// .information {
+//     background: url('../../../../assets/comprar/information.svg') no-repeat;
+// }
+
+// .user {
+//     background: url('../../../../assets/comprar/user.svg') no-repeat;
+// }
+
+// .calendar {
+//     background: url('../../../../assets/comprar/calendar.svg') no-repeat;
+// }
+
+// .plane-origin {
+//     background: url('../../../../assets/comprar/plane-origin.svg') no-repeat;
+// }
+
+// .plane-destination {
+//     background: url('../../../../assets/comprar/plane-destination.svg') no-repeat;
+// }
+
+// .fire {
+//     background: url('../../../../assets/comprar/fire.svg') no-repeat;
+// }
+
+// .agency {
+//     background: url('../../../../assets/comprar/agency.svg') no-repeat;
+//     width: 202px;
+//     height: 91px;
+//     background-size: 202px 91px;
+//     padding: 0rem 0rem 0rem 3rem;
+// }
+
+// .american-express {
+//     background: url('../../../../assets/comprar/american-express.svg') no-repeat;
+// }
+
+// .blog {
+//     background: url('../../../../assets/comprar/blog.svg') no-repeat;
+//     width: 2.5rem;
+//     height: 2.5rem;
+//     background-size: 2.5rem 2.5rem;
+//     padding: 0px 0rem 0px 3rem;
+// }
+
+// .diners-club {
+//     background: url('../../../../assets/comprar/diners-club.svg') no-repeat;
+// }
+
+// .facebook {
+//     background: url('../../../../assets/comprar/facebook.svg') no-repeat;
+//     width: 2.5rem;
+//     height: 2.5rem;
+//     background-size: 2.5rem 2.5rem;
+//     padding: 0px 0rem 0px 3rem;
+// }
+
+// .instagram {
+//     background: url('../../../../assets/comprar/instagram.svg') no-repeat;
+//     width: 2.5rem;
+//     height: 2.5rem;
+//     background-size: 2.5rem 2.5rem;
+//     padding: 0px 0rem 0px 3rem;
+// }
+
+// .library {
+//     background: url('../../../../assets/comprar/library.svg') no-repeat;
+//     width: 6.5rem;
+//     height: 5rem;
+//     background-size: 6.5rem 5rem;
+//     padding: 0px 1rem 0px 1rem;
+// }
+
+// .mastercard {
+//     background: url('../../../../assets/comprar/mastercard.svg') no-repeat;
+// }
+
+// .protection {
+//     background: url('../../../../assets/comprar/protection.svg') no-repeat;
+//     width: 211px;
+//     height: 81px;
+//     background-size: 211px 81px;
+//     padding: 0px 0rem 0px 3rem;
+// }
+
+// .safety-pay {
+//     background: url('../../../../assets/comprar/safety-pay.svg') no-repeat;
+// }
+
+// .visa {
+//     background: url('../../../../assets/comprar/visa.svg') no-repeat;
+// }
+
+// .youtube {
+//     background: url('../../../../assets/comprar/youtube.svg') no-repeat;
+//     width: 2.5rem;
+//     height: 2.5rem;
+//     background-size: 2.5rem 2.5rem;
+//     padding: 0px 0rem 0px 3rem;
+// }
+
+// .arrow-right {
+//     background: url('../../../../assets/comprar/arrow-right.svg') no-repeat;
+//     width: 2rem;
+//     height: 1rem;
+//     background-size: 2rem 1rem;
+//     padding: 0px 1rem 0px 1rem;
+// }
+
+// .back-pack {
+//     background: url('../../../../assets/comprar/back-pack.svg') no-repeat;
+//     width: 1.5rem;
+//     height: 1rem;
+//     background-size: 1.5rem 1rem;
+//     padding: 0px 1rem 0px 1rem;
+// }
+
+// .hand-pack {
+//     background: url('../../../../assets/comprar/hand-pack.svg') no-repeat;
+//     width: 1.5rem;
+//     height: 1rem;
+//     background-size: 1.5rem 1rem;
+//     padding: 0px 1rem 0px 1rem;
+// }
+
+// .travel-pack {
+//     background: url('../../../../assets/comprar/travel-pack.svg') no-repeat;
+//     width: 1.5rem;
+//     height: 1rem;
+//     background-size: 1.5rem 1rem;
+//     padding: 0px 1rem 0px 1rem;
+// }
+
+// .select-pack {
+//     background: url('../../../../assets/comprar/select-pack.svg') no-repeat;
+//     width: 1.5rem;
+//     height: 1rem;
+//     background-size: 1.5rem 1rem;
+//     padding: 0px 1rem 0px 1rem;
+// }
+
+// .direct {
+//     background: url('../../../../assets/comprar/direct.svg') no-repeat;
+//     width: 3rem;
+//     height: 1.7rem;
+//     background-size: 3rem 1.7rem;
+//     padding: 0px 1rem 0px 1rem;
+// }
+
+// .scale {
+//     background: url('../../../../assets/comprar/scale.svg') no-repeat;
+//     width: 2rem;
+//     height: 1rem;
+//     background-size: 2rem 1rem;
+//     padding: 0px 1rem 0px 1rem;
+// }
+
+// .pay {
+//     background: url('../../../../assets/svg/pay.svg') no-repeat;
+//     width: 30rem;
+//     height: 4rem;
+//     background-size: 30rem 4rem;
+//     padding: 0px 1rem 0px 1rem;
+// }
+
+// .bg-principal {
+//     background-color: #B50A27;
+//     color: #ffff;
+//     border: none;
+// }
+
+// .bg-principal:hover {
+//     background-color: #B50A27;
+//     color: #ffff;
+//     border: none;
+// }
+
+// .bg-alternative {
+//     background-color: #F6F7F9;
+// }
+
+// .bg-white {
+//     background-color: #ffff;
+// }
+
+// .navbar {
+//     left: 0%;
+//     right: 0%;
+//     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+//     height: 75px;
+// }
+
+// .navbar-fixed-top {
+//     top: 0;
+//     border-width: 0 0 1px;
+//     position: fixed;
+//     right: 0;
+//     left: 0;
+//     z-index: 1030;
+// }
+
+// .margin-content {
+//     margin-top: 75px;
+// }
+
+.nav-item {
+    padding: 0px 1rem 0px 1rem !important;
+}
+
+// a {
+//     color: #ffff;
+//     text-decoration: none;
+// }
+
+// a:hover {
+//     color: #ffff;
+//     text-decoration: none;
+// }
+
+// .searcher, .index {
+//     padding: 2rem 0px 2rem 0px;
+// }
+
+// .btn-white {
+//     background: #ffff;
+//     border: none;
+// }
+
+// .btn-white:hover {
+//     border: none;
+// }
+
+// .form-control {
+//     border-radius: 0px !important;
+// }
+
+// .input-group {
+//     position: relative;
+//     display: flex;
+//     flex-wrap: wrap;
+//     align-items: stretch;
+//     width: calc(100% + 50px);
+// }
+
+// .input-group-text {
+//     background-color: #ffff;
+//     align-items: center;
+//     text-align: center;
+//     padding-top: 10px;
+//     border: none;
+// }
+
+// .input-control {
+//     left: -50px;
+//     padding-left: 50px;
+// }
+
+// input[type="date"]::-webkit-inner-spin-button,
+// input[type="date"]::-webkit-calendar-picker-indicator {
+//     display: none;
+//     -webkit-appearance: none;
+// }
+
+// .portrait {
+//     width: 291px;
+//     height: 400px;
+//     background: url('../../../../assets/comprar/banner/side-1.png') no-repeat;
+//     border-radius: 5px !important;
+//     margin-bottom: 20px;
+// }
+
+// .font-header {
+//     font-weight: 600;
+//     color: #4B4B4B;
+//     font-size: 16px;
+//     padding-right: 10px;
+// }
+
+// .font-header-disabled {
+//     font-weight: 600;
+//     line-height: 25px;
+//     color: #B9BCBF;
+// }
+
+// .font-text {
+//     font-weight: 500;
+//     font-size: 12px;
+// }
+
+// .font-fire-number {
+//     font-weight: 700;
+//     font-size: 28px;
+//     color: #009AED;
+//     padding-right: 0.7rem;
+// }
+
+// .font-fire-text {
+//     font-weight: 700;
+//     font-size: 14px;
+//     color: #009AED;
+//     padding-right: 0.7rem;
+// }
+
+// .font-notice-false {
+//     font-weight: 400;
+//     font-size: 14px;
+//     color: #ffff;
+// }
+
+// .font-body-text {
+//     font-weight: 400;
+//     font-size: 14px;
+//     line-height: 21px;
+//     letter-spacing: 0.1px;
+//     padding-right: 0.5rem;
+// }
+
+// .font-body-date {
+//     font-weight: 400;
+//     font-size: 14px;
+//     line-height: 21px;
+//     letter-spacing: 0.1px;
+//     padding-left: 0.5rem;
+// }
+
+// .font-content-scale {
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 10px;
+//     line-height: 15px;
+//     color: #4B4B4B;
+//     width: 100px;
+// }
+
+// .font-content-hour {
+//     font-style: normal;
+//     font-weight: bold;
+//     font-size: 12px;
+//     line-height: 18px;
+//     color: #4B4B4B;
+//     width: 100px;
+// }
+
+// .font-content-side {
+//     font-style: normal;
+//     font-weight: 600;
+//     font-size: 12px;
+//     line-height: 18px;
+//     color: #4B4B4B;
+// }
+
+// .font-content-duration {
+//     font-style: normal;
+//     font-weight: 600;
+//     font-size: 10px;
+//     line-height: 15px;
+//     color: #009AED;
+//     width: 50px;
+//     padding: 0.1rem;
+//     background-color: #E9F6FD;
+//     border-radius: 5px;
+// }
+
+// .font-price-title {
+//     font-style: normal;
+//     font-weight: 600;
+//     font-size: 12px;
+//     line-height: 18px;
+//     color: #4B4B4B;
+// }
+
+// .font-price-number {
+//     font-style: normal;
+//     font-weight: bold;
+//     font-size: 30px;
+//     line-height: 36px;
+//     color: #4B4B4B;
+// }
+
+// .font-price-text {
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 12px;
+//     line-height: 18px;
+//     color: #83898F;
+// }
+
+// .font-filter-text {
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 14px;
+//     line-height: 21px;
+//     color: #4B4B4B;
+//     cursor: pointer;
+// }
+
+// .font-footer-title {
+//     font-family: 'Open Sans' !important;
+//     font-style: normal !important;
+//     font-weight: bold !important;
+//     font-size: 24px !important;
+//     line-height: 36px !important;
+//     color: #4B4B4B !important;
+//     padding-top: 30px;
+//     padding-bottom: 30px;
+// }
+
+// .font-footer-description {
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 14px;
+//     line-height: 21px;
+//     color: #4B4B4B;
+// }
+
+// .font-footer-direction {
+//     font-style: normal;
+//     font-weight: 600;
+//     font-size: 14px;
+//     line-height: 24px;
+//     color: #4B4B4B;
+// }
+
+// .font-footer-library a {
+//     font-family: 'Open Sans' !important;
+//     font-style: normal !important;
+//     font-weight: bold !important;
+//     font-size: 12px !important;
+//     line-height: 11px !important;
+//     color: #009AED !important;
+// }
+
+// .font-footer-list li a {
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 14px;
+//     line-height: 21px;
+//     text-align: justify;
+//     letter-spacing: 0.1px;
+//     color: #4B4B4B !important;
+// }
+
+// .font-footer-copy {
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 16px;
+//     line-height: 24px;
+//     letter-spacing: 0.15px;
+//     color: #4B4B4B;
+// }
+
+.nav-pills {
+    border-radius: 5px;
+}
+
+// .nav-item-tabs {
+//     padding: 10px 0px 10px 0px !important;
+// }
+
+// .nav-item-tabs:hover {
+//     border-bottom: 3px solid #009AED !important;
+//     position: relative;
+//     padding: 10px 0px 0px 0px !important;
+// }
+
+// .nav-item-down {
+//     padding: 10px 0px 10px 0px !important;
+//     height: 61px;
+// }
+
+// .nav-item-pack {
+//     padding: 0px !important;
+//     text-align: center;
+//     align-items: center;
+// }
+
+// .display-default {
+//     display: inline;
+// }
+
+// .card {
+//     border: none;
+// }
+
+// .card-header {
+//     padding: 0px;
+//     background-color: white;
+//     margin-bottom: 0px;
+//     border-bottom: none;
+// }
+
+// .card-header:first-child {
+//     border-radius: 0px !important;
+// }
+
+// .card-header-fire {
+//     text-align: center;
+//     height: 31px;
+//     left: 0px;
+//     top: 0px;
+//     background: #E9F6FD;
+// }
+
+// .card-header-fire-corner {
+//     position: absolute;
+//     top: 0;
+//     right: 64%;
+//     border-top: 31px solid #E9F6FD;
+//     border-left: 31px solid #506370;
+//     width: 0;
+//     transform: rotate(-90deg);
+// }
+
+// .card-header-fire span {
+//     top: -5px;
+//     position: relative;
+// }
+
+// .card-header-notice {
+//     text-align: center;
+//     height: 31px;
+//     left: 0px;
+//     top: 0px;
+//     background: #506370;
+//     border-end-end-radius: 15px;
+// }
+
+// .card-header-notice span {
+//     top: 2px;
+//     position: relative;
+// }
+
+.row-cust {
+    --bs-gutter-x: 0rem;
+}
+
+// .row-cust-red {
+//     padding-top: 60px;
+//     --bs-gutter-x: 0rem;
+// }
+
+// .row-cust-price {
+//     --bs-gutter-x: 0rem;
+//     padding-left: 10px;
+//     border-left: 1px solid #C8C9CA;
+// }
+
+// .col-cust-price {
+//     padding-left: 10px;
+// }
+
+.company {
+    width: 30px;
+    height: 30px;
+    background: url('../../../../assets/comprar/company.png') no-repeat;
+}
+
+
+.accordion-item {
+    border: none !important;
+    background-color: #F6F7F9 !important;
+}
+
+.accordion-button {
+    background-color: #F6F7F9 !important;
+}
+
+.accordion-button:not(.collapsed) {
+    font-weight: 600;
+    color: #4B4B4B;
+    font-size: 16px;
+    padding-right: 10px;
+    background-color: #F6F7F9 !important;
+    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+    border: none;
+}
+
+.accordion-button:not(.collapsed):after {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 10px;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1.25rem;
+    transition: transform 0.2s ease-in-out;
+    transform: rotate(180deg);
+}
+
+.accordion-button:after {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: auto;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1.25rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.form-check-input[type=checkbox] {
+    border-radius: 0px !important;
+    width: 1.5em !important;
+    height: 1.5em !important;
+}
+
+.form-check-input[type=radio] {
+    border-radius: 50%;
+}
+
+.label-field {
+    padding-right: 1rem;
+}
+
+.nav-pills .nav-link {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: #B9BCBF;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: #B50A27;
+    background-color: transparent !important;
+}
+
+// .button-airlines {
+//     font-style: normal;
+//     font-weight: 600;
+//     font-size: 14px;
+//     line-height: 20px;
+//     color: #B9BCBF;
+//     outline: transparent;
+// }
+
+// .bg-footer-map {
+//     background: #F6F7F9;
+//     border-top: 1px solid #E4E5E7;
+//     box-shadow: 0px -1px 8px rgba(0, 0, 0, 0.15);
+// }
+
+// .bg-footer-pay {
+//     background: #ffff;
+// }
+
+// .footer {
+//     background: #F6F7F9;
+//     box-shadow: 0px -1px 8px rgba(0, 0, 0, 0.15);
+// }
+
+// ol, ul {
+//     padding-left: 1rem !important;
+// }
+
+// .btn-footer {
+//     font-style: normal;
+//     font-weight: 600;
+//     font-size: 16px;
+//     line-height: 24px;
+//     letter-spacing: 0.5px;
+//     color: rgba(223, 12, 48, 0.87);
+//     border: 1px solid #DF0C30;
+//     box-sizing: border-box;
+//     border-radius: 3px;
+//     width: 375.83px;
+//     height: 51.89px;
+//     margin-left: 50px;
+//     margin-right: 50px;
+// }

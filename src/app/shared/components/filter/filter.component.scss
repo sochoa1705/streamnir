@@ -133,18 +133,29 @@ $color-filter: white;
     background-image: url(../../../../assets/arrow.svg) ;
 
 }
+::ng-deep .mat-form-field-wrapper{
+        padding-bottom: 0;
+    }
 
-.mat-form-field-appearance-outline .mat-form-field-outline-start{
-border-radius: 0px !important;
-border: 1px solid blue !important;
-border-right-style: none !important;
-}
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix{
+    padding: 0!important;
+    height: auto;
+    input{
+        height: auto;
+    }
 
-.mat-form-field-appearance-outline .mat-form-field-outline-end{
-border-radius: 0px !important;
-border: 1px solid blue !important;
-border-left-style: none !important;
 }
+// .mat-form-field-appearance-outline .mat-form-field-outline-start{
+// border-radius: 0px !important;
+// border: 1px solid blue !important;
+// border-right-style: none !important;
+// }
+
+// .mat-form-field-appearance-outline .mat-form-field-outline-end{
+// border-radius: 0px !important;
+// border: 1px solid blue !important;
+// border-left-style: none !important;
+// }
 
 .mat-select-panel ng-animating {
 visibility: hidden;
