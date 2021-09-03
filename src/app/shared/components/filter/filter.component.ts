@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -14,6 +14,11 @@ export interface State {
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+
   stateCtrl = new FormControl();
   filteredStates: Observable<State[]>;
   states: State[] = [
