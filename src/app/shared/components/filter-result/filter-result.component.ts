@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Options, LabelType } from 'ng5-slider';
+import { Observable } from 'rxjs';
+import { FilterService } from 'src/app/Services/presenter/filter/filter.service';
 
 @Component({
   selector: 'app-filter-result',
@@ -7,7 +9,8 @@ import { Options, LabelType } from 'ng5-slider';
   styleUrls: ['./filter-result.component.scss']
 })
 export class FilterResultComponent implements OnInit {
-  minValuePrice: number = 1000;
+  selected = 'soles';
+  minValuePrice: number = 1001;
   maxValuePrice: number = 5694;
   optionsPrice: Options = {
     floor: 1000,
@@ -75,9 +78,40 @@ export class FilterResultComponent implements OnInit {
       }
     }
   };
-  constructor() { }
+  constructor(
+    public filterService: FilterService,
+  ) { }
 
   ngOnInit(): void {
+    console.log(this.filterService.aerolineas);
+    this.selectedItems = new Array<string>();
+
   }
 
+  toCheck(e: any) {
+    if (e === true) {
+      this.filterService.aerolineas.forEach(x => x.checked = true)
+    } else {
+      this.filterService.aerolineas.forEach(x => x.checked = false)
+    }
+  }
+  selectedItems!:string[];
+
+  checkId(e: any, id: string) {
+    if (e.target.checked) {
+      this.filterService.aerolineas.forEach(x => {
+      if(x.id === id){
+        x.checked = e.target.checked
+      }})
+
+      // console.log(id + 'cheched');
+      // this.selectedItems.push(id);
+    }
+    // else {
+    //   console.log(id + 'Uncheched');
+    //   this.selectedItems = this.selectedItems.filter(m => m != id);
+    // }
+
+    // console.log(this.selectedItems);
+  }
 }
