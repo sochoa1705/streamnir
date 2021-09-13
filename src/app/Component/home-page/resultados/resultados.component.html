@@ -1,0 +1,109 @@
+<div class="pb-4 bg-white">
+    <app-filter></app-filter>
+</div>
+<div class="container-fluid px-5">
+    <div class="row pt-4">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <span class="moneda"><strong>Moneda</strong> Tipo de cambio: S/ 3.93</span>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="row">
+        <!-- LEFT -->
+        <div class="col-sm-12 col-md-3 col-lg-3 pt-3">
+            <app-filter-result></app-filter-result>
+        </div>
+        <!-- END LEFT -->
+
+        <!-- CENTER -->
+        <div class="col-sm-12 col-md-6 col-lg-6 pt-3">
+            <div class="row">
+                <div class="col-12">
+                    <mat-tab-group mat-stretch-tabs (click)="tab($event)">
+                        <mat-tab label="Precio por aerolínea">Precio por aerolínea</mat-tab>
+                        <mat-tab label="Precios +/- 3 días">Precios +/- 3 días</mat-tab>
+                        <mat-tab label="Tendencia de precios">Tendencia de precios</mat-tab>
+                    </mat-tab-group>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-end">
+                    <!-- <mat-form-field appearance="fill">
+                        <mat-select>
+                            <mat-option value="option1">Precio más bajo</mat-option>
+                            <mat-option value="option3">Precio más alto</mat-option>
+                            <mat-option value="option1">Más conveniente</mat-option>
+                            <mat-option value="option3">Menor tiempo de vuelo</mat-option>
+                            <mat-option value="option3">Mayor tiempo de vuelo</mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+
+                    <!-- <mat-form-field appearance="fill">
+                        <mat-label>Favorite food</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" name="food">
+                            <mat-option *ngFor="let food of foods" [value]="food.value">
+                                {{food.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <p> Selected food: {{selectedValue}} </p> -->
+
+                    <button mat-button [matMenuTriggerFor]="menu">Más conveniente <svg width="13" height="8"
+                            viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="12.8" height="1.6" rx="0.8" fill="#4B4B4B" />
+                            <rect x="3" y="3.19995" width="9.6" height="1.6" rx="0.8" fill="#4B4B4B" />
+                            <rect x="2" y="6.40002" width="10.6667" height="1.6" rx="0.8" fill="#4B4B4B" />
+                        </svg>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item value="123">Precio más bajo</button>
+                        <button mat-menu-item [value]="14523">Precio más alto</button>
+                        <button mat-menu-item [value]="14523">Más conveniente</button>
+                        <button mat-menu-item [value]="14523">Menor tiempo de vuelo</button>
+                        <button mat-menu-item [value]="1243">Mayor tiempo de vuelo</button>
+                    </mat-menu>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!-- <div class="row row-cust">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <ul class="nav nav-pills nav-justified bg-white">
+                        <li class="nav-item nav-item-tabs">
+                            <a class="nav-link" href="#"><span class="font-header-disabled">Precio por
+                                    aerolínea</span></a>
+                        </li>
+                        <li class="nav-item nav-item-tabs">
+                            <a class="nav-link" href="#"><span class="font-header-disabled">Precios +/- 3
+                                    días</span></a>
+                        </li>
+                        <li class="nav-item nav-item-tabs">
+                            <a class="nav-link" href="#"><span class="font-header-disabled">Tendencia de
+                                    precios</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div> -->
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 pt-3">
+                    <app-flights *ngFor="let i of [1,2,3,4]"></app-flights>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- END CENTER -->
+
+        <!-- RIGHT -->
+
+        <div class="col-sm-12 col-md-3 col-lg-3 pt-3">
+            <div class="public mb-4" *ngFor="let i of [1,2,3]">
+                <img src="./assets/comprar/banner/side-1.png" alt="">
+            </div>
+            <!-- <div class="portrait"></div>
+            <div class="portrait"></div>
+            <div class="portrait"></div> -->
+        </div>
+        <!-- END RIGHT -->
+        <div class="clearfix"></div>
+    </div>
+</div>

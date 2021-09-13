@@ -1,0 +1,60 @@
+.portrait {
+    width: 291px;
+    height: 400px;
+    background: url("../../../../assets/comprar/banner/side-1.png") no-repeat;
+    border-radius: 5px !important;
+    margin-bottom: 20px;
+}
+.public {
+    border-radius: 10px;
+    overflow: hidden;
+    img {
+        width: 100%;
+    }
+}
+span {
+    &.moneda {
+        font-size: 12px;
+        font-family: "Montserrat";
+        font-weight: normal;
+        & strong {
+            font-size: 16px;
+            font-family: "Montserrat";
+            font-weight: 600;
+        }
+    }
+}
+
+:host ::ng-deep .mat-tab {
+    &-label-content {
+        font-family: "Montserrat";
+        font-weight: normal;
+        font-size: 14px;
+        // color: #b9bcbf;
+    }
+    &-label-container {
+        margin: 0 15px;
+    }
+    &-header {
+        background: white;
+        border-radius: 5px;
+    }
+}
+//     &-ink-bar{
+//         background-color: red;
+//     }
+//     &-label-active>&-label-content{
+//         color: red;
+//     }
+// }
+/* active tab */
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+    color: #4b4b4b;
+    opacity: 1;
+    // background-color: green;
+}
+
+/* ink bar */
+::ng-deep .mat-ink-bar {
+    background-color: var(--primary-color, #009aed) !important;
+}
