@@ -1,35 +1,30 @@
-<hr>
+<mat-form-field appearance="outline" class="mb-4">
+    <mat-select [(value)]="selected" disableOptionCentering>
+        <mat-option value="soles">Soles</mat-option>
+        <mat-option value="dolares">Dólares</mat-option>
+    </mat-select>
+</mat-form-field>
+
 <div class="accordion" id="accordionPanelsStayOpenExample">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <span class="font-header">Equipaje</span>
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                Equipaje
             </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
             <div class="accordion-body">
-                <div class="row row-cust">
-                    <div class="col-sm-12 col-md-12 col-lg-12 p-0">
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <label class="align-middle font-filter-text" for="checkbox-pack-1">Equipaje de mano</label>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-pack-1">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <label class="align-middle font-filter-text" for="checkbox-pack-2">Equipaje en bodega</label>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-pack-2">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <label for="checkbox-pack-1">Equipaje de mano</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-pack-1">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <label for="checkbox-pack-2">Equipaje en bodega</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-pack-2">
                     </div>
                 </div>
             </div>
@@ -37,288 +32,248 @@
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <span class="font-header">Escalas</span>
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                aria-expanded="true" aria-controls="collapseTwo">
+                Escalas
             </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
             <div class="accordion-body">
-                <div class="row row-cust">
-                    <div class="col-sm-12 col-md-12 col-lg-12 p-0">
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <label class="align-middle font-filter-text" for="checkbox-scale-1">Todas las escalas</label>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-scale-1">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <label class="align-middle font-filter-text" for="checkbox-scale-2">Directo</label>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-scale-2">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <label class="align-middle font-filter-text" for="checkbox-scale-3">1 Escala</label>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-scale-3">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <label class="align-middle font-filter-text" for="checkbox-scale-4">2 o más escalas</label>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-scale-4">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <label for="checkbox-scale-1">Todas las
+                        escalas</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-scale-1">
                     </div>
                 </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <label for="checkbox-scale-2">Directo</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-scale-2">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <label for="checkbox-scale-3">1 Escala</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-scale-3">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <label for="checkbox-scale-4">2 o más
+                        escalas</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-scale-4">
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                <span class="font-header">Aerolíneas</span>
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                aria-expanded="true" aria-controls="collapseThree">
+                Aerolíneas
             </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
-            <div class="accordion-body">
-                <div class="row row-cust">
-                    <div class="col-sm-12 col-md-12 col-lg-12 p-0">
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <button class="btn button-airlines" type="button">Seleccionar Todo</button>
-                                <button class="btn button-airlines" type="button">Borrar todo</button>
-                            </div>
-                        </div>
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row">
-                                    <div class="svg-icon company"></div>
-                                    <label class="align-middle font-filter-text" for="checkbox-airline-1">LATAM</label>
-                                </div>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-1">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row">
-                                    <div class="svg-icon company"></div>
-                                    <label class="align-middle font-filter-text" for="checkbox-airline-2">United Airlines</label>
-                                </div>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-2">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row">
-                                    <div class="svg-icon company"></div>
-                                    <label class="align-middle font-filter-text" for="checkbox-airline-3">American Airlines</label>
-                                </div>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-3">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row">
-                                    <div class="svg-icon company"></div>
-                                    <label class="align-middle font-filter-text" for="checkbox-airline-4">Copa Airlines</label>
-                                </div>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-4">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row">
-                                    <div class="svg-icon company"></div>
-                                    <label class="align-middle font-filter-text" for="checkbox-airline-5">Viva Air</label>
-                                </div>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-5">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row">
-                                    <div class="svg-icon company"></div>
-                                    <label class="align-middle font-filter-text" for="checkbox-airline-6">Viva Colombia</label>
-                                </div>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-6">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row">
-                                    <div class="svg-icon company"></div>
-                                    <label class="align-middle font-filter-text" for="checkbox-airline-7">Aero República</label>
-                                </div>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-7">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row">
-                                    <div class="svg-icon company"></div>
-                                    <label class="align-middle font-filter-text" for="checkbox-airline-8">Aeroméxico</label>
-                                </div>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-8">
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
+            <div class="accordion-body pt-0">
+                <div class="d-flex justify-content-center pb-3">
+                    <button class="px-0" (click)="toCheck(true)" type="button">Seleccionar Todo</button>
+                    <button class="" (click)="toCheck(false)" type="button">Borrar todo</button>
+                </div>
+                <div class="d-flex justify-content-between mb-2" *ngFor="let line of filterService.aerolineas">
+                    <div class="d-flex flex-row">
+                        <div class="company"> <img src="./assets/comprar/{{ line.img }}" alt=""></div>
+                        <label for="checkbox-airline-1">{{ line.company }}</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" [checked]="line.checked" value=""
+                            (change)="checkId($event, line.id)" id="checkbox-airline-1">
                     </div>
                 </div>
+                <!-- <pre>{{filterService.aerolineas|json}}</pre> -->
+                <!-- <div class="d-flex justify-content-between mb-2">
+                    <div class="d-flex flex-row">
+                        <div class="svg-icon company"></div>
+                        <label for="checkbox-airline-3">American
+                            Airlines</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-3">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <div class="d-flex flex-row">
+                        <div class="svg-icon company"></div>
+                        <label for="checkbox-airline-4">Copa
+                            Airlines</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-4">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <div class="d-flex flex-row">
+                        <div class="svg-icon company"></div>
+                        <label for="checkbox-airline-5">Viva
+                            Air</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-5">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <div class="d-flex flex-row">
+                        <div class="svg-icon company"></div>
+                        <label for="checkbox-airline-6">Viva
+                            Colombia</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-6">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <div class="d-flex flex-row">
+                        <div class="svg-icon company"></div>
+                        <label for="checkbox-airline-7">Aero
+                            República</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-7">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <div class="d-flex flex-row">
+                        <div class="svg-icon company"></div>
+                        <label for="checkbox-airline-8">Aeroméxico</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-8">
+                    </div>
+                </div> -->
             </div>
         </div>
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingFour">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                <span class="font-header">Precio</span>
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                aria-expanded="true" aria-controls="collapseFour">
+                Precio
             </button>
         </h2>
         <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour">
-            <div class="accordion-body">
-                <div class="row row-cust">
-                    <div class="col-sm-12 col-md-12 col-lg-12 p-0">
-                        <div class="row row-cust pt-1 pb-1">
-                            <div class="d-flex flex-row">
-                                <label class="align-middle font-filter-text label-field">Moneda:</label>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                        <label class="form-check-label" for="inlineRadio1">US$</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">S/.</label>
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
+            <div class="accordion-body pt-0">
+                <div class="d-flex flex-row">
+                    <span><strong>Moneda:</strong></span>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="inlineRadio1">US$</label>
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                            value="option1">
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="inlineRadio2">S/.</label>
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                            value="option2">
                     </div>
                 </div>
-                <ng5-slider [(value)]="minValuePrice" [(highValue)]="maxValuePrice" [options]="optionsPrice"></ng5-slider>
+                <ng5-slider [(value)]="minValuePrice" [(highValue)]="maxValuePrice" [options]="optionsPrice">
+                </ng5-slider>
             </div>
         </div>
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingFive">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-                <span class="font-header">Duración</span>
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                aria-expanded="true" aria-controls="collapseFive">
+                Duración
             </button>
         </h2>
         <div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingFive">
             <div class="accordion-body">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-                            type="button" role="tab" aria-controls="pills-home" aria-selected="true">Salida</button>
+                        <button class="nav-link active border-0" id="pills-home-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                            aria-selected="true">Salida</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
-                            type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Regreso</button>
+                        <button class="nav-link border-0" id="pills-profile-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                            aria-selected="false">Regreso</button>
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                        aria-labelledby="pills-home-tab">
                         <div class="row row-cust">
                             <div class="col-sm-12 col-md-12 col-lg-12 p-0">
-                                <label class="align-middle font-filter-text">Salida</label>
+                                <label>Salida</label>
                                 <br>
-                                <span class="font-text">Lima - México</span>
+                                Lima - México
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 p-0">
                                 <div class="row row-cust pt-1 pb-1">
                                     <div class="d-flex justify-content-start">
-                                        <ng5-slider [(value)]="minValueDurationExit" [(highValue)]="maxValueDurationExit" [options]="optionsDurationExit"></ng5-slider>
+                                        <ng5-slider [(value)]="minValueDurationExit"
+                                            [(highValue)]="maxValueDurationExit" [options]="optionsDurationExit">
+                                        </ng5-slider>
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 pt-4">
-                                <label class="align-middle font-filter-text">Escala</label>
+                                <label>Escala</label>
                                 <br>
-                                <span class="font-text">de 1 a 24 horas</span>
+                                de 1 a 24 horas
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 p-0">
                                 <div class="row row-cust pt-1 pb-1">
                                     <div class="d-flex justify-content-start">
-                                        <ng5-slider [(value)]="minValueDurationExitScale" [(highValue)]="maxValueDurationExitScale" [options]="optionsDurationExitScale"></ng5-slider>
+                                        <ng5-slider [(value)]="minValueDurationExitScale"
+                                            [(highValue)]="maxValueDurationExitScale"
+                                            [options]="optionsDurationExitScale"></ng5-slider>
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         <div class="row row-cust">
                             <div class="col-sm-12 col-md-12 col-lg-12 p-0">
-                                <label class="align-middle font-filter-text">Regreso</label>
+                                <label>Regreso</label>
                                 <br>
-                                <span class="font-text">México - Lima</span>
+                                México - Lima
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 p-0">
                                 <div class="row row-cust pt-1 pb-1">
                                     <div class="d-flex justify-content-start">
-                                        <ng5-slider [(value)]="minValueDurationBack" [(highValue)]="maxValueDurationBack" [options]="optionsDurationBack"></ng5-slider>
+                                        <ng5-slider [(value)]="minValueDurationBack"
+                                            [(highValue)]="maxValueDurationBack" [options]="optionsDurationBack">
+                                        </ng5-slider>
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 pt-4">
-                                <label class="align-middle font-filter-text">Escala</label>
+                                <label>Escala</label>
                                 <br>
-                                <span class="font-text">de 1 a 24 horas</span>
+                                de 1 a 24 horas
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 p-0">
                                 <div class="row row-cust pt-1 pb-1">
                                     <div class="d-flex justify-content-start">
-                                        <ng5-slider [(value)]="minValueDurationBackScale" [(highValue)]="maxValueDurationBackScale" [options]="optionsDurationBackScale"></ng5-slider>
+                                        <ng5-slider [(value)]="minValueDurationBackScale"
+                                            [(highValue)]="maxValueDurationBackScale"
+                                            [options]="optionsDurationBackScale"></ng5-slider>
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
@@ -327,8 +282,9 @@
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingSix">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                <span class="font-header">Alianzas</span>
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
+                aria-expanded="true" aria-controls="collapseSix">
+                Alianzas
             </button>
         </h2>
         <div id="collapseSix" class="accordion-collapse collapse show" aria-labelledby="headingSix">
@@ -337,43 +293,42 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 p-0">
                         <div class="row row-cust pt-1 pb-1">
                             <div class="d-flex justify-content-between">
-                                <label class="align-middle font-filter-text" for="checkbox-alliance-1">Todas las alianzas</label>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-alliance-1">
-                                    </div>
-                                </span>
+                                <label for="checkbox-alliance-1">Todas las alianzas</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkbox-alliance-1">
+                                </div>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                         <div class="row row-cust pt-1 pb-1">
                             <div class="d-flex justify-content-between">
-                                <label class="align-middle font-filter-text" for="checkbox-alliance-2">Alianza 1</label>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-alliance-2">
-                                    </div>
-                                </span>
+                                <label for="checkbox-alliance-2">Alianza 1</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkbox-alliance-2">
+                                </div>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                         <div class="row row-cust pt-1 pb-1">
                             <div class="d-flex justify-content-between">
-                                <label class="align-middle font-filter-text" for="checkbox-alliance-3">Alianza 2</label>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-alliance-3">
-                                    </div>
-                                </span>
+                                <label for="checkbox-alliance-3">Alianza 2</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkbox-alliance-3">
+                                </div>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingSeven">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
-                <span class="font-header">Reserva flexible</span>
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven"
+                aria-expanded="true" aria-controls="collapseSeven">
+                Reserva flexible
             </button>
         </h2>
         <div id="collapseSeven" class="accordion-collapse collapse show" aria-labelledby="headingSeven">
@@ -383,28 +338,29 @@
                         <div class="row row-cust pt-1 pb-1">
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex flex-row">
-                                    <label class="align-middle font-filter-text">Si</label>
+                                    <label>Si</label>
                                 </div>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                    </div>
-                                </span>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        id="inlineRadio1" value="option1">
+                                </div>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                         <div class="row row-cust pt-1 pb-1">
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex flex-row">
-                                    <label class="align-middle font-filter-text">No</label>
+                                    <label>No</label>
                                 </div>
-                                <span class="align-middle font-filter-text">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                    </div>
-                                </span>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        id="inlineRadio1" value="option1">
+                                </div>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>

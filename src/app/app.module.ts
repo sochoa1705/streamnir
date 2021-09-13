@@ -6,10 +6,11 @@ import { LoginComponent } from './Public/login/login.component';
 import { MaterialModule } from './shared/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToolbarModule } from './shared/components/toolbar/toolbar.module';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [
+  declarations: [   
     AppComponent,
     LoginComponent
   ],
@@ -20,7 +21,7 @@ import { ToolbarModule } from './shared/components/toolbar/toolbar.module';
     BrowserAnimationsModule,
     ToolbarModule,
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,6 +6,7 @@
     background-color: #B50A27;
     color: white;
     svg.logo{
+        cursor: pointer;
         @media (max-width: 768px) { 
             width: 100px;
         }

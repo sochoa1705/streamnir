@@ -1,6 +1,6 @@
 <section class="container mt-5">
     <aside class="row">
-        <div class="col-md-6 col-12 pr-0">
+        <div class="col-md-6 col-12 pr-md-0">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <ng-container *ngFor="let b of slider; let indice = index">
@@ -28,16 +28,21 @@
                 </button>
             </div>
         </div>
-        <div class="col-md-6 col-12 pl-0">
+        <div class="col-md-6 col-12 pl-md
+        
+        
+        -0">
             <div class="row">
                 <div class="col-12">
                     <ng-container *ngFor="let i of slider">
-                    <div *ngIf="!i.key" class="aside__content_2">
-                        <img src="./assets/aside/{{ i.img }}">
-                    </div>
-</ng-container>
+                        <div *ngIf="!i.key" class="aside__content_2">
+                            <img src="./assets/aside/{{ i.img }}">
+                        </div>
+                    </ng-container>
                 </div>
+                <div class="clearfix"></div>
             </div>
         </div>
+        <div class="clearfix"></div>
     </aside>
 </section>

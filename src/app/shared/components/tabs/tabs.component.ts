@@ -30,10 +30,10 @@ export class TabsComponent implements OnInit {
     return pasajero = pasajero + valor
   }
 
-  customers() {
-    var cdr: any = document.getElementById('cdr');
-    cdr.style = 'display:block'
+  // customers() {
+  //   var cdr: any = document.getElementById('cdr');
+  //   cdr.style = 'display:block'
 
-  }
+  // }
 
 }
