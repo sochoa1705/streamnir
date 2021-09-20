@@ -62,7 +62,8 @@ export class DataPagePresenterService {
       {
         id: 1,
         section: "Paquetes",
-        title: "Paquetes turísticos ¡Elige ahora tu paquete nacional o internacional!",
+        title: "Paquetes turísticos",
+        title2: "¡Elige ahora tu paquete nacional o internacional!",
         btn: "Otros paquetes",
         link: "#"
       },

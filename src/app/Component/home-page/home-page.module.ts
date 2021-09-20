@@ -18,6 +18,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
 import { TabsModule } from 'src/app/shared/components/tabs/tabs.module';
 import { ComprarModule } from './comprar/comprar.module';
 import { ResultadosModule } from './resultados/resultados.module';
+import { FlightsService } from 'src/app/Services/flights/flights.service';
+import { SegurosModule } from './seguros/seguros.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -36,8 +38,9 @@ import { ResultadosModule } from './resultados/resultados.module';
     GoogleMapsModule,
     ComprarModule,
     ResultadosModule,
+    SegurosModule,
   ],
   exports: [HomePageComponent],
-  providers: [OffersService, PackagesService, AsidePresenterService, DataPagePresenterService]
+  providers: [OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
 })
 export class HomePageModule { }

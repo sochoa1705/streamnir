@@ -4,13 +4,13 @@ import { MailingComponent } from './mailing.component';
 import { MaterialModule } from '../../material.module';
 
 @NgModule({
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ MailingComponent ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  declarations: [MailingComponent],
   imports: [
     CommonModule,
     MaterialModule,
   ],
-  exports: [ MailingComponent ],
+  exports: [MailingComponent],
 
 })
 export class MailingModule { }

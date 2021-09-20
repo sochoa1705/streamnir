@@ -1,0 +1,53 @@
+.banner {
+    width: 100%;
+    height: 540px;
+    padding: 0 !important;
+    position: relative;
+    overflow: inherit;
+    display: flex;
+    align-items: flex-end;
+    & > .content {
+        top: 0;
+        height: 440px;
+        position: absolute;
+        max-width: 100%;
+        width: 100%;
+        & img {
+            position: absolute;
+            object-fit: cover;
+            -o-object-position: top;
+            object-position: top;
+            height: 100%;
+            max-width: 100%;
+            width: 100%;
+        }
+    }
+}
+.w-130 {
+    width: 130px;
+    display: inline-block;
+    margin-right: 5px;
+    padding-left: 0;
+    @media (max-width: 768px) {
+        width: 99px;
+        display: inline-block;
+        padding-left: 0;
+    }
+}
+.customers {
+    width: 100%;
+    font-style: normal;
+    font-weight: 600;
+    border: 0px;
+    font-size: 14px;
+    color: #222;
+    margin-top: 7px;
+    background-color: white;
+    background: url(../../../../assets/arrow.svg) no-repeat center right;
+    padding-left: 0;
+    text-align: left;
+    font-family: "Montserrat";
+    @media (max-width: 768px) {
+        font-size: 10px;
+    }
+}
