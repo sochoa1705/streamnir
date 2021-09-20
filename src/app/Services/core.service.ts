@@ -19,7 +19,6 @@ export class CoreService {
   ) { 
     this.urlWebApi = environment?.serverUrlApi;
   }
-
   GetUserId = (userRequest: UserRequest): Observable<ResponseNumber> => {
     return this.http
       .post<ResponseNumber>(this.urlWebApi + Path.Core + Core.GetUserId, {

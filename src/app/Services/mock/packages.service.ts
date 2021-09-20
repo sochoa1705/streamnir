@@ -13,6 +13,8 @@ export class PackagesService {
       span: 'Elige tu próximo destino',
       price: 54,
       link: '#',
+      class: 'active'
+
     },
     {
       id:1,

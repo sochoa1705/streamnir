@@ -3,7 +3,11 @@
         position: relative;
         height: 372px;
         overflow: hidden;
+        @media (max-width: 768px) {
+            height: 180px;
+        }
         &>img{
+            border-radius: 2px;
             position: absolute;
             object-fit: cover;
             -o-object-position: top;
@@ -11,6 +15,9 @@
             height: 100%;
             max-width: 100%;
             width: 100%;
+            @media (max-width: 768px) {
+                position: relative;
+            }
         }
     }
 }
@@ -29,6 +36,11 @@
 }
 
 .carousel-inner{
+    &.row{
+        @media (max-width: 768px) {
+            --bs-gutter-x: 0!important;
+        }
+    }
     @media (min-width: 768px) {
         width: auto!important;
     }

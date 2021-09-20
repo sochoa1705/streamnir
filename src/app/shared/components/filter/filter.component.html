@@ -46,7 +46,7 @@
                     [matAutocomplete]="auto" [formControl]="stateCtrl" placeholder="Origen">
                 <mat-autocomplete #auto="matAutocomplete">
                     <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
-                        <img class="example-option-img" aria-hidden [src]="state.flag" height="25">
+                        <img class="example-option-img" aria-hidden src="../assets/{{ state.flag }}">
                         <span>{{state.name}}</span> |
                         <small>Population: {{state.population}}</small>
                     </mat-option>
@@ -55,7 +55,7 @@
             <!-- END ORIGEN -->
 
             <!-- DESTINO -->
-            <div class="col-12 col-md-3 d-flex align-items-center pr-md-0 p-0">
+            <div class="col-12 col-md-3 d-flex align-items-center pr-md-2 p-0">
                 <svg class="d-md-none" width="15" height="17" viewBox="0 0 15 17" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -121,7 +121,7 @@
             </div> -->
             <hr class="d-block d-md-none">
             <div class="col-md-1 col-12 text-end p-0 d-flex align-items-center">
-                <button (click)="send()" class="w-100">Buscar <span class="d-inline-block d-md-none">tu
+                <button (click)="send()" class="w-100">Busca <span class="d-inline-block d-md-none">tu
                         vuelo</span></button>
             </div>
             <div class="clearfix"></div>
