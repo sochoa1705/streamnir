@@ -4,6 +4,7 @@ import { ComprarComponent } from './comprar/comprar.component';
 import { ConformidadComponent } from './conformidad/conformidad.component';
 import { HomePageComponent } from './home-page.component';
 import { PaquetesComponent } from './paquetes/paquetes.component';
+import { PerfilComponent } from './perfil/perfil.component';
 import { ResultadosComponent } from './resultados/resultados.component';
 import { SegurosComponent } from './seguros/seguros.component';
 import { VuelosComponent } from './vuelos/vuelos.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'vuelos/resultados', component: ResultadosComponent },
   { path: 'conformidad', component: ConformidadComponent },
   { path: 'seguros', component: SegurosComponent },
+  { path: 'perfil', component: PerfilComponent },
 ];
 
 @NgModule({

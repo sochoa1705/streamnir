@@ -20,6 +20,7 @@ import { ComprarModule } from './comprar/comprar.module';
 import { ResultadosModule } from './resultados/resultados.module';
 import { FlightsService } from 'src/app/Services/flights/flights.service';
 import { SegurosModule } from './seguros/seguros.module';
+import { PerfilModule } from './perfil/perfil.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -39,6 +40,7 @@ import { SegurosModule } from './seguros/seguros.module';
     ComprarModule,
     ResultadosModule,
     SegurosModule,
+    PerfilModule,
   ],
   exports: [HomePageComponent],
   providers: [OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
