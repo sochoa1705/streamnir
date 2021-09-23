@@ -11,6 +11,8 @@ import { FlightsService } from 'src/app/Services/flights/flights.service';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+  selectedIndex: number = 0;
+
   zoom = 12
   center!: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {

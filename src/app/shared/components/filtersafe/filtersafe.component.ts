@@ -73,7 +73,7 @@ export class FiltersafeComponent implements OnInit {
 
   send() {
     console.log(this.form.value);
-    this.route.navigateByUrl('/home/vuelos/resultados');
+    this.route.navigateByUrl('/home/seguros/planes');
   }
 
   createForm() {

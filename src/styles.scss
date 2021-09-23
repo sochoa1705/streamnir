@@ -59,6 +59,28 @@ button {
             color: white;
         }
     }
+    &.planes {
+        background: white;
+        color: #4b4b4b;
+        font-family: Montserrat;
+        font-weight: normal;
+        font-size: 12px !important;
+        line-height: 24px;
+        letter-spacing: 0.5px;
+        border: 1px solid #54d834;
+        min-width: 130px;
+        &:hover{
+            background: #54d834;
+            color: white;
+        }
+        &.best{
+            border: 1px solid #df0c30 ;
+            &:hover{
+                background: white;
+                color: #4b4b4b;
+            }
+        }
+    }
 }
 
 .p {
@@ -185,7 +207,7 @@ section {
         display: inline-block;
         margin: 0 10px;
         box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
-        background: #54D834;
+        background: #54d834;
         border-radius: 22px;
         overflow: hidden;
         box-sizing: border-box;
@@ -194,14 +216,14 @@ section {
             width: 100%;
             margin: 0;
         }
-        &.best{
+        &.best {
             background: #f21037;
-            .card{
-                &-header{
+            .card {
+                &-header {
                     background: #f21037;
                 }
-                &-body{
-                    padding:1rem;
+                &-body {
+                    padding: 1rem;
                 }
             }
         }
@@ -217,10 +239,10 @@ section {
             &-header {
                 @include itemCard(bold, 14px, 21px, 0.1px, white);
                 border: 0px;
-                background: #54D834;
+                background: #54d834;
                 text-transform: uppercase;
                 text-align: center;
-                padding:4px;
+                padding: 4px;
             }
             &-body {
                 background: white;
@@ -234,7 +256,7 @@ section {
                         @include itemCard(500, 14px, 21px, 0.1px, #4b4b4b!important);
                     }
                 }
-                h2{
+                h2 {
                     margin-bottom: 10px;
                 }
                 p {
@@ -243,7 +265,7 @@ section {
                         @include itemCard(500, 14px, 21px, 0.1px, #83898f);
                     }
                     &.now {
-                        color: #4b4b4b!important;
+                        color: #4b4b4b !important;
                         strong {
                             @include itemCard(600, 30px, 24px, 0.15px, #4B4B4B!important);
                         }
@@ -279,90 +301,86 @@ section {
 .ng5-slider {
     height: 15px !important;
     font-family: "Montserrat";
+    & &-pointer.ng5-slider-pointer-min {
+        cursor: pointer;
+        width: 20px !important;
+        height: 20px !important;
+        top: -8px !important;
+        background-color: #0db9f0;
+        z-index: 3;
+        border-radius: 16px;
+        background-color: #ffff !important;
+        box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+    & &-pointer.ng5-slider-pointer-max {
+        cursor: pointer;
+        width: 25px !important;
+        height: 25px !important;
+        top: -10px !important;
+        background-color: #0db9f0;
+        z-index: 3;
+        border-radius: 16px;
+        background-color: #ffff !important;
+        box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+    &-pointer.ng5-slider-active:after {
+        opacity: 0 !important;
+        background-color: #ffff !important;
+        width: 0px !important;
+        position: absolute;
+    }
+    &-pointer:after {
+        opacity: 0 !important;
+        background-color: #ffff !important;
+        width: 0px !important;
+        position: absolute;
+    }
+    &-span.ng5-slider-ceil,
+    &-span.ng5-slider-floor {
+        display: none !important;
+        opacity: 1 !important;
+        top: 20px !important;
+        font-style: normal;
+        font-weight: 500 !important;
+        font-size: 14px !important;
+        line-height: 21px !important;
+        color: #4b4b4b !important;
+        font-family: "Montserrat";
+    }
+    &-bubble {
+        bottom: -26px !important;
+    }
+    &-model-value {
+        // display: none !important;
+        //right: 0!important;
+        left: 0 !important;
+    }
+    &-active {
+        outline: none;
+    }
+    &-model-high {
+        // display: none !important;
+        font-family: "Montserrat";
+        right: 0 !important;
+        left: auto !important;
+    }
+    &-pointer-min:active,
+    &-pointer-max:active {
+        border: 1px solid #0db9f0;
+    }
+
+    // .ng5-slider-combined {
+    //     display: none !important;
+    // }
+
+    // .ng5-slider-pointer:after {
+    //     opacity: 0 !important;
+    //     background-color: #ffff !important;
+    //     width: 0px !important;
+    //     position: absolute;
+    // }
 }
 
-.ng5-slider .ng5-slider-pointer.ng5-slider-pointer-min {
-    cursor: pointer;
-    width: 20px !important;
-    height: 20px !important;
-    top: -8px !important;
-    background-color: #0db9f0;
-    z-index: 3;
-    border-radius: 16px;
-    background-color: #ffff !important;
-    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15) !important;
-}
-
-.ng5-slider .ng5-slider-pointer.ng5-slider-pointer-max {
-    cursor: pointer;
-    width: 25px !important;
-    height: 25px !important;
-    top: -10px !important;
-    background-color: #0db9f0;
-    z-index: 3;
-    border-radius: 16px;
-    background-color: #ffff !important;
-    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15) !important;
-}
-
-.ng5-slider-pointer.ng5-slider-active:after {
-    opacity: 0 !important;
-    background-color: #ffff !important;
-    width: 0px !important;
-    position: absolute;
-}
-
-.ng5-slider-pointer:after {
-    opacity: 0 !important;
-    background-color: #ffff !important;
-    width: 0px !important;
-    position: absolute;
-}
-
-.ng5-slider-span.ng5-slider-ceil,
-.ng5-slider-span.ng5-slider-floor {
-    display: none !important;
-    opacity: 1 !important;
-    top: 20px !important;
-    font-style: normal;
-    font-weight: 500 !important;
-    font-size: 14px !important;
-    line-height: 21px !important;
-    color: #4b4b4b !important;
-    font-family: "Montserrat";
-}
-.ng5-slider-bubble {
-    bottom: -26px !important;
-}
-.ng5-slider-model-value {
-    // display: none !important;
-    //right: 0!important;
-    left: 0 !important;
-}
-.ng5-slider-active {
-    outline: none;
-}
-.ng5-slider-model-high {
-    // display: none !important;
-    font-family: "Montserrat";
-    right: 0 !important;
-    left: auto !important;
-}
-.ng5-slider-pointer-min:active,
-.ng5-slider-pointer-max:active {
-    border: 1px solid #0db9f0;
-}
-
-// .ng5-slider-combined {
-//     display: none !important;
-// }
-
-// .ng5-slider-pointer:after {
-//     opacity: 0 !important;
-//     background-color: #ffff !important;
-//     width: 0px !important;
-//     position: absolute;
-// }
 .mat-tab-body.mat-tab-body-active {
     position: initial !important;
 }

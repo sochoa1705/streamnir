@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-flights',
@@ -7,6 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./flights.component.scss']
 })
 export class FlightsComponent implements OnInit {
+  json = {
+    title: '¡Falta poco! Confirma ahora tu reserva.',
+    asistencia: true,
+    reembolso: true,
+    detalleViaje: true,
+    detalleCobertura: false,
+    cupon: true
+  }
 
   constructor(public route: Router) { }
 
@@ -15,6 +23,7 @@ export class FlightsComponent implements OnInit {
 
   shop() {
     //console.log(this.form.value);
-    this.route.navigateByUrl('/home/comprar');
+    const navigationExtras: NavigationExtras = { state: this.json };
+    this.route.navigateByUrl('/home/comprar', navigationExtras);
   }
 }

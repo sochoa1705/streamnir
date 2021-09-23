@@ -1,3 +1,4 @@
+<app-filter></app-filter>
 <div class="container pb-4">
     <div class="row">
         <div class="col-12 py-3">
@@ -13,7 +14,8 @@
     <div class="row">
         <!-- IZQUIERDA -->
         <div class="col-8">
-            <h1>¡Falta poco! Confirma ahora tu reserva.</h1>
+            <h1>{{ title }}</h1>
+            <!-- <h1>¡Falta poco! Confirma ahora tu reserva.</h1> -->
             <div class="card pasajeros">
                 <div class="card-header">
                     <h2>Información de pasajeros</h2>
@@ -32,7 +34,7 @@
             </div>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-6" *ngIf="asistencia">
                     <div class="card border-0 bg-transparent">
                         <div class="card-header text-center border rounded-top">
                             <img src="./assets/comprar/card/_assist.png" alt="">
@@ -61,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-6" *ngIf="reembolso">
                     <div class="card border-0 bg-transparent">
                         <div class="card-header text-center border rounded-top">
                             <img src="./assets/comprar/card/_protect.png" alt="">
@@ -320,7 +322,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button class="px-5" (click)="shop()">Comprar</button>
+                            <button class="px-5">Comprar</button>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -368,9 +370,16 @@
                     </div>
                 </div>
             </div>
-            <h2 class=" mt-3">Detalle de tu viaje</h2>
+            <!-- DETALLE DE COBERTURA -->
+            <h2 *ngIf="detalleCobertura" class=" mt-3">Detalle de cobertura</h2>
+
+            <!-- END DETALLE DE COBERTURA -->
+
+
+            <!-- DETALLE DE VIAJE -->
+            <h2 *ngIf="detalleViaje" class=" mt-3">Detalle de tu viaje</h2>
             <!-- DESTINOS -->
-            <div class="card">
+            <div class="card" *ngIf="detalleViaje">
                 <!-- <div class="card-header">
                     Featured
                 </div> -->
@@ -591,9 +600,10 @@
                     </div>
                 </div>
             </div>
+            <!-- END DETALLE DE VIAJE -->
 
             <!-- CUPON -->
-            <div class="card cupon">
+            <div class="card cupon" *ngIf="cupon">
                 <div class="card-header shadow-none">
                     Código de descuento
                 </div>

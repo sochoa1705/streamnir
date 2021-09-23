@@ -1,3 +1,12 @@
+@mixin itemCard($fw, $fs, $lh, $ls, $color: #4b4b4b) {
+    font-weight: $fw;
+    font-size: $fs;
+    line-height: $lh;
+    letter-spacing: $ls;
+    @if $color != #4b4b4b {
+        color: $color;
+    }
+}
 // .carousel-item {
 //     @media (min-width: 768px) {
 //         display: block;
@@ -91,4 +100,63 @@ button {
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0.5px;
+}
+
+.modal {
+    &-content {
+        background: #54d834;
+        border: 0;
+        border-radius: 20px;
+    }
+    &-header {
+        border-radius: 20px;
+        color: white;
+        padding: 1rem 2rem 0 2rem;
+        h {
+            &2 {
+                font-family: "Open Sans";
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 36px;
+                margin-bottom: 0;
+            }
+            &5 {
+                font-family: "Montserrat";
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 21px;
+                letter-spacing: 0.1px;
+            }
+        }
+    }
+    &-body {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        table {
+            tr.row {
+                border-top: 0;
+                border-bottom: 1px solid #CFD1D3;
+                td {
+                    color: #4b4b4b;
+                    border-top: 0;
+                    border-left: 0;
+                    padding: 5px 10px;
+                    border-right: 1px solid #CFD1D3;
+                    &:last-child {
+                        border-right: 0;
+                    }
+                }
+
+            }
+        }
+        .covid {
+            @include itemCard(bold, 16px, 20px, 0.5px, #1eaea5);
+            display: block;
+            text-transform: capitalize;
+            &:first-child {
+                font-size: 14px;
+            }
+        }
+    }
 }

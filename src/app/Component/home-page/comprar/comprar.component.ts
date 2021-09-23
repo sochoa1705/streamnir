@@ -8,17 +8,33 @@ import { OffersService } from 'src/app/Services/mock/offers.service';
   styleUrls: ['./comprar.component.scss']
 })
 export class ComprarComponent implements OnInit {
-
+  current: any;
+  title!: string;
+  asistencia!: boolean;
+  reembolso!: boolean;
+  detalleViaje!: boolean;
+  detalleCobertura!: boolean;
+  cupon!: boolean
   constructor(
     public route: Router,
     public offersService: OffersService,
-  ) { }
+  ) {
+    this.current = this.route.getCurrentNavigation()?.extras.state as any
+  }
 
   ngOnInit(): void {
+    console.log(this.current.title);
+    this.loadShop();
   }
 
-  shop(){
-    this.route.navigateByUrl('/home/conformidad');
+  loadShop() {
+    this.title = this.current.title;
+    this.asistencia = this.current.asistencia;
+    this.reembolso = this.current.reembolso;
+    this.detalleViaje = this.current.detalleViaje;
+    this.detalleCobertura = this.current.detalleCobertura;
+    this.cupon = this.current.cupon;
   }
+
 
 }

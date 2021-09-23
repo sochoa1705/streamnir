@@ -11,18 +11,24 @@ import { TitleModule } from 'src/app/shared/components/title/title.module';
 import { FiltersafeModule } from 'src/app/shared/components/filtersafe/filtersafe.module';
 import { PackagesService } from 'src/app/Services/mock/packages.service';
 import { SegurosRoutingModule } from './seguros-routing.module';
+import { RouterModule } from '@angular/router';
+import { SlideModule } from './commons/components/slide/slide.module';
+import { PlansModule } from './commons/components/plans/plans.module';
 
 @NgModule({
   declarations: [SegurosComponent],
   imports: [
     CommonModule,
+    SegurosRoutingModule,
     MailingModule,
+    RouterModule,
     CardModule,
     TitleModule,
     FooterModule,
     FiltersafeModule,
     HttpClientModule,
-    SegurosRoutingModule,
+    SlideModule,
+    PlansModule,
   ],
   exports: [SegurosComponent],
   providers: [DataPagePresenterService, OffersService, PackagesService]
