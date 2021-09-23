@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css?family=Montserrat:500,700");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap");
+@mixin itemCard($fw, $fs, $lh, $ls, $color: #4b4b4b) {
+    font-weight: $fw;
+    font-size: $fs;
+    line-height: $lh;
+    letter-spacing: $ls;
+    @if $color != #4b4b4b {
+        color: $color;
+    }
+}
 html,
 body {
     height: 100%;
@@ -19,10 +28,7 @@ a {
     text-decoration: none;
 }
 label {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
+    @include itemCard(600, 16px, 24px, 0.1px);
     padding-bottom: 26px;
 }
 .form-control {
@@ -34,7 +40,7 @@ label {
 }
 
 button {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     background-color: #df0c30;
     font-size: 16px;
     color: white;
@@ -154,14 +160,12 @@ section {
             font-weight: 700;
         }
         label {
+            @include itemCard(300, 14px, 21px, 0.1px);
             display: block;
             width: 100%;
             padding-bottom: 0;
-            font-family: Montserrat;
+            font-family: "Montserrat";
             font-style: normal;
-            font-weight: 300;
-            font-size: 14px;
-            line-height: 21px;
         }
         input.form-control {
             width: 100%;
@@ -171,12 +175,102 @@ section {
             box-sizing: border-box;
             border-radius: 5px;
             &::placeholder {
-                font-family: Montserrat;
-                font-style: normal;
-                font-weight: 300;
-                font-size: 14px;
-                line-height: 21px;
-                letter-spacing: 0.25px;
+                @include itemCard(300, 14px, 21px, 0.25px);
+                font-family: "Montserrat";
+            }
+        }
+    }
+    &.seguro {
+        width: calc(20% - 16px);
+        display: inline-block;
+        margin: 0 10px;
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+        background: #54D834;
+        border-radius: 22px;
+        overflow: hidden;
+        box-sizing: border-box;
+        font-family: "Montserrat";
+        @media (max-width: 768px) {
+            width: 100%;
+            margin: 0;
+        }
+        &.best{
+            background: #f21037;
+            .card{
+                &-header{
+                    background: #f21037;
+                }
+                &-body{
+                    padding:1rem;
+                }
+            }
+        }
+        &:first-child {
+            margin-right: 10px;
+            margin-left: 0px;
+        }
+        &:last-child {
+            margin-left: 10px;
+            margin-right: 0px;
+        }
+        .card {
+            &-header {
+                @include itemCard(bold, 14px, 21px, 0.1px, white);
+                border: 0px;
+                background: #54D834;
+                text-transform: uppercase;
+                text-align: center;
+                padding:4px;
+            }
+            &-body {
+                background: white;
+                color: #4b4b4b;
+                border-radius: 20px 20px 0 0;
+                padding: 6px 1rem;
+                span {
+                    @include itemCard(500, 10px, 15px, 0.1px, #83898f);
+                    margin: 0;
+                    &.now {
+                        @include itemCard(500, 14px, 21px, 0.1px, #4b4b4b!important);
+                    }
+                }
+                h2{
+                    margin-bottom: 10px;
+                }
+                p {
+                    @include itemCard(500, 10px, 15px, 0.1px, #83898f);
+                    strong {
+                        @include itemCard(500, 14px, 21px, 0.1px, #83898f);
+                    }
+                    &.now {
+                        color: #4b4b4b!important;
+                        strong {
+                            @include itemCard(600, 30px, 24px, 0.15px, #4B4B4B!important);
+                        }
+                    }
+                    &.card-text {
+                        @include itemCard(500, 11px, 18px, 0.1px, #4b4b4b);
+                        text-align: center;
+                    }
+                }
+                .covid {
+                    @include itemCard(bold, 16px, 20px, 0.5px, #1eaea5);
+                    display: block;
+                    text-transform: capitalize;
+                    &:first-child {
+                        font-size: 14px;
+                    }
+                }
+                a {
+                    @include itemCard(500, 11px, 18px, 0.1px, #009aed);
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+                button {
+                    @include itemCard(600, 12px, 24px, 0.5px, #ffffff);
+                    margin: 0 auto;
+                }
             }
         }
     }
@@ -293,23 +387,16 @@ section {
             font-size: 12px;
         }
         h1 {
+            @include itemCard(bold, 32px, 48px, 0.1px);
             font-family: "Open Sans";
-            font-weight: bold;
-            font-size: 32px;
-            line-height: 48px;
             text-align: left;
-            color: #4b4b4b;
             display: block;
             width: 100%;
             margin-bottom: 0;
         }
         p {
+            @include itemCard(14px, 300, 21px, 0.25px, #4b4b4b);
             font-family: "Montserrat";
-            font-weight: 300;
-            font-size: 14px;
-            line-height: 21px;
-            letter-spacing: 0.25px;
-            color: #4b4b4b;
             width: 100%;
         }
     }
@@ -325,23 +412,17 @@ section {
             margin-bottom: 20px !important;
             font-family: "Montserrat";
             &::placeholder {
+                @include itemCard(normal, 14px, 18px, 0.1px, #cfd1d3);
                 font-family: "Montserrat";
-                font-weight: normal;
-                font-size: 14px;
-                line-height: 18px;
                 text-transform: capitalize;
-                color: #cfd1d3;
             }
             // &:focus{
             //     box-shadow: none;
             // }
         }
         .mat-tab-label {
+            @include itemCard(500, 14px, 21px, 0.1px);
             font-family: "Montserrat";
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 21px;
-            letter-spacing: 0.1px;
             color: #4b4b4b;
             opacity: 1;
         }
@@ -352,25 +433,15 @@ section {
             padding: 2rem 0;
         }
         .mat-checkbox-label {
+            @include itemCard(normal, 14px, 21px, 0.1px, #009aed);
             font-family: "Montserrat";
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 21px;
-            letter-spacing: 0.1px;
-            color: #009aed;
         }
-        a{
+        a {
+            @include itemCard(600, 14px, 21px, 0.1px, #009aed);
             font-family: "Montserrat";
-            font-weight: 600;
-            font-size: 14px;
-            line-height: 21px;
-            letter-spacing: 0.1px;
-            color: #009aed;
         }
     }
 }
-
-
 
 #cdr {
     position: absolute;
@@ -394,13 +465,11 @@ section {
         margin-right: 6px;
     }
     h4 {
+        @include itemCard(500, 16px, 16px, 0.1px);
         width: auto;
-        font-size: 16px;
         margin-bottom: 0;
-        line-height: 16px;
         padding: 0;
         font-family: "Montserrat";
-        font-weight: 500;
     }
     span {
         font-size: 10px;
@@ -433,6 +502,70 @@ section {
                 background: #df0c30;
                 color: white;
             }
+        }
+    }
+}
+
+#carouselSeguros {
+    color: red;
+    background: #f6f7f9;
+    .carousel {
+        &-caption {
+            top: 180px;
+            p {
+                color: #4b4b4b;
+                font-size: 12px;
+                margin-top: 50px;
+                margin: 0 auto;
+                width: 230px;
+            }
+        }
+        &-inner {
+            height: 320px;
+        }
+        &-indicators {
+            // background: green;
+            button {
+                border-radius: 50%;
+                height: 10px;
+                width: 10px;
+                border: 1px solid #df0c30;
+                &.active {
+                    background-color: #df0c30;
+                }
+            }
+        }
+        &-control {
+            &-prev {
+                background: url(./assets/prev.png) no-repeat center center !important;
+                &-icon {
+                    background-image: none;
+                }
+            }
+            &-next {
+                background: url(./assets/next.png) no-repeat center center !important;
+                &-icon {
+                    background-image: none;
+                }
+            }
+            &-prev,
+            &-next {
+                background: white;
+                opacity: 1;
+                border-radius: 50%;
+                color: red;
+                height: 53px;
+                width: 53px;
+                box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+                top: 35%;
+            }
+        }
+    }
+    h2 {
+        font-size: 24px;
+        color: #4b4b4b;
+        span {
+            color: #b50a27;
         }
     }
 }

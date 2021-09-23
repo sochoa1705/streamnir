@@ -9,6 +9,8 @@ import { CardModule } from 'src/app/shared/components/card/card.module';
 import { OffersService } from 'src/app/Services/mock/offers.service';
 import { TitleModule } from 'src/app/shared/components/title/title.module';
 import { FiltersafeModule } from 'src/app/shared/components/filtersafe/filtersafe.module';
+import { PackagesService } from 'src/app/Services/mock/packages.service';
+import { SegurosRoutingModule } from './seguros-routing.module';
 
 @NgModule({
   declarations: [SegurosComponent],
@@ -20,8 +22,9 @@ import { FiltersafeModule } from 'src/app/shared/components/filtersafe/filtersaf
     FooterModule,
     FiltersafeModule,
     HttpClientModule,
+    SegurosRoutingModule,
   ],
   exports: [SegurosComponent],
-  providers: [DataPagePresenterService, OffersService]
+  providers: [DataPagePresenterService, OffersService, PackagesService]
 })
 export class SegurosModule { }

@@ -81,3 +81,17 @@
         }
     }
 }
+.active{
+    color: rgba(255, 255, 255, 1)!important;
+    &:after {
+        content: ""!important;
+        display: block!important;
+        margin: auto!important;
+        height: 2px!important;
+        width: 0px!important;
+        transition: all 0.3s!important;
+        width: 100%!important;
+        background: #fff!important;
+        color: rgba(255, 255, 255, 1)!important;
+}
+}
