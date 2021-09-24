@@ -3,7 +3,6 @@
 //     width: 100%;
 //     height: auto;
 //     color: red;
-
 // }
 // .mat-form-field-appearance-outline .mat-form-field-outline-thick{
 //     color: red;
@@ -16,11 +15,13 @@ svg {
         margin-bottom: 15px;
     }
 }
+
 .filter {
     .mat-form-field {
         width: 100%;
     }
 }
+
 .w-130 {
     width: 130px;
     display: inline-block;
@@ -32,6 +33,7 @@ svg {
         padding-left: 0;
     }
 }
+
 .customers {
     width: 100%;
     font-style: normal;
@@ -67,6 +69,7 @@ svg {
         letter-spacing: 0.25px;
     }
 }
+
 :host ::ng-deep span.mat-date-range-input-separator {
     display: none;
     margin: 0 !important;
@@ -85,7 +88,6 @@ svg {
         padding-right: 0;
         padding-left: 0;
     }
-
     .mat-date-range-input-start-wrapper,
     .mat-date-range-input-end-wrapper {
         flex: 1 0 0%;
@@ -98,9 +100,11 @@ svg {
         border-radius: 0 3px 3px 0 !important;
     }
 }
+
 :host ::ng-deep .mat-form-field-suffix {
     display: none;
 }
+
 :host ::ng-deep .mat-datepicker-input {
     padding: 13px;
     margin-top: 5px;
@@ -159,6 +163,7 @@ svg {
         }
     }
 }
+
 .mat-form-field-appearance-outline .mat-form-field-outline-start {
     border-radius: 0px !important;
     border: 1px solid blue !important;

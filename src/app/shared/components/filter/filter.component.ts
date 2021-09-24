@@ -3,6 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+//import { NgbDateISOParserFormatter} from './dateformat';
 
 export interface State {
   flag: string;
@@ -12,12 +14,14 @@ export interface State {
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss']
+  styleUrls: ['./filter.component.scss'],
+  // providers: [
+  //    {provide: FilterComponent, useClass: NgbDateISOParserFormatter}
+  //   ]
 })
 export class FilterComponent implements OnInit {
   form!: FormGroup;
-
-
+  model!: NgbDateStruct;
   stateCtrl = new FormControl();
   stateCtrl2 = new FormControl();
   filteredStates: Observable<State[]>;
@@ -58,7 +62,15 @@ export class FilterComponent implements OnInit {
     }
   ];
 
-  constructor(public route: Router) {
+  hoveredDate: NgbDate | null = null;
+
+  fromDate: NgbDate | null;
+  toDate: NgbDate | null;
+
+
+  constructor(public route: Router,private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
+    this.fromDate = calendar.getToday();
+    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.filteredStates = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -66,6 +78,33 @@ export class FilterComponent implements OnInit {
       );
   }
 
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
+    }
+  }
+
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) {
+    return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
+  }
+
+  isRange(date: NgbDate) {
+    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
+  }
+
+  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+    const parsed = this.formatter.parse(input);
+    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+  }
   ngOnInit(): void {
     this.createForm()
   }
