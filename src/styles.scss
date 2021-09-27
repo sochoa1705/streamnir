@@ -888,6 +888,10 @@ section {
 
 /* STYLE PERFIL  */
 
+.mat-tab-body-content {
+    overflow: hidden !important;
+}
+
 .box-container {
     width: 100%;
     display: flex;

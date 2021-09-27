@@ -100,7 +100,7 @@
                             <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                     </div>
-                    <input class="form-control" (click)="d.toggle()" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                    <input class="form-control" (click)="d.toggle()" placeholder="Salida" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
                 </div>
                 <!-- END SOLO IDA -->
 
@@ -137,89 +137,6 @@
         </div>
 
 
-
-
-
-
-
-
-        <div class="row">
-            <!-- ORIGEN -->
-            <div class="col-12 col-md-3 d-flex align-items-center pr-md-2 p-0">
-
-            </div>
-
-
-            <!-- DESTINO -->
-            <div class="col-12 col-md-3 d-flex align-items-center pr-md-2 p-0">
-
-            </div>
-            <!-- END DESTINO -->
-
-            <!-- DATE -->
-
-            <!-- <div class="col-12 col-md-5 d-flex align-items-center px-0 px-md-0" *ngIf="selected === 'ida'"> -->
-
-            <!-- AQUI SOLO IDA 
-            <div class="col-12 col-md-4 d-flex align-items-center" *ngIf="selected === 'ida'">
-                <mat-form-field (click)="picker.open()">
-                    <input matInput [matDatepicker]="picker">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-
-            </div> -->
-            <!-- END DATE -->
-
-            <!-- DATERANGE -->
-
-            <!-- <div class="col-12 col-md-5 d-flex align-items-center px-0 px-md-0" *ngIf="selected === 'idavuelta'"> -->
-            <!-- <svg class="d-md-none" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M12.1707 2.39998H3.7707C2.22431 2.39998 0.970703 3.65358 0.970703 5.19998V12.2C0.970703 13.7464 2.22431 15 3.7707 15H12.1707C13.7171 15 14.9707 13.7464 14.9707 12.2V5.19998C14.9707 3.65358 13.7171 2.39998 12.1707 2.39998Z"
-                        stroke="#009AED" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M5.17075 1V3.8" stroke="#009AED" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M10.7707 1V3.8" stroke="#009AED" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M0.970703 6.60002H14.9707" stroke="#009AED" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg> -->
-            <!-- <input type="text" class="form-control" placeholder="Salida"> -->
-            <!-- <mat-label>Enter a date range</mat-label> -->
-            <!-- <mat-date-range-input [formGroup]="range" [rangePicker]="picker" (click)="picker.open()"> -->
-
-            <!-- ANTIGUO DATEPICKER
-                <mat-date-range-input formGroupName="range" [rangePicker]="picker" (click)="picker.open()">
-                    <input matStartDate formControlName="start" class="form-control" placeholder="Salida">
-                    <input matEndDate formControlName="end" class="pr-0" placeholder="Regreso">
-                </mat-date-range-input> -->
-
-
-            <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
-            <!--  ANTIGUO DATEPICKER
-                <mat-date-range-picker #picker></mat-date-range-picker> -->
-
-            <!-- <mat-error *ngIf="form.controls.range.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-                <mat-error *ngIf="form.controls.range.end.hasError('matEndDateInvalid')">Invalid end date</mat-error> -->
-
-
-
-
-            <!-- 
-            <div class="col-3" *ngIf="selected === 'idavuelta'"> -->
-            <!-- <div class="portletDaterange" *ngIf="selected === 'idavuelta'">
-
-            </div> -->
-            <!-- </div> -->
-            <!-- END DATERANGE -->
-
-
-
-
-            <!-- <div class="col-12 col-md-2">
-                <input type="text" class="form-control" placeholder="Vuelta">
-            </div> -->
-
-        </div>
         <!-- END FILTROS -->
     </div>
     <ul id="cdr">
