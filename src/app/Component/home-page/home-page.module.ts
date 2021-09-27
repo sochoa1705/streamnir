@@ -16,6 +16,7 @@ import { HomeModule } from './home/home.module';
 import { ToolbarModule } from 'src/app/shared/components/toolbar/toolbar.module';
 import { ComprarModule } from './comprar/comprar.module';
 import { ResultadosModule } from './resultados/resultados.module';
+import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -27,6 +28,7 @@ import { ResultadosModule } from './resultados/resultados.module';
     PerfilModule,
     ToolbarModule,
     HomeModule,
+    PreFooterModule,
     FooterModule,
     HttpClientModule,
     GoogleMapsModule,

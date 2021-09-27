@@ -4,8 +4,9 @@
         <div class="row filter">
             <div class="w-130">
                 <mat-form-field>
-                    <mat-select formControlName="tipo" [(ngModel)]="selected" disableOptionCentering>
-                        <mat-option value="idavuelta">Ida y vuelta</mat-option>
+                    <!-- <mat-select formControlName="tipo" [(ngModel)]="selected" disableOptionCentering> -->
+                        <mat-select formControlName="tipo" disableOptionCentering>
+                            <mat-option value="idavuelta">Ida y vuelta</mat-option>
                         <mat-option value="ida">Solo ida</mat-option>
                         <mat-option value="multi">Multi city</mat-option>
                     </mat-select>
@@ -42,13 +43,14 @@
                         d="M0.199796 7.43146L3.25258 9.518C3.94007 9.98791 4.74826 10.2276 5.55989 10.2276C6.14744 10.2276 6.7368 10.1019 7.28313 9.84695L10.2909 8.44124C10.4981 8.34436 10.5875 8.09782 10.4907 7.89064C10.3939 7.68341 10.1474 7.59399 9.94007 7.69075L6.9326 9.09642C5.89556 9.58029 4.66464 9.47981 3.71997 8.83411L1.19504 7.10834L2.33144 6.41132L5.25599 7.38138C5.35685 7.41489 5.46674 7.40826 5.56291 7.36295L9.04759 5.72147C9.17744 5.66029 9.26633 5.53632 9.28261 5.39371C9.29888 5.25114 9.24019 5.11027 9.12745 5.02143L5.28233 1.99142L6.77777 1.22838L13.6943 3.4166C13.7936 3.44804 13.9011 3.44083 13.9954 3.3966L18.6229 1.22216C19.1452 1.00355 19.7774 1.24242 20.0349 1.75694C20.1666 2.02004 20.1858 2.31793 20.0891 2.59578C19.9924 2.87363 19.7923 3.09514 19.5256 3.21965L13.3091 6.12374C13.1018 6.22054 13.0123 6.46707 13.1091 6.6743C13.2059 6.88152 13.4524 6.97115 13.6597 6.87427L19.8761 3.97026C20.347 3.75045 20.7005 3.35907 20.8714 2.8682C21.0424 2.37733 21.0084 1.851 20.7757 1.38623C20.3248 0.485339 19.2104 0.0711376 18.2917 0.462889C18.2871 0.464836 18.2825 0.466907 18.278 0.46902L13.7898 2.57801L6.86574 0.387339C6.76207 0.354534 6.64949 0.363812 6.55252 0.413309L4.32971 1.54752C4.20396 1.61168 4.11955 1.73552 4.10575 1.87602C4.09196 2.01652 4.1507 2.15441 4.26162 2.2418L8.08863 5.25752L5.35971 6.54299L2.40948 5.5644C2.29354 5.526 2.16663 5.54063 2.0625 5.60445L0.216944 6.73643C0.09724 6.80982 0.0228909 6.93893 0.0194116 7.07926C0.0159738 7.21967 0.0839028 7.35222 0.199796 7.43146Z"
                         fill="#009AED" />
                 </svg>
-                <input matInput aria-label="State" class="form-control" formControlName="origen"
-                    [matAutocomplete]="auto" [formControl]="stateCtrl" placeholder="Origen">
+
+                <!-- <input matInput aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl" class="form-control" placeholder="Origen"> -->
+                <input matInput aria-label="State" [matAutocomplete]="auto" (keyup)="autoComplete()" (focus)="autoComplete()" (blur)="autoComplete()" #inputOrigen class="form-control animated fadeIn" formControlName="origen" placeholder="Origen">
                 <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
-                        <img class="example-option-img" aria-hidden src="../assets/{{ state.flag }}">
-                        <span>{{state.name}}</span> |
-                        <small>Population: {{state.population}}</small>
+                    <mat-option *ngFor="let state of citys" [value]="state.CITY">
+                        <img class="example-option-img" aria-hidden src="./assets/origen.png">
+                        <span>{{state.CITY}}</span>
+                        <!-- <small>Population: {{state.population}}</small> -->
                     </mat-option>
                 </mat-autocomplete>
             </div>
@@ -64,13 +66,13 @@
                 </svg>
                 <input matInput aria-label="State2" class="form-control" formControlName="destino"
                     [matAutocomplete]="auto" [formControl]="stateCtrl2" placeholder="Destino">
-                <mat-autocomplete #auto="matAutocomplete">
+                <!-- <mat-autocomplete #auto="matAutocomplete">
                     <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
                         <img class="example-option-img" aria-hidden [src]="state.flag" height="25">
                         <span>{{state.name}}</span> |
                         <small>Population: {{state.population}}</small>
                     </mat-option>
-                </mat-autocomplete>
+                </mat-autocomplete> -->
             </div>
             <!-- END DESTINO -->
 

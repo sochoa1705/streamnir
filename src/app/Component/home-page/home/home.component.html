@@ -17,7 +17,7 @@
         </div>
         <div class="clearfix"></div>
     </div>
-</div> -->
+</div> -->  
 <!-- END OFERTAS -->
 
 <!-- PAQUETES -->
@@ -31,7 +31,6 @@
         </div>
         <div class="clearfix"></div>
     </div>
-
 
     <div class="row">
         <div *ngFor="let packb of packagesService.packages" class="col-12 col-md-{{ packb.banner }}">
@@ -77,7 +76,6 @@
         </div>
     </div>
     <app-card [itemList]="packagesService.packages"></app-card>
-
     <div class="row text-end py-5">
         <div class="col-12">
             <ng-container *ngFor="let section of dataPagePresenterService.data.sections">

@@ -72,14 +72,12 @@ export class FiltersafeComponent implements OnInit {
   }
 
   send() {
-    console.log(this.form.value);
+    // console.log(this.form.value);
     this.route.navigateByUrl('/home/seguros/planes');
   }
 
   createForm() {
     this.form = new FormGroup({
-      tipo: new FormControl('idavuelta'),
-      catergory: new FormControl('economy'),
       // adultos: new FormControl(0),
       ninos: new FormControl(0),
       infantes: new FormControl(0),
@@ -100,12 +98,12 @@ export class FiltersafeComponent implements OnInit {
   count(valor: number, e: any) {
     // (document.getElementById("num1") as HTMLInputElement).value
     let adultos: any = Number((document.getElementById('adultos') as HTMLInputElement).value);
-    console.log(adultos);
+    // console.log(adultos);
     // console.log(adultos.value);
     // console.log(e);
     adultos = 10;
     let item = e.target.name;
-    console.log(valor);
+    // console.log(valor);
 
     // let pasajero = this.form.value.adultos;
     // if (pasajero >= 100 && valor >= 0) {

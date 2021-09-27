@@ -1,0 +1,35 @@
+@import '/src/scss/variables';
+h {
+    &r {
+        margin: 42px 0;
+        &.hr {
+            margin: 20px 0;
+        }
+    }
+}
+
+.text {
+    &-footer{
+        font-family: 'Montserrat';
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.15px;
+        color: $gray;
+        margin-top: 20px;
+        @media (max-width: 768px) {
+            font-size: 10px;
+            text-align: center;
+        }
+        span{
+            color: $red_light;
+        }
+    }
+    &-md-end img {
+        margin-right: 20px;
+        @media (max-width: 768px) {
+            height: 14px;
+            margin-bottom: 20px;
+        }
+    }
+}

@@ -9,6 +9,7 @@ import { OffersService } from 'src/app/Services/mock/offers.service';
 })
 export class ComprarComponent implements OnInit {
   current: any;
+  filter!: string;
   title!: string;
   asistencia!: boolean;
   reembolso!: boolean;
@@ -23,11 +24,13 @@ export class ComprarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.current.title);
     this.loadShop();
+    console.log(this.current);
+    
   }
 
   loadShop() {
+    this.filter = this.current.filter;
     this.title = this.current.title;
     this.asistencia = this.current.asistencia;
     this.reembolso = this.current.reembolso;

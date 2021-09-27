@@ -8,6 +8,7 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class PlansComponent implements OnInit {
   json = {
+    filter: 'filtersafe',
     title: 'Viaja seguro',
     asistencia: false,
     reembolso: false,

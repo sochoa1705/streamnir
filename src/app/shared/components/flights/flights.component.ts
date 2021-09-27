@@ -8,6 +8,7 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class FlightsComponent implements OnInit {
   json = {
+    filter: 'filter',
     title: '¡Falta poco! Confirma ahora tu reserva.',
     asistencia: true,
     reembolso: true,
