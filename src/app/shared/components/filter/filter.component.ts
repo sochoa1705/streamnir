@@ -3,55 +3,55 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { Injectable} from '@angular/core';
+import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Injectable } from '@angular/core';
 import { NgbDateAdapter, } from '@ng-bootstrap/ng-bootstrap';
 import { FlightsService } from 'src/app/Services/flights/flights.service';
 
 /**
  * This Service handles how the date is represented in scripts i.e. ngModel.
  */
- @Injectable()
- export class CustomAdapter extends NgbDateAdapter<string> {
-   readonly DELIMITER = '-';
-   fromModel(value: string | null): NgbDateStruct | null {
-     if (value) {
-       let date = value.split(this.DELIMITER);
-       return {
-         day : parseInt(date[0], 10),
-         month : parseInt(date[1], 10),
-         year : parseInt(date[2], 10)
-       };
-     }
-     return null;
-   }
- 
-   toModel(date: NgbDateStruct | null): string | null {
-     return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
-   }
- }
+@Injectable()
+export class CustomAdapter extends NgbDateAdapter<string> {
+  readonly DELIMITER = '-';
+  fromModel(value: string | null): NgbDateStruct | null {
+    if (value) {
+      let date = value.split(this.DELIMITER);
+      return {
+        day: parseInt(date[0], 10),
+        month: parseInt(date[1], 10),
+        year: parseInt(date[2], 10)
+      };
+    }
+    return null;
+  }
+
+  toModel(date: NgbDateStruct | null): string | null {
+    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
+  }
+}
 /**
  * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
  */
- @Injectable()
- export class CustomDateParserFormatter extends NgbDateParserFormatter {
-   readonly DELIMITER = '/';
-   parse(value: string): NgbDateStruct | null {
-     if (value) {
-       let date = value.split(this.DELIMITER);
-       return {
-         day : parseInt(date[0], 10),
-         month : parseInt(date[1], 10),
-         year : parseInt(date[2], 10)
-       };
-     }
-     return null;
-   }
- 
-   format(date: NgbDateStruct | null): string {
-     return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
-   }
- }
+@Injectable()
+export class CustomDateParserFormatter extends NgbDateParserFormatter {
+  readonly DELIMITER = '/';
+  parse(value: string): NgbDateStruct | null {
+    if (value) {
+      let date = value.split(this.DELIMITER);
+      return {
+        day: parseInt(date[0], 10),
+        month: parseInt(date[1], 10),
+        year: parseInt(date[2], 10)
+      };
+    }
+    return null;
+  }
+
+  format(date: NgbDateStruct | null): string {
+    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
+  }
+}
 
 export interface State {
   flag: string;
@@ -63,8 +63,8 @@ export interface State {
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
   providers: [
-    {provide: NgbDateAdapter, useClass: CustomAdapter},
-    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter}
+    { provide: NgbDateAdapter, useClass: CustomAdapter },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
   ]
 })
 
@@ -126,11 +126,11 @@ export class FilterComponent implements OnInit {
   constructor(
     public route: Router,
     private flightsService: FlightsService,
-    private calendar: NgbCalendar, 
-    public formatter: NgbDateParserFormatter, 
-    private ngbCalendar: NgbCalendar, 
+    private calendar: NgbCalendar,
+    public formatter: NgbDateParserFormatter,
+    private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>
-    ) {
+  ) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.filteredStates = this.stateCtrl.valueChanges
@@ -144,7 +144,7 @@ export class FilterComponent implements OnInit {
   private _filter(value: string): State[] {
     const filterValue = value.toLowerCase();
     return this.states.filter(state => state.name.toLowerCase().includes(filterValue));
-  
+  }
   get today() {
     return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
