@@ -1,12 +1,4 @@
-@mixin itemCard($fw, $fs, $lh, $ls, $color: #4b4b4b) {
-    font-weight: $fw;
-    font-size: $fs;
-    line-height: $lh;
-    letter-spacing: $ls;
-    @if $color != #4b4b4b {
-        color: $color;
-    }
-}
+@import "/src/scss/mixin";
 // .carousel-item {
 //     @media (min-width: 768px) {
 //         display: block;
