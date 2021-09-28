@@ -8,6 +8,7 @@
     color: $white;
     svg.logo {
         cursor: pointer;
+        margin-left: 50px;
         @media (max-width: 768px) {
             width: 100px;
         }
