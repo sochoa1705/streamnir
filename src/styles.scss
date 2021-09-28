@@ -815,6 +815,11 @@ section {
     padding: 10px 0;
 }
 
+.portletFiltro .rowFiltro .columnButton {
+    padding: 10px 0;
+    min-width: 150px;
+}
+
 .portletFiltro .rowFiltro .columnFiltro .iconCalendar {
     position: absolute;
     display: flex;
@@ -865,6 +870,11 @@ section {
 .portletFiltro .rowFiltro .columnFiltro.hideColumn input {
     border: none;
     color: #fff;
+}
+
+.portletFiltro .rowFiltro .columnFiltro button {
+    letter-spacing: 0.5px;
+    max-width: 150px;
 }
 
 .form-group.hidden {
@@ -1614,6 +1624,14 @@ section {
     text-decoration: line-through #DF0C30;
 }
 
+.carousel-item .card .card-body {
+    font-family: Open Sans;
+}
+
+.carousel-item .card .card-body .cotainer a {
+    padding: 10px 14.5px;
+}
+
 .card.seguro {
     margin-top: 15px;
 }
@@ -1736,6 +1754,10 @@ section {
     margin-right: 10px;
 }
 
+.espaciado {
+    padding: 0 12px;
+}
+
 @media (max-width: 640px) {
     .narginColumn {
         margin-right: 0px;
@@ -1762,5 +1784,10 @@ section {
     }
     .portletFiltro .rowFiltro .columnFiltro .iconCalendar {
         padding-top: 10px;
+    }
+    .columnButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

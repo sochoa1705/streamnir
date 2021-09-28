@@ -1,7 +1,7 @@
 <form class="bg-white filtroBox" [formGroup]="form">
     <div class="container bg-white">
         <!-- COMBOS -->
-        <div class="row filter">
+        <div class="row filter espaciado">
             <div class="w-130">
                 <!-- <button class="customers" (click)="customers($event)">10 Pasajero</button> -->
                 <button class="customers">1 Pasajero</button>
@@ -102,7 +102,7 @@
                     </div>
                     <input #dpFromDate class="form-control inputDer" (click)="datepicker.toggle()" placeholder="Salida" name="dpFromDate" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
                 </div>
-                <div class="columnFiltro" *ngIf="selected === 'idavuelta'">
+                <div class="columnFiltro narginColumn" *ngIf="selected === 'idavuelta'">
                     <div class="iconCalendar">
                         <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.7425 2.90918H5.28791C3.17918 2.90918 1.46973 4.61864 1.46973 6.72736V16.2728C1.46973 18.3815 3.17918 20.091 5.28791 20.091H16.7425C18.8512 20.091 20.5606 18.3815 20.5606 16.2728V6.72736C20.5606 4.61864 18.8512 2.90918 16.7425 2.90918Z" stroke="#009AED" stroke-linecap="round" stroke-linejoin="round"/>
@@ -115,8 +115,8 @@
                     <input #dpToDate class="form-control inputIzq" (click)="datepicker.toggle()" placeholder="Vuelta" name="dpToDate" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
                 </div>
                 <!-- BOTOM -->
-                <div class="columnFiltro marginLeft10">
-                    <button (click)="send()" class="w-100">Cotizar Ahora</button>
+                <div class="columnButton">
+                    <button (click)="send()">Cotizar Ahora</button>
                 </div>
                 <!-- END BOTOM -->
                 <!-- END IDA Y VUELTA -->
