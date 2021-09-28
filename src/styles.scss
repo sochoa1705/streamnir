@@ -829,7 +829,7 @@ section {
 }
 
 .mat-tab-label-container {
-    z-index: 0 !important;
+    //z-index: 0 !important;
 }
 
 .mat-tab-body-wrapper {
@@ -1732,7 +1732,14 @@ section {
     align-items: flex-start;
 }
 
+.narginColumn {
+    margin-right: 10px;
+}
+
 @media (max-width: 640px) {
+    .narginColumn {
+        margin-right: 0px;
+    }
     .width110 select {
         width: 100%;
     }
@@ -1752,5 +1759,8 @@ section {
     .portletFiltro .rowFiltro .columnFiltro input[type=text] {
         padding-bottom: 0 !important;
         border: 0.5px solid #E4E5E7;
+    }
+    .portletFiltro .rowFiltro .columnFiltro .iconCalendar {
+        padding-top: 10px;
     }
 }
