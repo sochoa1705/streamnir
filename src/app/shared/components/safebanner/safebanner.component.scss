@@ -1,3 +1,4 @@
+@import '/src/scss/variables';
 .banner {
     width: 100%;
     height: 540px;
@@ -6,6 +7,7 @@
     overflow: inherit;
     display: flex;
     align-items: flex-end;
+    background: $gray-light;
     & > .content {
         top: 0;
         height: 440px;

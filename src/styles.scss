@@ -678,7 +678,7 @@ section {
 
 /* Importing Bootstrap SCSS file. */
 
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
 
 /* datepicker styles  */
 
@@ -853,7 +853,7 @@ section {
 
 .portletFiltro .rowFiltro .columnFiltro input::-webkit-input-placeholder,
 .portletFiltro .rowFiltro .columnFiltro input[type="text"]::-webkit-input-placeholder {
-    color: #4B4B4B;
+    color: #B9BCBF;
     font-size: 16px;
 }
 
