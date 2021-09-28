@@ -1632,6 +1632,24 @@ section {
     padding: 10px 14.5px;
 }
 
+.carousel-item .card .card-body .cotainer .row,
+.carousel-item .card .card-body .cotainer .row h5 {
+    font-family: Montserrat !important;
+}
+
+.carousel-item .card .card-body h5 {
+    font-family: Montserrat !important;
+}
+
+card-title .carousel-item .card .card-body .cotainer .row h1 {
+    font-family: Open Sans !important;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 36px;
+    color: #4B4B4B;
+}
+
 .card.seguro {
     margin-top: 15px;
 }
