@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FiltersafeComponent } from './filtersafe.component';
 import { MaterialModule } from '../../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ FiltersafeComponent ],
@@ -12,8 +12,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    NgbModule,
   ],
   exports: [ FiltersafeComponent ],
+  bootstrap: [FiltersafeComponent]
 
 })
 export class FiltersafeModule { }

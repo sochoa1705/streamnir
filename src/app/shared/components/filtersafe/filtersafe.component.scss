@@ -1,5 +1,4 @@
 @import "/src/scss/variables";
-
 .w-130 {
     width: 130px;
     display: inline-block;
@@ -11,6 +10,7 @@
         padding-left: 0;
     }
 }
+
 .customers {
     width: 100%;
     font-style: normal;
@@ -27,4 +27,8 @@
     @media (max-width: 768px) {
         font-size: 10px;
     }
+}
+
+.card {
+    overflow: hidden !important;
 }

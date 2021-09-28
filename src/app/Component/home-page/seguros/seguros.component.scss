@@ -6,13 +6,11 @@
 //         transition: none;
 //     }
 // }
-
 // .carousel-inner {
 //     @media (min-width: 768px) {
 //         width: auto !important;
 //     }
 // }
-
 // .carousel-indicators button {
 //     border: 1px solid white;
 //     background: red;
@@ -46,6 +44,7 @@
         letter-spacing: 0.25px;
     }
 }
+
 :host ::ng-deep .mat-date-range-input-container {
     align-items: initial;
     flex-shrink: 0;
@@ -58,7 +57,6 @@
         padding-right: 0;
         padding-left: 0;
     }
-
     .mat-date-range-input-start-wrapper,
     .mat-date-range-input-end-wrapper {
         flex: 1 0 0%;
@@ -71,6 +69,7 @@
         border-radius: 0 3px 3px 0 !important;
     }
 }
+
 h2 {
     font-family: "Open Sans";
     font-style: normal;
@@ -78,6 +77,7 @@ h2 {
     font-size: 24px;
     line-height: 36px;
 }
+
 .text-justify {
     font-family: "Montserrat";
     font-weight: 500;
@@ -86,6 +86,7 @@ h2 {
     text-align: justify;
     letter-spacing: 0.1px;
 }
+
 button {
     font-family: "Montserrat";
     font-weight: 600;
@@ -139,7 +140,6 @@ button {
                         border-right: 0;
                     }
                 }
-
             }
         }
         .covid {

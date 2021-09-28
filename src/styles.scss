@@ -13,7 +13,6 @@
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
     }
@@ -37,7 +36,10 @@ a {
 }
 
 label {
-    @include itemCard(600, 16px, 24px, 0.1px);
+    @include itemCard(600,
+    16px,
+    24px,
+    0.1px);
     padding-bottom: 26px;
 }
 
@@ -176,11 +178,12 @@ section {
     margin: 20px 0px;
 }
 
-.mat-option-text{
-    img{
+.mat-option-text {
+    img {
         margin-right: 10px;
     }
 }
+
 .card {
     background: $white;
     border-radius: 10px;
@@ -197,7 +200,10 @@ section {
             font-weight: 700;
         }
         label {
-            @include itemCard(300, 14px, 21px, 0.1px);
+            @include itemCard(300,
+            14px,
+            21px,
+            0.1px);
             display: block;
             width: 100%;
             padding-bottom: 0;
@@ -212,7 +218,10 @@ section {
             box-sizing: border-box;
             border-radius: 5px;
             &::placeholder {
-                @include itemCard(300, 14px, 21px, 0.25px);
+                @include itemCard(300,
+                14px,
+                21px,
+                0.25px);
                 font-family: "Montserrat";
             }
         }
@@ -252,7 +261,11 @@ section {
         }
         .card {
             &-header {
-                @include itemCard(bold, 14px, 21px, 0.1px, $white);
+                @include itemCard(bold,
+                14px,
+                21px,
+                0.1px,
+                $white);
                 border: 0px;
                 background: $green;
                 text-transform: uppercase;
@@ -265,33 +278,61 @@ section {
                 border-radius: 20px 20px 0 0;
                 padding: 6px 1rem;
                 span {
-                    @include itemCard(500, 10px, 15px, 0.1px, $gray_border);
+                    @include itemCard(500,
+                    10px,
+                    15px,
+                    0.1px,
+                    $gray_border);
                     margin: 0;
                     &.now {
-                        @include itemCard(500, 14px, 21px, 0.1px, $gray!important);
+                        @include itemCard(500,
+                        14px,
+                        21px,
+                        0.1px,
+                        $gray!important);
                     }
                 }
                 h2 {
                     margin-bottom: 10px;
                 }
                 p {
-                    @include itemCard(500, 10px, 15px, 0.1px, $gray_border);
+                    @include itemCard(500,
+                    10px,
+                    15px,
+                    0.1px,
+                    $gray_border);
                     strong {
-                        @include itemCard(500, 14px, 21px, 0.1px, $gray_border);
+                        @include itemCard(500,
+                        14px,
+                        21px,
+                        0.1px,
+                        $gray_border);
                     }
                     &.now {
                         color: $gray !important;
                         strong {
-                            @include itemCard(600, 30px, 24px, 0.15px, $gray!important);
+                            @include itemCard(600,
+                            30px,
+                            24px,
+                            0.15px,
+                            $gray!important);
                         }
                     }
                     &.card-text {
-                        @include itemCard(500, 11px, 18px, 0.1px, $gray);
+                        @include itemCard(500,
+                        11px,
+                        18px,
+                        0.1px,
+                        $gray);
                         text-align: center;
                     }
                 }
                 .covid {
-                    @include itemCard(bold, 16px, 20px, 0.5px, $green_light);
+                    @include itemCard(bold,
+                    16px,
+                    20px,
+                    0.5px,
+                    $green_light);
                     display: block;
                     text-transform: capitalize;
                     &:first-child {
@@ -299,13 +340,21 @@ section {
                     }
                 }
                 a {
-                    @include itemCard(500, 11px, 18px, 0.1px, $blue_light);
+                    @include itemCard(500,
+                    11px,
+                    18px,
+                    0.1px,
+                    $blue_light);
                     &:hover {
                         text-decoration: underline;
                     }
                 }
                 button {
-                    @include itemCard(600, 12px, 24px, 0.5px, $white);
+                    @include itemCard(600,
+                    12px,
+                    24px,
+                    0.5px,
+                    $white);
                     margin: 0 auto;
                 }
             }
@@ -383,11 +432,9 @@ section {
     &-pointer-max:active {
         border: 1px solid #0db9f0;
     }
-
     // .ng5-slider-combined {
     //     display: none !important;
     // }
-
     // .ng5-slider-pointer:after {
     //     opacity: 0 !important;
     //     background-color: $white !important;
@@ -420,7 +467,10 @@ section {
             font-size: 12px;
         }
         h1 {
-            @include itemCard(bold, 32px, 48px, 0.1px);
+            @include itemCard(bold,
+            32px,
+            48px,
+            0.1px);
             font-family: "Open Sans";
             text-align: left;
             display: block;
@@ -428,7 +478,11 @@ section {
             margin-bottom: 0;
         }
         p {
-            @include itemCard(14px, 300, 21px, 0.25px, $gray);
+            @include itemCard(14px,
+            300,
+            21px,
+            0.25px,
+            $gray);
             font-family: "Montserrat";
             width: 100%;
         }
@@ -445,7 +499,11 @@ section {
             margin-bottom: 20px !important;
             font-family: "Montserrat";
             &::placeholder {
-                @include itemCard(normal, 14px, 18px, 0.1px, #cfd1d3);
+                @include itemCard(normal,
+                14px,
+                18px,
+                0.1px,
+                #cfd1d3);
                 font-family: "Montserrat";
                 text-transform: capitalize;
             }
@@ -454,7 +512,10 @@ section {
             // }
         }
         .mat-tab-label {
-            @include itemCard(500, 14px, 21px, 0.1px);
+            @include itemCard(500,
+            14px,
+            21px,
+            0.1px);
             font-family: "Montserrat";
             color: $gray;
             opacity: 1;
@@ -466,11 +527,19 @@ section {
             padding: 2rem 0;
         }
         .mat-checkbox-label {
-            @include itemCard(normal, 14px, 21px, 0.1px, $blue_light);
+            @include itemCard(normal,
+            14px,
+            21px,
+            0.1px,
+            $blue_light);
             font-family: "Montserrat";
         }
         a {
-            @include itemCard(600, 14px, 21px, 0.1px, $blue_light);
+            @include itemCard(600,
+            14px,
+            21px,
+            0.1px,
+            $blue_light);
             font-family: "Montserrat";
         }
     }
@@ -498,7 +567,10 @@ section {
         margin-right: 6px;
     }
     h4 {
-        @include itemCard(500, 16px, 16px, 0.1px);
+        @include itemCard(500,
+        16px,
+        16px,
+        0.1px);
         width: auto;
         margin-bottom: 0;
         padding: 0;
@@ -740,7 +812,6 @@ section {
 
 .portletFiltro .rowFiltro .columnFiltro {
     flex: 1 1 100%;
-    margin-right: 5px;
     padding: 10px 0;
 }
 
@@ -1495,6 +1566,10 @@ section {
     margin-right: 10px;
 }
 
+.marginLeft10 {
+    margin-left: 10px;
+}
+
 .marginTop20 {
     margin-top: 20px;
 }
@@ -1529,3 +1604,87 @@ section {
 
 
 /* END STYLE PERFIL */
+
+.card.seguro {
+    border: none !important;
+}
+
+.precioAntes {
+    text-decoration: line-through #DF0C30;
+}
+
+.card.seguro {
+    margin-top: 15px;
+}
+
+.card.seguro .card-header {
+    padding: 8px 4px !important;
+}
+
+.card.seguro .card-body a {
+    text-decoration: none;
+}
+
+.card.seguro .card-body h2 {
+    font-weight: bold;
+    padding-top: 15px;
+}
+
+.card.seguro .card-body p.now strong {
+    padding-left: 5px;
+}
+
+.card.seguro .card-body p.now strong {
+    padding-left: 5px;
+}
+
+.card.seguro .card-body button:hover {
+    background-color: #b50a27;
+}
+
+.card.seguro .card-body button {
+    border-radius: 3px;
+}
+
+.card {
+    font-family: Montserrat;
+}
+
+.filtroBox {
+    overflow: hidden;
+}
+
+.postCard {
+    overflow: hidden !important;
+    position: inherit;
+}
+
+.posFilter {
+    z-index: 11;
+}
+
+.inputDer {
+    border-radius: 3px 0 0 3px !important;
+    letter-spacing: 2px;
+}
+
+.inputIzq {
+    border-radius: 0 0 3px 3px !important;
+    letter-spacing: 2px;
+}
+
+@media (max-width: 640px) {
+    .rowFiltro {
+        flex-direction: column !important;
+    }
+    .portletFiltro .rowFiltro .columnFiltro {
+        padding: 0 !important;
+    }
+    .portletFiltro .rowFiltro .columnFiltro.hideColumn {
+        height: 0;
+        flex: auto;
+    }
+    .portletFiltro .rowFiltro .columnFiltro input[type=text] {
+        padding-bottom: 0 !important;
+    }
+}
