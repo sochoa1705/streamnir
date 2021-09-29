@@ -20,6 +20,70 @@ h2 {
     }
 }
 
+.textSafety {
+    font-size: 16px;
+}
+
+.selectBank {
+    border: 0.5px solid #E4E5E7;
+    box-sizing: border-box;
+    border-radius: 5px;
+    height: 40px;
+    color: #4B4B4B;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.25px;
+    width: 420px;
+}
+
+.boxAgencia {
+    margin-top: 40px;
+    .imgBanca {
+        padding-bottom: 40px;
+        img {
+            margin-right: 15px;
+            &:last-child {
+                margin-right: 0px;
+            }
+        }
+    }
+}
+
+.marginL {
+    margin-left: 15px;
+}
+
+.boxCardPas .card_pasajero label {
+    padding: 10px 0 10px 0 !important;
+}
+
+.boxCardPas .card_pasajero .textDire {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.5px;
+    color: #DF0C30;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.boxCardPas .card_pasajero .colBoxInfo {
+    position: relative;
+}
+
+.boxCardPas .card_pasajero .colBoxInfo .iconInfo {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+}
+
 .card {
     margin-bottom: 20px;
     &_ {
@@ -28,7 +92,7 @@ h2 {
             background: rgba(235, 235, 235, .4);
             display: flex;
             align-items: center;
-            justify-content: space-evenly;
+            justify-content: center;
             border-radius: 5px;
             cursor: pointer;
             padding: 0 10px;
@@ -204,10 +268,46 @@ h2 {
         }
         box-shadow: 0px -2px 3px rgba(0, 0, 0, 0.16);
         a {
-            text-decoration: underline;
-            font-size: 12px;
+            //text-decoration: underline;
+            font-size: 14px;
             color: #009AED;
             font-family: 'Montserrat';
+            &.btnBlue {
+                background: #ffffff;
+                border-radius: 3px;
+                height: 59px;
+                color: #ffffff;
+                text-decoration: none;
+                box-sizing: border-box;
+                padding: 14px;
+                font-family: Montserrat;
+                font-weight: 500;
+                font-size: 16px;
+                display: flex;
+                height: 50px;
+                justify-content: center;
+                border: 1px solid #009AED;
+                box-sizing: border-box;
+                border-radius: 3px;
+                color: #009AED;
+                cursor: pointer;
+                transition: all 0.3s;
+                &.active {
+                    background: #009AED;
+                    border: 1px solid #009AED;
+                    box-sizing: border-box;
+                    border-radius: 3px;
+                    color: #ffffff;
+                }
+            }
+            &.btnRed {
+                font-family: Montserrat;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 21px;
+                letter-spacing: 0.1px;
+                color: #DF0C30;
+            }
         }
         .button {
             margin-top: 30px!important;
@@ -233,6 +333,35 @@ h2 {
             background-image: url(../../../../assets/comprar/check-bold.png);
             background-repeat: no-repeat;
         }
+    }
+}
+
+.marginLat {
+    padding: 0 10px;
+}
+
+.btnSafe {
+    justify-content: space-evenly;
+}
+
+.boxLimite {
+    border-top: 2px dashed #E4E5E7;
+    padding: 20px 20px 10px 10px;
+    .titleLimite {
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
+        padding-bottom: 10px;
+    }
+    .descripLimite {
+        font-family: Montserrat;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
     }
 }
 
@@ -293,8 +422,11 @@ input[type="radio"] {
 
 #option-1:checked:checked~.option-1,
 #option-2:checked:checked~.option-2 {
-    border: 1px solid #009AED;
-    background: #fff;
+    background: #FFFFFF;
+    border: 1px solid rgb(0 154 237/20%);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 8px rgb(0 0 0 / 25%);
+    border-radius: 10px;
 }
 
 #option-1:checked:checked~.option-1 .dot,
