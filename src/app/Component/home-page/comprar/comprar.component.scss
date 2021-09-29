@@ -84,8 +84,13 @@ h2 {
     left: 0;
 }
 
+.lessMarginLeft {
+    margin-left: 0;
+}
+
 .card {
     margin-bottom: 20px;
+    justify-content: center;
     &_ {
         text-align: center;
         & .option {
@@ -418,6 +423,10 @@ input[type='checkbox']+label {
 
 input[type="radio"] {
     display: none;
+}
+
+.option-2 {
+    margin-right: 110px;
 }
 
 #option-1:checked:checked~.option-1,
