@@ -1639,6 +1639,7 @@ section {
 
 .carousel-item .card .card-body h5 {
     font-family: Montserrat !important;
+    font-weight: bold;
 }
 
 card-title .carousel-item .card .card-body .cotainer .row h1 {
@@ -1660,6 +1661,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .card.seguro .card-body a {
     text-decoration: none;
+    font-size: 12px;
 }
 
 .card.seguro .card-body h2 {
@@ -1681,6 +1683,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .card.seguro .card-body button {
     border-radius: 3px;
+    font-size: 14px;
+    font-weight: normal;
 }
 
 .card {
@@ -1808,4 +1812,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         align-items: center;
         justify-content: center;
     }
+}
+
+.widthDesktop {
+    width: 950px !important;
 }
