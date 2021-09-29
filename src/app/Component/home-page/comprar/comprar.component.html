@@ -114,7 +114,7 @@
                                     <!-- <input type="radio" name="select" id="option-1" (change)="chkValue($event)" checked>
                                         <input type="radio" name="select" id="option-2"> -->
                                     <input *ngFor="let chk of metodoPago" type="radio" name="select" id="{{ chk.name }}"
-                                        (change)="chkValue($event, chk.id)" [checked]="chk.checked">
+                                        (click)="chkValue($event)" [checked]="chk.checked">
                                     <label *ngFor="let chk of metodoPago" for="{{ chk.name }}"
                                         class="option {{ chk.name }} col-4 offset-1 py-3">
                                         <div class="dot"></div>
@@ -147,92 +147,114 @@
                                     <div class="clearfix"></div>
                                 </div>
 
-                                <div *ngIf="selectedPay == 'tarjeta'" style="background:red; padding: 20px;">
-                                    tarjeta
-                                </div>
-                                <div *ngIf="selectedPay == 'safety'" style="background:green; padding: 20px;">
-                                    safety pay
-                                </div>
-                                <!-- TARJETA -->
-                                <div class="row py-5">
-                                    <div class="col-12 text-center pago">
-                                        <img src="./assets/comprar/_visa.png" alt="">
-                                        <img src="./assets/comprar/_master.png" alt="">
-                                        <img src="./assets/comprar/_american.png" alt="">
-                                        <img src="./assets/comprar/_dinners.png" alt="">
+                                <div *ngIf="selectedPay == 'tarjeta'; else safety">
+                                    <!-- TARJETA -->
+                                    <div class="row py-5">
+                                        <div class="col-12 text-center pago">
+                                            <img src="./assets/comprar/_visa.png" alt="">
+                                            <img src="./assets/comprar/_master.png" alt="">
+                                            <img src="./assets/comprar/_american.png" alt="">
+                                            <img src="./assets/comprar/_dinners.png" alt="">
+                                        </div>
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="row  card_pasajero">
-                                    <div class="col-6">
-                                        <label for="names">Número de tarjeta</label>
-                                        <input class="form-control" placeholder="Ingrese el número de tarjeta."
-                                            type="text" name="names">
+                                    <div class="row  card_pasajero">
+                                        <div class="col-6">
+                                            <label for="names">Número de tarjeta</label>
+                                            <input class="form-control" placeholder="Ingrese el número de tarjeta."
+                                                type="text" name="names">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="lastname">Titular de la tarjeta</label>
+                                            <input class="form-control" placeholder="El que figura en la tarjeta."
+                                                type="text" name="lastname">
+                                        </div>
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="col-6">
-                                        <label for="lastname">Titular de la tarjeta</label>
-                                        <input class="form-control" placeholder="El que figura en la tarjeta."
-                                            type="text" name="lastname">
+                                    <div class="row  card_pasajero">
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <label for="names">Vencimiento</label>
+                                                    <input class="form-control" placeholder="MM/AA" type="text"
+                                                        name="names">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="lastname">Código de seguridad</label>
+                                                    <input class="form-control"
+                                                        placeholder="El que figura en el documento de viaje."
+                                                        type="text" name="lastname">
+                                                </div>
+                                                <div class="col-1">
+                                                    <label for="lastname">?</label>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <label for="names">Tipo de doc</label>
+                                                    <input class="form-control" placeholder="" type="text" name="names">
+                                                </div>
+                                                <div class="col-7">
+                                                    <label for="lastname">N° de documento</label>
+                                                    <input class="form-control" placeholder="Ingresar N°" type="text"
+                                                        name="lastname">
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="clearfix"></div>
+                                    <div class="row card_pasajero">
+                                        <div class="col-6">
+                                            <label for="names">Cuotas</label>
+                                            <input class="form-control" placeholder="Sin cuotas" type="text"
+                                                name="names">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="lastname">Ciudad de facturación</label>
+                                            <input class="form-control" placeholder="Del titular de la tarjeta."
+                                                type="text" name="lastname">
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="row card_pasajero">
+                                        <div class="col-12">
+                                            <label for="names">Dirección</label>
+                                            <input class="form-control" placeholder="Ingrese la dirección" type="text"
+                                                name="names">
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <!-- END TARJETA -->
                                 </div>
-                                <div class="row  card_pasajero">
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <div class="col-5">
-                                                <label for="names">Vencimiento</label>
-                                                <input class="form-control" placeholder="MM/AA" type="text"
-                                                    name="names">
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="lastname">Código de seguridad</label>
-                                                <input class="form-control"
-                                                    placeholder="El que figura en el documento de viaje." type="text"
-                                                    name="lastname">
-                                            </div>
-                                            <div class="col-1">
-                                                <label for="lastname">?</label>
-                                            </div>
-                                            <div class="clearfix"></div>
+                                <ng-template #safety>
+                                    <div class="row">
+                                        <p>Seleccione una opción para pagar</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <a value="true" (click)="optionPay($event, true)">Banca por internet o Móvil</a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a value="false" (click)="optionPay($event, false)">Agencias/Agentes</a>
                                         </div>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <div class="col-5">
-                                                <label for="names">Tipo de doc</label>
-                                                <input class="form-control" placeholder="" type="text" name="names">
-                                            </div>
-                                            <div class="col-7">
-                                                <label for="lastname">N° de documento</label>
-                                                <input class="form-control" placeholder="Ingresar N°" type="text"
-                                                    name="lastname">
-                                            </div>
-                                            <div class="clearfix"></div>
+                                    <div class="row">
+                                        <div *ngIf="banca; else agencia">
+                                            <select placeholder="Selecciona tu banco">
+                                                <option value="">bcp</option>
+                                            </select>
                                         </div>
+
+                                        <ng-template #agencia>
+agencia
+                                        </ng-template>
                                     </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="row card_pasajero">
-                                    <div class="col-6">
-                                        <label for="names">Cuotas</label>
-                                        <input class="form-control" placeholder="Sin cuotas" type="text" name="names">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="lastname">Ciudad de facturación</label>
-                                        <input class="form-control" placeholder="Del titular de la tarjeta." type="text"
-                                            name="lastname">
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="row card_pasajero">
-                                    <div class="col-12">
-                                        <label for="names">Dirección</label>
-                                        <input class="form-control" placeholder="Ingrese la dirección" type="text"
-                                            name="names">
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- END TARJETA -->
+                                </ng-template>
+
                             </form>
                         </div>
                     </div>
