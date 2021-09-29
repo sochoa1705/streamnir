@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400;500;600;700;800;900");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap");
 @import "scss/variables";
 @import "scss/mixin";
@@ -209,6 +209,7 @@ section {
             padding-bottom: 0;
             font-family: "Montserrat";
             font-style: normal;
+            margin: 10px 0;
         }
         input.form-control {
             width: 100%;
@@ -223,6 +224,7 @@ section {
                 21px,
                 0.25px);
                 font-family: "Montserrat";
+                color: #B9BCBF;
             }
         }
     }
