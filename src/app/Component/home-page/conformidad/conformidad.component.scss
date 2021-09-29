@@ -99,8 +99,8 @@
         &.padBottom50 {
             padding-bottom: 50px;
         }
-        &.padBottom30 {
-            padding-bottom: 30px;
+        &.padBottom10 {
+            padding-bottom: 10px;
         }
         .columnSaf {
             &.titleSafety {
@@ -188,6 +188,7 @@
                 text-align: center;
                 letter-spacing: 0.18px;
                 color: #4B4B4B;
+                flex-direction: column;
             }
         }
     }
