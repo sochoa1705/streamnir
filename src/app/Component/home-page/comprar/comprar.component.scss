@@ -56,6 +56,34 @@ h2 {
     margin-left: 15px;
 }
 
+.boxCardPas .card_pasajero label {
+    padding: 10px 0 10px 0 !important;
+}
+
+.boxCardPas .card_pasajero .textDire {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.5px;
+    color: #DF0C30;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.boxCardPas .card_pasajero .colBoxInfo {
+    position: relative;
+}
+
+.boxCardPas .card_pasajero .colBoxInfo .iconInfo {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+}
+
 .card {
     margin-bottom: 20px;
     &_ {
@@ -313,7 +341,7 @@ h2 {
 }
 
 .btnSafe {
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .boxLimite {
