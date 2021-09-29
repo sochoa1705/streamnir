@@ -75,7 +75,7 @@ export class DataPagePresenterService {
       {
         id: 3,
         section: "Vuelos",
-        title: "¡Corre y Vuela! con estas Súper ofertas de Vuelos saiendo desde Lima",
+        title: "¡Corre y Vuela! con estas Súper ofertas de Vuelos saliendo desde Lima",
         btn: "Más ofertas",
         link: "#"
       },
