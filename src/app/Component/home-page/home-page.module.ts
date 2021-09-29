@@ -17,6 +17,7 @@ import { ComprarModule } from './comprar/comprar.module';
 import { ResultadosModule } from './resultados/resultados.module';
 import { HomeModule } from './home/home.module';
 import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer.module';
+import { ConformidadModule } from './conformidad/conformidad.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -32,6 +33,7 @@ import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer
     HttpClientModule,
     GoogleMapsModule,
     ComprarModule,
+    ConformidadModule,
     ResultadosModule,
   ],
   exports: [HomePageComponent],
