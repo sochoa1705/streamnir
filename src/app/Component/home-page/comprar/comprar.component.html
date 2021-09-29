@@ -4,7 +4,7 @@
 <ng-template #filtersafe>
     <app-filtersafe></app-filtersafe>
 </ng-template>
-<div class="container pb-4">
+<div class="container-fluid pb-4 px-5">
     <div class="row">
         <div class="col-12 py-3">
             <a href="#"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -243,23 +243,55 @@
                                             <a value="false" (click)="optionPay($event, false)">Agencias/Agentes</a>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div *ngIf="banca; else agencia">
-                                            <div class="col-10">
-                                                <img src="./assets/comprar/bancos/_scotiabank.png" alt="">
-                                                <img src="./assets/comprar/bancos/_interbank.png" alt="">
-                                                <img src="./assets/comprar/bancos/_bbva.png" alt="">
-                                                <img src="./assets/comprar/bancos/_bcp.png" alt="">
+                                    <ng-container *ngIf="banca; else agencia">
+                                        <div class="row">
+                                            <div class="d-flex justify-content-center">
+                                                <img src="./assets/comprar/pago/_bcp.png" alt="">
+                                                <img src="./assets/comprar/pago/_scotiabank.png" alt="">
+                                                <img src="./assets/comprar/pago/_interbank.png" alt="">
+                                                <img src="./assets/comprar/pago/_bbva.png" alt="">
                                             </div>
-                                            <select placeholder="Selecciona tu banco">
-                                                <option value="">bcp</option>
-                                            </select>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-6 offset-3">
+                                                <select placeholder="Selecciona tu banco">
+                                                    <option value="">bcp</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <a href="#">Emisión automática después del pago.</a>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <a href="#">¿Como pagar con SafetyPay online?</a>
+                                            </div>
+                                        </div>
+                                    </ng-container>
 
-                                        <ng-template #agencia>
-                                            agencia
-                                        </ng-template>
-                                    </div>
+                                    <ng-template #agencia>
+                                        <div class="row">
+                                            <div class="d-flex justify-content-center">
+                                                <img src="./assets/comprar/pago/_bcp.png" alt="">
+                                                <img src="./assets/comprar/pago/_scotiabank.png" alt="">
+                                                <img src="./assets/comprar/pago/_interbank.png" alt="">
+                                                <img src="./assets/comprar/pago/_bbva.png" alt="">
+                                                <img src="./assets/comprar/pago/_wester.png" alt="">
+                                            </div>
+                                            <div class="d-flex justify-content-center">
+                                                <img src="./assets/comprar/pago/_arequipa.png" alt="">
+                                                <img src="./assets/comprar/pago/_huancayo.png" alt="">
+                                                <img src="./assets/comprar/pago/_trujillo.png" alt="">
+                                                <img src="./assets/comprar/pago/_tacna.png" alt="">
+                                                <img src="./assets/comprar/pago/_tambo.png" alt="">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 text-end">
+                                                    <a href="#">¿Como pagar con SafetyPay online?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
                                 </ng-template>
 
                             </form>
@@ -372,7 +404,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button class="px-5">Comprar</button>
+                            <button (click)="shopEnd()" class="px-5">Comprar</button>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -422,8 +454,10 @@
             </div>
             <!-- DETALLE DE COBERTURA -->
             <h2 *ngIf="detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
-
             <!-- END DETALLE DE COBERTURA -->
+            <div *ngIf="detalleCobertura">
+                <app-coverage></app-coverage>
+            </div>
 
             <!-- DETALLE DE VIAJE -->
             <h2 *ngIf="detalleViaje" class=" mt-3">Detalle de tu viaje</h2>
@@ -678,7 +712,6 @@
                 </div>
             </div>
             <!-- END CUPON -->
-            <app-coverage></app-coverage>
 
             <div class="row">
                 <!-- SLIDER -->

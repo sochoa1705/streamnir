@@ -61,5 +61,9 @@ export class ComprarComponent implements OnInit {
     this.banca = i;
   }
 
+  shopEnd(){
+    // this.route.navigateByUrl('/home/comprar', navigationExtras);
+    this.route.navigateByUrl('/home/conformidad');
 
+  }
 }
