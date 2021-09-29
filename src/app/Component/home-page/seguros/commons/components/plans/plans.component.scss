@@ -1,3 +1,8 @@
+.title {
+    font-family: Open Sans;
+    font-weight: normal;
+    font-size: 24px;
+}
 .oldPrice {
     position: relative;
     p {
@@ -8,7 +13,7 @@
 }
 
 .tachado {
-    border-bottom: 1px solid #DF0C30;
+    border-bottom: 1px solid #df0c30;
     width: 70px;
     position: absolute;
     top: 11px;
@@ -30,5 +35,5 @@
     font-size: 24px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
+    color: #4b4b4b;
 }

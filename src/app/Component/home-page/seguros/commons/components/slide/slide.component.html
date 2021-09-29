@@ -16,7 +16,7 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <h2>1Viaja seguro con <strong>Assist Card y </strong><span>NM Viajes</span></h2>
+                        <h2>Viaja seguro con <strong>Assist Card y </strong><span>NM Viajes</span></h2>
                         <img src="./assets/seguros/like.png " alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <p>Reembolso de gastos por cancelación, interrumpción y reprogramación de vuelos por
@@ -68,3 +68,47 @@
     </div>
     <div class="clearfix"></div>
 </div>
+<div class="container-fluid px-5">
+<div class="row mb-4 mt-5">
+    <div class="col-12">
+        <h2 class="title">¡Corre y Vuela! con estas <strong>súper ofertas de Vuelos</strong> saliendo <strong>desde
+                Lima</strong></h2>
+        <!-- <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+            <app-title *ngIf="section.section === 'Vuelos'" [title]="section.title"></app-title>
+        </ng-container> -->
+        <div class="clearfix"></div>
+    </div>
+</div>
+<app-card [itemList]="packagesService.packages"></app-card>
+<div class="row text-end py-5">
+    <div class="col-12">
+        <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+            <button class="plus dropdown-toggle" *ngIf="section.section === 'Vuelos'">{{ section.btn }}</button>
+        </ng-container>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- AYUDA -->
+<div class="row pb-3">
+    <div class="col-12">
+        <h2><strong>¿Necesitas ayuda?</strong></h2>
+    </div>
+</div>
+<div class="row py-3">
+    <div class="col-12 col-md-7 text-end">
+        <img src="./assets/seguros/ayuda.svg" alt="">
+    </div>
+    <div class="col-md-4 col-12 text-center mt-5">
+        <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipiscing elit nisl, suscipit tempus dis
+            purus ligula taciti morbi, lobortis nam et torquent nec montes neque. Dictumst lacinia magna egestas
+            vestibulum sed libero turpis interdum, cras phasellus urna
+            erat at aliquam maecenas purus eleifend, habitant dignissim augue primis vivamus taciti habitasse.</p>
+        <button class="my-5">Portal de ayuda</button>
+    </div>
+</div>
+<!-- END AYUDA -->
+</div>
+<!-- MAILING -->
+<ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+<app-mailing *ngIf="section.section === 'mailing'" [title]="section.title" [span]="section.span"></app-mailing>
+</ng-container>

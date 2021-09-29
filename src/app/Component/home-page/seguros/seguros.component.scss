@@ -1,220 +1,226 @@
-        @import "/src/scss/mixin";
-        // .carousel-item {
-        //     @media (min-width: 768px) {
-        //         display: block;
-        //         margin-right: 0;
-        //         transition: none;
-        //     }
-        // }
-        // .carousel-inner {
-        //     @media (min-width: 768px) {
-        //         width: auto !important;
-        //     }
-        // }
-        // .carousel-indicators button {
-        //     border: 1px solid white;
-        //     background: red;
-        //     border-radius: 50%;
-        //     width: 10px;
-        //     height: 10px;
-        //     &.active {
-        //         background: white;
-        //     }
-        // }
-         :host ::ng-deep span.mat-date-range-input-separator {
-            display: none;
-            margin: 0 !important;
-            padding: 0;
+@import "/src/scss/mixin";
+// .carousel-item {
+//     @media (min-width: 768px) {
+//         display: block;
+//         margin-right: 0;
+//         transition: none;
+//     }
+// }
+// .carousel-inner {
+//     @media (min-width: 768px) {
+//         width: auto !important;
+//     }
+// }
+// .carousel-indicators button {
+//     border: 1px solid white;
+//     background: red;
+//     border-radius: 50%;
+//     width: 10px;
+//     height: 10px;
+//     &.active {
+//         background: white;
+//     }
+// }
+.title{
+    font-weight: normal;
+}
+:host ::ng-deep span.mat-date-range-input-separator {
+    display: none;
+    margin: 0 !important;
+    padding: 0;
+}
+
+:host ::ng-deep input {
+    border: 0.5px solid rgba(185, 188, 191, 1);
+    padding: 10px;
+    border-radius: 3px;
+    @media (max-width: 768px) {
+        margin-bottom: 15px;
+    }
+    &::placeholder {
+        color: rgba(185, 188, 191, 1);
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.25px;
+    }
+}
+
+:host ::ng-deep .mat-date-range-input-container {
+    align-items: initial;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+    @media (max-width: 768px) {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .mat-date-range-input-start-wrapper,
+    .mat-date-range-input-end-wrapper {
+        flex: 1 0 0%;
+    }
+    .mat-date-range-input-start-wrapper input {
+        border-radius: 3px 0 0 3px !important;
+        border-right: 0;
+    }
+    .mat-date-range-input-end-wrapper input {
+        border-radius: 0 3px 3px 0 !important;
+    }
+}
+
+h2 {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 36px;
+}
+
+.text-justify {
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: justify;
+    letter-spacing: 0.1px;
+}
+
+button {
+    font-family: "Montserrat";
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+}
+
+.modal {
+    &-content {
+        background: #54d834;
+        border: 0;
+        border-radius: 20px;
+        &.red{
+            background-color: #f00;
         }
-        
-         :host ::ng-deep input {
-            border: 0.5px solid rgba(185, 188, 191, 1);
-            padding: 10px;
-            border-radius: 3px;
-            @media (max-width: 768px) {
-                margin-bottom: 15px;
+    }
+    &-header {
+        border-radius: 20px;
+        color: white;
+        padding: 1rem 2rem 1rem 2rem;
+        h {
+            &2 {
+                font-family: "Open Sans";
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 36px;
+                margin-bottom: 0;
             }
-            &::placeholder {
-                color: rgba(185, 188, 191, 1);
+            &5 {
                 font-family: "Montserrat";
-                font-style: normal;
-                font-weight: 300;
+                font-weight: 500;
                 font-size: 14px;
                 line-height: 21px;
-                letter-spacing: 0.25px;
+                letter-spacing: 0.1px;
             }
         }
-        
-         :host ::ng-deep .mat-date-range-input-container {
-            align-items: initial;
-            flex-shrink: 0;
-            width: 100%;
-            max-width: 100%;
-            padding-right: calc(var(--bs-gutter-x) * 0.5);
-            padding-left: calc(var(--bs-gutter-x) * 0.5);
-            margin-top: var(--bs-gutter-y);
-            @media (max-width: 768px) {
-                padding-right: 0;
-                padding-left: 0;
-            }
-            .mat-date-range-input-start-wrapper,
-            .mat-date-range-input-end-wrapper {
-                flex: 1 0 0%;
-            }
-            .mat-date-range-input-start-wrapper input {
-                border-radius: 3px 0 0 3px !important;
-                border-right: 0;
-            }
-            .mat-date-range-input-end-wrapper input {
-                border-radius: 0 3px 3px 0 !important;
+    }
+    &-body {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        overflow: hidden;
+        table {
+            tr.row {
+                border-top: 0;
+                border-bottom: 1px solid #cfd1d3;
+                td {
+                    color: #4b4b4b;
+                    border-top: 0;
+                    border-left: 0;
+                    padding: 5px 10px;
+                    border-right: 1px solid #cfd1d3;
+                    &:last-child {
+                        border-right: 0;
+                    }
+                }
             }
         }
-        
-        h2 {
+        .covid {
+            @include itemCard(bold, 16px, 20px, 0.5px, #1eaea5);
+            display: block;
+            text-transform: capitalize;
+            &:first-child {
+                font-size: 14px;
+            }
+        }
+        .scrollBody {
+            overflow-y: scroll;
+            height: 355px;
+        }
+        .otroPlan {
+            margin-top: 25px;
+            font-weight: normal;
+        }
+        .planBox {
             font-family: "Open Sans";
-            font-style: normal;
             font-weight: bold;
-            font-size: 24px;
-            line-height: 36px;
-        }
-        
-        .text-justify {
-            font-family: "Montserrat";
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 21px;
-            text-align: justify;
-            letter-spacing: 0.1px;
-        }
-        
-        button {
-            font-family: "Montserrat";
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 24px;
-            letter-spacing: 0.5px;
-        }
-        
-        .modal {
-            &-content {
-                background: #54d834;
-                border: 0;
-                border-radius: 20px;
-            }
-            &-header {
-                border-radius: 20px;
-                color: white;
-                padding: 1rem 2rem 1rem 2rem;
-                h {
-                    &2 {
-                        font-family: "Open Sans";
-                        font-weight: bold;
-                        font-size: 24px;
-                        line-height: 36px;
-                        margin-bottom: 0;
-                    }
-                    &5 {
-                        font-family: "Montserrat";
-                        font-weight: 500;
-                        font-size: 14px;
-                        line-height: 21px;
-                        letter-spacing: 0.1px;
-                    }
-                }
-            }
-            &-body {
-                background: white;
-                border-radius: 20px;
-                padding: 2rem;
-                overflow: hidden;
-                table {
-                    tr.row {
-                        border-top: 0;
-                        border-bottom: 1px solid #CFD1D3;
-                        td {
-                            color: #4b4b4b;
-                            border-top: 0;
-                            border-left: 0;
-                            padding: 5px 10px;
-                            border-right: 1px solid #CFD1D3;
-                            &:last-child {
-                                border-right: 0;
-                            }
-                        }
-                    }
-                }
-                .covid {
-                    @include itemCard(bold, 16px, 20px, 0.5px, #1eaea5);
-                    display: block;
-                    text-transform: capitalize;
-                    &:first-child {
-                        font-size: 14px;
-                    }
-                }
-                .scrollBody {
-                    overflow-y: scroll;
-                    height: 355px;
-                }
-                .otroPlan {
-                    margin-top: 25px;
-                    font-weight: normal;
-                }
-                .planBox {
-                    font-family: 'Open Sans';
-                    font-weight: bold;
-                    margin-left: 4px;
-                    button.planes {
-                        min-width: 124px !important;
-                    }
-                }
-                .footerPopup {
-                    padding-right: 15px;
-                    .borderRight {
-                        border-right: 1px solid #CFD1D3;
-                        font-family: 'Open Sans';
-                        width: 22%;
-                        p {
-                            margin-bottom: 0;
-                        }
-                    }
-                }
-                .alignFooterPopup {
-                    //padding: 0 25px;
-                }
+            margin-left: 4px;
+            button.planes {
+                min-width: 124px !important;
             }
         }
-        
-        @media (max-width: 640px) {
-            .modal-body {
-                overflow: auto;
-            }
-            .footerPopup {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
+        .footerPopup {
+            padding-right: 15px;
             .borderRight {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                border-right: none !important;
-                span {
-                    display: flex;
-                    align-items: baseline;
-                }
-            }
-            .scrollBody {
-                overflow: auto !important;
-                height: auto !important;
-            }
-            .footerPopup {
-                .alignFooterPopup {
-                    width: 100% !important;
-                    .col-3 {
-                        width: 50% !important;
-                    }
+                border-right: 1px solid #cfd1d3;
+                font-family: "Open Sans";
+                width: 22%;
+                p {
+                    margin-bottom: 0;
                 }
             }
         }
+        .alignFooterPopup {
+            //padding: 0 25px;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .modal-body {
+        overflow: auto;
+    }
+    .footerPopup {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .borderRight {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-right: none !important;
+        span {
+            display: flex;
+            align-items: baseline;
+        }
+    }
+    .scrollBody {
+        overflow: auto !important;
+        height: auto !important;
+    }
+    .footerPopup {
+        .alignFooterPopup {
+            width: 100% !important;
+            .col-3 {
+                width: 50% !important;
+            }
+        }
+    }
+}

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { PackagesService } from 'src/app/Services/mock/packages.service';
+import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 
 @Component({
   selector: 'app-plans',
@@ -17,7 +19,10 @@ export class PlansComponent implements OnInit {
     cupon: false
   }
 
-  constructor(public route: Router) { }
+  constructor(public route: Router,
+    public packagesService: PackagesService,
+    public dataPagePresenterService: DataPagePresenterService,
+    ) {}
 
   ngOnInit(): void {
   }
