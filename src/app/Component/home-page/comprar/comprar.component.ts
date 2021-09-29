@@ -15,7 +15,14 @@ export class ComprarComponent implements OnInit {
   reembolso!: boolean;
   detalleViaje!: boolean;
   detalleCobertura!: boolean;
-  cupon!: boolean
+  cupon!: boolean;
+
+  selectedPay: any = 'tarjeta';
+  metodoPago: any = [
+    {name: 'option-1', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: true, id: "0" },
+    {name: 'option-2', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: false, id: "1" },
+  ]
+
   constructor(
     public route: Router,
     public offersService: OffersService,
@@ -26,7 +33,7 @@ export class ComprarComponent implements OnInit {
   ngOnInit(): void {
     this.loadShop();
     console.log(this.current);
-    
+
   }
 
   loadShop() {
@@ -37,6 +44,16 @@ export class ComprarComponent implements OnInit {
     this.detalleViaje = this.current.detalleViaje;
     this.detalleCobertura = this.current.detalleCobertura;
     this.cupon = this.current.cupon;
+  }
+
+  chkValue(e: any, i: any) {
+    console.log(e.target.checked);
+    console.log(i);
+    if(i === 0){
+      this.selectedPay = 'tarjeta';
+    } else {
+      this.selectedPay = 'safety';
+    }
   }
 
 
