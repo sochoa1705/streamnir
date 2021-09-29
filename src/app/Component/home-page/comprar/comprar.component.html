@@ -236,7 +236,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-4">
-                                            <a value="true" (click)="optionPay($event, true)">Banca por internet o Móvil</a>
+                                            <a value="true" (click)="optionPay($event, true)">Banca por internet o
+                                                Móvil</a>
                                         </div>
                                         <div class="col-4">
                                             <a value="false" (click)="optionPay($event, false)">Agencias/Agentes</a>
@@ -244,13 +245,19 @@
                                     </div>
                                     <div class="row">
                                         <div *ngIf="banca; else agencia">
+                                            <div class="col-10">
+                                                <img src="./assets/comprar/bancos/_scotiabank.png" alt="">
+                                                <img src="./assets/comprar/bancos/_interbank.png" alt="">
+                                                <img src="./assets/comprar/bancos/_bbva.png" alt="">
+                                                <img src="./assets/comprar/bancos/_bcp.png" alt="">
+                                            </div>
                                             <select placeholder="Selecciona tu banco">
                                                 <option value="">bcp</option>
                                             </select>
                                         </div>
 
                                         <ng-template #agencia>
-agencia
+                                            agencia
                                         </ng-template>
                                     </div>
                                 </ng-template>
