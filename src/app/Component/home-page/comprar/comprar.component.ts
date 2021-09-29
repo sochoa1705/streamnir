@@ -55,11 +55,14 @@ export class ComprarComponent implements OnInit {
       this.selectedPay = 'safety';
     }
   }
-
-  optionPay(e: any, i: any) {
+  id:any = "banca";
+  optionPay(e: any, i: any,ids:any) {
     console.log(i);
     this.banca = i;
+    this.id = ids;
   }
+
+  
 
   shopEnd(){
     // this.route.navigateByUrl('/home/comprar', navigationExtras);
