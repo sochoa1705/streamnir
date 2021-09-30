@@ -1,76 +1,171 @@
-<app-filtersafe></app-filtersafe>
+<app-safebanner></app-safebanner>
+<div class="container-fluid px-5">
+    <router-outlet></router-outlet>
+</div>
 
-
-<!-- OFERTAS -->
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                <app-title *ngIf="section.section === 'Ofertas'" [title]="section.title"></app-title>
-            </ng-container>
-
-            <!-- <div class=""> -->
-            <!-- SLIDER -->
-            <div id="carouselExampleIndicatorsOffers" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators d-flex d-md-none">
-                    <ng-container *ngFor="let b of offersService.offers; let indice = index">
-                        <button type="button" data-bs-target="#carouselExampleIndicatorsOffers" class="{{ b.class }}"
-                            [attr.data-bs-slide-to]="indice" aria-current="true" aria-label="Slide 1"></button>
-                    </ng-container>
-                </div>
-                <div class="carousel-inner row">
-                    <div *ngFor="let offer of offersService.offers"
-                        class=" col-md-3 col-12 {{ offer.class }} carousel-item">
-                        <!-- <app-card [image]="offer.image" [label]="offer.label" [destiny]="offer.destiny"
-                            [from]="offer.from" [span]="offer.span" [price]="offer.price"></app-card> -->
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <button class="carousel-control-prev d-block d-md-none" type="button"
-                    data-bs-target="#carouselExampleIndicatorsOffers" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next d-block d-md-none" type="button"
-                    data-bs-target="#carouselExampleIndicatorsOffers" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">PLAN CLASSIC - S/. 314,80</h2>
+                <h5 class="modal-title" id="exampleModalLabel">Asistencia médica: USD 60.000</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <!-- END SLIDER -->
-            <!-- <div class="col-md-3 col-12" *ngFor="let offer of offersService.offers">
-            <app-card [image]="offer.image" [label]="offer.label" [destiny]="offer.destiny" [from]="offer.from"
-                [span]="offer.span" [price]="offer.price"></app-card>
-        </div> -->
-            <!-- </div> -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex py-3">
+                            <img src="./assets/seguros/covid.png" alt="">
+                            <div class="px-2">
+                                <span class="covid">COBERTURA</span>
+                                <span class="covid">COVID</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row scrollBody">
+                    <div class="col-10 offset-1">
+                        <table class="table-bordered w-100">
+                            <tbody>
+                                <tr class="row">
+                                    <td class="col d-flex align-items-center"><strong>USD 60,000</strong></td>
+                                    <td class="col"><strong>MONTO MÁXIMO GLOBAL</strong> (Incluye todos los servicios de
+                                        este producto con sus topes)</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col d-flex align-items-center"><strong>USD 60,000</strong></td>
+                                    <td class="col">Asistencia médica en caso de accidente</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col d-flex align-items-center"><strong>USD 60,000</strong></td>
+                                    <td class="col">Asistencia médica en caso de enfermedad no preexistente (Incluido
+                                        COVID-19)</td>
+                                </tr>
+                                <tr class="row" *ngFor="let item of [10,0,0,0,0,0,0,0,0,0,0,0,0,0]">
+                                    <td class="col d-flex align-items-center"><strong>USD 300</strong></td>
+                                    <td class="col">Primera atención médica por dolencias preexistente y dolencias
+                                        crónicas</td>
+                                </tr>
 
-            <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                <button class="plus dropdown-toggle" *ngIf="section.section === 'Ofertas'">{{ section.btn }}</button>
-            </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row py-3 footerPopup">
+                        <div class="col-3 borderRight">
+                            <p>Total</p>
+                            <span>PEN <strong>314,80</strong></span>
+                            <button>Comprar</button>
+                        </div>
+                        <div class="col-9 alignFooterPopup">
+                            <p class="otroPlan">otros planes:</p>
+                            <div class="row planBox">
+                                <div class="col-3">
+                                    <button class="planes best">El mejor plan</button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="planes">Privileged</button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="planes">Premiun</button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="planes">Million</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
         </div>
-        <div class="clearfix"></div>
     </div>
 </div>
-<!-- END OFERTAS -->
+<!-- Modal Rojo-->
+<div class="modal fade" id="exampleModalRed" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content red">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">EL MEJOR PLAN - S/. 804,48</h2>
+                <h5 class="modal-title" id="exampleModalLabel">Usala en múltiples viajes por <strong>un año</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex py-3">
+                            <img src="./assets/seguros/covid.png" alt="">
+                            <div class="px-2">
+                                <span class="covid">COBERTURA</span>
+                                <span class="covid">COVID</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row scrollBody">
+                    <div class="col-10 offset-1">
+                        <table class="table-bordered w-100">
+                            <tbody>
+                                <tr class="row">
+                                    <td class="col d-flex align-items-center"><strong>USD 60,000</strong></td>
+                                    <td class="col"><strong>MONTO MÁXIMO GLOBAL</strong> (Incluye todos los servicios de
+                                        este producto con sus topes)</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col d-flex align-items-center"><strong>USD 60,000</strong></td>
+                                    <td class="col">Asistencia médica en caso de accidente</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col d-flex align-items-center"><strong>USD 60,000</strong></td>
+                                    <td class="col">Asistencia médica en caso de enfermedad no preexistente (Incluido
+                                        COVID-19)</td>
+                                </tr>
+                                <tr class="row" *ngFor="let item of [10,0,0,0,0,0,0,0,0,0,0,0,0,0]">
+                                    <td class="col d-flex align-items-center"><strong>USD 300</strong></td>
+                                    <td class="col">Primera atención médica por dolencias preexistente y dolencias
+                                        crónicas</td>
+                                </tr>
 
-<div class="container">
-    <div class="row py-5">
-        <div class="col-6">
-            <h2>Viaja seguro con Assist Card y NM Viajes</h2>
-        </div>
-        <div class="col-6">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/Ob2k8t6vEOs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row py-3 footerPopup">
+                        <div class="col-3 borderRight">
+                            <p>Total</p>
+                            <span>PEN <strong>804,48</strong></span>
+                            <button>Comprar</button>
+                        </div>
+                        <div class="col-9 alignFooterPopup">
+                            <p class="otroPlan">otros planes:</p>
+                            <div class="row planBox">
+                                <div class="col-3">
+                                    <button class="planes">Classic</button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="planes">Privileged</button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="planes">Premiun</button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="planes">Million</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
         </div>
     </div>
 </div>
-
-<!-- MAILING -->
-<ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-    <app-mailing *ngIf="section.section === 'mailing'" [title]="section.title" [span]="section.span"></app-mailing>
-</ng-container>
-<!-- FOOTER -->
-<ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-    <app-footer *ngIf="section.section === 'Footer'" [title1]="section.title1" [list1]="section.list1"
-        [title2]="section.title2" [list2]="section.list2" [libro]="section.libro" [linkLibro]="section.linkLibro"
-        [span]="section.span" [addrees]="section.addrees" [title3]="section.title3"></app-footer>
-</ng-container>

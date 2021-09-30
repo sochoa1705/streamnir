@@ -4,13 +4,13 @@ import { FooterComponent } from './footer.component';
 import { MaterialModule } from '../../material.module';
 import { RouterModule } from '@angular/router';
 @NgModule({
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ FooterComponent ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  declarations: [FooterComponent],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule,
   ],
-  exports: [ FooterComponent ],
+  exports: [FooterComponent],
 })
 export class FooterModule { }

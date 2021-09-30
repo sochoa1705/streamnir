@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,7 +6,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'NuevoMundoViajes';
-  selectedIndex: number = 0;
   pasajeros: any = [
     {
       adultos: 10,

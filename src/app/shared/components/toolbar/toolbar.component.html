@@ -36,34 +36,9 @@
     </span>
     <span class="spacer"></span>
     <ul class="d-none d-sm-none d-md-block">
-        <li>
-            <a routerLink="home/vuelos">
-                Vuelos</a>
-        </li>
-        <li>
-            <a routerLink="home/paquetes">
-                Paquetes</a>
-        </li>
-        <li>
-            <a routerLink="/">
-                Vuelo + Hotel</a>
-        </li>
-        <li>
-            <a routerLink="/">
-                Hoteles</a>
-        </li>
-        <li>
-            <a routerLink="/">
-                Autos</a>
-        </li>
-        <li>
-            <a routerLink="/">
-
-                Actividades</a>
-        </li>
-        <li>
-            <a routerLink="home/seguros" routerLinkActive="active">
-                Seguros</a>
+        <li *ngFor="let m of main">
+            <a routerLink="{{ m.link }}" routerLinkActive="active">
+                {{ m.text }}</a>
         </li>
     </ul>
     <span class="spacer"></span>

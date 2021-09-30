@@ -1,4 +1,10 @@
-<div class="container pb-4">
+<ng-container *ngIf="filter == 'filter'; else filtersafe">
+    <app-filter></app-filter>
+</ng-container>
+<ng-template #filtersafe>
+    <app-filtersafe></app-filtersafe>
+</ng-template>
+<div class="container-fluid pb-4 px-5">
     <div class="row">
         <div class="col-12 py-3">
             <a href="#"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,7 +19,8 @@
     <div class="row">
         <!-- IZQUIERDA -->
         <div class="col-8">
-            <h1>¡Falta poco! Confirma ahora tu reserva.</h1>
+            <h1>{{ title }}</h1>
+            <!-- <h1>¡Falta poco! Confirma ahora tu reserva.</h1> -->
             <div class="card pasajeros">
                 <div class="card-header">
                     <h2>Información de pasajeros</h2>
@@ -32,11 +39,10 @@
             </div>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-6" *ngIf="asistencia">
                     <div class="card border-0 bg-transparent">
                         <div class="card-header text-center border rounded-top">
-                            <img src="./assets/comprar/card/_assist.png" alt="">
-                            Asistencia al viajero
+                            <img src="./assets/comprar/card/_assist.png" alt=""> Asistencia al viajero
                         </div>
                         <div class="card-center text-center d-flex align-items-center">
                             <strong>$ 2.50</strong>
@@ -45,8 +51,8 @@
                         <div class="card-body border bg-white rounded-bottom">
                             <!-- <h5 class="card-title">Special title treatment</h5> -->
                             <ul>
-                                <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 |
-                                    Resto del mundo: USD 30,000</li>
+                                <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 | Resto del mundo:
+                                    USD 30,000</li>
                                 <li>Asistencia en caso de robo o extravío de documentos, etc</li>
                                 <li>Indemnización por pérdida de equipaje Complementario - USD 40 por Kg</li>
                             </ul>
@@ -61,11 +67,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-6" *ngIf="reembolso">
                     <div class="card border-0 bg-transparent">
                         <div class="card-header text-center border rounded-top">
-                            <img src="./assets/comprar/card/_protect.png" alt="">
-                            Reembolso por emergencia
+                            <img src="./assets/comprar/card/_protect.png" alt=""> Reembolso por emergencia
                         </div>
                         <div class="card-center text-center d-flex align-items-center">
                             <strong>$ 60</strong>
@@ -74,8 +79,8 @@
                         <div class="card-body border bg-white rounded-bottom">
                             <!-- <h5 class="card-title">Special title treatment</h5> -->
                             <ul>
-                                <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 |
-                                    Resto del mundo: USD 30,000</li>
+                                <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 | Resto del mundo:
+                                    USD 30,000</li>
                                 <li>Asistencia en caso de robo o extravío de documentos, etc</li>
                                 <li>Indemnización por pérdida de equipaje Complementario - USD 40 por Kg</li>
                             </ul>
@@ -104,10 +109,19 @@
                         </div>
                         <div class="card-body">
                             <form action="">
-                                <div class="row card_">
-                                    <input type="radio" name="select" id="option-1" checked>
-                                    <input type="radio" name="select" id="option-2">
-                                    <label for="option-1" class="option option-1 col-4 offset-1 py-3">
+                                <div class="row card_ py-4 justify-content-center">
+
+                                    <!-- <input type="radio" name="select" id="option-1" (change)="chkValue($event)" checked>
+                                        <input type="radio" name="select" id="option-2"> -->
+                                    <input *ngFor="let chk of metodoPago" type="radio" name="select" id="{{ chk.name }}"
+                                        (click)="chkValue($event)" [checked]="chk.checked">
+                                    <label *ngFor="let chk of metodoPago" for="{{ chk.name }}"
+                                        class="option {{ chk.name }} col-4 offset-1 py-3 lessMarginLeft">
+                                        <div class="dot"></div>
+                                        <img class="marginL" src="./assets{{ chk.img }}" alt="">
+                                        <span>{{ chk.text }}</span>
+                                    </label>
+                                    <!-- <label for="option-1" class="option option-1 col-4 offset-1 py-3">
                                         <div class="dot"></div>
                                         <img src="./assets/credit-card.png" alt="">
                                         <span>Tarjeta de crédito odébito</span>
@@ -116,7 +130,7 @@
                                         <div class="dot"></div>
                                         <img src="./assets/footer/_safety.png" alt="">
                                         <span>Banca por internet / Agencias</span>
-                                    </label>
+                                    </label> -->
 
                                     <!-- <div class="card_ col-4 offset-1 rounded border py-3">
                                     <label class="form-check-label" for="inlineRadio3">
@@ -132,84 +146,170 @@
                                 </div> -->
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="row py-5">
-                                    <div class="col-12 text-center pago">
-                                        <img src="./assets/comprar/_visa.png" alt="">
-                                        <img src="./assets/comprar/_master.png" alt="">
-                                        <img src="./assets/comprar/_american.png" alt="">
-                                        <img src="./assets/comprar/_dinners.png" alt="">
+
+                                <div class="boxCardPas" *ngIf="selectedPay == 'tarjeta'; else safety">
+                                    <!-- TARJETA -->
+                                    <div class="row py-5">
+                                        <div class="col-12 text-center pago">
+                                            <img src="./assets/comprar/_visa.png" alt="">
+                                            <img src="./assets/comprar/_master.png" alt="">
+                                            <img src="./assets/comprar/_american.png" alt="">
+                                            <img src="./assets/comprar/_dinners.png" alt="">
+                                        </div>
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="row  card_pasajero">
-                                    <div class="col-6">
-                                        <label for="names">Número de tarjeta</label>
-                                        <input class="form-control" placeholder="Ingrese el número de tarjeta."
-                                            type="text" name="names">
+                                    <div class="row card_pasajero">
+                                        <div class="col-6">
+                                            <label for="names">Número de tarjeta</label>
+                                            <input class="form-control" placeholder="Ingrese el número de tarjeta."
+                                                type="text" name="names">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="lastname">Titular de la tarjeta</label>
+                                            <input class="form-control" placeholder="El que figura en la tarjeta."
+                                                type="text" name="lastname">
+                                        </div>
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="col-6">
-                                        <label for="lastname">Titular de la tarjeta</label>
-                                        <input class="form-control" placeholder="El que figura en la tarjeta."
-                                            type="text" name="lastname">
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="row  card_pasajero">
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <div class="col-5">
-                                                <label for="names">Vencimiento</label>
-                                                <input class="form-control" placeholder="MM/AA" type="text"
-                                                    name="names">
+                                    <div class="row  card_pasajero">
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <label for="names">Vencimiento</label>
+                                                    <input class="form-control" placeholder="MM/AA" type="text"
+                                                        name="names">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="lastname">Código de seguridad</label>
+                                                    <input class="form-control"
+                                                        placeholder="El que figura en el documento de viaje."
+                                                        type="text" name="lastname">
+                                                </div>
+                                                <div class="col-1 colBoxInfo">
+                                                    <div class="iconInfo"><img src="./assets/comprar/card/info.png"
+                                                            alt=""></div>
+                                                </div>
+                                                <div class="clearfix"></div>
                                             </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <label for="names">Tipo de doc</label>
+                                                    <input class="form-control" placeholder="" type="text" name="names">
+                                                </div>
+                                                <div class="col-7">
+                                                    <label for="lastname">N° de documento</label>
+                                                    <input class="form-control" placeholder="Ingresar N°" type="text"
+                                                        name="lastname">
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="row card_pasajero">
+                                        <div class="col-6">
+                                            <label for="names">Cuotas</label>
+                                            <input class="form-control" placeholder="Sin cuotas" type="text"
+                                                name="names">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="lastname">Ciudad de facturación</label>
+                                            <input class="form-control" placeholder="Del titular de la tarjeta."
+                                                type="text" name="lastname">
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="row card_pasajero">
+                                        <div class="col-6">
+                                            <label for="names">Dirección</label>
+                                            <input class="form-control" placeholder="Ingrese la dirección" type="text"
+                                                name="names">
+                                        </div>
+                                        <div class="col-6 textDire">
+                                            <label for="names"></label>
+                                            <div>Emisión en max 24hrs aprox.</div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <!-- END TARJETA -->
+                                </div>
+                                <ng-template #safety>
+                                    <div class="col-5 offset-1 py-3">
+                                        <p class="textSafety">Seleccione una opción para pagar</p>
+                                    </div>
+                                    <div class="row btnSafe">
+                                        <div class="col-4">
+                                            <a class="btnBlue" [class.active]="id === 'banca'" value="true"
+                                                (click)="optionPay($event, true, 'banca');">Banca por internet o
+                                                Móvil</a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a class="btnBlue" value="false" [class.active]="id === 'movil'"
+                                                (click)="optionPay($event, false,'movil')">Agencias/Agentes</a>
+                                        </div>
+                                    </div>
+                                    <ng-container *ngIf="banca; else agencia">
+                                        <div class="row boxAgencia">
+                                            <div class="d-flex justify-content-center imgBanca">
+                                                <img src="./assets/comprar/pago/_bcp.png" alt="">
+                                                <img src="./assets/comprar/pago/_scotiabank.png" alt="">
+                                                <img src="./assets/comprar/pago/_interbank.png" alt="">
+                                                <img src="./assets/comprar/pago/_bbva.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6 offset-3 py-4">
+                                                <select class="selectBank" placeholder="Selecciona tu banco">
+                                                    <option value="">bcp</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row py-4 marginLat">
                                             <div class="col-6">
-                                                <label for="lastname">Código de seguridad</label>
-                                                <input class="form-control"
-                                                    placeholder="El que figura en el documento de viaje." type="text"
-                                                    name="lastname">
+                                                <a class="btnRed" href="#">Emisión automática después del pago.</a>
                                             </div>
-                                            <div class="col-1">
-                                                <label for="lastname">?</label>
+                                            <div class="col-6 text-end">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalBlue">¿Como pagar con SafetyPay online?</a>
                                             </div>
-                                            <div class="clearfix"></div>
                                         </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <div class="col-5">
-                                                <label for="names">Tipo de doc</label>
-                                                <input class="form-control" placeholder="" type="text" name="names">
+                                        <div class="row boxLimite">
+                                            <div class="titleLimite">
+                                                Tiempo Límite
                                             </div>
-                                            <div class="col-7">
-                                                <label for="lastname">N° de documento</label>
-                                                <input class="form-control" placeholder="Ingresar N°" type="text"
-                                                    name="lastname">
+                                            <div class="descripLimite">
+                                                Recuerda que una vez generado tu código safetypay, deberás pagar dentro
+                                                de las próximas 2 horas. De lo contrario la reserva será cancelada.
                                             </div>
-                                            <div class="clearfix"></div>
                                         </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="row card_pasajero">
-                                    <div class="col-6">
-                                        <label for="names">Cuotas</label>
-                                        <input class="form-control" placeholder="Sin cuotas" type="text" name="names">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="lastname">Ciudad de facturación</label>
-                                        <input class="form-control" placeholder="Del titular de la tarjeta." type="text"
-                                            name="lastname">
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="row card_pasajero">
-                                    <div class="col-12">
-                                        <label for="names">Dirección</label>
-                                        <input class="form-control" placeholder="Ingrese la dirección" type="text"
-                                            name="names">
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
+                                    </ng-container>
+
+                                    <ng-template #agencia>
+                                        <div class="row boxAgencia">
+                                            <div class="d-flex justify-content-center imgBanca">
+                                                <img src="./assets/comprar/pago/_bcp.png" alt="">
+                                                <img src="./assets/comprar/pago/_scotiabank.png" alt="">
+                                                <img src="./assets/comprar/pago/_interbank.png" alt="">
+                                                <img src="./assets/comprar/pago/_bbva.png" alt="">
+                                                <img src="./assets/comprar/pago/_wester.png" alt="">
+                                            </div>
+                                            <div class="d-flex justify-content-center imgBanca">
+                                                <img src="./assets/comprar/pago/_arequipa.png" alt="">
+                                                <img src="./assets/comprar/pago/_huancayo.png" alt="">
+                                                <img src="./assets/comprar/pago/_trujillo.png" alt="">
+                                                <img src="./assets/comprar/pago/_tacna.png" alt="">
+                                                <img src="./assets/comprar/pago/_tambo.png" alt="">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 text-end">
+                                                    <a href="#">¿Como pagar con SafetyPay online?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ng-template>
+
                             </form>
                         </div>
                     </div>
@@ -320,7 +420,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button class="px-5" (click)="shop()">Comprar</button>
+                            <button (click)="shopEnd()" class="px-5">Comprar</button>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -333,7 +433,35 @@
         <!-- DERECHA -->
         <div class="col-4">
             <h2>Detalle de tu pago</h2>
+            <!-- ACORDION SEGUROS -->
+            <div *ngIf="detailPay == 'safe'; else detail" class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <a class="accordion-button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseOne">
+                            Ver detalles
+                        </a>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-7">
+                                    <span class="price_end">TOTAL A PAGAR</span>
+                                </div>
+                                <div class="col-5 text-end">
+                                    $<span class="price_end_number">314.80</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- ACORDION -->
+            <ng-template #detail>
             <div class="accordion" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -368,9 +496,18 @@
                     </div>
                 </div>
             </div>
-            <h2 class=" mt-3">Detalle de tu viaje</h2>
+        </ng-template>
+            <!-- DETALLE DE COBERTURA -->
+            <h2 *ngIf="detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
+            <!-- END DETALLE DE COBERTURA -->
+            <div *ngIf="detalleCobertura">
+                <app-coverage></app-coverage>
+            </div>
+
+            <!-- DETALLE DE VIAJE -->
+            <h2 *ngIf="detalleViaje" class=" mt-3">Detalle de tu viaje</h2>
             <!-- DESTINOS -->
-            <div class="card">
+            <div class="card" *ngIf="detalleViaje">
                 <!-- <div class="card-header">
                     Featured
                 </div> -->
@@ -398,8 +535,7 @@
                                         <path
                                             d="M12.1586 9.85658C11.9583 9.74733 11.7037 9.82792 11.5899 10.0366C10.3377 12.3316 7.53655 13.2176 5.33331 12.0155C4.21436 11.405 3.41395 10.333 3.12727 9.0611L5.03836 9.37933C5.26462 9.41716 5.48436 9.25917 5.52915 9.02643C5.57394 8.79368 5.42686 8.57431 5.20061 8.53648L2.6123 8.1053C2.43565 8.07582 2.25651 8.16632 2.16806 8.32967L0.931803 10.5966C0.818005 10.8052 0.888144 11.0629 1.08847 11.1722C1.28879 11.2814 1.54343 11.2008 1.65722 10.9922L2.4099 9.61201C3.25025 12.5135 6.25698 14.0881 9.12561 13.1289C10.4775 12.6768 11.6218 11.7094 12.3152 10.4322C12.4291 10.2235 12.3589 9.96582 12.1586 9.85658Z"
                                             fill="#DF0C30" />
-                                    </svg>
-                                    Cancún
+                                    </svg> Cancún
                                 </h1>
                                 <span class="d-block">Ida y vuelta, 2 adultos</span>
                             </div>
@@ -591,9 +727,10 @@
                     </div>
                 </div>
             </div>
+            <!-- END DETALLE DE VIAJE -->
 
             <!-- CUPON -->
-            <div class="card cupon">
+            <div class="card cupon" *ngIf="cupon">
                 <div class="card-header shadow-none">
                     Código de descuento
                 </div>
@@ -620,7 +757,7 @@
                 </div>
             </div>
             <!-- END CUPON -->
-            <h1>Recibe ofertas de hoteles, especiales para ti</h1>
+
             <div class="row">
                 <!-- SLIDER -->
                 <div id="carouselExampleIndicatorsOffers" class="carousel slide" data-bs-ride="carousel">
@@ -660,5 +797,86 @@
         </div>
         <!-- END DERECHA -->
         <div class="clearfix"></div>
+    </div>
+</div>
+
+<!-- MODAL BLUE-->
+<div class="modal fade" id="ModalBlue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content red">
+            <div class="modal-header">
+                <div class="modal-title" id="exampleModalLabel">¿Cómo pagar con SafetyPay?</div>
+                <div class="modal-subtitle" id="exampleModalLabel">Agencias/Agentes</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="contentRow centerCont">
+                <div class="circleSafety">
+                    <img src="./assets/comprar/modal/safety.png" alt="">
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <div class="rowModal py-4">
+                    <div class="columnModal inputCheck" [class.activo]="selectedPopup === 'agencia'">
+                        <input type="radio" name="select" id="option1" (click)="chkValuePopup($event)">
+                        <label for="option1" id="flexRadioDefault1" class="option1">
+                            <div class="dot"></div>
+                            <span>Agencias</span>
+                        </label>
+                    </div>
+                    <div class="columnModal inputCheck" [class.activo]="selectedPopup === 'agente'">
+                        <input type="radio" name="select" id="option2" (click)="chkValuePopup($event)">
+                        <label for="option2" id="flexRadioDefault1" class="option2">
+                            <div class="dot"></div>
+                            <span>Agentes</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="rowModal" *ngIf="selectedPopup === 'agencia'">
+                    <div class="columnModal colCenter">
+                        <div class="headPaso">
+                            <div class="number">1</div>
+                        </div>
+                        <div class="textPaso">Acércate a cualquier agencia afiliada.</div>
+                    </div>
+                    <div class="columnModal colCenter">
+                        <div class="headPaso">
+                            <div class="number">2</div>
+                        </div>
+                        <div class="textPaso">Indica que realizarás un pago al servicio “SafetyPay” con el codigo de pago y el monto exacto a pagar.</div>
+                    </div>
+                    <div class="columnModal colCenter">
+                        <div class="headPaso">
+                            <div class="number">3</div>
+                        </div>
+                        <div class="textPaso">Recibe tu comprobante y ¡listo!</div>
+                    </div>
+                </div>
+                <div class="rowModal" *ngIf="selectedPopup === 'agente'">
+                    <div class="columnModal colCenter">
+                        <div class="headPaso">
+                            <div class="number">1</div>
+                        </div>
+                        <div class="textPaso">Acércate a cualquier agencia afiliada.</div>
+                    </div>
+                    <div class="columnModal colCenter">
+                        <div class="headPaso">
+                            <div class="number">2</div>
+                        </div>
+                        <div class="textPaso">Menciona el código de empresa o banco de su selección</div>
+                    </div>
+                    <div class="columnModal colCenter">
+                        <div class="headPaso">
+                            <div class="number">3</div>
+                        </div>
+                        <div class="textPaso">indica el código de pago y el monto a pagar exacto y ¡listo!</div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
     </div>
 </div>

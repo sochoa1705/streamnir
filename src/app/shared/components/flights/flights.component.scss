@@ -1,3 +1,4 @@
+@import "/src/scss/variables";
 .card {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     border: 0;
@@ -8,7 +9,7 @@
     }
     &-body {
         .border-start {
-            button{
+            button {
                 font-family: "Montserrat";
                 font-size: 11px;
             }
@@ -18,7 +19,7 @@
                     font-weight: 500;
                     font-size: 11px;
                     line-height: 18px;
-                    color: #83898f;
+                    color: $gray_border;
                 }
                 &.price {
                     font-family: "Montserrat";
@@ -51,13 +52,13 @@
             line-height: 36px;
             text-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
             text-align: center;
-            color: #4b4b4b;
+            color: $gray;
             margin: 0;
             & + span {
                 font-weight: 600 !important;
                 font-size: 12px;
                 letter-spacing: 0.1px;
-                color: #4b4b4b !important;
+                color: $gray !important;
                 text-shadow: 0px 1px 8px rgb(0 0 0 / 5%);
                 display: flex;
                 align-items: flex-end;
@@ -69,7 +70,7 @@
     font-family: "Open Sans";
     display: flex;
     align-items: center;
-    color: #009aed;
+    color: $blue_light;
     background: rgba(143, 208, 243, 0.2);
     justify-content: center;
     span {
@@ -117,7 +118,7 @@
     height: 0;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent transparent transparent #df0c30;
+    border-color: transparent transparent transparent $red_light;
     position: relative;
     &:after {
         content: "";
@@ -133,7 +134,7 @@
     }
     &:before {
         content: "";
-        border: 1px solid #df0c30;
+        border: 1px solid $red_light;
         height: 1px;
         width: 20px;
         position: absolute;
@@ -145,7 +146,7 @@
 
 .viajero {
     a {
-        color: red;
+        color: $red;
         text-decoration: none;
         &:hover {
             text-decoration: underline;
@@ -161,7 +162,7 @@
             font-size: 12px;
             font-family: "Montserrat";
             margin-bottom: 0;
-            color: #4b4b4b;
+            color: $gray;
             font-weight: bold;
         }
     }
@@ -171,7 +172,7 @@
         font-weight: bold;
     }
     .destinos {
-        color: #009aed;
+        color: $blue_light;
         font-size: 14px;
         font-weight: bold;
     }
@@ -198,18 +199,18 @@
         font-weight: 600;
         font-size: 10px;
         line-height: 26px;
-        color: #009aed;
+        color: $blue_light;
         padding: 5px;
     }
     .escala {
         font-size: 10px;
         font-family: "Montserrat";
         &_line {
-            border-top: 0.5px dashed #83898f;
+            border-top: 0.5px dashed $gray_border;
         }
         &_punto {
-            background: white;
-            border: 1px solid #f21037;
+            background: $white;
+            border: 1px solid $red_header;
             border-radius: 50%;
             width: 10px;
             height: 10px;
@@ -221,210 +222,8 @@
 
 // OMAC ***********************************************/
 
-.bg-white {
-    background-color: #ffff;
-}
-
-.navbar {
-    left: 0%;
-    right: 0%;
-    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
-    height: 75px;
-}
-
-.navbar-fixed-top {
-    top: 0;
-    border-width: 0 0 1px;
-    position: fixed;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-}
-
-.margin-content {
-    margin-top: 75px;
-}
-
-.nav-item {
-    padding: 0px 1rem 0px 1rem !important;
-}
-
-a {
-    color: #ffff;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #ffff;
-    text-decoration: none;
-}
-
-.searcher,
-.index {
-    padding: 2rem 0px 2rem 0px;
-}
-
-.btn-white {
-    background: #ffff;
-    border: none;
-}
-
-.btn-white:hover {
-    border: none;
-}
-
-.form-control {
-    border-radius: 0px !important;
-}
-
-.input-group {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    width: calc(100% + 50px);
-}
-
-.input-group-text {
-    background-color: #ffff;
-    align-items: center;
-    text-align: center;
-    padding-top: 10px;
-    border: none;
-}
-
-.input-control {
-    left: -50px;
-    padding-left: 50px;
-}
-
-input[type="date"]::-webkit-inner-spin-button,
-input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
-    -webkit-appearance: none;
-}
-
-.font-text {
-    font-weight: 500;
-    font-size: 12px;
-}
-
-.nav-item-pack {
-    padding: 0px !important;
-    text-align: center;
-    align-items: center;
-}
-
-.row-cust {
-    --bs-gutter-x: 0rem;
-}
-
-.row-cust-red {
-    padding-top: 60px;
-    --bs-gutter-x: 0rem;
-}
-
-.row-cust-price {
-    --bs-gutter-x: 0rem;
-    padding-left: 10px;
-    border-left: 1px solid #c8c9ca;
-}
-
-.col-cust-price {
-    padding-left: 10px;
-}
-
 // .company {
 //     width: 30px;
 //     height: 30px;
 //     background: url('assets/img/company.png') no-repeat;
 // }
-
-
-.accordion-item {
-    border: none !important;
-    background-color: #f6f7f9 !important;
-}
-
-.accordion-button {
-    background-color: #f6f7f9 !important;
-}
-
-.accordion-button:not(.collapsed) {
-    font-weight: 600;
-    color: #4b4b4b;
-    font-size: 16px;
-    padding-right: 10px;
-    background-color: #f6f7f9 !important;
-    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
-    border: none;
-}
-
-.accordion-button:not(.collapsed):after {
-    flex-shrink: 0;
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-right: 10px;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 1.25rem;
-    transition: transform 0.2s ease-in-out;
-    transform: rotate(180deg);
-}
-
-.accordion-button:after {
-    flex-shrink: 0;
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-left: auto;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 1.25rem;
-    transition: transform 0.2s ease-in-out;
-}
-
-.form-check-input[type="checkbox"] {
-    border-radius: 0px !important;
-    width: 1.5em !important;
-    height: 1.5em !important;
-}
-
-.form-check-input[type="radio"] {
-    border-radius: 50%;
-}
-
-.label-field {
-    padding-right: 1rem;
-}
-
-.nav-pills .nav-link {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 20px;
-    color: #b9bcbf;
-}
-
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 20px;
-    color: #b50a27;
-    background-color: transparent !important;
-}
-
-.button-airlines {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 20px;
-    color: #b9bcbf;
-    outline: transparent;
-}
-
-ol,
-ul {
-    padding-left: 1rem !important;
-}

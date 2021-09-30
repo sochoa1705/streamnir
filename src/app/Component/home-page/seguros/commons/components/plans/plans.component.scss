@@ -1,0 +1,39 @@
+.title {
+    font-family: Open Sans;
+    font-weight: normal;
+    font-size: 24px;
+}
+.oldPrice {
+    position: relative;
+    p {
+        strong {
+            margin-left: 5px;
+        }
+    }
+}
+
+.tachado {
+    border-bottom: 1px solid #df0c30;
+    width: 70px;
+    position: absolute;
+    top: 11px;
+}
+
+.precioAhorra {
+    position: relative;
+    p {
+        strong {
+            margin-left: 5px;
+        }
+    }
+}
+
+.card-body h2 {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 21px;
+    letter-spacing: 0.1px;
+    color: #4b4b4b;
+}

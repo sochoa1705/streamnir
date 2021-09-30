@@ -83,7 +83,7 @@ export class FilterResultComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.filterService.aerolineas);
+    // console.log(this.filterService.aerolineas);
     this.selectedItems = new Array<string>();
 
   }
