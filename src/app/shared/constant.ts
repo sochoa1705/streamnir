@@ -15,6 +15,10 @@ export const LogoutType = {
 };
 
 export enum ENDPOINT_API {
+  // AUTOCOMPLETE
   ciudades = 'GetCiudades_AutoComplete',
   ciudad = 'pStrIdCiudad',
+
+  // COBERTURA
+  coverage = 'ObtenerCobertura'
 }

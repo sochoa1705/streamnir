@@ -159,10 +159,12 @@ h2 {
     }
     &-header {
         box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.16);
-        font-size: 20px;
+        font-size: 18px;
         color: #4B4B4B;
-        font-weight: bold;
+        font-weight: 600;
         z-index: 1;
+        white-space: pre;
+        line-height: 53px;
         h2 {
             color: #4B4B4B;
             font-family: 'Open Sans';

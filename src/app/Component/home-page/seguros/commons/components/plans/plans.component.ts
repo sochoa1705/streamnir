@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { CoverageService } from 'src/app/Services/coverage/coverage.service';
 import { PackagesService } from 'src/app/Services/mock/packages.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 
@@ -23,9 +24,16 @@ export class PlansComponent implements OnInit {
   constructor(public route: Router,
     public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
+    public coverageService: CoverageService,
     ) {}
 
   ngOnInit(): void {
+    console.log('Hola')
+    this.coverageService.getCoverage().subscribe(
+      data => console.log(data),
+      err => console.log(err),
+      () => console.log('Ciudades cargadas')
+    )
   }
 
   shop() {
