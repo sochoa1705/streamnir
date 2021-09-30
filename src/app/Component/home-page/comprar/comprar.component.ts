@@ -18,7 +18,9 @@ export class ComprarComponent implements OnInit {
   detalleCobertura!: boolean;
   cupon!: boolean;
 
-  selectedPay: string = 'safety';
+  selectedPay: string = 'tarjeta';
+  selectedPopup: string = 'agencia';
+
   banca: boolean = true;
   metodoPago: any = [
     { name: 'option-2', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
@@ -49,6 +51,15 @@ export class ComprarComponent implements OnInit {
     this.cupon = this.current.cupon;
   }
 
+  chkValuePopup(e: any) {
+    const type = e.target.id;
+    if (type === 'option1') {
+      this.selectedPopup = 'agencia';
+    } else {
+      this.selectedPopup = 'agente';
+    }
+    //console.log(this.selectedPopup);
+  }
   chkValue(e: any) {
     const type = e.target.id;
     if (type === 'option-1') {

@@ -372,3 +372,71 @@
         }
     }
 }
+
+@media (max-width: 640px) {
+    .titleSuperior {
+        font-size: 16px;
+    }
+    .imgViewMovile {
+        width: 100%;
+    }
+    .subTitleConf {
+        font-size: 14px;
+        line-height: 22px;
+    }
+    .bancaInt {
+        .bodyBanca {
+            width: 90%;
+            height: 320px;
+            .cardBlue {
+                padding: 20px 0;
+                .descrip {
+                    font-size: 14px;
+                }
+                .number {
+                    font-size: 45px;
+                    line-height: 65px;
+                    padding-top: 0;
+                }
+            }
+            .cardRed {
+                padding-top: 10px;
+                .descrip {
+                    font-size: 14px;
+                }
+                .hora {
+                    font-size: 24px;
+                    line-height: 45px;
+                }
+                .fecha {
+                    font-size: 14px;
+                    padding: 0 20px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+    .titleSafety {
+        font-size: 18px;
+    }
+    .descripSafety {
+        font-size: 14px;
+    }
+    .rowSafety {
+        flex-wrap: wrap;
+        .boxBank {
+            margin-right: 0!important;
+        }
+    }
+    .columnSaf.colCenter {
+        margin: 10px!important;
+        padding: 20px!important;
+        .headPaso {
+            height: 50px!important;
+        }
+    }
+    .viewMobile {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+}

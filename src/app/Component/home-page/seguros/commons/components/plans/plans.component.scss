@@ -3,6 +3,7 @@
     font-weight: normal;
     font-size: 24px;
 }
+
 .oldPrice {
     position: relative;
     p {
@@ -36,4 +37,11 @@
     line-height: 21px;
     letter-spacing: 0.1px;
     color: #4b4b4b;
+}
+
+@media (max-width: 640px) {
+    .title {
+        font-size: 14px;
+        padding: 25px 14px 5px 14px !important;
+    }
 }

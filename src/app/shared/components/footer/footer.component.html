@@ -25,8 +25,7 @@
                         </svg>
                     </div>
                     <div class="icon">
-                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" class="icono"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" class="icono" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M17.0783 0.862793H6.50924C2.92005 0.862793 0 3.78298 0 7.37217V17.9412C0 21.5305 2.92005 24.4506 6.50924 24.4506H17.0783C20.6677 24.4506 23.5878 21.5304 23.5878 17.9412V7.37217C23.5879 3.78298 20.6677 0.862793 17.0783 0.862793ZM21.4951 17.9412C21.4951 20.3766 19.5138 22.3578 17.0784 22.3578H6.50924C4.07403 22.3579 2.09282 20.3766 2.09282 17.9412V7.37217C2.09282 4.93696 4.07403 2.95562 6.50924 2.95562H17.0783C19.5136 2.95562 21.495 4.93696 21.495 7.37217V17.9412H21.4951Z"
                                 fill="#83898F" />
@@ -54,14 +53,18 @@
                 </div>
             </div>
             <div class="col-md-2 col-12 text-md-left text-center order-1">
-                <h3>{{ title1 }}</h3>
-                <ul>
+                <h3 class="menuProd" (click)="showProducto()">{{ title1 }}
+                    <img class="iconFlecha" src="./assets/footer/flecha.png" alt="">
+                </h3>
+                <ul class="showDesktop" [class.activoMnu]="!showMenuProd">
                     <li *ngFor="let option of list1"><a routerLink="{{ option.link }}">{{ option.text }}</a></li>
                 </ul>
             </div>
             <div class="col-md-3 col-12 order-2 text-md-left text-center">
-                <h3>{{ title2 }}</h3>
-                <ul>
+                <h3 class="menuProd" (click)="showConocenos()">{{ title2 }}
+                    <img class="iconFlecha" src="./assets/footer/flecha.png" alt="">
+                </h3>
+                <ul class="showDesktop" [class.activoMnu]="!showMenuConocenos">
                     <li *ngFor="let option of list2"><a routerLink="{{ option.link }}">{{ option.text }}</a></li>
                 </ul>
             </div>

@@ -8,7 +8,7 @@
     display: flex;
     align-items: flex-end;
     background: $gray-light;
-    & > .content {
+    &>.content {
         top: 0;
         height: 440px;
         position: absolute;
@@ -31,6 +31,17 @@
             height: 100%;
             max-width: 100%;
             width: 100%;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .banner {
+        &>.content {
+            & .float img {
+                left: 10%;
+                top: 8%;
+            }
         }
     }
 }
