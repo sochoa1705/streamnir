@@ -1823,7 +1823,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 // MODAL BLUE
 #ModalBlue {
     .modal-dialog {
-        min-width: 950px !important;
+        min-width: 70% !important;
     }
     .modal-header {
         background: #009aed;
@@ -1967,5 +1967,49 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
             }
         }
+    }
+}
+
+@media (max-width: 640px) {
+    #ModalBlue {
+        .modal-dialog {
+            width: 90% !important;
+            min-width: auto !important;
+        }
+        .modal-body {
+            .rowModal {
+                justify-content: space-between;
+                &.viewModal {
+                    flex-direction: column;
+                    margin-bottom: 30px;
+                }
+                .columnModal {
+                    &.inputCheck {
+                        span {
+                            width: 160px;
+                            height: 80px;
+                        }
+                    }
+                    input[type=radio] {
+                        left: 15px;
+                        top: 32px;
+                    }
+                }
+            }
+        }
+    }
+    .px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    .ngb-dp-months {
+        flex-direction: column;
+    }
+    .ngb-dp-content {
+        padding: 0 8px;
+    }
+    .ngb-dp-month:first-child {
+        border-right: none;
+        padding-right: 0;
     }
 }

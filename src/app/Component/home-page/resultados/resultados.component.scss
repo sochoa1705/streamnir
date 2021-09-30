@@ -5,6 +5,7 @@
     border-radius: 5px !important;
     margin-bottom: 20px;
 }
+
 .public {
     border-radius: 10px;
     overflow: hidden;
@@ -12,6 +13,7 @@
         width: 100%;
     }
 }
+
 span {
     &.moneda {
         font-size: 12px;
@@ -40,6 +42,7 @@ span {
         border-radius: 5px;
     }
 }
+
 //     &-ink-bar{
 //         background-color: red;
 //     }
@@ -47,14 +50,23 @@ span {
 //         color: red;
 //     }
 // }
+
 /* active tab */
+
 ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
     color: #4b4b4b;
     opacity: 1;
     // background-color: green;
 }
 
+
 /* ink bar */
+
 ::ng-deep .mat-ink-bar {
     background-color: var(--primary-color, #009aed) !important;
+}
+
+.mnuResult {
+    background: transparent;
+    color: #4b4b4b;
 }

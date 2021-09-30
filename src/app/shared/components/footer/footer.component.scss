@@ -1,18 +1,18 @@
 @import '/src/scss/variables';
-
-footer{
-    ._libro{
+footer {
+    ._libro {
         color: $blue_light;
         text-decoration: none;
         font-size: 12px;
         font-weight: bold;
     }
-    .bg-white{
+    .bg-white {
         background: $white;
-        & .order-2>img{
+        & .order-2>img {
             @media (max-width: 768px) {
-                height: 60px;            } 
+                height: 60px;
             }
+        }
     }
     // .text {
     //     &-footer{
@@ -44,23 +44,23 @@ footer{
         color: $red_light;
         font-size: 16px;
         background: transparent;
-        &:hover{
+        &:hover {
             background: $red_light;
             color: white
         }
     }
-    h{
-        &r{
+    h {
+        &r {
             margin: 42px 0;
-            &.hr{
+            &.hr {
                 margin: 20px 0;
             }
         }
-        &3{
-        font-family: 'Open Sans';
-        font-weight: bold;
-        font-size: 24px;
-        line-height: 36px;
+        &3 {
+            font-family: 'Open Sans';
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 36px;
         }
     }
     ul {
@@ -68,23 +68,24 @@ footer{
         padding-left: 16px;
         li {
             text-align: left;
-            a{
-            font-family: 'Montserrat';
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 21px;
-            text-align: justify;
-            letter-spacing: 0.1px;
-            color: $gray;
-            text-decoration: none;
-            &:hover{
-                color: $red_light;
+            a {
+                font-family: 'Montserrat';
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 21px;
+                text-align: justify;
+                letter-spacing: 0.1px;
+                color: $gray;
+                text-decoration: none;
+                &:hover {
+                    color: $red_light;
+                }
             }
-        }}
+        }
     }
     .icons {
         display: flex;
-        & .icon{
+        & .icon {
             border-radius: 50%;
             border: 1px solid $gray_border;
             width: 42px;
@@ -93,11 +94,29 @@ footer{
             margin-right: 10px;
             align-items: center;
             justify-content: space-around;
-
-            &:hover{
+            &:hover {
                 background: $red;
             }
-
         }
+    }
+}
+
+.iconFlecha {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .menuProd {
+        cursor: pointer;
+    }
+    .showDesktop {
+        display: none;
+    }
+    .activoMnu {
+        display: block !important;
+    }
+    .iconFlecha {
+        display: initial;
+        padding-left: 5px;
     }
 }
