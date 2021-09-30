@@ -9,6 +9,7 @@ import { OffersService } from 'src/app/Services/mock/offers.service';
 })
 export class ComprarComponent implements OnInit {
   current: any;
+  detailPay!: string;
   filter!: string;
   title!: string;
   asistencia!: boolean;
@@ -19,10 +20,11 @@ export class ComprarComponent implements OnInit {
 
   selectedPay: string = 'tarjeta';
   selectedPopup: string = 'agencia';
+
   banca: boolean = true;
   metodoPago: any = [
-    { name: 'option-2', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: false, id: "0" },
-    { name: 'option-1', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: true, id: "1" },
+    { name: 'option-2', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
+    { name: 'option-1', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
   ]
 
   constructor(
@@ -39,6 +41,7 @@ export class ComprarComponent implements OnInit {
   }
 
   loadShop() {
+    this.detailPay = this.current.detailPay;
     this.filter = this.current.filter;
     this.title = this.current.title;
     this.asistencia = this.current.asistencia;
