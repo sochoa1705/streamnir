@@ -10,6 +10,7 @@ import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-p
 })
 export class PlansComponent implements OnInit {
   json = {
+    detailPay: 'safe',
     filter: 'filtersafe',
     title: 'Viaja seguro',
     asistencia: false,

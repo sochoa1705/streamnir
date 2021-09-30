@@ -9,6 +9,7 @@ import { OffersService } from 'src/app/Services/mock/offers.service';
 })
 export class ComprarComponent implements OnInit {
   current: any;
+  detailPay!: string;
   filter!: string;
   title!: string;
   asistencia!: boolean;
@@ -38,6 +39,7 @@ export class ComprarComponent implements OnInit {
   }
 
   loadShop() {
+    this.detailPay = this.current.detailPay;
     this.filter = this.current.filter;
     this.title = this.current.title;
     this.asistencia = this.current.asistencia;
