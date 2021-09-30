@@ -2,11 +2,11 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <hr>
+                <hr class="hideMobile">
             </div>
             <div class="clearfix"></div>
         </div>
-        <div class="row">
+        <div class="row marginTop35">
             <div class="col-3 d-none d-md-inline-block text-center my-5 order-md-1">
                 <img src="./assets/logo_rojo.svg" alt="">
                 <div class="icons justify-content-center">
@@ -68,12 +68,12 @@
                     <li *ngFor="let option of list2"><a routerLink="{{ option.link }}">{{ option.text }}</a></li>
                 </ul>
             </div>
-            <div class="col-md-4 col-12 order-3 text-md-left text-center">
+            <div class="col-md-4 col-12 order-3 text-md-left text-center marginTopMobile ">
                 <h3>{{ title3 }}</h3>
                 <span>{{ span }}<br>
                     <strong>{{ addrees }}</strong>
                 </span>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center centerBox">
                     <img src="./assets/libro.png" alt="">
                     <a class="_libro" href="{{ linkLibro }}">{{ libro }}</a>
                 </div>
@@ -88,7 +88,7 @@
                 <img src="./assets/footer/agencia.png" alt="">
             </div>
             <div class="col-md-4 col-12 order-1 d-flex align-items-center order-md-2">
-                <button class="w-100"> oficinas</button>
+                <button class="w-100 btnMobile"> oficinas</button>
             </div>
             <div class="col-md-4 col-6 text-center order-2 order-md-3">
                 <img src="./assets/footer/protegeme.png" alt="">
