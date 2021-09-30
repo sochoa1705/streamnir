@@ -1817,3 +1817,153 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .widthDesktop {
     width: 950px !important;
 }
+
+// MODAL BLUE
+#ModalBlue {
+    .modal-dialog {
+        min-width: 950px !important;
+    }
+    .modal-header {
+        background: #009aed;
+        color: #fff;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 176px;
+        padding: 16px !important;
+        .modal-title {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 36px;
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
+        .modal-subtitle {
+            font-family: Open Sans;
+            font-size: 20px;
+            line-height: 36px;
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
+    }
+    .contentRow {
+        display: flex;
+        flex: 1 1 100%;
+        margin-top: -76px;
+        &.centerCont {
+            justify-content: center;
+        }
+        .circleSafety {
+            width: 152px;
+            height: 152px;
+            background: #ffffff;
+            border-radius: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
+        }
+    }
+    .modal-body {
+        .rowModal {
+            display: flex;
+            flex: 1 1 100%;
+            justify-content: space-evenly;
+            &.padBottom50 {
+                padding-bottom: 50px;
+            }
+            &.padBottom10 {
+                padding-bottom: 10px;
+            }
+            .columnModal {
+                position: relative;
+                &.colCenter {
+                    display: flex;
+                    flex: 1 1 100%;
+                    flex-wrap: wrap;
+                    text-align: center;
+                    margin: 10px;
+                    background: #ffffff;
+                    padding: 42px;
+                    border: 1px solid #E4E5E7;
+                    box-sizing: border-box;
+                    border-radius: 10px;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start;
+                }
+                &.inputCheck {
+                    &.activo {
+                        background: #FFFFFF;
+                        border: 1px solid #009AED;
+                        box-sizing: border-box;
+                        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+                        border-radius: 10px;
+                        transition: all 0.3s;
+                    }
+                    span {
+                        font-family: Open Sans;
+                        font-weight: bold;
+                        font-size: 18px;
+                        line-height: 27px;
+                        display: flex;
+                        align-items: center;
+                        letter-spacing: 0.18px;
+                        color: #4B4B4B;
+                        background: rgba(235, 235, 235, 0.2);
+                        border-radius: 10px;
+                        width: 233px;
+                        height: 106px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        cursor: pointer;
+                        transition: all 0.3s;
+                    }
+                }
+                .headPaso {
+                    height: 80px;
+                    .number {
+                        display: flex;
+                        background: #009AED;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 20px;
+                        color: #ffffff;
+                        align-items: center;
+                        justify-content: center;
+                        font-family: 'Open Sans';
+                        font-weight: bold;
+                        font-size: 18px;
+                        line-height: 27px;
+                    }
+                }
+                .textPaso {
+                    font-family: Open Sans;
+                    font-size: 18px;
+                    line-height: 27px;
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+                    letter-spacing: 0.18px;
+                    color: #4B4B4B;
+                    flex-direction: column;
+                }
+                input[type=radio] {
+                    display: flex !important;
+                    position: absolute;
+                    left: 50px;
+                    top: 45px;
+                    width: 18px;
+                    height: 18px;
+                }
+                label {
+                    padding-bottom: 0 !important;
+                }
+            }
+        }
+    }
+}

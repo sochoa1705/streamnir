@@ -255,7 +255,7 @@
                                                 <a class="btnRed" href="#">Emisión automática después del pago.</a>
                                             </div>
                                             <div class="col-6 text-end">
-                                                <a href="#">¿Como pagar con SafetyPay online?</a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalBlue">¿Como pagar con SafetyPay online?</a>
                                             </div>
                                         </div>
                                         <div class="row boxLimite">
@@ -725,5 +725,86 @@
         </div>
         <!-- END DERECHA -->
         <div class="clearfix"></div>
+    </div>
+</div>
+
+<!-- MODAL BLUE-->
+<div class="modal fade" id="ModalBlue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content red">
+            <div class="modal-header">
+                <div class="modal-title" id="exampleModalLabel">¿Cómo pagar con SafetyPay?</div>
+                <div class="modal-subtitle" id="exampleModalLabel">Agencias/Agentes</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="contentRow centerCont">
+                <div class="circleSafety">
+                    <img src="./assets/comprar/modal/safety.png" alt="">
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <div class="rowModal py-4">
+                    <div class="columnModal inputCheck" [class.activo]="selectedPopup === 'agencia'">
+                        <input type="radio" name="select" id="option1" (click)="chkValuePopup($event)">
+                        <label for="option1" id="flexRadioDefault1" class="option1">
+                            <div class="dot"></div>
+                            <span>Agencias</span>
+                        </label>
+                    </div>
+                    <div class="columnModal inputCheck" [class.activo]="selectedPopup === 'agente'">
+                        <input type="radio" name="select" id="option2" (click)="chkValuePopup($event)">
+                        <label for="option2" id="flexRadioDefault1" class="option2">
+                            <div class="dot"></div>
+                            <span>Agentes</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="rowModal" *ngIf="selectedPopup === 'agencia'">
+                    <div class="columnModal colCenter">
+                        <div class="headPaso">
+                            <div class="number">1</div>
+                        </div>
+                        <div class="textPaso">Acércate a cualquier agencia afiliada.</div>
+                    </div>
+                    <div class="columnModal colCenter">
+                        <div class="headPaso">
+                            <div class="number">2</div>
+                        </div>
+                        <div class="textPaso">Indica que realizarás un pago al servicio “SafetyPay” con el codigo de pago y el monto exacto a pagar.</div>
+                    </div>
+                    <div class="columnModal colCenter">
+                        <div class="headPaso">
+                            <div class="number">3</div>
+                        </div>
+                        <div class="textPaso">Recibe tu comprobante y ¡listo!</div>
+                    </div>
+                </div>
+                <div class="rowModal" *ngIf="selectedPopup === 'agente'">
+                    <div class="columnModal colCenter">
+                        <div class="headPaso">
+                            <div class="number">1</div>
+                        </div>
+                        <div class="textPaso">Acércate a cualquier agencia afiliada.</div>
+                    </div>
+                    <div class="columnModal colCenter">
+                        <div class="headPaso">
+                            <div class="number">2</div>
+                        </div>
+                        <div class="textPaso">Menciona el código de empresa o banco de su selección</div>
+                    </div>
+                    <div class="columnModal colCenter">
+                        <div class="headPaso">
+                            <div class="number">3</div>
+                        </div>
+                        <div class="textPaso">indica el código de pago y el monto a pagar exacto y ¡listo!</div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
     </div>
 </div>
