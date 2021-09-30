@@ -7,22 +7,26 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
   @Input()
-  image!: string;
-  @Input()
-  label!: string;
-  @Input()
-  destiny!: string;
-  @Input()
-  from!: string;
-  @Input()
-  span!: string;
-  @Input()
-  price!: number;
-  @Input()
-  link!: string;
+  itemList!: any[];
+  // @Input()
+  // image!: string;
+  // @Input()
+  // label!: string;
+  // @Input()
+  // destiny!: string;
+  // @Input()
+  // from!: string;
+  // @Input()
+  // span!: string;
+  // @Input()
+  // price!: number;
+  // @Input()
+  // link!: string;
   constructor() { }
 
   ngOnInit(): void {
+    // console.log(this.itemList);
+    
   }
 
 }

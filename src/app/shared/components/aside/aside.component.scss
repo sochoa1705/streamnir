@@ -1,36 +1,63 @@
+@import "/src/scss/variables";
 aside {
-    .carousel-indicators button{
-        border: 1px solid white;
-        background: transparent;
-        border-radius: 50%;
-        width: 10px;
-        height: 10px;
-        &.active{
-            background: white;
+    .col-md-6.col-12 {
+        padding-right: 12px !important;
+        padding-left: 0px;
+        @media (max-width: 768px) {
+            padding-left: 12px !important;
+        }
+        &:first-child {
+            padding-right: 0px !important;
+            padding-left: 12px !important;
+            @media (max-width: 768px) {
+                padding-right: 12px !important;
+            }
         }
     }
-    .aside{
+    // .col-12 {
+    //     padding-right: 0px;
+    //     @media (max-width: 768px) {
+    //         padding-right: 12px;
+    //     }
+    // }
+    .carousel-indicators {
+        @media (max-width: 768px) {
+            bottom: 22px;
+        }
+        button {
+            border: 1px solid $white;
+            background: transparent;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            &.active {
+                background: $white;
+            }
+        }
+    }
+    .aside {
         &__content {
             position: relative;
             width: 100%;
             height: 398px;
             //display: block;
-            border-right: 4px solid #f6f7f9;
+            border-right: 4px solid $gray_light;
             overflow: hidden;
             border-radius: 10px 0 0 10px;
             @media (max-width: 768px) {
                 border-right: 0;
                 height: 222px;
                 margin-bottom: 20px;
+                border-radius: 10px 10px 0 0;
             }
-            &:first-child{
+            &:first-child {
                 border-radius: 10px 0 0 10px;
                 @media (max-width: 768px) {
                     border-radius: 10px 10px 0 0;
                 }
             }
 
-            &>img{
+            & > img {
                 position: absolute;
                 object-fit: cover;
                 -o-object-position: top;
@@ -39,7 +66,7 @@ aside {
                 max-width: 100%;
                 width: 100%;
             }
-            &_2{
+            &_2 {
                 height: 199px;
                 // background: red;
                 position: relative;
@@ -51,15 +78,15 @@ aside {
                     height: 84px;
                     margin-bottom: 20px;
                 }
-                &:first-child{
-                    border-bottom: 4px solid #f6f7f9;
+                &:first-child {
+                    border-bottom: 4px solid $gray_light;
                     overflow: hidden;
                     border-radius: 0 10px 0 0;
                     @media (max-width: 768px) {
                         border-radius: 0;
                     }
                 }
-                &>img{
+                & > img {
                     position: absolute;
                     object-fit: cover;
                     -o-object-position: top;

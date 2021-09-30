@@ -1,0 +1,171 @@
+<app-safebanner></app-safebanner>
+<div class="container-fluid px-5">
+    <router-outlet></router-outlet>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">PLAN CLASSIC - S/. 314,80</h2>
+                <h5 class="modal-title" id="exampleModalLabel">Asistencia médica: USD 60.000</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex py-3">
+                            <img src="./assets/seguros/covid.png" alt="">
+                            <div class="px-2">
+                                <span class="covid">COBERTURA</span>
+                                <span class="covid">COVID</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row scrollBody">
+                    <div class="col-10 offset-1">
+                        <table class="table-bordered w-100">
+                            <tbody>
+                                <tr class="row">
+                                    <td class="col d-flex align-items-center"><strong>USD 60,000</strong></td>
+                                    <td class="col"><strong>MONTO MÁXIMO GLOBAL</strong> (Incluye todos los servicios de
+                                        este producto con sus topes)</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col d-flex align-items-center"><strong>USD 60,000</strong></td>
+                                    <td class="col">Asistencia médica en caso de accidente</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col d-flex align-items-center"><strong>USD 60,000</strong></td>
+                                    <td class="col">Asistencia médica en caso de enfermedad no preexistente (Incluido
+                                        COVID-19)</td>
+                                </tr>
+                                <tr class="row" *ngFor="let item of [10,0,0,0,0,0,0,0,0,0,0,0,0,0]">
+                                    <td class="col d-flex align-items-center"><strong>USD 300</strong></td>
+                                    <td class="col">Primera atención médica por dolencias preexistente y dolencias
+                                        crónicas</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row py-3 footerPopup">
+                        <div class="col-3 borderRight">
+                            <p>Total</p>
+                            <span>PEN <strong>314,80</strong></span>
+                            <button>Comprar</button>
+                        </div>
+                        <div class="col-9 alignFooterPopup">
+                            <p class="otroPlan">otros planes:</p>
+                            <div class="row planBox">
+                                <div class="col-3">
+                                    <button class="planes best">El mejor plan</button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="planes">Privileged</button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="planes">Premiun</button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="planes">Million</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+<!-- Modal Rojo-->
+<div class="modal fade" id="exampleModalRed" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content red">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">EL MEJOR PLAN - S/. 804,48</h2>
+                <h5 class="modal-title" id="exampleModalLabel">Usala en múltiples viajes por <strong>un año</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex py-3">
+                            <img src="./assets/seguros/covid.png" alt="">
+                            <div class="px-2">
+                                <span class="covid">COBERTURA</span>
+                                <span class="covid">COVID</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row scrollBody">
+                    <div class="col-10 offset-1">
+                        <table class="table-bordered w-100">
+                            <tbody>
+                                <tr class="row">
+                                    <td class="col d-flex align-items-center"><strong>USD 60,000</strong></td>
+                                    <td class="col"><strong>MONTO MÁXIMO GLOBAL</strong> (Incluye todos los servicios de
+                                        este producto con sus topes)</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col d-flex align-items-center"><strong>USD 60,000</strong></td>
+                                    <td class="col">Asistencia médica en caso de accidente</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col d-flex align-items-center"><strong>USD 60,000</strong></td>
+                                    <td class="col">Asistencia médica en caso de enfermedad no preexistente (Incluido
+                                        COVID-19)</td>
+                                </tr>
+                                <tr class="row" *ngFor="let item of [10,0,0,0,0,0,0,0,0,0,0,0,0,0]">
+                                    <td class="col d-flex align-items-center"><strong>USD 300</strong></td>
+                                    <td class="col">Primera atención médica por dolencias preexistente y dolencias
+                                        crónicas</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row py-3 footerPopup">
+                        <div class="col-3 borderRight">
+                            <p>Total</p>
+                            <span>PEN <strong>804,48</strong></span>
+                            <button>Comprar</button>
+                        </div>
+                        <div class="col-9 alignFooterPopup">
+                            <p class="otroPlan">otros planes:</p>
+                            <div class="row planBox">
+                                <div class="col-3">
+                                    <button class="planes">Classic</button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="planes">Privileged</button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="planes">Premiun</button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="planes">Million</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>

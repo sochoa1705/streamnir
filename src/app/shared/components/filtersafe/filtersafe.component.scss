@@ -1,0 +1,34 @@
+@import "/src/scss/variables";
+.w-130 {
+    width: 130px;
+    display: inline-block;
+    margin-right: 5px;
+    padding-left: 0;
+    @media (max-width: 768px) {
+        width: 99px;
+        display: inline-block;
+        padding-left: 0;
+    }
+}
+
+.customers {
+    width: 100%;
+    font-style: normal;
+    font-weight: 600;
+    border: 0px;
+    font-size: 14px;
+    color: #222;
+    margin-top: 7px;
+    background-color: white;
+    background: url(../../../../assets/arrow.svg) no-repeat center right;
+    padding-left: 0;
+    text-align: left;
+    font-family: "Montserrat";
+    @media (max-width: 768px) {
+        font-size: 10px;
+    }
+}
+
+.card {
+    overflow: hidden !important;
+}

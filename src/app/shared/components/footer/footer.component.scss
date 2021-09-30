@@ -1,50 +1,51 @@
+@import '/src/scss/variables';
+
 footer{
     ._libro{
-        color: #009AED;
+        color: $blue_light;
         text-decoration: none;
         font-size: 12px;
         font-weight: bold;
     }
     .bg-white{
-        background: white;
+        background: $white;
         & .order-2>img{
             @media (max-width: 768px) {
                 height: 60px;            } 
             }
     }
-    .text {
-        &-footer{
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 24px;
-            letter-spacing: 0.15px;
-            color: #4B4B4B;
-            margin-top: 20px;
-            @media (max-width: 768px) {
-                font-size: 10px;
-                text-align: center;
-            }
-            span{
-                color: #DF0C30;
-            }
-        }
-        &-md-end img {
-            margin-right: 20px;
-            @media (max-width: 768px) {
-                height: 14px;
-                margin-bottom: 20px;
-            }
-        }
-    }
+    // .text {
+    //     &-footer{
+    //         font-family: 'Montserrat';
+    //         font-weight: 500;
+    //         font-size: 16px;
+    //         line-height: 24px;
+    //         letter-spacing: 0.15px;
+    //         color: $gray;
+    //         margin-top: 20px;
+    //         @media (max-width: 768px) {
+    //             font-size: 10px;
+    //             text-align: center;
+    //         }
+    //         span{
+    //             color: $red_light;
+    //         }
+    //     }
+    //     &-md-end img {
+    //         margin-right: 20px;
+    //         @media (max-width: 768px) {
+    //             height: 14px;
+    //             margin-bottom: 20px;
+    //         }
+    //     }
+    // }
     button {
-        border: 1px solid #DF0C30;
-        color: #DF0C30;
+        border: 1px solid $red_light;
+        color: $red_light;
         font-size: 16px;
         background: transparent;
         &:hover{
-            background: #DF0C30;
+            background: $red_light;
             color: white
         }
     }
@@ -56,30 +57,28 @@ footer{
             }
         }
         &3{
-        font-family: Open Sans;
-        font-style: normal;
+        font-family: 'Open Sans';
         font-weight: bold;
         font-size: 24px;
         line-height: 36px;
         }
     }
     ul {
-        color: red;
+        color: $red;
         padding-left: 16px;
         li {
             text-align: left;
             a{
-            font-family: Montserrat;
-            font-style: normal;
+            font-family: 'Montserrat';
             font-weight: 500;
             font-size: 14px;
             line-height: 21px;
             text-align: justify;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: $gray;
             text-decoration: none;
             &:hover{
-                color: #DF0C30;
+                color: $red_light;
             }
         }}
     }
@@ -87,7 +86,7 @@ footer{
         display: flex;
         & .icon{
             border-radius: 50%;
-            border: 1px solid #83898F;
+            border: 1px solid $gray_border;
             width: 42px;
             height: 42px;
             display: flex;
@@ -96,7 +95,7 @@ footer{
             justify-content: space-around;
 
             &:hover{
-                background: red;
+                background: $red;
             }
 
         }

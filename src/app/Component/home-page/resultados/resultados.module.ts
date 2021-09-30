@@ -7,8 +7,6 @@ import { FilterModule } from 'src/app/shared/components/filter/filter.module';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { FormsModule } from '@angular/forms';
 
-
-
 @NgModule({
   declarations: [ ResultadosComponent ],
   imports: [

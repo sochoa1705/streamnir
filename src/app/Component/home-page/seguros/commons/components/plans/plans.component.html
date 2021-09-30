@@ -1,0 +1,91 @@
+<div class="row pt-md-5">
+        <h2 class="title px-0 pb-md-3"><strong>Selecciona el plan que mejor se adapte a tu viaje |</strong> 9 días por Europa
+        </h2>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card seguro best">
+            <div class="card-header">El mejor plan</div>
+            <div class="card-body">
+                <h2>Anual</h2>
+                <span>Antes</span>
+                <div class="oldPrice">
+                    <div class="tachado"></div>
+                    <p>PEN<strong>141.97</strong></p>
+                </div>
+                <span class="now">Ahora</span>
+                <p class="now">PEN <strong>946,45</strong></p>
+                <span>Ahorra</span>
+                <div class="precioAhorra">
+                    <p>PEN<strong>141.97</strong></p>
+                </div>
+                <div class="d-flex py-3">
+                    <img src="./assets/seguros/covid.png" alt="">
+                    <div class="px-2">
+                        <span class="covid">COBERTURA</span>
+                        <span class="covid">COVID</span>
+                    </div>
+                </div>
+                <div class="d-block text-center">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalRed">Ver detalle de los beneficios</a>                </div>
+                <div class="d-block text-center py-2">
+                    <button>Seleccionar</button>
+                </div>
+                <p class="card-text">Usa tu Assist Card en múltiples viajes por 1 año</p>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+            </div>
+        </div>
+        <div class="card seguro" *ngFor="let card of [1,2,3,4]">
+            <div class="card-header">Fecha flexible</div>
+            <div class="card-body">
+                <h2>Anual</h2>
+                <span>Antes</span>
+                <div class="oldPrice">
+                    <div class="tachado"></div>
+                    <p>PEN<strong>141.97</strong></p>
+                </div>
+                <span class="now">Ahora</span>
+                <p class="now">PEN <strong>946,45</strong></p>
+                <span>Ahorra</span>
+                <div class="precioAhorra">
+                    <p>PEN<strong>141.97</strong></p>
+                </div>
+                <div class="d-flex py-3">
+                    <img src="./assets/seguros/covid.png" alt="">
+                    <div class="px-2">
+                        <span class="covid">COBERTURA</span>
+                        <span class="covid">COVID</span>
+                    </div>
+                </div>
+                <div class="d-block text-center">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver detalle de los beneficios</a>
+                </div>
+                <div class="d-block text-center py-2">
+                    <button (click)="shop()">Seleccionar</button>
+                </div>
+                <p class="card-text">Asistencia médica: USD 60.000</p>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+            </div>
+        </div>
+
+    </div>
+</div>
+    <div class="row mb-4 mt-5">
+        <div class="col-12">
+            <h2 class="title">¡Corre y Vuela! con estas <strong>súper ofertas de Vuelos</strong> saliendo <strong>desde
+                    Lima</strong></h2>
+            <!-- <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+                <app-title *ngIf="section.section === 'Vuelos'" [title]="section.title"></app-title>
+            </ng-container> -->
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <app-card [itemList]="packagesService.packages"></app-card>
+    <div class="row text-end py-5">
+        <div class="col-12">
+            <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+                <button class="plus dropdown-toggle" *ngIf="section.section === 'Vuelos'">{{ section.btn }}</button>
+            </ng-container>
+        </div>
+        <div class="clearfix"></div>
+    </div>
