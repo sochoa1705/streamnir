@@ -8,6 +8,10 @@
         <app-filtersafe></app-filtersafe>
     </div>
 </ng-template>
+<div #adultoCdr style="display: none;">
+    <a (click)="pasajeroClose()">cerrar</a>
+    HOLA MUNDOI
+</div>
 <div class="container-fluid pb-4 px-5">
     <div class="row stepCard d-md-none d-block">
         <!-- STEPPER -->
@@ -39,7 +43,7 @@
                         Adulto
                         <button (click)="pasajero()">Agregar</button>
                     </div>
-                
+
                 
                     <!-- <mat-form-field appearance="fill">
                         <mat-label>Name</mat-label>

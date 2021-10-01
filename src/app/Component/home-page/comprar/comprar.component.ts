@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OffersService } from 'src/app/Services/mock/offers.service';
@@ -30,6 +30,8 @@ export class ComprarComponent implements OnInit {
   isLinear = true;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
+  @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>;
+
   constructor(
     public route: Router,
     public offersService: OffersService,
@@ -52,9 +54,21 @@ export class ComprarComponent implements OnInit {
   }
 
   pasajero(){
-    console.log('agtregar pasajero');
-    
+    let scrolTop = window.scrollY;
+    let n = scrolTop - 50;
+    let elemento = this.adulto.nativeElement;
+    console.log(elemento);
+    elemento.classList.add('adultocdr');
+    elemento.setAttribute('style', `margin-top: ${n}px`);
+    // elemento.style = `margin-top: ${scrolTop}`
+  
   }
+  pasajeroClose(){
+    let elemento = this.adulto.nativeElement;
+    elemento.classList.remove('adultocdr');
+    elemento.setAttribute('style', `display:none`);
+  }
+
   // createForm() {
   //   this.form = new FormGroup({
   //     tipo: new FormControl('idavuelta'),
