@@ -5,6 +5,7 @@
 .mat-form-field {
     margin-top: 16px;
 }
+
 h1 {
     color: #506370;
     font-family: "Open Sans";
@@ -132,7 +133,7 @@ h2 {
                     transition: all 0.3s ease;
                 }
             }
-            & > span {
+            &>span {
                 font-size: 12px;
                 font-family: "Open Sans";
                 display: block;
@@ -416,7 +417,7 @@ h2 {
     }
 }
 
-input[type="checkbox"] + label {
+input[type="checkbox"]+label {
     color: #4b4b4b;
     font-size: 12px;
     font-family: "Montserrat";
@@ -438,8 +439,8 @@ input[type="radio"] {
     margin-right: 110px;
 }
 
-#option-1:checked:checked ~ .option-1,
-#option-2:checked:checked ~ .option-2 {
+#option-1:checked:checked~.option-1,
+#option-2:checked:checked~.option-2 {
     background: #ffffff;
     border: 1px solid rgb(0 154 237/20%);
     box-sizing: border-box;
@@ -447,20 +448,20 @@ input[type="radio"] {
     border-radius: 10px;
 }
 
-#option-1:checked:checked ~ .option-1 .dot,
-#option-2:checked:checked ~ .option-2 .dot {
+#option-1:checked:checked~.option-1 .dot,
+#option-2:checked:checked~.option-2 .dot {
     background: #fff;
     border: 1px solid #009aed;
 }
 
-#option-1:checked:checked ~ .option-1 .dot::before,
-#option-2:checked:checked ~ .option-2 .dot::before {
+#option-1:checked:checked~.option-1 .dot::before,
+#option-2:checked:checked~.option-2 .dot::before {
     opacity: 1;
     transform: scale(1);
 }
 
-#option-1:checked:checked ~ .option-1 span,
-#option-2:checked:checked ~ .option-2 span {
+#option-1:checked:checked~.option-1 span,
+#option-2:checked:checked~.option-2 span {
     color: #4b4b4b;
 }
 
