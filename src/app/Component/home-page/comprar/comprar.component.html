@@ -393,12 +393,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header shadow-none">
-                            <h2>Datos de contacto</h2>
+                        <div class="card-header shadow-none" (click)="showDataContact()">
+                            <h2>Datos de contacto<img class="iconFlechaSup" [class.activeIcon]="!showDataContacto" src="./assets/comprar/flecha-top.png" alt=""></h2>
                             <span>Ingresa tus datos actualizados, este se utilizará para avisarte en caso de cambios en
                                 el itinerario. </span>
                         </div>
-                        <div class="card-body card_pasajero  shadow-none">
+                        <div class="card-body card_pasajero boxHideM shadow-none" [class.activoBoxContact]="!showDataContacto">
                             <div class="row rowMobileCard">
                                 <div class="col-6 viewMobileWidth">
                                     <label for="names">Nombres</label>

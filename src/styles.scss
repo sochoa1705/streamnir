@@ -1778,6 +1778,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     padding: 0 12px;
 }
 
+.iconFlechaSup {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    transition: all 0.3s;
+    transform: rotate(180deg);
+}
+
 @media (max-width: 640px) {
     .narginColumn {
         margin-right: 0px;
@@ -1971,6 +1980,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     background: transparent;
     border: none;
     overflow: hidden;
+}
+
+.btnMobile {
+    display: none;
+    padding: 20px 0 10px 0;
+    justify-content: center;
 }
 
 @media (max-width: 640px) {
@@ -2211,5 +2226,31 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .selectBank {
         width: 100%!important;
+    }
+    .btnMobile {
+        &.activoBox {
+            display: flex !important;
+        }
+    }
+    .boxHideM {
+        display: none;
+        &.activoBoxContact {
+            display: block;
+        }
+    }
+    .mat-horizontal-stepper-header-container {
+        //box-shadow: 0px 4px 4px 0 rgb(0 0 0 / 15%);
+        box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
+    }
+    .mat-horizontal-stepper-header-container {
+        padding: 15px 0 0 0!important;
+        margin-left: -15px!important;
+        margin-right: -15px!important;
+    }
+    .iconFlechaSup {
+        display: block;
+        &.activeIcon {
+            transform: rotate(0deg);
+        }
     }
 }

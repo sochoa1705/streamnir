@@ -39,6 +39,11 @@ export class ComprarComponent implements OnInit {
     this.current = this.route.getCurrentNavigation()?.extras.state as any
   }
 
+  showDataContacto: Boolean = true;
+  showDataContact() {
+    this.showDataContacto = this.showDataContacto ? false : true;
+  }
+
   ngOnInit(): void {
     this.loadShop();
     console.log(this.current);
