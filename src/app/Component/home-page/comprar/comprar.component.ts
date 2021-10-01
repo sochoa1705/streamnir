@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OffersService } from 'src/app/Services/mock/offers.service';
 
@@ -26,7 +27,9 @@ export class ComprarComponent implements OnInit {
     { name: 'option-2', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
     { name: 'option-1', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
   ]
-
+  isLinear = true;
+  firstFormGroup!: FormGroup;
+  secondFormGroup!: FormGroup;
   constructor(
     public route: Router,
     public offersService: OffersService,
@@ -38,7 +41,31 @@ export class ComprarComponent implements OnInit {
     this.loadShop();
     console.log(this.current);
 
+    this.firstFormGroup = new FormGroup({
+      firstCtrl: new FormControl('idavuelta', Validators.required),
+
+    });
+    this.secondFormGroup = new FormGroup({
+      secondCtrl: new FormControl('idavuelta', Validators.required),
+
+    });
   }
+
+  // createForm() {
+  //   this.form = new FormGroup({
+  //     tipo: new FormControl('idavuelta'),
+  //     catergory: new FormControl('economy'),
+  //     // adultos: new FormControl(0),
+  //     ninos: new FormControl(0),
+  //     infantes: new FormControl(0),
+  //     origen: new FormControl(),
+  //     destino: new FormControl(''),
+  //     range: new FormGroup({
+  //       start: new FormControl(),
+  //       end: new FormControl()
+  //     })
+  //   })
+  // }
 
   loadShop() {
     this.detailPay = this.current.detailPay;
@@ -68,16 +95,14 @@ export class ComprarComponent implements OnInit {
       this.selectedPay = 'safety';
     }
   }
-  id:any = "banca";
-  optionPay(e: any, i: any,ids:any) {
+  id: any = "banca";
+  optionPay(e: any, i: any, ids: any) {
     console.log(i);
     this.banca = i;
     this.id = ids;
   }
 
-  
-
-  shopEnd(){
+  shopEnd() {
     // this.route.navigateByUrl('/home/comprar', navigationExtras);
     this.route.navigateByUrl('/home/conformidad');
 

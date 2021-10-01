@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlBase: 'https://10.75.131.17:10508/api/productoAsistencia/',
+  urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',
   serverUrlApi: 'http://localhost:8080/api/',
   urlLogin: 'http://localhost:64238/login',
 };

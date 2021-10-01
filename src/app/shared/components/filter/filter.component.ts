@@ -178,12 +178,15 @@ export class FilterComponent implements OnInit {
   }
   ngOnInit(): void {
     this.createForm()
+    this.getListVuelos('lim')
   }
 
   getListVuelos(e: any) {
     console.log(e)
     this.flightsService.getCiudades(e).subscribe(
       data => {
+        console.log(data);
+        
         this.citys = data
       },
       err => console.log(err),

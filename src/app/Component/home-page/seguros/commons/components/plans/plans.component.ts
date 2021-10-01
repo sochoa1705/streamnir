@@ -25,11 +25,25 @@ export class PlansComponent implements OnInit {
     public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
     public coverageService: CoverageService,
-    ) {}
+  ) { }
 
   ngOnInit(): void {
+    let payload = {
+      "Aplicacion": "Intranet",
+      "CodigoSeguimiento": "Test",
+      "CodigosEntorno": "PROD/NMO/NMO",
+      "Parametros": {
+        "CodigoISOPais": "510",
+        "Agencia": "87823",
+        "Sucursal": "0",
+        "CodigoProducto": "MX",
+        "CodigoTarifa": "96045",
+        "Edad": "40",
+        "TipoModalidad": "1"
+      }
+    }
     console.log('Hola')
-    this.coverageService.getCoverage().subscribe(
+    this.coverageService.getCoverage(payload).subscribe(
       data => console.log(data),
       err => console.log(err),
       () => console.log('Ciudades cargadas')

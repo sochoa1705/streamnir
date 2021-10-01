@@ -6,6 +6,8 @@ import { CardOfferModule } from 'src/app/shared/components/card-offer/card-offer
 import { FilterModule } from 'src/app/shared/components/filter/filter.module';
 import { FiltersafeModule } from 'src/app/shared/components/filtersafe/filtersafe.module';
 import { CoverageModule } from 'src/app/shared/components/coverage/coverage.module';
+import { MaterialModule } from 'src/app/shared/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ ComprarComponent ],
@@ -16,6 +18,9 @@ import { CoverageModule } from 'src/app/shared/components/coverage/coverage.modu
     FilterModule,
     FiltersafeModule,
     CoverageModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
   ],
   exports: [ ComprarComponent ]
 })

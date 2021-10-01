@@ -15,31 +15,14 @@ export class CoverageService {
   ) { }
 
 
-  getCoverage(): Observable<Coverage[]> {
+  getCoverage(payload: any): Observable<Coverage[]> {
     let url_api = `${environment.urlBase}${ENDPOINT_API.coverage}`;
     let headers = new HttpHeaders({
-      "cache-control": "no-cache",
-      "content-type": "application/json; charset=utf-8",
-      "expires": "-1",
-      "pragma": "no-cache",
-      "server": "Microsoft-IIS/8.5",
-      "x-aspnet-version": "4.0.30319",
-      "x-powered-by": "ASP.NET"
+      "content-type": "application/json",
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
     })
-    let body = {
-      "Aplicacion": "Intranet",
-      "CodigoSeguimiento": "Test",
-      "CodigosEntorno": "PROD/NMO/NMO",
-      "Parametros": {
-        "CodigoISOPais": "510",
-        "Agencia": "87823",
-        "Sucursal": "0",
-        "CodigoProducto": "MX",
-        "CodigoTarifa": "96045",
-        "Edad": "40",
-        "TipoModalidad": "1"
-      }
-    }
-    return this.http.post<any>(url_api, body, { headers})
+
+    return this.http.post<any>(url_api, payload, { headers })
   }
 }
