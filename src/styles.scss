@@ -2037,8 +2037,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             line-height: 27px!important;
         }
     }
-    .form-control {
-        font-size: 12px;
+    .form-control,
+    .text-end,
+    .marginLat a,
+    .textDire {
+        font-size: 12px!important;
     }
     .contentCenterMobile {
         display: flex;
@@ -2107,12 +2110,23 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .imgBanca {
             padding-bottom: 0px;
             img {
-                width: 22%;
+                width: 15%;
             }
         }
     }
     .lessMarginMobile {
         padding: 0;
         margin: 0;
+    }
+    .titleMob,
+    .titleCobertura,
+    .titleBodyCober {
+        font-size: 18px!important;
+    }
+    .rightHeader {
+        font-size: 12px!important;
+    }
+    .titleBodyCober p {
+        font-size: 11px!important;
     }
 }

@@ -202,19 +202,19 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="row card_pasajero">
-                                        <div class="col-6">
+                                    <div class="row card_pasajero rowMobileCard">
+                                        <div class="col-6 viewMobileWidth">
                                             <label for="names">Número de tarjeta</label>
                                             <input class="form-control" placeholder="Ingrese el número de tarjeta." type="text" name="names">
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 viewMobileWidth">
                                             <label for="lastname">Titular de la tarjeta</label>
                                             <input class="form-control" placeholder="El que figura en la tarjeta." type="text" name="lastname">
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="row  card_pasajero">
-                                        <div class="col-6">
+                                    <div class="row  card_pasajero rowMobileCard">
+                                        <div class="col-6 viewMobileWidth">
                                             <div class="row">
                                                 <div class="col-5">
                                                     <label for="names">Vencimiento</label>
@@ -230,7 +230,7 @@
                                                 <div class="clearfix"></div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 viewMobileWidth">
                                             <div class="row">
                                                 <div class="col-5">
                                                     <label for="names">Tipo de doc</label>
@@ -245,23 +245,23 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="row card_pasajero">
-                                        <div class="col-6">
+                                    <div class="row card_pasajero rowMobileCard">
+                                        <div class="col-6 viewMobileWidth">
                                             <label for="names">Cuotas</label>
                                             <input class="form-control" placeholder="Sin cuotas" type="text" name="names">
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 viewMobileWidth">
                                             <label for="lastname">Ciudad de facturación</label>
                                             <input class="form-control" placeholder="Del titular de la tarjeta." type="text" name="lastname">
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="row card_pasajero">
-                                        <div class="col-6">
+                                    <div class="row card_pasajero rowMobileCard">
+                                        <div class="col-6 viewMobileWidth">
                                             <label for="names">Dirección</label>
                                             <input class="form-control" placeholder="Ingrese la dirección" type="text" name="names">
                                         </div>
-                                        <div class="col-6 textDire">
+                                        <div class="col-6 textDire viewMobileWidth">
                                             <label for="names"></label>
                                             <div>Emisión en max 24hrs aprox.</div>
                                         </div>
@@ -299,7 +299,7 @@
                                             </div>
                                         </div>
                                         <div class="row py-4 marginLat">
-                                            <div class="col-6">
+                                            <div class="col-6 ">
                                                 <a class="btnRed" href="#">Emisión automática después del pago.</a>
                                             </div>
                                             <div class="col-6 text-end">
@@ -454,8 +454,8 @@
         <!-- END IZQUIERDA -->
 
         <!-- DERECHA -->
-        <div class="col-4">
-            <h2>Detalle de tu pago</h2>
+        <div class="col-4 viewMobileWidth">
+            <h2 class="titleMob">Detalle de tu pago</h2>
             <!-- ACORDION SEGUROS -->
             <div *ngIf="detailPay == 'safe'; else detail" class="accordion" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
