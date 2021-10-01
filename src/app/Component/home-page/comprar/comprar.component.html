@@ -5,7 +5,7 @@
     <app-filtersafe></app-filtersafe>
 </ng-template>
 <div class="container-fluid pb-4 px-5">
-    <div class="row stepCard">
+    <div class="row stepCard d-md-none d-block">
         <!-- STEPPER -->
         <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
             {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
@@ -64,7 +64,7 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    <div class="row">
+    <div class="row pt-md-3">
         <!-- IZQUIERDA -->
         <div class="col-8 viewMobileWidth">
             <h1 class="titleMob">{{ title }}</h1>
