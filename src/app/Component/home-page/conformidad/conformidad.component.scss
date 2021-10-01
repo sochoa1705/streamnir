@@ -150,14 +150,14 @@
                 justify-content: center;
                 align-items: center;
                 margin-right: 50px;
-                cursor: pointer;
-                transition: all 0.3s;
+                // cursor: pointer;
+                // transition: all 0.3s;
                 &.lessMargin {
                     margin-right: 0px;
                 }
-                &:hover {
-                    background: #ffffff;
-                }
+                // &:hover {
+                //     background: #ffffff;
+                // }
                 &.selected {
                     background: #ffffff;
                 }
@@ -417,16 +417,33 @@
         }
     }
     .titleSafety {
-        font-size: 18px;
+        font-size: 14px !important;
     }
     .descripSafety {
-        font-size: 14px;
+        font-size: 12px;
+        text-align: center;
     }
     .rowSafety {
         flex-wrap: wrap;
+        justify-content: space-evenly!important;
         .boxBank {
             margin-right: 0!important;
+            width: 80px!important;
+            padding: 0!important;
+            height: 40px!important;
+            img {
+                width: 80%;
+            }
         }
+        .colMobile {
+            max-width: 43%!important;
+        }
+        .textPaso {
+            font-size: 12px!important;
+        }
+    }
+    .titleConf {
+        font-size: 14px!important;
     }
     .columnSaf.colCenter {
         margin: 10px!important;

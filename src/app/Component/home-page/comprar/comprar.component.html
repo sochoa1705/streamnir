@@ -14,12 +14,12 @@
             <mat-step [stepControl]="firstFormGroup">
                 <form [formGroup]="firstFormGroup">
                     <ng-template matStepLabel>Comprar</ng-template>
-                                <!-- DETALLE DE COBERTURA -->
-            <h2 *ngIf="detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
-            <!-- END DETALLE DE COBERTURA -->
-            <div *ngIf="detalleCobertura">
-                <app-coverage></app-coverage>
-            </div>
+                    <!-- DETALLE DE COBERTURA -->
+                    <h2 *ngIf="detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
+                    <!-- END DETALLE DE COBERTURA -->
+                    <div *ngIf="detalleCobertura">
+                        <app-coverage></app-coverage>
+                    </div>
                     <!-- <mat-form-field appearance="fill">
                         <mat-label>Name</mat-label>
                         <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
@@ -292,7 +292,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6 offset-3 py-4 lessMarginMobile">
+                                            <div class="col-6 offset-3 py-4 lessViewMob">
                                                 <select class="selectBank" placeholder="Selecciona tu banco">
                                                     <option value="">bcp</option>
                                                 </select>
@@ -417,38 +417,41 @@
                             <a href="#" class="btn btn-primary">Go somewhere</a> -->
                         </div>
                     </div>
-                    <div class="row rowMobileCard">
-                        <div class="col-6 viewMobileWidth">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                <label class="form-check-label" for="inlineRadio1">He leído y acepto la <a
+
+                </div>
+                <div class="col-12 ">
+                    <div class="card atribCard">
+                        <div class="row rowMobileCard">
+                            <div class="col-6 viewMobileWidth">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">He leído y acepto la <a
                                         href="">política de protección de datos personales.</a></label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6 viewMobileWidth">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                <label class="form-check-label" for="inlineRadio1">Autorizo el uso de mi Información
+                            <div class="col-6 viewMobileWidth">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">Autorizo el uso de mi Información
                                     para la Publicidad.</label>
+                                </div>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <p>Al realizar esta compra, acepto los <a href="">términos y condiciones de compra</a>, <a href="">condiciones de
+                        <div class="row">
+                            <div class="col-12">
+                                <p>Al realizar esta compra, acepto los <a href="">términos y condiciones de compra</a>, <a href="">condiciones de
                                     reserva</a> y <a href="">documentación de viaje</a> .</p>
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="row rowMobileCard ">
-                        <div class="col-12 contentCenterMobile">
-                            <button (click)="shopEnd()" class="px-5">Comprar</button>
-                        </div>
-                        <div class="clearfix"></div>
                     </div>
                 </div>
-                <div class="clearfix"></div>
+                <div class="row rowMobileCard ">
+                    <div class="col-12 contentCenterMobile">
+                        <button (click)="shopEnd()" class="px-5">Comprar</button>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- END IZQUIERDA -->
