@@ -835,10 +835,6 @@ section {
     flex: 0 !important;
 }
 
-.mat-tab-label-container {
-    //z-index: 0 !important;
-}
-
 .mat-tab-body-wrapper {
     z-index: auto !important;
 }
@@ -1970,6 +1966,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+.atribCard {
+    padding: 0;
+    background: transparent;
+    border: none;
+    overflow: hidden;
+}
+
 @media (max-width: 640px) {
     #ModalBlue {
         .modal-dialog {
@@ -2018,13 +2021,30 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .viewMobileWidth {
         width: 100%!important;
     }
+    .py-5 {
+        padding-top: 2rem !important;
+        padding-bottom: 1rem !important;
+    }
+    .lessViewMob {
+        width: 100%!important;
+        margin: 0!important;
+    }
     .card_pasajero {
         .rowMobileCard {
             display: flex;
             flex-direction: column!important;
+            &.hideMobile {
+                display: none;
+                &.activoBox {
+                    display: flex;
+                }
+            }
         }
         label {
             font-size: 12px!important;
+        }
+        .form-check-label {
+            margin: 0 !important;
         }
     }
     .card-header {
@@ -2128,5 +2148,68 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .titleBodyCober p {
         font-size: 11px!important;
+    }
+    .card {
+        .card-body {
+            .titleAsegurado {
+                font-size: 15px!important;
+            }
+            .fechaAsegurado {
+                font-size: 12px!important;
+            }
+            .descripAsegurado {
+                font-size: 12px!important;
+            }
+            .card-title {
+                font-size: 14px!important;
+                svg {
+                    margin-right: 8px;
+                }
+            }
+        }
+        &.pasajeros {
+            background: transparent;
+            border: none;
+            .card-header {
+                background: transparent;
+                border-bottom: none;
+            }
+            .card-body {
+                background: #FFFFFF;
+                border: 0.5px solid #E4E5E7;
+                box-sizing: border-box;
+                border-radius: 10px;
+            }
+        }
+    }
+    .selectBank {
+        width: 100%;
+    }
+    .agregarAdultoPas {
+        display: flex !important;
+        background: #F21037;
+        border-radius: 5px;
+        justify-content: space-between;
+        align-items: center;
+        .textAgregar {
+            font-family: Montserrat;
+            font-size: 12px;
+            line-height: 18px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.1px;
+            color: #FFFFFF;
+            padding: 10px 10px;
+        }
+    }
+    .atribCard {
+        padding: 18px;
+        background: #FFFFFF;
+        border: 0.5px solid #E4E5E7;
+        box-sizing: border-box;
+        border-radius: 10px;
+    }
+    .selectBank {
+        width: 100%!important;
     }
 }
