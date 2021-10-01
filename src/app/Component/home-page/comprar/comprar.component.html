@@ -13,7 +13,7 @@
         <mat-stepper [linear]="isLinear" #stepper>
             <mat-step [stepControl]="firstFormGroup">
                 <form [formGroup]="firstFormGroup">
-                    <ng-template matStepLabel>Fill out your name</ng-template>
+                    <ng-template matStepLabel>Comprar</ng-template>
                                 <!-- DETALLE DE COBERTURA -->
             <h2 *ngIf="detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
             <!-- END DETALLE DE COBERTURA -->
@@ -29,7 +29,7 @@
                     </div>
                 </form>
             </mat-step>
-            <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+            <mat-step [stepControl]="secondFormGroup" label="Medios de pago">
                 <form [formGroup]="secondFormGroup">
                     <mat-form-field appearance="fill">
                         <mat-label>Address</mat-label>
@@ -42,7 +42,7 @@
                 </form>
             </mat-step>
             <mat-step>
-                <ng-template matStepLabel>Done</ng-template>
+                <ng-template matStepLabel>Datos de pago</ng-template>
                 <p>You are now done.</p>
                 <div>
                     <button mat-button matStepperPrevious>Back</button>
