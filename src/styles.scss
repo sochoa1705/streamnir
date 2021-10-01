@@ -2015,4 +2015,104 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     #carouselSeguros h2 {
         font-size: 14px;
     }
+    .viewMobileWidth {
+        width: 100%!important;
+    }
+    .card_pasajero {
+        .rowMobileCard {
+            display: flex;
+            flex-direction: column!important;
+        }
+        label {
+            font-size: 12px!important;
+        }
+    }
+    .card-header {
+        white-space: inherit!important;
+        line-height: 15px!important;
+        font-size: 11px!important;
+        padding-bottom: 20px;
+        h2 {
+            font-size: 18px!important;
+            line-height: 27px!important;
+        }
+    }
+    .form-control {
+        font-size: 12px;
+    }
+    .contentCenterMobile {
+        display: flex;
+        justify-content: center;
+    }
+    .stepCard {
+        .mat-horizontal-content-container {
+            padding: 0 !important;
+        }
+        h2 {
+            font-size: 18px!important;
+        }
+        p,
+        .columnDest {
+            font-size: 12px!important;
+        }
+    }
+    .titleMob {
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 27px;
+        letter-spacing: 0.18px;
+        padding: 15px 0 10px 0;
+    }
+    .cardPagoMobile {
+        background: transparent;
+        border: none;
+        .card-header {
+            background: transparent;
+            box-shadow: none !important;
+            border-bottom: none;
+        }
+        .card-body {
+            box-shadow: none !important;
+        }
+    }
+    .medioPagoMobile {
+        padding: 0;
+        .cardMob {
+            width: 100%;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            .boxMob {
+                width: 100%;
+            }
+        }
+    }
+    .btnSafe {
+        flex-direction: column;
+        justify-content: flex-start;
+        div {
+            padding-bottom: 20px;
+        }
+    }
+    .textSafMob {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        p {
+            font-size: 11px!important;
+        }
+    }
+    .boxAgencia {
+        margin-top: 0px;
+        .imgBanca {
+            padding-bottom: 0px;
+            img {
+                width: 22%;
+            }
+        }
+    }
+    .lessMarginMobile {
+        padding: 0;
+        margin: 0;
+    }
 }
