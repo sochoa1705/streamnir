@@ -19,7 +19,7 @@ export class ComprarComponent implements OnInit {
   detalleCobertura!: boolean;
   cupon!: boolean;
 
-  selectedPay: string = 'tarjeta';
+  selectedPay: string = 'safety';
   selectedPopup: string = 'agencia';
 
   banca: boolean = true;
@@ -51,6 +51,10 @@ export class ComprarComponent implements OnInit {
     });
   }
 
+  pasajero(){
+    console.log('agtregar pasajero');
+    
+  }
   // createForm() {
   //   this.form = new FormGroup({
   //     tipo: new FormControl('idavuelta'),
