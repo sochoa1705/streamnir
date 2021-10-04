@@ -1,12 +1,38 @@
 <form class="bg-white filtroBox" [formGroup]="form">
     <div class="container bg-white">
         <!-- COMBOS -->
-        <div class="row filter espaciado">
+        <div class="row filter espaciado versionMobile">
             <div class="w-130">
                 <!-- <button class="customers" (click)="customers($event)">10 Pasajero</button> -->
                 <button class="customers">1 Pasajero</button>
             </div>
-            <div class="clearfix"></div>
+            <div class="selectDestino">
+                <div class="iconBandera">
+                    <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <mask id="mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="1" y="1" width="27" height="27">
+                        <path d="M27.5 14.1001C27.5 21.0449 21.694 26.7002 14.5 26.7002C7.30602 26.7002 1.5 21.0449 1.5 14.1001C1.5 7.15532 7.30602 1.5 14.5 1.5C21.694 1.5 27.5 7.15532 27.5 14.1001Z" fill="#C4C4C4" stroke="#E4E5E7"/>
+                        </mask>
+                        <g mask="url(#mask0)">
+                        <rect x="-4.40002" y="1" width="37.8" height="26.2002" fill="url(#pattern0)"/>
+                        </g>
+                        <path d="M14.5 27.4502C22.0849 27.4502 28.25 21.5268 28.25 14.2002C28.25 6.87361 22.0849 0.950195 14.5 0.950195C6.91506 0.950195 0.75 6.87361 0.75 14.2002C0.75 21.5268 6.91506 27.4502 14.5 27.4502Z" stroke="#E4E5E7" stroke-width="0.5"/>
+                        <defs>
+                        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0" transform="translate(-0.0198452) scale(0.0038507 0.00555556)"/>
+                        </pattern>
+                        <image id="image0" width="270" height="180" xlink:href="data:image/png;base64,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"/>
+                        </defs>
+                        </svg>
+                </div>
+                <select class="form-select selectSeguro" aria-label="Default select example">
+                    <option selected>PE</option>
+                    <option value="1">(EU) Europa</option>
+                    <option value="2">América Latina y Caribe</option>
+                    <option value="3">EEUU y Canadá</option>
+                    <option value="4">Asía, África y Oceanía</option>
+                    <option value="5">Todo el mundo</option>
+                </select>
+            </div>
         </div>
         <!-- END COMBOS -->
 
@@ -14,23 +40,10 @@
         <div class="portletFiltro">
             <div class="rowFiltro">
                 <!-- ORIGEN -->
-                <div class="columnFiltro flexCero width110">
+                <div class="columnFiltro flexCero width110 boxHideM">
                     <div class="iconBandera">
-                        <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <mask id="mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="1" y="1" width="27" height="27">
-                            <path d="M27.5 14.1001C27.5 21.0449 21.694 26.7002 14.5 26.7002C7.30602 26.7002 1.5 21.0449 1.5 14.1001C1.5 7.15532 7.30602 1.5 14.5 1.5C21.694 1.5 27.5 7.15532 27.5 14.1001Z" fill="#C4C4C4" stroke="#E4E5E7"/>
-                            </mask>
-                            <g mask="url(#mask0)">
-                            <rect x="-4.40002" y="1" width="37.8" height="26.2002" fill="url(#pattern0)"/>
-                            </g>
-                            <path d="M14.5 27.4502C22.0849 27.4502 28.25 21.5268 28.25 14.2002C28.25 6.87361 22.0849 0.950195 14.5 0.950195C6.91506 0.950195 0.75 6.87361 0.75 14.2002C0.75 21.5268 6.91506 27.4502 14.5 27.4502Z" stroke="#E4E5E7" stroke-width="0.5"/>
-                            <defs>
-                            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                            <use xlink:href="#image0" transform="translate(-0.0198452) scale(0.0038507 0.00555556)"/>
-                            </pattern>
-                            <image id="image0" width="270" height="180" xlink:href="data:image/png;base64,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"/>
-                            </defs>
-                            </svg>
+                        <img src="./assets/_peru.png" alt="">
+
                     </div>
                     <select class="form-select marginRight10 selectSeguro" aria-label="Default select example">
                         <option selected>PE</option>

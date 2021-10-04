@@ -1159,22 +1159,31 @@ section {
     justify-content: end;
 }
 
+.contentSecuritySeg {
+    padding: 10px 0 20px 0;
+}
+
 .box-container .box-content .portlet-der .contentSecurity,
-.box-container .box-content .portlet-der .contentSecurity .rowContent {
+.box-container .box-content .portlet-der .contentSecurity .rowContent,
+.contentSecuritySeg,
+.contentSecuritySeg .rowContent {
     display: flex;
 }
 
-.box-container .box-content .portlet-der .contentSecurity .rowContent {
+.box-container .box-content .portlet-der .contentSecurity .rowContent,
+.contentSecuritySeg .rowContent {
     flex-wrap: wrap;
     align-items: center;
 }
 
-.box-container .box-content .portlet-der .contentSecurity .rowContent img {
+.box-container .box-content .portlet-der .contentSecurity .rowContent img,
+.contentSecuritySeg .rowContent img {
     width: 38px;
     margin-right: 10px;
 }
 
-.box-container .box-content .portlet-der .contentSecurity .rowContent .title {
+.box-container .box-content .portlet-der .contentSecurity .rowContent .title,
+.contentSecuritySeg .rowContent .title {
     font-family: Open Sans;
     font-style: normal;
     font-weight: bold;
@@ -1188,7 +1197,8 @@ section {
     flex: 1 1 100%;
 }
 
-.box-container .box-content .portlet-der .contentSecurity .rowContent .subtitle {
+.box-container .box-content .portlet-der .contentSecurity .rowContent .subtitle,
+.contentSecuritySeg .rowContent .subtitle {
     font-family: Montserrat;
     font-style: normal;
     font-weight: 300;
@@ -1385,6 +1395,47 @@ section {
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-input[type=radio],
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-label {
     cursor: pointer;
+}
+
+.optionSel {
+    display: flex;
+    flex: 1 1 100%;
+    .optionLeft {
+        border: 0.5px solid #E4E5E7;
+        box-sizing: border-box;
+        border-radius: 5px 0 0 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 15px;
+        height: 47px;
+    }
+    .optionRight {
+        border: 0.5px solid #E4E5E7;
+        box-sizing: border-box;
+        border-radius: 0 5px 5px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 15px;
+        height: 47px;
+    }
+    .form-check-input {
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        min-width: 24px;
+        margin-left: 0px;
+    }
+    .form-check-inline {
+        margin-right: 0;
+    }
+}
+
+.form-check-inline {
+    .form-check-label {
+        padding-bottom: 0px;
+    }
 }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .optionLeft {
@@ -1691,6 +1742,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .filtroBox {
     overflow: hidden;
+    border: 1px solid #E4E5E7;
 }
 
 .postCard {
@@ -1787,6 +1839,20 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     transform: rotate(180deg);
 }
 
+.textContactenos {
+    font-family: Montserrat;
+    font-size: 14px;
+    line-height: 21px;
+    /* or 150% */
+    text-align: justify;
+    letter-spacing: 0.1px;
+    color: #4B4B4B;
+}
+
+.selectDestino {
+    display: none;
+}
+
 @media (max-width: 640px) {
     .narginColumn {
         margin-right: 0px;
@@ -1818,6 +1884,17 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+}
+
+.versionMobile {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    .selectDestino {
+        display: none;
+        flex: 1 1 100%;
+        padding-right: 0 !important;
     }
 }
 
@@ -1988,6 +2065,62 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     justify-content: center;
 }
 
+.form-check-inline {
+    display: flex;
+    align-items: center;
+    .form-check-input {
+        margin-right: 10px;
+        margin-bottom: 5px;
+    }
+}
+
+.colFono {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.accordion-header {
+    border-bottom: 1px solid #E4E5E7;
+}
+
+.accordion-body {
+    border-bottom: 1px solid #E4E5E7;
+    .textAcor {
+        font-family: Montserrat;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        color: #83898F;
+    }
+    .text-end {
+        font-family: Montserrat;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        color: #83898F;
+    }
+    .price_old {
+        text-decoration: line-through red;
+        padding-right: 10px;
+    }
+    .price_new {}
+    .textDesc,
+    .price_Desc {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        color: #009AED;
+    }
+}
+
+.totalItem {
+    margin: 1rem 0.5rem;
+}
+
 @media (max-width: 640px) {
     #ModalBlue {
         .modal-dialog {
@@ -2070,6 +2203,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         h2 {
             font-size: 18px!important;
             line-height: 27px!important;
+            padding-bottom: 7px;
+        }
+        span {
+            font-size: 11px !important;
         }
     }
     .form-control,
@@ -2243,14 +2380,57 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
     }
     .mat-horizontal-stepper-header-container {
-        padding: 15px 0 0 0!important;
         margin-left: -15px!important;
         margin-right: -15px!important;
+    }
+    .mat-step-header {
+        padding-top: 20px !important;
     }
     .iconFlechaSup {
         display: block;
         &.activeIcon {
             transform: rotate(0deg);
         }
+    }
+    .versionMobile {
+        .selectDestino {
+            display: flex;
+            .selectSeguro {
+                text-indent: 40px;
+            }
+        }
+    }
+    .contentSecuritySeg .vermovil {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    .hideViewMobile {
+        display: none;
+    }
+    .mat-stepper-horizontal {
+        background: #f6f7f9;
+        .mat-horizontal-stepper-header-container {
+            background: #ffffff;
+        }
+    }
+    .card_ .option {
+        margin-bottom: 20px;
+        flex-wrap: nowrap !important;
+        height: 70px;
+        .dot {
+            min-width: 20px;
+        }
+        .py-4 {
+            padding-top: 0!important;
+            padding-bottom: 0!important;
+        }
+    }
+    .textEmision {
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.5px;
+        color: #DF0C30;
     }
 }
