@@ -1,5 +1,5 @@
-:host ::ng-deep .mat{
-    &-step-header .mat-step-icon-selected{
+:host ::ng-deep .mat {
+    &-step-header .mat-step-icon-selected {
         background: #B50A27!important;
         color: white;
         border: 1px solid #B50A27!important;
@@ -9,14 +9,13 @@
         font-family: Montserrat;
         font-weight: 500!important;
     }
-    &-step-header .mat-step-label{
+    &-step-header .mat-step-label {
         color: #CFD1D3;
-
-        &.mat-step-label-active{
+        &.mat-step-label-active {
             color: #B50A27;
         }
     }
-    &-step-header .mat-step-icon{
+    &-step-header .mat-step-icon {
         background-color: transparent;
         color: #CFD1D3;
         border: 1px solid #CFD1D3;
@@ -25,20 +24,19 @@
         font-size: 12px;
         font-family: Montserrat;
         font-weight: 500!important;
-
     }
-    &-horizontal-stepper-header{
+    &-horizontal-stepper-header {
         flex-direction: column;
         width: 30%;
         padding: 0;
     }
-    &-stepper-horizontal-line{
+    &-stepper-horizontal-line {
         height: 2px;
         border: 0!important;
         margin: 0 -30px;
         /* min-width: 32px; */
-        margin-top: -40px;
-        background: linear-gradient(90deg, rgba(181,10,39,1) 10%, rgba(207,209,211,1) 100%);
+        margin-top: -20px;
+        background: linear-gradient(90deg, rgba(181, 10, 39, 1) 10%, rgba(207, 209, 211, 1) 100%);
     }
 }
 
@@ -60,7 +58,7 @@ h1 {
 h2 {
     color: #4b4b4b;
     font-family: "Open Sans";
-    font-weight: bold;
+    font-weight: 400;
     font-size: 24px;
 }
 
@@ -216,12 +214,13 @@ h2 {
         font-weight: 600;
         z-index: 1;
         white-space: pre;
-        line-height: 53px;
+        line-height: 36px;
         h2 {
             color: #4b4b4b;
             font-family: "Open Sans";
             font-size: 24px;
             font-weight: bold;
+            margin-bottom: 0;
         }
         span {
             color: #4b4b4b;
@@ -421,6 +420,9 @@ h2 {
         line-height: 21px;
         letter-spacing: 0.1px;
         color: #4b4b4b;
+        strong {
+            color: #b50a27;
+        }
     }
 }
 
@@ -468,7 +470,7 @@ input[type="checkbox"]+label {
     font-weight: normal;
     a {
         color: #009aed;
-        font-weight: normal;
+        font-weight: 600;
         // &:hover{
         //     text-decoration: underline;
         // }
@@ -515,6 +517,16 @@ p {
     font-family: "Montserrat";
     a {
         color: #009aed;
-        font-weight: normal;
+        font-weight: 600;
+    }
+}
+
+@media (max-width: 640px) {
+    .card {
+        &-body {
+            a {
+                font-size: 12px;
+            }
+        }
     }
 }
