@@ -9,8 +9,7 @@
     </div>
 </ng-template>
 <div #adultoCdr style="display: none;">
-    <a (click)="pasajeroClose()">cerrar</a>
-    HOLA MUNDOI
+    <a (click)="pasajeroClose()">cerrar</a> HOLA MUNDOI
 </div>
 <div class="container-fluid pb-4 px-5">
     <div class="row stepCard d-md-none d-block">
@@ -357,7 +356,54 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <div class="row">
+                        <div class="col-12 ">
 
+                            <div *ngIf="detailPay == 'safe'; else detail" class="accordion" id="accordionPanelsStayOpenExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                        <a class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            Ver detalles
+                                        </a>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <span class="textAcor">1 Adulto(s)
+                                                    </span>
+                                                </div>
+                                                <div class="col-6 text-end">
+                                                    <span class="price_old">PEN 370,35</span>
+                                                    <span class="price_new">PEN 314,80</span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <span class="textDesc">Descuento
+                                                    </span>
+                                                </div>
+                                                <div class="col-5 text-end">
+                                                    <span class="price_Desc">PEN -55,55</span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row totalItem">
+                                        <div class="col-7">
+                                            <span class="price_end">TOTAL A PAGAR</span>
+                                        </div>
+                                        <div class="col-5 text-end">
+                                            $<span class="price_end_number">314.80</span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </form>

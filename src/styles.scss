@@ -1742,7 +1742,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .filtroBox {
     overflow: hidden;
-    border: 1px solid #E4E5E7;
+    //border: 1px solid #E4E5E7;
 }
 
 .postCard {
@@ -2432,5 +2432,23 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         line-height: 18px;
         letter-spacing: 0.5px;
         color: #DF0C30;
+    }
+    .card.padCard {
+        padding: 10px 25px !important;
+        .rowCard {
+            flex-wrap: wrap;
+            &:first-child {
+                padding-bottom: 10px !important;
+            }
+        }
+        .columnCard {
+            font-size: 12px!important;
+            &.fontOpen {
+                font-size: 14px !important;
+            }
+            &:last-child {
+                margin-left: 30px!important;
+            }
+        }
     }
 }
