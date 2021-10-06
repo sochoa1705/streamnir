@@ -4,10 +4,37 @@
     </div>
 </ng-container>
 <ng-template #filtersafe>
-    <div class="d-md-block d-none">
+    <!-- <div class="d-md-block d-none">
         <app-filtersafe></app-filtersafe>
+    </div> -->
+
+    <div class="d-flex flex-row bg-white flex-column py-3 px-5 boxFilter hideMov">
+        <div class="d-flex flex-row">
+            <a href="#"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M5.65381 1.07581L2.15933 4.57792L5.65381 8.08003L4.578 9.15584L7.51402e-05 4.57792L4.578 -4.70252e-08L5.65381 1.07581Z"
+                    fill="#B50A27" />
+            </svg>
+            Vuelve a la página anterior</a>
+        </div>
+        <div class="d-flex flex-row justify-content-evenly py-3 bodyFilter">
+            <div class="d-flex align-items-center">
+                <img src="./assets/_peru.png" alt=""> PE
+            </div>
+            <div class="d-flex align-items-center">
+                <img src="./assets/origen.png" alt=""> (EU) Europa
+            </div>
+            <div class="d-flex align-items-center">
+                <img src="./assets/calendar.png" alt=""> 08 / 07 / 2022 . 15 / 07 / 2022 (8 días)
+            </div>
+            <div class="d-flex align-items-center textBold">
+                <img src="./assets/user.png" alt=""> 1 Pasajero
+            </div>
+        </div>
     </div>
 </ng-template>
+
+
 <div #adultoCdr style="display: none;">
     <a (click)="pasajeroClose()">cerrar</a> HOLA MUNDOI
 </div>

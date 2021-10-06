@@ -39,7 +39,8 @@
         background: linear-gradient(90deg, rgba(181, 10, 39, 1) 10%, rgba(207, 209, 211, 1) 100%);
     }
 }
-.adultocdr{
+
+.adultocdr {
     display: block !important;
     background: red;
     color: white;
@@ -48,6 +49,7 @@
     position: absolute;
     z-index: 1;
 }
+
 .mat-stepper-horizontal {
     margin-top: 8px;
 }
@@ -61,6 +63,8 @@ h1 {
     font-family: "Open Sans";
     font-weight: bold;
     font-size: 24px;
+    line-height: 36px;
+    padding-bottom: 10px;
 }
 
 h2 {
