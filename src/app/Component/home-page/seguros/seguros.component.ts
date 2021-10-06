@@ -17,8 +17,7 @@ export class SegurosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // console.log(this.dataPagePresenterService.data.sections[0].id === 0);
-    
+    // console.log(this.dataPagePresenterService.data.sections[0].id === 0)
   }
 
 }

@@ -15,9 +15,9 @@ export class FooterComponent implements OnInit {
   @Input() addrees!: string;
   @Input() libro!: string;
   @Input() linkLibro!: string;
-  
+
   constructor() { }
-  
+
   showMenuProd: Boolean = true;
   showProducto() {
     this.showMenuProd = this.showMenuProd ? false : true;
