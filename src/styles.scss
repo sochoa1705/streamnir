@@ -1902,6 +1902,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     width: 950px !important;
 }
 
+.hideDesktop {
+    display: none !important;
+}
+
 // MODAL BLUE
 #ModalBlue {
     .modal-dialog {
@@ -2119,6 +2123,22 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .totalItem {
     margin: 1rem 0.5rem;
+}
+
+.boxFilter {
+    .bodyFilter {
+        font-family: Montserrat;
+        font-size: 16px;
+        line-height: 18px;
+        color: #4B4B4B;
+        img {
+            margin-right: 10px;
+        }
+        .textBold {
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+    }
 }
 
 @media (max-width: 640px) {
@@ -2450,5 +2470,183 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 margin-left: 30px!important;
             }
         }
+    }
+    .boxBotones {
+        gap: 10px;
+        .btnMovil {
+            background: #FFFFFF;
+            border: 1px solid #E4E5E7;
+            box-sizing: border-box;
+            border-radius: 5px;
+            font-family: Montserrat;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            img {
+                margin-right: 7px;
+            }
+        }
+    }
+    .boxViaje {
+        gap: 10px;
+        font-family: Montserrat;
+        img {
+            padding: 0 5px;
+        }
+        .title {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+        }
+        .subtitle {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+        }
+    }
+    .boxComprar {
+        .precio {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 36px;
+            color: #4B4B4B;
+        }
+        .descrip {
+            font-family: Montserrat;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+        }
+        .btnDetalles {
+            font-family: Montserrat;
+            font-size: 12px;
+            line-height: 18px;
+            text-align: center;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            background: #F7F7F7;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 0px 20px;
+            margin-right: 15px;
+        }
+        button {
+            width: 100%;
+        }
+    }
+    .boxConveniente {
+        font-family: Montserrat;
+        .title {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 24px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.15px;
+            color: #4B4B4B;
+        }
+        label {
+            font-size: 12px;
+            line-height: 18px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.4px;
+            color: #4B4B4B;
+            padding-bottom: 0;
+            font-weight: normal;
+        }
+        .flex-row {
+            border-bottom: 1px solid #E4E5E7;
+            &:first-child {
+                padding: 1rem 0 !important;
+            }
+            &:nth-last-child(-n+2) {
+                border-bottom: none;
+            }
+        }
+        button {
+            width: 80%;
+        }
+        .btn-close {
+            width: 12px;
+        }
+    }
+    .boxFlights {
+        .equipajes {
+            & span:before {
+                content: none !important;
+            }
+        }
+        .card-body {
+            .col-9,
+            .col-3 {
+                width: 100% !important;
+            }
+            .border-start {
+                border-left: none;
+            }
+        }
+    }
+    .boxModalDetalle {
+        .header {
+            border-bottom: 1px solid #E4E5E7;
+            margin-bottom: 10px;
+        }
+        .price {
+            align-items: baseline;
+            h2 {
+                font-family: Open Sans;
+                font-weight: bold;
+                font-size: 30px;
+                line-height: 36px;
+                text-align: center;
+                color: #4B4B4B;
+            }
+            span {
+                font-family: Montserrat;
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 15px;
+                letter-spacing: 0.1px;
+                color: #4B4B4B;
+            }
+        }
+        .descrip span {
+            font-family: Montserrat;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+        }
+        .price {
+            font-family: Montserrat;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+        }
+        .priceMont {
+            font-family: Montserrat;
+            font-weight: bold;
+            font-size: 25px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+        }
+    }
+    .hideMov {
+        display: none!important;
+    }
+    .hideDesktop {
+        display: flex !important;
     }
 }
