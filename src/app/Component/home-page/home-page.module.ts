@@ -30,7 +30,6 @@ import { ConformidadModule } from './conformidad/conformidad.module';
     ToolbarModule,
     PreFooterModule,
     FooterModule,
-    HttpClientModule,
     GoogleMapsModule,
     ComprarModule,
     ConformidadModule,
