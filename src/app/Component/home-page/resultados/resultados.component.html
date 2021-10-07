@@ -454,14 +454,36 @@
         <!-- END LEFT -->
 
         <!-- CENTER -->
-        <div class="d-flex w-100 boxImagen">
+        <div class="d-flex w-100 boxImagen hideDesktop">
             <img height="13px" src="./assets/resultado/img-fondo.png" alt="">
         </div>
         <div class="col-sm-12 col-md-6 col-lg-6 pt-3 boxResult">
             <div class="row hideMov">
                 <div class="col-12">
-                    <mat-tab-group mat-stretch-tabs (click)="tab($event)">
-                        <mat-tab label="Precio por aerolínea">Precio por aerolínea</mat-tab>
+                    <!-- <mat-tab-group mat-stretch-tabs (click)="tab($event)"></mat-tab-group> -->
+                    <mat-tab-group mat-stretch-tabs>
+                        <mat-tab label="Precio por aerolínea">
+                            <div class="d-flex flex-column">
+                                <div class="row">
+                                    <div class="col">Aerolíneas</div>
+                                    <div class="col">Directo</div>
+                                    <div class="col">1 escala</div>
+                                    <div class="col">2 o más escalas</div>
+                                </div>
+                                <div class="row">
+                                    <div class="d-flex col">
+                                        <div class="col"><img height="13px" src="./assets/comprar/company.png" alt=""></div>
+                                        <div class="col">LAN Airlines</div>
+                                    </div>
+                                    <div class="col"></div>
+                                    <div class="col">$9,689</div>
+                                    <div class="col"></div>
+                                </div>
+                            </div>
+
+
+
+                        </mat-tab>
                         <mat-tab label="Precios +/- 3 días">Precios +/- 3 días</mat-tab>
                         <mat-tab label="Tendencia de precios">Tendencia de precios</mat-tab>
                     </mat-tab-group>
