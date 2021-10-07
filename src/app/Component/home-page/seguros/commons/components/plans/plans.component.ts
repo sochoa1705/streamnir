@@ -42,9 +42,8 @@ export class PlansComponent implements OnInit {
         "TipoModalidad": "1"
       }
     }
-    console.log('Hola')
     this.coverageService.getCoverage(payload).subscribe(
-      data => console.log(data),
+      data => console.log(data['Resultado']),
       err => console.log(err),
       () => console.log('Ciudades cargadas')
     )
