@@ -2085,7 +2085,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 .accordion-header {
-    border-bottom: 1px solid #E4E5E7;
+    //border-bottom: 1px solid #E4E5E7;
 }
 
 .accordion-body {
@@ -2139,6 +2139,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             letter-spacing: 0.5px;
         }
     }
+}
+
+.titleMob {
+    line-height: 36px;
+    padding-bottom: 10px;
 }
 
 @media (max-width: 640px) {
@@ -2353,6 +2358,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 border-radius: 10px;
             }
         }
+        .py-4 {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
     }
     .selectBank {
         width: 100%;
@@ -2543,7 +2552,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             width: 100%;
         }
     }
-    .boxConveniente {
+    .boxConveniente,
+    .boxMoneda {
         font-family: Montserrat;
         .title {
             font-weight: 600;
@@ -2600,6 +2610,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .header {
             border-bottom: 1px solid #E4E5E7;
             margin-bottom: 10px;
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 24px;
+            align-items: center;
+            letter-spacing: 0.15px;
         }
         .price {
             align-items: baseline;
@@ -2625,6 +2642,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 12px;
             line-height: 18px;
             letter-spacing: 0.1px;
+            font-weight: 500;
         }
         .price {
             font-family: Montserrat;
@@ -2642,6 +2660,232 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             letter-spacing: 0.1px;
             color: #4B4B4B;
         }
+    }
+    #modalConveniente,
+    #modalMoneda {
+        .modal-body {
+            padding: 0rem 1rem 0rem 1rem;
+        }
+    }
+    #modalViajes {
+        .header {
+            border-bottom: 1px solid #E4E5E7;
+            .title {
+                font-family: Montserrat;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 24px;
+                letter-spacing: 0.15px;
+                color: #4B4B4B;
+            }
+        }
+        .modal-body {
+            padding: 0;
+            .boxTipoViaje {
+                gap: 30px;
+            }
+            .tipo {
+                gap: 15px;
+            }
+            .titleTramo {
+                font-family: Montserrat;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 24px;
+                letter-spacing: 0.15px;
+                color: #4B4B4B;
+                padding-left: 30px;
+            }
+            .agregaTramo {
+                font-family: Montserrat;
+                font-weight: 300;
+                font-size: 10px;
+                line-height: 20px;
+                color: #222222;
+                margin-left: 30px;
+                padding: 10px 10px 10px 0;
+                cursor: pointer;
+                transition: all 0.3s;
+                width: 110px;
+            }
+            .btnTipoViaje {
+                background: #FFFFFF;
+                border: 1px solid #E4E5E7;
+                box-sizing: border-box;
+                border-radius: 5px;
+                font-family: Montserrat;
+                font-size: 10px;
+                line-height: 24px;
+                height: 33px;
+                align-items: center;
+                letter-spacing: 0.5px;
+                text-transform: capitalize;
+                color: #4B4B4B;
+                cursor: pointer;
+                transition: all 0.3s;
+                padding: 0 15px;
+                &:hover {
+                    background: #F7F7F7;
+                }
+            }
+            .contentViaje {
+                width: 100%;
+                padding: 10px 30px 0px 10px;
+                .iconViaje {
+                    width: 70px;
+                }
+                .inputViaje {
+                    input {
+                        margin-bottom: 0 !important;
+                        height: 35px;
+                        font-size: 10px !important;
+                    }
+                }
+                .btnConfirm {
+                    background: #DF0C30;
+                    border-radius: 3px;
+                    width: 80%;
+                    font-family: Montserrat;
+                    font-weight: 600;
+                    font-size: 12px;
+                    line-height: 18px;
+                    letter-spacing: 0.5px;
+                    height: 35px;
+                    color: #FFFFFF;
+                    cursor: pointer;
+                    margin-bottom: 15px;
+                }
+            }
+        }
+    }
+    #modalTwoPasajero {
+        .header {
+            border-bottom: 0.5px solid #E4E5E7;
+        }
+        .modal-body {
+            padding: 0 20px;
+        }
+        .title {
+            font-family: Montserrat;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 24px;
+            letter-spacing: 0.15px;
+            color: #4B4B4B;
+        }
+        .boxTwoPasajero {
+            border-bottom: 0.5px solid #E4E5E7;
+            .iconTwo {
+                width: 40px;
+            }
+            .text1 {
+                font-family: Montserrat;
+                font-size: 13px;
+                line-height: 18px;
+                letter-spacing: 0.4px;
+                color: #4B4B4B;
+            }
+            .text2 {
+                font-family: Montserrat;
+                font-weight: 300;
+                font-size: 10px;
+                line-height: 15px;
+                letter-spacing: 0.25px;
+                color: #4B4B4B;
+            }
+            .number {
+                font-family: Montserrat;
+                gap: 10px;
+                .btnNWhite {
+                    border: 0.5px solid #DF0C30;
+                    box-sizing: border-box;
+                    border-radius: 3px;
+                    font-weight: 600;
+                    font-size: 14px;
+                    color: #83898F;
+                    width: 22.5px;
+                    height: 22.5px;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .textBtn {
+                    font-weight: 600;
+                    font-size: 12px;
+                    line-height: 24px;
+                    letter-spacing: 0.5px;
+                    color: #4B4B4B;
+                    width: 22.5px;
+                    height: 22.5px;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .btnNRed {
+                    background: #DF0C30;
+                    border-radius: 3px;
+                    font-weight: 600;
+                    font-size: 14px;
+                    color: #FFFFFF;
+                    width: 22.5px;
+                    height: 22.5px;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+        button {
+            width: 80%;
+        }
+    }
+    #modalFiltro {
+        .modal-body {
+            padding: 0;
+        }
+        .accordion-item,
+        .accordion-button {
+            background-color: #ffffff !important;
+            font-size: 14px !important;
+        }
+        .title {
+            font-family: Montserrat;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 24px;
+            align-items: center;
+            letter-spacing: 0.15px;
+            color: #4B4B4B;
+        }
+        .btnFiltro {
+            border: 1px solid #506370;
+            box-sizing: border-box;
+            border-radius: 10px;
+            font-family: Montserrat;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #506370;
+            padding: 0px 15px;
+            height: 35px;
+        }
+        .accordion-body span {
+            font-size: 12px !important;
+            font-weight: normal !important;
+            strong {
+                font-size: 12px !important;
+                font-weight: normal !important;
+            }
+        }
+    }
+    .boxImagen {
+        padding: 20px 10px 0 10px;
+        img {
+            width: 100%;
+            height: 110px;
+            border-radius: 10px;
+        }
+    }
+    .boxResult {
+        padding-top: 10px !important;
     }
     .hideMov {
         display: none!important;

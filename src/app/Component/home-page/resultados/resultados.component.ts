@@ -14,6 +14,12 @@ export class ResultadosComponent implements OnInit {
   ];
   constructor() { }
 
+  id:any = "tabIda";
+  showOption(ids:any) {
+    this.id = ids;
+    console.log(this.id);
+  }
+
   ngOnInit(): void {
   }
 
