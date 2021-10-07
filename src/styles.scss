@@ -815,11 +815,19 @@ section {
 .portletFiltro .rowFiltro .columnFiltro {
     flex: 1 1 100%;
     padding: 10px 0;
+    position: relative;
+    svg {
+        position: absolute;
+        left: 8px;
+    }
 }
 
 .portletFiltro .rowFiltro .columnButton {
     padding: 10px 0;
     min-width: 150px;
+    button {
+        height: 40px;
+    }
 }
 
 .portletFiltro .rowFiltro .columnFiltro .iconCalendar {
@@ -873,6 +881,8 @@ section {
 .portletFiltro .rowFiltro .columnFiltro button {
     letter-spacing: 0.5px;
     max-width: 150px;
+    height: 40px;
+    margin-left: 10px;
 }
 
 .form-group.hidden {
@@ -1887,6 +1897,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         flex-wrap: nowrap;
         padding: 20px 0 0 0;
         border-bottom: 0.5px solid #CFD1D3;
+        position: relative;
         &.footer {
             border-bottom: none;
             padding-top: 5px;
@@ -1902,6 +1913,36 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             .column {
                 text-align: center;
             }
+        }
+        .valorHor {
+            position: absolute;
+            top: 72%;
+            border-top: 1px dashed #CFD1D3;
+            left: 0;
+            width: calc(100% - 185px);
+            font-family: Montserrat;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            z-index: 4;
+        }
+        .anioVertical {
+            position: absolute;
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            left: 50%;
+            top: -10px;
+            height: 100%;
+            border-left: 1px solid #E4E5E7;
+            padding-left: 10px;
+            z-index: 2;
         }
         .gLeft {
             width: 70px;
@@ -1920,6 +1961,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             align-items: flex-end;
             justify-content: center;
             height: 230px;
+            z-index: 3;
             .column {
                 width: 40px;
                 display: flex;
@@ -1977,7 +2019,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
         .gRight {
             font-family: Montserrat;
-            margin: auto 0;
+            //margin: auto 0;
             width: 220px;
             .desde {
                 font-size: 14px;

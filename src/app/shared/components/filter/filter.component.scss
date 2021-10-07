@@ -9,7 +9,6 @@
 //     color: red;
 //     border: 1px solid red;
 // }
-
 svg {
     margin-right: 6px;
     @media (max-width: 768px) {
@@ -49,6 +48,7 @@ svg {
     padding-left: 0;
     text-align: left;
     font-family: "Montserrat";
+    padding-top: 13px;
     @media (max-width: 768px) {
         font-size: 10px;
     }
