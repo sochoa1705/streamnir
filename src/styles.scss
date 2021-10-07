@@ -1849,6 +1849,253 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     color: #4B4B4B;
 }
 
+.boxGraphic {
+    background: #FFFFFF;
+    box-shadow: 0px 1px 8px rgb(0 0 0 / 10%);
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 20px 19px;
+    .row {
+        margin: 0;
+        &.title {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 27px;
+            letter-spacing: 0.18px;
+            color: #4B4B4B;
+        }
+        &.subtitle {
+            font-family: Montserrat;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            gap: 10px;
+        }
+        .circleBlue {
+            background: #009AED;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            padding: 0;
+            margin: 0;
+        }
+    }
+    .contentGraphic {
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 20px 0 0 0;
+        border-bottom: 0.5px solid #CFD1D3;
+        &.footer {
+            border-bottom: none;
+            padding-top: 5px;
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            .gCenter {
+                height: 20px;
+            }
+            .column {
+                text-align: center;
+            }
+        }
+        .gLeft {
+            width: 70px;
+            font-family: Montserrat;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            margin: auto 0;
+        }
+        .gCenter {
+            width: 100%;
+            gap: 5px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 230px;
+            .column {
+                width: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                img {
+                    padding-top: 10px;
+                }
+                &:first-child {
+                    border-radius: 5px 0 0 0;
+                }
+                &:last-child {
+                    border-radius: 0 5px 0 0;
+                }
+                &.gris {
+                    background: #CFD1D3;
+                }
+                &.red {
+                    background: #B50A27;
+                }
+                &.blue {
+                    background: #009AED;
+                }
+                &.height-10 {
+                    height: 10%;
+                }
+                &.height-20 {
+                    height: 20%;
+                }
+                &.height-30 {
+                    height: 30%;
+                }
+                &.height-40 {
+                    height: 40%;
+                }
+                &.height-50 {
+                    height: 50%;
+                }
+                &.height-60 {
+                    height: 60%;
+                }
+                &.height-70 {
+                    height: 70%;
+                }
+                &.height-80 {
+                    height: 80%;
+                }
+                &.height-90 {
+                    height: 90%;
+                }
+                &.height-100 {
+                    height: 100%;
+                }
+            }
+        }
+        .gRight {
+            font-family: Montserrat;
+            margin: auto 0;
+            width: 220px;
+            .desde {
+                font-size: 14px;
+                line-height: 21px;
+                letter-spacing: 0.1px;
+                color: #009AED;
+                padding-bottom: 10px;
+            }
+            .precio {
+                font-weight: bold;
+                font-size: 36px;
+                line-height: 21px;
+                letter-spacing: 0.1px;
+                color: #009AED;
+                padding-bottom: 10px;
+            }
+            .descrip {
+                font-size: 14px;
+                line-height: 21px;
+                letter-spacing: 0.1px;
+                color: #4B4B4B;
+                padding-bottom: 5px;
+            }
+            .line {
+                background: #009AED;
+                height: 3px;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.boxPrecioAero,
+.boxPrecios {
+    background: #FFFFFF;
+    box-shadow: 0px 1px 8px rgb(0 0 0 / 10%);
+    border-radius: 5px;
+    margin-top: 10px;
+    .header {
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: 14px;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
+        height: 46px;
+        margin: 0;
+        text-align: center;
+    }
+    .row {
+        margin: 0;
+        .col {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #E4E5E7;
+            border-left: 1px solid #E4E5E7;
+            color: #4B4B4B;
+            height: 46px;
+            display: flex;
+            justify-content: center;
+            &:first-child {
+                border-left: none;
+                font-weight: bold;
+                font-size: 14px;
+                justify-content: start;
+            }
+            img {
+                padding-right: 10px;
+            }
+            &.green {
+                font-weight: bold;
+                letter-spacing: 0.1px;
+                color: #54D834;
+            }
+            &.red {
+                letter-spacing: 0.1px;
+                color: #B50A27;
+            }
+            &.selected {
+                background: #009AED;
+                font-weight: bold;
+                color: #ffffff;
+            }
+            &.center {
+                justify-content: center !important;
+            }
+        }
+    }
+}
+
+.boxPrecios {
+    .header {
+        font-size: 12px !important;
+        .twoRow {
+            text-align: left;
+            padding-left: 10px;
+            font-weight: normal!important;
+            &:first-child {
+                border-bottom: 1px solid #E4E5E7;
+            }
+            img {
+                margin-left: 10px;
+            }
+        }
+    }
+    .row {
+        .col {
+            font-size: 12px !important;
+            padding: 0;
+            &:first-child {
+                padding-left: 10px;
+            }
+            &.lessPadLeft {
+                padding-left: 0;
+            }
+        }
+    }
+}
+
 .selectDestino {
     display: none;
 }

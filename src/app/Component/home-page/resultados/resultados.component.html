@@ -462,30 +462,228 @@
                 <div class="col-12">
                     <!-- <mat-tab-group mat-stretch-tabs (click)="tab($event)"></mat-tab-group> -->
                     <mat-tab-group mat-stretch-tabs>
-                        <mat-tab label="Precio por aerolínea">
-                            <div class="d-flex flex-column">
-                                <div class="row">
-                                    <div class="col">Aerolíneas</div>
+                        <!-- PRIMER TAB -->
+                        <mat-tab label="Precio por aerolínea" class="tabAero">
+                            <div class="d-flex flex-column boxPrecioAero">
+                                <div class="d-flex align-items-center row header">
+                                    <div class="col center">Aerolíneas</div>
                                     <div class="col">Directo</div>
                                     <div class="col">1 escala</div>
                                     <div class="col">2 o más escalas</div>
                                 </div>
                                 <div class="row">
-                                    <div class="d-flex col">
-                                        <div class="col"><img height="13px" src="./assets/comprar/company.png" alt=""></div>
-                                        <div class="col">LAN Airlines</div>
+                                    <div class="col">
+                                        <img src="./assets/comprar/company.png" alt="">
+                                        <div>LAN Airlines</div>
                                     </div>
                                     <div class="col"></div>
                                     <div class="col">$9,689</div>
                                     <div class="col"></div>
                                 </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="./assets/comprar/company.png" alt="">
+                                        <div>United Airlines</div>
+                                    </div>
+                                    <div class="col"></div>
+                                    <div class="col">$12,376</div>
+                                    <div class="col"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="./assets/comprar/company.png" alt="">
+                                        <div>American Airlines</div>
+                                    </div>
+                                    <div class="col green">$4,216</div>
+                                    <div class="col">$9,689</div>
+                                    <div class="col">$10,135</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="./assets/comprar/company.png" alt="">
+                                        <div>Copa Airlines</div>
+                                    </div>
+                                    <div class="col"></div>
+                                    <div class="col">$12,376</div>
+                                    <div class="col"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="./assets/comprar/company.png" alt="">
+                                        <div>Delta Air Lines</div>
+                                    </div>
+                                    <div class="col"></div>
+                                    <div class="col"></div>
+                                    <div class="col green">$3,898</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="./assets/comprar/company.png" alt="">
+                                        <div>Viva Colombia</div>
+                                    </div>
+                                    <div class="col"></div>
+                                    <div class="col">$9,689</div>
+                                    <div class="col"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="./assets/comprar/company.png" alt="">
+                                        <div>AeroRepublica</div>
+                                    </div>
+                                    <div class="col"></div>
+                                    <div class="col">$9,689</div>
+                                    <div class="col">$10,135</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="./assets/comprar/company.png" alt="">
+                                        <div>Aeroméxico</div>
+                                    </div>
+                                    <div class="col green">$4,216</div>
+                                    <div class="col">$9,689</div>
+                                    <div class="col">$10,135</div>
+                                </div>
                             </div>
-
-
-
+                            <!-- END PRIMER TAB -->
                         </mat-tab>
-                        <mat-tab label="Precios +/- 3 días">Precios +/- 3 días</mat-tab>
-                        <mat-tab label="Tendencia de precios">Tendencia de precios</mat-tab>
+                        <mat-tab label="Precios +/- 3 días">
+                            <!-- SEGUNDO TAB -->
+                            <div class="d-flex flex-column boxPrecios">
+                                <div class="d-flex align-items-center row header">
+                                    <div class="col flex-column align-items-md-start justify-content-evenly">
+                                        <div class="twoRow w-100">Ida<img src="./assets/resultado/flecha-right.png" alt=""></div>
+                                        <div class="twoRow w-100">Vuelta<img src="./assets/resultado/flecha-bottom.png" alt=""></div>
+                                    </div>
+                                    <div class="col">Jue 22/07</div>
+                                    <div class="col">Vie 23/07</div>
+                                    <div class="col">Sáb 24/07</div>
+                                    <div class="col">Dom 25/07</div>
+                                    <div class="col">Lun 26/07</div>
+                                    <div class="col">Mar 27/07</div>
+                                    <div class="col">Mie 28/07</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Vie 30/07</div>
+                                    <div class="col"></div>
+                                    <div class="col green">$1,144</div>
+                                    <div class="col green">$1,144</div>
+                                    <div class="col green">$1,153</div>
+                                    <div class="col">$1,334</div>
+                                    <div class="col">$1,334</div>
+                                    <div class="col">$1,220</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Sab 31/07</div>
+                                    <div class="col selected">$1194</div>
+                                    <div class="col">$1,334</div>
+                                    <div class="col green">$1,144</div>
+                                    <div class="col green">$1,144</div>
+                                    <div class="col">$1,306</div>
+                                    <div class="col green">$1,144</div>
+                                    <div class="col">$1,349</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Dom 01/08</div>
+                                    <div class="col"></div>
+                                    <div class="col green">$1,144</div>
+                                    <div class="col">$1,349</div>
+                                    <div class="col">$1,220</div>
+                                    <div class="col">$1,349</div>
+                                    <div class="col green">$1,144</div>
+                                    <div class="col">$1,334</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Lun 02/08</div>
+                                    <div class="col"></div>
+                                    <div class="col">$1,349</div>
+                                    <div class="col red">$1,476</div>
+                                    <div class="col">$1,214</div>
+                                    <div class="col green">$1,144</div>
+                                    <div class="col">$1,349</div>
+                                    <div class="col">$1,306</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Mar 03/08</div>
+                                    <div class="col"></div>
+                                    <div class="col">$1,334</div>
+                                    <div class="col">$1,334</div>
+                                    <div class="col green">$1,169</div>
+                                    <div class="col green">$1,169</div>
+                                    <div class="col">$1,334</div>
+                                    <div class="col">$1,349</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Mie 04/08</div>
+                                    <div class="col"></div>
+                                    <div class="col red">$1,578</div>
+                                    <div class="col">$1,306</div>
+                                    <div class="col">$1,349</div>
+                                    <div class="col">$1,349</div>
+                                    <div class="col">$1,306</div>
+                                    <div class="col green">$1,144</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Jue 05/08</div>
+                                    <div class="col"></div>
+                                    <div class="col">$1,349</div>
+                                    <div class="col">$1,349</div>
+                                    <div class="col green">$1,153</div>
+                                    <div class="col">$1,334</div>
+                                    <div class="col">$1,349</div>
+                                    <div class="col green">$1,153</div>
+                                </div>
+                            </div>
+                            <!-- END SEGUNDO TAB -->
+                        </mat-tab>
+                        <mat-tab label="Tendencia de precios">
+                            <!-- TERCER TAB -->
+                            <div class="d-flex boxGraphic flex-column">
+                                <div class="row title">Revisa la tendencia de precios</div>
+                                <div class="row align-items-center subtitle">
+                                    <div class="circleBlue"></div>Precio más bajo</div>
+                                <div class="contentGraphic">
+                                    <div class="gLeft">
+                                        $515
+                                    </div>
+                                    <div class="gCenter">
+                                        <div class="column height-10 gris"></div>
+                                        <div class="column height-100 red"></div>
+                                        <div class="column height-80 red"></div>
+                                        <div class="column height-30 red"></div>
+                                        <div class="column height-40 red"></div>
+                                        <div class="column height-50 red"></div>
+                                        <div class="column height-30 blue"><img src="./assets/resultado/plane-white.png" alt=""></div>
+                                        <div class="column height-30 blue"><img src="./assets/resultado/plane-white.png" alt=""></div>
+                                        <div class="column height-30 blue"><img src="./assets/resultado/plane-white.png" alt=""></div>
+                                    </div>
+                                    <div class="gRight">
+                                        <div class="desde">Desde</div>
+                                        <div class="precio">$ 515</div>
+                                        <div class="descrip">Precio más barato para tu vuelo.</div>
+                                        <div class="line"></div>
+                                    </div>
+                                </div>
+                                <div class="contentGraphic footer">
+                                    <div class="gLeft">
+
+                                    </div>
+                                    <div class="gCenter">
+                                        <div class="column">Jul.</div>
+                                        <div class="column">Ago.</div>
+                                        <div class="column">Sep.</div>
+                                        <div class="column">Oct.</div>
+                                        <div class="column">Nov.</div>
+                                        <div class="column">Dic.</div>
+                                        <div class="column">Ene.</div>
+                                        <div class="column">Feb.</div>
+                                        <div class="column">Mar.</div>
+                                    </div>
+                                    <div class="gRight">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END TERCER TAB -->
+                        </mat-tab>
                     </mat-tab-group>
                 </div>
                 <div class="clearfix"></div>
