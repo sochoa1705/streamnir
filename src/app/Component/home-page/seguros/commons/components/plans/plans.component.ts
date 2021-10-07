@@ -45,7 +45,7 @@ export class PlansComponent implements OnInit {
     this.coverageService.getCoverage(payload).subscribe(
       data => console.log(data['Resultado']),
       err => console.log(err),
-      () => console.log('Ciudades cargadas')
+      () => console.log('cobertura')
     )
   }
 

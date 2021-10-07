@@ -1,23 +1,28 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Coverage } from 'src/app/Models/general/coverage';
 import { ENDPOINT_API } from 'src/app/shared/constant';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CoverageService {
+export class DestinyService {
 
   constructor(
     private http: HttpClient
   ) { }
 
+  payload = {
+    "Aplicacion": "Intranet",
+    "CodigoSeguimiento": "Test",
+    "CodigosEntorno": "PROD/NMO/NMO"
+  }
 
-  getCoverage(payload: any): Observable<any> {
-    let url_api = `${environment.urlBase}${ENDPOINT_API.COVERAGE}`;
+
+  getDestiny(payload: any): Observable<any> {
+    let url_api = `${environment.urlBase}${ENDPOINT_API.DESTINY}`;
 
     return this.http.post<any>(url_api, payload, { observe: 'response' }).pipe(
       map((observe: any) => observe['body'])
