@@ -178,7 +178,7 @@ export class FilterComponent implements OnInit {
   }
   ngOnInit(): void {
     this.createForm()
-    this.getListVuelos('lim')
+    //this.getListVuelos('lim')
   }
 
   getListVuelos(e: any) {
@@ -194,8 +194,13 @@ export class FilterComponent implements OnInit {
     )
   }
 
-  autoComplete() {
-    let elemento = this.origen.nativeElement;
+  autoComplete(e:any) {
+    this.citys = [];
+    console.log(e.target);
+    // let elemento = this.origen.nativeElement;
+    let elemento = e.target;
+    console.log(elemento);
+    
     let value = elemento.value;
     if (value.length == 0) {
       elemento.classList.remove('auto');
@@ -225,7 +230,7 @@ export class FilterComponent implements OnInit {
 
   send() {
     console.log(this.form.value);
-    this.route.navigateByUrl('/home/vuelos/resultados');
+    // this.route.navigateByUrl('/home/vuelos/resultados');
   }
 
   // count(valor: number, e: any) {
