@@ -49,7 +49,13 @@ export class PlansACService {
     let url_api = `${environment.urlBase}${ENDPOINT_API.PLANSAC}`;
 
     return this.http.post<any>(url_api, payload, { observe: 'response' }).pipe(
-      map((observe: any) => observe['body'])
+      map((observe: any) => observe['body']['Resultado']),
+      map((e: any) => {
+        return e.map((i: any, index: any) => {
+          i.change = e[index].precioEmision * e[index].tipoCambio
+          return i
+        })
+      })
     )
   }
 }

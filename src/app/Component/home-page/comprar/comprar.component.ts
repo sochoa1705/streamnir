@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { OffersService } from 'src/app/Services/mock/offers.service';
 
 @Component({
@@ -34,6 +34,7 @@ export class ComprarComponent implements OnInit {
 
   constructor(
     public route: Router,
+    private router: ActivatedRoute,
     public offersService: OffersService,
   ) {
     this.current = this.route.getCurrentNavigation()?.extras.state as any

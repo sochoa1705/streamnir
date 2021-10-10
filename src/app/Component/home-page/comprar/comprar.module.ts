@@ -8,6 +8,7 @@ import { FiltersafeModule } from 'src/app/shared/components/filtersafe/filtersaf
 import { CoverageModule } from 'src/app/shared/components/coverage/coverage.module';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [ ComprarComponent ],
@@ -21,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    RouterModule,
   ],
   exports: [ ComprarComponent ]
 })

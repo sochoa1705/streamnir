@@ -18,6 +18,7 @@ import { ResultadosModule } from './resultados/resultados.module';
 import { HomeModule } from './home/home.module';
 import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer.module';
 import { ConformidadModule } from './conformidad/conformidad.module';
+import { LoaderModule } from '../../shared/components/loader/loader.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -34,6 +35,7 @@ import { ConformidadModule } from './conformidad/conformidad.module';
     ComprarModule,
     ConformidadModule,
     ResultadosModule,
+    LoaderModule,
   ],
   exports: [HomePageComponent],
   providers: [OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]

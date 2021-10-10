@@ -2,20 +2,18 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlansComponent } from './plans.component';
 import { CardModule } from 'src/app/shared/components/card/card.module';
-import { CoverageService } from 'src/app/Services/coverage/coverage.service';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PlansACService } from '../../../../../../Services/plansAC/plans-ac.service';
+import { CoverageService } from '../../../../../../Services/coverage/coverage.service';
+import { RouterModule } from '@angular/router';
 @NgModule({
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [PlansComponent],
   imports: [
     CommonModule,
     CardModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
+    RouterModule,
   ],
   exports: [PlansComponent],
-  providers: [CoverageService]
+  providers: [PlansACService, CoverageService]
 })
 export class PlansModule { }
