@@ -26,7 +26,7 @@ export enum ENDPOINT_API {
   BUSINESS_UNIT = 'ObtenerUnidadesNegocio',
 
   // UNIDAD DE NEGOCIOS VENDEDOR
-  BUSINESS_UNIT_SELLER = 'ObtenerUnidadNegocioByVe',
+  BUSINESS_UNIT_SELLER = 'ObtenerUnidadNegocioByVendedor',
 
   // DESTINOS
   DESTINY = 'Destinos',
