@@ -2430,6 +2430,105 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+.boxFlotante {
+    width: 260px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 8px rgb(0 0 0 / 5%);
+    border-radius: 5px;
+    position: absolute;
+    top: 90px;
+    z-index: 2;
+    .boxTwoPasajero {
+        border-bottom: 0.5px solid #E4E5E7;
+        .iconTwo {
+            width: 40px;
+        }
+        .text1 {
+            font-family: Montserrat;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 18px;
+            letter-spacing: 0.4px;
+            color: #4B4B4B;
+        }
+        .text2 {
+            font-family: Montserrat;
+            font-weight: 300;
+            font-size: 10px;
+            line-height: 15px;
+            letter-spacing: 0.25px;
+            color: #4B4B4B;
+        }
+        .number {
+            font-family: Montserrat;
+            gap: 10px;
+            .btnNWhite {
+                border: 0.5px solid #DF0C30;
+                box-sizing: border-box;
+                border-radius: 3px;
+                font-weight: 600;
+                font-size: 14px;
+                color: #83898F;
+                width: 22.5px;
+                height: 22.5px;
+                align-items: center;
+                justify-content: center;
+            }
+            .textBtn {
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 24px;
+                letter-spacing: 0.5px;
+                color: #4B4B4B;
+                width: 22.5px;
+                height: 22.5px;
+                align-items: center;
+                justify-content: center;
+            }
+            .btnNRed {
+                background: #DF0C30;
+                border-radius: 3px;
+                font-weight: 600;
+                font-size: 14px;
+                color: #FFFFFF;
+                width: 22.5px;
+                height: 22.5px;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+    .btnPasajero {
+        button {
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            &.gray {
+                background: #EBEBEB;
+                color: #4B4B4B;
+            }
+        }
+    }
+}
+
+.titleHome {
+    font-size: 24px;
+    font-weight: normal;
+    &.bold {
+        font-weight: bold;
+    }
+    .red {
+        color: #DF0C30;
+    }
+}
+
+.comprarHideTitle {
+    .textTitle {
+        display: none;
+    }
+}
+
 .titleMob {
     line-height: 36px;
     padding-bottom: 10px;

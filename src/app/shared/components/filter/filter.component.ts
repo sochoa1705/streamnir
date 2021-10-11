@@ -78,6 +78,14 @@ export class FilterComponent implements OnInit {
   stateCtrl2 = new FormControl();
   filteredStates: Observable<State[]>;
 
+  
+
+  showOption: Boolean = true;
+  showPasajero() {
+    this.showOption = this.showOption ? false : true;
+  }
+
+
   model1: string | undefined;
   model2: string | undefined;
   states: State[] = [
@@ -232,6 +240,7 @@ export class FilterComponent implements OnInit {
     console.log(this.form.value);
     // this.route.navigateByUrl('/home/vuelos/resultados');
   }
+
 
   // count(valor: number, e: any) {
   //   console.log('HOLA');
