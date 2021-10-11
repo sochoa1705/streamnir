@@ -1,5 +1,5 @@
 <app-tabs></app-tabs>
-<app-aside [slider]="dataPagePresenterService?.data?.aside" [images]="asidePresenterService?.images"></app-aside>
+<app-aside [slider]="dataPagePresenterService.data.aside" [images]="asidePresenterService.images"></app-aside>
 <!-- OFERTAS -->
 <!-- <div class="container">
     <div class="row">
@@ -24,8 +24,8 @@
 <div class="container">
     <div class="row pt-5 pb-md-3">
         <div class="col-12">
-            <ng-container *ngFor="let section of dataPagePresenterService?.data?.sections">
-                <app-title *ngIf="section.section === 'Paquetes'" [title]="section?.title" [title2]="section?.title2">
+            <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+                <app-title *ngIf="section.section === 'Paquetes'" [title]="section.title" [title2]="section.title2">
                 </app-title>
             </ng-container>
         </div>

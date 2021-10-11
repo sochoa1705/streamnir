@@ -36,7 +36,7 @@
 
 
 <div #adultoCdr style="display: none;">
-    <a (click)="pasajeroClose()">cerrar</a> HOLA MUNDOI
+    <a (click)="pasajeroClose()">cerrar</a>
 </div>
 <div class="container-fluid pb-4 px-5">
     <div class="row stepCard d-md-none d-block">
@@ -976,8 +976,8 @@
                                     </span>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <span class="price_old">PEN 370,35</span>
-                                    <span class="price_new">PEN 314,80</span>
+                                    <span class="price_old">PEN {{ current.precioBruto }}</span>
+                                    <span class="price_new">PEN {{ current.DsctoPromcional === null ? '0' : current.DsctoPromcional }}</span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -987,7 +987,7 @@
                                     </span>
                                 </div>
                                 <div class="col-5 text-end">
-                                    <span class="price_Desc">PEN -55,55</span>
+                                    <span class="price_Desc">PEN {{ current.DsctoPromcional === null ? '0' : current.DsctoPromcional }}</span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -998,7 +998,7 @@
                             <span class="price_end">TOTAL A PAGAR</span>
                         </div>
                         <div class="col-5 text-end">
-                            $<span class="price_end_number">314.80</span>
+                            $<span class="price_end_number">{{ current.precioBruto }}</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
