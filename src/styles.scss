@@ -815,11 +815,6 @@ section {
 .portletFiltro .rowFiltro .columnFiltro {
     flex: 1 1 100%;
     padding: 10px 0;
-    //position: relative;
-    svg {
-        position: absolute;
-        left: 8px;
-    }
 }
 
 .portletFiltro .rowFiltro .columnButton {
@@ -2534,6 +2529,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     padding-bottom: 10px;
 }
 
+.boxImgDesktop {
+    margin-bottom: 25px;
+    img {
+        width: 100%;
+        height: 70px;
+        border-radius: 5px;
+    }
+}
+
 @media (max-width: 640px) {
     #ModalBlue {
         .modal-dialog {
@@ -3271,6 +3275,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             height: 110px;
             border-radius: 10px;
         }
+    }
+    .boxImgDesktop {
+        display: none;
     }
     .boxResult {
         padding-top: 10px !important;

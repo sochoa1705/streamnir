@@ -465,10 +465,41 @@ h2 {
             background: white;
             justify-content: flex-end;
             padding: 10px 20px;
+            cursor: pointer;
+            gap: 10px;
+            &::after {
+                content: none;
+            }
+            &.collapsed {
+                img {
+                    transform: rotate(180deg);
+                }
+            }
+            img {
+                transition: all 0.3s;
+            }
         }
     }
     &-button::after {
         margin-left: 10px;
+    }
+    .mgBottom {
+        margin-bottom: 8px;
+    }
+    .txtdet {
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        &.right {
+            text-align: right;
+        }
+    }
+    .separarBox {
+        border-top: 1px solid #E4E5E7;
+        height: 1px;
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
     }
 }
 
@@ -527,6 +558,28 @@ p {
     a {
         color: #009aed;
         font-weight: 600;
+    }
+}
+
+.bCard {
+    .bCardHead {
+        height: 86px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .button {
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+        color: #009AED;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 
