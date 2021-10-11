@@ -17,26 +17,25 @@
         </div>
         <div class="clearfix"></div>
     </div>
-</div> -->  
+</div> -->
 <!-- END OFERTAS -->
 
 <!-- PAQUETES -->
 <div class="container">
     <div class="row pt-5 pb-md-3">
         <div class="col-12">
-            <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+            <h2 class="titleHome"><strong>Paquetes turísticos </strong> ¡Elige ahora tu paquete nacional o internacional!</h2>
+            <!-- <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
                 <app-title *ngIf="section.section === 'Paquetes'" [title]="section.title" [title2]="section.title2">
                 </app-title>
-            </ng-container>
+            </ng-container> -->
         </div>
         <div class="clearfix"></div>
     </div>
 
     <div class="row">
         <div *ngFor="let packb of packagesService.packages" class="col-12 col-md-{{ packb.banner }}">
-            <app-package *ngIf="packb.banner" [image]="packb.image" [label]="packb.label" [banner]="packb.banner"
-                [span]="packb.span" [pack]="packb.pack" [city]="packb.city" [price]="packb.price"
-                [destiny]="packb.destiny"></app-package>
+            <app-package *ngIf="packb.banner" [image]="packb.image" [label]="packb.label" [banner]="packb.banner" [span]="packb.span" [pack]="packb.pack" [city]="packb.city" [price]="packb.price" [destiny]="packb.destiny"></app-package>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -69,9 +68,10 @@
 <div class="container">
     <div class="row mb-4 mt-5">
         <div class="col-12">
-            <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+            <!-- <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
                 <app-title *ngIf="section.section === 'Vuelos'" [title]="section.title"></app-title>
-            </ng-container>
+            </ng-container> -->
+            <h2 class="titleHome">¡Corre y Vuela! con estas <strong>súper ofertas de Vuelos</strong> saliendo <strong> desde Lima</strong></h2>
             <div class="clearfix"></div>
         </div>
     </div>
@@ -89,16 +89,16 @@
 
 <!-- COMPRAR -->
 <div class="container">
-    <div class="row">
+    <h2 class="titleHome bold">¿Por qué comprar en <span class="red">NMVIAJES</span>?</h2>
+    <div class="row comprarHideTitle">
         <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-            <app-title *ngIf="section.section === 'Comprar'" [title]="section.title"></app-title>
+            <app-title class="textTitle" *ngIf="section.section === 'Comprar'" [title]="section.title"></app-title>
             <div *ngIf="section.img" class="col-12 col-md-6 card__content">
                 <img src="./assets/{{ section.img }}" class="d-block w-100">
             </div>
             <div class="col-12 col-md-6">
                 <ng-container *ngIf="section.section === 'Comprar'">
-                    <app-card-info [title]="card.title" [description]="card.description" [image]="card.img"
-                        *ngFor="let card of section.card"></app-card-info>
+                    <app-card-info [title]="card.title" [description]="card.description" [image]="card.img" *ngFor="let card of section.card"></app-card-info>
                 </ng-container>
             </div>
         </ng-container>

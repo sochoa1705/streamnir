@@ -24,7 +24,86 @@
             </div>
             <div class="w-130">
                 <!-- <button class="customers" (click)="customers($event)">10 Pasajero</button> -->
-                <button class="customers">10 Pasajero</button>
+                <button class="customers" (click)="showPasajero()">10 Pasajero</button>
+                <div class="boxFlotante" *ngIf="!showOption">
+                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
+                        <div class="d-flex flex-row iconTwo">
+                            <img height="13px" src="./assets/filter/adulto.png" alt="">
+                        </div>
+                        <div class="d-flex flex-row flex-column w-100">
+                            <div class="d-flex flex-row text1">
+                                Adultos
+                            </div>
+                            <div class="d-flex flex-row text2">
+                                12 o más años
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row number">
+                            <div class="d-flex flex-row btnNWhite">
+                                -
+                            </div>
+                            <div class="d-flex flex-row textBtn">
+                                0
+                            </div>
+                            <div class="d-flex flex-row btnNRed">
+                                +
+                            </div>
+                        </div>
+                    </div>
+                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
+                        <div class="d-flex flex-row iconTwo">
+                            <img height="13px" src="./assets/filter/nino.png" alt="">
+                        </div>
+                        <div class="d-flex flex-row flex-column w-100">
+                            <div class="d-flex flex-row text1">
+                                Niños
+                            </div>
+                            <div class="d-flex flex-row text2">
+                                De 2 - 11 años
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row number">
+                            <div class="d-flex flex-row btnNWhite">
+                                -
+                            </div>
+                            <div class="d-flex flex-row textBtn">
+                                0
+                            </div>
+                            <div class="d-flex flex-row btnNRed">
+                                +
+                            </div>
+                        </div>
+                    </div>
+                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
+                        <div class="d-flex flex-row iconTwo">
+                            <img height="13px" src="./assets/filter/infante.png" alt="">
+                        </div>
+                        <div class="d-flex flex-row flex-column w-100">
+                            <div class="d-flex flex-row text1">
+                                Infantes
+                            </div>
+                            <div class="d-flex flex-row text2">
+                                Menores de 2 años
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row number">
+                            <div class="d-flex flex-row btnNWhite">
+                                -
+                            </div>
+                            <div class="d-flex flex-row textBtn">
+                                0
+                            </div>
+                            <div class="d-flex flex-row btnNRed">
+                                +
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row justify-content-between align-items-center p-3 btnPasajero">
+                        <button class="gray" type="button">Cancelar</button>
+                        <button type="button" (click)="showPasajero()">Listo</button>
+                    </div>
+                </div>
             </div>
             <div class="clearfix"></div>
         </div>
