@@ -75,6 +75,11 @@ export class FiltersafeComponent implements OnInit {
   stateCtrl = new FormControl();
   stateCtrl2 = new FormControl();
 
+  showOption: Boolean = true;
+  showPasajero() {
+    this.showOption = this.showOption ? false : true;
+  }
+  
   model1: string | undefined;
   model2: string | undefined;
   filteredStates: Observable<State[]>;
