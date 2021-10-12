@@ -43,9 +43,9 @@
                                 -
                             </div>
                             <div class="d-flex flex-row textBtn">
-                                0
+                                <input class="inputPasajero" type="text" value="0">
                             </div>
-                            <div class="d-flex flex-row btnNRed">
+                            <div class="d-flex flex-row btnNWhite">
                                 +
                             </div>
                         </div>
@@ -67,9 +67,9 @@
                                 -
                             </div>
                             <div class="d-flex flex-row textBtn">
-                                0
+                                <input class="inputPasajero" type="text" value="0">
                             </div>
-                            <div class="d-flex flex-row btnNRed">
+                            <div class="d-flex flex-row btnNWhite">
                                 +
                             </div>
                         </div>
@@ -91,9 +91,9 @@
                                 -
                             </div>
                             <div class="d-flex flex-row textBtn">
-                                0
+                                <input class="inputPasajero" type="text" value="0">
                             </div>
-                            <div class="d-flex flex-row btnNRed">
+                            <div class="d-flex flex-row btnNWhite">
                                 +
                             </div>
                         </div>
@@ -115,8 +115,7 @@
                 <!-- ORIGEN -->
                 <div class="columnFiltro narginColumn">
                     <div class="iconCalendar" style="display: none;">
-                        <svg class="" width="21" height="15" viewBox="0 0 21 15" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg class="" width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M20.5858 13.8566H0.414201C0.185479 13.8566 0 14.042 0 14.2708C0 14.4996 0.185479 14.685 0.414201 14.685H20.5858C20.8145 14.685 21 14.4996 21 14.2708C21 14.042 20.8145 13.8566 20.5858 13.8566Z"
                                 fill="#009AED" />
@@ -126,9 +125,7 @@
                         </svg>
                     </div>
 
-                    <input matInput aria-label="State" [matAutocomplete]="auto" (keyup)="autoComplete($event)"
-                        (focus)="autoComplete($event)" (blur)="autoComplete($event)" #inputOrigen
-                        class="form-control animated fadeIn" formControlName="origen" placeholder="Origen">
+                    <input matInput aria-label="State" [matAutocomplete]="auto" (keyup)="autoComplete($event)" (focus)="autoComplete($event)" (blur)="autoComplete($event)" #inputOrigen class="form-control animated fadeIn" formControlName="origen" placeholder="Origen">
                     <mat-autocomplete #auto="matAutocomplete">
                         <mat-option *ngFor="let state of citys" [value]="state.CITY">
                             <img class="example-option-img" aria-hidden src="./assets/origen.png">
@@ -142,17 +139,14 @@
                 <!-- DESTINO -->
                 <div class="columnFiltro narginColumn">
                     <div class="iconCalendar" style="display: none;">
-                        <svg class="" width="15" height="17" viewBox="0 0 15 17" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg class="" width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M10.3088 11.2321C12.1178 8.39349 11.8904 8.74763 11.9425 8.67362C12.6011 7.74466 12.9492 6.65132 12.9492 5.51172C12.9492 2.48957 10.4968 0 7.4707 0C4.45446 0 1.99219 2.48466 1.99219 5.51172C1.99219 6.65059 2.34759 7.77255 3.02779 8.71403L4.63257 11.2322C2.9168 11.4958 0 12.2816 0 14.0117C0 14.6424 0.411652 15.5412 2.37276 16.2416C3.74213 16.7307 5.55259 17 7.4707 17C11.0575 17 14.9414 15.9882 14.9414 14.0117C14.9414 12.2813 12.028 11.4963 10.3088 11.2321ZM3.85983 8.16614C3.85435 8.15758 3.84864 8.14921 3.84266 8.14097C3.27665 7.36229 2.98828 6.43945 2.98828 5.51172C2.98828 3.02089 4.99395 0.996094 7.4707 0.996094C9.94231 0.996094 11.9531 3.02178 11.9531 5.51172C11.9531 6.44094 11.6702 7.33248 11.1348 8.09064C11.0868 8.15392 11.3371 7.76505 7.4707 13.8321L3.85983 8.16614ZM7.4707 16.0039C3.55293 16.0039 0.996094 14.8523 0.996094 14.0117C0.996094 13.4467 2.30988 12.5177 5.22113 12.1556L7.05068 15.0265C7.14213 15.17 7.3005 15.2568 7.47067 15.2568C7.64084 15.2568 7.79925 15.1699 7.89066 15.0265L9.72018 12.1556C12.6315 12.5177 13.9453 13.4467 13.9453 14.0117C13.9453 14.8452 11.4115 16.0039 7.4707 16.0039Z"
                                 fill="#009AED" />
                         </svg>
                     </div>
 
-                    <input matInput aria-label="State2" (keyup)="autoComplete($event)" (focus)="autoComplete($event)"
-                        (blur)="autoComplete($event)" class="form-control" formControlName="destino" [matAutocomplete]="auto"
-                        [formControl]="stateCtrl2" placeholder="Destino">
+                    <input matInput aria-label="State2" (keyup)="autoComplete($event)" (focus)="autoComplete($event)" (blur)="autoComplete($event)" class="form-control" formControlName="destino" [matAutocomplete]="auto" [formControl]="stateCtrl2" placeholder="Destino">
                     <mat-autocomplete #auto="matAutocomplete">
                         <mat-option *ngFor="let state of citys" [value]="state.CITY">
                             <img class="example-option-img" aria-hidden src="./assets/origen.png">
@@ -172,13 +166,9 @@
 
                 <!-- OCULTAR CAMPO -->
                 <div class="columnFiltro hideColumn">
-                    <input name="datepicker" ngbDatepicker #datepicker="ngbDatepicker" [footerTemplate]="footerTemplate"
-                        [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
-                        [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1">
+                    <input name="datepicker" ngbDatepicker #datepicker="ngbDatepicker" [footerTemplate]="footerTemplate" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1">
                     <ng-template #t let-date let-focused="focused">
-                        <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
-                            [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
-                            (mouseleave)="hoveredDate = null">
+                        <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
                             {{ date.day }}
                         </span>
                     </ng-template>
@@ -207,8 +197,7 @@
                                 stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <input class="form-control" (click)="d.toggle()" placeholder="Salida" name="dp" [(ngModel)]="model"
-                        ngbDatepicker #d="ngbDatepicker">
+                    <input class="form-control" (click)="d.toggle()" placeholder="Salida" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
                 </div>
                 <!-- END SOLO IDA -->
 
@@ -227,9 +216,7 @@
                                 stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <input #dpFromDate class="form-control" (click)="datepicker.toggle()" placeholder="Salida"
-                        name="dpFromDate" [value]="formatter.format(fromDate)"
-                        (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+                    <input #dpFromDate class="form-control" (click)="datepicker.toggle()" placeholder="Salida" name="dpFromDate" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
                 </div>
                 <div class="columnFiltro" *ngIf="selected === 'idavuelta'">
                     <div class="iconCalendar">
@@ -245,9 +232,7 @@
                                 stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <input #dpToDate class="form-control" (click)="datepicker.toggle()" placeholder="Vuelta"
-                        name="dpToDate" [value]="formatter.format(toDate)"
-                        (input)="toDate = validateInput(toDate, dpToDate.value)">
+                    <input #dpToDate class="form-control" (click)="datepicker.toggle()" placeholder="Vuelta" name="dpToDate" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
                 </div>
                 <!-- BOTOM -->
                 <div class="columnFiltro flexCero">
@@ -266,8 +251,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-6 d-flex align-items-center pr-0">
-                        <svg class="d-inline" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg class="d-inline" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M8.32455 0.247574C9.31378 0.247574 10.2625 0.640545 10.962 1.34004C11.6615 2.03953 12.0545 2.98825 12.0545 3.97748C12.0545 4.96671 11.6615 5.91542 10.962 6.61492C10.2625 7.31441 9.31378 7.70738 8.32455 7.70738C7.33532 7.70738 6.38661 7.31441 5.68711 6.61492C4.98762 5.91542 4.59465 4.96671 4.59465 3.97748C4.59465 2.98825 4.98762 2.03953 5.68711 1.34004C6.38661 0.640545 7.33532 0.247574 8.32455 0.247574ZM8.32455 9.57233C12.4461 9.57233 15.7844 11.2415 15.7844 13.3022V15.1672H0.864746V13.3022C0.864746 11.2415 4.20301 9.57233 8.32455 9.57233Z"
                                 fill="#DF0C30" />

@@ -86,7 +86,7 @@
                         <span>Lima</span>
                     </div>
                     <div class="col-2 p-0">
-                        <span class="time_duration">17h 00m</span>
+                        <span class="time_duration" data-bs-toggle="modal" data-bs-target="#modalDetVuelo">17h 00m</span>
                     </div>
                     <div class="col-2 equipaje p-0">
                         <div class="d-inline-flex align-items-end">
@@ -175,7 +175,7 @@
                         <span>Lima</span>
                     </div>
                     <div class="col-2 p-0">
-                        <span class="time_duration">17h 00m</span>
+                        <span class="time_duration" data-bs-toggle="modal" data-bs-target="#modalDetVuelo">17h 00m</span>
                     </div>
                     <div class="col-2 equipaje p-0">
                         <div class="d-inline-flex align-items-end">
@@ -548,7 +548,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <button type="button" class="btnRed">Ver opciones</button>
+                <button type="button" class="btnRed" data-bs-toggle="modal" data-bs-target="#modalVerOpciones">Ver opciones</button>
             </div>
         </div>
         <div class="d-flex row align-items-center agregaP">
@@ -594,7 +594,9 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="row viajero py-2">
-                    <div class="col-2 text-center"><img src="../../../../assets/comprar/company.png" alt=""></div>
+                    <div class="col-2 text-center">
+                        <input type="radio" id="inlineSalida1" class="form-check-input mx-2">
+                        <img src="../../../../assets/comprar/company.png" alt=""></div>
                     <div class="col-2 text-center p-0">
                         <h3>16:48 PM</h3>
                         <span>Lima</span>
@@ -682,7 +684,9 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="row viajero py-2">
-                    <div class="col-2 text-center"><img src="../../../../assets/comprar/company.png" alt=""></div>
+                    <div class="col-2 text-center">
+                        <input type="radio" id="inlineSalida2" class="form-check-input mx-2">
+                        <img src="../../../../assets/comprar/company.png" alt=""></div>
                     <div class="col-2 text-center p-0">
                         <h3>16:48 PM</h3>
                         <span>Lima</span>
@@ -778,7 +782,9 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="row viajero py-2">
-                    <div class="col-2 text-center"><img src="../../../../assets/comprar/company.png" alt=""></div>
+                    <div class="col-2 text-center">
+                        <input type="radio" id="inlineRegreso1" class="form-check-input mx-2">
+                        <img src="../../../../assets/comprar/company.png" alt=""></div>
                     <div class="col-2 text-center p-0">
                         <h3>16:48 PM</h3>
                         <span>Lima</span>
@@ -866,7 +872,9 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="row viajero py-2">
-                    <div class="col-2 text-center"><img src="../../../../assets/comprar/company.png" alt=""></div>
+                    <div class="col-2 text-center">
+                        <input type="radio" id="inlineRegreso1" class="form-check-input mx-2">
+                        <img src="../../../../assets/comprar/company.png" alt=""></div>
                     <div class="col-2 text-center p-0">
                         <h3>16:48 PM</h3>
                         <span>Lima</span>
@@ -1565,6 +1573,312 @@
                     <div class="d-flex justify-content-between py-3">
                         <div class="price">Precio final</div>
                         <div class="priceMont">$1136.72</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal VER OPCIONES-->
+<div class="modal fade" id="modalVerOpciones" tabindex="-1" aria-labelledby="modVerOpciones" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content boxModalDetalle">
+            <div class="d-flex justify-content-between align-items-center p-3 header">
+                <div class="d-flex titleModal">Agrega equipaje, selección de asiento y más</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="boxPlanes">
+                    <div class="cardPlan green">
+                        <div class="row title">Clase Económica</div>
+                        <div class="row precio">
+                            Adicional por persona
+                            <div class=" d-flex align-items-center justify-content-center">
+                                <div class="simbol">+$</div>
+                                <div class="total">0</div>
+                            </div>
+
+                        </div>
+                        <div class="row titleContent">
+                            Equipaje
+                            <div class="lineT"></div>
+                        </div>
+                        <div class="row">
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/mochila.svg" type="image/svg+xml"></object> Mochila o cartera
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/equipaje-mano.svg" type="image/svg+xml"></object> Equipaje de mano
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/equipaje.svg" type="image/svg+xml"></object> Equipaje en bodega
+                            </div>
+                        </div>
+                        <div class="row titleContent">
+                            Servicios extras
+                            <div class="lineT"></div>
+                        </div>
+                        <div class="row">
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/check.svg" type="image/svg+xml"></object> Selección de asiento con cargo extra
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/check.svg" type="image/svg+xml"></object> Asiento con más espacio con cargo extra
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/check.svg" type="image/svg+xml"></object> Vuelo super flexible: cambio de fecha sin pago de multa
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END BOX GREEN -->
+                    <div class="cardPlan orange">
+                        <div class="row title">Clase Premium</div>
+                        <div class="row precio">
+                            Adicional por persona
+                            <div class=" d-flex align-items-center justify-content-center">
+                                <div class="simbol">+$</div>
+                                <div class="total">180</div>
+                            </div>
+
+                        </div>
+                        <div class="row titleContent">
+                            Equipaje
+                            <div class="lineT"></div>
+                        </div>
+                        <div class="row">
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/mochila-O.svg" type="image/svg+xml"></object> Mochila o cartera
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/equipaje-mano-O.svg" type="image/svg+xml"></object> Equipaje de mano
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/equipaje-O.svg" type="image/svg+xml"></object> Equipaje en bodega
+                            </div>
+                            <div class="descrip adicional">
+                                1 pieza por persona
+                            </div>
+                        </div>
+                        <div class="row titleContent">
+                            Servicios extras
+                            <div class="lineT"></div>
+                        </div>
+                        <div class="row">
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/check-O.svg" type="image/svg+xml"></object> Selección de asiento con cargo extra
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/check-O.svg" type="image/svg+xml"></object> Asiento con más espacio con cargo extra
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/check-O.svg" type="image/svg+xml"></object> Vuelo super flexible: cambio de fecha sin pago de multa
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END BOX ORANGE -->
+                    <div class="cardPlan blue">
+                        <div class="row title">Clase Business</div>
+                        <div class="row precio">
+                            Adicional por persona
+                            <div class=" d-flex align-items-center justify-content-center">
+                                <div class="simbol">+$</div>
+                                <div class="total">670</div>
+                            </div>
+
+                        </div>
+                        <div class="row titleContent">
+                            Equipaje
+                            <div class="lineT"></div>
+                        </div>
+                        <div class="row">
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/mochila-B.svg" type="image/svg+xml"></object> Mochila o cartera
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/equipaje-mano-B.svg" type="image/svg+xml"></object> Equipaje de mano
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/equipaje-B.svg" type="image/svg+xml"></object> Equipaje en bodega
+                            </div>
+                            <div class="descrip adicional">
+                                1 pieza por persona
+                            </div>
+                        </div>
+                        <div class="row titleContent">
+                            Servicios extras
+                            <div class="lineT"></div>
+                        </div>
+                        <div class="row">
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/check-B.svg" type="image/svg+xml"></object> Selección de asiento con cargo extra
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/check-B.svg" type="image/svg+xml"></object> Asiento con más espacio con cargo extra
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/check-B.svg" type="image/svg+xml"></object> Vuelo super flexible: cambio de fecha sin pago de multa
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END BOX BLUE -->
+
+                    <div class="cardPlan red">
+                        <div class="row title">First Class</div>
+                        <div class="row precio">
+                            Adicional por persona
+                            <div class=" d-flex align-items-center justify-content-center">
+                                <div class="simbol">+$</div>
+                                <div class="total">1054</div>
+                            </div>
+
+                        </div>
+                        <div class="row titleContent">
+                            Equipaje
+                            <div class="lineT"></div>
+                        </div>
+                        <div class="row">
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/mochila-R.svg" type="image/svg+xml"></object> Mochila o cartera
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/equipaje-mano-R.svg" type="image/svg+xml"></object> Equipaje de mano
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/equipaje-R.svg" type="image/svg+xml"></object> Equipaje en bodega
+                            </div>
+                        </div>
+                        <div class="row titleContent">
+                            Servicios extras
+                            <div class="lineT"></div>
+                        </div>
+                        <div class="row">
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/check-R.svg" type="image/svg+xml"></object> Selección de asiento con cargo extra
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/check-R.svg" type="image/svg+xml"></object> Asiento con más espacio con cargo extra
+                            </div>
+                            <div class="descrip">
+                                <object width="15px" data="../../../../assets/modal/check-R.svg" type="image/svg+xml"></object> Vuelo super flexible: cambio de fecha sin pago de multa
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END BOX RED -->
+                </div>
+                <div class="boxFooter">
+                    <div class="title">
+                        Tarifa Económica
+                    </div>
+
+                    <img src="../../../../assets/modal/flecha.png" alt="">
+                    <div class="d-flex flex-column justify-content-center">
+                        <div class="descrip">Precio final del vuelo <br>para 2 personas</div>
+                        <div class="d-flex justify-content-center">
+                            <div class="simbolo">+$ </div>
+                            <div class="precio">1,194</div>
+                        </div>
+                    </div>
+                    <button>Continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal DETALLE VUELO-->
+<div class="modal fade" id="modalDetVuelo" tabindex="-1" aria-labelledby="modDetVuelo" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content boxModalDetalle">
+            <div class="d-flex justify-content-between align-items-center p-3 header">
+                <div class="d-flex titleModal">Detalles de Vuelo</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="boxVuelos">
+                    <div class="subtitle">
+                        <div><img width="27px" src="../../../../assets/modal/avion.png" alt=""></div>
+                        <div>De Lima a Cancún (Ida)</div>
+                    </div>
+                    <div class="content">
+                        <div class="column alignRight">
+                            <div class="boxSeg">
+                                <div class="text">Salida 22 Jul</div>
+                                <div class="text blue">LIM 16:21 PM</div>
+                                <div class="text">Aeropuerto Internacional Jorge Chavez</div>
+                                <div class="iconImg firstIcon"><img src="../../../../assets/modal/circle.png" alt=""></div>
+                            </div>
+
+                            <div class="boxSeg">
+                                <div class="text blue">Duración</div>
+                                <div class="text borde">3h 41m</div>
+                                <div class="iconImg"><img src="../../../../assets/modal/airplane.png" alt=""></div>
+                            </div>
+
+                            <div class="boxSeg">
+                                <div class="text">Llegada 22 Jul</div>
+                                <div class="text blue">PTY 20:02 PM</div>
+                                <div class="text">General Omar Torrijos Herrara</div>
+                                <div class="iconImg"><img src="../../../../assets/modal/circle.png" alt=""></div>
+                            </div>
+                        </div>
+                        <div class="column alignLeft">
+                            <div class="boxSeg">
+                                <div class="text"><img width="27px" src="../../../../assets/modal/icon-empresa.png" alt=""></div>
+                                <div class="text"><strong>Vuelo 132</strong></div>
+                                <div class="text">Operado por: Copa Airlines</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="boxCenter">
+                        <div class="boxDescrip">
+                            <div><strong>Panama City</strong> (cambio de avión)</div>
+                            <div>Tiempo de espera <strong>11h 44m</strong></div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="column alignRight paddingTop">
+                            <div class="boxSeg">
+                                <div class="text red">Salida 23 Jul (+1)</div>
+                                <div class="text blue">PTY 07:46 AM</div>
+                                <div class="text">General Omar Torrijos Herrara</div>
+                                <div class="iconImg"><img src="../../../../assets/modal/circle.png" alt=""></div>
+                            </div>
+
+                            <div class="boxSeg">
+                                <div class="text blue">Duración</div>
+                                <div class="text borde">3h 41m</div>
+                                <div class="iconImg"><img src="../../../../assets/modal/airplane.png" alt=""></div>
+                            </div>
+
+                            <div class="boxSeg">
+                                <div class="text red">Llegada 23 Jul (+1)</div>
+                                <div class="text blue">PTY 20:02 PM</div>
+                                <div class="text">General Omar Torrijos Herrara</div>
+                                <div class="iconImg lastIcon"><img src="../../../../assets/modal/circle.png" alt=""></div>
+                            </div>
+                        </div>
+                        <div class="column alignLeft">
+                            <div class="boxSeg">
+                                <div class="text"><img width="27px" src="../../../../assets/modal/icon-empresa.png" alt=""></div>
+                                <div class="text"><strong>Vuelo 132</strong></div>
+                                <div class="text">Operado por: Copa Airlines</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="boxCenter">
+                        <div class="boxFooter">
+                            <div class="title">Equipaje que incluye tu viaje</div>
+                            <div class="elemento">
+                                <object width="15px" data="../../../../assets/modal/mochila.svg" type="image/svg+xml"></object> Incluye equipaje de mano
+                            </div>
+                            <div class="elemento">
+                                <object width="15px" data="../../../../assets/modal/equipaje.svg" type="image/svg+xml"></object> No incluye equipaje de bodega
+                            </div>
+                            <div class="elemento">
+                                <object width="15px" data="../../../../assets/modal/check.svg" type="image/svg+xml"></object> Puedes agregar maletas por un cargo adicional en el aeropuerto
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

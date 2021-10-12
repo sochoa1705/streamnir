@@ -6,16 +6,13 @@
                 <!-- <button class="customers" (click)="customers($event)">10 Pasajero</button> -->
                 <button class="customers" (click)="showPasajero()">1 Pasajero</button>
                 <div class="boxFlotante seguro" *ngIf="!showOption">
-                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                        <div class="d-flex flex-row iconTwo">
-                            <img height="13px" src="./assets/filter/adulto.png" alt="">
-                        </div>
+                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
                         <div class="d-flex flex-row flex-column w-100">
                             <div class="d-flex flex-row text1">
-                                Adultos
+                                Menor de edad
                             </div>
                             <div class="d-flex flex-row text2">
-                                12 o más años
+                                De 0 a 20 años
                             </div>
                         </div>
                         <div class="d-flex flex-row number">
@@ -23,23 +20,20 @@
                                 -
                             </div>
                             <div class="d-flex flex-row textBtn">
-                                0
+                                <input class="inputPasajero" type="text" value="0">
                             </div>
-                            <div class="d-flex flex-row btnNRed">
+                            <div class="d-flex flex-row btnNWhite">
                                 +
                             </div>
                         </div>
                     </div>
-                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                        <div class="d-flex flex-row iconTwo">
-                            <img height="13px" src="./assets/filter/nino.png" alt="">
-                        </div>
+                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
                         <div class="d-flex flex-row flex-column w-100">
                             <div class="d-flex flex-row text1">
-                                Niños
+                                Adulto
                             </div>
                             <div class="d-flex flex-row text2">
-                                De 2 - 11 años
+                                De 21 a 75 años
                             </div>
                         </div>
                         <div class="d-flex flex-row number">
@@ -47,23 +41,20 @@
                                 -
                             </div>
                             <div class="d-flex flex-row textBtn">
-                                0
+                                <input class="inputPasajero" type="text" value="0">
                             </div>
-                            <div class="d-flex flex-row btnNRed">
+                            <div class="d-flex flex-row btnNWhite">
                                 +
                             </div>
                         </div>
                     </div>
-                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                        <div class="d-flex flex-row iconTwo">
-                            <img height="13px" src="./assets/filter/infante.png" alt="">
-                        </div>
+                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
                         <div class="d-flex flex-row flex-column w-100">
                             <div class="d-flex flex-row text1">
-                                Infantes
+                                Adulto Mayor
                             </div>
                             <div class="d-flex flex-row text2">
-                                Menores de 2 años
+                                De 76 a 99 años
                             </div>
                         </div>
                         <div class="d-flex flex-row number">
@@ -71,15 +62,15 @@
                                 -
                             </div>
                             <div class="d-flex flex-row textBtn">
-                                0
+                                <input class="inputPasajero" type="text" value="0">
                             </div>
-                            <div class="d-flex flex-row btnNRed">
+                            <div class="d-flex flex-row btnNWhite">
                                 +
                             </div>
                         </div>
                     </div>
 
-                    <div class="d-flex flex-row justify-content-between align-items-center p-3 btnPasajero">
+                    <div class="d-flex flex-row justify-content-between align-items-center p-2 btnPasajero">
                         <button class="gray" type="button">Cancelar</button>
                         <button type="button" (click)="showPasajero()">Listo</button>
                     </div>
