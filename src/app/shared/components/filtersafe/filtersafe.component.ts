@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -68,6 +68,8 @@ export interface State {
 export class FiltersafeComponent implements OnInit {
   @Input() options:any;
   @Input() plan:any;
+  // @ViewChild('dpFromDate', { static: false }) dpFromDate!: ElementRef<HTMLInputElement>;
+  // @ViewChild('dpToDate', { static: false }) dpToDate!: ElementRef<HTMLInputElement>;
 
   form!: FormGroup;
   model!: NgbDateStruct;
@@ -125,6 +127,8 @@ export class FiltersafeComponent implements OnInit {
     private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>
   ) {
+    // this.fromDate = null
+    // this.toDate = null
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.filteredStates = this.stateCtrl.valueChanges
@@ -172,13 +176,19 @@ export class FiltersafeComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm()
+    console.log(this.fromDate);
+    
+    // console.log(this.dpFromDate.nativeElement.value);
 
   }
 
   send() {
-    console.log(this.form.value);
-    const navigationExtras: NavigationExtras = { state: this.plan };
-    this.route.navigateByUrl('/home/seguros/planes', navigationExtras);
+    let form = this.form.value
+    console.log(form);
+    localStorage.setItem('form', JSON.stringify(form));
+
+    // const navigationExtras: NavigationExtras = { state: this.plan };
+    // this.route.navigateByUrl('/home/seguros/planes', navigationExtras);
   }
 
   createForm() {
@@ -189,7 +199,7 @@ export class FiltersafeComponent implements OnInit {
       origenSafe: new FormControl(0),
       destinoSafe: new FormControl(),
       start: new FormControl(),
-      end: new FormControl()
+      end: new FormControl(),
     })
   }
 
