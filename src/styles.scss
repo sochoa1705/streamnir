@@ -2312,8 +2312,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                         font-weight: 600;
                         background-color: rgba(143, 208, 243, 0.2);
                         border-radius: 5px;
-                        padding: 0 10px;
+                        padding: 0px 7px;
                         text-align: center;
+                    }
+                    img {
+                        padding-bottom: 5px;
                     }
                 }
                 .iconImg {
@@ -2333,6 +2336,19 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
         }
     }
+}
+
+.nav-item .nav-link {
+    padding: 0;
+}
+
+.ng5-slider .ng5-slider-bubble {
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.1px;
+    color: #4B4B4B !important;
 }
 
 #modalVerOpciones {
@@ -3403,6 +3419,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             letter-spacing: 0.1px;
             color: #4B4B4B;
         }
+    }
+    .edad {
+        display: none;
     }
     .boxComprar {
         .precio {

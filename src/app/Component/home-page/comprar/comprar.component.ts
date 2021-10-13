@@ -19,13 +19,18 @@ export class ComprarComponent implements OnInit {
   detalleCobertura!: boolean;
   cupon!: boolean;
 
-  selectedPay: string = 'safety';
+  selectedPay: string = 'tarjeta';
   selectedPopup: string = 'agencia';
 
   banca: boolean = true;
-  metodoPago: any = [
+  /* metodoPago: any = [
     { name: 'option-2', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
     { name: 'option-1', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
+  ] */
+
+  metodoPago: any = [
+    { name: 'option-1', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: true, id: "1" },
+    { name: 'option-2', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: false, id: "0" },
   ]
   isLinear = true;
   firstFormGroup!: FormGroup;
@@ -118,6 +123,7 @@ export class ComprarComponent implements OnInit {
     } else {
       this.selectedPay = 'safety';
     }
+    //console.log(this.selectedPay);
   }
   id: any = "banca";
   optionPay(e: any, i: any, ids: any) {
