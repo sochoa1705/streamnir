@@ -2842,6 +2842,29 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     letter-spacing: 0.5px;
 }
 
+.edad {
+    display: flex;
+    flex: 1 1 100%;
+    gap: 10px;
+    margin-top: 7px;
+    .titleEdad {
+        display: flex;
+        min-width: 140px;
+        align-items: center;
+        font-weight: 600;
+        font-size: 14px;
+        color: #222;
+        font-family: "Montserrat";
+    }
+    .inputEdad {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        text-align: center;
+        border: 0.5px solid #E4E5E7;
+    }
+}
+
 .boxFlotante {
     width: 280px;
     background: #FFFFFF;
