@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -65,11 +65,9 @@ export interface State {
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
   ]
 })
-export class FiltersafeComponent implements OnInit {
+export class FiltersafeComponent implements OnInit, AfterViewInit {
   @Input() options:any;
   @Input() plan:any;
-  // @ViewChild('dpFromDate', { static: false }) dpFromDate!: ElementRef<HTMLInputElement>;
-  // @ViewChild('dpToDate', { static: false }) dpToDate!: ElementRef<HTMLInputElement>;
 
   form!: FormGroup;
   model!: NgbDateStruct;
@@ -119,23 +117,27 @@ export class FiltersafeComponent implements OnInit {
       infantes: 1
     }
   ];
-
   hoveredDate: NgbDate | null = null;
 
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
+  @ViewChild('dpFromDate', { static: false })FromDate2!: ElementRef<HTMLInputElement>;;
+  @ViewChild('dpToDate', { static: false })ToDate2!: ElementRef<HTMLInputElement>;;
+  // @ViewChild('dpFromDate', { static: false }) dpFromDate!: ElementRef<HTMLInputElement>;
+  // @ViewChild('dpToDate', { static: false }) dpToDate!: ElementRef<HTMLInputElement>;
 
   constructor(
     public route: Router,
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
     private ngbCalendar: NgbCalendar,
-    private dateAdapter: NgbDateAdapter<string>
+    private dateAdapter: NgbDateAdapter<string>,
+    public elementRef: ElementRef,
   ) {
-    // this.fromDate = null
-    // this.toDate = null
-    this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    this.fromDate = null
+    this.toDate = null
+    // this.fromDate = calendar.getToday();
+    // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.filteredStates = this.stateCtrl.valueChanges
     .pipe(
       startWith(''),
@@ -175,36 +177,51 @@ export class FiltersafeComponent implements OnInit {
   }
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-    const parsed = this.formatter.parse(input);
+    const parsed = this.formatter.parse(input);    
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
   ngOnInit(): void {
     this.createForm()
-    console.log(this.fromDate);
+  }
+  
+  ngAfterViewInit() {
+    console.log('2');
+    console.log(this.FromDate2.nativeElement.value);
+    //this.form.addControl('fromDate', new FormControl(this.FromDate2.nativeElement.value));
+    // this.form.updateValueAndValidity();
     
-    // console.log(this.dpFromDate.nativeElement.value);
-
   }
 
   send() {
+
+    this.form.removeControl('fromDate'); 
+    this.form.removeControl('toDate'); 
+    this.form.addControl('fromDate', new FormControl(this.FromDate2.nativeElement.value));
+    this.form.addControl('toDate', new FormControl(this.ToDate2.nativeElement.value));
+    this.form.addControl('days', new FormControl())
+    
+    console.log(this.fromDate);
     let form = this.form.value
     console.log(form);
     localStorage.setItem('form', JSON.stringify(form));
+    console.log(this.FromDate2.nativeElement.value);
 
     // const navigationExtras: NavigationExtras = { state: this.plan };
     // this.route.navigateByUrl('/home/seguros/planes', navigationExtras);
   }
-
+ 
   createForm() {
+    console.log('jjj');
+    
     this.form = new FormGroup({
       // adultos: new FormControl(0),
       ninos: new FormControl(0),
       infantes: new FormControl(0),
       origenSafe: new FormControl(0),
       destinoSafe: new FormControl(),
-      start: new FormControl(),
-      end: new FormControl(),
+      fromDate: new FormControl(),
+      toDate: new FormControl(),      
     })
   }
 
