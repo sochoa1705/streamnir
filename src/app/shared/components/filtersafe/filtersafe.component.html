@@ -3,88 +3,95 @@
         <!-- COMBOS -->
         <div class="row filter espaciado versionMobile">
             <div class="w-130">
-                <!-- <button class="customers" (click)="customers($event)">10 Pasajero</button> -->
-                <button class="customers" (click)="showPasajero()">1 Pasajero</button>
+                <button class="customers" (click)="showEdadPasajero()">Pasajero(s):</button>
+                <div class="boxFlotante seguro" *ngIf="!showOptionEdad">
+                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
+                        <div class="d-flex flex-row flex-column w-100">
+                            <div class="d-flex flex-row text1">
+                                <img src="./assets/filter/icon-user.png" alt=""> Pasajero 1
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row number">
+                            <div class="d-flex flex-row textBtn">
+                                <input class="inputEdadPasajero" type="text" placeholder="Edad">
+                            </div>
+                            <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
 
-                <div class="boxFlotante seguro" *ngIf="!showOption">
-                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
-                        <div class="d-flex flex-row flex-column w-100">
-                            <div class="d-flex flex-row text1">
-                                Menor de edad
-                            </div>
-                            <div class="d-flex flex-row text2">
-                                De 0 a 20 años
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row number">
-                            <div class="d-flex flex-row btnNWhite">
-                                -
-                            </div>
-                            <div class="d-flex flex-row textBtn">
-                                <input class="inputPasajero" type="text" value="0">
-                            </div>
-                            <div class="d-flex flex-row btnNWhite">
-                                +
-                            </div>
-                        </div>
-                    </div>
-                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
-                        <div class="d-flex flex-row flex-column w-100">
-                            <div class="d-flex flex-row text1">
-                                Adulto
-                            </div>
-                            <div class="d-flex flex-row text2">
-                                De 21 a 75 años
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row number">
-                            <div class="d-flex flex-row btnNWhite">
-                                -
-                            </div>
-                            <div class="d-flex flex-row textBtn">
-                                <input class="inputPasajero" type="text" value="0">
-                            </div>
-                            <div class="d-flex flex-row btnNWhite">
-                                +
-                            </div>
-                        </div>
-                    </div>
-                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
-                        <div class="d-flex flex-row flex-column w-100">
-                            <div class="d-flex flex-row text1">
-                                Adulto Mayor
-                            </div>
-                            <div class="d-flex flex-row text2">
-                                De 76 a 99 años
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row number">
-                            <div class="d-flex flex-row btnNWhite">
-                                -
-                            </div>
-                            <div class="d-flex flex-row textBtn">
-                                <input class="inputPasajero" type="text" value="0">
-                            </div>
-                            <div class="d-flex flex-row btnNWhite">
-                                +
                             </div>
                         </div>
                     </div>
 
+                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
+                        <div class="d-flex flex-row flex-column w-100">
+                            <div class="d-flex flex-row text1">
+                                <img src="./assets/filter/icon-user.png" alt=""> Pasajero 2
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row number">
+                            <div class="d-flex flex-row textBtn">
+                                <input class="inputEdadPasajero" type="text" placeholder="Edad">
+                            </div>
+                            <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
+                                <img src="./assets/filter/delete.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
+                        <div class="d-flex flex-row flex-column w-100">
+                            <div class="d-flex flex-row text1">
+                                <img src="./assets/filter/icon-user.png" alt=""> Pasajero 3
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row number">
+                            <div class="d-flex flex-row textBtn">
+                                <input class="inputEdadPasajero" type="text" placeholder="Edad">
+                            </div>
+                            <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
+                                <img src="./assets/filter/delete.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
+                        <div class="d-flex flex-row flex-column w-100">
+                            <div class="d-flex flex-row text1">
+                                <img src="./assets/filter/icon-user.png" alt=""> Pasajero 4
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row number">
+                            <div class="d-flex flex-row textBtn">
+                                <input class="inputEdadPasajero" type="text" placeholder="Edad">
+                            </div>
+                            <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
+                                <img src="./assets/filter/delete.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
+                        <div class="d-flex flex-row flex-column w-100">
+                            <div class="d-flex flex-row text1">
+                                <img src="./assets/filter/icon-user.png" alt=""> Pasajero 5
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row number">
+                            <div class="d-flex flex-row textBtn">
+                                <input class="inputEdadPasajero" type="text" placeholder="Edad">
+                            </div>
+                            <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
+                                <img src="./assets/filter/delete.png" alt="">
+                            </div>
+                        </div>
+                    </div>
                     <div class="d-flex flex-row justify-content-between align-items-center p-2 btnPasajero">
-                        <button class="gray" type="button">Cancelar</button>
-                        <button type="button" (click)="showPasajero()">Listo</button>
+                        <button class="Agregar" type="button">+ Agregar pasajero</button>
+                        <button type="button" (click)="showEdadPasajero()">Listo</button>
                     </div>
                 </div>
             </div>
-            <div class="edad">
-                <div class="titleEdad">Edad Pasajero(s):</div>
-                <input class="inputEdad" type="text" value="0">
-                <input class="inputEdad" type="text" value="0">
-                <input class="inputEdad" type="text" value="0">
-                <input class="inputEdad" type="text" value="0">
-                <input class="inputEdad" type="text" value="0">
-            </div>
+
+
             <div class="selectDestino">
                 <div class="iconBandera">
                     <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

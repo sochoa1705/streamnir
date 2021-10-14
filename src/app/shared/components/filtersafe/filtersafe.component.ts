@@ -80,6 +80,11 @@ export class FiltersafeComponent implements OnInit {
     this.showOption = this.showOption ? false : true;
   }
   
+  showOptionEdad: Boolean = true;
+  showEdadPasajero() {
+    this.showOptionEdad = this.showOptionEdad ? false : true;
+  }
+
   model1: string | undefined;
   model2: string | undefined;
   filteredStates: Observable<State[]>;
