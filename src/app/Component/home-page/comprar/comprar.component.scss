@@ -440,6 +440,7 @@ h2 {
         color: #4b4b4b;
         font-size: 12px;
         font-family: "Montserrat";
+        font-weight: 600;
         &_number {
             font-size: 25px;
             font-weight: bold;
@@ -522,7 +523,7 @@ input[type="radio"] {
 }
 
 .option-2 {
-    margin-right: 110px;
+    //margin-right: 110px;
 }
 
 #option-1:checked:checked~.option-1,

@@ -220,7 +220,7 @@
                                 </div>
                                 <div class="card-body">
                                     <form action="">
-                                        <div class="row card_ py-4 justify-content-center cardMob">
+                                        <div class="row card_ py-4 justify-content-evenly cardMob">
                                             <!-- <input type="radio" name="select" id="option-1" (change)="chkValue($event)" checked>
                                                 <input type="radio" name="select" id="option-2"> -->
                                             <input *ngFor="let chk of metodoPago" type="radio" name="select" id="{{ chk.name }}" (click)="chkValue($event)" [checked]="chk.checked">
@@ -573,7 +573,7 @@
                         </div>
                         <div class="card-body">
                             <form action="">
-                                <div class="row card_ py-4 justify-content-center cardMob">
+                                <div class="row card_ py-4 justify-content-evenly cardMob">
 
                                     <!-- <input type="radio" name="select" id="option-1" (change)="chkValue($event)" checked>
                                         <input type="radio" name="select" id="option-2"> -->
@@ -964,26 +964,27 @@
                                     <div class="col-6 txtdet">Cargos</div>
                                     <div class="col-6  txtdet right">$ 103.34</div>
                                 </div>
-                                <div class="separarBox"></div>
-
-                                <div class="row">
-                                    <div class="col-7">
-                                        <span class="price_end">PRECIO FINAL</span>
-                                    </div>
-                                    <div class="col-5 text-end">
-                                        $<span class="price_end_number">1136.72</span>
-                                    </div>
-                                    <div class="clearfix"></div>
+                                <!-- <div class="separarBox"></div> -->
+                            </div>
+                        </div>
+                        <div class="footerDet">
+                            <div class="row">
+                                <div class="col-7">
+                                    <span class="price_end">PRECIO FINAL</span>
                                 </div>
-                                <div class="row">
-                                    <div class="col-7 mt-3">
-                                        <span class="price_reference">Precio referencial en soles.</span>
-                                    </div>
-                                    <div class="col-5 text-end mt-3">
-                                        <span class="price_reference_number">S/. 4546.72</span>
-                                    </div>
-                                    <div class="clearfix"></div>
+                                <div class="col-5 text-end">
+                                    $<span class="price_end_number">1136.72</span>
                                 </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-7">
+                                    <span class="price_reference">Precio referencial en soles.</span>
+                                </div>
+                                <div class="col-5 text-end">
+                                    <span class="price_reference_number">S/. 4546.72</span>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>
