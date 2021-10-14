@@ -1795,6 +1795,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     text-indent: 40px;
 }
 
+.accordion {
+    .accordion-item {
+        .footerDet {
+            padding: 1rem 1.25rem;
+            border-top: 1px solid #E4E5E7;
+        }
+    }
+}
+
 .modal-body {
     font-family: Montserrat;
 }
@@ -2194,6 +2203,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .time_duration {
         cursor: pointer;
     }
+}
+
+#carouselSeguros .carousel-caption p {
+    width: 100%;
 }
 
 #modalDetVuelo {
@@ -3297,6 +3310,19 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         &.activoBox {
             display: flex !important;
         }
+    }
+    .btnFooter {
+        background: #df0c30 !important;
+        color: #ffffff !important;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    #carouselSeguros .carousel-caption p {
+        width: 100%;
+        font-weight: 500;
+        line-height: 19px;
+        align-items: center;
+        letter-spacing: 0.1px;
     }
     .boxHideM {
         display: none;
