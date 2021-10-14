@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
+import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -66,20 +66,17 @@ export interface State {
   ]
 })
 export class FiltersafeComponent implements OnInit, AfterViewInit {
-  @Input() options:any;
-  @Input() plan:any;
+  @Input() options: any;
+  @Input() plan: any;
 
   form!: FormGroup;
   model!: NgbDateStruct;
   selected = 'idavuelta';
   stateCtrl = new FormControl();
   stateCtrl2 = new FormControl();
-
+  customers!: number;
   showOption: Boolean = true;
-  showPasajero() {
-    this.showOption = this.showOption ? false : true;
-  }
-  
+
   model1: string | undefined;
   model2: string | undefined;
   filteredStates: Observable<State[]>;
@@ -110,19 +107,15 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     },
 
   ];
-  pasajeros: any = [
-    {
-      adultos: 6,
-      ninos: 1,
-      infantes: 1
-    }
-  ];
   hoveredDate: NgbDate | null = null;
 
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
-  @ViewChild('dpFromDate', { static: false })FromDate2!: ElementRef<HTMLInputElement>;;
-  @ViewChild('dpToDate', { static: false })ToDate2!: ElementRef<HTMLInputElement>;;
+  @ViewChild('dpFromDate', { static: false }) FromDate2!: ElementRef<HTMLInputElement>;
+  @ViewChild('dpToDate', { static: false }) ToDate2!: ElementRef<HTMLInputElement>;
+  @ViewChild('menorEdad', { static: false }) menor!: ElementRef<HTMLInputElement>;
+  @ViewChild('adulto', { static: false }) adulto!: ElementRef<HTMLInputElement>;
+  @ViewChild('mayor', { static: false }) mayor!: ElementRef<HTMLInputElement>;
   // @ViewChild('dpFromDate', { static: false }) dpFromDate!: ElementRef<HTMLInputElement>;
   // @ViewChild('dpToDate', { static: false }) dpToDate!: ElementRef<HTMLInputElement>;
 
@@ -133,16 +126,17 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>,
     public elementRef: ElementRef,
+    private renderer: Renderer2,
   ) {
     this.fromDate = null
     this.toDate = null
     // this.fromDate = calendar.getToday();
     // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.filteredStates = this.stateCtrl.valueChanges
-    .pipe(
-      startWith(''),
-      map(state => state ? this._filterStates(state) : this.states.slice())
-    );
+      .pipe(
+        startWith(''),
+        map(state => state ? this._filterStates(state) : this.states.slice())
+      );
   }
 
   private _filter(value: string): State[] {
@@ -177,69 +171,132 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   }
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-    const parsed = this.formatter.parse(input);    
+    const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
   ngOnInit(): void {
     this.createForm()
   }
-  
+
   ngAfterViewInit() {
-    console.log('2');
     console.log(this.FromDate2.nativeElement.value);
     //this.form.addControl('fromDate', new FormControl(this.FromDate2.nativeElement.value));
     // this.form.updateValueAndValidity();
-    
   }
 
   send() {
+    console.log(this.form);
 
-    this.form.removeControl('fromDate'); 
-    this.form.removeControl('toDate'); 
+    this.form.removeControl('fromDate');
+    this.form.removeControl('toDate');
     this.form.addControl('fromDate', new FormControl(this.FromDate2.nativeElement.value));
     this.form.addControl('toDate', new FormControl(this.ToDate2.nativeElement.value));
     this.form.addControl('days', new FormControl())
-    
+
     console.log(this.fromDate);
     let form = this.form.value
     console.log(form);
     localStorage.setItem('form', JSON.stringify(form));
     console.log(this.FromDate2.nativeElement.value);
-
-    // const navigationExtras: NavigationExtras = { state: this.plan };
-    // this.route.navigateByUrl('/home/seguros/planes', navigationExtras);
+    const navigationExtras: NavigationExtras = { state: this.plan };
+    this.route.navigateByUrl('/home/seguros/planes', navigationExtras);
   }
- 
+
   createForm() {
-    console.log('jjj');
-    
     this.form = new FormGroup({
-      // adultos: new FormControl(0),
-      ninos: new FormControl(0),
-      infantes: new FormControl(0),
+      // adulto: new FormControl(),
+      // menor: new FormControl(),
+      // mayor: new FormControl(), 
       origenSafe: new FormControl(0),
-      destinoSafe: new FormControl(),
-      fromDate: new FormControl(),
-      toDate: new FormControl(),      
+      destinoSafe: new FormControl('', Validators.required),
+      fromDate: new FormControl(''), // <== Cambia
+      toDate: new FormControl(''), // <== Cambia
+      ages: new FormArray([])
     })
   }
 
-  customerClose(e: any) {
-    let cdr: any = document.getElementById('cdr');
-    cdr.style = `display:none`;
+  getArrayAges(){
+    return (<FormArray>this.form.get('ages')).controls
   }
 
-  
+  addAge() {
+    (<FormArray>this.form.controls['ages']).push(
+      new FormGroup({
+        fehca: new FormControl()
+      }));
+  }
+
+  removeAge(index:any) {
+    (<FormArray>this.form.controls['ages']).removeAt(index);
+  }
+
+  customersAdd() {
+    console.log(this.menor.nativeElement.value);
+    let totalCustomers = Number(this.mayor.nativeElement.value) + Number(this.menor.nativeElement.value) + Number(this.adulto.nativeElement.value)
+    this.customers = totalCustomers;
+
+    if (totalCustomers === 0) {
+      this.form.addControl('menor', new FormControl(this.menor.nativeElement.value));
+      this.form.addControl('adulto', new FormControl(this.adulto.nativeElement.value));
+      this.form.addControl('mayor', new FormControl(this.mayor.nativeElement.value));
+      this.form.addControl('total', new FormControl(totalCustomers));
+    } else {
+      this.form.removeControl('menor');
+      this.form.removeControl('adulto');
+      this.form.removeControl('mayor');
+      this.form.removeControl('total');
+
+      this.form.addControl('menor', new FormControl(this.menor.nativeElement.value));
+      this.form.addControl('adulto', new FormControl(this.adulto.nativeElement.value));
+      this.form.addControl('mayor', new FormControl(this.mayor.nativeElement.value));
+      this.form.addControl('total', new FormControl(totalCustomers));
+      this.showOption = !this.showOption
+    }
+  }
+
+  showPasajero() {
+    this.showOption = !this.showOption
+
+    if (this.customers !== undefined) {
+      setTimeout(() => {
+        this.menor.nativeElement.defaultValue = this.form.getRawValue().menor
+        this.adulto.nativeElement.defaultValue = this.form.getRawValue().adulto
+        this.mayor.nativeElement.defaultValue = this.form.getRawValue().mayor
+      }, 1000)
+    }
+  }
+
   count(valor: number, e: any) {
+    let customer: any;
+    console.log(valor);
+    switch (e) {
+      case 'menor':
+        customer = this.menor.nativeElement
+        break;
+      case 'adulto':
+        customer = this.adulto.nativeElement
+        break;
+      case 'mayor':
+        customer = this.mayor.nativeElement
+        break;
+      default:
+      // code block
+    }
+    // let menor = this.pasajeros.menor
+    // let adultos: any = Number((document.getElementById('adultos') as HTMLInputElement).value);
+
+    // let menor = Number(this.menorEdad.nativeElement.value)
+    let inputvalue = Number(customer.value)
+    inputvalue = inputvalue + valor
+    this.renderer.setAttribute(customer, 'value', String(inputvalue))
+
+
     // (document.getElementById("num1") as HTMLInputElement).value
-    let adultos: any = Number((document.getElementById('adultos') as HTMLInputElement).value);
-    // console.log(adultos);
+    // let adultos: any = Number((document.getElementById('adultos') as HTMLInputElement).value);
     // console.log(adultos.value);
-    // console.log(e);
-    adultos = 10;
-    let item = e.target.name;
-    // console.log(valor);
+    // adultos = 10;
+    // let item = e.target.name;
 
     // let pasajero = this.form.value.adultos;
     // if (pasajero >= 100 && valor >= 0) {
@@ -252,7 +309,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     // console.log(pasajero + valor);
     //console.log(this.pasajeros[0]);
 
-    adultos = adultos + valor
+    // adultos = adultos + valor
   }
 
   private _filterStates(value: string): State[] {

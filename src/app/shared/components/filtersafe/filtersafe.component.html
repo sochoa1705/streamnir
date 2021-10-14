@@ -1,11 +1,11 @@
-<form class="bg-white filtroBox" [formGroup]="form">
+<form class="bg-white filtroBox" [formGroup]="form" (ngSubmit)="send()" novalidate>
     <div class="container bg-white">
         <!-- COMBOS -->
         <div class="row filter espaciado versionMobile">
             <div class="w-130">
                 <!-- <button class="customers" (click)="customers($event)">10 Pasajero</button> -->
-                <button class="customers" (click)="showPasajero()">1 Pasajero</button>
-
+                <button class="customers" (click)="showPasajero()">{{customers == 0 ? '': customers}} Pasajero(s)</button>
+                <!-- PASAJEROS -->
                 <div class="boxFlotante seguro" *ngIf="!showOption">
                     <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
                         <div class="d-flex flex-row flex-column w-100">
@@ -17,13 +17,13 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row number">
-                            <div class="d-flex flex-row btnNWhite">
+                            <div class="d-flex flex-row btnNWhite" (click)="count(-1, 'menor')">
                                 -
                             </div>
                             <div class="d-flex flex-row textBtn">
-                                <input class="inputPasajero" type="text" value="0">
+                                <input #menorEdad id="menor" name="menor" class="inputPasajero" type="text" value="0">
                             </div>
-                            <div class="d-flex flex-row btnNWhite">
+                            <div class="d-flex flex-row btnNWhite" (click)="count(+1, 'menor')">
                                 +
                             </div>
                         </div>
@@ -38,13 +38,13 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row number">
-                            <div class="d-flex flex-row btnNWhite">
+                            <div class="d-flex flex-row btnNWhite" (click)="count(-1, 'adulto')">
                                 -
                             </div>
                             <div class="d-flex flex-row textBtn">
-                                <input class="inputPasajero" type="text" value="0">
+                                <input #adulto class="inputPasajero" type="text" value="0">
                             </div>
-                            <div class="d-flex flex-row btnNWhite">
+                            <div class="d-flex flex-row btnNWhite" (click)="count(+1, 'adulto')">
                                 +
                             </div>
                         </div>
@@ -59,32 +59,35 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row number">
-                            <div class="d-flex flex-row btnNWhite">
+                            <div class="d-flex flex-row btnNWhite" (click)="count(-1, 'mayor')">
                                 -
                             </div>
                             <div class="d-flex flex-row textBtn">
-                                <input class="inputPasajero" type="text" value="0">
+                                <input #mayor class="inputPasajero" type="text" value="0">
                             </div>
-                            <div class="d-flex flex-row btnNWhite">
+                            <div class="d-flex flex-row btnNWhite" (click)="count(+1, 'mayor')">
                                 +
                             </div>
                         </div>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between align-items-center p-2 btnPasajero">
-                        <button class="gray" type="button">Cancelar</button>
-                        <button type="button" (click)="showPasajero()">Listo</button>
+                        <button class="gray" type="button" (click)="showPasajero()">Cancelar</button>
+                        <button type="button" (click)="customersAdd()">Listo</button>
                     </div>
                 </div>
+                <!-- END PASAJEROS -->
             </div>
-            <div class="edad">
-                <div class="titleEdad">Edad Pasajero(s):</div>
-                <input class="inputEdad" type="text" value="0">
-                <input class="inputEdad" type="text" value="0">
-                <input class="inputEdad" type="text" value="0">
-                <input class="inputEdad" type="text" value="0">
-                <input class="inputEdad" type="text" value="0">
-            </div>
+            <!-- <ng-template> -->
+                <div class="edad">
+                    <div class="titleEdad">Edad Pasajero(s):</div>
+                    <input class="inputEdad" type="text" value="0">
+                    <input class="inputEdad" type="text" value="0">
+                    <input class="inputEdad" type="text" value="0">
+                    <input class="inputEdad" type="text" value="0">
+                    <input class="inputEdad" type="text" value="0">
+                </div>
+            <!-- </ng-template> -->
             <div class="selectDestino">
                 <div class="iconBandera">
                     <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -140,13 +143,16 @@
 
                 <!-- DESTINO -->
                 <div class="columnFiltro narginColumn">
-                    <select class="form-select selectSeguro" formControlName="destinoSafe" aria-label="Default select example">
+                    <div *ngIf="this.form.controls.destinoSafe.touched && this.form.controls.destinoSafe.invalid" class="position-relative">
+                        <div *ngIf="this.form.controls.destinoSafe.errors && this.form.controls.destinoSafe.errors.required">Email is required.</div>
+                    </div>
+                    <select class="form-select selectSeguro" formControlName="destinoSafe" aria-label="Default select example" required>
                         <!-- <option selected>Destino</option>
-                        <option value="1">(EU) Europa</option>
-                        <option value="2">América Latina y Caribe</option>
-                        <option value="3">EEUU y Canadá</option>
-                        <option value="4">Asía, África y Oceanía</option>
-                        <option value="5">Todo el mundo</option> -->
+                            <option value="1">(EU) Europa</option>
+                            <option value="2">América Latina y Caribe</option>
+                            <option value="3">EEUU y Canadá</option>
+                            <option value="4">Asía, África y Oceanía</option>
+                            <option value="5">Todo el mundo</option> -->
                         <option disabled selected>Destino</option>
                         <option *ngFor="let o of options" value="{{o.id_destino}}">{{o.descripcion_destino}}</option>
                     </select>
@@ -216,13 +222,14 @@
                         </svg>
 
                     </div>
-                    <input autocomplete="off" #dpToDate formControlName="toDate" class="form-control inputIzq" (click)="datepicker.toggle()" placeholder="Vuelta"
-                        name="dpToDate" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
+                    <input autocomplete="off" #dpToDate formControlName="toDate" class="form-control inputIzq" (click)="datepicker.toggle()"
+                        placeholder="Vuelta" name="dpToDate" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
                 </div>
                 <!-- BOTOM -->
                 <div class="columnButton">
-                    <button (click)="send()">Cotizar Ahora</button>
-                </div>
+                        <!-- <button type="submit" [disabled]="form.invalid">Cotizar Ahora</button> -->
+                        <button type="submit">Cotizar Ahora</button>
+                    </div>
                 <!-- END BOTOM -->
                 <!-- END IDA Y VUELTA -->
             </div>
@@ -231,7 +238,7 @@
 
         <!-- END FILTROS -->
     </div>
-    <ul id="cdr">
+    <!-- <ul id="cdr">
         <li>
             <div class="container">
                 <div class="row">
@@ -327,11 +334,11 @@
         </li>
         <hr>
         <li class="d-flex justify-content-between">
-            <!-- <button mat-raised-button color="primary">Cancelar</button>
-            <button mat-raised-button color="accent">Listo</button> -->
+            <! <button mat-raised-button color="primary">Cancelar</button>
+            <button mat-raised-button color="accent">Listo</button> >
 
             <button class="cancel" (click)="customerClose($event)">Cancelar</button>
             <button>Listo</button>
         </li>
-    </ul>
+    </ul> -->
 </form>
