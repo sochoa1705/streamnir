@@ -39,7 +39,8 @@
         background: linear-gradient(90deg, rgba(181, 10, 39, 1) 10%, rgba(207, 209, 211, 1) 100%);
     }
 }
-.adultocdr{
+
+.adultocdr {
     display: block !important;
     background: red;
     color: white;
@@ -48,6 +49,7 @@
     position: absolute;
     z-index: 1;
 }
+
 .mat-stepper-horizontal {
     margin-top: 8px;
 }
@@ -61,6 +63,8 @@ h1 {
     font-family: "Open Sans";
     font-weight: bold;
     font-size: 24px;
+    line-height: 36px;
+    padding-bottom: 10px;
 }
 
 h2 {
@@ -224,9 +228,6 @@ h2 {
         white-space: pre;
         line-height: 36px;
         h2 {
-            color: #4b4b4b;
-            font-family: "Open Sans";
-            font-size: 24px;
             font-weight: bold;
             margin-bottom: 0;
         }
@@ -439,6 +440,7 @@ h2 {
         color: #4b4b4b;
         font-size: 12px;
         font-family: "Montserrat";
+        font-weight: 600;
         &_number {
             font-size: 25px;
             font-weight: bold;
@@ -464,10 +466,41 @@ h2 {
             background: white;
             justify-content: flex-end;
             padding: 10px 20px;
+            cursor: pointer;
+            gap: 10px;
+            &::after {
+                content: none;
+            }
+            &.collapsed {
+                img {
+                    transform: rotate(180deg);
+                }
+            }
+            img {
+                transition: all 0.3s;
+            }
         }
     }
     &-button::after {
         margin-left: 10px;
+    }
+    .mgBottom {
+        margin-bottom: 8px;
+    }
+    .txtdet {
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        &.right {
+            text-align: right;
+        }
+    }
+    .separarBox {
+        border-top: 1px solid #E4E5E7;
+        height: 1px;
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
     }
 }
 
@@ -490,7 +523,7 @@ input[type="radio"] {
 }
 
 .option-2 {
-    margin-right: 110px;
+    //margin-right: 110px;
 }
 
 #option-1:checked:checked~.option-1,
@@ -526,6 +559,28 @@ p {
     a {
         color: #009aed;
         font-weight: 600;
+    }
+}
+
+.bCard {
+    .bCardHead {
+        height: 86px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .button {
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+        color: #009AED;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 

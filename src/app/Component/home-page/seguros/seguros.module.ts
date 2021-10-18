@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
 import { SlideModule } from './commons/components/slide/slide.module';
 import { PlansModule } from './commons/components/plans/plans.module';
 import { SafebannerModule } from 'src/app/shared/components/safebanner/safebanner.module';
+import { PlansACService } from '../../../Services/plansAC/plans-ac.service';
+import { DestinyService } from '../../../Services/destiny/destiny.service';
 
 @NgModule({
   declarations: [SegurosComponent],
@@ -31,6 +33,6 @@ import { SafebannerModule } from 'src/app/shared/components/safebanner/safebanne
     PlansModule,
   ],
   exports: [SegurosComponent],
-  providers: [DataPagePresenterService, OffersService, PackagesService]
+  providers: [DestinyService, DataPagePresenterService, OffersService, PackagesService]
 })
 export class SegurosModule { }

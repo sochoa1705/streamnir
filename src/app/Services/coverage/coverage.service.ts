@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Coverage } from 'src/app/Models/general/coverage';
 import { ENDPOINT_API } from 'src/app/shared/constant';
 import { environment } from 'src/environments/environment';
@@ -15,14 +16,11 @@ export class CoverageService {
   ) { }
 
 
-  getCoverage(payload: any): Observable<Coverage[]> {
-    let url_api = `${environment.urlBase}${ENDPOINT_API.coverage}`;
-    let headers = new HttpHeaders({
-      "content-type": "application/json",
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
-    })
+  getCoverage(payload: any): Observable<any> {
+    let url_api = `${environment.urlBase}${ENDPOINT_API.COVERAGE}`;
 
-    return this.http.post<any>(url_api, payload, { headers })
+    return this.http.post<any>(url_api, payload, { observe: 'response' }).pipe(
+      map((observe: any) => observe['body'])
+    )
   }
 }

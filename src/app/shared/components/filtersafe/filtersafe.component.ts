@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -66,11 +66,24 @@ export interface State {
   ]
 })
 export class FiltersafeComponent implements OnInit {
+  @Input() options:any;
+  @Input() plan:any;
+
   form!: FormGroup;
   model!: NgbDateStruct;
   selected = 'idavuelta';
   stateCtrl = new FormControl();
   stateCtrl2 = new FormControl();
+
+  showOption: Boolean = true;
+  showPasajero() {
+    this.showOption = this.showOption ? false : true;
+  }
+  
+  showOptionEdad: Boolean = true;
+  showEdadPasajero() {
+    this.showOptionEdad = this.showOptionEdad ? false : true;
+  }
 
   model1: string | undefined;
   model2: string | undefined;
@@ -173,8 +186,9 @@ export class FiltersafeComponent implements OnInit {
   }
 
   send() {
-    // console.log(this.form.value);
-    this.route.navigateByUrl('/home/seguros/planes');
+    console.log(this.form.value);
+    const navigationExtras: NavigationExtras = { state: this.plan };
+    this.route.navigateByUrl('/home/seguros/planes', navigationExtras);
   }
 
   createForm() {
@@ -182,12 +196,10 @@ export class FiltersafeComponent implements OnInit {
       // adultos: new FormControl(0),
       ninos: new FormControl(0),
       infantes: new FormControl(0),
-      origen: new FormControl(''),
-      destino: new FormControl(''),
-      range: new FormGroup({
-        start: new FormControl(),
-        end: new FormControl()
-      })
+      origenSafe: new FormControl(0),
+      destinoSafe: new FormControl(),
+      start: new FormControl(),
+      end: new FormControl()
     })
   }
 
@@ -196,6 +208,7 @@ export class FiltersafeComponent implements OnInit {
     cdr.style = `display:none`;
   }
 
+  
   count(valor: number, e: any) {
     // (document.getElementById("num1") as HTMLInputElement).value
     let adultos: any = Number((document.getElementById('adultos') as HTMLInputElement).value);

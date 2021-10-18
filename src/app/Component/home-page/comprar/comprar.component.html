@@ -4,13 +4,39 @@
     </div>
 </ng-container>
 <ng-template #filtersafe>
-    <div class="d-md-block d-none">
+    <!-- <div class="d-md-block d-none">
         <app-filtersafe></app-filtersafe>
+    </div> -->
+
+    <div class="d-flex flex-row bg-white flex-column py-3 px-5 boxFilter hideMov">
+        <div class="d-flex flex-row">
+            <a href="#"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M5.65381 1.07581L2.15933 4.57792L5.65381 8.08003L4.578 9.15584L7.51402e-05 4.57792L4.578 -4.70252e-08L5.65381 1.07581Z"
+                        fill="#B50A27" />
+                </svg>
+                Vuelve a la página anterior</a>
+        </div>
+        <div class="d-flex flex-row justify-content-evenly py-3 bodyFilter">
+            <div class="d-flex align-items-center">
+                <img src="./assets/_peru.png" alt=""> PE
+            </div>
+            <div class="d-flex align-items-center">
+                <img src="./assets/origen.png" alt=""> (EU) Europa
+            </div>
+            <div class="d-flex align-items-center">
+                <img src="./assets/calendar.png" alt=""> 08 / 07 / 2022 . 15 / 07 / 2022 (8 días)
+            </div>
+            <div class="d-flex align-items-center textBold">
+                <img src="./assets/user.png" alt=""> 1 Pasajero
+            </div>
+        </div>
     </div>
 </ng-template>
+
+
 <div #adultoCdr style="display: none;">
     <a (click)="pasajeroClose()">cerrar</a>
-    HOLA MUNDOI
 </div>
 <div class="container-fluid pb-4 px-5">
     <div class="row stepCard d-md-none d-block">
@@ -38,7 +64,8 @@
                                         d="M6.936 3.6H8.292L8.064 9.348H7.152L6.936 3.6ZM7.62 12.072C7.396 12.072 7.208 12 7.056 11.856C6.904 11.704 6.828 11.52 6.828 11.304C6.828 11.088 6.904 10.908 7.056 10.764C7.208 10.612 7.396 10.536 7.62 10.536C7.844 10.536 8.028 10.612 8.172 10.764C8.316 10.908 8.388 11.088 8.388 11.304C8.388 11.52 8.312 11.704 8.16 11.856C8.016 12 7.836 12.072 7.62 12.072Z"
                                         fill="#F29704" />
                                 </svg>
-                                Verifica que los datos ingresados sean correctos ya que una vez emitido el boleto este no
+                                Verifica que los datos ingresados sean correctos ya que una vez emitido el boleto este
+                                no
                                 puede ser cambiado.
                             </span>
                         </div>
@@ -65,7 +92,8 @@
                             <div class="card">
                                 <div class="card-header shadow-none" (click)="showDataContact()">
                                     <h2>Datos de contacto<img class="iconFlechaSup" [class.activeIcon]="!showDataContacto" src="./assets/comprar/flecha-top.png" alt=""></h2>
-                                    <span>Ingresa tus datos actualizados, este se utilizará para avisarte en caso de cambios en
+                                    <span>Ingresa tus datos actualizados, este se utilizará para avisarte en caso de
+                                        cambios en
                                         el itinerario. </span>
                                 </div>
                                 <div class="card-body card_pasajero boxHideM shadow-none" [class.activoBoxContact]="!showDataContacto">
@@ -115,7 +143,8 @@
                                         <div class="col-6 viewMobileWidth">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                                <label class="form-check-label" for="inlineRadio1">Solicitar factura</label>
+                                                <label class="form-check-label" for="inlineRadio1">Solicitar
+                                                    factura</label>
                                             </div>
                                         </div>
                                         <div class="col-6 viewMobileWidth colFono">
@@ -138,22 +167,24 @@
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                                             <label class="form-check-label" for="inlineRadio1">He leído y acepto la <a
-                                                href="">política de protección de datos personales.</a></label>
+                                                    href="">política de protección de datos personales.</a></label>
                                         </div>
                                     </div>
                                     <div class="col-6 viewMobileWidth">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                            <label class="form-check-label" for="inlineRadio1">Autorizo el uso de mi Información
-                                            para la Publicidad.</label>
+                                            <label class="form-check-label" for="inlineRadio1">Autorizo el uso de mi
+                                                Información
+                                                para la Publicidad.</label>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <p>Al realizar esta compra, acepto los <a href="">términos y condiciones de compra</a>, <a href="">condiciones de
-                                            reserva</a> y <a href="">documentación de viaje</a> .</p>
+                                        <p>Al realizar esta compra, acepto los <a href="">términos y condiciones de
+                                                compra</a>, <a href="">condiciones de
+                                                reserva</a> y <a href="">documentación de viaje</a> .</p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -182,13 +213,14 @@
                             <div class="card cardPagoMobile">
                                 <div class="card-header shadow-none">
                                     <h2>Selecciona el medio de pago</h2>
-                                    <span>Selecciona tu método de pago (el pago se llevará a cabo una vez presiones el botón
+                                    <span>Selecciona tu método de pago (el pago se llevará a cabo una vez presiones el
+                                        botón
                                         pagar al final del formulario).
                                     </span>
                                 </div>
                                 <div class="card-body">
                                     <form action="">
-                                        <div class="row card_ py-4 justify-content-center cardMob">
+                                        <div class="row card_ py-4 justify-content-evenly cardMob">
                                             <!-- <input type="radio" name="select" id="option-1" (change)="chkValue($event)" checked>
                                                 <input type="radio" name="select" id="option-2"> -->
                                             <input *ngFor="let chk of metodoPago" type="radio" name="select" id="{{ chk.name }}" (click)="chkValue($event)" [checked]="chk.checked">
@@ -202,80 +234,6 @@
 
                                         <div class="boxCardPas" *ngIf="selectedPay == 'tarjeta'; else safety">
                                             <!-- TARJETA -->
-                                            <div class="row py-5">
-                                                <div class="col-12 text-center pago">
-                                                    <img src="./assets/comprar/_visa.png" alt="">
-                                                    <img src="./assets/comprar/_master.png" alt="">
-                                                    <img src="./assets/comprar/_american.png" alt="">
-                                                    <img src="./assets/comprar/_dinners.png" alt="">
-                                                </div>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                            <div class="row card_pasajero rowMobileCard">
-                                                <div class="col-6 viewMobileWidth">
-                                                    <label for="names">Número de tarjeta</label>
-                                                    <input class="form-control" placeholder="Ingrese el número de tarjeta." type="text" name="names">
-                                                </div>
-                                                <div class="col-6 viewMobileWidth">
-                                                    <label for="lastname">Titular de la tarjeta</label>
-                                                    <input class="form-control" placeholder="El que figura en la tarjeta." type="text" name="lastname">
-                                                </div>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                            <div class="row  card_pasajero rowMobileCard">
-                                                <div class="col-6 viewMobileWidth">
-                                                    <div class="row">
-                                                        <div class="col-5">
-                                                            <label for="names">Vencimiento</label>
-                                                            <input class="form-control" placeholder="MM/AA" type="text" name="names">
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <label for="lastname">Código de seguridad</label>
-                                                            <input class="form-control" placeholder="El que figura en el documento de viaje." type="text" name="lastname">
-                                                        </div>
-                                                        <div class="col-1 colBoxInfo">
-                                                            <div class="iconInfo"><img src="./assets/comprar/card/info.png" alt=""></div>
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 viewMobileWidth">
-                                                    <div class="row">
-                                                        <div class="col-5">
-                                                            <label for="names">Tipo de doc</label>
-                                                            <input class="form-control" placeholder="" type="text" name="names">
-                                                        </div>
-                                                        <div class="col-7">
-                                                            <label for="lastname">N° de documento</label>
-                                                            <input class="form-control" placeholder="Ingresar N°" type="text" name="lastname">
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                            <div class="row card_pasajero rowMobileCard">
-                                                <div class="col-6 viewMobileWidth">
-                                                    <label for="names">Cuotas</label>
-                                                    <input class="form-control" placeholder="Sin cuotas" type="text" name="names">
-                                                </div>
-                                                <div class="col-6 viewMobileWidth">
-                                                    <label for="lastname">Ciudad de facturación</label>
-                                                    <input class="form-control" placeholder="Del titular de la tarjeta." type="text" name="lastname">
-                                                </div>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                            <div class="row card_pasajero rowMobileCard">
-                                                <div class="col-6 viewMobileWidth">
-                                                    <label for="names">Dirección</label>
-                                                    <input class="form-control" placeholder="Ingrese la dirección" type="text" name="names">
-                                                </div>
-                                                <div class="col-6 textDire viewMobileWidth">
-                                                    <label for="names"></label>
-                                                    <div>Emisión en max 24hrs aprox.</div>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                            </div>
                                             <!-- END TARJETA -->
                                         </div>
                                         <ng-template #safety>
@@ -309,7 +267,8 @@
                                                 </div>
                                                 <div class="row py-4 marginLat">
                                                     <div class="col-6 ">
-                                                        <a class="btnRed" href="#">Emisión automática después del pago.</a>
+                                                        <a class="btnRed" href="#">Emisión automática después del
+                                                            pago.</a>
                                                     </div>
                                                     <div class="col-6 text-end">
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#ModalBlue">¿Como
@@ -357,7 +316,54 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <div class="row">
+                        <div class="col-12 ">
 
+                            <div *ngIf="detailPay == 'safe'; else detail" class="accordion" id="accordionPanelsStayOpenExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                        <a class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            Ver detalles
+                                        </a>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <span class="textAcor">1 Adulto(s)
+                                                    </span>
+                                                </div>
+                                                <div class="col-6 text-end">
+                                                    <span class="price_old">PEN 370,35</span>
+                                                    <span class="price_new">PEN 314,80</span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <span class="textDesc">Descuento
+                                                    </span>
+                                                </div>
+                                                <div class="col-5 text-end">
+                                                    <span class="price_Desc">PEN -55,55</span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row totalItem">
+                                        <div class="col-7">
+                                            <span class="price_end">TOTAL A PAGAR</span>
+                                        </div>
+                                        <div class="col-5 text-end">
+                                            $<span class="price_end_number">314.80</span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </form>
@@ -499,9 +505,9 @@
             </div>
 
             <div class="row">
-                <div class="col-6" *ngIf="asistencia">
-                    <div class="card border-0 bg-transparent">
-                        <div class="card-header text-center border rounded-top">
+                <div class="col-sm-12 col-md-6 bCard" *ngIf="asistencia">
+                    <div class="card border-0 bg-transparent ">
+                        <div class="card-header text-center border rounded-top bCardHead">
                             <img src="./assets/comprar/card/_assist.png" alt=""> Asistencia al viajero
                         </div>
                         <div class="card-center text-center d-flex align-items-center">
@@ -526,9 +532,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6" *ngIf="reembolso">
+                <div class="col-sm-12 col-md-6 bCard" *ngIf="reembolso">
                     <div class="card border-0 bg-transparent">
-                        <div class="card-header text-center border rounded-top">
+                        <div class="card-header text-center border rounded-top bCardHead">
                             <img src="./assets/comprar/card/_protect.png" alt=""> Reembolso por emergencia
                         </div>
                         <div class="card-center text-center d-flex align-items-center">
@@ -567,7 +573,7 @@
                         </div>
                         <div class="card-body">
                             <form action="">
-                                <div class="row card_ py-4 justify-content-center cardMob">
+                                <div class="row card_ py-4 justify-content-evenly cardMob">
 
                                     <!-- <input type="radio" name="select" id="option-1" (change)="chkValue($event)" checked>
                                         <input type="radio" name="select" id="option-2"> -->
@@ -855,22 +861,23 @@
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                                     <label class="form-check-label" for="inlineRadio1">He leído y acepto la <a
-                                        href="">política de protección de datos personales.</a></label>
+                                            href="">política de protección de datos personales.</a></label>
                                 </div>
                             </div>
                             <div class="col-6 viewMobileWidth">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                                     <label class="form-check-label" for="inlineRadio1">Autorizo el uso de mi Información
-                                    para la Publicidad.</label>
+                                        para la Publicidad.</label>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <p>Al realizar esta compra, acepto los <a href="">términos y condiciones de compra</a>, <a href="">condiciones de
-                                    reserva</a> y <a href="">documentación de viaje</a> .</p>
+                                <p>Al realizar esta compra, acepto los <a href="">términos y condiciones de compra</a>,
+                                    <a href="">condiciones de
+                                        reserva</a> y <a href="">documentación de viaje</a> .</p>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -894,6 +901,7 @@
                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                         <a class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                             Ver detalles
+                            <img  src="./assets/footer/flecha.png" alt="" class="iconFlecha">
                         </a>
                     </h2>
                     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
@@ -904,8 +912,8 @@
                                     </span>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <span class="price_old">PEN 370,35</span>
-                                    <span class="price_new">PEN 314,80</span>
+                                    <span class="price_old">PEN {{ current.precioBruto }}</span>
+                                    <span class="price_new">PEN {{ current.DsctoPromcional === null ? '0' : current.DsctoPromcional }}</span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -915,7 +923,7 @@
                                     </span>
                                 </div>
                                 <div class="col-5 text-end">
-                                    <span class="price_Desc">PEN -55,55</span>
+                                    <span class="price_Desc">PEN {{ current.DsctoPromcional === null ? '0' : current.DsctoPromcional }}</span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -926,7 +934,7 @@
                             <span class="price_end">TOTAL A PAGAR</span>
                         </div>
                         <div class="col-5 text-end">
-                            $<span class="price_end_number">314.80</span>
+                            $<span class="price_end_number">{{ current.precioBruto }}</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -939,28 +947,44 @@
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                             <a class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                                 Ver detalles
+                                <img  src="./assets/footer/flecha.png" alt="" class="iconFlecha">
                             </a>
                         </h2>
                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                             <div class="accordion-body">
-                                <div class="row">
-                                    <div class="col-7">
-                                        <span class="price_end">PRECIO FINAL</span>
-                                    </div>
-                                    <div class="col-5 text-end">
-                                        $<span class="price_end_number">1136.72</span>
-                                    </div>
-                                    <div class="clearfix"></div>
+                                <div class="row mgBottom">
+                                    <div class="col-6 txtdet">2 Adulto(s)</div>
+                                    <div class="col-6 txtdet right">$ 690.00</div>
+                                </div>
+                                <div class="row mgBottom">
+                                    <div class="col-6 txtdet">Impuestos</div>
+                                    <div class="col-6 txtdet right">$ 343.38</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-7 mt-3">
-                                        <span class="price_reference">Precio referencial en soles.</span>
-                                    </div>
-                                    <div class="col-5 text-end mt-3">
-                                        <span class="price_reference_number">S/. 4546.72</span>
-                                    </div>
-                                    <div class="clearfix"></div>
+                                    <div class="col-6 txtdet">Cargos</div>
+                                    <div class="col-6  txtdet right">$ 103.34</div>
                                 </div>
+                                <!-- <div class="separarBox"></div> -->
+                            </div>
+                        </div>
+                        <div class="footerDet">
+                            <div class="row">
+                                <div class="col-7">
+                                    <span class="price_end">PRECIO FINAL</span>
+                                </div>
+                                <div class="col-5 text-end">
+                                    $<span class="price_end_number">1136.72</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-7">
+                                    <span class="price_reference">Precio referencial en soles.</span>
+                                </div>
+                                <div class="col-5 text-end">
+                                    <span class="price_reference_number">S/. 4546.72</span>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>
@@ -1219,10 +1243,46 @@
             </div>
             <!-- END CUPON -->
 
-            <div class="row d-md-block d-none">
-                <!-- SLIDER -->
-                <img src="./assets/comprar/banner/side-3.png" alt="">
-                <div class="clearfix"></div>
+
+            <!-- SLIDER -->
+            <div class="boxOferta">
+                <div class="ofertaRow zoom">
+                    <img class="imgFondo" src="./assets/hotel.jpg" alt="">
+                    <div class="flotante">
+                        <div class="rowFlota">USD 85
+                            <div class="line"></div>
+                        </div>
+                        <div class="rowFlota red">USD 46</div>
+                        <div class="rowFlota descrip">precio por noche, por hab.</div>
+                    </div>
+                </div>
+
+                <div class="ofertaRow title">
+                    Hotel El Ejecutivo by Reforma Avenue
+                </div>
+                <div class="ofertaRow d-flex">
+                    <div class="col-6">
+                        <img height="18px" width="18px" src="./assets/star-llena.png" alt="">
+                        <img height="18px" width="18px" src="./assets/star-llena.png" alt="">
+                        <img height="18px" width="18px" src="./assets/star-llena.png" alt="">
+                        <img height="18px" width="18px" src="./assets/star-mitad.png" alt="">
+                        <img height="18px" width="18px" src="./assets/star-vacia.png" alt="">
+                    </div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <img class="iconOferta" height="20px" width="20px" src="./assets/icon-cart.png" alt="">
+                        <img class="iconOferta" height="20px" width="20px" src="./assets/icon-cubierto.png" alt="">
+                        <img class="iconOferta" height="20px" width="20px" src="./assets/icon-copa.png" alt="">
+                        <img class="iconOferta" height="20px" width="20px" src="./assets/icon-wifi.png" alt="">
+                    </div>
+                </div>
+                <div class="ofertaRow descrip">
+                    <span>Evaluación de los huéspedes</span>
+                    <br>
+                    <span>8.2 de 10</span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center py-3">
+                <button class="btnVerMas">Ver más ofertas</button>
             </div>
         </div>
         <!-- END DERECHA -->
