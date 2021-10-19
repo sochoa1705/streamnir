@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -75,38 +75,14 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   stateCtrl = new FormControl();
   stateCtrl2 = new FormControl();
   customers!: number;
+  ClienteCotizacion: Array<any> = [];
   showOption: Boolean = true;
+  limitePassenger = false
+  limit = 0
 
   model1: string | undefined;
   model2: string | undefined;
-  filteredStates: Observable<State[]>;
-  states: State[] = [
-    {
-      name: 'Arkansas',
-      population: '2.978M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Arkansas.svg
-      flag: 'origen.png'
-    },
-    {
-      name: 'California',
-      population: '39.14M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_California.svg
-      flag: 'origen.png'
-    },
-    {
-      name: 'Florida',
-      population: '20.27M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Florida.svg
-      flag: 'origen.png'
-    },
-    {
-      name: 'Texas',
-      population: '27.47M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Texas.svg
-      flag: 'origen.png'
-    },
 
-  ];
   hoveredDate: NgbDate | null = null;
 
   fromDate: NgbDate | null;
@@ -132,17 +108,8 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     this.toDate = null
     // this.fromDate = calendar.getToday();
     // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
-    this.filteredStates = this.stateCtrl.valueChanges
-      .pipe(
-        startWith(''),
-        map(state => state ? this._filterStates(state) : this.states.slice())
-      );
   }
 
-  private _filter(value: string): State[] {
-    const filterValue = value.toLowerCase();
-    return this.states.filter(state => state.name.toLowerCase().includes(filterValue));
-  }
   get today() {
     return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
@@ -177,6 +144,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.createForm()
+    this.addPassenger(null)
   }
 
   ngAfterViewInit() {
@@ -186,73 +154,135 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   }
 
   send() {
-    console.log(this.form);
-
+    // console.log(this.form);
+    // console.log(this.form.controls['passenger'].value[0].age);
+    // this.form.removeControl('passenger');
     this.form.removeControl('fromDate');
     this.form.removeControl('toDate');
+    this.form.addControl('ClienteCotizacion', new FormControl(this.ClienteCotizacion));
     this.form.addControl('fromDate', new FormControl(this.FromDate2.nativeElement.value));
     this.form.addControl('toDate', new FormControl(this.ToDate2.nativeElement.value));
     this.form.addControl('days', new FormControl())
 
-    console.log(this.fromDate);
+    //console.log(this.fromDate);
     let form = this.form.value
+    localStorage.setItem('Datasafe', JSON.stringify(form));
     console.log(form);
-    localStorage.setItem('form', JSON.stringify(form));
-    console.log(this.FromDate2.nativeElement.value);
+    // console.log(this.FromDate2.nativeElement.value);
     const navigationExtras: NavigationExtras = { state: this.plan };
     this.route.navigateByUrl('/home/seguros/planes', navigationExtras);
   }
+
 
   createForm() {
     this.form = new FormGroup({
       // adulto: new FormControl(),
       // menor: new FormControl(),
       // mayor: new FormControl(), 
-      origenSafe: new FormControl(0),
+      origenSafe: new FormControl('510'),
       destinoSafe: new FormControl('', Validators.required),
       fromDate: new FormControl(''), // <== Cambia
       toDate: new FormControl(''), // <== Cambia
-      ages: new FormArray([])
+      passenger: new FormArray([
+        // new FormGroup({
+        //   age: new FormControl(0),
+        // })
+      ])
     })
   }
 
-  getArrayAges(){
-    return (<FormArray>this.form.get('ages')).controls
+  getArraypassenger() {
+    return (<FormArray>this.form.get('passenger')).controls
   }
 
-  addAge() {
-    (<FormArray>this.form.controls['ages']).push(
-      new FormGroup({
-        fehca: new FormControl()
-      }));
+  get agePass() {
+    return 38
   }
 
-  removeAge(index:any) {
-    (<FormArray>this.form.controls['ages']).removeAt(index);
-  }
+  fechNac() {
+    this.showOption = !this.showOption
 
-  customersAdd() {
-    console.log(this.menor.nativeElement.value);
-    let totalCustomers = Number(this.mayor.nativeElement.value) + Number(this.menor.nativeElement.value) + Number(this.adulto.nativeElement.value)
-    this.customers = totalCustomers;
+    // (<FormArray>this.form.controls['passenger']).push(
+    //   new FormControl()
+    // )
 
-    if (totalCustomers === 0) {
-      this.form.addControl('menor', new FormControl(this.menor.nativeElement.value));
-      this.form.addControl('adulto', new FormControl(this.adulto.nativeElement.value));
-      this.form.addControl('mayor', new FormControl(this.mayor.nativeElement.value));
-      this.form.addControl('total', new FormControl(totalCustomers));
-    } else {
-      this.form.removeControl('menor');
-      this.form.removeControl('adulto');
-      this.form.removeControl('mayor');
-      this.form.removeControl('total');
+    // let numer = this.form.controls['passenger'].value[0]
+    // numer.addControl('es', new FormControl(this.form.controls['passenger'].value[0].age));
+    // console.log(this.form.controls['passenger'].value.length)
+    // let array = [1,2,3,4]
+    let array = this.form.controls['passenger'].value
+    for (let i in array) {
+      // console.log(i);
+      let indice = Number(i)
+      // console.log(this.form.controls['passenger'].value[i].age);
+      let age = Number(this.form.controls['passenger'].value[i].age);
+      //let fech = Number(this.form.controls['passenger'].value[i].fecha);
+      // this.form.controls['passenger'].valueChanges.subscribe(data => fech = fech - age);
+      //fechga.Set(12)
+      let fecha: FormArray = (<FormArray>this.form.get('passenger'))
+      ['controls'][indice].value.fecha;
+      let fechaEnd = Number(fecha) - age
+      let dayFech:any = String(fechaEnd).substr(0, 2)
+      let monthFech:any = String(fechaEnd).substr(2, 2)
+      let yearFech:any = String(fechaEnd).substr(4, 4)
 
-      this.form.addControl('menor', new FormControl(this.menor.nativeElement.value));
-      this.form.addControl('adulto', new FormControl(this.adulto.nativeElement.value));
-      this.form.addControl('mayor', new FormControl(this.mayor.nativeElement.value));
-      this.form.addControl('total', new FormControl(totalCustomers));
-      this.showOption = !this.showOption
+      let omac2 ={'Edad': String(age),'FechaNacimiento': String(dayFech + '/' + monthFech + '/'+ yearFech)}
+      // omac.push(omac2)
+      // console.log(fech);
+      //  console.log(fech);
+      //  console.log(age);
+      this.ClienteCotizacion.push(omac2)
+      //  console.log(this.form.controls);
+      
     }
+
+    // console.log(this.form.controls['passenger'].value[0].age);
+  }
+
+  addPassenger(e: any) {
+    // console.log(e+1);
+    let numss = e - 1;
+    // console.log(this.form.controls['passenger'].value.length + 1);
+    const fecha = new Date()
+    const day = String(fecha.getDate() + 1).padStart(2, '0')
+    const month = String(fecha.getMonth() + 1).padStart(2, '0')
+    const year = String(fecha.getFullYear())
+
+    //console.log(this.form.controls['passenger'].value);
+    if (this.form.controls['passenger'].value.length < 2) {
+      //console.log('1');
+    } else {
+      console.log(this.form.controls['passenger'].value[numss].age);
+      // console.log('mas');
+    }
+    // console.log(this.form.controls['passenger'].value[1].age);
+
+    const fechaFormat = day + month + year;
+    const fechaNac = Number(fechaFormat);
+    let limite = this.form.controls['passenger'].value.length + 1
+    this.limit = limite
+    if (limite > 4) {
+      this.limitePassenger = true
+    }
+
+    (<FormArray>this.form.controls['passenger']).push(
+      new FormGroup({
+        age: new FormControl(),
+        fecha: new FormControl(fechaNac),
+      }));
+
+      //this.form.controls['passenger'].addControl
+
+  }
+
+  removePassenger(index: any) {
+    let limite = this.form.controls['passenger'].value.length - 1
+    this.limit = limite
+
+    if (this.limit < 5) {
+      this.limitePassenger = false
+    }
+    (<FormArray>this.form.controls['passenger']).removeAt(index);
   }
 
   showPasajero() {
@@ -311,12 +341,5 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
 
     // adultos = adultos + valor
   }
-
-  private _filterStates(value: string): State[] {
-    const filterValue = value.toLowerCase();
-
-    return this.states.filter(state => state.name.toLowerCase().includes(filterValue));
-  }
-
 
 }

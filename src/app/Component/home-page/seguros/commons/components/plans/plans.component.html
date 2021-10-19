@@ -39,14 +39,14 @@
         <div class="card seguro" *ngIf="index < 4">
             <div class="card-header">Fecha flexible</div>
             <div class="card-body">
-                <h2>{{card.producto}}</h2>
+                <h2>{{card.nombreProducto.substr(0, 9)  }}</h2>
                 <span>Antes</span>
                 <div class="oldPrice">
                     <div class="tachado"></div>
                     <p>PEN<strong>141.97</strong></p>
                 </div>
                 <span class="now">Ahora</span>
-                <p class="now">PEN <strong>{{card.precioEmision}}</strong></p>
+                <p class="now">PEN <strong>{{card.change}}</strong></p>
                 <span>Ahorra</span>
                 <div class="precioAhorra">
                     <p>PEN<strong>141.97</strong></p>
@@ -97,7 +97,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLabel">{{pop.producto}} - S/. {{pop.precioEmision}}</h2>
+                    <h2 class="modal-title" id="exampleModalLabel">{{pop.producto}} - S/. {{pop.change}}</h2>
                     <h5 class="modal-title" id="exampleModalLabel">Asistencia médica: USD 60.000</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

@@ -822,6 +822,13 @@ section {
     min-width: 150px;
     button {
         height: 40px;
+        &:hover{
+            background: $red
+        }
+        &:disabled{
+            color: $gray_border;
+            background: $red!important
+        }
     }
 }
 
@@ -3034,6 +3041,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 12px;
             letter-spacing: 0.1px;
             color: #009AED;
+            &:disabled{
+                color: $gray
+            }
         }
     }
 }

@@ -20,6 +20,7 @@ export class SegurosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //localStorage.clear()
     this.listDestiny()
     // console.log(this.dataPagePresenterService.data.sections[0].id === 0)
   }
