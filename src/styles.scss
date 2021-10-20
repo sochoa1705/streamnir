@@ -822,7 +822,7 @@ section {
     min-width: 150px;
     button {
         height: 40px;
-        &:hover{
+        &:hover {
             background: $red
         }
         &:disabled{
@@ -2149,8 +2149,41 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
-.viajero .escala {
-    padding-bottom: 5px;
+.viajero {
+    .escala {
+        padding-bottom: 5px;
+    }
+    .directo {
+        display: flex;
+        justify-content: space-between;
+        .escala_directo {
+            background: #fff;
+            border: 1px solid #83898F;
+            border-radius: 50%;
+            width: 6px;
+            height: 6px;
+            margin-top: -4px;
+        }
+    }
+    .twoEscala {
+        display: flex;
+        .escala_punto {
+            margin-top: -6px;
+        }
+    }
+}
+
+.boxMasUno {
+    position: relative;
+    .textMasUno {
+        position: absolute;
+        font-family: Montserrat;
+        font-size: 11px;
+        letter-spacing: 0.1px;
+        color: #F21037;
+        top: -12px;
+        right: 5px;
+    }
 }
 
 .toolTip {
@@ -3108,7 +3141,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 12px;
             letter-spacing: 0.1px;
             color: #009AED;
-            &:disabled{
+            &:disabled {
                 color: $gray
             }
         }
