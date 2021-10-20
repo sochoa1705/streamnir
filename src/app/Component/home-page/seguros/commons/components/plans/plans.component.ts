@@ -13,7 +13,10 @@ import { CoverageService } from '../../../../../../Services/coverage/coverage.se
   styleUrls: ['./plans.component.scss']
 })
 export class PlansComponent implements OnInit {
-  pop:any
+  // result: any[] = JSON.parse(localStorage.getItem('form'))
+  result: any
+  resultJson: any
+  pop: any
   plansAC: any = []
   coverageList: any
   json = {
@@ -26,6 +29,7 @@ export class PlansComponent implements OnInit {
     detalleCobertura: true,
     cupon: false,
   }
+  //datoUsuario:any = localStorage.getItem('form');
 
   constructor(
     public route: Router,
@@ -36,42 +40,39 @@ export class PlansComponent implements OnInit {
     public coverageService: CoverageService,
     public loaderSubjectService: LoaderSubjectService,
   ) {
-
+    this.result = localStorage.getItem('Datasafe')
+    this.resultJson = JSON.parse(this.result)
+    console.log(this.resultJson);
+    console.log(this.resultJson.ClienteCotizacion);
   }
   ngOnInit(): void {
     this.listPlansAC()
-    this.listCoverage()
-  }
-
-  listCoverage() {
-    let payload = {
-      "Aplicacion": "Intranet",
-      "CodigoSeguimiento": "Test",
-      "CodigosEntorno": "PROD/NMO/NMO",
-      "Parametros": {
-        "CodigoISOPais": "510",
-        "Agencia": "87823",
-        "Sucursal": "0",
-        "CodigoProducto": "MX",
-        "CodigoTarifa": "96045",
-        "Edad": "40",
-        "TipoModalidad": "1"
-      }
-    }
-    this.coverageService.getCoverage(payload).subscribe({
-      next: (response) => {
-        this.coverageList = response['Resultado']
-        console.log(this.coverageList)
-      },
-      error: error => console.log(error),
-    }
-      // data => console.log(data['Resultado']),
-
-    )
   }
 
   listPlansAC() {
     this.loaderSubjectService.showLoader()
+    // let payload = {
+    //   "Aplicacion": "Intranet",
+    //   "CodigoSeguimiento": "Test",
+    //   "CodigosEntorno": "PROD/NMO/NMO",
+    //   "Parametros": {
+    //     "UnidadNegocio": 5,
+    //     "Dk": "23571",
+    //     "SubCodigo": null,
+    //     "CotizacionAC": {
+    //       "Pais": "510",
+    //       "CodigoAgencia": "87823",
+    //       "NumeroSucursal": "0",
+    //       "PlanFamiliar": "false",
+    //       "Destino": this.resultJson.destinoSafe,
+    //       "CantidadDias": "10",
+    //       "Clientes": {
+    //         "ClienteCotizacion": this.resultJson.ClienteCotizacion
+    //       }
+    //     }
+    //   }
+    // }
+
     let payload = {
       "Aplicacion": "Intranet",
       "CodigoSeguimiento": "Test",
@@ -105,6 +106,42 @@ export class PlansComponent implements OnInit {
     this.plansACService.plansAC(payload).subscribe({
       next: (response) => {
         this.plansAC = response
+        // .map((m: any, index: any) => {
+        //   let payload2 = {
+        //     "Aplicacion": "Intranet",
+        //     "CodigoSeguimiento": "Test",
+        //     "CodigosEntorno": "PROD/NMO/NMO",
+        //     "Parametros": {
+        //       "CodigoISOPais": this.resultJson.destinoSafe,
+        //       "Agencia": "87823",
+        //       "Sucursal": "0",
+        //       "CodigoProducto": m.codProducto,
+        //       "CodigoTarifa": m.codTarifa,
+        //       "Edad": "40",
+        //       "TipoModalidad": m.codModalidad
+        //     }
+        //   }
+        //   let omac
+        //   let medica = this.coverageService.getCoverage(payload2).subscribe({
+        //     next: (infoData)=>{
+        //       omac = infoData['Resultado'][index].map( (el:any) => {
+        //         if(el.Codigo = 'C.4.1.10.1'){
+        //           console.log(el.Valor);
+
+        //           return el.Valor
+        //         }
+        //       })
+        //   }
+        //   })
+
+        //   // this.listCoverage(response[index]).filter((medic: any) => {
+        //   //   return r
+        //   // })
+        //     m.AsistenciaMEdica = omac
+        //     return m
+        //   })
+
+
         // .pipe(
         //   map(money => {
         //     return money.map((item: any, index: any) => {
@@ -127,19 +164,36 @@ export class PlansComponent implements OnInit {
     )
   }
 
-  // price() {
-  //   let price = Number(this.plansAC[0].precioEmision)
-  //   let change = Number(this.plansAC.tipoCambio)
-  //   let priceSol = price * change
-  //   console.log(price);
+  listCoverage(data: any) {
+    let payload = {
+      "Aplicacion": "Intranet",
+      "CodigoSeguimiento": "Test",
+      "CodigosEntorno": "PROD/NMO/NMO",
+      "Parametros": {
+        "CodigoISOPais": this.resultJson.destinoSafe,
+        "Agencia": "87823",
+        "Sucursal": "0",
+        "CodigoProducto": data.codProducto,
+        "CodigoTarifa": data.codTarifa,
+        "Edad": "40",
+        "TipoModalidad": data.codModalidad
+      }
+    }
+    this.coverageService.getCoverage(payload).subscribe({
+      next: (response) => {
+        this.coverageList = response['Resultado']
+        console.log(this.coverageList)
+      },
+      error: error => console.log(error),
+    }
+      // data => console.log(data['Resultado']),
+    )
+  }
 
-  //   this.priceSol = priceSol
-  //   return price
-  // }
-
-  data(id: any){
+  data(id: any) {
     let service = this.plansAC.find((e: any) => {
-      if(e.idProducto === id){
+      this.listCoverage(e)
+      if (e.idProducto === id) {
         console.log(e);
         return e
       }
@@ -150,10 +204,24 @@ export class PlansComponent implements OnInit {
 
   shop(id: any) {
     let service = this.plansAC.find((e: any) => {
-      if(e.idProducto === id){
+      if (e.idProducto === id) {
         return e
       }
     })
-    const navigationExtras: NavigationExtras = { state: {...this.json, ...service} };
-    this.route.navigateByUrl('/home/comprar', navigationExtras);}
+    let state2 = { ...this.json, ...service }
+    localStorage.setItem('safe0', JSON.stringify(state2));
+    const navigationExtras: NavigationExtras = { state: { ...this.json, ...service } };
+    this.route.navigateByUrl('/home/comprar', navigationExtras);
+  }
+  
+  // price() {
+  //   let price = Number(this.plansAC[0].precioEmision)
+  //   let change = Number(this.plansAC.tipoCambio)
+  //   let priceSol = price * change
+  //   console.log(price);
+
+  //   this.priceSol = priceSol
+  //   return price
+  // }
+
 }

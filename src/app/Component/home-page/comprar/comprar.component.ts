@@ -21,7 +21,10 @@ export class ComprarComponent implements OnInit {
 
   selectedPay: string = 'tarjeta';
   selectedPopup: string = 'agencia';
-
+  result: any
+  resultJson: any
+  safe0: any
+  safe0Json: any
   banca: boolean = true;
   /* metodoPago: any = [
     { name: 'option-2', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
@@ -42,7 +45,14 @@ export class ComprarComponent implements OnInit {
     private router: ActivatedRoute,
     public offersService: OffersService,
   ) {
-    this.current = this.route.getCurrentNavigation()?.extras.state as any
+    this.safe0 = localStorage.getItem('safe0')
+    this.safe0Json = JSON.parse(this.safe0)
+    this.result = localStorage.getItem('Datasafe')
+    this.resultJson = JSON.parse(this.result)
+    console.log(this.resultJson);
+    console.log(this.safe0Json);
+
+    // this.current = this.route.getCurrentNavigation()?.extras.state as any
   }
 
   showDataContacto: Boolean = true;
@@ -51,8 +61,10 @@ export class ComprarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadShop();
-    console.log(this.current);
+    // this.loadShop();
+    // console.log(this.current);
+    //console.log(this.safe0Json.detailPay);
+
 
     this.firstFormGroup = new FormGroup({
       firstCtrl: new FormControl('idavuelta', Validators.required),
@@ -135,6 +147,10 @@ export class ComprarComponent implements OnInit {
   shopEnd() {
     // this.route.navigateByUrl('/home/comprar', navigationExtras);
     this.route.navigateByUrl('/home/conformidad');
+  }
 
+  otherPlan(){
+    localStorage.removeItem('safe0')
+    this.route.navigateByUrl('/home/seguros/planes');
   }
 }

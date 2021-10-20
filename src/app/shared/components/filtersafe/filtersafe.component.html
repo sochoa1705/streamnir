@@ -1,11 +1,13 @@
-<form class="bg-white filtroBox" [formGroup]="form">
+<form class="bg-white filtroBox" [formGroup]="form" novalidate>
     <div class="container bg-white">
         <!-- COMBOS -->
         <div class="row filter espaciado versionMobile">
             <div class="w-130">
-                <button class="customers" (click)="showEdadPasajero()">Pasajero(s):</button>
-                <div class="boxFlotante seguro" *ngIf="!showOptionEdad">
-                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
+                <!-- <button class="customers" (click)="customers($event)">10 Pasajero</button> -->
+                <button class="customers" (click)="showPasajero()">{{limit}} Pasajero(s)</button>
+                <!-- PASAJEROS -->
+                <div class="boxFlotante seguro" *ngIf="!showOption">
+                    <!-- <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
                         <div class="d-flex flex-row flex-column w-100">
                             <div class="d-flex flex-row text1">
                                 <img src="./assets/filter/icon-user.png" alt=""> Pasajero 1
@@ -13,82 +15,38 @@
                         </div>
                         <div class="d-flex flex-row number">
                             <div class="d-flex flex-row textBtn">
-                                <input class="inputEdadPasajero" type="text" placeholder="Edad">
+                                <input  formControlName="age" class="inputEdadPasajero" type="text" placeholder="Edad">
                             </div>
                             <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
 
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
-                        <div class="d-flex flex-row flex-column w-100">
-                            <div class="d-flex flex-row text1">
-                                <img src="./assets/filter/icon-user.png" alt=""> Pasajero 2
+                    <div formArrayName="passenger">
+                        <div [formGroupName]="i" *ngFor="let pass of getArraypassenger(); let i = index" class="boxTwoPasajero d-flex flex-row align-items-center p-2">
+                            <div class="d-flex flex-row flex-column w-100">
+                                <div class="d-flex flex-row text1">
+                                    <img src="./assets/filter/icon-user.png" alt=""> Pasajero {{i + 1}}
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex flex-row number">
-                            <div class="d-flex flex-row textBtn">
-                                <input class="inputEdadPasajero" type="text" placeholder="Edad">
-                            </div>
-                            <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
-                                <img src="./assets/filter/delete.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
-                        <div class="d-flex flex-row flex-column w-100">
-                            <div class="d-flex flex-row text1">
-                                <img src="./assets/filter/icon-user.png" alt=""> Pasajero 3
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row number">
-                            <div class="d-flex flex-row textBtn">
-                                <input class="inputEdadPasajero" type="text" placeholder="Edad">
-                            </div>
-                            <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
-                                <img src="./assets/filter/delete.png" alt="">
+                            <div class="d-flex flex-row number">
+                                <div class="d-flex flex-row textBtn">
+                                    <input formControlName="age" class="inputEdadPasajero" type="text" placeholder="Edad">
+                                </div>
+                                <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
+                                    <img (click)="removePassenger(i)" src="./assets/filter/delete.png" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
-                        <div class="d-flex flex-row flex-column w-100">
-                            <div class="d-flex flex-row text1">
-                                <img src="./assets/filter/icon-user.png" alt=""> Pasajero 4
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row number">
-                            <div class="d-flex flex-row textBtn">
-                                <input class="inputEdadPasajero" type="text" placeholder="Edad">
-                            </div>
-                            <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
-                                <img src="./assets/filter/delete.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
-                        <div class="d-flex flex-row flex-column w-100">
-                            <div class="d-flex flex-row text1">
-                                <img src="./assets/filter/icon-user.png" alt=""> Pasajero 5
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row number">
-                            <div class="d-flex flex-row textBtn">
-                                <input class="inputEdadPasajero" type="text" placeholder="Edad">
-                            </div>
-                            <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
-                                <img src="./assets/filter/delete.png" alt="">
-                            </div>
-                        </div>
-                    </div>
                     <div class="d-flex flex-row justify-content-between align-items-center p-2 btnPasajero">
-                        <button class="Agregar" type="button">+ Agregar pasajero</button>
-                        <button type="button" (click)="showEdadPasajero()">Listo</button>
+                        <button class="Agregar" [disabled]="limitePassenger" type="button" (click)="addPassenger(limit)">+ Agregar pasajero</button>
+                        <button type="button" (click)="fechNac()">Listo</button>
                     </div>
                 </div>
+                <!-- END PASAJEROS -->
             </div>
 
 
@@ -135,7 +93,7 @@
 
                     </div>
                     <select class="form-select marginRight10 selectSeguro" formControlName="origenSafe" aria-label="Default select example">
-                        <option selected>PE</option>
+                        <option selected value="510">PE</option>
                         <option value="1">(EU) Europa</option>
                         <option value="2">América Latina y Caribe</option>
                         <option value="3">EEUU y Canadá</option>
@@ -147,24 +105,24 @@
 
                 <!-- DESTINO -->
                 <div class="columnFiltro narginColumn">
-                    <select class="form-select selectSeguro" formControlName="destinoSafe" aria-label="Default select example">
-                        <!-- <option selected>Destino</option>
-                        <option value="1">(EU) Europa</option>
-                        <option value="2">América Latina y Caribe</option>
-                        <option value="3">EEUU y Canadá</option>
-                        <option value="4">Asía, África y Oceanía</option>
-                        <option value="5">Todo el mundo</option> -->
+                    <div *ngIf="this.form.controls.destinoSafe.touched && this.form.controls.destinoSafe.invalid" class="position-relative">
+                        <div *ngIf="this.form.controls.destinoSafe.errors && this.form.controls.destinoSafe.errors.required">Email is required.</div>
+                    </div>
+                    <select class="form-select selectSeguro" formControlName="destinoSafe" aria-label="Default select example" required>
                         <option disabled selected>Destino</option>
-                        <option *ngFor="let o of options" value="{{o.id_destino}}">{{o.descripcion_destino}}</option>
+                        <option *ngFor="let o of options" value="{{o.ref_assistcard}}">{{o.descripcion_destino}}</option>
                     </select>
                 </div>
                 <!-- END DESTINO -->
 
                 <!-- OCULTAR CAMPO -->
                 <div class="columnFiltro hideColumn">
-                    <input name="datepicker" ngbDatepicker #datepicker="ngbDatepicker" [footerTemplate]="footerTemplate" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1">
+                    <input name="datepicker" ngbDatepicker #datepicker="ngbDatepicker" [footerTemplate]="footerTemplate" [autoClose]="'outside'"
+                        (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!"
+                        tabindex="-1">
                     <ng-template #t let-date let-focused="focused">
-                        <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                        <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)"
+                            (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
                             {{ date.day }}
                         </span>
                     </ng-template>
@@ -206,7 +164,8 @@
                         </svg>
 
                     </div>
-                    <input #dpFromDate formControlName="start" class="form-control inputDer" (click)="datepicker.toggle()" placeholder="Salida" name="dpFromDate" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+                    <input #dpFromDate autocomplete="off" formControlName="fromDate" class="form-control inputDer" (click)="datepicker.toggle()"
+                        placeholder="Salida" name="start" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
                 </div>
                 <div class="columnFiltro narginColumn" *ngIf="selected === 'idavuelta'">
                     <div class="iconCalendar">
@@ -219,121 +178,18 @@
                         </svg>
 
                     </div>
-                    <input #dpToDate formControlName="end" class="form-control inputIzq" (click)="datepicker.toggle()" placeholder="Vuelta" name="dpToDate" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
+                    <input autocomplete="off" #dpToDate formControlName="toDate" class="form-control inputIzq" (click)="datepicker.toggle()"
+                        placeholder="Vuelta" name="dpToDate" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
                 </div>
                 <!-- BOTOM -->
                 <div class="columnButton">
-                    <button (click)="send()">Cotizar Ahora</button>
+                    <!-- <button type="submit" [disabled]="form.invalid">Cotizar Ahora</button> -->
+                    <button type="submit" (click)="send()" [disabled]="!showOption">Cotizar Ahora</button>
                 </div>
                 <!-- END BOTOM -->
                 <!-- END IDA Y VUELTA -->
             </div>
         </div>
-
-
         <!-- END FILTROS -->
     </div>
-    <ul id="cdr">
-        <li>
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 d-flex align-items-center pr-0">
-                        <svg class="d-inline" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.32455 0.247574C9.31378 0.247574 10.2625 0.640545 10.962 1.34004C11.6615 2.03953 12.0545 2.98825 12.0545 3.97748C12.0545 4.96671 11.6615 5.91542 10.962 6.61492C10.2625 7.31441 9.31378 7.70738 8.32455 7.70738C7.33532 7.70738 6.38661 7.31441 5.68711 6.61492C4.98762 5.91542 4.59465 4.96671 4.59465 3.97748C4.59465 2.98825 4.98762 2.03953 5.68711 1.34004C6.38661 0.640545 7.33532 0.247574 8.32455 0.247574ZM8.32455 9.57233C12.4461 9.57233 15.7844 11.2415 15.7844 13.3022V15.1672H0.864746V13.3022C0.864746 11.2415 4.20301 9.57233 8.32455 9.57233Z"
-                                fill="#DF0C30" />
-                        </svg>
-                        <div class="d-inline">
-                            <h4>Adultos</h4>
-                            <span>12 o más años</span>
-                        </div>
-                    </div>
-                    <div class="col-6 d-flex">
-                        <button class="count" name="adultos" (click)="count(-1, $event)">
-                            -
-                        </button>
-                        <input type='text' id="adultos" value="{{ pasajeros[0].adultos }}">
-                        <button class="count" name="adultos" (click)="count(+1, $event)">
-                            +
-                        </button>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 d-flex align-items-center pr-0">
-                        <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0)">
-                                <path d="M5.59493 11.2267C6.1743 11.2267 6.64397 10.7571 6.64397 10.1777C6.64397 9.59833 6.1743 9.12866 5.59493 9.12866C5.01557 9.12866 4.5459 9.59833 4.5459 10.1777C4.5459 10.7571 5.01557 11.2267 5.59493 11.2267Z"
-                                    fill="#DF0C30" />
-                                <path d="M15.5824 8.40343C15.6621 7.71526 15.7355 6.93128 15.7355 6.39208C15.7355 2.52673 11.2317 1.08606 8.39228 1.08606C6.55018 1.08606 5.2207 2.07425 4.77381 2.4582C3.3751 2.53862 1.04904 3.42891 1.04904 6.39208C1.04904 6.93898 1.12177 7.71946 1.2008 8.40413C0.492347 8.69366 0 9.37903 0 10.1777C0 11.1876 0.785378 12.0093 1.77567 12.0862C2.7233 14.8368 5.3284 16.8216 8.39228 16.8216C11.4562 16.8216 14.0613 14.8375 15.0089 12.0862C15.9999 12.0093 16.7846 11.1876 16.7846 10.1777C16.7846 9.37833 16.2922 8.69296 15.5824 8.40343ZM14.1095 11.4554C14.1095 11.4568 14.1081 11.4575 14.1081 11.4589V11.461C13.3906 13.9472 11.1023 15.7726 8.39228 15.7726C5.4375 15.7726 2.98555 13.6024 2.52398 10.7715L3.22194 8.33C3.84506 8.13208 5.24098 7.5719 5.85222 6.38928C6.79285 7.27817 8.90071 8.36916 13.5913 8.42721L14.2613 10.768C14.2235 11.0015 14.1739 11.2309 14.1095 11.4554Z"
-                                    fill="#DF0C30" />
-                                <path d="M11.1897 11.2267C11.769 11.2267 12.2387 10.7571 12.2387 10.1777C12.2387 9.59833 11.769 9.12866 11.1897 9.12866C10.6103 9.12866 10.1406 9.59833 10.1406 10.1777C10.1406 10.7571 10.6103 11.2267 11.1897 11.2267Z"
-                                    fill="#DF0C30" />
-                                <path d="M9.77634 12.7722C9.01334 13.51 7.77128 13.51 7.00829 12.7722C6.80058 12.5729 6.46768 12.5771 6.26627 12.7862C6.06485 12.9946 6.07115 13.3261 6.27956 13.5282C6.86212 14.0905 7.62722 14.3709 8.39231 14.3709C9.15741 14.3709 9.92251 14.0905 10.5051 13.5282C10.7135 13.3268 10.7191 12.9946 10.5184 12.7862C10.3169 12.5771 9.98475 12.5729 9.77634 12.7722Z"
-                                    fill="#DF0C30" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0">
-                                    <rect width="16.7846" height="16.7846" fill="white" transform="translate(0 0.736328)" />
-                                </clipPath>
-                            </defs>
-                        </svg>
-
-                        <div class="d-inline">
-                            <h4>Niños</h4>
-                            <span>de 2 a 11 años</span>
-                        </div>
-                    </div>
-                    <div class="col-6 d-flex">
-                        <button class="count" name="ninos" (click)="count(-1, $event)">
-                            -
-                        </button>
-                        <input type='text' id="ninos" formControlName="ninos" value="{{pasajeros[0].ninos}}">
-                        <button class="count" name="ninos" (click)="count(+1, $event)">
-                            +
-                        </button>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 d-flex align-items-center  pr-0">
-                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18.3381 9.74065C18.4004 9.53642 18.4536 9.32952 18.4975 9.12056C18.5003 9.1047 18.5013 9.08978 18.505 9.07393C18.5236 8.98255 18.532 8.88837 18.5469 8.79605C18.5703 8.64965 18.5982 8.50419 18.6122 8.35686C18.7232 7.2578 18.5881 6.14782 18.2166 5.10749C17.8452 4.06717 17.2467 3.12261 16.4647 2.34239C15.7726 1.64882 14.9504 1.09879 14.0451 0.723858C13.1399 0.348929 12.1695 0.156493 11.1897 0.157597V7.6174H4.21199L3.41193 5.75245H0V7.6174H2.18293L3.88749 11.5953C3.2899 11.8416 2.77877 12.2596 2.41875 12.7963C2.05873 13.3331 1.86601 13.9646 1.86495 14.611C1.86495 16.4107 3.32894 17.8746 5.12862 17.8746C6.76884 17.8746 8.11627 16.654 8.34473 15.0772H10.3048C10.5332 16.654 11.8807 17.8746 13.5209 17.8746C15.3206 17.8746 16.7846 16.4107 16.7846 14.611C16.7846 14.0235 16.6158 13.4799 16.3435 13.0025C16.3827 12.9642 16.4265 12.9307 16.4657 12.8915C16.8014 12.5549 17.1072 12.1837 17.3767 11.7874C17.6452 11.3865 17.8765 10.9613 18.063 10.5202C18.0779 10.4857 18.0872 10.4493 18.1012 10.4148H18.1022L18.1161 10.3757C18.1982 10.1705 18.2728 9.96445 18.3353 9.75277L18.3381 9.74065ZM5.12862 16.0097C4.35746 16.0097 3.7299 15.3821 3.7299 14.611C3.7299 13.8398 4.35746 13.2123 5.12862 13.2123C5.89978 13.2123 6.52733 13.8398 6.52733 14.611C6.52733 15.3821 5.89978 16.0097 5.12862 16.0097ZM13.5209 16.0097C12.7497 16.0097 12.1222 15.3821 12.1222 14.611C12.1222 13.8398 12.7497 13.2123 13.5209 13.2123C14.2921 13.2123 14.9196 13.8398 14.9196 14.611C14.9196 15.3821 14.2921 16.0097 13.5209 16.0097Z"
-                                fill="#DF0C30" />
-                        </svg>
-
-                        <div class="d-inline">
-                            <h4>Infantes</h4>
-                            <span>menores de 2 años</span>
-                        </div>
-                    </div>
-                    <div class="col-6 d-flex">
-                        <button class="count" name="infantes" (click)="count(-1, $event)">
-                            -
-                        </button>
-                        <input type='text' formControlName="infantes" id="infantes" value="{{pasajeros[0].infantes}}">
-                        <button class="count" name="infantes" (click)="count(+1, $event)">
-                            +
-                        </button>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </li>
-        <hr>
-        <li class="d-flex justify-content-between">
-            <!-- <button mat-raised-button color="primary">Cancelar</button>
-            <button mat-raised-button color="accent">Listo</button> -->
-
-            <button class="cancel" (click)="customerClose($event)">Cancelar</button>
-            <button>Listo</button>
-        </li>
-    </ul>
 </form>
