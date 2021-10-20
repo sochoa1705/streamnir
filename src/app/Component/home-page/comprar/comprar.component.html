@@ -485,7 +485,7 @@
     <div class="row pt-md-3">
         <!-- IZQUIERDA -->
         <div class="col-8 viewMobileWidth order-1 order-md-0 ">
-            <h1 class="titleMob d-md-block d-none">{{ title }}</h1>
+            <h1 class="titleMob d-md-block d-none">{{ safe0Json?.title }}</h1>
             <!-- <h1>¡Falta poco! Confirma ahora tu reserva.</h1> -->
             <div class="card pasajeros hideViewMobile">
                 <div class="card-header">
@@ -912,8 +912,8 @@
                                     </span>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <span class="price_old">PEN {{ safe0Json.change }}</span>
-                                    <span class="price_new">PEN {{ safe0Json.DsctoPromcional === null ? '0' : safe0Json.DsctoPromcional }}</span>
+                                    <span class="price_old">PEN {{ safe0Json?.change }}</span>
+                                    <span class="price_new">PEN {{ safe0Json?.DsctoPromcional === null ? '0' : safe0Json?.DsctoPromcional }}</span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -923,7 +923,7 @@
                                     </span>
                                 </div>
                                 <div class="col-5 text-end">
-                                    <span class="price_Desc">PEN {{ safe0Json.DsctoPromcional === null ? '0' : safe0Json.DsctoPromcional }}</span>
+                                    <span class="price_Desc">PEN {{ safe0Json?.DsctoPromcional === null ? '0' : safe0Json?.DsctoPromcional }}</span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -934,7 +934,7 @@
                             <span class="price_end">TOTAL A PAGAR</span>
                         </div>
                         <div class="col-5 text-end">
-                            $<span class="price_end_number">{{ safe0Json.change }}</span>
+                            $<span class="price_end_number">{{ safe0Json?.change }}</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -995,14 +995,14 @@
             <!-- END DETALLE DE COBERTURA -->
             <div *ngIf="safe0Json.detalleCobertura" class="order-0">
                 <app-coverage
-                [txtPlan]="safe0Json.nombreProducto"
+                [txtPlan]="safe0Json?.nombreProducto"
                 [txtDias]="'8'"
                 [asistenciaMedica]="'USD 60.000'"
                 [txtOrigen]=""
                 [txtDestino]="'EUROPA'"
-                [txtSalida]="resultJson.fromDate"
-                [txtRegreso]="resultJson.toDate"
-                [txtPasajeros]="resultJson.ClienteCotizacion.length"
+                [txtSalida]="resultJson?.fromDate"
+                [txtRegreso]="resultJson?.toDate"
+                [txtPasajeros]="resultJson?.ClienteCotizacion.length"
                 ></app-coverage>
             </div>
 

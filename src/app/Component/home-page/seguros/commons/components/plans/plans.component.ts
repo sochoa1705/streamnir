@@ -22,7 +22,7 @@ export class PlansComponent implements OnInit {
   json = {
     detailPay: 'safe',
     filter: 'filtersafe',
-    title: 'Viaja seguro',
+    title: '!Viaja seguro!',
     asistencia: false,
     reembolso: false,
     detalleViaje: false,

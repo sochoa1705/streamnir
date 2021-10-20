@@ -106,8 +106,9 @@
                 <!-- DESTINO -->
                 <div class="columnFiltro narginColumn">
                     <div *ngIf="this.form.controls.destinoSafe.touched && this.form.controls.destinoSafe.invalid" class="position-relative">
-                        <div *ngIf="this.form.controls.destinoSafe.errors && this.form.controls.destinoSafe.errors.required">Email is required.</div>
+                        <div *ngIf="this.form.controls.destinoSafe.errors && this.form.controls.destinoSafe.errors.required">Destino requerido.</div>
                     </div>
+                    <input type="hidden" value="">
                     <select class="form-select selectSeguro" formControlName="destinoSafe" aria-label="Default select example" required>
                         <option disabled selected>Destino</option>
                         <option *ngFor="let o of options" value="{{o.ref_assistcard}}">{{o.descripcion_destino}}</option>
@@ -162,7 +163,6 @@
                             <path d="M14.8335 1V4.81818" stroke="#009AED" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M1.46973 8.63647H20.5606" stroke="#009AED" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-
                     </div>
                     <input #dpFromDate autocomplete="off" formControlName="fromDate" class="form-control inputDer" (click)="datepicker.toggle()"
                         placeholder="Salida" name="start" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
@@ -176,18 +176,18 @@
                             <path d="M14.8335 1V4.81818" stroke="#009AED" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M1.46973 8.63647H20.5606" stroke="#009AED" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-
                     </div>
                     <input autocomplete="off" #dpToDate formControlName="toDate" class="form-control inputIzq" (click)="datepicker.toggle()"
                         placeholder="Vuelta" name="dpToDate" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
                 </div>
+                <!-- END IDA Y VUELTA -->
+
                 <!-- BOTOM -->
                 <div class="columnButton">
                     <!-- <button type="submit" [disabled]="form.invalid">Cotizar Ahora</button> -->
-                    <button type="submit" (click)="send()" [disabled]="!showOption">Cotizar Ahora</button>
+                    <button type="submit" (click)="send()" [disabled]="!showOption || form.invalid">Cotizar Ahora</button>
                 </div>
                 <!-- END BOTOM -->
-                <!-- END IDA Y VUELTA -->
             </div>
         </div>
         <!-- END FILTROS -->
