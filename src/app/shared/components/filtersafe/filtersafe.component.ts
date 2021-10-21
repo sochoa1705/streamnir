@@ -166,8 +166,8 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
 
     //console.log(this.fromDate);
     let form = this.form.value
-    localStorage.setItem('Datasafe', JSON.stringify(form));
     console.log(form);
+    localStorage.setItem('Datasafe', JSON.stringify(form));
     // console.log(this.FromDate2.nativeElement.value);
     const navigationExtras: NavigationExtras = { state: this.plan };
     this.route.navigateByUrl('/home/seguros/planes', navigationExtras);

@@ -825,8 +825,8 @@ section {
         &:hover {
             background: $red
         }
-        &:disabled {
-            color: $gray_border;
+        &:disabled{
+            color: $gray_light;
             background: $red!important
         }
     }

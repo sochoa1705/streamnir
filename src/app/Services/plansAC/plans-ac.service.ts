@@ -52,7 +52,7 @@ export class PlansACService {
       map((observe: any) => observe['body']['Resultado']),
       map((e: any) => {
         return e.map((i: any, index: any) => {
-          i.change = e[index].precioEmision * e[index].tipoCambio
+          i.change = (e[index].precioEmision * e[index].tipoCambio).toFixed(2)
           return i
         })
       })
