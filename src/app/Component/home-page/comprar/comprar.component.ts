@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OffersService } from 'src/app/Services/mock/offers.service';
 
@@ -9,6 +9,7 @@ import { OffersService } from 'src/app/Services/mock/offers.service';
   styleUrls: ['./comprar.component.scss']
 })
 export class ComprarComponent implements OnInit {
+  formShop!: FormGroup
   current: any;
   detailPay!: string;
   filter!: string;
@@ -74,9 +75,56 @@ export class ComprarComponent implements OnInit {
       secondCtrl: new FormControl('idavuelta', Validators.required),
 
     });
+    this.createForm()
   }
 
-  pasajero(){
+  createForm() {
+    this.formShop = new FormGroup({
+      formCard: new FormGroup({
+        numberCard: new FormControl(),
+        nameCard: new FormControl(),
+        expiredCard: new FormControl(),
+        ccvCard: new FormControl(),
+        tipoDoc: new FormControl(),
+        numDoc: new FormControl(),
+        feePay: new FormControl(),
+        cityCard: new FormControl(),
+        address: new FormControl(),
+      }),
+      formContact: new FormGroup({
+        nameContacto: new FormControl(),
+        lastnameContacto: new FormControl(),
+        mailContacto: new FormControl(),
+        mailConfirmContacto: new FormControl(),
+        typePhone0: new FormControl(),
+        code0: new FormControl(),
+        numberPhone0: new FormControl(),
+        phones: new FormArray([]),
+        chkFac: new FormControl()
+      }),
+      chkPolity: new FormControl(),
+      chkInfo: new FormControl(),
+    })
+  }
+
+  getArrayPhone() {
+    return (<FormArray>this.formShop.get(['formContact', 'phones'])).controls
+  }
+
+  addPhone() {
+    ((<any>this.formShop.controls['formContact']).controls['phones']).push(
+      new FormGroup({
+        typePhone: new FormControl(),
+        code: new FormControl(),
+        numberPhone: new FormControl()
+      }));
+  }
+
+  removePhone(index: any) {
+    ((<any>this.formShop.controls['formContact']).controls['phones']).removeAt(index);
+  }
+
+  pasajero() {
     let scrolTop = window.scrollY;
     let n = scrolTop - 50;
     let elemento = this.adulto.nativeElement;
@@ -84,9 +132,9 @@ export class ComprarComponent implements OnInit {
     elemento.classList.add('adultocdr');
     elemento.setAttribute('style', `margin-top: ${n}px`);
     // elemento.style = `margin-top: ${scrolTop}`
-  
+
   }
-  pasajeroClose(){
+  pasajeroClose() {
     let elemento = this.adulto.nativeElement;
     elemento.classList.remove('adultocdr');
     elemento.setAttribute('style', `display:none`);
@@ -145,11 +193,17 @@ export class ComprarComponent implements OnInit {
   }
 
   shopEnd() {
+    // console.log(this.formShop);
+    console.log(this.formShop.value);
+    // console.log((this.formShop.controls));
+    // console.log((<FormArray>this.formShop.get(['formContact', 'phones'])).controls)
+
+
     // this.route.navigateByUrl('/home/comprar', navigationExtras);
-    this.route.navigateByUrl('/home/conformidad');
+    //this.route.navigateByUrl('/home/conformidad');
   }
 
-  otherPlan(){
+  otherPlan() {
     localStorage.removeItem('safe0')
     this.route.navigateByUrl('/home/seguros/planes');
   }
