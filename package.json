@@ -27,6 +27,7 @@
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "bootstrap": "^5.0.2",
     "eslint": "^7.32.0",
+    "moment": "^2.29.1",
     "ng5-slider": "^1.2.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",

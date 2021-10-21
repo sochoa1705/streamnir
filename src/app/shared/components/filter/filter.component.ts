@@ -7,6 +7,7 @@ import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng
 import { Injectable } from '@angular/core';
 import { NgbDateAdapter, } from '@ng-bootstrap/ng-bootstrap';
 import { FlightsService } from 'src/app/Services/flights/flights.service';
+import * as moment from 'moment/moment';
 
 /**
  * This Service handles how the date is represented in scripts i.e. ngModel.
@@ -78,6 +79,12 @@ export class FilterComponent implements OnInit {
   stateCtrl2 = new FormControl();
   filteredStates: Observable<State[]>;
 
+  dpFromDate: any;
+  dpToDate: any;
+
+ // fechaInicial : NgbDate | undefined;
+ // FechaFinal : NgbDate | undefined;
+  diffInDays: number | undefined
   
 
   showOption: Boolean = true;
@@ -128,8 +135,9 @@ export class FilterComponent implements OnInit {
 
   hoveredDate: NgbDate | null = null;
 
-  fromDate: NgbDate | null;
+  fromDate: NgbDate| null
   toDate: NgbDate | null;
+   
 
   constructor(
     public route: Router,
@@ -181,11 +189,13 @@ export class FilterComponent implements OnInit {
   }
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+   debugger;
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
   ngOnInit(): void {
     this.createForm()
+   
     //this.getListVuelos('lim')
   }
 
@@ -237,10 +247,21 @@ export class FilterComponent implements OnInit {
   }
 
   send() {
-    console.log(this.form.value);
-    // this.route.navigateByUrl('/home/vuelos/resultados');
-  }
+   // console.log(this.form.value);
+  debugger;
+   var FeIni = this.fromDate?.month + "/" + this.fromDate?.day + "/"+ this.fromDate?.year;
+   var FeFin = this.toDate?.month   + "/" + this.toDate?.day + "/"+ this.toDate?.year;
+   const date1 = new Date(FeIni);
+   const date2 = new Date(FeFin);
+ 
+   var diff = Math.abs(date1.getTime() - date2.getTime());
+   var diffDays = Math.ceil(diff / (1000 * 3600 * 24));   
+    console.log(FeIni);
+    console.log(FeFin);
+    console.log(diffDays);
 
+
+  }
 
   // count(valor: number, e: any) {
   //   console.log('HOLA');
