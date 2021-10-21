@@ -354,7 +354,8 @@ h2 {
             font-family: "Montserrat";
             font-size: 12px;
         }
-        box-shadow: 0px -2px 3px rgba(0, 0, 0, 0.16);
+        box-shadow: none;
+        // box-shadow: 0px -2px 3px rgba(0, 0, 0, 0.16);
         a {
             //text-decoration: underline;
             font-size: 14px;
@@ -541,6 +542,9 @@ input[type="checkbox"]+label {
 
 input[type="radio"] {
     display: none;
+    &.sex{
+        display: block
+    }
 }
 
 .option-2 {

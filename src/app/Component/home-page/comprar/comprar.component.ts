@@ -66,7 +66,6 @@ export class ComprarComponent implements OnInit {
     // console.log(this.current);
     //console.log(this.safe0Json.detailPay);
 
-
     this.firstFormGroup = new FormGroup({
       firstCtrl: new FormControl('idavuelta', Validators.required),
 
@@ -76,10 +75,14 @@ export class ComprarComponent implements OnInit {
 
     });
     this.createForm()
+    for (const i of this.resultJson.ClienteCotizacion) {
+      this.addCustomers()
+    }
   }
 
   createForm() {
     this.formShop = new FormGroup({
+      customers: new FormArray([]),
       formCard: new FormGroup({
         numberCard: new FormControl(),
         nameCard: new FormControl(),
@@ -105,6 +108,27 @@ export class ComprarComponent implements OnInit {
       chkPolity: new FormControl(),
       chkInfo: new FormControl(),
     })
+  }
+
+  getArrayCustomers() {
+    return (<FormArray>this.formShop.get(['customers'])).controls
+
+  }
+
+  addCustomers() {
+    // ((<any>this.formShop.controls['formContact']).controls['phones']).push(
+    (<FormArray>this.formShop.controls['customers']).push(
+      new FormGroup({
+        nameCustomer: new FormControl(),
+        lastNameCustomer: new FormControl(),
+        dayCustomer: new FormControl(),
+        monthCustomer: new FormControl(),
+        yearCustomer: new FormControl(),
+        nationalityCustomer: new FormControl(),
+        typeDocCustomer: new FormControl(),
+        numDocCustomer: new FormControl(),
+        sexCustomer: new FormControl()
+      }));
   }
 
   getArrayPhone() {
@@ -139,22 +163,6 @@ export class ComprarComponent implements OnInit {
     elemento.classList.remove('adultocdr');
     elemento.setAttribute('style', `display:none`);
   }
-
-  // createForm() {
-  //   this.form = new FormGroup({
-  //     tipo: new FormControl('idavuelta'),
-  //     catergory: new FormControl('economy'),
-  //     // adultos: new FormControl(0),
-  //     ninos: new FormControl(0),
-  //     infantes: new FormControl(0),
-  //     origen: new FormControl(),
-  //     destino: new FormControl(''),
-  //     range: new FormGroup({
-  //       start: new FormControl(),
-  //       end: new FormControl()
-  //     })
-  //   })
-  // }
 
   loadShop() {
     this.detailPay = this.current.detailPay;
@@ -200,7 +208,7 @@ export class ComprarComponent implements OnInit {
 
 
     // this.route.navigateByUrl('/home/comprar', navigationExtras);
-    //this.route.navigateByUrl('/home/conformidad');
+    this.route.navigateByUrl('/home/conformidad');
   }
 
   otherPlan() {
