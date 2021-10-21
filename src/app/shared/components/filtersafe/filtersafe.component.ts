@@ -92,6 +92,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   @ViewChild('menorEdad', { static: false }) menor!: ElementRef<HTMLInputElement>;
   @ViewChild('adulto', { static: false }) adulto!: ElementRef<HTMLInputElement>;
   @ViewChild('mayor', { static: false }) mayor!: ElementRef<HTMLInputElement>;
+  @ViewChild('destino', { static: false }) destino!: ElementRef<HTMLInputElement>;
   // @ViewChild('dpFromDate', { static: false }) dpFromDate!: ElementRef<HTMLInputElement>;
   // @ViewChild('dpToDate', { static: false }) dpToDate!: ElementRef<HTMLInputElement>;
 
@@ -162,17 +163,44 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     this.form.addControl('ClienteCotizacion', new FormControl(this.ClienteCotizacion));
     this.form.addControl('fromDate', new FormControl(this.FromDate2.nativeElement.value));
     this.form.addControl('toDate', new FormControl(this.ToDate2.nativeElement.value));
-    this.form.addControl('days', new FormControl())
+    this.form.removeControl('days')
+    this.form.addControl('days', new FormControl(this.diffDays()))
+    this.form.removeControl('destinyString');
+    this.form.addControl('destinyString', new FormControl(this.destinySring()));
 
     //console.log(this.fromDate);
     let form = this.form.value
     console.log(form);
     localStorage.setItem('Datasafe', JSON.stringify(form));
-    // console.log(this.FromDate2.nativeElement.value);
+    // console.log(this.options);
+    // console.log(this.destino.nativeElement.value);
+    
     const navigationExtras: NavigationExtras = { state: this.plan };
     this.route.navigateByUrl('/home/seguros/planes', navigationExtras);
   }
 
+  destinySring(){
+    for (const i of this.options) {   
+      if(String(i.ref_assistcard) === this.destino.nativeElement.value){
+        console.log(i.descripcion_destino);
+        return i.descripcion_destino
+      }
+    }
+  }
+
+  diffDays() {
+    var FeIni = this.fromDate ?.month + "/" + this.fromDate ?.day + "/" + this.fromDate ?.year;
+    var FeFin = this.toDate ?.month + "/" + this.toDate ?.day + "/" + this.toDate ?.year;
+    const date1 = new Date(FeIni);
+    const date2 = new Date(FeFin);
+
+    var diff = Math.abs(date1.getTime() - date2.getTime());
+    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    // console.log(FeIni);
+    // console.log(FeFin);
+    // console.log(diffDays);
+    return String(diffDays);
+  }
 
   createForm() {
     this.form = new FormGroup({
@@ -222,18 +250,18 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       let fecha: FormArray = (<FormArray>this.form.get('passenger'))
       ['controls'][indice].value.fecha;
       let fechaEnd = Number(fecha) - age
-      let dayFech:any = String(fechaEnd).substr(0, 2)
-      let monthFech:any = String(fechaEnd).substr(2, 2)
-      let yearFech:any = String(fechaEnd).substr(4, 4)
+      let dayFech: any = String(fechaEnd).substr(0, 2)
+      let monthFech: any = String(fechaEnd).substr(2, 2)
+      let yearFech: any = String(fechaEnd).substr(4, 4)
 
-      let omac2 ={'Edad': String(age),'FechaNacimiento': String(dayFech + '/' + monthFech + '/'+ yearFech)}
+      let omac2 = { 'Edad': String(age), 'FechaNacimiento': String(dayFech + '/' + monthFech + '/' + yearFech) }
       // omac.push(omac2)
       // console.log(fech);
       //  console.log(fech);
       //  console.log(age);
       this.ClienteCotizacion.push(omac2)
       //  console.log(this.form.controls);
-      
+
     }
 
     // console.log(this.form.controls['passenger'].value[0].age);
@@ -271,7 +299,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
         fecha: new FormControl(fechaNac),
       }));
 
-      //this.form.controls['passenger'].addControl
+    //this.form.controls['passenger'].addControl
 
   }
 

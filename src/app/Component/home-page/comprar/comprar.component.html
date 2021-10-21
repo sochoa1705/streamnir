@@ -22,10 +22,10 @@
                 <img src="./assets/_peru.png" alt=""> PE
             </div>
             <div class="d-flex align-items-center">
-                <img src="./assets/origen.png" alt=""> (EU) Europa
+                <img src="./assets/origen.png" alt=""> {{ resultJson?.destinyString }}
             </div>
             <div class="d-flex align-items-center">
-                <img src="./assets/calendar.png" alt=""> {{resultJson.fromDate}} . {{resultJson.toDate}} (8 días)
+                <img src="./assets/calendar.png" alt=""> {{resultJson.fromDate}} . {{resultJson.toDate}} ( {{ resultJson?.days }} días )
             </div>
             <div class="d-flex align-items-center textBold">
                 <img src="./assets/user.png" alt=""> {{resultJson.ClienteCotizacion.length}} Pasajero(s)
@@ -1085,10 +1085,10 @@
                         </a>
                     </h2>
                     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                        <div class="accordion-body">
+                        <div class="accordion-body" *ngFor="let price of resultJson.passenger">
                             <div class="row">
                                 <div class="col-6">
-                                    <span class="textAcor">1 Adulto(s)
+                                    <span class="textAcor">1 Pasajero
                                     </span>
                                 </div>
                                 <div class="col-6 text-end">
@@ -1114,8 +1114,8 @@
                             <span class="price_end">TOTAL A PAGAR</span>
                         </div>
                         <div class="col-5 text-end">
-                            $
-                            <span class="price_end_number">{{ safe0Json?.change }}</span>
+                            S/.
+                            <span class="price_end_number">{{ safe0Json?.change * resultJson.passenger.length }}</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -1176,7 +1176,7 @@
             <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
             <!-- END DETALLE DE COBERTURA -->
             <div *ngIf="safe0Json.detalleCobertura" class="order-0">
-                <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="'8'" [asistenciaMedica]="'USD 60.000'" [txtOrigen]="" [txtDestino]="'EUROPA'"
+                <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]="" [txtDestino]="'EUROPA'"
                     [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
             </div>
 

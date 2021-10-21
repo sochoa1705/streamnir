@@ -37,4 +37,7 @@ export enum ENDPOINT_API {
   // SECUREBOOKING
   SECURE_BOOKING ='RegistrarReservaSeguro',
 
+    // GENERATEPAY
+    GENERATE_PAY ='GenerarPagoSafetyPay',
+
 }

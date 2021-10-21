@@ -9,11 +9,15 @@ import { CoverageModule } from 'src/app/shared/components/coverage/coverage.modu
 import { MaterialModule } from 'src/app/shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SecureBookingService } from 'src/app/Services/secureBooking/secure-booking.service';
+import { HttpClientModule } from '@angular/common/http';
+import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
 
 @NgModule({
   declarations: [ ComprarComponent ],
   imports: [
     CommonModule,
+    HttpClientModule,
     CustomersModule,
     CardOfferModule,
     FilterModule,
@@ -24,6 +28,7 @@ import { RouterModule } from '@angular/router';
     MaterialModule,
     RouterModule,
   ],
-  exports: [ ComprarComponent ]
+  exports: [ ComprarComponent ],
+  providers: [SecureBookingService, GeneratePayService]
 })
 export class ComprarModule { }

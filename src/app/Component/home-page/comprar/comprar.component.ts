@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OffersService } from 'src/app/Services/mock/offers.service';
+import { SecureBookingService } from 'src/app/Services/secureBooking/secure-booking.service';
+import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
 
 @Component({
   selector: 'app-comprar',
@@ -45,6 +47,7 @@ export class ComprarComponent implements OnInit {
     public route: Router,
     private router: ActivatedRoute,
     public offersService: OffersService,
+    public generatePayService: GeneratePayService,
   ) {
     this.safe0 = localStorage.getItem('safe0')
     this.safe0Json = JSON.parse(this.safe0)
@@ -62,6 +65,7 @@ export class ComprarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getGeneratePay()
     // this.loadShop();
     // console.log(this.current);
     //console.log(this.safe0Json.detailPay);
@@ -79,6 +83,32 @@ export class ComprarComponent implements OnInit {
       this.addCustomers()
     }
   }
+
+  getGeneratePay(){
+    let payload = {
+      "Aplicacion": "Intranet",
+      "CodigoSeguimiento": "[Web: midominio.com - Agente: demo - Id: 19082021101601]",
+      "CodigosEntorno": "DESA/NMO/NMO",
+      "Parametros": {
+        "PromoterName": "",
+        "CustomerName": "PEREZ ANA",
+        "CustomerDocumentNumber": "10078410452",
+        "IdClient": 12758,
+        "WebId": "3",
+        "Mail": "anaperez@gmail.com",
+        "DKClient": "61649",
+        "UserAgent": "Assist Card",
+        "IdUser": "87614",
+        "IpUser": "119.5.166.59",
+        "Amount": {
+          "FeeAmount": 0.9,
+          "RechargeAmount": 64,
+          "Currency": "USD"
+        }
+      }
+    }
+  this.generatePayService.generatePay(payload).subscribe((e: any) => console.log(e))
+}
 
   createForm() {
     this.formShop = new FormGroup({

@@ -7,7 +7,6 @@ import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng
 import { Injectable } from '@angular/core';
 import { NgbDateAdapter, } from '@ng-bootstrap/ng-bootstrap';
 import { FlightsService } from 'src/app/Services/flights/flights.service';
-import * as moment from 'moment/moment';
 
 /**
  * This Service handles how the date is represented in scripts i.e. ngModel.
@@ -82,10 +81,10 @@ export class FilterComponent implements OnInit {
   dpFromDate: any;
   dpToDate: any;
 
- // fechaInicial : NgbDate | undefined;
- // FechaFinal : NgbDate | undefined;
+  // fechaInicial : NgbDate | undefined;
+  // FechaFinal : NgbDate | undefined;
   diffInDays: number | undefined
-  
+
 
   showOption: Boolean = true;
   showPasajero() {
@@ -135,9 +134,9 @@ export class FilterComponent implements OnInit {
 
   hoveredDate: NgbDate | null = null;
 
-  fromDate: NgbDate| null
+  fromDate: NgbDate | null
   toDate: NgbDate | null;
-   
+
 
   constructor(
     public route: Router,
@@ -189,13 +188,13 @@ export class FilterComponent implements OnInit {
   }
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-   debugger;
+    debugger;
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
   ngOnInit(): void {
     this.createForm()
-   
+
     //this.getListVuelos('lim')
   }
 
@@ -204,7 +203,7 @@ export class FilterComponent implements OnInit {
     this.flightsService.getCiudades(e).subscribe(
       data => {
         console.log(data);
-        
+
         this.citys = data
       },
       err => console.log(err),
@@ -212,13 +211,13 @@ export class FilterComponent implements OnInit {
     )
   }
 
-  autoComplete(e:any) {
+  autoComplete(e: any) {
     this.citys = [];
     console.log(e.target);
     // let elemento = this.origen.nativeElement;
     let elemento = e.target;
     console.log(elemento);
-    
+
     let value = elemento.value;
     if (value.length == 0) {
       elemento.classList.remove('auto');
@@ -247,19 +246,18 @@ export class FilterComponent implements OnInit {
   }
 
   send() {
-   // console.log(this.form.value);
-  debugger;
-   var FeIni = this.fromDate?.month + "/" + this.fromDate?.day + "/"+ this.fromDate?.year;
-   var FeFin = this.toDate?.month   + "/" + this.toDate?.day + "/"+ this.toDate?.year;
-   const date1 = new Date(FeIni);
-   const date2 = new Date(FeFin);
- 
-   var diff = Math.abs(date1.getTime() - date2.getTime());
-   var diffDays = Math.ceil(diff / (1000 * 3600 * 24));   
+    // console.log(this.form.value);
+    debugger;
+    var FeIni = this.fromDate?.month + "/" + this.fromDate?.day + "/" + this.fromDate?.year;
+    var FeFin = this.toDate?.month + "/" + this.toDate?.day + "/" + this.toDate?.year;
+    const date1 = new Date(FeIni);
+    const date2 = new Date(FeFin);
+
+    var diff = Math.abs(date1.getTime() - date2.getTime());
+    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
     console.log(FeIni);
     console.log(FeFin);
     console.log(diffDays);
-
 
   }
 

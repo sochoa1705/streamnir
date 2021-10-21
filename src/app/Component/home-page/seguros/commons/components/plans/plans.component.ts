@@ -51,28 +51,6 @@ export class PlansComponent implements OnInit {
 
   listPlansAC() {
     this.loaderSubjectService.showLoader()
-    // let payload = {
-    //   "Aplicacion": "Intranet",
-    //   "CodigoSeguimiento": "Test",
-    //   "CodigosEntorno": "PROD/NMO/NMO",
-    //   "Parametros": {
-    //     "UnidadNegocio": 5,
-    //     "Dk": "23571",
-    //     "SubCodigo": null,
-    //     "CotizacionAC": {
-    //       "Pais": "510",
-    //       "CodigoAgencia": "87823",
-    //       "NumeroSucursal": "0",
-    //       "PlanFamiliar": "false",
-    //       "Destino": this.resultJson.destinoSafe,
-    //       "CantidadDias": "10",
-    //       "Clientes": {
-    //         "ClienteCotizacion": this.resultJson.ClienteCotizacion
-    //       }
-    //     }
-    //   }
-    // }
-
     let payload = {
       "Aplicacion": "Intranet",
       "CodigoSeguimiento": "Test",
@@ -86,23 +64,45 @@ export class PlansComponent implements OnInit {
           "CodigoAgencia": "87823",
           "NumeroSucursal": "0",
           "PlanFamiliar": "false",
-          "Destino": "12",
-          "CantidadDias": "10",
+          "Destino": this.resultJson.destinoSafe,
+          "CantidadDias": this.resultJson.days,
           "Clientes": {
-            "ClienteCotizacion": [
-              {
-                "Edad": "40",
-                "FechaNacimiento": "17/08/1981"
-              },
-              {
-                "Edad": "10",
-                "FechaNacimiento": "17/08/2011"
-              }
-            ]
+            "ClienteCotizacion": this.resultJson.ClienteCotizacion
           }
         }
       }
     }
+
+    // let payload = {
+    //   "Aplicacion": "Intranet",
+    //   "CodigoSeguimiento": "Test",
+    //   "CodigosEntorno": "PROD/NMO/NMO",
+    //   "Parametros": {
+    //     "UnidadNegocio": 5,
+    //     "Dk": "23571",
+    //     "SubCodigo": null,
+    //     "CotizacionAC": {
+    //       "Pais": "510",
+    //       "CodigoAgencia": "87823",
+    //       "NumeroSucursal": "0",
+    //       "PlanFamiliar": "false",
+    //       "Destino": "12",
+    //       "CantidadDias": "10",
+    //       "Clientes": {
+    //         "ClienteCotizacion": [
+    //           {
+    //             "Edad": "40",
+    //             "FechaNacimiento": "17/08/1981"
+    //           },
+    //           {
+    //             "Edad": "10",
+    //             "FechaNacimiento": "17/08/2011"
+    //           }
+    //         ]
+    //       }
+    //     }
+    //   }
+    // }
     this.plansACService.plansAC(payload).subscribe({
       next: (response) => {
         this.plansAC = response

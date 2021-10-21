@@ -60,7 +60,7 @@
                 <div class="card-body rowBody">
                     <div class="leftCard">TOTAL A PAGAR</div>
                     <div class="rightCard">PEN
-                        <div class="boldFont">314,80</div>
+                        <div class="boldFont">{{ safe0Json?.change * resultJson.passenger.length }}</div>
                     </div>
                 </div>
             </div>
@@ -153,7 +153,10 @@
 
     <div class="row py-2">
         <div class="offset-4 col-4 viewMobile">
-            <app-coverage></app-coverage>
+                <div *ngIf="safe0Json.detalleCobertura" class="order-0">
+                        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]="" [txtDestino]="'EUROPA'"
+                            [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
+                    </div>
         </div>
         <div class="clearfix"></div>
     </div>
