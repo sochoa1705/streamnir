@@ -17,7 +17,7 @@ export class PlansACService {
   // payload = {
   //   "Aplicacion": "Intranet",
   //   "CodigoSeguimiento": "Test",
-  //   "CodigosEntorno": "PROD/NMO/NMO",
+  //   "CodigosEntorno": "DESA/NMO/NMO",
   //   "Parametros": {
   //     "UnidadNegocio": 5,
   //     "Dk": "23571",

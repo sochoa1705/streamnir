@@ -55,6 +55,10 @@ export interface State {
   name: string;
   population: string;
 }
+export interface Clientes {
+  Edad: string;
+  FechaNacimiento: string;
+}
 
 @Component({
   selector: 'app-filtersafe',
@@ -68,14 +72,14 @@ export interface State {
 export class FiltersafeComponent implements OnInit, AfterViewInit {
   @Input() options: any;
   @Input() plan: any;
-
   form!: FormGroup;
   model!: NgbDateStruct;
   selected = 'idavuelta';
   stateCtrl = new FormControl();
   stateCtrl2 = new FormControl();
   customers!: number;
-  ClienteCotizacion: Array<any> = [];
+  // ClienteCotizacion: Array<{'Edad': string; 'FechaNacimiento': string;}> = []
+  ClienteCotizacion: Array<any> = []
   showOption: Boolean = true;
   limitePassenger = false
   limit = 0
@@ -172,16 +176,24 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     let form = this.form.value
     console.log(form);
     localStorage.setItem('Datasafe', JSON.stringify(form));
-    // console.log(this.options);
+    console.log('Enviado-Plan');
     // console.log(this.destino.nativeElement.value);
-    
-    const navigationExtras: NavigationExtras = { state: this.plan };
-    this.route.navigateByUrl('/home/seguros/planes', navigationExtras);
+
+    // const navigationExtras: NavigationExtras = { state: this.plan };
+    // this.route.navigateByUrl('/home/seguros/planes', navigationExtras);
+
+
+    // this.route.navigateByUrl('/home/seguros/planes', { skipLocationChange: true }).then(() =>
+    //   this.route.navigate(["/home/seguros"]));
+    // window.location.href="#/home/seguros/planes"
+      this.route.navigateByUrl('/home/seguros/planes', { skipLocationChange: true });
+      this.route.navigate(["/home/seguros/planes"]);
+
   }
 
-  destinySring(){
-    for (const i of this.options) {   
-      if(String(i.ref_assistcard) === this.destino.nativeElement.value){
+  destinySring() {
+    for (const i of this.options) {
+      if (String(i.ref_assistcard) === this.destino.nativeElement.value) {
         console.log(i.descripcion_destino);
         return i.descripcion_destino
       }
@@ -253,7 +265,10 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       let dayFech: any = String(fechaEnd).substr(0, 2)
       let monthFech: any = String(fechaEnd).substr(2, 2)
       let yearFech: any = String(fechaEnd).substr(4, 4)
-
+      console.log(fecha);
+      console.log(age);
+      console.log(fechaEnd);
+      
       let omac2 = { 'Edad': String(age), 'FechaNacimiento': String(dayFech + '/' + monthFech + '/' + yearFech) }
       // omac.push(omac2)
       // console.log(fech);
@@ -272,7 +287,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     let numss = e - 1;
     // console.log(this.form.controls['passenger'].value.length + 1);
     const fecha = new Date()
-    const day = String(fecha.getDate() + 1).padStart(2, '0')
+    const day = String(fecha.getDate()).padStart(2, '0')
     const month = String(fecha.getMonth() + 1).padStart(2, '0')
     const year = String(fecha.getFullYear())
 

@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     let payload = {
       "Aplicacion": "Intranet",
       "CodigoSeguimiento": "Test",
-      "CodigosEntorno": "PROD/NMO/NMO"
+      "CodigosEntorno": "DESA/NMO/NMO"
     }
 
     this.businessUnitService.businessUnit(payload).subscribe(

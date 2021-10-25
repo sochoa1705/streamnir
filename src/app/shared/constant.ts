@@ -35,9 +35,9 @@ export enum ENDPOINT_API {
   PLANSAC = 'ObtenerPlanesAC',
 
   // SECUREBOOKING
-  SECURE_BOOKING ='RegistrarReservaSeguro',
+  SECURE_BOOKING = 'RegistrarReservaSeguro',
 
-    // GENERATEPAY
-    GENERATE_PAY ='GenerarPagoSafetyPay',
+  // GENERATEPAY
+  GENERATE_PAY = 'GenerarPagoSafetyPay',
 
 }

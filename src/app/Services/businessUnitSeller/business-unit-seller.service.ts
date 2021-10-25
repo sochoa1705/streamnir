@@ -17,7 +17,7 @@ export class BusinessUnitSellerService {
   payload = {
     "Aplicacion": "Intranet",
     "CodigoSeguimiento": "Test",
-    "CodigosEntorno": "PROD/NMO/NMO",
+    "CodigosEntorno": "DESA/NMO/NMO",
     "Parametros": "W83"
   }
 

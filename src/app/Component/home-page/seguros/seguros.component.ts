@@ -29,7 +29,7 @@ export class SegurosComponent implements OnInit {
     let payload = {
       "Aplicacion": "Intranet",
       "CodigoSeguimiento": "Test",
-      "CodigosEntorno": "PROD/NMO/NMO"
+      "CodigosEntorno": "DESA/NMO/NMO"
     }
     this.destinyService.getDestiny(payload).subscribe({
       next: (response) => {

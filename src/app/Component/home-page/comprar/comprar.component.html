@@ -219,7 +219,7 @@
                                 </div>
                                 <div class="card-body">
                                     <form action="">
-                                        <div class="row card_ py-4 justify-content-evenly cardMob">
+                                        <div class="row card_ py-4 justify-content-evenly cardMob" *ngIf="mobile">
                                             <!-- <input type="radio" name="select" id="option-1" (change)="chkValue($event)" checked>
                                                 <input type="radio" name="select" id="option-2"> -->
                                             <input *ngFor="let chk of metodoPago" type="radio" name="select" id="{{ chk.name }}" (click)="chkValue($event)" [checked]="chk.checked">
@@ -231,11 +231,11 @@
                                             <div class="textEmision">Emisión automática después del pago.</div>
                                         </div>
 
-                                        <div class="boxCardPas" *ngIf="selectedPay == 'tarjeta'; else safety">
+                                        <div class="boxCardPas" *ngIf="selectedPay == 'tarjeta2'; else safety">
                                             <!-- TARJETA -->
                                             <!-- END TARJETA -->
                                         </div>
-                                        <ng-template #safety>
+                                        <ng-template #safety2>
                                             <div class="col-5 offset-1 py-3 textSafMob">
                                                 <p class="textSafety">Seleccione una opción para pagar</p>
                                             </div>
@@ -259,8 +259,8 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6 offset-3 py-4 lessViewMob">
-                                                        <select class="selectBank" placeholder="Selecciona tu banco">
-                                                            <option value="">bcp</option>
+                                                        <select class="selectBank" formControlName="bank" placeholder="Selecciona tu banco">
+                                                            <option value="bcp">bcp</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -389,7 +389,7 @@
                                         <div class="row card_pasajero rowMobileCard">
                                             <div class="col-6 viewMobileWidth">
                                                 <label for="names">Número de tarjeta</label>
-                                                <input class="form-control" placeholder="Ingrese el número de tarjeta2." type="text" name="names">
+                                                <input class="form-control" placeholder="Ingrese el número de tarjeta." type="text" name="names">
                                             </div>
                                             <div class="col-6 viewMobileWidth">
                                                 <label for="lastname">Titular de la tarjeta</label>
@@ -510,7 +510,7 @@
                                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12.8033 9.69668C11.9864 8.87982 11.0141 8.27511 9.95329 7.90904C11.0895 7.12649 11.8359 5.81684 11.8359 4.33594C11.8359 1.94511 9.89083 0 7.5 0C5.10917 0 3.16406 1.94511 3.16406 4.33594C3.16406 5.81684 3.91052 7.12649 5.04674 7.90904C3.9859 8.27511 3.01359 8.87982 2.19671 9.69668C0.780147 11.1133 0 12.9967 0 15H1.17188C1.17188 11.5107 4.01065 8.67188 7.5 8.67188C10.9893 8.67188 13.8281 11.5107 13.8281 15H15C15 12.9967 14.2199 11.1133 12.8033 9.69668ZM7.5 7.5C5.75534 7.5 4.33594 6.08063 4.33594 4.33594C4.33594 2.59125 5.75534 1.17188 7.5 1.17188C9.24466 1.17188 10.6641 2.59125 10.6641 4.33594C10.6641 6.08063 9.24466 7.5 7.5 7.5Z"
                                             fill="#009AED" />
-                                    </svg>  &nbsp;    Pasajero {{ i + 1 }}</h4>
+                                    </svg> &nbsp; Pasajero {{ i + 1 }}</h4>
 
                                 <!-- <div class="agregarAdultoPas">
                                     <div class="textAgregar">
@@ -523,11 +523,13 @@
                                 <div class="row rowMobileCard hideMobile">
                                     <div class="col-6 viewMobileWidth">
                                         <label for="names">Nombres</label>
-                                        <input class="form-control" formControlName="nameCustomer" placeholder="El que figura en el documento de viaje." type="text" name="names">
+                                        <input class="form-control" formControlName="nameCustomer" placeholder="El que figura en el documento de viaje." type="text"
+                                            name="names">
                                     </div>
                                     <div class="col-6 viewMobileWidth">
                                         <label for="lastname">Apellidos</label>
-                                        <input class="form-control" formControlName="lastNameCustomer" placeholder="El que figura en el documento de viaje." type="text" name="lastname">
+                                        <input class="form-control" formControlName="lastNameCustomer" placeholder="El que figura en el documento de viaje." type="text"
+                                            name="lastname">
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -724,18 +726,18 @@
                     <div class="col-12 medioPagoMobile">
                         <div class="card cardPagoMobile">
                             <div class="card-header shadow-none">
-                                <h2>Selecciona el medio de pago</h2>
+                                <h2>Selecciona el medio de pago2</h2>
                                 <span>Selecciona tu método de pago (el pago se llevará a cabo una vez presiones el botón pagar
                                     al final del formulario).
                                 </span>
                             </div>
                             <div class="card-body" formGroupName="formCard">
-                                <div class="row card_ py-4 justify-content-evenly cardMob">
-
+                                <div class="row card_ py-4 justify-content-evenly cardMob" *ngIf="!mobile">
                                     <!-- <input type="radio" name="select" id="option-1" (change)="chkValue($event)" checked>
-                                            <input type="radio" name="select" id="option-2"> -->
-                                    <input *ngFor="let chk of metodoPago" type="radio" name="select" id="{{ chk.name }}" (click)="chkValue($event)" [checked]="chk.checked">
-                                    <label *ngFor="let chk of metodoPago" for="{{ chk.name }}" class="option {{ chk.name }} col-4 offset-1 py-3 lessMarginLeft boxMob">
+                                        <input type="radio" name="select" id="option-2"> -->
+                                    <input *ngFor="let chk of metodoPago" formControlName="select21" value="{{ chk.value}}" type="radio" name="select21" id="{{ chk.name }}"
+                                        (click)="chkValue($event)" [checked]="chk.checked">
+                                    <label *ngFor="let chk of metodoPago" for="{{ chk.name }}" class="optionm {{ chk.name }} col-4 offset-1 py-3 lessMarginLeft boxMob">
                                         <div class="dot"></div>
                                         <img class="marginL" src="./assets{{ chk.img }}" alt="">
                                         <span>{{ chk.text }}</span>
@@ -757,7 +759,7 @@
                                     <div class="row card_pasajero rowMobileCard">
                                         <div class="col-6 viewMobileWidth">
                                             <label for="names">Número de tarjeta</label>
-                                            <input class="form-control" formControlName="numberCard" placeholder="Ingrese el número de tarjeta1." type="text" name="names">
+                                            <input class="form-control" formControlName="numberCard" placeholder="Ingrese el número de tarjeta." type="text" name="names">
                                         </div>
                                         <div class="col-6 viewMobileWidth">
                                             <label for="lastname">Titular de la tarjeta</label>
@@ -830,8 +832,9 @@
                                     <!-- END TARJETA -->
                                 </div>
                                 <ng-template #safety>
+                                    <!-- WEB -->
                                     <div class="col-5 offset-1 py-3 textSafMob">
-                                        <p class="textSafety">Seleccione una opción para pagar</p>
+                                        <p class="textSafety">Seleccione una opción para pagar2</p>
                                     </div>
                                     <div class="row btnSafe">
                                         <div class="col-4 viewMobileWidth">
@@ -853,9 +856,17 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6 offset-3 py-4 lessViewMob">
-                                                <select class="selectBank" placeholder="Selecciona tu banco">
-                                                    <option value="">bcp</option>
+                                                <select class="selectBank" formControlName="bankPay">
+                                                    <option disabled selected>Seleccione</option>
+                                                    <option value="bcp">BCP</option>
+                                                    <option value="scotiabnak">Scotiabank</option>
+                                                    <option value="interbank">Interbank</option>
+                                                    <option value="bbva">BBVA</option>
                                                 </select>
+                                                <!-- <select class="selectBank" formControlName="bankPay" placeholder="Selecciona tu banco">
+                                                    <option disabled selected>Seleccione</option>
+                                                    <option *ngFor="let bank of listBank" value="{{ bank.ID }}">{{ bank.Name }}</option>
+                                                </select> -->
                                             </div>
                                         </div>
                                         <div class="row py-4 marginLat">
@@ -1176,8 +1187,8 @@
             <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
             <!-- END DETALLE DE COBERTURA -->
             <div *ngIf="safe0Json.detalleCobertura" class="order-0">
-                <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]="" [txtDestino]="'EUROPA'"
-                    [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
+                <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]=""
+                    [txtDestino]="'EUROPA'" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
             </div>
 
             <!-- DETALLE DE VIAJE -->

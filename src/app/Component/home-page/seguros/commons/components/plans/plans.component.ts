@@ -6,7 +6,6 @@ import { PlansACService } from '../../../../../../Services/plansAC/plans-ac.serv
 import { LoaderSubjectService } from '../../../../../../shared/components/loader/service/loader-subject.service';
 import { map } from 'rxjs/operators';
 import { CoverageService } from '../../../../../../Services/coverage/coverage.service';
-
 @Component({
   selector: 'app-plans',
   templateUrl: './plans.component.html',
@@ -30,7 +29,6 @@ export class PlansComponent implements OnInit {
     cupon: false,
   }
   //datoUsuario:any = localStorage.getItem('form');
-
   constructor(
     public route: Router,
     public router: ActivatedRoute,
@@ -49,8 +47,36 @@ export class PlansComponent implements OnInit {
     this.listPlansAC()
   }
 
+  test(){
+    console.log('HOLA');
+    
+  }
+
   listPlansAC() {
+    const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!'
+    this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
+    // let payload = {
+    //   "Aplicacion": "Intranet",
+    //   "CodigoSeguimiento": "Test",
+    //   "CodigosEntorno": "DESA/NMO/NMO",
+    //   "Parametros": {
+    //     "UnidadNegocio": 5,
+    //     "Dk": "23571",
+    //     "SubCodigo": null,
+    //     "CotizacionAC": {
+    //       "Pais": "510",
+    //       "CodigoAgencia": "87823",
+    //       "NumeroSucursal": "0",
+    //       "PlanFamiliar": "false",
+    //       "Destino": this.resultJson.destinoSafe,
+    //       "CantidadDias": this.resultJson.days,
+    //       "Clientes": {
+    //         "ClienteCotizacion": this.resultJson.ClienteCotizacion
+    //       }
+    //     }
+    //   }
+    // }
     let payload = {
       "Aplicacion": "Intranet",
       "CodigoSeguimiento": "Test",
@@ -64,45 +90,23 @@ export class PlansComponent implements OnInit {
           "CodigoAgencia": "87823",
           "NumeroSucursal": "0",
           "PlanFamiliar": "false",
-          "Destino": this.resultJson.destinoSafe,
-          "CantidadDias": this.resultJson.days,
+          "Destino": "12",
+          "CantidadDias": "10",
           "Clientes": {
-            "ClienteCotizacion": this.resultJson.ClienteCotizacion
+            "ClienteCotizacion": [
+              {
+                "Edad": "40",
+                "FechaNacimiento": "22/10/1981"
+              },
+              {
+                "Edad": "10",
+                "FechaNacimiento": "22/10/2011"
+              }
+            ]
           }
         }
       }
     }
-
-    // let payload = {
-    //   "Aplicacion": "Intranet",
-    //   "CodigoSeguimiento": "Test",
-    //   "CodigosEntorno": "PROD/NMO/NMO",
-    //   "Parametros": {
-    //     "UnidadNegocio": 5,
-    //     "Dk": "23571",
-    //     "SubCodigo": null,
-    //     "CotizacionAC": {
-    //       "Pais": "510",
-    //       "CodigoAgencia": "87823",
-    //       "NumeroSucursal": "0",
-    //       "PlanFamiliar": "false",
-    //       "Destino": "12",
-    //       "CantidadDias": "10",
-    //       "Clientes": {
-    //         "ClienteCotizacion": [
-    //           {
-    //             "Edad": "40",
-    //             "FechaNacimiento": "17/08/1981"
-    //           },
-    //           {
-    //             "Edad": "10",
-    //             "FechaNacimiento": "17/08/2011"
-    //           }
-    //         ]
-    //       }
-    //     }
-    //   }
-    // }
     this.plansACService.plansAC(payload).subscribe({
       next: (response) => {
         this.plansAC = response
@@ -110,7 +114,7 @@ export class PlansComponent implements OnInit {
         //   let payload2 = {
         //     "Aplicacion": "Intranet",
         //     "CodigoSeguimiento": "Test",
-        //     "CodigosEntorno": "PROD/NMO/NMO",
+        //     "CodigosEntorno": "DESA/NMO/NMO",
         //     "Parametros": {
         //       "CodigoISOPais": this.resultJson.destinoSafe,
         //       "Agencia": "87823",
@@ -127,21 +131,17 @@ export class PlansComponent implements OnInit {
         //       omac = infoData['Resultado'][index].map( (el:any) => {
         //         if(el.Codigo = 'C.4.1.10.1'){
         //           console.log(el.Valor);
-
         //           return el.Valor
         //         }
         //       })
         //   }
         //   })
-
         //   // this.listCoverage(response[index]).filter((medic: any) => {
         //   //   return r
         //   // })
         //     m.AsistenciaMEdica = omac
         //     return m
         //   })
-
-
         // .pipe(
         //   map(money => {
         //     return money.map((item: any, index: any) => {
@@ -163,7 +163,6 @@ export class PlansComponent implements OnInit {
     }
     )
   }
-
   listCoverage(data: any) {
     let payload = {
       "Aplicacion": "Intranet",
@@ -189,7 +188,6 @@ export class PlansComponent implements OnInit {
       // data => console.log(data['Resultado']),
     )
   }
-
   data(id: any) {
     let service = this.plansAC.find((e: any) => {
       this.listCoverage(e)
@@ -199,9 +197,7 @@ export class PlansComponent implements OnInit {
       }
     })
     this.pop = service
-
   }
-
   shop(id: any) {
     let service = this.plansAC.find((e: any) => {
       if (e.idProducto === id) {
@@ -213,15 +209,12 @@ export class PlansComponent implements OnInit {
     const navigationExtras: NavigationExtras = { state: { ...this.json, ...service } };
     this.route.navigateByUrl('/home/comprar', navigationExtras);
   }
-  
   // price() {
   //   let price = Number(this.plansAC[0].precioEmision)
   //   let change = Number(this.plansAC.tipoCambio)
   //   let priceSol = price * change
   //   console.log(price);
-
   //   this.priceSol = priceSol
   //   return price
   // }
-
 }

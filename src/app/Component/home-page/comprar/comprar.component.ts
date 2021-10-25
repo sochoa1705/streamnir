@@ -2,8 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OffersService } from 'src/app/Services/mock/offers.service';
-import { SecureBookingService } from 'src/app/Services/secureBooking/secure-booking.service';
-import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
 
 @Component({
   selector: 'app-comprar',
@@ -21,8 +19,8 @@ export class ComprarComponent implements OnInit {
   detalleViaje!: boolean;
   detalleCobertura!: boolean;
   cupon!: boolean;
-
-  selectedPay: string = 'tarjeta';
+  mobile!: boolean
+  selectedPay: string = 'safety'
   selectedPopup: string = 'agencia';
   result: any
   resultJson: any
@@ -35,8 +33,8 @@ export class ComprarComponent implements OnInit {
   ] */
 
   metodoPago: any = [
-    { name: 'option-1', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: true, id: "1" },
-    { name: 'option-2', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: false, id: "0" },
+    { name: 'optionm-2', value: 'bancaInternet', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
+    { name: 'optionm-1', value: 'tarjeta', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
   ]
   isLinear = true;
   firstFormGroup!: FormGroup;
@@ -47,7 +45,6 @@ export class ComprarComponent implements OnInit {
     public route: Router,
     private router: ActivatedRoute,
     public offersService: OffersService,
-    public generatePayService: GeneratePayService,
   ) {
     this.safe0 = localStorage.getItem('safe0')
     this.safe0Json = JSON.parse(this.safe0)
@@ -55,6 +52,12 @@ export class ComprarComponent implements OnInit {
     this.resultJson = JSON.parse(this.result)
     console.log(this.resultJson);
     console.log(this.safe0Json);
+    console.log(screen.width);
+    if (screen.width < 769) {
+      this.mobile = true
+    } else {
+      this.mobile = false
+    }
 
     // this.current = this.route.getCurrentNavigation()?.extras.state as any
   }
@@ -65,7 +68,7 @@ export class ComprarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getGeneratePay()
+    // this.getSecureBooking()
     // this.loadShop();
     // console.log(this.current);
     //console.log(this.safe0Json.detailPay);
@@ -79,41 +82,18 @@ export class ComprarComponent implements OnInit {
 
     });
     this.createForm()
+    // this.chkValue('')
     for (const i of this.resultJson.ClienteCotizacion) {
       this.addCustomers()
     }
   }
 
-  getGeneratePay(){
-    let payload = {
-      "Aplicacion": "Intranet",
-      "CodigoSeguimiento": "[Web: midominio.com - Agente: demo - Id: 19082021101601]",
-      "CodigosEntorno": "DESA/NMO/NMO",
-      "Parametros": {
-        "PromoterName": "",
-        "CustomerName": "PEREZ ANA",
-        "CustomerDocumentNumber": "10078410452",
-        "IdClient": 12758,
-        "WebId": "3",
-        "Mail": "anaperez@gmail.com",
-        "DKClient": "61649",
-        "UserAgent": "Assist Card",
-        "IdUser": "87614",
-        "IpUser": "119.5.166.59",
-        "Amount": {
-          "FeeAmount": 0.9,
-          "RechargeAmount": 64,
-          "Currency": "USD"
-        }
-      }
-    }
-  this.generatePayService.generatePay(payload).subscribe((e: any) => console.log(e))
-}
-
   createForm() {
     this.formShop = new FormGroup({
       customers: new FormArray([]),
       formCard: new FormGroup({
+        bankPay:  new FormControl(),
+        select21: new FormControl('bancaInternet'),
         numberCard: new FormControl(),
         nameCard: new FormControl(),
         expiredCard: new FormControl(),
@@ -216,7 +196,7 @@ export class ComprarComponent implements OnInit {
   }
   chkValue(e: any) {
     const type = e.target.id;
-    if (type === 'option-1') {
+    if (type === 'optionm-1' || type === 'option-1') {
       this.selectedPay = 'tarjeta';
     } else {
       this.selectedPay = 'safety';
@@ -233,12 +213,15 @@ export class ComprarComponent implements OnInit {
   shopEnd() {
     // console.log(this.formShop);
     console.log(this.formShop.value);
+    let dataShop = this.formShop.value
+    localStorage.setItem('shop', JSON.stringify(dataShop));
+
     // console.log((this.formShop.controls));
     // console.log((<FormArray>this.formShop.get(['formContact', 'phones'])).controls)
 
 
     // this.route.navigateByUrl('/home/comprar', navigationExtras);
-    this.route.navigateByUrl('/home/conformidad');
+    // this.route.navigateByUrl('/home/conformidad');
   }
 
   otherPlan() {

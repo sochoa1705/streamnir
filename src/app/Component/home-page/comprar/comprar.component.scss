@@ -128,6 +128,8 @@ h2 {
         padding-bottom: 40px;
         img {
             margin-right: 15px;
+            width: auto;
+            height: 41px;
             &:last-child {
                 margin-right: 0px;
             }
@@ -176,7 +178,7 @@ h2 {
     justify-content: center;
     &_ {
         text-align: center;
-        & .option {
+        & .optionm {
             background: rgba(235, 235, 235, 0.4);
             display: flex;
             align-items: center;
@@ -566,14 +568,41 @@ input[type="radio"] {
     border: 1px solid #009aed;
 }
 
-#option-1:checked:checked~.option-1 .dot::before,
-#option-2:checked:checked~.option-2 .dot::before {
+#option-1:checked:checked~.optionm-1 .dot::before,
+#option-2:checked:checked~.optionm-2 .dot::before {
     opacity: 1;
     transform: scale(1);
 }
 
-#option-1:checked:checked~.option-1 span,
-#option-2:checked:checked~.option-2 span {
+#option-1:checked:checked~.optionm-1 span,
+#option-2:checked:checked~.optionm-2 span {
+    color: #4b4b4b;
+}
+
+/* METODO DE PAGO */
+#optionm-1:checked:checked~.optionm-1,
+#optionm-2:checked:checked~.optionm-2 {
+    background: #ffffff;
+    border: 1px solid rgb(0 154 237/20%);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 8px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+}
+
+#optionm-1:checked:checked~.optionm-1 .dot,
+#optionm-2:checked:checked~.optionm-2 .dot {
+    background: #fff;
+    border: 1px solid #009aed;
+}
+
+#optionm-1:checked:checked~.optionm-1 .dot::before,
+#optionm-2:checked:checked~.optionm-2 .dot::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+#optionm-1:checked:checked~.optionm-1 span,
+#optionm-2:checked:checked~.optionm-2 span {
     color: #4b4b4b;
 }
 

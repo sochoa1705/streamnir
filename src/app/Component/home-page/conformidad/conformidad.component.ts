@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SecureBookingService } from 'src/app/Services/secureBooking/secure-booking.service';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
+import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-conformidad',
@@ -8,15 +10,27 @@ import { LoaderSubjectService } from 'src/app/shared/components/loader/service/l
   styleUrls: ['./conformidad.component.scss']
 })
 export class ConformidadComponent implements OnInit {
+  listBank: any
+  listBooking: any
+
   result: any
   resultJson: any
   safe0: any
   safe0Json: any
-  listBooking: any
+  shopData: any
+  shopString: any
+  
+
   constructor(
+    public route: Router,
     public secureBookingService: SecureBookingService,
     public loaderSubjectService: LoaderSubjectService,
+    public generatePayService: GeneratePayService,
   ) {
+    //shopdata
+    this.shopData = localStorage.getItem('shop')
+    this.shopString = JSON.parse(this.shopData)
+    //plan
     this.safe0 = localStorage.getItem('safe0')
     this.safe0Json = JSON.parse(this.safe0)
     this.result = localStorage.getItem('Datasafe')
@@ -26,16 +40,15 @@ export class ConformidadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getSecureBooking()
-
+    this.getGeneratePay()
+    this.getSecureBooking() 
   }
 
   getSecureBooking() {
-    this.loaderSubjectService.showLoader()
     let payload = {
       "Aplicacion": "Intranet",
       "CodigoSeguimiento": "Test",
-      "CodigosEntorno": "PROD/NMO/NMO",
+      "CodigosEntorno": "DESA/NMO/NMO",
       "Parametros": {
         "fec_salida": "09/09/2021",
         "fec_retorno": "16/09/2021",
@@ -125,18 +138,71 @@ export class ConformidadComponent implements OnInit {
         }
       ]
     }
-    this.secureBookingService.secureBooking(payload).subscribe({
-      next: (response: any) => {
-        this.listBooking = response
+    this.secureBookingService.secureBooking(payload).subscribe((e: any) => console.log(e))
+  }
+
+  getGeneratePay() {
+    const textSend = 'SE ESTA PROCESANDO TU PAGO!'
+    this.loaderSubjectService.showText(textSend)
+    this.loaderSubjectService.showLoader()
+    // let payload = {
+    //   "Aplicacion": "Intranet",
+    //   "CodigoSeguimiento": "[Web: midominio.com - Agente: demo - Id: 19082021101601]",
+    //   "CodigosEntorno": "DESA/NMO/NMO",
+    //   "Parametros": {
+    //     "PromoterName": "",
+    //     "CustomerName": "PEREZ ANA",
+    //     "CustomerDocumentNumber": "10078410452",
+    //     "IdClient": 12758,
+    //     "WebId": "3",
+    //     "Mail": "anaperez@gmail.com",
+    //     "DKClient": "61649",
+    //     "UserAgent": "Assist Card",
+    //     "IdUser": "87614",
+    //     "IpUser": "119.5.166.59",
+    //     "Amount": {
+    //       "FeeAmount": 0.9,
+    //       "RechargeAmount": 64,
+    //       "Currency": "USD"
+    //     }
+    //   }
+    // }
+        let payload = {
+      "Aplicacion": "Intranet",
+      "CodigoSeguimiento": "[Web: midominio.com - Agente: demo - Id: 19082021101601]",
+      "CodigosEntorno": "DESA/NMO/NMO",
+      "Parametros": {
+        "PromoterName": "",
+        "CustomerName": String(this.shopString.formContact.nameContacto + this.shopString.formContact.lastnameContacto) ,
+        "CustomerDocumentNumber": "10078410452",
+        "IdClient": 12758,
+        "WebId": "3",
+        "Mail": "anaperez@gmail.com",
+        "DKClient": "61649",
+        "UserAgent": "Assist Card",
+        "IdUser": "87614",
+        "IpUser": "119.5.166.59",
+        "Amount": {
+          "FeeAmount": 0.9,
+          "RechargeAmount": 64,
+          "Currency": "USD"
+        }
+      }
+    }
+    this.generatePayService.generatePay(payload).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.listBank = response
         this.loaderSubjectService.closeLoader()
-        console.log(this.listBooking)
-      },
+      }
+      ,
       error: error => {
         console.log(error)
         this.loaderSubjectService.closeLoader()
-        // this.route.navigateByUrl('/home/seguros');
+        this.route.navigateByUrl('/home/seguros');
       }
-    }
-    )
+    })
   }
+
+
 }

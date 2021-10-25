@@ -17,7 +17,7 @@ export class DestinyService {
   payload = {
     "Aplicacion": "Intranet",
     "CodigoSeguimiento": "Test",
-    "CodigosEntorno": "PROD/NMO/NMO"
+    "CodigosEntorno": "DESA/NMO/NMO"
   }
 
 

@@ -10,7 +10,7 @@ import { LoaderSubjectService } from './service/loader-subject.service';
 export class LoaderComponent implements OnInit {
   private loaderSbscripcionRef = new Subscription()
   showLoader = false
-
+  textService!: string;
   constructor(
     private loaderSubjectService: LoaderSubjectService,
   ) { }
@@ -24,7 +24,12 @@ export class LoaderComponent implements OnInit {
   }
 
   private loader() {
-    this.loaderSbscripcionRef = this.loaderSubjectService.loader$.subscribe(state => this.showLoader = state)
+    this.loaderSbscripcionRef = this.loaderSubjectService.loader$.subscribe(state => 
+      {
+        console.log(state);
+        
+        this.showLoader = state
+      })
   }
 
 }

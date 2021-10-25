@@ -9,9 +9,7 @@ import { CoverageModule } from 'src/app/shared/components/coverage/coverage.modu
 import { MaterialModule } from 'src/app/shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SecureBookingService } from 'src/app/Services/secureBooking/secure-booking.service';
 import { HttpClientModule } from '@angular/common/http';
-import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
 
 @NgModule({
   declarations: [ ComprarComponent ],
@@ -29,6 +27,6 @@ import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.se
     RouterModule,
   ],
   exports: [ ComprarComponent ],
-  providers: [SecureBookingService, GeneratePayService]
+  providers: []
 })
 export class ComprarModule { }

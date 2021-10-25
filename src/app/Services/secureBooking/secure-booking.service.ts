@@ -17,7 +17,7 @@ export class SecureBookingService {
   // payload = {
   //   "Aplicacion": "Intranet",
   //   "CodigoSeguimiento": "Test",
-  //   "CodigosEntorno": "PROD/NMO/NMO",
+  //   "CodigosEntorno": "DESA/NMO/NMO",
   //   "Parametros": {
   //     "fec_salida": "09/09/2021",
   //     "fec_retorno": "16/09/2021",

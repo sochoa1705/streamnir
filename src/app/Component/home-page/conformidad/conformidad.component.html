@@ -22,7 +22,7 @@
     </div>
 
 </div>
-<div class="bancaInt">
+<div class="bancaInt" *ngIf="listBank">
     <div class="bodyBanca">
         <div class="cardBlue">
             <div class="descrip">
@@ -32,7 +32,7 @@
                 Banca por Internet
             </div>
             <div class="number">
-                186990
+                    {{ listBank['IDPedido']}}
             </div>
             <div class="circle leftPos"></div>
             <div class="circle rightPos"></div>
@@ -48,8 +48,9 @@
                 1h 59m 47s
             </div>
             <div class="fecha">
-                Solo tienes hasta las 12:30 p.m. del viernes 10 septiembre
-            </div>
+                    <!-- Solo tienes hasta las {{ listBank.ExpirationDateTime.substr(11,5) }} p.m. del viernes 10 septiembre -->
+                    Solo tienes hasta las {{ listBank.ExpirationDateTime.substr(11,5) }} p.m. del {{ listBank.ExpirationDateTime.substr(0,10) }}
+                </div>
         </div>
     </div>
 </div>
@@ -131,14 +132,17 @@
         <div class="offset-3 col-6 viewMobile">
             <div class="card">
                 <div class="card-body">
+                    <ng-container *ngFor="let safe of shopString.customers">
                     <div class="titleAsegurado">
-                        ADT - HUGO PERAL MONTANA
+                        ADT - {{ safe.nameCustomer }} {{ safe.lastNameCustomer }}
                     </div>
                     <div class="fechaAsegurado">
-                        18 / 05 / 1986
+                        {{ safe.dayCustomer }} / {{ safe.monthCustomer }} / {{ safe.yearCustomer }}
                     </div>
-                    <div class="descripAsegurado">
-                        Tu solicitud de compra es 953622
+
+                    </ng-container>
+                    <div class="descripAsegurado" *ngIf="listBank">
+                        Tu solicitud de compra es {{ listBank['TransactionIdentifier']}}
                     </div>
                 </div>
             </div>
@@ -154,7 +158,7 @@
     <div class="row py-2">
         <div class="offset-4 col-4 viewMobile">
                 <div *ngIf="safe0Json.detalleCobertura" class="order-0">
-                        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]="" [txtDestino]="'EUROPA'"
+                        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]="" [txtDestino]="resultJson?.destinyString"
                             [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
                     </div>
         </div>
@@ -183,7 +187,7 @@
                         Nombres y apellidos:
                     </div>
                     <div class="columnCard">
-                        Hugo Peral Montana
+                            {{ shopString.formContact.nameContacto }} {{ shopString.formContact.lastnameContacto }}
                     </div>
                 </div>
                 <div class="rowCard">
@@ -192,7 +196,7 @@
                         Email:
                     </div>
                     <div class="columnCard">
-                        hugo.peral@gmail.com
+                            {{ shopString.formContact.mailContacto }}
                     </div>
                 </div>
                 <div class="rowCard">
@@ -201,7 +205,7 @@
                         Teléfono(s):
                     </div>
                     <div class="columnCard">
-                        Celular (51) 958 524 562
+                        Celular {{ shopString.formContact.code0 }} {{ shopString.formContact.numberPhone0 }}
                     </div>
                 </div>
             </div>
