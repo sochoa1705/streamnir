@@ -10,6 +10,19 @@ import { OffersService } from 'src/app/Services/mock/offers.service';
 })
 export class ComprarComponent implements OnInit {
   formShop!: FormGroup
+  errors: any[] = []
+  MSG_EMPTY: string = 'none'
+
+  MSG_BANK: string = 'bankPay'
+  MSG_NAME_CONTACT: string = 'nameContacto'
+  MSG_LASTNAME_CONTACT: string = 'lastnameContacto'
+  MSG_EMAIL_CONTACT: string = 'mailContacto'
+  MSG_EMAILC_CONTACT: string = 'mailConfirmContacto'
+  MSG_TYPEPHONE_CONTACT: string = 'typePhone0'
+  MSG_CODE0_CONTACT: string = 'code0'
+  MSG_PHONE0_CONTACT: string = 'numberPhone0'
+  MSG_CHK_POLITY: string = 'chkPolity'
+  MSG_CHK_INFO: string = 'chkInfo'
   current: any;
   detailPay!: string;
   filter!: string;
@@ -83,16 +96,75 @@ export class ComprarComponent implements OnInit {
     });
     this.createForm()
     // this.chkValue('')
-    for (const i of this.resultJson.ClienteCotizacion) {
+    for (const i of this.resultJson['ClienteCotizacion']) {
       this.addCustomers()
     }
+  }
+
+  validForm() {
+    this.errors = []
+
+    let bankPay: string = this.formShop.getRawValue()['formCard']['bankPay']
+    if (bankPay === undefined || bankPay === null || bankPay.trim() === '') {
+      this.errors.push({ name: this.MSG_BANK, message: 'Elija el banco' })
+    }
+    //FORMCONTACT
+    let nameContacto: string = this.formShop.getRawValue()['formContact']['nameContacto']
+    if (nameContacto === undefined || nameContacto === null || nameContacto.trim() === '') {
+      this.errors.push({ name: this.MSG_NAME_CONTACT, message: 'Nombre de contacto es requerido' })
+    }
+    let lastnameContacto: string = this.formShop.getRawValue()['formContact']['lastnameContacto']
+    if (lastnameContacto === undefined || lastnameContacto === null || lastnameContacto.trim() === '') {
+      this.errors.push({ name: this.MSG_LASTNAME_CONTACT, message: 'Apellido de contacto es requerido' })
+    }
+    let mailContacto: string = this.formShop.getRawValue()['formContact']['mailContacto']
+    if (mailContacto === undefined || mailContacto === null || mailContacto.trim() === '') {
+      this.errors.push({ name: this.MSG_EMAIL_CONTACT, message: 'Email de contacto es requerido' })
+    }
+
+    let mailConfirmContacto: string = this.formShop.getRawValue()['formContact']['mailConfirmContacto']
+    if (mailConfirmContacto === undefined || mailConfirmContacto === null || mailConfirmContacto.trim() === '') {
+      this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Confirmación es requerida' })
+    }
+    if (mailConfirmContacto !== mailContacto) {
+      this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Email no coincide' })
+    }
+
+    let typePhone0: string = this.formShop.getRawValue()['formContact']['typePhone0']
+    if (typePhone0 === undefined || typePhone0 === null || typePhone0.trim() === '') {
+      this.errors.push({ name: this.MSG_TYPEPHONE_CONTACT, message: 'Tipo de teléfono es requerido' })
+    }
+    let code0: string = this.formShop.getRawValue()['formContact']['code0']
+    if (code0 === undefined || code0 === null || code0.trim() === '') {
+      this.errors.push({ name: this.MSG_CODE0_CONTACT, message: 'Código de país es requerido' })
+    }
+    let numberPhone0: string = this.formShop.getRawValue()['formContact']['numberPhone0']
+    if (numberPhone0 === undefined || numberPhone0 === null || numberPhone0.trim() === '') {
+      this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'Teléfono es requerido' })
+    }
+    let chkPolity: string = this.formShop.getRawValue()['chkPolity']
+    if (chkPolity === undefined || chkPolity === null || chkPolity.trim() === '') {
+      this.errors.push({ name: this.MSG_CHK_POLITY, message: 'Políticas  es requerido' })
+    }
+    let chkInfo: string = this.formShop.getRawValue()['chkInfo']
+    if (chkInfo === undefined || chkInfo === null || chkInfo.trim() === '') {
+      this.errors.push({ name: this.MSG_CHK_INFO, message: 'Autorizar uso de información es requerido' })
+    }
+    //FORMCONTACT
+
+
+    return this.errors.length === 0
+  }
+
+  getMessage(messageKey: any) {
+    return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
   }
 
   createForm() {
     this.formShop = new FormGroup({
       customers: new FormArray([]),
       formCard: new FormGroup({
-        bankPay:  new FormControl(),
+        bankPay: new FormControl(),
         select21: new FormControl('bancaInternet'),
         numberCard: new FormControl(),
         nameCard: new FormControl(),
@@ -211,6 +283,14 @@ export class ComprarComponent implements OnInit {
   }
 
   shopEnd() {
+    // console.log(this.validForm());
+    console.log(this.errors);
+    console.log(this.formShop.getRawValue());
+    // console.log(this.formShop.getRawValue()['formContact']['numberPhone0']);
+
+    if (this.validForm()) {
+
+    }
     // console.log(this.formShop);
     console.log(this.formShop.value);
     let dataShop = this.formShop.value

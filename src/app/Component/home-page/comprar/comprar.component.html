@@ -17,7 +17,7 @@
                 </svg>
                 Vuelve para escoger otro plan</a>
         </div>
-        <div class="d-flex flex-row justify-content-evenly py-3 bodyFilter">
+        <div class="d-flex flex-row justify-content-evenly py-3 bodyFilter"  *ngIf="resultJson">
             <div class="d-flex align-items-center">
                 <img src="./assets/_peru.png" alt=""> PE
             </div>
@@ -863,6 +863,7 @@
                                                     <option value="interbank">Interbank</option>
                                                     <option value="bbva">BBVA</option>
                                                 </select>
+                                                <span class="valid" *ngIf="getMessage(MSG_BANK) != MSG_EMPTY">{{ getMessage(MSG_BANK) }}</span>
                                                 <!-- <select class="selectBank" formControlName="bankPay" placeholder="Selecciona tu banco">
                                                     <option disabled selected>Seleccione</option>
                                                     <option *ngFor="let bank of listBank" value="{{ bank.ID }}">{{ bank.Name }}</option>
@@ -950,41 +951,48 @@
                                     <div class="col-6 viewMobileWidth">
                                         <label for="names">Nombres</label>
                                         <input class="form-control" placeholder="Ingresa tu nombre" formControlName="nameContacto" type="text" name="names">
+                                        <span class="valid" *ngIf="getMessage(MSG_NAME_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_NAME_CONTACT) }}</span>
                                     </div>
                                     <div class="col-6 viewMobileWidth">
                                         <label for="lastname">Apellidos</label>
                                         <input class="form-control" placeholder="Ingresa tu apellido" formControlName="lastnameContacto" type="text" name="lastname">
+                                        <span class="valid" *ngIf="getMessage(MSG_LASTNAME_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_LASTNAME_CONTACT) }}</span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="row rowMobileCard">
                                     <div class="col-6 viewMobileWidth">
-                                        <label for="names">Email</label>
-                                        <input class="form-control" placeholder="Ingresa tu email de contacto" formControlName="mailContacto" type="text" name="names">
+                                        <label for="Email">Email</label>
+                                        <input class="form-control" placeholder="Ingresa tu email de contacto" formControlName="mailContacto" type="text" name="Email">
+                                        <span class="valid" *ngIf="getMessage(MSG_EMAIL_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_EMAIL_CONTACT) }}</span>
                                     </div>
                                     <div class="col-6 viewMobileWidth">
-                                        <label for="lastname">Confirma tu email</label>
-                                        <input class="form-control" formControlName="mailConfirmContacto" placeholder="Ingresa tu email" type="text" name="">
+                                        <label for="EmailC">Confirma tu email</label>
+                                        <input class="form-control" formControlName="mailConfirmContacto" placeholder="Ingresa tu email" type="text" name="EmailC">
+                                        <span class="valid" *ngIf="getMessage(MSG_EMAILC_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_EMAILC_CONTACT) }}</span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="row rowMobileCard">
                                     <div class="col-6 viewMobileWidth">
-                                        <label for="names">Tipo de teléfono</label>
+                                        <label for="typePhone">Tipo de teléfono</label>
                                         <select formControlName="typePhone0" class="form-select-f">
                                             <option value="celular">Celular</option>
                                             <option value="fijo">Fijo</option>
                                         </select>
+                                        <span class="valid" *ngIf="getMessage(MSG_TYPEPHONE_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_TYPEPHONE_CONTACT) }}</span>
                                     </div>
                                     <div class="col-6 viewMobileWidth">
                                         <div class="row">
                                             <div class="col-5">
-                                                <label for="lastname">Código de país</label>
-                                                <input formControlName="code0" class="form-control" placeholder="" type="text" name="lastname">
+                                                <label for="code0">Código de país</label>
+                                                <input formControlName="code0" class="form-control" placeholder="" type="text" name="code0">
+                                                <span class="valid" *ngIf="getMessage(MSG_CODE0_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_CODE0_CONTACT) }}</span>
                                             </div>
                                             <div class="col-7">
                                                 <label for="lastname">Número de teléfono</label>
-                                                <input formControlName="numberPhone0" class="form-control" placeholder="Ingresa N°" type="text" name="lastname">
+                                                <input formControlName="numberPhone0" class="form-control" placeholder="Ingresa N°" type="text">
+                                                <span class="valid" *ngIf="getMessage(MSG_PHONE0_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_PHONE0_CONTACT) }}</span>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -1052,12 +1060,14 @@
                                             <a href="">política de protección de datos personales.</a>
                                         </label>
                                     </div>
+                                    <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) != MSG_EMPTY">{{getMessage(MSG_CHK_POLITY)}}</span>
                                 </div>
                                 <div class="col-6 viewMobileWidth">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" formControlName="chkInfo" id="chkInfo" value="option1">
                                         <label class="form-check-label" for="chkInfo">Autorizo el uso de mi Información para la Publicidad.</label>
                                     </div>
+                                    <span class="valid" *ngIf="getMessage(MSG_CHK_INFO) != MSG_EMPTY">{{getMessage(MSG_CHK_INFO)}}</span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -1186,7 +1196,7 @@
             <!-- DETALLE DE COBERTURA -->
             <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
             <!-- END DETALLE DE COBERTURA -->
-            <div *ngIf="safe0Json.detalleCobertura" class="order-0">
+            <div *ngIf="resultJson" class="order-0">
                 <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]=""
                     [txtDestino]="'EUROPA'" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
             </div>
