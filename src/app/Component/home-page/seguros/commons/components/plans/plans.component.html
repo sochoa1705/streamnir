@@ -4,7 +4,7 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <div class="card seguro best">
+        <!-- <div class="card seguro best">
                 <div class="card-header">El mejor plan</div>
                 <div class="card-body">
                 <h2>Anual</h2>
@@ -32,11 +32,11 @@
                     <button (click)="shop(1)">Seleccionar</button>
                 </div>
                 <p class="card-text">Usa tu Assist Card en múltiples viajes por 1 año</p>
-                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
-        </div>
+        </div> -->
         <div class="d-inline" *ngFor="let card of plansAC; let index = index">
-        <div class="card seguro" *ngIf="index < 4">
+        <div class="card seguro" *ngIf="index < 5">
             <div class="card-header">Fecha flexible</div>
             <div class="card-body">
                 <h2>{{card.nombreProducto.substr(0, 9)  }}</h2>
