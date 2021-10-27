@@ -186,9 +186,10 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     // this.route.navigateByUrl('/home/seguros/planes', { skipLocationChange: true }).then(() =>
     //   this.route.navigate(["/home/seguros"]));
     // window.location.href="#/home/seguros/planes"
-      this.route.navigateByUrl('/home/seguros/planes', { skipLocationChange: true });
-      this.route.navigate(["/home/seguros/planes"]);
-
+      // this.route.navigateByUrl('/home/comprar', { skipLocationChange: true });
+      // this.route.navigate(["/home/seguros/planes"]);
+      this.route.navigateByUrl('/home/comprar', {skipLocationChange: true}).then(()=>
+      this.route.navigate(["/home/seguros/planes"]));
   }
 
   destinySring() {
