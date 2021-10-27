@@ -14,10 +14,9 @@
                 <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.65381 1.07581L2.15933 4.57792L5.65381 8.08003L4.578 9.15584L7.51402e-05 4.57792L4.578 -4.70252e-08L5.65381 1.07581Z"
                         fill="#B50A27" />
-                </svg>
-                Vuelve para escoger otro plan</a>
+                </svg> Vuelve para escoger otro plan</a>
         </div>
-        <div class="d-flex flex-row justify-content-evenly py-3 bodyFilter"  *ngIf="resultJson">
+        <div class="d-flex flex-row justify-content-evenly py-3 bodyFilter" *ngIf="resultJson">
             <div class="d-flex align-items-center">
                 <img src="./assets/_peru.png" alt=""> PE
             </div>
@@ -165,7 +164,7 @@
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                                             <label class="form-check-label" for="inlineRadio1">He leído y acepto la
-                                                <a href="">política de protección de datos personales.</a>
+                                                <a  class="linkBlue" data-bs-toggle="modal" data-bs-target="#politicaModal">política de protección de datos personales.</a>
                                             </label>
                                         </div>
                                     </div>
@@ -179,12 +178,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <p>Al realizar esta compra, acepto los
-                                            <a href="">términos y condiciones de compra
-                                            </a>,
-                                            <a href="">condiciones de reserva
-                                            </a> y
-                                            <a href="">documentación de viaje</a> .</p>
+                                        Al realizar esta compra, acepto los
+                                        <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#Modaltermino">&nbsp;términos y condiciones de compra</a>,
+                                        <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#reservaModal">&nbsp;condiciones de reserva&nbsp;</a> y
+                                        <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#ModalCondicion">&nbsp;documentación de viaje</a>.
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -479,8 +476,7 @@
                 <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.65381 1.07581L2.15933 4.57792L5.65381 8.08003L4.578 9.15584L7.51402e-05 4.57792L4.578 -4.70252e-08L5.65381 1.07581Z"
                         fill="#B50A27" />
-                </svg>
-                Vuelve a la página anterior</a>
+                </svg> Vuelve a la página anterior</a>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -523,13 +519,11 @@
                                 <div class="row rowMobileCard hideMobile">
                                     <div class="col-6 viewMobileWidth">
                                         <label for="names">Nombres</label>
-                                        <input class="form-control" formControlName="nameCustomer" placeholder="El que figura en el documento de viaje." type="text"
-                                            name="names">
+                                        <input class="form-control" formControlName="nameCustomer" placeholder="El que figura en el documento de viaje." type="text" name="names">
                                     </div>
                                     <div class="col-6 viewMobileWidth">
                                         <label for="lastname">Apellidos</label>
-                                        <input class="form-control" formControlName="lastNameCustomer" placeholder="El que figura en el documento de viaje." type="text"
-                                            name="lastname">
+                                        <input class="form-control" formControlName="lastNameCustomer" placeholder="El que figura en el documento de viaje." type="text" name="lastname">
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -675,8 +669,7 @@
                             <div class="card-body border bg-white rounded-bottom">
                                 <!-- <h5 class="card-title">Special title treatment</h5> -->
                                 <ul>
-                                    <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 | Resto del mundo:
-                                        USD 30,000
+                                    <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 | Resto del mundo: USD 30,000
                                     </li>
                                     <li>Asistencia en caso de robo o extravío de documentos, etc</li>
                                     <li>Indemnización por pérdida de equipaje Complementario - USD 40 por Kg</li>
@@ -685,8 +678,7 @@
                                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.6713 2.10503L6.69472 0.0388191C6.57005 -0.012927 6.42992 -0.0129524 6.30528 0.0388191L1.32872 2.10503C1.13918 2.18374 1.01562 2.36879 1.01562 2.57402V5.08579C1.01562 8.54432 3.10601 11.6554 6.3081 12.9623C6.43109 13.0125 6.56889 13.0125 6.6919 12.9623C9.89394 11.6554 11.9844 8.54435 11.9844 5.08579V2.57402C11.9844 2.36879 11.8608 2.18374 11.6713 2.10503ZM10.9688 5.08579C10.9688 8.0259 9.24219 10.7325 6.5 11.9406C3.83109 10.7647 2.03125 8.10557 2.03125 5.08579V2.91304L6.5 1.05764L10.9688 2.91304V5.08579ZM5.93871 6.79747L8.12139 4.61482C8.3197 4.41652 8.64122 4.41649 8.83954 4.61482C9.03787 4.81315 9.03784 5.13467 8.83952 5.33297L6.29779 7.8747C6.09944 8.07305 5.77792 8.07297 5.57964 7.8747L4.16046 6.45551C3.96213 6.25719 3.96213 5.93567 4.16046 5.73737C4.35878 5.53906 4.6803 5.53904 4.87861 5.73737L5.93871 6.79747Z"
                                             fill="#009AED" />
-                                    </svg>
-                                    Ver cobertura de seguro</a>
+                                    </svg> Ver cobertura de seguro</a>
                                 <a href="#" class="button">Agregar seguro</a>
                             </div>
                         </div>
@@ -703,8 +695,7 @@
                             <div class="card-body border bg-white rounded-bottom">
                                 <!-- <h5 class="card-title">Special title treatment</h5> -->
                                 <ul>
-                                    <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 | Resto del mundo:
-                                        USD 30,000
+                                    <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 | Resto del mundo: USD 30,000
                                     </li>
                                     <li>Asistencia en caso de robo o extravío de documentos, etc</li>
                                     <li>Indemnización por pérdida de equipaje Complementario - USD 40 por Kg</li>
@@ -713,8 +704,7 @@
                                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.6713 2.10503L6.69472 0.0388191C6.57005 -0.012927 6.42992 -0.0129524 6.30528 0.0388191L1.32872 2.10503C1.13918 2.18374 1.01562 2.36879 1.01562 2.57402V5.08579C1.01562 8.54432 3.10601 11.6554 6.3081 12.9623C6.43109 13.0125 6.56889 13.0125 6.6919 12.9623C9.89394 11.6554 11.9844 8.54435 11.9844 5.08579V2.57402C11.9844 2.36879 11.8608 2.18374 11.6713 2.10503ZM10.9688 5.08579C10.9688 8.0259 9.24219 10.7325 6.5 11.9406C3.83109 10.7647 2.03125 8.10557 2.03125 5.08579V2.91304L6.5 1.05764L10.9688 2.91304V5.08579ZM5.93871 6.79747L8.12139 4.61482C8.3197 4.41652 8.64122 4.41649 8.83954 4.61482C9.03787 4.81315 9.03784 5.13467 8.83952 5.33297L6.29779 7.8747C6.09944 8.07305 5.77792 8.07297 5.57964 7.8747L4.16046 6.45551C3.96213 6.25719 3.96213 5.93567 4.16046 5.73737C4.35878 5.53906 4.6803 5.53904 4.87861 5.73737L5.93871 6.79747Z"
                                             fill="#009AED" />
-                                    </svg>
-                                    Ver cobertura de seguro</a>
+                                    </svg> Ver cobertura de seguro</a>
                                 <a href="#" class="button">Agregar seguro</a>
                             </div>
                         </div>
@@ -735,8 +725,7 @@
                                 <div class="row card_ py-4 justify-content-evenly cardMob" *ngIf="!mobile">
                                     <!-- <input type="radio" name="select" id="option-1" (change)="chkValue($event)" checked>
                                         <input type="radio" name="select" id="option-2"> -->
-                                    <input *ngFor="let chk of metodoPago" formControlName="select21" value="{{ chk.value}}" type="radio" name="select21" id="{{ chk.name }}"
-                                        (click)="chkValue($event)" [checked]="chk.checked">
+                                    <input *ngFor="let chk of metodoPago" formControlName="select21" value="{{ chk.value}}" type="radio" name="select21" id="{{ chk.name }}" (click)="chkValue($event)" [checked]="chk.checked">
                                     <label *ngFor="let chk of metodoPago" for="{{ chk.name }}" class="optionm {{ chk.name }} col-4 offset-1 py-3 lessMarginLeft boxMob">
                                         <div class="dot"></div>
                                         <img class="marginL" src="./assets{{ chk.img }}" alt="">
@@ -977,6 +966,7 @@
                                     <div class="col-6 viewMobileWidth">
                                         <label for="typePhone">Tipo de teléfono</label>
                                         <select formControlName="typePhone0" class="form-select-f">
+
                                             <option value="celular">Celular</option>
                                             <option value="fijo">Fijo</option>
                                         </select>
@@ -1057,7 +1047,7 @@
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" formControlName="chkPolity" id="chkPolity" value="option1">
                                         <label class="form-check-label" for="chkPolity">He leído y acepto la
-                                            <a href="">política de protección de datos personales.</a>
+                                            <a  class="linkBlue" data-bs-toggle="modal" data-bs-target="#politicaModal">política de protección de datos personales.</a>
                                         </label>
                                     </div>
                                     <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) != MSG_EMPTY">{{getMessage(MSG_CHK_POLITY)}}</span>
@@ -1072,13 +1062,13 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="row">
-                                <div class="col-12">
-                                    <p>Al realizar esta compra, acepto los
-                                        <a href="">términos y condiciones de compra</a>,
-                                        <a href="">condiciones de reserva
-                                        </a> y
-                                        <a href="">documentación de viaje</a> .</p>
+                                <div class="col-12 footerLink">
+                                    Al realizar esta compra, acepto los
+                                    <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#Modaltermino">&nbsp;términos y condiciones de compra</a>,
+                                    <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#reservaModal">&nbsp;condiciones de reserva&nbsp;</a> y
+                                    <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#ModalCondicion">&nbsp;documentación de viaje</a>.
                                 </div>
+
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -1197,8 +1187,7 @@
             <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
             <!-- END DETALLE DE COBERTURA -->
             <div *ngIf="resultJson" class="order-0">
-                <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]=""
-                    [txtDestino]="'EUROPA'" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
+                <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]="" [txtDestino]="'EUROPA'" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
             </div>
 
             <!-- DETALLE DE VIAJE -->
@@ -1552,6 +1541,529 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- MODAL TERMINOS Y CONDICIONES-->
+<div class="modal fade" id="Modaltermino" tabindex="-1" aria-labelledby="terminoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content red">
+            <div class="headerRojo">
+                <svg width="128" height="30" viewBox="0 0 128 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_2:40150)">
+                    <path d="M15.0815 12.2672V23.112H10.7502V13.2625C10.7502 11.5228 10.153 10.6826 8.64694 10.6826C7.39226 10.6826 5.97859 11.2739 4.62938 12.2991V23.112H0.23584V7.57744H4.28348V9.22363C6.04089 7.91774 7.95514 7.17334 9.93385 7.17334C13.135 7.17121 15.0815 8.94288 15.0815 12.2672Z" fill="white"/>
+                    <path d="M43.9625 12.2672V23.112H39.599V13.2008C39.599 11.5844 39.1285 10.6848 37.558 10.6848C36.1766 10.6848 34.8897 11.2122 33.5727 12.3629V23.1141H29.2092V13.203C29.2092 11.5866 28.7065 10.6869 27.1381 10.6869C25.8212 10.6869 24.5343 11.2782 23.1528 12.4586V23.1162H18.7915V7.57744H22.8413V9.53415C24.5987 8.073 26.5452 7.17334 28.6163 7.17334C30.6874 7.17334 32.1934 7.94964 32.9797 9.44269C34.7071 8.04535 36.7137 7.17334 38.8492 7.17334C41.9236 7.17121 43.9625 8.91311 43.9625 12.2672Z" fill="white"/>
+                    <path d="M61.9878 7.5752L56.4964 21.7443C56.056 22.9247 55.3664 23.2969 53.7658 23.2969C52.133 23.2969 51.4433 22.8928 50.9728 21.7443L45.4492 7.5752H49.875L53.798 19.4452L57.7834 7.5752H61.9878Z" fill="white"/>
+                    <path d="M64.5791 3.16418C64.5791 1.61158 65.5523 0.616211 67.0906 0.616211C68.6289 0.616211 69.6322 1.61158 69.6322 3.16418C69.6322 4.71678 68.6289 5.71215 67.0906 5.71215C65.5502 5.71215 64.5791 4.71678 64.5791 3.16418ZM64.9551 7.57528H69.1918V23.1098H64.9551V7.57528Z" fill="white"/>
+                    <path d="M86.4092 13.6347V23.112H82.643V21.0915C81.5452 22.5526 79.8501 23.4842 77.5577 23.4842C74.3243 23.4842 72.1587 21.5892 72.1587 18.669C72.1587 14.847 75.8304 13.5411 79.8178 13.5411C80.7288 13.5411 81.6376 13.6028 82.4862 13.7283V13.5114C82.4862 11.4909 81.1047 10.5295 79.1583 10.5295C77.6823 10.5295 76.0194 11.057 74.3888 12.3012L72.569 9.65963C74.2642 8.07513 76.868 7.17334 79.4741 7.17334C83.6163 7.17334 86.4092 9.47034 86.4092 13.6347ZM82.4862 16.2146C81.6698 16.1529 80.8856 16.121 80.1315 16.121C78.0905 16.121 76.3975 16.7102 76.3975 18.3882C76.3975 19.5389 77.244 20.3449 78.5954 20.3449C80.9178 20.3471 82.3294 18.6052 82.4862 16.2146Z" fill="white"/>
+                    <path d="M86.4565 28.5482L87.0839 24.9751C87.5866 25.1622 88.1517 25.2856 88.6845 25.2856C89.8768 25.2856 90.4419 24.6646 90.4419 23.3289V7.57528H94.7409V23.4522C94.7409 27.1508 93.0135 29.2309 89.4042 29.2309C88.2763 29.233 87.3052 28.9225 86.4565 28.5482ZM90.0358 3.16418C90.0358 1.61158 91.0391 0.616211 92.6096 0.616211C94.2102 0.616211 95.2157 1.61158 95.2157 3.16418C95.2157 4.71679 94.2124 5.71215 92.6096 5.71215C91.0391 5.71215 90.0358 4.71679 90.0358 3.16418Z" fill="white"/>
+                    <path d="M110.611 18.4499L112.336 21.1851C110.39 22.7079 107.911 23.4842 105.588 23.4842C100.692 23.4842 97.71 20.0982 97.71 15.5617C97.71 11.0868 100.66 7.17334 105.902 7.17334C109.385 7.17334 112.493 9.06837 112.493 12.5798C112.493 14.9406 111.112 17.0228 107.565 17.0228H101.728C102.136 18.9178 103.455 20.0982 105.87 20.0982C107.41 20.0982 109.2 19.4772 110.611 18.4499ZM101.635 14.1622H106.658C107.945 14.1622 108.635 13.4476 108.635 12.4543C108.635 11.3356 107.567 10.3721 105.872 10.3721C103.895 10.3721 102.073 11.678 101.635 14.1622Z" fill="white"/>
+                    <path d="M113.978 21.0913L115.673 18.4179C117.336 19.7535 119.093 20.2512 120.35 20.2512C121.669 20.2512 122.797 19.7238 122.797 18.7284C122.797 17.4863 121.102 17.1439 119.407 16.5845C116.896 15.7444 114.857 14.6576 114.857 12.0479C114.857 8.91084 117.587 7.16895 121.197 7.16895C123.425 7.16895 125.59 7.88357 127.098 8.97039L125.466 11.6119C124.022 10.7421 122.61 10.3061 121.386 10.3061C119.974 10.3061 119.096 10.8973 119.096 11.7034C119.096 12.7604 120.415 13.1326 121.858 13.5984C124.432 14.4364 127.257 15.3382 127.257 18.4774C127.257 21.74 124.089 23.45 120.541 23.45C118.058 23.4543 115.611 22.6461 113.978 21.0913Z" fill="white"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_2:40150">
+                    <rect width="127.019" height="28.6168" fill="white" transform="translate(0.23584 0.616211)"/>
+                    </clipPath>
+                    </defs>
+                    </svg>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="cabeceraModal">
+                Condiciones de compra
+                <div class="d-flex">
+                    <div class="btnModal">Descargar</div>
+                    <div class="btnModal">Imprimir</div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="titleModal">
+                    Contenido
+                </div>
+                <div class="linkRed">A) Declaraciones generales</div>
+                <div class="linkRed">B) Responsabilidad</div>
+                <div class="linkRed">C) Solicitudes y pagos</div>
+                <div class="linkRed">D) Servicios no incluidos</div>
+                <div class="linkRed">E) Documentación</div>
+                <div class="linkRed">F) Vuelos Airline Mix</div>
+                <div class="linkRed">G) Hoteles</div>
+                <div class="linkRed">H) Autos</div>
+                <div class="linkRed">I) Translados</div>
+                <div class="linkRed">J) Cancelaciones</div>
+                <div class="linkRed">K) Cambio de fecha</div>
+                <div class="linkRed">L) Procedimiento de consultas o reclamos</div>
+                <div class="linkRed">M) Presentación en el aeropuerto</div>
+                <div class="linkRed">N) Seguros</div>
+                <div class="linkRed">Ñ) Equipaje</div>
+                <div class="linkRed">O) Aceptación del cliente</div>
+                <div class="linkRed">P) Autorización del cliente para el manejo de datos personales</div>
+
+                <div class="subtitleModal">
+                    A) DECLARACIONES GENERALES
+                </div>
+
+                <ul class="listaModal">
+                    <li>Declaro ser mayor de edad y tener la capacidad legal para adquirir los servicios ofrecidos a través de este sitio web.</li>
+                    <li>Declaro que toda la información registrada es exacta, clara y detallada.</li>
+                    <li>Como Cliente autorizo a Promotora de Turismo Nuevo Mundo S.A.C. o al proveedor de los servicios adquiridos a debitar de mi Tarjeta de Crédito los valores en la forma seleccionada por mí en el paso anterior.</li>
+                    <li>Al aceptar este contrato, como Cliente me comprometo a enviarlo impreso, con todos los datos completos, junto con una copia de mi documento de identidad cuando sea solicitado por Promotora de Turismo Nuevo Mundo S.A.C.</li>
+                    <li>Como Cliente declaro conocer y aceptar las reglas de Cancelación y Reembolso, y los recargos que ellos puedan generar.</li>
+                    <li>Declaro haber sido informado que mi solicitud de compra será atendida dentro de las 72 horas de adquirido el servicio. Luego de procesada la compra, el ticket y/o voucher será enviado dentro de las 24 horas siguientes.</li>
+                    <li>Con la efectiva cobranza a través del medio de pago seleccionado por mí en el paso anterior, Promotora de Turismo Nuevo Mundo S.A. se compromete a gestionar por mi cuenta y orden los servicios seleccionados en el paso anterior.</li>
+                    <li>En caso de mi incumplimiento de los términos pactados en la forma de pago, como Cliente reconozco adeudar los montos presentados en el paso anterior, que corresponden a mi elección.</li>
+                    <li>Declaro que he sido debida y previamente informado respecto de los servicios contratados, así como de las condiciones, regulaciones y restricciones que conllevan, las mismas que me han sido detalladas y explicadas debidamente, y que
+                        acepto plenamente.</li>
+                    <li>Declaro haber sido informado y acepto que es mi responsabilidad como Cliente contar con la documentación en regla de acuerdo con el destino y/o nacionalidad, esto es tener pasaporte vigente (mínimo 6 meses) y visas vigentes de los
+                        países por los que voy a viajar, vacunas, permiso de menores en caso sea necesario y la documentación respectiva para realizar el viaje.</li>
+                    <li>Declaro hacerme responsable de las consecuencias económicas derivadas de cualquier utilización de esta página web, incluido el mal uso de las contraseñas que en su caso el cliente o un tercero no autorizado pueda llevar a cabo, evitando
+                        el acceso de terceros no autorizados a datos personales que solo el cliente debe conocer, como un posible nombre de usuario o los datos de tu tarjeta de crédito.</li>
+                    <li>Como Cliente me responsabilizo de la revisión de mi correo electrónico, por lo que declaro tener conocimiento de las comunicaciones que se me efectúen por esta vía.</li>
+                    <li>En caso de no aceptar las presentes Condiciones Generales de Compra, el Cliente no podrá acceder ni utilizar los servicios y/o contenidos ofertados en esta página.</li>
+                </ul>
+
+                <div class="subtitleModal">
+                    B) RESPONSABILIDAD
+                </div>
+                <ul class="listaModal">
+                    <li>Promotora de Turismo Nuevo Mundo S.A.C. declara expresamente que actúa en la condición exclusiva de intermediaria en la reserva o contratación de los distintos servicios turísticos y su responsabilidad será determinada únicamente en
+                        tal condición conforme a las disposiciones legales sobre la materia.</li>
+                    <li>Promotora de Turismo Nuevo Mundo S.A.C. no se responsabiliza por los hechos que se produzcan por caso fortuito o fuerza mayor, fenómenos climáticos o hechos de la naturaleza que acontezcan antes o durante el desarrollo de los servicios
+                        que impidan, demoren o de cualquier modo obstaculicen la ejecución total o parcial de las prestaciones contratadas. No obstante, lo declarado en el párrafo que antecede, Promotora de Turismo Nuevo Mundo S.A.C. brindará soporte
+                        al cliente, en su condición de intermediaria, para la mejor solución del problema y de corresponder, solicitar los reembolsos respectivos, de acuerdo a las políticas de los operadores.</li>
+                    <li>Promotora de Turismo Nuevo Mundo S.A.C. no se responsabiliza por las alteraciones de horarios, postergaciones y/o cancelaciones, las comodidades, equipos utilizados o cualquier otra modificación realizada por las empresas transportadoras,
+                        ni por cualquier otro hecho de tercero, no imputable a Promotora de Turismo Nuevo Mundo S.A.C., que afecten la prestación del servicio. No obstante, lo declarado en el párrafo que antecede, Promotora de Turismo Nuevo Mundo S.A.C.
+                        brindará soporte al cliente, en su condición de intermediario, para la mejor solución del problema y de corresponder, solicitar los reembolsos respectivos, de acuerdo a las políticas de los operadores.</li>
+                    <li>En ningún caso Promotora de Turismo Nuevo Mundo S.A.C. responderá frente al Cliente por daños indirectos o lucro cesante alegado por ellos, referidos a hechos en los cuales los funcionarios, empleados o representantes de Promotora
+                        de Turismo Nuevo Mundo S.A.C. no hayan tenido participación en ellos, debiendo en todo caso acreditar que les son imputables.</li>
+                    <li>Promotora de Turismo Nuevo Mundo S.A.C. se reserva el derecho de procesar o no cualquier operación de compra, en donde se evidencie o haya sospecha de transacción dudosa o fraude, pudiendo solicitar al cliente documentación adicional
+                        y su presencia física en nuestras oficinas para la firma del voucher. Asimismo, Promotora de Turismo Nuevo Mundo S.A.C. podrá requerir al Cliente el cambio de la modalidad de pago por él seleccionada, de ser necesario para concretar
+                        su operación de compra.</li>
+                </ul>
+
+                <div class="subtitleModal">
+                    C) SOLICITUDES Y PAGOS
+                </div>
+                <ul class="listaModal">
+                    <li>El precio estimado en el momento de la solicitud de servicios y hasta que no se haya efectuado la emisión de los pasajes u órdenes de servicio y su facturación y pago, queda sujeto a disponibilidad y a modificaciones sin previo aviso.
+                        Cuando se produzca una alteración en los mismos y/o modificaciones en sus costos y/o en el tipo de cambio aplicado y/o por la aplicación de los impuestos que correspondan de acuerdo a la normativa vigente, Promotora de Turismo
+                        Nuevo Mundo S.A.C. no será responsable de los mayores costos resultantes, los que deberán ser comunicados al cliente a su correo electrónico, debiendo asumirlos. Cada Pasaje Aéreo se encuentra regulado por una serie de condiciones
+                        y restricciones determinadas por cada Compañía Aérea para cada tarifa en particular. De acuerdo al monto de la tarifa, se imponen ciertas limitaciones sobre la utilización del Pasaje Aéreo, por ejemplo: no reembolsable, no transferible,
+                        restricciones sobre cambios de ruta, imposición de estadías mínimas y máximas, restricciones a la devolución del importe abonado, etc. Las tarifas más económicas son las que mayores restricciones poseen. Tenga presente que Promotora
+                        de Turismo Nuevo Mundo S.A.C. no se encuentra autorizada a variar ni modificar en ningún caso las regulaciones de los Pasajes Aéreos.</li>
+                    <li>Los boletos aéreos están sujetos al Impuesto General a las Ventas cuando se expidan en el país o de aquellos documentos que aumenten o disminuyan el valor de venta de los pasajes, siempre que el servicio se inicie o termine en el país,
+                        así como cuando se adquieran en el extranjero para ser utilizados desde el país.</li>
+                    <li>Todos los importes pagados antes de la confirmación de los servicios son recibidos por concepto de reserva.</li>
+                    <li>Los precios definitivos quedarán fijados a partir del momento de la confirmación definitiva de los servicios que se produce con la emisión de los pasajes u órdenes de servicios, vouchers, y su facturación.</li>
+                    <li>De no efectuarse la cancelación del precio, Promotora de Turismo Nuevo Mundo S.A.C. queda facultada a cancelar los servicios con previo aviso al Cliente, no teniendo el Cliente derecho a reintegro alguno.</li>
+                </ul>
+
+                <div class="subtitleModal">
+                    D) SERVICIOS NO INCLUIDOS
+                </div>
+                <p>Sólo debe considerarse incluido en los precios aquello que está expresa y literalmente detallado en la documentación de viaje, de lo que se desprende que no está incluido en los precios: visados, certificados de vacunación, tasas de embarque
+                    o de aeropuertos, extras en hoteles (cafés, licores, aguas minerales, lavado y planchado, propinas, comunicaciones, resort fee y cargos adicionales en hoteles, llamadas telefónicas sin costo, periódicos, cajas de seguridad, deportes
+                    o excursiones no incluidos, etc.), tasas sobre servicios, impuestos, gastos e intereses de operaciones financieras, excursiones y visitas opcionales, alimentación extra en ruta, comidas y/o gastos adicionales, o perjuicios producidos
+                    por cancelaciones, demoras en las salidas o llegadas de los medios de transporte, o por razones imprevistas ajenas a Promotora de Turismo Nuevo Mundo S.A., entre otros.</p>
+
+                <div class="subtitleModal">
+                    E) DOCUMENTACION
+                </div>
+                <p>Es responsabilidad del Cliente informarse sobre los requisitos que exigen las autoridades migratorias, aduaneras y sanitarias de los destinos, siendo responsabilidad exclusiva del Cliente contar con la documentación personal que exijan
+                    las autoridades mencionadas. Promotora de Turismo Nuevo Mundo S.A. no será responsable por inconvenientes que sufriera el Cliente que carezca de documentos en las condiciones necesarias ya sea al salir o al entrar en este u otro país.
+                    Debe tenerse en cuenta que la obtención de las visas en los países a visitar por el Cliente corren por exclusiva responsabilidad de éste, como así también la presentación de la documentación necesaria para el ingreso a los países de
+                    destino y documentos de sanidad requeridos (vacunas).</p>
+
+                <div class="subtitleModal">
+                    F) VUELOS AIRLINE MIX
+                </div>
+                <p>En el caso de vuelos que se muestren como Airline Mix , www.nmviajes.com ofrecerá resultados que son una combinación de vuelos por separado, o dos vuelos de ida en vez de ida y vuelta. Nuestra web reserva 2 vuelos por separado y estas
+                    son independientes , cada una puede tener distintas regulaciones. (Ejemplo: tasas de equipaje , cargos por cambios, y diferentes políticas de reembolsos). En caso que una de las 2 aerolineas realice alguna modificación en su itinerario
+                    o Ud desee realizar algún cambio, el otro vuelo no se afectatará lo mismo que si se realiza una postergación o cancelación , el otro vuelo no estaría afectado. Recuerde que recibirá 2 códigos de reserva , lo mismo que boletos independientes
+                    y en el caso que sea un viaje internacional, es importante que revise la información previa ya que para presentarse en el aeropuerto es importante que informe ambos codigos y boletos aéreos.</p>
+
+                <div class="subtitleModal">
+                    G) HOTELES
+                </div>
+                <ul class="listaModal">
+                    <li>Informamos que cada hotel tiene sus propias regulaciones en el servicio y condiciones tarifarias, así como la categorización de tipos de habitación. El horario de ingreso puede variar según la temporada y ocupación del mismo. Todas
+                        las reservaciones se generan en habitación estándar a excepción de casos que se haya solicitado otro tipo de habitación.</li>
+                    <li>El Cliente deberá tener al menos 18 años para poder realizar el check in, a menos que se encuentre acompañado de sus padres o un representante legal. En el extranjero deberá contar con una tarjeta de crédito como garantía si así se
+                        lo requieren al momento del check in.</li>
+                    <li>En algunos hoteles los cargos adicionales no están incluidos y deberán pagarse directamente en destino. Estos pueden variar entre USD10.00 hasta USD30.00 aprox. por habitación por día. Las reservas garantizan la ocupación máxima de
+                        personas en la habitación; la distribución de camas depende de la propiedad. Se recomienda consultar en caso de las habitaciones TRIPLE Y CUADRUPLE así mismo si tienen alguna solicitud especial al momento de generar su reserva.
+                        Las solicitudes especiales se confirman solo en la propiedad no se pueden confirmar antes de la llegada.</li>
+                    <li>Reservas hoteleras en territorio peruano: Los residentes y ciudadanos peruanos (y los extranjeros que permanezcan más de 59 días en Perú) deben abonar el impuesto a la renta del 18%. En caso de los extranjeros si no presentan una copia
+                        de la tarjeta de inmigración y el pasaporte en el momento del check in deberán pagar el impuesto del 18%.</li>
+                    <li>Se recomienda a los clientes llevar impreso su voucher de reserva. En caso Ud. no se presente en el Hotel en la fecha y horario correspondiente, el Hotel puede cancelar su reserva y considerarla como NO SHOW lo cual afectaría cualquier
+                        solicitud de reembolso total o parcial.</li>
+                </ul>
+
+                <div class="subtitleModal">
+                    H) AUTOS
+                </div>
+                <ul class="listaModal">
+                    <li>Informamos que cada rentadora de autos tiene sus propias regulaciones de servicio, así como sus condiciones tarifarias y contractuales aplicables al alquiler de vehículos.</li>
+                    <li>La reserva de auto se realiza para una categoría específica, se garantiza el tamaño y capacidad, la información de modelo y marca es referencial. La renta del auto se realiza por un periodo o bloque determinado (día, semana, horas).
+                        Estas incluyen kilometraje y/o millaje ilimitado y los requisitos y seguros mínimos para retirar el auto y circular en la localidad indicada. La tarifa de renta no incluye el pago de multas, impuestos, infracciones, arrastre de
+                        grúas, gasolina, cargos por dejar el auto en otra ciudad, ni cualquier servicio adicional. En caso se extienda el periodo de alquiler o se retire o entregue el auto fuera de las horas estipuladas o en otra localidad pueden existir
+                        cargos adicionales. Los impuestos y tasas en algunos casos están incluidos de acuerdo a la tarifa solicitada.</li>
+                    <li>El conductor deberá ser mayor de 25 años, en caso tenga entre 21 y 26 años algunas rentadoras pueden exigir documentación adicional y/o solicitar se paguen cargos adicionales.</li>
+                    <li>El conductor debe llevar consigo el voucher de reserva emitido por Promotora de Turismo Nuevo Mundo S.A.C., permiso de conducir vigente y valido en el lugar de destino, tarjeta de crédito internacional propia con saldo disponible en
+                        caso de garantía y pasaporte vigente.</li>
+                    <li>En caso desee contratar tarifas con seguros y servicios adicionales (seguros con pólizas contra terceros, cargos de gasolina, cargo por conductor adicional, puede revisar la información de reserva y/o solicitarlo al asesor de venta.</li>
+                </ul>
+
+                <div class="subtitleModal">
+                    I) TRASLADOS
+                </div>
+                <p>Los servicios contratados son en servicio regular (compartido con otros pasajeros) o en privados según lo indicado en el voucher de servicios. Se recomienda llevar impresa la documentación de los servicios ya que esta contiene información
+                    de los servicios contratados con el operador local e información importante en caso de emergencia. En caso Ud. no se presente a la fecha y horario correspondiente, el operador puede cancelar su reserva y Ud. no tendrá derecho a solicitar
+                    un reembolso total o parcial. En algunos casos se le solicitará que, previo a la fecha para hacer uso de la Actividad o Traslado, Ud. se comunique con el Operador para confirmar algunos detalles de la Actividad y/o coordinar el punto
+                    de encuentro o el traslado y/o solicitar los vouchers definitivos sin los cuales Ud. no podrá hacer uso del servicio. Si Ud. no realiza este contacto en tiempo y forma y, en virtud de ello, Ud. ve frustrado el uso y goce del servicio,
+                    Promotora de Turismo Nuevo Mundo S.A.C. no se hará responsable y Ud. no tendrá derecho a exigir reembolso alguno por parte de Promotora de Turismo Nuevo Mundo S.A.C y/o el Operador.</p>
+
+                <div class="subtitleModal">
+                    J) CANCELACIONES
+                </div>
+                <ul class="listaModal">
+                    <li>En caso de desistimiento por parte del Cliente de servicios contratados en firme por Promotora de Turismo Nuevo Mundo S.A.C. a terceros, las cancelaciones estarán sujetas a las condiciones contractuales bajo las cuales estos últimos
+                        presten sus servicios, las mismas que han sido informadas al cliente en el paso anterior. En todos los casos de reintegro, la agencia podrá retener del precio, los gastos incurridos más la comisión del diez por ciento de los servicios
+                        contratados con terceros.</li>
+                    <li>Promotora de Turismo Nuevo Mundo S.A.C. no es responsable por los servicios que no fueran tomados por el Cliente en tiempo y forma convenidos, ni por las consecuencias que de ello emanen, como la cancelación del servicio por parte
+                        del prestador, ni por el reintegro, reembolso o devolución del importe abonado por dicho servicio.</li>
+                    <li>Respecto a la devolución de boletos aéreos, el Cliente acepta las condiciones impuestas por las regulaciones de las compañías aéreas en relación a este trámite.</li>
+                </ul>
+
+                <div class="subtitleModal">
+                    K) CAMBIO DE FECHA
+                </div>
+                <p>No procede el cambio de fecha de los boletos aéreos. El cambio de fecha respecto de otro servicio turístico queda sujeto a las modalidades, condiciones y disponibilidad de los distintos prestadores de los servicios, debiendo abonarse la
+                    correspondiente penalidad aplicada por el prestador y una comisión del 10% por concepto de modificaciones y, en su caso, la diferencia tarifaria si correspondiese. Tratándose de pasajes nacionales se estará las políticas y directivas
+                    de cada Línea Aérea.</p>
+
+                <div class="subtitleModal">
+                    L) PROCEDIMIENTO DE CONSULTAS O RECLAMOS
+                </div>
+                <p>En el caso de que Usted necesite efectuar un reclamo y/o consulta, solicitar modificaciones y/o cancelaciones siempre que su tarifa lo permita, solicitar el reenvío de vouchers o tickets. Recuerde que Promotora de Turismo Nuevo Mundo S.A.C.
+                    es una plataforma de intermediación y, como tal, su principal vía de contacto es en línea. Independientemente de ello, para cualquier urgencia siempre cuenta con líneas telefónicas que constan en los correos y/o vouchers enviados con
+                    cada Servicio Turístico.</p>
+                <ul class="listaModal">
+                    <li>En el caso de querer realizar un reclamo, sugerencia o consulta, se recomienda realizar una descripción detallada de los hechos adjuntando de inmediato la copia de los antecedentes de respaldo, explicando lo ocurrido y formulando en
+                        términos claros, simples y la solución que desea. De esta manera podremos revisar su caso en forma más rápida y eficiente. Promotora de Promotora de Turismo Nuevo Mundo S.A.C. analizará el reclamo, y dará respuesta al mismo correo
+                        electrónico informado por Usted lo antes posible. Si de la revisión de los antecedentes resultara procedente acoger en todo o en parte el reclamo, Promotora de Turismo Nuevo Mundo S.A.C. se lo hará saber y le solicitará la conformidad
+                        del acuerdo por mail.</li>
+                    <li>Los cambios o cancelaciones de reservas efectuadas por nuestro intermedio, si bien son regidos por los Proveedores de los Servicios Turísticos, deben ser gestionados a través de Promotora de Turismo Nuevo Mundo S.A.C. En cualquiera
+                        de los casos anteriores, la línea aérea y/o el proveedor lo derivarán a nuestra empresa.</li>
+                    <li>En los casos de servicios de vuelos regulares, las condiciones son impuestas por las transportadoras con quien el Cliente deberá entenderse directamente y reclamar en su caso por cualquier inconveniente o perjuicio sufrido como consecuencia
+                        del viaje. Promotora de Turismo Nuevo Mundo S.A.C. no tiene control sobre estas condiciones y ofrecerá todo apoyo a su alcance para llevarlos a cabo.</li>
+                </ul>
+
+                <div class="subtitleModal">
+                    M) PRESENTACIÓN EN EL AEROPUERTO
+                </div>
+                <p>Usted deberá hacerse presente en el Aeropuerto de partida el día previsto y a la hora indicada con la Documentación de Viaje. Para vuelos domésticos aconsejamos presentarse en el aeropuerto con 3 horas de anticipación y, para vuelos internacionales,
+                    la anticipación deberá ser de al menos 4 horas. Si Usted no se presenta a embarcar o llega con atraso a embarcar en la fecha y horarios indicados se configura lo que en el mercado turísticos se conoce como No Show y la Compañía Aérea
+                    puede cancelar cualquier reserva para la continuación del viaje o el retorno y Usted no tendrá derecho a exigir la devolución total o parcial del importe abonado.</p>
+
+                <div class="subtitleModal">
+                    N) SEGUROS
+                </div>
+                <p>Le aconsejamos que viaje siempre convenientemente asegurado. En ciertos casos, le ofrecemos la posibilidad de añadir un seguro a su viaje en ciertos destinos. Adicionalmente nuestros agentes le proporcionarán toda la información que pueda
+                    necesitar para decidir si quiere contratar el seguro propuesto. Tenga en cuenta que los seguros no permiten cancelaciones, por tanto no son reembolsables. A menos que su visado haya sido denegado, en cuyo caso debe contactarse con
+                    nosotros para su devolución previa aplicación de la penalidad correspondiente de acuerdo a las políticas del prestador del servicio.</p>
+
+                <div class="subtitleModal">
+                    Ñ) EQUIPAJE
+                </div>
+                <p>Todas las compañías aéreas tienen diferentes políticas de franquicias de equipajes. Infórmese antes de viajar. Promotora de Turismo Nuevo Mundo S.A.C. no se responsabiliza por el deterioro y/o extravío y/o hurto y/o robo y/o pérdida del
+                    equipaje y demás efectos personales de los pasajeros. En caso de pérdida o deterioro de equipaje, Usted debe dirigirse a las oficinas de atención al cliente de la compañía aérea y realizar el correspondiente reclamo. Se recomienda
+                    al Cliente contratar un seguro de viaje para cubrir parte de los riesgos mencionados.</p>
+
+                <div class="subtitleModal">
+                    O) ACEPTACION DEL CLIENTE
+                </div>
+                <p>Las presentes condiciones generales, junto con la restante documentación que se entrega al Cliente, conforman el Contrato de Viaje. Estas condiciones son entregadas por Promotora de Turismo Nuevo Mundo S.A.C. al Cliente al momento de realizar
+                    la reserva de los servicios. El Cliente declara conocer y aceptar las presentes condiciones generales de contratación y dicha aceptación queda ratificada por medio de uno cualquiera de los siguientes actos:</p>
+                <ul class="listaModal">
+                    <li>El pago de la reserva y/o de los servicios contratados antes del inicio del viaje, por cualquier forma o modalidad.</li>
+                    <li>La aceptación de la factura de los servicios contratados.</li>
+                    <li>Mediante el uso de una porción cualquiera de los servicios contratados.</li>
+                </ul>
+
+                <div class="subtitleModal">
+                    P) AUTORIZACION DEL CLIENTE PARA EL MANEJO DE DATOS PERSONALES
+                </div>
+                <p>El Cliente, titular de los datos personales, otorga su consentimiento de manera indefinida, libre, previo, expreso, inequívoco e informado para que Promotora de Turismo Nuevo Mundo S.A.C. y en tanto este consentimiento no sea revocado,
+                    pueda realizar el tratamiento de sus datos personales con las siguientes finalidades: i) decidir el otorgamiento de servicios que solicite, (ii) efectuar la cobranza de los servicios solicitados, (iii) ofrecerle otros servicios de
+                    Promotora de Turismo Nuevo Mundo S.A.C. y/o de sus vinculadas; (iv) enviar ofertas comerciales, promociones, publicidad e información general de los productos y/o servicios de Promotora de Turismo Nuevo Mundo S.A.C. y/o de sus vinculadas,
+                    (v) usar y/o transferir esta información (dentro o fuera del país) a terceros y/o a cualquier vinculada de Promotora de Turismo Nuevo Mundo S.A.C.; (vi) formalizaciones contractuales; (vii) remisión de correspondencia; (viii) enviar
+                    a los proveedores del servicio de conexión tecnológica para recibir los pagos aceptando medios de pago autorizados por Promotora de Turismo Nuevo Mundo S.A.C.</p>
+                <p>Promotora de Turismo Nuevo Mundo S.A.C. tratará sus datos personales con la más estricta confidencialidad, adoptará las medidas de seguridad establecidas en la Ley N° 29733, su reglamento y modificaciones; y usará sus datos personales
+                    autorizados para las finalidades expresamente establecidas. El Cliente declara haber sido informado que podrá revocar en cualquier momento su consentimiento, comunicando su decisión por escrito, lo cual no afectará el uso de sus datos
+                    ni el contenido de las bases de datos de Promotora de Turismo Nuevo Mundo S.A.C. para la ejecución y/o desarrollo de la relación contractual que mantiene con Promotora de Turismo Nuevo Mundo S.A.C. Asimismo, el Cliente podrá ejercitar
+                    los derechos de acceso, rectificación, cancelación u oposición que, en su caso, le correspondan conforme a la ley precitada, mediante una solicitud por escrito presentada a Promotora de Turismo Nuevo Mundo S.A.C. en su oficina de Av.
+                    Jorge Chávez 154, int. 604, Miraflores y/o correo electrónico clientes@nmviajes.com</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL POLITICA DE PROTECCION -->
+<div class="modal fade" id="politicaModal" tabindex="-1" aria-labelledby="politicaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="titleMod">Política de Protección y Tratamiento de Datos Personales</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>En cumplimiento de la Ley N° 29733 – Ley de Protección de Datos Personales- y su Reglamento N° 003-2013-JUS</strong>, autorizo y otorgo a Promotora de Turismo Nuevo Mundo S.A.C. . (en adelante Nuevo Mundo Viajes), de manera indefinida,
+                    mi consentimiento libre, previo, expreso, inequí voco e informado para que (por sí mismo o a travé s de terceros): Recopile, de tratamiento o suprima, transfiera o importe, exporte mis datos personales, para elaborar Bases de Datos,
+                    transferirlas a terceras personas vinculadas o no a Nuevo Mundo Viajes (sean socios comerciales o no, nacionales o extranjeros, pú blicos o privados) con la finalidad de:</p>
+
+                <ul class="listModal">
+                    <li>Cumplir con la prestación de los servicios turísticos contratados: programación y reserva de vuelos, paquetes turí sticos, reserva de hoteles, programación de itinerarios; así como servicios de alquiler de autos y seguros, entre otros.</li>
+                    <li>Contactar con el cliente antes y durante la prestación de los servicios turísticos contratados a fin de responder dudas, consultas y solicitudes.</li>
+                    <li>Enviar información relativa a la naturaleza del servicio y/o disposiciones de obligatorio conocimiento y cumplimiento durante el servicio o paquete turístico adquirido, como las condiciones de contratación y/u otras condiciones dentro
+                        de las que podrían incluirse políticas internas de la empresa.</li>
+                </ul>
+                <p>Los datos personales que usted nos proporcione, serán almacenados en los bancos de datos descrito en el <strong>anexo 2</strong>.</p>
+                <p>He sido informado que: <br> Si no otorgo este consentimiento, mi información solo será utilizada (tratada) para la ejecución (desarrollo) y cumplimiento del servicio que contrate, podré revocar, en cualquier momento mi consentimiento,
+                    comunicando mi decisión por escrito en cualquiera de las oficinas de Nuevo Mundo Viajes, la cual no afectará el uso de mis datos ni el contenido de las Bases de Datos para la ejecución y cumplimiento de la transacción que celebre con
+                    ustedes, podré ejercer mis derechos de acceso, rectificación, cancelación y oposición de mis datos de acuerdo a la legislación vigente.</p>
+
+                <p>Mayor información sobre la política de protección y tratamiento de datos <a class="redLink" href="#">aquí.</a> </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CONDICIONES DE RESERVA -->
+<div class="modal fade" id="reservaModal" tabindex="-1" aria-labelledby="reservaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="titleMod">Condiciones de Reserva de tu Vuelo</div>
+                <div class="d-flex">
+                    <svg width="19" height="7" viewBox="0 0 19 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.5834 7L0 0H19L9.5834 7Z" fill="white"/>
+                        </svg>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="titleModal">
+                    ESTA TARIFA ES
+                </div>
+                <ul class="listModal">
+                    <li>No reembolsable</li>
+                    <li>No permite cambios</li>
+                </ul>
+                <div class="subtitleMod">
+                    Tarifa sujeta a cambios hasta el momento de emisión
+                </div>
+                <p><strong>Recomendación :</strong> </p>
+
+                <p>Los cambios de nombres NO están permitidos, revise los nombres y apellidos de los pasajeros deben coincidir con la documentación que presenten en el aeropuerto el día del vuelo. Si los datos del boleto electrónico, no coinciden, las aerolíneas
+                    y/o proveedores podrán negar el derecho a embarque o uso del servicio.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL TERMINOS Y CONDICIONES-->
+<div class="modal fade" id="ModalCondicion" tabindex="-1" aria-labelledby="CondicionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="headerRojo">
+                <svg width="128" height="30" viewBox="0 0 128 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_2:40150)">
+                    <path d="M15.0815 12.2672V23.112H10.7502V13.2625C10.7502 11.5228 10.153 10.6826 8.64694 10.6826C7.39226 10.6826 5.97859 11.2739 4.62938 12.2991V23.112H0.23584V7.57744H4.28348V9.22363C6.04089 7.91774 7.95514 7.17334 9.93385 7.17334C13.135 7.17121 15.0815 8.94288 15.0815 12.2672Z" fill="white"/>
+                    <path d="M43.9625 12.2672V23.112H39.599V13.2008C39.599 11.5844 39.1285 10.6848 37.558 10.6848C36.1766 10.6848 34.8897 11.2122 33.5727 12.3629V23.1141H29.2092V13.203C29.2092 11.5866 28.7065 10.6869 27.1381 10.6869C25.8212 10.6869 24.5343 11.2782 23.1528 12.4586V23.1162H18.7915V7.57744H22.8413V9.53415C24.5987 8.073 26.5452 7.17334 28.6163 7.17334C30.6874 7.17334 32.1934 7.94964 32.9797 9.44269C34.7071 8.04535 36.7137 7.17334 38.8492 7.17334C41.9236 7.17121 43.9625 8.91311 43.9625 12.2672Z" fill="white"/>
+                    <path d="M61.9878 7.5752L56.4964 21.7443C56.056 22.9247 55.3664 23.2969 53.7658 23.2969C52.133 23.2969 51.4433 22.8928 50.9728 21.7443L45.4492 7.5752H49.875L53.798 19.4452L57.7834 7.5752H61.9878Z" fill="white"/>
+                    <path d="M64.5791 3.16418C64.5791 1.61158 65.5523 0.616211 67.0906 0.616211C68.6289 0.616211 69.6322 1.61158 69.6322 3.16418C69.6322 4.71678 68.6289 5.71215 67.0906 5.71215C65.5502 5.71215 64.5791 4.71678 64.5791 3.16418ZM64.9551 7.57528H69.1918V23.1098H64.9551V7.57528Z" fill="white"/>
+                    <path d="M86.4092 13.6347V23.112H82.643V21.0915C81.5452 22.5526 79.8501 23.4842 77.5577 23.4842C74.3243 23.4842 72.1587 21.5892 72.1587 18.669C72.1587 14.847 75.8304 13.5411 79.8178 13.5411C80.7288 13.5411 81.6376 13.6028 82.4862 13.7283V13.5114C82.4862 11.4909 81.1047 10.5295 79.1583 10.5295C77.6823 10.5295 76.0194 11.057 74.3888 12.3012L72.569 9.65963C74.2642 8.07513 76.868 7.17334 79.4741 7.17334C83.6163 7.17334 86.4092 9.47034 86.4092 13.6347ZM82.4862 16.2146C81.6698 16.1529 80.8856 16.121 80.1315 16.121C78.0905 16.121 76.3975 16.7102 76.3975 18.3882C76.3975 19.5389 77.244 20.3449 78.5954 20.3449C80.9178 20.3471 82.3294 18.6052 82.4862 16.2146Z" fill="white"/>
+                    <path d="M86.4565 28.5482L87.0839 24.9751C87.5866 25.1622 88.1517 25.2856 88.6845 25.2856C89.8768 25.2856 90.4419 24.6646 90.4419 23.3289V7.57528H94.7409V23.4522C94.7409 27.1508 93.0135 29.2309 89.4042 29.2309C88.2763 29.233 87.3052 28.9225 86.4565 28.5482ZM90.0358 3.16418C90.0358 1.61158 91.0391 0.616211 92.6096 0.616211C94.2102 0.616211 95.2157 1.61158 95.2157 3.16418C95.2157 4.71679 94.2124 5.71215 92.6096 5.71215C91.0391 5.71215 90.0358 4.71679 90.0358 3.16418Z" fill="white"/>
+                    <path d="M110.611 18.4499L112.336 21.1851C110.39 22.7079 107.911 23.4842 105.588 23.4842C100.692 23.4842 97.71 20.0982 97.71 15.5617C97.71 11.0868 100.66 7.17334 105.902 7.17334C109.385 7.17334 112.493 9.06837 112.493 12.5798C112.493 14.9406 111.112 17.0228 107.565 17.0228H101.728C102.136 18.9178 103.455 20.0982 105.87 20.0982C107.41 20.0982 109.2 19.4772 110.611 18.4499ZM101.635 14.1622H106.658C107.945 14.1622 108.635 13.4476 108.635 12.4543C108.635 11.3356 107.567 10.3721 105.872 10.3721C103.895 10.3721 102.073 11.678 101.635 14.1622Z" fill="white"/>
+                    <path d="M113.978 21.0913L115.673 18.4179C117.336 19.7535 119.093 20.2512 120.35 20.2512C121.669 20.2512 122.797 19.7238 122.797 18.7284C122.797 17.4863 121.102 17.1439 119.407 16.5845C116.896 15.7444 114.857 14.6576 114.857 12.0479C114.857 8.91084 117.587 7.16895 121.197 7.16895C123.425 7.16895 125.59 7.88357 127.098 8.97039L125.466 11.6119C124.022 10.7421 122.61 10.3061 121.386 10.3061C119.974 10.3061 119.096 10.8973 119.096 11.7034C119.096 12.7604 120.415 13.1326 121.858 13.5984C124.432 14.4364 127.257 15.3382 127.257 18.4774C127.257 21.74 124.089 23.45 120.541 23.45C118.058 23.4543 115.611 22.6461 113.978 21.0913Z" fill="white"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_2:40150">
+                    <rect width="127.019" height="28.6168" fill="white" transform="translate(0.23584 0.616211)"/>
+                    </clipPath>
+                    </defs>
+                    </svg>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="cabeceraModal">
+                    Documentación de Viaje
+                    <div class="d-flex">
+                        <div class="btnModal">Descargar</div>
+                        <div class="btnModal">Imprimir</div>
+                    </div>
+
+                </div>
+                <div class="contentModal">
+                    <div class="imgCentral">
+                        <img src="./assets/modal/img-modal-01.png" alt="">
+                        <img src="./assets/modal/img-modal-02.png" alt="">
+                        <img src="./assets/modal/img-modal-03.png" alt="">
+                    </div>
+                    <p>Recuerde revisar su documentación antes del viaje, su <strong>Pasaporte /o su DNI</strong> debe tener una <strong>vigencia mínima de 6 meses desde la fecha de inicio de viaje.</strong><br> Ud. debe consultar sí necesita <strong>VISA para viajar al país de destino</strong>,
+                        como así también verificar la vigencia requerida. <br> Si Ud. es peruano, recuerde que cuando viaja a Estados Unidos y/o Canadá requiere visa.<br> Así mismo, si su viaje realiza escala en estos países.</p>
+
+                    <p>Si cuenta con otra nacionalidad deberá verificar si requiere tramitar los permisos de viaje requeridos, en caso de Estados Unidos (ESTA) y en Canadá (ETA), los mismos que tienen que realizarse de preferencia entre 5 y hasta 15 días
+                        de anticipación.
+                        <br> <a href="#">https://esta.cbp.dhs.gov</a> (TRAMITAR ESTA)<br> <a href="#">http://www.cic.gc.ca/english/visit/eta-start-es.asp</a> (TRAMITAR ETA)<br> De acuerdo a su destino de viaje puede ser que sea necesario el certificado
+                        de VACUNA DE FIEBRE AMARILLA.<br>
+                        <strong>Es obligatorio para Peruanos</strong> (Aruba, Australia, Bolivia, Costa Rica, honduras, Guatemala, India, Jamaica, Salvador, Venezuela) Otros destinos verificar.<br> Infórmese sobre los requisitos sanitarios requeridos
+                        para su viaje. Le recordamos, si Ud. realiza el pre-chequeo electrónico con la aerolínea antes del vuelo, verifique y lea cuidadosamente las instrucciones y recomendaciones de la línea aérea en materia de equipajes permitidos,
+                        materiales peligrosos, hora de presentación al aeropuerto, sala de embarque y tome sus precauciones. </p>
+
+                    <p>El pasajero es responsable por cualquier problema que pudiera suscitarse en el momento del embarque por cuestiones de documentación personal necesaria para viajar y ajenas a NUEVO MUNDO VIAJES</p>
+                </div>
+
+                <div class="contentModBox">
+                    <div class="textTitle">Pasajeros Peruanos Viajando al Exterior</div>
+                    <ul class="listModal">
+                        <li>Países limítrofes: Cédula del MERCOSUR sin vencer, DNI en buen estado/no deteriorado o Pasaporte Peruano deberá contar con vigencia mínima 6 meses a partir de la fecha de viaje.</li>
+                        <li>Países no limítrofes: Pasaporte Peruano vigente mínimo 6 meses a partir de la fecha de viaje. Mayor de 18 años y si viaja a países miembros de la Comunidad Andina, puede viajar solo con su DNI vigente.</li>
+                        <li>Si no cuenta con residencia en el país de destino de viaje, recuerde que siempre debe viajar con un boleto aéreo de ida y retorno.</li>
+                    </ul>
+                    <div class="padLateral">
+                        <div class="titleCondicion">
+                            Países que solicitan visa de turista para el ingreso a Peruano:
+                        </div>
+                        <ul class="listModal lessPad">
+                            <li>Australia</li>
+                            <li>Jamaica</li>
+                            <li>Canadá</li>
+                            <li>Japón</li>
+                            <li>El Salvador</li>
+                            <li>Nueva Zelanda</li>
+                            <li>Estados Unidos</li>
+                            <li>Reino Unido</li>
+                            <li>Fiji</li>
+                            <li>Otros países favor de verificar.</li>
+                        </ul>
+                    </div>
+                    <div class="titleCondicion">
+                        Pasajeros Menores de 18 años requieren:
+                    </div>
+                    <ul class="listModal">
+                        <li>Si viajan solos deben tener permiso de viaje notarial de los padres.</li>
+                        <li>Viajando con ambos padres: Partida de nacimiento o libreta de matrimonio donde figure el menor. Para ambos casos deben llevar documento del menor DNI, PASAPORTE deberá contar con vigencia mínimo 6 meses a partir de la fecha de
+                            viaje.
+                        </li>
+                        <li>Viajando con uno u otro padre deben tener permiso notarial de viaje autorizado por el otro padre. Documento del menor. DNI, PASAPORTE deberá contar con vigencia mínimo 6 meses a partir de la fecha de viaje.</li>
+                    </ul>
+                </div>
+
+                <div class="contentModBox">
+                    <div class="textTitle">Pasajeros extranjeros</div>
+                    <ul class="listModal">
+                        <li>Residentes no nacionalizados: DNI de extranjero, Residencia permanente o temporaria dentro de la vigencia.</li>
+                        <li>Para países no limítrofes/ limítrofes: Pasaporte de extranjero más DNI de extranjero.</li>
+                        <li>Residentes nacionalizados: Cédula del MERCOSUR, Pasaporte o DNI.</li>
+                    </ul>
+                    <div class="titleCondicion">
+                        Requisitos para casos especiales:
+                    </div>
+                    <ul class="listModal">
+                        <li>Extranjero tramitando residencia: Documento válido de su país de origen más certificado de tramitación de residencia con permanencia vigente.</li>
+                        <li>Pasajeros que cuentan con las siguientes nacionalidades* y Deseen ingresar a Estados Unidos deberán obtener una autorización a través: El Programa se llama ESTA (Electronic System For Travel Authorization) Pág. web: <a href="https://esta.cbp.dhs.gov">https://esta.cbp.dhs.gov</a></li>
+                    </ul>
+                    <div class="tablaModal">
+                        <div class="rowModal">
+                            <div class="colModal">Andorra</div>
+                            <div class="colModal">Dinamarca</div>
+                            <div class="colModal">Hungría</div>
+                            <div class="colModal">Liechtenstein</div>
+                            <div class="colModal">Noruega</div>
+                            <div class="colModal">Eslovenia</div>
+                        </div>
+                        <div class="rowModal">
+                            <div class="colModal">Australia</div>
+                            <div class="colModal">Estonia</div>
+                            <div class="colModal">Islandia</div>
+                            <div class="colModal">Lituania</div>
+                            <div class="colModal">Portugal</div>
+                            <div class="colModal">Corea del Sur</div>
+                        </div>
+                        <div class="rowModal">
+                            <div class="colModal">Austria</div>
+                            <div class="colModal">Finlandia</div>
+                            <div class="colModal">Irlanda</div>
+                            <div class="colModal">Luxemburgo</div>
+                            <div class="colModal">República de Malta</div>
+                            <div class="colModal">España</div>
+                        </div>
+                        <div class="rowModal">
+                            <div class="colModal">Bélgica</div>
+                            <div class="colModal">Francia</div>
+                            <div class="colModal">Italia</div>
+                            <div class="colModal">Mónaco</div>
+                            <div class="colModal">San Marino</div>
+                            <div class="colModal">Suecia</div>
+                        </div>
+                        <div class="rowModal">
+                            <div class="colModal">Brunei</div>
+                            <div class="colModal">Alemania</div>
+                            <div class="colModal">Japón</div>
+                            <div class="colModal">Países Bajos</div>
+                            <div class="colModal">Singapur</div>
+                            <div class="colModal">Suiza</div>
+                        </div>
+                        <div class="rowModal">
+                            <div class="colModal">República Checa</div>
+                            <div class="colModal">Grecia</div>
+                            <div class="colModal">Letonia</div>
+                            <div class="colModal">Nueva Zelanda</div>
+                            <div class="colModal">Eslovaquia</div>
+                            <div class="colModal">Reino Unido</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="contentModBox">
+                    <div class="textTitle">Recomendaciones Importantes</div>
+                    <ul class="listModal">
+                        <li>Si Ud. viaja a Estados Unidos de América o tendrá una estadía superior a las 8Hs en México, por favor recuerde que debe tener pasaporte y visas vigentes, aunque sean vuelos en tránsito</li>
+                        <li>Si posee documentación de la Comunidad Europea, consulte con la representación consular del país de nacionalidad que posee y verifique si requiere alguna documentación adicional.</li>
+                        <li>Recuerde que para el ingreso a Europa debe consultar por la documentación que es requerida para el viaje.</li>
+                        <li>Los documentos para viaje deben encontrarse en buen estado, no deben estar deteriorados ni rotos.</li>
+                        <li>Se sugiere la compra de su tarjeta de asistencia.</li>
+                        <li>Cualquier duda se puede contactar al Departamento de Migraciones (51) 1-417-6900 o visite su página web: <a href="http://www.digemin.gob.pe/.">http://www.digemin.gob.pe/.</a></li>
+                    </ul>
+                </div>
+
+                <div class="contentModBox">
+                    <div class="textTitle">Reglamentación permiso de viaje de menores</div>
+                    <ul class="listModal">
+                        <li>Entregar la autorización de viaje expedida por el juez de familia o permiso notarial (si es otorgado en el país) o autorización consular legalizada por el Ministerio de Relaciones Exteriores (si es otorgada en el extranjero).</li>
+                        <li>La vigencia de las autorizaciones será no mayor a 60 días. En todos los casos válidos para un solo viaje.</li>
+                    </ul>
+                </div>
+
+                <div class="contentModBox">
+                    <div class="textTitle">Notas</div>
+                    <ul class="listModal">
+                        <li>En el caso de menor de edad residente en el extranjero que haya permanecido menos de tres (03) meses en el Perú presentará sólo su cédula o autorización de residencia en el extranjero.</li>
+                        <li>En aplicación del Convenio de Tránsito de Personas Perú-Ecuador u otros convenios Bilaterales y la Decisión № 503 de la Comunidad Andina, se podrá presentar partida de nacimiento en sustitución del pasaporte.</li>
+                    </ul>
+                </div>
+
+                <div class="contentRed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22C6.477 22 2 17.523 2 12ZM13 8C13 7.73478 12.8946 7.48043 12.7071 7.29289C12.5196 7.10536 12.2652 7 12 7C11.7348 7 11.4804 7.10536 11.2929 7.29289C11.1054 7.48043 11 7.73478 11 8C11 8.26522 11.1054 8.51957 11.2929 8.70711C11.4804 8.89464 11.7348 9 12 9C12.2652 9 12.5196 8.89464 12.7071 8.70711C12.8946 8.51957 13 8.26522 13 8ZM12 17C12.2652 17 12.5196 16.8946 12.7071 16.7071C12.8946 16.5196 13 16.2652 13 16V12C13 11.7348 12.8946 11.4804 12.7071 11.2929C12.5196 11.1054 12.2652 11 12 11C11.7348 11 11.4804 11.1054 11.2929 11.2929C11.1054 11.4804 11 11.7348 11 12V16C11 16.2652 11.1054 16.5196 11.2929 16.7071C11.4804 16.8946 11.7348 17 12 17Z" fill="#DF0C30"/>
+                        </svg> NUEVO MUNDO VIAJES no se hará responsable de los problemas que se pudieran suscitar en el embarque debido a documentación
+                </div>
+            </div>
         </div>
     </div>
 </div>
