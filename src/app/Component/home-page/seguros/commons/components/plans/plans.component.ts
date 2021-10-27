@@ -47,9 +47,17 @@ export class PlansComponent implements OnInit {
     this.listPlansAC()
   }
 
-  test(){
+  test() {
     console.log('HOLA');
-    
+  }
+
+  bestPlan() {    
+    let arrai = this.plansAC
+    arrai.sort((a: any, b: any) => a['change'] - b['change'])
+    var longitud = arrai.length;
+    longitud = longitud / 2;
+    let medium = Math.floor(longitud -1)
+    return medium
   }
 
   listPlansAC() {
@@ -109,7 +117,16 @@ export class PlansComponent implements OnInit {
     }
     this.plansACService.plansAC(payload).subscribe({
       next: (response) => {
-        this.plansAC = response
+        this.plansAC = response.filter((price: any) => {
+          if (price.precioEmision != '0') {
+            let clase = {clase: {clase2: 'best'}}
+            price[this.bestPlan()] = {...clase, ...price[this.bestPlan()]}
+            return price
+          }
+        })
+        console.log(this.bestPlan());
+        
+        
         // .map((m: any, index: any) => {
         //   let payload2 = {
         //     "Aplicacion": "Intranet",
@@ -160,9 +177,9 @@ export class PlansComponent implements OnInit {
         this.loaderSubjectService.closeLoader()
         this.route.navigateByUrl('/home/seguros');
       }
-    }
-    )
+    })
   }
+
   listCoverage(data: any) {
     let payload = {
       "Aplicacion": "Intranet",
