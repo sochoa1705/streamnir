@@ -84,6 +84,14 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   limitePassenger = false
   limit = 0
 
+  errors: any[] = []
+  MSG_EMPTY: string = 'none'
+
+  MSG_CUSTOMERS: string = 'age'
+  MSG_DESTINO: string = 'destinoSafe'
+  MSG_OUTFLY: string = 'fromDate'
+  MSG_INFLY: string = 'toDate'
+
   model1: string | undefined;
   model2: string | undefined;
 
@@ -153,43 +161,77 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log(this.FromDate2.nativeElement.value);
+    // console.log(this.FromDate2.nativeElement.value);
     //this.form.addControl('fromDate', new FormControl(this.FromDate2.nativeElement.value));
     // this.form.updateValueAndValidity();
   }
 
+  validForm() {
+    this.errors = []
+
+    let age: string = this.form.getRawValue()['passenger'][0]['age']
+    if (age === undefined || age === null || age.trim() === '') {
+      this.errors.push({ name: this.MSG_CUSTOMERS, message: 'Debe ingresar la edad' })
+    }
+
+    let destinoSafe: string = this.form.getRawValue()['destinoSafe']
+    if (destinoSafe === undefined || destinoSafe === null || destinoSafe.trim() === '') {
+      this.errors.push({ name: this.MSG_DESTINO, message: 'Elija el Destino' })
+    }
+
+    // let fromDate: string = this.form.getRawValue()['fromDate']
+    let fromDate: string = this.FromDate2.nativeElement.value
+    if (fromDate === undefined || fromDate === null || fromDate.trim() === '') {
+      this.errors.push({ name: this.MSG_OUTFLY, message: 'Elija La fecha' })
+    }
+
+    // let fromDate: string = this.form.getRawValue()['fromDate']
+    let toDate: string = this.ToDate2.nativeElement.value
+    if (toDate === undefined || toDate === null || toDate.trim() === '') {
+      this.errors.push({ name: this.MSG_INFLY, message: 'Elija la fecha de llegada' })
+    }
+
+    return this.errors.length === 0
+  }
+
+  getMessage(messageKey: any) {
+    return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
+  }
+
   send() {
-    // console.log(this.form);
-    // console.log(this.form.controls['passenger'].value[0].age);
-    // this.form.removeControl('passenger');
-    this.form.removeControl('fromDate');
-    this.form.removeControl('toDate');
-    this.form.addControl('ClienteCotizacion', new FormControl(this.ClienteCotizacion));
-    this.form.addControl('fromDate', new FormControl(this.FromDate2.nativeElement.value));
-    this.form.addControl('toDate', new FormControl(this.ToDate2.nativeElement.value));
-    this.form.removeControl('days')
-    this.form.addControl('days', new FormControl(this.diffDays()))
-    this.form.removeControl('destinyString');
-    this.form.addControl('destinyString', new FormControl(this.destinySring()));
+    if (this.validForm()) {
+      // console.log(this.form);
+      // console.log(this.form.controls['passenger'].value[0].age);
+      // this.form.removeControl('passenger');
+      this.form.removeControl('fromDate');
+      this.form.removeControl('toDate');
+      this.form.addControl('ClienteCotizacion', new FormControl(this.ClienteCotizacion));
+      this.form.addControl('fromDate', new FormControl(this.FromDate2.nativeElement.value));
+      this.form.addControl('toDate', new FormControl(this.ToDate2.nativeElement.value));
+      this.form.removeControl('days')
+      this.form.addControl('days', new FormControl(this.diffDays()))
+      this.form.removeControl('destinyString');
+      this.form.addControl('destinyString', new FormControl(this.destinySring()));
 
-    //console.log(this.fromDate);
-    let form = this.form.value
-    console.log(form);
-    localStorage.setItem('Datasafe', JSON.stringify(form));
-    console.log('Enviado-Plan');
-    // console.log(this.destino.nativeElement.value);
+      //console.log(this.fromDate);
+      let form = this.form.value
+      console.log(form);
+      localStorage.setItem('Datasafe', JSON.stringify(form));
+      console.log('Enviado-Plan');
+      // console.log(this.destino.nativeElement.value);
 
-    // const navigationExtras: NavigationExtras = { state: this.plan };
-    // this.route.navigateByUrl('/home/seguros/planes', navigationExtras);
+      // const navigationExtras: NavigationExtras = { state: this.plan };
+      // this.route.navigateByUrl('/home/seguros/planes', navigationExtras);
 
 
-    // this.route.navigateByUrl('/home/seguros/planes', { skipLocationChange: true }).then(() =>
-    //   this.route.navigate(["/home/seguros"]));
-    // window.location.href="#/home/seguros/planes"
+      // this.route.navigateByUrl('/home/seguros/planes', { skipLocationChange: true }).then(() =>
+      //   this.route.navigate(["/home/seguros"]));
+      // window.location.href="#/home/seguros/planes"
       // this.route.navigateByUrl('/home/comprar', { skipLocationChange: true });
       // this.route.navigate(["/home/seguros/planes"]);
-      this.route.navigateByUrl('/home/comprar', {skipLocationChange: true}).then(()=>
-      this.route.navigate(["/home/seguros/planes"]));
+      this.route.navigateByUrl('/home/comprar', { skipLocationChange: true }).then(() =>
+        this.route.navigate(["/home/seguros/planes"]));
+    }
   }
 
   destinySring() {
@@ -269,7 +311,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       console.log(fecha);
       console.log(age);
       console.log(fechaEnd);
-      
+
       let omac2 = { 'Edad': String(age), 'FechaNacimiento': String(dayFech + '/' + monthFech + '/' + yearFech) }
       // omac.push(omac2)
       // console.log(fech);

@@ -19,17 +19,14 @@ export class LoaderComponent implements OnInit {
     this.loader()
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.loaderSbscripcionRef.unsubscribe()
   }
 
   private loader() {
-    this.loaderSbscripcionRef = this.loaderSubjectService.loader$.subscribe(state => 
-      {
-        console.log(state);
-        
-        this.showLoader = state
-      })
+    this.loaderSbscripcionRef = this.loaderSubjectService.loader$.subscribe(state => {
+      this.showLoader = state
+    })
   }
 
 }

@@ -17,6 +17,7 @@ export class PlansComponent implements OnInit {
   resultJson: any
   pop: any
   plansAC: any = []
+  plans: any = []
   coverageList: any
   json = {
     detailPay: 'safe',
@@ -40,27 +41,23 @@ export class PlansComponent implements OnInit {
   ) {
     this.result = localStorage.getItem('Datasafe')
     this.resultJson = JSON.parse(this.result)
-    console.log(this.resultJson);
-    console.log(this.resultJson.ClienteCotizacion);
+    // console.log(this.resultJson);
+    // console.log(this.resultJson.ClienteCotizacion);
   }
   ngOnInit(): void {
     this.listPlansAC()
   }
 
-  test() {
-    console.log('HOLA');
-  }
-
-  bestPlan() {    
+  bestPlan() {
     let arrai = this.plansAC
     arrai.sort((a: any, b: any) => a['change'] - b['change'])
     var longitud = arrai.length;
     longitud = longitud / 2;
-    let medium = Math.floor(longitud -1)
+    let medium = Math.floor(longitud - 1)
     return medium
   }
 
-  listPlansAC() {
+    listPlansAC() {
     const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!'
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
@@ -119,14 +116,74 @@ export class PlansComponent implements OnInit {
       next: (response) => {
         this.plansAC = response.filter((price: any) => {
           if (price.precioEmision != '0') {
-            let clase = {clase: {clase2: 'best'}}
-            price[this.bestPlan()] = {...clase, ...price[this.bestPlan()]}
+            // console.log(price);
             return price
           }
         })
-        console.log(this.bestPlan());
-        
-        
+        let maxi = this.bestPlan()
+        let clase = { clase: 'best' }
+        this.plans = { ...this.plansAC[maxi], ...clase }
+        this.plansAC.splice(maxi, 1)
+        this.plansAC.unshift(this.plans)
+
+        // AGREGAR CPVERAGE
+        this.plansAC.map(async (plan: any) => {
+console.log(plan);
+
+          let planes: any =   await this.listCoverage(plan)
+
+          // if(planes.Codigo === 'C.4.1.10.1'){
+          //   plan.aMedica = plan.valor
+          // }
+          return plan
+
+//           let payload = {
+//             "Aplicacion": "Intranet",
+//             "CodigoSeguimiento": "Test",
+//             "CodigosEntorno": "DESA/NMO/NMO",
+//             "Parametros": {
+//               "CodigoISOPais": this.resultJson.destinoSafe,
+//               "Agencia": "87823",
+//               "Sucursal": "0",
+//               "CodigoProducto": plan.codProducto,
+//               "CodigoTarifa": plan.codTarifa,
+//               "Edad": "40",
+//               "TipoModalidad": plan.codModalidad
+//             }
+//           }
+
+//           this.coverageService.getCoverage(payload).subscribe(
+//             response.map((n: any)=>{
+//               if(n.Codigo === 'C.4.1.10.1'){
+//               plan.cobertura = n.valor
+//               }
+              
+//             })
+            
+//             // data => console.log(data['Resultado']),
+//           )
+// return plan
+        })
+        // this.listCoverage(this.plansAC)
+
+        // .map((e: any) => {
+        //   // let max = this.bestPlan()
+        //   let max = 2
+        //   console.log(e[max])
+        //   console.log(e);
+
+        //   if (e === e[max]) {
+        //     console.log(e);
+        //   }
+        //   // price[this.bestPlan()] = {...clase, ...price[this.bestPlan()]}
+        //   //price[0] = {...clase, ...price[0]}
+        //   //  console.log(e[this.bestPlan()]);
+
+        //   return e
+        // })
+        //console.log(this.bestPlan());
+
+
         // .map((m: any, index: any) => {
         //   let payload2 = {
         //     "Aplicacion": "Intranet",
@@ -180,11 +237,11 @@ export class PlansComponent implements OnInit {
     })
   }
 
-  listCoverage(data: any) {
+  listCoverage(data: any) {    
     let payload = {
       "Aplicacion": "Intranet",
       "CodigoSeguimiento": "Test",
-      "CodigosEntorno": "PROD/NMO/NMO",
+      "CodigosEntorno": "DESA/NMO/NMO",
       "Parametros": {
         "CodigoISOPais": this.resultJson.destinoSafe,
         "Agencia": "87823",
@@ -195,6 +252,8 @@ export class PlansComponent implements OnInit {
         "TipoModalidad": data.codModalidad
       }
     }
+
+    
     this.coverageService.getCoverage(payload).subscribe({
       next: (response) => {
         this.coverageList = response['Resultado']
@@ -205,6 +264,7 @@ export class PlansComponent implements OnInit {
       // data => console.log(data['Resultado']),
     )
   }
+
   data(id: any) {
     let service = this.plansAC.find((e: any) => {
       this.listCoverage(e)
@@ -215,6 +275,7 @@ export class PlansComponent implements OnInit {
     })
     this.pop = service
   }
+
   shop(id: any) {
     let service = this.plansAC.find((e: any) => {
       if (e.idProducto === id) {

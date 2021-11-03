@@ -36,20 +36,21 @@
             </div>
         </div> -->
         <div class="d-inline" *ngFor="let card of plansAC; let index = index">
-        <div class="card seguro" *ngIf="index < 5">
-            <div class="card-header">Fecha flexible</div>
+        <div class="card seguro" [ngClass]="card.clase" *ngIf="index < 5">
+            <div *ngIf="card.clase" class="card-header">El mejor plan</div>
+            <div *ngIf="!card.clase" class="card-header">Fecha flexible</div>
             <div class="card-body">
                 <h2>{{card.nombreProducto.substr(0, 9)  }}</h2>
                 <span>Antes</span>
                 <div class="oldPrice">
                     <div class="tachado"></div>
-                    <p>PEN<strong>141.97</strong></p>
+                    <p>PEN<strong>{{card.change}}</strong></p>
                 </div>
                 <span class="now">Ahora</span>
                 <p class="now">PEN <strong>{{card.change}}</strong></p>
                 <span>Ahorra</span>
                 <div class="precioAhorra">
-                    <p>PEN<strong>141.97</strong></p>
+                    <p>PEN<strong>0</strong></p>
                 </div>
                 <div class="d-flex py-3">
                     <img src="./assets/seguros/covid.png" alt="">
@@ -59,12 +60,13 @@
                     </div>
                 </div>
                 <div class="d-block text-center">
-                    <a href="#" (click)="data(card.idProducto)" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver detalle de los beneficios</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#ModalCoverage" (click)="data(card.idProducto)">Ver detalle de los beneficios</a>
                 </div>
                 <div class="d-block text-center py-2">
                     <button (click)="shop(card.idProducto)">Seleccionar</button>
                 </div>
-                <p class="card-text">Asistencia médica: USD 60.000</p>
+                <p *ngIf="card.clase" class="card-text">Usa tu <b>Assist Card</b>  en múltiples viajes por 1 año</p>
+                <p *ngIf="!card.clase" class="card-text">Asistencia médica: USD 60.000</p>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             </div>
             </div>
@@ -93,12 +95,12 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="pop">
+<div class="modal fade" id="ModalCoverage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="pop">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
+            <div class="modal-content {{ pop?.clase }}">
                 <div class="modal-header">
                     <h2 class="modal-title" id="exampleModalLabel">{{pop.producto}} - S/. {{pop.change}}</h2>
-                    <h5 class="modal-title" id="exampleModalLabel">Asistencia médica: USD 60.000</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" *ngFor="let cod of coverageList">Asistencia médica: USD 60.000</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -142,16 +144,16 @@
                         <div class="row py-3 footerPopup">
                             <div class="col-3 borderRight">
                                 <p>Total</p>
-                                <span>PEN <strong>314,80</strong></span>
-                                <button>Comprar</button>
+                                <span>PEN <strong>{{pop.change}}</strong></span>
+                                <button (click)="shop(pop.idProducto)">Comprar</button>
                             </div>
                             <div class="col-9 alignFooterPopup">
-                                <p class="otroPlan">otros planes:</p>
+                                <p class="otroPlan">otros planes2:</p>
                                 <div class="row planBox">
-                                    <div class="col-3">
-                                        <button class="planes best">El mejor plan</button>
+                                    <div class="col-3" *ngFor="let p of plansAC; let index = index">
+                                        <button (click)="data(p.idProducto)" *ngIf="index < 5" class="planes {{ p.clase }}">{{ p.nombreProducto.substr(0, 9)  }}</button>
                                     </div>
-                                    <div class="col-3">
+                                    <!-- <div class="col-3">
                                         <button class="planes">Privileged</button>
                                     </div>
                                     <div class="col-3">
@@ -159,7 +161,7 @@
                                     </div>
                                     <div class="col-3">
                                         <button class="planes">Million</button>
-                                    </div>
+                                    </div> -->
                                 </div>
     
                             </div>
@@ -177,7 +179,7 @@
     <!-- Modal Rojo-->
     <div class="modal fade" id="exampleModalRed" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content red">
+            <div class="modal-content best">
                 <div class="modal-header">
                     <h2 class="modal-title" id="exampleModalLabel">EL MEJOR PLAN - S/. 804,48</h2>
                     <h5 class="modal-title" id="exampleModalLabel">Usala en múltiples viajes por <strong>un año</strong></h5>

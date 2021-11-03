@@ -3,6 +3,7 @@
         <!-- COMBOS -->
         <div class="row filter espaciado versionMobile">
             <div class="w-130">
+                <span class="valid" *ngIf="getMessage(MSG_CUSTOMERS) != MSG_EMPTY">{{ getMessage(MSG_CUSTOMERS) }}</span>
                 <!-- <button class="customers" (click)="customers($event)">10 Pasajero</button> -->
                 <button class="customers" (click)="showPasajero()">{{limit}} Pasajero(s)</button>
                 <!-- PASAJEROS -->
@@ -105,11 +106,12 @@
 
                 <!-- DESTINO -->
                 <div class="columnFiltro narginColumn">
-                    <div *ngIf="this.form.controls.destinoSafe.touched && this.form.controls.destinoSafe.invalid" class="position-relative">
+                    <!-- <div *ngIf="this.form.controls.destinoSafe.touched && this.form.controls.destinoSafe.invalid" class="position-relative">
                         <div *ngIf="this.form.controls.destinoSafe.errors && this.form.controls.destinoSafe.errors.required">Destino requerido.</div>
-                    </div>
+                    </div> -->
                     <input type="hidden" value="">
-                    <select #destino class="form-select selectSeguro" formControlName="destinoSafe" aria-label="Default select example" required>
+                    <!-- <span class="valid" *ngIf="getMessage(MSG_DESTINO) != MSG_EMPTY">{{ getMessage(MSG_DESTINO) }}</span> -->
+                    <select #destino [ngClass]="getMessage(MSG_DESTINO) != MSG_EMPTY ? 'isvalid' : ''" class="form-select selectSeguro" formControlName="destinoSafe" aria-label="Default select example" required>
                         <option disabled selected>Destino</option>
                         <option *ngFor="let o of options" value="{{o.ref_assistcard}}">{{o.descripcion_destino}}</option>
                     </select>
@@ -164,7 +166,7 @@
                             <path d="M1.46973 8.63647H20.5606" stroke="#009AED" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <input #dpFromDate autocomplete="off" formControlName="fromDate" class="form-control inputDer" (click)="datepicker.toggle()"
+                    <input #dpFromDate autocomplete="off" [ngClass]="getMessage(MSG_OUTFLY) != MSG_EMPTY ? 'isvalid' : ''" formControlName="fromDate" class="form-control inputDer" (click)="datepicker.toggle()"
                         placeholder="Salida" name="start" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
                 </div>
                 <div class="columnFiltro narginColumn" *ngIf="selected === 'idavuelta'">
@@ -178,14 +180,15 @@
                         </svg>
                     </div>
                     <input autocomplete="off" #dpToDate formControlName="toDate" class="form-control inputIzq" (click)="datepicker.toggle()"
-                        placeholder="Vuelta" name="dpToDate" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
+                        placeholder="Vuelta" name="dpToDate" [ngClass]="getMessage(MSG_INFLY) != MSG_EMPTY ? 'isvalid' : ''" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
                 </div>
                 <!-- END IDA Y VUELTA -->
 
                 <!-- BOTOM -->
                 <div class="columnButton">
                     <!-- <button type="submit" [disabled]="form.invalid">Cotizar Ahora</button> -->
-                    <button type="submit" (click)="send()" [disabled]="!showOption || form.invalid">Cotizar Ahora</button>
+                    <!-- <button type="submit" (click)="send()" [disabled]="!showOption || form.invalid">Cotizar Ahora</button> -->
+                    <button type="submit" (click)="send()">Cotizar Ahora</button>
                 </div>
                 <!-- END BOTOM -->
             </div>
