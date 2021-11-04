@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-tabs',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tabs.component.scss']
 })
 export class TabsComponent implements OnInit {
+  form!: FormGroup;
   selected = 'option1';
   pasajeros: any = [
     {
@@ -16,7 +18,19 @@ export class TabsComponent implements OnInit {
   ];
   constructor() { }
 
+  showOption: Boolean = true;
+  showPasajero() {
+    this.showOption = this.showOption ? false : true;
+  }
+  
   ngOnInit(): void {
+    this.createForm()
+  }
+
+  createForm() {
+    this.form = new FormGroup({
+      clase: new FormControl('economy')
+    })
   }
   count(valor: number, e: any) {
     let item = e.target.name;
