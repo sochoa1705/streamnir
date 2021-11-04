@@ -3468,6 +3468,52 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+.boxTab {
+    width: 100%;
+    .rowBoxTab {
+        display: flex;
+        gap: 10px;
+        padding: 0 10px 10px 10px;
+        &.right {
+            justify-content: end;
+        }
+        &.text {
+            font-family: Open Sans;
+            font-style: normal;
+            font-size: 14px;
+            line-height: 27px;
+            letter-spacing: 0.18px;
+        }
+        .padRight {
+            padding-right: 20px;
+        }
+        .fullWidht {
+            width: 100%;
+        }
+        .colBoxtab {
+            flex: 1 1 auto;
+            position: relative;
+            input {
+                width: 100%;
+                padding: 0 !important;
+                height: 40px;
+                font-family: Montserrat;
+                font-size: 16px;
+                text-transform: capitalize;
+                color: #4B4B4B;
+                text-indent: 40px;
+                border: 0.5px solid #E4E5E7;
+                border-radius: 3px;
+            }
+            .iconCalendar {
+                position: absolute;
+                top: 5px;
+                left: 10px;
+            }
+        }
+    }
+}
+
 @media (max-width: 640px) {
     #modalVerOpciones {
         .boxPlanes {
@@ -4488,6 +4534,7 @@ span.valid {
     font-size: 10px!important;
     color: red!important;
 }
-.isvalid{
+
+.isvalid {
     border: 1px solid red!important
 }
