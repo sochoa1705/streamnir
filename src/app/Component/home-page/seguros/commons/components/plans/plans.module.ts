@@ -5,6 +5,7 @@ import { CardModule } from 'src/app/shared/components/card/card.module';
 import { PlansACService } from '../../../../../../Services/plansAC/plans-ac.service';
 import { CoverageService } from '../../../../../../Services/coverage/coverage.service';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../../../../../../shared/material.module';
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [PlansComponent],
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     CardModule,
     RouterModule,
+    MaterialModule,
   ],
   exports: [PlansComponent],
   providers: [PlansACService, CoverageService]

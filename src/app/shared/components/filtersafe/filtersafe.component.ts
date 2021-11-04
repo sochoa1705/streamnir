@@ -244,8 +244,8 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   }
 
   diffDays() {
-    var FeIni = this.fromDate ?.month + "/" + this.fromDate ?.day + "/" + this.fromDate ?.year;
-    var FeFin = this.toDate ?.month + "/" + this.toDate ?.day + "/" + this.toDate ?.year;
+    var FeIni = this.fromDate!.month + "/" + this.fromDate!.day + "/" + this.fromDate!.year
+    var FeFin = this.toDate!.month + "/" + this.toDate!.day + "/" + this.toDate!.year
     const date1 = new Date(FeIni);
     const date2 = new Date(FeFin);
 

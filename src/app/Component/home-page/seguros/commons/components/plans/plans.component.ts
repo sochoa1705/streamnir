@@ -19,6 +19,8 @@ export class PlansComponent implements OnInit {
   plansAC: any = []
   plans: any = []
   coverageList: any
+  coverageDisplay: boolean = false
+  asistMedic: any
   json = {
     detailPay: 'safe',
     filter: 'filtersafe',
@@ -137,32 +139,32 @@ export class PlansComponent implements OnInit {
         //   }
         //   return plan
 
-          //           let payload = {
-          //             "Aplicacion": "Intranet",
-          //             "CodigoSeguimiento": "Test",
-          //             "CodigosEntorno": "DESA/NMO/NMO",
-          //             "Parametros": {
-          //               "CodigoISOPais": this.resultJson.destinoSafe,
-          //               "Agencia": "87823",
-          //               "Sucursal": "0",
-          //               "CodigoProducto": plan.codProducto,
-          //               "CodigoTarifa": plan.codTarifa,
-          //               "Edad": "40",
-          //               "TipoModalidad": plan.codModalidad
-          //             }
-          //           }
+        //           let payload = {
+        //             "Aplicacion": "Intranet",
+        //             "CodigoSeguimiento": "Test",
+        //             "CodigosEntorno": "DESA/NMO/NMO",
+        //             "Parametros": {
+        //               "CodigoISOPais": this.resultJson.destinoSafe,
+        //               "Agencia": "87823",
+        //               "Sucursal": "0",
+        //               "CodigoProducto": plan.codProducto,
+        //               "CodigoTarifa": plan.codTarifa,
+        //               "Edad": "40",
+        //               "TipoModalidad": plan.codModalidad
+        //             }
+        //           }
 
-          //           this.coverageService.getCoverage(payload).subscribe(
-          //             response.map((n: any)=>{
-          //               if(n.Codigo === 'C.4.1.10.1'){
-          //               plan.cobertura = n.valor
-          //               }
+        //           this.coverageService.getCoverage(payload).subscribe(
+        //             response.map((n: any)=>{
+        //               if(n.Codigo === 'C.4.1.10.1'){
+        //               plan.cobertura = n.valor
+        //               }
 
-          //             })
+        //             })
 
-          //             // data => console.log(data['Resultado']),
-          //           )
-          // return plan
+        //             // data => console.log(data['Resultado']),
+        //           )
+        // return plan
         // })
         // this.listCoverage(this.plansAC)
 
@@ -238,6 +240,8 @@ export class PlansComponent implements OnInit {
   }
 
   listCoverage(data: any) {
+    this.coverageDisplay = false
+
     let payload = {
       "Aplicacion": "Intranet",
       "CodigoSeguimiento": "Test",
@@ -258,6 +262,14 @@ export class PlansComponent implements OnInit {
       next: (response) => {
         this.coverageList = response['Resultado']
         console.log(this.coverageList)
+        this.coverageDisplay = true
+
+        // this.asistMedic = response.find((e: any) => {
+        //   if (e.Codigo = 'C.4.1.10.1') {
+        //     console.log(e.Valor);
+        //     return e.Valor
+        //   }
+        // })
       },
       error: error => console.log(error),
     }
@@ -266,14 +278,9 @@ export class PlansComponent implements OnInit {
   }
 
   data(id: any) {
-    let service = this.plansAC.find((e: any) => {
-      this.listCoverage(e)
-      if (e.idProducto === id) {
-        console.log(e);
-        return e
-      }
-    })
-    this.pop = service
+    console.log(id);
+    this.pop = id
+    this.listCoverage(id)
   }
 
   shop(id: any) {
