@@ -32,6 +32,7 @@ export class TabsComponent implements OnInit {
       clase: new FormControl('economy')
     })
   }
+  
   count(valor: number, e: any) {
     let item = e.target.name;
     let pasajero = this.pasajeros[0][item];
