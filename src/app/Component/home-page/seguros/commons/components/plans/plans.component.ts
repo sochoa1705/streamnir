@@ -19,6 +19,8 @@ export class PlansComponent implements OnInit {
   plansAC: any = []
   plans: any = []
   coverageList: any
+  coverageDisplay: boolean = false
+  asistMedic: any
   json = {
     detailPay: 'safe',
     filter: 'filtersafe',
@@ -57,7 +59,7 @@ export class PlansComponent implements OnInit {
     return medium
   }
 
-    listPlansAC() {
+  listPlansAC() {
     const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!'
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
@@ -87,16 +89,16 @@ export class PlansComponent implements OnInit {
       "CodigoSeguimiento": "Test",
       "CodigosEntorno": "PROD/NMO/NMO",
       "Parametros": {
-        "UnidadNegocio": 5,
-        "Dk": "23571",
-        "SubCodigo": null,
+        "UnidadNegocio": 1,
+        "Dk": "339",
+        "SubCodigo": "1",
         "CotizacionAC": {
           "Pais": "510",
           "CodigoAgencia": "87823",
           "NumeroSucursal": "0",
           "PlanFamiliar": "false",
-          "Destino": "12",
-          "CantidadDias": "10",
+          "Destino": "2",
+          "CantidadDias": "28",
           "Clientes": {
             "ClienteCotizacion": [
               {
@@ -115,7 +117,7 @@ export class PlansComponent implements OnInit {
     this.plansACService.plansAC(payload).subscribe({
       next: (response) => {
         this.plansAC = response.filter((price: any) => {
-          if (price.precioEmision != '0') {
+          if (price.precioEmisionLocal != '0') {
             // console.log(price);
             return price
           }
@@ -127,43 +129,43 @@ export class PlansComponent implements OnInit {
         this.plansAC.unshift(this.plans)
 
         // AGREGAR CPVERAGE
-        this.plansAC.map(async (plan: any) => {
-console.log(plan);
+        // this.plansAC.map((plan: any) => {
+        //   console.log(plan);
 
-          let planes: any =   await this.listCoverage(plan)
+        //   let planes: any = this.listCoverage(plan)
 
-          // if(planes.Codigo === 'C.4.1.10.1'){
-          //   plan.aMedica = plan.valor
-          // }
-          return plan
+        //   if (planes.Codigo === 'C.4.1.10.1') {
+        //     plan.aMedica = plan.valor
+        //   }
+        //   return plan
 
-//           let payload = {
-//             "Aplicacion": "Intranet",
-//             "CodigoSeguimiento": "Test",
-//             "CodigosEntorno": "DESA/NMO/NMO",
-//             "Parametros": {
-//               "CodigoISOPais": this.resultJson.destinoSafe,
-//               "Agencia": "87823",
-//               "Sucursal": "0",
-//               "CodigoProducto": plan.codProducto,
-//               "CodigoTarifa": plan.codTarifa,
-//               "Edad": "40",
-//               "TipoModalidad": plan.codModalidad
-//             }
-//           }
+        //           let payload = {
+        //             "Aplicacion": "Intranet",
+        //             "CodigoSeguimiento": "Test",
+        //             "CodigosEntorno": "DESA/NMO/NMO",
+        //             "Parametros": {
+        //               "CodigoISOPais": this.resultJson.destinoSafe,
+        //               "Agencia": "87823",
+        //               "Sucursal": "0",
+        //               "CodigoProducto": plan.codProducto,
+        //               "CodigoTarifa": plan.codTarifa,
+        //               "Edad": "40",
+        //               "TipoModalidad": plan.codModalidad
+        //             }
+        //           }
 
-//           this.coverageService.getCoverage(payload).subscribe(
-//             response.map((n: any)=>{
-//               if(n.Codigo === 'C.4.1.10.1'){
-//               plan.cobertura = n.valor
-//               }
-              
-//             })
-            
-//             // data => console.log(data['Resultado']),
-//           )
-// return plan
-        })
+        //           this.coverageService.getCoverage(payload).subscribe(
+        //             response.map((n: any)=>{
+        //               if(n.Codigo === 'C.4.1.10.1'){
+        //               plan.cobertura = n.valor
+        //               }
+
+        //             })
+
+        //             // data => console.log(data['Resultado']),
+        //           )
+        // return plan
+        // })
         // this.listCoverage(this.plansAC)
 
         // .map((e: any) => {
@@ -237,11 +239,13 @@ console.log(plan);
     })
   }
 
-  listCoverage(data: any) {    
+  listCoverage(data: any) {
+    this.coverageDisplay = false
+
     let payload = {
       "Aplicacion": "Intranet",
       "CodigoSeguimiento": "Test",
-      "CodigosEntorno": "DESA/NMO/NMO",
+      "CodigosEntorno": "PROD/NMO/NMO",
       "Parametros": {
         "CodigoISOPais": this.resultJson.destinoSafe,
         "Agencia": "87823",
@@ -253,11 +257,19 @@ console.log(plan);
       }
     }
 
-    
+
     this.coverageService.getCoverage(payload).subscribe({
       next: (response) => {
         this.coverageList = response['Resultado']
         console.log(this.coverageList)
+        this.coverageDisplay = true
+
+        // this.asistMedic = response.find((e: any) => {
+        //   if (e.Codigo = 'C.4.1.10.1') {
+        //     console.log(e.Valor);
+        //     return e.Valor
+        //   }
+        // })
       },
       error: error => console.log(error),
     }
@@ -266,14 +278,9 @@ console.log(plan);
   }
 
   data(id: any) {
-    let service = this.plansAC.find((e: any) => {
-      this.listCoverage(e)
-      if (e.idProducto === id) {
-        console.log(e);
-        return e
-      }
-    })
-    this.pop = service
+    console.log(id);
+    this.pop = id
+    this.listCoverage(id)
   }
 
   shop(id: any) {

@@ -80,8 +80,7 @@ export class ComprarComponent implements OnInit , AfterViewInit {
     } else {
       this.mobile = false
     }
-
-    // this.current = this.route.getCurrentNavigation()?.extras.state as any
+    this.current = this.route.getCurrentNavigation()!.extras.state as any
   }
 
   showDataContacto: Boolean = true;
@@ -100,8 +99,8 @@ ngAfterViewInit(){
 
   ngOnInit(): void {
     // this.getSecureBooking()
-    // this.loadShop();
-    // console.log(this.current);
+    console.log(this.current);
+    this.loadShop();
     //console.log(this.safe0Json.detailPay);
 
     this.firstFormGroup = new FormGroup({

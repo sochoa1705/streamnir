@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-resultados',
@@ -7,12 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultadosComponent implements OnInit {
   selectedValue!: string;
+  json = {
+    filter: 'filter',
+    title: '¡Falta poco! Confirma ahora tu reserva.',
+    asistencia: true,
+    reembolso: true,
+    detalleViaje: true,
+    detalleCobertura: false,
+    cupon: true
+  }
   foods: any[] = [
     { value: 'steak-0', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
     { value: 'tacos-2', viewValue: 'Tacos' }
   ];
-  constructor() { }
+  constructor(public route: Router) { }
 
   id:any = "tabIda";
   showOption(ids:any) {
@@ -37,4 +47,9 @@ export class ResultadosComponent implements OnInit {
 
   }
 
+  shop() {
+    //console.log(this.form.value);
+    const navigationExtras: NavigationExtras = { state: this.json };
+    this.route.navigateByUrl('/home/comprar', navigationExtras);
+  }
 }

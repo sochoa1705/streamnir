@@ -247,9 +247,12 @@ export class FilterComponent implements OnInit {
 
   send() {
     // console.log(this.form.value);
-    debugger;
-    var FeIni = this.fromDate?.month + "/" + this.fromDate?.day + "/" + this.fromDate?.year;
-    var FeFin = this.toDate?.month + "/" + this.toDate?.day + "/" + this.toDate?.year;
+    // debugger;
+    var FeIni = this.fromDate!.month + "/" + this.fromDate!.day + "/" + this.fromDate!.year
+    var FeFin = this.toDate!.month + "/" + this.toDate!.day + "/" + this.toDate!.year
+
+    // var FeIni = this.fromDate?.month + "/" + this.fromDate?.day + "/" + this.fromDate?.year;
+    // var FeFin = this.toDate?.month + "/" + this.toDate?.day + "/" + this.toDate?.year;
     const date1 = new Date(FeIni);
     const date2 = new Date(FeFin);
 
@@ -258,6 +261,7 @@ export class FilterComponent implements OnInit {
     console.log(FeIni);
     console.log(FeFin);
     console.log(diffDays);
+    this.route.navigateByUrl('/home/vuelos/resultados');
 
   }
 
