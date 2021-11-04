@@ -518,12 +518,14 @@
                                 </div> -->
                                 <div class="row rowMobileCard hideMobile">
                                     <div class="col-6 viewMobileWidth">
-                                        <label for="names">Nombres</label>
-                                        <input class="form-control" formControlName="nameCustomer" placeholder="El que figura en el documento de viaje." type="text" name="names">
+                                        <label for="names1">Nombres</label>
+                                        <input class="form-control" formControlName="nameCustomer" placeholder="El que figura en el documento de viaje." type="text" name="names1">
+                                        <span class="valid" *ngIf="getMessage(MSG_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_NAME_CUSTOMER)" >{{ getMessage(MSG_NAME_CUSTOMER) }}</span>
                                     </div>
                                     <div class="col-6 viewMobileWidth">
-                                        <label for="lastname">Apellidos</label>
-                                        <input class="form-control" formControlName="lastNameCustomer" placeholder="El que figura en el documento de viaje." type="text" name="lastname">
+                                        <label for="lastname1">Apellidos</label>
+                                        <input class="form-control" formControlName="lastNameCustomer" placeholder="El que figura en el documento de viaje." type="text" name="lastname1">
+                                        <span class="valid" *ngIf="getMessage(MSG_LAST_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_LAST_NAME_CUSTOMER)" >{{ getMessage(MSG_LAST_NAME_CUSTOMER) }}</span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -533,6 +535,7 @@
                                         <div class="row">
                                             <div class="col-4">
                                                 <input class="form-control" formControlName="dayCustomer" type="text" name="names">
+                                                <span class="valid" *ngIf="getMessage(MSG_DAY_CUSTOMER) != MSG_EMPTY  &&  getMessageArray(i, MSG_DAY_CUSTOMER)">{{ getMessage(MSG_DAY_CUSTOMER) }}</span>
                                             </div>
                                             <div class="col-4">
                                                 <select formControlName="monthCustomer" class="form-select-f">
@@ -550,6 +553,7 @@
                                                     <option value="11">Noviembre</option>
                                                     <option value="12">Diciembre</option>
                                                 </select>
+                                                <span class="valid" *ngIf="getMessage(MSG_MONTH_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_MONTH_CUSTOMER)" >{{ getMessage(MSG_MONTH_CUSTOMER) }}</span>
                                             </div>
                                             <div class="col-4">
                                                 <select formControlName="yearCustomer" class="form-select-f">
@@ -589,6 +593,7 @@
                                                     <option value="2020">2020</option>
                                                     <option value="2021">2021</option>
                                                 </select>
+                                                <span class="valid" *ngIf="getMessage(MSG_YEAR_CUSTOMER) != MSG_EMPTY  &&  getMessageArray(i, MSG_YEAR_CUSTOMER)" >{{ getMessage(MSG_YEAR_CUSTOMER) }}</span>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -611,6 +616,7 @@
                                             <option value="07">Rumanía</option>
                                             <option value="08">Rusia</option>
                                         </select>
+                                        <span class="valid" *ngIf="getMessage(MSG_NATIONALITY_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_NATIONALITY_CUSTOMER)" >{{ getMessage(MSG_NATIONALITY_CUSTOMER) }}</span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -623,21 +629,23 @@
                                             <option value="pasaporte">Pasaporte</option>
                                             <option value="CE">C.Extranjería</option>
                                         </select>
+                                        <span class="valid" *ngIf="getMessage(MSG_TYPE_DOC_CUSTOMER) != MSG_EMPTY  &&  getMessageArray(i, MSG_TYPE_DOC_CUSTOMER)" >{{ getMessage(MSG_TYPE_DOC_CUSTOMER) }}</span>
                                     </div>
                                     <div class="col-3 viewMobileWidth">
                                         <label for="lastname">N° de documento</label>
                                         <input class="form-control" formControlName="numDocCustomer" type="text" name="ndocumento">
+                                        <span class="valid" *ngIf="getMessage(MSG_NUM_DOC_CUSTOMER) != MSG_EMPTY  &&  getMessageArray(i, MSG_NUM_DOC_CUSTOMER)" >{{ getMessage(MSG_NUM_DOC_CUSTOMER) }}</span>
                                     </div>
                                     <div class="col-6 viewMobileWidth">
                                         <label for="names">Sexo</label>
                                         <div class="optionSel">
                                             <div class="form-check form-check-inline optionLeft">
-                                                <input class="form-check-input sex" formControlName="sexCustomer" value="masculino" type="radio" id="sexMasc">
-                                                <label class="form-check-label" for="sexMasc">Masculino</label>
+                                                <input class="form-check-input sex" formControlName="sexCustomer" value="masculino" type="radio" id="sexMasc{{i}}" checked>
+                                                <label class="form-check-label" for="sexMasc{{i}}">Masculino</label>
                                             </div>
                                             <div class="form-check form-check-inline optionRight">
-                                                <input class="form-check-input sex" formControlName="sexCustomer" value="femenino" type="radio" id="sexFem">
-                                                <label class="form-check-label" for="sexFem">Femenino</label>
+                                                <input class="form-check-input sex" formControlName="sexCustomer" value="femenino" type="radio" id="sexFem{{i}}">
+                                                <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
                                             </div>
 
                                         </div>
@@ -655,6 +663,8 @@
                         </div>
                     </div>
                 </div>
+
+              
 
                 <div class="row">
                     <div class="col-sm-12 col-md-6 bCard" *ngIf="safe0Json.asistencia">

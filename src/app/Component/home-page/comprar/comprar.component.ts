@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OffersService } from 'src/app/Services/mock/offers.service';
@@ -8,10 +8,19 @@ import { OffersService } from 'src/app/Services/mock/offers.service';
   templateUrl: './comprar.component.html',
   styleUrls: ['./comprar.component.scss']
 })
-export class ComprarComponent implements OnInit {
+export class ComprarComponent implements OnInit , AfterViewInit {
   formShop!: FormGroup
   errors: any[] = []
   MSG_EMPTY: string = 'none'
+  
+  MSG_NAME_CUSTOMER: string = 'nameCustomer'
+  MSG_LAST_NAME_CUSTOMER: string = 'lastNameCustomer'
+  MSG_DAY_CUSTOMER: string = 'dayCustomer'
+  MSG_MONTH_CUSTOMER: string = 'monthCustomer'
+  MSG_YEAR_CUSTOMER: string = 'yearCustomer'
+  MSG_NATIONALITY_CUSTOMER: string = 'nationalityCustomer'
+  MSG_TYPE_DOC_CUSTOMER: string = 'typeDocCustomer'
+  MSG_NUM_DOC_CUSTOMER: string = 'numDocCustomer'
 
   MSG_BANK: string = 'bankPay'
   MSG_NAME_CONTACT: string = 'nameContacto'
@@ -80,6 +89,15 @@ export class ComprarComponent implements OnInit {
     this.showDataContacto = this.showDataContacto ? false : true;
   }
 
+ngAfterViewInit(){
+  for (let x = 0 ; x < this.formShop.getRawValue()['customers'].length; x++)
+  {
+    let checked = document.getElementById("sexMasc" + x);
+    (<HTMLInputElement>checked).checked = true;
+  }
+
+}
+
   ngOnInit(): void {
     // this.getSecureBooking()
     // this.loadShop();
@@ -108,7 +126,56 @@ export class ComprarComponent implements OnInit {
     if (bankPay === undefined || bankPay === null || bankPay.trim() === '') {
       this.errors.push({ name: this.MSG_BANK, message: 'Elija el banco' })
     }
+
+ //FORM PASAJERO
+ debugger;
+for (let x = 0 ; x < this.formShop.getRawValue()['customers'].length; x++)
+{
+ let nameCustomer: string = this.formShop.getRawValue()['customers'][x]['nameCustomer']
+ if (nameCustomer === undefined || nameCustomer === null || nameCustomer.trim() === '') {
+   this.errors.push({indice: x,  name: this.MSG_NAME_CUSTOMER, message: 'Nombre del pasajero es requerido' })
+ }
+
+ let lastNameCustomer: string = this.formShop.getRawValue()['customers'][x]['lastNameCustomer']
+ if (lastNameCustomer === undefined || lastNameCustomer === null || lastNameCustomer.trim() === '') {
+   this.errors.push({indice: x, name: this.MSG_LAST_NAME_CUSTOMER, message: 'Apellido del pasajero es requerido' })
+ }
+
+
+  let dayCustomer: string = this.formShop.getRawValue()['customers'][x]['dayCustomer']
+    if (dayCustomer === undefined || dayCustomer === null || dayCustomer.trim() === '') {
+      this.errors.push({indice: x, name: this.MSG_DAY_CUSTOMER, message: 'Dia de la fecha nacimiento del pasajero es requerido' })
+    }
+
+    let monthCustomer: string = this.formShop.getRawValue()['customers'][x]['monthCustomer']
+    if (monthCustomer === undefined || monthCustomer === null || monthCustomer.trim() === '') {
+      this.errors.push({indice: x, name: this.MSG_MONTH_CUSTOMER, message: 'Mes de la fecha nacimiento del pasajero es requerido' })
+    }
+
+    let yearCustomer: string = this.formShop.getRawValue()['customers'][x]['yearCustomer']
+    if (yearCustomer === undefined || yearCustomer === null || yearCustomer.trim() === '') {
+      this.errors.push({indice: x, name: this.MSG_YEAR_CUSTOMER, message: 'Año de la fecha nacimiento del pasajero es requerido' })
+    }
+
+    let nationalityCustomer: string = this.formShop.getRawValue()['customers'][x]['nationalityCustomer']
+    if (nationalityCustomer === undefined || nationalityCustomer === null || nationalityCustomer.trim() === '') {
+      this.errors.push({indice: x, name: this.MSG_NATIONALITY_CUSTOMER, message: 'Nacionalidad del pasajero es requerido' })
+    }
+
+    let typeDocCustomer: string = this.formShop.getRawValue()['customers'][x]['typeDocCustomer']
+    if (typeDocCustomer === undefined || typeDocCustomer === null || typeDocCustomer.trim() === '') {
+      this.errors.push({indice: x, name: this.MSG_TYPE_DOC_CUSTOMER, message: 'Tipo de documento del pasajero es requerido' })
+    }
+
+    let numDocCustomer: string = this.formShop.getRawValue()['customers'][x]['numDocCustomer']
+    if (numDocCustomer === undefined || numDocCustomer === null || numDocCustomer.trim() === '') {
+      this.errors.push({indice: x, name: this.MSG_NUM_DOC_CUSTOMER, message: 'Tipo de documento del pasajero es requerido' })
+    }
+  }
+ //FORM PASAJERO
+
     //FORMCONTACT
+   
     let nameContacto: string = this.formShop.getRawValue()['formContact']['nameContacto']
     if (nameContacto === undefined || nameContacto === null || nameContacto.trim() === '') {
       this.errors.push({ name: this.MSG_NAME_CONTACT, message: 'Nombre de contacto es requerido' })
@@ -158,6 +225,11 @@ export class ComprarComponent implements OnInit {
 
   getMessage(messageKey: any) {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
+  }
+
+  
+  getMessageArray(index: any,messageKey: any) {
+    return this.errors.filter((item: any) => item.indice === index && item.name === messageKey ).length > 0;
   }
 
   createForm() {
