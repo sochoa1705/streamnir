@@ -6,17 +6,27 @@ import { CardOfferModule } from 'src/app/shared/components/card-offer/card-offer
 import { FilterModule } from 'src/app/shared/components/filter/filter.module';
 import { FiltersafeModule } from 'src/app/shared/components/filtersafe/filtersafe.module';
 import { CoverageModule } from 'src/app/shared/components/coverage/coverage.module';
+import { MaterialModule } from 'src/app/shared/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [ ComprarComponent ],
   imports: [
     CommonModule,
+    HttpClientModule,
     CustomersModule,
     CardOfferModule,
     FilterModule,
     FiltersafeModule,
     CoverageModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MaterialModule,
+    RouterModule,
   ],
-  exports: [ ComprarComponent ]
+  exports: [ ComprarComponent ],
+  providers: []
 })
 export class ComprarModule { }

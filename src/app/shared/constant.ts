@@ -15,6 +15,29 @@ export const LogoutType = {
 };
 
 export enum ENDPOINT_API {
-  ciudades = 'GetCiudades_AutoComplete',
+  // AUTOCOMPLETE
+  CIUDADES = 'GetCiudades_AutoComplete',
   ciudad = 'pStrIdCiudad',
+
+  // COBERTURA
+  COVERAGE = 'ObtenerCobertura',
+
+  // UNIDAD DE NEGOCIOS
+  BUSINESS_UNIT = 'ObtenerUnidadesNegocio',
+
+  // UNIDAD DE NEGOCIOS VENDEDOR
+  BUSINESS_UNIT_SELLER = 'ObtenerUnidadNegocioByVendedor',
+
+  // DESTINOS
+  DESTINY = 'Destinos',
+
+  // PLANSAC
+  PLANSAC = 'ObtenerPlanesAC',
+
+  // SECUREBOOKING
+  SECURE_BOOKING = 'RegistrarReservaSeguro',
+
+  // GENERATEPAY
+  GENERATE_PAY = 'GenerarPagoSafetyPay',
+
 }

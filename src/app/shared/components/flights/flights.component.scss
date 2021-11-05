@@ -6,6 +6,22 @@
     &-header {
         padding: 0px;
         border-bottom: none;
+        .equipajeTitleInt {
+            font-family: Open Sans;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.15px;
+            height: 31px;
+            display: flex;
+            align-items: center;
+            border-radius: 0 0 12px 0;
+            background: #54D834;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            span {
+                padding-left: 17px;
+            }
+        }
     }
     &-body {
         .border-start {
@@ -54,7 +70,7 @@
             text-align: center;
             color: $gray;
             margin: 0;
-            & + span {
+            &+span {
                 font-weight: 600 !important;
                 font-size: 12px;
                 letter-spacing: 0.1px;
@@ -66,6 +82,11 @@
         }
     }
 }
+
+.headerBottom {
+    margin: 1rem 0 0 0 !important;
+}
+
 .espacios {
     font-family: "Open Sans";
     display: flex;
@@ -85,6 +106,7 @@
         }
     }
 }
+
 .equipajes {
     justify-content: center;
     align-items: center;
@@ -109,6 +131,67 @@
         border-width: 18px;
         border-style: solid;
         border-color: #e9f6fd #506370 #506370 #e9f6fd;
+    }
+    &.soloEquipaje {
+        & span:before {
+            content: none;
+        }
+        &.green {
+            background: #54D834;
+        }
+    }
+}
+
+.agregaP {
+    border-top: 1px solid #E4E5E7;
+    margin: 15px 0 0 0;
+    padding: 15px 0 0 0;
+    &.lessBorder {
+        border-top: none;
+        margin: 0;
+        padding: 0;
+    }
+    .boxContent {
+        .titleP {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.15px;
+            color: #4B4B4B;
+        }
+        .descripP {
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #83898F;
+        }
+    }
+    .btnRed {
+        font-size: 12px;
+    }
+    .btnOrange {
+        background: #F29704;
+        color: #ffffff;
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.1px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        border-radius: 5px;
+    }
+    .tipo {
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
     }
 }
 
@@ -220,8 +303,24 @@
     }
 }
 
-// OMAC ***********************************************/
+@media (max-width: 640px) {
+    .btnRed {
+        background: #fff;
+        color: #df0c30;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.1px;
+        margin-left: 9%;
+    }
+    .equipajeTitleInt {
+        border-radius: 0!important;
+        display: flex;
+        justify-content: center;
+    }
+}
 
+// OMAC ***********************************************/
 // .company {
 //     width: 30px;
 //     height: 30px;

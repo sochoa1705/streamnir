@@ -32,3 +32,16 @@
 .card {
     overflow: hidden !important;
 }
+
+.position-relative{
+    div{
+        font-family: "Montserrat";
+        font-size: 10px;
+        color: $red_light;
+        position: absolute;
+        top: -15px;
+        font-weight: bold;
+        letter-spacing: 0.1px;
+        margin-left:5px
+    }
+}
