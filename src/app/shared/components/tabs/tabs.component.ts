@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Injectable } from '@angular/core';
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
-
 
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
@@ -73,6 +70,9 @@ export class TabsComponent implements OnInit {
   stateCtrl2 = new FormControl();
   dpFromDate: any;
   dpToDate: any;
+
+  dpFromDate2: any;
+  dpToDate2: any;
   // fechaInicial : NgbDate | undefined;
   // FechaFinal : NgbDate | undefined;
   diffInDays: number | undefined
@@ -87,6 +87,7 @@ export class TabsComponent implements OnInit {
 
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null
+  fromDate2: NgbDate | null
   toDate: NgbDate | null;
 
   constructor(
@@ -97,6 +98,7 @@ export class TabsComponent implements OnInit {
     private dateAdapter: NgbDateAdapter<string>
   ) {
     this.fromDate = calendar.getToday();
+    this.fromDate2 = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
    }
 
