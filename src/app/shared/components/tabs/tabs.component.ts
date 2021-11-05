@@ -158,6 +158,10 @@ export class TabsComponent implements OnInit {
     this.showOption3 = this.showOption3 ? false : true;
   }
 
+  showOption4: Boolean = true;
+  showPasajero4() {
+    this.showOption4 = this.showOption4 ? false : true;
+  }
   ngOnInit(): void {
     this.createForm()
   }
