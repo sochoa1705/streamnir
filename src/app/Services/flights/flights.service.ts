@@ -15,7 +15,7 @@ export class FlightsService {
   ) { }
 
   getCiudades(value: City): Observable<City[]> {
-    let url_api = `${environment.urlBase}${ENDPOINT_API.ciudades}?${ENDPOINT_API.ciudad}=${value}`;
+    let url_api = `${environment.urlBase}${ENDPOINT_API.CIUDADES}?${ENDPOINT_API.ciudad}=${value}`;
     return this.http.get<City[]>(url_api)
   }
 }

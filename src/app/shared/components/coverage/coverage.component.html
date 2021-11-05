@@ -9,9 +9,9 @@
     </div>
     <div class="BodyCober">
         <div class="titleBodyCober">
-            Classic
+            {{txtPlan}}
         </div>
-        <p>Cobertura por: 8 días</p>
+        <p>Cobertura por: {{ txtDias }} día(s)</p>
         <p>Asistencia médica: USD 60.000</p>
         <div class="destinoCober marginSup">
             <div class="columnDest">
@@ -25,7 +25,7 @@
             </div>
             <div class="columnDest">
                 <div>(PE) Perú</div>
-                <div>(EU) Europa</div>
+                <div>{{txtDestino}}</div>
             </div>
         </div>
         <div class="destinoCober">
@@ -39,8 +39,8 @@
                 <div>Regreso:</div>
             </div>
             <div class="columnDest">
-                <div>08/07/2022</div>
-                <div>15/07/2022</div>
+                <div>{{txtSalida}}</div>
+                <div>{{txtRegreso}}</div>
             </div>
         </div>
         <div class="destinoCober">
@@ -50,10 +50,10 @@
                 </div>
             </div>
             <div class="columnDest boldBox">
-                <div>Pasajeros:</div>
+                <div>Pasajero(s):</div>
             </div>
             <div class="columnDest">
-                <div>1 Adulto</div>
+                <div>{{txtPasajeros}}</div>
             </div>
         </div>
     </div>

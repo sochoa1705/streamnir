@@ -24,6 +24,9 @@ export class FlightsComponent implements OnInit {
 
   shop() {
     //console.log(this.form.value);
+    let state2 = { ...this.json }
+    localStorage.setItem('safe0', JSON.stringify(state2));
+
     const navigationExtras: NavigationExtras = { state: this.json };
     this.route.navigateByUrl('/home/comprar', navigationExtras);
   }

@@ -78,6 +78,20 @@ export class FilterComponent implements OnInit {
   stateCtrl2 = new FormControl();
   filteredStates: Observable<State[]>;
 
+  dpFromDate: any;
+  dpToDate: any;
+
+  // fechaInicial : NgbDate | undefined;
+  // FechaFinal : NgbDate | undefined;
+  diffInDays: number | undefined
+
+
+  showOption: Boolean = true;
+  showPasajero() {
+    this.showOption = this.showOption ? false : true;
+  }
+
+
   model1: string | undefined;
   model2: string | undefined;
   states: State[] = [
@@ -120,8 +134,9 @@ export class FilterComponent implements OnInit {
 
   hoveredDate: NgbDate | null = null;
 
-  fromDate: NgbDate | null;
+  fromDate: NgbDate | null
   toDate: NgbDate | null;
+
 
   constructor(
     public route: Router,
@@ -173,17 +188,22 @@ export class FilterComponent implements OnInit {
   }
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+    debugger;
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
   ngOnInit(): void {
     this.createForm()
+
+    //this.getListVuelos('lim')
   }
 
   getListVuelos(e: any) {
     console.log(e)
     this.flightsService.getCiudades(e).subscribe(
       data => {
+        console.log(data);
+
         this.citys = data
       },
       err => console.log(err),
@@ -191,8 +211,13 @@ export class FilterComponent implements OnInit {
     )
   }
 
-  autoComplete() {
-    let elemento = this.origen.nativeElement;
+  autoComplete(e: any) {
+    this.citys = [];
+    console.log(e.target);
+    // let elemento = this.origen.nativeElement;
+    let elemento = e.target;
+    console.log(elemento);
+
     let value = elemento.value;
     if (value.length == 0) {
       elemento.classList.remove('auto');
@@ -221,8 +246,23 @@ export class FilterComponent implements OnInit {
   }
 
   send() {
-    console.log(this.form.value);
+    // console.log(this.form.value);
+    // debugger;
+    var FeIni = this.fromDate!.month + "/" + this.fromDate!.day + "/" + this.fromDate!.year
+    var FeFin = this.toDate!.month + "/" + this.toDate!.day + "/" + this.toDate!.year
+
+    // var FeIni = this.fromDate?.month + "/" + this.fromDate?.day + "/" + this.fromDate?.year;
+    // var FeFin = this.toDate?.month + "/" + this.toDate?.day + "/" + this.toDate?.year;
+    const date1 = new Date(FeIni);
+    const date2 = new Date(FeFin);
+
+    var diff = Math.abs(date1.getTime() - date2.getTime());
+    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    console.log(FeIni);
+    console.log(FeFin);
+    console.log(diffDays);
     this.route.navigateByUrl('/home/vuelos/resultados');
+
   }
 
   // count(valor: number, e: any) {
