@@ -4,7 +4,7 @@ import { PackagesService } from 'src/app/Services/mock/packages.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { PlansACService } from '../../../../../../Services/plansAC/plans-ac.service';
 import { LoaderSubjectService } from '../../../../../../shared/components/loader/service/loader-subject.service';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { CoverageService } from '../../../../../../Services/coverage/coverage.service';
 @Component({
   selector: 'app-plans',
@@ -63,31 +63,10 @@ export class PlansComponent implements OnInit {
     const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!'
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
-    // let payload = {
-    //   "Aplicacion": "Intranet",
-    //   "CodigoSeguimiento": "Test",
-    //   "CodigosEntorno": "DESA/NMO/NMO",
-    //   "Parametros": {
-    //     "UnidadNegocio": 5,
-    //     "Dk": "23571",
-    //     "SubCodigo": null,
-    //     "CotizacionAC": {
-    //       "Pais": "510",
-    //       "CodigoAgencia": "87823",
-    //       "NumeroSucursal": "0",
-    //       "PlanFamiliar": "false",
-    //       "Destino": this.resultJson.destinoSafe,
-    //       "CantidadDias": this.resultJson.days,
-    //       "Clientes": {
-    //         "ClienteCotizacion": this.resultJson.ClienteCotizacion
-    //       }
-    //     }
-    //   }
-    // }
     let payload = {
       "Aplicacion": "Intranet",
       "CodigoSeguimiento": "Test",
-      "CodigosEntorno": "PROD/NMO/NMO",
+      "CodigosEntorno": "DESA/NMO/NMO",
       "Parametros": {
         "UnidadNegocio": 1,
         "Dk": "339",
@@ -97,24 +76,46 @@ export class PlansComponent implements OnInit {
           "CodigoAgencia": "87823",
           "NumeroSucursal": "0",
           "PlanFamiliar": "false",
-          "Destino": "2",
-          "CantidadDias": "28",
+          "Destino": this.resultJson.destinoSafe,
+          "CantidadDias": this.resultJson.days,
           "Clientes": {
-            "ClienteCotizacion": [
-              {
-                "Edad": "40",
-                "FechaNacimiento": "22/10/1981"
-              },
-              {
-                "Edad": "10",
-                "FechaNacimiento": "22/10/2011"
-              }
-            ]
+            "ClienteCotizacion": this.resultJson.ClienteCotizacion
           }
         }
       }
     }
-    this.plansACService.plansAC(payload).subscribe({
+
+    // let payload = {
+    //   "Aplicacion": "Intranet",
+    //   "CodigoSeguimiento": "Test",
+    //   "CodigosEntorno": "PROD/NMO/NMO",
+    //   "Parametros": {
+    //     "UnidadNegocio": 1,
+    //     "Dk": "339",
+    //     "SubCodigo": "1",
+    //     "CotizacionAC": {
+    //       "Pais": "510",
+    //       "CodigoAgencia": "87823",
+    //       "NumeroSucursal": "0",
+    //       "PlanFamiliar": "false",
+    //       "Destino": "2",
+    //       "CantidadDias": "28",
+    //       "Clientes": {
+    //         "ClienteCotizacion": [
+    //           {
+    //               "Edad": "24",
+    //               "FechaNacimiento": "4/11/1997"
+    //           },
+    //           {
+    //               "Edad": "40",
+    //               "FechaNacimiento": "4/11/1981"
+    //           }
+    //       ]
+    //       }
+    //     }
+    //   }
+    // }
+    this.plansACService.plansAC(payload).pipe(take(1)).subscribe({
       next: (response) => {
         this.plansAC = response.filter((price: any) => {
           if (price.precioEmisionLocal != '0') {
@@ -257,19 +258,21 @@ export class PlansComponent implements OnInit {
       }
     }
 
-
-    this.coverageService.getCoverage(payload).subscribe({
+    this.coverageService.getCoverage(payload).pipe(take(5)).subscribe({
       next: (response) => {
         this.coverageList = response['Resultado']
         console.log(this.coverageList)
         this.coverageDisplay = true
 
-        // this.asistMedic = response.find((e: any) => {
-        //   if (e.Codigo = 'C.4.1.10.1') {
-        //     console.log(e.Valor);
-        //     return e.Valor
-        //   }
-        // })
+        if (Object.keys(this.coverageList).length === 0) {
+          this.asistMedic = 0
+        } else {
+          this.asistMedic = this.coverageList.find((e: any) => {
+            if (e.Codigo === 'C.4.1.10.1') {
+              return e
+            }
+          })['Valor']
+        }
       },
       error: error => console.log(error),
     }

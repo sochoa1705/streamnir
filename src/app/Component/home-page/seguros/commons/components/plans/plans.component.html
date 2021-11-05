@@ -75,7 +75,7 @@
                     </div>
                     <p *ngIf="card.clase" class="card-text">Usa tu
                         <b>Assist Card</b> en múltiples viajes por 1 año</p>
-                    <p *ngIf="!card.clase" class="card-text">Asistencia médica: USD 60.000</p>
+                    <p *ngIf="!card.clase" class="card-text invisible">Asistencia médica: USD 60.000</p>
                     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                 </div>
             </div>
@@ -112,7 +112,7 @@
         <div class="modal-content {{ pop?.clase }}">
             <div class="modal-header">
                 <h2 class="modal-title" id="exampleModalLabel">{{pop?.producto}} - S/. {{pop?.change}}</h2>
-                <h5 class="modal-title" id="exampleModalLabel">Asistencia médica: USD 60.000</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Asistencia médica: {{ asistMedic }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" *ngIf="!coverageDisplay">

@@ -4,6 +4,7 @@ import { PackagesService } from 'src/app/Services/mock/packages.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { CoverageService } from '../../../Services/coverage/coverage.service';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-seguros',
@@ -31,7 +32,7 @@ export class SegurosComponent implements OnInit {
       "CodigoSeguimiento": "Test",
       "CodigosEntorno": "DESA/NMO/NMO"
     }
-    this.destinyService.getDestiny(payload).subscribe({
+    this.destinyService.getDestiny(payload).pipe(take(1)).subscribe({
       next: (response) => {
         this.destiny = response['Resultado']
         console.log(this.destiny)

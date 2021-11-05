@@ -49,7 +49,6 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
     return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
   }
 }
-
 export interface State {
   flag: string;
   name: string;
@@ -248,28 +247,18 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     var FeFin = this.toDate!.month + "/" + this.toDate!.day + "/" + this.toDate!.year
     const date1 = new Date(FeIni);
     const date2 = new Date(FeFin);
-
     var diff = Math.abs(date1.getTime() - date2.getTime());
     var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-    // console.log(FeIni);
-    // console.log(FeFin);
-    // console.log(diffDays);
     return String(diffDays);
   }
 
   createForm() {
     this.form = new FormGroup({
-      // adulto: new FormControl(),
-      // menor: new FormControl(),
-      // mayor: new FormControl(), 
       origenSafe: new FormControl('510'),
       destinoSafe: new FormControl('', Validators.required),
       fromDate: new FormControl(''), // <== Cambia
       toDate: new FormControl(''), // <== Cambia
       passenger: new FormArray([
-        // new FormGroup({
-        //   age: new FormControl(0),
-        // })
       ])
     })
   }
@@ -278,17 +267,11 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     return (<FormArray>this.form.get('passenger')).controls
   }
 
-  get agePass() {
-    return 38
-  }
-
   fechNac() {
     this.showOption = !this.showOption
-
     // (<FormArray>this.form.controls['passenger']).push(
     //   new FormControl()
     // )
-
     // let numer = this.form.controls['passenger'].value[0]
     // numer.addControl('es', new FormControl(this.form.controls['passenger'].value[0].age));
     // console.log(this.form.controls['passenger'].value.length)
@@ -305,23 +288,22 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       let fecha: FormArray = (<FormArray>this.form.get('passenger'))
       ['controls'][indice].value.fecha;
       let fechaEnd = Number(fecha) - age
-      let dayFech: any = String(fechaEnd).substr(0, 2)
-      let monthFech: any = String(fechaEnd).substr(2, 2)
-      let yearFech: any = String(fechaEnd).substr(4, 4)
+      let fechaString: string = String(fechaEnd).padStart(8, '0')
+      let dayFech: any = String(fechaString).substr(0, 2)
+      let monthFech: any = String(fechaString).substr(2, 2)
+      let yearFech: any = String(fechaString).substr(4, 4)
       console.log(fecha);
       console.log(age);
-      console.log(fechaEnd);
+      console.log(fechaString);
 
       let omac2 = { 'Edad': String(age), 'FechaNacimiento': String(dayFech + '/' + monthFech + '/' + yearFech) }
       // omac.push(omac2)
-      // console.log(fech);
+      console.log(omac2);
       //  console.log(fech);
       //  console.log(age);
       this.ClienteCotizacion.push(omac2)
       //  console.log(this.form.controls);
-
     }
-
     // console.log(this.form.controls['passenger'].value[0].age);
   }
 
