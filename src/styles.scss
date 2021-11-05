@@ -3491,8 +3491,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             width: 100%;
         }
         .colBoxtab {
+            display: flex;
             flex: 1 1 auto;
-            position: relative;
+            //position: relative;
             input {
                 width: 100%;
                 padding: 0 !important;
@@ -3506,9 +3507,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 border-radius: 3px;
             }
             .iconCalendar {
-                position: absolute;
-                top: 5px;
-                left: 10px;
+                position: relative;
+                svg {
+                    position: absolute;
+                    top: 8px;
+                    left: 10px;
+                }
             }
         }
     }

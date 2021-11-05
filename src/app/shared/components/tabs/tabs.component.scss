@@ -197,3 +197,8 @@ article {
 :host ::ng-deep .mat-form-field-underline {
     display: none;
 }
+
+.hideDate {
+    max-width: 0 !important;
+    width: 0 !important;
+}
