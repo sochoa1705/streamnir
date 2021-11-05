@@ -73,6 +73,11 @@ export class TabsComponent implements OnInit {
 
   dpFromDate2: any;
   dpToDate2: any;
+
+  dpFromDate3: any;
+  dpToDate3: any;
+  dpFromDate4: any;
+  dpToDate4: any;
   // fechaInicial : NgbDate | undefined;
   // FechaFinal : NgbDate | undefined;
   diffInDays: number | undefined
@@ -88,6 +93,8 @@ export class TabsComponent implements OnInit {
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null
   fromDate2: NgbDate | null
+  fromDate3: NgbDate | null
+  fromDate4: NgbDate | null
   toDate: NgbDate | null;
 
   constructor(
@@ -99,6 +106,8 @@ export class TabsComponent implements OnInit {
   ) {
     this.fromDate = calendar.getToday();
     this.fromDate2 = calendar.getToday();
+    this.fromDate3 = calendar.getToday();
+    this.fromDate4 = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
    }
 
@@ -138,7 +147,17 @@ export class TabsComponent implements OnInit {
   showPasajero() {
     this.showOption = this.showOption ? false : true;
   }
+
+  showOption2: Boolean = true;
+  showPasajero2() {
+    this.showOption2 = this.showOption2 ? false : true;
+  }
   
+  showOption3: Boolean = true;
+  showPasajero3() {
+    this.showOption3 = this.showOption3 ? false : true;
+  }
+
   ngOnInit(): void {
     this.createForm()
   }

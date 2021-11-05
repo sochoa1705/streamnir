@@ -3473,11 +3473,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .rowBoxTab {
         display: flex;
         gap: 10px;
-        padding: 0 10px 10px 10px;
+        padding: 4px 10px 10px 10px;
         &.right {
             justify-content: end;
         }
-        &.text {
+        &.text,
+        label {
             font-family: Open Sans;
             font-style: normal;
             font-size: 14px;

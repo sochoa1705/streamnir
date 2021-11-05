@@ -226,8 +226,8 @@
                         <div class="boxTab">
                             <div class="rowBoxTab">
                                 <div class="padRight">
-                                    <button class="customers" (click)="showPasajero()">Habitación - Pasajero</button>
-                                    <div class="boxFlotante" *ngIf="!showOption">
+                                    <button class="customers" (click)="showPasajero2()">Habitación - Pasajero</button>
+                                    <div class="boxFlotante" *ngIf="!showOption2">
                                         <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
                                             <div class="d-flex flex-row iconTwo">
                                                 <img height="13px" src="./assets/filter/habitacion.png" alt="">
@@ -295,7 +295,7 @@
 
                                         <div class="d-flex flex-row justify-content-between align-items-center p-3 btnPasajero">
                                             <button class="gray" type="button">Cancelar</button>
-                                            <button type="button" (click)="showPasajero()">Listo</button>
+                                            <button type="button" (click)="showPasajero2()">Listo</button>
                                         </div>
                                     </div>
                                 </div>
@@ -371,7 +371,73 @@
                                     fill="#4B4B4B" />
                             </svg> Autos
                         </ng-template>
-                        Content 1
+                        <div class="boxTab">
+                            <div class="rowBoxTab">
+                                <div class="colBoxtab"><input class="form-control" type="text" placeholder="Punto de recogida"></div>
+                                <div class="colBoxtab"><input class="form-control" type="text" placeholder="Punto de devolución"></div>
+                            </div>
+                            <div class="rowBoxTab">
+                                <div class="colBoxtab">
+                                    <div class="hideDate">
+                                        <!-- OCULTAR CAMPO -->
+                                        <input name="datepicker3" ngbDatepicker #datepicker3="ngbDatepicker" [footerTemplate]="footerTemplate3" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate3!"
+                                            tabindex="-1">
+                                        <ng-template #t let-date let-focused="focused">
+                                            <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                                {{ date.day }}</span>
+                                        </ng-template>
+                                        <ng-template #footerTemplate3>
+                                            <div class="btnDatePicker">
+                                                <hr class="my-0">
+                                                <button (click)="datepicker3.close()">Listo</button>
+                                            </div>
+                                        </ng-template>
+                                        <!-- END OCULTAR CAMPO -->
+                                    </div>
+                                    <div class="iconCalendar">
+                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
+                                                stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <input #dpFromDate2 class="form-control" (click)="datepicker3.toggle()" placeholder="Recogida" name="dpFromDate3" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate3.value)">
+
+                                </div>
+                                <div class="colBoxtab"><input class="form-control" type="time" placeholder="Hora de recogida"></div>
+                                <div class="colBoxtab">
+                                    <div class="iconCalendar">
+                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
+                                                stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <input #dpToDate2 class="form-control" (click)="datepicker3.toggle()" placeholder="Devolución" name="dpToDate3" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate3.value)">
+
+                                </div>
+                                <div class="colBoxtab"><input class="form-control" type="time" placeholder="Hora de devolución"></div>
+                                <div class="colBoxtab"><button class="fullWidht">Buscar</button></div>
+                            </div>
+                            <div class="rowBoxTab right">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">Conductor entre 30 y 65 años</label>
+                                </div>
+                            </div>
+                        </div>
                     </mat-tab>
                     <!-- END AUTOS -->
 
@@ -405,7 +471,126 @@
                                     fill="#4B4B4B" />
                             </svg> Actividades
                         </ng-template>
-                        Content 1
+                        <div class="boxTab">
+                            <div class="rowBoxTab">
+                                <div class="padRight">
+                                    <button class="customers" (click)="showPasajero3()">Pasajeros</button>
+                                    <div class="boxFlotante" *ngIf="!showOption3">
+                                        <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
+                                            <div class="d-flex flex-row iconTwo">
+                                                <img height="13px" src="./assets/filter/adulto.png" alt="">
+                                            </div>
+                                            <div class="d-flex flex-row flex-column w-100">
+                                                <div class="d-flex flex-row text1">Adultos</div>
+                                                <div class="d-flex flex-row text2">12 o más años</div>
+                                            </div>
+                                            <div class="d-flex flex-row number">
+                                                <div class="d-flex flex-row btnNWhite">-</div>
+                                                <div class="d-flex flex-row textBtn">
+                                                    <input class="inputPasajero" type="text" value="0">
+                                                </div>
+                                                <div class="d-flex flex-row btnNWhite">+</div>
+                                            </div>
+                                        </div>
+                                        <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
+                                            <div class="d-flex flex-row iconTwo">
+                                                <img height="13px" src="./assets/filter/nino.png" alt="">
+                                            </div>
+                                            <div class="d-flex flex-row flex-column w-100">
+                                                <div class="d-flex flex-row text1">Niños</div>
+                                                <div class="d-flex flex-row text2">De 2 - 11 años</div>
+                                            </div>
+                                            <div class="d-flex flex-row number">
+                                                <div class="d-flex flex-row btnNWhite">-</div>
+                                                <div class="d-flex flex-row textBtn">
+                                                    <input class="inputPasajero" type="text" value="0">
+                                                </div>
+                                                <div class="d-flex flex-row btnNWhite">+</div>
+                                            </div>
+                                        </div>
+                                        <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
+                                            <div class="d-flex flex-row iconTwo">
+                                                <img height="13px" src="./assets/filter/infante.png" alt="">
+                                            </div>
+                                            <div class="d-flex flex-row flex-column w-100">
+                                                <div class="d-flex flex-row text1">Infantes</div>
+                                                <div class="d-flex flex-row text2">Menores de 2 años</div>
+                                            </div>
+                                            <div class="d-flex flex-row number">
+                                                <div class="d-flex flex-row btnNWhite">-</div>
+                                                <div class="d-flex flex-row textBtn">
+                                                    <input class="inputPasajero" type="text" value="0">
+                                                </div>
+                                                <div class="d-flex flex-row btnNWhite">+</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row justify-content-between align-items-center p-3 btnPasajero">
+                                            <button class="gray" type="button">Cancelar</button>
+                                            <button type="button" (click)="showPasajero3()">Listo</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="rowBoxTab">
+                                <div class="colBoxtab"><input class="form-control" type="text" placeholder="Destino"></div>
+                                <div class="colBoxtab">
+                                    <div class="hideDate">
+                                        <!-- OCULTAR CAMPO -->
+                                        <input name="datepicker4" ngbDatepicker #datepicker4="ngbDatepicker" [footerTemplate]="footerTemplate4" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate4!"
+                                            tabindex="-1">
+                                        <ng-template #t let-date let-focused="focused">
+                                            <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                                {{ date.day }}</span>
+                                        </ng-template>
+                                        <ng-template #footerTemplate4>
+                                            <div class="btnDatePicker">
+                                                <hr class="my-0">
+                                                <button (click)="datepicker4.close()">Listo</button>
+                                            </div>
+                                        </ng-template>
+                                        <!-- END OCULTAR CAMPO -->
+                                    </div>
+                                    <div class="iconCalendar">
+                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
+                                                stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <input #dpFromDate2 class="form-control" (click)="datepicker4.toggle()" placeholder="Fecha de inicio" name="dpFromDate4" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate4.value)">
+                                    <!-- <input class="form-control" type="text" placeholder="Fecha de inicio"> -->
+                                </div>
+                                <div class="colBoxtab">
+                                    <div class="iconCalendar">
+                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
+                                                stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <input #dpToDate2 class="form-control" (click)="datepicker4.toggle()" placeholder="Fecha de término" name="dpToDate4" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate4.value)">
+                                    <!-- <input class="form-control" type="text" placeholder="Fecha de término"> -->
+                                </div>
+                                <div class="colBoxtab"><button class="fullWidht">Buscar</button></div>
+                            </div>
+                            <div class="rowBoxTab right">
+                                Haciendo click en "Buscar", acepto las Condiciones Generales
+                            </div>
+                        </div>
                     </mat-tab>
                     <!-- END ACTIVIDADES -->
 
