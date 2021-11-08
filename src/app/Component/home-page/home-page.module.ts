@@ -19,6 +19,7 @@ import { HomeModule } from './home/home.module';
 import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer.module';
 import { ConformidadModule } from './conformidad/conformidad.module';
 import { LoaderModule } from '../../shared/components/loader/loader.module';
+import { VuelosModule } from './vuelos/vuelos.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -27,6 +28,7 @@ import { LoaderModule } from '../../shared/components/loader/loader.module';
     HomePageRoutingModule,
     HomeModule,
     SegurosModule,
+    VuelosModule,
     PerfilModule,
     ToolbarModule,
     PreFooterModule,

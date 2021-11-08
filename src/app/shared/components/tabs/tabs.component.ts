@@ -109,9 +109,9 @@ export class TabsComponent implements OnInit {
     this.fromDate3 = calendar.getToday();
     this.fromDate4 = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
-   }
+  }
 
-   get today() {
+  get today() {
     return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
 
@@ -152,7 +152,7 @@ export class TabsComponent implements OnInit {
   showPasajero2() {
     this.showOption2 = this.showOption2 ? false : true;
   }
-  
+
   showOption3: Boolean = true;
   showPasajero3() {
     this.showOption3 = this.showOption3 ? false : true;
@@ -171,7 +171,7 @@ export class TabsComponent implements OnInit {
       clase: new FormControl('economy')
     })
   }
-  
+
   count(valor: number, e: any) {
     let item = e.target.name;
     let pasajero = this.pasajeros[0][item];
@@ -189,5 +189,11 @@ export class TabsComponent implements OnInit {
   //   cdr.style = 'display:block'
 
   // }
+
+  safeLink(e: any) {
+    if (e.tab.textLabel === "seguros") {
+      this.route.navigate(['/home/seguros'])
+    }
+  }
 
 }

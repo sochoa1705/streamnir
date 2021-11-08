@@ -1,4 +1,4 @@
-export class Coverage {
+export class COVERAGE {
     Aplicacion!: string
     CodigoSeguimiento!: string
     CodigosEntorno!: string

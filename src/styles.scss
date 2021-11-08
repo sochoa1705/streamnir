@@ -189,6 +189,16 @@ section {
     border-radius: 10px;
     border: 1px solid #e4e5e7;
     overflow: auto;
+    &__internacional{
+        height:190px;
+        h1{ font-size: 38px;}
+        &>img{
+            width: 100%!important
+        }
+        &>.d-flex{
+            height:210px!important
+        }
+    }
     &-header {
         background: $white;
     }

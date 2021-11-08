@@ -13,6 +13,7 @@ import { take } from 'rxjs/operators';
 })
 export class SegurosComponent implements OnInit {
   destiny: any = []
+  destinyString: any
   constructor(
     public offersService: OffersService,
     public packagesService: PackagesService,
@@ -22,7 +23,14 @@ export class SegurosComponent implements OnInit {
 
   ngOnInit(): void {
     //localStorage.clear()
-    this.listDestiny()
+    //Se conecta al servicio destinos por unica vez
+    if(localStorage.getItem('destiny') !== null){
+      this.destinyString = localStorage.getItem('destiny')
+      this.destiny = JSON.parse(this.destinyString)
+    } else {
+      this.listDestiny()
+    }
+
     // console.log(this.dataPagePresenterService.data.sections[0].id === 0)
   }
 
@@ -35,6 +43,7 @@ export class SegurosComponent implements OnInit {
     this.destinyService.getDestiny(payload).pipe(take(1)).subscribe({
       next: (response) => {
         this.destiny = response['Resultado']
+        localStorage.setItem('destiny', JSON.stringify(this.destiny));
         console.log(this.destiny)
       },
       error: error => console.log(error),

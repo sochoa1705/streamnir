@@ -25,7 +25,11 @@ export class PackageComponent implements OnInit {
   @Input()
   link!: string;
   @Input()
+  btn!: string;
+  @Input()
   pack!: string;
+  @Input()
+  fly!: string;
   constructor() { }
 
   ngOnInit(): void {

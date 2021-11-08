@@ -102,6 +102,76 @@ export class PackagesService {
       link: '#',
       banner: 4,
       pack: '4 días / 3 noches'
+    },
+    {
+      id:9,
+      image: './assets/internacionales/cancun.jpg',
+      city: 'MADRID',
+      span: 'desde $718',
+      link: '#',
+      banner: 4,
+      fly: true,
+      btn: 'Ver Tarifas'
+    },
+    {
+      id:10,
+      image: './assets/internacionales/cancun.jpg',
+      city: 'MIAMI',
+      span: 'desde $718',
+      link: '#',
+      banner: 4,
+      fly: true,
+      btn: 'Ver Tarifas'
+    },
+    {
+      id:11,
+      image: './assets/internacionales/cancun.jpg',
+      city: 'CANCÚN',
+      span: 'desde $718',
+      link: '#',
+      banner: 4,
+      fly: true,
+      btn: 'Ver Tarifas'
+    },
+    {
+      id:12,
+      image: './assets/internacionales/cancun.jpg',
+      city: 'BUENOS AIRES',
+      span: 'desde $718',
+      link: '#',
+      banner: 4,
+      fly: true,
+      btn: 'Ver Tarifas'
+    },
+    {
+      id:13,
+      image: './assets/internacionales/cancun.jpg',
+      city: 'SANTIAGO DE CHILE',
+      span: 'desde $718',
+      link: '#',
+      banner: 4,
+      fly: true,
+      btn: 'Ver Tarifas'
+    },
+    {
+      id:14,
+      image: './assets/internacionales/cancun.jpg',
+      city: 'MÉXICO',
+      span: 'desde $718',
+      link: '#',
+      banner: 4,
+      fly: true,
+      btn: 'Ver Tarifas'
+    },
+    {
+      id:15,
+      image: './assets/internacionales/cancun.jpg',
+      city: 'BOGOTÁ',
+      span: 'desde $718',
+      link: '#',
+      banner: 4,
+      fly: true,
+      btn: 'Ver Tarifas'
     }
   ];
   constructor() { }

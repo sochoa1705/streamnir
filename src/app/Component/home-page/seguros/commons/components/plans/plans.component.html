@@ -6,37 +6,6 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <!-- <div class="card seguro best">
-                <div class="card-header">El mejor plan</div>
-                <div class="card-body">
-                <h2>Anual</h2>
-                <span>Antes</span>
-                <div class="oldPrice">
-                    <div class="tachado"></div>
-                    <p>PEN<strong>141.97</strong></p>
-                </div>
-                <span class="now">Ahora</span>
-                <p class="now">PEN <strong>946,45</strong></p>
-                <span>Ahorra</span>
-                <div class="precioAhorra">
-                    <p>PEN<strong>141.97</strong></p>
-                </div>
-                <div class="d-flex py-3">
-                    <img src="./assets/seguros/covid.png" alt="">
-                    <div class="px-2">
-                        <span class="covid">COBERTURA</span>
-                        <span class="covid">COVID</span>
-                    </div>
-                </div>
-                <div class="d-block text-center">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalRed">Ver detalle de los beneficios</a> </div>
-                <div class="d-block text-center py-2">
-                    <button (click)="shop(1)">Seleccionar</button>
-                </div>
-                <p class="card-text">Usa tu Assist Card en múltiples viajes por 1 año</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div> -->
         <div class="d-inline" *ngFor="let card of plansAC; let index = index">
             <div class="card seguro" [ngClass]="card.clase" *ngIf="index < 5">
                 <div *ngIf="card.clase" class="card-header">El mejor plan</div>
@@ -80,7 +49,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <div class="row mb-4 mt-5">

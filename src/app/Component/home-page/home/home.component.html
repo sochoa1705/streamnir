@@ -35,7 +35,7 @@
 
     <div class="row">
         <div *ngFor="let packb of packagesService.packages" class="col-12 col-md-{{ packb.banner }}">
-            <app-package *ngIf="packb.banner" [image]="packb.image" [label]="packb.label" [banner]="packb.banner" [span]="packb.span" [pack]="packb.pack" [city]="packb.city" [price]="packb.price" [destiny]="packb.destiny"></app-package>
+            <app-package *ngIf="packb.banner && !packb.fly" [image]="packb.image" [label]="packb.label" [banner]="packb.banner" [span]="packb.span" [pack]="packb.pack" [city]="packb.city" [price]="packb.price" [destiny]="packb.destiny"></app-package>
         </div>
         <div class="clearfix"></div>
     </div>
