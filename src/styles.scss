@@ -189,14 +189,16 @@ section {
     border-radius: 10px;
     border: 1px solid #e4e5e7;
     overflow: auto;
-    &__internacional{
-        height:190px;
-        h1{ font-size: 38px;}
-        &>img{
+    &__internacional {
+        height: 190px;
+        h1 {
+            font-size: 38px;
+        }
+        &>img {
             width: 100%!important
         }
-        &>.d-flex{
-            height:210px!important
+        &>.d-flex {
+            height: 210px!important
         }
     }
     &-header {
@@ -4421,6 +4423,153 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .hideDesktop {
         display: flex !important;
+    }
+}
+
+.boxVuelos {
+    width: 100%;
+    padding: 35px;
+    .rowVuelo {
+        display: flex;
+        align-items: center;
+        font-family: Montserrat;
+        height: 53px;
+        border-bottom: 1px solid #CFD1D3;
+        transition: all 0.3s;
+        cursor: pointer;
+        &:first-child {
+            border-top: 1px solid #CFD1D3;
+        }
+        &:hover {
+            background: #FFFFFF;
+            filter: drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.15));
+        }
+        .lugar {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0.15px;
+            color: #34495E;
+            padding-left: 45px;
+            width: 100%;
+        }
+        .desde {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #34495E;
+            width: 80px;
+        }
+        .precio {
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0.15px;
+            color: #34495E;
+            width: 100px;
+        }
+    }
+}
+
+.padTitle {
+    padding: 20px 0 40px 0;
+}
+
+.boxImgVuelo {
+    width: 570px;
+    padding: 0 20px 0 60px;
+    .gridVuelo {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 270px 115px 270px;
+        grid-column-gap: 30px;
+        grid-row-gap: 10px;
+        .gridItem1 {
+            grid-column: 1/2;
+            grid-row: 1/1;
+        }
+        .gridItem2 {
+            grid-row: 1/3;
+        }
+        .gridItem3 {
+            grid-row: 2/4;
+        }
+        .gridItem4 {
+            grid-column: 2/3;
+        }
+        img {
+            height: 100%;
+            width: 270px;
+        }
+    }
+}
+
+.viajaBox {
+    height: 550px;
+    margin-top: -60px;
+    background-image: url("./assets/vuelos/footer-vuelos.png");
+    background-color: #DF0C30;
+    background-repeat: no-repeat;
+    background-position: center;
+    .mnuViaja {
+        padding-top: 190px;
+        margin: 0;
+        display: flex;
+        .padLeft70 {
+            padding-left: 70px;
+        }
+        .subMenu {
+            display: flex;
+            align-items: center;
+            font-family: Montserrat;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0.15px;
+            color: #FFFFFF;
+            cursor: pointer;
+            height: 42px;
+            padding: 0 15px;
+            width: max-content;
+            transition: all 0.5s;
+            margin-bottom: 10px;
+            &:hover {
+                background: #F7F7F7;
+                border-radius: 20px;
+                color: #4B4B4B;
+                svg {
+                    fill: #4B4B4B;
+                }
+            }
+            svg {
+                margin-right: 15px;
+                fill: #ffffff;
+            }
+        }
+    }
+}
+
+.sliderOfertas {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    background: #FFFFFF;
+    border: 1px solid #E4E5E7;
+    box-sizing: border-box;
+    border-radius: 10px;
+    height: 105px;
+    .btnSteps {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        box-sizing: border-box;
+        border: 1px solid #DF0C30;
+        cursor: pointer;
     }
 }
 
