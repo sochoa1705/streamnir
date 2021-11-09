@@ -16,7 +16,6 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch:'full' },
       { path: '', component: HomeComponent },
-      { path: 'vuelos', component: VuelosComponent },
       { path: 'paquetes', component: PaquetesComponent },
       { path: 'comprar', component: ComprarComponent },
       { path: 'vuelos/resultados', component: ResultadosComponent },
@@ -26,6 +25,12 @@ const routes: Routes = [
         path: 'seguros',
         loadChildren: () => import('./seguros/seguros.module').then(
           m => m.SegurosModule
+        )
+      },
+      {
+        path: 'vuelos',
+        loadChildren: () => import('./vuelos/vuelos.module').then(
+          m => m.VuelosModule
         )
       },
     ]

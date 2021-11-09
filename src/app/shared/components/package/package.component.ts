@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-package',
@@ -8,6 +9,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PackageComponent implements OnInit {
   @Input()
   image!: string;
+  @Input()
+  rout!: string;
   @Input()
   label!: string;
   @Input()
@@ -30,9 +33,16 @@ export class PackageComponent implements OnInit {
   pack!: string;
   @Input()
   fly!: string;
-  constructor() { }
+  constructor(
+    public route: Router,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  toDestiny(e: any){
+    console.log(e);
+    this.route.navigateByUrl('/home/vuelos/destinos')
   }
 
 }
