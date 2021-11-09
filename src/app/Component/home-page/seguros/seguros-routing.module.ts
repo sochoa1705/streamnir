@@ -5,15 +5,14 @@ import { SlideComponent } from './commons/components/slide/slide.component';
 import { SegurosComponent } from './seguros.component';
 
 const routes: Routes = [
-  {path: '', component: SegurosComponent,
-  children:[
-    {path: '', component: SlideComponent},
-    {path: 'slide', component: SlideComponent},
-    {path: 'planes', component: PlansComponent}
-
-  ]},
-
-
+  {
+    path: '', component: SegurosComponent,
+    children: [
+      { path: '', component: SlideComponent },
+      { path: 'slide', component: SlideComponent },
+      { path: 'planes', component: PlansComponent }
+    ]
+  },
 ]
 
 @NgModule({

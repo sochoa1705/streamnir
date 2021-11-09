@@ -111,7 +111,8 @@ export class PackagesService {
       link: '#',
       banner: 4,
       fly: true,
-      btn: 'Ver Tarifas'
+      btn: 'Ver Tarifas',
+      route: '/vuelos/destinos'
     },
     {
       id:10,
@@ -121,7 +122,8 @@ export class PackagesService {
       link: '#',
       banner: 4,
       fly: true,
-      btn: 'Ver Tarifas'
+      btn: 'Ver Tarifas',
+      route: '/vuelos/destinos'
     },
     {
       id:11,
@@ -131,7 +133,8 @@ export class PackagesService {
       link: '#',
       banner: 4,
       fly: true,
-      btn: 'Ver Tarifas'
+      btn: 'Ver Tarifas',
+      route: '/vuelos/destinos'
     },
     {
       id:12,
@@ -141,7 +144,8 @@ export class PackagesService {
       link: '#',
       banner: 4,
       fly: true,
-      btn: 'Ver Tarifas'
+      btn: 'Ver Tarifas',
+      route: '/vuelos/destinos'
     },
     {
       id:13,
@@ -151,7 +155,8 @@ export class PackagesService {
       link: '#',
       banner: 4,
       fly: true,
-      btn: 'Ver Tarifas'
+      btn: 'Ver Tarifas',
+      route: '/vuelos/destinos'
     },
     {
       id:14,
@@ -161,7 +166,8 @@ export class PackagesService {
       link: '#',
       banner: 4,
       fly: true,
-      btn: 'Ver Tarifas'
+      btn: 'Ver Tarifas',
+      route: '/vuelos/destinos'
     },
     {
       id:15,
@@ -171,7 +177,8 @@ export class PackagesService {
       link: '#',
       banner: 4,
       fly: true,
-      btn: 'Ver Tarifas'
+      btn: 'Ver Tarifas',
+      route: '/vuelos/destinos'
     },
     {
       id:16,
@@ -181,7 +188,8 @@ export class PackagesService {
       link: '#',
       banner: 4,
       fly: true,
-      btn: 'Ver Tarifas'
+      btn: 'Ver Tarifas',
+      route: '/vuelos/destinos'
     },
     {
       id:17,
@@ -191,7 +199,8 @@ export class PackagesService {
       link: '#',
       banner: 4,
       fly: true,
-      btn: 'Ver Tarifas'
+      btn: 'Ver Tarifas',
+      route: '/vuelos/destinos'
     },
     {
       id:18,
@@ -201,7 +210,8 @@ export class PackagesService {
       link: '#',
       banner: 4,
       fly: true,
-      btn: 'Ver Tarifas'
+      btn: 'Ver Tarifas',
+      route: '/vuelos/destinos'
     }
   ];
   constructor() { }

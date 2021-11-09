@@ -27,7 +27,7 @@
                     </svg>
                 </span>
                 <h1>{{ city }}</h1>
-                <button class="hidden mb-2" *ngIf="btn">{{ btn }}</button>
+                <button (click)="toDestiny(rout)" class="hidden mb-2" *ngIf="btn">{{ btn }}</button>
                 <span *ngIf="destiny" class="hidden">{{ destiny }} - </span>
                 <span class="d-inline"> {{ pack }}</span>
                 <span class="d-inline d-md-none d-inline"> desde</span>
