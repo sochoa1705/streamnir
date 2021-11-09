@@ -5,6 +5,7 @@ import { TabsModule } from 'src/app/shared/components/tabs/tabs.module';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { PackageModule } from 'src/app/shared/components/package/package.module';
 import { CardModule } from 'src/app/shared/components/card/card.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [ FlightComponent ],
@@ -13,6 +14,7 @@ import { CardModule } from 'src/app/shared/components/card/card.module';
     TabsModule,
     MaterialModule,
     PackageModule,
+    RouterModule,
     CardModule,
   ],
   exports: [ FlightComponent ],
