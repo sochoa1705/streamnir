@@ -14,13 +14,6 @@ export class DestinyService {
     private http: HttpClient
   ) { }
 
-  payload = {
-    "Aplicacion": "Intranet",
-    "CodigoSeguimiento": "Test",
-    "CodigosEntorno": "DESA/NMO/NMO"
-  }
-
-
   getDestiny(payload: any): Observable<any> {
     let url_api = `${environment.urlBase}${ENDPOINT_API.DESTINY}`;
 

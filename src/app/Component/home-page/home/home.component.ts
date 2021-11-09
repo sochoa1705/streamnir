@@ -3,6 +3,8 @@ import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit
 import { PackagesService } from 'src/app/Services/mock/packages.service';
 import { AsidePresenterService } from 'src/app/Services/presenter/aside/aside-presenter.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
+import { NMRequest } from 'src/app/Models/base/NMRequest';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +12,8 @@ import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-p
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  destiny: any = []
+  destinyString: any
 
   constructor(
     public businessUnitService: BusinessUnitService,
@@ -19,17 +23,17 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let payload = {
-      "Aplicacion": "Intranet",
-      "CodigoSeguimiento": "Test",
-      "CodigosEntorno": "DESA/NMO/NMO"
+    if (localStorage.getItem('businessunit') == null) {
+      let payload = new NMRequest();
+
+      this.businessUnitService.businessUnit(payload).subscribe(
+        data => {
+          let linfo = data['Resultado'].filter((und: any) => und.id_unidad_negocio == environment.undidadNegocioAC);
+          localStorage.setItem('businessunit', (linfo.length > 0 ? JSON.stringify(linfo[0]) : ''));
+        },
+        err => console.log(err),
+        () => console.log('unidad cargada')
+      )
     }
-
-    this.businessUnitService.businessUnit(payload).subscribe(
-      data => console.log(data['Resultado']),
-      err => console.log(err),
-      () => console.log('unidad cargada')
-    )
   }
-
 }

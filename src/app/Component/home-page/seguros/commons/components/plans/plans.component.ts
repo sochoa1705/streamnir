@@ -6,6 +6,11 @@ import { PlansACService } from '../../../../../../Services/plansAC/plans-ac.serv
 import { LoaderSubjectService } from '../../../../../../shared/components/loader/service/loader-subject.service';
 import { map, take } from 'rxjs/operators';
 import { CoverageService } from '../../../../../../Services/coverage/coverage.service';
+import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
+import { CotizarSeguroRQ } from 'src/app/Models/seguros/cotizacionRQ.interface';
+import { environment } from 'src/environments/environment';
+import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface';
+
 @Component({
   selector: 'app-plans',
   templateUrl: './plans.component.html',
@@ -21,6 +26,7 @@ export class PlansComponent implements OnInit {
   coverageList: any
   coverageDisplay: boolean = false
   asistMedic: any
+  unidadNegocio: any
   json = {
     detailPay: 'safe',
     filter: 'filtersafe',
@@ -47,6 +53,9 @@ export class PlansComponent implements OnInit {
     // console.log(this.resultJson.ClienteCotizacion);
   }
   ngOnInit(): void {
+    let lcadena: any = localStorage.getItem('businessunit');
+    this.unidadNegocio = JSON.parse(lcadena);
+
     this.listPlansAC()
   }
 
@@ -63,58 +72,26 @@ export class PlansComponent implements OnInit {
     const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!'
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
-    let payload = {
-      "Aplicacion": "Intranet",
-      "CodigoSeguimiento": "Test",
-      "CodigosEntorno": "DESA/NMO/NMO",
-      "Parametros": {
-        "UnidadNegocio": 1,
-        "Dk": "339",
-        "SubCodigo": "1",
-        "CotizacionAC": {
-          "Pais": "510",
-          "CodigoAgencia": "87823",
-          "NumeroSucursal": "0",
-          "PlanFamiliar": "false",
-          "Destino": this.resultJson.destinoSafe,
-          "CantidadDias": this.resultJson.days,
-          "Clientes": {
-            "ClienteCotizacion": this.resultJson.ClienteCotizacion
-          }
+    
+    let lcotizacion: CotizarSeguroRQ = {
+      UnidadNegocio: environment.undidadNegocioAC,
+      Dk: environment.dkAgenciaAC,
+      SubCodigo: environment.subcodigoAgenciaAC,
+      CotizacionAC: {
+        Pais: this.unidadNegocio.id_pais_ac,
+        CodigoAgencia: this.unidadNegocio.codigo_ac,
+        NumeroSucursal: this.unidadNegocio.sucursal_ac,
+        PlanFamiliar: 'false',
+        Destino: this.resultJson.destinoSafe,
+        CantidadDias: this.resultJson.days,
+        Clientes: {
+          ClienteCotizacion: this.resultJson.ClienteCotizacion
         }
       }
-    }
+    };
 
-    // let payload = {
-    //   "Aplicacion": "Intranet",
-    //   "CodigoSeguimiento": "Test",
-    //   "CodigosEntorno": "PROD/NMO/NMO",
-    //   "Parametros": {
-    //     "UnidadNegocio": 1,
-    //     "Dk": "339",
-    //     "SubCodigo": "1",
-    //     "CotizacionAC": {
-    //       "Pais": "510",
-    //       "CodigoAgencia": "87823",
-    //       "NumeroSucursal": "0",
-    //       "PlanFamiliar": "false",
-    //       "Destino": "2",
-    //       "CantidadDias": "28",
-    //       "Clientes": {
-    //         "ClienteCotizacion": [
-    //           {
-    //               "Edad": "24",
-    //               "FechaNacimiento": "4/11/1997"
-    //           },
-    //           {
-    //               "Edad": "40",
-    //               "FechaNacimiento": "4/11/1981"
-    //           }
-    //       ]
-    //       }
-    //     }
-    //   }
-    // }
+    let payload = new NMRequestBy<CotizarSeguroRQ>(lcotizacion);
+
     this.plansACService.plansAC(payload).pipe(take(1)).subscribe({
       next: (response) => {
         this.plansAC = response.filter((price: any) => {
@@ -243,25 +220,21 @@ export class PlansComponent implements OnInit {
   listCoverage(data: any) {
     this.coverageDisplay = false
 
-    let payload = {
-      "Aplicacion": "Intranet",
-      "CodigoSeguimiento": "Test",
-      "CodigosEntorno": "PROD/NMO/NMO",
-      "Parametros": {
-        "CodigoISOPais": this.resultJson.destinoSafe,
-        "Agencia": "87823",
-        "Sucursal": "0",
-        "CodigoProducto": data.codProducto,
-        "CodigoTarifa": data.codTarifa,
-        "Edad": "40",
-        "TipoModalidad": data.codModalidad
-      }
+    let lcobertura: CoberturaSeguroRQ = {
+      CodigoISOPais: this.resultJson.destinoSafe,
+      Agencia: this.unidadNegocio.codigo_ac,
+      Sucursal: this.unidadNegocio.sucursal_ac,
+      CodigoProducto: data.codProducto,
+      CodigoTarifa: data.codTarifa,
+      Edad: this.resultJson.ClienteCotizacion.shift().Edad,     // COLOCAR LA PRIMERA EDAD DE BUSQUEDA
+      TipoModalidad: data.codModalidad
     }
+    
+    let payload = new NMRequestBy<CoberturaSeguroRQ>(lcobertura);
 
     this.coverageService.getCoverage(payload).pipe(take(5)).subscribe({
       next: (response) => {
         this.coverageList = response['Resultado']
-        console.log(this.coverageList)
         this.coverageDisplay = true
 
         if (Object.keys(this.coverageList).length === 0) {
