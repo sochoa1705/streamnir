@@ -10,6 +10,9 @@ import { AerolineasComponent } from './aerolineas.component';
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [
+    AerolineasComponent
+  ],
 })
 export class AerolineasModule { }

@@ -20,6 +20,7 @@ import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer
 import { ConformidadModule } from './conformidad/conformidad.module';
 import { LoaderModule } from '../../shared/components/loader/loader.module';
 import { VuelosModule } from './vuelos/vuelos.module';
+import { AerolineasModule } from './aerolineas/aerolineas.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -29,6 +30,7 @@ import { VuelosModule } from './vuelos/vuelos.module';
     HomeModule,
     SegurosModule,
     VuelosModule,
+    AerolineasModule,
     PerfilModule,
     ToolbarModule,
     PreFooterModule,
