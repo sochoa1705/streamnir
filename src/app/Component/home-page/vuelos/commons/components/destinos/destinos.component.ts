@@ -12,4 +12,9 @@ export class DestinosComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  id: any = "option1";
+  showOption(ids: any) {
+    this.id = ids;
+    //console.log(this.id);
+  }
 }

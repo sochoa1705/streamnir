@@ -4518,6 +4518,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         display: flex;
         .padLeft70 {
             padding-left: 70px;
+            img {
+                width: 100%;
+            }
         }
         .subMenu {
             display: flex;
@@ -4570,6 +4573,610 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         box-sizing: border-box;
         border: 1px solid #DF0C30;
         cursor: pointer;
+    }
+    .contentImg {
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 640px) {
+    .verMovil {
+        .col-5,
+        .col-7 {
+            width: 100% !important;
+        }
+        .boxVuelos {
+            padding: 10px 15px;
+        }
+        .boxImgVuelo {
+            width: 100%;
+            padding: 0 15px;
+            .gridVuelo {
+                grid-column-gap: 10px;
+                grid-template-rows: 150px 60px 150px;
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .viajaBox {
+        background-size: auto 70%;
+        background-position-x: center;
+        background-position-y: 0;
+        height: auto;
+        .mnuViaja {
+            padding-top: 100px;
+            .col-3,
+            .col-4,
+            .col-5 {
+                width: 100% !important;
+            }
+            .subMenu {
+                margin: 0 0 0 20px;
+            }
+            .col-4 {
+                margin-bottom: 20px;
+            }
+        }
+        .padLeft70 {
+            padding-left: 45px !important;
+            margin-bottom: 30px;
+            img {
+                width: 220px;
+            }
+        }
+    }
+    .padTitle {
+        padding: 20px 0 20px 0;
+    }
+    .sliderOfertas {
+        padding: 0 15px;
+        .btnSteps {
+            display: none;
+        }
+        .contentImg {
+            overflow: hidden;
+            gap: 15px;
+            width: 100%;
+        }
+    }
+}
+
+.boxDestino {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    .rowDestino {
+        display: flex;
+        flex: 1 1 100%;
+        &.center {
+            justify-content: center;
+        }
+        .colDestino {
+            display: flex;
+            gap: 15px;
+            &:nth-child(1),
+            &:nth-child(2) {
+                width: 30%;
+            }
+            &:nth-child(3),
+            &:nth-child(4),
+            &:nth-child(5) {
+                width: 13%;
+            }
+            &:first-child {
+                padding-left: 60px;
+            }
+            &:last-child {
+                padding-right: 60px;
+            }
+        }
+        .ida,
+        .vuelta {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 27px;
+            letter-spacing: 0.18px;
+            color: #4B4B4B;
+            margin-right: 20px;
+            svg {
+                margin-right: 10px;
+            }
+        }
+        .descrip {
+            flex: auto;
+            text-align: right;
+        }
+    }
+    .tableDestino {
+        display: flex;
+        align-items: center;
+        height: 70px;
+        font-family: Montserrat;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.15px;
+        border-bottom: 1px solid #CFD1D3;
+        transition: all 0.3s;
+        &.bold {
+            font-weight: bold;
+            margin-top: 40px;
+            height: 50px;
+            filter: none;
+            background: transparent !important;
+        }
+        &:hover {
+            filter: drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.15));
+            background: #ffffff;
+        }
+        .boldTarifa {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 36px;
+            color: #4B4B4B;
+        }
+        .btnBuscar {
+            display: flex;
+            align-items: center;
+            background: #DF0C30;
+            border-radius: 3px;
+            cursor: pointer;
+            height: 43px;
+            color: #ffffff;
+            padding: 0 15px;
+            transition: all 0.3ms;
+            &:hover {
+                background: #B50A27;
+            }
+        }
+    }
+    .footerTable {
+        margin: 40px 0;
+        .text {
+            font-family: Montserrat;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            margin: 0 20px 0 60px;
+        }
+        .masOfertas {
+            margin-right: 60px;
+        }
+    }
+    .titulo {
+        display: flex;
+        justify-content: center;
+        font-family: Open Sans;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 36px;
+        margin-top: 20px;
+        color: #4B4B4B;
+    }
+    .subtitulo {
+        display: flex;
+        justify-content: center;
+        font-family: Open Sans;
+        font-size: 20px;
+        line-height: 36px;
+        color: #4B4B4B;
+        margin-bottom: 50px;
+    }
+    .boxSearchHotel {
+        width: 100%;
+        background: #DF0C30;
+        padding: 60px 50px;
+        margin-bottom: 50px;
+        .titulo,
+        .subtitulo {
+            color: #ffffff !important;
+        }
+    }
+}
+
+.boxPackage {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-bottom: 20px;
+    .package {
+        display: flex;
+        align-items: center;
+        width: 310px;
+        height: 90px;
+        background: #FFFFFF;
+        border: 1px solid #E4E5E7;
+        box-sizing: border-box;
+        border-radius: 10px 0px;
+        padding: 40px;
+        gap: 30px;
+        .icono {
+            position: relative;
+            .eclipse {
+                position: absolute;
+                right: -12px;
+                bottom: -5px;
+            }
+        }
+        .texto {}
+    }
+}
+
+.ofrecido {
+    font-family: Montserrat;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.1px;
+    color: #4B4B4B;
+    margin-bottom: 50px;
+}
+
+.cardDestino {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-bottom: 20px;
+    .boxCards {
+        max-width: 426px;
+        background: #FFFFFF;
+        border: 1px solid #E4E5E7;
+        box-sizing: border-box;
+        border-radius: 10px;
+        .imageHead {
+            width: 100%;
+            height: 215px;
+        }
+        .cardTitulo {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 21px;
+            letter-spacing: 0.15px;
+            color: #4B4B4B;
+            padding: 20px 25px;
+        }
+        .cardDuracion {
+            font-family: Montserrat;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            padding: 0 25px 20px 25px;
+        }
+        .cardStar {
+            display: flex;
+            padding: 0 25px 20px 25px;
+            gap: 5px;
+            .star {
+                width: 18px;
+                height: 17px;
+                background: url("./assets/vuelos/star.png")no-repeat;
+            }
+            .star-mid {
+                width: 18px;
+                height: 17px;
+                background: url("./assets/vuelos/star-mid.png")no-repeat;
+            }
+            .star-null {
+                width: 18px;
+                height: 17px;
+                background: url("./assets/vuelos/star-null.png")no-repeat;
+            }
+        }
+        .cardOpinion {
+            font-family: Montserrat;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            padding: 0 25px 20px 25px;
+        }
+    }
+}
+
+.cardHotel {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 50px 0;
+    .boxCards {
+        max-width: 434px;
+        background: #FFFFFF;
+        border: 1px solid #E4E5E7;
+        box-sizing: border-box;
+        border-radius: 10px;
+        .imageHead {
+            position: relative;
+            height: auto;
+            img {
+                width: 100%;
+            }
+            .precio {
+                position: absolute;
+                left: 0;
+                bottom: 63px;
+                .desde {
+                    position: relative;
+                    font-family: Montserrat;
+                    font-weight: 600;
+                    font-size: 15px;
+                    line-height: 18px;
+                    letter-spacing: 0.1px;
+                    padding-left: 15px;
+                    padding-bottom: 5px;
+                    color: #FFFFFF;
+                    .linea {
+                        position: absolute;
+                        background: #DF0C30;
+                        height: 2px;
+                        bottom: 12px;
+                        left: 10px;
+                        width: 70px;
+                    }
+                }
+                .tarifa {
+                    display: flex;
+                    align-items: center;
+                    font-family: Open Sans;
+                    font-weight: bold;
+                    font-size: 30px;
+                    line-height: 36px;
+                    display: flex;
+                    align-items: center;
+                    color: #FFFFFF;
+                    background: #DF0C30;
+                    border-radius: 0 5px 5px 0;
+                    height: 45px;
+                    padding: 0 20px;
+                }
+            }
+        }
+        .cardTitulo {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 28px;
+            line-height: 36px;
+            color: #4B4B4B;
+            padding: 20px 25px;
+        }
+        .cardStar {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 25px 20px 25px;
+            .estrellas {
+                display: flex;
+                gap: 5px;
+                .star {
+                    width: 18px;
+                    height: 17px;
+                    background: url("./assets/vuelos/star.png")no-repeat;
+                }
+                .star-mid {
+                    width: 18px;
+                    height: 17px;
+                    background: url("./assets/vuelos/star-mid.png")no-repeat;
+                }
+                .star-null {
+                    width: 18px;
+                    height: 17px;
+                    background: url("./assets/vuelos/star-null.png")no-repeat;
+                }
+            }
+            .iconos {
+                display: flex;
+                gap: 5px;
+                .car,
+                .restaurant,
+                .cocktail,
+                .wifi-signal,
+                .fitness {
+                    width: 20px;
+                    height: 20px;
+                }
+                .car {
+                    background: url("./assets/vuelos/car.png")no-repeat;
+                }
+                .restaurant {
+                    background: url("./assets/vuelos/restaurant.png")no-repeat;
+                }
+                .cocktail {
+                    background: url("./assets/vuelos/cocktail.png")no-repeat;
+                }
+                .wifi-signal {
+                    background: url("./assets/vuelos/wifi-signal.png")no-repeat;
+                }
+                .fitness {
+                    background: url("./assets/vuelos/fitness.png")no-repeat;
+                }
+            }
+        }
+        .cardOpinion {
+            font-family: Montserrat;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #1EAEA5;
+            padding: 0 25px 20px 25px;
+        }
+    }
+}
+
+.companyCar {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 30px 0;
+    background: #ffffff;
+    .iconCenter {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .carTitulo {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        font-family: Open Sans;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 36px;
+        color: #4B4B4B;
+    }
+    .carSubtitulo {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        font-family: Open Sans;
+        font-size: 20px;
+        line-height: 36px;
+        color: #4B4B4B;
+        margin-bottom: 50px;
+    }
+    .contentCompany {
+        display: flex;
+        .imgCar {
+            display: flex;
+            width: 50%;
+            img {
+                width: 100%;
+            }
+        }
+        .logosCompany {
+            width: 50%;
+            .imgLogos {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+                width: 100%;
+                gap: 20px;
+            }
+            .centerCard {
+                display: flex;
+                justify-content: center;
+                margin-top: 40px;
+                .btnReservar {
+                    display: flex;
+                    align-items: center;
+                    background: #DF0C30;
+                    border-radius: 3px;
+                    color: #ffffff;
+                    padding: 0 40px;
+                    height: 50px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    &:hover {
+                        background: #B50A27;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tabDestino {
+    display: flex;
+    width: 100%;
+    padding: 50px 0 10px 0;
+    .tabImgDest {
+        width: 760px;
+        position: relative;
+        .mascara {
+            position: absolute;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 44.18%);
+            border-radius: 0px 50px 50px 0px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        .galeriaText {
+            position: absolute;
+            right: 40px;
+            bottom: 20px;
+            cursor: pointer;
+            .texto {
+                font-family: Open Sans;
+                font-weight: bold;
+                font-size: 18px;
+                line-height: 27px;
+                letter-spacing: 0.18px;
+                color: #FFFFFF;
+                svg {
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+    .tabContentDest {
+        flex: 1 1 auto;
+        padding: 0 45px;
+        .titleTabDest {
+            display: flex;
+            width: 100%;
+            padding: 40px 0 10px 0;
+            gap: 15px;
+            font-family: Montserrat;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            border-bottom: 1px solid #E4E5E7;
+        }
+        .nameCity {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 32px;
+            line-height: 48px;
+            color: #4B4B4B;
+            margin: 30px 0 30px 20px;
+        }
+        .opcionTab {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 35px;
+            margin-left: 20px;
+            .tabName {
+                display: flex;
+                align-items: center;
+                background: #F7F7F7;
+                border: 1px solid #E4E5E7;
+                box-sizing: border-box;
+                border-radius: 5px;
+                font-family: Montserrat;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 21px;
+                letter-spacing: 0.1px;
+                height: 44px;
+                padding: 0 20px;
+                cursor: pointer;
+                transition: all 0.3s;
+                color: #4B4B4B;
+                &:hover,
+                &.active {
+                    background: #DF0C30;
+                    border: 1px solid #DF0C30;
+                    color: #ffffff;
+                }
+            }
+        }
+        .contOpcion {
+            font-family: Montserrat;
+            font-size: 16px;
+            line-height: 24px;
+            text-align: justify;
+            letter-spacing: 0.15px;
+            margin-left: 20px;
+            color: #4B4B4B;
+        }
     }
 }
 
