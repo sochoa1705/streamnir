@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-aerolineas',
   templateUrl: './aerolineas.component.html',
@@ -12,4 +12,21 @@ export class AerolineasComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  id: any = "Internacional";
+  showOption(ids: any) {
+    this.id = ids;
+  }
+
+  aeroId: any = "Historia";
+  showOptionAero(ids: any) {
+    this.aeroId = ids;
+  }
+
+  counter: number = 1;
+  nextBtn() {
+    this.counter < 3 ? this.counter++ : this.counter = 1;
+  }
+  afterBtn() {
+    this.counter > 1 ? this.counter-- : this.counter = 3;
+  }
 }

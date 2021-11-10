@@ -4575,11 +4575,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         cursor: pointer;
     }
     .contentImg {
-        width: 90%;
-        display: none;
-        transition: all 0.3s;
+        transition: opacity 1s ease-out;
+        opacity: 0;
+        width: 0;
+        overflow: hidden;
         &.active {
+            width: 90%;
             display: flex;
+            opacity: 1;
             align-items: center;
             justify-content: space-between;
         }
@@ -4650,11 +4653,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
-.boxDestino {
+.boxDestino,
+.boxAero {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    .rowDestino {
+    .rowDestino,
+    .rowAero {
         display: flex;
         flex: 1 1 100%;
         &.center {
@@ -4671,6 +4676,27 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             &:nth-child(4),
             &:nth-child(5) {
                 width: 13%;
+            }
+            &:first-child {
+                padding-left: 60px;
+            }
+            &:last-child {
+                padding-right: 60px;
+            }
+        }
+        .colAero {
+            display: flex;
+            gap: 15px;
+            &:nth-child(2),
+            &:nth-child(3) {
+                width: 25%;
+            }
+            &:nth-child(1),
+            &:nth-child(4) {
+                width: 20%;
+            }
+            &:nth-child(5) {
+                width: 10%;
             }
             &:first-child {
                 padding-left: 60px;
@@ -4785,6 +4811,91 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+.boxAero {
+    .logoAero {
+        justify-content: center;
+        margin: 70px 0 40px 0;
+    }
+    .textAbout {
+        width: 800px;
+        font-family: Montserrat;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        letter-spacing: 0.15px;
+        color: #4B4B4B;
+        text-align: center;
+    }
+    .boxAbout {
+        display: flex;
+        width: 100%;
+        background: #B50A27 url('./assets/aerolineas/lineas.png') no-repeat top left;
+        padding: 25px 0;
+        margin: 70px 0 0 0;
+        .descrip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10%;
+            p {
+                text-align: center;
+                align-items: center;
+                font-family: Montserrat;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 24px;
+                letter-spacing: 0.5px;
+                color: #FFFFFF;
+            }
+        }
+        .sliderAero {
+            margin-right: 5%;
+        }
+    }
+    .tabSalidas {
+        width: 100%;
+        padding: 0 10%;
+        background: #ffffff;
+        padding-top: 45px;
+        .contentTab {
+            .footerTable {
+                justify-content: flex-end;
+            }
+        }
+        .opcionTab {
+            margin: 48px 0;
+        }
+        .tabName {
+            display: flex;
+            align-items: center;
+            background: #F7F7F7;
+            border: 1px solid #E4E5E7;
+            box-sizing: border-box;
+            border-radius: 15px;
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            height: 44px;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #4B4B4B;
+            &:hover,
+            &.active {
+                background: #DF0C30;
+                border: 1px solid #DF0C30;
+                color: #ffffff;
+            }
+            &:first-child {
+                margin-right: 30px;
+            }
+        }
+    }
+}
+
 .boxPackage {
     display: flex;
     justify-content: space-evenly;
@@ -4809,7 +4920,6 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 bottom: -5px;
             }
         }
-        .texto {}
     }
 }
 
@@ -4841,6 +4951,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .imageHead {
             width: 100%;
             height: 215px;
+            img {
+                width: 100%;
+            }
         }
         .cardTitulo {
             font-family: Open Sans;
@@ -5124,66 +5237,117 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
         }
     }
-    .tabContentDest {
-        flex: 1 1 auto;
-        padding: 0 45px;
-        .titleTabDest {
+}
+
+.tabContentDest {
+    flex: 1 1 auto;
+    padding: 0 45px;
+    .titleTabDest {
+        display: flex;
+        width: 100%;
+        padding: 40px 0 10px 0;
+        gap: 15px;
+        font-family: Montserrat;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
+        border-bottom: 1px solid #E4E5E7;
+    }
+    .nameCity {
+        font-family: Open Sans;
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 48px;
+        color: #4B4B4B;
+        margin: 30px 0 30px 20px;
+    }
+    .opcionTab {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 35px;
+        margin-left: 20px;
+        .tabName {
             display: flex;
-            width: 100%;
-            padding: 40px 0 10px 0;
-            gap: 15px;
+            align-items: center;
+            background: #F7F7F7;
+            border: 1px solid #E4E5E7;
+            box-sizing: border-box;
+            border-radius: 5px;
             font-family: Montserrat;
-            font-size: 12px;
-            line-height: 18px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
             letter-spacing: 0.1px;
+            height: 44px;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: all 0.3s;
             color: #4B4B4B;
-            border-bottom: 1px solid #E4E5E7;
+            &:hover,
+            &.active {
+                background: #DF0C30;
+                border: 1px solid #DF0C30;
+                color: #ffffff;
+            }
         }
-        .nameCity {
-            font-family: Open Sans;
-            font-weight: bold;
-            font-size: 32px;
-            line-height: 48px;
-            color: #4B4B4B;
-            margin: 30px 0 30px 20px;
+    }
+    .tabColumna {
+        display: flex;
+        width: 100%;
+        .contenidoTab {
+            width: 40%;
+            padding-top: 30px;
         }
-        .opcionTab {
+        .imagenTab {
             display: flex;
-            gap: 30px;
-            margin-bottom: 35px;
-            margin-left: 20px;
-            .tabName {
-                display: flex;
-                align-items: center;
-                background: #F7F7F7;
-                border: 1px solid #E4E5E7;
-                box-sizing: border-box;
-                border-radius: 5px;
-                font-family: Montserrat;
-                font-weight: 500;
-                font-size: 14px;
-                line-height: 21px;
-                letter-spacing: 0.1px;
-                height: 44px;
-                padding: 0 20px;
-                cursor: pointer;
-                transition: all 0.3s;
-                color: #4B4B4B;
-                &:hover,
-                &.active {
-                    background: #DF0C30;
-                    border: 1px solid #DF0C30;
-                    color: #ffffff;
+            justify-content: flex-end;
+            width: 60%;
+            .galeria {
+                width: 660px;
+                overflow: hidden;
+                img {
+                    width: 100%;
                 }
             }
         }
-        .contOpcion {
-            font-family: Montserrat;
-            font-size: 16px;
-            line-height: 24px;
-            text-align: justify;
-            letter-spacing: 0.15px;
-            margin-left: 20px;
+    }
+    .contOpcion {
+        font-family: Montserrat;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: justify;
+        letter-spacing: 0.15px;
+        margin-left: 20px;
+        color: #4B4B4B;
+    }
+}
+
+.portadaAero {
+    width: 100%;
+    position: relative;
+    img {
+        width: 100%;
+    }
+    .textoPortada {
+        position: absolute;
+        right: 15%;
+        top: calc(50% - 50px);
+        .aeroTitle {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 38px;
+            line-height: 72px;
+            text-align: center;
+            letter-spacing: -0.5px;
+            color: #DF0C30;
+        }
+        .aeroDescrip {
+            font-family: Open Sans;
+            font-size: 18px;
+            line-height: 27px;
+            text-align: center;
+            letter-spacing: 0.18px;
             color: #4B4B4B;
         }
     }
