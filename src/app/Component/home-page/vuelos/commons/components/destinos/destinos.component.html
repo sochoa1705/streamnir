@@ -444,12 +444,12 @@
     <div class="row">
         <div class="col-12">
             <div class="sliderOfertas">
-                <div class="btnSteps">
+                <div class="btnSteps" (click)="afterBtn()">
                     <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.29248 1.80184L3.22217 6.00001L7.29248 10.1982L6.03939 11.4878L0.707115 6.00001L6.0394 0.512207L7.29248 1.80184Z" fill="#DF0C30"/>
                         </svg>
                 </div>
-                <div class="contentImg">
+                <div class="contentImg" [ngClass]="{active: counter===1}">
                     <img src="./assets/vuelos/logo-01.png" alt="">
                     <img src="./assets/vuelos/logo-02.png" alt="">
                     <img src="./assets/vuelos/logo-03.png" alt="">
@@ -462,8 +462,32 @@
                     <img src="./assets/vuelos/logo-10.png" alt="">
                     <img src="./assets/vuelos/logo-11.png" alt="">
                 </div>
-
-                <div class="btnSteps">
+                <div class="contentImg" [ngClass]="{active: counter===2}">
+                    <img src="./assets/vuelos/logo-12.png" alt="">
+                    <img src="./assets/vuelos/logo-13.png" alt="">
+                    <img src="./assets/vuelos/logo-14.png" alt="">
+                    <img src="./assets/vuelos/logo-15.png" alt="">
+                    <img src="./assets/vuelos/logo-16.png" alt="">
+                    <img src="./assets/vuelos/logo-17.png" alt="">
+                    <img src="./assets/vuelos/logo-18.png" alt="">
+                    <img src="./assets/vuelos/logo-19.png" alt="">
+                    <img src="./assets/vuelos/logo-20.png" alt="">
+                    <img src="./assets/vuelos/logo-21.png" alt="">
+                    <img src="./assets/vuelos/logo-22.png" alt="">
+                    <img src="./assets/vuelos/logo-23.png" alt="">
+                </div>
+                <div class="contentImg" [ngClass]="{active: counter===3}">
+                    <img src="./assets/vuelos/logo-24.png" alt="">
+                    <img src="./assets/vuelos/logo-25.png" alt="">
+                    <img src="./assets/vuelos/logo-26.png" alt="">
+                    <img src="./assets/vuelos/logo-27.png" alt="">
+                    <img src="./assets/vuelos/logo-28.png" alt="">
+                    <img src="./assets/vuelos/logo-29.png" alt="">
+                    <img src="./assets/vuelos/logo-30.png" alt="">
+                    <img src="./assets/vuelos/logo-31.png" alt="">
+                    <img src="./assets/vuelos/logo-32.png" alt="">
+                </div>
+                <div class="btnSteps" (click)="nextBtn()">
                     <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.70752 10.1982L4.77783 5.99999L0.707521 1.80182L1.96061 0.512183L7.29288 5.99999L1.9606 11.4878L0.70752 10.1982Z" fill="#DF0C30"/>
                         </svg>

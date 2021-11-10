@@ -23,4 +23,11 @@ export class FlightComponent implements OnInit {
     this.route.navigateByUrl('/home/aerolineas')
   }
 
+  counter: number = 1;
+  nextBtn() {
+    this.counter < 3 ? this.counter++ : this.counter = 1;
+  }
+  afterBtn() {
+    this.counter > 1 ? this.counter-- : this.counter = 3;
+  }
 }
