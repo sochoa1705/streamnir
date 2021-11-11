@@ -40,4 +40,8 @@ export enum ENDPOINT_API {
   // GENERATEPAY
   GENERATE_PAY = 'GenerarPagoSafetyPay',
 
+  //LOCATIONSEARCH
+
+  LOCATION_SEARCH = 'jsonp/locationSearch'
+
 }

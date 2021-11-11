@@ -16,6 +16,7 @@ export const environment = {
   sucursalAgenciaAC: '3',
   ptoventaAgenciaAC: '1',
   comisionistaAgenciaAC: '146',
+  urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/'
 };
 
 /*
