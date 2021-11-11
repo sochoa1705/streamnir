@@ -22,5 +22,13 @@ export class FlightComponent implements OnInit {
   toLine(e: any){
     this.route.navigateByUrl('/home/aerolineas')
   }
-
+ /* codigo para los sliders de las compañias */
+  counter: number = 1;
+  nextBtn() {
+    this.counter < 3 ? this.counter++ : this.counter = 1;
+  }
+  afterBtn() {
+    this.counter > 1 ? this.counter-- : this.counter = 3;
+  }
+  /* end code */
 }

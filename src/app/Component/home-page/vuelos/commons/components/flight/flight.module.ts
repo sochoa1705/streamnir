@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlightComponent } from './flight.component';
 import { TabsModule } from 'src/app/shared/components/tabs/tabs.module';
@@ -8,6 +8,7 @@ import { CardModule } from 'src/app/shared/components/card/card.module';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [ FlightComponent ],
   imports: [
     CommonModule,
