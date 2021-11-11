@@ -23,11 +23,9 @@ export class DestinosComponent implements OnInit {
   counter: number = 1;
   nextBtn() {
     this.counter < 3 ? this.counter++ : this.counter = 1;
-    //console.log(this.counter);
   }
   afterBtn() {
     this.counter > 1 ? this.counter-- : this.counter = 3;
-    //console.log(this.counter);
   }
 
 }

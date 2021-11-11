@@ -22,6 +22,7 @@ export class AerolineasComponent implements OnInit {
     this.aeroId = ids;
   }
 
+  /* codigo para los sliders de las compañias */
   counter: number = 1;
   nextBtn() {
     this.counter < 3 ? this.counter++ : this.counter = 1;
@@ -29,4 +30,5 @@ export class AerolineasComponent implements OnInit {
   afterBtn() {
     this.counter > 1 ? this.counter-- : this.counter = 3;
   }
+  /* end code */
 }
