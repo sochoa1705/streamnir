@@ -4589,6 +4589,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             align-items: center;
             justify-content: space-between;
         }
+        &.onlyMovil {
+            display: none;
+        }
         a {
             cursor: pointer;
         }
@@ -5277,6 +5280,28 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .ofrecido {
         margin-bottom: 35px;
+    }
+    .ofertas {
+        .col-12 {
+            padding: 0;
+            &.padLateral {
+                padding: 0 15px;
+            }
+        }
+        .sliderOfertas {
+            .contentImg {
+                &.active {
+                    display: none !important;
+                }
+                &.onlyMovil {
+                    width: 100%;
+                    display: flex;
+                    opacity: 1;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+            }
+        }
     }
 }
 
