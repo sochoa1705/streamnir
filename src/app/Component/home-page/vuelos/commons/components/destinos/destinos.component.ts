@@ -27,7 +27,6 @@ export class DestinosComponent implements OnInit {
   afterBtn() {
     this.counter > 1 ? this.counter-- : this.counter = 3;
   }
-
 }
 
 

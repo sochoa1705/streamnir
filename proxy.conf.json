@@ -1,0 +1,10 @@
+{
+    "/posts": {
+      "target": "https://nmviajes.paquetedinamico.com",
+      "secure": true,
+      "pathRewrite": {
+      "^/posts": ""
+    },
+      "changeOrigin": true
+    }
+}
