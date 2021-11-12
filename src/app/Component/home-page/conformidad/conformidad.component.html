@@ -14,8 +14,8 @@
     </div>
 
     <div class="row">
-        <div class="col-12 subTitleConf">
-            Excelente elección.<br> Tu solicitud de compra es 958456 ha sido recibida y fue pagada correctamente.
+        <div class="col-12 subTitleConf" *ngIf="reservation">
+            Excelente elección.<br> Tu solicitud de compra es {{ reservation.Reserva }} ha sido recibida y fue pagada correctamente.
         </div>
     </div>
     <div class="padBancaInt">
@@ -32,7 +32,7 @@
                 Banca por Internet
             </div>
             <div class="number">
-                    {{ listBank['IDPedido']}}
+                    {{ listBank['TransactionIdentifier']}}
             </div>
             <div class="circle leftPos"></div>
             <div class="circle rightPos"></div>
@@ -59,7 +59,7 @@
         <div class="offset-2 col-8 lessViewMob">
             <div class="card">
                 <div class="card-body rowBody">
-                    <div class="leftCard">TOTAL A PAGAR</div>
+                    <div class="leftCard">IMPORTE A PAGAR</div>
                     <div class="rightCard">PEN
                         <div class="boldFont">{{ safe0Json?.change * resultJson.passenger.length }}</div>
                     </div>
@@ -82,6 +82,10 @@
         </div>
 
         <div class="rowSafety padBottom50">
+            <!-- <div class="columnSaf" *ngFor="let bn of listBank">
+                <div class="boxBank selected"><img src="bn.PaymentLocations.Imagen" alt=""></div>
+            </div> -->
+
             <div class="columnSaf">
                 <div class="boxBank selected"><img src="./assets/conformidad/bcp.png" alt=""></div>
             </div>
@@ -96,12 +100,12 @@
             </div>
         </div>
         <div class="rowSafety padBottom10">
-            <div class="columnSaf colCenter colMobile">
+            <!-- <div class="columnSaf colCenter colMobile" *ngFor="let step of listBank.PaymentLocations.PaymentSteps">
                 <div class="headPaso">
-                    <div class="number">1</div>
+                    <div class="number">{{ step.Step }}</div>
                 </div>
-                <div class="textPaso">Ingresa a <strong>www.viabcp.com</strong> con tu clave de acceso.</div>
-            </div>
+                <div class="textPaso">{{ step.Value }}</div>
+            </div> -->
             <div class="columnSaf colCenter colMobile">
                 <div class="headPaso">
                     <div class="number">2</div>
@@ -141,8 +145,8 @@
                     </div>
 
                     </ng-container>
-                    <div class="descripAsegurado" *ngIf="listBank">
-                        Tu solicitud de compra es {{ listBank['TransactionIdentifier']}}
+                    <div class="descripAsegurado" *ngIf="reservation">
+                        Tu solicitud de compra es {{ reservation.Reserva }}.
                     </div>
                 </div>
             </div>
@@ -174,9 +178,9 @@
         <div class="offset-3 col-6 viewMobile">
             <div class="card padCard">
                 <div class="rowCard">
-                    <div class="columnCard fontOpen">
+                    <!-- <div class="columnCard fontOpen">
                         Pasajeros
-                    </div>
+                    </div> -->
                     <div class="columnCard">
 
                     </div>

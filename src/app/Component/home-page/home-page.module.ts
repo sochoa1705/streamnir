@@ -21,6 +21,7 @@ import { ConformidadModule } from './conformidad/conformidad.module';
 import { LoaderModule } from '../../shared/components/loader/loader.module';
 import { VuelosModule } from './vuelos/vuelos.module';
 import { AerolineasModule } from './aerolineas/aerolineas.module';
+import { DollarChangeService } from '../../Services/dollarChange/dollar-change.service';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -42,6 +43,6 @@ import { AerolineasModule } from './aerolineas/aerolineas.module';
     LoaderModule,
   ],
   exports: [HomePageComponent],
-  providers: [OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
+  providers: [DollarChangeService, OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
 })
 export class HomePageModule { }
