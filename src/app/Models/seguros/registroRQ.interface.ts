@@ -34,7 +34,7 @@ export interface RegistrarSeguroRQ {
   webs_cid: number;
   usuweb_id: number;
   destinonacional: string;
-  numeroruc: string;
+  numeroruc?: string;
   comprobantepago: string;
   usobilletera: string;
   codigobloqueo: string;
@@ -59,7 +59,7 @@ export interface RegistrarSeguroRQ {
   gasto_emision: number;
   id_file: number;
   aplica_descuento: number;
-  direccion_fiscal: string;
+  direccion_fiscal?: string;
   id_unidad_negocio: number;
   aplica_factura_comision: number;
   forma_de_pago: string;

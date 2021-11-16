@@ -77,6 +77,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   stateCtrl = new FormControl();
   stateCtrl2 = new FormControl();
   customers!: number;
+  ageCustomers: any
   // ClienteCotizacion: Array<{'Edad': string; 'FechaNacimiento': string;}> = []
   ClienteCotizacion: Array<any> = []
   showOption: Boolean = true;
@@ -205,6 +206,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       this.form.removeControl('fromDate');
       this.form.removeControl('toDate');
       this.form.addControl('ClienteCotizacion', new FormControl(this.ClienteCotizacion));
+      this.form.addControl('Edades', new FormControl(this.ageCustomers));
       this.form.addControl('fromDate', new FormControl(this.FromDate2.nativeElement.value));
       this.form.addControl('toDate', new FormControl(this.ToDate2.nativeElement.value));
       this.form.removeControl('days')
@@ -277,6 +279,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     // console.log(this.form.controls['passenger'].value.length)
     // let array = [1,2,3,4]
     let array = this.form.controls['passenger'].value
+    let Ages = []
     for (let i in array) {
       // console.log(i);
       let indice = Number(i)
@@ -295,7 +298,12 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       console.log(fecha);
       console.log(age);
       console.log(fechaString);
-
+      Ages.push(age)
+      this.ageCustomers = Ages.join(';')
+      console.log(Ages);
+      console.log(this.ageCustomers);
+      
+      
       let omac2 = { 'Edad': String(age), 'FechaNacimiento': String(dayFech + '/' + monthFech + '/' + yearFech) }
       // omac.push(omac2)
       console.log(omac2);

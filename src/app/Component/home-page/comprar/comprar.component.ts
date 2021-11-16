@@ -2,6 +2,10 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OffersService } from 'src/app/Services/mock/offers.service';
+import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface';
+import { CoverageService } from 'src/app/Services/coverage/coverage.service';
+import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-comprar',
@@ -12,6 +16,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   formShop!: FormGroup
   errors: any[] = []
   MSG_EMPTY: string = 'none'
+  //COBERTURA
+  coverageDisplay: boolean = false
+  unidadNegocio: any
+  businessunit: any
+  coverageList: any
+  asistMedic: any
 
   MSG_NAME_CUSTOMER: string = 'nameCustomer'
   MSG_LAST_NAME_CUSTOMER: string = 'lastNameCustomer'
@@ -33,6 +43,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   MSG_PHONE0_CONTACT: string = 'numberPhone0'
   MSG_CHK_POLITY: string = 'chkPolity'
   MSG_CHK_INFO: string = 'chkInfo'
+
+  listYears: string[] = []
   current: any;
   detailPay!: string;
   filter!: string;
@@ -56,7 +68,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   ] */
 
   metodoPago: any = [
-    { name: 'optionm-2', value: 'bancaInternet', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
+    { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
     { name: 'optionm-1', value: 'tarjeta', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
   ]
   isLinear = true;
@@ -68,11 +80,14 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     public route: Router,
     private router: ActivatedRoute,
     public offersService: OffersService,
+    public coverageService: CoverageService,
   ) {
     this.safe0 = localStorage.getItem('safe0')
     this.safe0Json = JSON.parse(this.safe0)
     this.result = localStorage.getItem('Datasafe')
     this.resultJson = JSON.parse(this.result)
+    this.unidadNegocio = localStorage.getItem('businessunit')
+    this.businessunit = JSON.parse(this.unidadNegocio)
     console.log(this.resultJson);
     console.log(this.safe0Json);
     console.log(screen.width);
@@ -98,23 +113,34 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.listCoverage()
     // this.getSecureBooking()
     console.log(this.current);
     this.loadShop();
     //console.log(this.safe0Json.detailPay);
-
     this.firstFormGroup = new FormGroup({
       firstCtrl: new FormControl('idavuelta', Validators.required),
-
     });
     this.secondFormGroup = new FormGroup({
       secondCtrl: new FormControl('idavuelta', Validators.required),
-
     });
+
     this.createForm()
     // this.chkValue('')
     for (const i of this.resultJson['ClienteCotizacion']) {
       this.addCustomers()
+    }
+    this.selectYear()
+  }
+
+  toCustomer(e: any) {
+    console.log(e.target.checked);
+  }
+
+  selectYear() {
+    for (let i = 1950; i < 2021; i++) {
+      let year = String(i)
+      this.listYears.push(year)
     }
   }
 
@@ -240,8 +266,19 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
 
-  validNumber(inputText: any): boolean{
+  validNumber(inputText: any): boolean {
     return new RegExp(/^[0-9]+$/).test(inputText)
+  }
+
+  toFactura(e: any) {
+    console.log(e.target.checked);
+    let chk = e.target.checked
+    if (chk) {
+      this.addRecibo()
+    } else {
+      this.removeRecibo(0)
+    }
+
   }
 
   createForm() {
@@ -249,7 +286,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       customers: new FormArray([]),
       formCard: new FormGroup({
         bankPay: new FormControl(),
-        select21: new FormControl('bancaInternet'),
+        select21: new FormControl('SAFETYPAY'),
         numberCard: new FormControl(),
         nameCard: new FormControl(),
         expiredCard: new FormControl(),
@@ -261,6 +298,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         address: new FormControl(),
       }),
       formContact: new FormGroup({
+        chkCustomer: new FormControl(),
         nameContacto: new FormControl(),
         lastnameContacto: new FormControl(),
         mailContacto: new FormControl(),
@@ -269,6 +307,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         code0: new FormControl(),
         numberPhone0: new FormControl(),
         phones: new FormArray([]),
+        recibo: new FormArray([]),
         chkFac: new FormControl()
       }),
       chkPolity: new FormControl(),
@@ -297,6 +336,24 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }));
   }
 
+  ///RECIBO ADD FORMULARIO
+  getArrayRecibo() {
+    return (<FormArray>this.formShop.get(['formContact', 'recibo'])).controls
+  }
+
+  addRecibo() {
+    ((<any>this.formShop.controls['formContact']).controls['recibo']).push(
+      new FormGroup({
+        direccion: new FormControl(),
+        ruc: new FormControl()
+      }));
+  }
+
+  removeRecibo(index: any) {
+    ((<any>this.formShop.controls['formContact']).controls['recibo']).removeAt(index);
+  }
+
+  ///PHONE ADD FORMULARIO
   getArrayPhone() {
     return (<FormArray>this.formShop.get(['formContact', 'phones'])).controls
   }
@@ -314,16 +371,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     ((<any>this.formShop.controls['formContact']).controls['phones']).removeAt(index);
   }
 
-  pasajero() {
-    let scrolTop = window.scrollY;
-    let n = scrolTop - 50;
-    let elemento = this.adulto.nativeElement;
-    console.log(elemento);
-    elemento.classList.add('adultocdr');
-    elemento.setAttribute('style', `margin-top: ${n}px`);
-    // elemento.style = `margin-top: ${scrolTop}`
+  // pasajero() {
+  //   let scrolTop = window.scrollY;
+  //   let n = scrolTop - 50;
+  //   let elemento = this.adulto.nativeElement;
+  //   console.log(elemento);
+  //   elemento.classList.add('adultocdr');
+  //   elemento.setAttribute('style', `margin-top: ${n}px`);
+  //   // elemento.style = `margin-top: ${scrolTop}`
+  // }
 
-  }
   pasajeroClose() {
     let elemento = this.adulto.nativeElement;
     elemento.classList.remove('adultocdr');
@@ -375,6 +432,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (this.validForm()) {
       // console.log(this.formShop);
       console.log(this.formShop.value);
+      this.formShop.addControl('tipoRecibo', new FormControl('BV'));
       let dataShop = this.formShop.value
       localStorage.setItem('shop', JSON.stringify(dataShop));
 
@@ -389,5 +447,36 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   otherPlan() {
     localStorage.removeItem('safe0')
     this.route.navigateByUrl('/home/seguros/planes');
+  }
+
+  listCoverage() {
+    // this.coverageDisplay = false
+
+    let lcobertura: CoberturaSeguroRQ = {
+      CodigoISOPais: this.businessunit.id_pais_ac,
+      Agencia: this.businessunit.codigo_ac,
+      Sucursal: this.businessunit.sucursal_ac,
+      CodigoProducto: this.safe0Json.codProducto,
+      CodigoTarifa: this.safe0Json.codTarifa,
+      Edad: this.resultJson.ClienteCotizacion.shift().Edad,     // COLOCAR LA PRIMERA EDAD DE BUSQUEDA
+      TipoModalidad: this.safe0Json.codModalidad
+    }
+    
+    let payload = new NMRequestBy<CoberturaSeguroRQ>(lcobertura);
+
+    this.coverageService.getCoverage(payload).pipe(take(5)).subscribe({
+      next: (response) => {
+        this.coverageList = response['Resultado'].find((e: any) => {
+          if (e.Codigo === 'C.4.1.10.1') {
+            return e
+          }
+        })
+        // this.coverageDisplay = true
+        localStorage.setItem('coverage', JSON.stringify(this.coverageList))
+      },
+      error: error => console.log(error),
+    }
+      // data => console.log(data['Resultado']),
+    )
   }
 }
