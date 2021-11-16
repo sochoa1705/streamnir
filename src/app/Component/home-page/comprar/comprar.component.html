@@ -34,9 +34,9 @@
 </ng-template>
 
 
-<div #adultoCdr style="display: none;">
+<!-- <div #adultoCdr style="display: none;">
     <a (click)="pasajeroClose()">cerrar</a>
-</div>
+</div> -->
 <div class="container-fluid pb-4 px-5">
     <div class="row stepCard d-md-none d-block">
         <!-- STEPPER -->
@@ -560,40 +560,8 @@
                                             <div class="col-4">
                                                 <select formControlName="yearCustomer" class="form-select-f">
                                                     <option disabled>Seleccione</option>
-                                                    <option value="1990">1990</option>
-                                                    <option value="1991">1991</option>
-                                                    <option value="1992">1992</option>
-                                                    <option value="1993">1993</option>
-                                                    <option value="1994">1994</option>
-                                                    <option value="1995">1995</option>
-                                                    <option value="1996">1996</option>
-                                                    <option value="1997">1997</option>
-                                                    <option value="1998">1998</option>
-                                                    <option value="1999">1999</option>
-                                                    <option value="2001">2001</option>
-                                                    <option value="2002">2002</option>
-                                                    <option value="2003">2003</option>
-                                                    <option value="2001">2001</option>
-                                                    <option value="2002">2002</option>
-                                                    <option value="2003">2003</option>
-                                                    <option value="2004">2004</option>
-                                                    <option value="2005">2005</option>
-                                                    <option value="2006">2006</option>
-                                                    <option value="2007">2007</option>
-                                                    <option value="2008">2008</option>
-                                                    <option value="2009">2009</option>
-                                                    <option value="2010">2010</option>
-                                                    <option value="2011">2011</option>
-                                                    <option value="2012">2012</option>
-                                                    <option value="2013">2013</option>
-                                                    <option value="2014">2014</option>
-                                                    <option value="2015">2015</option>
-                                                    <option value="2016">2016</option>
-                                                    <option value="2017">2017</option>
-                                                    <option value="2018">2018</option>
-                                                    <option value="2019">2019</option>
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>
+                                                    <option *ngFor="let year of listYears" value="{{year}}">{{year}}</option>
+
                                                 </select>
                                                 <span class="valid" *ngIf="getMessage(MSG_YEAR_CUSTOMER) != MSG_EMPTY  &&  getMessageArray(i, MSG_YEAR_CUSTOMER)">{{ getMessage(MSG_YEAR_CUSTOMER) }}</span>
                                             </div>
@@ -949,6 +917,13 @@
                                 </span>
                             </div>
                             <div formGroupName="formContact" class="card-body card_pasajero boxHideM shadow-none" [class.activoBoxContact]="!showDataContacto">
+                                <!-- <div class="row rowMobileCard">
+                                    <div class="col-3 viewMobileWidth form-check-inline">
+                                        <input class="form-check-input" (change)="toCustomer($event)" formControlName="chkCustomer" type="checkbox" id="chkCustomer">
+                                        <label class="form-check-label" for="chkCustomer">Solicitar factura</label>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div> -->
                                 <div class="row rowMobileCard">
                                     <div class="col-6 viewMobileWidth">
                                         <label for="names">Nombres</label>
@@ -1002,11 +977,29 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
-
+                                <!-- FACTURA -->
+                                <div formArrayName="recibo" *ngIf="getArrayRecibo()">
+                                    <div [formGroupName]="i" *ngFor="let rec of getArrayRecibo(); let i = index" class="row rowMobileCard">
+                                        <div class="col-12 viewMobileWidth">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label for="ruc">Ruc</label>
+                                                    <input formControlName="ruc" class="form-control" placeholder="Ingresa N° deRuc" type="text" name="ruc">
+                                                </div>
+                                                <div class="col-8">
+                                                    <label for="dirección">Dirección</label>
+                                                    <input formControlName="direccion" class="form-control" placeholder="Ca. / Jr. / Av." type="text" name="dirección">
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
                                 <div class="row rowMobileCard">
                                     <div class="col-6 viewMobileWidth">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" formControlName="chkFac" type="checkbox" id="chkFac" value="option1">
+                                            <input class="form-check-input" (change)="toFactura($event)" formControlName="chkFac" type="checkbox" id="chkFac" value="option1">
                                             <label class="form-check-label" for="chkFac">Solicitar factura</label>
                                         </div>
                                     </div>
@@ -1638,7 +1631,8 @@
                         puedan generar.</li>
                     <li>Declaro haber sido informado que mi solicitud de compra será atendida dentro de las 72 horas de adquirido
                         el servicio. Luego de procesada la compra, el ticket y/o voucher será enviado dentro de las 24 horas
-                        siguientes.</li>
+                        siguientes.
+                    </li>
                     <li>Con la efectiva cobranza a través del medio de pago seleccionado por mí en el paso anterior, Promotora
                         de Turismo Nuevo Mundo S.A. se compromete a gestionar por mi cuenta y orden los servicios seleccionados
                         en el paso anterior.</li>
@@ -1967,7 +1961,8 @@
                     o a travé s de terceros): Recopile, de tratamiento o suprima, transfiera o importe, exporte mis datos
                     personales, para elaborar Bases de Datos, transferirlas a terceras personas vinculadas o no a Nuevo Mundo
                     Viajes (sean socios comerciales o no, nacionales o extranjeros, pú blicos o privados) con la finalidad
-                    de:</p>
+                    de:
+                </p>
 
                 <ul class="listModal">
                     <li>Cumplir con la prestación de los servicios turísticos contratados: programación y reserva de vuelos,
@@ -2119,7 +2114,8 @@
                             Peruano deberá contar con vigencia mínima 6 meses a partir de la fecha de viaje.</li>
                         <li>Países no limítrofes: Pasaporte Peruano vigente mínimo 6 meses a partir de la fecha de viaje. Mayor
                             de 18 años y si viaja a países miembros de la Comunidad Andina, puede viajar solo con su DNI
-                            vigente.</li>
+                            vigente.
+                        </li>
                         <li>Si no cuenta con residencia en el país de destino de viaje, recuerde que siempre debe viajar con
                             un boleto aéreo de ida y retorno.</li>
                     </ul>
@@ -2159,7 +2155,8 @@
                     <div class="textTitle">Pasajeros extranjeros</div>
                     <ul class="listModal">
                         <li>Residentes no nacionalizados: DNI de extranjero, Residencia permanente o temporaria dentro de la
-                            vigencia.</li>
+                            vigencia.
+                        </li>
                         <li>Para países no limítrofes/ limítrofes: Pasaporte de extranjero más DNI de extranjero.</li>
                         <li>Residentes nacionalizados: Cédula del MERCOSUR, Pasaporte o DNI.</li>
                     </ul>
@@ -2236,7 +2233,8 @@
                         <li>Si posee documentación de la Comunidad Europea, consulte con la representación consular del país
                             de nacionalidad que posee y verifique si requiere alguna documentación adicional.</li>
                         <li>Recuerde que para el ingreso a Europa debe consultar por la documentación que es requerida para el
-                            viaje.</li>
+                            viaje.
+                        </li>
                         <li>Los documentos para viaje deben encontrarse en buen estado, no deben estar deteriorados ni rotos.</li>
                         <li>Se sugiere la compra de su tarjeta de asistencia.</li>
                         <li>Cualquier duda se puede contactar al Departamento de Migraciones (51) 1-417-6900 o visite su página
@@ -2253,7 +2251,8 @@
                             en el país) o autorización consular legalizada por el Ministerio de Relaciones Exteriores (si
                             es otorgada en el extranjero).</li>
                         <li>La vigencia de las autorizaciones será no mayor a 60 días. En todos los casos válidos para un solo
-                            viaje.</li>
+                            viaje.
+                        </li>
                     </ul>
                 </div>
 

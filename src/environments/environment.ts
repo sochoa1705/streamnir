@@ -17,7 +17,7 @@ export const environment = {
   ptoventaAgenciaAC: '1',
   comisionistaAgenciaAC: '146',
   today: (hoy: any) => {
-    let fehcaHoy = `${hoy.getDay()}/${hoy.getMonth()}/${ hoy.getFullYear()}`
+    let fehcaHoy = `${hoy.getDate()}/${hoy.getMonth() +1}/${ hoy.getFullYear()}`
     return fehcaHoy
   },
   urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/'
