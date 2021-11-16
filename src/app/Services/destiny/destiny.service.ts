@@ -22,9 +22,9 @@ export class DestinyService {
     )
   }
 
-  getDestinyPaqueteDinamico(search: string): Observable<any> {
-    let URL_API_MARCAS_BLANCAS: string = environment.urlPaqueteDinamico;
-    let url_api = `${URL_API_MARCAS_BLANCAS}${ENDPOINT_API.LOCATION_SEARCH}?tripType=FLIGHT_HOTEL&query=${search}&micrositeId=nm_viajes&languageId=ES&departure=&specialTicket=false&searchType=origin&_=1636554156303`;
-    return this.http.jsonp(url_api, 'callback=test');
+  getDestinyPaqueteDinamico(search: string, typeSearch: string): Observable<any> {
+    let urlApiPaquete : string = environment.urlPaqueteDinamico;
+    let urlApi = `${urlApiPaquete}${ENDPOINT_API.LOCATION_SEARCH}?tripType=${typeSearch}&query=${search}&micrositeId=nm_viajes&languageId=ES&departure=&specialTicket=false&searchType=origin&_=1636554156303`;
+    return this.http.jsonp(urlApi, 'callback=test');
   }
 }

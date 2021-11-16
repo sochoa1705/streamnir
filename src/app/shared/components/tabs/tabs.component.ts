@@ -65,6 +65,8 @@ export interface State {
 })
 export class TabsComponent implements OnInit {
   form!: FormGroup;
+  form2!: FormGroup;
+  form3!: FormGroup;
   selected = 'option1';
   model!: NgbDateStruct;
   stateCtrl = new FormControl();
@@ -103,6 +105,7 @@ export class TabsComponent implements OnInit {
   citysDestinosSelect: Array<any> = [];
   origen: any;
   destino: any;
+  origenHotel: any;
 
   habitacion = 1;
   adultos = 0;
@@ -112,6 +115,7 @@ export class TabsComponent implements OnInit {
 
   @ViewChild('inputOrigen', { static: false }) inputOrigen!: ElementRef<HTMLInputElement>;
   @ViewChild('inputDestino', { static: false }) inputDestino!: ElementRef<HTMLInputElement>;
+  @ViewChild('inputOrigenHotel', { static: false }) inputOrigenHotel!: ElementRef<HTMLInputElement>;
 
   constructor(
     public route: Router,
@@ -185,7 +189,7 @@ export class TabsComponent implements OnInit {
   }
 
   private getDestinyOrigin(){
-    this.destineService.getDestinyPaqueteDinamico('truji').subscribe(res => {
+    this.destineService.getDestinyPaqueteDinamico('truji','FLIGHT_HOTEL').subscribe(res => {
       console.log('res ', res);
     });
   }
@@ -195,11 +199,31 @@ export class TabsComponent implements OnInit {
       clase: new FormControl('economy'),
       origen: new FormControl(),
       destino: new FormControl(''),
+      origenHotel: new FormControl(''),
       range: new FormGroup({
         start: new FormControl(),
         end: new FormControl()
       })
-    })
+    });
+
+    this.form2 = new FormGroup({
+      origenHotel: new FormControl(''),
+      range: new FormGroup({
+        start: new FormControl(),
+        end: new FormControl()
+      })
+    });
+
+    this.form3 = new FormGroup({
+      origen: new FormControl(''),
+      destino: new FormControl(''),
+      range: new FormGroup({
+        start: new FormControl(),
+        end: new FormControl()
+      }),
+      initHour: new FormControl(''),
+      lastHour: new FormControl('')
+    });
   }
 
   count(valor: number, e: any) {
@@ -226,7 +250,7 @@ export class TabsComponent implements OnInit {
     }
   }
 
-  autoComplete(e: any, type: number) {
+  autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
     this.citys = [];
     console.log(e.target);
     // let elemento = this.origen.nativeElement;
@@ -240,13 +264,13 @@ export class TabsComponent implements OnInit {
       elemento.classList.add('auto');
     }
     if (value.length >= 3) {
-      this.getListCiudades(value, type);
+      this.getListCiudades(value, type, typeSearch);
     }
   }
 
 
-  getListCiudades(e: any, type: number) {
-    this.destineService.getDestinyPaqueteDinamico(e).subscribe(
+  getListCiudades(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
+    this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
         console.log(data);
         this.citys = data;
@@ -292,6 +316,13 @@ export class TabsComponent implements OnInit {
     return urlDistributon;
   }
 
+  public changeTab() {
+    //this.adultos = 0;
+    //this.ninos = 0;
+    //this.infantes = 0;
+    console.log('test tab');
+  }
+
   public searchVueloHotel(){
     console.log('value ', this.form);
     console.log('value fecha ' , this.fromDate, this.toDate);
@@ -300,19 +331,39 @@ export class TabsComponent implements OnInit {
 
     if(this.adultos > 0) {
       let tab = 'FLIGHT_HOTEL';
-
-      let startDate = this.fromDate!.day + "/" + this.fromDate!.month + "/" + this.fromDate!.year;
-      let endDate = this.toDate!.day + "/" + this.toDate!.month + "/" + this.toDate!.year;
-      let origen = this.form.controls['origen'].value;
-      let destino = this.form.controls['destino'].value;
-      let businessClass = this.form.controls['clase'].value === 'business';
-  
-      let idOrigen = (this.citysOrigenSelect || []).find(item => item.label === origen).id;
-      let idDestino = (this.citysDestinosSelect || []).find(item => item.label === destino).id;
-  
+      let params = this.getParamsTabs(1);
       let distribution = this.getDistributionUrl();
   
-      window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&destination=${idDestino}&departure=${idOrigen}&departureDate=${startDate}&arrivalDate=${endDate}&distribution=${distribution}&businessCabin=${businessClass}&lang=ES`;
+      window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&destination=${params.idDestino}&departure=${params.idOrigen}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&distribution=${distribution}&businessCabin=${params.businessClass}&lang=ES`;
     }
+  }
+
+  public searchAlojamiento() {
+    this.validPasajeros = this.adultos === 0;
+    if(this.adultos > 0) {
+      let tab = 'ONLY_HOTEL';
+      let params = this.getParamsTabs(2);
+      let distribution = this.getDistributionUrl();
+      window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&hotelDestination=${params.idOrigen}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&distribution=${distribution}&lang=ES&carRental=false`;
+    }
+  }
+
+  public searchOnlyCar() {
+    let tab = 'ONLY_CAR';
+    let params = this.getParamsTabs(3);
+    window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&dropoffPoint=${params.idOrigen}&destination=${params.idDestino}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&useSameDropoff=false&pickupTime=${params.horaInicio}&dropoffTime=${params.horaDestino}&lang=ES`;
+  }
+
+  private getParamsTabs(typeTab: number): any {
+    let startDate = this.fromDate!.day + "/" + this.fromDate!.month + "/" + this.fromDate!.year;
+    let endDate = this.toDate!.day + "/" + this.toDate!.month + "/" + this.toDate!.year;
+    let origen = typeTab === 1 ? this.form.controls['origen'].value : typeTab === 2 ? this.form2.controls['origenHotel'].value : this.form3.controls['origen'].value;
+    let destino = typeTab === 1 ? this.form.controls['destino'].value : this.form3.controls['destino'].value;
+    let businessClass = this.form.controls['clase'].value === 'business';
+    let idOrigen = (this.citysOrigenSelect || []).find(item => item.label === origen).id;
+    let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.label === destino).id : 0;
+    let horaInicio = this.form3.controls['initHour'].value;
+    let horaDestino = this.form3.controls['lastHour'].value;
+    return {startDate, endDate, origen, destino, businessClass, idOrigen, idDestino, horaInicio, horaDestino};
   }
 }
