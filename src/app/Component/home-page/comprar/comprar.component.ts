@@ -382,7 +382,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       // console.log((<FormArray>this.formShop.get(['formContact', 'phones'])).controls)
 
       // this.route.navigateByUrl('/home/comprar', navigationExtras);
-      //this.route.navigateByUrl('/home/conformidad');
+      this.route.navigateByUrl('/home/conformidad');
     }
   }
 
