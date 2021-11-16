@@ -61,8 +61,7 @@ export class ConformidadComponent implements OnInit {
     this.tipodeCambio = JSON.parse(this.cambio)
 
     //IP DEL CLIENTE
-    this.ip = localStorage.getItem('ipCliente')
-    this.ipCliente = JSON.parse(this.ip)
+    this.ipCliente = localStorage.getItem('ipCliente')
 
   }
 
@@ -74,14 +73,45 @@ export class ConformidadComponent implements OnInit {
     this.getSecureBooking()
   }
 
+  formattFecha() {
+    let arrCustomer = this.shopString.customers[0]
+    let fechaNac = arrCustomer.dayCustomer + '/' + arrCustomer.monthCustomer + '/' + arrCustomer.yearCustomer
+    return fechaNac
+  }
+
+  pasajerosArr() {
+    let pasajeros: any = []
+    this.shopString.customers.forEach((value: any, index: number) => {
+      let jsonPasajeros = {
+        pax_nom: value.nameCustomer,
+        pax_ape_pat: value.lastNameCustomer,
+        doc_cid: (value.typeDocCustomer).toUpperCase(),
+        pax_num_doc: value.numDocCustomer,
+        pax_fec_nac: value.dayCustomer + '/' + value.monthCustomer + '/' + value.yearCustomer,
+        pax_voucher_travelace: '-',
+        pax_control_travelace: '-',
+        pax_void_travelace: 'N',
+        pax_boleto: '-',
+        pax_voideo_pta: '0',
+        pax_facturado_pta: 0,
+        pax_precio_emision: this.safe0Json.tarifario[index].precioEmision,            // obtener desde plansAC.producto.tarifario.precioEmision (FILTRAR POR CAMPO EDAD)
+        pax_precio_emision_local: this.safe0Json.tarifario[index].precioEmisionLocal, // obtener desde plansAC.producto.tarifario.precioEmisionLocal (FILTRAR POR CAMPO EDAD)
+        pax_precio_neto: this.safe0Json.tarifario[index].precioBrutoLocal
+      }
+      pasajeros.push(jsonPasajeros)
+    })
+    return pasajeros
+  }
+
+
   getSecureBooking() {
     const textSend = 'SE ESTA GENERANDO SU RESERVA!'
     this.loaderSubjectService.showText(textSend)
     let lregistro: RegistrarSeguroRQ = {
-      fec_salida: new Date(this.resultJson.fromDate), // FECHA DE PARTIDA
-      fec_retorno: new Date(this.resultJson.toDate),  // FECHA DE RETORNO
+      fec_salida: this.resultJson.fromDate, // FECHA DE PARTIDA
+      fec_retorno: this.resultJson.toDate,  // FECHA DE RETORNO
       cant_paxes: this.shopString.customers.length,   // CANTIDAD DE PASAJEROS
-      destino: this.resultJson.destinyString,         // NOMBRE DEL DESTINO
+      destino: this.resultJson.destinyString.descripcion_destino,         // NOMBRE DEL DESTINO
       edades: `${this.resultJson.Edades};`,           // EDADES CONCATENADAS CON PUNTO Y COMA
       prod_id: this.safe0Json.idProducto,             // obtener desde plansAC.idProducto
       prod_nom: this.safe0Json.producto,              // obtener desde plansAC.producto
@@ -111,8 +141,8 @@ export class ConformidadComponent implements OnInit {
       webs_cid: 7,
       usuweb_id: 6996,
 
-      destinonacional: 'N',
-      // obtener desde destiny.EsDestinoNacional
+      destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'N' : 'I', // obtener desde destiny.EsDestinoNacional
+
       numeroruc: (this.shopString.formContact.recibo.length === 0) ? `BV-${this.shopString.customers[0].numDocCustomer}` : this.shopString.formContact.recibo[0].ruc,
       comprobantepago: (this.shopString.formContact.chkFac) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
       usobilletera: 'N',
@@ -147,28 +177,29 @@ export class ConformidadComponent implements OnInit {
       nro_pedido_srv: 0,
       fee_safetypay: 0,
       validarDuplicidad: false,
-      pasajeros: [
-        {
-          pax_nom: this.shopString.customers[0].nameCustomer,                   // NOMBRE DEL PASAJERO
-          pax_ape_pat: this.shopString.customers[0].lastNameCustomer,           // APELLIDOS DEL PASAJERO
-          doc_cid: (this.shopString.customers[0].typeDocCustomer).toLowerCase(),// TIPO DE DOUMENTO DE IDENTIDAD (DNI, PSP, CE)
-          pax_num_doc: this.shopString.customers[0].numDocCustomer,             // DOCUMENTO DE IDENTIDAD
-          pax_fec_nac: new Date('20/10/1979'),                                  // FECHA DE NACIMIENTO
-          pax_voucher_travelace: '-',
-          pax_control_travelace: '-',
-          pax_void_travelace: 'N',
-          pax_boleto: '-',
-          pax_voideo_pta: '0',
-          pax_facturado_pta: 0,
-          pax_precio_emision: this.safe0Json.tarifario[0].precioEmision,            // obtener desde plansAC.producto.tarifario.precioEmision (FILTRAR POR CAMPO EDAD)
-          pax_precio_emision_local: this.safe0Json.tarifario[0].precioEmisionLocal, // obtener desde plansAC.producto.tarifario.precioEmisionLocal (FILTRAR POR CAMPO EDAD)
-          pax_precio_neto: this.safe0Json.tarifario[0].precioBrutoLocal             // obtener desde plansAC.producto.tarifario.precioBrutoLocal (FILTRAR POR CAMPO EDAD)
-        }
-      ],
+      pasajeros: this.pasajerosArr(),
+      // pasajeros: [
+      //   {
+      //     pax_nom: this.shopString.customers[0].nameCustomer,                   // NOMBRE DEL PASAJERO
+      //     pax_ape_pat: this.shopString.customers[0].lastNameCustomer,           // APELLIDOS DEL PASAJERO
+      //     doc_cid: (this.shopString.customers[0].typeDocCustomer).toLowerCase(),// TIPO DE DOUMENTO DE IDENTIDAD (DNI, PSP, CE)
+      //     pax_num_doc: this.shopString.customers[0].numDocCustomer,             // DOCUMENTO DE IDENTIDAD
+      //     pax_fec_nac: new Date(this.formattFecha()),                           // FECHA DE NACIMIENTO
+      //     pax_voucher_travelace: '-',
+      //     pax_control_travelace: '-',
+      //     pax_void_travelace: 'N',
+      //     pax_boleto: '-',
+      //     pax_voideo_pta: '0',
+      //     pax_facturado_pta: 0,
+      //     pax_precio_emision: this.safe0Json.tarifario[0].precioEmision,            // obtener desde plansAC.producto.tarifario.precioEmision (FILTRAR POR CAMPO EDAD)
+      //     pax_precio_emision_local: this.safe0Json.tarifario[0].precioEmisionLocal, // obtener desde plansAC.producto.tarifario.precioEmisionLocal (FILTRAR POR CAMPO EDAD)
+      //     pax_precio_neto: this.safe0Json.tarifario[0].precioBrutoLocal             // obtener desde plansAC.producto.tarifario.precioBrutoLocal (FILTRAR POR CAMPO EDAD)
+      //   }
+      // ],
       cobertura: [
         {
           unidad: this.coverage.Unidad,                                 // obtener desde coverageList.Unidad
-          atr_nom: this.coverage.Codigo + ' ' + this.coverage.Nombre ,  // obtener desde coverageList.Codigo + ' ' + coverageList.Nombre
+          atr_nom: this.coverage.Codigo + ' ' + this.coverage.Nombre,  // obtener desde coverageList.Codigo + ' ' + coverageList.Nombre
           valor: this.coverage.Valor                                    // obtener desde coverageList.Valor
         }
       ],
@@ -181,7 +212,7 @@ export class ConformidadComponent implements OnInit {
     };
 
     let payload = new NMRequestBy<RegistrarSeguroRQ>(lregistro);
-    
+
     console.log(payload.Parametros)
     this.secureBookingService.secureBooking(payload).subscribe((response: any) => {
       console.log(response)
@@ -219,14 +250,14 @@ export class ConformidadComponent implements OnInit {
     let lsafetypay: GenerarSafetyPayRQ = {
       PromoterName: this.shopString.customers[0].nameCustomer,                 //NOMBRE DEL PRIMER PASAJERO ADULTO
       CustomerName: this.shopString.customers[0].nameCustomer,                 //NOMBRE DEL PRIMER PASAJERO ADULTO
-      CustomerDocumentNumber: this.shopString.customers[0].numDocCustomer,               //DOCUMENTO DEL PRIMER PASAJERO ADULTO
+      CustomerDocumentNumber: this.shopString.customers[0].numDocCustomer,     //DOCUMENTO DEL PRIMER PASAJERO ADULTO
       IdClient: Number(environment.dkAgenciaAC),
       WebId: '7',
       Mail: this.shopString.formContact.mailContacto,   //MAIL DEL PASAJERO
       DKClient: environment.dkAgenciaAC,
       UserAgent: environment.identifierAC,
       IdUser: '6996',
-      IpUser: this.ipCliente,                                //IP DEL CLIENTE
+      IpUser: this.ipCliente,                           //IP DEL CLIENTE
       Amount: {
         FeeAmount: 0,
         RechargeAmount: 100,                            //COSTO TOTAL DEL SEGURO; SOLO SI destiny.EsDestinoNacional = 'S' ENTONCES MULTIPLICAR POR 1.18 (IGV)
@@ -243,10 +274,10 @@ export class ConformidadComponent implements OnInit {
         this.loaderSubjectService.closeLoader()
 
         let lactualizar: SafetyPayRQ = {
-          res_seguro_id: 1111,                          // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
+          res_seguro_id: this.reservation.Reserva,                // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
           usosafetypay: 'S',
-          codigo_safetypay: '',                         // obtener desde this.listBank.TransactionIdentifier
-          nro_pedido_srv: 11,                           // obtener desde this.listBank.IDPedido
+          codigo_safetypay: this.listBank.TransactionIdentifier,  // obtener desde this.listBank.TransactionIdentifier
+          nro_pedido_srv: this.listBank.IDPedido,                 // obtener desde this.listBank.IDPedido
           fee_safetypay: 0
         }
 
@@ -263,7 +294,7 @@ export class ConformidadComponent implements OnInit {
         //>>>> EN CASO SALGA ERROR SE DEBE DE ELIMINAR LA SOLICITUD
 
         let lanular: CambiarEstadoRQ = {
-          res_seguro_id: 1111,                          // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
+          res_seguro_id: this.reservation.Reserva,  // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
           estado: 7
         }
 

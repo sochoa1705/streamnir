@@ -30,6 +30,7 @@ import { IpClienteService } from '../../Services/ipCliente/ip-cliente.service';
     CommonModule,
     HomePageRoutingModule,
     HomeModule,
+    HttpClientModule,
     SegurosModule,
     VuelosModule,
     AerolineasModule,

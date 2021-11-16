@@ -113,7 +113,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.listCoverage()
     // this.getSecureBooking()
     console.log(this.current);
     this.loadShop();
@@ -131,6 +130,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.addCustomers()
     }
     this.selectYear()
+    this.listCoverage()
   }
 
   toCustomer(e: any) {
@@ -332,7 +332,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         nationalityCustomer: new FormControl(),
         typeDocCustomer: new FormControl(),
         numDocCustomer: new FormControl(),
-        sexCustomer: new FormControl()
+        sexCustomer: new FormControl(),
       }));
   }
 
@@ -461,7 +461,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       Edad: this.resultJson.ClienteCotizacion.shift().Edad,     // COLOCAR LA PRIMERA EDAD DE BUSQUEDA
       TipoModalidad: this.safe0Json.codModalidad
     }
-    
+
     let payload = new NMRequestBy<CoberturaSeguroRQ>(lcobertura);
 
     this.coverageService.getCoverage(payload).pipe(take(5)).subscribe({

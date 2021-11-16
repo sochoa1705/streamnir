@@ -239,7 +239,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     for (const i of this.options) {
       if (String(i.ref_assistcard) === this.destino.nativeElement.value) {
         console.log(i.descripcion_destino);
-        return i.descripcion_destino
+        return i
       }
     }
   }
