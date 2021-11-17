@@ -45,3 +45,7 @@ export enum ENDPOINT_API {
   LOCATION_SEARCH = 'jsonp/locationSearch'
 
 }
+
+export enum ROUTE_VIAJES {
+  RUTA_PAQUETES = 'https://nmviajes.paquetedinamico.com/ES/holidays/search'
+}

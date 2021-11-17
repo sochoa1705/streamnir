@@ -6,6 +6,7 @@ import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng
 import { Injectable } from '@angular/core';
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
+import { ROUTE_VIAJES } from '../../constant';
 
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
@@ -365,5 +366,10 @@ export class TabsComponent implements OnInit {
     let horaInicio = this.form3.controls['initHour'].value;
     let horaDestino = this.form3.controls['lastHour'].value;
     return {startDate, endDate, origen, destino, businessClass, idOrigen, idDestino, horaInicio, horaDestino};
+  }
+
+
+  public goToUrlPackages(): void {
+    window.location.href = ROUTE_VIAJES.RUTA_PAQUETES;
   }
 }
