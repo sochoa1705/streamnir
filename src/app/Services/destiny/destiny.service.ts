@@ -1,18 +1,27 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map, retry } from 'rxjs/operators';
+import { ListaTarifaRequest } from 'src/app/Models/Request/ListaTarifasRequest';
 import { ENDPOINT_API } from 'src/app/shared/constant';
 import { environment } from 'src/environments/environment';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DestinyService {
-
+  //private httpOptions: any;
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+
+     const httpOptions = { headers: new 
+      HttpHeaders({ 'Content-Type':'application/x-www-form-urlencoded','Access-Control-Allow-Origins':'*'})};
+   
+
+  }
 
   getDestiny(payload: any): Observable<any> {
     let url_api = `${environment.urlBase}${ENDPOINT_API.DESTINY}`;
@@ -21,4 +30,16 @@ export class DestinyService {
       map((observe: any) => observe['body'])
     )
   }
+
+  
+
+  ObtenerOfertaVuelos(payload: any): Observable<any> {
+    debugger;
+    //let url_api = `http://10.75.131.17:8097/api/flights/Lista_Tarifas/`;
+    let url_api = `http://localhost:21555/api/flights/Lista_Tarifas/`;
+    return this.http.post<any>(url_api , payload );
+  }
+
+
+ 
 }

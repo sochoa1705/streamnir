@@ -34,8 +34,10 @@
         <div class="clearfix"></div>
     </div>
     <div class="row">
-        <div *ngFor="let packb of packagesService.packages" class="col-12 col-md-3" [ngClass]="{'d-none': !packb.fly}">
-            <app-package *ngIf="packb.fly" [image]="packb.image" [rout]="packb.route" [fly]="packb.fly" [banner]="packb.banner" [span]="packb.span" [city]="packb.city" [price]="packb.price" [btn]="packb.btn"></app-package>
+      <!--  <div *ngFor="let packb of ListaTarifa" class="col-12 col-md-3" [ngClass]="{'d-none': !packb.fly}">-->
+        <div *ngFor="let packb of ListaTarifa" class="col-12 col-md-3" > 
+        <!--  <app-package *ngIf="packb.fly" [image]="packb.image" [rout]="packb.route" [fly]="packb.fly" [banner]="packb.banner" [span]="packb.span" [city]="packb.nomCiuDestino" [price]="packb.price" [btn]="packb.btn"></app-package>-->
+            <app-package *ngIf="packb.tipoDestino === 'I'"  [image]="packb.url"  [city]="packb.nomCiuDestino"    [span]= "packb.tarifaNeta" ></app-package>
         </div>
         <div class="clearfix"></div>
     </div>
