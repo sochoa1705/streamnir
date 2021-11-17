@@ -27,6 +27,6 @@ export function CloseSession(): void {
     sleep.then(function () {
       win.close();
       localStorage.clear();
-      window.location.replace(environment?.urlLogin);
+      window.location.replace(environment.urlLogin);
     });
   }

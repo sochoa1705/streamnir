@@ -1,10 +1,10 @@
-<div class="package">
+<div class="package" [ngClass]="{'card__internacional': fly}">
     <img src="{{ image }}" alt="">
     <div class="shadow"></div>
     <div class="d-flex align-items-start flex-column pl-md-3 pb-md-3">
         <div class="mb-auto d-flex w-100 align-items-start justify-content-between">
-            <h6>Saliendo de lima</h6>
-            <p class="py-2 px-2">{{ span }} <svg width="21" height="15" viewBox="0 0 21 15" fill="none"
+            <h6>{{label}}</h6>
+            <p class="py-2 px-2">{{ span }} <svg *ngIf="label" width="21" height="15" viewBox="0 0 21 15" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M20.5858 13.8564H0.414201C0.185479 13.8564 0 14.0419 0 14.2706C0 14.4994 0.185479 14.6848 0.414201 14.6848H20.5858C20.8145 14.6848 21 14.4994 21 14.2706C21 14.0419 20.8145 13.8564 20.5858 13.8564Z"
@@ -19,21 +19,22 @@
             </p>
         </div>
         <div class="show d-md-flex w-100 align-items-end justify-content-between">
-            <div>
-                <span class="hidden">¡Vamos! <svg width="16" height="13" viewBox="0 0 16 13" fill="none"
+            <div [ngClass]="{'w-100 text-center': fly}">
+                <span *ngIf="destiny" class="hidden">¡Vamos! <svg width="16" height="13" viewBox="0 0 16 13" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.22168 6.4825H14.5749M14.5749 6.4825L9.58248 0.741211M14.5749 6.4825L9.58248 12.2238"
                             stroke="white" />
                     </svg>
                 </span>
                 <h1>{{ city }}</h1>
-                <span class="hidden">{{ destiny }} - </span>
+                <button (click)="toDestiny(rout)" class="hidden mb-2" *ngIf="btn">{{ btn }}</button>
+                <span *ngIf="destiny" class="hidden">{{ destiny }} - </span>
                 <span class="d-inline"> {{ pack }}</span>
                 <span class="d-inline d-md-none d-inline"> desde</span>
             </div>
             <div>
-                <div class="d-md-block d-none">desde<mark>${{ price }}</mark></div>
-                <div class="d-md-none d-block"><mark>${{ price }}</mark></div>
+                <div *ngIf="price" class="d-md-block d-none">desde<mark>${{ price }}</mark></div>
+                <div *ngIf="price" class="d-md-none d-block"><mark>${{ price }}</mark></div>
             </div>
         </div>
     </div>
