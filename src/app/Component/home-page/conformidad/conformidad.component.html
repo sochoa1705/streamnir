@@ -81,12 +81,12 @@
             </div>
         </div>
 
-        <div class="rowSafety padBottom50">
-            <!-- <div class="columnSaf" *ngFor="let bn of listBank">
-                <div class="boxBank selected"><img src="bn.PaymentLocations.Imagen" alt=""></div>
-            </div> -->
+        <div class="rowSafety padBottom50" *ngIf="listBank">
+            <div class="columnSaf" *ngFor="let bn of bankSteps">
+                <div class="boxBank selected"><img src="{{bn.Imagen}}" alt="{{bn.Name}}"></div>
+            </div>
 
-            <div class="columnSaf">
+            <!-- <div class="columnSaf">
                 <div class="boxBank selected"><img src="./assets/conformidad/bcp.png" alt=""></div>
             </div>
             <div class="columnSaf">
@@ -97,16 +97,16 @@
             </div>
             <div class="columnSaf">
                 <div class="boxBank lessMargin"><img src="./assets/conformidad/scotiabank.png" alt=""></div>
-            </div>
+            </div> -->
         </div>
-        <div class="rowSafety padBottom10">
-            <!-- <div class="columnSaf colCenter colMobile" *ngFor="let step of listBank.PaymentLocations.PaymentSteps">
+        <div class="rowSafety padBottom10" *ngIf="listBank">
+            <div class="columnSaf colCenter colMobile" *ngFor="let step of bankSteps[0].PaymentSteps">
                 <div class="headPaso">
                     <div class="number">{{ step.Step }}</div>
                 </div>
                 <div class="textPaso">{{ step.Value }}</div>
-            </div> -->
-            <div class="columnSaf colCenter colMobile">
+            </div>
+            <!-- <div class="columnSaf colCenter colMobile">
                 <div class="headPaso">
                     <div class="number">2</div>
                 </div>
@@ -124,7 +124,7 @@
                 </div>
                 <div class="textPaso">Ingresa tu código de pago <strong>186990</strong>, verifica el monto, confirma el pago con tu <strong>clave token</strong> listo!
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="row text-center">
@@ -162,7 +162,7 @@
     <div class="row py-2">
         <div class="offset-4 col-4 viewMobile">
                 <div *ngIf="safe0Json.detalleCobertura" class="order-0">
-                        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]="" [txtDestino]="resultJson?.destinyString"
+                        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]="" [txtDestino]="resultJson?.destinyString.descripcion_destino"
                             [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
                     </div>
         </div>

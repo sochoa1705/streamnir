@@ -21,7 +21,7 @@
                 <img src="./assets/_peru.png" alt=""> PE
             </div>
             <div class="d-flex align-items-center">
-                <img src="./assets/origen.png" alt=""> {{ resultJson?.destinyString }}
+                <img src="./assets/origen.png" alt=""> {{ resultJson?.destinyString.descripcion_destino }}
             </div>
             <div class="d-flex align-items-center">
                 <img src="./assets/calendar.png" alt=""> {{resultJson.fromDate}} . {{resultJson.toDate}} ( {{ resultJson?.days }} días )
@@ -255,9 +255,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-6 offset-3 py-4 lessViewMob">
+                                                    <div class="col-6 offset-3 py-4 lessViewMob">1
                                                         <select class="selectBank" formControlName="bank" placeholder="Selecciona tu banco">
-                                                            <option value="bcp">bcp</option>
+                                                            <option *ngFor="let b of banks" value="{{b.value}}">{{b.name}}</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -827,11 +827,7 @@
                                         <div class="row">
                                             <div class="col-6 offset-3 py-4 lessViewMob">
                                                 <select class="selectBank" formControlName="bankPay">
-                                                    <option disabled selected>Seleccione</option>
-                                                    <option value="bcp">BCP</option>
-                                                    <option value="scotiabnak">Scotiabank</option>
-                                                    <option value="interbank">Interbank</option>
-                                                    <option value="bbva">BBVA</option>
+                                                    <option *ngFor="let b of banks" value="{{b.value}}">{{b.name}}</option>
                                                 </select>
                                                 <span class="valid" *ngIf="getMessage(MSG_BANK) != MSG_EMPTY">{{ getMessage(MSG_BANK) }}</span>
                                                 <!-- <select class="selectBank" formControlName="bankPay" placeholder="Selecciona tu banco">
@@ -1194,7 +1190,7 @@
             <!-- END DETALLE DE COBERTURA -->
             <div *ngIf="resultJson" class="order-0">
                 <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]=""
-                    [txtDestino]="resultJson?.destinyString" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
+                    [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
                     [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
             </div>
 

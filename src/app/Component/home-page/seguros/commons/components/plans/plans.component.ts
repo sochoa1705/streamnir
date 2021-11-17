@@ -57,11 +57,10 @@ export class PlansComponent implements OnInit {
     this.unidadNegocio = JSON.parse(lcadena);
     if (localStorage.getItem('safe0')) {
       localStorage.removeItem('safe0')
-      console.log('Existe');
-      this.route.navigateByUrl('/home/seguros');
+      this.listPlansAC()
+      // this.route.navigateByUrl('/home/seguros');
     } else {
       this.listPlansAC()
-      console.log('No Existe');
 
     }
   }

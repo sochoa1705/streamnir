@@ -66,7 +66,18 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     { name: 'option-2', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
     { name: 'option-1', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
   ] */
-
+  banks = [
+    { name: 'Banco de Crédito', value: 1005 },
+    { name: 'Interbank', value: 1011 },
+    { name: 'Scotiabank', value: 1006 },
+    { name: 'Western Union', value: 8320 },
+    { name: 'Banco Ripley', value: 8320 },
+    { name: 'Caja Arequipa', value: 8324 },
+    { name: 'Caja Huancayo', value: 8250 },
+    { name: 'Caja Tacna', value: 1024 },
+    { name: 'Caja Trujillo', value: 1025 }
+  ]
+  
   metodoPago: any = [
     { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
     { name: 'optionm-1', value: 'tarjeta', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },

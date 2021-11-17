@@ -17,9 +17,10 @@ import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interfac
 })
 export class ConformidadComponent implements OnInit {
   listBank: any
+  bankSteps: any
   listBooking: any
   reservation: any
-
+  agesCustomers: any
   //COBERTURA
   coverageList: any
   coverage: any
@@ -68,9 +69,29 @@ export class ConformidadComponent implements OnInit {
   ngOnInit(): void {
     let lcadena: any = localStorage.getItem('businessunit');
     this.unidadNegocio = JSON.parse(lcadena);
-
-    this.getGeneratePay()
+    this.edades()
     this.getSecureBooking()
+    this.getGeneratePay()
+  }
+
+  edades() {
+    let Ages = []
+    // Obtiene la fecha de hoy
+    let Today = new Date()
+    let day = String(Today.getDate()).padStart(2, '0') + String(Today.getMonth() + 1).padStart(2, '0') + String(Today.getFullYear())
+
+    // Obtiene la fecha de nacimiento
+    let fNac = this.shopString.customers
+    for (let e of this.shopString.customers) {
+      let customer = e.dayCustomer.padStart(2, '0') + e.monthCustomer.padStart(2, '0') + e.yearCustomer
+      console.log(e);
+      let Edad = Math.ceil((Number(day) - Number(customer)) / (1000 * 300)) + 1
+      Ages.push(Edad)
+    }
+    this.agesCustomers = Ages.join(';')
+    console.log(this.agesCustomers);
+    // return Edad
+
   }
 
   formattFecha() {
@@ -108,13 +129,13 @@ export class ConformidadComponent implements OnInit {
     const textSend = 'SE ESTA GENERANDO SU RESERVA!'
     this.loaderSubjectService.showText(textSend)
     let lregistro: RegistrarSeguroRQ = {
-      fec_salida: this.resultJson.fromDate, // FECHA DE PARTIDA
-      fec_retorno: this.resultJson.toDate,  // FECHA DE RETORNO
-      cant_paxes: this.shopString.customers.length,   // CANTIDAD DE PASAJEROS
-      destino: this.resultJson.destinyString.descripcion_destino,         // NOMBRE DEL DESTINO
-      edades: `${this.resultJson.Edades};`,           // EDADES CONCATENADAS CON PUNTO Y COMA
-      prod_id: this.safe0Json.idProducto,             // obtener desde plansAC.idProducto
-      prod_nom: this.safe0Json.producto,              // obtener desde plansAC.producto
+      fec_salida: this.resultJson.fromDate,                       // FECHA DE PARTIDA
+      fec_retorno: this.resultJson.toDate,                        // FECHA DE RETORNO
+      cant_paxes: this.shopString.customers.length,               // CANTIDAD DE PASAJEROS
+      destino: this.resultJson.destinyString.descripcion_destino, // NOMBRE DEL DESTINO
+      edades: `${this.agesCustomers};`,                           // EDADES CONCATENADAS CON PUNTO Y COMA
+      prod_id: this.safe0Json.idProducto,                         // obtener desde plansAC.idProducto
+      prod_nom: this.safe0Json.producto,                          // obtener desde plansAC.producto
       prod_familia: '',
       moneda_lista: 'USD',
       moneda_local: 'USD',
@@ -140,9 +161,7 @@ export class ConformidadComponent implements OnInit {
       comentario: '',
       webs_cid: 7,
       usuweb_id: 6996,
-
       destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'N' : 'I', // obtener desde destiny.EsDestinoNacional
-
       numeroruc: (this.shopString.formContact.recibo.length === 0) ? `BV-${this.shopString.customers[0].numDocCustomer}` : this.shopString.formContact.recibo[0].ruc,
       comprobantepago: (this.shopString.formContact.chkFac) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
       usobilletera: 'N',
@@ -199,7 +218,7 @@ export class ConformidadComponent implements OnInit {
       cobertura: [
         {
           unidad: this.coverage.Unidad,                                 // obtener desde coverageList.Unidad
-          atr_nom: this.coverage.Codigo + ' ' + this.coverage.Nombre,  // obtener desde coverageList.Codigo + ' ' + coverageList.Nombre
+          atr_nom: this.coverage.Codigo + ' ' + this.coverage.Nombre,   // obtener desde coverageList.Codigo + ' ' + coverageList.Nombre
           valor: this.coverage.Valor                                    // obtener desde coverageList.Valor
         }
       ],
@@ -271,6 +290,13 @@ export class ConformidadComponent implements OnInit {
       next: (response) => {
         console.log(response)
         this.listBank = response
+        this.bankSteps = this.listBank.PaymentLocations.filter((e: any) => {
+          let namco = this.shopString.formCard.bankPay
+          if (namco === e.ID) {
+            return e
+          }
+        })
+
         this.loaderSubjectService.closeLoader()
 
         let lactualizar: SafetyPayRQ = {
@@ -289,16 +315,16 @@ export class ConformidadComponent implements OnInit {
       error: error => {
         console.log(error)
         this.loaderSubjectService.closeLoader()
-        this.route.navigateByUrl('/home/seguros');
-
+        
         //>>>> EN CASO SALGA ERROR SE DEBE DE ELIMINAR LA SOLICITUD
-
+        
         let lanular: CambiarEstadoRQ = {
           res_seguro_id: this.reservation.Reserva,  // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
           estado: 7
         }
-
+        
         let payloadanular = new NMRequestBy<CambiarEstadoRQ>(lanular);
+        this.route.navigateByUrl('/home/seguros');
       }
     })
   }
