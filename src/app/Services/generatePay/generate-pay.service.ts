@@ -13,28 +13,6 @@ export class GeneratePayService {
   constructor(
     private http: HttpClient
   ) { }
-  // payload = {
-  //   "Aplicacion": "Intranet",
-  //   "CodigoSeguimiento": "[Web: midominio.com - Agente: demo - Id: 19082021101601]",
-  //   "CodigosEntorno": "DESA/NMO/NMO",
-  //   "Parametros": {
-  //     "PromoterName": "",
-  //     "CustomerName": "PEREZ ANA",
-  //     "CustomerDocumentNumber": "10078410452",
-  //     "IdClient": 12758,
-  //     "WebId": "3",
-  //     "Mail": "anaperez@gmail.com",
-  //     "DKClient": "61649",
-  //     "UserAgent": "Assist Card",
-  //     "IdUser": "87614",
-  //     "IpUser": "119.5.166.59",
-  //     "Amount": {
-  //       "FeeAmount": 0.9,
-  //       "RechargeAmount": 64,
-  //       "Currency": "USD"
-  //     }
-  //   }
-  // }
 
   generatePay(payload: any): Observable<any> {
     let url_api = `${environment.urlBase}${ENDPOINT_API.GENERATE_PAY}`;

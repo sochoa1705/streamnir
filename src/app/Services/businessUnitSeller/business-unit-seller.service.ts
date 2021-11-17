@@ -14,13 +14,6 @@ export class BusinessUnitSellerService {
     private http: HttpClient
   ) { }
 
-  payload = {
-    "Aplicacion": "Intranet",
-    "CodigoSeguimiento": "Test",
-    "CodigosEntorno": "DESA/NMO/NMO",
-    "Parametros": "W83"
-  }
-
   businessUnitSeller(payload: any): Observable<any> {
     let url_api = `${environment.urlBase}${ENDPOINT_API.BUSINESS_UNIT_SELLER}`;
     return this.http.post<any>(url_api, payload, { observe: 'response' }).pipe(

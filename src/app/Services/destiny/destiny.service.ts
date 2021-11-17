@@ -14,18 +14,17 @@ export class DestinyService {
     private http: HttpClient
   ) { }
 
-  payload = {
-    "Aplicacion": "Intranet",
-    "CodigoSeguimiento": "Test",
-    "CodigosEntorno": "DESA/NMO/NMO"
-  }
-
-
   getDestiny(payload: any): Observable<any> {
     let url_api = `${environment.urlBase}${ENDPOINT_API.DESTINY}`;
 
     return this.http.post<any>(url_api, payload, { observe: 'response' }).pipe(
       map((observe: any) => observe['body'])
     )
+  }
+
+  getDestinyPaqueteDinamico(search: string, typeSearch: string): Observable<any> {
+    let urlApiPaquete : string = environment.urlPaqueteDinamico;
+    let urlApi = `${urlApiPaquete}${ENDPOINT_API.LOCATION_SEARCH}?tripType=${typeSearch}&query=${search}&micrositeId=nm_viajes&languageId=ES&departure=&specialTicket=false&searchType=origin&_=1636554156303`;
+    return this.http.jsonp(urlApi, 'callback=test');
   }
 }

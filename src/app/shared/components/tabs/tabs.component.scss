@@ -48,7 +48,7 @@ article {
         &:hover>.mat-tab-label-content>svg>path {
             fill: $red_light;
         }
-        &-content {
+        &-content, &-content>a {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -201,4 +201,8 @@ article {
 .hideDate {
     max-width: 0 !important;
     width: 0 !important;
+}
+
+.valid {
+    font-size: 14px !important;
 }

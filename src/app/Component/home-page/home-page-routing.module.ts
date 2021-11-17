@@ -8,6 +8,7 @@ import { PaquetesComponent } from './paquetes/paquetes.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { ResultadosComponent } from './resultados/resultados.component';
 import { VuelosComponent } from './vuelos/vuelos.component';
+import { AerolineasComponent } from './aerolineas/aerolineas.component';
 
 const routes: Routes = [
   {
@@ -16,16 +17,22 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch:'full' },
       { path: '', component: HomeComponent },
-      { path: 'vuelos', component: VuelosComponent },
       { path: 'paquetes', component: PaquetesComponent },
       { path: 'comprar', component: ComprarComponent },
       { path: 'vuelos/resultados', component: ResultadosComponent },
       { path: 'conformidad', component: ConformidadComponent },
+      { path: 'aerolineas', component: AerolineasComponent },
       { path: 'perfil', component: PerfilComponent },
       {
         path: 'seguros',
         loadChildren: () => import('./seguros/seguros.module').then(
           m => m.SegurosModule
+        )
+      },
+      {
+        path: 'vuelos',
+        loadChildren: () => import('./vuelos/vuelos.module').then(
+          m => m.VuelosModule
         )
       },
     ]
