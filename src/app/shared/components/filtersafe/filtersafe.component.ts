@@ -419,3 +419,4 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   }
 
 }
+
