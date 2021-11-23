@@ -15,6 +15,7 @@ import { CardInfoModule } from 'src/app/shared/components/card-info/card-info.mo
 import { MailingModule } from 'src/app/shared/components/mailing/mailing.module';
 import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer.module';
 import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit.service';
+import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -33,7 +34,7 @@ import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit
     HttpClientModule,
   ],
   exports: [HomeComponent],
-  providers: [ AsidePresenterService, BusinessUnitService ]
+  providers: [ DestinyService, AsidePresenterService, BusinessUnitService ]
 
 })
 export class HomeModule { }

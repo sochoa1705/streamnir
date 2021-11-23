@@ -54,9 +54,7 @@ export class ToolbarComponent implements OnInit {
       active: ''
     },
   ]
-  ngOnInit() {
-    console.log('Tollbar');
-    
+  ngOnInit() {    
   }
   toHome() {
     this.route.navigateByUrl('/');

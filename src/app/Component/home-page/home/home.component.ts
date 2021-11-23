@@ -5,6 +5,8 @@ import { AsidePresenterService } from 'src/app/Services/presenter/aside/aside-pr
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { NMRequest } from 'src/app/Models/base/NMRequest';
 import { environment } from 'src/environments/environment';
+import { DestinyService } from 'src/app/Services/destiny/destiny.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -19,8 +21,24 @@ export class HomeComponent implements OnInit {
     public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
     public asidePresenterService: AsidePresenterService,
+    public destinyService: DestinyService,
   ) { }
 
   ngOnInit(): void {
+    this.listDestiny()
+  }
+
+  listDestiny() {
+    let payload = new NMRequest();
+
+    this.destinyService.getDestiny(payload).pipe(take(1)).subscribe({
+      next: (response) => {
+        this.destiny = response['Resultado']
+        localStorage.setItem('destiny', JSON.stringify(this.destiny));
+        console.log(this.destiny)
+      },
+      error: error => console.log(error),
+    }
+    )
   }
 }

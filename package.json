@@ -29,6 +29,7 @@
     "eslint": "^7.32.0",
     "moment": "^2.29.1",
     "ng5-slider": "^1.2.6",
+    "ngx-countdown": "^12.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

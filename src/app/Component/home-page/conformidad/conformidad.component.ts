@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SecureBookingService } from 'src/app/Services/secureBooking/secure-booking.service';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
@@ -17,6 +17,8 @@ import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interfac
 })
 export class ConformidadComponent implements OnInit {
   listBank: any
+  timeShow!: number
+  ShowComponentTime!: boolean
   bankSteps: any
   listBooking: any
   reservation: any
@@ -53,20 +55,15 @@ export class ConformidadComponent implements OnInit {
     //COBERTURA
     this.coverageList = localStorage.getItem('coverage')
     this.coverage = JSON.parse(this.coverageList)
-
-    console.log(this.resultJson);
-    console.log(this.safe0Json);
-
     //TIPO DE CAMBIO
     this.cambio = localStorage.getItem('tipoCambio')
     this.tipodeCambio = JSON.parse(this.cambio)
-
     //IP DEL CLIENTE
     this.ipCliente = localStorage.getItem('ipCliente')
-
   }
 
   ngOnInit(): void {
+    this.ShowComponentTime = false
     let lcadena: any = localStorage.getItem('businessunit');
     this.unidadNegocio = JSON.parse(lcadena);
     this.edades()
@@ -74,24 +71,38 @@ export class ConformidadComponent implements OnInit {
     this.getGeneratePay()
   }
 
+  timeShop(data: string) {
+    let dayPay = data
+    let day = dayPay.substr(0, 2)
+    let month = dayPay.substr(3, 2)
+    let year = dayPay.substr(6, 4)
+    let hour = dayPay.substr(11, 5)
+    let newDate = `${year}/${month}/${day} ${hour}`
+    let datePay = new Date(newDate)
+
+    var dayStart = new Date();
+    var difference = datePay.getTime() - dayStart.getTime()
+    var resultInMinutes = Math.round(difference / 60000)
+    var totalSeconds = resultInMinutes * 60
+    this.timeShow = totalSeconds
+    this.ShowComponentTime = true
+    // return totalSeconds
+  }
+
   edades() {
     let Ages = []
     // Obtiene la fecha de hoy
     let Today = new Date()
     let day = String(Today.getDate()).padStart(2, '0') + String(Today.getMonth() + 1).padStart(2, '0') + String(Today.getFullYear())
-
     // Obtiene la fecha de nacimiento
     let fNac = this.shopString.customers
     for (let e of this.shopString.customers) {
       let customer = e.dayCustomer.padStart(2, '0') + e.monthCustomer.padStart(2, '0') + e.yearCustomer
-      console.log(e);
       let Edad = Math.ceil((Number(day) - Number(customer)) / (1000 * 300)) + 1
       Ages.push(Edad)
     }
     this.agesCustomers = Ages.join(';')
-    console.log(this.agesCustomers);
     // return Edad
-
   }
 
   formattFecha() {
@@ -160,7 +171,7 @@ export class ConformidadComponent implements OnInit {
       direccion_fiscal: (this.shopString.formContact.recibo.length === 0) ? '' : this.shopString.formContact.recibo[0].direccion, // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
       comentario: '',
       webs_cid: 7,
-      usuweb_id: 6996,
+      usuweb_id: 339,
       destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'N' : 'I', // obtener desde destiny.EsDestinoNacional
       numeroruc: (this.shopString.formContact.recibo.length === 0) ? `BV-${this.shopString.customers[0].numDocCustomer}` : this.shopString.formContact.recibo[0].ruc,
       comprobantepago: (this.shopString.formContact.chkFac) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
@@ -232,9 +243,7 @@ export class ConformidadComponent implements OnInit {
 
     let payload = new NMRequestBy<RegistrarSeguroRQ>(lregistro);
 
-    console.log(payload.Parametros)
     this.secureBookingService.secureBooking(payload).subscribe((response: any) => {
-      console.log(response)
       this.reservation = response
     })
   }
@@ -243,28 +252,6 @@ export class ConformidadComponent implements OnInit {
     const textSend = 'SE ESTA PROCESANDO TU PAGO!'
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
-    // let payload = {
-    //   "Aplicacion": "Intranet",
-    //   "CodigoSeguimiento": "[Web: midominio.com - Agente: demo - Id: 19082021101601]",
-    //   "CodigosEntorno": "DESA/NMO/NMO",
-    //   "Parametros": {
-    //     "PromoterName": "",
-    //     "CustomerName": "PEREZ ANA",
-    //     "CustomerDocumentNumber": "10078410452",
-    //     "IdClient": 12758,
-    //     "WebId": "3",
-    //     "Mail": "anaperez@gmail.com",
-    //     "DKClient": "61649",
-    //     "UserAgent": "Assist Card",
-    //     "IdUser": "87614",
-    //     "IpUser": "119.5.166.59",
-    //     "Amount": {
-    //       "FeeAmount": 0.9,
-    //       "RechargeAmount": 64,
-    //       "Currency": "USD"
-    //     }
-    //   }
-    // }
 
     let lsafetypay: GenerarSafetyPayRQ = {
       PromoterName: this.shopString.customers[0].nameCustomer,                 //NOMBRE DEL PRIMER PASAJERO ADULTO
@@ -275,21 +262,19 @@ export class ConformidadComponent implements OnInit {
       Mail: this.shopString.formContact.mailContacto,   //MAIL DEL PASAJERO
       DKClient: environment.dkAgenciaAC,
       UserAgent: environment.identifierAC,
-      IdUser: '6996',
+      IdUser: '56190',
       IpUser: this.ipCliente,                           //IP DEL CLIENTE
       Amount: {
         FeeAmount: 0,
-        RechargeAmount: 100,                            //COSTO TOTAL DEL SEGURO; SOLO SI destiny.EsDestinoNacional = 'S' ENTONCES MULTIPLICAR POR 1.18 (IGV)
+        RechargeAmount: (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal, //COSTO TOTAL DEL SEGURO; SOLO SI destiny.EsDestinoNacional = 'S' ENTONCES MULTIPLICAR POR 1.18 (IGV)
         Currency: 'USD'
       }
     }
-
     let payload = new NMRequestBy<GenerarSafetyPayRQ>(lsafetypay);
-
     this.generatePayService.generatePay(payload).subscribe({
       next: (response) => {
-        console.log(response)
         this.listBank = response
+          this.timeShop(this.listBank['ExpirationDateTime'])
         this.bankSteps = this.listBank.PaymentLocations.filter((e: any) => {
           let namco = this.shopString.formCard.bankPay
           if (namco === e.ID) {
@@ -315,14 +300,14 @@ export class ConformidadComponent implements OnInit {
       error: error => {
         console.log(error)
         this.loaderSubjectService.closeLoader()
-        
+
         //>>>> EN CASO SALGA ERROR SE DEBE DE ELIMINAR LA SOLICITUD
-        
+
         let lanular: CambiarEstadoRQ = {
           res_seguro_id: this.reservation.Reserva,  // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
           estado: 7
         }
-        
+
         let payloadanular = new NMRequestBy<CambiarEstadoRQ>(lanular);
         this.route.navigateByUrl('/home/seguros');
       }

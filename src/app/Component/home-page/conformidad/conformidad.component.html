@@ -15,14 +15,15 @@
 
     <div class="row">
         <div class="col-12 subTitleConf" *ngIf="reservation">
-            Excelente elección.<br> Tu solicitud de compra es {{ reservation.Reserva }} ha sido recibida y fue pagada correctamente.
+            Excelente elección.
+            <br> Tu solicitud de compra es {{ reservation.Reserva }} ha sido recibida y fue pagada correctamente.
         </div>
     </div>
     <div class="padBancaInt">
     </div>
 
 </div>
-<div class="bancaInt" *ngIf="listBank">
+<div class="bancaInt">
     <div class="bodyBanca">
         <div class="cardBlue">
             <div class="descrip">
@@ -31,26 +32,29 @@
             <div class="descrip Bold">
                 Banca por Internet
             </div>
-            <div class="number">
-                    {{ listBank['TransactionIdentifier']}}
+            <div class="number" *ngIf="listBank">
+                {{ listBank['TransactionIdentifier']}}
             </div>
             <div class="circle leftPos"></div>
             <div class="circle rightPos"></div>
             <div class="sombraBlue int1"></div>
             <div class="sombraBlue int2"></div>
         </div>
-        <div class="cardRed">
+        <div class="cardRed" *ngIf="ShowComponentTime">
             <div class="descrip">
                 Te quedan
             </div>
             <div class="hora">
-                <div class="iconCard"><img src="./assets/conformidad/reloj.png" alt=""></div>
-                1h 59m 47s
+                <div class="iconCard">
+                    <img src="./assets/conformidad/reloj.png" alt="">
+                </div>
+                <countdown [config]="{leftTime: timeShow}"></countdown>
             </div>
             <div class="fecha">
-                    <!-- Solo tienes hasta las {{ listBank.ExpirationDateTime.substr(11,5) }} p.m. del viernes 10 septiembre -->
-                    Solo tienes hasta las {{ listBank.ExpirationDateTime.substr(11,5) }} p.m. del {{ listBank.ExpirationDateTime.substr(0,10) }}
-                </div>
+                <!-- Solo tienes hasta las {{ listBank.ExpirationDateTime.substr(11,5) }} p.m. del viernes 10 septiembre -->
+                Solo tienes hasta las {{ listBank.ExpirationDateTime.substr(11,5) }} p.m. del {{ listBank.ExpirationDateTime.substr(0,10)
+                }}
+            </div>
         </div>
     </div>
 </div>
@@ -61,7 +65,8 @@
                 <div class="card-body rowBody">
                     <div class="leftCard">IMPORTE A PAGAR</div>
                     <div class="rightCard">PEN
-                        <div class="boldFont">{{ safe0Json?.change * resultJson.passenger.length }}</div>
+                        <div class="boldFont">{{ (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal
+                            | number:'1.2-2'}}</div>
                     </div>
                 </div>
             </div>
@@ -77,13 +82,17 @@
         </div>
         <div class="rowSafety">
             <div class="columnSaf">
-                <div class="iconCard"><img src="./assets/conformidad/safetyPay.png" alt=""></div>
+                <div class="iconCard">
+                    <img src="./assets/conformidad/safetyPay.png" alt="">
+                </div>
             </div>
         </div>
 
         <div class="rowSafety padBottom50" *ngIf="listBank">
             <div class="columnSaf" *ngFor="let bn of bankSteps">
-                <div class="boxBank selected"><img src="{{bn.Imagen}}" alt="{{bn.Name}}"></div>
+                <div class="boxBank selected">
+                    <img src="{{bn.Imagen}}" alt="{{bn.Name}}">
+                </div>
             </div>
 
             <!-- <div class="columnSaf">
@@ -137,12 +146,12 @@
             <div class="card">
                 <div class="card-body">
                     <ng-container *ngFor="let safe of shopString.customers">
-                    <div class="titleAsegurado">
-                        ADT - {{ safe.nameCustomer }} {{ safe.lastNameCustomer }}
-                    </div>
-                    <div class="fechaAsegurado">
-                        {{ safe.dayCustomer }} / {{ safe.monthCustomer }} / {{ safe.yearCustomer }}
-                    </div>
+                        <div class="titleAsegurado">
+                            ADT - {{ safe.nameCustomer }} {{ safe.lastNameCustomer }}
+                        </div>
+                        <div class="fechaAsegurado">
+                            {{ safe.dayCustomer }} / {{ safe.monthCustomer }} / {{ safe.yearCustomer }}
+                        </div>
 
                     </ng-container>
                     <div class="descripAsegurado" *ngIf="reservation">
@@ -161,10 +170,11 @@
 
     <div class="row py-2">
         <div class="offset-4 col-4 viewMobile">
-                <div *ngIf="safe0Json.detalleCobertura" class="order-0">
-                        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]="" [txtDestino]="resultJson?.destinyString.descripcion_destino"
-                            [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
-                    </div>
+            <div *ngIf="safe0Json.detalleCobertura" class="order-0">
+                <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]=""
+                    [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
+                    [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
+            </div>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -187,25 +197,31 @@
                 </div>
                 <div class="rowCard">
                     <div class="columnCard boldCol">
-                        <div class="iconCard"><img src="./assets/conformidad/user.png" alt=""></div>
+                        <div class="iconCard">
+                            <img src="./assets/conformidad/user.png" alt="">
+                        </div>
                         Nombres y apellidos:
                     </div>
                     <div class="columnCard">
-                            {{ shopString.formContact.nameContacto }} {{ shopString.formContact.lastnameContacto }}
+                        {{ shopString.formContact.nameContacto }} {{ shopString.formContact.lastnameContacto }}
                     </div>
                 </div>
                 <div class="rowCard">
                     <div class="columnCard boldCol">
-                        <div class="iconCard"><img src="./assets/conformidad/mail.png" alt=""></div>
+                        <div class="iconCard">
+                            <img src="./assets/conformidad/mail.png" alt="">
+                        </div>
                         Email:
                     </div>
                     <div class="columnCard">
-                            {{ shopString.formContact.mailContacto }}
+                        {{ shopString.formContact.mailContacto }}
                     </div>
                 </div>
                 <div class="rowCard">
                     <div class="columnCard boldCol">
-                        <div class="iconCard"><img src="./assets/conformidad/phone.png" alt=""></div>
+                        <div class="iconCard">
+                            <img src="./assets/conformidad/phone.png" alt="">
+                        </div>
                         Teléfono(s):
                     </div>
                     <div class="columnCard">

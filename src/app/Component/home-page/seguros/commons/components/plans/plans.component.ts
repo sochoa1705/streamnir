@@ -4,7 +4,7 @@ import { PackagesService } from 'src/app/Services/mock/packages.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { PlansACService } from '../../../../../../Services/plansAC/plans-ac.service';
 import { LoaderSubjectService } from '../../../../../../shared/components/loader/service/loader-subject.service';
-import { map, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { CoverageService } from '../../../../../../Services/coverage/coverage.service';
 import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { CotizarSeguroRQ } from 'src/app/Models/seguros/cotizacionRQ.interface';
@@ -27,6 +27,7 @@ export class PlansComponent implements OnInit {
   coverageDisplay: boolean = false
   asistMedic: any
   unidadNegocio: any
+  dollar: any
   json = {
     detailPay: 'safe',
     filter: 'filtersafe',
@@ -49,6 +50,9 @@ export class PlansComponent implements OnInit {
   ) {
     this.result = localStorage.getItem('Datasafe')
     this.resultJson = JSON.parse(this.result)
+    this.dollar = localStorage.getItem('tipoCambio')
+
+
     // console.log(this.resultJson);
     // console.log(this.resultJson.ClienteCotizacion);
   }
@@ -99,12 +103,18 @@ export class PlansComponent implements OnInit {
 
     this.plansACService.plansAC(payload).pipe(take(1)).subscribe({
       next: (response) => {
-        this.plansAC = response.filter((price: any) => {
-          if (price.precioEmisionLocal != '0') {
-            // console.log(price);
-            return price
-          }
-        })
+        this.plansAC = response.map((e: any, index: number) => {
+          e.change = (e.precioEmisionLocal * this.dollar).toFixed(2)
+          e.precioBrutochange = (e.precioBrutoLocal * this.dollar).toFixed(2)
+          return e
+        }
+        )
+        //   this.plansAC = response.filter((price: any) => {
+        //     if (price.precioEmisionLocal != '0') {
+        //     // console.log(price);
+        //     return price
+        //   }
+        // })
         let maxi = this.bestPlan()
         let clase = { clase: 'best' }
         this.plans = { ...this.plansAC[maxi], ...clase }
