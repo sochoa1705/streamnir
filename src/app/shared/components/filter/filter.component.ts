@@ -258,9 +258,6 @@ export class FilterComponent implements OnInit {
 
     var diff = Math.abs(date1.getTime() - date2.getTime());
     var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-    console.log(FeIni);
-    console.log(FeFin);
-    console.log(diffDays);
     this.route.navigateByUrl('/home/vuelos/resultados');
 
   }

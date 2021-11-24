@@ -21,7 +21,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   unidadNegocio: any
   businessunit: any
   coverageList: any
+  coverageL: any
   asistMedic: any
+  pop: any
 
   MSG_NAME_CUSTOMER: string = 'nameCustomer'
   MSG_LAST_NAME_CUSTOMER: string = 'lastNameCustomer'
@@ -77,7 +79,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     { name: 'Caja Tacna', value: 1024 },
     { name: 'Caja Trujillo', value: 1025 }
   ]
-  
+
   metodoPago: any = [
     { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
     { name: 'optionm-1', value: 'tarjeta', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
@@ -124,6 +126,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.pop = this.safe0Json
     // this.getSecureBooking()
     console.log(this.current);
     this.loadShop();
@@ -444,6 +447,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       // console.log(this.formShop);
       console.log(this.formShop.value);
       this.formShop.addControl('tipoRecibo', new FormControl('BV'));
+      this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson.passenger.length));
       let dataShop = this.formShop.value
       localStorage.setItem('shop', JSON.stringify(dataShop));
 
@@ -477,6 +481,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     this.coverageService.getCoverage(payload).pipe(take(5)).subscribe({
       next: (response) => {
+        this.coverageL = response
         this.coverageList = response['Resultado'].find((e: any) => {
           if (e.Codigo === 'C.4.1.10.1') {
             return e
@@ -490,4 +495,5 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       // data => console.log(data['Resultado']),
     )
   }
+  
 }

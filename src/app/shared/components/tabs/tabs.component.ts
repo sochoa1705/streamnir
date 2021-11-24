@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { Router } from '@angular/router';
@@ -65,6 +65,7 @@ export interface State {
   ]
 })
 export class TabsComponent implements OnInit {
+  @Input() options: any
   form!: FormGroup;
   form2!: FormGroup;
   form3!: FormGroup;
