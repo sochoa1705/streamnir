@@ -21,7 +21,7 @@ export class SegurosComponent implements OnInit {
     public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
     public destinyService: DestinyService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     //localStorage.clear()
@@ -43,7 +43,6 @@ export class SegurosComponent implements OnInit {
       next: (response) => {
         this.destiny = response['Resultado']
         localStorage.setItem('destiny', JSON.stringify(this.destiny));
-        console.log(this.destiny)
       },
       error: error => console.log(error),
     }

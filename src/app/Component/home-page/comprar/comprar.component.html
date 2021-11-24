@@ -1105,12 +1105,12 @@
                                     </span>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <span class="price_old">PEN {{ safe0Json?.change }}</span>
-                                    <span class="price_new">PEN {{ safe0Json?.DsctoPromcional === null ? '0' : safe0Json?.DsctoPromcional }}</span>
+                                    <span class="price_old" *ngIf="safe0Json?.DsctoPromcional !== null">PEN {{ safe0Json?.change }}</span>
+                                    <span class="price_new">PEN {{ safe0Json?.DsctoPromcional === null ? safe0Json?.change : '0'}}</span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="row">
+                            <div class="row" *ngIf="safe0Json?.DsctoPromcional !== null">
                                 <div class="col-7">
                                     <span class="textDesc">Descuento
                                     </span>
@@ -1128,7 +1128,7 @@
                         </div>
                         <div class="col-5 text-end">
                             S/.
-                            <span class="price_end_number">{{ safe0Json?.change * resultJson.passenger.length }}</span>
+                            <span class="price_end_number">{{ safe0Json?.change * resultJson.passenger.length | number:'1.2-2'}}</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -1191,7 +1191,7 @@
             <div *ngIf="resultJson" class="order-0">
                 <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]=""
                     [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
-                    [txtPasajeros]="resultJson?.ClienteCotizacion.length"></app-coverage>
+                    [txtPasajeros]="resultJson?.ClienteCotizacion?.length +1" [plan]="safe0Json"></app-coverage>
             </div>
 
             <!-- DETALLE DE VIAJE -->
@@ -2269,6 +2269,70 @@
                             fill="#DF0C30" />
                     </svg> NUEVO MUNDO VIAJES no se hará responsable de los problemas que se pudieran suscitar en el embarque
                     debido a documentación
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Coverage -->
+<div class="modal fade" id="ModalCoverageI" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content {{ pop?.clase }}">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">{{pop?.producto}} - S/. {{pop?.change}}</h2>
+                <h5 class="modal-title" id="exampleModalLabel">Asistencia médica: {{ asistMedic }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" *ngIf="!coverageL">
+                <div class="row">
+                    <p class="text">!Cargando Cobertura¡</p>
+                    <mat-spinner color="warn"></mat-spinner>
+                </div>
+            </div>
+            <div class="modal-body" *ngIf="coverageL">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex py-3">
+                            <img src="./assets/seguros/covid.png" alt="">
+                            <div class="px-2">
+                                <span class="covid">COBERTURA</span>
+                                <span class="covid">COVID</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row scrollBody">
+                    <div class="col-10 offset-1">
+                        <table class="table-bordered w-100">
+                            <tbody *ngIf="coverageL">
+                                <tr class="row" *ngFor="let text of coverageL['Resultado']">
+                                    <td class="col d-flex align-items-center">
+                                        <strong>{{ text?.Valor }}</strong>
+                                    </td>
+                                    <td class="col">{{ text?.NombreVisible}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row py-3 footerPopup">
+                        <div class="col-3 borderRight">
+                            <p>Total</p>
+                            <span>PEN
+                                <strong>{{pop.change}}</strong>
+                            </span>
+                            <!-- <button (click)="shop(pop.idProducto)">Comprar</!-->
+                        </div>
+                        <!-- <div class="col-9 alignFooterPopup">
+                            <p class="otroPlan">otros planes:</p>
+                            <div class="row planBox">
+                                <div class="col-3" *ngFor="let p of plansAC; let index = index">
+                                    <button (click)="data(p)" *ngIf="index < 5" class="planes {{ p?.clase }}">{{ p?.nombreProducto.substr(0, 9) }}</button>
+                                </div>
+                            </div> 
+                        </div>-->
+                    </div>
                 </div>
             </div>
         </div>

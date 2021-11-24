@@ -12,7 +12,6 @@ import { MailingModule } from 'src/app/shared/components/mailing/mailing.module'
     CardModule,
     TitleModule,
     MailingModule,
-    
   ],
   exports: [ SlideComponent ]
 

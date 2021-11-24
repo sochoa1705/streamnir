@@ -43,7 +43,6 @@ export class HomePageComponent implements OnInit {
       next: (response) => {
         localStorage.setItem('tipoCambio', response)
         this.dollar = response
-        console.log(this.dollar);
       }
     })
   }
@@ -57,7 +56,6 @@ export class HomePageComponent implements OnInit {
           let linfo = data['Resultado'].filter((und: any) => und.id_unidad_negocio == environment.undidadNegocioAC);
           localStorage.setItem('businessunit', (linfo.length > 0 ? JSON.stringify(linfo[0]) : ''));
           this.businessUnit = linfo
-          console.log(linfo)
         },
         err => console.log(err)
       )
