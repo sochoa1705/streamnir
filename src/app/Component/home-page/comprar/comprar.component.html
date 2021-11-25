@@ -97,11 +97,13 @@
                                     <div class="row rowMobileCard">
                                         <div class="col-6 viewMobileWidth">
                                             <label for="names">Nombres</label>
-                                            <input class="form-control" placeholder="Ingresa tu nombre" type="text" name="names">
+                                            <input class="form-control" placeholder="Ingresa tu nombre" formControlName="nameContacto" type="text" name="names">
+                                            <span class="valid" *ngIf="getMessage(MSG_NAME_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_NAME_CONTACT) }}</span>
                                         </div>
                                         <div class="col-6 viewMobileWidth">
                                             <label for="lastname">Apellidos</label>
-                                            <input class="form-control" placeholder="Ingresa tu apellido" type="text" name="lastname">
+                                            <input class="form-control" placeholder="Ingresa tu apellido" type="text" name="lastnameContacto">
+                                            <span class="valid" *ngIf="getMessage(MSG_LASTNAME_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_LASTNAME_CONTACT) }}</span>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
