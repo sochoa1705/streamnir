@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { PackagesService } from 'src/app/Services/mock/packages.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { Router } from '@angular/router';
+
 import { ListaTarifaRequest } from 'src/app/Models/Request/ListaTarifasRequest';
 import { SignatureModel } from 'src/app/Models/Request/SignatureModel';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ListaTarifaResponse } from 'src/app/Models/Response/ListaTarifaResponse';
+
+import { interval } from 'rxjs';
+
 
 @Component({
   selector: 'app-flight',
@@ -25,20 +29,30 @@ export class FlightComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+ 
     this.OfertaVuelos();
+
+    const contador = interval(4000);
+    contador.subscribe((n)=> {
+      this.counter < 3 ? this.counter++ : this.counter = 1;
+      this.counterMovil < 8 ? this.counterMovil++ : this.counterMovil = 1;
+    })
+
   }
 
   toLine(e: any){
     this.route.navigateByUrl('/home/aerolineas')
   }
-
+ /* codigo para los sliders de las compañias */
   counter: number = 1;
+  counterMovil: number = 1;
   nextBtn() {
     this.counter < 3 ? this.counter++ : this.counter = 1;
   }
   afterBtn() {
     this.counter > 1 ? this.counter-- : this.counter = 3;
   }
+
 
 
   OfertaVuelos(){
@@ -70,5 +84,8 @@ export class FlightComponent implements OnInit {
       );
   
     }
+
+
+  /* end code */
 
 }

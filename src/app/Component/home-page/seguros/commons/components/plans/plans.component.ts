@@ -55,10 +55,15 @@ export class PlansComponent implements OnInit {
   ngOnInit(): void {
     let lcadena: any = localStorage.getItem('businessunit');
     this.unidadNegocio = JSON.parse(lcadena);
+    if (localStorage.getItem('safe0')) {
+      localStorage.removeItem('safe0')
+      this.listPlansAC()
+      // this.route.navigateByUrl('/home/seguros');
+    } else {
+      this.listPlansAC()
 
-    this.listPlansAC()
+    }
   }
-
   bestPlan() {
     let arrai = this.plansAC
     arrai.sort((a: any, b: any) => a['change'] - b['change'])
@@ -72,7 +77,7 @@ export class PlansComponent implements OnInit {
     const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!'
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
-    
+
     let lcotizacion: CotizarSeguroRQ = {
       UnidadNegocio: environment.undidadNegocioAC,
       Dk: environment.dkAgenciaAC,
@@ -229,7 +234,7 @@ export class PlansComponent implements OnInit {
       Edad: this.resultJson.ClienteCotizacion.shift().Edad,     // COLOCAR LA PRIMERA EDAD DE BUSQUEDA
       TipoModalidad: data.codModalidad
     }
-    
+
     let payload = new NMRequestBy<CoberturaSeguroRQ>(lcobertura);
 
     this.coverageService.getCoverage(payload).pipe(take(5)).subscribe({

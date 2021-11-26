@@ -20,6 +20,9 @@ import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer
 import { ConformidadModule } from './conformidad/conformidad.module';
 import { LoaderModule } from '../../shared/components/loader/loader.module';
 import { VuelosModule } from './vuelos/vuelos.module';
+import { AerolineasModule } from './aerolineas/aerolineas.module';
+import { DollarChangeService } from '../../Services/dollarChange/dollar-change.service';
+import { IpClienteService } from '../../Services/ipCliente/ip-cliente.service';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -27,8 +30,10 @@ import { VuelosModule } from './vuelos/vuelos.module';
     CommonModule,
     HomePageRoutingModule,
     HomeModule,
+    HttpClientModule,
     SegurosModule,
     VuelosModule,
+    AerolineasModule,
     PerfilModule,
     ToolbarModule,
     PreFooterModule,
@@ -40,6 +45,6 @@ import { VuelosModule } from './vuelos/vuelos.module';
     LoaderModule,
   ],
   exports: [HomePageComponent],
-  providers: [OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
+  providers: [IpClienteService, DollarChangeService, OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
 })
 export class HomePageModule { }

@@ -4469,6 +4469,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             color: #34495E;
             width: 100px;
         }
+        .btnCircle {
+            display: none;
+        }
     }
 }
 
@@ -4575,13 +4578,22 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         cursor: pointer;
     }
     .contentImg {
-        width: 90%;
-        display: none;
-        transition: all 0.3s;
+        transition: opacity 1s ease-out;
+        opacity: 0;
+        width: 0;
+        overflow: hidden;
         &.active {
+            width: 90%;
             display: flex;
+            opacity: 1;
             align-items: center;
             justify-content: space-between;
+        }
+        &.onlyMovil {
+            display: none;
+        }
+        a {
+            cursor: pointer;
         }
     }
 }
@@ -4621,6 +4633,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
             .subMenu {
                 margin: 0 0 0 20px;
+                font-size: 14px;
             }
             .col-4 {
                 margin-bottom: 20px;
@@ -4643,18 +4656,44 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             display: none;
         }
         .contentImg {
+            display: none;
             overflow: hidden;
             gap: 15px;
             width: 100%;
+            &.active {
+                width: 100%;
+            }
+        }
+    }
+    .boxVuelos {
+        padding: 10px 15px 10px 0 !important;
+        .lugar {
+            padding-left: 20px !important;
+        }
+        .desde {
+            width: 100px !important;
+        }
+        .btnCircle {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            min-width: 30px;
+            height: 30px;
+            min-height: 30px;
+            border-radius: 15px;
+            background: #DF0C30;
         }
     }
 }
 
-.boxDestino {
+.boxDestino,
+.boxAero {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    .rowDestino {
+    .rowDestino,
+    .rowAero {
         display: flex;
         flex: 1 1 100%;
         &.center {
@@ -4671,6 +4710,27 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             &:nth-child(4),
             &:nth-child(5) {
                 width: 13%;
+            }
+            &:first-child {
+                padding-left: 60px;
+            }
+            &:last-child {
+                padding-right: 60px;
+            }
+        }
+        .colAero {
+            display: flex;
+            gap: 15px;
+            &:nth-child(2),
+            &:nth-child(3) {
+                width: 25%;
+            }
+            &:nth-child(1),
+            &:nth-child(4) {
+                width: 20%;
+            }
+            &:nth-child(5) {
+                width: 10%;
             }
             &:first-child {
                 padding-left: 60px;
@@ -4785,6 +4845,291 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+@media (max-width: 640px) {
+    .boxDestino {
+        .titulo {
+            font-size: 14px;
+            line-height: 27px;
+        }
+        .subtitulo {
+            font-size: 12px;
+            line-height: 18px;
+            text-align: center;
+        }
+        .footerTable {
+            margin: 30px 0;
+            flex-direction: column-reverse;
+            .text {
+                margin: 20px 0 0 0;
+            }
+            .masOfertas {
+                display: flex;
+                justify-content: flex-end;
+                margin-right: 0;
+                .plus {
+                    background: #df0c30;
+                    color: #ffffff !important;
+                }
+            }
+        }
+        .boxPackage {
+            .package {
+                display: none;
+            }
+            .packageMov {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                background: #FFFFFF;
+                border: 1px solid #E4E5E7;
+                box-sizing: border-box;
+                border-radius: 10px 0px;
+                padding: 10px 20px;
+                gap: 10px;
+                .contentBox {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    .icono {
+                        position: relative;
+                        .eclipse {
+                            position: absolute;
+                            right: -12px;
+                            bottom: -5px;
+                        }
+                    }
+                    .texto {
+                        font-family: Montserrat;
+                        font-size: 10px;
+                        line-height: 12px;
+                        text-align: center;
+                        color: #4B4B4B;
+                        margin-top: 10px;
+                    }
+                }
+            }
+        }
+    }
+    .verMov {
+        flex-wrap: wrap;
+        .ida,
+        .vuelta {
+            font-size: 14px !important;
+            line-height: 21px !important;
+        }
+        .descrip {
+            font-size: 12px;
+            line-height: 15px;
+            width: 100%;
+            margin: 5px 0 20px 0;
+        }
+    }
+}
+
+.boxAero {
+    .logoAero {
+        justify-content: center;
+        margin: 70px 0 40px 0;
+        @media (max-width: 640px) {
+            margin: 20px 0;
+        }
+    }
+    .textAbout {
+        width: 800px;
+        font-family: Montserrat;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        letter-spacing: 0.15px;
+        color: #4B4B4B;
+        text-align: center;
+        @media (max-width: 640px) {
+            font-size: 12px;
+            line-height: 18px;
+            width: 100%;
+            padding: 0 20px;
+        }
+    }
+    .boxAbout {
+        display: flex;
+        width: 100%;
+        background: #B50A27 url('./assets/aerolineas/lineas.png') no-repeat top left;
+        padding: 25px 0;
+        margin: 70px 0 0 0;
+        .descrip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10%;
+            p {
+                text-align: center;
+                align-items: center;
+                font-family: Montserrat;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 24px;
+                letter-spacing: 0.5px;
+                color: #FFFFFF;
+            }
+        }
+        .sliderAero {
+            margin-right: 5%;
+        }
+    }
+    .tabSalidas {
+        width: 100%;
+        padding: 0 10%;
+        background: #ffffff;
+        padding-top: 45px;
+        .contentTab {
+            .footerTable {
+                justify-content: flex-end;
+            }
+        }
+        .opcionTab {
+            margin: 48px 0;
+        }
+        .tabName {
+            display: flex;
+            align-items: center;
+            background: #F7F7F7;
+            border: 1px solid #E4E5E7;
+            box-sizing: border-box;
+            border-radius: 15px;
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            height: 44px;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #4B4B4B;
+            &:hover,
+            &.active {
+                background: #DF0C30;
+                border: 1px solid #DF0C30;
+                color: #ffffff;
+            }
+            &:first-child {
+                margin-right: 30px;
+            }
+        }
+    }
+}
+
+.contentTabMobile {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .verDesktop {
+        display: none !important;
+    }
+    .boxAero {
+        .boxAbout {
+            margin: 30px 0 0 0;
+            flex-direction: column;
+            padding: 85px 30px 120px 30px;
+            background: #B50A27 url('./assets/aerolineas/lineas-movil.png') no-repeat top left;
+            .descrip p {
+                font-size: 12px;
+                line-height: 18px;
+            }
+            .sliderAero {
+                margin-right: 0;
+                img {
+                    height: auto;
+                    width: 100%;
+                }
+            }
+        }
+        .tabSalidas {
+            padding: 25px 15px 0 15px;
+            background: transparent;
+            .descripTab {
+                text-align: center;
+            }
+            .opcionTab {
+                margin: 25px 0;
+                justify-content: center;
+                .tabName {
+                    font-size: 12px;
+                    &:first-child {
+                        margin-right: 20px;
+                    }
+                }
+            }
+        }
+        .footerTable {
+            margin: 25px 0;
+            .masOfertas {
+                margin-right: 0;
+                background: #df0c30;
+            }
+            button.plus {
+                color: #ffffff !important;
+            }
+        }
+        .ida,
+        .vuelta {
+            font-size: 14px !important;
+            line-height: 21px !important;
+        }
+    }
+    .contentTabMobile {
+        display: block;
+        background: #FFFFFF;
+        box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
+        padding: 25px 24px;
+        .headerRow {
+            margin-bottom: 15px;
+        }
+        .tableDestino {
+            flex-wrap: wrap;
+            height: auto;
+            padding-bottom: 15px;
+            &:hover {
+                filter: none;
+            }
+            .buscar {
+                padding: 0 40px;
+            }
+            .city {
+                width: 100%;
+                font-family: Montserrat;
+                font-size: 14px;
+                color: #4B4B4B;
+                margin-bottom: 5px;
+                margin-top: 10px;
+            }
+            .rowTab {
+                display: flex;
+                width: 100%;
+                margin-bottom: 5px;
+                svg {
+                    margin-right: 10px;
+                }
+                .cLeft,
+                .cRight {
+                    display: flex;
+                    align-items: center;
+                }
+                .cLeft {
+                    flex: 1 1 60%;
+                }
+                .cRight {
+                    flex: 1 1 40%;
+                    justify-content: flex-end;
+                }
+            }
+        }
+    }
+}
+
 .boxPackage {
     display: flex;
     justify-content: space-evenly;
@@ -4809,7 +5154,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 bottom: -5px;
             }
         }
-        .texto {}
+    }
+    .contentBox {
+        display: none;
     }
 }
 
@@ -4841,6 +5188,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .imageHead {
             width: 100%;
             height: 215px;
+            img {
+                width: 100%;
+                height: 215px;
+            }
         }
         .cardTitulo {
             font-family: Open Sans;
@@ -4890,6 +5241,70 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+@media (max-width: 640px) {
+    .cardDestino {
+        flex-direction: column;
+        gap: 13px;
+        .boxCards {
+            display: flex;
+            width: 100%;
+            max-width: 100%;
+            .imageHead {
+                display: flex;
+                justify-content: center;
+                width: 100px;
+                min-width: 100px;
+                overflow: hidden;
+                height: 135px;
+                border-radius: 10px 0 0 10px;
+                img {
+                    width: fit-content;
+                    height: 100%;
+                }
+            }
+            .contCardDest {
+                .cardTitulo {
+                    padding: 10px;
+                    font-size: 12px;
+                    line-height: 20px;
+                }
+                .cardDuracion,
+                .cardOpinion,
+                .cardStar {
+                    padding: 0 10px 5px 10px;
+                    font-size: 10px;
+                    line-height: 15px;
+                }
+            }
+        }
+    }
+    .ofrecido {
+        margin-bottom: 35px;
+    }
+    .ofertas {
+        .col-12 {
+            padding: 0;
+            &.padLateral {
+                padding: 0 15px;
+            }
+        }
+        .sliderOfertas {
+            .contentImg {
+                &.active {
+                    display: none !important;
+                }
+                &.onlyMovil {
+                    width: 100%;
+                    display: flex;
+                    opacity: 1;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+}
+
 .cardHotel {
     display: flex;
     justify-content: space-evenly;
@@ -4906,6 +5321,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             height: auto;
             img {
                 width: 100%;
+                height: 264px;
             }
             .precio {
                 position: absolute;
@@ -5017,6 +5433,34 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+@media (max-width: 640px) {
+    .cardHotel {
+        flex-direction: column;
+        gap: 13px;
+        .imageHead {
+            img {
+                height: 200px !important;
+            }
+        }
+        .cardTitulo {
+            font-size: 14px!important;
+            padding: 10px 15px!important;
+        }
+        .cardStar,
+        .cardOpinion {
+            padding: 0 15px 10px 15px!important;
+        }
+        .precio {
+            .desde {
+                font-size: 12px!important;
+            }
+            .tarifa {
+                font-size: 24px!important;
+            }
+        }
+    }
+}
+
 .companyCar {
     display: flex;
     flex-wrap: wrap;
@@ -5052,9 +5496,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         display: flex;
         .imgCar {
             display: flex;
+            align-items: end;
             width: 50%;
             img {
                 width: 100%;
+                height: fit-content;
             }
         }
         .logosCompany {
@@ -5090,12 +5536,40 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+@media (max-width: 640px) {
+    .companyCar {
+        .carTitulo {
+            font-size: 14px;
+            line-height: 21px;
+        }
+        .carSubtitulo {
+            font-size: 12px;
+            line-height: 18px;
+        }
+        .contentCompany {
+            flex-direction: column-reverse;
+        }
+        .imgCar,
+        .logosCompany {
+            width: 100% !important;
+        }
+        .logosCompany {
+            .imgLogos {
+                gap: 0;
+                img {
+                    width: 40%;
+                }
+            }
+        }
+    }
+}
+
 .tabDestino {
     display: flex;
     width: 100%;
     padding: 50px 0 10px 0;
     .tabImgDest {
-        width: 760px;
+        flex: 1 1 60%;
         position: relative;
         .mascara {
             position: absolute;
@@ -5123,68 +5597,201 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
             }
         }
-    }
-    .tabContentDest {
-        flex: 1 1 auto;
-        padding: 0 45px;
-        .titleTabDest {
-            display: flex;
+        img {
             width: 100%;
-            padding: 40px 0 10px 0;
-            gap: 15px;
-            font-family: Montserrat;
-            font-size: 12px;
-            line-height: 18px;
-            letter-spacing: 0.1px;
-            color: #4B4B4B;
-            border-bottom: 1px solid #E4E5E7;
         }
-        .nameCity {
-            font-family: Open Sans;
-            font-weight: bold;
-            font-size: 32px;
-            line-height: 48px;
-            color: #4B4B4B;
-            margin: 30px 0 30px 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .movDestino {
+        flex-direction: column-reverse;
+        .tabContentDest {
+            .opcionTab {
+                margin-bottom: 25px;
+            }
+            .contOpcion {
+                margin-left: 0;
+                font-size: 12px;
+                line-height: 17px;
+            }
         }
-        .opcionTab {
+    }
+}
+
+.tabContentDest {
+    flex: 1 1 40%;
+    padding: 0 45px;
+    .titleTabDest {
+        display: flex;
+        width: 100%;
+        padding: 40px 0 10px 0;
+        gap: 15px;
+        font-family: Montserrat;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
+        border-bottom: 1px solid #E4E5E7;
+    }
+    .nameCity {
+        font-family: Open Sans;
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 48px;
+        color: #4B4B4B;
+        margin: 30px 0 30px 20px;
+    }
+    .opcionTab {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 35px;
+        margin-left: 20px;
+        .tabName {
             display: flex;
-            gap: 30px;
-            margin-bottom: 35px;
-            margin-left: 20px;
-            .tabName {
-                display: flex;
-                align-items: center;
-                background: #F7F7F7;
-                border: 1px solid #E4E5E7;
-                box-sizing: border-box;
-                border-radius: 5px;
-                font-family: Montserrat;
-                font-weight: 500;
-                font-size: 14px;
-                line-height: 21px;
-                letter-spacing: 0.1px;
-                height: 44px;
-                padding: 0 20px;
-                cursor: pointer;
-                transition: all 0.3s;
-                color: #4B4B4B;
-                &:hover,
-                &.active {
-                    background: #DF0C30;
-                    border: 1px solid #DF0C30;
-                    color: #ffffff;
+            align-items: center;
+            background: #F7F7F7;
+            border: 1px solid #E4E5E7;
+            box-sizing: border-box;
+            border-radius: 5px;
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            height: 44px;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #4B4B4B;
+            &:hover,
+            &.active {
+                background: #DF0C30;
+                border: 1px solid #DF0C30;
+                color: #ffffff;
+            }
+        }
+    }
+    .tabColumna {
+        display: flex;
+        width: 100%;
+        .contenidoTab {
+            width: 40%;
+            padding-top: 30px;
+        }
+        .imagenTab {
+            display: flex;
+            justify-content: flex-end;
+            width: 60%;
+            .galeria {
+                width: 660px;
+                overflow: hidden;
+                img {
+                    width: 100%;
                 }
             }
         }
-        .contOpcion {
-            font-family: Montserrat;
-            font-size: 16px;
-            line-height: 24px;
-            text-align: justify;
-            letter-spacing: 0.15px;
-            margin-left: 20px;
+    }
+    .contOpcion {
+        font-family: Montserrat;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: justify;
+        letter-spacing: 0.15px;
+        margin-left: 20px;
+        color: #4B4B4B;
+    }
+}
+
+@media (max-width: 640px) {
+    .tabContentDest {
+        margin: 0;
+        padding: 0 15px;
+        .titleTabDest {
+            padding: 0;
+        }
+        .nameCity {
+            margin-left: 0;
+        }
+        .opcionTab {
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-left: 0;
+            .tabName {
+                font-size: 12px;
+                line-height: 18px;
+                height: 30px;
+            }
+        }
+        .tabColumna {
+            flex-wrap: wrap;
+            .contenidoTab {
+                width: 100%;
+                padding-top: 10px;
+                .contOpcion {
+                    font-size: 12px;
+                    line-height: 17px;
+                    margin-left: 0;
+                }
+            }
+            .imagenTab {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.portadaAero {
+    width: 100%;
+    position: relative;
+    img {
+        width: 100%;
+    }
+    .textoPortada {
+        position: absolute;
+        right: 15%;
+        top: calc(50% - 50px);
+        .aeroTitle {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 38px;
+            line-height: 72px;
+            text-align: center;
+            letter-spacing: -0.5px;
+            color: #DF0C30;
+        }
+        .aeroDescrip {
+            font-family: Open Sans;
+            font-size: 18px;
+            line-height: 27px;
+            text-align: center;
+            letter-spacing: 0.18px;
             color: #4B4B4B;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .portadaAero {
+        height: 163px;
+        img {
+            position: absolute;
+            left: -130px;
+            width: auto;
+            height: 163px;
+        }
+        .textoPortada {
+            top: 55px;
+            right: 10%;
+            .aeroTitle {
+                font-size: 18px;
+                line-height: 27px;
+                text-align: left;
+            }
+            .aeroDescrip {
+                font-size: 10px;
+                line-height: 15px;
+            }
         }
     }
 }

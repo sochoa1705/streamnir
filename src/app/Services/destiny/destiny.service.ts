@@ -31,7 +31,7 @@ export class DestinyService {
     )
   }
 
-  
+
 
   ObtenerOfertaVuelos(payload: any): Observable<any> {
     debugger;
@@ -42,4 +42,11 @@ export class DestinyService {
 
 
  
+
+  getDestinyPaqueteDinamico(search: string, typeSearch: string): Observable<any> {
+    let urlApiPaquete : string = environment.urlPaqueteDinamico;
+    let urlApi = `${urlApiPaquete}${ENDPOINT_API.LOCATION_SEARCH}?tripType=${typeSearch}&query=${search}&micrositeId=nm_viajes&languageId=ES&departure=&specialTicket=false&searchType=origin&_=1636554156303`;
+    return this.http.jsonp(urlApi, 'callback=test');
+  }
+
 }

@@ -34,10 +34,8 @@
         <div class="clearfix"></div>
     </div>
     <div class="row">
-      <!--  <div *ngFor="let packb of ListaTarifa" class="col-12 col-md-3" [ngClass]="{'d-none': !packb.fly}">-->
         <div *ngFor="let packb of ListaTarifa" class="col-12 col-md-3" > 
-        <!--  <app-package *ngIf="packb.fly" [image]="packb.image" [rout]="packb.route" [fly]="packb.fly" [banner]="packb.banner" [span]="packb.span" [city]="packb.nomCiuDestino" [price]="packb.price" [btn]="packb.btn"></app-package>-->
-            <app-package *ngIf="packb.tipoDestino === 'I'"  [image]="packb.url"  [city]="packb.nomCiuDestino"    [span]= "packb.tarifaNeta" ></app-package>
+            <app-package *ngIf="packb.tipoDestino === 'I'"  [image]="packb.url"  [city]="packb.nomCiuDestino"    [span]= "packb.textoTiempoBusq" ></app-package>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -49,59 +47,18 @@
             </h2>
         </div>
     </div>
-    <div class="row">
+    <div class="row verMovil">
         <div class="col-5">
             <div class="boxVuelos">
-                <div class="rowVuelo">
-                    <div class="lugar">Cusco</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$79</div>
+                <div *ngFor="let packb of ListaTarifa" class="rowVuelo" [ngClass]="{'d-none': packb.tipoDestino ==='I'}">
+                    <div class="lugar" *ngIf="packb.tipoDestino === 'N'">{{packb.nomCiuDestino}}</div>
+                    <div class="desde" *ngIf="packb.tipoDestino === 'N'">desde</div>
+                    <div class="precio" *ngIf="packb.tipoDestino === 'N'">${{packb.tarifaNeta}}</div>
+                    <div class="btnCircle"><svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M-6.56879e-08 11.4972L4.83081 6.60526L-4.93358e-07 1.71329L1.48721 0.210525L7.81579 6.60526L1.48722 13L-6.56879e-08 11.4972Z" fill="white"/>
+                        </svg></div>
                 </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Tarapoto</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$87</div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Iquitos</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$81</div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Chiclayo</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$86</div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Piura</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$87</div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Cajamarca</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$78</div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Pucallpa</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$76</div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Arequipa</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$81</div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Juliaca</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$78</div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Tumbes</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$91</div>
-                </div>
+            
             </div>
         </div>
         <div class="col-7">
@@ -247,6 +204,7 @@
     </div>
     <div class="row">
         <div class="col-12">
+            <!-- slide de logos version desktop -->
             <div class="sliderOfertas">
                 <div class="btnSteps" (click)="afterBtn()">
                     <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -296,110 +254,59 @@
                         <path d="M0.70752 10.1982L4.77783 5.99999L0.707521 1.80182L1.96061 0.512183L7.29288 5.99999L1.9606 11.4878L0.70752 10.1982Z" fill="#DF0C30"/>
                         </svg>
                 </div>
+
+                <!-- slider logos only mobile -->
+                <div class="contentImg" [ngClass]="{onlyMovil: counterMovil===1}" *ngIf="counterMovil === 1">
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-01.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-02.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-03.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-04.png" alt=""></a>
+                </div>
+                <div class="contentImg" [ngClass]="{onlyMovil: counterMovil===2}" *ngIf="counterMovil === 2">
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-05.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-06.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-07.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-08.png" alt=""></a>
+                </div>
+                <div class="contentImg" [ngClass]="{onlyMovil: counterMovil===3}" *ngIf="counterMovil === 3">
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-09.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-10.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-11.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-12.png" alt=""></a>
+                </div>
+                <div class="contentImg" [ngClass]="{onlyMovil: counterMovil===4}" *ngIf="counterMovil === 4">
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-13.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-14.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-15.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-16.png" alt=""></a>
+                </div>
+                <div class="contentImg" [ngClass]="{onlyMovil: counterMovil===5}" *ngIf="counterMovil === 5">
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-17.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-18.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-19.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-20.png" alt=""></a>
+                </div>
+                <div class="contentImg" [ngClass]="{onlyMovil: counterMovil===6}" *ngIf="counterMovil === 6">
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-21.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-22.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-23.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-24.png" alt=""></a>
+                </div>
+                <div class="contentImg" [ngClass]="{onlyMovil: counterMovil===7}" *ngIf="counterMovil === 7">
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-25.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-26.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-27.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-28.png" alt=""></a>
+                </div>
+                <div class="contentImg" [ngClass]="{onlyMovil: counterMovil===8}" *ngIf="counterMovil === 8">
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-29.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-30.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-31.png" alt=""></a>
+                    <a (click)="toLine($event)"><img src="./assets/vuelos/logo-32.png" alt=""></a>
+                </div>
+                <!-- end slider -->
             </div>
+            <!-- end desktop -->
         </div>
     </div>
 </section>
-
-<!-- <app-filter></app-filter>
-<app-aside></app-aside>
-
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <app-title></app-title>
-        </div>
-    </div>
-</div>
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <app-title></app-title>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-            <app-package></app-package>
-        </div>
-        <div class="col-6">
-            <app-package></app-package>
-        </div>
-        <div class="col-4">
-            <app-package></app-package>
-        </div>
-        <div class="col-4">
-            <app-package></app-package>
-        </div>
-        <div class="col-4">
-            <app-package></app-package>
-        </div>
-    </div>
-</div>
-
-<br>
-
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <app-title></app-title>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-    </div>
-</div>
-
-<br>
-<div class="container px-0">
-    <div class="row">
-        <div class="col-6">
-            <img width="100%" src="./assets/aside/3-PlayaDelCarmen.jpg">
-        </div>
-        <div class="col-6">
-            <div class="row">
-                <app-card-info></app-card-info>
-                <app-card-info></app-card-info>
-                <app-card-info></app-card-info>
-            </div>
-        </div>
-    </div>
-</div>
-
-<app-mailing></app-mailing>
-<app-footer></app-footer> -->

@@ -16,6 +16,11 @@ export const environment = {
   sucursalAgenciaAC: '3',
   ptoventaAgenciaAC: '1',
   comisionistaAgenciaAC: '146',
+  today: (hoy: any) => {
+    let fehcaHoy = `${hoy.getDate()}/${hoy.getMonth() +1}/${ hoy.getFullYear()}`
+    return fehcaHoy
+  },
+  urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/'
 };
 
 /*

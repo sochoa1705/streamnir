@@ -4,6 +4,8 @@ import { TabsComponent } from './tabs.component';
 import { MaterialModule } from '../../material.module';
 import { FilterModule } from '../filter/filter.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientJsonpModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ TabsComponent ],
@@ -12,6 +14,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MaterialModule,
     FilterModule,
     NgbModule,
+    HttpClientJsonpModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [ TabsComponent ],
 
