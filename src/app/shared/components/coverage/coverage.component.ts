@@ -14,9 +14,16 @@ export class CoverageComponent implements OnInit {
   @Input() txtSalida: any
   @Input() txtRegreso: any
   @Input() txtPasajeros: any
+  @Input() plan: any
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  
+  data(id: any) {
+    console.log(id);
+    // this.pop = id
   }
 
 }

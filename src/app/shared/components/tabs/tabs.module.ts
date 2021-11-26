@@ -6,6 +6,7 @@ import { FilterModule } from '../filter/filter.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientJsonpModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FiltersafeModule } from 'src/app/shared/components/filtersafe/filtersafe.module';
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ TabsComponent ],
@@ -13,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     MaterialModule,
     FilterModule,
+    FiltersafeModule,
     NgbModule,
     HttpClientJsonpModule,
     FormsModule,
