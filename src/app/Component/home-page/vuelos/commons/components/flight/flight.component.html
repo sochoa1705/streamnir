@@ -34,8 +34,8 @@
         <div class="clearfix"></div>
     </div>
     <div class="row">
-        <div *ngFor="let packb of packagesService.packages" class="col-12 col-md-3" [ngClass]="{'d-none': !packb.fly}">
-            <app-package *ngIf="packb.fly" [image]="packb.image" [rout]="packb.route" [fly]="packb.fly" [banner]="packb.banner" [span]="packb.span" [city]="packb.city" [price]="packb.price" [btn]="packb.btn"></app-package>
+        <div *ngFor="let packb of ListaTarifa" class="col-12 col-md-3" > 
+            <app-package *ngIf="packb.tipoDestino === 'I'"  [image]="packb.url"  [city]="packb.nomCiuDestino"    [span]= "packb.textoTiempoBusq" ></app-package>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -50,86 +50,15 @@
     <div class="row verMovil">
         <div class="col-5">
             <div class="boxVuelos">
-                <div class="rowVuelo">
-                    <div class="lugar">Cusco</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$79</div>
+                <div *ngFor="let packb of ListaTarifa" class="rowVuelo" [ngClass]="{'d-none': packb.tipoDestino ==='I'}">
+                    <div class="lugar" *ngIf="packb.tipoDestino === 'N'">{{packb.nomCiuDestino}}</div>
+                    <div class="desde" *ngIf="packb.tipoDestino === 'N'">desde</div>
+                    <div class="precio" *ngIf="packb.tipoDestino === 'N'">${{packb.tarifaNeta}}</div>
                     <div class="btnCircle"><svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M-6.56879e-08 11.4972L4.83081 6.60526L-4.93358e-07 1.71329L1.48721 0.210525L7.81579 6.60526L1.48722 13L-6.56879e-08 11.4972Z" fill="white"/>
                         </svg></div>
                 </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Tarapoto</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$87</div>
-                    <div class="btnCircle"><svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M-6.56879e-08 11.4972L4.83081 6.60526L-4.93358e-07 1.71329L1.48721 0.210525L7.81579 6.60526L1.48722 13L-6.56879e-08 11.4972Z" fill="white"/>
-                        </svg></div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Iquitos</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$81</div>
-                    <div class="btnCircle"><svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M-6.56879e-08 11.4972L4.83081 6.60526L-4.93358e-07 1.71329L1.48721 0.210525L7.81579 6.60526L1.48722 13L-6.56879e-08 11.4972Z" fill="white"/>
-                        </svg></div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Chiclayo</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$86</div>
-                    <div class="btnCircle"><svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M-6.56879e-08 11.4972L4.83081 6.60526L-4.93358e-07 1.71329L1.48721 0.210525L7.81579 6.60526L1.48722 13L-6.56879e-08 11.4972Z" fill="white"/>
-                        </svg></div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Piura</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$87</div>
-                    <div class="btnCircle"><svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M-6.56879e-08 11.4972L4.83081 6.60526L-4.93358e-07 1.71329L1.48721 0.210525L7.81579 6.60526L1.48722 13L-6.56879e-08 11.4972Z" fill="white"/>
-                        </svg></div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Cajamarca</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$78</div>
-                    <div class="btnCircle"><svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M-6.56879e-08 11.4972L4.83081 6.60526L-4.93358e-07 1.71329L1.48721 0.210525L7.81579 6.60526L1.48722 13L-6.56879e-08 11.4972Z" fill="white"/>
-                        </svg></div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Pucallpa</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$76</div>
-                    <div class="btnCircle"><svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M-6.56879e-08 11.4972L4.83081 6.60526L-4.93358e-07 1.71329L1.48721 0.210525L7.81579 6.60526L1.48722 13L-6.56879e-08 11.4972Z" fill="white"/>
-                        </svg></div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Arequipa</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$81</div>
-                    <div class="btnCircle"><svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M-6.56879e-08 11.4972L4.83081 6.60526L-4.93358e-07 1.71329L1.48721 0.210525L7.81579 6.60526L1.48722 13L-6.56879e-08 11.4972Z" fill="white"/>
-                        </svg></div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Juliaca</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$78</div>
-                    <div class="btnCircle"><svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M-6.56879e-08 11.4972L4.83081 6.60526L-4.93358e-07 1.71329L1.48721 0.210525L7.81579 6.60526L1.48722 13L-6.56879e-08 11.4972Z" fill="white"/>
-                        </svg></div>
-                </div>
-                <div class="rowVuelo">
-                    <div class="lugar">Tumbes</div>
-                    <div class="desde">desde</div>
-                    <div class="precio">$91</div>
-                    <div class="btnCircle"><svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M-6.56879e-08 11.4972L4.83081 6.60526L-4.93358e-07 1.71329L1.48721 0.210525L7.81579 6.60526L1.48722 13L-6.56879e-08 11.4972Z" fill="white"/>
-                        </svg></div>
-                </div>
+            
             </div>
         </div>
         <div class="col-7">
@@ -381,106 +310,3 @@
         </div>
     </div>
 </section>
-
-<!-- <app-filter></app-filter>
-<app-aside></app-aside>
-
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <app-title></app-title>
-        </div>
-    </div>
-</div>
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <app-title></app-title>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-            <app-package></app-package>
-        </div>
-        <div class="col-6">
-            <app-package></app-package>
-        </div>
-        <div class="col-4">
-            <app-package></app-package>
-        </div>
-        <div class="col-4">
-            <app-package></app-package>
-        </div>
-        <div class="col-4">
-            <app-package></app-package>
-        </div>
-    </div>
-</div>
-
-<br>
-
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <app-title></app-title>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-        <div class="col-3">
-            <app-card></app-card>
-        </div>
-    </div>
-</div>
-
-<br>
-<div class="container px-0">
-    <div class="row">
-        <div class="col-6">
-            <img width="100%" src="./assets/aside/3-PlayaDelCarmen.jpg">
-        </div>
-        <div class="col-6">
-            <div class="row">
-                <app-card-info></app-card-info>
-                <app-card-info></app-card-info>
-                <app-card-info></app-card-info>
-            </div>
-        </div>
-    </div>
-</div>
-
-<app-mailing></app-mailing>
-<app-footer></app-footer> -->
