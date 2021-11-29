@@ -54,7 +54,6 @@ export class VuelosComponent implements OnInit {
     .ObtenerOfertaVuelos(this.OfertaVuelosRequest)
     .subscribe(
       (data: any) => {
-     debugger;
       this.ListaTarifa =  data["tarifas"];
       console.log(data);
        

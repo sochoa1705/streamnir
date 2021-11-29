@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
 
   GetUserId =() =>
   {
-    debugger;
     this.userRequest.nomUser = this.userNom;
      this.CoreService.GetUserId(this.userRequest).subscribe(
             (data: ResponseNumber) => {

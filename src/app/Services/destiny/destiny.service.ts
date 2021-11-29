@@ -34,7 +34,6 @@ export class DestinyService {
 
 
   ObtenerOfertaVuelos(payload: any): Observable<any> {
-    debugger;
     //let url_api = `http://10.75.131.17:8097/api/flights/Lista_Tarifas/`;
     let url_api = `http://localhost:21555/api/flights/Lista_Tarifas/`;
     return this.http.post<any>(url_api , payload );
