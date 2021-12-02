@@ -21,7 +21,7 @@
 <!-- END OFERTAS -->
 
 <!-- PAQUETES -->
-<div class="container">
+<div class="container-fluid px-5">
     <div class="row pt-5 pb-md-3">
         <div class="col-12">
             <h2 class="titleHome"><strong>Paquetes turísticos </strong> ¡Elige ahora tu paquete nacional o internacional!</h2>
@@ -44,7 +44,7 @@
     <div class="row text-md-end text-center py-2 py-md-5">
         <div class="col-12">
             <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                <button class="plus dropdown-toggle" *ngIf="section.section === 'Paquetes'">{{ section.btn }}</button>
+                <button class="plus dropdown-toggle px-4" *ngIf="section.section === 'Paquetes'">{{ section.btn }}</button>
             </ng-container>
         </div>
         <div class="clearfix"></div>
@@ -65,13 +65,13 @@
 <!-- END MAPA -->
 
 <!-- VUELOS -->
-<div class="container">
+<div class="container-fluid px-4">
     <div class="row mb-4 mt-5">
         <div class="col-12">
             <!-- <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
                 <app-title *ngIf="section.section === 'Vuelos'" [title]="section.title"></app-title>
             </ng-container> -->
-            <h2 class="titleHome">¡Corre y Vuela! con estas <strong>súper ofertas de Vuelos</strong> saliendo <strong> desde Lima</strong></h2>
+            <h2 class="titleHome ms-4">¡Corre y Vuela! con estas <strong>súper ofertas de Vuelos</strong> saliendo <strong> desde Lima</strong></h2>
             <div class="clearfix"></div>
         </div>
     </div>
@@ -79,7 +79,7 @@
     <div class="row text-end py-5">
         <div class="col-12">
             <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                <button class="plus dropdown-toggle" *ngIf="section.section === 'Vuelos'">{{ section.btn }}</button>
+                <button class="plus dropdown-toggle px-4" *ngIf="section.section === 'Vuelos'">{{ section.btn }}</button>
             </ng-container>
         </div>
         <div class="clearfix"></div>
@@ -88,8 +88,8 @@
 <!-- END VUELOS -->
 
 <!-- COMPRAR -->
-<div class="container">
-    <h2 class="titleHome bold">¿Por qué comprar en <span class="red">NMVIAJES</span>?</h2>
+<div class="container-fluid px-4">
+    <h2 class="titleHome bold ms-4 mb-5">¿Por qué comprar en <span class="red">NMVIAJES</span>?</h2>
     <div class="row comprarHideTitle">
         <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
             <app-title class="textTitle" *ngIf="section.section === 'Comprar'" [title]="section.title"></app-title>

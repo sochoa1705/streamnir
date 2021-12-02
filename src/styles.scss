@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400;500;600;700;800;900");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400&display=swap');
 @import "scss/variables";
 @import "scss/mixin";
 .animated {
@@ -63,6 +64,9 @@ button {
         font-size: 12px;
     }
     &.plus {
+        font-family: "Montserrat";
+        letter-spacing: 0.5px;
+        font-weight: 600;
         border: 1px solid $red_light;
         color: $red_light;
         background: transparent;
@@ -874,6 +878,10 @@ section {
     color: #4B4B4B;
     text-indent: 40px;
     border: 0.5px solid #E4E5E7;
+    &:focus{
+        border: 0.5px solid #009AED!important;
+        box-shadow: none;
+    }
 }
 
 .portletFiltro .rowFiltro .columnFiltro input::-webkit-input-placeholder,
@@ -897,6 +905,10 @@ section {
     max-width: 150px;
     height: 40px;
     margin-left: 10px;
+    background: $red_light;
+    &:hover{
+        background: $red
+    }
 }
 
 .form-group.hidden {
@@ -1778,16 +1790,25 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     z-index: 11;
 }
 
-.inputDer {
-    border-radius: 3px 0 0 3px !important;
-    letter-spacing: 2px;
+.input{
+    &Der {
+        border-radius: 3px 0 0 3px !important;
+        letter-spacing: 2px;
+        &:focus{
+            border: 0.5px solid #009AED!important;
+            box-shadow: none;
+        }
+    }
+    &Izq {
+        border-radius: 0 3px 3px 0 !important;
+        letter-spacing: 2px;
+        border-left: 0px!important;
+        &:focus{
+            border: 0.5px solid #009AED!important;;
+            box-shadow: none;
+        }
+    }
 }
-
-.inputIzq {
-    border-radius: 0 0 3px 3px !important;
-    letter-spacing: 2px;
-}
-
 .selectSeguro {
     border: 0.5px solid #E4E5E7;
     box-sizing: border-box;
@@ -1801,6 +1822,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     line-height: 21px;
     letter-spacing: 0.25px;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23DF0C30' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    &:focus{
+        border: 0.5px solid #009AED;
+        box-shadow: none;
+    }
 }
 
 .iconBandera {
@@ -2078,9 +2103,25 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .boxPrecioAero,
 .boxPrecios {
     background: #FFFFFF;
-    box-shadow: 0px 1px 8px rgb(0 0 0 / 10%);
+    // box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
+    // box-shadow: 0px 1px 8px rgb(0 0 0 / 10%);
     border-radius: 5px;
-    margin-top: 10px;
+    // margin-top: 10px;
+    table{
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 26px;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
+        text-align: center;
+        & tr:hover {
+            background: rgba(#8FD0F3, .2)
+        }
+        & tr td:first-child{
+            font-weight:bold;
+        }
+}
     .header {
         font-family: Montserrat;
         font-weight: bold;
@@ -2093,7 +2134,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .row {
         margin: 0;
+        &:first-child:hover{
+            background: white;
+        }
+        &:hover{
+            background: rgba(#8FD0F3, .2)
+        }
         .col {
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
             display: flex;
             align-items: center;
             border-bottom: 1px solid #E4E5E7;
@@ -2110,6 +2162,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
             img {
                 padding-right: 10px;
+                &+div{
+                    font-weight:bold;
+                    white-space: pre-line;
+                }
             }
             &.green {
                 font-weight: bold;
@@ -3123,7 +3179,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 .accordion-body {
-    border-bottom: 1px solid #E4E5E7;
+    border-bottom: 0px solid #E4E5E7;
     .textAcor {
         font-family: Montserrat;
         font-size: 14px;
@@ -3304,7 +3360,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .boxFlotante {
     width: 280px;
     background: #FFFFFF;
-    box-shadow: 0px 1px 8px rgb(0 0 0 / 5%);
+    box-shadow: 0px 0px 8px rgb(0 0 0 / 5%);
     border-radius: 5px;
     position: absolute;
     top: 90px;
@@ -3312,6 +3368,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     &.seguro {
         top: inherit;
         padding: 10px 10px 0 10px;
+        margin-top: 50px;
         .boxTwoPasajero {
             .text1 {
                 font-weight: bold;
@@ -3347,7 +3404,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             border: none;
         }
         .inputEdadPasajero {
-            border: 0.5px solid #83898F;
+            // border: 0.5px solid #83898F;
             box-sizing: border-box;
             border-radius: 3px;
             width: 50px;
@@ -3359,6 +3416,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 0;
             margin: 0;
             text-align: center;
+            &::placeholder{
+                font-family: Montserrat;
+                font-weight: normal;
+                font-size: 12px;
+                }
         }
     }
     .opcionBtn {
@@ -3430,9 +3492,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-style: normal;
             font-weight: 600;
             font-size: 12px;
+            &:hover{
+                background: #B50A27;
+            }
             &.gray {
                 background: #EBEBEB;
                 color: #4B4B4B;
+                &:hover{
+                    background: #CFD1D3;
+                }
             }
         }
         .Agregar {
@@ -3442,6 +3510,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 12px;
             letter-spacing: 0.1px;
             color: #009AED;
+            &:hover{
+                background: transparent;
+            }
             &:disabled {
                 color: $gray
             }
@@ -3451,9 +3522,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .titleHome {
     font-size: 24px;
-    font-weight: normal;
+    font-weight: 400;
+    font-family: Open Sans;
     &.bold {
-        font-weight: bold;
+        font-weight: 700;
     }
     .red {
         color: #DF0C30;
@@ -4939,6 +5011,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         width: 800px;
         font-family: Montserrat;
         font-size: 16px;
+        font-weight: 600;
         line-height: 24px;
         text-align: center;
         letter-spacing: 0.15px;
@@ -4976,6 +5049,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
         .sliderAero {
             margin-right: 5%;
+            #carouselAero{
+                height: auto;
+                width: 581px;
+                .carousel-control-prev, .carousel-control-next{
+                        top: 40%;
+                        width: 47px;
+                        background: #4B4B4B;
+                        opacity: 0.5;
+                        height: 78px;
+                        border-radius: 0;
+                }
+            }
         }
     }
     .tabSalidas {
@@ -4999,7 +5084,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             box-sizing: border-box;
             border-radius: 15px;
             font-family: Montserrat;
-            font-weight: 500;
+            font-weight: 700;
             font-size: 14px;
             line-height: 21px;
             letter-spacing: 0.1px;
@@ -5753,7 +5838,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         top: calc(50% - 50px);
         .aeroTitle {
             font-family: Open Sans;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 38px;
             line-height: 72px;
             text-align: center;
@@ -5924,4 +6009,19 @@ span.valid {
 
 .isvalid {
     border: 1px solid red!important
+}
+
+@media (min-width: 1400px) {
+.container{
+        &-fluid{
+            width: 1397px!important;
+            &.fluid{
+                width:100%!important;
+            }
+        }
+    }
+}
+
+.ngb-dp-arrow-btn{
+    background: transparent!important
 }
