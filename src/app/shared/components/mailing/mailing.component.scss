@@ -5,9 +5,11 @@
         box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15) !important;
     }
     a {
+        font-family: "Montserrat";
         color: $blue_light;
         font-size: 12px;
-        font-weight: normal;
+        font-weight: 500;
+        letter-spacing: 0.1px;
         @media (max-width: 768px) {
             color: $blue_light;
             font-size: 10px;
@@ -41,6 +43,9 @@ button {
 }
 
 ::ng-deep .mat-checkbox {
+    &-frame{
+        border-width: 0.5px!important;
+    }
     label {
         padding-bottom: 0px;
     }
@@ -56,6 +61,8 @@ button {
     font-family: "Montserrat";
     font-size: 12px;
     margin-right: 20px;
+    letter-spacing: 0.1px;
+    font-weight: 500;
     font-weight: normal;
     @media (max-width: 768px) {
         font-size: 10px;
@@ -65,7 +72,21 @@ button {
 }
 
 input {
-    font-size: 16px;
+    font-size: 16px!important;
+    line-height: 30px;
+    font-family: Montserrat;
+    font-weight: normal;
+    &:focus{
+        border: 0.5px solid #009AED!important;
+        box-shadow: none;
+    }
+    &::placeholder{
+        font-family: Montserrat;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 18px;
+        color: #B9BCBF;
+    }
     @media (max-width: 768px) {
         font-size: 10px !important;
         margin-bottom: 15px;

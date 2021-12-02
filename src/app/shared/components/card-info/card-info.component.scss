@@ -1,10 +1,13 @@
 .card {
     margin-bottom: 30px;
     height: 104px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
+    &:hover{
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    }
 }
 h1 {
     font-family: Open Sans;
-    font-style: normal;
     font-weight: bold;
     font-size: 18px;
     line-height: 27px;
@@ -14,7 +17,6 @@ h1 {
 
 h5{
     font-family: Montserrat;
-    font-style: normal;
     font-weight: 500;
     font-size: 10px;
     line-height: 18px;

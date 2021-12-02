@@ -1,5 +1,6 @@
 @import '/src/scss/variables';
 footer {
+    background: #F6F7F9;
     ._libro {
         color: $blue_light;
         text-decoration: none;
@@ -51,7 +52,9 @@ footer {
     }
     h {
         &r {
+            height: 1px;
             margin: 42px 0;
+            color: #E4E5E7;
             &.hr {
                 margin: 20px 0;
             }
@@ -61,7 +64,8 @@ footer {
             font-weight: bold;
             font-size: 24px;
             line-height: 36px;
-        }
+            margin-bottom: 40px
+            }
     }
     ul {
         color: $red;
@@ -94,8 +98,13 @@ footer {
             margin-right: 10px;
             align-items: center;
             justify-content: space-around;
+            &:hover>svg>path{
+                fill: white;
+            }
             &:hover {
                 background: $red;
+                fill: white;
+                border: 1px solid white
             }
         }
     }
