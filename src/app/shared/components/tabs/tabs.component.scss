@@ -27,7 +27,8 @@ article {
         margin-bottom: 4px;
         min-width: 130px;
         height: auto;
-        font-weight: bold;
+        font-weight: 600;
+        font-family: "Montserrat";
         @media (max-width: 768px) {
             min-width: 77px;
             height: auto;
@@ -110,23 +111,23 @@ article {
     }
 }
 
-.customers {
-    width: 100%;
-    font-style: normal;
-    font-weight: 600;
-    border: 0px;
-    font-size: 14px;
-    color: $gray;
-    margin-top: 7px;
-    background: url(../../../../assets/arrow.svg) no-repeat center right;
-    padding-left: 0;
-    text-align: left;
-    font-family: "Montserrat";
-    padding-top: 13px;
-    @media (max-width: 768px) {
-        font-size: 10px;
-    }
-}
+// .customers {
+//     width: 100%;
+//     font-style: normal;
+//     font-weight: 600;
+//     border: 0px;
+//     font-size: 14px;
+//     color: $gray;
+//     margin-top: 7px;
+//     background: url(../../../../assets/arrow.svg) no-repeat center right;
+//     padding-left: 0;
+//     text-align: left;
+//     font-family: "Montserrat";
+//     padding-top: 13px;
+//     @media (max-width: 768px) {
+//         font-size: 10px;
+//     }
+// }
 
 :host ::ng-deep .mat-select {
     font-style: normal;

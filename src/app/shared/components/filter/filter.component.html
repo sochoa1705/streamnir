@@ -24,7 +24,6 @@
             </div>
             <div class="w-130">
                 <!-- <button class="customers" (click)="customers($event)">10 Pasajero</button> -->
-                <button class="customers" (click)="showPasajero()">10 Pasajero</button>
                 <div class="boxFlotante" *ngIf="!showOption">
                     <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
                         <div class="d-flex flex-row iconTwo">
@@ -100,10 +99,12 @@
                     </div>
 
                     <div class="d-flex flex-row justify-content-between align-items-center p-3 btnPasajero">
-                        <button class="gray" type="button">Cancelar</button>
+                        <button class="gray" type="button" (click)="showPasajero()">Cancelar</button>
                         <button type="button" (click)="showPasajero()">Listo</button>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
+                <button class="customers" (click)="showPasajero()">10 Pasajero</button>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -197,7 +198,7 @@
                                 stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <input class="form-control" (click)="d.toggle()" placeholder="Salida" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                    <input class="form-control omac" (click)="d.toggle()" placeholder="Salida" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
                 </div>
                 <!-- END SOLO IDA -->
 
@@ -216,7 +217,7 @@
                                 stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <input #dpFromDate class="form-control" (click)="datepicker.toggle()" placeholder="Salida" name="dpFromDate" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+                    <input #dpFromDate class="form-control inputDer" (click)="datepicker.toggle()" placeholder="Salida" name="dpFromDate" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
                 </div>
                 <div class="columnFiltro" *ngIf="selected === 'idavuelta'">
                     <div class="iconCalendar">
@@ -232,7 +233,7 @@
                                 stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <input #dpToDate class="form-control" (click)="datepicker.toggle()" placeholder="Vuelta" name="dpToDate" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
+                    <input #dpToDate class="form-control inputIzq" (click)="datepicker.toggle()" placeholder="Vuelta" name="dpToDate" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
                 </div>
                 <!-- BOTOM -->
                 <div class="columnFiltro flexCero">

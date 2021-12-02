@@ -34,23 +34,30 @@ svg {
         padding-left: 0;
     }
 }
-
+.boxFlotante + .customers:before{
+    transform: rotate(-180deg);
+}
 .customers {
+    position: relative;
     width: 100%;
-    font-style: normal;
     font-weight: 600;
     border: 0px;
     font-size: 14px;
-    color: $gray;
+    color: #222;
     margin-top: 7px;
     background-color: $white;
-    background: url(../../../../assets/arrow.svg) no-repeat center right;
+    // background: url(../../../../assets/arrow.svg) no-repeat center right;
     padding-left: 0;
     text-align: left;
     font-family: "Montserrat";
     padding-top: 13px;
     @media (max-width: 768px) {
         font-size: 10px;
+    }
+    &:before{
+        content:  url(../../../../assets/arrow.svg);
+        right: 0;
+        position: absolute
     }
 }
 
@@ -118,11 +125,9 @@ svg {
 }
 
 :host ::ng-deep .mat-select {
-    font-style: normal;
     font-weight: 600;
     border: 0px;
     font-size: 14px;
-    color: $gray;
     background-color: $white;
     background: url(../../../../assets/arrow.svg) no-repeat center right;
     font-family: "Montserrat";
@@ -133,6 +138,11 @@ svg {
     }
     &:focus {
         box-shadow: none;
+    }
+    &-value{
+        color: #222!important;
+        font-family: "Montserrat";
+        font-weight: 600;
     }
     option.sel {
         border: 0px;
@@ -250,4 +260,10 @@ svg {
             }
         }
     }
+}
+
+::ng-deep .mat-option-text{
+    font-weight: 600;
+    font-family: "Montserrat";
+    color: #4B4B4B 
 }

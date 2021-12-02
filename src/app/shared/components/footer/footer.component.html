@@ -1,15 +1,15 @@
 <footer>
-    <div class="container">
+    <div class="container-fluid fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-10 offset-2">
                 <hr class="hideMobile">
             </div>
             <div class="clearfix"></div>
         </div>
         <div class="row marginTop35">
-            <div class="col-3 d-none d-md-inline-block text-center my-5 order-md-1">
-                <img src="./assets/logo_rojo.svg" alt="">
-                <div class="icons justify-content-center">
+            <div class="col-4 d-none d-md-inline-block text-center my-5 pt-4 order-md-1">
+                <img src="./assets/logo_rojo.svg" alt="NMVIAJES">
+                <div class="icons justify-content-center mt-4">
                     <div class="icon">
                         <svg width="15" height="31" viewBox="0 0 15 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="col-md-2 col-12 text-md-left text-center order-1">
-                <h3 class="menuProd" (click)="showProducto()">{{ title1 }}
+                <h3 class="menuProd text-start" (click)="showProducto()">{{ title1 }}
                     <img class="iconFlecha" src="./assets/footer/flecha.png" alt="">
                 </h3>
                 <ul class="showDesktop" [class.activoMnu]="!showMenuProd">
@@ -61,16 +61,16 @@
                 </ul>
             </div>
             <div class="col-md-3 col-12 order-2 text-md-left text-center">
-                <h3 class="menuProd" (click)="showConocenos()">{{ title2 }}
+                <h3 class="menuProd text-start" (click)="showConocenos()">{{ title2 }}
                     <img class="iconFlecha" src="./assets/footer/flecha.png" alt="">
                 </h3>
                 <ul class="showDesktop" [class.activoMnu]="!showMenuConocenos">
                     <li *ngFor="let option of list2"><a routerLink="{{ option.link }}">{{ option.text }}</a></li>
                 </ul>
             </div>
-            <div class="col-md-4 col-12 order-3 text-md-left text-center marginTopMobile ">
-                <h3>{{ title3 }}</h3>
-                <span class="textContactenos">{{ span }}<br>
+            <div class="col-md-3 col-12 order-3 text-md-left text-center marginTopMobile ">
+                <h3 class="text-start">{{ title3 }}</h3>
+                <span class="textContactenos text-start">{{ span }}<br>
                     <strong>{{ addrees }}</strong>
                 </span>
                 <div class="d-flex align-items-center centerBox">
@@ -81,8 +81,9 @@
             <div class="clearfix"></div>
         </div>
     </div>
-
-    <div class="container-fluid bg-white order-4">
+    
+    <div class="container-fluid fluid bg-white order-4 pt-3">
+    <div class="container">
         <div class="row">
             <div class="col-md-4 col-6 text-center order-2 order-md-1">
                 <img src="./assets/footer/agencia.png" alt="">
@@ -114,5 +115,5 @@
             </div>
             <div class="clearfix"></div>
         </div> -->
-    </div>
+    </div></div>
 </footer>

@@ -7,6 +7,7 @@
     margin-bottom: 20px;
     overflow: hidden;
     font-weight: bold;
+    transition: all 300ms ease-in-out;
     & .d-flex {
         height: 281px;
     }
@@ -18,15 +19,22 @@
         -o-object-position: top;
         object-position: top;
     }
+    .d-md-block.d-none.text-center{
+        font-size: 14px;
+        letter-spacing: 0.15px;
+    }
     p {
         background: $red_light;
         margin-bottom: 0;
         border-radius: 0 5px;
+        font-family: 'Open Sans';
+        font-weight: bold;
+        font-size: 14px;
+        letter-spacing: 0.15px;
     }
-    // &:hover{
-    //     -webkit-filter: grayscale(100%);
-    //     filter: grayscale(100%);
-    // }
+    &:hover{
+        transition: all 300ms ease-in-out;
+    }
     &:hover>.shadow {
         position: absolute;
         left: 0;
@@ -34,13 +42,13 @@
         top: 0;
         bottom: 0;
         z-index: 0;
-        background: rgba(33, 55, 67, 0.4);
+        background: rgba(33, 55, 67, 0.6);
         z-index: -1;
+        transition: all 300ms ease-in-out;
     }
     h {
         &1 {
             font-family: 'Open Sans';
-            font-style: normal;
             font-weight: bold;
             font-size: 38px;
             letter-spacing: -0.5px;
@@ -51,11 +59,12 @@
             }
         }
         &6 {
+            font-family: 'Open Sans';
             text-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
-            font-style: normal;
+            font-weight: bold;
             font-size: 14px;
             line-height: 21px;
-            letter-spacing: 1px;
+            letter-spacing: 0.15px;
             margin-top: 10px;
         }
         &r {
@@ -70,7 +79,6 @@
         padding: 0 20px;
         border-radius: 5px 0px 0px 5px;
         font-family: 'Open Sans';
-        font-style: normal;
         font-weight: bold;
         font-size: 38px;
         line-height: 60px;
@@ -92,12 +100,18 @@
     }
     &:hover .hidden {
         display: inline-block;
+        font-family: 'Open Sans';
+        font-weight: bold;
+        letter-spacing: 0.15px;
+        font-size: 14px;
+        transition: all 300ms ease-in-out;
     }
     &:hover hr+span {
         display: inline-block;
         margin-right: 20px;
+        transition: all 300ms ease-in-out;
     }
-    &:hover p {
-        background: transparent;
-    }
+    // &:hover p {
+    //     background: transparent;
+    // }
 }
