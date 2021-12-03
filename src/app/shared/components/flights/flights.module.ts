@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlightsComponent } from './flights.component';
+import { MaterialModule } from '../../material.module';
 
 
 
@@ -8,7 +9,8 @@ import { FlightsComponent } from './flights.component';
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ FlightsComponent ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule,
   ],
   exports: [ FlightsComponent ],
 })
