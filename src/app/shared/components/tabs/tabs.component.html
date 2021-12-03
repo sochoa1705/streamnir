@@ -1,12 +1,12 @@
-<div class="banner">
-    <div class="content">
+<div class="banner" [ngClass]="show ? 'bannerHide' : ' ' ">
+    <div class="content"  [ngClass]="show ? 'd-none' : ' ' ">
         <img src="./assets/banner/home_.jpg">
     </div>
     <article class="container">
         <div class="row">
             <div class="col-12">
                 <!-- <mat-tab-group mat-align-tabs="start"  (selectedTabChange)="safeLink($event)"> -->
-                <mat-tab-group mat-align-tabs="start">
+                <mat-tab-group mat-align-tabs="start"  [selectedIndex]="show ? '3' : '0' ">
                     <!-- VUELOS -->
                     <mat-tab>
                         <ng-template mat-tab-label>

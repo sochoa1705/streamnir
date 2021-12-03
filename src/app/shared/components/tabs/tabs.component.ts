@@ -65,6 +65,7 @@ export interface State {
   ]
 })
 export class TabsComponent implements OnInit {
+  @Input() show!: boolean
   @Input() options: any
   form!: FormGroup;
   form2!: FormGroup;

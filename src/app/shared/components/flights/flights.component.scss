@@ -246,13 +246,13 @@
             font-family: "Montserrat";
             margin-bottom: 0;
             color: $gray;
-            font-weight: bold;
+            font-weight: 700;
         }
     }
     span {
         font-size: 12px;
         font-family: "Montserrat";
-        font-weight: bold;
+        font-weight: 600;
     }
     .destinos {
         color: $blue_light;
@@ -326,3 +326,8 @@
 //     height: 30px;
 //     background: url('assets/img/company.png') no-repeat;
 // }
+
+.mat-tooltip {
+    background-color: rgb(255, 128, 128);
+    color: black;
+  }

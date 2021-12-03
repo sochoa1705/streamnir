@@ -13,6 +13,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -31,6 +32,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatNativeDateModule,
     MatStepperModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
   ],
   exports: [
     CommonModule,
@@ -47,6 +49,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatNativeDateModule,
     MatStepperModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
   ]
 })
 export class MaterialModule { }

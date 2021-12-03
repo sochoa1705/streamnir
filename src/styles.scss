@@ -1911,7 +1911,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     background: #FFFFFF;
     box-shadow: 0px 1px 8px rgb(0 0 0 / 10%);
     border-radius: 5px;
-    margin-top: 10px;
+    // margin-top: 10px;
     padding: 20px 19px;
     .row {
         margin: 0;
@@ -1927,6 +1927,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-family: Montserrat;
             font-size: 14px;
             line-height: 21px;
+            font-weight:500;
             letter-spacing: 0.1px;
             color: #4B4B4B;
             gap: 10px;
@@ -2121,6 +2122,25 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         & tr td:first-child{
             font-weight:bold;
         }
+        & td{
+            &.green {
+                font-weight: bold;
+                letter-spacing: 0.1px;
+                color: #54D834;
+            }
+            &.red {
+                letter-spacing: 0.1px;
+                color: #B50A27;
+            }
+            &.selected {
+                background: #009AED;
+                font-weight: bold;
+                color: #ffffff;
+            }
+            &.center {
+                justify-content: center !important;
+            }
+        }
 }
     .header {
         font-family: Montserrat;
@@ -2142,7 +2162,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
         .col {
             font-family: Montserrat;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 14px;
             line-height: 18px;
             letter-spacing: 0.1px;
@@ -2154,6 +2174,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             height: 46px;
             display: flex;
             justify-content: center;
+            span{
+                font-weight: bold;
+                margin-left: 3px;
+            }
             &:first-child {
                 border-left: none;
                 font-weight: bold;
@@ -2195,6 +2219,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             text-align: left;
             padding-left: 10px;
             font-weight: normal!important;
+            display: flex;
+            align-items: center;
             &:first-child {
                 border-bottom: 1px solid #E4E5E7;
             }
@@ -2257,8 +2283,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .toolTip {
     position: relative;
     &:hover {
-        .boxTooltip {
+        .boxTooltip, .boxTooltip2 {
             display: block;
+            
         }
     }
     .boxTooltip {
@@ -2274,6 +2301,41 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         bottom: 32px;
         z-index: 20;
         font-family: Montserrat;
+        &2{
+            display: none;
+            position: absolute;
+            padding: 10px;
+            width: 230px;
+            background: #FFFFFF;
+            border-radius: 5px;
+            border: 1px solid #E4E5E7;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+            bottom: 32px;
+            z-index: 20;
+            font-family: Montserrat;
+            left: calc(100% - 119px);
+            &:after {
+                display: block;
+                content: " ";
+                position: absolute;
+                bottom: -8px;
+                border-top: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-left: 8px solid transparent;
+                background: #ffffff;
+                right: calc(50% - 8px);
+                box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+                transform: rotate(45deg);
+            }
+            .descripTooltip {
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 18px;
+                letter-spacing: 0.1px;
+                color: #83898F;
+            }
+        }
         &:after {
             display: block;
             content: " ";
@@ -5294,6 +5356,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             letter-spacing: 0.1px;
             color: #4B4B4B;
             padding: 0 25px 20px 25px;
+            font-weight:500;
+            display: flex;
+            align-items: center;
         }
         .cardStar {
             display: flex;
@@ -6024,4 +6089,8 @@ span.valid {
 
 .ngb-dp-arrow-btn{
     background: transparent!important
+}
+
+.font-12{
+    font-size: 12px;
 }
