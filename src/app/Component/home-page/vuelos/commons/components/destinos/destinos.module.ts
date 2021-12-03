@@ -1,6 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DestinosComponent } from './destinos.component';
+import { MaterialModule } from '../../../../../../shared/material.module';
+import { TabsModule } from '../../../../../../shared/components/tabs/tabs.module';
 
 
 
@@ -10,7 +12,9 @@ import { DestinosComponent } from './destinos.component';
     DestinosComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule,
+    TabsModule,
   ],
   exports: [
     DestinosComponent
