@@ -50,6 +50,11 @@ label {
     border: 0.5px solid $gray_border;
     box-sizing: border-box;
     border-radius: 3px;
+    &:focus{
+        outline: none;
+        border: 0.5px solid #009AED!important;
+        box-shadow: none !important;
+    }
 }
 
 button {
@@ -192,7 +197,7 @@ section {
     background: $white;
     border-radius: 10px;
     border: 1px solid #e4e5e7;
-    overflow: auto;
+    // overflow: auto;
     &__internacional {
         height: 190px;
         h1 {
@@ -241,6 +246,10 @@ section {
                 0.25px);
                 font-family: "Montserrat";
                 color: #B9BCBF;
+            }
+            &:focus{
+                border: 0.5px solid #009AED!important;
+                box-shadow: none;
             }
         }
     }
@@ -6092,5 +6101,5 @@ span.valid {
 }
 
 .font-12{
-    font-size: 12px;
+    font-size: 12px!important;
 }

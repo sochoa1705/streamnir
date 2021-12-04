@@ -61,7 +61,7 @@
 }
 
 h1 {
-    color: #506370;
+    color: #4B4B4B;
     font-family: "Open Sans";
     font-weight: bold;
     font-size: 24px;
@@ -78,7 +78,7 @@ h2 {
 
 .pago {
     img {
-        margin-right: 10px;
+        margin-right: 28px;
         filter: grayscale(1);
         opacity: 0.3;
     }
@@ -122,6 +122,11 @@ h2 {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    &:focus-visible{
+        outline: none;
+        border: 0.5px solid #009AED!important;
+        box-shadow: none !important;
+    }
 }
 
 .boxAgencia {
@@ -236,6 +241,15 @@ h2 {
             background: #1eaea5;
             font-family: "Montserrat";
         }
+        input{
+            font-family: "Montserrat";
+            font-size: 14px;
+            border: .5px solid #83898F;
+            &:placeholder{
+                font-family: "Montserrat";
+                font-size: 14px;    
+            }
+        }
     }
     &.pasajeros {
         .card {
@@ -260,7 +274,7 @@ h2 {
             color: #4b4b4b;
             font-family: "Montserrat";
             font-size: 14px;
-            font-weight: normal;
+            font-weight: 600;
         }
     }
     &-center {
@@ -319,8 +333,11 @@ h2 {
             .destinos {
                 color: #009aed;
                 font-size: 14px;
-                font-weight: bold;
+                font-weight: 500;
             }
+                    span.destinos{
+                        font-weight:600!important;
+                    }
             .equipaje {
                 & svg {
                     margin-right: 7px;
@@ -339,6 +356,7 @@ h2 {
             .escala {
                 font-size: 10px;
                 font-family: "Montserrat";
+                font-weight: 600;
                 &_line {
                     border-top: 0.5px dashed #83898f;
                 }
@@ -354,7 +372,7 @@ h2 {
             }
         }
         span {
-            color: #506370;
+            color: #4B4B4B;
             font-family: "Montserrat";
             font-size: 12px;
         }
@@ -419,6 +437,9 @@ h2 {
             letter-spacing: 1px;
         }
         li {
+            font-family: "Montserrat";
+            font-weight: 500;
+            font-size: 14px;
             margin-bottom: 20px;
             padding-right: 30px;
             padding-left: 30px;
@@ -624,6 +645,8 @@ p {
         display: flex;
         align-items: center;
         justify-content: center;
+        font-family: Open Sans;
+        font-weight: bold;
     }
     .button {
         font-family: Montserrat;
@@ -652,6 +675,20 @@ p {
 
 .btnEliminar{
     color: #DF0C30!important;
+}
+
+#politicaModal {
+    .modal{
+        &-header{
+        border:0 !important;
+        }
+        &-content{
+            background: white !important;
+        }
+    }
+}
+.text-justify{
+    text-align: justify
 }
 .modal {
     &-content {

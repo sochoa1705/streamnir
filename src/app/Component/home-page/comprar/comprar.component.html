@@ -37,7 +37,7 @@
 <!-- <div #adultoCdr style="display: none;">
     <a (click)="pasajeroClose()">cerrar</a>
 </div> -->
-<div class="container-fluid pb-4 px-5">
+<div class="container-fluid pb-4 px-4">
     <div class="row stepCard d-md-none d-block">
         <!-- STEPPER -->
         <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
@@ -221,7 +221,7 @@
                                         <div class="row card_ py-4 justify-content-evenly cardMob" *ngIf="mobile">
                                             <!-- <input type="radio" name="select" id="option-1" (change)="chkValue($event)" checked>
                                                 <input type="radio" name="select" id="option-2"> -->
-                                            <input *ngFor="let chk of metodoPago" type="radio" name="select" id="{{ chk.name }}" (click)="chkValue($event)" [checked]="chk.checked">
+                                            <input *ngFor="let chk of metodoPago" type="radio" name="select" id="{{ chk.name }}" (click)="chkValue(chk.name)" [checked]="chk.checked">
                                             <label *ngFor="let chk of metodoPago" for="{{ chk.name }}" class="option {{ chk.name }} col-4 offset-1 py-3 lessMarginLeft boxMob">
                                                 <div class="dot"></div>
                                                 <img class="marginL" src="./assets{{ chk.img }}" alt="">
@@ -708,7 +708,7 @@
                                     <!-- <input type="radio" name="select" id="option-1" (change)="chkValue($event)" checked>
                                         <input type="radio" name="select" id="option-2"> -->
                                     <input *ngFor="let chk of metodoPago" formControlName="select21" value="{{ chk.value}}" type="radio" name="select21" id="{{ chk.name }}"
-                                        (click)="chkValue($event)" [checked]="chk.checked">
+                                        (click)="chkValue(chk.name)" [checked]="chk.checked">
                                     <label *ngFor="let chk of metodoPago" for="{{ chk.name }}" class="optionm {{ chk.name }} col-4 offset-1 py-3 lessMarginLeft boxMob">
                                         <div class="dot"></div>
                                         <img class="marginL" src="./assets{{ chk.img }}" alt="">
@@ -717,7 +717,7 @@
                                     <div class="clearfix"></div>
                                 </div>
 
-                                <div class="boxCardPas" *ngIf="selectedPay == 'tarjeta'; else safety">
+                                <div class="boxCardPas" *ngIf="selectedPay === 'tarjeta'; else safety">
                                     <!-- TARJETA -->
                                     <div class="row py-5">
                                         <div class="col-12 text-center pago">
@@ -751,8 +751,11 @@
                                                     <input class="form-control" formControlName="ccvCard" placeholder="El que figura en el documento de viaje." type="text" name="lastname">
                                                 </div>
                                                 <div class="col-1 colBoxInfo">
-                                                    <div class="iconInfo">
+                                                    <div class="iconInfo toolTip">
                                                         <img src="./assets/comprar/card/info.png" alt="">
+                                                        <div class="boxTooltip2">
+                                                            <div class="descripTooltip">El código de seguridad esta localizado en los 3 últimos digitos detras de tu tarjet</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="clearfix"></div>
@@ -782,7 +785,23 @@
                                     <div class="row card_pasajero rowMobileCard">
                                         <div class="col-6 viewMobileWidth">
                                             <label for="names">Cuotas</label>
-                                            <input class="form-control" formControlName="feePay" placeholder="Sin cuotas" type="text" name="names">
+                                            <!-- <input class="form-control" formControlName="" placeholder="Sin cuotas" type="text" name="names"> -->
+                                            <select formControlName="feePay" class="form-select-f">
+                                                <!-- <option disabled>Seleccione</option> -->
+                                                <option value="0">Sin cuotas</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="1">3</option>
+                                                <option value="2">4</option>
+                                                <option value="1">5</option>
+                                                <option value="2">6</option>
+                                                <option value="1">7</option>
+                                                <option value="2">8</option>
+                                                <option value="1">9</option>
+                                                <option value="1">10</option>
+                                                <option value="2">11</option>
+                                                <option value="2">12</option>
+                                            </select>
                                         </div>
                                         <div class="col-6 viewMobileWidth">
                                             <label for="lastname">Ciudad de facturación</label>
@@ -874,8 +893,17 @@
                                                 <img src="./assets/comprar/pago/_tambo.png" alt="">
                                             </div>
                                             <div class="row">
-                                                <div class="col-12 text-end">
+                                                <div class="col-12 text-end mb-3">
                                                     <a href="#">¿Como pagar con SafetyPay online?</a>
+                                                </div>
+                                            </div>
+                                            <div class="row boxLimite">
+                                                <div class="titleLimite">
+                                                    Tiempo Límite
+                                                </div>
+                                                <div class="descripLimite">
+                                                    Recuerda que una vez generado tu código safetypay, deberás pagar dentro de las
+                                                    <strong>próximas 2 horas</strong>. De lo contrario la reserva será cancelada.
                                                 </div>
                                             </div>
                                         </div>
@@ -1003,7 +1031,7 @@
                                     </div>
                                     <div formArrayName="phones" *ngIf="getArrayPhone()">
                                         <div [formGroupName]="i" *ngFor="let phon of getArrayPhone(); let i = index" class="row rowMobileCard">
-                                            <hr>
+                                            <!-- <hr> -->
                                             <div class="col-6 viewMobileWidth">
                                                 <label for="names">Tipo de teléfono</label>
                                                 <select formControlName="typePhone" class="form-select-f">
@@ -1047,8 +1075,8 @@
                     <div class="col-12 ">
                         <div class="card atribCard">
                             <div class="row rowMobileCard">
-                                <div class="col-6 viewMobileWidth">
-                                    <div class="form-check form-check-inline">
+                                <div class="col-6 viewMobileWidth pe-0">
+                                    <div class="form-check form-check-inline me-0">
                                         <input class="form-check-input" type="checkbox" formControlName="chkPolity" id="chkPolity" value="option1">
                                         <label class="form-check-label" for="chkPolity">He leído y acepto la
                                             <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#politicaModal">política de protección de datos personales.</a>
@@ -1206,7 +1234,7 @@
                 <div class="card-body shadow-none">
                     <div class="container">
                         <div class="row">
-                            <div class="col-2 d-flex align-items-center">
+                            <div class="col-2 d-flex align-items-center pe-0">
                                 <svg width="26" height="15" viewBox="0 0 26 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0.22224 10.6745L3.98078 13.8043C4.82721 14.5092 5.82223 14.8688 6.8215 14.8687C7.54487 14.8687 8.27049 14.6802 8.94312 14.2977L12.6462 12.1892C12.9013 12.0438 13.0115 11.674 12.8922 11.3633C12.773 11.0524 12.4695 10.9183 12.2143 11.0634L8.51155 13.1719C7.23477 13.8977 5.71927 13.747 4.55621 12.7785L1.44757 10.1898L2.84668 9.14429L6.44734 10.5994C6.57151 10.6496 6.70681 10.6397 6.82522 10.5717L11.1155 8.10951C11.2754 8.01775 11.3848 7.83179 11.4048 7.61788C11.4249 7.40402 11.3526 7.19272 11.2138 7.05945L6.47977 2.51444L8.32092 1.36988L16.8364 4.65222C16.9587 4.69937 17.0911 4.68856 17.2072 4.62221L22.9044 1.36056C23.5474 1.03263 24.3258 1.39094 24.6429 2.16272C24.805 2.55737 24.8287 3.00421 24.7096 3.42098C24.5905 3.83775 24.3441 4.17002 24.0158 4.35679L16.3621 8.71292C16.107 8.85812 15.9967 9.22792 16.1159 9.53876C16.2352 9.84959 16.5386 9.98404 16.7938 9.83872L24.4473 5.48271C25.0272 5.15298 25.4624 4.56592 25.6728 3.82961C25.8832 3.09331 25.8414 2.30382 25.5549 1.60665C24.9998 0.255322 23.6278 -0.36598 22.4967 0.221647C22.491 0.224567 22.4853 0.227674 22.4798 0.230843L16.954 3.39433L8.42924 0.108322C8.3016 0.0591148 8.16299 0.0730319 8.04361 0.147277L5.30692 1.84859C5.1521 1.94483 5.04817 2.1306 5.03119 2.34134C5.01421 2.55209 5.08652 2.75892 5.22309 2.89002L9.93484 7.41359L6.57503 9.3418L2.94276 7.87392C2.80002 7.81632 2.64377 7.83825 2.51557 7.93399L0.243352 9.63195C0.0959743 9.74205 0.00443697 9.93571 0.000153326 10.1462C-0.00407932 10.3568 0.0795537 10.5556 0.22224 10.6745Z"
                                         fill="#4B4B4B" />
@@ -1214,7 +1242,7 @@
                                         fill="#4B4B4B" />
                                 </svg>
                             </div>
-                            <div class="col-10">
+                            <div class="col-10 ps-0">
                                 <h1 class="d-inline">
                                     Lima
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1228,7 +1256,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="viajero">
+                        <div class="viajero mt-3">
                             <div class="row">
                                 <div class="col-6">
                                     <h3>SALIDA</h3>
@@ -1303,7 +1331,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <a href="#">ver detalles</a>
+                                    <a href="#" class="font-12">ver detalles</a>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -1384,7 +1412,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <a href="#">ver detalles</a>
+                                    <a href="#" class="font-12">ver detalles</a>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -1951,7 +1979,7 @@
                 <div class="titleMod">Política de Protección y Tratamiento de Datos Personales</div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-justify">
                 <p>
                     <strong>En cumplimiento de la Ley N° 29733 – Ley de Protección de Datos Personales- y su Reglamento N° 003-2013-JUS</strong>,
                     autorizo y otorgo a Promotora de Turismo Nuevo Mundo S.A.C. . (en adelante Nuevo Mundo Viajes), de manera
