@@ -7,6 +7,15 @@ import { CoverageService } from 'src/app/Services/coverage/coverage.service';
 import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { take } from 'rxjs/operators';
 
+interface Methods {
+  id: string;
+  name: string;
+  value: string;
+  img: string;
+  text: string;
+  checked: boolean;
+}
+
 @Component({
   selector: 'app-comprar',
   templateUrl: './comprar.component.html',
@@ -47,23 +56,23 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   MSG_CHK_INFO: string = 'chkInfo'
 
   listYears: string[] = []
-  current: any;
-  detailPay!: string;
-  filter!: string;
-  title!: string;
-  asistencia!: boolean;
-  reembolso!: boolean;
-  detalleViaje!: boolean;
-  detalleCobertura!: boolean;
-  cupon!: boolean;
+  current: any
+  detailPay!: string
+  filter!: string
+  title!: string
+  asistencia!: boolean
+  reembolso!: boolean
+  detalleViaje!: boolean
+  detalleCobertura!: boolean
+  cupon!: boolean
   mobile!: boolean
-  selectedPay: string = 'safety'
-  selectedPopup: string = 'agencia';
+  selectedPay!: string
+  selectedPopup: string = 'agencia'
   result: any
   resultJson: any
   safe0: any
   safe0Json: any
-  banca: boolean = true;
+  banca: boolean = true
   /* metodoPago: any = [
     { name: 'option-2', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
     { name: 'option-1', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
@@ -80,10 +89,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     { name: 'Caja Trujillo', value: 1025 }
   ]
 
-  metodoPago: any = [
-    { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
-    { name: 'optionm-1', value: 'tarjeta', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
-  ]
+  metodoPago: Methods[]
+  // metodoPago: any = [
+  //   { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
+  //   { name: 'optionm-1', value: 'tarjeta', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
+  // ]
+
   isLinear = true;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
@@ -95,6 +106,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     public offersService: OffersService,
     public coverageService: CoverageService,
   ) {
+    
     this.safe0 = localStorage.getItem('safe0')
     this.safe0Json = JSON.parse(this.safe0)
     this.result = localStorage.getItem('Datasafe')
@@ -110,6 +122,19 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.mobile = false
     }
     this.current = this.route.getCurrentNavigation()!.extras.state as any
+    
+    this.selectedPay = (this.current['filter'] === 'filter') ? 'tarjeta' : 'safety'
+    if (this.current['filter'] === 'filter') {
+      this.metodoPago = [
+        { name: 'optionm-1', value: 'tarjeta', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: true, id: "0" },
+        { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: false, id: "1" },
+      ]
+    } else {
+      this.metodoPago = [
+        { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
+        { name: 'optionm-1', value: 'tarjeta', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
+      ]
+    }
   }
 
   showDataContacto: Boolean = true;
@@ -152,7 +177,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     this.createForm()
     // this.chkValue('')
-    for (const i of this.resultJson['ClienteCotizacion']) {
+    console.log(this.resultJson);
+
+    let pasajeros = this.resultJson !== null ? this.resultJson['ClienteCotizacion'] : '1'
+    for (const i of pasajeros) {
       this.addCustomers()
     }
     this.selectYear()
@@ -312,7 +340,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       customers: new FormArray([]),
       formCard: new FormGroup({
         bankPay: new FormControl(),
-        select21: new FormControl('SAFETYPAY'),
+        select21: new FormControl(this.current['filter'] === 'filter' ? 'tarjeta' : 'SAFETYPAY'),
         numberCard: new FormControl(),
         nameCard: new FormControl(),
         expiredCard: new FormControl(),
@@ -434,8 +462,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     //console.log(this.selectedPopup);
   }
   chkValue(e: any) {
-    const type = e.target.id;
-    if (type === 'optionm-1' || type === 'option-1') {
+    if (e === 'optionm-1' || e === 'option-1') {
       this.selectedPay = 'tarjeta';
     } else {
       this.selectedPay = 'safety';
@@ -473,7 +500,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   otherPlan() {
     localStorage.removeItem('safe0')
-    this.route.navigateByUrl('/home/seguros/planes');
+    this.route.navigateByUrl('/home/vuelos/resultados');
   }
 
   listCoverage() {
@@ -507,5 +534,5 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       // data => console.log(data['Resultado']),
     )
   }
-  
+
 }
