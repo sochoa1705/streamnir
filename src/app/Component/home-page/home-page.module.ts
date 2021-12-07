@@ -23,6 +23,8 @@ import { VuelosModule } from './vuelos/vuelos.module';
 import { AerolineasModule } from './aerolineas/aerolineas.module';
 import { DollarChangeService } from '../../Services/dollarChange/dollar-change.service';
 import { IpClienteService } from '../../Services/ipCliente/ip-cliente.service';
+import { TerminosCondicionesModule } from './terminos-condiciones/terminos-condiciones.module';
+import { DocumentacionViajeModule } from './documentacion-viaje/documentacion-viaje.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -35,6 +37,8 @@ import { IpClienteService } from '../../Services/ipCliente/ip-cliente.service';
     VuelosModule,
     AerolineasModule,
     PerfilModule,
+    TerminosCondicionesModule,
+    DocumentacionViajeModule,
     ToolbarModule,
     PreFooterModule,
     FooterModule,
