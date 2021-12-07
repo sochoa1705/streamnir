@@ -1,0 +1,117 @@
+            .titleModal {
+                font-family: Open Sans;
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 36px;
+                padding-bottom: 30px;
+                color: #4B4B4B;
+            }
+            .linkRed {
+                font-family: Montserrat;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 21px;
+                letter-spacing: 0.1px;
+                padding-bottom: 10px;
+                color: #B50A27;
+            }
+            .subtitleModal {
+                font-family: Montserrat;
+                font-weight: 700;
+                font-size: 16px;
+                letter-spacing: 0.1px;
+                padding: 30px 0;
+            }
+            .listaModal {
+                li {
+                    font-family: Montserrat;
+                    font-weight: 500;
+                    font-size: 14px;
+                    letter-spacing: 0.1px;
+                    list-style-type: decimal;
+                }
+            }
+            p {
+                font-family: Montserrat;
+                font-weight: 500;
+                font-size: 14px;
+                letter-spacing: 0.1px;
+            }
+            .contentModal {
+                padding: 55px;
+                background: #ffffff;
+                .imgCentral {
+                    display: flex;
+                    flex: 1 1 100%;
+                    align-items: flex-end;
+                    gap: 20px;
+                    margin-bottom: 40px;
+                    justify-content: center;
+                }
+            }
+            .contentModBox {
+                border: 0.5px solid #E4E5E7;
+                margin: 55px;
+                border-radius: 10px;
+                background: #ffffff;
+                .textTitle {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 10px 10px 0px 0px;
+                    font-family: Open Sans;
+                    font-weight: bold;
+                    font-size: 24px;
+                    line-height: 36px;
+                    color: #FFFFFF;
+                    background: #1EAEA5;
+                    height: 60px;
+                }
+                .listModal {
+                    padding: 30px 60px;
+                    &.lessPad {
+                        padding: 30px 15px;
+                    }
+                }
+                .padLateral {
+                    padding: 0 120px;
+                }
+                .titleCondicion {
+                    font-family: Montserrat;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 21px;
+                    letter-spacing: 0.1px;
+                    padding-left: 45px;
+                    color: #4B4B4B;
+                }
+                .tablaModal {
+                    padding: 0 150px;
+                    .rowModal {
+                        display: flex;
+                        flex: 1 1 auto;
+                        .colModal {
+                            display: flex;
+                            flex: 1 1 15%;
+                            padding-bottom: 30px;
+                        }
+                    }
+                }
+            }
+            .contentRed {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 55px 55px 55px;
+                font-family: Montserrat;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 21px;
+                text-align: justify;
+                letter-spacing: 0.1px;
+                color: #4B4B4B;
+                height: 60px;
+                border: 1px solid #DF0C30;
+                box-sizing: border-box;
+                border-radius: 10px;
+            }

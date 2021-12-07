@@ -1,0 +1,57 @@
+h1{
+    font-family: Open Sans;
+    font-weight: 700;
+    font-size: 32px
+}
+.titleModal {
+    font-family: Open Sans;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 36px;
+    padding-bottom: 30px;
+    color: #4B4B4B;
+}
+.linkRed {
+    display: table;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.1px;
+    padding-bottom: 10px;
+    color: #B50A27;
+    &:hover{
+        text-decoration: underline;
+    }
+}
+.subtitleModal {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.1px;
+    padding: 30px 0;
+}
+.listaModal {
+    li {
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 14px;
+        letter-spacing: 0.1px;
+        list-style-type: decimal;
+    }
+}
+p {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+}
+.btnModal{
+    color: #B50A27;
+    border: 1px solid #B50A27;
+background: white;
+font-family: Montserrat;
+font-weight: 600;
+font-size: 14px;
+
+}
