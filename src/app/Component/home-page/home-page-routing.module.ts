@@ -9,6 +9,8 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { ResultadosComponent } from './resultados/resultados.component';
 import { VuelosComponent } from './vuelos/vuelos.component';
 import { AerolineasComponent } from './aerolineas/aerolineas.component';
+import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
+import { DocumentacionViajeComponent } from './documentacion-viaje/documentacion-viaje.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,8 @@ const routes: Routes = [
       { path: 'conformidad', component: ConformidadComponent },
       { path: 'aerolineas', component: AerolineasComponent },
       { path: 'perfil', component: PerfilComponent },
+      { path: 'terminos-condiciones', component: TerminosCondicionesComponent },
+      { path: 'documentacion-viaje', component: DocumentacionViajeComponent },
       {
         path: 'seguros',
         loadChildren: () => import('./seguros/seguros.module').then(
