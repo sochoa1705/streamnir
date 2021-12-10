@@ -15,6 +15,9 @@ export const LogoutType = {
 };
 
 export enum ENDPOINT_API {
+  // DOLLAR
+  CHANGE = 'generales/TipoCambio',
+
   // AUTOCOMPLETE
   CIUDADES = 'GetCiudades_AutoComplete',
   ciudad = 'pStrIdCiudad',

@@ -885,7 +885,7 @@ section {
     line-height: 18px;
     text-transform: capitalize;
     color: #4B4B4B;
-    text-indent: 40px;
+    text-indent: 10px;
     border: 0.5px solid #E4E5E7;
     &:focus{
         border: 0.5px solid #009AED!important;
@@ -6106,4 +6106,9 @@ span.valid {
 
 @media print{
     .doNotPrint{display:none !important;}
+}
+
+input.inputDer,
+    input.inputIzq {
+        text-indent: 40px!important
 }
