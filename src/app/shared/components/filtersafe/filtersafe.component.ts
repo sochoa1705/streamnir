@@ -230,7 +230,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       // window.location.href="#/home/seguros/planes"
       // this.route.navigateByUrl('/home/comprar', { skipLocationChange: true });
       // this.route.navigate(["/home/seguros/planes"]);
-      this.route.navigateByUrl('/home/comprar', { skipLocationChange: true }).then(() =>
+      this.route.navigateByUrl('/home', { skipLocationChange: true }).then(() =>
         this.route.navigate(["/home/seguros/planes"]));
     }
   }
@@ -247,10 +247,10 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   diffDays() {
     var FeIni = this.fromDate!.month + "/" + this.fromDate!.day + "/" + this.fromDate!.year
     var FeFin = this.toDate!.month + "/" + this.toDate!.day + "/" + this.toDate!.year
-    const date1 = new Date(FeIni);
-    const date2 = new Date(FeFin);
-    var diff = Math.abs(date1.getTime() - date2.getTime());
-    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    const date1 = new Date(FeIni)
+    const date2 = new Date(FeFin)
+    var diff = Math.abs(date1.getTime() - date2.getTime())
+    var diffDays = Math.ceil(diff / (1000 * 3600 * 24)) + 1
     return String(diffDays);
   }
 

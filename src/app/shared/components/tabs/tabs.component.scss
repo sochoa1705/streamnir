@@ -71,7 +71,7 @@ article {
     &-tab-body {
         background: $white;
         box-shadow: 0px 1px 8px rgba(122, 88, 88, 0.05);
-        padding: 35px 43px;
+        padding: 35px 0px 35px 43px;
         border-radius: 7px;
         @media (max-width: 768px) {
             padding: 7px;
