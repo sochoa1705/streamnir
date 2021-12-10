@@ -28,6 +28,7 @@ svg {
     display: inline-block;
     margin-right: 5px;
     padding-left: 0;
+    padding-right: 10px;
     @media (max-width: 768px) {
         width: 99px;
         display: inline-block;
@@ -72,7 +73,8 @@ svg {
         // border-radius: 0 3px 3px 0;
         // border-left: 0;
         background: url(../../../../assets/origen.png) no-repeat 7px center;
-        padding-left: 40px;
+        text-indent:40px!important;
+       // padding-left: 40px;
     }
     &::placeholder {
         color: rgba(185, 188, 191, 1);
