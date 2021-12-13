@@ -65,6 +65,11 @@ button {
     border: 0px;
     padding: 9px 16px;
     border-radius: 3px;
+
+        &:hover{
+            background: $red
+        }
+    
     @media (max-width: 768px) {
         font-size: 12px;
     }
