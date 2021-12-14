@@ -16,8 +16,8 @@ export class DollarChangeService {
   changeDollar(payload: any){
     // const url_api = 'http://10.75.131.17:8091/api/generales/TipoCambio' //cambiar ruta
     // `${environment.urlBase}${ENDPOINT_API.CIUDADES}?${ENDPOINT_API.ciudad}=${value}`
-    //nconst url_api = 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/generales/TipoCambio' //cambiar ruta
-    const url_api = `${environment.endpoint}${ENDPOINT_API.CHANGE}`
+    const url_api = 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/generales/TipoCambio' //cambiar ruta
+    //const url_api = `${environment.endpoint}${ENDPOINT_API.CHANGE}`
     return this.http.post<any>(url_api, payload, { observe: 'response' }).pipe(
       map((observe: any) => observe['body']['Resultado'])
     )
