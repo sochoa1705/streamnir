@@ -15,13 +15,7 @@ export class DestinyService {
   //private httpOptions: any;
   constructor(
     private http: HttpClient
-  ) { 
-
-     const httpOptions = { headers: new 
-      HttpHeaders({ 'Content-Type':'application/x-www-form-urlencoded','Access-Control-Allow-Origins':'*'})};
-   
-
-  }
+  ) { }
 
   getDestiny(payload: any): Observable<any> {
     let url_api = `${environment.urlBase}${ENDPOINT_API.DESTINY}`;
