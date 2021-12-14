@@ -26,13 +26,13 @@ export enum ENDPOINT_API {
   COVERAGE = 'ObtenerCobertura',
 
   // UNIDAD DE NEGOCIOS
-  BUSINESS_UNIT = 'ObtenerUnidadesNegocio',
+  BUSINESS_UNIT = 'productoAsistencia/ObtenerUnidadesNegocio',
 
   // UNIDAD DE NEGOCIOS VENDEDOR
   BUSINESS_UNIT_SELLER = 'ObtenerUnidadNegocioByVendedor',
 
   // DESTINOS
-  DESTINY = 'Destinos',
+  DESTINY = 'generales/Destinos',
 
   // PLANSAC
   PLANSAC = 'ObtenerPlanesAC',
