@@ -3,53 +3,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { Injectable } from '@angular/core';
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
 import { ROUTE_VIAJES } from '../../constant';
-
-@Injectable()
-export class CustomAdapter extends NgbDateAdapter<string> {
-  readonly DELIMITER = '-';
-  fromModel(value: string | null): NgbDateStruct | null {
-    if (value) {
-      let date = value.split(this.DELIMITER);
-      return {
-        day: parseInt(date[0], 10),
-        month: parseInt(date[1], 10),
-        year: parseInt(date[2], 10)
-      };
-    }
-    return null;
-  }
-
-  toModel(date: NgbDateStruct | null): string | null {
-    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
-  }
-}
-/**
- * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
- */
-@Injectable()
-export class CustomDateParserFormatter extends NgbDateParserFormatter {
-  readonly DELIMITER = '/';
-  parse(value: string): NgbDateStruct | null {
-    if (value) {
-      let date = value.split(this.DELIMITER);
-      return {
-        day: parseInt(date[0], 10),
-        month: parseInt(date[1], 10),
-        year: parseInt(date[2], 10)
-      };
-    }
-    return null;
-  }
-
-  format(date: NgbDateStruct | null): string {
-    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
-  }
-}
-
 export interface State {
   flag: string;
   name: string;
@@ -58,11 +14,7 @@ export interface State {
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.scss'],
-  providers: [
-    { provide: NgbDateAdapter, useClass: CustomAdapter },
-    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
-  ]
+  styleUrls: ['./tabs.component.scss']
 })
 export class TabsComponent implements OnInit {
   @Input() show!: boolean
