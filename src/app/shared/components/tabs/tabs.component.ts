@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
 import { ROUTE_VIAJES } from '../../constant';
 export interface State {
@@ -206,10 +207,8 @@ export class TabsComponent implements OnInit {
 
   autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
     this.citys = [];
-    console.log(e.target);
     // let elemento = this.origen.nativeElement;
     let elemento = e.target;
-    console.log(elemento);
 
     let value = elemento.value;
     if (value.length == 0) {
@@ -226,7 +225,6 @@ export class TabsComponent implements OnInit {
   getListCiudades(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
-        console.log(data);
         this.citys = data;
         if(type === 1) {
           this.citysOrigenSelect = data;
@@ -274,12 +272,12 @@ export class TabsComponent implements OnInit {
     //this.adultos = 0;
     //this.ninos = 0;
     //this.infantes = 0;
-    console.log('test tab');
+    // console.log('test tab');
   }
 
   public searchVueloHotel(){
-    console.log('value ', this.form);
-    console.log('value fecha ' , this.fromDate, this.toDate);
+    // console.log('value ', this.form);
+    // console.log('value fecha ' , this.fromDate, this.toDate);
 
     this.validPasajeros = this.adultos === 0;
 
@@ -309,8 +307,12 @@ export class TabsComponent implements OnInit {
   }
 
   private getParamsTabs(typeTab: number): any {
-    let startDate = this.fromDate!.day + "/" + this.fromDate!.month + "/" + this.fromDate!.year;
-    let endDate = this.toDate!.day + "/" + this.toDate!.month + "/" + this.toDate!.year;
+
+    let startDateStr =  `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
+    let endDateStr =  `${(this.toDate!.day).toString()}/${(this.toDate!.month).toString()}/${(this.toDate!.year).toString()}`;
+
+    let startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
+    let endDate =  moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
     let origen = typeTab === 1 ? this.form.controls['origen'].value : typeTab === 2 ? this.form2.controls['origenHotel'].value : this.form3.controls['origen'].value;
     let destino = typeTab === 1 ? this.form.controls['destino'].value : this.form3.controls['destino'].value;
     let businessClass = this.form.controls['clase'].value === 'business';
@@ -323,6 +325,7 @@ export class TabsComponent implements OnInit {
 
 
   public goToUrlPackages(): void {
+    console.log('go');
     window.location.href = ROUTE_VIAJES.RUTA_PAQUETES;
   }
 }

@@ -22,7 +22,6 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
   }
 
   format(date: NgbDateStruct | null): string {
-      console.log(date);
     if (!date) return '';
     let mdt = moment([date.year, date.month - 1, date.day]);
     if (!mdt.isValid()) return '';
