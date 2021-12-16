@@ -7,6 +7,8 @@ import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
 import { ROUTE_VIAJES } from '../../constant';
+import { PopUpPasajeroModel } from '../pop-up-pasajero/pop-up-pasajero.model';
+import { PasajerosConHabitacion, PasajerosSinHabitacion } from './tabs.models';
 export interface State {
   flag: string;
   name: string;
@@ -41,14 +43,6 @@ export class TabsComponent implements OnInit {
   // FechaFinal : NgbDate | undefined;
   diffInDays: number | undefined
 
-  pasajeros: any = [
-    {
-      adultos: 10,
-      ninos: 1,
-      infantes: 1
-    }
-  ];
-
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null
   fromDate2: NgbDate | null
@@ -63,11 +57,11 @@ export class TabsComponent implements OnInit {
   destino: any;
   origenHotel: any;
 
-  habitacion = 1;
-  adultos = 0;
-  ninos = 0;
-  infantes = 0;
   validPasajeros = false;
+
+  public pasajerosVueloHotel:PasajerosConHabitacion;
+  public pasajerosHoteles:PasajerosConHabitacion;
+  public pasajerosActividades:PasajerosSinHabitacion;
 
   @ViewChild('inputOrigen', { static: false }) inputOrigen!: ElementRef<HTMLInputElement>;
   @ViewChild('inputDestino', { static: false }) inputDestino!: ElementRef<HTMLInputElement>;
@@ -86,6 +80,10 @@ export class TabsComponent implements OnInit {
     this.fromDate3 = calendar.getToday();
     this.fromDate4 = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+
+    this.pasajerosVueloHotel = new PasajerosConHabitacion(0,0,0,1);
+    this.pasajerosHoteles = new PasajerosConHabitacion(0,0,0,1);
+    this.pasajerosActividades = new PasajerosSinHabitacion(0,0,0);
   }
 
   get today() {
@@ -119,25 +117,7 @@ export class TabsComponent implements OnInit {
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
-  showOption: Boolean = true;
-  showPasajero() {
-    this.showOption = this.showOption ? false : true;
-  }
 
-  showOption2: Boolean = true;
-  showPasajero2() {
-    this.showOption2 = this.showOption2 ? false : true;
-  }
-
-  showOption3: Boolean = true;
-  showPasajero3() {
-    this.showOption3 = this.showOption3 ? false : true;
-  }
-
-  showOption4: Boolean = true;
-  showPasajero4() {
-    this.showOption4 = this.showOption4 ? false : true;
-  }
   ngOnInit(): void {
     this.createForm();
     this.getDestinyOrigin();
@@ -181,17 +161,6 @@ export class TabsComponent implements OnInit {
     });
   }
 
-  count(valor: number, e: any) {
-    let item = e.target.name;
-    let pasajero = this.pasajeros[0][item];
-    if (pasajero >= 100 && valor >= 0) {
-      return pasajero = 100
-    }
-    if (pasajero <= 0 && valor < 0) {
-      return pasajero = 0
-    }
-    return pasajero = pasajero + valor
-  }
 
   // customers() {
   //   var cdr: any = document.getElementById('cdr');
@@ -203,6 +172,10 @@ export class TabsComponent implements OnInit {
     if (e.tab.textLabel === "seguros") {
       this.route.navigate(['/home/seguros'])
     }
+  }
+
+  savePasajerosVueloHotel(pasajeros:PopUpPasajeroModel){    
+    this.pasajerosVueloHotel = {...pasajeros};
   }
 
   autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
@@ -237,31 +210,15 @@ export class TabsComponent implements OnInit {
     )
   }
 
-  public calculateDistributionTravel(optionTravel: string, optionAddRemove: number): void {
-    switch(optionTravel) {
-      case 'habitacion' :
-        //this.habitacion += this.habitacion === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        break;
-      case 'adultos' :
-        this.adultos += this.adultos === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        break;
-      case 'ninos' :
-        this.ninos += this.ninos === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        break;
-      case 'infantes' :
-        this.infantes += this.infantes === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        break;
-    }
-  }
 
-  private getDistributionUrl(){
-    let urlDistributon = this.adultos.toString();
-    if(this.ninos > 0) {
-      urlDistributon += `-${this.ninos}-`;
+  private getDistributionUrl(pasajeros:PasajerosSinHabitacion){
+    let urlDistributon = pasajeros.adultos.toString();
+    if(pasajeros.ninos > 0) {
+      urlDistributon += `-${pasajeros.ninos}-`;
     } else {
       urlDistributon += "-0";
     }
-    for(let i=0;i<this.ninos;i++) {
+    for(let i=0;i<pasajeros.ninos;i++) {
       urlDistributon += "10,"
     }
     urlDistributon = urlDistributon.charAt(urlDistributon.length - 1 ) === ',' ? urlDistributon.substring(0, urlDistributon.length - 1) : urlDistributon;
@@ -279,23 +236,20 @@ export class TabsComponent implements OnInit {
     // console.log('value ', this.form);
     // console.log('value fecha ' , this.fromDate, this.toDate);
 
-    this.validPasajeros = this.adultos === 0;
-
-    if(this.adultos > 0) {
+    if(this.pasajerosVueloHotel.adultos > 0) {
       let tab = 'FLIGHT_HOTEL';
       let params = this.getParamsTabs(1);
-      let distribution = this.getDistributionUrl();
+      let distribution = this.getDistributionUrl(this.pasajerosVueloHotel);
   
       window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&destination=${params.idDestino}&departure=${params.idOrigen}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&distribution=${distribution}&businessCabin=${params.businessClass}&lang=ES`;
     }
   }
 
   public searchAlojamiento() {
-    this.validPasajeros = this.adultos === 0;
-    if(this.adultos > 0) {
+    if(this.pasajerosHoteles.adultos > 0) {
       let tab = 'ONLY_HOTEL';
       let params = this.getParamsTabs(2);
-      let distribution = this.getDistributionUrl();
+      let distribution = this.getDistributionUrl(this.pasajerosHoteles);
       window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&hotelDestination=${params.idOrigen}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&distribution=${distribution}&lang=ES&carRental=false`;
     }
   }

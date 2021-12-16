@@ -1,8 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { Guid } from '../../utils';
+import { PopUpPasajeroModel } from './pop-up-pasajero.model';
 
 @Component({
   selector: 'app-pop-up-pasajero',
@@ -36,6 +37,8 @@ export class PopUpPasajeroComponent implements OnInit{
 
   @Input() onlyPasajeros = false;
   @Input() habitacionDisabled = true;
+
+  @Output() emitPasajeros = new EventEmitter<PopUpPasajeroModel>()
 
   @ViewChild('boxFlotante') boxFlotante:ElementRef<HTMLElement> | undefined;
 
@@ -78,7 +81,12 @@ export class PopUpPasajeroComponent implements OnInit{
         this.infantes += this.infantes === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
         break;
     }
+  }
 
+  savePasajeros(){
+    const popUpPasajeroModel = new PopUpPasajeroModel(this.adultos,this.ninos,this.infantes,this.habitacion);
+    this.emitPasajeros.emit(popUpPasajeroModel);
+    this.closePopUp();
   }
 
 }
