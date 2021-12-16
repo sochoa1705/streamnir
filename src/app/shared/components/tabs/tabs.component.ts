@@ -222,17 +222,26 @@ export class TabsComponent implements OnInit {
     // console.log('test tab');
   }
 
-  public searchVueloHotel(){
-    // console.log('value ', this.form);
-    // console.log('value fecha ' , this.fromDate, this.toDate);
 
-    if(this.pasajerosVueloHotel.adultos > 0) {
-      let tab = 'FLIGHT_HOTEL';
-      let params = this.getParamsTabs(1);
-      let distribution = this.getDistributionUrl(this.pasajerosVueloHotel);
-  
-      window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&destination=${params.idDestino}&departure=${params.idOrigen}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&distribution=${distribution}&businessCabin=${params.businessClass}&lang=ES`;
-    }
+  navigateToResponseUrl(url: string): void {
+    window.location.href = url;
+ }
+
+ public getUrlVueloHotel():string{
+  let url = ''
+  if(this.pasajerosVueloHotel.adultos > 0) {
+    let tab = 'FLIGHT_HOTEL';
+    let params = this.getParamsTabs(1);
+    let distribution = this.getDistributionUrl(this.pasajerosVueloHotel);
+    url = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&destination=${params.idDestino}&departure=${params.idOrigen}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&distribution=${distribution}&businessCabin=${params.businessClass}&lang=ES`;
+  }
+
+  return url;
+ }
+
+  public searchVueloHotel(){
+    const url = this.getUrlVueloHotel();
+    this.navigateToResponseUrl(url);
   }
 
   public searchAlojamiento() {
@@ -250,7 +259,7 @@ export class TabsComponent implements OnInit {
     window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&dropoffPoint=${params.idOrigen}&destination=${params.idDestino}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&useSameDropoff=false&pickupTime=${params.horaInicio}&dropoffTime=${params.horaDestino}&lang=ES`;
   }
 
-  private getParamsTabs(typeTab: number): any {
+  public getParamsTabs(typeTab: number): any {
 
     let startDateStr =  `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
     let endDateStr =  `${(this.toDate!.day).toString()}/${(this.toDate!.month).toString()}/${(this.toDate!.year).toString()}`;
@@ -264,6 +273,7 @@ export class TabsComponent implements OnInit {
     let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.label === destino).id : 0;
     let horaInicio = this.form3.controls['initHour'].value;
     let horaDestino = this.form3.controls['lastHour'].value;
+    
     return {startDate, endDate, origen, destino, businessClass, idOrigen, idDestino, horaInicio, horaDestino};
   }
 

@@ -2,7 +2,7 @@ import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, discardPeriodicTasks, fakeAsync, flush, flushMicrotasks, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from '../../material.module';
 import { TabsComponent } from './tabs.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -16,7 +16,6 @@ export function findComponent<T>(
 ): DebugElement {
   return fixture.debugElement.query(By.css(selector));
 }
-
 
 describe('TabsComponent', () => {
   let fixture: ComponentFixture<TabsComponent>;
@@ -101,34 +100,114 @@ describe('TabsComponent', () => {
 
     })
 
-    it('Generar Distribucion by mock', ()=>{
+    it('Debe buscar un vuelo o hotel correctamente, searchVueloHotel()',()=>{
 
-      let pasajeros 
-      let result
-      let mockedResult
+      const mockedParams = {
+        "startDate": "27/12/2021",
+        "endDate": "09/01/2022",
+        "origen": "Lima, Perú",
+        "destino": "Ciudad de México, México",
+        "businessClass": false,
+        "idOrigen": "Destination::LIM",
+        "idDestino": "Destination::MDF",
+        "horaInicio": "",
+        "horaDestino": ""
+      }
 
-      pasajeros = new PasajerosConHabitacion(4,6,2,1);
-      result = component.getDistributionUrl(pasajeros);
-      mockedResult = "4-8-10,10,10,10,10,10,2,2";
-      expect(result).toBe(mockedResult);
+      component.pasajerosVueloHotel = new PasajerosConHabitacion(1, 2, 1, 1);
+      let pasajerosMockedResult = "1-3-10,10,2";
+      // 1 adulto, 3 niños (2 niños de 10 años y 1 infante de 2 años)
 
+      spyOn(component, 'getParamsTabs').and.returnValue(mockedParams)
 
-      pasajeros = new PasajerosConHabitacion(2,3,2,1);
-      result = component.getDistributionUrl(pasajeros);
-      mockedResult = "2-5-10,10,10,2,2";
-      expect(result).toBe(mockedResult);
+      const mockedReponse = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=FLIGHT_HOTEL&destination=Destination::MDF&departure=Destination::LIM&departureDate=27/12/2021&arrivalDate=09/01/2022&distribution=${pasajerosMockedResult}&businessCabin=false&lang=ES`;
+   
+      // Se hace esto para no redirigir la web ya que hay un windows.locaction
+      spyOn(component,'navigateToResponseUrl').and.callFake((url)=>{
+        return url;
+      })
 
-      
-      pasajeros = new PasajerosConHabitacion(1,2,1,1);
-      result = component.getDistributionUrl(pasajeros);
-      mockedResult = "1-3-10,10,2";
-      expect(result).toBe(mockedResult);
-      
+      component.searchVueloHotel();
+
+      expect(component.navigateToResponseUrl).toHaveBeenCalledOnceWith(mockedReponse);
     })
 
   });
 
+  
+  it('Generar Distribucion by mock, getDistributionUrl(pasajeros:PasajerosSinHabitacion)', ()=>{
 
+    let pasajeros 
+    let result
+    let mockedResult
+
+    pasajeros = new PasajerosConHabitacion(4,6,2,1);
+    result = component.getDistributionUrl(pasajeros);
+    mockedResult = "4-8-10,10,10,10,10,10,2,2";
+    expect(result).toBe(mockedResult);
+
+
+    pasajeros = new PasajerosConHabitacion(2,3,2,1);
+    result = component.getDistributionUrl(pasajeros);
+    mockedResult = "2-5-10,10,10,2,2";
+    expect(result).toBe(mockedResult);
+
+    
+    pasajeros = new PasajerosConHabitacion(1,2,1,1);
+    result = component.getDistributionUrl(pasajeros);
+    mockedResult = "1-3-10,10,2";
+    expect(result).toBe(mockedResult);
+    
+  })
+
+  it("Generar Parametros, getParamsTabs()", ()=>{
+
+    const tabVueloHotel = 1;
+
+    component.fromDate = new NgbDate(2021,12,27);
+    component.toDate = new NgbDate(2022,1,9);
+
+    component.form.controls['origen'].setValue("Lima, Perú");
+    component.form.controls['destino'].setValue("Ciudad de México, México");
+    component.form.controls['clase'].setValue("economy");
+
+    component.citysOrigenSelect =  [
+      {
+          "type": "Destination:",
+          "value": "LIM",
+          "id": "Destination::LIM",
+          "label": "Lima, Perú",
+          "country": "PE"
+      }
+    ]
+    component.citysDestinosSelect =  [
+        {
+          "type": "Destination:",
+          "value": "MDF",
+          "id": "Destination::MDF",
+          "label": "Ciudad de México, México",
+          "country": "MX"
+      }
+    ]
+
+    const mockedReponse = {
+      "startDate": "27/12/2021",
+      "endDate": "09/01/2022",
+      "origen": "Lima, Perú",
+      "destino": "Ciudad de México, México",
+      "businessClass": false,
+      "idOrigen": "Destination::LIM",
+      "idDestino": "Destination::MDF",
+      "horaInicio": "",
+      "horaDestino": ""
+  }
+
+
+    const result = component.getParamsTabs(tabVueloHotel);
+
+    expect(result).toEqual(mockedReponse);
+
+  })
 
   
 });
