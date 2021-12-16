@@ -35,6 +35,7 @@ export class PopUpPasajeroComponent implements OnInit{
   idStateOpen:string = '';
 
   @Input() onlyPasajeros = false;
+  @Input() habitacionDisabled = true;
 
   @ViewChild('boxFlotante') boxFlotante:ElementRef<HTMLElement> | undefined;
 
@@ -59,10 +60,13 @@ export class PopUpPasajeroComponent implements OnInit{
     this.popupService.closePopUp(this.idContent);
   }
 
-  public calculateDistributionTravel(optionTravel: string, optionAddRemove: number): void {
+  public calculateDistributionTravel(optionTravel:string, optionAddRemove: number): void {
+
     switch(optionTravel) {
       case 'habitacion' :
-        //this.habitacion += this.habitacion === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
+        if(!this.habitacionDisabled){
+          this.habitacion += this.habitacion === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
+        }
         break;
       case 'adultos' :
         this.adultos += this.adultos === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
@@ -74,6 +78,7 @@ export class PopUpPasajeroComponent implements OnInit{
         this.infantes += this.infantes === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
         break;
     }
+
   }
 
 }
