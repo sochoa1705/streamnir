@@ -27,8 +27,7 @@ export class TabsComponent implements OnInit {
   form3!: FormGroup;
   selected = 'option1';
   model!: NgbDateStruct;
-  stateCtrl = new FormControl();
-  stateCtrl2 = new FormControl();
+
   dpFromDate: any;
   dpToDate: any;
 
@@ -62,10 +61,6 @@ export class TabsComponent implements OnInit {
   public pasajerosVueloHotel:PasajerosConHabitacion;
   public pasajerosHoteles:PasajerosConHabitacion;
   public pasajerosActividades:PasajerosSinHabitacion;
-
-  @ViewChild('inputOrigen', { static: false }) inputOrigen!: ElementRef<HTMLInputElement>;
-  @ViewChild('inputDestino', { static: false }) inputDestino!: ElementRef<HTMLInputElement>;
-  @ViewChild('inputOrigenHotel', { static: false }) inputOrigenHotel!: ElementRef<HTMLInputElement>;
 
   constructor(
     public route: Router,
@@ -135,27 +130,17 @@ export class TabsComponent implements OnInit {
       origen: new FormControl(),
       destino: new FormControl(''),
       origenHotel: new FormControl(''),
-      range: new FormGroup({
-        start: new FormControl(),
-        end: new FormControl()
-      })
+
     });
 
     this.form2 = new FormGroup({
       origenHotel: new FormControl(''),
-      range: new FormGroup({
-        start: new FormControl(),
-        end: new FormControl()
-      })
     });
 
     this.form3 = new FormGroup({
       origen: new FormControl(''),
       destino: new FormControl(''),
-      range: new FormGroup({
-        start: new FormControl(),
-        end: new FormControl()
-      }),
+
       initHour: new FormControl(''),
       lastHour: new FormControl('')
     });

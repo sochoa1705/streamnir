@@ -88,7 +88,7 @@
                                         <!-- <input class="form-control" type="text" placeholder="Origen"> -->
                                     </div>
                                     <div class="colBoxtab">
-                                        <input matInput aria-label="State2" [formControl]="stateCtrl2" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event,2)"
+                                        <input matInput aria-label="State2"  [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event,2)"
                                             class="form-control" placeholder="Destino">
                                         <mat-autocomplete #auto="matAutocomplete">
                                             <mat-option *ngFor="let state of citys" [value]="state.label">
@@ -101,7 +101,7 @@
                                     <div class="colBoxtab">
                                         <div class="hideDate">
                                             <!-- OCULTAR CAMPO -->
-                                            <input name="datepicker" ngbDatepicker #datepicker="ngbDatepicker" formControlName="range" [footerTemplate]="footerTemplate"
+                                            <input name="datepicker" ngbDatepicker #datepicker="ngbDatepicker"  [footerTemplate]="footerTemplate"
                                                 [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
                                                 [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1">
                                             <ng-template #t let-date let-focused="focused">
@@ -176,7 +176,7 @@
                                 <div class="rowBoxTab">
                                     <div class="colBoxtab">
                                         <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="origenHotel" (keyup)="autoComplete($event,1)"
-                                            #inputOrigenHotel class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
+                                             class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
                                         <mat-autocomplete #auto="matAutocomplete">
                                             <mat-option *ngFor="let state of citys" [value]="state.label">
                                                 <img class="example-option-img" aria-hidden src="./assets/origen.png">
@@ -187,7 +187,7 @@
                                     <div class="colBoxtab">
                                         <div class="hideDate">
                                             <!-- OCULTAR CAMPO -->
-                                            <input name="datepicker2" formControlName="range" ngbDatepicker #datepicker2="ngbDatepicker" [footerTemplate]="footerTemplate2"
+                                            <input name="datepicker2"  ngbDatepicker #datepicker2="ngbDatepicker" [footerTemplate]="footerTemplate2"
                                                 [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
                                                 [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate2!" tabindex="-1">
                                             <ng-template #t let-date let-focused="focused">
