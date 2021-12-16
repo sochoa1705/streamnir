@@ -161,6 +161,7 @@ export class TabsComponent implements OnInit {
 
   savePasajerosVueloHotel(pasajeros:PopUpPasajeroModel){    
     this.pasajerosVueloHotel = {...pasajeros};
+    console.log( this.pasajerosVueloHotel);
   }
 
   autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {

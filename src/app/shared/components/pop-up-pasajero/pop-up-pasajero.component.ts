@@ -50,6 +50,9 @@ export class PopUpPasajeroComponent implements OnInit{
     this.popupService.state().subscribe(state=>{
       this.showOption = state.open;
       this.idStateOpen = state.id;
+
+      const popUpPasajeroModel = new PopUpPasajeroModel(this.adultos,this.ninos,this.infantes,this.habitacion);
+      this.emitPasajeros.emit(popUpPasajeroModel);
     })
     
   }
@@ -83,10 +86,10 @@ export class PopUpPasajeroComponent implements OnInit{
     }
   }
 
+
   savePasajeros(){
-    const popUpPasajeroModel = new PopUpPasajeroModel(this.adultos,this.ninos,this.infantes,this.habitacion);
-    this.emitPasajeros.emit(popUpPasajeroModel);
-    this.closePopUp();
+    this.popupService.closePopUp(this.idContent);
   }
+
 
 }
