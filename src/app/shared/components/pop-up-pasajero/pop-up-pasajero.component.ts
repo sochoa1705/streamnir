@@ -1,11 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { fromEvent } from 'rxjs';
+import { PopupService } from 'src/app/Services/pop-up/popup.service';
+import { Guid } from '../../utils';
 
 @Component({
   selector: 'app-pop-up-pasajero',
   templateUrl: './pop-up-pasajero.component.html',
-  styleUrls: ['./pop-up-pasajero.component.scss']
+  styleUrls: ['./pop-up-pasajero.component.scss'],
+  animations:[
+    trigger('openClose',[
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('100ms', style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
-export class PopUpPasajeroComponent {
+export class PopUpPasajeroComponent implements OnInit{
 
   showOption: Boolean = true;
   
@@ -15,12 +30,33 @@ export class PopUpPasajeroComponent {
   infantes = 0;
   validPasajeros = false;
 
+  idContent:string;
+
+  idStateOpen:string = '';
+
   @Input() onlyPasajeros = false;
 
-  constructor() { }
+  @ViewChild('boxFlotante') boxFlotante:ElementRef<HTMLElement> | undefined;
+
+  constructor(private popupService:PopupService) {
+    this.idContent = `popup_${Guid()}`;
+  }
+
+  ngOnInit(){
+    this.popupService.state().subscribe(state=>{
+      this.showOption = state.open;
+      this.idStateOpen = state.id;
+    })
+    
+  }
 
   showPasajero() {
-    this.showOption = this.showOption ? false : true;
+    this.popupService.openPopUp(this.idContent);
+    // this.showOption = this.showOption ? false : true;
+  }
+
+  closePopUp(){
+    this.popupService.closePopUp(this.idContent);
   }
 
   public calculateDistributionTravel(optionTravel: string, optionAddRemove: number): void {

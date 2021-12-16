@@ -168,11 +168,9 @@ export class FilterComponent implements OnInit {
 
   autoComplete(e: any) {
     this.citys = [];
-    console.log(e.target);
     // let elemento = this.origen.nativeElement;
     let elemento = e.target;
-    console.log(elemento);
-
+    
     let value = elemento.value;
     if (value.length == 0) {
       elemento.classList.remove('auto');

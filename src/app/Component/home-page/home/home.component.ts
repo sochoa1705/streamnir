@@ -6,7 +6,9 @@ import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-p
 import { NMRequest } from 'src/app/Models/base/NMRequest';
 import { environment } from 'src/environments/environment';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
-import { take } from 'rxjs/operators';
+import { concatMap, filter, mergeMap, switchMap, take } from 'rxjs/operators';
+import { combineLatest, fromEvent } from 'rxjs';
+import { PopupService } from 'src/app/Services/pop-up/popup.service';
 
 @Component({
   selector: 'app-home',
@@ -22,10 +24,27 @@ export class HomeComponent implements OnInit {
     public dataPagePresenterService: DataPagePresenterService,
     public asidePresenterService: AsidePresenterService,
     public destinyService: DestinyService,
+    private popUpSubject:PopupService
   ) { }
 
   ngOnInit(): void {
     this.listDestiny()
+    this.cerrarBoxClicFuera()
+  }
+
+  cerrarBoxClicFuera(){
+    combineLatest([fromEvent(document, 'click'), this.popUpSubject.state()]).pipe(
+      filter(resp => resp[1].open == true)
+    ).subscribe(resp => {
+      const htmlSelected = (resp[0].target as HTMLElement)
+      const popUpElement = document.getElementById(resp[1].id);
+
+      if (htmlSelected.contains(popUpElement)) {
+        this.popUpSubject.closePopUp('')
+      } 
+
+    })
+
   }
 
   listDestiny() {
