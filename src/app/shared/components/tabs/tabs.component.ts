@@ -7,7 +7,6 @@ import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
 import { ROUTE_VIAJES } from '../../constant';
-import { PopUpPasajeroModel } from '../pop-up-pasajero/pop-up-pasajero.model';
 import { PasajerosConHabitacion, PasajerosSinHabitacion } from './tabs.models';
 export interface State {
   flag: string;
@@ -159,9 +158,8 @@ export class TabsComponent implements OnInit {
     }
   }
 
-  savePasajerosVueloHotel(pasajeros:PopUpPasajeroModel){    
-    this.pasajerosVueloHotel = {...pasajeros};
-    console.log( this.pasajerosVueloHotel);
+  savePasajerosVueloHotel(pasajeros:PasajerosConHabitacion){    
+    this.pasajerosVueloHotel = pasajeros;
   }
 
   autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
@@ -197,15 +195,21 @@ export class TabsComponent implements OnInit {
   }
 
 
-  private getDistributionUrl(pasajeros:PasajerosSinHabitacion){
+  public getDistributionUrl(pasajeros:PasajerosSinHabitacion){
     let urlDistributon = pasajeros.adultos.toString();
-    if(pasajeros.ninos > 0) {
-      urlDistributon += `-${pasajeros.ninos}-`;
-    } else {
+
+    let ninos = pasajeros.infantes + pasajeros.ninos;
+
+    if(ninos > 0) {
+      urlDistributon += `-${ninos}-`;
+    } else{
       urlDistributon += "-0";
     }
     for(let i=0;i<pasajeros.ninos;i++) {
       urlDistributon += "10,"
+    }
+    for(let i=0;i<pasajeros.infantes;i++) {
+      urlDistributon += "2,"
     }
     urlDistributon = urlDistributon.charAt(urlDistributon.length - 1 ) === ',' ? urlDistributon.substring(0, urlDistributon.length - 1) : urlDistributon;
     return urlDistributon;

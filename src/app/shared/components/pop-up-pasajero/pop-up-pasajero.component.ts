@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 import { fromEvent } from 'rxjs';
 import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { Guid } from '../../utils';
-import { PopUpPasajeroModel } from './pop-up-pasajero.model';
+import { PasajerosConHabitacion } from '../tabs/tabs.models';
 
 @Component({
   selector: 'app-pop-up-pasajero',
@@ -38,7 +38,7 @@ export class PopUpPasajeroComponent implements OnInit{
   @Input() onlyPasajeros = false;
   @Input() habitacionDisabled = true;
 
-  @Output() emitPasajeros = new EventEmitter<PopUpPasajeroModel>()
+  @Output() emitPasajeros = new EventEmitter<PasajerosConHabitacion>()
 
   @ViewChild('boxFlotante') boxFlotante:ElementRef<HTMLElement> | undefined;
 
@@ -51,7 +51,7 @@ export class PopUpPasajeroComponent implements OnInit{
       this.showOption = state.open;
       this.idStateOpen = state.id;
 
-      const popUpPasajeroModel = new PopUpPasajeroModel(this.adultos,this.ninos,this.infantes,this.habitacion);
+      const popUpPasajeroModel = new PasajerosConHabitacion(this.adultos,this.ninos,this.infantes,this.habitacion);
       this.emitPasajeros.emit(popUpPasajeroModel);
     })
     
