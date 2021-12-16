@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { GeneratePayService } from './generate-pay.service';
 
-describe('GeneratePayService', () => {
+xdescribe('GeneratePayService', () => {
   let service: GeneratePayService;
 
   beforeEach(() => {

@@ -10,6 +10,7 @@ import { FiltersafeModule } from 'src/app/shared/components/filtersafe/filtersaf
 import { CustomAdapter } from 'src/app/Services/datepicker/customAdapter.service';
 import { CustomDateParserFormatter } from 'src/app/Services/datepicker/customDateParserFormatter.service';
 import { I18n, CustomDatepickerI18nService } from 'src/app/Services/datepicker/customDatepickerI18n.service';
+import { PopUpPasajeroModule } from '../pop-up-pasajero/pop-up-pasajero.module';
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ TabsComponent ],
@@ -21,7 +22,8 @@ import { I18n, CustomDatepickerI18nService } from 'src/app/Services/datepicker/c
     NgbModule,
     HttpClientJsonpModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PopUpPasajeroModule
   ],
   exports: [ TabsComponent ],
   providers: [
