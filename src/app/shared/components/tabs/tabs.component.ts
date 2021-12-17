@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 import { Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -7,7 +8,7 @@ import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
 import { ROUTE_VIAJES } from '../../constant';
-import { PasajerosConHabitacion, PasajerosSinHabitacion } from './tabs.models';
+import { ParamsHoteles, ParamsVueloHotel, PasajerosConHabitacion, PasajerosSinHabitacion, URLHotel, URLVueloHotel } from './tabs.models';
 export interface State {
   flag: string;
   name: string;
@@ -114,14 +115,14 @@ export class TabsComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    this.getDestinyOrigin();
+    // this.getDestinyOrigin();
   }
 
-  private getDestinyOrigin(){
-    this.destineService.getDestinyPaqueteDinamico('truji','FLIGHT_HOTEL').subscribe(res => {
-      console.log('res ', res);
-    });
-  }
+  // private getDestinyOrigin(){
+  //   this.destineService.getDestinyPaqueteDinamico('truji','FLIGHT_HOTEL').subscribe(res => {
+  //     console.log('res ', res);
+  //   });
+  // }
 
   createForm() {
     this.form = new FormGroup({
@@ -133,6 +134,7 @@ export class TabsComponent implements OnInit {
     });
 
     this.form2 = new FormGroup({
+      destino: new FormControl(''),
       origenHotel: new FormControl(''),
     });
 
@@ -156,10 +158,6 @@ export class TabsComponent implements OnInit {
     if (e.tab.textLabel === "seguros") {
       this.route.navigate(['/home/seguros'])
     }
-  }
-
-  savePasajerosVueloHotel(pasajeros:PasajerosConHabitacion){    
-    this.pasajerosVueloHotel = pasajeros;
   }
 
   autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
@@ -215,43 +213,60 @@ export class TabsComponent implements OnInit {
     return urlDistributon;
   }
 
-  public changeTab() {
-    //this.adultos = 0;
-    //this.ninos = 0;
-    //this.infantes = 0;
-    // console.log('test tab');
-  }
-
-
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
  }
 
+ 
+ public searchVueloHotel(){
+  const url = this.getUrlVueloHotel(); 
+  this.navigateToResponseUrl(url);
+}
+
+getParamsVueloHotel(){
+  let params = new ParamsVueloHotel(
+    this.fromDate,
+    this.toDate,
+    this.form,
+    this.citysDestinosSelect,
+    this.citysOrigenSelect
+  ).getParams();
+  return params;
+}
+
  public getUrlVueloHotel():string{
   let url = ''
   if(this.pasajerosVueloHotel.adultos > 0) {
-    let tab = 'FLIGHT_HOTEL';
-    let params = this.getParamsTabs(1);
+    let params = this.getParamsVueloHotel();
     let distribution = this.getDistributionUrl(this.pasajerosVueloHotel);
-    url = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&destination=${params.idDestino}&departure=${params.idOrigen}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&distribution=${distribution}&businessCabin=${params.businessClass}&lang=ES`;
+    url = new URLVueloHotel(params,distribution).getUrl();
   }
-
   return url;
  }
 
-  public searchVueloHotel(){
-    const url = this.getUrlVueloHotel();
+  public searchAlojamiento() {
+    const url = this.getUrlAlojamiento();
     this.navigateToResponseUrl(url);
   }
-
-  public searchAlojamiento() {
+  public getUrlAlojamiento(){
+    let url = ''
     if(this.pasajerosHoteles.adultos > 0) {
-      let tab = 'ONLY_HOTEL';
-      let params = this.getParamsTabs(2);
+      let params = this.getParamsAlojamiento();
       let distribution = this.getDistributionUrl(this.pasajerosHoteles);
-      window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&hotelDestination=${params.idOrigen}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&distribution=${distribution}&lang=ES&carRental=false`;
+      url = new URLHotel(params,distribution).getUrl();
     }
+    return url;
   }
+  getParamsAlojamiento(){
+    let params = new ParamsHoteles(
+      this.fromDate,
+      this.toDate,
+      this.form2,
+      this.citysDestinosSelect,
+    ).getParams();
+    return params;
+  }
+
 
   public searchOnlyCar() {
     let tab = 'ONLY_CAR';
@@ -259,7 +274,7 @@ export class TabsComponent implements OnInit {
     window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&dropoffPoint=${params.idOrigen}&destination=${params.idDestino}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&useSameDropoff=false&pickupTime=${params.horaInicio}&dropoffTime=${params.horaDestino}&lang=ES`;
   }
 
-  public getParamsTabs(typeTab: number): any {
+  private getParamsTabs(typeTab: number): any {
 
     let startDateStr =  `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
     let endDateStr =  `${(this.toDate!.day).toString()}/${(this.toDate!.month).toString()}/${(this.toDate!.year).toString()}`;
@@ -277,9 +292,8 @@ export class TabsComponent implements OnInit {
     return {startDate, endDate, origen, destino, businessClass, idOrigen, idDestino, horaInicio, horaDestino};
   }
 
-
-  public goToUrlPackages(): void {
-    console.log('go');
-    window.location.href = ROUTE_VIAJES.RUTA_PAQUETES;
+  changeTab(value:MatTabChangeEvent ){
+    (value.index == 1)?this.navigateToResponseUrl(ROUTE_VIAJES.RUTA_PAQUETES):null;
   }
+
 }

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
                 <!-- <mat-tab-group mat-align-tabs="start"  (selectedTabChange)="safeLink($event)"> -->
-                <mat-tab-group mat-align-tabs="start"  [selectedIndex]="show ? '3' : '0' ">
+                <mat-tab-group mat-align-tabs="start" (selectedTabChange)="changeTab($event)" [selectedIndex]="show ? '3' : '0' ">
                     <!-- VUELOS -->
                     <mat-tab>
                         <ng-template mat-tab-label>
@@ -33,7 +33,7 @@
                                 <path d="M18.0379 2.7749H16.1879C15.9326 2.7749 15.7253 2.98212 15.7253 3.23742V18.0374C15.7253 18.2927 15.9326 18.4999 16.1879 18.4999H18.0379C18.2932 18.4999 18.5004 18.2927 18.5004 18.0374V3.23737C18.5004 2.98207 18.2932 2.7749 18.0379 2.7749ZM17.5754 17.5749H16.6504V3.69989H17.5754V17.5749Z"
                                     fill="#4B4B4B" />
                             </svg>
-                            <span (click)="goToUrlPackages()">Paquetes</span>
+                            <span>Paquetes</span>
                         </ng-template>
 
                         <mat-progress-bar mode="indeterminate" style="width: 60rem;"></mat-progress-bar>
@@ -56,7 +56,7 @@
                                     fill="#4B4B4B" />
                             </svg> Vuelo + Hotel
                         </ng-template>
-                        <div class="boxTab" (click)="changeTab()">
+                        <div class="boxTab">
                             <form class="bg-white" [formGroup]="form">
                                 <div class="rowBoxTab">
                                     <div class="padRight">
@@ -68,7 +68,7 @@
                                         </mat-form-field>
                                     </div>
                                     <div class="padRight">
-                                        <app-pop-up-pasajero (emitPasajeros)="savePasajerosVueloHotel($event)"></app-pop-up-pasajero>
+                                        <app-pop-up-pasajero (emitPasajeros)="pasajerosVueloHotel = $event"></app-pop-up-pasajero>
                                     </div>
 
                                 </div>
@@ -165,17 +165,17 @@
                                     fill="#4B4B4B" />
                             </svg> Hoteles
                         </ng-template>
-                        <div class="boxTab" (click)="changeTab()">
+                        <div class="boxTab">
                             <form class="bg-white" [formGroup]="form2">
                                 <div class="rowBoxTab">
                                     <div class="padRight">
-                                        <app-pop-up-pasajero></app-pop-up-pasajero>
+                                        <app-pop-up-pasajero (emitPasajeros)="pasajerosHoteles = $event"></app-pop-up-pasajero>
                                     </div>
 
                                 </div>
                                 <div class="rowBoxTab">
                                     <div class="colBoxtab">
-                                        <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="origenHotel" (keyup)="autoComplete($event,1)"
+                                        <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event,2)"
                                              class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
                                         <mat-autocomplete #auto="matAutocomplete">
                                             <mat-option *ngFor="let state of citys" [value]="state.label">
