@@ -130,13 +130,14 @@ export class FilterComponent implements OnInit {
       infantes: 1
     }
   ];
-  @ViewChild('inputOrigen', { static: false }) origen!: ElementRef<HTMLInputElement>;
-
+  @ViewChild('inputOrigen', { static: false }) origen!: ElementRef<HTMLInputElement>
+  @ViewChild('inputDestino', { static: false }) destino!: ElementRef<HTMLInputElement>
+  classAutoOrigen!: boolean
+  classAutoDestino!: boolean
   hoveredDate: NgbDate | null = null;
 
   fromDate: NgbDate | null
   toDate: NgbDate | null;
-
 
   constructor(
     public route: Router,
@@ -192,9 +193,14 @@ export class FilterComponent implements OnInit {
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
   ngOnInit(): void {
+    this.classAutoOrigen = false
+    this.classAutoDestino = false
     this.createForm()
 
     //this.getListVuelos('lim')
+  }
+  ngAfterViewInit() {
+    console.log(this.origen.nativeElement.value);
   }
 
   getListVuelos(e: any) {
@@ -211,21 +217,38 @@ export class FilterComponent implements OnInit {
   }
 
   autoComplete(e: any) {
-    this.citys = [];
-    console.log(e.target);
-    // let elemento = this.origen.nativeElement;
-    let elemento = e.target;
-    console.log(elemento);
-
-    let value = elemento.value;
-    if (value.length == 0) {
-      elemento.classList.remove('auto');
+    let inp = e.target.name
+    let inputy
+    if (inp === 'origen') {
+      inputy = this.origen.nativeElement.value
+      this.setClass(inputy, 'origen')
     } else {
-      elemento.classList.add('auto');
+      inputy = this.destino.nativeElement.value
+      this.setClass(inputy, 'destino')
     }
-    if (value.length >= 3) {
-      this.getListVuelos(value)
+    console.log(inputy);
+
+    this.citys = []
+  }
+
+  setClass(inputy : string, inp: string){
+    if(inp === 'origen'){
+      if (inputy.length == 0) {
+        this.classAutoOrigen = false
+      } else {
+        this.classAutoOrigen = true
+      }
+    } else {
+      if (inputy.length == 0) {
+        this.classAutoDestino = false
+      } else {
+        this.classAutoDestino = true
+      }
     }
+    if (inputy.length >= 3) {
+      this.getListVuelos(inputy)
+    }
+
   }
 
   createForm() {
@@ -235,7 +258,7 @@ export class FilterComponent implements OnInit {
       // adultos: new FormControl(0),
       ninos: new FormControl(0),
       infantes: new FormControl(0),
-      origen: new FormControl(),
+      origen: new FormControl('Lima'),
       destino: new FormControl(''),
       range: new FormGroup({
         start: new FormControl(),

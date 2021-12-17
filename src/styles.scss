@@ -26,6 +26,7 @@ body {
     margin: 0;
     font-family: "Montserrat";
     color: $gray;
+    transition: 300ms ease;
 }
 
 a {
@@ -65,7 +66,7 @@ button {
     border: 0px;
     padding: 9px 16px;
     border-radius: 3px;
-
+    transition: 300ms ease;
         &:hover{
             background: $red
         }
@@ -202,6 +203,7 @@ section {
     background: $white;
     border-radius: 10px;
     border: 1px solid #e4e5e7;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
     // overflow: auto;
     &__internacional {
         height: 190px;
@@ -497,6 +499,13 @@ section {
             right: 22px;
             top: 22px;
             font-size: 12px;
+            &:hover{
+                position: absolute;
+                right: 22px;
+                top: 22px;
+                transition: none ;
+                background:transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+            }
         }
         h1 {
             @include itemCard(bold,
@@ -869,6 +878,10 @@ section {
     width: 40px;
     align-items: center;
     padding-left: 10px;
+
+    svg path{
+        stroke:#009AED;
+    }
 }
 
 .flexCero {
@@ -1912,11 +1925,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 .textContactenos {
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     font-size: 14px;
     line-height: 21px;
     /* or 150% */
-    text-align: justify;
+    // text-align: left;
     letter-spacing: 0.1px;
     color: #4B4B4B;
 }
@@ -2248,7 +2261,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 12px !important;
             padding: 0;
             &:first-child {
-                padding-left: 10px;
+                padding-left: 6px;
+                width:500px;
             }
             &.lessPadLeft {
                 padding-left: 0;
@@ -5135,6 +5149,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                         opacity: 0.5;
                         height: 78px;
                         border-radius: 0;
+
                 }
             }
         }

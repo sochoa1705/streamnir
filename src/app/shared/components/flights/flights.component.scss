@@ -11,14 +11,17 @@
             font-size: 14px;
             line-height: 21px;
             letter-spacing: 0.15px;
-            height: 31px;
+            height: 36px;
             display: flex;
             align-items: center;
             border-radius: 0 0 12px 0;
             background: #54D834;
             color: #ffffff;
             margin-bottom: 1rem;
+            left:0;
             span {
+                font-family: Open Sans;
+                font-size: 14px;
                 padding-left: 17px;
             }
         }
