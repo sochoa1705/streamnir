@@ -1,55 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 import { Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { Injectable } from '@angular/core';
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
 import { ROUTE_VIAJES } from '../../constant';
-
-@Injectable()
-export class CustomAdapter extends NgbDateAdapter<string> {
-  readonly DELIMITER = '-';
-  fromModel(value: string | null): NgbDateStruct | null {
-    if (value) {
-      let date = value.split(this.DELIMITER);
-      return {
-        day: parseInt(date[0], 10),
-        month: parseInt(date[1], 10),
-        year: parseInt(date[2], 10)
-      };
-    }
-    return null;
-  }
-
-  toModel(date: NgbDateStruct | null): string | null {
-    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
-  }
-}
-/**
- * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
- */
-@Injectable()
-export class CustomDateParserFormatter extends NgbDateParserFormatter {
-  readonly DELIMITER = '/';
-  parse(value: string): NgbDateStruct | null {
-    if (value) {
-      let date = value.split(this.DELIMITER);
-      return {
-        day: parseInt(date[0], 10),
-        month: parseInt(date[1], 10),
-        year: parseInt(date[2], 10)
-      };
-    }
-    return null;
-  }
-
-  format(date: NgbDateStruct | null): string {
-    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
-  }
-}
-
+import { ParamsHoteles, ParamsVueloHotel, PasajerosConHabitacion, PasajerosSinHabitacion, URLHotel, URLVueloHotel } from './tabs.models';
 export interface State {
   flag: string;
   name: string;
@@ -58,11 +17,7 @@ export interface State {
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.scss'],
-  providers: [
-    { provide: NgbDateAdapter, useClass: CustomAdapter },
-    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
-  ]
+  styleUrls: ['./tabs.component.scss']
 })
 export class TabsComponent implements OnInit {
   @Input() show!: boolean
@@ -72,8 +27,7 @@ export class TabsComponent implements OnInit {
   form3!: FormGroup;
   selected = 'option1';
   model!: NgbDateStruct;
-  stateCtrl = new FormControl();
-  stateCtrl2 = new FormControl();
+
   dpFromDate: any;
   dpToDate: any;
 
@@ -87,14 +41,6 @@ export class TabsComponent implements OnInit {
   // fechaInicial : NgbDate | undefined;
   // FechaFinal : NgbDate | undefined;
   diffInDays: number | undefined
-
-  pasajeros: any = [
-    {
-      adultos: 10,
-      ninos: 1,
-      infantes: 1
-    }
-  ];
 
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null
@@ -110,15 +56,11 @@ export class TabsComponent implements OnInit {
   destino: any;
   origenHotel: any;
 
-  habitacion = 1;
-  adultos = 0;
-  ninos = 0;
-  infantes = 0;
   validPasajeros = false;
 
-  @ViewChild('inputOrigen', { static: false }) inputOrigen!: ElementRef<HTMLInputElement>;
-  @ViewChild('inputDestino', { static: false }) inputDestino!: ElementRef<HTMLInputElement>;
-  @ViewChild('inputOrigenHotel', { static: false }) inputOrigenHotel!: ElementRef<HTMLInputElement>;
+  public pasajerosVueloHotel:PasajerosConHabitacion;
+  public pasajerosHoteles:PasajerosConHabitacion;
+  public pasajerosActividades:PasajerosSinHabitacion;
 
   constructor(
     public route: Router,
@@ -133,6 +75,10 @@ export class TabsComponent implements OnInit {
     this.fromDate3 = calendar.getToday();
     this.fromDate4 = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+
+    this.pasajerosVueloHotel = new PasajerosConHabitacion(0,0,0,1);
+    this.pasajerosHoteles = new PasajerosConHabitacion(0,0,0,1);
+    this.pasajerosActividades = new PasajerosSinHabitacion(0,0,0);
   }
 
   get today() {
@@ -166,35 +112,17 @@ export class TabsComponent implements OnInit {
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
-  showOption: Boolean = true;
-  showPasajero() {
-    this.showOption = this.showOption ? false : true;
-  }
 
-  showOption2: Boolean = true;
-  showPasajero2() {
-    this.showOption2 = this.showOption2 ? false : true;
-  }
-
-  showOption3: Boolean = true;
-  showPasajero3() {
-    this.showOption3 = this.showOption3 ? false : true;
-  }
-
-  showOption4: Boolean = true;
-  showPasajero4() {
-    this.showOption4 = this.showOption4 ? false : true;
-  }
   ngOnInit(): void {
     this.createForm();
-    this.getDestinyOrigin();
+    // this.getDestinyOrigin();
   }
 
-  private getDestinyOrigin(){
-    this.destineService.getDestinyPaqueteDinamico('truji','FLIGHT_HOTEL').subscribe(res => {
-      console.log('res ', res);
-    });
-  }
+  // private getDestinyOrigin(){
+  //   this.destineService.getDestinyPaqueteDinamico('truji','FLIGHT_HOTEL').subscribe(res => {
+  //     console.log('res ', res);
+  //   });
+  // }
 
   createForm() {
     this.form = new FormGroup({
@@ -202,43 +130,23 @@ export class TabsComponent implements OnInit {
       origen: new FormControl(),
       destino: new FormControl(''),
       origenHotel: new FormControl(''),
-      range: new FormGroup({
-        start: new FormControl(),
-        end: new FormControl()
-      })
+
     });
 
     this.form2 = new FormGroup({
+      destino: new FormControl(''),
       origenHotel: new FormControl(''),
-      range: new FormGroup({
-        start: new FormControl(),
-        end: new FormControl()
-      })
     });
 
     this.form3 = new FormGroup({
       origen: new FormControl(''),
       destino: new FormControl(''),
-      range: new FormGroup({
-        start: new FormControl(),
-        end: new FormControl()
-      }),
+
       initHour: new FormControl(''),
       lastHour: new FormControl('')
     });
   }
 
-  count(valor: number, e: any) {
-    let item = e.target.name;
-    let pasajero = this.pasajeros[0][item];
-    if (pasajero >= 100 && valor >= 0) {
-      return pasajero = 100
-    }
-    if (pasajero <= 0 && valor < 0) {
-      return pasajero = 0
-    }
-    return pasajero = pasajero + valor
-  }
 
   // customers() {
   //   var cdr: any = document.getElementById('cdr');
@@ -254,10 +162,8 @@ export class TabsComponent implements OnInit {
 
   autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
     this.citys = [];
-    console.log(e.target);
     // let elemento = this.origen.nativeElement;
     let elemento = e.target;
-    console.log(elemento);
 
     let value = elemento.value;
     if (value.length == 0) {
@@ -274,7 +180,6 @@ export class TabsComponent implements OnInit {
   getListCiudades(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
-        console.log(data);
         this.citys = data;
         if(type === 1) {
           this.citysOrigenSelect = data;
@@ -287,68 +192,81 @@ export class TabsComponent implements OnInit {
     )
   }
 
-  public calculateDistributionTravel(optionTravel: string, optionAddRemove: number): void {
-    switch(optionTravel) {
-      case 'habitacion' :
-        //this.habitacion += this.habitacion === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        break;
-      case 'adultos' :
-        this.adultos += this.adultos === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        break;
-      case 'ninos' :
-        this.ninos += this.ninos === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        break;
-      case 'infantes' :
-        this.infantes += this.infantes === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        break;
-    }
-  }
 
-  private getDistributionUrl(){
-    let urlDistributon = this.adultos.toString();
-    if(this.ninos > 0) {
-      urlDistributon += `-${this.ninos}-`;
-    } else {
+  public getDistributionUrl(pasajeros:PasajerosSinHabitacion){
+    let urlDistributon = pasajeros.adultos.toString();
+
+    let ninos = pasajeros.infantes + pasajeros.ninos;
+
+    if(ninos > 0) {
+      urlDistributon += `-${ninos}-`;
+    } else{
       urlDistributon += "-0";
     }
-    for(let i=0;i<this.ninos;i++) {
+    for(let i=0;i<pasajeros.ninos;i++) {
       urlDistributon += "10,"
+    }
+    for(let i=0;i<pasajeros.infantes;i++) {
+      urlDistributon += "2,"
     }
     urlDistributon = urlDistributon.charAt(urlDistributon.length - 1 ) === ',' ? urlDistributon.substring(0, urlDistributon.length - 1) : urlDistributon;
     return urlDistributon;
   }
 
-  public changeTab() {
-    //this.adultos = 0;
-    //this.ninos = 0;
-    //this.infantes = 0;
-    console.log('test tab');
+  navigateToResponseUrl(url: string): void {
+    window.location.href = url;
+ }
+
+ 
+ public searchVueloHotel(){
+  const url = this.getUrlVueloHotel(); 
+  this.navigateToResponseUrl(url);
+}
+
+getParamsVueloHotel(){
+  let params = new ParamsVueloHotel(
+    this.fromDate,
+    this.toDate,
+    this.form,
+    this.citysDestinosSelect,
+    this.citysOrigenSelect
+  ).getParams();
+  return params;
+}
+
+ public getUrlVueloHotel():string{
+  let url = ''
+  if(this.pasajerosVueloHotel.adultos > 0) {
+    let params = this.getParamsVueloHotel();
+    let distribution = this.getDistributionUrl(this.pasajerosVueloHotel);
+    url = new URLVueloHotel(params,distribution).getUrl();
   }
-
-  public searchVueloHotel(){
-    console.log('value ', this.form);
-    console.log('value fecha ' , this.fromDate, this.toDate);
-
-    this.validPasajeros = this.adultos === 0;
-
-    if(this.adultos > 0) {
-      let tab = 'FLIGHT_HOTEL';
-      let params = this.getParamsTabs(1);
-      let distribution = this.getDistributionUrl();
-  
-      window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&destination=${params.idDestino}&departure=${params.idOrigen}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&distribution=${distribution}&businessCabin=${params.businessClass}&lang=ES`;
-    }
-  }
+  return url;
+ }
 
   public searchAlojamiento() {
-    this.validPasajeros = this.adultos === 0;
-    if(this.adultos > 0) {
-      let tab = 'ONLY_HOTEL';
-      let params = this.getParamsTabs(2);
-      let distribution = this.getDistributionUrl();
-      window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&hotelDestination=${params.idOrigen}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&distribution=${distribution}&lang=ES&carRental=false`;
-    }
+    const url = this.getUrlAlojamiento();
+    this.navigateToResponseUrl(url);
   }
+  public getUrlAlojamiento(){
+    let url = ''
+    if(this.pasajerosHoteles.adultos > 0) {
+      let params = this.getParamsAlojamiento();
+      let distribution = this.getDistributionUrl(this.pasajerosHoteles);
+      url = new URLHotel(params,distribution).getUrl();
+    }
+    return url;
+  }
+  getParamsAlojamiento(){
+    let params = new ParamsHoteles(
+      this.fromDate,
+      this.toDate,
+      this.form2,
+      this.citysDestinosSelect,
+    ).getParams();
+    return params;
+  }
+
 
   public searchOnlyCar() {
     let tab = 'ONLY_CAR';
@@ -357,8 +275,12 @@ export class TabsComponent implements OnInit {
   }
 
   private getParamsTabs(typeTab: number): any {
-    let startDate = this.fromDate!.day + "/" + this.fromDate!.month + "/" + this.fromDate!.year;
-    let endDate = this.toDate!.day + "/" + this.toDate!.month + "/" + this.toDate!.year;
+
+    let startDateStr =  `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
+    let endDateStr =  `${(this.toDate!.day).toString()}/${(this.toDate!.month).toString()}/${(this.toDate!.year).toString()}`;
+
+    let startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
+    let endDate =  moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
     let origen = typeTab === 1 ? this.form.controls['origen'].value : typeTab === 2 ? this.form2.controls['origenHotel'].value : this.form3.controls['origen'].value;
     let destino = typeTab === 1 ? this.form.controls['destino'].value : this.form3.controls['destino'].value;
     let businessClass = this.form.controls['clase'].value === 'business';
@@ -366,11 +288,12 @@ export class TabsComponent implements OnInit {
     let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.label === destino).id : 0;
     let horaInicio = this.form3.controls['initHour'].value;
     let horaDestino = this.form3.controls['lastHour'].value;
+    
     return {startDate, endDate, origen, destino, businessClass, idOrigen, idDestino, horaInicio, horaDestino};
   }
 
-
-  public goToUrlPackages(): void {
-    window.location.href = ROUTE_VIAJES.RUTA_PAQUETES;
+  changeTab(value:MatTabChangeEvent ){
+    (value.index == 1)?this.navigateToResponseUrl(ROUTE_VIAJES.RUTA_PAQUETES):null;
   }
+
 }
