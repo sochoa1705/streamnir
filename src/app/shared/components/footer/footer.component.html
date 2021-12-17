@@ -7,7 +7,7 @@
             <div class="clearfix"></div>
         </div>
         <div class="row marginTop35">
-            <div class="col-4 d-none d-md-inline-block text-center my-5 pt-4 order-md-1">
+            <div class="col-3 d-none d-md-inline-block text-center my-5 pt-4 order-md-1">
                 <img src="./assets/logo_rojo.svg" alt="NMVIAJES">
                 <div class="icons justify-content-center mt-4">
                     <div class="icon">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-12 text-md-left text-center order-1">
+            <div class="col-md-3 col-12 text-md-left text-center order-1 mb-5">
                 <h3 class="menuProd text-start" (click)="showProducto()">{{ title1 }}
                     <img class="iconFlecha" src="./assets/footer/flecha.png" alt="">
                 </h3>
@@ -60,7 +60,7 @@
                     <li *ngFor="let option of list1"><a routerLink="{{ option.link }}">{{ option.text }}</a></li>
                 </ul>
             </div>
-            <div class="col-md-3 col-12 order-2 text-md-left text-center">
+            <div class="col-md-2 p-md-0 col-12 order-2 text-md-left text-center">
                 <h3 class="menuProd text-start" (click)="showConocenos()">{{ title2 }}
                     <img class="iconFlecha" src="./assets/footer/flecha.png" alt="">
                 </h3>
@@ -68,12 +68,12 @@
                     <li *ngFor="let option of list2"><a routerLink="{{ option.link }}">{{ option.text }}</a></li>
                 </ul>
             </div>
-            <div class="col-md-3 col-12 order-3 text-md-left text-center marginTopMobile ">
+            <div class="col-md-3 offset-1 col-12 order-3 text-md-left marginTopMobile ">
                 <h3 class="text-start">{{ title3 }}</h3>
-                <span class="textContactenos text-start">{{ span }}<br>
+                <span class="textContactenos">{{ span }}<br>
                     <strong>{{ addrees }}</strong>
                 </span>
-                <div class="d-flex align-items-center centerBox">
+                <div class="d-flex align-items-center centerBox justify-content-center">
                     <img src="./assets/libro.png" alt="">
                     <a class="_libro" href="{{ linkLibro }}">{{ libro }}</a>
                 </div>
@@ -89,7 +89,7 @@
                 <img src="./assets/footer/agencia.png" alt="">
             </div>
             <div class="col-md-4 col-12 order-1 d-flex align-items-center order-md-2">
-                <button class="w-100 btnFooter"> oficinas</button>
+                <button class="w-100 btnFooter">Oficinas</button>
             </div>
             <div class="col-md-4 col-6 text-center order-2 order-md-3">
                 <img src="./assets/footer/protegeme.png" alt="">

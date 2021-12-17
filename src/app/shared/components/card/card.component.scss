@@ -117,6 +117,7 @@ a {
             width: 6px;
         }
         &::before {
+            font-family: Montserrat;
             content: "Vamos ";
             transition: all 0.5s ease-in-out;
             -webkit-transition: all 0.5s ease-in-out;
