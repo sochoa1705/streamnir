@@ -30,3 +30,7 @@ export function CloseSession(): void {
       window.location.replace(environment.urlLogin);
     });
   }
+
+  export function Guid() {
+    return Math.floor(Math.random() * 0x10000).toString(16);
+  }

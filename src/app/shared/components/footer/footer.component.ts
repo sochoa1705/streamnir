@@ -5,7 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent  {
   @Input() title1!: string;
   @Input() list1!: any;
   @Input() title2!: string;
@@ -27,7 +27,4 @@ export class FooterComponent implements OnInit {
   showConocenos() {
     this.showMenuConocenos = this.showMenuConocenos ? false : true;
   }
-  ngOnInit(): void {
-  }
-
 }

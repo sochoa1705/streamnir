@@ -14,6 +14,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
@@ -33,6 +34,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatStepperModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
+    MatProgressBarModule
   ],
   exports: [
     CommonModule,
@@ -50,6 +52,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatStepperModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
+    MatProgressBarModule
   ]
 })
 export class MaterialModule { }

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SecureBookingService } from './secure-booking.service';
+import { PopupService } from './popup.service';
 
-xdescribe('SecureBookingService', () => {
-  let service: SecureBookingService;
+describe('PopupService', () => {
+  let service: PopupService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SecureBookingService);
+    service = TestBed.inject(PopupService);
   });
 
   it('should be created', () => {

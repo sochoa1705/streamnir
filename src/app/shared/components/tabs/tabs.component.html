@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
                 <!-- <mat-tab-group mat-align-tabs="start"  (selectedTabChange)="safeLink($event)"> -->
-                <mat-tab-group mat-align-tabs="start"  [selectedIndex]="show ? '3' : '0' ">
+                <mat-tab-group mat-align-tabs="start" (selectedTabChange)="changeTab($event)" [selectedIndex]="show ? '3' : '0' ">
                     <!-- VUELOS -->
                     <mat-tab>
                         <ng-template mat-tab-label>
@@ -33,9 +33,11 @@
                                 <path d="M18.0379 2.7749H16.1879C15.9326 2.7749 15.7253 2.98212 15.7253 3.23742V18.0374C15.7253 18.2927 15.9326 18.4999 16.1879 18.4999H18.0379C18.2932 18.4999 18.5004 18.2927 18.5004 18.0374V3.23737C18.5004 2.98207 18.2932 2.7749 18.0379 2.7749ZM17.5754 17.5749H16.6504V3.69989H17.5754V17.5749Z"
                                     fill="#4B4B4B" />
                             </svg>
-                            <span (click)="goToUrlPackages()">Paquetes</span>
+                            <span>Paquetes</span>
                         </ng-template>
-                        Content 1
+
+                        <mat-progress-bar mode="indeterminate" style="width: 60rem;"></mat-progress-bar>
+
                     </mat-tab>
                     <!-- END PAQUETES -->
 
@@ -54,7 +56,7 @@
                                     fill="#4B4B4B" />
                             </svg> Vuelo + Hotel
                         </ng-template>
-                        <div class="boxTab" (click)="changeTab()">
+                        <div class="boxTab">
                             <form class="bg-white" [formGroup]="form">
                                 <div class="rowBoxTab">
                                     <div class="padRight">
@@ -66,78 +68,7 @@
                                         </mat-form-field>
                                     </div>
                                     <div class="padRight">
-                                        <button class="customers" (click)="showPasajero2()">Habitación - Pasajero</button>
-                                        <div class="boxFlotante" *ngIf="!showOption2">
-                                            <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                                                <div class="d-flex flex-row iconTwo">
-                                                    <img height="13px" src="./assets/filter/habitacion.png" alt="">
-                                                </div>
-                                                <div class="d-flex flex-row flex-column w-100">
-                                                    <div class="d-flex flex-row text1">Habitación</div>
-                                                    <div class="d-flex flex-row text2">Añadir</div>
-                                                </div>
-                                                <div class="d-flex flex-row number">
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('habitacion',0)">-</div>
-                                                    <div class="d-flex flex-row textBtn">
-                                                        <input class="inputPasajero" type="text" [value]="habitacion">
-                                                    </div>
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('habitacion',1)">+</div>
-                                                </div>
-                                            </div>
-                                            <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                                                <div class="d-flex flex-row iconTwo">
-                                                    <img height="13px" src="./assets/filter/adulto.png" alt="">
-                                                </div>
-                                                <div class="d-flex flex-row flex-column w-100">
-                                                    <div class="d-flex flex-row text1">Adultos</div>
-                                                    <div class="d-flex flex-row text2">12 o más años</div>
-                                                </div>
-                                                <div class="d-flex flex-row number">
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('adultos',0)">-</div>
-                                                    <div class="d-flex flex-row textBtn">
-                                                        <input class="inputPasajero" type="text" [value]="adultos">
-                                                    </div>
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('adultos',1)">+</div>
-                                                </div>
-                                            </div>
-                                            <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                                                <div class="d-flex flex-row iconTwo">
-                                                    <img height="13px" src="./assets/filter/nino.png" alt="">
-                                                </div>
-                                                <div class="d-flex flex-row flex-column w-100">
-                                                    <div class="d-flex flex-row text1">Niños</div>
-                                                    <div class="d-flex flex-row text2">De 2 - 11 años</div>
-                                                </div>
-                                                <div class="d-flex flex-row number">
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('ninos',0)">-</div>
-                                                    <div class="d-flex flex-row textBtn">
-                                                        <input class="inputPasajero" type="text" [value]="ninos">
-                                                    </div>
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('ninos',1)">+</div>
-                                                </div>
-                                            </div>
-                                            <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                                                <div class="d-flex flex-row iconTwo">
-                                                    <img height="13px" src="./assets/filter/infante.png" alt="">
-                                                </div>
-                                                <div class="d-flex flex-row flex-column w-100">
-                                                    <div class="d-flex flex-row text1">Infantes</div>
-                                                    <div class="d-flex flex-row text2">Menores de 2 años</div>
-                                                </div>
-                                                <div class="d-flex flex-row number">
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('infantes',0)">-</div>
-                                                    <div class="d-flex flex-row textBtn">
-                                                        <input class="inputPasajero" type="text" [value]="infantes">
-                                                    </div>
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('infantes',1)">+</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex flex-row justify-content-between align-items-center p-3 btnPasajero">
-                                                <button class="gray" type="button">Cancelar</button>
-                                                <button type="button" (click)="showPasajero2()">Listo</button>
-                                            </div>
-                                        </div>
+                                        <app-pop-up-pasajero (emitPasajeros)="pasajerosVueloHotel = $event"></app-pop-up-pasajero>
                                     </div>
 
                                 </div>
@@ -157,7 +88,7 @@
                                         <!-- <input class="form-control" type="text" placeholder="Origen"> -->
                                     </div>
                                     <div class="colBoxtab">
-                                        <input matInput aria-label="State2" [formControl]="stateCtrl2" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event,2)"
+                                        <input matInput aria-label="State2"  [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event,2)"
                                             class="form-control" placeholder="Destino">
                                         <mat-autocomplete #auto="matAutocomplete">
                                             <mat-option *ngFor="let state of citys" [value]="state.label">
@@ -170,7 +101,7 @@
                                     <div class="colBoxtab">
                                         <div class="hideDate">
                                             <!-- OCULTAR CAMPO -->
-                                            <input name="datepicker" ngbDatepicker #datepicker="ngbDatepicker" formControlName="range" [footerTemplate]="footerTemplate"
+                                            <input name="datepicker" ngbDatepicker #datepicker="ngbDatepicker"  [footerTemplate]="footerTemplate"
                                                 [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
                                                 [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1">
                                             <ng-template #t let-date let-focused="focused">
@@ -234,89 +165,18 @@
                                     fill="#4B4B4B" />
                             </svg> Hoteles
                         </ng-template>
-                        <div class="boxTab" (click)="changeTab()">
+                        <div class="boxTab">
                             <form class="bg-white" [formGroup]="form2">
                                 <div class="rowBoxTab">
                                     <div class="padRight">
-                                        <button class="customers" (click)="showPasajero3()">Habitación - Pasajero</button>
-                                        <div class="boxFlotante" *ngIf="!showOption3">
-                                            <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                                                <div class="d-flex flex-row iconTwo">
-                                                    <img height="13px" src="./assets/filter/habitacion.png" alt="">
-                                                </div>
-                                                <div class="d-flex flex-row flex-column w-100">
-                                                    <div class="d-flex flex-row text1">Habitación</div>
-                                                    <div class="d-flex flex-row text2">Añadir</div>
-                                                </div>
-                                                <div class="d-flex flex-row number">
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('habitacion',0)">-</div>
-                                                    <div class="d-flex flex-row textBtn">
-                                                        <input class="inputPasajero" type="text" [value]="habitacion">
-                                                    </div>
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('habitacion',1)">+</div>
-                                                </div>
-                                            </div>
-                                            <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                                                <div class="d-flex flex-row iconTwo">
-                                                    <img height="13px" src="./assets/filter/adulto.png" alt="">
-                                                </div>
-                                                <div class="d-flex flex-row flex-column w-100">
-                                                    <div class="d-flex flex-row text1">Adultos</div>
-                                                    <div class="d-flex flex-row text2">12 o más años</div>
-                                                </div>
-                                                <div class="d-flex flex-row number">
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('adultos',0)">-</div>
-                                                    <div class="d-flex flex-row textBtn">
-                                                        <input class="inputPasajero" type="text" [value]="adultos">
-                                                    </div>
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('adultos',1)">+</div>
-                                                </div>
-                                            </div>
-                                            <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                                                <div class="d-flex flex-row iconTwo">
-                                                    <img height="13px" src="./assets/filter/nino.png" alt="">
-                                                </div>
-                                                <div class="d-flex flex-row flex-column w-100">
-                                                    <div class="d-flex flex-row text1">Niños</div>
-                                                    <div class="d-flex flex-row text2">De 2 - 11 años</div>
-                                                </div>
-                                                <div class="d-flex flex-row number">
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('ninos',0)">-</div>
-                                                    <div class="d-flex flex-row textBtn">
-                                                        <input class="inputPasajero" type="text" [value]="ninos">
-                                                    </div>
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('ninos',1)">+</div>
-                                                </div>
-                                            </div>
-                                            <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                                                <div class="d-flex flex-row iconTwo">
-                                                    <img height="13px" src="./assets/filter/infante.png" alt="">
-                                                </div>
-                                                <div class="d-flex flex-row flex-column w-100">
-                                                    <div class="d-flex flex-row text1">Infantes</div>
-                                                    <div class="d-flex flex-row text2">Menores de 2 años</div>
-                                                </div>
-                                                <div class="d-flex flex-row number">
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('infantes',0)">-</div>
-                                                    <div class="d-flex flex-row textBtn">
-                                                        <input class="inputPasajero" type="text" [value]="infantes">
-                                                    </div>
-                                                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('infantes',1)">+</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex flex-row justify-content-between align-items-center p-3 btnPasajero">
-                                                <button class="gray" type="button">Cancelar</button>
-                                                <button type="button" (click)="showPasajero3()">Listo</button>
-                                            </div>
-                                        </div>
+                                        <app-pop-up-pasajero (emitPasajeros)="pasajerosHoteles = $event"></app-pop-up-pasajero>
                                     </div>
 
                                 </div>
                                 <div class="rowBoxTab">
                                     <div class="colBoxtab">
-                                        <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="origenHotel" (keyup)="autoComplete($event,1)"
-                                            #inputOrigenHotel class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
+                                        <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event,2)"
+                                             class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
                                         <mat-autocomplete #auto="matAutocomplete">
                                             <mat-option *ngFor="let state of citys" [value]="state.label">
                                                 <img class="example-option-img" aria-hidden src="./assets/origen.png">
@@ -327,7 +187,7 @@
                                     <div class="colBoxtab">
                                         <div class="hideDate">
                                             <!-- OCULTAR CAMPO -->
-                                            <input name="datepicker2" formControlName="range" ngbDatepicker #datepicker2="ngbDatepicker" [footerTemplate]="footerTemplate2"
+                                            <input name="datepicker2"  ngbDatepicker #datepicker2="ngbDatepicker" [footerTemplate]="footerTemplate2"
                                                 [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
                                                 [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate2!" tabindex="-1">
                                             <ng-template #t let-date let-focused="focused">
@@ -507,62 +367,7 @@
                         <div class="boxTab">
                             <div class="rowBoxTab">
                                 <div class="padRight">
-                                    <button class="customers" (click)="showPasajero4()">Pasajeros</button>
-                                    <div class="boxFlotante" *ngIf="!showOption4">
-                                        <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                                            <div class="d-flex flex-row iconTwo">
-                                                <img height="13px" src="./assets/filter/adulto.png" alt="">
-                                            </div>
-                                            <div class="d-flex flex-row flex-column w-100">
-                                                <div class="d-flex flex-row text1">Adultos</div>
-                                                <div class="d-flex flex-row text2">12 o más años</div>
-                                            </div>
-                                            <div class="d-flex flex-row number">
-                                                <div class="d-flex flex-row btnNWhite">-</div>
-                                                <div class="d-flex flex-row textBtn">
-                                                    <input class="inputPasajero" type="text" value="0">
-                                                </div>
-                                                <div class="d-flex flex-row btnNWhite">+</div>
-                                            </div>
-                                        </div>
-                                        <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                                            <div class="d-flex flex-row iconTwo">
-                                                <img height="13px" src="./assets/filter/nino.png" alt="">
-                                            </div>
-                                            <div class="d-flex flex-row flex-column w-100">
-                                                <div class="d-flex flex-row text1">Niños</div>
-                                                <div class="d-flex flex-row text2">De 2 - 11 años</div>
-                                            </div>
-                                            <div class="d-flex flex-row number">
-                                                <div class="d-flex flex-row btnNWhite">-</div>
-                                                <div class="d-flex flex-row textBtn">
-                                                    <input class="inputPasajero" type="text" value="0">
-                                                </div>
-                                                <div class="d-flex flex-row btnNWhite">+</div>
-                                            </div>
-                                        </div>
-                                        <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-                                            <div class="d-flex flex-row iconTwo">
-                                                <img height="13px" src="./assets/filter/infante.png" alt="">
-                                            </div>
-                                            <div class="d-flex flex-row flex-column w-100">
-                                                <div class="d-flex flex-row text1">Infantes</div>
-                                                <div class="d-flex flex-row text2">Menores de 2 años</div>
-                                            </div>
-                                            <div class="d-flex flex-row number">
-                                                <div class="d-flex flex-row btnNWhite">-</div>
-                                                <div class="d-flex flex-row textBtn">
-                                                    <input class="inputPasajero" type="text" value="0">
-                                                </div>
-                                                <div class="d-flex flex-row btnNWhite">+</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex flex-row justify-content-between align-items-center p-3 btnPasajero">
-                                            <button class="gray" type="button">Cancelar</button>
-                                            <button type="button" (click)="showPasajero4()">Listo</button>
-                                        </div>
-                                    </div>
+                                    <app-pop-up-pasajero [onlyPasajeros]="true"></app-pop-up-pasajero>
                                 </div>
 
                             </div>
