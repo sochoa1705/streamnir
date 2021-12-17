@@ -60,17 +60,17 @@ span {
 //     }
 // }
 
-/* active tab */
-
-::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
-    color: #4b4b4b;
-    opacity: 1;
-    // background-color: green;
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label {
+    color: #B9BCBF;
+    font-weight:700;
+    &-active{
+        color: #4b4b4b;
+        opacity: 1;
+        // background-color: green;
+    }
 }
 
-
 /* ink bar */
-
 ::ng-deep .mat-ink-bar {
     background-color: var(--primary-color, #009aed) !important;
 }
