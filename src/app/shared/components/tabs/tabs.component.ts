@@ -160,37 +160,10 @@ export class TabsComponent implements OnInit {
     }
   }
 
-  autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
-    this.citys = [];
-    // let elemento = this.origen.nativeElement;
-    let elemento = e.target;
-
-    let value = elemento.value;
-    if (value.length == 0) {
-      elemento.classList.remove('auto');
-    } else {
-      elemento.classList.add('auto');
-    }
-    if (value.length >= 3) {
-      this.getListCiudades(value, type, typeSearch);
-    }
-  }
 
 
-  getListCiudades(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
-    this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
-      data => {
-        this.citys = data;
-        if(type === 1) {
-          this.citysOrigenSelect = data;
-        } else {
-          this.citysDestinosSelect = data;
-        }
-      },
-      err => console.log(err),
-      () => console.log('Ciudades cargadas')
-    )
-  }
+
+
 
 
   public getDistributionUrl(pasajeros:PasajerosSinHabitacion){
@@ -295,5 +268,40 @@ getParamsVueloHotel(){
   changeTab(value:MatTabChangeEvent ){
     (value.index == 1)?this.navigateToResponseUrl(ROUTE_VIAJES.RUTA_PAQUETES):null;
   }
+
+
+  //TODO ELIMINAR
+
+  autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
+    this.citys = [];
+    // let elemento = this.origen.nativeElement;
+    let elemento = e.target;
+
+    let value = elemento.value;
+    if (value.length == 0) {
+      elemento.classList.remove('auto');
+    } else {
+      elemento.classList.add('auto');
+    }
+    if (value.length >= 3) {
+      this.getListCiudades(value, type, typeSearch);
+    }
+  }
+
+  getListCiudades(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
+    this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
+      data => {
+        this.citys = data;
+        if(type === 1) {
+          this.citysOrigenSelect = data;
+        } else {
+          this.citysDestinosSelect = data;
+        }
+      },
+      err => console.log(err),
+      () => console.log('Ciudades cargadas')
+    )
+  }
+
 
 }
