@@ -105,6 +105,9 @@ aside {
     &-prev,
     &-next{
         opacity: 1!important;
+        &:hover{
+            background: none;
+        }
     }
     &-next-icon{
         transform: rotate(135deg);
