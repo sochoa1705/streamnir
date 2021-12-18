@@ -1,13 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { findComponent } from 'src/app/shared/utils';
 import { PopUpPasajeroModule } from '../../pop-up-pasajero/pop-up-pasajero.module';
-import { PasajerosConHabitacion } from '../../tabs/tabs.models';
 
 import { TabVueloHotelComponent } from './tab-vuelo-hotel.component';
 
@@ -42,7 +40,19 @@ describe('TabVueloHotelComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('Testeando autocomplete que llame a lista de ciudades cuando son 3 palabras', async () => {
 
+    spyOn(component, 'getListCiudades').and.callThrough();
+
+    const event = {
+      target: {
+        value: 'lim'
+      }
+    }
+    component.autoComplete(event, 1);
+    expect(component.getListCiudades).toHaveBeenCalled();
+
+  });
 
   describe('Tab: Vuelo + Hotel', () => {
 

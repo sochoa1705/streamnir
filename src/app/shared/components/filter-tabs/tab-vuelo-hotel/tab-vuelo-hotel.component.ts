@@ -88,12 +88,14 @@ export class TabVueloHotelComponent  {
     // let elemento = this.origen.nativeElement;
     let elemento = e.target;
 
+    // console.log(elemento,type);
+
     let value = elemento.value;
-    if (value.length == 0) {
-      elemento.classList.remove('auto');
-    } else {
-      elemento.classList.add('auto');
-    }
+    // if (value.length == 0) {
+    //   elemento.classList.remove('auto');
+    // } else {
+    //   elemento.classList.add('auto');
+    // }
     if (value.length >= 3) {
       this.getListCiudades(value, type, typeSearch);
     }
@@ -113,8 +115,7 @@ export class TabVueloHotelComponent  {
           this.citysDestinosSelect = data;
         }
       },
-      err => console.log(err),
-      () => console.log('Ciudades cargadas')
+      err => console.log(err)
     )
   }
 
