@@ -15,10 +15,8 @@ export class TabVueloHotelComponent  {
 
   @ViewChild('popUp') popUpElement:PopUpPasajeroComponent | undefined;
  
-  public pasajerosVueloHotel: PasajerosConHabitacion;
   form!: FormGroup;
   fromDate: NgbDate | null
-  citys: Array<any> = [];
   citysOrigenSelect: Array<any> = [];
   citysDestinosSelect: Array<any> = [];
   origen: any;
@@ -27,9 +25,6 @@ export class TabVueloHotelComponent  {
   toDate: NgbDate | null;
 
   distribution = '';
-
-
-
   hoveredDate: NgbDate | null = null;
 
 
@@ -39,10 +34,6 @@ export class TabVueloHotelComponent  {
     this.createForm();
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
-    
-
-    this.pasajerosVueloHotel = new PasajerosConHabitacion(0, 0, 0, 1);
-
   }
 
   openSnackBar(message: string, action: string = "Error") {
@@ -88,15 +79,12 @@ export class TabVueloHotelComponent  {
   }
   public getUrlVueloHotel(): string {
     let url = ''
-    if (this.pasajerosVueloHotel.adultos > 0) {
-      let params = this.getParamsVueloHotel();
-      url = new URLVueloHotel(params, this.distribution).getUrl();
-    }
+    let params = this.getParamsVueloHotel();
+    url = new URLVueloHotel(params, this.distribution).getUrl();
     return url;
   }
 
   autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
-    this.citys = [];
     // let elemento = this.origen.nativeElement;
     let elemento = e.target;
 
@@ -119,7 +107,6 @@ export class TabVueloHotelComponent  {
   getListCiudades(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
-        this.citys = data;
         if(type === 1) {
           this.citysOrigenSelect = data;
         } else {

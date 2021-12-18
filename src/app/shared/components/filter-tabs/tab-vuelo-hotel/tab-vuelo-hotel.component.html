@@ -19,10 +19,10 @@
 
         <div class="rowBoxTab">
             <div class="colBoxtab">
-                <input matInput aria-label="State" [matAutocomplete]="auto" formControlName="origen" (keyup)="autoComplete($event,1)" #inputOrigen
+                <input matInput aria-label="State" [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event,1)"
                     class="form-control animated fadeIn" placeholder="Origen">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let state of citys" [value]="state.label">
+                <mat-autocomplete #auto1="matAutocomplete">
+                    <mat-option *ngFor="let state of citysOrigenSelect" [value]="state.label">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
                         <span>{{state.label}}</span>
                         <!-- <small>Population: {{state.population}}</small> -->
@@ -31,16 +31,18 @@
                 <!-- <input class="form-control" type="text" placeholder="Origen"> -->
             </div>
             <div class="colBoxtab">
-                <input matInput aria-label="State2"  [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event,2)"
+                <input matInput aria-label="State2"  [matAutocomplete]="auto2" formControlName="destino" (keyup)="autoComplete($event,2)"
                     class="form-control" placeholder="Destino">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let state of citys" [value]="state.label">
+                <mat-autocomplete #auto2="matAutocomplete">
+                    <mat-option *ngFor="let state of citysDestinosSelect" [value]="state.label">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
                         <span>{{state.label}}</span>
                         <!-- <small>Population: {{state.population}}</small> -->
                     </mat-option>
                 </mat-autocomplete>
             </div>
+
+            <!-- TODO CREAR COMPONENTE PARA FECHA -->
             <div class="colBoxtab">
                 <div class="hideDate">
                     <!-- OCULTAR CAMPO -->

@@ -94,8 +94,22 @@ describe('TabVueloHotelComponent', () => {
 
       let pasajerosMockedResult = "1-3-10,10,2";
 
-      component.distribution = pasajerosMockedResult;
-      // 1 adulto, 3 niños (2 niños de 10 años y 1 infante de 2 años)
+      const popUp = findComponent(fixture,"app-pop-up-pasajero");
+
+
+      popUp.componentInstance.calculateDistributionTravel('adultos',1);
+      popUp.componentInstance.calculateDistributionTravel('adultos',1);
+      popUp.componentInstance.calculateDistributionTravel('ninos',1);
+      popUp.componentInstance.calculateDistributionTravel('ninos',1);
+      popUp.componentInstance.calculateDistributionTravel('infantes',1);
+
+
+      // 1 adulto, 3 niños (2 niños de 10 años y 1 infante de 2 años);
+
+      popUp.triggerEventHandler('emitDistribution',pasajerosMockedResult);
+
+      expect(component.distribution).toEqual(pasajerosMockedResult);
+
 
       spyOn(component, 'getParamsVueloHotel').and.returnValue(mockedParams);
 
@@ -108,7 +122,7 @@ describe('TabVueloHotelComponent', () => {
 
       component.searchVueloHotel();
 
-      expect(component.navigateToResponseUrl).toHaveBeenCalledOnceWith(mockedReponse);
+      expect(component.navigateToResponseUrl).toHaveBeenCalledWith(mockedReponse);
     })
 
   });
