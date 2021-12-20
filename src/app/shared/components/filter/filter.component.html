@@ -127,7 +127,7 @@
                     </div>
 
                     <input matInput aria-label="State" [ngClass]="classAutoOrigen ? 'auto' : ''" [matAutocomplete]="auto" (keyup)="autoComplete($event)" (focus)="autoComplete($event)"
-                        (blur)="autoComplete($event)" #inputOrigen class="form-control animated fadeIn" formControlName="origen" name="origen"
+                        (blur)="autoComplete($event)" #inputOrigen class="form-control animated fadeIn origen" formControlName="origen" name="origen"
                         placeholder="Origen">
                     <mat-autocomplete #auto="matAutocomplete">
                         <mat-option *ngFor="let state of citys" [value]="state.CITY">
@@ -149,7 +149,7 @@
                     </div>
 
                     <input matInput aria-label="State2"  [ngClass]="classAutoDestino ? 'auto' : ''"(keyup)="autoComplete($event)" (focus)="autoComplete($event)" (blur)="autoComplete($event)" name="destino" #inputDestino
-                        class="form-control" formControlName="destino" [matAutocomplete]="auto" [formControl]="stateCtrl2" placeholder="Destino">
+                        class="form-control destino" formControlName="destino" [matAutocomplete]="auto" [formControl]="stateCtrl2" placeholder="Destino">
                     <mat-autocomplete #auto="matAutocomplete">
                         <mat-option *ngFor="let state of citys" [value]="state.CITY">
                             <img class="example-option-img" aria-hidden src="./assets/origen.png">

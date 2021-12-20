@@ -1,0 +1,23 @@
+.card{
+    &__content {
+        position: relative;
+        height: 372px;
+        overflow: hidden;
+        @media (max-width: 768px) {
+            height: 180px;
+        }
+        &>img{
+            border-radius: 2px;
+            position: absolute;
+            object-fit: cover;
+            -o-object-position: top;
+            object-position: top;
+            height: 100%;
+            max-width: 100%;
+            width: 100%;
+            @media (max-width: 768px) {
+                position: relative;
+            }
+        }
+    }
+}

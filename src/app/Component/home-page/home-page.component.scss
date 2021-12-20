@@ -2,6 +2,7 @@
     &__content {
         position: relative;
         height: 372px;
+        background: red;
         overflow: hidden;
         @media (max-width: 768px) {
             height: 180px;

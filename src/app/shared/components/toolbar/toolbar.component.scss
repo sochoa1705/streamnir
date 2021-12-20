@@ -39,7 +39,7 @@
             font-weight: normal;
             white-space: pre-line;
             width: 50px;
-            height: 10px;
+            height: 2px;
             @media (max-width: 768px) {
                 display: none !important;
             }
@@ -104,4 +104,8 @@
         background: $white !important;
         color: rgba(255, 255, 255, 1) !important;
     }
+}
+
+.border{
+    border-color: white!important
 }

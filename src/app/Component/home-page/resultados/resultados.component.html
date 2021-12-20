@@ -459,14 +459,14 @@
             <div class="row hideMov">
                 <div class="col-12">
                     <!-- <mat-tab-group mat-stretch-tabs (click)="tab($event)"></mat-tab-group> -->
-                    <mat-tab-group mat-stretch-tabs>
+                    <mat-tab-group mat-stretch-tabs (click)="showTab()">
                         <!-- PRIMER TAB -->
                         <mat-tab label="Precio por aerolínea" class="tabAero">
-                            <div class="d-flex flex-column boxPrecioAero">
+                            <div class="d-flex flex-column boxPrecioAero" [ngClass]="showTabs === true ? 'd-none' : ''">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Aerolíneas</th>
+                                            <th width="210">Aerolíneas</th>
                                             <th>Directo</th>
                                             <th>1 escala</th>
                                             <th>2 o más escalas</th>
@@ -620,7 +620,7 @@
                         </mat-tab>
                         <mat-tab label="Precios +/- 3 días">
                             <!-- SEGUNDO TAB -->
-                            <div class="d-flex flex-column boxPrecios">
+                            <div class="d-flex flex-column boxPrecios border m-sm-4" [ngClass]="showTabs === true ? 'd-none' : ''">
                                 <div class="d-flex align-items-center row header">
                                     <div class="col flex-column align-items-md-start justify-content-evenly ps-0">
                                         <div class="twoRow w-100">Ida
@@ -630,16 +630,32 @@
                                             <img src="./assets/resultado/flecha-bottom.png" alt="">
                                         </div>
                                     </div>
-                                    <div class="col">Jue <span> 22/07</span></div>
-                                    <div class="col">Vie<span>23/07</span></div>
-                                    <div class="col">Sáb<span>24/07</span></div>
-                                    <div class="col">Dom<span>25/07</span></div>
-                                    <div class="col">Lun<span>26/07</span></div>
-                                    <div class="col">Mar<span>27/07</span></div>
-                                    <div class="col">Mie<span>28/07</span></div>
+                                    <div class="col">Jue
+                                        <span> 22/07</span>
+                                    </div>
+                                    <div class="col">Vie
+                                        <span>23/07</span>
+                                    </div>
+                                    <div class="col">Sáb
+                                        <span>24/07</span>
+                                    </div>
+                                    <div class="col">Dom
+                                        <span>25/07</span>
+                                    </div>
+                                    <div class="col">Lun
+                                        <span>26/07</span>
+                                    </div>
+                                    <div class="col">Mar
+                                        <span>27/07</span>
+                                    </div>
+                                    <div class="col">Mie
+                                        <span>28/07</span>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">Vie <span>30/07</span></div>
+                                    <div class="col">Vie
+                                        <span>30/07</span>
+                                    </div>
                                     <div class="col"></div>
                                     <div class="col green">$1,144</div>
                                     <div class="col green">$1,144</div>
@@ -649,7 +665,9 @@
                                     <div class="col">$1,220</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">Sab <span>31/07</span></div>
+                                    <div class="col">Sab
+                                        <span>31/07</span>
+                                    </div>
                                     <div class="col selected">$1194</div>
                                     <div class="col">$1,334</div>
                                     <div class="col green">$1,144</div>
@@ -659,7 +677,9 @@
                                     <div class="col">$1,349</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">Dom <span>01/08</span></div>
+                                    <div class="col">Dom
+                                        <span>01/08</span>
+                                    </div>
                                     <div class="col"></div>
                                     <div class="col green">$1,144</div>
                                     <div class="col">$1,349</div>
@@ -669,7 +689,9 @@
                                     <div class="col">$1,334</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">Lun <span>02/08</span></div>
+                                    <div class="col">Lun
+                                        <span>02/08</span>
+                                    </div>
                                     <div class="col"></div>
                                     <div class="col">$1,349</div>
                                     <div class="col red">$1,476</div>
@@ -679,7 +701,9 @@
                                     <div class="col">$1,306</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">Mar <span>03/08</span></div>
+                                    <div class="col">Mar
+                                        <span>03/08</span>
+                                    </div>
                                     <div class="col"></div>
                                     <div class="col">$1,334</div>
                                     <div class="col">$1,334</div>
@@ -689,7 +713,9 @@
                                     <div class="col">$1,349</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">Mie <span>04/08</span></div>
+                                    <div class="col">Mie
+                                        <span>04/08</span>
+                                    </div>
                                     <div class="col"></div>
                                     <div class="col red">$1,578</div>
                                     <div class="col">$1,306</div>
@@ -699,7 +725,9 @@
                                     <div class="col green">$1,144</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">Jue <span>05/08</span></div>
+                                    <div class="col">Jue
+                                        <span>05/08</span>
+                                    </div>
                                     <div class="col"></div>
                                     <div class="col">$1,349</div>
                                     <div class="col">$1,349</div>
@@ -713,7 +741,7 @@
                         </mat-tab>
                         <mat-tab label="Tendencia de precios">
                             <!-- TERCER TAB -->
-                            <div class="d-flex boxGraphic flex-column">
+                            <div class="d-flex boxGraphic flex-column" [ngClass]="showTabs === true ? 'd-none' : ''">
                                 <div class="row title">Revisa la tendencia de precios</div>
                                 <div class="row align-items-center subtitle">
                                     <div class="circleBlue"></div>Precio más bajo</div>

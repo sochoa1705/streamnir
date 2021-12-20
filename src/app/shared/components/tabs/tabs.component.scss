@@ -35,13 +35,23 @@ article {
             font-size: 10px;
             padding: 7px;
         }
+        & span:hover{
+            color: $red_light;
+        }
         &:hover {
             color: $red_light;
         }
         &-active {
             border-radius: 7px 7px 0 0;
-            color: $red_light;
+            color: $red_light!important;
             font-weight: bold;
+            & span{
+                color: #DF0C30;
+            }
+            &:first-child{
+                margin: 0px;
+                border-radius: 7px 7px 7px 0px;
+            }
             .mat-tab-label-content>svg>path {
                 fill: $red_light;
             }
@@ -54,6 +64,7 @@ article {
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            color: #4B4B4B;
             &>svg {
                 @media (max-width: 768px) {
                     height: 12px;
@@ -72,7 +83,7 @@ article {
         background: $white;
         box-shadow: 0px 1px 8px rgba(122, 88, 88, 0.05);
         padding: 35px 0px 35px 43px;
-        border-radius: 7px;
+        border-radius: 0px 7px 7px 7px;
         @media (max-width: 768px) {
             padding: 7px;
         }
