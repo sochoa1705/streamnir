@@ -18,7 +18,7 @@ h1 {
     font-family: "Open Sans";
     font-style: normal;
     font-weight: bold;
-    font-size: 28px;
+    font-size: 38px;
     line-height: 36px;
     color: $gray;
     text-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
@@ -110,6 +110,8 @@ a {
     padding: 10px 13px;
     color: $white;
     text-decoration: none;
+    
+    transition: all 200ms ease-in-out;
     &:hover {
         border-radius: 30px;
         padding: 10px 10px;
@@ -119,7 +121,6 @@ a {
         &::before {
             font-family: Montserrat;
             content: "Vamos ";
-            transition: all 0.5s ease-in-out;
             -webkit-transition: all 0.5s ease-in-out;
         }
     }

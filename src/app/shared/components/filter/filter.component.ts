@@ -214,7 +214,7 @@ export class FilterComponent implements OnInit {
       // adultos: new FormControl(0),
       ninos: new FormControl(0),
       infantes: new FormControl(0),
-      origen: new FormControl('Lima'),
+      origen: new FormControl(),
       destino: new FormControl(''),
       range: new FormGroup({
         start: new FormControl(),

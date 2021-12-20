@@ -112,7 +112,8 @@ h2 {
     line-height: 2;
     color: #212529;
     background-color: #fff;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-image: url(../../../../assets/arrow.svg);
+    // background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     background-size: 16px 12px;
@@ -252,6 +253,10 @@ h2 {
         }
     }
     &.pasajeros {
+        border-radius: 10px;
+        & .card-header{
+            border-radius: 10px;
+        }
         .card {
             &-header {
                 box-shadow: none;
@@ -298,6 +303,24 @@ h2 {
         }
     }
     &-body {
+        .input-group {
+            & input{
+            border: .5px solid #83898F;
+            border-right: 0px;
+            &:focus{
+                border: .5px solid #83898F!important;
+                border-right: 0px!important;
+            }
+            }
+            & label.input-group-text{
+                background: white;
+                border: .5px solid #83898F;
+                border-left: 0px;
+                & .mat-icon{
+                    color: #B9BCBF;
+                }
+            }
+        }
         h {
             &1 {
                 font-size: 18px;
@@ -308,6 +331,9 @@ h2 {
             a {
                 color: red;
                 text-decoration: none;
+                &.ver{
+                    color: #DF0C30 !important;
+                }
                 &:hover {
                     text-decoration: underline;
                 }
@@ -356,7 +382,7 @@ h2 {
             .escala {
                 font-size: 10px;
                 font-family: "Montserrat";
-                font-weight: 600;
+                font-weight: 700;
                 &_line {
                     border-top: 0.5px dashed #83898f;
                 }
@@ -372,9 +398,10 @@ h2 {
             }
         }
         span {
-            color: #4B4B4B;
+            color: #506370;
             font-family: "Montserrat";
             font-size: 12px;
+            font-weight: 500;
         }
         box-shadow: none;
         // box-shadow: 0px -2px 3px rgba(0, 0, 0, 0.16);
@@ -507,12 +534,18 @@ h2 {
 }
 
 .accordion {
+    &-item{
+        border-radius: 10px;
+    }
     &-header {
         a {
+            font-family: "Montserrat";
+            font-size: 12px;
             color: #df0c30;
             background: white;
             justify-content: flex-end;
             padding: 10px 20px;
+            border-radius: 10px 10px 0 0;
             cursor: pointer;
             gap: 10px;
             &::after {
@@ -692,7 +725,7 @@ p {
 }
 .modal {
     &-content {
-        background: #54d834;
+        // background: #54d834;
         border: 0;
         border-radius: 20px;
         &.best{
@@ -700,7 +733,7 @@ p {
         }
     }
     &-header {
-        border-radius: 20px;
+        // border-radius: 20px;
         color: white;
         padding: 1rem 2rem 1rem 2rem;
         h {
@@ -724,7 +757,7 @@ p {
         background: white;
         border-radius: 20px;
         padding: 2rem;
-        overflow: hidden;
+        overflow: auto;
         table {
             tr.row {
                 border-top: 0;

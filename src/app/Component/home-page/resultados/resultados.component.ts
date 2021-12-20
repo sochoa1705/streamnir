@@ -7,6 +7,7 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./resultados.component.scss']
 })
 export class ResultadosComponent implements OnInit {
+  showTabs!: boolean
   selectedValue!: string;
   json = {
     filter: 'filter',
@@ -22,7 +23,9 @@ export class ResultadosComponent implements OnInit {
     { value: 'pizza-1', viewValue: 'Pizza' },
     { value: 'tacos-2', viewValue: 'Tacos' }
   ];
-  constructor(public route: Router) { }
+  constructor(public route: Router) {
+    this.showTabs = true
+  }
 
   id:any = "tabIda";
   showOption(ids:any) {
@@ -44,12 +47,15 @@ export class ResultadosComponent implements OnInit {
     // console.log(cdr);
 
     cdr[0].style.display = `none`;
-
   }
 
   shop() {
     //console.log(this.form.value);
     const navigationExtras: NavigationExtras = { state: this.json };
     this.route.navigateByUrl('/home/comprar', navigationExtras);
+  }
+
+  showTab() {
+    this.showTabs = false
   }
 }
