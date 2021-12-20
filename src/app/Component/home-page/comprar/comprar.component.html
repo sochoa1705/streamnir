@@ -698,7 +698,7 @@
                     <div class="col-12 medioPagoMobile">
                         <div class="card cardPagoMobile">
                             <div class="card-header shadow-none">
-                                <h2>Selecciona el medio de pago2</h2>
+                                <h2>Selecciona el medio de pago</h2>
                                 <span>Selecciona tu método de pago (el pago se llevará a cabo una vez presiones el botón pagar
                                     al final del formulario).
                                 </span>
@@ -754,7 +754,8 @@
                                                     <div class="iconInfo toolTip">
                                                         <img src="./assets/comprar/card/info.png" alt="">
                                                         <div class="boxTooltip2">
-                                                            <div class="descripTooltip">El código de seguridad esta localizado en los 3 últimos digitos detras de tu tarjet</div>
+                                                            <div class="descripTooltip">El código de seguridad esta localizado en los 3 últimos digitos
+                                                                detras de tu tarjeta</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -809,7 +810,7 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="row card_pasajero rowMobileCard">
+                                    <div class="row card_pasajero rowMobileCard pb-sm-4">
                                         <div class="col-6 viewMobileWidth">
                                             <label for="names">Dirección</label>
                                             <input class="form-control" formControlName="address" placeholder="Ingrese la dirección" type="text" name="names">
@@ -847,7 +848,8 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6 offset-3 py-4 lessViewMob">
-                                                <select class="selectBank" formControlName="bankPay">
+                                                <select class="selectBank form-select-f" formControlName="bankPay">
+                                                    <option [ngValue]="null" [disabled]="true">Selecciona tu banco</option>
                                                     <option *ngFor="let b of banks" value="{{b.value}}">{{b.name}}</option>
                                                 </select>
                                                 <span class="valid" *ngIf="getMessage(MSG_BANK) != MSG_EMPTY">{{ getMessage(MSG_BANK) }}</span>
@@ -915,7 +917,7 @@
                     <div class="clearfix"></div>
                 </div>
 
-                <div class="contentSecuritySeg hideViewMobile">
+                <div class="contentSecuritySeg hideViewMobile mb-sm-3">
                     <div class="rowContent vermovil">
                         <div>
                             <img src="./assets/perfil/security.png" alt="">
@@ -1073,7 +1075,7 @@
 
                     </div>
                     <div class="col-12 ">
-                        <div class="card atribCard">
+                        <div class="card atribCard shadow-none">
                             <div class="row rowMobileCard">
                                 <div class="col-6 viewMobileWidth pe-0">
                                     <div class="form-check form-check-inline me-0">
@@ -1084,7 +1086,7 @@
                                     </div>
                                     <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) != MSG_EMPTY">{{getMessage(MSG_CHK_POLITY)}}</span>
                                 </div>
-                                <div class="col-6 viewMobileWidth">
+                                <div class="col-6 viewMobileWidth text-end">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" formControlName="chkInfo" id="chkInfo" value="option1">
                                         <label class="form-check-label" for="chkInfo">Autorizo el uso de mi Información para la Publicidad.</label>
@@ -1094,11 +1096,11 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="row">
-                                <div class="col-12 footerLink">
+                                <div class="col-12 footerLink mt-md-4 mb-md-5">
                                     Al realizar esta compra, acepto los
-                                    <a class="linkBlue" routerLink="/home/terminos-condiciones"  target="_blank">&nbsp;términos y condiciones de compra</a>,
+                                    <a class="linkBlue" routerLink="/home/terminos-condiciones" target="_blank">&nbsp;términos y condiciones de compra</a>,
                                     <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#reservaModal">&nbsp;condiciones de reserva&nbsp;</a> y
-                                    <a class="linkBlue" routerLink="/home/documentacion-viaje"  target="_blank">&nbsp;documentación de viaje</a>.
+                                    <a class="linkBlue" routerLink="/home/documentacion-viaje" target="_blank">&nbsp;documentación de viaje</a>.
                                 </div>
 
                                 <div class="clearfix"></div>
@@ -1169,15 +1171,16 @@
                 <div class="accordion" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                            <a class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                            <a class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+                                aria-controls="panelsStayOpen-collapseOne">
                                 Ver detalles
                                 <img src="./assets/footer/flecha.png" alt="" class="iconFlecha">
                             </a>
                         </h2>
-                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
                             <div class="accordion-body">
                                 <div class="row mgBottom">
-                                    <div class="col-6 txtdet">2 Adulto(s)</div>
+                                    <div class="col-6 txtdet">2 Pasajero(s)</div>
                                     <div class="col-6 txtdet right">$ 690.00</div>
                                 </div>
                                 <div class="row mgBottom">
@@ -1331,7 +1334,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <a href="#" class="font-12">ver detalles</a>
+                                    <a href="#" class="font-12 ver">ver detalles</a>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -1412,7 +1415,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <a href="#" class="font-12">ver detalles</a>
+                                    <a href="#" class="font-12 ver">ver detalles</a>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -1431,7 +1434,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <input type="text" class="form-control" placeholder="Ingrese Código de descuento">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Ingresar código de descuento">
+                                    <label class="input-group-text" for="inputGroupSelect01"><mat-icon>card_giftcard</mat-icon></label>
+                                </div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
