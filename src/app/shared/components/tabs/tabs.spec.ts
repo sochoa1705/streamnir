@@ -11,6 +11,7 @@ import { PopUpPasajeroModule } from '../pop-up-pasajero/pop-up-pasajero.module';
 import { ParamsHoteles, ParamsVueloHotel, PasajerosConHabitacion, URLVueloHotel } from './tabs.models';
 import { ROUTE_VIAJES } from '../../constant';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 
 
 describe('TabsComponent', () => {
@@ -28,6 +29,12 @@ describe('TabsComponent', () => {
             NgbModule,
             BrowserAnimationsModule,
             PopUpPasajeroModule
+          ],
+          providers: [
+            {
+              provide: MATERIAL_SANITY_CHECKS,
+              useValue: false
+            }
           ],
           schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
@@ -74,7 +81,7 @@ describe('TabsComponent', () => {
 
     it("Redirigir a url paquetes", fakeAsync(()=>{
 
-      spyOn(component,'navigateToResponseUrl').and.callFake((url)=>url);
+      jest.spyOn(component,'navigateToResponseUrl').mockImplementation((url)=>url) 
 
       const matTab = debugElement.nativeElement.querySelectorAll('.mat-tab-label')[1];
       matTab.click();
@@ -138,8 +145,9 @@ describe('TabsComponent', () => {
         startDate: "27/12/2021"
     }
 
-    spyOn(component,'navigateToResponseUrl').and.callFake((url)=>url);
-    spyOn(component,'getParamsAlojamiento').and.returnValues(paramsMockedReponse);
+    jest.spyOn(component,'navigateToResponseUrl').mockImplementation((url)=>url);
+
+    jest.spyOn(component,'getParamsAlojamiento').mockReturnValue(paramsMockedReponse);
 
       component.pasajerosHoteles = new PasajerosConHabitacion(2,2,1,1);
       const mockedDistribution = "2-3-10,10,2";

@@ -139,7 +139,7 @@ describe('PopUpPasajeroComponent', () => {
 
   it('Generando distribucion abriendo el modal y dandole al guardar, <<emitDistribution>>',()=>{
 
-    spyOn(component.emitDistribution, 'emit');
+    jest.spyOn(component.emitDistribution, 'emit');
 
     // const mockedOutput =  new PasajerosConHabitacion(2,2,1,1);
     const mockedResult = "2-3-10,10,2";
@@ -163,7 +163,7 @@ describe('PopUpPasajeroComponent', () => {
 
     fixture.detectChanges();
 
-    expect(component.emitDistribution.emit).toHaveBeenCalledOnceWith(mockedResult);
+    expect(component.emitDistribution.emit).toHaveBeenCalledWith(mockedResult);
 
   })
 

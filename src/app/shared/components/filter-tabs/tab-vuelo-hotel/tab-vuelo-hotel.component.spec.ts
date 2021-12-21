@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
+import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from 'src/app/shared/material.module';
@@ -24,6 +25,12 @@ describe('TabVueloHotelComponent', () => {
         PopUpPasajeroModule,
         BrowserAnimationsModule
       ],
+      providers: [
+        {
+          provide: MATERIAL_SANITY_CHECKS,
+          useValue: false
+        }
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
@@ -42,7 +49,7 @@ describe('TabVueloHotelComponent', () => {
 
   it('Testeando autocomplete que llame a lista de ciudades cuando son 3 palabras', async () => {
 
-    spyOn(component, 'getListCiudades').and.callThrough();
+   jest.spyOn(component, 'getListCiudades');
 
     const event = {
       target: {
@@ -121,12 +128,12 @@ describe('TabVueloHotelComponent', () => {
       expect(component.distribution).toEqual(pasajerosMockedResult);
 
 
-      spyOn(component, 'getParamsVueloHotel').and.returnValue(mockedParams);
+      jest.spyOn(component, 'getParamsVueloHotel').mockReturnValue(mockedParams);
 
       const mockedReponse = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=FLIGHT_HOTEL&destination=Destination::MDF&departure=Destination::LIM&departureDate=27/12/2021&arrivalDate=09/01/2022&distribution=${pasajerosMockedResult}&businessCabin=false&lang=ES`;
    
       // Se hace esto para no redirigir la web ya que hay un windows.locaction
-      spyOn(component,'navigateToResponseUrl').and.callFake((url)=>{
+      jest.spyOn(component,'navigateToResponseUrl').mockImplementation((url)=>{
         return url;
       })
 
