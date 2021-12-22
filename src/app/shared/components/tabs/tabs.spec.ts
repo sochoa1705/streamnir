@@ -11,13 +11,8 @@ import { PopUpPasajeroModule } from '../pop-up-pasajero/pop-up-pasajero.module';
 import { ParamsHoteles, ParamsVueloHotel, PasajerosConHabitacion, URLVueloHotel } from './tabs.models';
 import { ROUTE_VIAJES } from '../../constant';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
 
-export function findComponent<T>(
-  fixture: ComponentFixture<T>,
-  selector: string,
-): DebugElement {
-  return fixture.debugElement.query(By.css(selector));
-}
 
 describe('TabsComponent', () => {
   let fixture: ComponentFixture<TabsComponent>;
@@ -34,6 +29,12 @@ describe('TabsComponent', () => {
             NgbModule,
             BrowserAnimationsModule,
             PopUpPasajeroModule
+          ],
+          providers: [
+            {
+              provide: MATERIAL_SANITY_CHECKS,
+              useValue: false
+            }
           ],
           schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
@@ -75,81 +76,12 @@ describe('TabsComponent', () => {
     
   })
 
-  
-  describe('Tab: Vuelo + Hotel', () => {
-
-    beforeEach(fakeAsync(()=>{
-      const matTab = debugElement.nativeElement.querySelectorAll('.mat-tab-label')[2];
-      matTab.click();
-      fixture.detectChanges();
-      tick(100);
-    }))
-
-
-    it('renderizar app-pop-up-pasajero , Vuelo + Hotel', ()=>{
-
-      const popUp = findComponent(fixture, 'app-pop-up-pasajero');
-      // expect(compiled.querySelector('app-pop-up-pasajero')).toBeTruthy();
-
-      expect(popUp).toBeTruthy();
-    });
-
-
-    it('Generar Distribucion desde el hijo, getDistributionUrl(pasajeros:PasajerosSinHabitacion)',()=>{
-
-      const mockedOutput =  new PasajerosConHabitacion(2,2,1,1);
-      const mockedResult = "2-3-10,10,2";
-
-      // const mockedUrl = "https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=FLIGHT_HOTEL&destination=Destination::MXL&departure=Destination::LIM&departureDate=29/12/2020&arrivalDate=31/12/2020&distribution=2-3-10,10,2&businessCabin=false&lang=ES"
-
-      const popUp = findComponent(fixture, 'app-pop-up-pasajero');
-      popUp.triggerEventHandler('emitPasajeros',mockedOutput);
-
-      expect(component.pasajerosVueloHotel).toEqual(mockedOutput);
-
-      const result = component.getDistributionUrl(component.pasajerosVueloHotel);
-
-      expect(result).toBe(mockedResult);
-
-    })
-
-    it('Debe buscar un vuelo o hotel correctamente, searchVueloHotel()',()=>{
-
-      const mockedParams = {
-        "startDate": "27/12/2021",
-        "endDate": "09/01/2022",
-        "origen": "Lima, Perú",
-        "destino": "Ciudad de México, México",
-        "businessClass": false,
-        "idOrigen": "Destination::LIM",
-        "idDestino": "Destination::MDF",
-      }
-
-      component.pasajerosVueloHotel = new PasajerosConHabitacion(1, 2, 1, 1);
-      let pasajerosMockedResult = "1-3-10,10,2";
-      // 1 adulto, 3 niños (2 niños de 10 años y 1 infante de 2 años)
-
-      spyOn(component, 'getParamsVueloHotel').and.returnValue(mockedParams)
-
-      const mockedReponse = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=FLIGHT_HOTEL&destination=Destination::MDF&departure=Destination::LIM&departureDate=27/12/2021&arrivalDate=09/01/2022&distribution=${pasajerosMockedResult}&businessCabin=false&lang=ES`;
-   
-      // Se hace esto para no redirigir la web ya que hay un windows.locaction
-      spyOn(component,'navigateToResponseUrl').and.callFake((url)=>{
-        return url;
-      })
-
-      component.searchVueloHotel();
-
-      expect(component.navigateToResponseUrl).toHaveBeenCalledOnceWith(mockedReponse);
-    })
-
-  });
 
   describe('Tab: Paquetes', ()=>{
 
     it("Redirigir a url paquetes", fakeAsync(()=>{
 
-      spyOn(component,'navigateToResponseUrl').and.callFake((url)=>url);
+      jest.spyOn(component,'navigateToResponseUrl').mockImplementation((url)=>url) 
 
       const matTab = debugElement.nativeElement.querySelectorAll('.mat-tab-label')[1];
       matTab.click();
@@ -204,28 +136,7 @@ describe('TabsComponent', () => {
 
     })
 
-    it("Redirigir a url Hoteles, component.searchAlojamiento()", ()=>{
 
-      const paramsMockedReponse = {
-        destino: "Ciudad de México, México",
-        endDate: "08/01/2022",
-        idDestino: "Destination::MDF",
-        startDate: "27/12/2021"
-    }
-
-    spyOn(component,'navigateToResponseUrl').and.callFake((url)=>url);
-    spyOn(component,'getParamsAlojamiento').and.returnValues(paramsMockedReponse);
-
-      component.pasajerosHoteles = new PasajerosConHabitacion(2,2,1,1);
-      const mockedDistribution = "2-3-10,10,2";
-
-      component.searchAlojamiento();
-
-      const mockedUrl = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=ONLY_HOTEL&distribution=${mockedDistribution}&lang=ES&carRental=false&hotelDestination=Destination::MDF&departureDate=27/12/2021&arrivalDate=08/01/2022`
-
-      expect(component.navigateToResponseUrl).toHaveBeenCalledWith(mockedUrl);
-
-    })
 
     
   })

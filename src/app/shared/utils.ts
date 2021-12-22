@@ -1,3 +1,6 @@
+import { DebugElement } from '@angular/core';
+import { ComponentFixture } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 
 var urlLogout = "http://localhost:8080/Login";
@@ -34,3 +37,11 @@ export function CloseSession(): void {
   export function Guid() {
     return Math.floor(Math.random() * 0x10000).toString(16);
   }
+
+ export function findComponent<T>(
+  fixture: ComponentFixture<T>,
+  selector: string,
+): DebugElement {
+  return fixture.debugElement.query(By.css(selector));
+}
+

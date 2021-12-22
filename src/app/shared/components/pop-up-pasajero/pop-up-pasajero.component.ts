@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 import { fromEvent } from 'rxjs';
 import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { Guid } from '../../utils';
-import { PasajerosConHabitacion } from '../tabs/tabs.models';
+import { PasajerosConHabitacion, PasajerosSinHabitacion } from '../tabs/tabs.models';
 
 @Component({
   selector: 'app-pop-up-pasajero',
@@ -38,9 +38,7 @@ export class PopUpPasajeroComponent implements OnInit{
   @Input() onlyPasajeros = false;
   @Input() habitacionDisabled = true;
 
-  @Output() emitPasajeros = new EventEmitter<PasajerosConHabitacion>()
-
-  @ViewChild('boxFlotante') boxFlotante:ElementRef<HTMLElement> | undefined;
+  @Output() emitDistribution= new EventEmitter<string>();
 
   constructor(private popupService:PopupService) {
     this.idContent = `popup_${Guid()}`;
@@ -52,9 +50,20 @@ export class PopUpPasajeroComponent implements OnInit{
       this.idStateOpen = state.id;
 
       const popUpPasajeroModel = new PasajerosConHabitacion(this.adultos,this.ninos,this.infantes,this.habitacion);
-      this.emitPasajeros.emit(popUpPasajeroModel);
+
+      if(!state.open){
+        const distribution = this.getDistributionUrl(popUpPasajeroModel);
+        this.emitDistribution.emit(distribution);
+      }
     })
     
+  }
+
+  isValid(){
+    if(this.adultos>0){
+      return true
+    }
+    return false
   }
 
   showPasajero() {
@@ -91,5 +100,23 @@ export class PopUpPasajeroComponent implements OnInit{
     this.popupService.closePopUp(this.idContent);
   }
 
+  public getDistributionUrl(pasajeros:PasajerosSinHabitacion){
+    let urlDistributon = pasajeros.adultos.toString();
 
+    let ninos = pasajeros.infantes + pasajeros.ninos;
+
+    if(ninos > 0) {
+      urlDistributon += `-${ninos}-`;
+    } else{
+      urlDistributon += "-0";
+    }
+    for(let i=0;i<pasajeros.ninos;i++) {
+      urlDistributon += "10,"
+    }
+    for(let i=0;i<pasajeros.infantes;i++) {
+      urlDistributon += "2,"
+    }
+    urlDistributon = urlDistributon.charAt(urlDistributon.length - 1 ) === ',' ? urlDistributon.substring(0, urlDistributon.length - 1) : urlDistributon;
+    return urlDistributon;
+  }
 }
