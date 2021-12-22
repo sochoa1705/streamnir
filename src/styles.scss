@@ -895,7 +895,7 @@ section {
 .portletFiltro .rowFiltro .columnFiltro input,
 .portletFiltro .rowFiltro .columnFiltro input[type="text"] {
     padding: 0!important;
-    height: 40px;
+    height: 49px;
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
@@ -908,6 +908,14 @@ section {
     &:focus{
         border: 0.5px solid #009AED!important;
         box-shadow: none;
+    }
+    &::placeholder{
+        color: #B9BCBF!important;
+        font-size:16px;
+    }
+    &.origen,
+    &.destino{
+        width: 290px;
     }
 }
 
@@ -930,7 +938,7 @@ section {
 .portletFiltro .rowFiltro .columnFiltro button {
     letter-spacing: 0.5px;
     max-width: 150px;
-    height: 40px;
+    height: 48px;
     margin-left: 10px;
     background: $red_light;
     &:hover{
@@ -2143,6 +2151,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         letter-spacing: 0.1px;
         color: #4B4B4B;
         text-align: center;
+        & thead tr:first-child:hover{
+            background: none;
+        }
         & tr:hover {
             background: rgba(#8FD0F3, .2)
         }
@@ -3140,6 +3151,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
     }
     .modal-body {
+        border-radius: 0px;
         .rowModal {
             display: flex;
             flex: 1 1 100%;
@@ -3251,6 +3263,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     display: none;
     padding: 20px 0 10px 0;
     justify-content: center;
+}
+.btnFooter {
+    font-family: 'Montserrat';
+    font-size: 16px;
+    margin-top: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .form-check-inline {
@@ -3971,6 +3990,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
     }
     .btnFooter {
+        font-family: Montserrat;
         background: #df0c30 !important;
         color: #ffffff !important;
         margin-top: 20px;
@@ -6136,4 +6156,8 @@ input.inputDer,
 .hideDate {
     max-width: 0 !important;
     width: 0 !important;
+}
+.margin-filter{
+    margin-right: 70px;
+    margin-left: 70px;
 }

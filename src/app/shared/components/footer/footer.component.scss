@@ -54,6 +54,7 @@ footer {
         &r {
             height: 1px;
             margin: 42px 0;
+            opacity: 1;
             color: #E4E5E7;
             &.hr {
                 margin: 20px 0;
@@ -102,7 +103,7 @@ footer {
                 fill: white;
             }
             &:hover {
-                background: $red;
+                background: $red-light;
                 fill: white;
                 border: 1px solid white
             }

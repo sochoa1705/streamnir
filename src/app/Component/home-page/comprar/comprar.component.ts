@@ -106,7 +106,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     public offersService: OffersService,
     public coverageService: CoverageService,
   ) {
-    
+
     this.safe0 = localStorage.getItem('safe0')
     this.safe0Json = JSON.parse(this.safe0)
     this.result = localStorage.getItem('Datasafe')
@@ -122,7 +122,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.mobile = false
     }
     this.current = this.route.getCurrentNavigation()!.extras.state as any
-    
+
     this.selectedPay = (this.current['filter'] === 'filter') ? 'tarjeta' : 'safety'
     if (this.current['filter'] === 'filter') {
       this.metodoPago = [
@@ -184,7 +184,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.addCustomers()
     }
     this.selectYear()
-    this.listCoverage()
+    if (this.current['filter'] !== 'filter') {
+      this.listCoverage()
+    }
   }
 
   toCustomer(e: any) {
