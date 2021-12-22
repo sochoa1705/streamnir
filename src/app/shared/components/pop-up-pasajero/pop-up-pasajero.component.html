@@ -2,7 +2,7 @@
 
     <div [id]="idContent" class="boxFlotante" @openClose *ngIf="showOption && ( idStateOpen === idContent)">
 
-        <div class="boxTwoPasajero d-flex flex-row align-items-center p-3" *ngIf="!onlyPasajeros">
+        <div data-testid="habitacion" class="boxTwoPasajero d-flex flex-row align-items-center p-3" *ngIf="!onlyPasajeros">
             <div class="d-flex flex-row iconTwo">
                 <img height="13px" src="./assets/filter/habitacion.png" alt="">
             </div>
@@ -13,13 +13,13 @@
             <div class="d-flex flex-row number">
                 <div class="d-flex flex-row btnNWhite disable" (click)="calculateDistributionTravel('habitacion',0)">-</div>
                 <div class="d-flex flex-row textBtn">
-                    <input class="inputPasajero" type="text" [value]="habitacion">
+                    <input data-testid="input" class="inputPasajero" type="text" [value]="habitacion">
                 </div>
                 <div class="d-flex flex-row btnNWhite disable" (click)="calculateDistributionTravel('habitacion',1)">+</div>
             </div>
         </div>
     
-        <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
+        <div  data-testid="adultos" class="boxTwoPasajero d-flex flex-row align-items-center p-3">
             <div class="d-flex flex-row iconTwo">
                 <img height="13px" src="./assets/filter/adulto.png" alt="">
             </div>
@@ -30,12 +30,12 @@
             <div class="d-flex flex-row number">
                 <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('adultos',0)">-</div>
                 <div class="d-flex flex-row textBtn">
-                    <input class="inputPasajero" type="text" [value]="adultos">
+                    <input data-testid="input" class="inputPasajero" type="text" [value]="adultos">
                 </div>
                 <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('adultos',1)">+</div>
             </div>
         </div>
-        <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
+        <div data-testid="ninios" class="boxTwoPasajero d-flex flex-row align-items-center p-3">
             <div class="d-flex flex-row iconTwo">
                 <img height="13px" src="./assets/filter/nino.png" alt="">
             </div>
@@ -46,12 +46,12 @@
             <div class="d-flex flex-row number">
                 <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('ninos',0)">-</div>
                 <div class="d-flex flex-row textBtn">
-                    <input class="inputPasajero" type="text" [value]="ninos">
+                    <input data-testid="input" class="inputPasajero" type="text" [value]="ninos">
                 </div>
                 <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('ninos',1)">+</div>
             </div>
         </div>
-        <div class="boxTwoPasajero d-flex flex-row align-items-center p-3">
+        <div data-testid="infantes" class="boxTwoPasajero d-flex flex-row align-items-center p-3">
             <div class="d-flex flex-row iconTwo">
                 <img height="13px" src="./assets/filter/infante.png" alt="">
             </div>
@@ -62,7 +62,7 @@
             <div class="d-flex flex-row number">
                 <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('infantes',0)">-</div>
                 <div class="d-flex flex-row textBtn">
-                    <input class="inputPasajero" type="text" [value]="infantes">
+                    <input data-testid="input" class="inputPasajero" type="text" [value]="infantes">
                 </div>
                 <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('infantes',1)">+</div>
             </div>

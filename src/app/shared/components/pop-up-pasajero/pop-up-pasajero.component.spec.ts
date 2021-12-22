@@ -134,4 +134,37 @@ describe('PopUpPasajeroComponent', () => {
 
   })
 
+
+
+
+  it('Generando distribucion abriendo el modal y dandole al guardar, <<emitDistribution>>',()=>{
+
+    jest.spyOn(component.emitDistribution, 'emit');
+
+    // const mockedOutput =  new PasajerosConHabitacion(2,2,1,1);
+    const mockedResult = "2-3-10,10,2";
+
+    // const mockedUrl = "https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=FLIGHT_HOTEL&destination=Destination::MXL&departure=Destination::LIM&departureDate=29/12/2020&arrivalDate=31/12/2020&distribution=2-3-10,10,2&businessCabin=false&lang=ES"
+
+    const popUp = fixture.debugElement;
+
+    // NOTE mostrando abriendo poup 
+    popUp.componentInstance.showPasajero();
+
+    //NOTE clickeando en el + e intenando igual el resultado del mockedResult
+    popUp.componentInstance.calculateDistributionTravel('adultos',1);
+    popUp.componentInstance.calculateDistributionTravel('adultos',1);
+    popUp.componentInstance.calculateDistributionTravel('ninos',1);
+    popUp.componentInstance.calculateDistributionTravel('ninos',1);
+    popUp.componentInstance.calculateDistributionTravel('infantes',1);
+
+    //NOTE guardando y cerrando modal esto debe emitir el triger automaticamnete
+    popUp.componentInstance.savePasajeros();
+
+    fixture.detectChanges();
+
+    expect(component.emitDistribution.emit).toHaveBeenCalledWith(mockedResult);
+
+  })
+
 });

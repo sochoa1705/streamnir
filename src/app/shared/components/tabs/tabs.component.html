@@ -58,104 +58,9 @@
                             </svg>
                             <span>Vuelo + Hotel</span>
                         </ng-template>
-                        <div class="boxTab">
-                            <form class="bg-white" [formGroup]="form">
-                                <div class="rowBoxTab">
-                                    <div class="padRight">
-                                        <mat-form-field>
-                                            <mat-select formControlName="clase" disableOptionCentering>
-                                                <mat-option value="economy">Economy</mat-option>
-                                                <mat-option value="business">Business</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="padRight">
-                                        <app-pop-up-pasajero (emitPasajeros)="pasajerosVueloHotel = $event"></app-pop-up-pasajero>
-                                    </div>
 
-                                </div>
+                        <app-tab-vuelo-hotel></app-tab-vuelo-hotel>
 
-
-                                <div class="rowBoxTab">
-                                    <div class="colBoxtab">
-                                        <input matInput aria-label="State" [matAutocomplete]="auto" formControlName="origen" (keyup)="autoComplete($event,1)" #inputOrigen
-                                            class="form-control animated fadeIn" placeholder="Origen">
-                                        <mat-autocomplete #auto="matAutocomplete">
-                                            <mat-option *ngFor="let state of citys" [value]="state.label">
-                                                <img class="example-option-img" aria-hidden src="./assets/origen.png">
-                                                <span>{{state.label}}</span>
-                                                <!-- <small>Population: {{state.population}}</small> -->
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                        <!-- <input class="form-control" type="text" placeholder="Origen"> -->
-                                    </div>
-                                    <div class="colBoxtab">
-                                        <input matInput aria-label="State2" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event,2)" class="form-control"
-                                            placeholder="Destino">
-                                        <mat-autocomplete #auto="matAutocomplete">
-                                            <mat-option *ngFor="let state of citys" [value]="state.label">
-                                                <img class="example-option-img" aria-hidden src="./assets/origen.png">
-                                                <span>{{state.label}}</span>
-                                                <!-- <small>Population: {{state.population}}</small> -->
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </div>
-                                    <div class="colBoxtab">
-                                        <div class="hideDate">
-                                            <!-- OCULTAR CAMPO -->
-                                            <input name="datepicker" ngbDatepicker #datepicker="ngbDatepicker" [footerTemplate]="footerTemplate" [autoClose]="'outside'"
-                                                (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
-                                                outsideDays="hidden" [startDate]="fromDate!" tabindex="-1">
-                                            <ng-template #t let-date let-focused="focused">
-                                                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)"
-                                                    (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
-                                                    {{ date.day }}</span>
-                                            </ng-template>
-                                            <ng-template #footerTemplate>
-                                                <div class="btnDatePicker">
-                                                    <hr class="my-0">
-                                                    <button (click)="datepicker.close()">Listo</button>
-                                                </div>
-                                            </ng-template>
-                                            <!-- END OCULTAR CAMPO -->
-                                        </div>
-                                        <div class="iconCalendar">
-                                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
-                                                    stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                        <input #dpFromDate class="form-control" (click)="datepicker.toggle()" placeholder="Salida" name="dpFromDate" [value]="formatter.format(fromDate)"
-                                            (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
-                                        <!-- <input class="form-control" type="text" placeholder="Salida"> -->
-                                    </div>
-                                    <div class="colBoxtab">
-                                        <div class="iconCalendar">
-                                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
-                                                    stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                        <input #dpToDate class="form-control" (click)="datepicker.toggle()" placeholder="Vuelta" name="dpToDate" [value]="formatter.format(toDate)"
-                                            (input)="toDate = validateInput(toDate, dpToDate.value)">
-                                        <!-- <input class="form-control" type="text" placeholder="Vuelta"> -->
-                                    </div>
-                                    <div class="colBoxtab">
-                                        <button class="fullWidht" type="button" (click)="searchVueloHotel()">Buscar</button>
-                                    </div>
-                                </div>
-                                <div class="rowBoxTab right text">Haciendo click en "Buscar", acepto las Condiciones Generales</div>
-                                <span class="valid" *ngIf="validPasajeros">Debe seleccionar la cantidad de pasajeros</span>
-                            </form>
-
-
-                        </div>
                     </mat-tab>
                     <!-- END VUELO + HOTEL -->
 
@@ -168,78 +73,7 @@
                             </svg>
                             <span>Hoteles</span>
                         </ng-template>
-                        <div class="boxTab">
-                            <form class="bg-white" [formGroup]="form2">
-                                <div class="rowBoxTab">
-                                    <div class="padRight">
-                                        <app-pop-up-pasajero (emitPasajeros)="pasajerosHoteles = $event"></app-pop-up-pasajero>
-                                    </div>
-
-                                </div>
-                                <div class="rowBoxTab">
-                                    <div class="colBoxtab">
-                                        <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event,2)" class="form-control animated fadeIn"
-                                            placeholder="¿Donde le gustaría ir?">
-                                        <mat-autocomplete #auto="matAutocomplete">
-                                            <mat-option *ngFor="let state of citys" [value]="state.label">
-                                                <img class="example-option-img" aria-hidden src="./assets/origen.png">
-                                                <span>{{state.label}}</span>
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </div>
-                                    <div class="colBoxtab">
-                                        <div class="hideDate">
-                                            <!-- OCULTAR CAMPO -->
-                                            <input name="datepicker2" ngbDatepicker #datepicker2="ngbDatepicker" [footerTemplate]="footerTemplate2" [autoClose]="'outside'"
-                                                (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
-                                                outsideDays="hidden" [startDate]="fromDate2!" tabindex="-1">
-                                            <ng-template #t let-date let-focused="focused">
-                                                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)"
-                                                    (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
-                                                    {{ date.day }}</span>
-                                            </ng-template>
-                                            <ng-template #footerTemplate2>
-                                                <div class="btnDatePicker">
-                                                    <hr class="my-0">
-                                                    <button (click)="datepicker2.close()">Listo</button>
-                                                </div>
-                                            </ng-template>
-                                            <!-- END OCULTAR CAMPO -->
-                                        </div>
-                                        <div class="iconCalendar">
-                                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
-                                                    stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                        <input #dpFromDate2 class="form-control" (click)="datepicker2.toggle()" placeholder="Check-In" name="dpFromDate2" [value]="formatter.format(fromDate)"
-                                            (input)="fromDate = validateInput(fromDate, dpFromDate2.value)">
-                                        <!-- <input class="form-control" type="text" placeholder="Salida"> -->
-                                    </div>
-                                    <div class="colBoxtab">
-                                        <div class="iconCalendar">
-                                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
-                                                    stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                        <input #dpToDate2 class="form-control" (click)="datepicker2.toggle()" placeholder="Check-Out" name="dpToDate2" [value]="formatter.format(toDate)"
-                                            (input)="toDate = validateInput(toDate, dpToDate2.value)">
-                                        <!-- <input class="form-control" type="text" placeholder="Vuelta"> -->
-                                    </div>
-                                    <div class="colBoxtab">
-                                        <button class="fullWidht" (click)="searchAlojamiento()">Buscar</button>
-                                    </div>
-                                </div>
-                                <div class="rowBoxTab right text">Haciendo click en "Buscar", acepto las Condiciones Generales</div>
-                            </form>
-                        </div>
+                        <app-tab-hotel></app-tab-hotel>
                     </mat-tab>
                     <!-- END HOTELES -->
 
@@ -369,71 +203,7 @@
                             </svg>
                             <span>Actividades</span>
                         </ng-template>
-                        <div class="boxTab">
-                            <div class="rowBoxTab">
-                                <div class="padRight">
-                                    <app-pop-up-pasajero [onlyPasajeros]="true"></app-pop-up-pasajero>
-                                </div>
-
-                            </div>
-                            <div class="rowBoxTab">
-                                <div class="colBoxtab">
-                                    <input class="form-control" type="text" placeholder="Destino">
-                                </div>
-                                <div class="colBoxtab">
-                                    <div class="hideDate">
-                                        <!-- OCULTAR CAMPO -->
-                                        <input name="datepicker4" ngbDatepicker #datepicker4="ngbDatepicker" [footerTemplate]="footerTemplate4" [autoClose]="'outside'"
-                                            (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden"
-                                            [startDate]="fromDate4!" tabindex="-1">
-                                        <ng-template #t let-date let-focused="focused">
-                                            <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)"
-                                                (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
-                                                {{ date.day }}</span>
-                                        </ng-template>
-                                        <ng-template #footerTemplate4>
-                                            <div class="btnDatePicker">
-                                                <hr class="my-0">
-                                                <button (click)="datepicker4.close()">Listo</button>
-                                            </div>
-                                        </ng-template>
-                                        <!-- END OCULTAR CAMPO -->
-                                    </div>
-                                    <div class="iconCalendar">
-                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
-                                                stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                    <input #dpFromDate2 class="form-control" (click)="datepicker4.toggle()" placeholder="Fecha de inicio" name="dpFromDate4"
-                                        [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate4.value)">
-                                    <!-- <input class="form-control" type="text" placeholder="Fecha de inicio"> -->
-                                </div>
-                                <div class="colBoxtab">
-                                    <div class="iconCalendar">
-                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
-                                                stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                    <input #dpToDate2 class="form-control" (click)="datepicker4.toggle()" placeholder="Fecha de término" name="dpToDate4" [value]="formatter.format(toDate)"
-                                        (input)="toDate = validateInput(toDate, dpToDate4.value)">
-                                    <!-- <input class="form-control" type="text" placeholder="Fecha de término"> -->
-                                </div>
-                                <div class="colBoxtab">
-                                    <button class="fullWidht">Buscar</button>
-                                </div>
-                            </div>
-                            <div class="rowBoxTab right">
-                                Haciendo click en "Buscar", acepto las Condiciones Generales
-                            </div>
-                        </div>
+                        <app-tab-actividades></app-tab-actividades>
                     </mat-tab>
                     <!-- END ACTIVIDADES -->
 
