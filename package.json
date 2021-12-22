@@ -9,7 +9,10 @@
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
     "test": "jest --watch --detectOpenHandles",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "e2e": "ng e2e",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "private": true,
   "dependencies": {
@@ -47,13 +50,16 @@
     "@angular/cli": "^12.2.7",
     "@angular/compiler-cli": "~12.1.1",
     "@briebug/jest-schematic": "^4.0.0",
+    "@cypress/schematic": "^1.6.0",
     "@testing-library/angular": "^11.0.2",
+    "@testing-library/cypress": "^8.0.2",
     "@testing-library/dom": "^8.11.1",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "latest",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.28.2",
     "@typescript-eslint/parser": "4.28.2",
+    "cypress": "latest",
     "eslint": "^7.26.0",
     "jest": "latest",
     "typescript": "~4.3.2"
