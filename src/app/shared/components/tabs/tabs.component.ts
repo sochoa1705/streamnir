@@ -133,10 +133,7 @@ export class TabsComponent implements OnInit {
 
     });
 
-    this.form2 = new FormGroup({
-      destino: new FormControl(''),
-      origenHotel: new FormControl(''),
-    });
+
 
     this.form3 = new FormGroup({
       origen: new FormControl(''),
@@ -217,28 +214,6 @@ getParamsVueloHotel(){
   return url;
  }
 
-  public searchAlojamiento() {
-    const url = this.getUrlAlojamiento();
-    this.navigateToResponseUrl(url);
-  }
-  public getUrlAlojamiento(){
-    let url = ''
-    if(this.pasajerosHoteles.adultos > 0) {
-      let params = this.getParamsAlojamiento();
-      let distribution = this.getDistributionUrl(this.pasajerosHoteles);
-      url = new URLHotel(params,distribution).getUrl();
-    }
-    return url;
-  }
-  getParamsAlojamiento(){
-    let params = new ParamsHoteles(
-      this.fromDate,
-      this.toDate,
-      this.form2,
-      this.citysDestinosSelect,
-    ).getParams();
-    return params;
-  }
 
 
   public searchOnlyCar() {

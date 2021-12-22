@@ -148,7 +148,7 @@ describe('PopUpPasajeroComponent', () => {
 
     const popUp = fixture.debugElement;
 
-    // NOTE mostrando abriendo poup
+    // NOTE mostrando abriendo poup 
     popUp.componentInstance.showPasajero();
 
     //NOTE clickeando en el + e intenando igual el resultado del mockedResult

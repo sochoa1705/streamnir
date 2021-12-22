@@ -9,12 +9,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PopUpPasajeroModule } from '../pop-up-pasajero/pop-up-pasajero.module';
 import { MaterialModule } from '../../material.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TabHotelComponent } from './tab-hotel/tab-hotel.component';
 
 
 
 @NgModule({
   declarations: [
-    TabVueloHotelComponent
+    TabVueloHotelComponent,
+    TabHotelComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
   ],
   exports:[
-    TabVueloHotelComponent
+    TabVueloHotelComponent,
+    TabHotelComponent
   ]
 })
 export class FilterTabsModule { }

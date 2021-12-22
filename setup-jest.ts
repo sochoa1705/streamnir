@@ -1,5 +1,6 @@
 import 'jest-preset-angular/setup-jest';
 import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/user-event';
 
 /* global mocks for jsdom */
@@ -27,6 +28,15 @@ Object.defineProperty(document.body.style, 'transform', {
     };
   },
 });
+
+Object.defineProperty(window, 'getComputedStyle', {
+  value: () => ({
+      getPropertyValue: (prop:any) => {
+          return '';
+      }
+  })
+});
+
 
 /* output shorter and more meaningful Zone error stack traces */
 // Error.stackTraceLimit = 2;

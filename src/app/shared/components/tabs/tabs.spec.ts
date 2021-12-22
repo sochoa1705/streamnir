@@ -136,29 +136,7 @@ describe('TabsComponent', () => {
 
     })
 
-    it("Redirigir a url Hoteles, component.searchAlojamiento()", ()=>{
 
-      const paramsMockedReponse = {
-        destino: "Ciudad de México, México",
-        endDate: "08/01/2022",
-        idDestino: "Destination::MDF",
-        startDate: "27/12/2021"
-    }
-
-    jest.spyOn(component,'navigateToResponseUrl').mockImplementation((url)=>url);
-
-    jest.spyOn(component,'getParamsAlojamiento').mockReturnValue(paramsMockedReponse);
-
-      component.pasajerosHoteles = new PasajerosConHabitacion(2,2,1,1);
-      const mockedDistribution = "2-3-10,10,2";
-
-      component.searchAlojamiento();
-
-      const mockedUrl = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=ONLY_HOTEL&distribution=${mockedDistribution}&lang=ES&carRental=false&hotelDestination=Destination::MDF&departureDate=27/12/2021&arrivalDate=08/01/2022`
-
-      expect(component.navigateToResponseUrl).toHaveBeenCalledWith(mockedUrl);
-
-    })
 
     
   })
