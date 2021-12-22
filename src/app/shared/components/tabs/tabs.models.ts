@@ -96,7 +96,7 @@ export class URLActividades implements UrlNmViajes{
     }
 
     getUrl(){
-        return `${this.url}?directSubmit=true&tripType=${this.tab}&destination=${this.params.destino}&departureDate=${this.params.startDate}&arrivalDate=${this.params.endDate}&distribution=${this.distribution}&lang=ES`;
+        return `${this.url}?directSubmit=true&tripType=${this.tab}&destination=${this.params.idDestino}&departureDate=${this.params.startDate}&arrivalDate=${this.params.endDate}&distribution=${this.distribution}&lang=ES`;
     }
 }
 
@@ -126,6 +126,16 @@ export class ParamsHoteles implements ParamsTabs{
         let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.label === destino).id : 0;
 
         return {startDate, endDate, destino, idDestino};
+    }
+}
+export class ParamsActividades extends ParamsHoteles{
+    constructor(
+        fromDate:any,
+        toDate:any,
+        form:any,
+        citysDestinosSelect:any
+    ){
+        super(fromDate,toDate,form,citysDestinosSelect);
     }
 }
 export class ParamsVueloHotel implements ParamsTabs{

@@ -35,41 +35,4 @@ describe('Hoteles', ()=>{
     })
 
 
-
-   
-   
-
-
-    // userEvent.click(btnListo);
-
-    // await waitForElementToBeRemoved(seccionAdultos);
-
-    // jest.spyOn(fixture.componentInstance, 'autoComplete')
-
-    // expect(seccionAdultos).not.toBeVisible();
-
-    // userEvent.type(ciudadControl, 'mex');
-
-    // expect(screen.getByRole('listbox')).toBeVisible();
-    // const listOption = screen.getAllByRole('option');
-    // expect(listOption).toHaveLength(1);
-
-    // userEvent.dblClick(listOption[0]);
-    
-    // fixture.componentInstance.form.controls['destino'].setValue(mockedDestiny[0].label);
-
-    // fireEvent.change(fechaIni, { target: { value: "20-12-2021" } });
-    // fireEvent.change(fechaFin, { target: { value: "25-12-2021" } });
-
-    // const btnBuscar = screen.getByRole('button', {
-    //   name: /buscar/i
-    // })
-
-    // userEvent.click(btnBuscar);
-
-    // expect(fixture.componentInstance.navigateToResponseUrl).toHaveBeenCalled();
-
-
-
-
 })

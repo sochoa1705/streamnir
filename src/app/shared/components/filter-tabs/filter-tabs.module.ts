@@ -10,13 +10,15 @@ import { PopUpPasajeroModule } from '../pop-up-pasajero/pop-up-pasajero.module';
 import { MaterialModule } from '../../material.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TabHotelComponent } from './tab-hotel/tab-hotel.component';
+import { TabActividadesComponent } from './tab-actividades/tab-actividades.component';
 
 
 
 @NgModule({
   declarations: [
     TabVueloHotelComponent,
-    TabHotelComponent
+    TabHotelComponent,
+    TabActividadesComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { TabHotelComponent } from './tab-hotel/tab-hotel.component';
   ],
   exports:[
     TabVueloHotelComponent,
-    TabHotelComponent
+    TabHotelComponent,
+    TabActividadesComponent
   ]
 })
 export class FilterTabsModule { }
