@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
+import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { ParamsActividades, URLActividades } from '../../tabs/tabs.models';
 
 @Component({
@@ -23,15 +24,11 @@ export class TabActividadesComponent  {
   hoveredDate: NgbDate | null = null;
   
 
-  constructor(private calendar: NgbCalendar,private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
+  constructor(private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar) {
     this.form = new FormGroup({
       destino: new FormControl(''),
     });
-
-    this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
-  
    }
 
 
@@ -46,9 +43,6 @@ export class TabActividadesComponent  {
     }
   }
 
-  // https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=ONLY_TICKET&destination=Destination::LIM&departureDate=19/01/2022&arrivalDate=17/02/2022&distribution=2-0&lang=ES
-
-  
   getListCiudades(e: any, typeSearch = 'ONLY_TICKET') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
@@ -87,33 +81,10 @@ export class TabActividadesComponent  {
   }
 
 
-  //TODO CREAR COMPONENTE DE FECHA
-  onDateSelection(date: NgbDate) {
-    if (!this.fromDate && !this.toDate) {
-      this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
-      this.toDate = date;
-    } else {
-      this.toDate = null;
-      this.fromDate = date;
+    changeDate(value: ClassValueCalendar) {
+      this.toDate = value.toDate;
+      this.fromDate = value.fromDate;
     }
-  }
 
-  isHovered(date: NgbDate) {
-    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
-  }
 
-  
-  isRange(date: NgbDate) {
-    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
-  }
-
-  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-    const parsed = this.formatter.parse(input);
-    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
-  }
-
-  isInside(date: NgbDate) {
-    return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
-  }
 }
