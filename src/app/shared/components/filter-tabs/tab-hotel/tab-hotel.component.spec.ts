@@ -18,6 +18,7 @@ import { createMock } from '@testing-library/angular/jest-utils';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CalendarModule } from '../../calendar/calendar.module';
 
 
 describe('TabHotelComponent', () => {
@@ -43,13 +44,14 @@ describe('TabHotelComponent', () => {
     const { container, fixture } = await render(TabHotelComponent, {
       imports: [
         MaterialModule,
-        NgbModule,
         PopUpPasajeroModule,
         ReactiveFormsModule,
         HttpClientTestingModule,
         MatAutocompleteModule,
         MatInputModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        CalendarModule,
+        NgbModule
       ],
       providers: [
         { provide: MATERIAL_SANITY_CHECKS, useValue: false },
@@ -120,8 +122,8 @@ describe('TabHotelComponent', () => {
     
     fixture.componentInstance.form.controls['destino'].setValue(mockedDestiny[0].label);
 
-    fireEvent.change(fechaIni, { target: { value: "20-12-2021" } });
-    fireEvent.change(fechaFin, { target: { value: "25-12-2021" } });
+    userEvent.type(fechaIni,"20/12/2021");
+    userEvent.type(fechaFin,"25-12-2021");
 
     const btnBuscar = screen.getByRole('button', {
       name: /buscar/i

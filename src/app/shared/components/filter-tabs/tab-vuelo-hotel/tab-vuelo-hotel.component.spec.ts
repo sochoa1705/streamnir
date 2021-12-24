@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { findComponent } from 'src/app/shared/utils';
+import { CalendarModule } from '../../calendar/calendar.module';
 import { PopUpPasajeroModule } from '../../pop-up-pasajero/pop-up-pasajero.module';
 
 import { TabVueloHotelComponent } from './tab-vuelo-hotel.component';
@@ -21,9 +22,10 @@ describe('TabVueloHotelComponent', () => {
       imports:[
         HttpClientTestingModule,
         MaterialModule,
-        NgbModule,
         PopUpPasajeroModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        CalendarModule,
+        NgbModule
       ],
       providers: [
         {
