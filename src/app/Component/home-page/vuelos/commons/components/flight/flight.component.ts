@@ -6,9 +6,10 @@ import { Router } from '@angular/router';
 import { ListaTarifaRequest } from 'src/app/Models/Request/ListaTarifasRequest';
 import { SignatureModel } from 'src/app/Models/Request/SignatureModel';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
-import { ListaTarifaResponse } from 'src/app/Models/Response/ListaTarifaResponse';
 
-import { interval } from 'rxjs';
+import { interval, Observable } from 'rxjs';
+import { FlightService } from './flight.service';
+import { IFlightRates, TYPE_PARAM } from './flight.models';
 
 
 @Component({
@@ -20,17 +21,22 @@ export class FlightComponent implements OnInit {
 
   public OfertaVuelosRequest :  ListaTarifaRequest = new  ListaTarifaRequest();
    ListaTarifa : any;// ListaTarifaResponse[] = new Array <ListaTarifaResponse>(); 
+
+   $vuelosInternacioales:Observable<IFlightRates[]>;
    
   constructor(
     public route: Router,
     public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
-    private coreService: DestinyService
+    private coreService: DestinyService,
+    private flightService: FlightService
   ) { }
 
   ngOnInit(): void {
  
     this.OfertaVuelos();
+
+    this.loadVuelosInternacionales()
 
     const contador = interval(4000);
     contador.subscribe((n)=> {
@@ -38,6 +44,10 @@ export class FlightComponent implements OnInit {
       this.counterMovil < 8 ? this.counterMovil++ : this.counterMovil = 1;
     })
 
+  }
+
+  loadVuelosInternacionales(){
+    this.$vuelosInternacioales = this.flightService.getPasajesAereos(TYPE_PARAM.INTERNACIONAL);
   }
 
   toLine(e: any){

@@ -34,8 +34,8 @@
         <div class="clearfix"></div>
     </div>
     <div class="row">
-        <div *ngFor="let packb of ListaTarifa" class="col-12 col-md-3">
-            <app-package *ngIf="packb.tipoDestino === 'I'" [image]="packb.url" [city]="packb.nomCiuDestino" [span]="packb.textoTiempoBusq"></app-package>
+        <div *ngFor="let vuelo of $vuelosInternacioales | async" class="col-12 col-md-3">
+            <app-package  [image]="vuelo.Image" [city]="vuelo.Destination" [span]="vuelo.Currency"></app-package>
         </div>
         <div class="clearfix"></div>
     </div>

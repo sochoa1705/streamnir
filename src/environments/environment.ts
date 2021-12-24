@@ -5,7 +5,8 @@
 export const environment = {
   production: true,
   // urlBase: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',  // PRODUCCIÓN
-  urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',                 // DESARROLLO
+  urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',
+  muteExceptions:false,                 // DESARROLLO
   serverUrlApi: 'http://localhost:8080/api/',
   urlLogin: 'http://localhost:64238/login',
   nameAppAC: 'Intranet',
@@ -21,7 +22,8 @@ export const environment = {
     let fehcaHoy = `${hoy.getDay()}/${hoy.getMonth()}/${ hoy.getFullYear()}`
     return fehcaHoy
   },
-  urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/'
+  urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
+  urlNmviajes:"http://10.75.102.23:10001/v1/api"
 };
 
 /*

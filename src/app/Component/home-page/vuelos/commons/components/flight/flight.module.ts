@@ -6,6 +6,7 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { PackageModule } from 'src/app/shared/components/package/package.module';
 import { CardModule } from 'src/app/shared/components/card/card.module';
 import { RouterModule } from '@angular/router';
+import { FlightService } from './flight.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
     CardModule,
   ],
   exports: [ FlightComponent ],
+  providers:[FlightService]
 
 })
 export class FlightModule { }

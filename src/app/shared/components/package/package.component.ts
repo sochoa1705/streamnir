@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './package.component.html',
   styleUrls: ['./package.component.scss']
 })
-export class PackageComponent implements OnInit {
+export class PackageComponent {
   @Input()
   image!: string;
   @Input()
@@ -37,8 +37,6 @@ export class PackageComponent implements OnInit {
     public route: Router,
   ) { }
 
-  ngOnInit(): void {
-  }
 
   toDestiny(e: any){
     console.log(e);
