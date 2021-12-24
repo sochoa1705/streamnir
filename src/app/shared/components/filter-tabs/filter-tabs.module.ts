@@ -23,7 +23,6 @@ import { CalendarModule } from '../calendar/calendar.module';
   ],
   imports: [
     CommonModule,
-    NgbModule,
     ReactiveFormsModule,
     PopUpPasajeroModule,
     MaterialModule,

@@ -1,7 +1,7 @@
 <div class="colBoxtab">
     <div class="hideDate">
         <!-- OCULTAR CAMPO -->
-        <input name="datepicker2" ngbDatepicker #datepicker2="ngbDatepicker" [footerTemplate]="footerTemplate2"
+        <input name="datepicker2" [minDate]="minDate" ngbDatepicker #datepicker2="ngbDatepicker" [footerTemplate]="footerTemplate2"
             [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
             [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1">
         <ng-template #t let-date let-focused="focused">

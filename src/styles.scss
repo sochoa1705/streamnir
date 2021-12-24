@@ -6165,3 +6165,9 @@ input.inputDer,
 .ignore-template{
     display: contents;
 }
+
+.ngb-dp-week{
+    [role="gridcell"].disabled {
+        background: #e0e0e0;
+    }
+}

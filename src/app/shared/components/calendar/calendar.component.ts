@@ -13,8 +13,11 @@ import { ClassValueCalendar } from './calendar.models';
 export class CalendarComponent {
 
   toDate: NgbDate | null;
-  fromDate: NgbDate | null
+  fromDate: NgbDate | null;
   hoveredDate: NgbDate | null = null;
+
+  minDate:NgbDate;
+  maxDate:NgbDate;
 
   @Output() changeDate = new EventEmitter<ClassValueCalendar>()
 
@@ -22,6 +25,9 @@ export class CalendarComponent {
   constructor(private calendar: NgbCalendar,public formatter: NgbDateParserFormatter) { 
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+
+    this.minDate = calendar.getToday();
+
     const value = new ClassValueCalendar(this.toDate,this.fromDate);
     this.changeDate.emit(value);
   }

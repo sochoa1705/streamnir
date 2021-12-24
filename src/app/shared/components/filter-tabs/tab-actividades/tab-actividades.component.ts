@@ -14,11 +14,11 @@ import { ParamsActividades, URLActividades } from '../../tabs/tabs.models';
 export class TabActividadesComponent  {
 
   form!: FormGroup;
-  fromDate: NgbDate | null
+  public fromDate: NgbDate | null
   citys: Array<any> = [];
   origen: any;
   destino: any;
-  toDate: NgbDate | null;
+  public toDate: NgbDate | null;
 
   distribution = '';
   hoveredDate: NgbDate | null = null;
@@ -48,8 +48,7 @@ export class TabActividadesComponent  {
       data => {
         this.citys = data;
       },
-      err => console.log(err),
-      () => console.log('Ciudades cargadas')
+      err => console.log(err)
     )
   }
 
