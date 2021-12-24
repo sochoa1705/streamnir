@@ -11,6 +11,7 @@ import { MaterialModule } from '../../material.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TabHotelComponent } from './tab-hotel/tab-hotel.component';
 import { TabActividadesComponent } from './tab-actividades/tab-actividades.component';
+import { CalendarModule } from '../calendar/calendar.module';
 
 
 
@@ -22,18 +23,13 @@ import { TabActividadesComponent } from './tab-actividades/tab-actividades.compo
   ],
   imports: [
     CommonModule,
-    NgbModule,
     ReactiveFormsModule,
     PopUpPasajeroModule,
-    MaterialModule
+    MaterialModule,
+    CalendarModule
   ],
   providers: [
-    { provide: NgbDateAdapter, useClass: CustomAdapter },
-    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
-    I18n,
-    {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18nService},
     MatSnackBar
-
   ],
   exports:[
     TabVueloHotelComponent,

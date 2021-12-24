@@ -5,6 +5,7 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { ParamsVueloHotel, PasajerosConHabitacion, URLVueloHotel } from '../../tabs/tabs.models';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { ClassValueCalendar } from '../../calendar/calendar.models';
 
 @Component({
   selector: 'app-tab-vuelo-hotel',
@@ -119,40 +120,11 @@ export class TabVueloHotelComponent  {
     )
   }
 
-
-  // FIXME: Pasar a nuevo componente 
-
-  //NOTE Inicio datepicker
-  onDateSelection(date: NgbDate) {
-    if (!this.fromDate && !this.toDate) {
-      this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
-      this.toDate = date;
-    } else {
-      this.toDate = null;
-      this.fromDate = date;
-    }
+  changeDate(value: ClassValueCalendar) {
+    this.toDate = value.toDate;
+    this.fromDate = value.fromDate;
   }
 
-  isHovered(date: NgbDate) {
-    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
-  }
-
-  
-  isRange(date: NgbDate) {
-    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
-  }
-
-  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-    const parsed = this.formatter.parse(input);
-    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
-  }
-
-  isInside(date: NgbDate) {
-    return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
-  }
-
-  //NOTE : fin date picker
 
 
 }
