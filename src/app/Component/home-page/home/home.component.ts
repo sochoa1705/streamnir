@@ -24,28 +24,12 @@ export class HomeComponent implements OnInit {
     public dataPagePresenterService: DataPagePresenterService,
     public asidePresenterService: AsidePresenterService,
     public destinyService: DestinyService,
-    private popUpSubject:PopupService
   ) { }
 
   ngOnInit(): void {
     this.listDestiny()
-    this.cerrarBoxClicFuera()
   }
 
-  cerrarBoxClicFuera(){
-    combineLatest([fromEvent(document, 'click'), this.popUpSubject.state()]).pipe(
-      filter(resp => resp[1].open == true)
-    ).subscribe(resp => {
-      const htmlSelected = (resp[0].target as HTMLElement)
-      const popUpElement = document.getElementById(resp[1].id);
-
-      if (htmlSelected.contains(popUpElement)) {
-        this.popUpSubject.closePopUp('')
-      } 
-
-    })
-
-  }
 
   listDestiny() {
     let payload = new NMRequest();
