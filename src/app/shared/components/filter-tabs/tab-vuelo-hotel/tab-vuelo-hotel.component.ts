@@ -33,8 +33,6 @@ export class TabVueloHotelComponent  {
     private _snackBar: MatSnackBar
     ) {
     this.createForm();
-    this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   }
 
   openSnackBar(message: string, action: string = "Error") {

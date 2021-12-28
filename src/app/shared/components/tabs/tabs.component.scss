@@ -6,6 +6,10 @@ article {
     z-index: 1;
 }
 
+.banner{
+    z-index: 100;
+}
+
 :host ::ng-deep .mat {
     &-tab-header-pagination-before,
     &-tab-header-pagination-after {

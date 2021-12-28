@@ -55,7 +55,7 @@ export class PopUpPasajeroComponent implements OnInit{
         const distribution = this.getDistributionUrl(popUpPasajeroModel);
         this.emitDistribution.emit(distribution);
       }
-    })
+    }) 
     
   }
 
