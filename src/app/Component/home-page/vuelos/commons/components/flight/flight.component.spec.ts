@@ -1,25 +1,55 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from "@angular/core"
+import { ReactiveFormsModule } from "@angular/forms"
+import { MATERIAL_SANITY_CHECKS } from "@angular/material/core"
+import { RouterModule } from "@angular/router"
+import { render } from "@testing-library/angular"
+import { getByText, prettyDOM, screen } from "@testing-library/dom"
+import { of } from "rxjs"
+import { CardModule } from "src/app/shared/components/card/card.module"
+import { PackageModule } from "src/app/shared/components/package/package.module"
+import { TabsModule } from "src/app/shared/components/tabs/tabs.module"
+import { MaterialModule } from "src/app/shared/material.module"
+import { FlightComponent } from "./flight.component"
+import { MOCK_FLIGHT_NACIONAL } from "./flight.mocked"
+import { FlightService } from "./flight.service"
+import { GeneratePricePipe } from "./pipes/generate-price.pipe"
 
-import { FlightComponent } from './flight.component';
+const MockFlightService = {
+  getPasajesAereos(){
+    return of(MOCK_FLIGHT_NACIONAL)
+  }
+}
 
-xdescribe('FlightComponent', () => {
-  let component: FlightComponent;
-  let fixture: ComponentFixture<FlightComponent>;
+describe( "packageComponent", ()=>{
+    it("se renderiza correctamente la tabla de vuelos nacionales", async ()=>{
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ FlightComponent ]
+       const {container} = await render(FlightComponent, {
+            declarations:[GeneratePricePipe],
+            imports: [
+                ReactiveFormsModule,
+                TabsModule,
+                MaterialModule,
+                PackageModule,
+                RouterModule,
+                CardModule
+            ],
+            schemas: [NO_ERRORS_SCHEMA],
+            providers: [
+                { provide: FlightService, useValue: MockFlightService },
+                { provide: MATERIAL_SANITY_CHECKS, useValue: false },
+              ],
+            routes:[]
+          })
+
+          const contenedorList:HTMLElement = container.querySelector('.boxVuelos')!; 
+          const listItems:NodeListOf<HTMLDivElement> = contenedorList.querySelectorAll('.boxVuelos > div')!;
+
+          expect(listItems).toHaveLength(MOCK_FLIGHT_NACIONAL.length);
+        
+          MOCK_FLIGHT_NACIONAL.forEach((flight) => getByText( contenedorList , new RegExp(flight.Destination, 'i')));
+          
+    
     })
-    .compileComponents();
-  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(FlightComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+})

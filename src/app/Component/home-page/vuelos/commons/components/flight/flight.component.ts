@@ -20,15 +20,16 @@ import { IFlightRates, TYPE_PARAM } from './flight.models';
 export class FlightComponent implements OnInit {
 
   public OfertaVuelosRequest :  ListaTarifaRequest = new  ListaTarifaRequest();
-   ListaTarifa : any;// ListaTarifaResponse[] = new Array <ListaTarifaResponse>(); 
+  //  ListaTarifa : any;
 
-   $vuelosInternacioales:Observable<IFlightRates[]>;
+   $vuelosInternacionales:Observable<IFlightRates[]>;
+   $vuelosNacionales:Observable<IFlightRates[]>;
    
   constructor(
     public route: Router,
     public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
-    private coreService: DestinyService,
+    // private coreService: DestinyService,
     private flightService: FlightService
   ) { }
 
@@ -36,7 +37,8 @@ export class FlightComponent implements OnInit {
  
     this.OfertaVuelos();
 
-    this.loadVuelosInternacionales()
+    this.loadVuelosInternacionales();
+    this.loadVuelosNacionales();
 
     const contador = interval(4000);
     contador.subscribe((n)=> {
@@ -47,7 +49,10 @@ export class FlightComponent implements OnInit {
   }
 
   loadVuelosInternacionales(){
-    this.$vuelosInternacioales = this.flightService.getPasajesAereos(TYPE_PARAM.INTERNACIONAL);
+    this.$vuelosInternacionales = this.flightService.getPasajesAereos(TYPE_PARAM.INTERNACIONAL);
+  }
+  loadVuelosNacionales(){
+    this.$vuelosNacionales = this.flightService.getPasajesAereos(TYPE_PARAM.NACIONAL);
   }
 
   toLine(e: any){
@@ -79,19 +84,18 @@ export class FlightComponent implements OnInit {
   
     this.OfertaVuelosRequest.Signature = signatureModel;
   
-    this.coreService
-      .ObtenerOfertaVuelos(this.OfertaVuelosRequest)
-      .subscribe(
-        (data: any) => {
-      // debugger;
-        this.ListaTarifa =  data["tarifas"];
-        console.log( this.ListaTarifa);
+    // this.coreService
+    //   .ObtenerOfertaVuelos(this.OfertaVuelosRequest)
+    //   .subscribe(
+    //     (data: any) => {
+    //     this.ListaTarifa =  data["tarifas"];
+    //     console.log( this.ListaTarifa);
          
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      );
+    //     },
+    //     (error: any) => {
+    //       console.log(error);
+    //     }
+    //   );
   
     }
 

@@ -5,5 +5,5 @@ export interface State {
 export interface ResponseModelT<T> {
     TrackingCode: string;
     State: State;    
-    response: T
+    Result: T
 }

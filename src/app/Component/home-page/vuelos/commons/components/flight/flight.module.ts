@@ -7,17 +7,18 @@ import { PackageModule } from 'src/app/shared/components/package/package.module'
 import { CardModule } from 'src/app/shared/components/card/card.module';
 import { RouterModule } from '@angular/router';
 import { FlightService } from './flight.service';
+import { GeneratePricePipe } from './pipes/generate-price.pipe';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [ FlightComponent ],
+  declarations: [ FlightComponent,GeneratePricePipe ],
   imports: [
     CommonModule,
     TabsModule,
     MaterialModule,
     PackageModule,
     RouterModule,
-    CardModule,
+    CardModule
   ],
   exports: [ FlightComponent ],
   providers:[FlightService]
