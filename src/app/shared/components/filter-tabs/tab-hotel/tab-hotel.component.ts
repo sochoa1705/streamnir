@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
+import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { URLHotel, ParamsHoteles } from '../../tabs/tabs.models';
 
 @Component({
@@ -12,6 +13,10 @@ import { URLHotel, ParamsHoteles } from '../../tabs/tabs.models';
   styleUrls: ['./tab-hotel.component.scss']
 })
 export class TabHotelComponent {
+
+
+  @ViewChild('popUp') popUpElement:PopUpPasajeroComponent | undefined;
+
 
   form!: FormGroup;
   fromDate: NgbDate | null
@@ -30,11 +35,12 @@ export class TabHotelComponent {
       destino: new FormControl(''),
     });
 
-    this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
-  
    }
 
+
+   isValidate(){
+    return this.popUpElement?.isValid();
+  }
 
   autoComplete(e: any, typeSearch = 'FLIGHT_HOTEL') {
     // let elemento = this.origen.nativeElement;
@@ -64,7 +70,19 @@ export class TabHotelComponent {
     window.location.href = url;
  }
 
+ openSnackBar(message: string, action: string = "Error") {
+  this._snackBar.open(message, "", {
+    duration: 2000,
+    panelClass: ['mat-toolbar', 'mat-warn']
+  });
+}
+
   public searchAlojamiento() {
+    if(!this.isValidate()){
+      this.openSnackBar("Error de validacion")
+      return ;
+    }
+
     const url = this.getUrlAlojamiento();
     this.navigateToResponseUrl(url);
   }

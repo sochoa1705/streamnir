@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -45,3 +46,9 @@ export function CloseSession(): void {
   return fixture.debugElement.query(By.css(selector));
 }
 
+
+export const paramsNmv = new HttpParams().
+        set('TrackingCode', Guid()).
+        set('MuteExceptions', environment.muteExceptions).
+        set('Caller.Company', 'Agil').
+        set('Caller.Application','Interagencias')

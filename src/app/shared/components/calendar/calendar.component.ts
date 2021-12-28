@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, forwardRef, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { ClassValueCalendar } from './calendar.models';
@@ -10,7 +10,7 @@ import { ClassValueCalendar } from './calendar.models';
   styleUrls: ['./calendar.component.scss'],
 
 })
-export class CalendarComponent {
+export class CalendarComponent implements AfterViewInit{
 
   toDate: NgbDate | null;
   fromDate: NgbDate | null;
@@ -22,14 +22,18 @@ export class CalendarComponent {
   @Output() changeDate = new EventEmitter<ClassValueCalendar>()
 
 
-  constructor(private calendar: NgbCalendar,public formatter: NgbDateParserFormatter) { 
-    this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+  constructor(private calendar: NgbCalendar,public formatter: NgbDateParserFormatter,private cdRef:ChangeDetectorRef) { }
 
-    this.minDate = calendar.getToday();
+  ngAfterViewInit(){
+    this.fromDate = this.calendar.getToday();
+
+    this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 10);
+
+    this.minDate = this.calendar.getToday();
 
     const value = new ClassValueCalendar(this.toDate,this.fromDate);
     this.changeDate.emit(value);
+    this.cdRef.detectChanges();
   }
 
 
@@ -61,6 +65,7 @@ export class CalendarComponent {
     }
   
     validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+      // this.changeDate.emit(value);
       const parsed = this.formatter.parse(input);
       return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
     }
