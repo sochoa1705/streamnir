@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
+import { ActivatedRoute, Params } from '@angular/router';
+import { interval, Observable } from 'rxjs';
+import { IDestinos } from './destino.models';
+import { DestinosService } from './services/destinos.service';
 
 @Component({
   selector: 'app-destinos',
@@ -8,9 +11,50 @@ import { interval } from 'rxjs';
 })
 export class DestinosComponent implements OnInit {
 
-  constructor() { }
+  public codigoCiudad:string;
+  public origen:string;
+  public destino:string;
+
+  public title:string;
+  public subTitle:string;
+  public description:string;
+
+  vuelos:IDestinos[];
+
+
+  constructor(private ar:ActivatedRoute, private service:DestinosService) {
+   }
 
   ngOnInit(): void {
+
+    this.ar.params.subscribe(param=>{
+      this.loadCiudad(param)
+    })
+
+    this.slider();
+
+  }
+
+  loadCiudad(param:Params){
+    this.codigoCiudad = param.codigoCiudad || '';
+
+    this.service.getVuelos(this.codigoCiudad).subscribe(data=>{
+      this.vuelos = data;
+
+      this.origen = data[0].Origin;
+      this.destino = data[0].Destination;
+
+      this.title = `Vuelos desde ${this.origen} a ${this.destino}`;
+      this.subTitle = `Aprovecha ahora, encontramos los vuelos de ida y vuelta más baratos a ${this.destino}.`;
+      this.description = `Las mejores ofertas de vuelos a ${this.destino} en las últimas 24 horas.`;
+
+    })
+
+
+  }
+
+
+  slider(){
     const contador = interval(4000);
     contador.subscribe((n)=> {
       this.counter < 3 ? this.counter++ : this.counter = 1;

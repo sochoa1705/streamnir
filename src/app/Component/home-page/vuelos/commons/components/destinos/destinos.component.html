@@ -14,8 +14,8 @@
                 </defs>
             </svg>
         </div>
-        <div class="rowDestino titulo">Vuelos desde Lima a Madrid</div>
-        <div class="rowDestino subtitulo mt-3">Aprovecha ahora, encontramos los vuelos de ida y vuelta más baratos a Madrid.</div>
+        <div class="rowDestino titulo"> {{title}} </div>
+        <div class="rowDestino subtitulo mt-3">{{subTitle}}</div>
         <div class="rowDestino verMov">
             <div class="ida">
                 <svg width="26" height="15" viewBox="0 0 26 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +33,7 @@
                         fill="#DF0C30" />
                 </svg>Vuelta
             </div>
-            <div class="descrip description">Las mejores ofertas de vuelos a Madrid en las últimas 24 horas.</div>
+            <div class="descrip description">{{description}}</div>
         </div>
         <div class="verDesktop w-100">
             <div class="rowDestino tableDestino bold">
@@ -43,7 +43,7 @@
                 <div class="colDestino">Tarifas</div>
                 <div class="colDestino"></div>
             </div>
-            <div class="rowDestino tableDestino">
+            <div class="rowDestino tableDestino"  *ngFor="let item of vuelos">
                 <div class="colDestino">
                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.2727 2.90906H4.81818C2.70946 2.90906 1 4.61852 1 6.72724V16.2727C1 18.3814 2.70946 20.0909 4.81818 20.0909H16.2727C18.3815 20.0909 20.0909 18.3814 20.0909 16.2727V6.72724C20.0909 4.61852 18.3815 2.90906 16.2727 2.90906Z"
@@ -51,7 +51,7 @@
                         <path d="M6.72723 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M14.3637 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M1 8.63635H20.0909" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>Jue 11 Ago de 2022</div>
+                    </svg>{{item.DateStart}}</div>
                 <div class="colDestino">
                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.2727 2.90906H4.81818C2.70946 2.90906 1 4.61852 1 6.72724V16.2727C1 18.3814 2.70946 20.0909 4.81818 20.0909H16.2727C18.3815 20.0909 20.0909 18.3814 20.0909 16.2727V6.72724C20.0909 4.61852 18.3815 2.90906 16.2727 2.90906Z"
@@ -59,105 +59,14 @@
                         <path d="M6.72723 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M14.3637 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M1 8.63635H20.0909" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>Jue 8 Sep de 2022</div>
-                <div class="colDestino">hace 40 min.</div>
-                <div class="colDestino boldTarifa">$ 721</div>
+                    </svg>{{item.DateEnd}}</div>
+                <div class="colDestino">{{item.SearchTime}}</div>
+                <div class="colDestino boldTarifa">{{'$ '+ item.Total}}</div>
                 <div class="colDestino">
                     <div class="btnBuscar">Buscar</div>
                 </div>
             </div>
-            <div class="rowDestino tableDestino">
-                <div class="colDestino">
-                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.2727 2.90906H4.81818C2.70946 2.90906 1 4.61852 1 6.72724V16.2727C1 18.3814 2.70946 20.0909 4.81818 20.0909H16.2727C18.3815 20.0909 20.0909 18.3814 20.0909 16.2727V6.72724C20.0909 4.61852 18.3815 2.90906 16.2727 2.90906Z"
-                            stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6.72723 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M14.3637 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M1 8.63635H20.0909" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>Mié 1 Dic de 2021</div>
-                <div class="colDestino">
-                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.2727 2.90906H4.81818C2.70946 2.90906 1 4.61852 1 6.72724V16.2727C1 18.3814 2.70946 20.0909 4.81818 20.0909H16.2727C18.3815 20.0909 20.0909 18.3814 20.0909 16.2727V6.72724C20.0909 4.61852 18.3815 2.90906 16.2727 2.90906Z"
-                            stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6.72723 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M14.3637 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M1 8.63635H20.0909" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>Vie 31 Dic de 2021</div>
-                <div class="colDestino">hace 2 horas</div>
-                <div class="colDestino boldTarifa">$ 760</div>
-                <div class="colDestino">
-                    <div class="btnBuscar">Buscar</div>
-                </div>
-            </div>
-            <div class="rowDestino tableDestino">
-                <div class="colDestino">
-                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.2727 2.90906H4.81818C2.70946 2.90906 1 4.61852 1 6.72724V16.2727C1 18.3814 2.70946 20.0909 4.81818 20.0909H16.2727C18.3815 20.0909 20.0909 18.3814 20.0909 16.2727V6.72724C20.0909 4.61852 18.3815 2.90906 16.2727 2.90906Z"
-                            stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6.72723 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M14.3637 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M1 8.63635H20.0909" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>Vie 10 Dic de 2021</div>
-                <div class="colDestino">
-                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.2727 2.90906H4.81818C2.70946 2.90906 1 4.61852 1 6.72724V16.2727C1 18.3814 2.70946 20.0909 4.81818 20.0909H16.2727C18.3815 20.0909 20.0909 18.3814 20.0909 16.2727V6.72724C20.0909 4.61852 18.3815 2.90906 16.2727 2.90906Z"
-                            stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6.72723 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M14.3637 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M1 8.63635H20.0909" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>Vie 21 Ene de 2022</div>
-                <div class="colDestino">hace 2 horas</div>
-                <div class="colDestino boldTarifa">$ 775</div>
-                <div class="colDestino">
-                    <div class="btnBuscar">Buscar</div>
-                </div>
-            </div>
-            <div class="rowDestino tableDestino">
-                <div class="colDestino">
-                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.2727 2.90906H4.81818C2.70946 2.90906 1 4.61852 1 6.72724V16.2727C1 18.3814 2.70946 20.0909 4.81818 20.0909H16.2727C18.3815 20.0909 20.0909 18.3814 20.0909 16.2727V6.72724C20.0909 4.61852 18.3815 2.90906 16.2727 2.90906Z"
-                            stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6.72723 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M14.3637 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M1 8.63635H20.0909" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>Lun 6 Dic de 2021</div>
-                <div class="colDestino">
-                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.2727 2.90906H4.81818C2.70946 2.90906 1 4.61852 1 6.72724V16.2727C1 18.3814 2.70946 20.0909 4.81818 20.0909H16.2727C18.3815 20.0909 20.0909 18.3814 20.0909 16.2727V6.72724C20.0909 4.61852 18.3815 2.90906 16.2727 2.90906Z"
-                            stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6.72723 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M14.3637 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M1 8.63635H20.0909" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>Lun 31 Ene de 2022</div>
-                <div class="colDestino">hace 19 horas</div>
-                <div class="colDestino boldTarifa">$ 775</div>
-                <div class="colDestino">
-                    <div class="btnBuscar">Buscar</div>
-                </div>
-            </div>
-            <div class="rowDestino tableDestino">
-                <div class="colDestino">
-                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.2727 2.90906H4.81818C2.70946 2.90906 1 4.61852 1 6.72724V16.2727C1 18.3814 2.70946 20.0909 4.81818 20.0909H16.2727C18.3815 20.0909 20.0909 18.3814 20.0909 16.2727V6.72724C20.0909 4.61852 18.3815 2.90906 16.2727 2.90906Z"
-                            stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6.72723 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M14.3637 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M1 8.63635H20.0909" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>Vie 10 Dic de 2021</div>
-                <div class="colDestino">
-                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.2727 2.90906H4.81818C2.70946 2.90906 1 4.61852 1 6.72724V16.2727C1 18.3814 2.70946 20.0909 4.81818 20.0909H16.2727C18.3815 20.0909 20.0909 18.3814 20.0909 16.2727V6.72724C20.0909 4.61852 18.3815 2.90906 16.2727 2.90906Z"
-                            stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6.72723 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M14.3637 1V4.81818" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M1 8.63635H20.0909" stroke="#DF0C30" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>Vie 21 Ene de 2022</div>
-                <div class="colDestino">hace 23 horas</div>
-                <div class="colDestino boldTarifa">$ 775</div>
-                <div class="colDestino">
-                    <div class="btnBuscar">Buscar</div>
-                </div>
-            </div>
+
         </div>
         <div class="contentTabMobile">
             <div class="boxInter">

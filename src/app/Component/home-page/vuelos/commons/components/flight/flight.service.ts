@@ -84,6 +84,8 @@ const response = {
 export class FlightService {
     constructor(private httpClient: HttpClient) { }
 
+    //TODO modelo servicio
+
     getPasajesAereos(type:TYPE_PARAM){
         const options = {
             params: paramsNmv.set('Parameter.Type', type)
