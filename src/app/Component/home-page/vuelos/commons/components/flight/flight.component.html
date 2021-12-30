@@ -35,7 +35,7 @@
     </div>
     <div class="row">
         <div *ngFor="let vuelo of $vuelosInternacionales | async" class="col-12 col-md-3">
-            <app-package  [image]="vuelo.Image" [city]="vuelo.Destination" [span]="vuelo | generateprice"></app-package>
+            <app-package [fly]="'true'" btn="Ver Tarifas"  [image]="vuelo.Image" [city]="vuelo.Destination" [span]="vuelo | generateprice"></app-package>
         </div>
         <div class="clearfix"></div>
     </div>

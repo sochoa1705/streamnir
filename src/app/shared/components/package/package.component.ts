@@ -39,8 +39,7 @@ export class PackageComponent {
 
 
   toDestiny(e: any){
-    console.log(e);
-    this.route.navigateByUrl('/home/vuelos/destinos')
+    this.route.navigateByUrl('/home/vuelos/destinos/mia')
   }
 
 }
