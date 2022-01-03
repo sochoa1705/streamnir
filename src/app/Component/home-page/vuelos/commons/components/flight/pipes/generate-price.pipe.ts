@@ -7,6 +7,6 @@ import { IFlightRates } from '../flight.models';
 
 export class GeneratePricePipe implements PipeTransform {
     transform(value: IFlightRates): string {
-        return value.Currency=="USD"?'$' + value.Rate : '';
+        return '$' + value.Rate;
     }
 }

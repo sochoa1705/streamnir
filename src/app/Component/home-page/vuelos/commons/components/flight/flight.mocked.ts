@@ -104,3 +104,168 @@ export const MOCK_FLIGHT_NACIONAL = [
         "Image": "https://www.nmviajes.com/Images/paquetes\\pucallpa.jpg"
     }
 ]
+
+
+
+export const MOCK_AEREOLINEAS = [
+        {
+            "Id": "61cb2cb41d43c4dbffa2ec97",
+            "IataCode": "LA",
+            "Name": "LATAM",
+            "Information": "LATAM es la línea aérea más grande e importante de Sudamérica. Inició sus operaciones en el Perú en 1999, ofreciendo 14 destinos en el mercado local. Actualmente ofrece a\nnivel nacional e internacional más de 100 vuelos diarios. Con 45 000 personas que usan sus servicios al día, LATAM se constituye en la aerolínea más importante del Perú.\n\nEntre los destinos más populares de LATAM destacan:\nNacionales: Cusco, Arequipa, Juliaca, Piura, Tarapoto, Iquitos y Lima.\nInternacionales: Santo Domingo, Los Ángeles, Madrid, Santiago, Buenos Aires, Bogotá y Nueva York.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/la.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/latam.png"
+        },
+        {
+            "Id": "61cde4c0c68a6d55a92a6a8d",
+            "IataCode": "AV",
+            "Name": "Avianca",
+            "Information": "Avianca comenzó a operar las primeras rutas internacionales desde Colombia a mediados de los años 20 , utilizando la más moderna tecnología del momento, renovando su flota\ncon frecuencia. La compañía creó una alianza con TACA desde 2009, para tener una mayor presencia en el continente americano. Operando junto con compañías filiales a más de 85 destinos en 22 países. Entre los destinos más populares de AVIANCA destacan:\nLos vuelos internacionales a Bogotá, Cali, Medellín, Pereira, Cartagena, Quito,Guayaquil, Madrid, Barcelona. y vuelos nacionales Arequipa, Chiclayo, Cusco, Juliaca, Lima, Piura, Puerto Maldonado, Tarapoto, Trujillo.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/av.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/avianca.png"
+        },
+        {
+            "Id": "61cb2cb41d43c4dbffa2ec97",
+            "IataCode": "LA",
+            "Name": "LATAM",
+            "Information": "LATAM es la línea aérea más grande e importante de Sudamérica. Inició sus operaciones en el Perú en 1999, ofreciendo 14 destinos en el mercado local. Actualmente ofrece a\nnivel nacional e internacional más de 100 vuelos diarios. Con 45 000 personas que usan sus servicios al día, LATAM se constituye en la aerolínea más importante del Perú.\n\nEntre los destinos más populares de LATAM destacan:\nNacionales: Cusco, Arequipa, Juliaca, Piura, Tarapoto, Iquitos y Lima.\nInternacionales: Santo Domingo, Los Ángeles, Madrid, Santiago, Buenos Aires, Bogotá y Nueva York.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/la.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/latam.png"
+        },
+        {
+            "Id": "61cde4c0c68a6d55a92a6a8d",
+            "IataCode": "AV",
+            "Name": "Avianca",
+            "Information": "Avianca comenzó a operar las primeras rutas internacionales desde Colombia a mediados de los años 20 , utilizando la más moderna tecnología del momento, renovando su flota\ncon frecuencia. La compañía creó una alianza con TACA desde 2009, para tener una mayor presencia en el continente americano. Operando junto con compañías filiales a más de 85 destinos en 22 países. Entre los destinos más populares de AVIANCA destacan:\nLos vuelos internacionales a Bogotá, Cali, Medellín, Pereira, Cartagena, Quito,Guayaquil, Madrid, Barcelona. y vuelos nacionales Arequipa, Chiclayo, Cusco, Juliaca, Lima, Piura, Puerto Maldonado, Tarapoto, Trujillo.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/av.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/avianca.png"
+        },
+        {
+            "Id": "61cb2cb41d43c4dbffa2ec97",
+            "IataCode": "LA",
+            "Name": "LATAM",
+            "Information": "LATAM es la línea aérea más grande e importante de Sudamérica. Inició sus operaciones en el Perú en 1999, ofreciendo 14 destinos en el mercado local. Actualmente ofrece a\nnivel nacional e internacional más de 100 vuelos diarios. Con 45 000 personas que usan sus servicios al día, LATAM se constituye en la aerolínea más importante del Perú.\n\nEntre los destinos más populares de LATAM destacan:\nNacionales: Cusco, Arequipa, Juliaca, Piura, Tarapoto, Iquitos y Lima.\nInternacionales: Santo Domingo, Los Ángeles, Madrid, Santiago, Buenos Aires, Bogotá y Nueva York.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/la.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/latam.png"
+        },
+        {
+            "Id": "61cde4c0c68a6d55a92a6a8d",
+            "IataCode": "AV",
+            "Name": "Avianca",
+            "Information": "Avianca comenzó a operar las primeras rutas internacionales desde Colombia a mediados de los años 20 , utilizando la más moderna tecnología del momento, renovando su flota\ncon frecuencia. La compañía creó una alianza con TACA desde 2009, para tener una mayor presencia en el continente americano. Operando junto con compañías filiales a más de 85 destinos en 22 países. Entre los destinos más populares de AVIANCA destacan:\nLos vuelos internacionales a Bogotá, Cali, Medellín, Pereira, Cartagena, Quito,Guayaquil, Madrid, Barcelona. y vuelos nacionales Arequipa, Chiclayo, Cusco, Juliaca, Lima, Piura, Puerto Maldonado, Tarapoto, Trujillo.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/av.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/avianca.png"
+        },
+        {
+            "Id": "61cb2cb41d43c4dbffa2ec97",
+            "IataCode": "LA",
+            "Name": "LATAM",
+            "Information": "LATAM es la línea aérea más grande e importante de Sudamérica. Inició sus operaciones en el Perú en 1999, ofreciendo 14 destinos en el mercado local. Actualmente ofrece a\nnivel nacional e internacional más de 100 vuelos diarios. Con 45 000 personas que usan sus servicios al día, LATAM se constituye en la aerolínea más importante del Perú.\n\nEntre los destinos más populares de LATAM destacan:\nNacionales: Cusco, Arequipa, Juliaca, Piura, Tarapoto, Iquitos y Lima.\nInternacionales: Santo Domingo, Los Ángeles, Madrid, Santiago, Buenos Aires, Bogotá y Nueva York.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/la.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/latam.png"
+        },
+        {
+            "Id": "61cde4c0c68a6d55a92a6a8d",
+            "IataCode": "AV",
+            "Name": "Avianca",
+            "Information": "Avianca comenzó a operar las primeras rutas internacionales desde Colombia a mediados de los años 20 , utilizando la más moderna tecnología del momento, renovando su flota\ncon frecuencia. La compañía creó una alianza con TACA desde 2009, para tener una mayor presencia en el continente americano. Operando junto con compañías filiales a más de 85 destinos en 22 países. Entre los destinos más populares de AVIANCA destacan:\nLos vuelos internacionales a Bogotá, Cali, Medellín, Pereira, Cartagena, Quito,Guayaquil, Madrid, Barcelona. y vuelos nacionales Arequipa, Chiclayo, Cusco, Juliaca, Lima, Piura, Puerto Maldonado, Tarapoto, Trujillo.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/av.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/avianca.png"
+        },
+        {
+            "Id": "61cb2cb41d43c4dbffa2ec97",
+            "IataCode": "LA",
+            "Name": "LATAM",
+            "Information": "LATAM es la línea aérea más grande e importante de Sudamérica. Inició sus operaciones en el Perú en 1999, ofreciendo 14 destinos en el mercado local. Actualmente ofrece a\nnivel nacional e internacional más de 100 vuelos diarios. Con 45 000 personas que usan sus servicios al día, LATAM se constituye en la aerolínea más importante del Perú.\n\nEntre los destinos más populares de LATAM destacan:\nNacionales: Cusco, Arequipa, Juliaca, Piura, Tarapoto, Iquitos y Lima.\nInternacionales: Santo Domingo, Los Ángeles, Madrid, Santiago, Buenos Aires, Bogotá y Nueva York.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/la.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/latam.png"
+        },
+        {
+            "Id": "61cde4c0c68a6d55a92a6a8d",
+            "IataCode": "AV",
+            "Name": "Avianca",
+            "Information": "Avianca comenzó a operar las primeras rutas internacionales desde Colombia a mediados de los años 20 , utilizando la más moderna tecnología del momento, renovando su flota\ncon frecuencia. La compañía creó una alianza con TACA desde 2009, para tener una mayor presencia en el continente americano. Operando junto con compañías filiales a más de 85 destinos en 22 países. Entre los destinos más populares de AVIANCA destacan:\nLos vuelos internacionales a Bogotá, Cali, Medellín, Pereira, Cartagena, Quito,Guayaquil, Madrid, Barcelona. y vuelos nacionales Arequipa, Chiclayo, Cusco, Juliaca, Lima, Piura, Puerto Maldonado, Tarapoto, Trujillo.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/av.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/avianca.png"
+        },
+        {
+            "Id": "61cb2cb41d43c4dbffa2ec97",
+            "IataCode": "LA",
+            "Name": "LATAM",
+            "Information": "LATAM es la línea aérea más grande e importante de Sudamérica. Inició sus operaciones en el Perú en 1999, ofreciendo 14 destinos en el mercado local. Actualmente ofrece a\nnivel nacional e internacional más de 100 vuelos diarios. Con 45 000 personas que usan sus servicios al día, LATAM se constituye en la aerolínea más importante del Perú.\n\nEntre los destinos más populares de LATAM destacan:\nNacionales: Cusco, Arequipa, Juliaca, Piura, Tarapoto, Iquitos y Lima.\nInternacionales: Santo Domingo, Los Ángeles, Madrid, Santiago, Buenos Aires, Bogotá y Nueva York.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/la.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/latam.png"
+        },
+        {
+            "Id": "61cde4c0c68a6d55a92a6a8d",
+            "IataCode": "AV",
+            "Name": "Avianca",
+            "Information": "Avianca comenzó a operar las primeras rutas internacionales desde Colombia a mediados de los años 20 , utilizando la más moderna tecnología del momento, renovando su flota\ncon frecuencia. La compañía creó una alianza con TACA desde 2009, para tener una mayor presencia en el continente americano. Operando junto con compañías filiales a más de 85 destinos en 22 países. Entre los destinos más populares de AVIANCA destacan:\nLos vuelos internacionales a Bogotá, Cali, Medellín, Pereira, Cartagena, Quito,Guayaquil, Madrid, Barcelona. y vuelos nacionales Arequipa, Chiclayo, Cusco, Juliaca, Lima, Piura, Puerto Maldonado, Tarapoto, Trujillo.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/av.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/avianca.png"
+        },
+        {
+            "Id": "61cb2cb41d43c4dbffa2ec97",
+            "IataCode": "LA",
+            "Name": "LATAM",
+            "Information": "LATAM es la línea aérea más grande e importante de Sudamérica. Inició sus operaciones en el Perú en 1999, ofreciendo 14 destinos en el mercado local. Actualmente ofrece a\nnivel nacional e internacional más de 100 vuelos diarios. Con 45 000 personas que usan sus servicios al día, LATAM se constituye en la aerolínea más importante del Perú.\n\nEntre los destinos más populares de LATAM destacan:\nNacionales: Cusco, Arequipa, Juliaca, Piura, Tarapoto, Iquitos y Lima.\nInternacionales: Santo Domingo, Los Ángeles, Madrid, Santiago, Buenos Aires, Bogotá y Nueva York.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/la.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/latam.png"
+        },
+        {
+            "Id": "61cde4c0c68a6d55a92a6a8d",
+            "IataCode": "AV",
+            "Name": "Avianca",
+            "Information": "Avianca comenzó a operar las primeras rutas internacionales desde Colombia a mediados de los años 20 , utilizando la más moderna tecnología del momento, renovando su flota\ncon frecuencia. La compañía creó una alianza con TACA desde 2009, para tener una mayor presencia en el continente americano. Operando junto con compañías filiales a más de 85 destinos en 22 países. Entre los destinos más populares de AVIANCA destacan:\nLos vuelos internacionales a Bogotá, Cali, Medellín, Pereira, Cartagena, Quito,Guayaquil, Madrid, Barcelona. y vuelos nacionales Arequipa, Chiclayo, Cusco, Juliaca, Lima, Piura, Puerto Maldonado, Tarapoto, Trujillo.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/av.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/avianca.png"
+        },
+        {
+            "Id": "61cb2cb41d43c4dbffa2ec97",
+            "IataCode": "LA",
+            "Name": "LATAM",
+            "Information": "LATAM es la línea aérea más grande e importante de Sudamérica. Inició sus operaciones en el Perú en 1999, ofreciendo 14 destinos en el mercado local. Actualmente ofrece a\nnivel nacional e internacional más de 100 vuelos diarios. Con 45 000 personas que usan sus servicios al día, LATAM se constituye en la aerolínea más importante del Perú.\n\nEntre los destinos más populares de LATAM destacan:\nNacionales: Cusco, Arequipa, Juliaca, Piura, Tarapoto, Iquitos y Lima.\nInternacionales: Santo Domingo, Los Ángeles, Madrid, Santiago, Buenos Aires, Bogotá y Nueva York.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/la.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/latam.png"
+        },
+        {
+            "Id": "61cde4c0c68a6d55a92a6a8d",
+            "IataCode": "AV",
+            "Name": "Avianca",
+            "Information": "Avianca comenzó a operar las primeras rutas internacionales desde Colombia a mediados de los años 20 , utilizando la más moderna tecnología del momento, renovando su flota\ncon frecuencia. La compañía creó una alianza con TACA desde 2009, para tener una mayor presencia en el continente americano. Operando junto con compañías filiales a más de 85 destinos en 22 países. Entre los destinos más populares de AVIANCA destacan:\nLos vuelos internacionales a Bogotá, Cali, Medellín, Pereira, Cartagena, Quito,Guayaquil, Madrid, Barcelona. y vuelos nacionales Arequipa, Chiclayo, Cusco, Juliaca, Lima, Piura, Puerto Maldonado, Tarapoto, Trujillo.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/av.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/avianca.png"
+        },
+        {
+            "Id": "61cb2cb41d43c4dbffa2ec97",
+            "IataCode": "LA",
+            "Name": "LATAM",
+            "Information": "LATAM es la línea aérea más grande e importante de Sudamérica. Inició sus operaciones en el Perú en 1999, ofreciendo 14 destinos en el mercado local. Actualmente ofrece a\nnivel nacional e internacional más de 100 vuelos diarios. Con 45 000 personas que usan sus servicios al día, LATAM se constituye en la aerolínea más importante del Perú.\n\nEntre los destinos más populares de LATAM destacan:\nNacionales: Cusco, Arequipa, Juliaca, Piura, Tarapoto, Iquitos y Lima.\nInternacionales: Santo Domingo, Los Ángeles, Madrid, Santiago, Buenos Aires, Bogotá y Nueva York.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/la.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/latam.png"
+        },
+        {
+            "Id": "61cde4c0c68a6d55a92a6a8d",
+            "IataCode": "AV",
+            "Name": "Avianca",
+            "Information": "Avianca comenzó a operar las primeras rutas internacionales desde Colombia a mediados de los años 20 , utilizando la más moderna tecnología del momento, renovando su flota\ncon frecuencia. La compañía creó una alianza con TACA desde 2009, para tener una mayor presencia en el continente americano. Operando junto con compañías filiales a más de 85 destinos en 22 países. Entre los destinos más populares de AVIANCA destacan:\nLos vuelos internacionales a Bogotá, Cali, Medellín, Pereira, Cartagena, Quito,Guayaquil, Madrid, Barcelona. y vuelos nacionales Arequipa, Chiclayo, Cusco, Juliaca, Lima, Piura, Puerto Maldonado, Tarapoto, Trujillo.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/av.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/avianca.png"
+        },
+        {
+            "Id": "61cb2cb41d43c4dbffa2ec97",
+            "IataCode": "LA",
+            "Name": "LATAM",
+            "Information": "LATAM es la línea aérea más grande e importante de Sudamérica. Inició sus operaciones en el Perú en 1999, ofreciendo 14 destinos en el mercado local. Actualmente ofrece a\nnivel nacional e internacional más de 100 vuelos diarios. Con 45 000 personas que usan sus servicios al día, LATAM se constituye en la aerolínea más importante del Perú.\n\nEntre los destinos más populares de LATAM destacan:\nNacionales: Cusco, Arequipa, Juliaca, Piura, Tarapoto, Iquitos y Lima.\nInternacionales: Santo Domingo, Los Ángeles, Madrid, Santiago, Buenos Aires, Bogotá y Nueva York.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/la.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/latam.png"
+        },
+        {
+            "Id": "61cde4c0c68a6d55a92a6a8d",
+            "IataCode": "AV",
+            "Name": "Avianca",
+            "Information": "Avianca comenzó a operar las primeras rutas internacionales desde Colombia a mediados de los años 20 , utilizando la más moderna tecnología del momento, renovando su flota\ncon frecuencia. La compañía creó una alianza con TACA desde 2009, para tener una mayor presencia en el continente americano. Operando junto con compañías filiales a más de 85 destinos en 22 países. Entre los destinos más populares de AVIANCA destacan:\nLos vuelos internacionales a Bogotá, Cali, Medellín, Pereira, Cartagena, Quito,Guayaquil, Madrid, Barcelona. y vuelos nacionales Arequipa, Chiclayo, Cusco, Juliaca, Lima, Piura, Puerto Maldonado, Tarapoto, Trujillo.\n\nBúsqueda realizada para vuelos Ida y Vuelta 30/12/2021",
+            "SmallLogo": "https://www.nmviajes.com/Images/aerolineas/av.jpg",
+            "Logo": "https://www.nmviajes.com/Images/support/logo-aerolineas/avianca.png"
+        },
+    ]
