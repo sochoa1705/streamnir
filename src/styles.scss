@@ -4,7 +4,11 @@
 // @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400&display=swap');
 @import "scss/variables";
-@import "scss/mixin";
+@import 'scss/mixin';
+
+
+
+
 .animated {
     animation-duration: 1s !important;
     animation-fill-mode: both !important;
@@ -3664,9 +3668,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .boxTab {
     width: 100%;
     .rowBoxTab {
-        display: flex;
-        gap: 10px;
-        padding: 4px 10px 10px 10px;
+        @include desktop { 
+            display: flex;
+            gap: 10px;
+            padding: 4px 10px 10px 10px;
+         }
+        
+         
+       
         &.right {
             justify-content: end;
         }
@@ -3687,6 +3696,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .colBoxtab {
             display: flex;
             flex: 1 1 auto;
+            padding: 10px 0;
+
+            @include desktop { 
+                padding: 0;
+             }
+
             //position: relative;
             input {
                 width: 100%;
@@ -4585,7 +4600,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
     }
     .customers {
-        margin-top: 11px !important;
+        margin-bottom: 10px;
+
+        @include desktop { 
+            margin-top: 11px !important;
+         }
     }
     app-card-info {
         .col-2 {
@@ -6157,8 +6176,10 @@ input.inputDer,
     width: 0 !important;
 }
 .margin-filter{
-    margin-right: 70px;
-    margin-left: 70px;
+    @include desktop{
+        margin-right: 70px;
+        margin-left: 70px;
+    }
 }
 
 .ignore-template{
