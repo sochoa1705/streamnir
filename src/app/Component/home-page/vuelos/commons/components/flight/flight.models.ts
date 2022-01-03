@@ -13,3 +13,11 @@ export enum TYPE_PARAM  {
     NACIONAL = 'N',
     ALL = 'a'
 }
+
+export interface IVuelos {
+    Name:            string;
+    ContinentCode:   string;
+    DestinationCode: string;
+}
+
+

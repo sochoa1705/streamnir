@@ -9,7 +9,7 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 
 import { interval, Observable } from 'rxjs';
 import { FlightService } from './flight.service';
-import { IFlightRates, TYPE_PARAM } from './flight.models';
+import { IFlightRates, IVuelos, TYPE_PARAM } from './flight.models';
 import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
 
 
@@ -26,6 +26,7 @@ export class FlightComponent implements OnInit {
    $vuelosInternacionales:Observable<IFlightRates[]>;
    $vuelosNacionales:Observable<IFlightRates[]>;
    $aereolineas:Observable<IAereolineas[]>;
+   $vuelos:Observable<IVuelos[]>;
    
   constructor(
     public route: Router,
@@ -42,6 +43,7 @@ export class FlightComponent implements OnInit {
     this.loadVuelosInternacionales();
     this.loadVuelosNacionales();
     this.loadAereolineas();
+    this.loadVuelos();
 
   }
 
@@ -53,6 +55,9 @@ export class FlightComponent implements OnInit {
   }
   loadAereolineas(){
     this.$aereolineas = this.flightService.getAereolineas();
+  }
+  loadVuelos(){
+    this.$vuelos = this.flightService.getVuelos();
   }
 
   toLine(e: any){

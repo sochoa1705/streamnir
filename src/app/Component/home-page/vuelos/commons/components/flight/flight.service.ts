@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { paramsNmv } from 'src/app/shared/utils';
 import { ResponseModelT } from 'src/app/shared/models';
-import { IFlightRates, TYPE_PARAM } from './flight.models';
+import { IFlightRates, IVuelos, TYPE_PARAM } from './flight.models';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
@@ -34,6 +34,16 @@ export class FlightService {
         }
         const url = environment.urlNmviajes + '/Airline';
         return this.httpClient.get<ResponseModelT<IAereolineas[]>>(url, options).pipe(
+            map(resp=> resp.Result)
+        )
+    }
+
+    getVuelos(){
+        const options = {
+            params: paramsNmv.set('Parameter.Status', true)
+        }
+        const url = environment.urlNmviajes + '/Flight/GetContinents';
+        return this.httpClient.get<ResponseModelT<IVuelos[]>>(url, options).pipe(
             map(resp=> resp.Result)
         )
     }
