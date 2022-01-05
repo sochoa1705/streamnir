@@ -7,7 +7,7 @@ export const environment = {
   urlLogin: 'http://localhost:64238/login',
   nameAppAC: 'Intranet',
   identifierAC: 'NMViajes - Assist Card',
-  codeEnvironmentAC: 'DESA/NMO/NMO',
+  codeEnvironmentAC: 'PROD/NMO/NMO',
   undidadNegocioAC: 1,
   dkAgenciaAC: '339',
   subcodigoAgenciaAC: '1',
