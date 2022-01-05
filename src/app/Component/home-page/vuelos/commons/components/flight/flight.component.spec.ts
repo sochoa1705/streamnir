@@ -10,13 +10,19 @@ import { PackageModule } from "src/app/shared/components/package/package.module"
 import { TabsModule } from "src/app/shared/components/tabs/tabs.module"
 import { MaterialModule } from "src/app/shared/material.module"
 import { FlightComponent } from "./flight.component"
-import { MOCK_FLIGHT_NACIONAL } from "./flight.mocked"
+import { MOCK_AEREOLINEAS, MOCK_FLIGHT_NACIONAL, MOCK_VUELOS } from "./flight.mocked"
 import { FlightService } from "./flight.service"
 import { GeneratePricePipe } from "./pipes/generate-price.pipe"
 
 const MockFlightService = {
   getPasajesAereos(){
     return of(MOCK_FLIGHT_NACIONAL)
+  },
+  getAereolineas(){
+    return of([MOCK_AEREOLINEAS])
+  },
+  getVuelos(){
+    return of(MOCK_VUELOS)
   }
 }
 

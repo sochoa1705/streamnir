@@ -45,6 +45,17 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   MSG_SEX: string = 'sexCustomer'
 
   MSG_BANK: string = 'bankPay'
+
+  MSG_NUMBER_CARD: string = 'numberCard'
+  MSG_NAME_CARD: string = 'nameCard'
+  MSG_EXPIRED_CARD: string = 'expiredCard'
+  MSG_CCV_CARD: string = 'ccvCard'
+  MSG_TYPE_DOC: string = 'tipoDoc'
+  MSG_NUM_DOC: string = 'numDoc'
+  MSG_QUOTE: string = 'feePay'
+  MSG_CITY: string = 'cityCard'
+  MSG_ADRESS: string = 'address'
+
   MSG_NAME_CONTACT: string = 'nameContacto'
   MSG_LASTNAME_CONTACT: string = 'lastnameContacto'
   MSG_EMAIL_CONTACT: string = 'mailContacto'
@@ -66,17 +77,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   detalleCobertura!: boolean
   cupon!: boolean
   mobile!: boolean
-  selectedPay!: string
+  selectedPay: string
   selectedPopup: string = 'agencia'
   result: any
   resultJson: any
   safe0: any
   safe0Json: any
   banca: boolean = true
-  /* metodoPago: any = [
-    { name: 'option-2', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
-    { name: 'option-1', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
-  ] */
   banks = [
     { name: 'Banco de Crédito', value: 1005 },
     { name: 'Interbank', value: 1011 },
@@ -90,10 +97,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   ]
 
   metodoPago: Methods[]
-  // metodoPago: any = [
-  //   { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
-  //   { name: 'optionm-1', value: 'tarjeta', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
-  // ]
 
   isLinear = true;
   firstFormGroup!: FormGroup;
@@ -106,7 +109,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     public offersService: OffersService,
     public coverageService: CoverageService,
   ) {
-
     this.safe0 = localStorage.getItem('safe0')
     this.safe0Json = JSON.parse(this.safe0)
     this.result = localStorage.getItem('Datasafe')
@@ -122,17 +124,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.mobile = false
     }
     this.current = this.route.getCurrentNavigation()!.extras.state as any
-
-    this.selectedPay = (this.current['filter'] === 'filter') ? 'tarjeta' : 'safety'
+    this.selectedPay = (this.current['filter'] === 'filter') ? 'tarjeta' : 'safetypay'
     if (this.current['filter'] === 'filter') {
       this.metodoPago = [
-        { name: 'optionm-1', value: 'tarjeta', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: true, id: "0" },
+        { name: 'optionm-1', value: 'TARJETA', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: true, id: "0" },
         { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: false, id: "1" },
       ]
     } else {
       this.metodoPago = [
-        { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "0" },
-        { name: 'optionm-1', value: 'tarjeta', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "1" },
+        { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "1" },
+        { name: 'optionm-1', value: 'TARJETA', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "0" },
       ]
     }
   }
@@ -147,10 +148,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       let checked = document.getElementById("sexMasc" + x);
       (<HTMLInputElement>checked).checked = false;
     }
-
   }
 
   ngOnInit(): void {
+    console.log(this.selectedPay)
+
     this.pop = this.safe0Json
     // this.getSecureBooking()
     console.log(this.current);
@@ -203,13 +205,62 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   validForm() {
     this.errors = []
 
-    let bankPay: string = this.formShop.getRawValue()['formCard']['bankPay']
-    if (bankPay === undefined || bankPay === null || bankPay.trim() === '') {
-      this.errors.push({ name: this.MSG_BANK, message: 'Elija el banco' })
+    const typePay: string = this.formShop.getRawValue()['formCard']['select21']
+    if (typePay === 'TARJETA') {
+      // TC
+      let numberCard: string = this.formShop.getRawValue()['formCard']['numberCard']
+      if (numberCard === undefined || numberCard === null || numberCard.trim() === '') {
+        this.errors.push({ name: this.MSG_NUMBER_CARD, message: 'Ingresar número de tarjeta' })
+      }
+
+      let nameCard: string = this.formShop.getRawValue()['formCard']['nameCard']
+      if (nameCard === undefined || nameCard === null || nameCard.trim() === '') {
+        this.errors.push({ name: this.MSG_NAME_CARD, message: 'Nombre del titular de tarjeta' })
+      }
+
+      let expiredCard: string = this.formShop.getRawValue()['formCard']['expiredCard']
+      if (expiredCard === undefined || expiredCard === null || expiredCard.trim() === '') {
+        this.errors.push({ name: this.MSG_EXPIRED_CARD, message: 'fecha expiración de tarjeta' })
+      }
+
+      let ccvCard: string = this.formShop.getRawValue()['formCard']['ccvCard']
+      if (ccvCard === undefined || ccvCard === null || ccvCard.trim() === '') {
+        this.errors.push({ name: this.MSG_CCV_CARD, message: 'Código requerido' })
+      }
+
+      let tipoDoc: string = this.formShop.getRawValue()['formCard']['tipoDoc']
+      if (tipoDoc === undefined || tipoDoc === null || tipoDoc.trim() === '') {
+        this.errors.push({ name: this.MSG_TYPE_DOC, message: 'tipo es requerido' })
+      }
+
+      let numDoc: string = this.formShop.getRawValue()['formCard']['numDoc']
+      if (numDoc === undefined || numDoc === null || numDoc.trim() === '') {
+        this.errors.push({ name: this.MSG_NUM_DOC, message: 'Documento requerido' })
+      }
+
+      let feePay: string = this.formShop.getRawValue()['formCard']['feePay']
+      if (feePay === undefined || feePay === null || feePay.trim() === '') {
+        this.errors.push({ name: this.MSG_QUOTE, message: 'Cuotas requerido' })
+      }
+
+      let cityCard: string = this.formShop.getRawValue()['formCard']['cityCard']
+      if (cityCard === undefined || cityCard === null || cityCard.trim() === '') {
+        this.errors.push({ name: this.MSG_CITY, message: 'Ciudad requerida' })
+      }
+
+      let address: string = this.formShop.getRawValue()['formCard']['address']
+      if (address === undefined || address === null || address.trim() === '') {
+        this.errors.push({ name: this.MSG_ADRESS, message: 'Dirección es requerida' })
+      }
+    } else {
+      // SAFETYPAY
+      let bankPay: string = this.formShop.getRawValue()['formCard']['bankPay']
+      if (bankPay === undefined || bankPay === null || bankPay.trim() === '') {
+        this.errors.push({ name: this.MSG_BANK, message: 'Elija el banco' })
+      }
     }
 
     //FORM PASAJERO
-    //debugger;
     for (let x = 0; x < this.formShop.getRawValue()['customers'].length; x++) {
       let nameCustomer: string = this.formShop.getRawValue()['customers'][x]['nameCustomer']
       if (nameCustomer === undefined || nameCustomer === null || nameCustomer.trim() === '') {
@@ -298,7 +349,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'solo números' })
     }
 
-
     let chkPolity: boolean = this.formShop.getRawValue()['chkPolity']
     if (chkPolity === undefined || chkPolity === null || chkPolity == false) {
       this.errors.push({ name: this.MSG_CHK_POLITY, message: 'Políticas  es requerido' })
@@ -334,7 +384,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     } else {
       this.removeRecibo(0)
     }
-
   }
 
   createForm() {
@@ -342,7 +391,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       customers: new FormArray([]),
       formCard: new FormGroup({
         bankPay: new FormControl(),
-        select21: new FormControl(this.current['filter'] === 'filter' ? 'tarjeta' : 'SAFETYPAY'),
+        select21: new FormControl(this.current['filter'] === 'filter' ? 'TARJETA' : 'SAFETYPAY'),
         numberCard: new FormControl(),
         nameCard: new FormControl(),
         expiredCard: new FormControl(),
@@ -360,7 +409,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         mailContacto: new FormControl(),
         mailConfirmContacto: new FormControl(),
         typePhone0: new FormControl(),
-        code0: new FormControl(),
+        code0: new FormControl('511'),
         numberPhone0: new FormControl(),
         phones: new FormArray([]),
         recibo: new FormArray([]),
@@ -373,7 +422,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   getArrayCustomers() {
     return (<FormArray>this.formShop.get(['customers'])).controls
-
   }
 
   addCustomers() {
@@ -464,12 +512,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     //console.log(this.selectedPopup);
   }
   chkValue(e: any) {
+    console.log(e);
     if (e === 'optionm-1' || e === 'option-1') {
       this.selectedPay = 'tarjeta';
     } else {
       this.selectedPay = 'safety';
     }
-    //console.log(this.selectedPay);
   }
   id: any = "banca";
   optionPay(e: any, i: any, ids: any) {

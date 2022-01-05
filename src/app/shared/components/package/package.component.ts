@@ -33,14 +33,15 @@ export class PackageComponent {
   pack!: string;
   @Input()
   fly!: string;
+  @Input()
+  codigo_ciudad!: string;
   constructor(
     public route: Router,
   ) { }
 
 
   toDestiny(e: any){
-    console.log(e);
-    this.route.navigateByUrl('/home/vuelos/destinos')
+    this.route.navigate(['/home/vuelos/destinos',this.codigo_ciudad])
   }
 
 }
