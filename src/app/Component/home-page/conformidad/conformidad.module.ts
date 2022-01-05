@@ -7,6 +7,8 @@ import { SecureBookingService } from 'src/app/Services/secureBooking/secure-book
 import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
 import { RouterModule } from '@angular/router';
 import { CountdownModule } from 'ngx-countdown';
+import { UpdatePayService } from '../../../Services/updatePay/update-pay.service';
+import { StatePayService } from '../../../Services/statePay/state-pay.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -19,6 +21,6 @@ import { CountdownModule } from 'ngx-countdown';
     CountdownModule,
   ],
   exports: [ ConformidadComponent ],
-  providers: [SecureBookingService, GeneratePayService]
+  providers: [SecureBookingService, GeneratePayService, UpdatePayService, StatePayService]
 })
 export class ConformidadModule { }

@@ -9,7 +9,8 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 
 import { interval, Observable } from 'rxjs';
 import { FlightService } from './flight.service';
-import { IFlightRates, TYPE_PARAM } from './flight.models';
+import { IFlightRates, IVuelos, TYPE_PARAM } from './flight.models';
+import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
 
 
 @Component({
@@ -24,6 +25,8 @@ export class FlightComponent implements OnInit {
 
    $vuelosInternacionales:Observable<IFlightRates[]>;
    $vuelosNacionales:Observable<IFlightRates[]>;
+   $aereolineas:Observable<IAereolineas[]>;
+   $vuelos:Observable<IVuelos[]>;
    
   constructor(
     public route: Router,
@@ -39,12 +42,8 @@ export class FlightComponent implements OnInit {
 
     this.loadVuelosInternacionales();
     this.loadVuelosNacionales();
-
-    const contador = interval(4000);
-    contador.subscribe((n)=> {
-      this.counter < 3 ? this.counter++ : this.counter = 1;
-      this.counterMovil < 8 ? this.counterMovil++ : this.counterMovil = 1;
-    })
+    this.loadAereolineas();
+    this.loadVuelos();
 
   }
 
@@ -54,20 +53,16 @@ export class FlightComponent implements OnInit {
   loadVuelosNacionales(){
     this.$vuelosNacionales = this.flightService.getPasajesAereos(TYPE_PARAM.NACIONAL);
   }
+  loadAereolineas(){
+    this.$aereolineas = this.flightService.getAereolineas();
+  }
+  loadVuelos(){
+    this.$vuelos = this.flightService.getVuelos();
+  }
 
   toLine(e: any){
     this.route.navigateByUrl('/home/aerolineas')
   }
- /* codigo para los sliders de las compañias */
-  counter: number = 1;
-  counterMovil: number = 1;
-  nextBtn() {
-    this.counter < 3 ? this.counter++ : this.counter = 1;
-  }
-  afterBtn() {
-    this.counter > 1 ? this.counter-- : this.counter = 3;
-  }
-
 
 
   OfertaVuelos(){

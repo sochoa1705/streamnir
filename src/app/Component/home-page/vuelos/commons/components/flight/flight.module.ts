@@ -8,6 +8,7 @@ import { CardModule } from 'src/app/shared/components/card/card.module';
 import { RouterModule } from '@angular/router';
 import { FlightService } from './flight.service';
 import { GeneratePricePipe } from './pipes/generate-price.pipe';
+import { AereolineasModule } from 'src/app/shared/components/aereolineas/aereolineas.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -18,7 +19,8 @@ import { GeneratePricePipe } from './pipes/generate-price.pipe';
     MaterialModule,
     PackageModule,
     RouterModule,
-    CardModule
+    CardModule,
+    AereolineasModule
   ],
   exports: [ FlightComponent ],
   providers:[FlightService]
