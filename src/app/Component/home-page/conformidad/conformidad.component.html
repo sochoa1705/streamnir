@@ -1,9 +1,20 @@
 <div class="container-fluid bg-white py-3">
+    <!-- TITULO -->
     <div class="row">
-        <div class="col-12 titleSuperior">
-            ¡Felicidades, prepara todo para tu viaje!
-        </div>
+        <ng-container *ngIf="typePay === 'SAFETYPAY'; else tc">
+            <div class="col-12 titleSuperior">
+                ¡Felicidades, estás a un paso de tu viaje!
+            </div>
+        </ng-container>
+        <ng-template #tc>
+            <div class="col-12 titleSuperior">
+                ¡Felicidades, prepara todo para tu viaje!
+            </div>
+        </ng-template>
     </div>
+    <!-- END TITULO -->
+
+    <!-- BANNER -->
     <div class="row py-5">
         <div class="col-8 offset-2">
             <div class="d-flex justify-content-center align-items-center">
@@ -12,18 +23,27 @@
             </div>
         </div>
     </div>
+    <!-- END BANNER -->
 
-    <div class="row">
+    <div class="row" *ngIf="typePay === 'TARJETA'">
         <div class="col-12 subTitleConf" *ngIf="reservation">
             Excelente elección.
             <br> Tu solicitud de compra es {{ reservation.Reserva }} ha sido recibida y fue pagada correctamente.
         </div>
     </div>
-    <div class="padBancaInt">
+    <div class="row" *ngIf="typePay === 'SAFETYPAY'">
+        <div class="col-12 subTitleConf">
+            <br> Se ha completado la reserva y estamos a la espera del pago para completar tu compra!
+        </div>
     </div>
 
+    <!-- ESPACIO -->
+    <div class="padBancaInt" *ngIf="typePay === 'SAFETYPAY'">
+    </div>
+    <!-- END ESPACIO -->
+
 </div>
-<div class="bancaInt">
+<div class="bancaInt" *ngIf="typePay === 'SAFETYPAY'">
     <div class="bodyBanca">
         <div class="cardBlue">
             <div class="descrip">
@@ -58,6 +78,7 @@
         </div>
     </div>
 </div>
+
 <div class="container">
     <div class="row py-5">
         <div class="offset-2 col-8 lessViewMob">
@@ -73,7 +94,8 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    <div class="safetyPay">
+
+    <div class="safetyPay" *ngIf="typePay === 'SAFETYPAY'">
         <div class="rowSafety">
             <div class="columnSaf titleSafety">¿Cómo pagar con SafetyPay?</div>
         </div>
@@ -136,6 +158,7 @@
             </div> -->
         </div>
     </div>
+
     <div class="row text-center">
         <div class="titleConf">
             Datos del asegurado
@@ -162,6 +185,7 @@
         </div>
         <div class="clearfix"></div>
     </div>
+    
     <div class="row text-center">
         <div class="titleConf">
             Detalle de tu cobertura
@@ -232,3 +256,4 @@
         </div>
         <div class="clearfix"></div>
     </div>
+</div>
