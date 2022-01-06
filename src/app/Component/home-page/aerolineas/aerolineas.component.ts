@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { interval } from 'rxjs';
+import { IAerolineaInf } from './models/aerolineas.interface';
+import { AerolineasService } from './services/aerolineas.service';
 @Component({
   selector: 'app-aerolineas',
   templateUrl: './aerolineas.component.html',
@@ -8,13 +10,24 @@ import { interval } from 'rxjs';
 })
 export class AerolineasComponent implements OnInit {
 
-  constructor() { }
+  public information:IAerolineaInf;
+
+  constructor(private service:AerolineasService) { }
 
   ngOnInit(): void {
+
+    this.loadData();
+
     const contador = interval(4000);
     contador.subscribe((n)=> {
       this.counter < 3 ? this.counter++ : this.counter = 1;
       this.counterMovil < 8 ? this.counterMovil++ : this.counterMovil = 1;
+    })
+  }
+
+  loadData(){
+    this.service.getInformation('LA').subscribe(data=>{
+      this.information = data;
     })
   }
 

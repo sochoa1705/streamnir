@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AereolineasComponent } from './aereolineas.component';
 import { PorSlidePipe } from './pipe/porslide.pipe';
+import { DirectivesModule } from '../../directives/directives.module';
 
 
 
@@ -11,7 +12,8 @@ import { PorSlidePipe } from './pipe/porslide.pipe';
     PorSlidePipe
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    DirectivesModule
   ],
   exports:[
     AereolineasComponent

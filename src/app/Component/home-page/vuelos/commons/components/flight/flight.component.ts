@@ -94,6 +94,10 @@ export class FlightComponent implements OnInit {
   
     }
 
+    redirigirVuelo(vuelo:IVuelos){
+        console.log(vuelo);
+    }
+
 
   /* end code */
 
