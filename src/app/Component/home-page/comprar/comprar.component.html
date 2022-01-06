@@ -3,11 +3,11 @@
         <!-- <app-filter></app-filter> -->
     </div>
 </ng-container>
+
 <ng-template #filtersafe>
-    <!-- <div class="d-md-block d-none">w
+    <!-- <div class="d-md-block d-none">
         <app-filtersafe></app-filtersafe>
     </div> -->
-
     <div class="d-flex flex-row bg-white flex-column py-3 px-5 boxFilter hideMov">
         <div class="d-flex flex-row">
             <a (click)="otherPlan()">
@@ -32,7 +32,6 @@
         </div>
     </div>
 </ng-template>
-
 
 <!-- <div #adultoCdr style="display: none;">
     <a (click)="pasajeroClose()">cerrar</a>
@@ -235,6 +234,7 @@
                                             <!-- END TARJETA -->
                                         </div>
                                         <ng-template #safety2>
+                                            <!-- MOVILE -->
                                             <div class="col-5 offset-1 py-3 textSafMob">
                                                 <p class="textSafety">Seleccione una opción para pagar</p>
                                             </div>
@@ -469,6 +469,7 @@
                 </div> -->
             </mat-step>
         </mat-stepper>
+        <div class="clearfix"></div>
     </div>
     <!-- END STEPPER -->
 
@@ -482,13 +483,13 @@
         </div>
         <div class="clearfix"></div>
     </div>
+
     <div class="row pt-md-3">
         <!-- IZQUIERDA -->
         <div class="col-8 viewMobileWidth order-1 order-md-0 ">
             <h1 class="titleMob d-md-block d-none">{{ safe0Json?.title }}</h1>
-            <!-- <h1>¡Falta poco! Confirma ahora tu reserva.</h1> -->
             <form [formGroup]="formShop" novalidate>
-
+                <!-- FORM PASAJEROS -->
                 <div class="card pasajeros hideViewMobile">
                     <div class="card-header">
                         <h2>Información de pasajeros</h2>
@@ -509,15 +510,6 @@
                                         <path d="M12.8033 9.69668C11.9864 8.87982 11.0141 8.27511 9.95329 7.90904C11.0895 7.12649 11.8359 5.81684 11.8359 4.33594C11.8359 1.94511 9.89083 0 7.5 0C5.10917 0 3.16406 1.94511 3.16406 4.33594C3.16406 5.81684 3.91052 7.12649 5.04674 7.90904C3.9859 8.27511 3.01359 8.87982 2.19671 9.69668C0.780147 11.1133 0 12.9967 0 15H1.17188C1.17188 11.5107 4.01065 8.67188 7.5 8.67188C10.9893 8.67188 13.8281 11.5107 13.8281 15H15C15 12.9967 14.2199 11.1133 12.8033 9.69668ZM7.5 7.5C5.75534 7.5 4.33594 6.08063 4.33594 4.33594C4.33594 2.59125 5.75534 1.17188 7.5 1.17188C9.24466 1.17188 10.6641 2.59125 10.6641 4.33594C10.6641 6.08063 9.24466 7.5 7.5 7.5Z"
                                             fill="#009AED" />
                                     </svg> &nbsp; Pasajero {{ i + 1 }}</h4>
-
-                                <!-- <div class="agregarAdultoPas">
-                                    <div class="textAgregar">
-                                        Agrega tus datos
-                                    </div>
-                                    <div>
-                                        <img src="./assets/comprar/flecha-der.png" alt="">
-                                    </div>
-                                </div> -->
                                 <div class="row rowMobileCard hideMobile">
                                     <div class="col-6 viewMobileWidth">
                                         <label for="names1">Nombres</label>
@@ -619,9 +611,8 @@
                                                 <input class="form-check-input sex" formControlName="sexCustomer" value="femenino" type="radio" id="sexFem{{i}}">
                                                 <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
                                             </div>
-                                            <span class="valid" *ngIf="getMessage(MSG_SEX) != MSG_EMPTY  &&  getMessageArray(i, MSG_SEX)">{{ getMessage(MSG_SEX) }}</span>
                                         </div>
-
+                                        <span class="valid" *ngIf="getMessage(MSG_SEX) != MSG_EMPTY  &&  getMessageArray(i, MSG_SEX)">{{ getMessage(MSG_SEX) }}</span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -635,18 +626,20 @@
                         </div>
                     </div>
                 </div>
+                <!-- END FORM PASAJEROS -->
 
+                <!-- CDR -->
                 <div class="row">
                     <div class="col-sm-12 col-md-6 bCard" *ngIf="safe0Json.asistencia">
-                        <div class="card border-0 bg-transparent ">
-                            <div class="card-header text-center border rounded-top bCardHead">
+                        <div class="card shadow-none border-0 bg-transparent ">
+                            <div class="card-header text-center border-0 rounded-top bCardHead">
                                 <img src="./assets/comprar/card/_assist.png" alt=""> Asistencia al viajero
                             </div>
                             <div class="card-center text-center d-flex align-items-center">
                                 <strong>$ 2.50</strong>
                                 <span>por persona/por día</span>
                             </div>
-                            <div class="card-body border bg-white rounded-bottom">
+                            <div class="card-body shadow-sm bg-white rounded-bottom">
                                 <!-- <h5 class="card-title">Special title treatment</h5> -->
                                 <ul>
                                     <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 | Resto del mundo:
@@ -665,15 +658,15 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6 bCard" *ngIf="safe0Json.reembolso">
-                        <div class="card border-0 bg-transparent">
-                            <div class="card-header text-center border rounded-top bCardHead">
+                        <div class="card shadow-none border-0 bg-transparent">
+                            <div class="card-header text-center border-0 rounded-top bCardHead">
                                 <img src="./assets/comprar/card/_protect.png" alt=""> Reembolso por emergencia
                             </div>
                             <div class="card-center text-center d-flex align-items-center">
                                 <strong>$ 60</strong>
                                 <!-- <span>por persona/por día</span> -->
                             </div>
-                            <div class="card-body border bg-white rounded-bottom">
+                            <div class="card-body shadow-sm  bg-white rounded-bottom">
                                 <!-- <h5 class="card-title">Special title treatment</h5> -->
                                 <ul>
                                     <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 | Resto del mundo:
@@ -693,7 +686,9 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
+                <!-- END CDR -->
 
+                <!-- TIPO DE PAGO -->
                 <div class="row hideViewMobile">
                     <div class="col-12 medioPagoMobile">
                         <div class="card cardPagoMobile">
@@ -704,21 +699,21 @@
                                 </span>
                             </div>
                             <div class="card-body" formGroupName="formCard">
+                                <!-- OPCIONES DE PAGO -->
                                 <div class="row card_ py-4 justify-content-evenly cardMob" *ngIf="!mobile">
-                                    <!-- <input type="radio" name="select" id="option-1" (change)="chkValue($event)" checked>
-                                        <input type="radio" name="select" id="option-2"> -->
-                                    <input *ngFor="let chk of metodoPago" formControlName="select21" value="{{ chk.value}}" type="radio" name="select21" id="{{ chk.name }}"
+                                    <input *ngFor="let chk of metodoPago" formControlName="select21" value="{{chk.value}}" type="radio" name="select21" id="{{ chk.name }}"
                                         (click)="chkValue(chk.name)" [checked]="chk.checked">
-                                    <label *ngFor="let chk of metodoPago" for="{{ chk.name }}" class="optionm {{ chk.name }} col-4 offset-1 py-3 lessMarginLeft boxMob">
+                                    <label *ngFor="let chk of metodoPago" for="{{ chk.name }}" class="optionm {{chk.name}} col-4 offset-1 py-3 lessMarginLeft boxMob">
                                         <div class="dot"></div>
                                         <img class="marginL" src="./assets{{ chk.img }}" alt="">
                                         <span>{{ chk.text }}</span>
                                     </label>
                                     <div class="clearfix"></div>
                                 </div>
+                                <!-- END OPCIONES DE PAGO -->
 
+                                <!-- FORM TARJETA -->
                                 <div class="boxCardPas" *ngIf="selectedPay === 'tarjeta'; else safety">
-                                    <!-- TARJETA -->
                                     <div class="row py-5">
                                         <div class="col-12 text-center pago">
                                             <img src="./assets/comprar/_visa.png" alt="">
@@ -732,10 +727,12 @@
                                         <div class="col-6 viewMobileWidth">
                                             <label for="names">Número de tarjeta</label>
                                             <input class="form-control" formControlName="numberCard" placeholder="Ingrese el número de tarjeta." type="text" name="names">
+                                            <span class="valid" *ngIf="getMessage(MSG_NUMBER_CARD) != MSG_EMPTY">{{ getMessage(MSG_NUMBER_CARD) }}</span>
                                         </div>
                                         <div class="col-6 viewMobileWidth">
                                             <label for="lastname">Titular de la tarjeta</label>
                                             <input class="form-control" formControlName="nameCard" placeholder="El que figura en la tarjeta." type="text" name="lastname">
+                                            <span class="valid" *ngIf="getMessage(MSG_NAME_CARD) != MSG_EMPTY">{{ getMessage(MSG_NAME_CARD) }}</span>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -745,10 +742,12 @@
                                                 <div class="col-5">
                                                     <label for="names">Vencimiento</label>
                                                     <input class="form-control" formControlName="expiredCard" placeholder="MM/AA" type="text" name="names">
+                                                    <span class="valid" *ngIf="getMessage(MSG_EXPIRED_CARD) != MSG_EMPTY">{{ getMessage(MSG_EXPIRED_CARD) }}</span>
                                                 </div>
                                                 <div class="col-6">
                                                     <label for="lastname">Código de seguridad</label>
                                                     <input class="form-control" formControlName="ccvCard" placeholder="El que figura en el documento de viaje." type="text" name="lastname">
+                                                    <span class="valid" *ngIf="getMessage(MSG_CCV_CARD) != MSG_EMPTY">{{ getMessage(MSG_CCV_CARD) }}</span>
                                                 </div>
                                                 <div class="col-1 colBoxInfo">
                                                     <div class="iconInfo toolTip">
@@ -772,11 +771,13 @@
                                                         <option value="celular">Pasaporte</option>
                                                         <option value="fijo">C. Extranjería</option>
                                                     </select>
+                                                    <span class="valid" *ngIf="getMessage(MSG_TYPE_DOC) != MSG_EMPTY">{{ getMessage(MSG_TYPE_DOC) }}</span>
                                                     <!-- <input class="form-control"  placeholder="" type="text" name="names"> -->
                                                 </div>
                                                 <div class="col-7">
                                                     <label for="lastname">N° de documento</label>
                                                     <input class="form-control" formControlName="numDoc" placeholder="Ingresar N°" type="text" name="lastname">
+                                                    <span class="valid" *ngIf="getMessage(MSG_NUM_DOC) != MSG_EMPTY">{{ getMessage(MSG_NUM_DOC) }}</span>
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </div>
@@ -803,10 +804,12 @@
                                                 <option value="2">11</option>
                                                 <option value="2">12</option>
                                             </select>
+                                            <span class="valid" *ngIf="getMessage(MSG_QUOTE) != MSG_EMPTY">{{ getMessage(MSG_QUOTE) }}</span>
                                         </div>
                                         <div class="col-6 viewMobileWidth">
                                             <label for="lastname">Ciudad de facturación</label>
                                             <input class="form-control" formControlName="cityCard" placeholder="Del titular de la tarjeta." type="text" name="lastname">
+                                            <span class="valid" *ngIf="getMessage(MSG_CITY) != MSG_EMPTY">{{ getMessage(MSG_CITY) }}</span>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -814,6 +817,7 @@
                                         <div class="col-6 viewMobileWidth">
                                             <label for="names">Dirección</label>
                                             <input class="form-control" formControlName="address" placeholder="Ingrese la dirección" type="text" name="names">
+                                            <span class="valid" *ngIf="getMessage(MSG_ADRESS) != MSG_EMPTY">{{ getMessage(MSG_ADRESS) }}</span>
                                         </div>
                                         <div class="col-6 textDire viewMobileWidth">
                                             <label for="names"></label>
@@ -821,13 +825,16 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <!-- END TARJETA -->
                                 </div>
+                                <!-- END FORM TARJETA -->
+
                                 <ng-template #safety>
                                     <!-- WEB -->
                                     <div class="col-5 offset-1 py-3 textSafMob">
-                                        <p class="textSafety">Seleccione una opción para pagar2</p>
+                                        <p class="textSafety">Seleccione una opción para pagar</p>
                                     </div>
+
+                                    <!-- OPCIONES SAFETYPAY -->
                                     <div class="row btnSafe">
                                         <div class="col-4 viewMobileWidth">
                                             <a class="btnBlue" [class.active]="id === 'banca'" value="true" (click)="optionPay($event, true, 'banca');">Banca por internet o Móvil
@@ -837,6 +844,9 @@
                                             <a class="btnBlue" value="false" [class.active]="id === 'movil'" (click)="optionPay($event, false,'movil')">Agencias/Agentes</a>
                                         </div>
                                     </div>
+                                    <!-- END OPCIONES SAFETYPAY -->
+
+                                    <!-- BANCA POR INTERNET -->
                                     <ng-container *ngIf="banca; else agencia">
                                         <div class="row boxAgencia">
                                             <div class="d-flex justify-content-center imgBanca">
@@ -877,7 +887,9 @@
                                             </div>
                                         </div>
                                     </ng-container>
+                                    <!-- END BANCA POR INTERNET -->
 
+                                    <!-- AGENCIAS/AGENTES -->
                                     <ng-template #agencia>
                                         <div class="row boxAgencia">
                                             <div class="d-flex justify-content-center imgBanca">
@@ -910,13 +922,17 @@
                                             </div>
                                         </div>
                                     </ng-template>
+                                    <!-- END AGENCIAS/AGENTES -->
                                 </ng-template>
+
                             </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
+                <!-- END TIPO DE PAGO -->
 
+                <!-- TRANSACCIÓN SEGURA -->
                 <div class="contentSecuritySeg hideViewMobile mb-sm-3">
                     <div class="rowContent vermovil">
                         <div>
@@ -932,7 +948,9 @@
                         </div>
                     </div>
                 </div>
+                <!-- END TRANSACCIÓN SEGURA -->
 
+                <!-- FORM CONTACT -->
                 <div class="row hideViewMobile">
                     <div class="col-12">
                         <div class="card">
@@ -990,8 +1008,28 @@
                                     </div>
                                     <div class="col-6 viewMobileWidth">
                                         <div class="row">
-                                            <div class="col-5">
+                                            <div class="col-5 width110">
                                                 <label for="code0">Código de país</label>
+                                                <div class="iconBandera">
+                                                    <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                        <mask id="mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="1" y="1" width="27" height="27">
+                                                            <path d="M27.5 14.1001C27.5 21.0449 21.694 26.7002 14.5 26.7002C7.30602 26.7002 1.5 21.0449 1.5 14.1001C1.5 7.15532 7.30602 1.5 14.5 1.5C21.694 1.5 27.5 7.15532 27.5 14.1001Z"
+                                                                fill="#C4C4C4" stroke="#E4E5E7" />
+                                                        </mask>
+                                                        <g mask="url(#mask0)">
+                                                            <rect x="-4.40002" y="1" width="37.8" height="26.2002" fill="url(#pattern0)" />
+                                                        </g>
+                                                        <path d="M14.5 27.4502C22.0849 27.4502 28.25 21.5268 28.25 14.2002C28.25 6.87361 22.0849 0.950195 14.5 0.950195C6.91506 0.950195 0.75 6.87361 0.75 14.2002C0.75 21.5268 6.91506 27.4502 14.5 27.4502Z"
+                                                            stroke="#E4E5E7" stroke-width="0.5" />
+                                                        <defs>
+                                                            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                                                <use xlink:href="#image0" transform="translate(-0.0198452) scale(0.0038507 0.00555556)" />
+                                                            </pattern>
+                                                            <image id="image0" width="270" height="180" xlink:href="data:image/png;base64,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"
+                                                            />
+                                                        </defs>
+                                                    </svg>
+                                                </div>
                                                 <input formControlName="code0" class="form-control" placeholder="" type="text" name="code0">
                                                 <span class="valid" *ngIf="getMessage(MSG_CODE0_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_CODE0_CONTACT) }}</span>
                                             </div>
@@ -1086,7 +1124,7 @@
                                     </div>
                                     <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) != MSG_EMPTY">{{getMessage(MSG_CHK_POLITY)}}</span>
                                 </div>
-                                <div class="col-6 viewMobileWidth text-end">
+                                <div class="col-6 viewMobileWidth tex-end">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" formControlName="chkInfo" id="chkInfo" value="option1">
                                         <label class="form-check-label" for="chkInfo">Autorizo el uso de mi Información para la Publicidad.</label>
@@ -1113,6 +1151,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- END FORM CONTACT -->
             </form>
         </div>
         <!-- END IZQUIERDA -->
@@ -1166,7 +1205,9 @@
                     </div>
                 </div>
             </div>
-            <!-- ACORDION -->
+            <!-- END ACORDION SEGUROS -->
+
+            <!-- ACORDION VUELOS -->
             <ng-template #detail>
                 <div class="accordion" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item">
@@ -1218,16 +1259,21 @@
                     </div>
                 </div>
             </ng-template>
+            <!-- END ACORDION VUELOS -->
+
             <!-- DETALLE DE COBERTURA -->
             <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
             <!-- END DETALLE DE COBERTURA -->
+
+            <!-- COBERTURA -->
             <div *ngIf="resultJson" class="order-0">
                 <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]=""
                     [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
                     [txtPasajeros]="resultJson?.ClienteCotizacion?.length +1" [plan]="safe0Json"></app-coverage>
             </div>
+            <!-- end COBERTURA -->
 
-            <!-- DETALLE DE VIAJE -->
+            <!-- DETALLE DE TU VIAJE -->
             <h2 *ngIf="safe0Json.detalleViaje" class=" mt-3">Detalle de tu viaje</h2>
             <!-- DESTINOS -->
             <div class="card" *ngIf="safe0Json.detalleViaje">
@@ -1423,7 +1469,7 @@
                     </div>
                 </div>
             </div>
-            <!-- END DETALLE DE VIAJE -->
+            <!-- END DETALLE DE TU VIAJE -->
 
             <!-- CUPON -->
             <div class="card cupon" *ngIf="safe0Json.cupon">
@@ -1436,7 +1482,9 @@
                             <div class="col-12">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" placeholder="Ingresar código de descuento">
-                                    <label class="input-group-text" for="inputGroupSelect01"><mat-icon>card_giftcard</mat-icon></label>
+                                    <label class="input-group-text" for="inputGroupSelect01">
+                                        <mat-icon>card_giftcard</mat-icon>
+                                    </label>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
@@ -1456,7 +1504,6 @@
                 </div>
             </div>
             <!-- END CUPON -->
-
 
             <!-- SLIDER -->
             <div class="boxOferta">
@@ -1495,9 +1542,14 @@
                     <span>8.2 de 10</span>
                 </div>
             </div>
+            <!-- END SLIDER -->
+
+            <!-- MÁS OFERTAS -->
             <div class="d-flex justify-content-center py-3">
                 <button class="btnVerMas">Ver más ofertas</button>
             </div>
+            <!-- END MÁS OFERTAS -->
+
         </div>
         <!-- END DERECHA -->
         <div class="clearfix"></div>
@@ -1668,7 +1720,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Modal Coverage -->
 <div class="modal fade" id="ModalCoverageI" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

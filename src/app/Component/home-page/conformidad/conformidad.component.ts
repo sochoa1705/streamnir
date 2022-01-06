@@ -9,6 +9,8 @@ import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { RegistrarSeguroRQ } from 'src/app/Models/seguros/registroRQ.interface';
 import { SafetyPayRQ } from 'src/app/Models/seguros/safetypayRQ.interface';
 import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interface';
+import { UpdatePayService } from 'src/app/Services/updatePay/update-pay.service';
+import { StatePayService } from 'src/app/Services/statePay/state-pay.service';
 
 @Component({
   selector: 'app-conformidad',
@@ -37,29 +39,34 @@ export class ConformidadComponent implements OnInit {
   ipCliente: any
   shopString: any
   unidadNegocio: any
+  typePay: string
 
   constructor(
     public route: Router,
     public secureBookingService: SecureBookingService,
     public loaderSubjectService: LoaderSubjectService,
     public generatePayService: GeneratePayService,
+    public updatePayService: UpdatePayService,
+    public statePayService: StatePayService,
   ) {
-    //shopdata
+    // shopdata
     this.shopData = localStorage.getItem('shop')
     this.shopString = JSON.parse(this.shopData)
-    //plan
+    // plan
     this.safe0 = localStorage.getItem('safe0')
     this.safe0Json = JSON.parse(this.safe0)
     this.result = localStorage.getItem('Datasafe')
     this.resultJson = JSON.parse(this.result)
-    //COBERTURA
+    // COBERTURA
     this.coverageList = localStorage.getItem('coverage')
     this.coverage = JSON.parse(this.coverageList)
-    //TIPO DE CAMBIO
+    // TIPO DE CAMBIO
     this.cambio = localStorage.getItem('tipoCambio')
     this.tipodeCambio = JSON.parse(this.cambio)
-    //IP DEL CLIENTE
+    // IP DEL CLIENTE
     this.ipCliente = localStorage.getItem('ipCliente')
+    // TIPO DE PAGO
+    this.typePay = this.shopString.formCard.select21
   }
 
   ngOnInit(): void {
@@ -160,7 +167,7 @@ export class ConformidadComponent implements OnInit {
       contacto_nom: this.shopString.formContact.nameContacto,           // NOMBRE DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_ape: this.shopString.formContact.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_email: this.shopString.formContact.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_direccion: '',                                           // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
+      contacto_direccion: (this.shopString.formContact.chkFac) ? this.shopString.formContact.recibo[0].direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
       contacto_telfs: this.shopString.formContact.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
       contacto_emerg_nom: this.shopString.formContact.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_ape: this.shopString.formContact.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
@@ -239,7 +246,7 @@ export class ConformidadComponent implements OnInit {
       xPagarSafetyPay: 0,
       idTipoTarifa: 0,
       idReciboSafetyPay: 0
-    };
+    }
 
     let payload = new NMRequestBy<RegistrarSeguroRQ>(lregistro);
 
@@ -270,11 +277,11 @@ export class ConformidadComponent implements OnInit {
         Currency: 'USD'
       }
     }
-    let payload = new NMRequestBy<GenerarSafetyPayRQ>(lsafetypay);
+    let payload = new NMRequestBy<GenerarSafetyPayRQ>(lsafetypay)
     this.generatePayService.generatePay(payload).subscribe({
       next: (response) => {
         this.listBank = response
-          this.timeShop(this.listBank['ExpirationDateTime'])
+        this.timeShop(this.listBank['ExpirationDateTime'])
         this.bankSteps = this.listBank.PaymentLocations.filter((e: any) => {
           let namco = this.shopString.formCard.bankPay
           if (namco === e.ID) {
@@ -292,9 +299,14 @@ export class ConformidadComponent implements OnInit {
           fee_safetypay: 0
         }
 
-        let payloadupdate = new NMRequestBy<SafetyPayRQ>(lactualizar);
+        let payloadupdate = new NMRequestBy<SafetyPayRQ>(lactualizar)
 
         //>>>> EJECUTAR SERVICIO EN CASO SE HAYA GENERADO CORRECTAMENTE LOS DATOS DE PAGO DE SAFETYPAY
+        // this.updatePayService.updatePay(payloadupdate).subscribe({
+        //   next: _ => {
+        //     console.log('Update SafetyPay');
+        //   }
+        // })
       }
       ,
       error: error => {
@@ -308,7 +320,15 @@ export class ConformidadComponent implements OnInit {
           estado: 7
         }
 
-        let payloadanular = new NMRequestBy<CambiarEstadoRQ>(lanular);
+        let payloadanular = new NMRequestBy<CambiarEstadoRQ>(lanular)
+
+        // this.statePayService.updateState(payloadanular).subscribe({
+        //   next: _ => {
+        //     console.log('Actualizar Estado');
+        //   }
+        // })
+
+        // si ocurre un error
         this.route.navigateByUrl('/home/seguros');
       }
     })

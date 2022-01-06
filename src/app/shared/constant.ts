@@ -1,13 +1,10 @@
 export const Path = {
   Core: 'Core/'
-
 };
-
 
 export const Core = {
   GetUserId: 'GetUserId',
 };
-
 
 export const LogoutType = {
   cognito: 1,
@@ -43,8 +40,13 @@ export enum ENDPOINT_API {
   // GENERATEPAY
   GENERATE_PAY = 'GenerarPagoSafetyPay',
 
-  //LOCATIONSEARCH
+  // UPDATESAFETYPAY
+  UPDATE_PAY = 'ActualizarSafetyPayReservaSeguro',
 
+  // UPDATESAFETYPAY
+  UPDATE_STATE = 'ActualizarEstadoReservaSeguro',
+
+  //LOCATIONSEARCH
   LOCATION_SEARCH = 'jsonp/locationSearch'
 
 }
