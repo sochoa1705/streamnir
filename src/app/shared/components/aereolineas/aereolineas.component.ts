@@ -23,12 +23,12 @@ export class AereolineasComponent {
   public maxCounterMobile= 1;
 
   public imagenesPorSilder= 6;
-  public imagenesPorSilderMobile= 6;
+  public imagenesPorSilderMobile= 3;
 
   maxCounterArray:number[]= [];
   maxCounterArrayMobile:number[]= [];
 
-  tiempoSlider:number | null = 4000;
+  tiempoSlider:number | null;
 
   isMobile = isMobile();
 
@@ -49,7 +49,6 @@ export class AereolineasComponent {
 
   calculateSlider(aereolineas: IAereolineas[]) {
     const nroData = aereolineas.length;
-        
     this.maxCounter = Math.ceil(nroData/this.imagenesPorSilder);
     this.maxCounterMobile = Math.ceil(nroData/this.imagenesPorSilderMobile);
 
