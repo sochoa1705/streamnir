@@ -46,9 +46,19 @@ export function CloseSession(): void {
   return fixture.debugElement.query(By.css(selector));
 }
 
+export class NmvModel{
 
-export const paramsNmv = new HttpParams().
-        set('TrackingCode', Guid()).
-        set('MuteExceptions', environment.muteExceptions).
-        set('Caller.Company', 'Agil').
-        set('Caller.Application','Interagencias')
+  public params:HttpParams;
+
+  constructor(){
+    this.setParams();
+  }
+
+  setParams(){
+    this.params = new HttpParams().
+    set('TrackingCode', Guid()).
+    set('MuteExceptions', environment.muteExceptions).
+    set('Caller.Company', 'Agil').
+    set('Caller.Application','Interagencias')
+  }
+}
