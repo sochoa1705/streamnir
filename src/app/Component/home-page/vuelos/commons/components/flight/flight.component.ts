@@ -97,7 +97,11 @@ export class FlightComponent implements OnInit {
     redirigirVuelo(vuelo:IVuelos){
         console.log(vuelo);
     }
+    
 
+    toDestiny(vuelo: IFlightRates){
+      this.route.navigate(['/home/vuelos/destinos',vuelo.DestinationCode])
+    }
 
   /* end code */
 
