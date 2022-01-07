@@ -166,19 +166,22 @@
 //     transform: rotate(180deg);
 //     background: url(../../../../assets/arrow.svg) no-repeat center center;
 // }
-.form-check-input[type="checkbox"] {
-    border-radius: 0px !important;
-    width: 1.5em !important;
-    height: 1.5em !important;
-    margin-top: 0;
+.form-check{
+    margin-right: 22px;
+    &-input[type="checkbox"] {
+        border-radius: 0px !important;
+        width: 1.5em !important;
+        height: 1.5em !important;
+        margin-top: 0;
+    }
+    
+    &-input[type="radio"] {
+        border-radius: 50%;
+        width: 1.3em !important;
+        height: 1.3em !important;
+    }
 }
-
-.form-check-input[type="radio"] {
-    border-radius: 50%;
-    width: 1.3em !important;
-    height: 1.3em !important;
-}
-
+    
 //OMAC****************************************//
 .nav-pills {
     border-radius: 5px;

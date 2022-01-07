@@ -11,6 +11,8 @@ import { VuelosComponent } from './vuelos/vuelos.component';
 import { AerolineasComponent } from './aerolineas/aerolineas.component';
 import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
 import { DocumentacionViajeComponent } from './documentacion-viaje/documentacion-viaje.component';
+import { NuestraEmpresaComponent } from './nuestra-empresa/nuestra-empresa.component';
+import { NuestrasAgenciasComponent } from './nuestras-agencias/nuestras-agencias.component';
 
 const routes: Routes = [
   {
@@ -39,6 +41,9 @@ const routes: Routes = [
           m => m.VuelosModule
         )
       },
+      { path: 'nuestra-empresa', component: NuestraEmpresaComponent },
+      { path: 'nuestras-agencias', component: NuestrasAgenciasComponent },
+
     ]
   }
 ];

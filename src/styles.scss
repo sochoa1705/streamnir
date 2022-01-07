@@ -6192,3 +6192,52 @@ input.inputDer,
         background: #e0e0e0;
     }
 }
+
+// Banner de home, seguros & empresa
+.contentImg{
+    top: 0;
+    position: absolute;
+    max-width: 100%;
+    width: 100%;
+    // border-radius: 0px 0px 20px 20px;
+    overflow: hidden;
+    & img {
+        position: absolute;
+        object-fit: cover;
+        -o-object-position: top;
+        object-position: top;
+        height: 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+}
+.h659{
+    height: 659px !important;
+}
+.banner {
+    width: 100%;
+    height: 540px;
+    padding: 0 !important;
+    position: relative;
+    overflow: inherit;
+    display: flex;
+    align-items: flex-end;
+    &>.content {
+        @extend .contentImg;
+        height: 440px;
+        border-radius: 0px 0px 20px 20px;
+    }
+    &>.contentEmpresa{
+        @extend .contentImg;
+        height: 659px;
+    }
+}
+
+.text{
+    &-white{
+        color: white;
+    }
+    &-justify{
+        text-align: justify;
+    }
+}
