@@ -163,12 +163,12 @@ export class DataPagePresenterService {
           {
             id: 0,
             text: "Nuestra Empresa NM Viajes",
-            link: "#"
+            link: "/home/nuestra-empresa"
           },
           {
             id: 1,
             text: "Nuestras Agencias NM Viajes",
-            link: "#"
+            link: "/home/nuestras-agencias/"
           },
           {
             id: 2,
