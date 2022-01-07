@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { ResponseModelT } from 'src/app/shared/models';
-import { paramsNmv } from 'src/app/shared/utils';
+import { NmvModel } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 import { IDestinos } from '../destino.models';
 
@@ -13,8 +13,10 @@ export class DestinosService {
 
 
   getVuelos(codeDestination:string,codeOrigin:string='LIM',type:string='A'){
+    const nmvModel = new NmvModel()
+
     const options = {
-      params: paramsNmv
+      params: nmvModel.params
               .set('Parameter.CodeDestination', codeDestination)
               .set('Parameter.CodeOrigin', codeOrigin)
               .set('Parameter.Type', type)

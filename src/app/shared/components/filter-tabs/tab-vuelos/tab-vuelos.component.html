@@ -1,0 +1,56 @@
+<div class="boxTab">
+    
+    <form class="bg-white" [formGroup]="form">
+        <div class="rowBoxTab">
+            <div class="padRight">
+                <mat-form-field>
+                    <mat-select formControlName="clase" disableOptionCentering>
+                        <mat-option value="economy">Economy</mat-option>
+                        <mat-option value="business">Business</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="padRight">
+                <app-pop-up-pasajero #popUp (emitDistribution)="distribution = $event"></app-pop-up-pasajero>
+            </div>
+        </div>
+
+
+        <div class="rowBoxTab">
+            <div class="colBoxtab">
+                <input matInput aria-label="State" [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event)"
+                    class="form-control animated fadeIn" placeholder="Origen">
+                <mat-autocomplete #auto1="matAutocomplete">
+                    <mat-option *ngFor="let state of citysOrigenSelect" [value]="state.label">
+                        <img class="example-option-img" aria-hidden src="./assets/origen.png">
+                        <span>{{state.label}}</span>
+                        <!-- <small>Population: {{state.population}}</small> -->
+                    </mat-option>
+                </mat-autocomplete>
+                <!-- <input class="form-control" type="text" placeholder="Origen"> -->
+            </div>
+            <div class="colBoxtab">
+                <input matInput aria-label="State2"  [matAutocomplete]="auto2" formControlName="destino" (keyup)="autoComplete($event)"
+                    class="form-control" placeholder="Destino">
+                <mat-autocomplete #auto2="matAutocomplete">
+                    <mat-option *ngFor="let state of citysDestinosSelect" [value]="state.label">
+                        <img class="example-option-img" aria-hidden src="./assets/origen.png">
+                        <span>{{state.label}}</span>
+                        <!-- <small>Population: {{state.population}}</small> -->
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+
+            <app-calendar class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
+
+
+            <div class="colBoxtab">
+                <button class="fullWidht" type="button" (click)="searchVueloHotel()">Buscar</button>
+            </div>
+        </div>
+        <div class="rowBoxTab right text">Haciendo click en "Buscar", acepto las Condiciones Generales</div>
+        <span class="valid" *ngIf="false">Debe seleccionar la cantidad de pasajeros</span>
+    </form>
+
+
+</div>
