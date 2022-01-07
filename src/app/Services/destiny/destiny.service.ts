@@ -37,4 +37,10 @@ export class DestinyService {
     return this.http.jsonp(urlApi, 'callback=test');
   }
 
+  getGeoTree(query:string){
+    const url = environment.urlGeo + `/GeoTree/${query}`;
+    return this.http.get<any[]>(url);
+  }
+  
+
 }
