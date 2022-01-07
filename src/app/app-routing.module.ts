@@ -3,15 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   // { path: 'login',    component: LoginComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'home',
     loadChildren: () =>
-    import('./Component/home-page/home-page.module').then(
-      (m) => m.HomePageModule
-    )
+      import('./Component/home-page/home-page.module').then(
+        (m) => m.HomePageModule
+      )
   },
-  
 ];
 
 @NgModule({
