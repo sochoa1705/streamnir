@@ -23,4 +23,18 @@ export class AerolineasService {
       .get<ResponseModelT<IAerolineaInf>>(url, options)
       .pipe(map((resp) => resp.Result));
   }
+
+  getVuelos(codAerolinea: string, parametro:string) {
+    const nmvModel = new NmvModel();
+
+    const options = {
+      params: nmvModel.params.set('Parameter.IataCode', codAerolinea),
+    };
+
+    const url = environment.urlNmviajes + '/Airline/IataCode';
+
+    return this.httpClient
+      .get<ResponseModelT<IAerolineaInf>>(url, options)
+      .pipe(map((resp) => resp.Result));
+  }
 }

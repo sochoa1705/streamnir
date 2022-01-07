@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TabHotelComponent } from './tab-hotel/tab-hotel.component';
 import { TabActividadesComponent } from './tab-actividades/tab-actividades.component';
 import { CalendarModule } from '../calendar/calendar.module';
+import { TabVuelosComponent } from './tab-vuelos/tab-vuelos.component';
 
 
 
@@ -19,7 +20,8 @@ import { CalendarModule } from '../calendar/calendar.module';
   declarations: [
     TabVueloHotelComponent,
     TabHotelComponent,
-    TabActividadesComponent
+    TabActividadesComponent,
+    TabVuelosComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { CalendarModule } from '../calendar/calendar.module';
   exports:[
     TabVueloHotelComponent,
     TabHotelComponent,
-    TabActividadesComponent
+    TabActividadesComponent,
+    TabVuelosComponent
   ]
 })
 export class FilterTabsModule { }
