@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
@@ -31,7 +32,7 @@ export class TabVuelosComponent {
 
 
   constructor(private calendar: NgbCalendar,private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar, private router:Router
     ) {
     this.createForm();
   }
@@ -46,6 +47,7 @@ export class TabVuelosComponent {
   createForm() {
     this.form = new FormGroup({
       clase: new FormControl('economy'),
+      viajes: new FormControl('ida_vuelta'),
       origen: new FormControl(),
       destino: new FormControl(''),
       origenHotel: new FormControl(''),
@@ -53,8 +55,8 @@ export class TabVuelosComponent {
     });
   }
 
-  navigateToResponseUrl(url: string): void {
-    window.location.href = url;
+  navigateToResponseUrl(id: string): void {
+    this.router.navigateByUrl('/home/vuelos/resultados');
  }
 
 
@@ -63,8 +65,10 @@ export class TabVuelosComponent {
       this.openSnackBar("Error de validacion")
       return ;
     }
-    const url = this.getUrlVueloHotel();
-    this.navigateToResponseUrl(url);
+
+    
+    // const url = this.getUrlVueloHotel();
+    this.navigateToResponseUrl('id');
   }
 
   getParamsVueloHotel() {
@@ -79,9 +83,9 @@ export class TabVuelosComponent {
   }
   public getUrlVueloHotel(): string {
     let url = ''
-    let params = this.getParamsVueloHotel();
-    url = new URLVueloHotel(params, this.distribution).getUrl();
-    return url;
+    // let params = this.getParamsVueloHotel();
+    // url = new URLVueloHotel(params, this.distribution).getUrl();
+    return 'url';
   }
 
   autoComplete(e: any) {
