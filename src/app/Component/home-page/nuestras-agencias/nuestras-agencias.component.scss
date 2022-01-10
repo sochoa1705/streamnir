@@ -1,0 +1,62 @@
+img{
+    width: 100%
+}
+
+.flotante{
+    position: absolute;
+    width: 510px;
+    height: auto;
+    background: #FFFFFF;
+    border-radius: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.map{
+    background: lightblue;
+    height: 792px;
+    position: relative;
+    .direccion{
+        @extend .flotante;
+        top:310px;
+        left: 100px;
+    }
+    .buscador{
+        @extend .flotante;
+        top:100px;
+        left: 100px;
+        .mat-div{
+            margin:auto
+        }
+        input{
+            width: calc(100% - 26px);
+            background: white;
+            border:0;
+            &:focus-visible{
+                outline: 0;
+            }
+        }
+    }
+}
+
+ul li{
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: justify;
+    letter-spacing: 0.1px;
+    color: #4B4B4B;
+    margin-bottom: 24px;
+}
+// ul {
+//     list-style: none;
+//   }
+//   ul li::before {
+//     content: "\2022";
+//     color: red;
+//     font-weight: bold;
+//     display: inline-block; 
+//     width: 1em;
+//     margin-left: -1em;
+//   }
