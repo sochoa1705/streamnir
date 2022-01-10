@@ -4,6 +4,15 @@
         <div class="rowBoxTab">
             <div class="padRight">
                 <mat-form-field>
+                    <mat-select formControlName="viajes" disableOptionCentering>
+                        <mat-option value="ida_vuelta">Ida y Vuelta</mat-option>
+                        <mat-option value="ida">Solo Ida</mat-option>
+                        <mat-option value="multy">Multi City</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="padRight">
+                <mat-form-field>
                     <mat-select formControlName="clase" disableOptionCentering>
                         <mat-option value="economy">Economy</mat-option>
                         <mat-option value="business">Business</mat-option>
@@ -11,7 +20,7 @@
                 </mat-form-field>
             </div>
             <div class="padRight">
-                <app-pop-up-pasajero #popUp (emitDistribution)="distribution = $event"></app-pop-up-pasajero>
+                <app-pop-up-pasajero #popUp [onlyPasajeros]="true" (emitDistribution)="distribution = $event"></app-pop-up-pasajero>
             </div>
         </div>
 
