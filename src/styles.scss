@@ -3644,6 +3644,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .red {
         color: #DF0C30;
     }
+    &.red {
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 36px;
+        color: #DF0C30;
+        margin-bottom: 20px;
+    }
 }
 
 .comprarHideTitle {
@@ -6239,5 +6246,27 @@ input.inputDer,
     }
     &-justify{
         text-align: justify;
+    }
+}
+
+.btn{
+    &-agencias{
+        border:1px solid #E4E5E7;
+        background: white;
+        color:#4B4B4B;
+        border-radius: 10px;
+        letter-spacing: 0.15px;
+        font-family: Open Sans;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 21px;
+        &:hover{
+            background: #E4E5E7;
+        }
+        &.activa{
+            border:1px solid #DF0C30;
+            background: #DF0C30;
+            color: white;
+        }
     }
 }

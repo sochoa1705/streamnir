@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { PackagesService } from 'src/app/Services/mock/packages.service';
 import { AsidePresenterService } from 'src/app/Services/presenter/aside/aside-presenter.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
-import { GoogleMapsModule } from '@angular/google-maps'
 import { FlightsService } from 'src/app/Services/flights/flights.service';
 import { SegurosModule } from './seguros/seguros.module';
 import { PerfilModule } from './perfil/perfil.module';
@@ -25,6 +24,8 @@ import { DollarChangeService } from '../../Services/dollarChange/dollar-change.s
 import { IpClienteService } from '../../Services/ipCliente/ip-cliente.service';
 import { TerminosCondicionesModule } from './terminos-condiciones/terminos-condiciones.module';
 import { DocumentacionViajeModule } from './documentacion-viaje/documentacion-viaje.module';
+import { NuestrasAgenciasModule } from './nuestras-agencias/nuestras-agencias.module';
+import { NuestraEmpresaModule } from './nuestra-empresa/nuestra-empresa.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -42,11 +43,12 @@ import { DocumentacionViajeModule } from './documentacion-viaje/documentacion-vi
     ToolbarModule,
     PreFooterModule,
     FooterModule,
-    GoogleMapsModule,
     ComprarModule,
     ConformidadModule,
     ResultadosModule,
     LoaderModule,
+    NuestrasAgenciasModule,
+    NuestraEmpresaModule,
   ],
   exports: [HomePageComponent],
   providers: [IpClienteService, DollarChangeService, OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
