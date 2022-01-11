@@ -1,6 +1,9 @@
 img{
     width: 100%
 }
+.mat-icon{
+    margin-right: 10px;
+}
 
 .flotante{
     position: absolute;
@@ -10,34 +13,38 @@ img{
     border-radius: 5px;
     padding-top: 20px;
     padding-bottom: 20px;
+    z-index:1;
 }
 
-.map{
-    background: lightblue;
-    height: 792px;
-    position: relative;
-    .direccion{
-        @extend .flotante;
-        top:310px;
-        left: 100px;
-    }
-    .buscador{
-        @extend .flotante;
-        top:100px;
-        left: 100px;
-        .mat-div{
-            margin:auto
-        }
-        input{
-            width: calc(100% - 26px);
-            background: white;
-            border:0;
-            &:focus-visible{
-                outline: 0;
-            }
+.direccion{
+    @extend .flotante;
+    top:260px;
+    left: 100px;
+    padding: 10px 20px;
+    .row{
+        margin: 10px 0;
+        span{
+            display: block;
         }
     }
 }
+.buscador{
+    @extend .flotante;
+    top:100px;
+    left: 100px;
+    .mat-div{
+        margin:auto
+    }
+    input{
+        width: calc(100% - 26px);
+        background: white;
+        border:0;
+        &:focus-visible{
+            outline: 0;
+        }
+    }
+}
+
 
 ul li{
     font-family: Montserrat;
