@@ -6218,8 +6218,76 @@ input.inputDer,
         width: 100%;
     }
 }
+// Banner nuestra empresa
+.capital{
+    font-family: Open Sans;
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: -0.5px;
+    color: #4B4B4B;
+    line-height: 54px;
+    @media (max-width: 768px) {
+        font-size: 32px;
+        line-height: 32px;
+    }
+    .raya{
+        background: #F29704;
+        height: 2px;
+        width: 43px;
+        margin-bottom: 10px;
+        @media (max-width: 768px) {
+            margin-top: 10px !important;
+            margin-bottom: 10px !important;
+        }
+    }
+    &::first-letter{
+        color:red!important;
+        text-indent: 50px;
+    }
+    span{
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        color: #4B4B4B;
+        line-height: 16px;
+        @media (max-width: 768px) {
+            font-size: 10px;
+            line-height: 10px;
+        }
+    }
+    .f-12{
+        font-size:12px;
+        line-height: 20px;
+    }
+}
+$icon-size: 56px;
+$icon-size-mobile: 28px;
+.mat-icon.icon{
+    font-size: $icon-size;
+    width: $icon-size;
+    height: $icon-size;
+    display: block;
+    margin: 20px;
+    //margin-right: 20px;
+    @media (max-width: 768px) {
+        margin-right: 20px;
+        font-size: $icon-size-mobile;
+        width: $icon-size-mobile;
+        height: $icon-size-mobile;
+        display: block;
+        margin-left: 0px;
+        margin-top: 10px;
+    }
+    &+div{
+        @extend .capital;
+    }
+}
 .h659{
     height: 659px !important;
+    @media (max-width: 768px) {
+        height: 165px !important;
+    }
 }
 .banner {
     width: 100%;
@@ -6237,6 +6305,24 @@ input.inputDer,
     &>.contentEmpresa{
         @extend .contentImg;
         height: 659px;
+    }
+}
+.video-responsive{
+    margin-top: 260px;
+}
+.bg-img{
+    @media (max-width: 768px) {
+        padding-bottom:150px;
+    }
+}
+.img-responsive{
+    @media (max-width: 768px) {
+        width: 93% !important;
+        padding: 0;
+        padding-top: 30px;
+        // width: 100% !important;
+        // position: relative!important;
+        // padding: 0 15px;
     }
 }
 
