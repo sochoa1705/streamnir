@@ -27,4 +27,8 @@ export class FooterComponent  {
   showConocenos() {
     this.showMenuConocenos = this.showMenuConocenos ? false : true;
   }
+
+  to(e: any){
+    window.location.href = e;
+  }
 }

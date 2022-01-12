@@ -49,8 +49,9 @@
                     <img class="iconFlecha" src="./assets/footer/flecha.png" alt="">
                 </h3>
                 <ul class="showDesktop" [class.activoMnu]="!showMenuProd">
-                    <li *ngFor="let option of list1">
-                        <a routerLink="{{ option.link }}">{{ option.text }}</a>
+                    <li *ngFor="let option of list1" [ngClass]="option.header ? 'd-none' : ''">
+                        <a *ngIf="!option.external && !option.header" routerLink="{{ option.link }}">{{ option.text }}</a>
+                        <a *ngIf="option.external && !option.header" (click)="to(option.link)">{{ option.text }}</a>
                     </li>
                 </ul>
             </div>

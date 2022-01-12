@@ -119,7 +119,8 @@ export class DataPagePresenterService {
           {
             id: 0,
             text: "Paquetes",
-            link: "paquetes"
+            link: "https://nmviajes.paquetedinamico.com/ES/holidays/search",
+            external: true
           },
           {
 
@@ -131,7 +132,8 @@ export class DataPagePresenterService {
 
             id: 2,
             text: "Vuelos + Hotel",
-            link: "#"
+            link: "#",
+            tab: 2
           },
           {
 
