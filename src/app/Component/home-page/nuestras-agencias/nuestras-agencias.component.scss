@@ -4,7 +4,6 @@ img{
 .mat-icon{
     margin-right: 10px;
 }
-
 .flotante{
     position: absolute;
     width: 510px;
@@ -14,8 +13,16 @@ img{
     padding-top: 20px;
     padding-bottom: 20px;
     z-index:1;
+    @media (max-width: 768px) {
+        width: 95%;
+        left: 3%!important;
+    }
 }
-
+h2.titleHome{
+    @media (max-width: 768px) {
+        font-size: 18px!important
+    }
+}
 .direccion{
     @extend .flotante;
     top:260px;
@@ -25,6 +32,9 @@ img{
         margin: 10px 0;
         span{
             display: block;
+            @media (max-width: 768px) {
+                font-size: 16px!important
+            }
         }
     }
 }
@@ -44,8 +54,6 @@ img{
         }
     }
 }
-
-
 ul li{
     font-family: Montserrat;
     font-weight: 500;

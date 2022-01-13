@@ -180,7 +180,7 @@ export class DataPagePresenterService {
           {
             id: 3,
             text: "Responsabilidad Social Corporativa",
-            link: "#"
+            link: "https://www.nmviajes.com/resources/pdf/RSC_Nuevo_Mundo_Viajes.pdf"
           },
           {
             id: 4,
@@ -197,7 +197,7 @@ export class DataPagePresenterService {
         span: "Agencias de Viajes en Lima Perú",
         addrees: "Av. José Pardo 801 Miraflores - Lima 18, Perú.",
         libro: "Libro de reclamaciones",
-        linkLibro: "#"
+        linkLibro: "/home/libro-reclamaciones"
       }
     ],
     string: "Hello World"
