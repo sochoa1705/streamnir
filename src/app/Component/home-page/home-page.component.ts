@@ -59,7 +59,6 @@ export class HomePageComponent implements OnInit {
       }
     })
   }
-
   getBusinessUnit() {
     if (localStorage.getItem('businessunit') === null) {
       let payload = new NMRequest();
@@ -74,7 +73,6 @@ export class HomePageComponent implements OnInit {
       )
     }
   }
-
   getIpCliente() {
     this.ipClienteService.ipCliente().subscribe((res: any) => {
       this.ipAddress = res.ip;

@@ -11,9 +11,7 @@ export class ToolbarComponent implements OnInit {
   constructor(
     public route: Router,
   ) { }
-  ngOnInit() {
-    console.log(this.menu)
-  }
+  ngOnInit() { }
   toHome() {
     this.route.navigateByUrl('/')
   }
