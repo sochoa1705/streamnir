@@ -1,27 +1,23 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError, map, retry } from 'rxjs/operators';
+import { catchError, map, pluck, retry, switchMap } from 'rxjs/operators';
 import { ListaTarifaRequest } from 'src/app/Models/Request/ListaTarifasRequest';
 import { ENDPOINT_API } from 'src/app/shared/constant';
 import { environment } from 'src/environments/environment';
 
-
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DestinyService {
   //private httpOptions: any;
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   getDestiny(payload: any): Observable<any> {
     let url_api = `${environment.urlBase}${ENDPOINT_API.DESTINY}`;
-    return this.http.post<any>(url_api, payload, { observe: 'response' }).pipe(
-      map((observe: any) => observe['body'])
-    )
+    return this.http
+      .post<any>(url_api, payload, { observe: 'response' })
+      .pipe(map((observe: any) => observe['body']));
   }
 
   ObtenerOfertaVuelos(payload: any): Observable<any> {
@@ -30,17 +26,17 @@ export class DestinyService {
     return this.http.post<any>(url_api, payload);
   }
 
-
-  getDestinyPaqueteDinamico(search: string, typeSearch: string): Observable<any> {
+  getDestinyPaqueteDinamico(
+    search: string,
+    typeSearch: string
+  ): Observable<any> {
     let urlApiPaquete: string = environment.urlPaqueteDinamico;
     let urlApi = `${urlApiPaquete}${ENDPOINT_API.LOCATION_SEARCH}?tripType=${typeSearch}&query=${search}&micrositeId=nm_viajes&languageId=ES&departure=&specialTicket=false&searchType=origin&_=1636554156303`;
     return this.http.jsonp(urlApi, 'callback=test');
   }
 
-  getGeoTree(query:string){
-    const url = environment.urlGeo + `/GeoTree/${query}`;
+  getGeoTree(query: string) {
+    const url = environment.urlGeo + `/ubigeo/geotree/${query}`;
     return this.http.get<any[]>(url);
   }
-  
-
 }

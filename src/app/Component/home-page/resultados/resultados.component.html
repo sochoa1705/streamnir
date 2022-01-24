@@ -435,11 +435,15 @@
 
 <div class="pb-4 bg-white hideMov">
     <app-filter></app-filter>
+    <!-- <app-tabs></app-tabs> -->
 </div>
+
+<!-- TODO AQUI EMPIEZA CONTENDIO -->
+
 <div class="container-fluid px-sm-3">
     <div class="row pt-4 hideMov">
         <div class="col-sm-12 col-md-12 col-lg-12">
-            <span class="moneda">
+            <span class="moneda"> 
                 <strong>Moneda</strong> Tipo de cambio: S/ 3.93</span>
         </div>
         <div class="clearfix"></div>
@@ -861,10 +865,10 @@
                     </ul>
                 </div>
             </div> -->
-            <div class="row">
+            <div class="row" *ngIf="flights">
                 <div class="col-sm-12 col-md-12 col-lg-12 pt-3">
                     <!-- <app-flights *ngFor="let i of [1,2,3,4]"></app-flights> -->
-                    <app-flights *ngFor="let i of [1]"></app-flights>
+                    <app-flights [flights]="flights" *ngFor="let i of [1]"></app-flights>
                 </div>
                 <div class="clearfix"></div>
             </div>

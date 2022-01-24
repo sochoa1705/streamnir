@@ -5,6 +5,13 @@ import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { Guid } from '../../utils';
 import { PasajerosConHabitacion, PasajerosSinHabitacion } from '../tabs/tabs.models';
 
+export interface IDistributionObject{
+  habitacion:number,
+  adultos:number,
+  ninos:number,
+  infantes:number,
+}
+
 @Component({
   selector: 'app-pop-up-pasajero',
   templateUrl: './pop-up-pasajero.component.html',
@@ -40,6 +47,8 @@ export class PopUpPasajeroComponent implements OnInit{
 
   @Output() emitDistribution= new EventEmitter<string>();
 
+  @Output() emitDistributionObject= new EventEmitter<IDistributionObject>();
+
   constructor(private popupService:PopupService) {
     this.idContent = `popup_${Guid()}`;
   }
@@ -53,7 +62,17 @@ export class PopUpPasajeroComponent implements OnInit{
 
       if(!state.open){
         const distribution = this.getDistributionUrl(popUpPasajeroModel);
-        this.emitDistribution.emit(distribution);
+        
+          this.emitDistributionObject.emit(
+            {
+              habitacion:this.habitacion,
+              adultos:this.adultos,
+              ninos:this.ninos,
+              infantes:this.infantes
+            }
+          );
+
+          this.emitDistribution.emit(distribution);
       }
     }) 
     

@@ -6,6 +6,8 @@ import { FlightsModule } from 'src/app/shared/components/flights/flights.module'
 import { FilterModule } from 'src/app/shared/components/filter/filter.module';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { FormsModule } from '@angular/forms';
+import { ResultadosService } from './services/resultados.service';
+import { TabsModule } from 'src/app/shared/components/tabs/tabs.module';
 
 @NgModule({
   declarations: [ ResultadosComponent ],
@@ -16,8 +18,10 @@ import { FormsModule } from '@angular/forms';
     FilterModule,
     MaterialModule,
     FormsModule,
+    TabsModule
   ],
   exports: [ ResultadosComponent ],
+  providers:[ResultadosService]
 
 })
 export class ResultadosModule { }

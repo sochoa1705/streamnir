@@ -5,8 +5,9 @@ import { Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
-import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
-import { ParamsVueloHotel, URLVueloHotel } from '../../tabs/tabs.models';
+import { EnumCabins, EnumFlightType } from '../../flights/models/flights.interface';
+import { IDistributionObject, PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
+import { ParamsVueloHotel, ParamsVuelos, URLVueloHotel, URLVuelos } from '../../tabs/tabs.models';
 
 @Component({
   selector: 'app-tab-vuelos',
@@ -27,14 +28,22 @@ export class TabVuelosComponent {
   origenHotel: any;
   toDate: NgbDate | null;
 
-  distribution = '';
+  distributionObject:IDistributionObject;
   hoveredDate: NgbDate | null = null;
+
+  EnumFlightType = EnumFlightType;
+  EnumCabins = EnumCabins;
 
 
   constructor(private calendar: NgbCalendar,private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar, private router:Router
     ) {
     this.createForm();
+
+
+  //  const data = this.destineService.searchMv();
+  //  console.log(data);
+
   }
 
   openSnackBar(message: string, action: string = "Error") {
@@ -46,17 +55,17 @@ export class TabVuelosComponent {
 
   createForm() {
     this.form = new FormGroup({
-      clase: new FormControl('economy'),
-      viajes: new FormControl('ida_vuelta'),
+      clase: new FormControl(EnumCabins.economico),
+      viajes: new FormControl(EnumFlightType.ida_vuelta),
       origen: new FormControl(),
       destino: new FormControl(''),
-      origenHotel: new FormControl(''),
+      origenHotel: new FormControl('')
 
     });
   }
 
-  navigateToResponseUrl(id: string): void {
-    this.router.navigateByUrl('/home/vuelos/resultados');
+  navigateToResponseUrl(url: string): void {
+    this.router.navigateByUrl(url);
  }
 
 
@@ -67,12 +76,12 @@ export class TabVuelosComponent {
     }
 
     
-    // const url = this.getUrlVueloHotel();
-    this.navigateToResponseUrl('id');
+    const url = this.getUrl();
+    this.navigateToResponseUrl(url);
   }
 
-  getParamsVueloHotel() {
-    let params = new ParamsVueloHotel(
+  getParams() {
+    let params = new ParamsVuelos(
       this.fromDate,
       this.toDate,
       this.form,
@@ -81,14 +90,14 @@ export class TabVuelosComponent {
     ).getParams();
     return params;
   }
-  public getUrlVueloHotel(): string {
+  public getUrl() {
     let url = ''
-    // let params = this.getParamsVueloHotel();
-    // url = new URLVueloHotel(params, this.distribution).getUrl();
-    return 'url';
+    let params = this.getParams();
+    url = new URLVuelos(params, this.distributionObject).getUrl();
+    return url;
   }
 
-  autoComplete(e: any) {
+  autoComplete(e: any, type:'origen' | 'destino') {
     // let elemento = this.origen.nativeElement;
     let elemento = e.target;
 
@@ -101,7 +110,7 @@ export class TabVuelosComponent {
     //   elemento.classList.add('auto');
     // }
     if (value.length >= 3) {
-      this.getListVuelos(value);
+      this.getListVuelos(value,type);
     }
   }
 
@@ -110,13 +119,27 @@ export class TabVuelosComponent {
   }
 
 
-  getListVuelos(e: any) {
+  getListVuelos(e: any, type:'origen' | 'destino') {
     this.destineService.getGeoTree(e).subscribe(
       data => {
-        console.log(data);
+        if(type == 'origen'){
+          this.citysOrigenSelect = data;
+        }else if( type == 'destino'){
+          this.citysDestinosSelect = data;
+        }
+        
       },
       err => console.log(err)
     )
+  }
+
+
+  displayWithOrigen(value: string) {
+      return value ? this.citysOrigenSelect.find(_ => _.city_code === value).city : undefined;  
+  }
+
+  displayWithDestino(value: string) {
+      return value ? this.citysDestinosSelect.find(_ => _.city_code === value).city : undefined;
   }
 
   changeDate(value: ClassValueCalendar) {
