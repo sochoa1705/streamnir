@@ -1,4 +1,5 @@
-import { EnumCabins, EnumFlightType } from "./flights.interface"
+import { Segment } from "src/app/Component/home-page/resultados/models/resultados.interfaces";
+import { EnumCabins, EnumFlightType, IEscalaDetalleSegment, IMovDetalleSegment, IVueloDetalleSegment } from "./flights.interface"
 
 export class DisponibilidadPayload {
     constructor(
@@ -17,4 +18,35 @@ export class DisponibilidadPayload {
 }
 
 
+export class ClassModalVuelo {
+    constructor(
+        public segment:Segment,
+        public origen:string,
+        public destino:string,
+    ){}
+}
 
+export class ClassDetalleModalSegment {
+    constructor(
+        public general:ClassDetalleModalGeneralSegment,
+        public detalle:ClassDetalleSegment[]
+    ){}
+}
+export class ClassDetalleModalGeneralSegment {
+    public titulo:string;
+    constructor(
+        public origen:string,
+        public destino:string,
+        public ida:boolean,
+    ){
+        this.titulo = this.ida? `De ${origen} a ${destino} (Ida)`: `De ${origen} a ${destino} (Vuelta)`
+    }
+}
+export class ClassDetalleSegment {
+    constructor(
+        public salida:IMovDetalleSegment,
+        public llegada:IMovDetalleSegment,
+        public vuelo:IVueloDetalleSegment,
+        public escala?:IEscalaDetalleSegment
+    ){}
+}

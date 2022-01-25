@@ -28,7 +28,7 @@
                     </defs>
                 </svg>
                 <span>
-                    <strong>4</strong>¡Últimos espacios!</span>
+                    <strong></strong>¡Últimos espacios!</span>
             </div>
             <div class="col-sm-12 col-md-5 p-0 equipajes" *ngIf="!vuelo.departure[0].segments[0].equipaje?.piezas">
                 <span>No incluye equipaje de bodega</span>
@@ -80,12 +80,8 @@
                             <div class="col-2 text-center">
                                 <div class="row">
                                     <ng-container *ngIf="segment.flightSegments.length===1">
-                                        <div class="col-12 escala toolTip">
+                                        <div class="col-12 escala">
                                             Directo
-                                            <div class="boxTooltip">
-                                                <div class="titleTooltip">Panamá City (Cambio de avión)</div>
-                                                <div class="descripTooltip">Espera de 11h 44m</div>
-                                            </div>
                                         </div>
 
                                         <div class="clearfix"></div>
@@ -138,7 +134,7 @@
                                 </div>
                             </div>
                             <div class="col-2 p-0 text-center">
-                                <span class="time_duration" data-bs-toggle="modal" data-bs-target="#modalDetVuelo">{{segment.flightDuration}}</span>
+                                <span (click)="selectVuelo(segment)" class="time_duration" data-bs-toggle="modal" data-bs-target="#modalDetVuelo">{{segment.flightDuration}}</span>
                             </div>
                             <div class="col-2 equipaje p-0">
                                 <div class="d-inline-flex align-items-end" *ngIf="segment.equipaje?.piezas">
@@ -236,12 +232,8 @@
                             <div class="col-2 text-center">
                                 <div class="row">
                                     <ng-container *ngIf="segment.flightSegments.length===1">
-                                        <div class="col-12 escala toolTip">
+                                        <div class="col-12 escala">
                                             Directo
-                                            <div class="boxTooltip">
-                                                <div class="titleTooltip">Panamá City (Cambio de avión)</div>
-                                                <div class="descripTooltip">Espera de 11h 44m</div>
-                                            </div>
                                         </div>
     
                                         <div class="clearfix"></div>
@@ -711,7 +703,7 @@
 </div>
 
 <!-- Modal DETALLE VUELO-->
-<div class="modal fade" id="modalDetVuelo" tabindex="-1" aria-labelledby="modDetVuelo" aria-hidden="true">
+<div class="modal fade" id="modalDetVuelo" tabindex="-1" aria-labelledby="modDetVuelo" aria-hidden="true" >
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content boxModalDetalle">
             <div class="d-flex justify-content-between align-items-center p-3 header">
@@ -719,103 +711,157 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="boxVuelos">
+                <div class="boxVuelos" *ngIf="modalDetalle?.detalle">
                     <div class="subtitle">
                         <div>
                             <img width="27px" src="../../../../assets/modal/avion.png" alt="">
                         </div>
-                        <div>De Lima a Cancún (Ida)</div>
+                        <div>{{modalDetalle?.general?.titulo }}</div>
                     </div>
-                    <div class="content">
-                        <div class="column alignRight">
-                            <div class="boxSeg">
-                                <div class="text">Salida 22 Jul</div>
-                                <div class="text blue">LIM 16:21 PM</div>
-                                <div class="text">Aeropuerto Internacional Jorge Chavez</div>
-                                <div class="iconImg firstIcon">
-                                    <img src="../../../../assets/modal/circle.png" alt="">
+       
+                    
+                    <ng-container *ngFor="let item of modalDetalle.detalle; let last = last">
+                        <ng-container *ngIf="item.escala && item.escala.ciudad && item.escala.tiempo_espera">
+                            <div class="boxCenter">
+                                <div class="boxDescrip">
+                                    <div>
+                                        <strong>{{item.escala.ciudad}}</strong> (cambio de avión)
+                                    </div>
+                                    <div>Tiempo de espera
+                                        <strong>{{item.escala.tiempo_espera}}</strong>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="boxSeg">
-                                <div class="text blue">Duración</div>
-                                <div class="text borde">3h 41m</div>
-                                <div class="iconImg">
-                                    <img src="../../../../assets/modal/airplane.png" alt="">
+                            <div class="content">
+                                <div class="column alignRight paddingTop">
+                                    <div class="boxSeg">
+                                        <!-- <div class="text red">Salida {{item.salida.dia}} (+1)</div> -->
+                                        <div class="text">{{"Salida "+item.salida.dia}}</div>
+                                        <div class="text blue">{{item.salida.cod_ciudad + ' ' + item.salida.hora}}</div>
+                                        <div class="text">{{item.salida.aeropuerto}}</div>
+                                        <div class="iconImg">
+                                            <img src="../../../../assets/modal/circle.png" alt="">
+                                        </div>
+                                    </div>
+        
+                                    <div class="boxSeg">
+                                        <div class="text blue">Duración</div>
+                                        <div class="text borde">{{item.vuelo.duracion}}</div>
+                                        <div class="iconImg">
+                                            <img src="../../../../assets/modal/airplane.png" alt="">
+                                        </div>
+                                    </div>
+        
+                                    <div class="boxSeg">
+                                        <!-- <div class="text red">Llegada 23 Jul (+1)</div> -->
+                                        <div class="text">{{"Llegada "+item.llegada.dia}}</div>
+                                        <div class="text blue">{{item.llegada.cod_ciudad + ' ' + item.llegada.hora}}</div>
+                                        <div class="text">{{item.llegada.aeropuerto}}</div>
+                                        <div class="iconImg" [ngClass]="{'lastIcon':last}">
+                                            <img src="../../../../assets/modal/circle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column alignLeft">
+                                    <div class="boxSeg">
+                                        <div class="text">
+                                            <img [src]="item.vuelo.logo"  appImgDefault alt="">
+                                        </div>
+                                        <div class="text">
+                                            <strong>{{"Vuelo " +item.vuelo.num_vuelo}}</strong>
+                                        </div>
+                                        <div class="text">{{"Operado por: "+ item.vuelo.aerolinea }}</div>
+                                    </div>
                                 </div>
                             </div>
+                        </ng-container>
+                        <ng-container *ngIf="!item.escala ">
+                            <!-- <div class="content">
+                                <div class="column alignRight">
+                                    <div class="boxSeg">
+                                        <div class="text">{{"Salida 32"}}</div>
+                                        <div class="text blue">LIM 16:21 PM</div>
+                                        <div class="text">Aeropuerto Internacional Jorge Chavez</div>
+                                        <div class="iconImg firstIcon">
+                                            <img src="../../../../assets/modal/circle.png" alt="">
+                                        </div>
+                                    </div>
+        
+                                    <div class="boxSeg">
+                                        <div class="text blue">Duración</div>
+                                        <div class="text borde">3h 41m</div>
+                                        <div class="iconImg">
+                                            <img src="../../../../assets/modal/airplane.png" alt="">
+                                        </div>
+                                    </div>
+        
+                                    <div class="boxSeg">
+                                        <div class="text">Llegada 22 Jul</div>
+                                        <div class="text blue">PTY 20:02 PM</div>
+                                        <div class="text">General Omar Torrijos Herrara</div>
+                                        <div class="iconImg">
+                                            <img src="../../../../assets/modal/circle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column alignLeft">
+                                    <div class="boxSeg">
+                                        <div class="text">
+                                            <img width="27px" src="../../../../assets/modal/icon-empresa.png" alt="">
+                                        </div>
+                                        <div class="text">
+                                            <strong>Vuelo 132</strong>
+                                        </div>
+                                        <div class="text">Operado por: Copa Airlines</div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="content">
+                                <div class="column alignRight">
+                                    <div class="boxSeg">
+                                        <div class="text">{{"Salida "+item.salida.dia}}</div>
+                                        <div class="text blue">{{item.salida.cod_ciudad + ' ' + item.salida.hora}}</div>
+                                        <div class="text">{{item.salida.aeropuerto}}</div>
+                                        
+                                        <div class="iconImg firstIcon">
+                                            <img src="../../../../assets/modal/circle.png" alt="">
+                                        </div>
+                                    </div>
+        
+                                    <div class="boxSeg">
+                                        <div class="text blue">Duración</div>
+                                        <div class="text borde">{{item.vuelo.duracion}}</div>
+                                        <div class="iconImg">
+                                            <img src="../../../../assets/modal/airplane.png" alt="">
+                                        </div>
+                                    </div>
+        
+                                    <div class="boxSeg">
+                                        <div class="text">{{"Llegada "+item.llegada.dia}}</div>
+                                        <div class="text blue">{{item.llegada.cod_ciudad + ' ' + item.llegada.hora}}</div>
+                                        <div class="text">{{item.llegada.aeropuerto}}</div>
+                                        <div class="iconImg"  [ngClass]="{'lastIcon':last}">
+                                            <img src="../../../../assets/modal/circle.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column alignLeft">
+                                    <div class="boxSeg">
+                                        <div class="text">
+                                            <img [src]="item.vuelo.logo"  appImgDefault alt="">
+                                        </div>
+                                        <div class="text">
+                                            <strong>{{"Vuelo " +item.vuelo.num_vuelo}}</strong>
+                                        </div>
+                                        <div class="text">{{"Operado por: "+ item.vuelo.aerolinea }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>                
+                    </ng-container>
 
-                            <div class="boxSeg">
-                                <div class="text">Llegada 22 Jul</div>
-                                <div class="text blue">PTY 20:02 PM</div>
-                                <div class="text">General Omar Torrijos Herrara</div>
-                                <div class="iconImg">
-                                    <img src="../../../../assets/modal/circle.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column alignLeft">
-                            <div class="boxSeg">
-                                <div class="text">
-                                    <img width="27px" src="../../../../assets/modal/icon-empresa.png" alt="">
-                                </div>
-                                <div class="text">
-                                    <strong>Vuelo 132</strong>
-                                </div>
-                                <div class="text">Operado por: Copa Airlines</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="boxCenter">
-                        <div class="boxDescrip">
-                            <div>
-                                <strong>Panama City</strong> (cambio de avión)
-                            </div>
-                            <div>Tiempo de espera
-                                <strong>11h 44m</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div class="column alignRight paddingTop">
-                            <div class="boxSeg">
-                                <div class="text red">Salida 23 Jul (+1)</div>
-                                <div class="text blue">PTY 07:46 AM</div>
-                                <div class="text">General Omar Torrijos Herrara</div>
-                                <div class="iconImg">
-                                    <img src="../../../../assets/modal/circle.png" alt="">
-                                </div>
-                            </div>
-
-                            <div class="boxSeg">
-                                <div class="text blue">Duración</div>
-                                <div class="text borde">3h 41m</div>
-                                <div class="iconImg">
-                                    <img src="../../../../assets/modal/airplane.png" alt="">
-                                </div>
-                            </div>
-
-                            <div class="boxSeg">
-                                <div class="text red">Llegada 23 Jul (+1)</div>
-                                <div class="text blue">PTY 20:02 PM</div>
-                                <div class="text">General Omar Torrijos Herrara</div>
-                                <div class="iconImg lastIcon">
-                                    <img src="../../../../assets/modal/circle.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column alignLeft">
-                            <div class="boxSeg">
-                                <div class="text">
-                                    <img width="27px" src="../../../../assets/modal/icon-empresa.png" alt="">
-                                </div>
-                                <div class="text">
-                                    <strong>Vuelo 132</strong>
-                                </div>
-                                <div class="text">Operado por: Copa Airlines</div>
-                            </div>
-                        </div>
-                    </div>
+                 
                     <div class="boxCenter">
                         <div class="boxFooter">
                             <div class="title">Equipaje que incluye tu viaje</div>
