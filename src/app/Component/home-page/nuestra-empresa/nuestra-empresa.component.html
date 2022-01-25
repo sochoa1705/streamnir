@@ -2,26 +2,41 @@
     <div class="content" [ngClass]="show ? 'd-none' : ' ' "> -->
 <div class="banner h659">
     <div class="contentEmpresa h659">
+        <div class="float">
+            <h6>Comprometidos contigo</h6>
+            <h1>Nuestra <strong>experiencia</strong><br> a tu <strong>alcance</strong></h1>
+        </div>
         <img src="./assets/empresa/banner.jpg" alt="Nuestra experiencia a tu alcance">
     </div>
 </div>
 
-<section class="container">
-    <div class="row pt-5 pb-md-3 mb-4">
-        <div class="col-12">
-            <h2 class="titleHome">
+<section class="container mb-md-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="titleHome pt-md-5 pb-md-3 mb-md-4 mb-3">
                 <strong>Agencia de Viajes Nuevo Mundo Viajes</strong>
             </h2>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="row">
-        <div class="col-6">
             <p class="text-justify">
                 El 05 de mayo de 1979, asumimos un compromiso con el Perú, ofrecer alternativas de viajes con una calidad de servicio único
                 en el país y representarlo en el extranjero, captando así un mayor número de turistas año tras año.
             </p>
-            <p class="text-justify">
+            <div class="row mb-md-3">
+                <div class="col-6 d-flex">
+                    <mat-icon class="icon">people_alt</mat-icon>
+                    <div class="d-flex flex-column">
+                        640
+                        <span>Colaboradores</span>
+                    </div>
+                </div>
+                <div class="col-6 d-flex">
+                    <mat-icon class="icon">emoji_events</mat-icon>
+                    <div class="d-flex flex-column">
+                        15
+                        <span>Años de lideres</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-justify mb-4 mt-4 mb-md-3 mt-md-3 ">
                 Hoy somos 640 colaboradores que seguimos en la misma línea; otorgando una excelente calidad de servicio, lo que nos ha permitido
                 en los últimos 15 años; ser líderes en el mercado peruano y estar ubicados entre las 20 agencias de viajes
                 más grandes e importantes de América Latina (La única agencia de viajes del Perú en este ranking).
@@ -31,17 +46,17 @@
                 VIRTUOSO; nos han retado a ser altamente competitivos en materia comercial.
             </p>
         </div>
-        <div class="col-6 text-end">
-            <img src="./assets/empresa/avion.jpg" alt="Agencia de viajes Nuevo Mundo Viajes">
+        <div class="col-md-6 text-end pb-3 pt-3">
+            <img src="./assets/empresa/avion.jpg" alt="Agencia de viajes Nuevo Mundo Viajes" class="img-responsive pt-md-5">
         </div>
         <div class="clearfix"></div>
     </div>
 </section>
 
-<section class="clientes">
+<section class="clientes pb-md-5 py-md-5">
     <div class="container">
-        <div class="row pt-5 pb-md-3 mb-4">
-            <div class="col-12">
+        <div class="row pt-md-5 pb-md-3 mb-md-4 pt-5 mb-2">
+            <div class="col-md-12">
                 <h2 class="titleHome text-white">
                     <strong>Nuestros clientes</strong>
                 </h2>
@@ -49,35 +64,61 @@
             <div class="clearfix"></div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
                 <p class="text-white text-justify">
                     Contamos con una cartera de clientes de lo más extensa y variada, en el Perú somos distribuidores de viajes de los principales
                     sistemas de lealtad y estamos comprometidos con la cultura, mostrando nuestro apoyo en el rubro a través
                     de auspicios.
                 </p>
-                <p class="text-white">
+                <p class="text-white text-justify">
                     Nos prefieren más de:
                 </p>
-                <p class="text-white">
-                    y la más exclusiva red de agencias internacionales.
+                <div class="row">
+                    <div class="col-md-4 col-12 d-md-flex text-center my-4">
+                        <div class="d-flex flex-column capital text-white">
+                            850
+                            <div class="raya m-auto"></div>
+                            <span class="text-white f-12">Empresas
+                                <br>corporativas</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 d-md-flex text-center my-4">
+                        <div class="d-flex flex-column capital text-white">
+                            27 000
+                            <div class="raya m-auto"></div>
+                            <span class="text-white f-12">Personas
+                                <br>naturales</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 d-md-flex text-center my-4">
+                        <div class="d-flex flex-column capital text-white">
+                            1 100
+                            <div class="raya m-auto"></div>
+                            <span class="text-white f-12">Agencias de viaje
+                                <br>del Perú</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-white text-justify mt-md-5">
+                    y la más exclusiva <strong>red de agencias internacionales.</strong>
                 </p>
             </div>
-            <div class="col-6">
+            <div class="col-md-6 ps-md-5 bg-img">
                 <p class="text-white text-justify">
                     En el área de turismo receptivo, estamos seguros de contar con los requisitos que nos harán su mejor socio. El equipo de
                     turismo receptivo conoce todo el Perú, sus recursos e infraestructura turística. Ofrecemos nuestra experiencia
                     para brindar a sus clientes el mejor servicio y atención.
                 </p>
-                <img src="./assets/empresa/clientes.png" class="position-absolute" alt="Nuestros clientes">
+                <img src="./assets/empresa/clientes.png" class="position-absolute img-responsive mt-md-4" alt="Nuestros clientes">
             </div>
             <div class="clearfix"></div>
         </div>
     </div>
 </section>
 
-<section class="container">
-    <div class="row pt-5 pb-md-3 mb-4">
-        <div class="col-6">
+<section class="container video-responsive">
+    <div class="row pt-md-4 pb-md-3 mb-md-4">
+        <div class="col-md-6">
             <h2 class="titleHome">
                 <strong>Misión</strong>
             </h2>
@@ -85,7 +126,7 @@
         <div class="clearfix"></div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-md-6">
             <p class="text-justify">
                 Ser la empresa líder en turismo ofreciendo servicios de calidad para satisfacción de los clientes, obteniendo la mayor rentabilidad
                 y participación del mercado que nos permita crecer personas y como empresa.
@@ -93,14 +134,14 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    <div class="row pt-5 mt-5">
-        <div class="col-6">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/h10HzcA7nhU" title="YouTube video player" frameborder="0"
+    <div class="row pt-md-5">
+        <div class="col-md-6 my-4">
+            <iframe width="100%" height="310" src="https://www.youtube.com/embed/h10HzcA7nhU" title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <div class="col-6 d-flex align-items-end">
+        <div class="col-md-6 d-flex align-items-center  ps-md-5">
             <div>
-                <h2 class="titleHome pt-5 mt-5">
+                <h2 class="titleHome mt-md-5">
                     <strong>Visión</strong>
                 </h2>
                 <p class="text-justify">

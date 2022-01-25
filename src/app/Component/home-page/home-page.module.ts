@@ -26,6 +26,7 @@ import { TerminosCondicionesModule } from './terminos-condiciones/terminos-condi
 import { DocumentacionViajeModule } from './documentacion-viaje/documentacion-viaje.module';
 import { NuestrasAgenciasModule } from './nuestras-agencias/nuestras-agencias.module';
 import { NuestraEmpresaModule } from './nuestra-empresa/nuestra-empresa.module';
+import { MainService } from '../../Services/presenter/main/main.service';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -51,6 +52,6 @@ import { NuestraEmpresaModule } from './nuestra-empresa/nuestra-empresa.module';
     NuestraEmpresaModule,
   ],
   exports: [HomePageComponent],
-  providers: [IpClienteService, DollarChangeService, OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
+  providers: [MainService, IpClienteService, DollarChangeService, OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
 })
 export class HomePageModule { }

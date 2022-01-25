@@ -8,6 +8,7 @@ import { ChangeRQ } from '../../Models/general/changeRQ.interface';
 import { NMRequest } from 'src/app/Models/base/NMRequest';
 import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit.service';
 import { IpClienteService } from 'src/app/Services/ipCliente/ip-cliente.service';
+import { MainService } from '../../Services/presenter/main/main.service';
 
 @Component({
   selector: 'app-home-page',
@@ -19,19 +20,31 @@ export class HomePageComponent implements OnInit {
   businessUnit!: string[]
   dollar!: number
   dataUtil!: string[]
+  options: string[]
   constructor(
     public dataPagePresenterService: DataPagePresenterService,
     public dollarChangeService: DollarChangeService,
     public businessUnitService: BusinessUnitService,
     public ipClienteService: IpClienteService,
+    public mainService: MainService,
   ) { }
 
   ngOnInit(): void {
     this.getChange()
     this.getBusinessUnit()
     this.getIpCliente()
+    this.getMain()
   }
-
+  getMain() {
+    this.mainService.getMenu().subscribe({
+      next: (response: any) => {
+        this.options = response
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
   getChange() {
     let lChange: ChangeRQ = {
       Fecha: environment.today(new Date()),
@@ -46,7 +59,6 @@ export class HomePageComponent implements OnInit {
       }
     })
   }
-
   getBusinessUnit() {
     if (localStorage.getItem('businessunit') === null) {
       let payload = new NMRequest();
@@ -61,7 +73,6 @@ export class HomePageComponent implements OnInit {
       )
     }
   }
-
   getIpCliente() {
     this.ipClienteService.ipCliente().subscribe((res: any) => {
       this.ipAddress = res.ip;
