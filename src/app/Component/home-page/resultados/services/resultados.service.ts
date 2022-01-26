@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { MockedResultados } from '../resultados.mocked';
-import { IAerolineas } from '../models/resultados.interfaces';
+import { IAerolineas, IMotorVuelo } from '../models/resultados.interfaces';
 import { environment } from 'src/environments/environment';
 import { pluck } from 'rxjs/operators';
 
@@ -37,8 +37,9 @@ export class ResultadosService {
         ).toPromise()
       }
     
-      async searchMv(body:any):Promise<IAerolineas[]>{
-        const url = environment.urlMaster + ':10515/motor-vuelo/search';
+      async searchMv(body:any):Promise<IMotorVuelo>{
+        // const url = environment.urlMaster + ':10515/motor-vuelo/search';
+        const url = environment.urlMaster + ':10515/motor-vuelo/search-new';
     
         const token = await this.getToken();
     
@@ -59,7 +60,7 @@ export class ResultadosService {
         //   "excludedAirlines": null,
         //   "multicity": null
         // }
-        return this.http.post<Promise<IAerolineas[]>>(url,  body , {headers}).toPromise()
+        return this.http.post<Promise<IMotorVuelo>>(url,  body , {headers}).toPromise()
       }
 
     getResultados():Observable<IAerolineas[]>{

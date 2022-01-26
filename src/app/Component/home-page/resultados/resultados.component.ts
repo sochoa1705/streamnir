@@ -64,7 +64,7 @@ export class ResultadosComponent implements OnInit{
 
 
       this.service.searchMv(payload).then((resp)=>{
-        this.flights = resp;
+        this.flights = resp.groups;
         this.loader.closeLoader();
       })
 
