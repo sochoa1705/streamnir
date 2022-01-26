@@ -166,6 +166,27 @@
             Borrar todo
           </button>
         </div>
+        <!-- <div
+          class="d-flex justify-content-between mb-2"
+          *ngFor="let line of filtersObj.airlines"
+        >
+          <div class="d-flex flex-row">
+            <div class="company">
+              <img src="{{line.imageUrl}}" alt="" />
+            </div>
+            <label for="checkbox-airline-1">{{ line.name }}</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [checked]="line.checked"
+              value=""
+              (change)="checkId($event, line.code)"
+              id="checkbox-airline-1"
+            />
+          </div>
+        </div> -->
         <div
           class="d-flex justify-content-between mb-2"
           *ngFor="let line of filterService.aerolineas"

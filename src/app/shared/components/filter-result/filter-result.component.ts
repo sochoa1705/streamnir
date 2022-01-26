@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Options, LabelType } from 'ng5-slider';
 import { Observable } from 'rxjs';
 import { FilterService } from 'src/app/Services/presenter/filter/filter.service';
@@ -9,6 +9,7 @@ import { FilterService } from 'src/app/Services/presenter/filter/filter.service'
   styleUrls: ['./filter-result.component.scss'],
 })
 export class FilterResultComponent implements OnInit {
+  @Input() filtersObj: any;
   @Output() filterChangeEvent = new EventEmitter<any>();
 
   filter: any = {};
