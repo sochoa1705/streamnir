@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
@@ -33,13 +35,13 @@ export class ResultadosComponent implements OnInit {
   flights: IAerolineas[];
   flightsOri: IAerolineas[];
 
-  constructor(
-    public route: Router,
-    private service: ResultadosService,
-    private ar: ActivatedRoute,
-    private loader: LoaderSubjectService
-  ) {
-    this.showTabs = true;
+  error = {
+    isError: false,
+    errorMessage:''
+  }
+
+  constructor(public route: Router, private service:ResultadosService, private _snackBar: MatSnackBar, private ar:ActivatedRoute, private loader:LoaderSubjectService) {
+    this.showTabs = true
   }
 
   ngOnInit() {
@@ -75,11 +77,26 @@ export class ResultadosComponent implements OnInit {
         Number(children),
         Number(infants),
         businessCabin
-      );
+      )
 
-      this.service.searchMv(payload).then((resp) => {
-        this.flights = resp;
-        this.flightsOri = resp;
+      this.service.searchMv(payload).then((resp)=>{
+
+        this.error.isError = false;
+        this.flights = resp.groups;
+        this.flightsOri = resp.groups;
+        this.loader.closeLoader();
+
+      }).catch((err:HttpErrorResponse)=>{
+
+        console.log(err);
+
+        this.error = {
+          isError:true,
+          errorMessage:err.message
+        }
+        
+        this.openSnackBar(err.message)
+      
         this.loader.closeLoader();
       });
     });
@@ -89,6 +106,13 @@ export class ResultadosComponent implements OnInit {
   showOption(ids: any) {
     this.id = ids;
     console.log(this.id);
+  }
+
+
+  openSnackBar(message: string, action: string = "Error") {
+    this._snackBar.open(message, "", {
+      duration: 2000*5
+    });
   }
 
   tab(e: any) {

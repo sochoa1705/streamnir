@@ -1,4 +1,20 @@
 
+export interface IMotorVuelo {
+    groups:         IAerolineas[];
+    airlinesFilter: AirlinesFilter[];
+    exchangeRate:   ExchangeRate;
+}
+
+export interface AirlinesFilter {
+    code:     string;
+    name:     string;
+    imageUrl: string;
+}
+
+export interface ExchangeRate {
+    currency: string;
+    amount:   number;
+}
 export interface IAerolineas {
     sequenceNumber: number;
     lowCost:        boolean;
