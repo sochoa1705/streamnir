@@ -1,7 +1,9 @@
 img{
     width: 100%
 }
-
+.mat-icon{
+    margin-right: 10px;
+}
 .flotante{
     position: absolute;
     width: 510px;
@@ -10,35 +12,48 @@ img{
     border-radius: 5px;
     padding-top: 20px;
     padding-bottom: 20px;
-}
-
-.map{
-    background: lightblue;
-    height: 792px;
-    position: relative;
-    .direccion{
-        @extend .flotante;
-        top:310px;
-        left: 100px;
+    z-index:1;
+    @media (max-width: 768px) {
+        width: 95%;
+        left: 3%!important;
     }
-    .buscador{
-        @extend .flotante;
-        top:100px;
-        left: 100px;
-        .mat-div{
-            margin:auto
-        }
-        input{
-            width: calc(100% - 26px);
-            background: white;
-            border:0;
-            &:focus-visible{
-                outline: 0;
+}
+h2.titleHome{
+    @media (max-width: 768px) {
+        font-size: 18px!important
+    }
+}
+.direccion{
+    @extend .flotante;
+    top:260px;
+    left: 100px;
+    padding: 10px 20px;
+    .row{
+        margin: 10px 0;
+        span{
+            display: block;
+            @media (max-width: 768px) {
+                font-size: 16px!important
             }
         }
     }
 }
-
+.buscador{
+    @extend .flotante;
+    top:100px;
+    left: 100px;
+    .mat-div{
+        margin:auto
+    }
+    input{
+        width: calc(100% - 26px);
+        background: white;
+        border:0;
+        &:focus-visible{
+            outline: 0;
+        }
+    }
+}
 ul li{
     font-family: Montserrat;
     font-weight: 500;

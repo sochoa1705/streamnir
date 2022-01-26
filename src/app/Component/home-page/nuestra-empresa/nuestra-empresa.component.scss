@@ -4,11 +4,54 @@
 }
 
 .text-justify {
-    text-align: justify;
+    font-family: Montserrat;
+    font-weight: 500;
     font-size: 14px;
+    text-align: justify;
+    letter-spacing: 0.1px;
+    color: #4B4B4B;
 }
-h2 {
-    font-family:Open Sans !important;
+.float{
+    position: absolute;
+    z-index: 10;
+    left: 7%;
+    bottom: 7%;
+}
+h{
+    &1{
+        font-family: Open Sans;
+        font-weight: normal;
+        font-size: 3.75rem;
+        line-height: 80px;
+        letter-spacing: -0.5px;
+        color: #FFFFFF;
+        text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.45);
+        @media (max-width: 768px) {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 1.125rem !important;
+            line-height: 25px;
+            letter-spacing: 0.18px
+        }
+    }
+    &2 {
+        font-family:Open Sans !important;
+    }
+    &6 {
+        font-family: Open Sans;
+        font-weight: bold;
+        font-size: 1.125rem;
+        line-height: 27px;
+        letter-spacing: 0.18px;
+        color: #F29704;
+        @media (max-width: 768x) {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 0.625rem!important;
+            line-height: 27px;
+            letter-spacing: 0.18px;
+        }
+    }
 }
 @media (max-width: 640px) {
     .text-justify {

@@ -64,11 +64,7 @@
                         </div>
                         <div class="row viajero py-2">
                             <div class="col-1 text-center">
-                                <mat-checkbox (change)="vueloEscogidoIda = vuelo" class="example-margin" ></mat-checkbox>
-
-                                <!-- <mat-radio-group  (change)="hola(vueloEscogido)" aria-label="Select an option">
-                                    <mat-radio-button   [value]="vuelo">1</mat-radio-button>
-                                  </mat-radio-group> -->
+                                <mat-radio-button name="departure" (change)="radioSelect($event, 'departure')" [value]="segment.segmentId"></mat-radio-button>
                             </div>
                             <div class="col-1 text-center">
                                 <img src="../../../../assets/comprar/company.png" alt="">
@@ -219,7 +215,7 @@
                         </div>
                         <div class="row viajero py-2">
                             <div class="col-1 text-center">
-                                <mat-checkbox (change)="vueloEscogidoVuelta = vuelo" class="example-margin" ></mat-checkbox>
+                                <mat-radio-button name="return" (change)="radioSelect($event, 'return')" [value]="segment.segmentId"></mat-radio-button>
                             </div>
                             <div class="col-1 text-center">
                                 <img src="../../../../assets/comprar/company.png" alt="">
@@ -375,7 +371,7 @@
                         Ver detalles
                     </div>
                     <div class="d-flex w-100">
-                        <button type="button" (click)="shop()">Comprar</button>
+                        <button type="button" (click)="shop(vuelo.id)">Comprar</button>
                     </div>
                 </div>
             </div>
@@ -413,7 +409,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 d-grid gap-2 mx-auto">
-                        <button type="button" (click)="shop()">Comprar</button>
+                        <button type="button" (click)="shop(vuelo.id)">Comprar</button>
                     </div>
                     <div class="clearfix"></div>
                 </div>

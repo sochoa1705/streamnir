@@ -11,6 +11,7 @@ import { SafetyPayRQ } from 'src/app/Models/seguros/safetypayRQ.interface';
 import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interface';
 import { UpdatePayService } from 'src/app/Services/updatePay/update-pay.service';
 import { StatePayService } from 'src/app/Services/statePay/state-pay.service';
+import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
 
 @Component({
   selector: 'app-conformidad',
@@ -40,6 +41,9 @@ export class ConformidadComponent implements OnInit {
   shopString: any
   unidadNegocio: any
   typePay: string
+  resevaVuelo: any
+  vuelos: any
+  vuelosJson: any
 
   constructor(
     public route: Router,
@@ -48,10 +52,15 @@ export class ConformidadComponent implements OnInit {
     public generatePayService: GeneratePayService,
     public updatePayService: UpdatePayService,
     public statePayService: StatePayService,
+    public reservaVuelosService: ReservaVuelosService,
   ) {
     // shopdata
     this.shopData = localStorage.getItem('shop')
     this.shopString = JSON.parse(this.shopData)
+    // VUELOS
+    this.vuelos = localStorage.getItem('flight0')
+    this.vuelosJson = JSON.parse(this.vuelos)
+
     // plan
     this.safe0 = localStorage.getItem('safe0')
     this.safe0Json = JSON.parse(this.safe0)
@@ -334,5 +343,48 @@ export class ConformidadComponent implements OnInit {
     })
   }
 
+  getReserva() {
+    let payload = {
+      "segmentSelected": [
+        this.vuelosJson.departure, this.vuelosJson.return
+      ],
+      "IdGroup": this.vuelosJson.idGroup,
+      "passengers": [
+        {
+          "type": "ADT",
+          "name": "RODRIGO",
+          "lastName": "CCANCCE",
+          "birthday": "1998-02-20",
+          "documentType": 0,
+          "documentNumber": "72154521",
+          "gender": "M",
+          "email": "rodrigo98_22@outlook.com",
+          "phone": "989454123"
+        }
+      ],
+      contact: {
+        name: this.shopString.formContact.nameContacto,
+        lastName: this.shopString.formContact.lastnameContacto,
+        email: this.shopString.formContact.mailContacto,
+        address: this.shopString.formContact.recibo[0].direccion,
+        phones: [
+          {
+            phoneNumber: this.shopString.formContact.numberPhone0
+          }
+        ]
+      }
+    }
+    this.reservaVuelosService.reserva(payload).subscribe({
+      next: (response: any) => {
+        console.log(response)
+        this.resevaVuelo = response
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    }
+    )
+
+  }
 
 }
