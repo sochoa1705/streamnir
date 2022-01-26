@@ -12,6 +12,9 @@ export class GetDaysPipe implements PipeTransform {
         const salida = moment(date1, moment.ISO_8601);
         const llegada = moment(date2, moment.ISO_8601);
 
+        // console.log(moment(date1, moment.ISO_8601).format("DD/MM/YYYY, h:mm:ss a"));
+        // console.log(moment(date2, moment.ISO_8601).format("DD/MM/YYYY, h:mm:ss a"));
+
         const durationTime =  salida.diff(llegada,'days');
 
         return durationTime;
