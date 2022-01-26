@@ -66,7 +66,7 @@ export class FlightsComponent {
   }
 
 
-  selectVuelo(segment:Segment){
+  selectVuelo(segment:Segment, isIda:boolean){
 
     const detalle:ClassDetalleSegment[] = [];
 
@@ -133,8 +133,7 @@ export class FlightsComponent {
     const general = new ClassDetalleModalGeneralSegment(
       segment.flightSegments[0].departureAirport.name,
       segment.flightSegments[segment.flightSegments.length - 1].arrivalAirport.name,
-      true,
-
+      isIda
     )
 
     this.modalDetalle = new ClassDetalleModalSegment(
