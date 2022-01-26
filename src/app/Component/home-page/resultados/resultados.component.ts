@@ -10,10 +10,10 @@ import { ResultadosService } from './services/resultados.service';
 @Component({
   selector: 'app-resultados',
   templateUrl: './resultados.component.html',
-  styleUrls: ['./resultados.component.scss']
+  styleUrls: ['./resultados.component.scss'],
 })
-export class ResultadosComponent implements OnInit{
-  showTabs!: boolean
+export class ResultadosComponent implements OnInit {
+  showTabs!: boolean;
   selectedValue!: string;
   json = {
     filter: 'filter',
@@ -22,30 +22,45 @@ export class ResultadosComponent implements OnInit{
     reembolso: true,
     detalleViaje: true,
     detalleCobertura: false,
-    cupon: true
-  }
+    cupon: true,
+  };
   foods: any[] = [
     { value: 'steak-0', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
+    { value: 'tacos-2', viewValue: 'Tacos' },
   ];
 
-  flights:IAerolineas[];
+  flights: IAerolineas[];
+  flightsOri: IAerolineas[];
 
-  constructor(public route: Router, private service:ResultadosService, private ar:ActivatedRoute, private loader:LoaderSubjectService) {
-    this.showTabs = true
+  constructor(
+    public route: Router,
+    private service: ResultadosService,
+    private ar: ActivatedRoute,
+    private loader: LoaderSubjectService
+  ) {
+    this.showTabs = true;
   }
 
-  ngOnInit(){
-    this.loader.showText("Cargando los vuelos");
+  ngOnInit() {
+    this.loader.showText('Cargando los vuelos');
     this.loader.showLoader();
-    this.getParams()
+    this.getParams();
   }
 
-  async getParams(){
-    this.ar.queryParams.subscribe(resp=>{
-
-      let {arrivalDate,businessCabin,departure,departureDate,destination,adults,infants,children,flightType } = resp as ParamsVuelos;
+  async getParams() {
+    this.ar.queryParams.subscribe((resp) => {
+      let {
+        arrivalDate,
+        businessCabin,
+        departure,
+        departureDate,
+        destination,
+        adults,
+        infants,
+        children,
+        flightType,
+      } = resp as ParamsVuelos;
 
       arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').toISOString();
       departureDate = moment(departureDate, 'DD/MM/YYYY').toISOString();
@@ -60,19 +75,18 @@ export class ResultadosComponent implements OnInit{
         Number(children),
         Number(infants),
         businessCabin
-      )
+      );
 
-
-      this.service.searchMv(payload).then((resp)=>{
+      this.service.searchMv(payload).then((resp) => {
         this.flights = resp;
+        this.flightsOri = resp;
         this.loader.closeLoader();
-      })
-
-    })
+      });
+    });
   }
 
-  id:any = "tabIda";
-  showOption(ids:any) {
+  id: any = 'tabIda';
+  showOption(ids: any) {
     this.id = ids;
     console.log(this.id);
   }
@@ -97,6 +111,18 @@ export class ResultadosComponent implements OnInit{
   }
 
   showTab() {
-    this.showTabs = false
+    this.showTabs = false;
+  }
+
+  filterChange(filter: any) {
+    console.log(filter);
+    this.flights = this.flightsOri.filter(
+      (x) =>
+        x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare >=
+          filter.precio.min &&
+        x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare <=
+          filter.precio.max
+    );
+    // console.log(filter);
   }
 }

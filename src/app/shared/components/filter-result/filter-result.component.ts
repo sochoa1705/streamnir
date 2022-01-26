@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Options, LabelType } from 'ng5-slider';
 import { Observable } from 'rxjs';
 import { FilterService } from 'src/app/Services/presenter/filter/filter.service';
@@ -6,25 +6,28 @@ import { FilterService } from 'src/app/Services/presenter/filter/filter.service'
 @Component({
   selector: 'app-filter-result',
   templateUrl: './filter-result.component.html',
-  styleUrls: ['./filter-result.component.scss']
+  styleUrls: ['./filter-result.component.scss'],
 })
 export class FilterResultComponent implements OnInit {
+  @Output() filterChangeEvent = new EventEmitter<any>();
+
+  filter: any = {};
   selected = 'soles';
-  minValuePrice: number = 1001;
-  maxValuePrice: number = 5694;
+  minValuePrice: number = 100;
+  maxValuePrice: number = 1500;
   optionsPrice: Options = {
-    floor: 1000,
-    ceil: 5694,
+    floor: 100,
+    ceil: 1500,
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
-          return "S/." + value;
+          return 'S/.' + value;
         case LabelType.High:
-          return "S/." + value;
+          return 'S/.' + value;
         default:
-          return "S/." + value;
+          return 'S/.' + value;
       }
-    }
+    },
   };
 
   minValueDurationExit: number = 5;
@@ -35,9 +38,9 @@ export class FilterResultComponent implements OnInit {
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         default:
-          return value + "h" + " 30min";
+          return value + 'h' + ' 30min';
       }
-    }
+    },
   };
 
   minValueDurationExitScale: number = 1;
@@ -48,9 +51,9 @@ export class FilterResultComponent implements OnInit {
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         default:
-          return value + "h";
+          return value + 'h';
       }
-    }
+    },
   };
 
   minValueDurationBack: number = 5;
@@ -61,9 +64,9 @@ export class FilterResultComponent implements OnInit {
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         default:
-          return value + "h" + " 30min";
+          return value + 'h' + ' 30min';
       }
-    }
+    },
   };
 
   minValueDurationBackScale: number = 1;
@@ -74,35 +77,37 @@ export class FilterResultComponent implements OnInit {
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         default:
-          return value + "h";
+          return value + 'h';
       }
-    }
+    },
   };
-  constructor(
-    public filterService: FilterService,
-  ) { }
+  constructor(public filterService: FilterService) {}
 
   ngOnInit(): void {
     // console.log(this.filterService.aerolineas);
     this.selectedItems = new Array<string>();
-
+    this.filter.precio = {
+      min: this.minValuePrice,
+      max: this.maxValuePrice,
+    };
   }
 
   toCheck(e: any) {
     if (e === true) {
-      this.filterService.aerolineas.forEach(x => x.checked = true)
+      this.filterService.aerolineas.forEach((x) => (x.checked = true));
     } else {
-      this.filterService.aerolineas.forEach(x => x.checked = false)
+      this.filterService.aerolineas.forEach((x) => (x.checked = false));
     }
   }
-  selectedItems!:string[];
+  selectedItems!: string[];
 
   checkId(e: any, id: string) {
     if (e.target.checked) {
-      this.filterService.aerolineas.forEach(x => {
-      if(x.id === id){
-        x.checked = e.target.checked
-      }})
+      this.filterService.aerolineas.forEach((x) => {
+        if (x.id === id) {
+          x.checked = e.target.checked;
+        }
+      });
 
       // console.log(id + 'cheched');
       // this.selectedItems.push(id);
@@ -113,5 +118,19 @@ export class FilterResultComponent implements OnInit {
     // }
 
     // console.log(this.selectedItems);
+  }
+
+  priceChange(value: number) {
+    this.filter.precio.min = value;
+    this.filterChange();
+  }
+
+  priceMaxChange(value: number) {
+    this.filter.precio.max = value;
+    this.filterChange();
+  }
+
+  filterChange() {
+    this.filterChangeEvent.emit(this.filter);
   }
 }
