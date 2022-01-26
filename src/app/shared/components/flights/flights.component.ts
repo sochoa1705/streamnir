@@ -133,7 +133,9 @@ export class FlightsComponent {
     const general = new ClassDetalleModalGeneralSegment(
       segment.flightSegments[0].departureAirport.name,
       segment.flightSegments[segment.flightSegments.length - 1].arrivalAirport.name,
-      isIda
+      isIda,
+      segment.equipaje?.cabina?.piezas || 0,
+      segment.equipaje?.piezas || 0
     )
 
     this.modalDetalle = new ClassDetalleModalSegment(

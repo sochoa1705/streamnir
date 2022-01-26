@@ -139,7 +139,7 @@
                                 <span (click)="selectVuelo(segment, true)" class="time_duration" data-bs-toggle="modal" data-bs-target="#modalDetVuelo">{{segment.flightDuration | horaPipe}}</span>
                             </div>
                             <div class="col-2 equipaje p-0">
-                                <div class="d-inline-flex align-items-end" *ngIf="segment.equipaje?.piezas">
+                                <div class="d-inline-flex align-items-end" *ngIf="segment.equipaje?.cabina">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -153,7 +153,7 @@
                                             fill="#54D834" />
                                     </svg>
                                 </div>
-                                <div class="d-inline-flex align-items-end _not" *ngIf="!segment.equipaje?.piezas">
+                                <div class="d-inline-flex align-items-end _not" *ngIf="!segment.equipaje?.cabina">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -167,7 +167,7 @@
                                             fill="#83898F" />
                                     </svg>
                                 </div>
-                                <div class="d-inline-flex align-items-end _not"  *ngIf="!segment.equipaje?.cabina" >
+                                <div class="d-inline-flex align-items-end _not"  *ngIf="!segment.equipaje?.piezas" >
                                     <svg width="13" height="22" viewBox="0 0 13 22" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.09375 6.875H10.4688V7.5625H9.09375V6.875Z" fill="#83898F" />
@@ -178,7 +178,7 @@
                                             fill="#83898F" />
                                     </svg>
                                 </div>
-                                <div class="d-inline-flex align-items-end" *ngIf="segment.equipaje?.cabina">
+                                <div class="d-inline-flex align-items-end" *ngIf="segment.equipaje?.piezas">
                                     <svg width="13" height="22" viewBox="0 0 13 22" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.09375 6.875H10.4688V7.5625H9.09375V6.875Z" fill="#54D834" />
@@ -298,7 +298,7 @@
 
 
                         <div class="col-2 equipaje p-0">
-                            <div class="d-inline-flex align-items-end" *ngIf="segment.equipaje?.piezas">
+                            <div class="d-inline-flex align-items-end" *ngIf="segment.equipaje?.cabina">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -312,7 +312,7 @@
                                         fill="#54D834" />
                                 </svg>
                             </div>
-                            <div class="d-inline-flex align-items-end _not" *ngIf="!segment.equipaje?.piezas">
+                            <div class="d-inline-flex align-items-end _not" *ngIf="!segment.equipaje?.cabina">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -326,7 +326,7 @@
                                         fill="#83898F" />
                                 </svg>
                             </div>
-                            <div class="d-inline-flex align-items-end _not"  *ngIf="!segment.equipaje?.cabina" >
+                            <div class="d-inline-flex align-items-end _not"  *ngIf="!segment.equipaje?.piezas" >
                                 <svg width="13" height="22" viewBox="0 0 13 22" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9.09375 6.875H10.4688V7.5625H9.09375V6.875Z" fill="#83898F" />
@@ -337,7 +337,7 @@
                                         fill="#83898F" />
                                 </svg>
                             </div>
-                            <div class="d-inline-flex align-items-end" *ngIf="segment.equipaje?.cabina">
+                            <div class="d-inline-flex align-items-end" *ngIf="segment.equipaje?.piezas">
                                 <svg width="13" height="22" viewBox="0 0 13 22" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9.09375 6.875H10.4688V7.5625H9.09375V6.875Z" fill="#54D834" />
@@ -752,7 +752,7 @@
         
                                     <div class="boxSeg">
                                         <div class="text blue">Duración</div>
-                                        <div class="text borde">{{item.vuelo.duracion}}</div>
+                                        <div class="text borde">{{item.vuelo.duracion | horaPipe}}</div>
                                         <div class="iconImg">
                                             <img src="../../../../assets/modal/airplane.png" alt="">
                                         </div>
@@ -796,7 +796,7 @@
         
                                     <div class="boxSeg">
                                         <div class="text blue">Duración</div>
-                                        <div class="text borde">{{item.vuelo.duracion}}</div>
+                                        <div class="text borde">{{item.vuelo.duracion | horaPipe}}</div>
                                         <div class="iconImg">
                                             <img src="../../../../assets/modal/airplane.png" alt="">
                                         </div>
@@ -830,13 +830,21 @@
                     <div class="boxCenter">
                         <div class="boxFooter">
                             <div class="title">Equipaje que incluye tu viaje</div>
-                            <div class="elemento">
+                            <div class="elemento" *ngIf="modalDetalle.general.cabina > 0">
                                 <object width="15px" data="../../../../assets/modal/mochila.svg"
                                     type="image/svg+xml"></object> Incluye equipaje de mano
                             </div>
-                            <div class="elemento">
-                                <object width="15px" data="../../../../assets/modal/equipaje.svg"
+                            <div class="elemento" *ngIf="!modalDetalle.general.cabina">
+                                <object width="15px" data="../../../../assets/modal/equipaje-no.svg"
+                                    type="image/svg+xml"></object>No incluye equipaje de mano
+                            </div>
+                            <div class="elemento"  *ngIf="!modalDetalle.general.piezas">
+                                <object width="15px" data="../../../../assets/modal/bodega-no.svg"
                                     type="image/svg+xml"></object> No incluye equipaje de bodega
+                            </div>
+                            <div class="elemento"  *ngIf="modalDetalle.general.piezas > 0">
+                                <object width="15px" data="../../../../assets/modal/bodega-si.svg"
+                                    type="image/svg+xml"></object> Incluye equipaje de bodega
                             </div>
                             <div class="elemento">
                                 <object width="15px" data="../../../../assets/modal/check.svg"
