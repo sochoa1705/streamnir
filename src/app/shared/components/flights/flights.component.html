@@ -67,7 +67,7 @@
                                 <mat-radio-button name="departure" (change)="radioSelect($event, 'departure')" [value]="segment.segmentId"></mat-radio-button>
                             </div>
                             <div class="col-1 text-center">
-                                <img src="../../../../assets/comprar/company.png" alt="">
+                                <img [src]="segment.flightSegments[0].marketingAirline.imageUrl" appImgDefault alt="">
                             </div>
                             <div class="col-2 text-center p-0">
                                 <h3>{{segment.startDateTime | date:'h:mm a'}}</h3>
@@ -218,7 +218,7 @@
                                 <mat-radio-button name="return" (change)="radioSelect($event, 'return')" [value]="segment.segmentId"></mat-radio-button>
                             </div>
                             <div class="col-1 text-center">
-                                <img src="../../../../assets/comprar/company.png" alt="">
+                                <img [src]="segment.flightSegments[0].marketingAirline.imageUrl" appImgDefault alt="">
                             </div>
                             <div class="col-2 text-center p-0">
                                 <!-- <h3>16:48 PM</h3>
