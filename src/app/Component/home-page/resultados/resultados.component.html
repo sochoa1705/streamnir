@@ -867,11 +867,13 @@
             </div> -->
             <div class="row" *ngIf="flights">
                 <div class="col-sm-12 col-md-12 col-lg-12 pt-3">
-                    <!-- <app-flights *ngFor="let i of [1,2,3,4]"></app-flights> -->
-                    <app-flights [flights]="flights" *ngFor="let i of [1]"></app-flights>
+                    <ng-container *ngIf="!error.isError">
+                        <app-flights [flights]="flights" *ngFor="let i of [1]"></app-flights>
+                    </ng-container>
                 </div>
                 <div class="clearfix"></div>
             </div>
+
             <div class="row">
                 <div class="col-sm-12 text-center">
                     <button type="button" class="font-12 plus px-3">Ver más vuelos</button>
