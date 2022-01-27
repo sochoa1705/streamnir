@@ -93,6 +93,10 @@ export class TabVuelosComponent {
   public getUrl() {
     let url = ''
     let params = this.getParams();
+    let vuelo = {...params, ...this.distributionObject}
+    console.log(vuelo)
+    localStorage.setItem('filtroVuelo', JSON.stringify(vuelo))
+    
     url = new URLVuelos(params, this.distributionObject).getUrl();
     return url;
   }

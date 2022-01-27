@@ -84,6 +84,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   resultJson: any
   safe0: any
   safe0Json: any
+  filtroVuelo: any
+  filtroVueloJson: any
   banca: boolean = true
   banks = [
     { name: 'Banco de Crédito', value: 1005 },
@@ -109,6 +111,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     public offersService: OffersService,
     public coverageService: CoverageService,
   ) {
+    this.filtroVuelo = localStorage.getItem('filtroVuelo')
+    this.filtroVueloJson = JSON.parse(this.filtroVuelo)
     this.safe0 = localStorage.getItem('safe0')
     this.safe0Json = JSON.parse(this.safe0)
     this.result = localStorage.getItem('Datasafe')
@@ -179,9 +183,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     this.createForm()
     // this.chkValue('')
-    console.log(this.resultJson);
+    console.log(this.resultJson)
+    console.log(this.filtroVueloJson)
 
-    let pasajeros = this.resultJson !== null ? this.resultJson['ClienteCotizacion'] : '1'
+    // let pasajeros = this.resultJson !== null ? this.resultJson['ClienteCotizacion'] : '1'
+    let pasajeros = '3' 
     for (const i of pasajeros) {
       this.addCustomers()
     }

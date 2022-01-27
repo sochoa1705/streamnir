@@ -42,8 +42,10 @@ export class ConformidadComponent implements OnInit {
   unidadNegocio: any
   typePay: string
   resevaVuelo: any
-  vuelos: any
-  vuelosJson: any
+  // vuelos: any
+  // vuelosJson: any
+  token: any
+  tokenJson: any
 
   constructor(
     public route: Router,
@@ -58,8 +60,12 @@ export class ConformidadComponent implements OnInit {
     this.shopData = localStorage.getItem('shop')
     this.shopString = JSON.parse(this.shopData)
     // VUELOS
-    this.vuelos = localStorage.getItem('flight0')
-    this.vuelosJson = JSON.parse(this.vuelos)
+    // this.vuelos = localStorage.getItem('flight0')
+    // this.vuelosJson = JSON.parse(this.vuelos)
+
+    // Token
+    this.token = localStorage.getItem('token')
+    this.tokenJson = JSON.parse(this.token)
 
     // plan
     this.safe0 = localStorage.getItem('safe0')
@@ -346,9 +352,9 @@ export class ConformidadComponent implements OnInit {
   getReserva() {
     let payload = {
       "segmentSelected": [
-        this.vuelosJson.departure, this.vuelosJson.return
+        this.safe0Json.departure, this.safe0Json.return
       ],
-      "IdGroup": this.vuelosJson.idGroup,
+      "IdGroup": this.safe0Json.idGroup,
       "passengers": [
         {
           "type": "ADT",
@@ -374,7 +380,7 @@ export class ConformidadComponent implements OnInit {
         ]
       }
     }
-    this.reservaVuelosService.reserva(payload).subscribe({
+    this.reservaVuelosService.reserva(payload, this.tokenJson).subscribe({
       next: (response: any) => {
         console.log(response)
         this.resevaVuelo = response
@@ -384,7 +390,6 @@ export class ConformidadComponent implements OnInit {
       }
     }
     )
-
   }
 
 }

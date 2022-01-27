@@ -42,6 +42,7 @@ export class ResultadosService {
         const url = environment.urlMaster + ':10515/motor-vuelo/search-new';
     
         const token = await this.getToken();
+        localStorage.setItem('token', JSON.stringify(token))
     
         const headers = new HttpHeaders()
                 .set("Content-Type", "application/json")

@@ -10,6 +10,7 @@ export interface IDistributionObject{
   adultos:number,
   ninos:number,
   infantes:number,
+  pasajeros: number,
 }
 
 @Component({
@@ -36,6 +37,7 @@ export class PopUpPasajeroComponent implements OnInit{
   adultos = 0;
   ninos = 0;
   infantes = 0;
+  pasajeros = 0
   validPasajeros = false;
 
   idContent:string;
@@ -68,7 +70,8 @@ export class PopUpPasajeroComponent implements OnInit{
               habitacion:this.habitacion,
               adultos:this.adultos,
               ninos:this.ninos,
-              infantes:this.infantes
+              infantes:this.infantes,
+              pasajeros: this.adultos + this.ninos + this.infantes
             }
           );
 
@@ -115,7 +118,7 @@ export class PopUpPasajeroComponent implements OnInit{
   }
 
 
-  savePasajeros(){
+  savePasajeros(){    
     this.popupService.closePopUp(this.idContent);
   }
 

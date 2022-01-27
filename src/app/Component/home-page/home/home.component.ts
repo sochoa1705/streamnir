@@ -9,7 +9,6 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { concatMap, filter, mergeMap, switchMap, take } from 'rxjs/operators';
 import { combineLatest, fromEvent } from 'rxjs';
 import { PopupService } from 'src/app/Services/pop-up/popup.service';
-import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
 
 @Component({
   selector: 'app-home',
@@ -25,53 +24,11 @@ export class HomeComponent implements OnInit {
     public dataPagePresenterService: DataPagePresenterService,
     public asidePresenterService: AsidePresenterService,
     public destinyService: DestinyService,
-    public reservaVuelosService: ReservaVuelosService
   ) { }
 
   ngOnInit(): void {
     this.listDestiny()
-    this.testReserva()
   }
-
-  testReserva() {
-    let payload = {
-      "segmentSelected": [
-        0, 0
-      ],
-      "IdGroup": "1b005365-4685-4a56-8585-396138baf367",
-      "passengers": [
-        {
-          "type": "ADT",
-          "name": "RODRIGO",
-          "lastName": "CCANCCE",
-          "birthday": "1998-02-20",
-          "documentType": 0,
-          "documentNumber": "72154521",
-          "gender": "M",
-          "email": "rodrigo98_22@outlook.com",
-          "phone": "989454123"
-        }
-      ],
-      "contact": {
-        "name": "RODRIGO",
-        "lastName": "RAQUI",
-        "email": "rodrigo98_22@outlook.com",
-        "address": "LIMA",
-        "phones": [
-          {
-            "phoneNumber": "989454123"
-          }
-        ]
-      }
-    }
-    this.reservaVuelosService.reserva(payload).subscribe({
-      next: (response: any) => console.log(response)
-    }
-
-    )
-
-  }
-
 
   listDestiny() {
     let payload = new NMRequest();

@@ -1,5 +1,5 @@
 <div class="boxTab">
-    
+
     <form class="bg-white" [formGroup]="form">
         <div class="rowBoxTab">
             <div class="padRight">
@@ -39,7 +39,7 @@
                 <!-- <input class="form-control" type="text" placeholder="Origen"> -->
             </div>
             <div class="colBoxtab">
-                <input matInput aria-label="State2"  [matAutocomplete]="auto2" formControlName="destino" (keyup)="autoComplete($event, 'destino')"
+                <input matInput aria-label="State2" [matAutocomplete]="auto2" formControlName="destino" (keyup)="autoComplete($event, 'destino')"
                     class="form-control" placeholder="Destino">
                 <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayWithDestino.bind(this)">
                     <mat-option *ngFor="let state of citysDestinosSelect" [value]="state.city_code">
@@ -57,9 +57,8 @@
                 <button class="fullWidht" type="button" (click)="searchVueloHotel()">Buscar</button>
             </div>
         </div>
-        <div class="rowBoxTab right text">Haciendo click en "Buscar", acepto las Condiciones Generales</div>
+        <div class="rowBoxTab right text">Haciendo click en
+            <strong>"Buscar"</strong> , acepto las Condiciones Generales</div>
         <span class="valid" *ngIf="false">Debe seleccionar la cantidad de pasajeros</span>
     </form>
-
-
 </div>
