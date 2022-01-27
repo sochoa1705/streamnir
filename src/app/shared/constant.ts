@@ -55,3 +55,13 @@ export enum ROUTE_VIAJES {
   RUTA_PAQUETES = 'https://nmviajes.paquetedinamico.com/ES/holidays/search',
   RUTA_GET = 'https://nmviajes.paquetedinamico.com/home'
 }
+
+export const FilterTypes = {
+  equipaje: 1,
+  escalas: 2,
+  aerolineas: 3,
+  precio: 4,
+  duracion: 5,
+  alianzas: 6,
+  reserva: 7
+}

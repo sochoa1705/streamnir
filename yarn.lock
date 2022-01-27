@@ -331,7 +331,11 @@
     "symbol-observable" "4.0.0"
     "uuid" "8.3.2"
 
+<<<<<<< HEAD
 "@angular/common@^12.0.0", "@angular/common@^12.0.0 || ^13.0.0-0", "@angular/common@>= 13.0.0", "@angular/common@>=10.0.0", "@angular/common@>=5.0.2", "@angular/common@~12.1.1", "@angular/common@12.1.1":
+=======
+"@angular/common@>=10.0.0", "@angular/common@~12.1.1":
+>>>>>>> motor-vuelos
   "integrity" "sha512-NnRwGMatzjthvDQ4+8tm09Ak5i27Qga8x4BdzINN1RjLmzQ0zW00Mn2AUGYEDZHt9HXVHff5stsZGqj+Ne4QJw=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-12.1.1.tgz"
   "version" "12.1.1"
@@ -365,14 +369,22 @@
   dependencies:
     "tslib" "^2.2.0"
 
+<<<<<<< HEAD
 "@angular/core@^12.0.0", "@angular/core@^12.0.0 || ^13.0.0-0", "@angular/core@>= 13.0.0", "@angular/core@>=10.0.0", "@angular/core@>=5.0.2", "@angular/core@~12.1.1", "@angular/core@12.1.1":
+=======
+"@angular/core@>=10.0.0", "@angular/core@~12.1.1":
+>>>>>>> motor-vuelos
   "integrity" "sha512-7Q4na8zCXi4ITBG8kgbS+vnnVK0GDU2WXU80/il096+8YPFKfj6MyDWZH79KA3jrIg9/yhLwSQx8x8wnj8dqBA=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-12.1.1.tgz"
   "version" "12.1.1"
   dependencies:
     "tslib" "^2.2.0"
 
+<<<<<<< HEAD
 "@angular/forms@^12.0.0", "@angular/forms@^12.0.0 || ^13.0.0-0", "@angular/forms@>=10.0.0", "@angular/forms@>=5.0.2", "@angular/forms@~12.1.1":
+=======
+"@angular/forms@>=10.0.0", "@angular/forms@~12.1.1":
+>>>>>>> motor-vuelos
   "integrity" "sha512-up5P9jdqsPjrX3YgNMSIkTCwRzVNJbAlDiKrnww7pt5RL2fZGq+x/ddvtTSjdne9oknRKitADFkjuPozPH+LOg=="
   "resolved" "https://registry.npmjs.org/@angular/forms/-/forms-12.1.1.tgz"
   "version" "12.1.1"
