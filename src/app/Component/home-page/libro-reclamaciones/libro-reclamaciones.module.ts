@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NuestraEmpresaComponent } from './nuestra-empresa.component';
+import { LibroReclamacionesComponent } from './libro-reclamaciones.component';
 import { MaterialModule } from '../../../shared/material.module';
 
 @NgModule({
-  declarations: [ NuestraEmpresaComponent ],
+  declarations: [ LibroReclamacionesComponent ],
   imports: [
     CommonModule,
     MaterialModule,
   ],
-  exports: [ NuestraEmpresaComponent ],
+  exports: [ LibroReclamacionesComponent ],
+
 })
-export class NuestraEmpresaModule { }
+export class LibroReclamacionesModule { }

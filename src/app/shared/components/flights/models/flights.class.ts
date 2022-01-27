@@ -38,6 +38,8 @@ export class ClassDetalleModalGeneralSegment {
         public origen:string,
         public destino:string,
         public ida:boolean,
+        public cabina:number,
+        public piezas:number
     ){
         this.titulo = this.ida? `De ${origen} a ${destino} (Ida)`: `De ${origen} a ${destino} (Vuelta)`
     }

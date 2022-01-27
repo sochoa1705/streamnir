@@ -16,6 +16,7 @@ import { MailingModule } from 'src/app/shared/components/mailing/mailing.module'
 import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer.module';
 import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
+import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -34,7 +35,7 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
     HttpClientModule,
   ],
   exports: [HomeComponent],
-  providers: [ DestinyService, AsidePresenterService, BusinessUnitService ]
+  providers: [ ReservaVuelosService, DestinyService, AsidePresenterService, BusinessUnitService ]
 
 })
 export class HomeModule { }

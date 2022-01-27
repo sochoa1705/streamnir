@@ -13,14 +13,16 @@ import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-co
 import { DocumentacionViajeComponent } from './documentacion-viaje/documentacion-viaje.component';
 import { NuestraEmpresaComponent } from './nuestra-empresa/nuestra-empresa.component';
 import { NuestrasAgenciasComponent } from './nuestras-agencias/nuestras-agencias.component';
+import { LibroReclamacionesComponent } from './libro-reclamaciones/libro-reclamaciones.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomePageComponent,
     children: [
-      { path: '', redirectTo: 'home', pathMatch:'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '', component: HomeComponent },
+      { path: 'filtro/:tab', component: HomeComponent },
       { path: 'paquetes', component: PaquetesComponent },
       { path: 'comprar', component: ComprarComponent },
       { path: 'vuelos/resultados', component: ResultadosComponent },
@@ -43,6 +45,7 @@ const routes: Routes = [
       },
       { path: 'nuestra-empresa', component: NuestraEmpresaComponent },
       { path: 'nuestras-agencias', component: NuestrasAgenciasComponent },
+      { path: 'libro-reclamaciones', component: LibroReclamacionesComponent },
 
     ]
   }

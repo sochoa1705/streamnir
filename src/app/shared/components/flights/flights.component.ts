@@ -32,6 +32,9 @@ export class FlightsComponent {
 
   vueloActualModal:ClassDetalleSegment; 
 
+  segmentoDeparture:number;
+  segmentoReturn:number;
+  
   @Input() set flights(value: IAerolineas[] | null) {
     if (value) {
       console.log(value);
@@ -133,7 +136,9 @@ export class FlightsComponent {
     const general = new ClassDetalleModalGeneralSegment(
       segment.flightSegments[0].departureAirport.name,
       segment.flightSegments[segment.flightSegments.length - 1].arrivalAirport.name,
-      isIda
+      isIda,
+      segment.equipaje?.cabina?.piezas || 0,
+      segment.equipaje?.piezas || 0
     )
 
     this.modalDetalle = new ClassDetalleModalSegment(
@@ -145,12 +150,25 @@ export class FlightsComponent {
   }
 
 
-  shop() {
-    //console.log(this.form.value);
-    let state2 = { ...this.json }
-    localStorage.setItem('safe0', JSON.stringify(state2));
 
+  shop(vuelo: string) {
+    console.log(vuelo)
+    let flight = { ...this.json, ...{departure: this.segmentoDeparture, return: this.segmentoReturn, idGroup: vuelo}}
+    localStorage.setItem('flight0', JSON.stringify(flight))
+    console.log(flight)
     const navigationExtras: NavigationExtras = { state: this.json };
     this.route.navigateByUrl('/home/comprar', navigationExtras);
+  }
+
+  radioSelect(e: any, segmento: string) {
+    if (segmento === 'return') {
+      this.segmentoReturn = e.value
+    } else {
+      this.segmentoDeparture = e.value
+    }
+    console.log(segmento)
+    console.log(this.segmentoReturn)
+    console.log(this.segmentoDeparture)
+
   }
 }

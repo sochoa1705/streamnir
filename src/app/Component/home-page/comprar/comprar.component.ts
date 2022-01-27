@@ -6,6 +6,7 @@ import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface'
 import { CoverageService } from 'src/app/Services/coverage/coverage.service';
 import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { take } from 'rxjs/operators';
+import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
 
 interface Methods {
   id: string;
@@ -102,7 +103,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>;
-
   constructor(
     public route: Router,
     private router: ActivatedRoute,
