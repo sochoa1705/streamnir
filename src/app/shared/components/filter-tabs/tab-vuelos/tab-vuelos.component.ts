@@ -17,8 +17,8 @@ import { ParamsVueloHotel, ParamsVuelos, URLVueloHotel, URLVuelos } from '../../
 export class TabVuelosComponent {
 
 
-  @ViewChild('popUp') popUpElement:PopUpPasajeroComponent | undefined;
- 
+  @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
+
   form!: FormGroup;
   fromDate: NgbDate | null
   citysOrigenSelect: Array<any> = [];
@@ -28,21 +28,21 @@ export class TabVuelosComponent {
   origenHotel: any;
   toDate: NgbDate | null;
 
-  distributionObject:IDistributionObject;
+  distributionObject: IDistributionObject;
   hoveredDate: NgbDate | null = null;
 
   EnumFlightType = EnumFlightType;
   EnumCabins = EnumCabins;
 
 
-  constructor(private calendar: NgbCalendar,private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar, private router:Router
-    ) {
+  constructor(private calendar: NgbCalendar, private destineService: DestinyService, public formatter: NgbDateParserFormatter,
+    private _snackBar: MatSnackBar, private router: Router
+  ) {
     this.createForm();
 
 
-  //  const data = this.destineService.searchMv();
-  //  console.log(data);
+    //  const data = this.destineService.searchMv();
+    //  console.log(data);
 
   }
 
@@ -66,16 +66,16 @@ export class TabVuelosComponent {
 
   navigateToResponseUrl(url: string): void {
     this.router.navigateByUrl(url);
- }
+  }
 
 
   public searchVueloHotel() {
-    if(!this.isValidate()){
+    if (!this.isValidate()) {
       this.openSnackBar("Error de validacion")
-      return ;
+      return;
     }
 
-    
+
     const url = this.getUrl();
     this.navigateToResponseUrl(url);
   }
@@ -93,15 +93,43 @@ export class TabVuelosComponent {
   public getUrl() {
     let url = ''
     let params = this.getParams();
-    let vuelo = {...params, ...this.distributionObject}
-    console.log(vuelo)
+    // nuevo
+    let adultosCount = this.distributionObject['adultos'],
+      ninosCount = this.distributionObject['ninos'],
+      infantesCount = this.distributionObject['infantes'],
+      pasajeros = this.distributionObject['pasajeros']
+
+    let adultosN = { item: 'Adulto' }
+    let ninosN = { item: 'Niño' }
+    let infantesN = { item: 'Infante' }
+
+    if (adultosCount > 0) {
+      for (let i = 0; i < adultosCount; i++) {
+        pasajeros.push(adultosN)
+      }
+    }
+    if (ninosCount > 0) {
+      for (let i = 0; i < ninosCount; i++) {
+        pasajeros.push(ninosN)
+      }
+    }
+    if (infantesCount > 0) {
+      for (let i = 0; i < infantesCount; i++) {
+        pasajeros.push(infantesN)
+      }
+    }
+
+    let vuelo = { ...params, ...this.distributionObject }
+    console.log(this.distributionObject)
+
+
     localStorage.setItem('filtroVuelo', JSON.stringify(vuelo))
-    
+
     url = new URLVuelos(params, this.distributionObject).getUrl();
     return url;
   }
 
-  autoComplete(e: any, type:'origen' | 'destino') {
+  autoComplete(e: any, type: 'origen' | 'destino') {
     // let elemento = this.origen.nativeElement;
     let elemento = e.target;
 
@@ -114,24 +142,24 @@ export class TabVuelosComponent {
     //   elemento.classList.add('auto');
     // }
     if (value.length >= 3) {
-      this.getListVuelos(value,type);
+      this.getListVuelos(value, type);
     }
   }
 
-  isValidate(){
-    return this.popUpElement?.isValid();
+  isValidate() {
+    return this.popUpElement ?.isValid();
   }
 
 
-  getListVuelos(e: any, type:'origen' | 'destino') {
+  getListVuelos(e: any, type: 'origen' | 'destino') {
     this.destineService.getGeoTree(e).subscribe(
       data => {
-        if(type == 'origen'){
+        if (type == 'origen') {
           this.citysOrigenSelect = data;
-        }else if( type == 'destino'){
+        } else if (type == 'destino') {
           this.citysDestinosSelect = data;
         }
-        
+
       },
       err => console.log(err)
     )
@@ -139,11 +167,11 @@ export class TabVuelosComponent {
 
 
   displayWithOrigen(value: string) {
-      return value ? this.citysOrigenSelect.find(_ => _.city_code === value).city : undefined;  
+    return value ? this.citysOrigenSelect.find(_ => _.city_code === value).city : undefined;
   }
 
   displayWithDestino(value: string) {
-      return value ? this.citysDestinosSelect.find(_ => _.city_code === value).city : undefined;
+    return value ? this.citysDestinosSelect.find(_ => _.city_code === value).city : undefined;
   }
 
   changeDate(value: ClassValueCalendar) {

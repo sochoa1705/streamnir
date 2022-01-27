@@ -159,9 +159,11 @@
         </div>
     </div>
 
+    <!-- PASAJEROS -->
     <div class="row text-center">
         <div class="titleConf">
-            Datos del asegurado
+            {{ safe0Json.reservaVuelos ? 'Datos de pasajero(s)' : 'Datos de asegurado(s)'}}
+
         </div>
     </div>
     <div class="row py-4">
@@ -185,14 +187,15 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    
-    <div class="row text-center">
+    <!-- END PASAJEROS -->
+
+    <!-- COBERTURA-->
+    <div class="row text-center" *ngIf="!safe0Json.reservaVuelos">
         <div class="titleConf">
             Detalle de tu cobertura
         </div>
     </div>
-
-    <div class="row py-2">
+    <div class="row py-2" *ngIf="!safe0Json.reservaVuelos">
         <div class="offset-4 col-4 viewMobile">
             <div *ngIf="safe0Json.detalleCobertura" class="order-0">
                 <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="'USD 60.000'" [txtOrigen]=""
@@ -202,6 +205,70 @@
         </div>
         <div class="clearfix"></div>
     </div>
+    <!-- END COBERTURA-->
+
+    <!-- DETALLE DE VIAJE -->
+
+    <!-- END DETALLE DE VIAJE -->
+
+    <!-- CDR -->
+    <div class="row">
+        <div class="col-sm-12 col-md-6 bCard" *ngIf="safe0Json.reservaVuelos">
+            <div class="card shadow-none border-0 bg-transparent ">
+                <div class="card-header text-center border-0 rounded-top bCardHead">
+                    <img src="./assets/comprar/card/_assist.png" alt=""> Asistencia al viajero
+                </div>
+                <div class="card-center text-center d-flex align-items-center">
+                    <strong>$ 2.50</strong>
+                    <span>por persona/por día</span>
+                </div>
+                <div class="card-body shadow-sm bg-white rounded-bottom">
+                    <!-- <h5 class="card-title">Special title treatment</h5> -->
+                    <ul>
+                        <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 | Resto del mundo: USD 30,000
+                        </li>
+                        <li>Asistencia en caso de robo o extravío de documentos, etc</li>
+                        <li>Indemnización por pérdida de equipaje Complementario - USD 40 por Kg</li>
+                    </ul>
+                    <a href="#" class="d-block text-end">
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.6713 2.10503L6.69472 0.0388191C6.57005 -0.012927 6.42992 -0.0129524 6.30528 0.0388191L1.32872 2.10503C1.13918 2.18374 1.01562 2.36879 1.01562 2.57402V5.08579C1.01562 8.54432 3.10601 11.6554 6.3081 12.9623C6.43109 13.0125 6.56889 13.0125 6.6919 12.9623C9.89394 11.6554 11.9844 8.54435 11.9844 5.08579V2.57402C11.9844 2.36879 11.8608 2.18374 11.6713 2.10503ZM10.9688 5.08579C10.9688 8.0259 9.24219 10.7325 6.5 11.9406C3.83109 10.7647 2.03125 8.10557 2.03125 5.08579V2.91304L6.5 1.05764L10.9688 2.91304V5.08579ZM5.93871 6.79747L8.12139 4.61482C8.3197 4.41652 8.64122 4.41649 8.83954 4.61482C9.03787 4.81315 9.03784 5.13467 8.83952 5.33297L6.29779 7.8747C6.09944 8.07305 5.77792 8.07297 5.57964 7.8747L4.16046 6.45551C3.96213 6.25719 3.96213 5.93567 4.16046 5.73737C4.35878 5.53906 4.6803 5.53904 4.87861 5.73737L5.93871 6.79747Z"
+                                fill="#009AED" />
+                        </svg> Ver cobertura de seguro</a>
+                    <a href="#" class="button">Agregar seguro</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 bCard" *ngIf="safe0Json.reservaVuelos">
+            <div class="card shadow-none border-0 bg-transparent">
+                <div class="card-header text-center border-0 rounded-top bCardHead">
+                    <img src="./assets/comprar/card/_protect.png" alt=""> Reembolso por emergencia
+                </div>
+                <div class="card-center text-center d-flex align-items-center">
+                    <strong>$ 60</strong>
+                    <!-- <span>por persona/por día</span> -->
+                </div>
+                <div class="card-body shadow-sm  bg-white rounded-bottom">
+                    <!-- <h5 class="card-title">Special title treatment</h5> -->
+                    <ul>
+                        <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 | Resto del mundo: USD 30,000
+                        </li>
+                        <li>Asistencia en caso de robo o extravío de documentos, etc</li>
+                        <li>Indemnización por pérdida de equipaje Complementario - USD 40 por Kg</li>
+                    </ul>
+                    <a href="#" class="d-block text-end">
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.6713 2.10503L6.69472 0.0388191C6.57005 -0.012927 6.42992 -0.0129524 6.30528 0.0388191L1.32872 2.10503C1.13918 2.18374 1.01562 2.36879 1.01562 2.57402V5.08579C1.01562 8.54432 3.10601 11.6554 6.3081 12.9623C6.43109 13.0125 6.56889 13.0125 6.6919 12.9623C9.89394 11.6554 11.9844 8.54435 11.9844 5.08579V2.57402C11.9844 2.36879 11.8608 2.18374 11.6713 2.10503ZM10.9688 5.08579C10.9688 8.0259 9.24219 10.7325 6.5 11.9406C3.83109 10.7647 2.03125 8.10557 2.03125 5.08579V2.91304L6.5 1.05764L10.9688 2.91304V5.08579ZM5.93871 6.79747L8.12139 4.61482C8.3197 4.41652 8.64122 4.41649 8.83954 4.61482C9.03787 4.81315 9.03784 5.13467 8.83952 5.33297L6.29779 7.8747C6.09944 8.07305 5.77792 8.07297 5.57964 7.8747L4.16046 6.45551C3.96213 6.25719 3.96213 5.93567 4.16046 5.73737C4.35878 5.53906 4.6803 5.53904 4.87861 5.73737L5.93871 6.79747Z"
+                                fill="#009AED" />
+                        </svg> Ver cobertura de seguro</a>
+                    <a href="#" class="button">Agregar seguro</a>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- END CDR -->
+
 
     <div class="row text-center">
         <div class="titleConf">

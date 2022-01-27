@@ -10,7 +10,7 @@ export interface IDistributionObject{
   adultos:number,
   ninos:number,
   infantes:number,
-  pasajeros: number,
+  pasajeros: any[],
 }
 
 @Component({
@@ -71,7 +71,7 @@ export class PopUpPasajeroComponent implements OnInit{
               adultos:this.adultos,
               ninos:this.ninos,
               infantes:this.infantes,
-              pasajeros: this.adultos + this.ninos + this.infantes
+              pasajeros: []
             }
           );
 

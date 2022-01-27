@@ -133,6 +133,25 @@ export class ConformidadComponent implements OnInit {
     return fechaNac
   }
 
+  pasajerosVuelos() {
+    let pasajeros: any = []
+    this.shopString.customers.forEach((value: any, index: number) => {
+      let jsonPasajeros = {
+        type: "ADT",
+        name: value.nameCustomer,
+        lastName: value.lastNameCustomer,
+        birthday: value.yearCustomer + '-' + value.monthCustomer + '-' + value.dayCustomer,
+        documentType: (value.typeDocCustomer === 'dni') ? 0 : 1,
+        documentNumber: value.numDocCustomer,
+        gender: (value.sexCustomer === 'masculino') ? 'M' : '',
+        email: this.shopString.formContact.mailContacto,
+        phone: this.shopString.formContact.numberPhone0
+      }
+      pasajeros.push(jsonPasajeros)
+    })
+    return pasajeros
+  }
+
   pasajerosArr() {
     let pasajeros: any = []
     this.shopString.customers.forEach((value: any, index: number) => {
@@ -355,19 +374,20 @@ export class ConformidadComponent implements OnInit {
         this.safe0Json.departure, this.safe0Json.return
       ],
       "IdGroup": this.safe0Json.idGroup,
-      "passengers": [
-        {
-          "type": "ADT",
-          "name": "RODRIGO",
-          "lastName": "CCANCCE",
-          "birthday": "1998-02-20",
-          "documentType": 0,
-          "documentNumber": "72154521",
-          "gender": "M",
-          "email": "rodrigo98_22@outlook.com",
-          "phone": "989454123"
-        }
-      ],
+      "passengers": this.pasajerosVuelos(),
+      // "passengers": [
+      //   {
+      //     "type": "ADT",
+      //     "name": "RODRIGO",
+      //     "lastName": "CCANCCE",
+      //     "birthday": "1998-02-20",
+      //     "documentType": 0,
+      //     "documentNumber": "72154521",
+      //     "gender": "M",
+      //     "email": "rodrigo98_22@outlook.com",
+      //     "phone": "989454123"
+      //   }
+      // ],
       contact: {
         name: this.shopString.formContact.nameContacto,
         lastName: this.shopString.formContact.lastnameContacto,
@@ -380,6 +400,8 @@ export class ConformidadComponent implements OnInit {
         ]
       }
     }
+    console.log(payload);
+    
     this.reservaVuelosService.reserva(payload, this.tokenJson).subscribe({
       next: (response: any) => {
         console.log(response)

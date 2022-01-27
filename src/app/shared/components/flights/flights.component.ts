@@ -153,7 +153,7 @@ export class FlightsComponent {
 
   shop(vuelo: string) {
     console.log(vuelo)
-    let flight = { ...this.json, ...{departure: this.segmentoDeparture, return: this.segmentoReturn, idGroup: vuelo}}
+    let flight = { ...this.json, ...{departure: this.segmentoDeparture, return: this.segmentoReturn, idGroup: vuelo, reservaVuelos: true}}
     localStorage.setItem('safe0', JSON.stringify(flight))
     console.log(flight)
     const navigationExtras: NavigationExtras = { state: this.json };

@@ -187,6 +187,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log(this.filtroVueloJson)
 
     let pasajeros = this.resultJson !== null ? this.resultJson['ClienteCotizacion'] : this.filtroVueloJson['pasajeros']
+    console.log(pasajeros);
+    
     for (const i of pasajeros) {
       this.addCustomers()
     }
@@ -541,7 +543,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       // console.log(this.formShop);
       console.log(this.formShop.value);
       this.formShop.addControl('tipoRecibo', new FormControl('BV'));
-      this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson.passenger.length));
+      // this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson.passenger.length));
       let dataShop = this.formShop.value
       localStorage.setItem('shop', JSON.stringify(dataShop));
 
