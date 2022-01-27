@@ -2,13 +2,6 @@
 # yarn lockfile v1
 
 
-"@agm/core@^3.0.0-beta.0":
-  "integrity" "sha512-KNmKbe89Nen7s7+mX63RgX88jBfajUZCFqkHIQ8Fd+Lf/ko/IY6yw4kPh0iYGxgPVPjpsHJ06GZ5m3ZxpEVX9A=="
-  "resolved" "https://registry.npmjs.org/@agm/core/-/core-3.0.0-beta.0.tgz"
-  "version" "3.0.0-beta.0"
-  dependencies:
-    "tslib" "^2.0.0"
-
 "@angular-builders/jest@latest":
   "integrity" "sha512-lBr+Aw1PGVev/Cz3jpD+wZzoxIGOujFzxc5IAL2l5+LTzHGHxi+/f+rKIIidBjRm3iORqFwoxJXXm9StSIjbWA=="
   "resolved" "https://registry.npmjs.org/@angular-builders/jest/-/jest-13.0.2.tgz"
@@ -338,7 +331,7 @@
     "symbol-observable" "4.0.0"
     "uuid" "8.3.2"
 
-"@angular/common@~12.1.1":
+"@angular/common@>=10.0.0", "@angular/common@~12.1.1":
   "integrity" "sha512-NnRwGMatzjthvDQ4+8tm09Ak5i27Qga8x4BdzINN1RjLmzQ0zW00Mn2AUGYEDZHt9HXVHff5stsZGqj+Ne4QJw=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-12.1.1.tgz"
   "version" "12.1.1"
@@ -372,14 +365,14 @@
   dependencies:
     "tslib" "^2.2.0"
 
-"@angular/core@~12.1.1":
+"@angular/core@>=10.0.0", "@angular/core@~12.1.1":
   "integrity" "sha512-7Q4na8zCXi4ITBG8kgbS+vnnVK0GDU2WXU80/il096+8YPFKfj6MyDWZH79KA3jrIg9/yhLwSQx8x8wnj8dqBA=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-12.1.1.tgz"
   "version" "12.1.1"
   dependencies:
     "tslib" "^2.2.0"
 
-"@angular/forms@~12.1.1":
+"@angular/forms@>=10.0.0", "@angular/forms@~12.1.1":
   "integrity" "sha512-up5P9jdqsPjrX3YgNMSIkTCwRzVNJbAlDiKrnww7pt5RL2fZGq+x/ddvtTSjdne9oknRKitADFkjuPozPH+LOg=="
   "resolved" "https://registry.npmjs.org/@angular/forms/-/forms-12.1.1.tgz"
   "version" "12.1.1"
@@ -7493,6 +7486,13 @@
   dependencies:
     "tslib" "^2.1.0"
 
+"ngx-mask@^13.1.1":
+  "integrity" "sha512-UvkTrHQ6/WvJd5PIDnXZd734+eC8r4suxBGaRrIJ1Vn86WeQma9HouklYPNvEXEj5NAZUSP61siFpZL76l/ang=="
+  "resolved" "https://registry.npmjs.org/ngx-mask/-/ngx-mask-13.1.1.tgz"
+  "version" "13.1.1"
+  dependencies:
+    "tslib" "^2.3.0"
+
 "nice-try@^1.0.4":
   "integrity" "sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ=="
   "resolved" "https://registry.npmjs.org/nice-try/-/nice-try-1.0.5.tgz"
@@ -10409,7 +10409,7 @@
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   "version" "1.14.1"
 
-"tslib@^2.0.0", "tslib@^2.1.0", "tslib@^2.2.0", "tslib@2.3.0":
+"tslib@^2.0.0", "tslib@^2.1.0", "tslib@^2.2.0", "tslib@^2.3.0", "tslib@2.3.0":
   "integrity" "sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.3.0.tgz"
   "version" "2.3.0"

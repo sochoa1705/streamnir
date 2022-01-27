@@ -4,6 +4,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
+import {
+  AirlineFilter,
+  FilterResult,
+} from 'src/app/shared/components/filter-result/models/filter-result.interfaces';
 import { DisponibilidadPayload } from 'src/app/shared/components/flights/models/flights.class';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 import { IAerolineas, ParamsVuelos } from './models/resultados.interfaces';
@@ -32,9 +36,12 @@ export class ResultadosComponent implements OnInit {
     { value: 'tacos-2', viewValue: 'Tacos' },
   ];
 
-  flights: IAerolineas[];
+  //flights: IAerolineas[];
+  flights: any[];
   flightsOri: IAerolineas[];
-  filtersObj: any = {};
+  filtersObj: FilterResult;
+
+  exchangeRate: any;
 
   error = {
     isError: false,
@@ -52,6 +59,7 @@ export class ResultadosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.filtersObj = { airlines: [] };
     this.loader.showText('Cargando los vuelos');
     this.loader.showLoader();
     this.getParams();
@@ -92,7 +100,21 @@ export class ResultadosComponent implements OnInit {
           this.error.isError = false;
           this.flights = resp.groups;
           this.flightsOri = resp.groups;
-          this.filtersObj.airllines = resp.airlinesFilter;
+          this.filtersObj.airlines = resp.airlinesFilter.map((x) => {
+            let airline: AirlineFilter = {
+              code: x.code,
+              name: x.name,
+              imageUrl: x.imageUrl,
+              checked: false,
+            };
+
+            return airline;
+          });
+
+          this.exchangeRate = resp.exchangeRate;
+
+          console.log(resp);
+
           this.loader.closeLoader();
         })
         .catch((err: HttpErrorResponse) => {
@@ -147,13 +169,59 @@ export class ResultadosComponent implements OnInit {
 
   filterChange(filter: any) {
     console.log(filter);
-    this.flights = this.flightsOri.filter(
-      (x) =>
-        x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare >=
-          filter.precio.min &&
-        x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare <=
-          filter.precio.max
-    );
+
+    if (filter.price.currency == 'soles') {
+      this.flights = this.flightsOri.filter(
+        (x) =>
+          x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
+            .totalFare *
+            this.exchangeRate.amount >=
+            filter.price.min &&
+          x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
+            .totalFare *
+            this.exchangeRate.amount <=
+            filter.price.max
+      );
+    } else {
+      this.flights = this.flightsOri.filter(
+        (x) =>
+          x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
+            .totalFare >= filter.price.min &&
+          x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
+            .totalFare <= filter.price.max
+      );
+    }
+
+    if (filter.airline.length > 0) {
+      let af = this.flights.map((x) => {
+        let df = x.departure[0].segments[0].flightSegments[0]
+          ? x.departure[0].segments[0].flightSegments[0].marketingAirline.code
+          : '';
+        let dg = x.departure[0].segments[0].flightSegments[1]
+          ? x.departure[0].segments[0].flightSegments[1].marketingAirline.code
+          : '';
+
+        let rf = x.returns.segments[0].flightSegments[0]
+          ? x.returns.segments[0].flightSegments[0].marketingAirline.code
+          : '';
+        let rg = x.returns.segments[0].flightSegments[1]
+          ? x.returns.segments[0].flightSegments[1].marketingAirline.code
+          : '';
+
+        if (
+          filter.airline.find((ff: any) => ff == df) ||
+          filter.airline.find((ff: any) => ff == dg) ||
+          filter.airline.find((ff: any) => ff == rf) ||
+          filter.airline.find((ff: any) => ff == rg)
+        ) {
+          return x;
+        }
+        return null;
+      });
+
+      this.flights = af.filter((x) => x != null);
+    }
+
     // console.log(filter);
   }
 }
