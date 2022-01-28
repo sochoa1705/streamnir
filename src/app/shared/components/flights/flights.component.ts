@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { FlightSegment, IAerolineas, Segment } from 'src/app/Component/home-page/resultados/models/resultados.interfaces';
-import { ClassDetalleLocalSt, ClassDetalleModalGeneralSegment, ClassDetalleModalSegment, ClassDetalleSegment, ClassEscalasDetalle } from './models/flights.class';
+import { ClassDetalleLocalSt, ClassDetalleModalGeneralSegment, ClassDetalleModalSegment, ClassDetalleSegment, ClassEscalasDetalle, ClassPricingInfoDetalle } from './models/flights.class';
 import { IEscalaDetalleSegment, IMovDetalleSegment, IVueloDetalleSegment } from './models/flights.interface';
 import 'moment-precise-range-plugin';
 import * as moment from 'moment';
+import { FareBreakPipe } from './pipes/fare-break-downs.pipe';
 moment.locale('es')
 
 @Component({
@@ -45,13 +46,15 @@ export class FlightsComponent {
     }
   }
 
+  @Input() conversion:number;
+
   get flights() {
     return this._flights;
   }
 
 
 
-  constructor(public route: Router) { }
+  constructor(public route: Router, private fareBreakPipe:FareBreakPipe ) { }
 
   calculateTimeWait(durationTime:moment.PreciseRangeValueObject):string{
     let tiempo_espera:string;
@@ -152,6 +155,7 @@ export class FlightsComponent {
       escalas
     )
 
+
     this.modalDetalle = new ClassDetalleModalSegment(
       general,
       detalle
@@ -161,6 +165,21 @@ export class FlightsComponent {
   }
 
 
+  calculePrincing(){
+    const fareBreak = this.vueloEscogidoIda.pricingInfo.itinTotalFare.fareBreakDowns;
+
+    const pricingInf = new ClassPricingInfoDetalle(
+        this.fareBreakPipe.transform(fareBreak, 'persona'),
+        this.fareBreakPipe.transform(fareBreak, 'impuestos'),
+        this.fareBreakPipe.transform(fareBreak, 'cargos'),
+        this.fareBreakPipe.transform(fareBreak, 'nroAdultos'),
+        this.fareBreakPipe.transform(fareBreak, 'precioFinal'),
+        this.fareBreakPipe.transform(fareBreak, 'totalPrecioAdultos'),
+        this.fareBreakPipe.transform(fareBreak, 'precioSoles',this.conversion),
+      )
+
+      return pricingInf;
+  }
 
   shop(vuelo: string) {
     let flight = { ...this.json, ...{departure: this.segmentoDeparture, return: this.segmentoReturn, idGroup: vuelo}}
@@ -170,7 +189,10 @@ export class FlightsComponent {
     const ida = this.selectVuelo(this.segmentoDepartureObj,true);
     const vuelta = this.selectVuelo(this.segmentoReturnObj,false);
 
-    const detalleVuelo = new ClassDetalleLocalSt(ida,vuelta);
+
+    const pricingInf = this.calculePrincing();
+
+    const detalleVuelo = new ClassDetalleLocalSt(ida,vuelta,pricingInf);
 
     localStorage.setItem('detalleVuelo', JSON.stringify(detalleVuelo));
 
@@ -178,13 +200,15 @@ export class FlightsComponent {
     this.route.navigateByUrl('/home/comprar', navigationExtras);
   }
 
-  radioSelect(e: any, segmento: string, segment:Segment) {
+  radioSelect(e: any, segmento: string, segment:Segment, vuelo:IAerolineas) {
     if (segmento === 'return') {
       this.segmentoReturn = e.value;
       this.segmentoReturnObj = segment;
+      this.vueloEscogidoIda=vuelo;
     } else {
       this.segmentoDeparture = e.value;
       this.segmentoDepartureObj = segment;
+      this.vueloEscogidoVuelta= vuelo;
     }
 
     console.log(this.segmentoDepartureObj);

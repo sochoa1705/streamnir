@@ -1,4 +1,4 @@
-import { Segment } from "src/app/Component/home-page/resultados/models/resultados.interfaces";
+import { PassengerFare, PassengerType, Segment } from "src/app/Component/home-page/resultados/models/resultados.interfaces";
 import { EnumCabins, EnumFlightType, IEscalaDetalleSegment, IMovDetalleSegment, IVueloDetalleSegment } from "./flights.interface"
 
 export class DisponibilidadPayload {
@@ -43,6 +43,18 @@ export class ClassEscalasDetalle {
         public tiempo_espera:string
     ){}
 }
+export class ClassPricingInfoDetalle {
+    constructor(
+        public persona:number,
+        public impuestos:number,
+        public cargos:number,
+        public nroAdultos:number,
+        public precioFinal:number,
+        public totalPrecioAdultos:number,
+        public precioSoles:number,
+    ){}
+}
+
 export class ClassDetalleSegment {
     constructor(
         public salida:IMovDetalleSegment,
@@ -56,6 +68,7 @@ export class ClassDetalleSegment {
 export class ClassDetalleLocalSt {
     constructor(
         public segmentoDeparture:ClassDetalleModalSegment,
-        public segmentoReturn:ClassDetalleModalSegment
+        public segmentoReturn:ClassDetalleModalSegment,
+        public pricingInfo:ClassPricingInfoDetalle
     ){}
 }

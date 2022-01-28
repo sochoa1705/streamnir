@@ -20,5 +20,6 @@ import { FormatPipe } from './pipes/format-day.pipe';
     DirectivesModule
   ],
   exports: [ FlightsComponent ],
+  providers:[FareBreakPipe]
 })
 export class FlightsModule { }

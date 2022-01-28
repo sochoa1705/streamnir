@@ -868,7 +868,7 @@
             <div class="row" *ngIf="flights">
                 <div class="col-sm-12 col-md-12 col-lg-12 pt-3">
                     <ng-container *ngIf="!error.isError">
-                        <app-flights [flights]="flights" *ngFor="let i of [1]"></app-flights>
+                        <app-flights [flights]="flights" [conversion]="conversion" *ngFor="let i of [1]"></app-flights>
                     </ng-container>
                 </div>
                 <div class="clearfix"></div>

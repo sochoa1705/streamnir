@@ -33,6 +33,7 @@ export class ResultadosComponent implements OnInit {
   ];
 
   flights: IAerolineas[];
+  conversion: number;
   flightsOri: IAerolineas[];
   filtersObj: any = {};
 
@@ -91,6 +92,7 @@ export class ResultadosComponent implements OnInit {
         .then((resp) => {
           this.error.isError = false;
           this.flights = resp.groups;
+          this.conversion= resp.exchangeRate.amount;
           this.flightsOri = resp.groups;
           this.filtersObj.airllines = resp.airlinesFilter;
           this.loader.closeLoader();

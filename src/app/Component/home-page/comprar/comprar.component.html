@@ -1209,7 +1209,7 @@
 
             <!-- ACORDION VUELOS -->
             <ng-template #detail>
-                <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion" id="accordionPanelsStayOpenExample" *ngIf="detalleVuelos.pricingInfo">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                             <a class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
@@ -1221,16 +1221,16 @@
                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
                             <div class="accordion-body">
                                 <div class="row mgBottom">
-                                    <div class="col-6 txtdet">2 Pasajero(s)</div>
-                                    <div class="col-6 txtdet right">$ 690.00</div>
+                                    <div class="col-6 txtdet">{{detalleVuelos.pricingInfo.nroAdultos + " Pasajero(s)"}}</div>
+                                    <div class="col-6 txtdet right">{{"$ "+ detalleVuelos.pricingInfo.totalPrecioAdultos}}</div>
                                 </div>
                                 <div class="row mgBottom">
                                     <div class="col-6 txtdet">Impuestos</div>
-                                    <div class="col-6 txtdet right">$ 343.38</div>
+                                    <div class="col-6 txtdet right">{{"$ "+detalleVuelos.pricingInfo.impuestos}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-6 txtdet">Cargos</div>
-                                    <div class="col-6  txtdet right">$ 103.34</div>
+                                    <div class="col-6  txtdet right">{{"$ "+detalleVuelos.pricingInfo.cargos}}</div>
                                 </div>
                                 <!-- <div class="separarBox"></div> -->
                             </div>
@@ -1241,8 +1241,7 @@
                                     <span class="price_end">PRECIO FINAL</span>
                                 </div>
                                 <div class="col-5 text-end">
-                                    $
-                                    <span class="price_end_number">1136.72</span>
+                                    <span class="price_end_number">{{"$ "+detalleVuelos.pricingInfo.precioFinal}}</span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -1251,7 +1250,7 @@
                                     <span class="price_reference">Precio referencial en soles.</span>
                                 </div>
                                 <div class="col-5 text-end">
-                                    <span class="price_reference_number">S/. 4546.72</span>
+                                    <span class="price_reference_number">{{"S/ "+detalleVuelos.pricingInfo.precioSoles}}</span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
