@@ -36,8 +36,8 @@ export class ResultadosComponent implements OnInit {
     { value: 'tacos-2', viewValue: 'Tacos' },
   ];
 
-  //flights: IAerolineas[];
-  flights: any[];
+  flights: IAerolineas[];
+  conversion: number;
   flightsOri: IAerolineas[];
   filtersObj: FilterResult;
 
@@ -99,6 +99,7 @@ export class ResultadosComponent implements OnInit {
         .then((resp) => {
           this.error.isError = false;
           this.flights = resp.groups;
+          this.conversion= resp.exchangeRate.amount;
           this.flightsOri = resp.groups;
           this.filtersObj.airlines = resp.airlinesFilter.map((x) => {
             let airline: AirlineFilter = {
@@ -135,7 +136,6 @@ export class ResultadosComponent implements OnInit {
   id: any = 'tabIda';
   showOption(ids: any) {
     this.id = ids;
-    console.log(this.id);
   }
 
   openSnackBar(message: string, action: string = 'Error') {
@@ -168,6 +168,9 @@ export class ResultadosComponent implements OnInit {
   }
 
   filterChange(filter: any) {
+    this.loader.showText('Cargando los vuelos');
+    this.loader.showLoader();
+
     console.log(filter);
 
     if (filter.price.currency == 'soles') {
@@ -193,7 +196,7 @@ export class ResultadosComponent implements OnInit {
     }
 
     if (filter.airline.length > 0) {
-      let af = this.flights.map((x) => {
+      let af:any = this.flights.map((x) => {
         let df = x.departure[0].segments[0].flightSegments[0]
           ? x.departure[0].segments[0].flightSegments[0].marketingAirline.code
           : '';
@@ -219,9 +222,10 @@ export class ResultadosComponent implements OnInit {
         return null;
       });
 
-      this.flights = af.filter((x) => x != null);
+      this.flights = af.filter((x:any) => x != null);
     }
 
     // console.log(filter);
+    this.loader.closeLoader();
   }
 }

@@ -28,7 +28,7 @@
         <span
           *ngFor="let filterSelect of filterSelected; index as i"
           class="btn btn-outline-danger btn-filter"
-          >{{ filterSelect.name }}<a class="icon-x">X</a></span
+          >{{ filterSelect.name }}<a class="icon-x" (click)="removeFilterBlock(filterSelect.filterType)">X</a></span
         >
       </div>
     </div>
@@ -248,6 +248,7 @@
           [options]="optionsPrice"
           (valueChange)="priceChange($event)"
           (highValueChange)="priceMaxChange($event)"
+          (userChangeEnd)="filterChange()"
         >
         </ng5-slider>
       </div>
@@ -526,8 +527,5 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="accordion-item">
-    <button type="button" (click)="filterChange()">Aplicar Filtro</button>
   </div>
 </div>

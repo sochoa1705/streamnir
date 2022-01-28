@@ -7,6 +7,8 @@ import { CoverageService } from 'src/app/Services/coverage/coverage.service';
 import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { take } from 'rxjs/operators';
 import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
+import { ClassDetalleLocalSt, ClassDetalleModalSegment } from 'src/app/shared/components/flights/models/flights.class';
+import { IFiltroVuelo } from './interfaces/comprar.interfaces';
 
 interface Methods {
   id: string;
@@ -85,7 +87,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   safe0: any
   safe0Json: any
   filtroVuelo: any
-  filtroVueloJson: any
+  filtroVueloJson: IFiltroVuelo;
   banca: boolean = true
   banks = [
     { name: 'Banco de Crédito', value: 1005 },
@@ -104,6 +106,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   isLinear = true;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
+
+  detalleVuelos:ClassDetalleLocalSt;
+
+  modalDetalle:ClassDetalleModalSegment;
+
   @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>;
   constructor(
     public route: Router,
@@ -113,10 +120,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   ) {
     this.filtroVuelo = localStorage.getItem('filtroVuelo')
     this.filtroVueloJson = JSON.parse(this.filtroVuelo)
-    this.safe0 = localStorage.getItem('safe0')
+    this.safe0 = localStorage.getItem('safe0');
     this.safe0Json = JSON.parse(this.safe0)
-    this.result = localStorage.getItem('Datasafe')
-    this.resultJson = JSON.parse(this.result)
+    this.result = localStorage.getItem('Datasafe');
+    const detalleVuelosStr:any = localStorage.getItem('detalleVuelo');
+    this.detalleVuelos = JSON.parse(detalleVuelosStr);
+    this.resultJson = JSON.parse(this.result);
+
     this.unidadNegocio = localStorage.getItem('businessunit')
     this.businessunit = JSON.parse(this.unidadNegocio)
     console.log(this.resultJson);
@@ -558,6 +568,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   otherPlan() {
     localStorage.removeItem('safe0')
     this.route.navigateByUrl('/home/vuelos/resultados');
+  }
+
+
+  selectVuelo(isIda:boolean){
+    this.modalDetalle = isIda?this.detalleVuelos.segmentoDeparture:this.detalleVuelos.segmentoReturn;
   }
 
   listCoverage() {

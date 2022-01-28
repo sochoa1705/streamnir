@@ -10,9 +10,12 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FiltroDetallePipe } from './pipes/filtro-detalle.pipe';
+import { DirectivesModule } from 'src/app/shared/directives/directives.module';
+import { HoraPipe } from './pipes/hora.pipe';
 
 @NgModule({
-  declarations: [ ComprarComponent ],
+  declarations: [ ComprarComponent,FiltroDetallePipe,HoraPipe ],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -25,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MaterialModule,
     RouterModule,
+    DirectivesModule
   ],
   exports: [ ComprarComponent ],
   providers: []

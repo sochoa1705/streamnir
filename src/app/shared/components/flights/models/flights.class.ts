@@ -1,4 +1,4 @@
-import { Segment } from "src/app/Component/home-page/resultados/models/resultados.interfaces";
+import { PassengerFare, PassengerType, Segment } from "src/app/Component/home-page/resultados/models/resultados.interfaces";
 import { EnumCabins, EnumFlightType, IEscalaDetalleSegment, IMovDetalleSegment, IVueloDetalleSegment } from "./flights.interface"
 
 export class DisponibilidadPayload {
@@ -17,15 +17,6 @@ export class DisponibilidadPayload {
     ){}
 }
 
-
-export class ClassModalVuelo {
-    constructor(
-        public segment:Segment,
-        public origen:string,
-        public destino:string,
-    ){}
-}
-
 export class ClassDetalleModalSegment {
     constructor(
         public general:ClassDetalleModalGeneralSegment,
@@ -39,16 +30,45 @@ export class ClassDetalleModalGeneralSegment {
         public destino:string,
         public ida:boolean,
         public cabina:number,
-        public piezas:number
+        public piezas:number,
+        public escalas:ClassEscalasDetalle[] = []
     ){
         this.titulo = this.ida? `De ${origen} a ${destino} (Ida)`: `De ${origen} a ${destino} (Vuelta)`
     }
 }
+
+export class ClassEscalasDetalle {
+    constructor(
+        public nombre_ciudad:string,
+        public tiempo_espera:string
+    ){}
+}
+export class ClassPricingInfoDetalle {
+    constructor(
+        public persona:number,
+        public impuestos:number,
+        public cargos:number,
+        public nroAdultos:number,
+        public precioFinal:number,
+        public totalPrecioAdultos:number,
+        public precioSoles:number,
+    ){}
+}
+
 export class ClassDetalleSegment {
     constructor(
         public salida:IMovDetalleSegment,
         public llegada:IMovDetalleSegment,
         public vuelo:IVueloDetalleSegment,
         public escala?:IEscalaDetalleSegment
+    ){}
+}
+
+
+export class ClassDetalleLocalSt {
+    constructor(
+        public segmentoDeparture:ClassDetalleModalSegment,
+        public segmentoReturn:ClassDetalleModalSegment,
+        public pricingInfo:ClassPricingInfoDetalle
     ){}
 }
