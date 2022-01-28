@@ -123,7 +123,7 @@
                             <div class="col-2 text-center p-0 boxMasUno">
                                 <h3>{{segment.endDateTime | date:'h:mm a' }}</h3>
                                 <span>{{departure.destinationCity.name}}</span>
-                                <div class="textMasUno toolTip">{{"+ " + (segment.startDateTime | getDays:segment.endDateTime)}}
+                                <div *ngIf="(segment.startDateTime | getDays:segment.endDateTime)>0" class="textMasUno toolTip">{{"+ " + (segment.startDateTime | getDays:segment.endDateTime)}}
                                     <div class="boxTooltip2">
                                         <div class="descripTooltip">Llega el
                                             <strong>{{ segment.endDateTime|formatPipe:'D MMM'}}</strong> {{"a las "+( segment.endDateTime|formatPipe:'hh:mm a') }}
@@ -278,7 +278,7 @@
                             <div class="col-2 text-center p-0 boxMasUno">
                                 <h3>{{segment.endDateTime | date:'h:mm a'}}</h3>
                                 <span>{{vuelo.returns.destinationCity.name}}</span>
-                                <div class="textMasUno toolTip">{{"+ " + (segment.startDateTime | getDays:segment.endDateTime)}}
+                                <div *ngIf="(segment.startDateTime | getDays:segment.endDateTime)>0" class="textMasUno toolTip">{{"+ " + (segment.startDateTime | getDays:segment.endDateTime)}}
                                     <div class="boxTooltip2">
                                         <div class="descripTooltip">Llega el
                                             <strong>{{ segment.endDateTime|formatPipe:'D MMM'}}</strong> {{"a las "+( segment.endDateTime|formatPipe:'hh:mm a') }}

@@ -34,6 +34,11 @@
                                 <div class="column alignRight paddingTop">
                                     <div class="boxSeg">
                                         <!-- <div class="text red">Salida {{item.salida.dia}} (+1)</div> -->
+
+                                        <!-- <div *ngIf="(segment.startDateTime | getDays:segment.endDateTime)>0" class="textMasUno toolTip">{{"+ " + (segment.startDateTime | getDays:segment.endDateTime)}} -->
+
+                                            <!-- segment.startDateTime | getDays:segment.endDateTime -->
+
                                         <div class="text">{{"Salida "+item.salida.dia}}</div>
                                         <div class="text blue">{{item.salida.cod_ciudad + ' ' + item.salida.hora}}</div>
                                         <div class="text">{{item.salida.aeropuerto}}</div>
