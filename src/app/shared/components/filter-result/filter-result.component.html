@@ -1,5 +1,5 @@
 <mat-form-field appearance="outline" class="mb-4 hideMov text-start px-4">
-  <mat-select [(value)]="selected" disableOptionCentering>
+  <mat-select [(value)]="selectedCurrency" disableOptionCentering>
     <mat-option value="soles">Soles</mat-option>
     <mat-option value="dolares">Dólares</mat-option>
   </mat-select>
@@ -24,8 +24,12 @@
       class="accordion-collapse collapse show"
       aria-labelledby="headingZero"
     >
-      <div class="accordion-body">
-        <span class="btn btn-outline-danger btn-filter">Equipaje de mano<a class="icon-x">X</a></span>
+      <div *ngIf="filterSelected.length > 0" class="accordion-body">
+        <span
+          *ngFor="let filterSelect of filterSelected; index as i"
+          class="btn btn-outline-danger btn-filter"
+          >{{ filterSelect.name }}<a class="icon-x" (click)="removeFilterBlock(filterSelect.filterType)">X</a></span
+        >
       </div>
     </div>
   </div>
@@ -159,116 +163,36 @@
     >
       <div class="accordion-body pt-0">
         <div class="d-flex justify-content-center pb-3">
-          <button class="px-0" (click)="toCheck(true)" type="button">
+          <button class="px-0" [ngClass]="{'gris': filterAeroline}" (click)="toCheck(true)" type="button">
             Seleccionar Todo
           </button>
-          <button class="gris" (click)="toCheck(false)" type="button">
+          <button [ngClass]="{'gris': !filterAeroline}" (click)="toCheck(false)" type="button">
             Borrar todo
           </button>
         </div>
-        <!-- <div
-          class="d-flex justify-content-between mb-2"
-          *ngFor="let line of filtersObj.airlines"
-        >
-          <div class="d-flex flex-row">
-            <div class="company">
-              <img src="{{line.imageUrl}}" alt="" />
+        <ng-template [ngIf]="filters.airlines.length>0">
+          <div
+            class="d-flex justify-content-between mb-2"
+            *ngFor="let airlineObj of filters.airlines"
+          >
+            <div class="d-flex flex-row">
+              <div class="company">
+                <img src="{{airlineObj.imageUrl}}" alt="" />
+              </div>
+              <label for="checkbox-airline-1">{{ airlineObj.name }}</label>
             </div>
-            <label for="checkbox-airline-1">{{ line.name }}</label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              [checked]="line.checked"
-              value=""
-              (change)="checkId($event, line.code)"
-              id="checkbox-airline-1"
-            />
-          </div>
-        </div> -->
-        <div
-          class="d-flex justify-content-between mb-2"
-          *ngFor="let line of filterService.aerolineas"
-        >
-          <div class="d-flex flex-row">
-            <div class="company">
-              <img src="./assets/comprar/{{ line.img }}" alt="" />
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                [checked]="airlineObj.checked"
+                value=""
+                (change)="checkId($event, airlineObj.code)"
+                id="checkbox-airline-1"
+              />
             </div>
-            <label for="checkbox-airline-1">{{ line.company }}</label>
           </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              [checked]="line.checked"
-              value=""
-              (change)="checkId($event, line.id)"
-              id="checkbox-airline-1"
-            />
-          </div>
-        </div>
-        <!-- <pre>{{filterService.aerolineas|json}}</pre> -->
-        <!-- <div class="d-flex justify-content-between mb-2">
-                    <div class="d-flex flex-row">
-                        <div class="svg-icon company"></div>
-                        <label for="checkbox-airline-3">American
-                            Airlines</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-3">
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="d-flex flex-row">
-                        <div class="svg-icon company"></div>
-                        <label for="checkbox-airline-4">Copa
-                            Airlines</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-4">
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="d-flex flex-row">
-                        <div class="svg-icon company"></div>
-                        <label for="checkbox-airline-5">Viva
-                            Air</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-5">
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="d-flex flex-row">
-                        <div class="svg-icon company"></div>
-                        <label for="checkbox-airline-6">Viva
-                            Colombia</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-6">
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="d-flex flex-row">
-                        <div class="svg-icon company"></div>
-                        <label for="checkbox-airline-7">Aero
-                            República</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-7">
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <div class="d-flex flex-row">
-                        <div class="svg-icon company"></div>
-                        <label for="checkbox-airline-8">Aeroméxico</label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-airline-8">
-                    </div>
-                </div> -->
+        </ng-template>
       </div>
     </div>
   </div>
@@ -300,7 +224,9 @@
               type="radio"
               name="inlineRadioOptions"
               id="inlineRadio1"
-              value="option1"
+              value="dolares"
+              (change) = "changePriceCurrency($event)"
+              
             />
           </div>
           <div class="form-check form-check-inline">
@@ -310,7 +236,9 @@
               type="radio"
               name="inlineRadioOptions"
               id="inlineRadio2"
-              value="option2"
+              value="soles"
+              (change) = "changePriceCurrency($event)"
+              checked
             />
           </div>
         </div>
@@ -320,6 +248,7 @@
           [options]="optionsPrice"
           (valueChange)="priceChange($event)"
           (highValueChange)="priceMaxChange($event)"
+          (userChangeEnd)="filterChange()"
         >
         </ng5-slider>
       </div>
@@ -599,8 +528,4 @@
       </div>
     </div>
   </div>
-  <div class="accordion-item">
-    <button type="button">Aplicar Filtro</button>
-  </div>
-  
 </div>
