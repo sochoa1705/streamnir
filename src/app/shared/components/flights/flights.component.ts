@@ -41,7 +41,6 @@ export class FlightsComponent {
   
   @Input() set flights(value: IAerolineas[]) {
     if (value) {
-      console.log(value);
       this._flights = value;
     }
   }
@@ -210,8 +209,6 @@ export class FlightsComponent {
       this.segmentoDepartureObj = segment;
       this.vueloEscogidoVuelta= vuelo;
     }
-
-    console.log(this.segmentoDepartureObj);
 
   }
 }

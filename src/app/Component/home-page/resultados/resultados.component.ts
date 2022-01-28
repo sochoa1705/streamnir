@@ -136,7 +136,6 @@ export class ResultadosComponent implements OnInit {
   id: any = 'tabIda';
   showOption(ids: any) {
     this.id = ids;
-    console.log(this.id);
   }
 
   openSnackBar(message: string, action: string = 'Error') {
