@@ -143,7 +143,8 @@ export class FilterResultComponent implements OnInit {
       return null;
     });
 
-    this.filter.airline = this.filter.airline.filter((a:any) => a!=null);
+    this.filter.airline = this.filter.airline.filter((a: any) => a != null);
+    this.filterChange();
   }
 
   addFilter(type: number) {
@@ -153,6 +154,9 @@ export class FilterResultComponent implements OnInit {
       switch (type) {
         case FilterTypes.aerolineas:
           name = 'Aerolineas';
+          break;
+        case FilterTypes.precio:
+          name = 'Precio';
           break;
 
         default:
@@ -178,15 +182,19 @@ export class FilterResultComponent implements OnInit {
   priceChange(value: number) {
     this.filter.price.min = value;
     // this.filterChange();
+    console.log(value);
+    this.addFilter(FilterTypes.precio);
   }
 
   priceMaxChange(value: number) {
     this.filter.price.max = value;
     // this.filterChange();
+    console.log(value);
+    this.addFilter(FilterTypes.precio);
   }
 
   filterChange() {
-    console.log('holi');
+    console.log('mandando el filtro');
     console.log(this.filter);
     this.filter.price.currency = this.selectedCurrency;
     this.filterChangeEvent.emit(this.filter);
@@ -225,6 +233,25 @@ export class FilterResultComponent implements OnInit {
           }
         },
       };
+    }
+  }
+
+  removeFilterBlock(type: number) {
+    switch (type) {
+      case FilterTypes.aerolineas:
+        this.filters.airlines.forEach((x) => (x.checked = false));
+        this.removeFilter(FilterTypes.aerolineas);
+        this.verifyFilter();
+        break;
+      case FilterTypes.precio:
+        this.minValuePrice = 100;
+        this.maxValuePrice = 6000;
+
+        this.removeFilter(FilterTypes.precio);
+        this.verifyFilter();
+        break;
+      default:
+        break;
     }
   }
 }

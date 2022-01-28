@@ -168,6 +168,9 @@ export class ResultadosComponent implements OnInit {
   }
 
   filterChange(filter: any) {
+    this.loader.showText('Cargando los vuelos');
+    this.loader.showLoader();
+
     console.log(filter);
 
     if (filter.price.currency == 'soles') {
@@ -223,5 +226,6 @@ export class ResultadosComponent implements OnInit {
     }
 
     // console.log(filter);
+    this.loader.closeLoader();
   }
 }
