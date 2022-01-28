@@ -8,6 +8,7 @@ import { HoraPipe } from './pipes/hora.pipe';
 import { EscalasPipe } from './pipes/escalas.pipe';
 import { GetDaysPipe } from './pipes/get-days.pipe';
 import { FormatPipe } from './pipes/format-day.pipe';
+import { ModalsModule } from '../modals/modals.module';
 
 
 
@@ -17,7 +18,8 @@ import { FormatPipe } from './pipes/format-day.pipe';
   imports: [
     CommonModule,
     MaterialModule,
-    DirectivesModule
+    DirectivesModule,
+    ModalsModule
   ],
   exports: [ FlightsComponent ],
   providers:[FareBreakPipe]

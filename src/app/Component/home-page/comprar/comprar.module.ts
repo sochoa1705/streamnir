@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FiltroDetallePipe } from './pipes/filtro-detalle.pipe';
 import { DirectivesModule } from 'src/app/shared/directives/directives.module';
 import { HoraPipe } from './pipes/hora.pipe';
+import { ModalsModule } from 'src/app/shared/components/modals/modals.module';
 
 @NgModule({
   declarations: [ ComprarComponent,FiltroDetallePipe,HoraPipe ],
@@ -28,7 +29,8 @@ import { HoraPipe } from './pipes/hora.pipe';
     FormsModule,
     MaterialModule,
     RouterModule,
-    DirectivesModule
+    DirectivesModule,
+    ModalsModule
   ],
   exports: [ ComprarComponent ],
   providers: []
