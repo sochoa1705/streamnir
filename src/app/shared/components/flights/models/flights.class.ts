@@ -17,15 +17,6 @@ export class DisponibilidadPayload {
     ){}
 }
 
-
-export class ClassModalVuelo {
-    constructor(
-        public segment:Segment,
-        public origen:string,
-        public destino:string,
-    ){}
-}
-
 export class ClassDetalleModalSegment {
     constructor(
         public general:ClassDetalleModalGeneralSegment,
@@ -39,10 +30,18 @@ export class ClassDetalleModalGeneralSegment {
         public destino:string,
         public ida:boolean,
         public cabina:number,
-        public piezas:number
+        public piezas:number,
+        public escalas:ClassEscalasDetalle[] = []
     ){
         this.titulo = this.ida? `De ${origen} a ${destino} (Ida)`: `De ${origen} a ${destino} (Vuelta)`
     }
+}
+
+export class ClassEscalasDetalle {
+    constructor(
+        public nombre_ciudad:string,
+        public tiempo_espera:string
+    ){}
 }
 export class ClassDetalleSegment {
     constructor(
@@ -50,5 +49,13 @@ export class ClassDetalleSegment {
         public llegada:IMovDetalleSegment,
         public vuelo:IVueloDetalleSegment,
         public escala?:IEscalaDetalleSegment
+    ){}
+}
+
+
+export class ClassDetalleLocalSt {
+    constructor(
+        public segmentoDeparture:ClassDetalleModalSegment,
+        public segmentoReturn:ClassDetalleModalSegment
     ){}
 }

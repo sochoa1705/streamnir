@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { FlightSegment, IAerolineas, Segment } from 'src/app/Component/home-page/resultados/models/resultados.interfaces';
-import { ClassDetalleModalGeneralSegment, ClassDetalleModalSegment, ClassDetalleSegment } from './models/flights.class';
+import { ClassDetalleLocalSt, ClassDetalleModalGeneralSegment, ClassDetalleModalSegment, ClassDetalleSegment, ClassEscalasDetalle } from './models/flights.class';
 import { IEscalaDetalleSegment, IMovDetalleSegment, IVueloDetalleSegment } from './models/flights.interface';
 import 'moment-precise-range-plugin';
 import * as moment from 'moment';
@@ -34,8 +34,11 @@ export class FlightsComponent {
 
   segmentoDeparture:number;
   segmentoReturn:number;
+
+  segmentoDepartureObj:Segment;
+  segmentoReturnObj:Segment;
   
-  @Input() set flights(value: IAerolineas[] | null) {
+  @Input() set flights(value: IAerolineas[]) {
     if (value) {
       console.log(value);
       this._flights = value;
@@ -73,12 +76,15 @@ export class FlightsComponent {
 
     const detalle:ClassDetalleSegment[] = [];
 
+    let escalas:ClassEscalasDetalle[] = [];
+
     segment.flightSegments.forEach((item,i, array)=>{
     
       let salida:IMovDetalleSegment;
       let llegada:IMovDetalleSegment;
       let vuelo:IVueloDetalleSegment;
       let escala:IEscalaDetalleSegment;
+
 
       let obj:ClassDetalleSegment;
 
@@ -114,6 +120,10 @@ export class FlightsComponent {
             ciudad: item.departureAirport.name,
             tiempo_espera: this.calculateTimeWait(durationTime)
           }
+
+          let escalaObj = new ClassEscalasDetalle(item.departureAirport.name,this.calculateTimeWait(durationTime));
+
+          escalas.push(escalaObj);
           
           obj = new ClassDetalleSegment(
             salida,
@@ -123,7 +133,7 @@ export class FlightsComponent {
           )
           
         }else{
-          obj = new ClassDetalleSegment(
+          obj = new ClassDetalleSegment( 
             salida,
             llegada,
             vuelo
@@ -138,7 +148,8 @@ export class FlightsComponent {
       segment.flightSegments[segment.flightSegments.length - 1].arrivalAirport.name,
       isIda,
       segment.equipaje?.cabina?.piezas || 0,
-      segment.equipaje?.piezas || 0
+      segment.equipaje?.piezas || 0,
+      escalas
     )
 
     this.modalDetalle = new ClassDetalleModalSegment(
@@ -146,29 +157,37 @@ export class FlightsComponent {
       detalle
     )
 
-    console.log(this.modalDetalle);
+    return this.modalDetalle;
   }
 
 
 
   shop(vuelo: string) {
-    console.log(vuelo)
     let flight = { ...this.json, ...{departure: this.segmentoDeparture, return: this.segmentoReturn, idGroup: vuelo}}
-    localStorage.setItem('safe0', JSON.stringify(flight))
-    console.log(flight)
+    localStorage.setItem('safe0', JSON.stringify(flight));
+
+
+    const ida = this.selectVuelo(this.segmentoDepartureObj,true);
+    const vuelta = this.selectVuelo(this.segmentoReturnObj,false);
+
+    const detalleVuelo = new ClassDetalleLocalSt(ida,vuelta);
+
+    localStorage.setItem('detalleVuelo', JSON.stringify(detalleVuelo));
+
     const navigationExtras: NavigationExtras = { state: this.json };
     this.route.navigateByUrl('/home/comprar', navigationExtras);
   }
 
-  radioSelect(e: any, segmento: string) {
+  radioSelect(e: any, segmento: string, segment:Segment) {
     if (segmento === 'return') {
-      this.segmentoReturn = e.value
+      this.segmentoReturn = e.value;
+      this.segmentoReturnObj = segment;
     } else {
-      this.segmentoDeparture = e.value
+      this.segmentoDeparture = e.value;
+      this.segmentoDepartureObj = segment;
     }
-    console.log(segmento)
-    console.log(this.segmentoReturn)
-    console.log(this.segmentoDeparture)
+
+    console.log(this.segmentoDepartureObj);
 
   }
 }
