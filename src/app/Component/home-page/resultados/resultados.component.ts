@@ -10,7 +10,11 @@ import {
 } from 'src/app/shared/components/filter-result/models/filter-result.interfaces';
 import { DisponibilidadPayload } from 'src/app/shared/components/flights/models/flights.class';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
+import { IVuelos } from '../vuelos/commons/components/flight/flight.models';
+import { ResultadosPaginacion } from './models/resultados.class';
+import { ENUM_ORDER_BY } from './models/resultados.enum';
 import { IAerolineas, ParamsVuelos } from './models/resultados.interfaces';
+import { FareBreakPipe } from './pipes/fare-break-downs.pipe';
 import { ResultadosService } from './services/resultados.service';
 
 @Component({
@@ -41,6 +45,10 @@ export class ResultadosComponent implements OnInit {
   flightsOri: IAerolineas[];
   filtersObj: FilterResult;
 
+  ENUM_ORDER_BY = ENUM_ORDER_BY;
+
+  pag = new ResultadosPaginacion(5,5);
+
   exchangeRate: any;
 
   error = {
@@ -48,12 +56,16 @@ export class ResultadosComponent implements OnInit {
     errorMessage: '',
   };
 
+  orderByActive:number = ENUM_ORDER_BY.CONVENIENTE;
+
   constructor(
     public route: Router,
     private service: ResultadosService,
     private _snackBar: MatSnackBar,
     private ar: ActivatedRoute,
-    private loader: LoaderSubjectService
+    private loader: LoaderSubjectService,
+    private fareBreakPipe:FareBreakPipe
+
   ) {
     this.showTabs = true;
   }
@@ -114,8 +126,6 @@ export class ResultadosComponent implements OnInit {
 
           this.exchangeRate = resp.exchangeRate;
 
-          console.log(resp);
-
           this.loader.closeLoader();
         })
         .catch((err: HttpErrorResponse) => {
@@ -131,6 +141,88 @@ export class ResultadosComponent implements OnInit {
           this.loader.closeLoader();
         });
     });
+  }
+
+
+  actualizarPag(){
+    this.pag.elemContainer += this.pag.elemPag;
+    this.flights = [...this.flights];
+  }
+
+  comparePrecioBajo( a:IAerolineas, b:IAerolineas ) {
+    const priceA = this.fareBreakPipe.transform(a.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
+    const priceB = this.fareBreakPipe.transform(b.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
+
+    if ( priceA < priceB ){
+      return -1;
+    }
+    if ( priceA > priceB ){
+      return 1;
+    }
+    return 0;
+  }
+  comparePrecioAlto( a:IAerolineas, b:IAerolineas ) {
+    const priceA = this.fareBreakPipe.transform(a.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
+    const priceB = this.fareBreakPipe.transform(b.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
+
+    if ( priceA > priceB ){
+      return -1;
+    }
+    if ( priceA < priceB ){
+      return 1;
+    }
+    return 0;
+  }
+
+  compareMenorTiempo( a:IAerolineas, b:IAerolineas ) {
+    const priceA = this.fareBreakPipe.transform(a.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
+    const priceB = this.fareBreakPipe.transform(b.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
+
+    if ( priceA < priceB ){
+      return -1;
+    }
+    if ( priceA > priceB ){
+      return 1;
+    }
+    return 0;
+  }
+
+  compareMayorTiempo( a:IAerolineas, b:IAerolineas ) {
+    const priceA = this.fareBreakPipe.transform(a.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
+    const priceB = this.fareBreakPipe.transform(b.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
+
+    if ( priceA < priceB ){
+      return -1;
+    }
+    if ( priceA > priceB ){
+      return 1;
+    }
+    return 0;
+  }
+
+  orderBy(tipo:number){
+    switch (tipo) {
+      case ENUM_ORDER_BY.PRECIO_BAJO:
+        this.flights = [...this.flights.sort(this.comparePrecioBajo.bind(this))]
+        break;
+      case ENUM_ORDER_BY.PRECIO_ALTO:
+        this.flights = [...this.flights.sort(this.comparePrecioAlto.bind(this))]
+        break;
+      case ENUM_ORDER_BY.CONVENIENTE:
+        
+        break;
+      case ENUM_ORDER_BY.MENOR_TIEMPO:
+        
+        break;
+      case ENUM_ORDER_BY.MAYOR_TIEMPO:
+        
+        break;
+    
+      default:
+        break;
+    }
+    this.orderByActive = tipo;
+    this.pag = new ResultadosPaginacion(5,5);
   }
 
   id: any = 'tabIda';

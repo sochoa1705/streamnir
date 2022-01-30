@@ -62,3 +62,20 @@ export class NmvModel{
     set('Caller.Application','Interagencias')
   }
 }
+
+
+export function removeTimeZonePart(dateString:string) {
+  let finalDate = '';
+  if (dateString.split('+').length > 1) {
+      let b = dateString.split('+');
+ 
+      finalDate = b[0];
+  } else {
+      let b = dateString.split('-');
+       if (b.length > 1) {
+        b.pop();
+        finalDate = b.join('-');
+      }
+  }
+  return finalDate;
+}

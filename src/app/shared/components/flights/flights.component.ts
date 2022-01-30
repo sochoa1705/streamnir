@@ -6,6 +6,7 @@ import { IEscalaDetalleSegment, IMovDetalleSegment, IVueloDetalleSegment } from 
 import 'moment-precise-range-plugin';
 import * as moment from 'moment';
 import { FareBreakPipe } from './pipes/fare-break-downs.pipe';
+import { removeTimeZonePart } from '../../utils';
 moment.locale('es')
 
 @Component({
@@ -88,13 +89,21 @@ export class FlightsComponent {
       let escala: IEscalaDetalleSegment;
 
 
-      let obj: ClassDetalleSegment;
+      const departureDateTime = removeTimeZonePart(item.departureDateTime);
+      const arrivalDateTime = removeTimeZonePart(item.arrivalDateTime);
 
       salida = {
-        dia: moment(item.departureDateTime, moment.ISO_8601).format('D MMM'),
+        dia: moment(departureDateTime).format('D MMM'),
         cod_ciudad: item.departureAirport.code,
-        hora: moment(item.departureDateTime, moment.ISO_8601).format('HH:mm A'),
+        hora: moment(departureDateTime).format('HH:mm A'),
         aeropuerto: item.departureAirport.airport
+      }
+
+      llegada = {
+        dia: moment(arrivalDateTime).format('D MMM'),
+        cod_ciudad: item.arrivalAirport.code,
+        hora: moment(arrivalDateTime).format('HH:mm A'),
+        aeropuerto: item.arrivalAirport.airport
       }
 
       llegada = {

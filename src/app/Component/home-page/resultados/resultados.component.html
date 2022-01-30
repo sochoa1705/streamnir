@@ -312,31 +312,31 @@
                         <label class="form-check-label" for="flexRadioDefault1">
                             Precio más bajo
                         </label>
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <input class="form-check-input"  type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                     </div>
                     <div class="d-flex flex-row justify-content-between align-items-center p-3">
                         <label class="form-check-label" for="flexRadioDefault2">
                             Precio más alto
                         </label>
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                        <input class="form-check-input" (click)="orderBy(ENUM_ORDER_BY.PRECIO_ALTO)"  type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                     </div>
                     <div class="d-flex flex-row justify-content-between align-items-center p-3">
                         <label class="form-check-label" for="flexRadioDefault3">
                             Más conveniente
                         </label>
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                        <input class="form-check-input" (click)="orderBy(ENUM_ORDER_BY.CONVENIENTE)"   type="radio" name="flexRadioDefault" id="flexRadioDefault3">
                     </div>
                     <div class="d-flex flex-row justify-content-between align-items-center p-3">
                         <label class="form-check-label" for="flexRadioDefault4">
                             Menor tiempo de vuelo
                         </label>
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                        <input class="form-check-input" (click)="orderBy(ENUM_ORDER_BY.MENOR_TIEMPO)"  type="radio" name="flexRadioDefault" id="flexRadioDefault4">
                     </div>
                     <div class="d-flex flex-row justify-content-between align-items-center p-3">
                         <label class="form-check-label" for="flexRadioDefault5">
                             Mayor tiempo de vuelo
                         </label>
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
+                        <input class="form-check-input" (click)="orderBy(ENUM_ORDER_BY.MAYOR_TIEMPO)"  type="radio" name="flexRadioDefault" id="flexRadioDefault5">
                     </div>
                     <div class="d-flex flex-row justify-content-center align-items-center p-3">
                         <button type="button">Comprar</button>
@@ -461,10 +461,8 @@
         </div>
         <div class="col-sm-12 col-md-6 col-lg-6 pt-3 boxResult">
             <div class="row hideMov">
-                <div class="col-12">
-                    <!-- <mat-tab-group mat-stretch-tabs (click)="tab($event)"></mat-tab-group> -->
-                    <mat-tab-group mat-stretch-tabs (click)="showTab()">
-                        <!-- PRIMER TAB -->
+                <div class="col-12">                    
+                    <!-- <mat-tab-group mat-stretch-tabs (click)="showTab()">
                         <mat-tab label="Precio por aerolínea" class="tabAero">
                             <div class="d-flex flex-column boxPrecioAero" [ngClass]="showTabs === true ? 'd-none' : ''">
                                 <table class="table table-bordered">
@@ -541,89 +539,9 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <!-- <div class="d-flex align-items-center row header">
-                                  <div class="col center">Aerolíneas</div>
-                                  <div class="col">Directo</div>
-                                  <div class="col">1 escala</div>
-                                  <div class="col">2 o más escalas</div>
-                              </div>
-                              <div class="row">
-                                  <div class="col">
-                                      <img src="./assets/comprar/company.png" alt="">
-                                      <div>LAN Airlines</div>
-                                  </div>
-                                  <div class="col"></div>
-                                  <div class="col">$9,689</div>
-                                  <div class="col"></div>
-                              </div>
-                              <div class="row">
-                                  <div class="col">
-                                      <img src="./assets/comprar/company.png" alt="">
-                                      <div>United Airlines</div>
-                                  </div>
-                                  <div class="col"></div>
-                                  <div class="col">$12,376</div>
-                                  <div class="col"></div>
-                              </div>
-                              <div class="row">
-                                  <div class="col">
-                                      <img src="./assets/comprar/company.png" alt="">
-                                      <div>American Airlines</div>
-                                  </div>
-                                  <div class="col green">$4,216</div>
-                                  <div class="col">$9,689</div>
-                                  <div class="col">$10,135</div>
-                              </div>
-                              <div class="row">
-                                  <div class="col">
-                                      <img src="./assets/comprar/company.png" alt="">
-                                      <div>Copa Airlines</div>
-                                  </div>
-                                  <div class="col"></div>
-                                  <div class="col">$12,376</div>
-                                  <div class="col"></div>
-                              </div>
-                              <div class="row">
-                                  <div class="col">
-                                      <img src="./assets/comprar/company.png" alt="">
-                                      <div>Delta Air Lines</div>
-                                  </div>
-                                  <div class="col"></div>
-                                  <div class="col"></div>
-                                  <div class="col green">$3,898</div>
-                              </div>
-                              <div class="row">
-                                  <div class="col">
-                                      <img src="./assets/comprar/company.png" alt="">
-                                      <div>Viva Colombia</div>
-                                  </div>
-                                  <div class="col"></div>
-                                  <div class="col">$9,689</div>
-                                  <div class="col"></div>
-                              </div>
-                              <div class="row">
-                                  <div class="col">
-                                      <img src="./assets/comprar/company.png" alt="">
-                                      <div>AeroRepublica</div>
-                                  </div>
-                                  <div class="col"></div>
-                                  <div class="col">$9,689</div>
-                                  <div class="col">$10,135</div>
-                              </div>
-                              <div class="row">
-                                  <div class="col">
-                                      <img src="./assets/comprar/company.png" alt="">
-                                      <div>Aeroméxico</div>
-                                  </div>
-                                  <div class="col green">$4,216</div>
-                                  <div class="col">$9,689</div>
-                                  <div class="col">$10,135</div>
-                              </div> -->
                             </div>
-                            <!-- END PRIMER TAB -->
                         </mat-tab>
                         <mat-tab label="Precios +/- 3 días">
-                            <!-- SEGUNDO TAB -->
                             <div class="d-flex flex-column boxPrecios border m-sm-4" [ngClass]="showTabs === true ? 'd-none' : ''">
                                 <div class="d-flex align-items-center row header">
                                     <div class="col flex-column align-items-md-start justify-content-evenly ps-0">
@@ -741,10 +659,8 @@
                                     <div class="col green">$1,153</div>
                                 </div>
                             </div>
-                            <!-- END SEGUNDO TAB -->
                         </mat-tab>
                         <mat-tab label="Tendencia de precios">
-                            <!-- TERCER TAB -->
                             <div class="d-flex boxGraphic flex-column" [ngClass]="showTabs === true ? 'd-none' : ''">
                                 <div class="row title">Revisa la tendencia de precios</div>
                                 <div class="row align-items-center subtitle">
@@ -802,35 +718,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- END TERCER TAB -->
                         </mat-tab>
-                    </mat-tab-group>
+                    </mat-tab-group> -->
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="row hideMov">
                 <div class="col-12 text-end">
-                    <!-- <mat-form-field appearance="fill">
-                      <mat-select>
-                          <mat-option value="option1">Precio más bajo</mat-option>
-                          <mat-option value="option3">Precio más alto</mat-option>
-                          <mat-option value="option1">Más conveniente</mat-option>
-                          <mat-option value="option3">Menor tiempo de vuelo</mat-option>
-                          <mat-option value="option3">Mayor tiempo de vuelo</mat-option>
-                      </mat-select>
-                  </mat-form-field> -->
-
-                    <!-- <mat-form-field appearance="fill">
-                      <mat-label>Favorite food</mat-label>
-                      <mat-select [(ngModel)]="selectedValue" name="food">
-                          <mat-option *ngFor="let food of foods" [value]="food.value">
-                              {{food.viewValue}}
-                          </mat-option>
-                      </mat-select>
-                  </mat-form-field>
-                  <p> Selected food: {{selectedValue}} </p> -->
-
-                    <button class="mnuResult font-12 mt-3" mat-button [matMenuTriggerFor]="menu">Más conveniente
+                    <button class="mnuResult font-12 mt-3" mat-button [matMenuTriggerFor]="menu">{{orderByActive | displayOrder}}
                         <svg width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="12.8" height="1.6" rx="0.8" fill="#4B4B4B" />
                             <rect x="3" y="3.19995" width="9.6" height="1.6" rx="0.8" fill="#4B4B4B" />
@@ -838,47 +733,32 @@
                         </svg>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item value="123">Precio más bajo</button>
-                        <button mat-menu-item [value]="14523">Precio más alto</button>
-                        <button mat-menu-item [value]="14523">Más conveniente</button>
-                        <button mat-menu-item [value]="14523">Menor tiempo de vuelo</button>
-                        <button mat-menu-item [value]="1243">Mayor tiempo de vuelo</button>
+                        <button mat-menu-item (click)="orderBy(ENUM_ORDER_BY.PRECIO_BAJO)">Precio más bajo</button>
+                        <button mat-menu-item (click)="orderBy(ENUM_ORDER_BY.PRECIO_ALTO)">Precio más alto</button>
+                        <button mat-menu-item (click)="orderBy(ENUM_ORDER_BY.CONVENIENTE)">Más conveniente</button>
+                        <button mat-menu-item (click)="orderBy(ENUM_ORDER_BY.MENOR_TIEMPO)">Menor tiempo de vuelo</button>
+                        <button mat-menu-item (click)="orderBy(ENUM_ORDER_BY.MAYOR_TIEMPO)">Mayor tiempo de vuelo</button>
                     </mat-menu>
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <!-- <div class="row row-cust">
-              <div class="col-sm-12 col-md-12 col-lg-12">
-                  <ul class="nav nav-pills nav-justified bg-white">
-                      <li class="nav-item nav-item-tabs">
-                          <a class="nav-link" href="#"><span class="font-header-disabled">Precio por
-                                  aerolínea</span></a>
-                      </li>
-                      <li class="nav-item nav-item-tabs">
-                          <a class="nav-link" href="#"><span class="font-header-disabled">Precios +/- 3
-                                  días</span></a>
-                      </li>
-                      <li class="nav-item nav-item-tabs">
-                          <a class="nav-link" href="#"><span class="font-header-disabled">Tendencia de
-                                  precios</span></a>
-                      </li>
-                  </ul>
-              </div>
-          </div> -->
             <div class="row" *ngIf="flights">
                 <div class="col-sm-12 col-md-12 col-lg-12 pt-3">
                     <ng-container *ngIf="!error.isError">
-                        <app-flights [flights]="flights" [conversion]="conversion" *ngFor="let i of [1]"></app-flights>
+                        <app-flights [flights]="flights | slice:0:pag.elemContainer" [conversion]="conversion" ></app-flights>
                     </ng-container>
                 </div>
                 <div class="clearfix"></div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <button type="button" class="font-12 plus px-3">Ver más vuelos</button>
+            <ng-container *ngIf="flights">
+                <div class="row" *ngIf="pag.elemContainer <= flights.length">
+                    <div class="col-sm-12 text-center">
+                        <button type="button" (click)="actualizarPag()" class="font-12 plus px-3">Ver más vuelos</button>
+                    </div>
                 </div>
-            </div>
+            </ng-container>
+
         </div>
         <!-- END CENTER -->
 

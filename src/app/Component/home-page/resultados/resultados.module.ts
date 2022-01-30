@@ -8,9 +8,11 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { FormsModule } from '@angular/forms';
 import { ResultadosService } from './services/resultados.service';
 import { TabsModule } from 'src/app/shared/components/tabs/tabs.module';
+import { FareBreakPipe } from './pipes/fare-break-downs.pipe';
+import { DisplayOrderPipe } from './pipes/display-order-by.pipe';
 
 @NgModule({
-  declarations: [ ResultadosComponent ],
+  declarations: [ ResultadosComponent,DisplayOrderPipe ],
   imports: [
     CommonModule,
     FilterResultModule,
@@ -21,7 +23,7 @@ import { TabsModule } from 'src/app/shared/components/tabs/tabs.module';
     TabsModule
   ],
   exports: [ ResultadosComponent ],
-  providers:[ResultadosService]
+  providers:[ResultadosService,FareBreakPipe]
 
 })
 export class ResultadosModule { }
