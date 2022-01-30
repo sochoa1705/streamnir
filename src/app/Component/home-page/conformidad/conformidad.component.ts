@@ -46,7 +46,10 @@ export class ConformidadComponent implements OnInit {
   // vuelosJson: any
   token: any
   tokenJson: any
-
+  filtroVuelo: any
+  filtroVueloJson: any
+  detalleVuelosStr: any
+  detalleVuelos: any
   constructor(
     public route: Router,
     public secureBookingService: SecureBookingService,
@@ -62,6 +65,13 @@ export class ConformidadComponent implements OnInit {
     // VUELOS
     // this.vuelos = localStorage.getItem('flight0')
     // this.vuelosJson = JSON.parse(this.vuelos)
+
+    this.detalleVuelosStr = localStorage.getItem('detalleVuelo')
+    this.detalleVuelos = JSON.parse(this.detalleVuelosStr)
+
+    //filtro
+    this.filtroVuelo = localStorage.getItem('filtroVuelo')
+    this.filtroVueloJson = JSON.parse(this.filtroVuelo)
 
     // Token
     this.token = localStorage.getItem('token')
