@@ -418,22 +418,22 @@ export class ConformidadComponent implements OnInit {
         ]
       }
     }
-    console.log(payload);
+    console.log(payload)
 
-    // this.reservaVuelosService.reserva(payload, this.tokenJson).subscribe({
-    //   next: (response: any) => {
-    //     console.log(response)
-    //     this.resevaVuelo = response
+    this.reservaVuelosService.reserva(payload, this.tokenJson).subscribe({
+      next: (response: any) => {
+        console.log(response)
+        this.resevaVuelo = response
     // if (this.shopString.formCard.select21 === 'SAFETYPAY') {
     //   this.getGeneratePay()
     // } else {
     //   this.getCardPayment()
     // }
-    //   },
-    //   error: (err) => {
-    //     console.log(err)
-    //   }
-    // })
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
   }
 
 }
