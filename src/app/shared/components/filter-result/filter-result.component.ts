@@ -96,6 +96,15 @@ export class FilterResultComponent implements OnInit {
       max: this.maxValuePrice,
     };
     this.filter.airline = [];
+    this.filter.equipaje = {
+      bodega: false,
+      mano: false,
+    };
+    this.filter.escala = {
+      directo: false,
+      uno: false,
+      mas: false,
+    };
   }
 
   toCheck(e: any) {
@@ -158,7 +167,15 @@ export class FilterResultComponent implements OnInit {
         case FilterTypes.precio:
           name = 'Precio';
           break;
-
+        case FilterTypes.equipajebodega:
+          name = 'Equipaje bodega';
+          break;
+        case FilterTypes.equipajemano:
+          name = 'Equipaje de mano';
+          break;
+          case FilterTypes.escalas:
+            name = 'Escala';
+            break;
         default:
           break;
       }
@@ -250,8 +267,72 @@ export class FilterResultComponent implements OnInit {
         this.removeFilter(FilterTypes.precio);
         this.verifyFilter();
         break;
+      case FilterTypes.equipajemano:
+        this.filter.equipaje.mano = false;
+        this.removeFilter(FilterTypes.equipajemano);
+        this.verifyFilter();
+        break;
+      case FilterTypes.equipajebodega:
+        this.filter.equipaje.bodega = false;
+        this.removeFilter(FilterTypes.equipajebodega);
+        this.verifyFilter();
+        break;
+        case FilterTypes.escalas:
+          this.filter.escala.directo = false;
+          this.filter.escala.uno = false;
+          this.filter.escala.mas = false;
+          this.removeFilter(FilterTypes.escalas);
+          this.verifyFilter();
+          break;
       default:
         break;
     }
+  }
+
+  changeEquipaje(e: any) {
+    console.log("entra change equipaje");
+    switch (e.target.name) {
+      case 'equipajeMano':
+        if (e.target.checked) this.addFilter(FilterTypes.equipajemano);
+        else this.removeFilter(FilterTypes.equipajemano);
+
+        this.filter.equipaje.mano = e.target.checked;
+        break;
+      case 'equipajeBodega':
+        if (e.target.checked) this.addFilter(FilterTypes.equipajebodega);
+        else this.removeFilter(FilterTypes.equipajebodega);
+
+        this.filter.equipaje.bodega = e.target.checked;
+        break;
+      default:
+        break;
+    }
+    this.verifyFilter();
+  }
+  changeEscala(e: any) {
+    console.log("entra change escala");
+    switch (e.target.name) {
+      case 'directo':
+        if (e.target.checked) this.addFilter(FilterTypes.escalas);
+        else this.removeFilter(FilterTypes.escalas);
+
+        this.filter.escala.directo = e.target.checked;
+        break;
+      case 'uno':
+        if (e.target.checked) this.addFilter(FilterTypes.escalas);
+        else this.removeFilter(FilterTypes.escalas);
+
+        this.filter.escala.uno = e.target.checked;
+        break;
+      case 'mas':
+        if (e.target.checked) this.addFilter(FilterTypes.escalas);
+        else this.removeFilter(FilterTypes.escalas);
+
+        this.filter.escala.mas = e.target.checked;
+        break;
+      default:
+        break;
+    }
+    this.verifyFilter();
   }
 }

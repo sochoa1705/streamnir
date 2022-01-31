@@ -57,11 +57,12 @@ export enum ROUTE_VIAJES {
 }
 
 export const FilterTypes = {
-  equipaje: 1,
+  equipajemano: 1,
   escalas: 2,
   aerolineas: 3,
   precio: 4,
   duracion: 5,
   alianzas: 6,
-  reserva: 7
+  reserva: 7,
+  equipajebodega: 8,
 }
