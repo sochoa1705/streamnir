@@ -259,6 +259,7 @@
                                             <path d="M12.1586 9.85658C11.9583 9.74733 11.7037 9.82792 11.5899 10.0366C10.3377 12.3316 7.53655 13.2176 5.33331 12.0155C4.21436 11.405 3.41395 10.333 3.12727 9.0611L5.03836 9.37933C5.26462 9.41716 5.48436 9.25917 5.52915 9.02643C5.57394 8.79368 5.42686 8.57431 5.20061 8.53648L2.6123 8.1053C2.43565 8.07582 2.25651 8.16632 2.16806 8.32967L0.931803 10.5966C0.818005 10.8052 0.888144 11.0629 1.08847 11.1722C1.28879 11.2814 1.54343 11.2008 1.65722 10.9922L2.4099 9.61201C3.25025 12.5135 6.25698 14.0881 9.12561 13.1289C10.4775 12.6768 11.6218 11.7094 12.3152 10.4322C12.4291 10.2235 12.3589 9.96582 12.1586 9.85658Z"
                                                 fill="#DF0C30" />
                                         </svg>{{this.detalleVuelos.segmentoDeparture.general.destino}}</h1>
+                                        <br>
                                         Ida y vuelta, 2 Adultos
                                     <!-- <span class="d-block">{{filtroVueloJson | filtroDetalle}}</span> -->
                                 </div>
@@ -274,7 +275,7 @@
                                 <div class="row py-4">
                                     <div class="col-3 pr-0">
                                         <h3 class="destinos">{{detalleVuelos.segmentoDeparture.detalle[0].salida.cod_ciudad}}</h3>
-                                        <span class="destinos">{{detalleVuelos.segmentoDeparture.detalle[0].salida.hora}}</span>
+                                        <span class="destinos">{{detalleVuelos.segmentoDeparture.detalle[0].salida.hora}}</span><br>
                                         <span>{{detalleVuelos.segmentoDeparture.detalle[0].salida.cod_ciudad + " " + detalleVuelos.segmentoDeparture.detalle[0].salida.dia}}</span>
                                     </div>
                                     <div class="col-6 text-center">
