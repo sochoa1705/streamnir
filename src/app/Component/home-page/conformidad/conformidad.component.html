@@ -86,8 +86,8 @@
                 <div class="card-body rowBody">
                     <div class="leftCard">IMPORTE A PAGAR</div>
                     <div class="rightCard">PEN
-                        <div class="boldFont">{{ (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal
-                            | number:'1.2-2'}}</div>
+                        <!-- <div class="boldFont">{{ (resultJson.destinyString.es_nacional === 1) ? (shopString.PriceTotal * 1.18) : shopString.PriceTotal
+                            | number:'1.2-2'}}</div> -->
                     </div>
                 </div>
             </div>
@@ -169,7 +169,7 @@
     <div class="row py-4">
         <div class="offset-3 col-6 viewMobile">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" *ngIf="!safe0Json.reservaVuelos; else vuelos">
                     <ng-container *ngFor="let safe of shopString.customers">
                         <div class="titleAsegurado">
                             ADT - {{ safe.nameCustomer }} {{ safe.lastNameCustomer }}
@@ -183,6 +183,19 @@
                         Tu solicitud de compra es {{ reservation.Reserva }}.
                     </div>
                 </div>
+                <ng-template #vuelos>
+                    <ng-container *ngFor="let pasajero of shopString.customers">
+                        <div class="titleAsegurado">
+                            ADT - {{ safe.nameCustomer }} {{ safe.lastNameCustomer }}
+                        </div>
+                        <div class="fechaAsegurado">
+                            {{ safe.dayCustomer }} / {{ safe.monthCustomer }} / {{ safe.yearCustomer }}
+                        </div>
+
+                    </ng-container>
+                    <div class="descripAsegurado" *ngIf="reservation">
+                        Tu solicitud de compra es {{ reservation.Reserva }}.
+                    </div>                </ng-template>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -214,7 +227,7 @@
         <!-- <div class="card-header">
             Featured
         </div> -->
-        <div class="card-body shadow-none" *ngIf="this.filtroVueloJson">
+        <div class="card-body shadow-none" *ngIf="filtroVueloJson">
             <div class="container">
                 <div class="row">
                     <div class="col-2 d-flex align-items-center pe-0">
@@ -227,13 +240,13 @@
                     </div>
                     <div class="col-10 ps-0">
                         <h1 class="d-inline">
-                            {{this.detalleVuelos.segmentoDeparture.general.origen}}
+                            {{detalleVuelos.segmentoDeparture.general.origen}}
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14.1117 4.54943C13.9114 4.44018 13.6568 4.52078 13.543 4.72944L12.7903 6.1096C11.9499 3.20805 8.94322 1.63353 6.07459 2.59273C4.72266 3.04479 3.57841 4.01221 2.88494 5.28943C2.77115 5.4981 2.84129 5.75581 3.04161 5.86505C3.24193 5.9743 3.49655 5.89369 3.61034 5.68502C4.86253 3.38999 7.66367 2.50398 9.8669 3.70612C10.9859 4.31663 11.7863 5.3886 12.0729 6.66052L10.1619 6.34229C9.9356 6.30446 9.71585 6.46244 9.67106 6.69519C9.62627 6.92794 9.77335 7.1473 9.99961 7.18513L12.5879 7.61631C12.7646 7.64579 12.9437 7.5553 13.0322 7.39194L14.2684 5.12504C14.3822 4.91639 14.312 4.65867 14.1117 4.54943Z"
                                     fill="#DF0C30" />
                                 <path d="M12.1586 9.85658C11.9583 9.74733 11.7037 9.82792 11.5899 10.0366C10.3377 12.3316 7.53655 13.2176 5.33331 12.0155C4.21436 11.405 3.41395 10.333 3.12727 9.0611L5.03836 9.37933C5.26462 9.41716 5.48436 9.25917 5.52915 9.02643C5.57394 8.79368 5.42686 8.57431 5.20061 8.53648L2.6123 8.1053C2.43565 8.07582 2.25651 8.16632 2.16806 8.32967L0.931803 10.5966C0.818005 10.8052 0.888144 11.0629 1.08847 11.1722C1.28879 11.2814 1.54343 11.2008 1.65722 10.9922L2.4099 9.61201C3.25025 12.5135 6.25698 14.0881 9.12561 13.1289C10.4775 12.6768 11.6218 11.7094 12.3152 10.4322C12.4291 10.2235 12.3589 9.96582 12.1586 9.85658Z"
                                     fill="#DF0C30" />
-                            </svg>{{this.detalleVuelos.segmentoDeparture.general.destino}}</h1>
+                            </svg>{{detalleVuelos.segmentoDeparture.general.destino}}</h1>
                         <span class="d-block">
                             <!-- {{filtroVueloJson | filtroDetalle}} -->
                         </span>
@@ -311,7 +324,7 @@
                             </div> -->
                         </div>
                         <div class="col-3 pr-0 text-end pl-0">
-                            <h3 class="destinos">{{this.detalleVuelos.segmentoDeparture.general.destino}}</h3>
+                            <h3 class="destinos">{{detalleVuelos.segmentoDeparture.general.destino}}</h3>
                             <span class="destinos">{{detalleVuelos.segmentoDeparture.detalle[detalleVuelos.segmentoDeparture.detalle.length -1].llegada.hora}}</span>
                         </div>
                         <div class="clearfix"></div>
@@ -360,8 +373,8 @@
 
                         </div>
                         <!-- <div class="col-6 text-end"> -->
-                            <!-- <span  class="time_duration" data-bs-toggle="modal" data-bs-target="#modalDetVuelo">{{segment.flightDuration | horaPipe}}</span> -->
-<!-- 
+                        <!-- <span  class="time_duration" data-bs-toggle="modal" data-bs-target="#modalDetVuelo">{{segment.flightDuration | horaPipe}}</span> -->
+                        <!-- 
                             <a (click)="selectVuelo(true)" data-bs-toggle="modal" data-bs-target="#modalDetVuelo" class="font-12 ver">ver detalles</a>
                         </div> -->
                         <div class="clearfix"></div>
@@ -439,7 +452,7 @@
                             </div> -->
                         </div>
                         <div class="col-3 pr-0 text-end pl-0">
-                            <h3 class="destinos">{{this.detalleVuelos.segmentoReturn.general.destino}}</h3>
+                            <h3 class="destinos">{{detalleVuelos.segmentoReturn.general.destino}}</h3>
                             <span class="destinos">{{detalleVuelos.segmentoReturn.detalle[detalleVuelos.segmentoReturn.detalle.length -1].llegada.hora}}</span>
                         </div>
                         <div class="clearfix"></div>

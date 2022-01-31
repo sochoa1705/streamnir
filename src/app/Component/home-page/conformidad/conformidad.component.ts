@@ -99,8 +99,14 @@ export class ConformidadComponent implements OnInit {
     let lcadena: any = localStorage.getItem('businessunit');
     this.unidadNegocio = JSON.parse(lcadena);
     this.edades()
-    this.getSecureBooking()
-    this.getGeneratePay()
+    console.log(this.safe0Json['reservaVuelos'])
+    
+    if(this.safe0Json['reservaVuelos']) {
+      this.getReserva()
+    } else {
+      this.getSecureBooking()
+    }
+    // this.getGeneratePay()
   }
 
   timeShop(data: string) {
@@ -379,6 +385,8 @@ export class ConformidadComponent implements OnInit {
   }
 
   getReserva() {
+    console.log(this.shopString.formContact.recibo);
+    
     let payload = {
       "segmentSelected": [
         this.safe0Json.departure, this.safe0Json.return
@@ -402,7 +410,7 @@ export class ConformidadComponent implements OnInit {
         name: this.shopString.formContact.nameContacto,
         lastName: this.shopString.formContact.lastnameContacto,
         email: this.shopString.formContact.mailContacto,
-        address: this.shopString.formContact.recibo[0].direccion,
+        address: (this.shopString.formContact.recibo === undefined) ? this.shopString.formContact.recibo[0].direccion : this.shopString.formCard.address,
         phones: [
           {
             phoneNumber: this.shopString.formContact.numberPhone0
@@ -411,17 +419,21 @@ export class ConformidadComponent implements OnInit {
       }
     }
     console.log(payload);
-    
-    this.reservaVuelosService.reserva(payload, this.tokenJson).subscribe({
-      next: (response: any) => {
-        console.log(response)
-        this.resevaVuelo = response
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    }
-    )
+
+    // this.reservaVuelosService.reserva(payload, this.tokenJson).subscribe({
+    //   next: (response: any) => {
+    //     console.log(response)
+    //     this.resevaVuelo = response
+    // if (this.shopString.formCard.select21 === 'SAFETYPAY') {
+    //   this.getGeneratePay()
+    // } else {
+    //   this.getCardPayment()
+    // }
+    //   },
+    //   error: (err) => {
+    //     console.log(err)
+    //   }
+    // })
   }
 
 }

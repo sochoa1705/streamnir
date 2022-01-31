@@ -88,23 +88,24 @@ export class FlightsComponent {
       let vuelo: IVueloDetalleSegment;
       let escala: IEscalaDetalleSegment;
 
+      let obj: ClassDetalleSegment;
 
       const departureDateTime = removeTimeZonePart(item.departureDateTime);
       const arrivalDateTime = removeTimeZonePart(item.arrivalDateTime);
 
-      salida = {
-        dia: moment(departureDateTime).format('D MMM'),
-        cod_ciudad: item.departureAirport.code,
-        hora: moment(departureDateTime).format('HH:mm A'),
-        aeropuerto: item.departureAirport.airport
-      }
+        salida = {
+          dia:  moment(departureDateTime).format('D MMM'),
+          cod_ciudad:item.departureAirport.code,
+          hora: moment(departureDateTime).format('HH:mm A'),
+          aeropuerto:item.departureAirport.airport
+        }
 
-      llegada = {
-        dia: moment(arrivalDateTime).format('D MMM'),
-        cod_ciudad: item.arrivalAirport.code,
-        hora: moment(arrivalDateTime).format('HH:mm A'),
-        aeropuerto: item.arrivalAirport.airport
-      }
+        llegada = {
+          dia:  moment(arrivalDateTime).format('D MMM'),
+          cod_ciudad:item.arrivalAirport.code,
+          hora: moment(arrivalDateTime).format('HH:mm A'), 
+          aeropuerto:item.arrivalAirport.airport
+        }
 
       llegada = {
         dia: moment(item.arrivalDateTime, moment.ISO_8601).format('D MMM'),
