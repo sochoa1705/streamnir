@@ -28,7 +28,12 @@
         <span
           *ngFor="let filterSelect of filterSelected; index as i"
           class="btn btn-outline-danger btn-filter"
-          >{{ filterSelect.name }}<a class="icon-x" (click)="removeFilterBlock(filterSelect.filterType)">X</a></span
+          >{{ filterSelect.name
+          }}<a
+            class="icon-x"
+            (click)="removeFilterBlock(filterSelect.filterType)"
+            >X</a
+          ></span
         >
       </div>
     </div>
@@ -56,10 +61,12 @@
           <label for="checkbox-pack-1">Equipaje de mano</label>
           <div class="form-check">
             <input
+              name="equipajeMano"
               class="form-check-input"
               type="checkbox"
-              value=""
               id="checkbox-pack-1"
+              (change)="changeEquipaje($event)"
+              [checked]="filter.equipaje.mano"
             />
           </div>
         </div>
@@ -67,10 +74,12 @@
           <label for="checkbox-pack-2">Equipaje en bodega</label>
           <div class="form-check">
             <input
+              name="equipajeBodega"
               class="form-check-input"
               type="checkbox"
-              value=""
               id="checkbox-pack-2"
+              (change)="changeEquipaje($event)"
+              [checked]="filter.equipaje.bodega"
             />
           </div>
         </div>
@@ -111,10 +120,13 @@
           <label for="checkbox-scale-2">Directo</label>
           <div class="form-check">
             <input
+            name="directo"
               class="form-check-input"
               type="checkbox"
               value=""
               id="checkbox-scale-2"
+              [checked]="filter.escala.directo"
+              (change)="changeEscala($event)"
             />
           </div>
         </div>
@@ -122,10 +134,13 @@
           <label for="checkbox-scale-3">1 Escala</label>
           <div class="form-check">
             <input
+            name="uno"
               class="form-check-input"
               type="checkbox"
               value=""
               id="checkbox-scale-3"
+              [checked]="filter.escala.uno"
+              (change)="changeEscala($event)"
             />
           </div>
         </div>
@@ -133,10 +148,13 @@
           <label for="checkbox-scale-4">2 o más escalas</label>
           <div class="form-check">
             <input
+            name="mas"
               class="form-check-input"
               type="checkbox"
               value=""
               id="checkbox-scale-4"
+              [checked]="filter.escala.mas"
+              (change)="changeEscala($event)"
             />
           </div>
         </div>
@@ -163,21 +181,30 @@
     >
       <div class="accordion-body pt-0">
         <div class="d-flex justify-content-center pb-3">
-          <button class="px-0" [ngClass]="{'gris': filterAeroline}" (click)="toCheck(true)" type="button">
+          <button
+            class="px-0"
+            [ngClass]="{ gris: filterAeroline }"
+            (click)="toCheck(true)"
+            type="button"
+          >
             Seleccionar Todo
           </button>
-          <button [ngClass]="{'gris': !filterAeroline}" (click)="toCheck(false)" type="button">
+          <button
+            [ngClass]="{ gris: !filterAeroline }"
+            (click)="toCheck(false)"
+            type="button"
+          >
             Borrar todo
           </button>
         </div>
-        <ng-template [ngIf]="filters.airlines.length>0">
+        <ng-template [ngIf]="filters.airlines.length > 0">
           <div
             class="d-flex justify-content-between mb-2"
             *ngFor="let airlineObj of filters.airlines"
           >
             <div class="d-flex flex-row">
               <div class="company">
-                <img src="{{airlineObj.imageUrl}}" alt="" />
+                <img src="{{ airlineObj.imageUrl }}" alt="" />
               </div>
               <label for="checkbox-airline-1">{{ airlineObj.name }}</label>
             </div>
@@ -225,8 +252,7 @@
               name="inlineRadioOptions"
               id="inlineRadio1"
               value="dolares"
-              (change) = "changePriceCurrency($event)"
-              
+              (change)="changePriceCurrency($event)"
             />
           </div>
           <div class="form-check form-check-inline">
@@ -237,7 +263,7 @@
               name="inlineRadioOptions"
               id="inlineRadio2"
               value="soles"
-              (change) = "changePriceCurrency($event)"
+              (change)="changePriceCurrency($event)"
               checked
             />
           </div>

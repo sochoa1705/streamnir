@@ -111,7 +111,7 @@ export class ResultadosComponent implements OnInit {
         .then((resp) => {
           this.error.isError = false;
           this.flights = resp.groups;
-          this.conversion= resp.exchangeRate.amount;
+          this.conversion = resp.exchangeRate.amount;
           this.flightsOri = resp.groups;
           this.filtersObj.airlines = resp.airlinesFilter.map((x) => {
             let airline: AirlineFilter = {
@@ -288,33 +288,86 @@ export class ResultadosComponent implements OnInit {
     }
 
     if (filter.airline.length > 0) {
-      let af:any = this.flights.map((x) => {
+      let af: any = this.flights.map((x) => {
         let df = x.departure[0].segments[0].flightSegments[0]
           ? x.departure[0].segments[0].flightSegments[0].marketingAirline.code
-          : '';
-        let dg = x.departure[0].segments[0].flightSegments[1]
-          ? x.departure[0].segments[0].flightSegments[1].marketingAirline.code
           : '';
 
         let rf = x.returns.segments[0].flightSegments[0]
           ? x.returns.segments[0].flightSegments[0].marketingAirline.code
           : '';
-        let rg = x.returns.segments[0].flightSegments[1]
-          ? x.returns.segments[0].flightSegments[1].marketingAirline.code
-          : '';
 
         if (
           filter.airline.find((ff: any) => ff == df) ||
-          filter.airline.find((ff: any) => ff == dg) ||
-          filter.airline.find((ff: any) => ff == rf) ||
-          filter.airline.find((ff: any) => ff == rg)
+          filter.airline.find((ff: any) => ff == rf)
         ) {
           return x;
         }
         return null;
       });
 
-      this.flights = af.filter((x:any) => x != null);
+      this.flights = af.filter((x: any) => x != null);
+    }
+
+    if (filter.equipaje.mano || filter.equipaje.bodega) {
+      let eql: any = this.flights.map((x) => {
+        if (
+          (filter.equipaje.mano &&
+            x.departure[0].segments[0].equipaje != undefined &&
+            x.departure[0].segments[0].equipaje.cabina != undefined &&
+            x.departure[0].segments[0].equipaje.cabina.piezas > 0) ||
+          (filter.equipaje.mano &&
+            x.returns.segments[0].equipaje != undefined &&
+            x.returns.segments[0].equipaje.cabina != undefined &&
+            x.returns.segments[0].equipaje.cabina.piezas > 0) ||
+          (filter.equipaje.bodega &&
+            x.departure[0].segments[0].equipaje != undefined &&
+            x.departure[0].segments[0].equipaje.piezas > 0) ||
+          (filter.equipaje.bodega &&
+            x.returns.segments[0].equipaje != undefined &&
+            x.returns.segments[0].equipaje.piezas > 0)
+        ) {
+          return x;
+        } else {
+          return null;
+        }
+      });
+
+      this.flights = eql.filter((x: any) => x != null);
+    }
+
+    if (filter.escala.directo || filter.escala.uno || filter.escala.mas) {
+      console.log(this.flights);
+      let esl: any = this.flights.map((x) => {
+        if (
+          (filter.escala.directo &&
+            x.departure[0].segments[0].flightSegments != undefined &&
+            x.departure[0].segments[0].flightSegments.length == 1) ||
+          (filter.escala.directo &&
+            x.returns.segments[0].flightSegments != undefined &&
+            x.returns.segments[0].flightSegments.length == 1) ||
+          (filter.escala.uno &&
+            x.departure[0].segments[0].flightSegments != undefined &&
+            x.departure[0].segments[0].flightSegments.length == 2) ||
+          (filter.escala.uno &&
+            x.returns.segments[0].flightSegments != undefined &&
+            x.returns.segments[0].flightSegments.length == 2) ||
+          (filter.escala.mas &&
+            x.departure[0].segments[0].flightSegments != undefined &&
+            x.departure[0].segments[0].flightSegments.length > 2) ||
+          (filter.escala.mas &&
+            x.returns.segments[0].flightSegments != undefined &&
+            x.returns.segments[0].flightSegments.length > 2)
+        ) {
+          return x;
+        } else {
+          return null;
+        }
+      });
+
+      console.log(esl);
+
+      this.flights = esl.filter((x: any) => x != null);
     }
 
     // console.log(filter);
