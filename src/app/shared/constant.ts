@@ -47,7 +47,13 @@ export enum ENDPOINT_API {
   UPDATE_STATE = 'ActualizarEstadoReservaSeguro',
 
   //LOCATIONSEARCH
-  LOCATION_SEARCH = 'jsonp/locationSearch'
+  LOCATION_SEARCH = 'jsonp/locationSearch',
+
+  //CARDPAYMENT
+  CARD_PAYMENT = 'v1/api/Insurance',
+
+  //CHECKCARD
+  CHECK_CARD = 'v1/api/Card/Check?Parameter.Number=49133712345678900&TrackingCode=qwertyuiiop&MuteExceptions=false&Caller.Company=Agil&Caller.Application=Expertia',
 
 }
 

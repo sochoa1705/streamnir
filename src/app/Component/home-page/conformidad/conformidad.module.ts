@@ -10,6 +10,7 @@ import { CountdownModule } from 'ngx-countdown';
 import { UpdatePayService } from '../../../Services/updatePay/update-pay.service';
 import { StatePayService } from '../../../Services/statePay/state-pay.service';
 import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
+import { CardPaymentService } from '../../../Services/cardPayment/card-payment.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -22,6 +23,6 @@ import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vu
     CountdownModule,
   ],
   exports: [ ConformidadComponent ],
-  providers: [ReservaVuelosService, SecureBookingService, GeneratePayService, UpdatePayService, StatePayService]
+  providers: [CardPaymentService, ReservaVuelosService, SecureBookingService, GeneratePayService, UpdatePayService, StatePayService]
 })
 export class ConformidadModule { }
