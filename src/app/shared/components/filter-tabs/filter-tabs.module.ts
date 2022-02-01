@@ -13,6 +13,7 @@ import { TabHotelComponent } from './tab-hotel/tab-hotel.component';
 import { TabActividadesComponent } from './tab-actividades/tab-actividades.component';
 import { CalendarModule } from '../calendar/calendar.module';
 import { TabVuelosComponent } from './tab-vuelos/tab-vuelos.component';
+import { CardAutocompleteModule } from '../card-autocomplete/card-autocomplete.module';
 
 
 
@@ -28,7 +29,8 @@ import { TabVuelosComponent } from './tab-vuelos/tab-vuelos.component';
     ReactiveFormsModule,
     PopUpPasajeroModule,
     MaterialModule,
-    CalendarModule
+    CalendarModule,
+    CardAutocompleteModule
   ],
   providers: [
     MatSnackBar

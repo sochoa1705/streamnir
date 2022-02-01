@@ -2,7 +2,7 @@
 
     <form class="bg-white" [formGroup]="form">
         <div class="rowBoxTab">
-            <div class="padRight">
+            <div class="padRight " style="position: relative;">    
                 <mat-form-field>
                     <mat-select formControlName="viajes" disableOptionCentering>
                         <mat-option [value]="EnumFlightType.ida_vuelta">Ida y Vuelta</mat-option>
@@ -26,18 +26,24 @@
 
 
         <div class="rowBoxTab">
+            
             <div class="colBoxtab">
-                <input matInput aria-label="State" [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event, 'origen')"
+                <div class="tab-autocomplete" >
+                    <input placeholder="Origen" class="form-control" (focus)='showBoxOrigen()' on-focusout="hideBoxOrigen()" type="text">
+                    <app-card-autocomplete [cardAutocomplete]="[]" [boxOrigen]="boxOrigen"></app-card-autocomplete>
+                </div>
+
+
+                <!-- <input matInput aria-label="State" [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event, 'origen')"
                     class="form-control animated fadeIn" placeholder="Origen">
                 <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayWithOrigen.bind(this)">
                     <mat-option *ngFor="let state of citysOrigenSelect" [value]="state.city_code">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
                         <span>{{state.city}}</span>
-                        <!-- <small>Population: {{state.population}}</small> -->
                     </mat-option>
-                </mat-autocomplete>
-                <!-- <input class="form-control" type="text" placeholder="Origen"> -->
+                </mat-autocomplete> -->
             </div>
+            
             <div class="colBoxtab">
                 <input matInput aria-label="State2" [matAutocomplete]="auto2" formControlName="destino" (keyup)="autoComplete($event, 'destino')"
                     class="form-control" placeholder="Destino">

@@ -28,6 +28,8 @@ export class TabVuelosComponent {
   origenHotel: any;
   toDate: NgbDate | null;
 
+  boxOrigen = false;
+
   distributionObject: IDistributionObject;
   hoveredDate: NgbDate | null = null;
 
@@ -43,6 +45,18 @@ export class TabVuelosComponent {
 
     //  const data = this.destineService.searchMv();
     //  console.log(data);
+
+  }
+
+  showBoxOrigen() {
+
+    this.boxOrigen = true;
+
+  }
+
+  hideBoxOrigen() {
+
+    this.boxOrigen = false;
 
   }
 
