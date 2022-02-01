@@ -56,7 +56,7 @@ export class ResultadosComponent implements OnInit {
     errorMessage: '',
   };
 
-  orderByActive:number = ENUM_ORDER_BY.CONVENIENTE;
+  orderByActive:number = ENUM_ORDER_BY.PRECIO_BAJO;
 
   constructor(
     public route: Router,
