@@ -65,4 +65,5 @@ export const FilterTypes = {
   alianzas: 6,
   reserva: 7,
   equipajebodega: 8,
+  duracionSalida:9,
 }
