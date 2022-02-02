@@ -191,6 +191,12 @@
     --bs-gutter-x: 0rem;
 }
 
+.icon-x{
+    display: inline-block;
+    margin: -3px -2px 0 8px;
+    vertical-align: middle;
+}
+
 // .row-cust-$red {
 //     padding-top: 60px;
 //     --bs-gutter-x: 0rem;
@@ -226,4 +232,12 @@
     line-height: 20px;
     color: $red;
     background-color: transparent !important;
+}
+
+.btn-filter{
+    font-size: 14px;
+    border-radius: 25px;
+    font-weight: 600;
+    margin: 2px;
+    padding-right: 10px !important;
 }

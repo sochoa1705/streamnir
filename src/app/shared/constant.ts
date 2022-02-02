@@ -47,11 +47,30 @@ export enum ENDPOINT_API {
   UPDATE_STATE = 'ActualizarEstadoReservaSeguro',
 
   //LOCATIONSEARCH
-  LOCATION_SEARCH = 'jsonp/locationSearch'
+  LOCATION_SEARCH = 'jsonp/locationSearch',
+
+  //CARDPAYMENT
+  CARD_PAYMENT = 'v1/api/Insurance',
+
+  //CHECKCARD
+  CHECK_CARD = 'v1/api/Card/Check?Parameter.Number=49133712345678900&TrackingCode=qwertyuiiop&MuteExceptions=false&Caller.Company=Agil&Caller.Application=Expertia',
 
 }
 
 export enum ROUTE_VIAJES {
   RUTA_PAQUETES = 'https://nmviajes.paquetedinamico.com/ES/holidays/search',
   RUTA_GET = 'https://nmviajes.paquetedinamico.com/home'
+}
+
+export const FilterTypes = {
+  equipajemano: 1,
+  escalas: 2,
+  aerolineas: 3,
+  precio: 4,
+  duracion: 5,
+  alianzas: 6,
+  reserva: 7,
+  equipajebodega: 8,
+  duracionSalida:9,
+  duracionEscala:10,
 }

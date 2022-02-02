@@ -1,65 +1,69 @@
 <div class="boxTab">
-    
+
     <form class="bg-white" [formGroup]="form">
         <div class="rowBoxTab">
-            <div class="padRight">
+            <div class="padRight " style="position: relative;">    
                 <mat-form-field>
                     <mat-select formControlName="viajes" disableOptionCentering>
-                        <mat-option value="ida_vuelta">Ida y Vuelta</mat-option>
-                        <mat-option value="ida">Solo Ida</mat-option>
-                        <mat-option value="multy">Multi City</mat-option>
+                        <mat-option [value]="EnumFlightType.ida_vuelta">Ida y Vuelta</mat-option>
+                        <mat-option [value]="EnumFlightType.ida">Solo Ida</mat-option>
+                        <mat-option [value]="EnumFlightType.multy_city">Multi City</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
             <div class="padRight">
                 <mat-form-field>
                     <mat-select formControlName="clase" disableOptionCentering>
-                        <mat-option value="economy">Economy</mat-option>
-                        <mat-option value="business">Business</mat-option>
+                        <mat-option [value]="EnumCabins.economico">Economy</mat-option>
+                        <mat-option [value]="EnumCabins.business">Business</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
             <div class="padRight">
-                <app-pop-up-pasajero #popUp [onlyPasajeros]="true" (emitDistribution)="distribution = $event"></app-pop-up-pasajero>
+                <app-pop-up-pasajero #popUp [onlyPasajeros]="true" [adultos]="vuelosTab?.pasajeros?.adultos || 0" [ninos]="vuelosTab?.pasajeros?.ninos || 0" [infantes]="vuelosTab?.pasajeros?.infantes || 0" (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero>
             </div>
         </div>
 
 
         <div class="rowBoxTab">
+            
+
             <div class="colBoxtab">
-                <input matInput aria-label="State" [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event)"
+                <app-input-autocomplete placeholder="Origen" [items]="vuelos$ | async" [loading]="vuelosLoading"  [typeahead]="vuelosInput$" formControlName="origen"></app-input-autocomplete>    
+            </div>            
+                     <!-- <input matInput aria-label="State" [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event, 'origen')"
                     class="form-control animated fadeIn" placeholder="Origen">
-                <mat-autocomplete #auto1="matAutocomplete">
-                    <mat-option *ngFor="let state of citysOrigenSelect" [value]="state.label">
+                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayWithOrigen.bind(this)">
+                    <mat-option *ngFor="let state of citysOrigenSelect" [value]="state.city_code">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
-                        <span>{{state.label}}</span>
-                        <!-- <small>Population: {{state.population}}</small> -->
+                        <span>{{state.city}}</span>
                     </mat-option>
-                </mat-autocomplete>
-                <!-- <input class="form-control" type="text" placeholder="Origen"> -->
-            </div>
+                </mat-autocomplete> -->
+
             <div class="colBoxtab">
-                <input matInput aria-label="State2"  [matAutocomplete]="auto2" formControlName="destino" (keyup)="autoComplete($event)"
+
+                <app-input-autocomplete placeholder="Destino" [items]="vuelos2$ | async" [loading]="vuelosLoading2"  [typeahead]="vuelosInput2$" formControlName="destino"></app-input-autocomplete>
+
+
+                <!-- <input matInput aria-label="State2" [matAutocomplete]="auto2" formControlName="destino" (keyup)="autoComplete($event, 'destino')"
                     class="form-control" placeholder="Destino">
-                <mat-autocomplete #auto2="matAutocomplete">
-                    <mat-option *ngFor="let state of citysDestinosSelect" [value]="state.label">
+                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayWithDestino.bind(this)">
+                    <mat-option *ngFor="let state of citysDestinosSelect" [value]="state.city_code">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
-                        <span>{{state.label}}</span>
-                        <!-- <small>Population: {{state.population}}</small> -->
+                        <span>{{state.city}}</span>
                     </mat-option>
-                </mat-autocomplete>
+                </mat-autocomplete> -->
             </div>
 
-            <app-calendar class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
+            <app-calendar [toDate]="vuelosTab?.toDate || null" [fromDate]="vuelosTab?.fromDate || null" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
 
 
             <div class="colBoxtab">
                 <button class="fullWidht" type="button" (click)="searchVueloHotel()">Buscar</button>
             </div>
         </div>
-        <div class="rowBoxTab right text">Haciendo click en "Buscar", acepto las Condiciones Generales</div>
+        <div class="rowBoxTab right text">Haciendo click en
+            <strong>"Buscar"</strong> , acepto las Condiciones Generales</div>
         <span class="valid" *ngIf="false">Debe seleccionar la cantidad de pasajeros</span>
     </form>
-
-
 </div>
