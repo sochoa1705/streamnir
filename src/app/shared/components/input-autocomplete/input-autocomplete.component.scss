@@ -4,6 +4,7 @@
 
 .tab-autocomplete{
     position: relative;
+    z-index: 1;
     width: 100%;
 }
 
@@ -21,7 +22,6 @@
 .input-icon-loading {
 	color: #191919;
 	position: absolute;
-    z-index: 100;
 	width: 45px;
 	height: 45px;
 	right: 12px;
