@@ -16,6 +16,7 @@ import { ENUM_ORDER_BY } from './models/resultados.enum';
 import { IAerolineas, ParamsVuelos } from './models/resultados.interfaces';
 import { FareBreakPipe } from './pipes/fare-break-downs.pipe';
 import { ResultadosService } from './services/resultados.service';
+import { toUp } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-resultados',
@@ -71,6 +72,7 @@ export class ResultadosComponent implements OnInit {
   }
 
   ngOnInit() {
+    toUp()
     this.filtersObj = { airlines: [] };
     this.loader.showText('Cargando los vuelos');
     this.loader.showLoader();

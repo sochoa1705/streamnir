@@ -13,6 +13,7 @@ import { UpdatePayService } from 'src/app/Services/updatePay/update-pay.service'
 import { StatePayService } from 'src/app/Services/statePay/state-pay.service';
 import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
 import { CardPaymentService } from '../../../Services/cardPayment/card-payment.service';
+import { toUp } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-conformidad',
@@ -106,6 +107,7 @@ export class ConformidadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    toUp()
     this.ShowComponentTime = false
     let lcadena: any = localStorage.getItem('businessunit');
     this.unidadNegocio = JSON.parse(lcadena);

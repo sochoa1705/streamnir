@@ -79,3 +79,12 @@ export function removeTimeZonePart(dateString:string) {
   }
   return finalDate;
 }
+
+
+export function toUp(){
+  window.scroll({ 
+    top: 0, 
+    left: 0, 
+    behavior: 'smooth' 
+  })
+}

@@ -63,7 +63,7 @@
             </div>
 
             <div class="number" *ngIf="!listBank && safe0Json.reservaVuelos">
-                {{this.reservaStr.ciP_SafetyPAY}} - {{(this.reservaStr.pnr === undefined) ? this.reservaStr.rptaNative.confirmationId : this.reservaStr.pnr}}
+                {{this.reservaStr.ciP_SafetyPAY}}-{{(this.reservaStr.pnr === undefined) ? this.reservaStr.rptaNative.confirmationId : this.reservaStr.pnr}}-{{this.reservaStr.idCotizacion}}
                 
 
             </div>

@@ -13,6 +13,7 @@ import { LoaderSubjectService } from '../../../shared/components/loader/service/
 import { RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
+import { toUp } from 'src/app/shared/utils';
 
 interface Methods {
   id: string;
@@ -197,6 +198,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     console.log(this.selectedPay)
+    toUp()
 
     this.pop = this.safe0Json
     // this.getSecureBooking()
@@ -231,7 +233,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log(pasajeros);
 
     for (const i of pasajeros) {
-      this.addCustomers()
+      this.addCustomers(i.item)
     }
     this.selectYear()
     if (this.current['filter'] !== 'filter') {
@@ -415,7 +417,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
   }
 
-
   getMessageArray(index: any, messageKey: any) {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
@@ -425,7 +426,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   toFactura(e: any) {
-    console.log(e.target.checked);
     let chk = e.target.checked
     if (chk) {
       this.addRecibo()
@@ -452,7 +452,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }),
       formContact: new FormGroup({
         chkCustomer: new FormControl(),
-        nameContacto: new FormControl(),
+        nameContacto: new FormControl('', Validators.pattern("^[a-zA-Z ]+$")),
         lastnameContacto: new FormControl(),
         mailContacto: new FormControl(),
         mailConfirmContacto: new FormControl(),
@@ -472,10 +472,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return (<FormArray>this.formShop.get(['customers'])).controls
   }
 
-  addCustomers() {
+  addCustomers(e: any) {
     // ((<any>this.formShop.controls['formContact']).controls['phones']).push(
     (<FormArray>this.formShop.controls['customers']).push(
       new FormGroup({
+        typeCustomer: new FormControl(e),
         nameCustomer: new FormControl(),
         lastNameCustomer: new FormControl(),
         dayCustomer: new FormControl(),
@@ -597,19 +598,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         console.log('Reserva Seguros')
         this.getSecureBooking()
       }
-
       // console.log((this.formShop.controls));
       // console.log((<FormArray>this.formShop.get(['formContact', 'phones'])).controls)
-
       // this.route.navigateByUrl('/home/comprar', navigationExtras);
-
       // this.route.navigateByUrl('/home/conformidad')
     }
   }
 
   otherPlan() {
     localStorage.removeItem('safe0')
-    this.route.navigateByUrl('/home/vuelos/resultados');
+    this.route.navigateByUrl('/home/vuelos/resultados')
   }
 
 
@@ -618,7 +616,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
   listCoverage() {
     // this.coverageDisplay = false
-
     let lcobertura: CoberturaSeguroRQ = {
       CodigoISOPais: this.businessunit.id_pais_ac,
       Agencia: this.businessunit.codigo_ac,
