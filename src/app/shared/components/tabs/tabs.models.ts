@@ -201,9 +201,9 @@ export class ParamsVuelos implements ParamsTabs{
         let origen = this.form.controls['origen'].value;
         let destino = this.form.controls['destino'].value;
         let businessClass = this.form.controls['clase'].value === 'business';        
-        let idOrigen = (this.citysOrigenSelect || []).find(item => item.city_code === origen).city_code;
+        let idOrigen = origen.codigo;
         let flightType = this.form.controls['viajes'].value;
-        let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.city_code === destino).city_code : 0;
+        let idDestino = destino.codigo;
 
         return {startDate, endDate, origen, destino, businessClass, idOrigen, idDestino,flightType};
     }
