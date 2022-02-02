@@ -26,6 +26,15 @@
         </path>
     </svg>
 
+
+    <div *ngIf="input.value.length<minTermLength" class="resultVuelo" [class.active]="boxOrigenTerm">
+        <div class="rowVuelo" >
+            <div class="primaryTitle">
+                <span>{{typeToSearchText}}</span>
+            </div>
+        </div>
+    </div>
+
     <div class="div" #cardAutocompleteComponent>
         <app-card-autocomplete (itmSelected)="selectItm($event)" [cardAutocomplete]="items || []"
             [boxOrigen]="boxOrigen"></app-card-autocomplete>

@@ -18,6 +18,7 @@ import { ICardAutocomplete } from '../card-autocomplete/card-autocomplete.interf
 })
 export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   boxOrigen = false;
+  boxOrigenTerm = false;
 
   private _items: ICardAutocomplete[];
 
@@ -61,7 +62,10 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     const value: string = target.value || '';
     if (value.length >= this.minTermLength) {
       this.showBoxOrigen();
+      this.boxOrigenTerm = false;
       this.typeahead.next(value);
+    }else{
+      this.boxOrigenTerm = true;
     }
   }
 
