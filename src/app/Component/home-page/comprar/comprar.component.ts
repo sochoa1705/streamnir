@@ -107,9 +107,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
 
-  detalleVuelos:ClassDetalleLocalSt;
+  detalleVuelos: ClassDetalleLocalSt;
 
-  modalDetalle:ClassDetalleModalSegment;
+  modalDetalle: ClassDetalleModalSegment;
 
   @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>;
   constructor(
@@ -123,7 +123,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.safe0 = localStorage.getItem('safe0');
     this.safe0Json = JSON.parse(this.safe0)
     this.result = localStorage.getItem('Datasafe');
-    const detalleVuelosStr:any = localStorage.getItem('detalleVuelo');
+    const detalleVuelosStr: any = localStorage.getItem('detalleVuelo');
     this.detalleVuelos = JSON.parse(detalleVuelosStr);
     this.resultJson = JSON.parse(this.result);
 
@@ -197,6 +197,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log(this.filtroVueloJson)
 
     let pasajeros = this.resultJson !== null ? this.resultJson['ClienteCotizacion'] : this.filtroVueloJson['pasajeros']
+    console.log(pasajeros);
+
     for (const i of pasajeros) {
       this.addCustomers()
     }
@@ -551,7 +553,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       // console.log(this.formShop);
       console.log(this.formShop.value);
       this.formShop.addControl('tipoRecibo', new FormControl('BV'));
-      this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson.passenger.length));
+      // this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson.passenger.length));
       let dataShop = this.formShop.value
       localStorage.setItem('shop', JSON.stringify(dataShop));
 
@@ -569,8 +571,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
 
-  selectVuelo(isIda:boolean){
-    this.modalDetalle = isIda?this.detalleVuelos.segmentoDeparture:this.detalleVuelos.segmentoReturn;
+  selectVuelo(isIda: boolean) {
+    this.modalDetalle = isIda ? this.detalleVuelos.segmentoDeparture : this.detalleVuelos.segmentoReturn;
   }
 
   listCoverage() {

@@ -46,7 +46,10 @@ export class ConformidadComponent implements OnInit {
   // vuelosJson: any
   token: any
   tokenJson: any
-
+  filtroVuelo: any
+  filtroVueloJson: any
+  detalleVuelosStr: any
+  detalleVuelos: any
   constructor(
     public route: Router,
     public secureBookingService: SecureBookingService,
@@ -62,6 +65,13 @@ export class ConformidadComponent implements OnInit {
     // VUELOS
     // this.vuelos = localStorage.getItem('flight0')
     // this.vuelosJson = JSON.parse(this.vuelos)
+
+    this.detalleVuelosStr = localStorage.getItem('detalleVuelo')
+    this.detalleVuelos = JSON.parse(this.detalleVuelosStr)
+
+    //filtro
+    this.filtroVuelo = localStorage.getItem('filtroVuelo')
+    this.filtroVueloJson = JSON.parse(this.filtroVuelo)
 
     // Token
     this.token = localStorage.getItem('token')
@@ -89,8 +99,14 @@ export class ConformidadComponent implements OnInit {
     let lcadena: any = localStorage.getItem('businessunit');
     this.unidadNegocio = JSON.parse(lcadena);
     this.edades()
-    this.getSecureBooking()
-    this.getGeneratePay()
+    console.log(this.safe0Json['reservaVuelos'])
+    
+    if(this.safe0Json['reservaVuelos']) {
+      this.getReserva()
+    } else {
+      this.getSecureBooking()
+    }
+    // this.getGeneratePay()
   }
 
   timeShop(data: string) {
@@ -131,6 +147,25 @@ export class ConformidadComponent implements OnInit {
     let arrCustomer = this.shopString.customers[0]
     let fechaNac = arrCustomer.dayCustomer + '/' + arrCustomer.monthCustomer + '/' + arrCustomer.yearCustomer
     return fechaNac
+  }
+
+  pasajerosVuelos() {
+    let pasajeros: any = []
+    this.shopString.customers.forEach((value: any, index: number) => {
+      let jsonPasajeros = {
+        type: "ADT",
+        name: value.nameCustomer,
+        lastName: value.lastNameCustomer,
+        birthday: value.yearCustomer + '-' + value.monthCustomer + '-' + value.dayCustomer,
+        documentType: (value.typeDocCustomer === 'dni') ? 0 : 1,
+        documentNumber: value.numDocCustomer,
+        gender: (value.sexCustomer === 'masculino') ? 'M' : '',
+        email: this.shopString.formContact.mailContacto,
+        phone: this.shopString.formContact.numberPhone0
+      }
+      pasajeros.push(jsonPasajeros)
+    })
+    return pasajeros
   }
 
   pasajerosArr() {
@@ -350,29 +385,32 @@ export class ConformidadComponent implements OnInit {
   }
 
   getReserva() {
+    console.log(this.shopString.formContact.recibo);
+    
     let payload = {
       "segmentSelected": [
         this.safe0Json.departure, this.safe0Json.return
       ],
       "IdGroup": this.safe0Json.idGroup,
-      "passengers": [
-        {
-          "type": "ADT",
-          "name": "RODRIGO",
-          "lastName": "CCANCCE",
-          "birthday": "1998-02-20",
-          "documentType": 0,
-          "documentNumber": "72154521",
-          "gender": "M",
-          "email": "rodrigo98_22@outlook.com",
-          "phone": "989454123"
-        }
-      ],
+      "passengers": this.pasajerosVuelos(),
+      // "passengers": [
+      //   {
+      //     "type": "ADT",
+      //     "name": "RODRIGO",
+      //     "lastName": "CCANCCE",
+      //     "birthday": "1998-02-20",
+      //     "documentType": 0,
+      //     "documentNumber": "72154521",
+      //     "gender": "M",
+      //     "email": "rodrigo98_22@outlook.com",
+      //     "phone": "989454123"
+      //   }
+      // ],
       contact: {
         name: this.shopString.formContact.nameContacto,
         lastName: this.shopString.formContact.lastnameContacto,
         email: this.shopString.formContact.mailContacto,
-        address: this.shopString.formContact.recibo[0].direccion,
+        address: (this.shopString.formContact.recibo === undefined) ? this.shopString.formContact.recibo[0].direccion : this.shopString.formCard.address,
         phones: [
           {
             phoneNumber: this.shopString.formContact.numberPhone0
@@ -380,16 +418,22 @@ export class ConformidadComponent implements OnInit {
         ]
       }
     }
+    console.log(payload)
+
     this.reservaVuelosService.reserva(payload, this.tokenJson).subscribe({
       next: (response: any) => {
         console.log(response)
         this.resevaVuelo = response
+    // if (this.shopString.formCard.select21 === 'SAFETYPAY') {
+    //   this.getGeneratePay()
+    // } else {
+    //   this.getCardPayment()
+    // }
       },
       error: (err) => {
-        console.log(err);
+        console.log(err)
       }
-    }
-    )
+    })
   }
 
 }
