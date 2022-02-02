@@ -66,4 +66,5 @@ export const FilterTypes = {
   reserva: 7,
   equipajebodega: 8,
   duracionSalida:9,
+  duracionEscala:10,
 }

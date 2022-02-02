@@ -370,6 +370,9 @@
                       [(value)]="minValueDurationExitScale"
                       [(highValue)]="maxValueDurationExitScale"
                       [options]="optionsDurationExitScale"
+                      (valueChange)="elapsedExitChange($event)"
+                      (highValueChange)="elapsedExitMaxChange($event)"
+                      (userChangeEnd)="filterElpasedExit()"
                     ></ng5-slider>
                   </div>
                   <div class="clearfix"></div>

@@ -20,4 +20,5 @@ export class FilterResult{
   price: RangeFilter = new RangeFilter();
   exchangeRate: number;
   flightDurationExit: RangeFilter = new RangeFilter();
+  flightElapsedExit: RangeFilter = new RangeFilter();
 }
