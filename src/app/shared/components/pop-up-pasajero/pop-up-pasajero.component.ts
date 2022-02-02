@@ -34,9 +34,11 @@ export class PopUpPasajeroComponent implements OnInit{
   showOption: Boolean = true;
   
   habitacion = 1;
-  adultos = 0;
-  ninos = 0;
-  infantes = 0;
+
+  @Input() adultos  = 0;
+  @Input() ninos = 0;
+  @Input() infantes = 0;
+
   pasajeros = 0
   validPasajeros = false;
 

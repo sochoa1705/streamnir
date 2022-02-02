@@ -81,3 +81,207 @@ span {
     background: transparent;
     color: #4b4b4b;
 }
+
+// .example-stretched-tabs {
+//     max-width: 800px;
+// }
+@import '/src/scss/variables';
+article {
+    z-index: 1;
+}
+
+.banner{
+    z-index: 100;
+}
+
+:host ::ng-deep .mat {
+    &-tab-header-pagination-before,
+    &-tab-header-pagination-after {
+        @media (max-width: 768px) {
+            display: none !important;
+        }
+    }
+    &-tab-label {
+        background: $white;
+        color: $gray;
+        box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+        border-radius: 7px;
+        opacity: 1;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.5px;
+        padding: 13px 20px;
+        margin: 0 4px;
+        margin-bottom: 4px;
+        min-width: 130px;
+        height: auto;
+        font-weight: 600;
+        font-family: "Montserrat";
+        @media (max-width: 768px) {
+            min-width: 77px;
+            height: auto;
+            font-size: 10px;
+            padding: 7px;
+        }
+        & span:hover{
+            color: $red_light;
+        }
+        &:hover {
+            color: $red_light;
+        }
+        &-active {
+            border-radius: 7px 7px 0 0;
+            color: $red_light!important;
+            font-weight: bold;
+            & span{
+                color: #DF0C30;
+            }
+            &:first-child{
+                margin-right: 4px!important;
+                margin: 0px;
+                border-radius: 7px 7px 7px 0px;
+            }
+            .mat-tab-label-content>svg>path {
+                fill: $red_light;
+            }
+        }
+        &:hover>.mat-tab-label-content>svg>path {
+            fill: $red_light;
+        }
+        &-content, &-content>a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #4B4B4B;
+            &>svg {
+                @media (max-width: 768px) {
+                    height: 12px;
+                }
+            }
+        }
+    }
+    &-ink-bar {
+        height: 4px;
+        background-color: $white !important;
+    }
+    &-tab-header {
+        border-bottom: 0px;
+    }
+    &-tab-body {
+        background: $white;
+        box-shadow: 0px 1px 8px rgba(122, 88, 88, 0.05);
+        padding: 35px 0px 35px 43px;
+        border-radius: 0px 7px 7px 7px;
+        @media (max-width: 768px) {
+            padding: 7px;
+        }
+        &-wrapper {
+            overflow: inherit;
+            z-index: 0;
+        }
+    }
+}
+
+
+
+// .customers {
+//     width: 100%;
+//     font-style: normal;
+//     font-weight: 600;
+//     border: 0px;
+//     font-size: 14px;
+//     color: $gray;
+//     margin-top: 7px;
+//     background: url(../../../../assets/arrow.svg) no-repeat center right;
+//     padding-left: 0;
+//     text-align: left;
+//     font-family: "Montserrat";
+//     padding-top: 13px;
+//     @media (max-width: 768px) {
+//         font-size: 10px;
+//     }
+// }
+
+:host ::ng-deep .mat-select {
+    font-style: normal;
+    font-weight: 600;
+    border: 0px;
+    font-size: 14px;
+    color: $gray;
+    background-color: $white;
+    background: url(../../../../assets/arrow.svg) no-repeat center right;
+    font-family: "Montserrat";
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    @media (max-width: 768px) {
+        font-size: 10px;
+    }
+    &:focus {
+        box-shadow: none;
+    }
+    option.sel {
+        border: 0px;
+        height: 50px;
+        line-height: 50px;
+        outline: none;
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 44px;
+        margin: 10px;
+        padding: 20px;
+        &:hover {
+            background: $red !important;
+        }
+    }
+    &-arrow {
+        background: url(../../../../assets/arrow.svg) no-repeat center center;
+        &-wrapper {
+            visibility: hidden;
+        }
+    }
+    &-panel {
+        position: absolute;
+        top: 32px;
+        left: 4px;
+        min-width: calc(100% + 22px) !important;
+        border-radius: 0px !important;
+        border: 1px solid blue;
+        border-top-style: none;
+        background: url(../../../../assets/arrow.svg) no-repeat center center;
+        & ng-animating {
+            visibility: hidden;
+        }
+    }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border-radius: 0px !important;
+    border: 1px solid blue !important;
+    border-right-style: none !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border-radius: 0px !important;
+    border: 1px solid blue !important;
+    border-left-style: none !important;
+}
+
+:host ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+.hideDate {
+    max-width: 0 !important;
+    width: 0 !important;
+}
+
+.valid {
+    font-size: 14px !important;
+}
+
+.bannerHide{
+    height: auto !important;
+}

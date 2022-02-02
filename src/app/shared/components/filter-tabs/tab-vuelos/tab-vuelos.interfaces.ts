@@ -1,3 +1,5 @@
+import { ICardAutocomplete } from "../../card-autocomplete/card-autocomplete.interface";
+
 export interface IGeoTree{
     aerocodiata: string,
     city: string,
@@ -11,3 +13,12 @@ export interface IGeoTree{
     tipo_busqueda:string,
     tn_iata_padre?: "0" | "2"
 }
+
+export interface IForm {
+    clase:       string;
+    viajes:      number;
+    origen:      ICardAutocomplete;
+    destino:     ICardAutocomplete;
+    origenHotel: string;
+}
+

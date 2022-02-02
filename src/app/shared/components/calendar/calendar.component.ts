@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, forwardRef, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { ClassValueCalendar } from './calendar.models';
@@ -12,8 +12,9 @@ import { ClassValueCalendar } from './calendar.models';
 })
 export class CalendarComponent implements AfterViewInit{
 
-  toDate: NgbDate | null;
-  fromDate: NgbDate | null;
+  @Input() toDate: NgbDate | null;
+  @Input() fromDate: NgbDate | null;
+
   hoveredDate: NgbDate | null = null;
 
   minDate:NgbDate;
@@ -25,9 +26,13 @@ export class CalendarComponent implements AfterViewInit{
   constructor(private calendar: NgbCalendar,public formatter: NgbDateParserFormatter,private cdRef:ChangeDetectorRef) { }
 
   ngAfterViewInit(){
-    this.fromDate = this.calendar.getToday();
 
-    this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 10);
+
+    if(!this.fromDate && !this.toDate){
+      this.fromDate = this.calendar.getToday();
+      this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 10);
+    }
+
 
     this.minDate = this.calendar.getToday();
 

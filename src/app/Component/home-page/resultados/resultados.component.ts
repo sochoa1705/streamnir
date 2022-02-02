@@ -2,15 +2,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
+import { ICardAutocomplete } from 'src/app/shared/components/card-autocomplete/card-autocomplete.interface';
 import {
   AirlineFilter,
   FilterResult,
   RangeFilter,
 } from 'src/app/shared/components/filter-result/models/filter-result.interfaces';
+import { IForm } from 'src/app/shared/components/filter-tabs/tab-vuelos/tab-vuelos.interfaces';
 import { DisponibilidadPayload } from 'src/app/shared/components/flights/models/flights.class';
+import { EnumCabins } from 'src/app/shared/components/flights/models/flights.interface';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
+import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { IVuelos } from '../vuelos/commons/components/flight/flight.models';
 import { ResultadosPaginacion } from './models/resultados.class';
 import { ENUM_ORDER_BY } from './models/resultados.enum';
@@ -60,6 +65,8 @@ export class ResultadosComponent implements OnInit {
 
   orderByActive: number = ENUM_ORDER_BY.PRECIO_BAJO;
 
+  vuelosTab:SaveModelVuelos;
+
   constructor(
     public route: Router,
     private service: ResultadosService,
@@ -73,7 +80,6 @@ export class ResultadosComponent implements OnInit {
 
   ngOnInit() {
     toUp()
-    // this.filtersObj = { airlines: [] };
     this.filtersObj = {
       airlines: [],
       price: { min: 0, max: 0 },
@@ -86,8 +92,72 @@ export class ResultadosComponent implements OnInit {
     this.getParams();
   }
 
+  vuelosLogicInit(respVuelos:ParamsVuelos){
+
+    const obj = this.flights[0].departure[0];
+
+    const origen:ICardAutocomplete = {
+      id:  obj.originCity.code,
+      codigo:  obj.originCity.code,
+      title: obj.originCity.name,
+      children:[]
+    }
+
+    const destino:ICardAutocomplete = {
+      id:  obj.destinationCity.code,
+      codigo:  obj.destinationCity.code,
+      title: obj.destinationCity.name,
+      children:[]
+    }
+
+    const formModel:IForm = {
+      clase:       respVuelos.businessCabin?EnumCabins.economico:EnumCabins.economico,
+      viajes:      Number(respVuelos.flightType),
+      origen:      origen,
+      destino:     destino,
+      origenHotel: "",
+    }
+
+    const fromDate = new NgbDate(
+      moment(respVuelos.departureDate,"DD/MM/YYYY").year(),
+      moment(respVuelos.departureDate,"DD/MM/YYYY").month() + 1,
+      moment(respVuelos.departureDate,"DD/MM/YYYY").date(),
+    )
+    const toDate = new NgbDate(
+      moment(respVuelos.arrivalDate,"DD/MM/YYYY").year(),
+      moment(respVuelos.arrivalDate,"DD/MM/YYYY").month() + 1,
+      moment(respVuelos.arrivalDate,"DD/MM/YYYY").date(),
+    )
+
+    const pasajeros = {
+      adultos: Number(respVuelos.adults),
+      ninos: Number( respVuelos.children),
+      infantes: Number(respVuelos.infants)
+    }
+
+    this.vuelosTab =  new SaveModelVuelos(
+      fromDate,
+      toDate,
+      formModel,
+      pasajeros
+      )
+    
+
+
+    // this.vuelosService.getValue().subscribe(resp=>{
+    //   if(!resp){
+    //     return;
+    //   }
+    //   console.log(resp);
+    //   this.vuelosTab = resp;
+    // })
+  }
+
   async getParams() {
     this.ar.queryParams.subscribe((resp) => {
+
+      const respVuelos: ParamsVuelos = resp as ParamsVuelos
+
       let {
         arrivalDate,
         businessCabin,
@@ -99,6 +169,9 @@ export class ResultadosComponent implements OnInit {
         children,
         flightType,
       } = resp as ParamsVuelos;
+
+      this.loader.showText('Cargando los vuelos');
+      this.loader.showLoader();
 
       arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').toISOString();
       departureDate = moment(departureDate, 'DD/MM/YYYY').toISOString();
@@ -210,6 +283,8 @@ export class ResultadosComponent implements OnInit {
           this.filtersObj = { ...this.filtersObj };
 
           this.exchangeRate = resp.exchangeRate;
+
+          this.vuelosLogicInit(respVuelos);
 
           this.loader.closeLoader();
         })

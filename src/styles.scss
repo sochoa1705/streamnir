@@ -989,9 +989,20 @@ section {
 
 /* STYLE PERFIL  */
 
-.mat-tab-body, .mat-tab-body-content{
-    overflow: visible!important;    
+.mat-tab-body-content{
+    overflow: hidden!important;    
 }
+
+
+.mat-tab-body{
+    &-active{
+        overflow: visible!important;    
+        .mat-tab-body-content{
+            overflow: visible!important;    
+        }
+    }    
+}
+
 
 .box-container {
     width: 100%;
