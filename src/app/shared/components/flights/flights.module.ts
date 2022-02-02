@@ -9,12 +9,13 @@ import { EscalasPipe } from './pipes/escalas.pipe';
 import { GetDaysPipe } from './pipes/get-days.pipe';
 import { FormatPipe } from './pipes/format-day.pipe';
 import { ModalsModule } from '../modals/modals.module';
+import { WithoutZonePipe } from './pipes/without-zone.pipe';
 
 
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ FlightsComponent,FareBreakPipe,HoraPipe,EscalasPipe,GetDaysPipe,FormatPipe ],
+  declarations: [ FlightsComponent,FareBreakPipe,HoraPipe,EscalasPipe,GetDaysPipe,FormatPipe,WithoutZonePipe ],
   imports: [
     CommonModule,
     MaterialModule,
