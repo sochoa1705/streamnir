@@ -10,6 +10,7 @@ import { ResultadosService } from './services/resultados.service';
 import { TabsModule } from 'src/app/shared/components/tabs/tabs.module';
 import { FareBreakPipe } from './pipes/fare-break-downs.pipe';
 import { DisplayOrderPipe } from './pipes/display-order-by.pipe';
+import { FilterTabsModule } from 'src/app/shared/components/filter-tabs/filter-tabs.module';
 
 @NgModule({
   declarations: [ ResultadosComponent,DisplayOrderPipe ],
@@ -20,7 +21,7 @@ import { DisplayOrderPipe } from './pipes/display-order-by.pipe';
     FilterModule,
     MaterialModule,
     FormsModule,
-    TabsModule
+    FilterTabsModule
   ],
   exports: [ ResultadosComponent ],
   providers:[ResultadosService,FareBreakPipe]

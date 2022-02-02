@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -8,9 +8,10 @@ import { distinctUntilChanged, tap, switchMap, catchError, map, debounceTime } f
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { ICardAutocomplete } from '../../card-autocomplete/card-autocomplete.interface';
+import { DisponibilidadPayload } from '../../flights/models/flights.class';
 import { EnumCabins, EnumFlightType } from '../../flights/models/flights.interface';
 import { IDistributionObject, PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
-import { ParamsVueloHotel, ParamsVuelos, URLVueloHotel, URLVuelos } from '../../tabs/tabs.models';
+import { ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos } from '../../tabs/tabs.models';
 import { IGeoTree } from './tab-vuelos.interfaces';
 
 @Component({
@@ -22,6 +23,22 @@ export class TabVuelosComponent implements OnInit{
 
 
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
+
+  private _vuelosTab:SaveModelVuelos;
+
+  @Input() set vuelosTab(value: SaveModelVuelos) {
+    if (value) {
+      this.form.setValue(value.form);
+      this._vuelosTab = value;
+    }
+  }
+
+  get vuelosTab() {
+    return this._vuelosTab;
+  }
+
+  vuelosEscogidos:{} = {};
+
 
   form!: FormGroup;
   fromDate: NgbDate | null
@@ -51,7 +68,7 @@ export class TabVuelosComponent implements OnInit{
 
 
 
-  constructor(private calendar: NgbCalendar, private destineService: DestinyService, public formatter: NgbDateParserFormatter,
+  constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar, private router: Router
   ){
     this.createForm();
@@ -182,10 +199,10 @@ export class TabVuelosComponent implements OnInit{
       return;
     }
 
-
     const url = this.getUrl();
     this.navigateToResponseUrl(url);
   }
+
 
   getParams() {
     let params = new ParamsVuelos(
@@ -227,8 +244,6 @@ export class TabVuelosComponent implements OnInit{
     }
 
     let vuelo = { ...params, ...this.distributionObject }
-    console.log(this.distributionObject)
-
 
     localStorage.setItem('filtroVuelo', JSON.stringify(vuelo))
 

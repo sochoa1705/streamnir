@@ -1,7 +1,10 @@
+import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
 import { FormGroup } from "@angular/forms";
 import { NgbDate } from "@ng-bootstrap/ng-bootstrap/datepicker/ngb-date";
 import * as moment from "moment";
 import { ROUTE_VIAJES } from "../../constant";
+import { ICardAutocomplete } from "../card-autocomplete/card-autocomplete.interface";
+import { IForm } from "../filter-tabs/tab-vuelos/tab-vuelos.interfaces";
 import { IDistributionObject } from "../pop-up-pasajero/pop-up-pasajero.component";
 
 interface Pasajeros{
@@ -208,3 +211,21 @@ export class ParamsVuelos implements ParamsTabs{
         return {startDate, endDate, origen, destino, businessClass, idOrigen, idDestino,flightType};
     }
 }
+export class SaveModelVuelos{
+    constructor(
+        public fromDate: NgbDate | null,
+        public toDate: NgbDate | null,
+        public form:IForm,
+        public pasajeros:{adultos:number,ninos:number,infantes:number}
+    ){}
+}
+export class ModelIForm{
+    constructor(
+        public clase:       string,
+        public viajes:      number,
+        public origen:      ICardAutocomplete,
+        public destino:     ICardAutocomplete,
+        public origenHotel: string
+    ){}
+}
+
