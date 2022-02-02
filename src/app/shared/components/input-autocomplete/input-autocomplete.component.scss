@@ -1,0 +1,34 @@
+:host{
+    width: 100%;
+}
+
+.tab-autocomplete{
+    position: relative;
+    width: 100%;
+}
+
+.input-icon {
+	color: #191919;
+	position: absolute;
+    z-index: 100;
+	width: 14px;
+	height: 14px;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.input-icon-loading {
+	color: #191919;
+	position: absolute;
+    z-index: 100;
+	width: 45px;
+	height: 45px;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.pointer {
+    cursor: pointer;
+}

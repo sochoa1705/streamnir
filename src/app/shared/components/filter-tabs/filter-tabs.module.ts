@@ -13,7 +13,7 @@ import { TabHotelComponent } from './tab-hotel/tab-hotel.component';
 import { TabActividadesComponent } from './tab-actividades/tab-actividades.component';
 import { CalendarModule } from '../calendar/calendar.module';
 import { TabVuelosComponent } from './tab-vuelos/tab-vuelos.component';
-import { CardAutocompleteModule } from '../card-autocomplete/card-autocomplete.module';
+import { InputAutocompleteModule } from '../input-autocomplete/input-autocomplete.module';
 
 
 
@@ -30,7 +30,7 @@ import { CardAutocompleteModule } from '../card-autocomplete/card-autocomplete.m
     PopUpPasajeroModule,
     MaterialModule,
     CalendarModule,
-    CardAutocompleteModule
+    InputAutocompleteModule
   ],
   providers: [
     MatSnackBar

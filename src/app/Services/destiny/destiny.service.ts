@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map, pluck, retry, switchMap } from 'rxjs/operators';
 import { ListaTarifaRequest } from 'src/app/Models/Request/ListaTarifasRequest';
+import { IGeoTree } from 'src/app/shared/components/filter-tabs/tab-vuelos/tab-vuelos.interfaces';
 import { ENDPOINT_API } from 'src/app/shared/constant';
 import { environment } from 'src/environments/environment';
 
@@ -37,6 +38,6 @@ export class DestinyService {
 
   getGeoTree(query: string) {
     const url = environment.urlGeo + `/ubigeo/geotree/${query}`;
-    return this.http.get<any[]>(url);
+    return this.http.get<IGeoTree[]>(url);
   }
 }

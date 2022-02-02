@@ -3,32 +3,34 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { concat, Observable, of, Subject } from 'rxjs';
+import { distinctUntilChanged, tap, switchMap, catchError, map, debounceTime } from 'rxjs/operators';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
+import { ICardAutocomplete } from '../../card-autocomplete/card-autocomplete.interface';
 import { EnumCabins, EnumFlightType } from '../../flights/models/flights.interface';
 import { IDistributionObject, PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { ParamsVueloHotel, ParamsVuelos, URLVueloHotel, URLVuelos } from '../../tabs/tabs.models';
+import { IGeoTree } from './tab-vuelos.interfaces';
 
 @Component({
   selector: 'app-tab-vuelos',
   templateUrl: './tab-vuelos.component.html',
   styleUrls: ['./tab-vuelos.component.scss']
 })
-export class TabVuelosComponent {
+export class TabVuelosComponent implements OnInit{
 
 
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
 
   form!: FormGroup;
   fromDate: NgbDate | null
-  citysOrigenSelect: Array<any> = [];
-  citysDestinosSelect: Array<any> = [];
+  citysOrigenSelect: IGeoTree[]= [];
+  citysDestinosSelect: IGeoTree[]= [];
   origen: any;
   destino: any;
   origenHotel: any;
   toDate: NgbDate | null;
-
-  boxOrigen = false;
 
   distributionObject: IDistributionObject;
   hoveredDate: NgbDate | null = null;
@@ -37,9 +39,21 @@ export class TabVuelosComponent {
   EnumCabins = EnumCabins;
 
 
+
+
+  vuelos$:Observable<ICardAutocomplete[]>;
+  vuelosLoading = false;
+  vuelosInput$ = new Subject<string>();
+
+  vuelos2$:Observable<ICardAutocomplete[]>;
+  vuelosLoading2 = false;
+  vuelosInput2$ = new Subject<string>();
+
+
+
   constructor(private calendar: NgbCalendar, private destineService: DestinyService, public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar, private router: Router
-  ) {
+  ){
     this.createForm();
 
 
@@ -48,17 +62,96 @@ export class TabVuelosComponent {
 
   }
 
-  showBoxOrigen() {
 
-    this.boxOrigen = true;
-
+  ngOnInit(): void {
+      this.loadVuelosOrigen();
+      this.loadVuelosDestino();
   }
 
-  hideBoxOrigen() {
 
-    this.boxOrigen = false;
-
+  private loadVuelosOrigen() {
+    this.vuelos$ = concat(
+        of([]),
+        this.vuelosInput$.pipe(
+            distinctUntilChanged(),
+            debounceTime(400),
+            tap(() => this.vuelosLoading = true),
+            switchMap(term => this.destineService.getGeoTree(term).pipe(
+                catchError(() => of([])), // empty list on error
+                tap(() => this.vuelosLoading = false)
+            )),
+            map(item=> this.convertFormatAutocomplete(item))
+        )
+    )
   }
+
+  private loadVuelosDestino() {
+    this.vuelos2$ = concat(
+        of([]),
+        this.vuelosInput2$.pipe(
+            distinctUntilChanged(),
+            debounceTime(400),
+            tap(() => this.vuelosLoading2 = true),
+            switchMap(term => this.destineService.getGeoTree(term).pipe(
+                catchError(() => of([])), // empty list on error
+                tap(() => this.vuelosLoading2 = false)
+            )),
+            map(item=> this.convertFormatAutocomplete(item))
+        )
+    )
+  }
+
+  convertFormatAutocomplete(array:IGeoTree[]):ICardAutocomplete[]{
+
+      const nuevoArray:ICardAutocomplete[] = [];
+
+      array.forEach((x) => {
+
+        const elementFind = nuevoArray.find(item=>item.id == x.aerocodiata);
+
+        if(!elementFind && x.tn_iata_padre == "0"){
+          const obj = {
+            id: x.aerocodiata,
+            codigo: x.city_code,
+            title: x.city,
+            children: []
+          }
+          nuevoArray.push(obj)
+        }else if(!elementFind && x.tn_iata_padre == "2"){
+
+          const obj = {
+            id: x.aerocodiata,
+            codigo: "",
+            title: "",
+            children: [
+              {
+                id: x.aerocodiata,
+                codigo: x.city_code,
+                title: x.city,
+                children: []
+              }
+            ]
+          }
+
+          nuevoArray.push(obj)
+
+        }else if(elementFind && x.tn_iata_padre == "2"){
+
+          elementFind.children.push( 
+            {
+              id: x.aerocodiata,
+              codigo: x.city_code,
+              title: x.city,
+              children: []
+            }
+          )
+        }
+
+      });
+
+      return nuevoArray;
+  }
+
 
   openSnackBar(message: string, action: string = "Error") {
     this._snackBar.open(message, "", {
@@ -143,50 +236,11 @@ export class TabVuelosComponent {
     return url;
   }
 
-  autoComplete(e: any, type: 'origen' | 'destino') {
-    // let elemento = this.origen.nativeElement;
-    let elemento = e.target;
-
-    // console.log(elemento,type);
-
-    let value = elemento.value;
-    // if (value.length == 0) {
-    //   elemento.classList.remove('auto');
-    // } else {
-    //   elemento.classList.add('auto');
-    // }
-    if (value.length >= 3) {
-      this.getListVuelos(value, type);
-    }
-  }
 
   isValidate() {
     return this.popUpElement ?.isValid();
   }
 
-
-  getListVuelos(e: any, type: 'origen' | 'destino') {
-    this.destineService.getGeoTree(e).subscribe(
-      data => {
-        if (type == 'origen') {
-          this.citysOrigenSelect = data;
-        } else if (type == 'destino') {
-          this.citysDestinosSelect = data;
-        }
-
-      },
-      err => console.log(err)
-    )
-  }
-
-
-  displayWithOrigen(value: string) {
-    return value ? this.citysOrigenSelect.find(_ => _.city_code === value).city : undefined;
-  }
-
-  displayWithDestino(value: string) {
-    return value ? this.citysDestinosSelect.find(_ => _.city_code === value).city : undefined;
-  }
 
   changeDate(value: ClassValueCalendar) {
     this.toDate = value.toDate;
