@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import {
   AirlineFilter,
   FilterResult,
+  RangeFilter,
 } from 'src/app/shared/components/filter-result/models/filter-result.interfaces';
 import { DisponibilidadPayload } from 'src/app/shared/components/flights/models/flights.class';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
@@ -34,7 +35,7 @@ export class ResultadosComponent implements OnInit {
     detalleViaje: true,
     detalleCobertura: false,
     cupon: true,
-  }
+  };
   foods: any[] = [
     { value: 'steak-0', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
@@ -48,7 +49,7 @@ export class ResultadosComponent implements OnInit {
 
   ENUM_ORDER_BY = ENUM_ORDER_BY;
 
-  pag = new ResultadosPaginacion(5,5);
+  pag = new ResultadosPaginacion(5, 5);
 
   exchangeRate: any;
 
@@ -57,7 +58,7 @@ export class ResultadosComponent implements OnInit {
     errorMessage: '',
   };
 
-  orderByActive:number = ENUM_ORDER_BY.PRECIO_BAJO;
+  orderByActive: number = ENUM_ORDER_BY.PRECIO_BAJO;
 
   constructor(
     public route: Router,
@@ -65,15 +66,21 @@ export class ResultadosComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private ar: ActivatedRoute,
     private loader: LoaderSubjectService,
-    private fareBreakPipe:FareBreakPipe
-
+    private fareBreakPipe: FareBreakPipe
   ) {
     this.showTabs = true;
   }
 
   ngOnInit() {
     toUp()
-    this.filtersObj = { airlines: [] };
+    // this.filtersObj = { airlines: [] };
+    this.filtersObj = {
+      airlines: [],
+      price: { min: 0, max: 0 },
+      exchangeRate: 0,
+      flightDurationExit: { min: 0, max: 0 },
+      flightElapsedExit: { min: 0, max: 0 },
+    };
     this.loader.showText('Cargando los vuelos');
     this.loader.showLoader();
     this.getParams();
@@ -113,8 +120,78 @@ export class ResultadosComponent implements OnInit {
         .then((resp) => {
           this.error.isError = false;
           this.flights = resp.groups;
+
+          let pf: RangeFilter = { min: 0, max: 0 };
+          let durationExit: RangeFilter = { min: 0, max: 0 };
+          let elapsedExit: RangeFilter = { min: 0, max: 0 };
+
+          if (this.flights.length > 0) {
+            pf.min =
+              this.flights[0].pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare;
+            durationExit.min = Number(
+              this.flights[0].departure[0].segments[0].flightDuration
+            );
+            elapsedExit.min = Number(
+              this.flights[0].departure[0].segments[0].flightSegments[0]
+                .elapsedTime
+            );
+          }
+
+          for (const x of this.flights) {
+            if (
+              x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
+                .totalFare > pf.max
+            )
+              pf.max =
+                x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare;
+
+            if (
+              x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
+                .totalFare < pf.min
+            )
+              pf.min =
+                x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare;
+
+            if (
+              Number(x.departure[0].segments[0].flightDuration) >
+              durationExit.max
+            )
+              durationExit.max = Number(
+                x.departure[0].segments[0].flightDuration
+              );
+
+            if (
+              Number(x.departure[0].segments[0].flightDuration) <
+              durationExit.min
+            )
+              durationExit.min = Number(
+                x.departure[0].segments[0].flightDuration
+              );
+
+            if (
+              Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) >
+              elapsedExit.max
+            )
+              elapsedExit.max = Number(
+                x.departure[0].segments[0].flightSegments[0].elapsedTime
+              );
+
+            if (
+              Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) <
+              elapsedExit.min
+            )
+              elapsedExit.min = Number(
+                x.departure[0].segments[0].flightSegments[0].elapsedTime
+              );
+          }
+
+          this.filtersObj.price = pf;
+          this.filtersObj.flightDurationExit = durationExit;
+          this.filtersObj.flightElapsedExit = elapsedExit;
+
           this.conversion = resp.exchangeRate.amount;
           this.flightsOri = resp.groups;
+
           this.filtersObj.airlines = resp.airlinesFilter.map((x) => {
             let airline: AirlineFilter = {
               code: x.code,
@@ -125,6 +202,12 @@ export class ResultadosComponent implements OnInit {
 
             return airline;
           });
+
+          this.filtersObj.exchangeRate = resp.exchangeRate.amount;
+
+          console.log(this.filtersObj);
+
+          this.filtersObj = { ...this.filtersObj };
 
           this.exchangeRate = resp.exchangeRate;
 
@@ -145,86 +228,110 @@ export class ResultadosComponent implements OnInit {
     });
   }
 
-
-  actualizarPag(){
+  actualizarPag() {
     this.pag.elemContainer += this.pag.elemPag;
     this.flights = [...this.flights];
   }
 
-  comparePrecioBajo( a:IAerolineas, b:IAerolineas ) {
-    const priceA = this.fareBreakPipe.transform(a.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
-    const priceB = this.fareBreakPipe.transform(b.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
+  comparePrecioBajo(a: IAerolineas, b: IAerolineas) {
+    const priceA = this.fareBreakPipe.transform(
+      a.pricingInfo.itinTotalFare.fareBreakDowns,
+      'precioFinal'
+    );
+    const priceB = this.fareBreakPipe.transform(
+      b.pricingInfo.itinTotalFare.fareBreakDowns,
+      'precioFinal'
+    );
 
-    if ( priceA < priceB ){
+    if (priceA < priceB) {
       return -1;
     }
-    if ( priceA > priceB ){
+    if (priceA > priceB) {
       return 1;
     }
     return 0;
   }
-  comparePrecioAlto( a:IAerolineas, b:IAerolineas ) {
-    const priceA = this.fareBreakPipe.transform(a.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
-    const priceB = this.fareBreakPipe.transform(b.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
+  comparePrecioAlto(a: IAerolineas, b: IAerolineas) {
+    const priceA = this.fareBreakPipe.transform(
+      a.pricingInfo.itinTotalFare.fareBreakDowns,
+      'precioFinal'
+    );
+    const priceB = this.fareBreakPipe.transform(
+      b.pricingInfo.itinTotalFare.fareBreakDowns,
+      'precioFinal'
+    );
 
-    if ( priceA > priceB ){
+    if (priceA > priceB) {
       return -1;
     }
-    if ( priceA < priceB ){
-      return 1;
-    }
-    return 0;
-  }
-
-  compareMenorTiempo( a:IAerolineas, b:IAerolineas ) {
-    const priceA = this.fareBreakPipe.transform(a.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
-    const priceB = this.fareBreakPipe.transform(b.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
-
-    if ( priceA < priceB ){
-      return -1;
-    }
-    if ( priceA > priceB ){
-      return 1;
-    }
-    return 0;
-  }
-
-  compareMayorTiempo( a:IAerolineas, b:IAerolineas ) {
-    const priceA = this.fareBreakPipe.transform(a.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
-    const priceB = this.fareBreakPipe.transform(b.pricingInfo.itinTotalFare.fareBreakDowns,'precioFinal');
-
-    if ( priceA < priceB ){
-      return -1;
-    }
-    if ( priceA > priceB ){
+    if (priceA < priceB) {
       return 1;
     }
     return 0;
   }
 
-  orderBy(tipo:number){
+  compareMenorTiempo(a: IAerolineas, b: IAerolineas) {
+    const priceA = this.fareBreakPipe.transform(
+      a.pricingInfo.itinTotalFare.fareBreakDowns,
+      'precioFinal'
+    );
+    const priceB = this.fareBreakPipe.transform(
+      b.pricingInfo.itinTotalFare.fareBreakDowns,
+      'precioFinal'
+    );
+
+    if (priceA < priceB) {
+      return -1;
+    }
+    if (priceA > priceB) {
+      return 1;
+    }
+    return 0;
+  }
+
+  compareMayorTiempo(a: IAerolineas, b: IAerolineas) {
+    const priceA = this.fareBreakPipe.transform(
+      a.pricingInfo.itinTotalFare.fareBreakDowns,
+      'precioFinal'
+    );
+    const priceB = this.fareBreakPipe.transform(
+      b.pricingInfo.itinTotalFare.fareBreakDowns,
+      'precioFinal'
+    );
+
+    if (priceA < priceB) {
+      return -1;
+    }
+    if (priceA > priceB) {
+      return 1;
+    }
+    return 0;
+  }
+
+  orderBy(tipo: number) {
     switch (tipo) {
       case ENUM_ORDER_BY.PRECIO_BAJO:
-        this.flights = [...this.flights.sort(this.comparePrecioBajo.bind(this))]
+        this.flights = [
+          ...this.flights.sort(this.comparePrecioBajo.bind(this)),
+        ];
         break;
       case ENUM_ORDER_BY.PRECIO_ALTO:
-        this.flights = [...this.flights.sort(this.comparePrecioAlto.bind(this))]
+        this.flights = [
+          ...this.flights.sort(this.comparePrecioAlto.bind(this)),
+        ];
         break;
       case ENUM_ORDER_BY.CONVENIENTE:
-        
         break;
       case ENUM_ORDER_BY.MENOR_TIEMPO:
-        
         break;
       case ENUM_ORDER_BY.MAYOR_TIEMPO:
-        
         break;
-    
+
       default:
         break;
     }
     this.orderByActive = tipo;
-    this.pag = new ResultadosPaginacion(5,5);
+    this.pag = new ResultadosPaginacion(5, 5);
   }
 
   id: any = 'tabIda';
@@ -265,7 +372,7 @@ export class ResultadosComponent implements OnInit {
     this.loader.showText('Cargando los vuelos');
     this.loader.showLoader();
 
-    console.log(filter);
+    //console.log(filter);
 
     if (filter.price.currency == 'soles') {
       this.flights = this.flightsOri.filter(
@@ -288,6 +395,22 @@ export class ResultadosComponent implements OnInit {
             .totalFare <= filter.price.max
       );
     }
+
+    this.flights = this.flights.filter(
+      (x) =>
+        Number(x.departure[0].segments[0].flightDuration) >=
+          filter.durationExit.min &&
+        Number(x.departure[0].segments[0].flightDuration) <=
+          filter.durationExit.max
+    );
+
+    this.flights = this.flights.filter(
+      (x) =>
+        Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) >=
+          filter.elapsedExit.min &&
+        Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) <=
+          filter.elapsedExit.max
+    );
 
     if (filter.airline.length > 0) {
       let af: any = this.flights.map((x) => {
