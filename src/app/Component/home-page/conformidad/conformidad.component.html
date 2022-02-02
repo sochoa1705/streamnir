@@ -63,7 +63,8 @@
             </div>
 
             <div class="number" *ngIf="!listBank && safe0Json.reservaVuelos">
-                {{this.reservaStr.ciP_SafetyPAY}} - {{this.reservaStr.pnr}}
+                {{this.reservaStr.ciP_SafetyPAY}} - {{(this.reservaStr.pnr === undefined) ? this.reservaStr.rptaNative.confirmationId : this.reservaStr.pnr}}
+                
 
             </div>
             <div class="circle leftPos"></div>
@@ -116,7 +117,7 @@
                 <div class="card-body rowBody">
                     <div class="leftCard">IMPORTE A PAGAR</div>
                                         <!-- // RESERVA VUELOS -->
-                    
+
                     <div class="rightCard" *ngIf="safe0Json.reservaVuelos">PEN
                         <div class="boldFont">{{ detalleVuelos.pricingInfo.precioSoles }}</div>
                     </div>
