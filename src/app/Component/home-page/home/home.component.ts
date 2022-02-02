@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit {
     this.listDestiny()
   }
 
-
   listDestiny() {
     let payload = new NMRequest();
 
