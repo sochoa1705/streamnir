@@ -14,6 +14,9 @@ import { FiltroDetallePipe } from './pipes/filtro-detalle.pipe';
 import { DirectivesModule } from 'src/app/shared/directives/directives.module';
 import { HoraPipe } from './pipes/hora.pipe';
 import { ModalsModule } from 'src/app/shared/components/modals/modals.module';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
+import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
 
 @NgModule({
   declarations: [ ComprarComponent,FiltroDetallePipe,HoraPipe ],
@@ -29,10 +32,11 @@ import { ModalsModule } from 'src/app/shared/components/modals/modals.module';
     FormsModule,
     MaterialModule,
     RouterModule,
+    NgxMaskModule.forRoot(),
     DirectivesModule,
     ModalsModule
   ],
   exports: [ ComprarComponent ],
-  providers: []
+  providers: [LoaderSubjectService, ReservaVuelosService]
 })
 export class ComprarModule { }

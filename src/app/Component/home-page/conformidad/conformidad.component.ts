@@ -12,6 +12,8 @@ import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interfac
 import { UpdatePayService } from 'src/app/Services/updatePay/update-pay.service';
 import { StatePayService } from 'src/app/Services/statePay/state-pay.service';
 import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
+import { CardPaymentService } from '../../../Services/cardPayment/card-payment.service';
+import { toUp } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-conformidad',
@@ -50,6 +52,9 @@ export class ConformidadComponent implements OnInit {
   filtroVueloJson: any
   detalleVuelosStr: any
   detalleVuelos: any
+  reservaJSON: any
+  reservaStr: any
+  
   constructor(
     public route: Router,
     public secureBookingService: SecureBookingService,
@@ -58,7 +63,14 @@ export class ConformidadComponent implements OnInit {
     public updatePayService: UpdatePayService,
     public statePayService: StatePayService,
     public reservaVuelosService: ReservaVuelosService,
+    public cardPaymentService: CardPaymentService,
+
   ) {
+
+    // RESERVA
+    this.reservaJSON = localStorage.getItem('reserva')
+    this.reservaStr = JSON.parse(this.reservaJSON)
+
     // shopdata
     this.shopData = localStorage.getItem('shop')
     this.shopString = JSON.parse(this.shopData)
@@ -95,17 +107,19 @@ export class ConformidadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    toUp()
     this.ShowComponentTime = false
     let lcadena: any = localStorage.getItem('businessunit');
     this.unidadNegocio = JSON.parse(lcadena);
     this.edades()
     console.log(this.safe0Json['reservaVuelos'])
-    
-    if(this.safe0Json['reservaVuelos']) {
-      this.getReserva()
-    } else {
-      this.getSecureBooking()
-    }
+
+    // if (this.safe0Json['reservaVuelos']) {
+    //   console.log('INICIA RESERVA V');
+    //   this.getReserva()
+    // } else {
+    //   this.getSecureBooking()
+    // }
     // this.getGeneratePay()
   }
 
@@ -192,119 +206,7 @@ export class ConformidadComponent implements OnInit {
     return pasajeros
   }
 
-
-  getSecureBooking() {
-    const textSend = 'SE ESTA GENERANDO SU RESERVA!'
-    this.loaderSubjectService.showText(textSend)
-    let lregistro: RegistrarSeguroRQ = {
-      fec_salida: this.resultJson.fromDate,                       // FECHA DE PARTIDA
-      fec_retorno: this.resultJson.toDate,                        // FECHA DE RETORNO
-      cant_paxes: this.shopString.customers.length,               // CANTIDAD DE PASAJEROS
-      destino: this.resultJson.destinyString.descripcion_destino, // NOMBRE DEL DESTINO
-      edades: `${this.agesCustomers};`,                           // EDADES CONCATENADAS CON PUNTO Y COMA
-      prod_id: this.safe0Json.idProducto,                         // obtener desde plansAC.idProducto
-      prod_nom: this.safe0Json.producto,                          // obtener desde plansAC.producto
-      prod_familia: '',
-      moneda_lista: 'USD',
-      moneda_local: 'USD',
-      precio_bruto: this.safe0Json.precioBruto,                  // obtener desde plansAC.precioBruto
-      precio_bruto_local: this.safe0Json.precioBrutoLocal,       // obtener desde plansAC.precioBrutoLocal
-      precio_emision: this.safe0Json.precioEmision,              // obtener desde plansAC.precioEmision
-      precio_emision_local: this.safe0Json.precioEmisionLocal,   // obtener desde plansAC.precioEmisionLocal
-      precio_unitario: this.safe0Json.precioUnitario,            // obtener desde plansAC.precioUnitario
-      tipo_cambio: this.tipodeCambio,                            // TIPO DE CAMBIO DEL DIA
-      vuelo_res_id: 0,
-      contacto_nom: this.shopString.formContact.nameContacto,           // NOMBRE DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
-      contacto_ape: this.shopString.formContact.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
-      contacto_email: this.shopString.formContact.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_direccion: (this.shopString.formContact.chkFac) ? this.shopString.formContact.recibo[0].direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_telfs: this.shopString.formContact.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
-      contacto_emerg_nom: this.shopString.formContact.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
-      contacto_emerg_ape: this.shopString.formContact.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
-      contacto_emerg_email: this.shopString.formContact.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
-      contacto_emerg_telf: this.shopString.formContact.numberPhone0,    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
-      ruc: (this.shopString.formContact.recibo.length === 0) ? `BV-${this.shopString.customers[0].numDocCustomer}` : this.shopString.formContact.recibo[0].ruc, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
-      razon_social: this.shopString.formContact.nameContacto + ' ' + this.shopString.formContact.lastnameContacto,  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
-      direccion_fiscal: (this.shopString.formContact.recibo.length === 0) ? '' : this.shopString.formContact.recibo[0].direccion, // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
-      comentario: '',
-      webs_cid: 7,
-      usuweb_id: 339,
-      destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'N' : 'I', // obtener desde destiny.EsDestinoNacional
-      numeroruc: (this.shopString.formContact.recibo.length === 0) ? `BV-${this.shopString.customers[0].numDocCustomer}` : this.shopString.formContact.recibo[0].ruc,
-      comprobantepago: (this.shopString.formContact.chkFac) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
-      usobilletera: 'N',
-      codigobloqueo: '',
-      dkcliente: environment.dkAgenciaAC,
-      producto: this.safe0Json.nombreProducto,      // obtener desde plansAC.producto
-      pnr: '',
-      pais_ac: this.unidadNegocio.id_pais_ac,
-      agencia_ac: this.unidadNegocio.codigo_ac,
-      sucursal_ac: this.unidadNegocio.sucursal_ac,
-      counter_ac: 'ACNET',
-      id_destino: this.resultJson.destinoSafe,     // obtener desde destiny.id_destino
-      facturar_pta: 1,
-      id_sucursal: Number(environment.sucursalAgenciaAC),
-      id_punto: Number(environment.ptoventaAgenciaAC),
-      id_subcodigo: Number(environment.subcodigoAgenciaAC),
-      id_solicitante_agencia: '',
-      id_comisionista: environment.comisionistaAgenciaAC,
-      id_solicitante_area: '',
-      comision: 0,
-      incentivo: 0,
-      incentivo_adicional: 0,
-      gasto_emision: 0,
-      id_file: 0,
-      aplica_descuento: 0,
-      id_unidad_negocio: environment.undidadNegocioAC,
-      aplica_factura_comision: 0,
-      forma_de_pago: this.shopString.formCard.select21, // TARJETA, SAFETYPAY
-      porcentaje_descuento: 0,
-      usosafetypay: 'N',
-      codigo_safetypay: '',
-      nro_pedido_srv: 0,
-      fee_safetypay: 0,
-      validarDuplicidad: false,
-      pasajeros: this.pasajerosArr(),
-      // pasajeros: [
-      //   {
-      //     pax_nom: this.shopString.customers[0].nameCustomer,                   // NOMBRE DEL PASAJERO
-      //     pax_ape_pat: this.shopString.customers[0].lastNameCustomer,           // APELLIDOS DEL PASAJERO
-      //     doc_cid: (this.shopString.customers[0].typeDocCustomer).toLowerCase(),// TIPO DE DOUMENTO DE IDENTIDAD (DNI, PSP, CE)
-      //     pax_num_doc: this.shopString.customers[0].numDocCustomer,             // DOCUMENTO DE IDENTIDAD
-      //     pax_fec_nac: new Date(this.formattFecha()),                           // FECHA DE NACIMIENTO
-      //     pax_voucher_travelace: '-',
-      //     pax_control_travelace: '-',
-      //     pax_void_travelace: 'N',
-      //     pax_boleto: '-',
-      //     pax_voideo_pta: '0',
-      //     pax_facturado_pta: 0,
-      //     pax_precio_emision: this.safe0Json.tarifario[0].precioEmision,            // obtener desde plansAC.producto.tarifario.precioEmision (FILTRAR POR CAMPO EDAD)
-      //     pax_precio_emision_local: this.safe0Json.tarifario[0].precioEmisionLocal, // obtener desde plansAC.producto.tarifario.precioEmisionLocal (FILTRAR POR CAMPO EDAD)
-      //     pax_precio_neto: this.safe0Json.tarifario[0].precioBrutoLocal             // obtener desde plansAC.producto.tarifario.precioBrutoLocal (FILTRAR POR CAMPO EDAD)
-      //   }
-      // ],
-      cobertura: [
-        {
-          unidad: this.coverage.Unidad,                                 // obtener desde coverageList.Unidad
-          atr_nom: this.coverage.Codigo + ' ' + this.coverage.Nombre,   // obtener desde coverageList.Codigo + ' ' + coverageList.Nombre
-          valor: this.coverage.Valor                                    // obtener desde coverageList.Valor
-        }
-      ],
-      nro_intentos_facturacion: 0,
-      nro_intentos_emision: 0,
-      idfileautomatico: 0,
-      xPagarSafetyPay: 0,
-      idTipoTarifa: 0,
-      idReciboSafetyPay: 0
-    }
-
-    let payload = new NMRequestBy<RegistrarSeguroRQ>(lregistro);
-
-    this.secureBookingService.secureBooking(payload).subscribe((response: any) => {
-      this.reservation = response
-    })
-  }
-
+  // SAFETYPAY
   getGeneratePay() {
     const textSend = 'SE ESTA PROCESANDO TU PAGO!'
     this.loaderSubjectService.showText(textSend)
@@ -323,7 +225,7 @@ export class ConformidadComponent implements OnInit {
       IpUser: this.ipCliente,                           //IP DEL CLIENTE
       Amount: {
         FeeAmount: 0,
-        RechargeAmount: (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal, //COSTO TOTAL DEL SEGURO; SOLO SI destiny.EsDestinoNacional = 'S' ENTONCES MULTIPLICAR POR 1.18 (IGV)
+        RechargeAmount: (this.safe0Json['reservaVuelos']) ? this.detalleVuelos.pricingInfo.precioFinal : (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal, //COSTO TOTAL DEL SEGURO; SOLO SI destiny.EsDestinoNacional = 'S' ENTONCES MULTIPLICAR POR 1.18 (IGV)
         Currency: 'USD'
       }
     }
@@ -342,7 +244,7 @@ export class ConformidadComponent implements OnInit {
         this.loaderSubjectService.closeLoader()
 
         let lactualizar: SafetyPayRQ = {
-          res_seguro_id: this.reservation.Reserva,                // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
+          res_seguro_id: (this.safe0Json['reservaVuelos']) ? this.resevaVuelo.idCotizacion : this.reservation.Reserva,                // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
           usosafetypay: 'S',
           codigo_safetypay: this.listBank.TransactionIdentifier,  // obtener desde this.listBank.TransactionIdentifier
           nro_pedido_srv: this.listBank.IDPedido,                 // obtener desde this.listBank.IDPedido
@@ -366,7 +268,7 @@ export class ConformidadComponent implements OnInit {
         //>>>> EN CASO SALGA ERROR SE DEBE DE ELIMINAR LA SOLICITUD
 
         let lanular: CambiarEstadoRQ = {
-          res_seguro_id: this.reservation.Reserva,  // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
+          res_seguro_id: (this.safe0Json['reservaVuelos']) ? this.resevaVuelo.idCotizacion : this.reservation.Reserva,  // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
           estado: 7
         }
 
@@ -383,57 +285,70 @@ export class ConformidadComponent implements OnInit {
       }
     })
   }
+  // TARJETA
+  getCardPayment() {
+    const textSend = 'SE ESTA GENERANDO SU PAGO!'
+    this.loaderSubjectService.showText(textSend)
 
-  getReserva() {
-    console.log(this.shopString.formContact.recibo);
-    
-    let payload = {
-      "segmentSelected": [
-        this.safe0Json.departure, this.safe0Json.return
-      ],
-      "IdGroup": this.safe0Json.idGroup,
-      "passengers": this.pasajerosVuelos(),
-      // "passengers": [
-      //   {
-      //     "type": "ADT",
-      //     "name": "RODRIGO",
-      //     "lastName": "CCANCCE",
-      //     "birthday": "1998-02-20",
-      //     "documentType": 0,
-      //     "documentNumber": "72154521",
-      //     "gender": "M",
-      //     "email": "rodrigo98_22@outlook.com",
-      //     "phone": "989454123"
-      //   }
-      // ],
-      contact: {
-        name: this.shopString.formContact.nameContacto,
-        lastName: this.shopString.formContact.lastnameContacto,
-        email: this.shopString.formContact.mailContacto,
-        address: (this.shopString.formContact.recibo === undefined) ? this.shopString.formContact.recibo[0].direccion : this.shopString.formCard.address,
-        phones: [
-          {
-            phoneNumber: this.shopString.formContact.numberPhone0
-          }
-        ]
+    const payload = {
+      TrackingCode: "000",
+      MuteExceptions: false,
+      Caller: {
+        Company: "Agil",
+        Application: "Expertia"
+      },
+      Parameter: {
+        Ip: this.ipCliente,
+        Browser: this.shopString.browser,
+        Client: {
+          Firstname: this.shopString.formContact.nameContacto,
+          Lastname: this.shopString.formContact.lastnameContacto,
+          Address: this.shopString.formCard.address,
+          DocumentType: this.shopString.formCard.tipoDoc,
+          DocumentNumber: this.shopString.formCard.numDoc,
+          Email: this.shopString.formContact.mailContacto
+        },
+        Booking: {
+          NumberInsurance: (this.safe0Json['reservaVuelos']) ? this.resevaVuelo.idCotizacion : this.reservation.Reserva,
+          DateStart: this.resultJson.fromDate, // AAAA-MM-DD
+          DateEnd: this.resultJson.toDate,
+          NumberOfAdult: this.shopString.customers.length,
+          NumberOfChildren: 0
+        },
+        Payment: {
+          Card: {
+            HolderName: this.shopString.formCard.nameCard,
+            Number: this.shopString.formCard.numberCard,
+            Expiration: this.expired(this.shopString.formCard.expiredCard), // 2022/05
+            SecurityCode: Number(this.shopString.formCard.ccvCard)
+          },
+          AmountOfFees: Number(this.shopString.formCard.feePay),
+          Amount: (this.safe0Json['reservaVuelos']) ? this.detalleVuelos.pricingInfo.precioFinal : (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal,
+        }
       }
     }
     console.log(payload)
 
-    this.reservaVuelosService.reserva(payload, this.tokenJson).subscribe({
-      next: (response: any) => {
+    this.cardPaymentService.cardPayment(payload).subscribe({
+      next: (response) => {
         console.log(response)
-        this.resevaVuelo = response
-    // if (this.shopString.formCard.select21 === 'SAFETYPAY') {
-    //   this.getGeneratePay()
-    // } else {
-    //   this.getCardPayment()
-    // }
+        this.loaderSubjectService.closeLoader()
       },
       error: (err) => {
         console.log(err)
+        this.loaderSubjectService.closeLoader()
       }
     })
   }
 
+  // fecha de expiracion tarjeta
+  expired(e: any) {
+    const year = e.substring(0, 4)
+    const month = e.substring(4, 6)
+    const expiredFormatt = `${year}/${month}`
+    return expiredFormatt
+  }
+
 }
+
+

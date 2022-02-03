@@ -823,3 +823,15 @@ p {
     left: calc(100% - 210px);
 
 }
+
+input.readonly {
+    color: #4b4b4b;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 700;
+    border: 0;
+    &:focus-visible{
+        border: 0;
+        outline: 0;
+    }
+}

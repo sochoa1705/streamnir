@@ -78,6 +78,14 @@ export function removeTimeZonePart(dateString: string) {
   return finalDate;
 }
 
+
+export function toUp(){
+  window.scroll({ 
+    top: 0, 
+    left: 0, 
+    behavior: 'smooth' 
+  })
+}
 export function roundNumber(numero: number, decimal: number) {
   let n = numero * Math.pow(10, decimal);
   n = Math.round(n) / Math.pow(10, decimal);
