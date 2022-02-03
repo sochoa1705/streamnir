@@ -40,23 +40,22 @@ export class FareBreakPipe implements PipeTransform {
         const imp = adultos?.passengerFare.taxes || 0;
 
         resp = currency == 'dolares' ? imp : roundNumber(co * imp, 2);
-        return resp || 0;
+        return resp*cantidad || 0;
 
       case 'cargos':
         const fee = adultos?.passengerFare.feeNMV || 0;
         resp = currency == 'dolares' ? fee : roundNumber(co * fee, 2);
 
-        return resp || 0;
+        return resp*cantidad || 0;
 
       case 'nroAdultos':
-        resp = adultos?.passengerType.quantity || 0;
-        return resp;
+        return cantidad;
 
       case 'precioFinal':
         const tf = adultos?.passengerFare.totalFare || 0;
         resp = currency == 'dolares' ? tf : roundNumber(co * tf, 2);
 
-        return resp;
+        return resp*cantidad;
 
       case 'totalPrecioAdultos':
         resp =
