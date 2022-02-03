@@ -22,6 +22,7 @@ import { roundNumber } from '../../utils';
 export class FilterResultComponent implements OnInit, OnChanges {
   @Input() filters: FilterResult;
   @Output() filterChangeEvent = new EventEmitter<any>();
+  @Output() currencyChangeEvent = new EventEmitter<any>();
 
   filter: any = {};
   filterSelected: FilterBlock[] = [];
@@ -466,4 +467,9 @@ export class FilterResultComponent implements OnInit, OnChanges {
     }
     this.verifyFilter();
   }
+
+  selectorCurrencyChange(e:any){
+    this.currencyChangeEvent.emit(e.value);
+  }
+
 }

@@ -46,7 +46,8 @@ export class FlightsComponent {
     }
   }
 
-  @Input() conversion: number;
+  @Input() conversion:number;
+  @Input() currency:string;
 
   get flights() {
     return this._flights;
@@ -204,7 +205,6 @@ export class FlightsComponent {
   }
 
   radioSelect(e: any, segmento: string, segment: Segment, vuelo: IAerolineas) {
-    console.log(vuelo);
     if (segmento === 'return') {
       this.segmentoReturn = e.value;
       this.segmentoReturnObj = segment;

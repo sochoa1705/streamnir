@@ -49,6 +49,7 @@ export class ResultadosComponent implements OnInit {
 
   flights: IAerolineas[];
   conversion: number;
+  currency: string = "dolares";
   flightsOri: IAerolineas[];
   filtersObj: FilterResult;
 
@@ -278,8 +279,6 @@ export class ResultadosComponent implements OnInit {
 
           this.filtersObj.exchangeRate = resp.exchangeRate.amount;
 
-          console.log(this.filtersObj);
-
           this.filtersObj = { ...this.filtersObj };
 
           this.exchangeRate = resp.exchangeRate;
@@ -346,38 +345,26 @@ export class ResultadosComponent implements OnInit {
   }
 
   compareMenorTiempo(a: IAerolineas, b: IAerolineas) {
-    const priceA = this.fareBreakPipe.transform(
-      a.pricingInfo.itinTotalFare.fareBreakDowns,
-      'precioFinal'
-    );
-    const priceB = this.fareBreakPipe.transform(
-      b.pricingInfo.itinTotalFare.fareBreakDowns,
-      'precioFinal'
-    );
+    const durationA = Number(a.departure[0].segments[0].flightDuration);
+    const durationB = Number(b.departure[0].segments[0].flightDuration);
 
-    if (priceA < priceB) {
+    if (durationA < durationB) {
       return -1;
     }
-    if (priceA > priceB) {
+    if (durationA > durationB) {
       return 1;
     }
     return 0;
   }
 
   compareMayorTiempo(a: IAerolineas, b: IAerolineas) {
-    const priceA = this.fareBreakPipe.transform(
-      a.pricingInfo.itinTotalFare.fareBreakDowns,
-      'precioFinal'
-    );
-    const priceB = this.fareBreakPipe.transform(
-      b.pricingInfo.itinTotalFare.fareBreakDowns,
-      'precioFinal'
-    );
+    const durationA = Number(a.departure[0].segments[0].flightDuration);
+    const durationB = Number(b.departure[0].segments[0].flightDuration);
 
-    if (priceA < priceB) {
+    if (durationA > durationB) {
       return -1;
     }
-    if (priceA > priceB) {
+    if (durationA < durationB) {
       return 1;
     }
     return 0;
@@ -398,10 +385,15 @@ export class ResultadosComponent implements OnInit {
       case ENUM_ORDER_BY.CONVENIENTE:
         break;
       case ENUM_ORDER_BY.MENOR_TIEMPO:
+        this.flights = [
+          ...this.flights.sort(this.compareMenorTiempo.bind(this)),
+        ];
         break;
       case ENUM_ORDER_BY.MAYOR_TIEMPO:
+        this.flights = [
+          ...this.flights.sort(this.compareMayorTiempo.bind(this)),
+        ];
         break;
-
       default:
         break;
     }
@@ -572,5 +564,10 @@ export class ResultadosComponent implements OnInit {
 
     // console.log(filter);
     this.loader.closeLoader();
+  }
+
+  currencyChangeEvent(currency: string) {
+    console.log(currency);
+    this.currency = currency;
   }
 }
