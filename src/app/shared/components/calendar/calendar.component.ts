@@ -29,8 +29,8 @@ export class CalendarComponent implements AfterViewInit{
 
 
     if(!this.fromDate && !this.toDate){
-      this.fromDate = this.calendar.getToday();
-      this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 10);
+      // this.fromDate = this.calendar.getToday();
+      // this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 10);
     }
 
 
