@@ -379,24 +379,24 @@
             <div class="col-3 border-start hideMov">
                 <div class="row pb-3">
                     <div class="d-flex justify-content-center">
-                        <h2>{{ (currency == 'dolares' ? '$ ' : 'S/. ') + (vuelo.pricingInfo.itinTotalFare.fareBreakDowns | fareBreak:'persona': conversion : currency )}} </h2>
+                        <h2>{{ (currency === 'dolares' ? '$ ' : 'S/. ') + (vuelo.pricingInfo.itinTotalFare.fareBreakDowns | fareBreak:'persona': conversion : currency )}} </h2>
                         <span>/persona</span>
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="row">
                     <span class="col">{{(vuelo.pricingInfo.itinTotalFare.fareBreakDowns | fareBreak:'nroAdultos') + ' Adultos'}}</span>
-                    <span class="col text-end">{{ (currency == 'dolares' ? '$ ' : 'S/. ') + (vuelo.pricingInfo.itinTotalFare.fareBreakDowns | fareBreak:'totalPrecioAdultos': conversion : currency)}}</span>
+                    <span class="col text-end">{{ (currency === 'dolares' ? '$ ' : 'S/. ') + (vuelo.pricingInfo.itinTotalFare.fareBreakDowns | fareBreak:'totalPrecioAdultos': conversion : currency)}}</span>
                     <div class="clearfix"></div>
                 </div>
                 <div class="row">
                     <span class="col">Impuestos</span>
-                    <span class="col text-end">{{ (currency == 'dolares' ? '$ ' : 'S/. ') + (vuelo.pricingInfo.itinTotalFare.fareBreakDowns | fareBreak:'impuestos': conversion : currency) }}</span>
+                    <span class="col text-end">{{ (currency === 'dolares' ? '$ ' : 'S/. ') + (vuelo.pricingInfo.itinTotalFare.fareBreakDowns | fareBreak:'impuestos': conversion : currency) }}</span>
                     <div class="clearfix"></div>
                 </div>
                 <div class="row">
                     <span class="col">Cargos</span>
-                    <span class="col text-end">{{ (currency == 'dolares' ? '$ ' : 'S/. ') + (vuelo.pricingInfo.itinTotalFare.fareBreakDowns | fareBreak:'cargos': conversion : currency) }}</span>
+                    <span class="col text-end">{{ (currency === 'dolares' ? '$ ' : 'S/. ') + (vuelo.pricingInfo.itinTotalFare.fareBreakDowns | fareBreak:'cargos': conversion : currency) }}</span>
                     <div class="clearfix"></div>
                 </div>
                 <div class="row text-center py-2">
@@ -404,7 +404,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="row text-center pb-4">
-                    <span class="price">{{ (currency == 'dolares' ? '$ ' : 'S/. ') + (vuelo.pricingInfo.itinTotalFare.fareBreakDowns | fareBreak:'precioFinal': conversion : currency)  }}</span>
+                    <span class="price">{{ (currency === 'dolares' ? '$ ' : 'S/. ') + (vuelo.pricingInfo.itinTotalFare.fareBreakDowns | fareBreak:'precioFinal': conversion : currency)  }}</span>
                     <div class="clearfix"></div>
                 </div>
                 <div class="row">

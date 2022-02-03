@@ -205,7 +205,6 @@ export class FlightsComponent {
   }
 
   radioSelect(e: any, segmento: string, segment: Segment, vuelo: IAerolineas) {
-    console.log(vuelo);
     if (segmento === 'return') {
       this.segmentoReturn = e.value;
       this.segmentoReturnObj = segment;

@@ -279,8 +279,6 @@ export class ResultadosComponent implements OnInit {
 
           this.filtersObj.exchangeRate = resp.exchangeRate.amount;
 
-          console.log(this.filtersObj);
-
           this.filtersObj = { ...this.filtersObj };
 
           this.exchangeRate = resp.exchangeRate;
