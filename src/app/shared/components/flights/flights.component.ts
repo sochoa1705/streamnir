@@ -47,6 +47,7 @@ export class FlightsComponent {
   }
 
   @Input() conversion:number;
+  @Input() currency:string;
 
   get flights() {
     return this._flights;

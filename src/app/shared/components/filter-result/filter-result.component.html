@@ -1,5 +1,5 @@
 <mat-form-field appearance="outline" class="mb-4 hideMov text-start px-4">
-  <mat-select [(value)]="selectedCurrency" disableOptionCentering>
+  <mat-select [(value)]="selectedCurrency" disableOptionCentering (selectionChange)="selectorCurrencyChange($event)">
     <mat-option value="soles">Soles</mat-option>
     <mat-option value="dolares">Dólares</mat-option>
   </mat-select>
@@ -120,7 +120,7 @@
           <label for="checkbox-scale-2">Directo</label>
           <div class="form-check">
             <input
-            name="directo"
+              name="directo"
               class="form-check-input"
               type="checkbox"
               value=""
@@ -134,7 +134,7 @@
           <label for="checkbox-scale-3">1 Escala</label>
           <div class="form-check">
             <input
-            name="uno"
+              name="uno"
               class="form-check-input"
               type="checkbox"
               value=""
@@ -148,7 +148,7 @@
           <label for="checkbox-scale-4">2 o más escalas</label>
           <div class="form-check">
             <input
-            name="mas"
+              name="mas"
               class="form-check-input"
               type="checkbox"
               value=""
@@ -253,6 +253,7 @@
               id="inlineRadio1"
               value="dolares"
               (change)="changePriceCurrency($event)"
+              checked
             />
           </div>
           <div class="form-check form-check-inline">
@@ -264,7 +265,6 @@
               id="inlineRadio2"
               value="soles"
               (change)="changePriceCurrency($event)"
-              checked
             />
           </div>
         </div>
@@ -274,7 +274,7 @@
           [options]="optionsPrice"
           (valueChange)="priceChange($event)"
           (highValueChange)="priceMaxChange($event)"
-          (userChangeEnd)="filterChange()"
+          (userChangeEnd)="filterPrice()"
         >
         </ng5-slider>
       </div>
@@ -349,6 +349,9 @@
                       [(value)]="minValueDurationExit"
                       [(highValue)]="maxValueDurationExit"
                       [options]="optionsDurationExit"
+                      (valueChange)="durationExitChange($event)"
+                      (highValueChange)="durationExitMaxChange($event)"
+                      (userChangeEnd)="filterDurationExit()"
                     >
                     </ng5-slider>
                   </div>
@@ -367,6 +370,9 @@
                       [(value)]="minValueDurationExitScale"
                       [(highValue)]="maxValueDurationExitScale"
                       [options]="optionsDurationExitScale"
+                      (valueChange)="elapsedExitChange($event)"
+                      (highValueChange)="elapsedExitMaxChange($event)"
+                      (userChangeEnd)="filterElpasedExit()"
                     ></ng5-slider>
                   </div>
                   <div class="clearfix"></div>

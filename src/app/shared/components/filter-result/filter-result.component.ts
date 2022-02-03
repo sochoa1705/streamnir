@@ -1,66 +1,53 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { Options, LabelType } from 'ng5-slider';
 import { Observable } from 'rxjs';
 
 import { FilterTypes } from 'src/app/shared/constant';
 import { FilterBlock, FilterResult } from './models/filter-result.interfaces';
+import { roundNumber } from '../../utils';
 
 @Component({
   selector: 'app-filter-result',
   templateUrl: './filter-result.component.html',
   styleUrls: ['./filter-result.component.scss'],
 })
-export class FilterResultComponent implements OnInit {
+export class FilterResultComponent implements OnInit, OnChanges {
   @Input() filters: FilterResult;
   @Output() filterChangeEvent = new EventEmitter<any>();
+  @Output() currencyChangeEvent = new EventEmitter<any>();
 
   filter: any = {};
   filterSelected: FilterBlock[] = [];
   filterAeroline: boolean = false;
+  exchangeRate: number;
+  selectedCurrency = 'dolares';
 
-  selectedCurrency = 'soles';
-  minValuePrice: number = 100;
-  maxValuePrice: number = 6000;
-  optionsPrice: Options = {
-    floor: 100,
-    ceil: 6000,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return 'S/.' + value;
-        case LabelType.High:
-          return 'S/.' + value;
-        default:
-          return 'S/.' + value;
-      }
-    },
-  };
+  minValuePriceFilter: number = 0;
+  maxValuePriceFilter: number = 0;
+  minValuePrice: number = 0;
+  maxValuePrice: number = 0;
+  optionsPrice: Options;
 
-  minValueDurationExit: number = 5;
-  maxValueDurationExit: number = 16;
-  optionsDurationExit: Options = {
-    floor: 5,
-    ceil: 16,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        default:
-          return value + 'h' + ' 30min';
-      }
-    },
-  };
+  minValueDurationExit: number = 0;
+  maxValueDurationExit: number = 0;
+  minValueDurationExitFilter: number = 0;
+  maxValueDurationExitFilter: number = 0;
+  optionsDurationExit: Options;
 
-  minValueDurationExitScale: number = 1;
-  maxValueDurationExitScale: number = 24;
-  optionsDurationExitScale: Options = {
-    floor: 1,
-    ceil: 24,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        default:
-          return value + 'h';
-      }
-    },
-  };
+  minValueDurationExitScale: number = 0;
+  maxValueDurationExitScale: number = 0;
+  minValueDurationExitScaleFilter: number = 0;
+  maxValueDurationExitScaleFilter: number = 0;
+
+  optionsDurationExitScale: Options;
 
   minValueDurationBack: number = 5;
   maxValueDurationBack: number = 16;
@@ -91,10 +78,7 @@ export class FilterResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedItems = new Array<string>();
-    this.filter.price = {
-      min: this.minValuePrice,
-      max: this.maxValuePrice,
-    };
+
     this.filter.airline = [];
     this.filter.equipaje = {
       bodega: false,
@@ -104,6 +88,93 @@ export class FilterResultComponent implements OnInit {
       directo: false,
       uno: false,
       mas: false,
+    };
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('entra a cambio');
+    console.log(changes);
+
+    const fil = changes.filters.currentValue;
+
+    this.minValuePriceFilter = fil.price.min;
+    this.maxValuePriceFilter = fil.price.max;
+
+    console.log(this.minValuePriceFilter);
+    console.log(this.maxValuePriceFilter);
+
+    this.minValuePrice = Math.floor(this.minValuePriceFilter);
+    this.maxValuePrice = Math.ceil(this.maxValuePriceFilter);
+    this.exchangeRate = fil.exchangeRate;
+
+    this.filter.price = {
+      min: this.minValuePriceFilter,
+      max: this.maxValuePriceFilter,
+    };
+
+    this.optionsPrice = {
+      floor: this.minValuePrice,
+      ceil: this.maxValuePrice,
+      translate: (value: number, label: LabelType): string => {
+        switch (label) {
+          case LabelType.Low:
+            return '$' + value;
+          case LabelType.High:
+            return '$' + value;
+          default:
+            return '$' + value;
+        }
+      },
+    };
+
+    this.minValueDurationExitFilter = fil.flightDurationExit.min;
+    this.maxValueDurationExitFilter = fil.flightDurationExit.max;
+
+    this.minValueDurationExit = Math.floor(this.minValueDurationExitFilter);
+    this.maxValueDurationExit = Math.ceil(this.maxValueDurationExitFilter);
+
+    this.filter.durationExit = {
+      min: this.minValueDurationExitFilter,
+      max: this.maxValueDurationExitFilter,
+    };
+
+    this.optionsDurationExit = {
+      floor: this.minValueDurationExit,
+      ceil: this.maxValueDurationExit,
+      //step: 0.25,
+      translate: (value: number, label: LabelType): string => {
+        switch (label) {
+          default:
+            return value + 'h';
+        }
+      },
+    };
+
+    this.minValueDurationExitScaleFilter = fil.flightElapsedExit.min;
+    this.maxValueDurationExitScaleFilter = fil.flightElapsedExit.max;
+
+    this.minValueDurationExitScale = Math.floor(
+      this.minValueDurationExitScaleFilter
+    );
+    this.maxValueDurationExitScale = Math.ceil(
+      this.maxValueDurationExitScaleFilter
+    );
+
+    this.filter.elapsedExit = {
+      min: this.minValueDurationExitScale,
+      max: this.maxValueDurationExitScale,
+    };
+
+    this.optionsDurationExitScale = {
+      floor: this.minValueDurationExitScale,
+      ceil: this.maxValueDurationExitScale,
+
+      translate: (value: number, label: LabelType): string => {
+        switch (label) {
+          default:
+            return value + 'h';
+        }
+      },
     };
   }
 
@@ -173,9 +244,15 @@ export class FilterResultComponent implements OnInit {
         case FilterTypes.equipajemano:
           name = 'Equipaje de mano';
           break;
-          case FilterTypes.escalas:
-            name = 'Escala';
-            break;
+        case FilterTypes.escalas:
+          name = 'Escala';
+          break;
+        case FilterTypes.duracionSalida:
+          name = 'Duracion';
+          break;
+        case FilterTypes.duracionEscala:
+          name = 'Duracion';
+          break;
         default:
           break;
       }
@@ -199,15 +276,58 @@ export class FilterResultComponent implements OnInit {
   priceChange(value: number) {
     this.filter.price.min = value;
     // this.filterChange();
-    console.log(value);
-    this.addFilter(FilterTypes.precio);
+    //console.log(value);
+    //this.addFilter(FilterTypes.precio);
   }
 
   priceMaxChange(value: number) {
     this.filter.price.max = value;
     // this.filterChange();
-    console.log(value);
+    //console.log(value);
+    //this.addFilter(FilterTypes.precio);
+  }
+
+  durationExitChange(value: number) {
+    this.filter.durationExit.min = value;
+    // this.filterChange();
+    //console.log(value);
+    //this.addFilter(FilterTypes.precio);
+  }
+
+  durationExitMaxChange(value: number) {
+    this.filter.durationExit.max = value;
+    // this.filterChange();
+    //console.log(value);
+    //this.addFilter(FilterTypes.precio);
+  }
+
+  elapsedExitChange(value: number) {
+    this.filter.elapsedExit.min = value;
+    // this.filterChange();
+    //console.log(value);
+    //this.addFilter(FilterTypes.precio);
+  }
+
+  elapsedExitMaxChange(value: number) {
+    this.filter.elapsedExit.max = value;
+    // this.filterChange();
+    //console.log(value);
+    //this.addFilter(FilterTypes.precio);
+  }
+
+  filterPrice() {
     this.addFilter(FilterTypes.precio);
+    this.verifyFilter();
+  }
+
+  filterDurationExit() {
+    this.addFilter(FilterTypes.duracionSalida);
+    this.verifyFilter();
+  }
+
+  filterElpasedExit() {
+    this.addFilter(FilterTypes.duracionEscala);
+    this.verifyFilter();
   }
 
   filterChange() {
@@ -219,11 +339,21 @@ export class FilterResultComponent implements OnInit {
 
   changePriceCurrency(e: any) {
     if (e.target.checked) this.selectedCurrency = e.target.value;
+
+    console.log(this.exchangeRate);
+
     console.log(this.selectedCurrency);
     if (this.selectedCurrency == 'soles') {
+      this.minValuePrice = Math.floor(
+        roundNumber(this.minValuePriceFilter * this.exchangeRate, 2)
+      );
+      this.maxValuePrice = Math.ceil(
+        roundNumber(this.maxValuePriceFilter * this.exchangeRate, 2)
+      );
+
       this.optionsPrice = {
-        floor: 100,
-        ceil: 6000,
+        floor: this.minValuePrice,
+        ceil: this.maxValuePrice,
         translate: (value: number, label: LabelType): string => {
           switch (label) {
             case LabelType.Low:
@@ -236,9 +366,11 @@ export class FilterResultComponent implements OnInit {
         },
       };
     } else {
+      this.minValuePrice = Math.floor(this.minValuePriceFilter);
+      this.maxValuePrice = Math.ceil(this.maxValuePriceFilter);
       this.optionsPrice = {
-        floor: 100,
-        ceil: 6000,
+        floor: this.minValuePrice,
+        ceil: this.maxValuePrice,
         translate: (value: number, label: LabelType): string => {
           switch (label) {
             case LabelType.Low:
@@ -277,20 +409,20 @@ export class FilterResultComponent implements OnInit {
         this.removeFilter(FilterTypes.equipajebodega);
         this.verifyFilter();
         break;
-        case FilterTypes.escalas:
-          this.filter.escala.directo = false;
-          this.filter.escala.uno = false;
-          this.filter.escala.mas = false;
-          this.removeFilter(FilterTypes.escalas);
-          this.verifyFilter();
-          break;
+      case FilterTypes.escalas:
+        this.filter.escala.directo = false;
+        this.filter.escala.uno = false;
+        this.filter.escala.mas = false;
+        this.removeFilter(FilterTypes.escalas);
+        this.verifyFilter();
+        break;
       default:
         break;
     }
   }
 
   changeEquipaje(e: any) {
-    console.log("entra change equipaje");
+    console.log('entra change equipaje');
     switch (e.target.name) {
       case 'equipajeMano':
         if (e.target.checked) this.addFilter(FilterTypes.equipajemano);
@@ -310,7 +442,7 @@ export class FilterResultComponent implements OnInit {
     this.verifyFilter();
   }
   changeEscala(e: any) {
-    console.log("entra change escala");
+    console.log('entra change escala');
     switch (e.target.name) {
       case 'directo':
         if (e.target.checked) this.addFilter(FilterTypes.escalas);
@@ -335,4 +467,9 @@ export class FilterResultComponent implements OnInit {
     }
     this.verifyFilter();
   }
+
+  selectorCurrencyChange(e:any){
+    this.currencyChangeEvent.emit(e.value);
+  }
+
 }
