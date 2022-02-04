@@ -22,6 +22,7 @@ import { roundNumber } from '../../utils';
 export class FilterResultComponent implements OnInit, OnChanges {
   @Input() filters: FilterResult;
   @Output() filterChangeEvent = new EventEmitter<any>();
+  @Output() currencyChangeEvent = new EventEmitter<any>();
 
   filter: any = {};
   filterSelected: FilterBlock[] = [];
@@ -247,10 +248,10 @@ export class FilterResultComponent implements OnInit, OnChanges {
           name = 'Escala';
           break;
         case FilterTypes.duracionSalida:
-          name = 'Duracion';
+          name = 'Duracion Salida';
           break;
         case FilterTypes.duracionEscala:
-          name = 'Duracion';
+          name = 'Escala Salida';
           break;
         default:
           break;
@@ -275,14 +276,14 @@ export class FilterResultComponent implements OnInit, OnChanges {
   priceChange(value: number) {
     this.filter.price.min = value;
     // this.filterChange();
-    //console.log(value);
+    console.log(value);
     //this.addFilter(FilterTypes.precio);
   }
 
   priceMaxChange(value: number) {
     this.filter.price.max = value;
     // this.filterChange();
-    //console.log(value);
+    console.log(value);
     //this.addFilter(FilterTypes.precio);
   }
 
@@ -336,8 +337,9 @@ export class FilterResultComponent implements OnInit, OnChanges {
     this.filterChangeEvent.emit(this.filter);
   }
 
-  changePriceCurrency(e: any) {
-    if (e.target.checked) this.selectedCurrency = e.target.value;
+  changePriceCurrency(e?: any) {
+    if (e != undefined && e.target.checked)
+      this.selectedCurrency = e.target.value;
 
     console.log(this.exchangeRate);
 
@@ -392,8 +394,7 @@ export class FilterResultComponent implements OnInit, OnChanges {
         this.verifyFilter();
         break;
       case FilterTypes.precio:
-        this.minValuePrice = 100;
-        this.maxValuePrice = 6000;
+        this.changePriceCurrency();
 
         this.removeFilter(FilterTypes.precio);
         this.verifyFilter();
@@ -413,6 +414,20 @@ export class FilterResultComponent implements OnInit, OnChanges {
         this.filter.escala.uno = false;
         this.filter.escala.mas = false;
         this.removeFilter(FilterTypes.escalas);
+        this.verifyFilter();
+        break;
+      case FilterTypes.duracionSalida:
+        this.minValueDurationExit = this.minValueDurationExitFilter;
+        this.maxValueDurationExit = this.maxValueDurationExitFilter;
+
+        this.removeFilter(FilterTypes.duracionSalida);
+        this.verifyFilter();
+        break;
+      case FilterTypes.duracionEscala:
+        this.minValueDurationExitScale = this.minValueDurationExitScaleFilter;
+        this.maxValueDurationExitScale = this.maxValueDurationExitScaleFilter;
+
+        this.removeFilter(FilterTypes.duracionEscala);
         this.verifyFilter();
         break;
       default:
@@ -465,5 +480,9 @@ export class FilterResultComponent implements OnInit, OnChanges {
         break;
     }
     this.verifyFilter();
+  }
+
+  selectorCurrencyChange(e: any) {
+    this.currencyChangeEvent.emit(e.value);
   }
 }

@@ -1,5 +1,5 @@
 <mat-form-field appearance="outline" class="mb-4 hideMov text-start px-4">
-  <mat-select [(value)]="selectedCurrency" disableOptionCentering>
+  <mat-select [(value)]="selectedCurrency" disableOptionCentering (selectionChange)="selectorCurrencyChange($event)">
     <mat-option value="soles">Soles</mat-option>
     <mat-option value="dolares">Dólares</mat-option>
   </mat-select>
@@ -339,8 +339,8 @@
             <div class="row row-cust">
               <div class="col-sm-12 col-md-12 col-lg-12 p-0">
                 <label>Salida</label>
-                <br />
-                Lima - México
+                <!-- <br />
+                Lima - México -->
               </div>
               <div class="col-sm-12 col-md-12 col-lg-12 p-0">
                 <div class="row row-cust pt-1 pb-1">
