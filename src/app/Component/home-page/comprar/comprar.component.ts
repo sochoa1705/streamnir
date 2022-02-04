@@ -379,7 +379,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (mailConfirmContacto === undefined || mailConfirmContacto === null || mailConfirmContacto.trim() === '') {
       this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Confirmación es requerida' })
     }
-    debugger;
     if (mailConfirmContacto.toUpperCase() !== mailContacto.toUpperCase()) {
       this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Email no coincide' })
     }
