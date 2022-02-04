@@ -439,7 +439,8 @@ export class ResultadosComponent implements OnInit {
     this.loader.showText('Cargando los vuelos');
     this.loader.showLoader();
 
-    //console.log(filter);
+    console.log('aplicando filtro');
+    console.log(filter);
 
     if (filter.price.currency == 'soles') {
       this.flights = this.flightsOri.filter(
@@ -462,6 +463,8 @@ export class ResultadosComponent implements OnInit {
             .totalFare <= filter.price.max
       );
     }
+
+    console.log(this.flights);
 
     this.flights = this.flights.filter(
       (x) =>
@@ -561,6 +564,8 @@ export class ResultadosComponent implements OnInit {
 
       this.flights = esl.filter((x: any) => x != null);
     }
+
+    this.flights = [...this.flights];
 
     // console.log(filter);
     this.loader.closeLoader();

@@ -481,3 +481,299 @@
         justify-content: center;
     }
 }
+
+.card {
+    margin-bottom: 20px;
+    justify-content: center;
+    &_ {
+        text-align: center;
+        & .optionm {
+            background: rgba(235, 235, 235, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 0 10px;
+            border: 1px solid rgba(235, 235, 235, 0.4);
+            transition: all 0.3s ease;
+            flex-wrap: wrap;
+            & .dot {
+                height: 20px;
+                width: 20px;
+                background: #fff;
+                border-radius: 50%;
+                position: relative;
+                border: 1px solid #83898f;
+                &::before {
+                    position: absolute;
+                    content: "";
+                    top: 3px;
+                    left: 3px;
+                    width: 12px;
+                    height: 12px;
+                    background: #0069d9;
+                    border-radius: 50%;
+                    opacity: 0;
+                    transform: scale(1.5);
+                    transition: all 0.3s ease;
+                }
+            }
+            &>span {
+                font-size: 12px;
+                font-family: "Open Sans";
+                display: block;
+                width: 100%;
+                color: #4b4b4b;
+            }
+        }
+        label {
+            font-size: 12px;
+            font-family: "Open Sans";
+            display: block;
+            padding-bottom: 0;
+        }
+    }
+    &.cupon {
+        & .card-header {
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 26px;
+            color: white;
+            background: #1eaea5;
+            font-family: "Montserrat";
+        }
+        input{
+            font-family: "Montserrat";
+            font-size: 14px;
+            border: .5px solid #83898F;
+            &:placeholder{
+                font-family: "Montserrat";
+                font-size: 14px;    
+            }
+        }
+    }
+    &.pasajeros {
+        border-radius: 10px;
+        & .card-header{
+            border-radius: 10px 10px 0 0;
+        }
+        .card {
+            &-header {
+                box-shadow: none;
+            }
+        }
+    }
+    &-header {
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.16);
+        font-size: 18px;
+        color: #4b4b4b;
+        font-weight: 600;
+        z-index: 1;
+        white-space: pre;
+        line-height: 36px;
+        h2 {
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+        span {
+            color: #4b4b4b;
+            font-family: "Montserrat";
+            font-size: 14px;
+            font-weight: 600;
+        }
+    }
+    &-center {
+        background: #009aed;
+        width: 80%;
+        margin: 0 auto;
+        height: 71px;
+        flex-direction: column;
+        justify-content: center;
+        strong {
+            font-family: "Montserrat";
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        span {
+            font-family: "Montserrat";
+            color: white;
+            font-size: 12px;
+            font-weight: normal;
+        }
+    }
+    &-body {
+        .input-group {
+            & input{
+            border: .5px solid #83898F;
+            border-right: 0px;
+            &:focus{
+                border: .5px solid #83898F!important;
+                border-right: 0px!important;
+            }
+            }
+            & label.input-group-text{
+                background: white;
+                border: .5px solid #83898F;
+                border-left: 0px;
+                & .mat-icon{
+                    color: #B9BCBF;
+                }
+            }
+        }
+        h {
+            &1 {
+                font-size: 18px;
+                font-family: "Open Sans";
+            }
+        }
+        .viajero {
+            a {
+                color: red;
+                text-decoration: none;
+                &.ver{
+                    color: #DF0C30 !important;
+                }
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            h {
+                &1 {
+                    font-size: 18px;
+                    font-family: "Open Sans";
+                }
+                &3 {
+                    line-height: 12px;
+                    font-size: 12px;
+                    font-family: "Montserrat";
+                    margin-bottom: 0;
+                    color: #4b4b4b;
+                }
+            }
+            span {
+                font-size: 12px;
+                font-family: "Montserrat";
+                font-weight: bold;
+            }
+            .destinos {
+                color: #009aed;
+                font-size: 14px;
+                font-weight: 500;
+            }
+                    span.destinos{
+                        font-weight:600!important;
+                    }
+            .equipaje {
+                & svg {
+                    margin-right: 7px;
+                }
+                .d-inline-flex {
+                    height: 25px;
+                    position: relative;
+                }
+                ._not:after {
+                    content: url(../../../../assets/comprar/x.png);
+                    position: absolute;
+                    bottom: -30%;
+                    right: 20%;
+                }
+            }
+            .escala {
+                font-size: 10px;
+                font-family: "Montserrat";
+                font-weight: 700;
+                &_line {
+                    border-top: 0.5px dashed #83898f;
+                }
+                &_punto {
+                    background: white;
+                    border: 1px solid #f21037;
+                    border-radius: 50%;
+                    width: 10px;
+                    height: 10px;
+                    margin: auto;
+                    margin-top: -5px;
+                }
+            }
+        }
+        span {
+            color: #506370;
+            font-family: "Montserrat";
+            font-size: 12px;
+            font-weight: 500;
+        }
+        box-shadow: none;
+        // box-shadow: 0px -2px 3px rgba(0, 0, 0, 0.16);
+        a {
+            //text-decoration: underline;
+            font-size: 14px;
+            color: #009aed;
+            font-family: "Montserrat";
+            &.btnBlue {
+                background: #ffffff;
+                border-radius: 3px;
+                height: 59px;
+                color: #ffffff;
+                text-decoration: none;
+                box-sizing: border-box;
+                padding: 14px;
+                font-family: Montserrat;
+                font-weight: 500;
+                font-size: 16px;
+                display: flex;
+                height: 50px;
+                justify-content: center;
+                border: 1px solid #009aed;
+                box-sizing: border-box;
+                border-radius: 3px;
+                color: #009aed;
+                cursor: pointer;
+                transition: all 0.3s;
+                &.active {
+                    background: #009aed;
+                    border: 1px solid #009aed;
+                    box-sizing: border-box;
+                    border-radius: 3px;
+                    color: #ffffff;
+                }
+            }
+            &.btnRed {
+                font-family: Montserrat;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 21px;
+                letter-spacing: 0.1px;
+                color: #df0c30;
+            }
+        }
+        .button {
+            margin-top: 30px !important;
+            width: 221px;
+            margin: auto;
+            border: 1px solid #009aed;
+            background: white;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #009aed;
+            font-family: "Montserrat";
+            display: block;
+            line-height: 45px;
+            text-align: center;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        li {
+            font-family: "Montserrat";
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 20px;
+            padding-right: 30px;
+            padding-left: 30px;
+            list-style: none;
+            background-image: url(../../../../assets/comprar/check-bold.png);
+            background-repeat: no-repeat;
+        }
+    }
+}

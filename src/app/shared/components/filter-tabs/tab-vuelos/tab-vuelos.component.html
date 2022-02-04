@@ -28,7 +28,7 @@
         <div class="rowBoxTab">
             
 
-            <div class="colBoxtab">
+            <div class="colBoxtab w-30 me-md-1">
                 <app-input-autocomplete placeholder="Origen" [items]="vuelos$ | async" [loading]="vuelosLoading"  [typeahead]="vuelosInput$" formControlName="origen"></app-input-autocomplete>    
             </div>            
                      <!-- <input matInput aria-label="State" [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event, 'origen')"
@@ -40,7 +40,7 @@
                     </mat-option>
                 </mat-autocomplete> -->
 
-            <div class="colBoxtab">
+            <div class="colBoxtab w-30 me-md-1">
 
                 <app-input-autocomplete placeholder="Destino" [items]="vuelos2$ | async" [loading]="vuelosLoading2"  [typeahead]="vuelosInput2$" formControlName="destino"></app-input-autocomplete>
 
@@ -58,7 +58,7 @@
             <app-calendar [toDate]="vuelosTab?.toDate || null" [fromDate]="vuelosTab?.fromDate || null" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
 
 
-            <div class="colBoxtab">
+            <div class="colBoxtab w-10 ms-md-2">
                 <button class="fullWidht" type="button" (click)="searchVueloHotel()">Buscar</button>
             </div>
         </div>
