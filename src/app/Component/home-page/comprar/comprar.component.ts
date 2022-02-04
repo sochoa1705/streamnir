@@ -379,7 +379,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (mailConfirmContacto === undefined || mailConfirmContacto === null || mailConfirmContacto.trim() === '') {
       this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Confirmación es requerida' })
     }
-    if (mailConfirmContacto !== mailContacto) {
+    debugger;
+    if (mailConfirmContacto.toUpperCase() !== mailContacto.toUpperCase()) {
       this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Email no coincide' })
     }
 
@@ -867,4 +868,5 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     const expiredFormatt = `${year}/${month}`
     return expiredFormatt
   }
+
 }
