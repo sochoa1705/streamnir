@@ -49,7 +49,7 @@ export class ResultadosComponent implements OnInit {
 
   flights: IAerolineas[];
   conversion: number;
-  currency: string = "dolares";
+  currency: string = 'dolares';
   flightsOri: IAerolineas[];
   filtersObj: FilterResult;
 
@@ -66,7 +66,7 @@ export class ResultadosComponent implements OnInit {
 
   orderByActive: number = ENUM_ORDER_BY.PRECIO_BAJO;
 
-  vuelosTab:SaveModelVuelos;
+  vuelosTab: SaveModelVuelos;
 
   constructor(
     public route: Router,
@@ -80,7 +80,7 @@ export class ResultadosComponent implements OnInit {
   }
 
   ngOnInit() {
-    toUp()
+    toUp();
     this.filtersObj = {
       airlines: [],
       price: { min: 0, max: 0 },
@@ -93,57 +93,56 @@ export class ResultadosComponent implements OnInit {
     this.getParams();
   }
 
-  vuelosLogicInit(respVuelos:ParamsVuelos){
-
+  vuelosLogicInit(respVuelos: ParamsVuelos) {
     const obj = this.flights[0].departure[0];
 
-    const origen:ICardAutocomplete = {
-      id:  obj.originCity.code,
-      codigo:  obj.originCity.code,
+    const origen: ICardAutocomplete = {
+      id: obj.originCity.code,
+      codigo: obj.originCity.code,
       title: obj.originCity.name,
-      children:[]
-    }
+      children: [],
+    };
 
-    const destino:ICardAutocomplete = {
-      id:  obj.destinationCity.code,
-      codigo:  obj.destinationCity.code,
+    const destino: ICardAutocomplete = {
+      id: obj.destinationCity.code,
+      codigo: obj.destinationCity.code,
       title: obj.destinationCity.name,
-      children:[]
-    }
+      children: [],
+    };
 
-    const formModel:IForm = {
-      clase:       respVuelos.businessCabin?EnumCabins.economico:EnumCabins.economico,
-      viajes:      Number(respVuelos.flightType),
-      origen:      origen,
-      destino:     destino,
-      origenHotel: "",
-    }
+    const formModel: IForm = {
+      clase: respVuelos.businessCabin
+        ? EnumCabins.economico
+        : EnumCabins.economico,
+      viajes: Number(respVuelos.flightType),
+      origen: origen,
+      destino: destino,
+      origenHotel: '',
+    };
 
     const fromDate = new NgbDate(
-      moment(respVuelos.departureDate,"DD/MM/YYYY").year(),
-      moment(respVuelos.departureDate,"DD/MM/YYYY").month() + 1,
-      moment(respVuelos.departureDate,"DD/MM/YYYY").date(),
-    )
+      moment(respVuelos.departureDate, 'DD/MM/YYYY').year(),
+      moment(respVuelos.departureDate, 'DD/MM/YYYY').month() + 1,
+      moment(respVuelos.departureDate, 'DD/MM/YYYY').date()
+    );
     const toDate = new NgbDate(
-      moment(respVuelos.arrivalDate,"DD/MM/YYYY").year(),
-      moment(respVuelos.arrivalDate,"DD/MM/YYYY").month() + 1,
-      moment(respVuelos.arrivalDate,"DD/MM/YYYY").date(),
-    )
+      moment(respVuelos.arrivalDate, 'DD/MM/YYYY').year(),
+      moment(respVuelos.arrivalDate, 'DD/MM/YYYY').month() + 1,
+      moment(respVuelos.arrivalDate, 'DD/MM/YYYY').date()
+    );
 
     const pasajeros = {
       adultos: Number(respVuelos.adults),
-      ninos: Number( respVuelos.children),
-      infantes: Number(respVuelos.infants)
-    }
+      ninos: Number(respVuelos.children),
+      infantes: Number(respVuelos.infants),
+    };
 
-    this.vuelosTab =  new SaveModelVuelos(
+    this.vuelosTab = new SaveModelVuelos(
       fromDate,
       toDate,
       formModel,
       pasajeros
-      )
-    
-
+    );
 
     // this.vuelosService.getValue().subscribe(resp=>{
     //   if(!resp){
@@ -156,8 +155,7 @@ export class ResultadosComponent implements OnInit {
 
   async getParams() {
     this.ar.queryParams.subscribe((resp) => {
-
-      const respVuelos: ParamsVuelos = resp as ParamsVuelos
+      const respVuelos: ParamsVuelos = resp as ParamsVuelos;
 
       let {
         arrivalDate,
@@ -571,7 +569,8 @@ export class ResultadosComponent implements OnInit {
 
     this.flights = [...aFlights];
 
-    this.orderBy(this.orderByActive);
+    if (this.orderByActive && this.orderByActive > 0)
+      this.orderBy(this.orderByActive);
 
     // console.log(filter);
     this.loader.closeLoader();
