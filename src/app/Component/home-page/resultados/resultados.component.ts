@@ -442,8 +442,12 @@ export class ResultadosComponent implements OnInit {
     console.log('aplicando filtro');
     console.log(filter);
 
+    let aFlights: IAerolineas[];
+
+    debugger;
+
     if (filter.price.currency == 'soles') {
-      this.flights = this.flightsOri.filter(
+      aFlights = this.flightsOri.filter(
         (x) =>
           x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
             .totalFare *
@@ -455,7 +459,7 @@ export class ResultadosComponent implements OnInit {
             filter.price.max
       );
     } else {
-      this.flights = this.flightsOri.filter(
+      aFlights = this.flightsOri.filter(
         (x) =>
           x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
             .totalFare >= filter.price.min &&
@@ -466,7 +470,7 @@ export class ResultadosComponent implements OnInit {
 
     console.log(this.flights);
 
-    this.flights = this.flights.filter(
+    aFlights = aFlights.filter(
       (x) =>
         Number(x.departure[0].segments[0].flightDuration) >=
           filter.durationExit.min &&
@@ -474,7 +478,7 @@ export class ResultadosComponent implements OnInit {
           filter.durationExit.max
     );
 
-    this.flights = this.flights.filter(
+    aFlights = aFlights.filter(
       (x) =>
         Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) >=
           filter.elapsedExit.min &&
@@ -483,7 +487,7 @@ export class ResultadosComponent implements OnInit {
     );
 
     if (filter.airline.length > 0) {
-      let af: any = this.flights.map((x) => {
+      let af: any = aFlights.map((x) => {
         let df = x.departure[0].segments[0].flightSegments[0]
           ? x.departure[0].segments[0].flightSegments[0].marketingAirline.code
           : '';
@@ -501,11 +505,11 @@ export class ResultadosComponent implements OnInit {
         return null;
       });
 
-      this.flights = af.filter((x: any) => x != null);
+      aFlights = af.filter((x: any) => x != null);
     }
 
     if (filter.equipaje.mano || filter.equipaje.bodega) {
-      let eql: any = this.flights.map((x) => {
+      let eql: any = aFlights.map((x) => {
         if (
           (filter.equipaje.mano &&
             x.departure[0].segments[0].equipaje != undefined &&
@@ -528,12 +532,12 @@ export class ResultadosComponent implements OnInit {
         }
       });
 
-      this.flights = eql.filter((x: any) => x != null);
+      aFlights = eql.filter((x: any) => x != null);
     }
 
     if (filter.escala.directo || filter.escala.uno || filter.escala.mas) {
       console.log(this.flights);
-      let esl: any = this.flights.map((x) => {
+      let esl: any = aFlights.map((x) => {
         if (
           (filter.escala.directo &&
             x.departure[0].segments[0].flightSegments != undefined &&
@@ -562,10 +566,12 @@ export class ResultadosComponent implements OnInit {
 
       console.log(esl);
 
-      this.flights = esl.filter((x: any) => x != null);
+      aFlights = esl.filter((x: any) => x != null);
     }
 
-    this.flights = [...this.flights];
+    this.flights = [...aFlights];
+
+    this.orderBy(this.orderByActive);
 
     // console.log(filter);
     this.loader.closeLoader();

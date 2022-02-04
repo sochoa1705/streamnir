@@ -224,6 +224,15 @@ export class FilterResultComponent implements OnInit, OnChanges {
     });
 
     this.filter.airline = this.filter.airline.filter((a: any) => a != null);
+    this.filter.price.min = this.minValuePrice;
+    this.filter.price.max = this.maxValuePrice;
+
+    this.filter.durationExit.min = this.minValueDurationExit;
+    this.filter.durationExit.max = this.maxValueDurationExit;
+
+    this.filter.elapsedExit.min = this.minValueDurationExitScale;
+    this.filter.elapsedExit.max = this.maxValueDurationExitScale;
+
     this.filterChange();
   }
 
@@ -271,20 +280,6 @@ export class FilterResultComponent implements OnInit, OnChanges {
         (x) => x.filterType != type
       );
     }
-  }
-
-  priceChange(value: number) {
-    this.filter.price.min = value;
-    // this.filterChange();
-    console.log(value);
-    //this.addFilter(FilterTypes.precio);
-  }
-
-  priceMaxChange(value: number) {
-    this.filter.price.max = value;
-    // this.filterChange();
-    console.log(value);
-    //this.addFilter(FilterTypes.precio);
   }
 
   durationExitChange(value: number) {
