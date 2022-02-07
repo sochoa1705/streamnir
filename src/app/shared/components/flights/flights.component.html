@@ -43,7 +43,7 @@
         <div class="row">
             <div class="col-9">
                 <ng-container *ngFor="let departure of vuelo.departure">
-                    <ng-container *ngFor="let segment of departure.segments">
+                    <ng-container *ngFor="let segment of departure.segments; let first = first;">
                         <!-- SALIDA -->
                         <div class="row pb-2">
                             <div class="col-6">
@@ -59,6 +59,10 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
+                            </div>
+                            <div class="col-6 id_gds" *ngIf="first">
+                                <span>{{"GDS: "+vuelo.gds.idGDS}}</span>
+                                <span>{{"ID: "+vuelo.id}}</span>
                             </div>
                             <div class="clearfix"></div>
                         </div>
