@@ -254,6 +254,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   validForm() {
     this.errors = []
+    const letter = new RegExp('^[a-zA-Z ]+$', 'i')
+    const number = new RegExp('^[0-9]+$', 'i')
+    const alphanumeric = new RegExp('^[a-zA-Z0-9 ]+$', 'i')
 
     const typePay: string = this.formShop.getRawValue()['formCard']['select21']
     if (typePay === 'TARJETA') {
@@ -378,14 +381,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     let mailConfirmContacto: string = this.formShop.getRawValue()['formContact']['mailConfirmContacto']
     if (mailConfirmContacto === undefined || mailConfirmContacto === null || mailConfirmContacto.trim() === '') {
       this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Confirmación es requerida' })
-    }
-    if (mailConfirmContacto.toUpperCase() !== mailContacto.toUpperCase()) {
+    } else if (mailConfirmContacto.toUpperCase() !== mailContacto.toUpperCase()) {
       this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Email no coincide' })
     }
 
     let typePhone0: string = this.formShop.getRawValue()['formContact']['typePhone0']
     if (typePhone0 === undefined || typePhone0 === null || typePhone0.trim() === '') {
-      this.errors.push({ name: this.MSG_TYPEPHONE_CONTACT, message: 'Tipo de teléfono es requerido' })
+      this.errors.push({ name: this.MSG_TYPEPHONE_CONTACT, message: 'Campo requerido' })
     }
     let code0: string = this.formShop.getRawValue()['formContact']['code0']
     if (code0 === undefined || code0 === null || code0.trim() === '') {
@@ -395,7 +397,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (numberPhone0 === undefined || numberPhone0 === null || numberPhone0.trim() === '') {
       this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'Teléfono es requerido' })
     }
-    if (!this.validNumber(numberPhone0)) {
+    if (!number.test(numberPhone0)) {
       this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'solo números' })
     }
 
@@ -421,9 +423,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
 
-  validNumber(inputText: any): boolean {
-    return new RegExp(/^[0-9]+$/).test(inputText)
-  }
+  // validNumber(inputText: any): boolean {
+  //   return new RegExp(/^[0-9]+$/).test(inputText)
+  // }
 
   toFactura(e: any) {
     let chk = e.target.checked
@@ -452,7 +454,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }),
       formContact: new FormGroup({
         chkCustomer: new FormControl(),
-        nameContacto: new FormControl('', Validators.pattern("^[a-zA-Z ]+$")),
+        nameContacto: new FormControl(),
         lastnameContacto: new FormControl(),
         mailContacto: new FormControl(),
         mailConfirmContacto: new FormControl(),
@@ -578,6 +580,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   shopEnd() {
     // console.log(this.validForm());
     console.log(this.errors);
+    // let varrr = this.formShop.controls['formContact'].controls['nameContacto'].errors.pattern
     console.log(this.formShop.getRawValue());
     // console.log(this.formShop.getRawValue()['formContact']['numberPhone0']);
     console.log(this.safe0Json['reservaVuelos'])
