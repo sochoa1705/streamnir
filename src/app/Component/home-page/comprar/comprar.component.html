@@ -526,13 +526,13 @@
                                 <div class="row rowMobileCard hideMobile">
                                     <div class="col-6 viewMobileWidth">
                                         <label for="names1">Nombres</label>
-                                        <input class="form-control" formControlName="nameCustomer" placeholder="El que figura en el documento de viaje." type="text"
+                                        <input class="form-control" [ngClass]="getMessage(MSG_NAME_CUSTOMER) != MSG_EMPTY ? 'isvalid' : ''" formControlName="nameCustomer" placeholder="El que figura en el documento de viaje." type="text"
                                             name="names1">
                                         <span class="valid" *ngIf="getMessage(MSG_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_NAME_CUSTOMER)">{{ getMessage(MSG_NAME_CUSTOMER) }}</span>
                                     </div>
                                     <div class="col-6 viewMobileWidth">
                                         <label for="lastname1">Apellidos</label>
-                                        <input class="form-control" formControlName="lastNameCustomer" placeholder="El que figura en el documento de viaje." type="text"
+                                        <input class="form-control" [ngClass]="getMessage(MSG_LAST_NAME_CUSTOMER) != MSG_EMPTY ? 'isvalid' : ''" formControlName="lastNameCustomer" placeholder="El que figura en el documento de viaje." type="text"
                                             name="lastname1">
                                         <span class="valid" *ngIf="getMessage(MSG_LAST_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_LAST_NAME_CUSTOMER)">{{ getMessage(MSG_LAST_NAME_CUSTOMER) }}</span>
                                     </div>
@@ -543,11 +543,11 @@
                                         <label for="names">Fecha de nacimiento</label>
                                         <div class="row">
                                             <div class="col-4">
-                                                <input class="form-control" formControlName="dayCustomer" type="text" name="names">
+                                                <input class="form-control" [ngClass]="getMessage(MSG_DAY_CUSTOMER) != MSG_EMPTY ? 'isvalid' : ''" formControlName="dayCustomer" type="text" name="names">
                                                 <span class="valid" *ngIf="getMessage(MSG_DAY_CUSTOMER) != MSG_EMPTY  &&  getMessageArray(i, MSG_DAY_CUSTOMER)">{{ getMessage(MSG_DAY_CUSTOMER) }}</span>
                                             </div>
                                             <div class="col-4">
-                                                <select formControlName="monthCustomer" class="form-select-f">
+                                                <select formControlName="monthCustomer" class="form-select-f" [ngClass]="getMessage(MSG_MONTH_CUSTOMER) != MSG_EMPTY ? 'isvalid' : ''">
                                                     <option disabled>Seleccione</option>
                                                     <option value="01">Enero</option>
                                                     <option value="02">Febrero</option>
@@ -565,10 +565,9 @@
                                                 <span class="valid" *ngIf="getMessage(MSG_MONTH_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_MONTH_CUSTOMER)">{{ getMessage(MSG_MONTH_CUSTOMER) }}</span>
                                             </div>
                                             <div class="col-4">
-                                                <select formControlName="yearCustomer" class="form-select-f">
+                                                <select formControlName="yearCustomer" class="form-select-f"  [ngClass]="getMessage(MSG_YEAR_CUSTOMER) != MSG_EMPTY ? 'isvalid' : ''">
                                                     <option disabled>Seleccione</option>
                                                     <option *ngFor="let year of listYears" value="{{year}}">{{year}}</option>
-
                                                 </select>
                                                 <span class="valid" *ngIf="getMessage(MSG_YEAR_CUSTOMER) != MSG_EMPTY  &&  getMessageArray(i, MSG_YEAR_CUSTOMER)">{{ getMessage(MSG_YEAR_CUSTOMER) }}</span>
                                             </div>
@@ -577,7 +576,7 @@
                                     </div>
                                     <div class="col-6 viewMobileWidth">
                                         <label for="names">Nacionalidad</label>
-                                        <select formControlName="nationalityCustomer" class="form-select-f">
+                                        <select formControlName="nationalityCustomer" class="form-select-f" [ngClass]="getMessage(MSG_NATIONALITY_CUSTOMER) != MSG_EMPTY ? 'isvalid' : ''">
                                             <option disabled>Seleccione</option>
                                             <option value = "AF">Afganistan</option>
                                             <option value = "AX">Aland Island</option>
@@ -833,7 +832,7 @@
                                 <div class="row rowMobileCard hideMobile">
                                     <div class="col-3 viewMobileWidth">
                                         <label for="names">Tipo de documento</label>
-                                        <select formControlName="typeDocCustomer" class="form-select-f">
+                                        <select formControlName="typeDocCustomer" class="form-select-f" [ngClass]="getMessage(MSG_TYPE_DOC_CUSTOMER) != MSG_EMPTY ? 'isvalid' : ''">
                                             <option disabled>Seleccione</option>
                                             <option value="dni">DNI</option>
                                             <option value="pasaporte">Pasaporte</option>
@@ -843,7 +842,7 @@
                                     </div>
                                     <div class="col-3 viewMobileWidth">
                                         <label for="lastname">N° de documento</label>
-                                        <input class="form-control" formControlName="numDocCustomer" type="text" name="ndocumento">
+                                        <input class="form-control" formControlName="numDocCustomer" type="text" name="ndocumento" [ngClass]="getMessage(MSG_NUM_DOC_CUSTOMER) != MSG_EMPTY ? 'isvalid' : ''">
                                         <span class="valid" *ngIf="getMessage(MSG_NUM_DOC_CUSTOMER) != MSG_EMPTY  &&  getMessageArray(i, MSG_NUM_DOC_CUSTOMER)">{{ getMessage(MSG_NUM_DOC_CUSTOMER) }}</span>
                                     </div>
                                     <div class="col-6 viewMobileWidth">
@@ -972,13 +971,13 @@
                                     <div class="row card_pasajero rowMobileCard">
                                         <div class="col-6 viewMobileWidth">
                                             <label for="names">Número de tarjeta</label>
-                                            <input class="form-control" formControlName="numberCard" mask="0000-0000-0000-0000" placeholder="Ingrese el número de tarjeta."
+                                            <input class="form-control" formControlName="numberCard" [ngClass]="getMessage(MSG_NUMBER_CARD) != MSG_EMPTY ? 'isvalid' : ''" mask="0000-0000-0000-0000" placeholder="Ingrese el número de tarjeta."
                                                 type="text" name="names">
                                             <span class="valid" *ngIf="getMessage(MSG_NUMBER_CARD) != MSG_EMPTY">{{ getMessage(MSG_NUMBER_CARD) }}</span>
                                         </div>
                                         <div class="col-6 viewMobileWidth">
                                             <label for="lastname">Titular de la tarjeta</label>
-                                            <input class="form-control" formControlName="nameCard" placeholder="El que figura en la tarjeta." type="text" name="lastname">
+                                            <input class="form-control" [ngClass]="getMessage(MSG_NAME_CARD) != MSG_EMPTY ? 'isvalid' : ''" formControlName="nameCard" placeholder="El que figura en la tarjeta." type="text" name="lastname">
                                             <span class="valid" *ngIf="getMessage(MSG_NAME_CARD) != MSG_EMPTY">{{ getMessage(MSG_NAME_CARD) }}</span>
                                         </div>
                                         <div class="clearfix"></div>
@@ -988,12 +987,12 @@
                                             <div class="row">
                                                 <div class="col-5">
                                                     <label for="names">Vencimiento</label>
-                                                    <input class="form-control" formControlName="expiredCard" mask="9999/99" placeholder="MM/AA" type="text" name="names">
+                                                    <input class="form-control" formControlName="expiredCard" [ngClass]="getMessage(MSG_EXPIRED_CARD) != MSG_EMPTY ? 'isvalid' : ''" mask="9999/99" placeholder="MM/AA" type="text" name="names">
                                                     <span class="valid" *ngIf="getMessage(MSG_EXPIRED_CARD) != MSG_EMPTY">{{ getMessage(MSG_EXPIRED_CARD) }}</span>
                                                 </div>
                                                 <div class="col-6">
                                                     <label for="lastname">Código de seguridad</label>
-                                                    <input class="form-control" formControlName="ccvCard" placeholder="El que figura en el documento de viaje." type="text" name="lastname">
+                                                    <input class="form-control" formControlName="ccvCard" [ngClass]="getMessage(MSG_CCV_CARD) != MSG_EMPTY ? 'isvalid' : ''" placeholder="El que figura en el documento de viaje." type="text" name="lastname">
                                                     <span class="valid" *ngIf="getMessage(MSG_CCV_CARD) != MSG_EMPTY">{{ getMessage(MSG_CCV_CARD) }}</span>
                                                 </div>
                                                 <div class="col-1 colBoxInfo">
@@ -1012,7 +1011,7 @@
                                             <div class="row">
                                                 <div class="col-5">
                                                     <label for="names">Tipo de doc</label>
-                                                    <select formControlName="tipoDoc" class="form-select-f">
+                                                    <select formControlName="tipoDoc" class="form-select-f" [ngClass]="getMessage(MSG_TYPE_DOC) != MSG_EMPTY ? 'isvalid' : ''">
                                                         <option disabled>Seleccione</option>
                                                         <option value="celular">DNI</option>
                                                         <option value="celular">Pasaporte</option>
@@ -1023,7 +1022,7 @@
                                                 </div>
                                                 <div class="col-7">
                                                     <label for="lastname">N° de documento</label>
-                                                    <input class="form-control" formControlName="numDoc" placeholder="Ingresar N°" type="text" name="lastname">
+                                                    <input class="form-control" formControlName="numDoc" [ngClass]="getMessage(MSG_NUM_DOC) != MSG_EMPTY ? 'isvalid' : ''" placeholder="Ingresar N°" type="text" name="lastname">
                                                     <span class="valid" *ngIf="getMessage(MSG_NUM_DOC) != MSG_EMPTY">{{ getMessage(MSG_NUM_DOC) }}</span>
                                                 </div>
                                                 <div class="clearfix"></div>
@@ -1035,27 +1034,27 @@
                                         <div class="col-6 viewMobileWidth">
                                             <label for="names">Cuotas</label>
                                             <!-- <input class="form-control" formControlName="" placeholder="Sin cuotas" type="text" name="names"> -->
-                                            <select formControlName="feePay" class="form-select-f">
+                                            <select formControlName="feePay" class="form-select-f" [ngClass]="getMessage(MSG_QUOTE) != MSG_EMPTY ? 'isvalid' : ''">
                                                 <!-- <option disabled>Seleccione</option> -->
                                                 <option value="0">Sin cuotas</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
-                                                <option value="1">3</option>
-                                                <option value="2">4</option>
-                                                <option value="1">5</option>
-                                                <option value="2">6</option>
-                                                <option value="1">7</option>
-                                                <option value="2">8</option>
-                                                <option value="1">9</option>
-                                                <option value="1">10</option>
-                                                <option value="2">11</option>
-                                                <option value="2">12</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
                                             </select>
                                             <span class="valid" *ngIf="getMessage(MSG_QUOTE) != MSG_EMPTY">{{ getMessage(MSG_QUOTE) }}</span>
                                         </div>
                                         <div class="col-6 viewMobileWidth">
                                             <label for="lastname">Ciudad de facturación</label>
-                                            <input class="form-control" formControlName="cityCard" placeholder="Del titular de la tarjeta." type="text" name="lastname">
+                                            <input class="form-control" formControlName="cityCard" [ngClass]="getMessage(MSG_CITY) != MSG_EMPTY ? 'isvalid' : ''" placeholder="Del titular de la tarjeta." type="text" name="lastname">
                                             <span class="valid" *ngIf="getMessage(MSG_CITY) != MSG_EMPTY">{{ getMessage(MSG_CITY) }}</span>
                                         </div>
                                         <div class="clearfix"></div>
@@ -1063,7 +1062,7 @@
                                     <div class="row card_pasajero rowMobileCard pb-sm-4">
                                         <div class="col-6 viewMobileWidth">
                                             <label for="names">Dirección</label>
-                                            <input class="form-control" formControlName="address" placeholder="Ingrese la dirección" type="text" name="names">
+                                            <input class="form-control" formControlName="address" [ngClass]="getMessage(MSG_ADRESS) != MSG_EMPTY ? 'isvalid' : ''" placeholder="Ingrese la dirección" type="text" name="names">
                                             <span class="valid" *ngIf="getMessage(MSG_ADRESS) != MSG_EMPTY">{{ getMessage(MSG_ADRESS) }}</span>
                                         </div>
                                         <div class="col-6 textDire viewMobileWidth">
@@ -1105,7 +1104,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6 offset-3 py-4 lessViewMob">
-                                                <select class="selectBank form-select-f" formControlName="bankPay">
+                                                <select class="selectBank form-select-f" formControlName="bankPay" [ngClass]="getMessage(MSG_BANK) != MSG_EMPTY ? 'isvalid' : ''">
                                                     <option [ngValue]="null" [disabled]="true">Selecciona tu banco</option>
                                                     <option *ngFor="let b of banks" value="{{b.value}}">{{b.name}}</option>
                                                 </select>
@@ -1220,12 +1219,12 @@
                                 <div class="row rowMobileCard">
                                     <div class="col-6 viewMobileWidth">
                                         <label for="names">Nombres</label>
-                                        <input class="form-control" placeholder="Ingresa tu nombre" formControlName="nameContacto" type="text" name="names">
+                                        <input class="form-control" placeholder="Ingresa tu nombre" [ngClass]="getMessage(MSG_NAME_CONTACT) != MSG_EMPTY ? 'isvalid' : ''" formControlName="nameContacto" type="text" name="names">
                                         <span class="valid" *ngIf="getMessage(MSG_NAME_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_NAME_CONTACT) }}</span>
                                     </div>
                                     <div class="col-6 viewMobileWidth">
                                         <label for="lastname">Apellidos</label>
-                                        <input class="form-control" placeholder="Ingresa tu apellido" formControlName="lastnameContacto" type="text" name="lastname">
+                                        <input class="form-control" placeholder="Ingresa tu apellido" [ngClass]="getMessage(MSG_LASTNAME_CONTACT) != MSG_EMPTY ? 'isvalid' : ''" formControlName="lastnameContacto" type="text" name="lastname">
                                         <span class="valid" *ngIf="getMessage(MSG_LASTNAME_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_LASTNAME_CONTACT) }}</span>
                                     </div>
                                     <div class="clearfix"></div>
@@ -1233,12 +1232,12 @@
                                 <div class="row rowMobileCard">
                                     <div class="col-6 viewMobileWidth">
                                         <label for="Email">Email</label>
-                                        <input class="form-control" placeholder="Ingresa tu email de contacto" formControlName="mailContacto" type="text" name="Email">
+                                        <input class="form-control" placeholder="Ingresa tu email de contacto" [ngClass]="getMessage(MSG_EMAIL_CONTACT) != MSG_EMPTY ? 'isvalid' : ''" formControlName="mailContacto" type="text" name="Email">
                                         <span class="valid" *ngIf="getMessage(MSG_EMAIL_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_EMAIL_CONTACT) }}</span>
                                     </div>
                                     <div class="col-6 viewMobileWidth">
                                         <label for="EmailC">Confirma tu email</label>
-                                        <input class="form-control" formControlName="mailConfirmContacto" placeholder="Ingresa tu email" type="text" name="EmailC">
+                                        <input class="form-control" formControlName="mailConfirmContacto" [ngClass]="getMessage(MSG_EMAILC_CONTACT) != MSG_EMPTY ? 'isvalid' : ''" placeholder="Ingresa tu email" type="text" name="EmailC">
                                         <span class="valid" *ngIf="getMessage(MSG_EMAILC_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_EMAILC_CONTACT) }}</span>
                                     </div>
                                     <div class="clearfix"></div>
@@ -1247,7 +1246,6 @@
                                     <div class="col-6 viewMobileWidth">
                                         <label for="typePhone">Tipo de teléfono</label>
                                         <select formControlName="typePhone0" class="form-select-f">
-
                                             <option value="celular">Celular</option>
                                             <option value="fijo">Fijo</option>
                                         </select>
@@ -1277,12 +1275,12 @@
                                                         </defs>
                                                     </svg>
                                                 </div>
-                                                <input formControlName="code0" class="form-control" placeholder="" type="text" name="code0">
+                                                <input formControlName="code0" class="form-control" [ngClass]="getMessage(MSG_CODE0_CONTACT) != MSG_EMPTY ? 'isvalid' : ''" placeholder="" type="text" name="code0">
                                                 <span class="valid" *ngIf="getMessage(MSG_CODE0_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_CODE0_CONTACT) }}</span>
                                             </div>
                                             <div class="col-7">
                                                 <label for="numberPhone0">Número de teléfono</label>
-                                                <input formControlName="numberPhone0" class="form-control" placeholder="Ingresa N°" type="text">
+                                                <input formControlName="numberPhone0" class="form-control" [ngClass]="getMessage(MSG_PHONE0_CONTACT) != MSG_EMPTY ? 'isvalid' : ''" placeholder="Ingresa N°" type="text">
                                                 <span class="valid" *ngIf="getMessage(MSG_PHONE0_CONTACT) != MSG_EMPTY">{{ getMessage(MSG_PHONE0_CONTACT) }}</span>
                                             </div>
                                             <div class="clearfix"></div>
