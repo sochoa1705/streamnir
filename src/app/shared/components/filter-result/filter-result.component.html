@@ -272,8 +272,6 @@
           [(value)]="minValuePrice"
           [(highValue)]="maxValuePrice"
           [options]="optionsPrice"
-          (valueChange)="priceChange($event)"
-          (highValueChange)="priceMaxChange($event)"
           (userChangeEnd)="filterPrice()"
         >
         </ng5-slider>
@@ -349,8 +347,6 @@
                       [(value)]="minValueDurationExit"
                       [(highValue)]="maxValueDurationExit"
                       [options]="optionsDurationExit"
-                      (valueChange)="durationExitChange($event)"
-                      (highValueChange)="durationExitMaxChange($event)"
                       (userChangeEnd)="filterDurationExit()"
                     >
                     </ng5-slider>
@@ -370,8 +366,6 @@
                       [(value)]="minValueDurationExitScale"
                       [(highValue)]="maxValueDurationExitScale"
                       [options]="optionsDurationExitScale"
-                      (valueChange)="elapsedExitChange($event)"
-                      (highValueChange)="elapsedExitMaxChange($event)"
                       (userChangeEnd)="filterElpasedExit()"
                     ></ng5-slider>
                   </div>
