@@ -171,15 +171,16 @@ export class FlightsComponent {
 
   calculePrincing() {
     const fareBreak = this.vueloEscogidoIda.pricingInfo.itinTotalFare.fareBreakDowns;
+    const currency = this.currency; 
 
     const pricingInf = new ClassPricingInfoDetalle(
-      this.fareBreakPipe.transform(fareBreak, 'persona'),
-      this.fareBreakPipe.transform(fareBreak, 'impuestos'),
-      this.fareBreakPipe.transform(fareBreak, 'cargos'),
-      this.fareBreakPipe.transform(fareBreak, 'nroAdultos'),
-      this.fareBreakPipe.transform(fareBreak, 'precioFinal'),
-      this.fareBreakPipe.transform(fareBreak, 'totalPrecioAdultos'),
-      this.fareBreakPipe.transform(fareBreak, 'precioSoles', this.conversion),
+      this.fareBreakPipe.transform(fareBreak, 'persona', 0,currency), 
+      this.fareBreakPipe.transform(fareBreak, 'impuestos',0,currency),
+      this.fareBreakPipe.transform(fareBreak, 'cargos',0,currency),
+      this.fareBreakPipe.transform(fareBreak, 'nroAdultos',0,currency),
+      this.fareBreakPipe.transform(fareBreak, 'precioFinal',0,currency),
+      this.fareBreakPipe.transform(fareBreak, 'totalPrecioAdultos',0,currency),
+      this.fareBreakPipe.transform(fareBreak, 'precioSoles', this.conversion ,currency),
     )
 
     return pricingInf;
