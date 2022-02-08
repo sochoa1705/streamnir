@@ -49,7 +49,7 @@ export class ResultadosComponent implements OnInit {
 
   flights: IAerolineas[];
   conversion: number;
-  currency: string = "dolares";
+  currency: string = 'dolares';
   flightsOri: IAerolineas[];
   filtersObj: FilterResult;
 
@@ -66,7 +66,7 @@ export class ResultadosComponent implements OnInit {
 
   orderByActive: number = ENUM_ORDER_BY.PRECIO_BAJO;
 
-  vuelosTab:SaveModelVuelos;
+  vuelosTab: SaveModelVuelos;
 
   constructor(
     public route: Router,
@@ -80,7 +80,7 @@ export class ResultadosComponent implements OnInit {
   }
 
   ngOnInit() {
-    toUp()
+    toUp();
     this.filtersObj = {
       airlines: [],
       price: { min: 0, max: 0 },
@@ -93,57 +93,56 @@ export class ResultadosComponent implements OnInit {
     this.getParams();
   }
 
-  vuelosLogicInit(respVuelos:ParamsVuelos){
-
+  vuelosLogicInit(respVuelos: ParamsVuelos) {
     const obj = this.flights[0].departure[0];
 
-    const origen:ICardAutocomplete = {
-      id:  obj.originCity.code,
-      codigo:  obj.originCity.code,
+    const origen: ICardAutocomplete = {
+      id: obj.originCity.code,
+      codigo: obj.originCity.code,
       title: obj.originCity.name,
-      children:[]
-    }
+      children: [],
+    };
 
-    const destino:ICardAutocomplete = {
-      id:  obj.destinationCity.code,
-      codigo:  obj.destinationCity.code,
+    const destino: ICardAutocomplete = {
+      id: obj.destinationCity.code,
+      codigo: obj.destinationCity.code,
       title: obj.destinationCity.name,
-      children:[]
-    }
+      children: [],
+    };
 
-    const formModel:IForm = {
-      clase:       respVuelos.businessCabin?EnumCabins.economico:EnumCabins.economico,
-      viajes:      Number(respVuelos.flightType),
-      origen:      origen,
-      destino:     destino,
-      origenHotel: "",
-    }
+    const formModel: IForm = {
+      clase: respVuelos.businessCabin
+        ? EnumCabins.economico
+        : EnumCabins.economico,
+      viajes: Number(respVuelos.flightType),
+      origen: origen,
+      destino: destino,
+      origenHotel: '',
+    };
 
     const fromDate = new NgbDate(
-      moment(respVuelos.departureDate,"DD/MM/YYYY").year(),
-      moment(respVuelos.departureDate,"DD/MM/YYYY").month() + 1,
-      moment(respVuelos.departureDate,"DD/MM/YYYY").date(),
-    )
+      moment(respVuelos.departureDate, 'DD/MM/YYYY').year(),
+      moment(respVuelos.departureDate, 'DD/MM/YYYY').month() + 1,
+      moment(respVuelos.departureDate, 'DD/MM/YYYY').date()
+    );
     const toDate = new NgbDate(
-      moment(respVuelos.arrivalDate,"DD/MM/YYYY").year(),
-      moment(respVuelos.arrivalDate,"DD/MM/YYYY").month() + 1,
-      moment(respVuelos.arrivalDate,"DD/MM/YYYY").date(),
-    )
+      moment(respVuelos.arrivalDate, 'DD/MM/YYYY').year(),
+      moment(respVuelos.arrivalDate, 'DD/MM/YYYY').month() + 1,
+      moment(respVuelos.arrivalDate, 'DD/MM/YYYY').date()
+    );
 
     const pasajeros = {
       adultos: Number(respVuelos.adults),
-      ninos: Number( respVuelos.children),
-      infantes: Number(respVuelos.infants)
-    }
+      ninos: Number(respVuelos.children),
+      infantes: Number(respVuelos.infants),
+    };
 
-    this.vuelosTab =  new SaveModelVuelos(
+    this.vuelosTab = new SaveModelVuelos(
       fromDate,
       toDate,
       formModel,
       pasajeros
-      )
-    
-
+    );
 
     // this.vuelosService.getValue().subscribe(resp=>{
     //   if(!resp){
@@ -156,8 +155,7 @@ export class ResultadosComponent implements OnInit {
 
   async getParams() {
     this.ar.queryParams.subscribe((resp) => {
-
-      const respVuelos: ParamsVuelos = resp as ParamsVuelos
+      const respVuelos: ParamsVuelos = resp as ParamsVuelos;
 
       let {
         arrivalDate,
@@ -442,8 +440,12 @@ export class ResultadosComponent implements OnInit {
     console.log('aplicando filtro');
     console.log(filter);
 
+    let aFlights: IAerolineas[];
+
+    debugger;
+
     if (filter.price.currency == 'soles') {
-      this.flights = this.flightsOri.filter(
+      aFlights = this.flightsOri.filter(
         (x) =>
           x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
             .totalFare *
@@ -455,7 +457,7 @@ export class ResultadosComponent implements OnInit {
             filter.price.max
       );
     } else {
-      this.flights = this.flightsOri.filter(
+      aFlights = this.flightsOri.filter(
         (x) =>
           x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
             .totalFare >= filter.price.min &&
@@ -466,7 +468,7 @@ export class ResultadosComponent implements OnInit {
 
     console.log(this.flights);
 
-    this.flights = this.flights.filter(
+    aFlights = aFlights.filter(
       (x) =>
         Number(x.departure[0].segments[0].flightDuration) >=
           filter.durationExit.min &&
@@ -474,7 +476,7 @@ export class ResultadosComponent implements OnInit {
           filter.durationExit.max
     );
 
-    this.flights = this.flights.filter(
+    aFlights = aFlights.filter(
       (x) =>
         Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) >=
           filter.elapsedExit.min &&
@@ -483,7 +485,7 @@ export class ResultadosComponent implements OnInit {
     );
 
     if (filter.airline.length > 0) {
-      let af: any = this.flights.map((x) => {
+      let af: any = aFlights.map((x) => {
         let df = x.departure[0].segments[0].flightSegments[0]
           ? x.departure[0].segments[0].flightSegments[0].marketingAirline.code
           : '';
@@ -501,11 +503,11 @@ export class ResultadosComponent implements OnInit {
         return null;
       });
 
-      this.flights = af.filter((x: any) => x != null);
+      aFlights = af.filter((x: any) => x != null);
     }
 
     if (filter.equipaje.mano || filter.equipaje.bodega) {
-      let eql: any = this.flights.map((x) => {
+      let eql: any = aFlights.map((x) => {
         if (
           (filter.equipaje.mano &&
             x.departure[0].segments[0].equipaje != undefined &&
@@ -528,12 +530,12 @@ export class ResultadosComponent implements OnInit {
         }
       });
 
-      this.flights = eql.filter((x: any) => x != null);
+      aFlights = eql.filter((x: any) => x != null);
     }
 
     if (filter.escala.directo || filter.escala.uno || filter.escala.mas) {
       console.log(this.flights);
-      let esl: any = this.flights.map((x) => {
+      let esl: any = aFlights.map((x) => {
         if (
           (filter.escala.directo &&
             x.departure[0].segments[0].flightSegments != undefined &&
@@ -562,10 +564,13 @@ export class ResultadosComponent implements OnInit {
 
       console.log(esl);
 
-      this.flights = esl.filter((x: any) => x != null);
+      aFlights = esl.filter((x: any) => x != null);
     }
 
-    this.flights = [...this.flights];
+    this.flights = [...aFlights];
+
+    if (this.orderByActive && this.orderByActive > 0)
+      this.orderBy(this.orderByActive);
 
     // console.log(filter);
     this.loader.closeLoader();

@@ -254,59 +254,62 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   validForm() {
     this.errors = []
+    const letter = new RegExp('^[a-zA-Z ]+$', 'i')
+    const number = new RegExp('^[0-9]+$', 'i')
+    const alphanumeric = new RegExp('^[a-zA-Z0-9 ]+$', 'i')
 
     const typePay: string = this.formShop.getRawValue()['formCard']['select21']
     if (typePay === 'TARJETA') {
       // TC
       let numberCard: string = this.formShop.getRawValue()['formCard']['numberCard']
       if (numberCard === undefined || numberCard === null || numberCard.trim() === '') {
-        this.errors.push({ name: this.MSG_NUMBER_CARD, message: 'Ingresar número de tarjeta' })
+        this.errors.push({ name: this.MSG_NUMBER_CARD, message: 'Ingresa el número de tarjeta' })
       }
 
       let nameCard: string = this.formShop.getRawValue()['formCard']['nameCard']
       if (nameCard === undefined || nameCard === null || nameCard.trim() === '') {
-        this.errors.push({ name: this.MSG_NAME_CARD, message: 'Nombre del titular de tarjeta' })
+        this.errors.push({ name: this.MSG_NAME_CARD, message: 'Ingresa el nombre del titular' })
       }
 
       let expiredCard: string = this.formShop.getRawValue()['formCard']['expiredCard']
       if (expiredCard === undefined || expiredCard === null || expiredCard.trim() === '') {
-        this.errors.push({ name: this.MSG_EXPIRED_CARD, message: 'fecha expiración de tarjeta' })
+        this.errors.push({ name: this.MSG_EXPIRED_CARD, message: 'Campo requerido' })
       }
 
       let ccvCard: string = this.formShop.getRawValue()['formCard']['ccvCard']
       if (ccvCard === undefined || ccvCard === null || ccvCard.trim() === '') {
-        this.errors.push({ name: this.MSG_CCV_CARD, message: 'Código requerido' })
+        this.errors.push({ name: this.MSG_CCV_CARD, message: 'Campo requerido' })
       }
 
       let tipoDoc: string = this.formShop.getRawValue()['formCard']['tipoDoc']
       if (tipoDoc === undefined || tipoDoc === null || tipoDoc.trim() === '') {
-        this.errors.push({ name: this.MSG_TYPE_DOC, message: 'tipo es requerido' })
+        this.errors.push({ name: this.MSG_TYPE_DOC, message: 'Campo requerido' })
       }
 
       let numDoc: string = this.formShop.getRawValue()['formCard']['numDoc']
       if (numDoc === undefined || numDoc === null || numDoc.trim() === '') {
-        this.errors.push({ name: this.MSG_NUM_DOC, message: 'Documento requerido' })
+        this.errors.push({ name: this.MSG_NUM_DOC, message: 'Ingrese su N° de documento' })
       }
 
       let feePay: string = this.formShop.getRawValue()['formCard']['feePay']
       if (feePay === undefined || feePay === null || feePay.trim() === '') {
-        this.errors.push({ name: this.MSG_QUOTE, message: 'Cuotas requerido' })
+        this.errors.push({ name: this.MSG_QUOTE, message: 'Campo requerido' })
       }
 
       let cityCard: string = this.formShop.getRawValue()['formCard']['cityCard']
       if (cityCard === undefined || cityCard === null || cityCard.trim() === '') {
-        this.errors.push({ name: this.MSG_CITY, message: 'Ciudad requerida' })
+        this.errors.push({ name: this.MSG_CITY, message: 'Campo requerido' })
       }
 
       let address: string = this.formShop.getRawValue()['formCard']['address']
       if (address === undefined || address === null || address.trim() === '') {
-        this.errors.push({ name: this.MSG_ADRESS, message: 'Dirección es requerida' })
+        this.errors.push({ name: this.MSG_ADRESS, message: 'Campo requerido' })
       }
     } else {
       // SAFETYPAY
       let bankPay: string = this.formShop.getRawValue()['formCard']['bankPay']
       if (bankPay === undefined || bankPay === null || bankPay.trim() === '') {
-        this.errors.push({ name: this.MSG_BANK, message: 'Elija el banco' })
+        this.errors.push({ name: this.MSG_BANK, message: 'Campo requerido' })
       }
     }
 
@@ -314,49 +317,49 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     for (let x = 0; x < this.formShop.getRawValue()['customers'].length; x++) {
       let nameCustomer: string = this.formShop.getRawValue()['customers'][x]['nameCustomer']
       if (nameCustomer === undefined || nameCustomer === null || nameCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_NAME_CUSTOMER, message: 'Nombre del pasajero es requerido' })
+        this.errors.push({ indice: x, name: this.MSG_NAME_CUSTOMER, message: 'Ingresa el nombre del pasajero' })
       }
 
       let lastNameCustomer: string = this.formShop.getRawValue()['customers'][x]['lastNameCustomer']
       if (lastNameCustomer === undefined || lastNameCustomer === null || lastNameCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_LAST_NAME_CUSTOMER, message: 'Apellido del pasajero es requerido' })
+        this.errors.push({ indice: x, name: this.MSG_LAST_NAME_CUSTOMER, message: 'Ingresa el apellido del pasajero' })
       }
 
 
       let dayCustomer: string = this.formShop.getRawValue()['customers'][x]['dayCustomer']
       if (dayCustomer === undefined || dayCustomer === null || dayCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'Dia de la fecha nacimiento del pasajero es requerido' })
+        this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'Ingresa día' })
       }
 
       let monthCustomer: string = this.formShop.getRawValue()['customers'][x]['monthCustomer']
       if (monthCustomer === undefined || monthCustomer === null || monthCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_MONTH_CUSTOMER, message: 'Mes de la fecha nacimiento del pasajero es requerido' })
+        this.errors.push({ indice: x, name: this.MSG_MONTH_CUSTOMER, message: 'Ingresa mes' })
       }
 
       let yearCustomer: string = this.formShop.getRawValue()['customers'][x]['yearCustomer']
       if (yearCustomer === undefined || yearCustomer === null || yearCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_YEAR_CUSTOMER, message: 'Año de la fecha nacimiento del pasajero es requerido' })
+        this.errors.push({ indice: x, name: this.MSG_YEAR_CUSTOMER, message: 'Ingresa año' })
       }
 
       let nationalityCustomer: string = this.formShop.getRawValue()['customers'][x]['nationalityCustomer']
       if (nationalityCustomer === undefined || nationalityCustomer === null || nationalityCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_NATIONALITY_CUSTOMER, message: 'Nacionalidad del pasajero es requerido' })
+        this.errors.push({ indice: x, name: this.MSG_NATIONALITY_CUSTOMER, message: 'Campo requerido' })
       }
 
       let typeDocCustomer: string = this.formShop.getRawValue()['customers'][x]['typeDocCustomer']
       if (typeDocCustomer === undefined || typeDocCustomer === null || typeDocCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_TYPE_DOC_CUSTOMER, message: 'Tipo de documento del pasajero es requerido' })
+        this.errors.push({ indice: x, name: this.MSG_TYPE_DOC_CUSTOMER, message: 'Campo requerido' })
       }
 
       let numDocCustomer: string = this.formShop.getRawValue()['customers'][x]['numDocCustomer']
       if (numDocCustomer === undefined || numDocCustomer === null || numDocCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_NUM_DOC_CUSTOMER, message: 'Tipo de documento del pasajero es requerido' })
+        this.errors.push({ indice: x, name: this.MSG_NUM_DOC_CUSTOMER, message: 'Ingresa tu número de documento' })
       }
 
-      let sexCustomer: string = this.formShop.getRawValue()['customers'][x]['sexCustomer']
-      if (sexCustomer === undefined || sexCustomer === null) {
-        this.errors.push({ indice: x, name: this.MSG_SEX, message: 'Elegir un sexo' })
-      }
+      // let sexCustomer: string = this.formShop.getRawValue()['customers'][x]['sexCustomer']
+      // if (sexCustomer === undefined || sexCustomer === null) {
+      //   this.errors.push({ indice: x, name: this.MSG_SEX, message: 'Elegir un sexo' })
+      // }
     }
     //FORM PASAJERO
 
@@ -378,14 +381,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     let mailConfirmContacto: string = this.formShop.getRawValue()['formContact']['mailConfirmContacto']
     if (mailConfirmContacto === undefined || mailConfirmContacto === null || mailConfirmContacto.trim() === '') {
       this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Confirmación es requerida' })
-    }
-    if (mailConfirmContacto.toUpperCase() !== mailContacto.toUpperCase()) {
+    } else if (mailConfirmContacto.toUpperCase() !== mailContacto.toUpperCase()) {
       this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Email no coincide' })
     }
 
     let typePhone0: string = this.formShop.getRawValue()['formContact']['typePhone0']
     if (typePhone0 === undefined || typePhone0 === null || typePhone0.trim() === '') {
-      this.errors.push({ name: this.MSG_TYPEPHONE_CONTACT, message: 'Tipo de teléfono es requerido' })
+      this.errors.push({ name: this.MSG_TYPEPHONE_CONTACT, message: 'Campo requerido' })
     }
     let code0: string = this.formShop.getRawValue()['formContact']['code0']
     if (code0 === undefined || code0 === null || code0.trim() === '') {
@@ -395,7 +397,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (numberPhone0 === undefined || numberPhone0 === null || numberPhone0.trim() === '') {
       this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'Teléfono es requerido' })
     }
-    if (!this.validNumber(numberPhone0)) {
+    if (!number.test(numberPhone0)) {
       this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'solo números' })
     }
 
@@ -421,9 +423,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
 
-  validNumber(inputText: any): boolean {
-    return new RegExp(/^[0-9]+$/).test(inputText)
-  }
+  // validNumber(inputText: any): boolean {
+  //   return new RegExp(/^[0-9]+$/).test(inputText)
+  // }
 
   toFactura(e: any) {
     let chk = e.target.checked
@@ -452,7 +454,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }),
       formContact: new FormGroup({
         chkCustomer: new FormControl(),
-        nameContacto: new FormControl('', Validators.pattern("^[a-zA-Z ]+$")),
+        nameContacto: new FormControl(),
         lastnameContacto: new FormControl(),
         mailContacto: new FormControl(),
         mailConfirmContacto: new FormControl(),
@@ -578,6 +580,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   shopEnd() {
     // console.log(this.validForm());
     console.log(this.errors);
+    // let varrr = this.formShop.controls['formContact'].controls['nameContacto'].errors.pattern
     console.log(this.formShop.getRawValue());
     // console.log(this.formShop.getRawValue()['formContact']['numberPhone0']);
     console.log(this.safe0Json['reservaVuelos'])
