@@ -128,7 +128,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   coverage: any
   reservation: any
   dataShop: any
-  @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>;
+
+  @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>
+
+  @ViewChild('nameContactForm', { static: false }) inputNameContactForm!: ElementRef<HTMLInputElement>
+  @ViewChild('lastNameContactForm', { static: false }) inputLastNameContactForm!: ElementRef<HTMLInputElement>
+nombre: string
+apellido: string
   constructor(
     public route: Router,
     private router: ActivatedRoute,
@@ -170,6 +176,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.mobile = false
     }
     this.current = this.route.getCurrentNavigation()!.extras.state as any
+    if(!this.current){
+      this.route.navigate(['/home'])
+    }
     this.selectedPay = (this.current['filter'] === 'filter') ? 'tarjeta' : 'safetypay'
     if (this.current['filter'] === 'filter') {
       this.metodoPago = [
@@ -242,11 +251,31 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   toCustomer(e: any) {
-    console.log(e.target.checked);
+    let chk = e.target.checked
+    
+    let customerName = this.formShop.getRawValue()['customers'][0]['nameCustomer']
+    let customerLastName = this.formShop.getRawValue()['customers'][0]['lastNameCustomer']
+
+    let customerName2 = this.formShop.getRawValue()['formContact']['nameContacto']
+    let customerLastName2 = this.formShop.getRawValue()['formContact']['lastnameContacto']
+
+    let name = this.inputNameContactForm.nativeElement.value
+    let lastname = this.inputLastNameContactForm.nativeElement.value
+
+    if(chk){
+      this.inputNameContactForm.nativeElement.value = customerName
+      this.inputLastNameContactForm.nativeElement.value = customerLastName
+      
+      this.inputNameContactForm.nativeElement.focus()
+  
+    } else {
+      this.inputNameContactForm.nativeElement.value = ''
+      this.inputLastNameContactForm.nativeElement.value = ''
+    }
   }
 
   selectYear() {
-    for (let i = 1950; i < 2021; i++) {
+    for (let i = 1950; i < 2022; i++) {
       let year = String(i)
       this.listYears.push(year)
     }
@@ -257,6 +286,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     const letter = new RegExp('^[a-zA-Z ]+$', 'i')
     const number = new RegExp('^[0-9]+$', 'i')
     const alphanumeric = new RegExp('^[a-zA-Z0-9 ]+$', 'i')
+    const email = new RegExp('^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$', 'i')
 
     const typePay: string = this.formShop.getRawValue()['formCard']['select21']
     if (typePay === 'TARJETA') {
@@ -280,6 +310,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       if (ccvCard === undefined || ccvCard === null || ccvCard.trim() === '') {
         this.errors.push({ name: this.MSG_CCV_CARD, message: 'Campo requerido' })
       }
+      if (!number.test(ccvCard)) {
+        this.errors.push({ name: this.MSG_CCV_CARD, message: 'solo números' })
+      }
 
       let tipoDoc: string = this.formShop.getRawValue()['formCard']['tipoDoc']
       if (tipoDoc === undefined || tipoDoc === null || tipoDoc.trim() === '') {
@@ -289,6 +322,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       let numDoc: string = this.formShop.getRawValue()['formCard']['numDoc']
       if (numDoc === undefined || numDoc === null || numDoc.trim() === '') {
         this.errors.push({ name: this.MSG_NUM_DOC, message: 'Ingrese su N° de documento' })
+      }
+      if (!number.test(numDoc)) {
+        this.errors.push({ name: this.MSG_NUM_DOC, message: 'solo números' })
       }
 
       let feePay: string = this.formShop.getRawValue()['formCard']['feePay']
@@ -330,6 +366,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       if (dayCustomer === undefined || dayCustomer === null || dayCustomer.trim() === '') {
         this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'Ingresa día' })
       }
+      if (!number.test(dayCustomer)) {
+        this.errors.push({ name: this.MSG_DAY_CUSTOMER, message: 'solo números' })
+      }
 
       let monthCustomer: string = this.formShop.getRawValue()['customers'][x]['monthCustomer']
       if (monthCustomer === undefined || monthCustomer === null || monthCustomer.trim() === '') {
@@ -354,6 +393,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       let numDocCustomer: string = this.formShop.getRawValue()['customers'][x]['numDocCustomer']
       if (numDocCustomer === undefined || numDocCustomer === null || numDocCustomer.trim() === '') {
         this.errors.push({ indice: x, name: this.MSG_NUM_DOC_CUSTOMER, message: 'Ingresa tu número de documento' })
+      }
+      if (!number.test(numDocCustomer)) {
+        this.errors.push({ name: this.MSG_NUM_DOC_CUSTOMER, message: 'solo números' })
       }
 
       // let sexCustomer: string = this.formShop.getRawValue()['customers'][x]['sexCustomer']
@@ -454,8 +496,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }),
       formContact: new FormGroup({
         chkCustomer: new FormControl(),
-        nameContacto: new FormControl(),
-        lastnameContacto: new FormControl(),
+        nameContacto: new FormControl(this.nombre),
+        lastnameContacto: new FormControl(this.apellido),
         mailContacto: new FormControl(),
         mailConfirmContacto: new FormControl(),
         typePhone0: new FormControl(),
@@ -610,7 +652,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   otherPlan() {
     localStorage.removeItem('safe0')
-    this.route.navigateByUrl('/home/vuelos/resultados')
+    this.route.navigateByUrl('/home/seguros/slide')
   }
 
 
@@ -833,7 +875,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         name: this.dataShop.formContact.nameContacto,
         lastName: this.dataShop.formContact.lastnameContacto,
         email: this.dataShop.formContact.mailContacto,
-        address: (this.dataShop.formContact.recibo === undefined) ? this.dataShop.formContact.recibo[0].direccion : this.dataShop.formCard.address,
+        // address: (this.dataShop.formContact.recibo === undefined) ? this.dataShop.formContact.recibo[0].direccion : this.dataShop.formCard.address,
+        address: (this.dataShop.formContact.recibo === undefined) ? this.dataShop.formContact.recibo[0].direccion : 'LIMA',
         phones: [
           {
             phoneNumber: this.dataShop.formContact.numberPhone0

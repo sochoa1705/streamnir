@@ -216,7 +216,8 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
 
       //console.log(this.fromDate);
       let form = this.form.value
-      console.log(form);
+      localStorage.removeItem('Datasafe')
+      console.log(form)
       localStorage.setItem('Datasafe', JSON.stringify(form));
       console.log('Enviado-Plan');
       // console.log(this.destino.nativeElement.value);
@@ -230,7 +231,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       // window.location.href="#/home/seguros/planes"
       // this.route.navigateByUrl('/home/comprar', { skipLocationChange: true });
       // this.route.navigate(["/home/seguros/planes"]);
-      this.route.navigateByUrl('/home', { skipLocationChange: true }).then(() =>
+      this.route.navigateByUrl('/home/seguros', { skipLocationChange: true }).then(() =>
         this.route.navigate(["/home/seguros/planes"]));
     }
   }

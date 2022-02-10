@@ -835,3 +835,9 @@ input.readonly {
         outline: 0;
     }
 }
+a{
+    cursor:pointer;
+    &:hover{
+        color: red
+    }
+}
