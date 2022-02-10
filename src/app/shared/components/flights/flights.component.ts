@@ -187,8 +187,9 @@ export class FlightsComponent {
   }
 
   shop(vuelo: string) {
+    localStorage.removeItem('Datasafe')
     let flight = { ...this.json, ...{ departure: this.segmentoDeparture, return: this.segmentoReturn, idGroup: vuelo }, ...{reservaVuelos: true} }
-    localStorage.setItem('safe0', JSON.stringify(flight));
+    localStorage.setItem('safe0', JSON.stringify(flight))
 
 
     const ida = this.selectVuelo(this.segmentoDepartureObj, true);
