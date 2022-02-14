@@ -114,7 +114,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   detalleVuelos: ClassDetalleLocalSt;
 
-  modalDetalle: ClassDetalleModalSegment;
+  modalDetalle: ClassDetalleModalSegment | null;
 
   resevaVuelo: any
   shopData: any
