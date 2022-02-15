@@ -5996,6 +5996,45 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
         }
     }
+    .mat-tab-label {
+        min-width: auto !important;
+    }
+    .boxTab {
+        .rowBoxTab {
+            &:first-child {
+                display: flex;
+                width: 100%;
+            }
+            .mat-tab-body-active {
+                width: 90%;
+            }
+            .mat-form-field-infix {
+                width: 110px !important;
+            }
+            .mat-form-field-wrapper {
+                padding-bottom: 0;
+            }
+            .padRight {
+                padding-right: 10px;
+            }
+            .customers {
+                width: 90px;
+                padding-top: 18px;
+            }
+            .boxFlotante {
+                right: 0;
+            }
+            .colBoxtab {
+                padding: 0 0 10px 0;
+            }
+            .ignore-template {
+                display: flex;
+                .colBoxtab {
+                    width: 50%;
+                }
+            }
+        }
+    }
 }
 
 .portadaAero {
