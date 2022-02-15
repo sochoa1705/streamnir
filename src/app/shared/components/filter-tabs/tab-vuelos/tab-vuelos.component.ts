@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
@@ -172,8 +172,7 @@ export class TabVuelosComponent implements OnInit{
 
   openSnackBar(message: string, action: string = "Error") {
     this._snackBar.open(message, "", {
-      duration: 2000,
-      panelClass: ['mat-toolbar', 'mat-warn']
+      duration: 10000,
     });
   }
 
@@ -181,8 +180,8 @@ export class TabVuelosComponent implements OnInit{
     this.form = new FormGroup({
       clase: new FormControl(EnumCabins.economico),
       viajes: new FormControl(EnumFlightType.ida_vuelta),
-      origen: new FormControl(),
-      destino: new FormControl(''),
+      origen: new FormControl('', Validators.required),
+      destino: new FormControl('', Validators.required),
       origenHotel: new FormControl('')
 
     });
@@ -192,11 +191,37 @@ export class TabVuelosComponent implements OnInit{
     this.router.navigateByUrl(url);
   }
 
+  validateTab(){
+    const errors = [];
+
+    if(!this.isValidate()){
+      errors.push("Error al definir los pasajeros, debe agregar al menos uno");
+    }
+    if(this.form.controls['origen'].invalid){
+      errors.push("El origen es requerido");
+    }
+    if(this.form.controls['destino'].invalid){
+      errors.push("El destino es requerido");
+    }
+    if(!this.toDate){
+      errors.push("La fecha de inicio es requerido");
+    }
+    if(!this.fromDate){
+      errors.push("La fecha final es requerido");
+    }
+
+    return errors;
+
+  }
+
+
 
   public searchVueloHotel() {
-    if (!this.isValidate()) {
-      this.openSnackBar("Error de validacion")
-      return;
+    const errors = this.validateTab();
+
+    if (errors.length > 0) {
+      this.openSnackBar(errors.join(" - "))
+      return; 
     }
 
     const url = this.getUrl();

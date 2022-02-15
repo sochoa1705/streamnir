@@ -7,6 +7,7 @@ import 'moment-precise-range-plugin';
 import * as moment from 'moment';
 import { FareBreakPipe } from './pipes/fare-break-downs.pipe';
 import { removeTimeZonePart } from '../../utils';
+import { MatSnackBar } from '@angular/material/snack-bar';
 moment.locale('es')
 
 @Component({
@@ -55,7 +56,7 @@ export class FlightsComponent {
 
 
 
-  constructor(public route: Router, private fareBreakPipe: FareBreakPipe) { }
+  constructor(public route: Router, private fareBreakPipe: FareBreakPipe,private _snackBar: MatSnackBar) { }
 
   calculateTimeWait(durationTime: moment.PreciseRangeValueObject): string {
     let tiempo_espera: string;
@@ -73,6 +74,13 @@ export class FlightsComponent {
     }
 
     return tiempo_espera;
+  }
+
+
+  openSnackBar(message: string, action: string = "Error") {
+    this._snackBar.open(message, "", {
+      duration: 2000
+    });
   }
 
 
@@ -186,19 +194,47 @@ export class FlightsComponent {
     return pricingInf;
   }
 
+  validateSegment(){
+    console.log(this.vueloEscogidoVuelta);
+    const errors = [];
+    if(!this.vueloEscogidoIda){
+      errors.push("Debe seleccionarse un vuelo de ida")
+    }if(this.vueloEscogidoIda?.returns && !this.vueloEscogidoVuelta){
+      errors.push("Debe seleccionarse un vuelo de regreso")
+    }if(this.vueloEscogidoIda?.returns && (this.vueloEscogidoIda?.id != this.vueloEscogidoVuelta?.id)){
+      errors.push("Los vuelos escogidos deben ser del mismo grupo")
+    }
+    return errors;
+  }
+
   shop(vuelo: string) {
+
+
+    const errors = this.validateSegment();
+
+    if(errors.length > 0){
+      this.openSnackBar(errors.join(' - '))
+      return ;
+    }
+
     localStorage.removeItem('Datasafe')
     let flight = { ...this.json, ...{ departure: this.segmentoDeparture, return: this.segmentoReturn, idGroup: vuelo }, ...{reservaVuelos: true} }
     localStorage.setItem('safe0', JSON.stringify(flight))
 
 
     const ida = this.selectVuelo(this.segmentoDepartureObj, true);
-    const vuelta = this.selectVuelo(this.segmentoReturnObj, false);
+
+    let vuelta = null
+
+    if(this.vueloEscogidoIda?.returns){
+      vuelta = this.selectVuelo(this.segmentoReturnObj, false);
+    }
+
 
 
     const pricingInf = this.calculePrincing();
 
-    const detalleVuelo = new ClassDetalleLocalSt(ida, vuelta, pricingInf);
+    const detalleVuelo = new ClassDetalleLocalSt(ida, vuelta , pricingInf);
 
     localStorage.setItem('detalleVuelo', JSON.stringify(detalleVuelo));
 
@@ -210,11 +246,11 @@ export class FlightsComponent {
     if (segmento === 'return') {
       this.segmentoReturn = e.value;
       this.segmentoReturnObj = segment;
-      this.vueloEscogidoIda = vuelo;
+      this.vueloEscogidoVuelta = vuelo;
     } else {
       this.segmentoDeparture = e.value;
       this.segmentoDepartureObj = segment;
-      this.vueloEscogidoVuelta = vuelo;
+      this.vueloEscogidoIda = vuelo;
     }
 
   }
