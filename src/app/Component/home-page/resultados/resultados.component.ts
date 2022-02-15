@@ -19,7 +19,7 @@ import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { IVuelos } from '../vuelos/commons/components/flight/flight.models';
 import { ResultadosPaginacion } from './models/resultados.class';
 import { ENUM_ORDER_BY } from './models/resultados.enum';
-import { IAerolineas, ParamsVuelos } from './models/resultados.interfaces';
+import { IAerolineas, ParamsVuelos, Returns } from './models/resultados.interfaces';
 import { FareBreakPipe } from './pipes/fare-break-downs.pipe';
 import { ResultadosService } from './services/resultados.service';
 import { toUp } from 'src/app/shared/utils';
@@ -93,20 +93,19 @@ export class ResultadosComponent implements OnInit {
     this.getParams();
   }
 
-  vuelosLogicInit(respVuelos: ParamsVuelos) {
-    const obj = this.flights[0].departure[0];
+  vuelosLogicInit(respVuelos: ParamsVuelos, obj:Returns | null) {
 
     const origen: ICardAutocomplete = {
-      id: obj.originCity.code,
-      codigo: obj.originCity.code,
-      title: obj.originCity.name,
+      id: obj?.originCity?.code || respVuelos.departure ,
+      codigo: obj?.originCity.code || respVuelos.departure,
+      title: obj?.originCity.name || respVuelos.departure,
       children: [],
     };
 
     const destino: ICardAutocomplete = {
-      id: obj.destinationCity.code,
-      codigo: obj.destinationCity.code,
-      title: obj.destinationCity.name,
+      id: obj?.destinationCity.code ||  respVuelos.destination,
+      codigo: obj?.destinationCity.code || respVuelos.destination,
+      title: obj?.destinationCity.name  || respVuelos.destination,
       children: [],
     };
 
@@ -153,6 +152,7 @@ export class ResultadosComponent implements OnInit {
     // })
   }
 
+
   async getParams() {
     this.ar.queryParams.subscribe((resp) => {
       const respVuelos: ParamsVuelos = resp as ParamsVuelos;
@@ -168,6 +168,8 @@ export class ResultadosComponent implements OnInit {
         children,
         flightType,
       } = resp as ParamsVuelos;
+
+      this.vuelosLogicInit(respVuelos,null)
 
       this.loader.showText('Cargando los vuelos');
       this.loader.showLoader();
@@ -281,12 +283,18 @@ export class ResultadosComponent implements OnInit {
 
           this.exchangeRate = resp.exchangeRate;
 
-          this.vuelosLogicInit(respVuelos);
+          if(this.flights.length == 0){
+            throw new Error('No hay vuelos disponibles');
+          }
+      
+          const obj = this.flights[0].departure[0];
+
+          this.vuelosLogicInit(respVuelos, obj);
 
           this.loader.closeLoader();
         })
         .catch((err: HttpErrorResponse) => {
-          console.log(err);
+          console.error(err);
 
           this.error = {
             isError: true,

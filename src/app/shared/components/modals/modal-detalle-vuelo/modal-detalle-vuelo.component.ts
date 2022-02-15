@@ -8,7 +8,7 @@ import { ClassDetalleModalSegment } from '../../flights/models/flights.class';
 })
 export class ModalDetalleVueloComponent  {
 
-  @Input() modalDetalle:ClassDetalleModalSegment;
+  @Input() modalDetalle:ClassDetalleModalSegment | null;
 
 
   constructor() { }
