@@ -9,7 +9,6 @@
 
     <div class="row">
         <div class="col-12">
-
             <div class="desktop-visible">
                 <div class="sliderOfertas">
                     <div class="btnSteps" (click)="afterBtn()">
@@ -20,14 +19,12 @@
                         </svg>
                     </div>
                     <ng-container *ngFor="let contador of maxCounterArray">
-                        <div *ngIf="aereolineas" class="contentImg" [ngClass]="{active: counter===contador}">
-                            <a *ngFor="let item of aereolineas | porslide:contador:imagenesPorSilder"
-                                (click)="toLine(item)">
+                        <div *ngIf="aereolineas" class="contentSliderImg" [ngClass]="{active: counter===contador}">
+                            <a *ngFor="let item of aereolineas | porslide:contador:imagenesPorSilder" (click)="toLine(item)">
                                 <img [src]="item.Logo" appImgDefault alt="">
                             </a>
                         </div>
                     </ng-container>
-    
                     <div class="btnSteps" (click)="nextBtn()">
                         <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -36,28 +33,27 @@
                         </svg>
                     </div>
                 </div>
-    
-            </div>
- 
 
-                <div class="mobile-visible">
-                    <div class="sliderOfertasCel">
-                        <ng-container *ngFor="let contador of maxCounterArrayMobile">
-                            <div *ngIf="aereolineas" class="contentImg" [ngClass]="{active: counter===contador}">
-                                <a *ngFor="let item of aereolineas | porslide:contador:imagenesPorSilderMobile"
-                                    (click)="toLine(item)">
-                                    <img [src]="item.Logo" appImgDefault alt="">
-                                </a>
-                            </div>
-                        </ng-container>
-                    </div>
-            
-                    <div class="pages-cont">
-                        <ng-container *ngFor="let b of maxCounterArrayMobile; let indice = index">
-                            <button type="button" (click)="counter=b" [ngClass]="{active: counter===b}"></button>
-                        </ng-container>
-                    </div>
+            </div>
+
+
+            <div class="mobile-visible">
+                <div class="sliderOfertasCel">
+                    <ng-container *ngFor="let contador of maxCounterArrayMobile">
+                        <div *ngIf="aereolineas" class="contentSliderImg" [ngClass]="{active: counter===contador}">
+                            <a *ngFor="let item of aereolineas | porslide:contador:imagenesPorSilderMobile" (click)="toLine(item)">
+                                <img [src]="item.Logo" appImgDefault alt="">
+                            </a>
+                        </div>
+                    </ng-container>
                 </div>
+
+                <div class="pages-cont">
+                    <ng-container *ngFor="let b of maxCounterArrayMobile; let indice = index">
+                        <button type="button" (click)="counter=b" [ngClass]="{active: counter===b}"></button>
+                    </ng-container>
+                </div>
+            </div>
         </div>
     </div>
 </section>

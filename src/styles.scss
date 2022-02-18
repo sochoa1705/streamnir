@@ -983,20 +983,18 @@ section {
 
 /* STYLE PERFIL  */
 
-.mat-tab-body-content{
-    overflow: hidden!important;    
+.mat-tab-body-content {
+    overflow: hidden!important;
 }
 
-
-.mat-tab-body{
-    &-active{
-        overflow: visible!important;    
-        .mat-tab-body-content{
-            overflow: visible!important;    
+.mat-tab-body {
+    &-active {
+        overflow: visible!important;
+        .mat-tab-body-content {
+            overflow: visible!important;
         }
-    }    
+    }
 }
-
 
 .box-container {
     width: 100%;
@@ -3707,42 +3705,42 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
         .fullWidht {
             width: 100%;
+            height: 40px;
         }
         .colBoxtab {
             display: flex;
             flex: 1 1 auto;
             padding: 10px 0;
-            &.w-30{
+            &.w-30 {
                 width: 30%;
                 @media (max-width: 768px) {
                     width: 100%
                 }
             }
-            &.w-10{
+            &.w-10 {
                 width: 10%;
                 @media (max-width: 768px) {
                     width: 100%
                 }
             }
-            &.w-15{
+            &.w-15 {
                 width: 15%;
                 @media (max-width: 768px) {
                     width: 100%;
                 }
             }
-            .d{
-                &-left{
+            .d {
+                &-left {
                     border-radius: 3px 0 0 3px;
                     border: 0.5px solid #E4E5E7;
                     border-right: 0px;
                 }
-                &-right{
-                    border-radius:0 3px 3px 0;
-                    border: 0.5px solid #E4E5E7;    
+                &-right {
+                    border-radius: 0 3px 3px 0;
+                    border: 0.5px solid #E4E5E7;
                 }
             }
-
-            @include desktop { 
+            @include desktop {
                 padding: 0;
             }
             //position: relative;
@@ -4819,7 +4817,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         border: 1px solid #DF0C30;
         cursor: pointer;
     }
-    .contentImg {
+    .contentSliderImg {
         transition: opacity 1s ease-out;
         opacity: 0;
         width: 0;
@@ -4897,7 +4895,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .btnSteps {
             display: none;
         }
-        .contentImg {
+        .contentSliderImg {
             display: none;
             overflow: hidden;
             gap: 15px;
@@ -5998,6 +5996,45 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
         }
     }
+    .mat-tab-label {
+        min-width: auto !important;
+    }
+    .boxTab {
+        .rowBoxTab {
+            &:first-child {
+                display: flex;
+                width: 100%;
+            }
+            .mat-tab-body-active {
+                width: 90%;
+            }
+            .mat-form-field-infix {
+                width: 110px !important;
+            }
+            .mat-form-field-wrapper {
+                padding-bottom: 0;
+            }
+            .padRight {
+                padding-right: 10px;
+            }
+            .customers {
+                width: 90px;
+                padding-top: 18px;
+            }
+            .boxFlotante {
+                right: 0;
+            }
+            .colBoxtab {
+                padding: 0 0 10px 0;
+            }
+            .ignore-template {
+                display: flex;
+                .colBoxtab {
+                    width: 50%;
+                }
+            }
+        }
+    }
 }
 
 .portadaAero {
@@ -6220,7 +6257,7 @@ input.inputIzq {
     max-width: 0 !important;
     width: 0 !important;
     position: absolute;
-    right: 58%;
+    //right: 58%;
 }
 
 .margin-filter {
@@ -6406,6 +6443,7 @@ $icon-size-mobile: 28px;
         }
     }
 }
+
 button.customers {
     position: relative;
     width: 160px;
@@ -6423,8 +6461,8 @@ button.customers {
     @media (max-width: 768px) {
         font-size: 10px;
     }
-    &:before{
-        content:  url(./assets/arrow.svg);
+    &:before {
+        content: url(./assets/arrow.svg);
         right: 0;
         position: absolute
     }
@@ -6436,14 +6474,298 @@ button.customers {
     right: 15px;
     opacity: 0;
     transition: all .2s ease-in-out;
-   }
-   .show-scrollTop {
+}
+
+.show-scrollTop {
     opacity: 1;
     transition: all .2s ease-in-out;
     border-radius: 50%;
     background-color: hotpink;
+}
 
-   }
+#ModalSesion {
+    .mat-tab-label {
+        width: 50%;
+    }
+    .modal-header {
+        p {
+            font-size: 14px;
+        }
+    }
+    .modal-dialog {
+        width: 490px;
+    }
+    .modal-body {
+        .elementRow {
+            display: flex;
+            position: relative;
+            &.error {
+                flex-direction: column;
+                .form-control {
+                    margin-bottom: 0px !important;
+                    border: 0.5px solid #F44336;
+                }
+                .msgError {
+                    display: flex;
+                }
+            }
+            .msgError {
+                display: none;
+                margin-left: 15px;
+                font-family: Montserrat;
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 18px;
+                letter-spacing: 0.25px;
+                color: #F44336;
+                margin-bottom: 10px;
+            }
+            .form-control {
+                margin-bottom: 20px;
+                font-family: Montserrat;
+                font-size: 14px;
+                text-transform: capitalize;
+                color: #B9BCBF;
+                border-radius: 5px;
+                height: 47px;
+                border: 1px solid #ced4da;
+            }
+            .iconPass {
+                position: absolute;
+                right: 25px;
+                top: 10px;
+            }
+        }
+        .subRayado {
+            text-decoration: underline;
+        }
+        .mat-ink-bar {
+            height: 3px;
+        }
+        hr {
+            border: 1px solid #E4E5E7;
+        }
+        .textConecta {
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+        }
+        .socialMedia {
+            display: flex;
+            gap: 20px;
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.15px;
+            color: #FFFFFF;
+            .btnFacebook,
+            .btnGoogle {
+                width: calc(50% - 10px);
+                height: 47px;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                img {
+                    min-width: 25.19px;
+                    min-height: 25.19px;
+                    max-width: 25.19px;
+                    max-height: 25.19px;
+                    margin-right: 12px;
+                }
+            }
+            .btnFacebook {
+                background: #4267B2;
+            }
+            .btnGoogle {
+                background: #518EF8;
+            }
+        }
+    }
+    .modal-footer {
+        padding: 0rem 2rem 0rem 2rem;
+        margin: 0 0 18px 0;
+        border-top: none;
+        button {
+            background: #DF0C30;
+            border-radius: 5px;
+            margin: 0 0 18px 0;
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 27px;
+            text-align: center;
+            letter-spacing: 0.18px;
+            color: #FFFFFF;
+        }
+        .account {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            gap: 10px;
+            .notRegister {
+                font-family: Montserrat;
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 18px;
+                letter-spacing: 0.25px;
+                color: #4B4B4B;
+            }
+            .newAccount {
+                cursor: pointer;
+                font-family: Montserrat;
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 21px;
+                letter-spacing: 0.1px;
+                color: #009AED;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+#ModalRecovery,
+#ModalNewAccount {
+    .modal-dialog {
+        width: 918px;
+        max-width: 918px;
+        .modal-content {
+            flex-direction: row;
+            border: none;
+            .recoveryLeft {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                width: 419px;
+                height: 363px;
+                background: url('./assets/modal/bg-recovery.png');
+                .titleRecovery {
+                    font-family: Montserrat;
+                    font-weight: bold;
+                    font-size: 12px;
+                    line-height: 18px;
+                    text-align: center;
+                    letter-spacing: 0.1px;
+                    color: #FFFFFF;
+                    text-align: center;
+                    margin-top: 40px;
+                    padding-bottom: 13px;
+                }
+                img {
+                    width: 127.02px;
+                }
+            }
+            .recoveryRight {
+                flex: 1 1 auto;
+                padding: 0 30px;
+                position: relative;
+                .btn-close {
+                    position: absolute;
+                    right: 20px;
+                    top: 20px;
+                    font-size: 12px;
+                }
+                .titleRecovery {
+                    font-family: Open Sans;
+                    font-weight: bold;
+                    font-size: 24px;
+                    line-height: 36px;
+                    text-align: center;
+                    color: #4B4B4B;
+                    margin: 40px 0 25px 0;
+                }
+                .elementRow {
+                    display: flex;
+                    margin-bottom: 0;
+                    &.error {
+                        flex-direction: column;
+                        .form-control {
+                            margin-bottom: 0px !important;
+                            border: 0.5px solid #F44336;
+                        }
+                        .msgError {
+                            display: flex;
+                        }
+                    }
+                    .msgError {
+                        display: none;
+                        margin-left: 15px;
+                        font-family: Montserrat;
+                        font-weight: 300;
+                        font-size: 12px;
+                        line-height: 18px;
+                        letter-spacing: 0.25px;
+                        color: #F44336;
+                        margin-bottom: 10px;
+                    }
+                    .form-control {
+                        margin-bottom: 20px;
+                        font-family: Montserrat;
+                        font-size: 14px;
+                        text-transform: capitalize;
+                        color: #B9BCBF;
+                        border-radius: 5px;
+                        height: 41px;
+                        border: 1px solid #ced4da;
+                    }
+                }
+                button {
+                    margin-bottom: 20px;
+                    font-family: Open Sans;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 21px;
+                    letter-spacing: 0.15px;
+                    border-radius: 5px;
+                }
+                .account {
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    gap: 10px;
+                    .notRegister {
+                        font-family: Montserrat;
+                        font-weight: 300;
+                        font-size: 12px;
+                        line-height: 18px;
+                        letter-spacing: 0.25px;
+                        color: #4B4B4B;
+                    }
+                    .newAccount {
+                        cursor: pointer;
+                        font-family: Montserrat;
+                        font-weight: 600;
+                        font-size: 12px;
+                        line-height: 21px;
+                        letter-spacing: 0.1px;
+                        color: #009AED;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#ModalRecovery {
+    .modal-dialog {
+        .modal-content {
+            .recoveryRight {
+                .elementRow {
+                    .form-control {
+                        margin-bottom: 55px;
+                    }
+                }
+            }
+        }
+    }
+}
 
 .boxReclamaciones {
     display: flex;
@@ -6722,5 +7044,118 @@ button.customers {
     }
     @media (max-width: 640px) {
         flex-direction: column;
+    }
+}
+#ModalNewAccount {
+    .modal-dialog {
+        .modal-content {
+            .recoveryLeft {
+                height: 637px;
+                background: url('./assets/modal/bg-newAccount.png');
+            }
+            .recoveryRight {
+                .titleRecovery {
+                    margin: 10px 0 10px 0;
+                }
+                .mat-tab-header {
+                    margin-bottom: 25px;
+                }
+                .mat-tab-label {
+                    width: 50%;
+                }
+                .mat-ink-bar {
+                    background-color: #df0c30 !important;
+                    height: 3px;
+                }
+                .elementRow {
+                    display: flex;
+                    gap: 15px;
+                    .form-control,
+                    .form-select {
+                        margin-bottom: 20px;
+                        font-family: Montserrat;
+                        font-size: 14px;
+                        text-transform: capitalize;
+                        color: #B9BCBF;
+                        border-radius: 5px;
+                        height: 41px;
+                        border: 1px solid #ced4da;
+                    }
+                    .form-select {
+                        width: calc(100% - 30px);
+                    }
+                }
+                .textPass {
+                    font-family: Montserrat;
+                    font-weight: 300;
+                    font-size: 10px;
+                    line-height: 15px;
+                    letter-spacing: 0.25px;
+                    margin-bottom: 10px;
+                }
+                button {
+                    margin-bottom: 10px;
+                }
+                .textPolitica {
+                    display: block;
+                    font-family: Montserrat;
+                    font-weight: 300;
+                    font-size: 10px;
+                    line-height: 15px;
+                    letter-spacing: 0.25px;
+                    text-align: center;
+                    a {
+                        font-family: Montserrat;
+                        font-weight: 600;
+                        font-size: 10px;
+                        line-height: 21px;
+                        letter-spacing: 0.1px;
+                        font-weight: 600;
+                        color: #009AED;
+                    }
+                }
+                .socialMedia {
+                    display: none;
+                    flex-direction: column;
+                    gap: 11px;
+                    font-family: Open Sans;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 21px;
+                    letter-spacing: 0.15px;
+                    color: #FFFFFF;
+                    margin-bottom: 30px;
+                    &.active {
+                        display: flex;
+                    }
+                    .btnFacebook,
+                    .btnGoogle {
+                        position: relative;
+                        width: 100%;
+                        height: 41px;
+                        border-radius: 5px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        img {
+                            position: absolute;
+                            left: 33px;
+                            min-width: 25.19px;
+                            min-height: 25.19px;
+                            max-width: 25.19px;
+                            max-height: 25.19px;
+                            margin-right: 12px;
+                        }
+                    }
+                    .btnFacebook {
+                        background: #4267B2;
+                    }
+                    .btnGoogle {
+                        background: #518EF8;
+                    }
+                }
+            }
+        }
     }
 }
