@@ -68,7 +68,7 @@ export class ClassDetalleSegment {
 export class ClassDetalleLocalSt {
     constructor(
         public segmentoDeparture:ClassDetalleModalSegment,
-        public segmentoReturn:ClassDetalleModalSegment,
+        public segmentoReturn:ClassDetalleModalSegment | null,
         public pricingInfo:ClassPricingInfoDetalle
     ){}
 }

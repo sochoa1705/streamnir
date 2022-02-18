@@ -114,7 +114,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   detalleVuelos: ClassDetalleLocalSt;
 
-  modalDetalle: ClassDetalleModalSegment;
+  modalDetalle: ClassDetalleModalSegment | null;
 
   resevaVuelo: any
   shopData: any
@@ -219,24 +219,24 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log(this.current);
     this.loadShop();
     //console.log(this.safe0Json.detailPay);
-    this.firstFormGroup = new FormGroup({ //FORMULARIO DE CONTACTO EN MOBILE
-      firstCtrl: new FormControl('', Validators.required),
-      nameContacto: new FormControl('', Validators.required),
-      lastnameContacto: new FormControl('', Validators.required),
-      // AGREGAR
-      // mailContacto: new FormControl(),
-      // mailConfirmContacto: new FormControl(),
-      // typePhone0: new FormControl(),
-      // code0: new FormControl(),
-      // numberPhone0: new FormControl(),
-      // phones: new FormArray([]),
-      // recibo: new FormArray([]),
-      // chkFac: new FormControl()
+    // this.firstFormGroup = new FormGroup({ //FORMULARIO DE CONTACTO EN MOBILE
+    //   firstCtrl: new FormControl('', Validators.required),
+    //   nameContacto: new FormControl('', Validators.required),
+    //   lastnameContacto: new FormControl('', Validators.required),
+    //   // AGREGAR
+    //   // mailContacto: new FormControl(),
+    //   // mailConfirmContacto: new FormControl(),
+    //   // typePhone0: new FormControl(),
+    //   // code0: new FormControl(),
+    //   // numberPhone0: new FormControl(),
+    //   // phones: new FormArray([]),
+    //   // recibo: new FormArray([]),
+    //   // chkFac: new FormControl()
 
-    });
-    this.secondFormGroup = new FormGroup({
-      secondCtrl: new FormControl('idavuelta', Validators.required),
-    });
+    // })
+    // this.secondFormGroup = new FormGroup({
+    //   secondCtrl: new FormControl('idavuelta', Validators.required),
+    // })
 
     this.createForm()
     // this.chkValue('')
