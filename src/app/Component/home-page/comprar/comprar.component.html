@@ -338,15 +338,16 @@
                     </div>
                     <!-- END DETALLE DE TU VIAJE -->
 
-                    <ng-template matStepLabel>Comprar</ng-template>
+                    <ng-template matStepLabel>Reserva</ng-template>
                     <!-- DETALLE DE COBERTURA -->
                     <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
                     <!-- END DETALLE DE COBERTURA -->
                     <div *ngIf="safe0Json.detalleCobertura">
                         <app-coverage></app-coverage>
                     </div>
+
                     <div class="card pasajeros">
-                        <div class="card-header">
+                        <div class="card-header"> 
                             <h2>Información de pasajeros</h2>
                             <span>
                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -358,7 +359,386 @@
                             </span>
                         </div>
                         <!-- PASAJEROS -->
-                        <app-customers></app-customers>
+                        <!-- <app-customers></app-customers> -->
+
+                        <div formArrayName="customers">
+                            <div [formGroupName]="i" *ngFor="let customer of getArrayCustomers(); let i = index" class="ro rowMobileCard">
+                                <div class="card-body card_pasajero">
+                                    <div *ngIf="this.safe0Json['reservaVuelos']; else vuelosTitle">
+                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12.8033 9.69668C11.9864 8.87982 11.0141 8.27511 9.95329 7.90904C11.0895 7.12649 11.8359 5.81684 11.8359 4.33594C11.8359 1.94511 9.89083 0 7.5 0C5.10917 0 3.16406 1.94511 3.16406 4.33594C3.16406 5.81684 3.91052 7.12649 5.04674 7.90904C3.9859 8.27511 3.01359 8.87982 2.19671 9.69668C0.780147 11.1133 0 12.9967 0 15H1.17188C1.17188 11.5107 4.01065 8.67188 7.5 8.67188C10.9893 8.67188 13.8281 11.5107 13.8281 15H15C15 12.9967 14.2199 11.1133 12.8033 9.69668ZM7.5 7.5C5.75534 7.5 4.33594 6.08063 4.33594 4.33594C4.33594 2.59125 5.75534 1.17188 7.5 1.17188C9.24466 1.17188 10.6641 2.59125 10.6641 4.33594C10.6641 6.08063 9.24466 7.5 7.5 7.5Z"
+                                                fill="#009AED" />
+                                        </svg> &nbsp;
+                                        <input class="readonly" readonly formControlName="typeCustomer" type="text">
+                                    </div>
+    
+                                    <ng-template #vuelosTitle>
+                                        <h4 class="d-flex align-items-center card-title">
+                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12.8033 9.69668C11.9864 8.87982 11.0141 8.27511 9.95329 7.90904C11.0895 7.12649 11.8359 5.81684 11.8359 4.33594C11.8359 1.94511 9.89083 0 7.5 0C5.10917 0 3.16406 1.94511 3.16406 4.33594C3.16406 5.81684 3.91052 7.12649 5.04674 7.90904C3.9859 8.27511 3.01359 8.87982 2.19671 9.69668C0.780147 11.1133 0 12.9967 0 15H1.17188C1.17188 11.5107 4.01065 8.67188 7.5 8.67188C10.9893 8.67188 13.8281 11.5107 13.8281 15H15C15 12.9967 14.2199 11.1133 12.8033 9.69668ZM7.5 7.5C5.75534 7.5 4.33594 6.08063 4.33594 4.33594C4.33594 2.59125 5.75534 1.17188 7.5 1.17188C9.24466 1.17188 10.6641 2.59125 10.6641 4.33594C10.6641 6.08063 9.24466 7.5 7.5 7.5Z"
+                                                    fill="#009AED" />
+                                            </svg> &nbsp; Pasajero {{ i + 1 }}
+                                        </h4>
+                                    </ng-template>
+
+                                    <div class="agregarAdultoPas" *ngIf="!(showAdulto === i)" (click)="showDatosPasajero(i)">
+                                        <div class="textAgregar">
+                                            Agrega tus datos {{i}} 
+                                        </div>
+                                        <div>
+                                            <img src="./assets/comprar/flecha-der.png" alt="">
+                                        </div>
+                                    </div>
+    
+                                    <div class="row rowMobileCard hideMobile" [class.activoBox]="showAdulto == i">
+                                        <div class="col-6 viewMobileWidth">
+                                            <label for="names1">Nombres</label>
+                                            <input class="form-control" [ngClass]="getMessage(MSG_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_NAME_CUSTOMER) ? 'isvalid' : ''"
+                                                formControlName="nameCustomer" placeholder="El que figura en el documento de viaje."
+                                                type="text" name="names1">
+                                            <span class="valid" *ngIf="getMessage(MSG_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_NAME_CUSTOMER)">{{ getMessage(MSG_NAME_CUSTOMER) }}</span>
+                                        </div>
+                                        <div class="col-6 viewMobileWidth">
+                                            <label for="lastname1">Apellidos</label>
+                                            <input class="form-control" [ngClass]="getMessage(MSG_LAST_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_LAST_NAME_CUSTOMER) ? 'isvalid' : ''"
+                                                formControlName="lastNameCustomer" placeholder="El que figura en el documento de viaje."
+                                                type="text" name="lastname1">
+                                            <span class="valid" *ngIf="getMessage(MSG_LAST_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_LAST_NAME_CUSTOMER)">{{ getMessage(MSG_LAST_NAME_CUSTOMER) }}</span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="row rowMobileCard hideMobile" [class.activoBox]="showAdulto == i">
+                                        <div class="col-6 viewMobileWidth">
+                                            <label for="names">Fecha de nacimiento</label>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <input class="form-control" [ngClass]="getMessage(MSG_DAY_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_DAY_CUSTOMER) ? 'isvalid' : ''"
+                                                        formControlName="dayCustomer" type="text" name="names">
+                                                    <span class="valid" *ngIf="getMessage(MSG_DAY_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_DAY_CUSTOMER)">{{ getMessage(MSG_DAY_CUSTOMER) }}</span>
+                                                </div>
+                                                <div class="col-4">
+                                                    <select formControlName="monthCustomer" class="form-select-f" [ngClass]="getMessage(MSG_MONTH_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_MONTH_CUSTOMER) ? 'isvalid' : ''">
+                                                        <option disabled>Seleccione</option>
+                                                        <option value="01">Enero</option>
+                                                        <option value="02">Febrero</option>
+                                                        <option value="03">Marzo</option>
+                                                        <option value="04">Abril</option>
+                                                        <option value="05">Mayo</option>
+                                                        <option value="06">Junio</option>
+                                                        <option value="07">Julio</option>
+                                                        <option value="08">Agosto</option>
+                                                        <option value="09">Setiembre</option>
+                                                        <option value="10">Octubre</option>
+                                                        <option value="11">Noviembre</option>
+                                                        <option value="12">Diciembre</option>
+                                                    </select>
+                                                    <span class="valid" *ngIf="getMessage(MSG_MONTH_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_MONTH_CUSTOMER)">{{ getMessage(MSG_MONTH_CUSTOMER) }}</span>
+                                                </div>
+                                                <div class="col-4">
+                                                    <select formControlName="yearCustomer" class="form-select-f" [ngClass]="getMessage(MSG_YEAR_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_YEAR_CUSTOMER) ? 'isvalid' : ''">
+                                                        <option disabled>Seleccione</option>
+                                                        <option *ngFor="let year of listYears" value="{{year}}">{{year}}</option>
+                                                    </select>
+                                                    <span class="valid" *ngIf="getMessage(MSG_YEAR_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_YEAR_CUSTOMER)">{{ getMessage(MSG_YEAR_CUSTOMER) }}</span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 viewMobileWidth">
+                                            <label for="names">Nacionalidad</label>
+                                            <select formControlName="nationalityCustomer" class="form-select-f" [ngClass]="getMessage(MSG_NATIONALITY_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_NATIONALITY_CUSTOMER) ? 'isvalid' : ''">
+                                                <option disabled>Seleccione</option>
+                                                <option value="AF">Afganistan</option>
+                                                <option value="AX">Aland Island</option>
+                                                <option value="AL">Albania</option>
+                                                <option value="DE">Alemania</option>
+                                                <option value="DZ">Algeria</option>
+                                                <option value="DZ">American Samoa</option>
+                                                <option value="AD">Andorra</option>
+                                                <option value="AO">Angola</option>
+                                                <option value="AI">Anguilla</option>
+                                                <option value="AQ">Antartida</option>
+                                                <option value="AG">Antigua and Barbuda</option>
+                                                <option value="AN">Antillas Holandesas</option>
+                                                <option value="SA">Arabia Saudita</option>
+                                                <option value="AR">Argentina</option>
+                                                <option value="AM">Armenia</option>
+                                                <option value="AW">Aruba</option>
+                                                <option value="AC">Ascension Islands</option>
+                                                <option value="AU">Australia</option>
+                                                <option value="AT">Austria</option>
+                                                <option value="AZ">Azerbaijan</option>
+                                                <option value="BS">Bahamas</option>
+                                                <option value="BH">Bahrain</option>
+                                                <option value="BD">Bangladesh</option>
+                                                <option value="BB">Barbados</option>
+                                                <option value="BY">Belarus</option>
+                                                <option value="BE">Belgica</option>
+                                                <option value="BZ">Belize</option>
+                                                <option value="BJ">Benin</option>
+                                                <option value="BM">Bermuda</option>
+                                                <option value="BT">Bhutan</option>
+                                                <option value="BO">Bolivia</option>
+                                                <option value="BA">Bosnia and Herzegovina</option>
+                                                <option value="BW">Botswana</option>
+                                                <option value="BV">Bouvet Island</option>
+                                                <option value="BR">Brasil</option>
+                                                <option value="IO">British Indian Ocean Territory</option>
+                                                <option value="BN">Brunei Darussalam</option>
+                                                <option value="BG">Bulgaria</option>
+                                                <option value="BF">Burkina Faso</option>
+                                                <option value="BI">Burundi</option>
+                                                <option value="CV">Cabo Verde</option>
+                                                <option value="KH">Cambodia</option>
+                                                <option value="CM">Camerun</option>
+                                                <option value="CA">Canada</option>
+                                                <option value="CF">Central African Republic</option>
+                                                <option value="TD">Chad</option>
+                                                <option value="CL">Chile</option>
+                                                <option value="CN">China</option>
+                                                <option value="CX">Christmas Islands</option>
+                                                <option value="CC">Cocos (Keeling )Islands</option>
+                                                <option value="CO">Colombia</option>
+                                                <option value="KM">Comoros</option>
+                                                <option value="CG">Congo</option>
+                                                <option value="CK">Cook Islands</option>
+                                                <option value="KP">Corea del Norte</option>
+                                                <option value="KR">Corea del Sur</option>
+                                                <option value="CR">Costa Rica</option>
+                                                <option value="CI">Cote D'Ivoire</option>
+                                                <option value="HR">Croacia</option>
+                                                <option value="CU">Cuba</option>
+                                                <option value="CY">Cyprus</option>
+                                                <option value="DK">Dinamarca</option>
+                                                <option value="DJ">Djibouti</option>
+                                                <option value="DM">Dominica</option>
+                                                <option value="TP">East Timor</option>
+                                                <option value="EC">Ecuador</option>
+                                                <option value="EG">Egipto</option>
+                                                <option value="SV">El Salvador</option>
+                                                <option value="AE">Emiratos Arabes</option>
+                                                <option value="GQ">Equatorial Guinea</option>
+                                                <option value="ER">Eritrea</option>
+                                                <option value="SK">Eslovaquia</option>
+                                                <option value="SI">Eslovenia</option>
+                                                <option value="ES">España</option>
+                                                <option value="US">Estados Unidos</option>
+                                                <option value="EE">Estonia</option>
+                                                <option value="ET">Etiopia</option>
+                                                <option value="EU">Europa</option>
+                                                <option value="FO">Faroe Islands</option>
+                                                <option value="RU">Federacion Rusa</option>
+                                                <option value="FJ">Fiji</option>
+                                                <option value="PH">Filipinas</option>
+                                                <option value="FI">Finlandia</option>
+                                                <option value="FR">Francia</option>
+                                                <option value="TF">French Southern Territories</option>
+                                                <option value="GA">Gabon</option>
+                                                <option value="GM">Gambia</option>
+                                                <option value="GE">Georgia</option>
+                                                <option value="GH">Ghana</option>
+                                                <option value="GI">Gibraltar</option>
+                                                <option value="GD">Granada</option>
+                                                <option value="GR">Grecia</option>
+                                                <option value="GL">Groenlandia</option>
+                                                <option value="GP">Guadalupe</option>
+                                                <option value="GU">Guam</option>
+                                                <option value="GT">Guatemala</option>
+                                                <option value="GF">Guayana Francesa</option>
+                                                <option value="GN">Guinea</option>
+                                                <option value="GW">Guinea-Bissau</option>
+                                                <option value="GY">Guyana</option>
+                                                <option value="HT">Haiti</option>
+                                                <option value="HM">Heard Island and McDonald Islands</option>
+                                                <option value="VA">Holy See (Vatican City State)</option>
+                                                <option value="HN">Honduras</option>
+                                                <option value="HK">Hong Kong</option>
+                                                <option value="HU">Hungria</option>
+                                                <option value="IN">India</option>
+                                                <option value="ID">Indonesia</option>
+                                                <option value="IR">Iran</option>
+                                                <option value="IQ">Iraq</option>
+                                                <option value="IE">Irlanda</option>
+                                                <option value="IS">Islandia</option>
+                                                <option value="KY">Islas Caiman</option>
+                                                <option value="FK">Islas Malvinas</option>
+                                                <option value="VG">Islas Virgenes Britanicas</option>
+                                                <option value="VI">Islas Virgenes, USA</option>
+                                                <option value="IL">Israel</option>
+                                                <option value="IT">Italia</option>
+                                                <option value="JM">Jamaica</option>
+                                                <option value="JP">Japón</option>
+                                                <option value="JO">Jordan</option>
+                                                <option value="KZ">Kazakstan</option>
+                                                <option value="KE">Kenia</option>
+                                                <option value="KI">Kiribati</option>
+                                                <option value="KW">Kuwait</option>
+                                                <option value="KG">Kyrgyzstan</option>
+                                                <option value="LA">Lao People's Democratic Republic</option>
+                                                <option value="LS">Lesotho</option>
+                                                <option value="LV">Letonia</option>
+                                                <option value="LB">Libano</option>
+                                                <option value="LR">Liberia</option>
+                                                <option value="LY">Libia</option>
+                                                <option value="LI">Liechtenstein</option>
+                                                <option value="LT">Lituania</option>
+                                                <option value="LU">Luxemburgo</option>
+                                                <option value="MO">Macau</option>
+                                                <option value="MK">Macedonia</option>
+                                                <option value="MG">Madagascar</option>
+                                                <option value="MY">Malasia</option>
+                                                <option value="MW">Malawi</option>
+                                                <option value="MV">Maldivas</option>
+                                                <option value="ML">Mali</option>
+                                                <option value="MT">Malta</option>
+                                                <option value="MA">Marruecos</option>
+                                                <option value="MH">Marshall Islands</option>
+                                                <option value="MQ">Martinica</option>
+                                                <option value="MR">Mauritania</option>
+                                                <option value="MU">Mauritius</option>
+                                                <option value="YT">Mayotte</option>
+                                                <option value="MX">Mexico</option>
+                                                <option value="FM">Micronesia, Federated States of</option>
+                                                <option value="MD">Moldova, Republic of</option>
+                                                <option value="MC">Monaco</option>
+                                                <option value="MN">Mongolia</option>
+                                                <option value="ME">Montenegro</option>
+                                                <option value="MS">Montserrat</option>
+                                                <option value="MZ">Mozambique</option>
+                                                <option value="MM">Myanmar</option>
+                                                <option value="NA">Namibia</option>
+                                                <option value="NR">Nauru</option>
+                                                <option value="NP">Nepal</option>
+                                                <option value="NI">Nicaragua</option>
+                                                <option value="NE">Niger</option>
+                                                <option value="NG">Nigeria</option>
+                                                <option value="NU">Niue</option>
+                                                <option value="NL">Norfolk Island</option>
+                                                <option value="MP">Northern Mariana Islands</option>
+                                                <option value="NO">Noruega</option>
+                                                <option value="NC">Nueva Caledonia</option>
+                                                <option value="NZ">Nueva Zelandia</option>
+                                                <option value="OM">Oman</option>
+                                                <option value="NL">Paises Bajos</option>
+                                                <option value="PK">Pakistan</option>
+                                                <option value="PW">Palau</option>
+                                                <option value="PS">Palestinian Territory, Occupied</option>
+                                                <option value="PA">Panama</option>
+                                                <option value="PG">Papua Nueva Guinea</option>
+                                                <option value="PY">Paraguay</option>
+                                                <option value="PE">Peru</option>
+                                                <option value="PF">Polinesia Francesa</option>
+                                                <option value="PL">Polonia</option>
+                                                <option value="PT">Portugal</option>
+                                                <option value="PR">Puerto Rico</option>
+                                                <option value="QA">Qatar</option>
+                                                <option value="GB">Reino Unido</option>
+                                                <option value="SY">Republica Arabe Siria</option>
+                                                <option value="CZ">Republica Checa</option>
+                                                <option value="CD">Republica Democratica del Congo</option>
+                                                <option value="DO">Republica Dominicana</option>
+                                                <option value="RE">Reunion</option>
+                                                <option value="RO">Romania</option>
+                                                <option value="RW">Rwanda</option>
+                                                <option value="KN">Saint Kitts and Nevis</option>
+                                                <option value="LC">Saint Lucia</option>
+                                                <option value="VC">Saint Vincent and the Grenadines</option>
+                                                <option value="WS">Samoa</option>
+                                                <option value="SM">San Marino</option>
+                                                <option value="ST">Sao Tome and Principe</option>
+                                                <option value="SN">Senegal</option>
+                                                <option value="RS">Serbia</option>
+                                                <option value="CS">Serbia y Montenegro</option>
+                                                <option value="SC">Seychelles</option>
+                                                <option value="SL">Sierra Leona</option>
+                                                <option value="SG">Singapur</option>
+                                                <option value="SB">Solomon Islands</option>
+                                                <option value="SO">Somalia</option>
+                                                <option value="GS">South Georgia And The South Sandwich Island</option>
+                                                <option value="LK">Sri Lanka</option>
+                                                <option value="SH">St.Helena</option>
+                                                <option value="PM">St.Pierre And Miquelon</option>
+                                                <option value="SZ">Suazilandia</option>
+                                                <option value="ZA">Sudafrica</option>
+                                                <option value="SD">Sudan</option>
+                                                <option value="SE">Suecia</option>
+                                                <option value="CH">Suiza</option>
+                                                <option value="SR">Suriname</option>
+                                                <option value="SJ">Svalbard And Jan Mayen Islands</option>
+                                                <option value="TH">Tailandia</option>
+                                                <option value="TW">Taiwan</option>
+                                                <option value="TJ">Tajikistan</option>
+                                                <option value="TZ">Tanzania</option>
+                                                <option value="TL">Timor-Leste</option>
+                                                <option value="TG">Togo</option>
+                                                <option value="TK">Tokelau</option>
+                                                <option value="TO">Tonga</option>
+                                                <option value="TT">Trinidad and Tobago</option>
+                                                <option value="TN">Tunisia</option>
+                                                <option value="TM">Turkmenistan</option>
+                                                <option value="TC">Turks and Caicos Islands</option>
+                                                <option value="TR">Turquia</option>
+                                                <option value="TV">Tuvalu</option>
+                                                <option value="UG">Uganda</option>
+                                                <option value="UA">Ukraine</option>
+                                                <option value="UM">United States Minor Outlying Islands</option>
+                                                <option value="UY">Uruguay</option>
+                                                <option value="UZ">Uzbekistan</option>
+                                                <option value="VU">Vanuatu</option>
+                                                <option value="VE">Venezuela</option>
+                                                <option value="VN">Vietnam</option>
+                                                <option value="WF">Wallis And Futuna Islands</option>
+                                                <option value="YD">Yemen</option>
+                                                <option value="YE">Yemen</option>
+                                                <option value="YU">Yugoslavia</option>
+                                                <option value="ZR">Zaire</option>
+                                                <option value="ZM">Zambia</option>
+                                                <option value="ZW">Zimbabwe</option>
+                                            </select>
+                                            <span class="valid" *ngIf="getMessage(MSG_NATIONALITY_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_NATIONALITY_CUSTOMER)">{{ getMessage(MSG_NATIONALITY_CUSTOMER) }}</span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="row rowMobileCard hideMobile" [class.activoBox]="showAdulto == i">
+                                        <div class="col-3 viewMobileWidth">
+                                            <label for="names">Tipo de documento</label>
+                                            <select formControlName="typeDocCustomer" class="form-select-f" [ngClass]="getMessage(MSG_TYPE_DOC_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_TYPE_DOC_CUSTOMER) ? 'isvalid' : ''">
+                                                <option disabled>Seleccione</option>
+                                                <option value="dni">DNI</option>
+                                                <option value="pasaporte">Pasaporte</option>
+                                                <option value="CE">C.Extranjería</option>
+                                            </select>
+                                            <span class="valid" *ngIf="getMessage(MSG_TYPE_DOC_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_TYPE_DOC_CUSTOMER)">{{ getMessage(MSG_TYPE_DOC_CUSTOMER) }}</span>
+                                        </div>
+                                        <div class="col-3 viewMobileWidth">
+                                            <label for="lastname">N° de documento</label>
+                                            <input class="form-control" formControlName="numDocCustomer" type="text" name="ndocumento" [ngClass]="getMessage(MSG_NUM_DOC_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_NUM_DOC_CUSTOMER) ? 'isvalid' : ''">
+                                            <span class="valid" *ngIf="getMessage(MSG_NUM_DOC_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_NUM_DOC_CUSTOMER)">{{ getMessage(MSG_NUM_DOC_CUSTOMER) }}</span>
+                                        </div>
+                                        <div class="col-6 viewMobileWidth">
+                                            <label for="names">Sexo</label>
+                                            <div class="optionSel">
+                                                <div class="form-check form-check-inline optionLeft">
+                                                    <input class="form-check-input sex" formControlName="sexCustomer" value="masculino" type="radio" id="sexMasc{{i}}">
+                                                    <label class="form-check-label" for="sexMasc{{i}}">Masculino</label>
+                                                </div>
+                                                <div class="form-check form-check-inline optionRight">
+                                                    <input class="form-check-input sex" formControlName="sexCustomer" value="femenino" type="radio" id="sexFem{{i}}">
+                                                    <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
+                                                </div>
+                                            </div>
+                                            <!-- <span class="valid" *ngIf="getMessage(MSG_SEX) != MSG_EMPTY && getMessageArray(i, MSG_SEX)">{{ getMessage(MSG_SEX) }}</span> -->
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="row rowMobileCard hideMobile" [class.activoBox]="showAdulto == i">
+                                        <div class="col-12 text-center mt-3">
+                                            <button (click)="showDatosPasajero()" class="px-5">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- END PASAJEROS -->
                     </div>
 
@@ -866,7 +1246,7 @@
             <!-- IZQUIERDA -->
             <div class="col-8 viewMobileWidth order-1 order-md-0 ">
                 <h1 class="titleMob d-md-block d-none">{{ safe0Json?.title }}</h1>
-                <!-- FORM PASAJEROS -->
+                <!-- FORM PASAJEROS DESKTOP -->
                 <div class="card pasajeros hideViewMobile">
                     <div class="card-header">
                         <h2>Información de pasajeros</h2>

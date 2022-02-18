@@ -133,8 +133,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   @ViewChild('nameContactForm', { static: false }) inputNameContactForm!: ElementRef<HTMLInputElement>
   @ViewChild('lastNameContactForm', { static: false }) inputLastNameContactForm!: ElementRef<HTMLInputElement>
-nombre: string
-apellido: string
+  nombre: string
+  apellido: string
+  showAgregarAdulto: boolean = true
+  showAdulto: number
+
   constructor(
     public route: Router,
     private router: ActivatedRoute,
@@ -176,7 +179,7 @@ apellido: string
       this.mobile = false
     }
     this.current = this.route.getCurrentNavigation()!.extras.state as any
-    if(!this.current){
+    if (!this.current) {
       this.route.navigate(['/home'])
     }
     this.selectedPay = (this.current['filter'] === 'filter') ? 'tarjeta' : 'safetypay'
@@ -206,8 +209,10 @@ apellido: string
   }
 
   ngOnInit(): void {
+    // this.showAdulto = 0
     console.log(this.selectedPay)
     toUp()
+    console.log(this.showAdulto)
 
     this.pop = this.safe0Json
     // this.getSecureBooking()
@@ -252,7 +257,7 @@ apellido: string
 
   toCustomer(e: any) {
     let chk = e.target.checked
-    
+
     let customerName = this.formShop.getRawValue()['customers'][0]['nameCustomer']
     let customerLastName = this.formShop.getRawValue()['customers'][0]['lastNameCustomer']
 
@@ -262,12 +267,12 @@ apellido: string
     let name = this.inputNameContactForm.nativeElement.value
     let lastname = this.inputLastNameContactForm.nativeElement.value
 
-    if(chk){
+    if (chk) {
       this.inputNameContactForm.nativeElement.value = customerName
       this.inputLastNameContactForm.nativeElement.value = customerLastName
-      
+
       this.inputNameContactForm.nativeElement.focus()
-  
+
     } else {
       this.inputNameContactForm.nativeElement.value = ''
       this.inputLastNameContactForm.nativeElement.value = ''
@@ -530,7 +535,7 @@ apellido: string
         typeDocCustomer: new FormControl(),
         numDocCustomer: new FormControl(),
         sexCustomer: new FormControl(),
-      }));
+      }))
   }
 
   ///RECIBO ADD FORMULARIO
@@ -912,6 +917,20 @@ apellido: string
     const month = e.substring(4, 6)
     const expiredFormatt = `${year}/${month}`
     return expiredFormatt
+  }
+  showDatosPasajero(e?: any) {
+    // console.log(this.showAdulto)
+    console.log(this.formShop.getRawValue()['customers'])
+    
+    this.showAgregarAdulto = !this.showAgregarAdulto
+    for (let x = 0; x < this.formShop.getRawValue()['customers'].length; x++) {
+      if (e === x) {
+        console.log(e)
+        console.log(x)
+        console.log(this.showAgregarAdulto)
+        this.showAdulto = e
+      }
+    }
   }
 
 }
