@@ -54,7 +54,9 @@ export enum ENDPOINT_API {
 
   //CHECKCARD
   CHECK_CARD = 'v1/api/Card/Check?Parameter.Number=49133712345678900&TrackingCode=qwertyuiiop&MuteExceptions=false&Caller.Company=Agil&Caller.Application=Expertia',
-
+  
+  //CARDPAYMENT
+  LIBRO_RECLAMO = 'v1/api/Complaint',
 }
 
 export enum ROUTE_VIAJES {

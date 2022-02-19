@@ -37,7 +37,7 @@
     <a (click)="pasajeroClose()">cerrar</a>
 </div> -->
 <div class="container-fluid pb-4 px-4">
-        <form [formGroup]="formShop" novalidate>
+    <form [formGroup]="formShop" novalidate>
         <div class="row stepCard d-md-none d-block">
             <!-- STEPPER -->
             <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
@@ -207,7 +207,7 @@
                                         <hr *ngIf="filtroVueloJson.flightType === 2 || filtroVueloJson.flightType === 3">
                                     </div>
                                     <div class="viajero" *ngIf="(filtroVueloJson.flightType === 2 || filtroVueloJson.flightType === 3) && detalleVuelos.segmentoReturn">
-                                            <div class="row">
+                                        <div class="row">
                                             <div class="col-6">
                                                 <h3>REGRESO</h3>
                                                 <span>{{detalleVuelos.segmentoReturn.detalle[0].salida.cod_ciudad + " " + detalleVuelos.segmentoReturn.detalle[0].salida.dia}}</span>
@@ -962,7 +962,8 @@
                         </div>
                         <div class="row rowMobileCard ">
                             <div class="col-12 contentCenterMobile">
-                                <button (click)="shopEnd()" class="px-5">Continuar</button>
+                                <!-- <button (click)="shopEnd()" class="px-5">Continuar</button> -->
+                                <button mat-button matStepperNext class="px-5">Continuar</button>
                             </div>
                         </div>
                     </div>
@@ -2171,7 +2172,7 @@
                     </div>
                 </div>
                 <!-- END FORM CONTACT -->
-            
+
             </div>
             <!-- END IZQUIERDA -->
 
@@ -2455,7 +2456,7 @@
                                 <hr *ngIf="filtroVueloJson.flightType === 2 || filtroVueloJson.flightType === 3">
                             </div>
                             <div class="viajero" *ngIf="(filtroVueloJson.flightType === 2 || filtroVueloJson.flightType === 3) && detalleVuelos.segmentoReturn">
-                                    <div class="row">
+                                <div class="row">
                                     <div class="col-6">
                                         <h3>REGRESO</h3>
                                         <span>{{detalleVuelos.segmentoReturn.detalle[0].salida.cod_ciudad + " " + detalleVuelos.segmentoReturn.detalle[0].salida.dia}}</span>
