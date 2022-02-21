@@ -27,6 +27,7 @@ import { DocumentacionViajeModule } from './documentacion-viaje/documentacion-vi
 import { NuestrasAgenciasModule } from './nuestras-agencias/nuestras-agencias.module';
 import { NuestraEmpresaModule } from './nuestra-empresa/nuestra-empresa.module';
 import { MainService } from '../../Services/presenter/main/main.service';
+import { LibroReclamacionesModule } from './libro-reclamaciones/libro-reclamaciones.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -50,6 +51,7 @@ import { MainService } from '../../Services/presenter/main/main.service';
     LoaderModule,
     NuestrasAgenciasModule,
     NuestraEmpresaModule,
+    LibroReclamacionesModule,
   ],
   exports: [HomePageComponent],
   providers: [MainService, IpClienteService, DollarChangeService, OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]

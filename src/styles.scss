@@ -5,10 +5,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400&display=swap');
 @import "scss/variables";
 @import 'scss/mixin';
-
-
-
-
 .animated {
     animation-duration: 1s !important;
     animation-fill-mode: both !important;
@@ -55,7 +51,7 @@ label {
     border: 0.5px solid $gray_border;
     box-sizing: border-box;
     border-radius: 3px;
-    &:focus{
+    &:focus {
         outline: none;
         border: 0.5px solid #009AED!important;
         box-shadow: none !important;
@@ -71,10 +67,9 @@ button {
     padding: 9px 16px;
     border-radius: 3px;
     transition: 300ms ease;
-        &:hover{
-            background: $red
-        }
-    
+    &:hover {
+        background: $red
+    }
     @media (max-width: 768px) {
         font-size: 12px;
     }
@@ -259,7 +254,7 @@ section {
                 font-family: "Montserrat";
                 color: #B9BCBF;
             }
-            &:focus{
+            &:focus {
                 border: 0.5px solid #009AED!important;
                 box-shadow: none;
             }
@@ -504,12 +499,12 @@ section {
             right: 22px;
             top: 22px;
             font-size: 12px;
-            &:hover{
+            &:hover {
                 position: absolute;
                 right: 22px;
                 top: 22px;
-                transition: none ;
-                background:transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+                transition: none;
+                background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
             }
         }
         h1 {
@@ -883,9 +878,8 @@ section {
     width: 40px;
     align-items: center;
     padding-left: 10px;
-
-    svg path{
-        stroke:#009AED;
+    svg path {
+        stroke: #009AED;
     }
 }
 
@@ -910,16 +904,16 @@ section {
     color: #4B4B4B;
     text-indent: 10px;
     border: 0.5px solid #E4E5E7;
-    &:focus{
+    &:focus {
         border: 0.5px solid #009AED!important;
         box-shadow: none;
     }
-    &::placeholder{
+    &::placeholder {
         color: #B9BCBF!important;
-        font-size:16px;
+        font-size: 16px;
     }
     &.origen,
-    &.destino{
+    &.destino {
         width: 290px;
     }
 }
@@ -946,7 +940,7 @@ section {
     height: 48px;
     margin-left: 10px;
     background: $red_light;
-    &:hover{
+    &:hover {
         background: $red
     }
 }
@@ -989,20 +983,18 @@ section {
 
 /* STYLE PERFIL  */
 
-.mat-tab-body-content{
-    overflow: hidden!important;    
+.mat-tab-body-content {
+    overflow: hidden!important;
 }
 
-
-.mat-tab-body{
-    &-active{
-        overflow: visible!important;    
-        .mat-tab-body-content{
-            overflow: visible!important;    
+.mat-tab-body {
+    &-active {
+        overflow: visible!important;
+        .mat-tab-body-content {
+            overflow: visible!important;
         }
-    }    
+    }
 }
-
 
 .box-container {
     width: 100%;
@@ -1841,11 +1833,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     z-index: 11;
 }
 
-.input{
+.input {
     &Der {
         border-radius: 3px 0 0 3px !important;
         letter-spacing: 2px;
-        &:focus{
+        &:focus {
             border: 0.5px solid #009AED!important;
             box-shadow: none;
         }
@@ -1854,12 +1846,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         border-radius: 0 3px 3px 0 !important;
         letter-spacing: 2px;
         border-left: 0px!important;
-        &:focus{
-            border: 0.5px solid #009AED!important;;
+        &:focus {
+            border: 0.5px solid #009AED!important;
+            ;
             box-shadow: none;
         }
     }
 }
+
 .selectSeguro {
     border: 0.5px solid #E4E5E7;
     box-sizing: border-box;
@@ -1873,7 +1867,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     line-height: 21px;
     letter-spacing: 0.25px;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23DF0C30' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
-    &:focus{
+    &:focus {
         border: 0.5px solid #009AED;
         box-shadow: none;
     }
@@ -1887,7 +1881,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .width110 select,
 .width110 input {
-        width: 110px;
+    width: 110px;
     text-indent: 40px;
 }
 
@@ -1979,7 +1973,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-family: Montserrat;
             font-size: 14px;
             line-height: 21px;
-            font-weight:500;
+            font-weight: 500;
             letter-spacing: 0.1px;
             color: #4B4B4B;
             gap: 10px;
@@ -2160,7 +2154,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     // box-shadow: 0px 1px 8px rgb(0 0 0 / 10%);
     border-radius: 5px;
     // margin-top: 10px;
-    table{
+    table {
         font-family: Montserrat;
         font-weight: 500;
         font-size: 14px;
@@ -2168,16 +2162,16 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         letter-spacing: 0.1px;
         color: #4B4B4B;
         text-align: center;
-        & thead tr:first-child:hover{
+        & thead tr:first-child:hover {
             background: none;
         }
         & tr:hover {
             background: rgba(#8FD0F3, .2)
         }
-        & tr td:first-child{
-            font-weight:bold;
+        & tr td:first-child {
+            font-weight: bold;
         }
-        & td{
+        & td {
             &.green {
                 font-weight: bold;
                 letter-spacing: 0.1px;
@@ -2196,7 +2190,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 justify-content: center !important;
             }
         }
-}
+    }
     .header {
         font-family: Montserrat;
         font-weight: bold;
@@ -2209,10 +2203,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .row {
         margin: 0;
-        &:first-child:hover{
+        &:first-child:hover {
             background: white;
         }
-        &:hover{
+        &:hover {
             background: rgba(#8FD0F3, .2)
         }
         .col {
@@ -2229,7 +2223,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             height: 46px;
             display: flex;
             justify-content: center;
-            span{
+            span {
                 font-weight: bold;
                 margin-left: 3px;
             }
@@ -2241,8 +2235,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
             img {
                 padding-right: 10px;
-                &+div{
-                    font-weight:bold;
+                &+div {
+                    font-weight: bold;
                     white-space: pre-line;
                 }
             }
@@ -2290,7 +2284,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 0;
             &:first-child {
                 padding-left: 6px;
-                width:500px;
+                width: 500px;
             }
             &.lessPadLeft {
                 padding-left: 0;
@@ -2339,9 +2333,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .toolTip {
     position: relative;
     &:hover {
-        .boxTooltip, .boxTooltip2 {
+        .boxTooltip,
+        .boxTooltip2 {
             display: block;
-            
         }
     }
     .boxTooltip {
@@ -2357,7 +2351,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         bottom: 32px;
         z-index: 20;
         font-family: Montserrat;
-        &2{
+        &2 {
             display: none;
             position: absolute;
             padding: 10px;
@@ -3281,6 +3275,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     padding: 20px 0 10px 0;
     justify-content: center;
 }
+
 .btnFooter {
     font-family: 'Montserrat';
     font-size: 16px;
@@ -3542,11 +3537,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 0;
             margin: 0;
             text-align: center;
-            &::placeholder{
+            &::placeholder {
                 font-family: Montserrat;
                 font-weight: normal;
                 font-size: 12px;
-                }
+            }
         }
     }
     .opcionBtn {
@@ -3618,13 +3613,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-style: normal;
             font-weight: 600;
             font-size: 12px;
-            &:hover{
+            &:hover {
                 background: #B50A27;
             }
             &.gray {
                 background: #EBEBEB;
                 color: #4B4B4B;
-                &:hover{
+                &:hover {
                     background: #CFD1D3;
                 }
             }
@@ -3636,7 +3631,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 12px;
             letter-spacing: 0.1px;
             color: #009AED;
-            &:hover{
+            &:hover {
                 background: transparent;
             }
             &:disabled {
@@ -3688,15 +3683,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .boxTab {
     width: 100%;
     .rowBoxTab {
-        @include desktop { 
+        @include desktop {
             display: flex;
             // gap: 10px;
             padding: 4px 10px 10px 10px;
             position: relative;
          }
-        
-         
-       
         &.right {
             justify-content: end;
         }
@@ -3713,45 +3705,44 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
         .fullWidht {
             width: 100%;
+            height: 40px;
         }
         .colBoxtab {
             display: flex;
             flex: 1 1 auto;
             padding: 10px 0;
-            &.w-30{
+            &.w-30 {
                 width: 30%;
                 @media (max-width: 768px) {
                     width: 100%
                 }
             }
-            &.w-10{
+            &.w-10 {
                 width: 10%;
                 @media (max-width: 768px) {
                     width: 100%
                 }
             }
-            &.w-15{
+            &.w-15 {
                 width: 15%;
                 @media (max-width: 768px) {
                     width: 100%;
                 }
             }
-            .d{
-                &-left{
+            .d {
+                &-left {
                     border-radius: 3px 0 0 3px;
                     border: 0.5px solid #E4E5E7;
                     border-right: 0px;
                 }
-                &-right{
-                    border-radius:0 3px 3px 0;
-                    border: 0.5px solid #E4E5E7;    
+                &-right {
+                    border-radius: 0 3px 3px 0;
+                    border: 0.5px solid #E4E5E7;
                 }
             }
-
-            @include desktop { 
+            @include desktop {
                 padding: 0;
-             }
-
+            }
             //position: relative;
             input {
                 width: 100%;
@@ -4651,10 +4642,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .customers {
         margin-bottom: 10px;
-
-        @include desktop { 
+        @include desktop {
             margin-top: 11px !important;
-         }
+        }
     }
     app-card-info {
         .col-2 {
@@ -4827,7 +4817,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         border: 1px solid #DF0C30;
         cursor: pointer;
     }
-    .contentImg {
+    .contentSliderImg {
         transition: opacity 1s ease-out;
         opacity: 0;
         width: 0;
@@ -4905,7 +4895,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .btnSteps {
             display: none;
         }
-        .contentImg {
+        .contentSliderImg {
             display: none;
             overflow: hidden;
             gap: 15px;
@@ -5227,17 +5217,17 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
         .sliderAero {
             margin-right: 5%;
-            #carouselAero{
+            #carouselAero {
                 height: auto;
                 width: 581px;
-                .carousel-control-prev, .carousel-control-next{
-                        top: 40%;
-                        width: 47px;
-                        background: #4B4B4B;
-                        opacity: 0.5;
-                        height: 78px;
-                        border-radius: 0;
-
+                .carousel-control-prev,
+                .carousel-control-next {
+                    top: 40%;
+                    width: 47px;
+                    background: #4B4B4B;
+                    opacity: 0.5;
+                    height: 78px;
+                    border-radius: 0;
                 }
             }
         }
@@ -5473,7 +5463,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             letter-spacing: 0.1px;
             color: #4B4B4B;
             padding: 0 25px 20px 25px;
-            font-weight:500;
+            font-weight: 500;
             display: flex;
             align-items: center;
         }
@@ -6006,6 +5996,45 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
         }
     }
+    .mat-tab-label {
+        min-width: auto !important;
+    }
+    .boxTab {
+        .rowBoxTab {
+            &:first-child {
+                display: flex;
+                width: 100%;
+            }
+            .mat-tab-body-active {
+                width: 90%;
+            }
+            .mat-form-field-infix {
+                width: 110px !important;
+            }
+            .mat-form-field-wrapper {
+                padding-bottom: 0;
+            }
+            .padRight {
+                padding-right: 10px;
+            }
+            .customers {
+                width: 90px;
+                padding-top: 18px;
+            }
+            .boxFlotante {
+                right: 0;
+            }
+            .colBoxtab {
+                padding: 0 0 10px 0;
+            }
+            .ignore-template {
+                display: flex;
+                .colBoxtab {
+                    width: 50%;
+                }
+            }
+        }
+    }
 }
 
 .portadaAero {
@@ -6073,7 +6102,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     &__current {
         position: relative;
         border: 1px solid #E4E5E7;
-        height: 47px;
+        height: 45px;
         border-radius: 5px;
         font-family: Montserrat;
         font-weight: 300;
@@ -6092,6 +6121,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 margin-top: 6px;
                 .select-box__option {
                     cursor: pointer;
+                    padding-bottom: 0;
                 }
             }
             .select-box__icon {
@@ -6194,58 +6224,61 @@ span.valid {
 }
 
 @media (min-width: 1400px) {
-.container{
-        &-fluid{
+    .container {
+        &-fluid {
             width: 1397px!important;
-            &.fluid{
-                width:100%!important;
+            &.fluid {
+                width: 100%!important;
             }
         }
     }
 }
 
-.ngb-dp-arrow-btn{
+.ngb-dp-arrow-btn {
     background: transparent!important
 }
 
-.font-12{
+.font-12 {
     font-size: 12px!important;
 }
 
-@media print{
-    .doNotPrint{display:none !important;}
+@media print {
+    .doNotPrint {
+        display: none !important;
+    }
 }
 
 input.inputDer,
-    input.inputIzq {
-        text-indent: 40px!important
+input.inputIzq {
+    text-indent: 40px!important
 }
 
 .hideDate {
     max-width: 0 !important;
     width: 0 !important;
     position: absolute;
-    right: 58%;
+    //right: 58%;
 }
-.margin-filter{
-    @include desktop{
+
+.margin-filter {
+    @include desktop {
         margin-right: 70px;
         margin-left: 70px;
     }
 }
 
-.ignore-template{
+.ignore-template {
     display: contents;
 }
 
-.ngb-dp-week{
+.ngb-dp-week {
     [role="gridcell"].disabled {
         background: #e0e0e0;
     }
 }
 
 // Banner de home, seguros & empresa
-.contentImg{
+.contentImg {
     top: 0;
     position: absolute;
     max-width: 100%;
@@ -6262,8 +6295,9 @@ input.inputDer,
         width: 100%;
     }
 }
+
 // Banner nuestra empresa
-.capital{
+.capital {
     font-family: Open Sans;
     font-weight: 700;
     font-size: 40px;
@@ -6274,7 +6308,7 @@ input.inputDer,
         font-size: 32px;
         line-height: 32px;
     }
-    .raya{
+    .raya {
         background: #F29704;
         height: 2px;
         width: 43px;
@@ -6284,11 +6318,11 @@ input.inputDer,
             margin-bottom: 10px !important;
         }
     }
-    &::first-letter{
-        color:red!important;
+    &::first-letter {
+        color: red!important;
         text-indent: 50px;
     }
-    span{
+    span {
         font-family: Montserrat;
         font-weight: 600;
         font-size: 12px;
@@ -6300,14 +6334,15 @@ input.inputDer,
             line-height: 10px;
         }
     }
-    .f-12{
-        font-size:12px;
+    .f-12 {
+        font-size: 12px;
         line-height: 20px;
     }
 }
+
 $icon-size: 56px;
 $icon-size-mobile: 28px;
-.mat-icon.icon{
+.mat-icon.icon {
     font-size: $icon-size;
     width: $icon-size;
     height: $icon-size;
@@ -6323,16 +6358,18 @@ $icon-size-mobile: 28px;
         margin-left: 0px;
         margin-top: 10px;
     }
-    &+div{
+    &+div {
         @extend .capital;
     }
 }
-.h659{
+
+.h659 {
     height: 659px !important;
     @media (max-width: 768px) {
         height: 165px !important;
     }
 }
+
 .banner {
     width: 100%;
     height: 540px;
@@ -6346,20 +6383,23 @@ $icon-size-mobile: 28px;
         height: 440px;
         border-radius: 0px 0px 20px 20px;
     }
-    &>.contentEmpresa{
+    &>.contentEmpresa {
         @extend .contentImg;
         height: 659px;
     }
 }
-.video-responsive{
+
+.video-responsive {
     margin-top: 260px;
 }
-.bg-img{
+
+.bg-img {
     @media (max-width: 768px) {
-        padding-bottom:150px;
+        padding-bottom: 150px;
     }
 }
-.img-responsive{
+
+.img-responsive {
     @media (max-width: 768px) {
         width: 93% !important;
         padding: 0;
@@ -6370,20 +6410,20 @@ $icon-size-mobile: 28px;
     }
 }
 
-.text{
-    &-white{
+.text {
+    &-white {
         color: white;
     }
-    &-justify{
+    &-justify {
         text-align: justify;
     }
 }
 
-.btn{
-    &-agencias{
-        border:1px solid #E4E5E7;
+.btn {
+    &-agencias {
+        border: 1px solid #E4E5E7;
         background: white;
-        color:#4B4B4B;
+        color: #4B4B4B;
         border-radius: 10px;
         letter-spacing: 0.15px;
         font-family: Open Sans;
@@ -6393,16 +6433,17 @@ $icon-size-mobile: 28px;
         @media (max-width: 768px) {
             font-size: 10px;
         }
-        &:hover{
+        &:hover {
             background: #E4E5E7;
         }
-        &.activa{
-            border:1px solid #DF0C30;
+        &.activa {
+            border: 1px solid #DF0C30;
             background: #DF0C30;
             color: white;
         }
     }
 }
+
 button.customers {
     position: relative;
     width: 160px;
@@ -6420,8 +6461,8 @@ button.customers {
     @media (max-width: 768px) {
         font-size: 10px;
     }
-    &:before{
-        content:  url(./assets/arrow.svg);
+    &:before {
+        content: url(./assets/arrow.svg);
         right: 0;
         position: absolute
     }
@@ -6433,11 +6474,688 @@ button.customers {
     right: 15px;
     opacity: 0;
     transition: all .2s ease-in-out;
-   }
-   .show-scrollTop {
+}
+
+.show-scrollTop {
     opacity: 1;
     transition: all .2s ease-in-out;
     border-radius: 50%;
     background-color: hotpink;
+}
 
-   }
+#ModalSesion {
+    .mat-tab-label {
+        width: 50%;
+    }
+    .modal-header {
+        p {
+            font-size: 14px;
+        }
+    }
+    .modal-dialog {
+        width: 490px;
+    }
+    .modal-body {
+        .elementRow {
+            display: flex;
+            position: relative;
+            &.error {
+                flex-direction: column;
+                .form-control {
+                    margin-bottom: 0px !important;
+                    border: 0.5px solid #F44336;
+                }
+                .msgError {
+                    display: flex;
+                }
+            }
+            .msgError {
+                display: none;
+                margin-left: 15px;
+                font-family: Montserrat;
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 18px;
+                letter-spacing: 0.25px;
+                color: #F44336;
+                margin-bottom: 10px;
+            }
+            .form-control {
+                margin-bottom: 20px;
+                font-family: Montserrat;
+                font-size: 14px;
+                text-transform: capitalize;
+                color: #B9BCBF;
+                border-radius: 5px;
+                height: 47px;
+                border: 1px solid #ced4da;
+            }
+            .iconPass {
+                position: absolute;
+                right: 25px;
+                top: 10px;
+            }
+        }
+        .subRayado {
+            text-decoration: underline;
+        }
+        .mat-ink-bar {
+            height: 3px;
+        }
+        hr {
+            border: 1px solid #E4E5E7;
+        }
+        .textConecta {
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+        }
+        .socialMedia {
+            display: flex;
+            gap: 20px;
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.15px;
+            color: #FFFFFF;
+            .btnFacebook,
+            .btnGoogle {
+                width: calc(50% - 10px);
+                height: 47px;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                img {
+                    min-width: 25.19px;
+                    min-height: 25.19px;
+                    max-width: 25.19px;
+                    max-height: 25.19px;
+                    margin-right: 12px;
+                }
+            }
+            .btnFacebook {
+                background: #4267B2;
+            }
+            .btnGoogle {
+                background: #518EF8;
+            }
+        }
+    }
+    .modal-footer {
+        padding: 0rem 2rem 0rem 2rem;
+        margin: 0 0 18px 0;
+        border-top: none;
+        button {
+            background: #DF0C30;
+            border-radius: 5px;
+            margin: 0 0 18px 0;
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 27px;
+            text-align: center;
+            letter-spacing: 0.18px;
+            color: #FFFFFF;
+        }
+        .account {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            gap: 10px;
+            .notRegister {
+                font-family: Montserrat;
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 18px;
+                letter-spacing: 0.25px;
+                color: #4B4B4B;
+            }
+            .newAccount {
+                cursor: pointer;
+                font-family: Montserrat;
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 21px;
+                letter-spacing: 0.1px;
+                color: #009AED;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+#ModalRecovery,
+#ModalNewAccount {
+    .modal-dialog {
+        width: 918px;
+        max-width: 918px;
+        .modal-content {
+            flex-direction: row;
+            border: none;
+            .recoveryLeft {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                width: 419px;
+                height: 363px;
+                background: url('./assets/modal/bg-recovery.png');
+                .titleRecovery {
+                    font-family: Montserrat;
+                    font-weight: bold;
+                    font-size: 12px;
+                    line-height: 18px;
+                    text-align: center;
+                    letter-spacing: 0.1px;
+                    color: #FFFFFF;
+                    text-align: center;
+                    margin-top: 40px;
+                    padding-bottom: 13px;
+                }
+                img {
+                    width: 127.02px;
+                }
+            }
+            .recoveryRight {
+                flex: 1 1 auto;
+                padding: 0 30px;
+                position: relative;
+                .btn-close {
+                    position: absolute;
+                    right: 20px;
+                    top: 20px;
+                    font-size: 12px;
+                }
+                .titleRecovery {
+                    font-family: Open Sans;
+                    font-weight: bold;
+                    font-size: 24px;
+                    line-height: 36px;
+                    text-align: center;
+                    color: #4B4B4B;
+                    margin: 40px 0 25px 0;
+                }
+                .elementRow {
+                    display: flex;
+                    margin-bottom: 0;
+                    &.error {
+                        flex-direction: column;
+                        .form-control {
+                            margin-bottom: 0px !important;
+                            border: 0.5px solid #F44336;
+                        }
+                        .msgError {
+                            display: flex;
+                        }
+                    }
+                    .msgError {
+                        display: none;
+                        margin-left: 15px;
+                        font-family: Montserrat;
+                        font-weight: 300;
+                        font-size: 12px;
+                        line-height: 18px;
+                        letter-spacing: 0.25px;
+                        color: #F44336;
+                        margin-bottom: 10px;
+                    }
+                    .form-control {
+                        margin-bottom: 20px;
+                        font-family: Montserrat;
+                        font-size: 14px;
+                        text-transform: capitalize;
+                        color: #B9BCBF;
+                        border-radius: 5px;
+                        height: 41px;
+                        border: 1px solid #ced4da;
+                    }
+                }
+                button {
+                    margin-bottom: 20px;
+                    font-family: Open Sans;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 21px;
+                    letter-spacing: 0.15px;
+                    border-radius: 5px;
+                }
+                .account {
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    gap: 10px;
+                    .notRegister {
+                        font-family: Montserrat;
+                        font-weight: 300;
+                        font-size: 12px;
+                        line-height: 18px;
+                        letter-spacing: 0.25px;
+                        color: #4B4B4B;
+                    }
+                    .newAccount {
+                        cursor: pointer;
+                        font-family: Montserrat;
+                        font-weight: 600;
+                        font-size: 12px;
+                        line-height: 21px;
+                        letter-spacing: 0.1px;
+                        color: #009AED;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#ModalRecovery {
+    .modal-dialog {
+        .modal-content {
+            .recoveryRight {
+                .elementRow {
+                    .form-control {
+                        margin-bottom: 55px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.boxReclamaciones {
+    display: flex;
+    .contLeft {
+        width: 35%;
+        .virtual {
+            color: #4B4B4B;
+            font-family: Montserrat;
+            padding: 68px 30px 30px 50px;
+            .titleVirtual {
+                display: block;
+                font-family: Open Sans;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 32px;
+                line-height: 48px;
+                padding-bottom: 45px;
+                span {
+                    color: #B50A27;
+                    font-weight: bold;
+                }
+                @media (max-width: 640px) {
+                    font-size: 24px;
+                    padding-bottom: 20px;
+                }
+            }
+            .contentVirtual {
+                display: block;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 27px;
+                text-align: justify;
+                letter-spacing: 0.18px;
+                padding-bottom: 41px;
+                @media (max-width: 640px) {
+                    font-size: 14px;
+                }
+            }
+            .marcaOrange {
+                width: 43px;
+                height: 2px;
+                left: 59px;
+                top: 476px;
+                background: #F29704;
+                margin-bottom: 41px;
+            }
+            .boxImg {
+                width: 100%;
+                margin-bottom: 41px;
+                img {
+                    width: 100%;
+                }
+            }
+            .text {
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 27px;
+                text-align: center;
+                letter-spacing: 0.18px;
+                margin-bottom: 25px;
+                @media (max-width: 640px) {
+                    font-size: 14px;
+                }
+            }
+            .btnHelp {
+                background: #DF0C30;
+                border-radius: 3px;
+                padding: 14px 0;
+                cursor: pointer;
+                width: 180px;
+                color: #ffffff;
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 24px;
+                text-align: center;
+                letter-spacing: 0.5px;
+                margin: 0 auto;
+            }
+            @media (max-width: 640px) {
+                padding: 30px 25px;
+            }
+        }
+        @media (max-width: 640px) {
+            width: 100%;
+        }
+    }
+    .contRight {
+        width: 65%;
+        background: #FFFFFF;
+        box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        margin: 68px 60px 20px 30px;
+        padding: 45px 70px;
+        color: #4B4B4B;
+        font-family: Montserrat;
+        .rowGroup {
+            display: flex;
+            margin-bottom: 20px;
+            &.columna {
+                flex-direction: column;
+                .col {
+                    &:first-child {
+                        margin-bottom: 10px;
+                        font-weight: 600;
+                        font-size: 14px;
+                        line-height: 21px;
+                        letter-spacing: 0.25px;
+                    }
+                }
+                .subtitle {
+                    font-size: 12px;
+                    line-height: 20px;
+                    letter-spacing: 0.18px;
+                    margin-bottom: 10px;
+                }
+                .twoCol {
+                    display: flex;
+                    gap: 20px;
+                    &.onlyMovil {
+                        flex-wrap: wrap;
+                        @media (max-width: 640px) {
+                            .numero {
+                                width: 100%;
+                            }
+                        }
+                    }
+                    .tipo,
+                    .numero {
+                        .text {
+                            margin-bottom: 10px;
+                            font-weight: 600;
+                            font-size: 14px;
+                            line-height: 21px;
+                            letter-spacing: 0.25px;
+                        }
+                        &.dFlex {
+                            display: flex;
+                        }
+                    }
+                    .tipo {
+                        width: 30%;
+                        @media (max-width: 640px) {
+                            width: calc(50% - 5px);
+                        }
+                    }
+                    .numero {
+                        width: 70%;
+                        .campo {
+                            font-size: 12px;
+                            line-height: 20px;
+                            letter-spacing: 0.18px;
+                        }
+                        @media (max-width: 640px) {
+                            width: calc(50% - 5px);
+                        }
+                    }
+                    @media (max-width: 640px) {
+                        gap: 10px;
+                    }
+                }
+            }
+            .colLeft {
+                width: 40%;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 27px;
+                letter-spacing: 0.18px;
+                @media (max-width: 640px) {
+                    width: 100%;
+                }
+            }
+            .colRight {
+                width: 60%;
+                font-size: 14px;
+                line-height: 27px;
+                letter-spacing: 0.18px;
+                @media (max-width: 640px) {
+                    width: 100%;
+                }
+            }
+            .texto {
+                font-size: 14px;
+                line-height: 27px;
+                letter-spacing: 0.18px;
+                &.mTop {
+                    margin-top: 30px;
+                }
+                @media (max-width: 640px) {
+                    text-align: justify;
+                }
+            }
+            .subTitle {
+                margin-bottom: 10px;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 21px;
+                letter-spacing: 0.25px;
+            }
+            @media (max-width: 640px) {
+                flex-wrap: wrap;
+            }
+        }
+        .form-control {
+            border: 1px solid #E4E5E7;
+            border-radius: 5px;
+            height: 45px;
+        }
+        textarea {
+            border: 1px solid #E4E5E7;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .separador {
+            margin: 42px 0;
+            width: 100%;
+            height: 1px;
+            background: #E4E5E7;
+            @media (max-width: 640px) {
+                margin: 30px 0;
+            }
+        }
+        .title {
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 27px;
+            letter-spacing: 0.18px;
+            margin-bottom: 30px;
+        }
+        .form-check-input {
+            width: 21px;
+            height: 21px;
+        }
+        .form-check-label {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.25px;
+            color: #009AED;
+            a {
+                color: #B50A27;
+            }
+        }
+        .form-radio-label {
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 27px;
+            letter-spacing: 0.18px;
+            padding-bottom: 0;
+        }
+        .btnEnviar {
+            background: #DF0C30;
+            border-radius: 3px;
+            padding: 14px 0;
+            cursor: pointer;
+            width: 140px;
+            color: #ffffff;
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 24px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        @media (max-width: 640px) {
+            width: 100%;
+            margin: 0;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 30px 25px;
+        }
+    }
+    @media (max-width: 640px) {
+        flex-direction: column;
+    }
+}
+#ModalNewAccount {
+    .modal-dialog {
+        .modal-content {
+            .recoveryLeft {
+                height: 637px;
+                background: url('./assets/modal/bg-newAccount.png');
+            }
+            .recoveryRight {
+                .titleRecovery {
+                    margin: 10px 0 10px 0;
+                }
+                .mat-tab-header {
+                    margin-bottom: 25px;
+                }
+                .mat-tab-label {
+                    width: 50%;
+                }
+                .mat-ink-bar {
+                    background-color: #df0c30 !important;
+                    height: 3px;
+                }
+                .elementRow {
+                    display: flex;
+                    gap: 15px;
+                    .form-control,
+                    .form-select {
+                        margin-bottom: 20px;
+                        font-family: Montserrat;
+                        font-size: 14px;
+                        text-transform: capitalize;
+                        color: #B9BCBF;
+                        border-radius: 5px;
+                        height: 41px;
+                        border: 1px solid #ced4da;
+                    }
+                    .form-select {
+                        width: calc(100% - 30px);
+                    }
+                }
+                .textPass {
+                    font-family: Montserrat;
+                    font-weight: 300;
+                    font-size: 10px;
+                    line-height: 15px;
+                    letter-spacing: 0.25px;
+                    margin-bottom: 10px;
+                }
+                button {
+                    margin-bottom: 10px;
+                }
+                .textPolitica {
+                    display: block;
+                    font-family: Montserrat;
+                    font-weight: 300;
+                    font-size: 10px;
+                    line-height: 15px;
+                    letter-spacing: 0.25px;
+                    text-align: center;
+                    a {
+                        font-family: Montserrat;
+                        font-weight: 600;
+                        font-size: 10px;
+                        line-height: 21px;
+                        letter-spacing: 0.1px;
+                        font-weight: 600;
+                        color: #009AED;
+                    }
+                }
+                .socialMedia {
+                    display: none;
+                    flex-direction: column;
+                    gap: 11px;
+                    font-family: Open Sans;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 21px;
+                    letter-spacing: 0.15px;
+                    color: #FFFFFF;
+                    margin-bottom: 30px;
+                    &.active {
+                        display: flex;
+                    }
+                    .btnFacebook,
+                    .btnGoogle {
+                        position: relative;
+                        width: 100%;
+                        height: 41px;
+                        border-radius: 5px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        img {
+                            position: absolute;
+                            left: 33px;
+                            min-width: 25.19px;
+                            min-height: 25.19px;
+                            max-width: 25.19px;
+                            max-height: 25.19px;
+                            margin-right: 12px;
+                        }
+                    }
+                    .btnFacebook {
+                        background: #4267B2;
+                    }
+                    .btnGoogle {
+                        background: #518EF8;
+                    }
+                }
+            }
+        }
+    }
+}
