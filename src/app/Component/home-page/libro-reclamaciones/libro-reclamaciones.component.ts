@@ -211,4 +211,9 @@ export class LibroReclamacionesComponent implements OnInit {
     this.numCode = undefined
     this.formLibro.reset()
   }
+
+  isChecked: Boolean = false;
+  checkSelect(value:boolean){
+    this.isChecked = value;
+  }
 }
