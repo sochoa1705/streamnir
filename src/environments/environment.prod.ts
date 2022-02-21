@@ -21,5 +21,6 @@ export const environment = {
   urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
   urlNmviajes:"http://10.75.102.23:10001/v1/api",
   urlGeo:"http://10.75.131.17:10515",
-  urlMaster:"http://10.75.131.17"
+  urlMaster:"http://10.75.131.17",
+  urlLibro:"http://10.75.102.23:10007/",
 };

@@ -21,7 +21,11 @@ export class AppComponent {
 
     this.cerrarBoxClicFuera()
   }
-
+  
+  socialMedia: Boolean = true;
+  showSocialMedia($event: { index: string | number; }){
+    this.socialMedia = $event.index == 0 ? true : false;
+}
 
   cerrarBoxClicFuera() {
     combineLatest([fromEvent(document, 'click'), this.popUpSubject.state()]).pipe(
