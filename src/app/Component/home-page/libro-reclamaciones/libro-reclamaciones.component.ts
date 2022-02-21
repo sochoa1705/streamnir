@@ -74,52 +74,62 @@ export class LibroReclamacionesComponent implements OnInit {
   }
   enviar() {
     let data = this.formLibro.value
-    
+
     if (this.validForm()) {
       const textSend = 'SE ESTAN VALIDADNDO SUS DATOS!'
       this.loaderSubjectService.showText(textSend)
-    let payload = {
-      "TrackingCode": "00000",
-      "MuteExceptions": false,
-      "Caller": {
-        "Company": "Agil",
-        "Application": "Interagencias"
-      },
-      "Parameter": {
-        "Ip": this.ipCliente,
-        "Browser": "Chrome",
-        "Person": {
-          "Firstname": data.nombre,
-          "Lastname": "Oshiro",
-          "DocumentType": "DNI",
-          "DocumentNumber": data.numDoc,
-          "Phone": data.telefono,
-          "Address": data.direccion,
-          "Email": data.email
+      let payload = {
+        "TrackingCode": "00000",
+        "MuteExceptions": false,
+        "Caller": {
+          "Company": "Agil",
+          "Application": "Interagencias"
         },
-        "Type": data.tipoReclamo,
-        "Service": {
-          "Name": data.descripcionBienContratado,
-          "Amount": Number(data.montoReclamado),
-          "Observation": data.observaciones,
-          "Comment": data.detalleReclamo
-        },
-        "Adviser": {
-          "FullName": data.asesora,
-          "PointSale": data.puntoVenta
+        "Parameter": {
+          "Ip": this.ipCliente,
+          "Browser": "Chrome",
+          "Person": {
+            "Firstname": data.nombre,
+            "Lastname": "Oshiro",
+            "DocumentType": "DNI",
+            "DocumentNumber": data.numDoc,
+            "Phone": data.telefono,
+            "Address": data.direccion,
+            "Email": data.email,
+            "IsChildren": true,
+            "Father": {
+              "Firstname": "Pepe",
+              "Lastname": "Oshiro",
+              "Address": "Mi casa 2",
+              "Email": "papa@gmail.com"
+            }
+          },
+          "Type": data.tipoReclamo,
+          "Service": {
+            "Name": data.descripcionBienContratado,
+            "Amount": Number(data.montoReclamado),
+            "Text": "Test pedido",
+            "Observation": data.observaciones,
+            "Comment": data.detalleReclamo
+          },
+          "Adviser": {
+            "FullName": data.asesora,
+            "PointSale": data.puntoVenta
+          }
         }
       }
+      console.log(payload)
+      this.libroService.libroData(payload).subscribe({
+        next: response => {
+          this.numCode = response['Result']['Code']
+          this.loaderSubjectService.closeLoader()
+        },
+        error: err => {
+          console.log(err)
+          this.loaderSubjectService.closeLoader()
+        }
+      })
     }
-    console.log(payload)
-    this.libroService.libroData(payload).subscribe({
-      next: response => {
-        this.numCode = response['Result']['Code']
-        this.loaderSubjectService.closeLoader()
-      },
-      error: err =>{ console.log(err)
-      this.loaderSubjectService.closeLoader()}
-    })
-  }
   }
   validForm() {
     this.errors = []
@@ -143,7 +153,7 @@ export class LibroReclamacionesComponent implements OnInit {
     let tipoDoc: string = this.formLibro.getRawValue()['tipoDoc']
     if (tipoDoc === undefined || tipoDoc === null || tipoDoc.trim() === '') {
       this.errors.push({ name: this.MSG_TIPO_DOC, message: 'Campo requerido' })
-    } 
+    }
     let numDoc: string = this.formLibro.getRawValue()['numDoc']
     if (numDoc === undefined || numDoc === null || numDoc.trim() === '') {
       this.errors.push({ name: this.MSG_NUM_DOC, message: 'Campo requerido' })
@@ -176,7 +186,7 @@ export class LibroReclamacionesComponent implements OnInit {
       this.errors.push({ name: this.MSG_MONTO_RECLAMO, message: 'Campo es requerido' })
     }
     let tipoReclamo: boolean = this.formLibro.getRawValue()['tipoReclamo']
-    if (tipoReclamo === undefined || tipoReclamo === null || tipoReclamo  === false) {
+    if (tipoReclamo === undefined || tipoReclamo === null || tipoReclamo === false) {
       this.errors.push({ name: this.MSG_TIPO_RECLAMO, message: 'tipo es requerido' })
     }
     let detalleReclamo: string = this.formLibro.getRawValue()['detalleReclamo']
@@ -207,7 +217,7 @@ export class LibroReclamacionesComponent implements OnInit {
   getMessageArray(index: any, messageKey: any) {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
-  reenviar(){
+  reenviar() {
     this.numCode = undefined
     this.formLibro.reset()
   }
