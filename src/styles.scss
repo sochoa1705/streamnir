@@ -3688,7 +3688,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             // gap: 10px;
             padding: 4px 10px 10px 10px;
             position: relative;
-         }
+        }
         &.right {
             justify-content: end;
         }
@@ -7046,6 +7046,11 @@ button.customers {
         flex-direction: column;
     }
 }
+
+.cursorPointer {
+    cursor: pointer;
+}
+
 #ModalNewAccount {
     .modal-dialog {
         .modal-content {

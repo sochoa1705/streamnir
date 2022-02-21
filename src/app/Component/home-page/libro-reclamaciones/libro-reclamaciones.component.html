@@ -76,10 +76,17 @@
             </div>
 
             <div class="rowGroup columna">
-                <div class="col">Nombres y Apellidos:</div>
+                <div class="col">Nombres:</div>
                 <div class="col">
                     <input formControlName="nombre" class="form-control" type="text" name="" [ngClass]="getMessage(MSG_NOMBRE) != MSG_EMPTY ? 'isvalid' : ''">
                     <span class="valid" *ngIf="getMessage(MSG_NOMBRE) != MSG_EMPTY">{{ getMessage(MSG_NOMBRE) }}</span>
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="col">Apellidos:</div>
+                <div class="col">
+                    <input formControlName="apellido" class="form-control" type="text" name="" [ngClass]="getMessage(MSG_APELLIDO) != MSG_EMPTY ? 'isvalid' : ''">
+                    <span class="valid" *ngIf="getMessage(MSG_APELLIDO) != MSG_EMPTY">{{ getMessage(MSG_APELLIDO) }}</span>
                 </div>
             </div>
             <div class="rowGroup columna">
@@ -168,11 +175,58 @@
             </div>
 
             <div class="rowGroup">
-                <div class="form-check form-check-inline">
-                    <input formControlName="menor" class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">Soy menor de edad </label>
+                <div class="form-check form-check-inline ">
+                    <input #menorEdad id="menorEdad" [checked]="isChecked" (change)="checkSelect(menorEdad.checked)" formControlName="menor"
+                        class="form-check-input cursorPointer" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                    <label class="form-check-label cursorPointer" for="inlineRadio1">Soy menor de edad </label>
                 </div>
             </div>
+            <!-- Datos Padre -->
+            <div *ngIf="isChecked">
+                <div class="title">
+                    Datos del padre o representante legal
+                </div>
+                <div class="rowGroup columna">
+                    <div class="col">Nombre:</div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="" formControlName="nombreMenor" [ngClass]="getMessage(MSG_NOMBRE_MENOR) != MSG_EMPTY ? 'isvalid' : ''">
+                        <span class="valid" *ngIf="getMessage(MSG_NOMBRE_MENOR) != MSG_EMPTY">{{ getMessage(MSG_NOMBRE_MENOR) }}</span>
+                    </div>
+                </div>
+                <div class="rowGroup columna">
+                    <div class="col">Apellidos:</div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="" formControlName="apellidoMenor" [ngClass]="getMessage(MSG_APELLIDO_MENOR) != MSG_EMPTY ? 'isvalid' : ''">
+                        <span class="valid" *ngIf="getMessage(MSG_APELLIDO_MENOR) != MSG_EMPTY">{{ getMessage(MSG_APELLIDO_MENOR) }}</span>
+                    </div>
+                </div>
+                <div class="rowGroup columna">
+                    <div class="col">Teléfono:</div>
+                    <div class="col">
+                        <!-- <input class="form-control" type="text" name="" formControlName="telefonoMenor" [ngClass]="getMessage(MSG_TELEFONO_MENOR) != MSG_EMPTY ? 'isvalid' : ''"> -->
+                        <input class="form-control" type="text" name="" formControlName="telefonoMenor">
+                        <!-- <span class="valid" *ngIf="getMessage(MSG_TELEFONO_MENOR) != MSG_EMPTY">{{ getMessage(MSG_TELEFONO_MENOR) }}</span> -->
+                    </div>
+                </div>
+                <div class="rowGroup columna">
+                    <div class="col">Dirección:</div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="" formControlName="direccionMenor" [ngClass]="getMessage(MSG_DIRECCION_MENOR) != MSG_EMPTY ? 'isvalid' : ''">
+                        <span class="valid" *ngIf="getMessage(MSG_DIRECCION_MENOR) != MSG_EMPTY">{{ getMessage(MSG_DIRECCION_MENOR) }}</span>
+                    </div>
+                </div>
+                <div class="rowGroup columna">
+                    <div class="col">E-mail:</div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="" formControlName="emailMenor" [ngClass]="getMessage(MSG_EMAIL_MENOR) != MSG_EMPTY ? 'isvalid' : ''">
+                        <span class="valid" *ngIf="getMessage(MSG_EMAIL_MENOR) != MSG_EMPTY">{{ getMessage(MSG_EMAIL_MENOR) }}</span>
+                    </div>
+                </div>
+                <div class="separador"></div>
+            </div>
+            <!-- END Datos Padre -->
+
+
             <div class="rowGroup">
                 <div class="texto">
                     En caso de menores de edad indicar Nombre, Domicilio, Teléfono y correo electrónico de uno de los padres o representantes
