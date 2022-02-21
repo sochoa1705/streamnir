@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import { combineLatest, fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { PopupService } from './Services/pop-up/popup.service';
@@ -17,9 +18,32 @@ export class AppComponent {
     }
   ]
 
-  constructor(private popUpSubject: PopupService) {
+  constructor(private popUpSubject: PopupService,private authService: SocialAuthService) {
 
-    this.cerrarBoxClicFuera()
+    this.cerrarBoxClicFuera();
+
+
+    this.authService.authState.subscribe((user) => {
+      console.log(user);
+    });
+
+  }
+
+
+  
+
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  signOut(): void {
+    this.authService.signOut();
   }
   
   socialMedia: Boolean = true;

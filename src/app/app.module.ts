@@ -8,6 +8,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [AppComponent],
@@ -18,8 +24,27 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTabsModule,
     MatCheckboxModule,
     NgbModule,
+    SocialLoginModule
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy },],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy },  
+    {
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(
+            '377536376412-5ik9nvviq62v8dsin6tmbj2ap8i2g7dl.apps.googleusercontent.com'
+          )
+        },
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider('eb0d04cdb678b94610793bc538cac200')
+        }
+      ]
+    } as SocialAuthServiceConfig,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
