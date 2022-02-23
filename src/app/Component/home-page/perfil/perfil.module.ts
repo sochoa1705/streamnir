@@ -7,13 +7,16 @@ import { FooterModule } from 'src/app/shared/components/footer/footer.module';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { HttpClientModule } from '@angular/common/http';
 
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [PerfilComponent],
   imports: [
     CommonModule,
     PerfilRoutingModule,
     FooterModule,
+    MatCheckboxModule,
+    MatRadioModule,
     HttpClientModule
   ],
   exports: [PerfilComponent],

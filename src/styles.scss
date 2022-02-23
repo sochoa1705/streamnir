@@ -5085,6 +5085,62 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+.moreInfo {
+    padding: 20px 26px 0 26px;
+    .title {
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 36px;
+        display: flex;
+        align-items: center;
+        color: #4B4B4B;
+        width: 100%;
+    }
+    .question {
+        margin-top: 20px;
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.25px;
+        color: #4B4B4B;
+        padding-bottom: 9px;
+        span {
+            font-weight: 300;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+    }
+    .groupOption {
+        display: flex;
+        flex-wrap: wrap;
+        .checkOption {
+            font-family: Montserrat;
+            width: 20%;
+            display: flex;
+            label {
+                font-style: normal;
+                font-weight: 300;
+                font-size: 14px;
+                line-height: 21px;
+                display: flex;
+                align-items: center;
+                letter-spacing: 0.25px;
+                color: #4B4B4B;
+                padding-bottom: 9px;
+            }
+        }
+        .groupRadio {
+            display: flex;
+            width: 100%;
+        }
+    }
+}
+
 @media (max-width: 640px) {
     .boxDestino {
         .titulo {
