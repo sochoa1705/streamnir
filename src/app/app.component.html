@@ -151,51 +151,64 @@
 					<!-- PERSONAL -->
 					<mat-tab label="Personal">
 						<form name="personalAccountForm" [formGroup]="personalAccountForm">
-							<div class="elementRow" [ngClass]="{error : validatePersonalAccountForm('firstName')}">
-								<input type="text" class="form-control" formControlName="firstName" placeholder="Nombres">
 
-								<!-- <div class="msgError" *ngIf="validatePersonalAccountForm('firstName')">
-									Ingresa tu(s) nombre(s)
-								</div> -->
+							<div class="elementRow">
+								<div class="divValida" [ngClass]="{error : validatePersonalAccountForm('firstName')}">
+									<input type="text" class="form-control" formControlName="firstName" placeholder="Nombres">
+
+									<div class="textError" *ngIf="validatePersonalAccountForm('firstName')">
+										Ingresa tu(s) nombre(s)
+									</div>
+								</div>
 							</div>
 
-							<div class="elementRow"
-								[ngClass]="{error : validatePersonalAccountForm('fatherLastname') || validatePersonalAccountForm('motherLastname')}">
-								<input type="text" class="form-control" formControlName="fatherLastname" placeholder="Primer apellido">
+							<div class="elementRow">
+								<div class="divValida" [ngClass]="{error : validatePersonalAccountForm('fatherLastname')}">
+									<input type="text" class="form-control" formControlName="fatherLastname"
+										placeholder="Primer apellido">
 
-								<!-- <div class="msgError" *ngIf="validatePersonalAccountForm('fatherLastname')">
-									Ingresa tu primer apellido
-								</div> -->
+									<div class="textError" *ngIf="validatePersonalAccountForm('fatherLastname')">
+										Ingresa tu primer apellido
+									</div>
+								</div>
 
-								<input type="text" class="form-control" formControlName="motherLastname" placeholder="Segundo apellido">
+								<div class="divValida" [ngClass]="{error : validatePersonalAccountForm('motherLastname')}">
+									<input type="text" class="form-control" formControlName="motherLastname"
+										placeholder="Segundo apellido">
 
-								<!-- <div class="msgError" *ngIf="validatePersonalAccountForm('motherLastname')">
-									Ingresa tu segundo apellido
-								</div> -->
+									<div class="textError" *ngIf="validatePersonalAccountForm('motherLastname')">
+										Ingresa tu segundo apellido
+									</div>
+								</div>
 							</div>
 
-							<div class="elementRow" [ngClass]="{error : validatePersonalAccountForm('email')}">
-								<input type="text" class="form-control" formControlName="email" placeholder="Email">
+							<div class="elementRow">
+								<div class="divValida" [ngClass]="{error : validatePersonalAccountForm('email')}">
+									<input type="text" class="form-control" formControlName="email" placeholder="Email">
 
-								<!-- <div class="msgError" *ngIf="validatePersonalAccountForm('email')">
-									Ingresa tu email
-								</div> -->
+									<div class="textError" *ngIf="validatePersonalAccountForm('email')">
+										Ingresa tu email
+									</div>
+								</div>
 							</div>
 
-							<div class="elementRow"
-								[ngClass]="{error : validatePersonalAccountForm('password') || validatePersonalAccountForm('repeatPassword')}">
-								<input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+							<div class="elementRow">
+								<div class="divValida" [ngClass]="{error : validatePersonalAccountForm('password')}">
+									<input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
 
-								<!-- <div class="msgError" *ngIf="validatePersonalAccountForm('password')">
-									Ingresa una contraseña
-								</div> -->
+									<div class="textError" *ngIf="validatePersonalAccountForm('password')">
+										Ingresa una contraseña
+									</div>
+								</div>
 
-								<input type="password" class="form-control" formControlName="repeatPassword"
-									placeholder="Confirmar contraseña">
+								<div class="divValida" [ngClass]="{error : validatePersonalAccountForm('repeatPassword')}">
+									<input type="password" class="form-control" formControlName="repeatPassword"
+										placeholder="Confirmar contraseña">
 
-								<!-- <div class="msgError" *ngIf="validatePersonalAccountForm('repeatPassword')">
-									Ingresa la misma contraseña
-								</div> -->
+									<div class="textError" *ngIf="validatePersonalAccountForm('repeatPassword')">
+										Ingresa la misma contraseña
+									</div>
+								</div>
 							</div>
 
 						</form>
@@ -231,84 +244,102 @@
 					<!-- EMPRESA -->
 					<mat-tab label="Empresa">
 						<form name="businessAccountForm" [formGroup]="businessAccountForm">
-							<div class="elementRow"
-								[ngClass]="{error : validateBusinessAccountForm('ruc') || validateBusinessAccountForm('businessName')}">
-								<input type="text" class="form-control" formControlName="ruc" placeholder="RUC">
 
-								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('ruc')">
-									Ingresa el número de RUC
-								</div> -->
+							<div class="elementRow">
+								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('ruc')}">
+									<input type="text" class="form-control" formControlName="ruc" placeholder="RUC">
 
-								<input type="text" class="form-control" formControlName="businessName" placeholder="Razón Social">
+									<div class="textError" *ngIf="validateBusinessAccountForm('ruc')">
+										Ingresa el número de RUC
+									</div>
+								</div>
 
-								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('businessName')">
-									Ingresa la razón social
-								</div> -->
+								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('businessName')}">
+									<input type="text" class="form-control" formControlName="businessName" placeholder="Razón Social">
+
+									<div class="textError" *ngIf="validateBusinessAccountForm('businessName')">
+										Ingresa la razón social
+									</div>
+								</div>
 							</div>
 
-							<div class="elementRow" [ngClass]="{error : validateBusinessAccountForm('firstName')}">
-								<input type="text" class="form-control" formControlName="firstName" placeholder="Nombres">
+							<div class="elementRow">
+								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('firstName')}">
+									<input type="text" class="form-control" formControlName="firstName" placeholder="Nombres">
 
-								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('firstName')">
-									Ingresa tu(s) nombre(s)
-								</div> -->
+									<div class="textError" *ngIf="validateBusinessAccountForm('firstName')">
+										Ingresa tu(s) nombre(s)
+									</div>
+								</div>
 							</div>
 
-							<div class="elementRow"
-								[ngClass]="{error : validateBusinessAccountForm('fatherLastname') || validateBusinessAccountForm('motherLastname')}">
-								<input type="text" class="form-control" formControlName="fatherLastname" placeholder="Apellido paterno">
+							<div class="elementRow">
+								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('fatherLastname')}">
+									<input type="text" class="form-control" formControlName="fatherLastname"
+										placeholder="Apellido paterno">
 
-								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('fatherLastname')">
-									Ingresa tu primer apellido
-								</div> -->
+									<div class="textError" *ngIf="validateBusinessAccountForm('fatherLastname')">
+										Ingresa tu primer apellido
+									</div>
+								</div>
 
-								<input type="text" class="form-control" formControlName="motherLastname" placeholder="Apellido materno">
-								<!-- 
-								<div class="msgError" *ngIf="validateBusinessAccountForm('motherLastname')">
-									Ingresa tu segundo apellido
-								</div> -->
+								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('motherLastname')}">
+									<input type="text" class="form-control" formControlName="motherLastname"
+										placeholder="Apellido materno">
+
+									<div class="textError" *ngIf="validateBusinessAccountForm('motherLastname')">
+										Ingresa tu segundo apellido
+									</div>
+								</div>
 							</div>
 
-							<div class="elementRow"
-								[ngClass]="{error : validateBusinessAccountForm('documentType') || validateBusinessAccountForm('documentNumber')}">
-								<select class="form-select" formControlName="documentType">
-									<option value="" selected>Seleccione</option>
-									<option value="1">DNI</option>
-								</select>
+							<div class="elementRow">
+								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('documentType')}">
+									<select class="form-select" formControlName="documentType">
+										<option value="" selected>Seleccione</option>
+										<option value="1">DNI</option>
+									</select>
 
-								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('documentType')">
-									Selecciona el tipo de documento
-								</div> -->
+									<div class="textError" *ngIf="validateBusinessAccountForm('documentType')">
+										Selecciona el tipo de documento
+									</div>
+								</div>
 
-								<input type="text" class="form-control" formControlName="documentNumber" placeholder="DNI">
+								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('documentNumber')}">
+									<input type="text" class="form-control" formControlName="documentNumber" placeholder="DNI">
 
-								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('documentNumber')">
-									Ingresa tu número de documento
-								</div> -->
+									<div class="textError" *ngIf="validateBusinessAccountForm('documentNumber')">
+										Ingresa tu número de documento
+									</div>
+								</div>
 							</div>
 
-							<div class="elementRow" [ngClass]="{error : validateBusinessAccountForm('email')}">
-								<input type="text" class="form-control" formControlName="email" placeholder="Email">
+							<div class="elementRow">
+								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('email')}">
+									<input type="text" class="form-control" formControlName="email" placeholder="Email">
 
-								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('email')">
-									Ingresa tu email
-								</div> -->
+									<div class="textError" *ngIf="validateBusinessAccountForm('email')">
+										Ingresa tu email
+									</div>
+								</div>
 							</div>
 
-							<div class="elementRow"
-								[ngClass]="{error : validateBusinessAccountForm('password') || validateBusinessAccountForm('repeatPassword')}">
-								<input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+							<div class="elementRow">
+								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('password')}">
+									<input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
 
-								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('password')">
-									Ingresa una contraseña
-								</div> -->
+									<div class="textError" *ngIf="validateBusinessAccountForm('password')">
+										Ingresa una contraseña
+									</div>
+								</div>
 
-								<input type="password" class="form-control" formControlName="repeatPassword" placeholder="Contraseña">
+								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('repeatPassword')}">
+									<input type="password" class="form-control" formControlName="repeatPassword" placeholder="Contraseña">
 
-								<!--
-								<div class="msgError" *ngIf="validateBusinessAccountForm('repeatPassword')">
-									Ingresa la misma contraseña
-								</div> -->
+									<div class="textError" *ngIf="validateBusinessAccountForm('repeatPassword')">
+										Ingresa la misma contraseña
+									</div>
+								</div>
 							</div>
 
 						</form>

@@ -563,6 +563,7 @@ section {
         }
         .mat-ink-bar {
             background-color: $red_light !important;
+						height: 3px;
             min-width: 212px !important;
         }
         .mat-tab-body-content {
@@ -6697,11 +6698,9 @@ button.customers {
                     .msgError {
                         display: none;
                         margin-left: 15px;
-                        font-family: Montserrat;
                         font-weight: 300;
                         font-size: 12px;
                         line-height: 18px;
-                        letter-spacing: 0.25px;
                         color: #F44336;
                         margin-bottom: 10px;
                     }
@@ -6715,6 +6714,29 @@ button.customers {
                         height: 41px;
                         border: 1px solid #ced4da;
                     }
+                    .divValida {
+                        flex-direction: column;
+                        flex: 1 1 auto;
+                        position: relative;
+                        &.error {
+                            .form-control,
+                            .form-select {
+                                border: 0.5px solid #F44336;
+                            }
+                            .textError {
+                                display: flex;
+                            }
+                        }
+                        .textError {
+                            display: none;
+                            position: absolute;
+                            margin-left: 15px;
+                            font-weight: 300;
+                            font-size: 11px;
+                            color: #F44336;
+                            bottom: 3px;
+                        }
+                    }										
                 }
                 button {
                     margin-bottom: 20px;
@@ -6808,7 +6830,12 @@ button.customers {
                         border: 1px solid #ced4da;
                     }
                     .form-select {
-                        width: calc(100% - 30px);
+                        //width: calc(100% - 30px);
+                    }
+                    .divValida {
+                        &.wSelect {
+                            min-width: calc(50% - 8px);
+                        }
                     }
                 }
                 .textPass {
