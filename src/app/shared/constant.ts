@@ -57,6 +57,9 @@ export enum ENDPOINT_API {
   
   //CARDPAYMENT
   LIBRO_RECLAMO = 'v1/api/Complaint',
+
+  // PREFERENCE
+  PREFERENCE = 'v1/api/Preference',
 }
 
 export enum ROUTE_VIAJES {

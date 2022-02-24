@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PreferenceService } from '../../../Services/preference/preference.service';
 @NgModule({
   declarations: [PerfilComponent],
   imports: [
@@ -17,10 +19,12 @@ import {MatRadioModule} from '@angular/material/radio';
     FooterModule,
     MatCheckboxModule,
     MatRadioModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [PerfilComponent],
-  providers: [DataPagePresenterService]
+  providers: [DataPagePresenterService, PreferenceService]
 
 })
 export class PerfilModule { }
