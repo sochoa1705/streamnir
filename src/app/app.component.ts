@@ -7,7 +7,7 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'a
 import { combineLatest, fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { ConfirmDialogComponent } from './Component/confirm-dialog/confirm-dialog.component';
+//import { ConfirmDialogComponent } from './Component/confirm-dialog/confirm-dialog.component';
 import { AccountService } from './Services/account/account.service';
 import { PopupService } from './Services/pop-up/popup.service';
 import { Guid } from './shared/utils';
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     }
   ]
 
-  confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
+  //confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   isPerson: boolean = true;
 
