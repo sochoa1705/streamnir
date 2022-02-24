@@ -64,9 +64,15 @@ export class AppComponent implements OnInit {
     this.cerrarBoxClicFuera();
 
     this._authService.authState.subscribe((user) => {
-      console.log(user);
+
+      if(user.provider == "GOOGLE"){
+        this.saveSocialAccount(user.firstName, user.lastName, user.email, "G", user.id)
+      }
+
     });
   }
+
+
 
   ngOnInit(): void {
     this.loadUsuario();
@@ -141,6 +147,61 @@ export class AppComponent implements OnInit {
     })
   }
   
+
+  saveSocialAccount(Firstname:string,FatherLastname:string, Email:string, SocialNetwork:"G" | "F" ,IdSocialNetwork:string ){
+
+      const payload = {
+        TrackingCode: Guid(),
+        MuteExceptions: environment.muteExceptions,
+        Caller: {
+          Company: "Agil",
+          Application: "Interagencias"
+        },
+        Parameter: {
+          Firstname,
+          FatherLastname,
+          MotherLastname: "",
+          Email,
+          Password: "",
+          IsPerson: true,
+          Ruc: "",
+          BusinessName: "",
+          SocialNetwork,
+          IdSocialNetwork
+        }
+      };
+
+      this._accountService.saveAccount(payload).subscribe({
+        next: (response) => {
+          const isSuccess = response.Result.IsSuccess;
+
+          if (isSuccess) {
+            this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
+              verticalPosition: 'top',
+              duration: 2000
+            });
+          } else {
+            this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
+              verticalPosition: 'top',
+              duration: 2000
+            });
+          }
+
+          console.log(this.personalAccountForm.value);
+          this.personalAccountForm.reset();
+
+          //this.loaderSubjectService.closeLoader()
+        },
+        error: (err) => {
+
+          console.log(err);
+
+          //this.loaderSubjectService.closeLoader()
+        },
+        complete: () => { }
+      });
+    
+  }
 
   savePersonalAccount(): void {
     if (this.personalAccountForm.invalid) {
