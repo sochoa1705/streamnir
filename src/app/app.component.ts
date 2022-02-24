@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -34,6 +34,8 @@ export class AppComponent implements OnInit {
 
   title = 'NuevoMundoViajes';
 
+  @ViewChild("closeBotonUsuario") closeBotonUsuario:ElementRef;
+
   pasajeros: any = [
     {
       adultos: 10,
@@ -58,7 +60,6 @@ export class AppComponent implements OnInit {
     public _matDialog: MatDialog,
     private _matSnackBar: MatSnackBar,
     private _validatorsService: ValidatorsService,
-    private authService: SocialAuthService
   ) {
     this.cerrarBoxClicFuera();
 
@@ -127,7 +128,7 @@ export class AppComponent implements OnInit {
   }
 
   closeModal(){
-    const btnModal:any = document.querySelector("button[data-bs-dismiss='modal']");
+    const btnModal:any = this.closeBotonUsuario.nativeElement;
     btnModal?btnModal.click():null;
   }
 

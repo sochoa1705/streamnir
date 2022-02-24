@@ -83,20 +83,21 @@ export class AccountService {
 
       localStorage.setItem('usuario', JSON.stringify(user));
 
-      console.log(this.userLogged.value);
-
       this.dispatchLogged(true);
     }
     
     
     getUserStorage():UserStorage{
       const userStr:string = localStorage.getItem('usuario') || '';
-      return JSON.parse(userStr);
+
+      return userStr.length>0?JSON.parse(userStr):'';
     }
 
     signOut(): void {
       // this.authService.signOut();
       localStorage.removeItem('usuario');
+
+      this.dispatchLogged(false);
     }
 
 

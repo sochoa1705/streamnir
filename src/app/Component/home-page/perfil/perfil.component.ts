@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AccountService } from 'src/app/Services/account/account.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 
 @Component({
@@ -9,7 +11,8 @@ import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-p
 export class PerfilComponent implements OnInit {
   constructor(
     public dataPagePresenterService: DataPagePresenterService,
-
+    public accountService:AccountService,
+    private router:Router
   ) { }
 
   id: any = "mnuPerfil";
@@ -50,6 +53,12 @@ export class PerfilComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log('object');
+  }
+
+  logout(){
+    this.accountService.signOut();
+    this.router.navigateByUrl("/");
   }
 
 }
