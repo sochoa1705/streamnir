@@ -16,8 +16,8 @@ import { ValidatorsService } from './shared/validators/validators.service';
 
 export class Login {
   constructor(
-    public email = "",
-    public password = "",
+    public email = "jose.oshiro@gmail.com",
+    public password = "Oshiro123",
     public recorder = false,
     public business = false,
     public emailB = "",
@@ -45,7 +45,6 @@ export class AppComponent implements OnInit {
   //confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
   login = new Login()
 
-
   isPerson: boolean = true;
 
   personalAccountForm: FormGroup;
@@ -69,8 +68,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
+  }
+
+  loadUsuario(){
+    const userStr = this._accountService.getUserStorage();
+    if(userStr.id > 0){
+      this._accountService.dispatchLogged(true);
+    }else{
+      this._accountService.dispatchLogged(false);
+    }
   }
 
   createPersonalAccountForm(): FormGroup {
@@ -116,15 +125,23 @@ export class AppComponent implements OnInit {
   saveAccount(): void {
     this.isPerson ? this.savePersonalAccount() : this.saveBusinessAccount();
   }
+
+  closeModal(){
+    const btnModal:any = document.querySelector("button[data-bs-dismiss='modal']");
+    btnModal?btnModal.click():null;
+  }
+
   signIn(){
-    console.log(this.login);
+    this._accountService.signIn(this.login).subscribe(resp=>{
+      if(resp.IsSuccess){
+        this._accountService.guardarStorage(resp);
+        this.closeModal();
+      }
+    })
   }
   
 
   savePersonalAccount(): void {
-
-    debugger
-
     if (this.personalAccountForm.invalid) {
       this.personalAccountForm.markAllAsTouched();
       return;
