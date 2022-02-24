@@ -7,13 +7,19 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogModule } from './Component/confirm-dialog/confirm-dialog.module';
+
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [AppComponent],
@@ -23,11 +29,17 @@ import {
     BrowserAnimationsModule,
     MatTabsModule,
     MatCheckboxModule,
+    MatSnackBarModule,
+    MatDialogModule,
     NgbModule,
-    SocialLoginModule
+    SocialLoginModule,
+    HttpClientModule,
+    ConfirmDialogModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy },  
-    {
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy },
+  {
     provide: 'SocialAuthServiceConfig',
     useValue: {
       autoLogin: false,

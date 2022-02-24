@@ -1,209 +1,338 @@
 <router-outlet></router-outlet>
 <!-- Modal -->
 <div class="modal fade" id="ModalSesion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="text-end">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <img src="./assets/modal/Logo_modal.png" alt="">
-                <h1 class="modal-title" id="exampleModalLabel">Iniciar sesión</h1>
-                <p>Ingresa con tus datos de siempre</p>
-                <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
-            </div>
-            <div class="modal-body">
-                <!-- <mat-tab-group mat-align-tabs="center" [(selectedIndex)]="selectedIndex"> -->
-                <mat-tab-group mat-align-tabs="center">
-                    <!-- PERSONAL -->
-                    <mat-tab label="Personal">
-                        <form action="">
-                            <div class="elementRow">
-                                <input type="text" class="form-control" placeholder="Email">
-                                <div class="msgError">Ingresa tu email</div>
-                            </div>
-                            <div class="elementRow">
-                                <input type="text" class="form-control" placeholder="Contraseña">
-                                <div class="msgError">Ingresa tu contraseña</div>
-                                <div class="iconPass">
-                                    <img src="./assets/modal/eye.png" alt="">
-                                </div>
-                            </div>
-                            <div class="row mx-0">
-                                <div class="col-6">
-                                    <mat-checkbox class="example-margin">Recordar datos</mat-checkbox>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <a href="#" class="subRayado" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la contraseña?</a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <hr>
-                            <p class="textConecta">O conéctate con uno de estos servicios</p>
-                            <div class="socialMedia">
-                                <div (click)="signInWithFB()" class="btnFacebook">
-                                    <img src="./assets/modal/facebook-logo.png" alt="">Facebook</div>
-                                <div (click)="signInWithGoogle()" class="btnGoogle">
-                                    <img src="./assets/modal/google-logo.png" alt="">Google</div>
-                            </div>
-                        </form>
-                    </mat-tab>
-                    <!-- END PERSONAL -->
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="text-end">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<img src="./assets/modal/Logo_modal.png" alt="">
+				<h1 class="modal-title" id="exampleModalLabel">Iniciar sesión</h1>
+				<p>Ingresa con tus datos de siempre</p>
+				<!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+			</div>
+			<div class="modal-body">
+				<!-- <mat-tab-group mat-align-tabs="center" [(selectedIndex)]="selectedIndex"> -->
+				<mat-tab-group mat-align-tabs="center">
+					<!-- PERSONAL -->
+					<mat-tab label="Personal">
+						<form action="">
+							<div class="elementRow">
+								<input type="text" class="form-control" placeholder="Email">
+								<div class="msgError">Ingresa tu email</div>
+							</div>
+							<div class="elementRow">
+								<input type="text" class="form-control" placeholder="Contraseña">
+								<div class="msgError">Ingresa tu contraseña</div>
+								<div class="iconPass">
+									<img src="./assets/modal/eye.png" alt="">
+								</div>
+							</div>
+							<div class="row mx-0">
+								<div class="col-6">
+									<mat-checkbox class="example-margin">Recordar datos</mat-checkbox>
+								</div>
+								<div class="col-6 text-end">
+									<a href="#" class="subRayado" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la
+										contraseña?</a>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<hr>
+							<p class="textConecta">O conéctate con uno de estos servicios</p>
+							<div class="socialMedia">
+								<div (click)="signInWithFB()" class="btnFacebook">
+									<img src="./assets/modal/facebook-logo.png" alt="">Facebook
+								</div>
+								<div (click)="signInWithGoogle()" class="btnGoogle">
+									<img src="./assets/modal/google-logo.png" alt="">Google
+								</div>
+							</div>
+						</form>
+					</mat-tab>
+					<!-- END PERSONAL -->
 
-                    <!-- EMPRESA -->
-                    <mat-tab label="Empresa">
-                        <form action="">
-                            <div class="elementRow error">
-                                <input type="text" class="form-control" placeholder="Email">
-                                <div class="msgError">Ingresa tu email</div>
-                            </div>
-                            <div class="elementRow error">
-                                <input type="text" class="form-control" placeholder="Contraseña">
-                                <div class="msgError">Ingresa tu contraseña</div>
-                                <div class="iconPass">
-                                    <img src="./assets/modal/eye.png" alt="">
-                                </div>
-                            </div>
-                            <div class="row mx-0">
-                                <div class="col-6">
-                                    <mat-checkbox class="example-margin">Recordar datos</mat-checkbox>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la contraseña?</a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </form>
-                    </mat-tab>
-                    <!-- END EMPRESA -->
-                </mat-tab-group>
-            </div>
-            <div class="modal-footer">
-                <button class="w-100">Iniciar sesión</button>
-                <div class="account">
-                    <div class="notRegister">¿No estás registrado?</div>
-                    <a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalNewAccount">Crea una cuenta</a>
-                </div>
-            </div>
-        </div>
-    </div>
+					<!-- EMPRESA -->
+					<mat-tab label="Empresa">
+						<form action="">
+							<div class="elementRow error">
+								<input type="text" class="form-control" placeholder="Email">
+								<div class="msgError">Ingresa tu email</div>
+							</div>
+							<div class="elementRow error">
+								<input type="text" class="form-control" placeholder="Contraseña">
+								<div class="msgError">Ingresa tu contraseña</div>
+								<div class="iconPass">
+									<img src="./assets/modal/eye.png" alt="">
+								</div>
+							</div>
+							<div class="row mx-0">
+								<div class="col-6">
+									<mat-checkbox class="example-margin">Recordar datos</mat-checkbox>
+								</div>
+								<div class="col-6 text-end">
+									<a href="#" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la
+										contraseña?</a>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</form>
+					</mat-tab>
+					<!-- END EMPRESA -->
+				</mat-tab-group>
+			</div>
+			<div class="modal-footer">
+				<button class="w-100">Iniciar sesión</button>
+				<div class="account">
+					<div class="notRegister">¿No estás registrado?</div>
+					<a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalNewAccount">Crea una cuenta</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
 
 <!-- Modal Recuperar contraseña-->
 <div class="modal fade" id="ModalRecovery" tabindex="-1" aria-labelledby="modalRecovery" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content ">
-            <div class="recoveryLeft ">
-                <div class="titleRecovery ">¡Únete a NMViajes y recibe nuestras ofertas exclusivas!</div>
-                <img src="./assets/modal/logo-white.png " alt=" ">
-            </div>
-            <div class="recoveryRight">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="titleRecovery">Recuperar contraseña</div>
-                <form action="">
-                    <div class="elementRow">
-                        <input type="text" class="form-control" placeholder="Email">
-                        <div class="msgError">Ingresa tu email</div>
-                    </div>
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content ">
+			<div class="recoveryLeft ">
+				<div class="titleRecovery ">¡Únete a NMViajes y recibe nuestras ofertas exclusivas!</div>
+				<img src="./assets/modal/logo-white.png " alt=" ">
+			</div>
+			<div class="recoveryRight">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="titleRecovery">Recuperar contraseña</div>
+				<form action="">
+					<div class="elementRow">
+						<input type="text" class="form-control" placeholder="Email">
+						<div class="msgError">Ingresa tu email</div>
+					</div>
 
-                </form>
-                <div class="d-flex justify-content-center">
-                    <button class="w-75">Recuperar contraseña</button>
-                </div>
-                <hr>
-                <div class="account">
-                    <div class="notRegister">¿Ya tienes cuenta?</div>
-                    <a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalSesion">Inicia sesión</a>
-                </div>
-            </div>
-        </div>
-    </div>
+				</form>
+				<div class="d-flex justify-content-center">
+					<button class="w-75">Recuperar contraseña</button>
+				</div>
+				<hr>
+				<div class="account">
+					<div class="notRegister">¿Ya tienes cuenta?</div>
+					<a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalSesion">Inicia sesión</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
-
-
 
 <!-- Modal Create Account-->
 <div class="modal fade" id="ModalNewAccount" tabindex="-1" aria-labelledby="modalNewAccount" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content ">
-            <div class="recoveryLeft ">
-                <div class="titleRecovery ">¡Únete a NMViajes y recibe nuestras ofertas exclusivas!</div>
-                <img src="./assets/modal/logo-white.png " alt=" ">
-            </div>
-            <div class="recoveryRight ">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="titleRecovery">Crear cuenta</div>
-                <div class="socialMedia" [class.active]="socialMedia">
-                    <div class="btnFacebook">
-                        <img src="./assets/modal/facebook-logo.png" alt="">Regístrate con Facebook</div>
-                    <div class="btnGoogle">
-                        <img src="./assets/modal/google-logo.png" alt="">Regístrate con Google</div>
-                </div>
-                <mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMedia($event)">
-                    <!-- PERSONAL -->
-                    <mat-tab label="Personal">
-                        <form action="">
-                            <div class="elementRow">
-                                <input type="text" class="form-control" placeholder="Nombre">
-                                <input type="text" class="form-control" placeholder="Apellido">
-                            </div>
-                            <div class="elementRow">
-                                <input type="text" class="form-control" placeholder="Email">
-                            </div>
-                            <div class="elementRow">
-                                <input type="text" class="form-control" placeholder="Contraseña">
-                                <input type="text" class="form-control" placeholder="Contraseña">
-                            </div>
-                        </form>
-                    </mat-tab>
-                    <!-- END PERSONAL -->
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content ">
+			<div class="recoveryLeft ">
+				<div class="titleRecovery ">¡Únete a NMViajes y recibe nuestras ofertas exclusivas!</div>
+				<img src="./assets/modal/logo-white.png " alt=" ">
+			</div>
+			<div class="recoveryRight ">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="titleRecovery">Crear cuenta</div>
+				<div class="socialMedia" [class.active]="socialMedia">
+					<div class="btnFacebook">
+						<img src="./assets/modal/facebook-logo.png" alt="">Regístrate con Facebook
+					</div>
+					<div class="btnGoogle">
+						<img src="./assets/modal/google-logo.png" alt="">Regístrate con Google
+					</div>
+				</div>
 
-                    <!-- EMPRESA -->
-                    <mat-tab label="Empresa">
-                        <form action="">
-                            <div class="elementRow">
-                                <input type="text" class="form-control" placeholder="RUC">
-                                <input type="text" class="form-control" placeholder="Razón Social">
-                            </div>
-                            <div class="elementRow">
-                                <input type="text" class="form-control" placeholder="Nombre">
-                                <input type="text" class="form-control" placeholder="Apellido">
-                            </div>
-                            <div class="elementRow">
-                                <select class="form-select">
-                                    <option selected>Seleccione</option>
-                                    <option value="1">DNI</option>
-                                  </select>
-                                <input type="text" class="form-control" placeholder="DNI">
-                            </div>
-                            <div class="elementRow">
-                                <input type="text" class="form-control" placeholder="Email">
-                            </div>
-                            <div class="elementRow">
-                                <input type="text" class="form-control" placeholder="Contraseña">
-                                <input type="text" class="form-control" placeholder="Contraseña">
-                            </div>
-                        </form>
-                    </mat-tab>
-                    <!-- END EMPRESA -->
-                </mat-tab-group>
-                <div class="textPass">Debe contener 6 caracteres como mínimo, combinando letras y números.</div>
-                <div class="d-flex justify-content-center">
-                    <button class="w-25">Regístrate</button>
-                </div>
-                <div class="textPolitica">Al crear una cuenta aceptas nuestra <a href="">política de privacidad</a></div>
-                <hr>
-                <div class="account">
-                    <div class="notRegister">¿Ya tienes cuenta?</div>
-                    <a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalSesion">Inicia sesión</a>
-                </div>
-            </div>
-        </div>
-    </div>
+				<mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMedia($event)">
+					<!-- PERSONAL -->
+					<mat-tab label="Personal">
+						<form name="personalAccountForm" [formGroup]="personalAccountForm">
+							<div class="elementRow" [ngClass]="{error : validatePersonalAccountForm('firstName')}">
+								<input type="text" class="form-control" formControlName="firstName" placeholder="Nombres">
+
+								<!-- <div class="msgError" *ngIf="validatePersonalAccountForm('firstName')">
+									Ingresa tu(s) nombre(s)
+								</div> -->
+							</div>
+
+							<div class="elementRow"
+								[ngClass]="{error : validatePersonalAccountForm('fatherLastname') || validatePersonalAccountForm('motherLastname')}">
+								<input type="text" class="form-control" formControlName="fatherLastname" placeholder="Primer apellido">
+
+								<!-- <div class="msgError" *ngIf="validatePersonalAccountForm('fatherLastname')">
+									Ingresa tu primer apellido
+								</div> -->
+
+								<input type="text" class="form-control" formControlName="motherLastname" placeholder="Segundo apellido">
+
+								<!-- <div class="msgError" *ngIf="validatePersonalAccountForm('motherLastname')">
+									Ingresa tu segundo apellido
+								</div> -->
+							</div>
+
+							<div class="elementRow" [ngClass]="{error : validatePersonalAccountForm('email')}">
+								<input type="text" class="form-control" formControlName="email" placeholder="Email">
+
+								<!-- <div class="msgError" *ngIf="validatePersonalAccountForm('email')">
+									Ingresa tu email
+								</div> -->
+							</div>
+
+							<div class="elementRow"
+								[ngClass]="{error : validatePersonalAccountForm('password') || validatePersonalAccountForm('repeatPassword')}">
+								<input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+
+								<!-- <div class="msgError" *ngIf="validatePersonalAccountForm('password')">
+									Ingresa una contraseña
+								</div> -->
+
+								<input type="password" class="form-control" formControlName="repeatPassword"
+									placeholder="Confirmar contraseña">
+
+								<!-- <div class="msgError" *ngIf="validatePersonalAccountForm('repeatPassword')">
+									Ingresa la misma contraseña
+								</div> -->
+							</div>
+
+						</form>
+
+						<h5>FirstName</h5>
+						<pre>{{ personalAccountForm.controls.firstName.errors | json }}</pre>
+
+						<!-- 
+						<h5>Form Valid: {{ personalAccountForm.valid }}</h5>
+
+						<h5>Form Errors</h5>
+						<pre>{{ personalAccountForm.errors | json }}</pre>
+
+						<h5>Json</h5>
+						<pre> {{ personalAccountForm.value | json }}</pre>
+
+						<h5>FirstName</h5>
+						<pre>{{ personalAccountForm.controls.firstName.errors | json }}</pre>
+
+						<h5>Email</h5>
+						<pre>{{ personalAccountForm.controls.email.errors | json }}</pre>
+
+						<h5>Password</h5>
+						<pre>{{ personalAccountForm.controls.password.errors | json }}</pre>
+
+						<h5>Repeat Password</h5>
+						<pre>{{ personalAccountForm.controls.repeatPassword.errors | json }}</pre> -->
+
+
+					</mat-tab>
+					<!-- END PERSONAL -->
+
+					<!-- EMPRESA -->
+					<mat-tab label="Empresa">
+						<form name="businessAccountForm" [formGroup]="businessAccountForm">
+							<div class="elementRow"
+								[ngClass]="{error : validateBusinessAccountForm('ruc') || validateBusinessAccountForm('businessName')}">
+								<input type="text" class="form-control" formControlName="ruc" placeholder="RUC">
+
+								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('ruc')">
+									Ingresa el número de RUC
+								</div> -->
+
+								<input type="text" class="form-control" formControlName="businessName" placeholder="Razón Social">
+
+								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('businessName')">
+									Ingresa la razón social
+								</div> -->
+							</div>
+
+							<div class="elementRow" [ngClass]="{error : validateBusinessAccountForm('firstName')}">
+								<input type="text" class="form-control" formControlName="firstName" placeholder="Nombres">
+
+								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('firstName')">
+									Ingresa tu(s) nombre(s)
+								</div> -->
+							</div>
+
+							<div class="elementRow"
+								[ngClass]="{error : validateBusinessAccountForm('fatherLastname') || validateBusinessAccountForm('motherLastname')}">
+								<input type="text" class="form-control" formControlName="fatherLastname" placeholder="Apellido paterno">
+
+								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('fatherLastname')">
+									Ingresa tu primer apellido
+								</div> -->
+
+								<input type="text" class="form-control" formControlName="motherLastname" placeholder="Apellido materno">
+								<!-- 
+								<div class="msgError" *ngIf="validateBusinessAccountForm('motherLastname')">
+									Ingresa tu segundo apellido
+								</div> -->
+							</div>
+
+							<div class="elementRow"
+								[ngClass]="{error : validateBusinessAccountForm('documentType') || validateBusinessAccountForm('documentNumber')}">
+								<select class="form-select" formControlName="documentType">
+									<option value="" selected>Seleccione</option>
+									<option value="1">DNI</option>
+								</select>
+
+								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('documentType')">
+									Selecciona el tipo de documento
+								</div> -->
+
+								<input type="text" class="form-control" formControlName="documentNumber" placeholder="DNI">
+
+								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('documentNumber')">
+									Ingresa tu número de documento
+								</div> -->
+							</div>
+
+							<div class="elementRow" [ngClass]="{error : validateBusinessAccountForm('email')}">
+								<input type="text" class="form-control" formControlName="email" placeholder="Email">
+
+								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('email')">
+									Ingresa tu email
+								</div> -->
+							</div>
+
+							<div class="elementRow"
+								[ngClass]="{error : validateBusinessAccountForm('password') || validateBusinessAccountForm('repeatPassword')}">
+								<input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+
+								<!-- <div class="msgError" *ngIf="validateBusinessAccountForm('password')">
+									Ingresa una contraseña
+								</div> -->
+
+								<input type="password" class="form-control" formControlName="repeatPassword" placeholder="Contraseña">
+
+								<!--
+								<div class="msgError" *ngIf="validateBusinessAccountForm('repeatPassword')">
+									Ingresa la misma contraseña
+								</div> -->
+							</div>
+
+						</form>
+
+						<h5>ruc</h5>
+						<pre>{{ businessAccountForm.controls.ruc.errors | json }}</pre>
+
+					</mat-tab>
+					<!-- END EMPRESA -->
+				</mat-tab-group>
+
+				<div class="textPass">Debe contener 6 caracteres como mínimo, combinando letras y números.</div>
+				<div class="d-flex justify-content-center">
+					<button class="w-25" (click)="saveAccount()">Regístrate</button>
+				</div>
+				<div class="textPolitica">Al crear una cuenta aceptas nuestra <a href="">política de privacidad</a>
+				</div>
+				<hr>
+				<div class="account">
+					<div class="notRegister">¿Ya tienes cuenta?</div>
+					<a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalSesion">Inicia sesión</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
