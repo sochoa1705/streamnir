@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AccountService } from 'src/app/Services/account/account.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PreferenceService } from '../../../Services/preference/preference.service';
@@ -27,6 +29,8 @@ export class PerfilComponent implements OnInit {
   constructor(
     public dataPagePresenterService: DataPagePresenterService,
     public preferenceService: PreferenceService,
+    public accountService:AccountService,
+    private router:Router,
   ) { }
 
   id: any = "mnuPerfil";
@@ -224,6 +228,10 @@ export class PerfilComponent implements OnInit {
   }
   getMessageArray(index: any, messageKey: any) {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
+  }
+  logout(){
+    this.accountService.signOut();
+    this.router.navigateByUrl("/");
   }
 
 }

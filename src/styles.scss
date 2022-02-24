@@ -563,6 +563,8 @@ section {
         }
         .mat-ink-bar {
             background-color: $red_light !important;
+						height: 3px;
+            min-width: 212px !important;
         }
         .mat-tab-body-content {
             padding: 2rem 0;
@@ -6741,6 +6743,7 @@ button.customers {
                     margin-bottom: 0;
                     &.error {
                         flex-direction: column;
+                        .form-select,
                         .form-control {
                             margin-bottom: 0px !important;
                             border: 0.5px solid #F44336;
@@ -6752,11 +6755,9 @@ button.customers {
                     .msgError {
                         display: none;
                         margin-left: 15px;
-                        font-family: Montserrat;
                         font-weight: 300;
                         font-size: 12px;
                         line-height: 18px;
-                        letter-spacing: 0.25px;
                         color: #F44336;
                         margin-bottom: 10px;
                     }
@@ -6770,6 +6771,29 @@ button.customers {
                         height: 41px;
                         border: 1px solid #ced4da;
                     }
+                    .divValida {
+                        flex-direction: column;
+                        flex: 1 1 auto;
+                        position: relative;
+                        &.error {
+                            .form-control,
+                            .form-select {
+                                border: 0.5px solid #F44336;
+                            }
+                            .textError {
+                                display: flex;
+                            }
+                        }
+                        .textError {
+                            display: none;
+                            position: absolute;
+                            margin-left: 15px;
+                            font-weight: 300;
+                            font-size: 11px;
+                            color: #F44336;
+                            bottom: 3px;
+                        }
+                    }										
                 }
                 button {
                     margin-bottom: 20px;
@@ -6785,6 +6809,7 @@ button.customers {
                     justify-content: center;
                     width: 100%;
                     gap: 10px;
+                    margin-bottom: 20px;
                     .notRegister {
                         font-family: Montserrat;
                         font-weight: 300;
@@ -7111,8 +7136,10 @@ button.customers {
     .modal-dialog {
         .modal-content {
             .recoveryLeft {
-                height: 637px;
+                //height: 637px;
                 background: url('./assets/modal/bg-newAccount.png');
+                height: auto;
+                background-size: cover;
             }
             .recoveryRight {
                 .titleRecovery {
@@ -7126,7 +7153,8 @@ button.customers {
                 }
                 .mat-ink-bar {
                     background-color: #df0c30 !important;
-                    height: 3px;
+                    height: 3px !important;
+                    min-width: 219px !important;
                 }
                 .elementRow {
                     display: flex;
@@ -7143,7 +7171,12 @@ button.customers {
                         border: 1px solid #ced4da;
                     }
                     .form-select {
-                        width: calc(100% - 30px);
+                        //width: calc(100% - 30px);
+                    }
+                    .divValida {
+                        &.wSelect {
+                            min-width: calc(50% - 8px);
+                        }
                     }
                 }
                 .textPass {
@@ -7185,7 +7218,7 @@ button.customers {
                     line-height: 21px;
                     letter-spacing: 0.15px;
                     color: #FFFFFF;
-                    margin-bottom: 30px;
+                    margin-bottom: 10px;
                     &.active {
                         display: flex;
                     }
