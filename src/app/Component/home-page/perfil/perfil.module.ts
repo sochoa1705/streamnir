@@ -11,8 +11,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PreferenceService } from '../../../Services/preference/preference.service';
+import { ContactoComponent } from './contacto/contacto.component';
+import { ContactoService } from './contacto/contacto.service';
 @NgModule({
-  declarations: [PerfilComponent],
+  declarations: [PerfilComponent, ContactoComponent],
   imports: [
     CommonModule,
     PerfilRoutingModule,
@@ -24,7 +26,7 @@ import { PreferenceService } from '../../../Services/preference/preference.servi
     FormsModule,
   ],
   exports: [PerfilComponent],
-  providers: [DataPagePresenterService, PreferenceService]
+  providers: [DataPagePresenterService, PreferenceService,ContactoService]
 
 })
 export class PerfilModule { }
