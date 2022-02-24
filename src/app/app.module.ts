@@ -18,7 +18,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ConfirmDialogModule } from './Component/confirm-dialog/confirm-dialog.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -34,7 +33,6 @@ import { ConfirmDialogModule } from './Component/confirm-dialog/confirm-dialog.m
     NgbModule,
     SocialLoginModule,
     HttpClientModule,
-    ConfirmDialogModule,
     FormsModule,
     ReactiveFormsModule
   ],
@@ -52,7 +50,7 @@ import { ConfirmDialogModule } from './Component/confirm-dialog/confirm-dialog.m
         },
         {
           id: FacebookLoginProvider.PROVIDER_ID,
-          provider: new FacebookLoginProvider('eb0d04cdb678b94610793bc538cac200')
+          provider: new FacebookLoginProvider('263646375921809')
         }
       ]
     } as SocialAuthServiceConfig,

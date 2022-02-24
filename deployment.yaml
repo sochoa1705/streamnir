@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nmviajes
+  # namespace: default
+spec:
+  containers:
+    - name: nmviajes
+      image: expertiafrontendreg.azurecr.io/nmviajes
+      imagePullPolicy: IfNotPresent
+  imagePullSecrets:
+    - name: expertiasecret

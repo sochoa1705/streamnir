@@ -13,6 +13,18 @@ import { PopupService } from './Services/pop-up/popup.service';
 import { Guid } from './shared/utils';
 import { ValidatorsService } from './shared/validators/validators.service';
 
+
+export class Login {
+  constructor(
+    public email = "",
+    public password = "",
+    public recorder = false,
+    public business = false,
+    public emailB = "",
+    public passwordB = "",
+  ){}
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -31,6 +43,8 @@ export class AppComponent implements OnInit {
   ]
 
   //confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
+  login = new Login()
+
 
   isPerson: boolean = true;
 
@@ -44,7 +58,8 @@ export class AppComponent implements OnInit {
     private _formBuilder: FormBuilder,
     public _matDialog: MatDialog,
     private _matSnackBar: MatSnackBar,
-    private _validatorsService: ValidatorsService
+    private _validatorsService: ValidatorsService,
+    private authService: SocialAuthService
   ) {
     this.cerrarBoxClicFuera();
 
@@ -101,6 +116,10 @@ export class AppComponent implements OnInit {
   saveAccount(): void {
     this.isPerson ? this.savePersonalAccount() : this.saveBusinessAccount();
   }
+  signIn(){
+    console.log(this.login);
+  }
+  
 
   savePersonalAccount(): void {
 
