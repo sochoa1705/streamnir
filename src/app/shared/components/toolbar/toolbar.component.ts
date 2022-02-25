@@ -39,4 +39,9 @@ export class ToolbarComponent implements OnInit {
   to(e: any){
     window.location.href = e;
   }
+
+  showOptionUser: Boolean = false;
+  showOption() {
+    this.showOptionUser = this.showOptionUser ? false : true;
+  }
 }
