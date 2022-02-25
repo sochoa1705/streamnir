@@ -7,17 +7,26 @@ import { FooterModule } from 'src/app/shared/components/footer/footer.module';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { HttpClientModule } from '@angular/common/http';
 
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PreferenceService } from '../../../Services/preference/preference.service';
+import { ContactoComponent } from './contacto/contacto.component';
+import { ContactoService } from './contacto/contacto.service';
 @NgModule({
-  declarations: [PerfilComponent],
+  declarations: [PerfilComponent, ContactoComponent],
   imports: [
     CommonModule,
     PerfilRoutingModule,
     FooterModule,
-    HttpClientModule
+    MatCheckboxModule,
+    MatRadioModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [PerfilComponent],
-  providers: [DataPagePresenterService]
+  providers: [DataPagePresenterService, PreferenceService,ContactoService]
 
 })
 export class PerfilModule { }

@@ -60,6 +60,17 @@ export class NmvModel {
       .set('Caller.Company', 'Agil')
       .set('Caller.Application', 'Interagencias');
   }
+
+  getPayload(){
+    return {
+      TrackingCode:  Guid(),
+      MuteExceptions:  environment.muteExceptions,
+      Caller: {
+        Company:  'Agil',
+        Application:  'Interagencias'
+      } 
+    }
+  }
 }
 
 export function removeTimeZonePart(dateString: string) {
