@@ -23,4 +23,6 @@ export const environment = {
   urlGeo:"http://10.75.131.17:10515",
   urlMaster:"http://10.75.131.17",
   urlLibro:"http://10.75.102.23:10007/",
-};
+  urlPreference:"http://10.75.102.23:10006/",
+  urlNmviajesAccount:"http://10.75.102.23:10006/v1/api",
+}

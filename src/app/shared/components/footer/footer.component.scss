@@ -67,7 +67,7 @@ footer {
             font-size: 24px;
             line-height: 36px;
             margin-bottom: 40px
-            }
+        }
     }
     ul {
         color: $red;
@@ -101,7 +101,7 @@ footer {
             margin-right: 10px;
             align-items: center;
             justify-content: space-around;
-            &:hover>svg>path{
+            &:hover>svg>path {
                 fill: white;
             }
             &:hover {
