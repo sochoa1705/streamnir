@@ -58,6 +58,8 @@
       <div class="rowContent">
         <div class="inputGroup" [ngClass]="{error : validatePassengerForm('firstName')}">
 
+          <input type="hidden" formControlName="id">
+
           <span class="">Nombres</span>
           <input type="text" class="form-control" formControlName="firstName"
             placeholder="El que figura en el documento de viaje.">

@@ -4,7 +4,6 @@ import { AccountsService, UserStorage } from 'src/app/Services/accounts.service'
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PreferenceService } from '../../../Services/preference/preference.service';
-import { Passenger, PassengersService } from 'src/app/Services/passengers.service';
 
 @Component({
   selector: 'app-perfil',
@@ -29,15 +28,10 @@ export class PerfilComponent implements OnInit {
 
   userStorage: UserStorage;
 
-  hiddenList: boolean = true;
-  hiddenForm: boolean = false;
-  passengerId: number;
-
   constructor(
     public dataPagePresenterService: DataPagePresenterService,
     public preferenceService: PreferenceService,
     public accountService: AccountsService,
-    private _passengersService: PassengersService,
     private router: Router,
   ) {
 
@@ -47,27 +41,6 @@ export class PerfilComponent implements OnInit {
   showOption(ids: any) {
     this.id = ids;
     //console.log(this.id);
-  }
-
-  hideList(isHidden: boolean) {
-    this.hiddenList = isHidden;
-  }
-
-  hideForm(isHidden: boolean) {
-    this.hiddenForm = isHidden;
-  }
-
-  getPassengerId(id: number) {
-    debugger
-
-    this.passengerId = id;
-
-    // let userId = 44290;
-
-    // this._passengersService.get(userId, id).subscribe(res => {
-    //   debugger
-    //   this.passenger = res;
-    // })
   }
 
   agregaTarjeta = false;
@@ -182,6 +155,7 @@ export class PerfilComponent implements OnInit {
 
     })
   }
+
   validForm() {
     this.errors = []
     const letter = new RegExp('^[a-zA-Z ]+$', 'i')
@@ -239,15 +213,17 @@ export class PerfilComponent implements OnInit {
 
     return this.errors.length === 0
   }
+
   getMessage(messageKey: any) {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
   }
+
   getMessageArray(index: any, messageKey: any) {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
+
   logout() {
     this.accountService.signOut();
     this.router.navigateByUrl("/");
   }
-
 }

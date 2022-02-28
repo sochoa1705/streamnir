@@ -81,16 +81,16 @@ export class PassengersService {
   }
 
   update(payload: any) {
-    const nmvModel = new NmvModel();
+    // const nmvModel = new NmvModel();
 
-    const options = {
-      params: nmvModel.params
-        .set('Parameter', payload)
-    };
+    // const options = {
+    //   params: nmvModel.params
+    //     .set('Parameter', payload)
+    // };
 
     const url = `${environment.urlNmviajesAccount}${PassengersService.passengersPutPath}`;
 
-    return this.http.put<any>(url, options);
+    return this.http.put<any>(url, payload);
   }
 
   delete(userId: number, id: number) {
