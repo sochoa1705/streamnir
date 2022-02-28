@@ -253,11 +253,10 @@ export class PerfilComponent implements OnInit {
         "DataAuthorization": true
       }
     }
-    console.log(payload);
+    console.log(payload)
 
     this.preferenceService.preference(payload).subscribe({
       next: response => console.log(response)
-
     })
     }
   }
