@@ -104,14 +104,14 @@
             <div class="userlogged" (click)="showOption()">
                 <img src="./assets/user-conect.svg" alt="">
             </div>
-            <div class="divFlotante" *ngIf="showOptionUser==true">
+            <div class="divFlotante" *ngIf="showOptionUser">
                 <div class="option" routerLink="/home/perfil">Mi Perfil</div>
                 <div class="option">Mis Reservas</div>
                 <div class="option">Pasajero Frecuente</div>
                 <div class="option">Notificaciones</div>
                 <div class="option">Asesor Online</div>
                 <div class="line"></div>
-                <div class="option red">Cerrar sesión</div>
+                <div class="option red" (click)="logout()">Cerrar sesión</div>
                 <div class="correo">
                     <img src="./assets/usuario.svg" alt=""> agoney.delacroix@gmail.com
                 </div>
