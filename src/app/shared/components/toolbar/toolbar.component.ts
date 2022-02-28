@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountService, UserStorage } from 'src/app/Services/account/account.service';
+import { AccountService } from 'src/app/Services/account/account.service';
+import { UserStorage } from 'src/app/Services/accounts.service';
 
 @Component({
   selector: 'app-toolbar',

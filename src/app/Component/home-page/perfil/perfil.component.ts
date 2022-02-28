@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountService, UserStorage } from 'src/app/Services/account/account.service';
+import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PreferenceService } from '../../../Services/preference/preference.service';
+import { AccountService } from 'src/app/Services/account/account.service';
 
 @Component({
   selector: 'app-perfil',
@@ -54,7 +55,6 @@ export class PerfilComponent implements OnInit {
     this.id = ids;
     //console.log(this.id);
   }
-
 
   agregaTarjeta = false;
   showAgregaTarjeta(valElem: boolean) {
@@ -262,6 +262,7 @@ export class PerfilComponent implements OnInit {
     })
     }
   }
+
   validForm() {
     this.errors = []
     const letter = new RegExp('^[a-zA-Z ]+$', 'i')
@@ -364,9 +365,11 @@ export class PerfilComponent implements OnInit {
 
     return this.errors.length === 0
   }
+
   getMessage(messageKey: any) {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
   }
+
   getMessageArray(index: any, messageKey: any) {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
@@ -396,10 +399,6 @@ export class PerfilComponent implements OnInit {
     //   console.log()
     // }
 
-  }
-  logout() {
-    this.accountService.signOut();
-    this.router.navigateByUrl("/");
   }
 
 }

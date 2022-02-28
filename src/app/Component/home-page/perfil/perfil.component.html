@@ -5,20 +5,24 @@
             {{userStorage.name | slice:0:1}}
             <div class="blueIcon">
                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.5211 4.4353H13.1781L11.8255 2.95703H6.65158V5.17442H4.43419V7.39181H2.2168V14.7831C2.2168 15.5962 2.88201 16.2614 3.69507 16.2614H15.5211C16.3342 16.2614 16.9994 15.5962 16.9994 14.7831V5.91354C16.9994 5.10052 16.3342 4.4353 15.5211 4.4353ZM9.60809 14.044C7.56809 14.044 5.91242 12.3883 5.91242 10.3483C5.91242 8.30832 7.56809 6.65269 9.60809 6.65269C11.6481 6.65269 13.3037 8.30836 13.3037 10.3484C13.3037 12.3884 11.6481 14.044 9.60809 14.044Z"
+                    <path
+                        d="M15.5211 4.4353H13.1781L11.8255 2.95703H6.65158V5.17442H4.43419V7.39181H2.2168V14.7831C2.2168 15.5962 2.88201 16.2614 3.69507 16.2614H15.5211C16.3342 16.2614 16.9994 15.5962 16.9994 14.7831V5.91354C16.9994 5.10052 16.3342 4.4353 15.5211 4.4353ZM9.60809 14.044C7.56809 14.044 5.91242 12.3883 5.91242 10.3483C5.91242 8.30832 7.56809 6.65269 9.60809 6.65269C11.6481 6.65269 13.3037 8.30836 13.3037 10.3484C13.3037 12.3884 11.6481 14.044 9.60809 14.044Z"
                         fill="white" />
-                    <path d="M2.21739 6.65231H3.69566V4.43492H5.91305V2.95665H3.69566V0.739258H2.21739V2.95665H0V4.43492H2.21739V6.65231Z" fill="white"
-                    />
-                    <path d="M9.60839 7.98242C8.30013 7.98242 7.24316 9.03939 7.24316 10.3476C7.24316 11.6559 8.30013 12.7129 9.60839 12.7129C10.9167 12.7129 11.9736 11.6559 11.9736 10.3476C11.9736 9.03939 10.9167 7.98242 9.60839 7.98242Z"
+                    <path
+                        d="M2.21739 6.65231H3.69566V4.43492H5.91305V2.95665H3.69566V0.739258H2.21739V2.95665H0V4.43492H2.21739V6.65231Z"
+                        fill="white" />
+                    <path
+                        d="M9.60839 7.98242C8.30013 7.98242 7.24316 9.03939 7.24316 10.3476C7.24316 11.6559 8.30013 12.7129 9.60839 12.7129C10.9167 12.7129 11.9736 11.6559 11.9736 10.3476C11.9736 9.03939 10.9167 7.98242 9.60839 7.98242Z"
                         fill="white" />
                 </svg>
             </div>
         </div>
         <div class="perfilName">{{userStorage.name}}</div>
         <div class="perfilMail">{{userStorage.email}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
-                />
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
             </svg>
         </div>
         <div class="boxContact" *ngIf="id === 'mnuPerfil'">
@@ -102,7 +106,8 @@
                             Pasajeros
                         </div>
                         <div class="descrip">
-                            Reserva más rápido y sin complicaciones, agrega los datos de quienes suelen viajar a tu lado.
+                            Reserva más rápido y sin complicaciones, agrega los datos de quienes suelen viajar a tu
+                            lado.
                         </div>
                         <div class="boxBtn">
                             <div class="btnPerfil primary" (click)="showOption('mnuPasajero')">
@@ -122,8 +127,9 @@
                     </div>
                     <div class="iconBox">
                         <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M-8.21774e-08 14.12L6.18084 8L-6.17205e-07 1.88L1.90283 -8.31755e-08L10 8L1.90283 16L-8.21774e-08 14.12Z" fill="#DF0C30"
-                            />
+                            <path
+                                d="M-8.21774e-08 14.12L6.18084 8L-6.17205e-07 1.88L1.90283 -8.31755e-08L10 8L1.90283 16L-8.21774e-08 14.12Z"
+                                fill="#DF0C30" />
                         </svg>
                     </div>
                 </div>
@@ -142,42 +148,45 @@
                             <div class="rowContent">
                                 <div class="inputGroup">
                                     <span class="">Nombres</span>
-                                    <input type="text" formControlName="nombres" class="form-control" placeholder="El que figura en el documento de viaje." [ngClass]="getMessage(MSG_NOMBRES) != MSG_EMPTY ? 'isvalid' : ''">
-                                    <span class="valid" *ngIf="getMessage(MSG_NOMBRES) != MSG_EMPTY">{{ getMessage(MSG_NOMBRES) }}</span>
+                                    <input type="text" formControlName="nombres" class="form-control" placeholder="El que figura en el documento de viaje." [ngClass]="getMessage(MSG_NOMBRES) !== MSG_EMPTY ? 'isvalid' : ''">
+                                    <span class="valid" *ngIf="getMessage(MSG_NOMBRES) !== MSG_EMPTY">{{ getMessage(MSG_NOMBRES) }}</span>
                                 </div>
                                 <div class="inputGroup">
                                     <span class="">Apellido paterno</span>
                                     <input type="text" formControlName="apellidoPaterno" class="form-control" placeholder="El que figura en el documento de viaje."
-                                        [ngClass]="getMessage(MSG_APELLIDO_PATERNO) != MSG_EMPTY ? 'isvalid' : ''">
-                                    <span class="valid" *ngIf="getMessage(MSG_APELLIDO_PATERNO) != MSG_EMPTY">{{ getMessage(MSG_APELLIDO_PATERNO) }}</span>
+                                        [ngClass]="getMessage(MSG_APELLIDO_PATERNO) !== MSG_EMPTY ? 'isvalid' : ''">
+                                    <span class="valid" *ngIf="getMessage(MSG_APELLIDO_PATERNO) !== MSG_EMPTY">{{ getMessage(MSG_APELLIDO_PATERNO) }}</span>
                                 </div>
                             </div>
                             <div class="rowContent">
                                 <div class="inputGroup">
                                     <span class="">Apellido materno</span>
                                     <input type="text" formControlName="apellidoMaterno" class="form-control" placeholder="El que figura en el documento de viaje."
-                                        [ngClass]="getMessage(MSG_APELLIDO_MATERNO) != MSG_EMPTY ? 'isvalid' : ''">
-                                    <span class="valid" *ngIf="getMessage(MSG_APELLIDO_MATERNO) != MSG_EMPTY">{{ getMessage(MSG_APELLIDO_MATERNO) }}</span>
+                                        [ngClass]="getMessage(MSG_APELLIDO_MATERNO) !== MSG_EMPTY ? 'isvalid' : ''">
+                                    <span class="valid" *ngIf="getMessage(MSG_APELLIDO_MATERNO) !== MSG_EMPTY">{{ getMessage(MSG_APELLIDO_MATERNO) }}</span>
                                 </div>
                                 <div class="inputGroup">
                                         <span class="">Correo electrónico</span>
                                         <input type="text" formControlName="email" class="form-control" placeholder="El que figura en el documento de viaje."
-                                            [ngClass]="getMessage(MSG_MAIL) != MSG_EMPTY ? 'isvalid' : ''">
-                                        <span class="valid" *ngIf="getMessage(MSG_MAIL) != MSG_EMPTY">{{ getMessage(MSG_MAIL) }}</span>
+                                            [ngClass]="getMessage(MSG_MAIL) !== MSG_EMPTY ? 'isvalid' : ''">
+                                        <span class="valid" *ngIf="getMessage(MSG_MAIL) !== MSG_EMPTY">{{ getMessage(MSG_MAIL) }}</span>
                                     </div>
                             </div>
                             <div class="rowContent">
                                 <div class="inputGroup">
                                     <span class="">Fecha de nacimiento</span>
                                     <div class="rowElement">
-                                        <input type="text" class="form-control marginRight10" formControlName="dia" placeholder="Dia">
-                                        <select class="form-select marginRight10" formControlName="mes" aria-label="Default select example">
+                                        <input type="text" class="form-control marginRight10" formControlName="dia"
+                                            placeholder="Dia">
+                                        <select class="form-select marginRight10" formControlName="mes"
+                                            aria-label="Default select example">
                                             <option selected>Mes</option>
                                             <option value="1">Enero</option>
                                             <option value="2">Febrero</option>
                                             <option value="3">Marzo</option>
                                         </select>
-                                        <select class="form-select" formControlName="anio" aria-label="Default select example">
+                                        <select class="form-select" formControlName="anio"
+                                            aria-label="Default select example">
                                             <option selected>Año</option>
                                             <option value="1">1990</option>
                                             <option value="2">1991</option>
@@ -187,7 +196,8 @@
                                 </div>
                                 <div class="inputGroup">
                                     <span class="">Nacionalidad</span>
-                                    <select class="form-select" formControlName="nacionalidad" aria-label="Default select example">
+                                    <select class="form-select" formControlName="nacionalidad"
+                                        aria-label="Default select example">
                                         <option selected>Perú</option>
                                         <option value="1">Argentina</option>
                                         <option value="2">Bolivia</option>
@@ -200,19 +210,22 @@
                                     <div class="rowElement">
                                         <div class="nroDoc marginRight10">
                                             <span class="">Tipo de documento</span>
-                                            <select class="form-select" formControlName="tipoDocumento" aria-label="Default select example" [ngClass]="getMessage(MSG_TIPO_DOCUMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
+                                            <select class="form-select" formControlName="tipoDocumento"
+                                                aria-label="Default select example"
+                                                [ngClass]="getMessage(MSG_TIPO_DOCUMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
                                                 <option selected>Seleccione</option>
                                                 <option value="1">DNI</option>
                                                 <option value="2">Pasaporte</option>
                                             </select>
-                                            <span class="valid" *ngIf="getMessage(MSG_TIPO_DOCUMENTO) !== MSG_EMPTY">{{ getMessage(MSG_TIPO_DOCUMENTO) }}</span>
+                                            <span class="valid" *ngIf="getMessage(MSG_TIPO_DOCUMENTO) !== MSG_EMPTY">{{
+                                                getMessage(MSG_TIPO_DOCUMENTO) }}</span>
                                         </div>
                                     </div>
                                     <div class="rowElement">
                                         <div class="nroDoc">
                                             <span class="">N° de documento</span>
-                                            <input type="text" class="form-control" formControlName="numeroDocumento" placeholder="Ingresar Nro" [ngClass]="getMessage(MSG_NUMERO_DOCUMENTO) != MSG_EMPTY ? 'isvalid' : ''">
-                                            <span class="valid" *ngIf="getMessage(MSG_NUMERO_DOCUMENTO) != MSG_EMPTY">{{ getMessage(MSG_NUMERO_DOCUMENTO) }}</span>
+                                            <input type="text" class="form-control" formControlName="numeroDocumento" placeholder="Ingresar Nro" [ngClass]="getMessage(MSG_NUMERO_DOCUMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
+                                            <span class="valid" *ngIf="getMessage(MSG_NUMERO_DOCUMENTO) !== MSG_EMPTY">{{ getMessage(MSG_NUMERO_DOCUMENTO) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -236,12 +249,12 @@
                             </div>
                             <div class="rowContent">
                                 <div class="inputGroup">
-                                    <span class="">País2</span>
+                                    <span class="">País</span>
                                     <select class="form-select marginRight10" (change)="optionDepartament($event)" formControlName="pais" aria-label="Default select example" [ngClass]="getMessage(MSG_PAIS) !== MSG_EMPTY ? 'isvalid' : ''">
                                             <option selected>Seleccione país</option>
                                             <option *ngFor="let option of paises" [value]="option.Code">{{ option.Name }}</option>
                                         </select>
-                                    <span class="valid" *ngIf="getMessage(MSG_PAIS) != MSG_EMPTY">{{ getMessage(MSG_PAIS) }}</span>
+                                    <span class="valid" *ngIf="getMessage(MSG_PAIS) !== MSG_EMPTY">{{ getMessage(MSG_PAIS) }}</span>
                                 </div>
                                 <div class="inputGroup">
                                     <span class="">Departamento</span>
@@ -249,15 +262,17 @@
                                         <option selected>Seleccione departamento</option>
                                         <option *ngFor="let option of departamentos" [value]="option.Code">{{ option.Name }}</option>
                                     </select>
-                                    <span class="valid" *ngIf="getMessage(MSG_DEPARTAMENTO) != MSG_EMPTY">{{ getMessage(MSG_DEPARTAMENTO) }}</span>
+                                    <span class="valid" *ngIf="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY">{{ getMessage(MSG_DEPARTAMENTO) }}</span>
                                 </div>
                                 <div class="inputGroup">
                                     <span class="">Distrito</span>
-                                    <select class="form-select" formControlName="distrito" aria-label="Default select example" [ngClass]="getMessage(MSG_DISTRITO) !== MSG_EMPTY ? 'isvalid' : ''">
+                                    <select class="form-select" formControlName="distrito"
+                                        aria-label="Default select example"
+                                        [ngClass]="getMessage(MSG_DISTRITO) !== MSG_EMPTY ? 'isvalid' : ''">
                                         <option selected>Seleccione distrito</option>
                                         <option *ngFor="let option of distritos" [value]="option.Code">{{ option.Name }}</option>
                                     </select>
-                                    <span class="valid" *ngIf="getMessage(MSG_DISTRITO) != MSG_EMPTY">{{ getMessage(MSG_DISTRITO) }}</span>
+                                    <span class="valid" *ngIf="getMessage(MSG_DISTRITO) !== MSG_EMPTY">{{ getMessage(MSG_DISTRITO) }}</span>
                                 </div>
                             </div>
 
@@ -268,7 +283,7 @@
                                 </div>
                                 <div class="groupOption"formGroupName="preference">
                                     <mat-checkbox *ngFor="let chk of listPreferent" [formControlName]="chk.name" [value]="chk.value" class="checkOption">{{ chk.text }}</mat-checkbox>
-                                    <!-- <span class="valid" *ngIf="getMessage(MSG_CHK_PREFE) != MSG_EMPTY">{{ getMessage(MSG_CHK_PREFE) }}</span> -->
+                                    <!-- <span class="valid" *ngIf="getMessage(MSG_CHK_PREFE) !== MSG_EMPTY">{{ getMessage(MSG_CHK_PREFE) }}</span> -->
 
                                     <!-- <mat-checkbox formControlName="playa" class="checkOption">Playa</mat-checkbox>
                                             <mat-checkbox formControlName="aventura" class="checkOption">Aventura</mat-checkbox>
@@ -319,11 +334,11 @@
                                         <a href="#">política de protección de datos</a>
                                     </mat-checkbox>
                                 </div>
-                                <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) != MSG_EMPTY">{{ getMessage(MSG_CHK_POLITY) }}</span>
+                                <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) !== MSG_EMPTY">{{ getMessage(MSG_CHK_POLITY) }}</span>
                                 <div class="groupOption">
                                     <mat-checkbox formControlName="autorizo" class="checkOption">Autorizo el uso de mi información para fines publicitarios</mat-checkbox>
                                 </div>
-                                <span class="valid" *ngIf="getMessage(MSG_CHK_AUTORIZO) != MSG_EMPTY">{{ getMessage(MSG_CHK_AUTORIZO) }}</span>
+                                <span class="valid" *ngIf="getMessage(MSG_CHK_AUTORIZO) !== MSG_EMPTY">{{ getMessage(MSG_CHK_AUTORIZO) }}</span>
                             </div>
                             <div class="rowContent">
                                 <div class="btnPerfil primary" (click)="save()">
@@ -347,7 +362,8 @@
                 <div class="personalDocument">
                     <div class="headerPortlet">
                         <div class="titleBoxRight">Tarjeta de crédito o débito</div>
-                        <div class="subtitleBoxRight">Realiza reservas de manera más rápido guardando los datos de tu tarjeta. Nunca los usaremos sin tu
+                        <div class="subtitleBoxRight">Realiza reservas de manera más rápido guardando los datos de tu
+                            tarjeta. Nunca los usaremos sin tu
                             permiso.
                         </div>
                     </div>
@@ -370,18 +386,24 @@
                                     </div>
                                     <div class="rowElement spaceEnd">
                                         <div class="optModificar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.8972 4.81629L10.0978 2.01775L11.2181 0.898334C11.7168 0.399584 12.8592 0.300626 13.4569 0.898334L14.0166 1.45804C14.6143 2.05575 14.5161 3.19813 14.0166 3.69767L12.8972 4.81629ZM11.7778 5.9365L3.94026 13.774L0.301758 14.6132L1.14092 10.9747L8.97843 3.13717L11.7778 5.9365Z"
+                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M12.8972 4.81629L10.0978 2.01775L11.2181 0.898334C11.7168 0.399584 12.8592 0.300626 13.4569 0.898334L14.0166 1.45804C14.6143 2.05575 14.5161 3.19813 14.0166 3.69767L12.8972 4.81629ZM11.7778 5.9365L3.94026 13.774L0.301758 14.6132L1.14092 10.9747L8.97843 3.13717L11.7778 5.9365Z"
                                                     fill="#009AED" />
                                             </svg>
                                         </div>
                                         <div class="optEliminar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.25116 0.905457H8.7581V1.32729H9.66344V0.846405C9.66356 0.379715 9.28407 0 8.81761 0H6.19165C5.72519 0 5.3457 0.379715 5.3457 0.846405V1.32729H6.25116V0.905457Z"
+                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M6.25116 0.905457H8.7581V1.32729H9.66344V0.846405C9.66356 0.379715 9.28407 0 8.81761 0H6.19165C5.72519 0 5.3457 0.379715 5.3457 0.846405V1.32729H6.25116V0.905457Z"
                                                     fill="#009AED" />
-                                                <path d="M11.7545 4.91455H3.25522C3.02233 4.91455 2.839 5.11322 2.85777 5.34542L3.56833 14.1317C3.60793 14.6222 4.01705 15 4.50858 15H10.501C10.9926 15 11.4017 14.6222 11.4413 14.1316L12.1519 5.34542C12.1707 5.11322 11.9874 4.91455 11.7545 4.91455ZM5.31321 14.0628C5.30371 14.0634 5.29422 14.0638 5.28483 14.0638C5.04748 14.0638 4.84824 13.8789 4.83348 13.6388L4.38819 6.42574C4.37285 6.17615 4.56271 5.96134 4.81219 5.94601C5.06087 5.9309 5.27659 6.1203 5.29193 6.37001L5.7371 13.5831C5.75255 13.8327 5.56269 14.0474 5.31321 14.0628ZM7.96263 13.611C7.96263 13.861 7.75996 14.0636 7.50991 14.0636C7.25985 14.0636 7.05718 13.861 7.05718 13.611V6.39782C7.05718 6.14777 7.25985 5.94509 7.50991 5.94509C7.75984 5.94509 7.96263 6.14777 7.96263 6.39782V13.611ZM10.6216 6.42448L10.1964 13.6376C10.1823 13.8781 9.98275 14.0636 9.74494 14.0636C9.73601 14.0636 9.72697 14.0634 9.71793 14.063C9.46833 14.0482 9.2779 13.834 9.29267 13.5844L9.7177 6.37115C9.73235 6.12156 9.9459 5.93113 10.1962 5.94589C10.4458 5.96054 10.6362 6.17489 10.6216 6.42448Z"
+                                                <path
+                                                    d="M11.7545 4.91455H3.25522C3.02233 4.91455 2.839 5.11322 2.85777 5.34542L3.56833 14.1317C3.60793 14.6222 4.01705 15 4.50858 15H10.501C10.9926 15 11.4017 14.6222 11.4413 14.1316L12.1519 5.34542C12.1707 5.11322 11.9874 4.91455 11.7545 4.91455ZM5.31321 14.0628C5.30371 14.0634 5.29422 14.0638 5.28483 14.0638C5.04748 14.0638 4.84824 13.8789 4.83348 13.6388L4.38819 6.42574C4.37285 6.17615 4.56271 5.96134 4.81219 5.94601C5.06087 5.9309 5.27659 6.1203 5.29193 6.37001L5.7371 13.5831C5.75255 13.8327 5.56269 14.0474 5.31321 14.0628ZM7.96263 13.611C7.96263 13.861 7.75996 14.0636 7.50991 14.0636C7.25985 14.0636 7.05718 13.861 7.05718 13.611V6.39782C7.05718 6.14777 7.25985 5.94509 7.50991 5.94509C7.75984 5.94509 7.96263 6.14777 7.96263 6.39782V13.611ZM10.6216 6.42448L10.1964 13.6376C10.1823 13.8781 9.98275 14.0636 9.74494 14.0636C9.73601 14.0636 9.72697 14.0634 9.71793 14.063C9.46833 14.0482 9.2779 13.834 9.29267 13.5844L9.7177 6.37115C9.73235 6.12156 9.9459 5.93113 10.1962 5.94589C10.4458 5.96054 10.6362 6.17489 10.6216 6.42448Z"
                                                     fill="#009AED" />
-                                                <path d="M13.3198 3.51762L13.0224 2.62636C12.9441 2.39141 12.7241 2.23291 12.4763 2.23291H2.53268C2.28503 2.23291 2.06496 2.39141 1.98668 2.62636L1.68936 3.51762C1.63203 3.68951 1.70664 3.86484 1.84592 3.95227C1.90268 3.98786 1.96986 4.00926 2.04367 4.00926H12.9655C13.0393 4.00926 13.1066 3.98786 13.1632 3.95216C13.3025 3.86472 13.3771 3.6894 13.3198 3.51762Z"
+                                                <path
+                                                    d="M13.3198 3.51762L13.0224 2.62636C12.9441 2.39141 12.7241 2.23291 12.4763 2.23291H2.53268C2.28503 2.23291 2.06496 2.39141 1.98668 2.62636L1.68936 3.51762C1.63203 3.68951 1.70664 3.86484 1.84592 3.95227C1.90268 3.98786 1.96986 4.00926 2.04367 4.00926H12.9655C13.0393 4.00926 13.1066 3.98786 13.1632 3.95216C13.3025 3.86472 13.3771 3.6894 13.3198 3.51762Z"
                                                     fill="#009AED" />
                                             </svg>
                                         </div>
@@ -403,18 +425,24 @@
                                     </div>
                                     <div class="rowElement spaceEnd">
                                         <div class="optModificar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.8972 4.81629L10.0978 2.01775L11.2181 0.898334C11.7168 0.399584 12.8592 0.300626 13.4569 0.898334L14.0166 1.45804C14.6143 2.05575 14.5161 3.19813 14.0166 3.69767L12.8972 4.81629ZM11.7778 5.9365L3.94026 13.774L0.301758 14.6132L1.14092 10.9747L8.97843 3.13717L11.7778 5.9365Z"
+                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M12.8972 4.81629L10.0978 2.01775L11.2181 0.898334C11.7168 0.399584 12.8592 0.300626 13.4569 0.898334L14.0166 1.45804C14.6143 2.05575 14.5161 3.19813 14.0166 3.69767L12.8972 4.81629ZM11.7778 5.9365L3.94026 13.774L0.301758 14.6132L1.14092 10.9747L8.97843 3.13717L11.7778 5.9365Z"
                                                     fill="#009AED" />
                                             </svg>
                                         </div>
                                         <div class="optEliminar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.25116 0.905457H8.7581V1.32729H9.66344V0.846405C9.66356 0.379715 9.28407 0 8.81761 0H6.19165C5.72519 0 5.3457 0.379715 5.3457 0.846405V1.32729H6.25116V0.905457Z"
+                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M6.25116 0.905457H8.7581V1.32729H9.66344V0.846405C9.66356 0.379715 9.28407 0 8.81761 0H6.19165C5.72519 0 5.3457 0.379715 5.3457 0.846405V1.32729H6.25116V0.905457Z"
                                                     fill="#009AED" />
-                                                <path d="M11.7545 4.91455H3.25522C3.02233 4.91455 2.839 5.11322 2.85777 5.34542L3.56833 14.1317C3.60793 14.6222 4.01705 15 4.50858 15H10.501C10.9926 15 11.4017 14.6222 11.4413 14.1316L12.1519 5.34542C12.1707 5.11322 11.9874 4.91455 11.7545 4.91455ZM5.31321 14.0628C5.30371 14.0634 5.29422 14.0638 5.28483 14.0638C5.04748 14.0638 4.84824 13.8789 4.83348 13.6388L4.38819 6.42574C4.37285 6.17615 4.56271 5.96134 4.81219 5.94601C5.06087 5.9309 5.27659 6.1203 5.29193 6.37001L5.7371 13.5831C5.75255 13.8327 5.56269 14.0474 5.31321 14.0628ZM7.96263 13.611C7.96263 13.861 7.75996 14.0636 7.50991 14.0636C7.25985 14.0636 7.05718 13.861 7.05718 13.611V6.39782C7.05718 6.14777 7.25985 5.94509 7.50991 5.94509C7.75984 5.94509 7.96263 6.14777 7.96263 6.39782V13.611ZM10.6216 6.42448L10.1964 13.6376C10.1823 13.8781 9.98275 14.0636 9.74494 14.0636C9.73601 14.0636 9.72697 14.0634 9.71793 14.063C9.46833 14.0482 9.2779 13.834 9.29267 13.5844L9.7177 6.37115C9.73235 6.12156 9.9459 5.93113 10.1962 5.94589C10.4458 5.96054 10.6362 6.17489 10.6216 6.42448Z"
+                                                <path
+                                                    d="M11.7545 4.91455H3.25522C3.02233 4.91455 2.839 5.11322 2.85777 5.34542L3.56833 14.1317C3.60793 14.6222 4.01705 15 4.50858 15H10.501C10.9926 15 11.4017 14.6222 11.4413 14.1316L12.1519 5.34542C12.1707 5.11322 11.9874 4.91455 11.7545 4.91455ZM5.31321 14.0628C5.30371 14.0634 5.29422 14.0638 5.28483 14.0638C5.04748 14.0638 4.84824 13.8789 4.83348 13.6388L4.38819 6.42574C4.37285 6.17615 4.56271 5.96134 4.81219 5.94601C5.06087 5.9309 5.27659 6.1203 5.29193 6.37001L5.7371 13.5831C5.75255 13.8327 5.56269 14.0474 5.31321 14.0628ZM7.96263 13.611C7.96263 13.861 7.75996 14.0636 7.50991 14.0636C7.25985 14.0636 7.05718 13.861 7.05718 13.611V6.39782C7.05718 6.14777 7.25985 5.94509 7.50991 5.94509C7.75984 5.94509 7.96263 6.14777 7.96263 6.39782V13.611ZM10.6216 6.42448L10.1964 13.6376C10.1823 13.8781 9.98275 14.0636 9.74494 14.0636C9.73601 14.0636 9.72697 14.0634 9.71793 14.063C9.46833 14.0482 9.2779 13.834 9.29267 13.5844L9.7177 6.37115C9.73235 6.12156 9.9459 5.93113 10.1962 5.94589C10.4458 5.96054 10.6362 6.17489 10.6216 6.42448Z"
                                                     fill="#009AED" />
-                                                <path d="M13.3198 3.51762L13.0224 2.62636C12.9441 2.39141 12.7241 2.23291 12.4763 2.23291H2.53268C2.28503 2.23291 2.06496 2.39141 1.98668 2.62636L1.68936 3.51762C1.63203 3.68951 1.70664 3.86484 1.84592 3.95227C1.90268 3.98786 1.96986 4.00926 2.04367 4.00926H12.9655C13.0393 4.00926 13.1066 3.98786 13.1632 3.95216C13.3025 3.86472 13.3771 3.6894 13.3198 3.51762Z"
+                                                <path
+                                                    d="M13.3198 3.51762L13.0224 2.62636C12.9441 2.39141 12.7241 2.23291 12.4763 2.23291H2.53268C2.28503 2.23291 2.06496 2.39141 1.98668 2.62636L1.68936 3.51762C1.63203 3.68951 1.70664 3.86484 1.84592 3.95227C1.90268 3.98786 1.96986 4.00926 2.04367 4.00926H12.9655C13.0393 4.00926 13.1066 3.98786 13.1632 3.95216C13.3025 3.86472 13.3771 3.6894 13.3198 3.51762Z"
                                                     fill="#009AED" />
                                             </svg>
                                         </div>
@@ -439,7 +467,8 @@
                 <div class="personalDocument">
                     <div class="headerPortlet">
                         <div class="titleBoxRight">Tarjeta de crédito o débito</div>
-                        <div class="subtitleBoxRight">Realiza reservas de manera más rápido guardando los datos de tu tarjeta. Nunca los usaremos sin tu
+                        <div class="subtitleBoxRight">Realiza reservas de manera más rápido guardando los datos de tu
+                            tarjeta. Nunca los usaremos sin tu
                             permiso.
                         </div>
                     </div>
@@ -506,207 +535,10 @@
                 </div>
             </div>
 
-
             <!-- END METODOS DE PAGO -->
 
             <!-- PASAJEROS -->
-
-            <div class="viewPasajero marginBottom40" *ngIf="id === 'mnuPasajero'" [hidden]="!agregaPasajero">
-                <div class="personalDocument">
-                    <div class="headerPortlet">
-                        <div class="titleBoxRight">Pasajeros</div>
-                        <div class="subtitleBoxRight">Reserva más rápido y sin complicaciones, agrega los datos de quienes suelen viajar a tu lado.</div>
-                    </div>
-                    <div class="content">
-                        <div class="rowContent">
-                            <div class="boxGrid">
-                                <div class="rowGrid">
-                                    <div class="rowElement flexAuto">
-                                        <div class="marginRight10">
-                                            <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.36902 9.81193C9.717 9.81193 10.8841 9.32846 11.838 8.37459C12.7915 7.42087 13.2751 6.25394 13.2751 4.90581C13.2751 3.55814 12.7917 2.39105 11.8378 1.43703C10.8839 0.483463 9.71684 0 8.36902 0C7.02088 0 5.85395 0.483463 4.90023 1.43718C3.94651 2.3909 3.46289 3.55799 3.46289 4.90581C3.46289 6.25394 3.94651 7.42103 4.90023 8.37475C5.85426 9.32831 7.02135 9.81193 8.36902 9.81193ZM5.74439 2.28118C6.47619 1.54938 7.33464 1.19366 8.36902 1.19366C9.40324 1.19366 10.2618 1.54938 10.9938 2.28118C11.7256 3.01314 12.0815 3.87175 12.0815 4.90581C12.0815 5.94018 11.7256 6.79864 10.9938 7.53059C10.2618 8.26254 9.40324 8.61827 8.36902 8.61827C7.33496 8.61827 6.4765 8.26239 5.74439 7.53059C5.01243 6.79879 4.65655 5.94018 4.65655 4.90581C4.65655 3.87175 5.01243 3.01314 5.74439 2.28118Z"
-                                                    fill="#009AED" />
-                                                <path d="M16.9529 15.6626C16.9254 15.2657 16.8698 14.8328 16.7879 14.3756C16.7052 13.915 16.5988 13.4795 16.4713 13.0815C16.3396 12.6702 16.1607 12.264 15.9392 11.8747C15.7097 11.4706 15.4399 11.1188 15.1372 10.8293C14.8206 10.5264 14.4331 10.2829 13.9849 10.1052C13.5382 9.92854 13.0433 9.83902 12.5138 9.83902C12.3059 9.83902 12.1048 9.92434 11.7164 10.1772C11.4774 10.3331 11.1978 10.5133 10.8858 10.7127C10.619 10.8827 10.2575 11.042 9.81101 11.1862C9.37541 11.3272 8.93313 11.3987 8.49644 11.3987C8.06007 11.3987 7.61779 11.3272 7.18188 11.1862C6.73586 11.0422 6.37424 10.8829 6.10787 10.7129C5.79877 10.5153 5.51904 10.3351 5.27646 10.177C4.88841 9.92418 4.68732 9.83887 4.47939 9.83887C3.94977 9.83887 3.45496 9.92854 3.00848 10.1054C2.5606 10.2827 2.17287 10.5262 1.856 10.8294C1.55327 11.1191 1.28349 11.4708 1.05411 11.8747C0.832969 12.264 0.653943 12.67 0.52216 13.0817C0.394883 13.4797 0.288431 13.915 0.205756 14.3756C0.123702 14.8322 0.0682227 15.2653 0.0407161 15.6631C0.0136756 16.0521 0 16.4569 0 16.8659C0 17.9292 0.338005 18.79 1.00454 19.4248C1.66283 20.0513 2.53372 20.3689 3.59311 20.3689H13.401C14.4601 20.3689 15.331 20.0513 15.9894 19.4248C16.6561 18.7905 16.9941 17.9294 16.9941 16.8658C16.994 16.4554 16.9801 16.0505 16.9529 15.6626ZM15.1664 18.56C14.7314 18.974 14.154 19.1753 13.4009 19.1753H3.59311C2.83987 19.1753 2.26238 18.974 1.82756 18.5602C1.40097 18.1541 1.19366 17.5998 1.19366 16.8659C1.19366 16.4843 1.20625 16.1074 1.23143 15.7456C1.25598 15.3907 1.30618 15.0008 1.38062 14.5865C1.45412 14.1773 1.54768 13.7933 1.65895 13.4456C1.76571 13.1123 1.91132 12.7822 2.0919 12.4643C2.26425 12.1612 2.46254 11.9012 2.68135 11.6918C2.88602 11.4958 3.14399 11.3354 3.44797 11.2151C3.72909 11.1039 4.04503 11.0429 4.38801 11.0338C4.42981 11.056 4.50425 11.0984 4.62485 11.1771C4.87023 11.337 5.15307 11.5194 5.46574 11.7191C5.8182 11.9438 6.27229 12.1468 6.81481 12.3219C7.36945 12.5013 7.93512 12.5923 8.4966 12.5923C9.05808 12.5923 9.62391 12.5013 10.1782 12.3221C10.7212 12.1466 11.1752 11.9438 11.5281 11.7188C11.8481 11.5143 12.123 11.3371 12.3684 11.1771C12.4889 11.0986 12.5634 11.056 12.6052 11.0338C12.9483 11.0429 13.2643 11.1039 13.5455 11.2151C13.8494 11.3354 14.1073 11.4959 14.312 11.6918C14.5308 11.9011 14.7291 12.1611 14.9015 12.4644C15.0822 12.7822 15.228 13.1125 15.3346 13.4455C15.446 13.7936 15.5397 14.1774 15.613 14.5863C15.6873 15.0014 15.7377 15.3915 15.7622 15.7458V15.7461C15.7876 16.1065 15.8003 16.4832 15.8005 16.8659C15.8003 17.5999 15.593 18.1541 15.1664 18.56Z"
-                                                    fill="#009AED" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="rowElement flexWrap">
-                                        <div class="descrip titleDesc">
-                                            Juan José Melguiza
-                                        </div>
-                                        <div class="descrip subtitleDesc">
-                                            D.N.I: 78546558
-                                        </div>
-                                    </div>
-                                    <div class="rowElement spaceEnd">
-                                        <div class="optModificar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.8972 4.81629L10.0978 2.01775L11.2181 0.898334C11.7168 0.399584 12.8592 0.300626 13.4569 0.898334L14.0166 1.45804C14.6143 2.05575 14.5161 3.19813 14.0166 3.69767L12.8972 4.81629ZM11.7778 5.9365L3.94026 13.774L0.301758 14.6132L1.14092 10.9747L8.97843 3.13717L11.7778 5.9365Z"
-                                                    fill="#009AED" />
-                                            </svg>
-                                        </div>
-                                        <div class="optEliminar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.25116 0.905457H8.7581V1.32729H9.66344V0.846405C9.66356 0.379715 9.28407 0 8.81761 0H6.19165C5.72519 0 5.3457 0.379715 5.3457 0.846405V1.32729H6.25116V0.905457Z"
-                                                    fill="#009AED" />
-                                                <path d="M11.7545 4.91455H3.25522C3.02233 4.91455 2.839 5.11322 2.85777 5.34542L3.56833 14.1317C3.60793 14.6222 4.01705 15 4.50858 15H10.501C10.9926 15 11.4017 14.6222 11.4413 14.1316L12.1519 5.34542C12.1707 5.11322 11.9874 4.91455 11.7545 4.91455ZM5.31321 14.0628C5.30371 14.0634 5.29422 14.0638 5.28483 14.0638C5.04748 14.0638 4.84824 13.8789 4.83348 13.6388L4.38819 6.42574C4.37285 6.17615 4.56271 5.96134 4.81219 5.94601C5.06087 5.9309 5.27659 6.1203 5.29193 6.37001L5.7371 13.5831C5.75255 13.8327 5.56269 14.0474 5.31321 14.0628ZM7.96263 13.611C7.96263 13.861 7.75996 14.0636 7.50991 14.0636C7.25985 14.0636 7.05718 13.861 7.05718 13.611V6.39782C7.05718 6.14777 7.25985 5.94509 7.50991 5.94509C7.75984 5.94509 7.96263 6.14777 7.96263 6.39782V13.611ZM10.6216 6.42448L10.1964 13.6376C10.1823 13.8781 9.98275 14.0636 9.74494 14.0636C9.73601 14.0636 9.72697 14.0634 9.71793 14.063C9.46833 14.0482 9.2779 13.834 9.29267 13.5844L9.7177 6.37115C9.73235 6.12156 9.9459 5.93113 10.1962 5.94589C10.4458 5.96054 10.6362 6.17489 10.6216 6.42448Z"
-                                                    fill="#009AED" />
-                                                <path d="M13.3198 3.51762L13.0224 2.62636C12.9441 2.39141 12.7241 2.23291 12.4763 2.23291H2.53268C2.28503 2.23291 2.06496 2.39141 1.98668 2.62636L1.68936 3.51762C1.63203 3.68951 1.70664 3.86484 1.84592 3.95227C1.90268 3.98786 1.96986 4.00926 2.04367 4.00926H12.9655C13.0393 4.00926 13.1066 3.98786 13.1632 3.95216C13.3025 3.86472 13.3771 3.6894 13.3198 3.51762Z"
-                                                    fill="#009AED" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="rowGrid">
-                                    <div class="rowElement flexAuto">
-                                        <div class="marginRight10">
-                                            <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.36902 9.81193C9.717 9.81193 10.8841 9.32846 11.838 8.37459C12.7915 7.42087 13.2751 6.25394 13.2751 4.90581C13.2751 3.55814 12.7917 2.39105 11.8378 1.43703C10.8839 0.483463 9.71684 0 8.36902 0C7.02088 0 5.85395 0.483463 4.90023 1.43718C3.94651 2.3909 3.46289 3.55799 3.46289 4.90581C3.46289 6.25394 3.94651 7.42103 4.90023 8.37475C5.85426 9.32831 7.02135 9.81193 8.36902 9.81193ZM5.74439 2.28118C6.47619 1.54938 7.33464 1.19366 8.36902 1.19366C9.40324 1.19366 10.2618 1.54938 10.9938 2.28118C11.7256 3.01314 12.0815 3.87175 12.0815 4.90581C12.0815 5.94018 11.7256 6.79864 10.9938 7.53059C10.2618 8.26254 9.40324 8.61827 8.36902 8.61827C7.33496 8.61827 6.4765 8.26239 5.74439 7.53059C5.01243 6.79879 4.65655 5.94018 4.65655 4.90581C4.65655 3.87175 5.01243 3.01314 5.74439 2.28118Z"
-                                                    fill="#009AED" />
-                                                <path d="M16.9529 15.6626C16.9254 15.2657 16.8698 14.8328 16.7879 14.3756C16.7052 13.915 16.5988 13.4795 16.4713 13.0815C16.3396 12.6702 16.1607 12.264 15.9392 11.8747C15.7097 11.4706 15.4399 11.1188 15.1372 10.8293C14.8206 10.5264 14.4331 10.2829 13.9849 10.1052C13.5382 9.92854 13.0433 9.83902 12.5138 9.83902C12.3059 9.83902 12.1048 9.92434 11.7164 10.1772C11.4774 10.3331 11.1978 10.5133 10.8858 10.7127C10.619 10.8827 10.2575 11.042 9.81101 11.1862C9.37541 11.3272 8.93313 11.3987 8.49644 11.3987C8.06007 11.3987 7.61779 11.3272 7.18188 11.1862C6.73586 11.0422 6.37424 10.8829 6.10787 10.7129C5.79877 10.5153 5.51904 10.3351 5.27646 10.177C4.88841 9.92418 4.68732 9.83887 4.47939 9.83887C3.94977 9.83887 3.45496 9.92854 3.00848 10.1054C2.5606 10.2827 2.17287 10.5262 1.856 10.8294C1.55327 11.1191 1.28349 11.4708 1.05411 11.8747C0.832969 12.264 0.653943 12.67 0.52216 13.0817C0.394883 13.4797 0.288431 13.915 0.205756 14.3756C0.123702 14.8322 0.0682227 15.2653 0.0407161 15.6631C0.0136756 16.0521 0 16.4569 0 16.8659C0 17.9292 0.338005 18.79 1.00454 19.4248C1.66283 20.0513 2.53372 20.3689 3.59311 20.3689H13.401C14.4601 20.3689 15.331 20.0513 15.9894 19.4248C16.6561 18.7905 16.9941 17.9294 16.9941 16.8658C16.994 16.4554 16.9801 16.0505 16.9529 15.6626ZM15.1664 18.56C14.7314 18.974 14.154 19.1753 13.4009 19.1753H3.59311C2.83987 19.1753 2.26238 18.974 1.82756 18.5602C1.40097 18.1541 1.19366 17.5998 1.19366 16.8659C1.19366 16.4843 1.20625 16.1074 1.23143 15.7456C1.25598 15.3907 1.30618 15.0008 1.38062 14.5865C1.45412 14.1773 1.54768 13.7933 1.65895 13.4456C1.76571 13.1123 1.91132 12.7822 2.0919 12.4643C2.26425 12.1612 2.46254 11.9012 2.68135 11.6918C2.88602 11.4958 3.14399 11.3354 3.44797 11.2151C3.72909 11.1039 4.04503 11.0429 4.38801 11.0338C4.42981 11.056 4.50425 11.0984 4.62485 11.1771C4.87023 11.337 5.15307 11.5194 5.46574 11.7191C5.8182 11.9438 6.27229 12.1468 6.81481 12.3219C7.36945 12.5013 7.93512 12.5923 8.4966 12.5923C9.05808 12.5923 9.62391 12.5013 10.1782 12.3221C10.7212 12.1466 11.1752 11.9438 11.5281 11.7188C11.8481 11.5143 12.123 11.3371 12.3684 11.1771C12.4889 11.0986 12.5634 11.056 12.6052 11.0338C12.9483 11.0429 13.2643 11.1039 13.5455 11.2151C13.8494 11.3354 14.1073 11.4959 14.312 11.6918C14.5308 11.9011 14.7291 12.1611 14.9015 12.4644C15.0822 12.7822 15.228 13.1125 15.3346 13.4455C15.446 13.7936 15.5397 14.1774 15.613 14.5863C15.6873 15.0014 15.7377 15.3915 15.7622 15.7458V15.7461C15.7876 16.1065 15.8003 16.4832 15.8005 16.8659C15.8003 17.5999 15.593 18.1541 15.1664 18.56Z"
-                                                    fill="#009AED" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="rowElement flexWrap">
-                                        <div class="descrip titleDesc">
-                                            Juan José Melguiza
-                                        </div>
-                                        <div class="descrip subtitleDesc">
-                                            D.N.I: 78546558
-                                        </div>
-                                    </div>
-                                    <div class="rowElement spaceEnd">
-                                        <div class="optModificar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.8972 4.81629L10.0978 2.01775L11.2181 0.898334C11.7168 0.399584 12.8592 0.300626 13.4569 0.898334L14.0166 1.45804C14.6143 2.05575 14.5161 3.19813 14.0166 3.69767L12.8972 4.81629ZM11.7778 5.9365L3.94026 13.774L0.301758 14.6132L1.14092 10.9747L8.97843 3.13717L11.7778 5.9365Z"
-                                                    fill="#009AED" />
-                                            </svg>
-                                        </div>
-                                        <div class="optEliminar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.25116 0.905457H8.7581V1.32729H9.66344V0.846405C9.66356 0.379715 9.28407 0 8.81761 0H6.19165C5.72519 0 5.3457 0.379715 5.3457 0.846405V1.32729H6.25116V0.905457Z"
-                                                    fill="#009AED" />
-                                                <path d="M11.7545 4.91455H3.25522C3.02233 4.91455 2.839 5.11322 2.85777 5.34542L3.56833 14.1317C3.60793 14.6222 4.01705 15 4.50858 15H10.501C10.9926 15 11.4017 14.6222 11.4413 14.1316L12.1519 5.34542C12.1707 5.11322 11.9874 4.91455 11.7545 4.91455ZM5.31321 14.0628C5.30371 14.0634 5.29422 14.0638 5.28483 14.0638C5.04748 14.0638 4.84824 13.8789 4.83348 13.6388L4.38819 6.42574C4.37285 6.17615 4.56271 5.96134 4.81219 5.94601C5.06087 5.9309 5.27659 6.1203 5.29193 6.37001L5.7371 13.5831C5.75255 13.8327 5.56269 14.0474 5.31321 14.0628ZM7.96263 13.611C7.96263 13.861 7.75996 14.0636 7.50991 14.0636C7.25985 14.0636 7.05718 13.861 7.05718 13.611V6.39782C7.05718 6.14777 7.25985 5.94509 7.50991 5.94509C7.75984 5.94509 7.96263 6.14777 7.96263 6.39782V13.611ZM10.6216 6.42448L10.1964 13.6376C10.1823 13.8781 9.98275 14.0636 9.74494 14.0636C9.73601 14.0636 9.72697 14.0634 9.71793 14.063C9.46833 14.0482 9.2779 13.834 9.29267 13.5844L9.7177 6.37115C9.73235 6.12156 9.9459 5.93113 10.1962 5.94589C10.4458 5.96054 10.6362 6.17489 10.6216 6.42448Z"
-                                                    fill="#009AED" />
-                                                <path d="M13.3198 3.51762L13.0224 2.62636C12.9441 2.39141 12.7241 2.23291 12.4763 2.23291H2.53268C2.28503 2.23291 2.06496 2.39141 1.98668 2.62636L1.68936 3.51762C1.63203 3.68951 1.70664 3.86484 1.84592 3.95227C1.90268 3.98786 1.96986 4.00926 2.04367 4.00926H12.9655C13.0393 4.00926 13.1066 3.98786 13.1632 3.95216C13.3025 3.86472 13.3771 3.6894 13.3198 3.51762Z"
-                                                    fill="#009AED" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="rowContent">
-                            <div class="btnAgregar" (click)="showAgregaPasajero(false)">
-                                + Agregar otro pasajero
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="viewPasajero" *ngIf="id === 'mnuPasajero'" [hidden]="agregaPasajero">
-                <div class="personalDocument">
-                    <div class="headerPortlet">
-                        <div class="titleBoxRight">Agregar pasajero</div>
-                        <div class="subtitleBoxRight">Reserva más rápido y sin complicaciones, agrega los datos de quienes suelen viajar a tu lado.</div>
-                    </div>
-                    <div class="content">
-                        <div class="rowContent">
-                            <div class="inputGroup">
-                                <span class="">Nombres</span>
-                                <input type="text" class="form-control" placeholder="El que figura en el documento de viaje.">
-                            </div>
-                            <div class="inputGroup">
-                                <span class="">Apellidos</span>
-                                <input type="text" class="form-control" placeholder="El que figura en el documento de viaje.">
-                            </div>
-                        </div>
-                        <div class="rowContent">
-                            <div class="inputGroup">
-                                <span class="">Fecha de nacimiento</span>
-                                <div class="rowElement">
-                                    <input type="text" class="form-control marginRight10" placeholder="Dia">
-                                    <select class="form-select marginRight10" aria-label="Default select example">
-                                        <option selected>Mes</option>
-                                        <option value="1">Enero</option>
-                                        <option value="2">Febrero</option>
-                                        <option value="3">Marzo</option>
-                                    </select>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Año</option>
-                                        <option value="1">1990</option>
-                                        <option value="2">1991</option>
-                                        <option value="3">1992</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="inputGroup">
-                                <span class="">Nacionalidad</span>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Perú</option>
-                                    <option value="1">Argentina</option>
-                                    <option value="2">Bolivia</option>
-                                    <option value="3">Brazil</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="rowContent">
-                            <div class="inputGroup flexNowrap">
-                                <div class="rowElement">
-                                    <div class="nroDoc marginRight10">
-                                        <span class="">Tipo de documento</span>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Seleccione</option>
-                                            <option value="1">DNI</option>
-                                            <option value="2">Pasaporte</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="rowElement">
-                                    <div class="nroDoc">
-                                        <span class="">N° de documento</span>
-                                        <input type="text" class="form-control" placeholder="Ingresar Nro">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="inputGroup">
-                                <span class="">Sexo</span>
-                                <div class="rowElement">
-                                    <div class="optionLeft">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Femenino
-                                        </label>
-                                    </div>
-                                    <div class="optionRight">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            Masculino
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="rowContent spaceBetween">
-                            <div class="btnPerfil primary" (click)="showAgregaPasajero(true)">
-                                Guardar
-                            </div>
-                            <div class="btnAgregar gris">
-                                + Agregar otro pasajero
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
+            <app-passenger></app-passenger>
             <!-- END PASAJEROS -->
 
             <!-- ELIMINAR CUENTA -->
@@ -714,7 +546,8 @@
                 <div class="personalDocument">
                     <div class="headerPortlet">
                         <div class="titleBoxRight">Eliminar cuenta</div>
-                        <div class="subtitleBoxRight">Lamentamos que te vayas. Coméntanos, ¿por qué eliminarás tu cuenta?
+                        <div class="subtitleBoxRight">Lamentamos que te vayas. Coméntanos, ¿por qué eliminarás tu
+                            cuenta?
                         </div>
                     </div>
 
@@ -722,31 +555,36 @@
                         <div class="rowContent">
                             <div class="inputGroup">
                                 <div class="optionCheck">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Razón 1
                                     </label>
                                 </div>
                                 <div class="optionCheck">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault2">
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         Razón 2
                                     </label>
                                 </div>
                                 <div class="optionCheck">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault3">
                                     <label class="form-check-label" for="flexRadioDefault3">
                                         Razón 3
                                     </label>
                                 </div>
                                 <div class="optionCheck">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault4">
                                     <label class="form-check-label" for="flexRadioDefault4">
                                         Razón 4
                                     </label>
                                 </div>
                                 <div class="optionCheck">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5" checked>
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault5" checked>
                                     <label class="form-check-label" for="flexRadioDefault5">
                                         Otros
                                     </label>
@@ -761,7 +599,8 @@
                         </div>
                         <div class="rowContent">
                             <div class="msgWarning">
-                                *Recuerda que perderás el acceso a tu historial de reservas y todos tus datos serán eliminados de manera permanente.
+                                *Recuerda que perderás el acceso a tu historial de reservas y todos tus datos serán
+                                eliminados de manera permanente.
                             </div>
                         </div>
                     </div>
