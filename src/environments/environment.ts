@@ -29,7 +29,7 @@ export const environment = {
   urlLibro:"http://10.75.102.23:10007/",
   urlPreference:"http://10.75.102.23:10006/",
   urlNmviajesAccount:"http://10.75.102.23:10006/v1/api",
-};
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

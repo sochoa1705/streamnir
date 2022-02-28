@@ -15,7 +15,9 @@ export class PerfilComponent implements OnInit {
   errors: any[] = []
   MSG_EMPTY: string = 'none'
   MSG_NOMBRES: string = 'nombres'
-  MSG_APELLIDOS: string = 'apellidos'
+  MSG_APELLIDO_PATERNO: string = 'apellidoPaterno'
+  MSG_APELLIDO_MATERNO: string = 'apellidoMaterno'
+  MSG_MAIL: string = 'email'
   MSG_DIA: string = 'dia'
   MSG_MES: string = 'mes'
   MSG_ANIO: string = 'anio'
@@ -24,16 +26,28 @@ export class PerfilComponent implements OnInit {
   MSG_NUMERO_DOCUMENTO: string = 'numeroDocumento'
   MSG_PAIS: string = 'pais'
   MSG_DEPARTAMENTO: string = 'departamento'
-  MSG_DISTRITO: string = 'distrito';
+  MSG_DISTRITO: string = 'distrito'
+  MSG_CHK_POLITY: string = 'politicas'
+  MSG_CHK_AUTORIZO: string = 'autorizo'
+  MSG_CHK_PREFE: string = 'playa'
+  listPreferent: any[]
+  user: any
+  userData: any
+  distritos: any
+  departamentos: any
+  paises: any
 
-  userStorage:UserStorage;
+  userStorage: UserStorage;
 
   constructor(
     public dataPagePresenterService: DataPagePresenterService,
     public preferenceService: PreferenceService,
-    public accountService:AccountService,
-    private router:Router,
-  ) { }
+    public accountService: AccountService,
+    private router: Router,
+  ) {
+    this.user = localStorage.getItem('usuario')
+    this.userData = JSON.parse(this.user)
+  }
 
   id: any = "mnuPerfil";
   showOption(ids: any) {
@@ -55,15 +69,73 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createform();
+    this.getCountries()
+    this.listPreferent = [
+      {
+        id: 1,
+        text: 'Playa',
+        name: 'playa',
+        value: 'PLA'
+      },
+      {
+        id: 2,
+        text: 'Aventura',
+        name: 'aventura',
+        value: 'AVE'
+      },
+      {
+        id: 3,
+        text: 'Naturaleza',
+        name: 'naturaleza',
+        value: 'NAT'
+      },
+      {
+        id: 4,
+        text: 'Exóticos',
+        name: 'exoticos',
+        value: 'EXO'
+      },
+      {
+        id: 5,
+        text: 'Tematico',
+        name: 'tematico',
+        value: 'TEM'
+      },
+      {
+        id: 6,
+        text: 'Shopping',
+        name: 'shopping',
+        value: 'SHO'
+      },
+      {
+        id: 7,
+        text: 'Cruceros',
+        name: 'cruceros',
+        value: 'CRU'
+      },
+      {
+        id: 8,
+        text: 'Cultural',
+        name: 'cultural',
+        value: 'CUL'
+      },
+      {
+        id: 9,
+        text: 'Otros',
+        name: 'otros',
+        value: 'OTR'
+      }
+    ]
+    this.createform()
     this.userStorage = this.accountService.getUserStorage();
   }
-
 
   createform() {
     this.formPreference = new FormGroup({
       nombres: new FormControl(),
-      apellidos: new FormControl(),
+      apellidoPaterno: new FormControl(),
+      apellidoMaterno: new FormControl(),
+      email: new FormControl(),
       dia: new FormControl(),
       mes: new FormControl(),
       anio: new FormControl(),
@@ -74,15 +146,17 @@ export class PerfilComponent implements OnInit {
       departamento: new FormControl(),
       distrito: new FormControl(),
 
-      playa: new FormControl(),
-      aventura: new FormControl(),
-      naturaleza: new FormControl(),
-      exoticos: new FormControl(),
-      tematico: new FormControl(),
-      shopping: new FormControl(),
-      cruceros: new FormControl(),
-      cultural: new FormControl(),
-      otros: new FormControl(),
+      preference: new FormGroup({
+        playa: new FormControl(false),
+        aventura: new FormControl(false),
+        naturaleza: new FormControl(false),
+        exoticos: new FormControl(false),
+        tematico: new FormControl(false),
+        shopping: new FormControl(false),
+        cruceros: new FormControl(false),
+        cultural: new FormControl(false),
+        otros: new FormControl(false),
+      }),
 
       economico: new FormControl(),
       clasico: new FormControl(),
@@ -99,13 +173,45 @@ export class PerfilComponent implements OnInit {
       autorizo: new FormControl(),
     })
   }
-
+  getCountries() {
+    this.preferenceService.countries().subscribe({
+      next: response => {
+        console.log(response['Result'])
+        this.paises = response['Result']
+      }
+    })
+  }
+  optionDepartament(e: any) {
+    console.log(e.target.value)
+    let countrie = e.target.value
+    this.getDepartament(countrie)
+  }
+  getDepartament(option: string) {
+    this.preferenceService.departments(option).subscribe({
+      next: response => {
+        console.log(response['Result'])
+        this.departamentos = response['Result']
+      }
+    })
+  }
+  optionDistrict(e: any) {
+    console.log(e.target.value)
+    let departament = e.target.value
+    this.getDistrict(departament)
+  }
+  getDistrict(option: string) {
+    this.preferenceService.districts(option).subscribe({
+      next: response => {
+        console.log(response['Result'])
+        this.distritos = response['Result']
+      }
+    })
+  }
   save() {
-    console.log(this.formPreference.value)
-
+    // console.log(this.formPreference.value)
+    let data = this.formPreference.value
     if (this.validForm()) {
-      console.log(this.formPreference.value)
-    }
+
     let payload = {
       "TrackingCode": "000001",
       "MuteExceptions": false,
@@ -114,16 +220,16 @@ export class PerfilComponent implements OnInit {
         "Application": "Interagencias"
       },
       "Parameter": {
-        "Firstname": "Test 1",
-        "FatherLastname": "oshiro",
-        "MotherLastname": "gushiken",
-        "Email": "joshirog@gmail.com",
+        "Firstname": data.nombres,
+        "FatherLastname": data.apellidoPaterno,
+        "MotherLastname": data.apellidoMaterno,
+        "Email": data.email,
         "Gender": "M",
-        "Phone": "987654321",
-        "Birthdate": "1990-01-01 ",
-        "Nationality": "PE",
-        "DocumentType": "DNI",
-        "DocumentNumber": "43214321",
+        "Phone": data.telefono,
+        "Birthdate": data.anio + '-' + data.mes + '-' + data.dia,
+        "Nationality": data.nacionalidad,
+        "DocumentType": data.tipoDocumento,
+        "DocumentNumber": data.numeroDocumento,
         "CountryId": 132,
         "DepartmentId": 14,
         "DistrictId": 1245,
@@ -148,11 +254,13 @@ export class PerfilComponent implements OnInit {
         "DataAuthorization": true
       }
     }
+    console.log(payload);
 
     this.preferenceService.preference(payload).subscribe({
       next: response => console.log(response)
 
     })
+    }
   }
   validForm() {
     this.errors = []
@@ -165,9 +273,17 @@ export class PerfilComponent implements OnInit {
     if (nombres === undefined || nombres === null || nombres.trim() === '') {
       this.errors.push({ name: this.MSG_NOMBRES, message: 'Campo requerido' })
     }
-    let apellidos: string = this.formPreference.getRawValue()['apellidos']
-    if (apellidos === undefined || apellidos === null || apellidos.trim() === '') {
-      this.errors.push({ name: this.MSG_APELLIDOS, message: 'Campo requerido' })
+    let apellidoPaterno: string = this.formPreference.getRawValue()['apellidoPaterno']
+    if (apellidoPaterno === undefined || apellidoPaterno === null || apellidoPaterno.trim() === '') {
+      this.errors.push({ name: this.MSG_APELLIDO_PATERNO, message: 'Campo requerido' })
+    }
+    let apellidoMaterno: string = this.formPreference.getRawValue()['apellidoMaterno']
+    if (apellidoMaterno === undefined || apellidoMaterno === null || apellidoMaterno.trim() === '') {
+      this.errors.push({ name: this.MSG_APELLIDO_MATERNO, message: 'Campo requerido' })
+    }
+    let email: string = this.formPreference.getRawValue()['email']
+    if (email === undefined || email === null || email.trim() === '') {
+      this.errors.push({ name: this.MSG_MAIL, message: 'Campo requerido' })
     }
     let dia: string = this.formPreference.getRawValue()['dia']
     if (dia === undefined || dia === null || dia.trim() === '') {
@@ -187,27 +303,64 @@ export class PerfilComponent implements OnInit {
     }
     let tipoDocumento: string = this.formPreference.getRawValue()['tipoDocumento']
     if (tipoDocumento === undefined || tipoDocumento === null || tipoDocumento.trim() === '') {
-      this.errors.push({ name: this.MSG_TIPO_DOCUMENTO, message: 'teléfono es requerido' })
+      this.errors.push({ name: this.MSG_TIPO_DOCUMENTO, message: 'Campo requerido' })
     }
     let numeroDocumento: string = this.formPreference.getRawValue()['numeroDocumento']
     if (numeroDocumento === undefined || numeroDocumento === null || numeroDocumento.trim() === '') {
-      this.errors.push({ name: this.MSG_NUMERO_DOCUMENTO, message: 'Dirección es requerido' })
+      this.errors.push({ name: this.MSG_NUMERO_DOCUMENTO, message: 'Campo requerido' })
     }
     if (!number.test(numeroDocumento)) {
       this.errors.push({ name: this.MSG_NUMERO_DOCUMENTO, message: 'solo números' })
     }
     let pais: string = this.formPreference.getRawValue()['pais']
     if (pais === undefined || pais === null || pais.trim() === '') {
-      this.errors.push({ name: this.MSG_PAIS, message: 'Email requerido' })
+      this.errors.push({ name: this.MSG_PAIS, message: 'Campo requerido' })
     }
     let departamento: string = this.formPreference.getRawValue()['departamento']
     if (departamento === undefined || departamento === null || departamento.trim() === '') {
-      this.errors.push({ name: this.MSG_DEPARTAMENTO, message: 'departamento requerido' })
+      this.errors.push({ name: this.MSG_DEPARTAMENTO, message: 'Campo requerido' })
     }
     let distrito: string = this.formPreference.getRawValue()['distrito']
     if (distrito === undefined || distrito === null || distrito.trim() === '') {
-      this.errors.push({ name: this.MSG_DISTRITO, message: 'Distrito requerido' })
+      this.errors.push({ name: this.MSG_DISTRITO, message: 'Campo requerido' })
     }
+    let politicas: boolean = this.formPreference.getRawValue()['politicas']
+    if (politicas === undefined || politicas === null || politicas == false) {
+      this.errors.push({ name: this.MSG_CHK_POLITY, message: 'Aceptar Politicas requerido' })
+    }
+    let autorizo: boolean = this.formPreference.getRawValue()['autorizo']
+    if (autorizo === undefined || autorizo === null || autorizo == false) {
+      this.errors.push({ name: this.MSG_CHK_AUTORIZO, message: 'Autorizar uso de información requerido' })
+    }
+
+    // let playa: boolean = this.formPreference.getRawValue()['playa'],
+    //   aventura: boolean = this.formPreference.getRawValue()['aventura'],
+    //   naturaleza: boolean = this.formPreference.getRawValue()['naturaleza'],
+    //   exoticos: boolean = this.formPreference.getRawValue()['exoticos'],
+    //   tematico: boolean = this.formPreference.getRawValue()['tematico'],
+    //   shopping: boolean = this.formPreference.getRawValue()['shopping'],
+    //   cruceros: boolean = this.formPreference.getRawValue()['cruceros'],
+    //   cultura: boolean = this.formPreference.getRawValue()['cultura'],
+    //   otros: boolean = this.formPreference.getRawValue()['otros']
+    // if (
+    //   playa == false ||
+    //   aventura == false ||
+    //   naturaleza == false ||
+    //   exoticos == false ||
+    //   tematico == false ||
+    //   shopping == false ||
+    //   cruceros == false ||
+    //   cultura == false ||
+    //   otros == false
+    // ) {
+    //   this.errors.push({ name: this.MSG_CHK_PREFE, message: 'Debe elegir al menos una opción' })
+    // }
+
+    // for (let x = 0; x < this.listPreferent.length; x++) {
+    //   let prefe: string = this.formPreference.getRawValue()['playa']
+    //   console.log(prefe);
+
+    // }
 
     return this.errors.length === 0
   }
@@ -217,7 +370,34 @@ export class PerfilComponent implements OnInit {
   getMessageArray(index: any, messageKey: any) {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
-  logout(){
+  preference() {
+    console.log(this.formPreference.value);
+
+    let formPreference = this.formPreference.getRawValue()['preference']
+    let jsonPreference = this.listPreferent
+
+    // console.log(formPreference)
+    // console.log(jsonPreference[0].name)
+
+    for (const key of formPreference) {
+      //     // if (object.hasOwnProperty(key)) {
+      //   //   const element = object[key];
+      //   // }
+      //   if(key.name === 'playa') {
+      //     console.log(key)
+      //   }
+      console.log(key)
+
+      // }
+      // console.log(chk[0].name)
+      // console.log(chk.playa)
+    }
+    // if(true){
+    //   console.log()
+    // }
+
+  }
+  logout() {
     this.accountService.signOut();
     this.router.navigateByUrl("/");
   }
