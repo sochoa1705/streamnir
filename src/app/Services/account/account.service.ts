@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Login } from 'src/app/app.component';
+import { LoginPerson } from 'src/app/app.component';
 import { ResponseModelT } from 'src/app/shared/models';
 import { NmvModel } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
@@ -42,14 +42,14 @@ export class AccountService {
 
 
 
-    signIn(login:Login){
+    signIn(login:LoginPerson, isPerson:boolean){
 
         let payload:any = {};
     
         const parameter = {
             Username: login.email,
             Password: login.password,
-            IsPerson: !login.business,
+            IsPerson: isPerson
         };
 
         const nmvModel = new NmvModel();

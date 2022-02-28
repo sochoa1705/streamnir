@@ -1,6 +1,6 @@
 
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
@@ -14,14 +14,18 @@ import { Guid } from './shared/utils';
 import { ValidatorsService } from './shared/validators/validators.service';
 
 
-export class Login {
+export class LoginPerson {
   constructor(
     public email = "jose.oshiro@gmail.com",
     public password = "Oshiro123",
-    public recorder = false,
-    public business = false,
-    public emailB = "",
-    public passwordB = "",
+    public recorder = false
+  ){}
+}
+export class LoginBusiness {
+  constructor(
+    public email = "jose.oshiro@gmail.com",
+    public password = "Oshiro123",
+    public recorder = false
   ){}
 }
 
@@ -45,12 +49,18 @@ export class AppComponent implements OnInit {
   ]
 
   //confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
-  login = new Login()
+  login = new LoginPerson();
+  loginB = new LoginBusiness();
 
   isPerson: boolean = true;
+  isPersonLoggin: boolean = true;
 
   personalAccountForm: FormGroup;
   businessAccountForm: FormGroup;
+
+
+  submitBusiness = false;
+  submitPerson = false;
 
   constructor(
     private _popUpSubject: PopupService,
@@ -138,13 +148,57 @@ export class AppComponent implements OnInit {
     btnModal?btnModal.click():null;
   }
 
-  signIn(){
-    this._accountService.signIn(this.login).subscribe(resp=>{
-      if(resp.IsSuccess){
-        this._accountService.guardarStorage(resp);
-        this.closeModal();
-      }
-    })
+
+  openSnackBar(message: string, action: string = "Error") {
+    this._matSnackBar.open(message, "", {
+      duration: 2000,
+      panelClass: ['mat-toolbar', 'mat-warn']
+    });
+  }
+  
+
+  validationFormLogin(form:NgForm){
+    if(form.invalid){
+      return false;
+    }
+    return true;
+  }
+
+
+
+  signIn(formPerson:NgForm, formBussines:NgForm){
+
+    const validPerson = this.validationFormLogin(formPerson);
+    const validBusiness = this.validationFormLogin(formBussines);
+
+    if(this.isPersonLoggin && validPerson){
+      this._accountService.signIn(this.login, this.isPersonLoggin).subscribe(resp=>{
+        console.log(resp);
+        if(resp.IsSuccess){
+          this._accountService.guardarStorage(resp);
+          this.closeModal();
+        }
+      })
+
+
+    }else if(!this.isPersonLoggin && validBusiness){
+      this._accountService.signIn(this.loginB, this.isPersonLoggin).subscribe(resp=>{
+        if(resp.IsSuccess){
+          this._accountService.guardarStorage(resp);
+          this.closeModal();
+        }
+      })
+
+    }else if(!validPerson && this.isPersonLoggin){
+      this.submitPerson = true; 
+      // this.openSnackBar("El usuario y la contraseña son requeridos")
+    }else if(!validBusiness && !this.isPersonLoggin){
+      this.submitBusiness = true;
+      // this.openSnackBar("El usuario y la contraseña son requeridos")
+    }else{
+      this.openSnackBar("Ocurrio un error")
+    }
+
   }
   
 
@@ -337,6 +391,10 @@ export class AppComponent implements OnInit {
   showSocialMedia($event: { index: string | number; }) {
     this.socialMedia = $event.index == 0 ? true : false;
     this.isPerson = $event.index == 0 ? true : false;
+  }
+
+  showSocialMediaLogin($event: { index: string | number; }) {
+    this.isPersonLoggin = $event.index == 0 ? true : false;
   }
 
   cerrarBoxClicFuera() {
