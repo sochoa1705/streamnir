@@ -563,7 +563,7 @@ section {
         }
         .mat-ink-bar {
             background-color: $red_light !important;
-						height: 3px;
+            height: 3px;
             min-width: 212px !important;
         }
         .mat-tab-body-content {
@@ -1309,6 +1309,28 @@ section {
     display: flex;
     flex: 1 1 100%;
     padding: 14px 6px 0px 26px;
+}
+
+.box-container .box-content .portlet-der .personalDocument .content .rowContent {
+    .inputGroup {
+        &.error {
+            .form-control,
+            .form-select {
+                border: 0.5px solid #F44336;
+            }
+            .textError {
+                //display: flex;
+                opacity: 1;
+            }
+        }
+        .textError {
+            opacity: 0;
+            margin-left: 15px;
+            font-weight: 300;
+            font-size: 11px;
+            color: #F44336;
+        }
+    }
 }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid {
@@ -6793,7 +6815,7 @@ button.customers {
                             color: #F44336;
                             bottom: 3px;
                         }
-                    }										
+                    }
                 }
                 button {
                     margin-bottom: 20px;
