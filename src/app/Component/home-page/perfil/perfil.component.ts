@@ -33,8 +33,11 @@ export class PerfilComponent implements OnInit {
   listPreferent: any[]
   user: any
   userData: any
+  distritos: any
+  departamentos: any
+  paises: any
 
-  userStorage:UserStorage;
+  userStorage: UserStorage;
 
   constructor(
     public dataPagePresenterService: DataPagePresenterService,
@@ -66,6 +69,7 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCountries()
     this.listPreferent = [
       {
         id: 1,
@@ -142,15 +146,17 @@ export class PerfilComponent implements OnInit {
       departamento: new FormControl(),
       distrito: new FormControl(),
 
-      playa: new FormControl(false),
-      aventura: new FormControl(false),
-      naturaleza: new FormControl(false),
-      exoticos: new FormControl(false),
-      tematico: new FormControl(false),
-      shopping: new FormControl(false),
-      cruceros: new FormControl(false),
-      cultural: new FormControl(false),
-      otros: new FormControl(false),
+      preference: new FormGroup({
+        playa: new FormControl(false),
+        aventura: new FormControl(false),
+        naturaleza: new FormControl(false),
+        exoticos: new FormControl(false),
+        tematico: new FormControl(false),
+        shopping: new FormControl(false),
+        cruceros: new FormControl(false),
+        cultural: new FormControl(false),
+        otros: new FormControl(false),
+      }),
 
       economico: new FormControl(),
       clasico: new FormControl(),
@@ -167,9 +173,42 @@ export class PerfilComponent implements OnInit {
       autorizo: new FormControl(),
     })
   }
-
+  getCountries() {
+    this.preferenceService.countries().subscribe({
+      next: response => {
+        console.log(response['Result'])
+        this.paises = response['Result']
+      }
+    })
+  }
+  optionDepartament(e: any) {
+    console.log(e.target.value)
+    let countrie = e.target.value
+    this.getDepartament(countrie)
+  }
+  getDepartament(option: string) {
+    this.preferenceService.departments(option).subscribe({
+      next: response => {
+        console.log(response['Result'])
+        this.departamentos = response['Result']
+      }
+    })
+  }
+  optionDistrict(e: any) {
+    console.log(e.target.value)
+    let departament = e.target.value
+    this.getDistrict(departament)
+  }
+  getDistrict(option: string) {
+    this.preferenceService.districts(option).subscribe({
+      next: response => {
+        console.log(response['Result'])
+        this.distritos = response['Result']
+      }
+    })
+  }
   save() {
-    console.log(this.formPreference.value)
+    // console.log(this.formPreference.value)
     let data = this.formPreference.value
     if (this.validForm()) {
 
@@ -215,11 +254,13 @@ export class PerfilComponent implements OnInit {
         "DataAuthorization": true
       }
     }
+    console.log(payload);
+
     this.preferenceService.preference(payload).subscribe({
       next: response => console.log(response)
 
     })
-  }
+    }
   }
   validForm() {
     this.errors = []
@@ -328,6 +369,33 @@ export class PerfilComponent implements OnInit {
   }
   getMessageArray(index: any, messageKey: any) {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
+  }
+  preference() {
+    console.log(this.formPreference.value);
+
+    let formPreference = this.formPreference.getRawValue()['preference']
+    let jsonPreference = this.listPreferent
+
+    // console.log(formPreference)
+    // console.log(jsonPreference[0].name)
+
+    for (const key of formPreference) {
+      //     // if (object.hasOwnProperty(key)) {
+      //   //   const element = object[key];
+      //   // }
+      //   if(key.name === 'playa') {
+      //     console.log(key)
+      //   }
+      console.log(key)
+
+      // }
+      // console.log(chk[0].name)
+      // console.log(chk.playa)
+    }
+    // if(true){
+    //   console.log()
+    // }
+
   }
   logout() {
     this.accountService.signOut();
