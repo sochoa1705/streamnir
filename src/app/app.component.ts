@@ -8,7 +8,7 @@ import { combineLatest, fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 //import { ConfirmDialogComponent } from './Component/confirm-dialog/confirm-dialog.component';
-import { AccountService } from './Services/account/account.service';
+import { AccountsService } from './Services/accounts.service';
 import { PopupService } from './Services/pop-up/popup.service';
 import { Guid } from './shared/utils';
 import { ValidatorsService } from './shared/validators/validators.service';
@@ -22,7 +22,7 @@ export class Login {
     public business = false,
     public emailB = "",
     public passwordB = "",
-  ){}
+  ) { }
 }
 
 @Component({
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
 
   title = 'NuevoMundoViajes';
 
-  @ViewChild("closeBotonUsuario") closeBotonUsuario:ElementRef;
+  @ViewChild("closeBotonUsuario") closeBotonUsuario: ElementRef;
 
   pasajeros: any = [
     {
@@ -55,17 +55,17 @@ export class AppComponent implements OnInit {
   constructor(
     private _popUpSubject: PopupService,
     private _authService: SocialAuthService,
-    private _accountService: AccountService,
+    private _accountService: AccountsService,
     private _formBuilder: FormBuilder,
     public _matDialog: MatDialog,
     private _matSnackBar: MatSnackBar,
-    private _validatorsService: ValidatorsService,
+    private _validatorsService: ValidatorsService
   ) {
     this.cerrarBoxClicFuera();
 
     this._authService.authState.subscribe((user) => {
 
-      if(user.provider == "GOOGLE"){
+      if (user.provider == "GOOGLE") {
         this.saveSocialAccount(user.firstName, user.lastName, user.email, "G", user.id)
       }
 
@@ -80,11 +80,11 @@ export class AppComponent implements OnInit {
     this.businessAccountForm = this.createBusinessAccountForm();
   }
 
-  loadUsuario(){
+  loadUsuario() {
     const userStr = this._accountService.getUserStorage();
-    if(userStr.id > 0){
+    if (userStr.id > 0) {
       this._accountService.dispatchLogged(true);
-    }else{
+    } else {
       this._accountService.dispatchLogged(false);
     }
   }
@@ -133,74 +133,74 @@ export class AppComponent implements OnInit {
     this.isPerson ? this.savePersonalAccount() : this.saveBusinessAccount();
   }
 
-  closeModal(){
-    const btnModal:any = this.closeBotonUsuario.nativeElement;
-    btnModal?btnModal.click():null;
+  closeModal() {
+    const btnModal: any = this.closeBotonUsuario.nativeElement;
+    btnModal ? btnModal.click() : null;
   }
 
-  signIn(){
-    this._accountService.signIn(this.login).subscribe(resp=>{
-      if(resp.IsSuccess){
+  signIn() {
+    this._accountService.signIn(this.login).subscribe(resp => {
+      if (resp.IsSuccess) {
         this._accountService.guardarStorage(resp);
         this.closeModal();
       }
     })
   }
-  
 
-  saveSocialAccount(Firstname:string,FatherLastname:string, Email:string, SocialNetwork:"G" | "F" ,IdSocialNetwork:string ){
 
-      const payload = {
-        TrackingCode: Guid(),
-        MuteExceptions: environment.muteExceptions,
-        Caller: {
-          Company: "Agil",
-          Application: "Interagencias"
-        },
-        Parameter: {
-          Firstname,
-          FatherLastname,
-          MotherLastname: "",
-          Email,
-          Password: "",
-          IsPerson: true,
-          Ruc: "",
-          BusinessName: "",
-          SocialNetwork,
-          IdSocialNetwork
+  saveSocialAccount(Firstname: string, FatherLastname: string, Email: string, SocialNetwork: "G" | "F", IdSocialNetwork: string) {
+
+    const payload = {
+      TrackingCode: Guid(),
+      MuteExceptions: environment.muteExceptions,
+      Caller: {
+        Company: "Agil",
+        Application: "Interagencias"
+      },
+      Parameter: {
+        Firstname,
+        FatherLastname,
+        MotherLastname: "",
+        Email,
+        Password: "",
+        IsPerson: true,
+        Ruc: "",
+        BusinessName: "",
+        SocialNetwork,
+        IdSocialNetwork
+      }
+    };
+
+    this._accountService.saveAccount(payload).subscribe({
+      next: (response) => {
+        const isSuccess = response.Result.IsSuccess;
+
+        if (isSuccess) {
+          this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
+            verticalPosition: 'top',
+            duration: 2000
+          });
+        } else {
+          this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
+            verticalPosition: 'top',
+            duration: 2000
+          });
         }
-      };
 
-      this._accountService.saveAccount(payload).subscribe({
-        next: (response) => {
-          const isSuccess = response.Result.IsSuccess;
+        console.log(this.personalAccountForm.value);
+        this.personalAccountForm.reset();
 
-          if (isSuccess) {
-            this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
-              verticalPosition: 'top',
-              duration: 2000
-            });
-          } else {
-            this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
-              verticalPosition: 'top',
-              duration: 2000
-            });
-          }
+        //this.loaderSubjectService.closeLoader()
+      },
+      error: (err) => {
 
-          console.log(this.personalAccountForm.value);
-          this.personalAccountForm.reset();
+        console.log(err);
 
-          //this.loaderSubjectService.closeLoader()
-        },
-        error: (err) => {
+        //this.loaderSubjectService.closeLoader()
+      },
+      complete: () => { }
+    });
 
-          console.log(err);
-
-          //this.loaderSubjectService.closeLoader()
-        },
-        complete: () => { }
-      });
-    
   }
 
   savePersonalAccount(): void {

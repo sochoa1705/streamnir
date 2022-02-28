@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/app/Services/account/account.service';
+import { AccountsService } from 'src/app/Services/accounts.service';
 import { ContactoService } from './contacto.service';
 
 @Component({
@@ -15,24 +15,24 @@ export class ContactoComponent implements OnInit {
   idUsuario: number;
 
 
-  constructor(    public accountService:AccountService, public contactoService:ContactoService    ) {
+  constructor(public accountService: AccountsService, public contactoService: ContactoService) {
     this.idUsuario = this.accountService.getUserStorage().id;
-   }
+  }
 
   ngOnInit(): void {
 
     this.getInformation()
-    
+
   }
 
-  getInformation(){
-    this.contactoService.getInformation(this.idUsuario).subscribe(data=>{
+  getInformation() {
+    this.contactoService.getInformation(this.idUsuario).subscribe(data => {
       console.log(data);
     })
   }
 
 
-  
+
 
   cambiarPass = false;
   showCambiarPass(valElem: boolean) {

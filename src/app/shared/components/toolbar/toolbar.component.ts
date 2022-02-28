@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountService, UserStorage } from 'src/app/Services/account/account.service';
+import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -8,24 +8,24 @@ import { AccountService, UserStorage } from 'src/app/Services/account/account.se
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-  
+
   @Input() menu: any[];
 
   isLogged = false;
 
-  user:UserStorage;
+  user: UserStorage;
 
   constructor(
     public route: Router,
-    public accountService:AccountService
+    public accountService: AccountsService
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
 
-    this.accountService.isLogged().subscribe(logged=>{
+    this.accountService.isLogged().subscribe(logged => {
       this.isLogged = logged;
 
-      if(this.isLogged){
+      if (this.isLogged) {
         this.user = this.accountService.getUserStorage();
       }
     })
@@ -36,7 +36,7 @@ export class ToolbarComponent implements OnInit {
   toHome() {
     this.route.navigateByUrl('/')
   }
-  to(e: any){
+  to(e: any) {
     window.location.href = e;
   }
 }

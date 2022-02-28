@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountService, UserStorage } from 'src/app/Services/account/account.service';
+import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PreferenceService } from '../../../Services/preference/preference.service';
+import { Passenger, PassengersService } from 'src/app/Services/passengers.service';
 
 @Component({
   selector: 'app-perfil',
@@ -26,14 +27,21 @@ export class PerfilComponent implements OnInit {
   MSG_DEPARTAMENTO: string = 'departamento'
   MSG_DISTRITO: string = 'distrito';
 
-  userStorage:UserStorage;
+  userStorage: UserStorage;
+
+  hiddenList: boolean = true;
+  hiddenForm: boolean = false;
+  passengerId: number;
 
   constructor(
     public dataPagePresenterService: DataPagePresenterService,
     public preferenceService: PreferenceService,
-    public accountService:AccountService,
-    private router:Router,
-  ) { }
+    public accountService: AccountsService,
+    private _passengersService: PassengersService,
+    private router: Router,
+  ) {
+
+  }
 
   id: any = "mnuPerfil";
   showOption(ids: any) {
@@ -41,6 +49,26 @@ export class PerfilComponent implements OnInit {
     //console.log(this.id);
   }
 
+  hideList(isHidden: boolean) {
+    this.hiddenList = isHidden;
+  }
+
+  hideForm(isHidden: boolean) {
+    this.hiddenForm = isHidden;
+  }
+
+  getPassengerId(id: number) {
+    debugger
+
+    this.passengerId = id;
+
+    // let userId = 44290;
+
+    // this._passengersService.get(userId, id).subscribe(res => {
+    //   debugger
+    //   this.passenger = res;
+    // })
+  }
 
   agregaTarjeta = false;
   showAgregaTarjeta(valElem: boolean) {
@@ -217,7 +245,7 @@ export class PerfilComponent implements OnInit {
   getMessageArray(index: any, messageKey: any) {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
-  logout(){
+  logout() {
     this.accountService.signOut();
     this.router.navigateByUrl("/");
   }
