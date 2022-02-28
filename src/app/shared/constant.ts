@@ -54,12 +54,21 @@ export enum ENDPOINT_API {
 
   //CHECKCARD
   CHECK_CARD = 'v1/api/Card/Check?Parameter.Number=49133712345678900&TrackingCode=qwertyuiiop&MuteExceptions=false&Caller.Company=Agil&Caller.Application=Expertia',
-  
+
   //CARDPAYMENT
   LIBRO_RECLAMO = 'v1/api/Complaint',
 
   // PREFERENCE
   PREFERENCE = 'v1/api/Preference',
+
+  // COUNTRIES
+  COUNTRIES = 'v1/api/Master/Soap/Countries',
+
+  // DEPARTMENTS
+  DEPARTAMENTS = 'v1/api/Master/Soap/Departments',
+
+  // DISTRICTS
+  DISTRICTS = 'v1/api/Master/Soap/Districts',
 }
 
 export enum ROUTE_VIAJES {
@@ -76,6 +85,6 @@ export const FilterTypes = {
   alianzas: 6,
   reserva: 7,
   equipajebodega: 8,
-  duracionSalida:9,
-  duracionEscala:10,
+  duracionSalida: 9,
+  duracionEscala: 10,
 }

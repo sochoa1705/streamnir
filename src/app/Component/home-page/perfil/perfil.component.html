@@ -60,7 +60,7 @@
                     <li id="preferencia" [class.selected]="id === 'preferencia'" (click)="showOption('preferencia')">Preferencias</li>
                     <li id="mnuPago" [class.selected]="id === 'mnuPago'" (click)="showOption('mnuPago')">Métodos de pago</li>
                     <li id="mnuPasajero" [class.selected]="id === 'mnuPasajero'" (click)="showOption('mnuPasajero')">Pasajeros</li>
-                    <li id="mnuEliminar" (click)="logout()">Logout</li>
+                    <!-- <li id="mnuEliminar" (click)="preference()">Logout</li> -->
                 </ul>
             </div>
         </div>
@@ -236,16 +236,18 @@
                             </div>
                             <div class="rowContent">
                                 <div class="inputGroup">
-                                    <span class="">País</span>
-                                    <select class="form-select marginRight10" formControlName="pais" aria-label="Default select example" [ngClass]="getMessage(MSG_PAIS) !== MSG_EMPTY ? 'isvalid' : ''">
-                                        <option selected>Seleccione país</option>
-                                    </select>
+                                    <span class="">País2</span>
+                                    <select class="form-select marginRight10" (change)="optionDepartament($event)" formControlName="pais" aria-label="Default select example" [ngClass]="getMessage(MSG_PAIS) !== MSG_EMPTY ? 'isvalid' : ''">
+                                            <option selected>Seleccione país</option>
+                                            <option *ngFor="let option of paises" [value]="option.Code">{{ option.Name }}</option>
+                                        </select>
                                     <span class="valid" *ngIf="getMessage(MSG_PAIS) != MSG_EMPTY">{{ getMessage(MSG_PAIS) }}</span>
                                 </div>
                                 <div class="inputGroup">
                                     <span class="">Departamento</span>
-                                    <select class="form-select" formControlName="departamento" aria-label="Default select example" [ngClass]="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
+                                    <select class="form-select" (change)="optionDistrict($event)" formControlName="departamento" aria-label="Default select example" [ngClass]="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
                                         <option selected>Seleccione departamento</option>
+                                        <option *ngFor="let option of departamentos" [value]="option.Code">{{ option.Name }}</option>
                                     </select>
                                     <span class="valid" *ngIf="getMessage(MSG_DEPARTAMENTO) != MSG_EMPTY">{{ getMessage(MSG_DEPARTAMENTO) }}</span>
                                 </div>
@@ -253,6 +255,7 @@
                                     <span class="">Distrito</span>
                                     <select class="form-select" formControlName="distrito" aria-label="Default select example" [ngClass]="getMessage(MSG_DISTRITO) !== MSG_EMPTY ? 'isvalid' : ''">
                                         <option selected>Seleccione distrito</option>
+                                        <option *ngFor="let option of distritos" [value]="option.Code">{{ option.Name }}</option>
                                     </select>
                                     <span class="valid" *ngIf="getMessage(MSG_DISTRITO) != MSG_EMPTY">{{ getMessage(MSG_DISTRITO) }}</span>
                                 </div>
@@ -263,7 +266,7 @@
                                 <div class="question">¿Cuáles son tus preferencias de viaje?
                                     <span>(puedes elegir más de una opción)</span>
                                 </div>
-                                <div class="groupOption">
+                                <div class="groupOption"formGroupName="preference">
                                     <mat-checkbox *ngFor="let chk of listPreferent" [formControlName]="chk.name" [value]="chk.value" class="checkOption">{{ chk.text }}</mat-checkbox>
                                     <!-- <span class="valid" *ngIf="getMessage(MSG_CHK_PREFE) != MSG_EMPTY">{{ getMessage(MSG_CHK_PREFE) }}</span> -->
 
