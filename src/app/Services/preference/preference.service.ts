@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ENDPOINT_API } from '../../shared/constant';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment';
 import { NmvModel } from '../../shared/utils';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class PreferenceService {
   constructor(private http: HttpClient) { }
 
   preference(payload: any): Observable<any> {
-    let url_api = `${environment.urlPreference}${ENDPOINT_API.PREFERENCE}`
+    let url_api = `${environment.urlNmviajesAccount}/${ENDPOINT_API.PREFERENCE}`
     return this.http
       .post<any>(url_api, payload)
   }
@@ -23,7 +23,7 @@ export class PreferenceService {
     const options = {
       params: nmvModel.params.set('Parameter.IataCode', ''),
     }
-    let url_api = `${environment.urlPreference}${ENDPOINT_API.COUNTRIES}`
+    let url_api = `${environment.urlNmviajesAccount}/${ENDPOINT_API.COUNTRIES}`
     return this.http
       .get<any>(url_api, options)
   }
@@ -32,7 +32,7 @@ export class PreferenceService {
     const options = {
       params: nmvModel.params.set('Parameter.Code', option),
     }
-    let url_api = `${environment.urlPreference}${ENDPOINT_API.DEPARTAMENTS}`
+    let url_api = `${environment.urlNmviajesAccount}/${ENDPOINT_API.DEPARTAMENTS}`
     return this.http
       .get<any>(url_api, options)
   }
@@ -41,7 +41,7 @@ export class PreferenceService {
     const options = {
       params: nmvModel.params.set('Parameter.Code', option),
     }
-    let url_api = `${environment.urlPreference}${ENDPOINT_API.DISTRICTS}`
+    let url_api = `${environment.urlNmviajesAccount}/${ENDPOINT_API.DISTRICTS}`
     return this.http
       .get<any>(url_api, options)
   }

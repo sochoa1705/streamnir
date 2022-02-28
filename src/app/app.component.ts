@@ -173,7 +173,6 @@ export class AppComponent implements OnInit {
 
     if(this.isPersonLoggin && validPerson){
       this._accountService.signIn(this.login, this.isPersonLoggin).subscribe(resp=>{
-        console.log(resp);
         if(resp.IsSuccess){
           this._accountService.guardarStorage(resp);
           this.closeModal();

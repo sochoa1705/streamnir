@@ -4,7 +4,6 @@ import { AccountsService, UserStorage } from 'src/app/Services/accounts.service'
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PreferenceService } from '../../../Services/preference/preference.service';
-import { AccountService } from 'src/app/Services/account/account.service';
 
 @Component({
   selector: 'app-perfil',
@@ -43,7 +42,7 @@ export class PerfilComponent implements OnInit {
   constructor(
     public dataPagePresenterService: DataPagePresenterService,
     public preferenceService: PreferenceService,
-    public accountService: AccountService,
+    public accountService: AccountsService,
     private router: Router,
   ) {
     this.user = localStorage.getItem('usuario')

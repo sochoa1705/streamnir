@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountService } from 'src/app/Services/account/account.service';
-import { UserStorage } from 'src/app/Services/accounts.service';
+import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -17,13 +16,12 @@ export class ToolbarComponent implements OnInit {
 
   constructor(
     public route: Router,
-    public accountService: AccountService
+    public accountService: AccountsService
   ) { }
 
   ngOnInit() {
     this.accountService.isLogged().subscribe(logged => {
       this.isLogged = logged;
-
       if (this.isLogged) {
         this.user = this.accountService.getUserStorage();
       }
