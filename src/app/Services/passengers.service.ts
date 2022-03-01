@@ -112,8 +112,7 @@ export class PassengersService {
     const url = `${environment.urlNmviajesAccount}${PassengersService.passengersDeletePath}`;
 
     return this.http
-      .delete<ResponseModelT<Array<Passenger>>>(url, { body: payload })
-      .pipe(map((resp) => resp.Result));
+      .delete<any>(url, { body: payload });
   }
 }
 
