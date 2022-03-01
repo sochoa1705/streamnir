@@ -102,7 +102,8 @@
     <ng-container *ngIf="isLogged">
         <div class="boxUser">
             <div class="userlogged" (click)="showOption()">
-                <img src="./assets/user-conect.svg" alt="">
+                <img *ngIf="!user.image" src="./assets/user-conect.svg" alt="">
+                <img class="img-perfil"  *ngIf="user.image" appImgDefault [src]="user.image" alt="">
             </div>
             <div class="divFlotante" *ngIf="showOptionUser">
                 <div class="option" routerLink="/home/perfil">Mi Perfil</div>

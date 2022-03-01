@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
     this._authService.authState.subscribe((user) => {
 
       if (user.provider == "GOOGLE") {
-        this.saveSocialAccount(user.firstName, user.lastName, user.email, "G", user.id)
+        this.saveSocialAccount(user.firstName, user.lastName, user.email, "G", user.id, user.photoUrl)
       }
 
     });
@@ -201,7 +201,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  saveSocialAccount(Firstname: string, FatherLastname: string, Email: string, SocialNetwork: "G" | "F", IdSocialNetwork: string) {
+  saveSocialAccount(Firstname: string, FatherLastname: string, Email: string, SocialNetwork: "G" | "F", IdSocialNetwork: string, image:string) {
 
     const payload = {
       TrackingCode: Guid(),
@@ -224,11 +224,13 @@ export class AppComponent implements OnInit {
       }
     };
 
-    this._accountService.saveAccount(payload).subscribe({
+    this._accountService.saveAccount(payload).subscribe({ 
       next: (response) => {
         const isSuccess = response.Result.IsSuccess;
 
         if (isSuccess) {
+          this._accountService.guardarStorage(response.Result,image);
+          this.closeModal();
           this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
             verticalPosition: 'top',
             duration: 2000
@@ -240,8 +242,6 @@ export class AppComponent implements OnInit {
           });
         }
 
-        console.log(this.personalAccountForm.value);
-        this.personalAccountForm.reset();
 
         //this.loaderSubjectService.closeLoader()
       },

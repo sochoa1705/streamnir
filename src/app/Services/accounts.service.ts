@@ -22,6 +22,7 @@ export interface UserStorage {
   email: string;
   name: string;
   id: number;
+  image:string;
 }
 
 @Injectable({
@@ -67,11 +68,12 @@ export class AccountsService {
     return this.userLogged.asObservable();
   }
 
-  guardarStorage(usuario: AuthDTO) {
+  guardarStorage(usuario: AuthDTO, image?:string) {
     const user = {
       email: usuario.Email,
       name: usuario.Firstname + ' ' + usuario.FatherLastname,
       id: usuario.Id,
+      image: image || ""
     };
 
     localStorage.setItem('usuario', JSON.stringify(user));
