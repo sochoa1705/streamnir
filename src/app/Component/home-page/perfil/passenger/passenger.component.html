@@ -56,10 +56,9 @@
     <form class="content" name="passengerForm" [formGroup]="passengerForm">
 
       <div class="rowContent">
+        <input type="hidden" formControlName="id">
+
         <div class="inputGroup" [ngClass]="{error : validatePassengerForm('firstName')}">
-
-          <input type="hidden" formControlName="id">
-
           <span class="">Nombres</span>
           <input type="text" class="form-control" formControlName="firstName"
             placeholder="El que figura en el documento de viaje.">
@@ -74,7 +73,7 @@
           <input type="text" class="form-control" formControlName="fatherLastname"
             placeholder="El que figura en el documento de viaje.">
 
-          <div class="textError" *ngIf="validatePassengerForm('firstName')">
+          <div class="textError" *ngIf="validatePassengerForm('fatherLastname')">
             Ingresa tu primer apellido
           </div>
         </div>
@@ -84,7 +83,7 @@
           <input type="text" class="form-control" formControlName="motherLastname"
             placeholder="El que figura en el documento de viaje.">
 
-          <div class="textError" *ngIf="validatePassengerForm('firstName')">
+          <div class="textError" *ngIf="validatePassengerForm('motherLastname')">
             Ingresa tu segundo apellido
           </div>
         </div>

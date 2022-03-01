@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
+import { ConfirmDialogComponent } from 'src/app/Component/confirm-dialog/confirm-dialog.component';
 import { AccountsService } from 'src/app/Services/accounts.service';
 import { Passenger, PassengersService } from 'src/app/Services/passengers.service';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
@@ -30,13 +32,16 @@ export class PassengerComponent implements OnInit {
 
   years: Array<any> = [];
 
+  confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
+
   constructor(
     private _passengersService: PassengersService,
     private _accountService: AccountsService,
     private _formBuilder: FormBuilder,
     private _validatorsService: ValidatorsService,
     private _matSnackBar: MatSnackBar,
-    private _preferenceService: PreferenceService
+    private _preferenceService: PreferenceService,
+    public _matDialog: MatDialog
   ) {
     this.userId = this._accountService.getUserStorage().id;
   }
@@ -59,9 +64,6 @@ export class PassengerComponent implements OnInit {
     for (let index = 1922; index < 2022; index++) {
       this.years.push(index);
     }
-
-    debugger
-
   }
 
   getCountries() {
@@ -135,109 +137,118 @@ export class PassengerComponent implements OnInit {
 
     if (this.passengerForm.valid) {
 
-      debugger
+      this.confirmDialogRef = this._matDialog.open(ConfirmDialogComponent, {
+        disableClose: false
+      });
 
-      //let birthDate = `${this.passengerForm.get("birthYear")?.value}-${this.passengerForm.get("birthMonth")?.value}-${this.passengerForm.get("birthDay")?.value}`;
-      let birthDate = new Date(this.passengerForm.get("birthYear")?.value, this.passengerForm.get("birthMonth")?.value - 1, this.passengerForm.get("birthDay")?.value);
+      this.confirmDialogRef.componentInstance.confirmMessage = '¿Estás seguro de que quieres registrar el pasajero?';
 
-      let countryId: number = Number(this.passengerForm.get("nationality")?.value);
-      let nationality: string = this.countries.find(x => x.Id === countryId).Iata;
+      this.confirmDialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          //let birthDate = `${this.passengerForm.get("birthYear")?.value}-${this.passengerForm.get("birthMonth")?.value}-${this.passengerForm.get("birthDay")?.value}`;
+          let birthDate = new Date(this.passengerForm.get("birthYear")?.value, this.passengerForm.get("birthMonth")?.value - 1, this.passengerForm.get("birthDay")?.value);
 
-      const payload = {
-        TrackingCode: Guid(),
-        MuteExceptions: environment.muteExceptions,
-        Caller: {
-          Company: "Agil",
-          Application: "Interagencias"
-        },
-        Parameter: {
-          Id: 0,
-          UserId: this.userId,
-          Firstname: this.passengerForm.get("firstName")?.value,
-          FatherLastname: this.passengerForm.get("fatherLastname")?.value,
-          MotherLastname: this.passengerForm.get("motherLastname")?.value,
-          Birthdate: birthDate,
-          Nationality: nationality,
-          CountryId: countryId,
-          DocumentType: this.passengerForm.get("documentType")?.value,
-          DocumentNumber: this.passengerForm.get("documentNumber")?.value
+          let countryId: number = Number(this.passengerForm.get("nationality")?.value);
+          let nationality: string = this.countries.find(x => x.Id === countryId).Iata;
+
+          const payload = {
+            TrackingCode: Guid(),
+            MuteExceptions: environment.muteExceptions,
+            Caller: {
+              Company: "Agil",
+              Application: "Interagencias"
+            },
+            Parameter: {
+              Id: 0,
+              UserId: this.userId,
+              Firstname: this.passengerForm.get("firstName")?.value,
+              FatherLastname: this.passengerForm.get("fatherLastname")?.value,
+              MotherLastname: this.passengerForm.get("motherLastname")?.value,
+              Birthdate: birthDate,
+              Nationality: nationality,
+              CountryId: countryId,
+              DocumentType: this.passengerForm.get("documentType")?.value,
+              DocumentNumber: this.passengerForm.get("documentNumber")?.value
+            }
+          };
+
+          if (this.isNew) {
+            this._passengersService.save(payload).subscribe({
+              next: (response) => {
+                debugger
+
+                const isSuccess = response.Result.IsSuccess;
+
+                if (isSuccess) {
+                  this._matSnackBar.open(`Los datos del pasajero ${this.passengerForm.get("firstName")?.value} ${this.passengerForm.get("fatherLastname")?.value} han sido registrados`, 'OK', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                  });
+
+                  this.getAllPassengers();
+
+                } else {
+                  this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                  });
+                }
+
+                console.log(this.passengerForm.value);
+                this.passengerForm.reset();
+              },
+              error: (err) => {
+
+                console.log(err);
+              },
+              complete: () => { }
+            });
+          }
+          else {
+            debugger
+
+            payload.Parameter.Id = Number(this.passengerForm.get("id")?.value);
+
+            console.log(payload);
+
+            this._passengersService.update(payload).subscribe({
+              next: (response) => {
+                debugger
+
+                const isSuccess = response.Result.IsSuccess;
+
+                if (isSuccess) {
+                  this._matSnackBar.open(`Se actualizaron los datos del pasajero ${this.passengerForm.get("firstName")?.value} ${this.passengerForm.get("fatherLastname")?.value}`, 'OK', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                  });
+
+                  this.getAllPassengers();
+
+                } else {
+                  this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                  });
+                }
+
+                console.log(this.passengerForm.value);
+                this.passengerForm.reset();
+              },
+              error: (err) => {
+
+                console.log(err);
+              },
+              complete: () => { }
+            });
+          }
+
+          this.hideList = false;
         }
-      };
 
-      if (this.isNew) {
-        this._passengersService.save(payload).subscribe({
-          next: (response) => {
-            debugger
-
-            const isSuccess = response.Result.IsSuccess;
-
-            if (isSuccess) {
-              this._matSnackBar.open(`Los datos del pasajero ${this.passengerForm.get("firstName")?.value} ${this.passengerForm.get("fatherLastname")?.value} han sido registrados`, 'OK', {
-                verticalPosition: 'top',
-                duration: 2000
-              });
-
-              this.getAllPassengers();
-
-            } else {
-              this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
-                verticalPosition: 'top',
-                duration: 2000
-              });
-            }
-
-            console.log(this.passengerForm.value);
-            this.passengerForm.reset();
-          },
-          error: (err) => {
-
-            console.log(err);
-          },
-          complete: () => { }
-        });
-      }
-      else {
-        debugger
-
-        payload.Parameter.Id = Number(this.passengerForm.get("id")?.value);
-
-        console.log(payload);
-
-        this._passengersService.update(payload).subscribe({
-          next: (response) => {
-            debugger
-
-            const isSuccess = response.Result.IsSuccess;
-
-            if (isSuccess) {
-              this._matSnackBar.open(`Se actualizaron los datos del pasajero ${this.passengerForm.get("firstName")?.value} ${this.passengerForm.get("fatherLastname")?.value}`, 'OK', {
-                verticalPosition: 'top',
-                duration: 2000
-              });
-
-              this.getAllPassengers();
-
-            } else {
-              this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
-                verticalPosition: 'top',
-                duration: 2000
-              });
-            }
-
-            console.log(this.passengerForm.value);
-            this.passengerForm.reset();
-          },
-          error: (err) => {
-
-            console.log(err);
-          },
-          complete: () => { }
-        });
-      }
-
+        //this.confirmDialogRef = null;
+      });
     }
-
-    this.hideList = false;
   }
 
   deletePassenger(entity: Passenger): void {
