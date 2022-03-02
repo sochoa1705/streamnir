@@ -68,6 +68,7 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.addTag()
     this.getCountries()
     this.listPreferent = [
       {
@@ -398,5 +399,12 @@ export class PerfilComponent implements OnInit {
     // }
 
   }
-
+  addTag() {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'virtualPageView',
+      'virtualPagePath': '/home/perfil',
+      'virtualPageTitle': 'Perfil'
+    })
+  }
 }

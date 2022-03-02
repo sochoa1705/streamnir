@@ -48,6 +48,7 @@ export class NuestrasAgenciasComponent implements OnInit {
     this.agenciaView(1)
   }
   ngOnInit(): void {
+    this.addTag()
   }
   agenciaView(id: number) {
     this.agencias.filter((agencia: any) => {
@@ -66,5 +67,12 @@ export class NuestrasAgenciasComponent implements OnInit {
       }
     })
   }
-
+  addTag() {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'virtualPageView',
+      'virtualPagePath': '/home/nuestras-agencias',
+      'virtualPageTitle': 'Nuestras agencias'
+    })
+  }
 }

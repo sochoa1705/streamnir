@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
+  production: false,
   // urlBase: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',  // PRODUCCIÓN
   urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',
   muteExceptions: false,                 // DESARROLLO

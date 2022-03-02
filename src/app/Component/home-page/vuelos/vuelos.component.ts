@@ -19,8 +19,16 @@ export class VuelosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.addTag()
    // this.OfertaVuelos();
+  }
+  addTag() {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'virtualPageView',
+      'virtualPagePath': '/home/vuelos',
+      'virtualPageTitle': 'Vuelos'
+    })
   }
 
   OfertaVuelos(){
