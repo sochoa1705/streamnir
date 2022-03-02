@@ -1,102 +1,87 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { NmvModel } from 'src/app/shared/utils';
 import { ResponseModelT } from 'src/app/shared/models';
 import { map } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
-import { ContactPayload, DataPayload } from './contacto.models';
 
-export interface IGetData {
-    UserId:         number;
-    Firstname:      string;
-    FatherLastname: string;
-    MotherLastname: string;
-    Birthdate:      Date;
-    Nationality:    string;
-    CountryId:      number;
-    DocumentType:   string;
+export interface ContactInformationHeader {
+  UserId: number;
+  Firstname: string;
+  FatherLastname: string;
+  MotherLastname: string;
+  Birthdate: Date;
+  Nationality: string;
+  CountryId: number;
+  DocumentType: string;
+  DocumentNumber: string;
 }
 
-export interface IGetContact {
-    UserId:         number;
-    CountryId:      number;
-    ProvinceId:     number;
-    CityId:         number;
-    Number:         string;
-    InteriorNumber: string;
-    DistrictId:     number;
-    PostalCode:     string;
-    Phone:          string;
-    MobilePhone:    string;
+export interface ContactInformationDetail {
+  UserId: number;
+  CountryId: number;
+  ProvinceId: number;
+  CityId: number;
+  Number: string;
+  InteriorNumber: string;
+  DistrictId: number;
+  PostalCode: string;
+  Phone: string;
+  MobilePhone: string;
 }
-
 
 @Injectable()
 export class ContactoService {
-    constructor(private httpClient: HttpClient) { }
 
+  constructor(
+    private _httpClient: HttpClient
+  ) { }
 
+  static readonly contactInformationHeaderGetPath = '/v1/api/Profile/GetData';
+  static readonly contactInformationDetailGetPath = '/v1/api/Profile/GetContact';
+  static readonly contactInformationHeaderPutPath = '/v1/api/Profile/Data';
+  static readonly contactInformationDetailPutPath = '/v1/api/Profile/Contact';
 
-    private getData(userId: number) {
-        const nmvModel = new NmvModel();
-    
-        const options = {
-          params: nmvModel.params.set('Parameter.UserId', userId)
-        };
-    
-        const url = environment.urlNmviajesAccount + '/v1/api/Profile/GetData';
-    
-        return this.httpClient
-          .get<ResponseModelT<IGetData>>(url, options)
-          .pipe(map((resp) => resp.Result));
-      }
+  getContactInformationHeader(userId: number) {
+    const nmvModel = new NmvModel();
 
-    private getContact(userId: number) {
-        const nmvModel = new NmvModel();
-    
-        const options = {
-          params: nmvModel.params.set('Parameter.UserId', userId)
-        };
-    
-        const url = environment.urlNmviajesAccount + '/v1/api/Profile/GetContact';
-    
-        return this.httpClient
-          .get<ResponseModelT<IGetContact>>(url, options)
-          .pipe(map((resp) => resp.Result));
-      }
+    const options = {
+      params: nmvModel.params
+        .set('Parameter.UserId', userId)
+    };
 
-      private saveContacto(parameter:ContactPayload ){
-        let payload:any = {};
+    const url = `${environment.urlNmviajesAccount}${ContactoService.contactInformationHeaderGetPath}`;
 
-        const nmvModel = new NmvModel();
+    return this._httpClient
+      .get<ResponseModelT<ContactInformationHeader>>(url, options)
+      .pipe(map((resp) => resp.Result));
+  }
 
-        payload = {...nmvModel.getPayload(), parameter:parameter };
-    
-        const url = environment.urlNmviajesAccount + '/v1/api/Profile/Contact';
-    
-        return this.httpClient
-          .post<ResponseModelT<any>>(url,payload)
-          .pipe(map((resp) => resp.Result));
-      }
+  getContactInformationDetail(userId: number) {
+    const nmvModel = new NmvModel();
 
-      private saveData(parameter:DataPayload ){
-        let payload:any = {};
+    const options = {
+      params: nmvModel.params
+        .set('Parameter.UserId', userId)
+    };
 
-        const nmvModel = new NmvModel();
+    const url = `${environment.urlNmviajesAccount}${ContactoService.contactInformationDetailGetPath}`;
 
-        payload = {...nmvModel.getPayload(), parameter:parameter };
-    
-        const url = environment.urlNmviajesAccount + '/v1/api/Profile/Data';
-    
-        return this.httpClient
-          .post<ResponseModelT<any>>(url,payload)
-          .pipe(map((resp) => resp.Result));
-      }
+    return this._httpClient
+      .get<ResponseModelT<ContactInformationDetail>>(url, options)
+      .pipe(map((resp) => resp.Result));
+  }
 
+  updateContactInformationHeader(payload: any) {
+    const url = `${environment.urlNmviajesAccount}${ContactoService.contactInformationHeaderPutPath}`;
 
-      getInformation(userId: number){
-          return forkJoin([this.getData(userId),this.getContact(userId)])
-      }
-    
+    return this._httpClient.put<any>(url, payload);
+  }
+
+  updateContactInformationDetail(payload: any) {
+    const url = `${environment.urlNmviajesAccount}${ContactoService.contactInformationDetailPutPath}`;
+
+    return this._httpClient.put<any>(url, payload);
+  }
 }
