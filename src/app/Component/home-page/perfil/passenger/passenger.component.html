@@ -1,0 +1,203 @@
+<div class="viewPasajero marginBottom40" [hidden]="hideList">
+  <div class="personalDocument">
+    <div class="headerPortlet">
+      <div class="titleBoxRight">Pasajeros</div>
+      <div class="subtitleBoxRight">Reserva más rápido y sin complicaciones, agrega los datos de
+        quienes suelen viajar a tu lado.</div>
+    </div>
+
+    <div class="content">
+      <div class="rowContent">
+        <div class="boxGrid">
+
+          <div class="rowGrid" *ngFor="let passenger of passengers">
+            <div class="rowElement flexAuto">
+              <div class="marginRight10">
+                <img src="assets/svg/people.svg" alt="">
+              </div>
+            </div>
+            <div class="rowElement flexWrap">
+              <div class="descrip titleDesc">
+                {{passenger.Firstname}} {{passenger.FatherLastname}} {{passenger.MotherLastname}}
+              </div>
+              <div class="descrip subtitleDesc">
+                {{passenger.DocumentType}}: {{passenger.DocumentNumber}}
+              </div>
+            </div>
+            <div class="rowElement spaceEnd">
+              <div class="optModificar">
+                <img src="assets/svg/edit.svg" alt="" (click)="editPassenger(passenger)">
+              </div>
+              <div class="optEliminar">
+                <img src="assets/svg/delete.svg" alt="" (click)="deletePassenger(passenger)">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="rowContent">
+        <div class="btnAgregar" (click)="newPassenger()">
+          + Agregar otro pasajero
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="viewPasajero" [hidden]="!hideList">
+  <div class="personalDocument">
+    <div class="headerPortlet">
+      <div class="titleBoxRight">{{ title }}</div>
+      <div class="subtitleBoxRight">Reserva más rápido y sin complicaciones, agrega los datos de
+        quienes suelen viajar a tu lado.</div>
+    </div>
+    <form class="content" name="passengerForm" [formGroup]="passengerForm">
+
+      <div class="rowContent">
+        <input type="hidden" formControlName="id">
+
+        <div class="inputGroup" [ngClass]="{error : validatePassengerForm('firstName')}">
+          <span class="">Nombres</span>
+          <input type="text" class="form-control" formControlName="firstName"
+            placeholder="El que figura en el documento de viaje.">
+
+          <div class="textError" *ngIf="validatePassengerForm('firstName')">
+            Ingresa tu(s) nombre(s)
+          </div>
+        </div>
+
+        <div class="inputGroup" [ngClass]="{error : validatePassengerForm('fatherLastname')}">
+          <span class="">Primer apellido</span>
+          <input type="text" class="form-control" formControlName="fatherLastname"
+            placeholder="El que figura en el documento de viaje.">
+
+          <div class="textError" *ngIf="validatePassengerForm('fatherLastname')">
+            Ingresa tu primer apellido
+          </div>
+        </div>
+
+        <div class="inputGroup" [ngClass]="{error : validatePassengerForm('motherLastname')}">
+          <span class="">Segundo apellido</span>
+          <input type="text" class="form-control" formControlName="motherLastname"
+            placeholder="El que figura en el documento de viaje.">
+
+          <div class="textError" *ngIf="validatePassengerForm('motherLastname')">
+            Ingresa tu segundo apellido
+          </div>
+        </div>
+      </div>
+
+      <div class="rowContent">
+        <div class="inputGroup"
+          [ngClass]="{error : validatePassengerForm('birthDay') || validatePassengerForm('birthMonth') || validatePassengerForm('birthYear')}">
+          <span class="">Fecha de nacimiento</span>
+
+          <div class="rowElement">
+            <input type="text" class="form-control marginRight10" formControlName="birthDay" placeholder="Dia">
+
+            <select class="form-select marginRight10" formControlName="birthMonth" aria-label="Default select example">
+              <option value="" selected>Seleccione mes</option>
+              <option value="1">Enero</option>
+              <option value="2">Febrero</option>
+              <option value="3">Marzo</option>
+              <option value="4">Abril</option>
+              <option value="5">Mayo</option>
+              <option value="6">Junio</option>
+              <option value="7">Julio</option>
+              <option value="8">Agosto</option>
+              <option value="9">Septiembre</option>
+              <option value="10">Octubre</option>
+              <option value="11">Noviembre</option>
+              <option value="12">Diciembre</option>
+            </select>
+
+            <select class="form-select" formControlName="birthYear" aria-label="Default select example">
+              <option value="" selected>Seleccione año</option>
+              <option *ngFor="let elem of years" [value]="elem">
+                {{ elem }}
+              </option>
+            </select>
+          </div>
+
+          <div class="textError"
+            *ngIf="validatePassengerForm('birthDay') || validatePassengerForm('birthMonth') || validatePassengerForm('birthYear')">
+            Ingresa una fecha de nacimiento
+          </div>
+        </div>
+
+        <div class="inputGroup" [ngClass]="{error : validatePassengerForm('nationality')}">
+          <span class="">Nacionalidad</span>
+          <select class="form-select" formControlName="nationality" aria-label="Default select example">
+            <option value="" selected>Seleccione nacionalidad</option>
+            <option *ngFor="let elem of countries" [value]="elem.Id">
+              {{ elem.Name }}
+            </option>
+          </select>
+
+          <div class="textError" *ngIf="validatePassengerForm('nationality')">
+            Selecciona una nacionalidad
+          </div>
+        </div>
+      </div>
+
+      <div class="rowContent">
+        <!-- <div class="inputGroup flexNowrap"> -->
+
+        <div class="inputGroup" [ngClass]="{error : validatePassengerForm('documentType')}">
+          <div class="nroDoc marginRight10">
+            <span class="">Tipo de documento</span>
+            <select class="form-select" formControlName="documentType" aria-label="Default select example">
+              <option value="" selected>Seleccione tipo de documento</option>
+              <option value="DNI">DNI</option>
+            </select>
+
+            <div class="textError" *ngIf="validatePassengerForm('documentType')">
+              Selecciona un tipo de documento
+            </div>
+          </div>
+        </div>
+
+        <div class="inputGroup" [ngClass]="{error : validatePassengerForm('documentNumber')}">
+          <div class="nroDoc">
+            <span class="">N° de documento</span>
+            <input type="text" class="form-control" formControlName="documentNumber" placeholder="Ingresar Nro">
+
+            <div class="textError" *ngIf="validatePassengerForm('documentNumber')">
+              Ingresa un número de documento
+            </div>
+
+          </div>
+        </div>
+
+        <!-- </div> -->
+        <!-- <div class="inputGroup">
+          <span class="">Sexo</span>
+          <div class="rowElement">
+            <div class="optionLeft">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Femenino
+              </label>
+            </div>
+            <div class="optionRight">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                Masculino
+              </label>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="rowContent spaceBetween">
+        <div class="btnPerfil primary" (click)="savePassenger()">
+          Guardar
+        </div>
+        <div class="btnAgregar gris" (click)="cancel()">
+          Cancelar
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

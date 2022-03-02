@@ -53,6 +53,7 @@ export class LibroReclamacionesComponent implements OnInit {
     this.today = String(day.getDate()).padStart(2, '0') + "/" + String((day.getMonth() + 1)).padStart(2, '0') + "/" + day.getFullYear()
   }
   ngOnInit(): void {
+    this.addTag()
     this.createForm()
     toUp()
     console.log(this.numCode)
@@ -271,5 +272,13 @@ export class LibroReclamacionesComponent implements OnInit {
   isChecked: Boolean = false;
   checkSelect(value:boolean){
     this.isChecked = value;
+  }
+  addTag() {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'virtualPageView',
+      'virtualPagePath': '/home/libro-reclamaciones',
+      'virtualPageTitle': 'Libro de Reclamaciones'
+    })
   }
 }

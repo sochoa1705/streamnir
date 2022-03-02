@@ -15,7 +15,7 @@ export class AerolineasComponent implements OnInit {
   constructor(private service:AerolineasService) { }
 
   ngOnInit(): void {
-
+    this.addTag()
     this.loadData();
 
     const contador = interval(4000);
@@ -51,4 +51,12 @@ export class AerolineasComponent implements OnInit {
     this.counter > 1 ? this.counter-- : this.counter = 3;
   }
   /* end code */
+  addTag() {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'virtualPageView',
+      'virtualPagePath': '/home/seguros',
+      'virtualPageTitle': 'Aerolineas'
+    })
+  }
 }

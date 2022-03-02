@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountService, UserStorage } from 'src/app/Services/account/account.service';
+import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PreferenceService } from '../../../Services/preference/preference.service';
@@ -42,7 +42,7 @@ export class PerfilComponent implements OnInit {
   constructor(
     public dataPagePresenterService: DataPagePresenterService,
     public preferenceService: PreferenceService,
-    public accountService: AccountService,
+    public accountService: AccountsService,
     private router: Router,
   ) {
     this.user = localStorage.getItem('usuario')
@@ -54,7 +54,6 @@ export class PerfilComponent implements OnInit {
     this.id = ids;
     //console.log(this.id);
   }
-
 
   agregaTarjeta = false;
   showAgregaTarjeta(valElem: boolean) {
@@ -69,6 +68,7 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.addTag()
     this.getCountries()
     this.listPreferent = [
       {
@@ -254,14 +254,14 @@ export class PerfilComponent implements OnInit {
         "DataAuthorization": true
       }
     }
-    console.log(payload);
+    console.log(payload)
 
     this.preferenceService.preference(payload).subscribe({
       next: response => console.log(response)
-
     })
     }
   }
+
   validForm() {
     this.errors = []
     const letter = new RegExp('^[a-zA-Z ]+$', 'i')
@@ -364,9 +364,11 @@ export class PerfilComponent implements OnInit {
 
     return this.errors.length === 0
   }
+
   getMessage(messageKey: any) {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
   }
+
   getMessageArray(index: any, messageKey: any) {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
@@ -397,9 +399,12 @@ export class PerfilComponent implements OnInit {
     // }
 
   }
-  logout() {
-    this.accountService.signOut();
-    this.router.navigateByUrl("/");
+  addTag() {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'virtualPageView',
+      'virtualPagePath': '/home/perfil',
+      'virtualPageTitle': 'Perfil'
+    })
   }
-
 }

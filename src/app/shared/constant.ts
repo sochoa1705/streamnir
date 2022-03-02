@@ -64,6 +64,9 @@ export enum ENDPOINT_API {
   // COUNTRIES
   COUNTRIES = 'v1/api/Master/Soap/Countries',
 
+  // COUNTRY
+  COUNTRY = 'v1/api/Master/Country',
+
   // DEPARTMENTS
   DEPARTAMENTS = 'v1/api/Master/Soap/Departments',
 
