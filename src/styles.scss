@@ -1016,31 +1016,7 @@ section {
     z-index: 10;
 }
 
-.box-container .box-perfil .perfilCicle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #5C6BC0;
-    width: 97px;
-    height: 97px;
-    border-radius: 48px;
-    color: #fff;
-    font-size: 38px;
-    position: relative;
-}
 
-.box-container .box-perfil .perfilCicle .blueIcon {
-    position: absolute;
-    right: 4px;
-    bottom: 0;
-    background: #009AED;
-    width: 32px;
-    height: 32px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .box-container .box-perfil .perfilName {
     font-family: Open Sans;

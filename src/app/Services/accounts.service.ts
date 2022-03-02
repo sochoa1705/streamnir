@@ -81,6 +81,12 @@ export class AccountsService {
     this.dispatchLogged(true);
   }
 
+  guardarImage(image:string){
+    const user = this.getUserStorage();
+    user.image = image;
+    localStorage.setItem('usuario', JSON.stringify(user));
+  }
+
   getUserStorage(): UserStorage {
     const userStr: string = localStorage.getItem('usuario') || '';
 

@@ -15,6 +15,7 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { ContactoService } from './contacto/contacto.service';
 import { MatIconModule } from '@angular/material/icon';
 import { PassengerComponent } from './passenger/passenger.component';
+import { FileModule } from 'src/app/shared/components/file/file.module';
 
 @NgModule({
   declarations: [PerfilComponent, ContactoComponent, PassengerComponent],
@@ -28,6 +29,7 @@ import { PassengerComponent } from './passenger/passenger.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    FileModule
   ],
   exports: [PerfilComponent],
   providers: [DataPagePresenterService, PreferenceService, ContactoService]

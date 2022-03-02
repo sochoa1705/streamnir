@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
+import { FileService } from 'src/app/Services/file.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,9 +15,12 @@ export class ToolbarComponent implements OnInit {
   isLogged = false;
   user: UserStorage;
 
+  img:string;
+
   constructor(
     public route: Router,
-    public accountService: AccountsService
+    public accountService: AccountsService,
+    private fileService:FileService
   ) { }
 
   ngOnInit() {
@@ -24,7 +28,16 @@ export class ToolbarComponent implements OnInit {
       this.isLogged = logged;
       if (this.isLogged) {
         this.user = this.accountService.getUserStorage();
+       (!this.user.image)?this.downloadImage(this.user):null;
+
       }
+    })
+  }
+
+  downloadImage(user:UserStorage){
+    this.fileService.getImage(user.id).subscribe(img=>{
+      this.user.image = img;
+      this.accountService.guardarImage(img);
     })
   }
 
