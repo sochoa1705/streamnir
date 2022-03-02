@@ -45,7 +45,7 @@ export class ContactoService {
           params: nmvModel.params.set('Parameter.UserId', userId)
         };
     
-        const url = environment.urlNmviajesAccount + '/Profile/GetData';
+        const url = environment.urlNmviajesAccount + '/v1/api/Profile/GetData';
     
         return this.httpClient
           .get<ResponseModelT<IGetData>>(url, options)
@@ -59,7 +59,7 @@ export class ContactoService {
           params: nmvModel.params.set('Parameter.UserId', userId)
         };
     
-        const url = environment.urlNmviajesAccount + '/Profile/GetContact';
+        const url = environment.urlNmviajesAccount + '/v1/api/Profile/GetContact';
     
         return this.httpClient
           .get<ResponseModelT<IGetContact>>(url, options)
@@ -73,7 +73,7 @@ export class ContactoService {
 
         payload = {...nmvModel.getPayload(), parameter:parameter };
     
-        const url = environment.urlNmviajesAccount + '/Profile/Contact';
+        const url = environment.urlNmviajesAccount + '/v1/api/Profile/Contact';
     
         return this.httpClient
           .post<ResponseModelT<any>>(url,payload)
@@ -87,7 +87,7 @@ export class ContactoService {
 
         payload = {...nmvModel.getPayload(), parameter:parameter };
     
-        const url = environment.urlNmviajesAccount + '/Profile/Data';
+        const url = environment.urlNmviajesAccount + '/v1/api/Profile/Data';
     
         return this.httpClient
           .post<ResponseModelT<any>>(url,payload)
