@@ -5,6 +5,7 @@ import { NmvModel } from 'src/app/shared/utils';
 import { ResponseModelT } from 'src/app/shared/models';
 import { map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
+import { ContactPayload, DataPayload } from './contacto.models';
 
 export interface IGetData {
     UserId:         number;
@@ -37,31 +38,59 @@ export class ContactoService {
 
 
 
-    getData(userId: number) {
+    private getData(userId: number) {
         const nmvModel = new NmvModel();
     
         const options = {
           params: nmvModel.params.set('Parameter.UserId', userId)
         };
     
-        const url = environment.urlNmviajesAccount + '/Profile/GetData';
+        const url = environment.urlNmviajesAccount + '/v1/api/Profile/GetData';
     
         return this.httpClient
           .get<ResponseModelT<IGetData>>(url, options)
           .pipe(map((resp) => resp.Result));
       }
 
-    getContact(userId: number) {
+    private getContact(userId: number) {
         const nmvModel = new NmvModel();
     
         const options = {
           params: nmvModel.params.set('Parameter.UserId', userId)
         };
     
-        const url = environment.urlNmviajesAccount + '/Profile/GetContact';
+        const url = environment.urlNmviajesAccount + '/v1/api/Profile/GetContact';
     
         return this.httpClient
           .get<ResponseModelT<IGetContact>>(url, options)
+          .pipe(map((resp) => resp.Result));
+      }
+
+      private saveContacto(parameter:ContactPayload ){
+        let payload:any = {};
+
+        const nmvModel = new NmvModel();
+
+        payload = {...nmvModel.getPayload(), parameter:parameter };
+    
+        const url = environment.urlNmviajesAccount + '/v1/api/Profile/Contact';
+    
+        return this.httpClient
+          .post<ResponseModelT<any>>(url,payload)
+          .pipe(map((resp) => resp.Result));
+      }
+
+      private saveData(parameter:DataPayload ){
+        let payload:any = {};
+
+        const nmvModel = new NmvModel();
+
+        payload = {...nmvModel.getPayload(), parameter:parameter };
+    
+        const url = environment.urlNmviajesAccount + '/v1/api/Profile/Data';
+    
+        return this.httpClient
+          .post<ResponseModelT<any>>(url,payload)
           .pipe(map((resp) => resp.Result));
       }
 

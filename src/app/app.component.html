@@ -14,17 +14,17 @@
 			</div>
 			<div class="modal-body">
 				<!-- <mat-tab-group mat-align-tabs="center" [(selectedIndex)]="selectedIndex"> -->
-				<mat-tab-group mat-align-tabs="center">
+				<mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMediaLogin($event)">
 					<!-- PERSONAL -->
 
 					<mat-tab label="Personal">
-                        <form action="">
+                        <form #formUser="ngForm" (ngSubmit)="formUser.form.valid" action="">
                             <div class="elementRow">
-                                <input type="text" class="form-control" name="email" [(ngModel)]="login.email" placeholder="Email">
+                                <input type="text" email class="form-control" name="email" [(ngModel)]="login.email" placeholder="Email" required>
                                 <div class="msgError">Ingresa tu email</div>
                             </div>
                             <div class="elementRow">
-                                <input type="text" class="form-control" name="password" [(ngModel)]="login.password" placeholder="Contraseña">
+                                <input type="text" class="form-control" name="password" [(ngModel)]="login.password" placeholder="Contraseña" required>
                                 <div class="msgError">Ingresa tu contraseña</div>
                                 <div class="iconPass">
                                     <img src="./assets/modal/eye.png" alt="">
@@ -54,21 +54,23 @@
 
 					<!-- EMPRESA -->
 					<mat-tab label="Empresa">
-						<form action="">
-							<div class="elementRow error">
-								<input type="text" class="form-control" [(ngModel)]="login.email" placeholder="Email">
-								<div class="msgError">Ingresa tu email</div>
+
+						{{loginBEmail.invalid}}
+						<form #formBusiness="ngForm" (ngSubmit)="formBusiness.form.valid"  action="">
+							<div class="elementRow" [ngClass]="{'error': loginBEmail.invalid && submitBusiness}">
+								<input #loginBEmail="ngModel" type="text" class="form-control" name="email" [(ngModel)]="loginB.email"  pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" placeholder="Email" required>
+								<div *ngIf="loginBEmail.invalid" class="msgError">Ingresa tu email</div>
 							</div>
-							<div class="elementRow error">
-								<input type="text" class="form-control" placeholder="Contraseña">
-								<div class="msgError">Ingresa tu contraseña</div>
+							<div class="elementRow"  [ngClass]="{'error': loginBPassword.invalid && submitBusiness}">
+								<input #loginBPassword="ngModel"  type="text" class="form-control" name="password" [(ngModel)]="loginB.password" placeholder="Contraseña" required>
+								<div  *ngIf="loginBPassword.invalid" class="msgError">Ingresa tu contraseña</div>
 								<div class="iconPass">
 									<img src="./assets/modal/eye.png" alt="">
 								</div>
 							</div>
 							<div class="row mx-0">
 								<div class="col-6">
-									<mat-checkbox class="example-margin">Recordar datos</mat-checkbox>
+									<mat-checkbox [(ngModel)]="loginB.recorder" name="recorder" class="example-margin">Recordar datos</mat-checkbox>
 								</div>
 								<div class="col-6 text-end">
 									<a href="#" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la
@@ -82,7 +84,7 @@
 				</mat-tab-group>
 			</div>
 			<div class="modal-footer">
-				<button (click)="signIn()" class="w-100">Iniciar sesión</button>
+				<button (click)="signIn(formUser, formBusiness)" class="w-100">Iniciar sesión</button>
 				<div class="account">
 					<div class="notRegister">¿No estás registrado?</div>
 					<a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalNewAccount">Crea una cuenta</a>
