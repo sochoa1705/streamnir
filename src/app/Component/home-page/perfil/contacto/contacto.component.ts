@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
-import { AccountsService } from 'src/app/Services/accounts.service';
+import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
 import { Guid } from 'src/app/shared/utils';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
@@ -27,6 +27,8 @@ export class ContactoComponent implements OnInit {
 
   years: Array<any> = [];
 
+  userStorage: UserStorage;
+
   constructor(
     private _accountsService: AccountsService,
     private _contactsService: ContactoService,
@@ -39,6 +41,9 @@ export class ContactoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.userStorage = this._accountsService.getUserStorage();
+
     this.contactInformationForm = this.createContactInformationForm();
 
     this.getCountries();

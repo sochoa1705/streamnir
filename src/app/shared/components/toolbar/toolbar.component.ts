@@ -12,7 +12,7 @@ export class ToolbarComponent implements OnInit {
   @Input() menu: any[];
 
   isLogged = false;
-  user: UserStorage;
+  userStorage: UserStorage;
 
   constructor(
     public route: Router,
@@ -23,7 +23,7 @@ export class ToolbarComponent implements OnInit {
     this.accountService.isLogged().subscribe(logged => {
       this.isLogged = logged;
       if (this.isLogged) {
-        this.user = this.accountService.getUserStorage();
+        this.userStorage = this.accountService.getUserStorage();
       }
     })
   }
