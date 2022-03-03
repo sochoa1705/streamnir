@@ -13,7 +13,7 @@ export class ToolbarComponent implements OnInit {
   @Input() menu: any[];
 
   isLogged = false;
-  user: UserStorage;
+  userStorage: UserStorage;
 
   img:string;
 
@@ -27,16 +27,17 @@ export class ToolbarComponent implements OnInit {
     this.accountService.isLogged().subscribe(logged => {
       this.isLogged = logged;
       if (this.isLogged) {
-        this.user = this.accountService.getUserStorage();
-       (!this.user.image)?this.downloadImage(this.user):null;
+        this.userStorage = this.accountService.getUserStorage();
+       (!this.userStorage.image)?this.downloadImage(this.userStorage):null;
 
+        this.userStorage = this.accountService.getUserStorage();
       }
     })
   }
 
   downloadImage(user:UserStorage){
     this.fileService.getImage(user.id).subscribe(img=>{
-      this.user.image = img;
+      this.userStorage.image = img;
       this.accountService.guardarImage(img);
     })
   }

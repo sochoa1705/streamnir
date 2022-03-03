@@ -46,4 +46,14 @@ export class PreferenceService {
       .get<any>(url_api, options)
   }
 
+  getCountries(): Observable<any> {
+    const nmvModel = new NmvModel()
+    const options = {
+      params: nmvModel.params.set('Parameter.Id', 0),
+    }
+    let url_api = `${environment.urlNmviajesAccount}/${ENDPOINT_API.COUNTRY}`
+    return this.http
+      .get<any>(url_api, options)
+  }
+
 }

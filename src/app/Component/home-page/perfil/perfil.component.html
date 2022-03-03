@@ -46,11 +46,16 @@
             </div>
             <div class="boxMenu">
                 <ul class="">
-                    <li id="mnuPerfil" [class.selected]="id === 'mnuPerfil'" (click)="showOption('mnuPerfil')">Mi Perfil</li>
-                    <li id="mnuContacto" [class.selected]="id === 'mnuContacto'" (click)="showOption('mnuContacto')">Datos de contacto</li>
-                    <li id="preferencia" [class.selected]="id === 'preferencia'" (click)="showOption('preferencia')">Preferencias</li>
-                    <li id="mnuPago" [class.selected]="id === 'mnuPago'" (click)="showOption('mnuPago')">Métodos de pago</li>
-                    <li id="mnuPasajero" [class.selected]="id === 'mnuPasajero'" (click)="showOption('mnuPasajero')">Pasajeros</li>
+                    <li id="mnuPerfil" [class.selected]="id === 'mnuPerfil'" (click)="showOption('mnuPerfil')">Mi Perfil
+                    </li>
+                    <li id="mnuContacto" [class.selected]="id === 'mnuContacto'" (click)="showOption('mnuContacto')">
+                        Datos de contacto</li>
+                    <li id="preferencia" [class.selected]="id === 'preferencia'" (click)="showOption('preferencia')">
+                        Preferencias</li>
+                    <li id="mnuPago" [class.selected]="id === 'mnuPago'" (click)="showOption('mnuPago')">Métodos de pago
+                    </li>
+                    <li id="mnuPasajero" [class.selected]="id === 'mnuPasajero'" (click)="showOption('mnuPasajero')">
+                        Pasajeros</li>
                     <!-- <li id="mnuEliminar" (click)="preference()">Logout</li> -->
                 </ul>
             </div>
@@ -135,29 +140,38 @@
                             <div class="rowContent">
                                 <div class="inputGroup">
                                     <span class="">Nombres</span>
-                                    <input type="text" formControlName="nombres" class="form-control" placeholder="El que figura en el documento de viaje." [ngClass]="getMessage(MSG_NOMBRES) !== MSG_EMPTY ? 'isvalid' : ''">
-                                    <span class="valid" *ngIf="getMessage(MSG_NOMBRES) !== MSG_EMPTY">{{ getMessage(MSG_NOMBRES) }}</span>
+                                    <input type="text" formControlName="nombres" class="form-control"
+                                        placeholder="El que figura en el documento de viaje."
+                                        [ngClass]="getMessage(MSG_NOMBRES) !== MSG_EMPTY ? 'isvalid' : ''">
+                                    <span class="valid" *ngIf="getMessage(MSG_NOMBRES) !== MSG_EMPTY">{{
+                                        getMessage(MSG_NOMBRES) }}</span>
                                 </div>
                                 <div class="inputGroup">
                                     <span class="">Apellido paterno</span>
-                                    <input type="text" formControlName="apellidoPaterno" class="form-control" placeholder="El que figura en el documento de viaje."
+                                    <input type="text" formControlName="apellidoPaterno" class="form-control"
+                                        placeholder="El que figura en el documento de viaje."
                                         [ngClass]="getMessage(MSG_APELLIDO_PATERNO) !== MSG_EMPTY ? 'isvalid' : ''">
-                                    <span class="valid" *ngIf="getMessage(MSG_APELLIDO_PATERNO) !== MSG_EMPTY">{{ getMessage(MSG_APELLIDO_PATERNO) }}</span>
+                                    <span class="valid" *ngIf="getMessage(MSG_APELLIDO_PATERNO) !== MSG_EMPTY">{{
+                                        getMessage(MSG_APELLIDO_PATERNO) }}</span>
                                 </div>
                             </div>
                             <div class="rowContent">
                                 <div class="inputGroup">
                                     <span class="">Apellido materno</span>
-                                    <input type="text" formControlName="apellidoMaterno" class="form-control" placeholder="El que figura en el documento de viaje."
+                                    <input type="text" formControlName="apellidoMaterno" class="form-control"
+                                        placeholder="El que figura en el documento de viaje."
                                         [ngClass]="getMessage(MSG_APELLIDO_MATERNO) !== MSG_EMPTY ? 'isvalid' : ''">
-                                    <span class="valid" *ngIf="getMessage(MSG_APELLIDO_MATERNO) !== MSG_EMPTY">{{ getMessage(MSG_APELLIDO_MATERNO) }}</span>
+                                    <span class="valid" *ngIf="getMessage(MSG_APELLIDO_MATERNO) !== MSG_EMPTY">{{
+                                        getMessage(MSG_APELLIDO_MATERNO) }}</span>
                                 </div>
                                 <div class="inputGroup">
-                                        <span class="">Correo electrónico</span>
-                                        <input type="text" formControlName="email" class="form-control" placeholder="El que figura en el documento de viaje."
-                                            [ngClass]="getMessage(MSG_MAIL) !== MSG_EMPTY ? 'isvalid' : ''">
-                                        <span class="valid" *ngIf="getMessage(MSG_MAIL) !== MSG_EMPTY">{{ getMessage(MSG_MAIL) }}</span>
-                                    </div>
+                                    <span class="">Correo electrónico</span>
+                                    <input type="text" formControlName="email" class="form-control"
+                                        placeholder="El que figura en el documento de viaje."
+                                        [ngClass]="getMessage(MSG_MAIL) !== MSG_EMPTY ? 'isvalid' : ''">
+                                    <span class="valid" *ngIf="getMessage(MSG_MAIL) !== MSG_EMPTY">{{
+                                        getMessage(MSG_MAIL) }}</span>
+                                </div>
                             </div>
                             <div class="rowContent">
                                 <div class="inputGroup">
@@ -211,8 +225,12 @@
                                     <div class="rowElement">
                                         <div class="nroDoc">
                                             <span class="">N° de documento</span>
-                                            <input type="text" class="form-control" formControlName="numeroDocumento" placeholder="Ingresar Nro" [ngClass]="getMessage(MSG_NUMERO_DOCUMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
-                                            <span class="valid" *ngIf="getMessage(MSG_NUMERO_DOCUMENTO) !== MSG_EMPTY">{{ getMessage(MSG_NUMERO_DOCUMENTO) }}</span>
+                                            <input type="text" class="form-control" formControlName="numeroDocumento"
+                                                placeholder="Ingresar Nro"
+                                                [ngClass]="getMessage(MSG_NUMERO_DOCUMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
+                                            <span class="valid"
+                                                *ngIf="getMessage(MSG_NUMERO_DOCUMENTO) !== MSG_EMPTY">{{
+                                                getMessage(MSG_NUMERO_DOCUMENTO) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -237,19 +255,27 @@
                             <div class="rowContent">
                                 <div class="inputGroup">
                                     <span class="">País</span>
-                                    <select class="form-select marginRight10" (change)="optionDepartament($event)" formControlName="pais" aria-label="Default select example" [ngClass]="getMessage(MSG_PAIS) !== MSG_EMPTY ? 'isvalid' : ''">
-                                            <option selected>Seleccione país</option>
-                                            <option *ngFor="let option of paises" [value]="option.Code">{{ option.Name }}</option>
-                                        </select>
-                                    <span class="valid" *ngIf="getMessage(MSG_PAIS) !== MSG_EMPTY">{{ getMessage(MSG_PAIS) }}</span>
+                                    <select class="form-select marginRight10" (change)="optionDepartament($event)"
+                                        formControlName="pais" aria-label="Default select example"
+                                        [ngClass]="getMessage(MSG_PAIS) !== MSG_EMPTY ? 'isvalid' : ''">
+                                        <option selected>Seleccione país</option>
+                                        <option *ngFor="let option of paises" [value]="option.Code">{{ option.Name }}
+                                        </option>
+                                    </select>
+                                    <span class="valid" *ngIf="getMessage(MSG_PAIS) !== MSG_EMPTY">{{
+                                        getMessage(MSG_PAIS) }}</span>
                                 </div>
                                 <div class="inputGroup">
                                     <span class="">Departamento</span>
-                                    <select class="form-select" (change)="optionDistrict($event)" formControlName="departamento" aria-label="Default select example" [ngClass]="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
+                                    <select class="form-select" (change)="optionDistrict($event)"
+                                        formControlName="departamento" aria-label="Default select example"
+                                        [ngClass]="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
                                         <option selected>Seleccione departamento</option>
-                                        <option *ngFor="let option of departamentos" [value]="option.Code">{{ option.Name }}</option>
+                                        <option *ngFor="let option of departamentos" [value]="option.Code">{{
+                                            option.Name }}</option>
                                     </select>
-                                    <span class="valid" *ngIf="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY">{{ getMessage(MSG_DEPARTAMENTO) }}</span>
+                                    <span class="valid" *ngIf="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY">{{
+                                        getMessage(MSG_DEPARTAMENTO) }}</span>
                                 </div>
                                 <div class="inputGroup">
                                     <span class="">Distrito</span>
@@ -257,9 +283,11 @@
                                         aria-label="Default select example"
                                         [ngClass]="getMessage(MSG_DISTRITO) !== MSG_EMPTY ? 'isvalid' : ''">
                                         <option selected>Seleccione distrito</option>
-                                        <option *ngFor="let option of distritos" [value]="option.Code">{{ option.Name }}</option>
+                                        <option *ngFor="let option of distritos" [value]="option.Code">{{ option.Name }}
+                                        </option>
                                     </select>
-                                    <span class="valid" *ngIf="getMessage(MSG_DISTRITO) !== MSG_EMPTY">{{ getMessage(MSG_DISTRITO) }}</span>
+                                    <span class="valid" *ngIf="getMessage(MSG_DISTRITO) !== MSG_EMPTY">{{
+                                        getMessage(MSG_DISTRITO) }}</span>
                                 </div>
                             </div>
 
@@ -268,8 +296,9 @@
                                 <div class="question">¿Cuáles son tus preferencias de viaje?
                                     <span>(puedes elegir más de una opción)</span>
                                 </div>
-                                <div class="groupOption"formGroupName="preference">
-                                    <mat-checkbox *ngFor="let chk of listPreferent" [formControlName]="chk.name" [value]="chk.value" class="checkOption">{{ chk.text }}</mat-checkbox>
+                                <div class="groupOption" formGroupName="preference">
+                                    <mat-checkbox *ngFor="let chk of listPreferent" [formControlName]="chk.name"
+                                        [value]="chk.value" class="checkOption">{{ chk.text }}</mat-checkbox>
                                     <!-- <span class="valid" *ngIf="getMessage(MSG_CHK_PREFE) !== MSG_EMPTY">{{ getMessage(MSG_CHK_PREFE) }}</span> -->
 
                                     <!-- <mat-checkbox formControlName="playa" class="checkOption">Playa</mat-checkbox>
@@ -287,7 +316,8 @@
                                     <span>(puedes elegir más de una opción)</span>
                                 </div>
                                 <div class="groupOption">
-                                    <mat-checkbox formControlName="economico" class="checkOption">Económico</mat-checkbox>
+                                    <mat-checkbox formControlName="economico" class="checkOption">Económico
+                                    </mat-checkbox>
                                     <mat-checkbox formControlName="clasico" class="checkOption">Clásico</mat-checkbox>
                                     <mat-checkbox formControlName="lujo" class="checkOption">Lujo</mat-checkbox>
                                 </div>
@@ -321,11 +351,14 @@
                                         <a href="#">política de protección de datos</a>
                                     </mat-checkbox>
                                 </div>
-                                <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) !== MSG_EMPTY">{{ getMessage(MSG_CHK_POLITY) }}</span>
+                                <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) !== MSG_EMPTY">{{
+                                    getMessage(MSG_CHK_POLITY) }}</span>
                                 <div class="groupOption">
-                                    <mat-checkbox formControlName="autorizo" class="checkOption">Autorizo el uso de mi información para fines publicitarios</mat-checkbox>
+                                    <mat-checkbox formControlName="autorizo" class="checkOption">Autorizo el uso de mi
+                                        información para fines publicitarios</mat-checkbox>
                                 </div>
-                                <span class="valid" *ngIf="getMessage(MSG_CHK_AUTORIZO) !== MSG_EMPTY">{{ getMessage(MSG_CHK_AUTORIZO) }}</span>
+                                <span class="valid" *ngIf="getMessage(MSG_CHK_AUTORIZO) !== MSG_EMPTY">{{
+                                    getMessage(MSG_CHK_AUTORIZO) }}</span>
                             </div>
                             <div class="rowContent">
                                 <div class="btnPerfil primary" (click)="save()">
@@ -340,9 +373,9 @@
             </div>
             <!-- END PREFERENCIAS -->
 
-            <ng-container *ngIf="id === 'mnuContacto'">
+            <div class="viewPay marginBottom40" *ngIf="id === 'mnuContacto'">
                 <app-contacto></app-contacto>
-            </ng-container>
+            </div>
 
             <!-- METODOS DE PAGO -->
             <div class="viewPay marginBottom40" *ngIf="id === 'mnuPago'" [hidden]="!agregaTarjeta">
@@ -525,7 +558,9 @@
             <!-- END METODOS DE PAGO -->
 
             <!-- PASAJEROS -->
-            <app-passenger></app-passenger>
+            <div class="viewPay" *ngIf="id === 'mnuPasajero'">
+                <app-passenger></app-passenger>
+            </div>
             <!-- END PASAJEROS -->
 
             <!-- ELIMINAR CUENTA -->

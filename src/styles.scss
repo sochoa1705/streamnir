@@ -7163,6 +7163,7 @@ button.customers {
             color: #009AED;
             cursor: pointer;
             transition: 0.3s all;
+            padding: 2px 0;
             &:hover {
                 color: #506370;
             }
@@ -7176,6 +7177,7 @@ button.customers {
         .line {
             height: 1px;
             background: #E4E5E7;
+            margin: 2px 0;
         }
         .correo {
             display: flex;
@@ -7312,6 +7314,63 @@ button.customers {
                     .btnGoogle {
                         background: #518EF8;
                     }
+                }
+            }
+        }
+    }
+}
+
+mat-dialog-container {
+    padding: 20px;
+    .title {
+        font-family: Open Sans;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 36px;
+        color: #4B4B4B;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .descrip {
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
+        padding-bottom: 20px;
+    }
+    .groupBtn {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        .boton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            font-family: "Montserrat";
+            font-size: 16px;
+            border-radius: 3px;
+            height: 40px;
+            cursor: pointer;
+            transition: 300ms ease;
+            &.primary {
+                background-color: #df0c30;
+                border: 1px solid #B60A35;
+                color: #ffffff;
+                &:hover {
+                    background: #B60A35;
+                }
+            }
+            &.secundary {
+                background: #D9E2E8;
+                border: 1px solid #BBCBD4;
+                color: #1C2A40;
+                &:hover {
+                    background: #BBCBD4;
                 }
             }
         }
