@@ -6,7 +6,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="text-end">
-                    <button #closeBotonUsuario type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button #closeModalSesion type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <img src="./assets/modal/Logo_modal.png" alt="">
                 <h1 class="modal-title" id="ModalSesionLabel">Iniciar sesión</h1>
@@ -138,7 +138,7 @@
             </div>
             <div class="recoveryRight ">
                 <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" #closeModalNewAccount class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="titleRecovery">Crear cuenta</div>
                 <div class="socialMedia" [class.active]="socialMedia">
@@ -381,7 +381,7 @@
                     Hemos enviado un correo de verificación a tu email ingresado, por favor valida el código a continuación para confirmar que tienes acceso.
                 </div>
                 <div class="action">
-                    <button type="button" class="">Aceptar</button>
+                    <button data-bs-dismiss="modal" aria-label="Close" type="button" class="">Aceptar</button>
                 </div>
             </div>
         </div>

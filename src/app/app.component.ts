@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+import * as bootstrap from 'bootstrap';
 import { combineLatest, fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -38,7 +39,8 @@ export class AppComponent implements OnInit {
 
   title = 'NuevoMundoViajes';
 
-  @ViewChild("closeBotonUsuario") closeBotonUsuario: ElementRef;
+  @ViewChild("closeModalSesion") closeModalSesion: ElementRef;
+  @ViewChild("closeModalNewAccount") closeModalNewAccount: ElementRef;
 
   pasajeros: any = [
     {
@@ -144,8 +146,11 @@ export class AppComponent implements OnInit {
   }
 
   closeModal() {
-    const btnModal: any = this.closeBotonUsuario.nativeElement;
-    btnModal ? btnModal.click() : null;
+    const closeModalSesion: any = this.closeModalSesion.nativeElement;
+    const closeModalNewAccount: any = this.closeModalNewAccount.nativeElement;
+
+    closeModalSesion ? closeModalSesion.click() : null;
+    closeModalNewAccount ? closeModalNewAccount.click() : null;
   }
 
 
@@ -198,6 +203,16 @@ export class AppComponent implements OnInit {
       this.openSnackBar("Ocurrio un error")
     }
 
+  }
+
+  toggleModalVerificaCorreo(){
+    const modal = document.getElementById("ModalVerificaCorreo");
+
+    if(!modal){
+      return ;
+    }
+
+    bootstrap.Modal.getOrCreateInstance(modal).toggle();
   }
 
 
@@ -288,6 +303,11 @@ export class AppComponent implements OnInit {
           const isSuccess = response.Result.IsSuccess;
 
           if (isSuccess) {
+
+            this.closeModal();
+            this.toggleModalVerificaCorreo();
+            
+
             this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
               verticalPosition: 'top',
               duration: 2000
@@ -299,7 +319,6 @@ export class AppComponent implements OnInit {
             });
           }
 
-          console.log(this.personalAccountForm.value);
           this.personalAccountForm.reset();
 
           //this.loaderSubjectService.closeLoader()
