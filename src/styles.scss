@@ -1016,8 +1016,6 @@ section {
     z-index: 10;
 }
 
-
-
 .box-container .box-perfil .perfilName {
     font-family: Open Sans;
     font-style: normal;
@@ -6498,6 +6496,36 @@ $icon-size-mobile: 28px;
             color: white;
         }
     }
+    &.primary {
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 12px;
+        border: 1px solid #DF0C30;
+        background: #DF0C30;
+        color: white;
+        border-radius: 3px;
+        padding: 10px 16px;
+        cursor: pointer;
+        transition: 0.3s all;
+        &:hover {
+            background: #B50A27;
+        }
+    }
+    &.secundary {
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 12px;
+        border: 1px solid #EBEBEB;
+        background: #EBEBEB;
+        color: #4B4B4B;
+        border-radius: 3px;
+        padding: 10px 16px;
+        cursor: pointer;
+        transition: 0.3s all;
+        &:hover {
+            background: #E4E5E7;
+        }
+    }
 }
 
 button.customers {
@@ -6927,6 +6955,112 @@ button.customers {
             display: flex;
             justify-content: center;
             margin-bottom: 30px;
+        }
+    }
+}
+
+#ModalEliminaCorreo {
+    .modal-header {
+        .iconCenter {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .titleVerifica {
+            display: flex;
+            justify-content: center;
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 36px;
+            color: #4B4B4B;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        img {
+            margin: 0 0 20px 0;
+        }
+    }
+    .modal-dialog {
+        width: 490px;
+    }
+    .modal-body {
+        .descripText {
+            display: block;
+            text-align: center;
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            padding-bottom: 20px;
+            span {
+                font-weight: 600;
+                font-size: 12px;
+                color: #009AED;
+            }
+        }
+        .action {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 65px;
+        }
+    }
+}
+
+#ModalChangePass {
+    .modal-header {
+        .iconCenter {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .titleVerifica {
+            display: flex;
+            justify-content: center;
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 36px;
+            color: #4B4B4B;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        img {
+            margin: 0 0 20px 0;
+        }
+    }
+    .modal-dialog {
+        width: 490px;
+    }
+    .modal-body {
+        .iconCenter {
+            display: flex;
+            justify-content: center;
+        }
+        .descripText {
+            display: block;
+            text-align: center;
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            padding-bottom: 20px;
+            span {
+                font-weight: 600;
+                font-size: 12px;
+                color: #009AED;
+            }
+        }
+        .action {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 65px;
         }
     }
 }
