@@ -107,6 +107,7 @@ export class ConformidadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.addTag()
     toUp()
     this.ShowComponentTime = false
     let lcadena: any = localStorage.getItem('businessunit');
@@ -347,6 +348,14 @@ export class ConformidadComponent implements OnInit {
     const month = e.substring(4, 6)
     const expiredFormatt = `${year}/${month}`
     return expiredFormatt
+  }
+  addTag() {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'virtualPageView',
+      'virtualPagePath': '/home/conformidad',
+      'virtualPageTitle': 'Conformidad'
+    })
   }
 
 }

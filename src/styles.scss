@@ -1311,6 +1311,28 @@ section {
     padding: 14px 6px 0px 26px;
 }
 
+.box-container .box-content .portlet-der .personalDocument .content .rowContent {
+    .inputGroup {
+        &.error {
+            .form-control,
+            .form-select {
+                border: 0.5px solid #F44336;
+            }
+            .textError {
+                //display: flex;
+                opacity: 1;
+            }
+        }
+        .textError {
+            opacity: 0;
+            margin-left: 15px;
+            font-weight: 300;
+            font-size: 11px;
+            color: #F44336;
+        }
+    }
+}
+
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid {
     display: flex;
     flex: 1 1 100%;

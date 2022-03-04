@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.addTag()
     this.listDestiny()
   }
 
@@ -42,5 +43,13 @@ export class HomeComponent implements OnInit {
       error: error => console.log(error),
     }
     )
+  }
+  addTag() {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'virtualPageView',
+      'virtualPagePath': '/home',
+      'virtualPageTitle': 'Home'
+    })
   }
 }

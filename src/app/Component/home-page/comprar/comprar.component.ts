@@ -209,6 +209,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.addTag()
     // this.showAdulto = 0
     console.log(this.selectedPay)
     toUp()
@@ -932,5 +933,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }
     }
   }
-
+  addTag() {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'virtualPageView',
+      'virtualPagePath': '/home/comprar',
+      'virtualPageTitle': 'Checkout'
+    })
+  }
 }

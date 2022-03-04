@@ -15,6 +15,16 @@ export class SlideComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.addTag()
+  }
+
+  addTag() {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'virtualPageView',
+      'virtualPagePath': '/home/seguros',
+      'virtualPageTitle': 'Seguros'
+    })
   }
 
 }
