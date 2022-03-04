@@ -6846,6 +6846,91 @@ button.customers {
     }
 }
 
+#ModalVerificaCorreo {
+    .modal-header {
+        margin-top: 40px;
+        .titleVerifica {
+            display: flex;
+            justify-content: center;
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 27px;
+            letter-spacing: 0.18px;
+            color: #4B4B4B;
+            width: 100%;
+        }
+    }
+    .modal-dialog {
+        width: 490px;
+    }
+    .modal-body {
+        .iconCenter {
+            display: flex;
+            justify-content: center;
+        }
+        .descripText {
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #83898F;
+            padding-bottom: 20px;
+        }
+        .action {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+    }
+}
+
+#ModalUsuarioVerificado {
+    .modal-header {
+        .iconCenter {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .titleVerifica {
+            display: flex;
+            justify-content: center;
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 36px;
+            color: #4B4B4B;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        img {
+            margin: 0 0 20px 0;
+        }
+    }
+    .modal-dialog {
+        width: 490px;
+    }
+    .modal-body {
+        .descripText {
+            display: flex;
+            justify-content: center;
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            padding-bottom: 20px;
+        }
+        .action {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+    }
+}
+
 .boxReclamaciones {
     display: flex;
     .contLeft {
