@@ -73,15 +73,14 @@
     <ng-container *ngIf="isLogged">
         <div class="boxUser">
             <div class="userlogged" (click)="showOption()">
-                <img *ngIf="!userStorage.image" src="./assets/user-conect.svg" alt="">
-                <img class="img-perfil"  *ngIf="userStorage.image" appImgDefault [src]="userStorage.image" alt="">
+                <img  class="img-perfil" appImgDefault [default]="'./assets/user-conect.svg'" [src]="userStorage.image" alt="">
             </div>
             <div class="divFlotante" *ngIf="showOptionUser">
-                <div class="option" routerLink="/home/perfil">Mi Perfil</div>
-                <div class="option">Mis Reservas</div>
+                <div class="option" routerLink="/home/perfil">Mi Perfil</div>    <!-- <div class="option">Mis Reservas</div>
                 <div class="option">Pasajero Frecuente</div>
                 <div class="option">Notificaciones</div>
                 <div class="option">Asesor Online</div>
+             -->
                 <div class="line"></div>
                 <div class="option red" (click)="logout()">Cerrar sesión</div>
                 <div class="correo">

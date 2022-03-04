@@ -176,7 +176,6 @@ export class PerfilComponent implements OnInit {
   getCountries() {
     this.preferenceService.countries().subscribe({
       next: response => {
-        console.log(response['Result'])
         this.paises = response['Result']
       }
     })

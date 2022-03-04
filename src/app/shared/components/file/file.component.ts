@@ -15,6 +15,10 @@ export class FileComponent implements OnInit {
 
   archivo64:any;
 
+  imagenUrl:string;
+
+  isErrorImagenUrl = false;
+
   @Input() name:string;
 
   loading = false;
@@ -25,7 +29,8 @@ export class FileComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.archivo64 = this.accountsService.getUserStorage().image;
+    this.imagenUrl = this.accountsService.getUserStorage().image;
+    // console.log("object");
   
   }
 
@@ -41,6 +46,7 @@ export class FileComponent implements OnInit {
     }
 
   }
+
 
   loadImages = (file:any) => {
     try {
@@ -109,7 +115,7 @@ export class FileComponent implements OnInit {
   
   openSnackBar(message: string, action: string = "Error") {
     this._snackBar.open(message, "", {
-      duration: 10000,
+      duration: 4000,
     });
   }
 

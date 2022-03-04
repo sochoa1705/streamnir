@@ -54,9 +54,6 @@ export class ContactoComponent implements OnInit {
   getContactInformation() {
     this._contactsService.getContactInformationHeader(this.userId).subscribe(headerData => {
       this._contactsService.getContactInformationDetail(this.userId).subscribe(detailData => {
-
-        debugger
-
         this.contactInformationForm.get("firstName")?.setValue(headerData.hasOwnProperty('Firstname') ? headerData.Firstname : '');
         this.contactInformationForm.get("fatherLastname")?.setValue(headerData.hasOwnProperty('FatherLastname') ? headerData.FatherLastname : '');
         this.contactInformationForm.get("motherLastname")?.setValue(headerData.hasOwnProperty('MotherLastname') ? headerData.MotherLastname : '');

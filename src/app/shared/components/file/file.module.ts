@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileComponent } from './file.component';
 import { MaterialModule } from '../../material.module';
+import { DirectivesModule } from '../../directives/directives.module';
 
 
 
@@ -11,7 +12,8 @@ import { MaterialModule } from '../../material.module';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    DirectivesModule
   ],exports:[
     FileComponent
   ]
