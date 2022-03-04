@@ -124,4 +124,23 @@ export class AccountsService {
 
     this.dispatchLogged(false);
   }
+
+
+  deleteAccount(Id: number) {
+    let payload: any = {};
+
+    const parameter = {
+      Id
+    };
+
+    const nmvModel = new NmvModel();
+
+    payload = { ...nmvModel.getPayload(), parameter };
+
+    const url = environment.urlNmviajesAccount + '/v1/api/Account';
+
+    return this._http
+      .delete<ResponseModelT<any>>(url,{body:payload})
+      .pipe(map((resp) => resp.Result));
+  }
 }

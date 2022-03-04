@@ -4,6 +4,7 @@ import { AccountsService, UserStorage } from 'src/app/Services/accounts.service'
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PreferenceService } from '../../../Services/preference/preference.service';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-perfil',
@@ -364,6 +365,29 @@ export class PerfilComponent implements OnInit {
 
     return this.errors.length === 0
   }
+
+
+  toggleModalEliminar(){
+    const modal = document.getElementById("ModalEliminaCorreo");
+
+    if(!modal){
+      return ;
+    }
+
+    bootstrap.Modal.getOrCreateInstance(modal).toggle();
+  }
+
+
+  eliminarCuenta(){
+    this.accountService.deleteAccount(this.userStorage.id).subscribe(data=>{
+      if(data.IsSuccess){
+        this.toggleModalEliminar();
+        this.accountService.signOut();
+        this.router.navigateByUrl("/")
+      }
+    })
+  }
+
 
   getMessage(messageKey: any) {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
