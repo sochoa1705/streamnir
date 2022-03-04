@@ -14,6 +14,7 @@ import { DocumentacionViajeComponent } from './documentacion-viaje/documentacion
 import { NuestraEmpresaComponent } from './nuestra-empresa/nuestra-empresa.component';
 import { NuestrasAgenciasComponent } from './nuestras-agencias/nuestras-agencias.component';
 import { LibroReclamacionesComponent } from './libro-reclamaciones/libro-reclamaciones.component';
+import { AppComponent } from 'src/app/app.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: 'perfil', component: PerfilComponent },
       { path: 'terminos-condiciones', component: TerminosCondicionesComponent },
       { path: 'documentacion-viaje', component: DocumentacionViajeComponent },
+      { path: 'confirmacion/:id', component: HomeComponent },
       {
         path: 'seguros',
         loadChildren: () => import('./seguros/seguros.module').then(

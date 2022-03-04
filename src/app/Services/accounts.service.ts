@@ -31,6 +31,8 @@ export interface UserStorage {
 export class AccountsService {
   private userLogged = new BehaviorSubject<boolean>(false);
 
+  private userConfirmate = new BehaviorSubject<boolean>(false);
+
   constructor(private _http: HttpClient) {}
 
   saveAccount(payload: any): Observable<any> {
@@ -60,8 +62,31 @@ export class AccountsService {
       .pipe(map((resp) => resp.Result));
   }
 
+
+  confirmationAccount(UserId: string) {
+    let payload: any = {};
+
+    const parameter = {
+      UserId
+    };
+
+    const nmvModel = new NmvModel();
+
+    payload = { ...nmvModel.getPayload(), parameter };
+
+    const url = environment.urlNmviajesAccount + '/v1/api/Account/Confirmation';
+
+    return this._http
+      .put<ResponseModelT<any>>(url, payload)
+      .pipe(map((resp) => resp.Result));
+  }
+
   dispatchLogged(value: boolean) {
     this.userLogged.next(value);
+  }
+
+  dispatchConfirmate(value: boolean) {
+    this.userConfirmate.next(value);
   }
 
   isLogged() {
