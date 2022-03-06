@@ -9,6 +9,9 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { concatMap, filter, mergeMap, switchMap, take } from 'rxjs/operators';
 import { combineLatest, fromEvent } from 'rxjs';
 import { PopupService } from 'src/app/Services/pop-up/popup.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AccountsService } from 'src/app/Services/accounts.service';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-home',
@@ -24,12 +27,57 @@ export class HomeComponent implements OnInit {
     public dataPagePresenterService: DataPagePresenterService,
     public asidePresenterService: AsidePresenterService,
     public destinyService: DestinyService,
+    private ar:ActivatedRoute,
+    private router:Router,
+    private accountsService:AccountsService
   ) { }
 
   ngOnInit(): void {
     this.addTag()
     this.listDestiny()
+    this.getConfirmacion();
   }
+
+  getConfirmacion(){
+    this.ar.params.pipe(
+      filter(params=>params.id),
+      switchMap(param=> this.accountsService.confirmationAccount(param.id))
+    ).subscribe(resp=>{
+      if(resp.IsSuccess){
+        this.accountsService.dispatchConfirmate(true);
+        this.toggleConfirmation();
+      }
+    })
+  }
+
+  aceptConfirm(){
+    this.toggleConfirmation();
+    this.router.navigateByUrl("/home");
+    this.openModalSession();
+  }
+
+  toggleConfirmation(){
+    const modal = document.getElementById("ModalUsuarioVerificado");
+
+    if(!modal){
+      return ;
+    }
+
+    bootstrap.Modal.getOrCreateInstance(modal).toggle();
+  }
+
+
+  openModalSession(){
+    const moodalSession:any = document.querySelector("[data-bs-target='#ModalSesion']");
+
+    if(!moodalSession){
+      return ;
+    }
+
+    moodalSession.click()
+
+  }
+
 
   listDestiny() {
     let payload = new NMRequest();

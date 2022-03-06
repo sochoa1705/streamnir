@@ -1007,32 +1007,6 @@ section {
     z-index: 10;
 }
 
-.box-container .box-perfil .perfilCicle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #5C6BC0;
-    width: 97px;
-    height: 97px;
-    border-radius: 48px;
-    color: #fff;
-    font-size: 38px;
-    position: relative;
-}
-
-.box-container .box-perfil .perfilCicle .blueIcon {
-    position: absolute;
-    right: 4px;
-    bottom: 0;
-    background: #009AED;
-    width: 32px;
-    height: 32px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .box-container .box-perfil .perfilName {
     font-family: Open Sans;
     font-style: normal;
@@ -6508,6 +6482,36 @@ $icon-size-mobile: 28px;
             color: white;
         }
     }
+    &.primary {
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 12px;
+        border: 1px solid #DF0C30;
+        background: #DF0C30;
+        color: white;
+        border-radius: 3px;
+        padding: 10px 16px;
+        cursor: pointer;
+        transition: 0.3s all;
+        &:hover {
+            background: #B50A27;
+        }
+    }
+    &.secundary {
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 12px;
+        border: 1px solid #EBEBEB;
+        background: #EBEBEB;
+        color: #4B4B4B;
+        border-radius: 3px;
+        padding: 10px 16px;
+        cursor: pointer;
+        transition: 0.3s all;
+        &:hover {
+            background: #E4E5E7;
+        }
+    }
 }
 
 button.customers {
@@ -6855,6 +6859,197 @@ button.customers {
     }
 }
 
+#ModalVerificaCorreo {
+    .modal-header {
+        margin-top: 40px;
+        .titleVerifica {
+            display: flex;
+            justify-content: center;
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 27px;
+            letter-spacing: 0.18px;
+            color: #4B4B4B;
+            width: 100%;
+        }
+    }
+    .modal-dialog {
+        width: 490px;
+    }
+    .modal-body {
+        .iconCenter {
+            display: flex;
+            justify-content: center;
+        }
+        .descripText {
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0.1px;
+            color: #83898F;
+            padding-bottom: 20px;
+        }
+        .action {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+    }
+}
+
+#ModalUsuarioVerificado {
+    .modal-header {
+        .iconCenter {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .titleVerifica {
+            display: flex;
+            justify-content: center;
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 36px;
+            color: #4B4B4B;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        img {
+            margin: 0 0 20px 0;
+        }
+    }
+    .modal-dialog {
+        width: 490px;
+    }
+    .modal-body {
+        .descripText {
+            display: flex;
+            justify-content: center;
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            padding-bottom: 20px;
+        }
+        .action {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+    }
+}
+
+#ModalEliminaCorreo {
+    .modal-header {
+        .iconCenter {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .titleVerifica {
+            display: flex;
+            justify-content: center;
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 36px;
+            color: #4B4B4B;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        img {
+            margin: 0 0 20px 0;
+        }
+    }
+    .modal-dialog {
+        width: 490px;
+    }
+    .modal-body {
+        .descripText {
+            display: block;
+            text-align: center;
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            padding-bottom: 20px;
+            span {
+                font-weight: 600;
+                font-size: 12px;
+                color: #009AED;
+            }
+        }
+        .action {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 65px;
+        }
+    }
+}
+
+#ModalChangePass {
+    .modal-header {
+        .iconCenter {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .titleVerifica {
+            display: flex;
+            justify-content: center;
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 36px;
+            color: #4B4B4B;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        img {
+            margin: 0 0 20px 0;
+        }
+    }
+    .modal-dialog {
+        width: 490px;
+    }
+    .modal-body {
+        .iconCenter {
+            display: flex;
+            justify-content: center;
+        }
+        .descripText {
+            display: block;
+            text-align: center;
+            font-family: Montserrat;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 21px;
+            letter-spacing: 0.1px;
+            color: #4B4B4B;
+            padding-bottom: 20px;
+            span {
+                font-weight: 600;
+                font-size: 12px;
+                color: #009AED;
+            }
+        }
+        .action {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 65px;
+        }
+    }
+}
+
 .boxReclamaciones {
     display: flex;
     .contLeft {
@@ -7172,6 +7367,7 @@ button.customers {
             color: #009AED;
             cursor: pointer;
             transition: 0.3s all;
+            padding: 2px 0;
             &:hover {
                 color: #506370;
             }
@@ -7185,6 +7381,7 @@ button.customers {
         .line {
             height: 1px;
             background: #E4E5E7;
+            margin: 2px 0;
         }
         .correo {
             display: flex;
@@ -7321,6 +7518,63 @@ button.customers {
                     .btnGoogle {
                         background: #518EF8;
                     }
+                }
+            }
+        }
+    }
+}
+
+mat-dialog-container {
+    padding: 20px;
+    .title {
+        font-family: Open Sans;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 36px;
+        color: #4B4B4B;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .descrip {
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
+        padding-bottom: 20px;
+    }
+    .groupBtn {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        .boton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            font-family: "Montserrat";
+            font-size: 16px;
+            border-radius: 3px;
+            height: 40px;
+            cursor: pointer;
+            transition: 300ms ease;
+            &.primary {
+                background-color: #df0c30;
+                border: 1px solid #B60A35;
+                color: #ffffff;
+                &:hover {
+                    background: #B60A35;
+                }
+            }
+            &.secundary {
+                background: #D9E2E8;
+                border: 1px solid #BBCBD4;
+                color: #1C2A40;
+                &:hover {
+                    background: #BBCBD4;
                 }
             }
         }

@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
 import { ConfirmDialogComponent } from 'src/app/Component/confirm-dialog/confirm-dialog.component';
 import { AccountsService } from 'src/app/Services/accounts.service';
-import { Passenger, PassengersService } from 'src/app/Services/passengers.service';
+import { Passenger, PassengersService } from 'src/app/Component/home-page/perfil/passenger/passengers.service';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
 import { Guid } from 'src/app/shared/utils';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
@@ -40,7 +40,7 @@ export class PassengerComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _validatorsService: ValidatorsService,
     private _matSnackBar: MatSnackBar,
-    private _preferenceService: PreferenceService,
+    private _preferencesService: PreferenceService,
     public _matDialog: MatDialog
   ) {
     this.userId = this._accountService.getUserStorage().id;
@@ -61,16 +61,16 @@ export class PassengerComponent implements OnInit {
   }
 
   makeYears() {
-    for (let index = 1922; index < 2022; index++) {
+    let currentYear = moment().year();
+
+    for (let index = currentYear - 100; index < currentYear; index++) {
       this.years.push(index);
     }
   }
 
   getCountries() {
-    this._preferenceService.getCountries().subscribe({
+    this._preferencesService.getCountries().subscribe({
       next: response => {
-        console.log(response['Result']);
-        debugger
         this.countries = response['Result'];
       }
     })
@@ -117,7 +117,7 @@ export class PassengerComponent implements OnInit {
     this.passengerForm.get("birthDay")?.setValue(birthDay);
     this.passengerForm.get("birthMonth")?.setValue(birthMonth);
     this.passengerForm.get("birthYear")?.setValue(birthYear);
-    this.passengerForm.get("nationality")?.setValue(entity.Nationality);
+    this.passengerForm.get("nationality")?.setValue(entity.CountryId);
     this.passengerForm.get("documentType")?.setValue(entity.DocumentType);
     this.passengerForm.get("documentNumber")?.setValue(entity.DocumentNumber);
 

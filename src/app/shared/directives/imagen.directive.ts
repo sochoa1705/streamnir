@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, OnInit } from "@angular/core";
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from "@angular/core";
 
 
 @Directive({
@@ -7,7 +7,8 @@ import { Directive, ElementRef, HostListener, Input, OnInit } from "@angular/cor
 
  export class DefaultImageDirective implements OnInit{
     // @Input() src:string;
-    // @Input() default:string;
+    @Input() default:string;
+    @Output() errorEvent = new EventEmitter<boolean>();
 
     constructor(private elementRef:ElementRef){}
 
@@ -16,11 +17,11 @@ import { Directive, ElementRef, HostListener, Input, OnInit } from "@angular/cor
         const img = this.elementRef.nativeElement;
     }
 
+
     @HostListener('error') cargarImgDefecto() {
+      this.errorEvent.emit(true);
       const element = this.elementRef.nativeElement;
-      element.src = "../../../assets/img/no-image.jpg" 
-      // console.log('error');
-        // this.src = "assets\img\no-image.png";
+      element.src = this.default ||  "../../../assets/img/no-image.jpg" 
       }
 
   

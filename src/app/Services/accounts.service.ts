@@ -22,6 +22,7 @@ export interface UserStorage {
   email: string;
   name: string;
   id: number;
+  image:string;
 }
 
 @Injectable({
@@ -29,6 +30,8 @@ export interface UserStorage {
 })
 export class AccountsService {
   private userLogged = new BehaviorSubject<boolean>(false);
+
+  private userConfirmate = new BehaviorSubject<boolean>(false);
 
   constructor(private _http: HttpClient) {}
 
@@ -59,24 +62,54 @@ export class AccountsService {
       .pipe(map((resp) => resp.Result));
   }
 
+
+  confirmationAccount(UserId: string) {
+    let payload: any = {};
+
+    const parameter = {
+      UserId
+    };
+
+    const nmvModel = new NmvModel();
+
+    payload = { ...nmvModel.getPayload(), parameter };
+
+    const url = environment.urlNmviajesAccount + '/v1/api/Account/Confirmation';
+
+    return this._http
+      .put<ResponseModelT<any>>(url, payload)
+      .pipe(map((resp) => resp.Result));
+  }
+
   dispatchLogged(value: boolean) {
     this.userLogged.next(value);
+  }
+
+  dispatchConfirmate(value: boolean) {
+    this.userConfirmate.next(value);
   }
 
   isLogged() {
     return this.userLogged.asObservable();
   }
 
-  guardarStorage(usuario: AuthDTO) {
+  guardarStorage(usuario: AuthDTO, image?:string) {
     const user = {
       email: usuario.Email,
       name: usuario.Firstname + ' ' + usuario.FatherLastname,
       id: usuario.Id,
+      image: image || ""
     };
 
     localStorage.setItem('usuario', JSON.stringify(user));
 
     this.dispatchLogged(true);
+  }
+
+  guardarImage(image:string){
+    const user = this.getUserStorage();
+    user.image = image;
+    localStorage.setItem('usuario', JSON.stringify(user));
   }
 
   getUserStorage(): UserStorage {
