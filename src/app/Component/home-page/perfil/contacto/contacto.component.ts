@@ -177,17 +177,7 @@ export class ContactoComponent implements OnInit {
         },
         complete: () => { }
       });
-
-
-
     }
-  }
-
-  cambiarPass = false;
-
-  showCambiarPass(valElem: boolean) {
-    this.cambiarPass = valElem;
-    //console.log(this.cambiarPass);
   }
 
   showAgregaEmail(valElem: boolean) {
