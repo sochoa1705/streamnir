@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
 import { ConfirmDialogComponent } from 'src/app/Component/confirm-dialog/confirm-dialog.component';
 import { AccountsService } from 'src/app/Services/accounts.service';
-import { Passenger, PassengersService } from 'src/app/Services/passengers.service';
+import { Passenger, PassengersService } from 'src/app/Component/home-page/perfil/passenger/passengers.service';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
 import { Guid } from 'src/app/shared/utils';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
