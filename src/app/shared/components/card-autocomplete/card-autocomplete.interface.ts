@@ -2,5 +2,6 @@ export interface ICardAutocomplete {
     id: string,
     codigo: string,
     title: string,
-    children: ICardAutocomplete[]
+    children: ICardAutocomplete[],
+    texto?: string | undefined
 }

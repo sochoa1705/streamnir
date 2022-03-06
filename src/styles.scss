@@ -53,7 +53,7 @@ label {
     border-radius: 3px;
     &:focus {
         outline: none;
-        border: 0.5px solid #009AED!important;
+        border: 0.5px solid #009AED !important;
         box-shadow: none !important;
     }
 }
@@ -202,18 +202,17 @@ section {
     background: $white;
     border-radius: 10px;
     border: 1px solid #e4e5e7;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-    // overflow: auto;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15); // overflow: auto;
     &__internacional {
         height: 190px;
         h1 {
             font-size: 38px;
         }
         &>img {
-            width: 100%!important
+            width: 100% !important
         }
         &>.d-flex {
-            height: 210px!important
+            height: 210px !important
         }
     }
     &-header {
@@ -255,7 +254,7 @@ section {
                 color: #B9BCBF;
             }
             &:focus {
-                border: 0.5px solid #009AED!important;
+                border: 0.5px solid #009AED !important;
                 box-shadow: none;
             }
         }
@@ -323,7 +322,7 @@ section {
                         14px,
                         21px,
                         0.1px,
-                        $gray!important);
+                        $gray !important);
                     }
                 }
                 h2 {
@@ -349,7 +348,7 @@ section {
                             30px,
                             24px,
                             0.15px,
-                            $gray!important);
+                            $gray !important);
                         }
                     }
                     &.card-text {
@@ -465,8 +464,7 @@ section {
     &-pointer-min:active,
     &-pointer-max:active {
         border: 1px solid #0db9f0;
-    }
-    // .ng5-slider-combined {
+    } // .ng5-slider-combined {
     //     display: none !important;
     // }
     // .ng5-slider-pointer:after {
@@ -532,8 +530,7 @@ section {
         padding: 0rem 2rem 0rem 2rem;
         input.form-control {
             border: 1px solid $gray_border;
-            background: $white;
-            // border: 0.5px solid #F44336;
+            background: $white; // border: 0.5px solid #F44336;
             box-sizing: border-box;
             border-radius: 5px;
             line-height: 42px;
@@ -547,8 +544,7 @@ section {
                 #cfd1d3);
                 font-family: "Montserrat";
                 text-transform: capitalize;
-            }
-            // &:focus{
+            } // &:focus{
             //     box-shadow: none;
             // }
         }
@@ -601,8 +597,7 @@ section {
     border-radius: 5px;
     li {
         margin-bottom: 10px;
-    }
-    // ul {
+    } // ul {
     //     list-style: none;
     //     padding: 0px;
     // }
@@ -718,11 +713,9 @@ section {
     }
 }
 
-
 /* Importing Bootstrap SCSS file. */
 
 // @import '~bootstrap/scss/bootstrap';
-
 /* datepicker styles  */
 
 .onlyDate .ngb-dp-month:first-child {
@@ -868,7 +861,7 @@ section {
         }
         &:disabled {
             color: $gray_light;
-            background: $red!important
+            background: $red !important
         }
     }
 }
@@ -895,7 +888,7 @@ section {
 
 .portletFiltro .rowFiltro .columnFiltro input,
 .portletFiltro .rowFiltro .columnFiltro input[type="text"] {
-    padding: 0!important;
+    padding: 0 !important;
     height: 49px;
     font-family: Montserrat;
     font-style: normal;
@@ -907,11 +900,11 @@ section {
     text-indent: 10px;
     border: 0.5px solid #E4E5E7;
     &:focus {
-        border: 0.5px solid #009AED!important;
+        border: 0.5px solid #009AED !important;
         box-shadow: none;
     }
     &::placeholder {
-        color: #B9BCBF!important;
+        color: #B9BCBF !important;
         font-size: 16px;
     }
     &.origen,
@@ -979,21 +972,19 @@ section {
     border-radius: 0;
 }
 
-
 /* end datepicker styles  */
-
 
 /* STYLE PERFIL  */
 
 .mat-tab-body-content {
-    overflow: hidden!important;
+    overflow: hidden !important;
 }
 
 .mat-tab-body {
     &-active {
-        overflow: visible!important;
+        overflow: visible !important;
         .mat-tab-body-content {
-            overflow: visible!important;
+            overflow: visible !important;
         }
     }
 }
@@ -1758,13 +1749,12 @@ section {
 }
 
 .spaceEnd {
-    justify-content: end!important;
+    justify-content: end !important;
 }
 
 .flexAuto {
     flex: auto !important;
 }
-
 
 /* END STYLE PERFIL */
 
@@ -1844,8 +1834,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 .filtroBox {
-    overflow: hidden;
-    //border: 1px solid #E4E5E7;
+    overflow: hidden; //border: 1px solid #E4E5E7;
 }
 
 .postCard {
@@ -1862,16 +1851,16 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         border-radius: 3px 0 0 3px !important;
         letter-spacing: 2px;
         &:focus {
-            border: 0.5px solid #009AED!important;
+            border: 0.5px solid #009AED !important;
             box-shadow: none;
         }
     }
     &Izq {
         border-radius: 0 3px 3px 0 !important;
         letter-spacing: 2px;
-        border-left: 0px!important;
+        border-left: 0px !important;
         &:focus {
-            border: 0.5px solid #009AED!important;
+            border: 0.5px solid #009AED !important;
             ;
             box-shadow: none;
         }
@@ -1980,8 +1969,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .boxGraphic {
     background: #FFFFFF;
     box-shadow: 0px 1px 8px rgb(0 0 0 / 10%);
-    border-radius: 5px;
-    // margin-top: 10px;
+    border-radius: 5px; // margin-top: 10px;
     padding: 20px 19px;
     .row {
         margin: 0;
@@ -2137,8 +2125,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
         }
         .gRight {
-            font-family: Montserrat;
-            //margin: auto 0;
+            font-family: Montserrat; //margin: auto 0;
             width: 220px;
             .desde {
                 font-size: 14px;
@@ -2173,11 +2160,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .boxPrecioAero,
 .boxPrecios {
-    background: #FFFFFF;
-    // box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
+    background: #FFFFFF; // box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
     // box-shadow: 0px 1px 8px rgb(0 0 0 / 10%);
-    border-radius: 5px;
-    // margin-top: 10px;
+    border-radius: 5px; // margin-top: 10px;
     table {
         font-family: Montserrat;
         font-weight: 500;
@@ -2291,7 +2276,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .twoRow {
             text-align: left;
             padding-left: 10px;
-            font-weight: normal!important;
+            font-weight: normal !important;
             display: flex;
             align-items: center;
             &:first-child {
@@ -3708,8 +3693,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     width: 100%;
     .rowBoxTab {
         @include desktop {
-            display: flex;
-            // gap: 10px;
+            display: flex; // gap: 10px;
             padding: 4px 10px 10px 10px;
             position: relative;
         }
@@ -3729,7 +3713,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
         .fullWidht {
             width: 100%;
-            height: 40px;
+            height: 49px;
         }
         .colBoxtab {
             display: flex;
@@ -3766,12 +3750,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
             @include desktop {
                 padding: 0;
-            }
-            //position: relative;
+            } //position: relative;
             input {
                 width: 100%;
                 padding: 0 !important;
-                height: 40px;
+                height: 49px;
                 font-family: Montserrat;
                 font-size: 16px;
                 text-transform: capitalize;
@@ -3779,12 +3762,21 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 text-indent: 40px;
                 border: 0.5px solid #E4E5E7;
                 border-radius: 3px;
+                &.icono {
+                    text-indent: 40px;
+                    background: url("./assets/origen.png") no-repeat 10px center;
+                    &-no{
+                        text-indent: 10px;
+                        background: none;
+    
+                    }
+                }
             }
             .iconCalendar {
                 position: relative;
                 svg {
                     position: absolute;
-                    top: 8px;
+                    top: 12px;
                     left: 10px;
                 }
             }
@@ -3863,20 +3855,20 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 14px;
     }
     .viewMobileWidth {
-        width: 100%!important;
+        width: 100% !important;
     }
     .py-5 {
         padding-top: 2rem !important;
         padding-bottom: 1rem !important;
     }
     .lessViewMob {
-        width: 100%!important;
-        margin: 0!important;
+        width: 100% !important;
+        margin: 0 !important;
     }
     .card_pasajero {
         .rowMobileCard {
             display: flex;
-            flex-direction: column!important;
+            flex-direction: column !important;
             &.hideMobile {
                 display: none;
                 &.activoBox {
@@ -3885,20 +3877,20 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
         }
         label {
-            font-size: 12px!important;
+            font-size: 12px !important;
         }
         .form-check-label {
             margin: 0 !important;
         }
     }
     .card-header {
-        white-space: inherit!important;
-        line-height: 15px!important;
-        font-size: 11px!important;
+        white-space: inherit !important;
+        line-height: 15px !important;
+        font-size: 11px !important;
         padding-bottom: 20px;
         h2 {
-            font-size: 18px!important;
-            line-height: 27px!important;
+            font-size: 18px !important;
+            line-height: 27px !important;
             padding-bottom: 7px;
         }
         span {
@@ -3909,7 +3901,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .text-end,
     .marginLat a,
     .textDire {
-        font-size: 12px!important;
+        font-size: 12px !important;
     }
     .contentCenterMobile {
         display: flex;
@@ -3920,11 +3912,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 0 !important;
         }
         h2 {
-            font-size: 18px!important;
+            font-size: 18px !important;
         }
         p,
         .columnDest {
-            font-size: 12px!important;
+            font-size: 12px !important;
         }
     }
     .titleMob {
@@ -3970,7 +3962,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         padding: 0;
         margin: 0;
         p {
-            font-size: 11px!important;
+            font-size: 11px !important;
         }
     }
     .boxAgencia {
@@ -3989,27 +3981,27 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .titleMob,
     .titleCobertura,
     .titleBodyCober {
-        font-size: 18px!important;
+        font-size: 18px !important;
     }
     .rightHeader {
-        font-size: 12px!important;
+        font-size: 12px !important;
     }
     .titleBodyCober p {
-        font-size: 11px!important;
+        font-size: 11px !important;
     }
     .card {
         .card-body {
             .titleAsegurado {
-                font-size: 15px!important;
+                font-size: 15px !important;
             }
             .fechaAsegurado {
-                font-size: 12px!important;
+                font-size: 12px !important;
             }
             .descripAsegurado {
-                font-size: 12px!important;
+                font-size: 12px !important;
             }
             .card-title {
-                font-size: 14px!important;
+                font-size: 14px !important;
                 svg {
                     margin-right: 8px;
                 }
@@ -4062,7 +4054,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         border-radius: 10px;
     }
     .selectBank {
-        width: 100%!important;
+        width: 100% !important;
     }
     .btnMobile {
         &.activoBox {
@@ -4094,8 +4086,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
     }
     .mat-horizontal-stepper-header-container {
-        margin-left: -15px!important;
-        margin-right: -15px!important;
+        margin-left: -15px !important;
+        margin-right: -15px !important;
     }
     .mat-step-header {
         padding-top: 20px !important;
@@ -4136,8 +4128,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             min-width: 20px;
         }
         .py-4 {
-            padding-top: 0!important;
-            padding-bottom: 0!important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
         }
     }
     .textEmision {
@@ -4157,12 +4149,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
         }
         .columnCard {
-            font-size: 12px!important;
+            font-size: 12px !important;
             &.fontOpen {
                 font-size: 14px !important;
             }
             &:last-child {
-                margin-left: 30px!important;
+                margin-left: 30px !important;
             }
         }
     }
@@ -4598,10 +4590,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .modal-dialog {
             max-width: 100% !important;
             .titleMod {
-                font-size: 20px!important;
+                font-size: 20px !important;
             }
             .modal-body {
-                padding: 30px 20px!important;
+                padding: 30px 20px !important;
             }
         }
     }
@@ -4641,7 +4633,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             .contentRed {
                 margin: 0 10px 10px 10px !important;
                 padding: 10px;
-                font-size: 12px!important;
+                font-size: 12px !important;
                 height: auto !important;
             }
         }
@@ -4684,7 +4676,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         padding-top: 10px !important;
     }
     .hideMov {
-        display: none!important;
+        display: none !important;
     }
     .hideDesktop {
         display: flex !important;
@@ -4800,8 +4792,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             color: #FFFFFF;
             cursor: pointer;
             height: 42px;
-            padding: 0 15px;
-            // width: max-content;
+            padding: 0 15px; // width: max-content;
             transition: all 0.5s;
             margin-bottom: 10px;
             &:hover {
@@ -5780,19 +5771,19 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
         }
         .cardTitulo {
-            font-size: 14px!important;
-            padding: 10px 15px!important;
+            font-size: 14px !important;
+            padding: 10px 15px !important;
         }
         .cardStar,
         .cardOpinion {
-            padding: 0 15px 10px 15px!important;
+            padding: 0 15px 10px 15px !important;
         }
         .precio {
             .desde {
-                font-size: 12px!important;
+                font-size: 12px !important;
             }
             .tarifa {
-                font-size: 24px!important;
+                font-size: 24px !important;
             }
         }
     }
@@ -6172,7 +6163,6 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
-
 /* boton select */
 
 .select-box {
@@ -6295,31 +6285,31 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 span.valid {
-    font-size: 10px!important;
-    color: red!important;
+    font-size: 10px !important;
+    color: red !important;
 }
 
 .isvalid {
-    border: 1px solid red!important
+    border: 1px solid red !important
 }
 
 @media (min-width: 1400px) {
     .container {
         &-fluid {
-            width: 1397px!important;
+            width: 1397px !important;
             &.fluid {
-                width: 100%!important;
+                width: 100% !important;
             }
         }
     }
 }
 
 .ngb-dp-arrow-btn {
-    background: transparent!important
+    background: transparent !important
 }
 
 .font-12 {
-    font-size: 12px!important;
+    font-size: 12px !important;
 }
 
 @media print {
@@ -6330,14 +6320,13 @@ span.valid {
 
 input.inputDer,
 input.inputIzq {
-    text-indent: 40px!important
+    text-indent: 40px !important
 }
 
 .hideDate {
     max-width: 0 !important;
     width: 0 !important;
-    position: absolute;
-    //right: 58%;
+    position: absolute; //right: 58%;
 }
 
 .margin-filter {
@@ -6362,8 +6351,7 @@ input.inputIzq {
     top: 0;
     position: absolute;
     max-width: 100%;
-    width: 100%;
-    // border-radius: 0px 0px 20px 20px;
+    width: 100%; // border-radius: 0px 0px 20px 20px;
     overflow: hidden;
     & img {
         position: absolute;
@@ -6399,7 +6387,7 @@ input.inputIzq {
         }
     }
     &::first-letter {
-        color: red!important;
+        color: red !important;
         text-indent: 50px;
     }
     span {
@@ -6427,8 +6415,7 @@ $icon-size-mobile: 28px;
     width: $icon-size;
     height: $icon-size;
     display: block;
-    margin: 20px;
-    //margin-right: 20px;
+    margin: 20px; //margin-right: 20px;
     @media (max-width: 768px) {
         margin-right: 20px;
         font-size: $icon-size-mobile;
@@ -6483,8 +6470,7 @@ $icon-size-mobile: 28px;
     @media (max-width: 768px) {
         width: 93% !important;
         padding: 0;
-        padding-top: 30px;
-        // width: 100% !important;
+        padding-top: 30px; // width: 100% !important;
         // position: relative!important;
         // padding: 0 15px;
     }
@@ -6532,8 +6518,7 @@ button.customers {
     font-size: 14px;
     color: #222;
     margin-top: 7px;
-    background-color: $white;
-    // background: url(../../../../assets/arrow.svg) no-repeat center right;
+    background-color: $white; // background: url(../../../../assets/arrow.svg) no-repeat center right;
     padding-left: 0;
     text-align: left;
     font-family: "Montserrat";
