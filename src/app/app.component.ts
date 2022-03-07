@@ -87,23 +87,19 @@ export class AppComponent implements OnInit {
     });
   }
 
+  initLoading(){
+    const textSend = 'CARGANDO'
+    this.loaderSubjectService.showText(textSend)
+  }
+
+  closeLoading(){
+    this.loaderSubjectService.closeLoader();
+  }
 
 
   ngOnInit(): void {
 
-
-    const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!'
-    this.loaderSubjectService.showText(textSend)
-
-    this.loaderSubjectService.showLoader()
-
-
-    setTimeout(() => {
-      this.loaderSubjectService.closeLoader();
-      console.log('faklse');
-    }, 15000);
-
-
+    this.initLoading();
 
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
@@ -362,22 +358,33 @@ export class AppComponent implements OnInit {
     bootstrap.Modal.getOrCreateInstance(modal).toggle();
   }
 
+  toggleModalRecovery(){
+    const modal = document.getElementById("ModalRecovery");
+
+    if(!modal){
+      return ;
+    }
+
+    bootstrap.Modal.getOrCreateInstance(modal).toggle();
+  }
+
+
 
   getPassword(email:string){
 
-    const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!'
-    this.loaderSubjectService.showText(textSend)
-    this.loaderSubjectService.showLoader()
-
+    this.initLoading();
 
     if(email.length <= 5){
       console.error("Ingrese email valido")
     }
     this._accountService.passwordSend(email).subscribe(resp=>{
+      this.closeLoading();
       if(resp.IsSuccess){
-        // this.toggleModalGetPass();
-        this.loaderSubjectService.closeLoader()
+         this.toggleModalGetPass();
+         this.toggleModalRecovery();
       }
+    },()=>{
+      this.closeLoading();
     })
   }
 
