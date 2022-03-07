@@ -18,15 +18,15 @@ import { ValidatorsService } from './shared/validators/validators.service';
 
 export class LoginPerson {
   constructor(
-    public email = "jose.oshiro@gmail.com",
-    public password = "Oshiro123",
+    public email = "",
+    public password = "",
     public recorder = false
   ){}
 }
 export class LoginBusiness {
   constructor(
-    public email = "jose.oshiro@gmail.com",
-    public password = "Oshiro123",
+    public email = "",
+    public password = "",
     public recorder = false
   ){}
 }
@@ -90,6 +90,7 @@ export class AppComponent implements OnInit {
   initLoading(){
     const textSend = 'CARGANDO'
     this.loaderSubjectService.showText(textSend)
+    this.loaderSubjectService.showLoader();
   }
 
   closeLoading(){
@@ -98,8 +99,6 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-    this.initLoading();
 
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
@@ -358,14 +357,15 @@ export class AppComponent implements OnInit {
     bootstrap.Modal.getOrCreateInstance(modal).toggle();
   }
 
-  toggleModalRecovery(){
-    const modal = document.getElementById("ModalRecovery");
+  closeModalRecovery(){
+    const btn = document.getElementById("btncloseRecovery");
 
-    if(!modal){
+
+    if(!btn){
       return ;
     }
 
-    bootstrap.Modal.getOrCreateInstance(modal).toggle();
+    btn.click();
   }
 
 
@@ -380,8 +380,8 @@ export class AppComponent implements OnInit {
     this._accountService.passwordSend(email).subscribe(resp=>{
       this.closeLoading();
       if(resp.IsSuccess){
+        this.closeModalRecovery();
          this.toggleModalGetPass();
-         this.toggleModalRecovery();
       }
     },()=>{
       this.closeLoading();
