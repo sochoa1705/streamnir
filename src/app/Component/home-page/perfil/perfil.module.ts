@@ -16,9 +16,10 @@ import { ContactoService } from './contacto/contacto.service';
 import { MatIconModule } from '@angular/material/icon';
 import { PassengerComponent } from './passenger/passenger.component';
 import { FileModule } from 'src/app/shared/components/file/file.module';
+import { PasswordComponent } from './password/password.component';
 
 @NgModule({
-  declarations: [PerfilComponent, ContactoComponent, PassengerComponent],
+  declarations: [PerfilComponent, ContactoComponent, PassengerComponent, PasswordComponent],
   imports: [
     CommonModule,
     PerfilRoutingModule,
