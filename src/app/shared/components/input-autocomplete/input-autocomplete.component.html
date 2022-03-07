@@ -1,5 +1,5 @@
 <div class="tab-autocomplete">
-    <input #input [placeholder]="placeholder" [value]="value?.title || '' " [disabled]="isDisabled"
+    <input #input [ngClass]="viewIcon ? 'icono' : 'icono-no'" [placeholder]="placeholder" [value]="value?.title || '' " [disabled]="isDisabled"
         (focus)="showAutocomplete()" (keyup)="keyUp($event.target)" class="form-control animated fadeIn" type="text">
 
     <svg (click)="clean()" *ngIf="input.value.length>0 && !loading" class="input-icon pointer" width="461" height="461"
@@ -37,6 +37,6 @@
 
     <div class="div" #cardAutocompleteComponent>
         <app-card-autocomplete (itmSelected)="selectItm($event)" [cardAutocomplete]="items || []"
-            [boxOrigen]="boxOrigen"></app-card-autocomplete>
+            [boxOrigen]="boxOrigen" [inputText]="inputTxt"></app-card-autocomplete>
     </div>
 </div>

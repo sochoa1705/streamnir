@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { ResponseModelT } from '../shared/models';
-import { NmvModel } from '../shared/utils';
+import { ResponseModelT } from '../../../../shared/models';
+import { NmvModel } from '../../../../shared/utils';
 
 export interface Passenger {
   Id: number;
@@ -24,7 +24,7 @@ export interface Passenger {
 export class PassengersService {
 
   constructor(
-    private http: HttpClient
+    private _httpClient: HttpClient
   ) { }
 
   static readonly passengersGetPath = '/v1/api/Passenger';
@@ -42,7 +42,7 @@ export class PassengersService {
 
     const url = `${environment.urlNmviajesAccount}${PassengersService.passengersGetPath}`;
 
-    return this.http
+    return this._httpClient
       .get<ResponseModelT<Array<Passenger>>>(url, options)
       .pipe(map((resp) => resp.Result));
   }
@@ -58,7 +58,7 @@ export class PassengersService {
 
     const url = `${environment.urlNmviajesAccount}${PassengersService.passengersGetByIdPath}`;
 
-    return this.http
+    return this._httpClient
       .get<ResponseModelT<Passenger>>(url, options)
       .pipe(map((resp) => resp.Result));
   }
@@ -77,7 +77,7 @@ export class PassengersService {
 
     const url = `${environment.urlNmviajesAccount}${PassengersService.passengersPostPath}`;
 
-    return this.http.post<any>(url, payload);
+    return this._httpClient.post<any>(url, payload);
   }
 
   update(payload: any) {
@@ -90,7 +90,7 @@ export class PassengersService {
 
     const url = `${environment.urlNmviajesAccount}${PassengersService.passengersPutPath}`;
 
-    return this.http.put<any>(url, payload);
+    return this._httpClient.put<any>(url, payload);
   }
 
   delete(userId: number, id: number) {
@@ -111,7 +111,7 @@ export class PassengersService {
 
     const url = `${environment.urlNmviajesAccount}${PassengersService.passengersDeletePath}`;
 
-    return this.http
+    return this._httpClient
       .delete<any>(url, { body: payload });
   }
 }

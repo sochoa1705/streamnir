@@ -2,7 +2,7 @@
 
     <form class="bg-white" [formGroup]="form">
         <div class="rowBoxTab">
-            <div class="padRight " style="position: relative;">    
+            <div class="padRight " style="position: relative;">
                 <mat-form-field>
                     <mat-select formControlName="viajes" disableOptionCentering>
                         <mat-option [value]="EnumFlightType.ida_vuelta">Ida y Vuelta</mat-option>
@@ -20,18 +20,20 @@
                 </mat-form-field>
             </div>
             <div class="padRight">
-                <app-pop-up-pasajero #popUp [onlyPasajeros]="true" [adultos]="vuelosTab?.pasajeros?.adultos || 0" [ninos]="vuelosTab?.pasajeros?.ninos || 0" [infantes]="vuelosTab?.pasajeros?.infantes || 0" (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero>
+                <app-pop-up-pasajero #popUp [onlyPasajeros]="true" [adultos]="vuelosTab?.pasajeros?.adultos || 0" [ninos]="vuelosTab?.pasajeros?.ninos || 0"
+                    [infantes]="vuelosTab?.pasajeros?.infantes || 0" (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero>
             </div>
         </div>
 
 
         <div class="rowBoxTab">
-            
+
 
             <div class="colBoxtab w-30 me-md-1">
-                <app-input-autocomplete placeholder="Origen" [items]="vuelos$ | async" [loading]="vuelosLoading"  [typeahead]="vuelosInput$" formControlName="origen"></app-input-autocomplete>    
-            </div>            
-                     <!-- <input matInput aria-label="State" [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event, 'origen')"
+                <app-input-autocomplete placeholder="Origen" [items]="vuelos$ | async" [loading]="vuelosLoading" [typeahead]="vuelosInput$"
+                    formControlName="origen"></app-input-autocomplete>
+            </div>
+            <!-- <input matInput aria-label="State" [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event, 'origen')"
                     class="form-control animated fadeIn" placeholder="Origen">
                 <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayWithOrigen.bind(this)">
                     <mat-option *ngFor="let state of citysOrigenSelect" [value]="state.city_code">
@@ -42,7 +44,8 @@
 
             <div class="colBoxtab w-30 me-md-1">
 
-                <app-input-autocomplete placeholder="Destino" [items]="vuelos2$ | async" [loading]="vuelosLoading2"  [typeahead]="vuelosInput2$" formControlName="destino"></app-input-autocomplete>
+                <app-input-autocomplete placeholder="Destino" [items]="vuelos2$ | async" [loading]="vuelosLoading2" [typeahead]="vuelosInput2$"
+                    formControlName="destino"></app-input-autocomplete>
 
 
                 <!-- <input matInput aria-label="State2" [matAutocomplete]="auto2" formControlName="destino" (keyup)="autoComplete($event, 'destino')"
@@ -62,8 +65,8 @@
                 <button class="fullWidht" type="button" (click)="searchVueloHotel()">Buscar</button>
             </div>
         </div>
-        <div class="rowBoxTab right text">Haciendo click en
-            <strong>"Buscar"</strong> , acepto las Condiciones Generales</div>
+        <!-- <div class="rowBoxTab right text">Haciendo click en
+            <strong>"Buscar"</strong> , acepto las Condiciones Generales</div> -->
         <span class="valid" *ngIf="false">Debe seleccionar la cantidad de pasajeros</span>
     </form>
 </div>

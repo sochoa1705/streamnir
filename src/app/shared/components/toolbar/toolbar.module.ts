@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ToolbarComponent } from './toolbar.component';
 import { MaterialModule } from '../../material.module';
 import { RouterModule } from '@angular/router';
+import { DirectivesModule } from '../../directives/directives.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -11,6 +12,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     MaterialModule,
     RouterModule,
+    DirectivesModule
   ],
   exports: [ ToolbarComponent ]
 })

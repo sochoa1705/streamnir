@@ -12,45 +12,52 @@ export class MainService {
       text: "Vuelos",
       link: "vuelos",
       active: 'active',
-      tab: ''
+      tab: '',
+      icon: '/assets/menu/vuelos.svg'
     },
     {
       id: 1,
       text: "Paquetes",
       link: "https://nmviajes.paquetedinamico.com/ES/holidays/search",
-      external: true
+      external: true,
+      icon: '/assets/menu/paquetes.svg'
     },
     {
       id: 2,
       text: "Vuelos + Hotel",
       link: "filtro",
       tab: 'vuelohotel',
+      icon: '/assets/menu/vuelo-hotel.svg'
     },
     {
       id: 3,
       text: "Hoteles",
       link: "filtro",
-      tab: 'hoteles'
+      tab: 'hoteles',
+      icon: '/assets/menu/hoteles.svg'
     },
     {
       id: 4,
       text: "Autos",
       link: "filtro",
       header: true,
-      tab: 'autos'
+      tab: 'autos',
+      icon: '/assets/menu/auto.svg'
     },
     {
       id: 5,
       text: "Actividades",
       link: "filtro",
-      tab: 'actividades'
+      tab: 'actividades',
+      icon: '/assets/menu/actividad.svg'
     },
     {
       id: 6,
       text: "Seguros",
       link: "/home/seguros",
       header: true,
-      tab: ''
+      tab: '',
+      icon: '/assets/menu/seguros.svg'
     },
     {
       id: 7,

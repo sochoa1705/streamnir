@@ -2,12 +2,24 @@
 <div class="resultVuelo" [class.active]="boxOrigen">
     <ng-container *ngIf="cardAutocomplete">
         <div class="rowVuelo" *ngFor="let item of cardAutocomplete">
-            <div (click)="selectItm(item)" class="primaryTitle">
-                <img src="./assets/svg/avion.svg" alt=""> {{item.title}} </div>
-            <div class="secondGroup">
-                <div class="secondTitle" *ngFor="let secondItem of item.children" (click)="selectItm(secondItem)" >
-                    <img src="./assets/svg/a-right.svg" alt=""> {{secondItem.title}} </div>
+            <div (click)="selectItm(item)" class="d-flex align-items-center">
+                <div class="m-3">
+                    <img src="./assets/origen.png" alt="Opcion de viaje">
+                </div>
+                <div>
+                    <div class="primaryTitle" [innerHTML]="item.texto | sanitizeHtml">
+                            </div>
+                    <!-- <div class="primaryTitle">
+                            {{item.title}} - 
+                            {{item.texto}}
+                        </div> -->
+                    <div class="secondTitle" *ngFor="let secondItem of item.children" (click)="selectItm(secondItem)">
+                        <!-- <img src="./assets/svg/a-right.svg" alt=""> -->
+                        {{secondItem.title}}
+                    </div>
+                </div>
             </div>
+
         </div>
     </ng-container>
 </div>
