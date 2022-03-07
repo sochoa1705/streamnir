@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
 import { FileService } from 'src/app/Services/file.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,6 +12,7 @@ import { FileService } from 'src/app/Services/file.service';
 export class ToolbarComponent implements OnInit {
 
   @Input() menu: any[];
+  @ViewChild('drawer') sidenav: MatSidenav;
 
   isLogged = false;
   userStorage: UserStorage;
@@ -57,4 +59,10 @@ export class ToolbarComponent implements OnInit {
     this.accountService.signOut()
     this.route.navigateByUrl("/")
   }
+  close(){
+    this.sidenav.close()
+    console.log('cerro');
+    
+  }
+
 }

@@ -11,12 +11,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatTooltipModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSidenavModule,
   ],
   exports: [
     CommonModule,
@@ -57,7 +59,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatTooltipModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSidenavModule,
   ]
 })
 export class MaterialModule { }

@@ -62,20 +62,24 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     this.inputTxt = target.value
 
     const value: string = target.value || '';
+    console.log(value)
+    
     if (value.length >= this.minTermLength) {
+      this.showBoxOrigen(true)
       this.viewIcon = true
-      this.showBoxOrigen();
       this.boxOrigenTerm = false;
       this.typeahead.next(value);
     } else {
-      this.boxOrigenTerm = true;
+      this.viewIcon = false
+      this.boxOrigenTerm = true
+      this.showBoxOrigen(false)
     }
   }
 
   showAutocomplete() {
     if (this._items.length > 0) {
       setTimeout(() => {
-        this.showBoxOrigen();
+        this.showBoxOrigen(false)
 
       }, 600);
     }
@@ -107,8 +111,8 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     this.isDisabled = isDisabled;
   }
 
-  showBoxOrigen() {
-    this.boxOrigen = true;
+  showBoxOrigen(valid: boolean) {
+    this.boxOrigen = valid
   }
 
   hideBoxOrigen() {
