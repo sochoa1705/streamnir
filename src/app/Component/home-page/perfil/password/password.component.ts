@@ -4,7 +4,10 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from 'src/app/Component/confirm-dialog/confirm-dialog.component';
 import { AccountsService } from 'src/app/Services/accounts.service';
+import { Guid } from 'src/app/shared/utils';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
+import { environment } from 'src/environments/environment';
+import { PasswordService } from './password.service';
 
 @Component({
   selector: 'app-password',
@@ -24,6 +27,7 @@ export class PasswordComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _accountService: AccountsService,
+    private _passwordService: PasswordService,
     private _validatorsService: ValidatorsService,
     private _matSnackBar: MatSnackBar,
     public _matDialog: MatDialog
@@ -73,12 +77,45 @@ export class PasswordComponent implements OnInit {
       this.confirmDialogRef.afterClosed().subscribe(result => {
         if (result) {
 
-          // TODO: Invocar al servicio de cambio de contraseña.
-          this.hideCurrentPassword = false;
+          const payload = {
+            TrackingCode: Guid(),
+            MuteExceptions: environment.muteExceptions,
+            Caller: {
+              Company: "Agil",
+              Application: "Interagencias"
+            },
+            Parameter: {
+              Id: 0,
+              UserId: this.userId,
+              Password: this.changePasswordForm.get("newPassword")?.value
+            }
+          };
 
-          this._matSnackBar.open(`Tu contraseña ha sido cambiada satisfactoriamente.`, 'OK', {
-            verticalPosition: 'top',
-            duration: 2000
+          this._passwordService.update(payload).subscribe({
+            next: (response) => {
+              debugger
+
+              const isSuccess = response.Result.IsSuccess;
+
+              if (isSuccess) {
+                this._matSnackBar.open(`Tu contraseña ha sido cambiada correctamente.`, 'OK', {
+                  verticalPosition: 'top',
+                  duration: 2000
+                });
+
+                this.hideCurrentPassword = false;
+              } else {
+                this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
+                  verticalPosition: 'top',
+                  duration: 2000
+                });
+              }
+            },
+            error: (err) => {
+
+              console.log(err);
+            },
+            complete: () => { }
           });
         }
       });
