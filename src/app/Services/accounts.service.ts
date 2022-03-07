@@ -143,4 +143,23 @@ export class AccountsService {
       .delete<ResponseModelT<any>>(url,{body:payload})
       .pipe(map((resp) => resp.Result));
   }
+
+
+  passwordSend(Email:string){
+    let payload: any = {};
+
+    const parameter = {
+      Email
+    };
+
+    const nmvModel = new NmvModel();
+
+    payload = { ...nmvModel.getPayload(), parameter };
+
+    const url = environment.urlNmviajesAccount + '/v1/api/Account/PasswordSend';
+
+    return this._http
+      .post<ResponseModelT<any>>(url, payload)
+      .pipe(map((resp) => resp.Result));
+  }
 }

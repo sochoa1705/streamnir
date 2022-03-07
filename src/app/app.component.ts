@@ -334,6 +334,29 @@ export class AppComponent implements OnInit {
     }
   }
 
+  toggleModalGetPass(){
+    const modal = document.getElementById("ModalChangePass");
+
+    if(!modal){
+      return ;
+    }
+
+    bootstrap.Modal.getOrCreateInstance(modal).toggle();
+  }
+
+
+  getPassword(email:string){
+    if(email.length <= 5){
+      console.error("Ingrese email valido")
+    }
+    this._accountService.passwordSend(email).subscribe(resp=>{
+      console.log(resp);
+      if(resp.IsSuccess){
+        this.toggleModalGetPass();
+      }
+    })
+  }
+
   saveBusinessAccount(): void {
     if (this.businessAccountForm.invalid) {
       this.businessAccountForm.markAllAsTouched();
