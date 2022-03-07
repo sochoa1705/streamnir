@@ -1,23 +1,24 @@
 <router-outlet></router-outlet>
-<!-- Modal -->
-<div class="modal fade" id="ModalSesion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<div class="text-end">
-					<button #closeBotonUsuario type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<img src="./assets/modal/Logo_modal.png" alt="">
-				<h1 class="modal-title" id="exampleModalLabel">Iniciar sesión</h1>
-				<p>Ingresa con tus datos de siempre</p>
-				<!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
-			</div>
-			<div class="modal-body">
-				<!-- <mat-tab-group mat-align-tabs="center" [(selectedIndex)]="selectedIndex"> -->
-				<mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMediaLogin($event)">
-					<!-- PERSONAL -->
 
-					<mat-tab label="Personal">
+<!-- Modal -->
+<div class="modal fade" id="ModalSesion" tabindex="-1" aria-labelledby="ModalSesionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="text-end">
+                    <button #closeModalSesion type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <img src="./assets/modal/Logo_modal.png" alt="">
+                <h1 class="modal-title" id="ModalSesionLabel">Iniciar sesión</h1>
+                <p>Ingresa con tus datos de siempre</p>
+                <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+            </div>
+            <div class="modal-body">
+                <!-- <mat-tab-group mat-align-tabs="center" [(selectedIndex)]="selectedIndex"> -->
+                <mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMediaLogin($event)">
+                    <!-- PERSONAL -->
+
+                    <mat-tab label="Personal">
                         <form #formUser="ngForm" (ngSubmit)="formUser.form.valid" action="">
                             <div class="elementRow">
                                 <input type="text" email class="form-control" name="email" [(ngModel)]="login.email" placeholder="Email" required>
@@ -32,7 +33,7 @@
                             </div>
                             <div class="row mx-0">
                                 <div class="col-6">
-                                    <mat-checkbox [(ngModel)]="login.recorder"  name="recorder" class="example-margin">Recordar datos</mat-checkbox>
+                                    <mat-checkbox [(ngModel)]="login.recorder" name="recorder" class="example-margin">Recordar datos</mat-checkbox>
                                 </div>
                                 <div class="col-6 text-end">
                                     <a href="#" class="subRayado" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la contraseña?</a>
@@ -50,175 +51,172 @@
                         </form>
                     </mat-tab>
 
-					<!-- END PERSONAL -->
+                    <!-- END PERSONAL -->
 
-					<!-- EMPRESA -->
-					<mat-tab label="Empresa">
+                    <!-- EMPRESA -->
+                    <mat-tab label="Empresa">
 
-						{{loginBEmail.invalid}}
-						<form #formBusiness="ngForm" (ngSubmit)="formBusiness.form.valid"  action="">
-							<div class="elementRow" [ngClass]="{'error': loginBEmail.invalid && submitBusiness}">
-								<input #loginBEmail="ngModel" type="text" class="form-control" name="email" [(ngModel)]="loginB.email"  pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" placeholder="Email" required>
-								<div *ngIf="loginBEmail.invalid" class="msgError">Ingresa tu email</div>
-							</div>
-							<div class="elementRow"  [ngClass]="{'error': loginBPassword.invalid && submitBusiness}">
-								<input #loginBPassword="ngModel"  type="text" class="form-control" name="password" [(ngModel)]="loginB.password" placeholder="Contraseña" required>
-								<div  *ngIf="loginBPassword.invalid" class="msgError">Ingresa tu contraseña</div>
-								<div class="iconPass">
-									<img src="./assets/modal/eye.png" alt="">
-								</div>
-							</div>
-							<div class="row mx-0">
-								<div class="col-6">
-									<mat-checkbox [(ngModel)]="loginB.recorder" name="recorder" class="example-margin">Recordar datos</mat-checkbox>
-								</div>
-								<div class="col-6 text-end">
-									<a href="#" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la
+                        {{loginBEmail.invalid}}
+                        <form #formBusiness="ngForm" (ngSubmit)="formBusiness.form.valid" action="">
+                            <div class="elementRow" [ngClass]="{'error': loginBEmail.invalid && submitBusiness}">
+                                <input #loginBEmail="ngModel" type="text" class="form-control" name="email" [(ngModel)]="loginB.email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" placeholder="Email" required>
+                                <div *ngIf="loginBEmail.invalid" class="msgError">Ingresa tu email</div>
+                            </div>
+                            <div class="elementRow" [ngClass]="{'error': loginBPassword.invalid && submitBusiness}">
+                                <input #loginBPassword="ngModel" type="text" class="form-control" name="password" [(ngModel)]="loginB.password" placeholder="Contraseña" required>
+                                <div *ngIf="loginBPassword.invalid" class="msgError">Ingresa tu contraseña</div>
+                                <div class="iconPass">
+                                    <img src="./assets/modal/eye.png" alt="">
+                                </div>
+                            </div>
+                            <div class="row mx-0">
+                                <div class="col-6">
+                                    <mat-checkbox [(ngModel)]="loginB.recorder" name="recorder" class="example-margin">Recordar datos</mat-checkbox>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la
 										contraseña?</a>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</form>
-					</mat-tab>
-					<!-- END EMPRESA -->
-				</mat-tab-group>
-			</div>
-			<div class="modal-footer">
-				<button (click)="signIn(formUser, formBusiness)" class="w-100">Iniciar sesión</button>
-				<div class="account">
-					<div class="notRegister">¿No estás registrado?</div>
-					<a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalNewAccount">Crea una cuenta</a>
-				</div>
-			</div>
-		</div>
-	</div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </mat-tab>
+                    <!-- END EMPRESA -->
+                </mat-tab-group>
+            </div>
+            <div class="modal-footer">
+                <button (click)="signIn(formUser, formBusiness)" class="w-100">Iniciar sesión</button>
+                <div class="account">
+                    <div class="notRegister">¿No estás registrado?</div>
+                    <a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalNewAccount">Crea una cuenta</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal Recuperar contraseña-->
-<div class="modal fade" id="ModalRecovery" tabindex="-1" aria-labelledby="modalRecovery" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content ">
-			<div class="recoveryLeft ">
-				<div class="titleRecovery ">¡Únete a NMViajes y recibe nuestras ofertas exclusivas!</div>
-				<img src="./assets/modal/logo-white.png " alt=" ">
-			</div>
-			<div class="recoveryRight">
-				<div class="modal-header">
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="titleRecovery">Recuperar contraseña</div>
-				<form action="">
-					<div class="elementRow">
-						<input type="text" class="form-control" placeholder="Email">
-						<div class="msgError">Ingresa tu email</div>
-					</div>
+<div class="modal fade" id="ModalRecovery" tabindex="-1" aria-labelledby="modalRecoveryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="recoveryLeft ">
+                <div class="titleRecovery ">¡Únete a NMViajes y recibe nuestras ofertas exclusivas!</div>
+                <img src="./assets/modal/logo-white.png " alt=" ">
+            </div>
+            <div class="recoveryRight">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="titleRecovery">Recuperar contraseña</div>
+                <form action="">
+                    <div class="elementRow">
+                        <input type="text" class="form-control" placeholder="Email">
+                        <div class="msgError">Ingresa tu email</div>
+                    </div>
 
-				</form>
-				<div class="d-flex justify-content-center">
-					<button class="w-75">Recuperar contraseña</button>
-				</div>
-				<hr>
-				<div class="account">
-					<div class="notRegister">¿Ya tienes cuenta?</div>
-					<a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalSesion">Inicia sesión</a>
-				</div>
-			</div>
-		</div>
-	</div>
+                </form>
+                <div class="d-flex justify-content-center">
+                    <button class="w-75">Recuperar contraseña</button>
+                </div>
+                <hr>
+                <div class="account">
+                    <div class="notRegister">¿Ya tienes cuenta?</div>
+                    <a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalSesion">Inicia sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal Create Account-->
-<div class="modal fade" id="ModalNewAccount" tabindex="-1" aria-labelledby="modalNewAccount" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content ">
-			<div class="recoveryLeft ">
-				<div class="titleRecovery ">¡Únete a NMViajes y recibe nuestras ofertas exclusivas!</div>
-				<img src="./assets/modal/logo-white.png " alt=" ">
-			</div>
-			<div class="recoveryRight ">
-				<div class="modal-header">
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="titleRecovery">Crear cuenta</div>
-				<div class="socialMedia" [class.active]="socialMedia">
-					<div class="btnFacebook">
-						<img src="./assets/modal/facebook-logo.png" alt="">Regístrate con Facebook
-					</div>
-					<div class="btnGoogle">
-						<img src="./assets/modal/google-logo.png" alt="">Regístrate con Google
-					</div>
-				</div>
+<div class="modal fade" id="ModalNewAccount" tabindex="-1" aria-labelledby="modalNewAccountLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="recoveryLeft ">
+                <div class="titleRecovery ">¡Únete a NMViajes y recibe nuestras ofertas exclusivas!</div>
+                <img src="./assets/modal/logo-white.png " alt=" ">
+            </div>
+            <div class="recoveryRight ">
+                <div class="modal-header">
+                    <button type="button" #closeModalNewAccount class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="titleRecovery">Crear cuenta</div>
+                <div class="socialMedia" [class.active]="socialMedia">
+                    <div class="btnFacebook">
+                        <img src="./assets/modal/facebook-logo.png" alt="">Regístrate con Facebook
+                    </div>
+                    <div class="btnGoogle">
+                        <img src="./assets/modal/google-logo.png" alt="">Regístrate con Google
+                    </div>
+                </div>
 
-				<mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMedia($event)">
-					<!-- PERSONAL -->
-					<mat-tab label="Personal">
-						<form name="personalAccountForm" [formGroup]="personalAccountForm">
+                <mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMedia($event)">
+                    <!-- PERSONAL -->
+                    <mat-tab label="Personal">
+                        <form name="personalAccountForm" [formGroup]="personalAccountForm">
 
-							<div class="elementRow">
-								<div class="divValida" [ngClass]="{error : validatePersonalAccountForm('firstName')}">
-									<input type="text" class="form-control" formControlName="firstName" placeholder="Nombres">
+                            <div class="elementRow">
+                                <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('firstName')}">
+                                    <input type="text" class="form-control" formControlName="firstName" placeholder="Nombres">
 
-									<div class="textError" *ngIf="validatePersonalAccountForm('firstName')">
-										Ingresa tu(s) nombre(s)
-									</div>
-								</div>
-							</div>
+                                    <div class="textError" *ngIf="validatePersonalAccountForm('firstName')">
+                                        Ingresa tu(s) nombre(s)
+                                    </div>
+                                </div>
+                            </div>
 
-							<div class="elementRow">
-								<div class="divValida" [ngClass]="{error : validatePersonalAccountForm('fatherLastname')}">
-									<input type="text" class="form-control" formControlName="fatherLastname"
-										placeholder="Primer apellido">
+                            <div class="elementRow">
+                                <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('fatherLastname')}">
+                                    <input type="text" class="form-control" formControlName="fatherLastname" placeholder="Primer apellido">
 
-									<div class="textError" *ngIf="validatePersonalAccountForm('fatherLastname')">
-										Ingresa tu primer apellido
-									</div>
-								</div>
+                                    <div class="textError" *ngIf="validatePersonalAccountForm('fatherLastname')">
+                                        Ingresa tu primer apellido
+                                    </div>
+                                </div>
 
-								<div class="divValida" [ngClass]="{error : validatePersonalAccountForm('motherLastname')}">
-									<input type="text" class="form-control" formControlName="motherLastname"
-										placeholder="Segundo apellido">
+                                <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('motherLastname')}">
+                                    <input type="text" class="form-control" formControlName="motherLastname" placeholder="Segundo apellido">
 
-									<div class="textError" *ngIf="validatePersonalAccountForm('motherLastname')">
-										Ingresa tu segundo apellido
-									</div>
-								</div>
-							</div>
+                                    <div class="textError" *ngIf="validatePersonalAccountForm('motherLastname')">
+                                        Ingresa tu segundo apellido
+                                    </div>
+                                </div>
+                            </div>
 
-							<div class="elementRow">
-								<div class="divValida" [ngClass]="{error : validatePersonalAccountForm('email')}">
-									<input type="text" class="form-control" formControlName="email" placeholder="Email">
+                            <div class="elementRow">
+                                <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('email')}">
+                                    <input type="text" class="form-control" formControlName="email" placeholder="Email">
 
-									<div class="textError" *ngIf="validatePersonalAccountForm('email')">
-										Ingresa tu email
-									</div>
-								</div>
-							</div>
+                                    <div class="textError" *ngIf="validatePersonalAccountForm('email')">
+                                        Ingresa tu email
+                                    </div>
+                                </div>
+                            </div>
 
-							<div class="elementRow">
-								<div class="divValida" [ngClass]="{error : validatePersonalAccountForm('password')}">
-									<input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+                            <div class="elementRow">
+                                <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('password')}">
+                                    <input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
 
-									<div class="textError" *ngIf="validatePersonalAccountForm('password')">
-										Ingresa una contraseña
-									</div>
-								</div>
+                                    <div class="textError" *ngIf="validatePersonalAccountForm('password')">
+                                        Ingresa una contraseña
+                                    </div>
+                                </div>
 
-								<div class="divValida" [ngClass]="{error : validatePersonalAccountForm('repeatPassword')}">
-									<input type="password" class="form-control" formControlName="repeatPassword"
-										placeholder="Confirmar contraseña">
+                                <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('repeatPassword')}">
+                                    <input type="password" class="form-control" formControlName="repeatPassword" placeholder="Confirmar contraseña">
 
-									<div class="textError" *ngIf="validatePersonalAccountForm('repeatPassword')">
-										Ingresa la misma contraseña
-									</div>
-								</div>
-							</div>
+                                    <div class="textError" *ngIf="validatePersonalAccountForm('repeatPassword')">
+                                        Ingresa la misma contraseña
+                                    </div>
+                                </div>
+                            </div>
 
-						</form>
+                        </form>
 
-						<!-- <h5>FirstName</h5>
+                        <!-- <h5>FirstName</h5>
 						<pre>{{ personalAccountForm.controls.firstName.errors | json }}</pre> -->
 
-						<!-- 
+                        <!-- 
 						<h5>Form Valid: {{ personalAccountForm.valid }}</h5>
 
 						<h5>Form Errors</h5>
@@ -240,131 +238,205 @@
 						<pre>{{ personalAccountForm.controls.repeatPassword.errors | json }}</pre> -->
 
 
-					</mat-tab>
-					<!-- END PERSONAL -->
+                    </mat-tab>
+                    <!-- END PERSONAL -->
 
-					<!-- EMPRESA -->
-					<mat-tab label="Empresa">
-						<form name="businessAccountForm" [formGroup]="businessAccountForm">
+                    <!-- EMPRESA -->
+                    <mat-tab label="Empresa">
+                        <form name="businessAccountForm" [formGroup]="businessAccountForm">
 
-							<div class="elementRow">
-								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('ruc')}">
-									<input type="text" class="form-control" formControlName="ruc" placeholder="RUC">
+                            <div class="elementRow">
+                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('ruc')}">
+                                    <input type="text" class="form-control" formControlName="ruc" placeholder="RUC">
 
-									<div class="textError" *ngIf="validateBusinessAccountForm('ruc')">
-										Ingresa el número de RUC
-									</div>
-								</div>
+                                    <div class="textError" *ngIf="validateBusinessAccountForm('ruc')">
+                                        Ingresa el número de RUC
+                                    </div>
+                                </div>
 
-								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('businessName')}">
-									<input type="text" class="form-control" formControlName="businessName" placeholder="Razón Social">
+                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('businessName')}">
+                                    <input type="text" class="form-control" formControlName="businessName" placeholder="Razón Social">
 
-									<div class="textError" *ngIf="validateBusinessAccountForm('businessName')">
-										Ingresa la razón social
-									</div>
-								</div>
-							</div>
+                                    <div class="textError" *ngIf="validateBusinessAccountForm('businessName')">
+                                        Ingresa la razón social
+                                    </div>
+                                </div>
+                            </div>
 
-							<div class="elementRow">
-								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('firstName')}">
-									<input type="text" class="form-control" formControlName="firstName" placeholder="Nombres">
+                            <div class="elementRow">
+                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('firstName')}">
+                                    <input type="text" class="form-control" formControlName="firstName" placeholder="Nombres">
 
-									<div class="textError" *ngIf="validateBusinessAccountForm('firstName')">
-										Ingresa tu(s) nombre(s)
-									</div>
-								</div>
-							</div>
+                                    <div class="textError" *ngIf="validateBusinessAccountForm('firstName')">
+                                        Ingresa tu(s) nombre(s)
+                                    </div>
+                                </div>
+                            </div>
 
-							<div class="elementRow">
-								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('fatherLastname')}">
-									<input type="text" class="form-control" formControlName="fatherLastname"
-										placeholder="Apellido paterno">
+                            <div class="elementRow">
+                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('fatherLastname')}">
+                                    <input type="text" class="form-control" formControlName="fatherLastname" placeholder="Apellido paterno">
 
-									<div class="textError" *ngIf="validateBusinessAccountForm('fatherLastname')">
-										Ingresa tu primer apellido
-									</div>
-								</div>
+                                    <div class="textError" *ngIf="validateBusinessAccountForm('fatherLastname')">
+                                        Ingresa tu primer apellido
+                                    </div>
+                                </div>
 
-								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('motherLastname')}">
-									<input type="text" class="form-control" formControlName="motherLastname"
-										placeholder="Apellido materno">
+                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('motherLastname')}">
+                                    <input type="text" class="form-control" formControlName="motherLastname" placeholder="Apellido materno">
 
-									<div class="textError" *ngIf="validateBusinessAccountForm('motherLastname')">
-										Ingresa tu segundo apellido
-									</div>
-								</div>
-							</div>
+                                    <div class="textError" *ngIf="validateBusinessAccountForm('motherLastname')">
+                                        Ingresa tu segundo apellido
+                                    </div>
+                                </div>
+                            </div>
 
-							<div class="elementRow">
-								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('documentType')}">
-									<select class="form-select" formControlName="documentType">
+                            <div class="elementRow">
+                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('documentType')}">
+                                    <select class="form-select" formControlName="documentType">
 										<option value="" selected>Seleccione</option>
 										<option value="1">DNI</option>
 									</select>
 
-									<div class="textError" *ngIf="validateBusinessAccountForm('documentType')">
-										Selecciona el tipo de documento
-									</div>
-								</div>
+                                    <div class="textError" *ngIf="validateBusinessAccountForm('documentType')">
+                                        Selecciona el tipo de documento
+                                    </div>
+                                </div>
 
-								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('documentNumber')}">
-									<input type="text" class="form-control" formControlName="documentNumber" placeholder="DNI">
+                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('documentNumber')}">
+                                    <input type="text" class="form-control" formControlName="documentNumber" placeholder="DNI">
 
-									<div class="textError" *ngIf="validateBusinessAccountForm('documentNumber')">
-										Ingresa tu número de documento
-									</div>
-								</div>
-							</div>
+                                    <div class="textError" *ngIf="validateBusinessAccountForm('documentNumber')">
+                                        Ingresa tu número de documento
+                                    </div>
+                                </div>
+                            </div>
 
-							<div class="elementRow">
-								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('email')}">
-									<input type="text" class="form-control" formControlName="email" placeholder="Email">
+                            <div class="elementRow">
+                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('email')}">
+                                    <input type="text" class="form-control" formControlName="email" placeholder="Email">
 
-									<div class="textError" *ngIf="validateBusinessAccountForm('email')">
-										Ingresa tu email
-									</div>
-								</div>
-							</div>
+                                    <div class="textError" *ngIf="validateBusinessAccountForm('email')">
+                                        Ingresa tu email
+                                    </div>
+                                </div>
+                            </div>
 
-							<div class="elementRow">
-								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('password')}">
-									<input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+                            <div class="elementRow">
+                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('password')}">
+                                    <input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
 
-									<div class="textError" *ngIf="validateBusinessAccountForm('password')">
-										Ingresa una contraseña
-									</div>
-								</div>
+                                    <div class="textError" *ngIf="validateBusinessAccountForm('password')">
+                                        Ingresa una contraseña
+                                    </div>
+                                </div>
 
-								<div class="divValida" [ngClass]="{error : validateBusinessAccountForm('repeatPassword')}">
-									<input type="password" class="form-control" formControlName="repeatPassword" placeholder="Contraseña">
+                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('repeatPassword')}">
+                                    <input type="password" class="form-control" formControlName="repeatPassword" placeholder="Contraseña">
 
-									<div class="textError" *ngIf="validateBusinessAccountForm('repeatPassword')">
-										Ingresa la misma contraseña
-									</div>
-								</div>
-							</div>
+                                    <div class="textError" *ngIf="validateBusinessAccountForm('repeatPassword')">
+                                        Ingresa la misma contraseña
+                                    </div>
+                                </div>
+                            </div>
 
-						</form>
+                        </form>
 
-						<!-- <h5>ruc</h5>
+                        <!-- <h5>ruc</h5>
 						<pre>{{ businessAccountForm.controls.ruc.errors | json }}</pre> -->
 
-					</mat-tab>
-					<!-- END EMPRESA -->
-				</mat-tab-group>
+                    </mat-tab>
+                    <!-- END EMPRESA -->
+                </mat-tab-group>
 
-				<div class="textPass">Debe contener 6 caracteres como mínimo, combinando letras y números.</div>
-				<div class="d-flex justify-content-center">
-					<button class="w-25" (click)="saveAccount()">Regístrate</button>
-				</div>
-				<div class="textPolitica">Al crear una cuenta aceptas nuestra <a href="">política de privacidad</a>
-				</div>
-				<hr>
-				<div class="account">
-					<div class="notRegister">¿Ya tienes cuenta?</div>
-					<a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalSesion">Inicia sesión</a>
-				</div>
-			</div>
-		</div>
-	</div>
+                <div class="textPass">Debe contener 6 caracteres como mínimo, combinando letras y números.</div>
+                <div class="d-flex justify-content-center">
+                    <button class="w-25" (click)="saveAccount()">Regístrate</button>
+                </div>
+                <div class="textPolitica">Al crear una cuenta aceptas nuestra <a href="">política de privacidad</a>
+                </div>
+                <hr>
+                <div class="account">
+                    <div class="notRegister">¿Ya tienes cuenta?</div>
+                    <a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalSesion">Inicia sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Verifica Correo -->
+<div class="modal fade" id="ModalVerificaCorreo" tabindex="-1" aria-labelledby="ModalVerificaCorreoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="titleVerifica">Verifica tu correo</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="iconCenter">
+                    <img src="./assets/modal/correo.svg" alt="">
+                </div>
+                <div class="descripText">
+                    Hemos enviado un correo de verificación a tu email ingresado, por favor valida el código a continuación para confirmar que tienes acceso.
+                </div>
+                <div class="action">
+                    <button data-bs-dismiss="modal" aria-label="Close" type="button" class="">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Eliminar Correo -->
+<div class="modal fade" id="ModalEliminaCorreo" tabindex="-1" aria-labelledby="ModalEliminaCorreoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="titleVerifica">¿Quieres eliminar tu correo?</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="descripText">
+                    Perderás acceso a visualizar todas las reservas que tengas con el correo <span>minombre@gmail.com</span>
+                </div>
+                <div class="descripText">
+                    Si quieres volver a visualizarlas tendrás que agregar y verificar nuevamente el correo.
+                </div>
+                <div class="action">
+                    <div class="btn secundary">
+                        Cancelar
+                    </div>
+                    <div class="btn primary">
+                        Aceptar
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cambio de password -->
+<div class="modal fade" id="ModalChangePass" tabindex="-1" aria-labelledby="ModalChangePassLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="titleVerifica">Recuperación de Contraseña</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="iconCenter">
+                    <img src="./assets/modal/correo.svg" alt="">
+                </div>
+                <div class="descripText">
+                    Se ha enviado a tu correo: <span>minombre@gmail.com</span> la nueva contraseña
+                </div>
+                <div class="action">
+                    <div class="btn primary">
+                        Aceptar
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -9,6 +9,7 @@ import { PreferenceService } from '../../../Services/preference/preference.servi
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.scss']
+
 })
 export class PerfilComponent implements OnInit {
   formPreference: FormGroup
@@ -176,7 +177,6 @@ export class PerfilComponent implements OnInit {
   getCountries() {
     this.preferenceService.countries().subscribe({
       next: response => {
-        console.log(response['Result'])
         this.paises = response['Result']
       }
     })

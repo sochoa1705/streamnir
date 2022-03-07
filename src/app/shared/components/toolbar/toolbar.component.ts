@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
+import { FileService } from 'src/app/Services/file.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-toolbar',
@@ -10,21 +12,35 @@ import { AccountsService, UserStorage } from 'src/app/Services/accounts.service'
 export class ToolbarComponent implements OnInit {
 
   @Input() menu: any[];
+  @ViewChild('drawer') sidenav: MatSidenav;
 
   isLogged = false;
-  user: UserStorage;
+  userStorage: UserStorage;
+
+  img:string;
 
   constructor(
     public route: Router,
-    public accountService: AccountsService
+    public accountService: AccountsService,
+    private fileService:FileService
   ) { }
 
   ngOnInit() {
     this.accountService.isLogged().subscribe(logged => {
       this.isLogged = logged;
       if (this.isLogged) {
-        this.user = this.accountService.getUserStorage();
+        this.userStorage = this.accountService.getUserStorage();
+       (!this.userStorage.image)?this.downloadImage(this.userStorage):null;
+
+        this.userStorage = this.accountService.getUserStorage();
       }
+    })
+  }
+
+  downloadImage(user:UserStorage){
+    this.fileService.getImage(user.id).subscribe(img=>{
+      this.userStorage.image = img;
+      this.accountService.guardarImage(img);
     })
   }
 
@@ -43,4 +59,10 @@ export class ToolbarComponent implements OnInit {
     this.accountService.signOut()
     this.route.navigateByUrl("/")
   }
+  close(){
+    this.sidenav.close()
+    console.log('cerro');
+    
+  }
+
 }

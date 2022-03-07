@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
 import { ICardAutocomplete } from './card-autocomplete.interface';
 import { MockedCardAutocomplete } from './card-autocomplete.mocked';
 
@@ -7,15 +7,29 @@ import { MockedCardAutocomplete } from './card-autocomplete.mocked';
   templateUrl: './card-autocomplete.component.html',
   styleUrls: ['./card-autocomplete.component.scss'],
 })
-export class CardAutocompleteComponent {
-    @Input() cardAutocomplete: Array<ICardAutocomplete> = MockedCardAutocomplete;
-    @Input() boxOrigen: boolean = false;
+export class CardAutocompleteComponent implements OnChanges {
+  @Input() cardAutocomplete: Array<ICardAutocomplete> = MockedCardAutocomplete;
+  @Input() boxOrigen: boolean = false;
+  @Input() inputText: string
+  @Output() itmSelected = new EventEmitter<ICardAutocomplete>()
+  str: any
+  lista: any[] = []
 
-    @Output() itmSelected = new EventEmitter<ICardAutocomplete>()
-
-
-    selectItm(itm:ICardAutocomplete){
-      this.itmSelected.emit(itm)
-    }
+  ngOnChanges(){
+    this.cardAutocomplete.map((pnt: ICardAutocomplete) => {
+      let title = pnt.title.toLowerCase()
+      this.inputText = this.inputText.toLowerCase()
+      if(title.includes(this.inputText)){
+          this.str = title.replace(this.inputText, `<span style="color:red">${this.inputText}</span>`)
+          pnt.texto = this.str
+      } else {
+        pnt.texto = pnt.title
+      }
+      return pnt
+    })
+  }
+  selectItm(itm: ICardAutocomplete) {    
+    this.itmSelected.emit(itm)
+  }
 
 }
