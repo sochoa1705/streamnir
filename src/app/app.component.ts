@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 //import { ConfirmDialogComponent } from './Component/confirm-dialog/confirm-dialog.component';
 import { AccountsService } from './Services/accounts.service';
 import { PopupService } from './Services/pop-up/popup.service';
+import { LoaderSubjectService } from './shared/components/loader/service/loader-subject.service';
 import { Guid } from './shared/utils';
 import { ValidatorsService } from './shared/validators/validators.service';
 
@@ -71,7 +72,9 @@ export class AppComponent implements OnInit {
     private _formBuilder: FormBuilder,
     public _matDialog: MatDialog,
     private _matSnackBar: MatSnackBar,
-    private _validatorsService: ValidatorsService
+    private _validatorsService: ValidatorsService,
+    public loaderSubjectService: LoaderSubjectService
+
   ) {
     this.cerrarBoxClicFuera();
 
@@ -87,6 +90,21 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+
+    const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!'
+    this.loaderSubjectService.showText(textSend)
+
+    this.loaderSubjectService.showLoader()
+
+
+    setTimeout(() => {
+      this.loaderSubjectService.closeLoader();
+      console.log('faklse');
+    }, 15000);
+
+
+
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
@@ -346,13 +364,19 @@ export class AppComponent implements OnInit {
 
 
   getPassword(email:string){
+
+    const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!'
+    this.loaderSubjectService.showText(textSend)
+    this.loaderSubjectService.showLoader()
+
+
     if(email.length <= 5){
       console.error("Ingrese email valido")
     }
     this._accountService.passwordSend(email).subscribe(resp=>{
-      console.log(resp);
       if(resp.IsSuccess){
-        this.toggleModalGetPass();
+        // this.toggleModalGetPass();
+        this.loaderSubjectService.closeLoader()
       }
     })
   }
