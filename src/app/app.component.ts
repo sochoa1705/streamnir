@@ -189,21 +189,29 @@ export class AppComponent implements OnInit {
     const validPerson = this.validationFormLogin(formPerson);
     const validBusiness = this.validationFormLogin(formBussines);
 
+    this.initLoading();
+
     if(this.isPersonLoggin && validPerson){
       this._accountService.signIn(this.login, this.isPersonLoggin).subscribe(resp=>{
+        this.closeLoading();
         if(resp.IsSuccess){
           this._accountService.guardarStorage(resp);
           this.closeModal();
         }
+      },()=>{
+        this.closeLoading();
       })
 
 
     }else if(!this.isPersonLoggin && validBusiness){
       this._accountService.signIn(this.loginB, this.isPersonLoggin).subscribe(resp=>{
         if(resp.IsSuccess){
+          this.closeLoading();
           this._accountService.guardarStorage(resp);
           this.closeModal();
         }
+      },()=>{
+        this.closeLoading();
       })
 
     }else if(!validPerson && this.isPersonLoggin){
@@ -231,6 +239,8 @@ export class AppComponent implements OnInit {
 
   saveSocialAccount(Firstname: string, FatherLastname: string, Email: string, SocialNetwork: "G" | "F", IdSocialNetwork: string, image:string) {
 
+    this.initLoading();
+
     const payload = {
       TrackingCode: Guid(),
       MuteExceptions: environment.muteExceptions,
@@ -254,6 +264,7 @@ export class AppComponent implements OnInit {
 
     this._accountService.saveAccount(payload).subscribe({ 
       next: (response) => {
+        this.closeLoading();
         const isSuccess = response.Result.IsSuccess;
 
         if (isSuccess) {
@@ -274,7 +285,7 @@ export class AppComponent implements OnInit {
         //this.loaderSubjectService.closeLoader()
       },
       error: (err) => {
-
+        this.closeLoading();
         console.log(err);
 
         //this.loaderSubjectService.closeLoader()
@@ -285,6 +296,7 @@ export class AppComponent implements OnInit {
   }
 
   savePersonalAccount(): void {
+    this.initLoading();
     if (this.personalAccountForm.invalid) {
       this.personalAccountForm.markAllAsTouched();
       return;
@@ -313,6 +325,7 @@ export class AppComponent implements OnInit {
 
       this._accountService.saveAccount(payload).subscribe({
         next: (response) => {
+          this.closeLoading();
           const isSuccess = response.Result.IsSuccess;
 
           if (isSuccess) {
@@ -337,7 +350,7 @@ export class AppComponent implements OnInit {
           //this.loaderSubjectService.closeLoader()
         },
         error: (err) => {
-
+          this.closeLoading();
           console.log(err);
 
           //this.loaderSubjectService.closeLoader()
