@@ -15,7 +15,6 @@ import { DirectivesModule } from 'src/app/shared/directives/directives.module';
 import { HoraPipe } from './pipes/hora.pipe';
 import { ModalsModule } from 'src/app/shared/components/modals/modals.module';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
-import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
 import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
 
 @NgModule({
@@ -37,6 +36,6 @@ import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vu
     ModalsModule
   ],
   exports: [ ComprarComponent ],
-  providers: [LoaderSubjectService, ReservaVuelosService]
+  providers: [ ReservaVuelosService]
 })
 export class ComprarModule { }
