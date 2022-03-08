@@ -11,21 +11,22 @@ import { environment } from 'src/environments/environment';
 //import { ConfirmDialogComponent } from './Component/confirm-dialog/confirm-dialog.component';
 import { AccountsService } from './Services/accounts.service';
 import { PopupService } from './Services/pop-up/popup.service';
+import { LoaderSubjectService } from './shared/components/loader/service/loader-subject.service';
 import { Guid } from './shared/utils';
 import { ValidatorsService } from './shared/validators/validators.service';
 
 
 export class LoginPerson {
   constructor(
-    public email = "jose.oshiro@gmail.com",
-    public password = "Oshiro123",
+    public email = "",
+    public password = "",
     public recorder = false
   ){}
 }
 export class LoginBusiness {
   constructor(
-    public email = "jose.oshiro@gmail.com",
-    public password = "Oshiro123",
+    public email = "",
+    public password = "",
     public recorder = false
   ){}
 }
@@ -71,7 +72,9 @@ export class AppComponent implements OnInit {
     private _formBuilder: FormBuilder,
     public _matDialog: MatDialog,
     private _matSnackBar: MatSnackBar,
-    private _validatorsService: ValidatorsService
+    private _validatorsService: ValidatorsService,
+    public loaderSubjectService: LoaderSubjectService
+
   ) {
     this.cerrarBoxClicFuera();
 
@@ -84,9 +87,19 @@ export class AppComponent implements OnInit {
     });
   }
 
+  initLoading(){
+    const textSend = 'CARGANDO'
+    this.loaderSubjectService.showText(textSend)
+    this.loaderSubjectService.showLoader();
+  }
+
+  closeLoading(){
+    this.loaderSubjectService.closeLoader();
+  }
 
 
   ngOnInit(): void {
+
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
@@ -176,21 +189,29 @@ export class AppComponent implements OnInit {
     const validPerson = this.validationFormLogin(formPerson);
     const validBusiness = this.validationFormLogin(formBussines);
 
+    this.initLoading();
+
     if(this.isPersonLoggin && validPerson){
       this._accountService.signIn(this.login, this.isPersonLoggin).subscribe(resp=>{
+        this.closeLoading();
         if(resp.IsSuccess){
           this._accountService.guardarStorage(resp);
           this.closeModal();
         }
+      },()=>{
+        this.closeLoading();
       })
 
 
     }else if(!this.isPersonLoggin && validBusiness){
       this._accountService.signIn(this.loginB, this.isPersonLoggin).subscribe(resp=>{
         if(resp.IsSuccess){
+          this.closeLoading();
           this._accountService.guardarStorage(resp);
           this.closeModal();
         }
+      },()=>{
+        this.closeLoading();
       })
 
     }else if(!validPerson && this.isPersonLoggin){
@@ -218,6 +239,8 @@ export class AppComponent implements OnInit {
 
   saveSocialAccount(Firstname: string, FatherLastname: string, Email: string, SocialNetwork: "G" | "F", IdSocialNetwork: string, image:string) {
 
+    this.initLoading();
+
     const payload = {
       TrackingCode: Guid(),
       MuteExceptions: environment.muteExceptions,
@@ -241,6 +264,7 @@ export class AppComponent implements OnInit {
 
     this._accountService.saveAccount(payload).subscribe({ 
       next: (response) => {
+        this.closeLoading();
         const isSuccess = response.Result.IsSuccess;
 
         if (isSuccess) {
@@ -261,7 +285,7 @@ export class AppComponent implements OnInit {
         //this.loaderSubjectService.closeLoader()
       },
       error: (err) => {
-
+        this.closeLoading();
         console.log(err);
 
         //this.loaderSubjectService.closeLoader()
@@ -272,6 +296,7 @@ export class AppComponent implements OnInit {
   }
 
   savePersonalAccount(): void {
+    this.initLoading();
     if (this.personalAccountForm.invalid) {
       this.personalAccountForm.markAllAsTouched();
       return;
@@ -300,6 +325,7 @@ export class AppComponent implements OnInit {
 
       this._accountService.saveAccount(payload).subscribe({
         next: (response) => {
+          this.closeLoading();
           const isSuccess = response.Result.IsSuccess;
 
           if (isSuccess) {
@@ -324,7 +350,7 @@ export class AppComponent implements OnInit {
           //this.loaderSubjectService.closeLoader()
         },
         error: (err) => {
-
+          this.closeLoading();
           console.log(err);
 
           //this.loaderSubjectService.closeLoader()
@@ -332,6 +358,47 @@ export class AppComponent implements OnInit {
         complete: () => { }
       });
     }
+  }
+
+  toggleModalGetPass(){
+    const modal = document.getElementById("ModalChangePass");
+
+    if(!modal){
+      return ;
+    }
+
+    bootstrap.Modal.getOrCreateInstance(modal).toggle();
+  }
+
+  closeModalRecovery(){
+    const btn = document.getElementById("btncloseRecovery");
+
+
+    if(!btn){
+      return ;
+    }
+
+    btn.click();
+  }
+
+
+
+  getPassword(email:string){
+
+    this.initLoading();
+
+    if(email.length <= 5){
+      console.error("Ingrese email valido")
+    }
+    this._accountService.passwordSend(email).subscribe(resp=>{
+      this.closeLoading();
+      if(resp.IsSuccess){
+        this.closeModalRecovery();
+         this.toggleModalGetPass();
+      }
+    },()=>{
+      this.closeLoading();
+    })
   }
 
   saveBusinessAccount(): void {
