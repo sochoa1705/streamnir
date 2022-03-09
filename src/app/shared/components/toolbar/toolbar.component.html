@@ -100,23 +100,21 @@
     <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>share</mat-icon>
     </button> -->
+    <mat-drawer position="end" #drawer>
+        <a class="m-3" (keydown.escape)="close()" (click)="close()">x</a>
+        <!-- <a>Iniciar Sesión</a> -->
+        <!-- <h6>Buscar</h6> -->
+        <ul>
+            <li *ngFor="let m of menu" [ngClass]="m.footer ? 'd-none' : ''">
+                <img [src]="m.icon" alt="">
+                <a [routerLink]="m.tab === '' ? m.link : [m.link, m.tab]" *ngIf="!m.footer && !m.external" routerLinkActive="active">
+                    {{ m.text }}
+                </a>
+                <a (click)="to(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
+                    {{ m.text }}
+                </a>
+                <hr>
+            </li>
+        </ul>
+    </mat-drawer>
 </mat-toolbar>
-
-<mat-drawer position="end" #drawer>
-    <a class="float-end m-3" (keydown.escape)="close()" (click)="close()">x</a>
-    <!-- <a>Iniciar Sesión</a> -->
-    <!-- <h6>Buscar</h6> -->
-    
-    <ul>
-        <li *ngFor="let m of menu" [ngClass]="m.footer ? 'd-none' : ''">
-            <img [src]="m.icon" alt="">
-            <a [routerLink]="m.tab === '' ? m.link : [m.link, m.tab]" *ngIf="!m.footer && !m.external" routerLinkActive="active">
-                {{ m.text }}
-            </a>
-            <a (click)="to(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
-                {{ m.text }}
-            </a>
-            <hr>
-        </li>
-    </ul>
-</mat-drawer>

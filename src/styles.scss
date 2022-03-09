@@ -4823,6 +4823,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
         a {
             cursor: pointer;
+            img{
+                max-height: 30px
+            }
         }
     }
 }
@@ -4918,7 +4921,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .boxDestino,
 .boxAero {
-    display: flex;
+    // display: flex;
     flex-wrap: wrap;
     width: 100%;
     .rowDestino,

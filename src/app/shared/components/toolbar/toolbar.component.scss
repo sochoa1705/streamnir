@@ -3,19 +3,22 @@
     flex: 1 1 auto;
 }
 .mat-drawer{
+    // position:absolute;
     width: 300px;
+    z-index:300;
     ul{
         list-style: none;
         padding-left: 10px;
         margin-top: 40px;
         li{
+            display: block!important;
             img{
                 width:20px;
                 height: auto;
                 margin-right:7px;
             }
             a{
-                color:#4B4B4B;
+                color:#4B4B4B!important;
                 font-size: 12px;
             }
         }
