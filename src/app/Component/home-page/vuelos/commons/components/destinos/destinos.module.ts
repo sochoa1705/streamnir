@@ -4,13 +4,17 @@ import { DestinosComponent } from './destinos.component';
 import { MaterialModule } from '../../../../../../shared/material.module';
 import { TabsModule } from '../../../../../../shared/components/tabs/tabs.module';
 import { DestinosService } from './services/destinos.service';
+import { ActivityComponent } from './activity/activity.component';
+import { HotelsComponent } from './hotels/hotels.component';
 
 
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
-    DestinosComponent
+    DestinosComponent,
+    ActivityComponent,
+    HotelsComponent
   ],
   imports: [
     CommonModule,
