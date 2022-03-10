@@ -1,8 +1,8 @@
 <div id="carouselExampleIndicatorsOffers" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators d-flex d-md-none">
         <ng-container *ngFor="let b of itemList; let indice = index">
-            <button *ngIf="b.id < 4" type="button" data-bs-target="#carouselExampleIndicatorsOffers" class="{{ b.class }}"
-                [attr.data-bs-slide-to]="indice" aria-current="true" aria-label="Slide 1"></button>
+            <button *ngIf="b.id < 4" type="button" data-bs-target="#carouselExampleIndicatorsOffers" class="{{ b.class }}" [attr.data-bs-slide-to]="indice"
+                aria-current="true" aria-label="Slide 1"></button>
         </ng-container>
     </div>
     <div class="carousel-inner row">
@@ -26,12 +26,11 @@
                                 <p class="card-text">{{ item.span }}</p>
                             </div>
                             <div class="col-4 pl-md-0 d-flex align-items-end justify-content-end">
-                                <a href="{{ item.link }}">
-                                    <svg class="arrow" width="11" height="18" viewBox="0 0 11 18" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M-9.24496e-08 15.885L6.79892 9L-6.94355e-07 2.115L2.09312 -9.14931e-08L11 9L2.09312 18L-9.24496e-08 15.885Z"
-                                            fill="white" />
+                                <!-- <a href="{{ item.link }}"> -->
+                                <a (click)="toOfertas(item)">
+                                    <svg class="arrow" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M-9.24496e-08 15.885L6.79892 9L-6.94355e-07 2.115L2.09312 -9.14931e-08L11 9L2.09312 18L-9.24496e-08 15.885Z" fill="white"
+                                        />
                                     </svg>
                                 </a>
                             </div>
@@ -44,13 +43,11 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    <button class="carousel-control-prev d-block d-md-none" type="button"
-        data-bs-target="#carouselExampleIndicatorsOffers" data-bs-slide="prev">
+    <button class="carousel-control-prev d-block d-md-none" type="button" data-bs-target="#carouselExampleIndicatorsOffers" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next d-block d-md-none" type="button"
-        data-bs-target="#carouselExampleIndicatorsOffers" data-bs-slide="next">
+    <button class="carousel-control-next d-block d-md-none" type="button" data-bs-target="#carouselExampleIndicatorsOffers" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>

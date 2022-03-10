@@ -19,12 +19,12 @@ import { IGeoTree } from './tab-vuelos.interfaces';
   templateUrl: './tab-vuelos.component.html',
   styleUrls: ['./tab-vuelos.component.scss']
 })
-export class TabVuelosComponent implements OnInit{
+export class TabVuelosComponent implements OnInit {
 
 
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
 
-  private _vuelosTab:SaveModelVuelos;
+  private _vuelosTab: SaveModelVuelos;
 
   @Input() set vuelosTab(value: SaveModelVuelos) {
     if (value) {
@@ -37,13 +37,13 @@ export class TabVuelosComponent implements OnInit{
     return this._vuelosTab;
   }
 
-  vuelosEscogidos:{} = {};
+  vuelosEscogidos: {} = {};
 
 
   form!: FormGroup;
   fromDate: NgbDate | null
-  citysOrigenSelect: IGeoTree[]= [];
-  citysDestinosSelect: IGeoTree[]= [];
+  citysOrigenSelect: IGeoTree[] = [];
+  citysDestinosSelect: IGeoTree[] = [];
   origen: any;
   destino: any;
   origenHotel: any;
@@ -58,11 +58,11 @@ export class TabVuelosComponent implements OnInit{
 
 
 
-  vuelos$:Observable<ICardAutocomplete[]>;
+  vuelos$: Observable<ICardAutocomplete[]>;
   vuelosLoading = false;
   vuelosInput$ = new Subject<string>();
 
-  vuelos2$:Observable<ICardAutocomplete[]>;
+  vuelos2$: Observable<ICardAutocomplete[]>;
   vuelosLoading2 = false;
   vuelosInput2$ = new Subject<string>();
 
@@ -70,7 +70,7 @@ export class TabVuelosComponent implements OnInit{
 
   constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar, private router: Router
-  ){
+  ) {
     this.createForm();
 
 
@@ -81,92 +81,92 @@ export class TabVuelosComponent implements OnInit{
 
 
   ngOnInit(): void {
-      this.loadVuelosOrigen();
-      this.loadVuelosDestino();
+    this.loadVuelosOrigen();
+    this.loadVuelosDestino();
   }
 
 
   private loadVuelosOrigen() {
     this.vuelos$ = concat(
-        of([]),
-        this.vuelosInput$.pipe(
-            distinctUntilChanged(),
-            debounceTime(400),
-            tap(() => this.vuelosLoading = true),
-            switchMap(term => this.destineService.getGeoTree(term).pipe(
-                catchError(() => of([])), // empty list on error
-                tap(() => this.vuelosLoading = false)
-            )),
-            map(item=> this.convertFormatAutocomplete(item))
-        )
+      of([]),
+      this.vuelosInput$.pipe(
+        distinctUntilChanged(),
+        debounceTime(400),
+        tap(() => this.vuelosLoading = true),
+        switchMap(term => this.destineService.getGeoTree(term).pipe(
+          catchError(() => of([])), // empty list on error
+          tap(() => this.vuelosLoading = false)
+        )),
+        map(item => this.convertFormatAutocomplete(item))
+      )
     )
   }
 
   private loadVuelosDestino() {
     this.vuelos2$ = concat(
-        of([]),
-        this.vuelosInput2$.pipe(
-            distinctUntilChanged(),
-            debounceTime(400),
-            tap(() => this.vuelosLoading2 = true),
-            switchMap(term => this.destineService.getGeoTree(term).pipe(
-                catchError(() => of([])), // empty list on error
-                tap(() => this.vuelosLoading2 = false)
-            )),
-            map(item=> this.convertFormatAutocomplete(item))
-        )
+      of([]),
+      this.vuelosInput2$.pipe(
+        distinctUntilChanged(),
+        debounceTime(400),
+        tap(() => this.vuelosLoading2 = true),
+        switchMap(term => this.destineService.getGeoTree(term).pipe(
+          catchError(() => of([])), // empty list on error
+          tap(() => this.vuelosLoading2 = false)
+        )),
+        map(item => this.convertFormatAutocomplete(item))
+      )
     )
   }
 
-  convertFormatAutocomplete(array:IGeoTree[]):ICardAutocomplete[]{
+  convertFormatAutocomplete(array: IGeoTree[]): ICardAutocomplete[] {
 
-      const nuevoArray:ICardAutocomplete[] = [];
+    const nuevoArray: ICardAutocomplete[] = [];
 
-      array.forEach((x) => {
+    array.forEach((x) => {
 
-        const elementFind = nuevoArray.find(item=>item.id == x.aerocodiata);
+      const elementFind = nuevoArray.find(item => item.id == x.aerocodiata);
 
-        if(!elementFind && x.tn_iata_padre == "0"){
-          const obj = {
-            id: x.aerocodiata,
-            codigo: x.city_code,
-            title: x.city,
-            children: []
-          }
-          nuevoArray.push(obj)
-        }else if(!elementFind && x.tn_iata_padre == "2"){
+      if (!elementFind && x.tn_iata_padre == "0") {
+        const obj = {
+          id: x.aerocodiata,
+          codigo: x.city_code,
+          title: x.city,
+          children: []
+        }
+        nuevoArray.push(obj)
+      } else if (!elementFind && x.tn_iata_padre == "2") {
 
-          const obj = {
-            id: x.aerocodiata,
-            codigo: "",
-            title: "",
-            children: [
-              {
-                id: x.aerocodiata,
-                codigo: x.city_code,
-                title: x.city,
-                children: []
-              }
-            ]
-          }
-
-          nuevoArray.push(obj)
-
-        }else if(elementFind && x.tn_iata_padre == "2"){
-
-          elementFind.children.push( 
+        const obj = {
+          id: x.aerocodiata,
+          codigo: "",
+          title: "",
+          children: [
             {
               id: x.aerocodiata,
               codigo: x.city_code,
               title: x.city,
               children: []
             }
-          )
+          ]
         }
 
-      });
+        nuevoArray.push(obj)
 
-      return nuevoArray;
+      } else if (elementFind && x.tn_iata_padre == "2") {
+
+        elementFind.children.push(
+          {
+            id: x.aerocodiata,
+            codigo: x.city_code,
+            title: x.city,
+            children: []
+          }
+        )
+      }
+
+    });
+
+    return nuevoArray;
   }
 
 
@@ -191,22 +191,22 @@ export class TabVuelosComponent implements OnInit{
     this.router.navigateByUrl(url);
   }
 
-  validateTab(){
+  validateTab() {
     const errors = [];
 
-    if(!this.isValidate()){
+    if (!this.isValidate()) {
       errors.push("Error al definir los pasajeros, debe agregar al menos uno");
     }
-    if(this.form.controls['origen'].invalid){
+    if (this.form.controls['origen'].invalid) {
       errors.push("El origen es requerido");
     }
-    if(this.form.controls['destino'].invalid){
+    if (this.form.controls['destino'].invalid) {
       errors.push("El destino es requerido");
     }
-    if(!this.toDate){
+    if (!this.toDate) {
       errors.push("La fecha de inicio es requerido");
     }
-    if(!this.fromDate){
+    if (!this.fromDate) {
       errors.push("La fecha final es requerido");
     }
 
@@ -221,7 +221,7 @@ export class TabVuelosComponent implements OnInit{
 
     if (errors.length > 0) {
       this.openSnackBar(errors.join(" - "))
-      return; 
+      return;
     }
 
     const url = this.getUrl();
@@ -242,6 +242,10 @@ export class TabVuelosComponent implements OnInit{
   public getUrl() {
     let url = ''
     let params = this.getParams();
+    console.log(params)
+    console.log(params.origen.id)
+    this.addTag(params.idOrigen, params.idDestino, params.startDate, params.endDate)
+
     // nuevo
     let adultosCount = this.distributionObject['adultos'],
       ninosCount = this.distributionObject['ninos'],
@@ -286,5 +290,14 @@ export class TabVuelosComponent implements OnInit{
     this.toDate = value.toDate;
     this.fromDate = value.fromDate;
   }
-
+  addTag(origen: string, destino: string, startDate: string, endDate: string) {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'vuelosConsulta_Nmviajes',
+      'vuelos_origen_id': origen,
+      'vuelos_destino_id': destino,
+      'vuelos_fecha_salida': startDate,
+      'vuelos_fecha_regreso': endDate
+    })
+  }
 }

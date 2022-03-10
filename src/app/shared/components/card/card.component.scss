@@ -108,9 +108,9 @@ a {
     border-radius: 50%;
     background: $red_light;
     padding: 10px 13px;
-    color: $white;
+    color: $white!important;
     text-decoration: none;
-    
+    cursor: pointer;
     transition: all 200ms ease-in-out;
     &:hover {
         border-radius: 30px;

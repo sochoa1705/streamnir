@@ -17,8 +17,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatSidenavModule } from '@angular/material/sidenav';
-
+import {
+  MatSidenavModule,
+  MAT_DRAWER_DEFAULT_AUTOSIZE
+} from "@angular/material/sidenav";
 @NgModule({
   imports: [
     CommonModule,
@@ -61,6 +63,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatSnackBarModule,
     MatRadioModule,
     MatSidenavModule,
-  ]
+  ],
+  providers: [
+    { provide: MAT_DRAWER_DEFAULT_AUTOSIZE, useValue: { autosize: true } }
+  ],
 })
 export class MaterialModule { }

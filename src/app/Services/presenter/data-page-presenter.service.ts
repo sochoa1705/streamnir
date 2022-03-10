@@ -12,30 +12,40 @@ export class DataPagePresenterService {
         id: 0,
         img: "3-PlayaDelCarmen.jpg",
         key: true,
+        titulo: 'detalle slider',
+        detalle: 'detalle slider',
         class: 'active'
       },
       {
 
         id: 1,
         img: "3-PlayaDelCarmen.jpg",
-        key: true,
+        titulo: 'detalle slider 1',
+        detalle: 'detalle slider 1',
+                key: true,
       },
       {
 
         id: 2,
         img: "3-PlayaDelCarmen.jpg",
+        titulo: 'detalle slider 2',
+        detalle: 'detalle slider 2',
         key: true,
       },
       {
 
         id: 3,
         img: "3-PlayaDelCarmen.jpg",
+        titulo: 'detalle slider 3',
+        detalle: 'detalle slider 3',
         key: true,
       },
       {
 
         id: 4,
         img: "3-PlayaDelCarmen.jpg",
+        titulo: 'detalle slider 4',
+        detalle: 'detalle slider 4',
         key: true,
       },
       {
