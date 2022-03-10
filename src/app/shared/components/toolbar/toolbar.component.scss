@@ -3,9 +3,9 @@
     flex: 1 1 auto;
 }
 .mat-drawer{
-    // position:absolute;
+    position:fixed;
     width: 300px;
-    z-index:300;
+    // z-index:300;
     ul{
         list-style: none;
         padding-left: 10px;
@@ -23,7 +23,18 @@
             }
         }
     }
+    &-container{
+        z-index:300;
+    }
+    
 }
+mat-drawer-container {
+    min-height: 0px;
+    z-index:300;
+    max-height: 500px; /* doesn't work*/
+    height: fit-content; /* doesn't work*/
+    /* height: 100vh; This Gives 100% View Height with a scrollbar*/
+  }
 .mat-toolbar {
     background-color: $red;
     color: $white;

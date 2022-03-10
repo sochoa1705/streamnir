@@ -1,4 +1,4 @@
-.card{
+.card {
     &__content {
         position: relative;
         height: 372px;
@@ -6,7 +6,7 @@
         @media (max-width: 768px) {
             height: 180px;
         }
-        &>img{
+        &>img {
             border-radius: 2px;
             position: absolute;
             object-fit: cover;
@@ -19,5 +19,31 @@
                 position: relative;
             }
         }
+    }
+}
+
+.publicidad {
+    height: 220px;
+    position: relative;
+    // width: 100%;
+    overflow: hidden;
+    margin-top: 50px;
+    img.left {
+        border-radius: 10px 0 0 10px;
+        position: absolute;
+        object-fit: cover;
+        object-position: top;
+        height: 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+    img.right {
+        border-radius: 0 10px 10px 0;
+        // position: absolute;
+        object-fit: cover;
+        object-position: top;
+        height: 100%;
+        max-width: 100%;
+        width: 100%;
     }
 }

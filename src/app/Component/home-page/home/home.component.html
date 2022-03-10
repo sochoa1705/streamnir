@@ -22,19 +22,14 @@
     <!-- END OFERTAS -->
 
     <!-- PAQUETES -->
-    <div class="container-fluid px-5">
+    <!-- <div class="container-fluid px-5">
         <div class="row pt-5 pb-md-3 mb-4">
             <div class="col-12">
                 <h2 class="titleHome">
                     <strong>Paquetes turísticos </strong> ¡Elige ahora tu paquete nacional o internacional!</h2>
-                <!-- <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                <app-title *ngIf="section.section === 'Paquetes'" [title]="section.title" [title2]="section.title2">
-                </app-title>
-            </ng-container> -->
             </div>
             <div class="clearfix"></div>
         </div>
-
         <div class="row">
             <div *ngFor="let packb of packagesService.packages" class="col-12 col-md-{{ packb.banner }}">
                 <app-package *ngIf="packb.banner && !packb.fly" [image]="packb.image" [label]="packb.label" [banner]="packb.banner" [span]="packb.span"
@@ -42,8 +37,6 @@
             </div>
             <div class="clearfix"></div>
         </div>
-
-
         <div class="row text-md-end text-center py-2 py-md-5">
             <div class="col-12">
                 <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
@@ -52,7 +45,7 @@
             </div>
             <div class="clearfix"></div>
         </div>
-    </div>
+    </div> -->
     <!-- END PAQUETES -->
 
     <!-- MAPA -->
@@ -67,6 +60,20 @@
 <google-map height="500px" width="100%" [zoom]="zoom" [center]="center" [options]="options"></google-map> -->
     <!-- END MAPA -->
 
+    <!-- PUBLICIDAD -->
+    <div class="container-fluid px-5 mt-5">
+        <div class="row mb-5">
+            <div class="col-6 publicidad pe-0">
+                <img class="left" src="/assets/publicidad/left.png" alt="publicidad">
+            </div>
+            <div class="col-6 publicidad ps-0">
+                <img class="right" src="/assets/publicidad/right.png" alt="publicidad">
+            </div>
+        </div>
+    </div>
+
+    <!-- END PUBLICIDAD -->
+
     <!-- VUELOS -->
     <div class="container-fluid px-4">
         <div class="row mb-5">
@@ -74,7 +81,7 @@
                 <!-- <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
                 <app-title *ngIf="section.section === 'Vuelos'" [title]="section.title"></app-title>
             </ng-container> -->
-                <h2 class="titleHome ms-4">¡Corre y Vuela! con estas
+                <h2 class="titleHome ms-4 mt-5">¡Corre y Vuela! con estas
                     <strong>súper ofertas de Vuelos</strong> saliendo
                     <strong> desde Lima</strong>
                 </h2>

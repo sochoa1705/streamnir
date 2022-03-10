@@ -100,8 +100,11 @@
     <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>share</mat-icon>
     </button> -->
-    <mat-drawer position="end" #drawer>
-        <a class="m-3" (keydown.escape)="close()" (click)="close()">x</a>
+</mat-toolbar>
+<mat-drawer-container>
+    <!-- <mat-drawer position="end" #drawer> -->
+    <mat-drawer fxFlex #drawer mode="side" position="end">
+        <a class="m-3" (keydown.escape)="close()" (click)="drawer.toggle()">x</a>
         <!-- <a>Iniciar Sesión</a> -->
         <!-- <h6>Buscar</h6> -->
         <ul>
@@ -117,4 +120,4 @@
             </li>
         </ul>
     </mat-drawer>
-</mat-toolbar>
+</mat-drawer-container>

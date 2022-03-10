@@ -16,5 +16,16 @@ export class AsideComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  toSlider(e: any) {
+    console.log(e)
+    this.addTag(e.titulo, e.detalle)
+  }
+  addTag(titulo: string, detalle: string) {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'nav_sliderDestinos',
+      'slider_titulo': titulo,
+      'slider_detalle': detalle
+    })
+  }
 }
