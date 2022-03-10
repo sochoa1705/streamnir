@@ -6,8 +6,8 @@ import { TabsModule } from '../../../../../../shared/components/tabs/tabs.module
 import { DestinosService } from './services/destinos.service';
 import { ActivityComponent } from './activity/activity.component';
 import { HotelsComponent } from './hotels/hotels.component';
-
-
+import { CarouselModule } from 'primeng/carousel';
+import { GalleriaModule } from 'primeng/galleria';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -20,10 +20,12 @@ import { HotelsComponent } from './hotels/hotels.component';
     CommonModule,
     MaterialModule,
     TabsModule,
+    CarouselModule,
+    GalleriaModule
   ],
   exports: [
     DestinosComponent
   ],
-  providers:[DestinosService]
+  providers: [DestinosService]
 })
 export class DestinosModule { }

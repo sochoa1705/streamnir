@@ -14,8 +14,8 @@ const routes: Routes = [
         (m) => m.HomePageModule
       )
   },
-  { path: 'hoteles', component: HotelsComponent },
-  { path: 'tickets', component: ActivityComponent },
+  { path: 'hoteles/ciudad/:city/sitio/:site/vuelos/:isflight', component: HotelsComponent },
+  { path: 'actividades/ciudad/:city/sitio/:site/vuelos/:isflight', component: ActivityComponent },
   { path: '**', component: HomeComponent }
 ]
 
