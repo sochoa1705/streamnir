@@ -1,0 +1,13 @@
+<div class="cardDestino">
+  <div class="boxCards" *ngFor="let elem of tickets">
+    <div class="imageHead">
+      <img *ngIf="elem.ImageUrls[0]" src="{{ elem.ImageUrls[0] }}" alt="">
+    </div>
+    <div class="contCardDest">
+      <div class="cardTitulo">{{ elem.Name }}</div>
+      <div class="cardDuracion" *ngIf="elem.Duration">
+        <mat-icon>restore</mat-icon> Duración: {{ elem.Duration }}
+      </div>
+    </div>
+  </div>
+</div>
