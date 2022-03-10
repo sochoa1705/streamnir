@@ -288,10 +288,7 @@ export class AppComponent implements OnInit {
             duration: 2000
           });
         } else {
-          this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
-            verticalPosition: 'top',
-            duration: 2000
-          });
+          this.notification.showNotificacion("Error","Error del servidor",10);
         }
 
 
@@ -299,7 +296,7 @@ export class AppComponent implements OnInit {
       },
       error: (err) => {
         this.closeLoading();
-        console.log(err);
+        this.notification.showNotificacion("Error","Error del servidor",10);
 
         //this.loaderSubjectService.closeLoader()
       },
@@ -311,6 +308,8 @@ export class AppComponent implements OnInit {
   savePersonalAccount(): void {
     this.initLoading();
     if (this.personalAccountForm.invalid) {
+      this.closeLoading();
+      this.notification.showNotificacion("Error", "Error de validación")
       this.personalAccountForm.markAllAsTouched();
       return;
     }
@@ -352,10 +351,7 @@ export class AppComponent implements OnInit {
               duration: 2000
             });
           } else {
-            this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
-              verticalPosition: 'top',
-              duration: 2000
-            });
+            this.notification.showNotificacion("Error","Error del servidor",10);
           }
 
           this.personalAccountForm.reset();
@@ -364,7 +360,7 @@ export class AppComponent implements OnInit {
         },
         error: (err) => {
           this.closeLoading();
-          console.log(err);
+          this.notification.showNotificacion("Error","Error del servidor",10);
 
           //this.loaderSubjectService.closeLoader()
         },
@@ -401,13 +397,15 @@ export class AppComponent implements OnInit {
     this.initLoading();
 
     if(email.length <= 5){
-      console.error("Ingrese email valido")
+      this.notification.showNotificacion("Error","Ingrese email valido",5);
     }
     this._accountService.passwordSend(email).subscribe(resp=>{
       this.closeLoading();
       if(resp.IsSuccess){
         this.closeModalRecovery();
          this.toggleModalGetPass();
+      }else{
+        this.notification.showNotificacion("Error","Error del servidor",10);
       }
     },()=>{
       this.closeLoading();
@@ -453,17 +451,14 @@ export class AppComponent implements OnInit {
               duration: 2000
             });
           } else {
-            this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
-              verticalPosition: 'top',
-              duration: 2000
-            });
+            this.notification.showNotificacion("Error","Ingrese datos correctos",10);
           }
 
           //this.loaderSubjectService.closeLoader()
         },
         error: (err) => {
 
-          console.log(err);
+          this.notification.showNotificacion("Error","Error del servidor",10);
 
           //this.loaderSubjectService.closeLoader()
         },
