@@ -5587,9 +5587,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 0 25px 20px 25px;
         }
     }
-    .p-carousel-indicators,
-    .p-carousel-prev,
-    .p-carousel-next {
+    .p-carousel-indicators {
+    // .p-carousel-prev,
+    // .p-carousel-next {
         display: none;
     }
     .loadingBoxCard {
@@ -5612,6 +5612,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
         }
     }
+    .p-galleria-item {
+        height: 340px;
+        img {
+            height: 100%
+        }
+    }    
 }
 
 @media (max-width: 640px) {
@@ -5810,9 +5816,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 0 25px 20px 25px;
         }
     }
-    .p-carousel-indicators,
-    .p-carousel-prev,
-    .p-carousel-next {
+    .p-carousel-indicators {
+    //.p-carousel-prev,
+    //.p-carousel-next {
         display: none;
     }
     .loadingBoxCard {
@@ -5834,7 +5840,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 color: #DF0C30;
             }
         }
-    }    
+    }
+    .p-galleria-item {
+        height: 340px;
+        img {
+            height: 100%
+        }
+    }
 }
 
 @media (max-width: 640px) {
