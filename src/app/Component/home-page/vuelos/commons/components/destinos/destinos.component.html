@@ -409,7 +409,7 @@
             <iframe src="http://localhost:4200/#/tickets" frameborder="0" allowfullscreen></iframe>
         </div> -->
 
-        <app-activity></app-activity>
+        <app-activity [city]="codigoCiudad" [site]="site" [isflight]="isFlight"></app-activity>
 
         <div class="ofrecido">
             Ofrecido por GetYourGuide.
@@ -471,7 +471,7 @@
         <iframe src="http://localhost:4200/#/hoteles" frameborder="0" allowfullscreen></iframe>
     </div> -->
 
-    <app-hotels></app-hotels>
+    <app-hotels [city]="codigoCiudad" [site]="site" [isflight]="isFlight"></app-hotels>
 </div>
 
 <div class="container-fluid mt-5 px-0">

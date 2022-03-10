@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HotelService } from 'src/app/api/api-hotels/services';
 import { Guid } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
@@ -12,20 +13,58 @@ export class HotelsComponent implements OnInit {
 
   hotels: Array<any>;
 
-  constructor(
-    private _hotelsService: HotelService
-  ) { }
+  @Input()
+  city: any;
 
-  ngOnInit(): void {
-    this.getAllHotels();
+  @Input()
+  site: any;
+
+  @Input()
+  isflight: any;
+
+  responsiveOptions: any[];
+
+  constructor(
+    private _hotelsService: HotelService,
+    private _activatedRoute: ActivatedRoute
+  ) {
+    this.responsiveOptions = [
+      {
+        breakpoint: '1024px',
+        numVisible: 3,
+        numScroll: 3
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 2,
+        numScroll: 2
+      },
+      {
+        breakpoint: '560px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
   }
 
-  getAllHotels() {
+  ngOnInit(): void {
+    this._activatedRoute.params.subscribe(params => {
+
+      let city: string = this.city || params.city;
+      let site: string = this.site || params.site;
+      let isflight: boolean = this.isflight === undefined ? params.isflight : this.isflight;
+
+      this.getAllHotels(city, site, isflight);
+    });
+  }
+
+  getAllHotels(city: string, site: string, isflight: boolean) {
+
     this._hotelsService.v1ApiHotelGet({
       'Parameter.Country': 'PE',
-      'Parameter.City': 'CUZ',
-      'Parameter.Site': 'nm_viajes',
-      'Parameter.IsFlight': false,
+      'Parameter.City': city,
+      'Parameter.Site': site,
+      'Parameter.IsFlight': isflight,
       TrackingCode: Guid(),
       MuteExceptions: environment.muteExceptions,
       'Caller.Company': "Agil",
@@ -39,5 +78,4 @@ export class HotelsComponent implements OnInit {
   validateScore(position: number, score: string): string {
     return Math.round(Number(score)) < position ? 'star-null' : 'star';
   }
-
 }
