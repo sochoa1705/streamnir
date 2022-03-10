@@ -108,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="boxContPerfil btnBox" (click)="showOption('mnuEliminar')">
+                <div class="boxContPerfil btnBox" (click)="toggleModalEliminar()">
                     <div class="boxCenter">
                         <div class="subTitle">
                             Eliminar mi cuenta
@@ -634,6 +634,37 @@
     </div>
 </div>
 <!-- END PERFIL -->
+
+
+
+
+<!-- Modal Eliminar Correo -->
+<div class="modal fade" id="ModalEliminaCorreo" tabindex="-1" aria-labelledby="ModalEliminaCorreoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="titleVerifica">¿Quieres eliminar tu cuenta?</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="descripText">
+                    Perderás acceso a visualizar todas las reservas que tengas con el correo <span>{{userStorage.email}}</span>
+                </div>
+                <div class="descripText">
+                    Si quieres volver a visualizarlas tendrás que agregar y verificar nuevamente el correo.
+                </div>
+                <div class="action">
+                    <div data-bs-dismiss="modal" aria-label="Close" class="btn secundary">
+                        Cancelar
+                    </div>
+                    <div (click)="eliminarCuenta()" class="btn primary">
+                        Aceptar
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- FOOTER -->
