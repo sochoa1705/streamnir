@@ -25,9 +25,9 @@
                                 <div class="msgError">Ingresa tu email</div>
                             </div>
                             <div class="elementRow">
-                                <input type="text" class="form-control" name="password" [(ngModel)]="login.password" placeholder="Contraseña" required>
+                                <input type="password" #passwordP class="form-control" name="password" [(ngModel)]="login.password" placeholder="Contraseña" required>
                                 <div class="msgError">Ingresa tu contraseña</div>
-                                <div class="iconPass">
+                                <div (click)="togglePassword(passwordP)" class="iconPass">
                                     <img src="./assets/modal/eye.png" alt="">
                                 </div>
                             </div>
@@ -66,9 +66,9 @@
                                 <div *ngIf="loginBEmail.invalid" class="msgError">Ingresa tu email</div>
                             </div>
                             <div class="elementRow" [ngClass]="{'error': loginBPassword.invalid && submitBusiness}">
-                                <input #loginBPassword="ngModel" type="text" class="form-control" name="password" [(ngModel)]="loginB.password" placeholder="Contraseña" required>
+                                <input #loginBPassword="ngModel" type="password" class="form-control" #passwordB name="password" [(ngModel)]="loginB.password" placeholder="Contraseña" required>
                                 <div *ngIf="loginBPassword.invalid" class="msgError">Ingresa tu contraseña</div>
-                                <div class="iconPass">
+                                <div (click)="togglePassword(passwordB)" class="iconPass">
                                     <img src="./assets/modal/eye.png" alt="">
                                 </div>
                             </div>
