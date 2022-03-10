@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NotificationModule } from './shared/components/notification/notification.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -34,7 +35,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     SocialLoginModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NotificationModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy },
   {
