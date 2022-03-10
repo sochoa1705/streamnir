@@ -10,6 +10,7 @@ import { filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 //import { ConfirmDialogComponent } from './Component/confirm-dialog/confirm-dialog.component';
 import { AccountsService } from './Services/accounts.service';
+import { NotificationService } from './Services/notification.service';
 import { PopupService } from './Services/pop-up/popup.service';
 import { LoaderSubjectService } from './shared/components/loader/service/loader-subject.service';
 import { Guid } from './shared/utils';
@@ -73,7 +74,8 @@ export class AppComponent implements OnInit {
     public _matDialog: MatDialog,
     private _matSnackBar: MatSnackBar,
     private _validatorsService: ValidatorsService,
-    public loaderSubjectService: LoaderSubjectService
+    public loaderSubjectService: LoaderSubjectService,
+    private notification:NotificationService
 
   ) {
     this.cerrarBoxClicFuera();
@@ -197,8 +199,12 @@ export class AppComponent implements OnInit {
         if(resp.IsSuccess){
           this._accountService.guardarStorage(resp);
           this.closeModal();
+        }else{
+          this.notification.showNotificacion("Error","Error de autenticación",10);
+          this.closeLoading();
         }
       },()=>{
+        this.notification.showNotificacion("Error","Error de autenticación",10);
         this.closeLoading();
       })
 
@@ -211,17 +217,24 @@ export class AppComponent implements OnInit {
           this.closeModal();
         }
       },()=>{
+        this.notification.showNotificacion("Error","Error de validación",5);
         this.closeLoading();
       })
 
     }else if(!validPerson && this.isPersonLoggin){
       this.submitPerson = true; 
+      this.notification.showNotificacion("Error","Error de validación",5);
+      this.closeLoading();
       // this.openSnackBar("El usuario y la contraseña son requeridos")
     }else if(!validBusiness && !this.isPersonLoggin){
       this.submitBusiness = true;
+      this.notification.showNotificacion("Error","Error de validación",5);
+      this.closeLoading();
       // this.openSnackBar("El usuario y la contraseña son requeridos")
     }else{
-      this.openSnackBar("Ocurrio un error")
+      this.openSnackBar("Ocurrio un error");
+      this.notification.showNotificacion("Error","Error de validación",5);
+      this.closeLoading();
     }
 
   }
