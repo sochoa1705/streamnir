@@ -1037,9 +1037,16 @@ section {
 
 .box-container .box-perfil .boxContact {
     display: flex;
-    margin-top: 20px;
+    flex-direction: column;
+    padding: 10px 0 10px 0;
     border-top: 1px solid #E4E5E7;
-    padding: 20px 20px 0 20px;
+    margin-top: 20px;
+
+    @include tablet {
+        flex-direction: row;
+        padding: 20px 20px 0 20px;
+    }
+
 }
 
 .box-container .box-perfil .boxContact .contacto {
@@ -1083,16 +1090,23 @@ section {
 }
 
 .box-container .box-content .portlet-izq {
-    width: 265px;
-    margin-right: 35px;
-    margin-top: -10px;
-    border: 0.5px solid #E4E5E7;
-    box-sizing: border-box;
-    border-radius: 5px 5px 5px 0px;
-    height: 376px;
-    background: #fff;
-    padding: 20px 34px;
-    z-index: 9;
+
+    display: none;
+    
+    @include tablet {
+        display: block;
+        width: 265px;
+        margin-right: 35px;
+        margin-top: -10px;
+        border: 0.5px solid #E4E5E7;
+        box-sizing: border-box;
+        border-radius: 5px 5px 5px 0px;
+        height: 376px;
+        background: #fff;
+        padding: 20px 34px;
+        z-index: 9;
+    }
+
 }
 
 .box-container .box-content .portlet-izq .iconViaje {
@@ -1109,8 +1123,15 @@ section {
 
 .box-container .box-content .portlet-der {
     flex: 1 1 100%;
-    margin: 30px 30px 0 0;
     box-sizing: border-box;
+    padding: 0 16px 0 10px;
+    margin-top: 20px;
+
+    @include tablet {
+        margin: 30px 30px 0 0;
+        padding: 0;
+    }
+
 }
 
 .box-container .box-content .portlet-der .viewPerfil {
@@ -1126,9 +1147,19 @@ section {
     border-radius: 5px;
     display: flex;
     padding: 15px 27px;
-    width: 400px;
-    margin-right: 40px;
     margin-bottom: 40px;
+    flex-direction: column;
+
+    &--row{
+        flex-direction: row;
+    }
+
+    
+    @include tablet {
+        width: 400px;
+        margin-right: 40px;
+        flex-direction: row;
+    }
 }
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil.btnBox {
@@ -1139,7 +1170,17 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 25px;
+    margin-bottom: 10px;
+    @include tablet {
+        margin-bottom: 0;
+        margin-right: 25px;
+    }
+}
+.box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight {
+    text-align: center;
+    @include tablet {
+       text-align: left;
+    }
 }
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxLeft img {
@@ -1211,7 +1252,11 @@ section {
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight .boxBtn {
     display: flex;
-    justify-content: end;
+    justify-content: center;
+
+    @include tablet {
+        justify-content: end;
+    }
 }
 
 .contentSecuritySeg {
