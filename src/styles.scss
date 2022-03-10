@@ -5587,6 +5587,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 0 25px 20px 25px;
         }
     }
+    .p-carousel-indicators,
     .p-carousel-prev,
     .p-carousel-next {
         display: none;
@@ -5809,6 +5810,31 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 0 25px 20px 25px;
         }
     }
+    .p-carousel-indicators,
+    .p-carousel-prev,
+    .p-carousel-next {
+        display: none;
+    }
+    .loadingBoxCard {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex: 1 1 auto;
+        padding: 20px;
+        &.show {
+            display: flex;
+        }
+        .iconLoading {
+            width: 60px;
+            height: 60px;
+            img {
+                width: 100%;
+            }
+            .texto {
+                color: #DF0C30;
+            }
+        }
+    }    
 }
 
 @media (max-width: 640px) {
