@@ -1,0 +1,26 @@
+<div class="cardHotel">
+
+  <div class="boxCards" *ngFor="let elem of hotels">
+    <div class="imageHead">
+      <img *ngIf="elem.Images[0]" src="{{ elem.Images[0] }}" alt="">
+    </div>
+    <div class="cardTitulo">{{ elem.Name }}</div>
+    <div class="cardStar">
+      <div class="estrellas">
+        <div [ngClass]="validateScore(1, elem.Rating.Score)"></div>
+        <div [ngClass]="validateScore(2, elem.Rating.Score)"></div>
+        <div [ngClass]="validateScore(3, elem.Rating.Score)"></div>
+        <div [ngClass]="validateScore(4, elem.Rating.Score)"></div>
+        <div [ngClass]="validateScore(5, elem.Rating.Score)"></div>
+      </div>
+      <div class="iconos" *ngIf="elem.Services">
+        <div *ngFor="let service of elem.Services.slice(0, 4)" class="{{ service.Icon }}"></div>
+        <!-- <div class="restaurant"></div>
+        <div class="cocktail"></div>
+        <div class="wifi-signal"></div>
+        <div class="fitness"></div> -->
+      </div>
+    </div>
+    <!-- <div class="cardOpinion">Evaluación de los huéspedes 8.8 de 10</div> -->
+  </div>
+</div>
