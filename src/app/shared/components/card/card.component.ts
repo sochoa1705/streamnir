@@ -26,7 +26,18 @@ export class CardComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.itemList);
-    
   }
-
+  toOfertas(e: any) {
+    console.log(e)
+    this.addTag(e.destiny, e.from, e.price)
+  }
+  addTag(titulo: string, detalle: string, precio: number) {
+    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
+    (<any><any>window).dataLayer.push({
+      'event': 'nav_ofertasVuelos',
+      'oferta_titulo': titulo,
+      'oferta_detalle': detalle,
+      'oferta_precio': precio
+    })
+  }
 }
