@@ -561,6 +561,9 @@ section {
             background-color: $red_light !important;
             height: 3px;
             min-width: 212px !important;
+            @media (max-width: 640px) {
+                min-width: 140px!important;
+            }
         }
         .mat-tab-body-content {
             padding: 2rem 0;
@@ -6787,6 +6790,9 @@ button.customers {
     }
     .modal-dialog {
         width: 490px;
+        @media (max-width: 640px) {
+            width: calc(100% - 15px);
+        }
     }
     .modal-body {
         .elementRow {
@@ -6927,6 +6933,9 @@ button.customers {
     .modal-dialog {
         width: 918px;
         max-width: 918px;
+        @media (max-width: 640px) {
+            width: calc(100% - 15px);
+        }
         .modal-content {
             flex-direction: row;
             border: none;
@@ -6952,6 +6961,10 @@ button.customers {
                 img {
                     width: 127.02px;
                 }
+                @media (max-width: 640px) {
+                    width: 100%;
+                    height: 320px;
+                }
             }
             .recoveryRight {
                 flex: 1 1 auto;
@@ -6962,6 +6975,9 @@ button.customers {
                     right: 20px;
                     top: 20px;
                     font-size: 12px;
+                    @media (max-width: 640px) {
+                        width: 32px !important;
+                    }
                 }
                 .titleRecovery {
                     font-family: Open Sans;
@@ -6971,6 +6987,9 @@ button.customers {
                     text-align: center;
                     color: #4B4B4B;
                     margin: 40px 0 25px 0;
+                    @media (max-width: 640px) {
+                        margin: 15px 0 15px 0;
+                    }
                 }
                 .elementRow {
                     display: flex;
@@ -7035,6 +7054,9 @@ button.customers {
                     line-height: 21px;
                     letter-spacing: 0.15px;
                     border-radius: 5px;
+                    @media (max-width: 640px) {
+                        width: 50% !important;
+                    }
                 }
                 .account {
                     display: flex;
@@ -7062,6 +7084,10 @@ button.customers {
                     }
                 }
             }
+            @media (max-width: 640px) {
+                flex-direction: column;
+                overflow: hidden;
+            }
         }
     }
 }
@@ -7073,6 +7099,9 @@ button.customers {
                 .elementRow {
                     .form-control {
                         margin-bottom: 55px;
+                        @media (max-width: 640px) {
+                            margin-bottom: 35px;
+                        }
                     }
                 }
             }
@@ -7588,6 +7617,10 @@ button.customers {
         justify-content: center;
         cursor: pointer;
     }
+    @media (max-width: 640px) {
+        min-width: calc(100% - 20px);
+        left: 10px;
+    }
 }
 
 .boxUser {
@@ -7685,6 +7718,9 @@ button.customers {
                     background-color: #df0c30 !important;
                     height: 3px !important;
                     min-width: 219px !important;
+                    @media (max-width: 640px) {
+                        min-width: 140px!important;
+                    }
                 }
                 .elementRow {
                     display: flex;
