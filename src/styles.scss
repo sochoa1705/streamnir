@@ -5538,6 +5538,46 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 //height: 215px;
             }
         }
+    }
+    .p-carousel-indicators {
+        display: none;
+    }
+    .loadingBoxCard {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex: 1 1 auto;
+        padding: 20px;
+        &.show {
+            display: flex;
+        }
+        .iconLoading {
+            width: 60px;
+            height: 60px;
+            img {
+                width: 100%;
+            }
+            .texto {
+                color: #DF0C30;
+            }
+        }
+    }
+    .p-carousel-prev,
+    .p-galleria-item-prev{
+        background: url("./assets/prev.png")no-repeat;
+        cursor: pointer;
+    }
+    .p-carousel-next,
+    .p-galleria-item-next{
+        background: url("./assets/next.png")no-repeat;
+        cursor: pointer;
+    }    
+    .p-galleria-item {
+        height: 340px;
+        img {
+            height: 100%
+        }
+    }    
         .cardTitulo {
             font-family: Open Sans;
             font-weight: bold;
@@ -5545,7 +5585,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             line-height: 21px;
             letter-spacing: 0.15px;
             color: #4B4B4B;
-            padding: 20px 25px;
+            padding: 0px 15px;
         }
         .cardDuracion {
             font-family: Montserrat;
@@ -5585,39 +5625,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             letter-spacing: 0.1px;
             color: #4B4B4B;
             padding: 0 25px 20px 25px;
-        }
-    }
-    .p-carousel-indicators {
-    // .p-carousel-prev,
-    // .p-carousel-next {
-        display: none;
-    }
-    .loadingBoxCard {
-        display: none;
-        align-items: center;
-        justify-content: center;
-        flex: 1 1 auto;
-        padding: 20px;
-        &.show {
-            display: flex;
-        }
-        .iconLoading {
-            width: 60px;
-            height: 60px;
-            img {
-                width: 100%;
-            }
-            .texto {
-                color: #DF0C30;
-            }
-        }
-    }
-    .p-galleria-item {
-        height: 340px;
-        img {
-            height: 100%
-        }
-    }    
+        }    
 }
 
 @media (max-width: 640px) {
@@ -5748,13 +5756,51 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
             }
         }
+    }  
+    .p-carousel-indicators {
+        display: none;
+    }
+    .loadingBoxCard {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex: 1 1 auto;
+        padding: 20px;
+        &.show {
+            display: flex;
+        }
+        .iconLoading {
+            width: 60px;
+            height: 60px;
+            img {
+                width: 100%;
+            }
+            .texto {
+                color: #DF0C30;
+            }
+        }
+    }
+    .p-carousel-prev,
+    .p-galleria-item-prev{
+        background: url("./assets/prev.png")no-repeat;
+    }
+    .p-carousel-next,
+    .p-galleria-item-next{
+        background: url("./assets/next.png")no-repeat;
+    }      
+    .p-galleria-item {
+        height: 340px;
+        img {
+            height: 100%
+        }
+    }
         .cardTitulo {
             font-family: Open Sans;
             font-weight: bold;
-            font-size: 28px;
+            font-size: 20px;
             line-height: 36px;
             color: #4B4B4B;
-            padding: 20px 25px;
+            padding: 0px 15px;
         }
         .cardStar {
             display: flex;
@@ -5814,39 +5860,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             letter-spacing: 0.1px;
             color: #1EAEA5;
             padding: 0 25px 20px 25px;
-        }
-    }
-    .p-carousel-indicators {
-    //.p-carousel-prev,
-    //.p-carousel-next {
-        display: none;
-    }
-    .loadingBoxCard {
-        display: none;
-        align-items: center;
-        justify-content: center;
-        flex: 1 1 auto;
-        padding: 20px;
-        &.show {
-            display: flex;
-        }
-        .iconLoading {
-            width: 60px;
-            height: 60px;
-            img {
-                width: 100%;
-            }
-            .texto {
-                color: #DF0C30;
-            }
-        }
-    }
-    .p-galleria-item {
-        height: 340px;
-        img {
-            height: 100%
-        }
-    }
+        }    
 }
 
 @media (max-width: 640px) {
