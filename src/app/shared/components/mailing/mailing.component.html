@@ -13,24 +13,25 @@
             </svg>
             <h1 class="mt-5 titleBold">{{ title }}</h1>
             <h3 class="mb-5">{{ span }}</h3>
-            <form action="">
+            <form [formGroup]="formMAiling">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 col-md-4 offset-0 offset-md-1 input-group-lg pe-0">
-                            <input class="form-control" placeholder="Ingrese su nombre" type="text">
+                        <div class="col-12 col-md-4 offset-0 offset-md-1 input-group-lg pe-0 text-start">
+                            <input class="form-control" formControlName="nombreMail" placeholder="Ingrese su nombre" type="text">
+                            <span class="valid" *ngIf="getMessage(MSG_NOMBRE) != MSG_EMPTY">{{ getMessage(MSG_NOMBRE) }}</span>
                         </div>
-                        <div class="col-12 col-md-4 offset-0 input-group-lg pl-0">
-                            <input class="form-control" placeholder="Correo electrónico" type="text">
+                        <div class="col-12 col-md-4 offset-0 input-group-lg pl-0  text-start">
+                            <input class="form-control" formControlName="correoMail" placeholder="Correo electrónico" type="text">
+                            <span class="valid" *ngIf="getMessage(MSG_CORREO) != MSG_EMPTY">{{ getMessage(MSG_CORREO) }}</span>
                         </div>
                         <div class="col-md-2 col-12 text-center text-md-start px-0">
                             <button (click)="subscribe(true)">Suscríbete</button>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-
                     <div class="row py-md-3 py-0">
                         <div class="col-md-10 offset-md-1 col-12 offset-0 text-center text-md-start px-4">
-                            <mat-checkbox class="check-link"></mat-checkbox>
+                            <mat-checkbox formControlName="politicasMail" class="check-link"></mat-checkbox>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#ModalDatosOpcionales">Acepto la Política De Protección De Datos
                             </a>
                             <a href="#" class="pl-md-3 centerMobile">
@@ -40,6 +41,8 @@
                                     <path d="M5.9409 7.70555C5.84327 7.80318 5.84327 7.96147 5.9409 8.0591C6.03853 8.15673 6.19682 8.15673 6.29445 8.0591L5.9409 7.70555ZM13.25 0.999971C13.25 0.8619 13.1381 0.749972 13 0.749971L10.75 0.749971C10.612 0.749971 10.5 0.8619 10.5 0.999971C10.5 1.13804 10.612 1.24997 10.75 1.24997L12.75 1.24997L12.75 3.24997C12.75 3.38804 12.862 3.49997 13 3.49997C13.1381 3.49997 13.25 3.38804 13.25 3.24997L13.25 0.999971ZM6.29445 8.0591L13.1768 1.17675L12.8233 0.823195L5.9409 7.70555L6.29445 8.0591Z"
                                         fill="#009AED" />
                                 </svg> Datos opcionales</a>
+                                
+                                <span class="valid" *ngIf="getMessage(MSG_POLITICA) != MSG_EMPTY">{{ getMessage(MSG_POLITICA) }}</span>
                         </div>
                         <!-- <div class="col-md-3 offset-md-0 col-12 offset-0 text-md-start text-center">
                     </div> -->
@@ -47,8 +50,10 @@
                     </div>
                     <div class="row">
                         <div class="col-md-10 offset-md-1 col-12 text-md-start text-center px-4">
-                            <mat-checkbox class="example-margin">Autorizo el uso de mi Información para la publicidad
+                            <mat-checkbox formControlName="autorizoMail" class="example-margin">Autorizo el uso de mi Información para la publicidad
                             </mat-checkbox>
+                            <span class="valid" *ngIf="getMessage(MSG_AUTORIZO) != MSG_EMPTY">{{ getMessage(MSG_AUTORIZO) }}</span>
+
                         </div>
                         <div class="clearfix"></div>
                     </div>

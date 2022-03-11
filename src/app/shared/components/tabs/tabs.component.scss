@@ -11,10 +11,14 @@ article {
 }
 
 :host ::ng-deep .mat {
+    &-tab-header-pagination-chevron{
+        border-color: $red!important;
+        box-shadow: 0px 0px 9px 7px rgb(255 255 255 / 70%);
+    }
     &-tab-header-pagination-before,
     &-tab-header-pagination-after {
         @media (max-width: 768px) {
-            display: none !important;
+            // display: none !important;
         }
     }
     &-tab-label {

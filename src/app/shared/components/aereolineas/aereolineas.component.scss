@@ -86,3 +86,17 @@
         display: none;
     }
 }
+
+.contentSliderImg{
+    display: none;
+    &.active{
+        display: flex;
+        width: 100%;
+        &>a>img{
+            height: 15px;
+            cursor: pointer;
+            margin: 0 6px;
+        }
+    }
+
+}

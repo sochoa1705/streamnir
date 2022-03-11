@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-mailing',
@@ -6,20 +7,74 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./mailing.component.scss']
 })
 export class MailingComponent implements OnInit {
+  formMAiling: FormGroup
+  MSG_NOMBRE: string = 'nombreMail'
+  MSG_CORREO: string = 'correoMail'
+  MSG_POLITICA: string = 'politicasMail'
+  MSG_AUTORIZO: string = 'autorizoMail'
+  MSG_EMPTY: string = 'none'
+  errors: any[] = []
+
   @Input() title!: string;
   @Input() span!: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.createForm()
+  }
+  createForm() {
+    this.formMAiling = new FormGroup({
+      nombreMail: new FormControl(),
+      correoMail: new FormControl(),
+      politicasMail: new FormControl(),
+      autorizoMail: new FormControl()
+    })
   }
   subscribe(e: any) {
-    console.log('Suscrito')
-    if(e){
-      this.addTag()
-    } else {
-      this.addTagError('codigo error', 'descripcion del error', 'Mensaje')
+    let valid = this.validForm()
+    if (valid) {
+      console.log('Suscrito')
+      if (valid) {
+        this.addTag()
+      } else {
+        this.addTagError('codigo error', 'descripcion del error', 'Mensaje')
+      }
     }
+  }
+  validForm() {
+    this.errors = []
+    const letter = new RegExp('^[a-zA-Z ]+$', 'i')
+    const number = new RegExp('^[0-9]+$', 'i')
+    const alphanumeric = new RegExp('^[a-zA-Z0-9 ]+$', 'i')
+    const mail = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}')
+  
+    let nombreMail: string = this.formMAiling.getRawValue()['nombreMail']
+    if (nombreMail === undefined || nombreMail === null || nombreMail.trim() === '') {
+      this.errors.push({ name: this.MSG_NOMBRE, message: 'Campo requerido' })
+    }
+    let correoMail: string = this.formMAiling.getRawValue()['correoMail']
+    if (correoMail === undefined || correoMail === null || correoMail.trim() === '') {
+      this.errors.push({ name: this.MSG_CORREO, message: 'Campo requerido' })
+    }
+    if (!mail.test(correoMail)) {
+      this.errors.push({ name: this.MSG_CORREO, message: 'Ingresar correo válido' })
+    }
+    let politicasMail: boolean = this.formMAiling.getRawValue()['politicasMail']
+    if (politicasMail === undefined || politicasMail === null || politicasMail == false) {
+      this.errors.push({ name: this.MSG_POLITICA, message: 'Políticas es requerido' })
+    }
+    let autorizoMail: boolean = this.formMAiling.getRawValue()['autorizoMail']
+    if (autorizoMail === undefined || autorizoMail === null || autorizoMail == false) {
+      this.errors.push({ name: this.MSG_AUTORIZO, message: 'Campo requerido' })
+    }
+    return this.errors.length === 0
+  }
+  getMessage(messageKey: any) {
+    return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
+  }
+  getMessageArray(index: any, messageKey: any) {
+    return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
   addTag() {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];

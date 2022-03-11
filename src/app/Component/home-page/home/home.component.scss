@@ -28,22 +28,37 @@
     // width: 100%;
     overflow: hidden;
     margin-top: 50px;
-    img.left {
-        border-radius: 10px 0 0 10px;
-        position: absolute;
-        object-fit: cover;
-        object-position: top;
-        height: 100%;
-        max-width: 100%;
-        width: 100%;
+    @media (max-width: 768px) {
+        &:first-child{
+            margin-top: 0px;
+        }
     }
-    img.right {
-        border-radius: 0 10px 10px 0;
-        // position: absolute;
-        object-fit: cover;
-        object-position: top;
-        height: 100%;
-        max-width: 100%;
-        width: 100%;
+    img{
+        &.left {
+            border-radius: 10px 0 0 10px;
+            position: absolute;
+            object-fit: cover;
+            object-position: top;
+            height: 100%;
+            max-width: 100%;
+            width: 100%;
+            @media (max-width: 768px) {
+                border-radius: 0px;
+                position: relative;
+            }
+        }
+        &.right {
+            border-radius: 0 10px 10px 0;
+            // position: absolute;
+            object-fit: cover;
+            object-position: top;
+            height: 100%;
+            max-width: 100%;
+            width: 100%;
+            @media (max-width: 768px) {
+                border-radius: 0px;
+                position: relative;
+            }
+        }
     }
 }
