@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { interval, Observable } from 'rxjs';
-import { AsidePresenterService } from 'src/app/Services/presenter/aside/aside-presenter.service';
-import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
+import { interval } from 'rxjs';
 import { IDestinos } from './destino.models';
 import { DestinosService } from './services/destinos.service';
 
@@ -28,9 +26,7 @@ export class DestinosComponent implements OnInit {
 
   constructor(
     private ar: ActivatedRoute,
-    private service: DestinosService,
-    public dataPagePresenterService: DataPagePresenterService,
-    public asidePresenterService: AsidePresenterService
+    private service: DestinosService
   ) {
     this.site = "nm_viajes";
     this.isFlight = false;

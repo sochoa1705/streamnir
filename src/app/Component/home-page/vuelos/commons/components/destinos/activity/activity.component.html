@@ -1,5 +1,14 @@
 <div class="cardDestino">
 
+  <div class="loadingBoxCard" [ngClass]="{show : !tickets}">
+    <div class="iconLoading">
+      <img src="./assets/loader.gif" alt="">
+    </div>
+    <div class="texto">
+      Cargando actividades...
+    </div>
+  </div>
+
   <p-carousel [value]="tickets" [numVisible]="3" [numScroll]="3" [responsiveOptions]="responsiveOptions">
     <ng-template let-product pTemplate="item">
       <div class="product-item">
@@ -8,7 +17,6 @@
           <p-galleria [(value)]="product.ImageUrls" [responsiveOptions]="responsiveOptions"
             [containerStyle]="{'max-width': '640px'}" [numVisible]="1" [circular]="true" [showItemNavigators]="true"
             [showThumbnails]="false">
-
             <ng-template pTemplate="item" let-item>
               <img [src]="item" [title]="product.Name" style="width: 100%; display: block;" />
             </ng-template>

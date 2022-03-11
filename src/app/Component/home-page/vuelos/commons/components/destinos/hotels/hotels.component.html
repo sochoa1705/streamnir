@@ -1,5 +1,14 @@
 <div class="cardHotel">
 
+  <div class="loadingBoxCard" [ngClass]="{show : !hotels}">
+    <div class="iconLoading">
+      <img src="./assets/loader.gif" alt="">
+    </div>
+    <div class="texto">
+      Cargando hoteles...
+    </div>
+  </div>
+
   <p-carousel [value]="hotels" [numVisible]="3" [numScroll]="3" [responsiveOptions]="responsiveOptions">
     <ng-template let-product pTemplate="item">
       <div class="product-item">
@@ -17,7 +26,6 @@
         </div>
 
         <div class="cardTitulo">{{ product.Name }}</div>
-        <span>{{product.Rating.Score}}</span>
 
         <div class="cardStar">
           <div class="estrellas">
