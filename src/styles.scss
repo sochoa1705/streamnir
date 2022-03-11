@@ -561,6 +561,9 @@ section {
             background-color: $red_light !important;
             height: 3px;
             min-width: 212px !important;
+            @media (max-width: 640px) {
+                min-width: 140px!important;
+            }
         }
         .mat-tab-body-content {
             padding: 2rem 0;
@@ -5572,69 +5575,69 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
     }
     .p-carousel-prev,
-    .p-galleria-item-prev{
+    .p-galleria-item-prev {
         background: url("./assets/prev.png")no-repeat;
         cursor: pointer;
     }
     .p-carousel-next,
-    .p-galleria-item-next{
+    .p-galleria-item-next {
         background: url("./assets/next.png")no-repeat;
         cursor: pointer;
-    }    
+    }
     .p-galleria-item {
         height: 340px;
         img {
             height: 100%
         }
-    }    
-        .cardTitulo {
-            font-family: Open Sans;
-            font-weight: bold;
-            font-size: 16px;
-            line-height: 21px;
-            letter-spacing: 0.15px;
-            color: #4B4B4B;
-            padding: 0px 15px;
+    }
+    .cardTitulo {
+        font-family: Open Sans;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 21px;
+        letter-spacing: 0.15px;
+        color: #4B4B4B;
+        padding: 0px 15px;
+    }
+    .cardDuracion {
+        font-family: Montserrat;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
+        padding: 0 25px 20px 25px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+    }
+    .cardStar {
+        display: flex;
+        padding: 0 25px 20px 25px;
+        gap: 5px;
+        .star {
+            width: 18px;
+            height: 17px;
+            background: url("./assets/vuelos/star.png")no-repeat;
         }
-        .cardDuracion {
-            font-family: Montserrat;
-            font-size: 14px;
-            line-height: 21px;
-            letter-spacing: 0.1px;
-            color: #4B4B4B;
-            padding: 0 25px 20px 25px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
+        .star-mid {
+            width: 18px;
+            height: 17px;
+            background: url("./assets/vuelos/star-mid.png")no-repeat;
         }
-        .cardStar {
-            display: flex;
-            padding: 0 25px 20px 25px;
-            gap: 5px;
-            .star {
-                width: 18px;
-                height: 17px;
-                background: url("./assets/vuelos/star.png")no-repeat;
-            }
-            .star-mid {
-                width: 18px;
-                height: 17px;
-                background: url("./assets/vuelos/star-mid.png")no-repeat;
-            }
-            .star-null {
-                width: 18px;
-                height: 17px;
-                background: url("./assets/vuelos/star-null.png")no-repeat;
-            }
+        .star-null {
+            width: 18px;
+            height: 17px;
+            background: url("./assets/vuelos/star-null.png")no-repeat;
         }
-        .cardOpinion {
-            font-family: Montserrat;
-            font-size: 12px;
-            line-height: 18px;
-            letter-spacing: 0.1px;
-            color: #4B4B4B;
-            padding: 0 25px 20px 25px;
-        }    
+    }
+    .cardOpinion {
+        font-family: Montserrat;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
+        padding: 0 25px 20px 25px;
+    }
 }
 
 @media (max-width: 640px) {
@@ -5701,12 +5704,105 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+.cardDestino {
+    &.show {
+        .p-carousel-prev,
+        .p-carousel-next {
+            display: flex;
+            padding: 18px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer !important;
+            background-color: #DADADA !important;
+            &:hover {
+                background-color: rgba(223, 12, 48, 1)!important;
+                ;
+            }
+        }
+        .p-carousel-prev {
+            background: url(./assets/left-white.png) center center no-repeat;
+        }
+        .p-carousel-next {
+            background: url(./assets/right-white.png) center center no-repeat;
+        }
+        .p-carousel-container {
+            .p-carousel-items-content {
+                .p-carousel-items-container {
+                    .p-carousel-item {
+                        .p-galleria-content {
+                            .p-galleria-item-prev,
+                            .p-galleria-item-next {
+                                display: flex;
+                                padding: 18px;
+                                border-radius: 50%;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                background-position: center center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .p-ripple {
+        display: none;
+    }
+}
+
 .cardHotel {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
     //margin: 50px 0;
     margin-bottom: 20px;
+    &.show {
+        .p-carousel-prev,
+        .p-carousel-next {
+            display: flex;
+            padding: 18px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer !important;
+            background-color: #DADADA !important;
+            &:hover {
+                background-color: rgba(223, 12, 48, 1)!important;
+                ;
+            }
+        }
+        .p-carousel-prev {
+            background: url(./assets/left-white.png) center center no-repeat;
+        }
+        .p-carousel-next {
+            background: url(./assets/right-white.png) center center no-repeat;
+        }
+        .p-carousel-container {
+            .p-carousel-items-content {
+                .p-carousel-items-container {
+                    .p-carousel-item {
+                        .p-galleria-content {
+                            .p-galleria-item-prev,
+                            .p-galleria-item-next {
+                                display: flex;
+                                padding: 18px;
+                                border-radius: 50%;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                background-position: center center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .p-ripple {
+        display: none;
+    }
     .boxCards {
         max-width: 434px;
         background: #FFFFFF;
@@ -5765,7 +5861,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
             }
         }
-    }  
+    }
     .p-carousel-indicators {
         display: none;
     }
@@ -5790,86 +5886,88 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
     }
     .p-carousel-prev,
-    .p-galleria-item-prev{
+    .p-galleria-item-prev {
         background: url("./assets/prev.png")no-repeat;
     }
     .p-carousel-next,
-    .p-galleria-item-next{
+    .p-galleria-item-next {
         background: url("./assets/next.png")no-repeat;
-    }      
+    }
     .p-galleria-item {
         height: 340px;
+        border-radius: 11px 11px 0 0;
+        overflow: hidden;
         img {
             height: 100%
         }
     }
-        .cardTitulo {
-            font-family: Open Sans;
-            font-weight: bold;
-            font-size: 20px;
-            line-height: 36px;
-            color: #4B4B4B;
-            padding: 0px 15px;
-        }
-        .cardStar {
+    .cardTitulo {
+        font-family: Open Sans;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 36px;
+        color: #4B4B4B;
+        padding: 0px 15px;
+    }
+    .cardStar {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 25px 20px 25px;
+        .estrellas {
             display: flex;
-            justify-content: space-between;
-            padding: 0 25px 20px 25px;
-            .estrellas {
-                display: flex;
-                gap: 5px;
-                .star {
-                    width: 18px;
-                    height: 17px;
-                    background: url("./assets/vuelos/star.png")no-repeat;
-                }
-                .star-mid {
-                    width: 18px;
-                    height: 17px;
-                    background: url("./assets/vuelos/star-mid.png")no-repeat;
-                }
-                .star-null {
-                    width: 18px;
-                    height: 17px;
-                    background: url("./assets/vuelos/star-null.png")no-repeat;
-                }
+            gap: 5px;
+            .star {
+                width: 18px;
+                height: 17px;
+                background: url("./assets/vuelos/star.png")no-repeat;
             }
-            .iconos {
-                display: flex;
-                gap: 5px;
-                .car,
-                .restaurant,
-                .cocktail,
-                .wifi-signal,
-                .fitness {
-                    width: 20px;
-                    height: 20px;
-                }
-                .car {
-                    background: url("./assets/vuelos/car.png")no-repeat;
-                }
-                .restaurant {
-                    background: url("./assets/vuelos/restaurant.png")no-repeat;
-                }
-                .cocktail {
-                    background: url("./assets/vuelos/cocktail.png")no-repeat;
-                }
-                .wifi-signal {
-                    background: url("./assets/vuelos/wifi-signal.png")no-repeat;
-                }
-                .fitness {
-                    background: url("./assets/vuelos/fitness.png")no-repeat;
-                }
+            .star-mid {
+                width: 18px;
+                height: 17px;
+                background: url("./assets/vuelos/star-mid.png")no-repeat;
+            }
+            .star-null {
+                width: 18px;
+                height: 17px;
+                background: url("./assets/vuelos/star-null.png")no-repeat;
             }
         }
-        .cardOpinion {
-            font-family: Montserrat;
-            font-size: 14px;
-            line-height: 21px;
-            letter-spacing: 0.1px;
-            color: #1EAEA5;
-            padding: 0 25px 20px 25px;
-        }    
+        .iconos {
+            display: flex;
+            gap: 5px;
+            .car,
+            .restaurant,
+            .cocktail,
+            .wifi-signal,
+            .fitness {
+                width: 20px;
+                height: 20px;
+            }
+            .car {
+                background: url("./assets/vuelos/car.png")no-repeat;
+            }
+            .restaurant {
+                background: url("./assets/vuelos/restaurant.png")no-repeat;
+            }
+            .cocktail {
+                background: url("./assets/vuelos/cocktail.png")no-repeat;
+            }
+            .wifi-signal {
+                background: url("./assets/vuelos/wifi-signal.png")no-repeat;
+            }
+            .fitness {
+                background: url("./assets/vuelos/fitness.png")no-repeat;
+            }
+        }
+    }
+    .cardOpinion {
+        font-family: Montserrat;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        color: #1EAEA5;
+        padding: 0 25px 20px 25px;
+    }
 }
 
 @media (max-width: 640px) {
@@ -6701,6 +6799,9 @@ button.customers {
     }
     .modal-dialog {
         width: 490px;
+        @media (max-width: 640px) {
+            width: calc(100% - 15px);
+        }
     }
     .modal-body {
         .elementRow {
@@ -6841,6 +6942,9 @@ button.customers {
     .modal-dialog {
         width: 918px;
         max-width: 918px;
+        @media (max-width: 640px) {
+            width: calc(100% - 15px);
+        }
         .modal-content {
             flex-direction: row;
             border: none;
@@ -6866,6 +6970,10 @@ button.customers {
                 img {
                     width: 127.02px;
                 }
+                @media (max-width: 640px) {
+                    width: 100%;
+                    height: 320px;
+                }
             }
             .recoveryRight {
                 flex: 1 1 auto;
@@ -6876,6 +6984,9 @@ button.customers {
                     right: 20px;
                     top: 20px;
                     font-size: 12px;
+                    @media (max-width: 640px) {
+                        width: 32px !important;
+                    }
                 }
                 .titleRecovery {
                     font-family: Open Sans;
@@ -6885,6 +6996,9 @@ button.customers {
                     text-align: center;
                     color: #4B4B4B;
                     margin: 40px 0 25px 0;
+                    @media (max-width: 640px) {
+                        margin: 15px 0 15px 0;
+                    }
                 }
                 .elementRow {
                     display: flex;
@@ -6949,6 +7063,9 @@ button.customers {
                     line-height: 21px;
                     letter-spacing: 0.15px;
                     border-radius: 5px;
+                    @media (max-width: 640px) {
+                        width: 50% !important;
+                    }
                 }
                 .account {
                     display: flex;
@@ -6976,6 +7093,10 @@ button.customers {
                     }
                 }
             }
+            @media (max-width: 640px) {
+                flex-direction: column;
+                overflow: hidden;
+            }
         }
     }
 }
@@ -6987,6 +7108,9 @@ button.customers {
                 .elementRow {
                     .form-control {
                         margin-bottom: 55px;
+                        @media (max-width: 640px) {
+                            margin-bottom: 35px;
+                        }
                     }
                 }
             }
@@ -7502,6 +7626,10 @@ button.customers {
         justify-content: center;
         cursor: pointer;
     }
+    @media (max-width: 640px) {
+        min-width: calc(100% - 20px);
+        left: 10px;
+    }
 }
 
 .boxUser {
@@ -7599,6 +7727,9 @@ button.customers {
                     background-color: #df0c30 !important;
                     height: 3px !important;
                     min-width: 219px !important;
+                    @media (max-width: 640px) {
+                        min-width: 140px!important;
+                    }
                 }
                 .elementRow {
                     display: flex;
