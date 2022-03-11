@@ -1,47 +1,45 @@
-<div class="cardHotel">
+<div class="cardHotel" [ngClass]="{show : hotels}">
 
-  <div class="loadingBoxCard" [ngClass]="{show : !hotels}">
-    <div class="iconLoading">
-      <img src="./assets/loader.gif" alt="">
-    </div>
-    <div class="texto">
-      Cargando hoteles...
-    </div>
-  </div>
-
-  <p-carousel [value]="hotels" [numVisible]="3" [numScroll]="3" [responsiveOptions]="responsiveOptions">
-    <ng-template let-product pTemplate="item">
-      <div class="product-item">
-        <div class="product-item-content">
-
-          <p-galleria [(value)]="product.Images" [responsiveOptions]="responsiveOptions"
-            [containerStyle]="{'max-width': '640px'}" [numVisible]="1" [circular]="true" [showItemNavigators]="true"
-            [showThumbnails]="false">
-
-            <ng-template pTemplate="item" let-item>
-              <img [src]="item" [title]="product.Name" style="width: 100%; display: block;" />
-            </ng-template>
-          </p-galleria>
-
+    <div class="loadingBoxCard" [ngClass]="{show : !hotels}">
+        <div class="iconLoading">
+            <img src="./assets/loader.gif" alt="">
         </div>
-
-        <div class="cardTitulo">{{ product.Name }}</div>
-
-        <div class="cardStar">
-          <div class="estrellas">
-            <div [ngClass]="validateScore(1, product.Rating.Score)"></div>
-            <div [ngClass]="validateScore(2, product.Rating.Score)"></div>
-            <div [ngClass]="validateScore(3, product.Rating.Score)"></div>
-            <div [ngClass]="validateScore(4, product.Rating.Score)"></div>
-            <div [ngClass]="validateScore(5, product.Rating.Score)"></div>
-          </div>
-          <div class="iconos" *ngIf="product.Services">
-            <div *ngFor="let service of product.Services.slice(0, 4)" class="{{ service.Icon }}"></div>
-          </div>
+        <div class="texto">
+            Cargando hoteles...
         </div>
+    </div>
 
-      </div>
-    </ng-template>
-  </p-carousel>
+    <p-carousel [value]="hotels" [numVisible]="3" [numScroll]="3" [responsiveOptions]="responsiveOptions">
+        <ng-template let-product pTemplate="item">
+            <div class="product-item">
+                <div class="product-item-content">
+
+                    <p-galleria [(value)]="product.Images" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="1" [circular]="true" [showItemNavigators]="true" [showThumbnails]="false">
+
+                        <ng-template pTemplate="item" let-item>
+                            <img [src]="item" [title]="product.Name" style="width: 100%; display: block;" />
+                        </ng-template>
+                    </p-galleria>
+
+                </div>
+
+                <div class="cardTitulo">{{ product.Name }}</div>
+
+                <div class="cardStar">
+                    <div class="estrellas">
+                        <div [ngClass]="validateScore(1, product.Rating.Score)"></div>
+                        <div [ngClass]="validateScore(2, product.Rating.Score)"></div>
+                        <div [ngClass]="validateScore(3, product.Rating.Score)"></div>
+                        <div [ngClass]="validateScore(4, product.Rating.Score)"></div>
+                        <div [ngClass]="validateScore(5, product.Rating.Score)"></div>
+                    </div>
+                    <div class="iconos" *ngIf="product.Services">
+                        <div *ngFor="let service of product.Services.slice(0, 4)" class="{{ service.Icon }}"></div>
+                    </div>
+                </div>
+
+            </div>
+        </ng-template>
+    </p-carousel>
 
 </div>
