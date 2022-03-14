@@ -54,9 +54,10 @@ export class DestinationsComponent implements OnInit {
     }).subscribe((res: any) => {
       debugger
       this.destination = JSON.parse(res).Result;
-      let obj = this.destination.Galleries[0];
-      this.destination.Galleries.push('https://upload.wikimedia.org/wikipedia/commons/4/44/Plaza_Mayor_de_Madrid_06.jpg');
-      this.destination.Galleries.push('http://img.emg-services.net/htmlpages/htmlpage17358/untitled-design-2021-08-19t104428.272.jpg');
+
+      this.destination.Galleries[0] = 'https://upload.wikimedia.org/wikipedia/commons/4/44/Plaza_Mayor_de_Madrid_06.jpg';
+      this.destination.Galleries[1] = 'http://img.emg-services.net/htmlpages/htmlpage17358/untitled-design-2021-08-19t104428.272.jpg';
+      this.destination.Galleries.push('https://hotelesen.net/wp-content/uploads/Madrid-en-Espa%C3%B1a.jpg');
     });
   }
 
