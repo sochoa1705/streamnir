@@ -25,6 +25,6 @@ export const environment = {
   urlLibro: "http://10.75.102.23:10007/",
   urlPreference: "http://10.75.102.23:10006/",
   urlNmviajesAccount: "http://10.75.102.23:10006/v1/api",
-  urlApiTickets: "http://localhost:12639",
-  urlApiHotels: "http://localhost:53826"
+  urlApiTickets: "http://10.75.102.23:10009",
+  urlApiHotels: "http://10.75.102.23:10008"
 }
