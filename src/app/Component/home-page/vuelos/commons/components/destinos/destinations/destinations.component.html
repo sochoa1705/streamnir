@@ -3,7 +3,7 @@
     <div class="mascara"></div>
     <img src="./assets/vuelos/madrid.png" alt="">
     <div class="galeriaText">
-      <div class="texto" *ngIf="destination.Galleries.length > 1" (click)="displayGallery = true">Ver Galería
+      <div class="texto" *ngIf="destination.Galleries.length > 0" (click)="displayGallery = true">Ver Galería
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clip-path="url(#clip0_152:1334)">
             <path
@@ -52,12 +52,8 @@
         (click)="showInformation('touristAttraction')">Atractivo
         Turístico</div>
     </div>
-    <div class="contOpcion" *ngIf="id === 'history'">
-      {{destination.History}}
-    </div>
-    <div class="contOpcion" *ngIf="id === 'touristAttraction'">
-      {{destination.Description}}
-    </div>
+    <div class="contOpcion" *ngIf="id === 'history'" [innerHtml]="destination.History"></div>
+    <div class="contOpcion" *ngIf="id === 'touristAttraction'" [innerHtml]="destination.Description"></div>
 
     <p-galleria [(value)]="destination.Galleries" [(visible)]="displayGallery" [responsiveOptions]="responsiveOptions"
       [containerStyle]="{'max-width': '850px'}" [numVisible]="7" [circular]="true" [fullScreen]="true"
