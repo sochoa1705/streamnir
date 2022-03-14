@@ -41,7 +41,6 @@ export class DestinosComponent implements OnInit {
   }
 
   loadCiudad(param: Params) {
-    debugger
 
     this.codigoCiudad = param.codigoCiudad || '';
 
