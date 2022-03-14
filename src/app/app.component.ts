@@ -305,6 +305,15 @@ export class AppComponent implements OnInit {
 
   }
 
+
+  togglePassword(pass:HTMLInputElement){
+    if(pass.type == "password"){
+      pass.type = "text";
+    }else{
+      pass.type = "password";
+    }
+  }
+
   savePersonalAccount(): void {
     this.initLoading();
     if (this.personalAccountForm.invalid) {

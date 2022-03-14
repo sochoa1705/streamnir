@@ -35,9 +35,9 @@ export class PasajerosSinHabitacion implements Pasajeros{
 interface Params {
     startDate: string;
     endDate: string;
-    destino: string;
+    destino: any;
     idDestino: string;
-    origen?: string;
+    origen?: any;
     businessClass?: boolean,
     idOrigen?: string;
     horaInicio?: string;
@@ -84,7 +84,7 @@ export class URLVuelos implements UrlNmViajes{
     }
 
     getUrl(){
-        return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&destination=${this.params.idDestino}&departure=${this.params.idOrigen}&departureDate=${this.params.startDate}&arrivalDate=${this.params.endDate}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&businessCabin=${this.params.businessClass}&lang=ES`;
+        return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&destination=${this.params.idDestino + "%20" + this.params.destino?.title || ''}&departure=${this.params.idOrigen + "%20" + this.params.origen?.title || ''}&departureDate=${this.params.startDate}&arrivalDate=${this.params.endDate}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&businessCabin=${this.params.businessClass}&lang=ES`;
     }
 }
 export class URLHotel implements UrlNmViajes{

@@ -14,7 +14,6 @@ import { DocumentacionViajeComponent } from './documentacion-viaje/documentacion
 import { NuestraEmpresaComponent } from './nuestra-empresa/nuestra-empresa.component';
 import { NuestrasAgenciasComponent } from './nuestras-agencias/nuestras-agencias.component';
 import { LibroReclamacionesComponent } from './libro-reclamaciones/libro-reclamaciones.component';
-import { AppComponent } from 'src/app/app.component';
 
 const routes: Routes = [
   {
@@ -47,8 +46,7 @@ const routes: Routes = [
       },
       { path: 'nuestra-empresa', component: NuestraEmpresaComponent },
       { path: 'nuestras-agencias', component: NuestrasAgenciasComponent },
-      { path: 'libro-reclamaciones', component: LibroReclamacionesComponent },
-
+      { path: 'libro-reclamaciones', component: LibroReclamacionesComponent }
     ]
   }
 ];

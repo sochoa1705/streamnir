@@ -11,7 +11,7 @@ import { FlightModule } from './commons/components/flight/flight.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [ VuelosComponent ],
+  declarations: [VuelosComponent],
   imports: [
     CommonModule,
     VuelosRoutingModule,
@@ -20,6 +20,6 @@ import { FlightModule } from './commons/components/flight/flight.module';
     DestinosModule,
     FlightModule,
   ],
-  exports: [ VuelosComponent ]
+  exports: [VuelosComponent]
 })
 export class VuelosModule { }

@@ -242,8 +242,8 @@ export class TabVuelosComponent implements OnInit {
   public getUrl() {
     let url = ''
     let params = this.getParams();
-    console.log(params)
-    console.log(params.origen.id)
+
+
     this.addTag(params.idOrigen, params.idDestino, params.startDate, params.endDate)
 
     // nuevo
@@ -272,11 +272,13 @@ export class TabVuelosComponent implements OnInit {
       }
     }
 
-    let vuelo = { ...params, ...this.distributionObject }
+    let vuelo = { ...params, ...this.distributionObject };
+
 
     localStorage.setItem('filtroVuelo', JSON.stringify(vuelo))
 
     url = new URLVuelos(params, this.distributionObject).getUrl();
+
     return url;
   }
 
