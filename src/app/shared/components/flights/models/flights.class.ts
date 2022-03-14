@@ -17,6 +17,7 @@ export class DisponibilidadPayload {
     ){}
 }
 
+
 export class ClassDetalleModalSegment {
     constructor(
         public general:ClassDetalleModalGeneralSegment,
