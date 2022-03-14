@@ -28,7 +28,7 @@ export const environment = {
   urlMaster: "http://10.75.131.17",
   urlLibro: "http://10.75.102.23:10007/",
   urlNmviajesAccount: "http://10.75.102.23:10006",
-  urlApiTickets: "http://localhost:12639",
+  urlApiTickets: "http://10.75.102.23:10009",
   urlApiHotels: "http://10.75.102.23:10008"
 };
 
