@@ -11,6 +11,7 @@ import { TabsModule } from 'src/app/shared/components/tabs/tabs.module';
 import { FareBreakPipe } from './pipes/fare-break-downs.pipe';
 import { DisplayOrderPipe } from './pipes/display-order-by.pipe';
 import { FilterTabsModule } from 'src/app/shared/components/filter-tabs/filter-tabs.module';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [ ResultadosComponent,DisplayOrderPipe ],
@@ -21,7 +22,8 @@ import { FilterTabsModule } from 'src/app/shared/components/filter-tabs/filter-t
     FilterModule,
     MaterialModule,
     FormsModule,
-    FilterTabsModule
+    FilterTabsModule,
+    PipesModule
   ],
   exports: [ ResultadosComponent ],
   providers:[ResultadosService,FareBreakPipe]

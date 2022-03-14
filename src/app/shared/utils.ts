@@ -102,3 +102,13 @@ export function roundNumber(numero: number, decimal: number) {
   n = Math.round(n) / Math.pow(10, decimal);
   return n;
 }
+
+
+export function objectToQueryString(obj:any) {
+  var str = [];
+  for (var p in obj)
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  return str.join("&");
+}

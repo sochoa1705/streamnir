@@ -33,29 +33,12 @@
                 <app-input-autocomplete placeholder="Origen" [items]="vuelos$ | async" [loading]="vuelosLoading" [typeahead]="vuelosInput$"
                     formControlName="origen"></app-input-autocomplete>
             </div>
-            <!-- <input matInput aria-label="State" [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event, 'origen')"
-                    class="form-control animated fadeIn" placeholder="Origen">
-                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayWithOrigen.bind(this)">
-                    <mat-option *ngFor="let state of citysOrigenSelect" [value]="state.city_code">
-                        <img class="example-option-img" aria-hidden src="./assets/origen.png">
-                        <span>{{state.city}}</span>
-                    </mat-option>
-                </mat-autocomplete> -->
 
             <div class="colBoxtab w-30 me-md-1">
 
                 <app-input-autocomplete placeholder="Destino" [items]="vuelos2$ | async" [loading]="vuelosLoading2" [typeahead]="vuelosInput2$"
                     formControlName="destino"></app-input-autocomplete>
 
-
-                <!-- <input matInput aria-label="State2" [matAutocomplete]="auto2" formControlName="destino" (keyup)="autoComplete($event, 'destino')"
-                    class="form-control" placeholder="Destino">
-                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayWithDestino.bind(this)">
-                    <mat-option *ngFor="let state of citysDestinosSelect" [value]="state.city_code">
-                        <img class="example-option-img" aria-hidden src="./assets/origen.png">
-                        <span>{{state.city}}</span>
-                    </mat-option>
-                </mat-autocomplete> -->
             </div>
 
             <app-calendar [toDate]="vuelosTab?.toDate || null" [fromDate]="vuelosTab?.fromDate || null" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
@@ -65,8 +48,11 @@
                 <button class="fullWidht" type="button" (click)="searchVueloHotel()">Buscar</button>
             </div>
         </div>
-        <!-- <div class="rowBoxTab right text">Haciendo click en
-            <strong>"Buscar"</strong> , acepto las Condiciones Generales</div> -->
+
         <span class="valid" *ngIf="false">Debe seleccionar la cantidad de pasajeros</span>
     </form>
 </div>
+
+
+
+<!-- <iframe style="height: auto;" width="100%" src="http://52.177.246.241/#/nmviajes"></iframe> -->

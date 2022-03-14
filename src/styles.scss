@@ -561,6 +561,9 @@ section {
             background-color: $red_light !important;
             height: 3px;
             min-width: 212px !important;
+            @media (max-width: 640px) {
+                min-width: 140px!important;
+            }
         }
         .mat-tab-body-content {
             padding: 2rem 0;
@@ -713,9 +716,11 @@ section {
     }
 }
 
+
 /* Importing Bootstrap SCSS file. */
 
 // @import '~bootstrap/scss/bootstrap';
+
 /* datepicker styles  */
 
 .onlyDate .ngb-dp-month:first-child {
@@ -972,7 +977,9 @@ section {
     border-radius: 0;
 }
 
+
 /* end datepicker styles  */
+
 
 /* STYLE PERFIL  */
 
@@ -1032,12 +1039,10 @@ section {
     padding: 10px 0 10px 0;
     border-top: 1px solid #E4E5E7;
     margin-top: 20px;
-
     @include tablet {
         flex-direction: row;
         padding: 20px 20px 0 20px;
     }
-
 }
 
 .box-container .box-perfil .boxContact .contacto {
@@ -1081,9 +1086,7 @@ section {
 }
 
 .box-container .box-content .portlet-izq {
-
     display: none;
-    
     @include tablet {
         display: block;
         width: 265px;
@@ -1097,7 +1100,6 @@ section {
         padding: 20px 34px;
         z-index: 9;
     }
-
 }
 
 .box-container .box-content .portlet-izq .iconViaje {
@@ -1115,14 +1117,14 @@ section {
 .box-container .box-content .portlet-der {
     flex: 1 1 100%;
     box-sizing: border-box;
-    padding: 0 16px 0 10px;
+    padding: 0 10px 0 10px;
     margin-top: 20px;
-
+    width: 100%;
     @include tablet {
+        padding: 0 16px 0 10px;
         margin: 30px 30px 0 0;
         padding: 0;
     }
-
 }
 
 .box-container .box-content .portlet-der .viewPerfil {
@@ -1140,12 +1142,9 @@ section {
     padding: 15px 27px;
     margin-bottom: 40px;
     flex-direction: column;
-
-    &--row{
+    &--row {
         flex-direction: row;
     }
-
-    
     @include tablet {
         width: 400px;
         margin-right: 40px;
@@ -1167,10 +1166,11 @@ section {
         margin-right: 25px;
     }
 }
+
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight {
     text-align: center;
     @include tablet {
-       text-align: left;
+        text-align: left;
     }
 }
 
@@ -1244,7 +1244,6 @@ section {
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight .boxBtn {
     display: flex;
     justify-content: center;
-
     @include tablet {
         justify-content: end;
     }
@@ -1319,6 +1318,10 @@ section {
     display: flex;
     flex: 1 1 100%;
     padding: 14px 6px 0px 26px;
+    flex-direction: column;
+    @include tablet {
+        flex-direction: row;
+    }
 }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent {
@@ -1774,6 +1777,7 @@ section {
 .flexAuto {
     flex: auto !important;
 }
+
 
 /* END STYLE PERFIL */
 
@@ -3784,10 +3788,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 &.icono {
                     text-indent: 40px;
                     background: url("./assets/origen.png") no-repeat 10px center;
-                    &-no{
+                    &-no {
                         text-indent: 10px;
                         background: none;
-    
                     }
                 }
             }
@@ -4868,7 +4871,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
         a {
             cursor: pointer;
-            img{
+            img {
                 max-height: 30px
             }
         }
@@ -5522,7 +5525,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     width: 100%;
     margin-bottom: 20px;
     .boxCards {
-        max-width: 426px;
+        //max-width: 426px;
+        max-width: 434px;
         background: #FFFFFF;
         border: 1px solid #E4E5E7;
         box-sizing: border-box;
@@ -5533,61 +5537,114 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             filter: drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.2));
         }
         .imageHead {
-            width: 100%;
-            height: 215px;
+            // width: 100%;
+            // height: 215px;
+            position: relative;
+            height: auto;
             img {
                 width: 100%;
-                height: 215px;
+                height: 264px;
+                //height: 215px;
             }
         }
-        .cardTitulo {
-            font-family: Open Sans;
-            font-weight: bold;
-            font-size: 16px;
-            line-height: 21px;
-            letter-spacing: 0.15px;
-            color: #4B4B4B;
-            padding: 20px 25px;
-        }
-        .cardDuracion {
-            font-family: Montserrat;
-            font-size: 14px;
-            line-height: 21px;
-            letter-spacing: 0.1px;
-            color: #4B4B4B;
-            padding: 0 25px 20px 25px;
-            font-weight: 500;
+    }
+    .p-carousel-indicators {
+        display: none;
+    }
+    .loadingBoxCard {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex: 1 1 auto;
+        padding: 20px;
+        &.show {
             display: flex;
-            align-items: center;
         }
-        .cardStar {
-            display: flex;
-            padding: 0 25px 20px 25px;
-            gap: 5px;
-            .star {
-                width: 18px;
-                height: 17px;
-                background: url("./assets/vuelos/star.png")no-repeat;
+        .iconLoading {
+            width: 60px;
+            height: 60px;
+            img {
+                width: 100%;
             }
-            .star-mid {
-                width: 18px;
-                height: 17px;
-                background: url("./assets/vuelos/star-mid.png")no-repeat;
-            }
-            .star-null {
-                width: 18px;
-                height: 17px;
-                background: url("./assets/vuelos/star-null.png")no-repeat;
+            .texto {
+                color: #DF0C30;
             }
         }
-        .cardOpinion {
-            font-family: Montserrat;
-            font-size: 12px;
-            line-height: 18px;
-            letter-spacing: 0.1px;
-            color: #4B4B4B;
-            padding: 0 25px 20px 25px;
+    }
+    .p-carousel-prev,
+    .p-galleria-item-prev {
+        background: url("./assets/prev.png")no-repeat;
+        cursor: pointer;
+    }
+    .p-carousel-next,
+    .p-galleria-item-next {
+        background: url("./assets/next.png")no-repeat;
+        cursor: pointer;
+    }
+    .p-galleria-item {
+        height: 340px;
+        img {
+            height: 100%
         }
+    }
+    .cardTitulo {
+        font-family: Open Sans;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 21px;
+        letter-spacing: 0.15px;
+        color: #4B4B4B;
+        padding: 0px 15px;
+    }
+    .cardDuracion {
+        font-family: Montserrat;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
+        padding: 0 25px 10px 25px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+    }
+    .cardStar {
+        display: flex;
+        padding: 0 25px 20px 25px;
+        gap: 5px;
+        .star {
+            width: 18px;
+            height: 17px;
+            background: url("./assets/vuelos/star.png")no-repeat;
+        }
+        .star-mid {
+            width: 18px;
+            height: 17px;
+            background: url("./assets/vuelos/star-mid.png")no-repeat;
+        }
+        .star-null {
+            width: 18px;
+            height: 17px;
+            background: url("./assets/vuelos/star-null.png")no-repeat;
+        }
+    }
+    .cardActividad {
+        font-family: Montserrat;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
+        padding: 0 25px 20px 25px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+    }
+    .cardOpinion {
+        font-family: Montserrat;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.1px;
+        color: #4B4B4B;
+        padding: 0 25px 20px 25px;
     }
 }
 
@@ -5620,6 +5677,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
                 .cardDuracion,
                 .cardOpinion,
+                .cardActividad,
                 .cardStar {
                     padding: 0 10px 5px 10px;
                     font-size: 10px;
@@ -5655,17 +5713,216 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+.cardDestino {
+    &.show {
+        .p-carousel-prev,
+        .p-carousel-next {
+            display: flex;
+            padding: 18px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer !important;
+            background-color: #DADADA !important;
+            &:hover {
+                background-color: rgba(223, 12, 48, 1)!important;
+                ;
+            }
+        }
+        .p-carousel-prev {
+            background: url(./assets/left-white.png) center center no-repeat;
+        }
+        .p-carousel-next {
+            background: url(./assets/right-white.png) center center no-repeat;
+        }
+        .p-carousel-container {
+            .p-carousel-items-content {
+                .p-carousel-items-container {
+                    .p-carousel-item {
+                        .p-galleria-content {
+                            .p-galleria-item-prev,
+                            .p-galleria-item-next {
+                                display: flex;
+                                padding: 18px;
+                                border-radius: 50%;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                background-position: center center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .p-ripple {
+        display: none;
+    }
+}
+
+.tabDestino {
+    .p-galleria .p-galleria-close {
+        margin: 0.5rem;
+        background: transparent;
+        color: #f8f9fa;
+        width: 4rem;
+        height: 4rem;
+        transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    .p-galleria-mask {
+        background: rgba(0, 0, 0, 0.8);
+    }
+    // .p-galleria-item {
+    //     img {
+    //         width: 60% !important;
+    //     }
+    // }
+    .p-galleria .p-galleria-close .p-galleria-close-icon {
+        font-size: 2rem;
+    }
+    .p-galleria .p-galleria-close:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #f8f9fa;
+    }
+    .p-galleria .p-galleria-item-nav {
+        background: transparent;
+        color: #f8f9fa;
+        width: 4rem;
+        height: 4rem;
+        transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+        border-radius: 6px;
+        margin: 0 0.5rem;
+        cursor: pointer;
+    }
+    .p-galleria-close-icon {
+        background: url(./assets/svg/close.svg) center center no-repeat;
+        width: 24px;
+        height: 24px;
+    }
+    .p-galleria .p-galleria-item-nav .p-galleria-item-prev-icon {
+        background: url(./assets/left-white.png) center center no-repeat;
+        width: 24px;
+        height: 24px;
+    }
+    .p-galleria .p-galleria-item-nav .p-galleria-item-next-icon {
+        background: url(./assets/right-white.png) center center no-repeat;
+        width: 24px;
+        height: 24px;
+    }
+    .p-galleria .p-galleria-item-nav:not(.p-disabled):hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #f8f9fa;
+    }
+    .p-galleria .p-galleria-caption {
+        background: rgba(0, 0, 0, 0.5);
+        color: #f8f9fa;
+        padding: 1rem;
+    }
+    .p-galleria .p-galleria-indicators {
+        padding: 1rem;
+    }
+    .p-galleria .p-galleria-indicators .p-galleria-indicator button {
+        background-color: #ced4da;
+        width: 1rem;
+        height: 1rem;
+        transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+        border-radius: 50%;
+    }
+    .p-galleria .p-galleria-indicators .p-galleria-indicator button:hover {
+        background: #adb5bd;
+    }
+    .p-galleria .p-galleria-indicators .p-galleria-indicator.p-highlight button {
+        background: #EFF6FF;
+        color: #1D4ED8;
+    }
+    .p-galleria.p-galleria-indicators-bottom .p-galleria-indicator,
+    .p-galleria.p-galleria-indicators-top .p-galleria-indicator {
+        margin-right: 0.5rem;
+    }
+    .p-galleria.p-galleria-indicators-left .p-galleria-indicator,
+    .p-galleria.p-galleria-indicators-right .p-galleria-indicator {
+        margin-bottom: 0.5rem;
+    }
+    .p-galleria.p-galleria-indicator-onitem .p-galleria-indicators {
+        background: rgba(0, 0, 0, 0.5);
+    }
+    .p-galleria.p-galleria-indicator-onitem .p-galleria-indicators .p-galleria-indicator button {
+        background: rgba(255, 255, 255, 0.4);
+    }
+    .p-galleria.p-galleria-indicator-onitem .p-galleria-indicators .p-galleria-indicator button:hover {
+        background: rgba(255, 255, 255, 0.6);
+    }
+    .p-galleria.p-galleria-indicator-onitem .p-galleria-indicators .p-galleria-indicator.p-highlight button {
+        background: #EFF6FF;
+        color: #1D4ED8;
+    }
+}
+
 .cardHotel {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    margin: 50px 0;
+    //margin: 50px 0;
+    margin-bottom: 20px;
+    &.show {
+        .p-carousel-prev,
+        .p-carousel-next {
+            display: flex;
+            padding: 18px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer !important;
+            background-color: #DADADA !important;
+            &:hover {
+                background-color: rgba(223, 12, 48, 1)!important;
+                ;
+            }
+        }
+        .p-carousel-prev {
+            background: url(./assets/left-white.png) center center no-repeat;
+        }
+        .p-carousel-next {
+            background: url(./assets/right-white.png) center center no-repeat;
+        }
+        .p-carousel-container {
+            .p-carousel-items-content {
+                .p-carousel-items-container {
+                    .p-carousel-item {
+                        .p-galleria-content {
+                            .p-galleria-item-prev,
+                            .p-galleria-item-next {
+                                display: flex;
+                                padding: 18px;
+                                border-radius: 50%;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                background-position: center center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .p-ripple {
+        display: none;
+    }
     .boxCards {
         max-width: 434px;
         background: #FFFFFF;
         border: 1px solid #E4E5E7;
         box-sizing: border-box;
         border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+            filter: drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.2));
+        }
         .imageHead {
             position: relative;
             height: auto;
@@ -5713,73 +5970,115 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
             }
         }
-        .cardTitulo {
-            font-family: Open Sans;
-            font-weight: bold;
-            font-size: 28px;
-            line-height: 36px;
-            color: #4B4B4B;
-            padding: 20px 25px;
-        }
-        .cardStar {
+    }
+    .p-carousel-indicators {
+        display: none;
+    }
+    .loadingBoxCard {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex: 1 1 auto;
+        padding: 20px;
+        &.show {
             display: flex;
-            justify-content: space-between;
-            padding: 0 25px 20px 25px;
-            .estrellas {
-                display: flex;
-                gap: 5px;
-                .star {
-                    width: 18px;
-                    height: 17px;
-                    background: url("./assets/vuelos/star.png")no-repeat;
-                }
-                .star-mid {
-                    width: 18px;
-                    height: 17px;
-                    background: url("./assets/vuelos/star-mid.png")no-repeat;
-                }
-                .star-null {
-                    width: 18px;
-                    height: 17px;
-                    background: url("./assets/vuelos/star-null.png")no-repeat;
-                }
+        }
+        .iconLoading {
+            width: 60px;
+            height: 60px;
+            img {
+                width: 100%;
             }
-            .iconos {
-                display: flex;
-                gap: 5px;
-                .car,
-                .restaurant,
-                .cocktail,
-                .wifi-signal,
-                .fitness {
-                    width: 20px;
-                    height: 20px;
-                }
-                .car {
-                    background: url("./assets/vuelos/car.png")no-repeat;
-                }
-                .restaurant {
-                    background: url("./assets/vuelos/restaurant.png")no-repeat;
-                }
-                .cocktail {
-                    background: url("./assets/vuelos/cocktail.png")no-repeat;
-                }
-                .wifi-signal {
-                    background: url("./assets/vuelos/wifi-signal.png")no-repeat;
-                }
-                .fitness {
-                    background: url("./assets/vuelos/fitness.png")no-repeat;
-                }
+            .texto {
+                color: #DF0C30;
             }
         }
-        .cardOpinion {
-            font-family: Montserrat;
-            font-size: 14px;
-            line-height: 21px;
-            letter-spacing: 0.1px;
-            color: #1EAEA5;
-            padding: 0 25px 20px 25px;
+    }
+    .p-carousel-prev,
+    .p-galleria-item-prev {
+        background: url("./assets/prev.png")no-repeat;
+    }
+    .p-carousel-next,
+    .p-galleria-item-next {
+        background: url("./assets/next.png")no-repeat;
+    }
+    .p-galleria-item {
+        height: 340px;
+        border-radius: 11px 11px 0 0;
+        overflow: hidden;
+        img {
+            height: 100%
         }
+    }
+    .cardTitulo {
+        font-family: Open Sans;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 36px;
+        color: #4B4B4B;
+        padding: 0px 15px;
+    }
+    .cardStar {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 25px 20px 25px;
+        .estrellas {
+            display: flex;
+            gap: 5px;
+            .star {
+                width: 18px;
+                height: 17px;
+                background: url("./assets/vuelos/star.png")no-repeat;
+            }
+            .star-mid {
+                width: 18px;
+                height: 17px;
+                background: url("./assets/vuelos/star-mid.png")no-repeat;
+            }
+            .star-null {
+                width: 18px;
+                height: 17px;
+                background: url("./assets/vuelos/star-null.png")no-repeat;
+            }
+        }
+        .iconos {
+            display: flex;
+            gap: 5px;
+            .car,
+            .restaurant,
+            .cocktail,
+            .wifi-signal,
+            .fitness {
+                width: 20px;
+                height: 20px;
+            }
+            .car {
+                background: url("./assets/vuelos/car.png")no-repeat;
+            }
+            .restaurant {
+                background: url("./assets/vuelos/restaurant.png")no-repeat;
+            }
+            .cocktail {
+                background: url("./assets/vuelos/cocktail.png")no-repeat;
+            }
+            .wifi-signal {
+                background: url("./assets/vuelos/wifi-signal.png")no-repeat;
+            }
+            .fitness {
+                background: url("./assets/vuelos/fitness.png")no-repeat;
+            }
+        }
+    }
+    .cardOpinion {
+        font-family: Montserrat;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.1px;
+        color: #1EAEA5;
+        padding: 0 25px 20px 25px;
+    }
+    .cardEvaluacion {
+        padding: 0 25px 20px 25px;
     }
 }
 
@@ -6184,6 +6483,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
     }
 }
+
 
 /* boton select */
 
@@ -6611,6 +6911,9 @@ button.customers {
     }
     .modal-dialog {
         width: 490px;
+        @media (max-width: 640px) {
+            width: calc(100% - 15px);
+        }
     }
     .modal-body {
         .elementRow {
@@ -6647,6 +6950,7 @@ button.customers {
             }
             .iconPass {
                 position: absolute;
+                cursor: pointer;
                 right: 25px;
                 top: 10px;
             }
@@ -6750,6 +7054,9 @@ button.customers {
     .modal-dialog {
         width: 918px;
         max-width: 918px;
+        @media (max-width: 640px) {
+            width: calc(100% - 15px);
+        }
         .modal-content {
             flex-direction: row;
             border: none;
@@ -6775,6 +7082,10 @@ button.customers {
                 img {
                     width: 127.02px;
                 }
+                @media (max-width: 640px) {
+                    width: 100%;
+                    height: 320px;
+                }
             }
             .recoveryRight {
                 flex: 1 1 auto;
@@ -6785,6 +7096,9 @@ button.customers {
                     right: 20px;
                     top: 20px;
                     font-size: 12px;
+                    @media (max-width: 640px) {
+                        width: 32px !important;
+                    }
                 }
                 .titleRecovery {
                     font-family: Open Sans;
@@ -6794,6 +7108,9 @@ button.customers {
                     text-align: center;
                     color: #4B4B4B;
                     margin: 40px 0 25px 0;
+                    @media (max-width: 640px) {
+                        margin: 15px 0 15px 0;
+                    }
                 }
                 .elementRow {
                     display: flex;
@@ -6858,6 +7175,9 @@ button.customers {
                     line-height: 21px;
                     letter-spacing: 0.15px;
                     border-radius: 5px;
+                    @media (max-width: 640px) {
+                        width: 50% !important;
+                    }
                 }
                 .account {
                     display: flex;
@@ -6885,6 +7205,10 @@ button.customers {
                     }
                 }
             }
+            @media (max-width: 640px) {
+                flex-direction: column;
+                overflow: hidden;
+            }
         }
     }
 }
@@ -6896,6 +7220,9 @@ button.customers {
                 .elementRow {
                     .form-control {
                         margin-bottom: 55px;
+                        @media (max-width: 640px) {
+                            margin-bottom: 35px;
+                        }
                     }
                 }
             }
@@ -7411,6 +7738,10 @@ button.customers {
         justify-content: center;
         cursor: pointer;
     }
+    @media (max-width: 640px) {
+        min-width: calc(100% - 20px);
+        left: 10px;
+    }
 }
 
 .boxUser {
@@ -7508,6 +7839,9 @@ button.customers {
                     background-color: #df0c30 !important;
                     height: 3px !important;
                     min-width: 219px !important;
+                    @media (max-width: 640px) {
+                        min-width: 140px!important;
+                    }
                 }
                 .elementRow {
                     display: flex;
