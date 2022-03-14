@@ -4,6 +4,7 @@ metadata:
   name: nmviajes
 spec:
   type: LoadBalancer
+  loadBalancerIP: "20.114.234.32"
   ports:
   - port: 80
   selector:
