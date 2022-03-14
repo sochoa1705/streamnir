@@ -70,7 +70,6 @@ export class HotelsComponent implements OnInit {
       'Caller.Company': "Agil",
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
-      debugger
       this.hotels = JSON.parse(res).Result;
     });
   }
