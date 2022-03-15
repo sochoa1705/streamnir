@@ -8,10 +8,11 @@ import { PackageModule } from '../../../shared/components/package/package.module
 import { VuelosRoutingModule } from './vuelos-routing.module';
 import { DestinosModule } from './commons/components/destinos/destinos.module';
 import { FlightModule } from './commons/components/flight/flight.module';
+import { OffersContinentComponent } from './commons/components/offers-continent/offers-continent.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [ VuelosComponent ],
+  declarations: [VuelosComponent, OffersContinentComponent],
   imports: [
     CommonModule,
     VuelosRoutingModule,
@@ -20,6 +21,6 @@ import { FlightModule } from './commons/components/flight/flight.module';
     DestinosModule,
     FlightModule,
   ],
-  exports: [ VuelosComponent ]
+  exports: [VuelosComponent]
 })
 export class VuelosModule { }

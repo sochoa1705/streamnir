@@ -1,0 +1,36 @@
+<div class="boxDestino">
+    <div class="container mt-5">
+
+        <div class="rowDestino center">
+            <img src="./assets/avion.svg" alt="">
+        </div>
+        <div class="rowDestino titulo"> {{ name }} </div>
+        <div class="rowDestino subtitulo mt-3">Estas son algunas de las mejores ofertas en {{ name }} encontradas hace poco por usuarios de nmviajes.</div>
+
+        <div class="rowDestino verMov ordenCol" *ngFor="let elem of rates">
+            <div class="ida">
+                <img src="./assets/iconList.svg" alt=""> {{ elem.Country }}
+            </div>
+
+            <div class="row verMovil" style="clear: both;">
+                <div class="col-12">
+                    <div class="boxVuelos">
+                        <div *ngFor="let item of elem.Items" class="rowVuelo">
+                            <div class="lugar">{{item.Destination}}</div>
+                            <div class="desde">desde</div>
+                            <div class="precio">${{item.Rate}}</div>
+                            <div class="btnCircle">
+                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M-6.56879e-08 11.4972L4.83081 6.60526L-4.93358e-07 1.71329L1.48721 0.210525L7.81579 6.60526L1.48722 13L-6.56879e-08 11.4972Z"
+                    fill="white" />
+                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

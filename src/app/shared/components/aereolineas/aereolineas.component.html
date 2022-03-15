@@ -19,7 +19,8 @@
                     </div>
                     <ng-container *ngFor="let contador of maxCounterArray">
                         <div *ngIf="aereolineas" class="contentSliderImg" [ngClass]="{active: counter===contador}">
-                            <a *ngFor="let item of aereolineas | porslide:contador:imagenesPorSilder" (click)="toLine(item)">
+                            <a *ngFor="let item of aereolineas | porslide:contador:imagenesPorSilder"
+                                (click)="toLine(item)">
                                 <img [src]="item.Logo" appImgDefault alt="">
                             </a>
                         </div>
@@ -38,7 +39,8 @@
                 <div class="sliderOfertasCel">
                     <ng-container *ngFor="let contador of maxCounterArrayMobile">
                         <div *ngIf="aereolineas" class="contentSliderImg" [ngClass]="{active: counter===contador}">
-                            <a *ngFor="let item of aereolineas | porslide:contador:imagenesPorSilderMobile" (click)="toLine(item)">
+                            <a *ngFor="let item of aereolineas | porslide:contador:imagenesPorSilderMobile"
+                                (click)="toLine(item)">
                                 <img [src]="item.Logo" appImgDefault alt="">
                             </a>
                         </div>

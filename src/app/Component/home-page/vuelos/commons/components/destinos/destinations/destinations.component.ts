@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DestinationService } from 'src/app/api/api-nmviajes/services';
 import { Guid } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
@@ -9,6 +9,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./destinations.component.scss']
 })
 export class DestinationsComponent implements OnInit {
+
+  @Input()
+  city: any;
 
   destination: any;
 
@@ -36,9 +39,7 @@ export class DestinationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
-
-    this.getAllDestinations('MAD');
+    this.getAllDestinations(this.city);
   }
 
   getAllDestinations(code: string) {
@@ -55,9 +56,9 @@ export class DestinationsComponent implements OnInit {
       debugger
       this.destination = JSON.parse(res).Result;
 
-      this.destination.Galleries[0] = 'https://upload.wikimedia.org/wikipedia/commons/4/44/Plaza_Mayor_de_Madrid_06.jpg';
-      this.destination.Galleries[1] = 'http://img.emg-services.net/htmlpages/htmlpage17358/untitled-design-2021-08-19t104428.272.jpg';
-      this.destination.Galleries.push('https://hotelesen.net/wp-content/uploads/Madrid-en-Espa%C3%B1a.jpg');
+      // this.destination.Galleries[0] = 'https://upload.wikimedia.org/wikipedia/commons/4/44/Plaza_Mayor_de_Madrid_06.jpg';
+      // this.destination.Galleries[1] = 'http://img.emg-services.net/htmlpages/htmlpage17358/untitled-design-2021-08-19t104428.272.jpg';
+      // this.destination.Galleries.push('https://hotelesen.net/wp-content/uploads/Madrid-en-Espa%C3%B1a.jpg');
     });
   }
 
