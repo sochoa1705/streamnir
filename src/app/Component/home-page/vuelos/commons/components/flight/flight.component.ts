@@ -20,14 +20,14 @@ import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.
 })
 export class FlightComponent implements OnInit {
 
-  public OfertaVuelosRequest :  ListaTarifaRequest = new  ListaTarifaRequest();
+  public OfertaVuelosRequest: ListaTarifaRequest = new ListaTarifaRequest();
   //  ListaTarifa : any;
 
-   $vuelosInternacionales:Observable<IFlightRates[]>;
-   $vuelosNacionales:Observable<IFlightRates[]>;
-   $aereolineas:Observable<IAereolineas[]>;
-   $vuelos:Observable<IVuelos[]>;
-   
+  $vuelosInternacionales: Observable<IFlightRates[]>;
+  $vuelosNacionales: Observable<IFlightRates[]>;
+  $aereolineas: Observable<IAereolineas[]>;
+  $vuelos: Observable<IVuelos[]>;
+
   constructor(
     public route: Router,
     public packagesService: PackagesService,
@@ -37,7 +37,7 @@ export class FlightComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
- 
+
     this.OfertaVuelos();
 
     this.loadVuelosInternacionales();
@@ -47,61 +47,63 @@ export class FlightComponent implements OnInit {
 
   }
 
-  loadVuelosInternacionales(){
+  loadVuelosInternacionales() {
     this.$vuelosInternacionales = this.flightService.getPasajesAereos(TYPE_PARAM.INTERNACIONAL);
   }
-  loadVuelosNacionales(){
+  loadVuelosNacionales() {
     this.$vuelosNacionales = this.flightService.getPasajesAereos(TYPE_PARAM.NACIONAL);
   }
-  loadAereolineas(){
+  loadAereolineas() {
     this.$aereolineas = this.flightService.getAereolineas();
   }
-  loadVuelos(){
+  loadVuelos() {
     this.$vuelos = this.flightService.getVuelos();
   }
 
-  toLine(e: any){
+  toLine(e: any) {
     this.route.navigateByUrl('/home/aerolineas')
   }
 
 
-  OfertaVuelos(){
+  OfertaVuelos() {
     //debugger;
     this.OfertaVuelosRequest.IdLang = 1;
     this.OfertaVuelosRequest.IdWeb = 7;
-  
-    let signatureModel =  new SignatureModel();
+
+    let signatureModel = new SignatureModel();
     signatureModel.IdLang = 1;
     signatureModel.IdSecuencia = 40;
     signatureModel.IdWeb = 7;
     signatureModel.KeyAccess = "20w3bnmvi4j3$14!";
-    signatureModel.Usuario =  "nmv_web";
-  
+    signatureModel.Usuario = "nmv_web";
+
     this.OfertaVuelosRequest.Signature = signatureModel;
-  
+
     // this.coreService
     //   .ObtenerOfertaVuelos(this.OfertaVuelosRequest)
     //   .subscribe(
     //     (data: any) => {
     //     this.ListaTarifa =  data["tarifas"];
     //     console.log( this.ListaTarifa);
-         
+
     //     },
     //     (error: any) => {
     //       console.log(error);
     //     }
     //   );
-  
-    }
 
-    redirigirVuelo(vuelo:IVuelos){
-        console.log(vuelo);
-    }
-    
+  }
 
-    toDestiny(vuelo: IFlightRates){
-      this.route.navigate(['/home/vuelos/destinos',vuelo.DestinationCode])
-    }
+  redirigirVuelo(vuelo: IVuelos) {
+    debugger
+    console.log(vuelo);
+    this.route.navigate(['/home/vuelos/', vuelo.Slug])
+  }
+
+
+  toDestiny(vuelo: IFlightRates) {
+    this.route.navigate(['/home/vuelos/destinos', vuelo.DestinationCode])
+  }
 
   /* end code */
 
