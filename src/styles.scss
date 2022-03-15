@@ -7877,6 +7877,9 @@ button.customers {
                     .form-select {
                         //width: calc(100% - 30px);
                     }
+                    .form-email-input {
+                        text-transform: none;
+                    }
                     .divValida {
                         &.wSelect {
                             min-width: calc(50% - 8px);
