@@ -10,7 +10,7 @@ export class DataPagePresenterService {
     aside: [
       {
         id: 0,
-        img: "3-PlayaDelCarmen.jpg",
+        img: "bannerHOME.jpg",
         key: true,
         titulo: 'detalle slider',
         detalle: 'detalle slider',
@@ -19,7 +19,7 @@ export class DataPagePresenterService {
       {
 
         id: 1,
-        img: "3-PlayaDelCarmen.jpg",
+        img: "bannersIBKcancun.jpg",
         titulo: 'detalle slider 1',
         detalle: 'detalle slider 1',
                 key: true,
@@ -27,7 +27,7 @@ export class DataPagePresenterService {
       {
 
         id: 2,
-        img: "3-PlayaDelCarmen.jpg",
+        img: "bannersIBKiguazu.jpg",
         titulo: 'detalle slider 2',
         detalle: 'detalle slider 2',
         key: true,
@@ -35,7 +35,7 @@ export class DataPagePresenterService {
       {
 
         id: 3,
-        img: "3-PlayaDelCarmen.jpg",
+        img: "bannersIBKpuntacana.jpg",
         titulo: 'detalle slider 3',
         detalle: 'detalle slider 3',
         key: true,
@@ -43,7 +43,7 @@ export class DataPagePresenterService {
       {
 
         id: 4,
-        img: "3-PlayaDelCarmen.jpg",
+        img: "bannersIBKvichay.jpg",
         titulo: 'detalle slider 4',
         detalle: 'detalle slider 4',
         key: true,
