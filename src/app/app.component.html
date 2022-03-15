@@ -58,8 +58,6 @@
 
                     <!-- EMPRESA -->
                     <mat-tab label="Empresa">
-
-                        {{loginBEmail.invalid}}
                         <form #formBusiness="ngForm" (ngSubmit)="formBusiness.form.valid" action="">
                             <div class="elementRow" [ngClass]="{'error': loginBEmail.invalid && submitBusiness}">
                                 <input #loginBEmail="ngModel" type="text" class="form-control" name="email" [(ngModel)]="loginB.email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" placeholder="Email" required>
