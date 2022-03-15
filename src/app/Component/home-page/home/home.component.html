@@ -92,7 +92,8 @@
         <div class="row text-end py-5">
             <div class="col-12">
                 <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                    <button class="plus dropdown-toggle px-4" *ngIf="section.section === 'Vuelos'">{{ section.btn }}</button>
+                    <button class="plus dropdown-toggle px-4" *ngIf="section.section === 'Vuelos'">{{ section.btn
+                        }}</button>
                 </ng-container>
             </div>
             <div class="clearfix"></div>
@@ -103,7 +104,8 @@
     <!-- COMPRAR -->
     <div class="container-fluid px-4">
         <h2 class="titleHome bold ms-4 mb-5">¿Por qué comprar en
-            <span class="red">NMVIAJES</span>?</h2>
+            <span class="red">NMVIAJES</span>?
+        </h2>
         <div class="row comprarHideTitle">
             <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
                 <app-title class="textTitle" *ngIf="section.section === 'Comprar'" [title]="section.title"></app-title>
@@ -112,7 +114,8 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <ng-container *ngIf="section.section === 'Comprar'">
-                        <app-card-info [title]="card.title" [description]="card.description" [image]="card.img" *ngFor="let card of section.card"></app-card-info>
+                        <app-card-info [title]="card.title" [description]="card.description" [image]="card.img"
+                            *ngFor="let card of section.card"></app-card-info>
                     </ng-container>
                 </div>
             </ng-container>
@@ -128,7 +131,8 @@
     <!-- END MAILING -->
 
     <!-- Modal Usuario Verificado -->
-    <div class="modal fade" id="ModalUsuarioVerificado" tabindex="-1" aria-labelledby="ModalUsuarioVerificadoLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalUsuarioVerificado" tabindex="-1" aria-labelledby="ModalUsuarioVerificadoLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

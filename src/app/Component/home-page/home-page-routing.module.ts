@@ -49,7 +49,7 @@ const routes: Routes = [
       { path: 'nuestra-empresa', component: NuestraEmpresaComponent },
       { path: 'nuestras-agencias', component: NuestrasAgenciasComponent },
       { path: 'libro-reclamaciones', component: LibroReclamacionesComponent },
-      { path: 'agendar-cita', component: CitaComponent },
+      { path: 'agendar-cita', component: CitaComponent }
     ]
   }
 ];
