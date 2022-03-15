@@ -1,0 +1,17 @@
+section {
+    background-image: url("/assets/citas/bg-nmviajes-citas.jpg");
+    background-position: 50% 50%;
+    height: -moz-calc(100vh - (20px + 30px));
+    height: -webkit-calc(100vh - (20px + 30px));
+    height: calc(100vh - (20px + 30px));
+}
+h1{
+    font-size: 3.75rem;
+    font-weight: 700;
+    color: white
+}
+p, a{
+    font-size: 1.5rem;
+    line-height: 1.35;
+    color: white
+}

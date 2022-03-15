@@ -13,7 +13,7 @@
         <div class="clearfix"></div>
     </div>
     <app-card [itemList]="packagesService.packages"></app-card>
-    <div class="row text-end py-5">
+    <div class="row text-end py-5 d-none d-md-block">
         <div class="col-12">
             <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
                 <button class="plus dropdown-toggle px-4" *ngIf="section.section === 'Vuelos'">{{ section.btn }}</button>
@@ -35,7 +35,8 @@
     </div>
     <div class="row">
         <div *ngFor="let vuelo of $vuelosInternacionales | async" class="col-12 col-md-3">
-            <app-package [fly]="'true'" btn="Ver Tarifas" [codigo_ciudad]="vuelo.DestinationCode"  [image]="vuelo.Image" [city]="vuelo.Destination" [span]="vuelo | generateprice"></app-package>
+            <app-package [fly]="'true'" btn="Ver Tarifas" [codigo_ciudad]="vuelo.DestinationCode" [image]="vuelo.Image" [city]="vuelo.Destination"
+                [span]="vuelo | generateprice"></app-package>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -109,5 +110,4 @@
         </div>
     </div>
 </section>
-<app-aereolineas  [aereolineas]="$aereolineas | async" (redirigir)="toLine($event)"></app-aereolineas>
-
+<app-aereolineas [aereolineas]="$aereolineas | async" (redirigir)="toLine($event)"></app-aereolineas>
