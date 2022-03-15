@@ -4979,6 +4979,20 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         &.center {
             justify-content: center;
         }
+        &.ordenCol {
+            flex-direction: column;
+            .boxVuelos {
+                padding: 20px 0;
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                .rowVuelo {
+                    width: 30%;
+                    border-top: 1px solid #CFD1D3;
+                    cursor: pointer;
+                }
+            }
+        }
         .colDestino {
             display: flex;
             gap: 15px;
