@@ -185,7 +185,7 @@ export class DataPagePresenterService {
           {
             id: 2,
             text: "Política de Protección de datos Personales",
-            link: "#"
+            link: "politicas"
           },
           {
             id: 3,
