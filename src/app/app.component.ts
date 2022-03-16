@@ -152,7 +152,8 @@ export class AppComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
       repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
     }, {
-      validators: [this._validatorsService.equalFields('password', 'repeatPassword')]
+      validators: [this._validatorsService.equalFields('password', 'repeatPassword'),
+      this._validatorsService.validateRUC('ruc')]
     });
   }
 
