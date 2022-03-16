@@ -4982,17 +4982,23 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         &.ordenCol {
             flex-direction: column;
             .boxVuelos {
-                padding: 20px 0;
+                padding: 20px 0 50px 0;
                 display: flex;
-                justify-content: space-between;
                 flex-wrap: wrap;
+                gap: 0 50px;
                 .rowVuelo {
-                    width: 30%;
+                    width: calc(33% - 35px);
+                    cursor: pointer !important;
+                    border-bottom: 1px solid #CFD1D3;
                     border-top: 1px solid #CFD1D3;
-                    cursor: pointer;
+                    min-height: 53px;
+                    height: auto;
                     @media (max-width: 640px) {
                         width: 100%;
                     }
+                }
+                @media (max-width: 640px) {
+                    padding: 20px 0 50px 0 !important;
                 }
             }
         }
@@ -7868,17 +7874,14 @@ button.customers {
                         margin-bottom: 20px;
                         font-family: Montserrat;
                         font-size: 14px;
-                        // text-transform: capitalize;
-                        // color: #B9BCBF;
+                        text-transform: capitalize;
+                        color: #B9BCBF;
                         border-radius: 5px;
                         height: 41px;
                         border: 1px solid #ced4da;
                     }
                     .form-select {
                         //width: calc(100% - 30px);
-                    }
-                    .form-email-input {
-                        text-transform: none;
                     }
                     .divValida {
                         &.wSelect {
