@@ -65,9 +65,6 @@ export class PassengersService {
 
   save(payload: any) {
 
-    // debugger
-
-
     // const nmvModel = new NmvModel();
 
     // const options = {
@@ -94,7 +91,6 @@ export class PassengersService {
   }
 
   delete(userId: number, id: number) {
-    // debugger
 
     const payload = {
       TrackingCode: "123qwe",

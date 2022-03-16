@@ -66,7 +66,6 @@ export class FlightComponent implements OnInit {
 
 
   OfertaVuelos() {
-    //debugger;
     this.OfertaVuelosRequest.IdLang = 1;
     this.OfertaVuelosRequest.IdWeb = 7;
 
@@ -95,7 +94,6 @@ export class FlightComponent implements OnInit {
   }
 
   redirigirVuelo(vuelo: IVuelos) {
-    // debugger
     console.log(vuelo);
     this.route.navigate(['/home/vuelos/', vuelo.Slug])
   }
