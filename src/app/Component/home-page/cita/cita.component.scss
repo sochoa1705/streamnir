@@ -4,6 +4,8 @@ section {
     height: -moz-calc(100vh - (20px + 30px));
     height: -webkit-calc(100vh - (20px + 30px));
     height: calc(100vh - (20px + 30px));
+    background-size: cover;
+    width: 100%!important;
 }
 h1{
     font-size: 3.75rem;
