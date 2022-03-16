@@ -365,16 +365,15 @@ export class AppComponent implements OnInit {
             this.toggleModalVerificaCorreo();
 
 
+            this.personalAccountForm.reset();
+
             this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
               verticalPosition: 'top',
               duration: 2000
             });
           } else {
-            this.notification.showNotificacion("Error", "Error del servidor", 10);
+            this.notification.showNotificacion("Error",response.Result.Message || "Error",10);
           }
-
-          this.personalAccountForm.reset();
-
           //this.loaderSubjectService.closeLoader()
         },
         error: (err) => {
