@@ -2,21 +2,23 @@
 export interface IFlightRates {
     Destination: string;
     DestinationCode: string;
-    Type:        string;
-    Rate:        number;
-    Currency:    string;
-    Image:       string;
+    Type: string;
+    Rate: number;
+    Currency: string;
+    Image: string;
 }
 
-export enum TYPE_PARAM  {
+export enum TYPE_PARAM {
     INTERNACIONAL = 'I',
     NACIONAL = 'N',
     ALL = 'a'
 }
 
 export interface IVuelos {
-    Name:            string;
-    ContinentCode:   string;
+    Name: string;
+    Slug: string;
+    Description: string;
+    ContinentCode: string;
     DestinationCode: string;
 }
 
