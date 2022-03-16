@@ -326,7 +326,7 @@
                                 </div>
                             </div>
 
-                            <div class="elementRow">
+                            <!-- <div class="elementRow">
                                 <div class="divValida"
                                     [ngClass]="{error : validateBusinessAccountForm('documentType')}">
                                     <select class="form-select" formControlName="documentType">
@@ -348,11 +348,12 @@
                                         Ingresa tu número de documento
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="elementRow">
                                 <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('email')}">
-                                    <input type="text" class="form-control" formControlName="email" placeholder="Email">
+                                    <input type="text" class="form-control form-email-input" formControlName="email"
+                                        placeholder="Email">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('email')">
                                         Ingresa tu email
