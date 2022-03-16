@@ -20,6 +20,8 @@
                 <mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMediaLogin($event)">
                     <!-- PERSONAL -->
 
+                    <!-- hugosanchez@expertiatravel.com -->
+
                     <mat-tab label="Personal">
                         <form #formUser="ngForm" (ngSubmit)="formUser.form.valid" action="">
                             <div class="elementRow">
@@ -170,7 +172,7 @@
                 <mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMedia($event)">
                     <!-- PERSONAL -->
                     <mat-tab label="Personal">
-                        <form name="personalAccountForm" [formGroup]="personalAccountForm">
+                        <form name="personalAccountForm" [formGroup]="personalAccountForm" autocomplete="false">
 
                             <div class="elementRow">
                                 <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('firstName')}">
