@@ -22,7 +22,7 @@ export class OffersContinentComponent implements OnInit {
   description: string = '';
 
   ngOnInit(): void {
-    debugger
+    // debugger
 
     this._activatedRoute.params.subscribe(params => {
       this.getAllContinents(params.slug);
@@ -30,7 +30,7 @@ export class OffersContinentComponent implements OnInit {
   }
 
   getAllContinents(slug: string) {
-    debugger
+    // debugger
 
     this._flightService.v1ApiFlightGetContinentsGet({
       'Parameter.Status': true,
@@ -40,7 +40,7 @@ export class OffersContinentComponent implements OnInit {
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
 
-      debugger
+      // debugger
 
       let continents: Array<any> = JSON.parse(res).Result;
 
@@ -59,7 +59,7 @@ export class OffersContinentComponent implements OnInit {
           'Caller.Company': "Agil",
           'Caller.Application': "Interagencias"
         }).subscribe((res: any) => {
-          debugger
+          // debugger
 
           this.rates = JSON.parse(res).Result;
         });
@@ -79,7 +79,7 @@ export class OffersContinentComponent implements OnInit {
       'Caller.Company': "Agil",
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
-      debugger
+      // debugger
 
       this.rates = JSON.parse(res).Result;
     });

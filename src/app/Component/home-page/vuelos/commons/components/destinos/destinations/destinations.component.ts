@@ -44,7 +44,7 @@ export class DestinationsComponent implements OnInit {
 
   getAllDestinations(code: string) {
 
-    debugger
+    // debugger
 
     this._destinationsService.v1ApiDestinationCodeGet({
       'Parameter.Code': code,
@@ -53,7 +53,7 @@ export class DestinationsComponent implements OnInit {
       'Caller.Company': "Agil",
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
-      debugger
+      // debugger
       this.destination = JSON.parse(res).Result;
 
       // this.destination.Galleries[0] = 'https://upload.wikimedia.org/wikipedia/commons/4/44/Plaza_Mayor_de_Madrid_06.jpg';

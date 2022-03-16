@@ -107,7 +107,7 @@ export class PassengerComponent implements OnInit {
     this.passengerForm.get("fatherLastname")?.setValue(entity.FatherLastname);
     this.passengerForm.get("motherLastname")?.setValue(entity.MotherLastname);
 
-    debugger
+    // debugger
 
     let birthdate = moment(entity.Birthdate);
     let birthDay = birthdate.date();
@@ -175,7 +175,7 @@ export class PassengerComponent implements OnInit {
           if (this.isNew) {
             this._passengersService.save(payload).subscribe({
               next: (response) => {
-                debugger
+                // debugger
 
                 const isSuccess = response.Result.IsSuccess;
 
@@ -205,7 +205,7 @@ export class PassengerComponent implements OnInit {
             });
           }
           else {
-            debugger
+            // debugger
 
             payload.Parameter.Id = Number(this.passengerForm.get("id")?.value);
 
@@ -213,7 +213,7 @@ export class PassengerComponent implements OnInit {
 
             this._passengersService.update(payload).subscribe({
               next: (response) => {
-                debugger
+                // debugger
 
                 const isSuccess = response.Result.IsSuccess;
 
@@ -253,7 +253,7 @@ export class PassengerComponent implements OnInit {
 
   deletePassenger(entity: Passenger): void {
 
-    debugger
+    // debugger
 
     this._passengersService.delete(this.userId, entity.Id).subscribe({
       next: (response) => {

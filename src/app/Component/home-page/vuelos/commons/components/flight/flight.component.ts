@@ -95,7 +95,7 @@ export class FlightComponent implements OnInit {
   }
 
   redirigirVuelo(vuelo: IVuelos) {
-    debugger
+    // debugger
     console.log(vuelo);
     this.route.navigate(['/home/vuelos/', vuelo.Slug])
   }

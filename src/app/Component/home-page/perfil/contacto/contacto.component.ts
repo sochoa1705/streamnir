@@ -152,7 +152,7 @@ export class ContactoComponent implements OnInit {
 
       this._contactsService.updateContactInformationHeader(payload).subscribe({
         next: (response) => {
-          debugger
+          // debugger
 
           // const isSuccess = response.Result.IsSuccess;
 
