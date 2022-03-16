@@ -5900,9 +5900,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             justify-content: center;
             cursor: pointer !important;
             background-color: #DADADA !important;
+            margin-bottom: 123px;
             &:hover {
                 background-color: rgba(223, 12, 48, 1)!important;
                 ;
+            }
+            @media (max-width: 640px) {
+                margin-bottom: 170px;
             }
         }
         .p-carousel-prev {
@@ -6101,7 +6105,29 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         padding: 0 25px 20px 25px;
     }
     .cardEvaluacion {
-        padding: 0 25px 20px 25px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        .groupItems {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 20px;
+            .itemsCardEvaluacion {
+                margin-bottom: 10px;
+                width: 50%;
+                &.aRight {
+                    display: flex;
+                    justify-content: flex-end;
+                }
+                img {
+                    height: 32px;
+                }
+            }
+            @media (max-width: 640px) {
+                padding: 0;
+            }
+        }
     }
 }
 
