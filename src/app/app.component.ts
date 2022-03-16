@@ -22,14 +22,14 @@ export class LoginPerson {
     public email = "",
     public password = "",
     public recorder = false
-  ){}
+  ) { }
 }
 export class LoginBusiness {
   constructor(
     public email = "",
     public password = "",
     public recorder = false
-  ){}
+  ) { }
 }
 
 @Component({
@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
     private _matSnackBar: MatSnackBar,
     private _validatorsService: ValidatorsService,
     public loaderSubjectService: LoaderSubjectService,
-    private notification:NotificationService
+    private notification: NotificationService
 
   ) {
     this.cerrarBoxClicFuera();
@@ -89,13 +89,13 @@ export class AppComponent implements OnInit {
     });
   }
 
-  initLoading(){
+  initLoading() {
     const textSend = 'CARGANDO'
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader();
   }
 
-  closeLoading(){
+  closeLoading() {
     this.loaderSubjectService.closeLoader();
   }
 
@@ -136,8 +136,8 @@ export class AppComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.pattern(this._validatorsService.lettersPattern)]],
       fatherLastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
       motherLastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
-      documentType: ['', [Validators.required, Validators.minLength(1)]],
-      documentNumber: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this._validatorsService.digitsPattern)]],
+      // documentType: ['', [Validators.required, Validators.minLength(1)]],
+      // documentNumber: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this._validatorsService.digitsPattern)]],
       email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]],
       repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]],
@@ -175,10 +175,10 @@ export class AppComponent implements OnInit {
       panelClass: ['mat-toolbar', 'mat-warn']
     });
   }
-  
 
-  validationFormLogin(form:NgForm){
-    if(form.invalid){
+
+  validationFormLogin(form: NgForm) {
+    if (form.invalid) {
       return false;
     }
     return true;
@@ -186,71 +186,71 @@ export class AppComponent implements OnInit {
 
 
 
-  signIn(formPerson:NgForm, formBussines:NgForm){
+  signIn(formPerson: NgForm, formBussines: NgForm) {
 
     const validPerson = this.validationFormLogin(formPerson);
     const validBusiness = this.validationFormLogin(formBussines);
 
     this.initLoading();
 
-    if(this.isPersonLoggin && validPerson){
-      this._accountService.signIn(this.login, this.isPersonLoggin).subscribe(resp=>{
+    if (this.isPersonLoggin && validPerson) {
+      this._accountService.signIn(this.login, this.isPersonLoggin).subscribe(resp => {
         this.closeLoading();
-        if(resp.IsSuccess){
+        if (resp.IsSuccess) {
           this._accountService.guardarStorage(resp);
           this.closeModal();
-        }else{
-          this.notification.showNotificacion("Error","Error de autenticación",10);
+        } else {
+          this.notification.showNotificacion("Error", "Error de autenticación", 10);
           this.closeLoading();
         }
-      },()=>{
-        this.notification.showNotificacion("Error","Error de autenticación",10);
+      }, () => {
+        this.notification.showNotificacion("Error", "Error de autenticación", 10);
         this.closeLoading();
       })
 
 
-    }else if(!this.isPersonLoggin && validBusiness){
-      this._accountService.signIn(this.loginB, this.isPersonLoggin).subscribe(resp=>{
-        if(resp.IsSuccess){
+    } else if (!this.isPersonLoggin && validBusiness) {
+      this._accountService.signIn(this.loginB, this.isPersonLoggin).subscribe(resp => {
+        if (resp.IsSuccess) {
           this.closeLoading();
           this._accountService.guardarStorage(resp);
           this.closeModal();
         }
-      },()=>{
-        this.notification.showNotificacion("Error","Error de validación",5);
+      }, () => {
+        this.notification.showNotificacion("Error", "Error de validación", 5);
         this.closeLoading();
       })
 
-    }else if(!validPerson && this.isPersonLoggin){
-      this.submitPerson = true; 
-      this.notification.showNotificacion("Error","Error de validación",5);
+    } else if (!validPerson && this.isPersonLoggin) {
+      this.submitPerson = true;
+      this.notification.showNotificacion("Error", "Error de validación", 5);
       this.closeLoading();
       // this.openSnackBar("El usuario y la contraseña son requeridos")
-    }else if(!validBusiness && !this.isPersonLoggin){
+    } else if (!validBusiness && !this.isPersonLoggin) {
       this.submitBusiness = true;
-      this.notification.showNotificacion("Error","Error de validación",5);
+      this.notification.showNotificacion("Error", "Error de validación", 5);
       this.closeLoading();
       // this.openSnackBar("El usuario y la contraseña son requeridos")
-    }else{
+    } else {
       this.openSnackBar("Ocurrio un error");
-      this.notification.showNotificacion("Error","Error de validación",5);
+      this.notification.showNotificacion("Error", "Error de validación", 5);
       this.closeLoading();
     }
 
   }
 
-  toggleModalVerificaCorreo(){
+  toggleModalVerificaCorreo() {
     const modal = document.getElementById("ModalVerificaCorreo");
 
-    if(!modal){
-      return ;
+    if (!modal) {
+      return;
     }
 
     bootstrap.Modal.getOrCreateInstance(modal).toggle();
   }
 
 
-  saveSocialAccount(Firstname: string, FatherLastname: string, Email: string, SocialNetwork: "G" | "F", IdSocialNetwork: string, image:string) {
+  saveSocialAccount(Firstname: string, FatherLastname: string, Email: string, SocialNetwork: "G" | "F", IdSocialNetwork: string, image: string) {
 
     this.initLoading();
 
@@ -275,20 +275,20 @@ export class AppComponent implements OnInit {
       }
     };
 
-    this._accountService.saveAccount(payload).subscribe({ 
+    this._accountService.saveAccount(payload).subscribe({
       next: (response) => {
         this.closeLoading();
         const isSuccess = response.Result.IsSuccess;
 
         if (isSuccess) {
-          this._accountService.guardarStorage(response.Result,image);
+          this._accountService.guardarStorage(response.Result, image);
           this.closeModal();
           this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
             verticalPosition: 'top',
             duration: 2000
           });
         } else {
-          this.notification.showNotificacion("Error","Error del servidor",10);
+          this.notification.showNotificacion("Error", "Error del servidor", 10);
         }
 
 
@@ -296,7 +296,7 @@ export class AppComponent implements OnInit {
       },
       error: (err) => {
         this.closeLoading();
-        this.notification.showNotificacion("Error","Error del servidor",10);
+        this.notification.showNotificacion("Error", "Error del servidor", 10);
 
         //this.loaderSubjectService.closeLoader()
       },
@@ -306,10 +306,10 @@ export class AppComponent implements OnInit {
   }
 
 
-  togglePassword(pass:HTMLInputElement){
-    if(pass.type == "password"){
+  togglePassword(pass: HTMLInputElement) {
+    if (pass.type == "password") {
       pass.type = "text";
-    }else{
+    } else {
       pass.type = "password";
     }
   }
@@ -353,14 +353,14 @@ export class AppComponent implements OnInit {
 
             this.closeModal();
             this.toggleModalVerificaCorreo();
-            
+
 
             this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
               verticalPosition: 'top',
               duration: 2000
             });
           } else {
-            this.notification.showNotificacion("Error","Error del servidor",10);
+            this.notification.showNotificacion("Error", "Error del servidor", 10);
           }
 
           this.personalAccountForm.reset();
@@ -369,7 +369,7 @@ export class AppComponent implements OnInit {
         },
         error: (err) => {
           this.closeLoading();
-          this.notification.showNotificacion("Error","Error del servidor",10);
+          this.notification.showNotificacion("Error", "Error del servidor", 10);
 
           //this.loaderSubjectService.closeLoader()
         },
@@ -378,22 +378,22 @@ export class AppComponent implements OnInit {
     }
   }
 
-  toggleModalGetPass(){
+  toggleModalGetPass() {
     const modal = document.getElementById("ModalChangePass");
 
-    if(!modal){
-      return ;
+    if (!modal) {
+      return;
     }
 
     bootstrap.Modal.getOrCreateInstance(modal).toggle();
   }
 
-  closeModalRecovery(){
+  closeModalRecovery() {
     const btn = document.getElementById("btncloseRecovery");
 
 
-    if(!btn){
-      return ;
+    if (!btn) {
+      return;
     }
 
     btn.click();
@@ -401,22 +401,22 @@ export class AppComponent implements OnInit {
 
 
 
-  getPassword(email:string){
+  getPassword(email: string) {
 
     this.initLoading();
 
-    if(email.length <= 5){
-      this.notification.showNotificacion("Error","Ingrese email valido",5);
+    if (email.length <= 5) {
+      this.notification.showNotificacion("Error", "Ingrese email valido", 5);
     }
-    this._accountService.passwordSend(email).subscribe(resp=>{
+    this._accountService.passwordSend(email).subscribe(resp => {
       this.closeLoading();
-      if(resp.IsSuccess){
+      if (resp.IsSuccess) {
         this.closeModalRecovery();
-         this.toggleModalGetPass();
-      }else{
-        this.notification.showNotificacion("Error","Error del servidor",10);
+        this.toggleModalGetPass();
+      } else {
+        this.notification.showNotificacion("Error", "Error del servidor", 10);
       }
-    },()=>{
+    }, () => {
       this.closeLoading();
     })
   }
@@ -445,8 +445,8 @@ export class AppComponent implements OnInit {
           IsPerson: false,
           Ruc: this.businessAccountForm.get("ruc")?.value,
           BusinessName: this.businessAccountForm.get("businessName")?.value,
-          DocumentType: this.businessAccountForm.get("documentType")?.value,
-          DocumentNumber: this.businessAccountForm.get("documentNumber")?.value
+          // DocumentType: this.businessAccountForm.get("documentType")?.value,
+          // DocumentNumber: this.businessAccountForm.get("documentNumber")?.value
         }
       };
 
@@ -460,14 +460,14 @@ export class AppComponent implements OnInit {
               duration: 2000
             });
           } else {
-            this.notification.showNotificacion("Error","Ingrese datos correctos",10);
+            this.notification.showNotificacion("Error", "Ingrese datos correctos", 10);
           }
 
           //this.loaderSubjectService.closeLoader()
         },
         error: (err) => {
 
-          this.notification.showNotificacion("Error","Error del servidor",10);
+          this.notification.showNotificacion("Error", "Error del servidor", 10);
 
           //this.loaderSubjectService.closeLoader()
         },
