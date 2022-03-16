@@ -8,7 +8,7 @@ export class AsidePresenterService {
   slider: Aside[] = [
       {
         id: 0,
-        img: "3-PlayaDelCarmen.jpg",
+        img: "bannerHOME.jpg",
         key: true,
         class: "active"
       },

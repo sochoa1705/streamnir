@@ -26,6 +26,14 @@
     &-container{
         z-index:300;
     }
+    .close{
+        float: right;
+        font-size: 14px;
+        padding: 7px;
+        &:hover{
+            background: rgb(231, 230, 230);
+        }
+    }
     
 }
 mat-drawer-container {
@@ -62,7 +70,7 @@ mat-drawer-container {
             margin: 0 9px;
         }
         & > span {
-            font-size: 11px;
+            font-size: 6px;
             line-height: 10px;
             display: flex !important;
             flex-direction: column;
@@ -77,6 +85,7 @@ mat-drawer-container {
             }
         }
         &:hover > span {
+            font-size: 11px;
             line-height: 14px;
             color: $white;
             height: auto;

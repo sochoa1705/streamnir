@@ -7,6 +7,6 @@ import { IAereolineas } from '../aereolineas.interfaces';
 
 export class PorSlidePipe implements PipeTransform {
     transform(aereolineas: IAereolineas[], slideActual:number ,maxPorSilde:number): any {
-        return aereolineas.slice((slideActual-1)*maxPorSilde,maxPorSilde*slideActual);
+        return aereolineas.slice((slideActual-1)*maxPorSilde, (maxPorSilde*slideActual) + 1);
     }
 }

@@ -12,7 +12,7 @@
                 <div class="carousel-inner">
                     <ng-container *ngFor="let i of slider">
                         <div *ngIf="i.key" class="aside__content carousel-item {{ i.class }}">
-                            <img (click)="toSlider(i)" src="./assets/aside/{{ i.img }}" class="d-block w-100" alt="...">
+                            <img (click)="toSlider(i)" src="./assets/aside/slider/{{ i.img }}" class="d-block w-100" alt="...">
                         </div>
                     </ng-container>
                 </div>
