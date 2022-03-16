@@ -105,6 +105,16 @@ export class AppComponent implements OnInit {
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
+
+    // this.personalAccountForm.reset({
+    //   email: '',
+    //   password: ''
+    // });
+
+    // this.businessAccountForm.reset({
+    //   email: '',
+    //   password: ''
+    // });
   }
 
   loadUsuario() {
@@ -122,8 +132,8 @@ export class AppComponent implements OnInit {
       fatherLastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
       motherLastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
       email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]],
-      repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
+      repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
     }, {
       validators: [this._validatorsService.equalFields('password', 'repeatPassword')]
     });
@@ -139,10 +149,11 @@ export class AppComponent implements OnInit {
       // documentType: ['', [Validators.required, Validators.minLength(1)]],
       // documentNumber: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this._validatorsService.digitsPattern)]],
       email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]],
-      repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
+      repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
     }, {
-      validators: [this._validatorsService.equalFields('password', 'repeatPassword')]
+      validators: [this._validatorsService.equalFields('password', 'repeatPassword'),
+      this._validatorsService.validateRUC('ruc')]
     });
   }
 
@@ -362,7 +373,7 @@ export class AppComponent implements OnInit {
               duration: 2000
             });
           } else {
-            this.notification.showNotificacion("Error",response.Result.Message || "Error",10);
+            this.notification.showNotificacion("Error", response.Result.Message || "Error", 10);
           }
           //this.loaderSubjectService.closeLoader()
         },

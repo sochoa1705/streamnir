@@ -96,19 +96,19 @@ export class ResultadosComponent implements OnInit {
     this.getParams();
   }
 
-  vuelosLogicInit(respVuelos: ParamsVuelos, obj:Returns | null) {
+  vuelosLogicInit(respVuelos: ParamsVuelos, obj: Returns | null) {
 
     const origen: ICardAutocomplete = {
-      id: obj?.originCity?.code || respVuelos.departure ,
+      id: obj?.originCity?.code || respVuelos.departure,
       codigo: obj?.originCity.code || respVuelos.departure,
       title: obj?.originCity.name || respVuelos.departure,
       children: [],
     };
 
     const destino: ICardAutocomplete = {
-      id: obj?.destinationCity.code ||  respVuelos.destination,
+      id: obj?.destinationCity.code || respVuelos.destination,
       codigo: obj?.destinationCity.code || respVuelos.destination,
-      title: obj?.destinationCity.name  || respVuelos.destination,
+      title: obj?.destinationCity.name || respVuelos.destination,
       children: [],
     };
 
@@ -161,7 +161,7 @@ export class ResultadosComponent implements OnInit {
 
       this.urlIframe = "http://52.177.246.241/#/nmviajes/vuelos/resultados";
 
-      
+
       const respVuelos: ParamsVuelos = resp as ParamsVuelos;
 
       let {
@@ -177,7 +177,7 @@ export class ResultadosComponent implements OnInit {
       } = resp as ParamsVuelos;
 
 
-      this.vuelosLogicInit(respVuelos,null)
+      this.vuelosLogicInit(respVuelos, null)
 
       // this.loader.showText('Cargando los vuelos');
       // this.loader.showLoader();
@@ -302,7 +302,7 @@ export class ResultadosComponent implements OnInit {
       //     if(this.flights.length == 0){
       //       throw new Error('No hay vuelos disponibles');
       //     }
-      
+
       //     const obj = this.flights[0].departure[0];
 
       //     this.vuelosLogicInit(respVuelos, obj);
@@ -465,8 +465,6 @@ export class ResultadosComponent implements OnInit {
   //   console.log(filter);
 
   //   let aFlights: IAerolineas[];
-
-  //   debugger;
 
   //   if (filter.price.currency == 'soles') {
   //     aFlights = this.flightsOri.filter(

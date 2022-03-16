@@ -93,17 +93,17 @@ export class DestinationService extends BaseService {
    */
   v1ApiDestinationPut$Response(params?: {
     body?: {
-'Parameter.Code'?: string;
-'Parameter.Name'?: string;
-'Parameter.Status'?: boolean;
-'Parameter.Galleries'?: Array<Blob>;
-'Parameter.History'?: string;
-'Parameter.Description'?: string;
-'TrackingCode': string;
-'MuteExceptions': boolean;
-'Caller.Company': string;
-'Caller.Application': string;
-}
+      'Parameter.Code'?: string;
+      'Parameter.Name'?: string;
+      'Parameter.Status'?: boolean;
+      'Parameter.Galleries'?: Array<Blob>;
+      'Parameter.History'?: string;
+      'Parameter.Description'?: string;
+      'TrackingCode': string;
+      'MuteExceptions': boolean;
+      'Caller.Company': string;
+      'Caller.Application': string;
+    }
   }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, DestinationService.V1ApiDestinationPutPath, 'put');
@@ -130,17 +130,17 @@ export class DestinationService extends BaseService {
    */
   v1ApiDestinationPut(params?: {
     body?: {
-'Parameter.Code'?: string;
-'Parameter.Name'?: string;
-'Parameter.Status'?: boolean;
-'Parameter.Galleries'?: Array<Blob>;
-'Parameter.History'?: string;
-'Parameter.Description'?: string;
-'TrackingCode': string;
-'MuteExceptions': boolean;
-'Caller.Company': string;
-'Caller.Application': string;
-}
+      'Parameter.Code'?: string;
+      'Parameter.Name'?: string;
+      'Parameter.Status'?: boolean;
+      'Parameter.Galleries'?: Array<Blob>;
+      'Parameter.History'?: string;
+      'Parameter.Description'?: string;
+      'TrackingCode': string;
+      'MuteExceptions': boolean;
+      'Caller.Company': string;
+      'Caller.Application': string;
+    }
   }): Observable<void> {
 
     return this.v1ApiDestinationPut$Response(params).pipe(
@@ -161,16 +161,16 @@ export class DestinationService extends BaseService {
    */
   v1ApiDestinationPost$Response(params?: {
     body?: {
-'Parameter.Code'?: string;
-'Parameter.Name'?: string;
-'Parameter.Galleries'?: Array<Blob>;
-'Parameter.History'?: string;
-'Parameter.Description'?: string;
-'TrackingCode': string;
-'MuteExceptions': boolean;
-'Caller.Company': string;
-'Caller.Application': string;
-}
+      'Parameter.Code'?: string;
+      'Parameter.Name'?: string;
+      'Parameter.Galleries'?: Array<Blob>;
+      'Parameter.History'?: string;
+      'Parameter.Description'?: string;
+      'TrackingCode': string;
+      'MuteExceptions': boolean;
+      'Caller.Company': string;
+      'Caller.Application': string;
+    }
   }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, DestinationService.V1ApiDestinationPostPath, 'post');
@@ -197,16 +197,16 @@ export class DestinationService extends BaseService {
    */
   v1ApiDestinationPost(params?: {
     body?: {
-'Parameter.Code'?: string;
-'Parameter.Name'?: string;
-'Parameter.Galleries'?: Array<Blob>;
-'Parameter.History'?: string;
-'Parameter.Description'?: string;
-'TrackingCode': string;
-'MuteExceptions': boolean;
-'Caller.Company': string;
-'Caller.Application': string;
-}
+      'Parameter.Code'?: string;
+      'Parameter.Name'?: string;
+      'Parameter.Galleries'?: Array<Blob>;
+      'Parameter.History'?: string;
+      'Parameter.Description'?: string;
+      'TrackingCode': string;
+      'MuteExceptions': boolean;
+      'Caller.Company': string;
+      'Caller.Application': string;
+    }
   }): Observable<void> {
 
     return this.v1ApiDestinationPost$Response(params).pipe(
@@ -263,7 +263,7 @@ export class DestinationService extends BaseService {
   /**
    * Path part for operation v1ApiDestinationCodeGet
    */
-  static readonly V1ApiDestinationCodeGetPath = '/v1/api/Destination/Code';
+  static readonly V1ApiDestinationCodeGetPath = '/Destination/Code';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
