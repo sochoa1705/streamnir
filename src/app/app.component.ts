@@ -105,6 +105,16 @@ export class AppComponent implements OnInit {
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
+
+    // this.personalAccountForm.reset({
+    //   email: '',
+    //   password: ''
+    // });
+
+    // this.businessAccountForm.reset({
+    //   email: '',
+    //   password: ''
+    // });
   }
 
   loadUsuario() {

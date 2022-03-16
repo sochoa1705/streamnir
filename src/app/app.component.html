@@ -170,7 +170,7 @@
                 <mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMedia($event)">
                     <!-- PERSONAL -->
                     <mat-tab label="Personal">
-                        <form name="personalAccountForm" [formGroup]="personalAccountForm">
+                        <form name="personalAccountForm" [formGroup]="personalAccountForm" autocomplete="false">
 
                             <div class="elementRow">
                                 <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('firstName')}">

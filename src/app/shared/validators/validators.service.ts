@@ -6,7 +6,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 })
 export class ValidatorsService {
 
-  public lettersPattern: string = "^[a-zA-Z ]+$";
+  public lettersPattern: string = "^[a-zA-ZÁ-ú ]+$";
   public emailPattern: string = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
   public alphanumericPattern: string = "^[a-zA-Z0-9 ]+$";
   public digitsPattern: string = "^[0-9]+$";
