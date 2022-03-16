@@ -16,6 +16,7 @@ import { NuestrasAgenciasComponent } from './nuestras-agencias/nuestras-agencias
 import { LibroReclamacionesComponent } from './libro-reclamaciones/libro-reclamaciones.component';
 import { AppComponent } from 'src/app/app.component';
 import { CitaComponent } from './cita/cita.component';
+import { PoliticasComponent } from './politicas/politicas.component';
 
 const routes: Routes = [
   {
@@ -49,7 +50,8 @@ const routes: Routes = [
       { path: 'nuestra-empresa', component: NuestraEmpresaComponent },
       { path: 'nuestras-agencias', component: NuestrasAgenciasComponent },
       { path: 'libro-reclamaciones', component: LibroReclamacionesComponent },
-      { path: 'agendar-cita', component: CitaComponent }
+      { path: 'agendar-cita', component: CitaComponent },
+      { path: 'politicas', component: PoliticasComponent }
     ]
   }
 ];

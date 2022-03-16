@@ -1,12 +1,14 @@
 <router-outlet></router-outlet>
 
 <!-- Modal -->
-<div class="modal" data-backdrop="false" id="ModalSesion" tabindex="-1" aria-labelledby="ModalSesionLabel" aria-hidden="true">
+<div class="modal" data-backdrop="false" id="ModalSesion" tabindex="-1" aria-labelledby="ModalSesionLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <div class="text-end">
-                    <button #closeModalSesion type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button #closeModalSesion type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <img src="./assets/modal/Logo_modal.png" alt="">
                 <h1 class="modal-title" id="ModalSesionLabel">Iniciar sesión</h1>
@@ -21,11 +23,13 @@
                     <mat-tab label="Personal">
                         <form #formUser="ngForm" (ngSubmit)="formUser.form.valid" action="">
                             <div class="elementRow">
-                                <input type="text" email class="form-control" name="email" [(ngModel)]="login.email" placeholder="Email" required>
+                                <input type="text" email class="form-control" name="email" [(ngModel)]="login.email"
+                                    placeholder="Email" required>
                                 <div class="msgError">Ingresa tu email</div>
                             </div>
                             <div class="elementRow">
-                                <input type="password" #passwordP class="form-control" name="password" [(ngModel)]="login.password" placeholder="Contraseña" required>
+                                <input type="password" #passwordP class="form-control" name="password"
+                                    [(ngModel)]="login.password" placeholder="Contraseña" required>
                                 <div class="msgError">Ingresa tu contraseña</div>
                                 <div (click)="togglePassword(passwordP)" class="iconPass">
                                     <img src="./assets/modal/eye.png" alt="">
@@ -36,10 +40,12 @@
 
                             <div class="row mx-0">
                                 <div class="col-6">
-                                    <mat-checkbox [(ngModel)]="login.recorder" name="recorder" class="example-margin">Recordar datos</mat-checkbox>
+                                    <mat-checkbox [(ngModel)]="login.recorder" name="recorder" class="example-margin">
+                                        Recordar datos</mat-checkbox>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <a href="#" class="subRayado" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la contraseña?</a>
+                                    <a href="#" class="subRayado" data-bs-toggle="modal"
+                                        data-bs-target="#ModalRecovery">¿Olvidaste la contraseña?</a>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -47,9 +53,11 @@
                             <p class="textConecta">O conéctate con uno de estos servicios</p>
                             <div class="socialMedia">
                                 <div (click)="signInWithFB()" class="btnFacebook">
-                                    <img src="./assets/modal/facebook-logo.png" alt="">Facebook</div>
+                                    <img src="./assets/modal/facebook-logo.png" alt="">Facebook
+                                </div>
                                 <div (click)="signInWithGoogle()" class="btnGoogle">
-                                    <img src="./assets/modal/google-logo.png" alt="">Google</div>
+                                    <img src="./assets/modal/google-logo.png" alt="">Google
+                                </div>
                             </div>
                         </form>
                     </mat-tab>
@@ -58,15 +66,16 @@
 
                     <!-- EMPRESA -->
                     <mat-tab label="Empresa">
-
-                        {{loginBEmail.invalid}}
                         <form #formBusiness="ngForm" (ngSubmit)="formBusiness.form.valid" action="">
                             <div class="elementRow" [ngClass]="{'error': loginBEmail.invalid && submitBusiness}">
-                                <input #loginBEmail="ngModel" type="text" class="form-control" name="email" [(ngModel)]="loginB.email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" placeholder="Email" required>
+                                <input #loginBEmail="ngModel" type="text" class="form-control" name="email"
+                                    [(ngModel)]="loginB.email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+                                    placeholder="Email" required>
                                 <div *ngIf="loginBEmail.invalid" class="msgError">Ingresa tu email</div>
                             </div>
                             <div class="elementRow" [ngClass]="{'error': loginBPassword.invalid && submitBusiness}">
-                                <input #loginBPassword="ngModel" type="password" class="form-control" #passwordB name="password" [(ngModel)]="loginB.password" placeholder="Contraseña" required>
+                                <input #loginBPassword="ngModel" type="password" class="form-control" #passwordB
+                                    name="password" [(ngModel)]="loginB.password" placeholder="Contraseña" required>
                                 <div *ngIf="loginBPassword.invalid" class="msgError">Ingresa tu contraseña</div>
                                 <div (click)="togglePassword(passwordB)" class="iconPass">
                                     <img src="./assets/modal/eye.png" alt="">
@@ -74,11 +83,12 @@
                             </div>
                             <div class="row mx-0">
                                 <div class="col-6">
-                                    <mat-checkbox [(ngModel)]="loginB.recorder" name="recorder" class="example-margin">Recordar datos</mat-checkbox>
+                                    <mat-checkbox [(ngModel)]="loginB.recorder" name="recorder" class="example-margin">
+                                        Recordar datos</mat-checkbox>
                                 </div>
                                 <div class="col-6 text-end">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la
-										contraseña?</a>
+                                        contraseña?</a>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -99,7 +109,8 @@
 </div>
 
 <!-- Modal Recuperar contraseña-->
-<div class="modal" data-backdrop="false" id="ModalRecovery" tabindex="-1" aria-labelledby="modalRecoveryLabel" aria-hidden="true">
+<div class="modal" data-backdrop="false" id="ModalRecovery" tabindex="-1" aria-labelledby="modalRecoveryLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content ">
             <div class="recoveryLeft ">
@@ -108,7 +119,8 @@
             </div>
             <div class="recoveryRight">
                 <div class="modal-header">
-                    <button type="button" id="btncloseRecovery" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" id="btncloseRecovery" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="titleRecovery">Recuperar contraseña</div>
                 <form action="">
@@ -132,7 +144,8 @@
 </div>
 
 <!-- Modal Create Account-->
-<div class="modal" data-backdrop="false" id="ModalNewAccount" tabindex="-1" aria-labelledby="modalNewAccountLabel" aria-hidden="true">
+<div class="modal" data-backdrop="false" id="ModalNewAccount" tabindex="-1" aria-labelledby="modalNewAccountLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content ">
             <div class="recoveryLeft ">
@@ -141,7 +154,8 @@
             </div>
             <div class="recoveryRight ">
                 <div class="modal-header">
-                    <button type="button" #closeModalNewAccount class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" #closeModalNewAccount class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="titleRecovery">Crear cuenta</div>
                 <div class="socialMedia" [class.active]="socialMedia">
@@ -160,7 +174,8 @@
 
                             <div class="elementRow">
                                 <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('firstName')}">
-                                    <input type="text" class="form-control" formControlName="firstName" placeholder="Nombres">
+                                    <input type="text" class="form-control" formControlName="firstName"
+                                        placeholder="Nombres">
 
                                     <div class="textError" *ngIf="validatePersonalAccountForm('firstName')">
                                         Ingresa tu(s) nombre(s)
@@ -169,16 +184,20 @@
                             </div>
 
                             <div class="elementRow">
-                                <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('fatherLastname')}">
-                                    <input type="text" class="form-control" formControlName="fatherLastname" placeholder="Primer apellido">
+                                <div class="divValida"
+                                    [ngClass]="{error : validatePersonalAccountForm('fatherLastname')}">
+                                    <input type="text" class="form-control" formControlName="fatherLastname"
+                                        placeholder="Primer apellido">
 
                                     <div class="textError" *ngIf="validatePersonalAccountForm('fatherLastname')">
                                         Ingresa tu primer apellido
                                     </div>
                                 </div>
 
-                                <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('motherLastname')}">
-                                    <input type="text" class="form-control" formControlName="motherLastname" placeholder="Segundo apellido">
+                                <div class="divValida"
+                                    [ngClass]="{error : validatePersonalAccountForm('motherLastname')}">
+                                    <input type="text" class="form-control" formControlName="motherLastname"
+                                        placeholder="Segundo apellido">
 
                                     <div class="textError" *ngIf="validatePersonalAccountForm('motherLastname')">
                                         Ingresa tu segundo apellido
@@ -188,7 +207,8 @@
 
                             <div class="elementRow">
                                 <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('email')}">
-                                    <input type="text" class="form-control" formControlName="email" placeholder="Email">
+                                    <input type="text" class="form-control form-email-input" formControlName="email"
+                                        placeholder="Email">
 
                                     <div class="textError" *ngIf="validatePersonalAccountForm('email')">
                                         Ingresa tu email
@@ -198,15 +218,18 @@
 
                             <div class="elementRow">
                                 <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('password')}">
-                                    <input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+                                    <input type="password" class="form-control" formControlName="password"
+                                        placeholder="Contraseña">
 
                                     <div class="textError" *ngIf="validatePersonalAccountForm('password')">
                                         Ingresa una contraseña
                                     </div>
                                 </div>
 
-                                <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('repeatPassword')}">
-                                    <input type="password" class="form-control" formControlName="repeatPassword" placeholder="Confirmar contraseña">
+                                <div class="divValida"
+                                    [ngClass]="{error : validatePersonalAccountForm('repeatPassword')}">
+                                    <input type="password" class="form-control" formControlName="repeatPassword"
+                                        placeholder="Confirmar contraseña">
 
                                     <div class="textError" *ngIf="validatePersonalAccountForm('repeatPassword')">
                                         Ingresa la misma contraseña
@@ -257,8 +280,10 @@
                                     </div>
                                 </div>
 
-                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('businessName')}">
-                                    <input type="text" class="form-control" formControlName="businessName" placeholder="Razón Social">
+                                <div class="divValida"
+                                    [ngClass]="{error : validateBusinessAccountForm('businessName')}">
+                                    <input type="text" class="form-control" formControlName="businessName"
+                                        placeholder="Razón Social">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('businessName')">
                                         Ingresa la razón social
@@ -268,7 +293,8 @@
 
                             <div class="elementRow">
                                 <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('firstName')}">
-                                    <input type="text" class="form-control" formControlName="firstName" placeholder="Nombres">
+                                    <input type="text" class="form-control" formControlName="firstName"
+                                        placeholder="Nombres">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('firstName')">
                                         Ingresa tu(s) nombre(s)
@@ -277,16 +303,20 @@
                             </div>
 
                             <div class="elementRow">
-                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('fatherLastname')}">
-                                    <input type="text" class="form-control" formControlName="fatherLastname" placeholder="Apellido paterno">
+                                <div class="divValida"
+                                    [ngClass]="{error : validateBusinessAccountForm('fatherLastname')}">
+                                    <input type="text" class="form-control" formControlName="fatherLastname"
+                                        placeholder="Apellido paterno">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('fatherLastname')">
                                         Ingresa tu primer apellido
                                     </div>
                                 </div>
 
-                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('motherLastname')}">
-                                    <input type="text" class="form-control" formControlName="motherLastname" placeholder="Apellido materno">
+                                <div class="divValida"
+                                    [ngClass]="{error : validateBusinessAccountForm('motherLastname')}">
+                                    <input type="text" class="form-control" formControlName="motherLastname"
+                                        placeholder="Apellido materno">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('motherLastname')">
                                         Ingresa tu segundo apellido
@@ -294,30 +324,34 @@
                                 </div>
                             </div>
 
-                            <div class="elementRow">
-                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('documentType')}">
+                            <!-- <div class="elementRow">
+                                <div class="divValida"
+                                    [ngClass]="{error : validateBusinessAccountForm('documentType')}">
                                     <select class="form-select" formControlName="documentType">
-										<option value="" selected>Seleccione</option>
-										<option value="1">DNI</option>
-									</select>
+                                        <option value="" selected>Seleccione</option>
+                                        <option value="1">DNI</option>
+                                    </select>
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('documentType')">
                                         Selecciona el tipo de documento
                                     </div>
                                 </div>
 
-                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('documentNumber')}">
-                                    <input type="text" class="form-control" formControlName="documentNumber" placeholder="DNI">
+                                <div class="divValida"
+                                    [ngClass]="{error : validateBusinessAccountForm('documentNumber')}">
+                                    <input type="text" class="form-control" formControlName="documentNumber"
+                                        placeholder="DNI">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('documentNumber')">
                                         Ingresa tu número de documento
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="elementRow">
                                 <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('email')}">
-                                    <input type="text" class="form-control" formControlName="email" placeholder="Email">
+                                    <input type="text" class="form-control form-email-input" formControlName="email"
+                                        placeholder="Email">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('email')">
                                         Ingresa tu email
@@ -327,15 +361,18 @@
 
                             <div class="elementRow">
                                 <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('password')}">
-                                    <input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+                                    <input type="password" class="form-control" formControlName="password"
+                                        placeholder="Contraseña">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('password')">
                                         Ingresa una contraseña
                                     </div>
                                 </div>
 
-                                <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('repeatPassword')}">
-                                    <input type="password" class="form-control" formControlName="repeatPassword" placeholder="Contraseña">
+                                <div class="divValida"
+                                    [ngClass]="{error : validateBusinessAccountForm('repeatPassword')}">
+                                    <input type="password" class="form-control" formControlName="repeatPassword"
+                                        placeholder="Contraseña">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('repeatPassword')">
                                         Ingresa la misma contraseña
@@ -369,7 +406,8 @@
 </div>
 
 <!-- Modal Verifica Correo -->
-<div class="modal" data-backdrop="false" id="ModalVerificaCorreo" tabindex="-1" aria-labelledby="ModalVerificaCorreoLabel" aria-hidden="true">
+<div class="modal" data-backdrop="false" id="ModalVerificaCorreo" tabindex="-1"
+    aria-labelledby="ModalVerificaCorreoLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -381,7 +419,8 @@
                     <img src="./assets/modal/correo.svg" alt="">
                 </div>
                 <div class="descripText">
-                    Hemos enviado un correo de verificación a tu email ingresado, por favor valida el código a continuación para confirmar que tienes acceso.
+                    Hemos enviado un correo de verificación a tu email ingresado, por favor valida el código a
+                    continuación para confirmar que tienes acceso.
                 </div>
                 <div class="action">
                     <button data-bs-dismiss="modal" aria-label="Close" type="button" class="">Aceptar</button>
@@ -392,7 +431,8 @@
 </div>
 
 <!-- Modal Cambio de password -->
-<div class="modal" data-backdrop="false" id="ModalChangePass" tabindex="-1" aria-labelledby="ModalChangePassLabel" aria-hidden="true">
+<div class="modal" data-backdrop="false" id="ModalChangePass" tabindex="-1" aria-labelledby="ModalChangePassLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
