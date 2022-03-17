@@ -70,6 +70,7 @@ export class ActivityComponent implements OnInit {
       'Caller.Company': "Agil",
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
+      debugger
       this.tickets = JSON.parse(res).Result;
     });
   }
