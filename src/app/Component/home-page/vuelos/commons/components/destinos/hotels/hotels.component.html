@@ -18,7 +18,7 @@
 
 <div class="rowDestino titulo" style="margin-bottom: 50px;" *ngIf="hotels.length">Reserva un hotel</div>
 
-<div class="cardHotel" [ngClass]="{show : hotels}">
+<div class="cardHotel" [ngClass]="{show : hotels.length}">
 
     <div class="loadingBoxCard" [ngClass]="{show : !hotels}">
         <div class="iconLoading">
