@@ -5617,7 +5617,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         line-height: 21px;
         letter-spacing: 0.15px;
         color: #4B4B4B;
-        padding: 0px 15px;
+        padding: 0px 15px 15px;
     }
     .cardDuracion {
         font-family: Montserrat;
@@ -5625,7 +5625,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         line-height: 21px;
         letter-spacing: 0.1px;
         color: #4B4B4B;
-        padding: 0 25px 10px 25px;
+        padding: 0 25px 15px 25px;
         font-weight: 500;
         display: flex;
         align-items: center;
@@ -5700,9 +5700,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
                 .cardDuracion,
                 .cardOpinion,
-                .cardActividad,
-                .cardStar {
-                    padding: 0 10px 5px 10px;
+                .cardActividad{
+                //.cardStar {
+                    padding: 0 10px 10px 10px;
                     font-size: 10px;
                     line-height: 15px;
                 }
@@ -5747,6 +5747,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             justify-content: center;
             cursor: pointer !important;
             background-color: #DADADA !important;
+            margin-bottom: 115px;
             &:hover {
                 background-color: rgba(223, 12, 48, 1)!important;
                 ;
@@ -5900,9 +5901,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             justify-content: center;
             cursor: pointer !important;
             background-color: #DADADA !important;
+            margin-bottom: 180px;
             &:hover {
                 background-color: rgba(223, 12, 48, 1)!important;
-                ;
+            }
+            @media (max-width: 640px) {
+                margin-bottom: 170px;
             }
         }
         .p-carousel-prev {
@@ -6101,7 +6105,29 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         padding: 0 25px 20px 25px;
     }
     .cardEvaluacion {
-        padding: 0 25px 20px 25px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        .groupItems {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 20px;
+            .itemsCardEvaluacion {
+                margin-bottom: 10px;
+                width: 50%;
+                &.aRight {
+                    display: flex;
+                    justify-content: flex-end;
+                }
+                img {
+                    height: 32px;
+                }
+            }
+            @media (max-width: 640px) {
+                padding: 0;
+            }
+        }
     }
 }
 
@@ -7874,8 +7900,8 @@ button.customers {
                         margin-bottom: 20px;
                         font-family: Montserrat;
                         font-size: 14px;
-                        text-transform: capitalize;
-                        color: #B9BCBF;
+                        // text-transform: capitalize;
+                        // color: #B9BCBF;
                         border-radius: 5px;
                         height: 41px;
                         border: 1px solid #ced4da;
@@ -7883,6 +7909,9 @@ button.customers {
                     .form-select {
                         //width: calc(100% - 30px);
                     }
+                    .form-email-input {
+                        text-transform: none;
+                    }                    
                     .divValida {
                         &.wSelect {
                             min-width: calc(50% - 8px);

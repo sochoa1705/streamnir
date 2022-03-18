@@ -141,7 +141,7 @@ export class AppComponent implements OnInit {
 
   createBusinessAccountForm(): FormGroup {
     return this._formBuilder.group({
-      ruc: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern(this._validatorsService.digitsPattern)]],
+      ruc: ['', [Validators.required, Validators.minLength(11), Validators.pattern(this._validatorsService.digitsPattern)]],
       businessName: ['', [Validators.required, Validators.minLength(3), Validators.pattern(this._validatorsService.lettersPattern)]],
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.pattern(this._validatorsService.lettersPattern)]],
       fatherLastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
@@ -152,7 +152,8 @@ export class AppComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
       repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
     }, {
-      validators: [this._validatorsService.equalFields('password', 'repeatPassword')]
+      validators: [this._validatorsService.equalFields('password', 'repeatPassword'),
+      this._validatorsService.validateRUC('ruc')]
     });
   }
 
@@ -164,6 +165,48 @@ export class AppComponent implements OnInit {
   validateBusinessAccountForm(field: string) {
     return this.businessAccountForm.controls[field].errors
       && this.businessAccountForm.controls[field].touched;
+  }
+
+  get personalAccountEmailErrorMessage(): string {
+    const errors = this.personalAccountForm.get('email')?.errors;
+
+    if (errors?.required) {
+      return 'Ingresa tu email';
+    } else if (errors?.minlength) {
+      return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
+    } else if (errors?.pattern) {
+      return 'El valor ingresado no tiene formato de email.';
+    }
+
+    return '';
+  }
+
+  get businessAccountEmailErrorMessage(): string {
+    const errors = this.businessAccountForm.get('email')?.errors;
+
+    if (errors?.required) {
+      return 'Ingresa tu email';
+    } else if (errors?.minlength) {
+      return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
+    } else if (errors?.pattern) {
+      return 'El valor ingresado no tiene formato de email.';
+    }
+
+    return '';
+  }
+
+  get businessAccountRUCErrorMessage(): string {
+    const errors = this.businessAccountForm.get('ruc')?.errors;
+
+    if (errors?.required) {
+      return 'Ingresa el número de RUC';
+    } else if (errors?.minlength) {
+      return `Un RUC válido tiene ${errors?.minlength.requiredLength} dígitos.`;
+    } else if (errors?.notValid) {
+      return 'Ingresa un número de RUC válido.';
+    }
+
+    return '';
   }
 
   saveAccount(): void {

@@ -213,15 +213,15 @@
                                         placeholder="Email">
 
                                     <div class="textError" *ngIf="validatePersonalAccountForm('email')">
-                                        Ingresa tu email
+                                        {{ personalAccountEmailErrorMessage }}
                                     </div>
                                 </div>
                             </div>
 
                             <div class="elementRow">
                                 <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('password')}">
-                                    <input type="password" class="form-control" formControlName="password"
-                                        placeholder="Contraseña">
+                                    <input type="password" maxlength="10" class="form-control"
+                                        formControlName="password" placeholder="Contraseña">
 
                                     <div class="textError" *ngIf="validatePersonalAccountForm('password')">
                                         Ingresa una contraseña
@@ -230,8 +230,8 @@
 
                                 <div class="divValida"
                                     [ngClass]="{error : validatePersonalAccountForm('repeatPassword')}">
-                                    <input type="password" class="form-control" formControlName="repeatPassword"
-                                        placeholder="Confirmar contraseña">
+                                    <input type="password" maxlength="10" class="form-control"
+                                        formControlName="repeatPassword" placeholder="Confirmar contraseña">
 
                                     <div class="textError" *ngIf="validatePersonalAccountForm('repeatPassword')">
                                         Ingresa la misma contraseña
@@ -244,26 +244,27 @@
                         <!-- <h5>FirstName</h5>
 						<pre>{{ personalAccountForm.controls.firstName.errors | json }}</pre> -->
 
-                        <!-- 
-						<h5>Form Valid: {{ personalAccountForm.valid }}</h5>
+                        <!-- <pre> {{ personalAccountForm.controls.email.errors | json }}</pre> -->
 
-						<h5>Form Errors</h5>
-						<pre>{{ personalAccountForm.errors | json }}</pre>
+                        <!-- <h5>Form Valid: {{ personalAccountForm.valid }}</h5>
 
-						<h5>Json</h5>
-						<pre> {{ personalAccountForm.value | json }}</pre>
+                        <h5>Form Errors</h5>
+                        <pre>{{ personalAccountForm.errors | json }}</pre>
 
-						<h5>FirstName</h5>
-						<pre>{{ personalAccountForm.controls.firstName.errors | json }}</pre>
+                        <h5>Json</h5>
+                        <pre> {{ personalAccountForm.value | json }}</pre>
 
-						<h5>Email</h5>
-						<pre>{{ personalAccountForm.controls.email.errors | json }}</pre>
+                        <h5>FirstName</h5>
+                        <pre>{{ personalAccountForm.controls.firstName.errors | json }}</pre>
 
-						<h5>Password</h5>
-						<pre>{{ personalAccountForm.controls.password.errors | json }}</pre>
+                        <h5>Email</h5>
+                        <pre>{{ personalAccountForm.controls.email.errors | json }}</pre>
 
-						<h5>Repeat Password</h5>
-						<pre>{{ personalAccountForm.controls.repeatPassword.errors | json }}</pre> -->
+                        <h5>Password</h5>
+                        <pre>{{ personalAccountForm.controls.password.errors | json }}</pre>
+
+                        <h5>Repeat Password</h5>
+                        <pre>{{ personalAccountForm.controls.repeatPassword.errors | json }}</pre> -->
 
 
                     </mat-tab>
@@ -271,14 +272,15 @@
 
                     <!-- EMPRESA -->
                     <mat-tab label="Empresa">
-                        <form name="businessAccountForm" [formGroup]="businessAccountForm">
+                        <form name="businessAccountForm" [formGroup]="businessAccountForm" autocomplete="false">
 
                             <div class="elementRow">
                                 <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('ruc')}">
-                                    <input type="text" class="form-control" formControlName="ruc" placeholder="RUC">
+                                    <input type="text" class="form-control" maxlength="11" formControlName="ruc"
+                                        placeholder="RUC">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('ruc')">
-                                        Ingresa el número de RUC
+                                        {{ businessAccountRUCErrorMessage }}
                                     </div>
                                 </div>
 
@@ -356,15 +358,15 @@
                                         placeholder="Email">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('email')">
-                                        Ingresa tu email
+                                        {{ businessAccountEmailErrorMessage }}
                                     </div>
                                 </div>
                             </div>
 
                             <div class="elementRow">
                                 <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('password')}">
-                                    <input type="password" class="form-control" formControlName="password"
-                                        placeholder="Contraseña">
+                                    <input type="password" maxlength="10" class="form-control"
+                                        formControlName="password" placeholder="Contraseña">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('password')">
                                         Ingresa una contraseña
@@ -373,8 +375,8 @@
 
                                 <div class="divValida"
                                     [ngClass]="{error : validateBusinessAccountForm('repeatPassword')}">
-                                    <input type="password" class="form-control" formControlName="repeatPassword"
-                                        placeholder="Contraseña">
+                                    <input type="password" maxlength="10" class="form-control"
+                                        formControlName="repeatPassword" placeholder="Contraseña">
 
                                     <div class="textError" *ngIf="validateBusinessAccountForm('repeatPassword')">
                                         Ingresa la misma contraseña
@@ -384,8 +386,7 @@
 
                         </form>
 
-                        <!-- <h5>ruc</h5>
-						<pre>{{ businessAccountForm.controls.ruc.errors | json }}</pre> -->
+                        <!-- <pre>{{ businessAccountForm.controls.ruc.errors | json }}</pre> -->
 
                     </mat-tab>
                     <!-- END EMPRESA -->

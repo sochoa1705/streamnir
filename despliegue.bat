@@ -24,6 +24,6 @@ cls
 
 echo  %USERNAME% la aplicacion se desplego correctamente
 
-powershell -Command "kubectl get service nmviajes"
+powershell -Command "kubectl get service nmviajes-balancer"
 
 pause
