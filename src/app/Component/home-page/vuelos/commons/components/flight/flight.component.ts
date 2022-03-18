@@ -11,6 +11,8 @@ import { interval, Observable } from 'rxjs';
 import { FlightService } from './flight.service';
 import { IFlightRates, IVuelos, TYPE_PARAM } from './flight.models';
 import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
+import { NMRequest } from 'src/app/Models/base/NMRequest';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class FlightComponent implements OnInit {
 
   public OfertaVuelosRequest: ListaTarifaRequest = new ListaTarifaRequest();
   //  ListaTarifa : any;
-
+  destiny: any = []
   $vuelosInternacionales: Observable<IFlightRates[]>;
   $vuelosNacionales: Observable<IFlightRates[]>;
   $aereolineas: Observable<IAereolineas[]>;
@@ -33,18 +35,18 @@ export class FlightComponent implements OnInit {
     public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
     // private coreService: DestinyService,
-    private flightService: FlightService
+    private flightService: FlightService,
+    public destinyService: DestinyService,
   ) { }
 
   ngOnInit(): void {
-
+    this.listDestiny()
     this.OfertaVuelos();
 
     this.loadVuelosInternacionales();
     this.loadVuelosNacionales();
     this.loadAereolineas();
     this.loadVuelos();
-
   }
 
   loadVuelosInternacionales() {
@@ -104,5 +106,17 @@ export class FlightComponent implements OnInit {
   }
 
   /* end code */
+  listDestiny() {
+    let payload = new NMRequest();
 
+    this.destinyService.getDestiny(payload).pipe(take(1)).subscribe({
+      next: (response) => {
+        this.destiny = response['Resultado']
+        localStorage.setItem('destiny', JSON.stringify(this.destiny));
+        console.log(this.destiny)
+      },
+      error: error => console.log(error),
+    }
+    )
+  }
 }

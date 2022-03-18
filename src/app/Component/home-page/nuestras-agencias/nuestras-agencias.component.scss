@@ -1,10 +1,12 @@
-img{
+img {
     width: 100%
 }
-.mat-icon{
+
+.mat-icon {
     margin-right: 10px;
 }
-.flotante{
+
+.flotante {
     position: absolute;
     width: 510px;
     height: auto;
@@ -12,49 +14,59 @@ img{
     border-radius: 5px;
     padding-top: 20px;
     padding-bottom: 20px;
-    z-index:1;
+    z-index: 1;
     @media (max-width: 768px) {
         width: 95%;
-        left: 3%!important;
+        left: 3% !important;
     }
 }
-h2.titleHome{
+
+h2.titleHome {
     @media (max-width: 768px) {
-        font-size: 18px!important
+        font-size: 18px !important
     }
 }
-.direccion{
+
+.direccion {
     @extend .flotante;
-    top:260px;
+    top: 328px;
     left: 100px;
     padding: 10px 20px;
-    .row{
+    @media (max-width: 768px) {
+        top: 260px;
+    }
+    .row {
         margin: 10px 0;
-        span{
+        span {
             display: block;
             @media (max-width: 768px) {
-                font-size: 16px!important
+                font-size: 16px !important
             }
         }
     }
 }
-.buscador{
+
+.buscador {
     @extend .flotante;
-    top:100px;
+    top: 180px;
     left: 100px;
-    .mat-div{
-        margin:auto
+    @media (max-width: 768px) {
+        top:124px;
     }
-    input{
+    .mat-div {
+        margin: auto
+    }
+    input {
         width: calc(100% - 26px);
         background: white;
-        border:0;
-        &:focus-visible{
+        border: 0;
+        &:focus-visible {
             outline: 0;
         }
     }
 }
-ul li{
+
+ul li {
     font-family: Montserrat;
     font-weight: 500;
     font-size: 14px;
@@ -64,6 +76,7 @@ ul li{
     color: #4B4B4B;
     margin-bottom: 24px;
 }
+
 // ul {
 //     list-style: none;
 //   }

@@ -93,7 +93,9 @@
         display: flex;
         width: 100%;
         &>a>img{
-            height: 15px;
+            @media (max-width: 768px) {
+                height: 15px;
+            }
             cursor: pointer;
             margin: 0 6px;
         }
