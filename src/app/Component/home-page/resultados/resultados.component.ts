@@ -23,6 +23,7 @@ import { IAerolineas, ParamsVuelos, Returns } from './models/resultados.interfac
 import { FareBreakPipe } from './pipes/fare-break-downs.pipe';
 import { ResultadosService } from './services/resultados.service';
 import { objectToQueryString, toUp } from 'src/app/shared/utils';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-resultados',
@@ -159,7 +160,7 @@ export class ResultadosComponent implements OnInit {
 
     this.ar.queryParams.subscribe((resp) => {
 
-      this.urlIframe = "http://52.177.246.241/#/nmviajes/vuelos/resultados";
+      this.urlIframe = environment.urlIframeMotorVuelos + "/vuelos/resultados";
 
 
       const respVuelos: ParamsVuelos = resp as ParamsVuelos;
@@ -182,8 +183,6 @@ export class ResultadosComponent implements OnInit {
       // this.loader.showText('Cargando los vuelos');
       // this.loader.showLoader();
 
-      arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
-      departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
 
       const payload = new DisponibilidadPayload(
         Number(flightType),
