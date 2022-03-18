@@ -72,7 +72,7 @@
                 <div class="colDestino">{{item.SearchTime}}</div>
                 <div class="colDestino boldTarifa">{{'$ '+ item.Total}}</div>
                 <div class="colDestino">
-                    <div class="btnBuscar">Buscar</div>
+                    <div (click)="buscarVuelo(item)" class="btnBuscar">Buscar</div>
                 </div>
             </div>
 

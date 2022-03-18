@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class PackagesService {
   packages: any = [
     {
-      id:0,
+      id: 0,
       image: './assets/img-cusco.jpg',
       destiny: 'Cusco',
       from: 'Desde lima',
@@ -17,7 +17,7 @@ export class PackagesService {
 
     },
     {
-      id:1,
+      id: 1,
       image: './assets/img-madrid.png',
       destiny: 'Madrid',
       from: 'Desde lima',
@@ -26,7 +26,7 @@ export class PackagesService {
       link: '#',
     },
     {
-      id:2,
+      id: 2,
       image: './assets/img-miami.png',
       destiny: 'Miami',
       from: 'Desde lima',
@@ -35,7 +35,7 @@ export class PackagesService {
       link: '#',
     },
     {
-      id:3,
+      id: 3,
       image: './assets/img-mexico.png',
       destiny: 'México',
       from: 'Desde lima',
@@ -44,7 +44,7 @@ export class PackagesService {
       link: '#',
     },
     {
-      id:4,
+      id: 4,
       image: './assets/package/13-RivieraMaya.jpg',
       label: 'Saliendo de Lima',
       destiny: 'MÉXICO',
@@ -56,7 +56,7 @@ export class PackagesService {
       pack: '6 días / 5 noches'
     },
     {
-      id:5,
+      id: 5,
       image: './assets/package/9-cancun.jpg',
       label: 'Saliendo de Lima',
       destiny: 'MÉXICO',
@@ -80,7 +80,7 @@ export class PackagesService {
       pack: '4 días / 3 noches'
     },
     {
-      id:7,
+      id: 7,
       image: './assets/package/8-zorritos.jpg',
       label: 'Saliendo de Lima',
       destiny: 'PERÚ',
@@ -92,7 +92,7 @@ export class PackagesService {
       pack: '4 días / 3 noches'
     },
     {
-      id:8,
+      id: 8,
       image: './assets/package/2-iquitos.jpg',
       label: 'Saliendo de Lima',
       destiny: 'PERÚ',
@@ -104,7 +104,7 @@ export class PackagesService {
       pack: '4 días / 3 noches'
     },
     {
-      id:9,
+      id: 9,
       image: './assets/internacionales/img-01.png',
       city: 'MADRID',
       span: 'desde $718',
@@ -112,10 +112,10 @@ export class PackagesService {
       banner: 4,
       fly: true,
       btn: 'Ver Tarifas',
-      route: '/vuelos/destinos'
+      route: '/vuelos/destino'
     },
     {
-      id:10,
+      id: 10,
       image: './assets/internacionales/img-02.png',
       city: 'MIAMI',
       span: 'desde $218',
@@ -123,10 +123,10 @@ export class PackagesService {
       banner: 4,
       fly: true,
       btn: 'Ver Tarifas',
-      route: '/vuelos/destinos'
+      route: '/vuelos/destino'
     },
     {
-      id:11,
+      id: 11,
       image: './assets/internacionales/img-03.png',
       city: 'CANCÚN',
       span: 'desde $249',
@@ -134,10 +134,10 @@ export class PackagesService {
       banner: 4,
       fly: true,
       btn: 'Ver Tarifas',
-      route: '/vuelos/destinos'
+      route: '/vuelos/destino'
     },
     {
-      id:12,
+      id: 12,
       image: './assets/internacionales/img-04.png',
       city: 'BUENOS AIRES',
       span: 'desde $285',
@@ -145,10 +145,10 @@ export class PackagesService {
       banner: 4,
       fly: true,
       btn: 'Ver Tarifas',
-      route: '/vuelos/destinos'
+      route: '/vuelos/destino'
     },
     {
-      id:13,
+      id: 13,
       image: './assets/internacionales/img-05.png',
       city: 'SANTIAGO DE CHILE',
       span: 'desde $163',
@@ -156,10 +156,10 @@ export class PackagesService {
       banner: 4,
       fly: true,
       btn: 'Ver Tarifas',
-      route: '/vuelos/destinos'
+      route: '/vuelos/destino'
     },
     {
-      id:14,
+      id: 14,
       image: './assets/internacionales/img-06.png',
       city: 'MÉXICO',
       span: 'desde $244',
@@ -167,10 +167,10 @@ export class PackagesService {
       banner: 4,
       fly: true,
       btn: 'Ver Tarifas',
-      route: '/vuelos/destinos'
+      route: '/vuelos/destino'
     },
     {
-      id:15,
+      id: 15,
       image: './assets/internacionales/img-07.png',
       city: 'BOGOTÁ',
       span: 'desde $179',
@@ -178,10 +178,10 @@ export class PackagesService {
       banner: 4,
       fly: true,
       btn: 'Ver Tarifas',
-      route: '/vuelos/destinos'
+      route: '/vuelos/destino'
     },
     {
-      id:16,
+      id: 16,
       image: './assets/internacionales/img-08.png',
       city: 'NEY YORK',
       span: 'desde $443',
@@ -189,10 +189,10 @@ export class PackagesService {
       banner: 4,
       fly: true,
       btn: 'Ver Tarifas',
-      route: '/vuelos/destinos'
+      route: '/vuelos/destino'
     },
     {
-      id:17,
+      id: 17,
       image: './assets/internacionales/img-09.png',
       city: 'BARCELONA',
       span: 'desde $728',
@@ -200,10 +200,10 @@ export class PackagesService {
       banner: 4,
       fly: true,
       btn: 'Ver Tarifas',
-      route: '/vuelos/destinos'
+      route: '/vuelos/destino'
     },
     {
-      id:18,
+      id: 18,
       image: './assets/internacionales/img-10.png',
       city: 'CARTAGENA',
       span: 'desde $208',
@@ -211,7 +211,7 @@ export class PackagesService {
       banner: 4,
       fly: true,
       btn: 'Ver Tarifas',
-      route: '/vuelos/destinos'
+      route: '/vuelos/destino'
     }
   ];
   constructor() { }

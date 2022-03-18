@@ -40,8 +40,8 @@ export class PackageComponent {
   ) { }
 
 
-  toDestiny(e: any){
-    this.route.navigate(['/home/vuelos/destinos',this.codigo_ciudad])
+  toDestiny(e: any) {
+    this.route.navigate(['/vuelos/destino', this.codigo_ciudad])
   }
 
 }

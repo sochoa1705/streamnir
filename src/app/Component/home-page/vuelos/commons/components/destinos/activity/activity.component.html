@@ -1,4 +1,4 @@
-<div class="rowDestino center" *ngIf="tickets.length">
+<div class="rowDestino center" *ngIf="tickets?.length">
   <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_117:1334)">
       <path
@@ -34,11 +34,11 @@
   </svg>
 </div>
 
-<div class="rowDestino titulo" *ngIf="tickets.length">Actividades</div>
-<div class="rowDestino subtitulo mt-4" *ngIf="tickets.length">Reserva experiencias inolvidables en todo el mundo.
+<div class="rowDestino titulo" *ngIf="tickets?.length">Actividades</div>
+<div class="rowDestino subtitulo mt-4" *ngIf="tickets?.length">Reserva experiencias inolvidables en todo el mundo.
 </div>
 
-<div class="boxPackage" *ngIf="tickets.length">
+<div class="boxPackage" *ngIf="tickets?.length">
   <div class="package">
     <div class="icono">
       <img src="./assets/vuelos/calendar.png" alt="">
@@ -98,7 +98,7 @@
   </div>
 </div>
 
-<div class="cardDestino" [ngClass]="{show : tickets.length}">
+<div class="cardDestino" [ngClass]="{show : tickets?.length}">
 
   <div class="loadingBoxCard" [ngClass]="{show : !tickets}">
     <div class="iconLoading">
@@ -114,7 +114,7 @@
       <div class="product-item">
         <div class="product-item-content">
 
-          <p-galleria [(value)]="product.ImageUrls" [responsiveOptions]="responsiveOptions"
+          <p-galleria [value]="product.ImageUrls" [responsiveOptions]="responsiveOptions"
             [containerStyle]="{'max-width': '640px'}" [numVisible]="1" [circular]="true" [showItemNavigators]="true"
             [showThumbnails]="false">
             <ng-template pTemplate="item" let-item>

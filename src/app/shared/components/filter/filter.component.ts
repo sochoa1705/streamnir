@@ -187,8 +187,8 @@ export class FilterComponent implements OnInit {
     this.citys = []
   }
 
-  setClass(inputy : string, inp: string){
-    if(inp === 'origen'){
+  setClass(inputy: string, inp: string) {
+    if (inp === 'origen') {
       if (inputy.length == 0) {
         this.classAutoOrigen = false
       } else {
@@ -236,7 +236,7 @@ export class FilterComponent implements OnInit {
 
     var diff = Math.abs(date1.getTime() - date2.getTime());
     var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-    this.route.navigateByUrl('/home/vuelos/resultados');
+    this.route.navigateByUrl('/vuelos/resultados');
 
   }
 

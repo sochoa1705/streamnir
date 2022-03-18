@@ -17,7 +17,7 @@ export class NuestraEmpresaComponent implements OnInit {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
       'event': 'virtualPageView',
-      'virtualPagePath': '/home/nuestra-empresa',
+      'virtualPagePath': '/nuestra-empresa',
       'virtualPageTitle': 'Nuestra empresa'
     })
   }

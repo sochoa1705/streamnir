@@ -48,6 +48,8 @@ export class ActivityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    debugger
+
     this._activatedRoute.params.subscribe(params => {
 
       let city: string = this.city || params.city;
@@ -70,7 +72,6 @@ export class ActivityComponent implements OnInit {
       'Caller.Company': "Agil",
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
-      debugger
       this.tickets = JSON.parse(res).Result;
     });
   }

@@ -196,8 +196,8 @@ export class LibroReclamacionesComponent implements OnInit {
 
     let menor: boolean = this.formLibro.getRawValue()['menor']
     console.log(menor)
-    
-    if(menor === true) {
+
+    if (menor === true) {
       let nombreMenor: string = this.formLibro.getRawValue()['nombreMenor']
       if (nombreMenor === undefined || nombreMenor === null || nombreMenor.trim() === '') {
         this.errors.push({ name: this.MSG_NOMBRE_MENOR, message: 'Campo requerido' })
@@ -270,14 +270,14 @@ export class LibroReclamacionesComponent implements OnInit {
   }
 
   isChecked: Boolean = false;
-  checkSelect(value:boolean){
+  checkSelect(value: boolean) {
     this.isChecked = value;
   }
   addTag() {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
       'event': 'virtualPageView',
-      'virtualPagePath': '/home/libro-reclamaciones',
+      'virtualPagePath': '/libro-reclamaciones',
       'virtualPageTitle': 'Libro de Reclamaciones'
     })
   }

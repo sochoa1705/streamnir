@@ -47,8 +47,8 @@ export class FlightsComponent {
     }
   }
 
-  @Input() conversion:number;
-  @Input() currency:string;
+  @Input() conversion: number;
+  @Input() currency: string;
 
   get flights() {
     return this._flights;
@@ -56,7 +56,7 @@ export class FlightsComponent {
 
 
 
-  constructor(public route: Router, private fareBreakPipe: FareBreakPipe,private _snackBar: MatSnackBar) { }
+  constructor(public route: Router, private fareBreakPipe: FareBreakPipe, private _snackBar: MatSnackBar) { }
 
   calculateTimeWait(durationTime: moment.PreciseRangeValueObject): string {
     let tiempo_espera: string;
@@ -162,8 +162,8 @@ export class FlightsComponent {
       segment.flightSegments[0].departureAirport.name,
       segment.flightSegments[segment.flightSegments.length - 1].arrivalAirport.name,
       isIda,
-      segment.equipaje ?.cabina ?.piezas || 0,
-      segment.equipaje ?.piezas || 0,
+      segment.equipaje?.cabina?.piezas || 0,
+      segment.equipaje?.piezas || 0,
       escalas
     )
 
@@ -179,29 +179,29 @@ export class FlightsComponent {
 
   calculePrincing() {
     const fareBreak = this.vueloEscogidoIda.pricingInfo.itinTotalFare.fareBreakDowns;
-    const currency = this.currency; 
+    const currency = this.currency;
 
     const pricingInf = new ClassPricingInfoDetalle(
-      this.fareBreakPipe.transform(fareBreak, 'persona', 0,currency), 
-      this.fareBreakPipe.transform(fareBreak, 'impuestos',0,currency),
-      this.fareBreakPipe.transform(fareBreak, 'cargos',0,currency),
-      this.fareBreakPipe.transform(fareBreak, 'nroAdultos',0,currency),
-      this.fareBreakPipe.transform(fareBreak, 'precioFinal',0,currency),
-      this.fareBreakPipe.transform(fareBreak, 'totalPrecioAdultos',0,currency),
-      this.fareBreakPipe.transform(fareBreak, 'precioSoles', this.conversion ,currency),
+      this.fareBreakPipe.transform(fareBreak, 'persona', 0, currency),
+      this.fareBreakPipe.transform(fareBreak, 'impuestos', 0, currency),
+      this.fareBreakPipe.transform(fareBreak, 'cargos', 0, currency),
+      this.fareBreakPipe.transform(fareBreak, 'nroAdultos', 0, currency),
+      this.fareBreakPipe.transform(fareBreak, 'precioFinal', 0, currency),
+      this.fareBreakPipe.transform(fareBreak, 'totalPrecioAdultos', 0, currency),
+      this.fareBreakPipe.transform(fareBreak, 'precioSoles', this.conversion, currency),
     )
 
     return pricingInf;
   }
 
-  validateSegment(){
+  validateSegment() {
     console.log(this.vueloEscogidoVuelta);
     const errors = [];
-    if(!this.vueloEscogidoIda){
+    if (!this.vueloEscogidoIda) {
       errors.push("Debe seleccionarse un vuelo de ida")
-    }if(this.vueloEscogidoIda?.returns && !this.vueloEscogidoVuelta){
+    } if (this.vueloEscogidoIda?.returns && !this.vueloEscogidoVuelta) {
       errors.push("Debe seleccionarse un vuelo de regreso")
-    }if(this.vueloEscogidoIda?.returns && (this.vueloEscogidoIda?.id != this.vueloEscogidoVuelta?.id)){
+    } if (this.vueloEscogidoIda?.returns && (this.vueloEscogidoIda?.id != this.vueloEscogidoVuelta?.id)) {
       errors.push("Los vuelos escogidos deben ser del mismo grupo")
     }
     return errors;
@@ -212,13 +212,13 @@ export class FlightsComponent {
 
     const errors = this.validateSegment();
 
-    if(errors.length > 0){
+    if (errors.length > 0) {
       this.openSnackBar(errors.join(' - '))
-      return ;
+      return;
     }
 
     localStorage.removeItem('Datasafe')
-    let flight = { ...this.json, ...{ departure: this.segmentoDeparture, return: this.segmentoReturn, idGroup: vuelo }, ...{reservaVuelos: true} }
+    let flight = { ...this.json, ...{ departure: this.segmentoDeparture, return: this.segmentoReturn, idGroup: vuelo }, ...{ reservaVuelos: true } }
     localStorage.setItem('safe0', JSON.stringify(flight))
 
 
@@ -226,7 +226,7 @@ export class FlightsComponent {
 
     let vuelta = null
 
-    if(this.vueloEscogidoIda?.returns){
+    if (this.vueloEscogidoIda?.returns) {
       vuelta = this.selectVuelo(this.segmentoReturnObj, false);
     }
 
@@ -234,12 +234,12 @@ export class FlightsComponent {
 
     const pricingInf = this.calculePrincing();
 
-    const detalleVuelo = new ClassDetalleLocalSt(ida, vuelta , pricingInf);
+    const detalleVuelo = new ClassDetalleLocalSt(ida, vuelta, pricingInf);
 
     localStorage.setItem('detalleVuelo', JSON.stringify(detalleVuelo));
 
     const navigationExtras: NavigationExtras = { state: this.json };
-    this.route.navigateByUrl('/home/comprar', navigationExtras);
+    this.route.navigateByUrl('/comprar', navigationExtras);
   }
 
   radioSelect(e: any, segmento: string, segment: Segment, vuelo: IAerolineas) {

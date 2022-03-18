@@ -10,23 +10,23 @@ import { AerolineasService } from './services/aerolineas.service';
 })
 export class AerolineasComponent implements OnInit {
 
-  public information:IAerolineaInf;
+  public information: IAerolineaInf;
 
-  constructor(private service:AerolineasService) { }
+  constructor(private service: AerolineasService) { }
 
   ngOnInit(): void {
     this.addTag()
     this.loadData();
 
     const contador = interval(4000);
-    contador.subscribe((n)=> {
+    contador.subscribe((n) => {
       this.counter < 3 ? this.counter++ : this.counter = 1;
       this.counterMovil < 8 ? this.counterMovil++ : this.counterMovil = 1;
     })
   }
 
-  loadData(){
-    this.service.getInformation('LA').subscribe(data=>{
+  loadData() {
+    this.service.getInformation('LA').subscribe(data => {
       this.information = data;
     })
   }
@@ -55,7 +55,7 @@ export class AerolineasComponent implements OnInit {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
       'event': 'virtualPageView',
-      'virtualPagePath': '/home/seguros',
+      'virtualPagePath': '/seguros',
       'virtualPageTitle': 'Aerolineas'
     })
   }

@@ -180,7 +180,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
     this.current = this.route.getCurrentNavigation()!.extras.state as any
     if (!this.current) {
-      this.route.navigate(['/home'])
+      this.route.navigate([''])
     }
     this.selectedPay = (this.current['filter'] === 'filter') ? 'tarjeta' : 'safetypay'
     if (this.current['filter'] === 'filter') {
@@ -658,7 +658,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   otherPlan() {
     localStorage.removeItem('safe0')
-    this.route.navigateByUrl('/home/seguros/slide')
+    this.route.navigateByUrl('/seguros/slide')
   }
 
 
@@ -897,7 +897,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         console.log(response)
         this.resevaVuelo = response
         localStorage.setItem('reserva', JSON.stringify(response))
-        this.route.navigateByUrl('/home/conformidad')
+        this.route.navigateByUrl('/conformidad')
 
         // if (this.shopString.formCard.select21 === 'SAFETYPAY') {
         //   this.getGeneratePay()
@@ -922,7 +922,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   showDatosPasajero(e?: any) {
     // console.log(this.showAdulto)
     console.log(this.formShop.getRawValue()['customers'])
-    
+
     this.showAgregarAdulto = !this.showAgregarAdulto
     for (let x = 0; x < this.formShop.getRawValue()['customers'].length; x++) {
       if (e === x) {
@@ -937,7 +937,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
       'event': 'virtualPageView',
-      'virtualPagePath': '/home/comprar',
+      'virtualPagePath': '/comprar',
       'virtualPageTitle': 'Checkout'
     })
   }

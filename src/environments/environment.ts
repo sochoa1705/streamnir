@@ -29,7 +29,8 @@ export const environment = {
   urlLibro: "http://10.75.102.23:10007/",
   urlNmviajesAccount: "http://10.75.102.23:10006",
   urlApiTickets: "http://10.75.102.23:10009",
-  urlApiHotels: "http://10.75.102.23:10008"
+  urlApiHotels: "http://10.75.102.23:10008",
+  urlIframeMotorVuelos: "http://52.177.246.241/#/nmviajes"
 };
 
 /*

@@ -32,6 +32,6 @@ export class FooterComponent {
     window.location.href = e;
   }
   toOficinas() {
-    this.route.navigate(['/home/nuestras-agencias'])
+    this.route.navigate(['/nuestras-agencias'])
   }
 }
