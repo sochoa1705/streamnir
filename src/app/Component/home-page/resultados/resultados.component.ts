@@ -160,7 +160,7 @@ export class ResultadosComponent implements OnInit {
 
     this.ar.queryParams.subscribe((resp) => {
 
-      this.urlIframe = environment.urlIframeMotorVuelos + "/vuelos/resultados";
+      this.urlIframe = environment.urlIframeMotorVuelos ;
 
 
       const respVuelos: ParamsVuelos = resp as ParamsVuelos;
@@ -184,6 +184,9 @@ export class ResultadosComponent implements OnInit {
       // this.loader.showLoader();
 
 
+      arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
+      departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
+      
       const payload = new DisponibilidadPayload(
         Number(flightType),
         departure,
