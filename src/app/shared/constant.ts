@@ -72,6 +72,9 @@ export enum ENDPOINT_API {
 
   // DISTRICTS
   DISTRICTS = 'v1/api/Master/Soap/Districts',
+
+  // NEWSLETTER
+  NEWSLETTER = 'v1/api/Newsletter',
 }
 
 export enum ROUTE_VIAJES {

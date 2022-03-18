@@ -27,5 +27,16 @@ export const environment = {
   urlNmviajesAccount: "http://10.75.102.23:10006",
   urlApiTickets: "http://10.75.102.23:10009",
   urlApiHotels: "http://10.75.102.23:10008",
-  urlIframeMotorVuelos: "http://52.177.246.241/#/nmviajes"
+  urlIframeMotorVuelos: "http://52.177.246.241/#/nmviajes",
+
+  // Rutas Nuevas
+  urlBAse23: "http://10.75.102.23",
+  urlBAse17: "http://10.75.131.17",
+  urlBAse241: "http://52.177.246.241",
+
+  portNmviajesAccount: "10006",
+  portLibro: "10007",
+  portApiHotels: "10008",
+  portApiTickets: "10009",
+  portNewsletter: "10010",
 }
