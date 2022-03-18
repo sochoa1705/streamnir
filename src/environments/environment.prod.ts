@@ -19,24 +19,26 @@ export const environment = {
     return fehcaHoy
   },
   urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
+
   urlNmviajes: "http://10.75.102.23:10001/v1/api",
   urlGeo: "http://10.75.131.17:10515",
   urlMaster: "http://10.75.131.17",
   urlLibro: "http://10.75.102.23:10007/",
-  urlPreference: "http://10.75.102.23:10006/",
-  urlNmviajesAccount: "http://10.75.102.23:10006",
   urlApiTickets: "http://10.75.102.23:10009",
   urlApiHotels: "http://10.75.102.23:10008",
-  urlIframeMotorVuelos: "http://52.177.246.241/#/nmviajes",
+  urlNmviajesAccount: "http://10.75.102.23:10006",
+  urlIframeMotorVuelos: "http://52.177.246.241/#/nmviajes/search/resultados",
 
   // Rutas Nuevas
   urlBAse23: "http://10.75.102.23",
   urlBAse17: "http://10.75.131.17",
   urlBAse241: "http://52.177.246.241",
 
+  portNmviajes: "10001",
   portNmviajesAccount: "10006",
   portLibro: "10007",
   portApiHotels: "10008",
   portApiTickets: "10009",
   portNewsletter: "10010",
+  portGeo: "10015",
 }
