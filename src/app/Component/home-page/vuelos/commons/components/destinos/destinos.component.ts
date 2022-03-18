@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { interval } from 'rxjs';
+import { ParamsVuelos } from 'src/app/Component/home-page/resultados/models/resultados.interfaces';
 import { DisponibilidadPayload } from 'src/app/shared/components/flights/models/flights.class';
 import { EnumCabins, EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
 import { objectToQueryString } from 'src/app/shared/utils';
@@ -85,14 +86,14 @@ export class DestinosComponent implements OnInit {
 
 generateParams(v:IVueloDestino){
 
-    return new DisponibilidadPayload(EnumFlightType.ida_vuelta, `${v.OriginCode} ${v.Origin}`, `${v.DestinationCode} ${v.Destination}`, v.DateStart,v.DateEnd,1,0,0,EnumCabins.economico);
+    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${v.OriginCode} ${v.Origin}`, `${v.DestinationCode} ${v.Destination}`, v.DateStart,v.DateEnd,"1","0","0",EnumCabins.economico);
     
   }
 
   buscarVuelo(vuelo:IVueloDestino){
     const params = this.generateParams(vuelo);
 
-    this.router.navigate(['/home/vuelos/resultados'], { queryParams: params});
+    this.router.navigate(['/vuelos/resultados'], { queryParams: params});
   }
 
   slider() {
