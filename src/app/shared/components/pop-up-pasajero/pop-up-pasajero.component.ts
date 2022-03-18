@@ -3,15 +3,8 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 import { fromEvent } from 'rxjs';
 import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { Guid } from '../../utils';
-import { PasajerosConHabitacion, PasajerosSinHabitacion } from '../tabs/tabs.models';
+import { DistributionObject, IDistributionObject } from './pop-up-pasajero.model';
 
-export interface IDistributionObject{
-  habitacion:number,
-  adultos:number,
-  ninos:number,
-  infantes:number,
-  pasajeros: any[],
-}
 
 @Component({
   selector: 'app-pop-up-pasajero',
@@ -33,11 +26,6 @@ export class PopUpPasajeroComponent implements OnInit{
 
   showOption: Boolean = true;
   
-  habitacion = 1;
-
-  @Input() adultos  = 0;
-  @Input() ninos = 0;
-  @Input() infantes = 0;
 
   pasajeros = 0
   validPasajeros = false;
@@ -46,48 +34,45 @@ export class PopUpPasajeroComponent implements OnInit{
 
   idStateOpen:string = '';
 
+  habitaciones:IDistributionObject[] = [ ];
+
   @Input() onlyPasajeros = false;
   @Input() habitacionDisabled = true;
 
   @Output() emitDistribution= new EventEmitter<string>();
 
-  @Output() emitDistributionObject= new EventEmitter<IDistributionObject>();
+  @Output() emitDistributionObject= new EventEmitter<IDistributionObject[]>();
 
   constructor(private popupService:PopupService) {
     this.idContent = `popup_${Guid()}`;
   }
 
   ngOnInit(){
+
+
+    this.agregarHabitacion();
+
     this.popupService.state().subscribe(state=>{
       this.showOption = state.open;
       this.idStateOpen = state.id;
 
-      const popUpPasajeroModel = new PasajerosConHabitacion(this.adultos,this.ninos,this.infantes,this.habitacion);
-
-      if(!state.open){
-        const distribution = this.getDistributionUrl(popUpPasajeroModel);
-        
-          this.emitDistributionObject.emit(
-            {
-              habitacion:this.habitacion,
-              adultos:this.adultos,
-              ninos:this.ninos,
-              infantes:this.infantes,
-              pasajeros: []
-            }
-          );
-
-          this.emitDistribution.emit(distribution);
-      }
     }) 
     
   }
 
+
+  agregarHabitacion(){
+    const distributionInitial = new DistributionObject();
+    this.habitaciones.push(distributionInitial);
+  }
+
+  eliminarHabitacion(i:number){
+    this.habitaciones.splice(i,1);
+  }
+
   isValid(){
-    if(this.adultos>0){
-      return true
-    }
-    return false
+    return true
+
   }
 
   showPasajero() {
@@ -99,22 +84,20 @@ export class PopUpPasajeroComponent implements OnInit{
     this.popupService.closePopUp(this.idContent);
   }
 
-  public calculateDistributionTravel(optionTravel:string, optionAddRemove: number): void {
+  public calculateDistributionTravel(distribution:IDistributionObject, optionTravel:'ninos' | 'adultos', optionAddRemove: number): void {
 
     switch(optionTravel) {
-      case 'habitacion' :
-        if(!this.habitacionDisabled){
-          this.habitacion += this.habitacion === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        }
-        break;
       case 'adultos' :
-        this.adultos += this.adultos === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
+        distribution.nroAdultos += distribution.nroAdultos === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
         break;
       case 'ninos' :
-        this.ninos += this.ninos === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        break;
-      case 'infantes' :
-        this.infantes += this.infantes === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
+        if(distribution.nroNinos == 0  && optionAddRemove === 0){
+          return ;
+        }else if( optionAddRemove === 1 ){
+          distribution.addNino();
+        }else if(distribution.nroNinos > 0  && optionAddRemove === 0){
+          distribution.deleteNino();
+        }
         break;
     }
   }
@@ -124,7 +107,7 @@ export class PopUpPasajeroComponent implements OnInit{
     this.popupService.closePopUp(this.idContent);
   }
 
-  public getDistributionUrl(pasajeros:PasajerosSinHabitacion){
+  public getDistributionUrl(pasajeros:any){
     let urlDistributon = pasajeros.adultos.toString();
 
     let ninos = pasajeros.infantes + pasajeros.ninos;

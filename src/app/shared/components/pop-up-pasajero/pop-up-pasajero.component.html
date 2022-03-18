@@ -2,25 +2,12 @@
 
 <div [id]="idContent" class="boxFlotante" @openClose *ngIf="showOption && ( idStateOpen === idContent)">
 
-    <div data-testid="habitacion" class="boxTwoPasajero d-flex flex-row align-items-center p-3" *ngIf="!onlyPasajeros">
-        <div class="d-flex flex-row iconTwo">
-            <img height="13px" src="./assets/filter/habitacion.png" alt="">
-        </div>
-        <div class="d-flex flex-row flex-column w-100">
-            <div class="d-flex flex-row text1">Habitación</div>
-            <div class="d-flex flex-row text2">Añadir</div>
-        </div>
-        <div class="d-flex flex-row number">
-            <div class="d-flex flex-row btnNWhite disable" (click)="calculateDistributionTravel('habitacion',0)">-</div>
-            <div class="d-flex flex-row textBtn">
-                <input data-testid="input" class="inputPasajero" type="text" [value]="habitacion">
-            </div>
-            <div class="d-flex flex-row btnNWhite disable" (click)="calculateDistributionTravel('habitacion',1)">+</div>
-        </div>
-    </div>
 
-    <div data-testid="adultos" class="boxTwoPasajero d-flex flex-row align-items-center p-3">
+    <div *ngFor="let habitacion of habitaciones; let first = first; let i = index" data-testid="adultos" class="boxTwoPasajero d-flex flex-row align-items-center p-3">
         <div class="groupItem">
+            <div  (click)="eliminarHabitacion(i)" class="closeBtn" *ngIf="!first">
+                <img src="./assets/comprar/x.png" alt="">
+            </div>
             <div class="itemPasajero">
                 <div class="d-flex flex-row iconTwo">
                     <img height="13px" src="./assets/filter/adulto.png" alt="">
@@ -30,11 +17,11 @@
                     <div class="d-flex flex-row text2">12 o más años</div>
                 </div>
                 <div class="d-flex flex-row number">
-                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('adultos',0)">-</div>
+                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel(habitacion,'adultos',0)">-</div>
                     <div class="d-flex flex-row textBtn">
-                        <input data-testid="input" class="inputPasajero" type="text" [value]="adultos">
+                        <input data-testid="input" class="inputPasajero" type="text" [value]="habitacion.nroAdultos">
                     </div>
-                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('adultos',1)">+</div>
+                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel(habitacion,'adultos',1)">+</div>
                 </div>
             </div>
             <div class="itemPasajero">
@@ -46,24 +33,23 @@
                     <div class="d-flex flex-row text2">De 2 - 11 años</div>
                 </div>
                 <div class="d-flex flex-row number">
-                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('ninos',0)">-</div>
+                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel(habitacion,'ninos',0)">-</div>
                     <div class="d-flex flex-row textBtn">
-                        <input data-testid="input" class="inputPasajero" type="text" [value]="ninos">
+                        <input data-testid="input" class="inputPasajero" type="text" [value]="habitacion.nroNinos">
                     </div>
-                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('ninos',1)">+</div>
+                    <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel(habitacion,'ninos',1)">+</div>
                 </div>
             </div>
-            <div class="itemPasajero espacio">
+            <div class="itemPasajero espacio" *ngIf="habitacion.nroNinos > 0">
                 <span>Edad(es):</span>
-                <input type="text" class="inputEdad">
-                <input type="text" class="inputEdad">
-                <input type="text" class="inputEdad">
-                <input type="text" class="inputEdad">
+                <ng-container  *ngFor="let item of habitacion.ninos">
+                    <input type="text" class="inputEdad">
+                </ng-container>
             </div>
         </div>
 
     </div>
-    <div data-testid="adultos" class="boxTwoPasajero d-flex flex-row align-items-center p-3">
+    <!-- <div data-testid="adultos" class="boxTwoPasajero d-flex flex-row align-items-center p-3">
         <div class="groupItem">
             <div class="closeBtn">
                 <img src="./assets/comprar/x.png" alt="">
@@ -109,29 +95,11 @@
             </div>
         </div>
 
-    </div>
-    <!-- <div data-testid="ninios" class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-
-    </div>
-    <div data-testid="infantes" class="boxTwoPasajero d-flex flex-row align-items-center p-3">
-        <div class="d-flex flex-row iconTwo">
-            <img height="13px" src="./assets/filter/infante.png" alt="">
-        </div>
-        <div class="d-flex flex-row flex-column w-100">
-            <div class="d-flex flex-row text1">Infantes</div>
-            <div class="d-flex flex-row text2">Menores de 2 años</div>
-        </div>
-        <div class="d-flex flex-row number">
-            <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('infantes',0)">-</div>
-            <div class="d-flex flex-row textBtn">
-                <input data-testid="input" class="inputPasajero" type="text" [value]="infantes">
-            </div>
-            <div class="d-flex flex-row btnNWhite" (click)="calculateDistributionTravel('infantes',1)">+</div>
-        </div>
     </div> -->
 
+
     <div class="d-flex flex-row justify-content-between align-items-center p-3 btnPasajero">
-        <button class="green" type="button" (click)="closePopUp()">Añadir habitación</button>
+        <button class="green" type="button" (click)="agregarHabitacion()">Añadir habitación</button>
         <button type="button" (click)="savePasajeros()">Listo</button>
     </div>
 </div>

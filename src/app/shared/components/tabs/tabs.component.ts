@@ -8,7 +8,7 @@ import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
 import { ROUTE_VIAJES } from '../../constant';
-import { ParamsHoteles, ParamsVueloHotel, PasajerosConHabitacion, PasajerosSinHabitacion, URLHotel, URLVueloHotel } from './tabs.models';
+import { ParamsHoteles, ParamsVueloHotel,  URLHotel, URLVueloHotel } from './tabs.models';
 export interface State {
   flag: string;
   name: string;
@@ -58,9 +58,7 @@ export class TabsComponent implements OnInit {
 
   validPasajeros = false;
 
-  public pasajerosVueloHotel: PasajerosConHabitacion;
-  public pasajerosHoteles: PasajerosConHabitacion;
-  public pasajerosActividades: PasajerosSinHabitacion;
+
   selectedTab: string
 
   constructor(
@@ -78,9 +76,7 @@ export class TabsComponent implements OnInit {
     this.fromDate4 = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
 
-    this.pasajerosVueloHotel = new PasajerosConHabitacion(0, 0, 0, 1);
-    this.pasajerosHoteles = new PasajerosConHabitacion(0, 0, 0, 1);
-    this.pasajerosActividades = new PasajerosSinHabitacion(0, 0, 0);
+
   }
   ngOnInit(): void {
     this.createForm()
@@ -182,35 +178,14 @@ export class TabsComponent implements OnInit {
 
 
 
-  public getDistributionUrl(pasajeros: PasajerosSinHabitacion) {
-    let urlDistributon = pasajeros.adultos.toString();
 
-    let ninos = pasajeros.infantes + pasajeros.ninos;
-
-    if (ninos > 0) {
-      urlDistributon += `-${ninos}-`;
-    } else {
-      urlDistributon += "-0";
-    }
-    for (let i = 0; i < pasajeros.ninos; i++) {
-      urlDistributon += "10,"
-    }
-    for (let i = 0; i < pasajeros.infantes; i++) {
-      urlDistributon += "2,"
-    }
-    urlDistributon = urlDistributon.charAt(urlDistributon.length - 1) === ',' ? urlDistributon.substring(0, urlDistributon.length - 1) : urlDistributon;
-    return urlDistributon;
-  }
 
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
   }
 
 
-  public searchVueloHotel() {
-    const url = this.getUrlVueloHotel();
-    this.navigateToResponseUrl(url);
-  }
+
 
   getParamsVueloHotel() {
     let params = new ParamsVueloHotel(
@@ -223,15 +198,6 @@ export class TabsComponent implements OnInit {
     return params;
   }
 
-  public getUrlVueloHotel(): string {
-    let url = ''
-    if (this.pasajerosVueloHotel.adultos > 0) {
-      let params = this.getParamsVueloHotel();
-      let distribution = this.getDistributionUrl(this.pasajerosVueloHotel);
-      url = new URLVueloHotel(params, distribution).getUrl();
-    }
-    return url;
-  }
 
 
 
