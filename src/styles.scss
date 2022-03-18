@@ -3511,7 +3511,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 .boxFlotante {
-    width: 280px;
+    width: 330px;
     background: #FFFFFF;
     box-shadow: 0px 0px 8px rgb(0 0 0 / 5%);
     border-radius: 5px;
@@ -3586,6 +3586,49 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .boxTwoPasajero {
         border-bottom: 0.5px solid #E4E5E7;
+        padding: 10px 20px !important;
+        .groupItem {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            width: 100%;
+            gap: 5px;
+            .closeBtn {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: 0.3s all;
+                border-radius: 3px;
+                &:hover {
+                    background: #E4E5E7;
+                }
+            }
+            .itemPasajero {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                &.espacio {
+                    gap: 10px;
+                }
+                .inputEdad {
+                    border: 0.5px solid #E4E5E7;
+                    border-radius: 3px;
+                    width: 20%;
+                    text-align: center;
+                }
+                span {
+                    font-family: Montserrat;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 18px;
+                    letter-spacing: 0.4px;
+                    color: #4B4B4B;
+                }
+            }
+        }
         .iconTwo {
             width: 40px;
         }
@@ -3653,6 +3696,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 color: #4B4B4B;
                 &:hover {
                     background: #CFD1D3;
+                }
+            }
+            &.green {
+                background: #54D834;
+                color: #ffffff;
+                &:hover {
+                    background: #3eb322;
                 }
             }
         }
@@ -5700,8 +5750,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
                 .cardDuracion,
                 .cardOpinion,
-                .cardActividad{
-                //.cardStar {
+                .cardActividad {
+                    //.cardStar {
                     padding: 0 10px 10px 10px;
                     font-size: 10px;
                     line-height: 15px;
@@ -7911,7 +7961,7 @@ button.customers {
                     }
                     .form-email-input {
                         text-transform: none;
-                    }                    
+                    }
                     .divValida {
                         &.wSelect {
                             min-width: calc(50% - 8px);
@@ -8047,5 +8097,12 @@ mat-dialog-container {
                 }
             }
         }
+    }
+}
+
+#carouselExampleIndicators {
+    .carousel-control-prev,
+    .carousel-control-next {
+        z-index: unset !important;
     }
 }
