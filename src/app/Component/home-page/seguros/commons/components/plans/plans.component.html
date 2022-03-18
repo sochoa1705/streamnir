@@ -11,20 +11,20 @@
                 <div *ngIf="!card.clase" class="card-header">Fecha flexible</div>
                 <div class="card-body">
                     <h2>{{card.nombreProducto.substr(0, 9) }}</h2>
-                    <span [ngClass]="card.precioBrutochange === card.change ? 'invisible' : 'visible'">Antes</span>
-                    <div [ngClass]="card.precioBrutochange === card.change ? 'invisible' : 'visible'" class="oldPrice">
+                    <span [ngClass]="card.packFamiliar === 'false' ? 'invisible' : 'visible'">Antes</span>
+                    <div [ngClass]="card.packFamiliar === 'false' ? 'invisible' : 'visible'" class="oldPrice">
                         <div class="tachado"></div>
-                        <p>PEN
+                        <p>{{card.monedaLista}}
                             <strong>{{card.precioBrutochange}}</strong>
                         </p>
                     </div>
                     <span class="now">Ahora</span>
-                    <p class="now">PEN
-                        <strong>{{card.change}}</strong>
+                    <p class="now">{{card.monedaLista}}
+                        <strong>{{card.precioEmisionLocal}}</strong>
                     </p>
-                    <span [ngClass]="card.precioBrutochange === card.change ? 'invisible' : 'visible'">Ahorra</span>
-                    <div [ngClass]="card.precioBrutochange === card.change ? 'invisible' : 'visible'" class="precioAhorra">
-                        <p>PEN
+                    <span [ngClass]="card.packFamiliar === 'false' ? 'invisible' : 'visible'">Ahorra</span>
+                    <div [ngClass]="card.packFamiliar === 'false' ? 'invisible' : 'visible'" class="precioAhorra">
+                        <p>{{card.monedaLista}}
                             <strong>{{card.change - card.precioBrutochange }}</strong>
                         </p>
                     </div>
@@ -116,7 +116,7 @@
                     <div class="row py-3 footerPopup">
                         <div class="col-3 borderRight">
                             <p>Total</p>
-                            <span>PEN
+                            <span>USD
                                 <strong>{{pop.change}}</strong>
                             </span>
                             <button (click)="shop(pop.idProducto)">Comprar</button>
