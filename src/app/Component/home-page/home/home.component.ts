@@ -27,9 +27,9 @@ export class HomeComponent implements OnInit {
     public dataPagePresenterService: DataPagePresenterService,
     public asidePresenterService: AsidePresenterService,
     public destinyService: DestinyService,
-    private ar:ActivatedRoute,
-    private router:Router,
-    private accountsService:AccountsService
+    private ar: ActivatedRoute,
+    private router: Router,
+    private accountsService: AccountsService
   ) { }
 
   ngOnInit(): void {
@@ -38,40 +38,40 @@ export class HomeComponent implements OnInit {
     this.getConfirmacion();
   }
 
-  getConfirmacion(){
+  getConfirmacion() {
     this.ar.params.pipe(
-      filter(params=>params.id),
-      switchMap(param=> this.accountsService.confirmationAccount(param.id))
-    ).subscribe(resp=>{
-      if(resp.IsSuccess){
+      filter(params => params.id),
+      switchMap(param => this.accountsService.confirmationAccount(param.id))
+    ).subscribe(resp => {
+      if (resp.IsSuccess) {
         this.accountsService.dispatchConfirmate(true);
         this.toggleConfirmation();
       }
     })
   }
 
-  aceptConfirm(){
+  aceptConfirm() {
     this.toggleConfirmation();
-    this.router.navigateByUrl("/home");
+    this.router.navigateByUrl("/");
     this.openModalSession();
   }
 
-  toggleConfirmation(){
+  toggleConfirmation() {
     const modal = document.getElementById("ModalUsuarioVerificado");
 
-    if(!modal){
-      return ;
+    if (!modal) {
+      return;
     }
 
     bootstrap.Modal.getOrCreateInstance(modal).toggle();
   }
 
 
-  openModalSession(){
-    const moodalSession:any = document.querySelector("[data-bs-target='#ModalSesion']");
+  openModalSession() {
+    const moodalSession: any = document.querySelector("[data-bs-target='#ModalSesion']");
 
-    if(!moodalSession){
-      return ;
+    if (!moodalSession) {
+      return;
     }
 
     moodalSession.click()
@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
       'event': 'virtualPageView',
-      'virtualPagePath': '/home',
+      'virtualPagePath': '/',
       'virtualPageTitle': 'Home'
     })
   }

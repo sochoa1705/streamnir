@@ -172,7 +172,7 @@ export class TabsComponent implements OnInit {
 
   safeLink(e: any) {
     if (e.tab.textLabel === "seguros") {
-      this.route.navigate(['/home/seguros'])
+      this.route.navigate(['/seguros'])
     }
   }
 
@@ -259,7 +259,7 @@ export class TabsComponent implements OnInit {
     return { startDate, endDate, origen, destino, businessClass, idOrigen, idDestino, horaInicio, horaDestino };
   }
 
-  changeTab(value: MatTabChangeEvent ) {
+  changeTab(value: MatTabChangeEvent) {
     (value.index == 1) ? this.navigateToResponseUrl(ROUTE_VIAJES.RUTA_PAQUETES) : null;
   }
 

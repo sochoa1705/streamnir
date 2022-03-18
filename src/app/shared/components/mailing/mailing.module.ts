@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MailingComponent } from './mailing.component';
 import { MaterialModule } from '../../material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MailingService } from '../../../Services/mailing/mailing.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -14,6 +15,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     FormsModule,
   ],
   exports: [MailingComponent],
-
+  providers: [MailingService]
 })
 export class MailingModule { }

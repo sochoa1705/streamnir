@@ -56,8 +56,6 @@ export class TabVuelosComponent implements OnInit {
   EnumCabins = EnumCabins;
 
 
-
-
   vuelos$: Observable<ICardAutocomplete[]>;
   vuelosLoading = false;
   vuelosInput$ = new Subject<string>();
@@ -65,6 +63,8 @@ export class TabVuelosComponent implements OnInit {
   vuelos2$: Observable<ICardAutocomplete[]>;
   vuelosLoading2 = false;
   vuelosInput2$ = new Subject<string>();
+
+  vuelosValue:EnumFlightType ; 
 
 
 
@@ -83,6 +83,11 @@ export class TabVuelosComponent implements OnInit {
   ngOnInit(): void {
     this.loadVuelosOrigen();
     this.loadVuelosDestino();
+  }
+
+
+  get viajesForm(){
+    return this.form.get("viajes")?.value;
   }
 
 
@@ -203,11 +208,11 @@ export class TabVuelosComponent implements OnInit {
     if (this.form.controls['destino'].invalid) {
       errors.push("El destino es requerido");
     }
-    if (!this.toDate) {
-      errors.push("La fecha de inicio es requerido");
+    if (!this.toDate && this.viajesForm !== EnumFlightType.ida) {
+      errors.push("La fecha final es requerido");
     }
     if (!this.fromDate) {
-      errors.push("La fecha final es requerido");
+      errors.push("La fecha de inicio es requerido");
     }
 
     return errors;

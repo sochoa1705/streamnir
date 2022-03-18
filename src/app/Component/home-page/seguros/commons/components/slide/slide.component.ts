@@ -22,7 +22,7 @@ export class SlideComponent implements OnInit {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
       'event': 'virtualPageView',
-      'virtualPagePath': '/home/seguros',
+      'virtualPagePath': '/seguros',
       'virtualPageTitle': 'Seguros'
     })
   }
