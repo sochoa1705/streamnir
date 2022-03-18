@@ -184,8 +184,11 @@ export class ResultadosComponent implements OnInit {
       // this.loader.showLoader();
 
 
-      arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
-      departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
+      arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("DD-MM-YYYY");
+      departureDate = moment(departureDate, 'DD/MM/YYYY').format("DD-MM-YYYY");
+
+      // arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
+      // departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
       
       const payload = new DisponibilidadPayload(
         Number(flightType),
