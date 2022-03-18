@@ -48,7 +48,7 @@ export class ActivityComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
+    //debugger
 
     this._activatedRoute.params.subscribe(params => {
 
