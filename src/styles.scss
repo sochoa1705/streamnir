@@ -6871,7 +6871,9 @@ $icon-size-mobile: 28px;
         font-size: 14px;
         line-height: 21px;
         @media (max-width: 768px) {
-            font-size: 10px;
+            font-size: 12px;
+            padding: 4px;
+            border-radius: 4px;
         }
         &:hover {
             background: #E4E5E7;
@@ -7299,6 +7301,9 @@ button.customers {
     }
     .modal-dialog {
         width: 490px;
+        @media (max-width: 640px) {
+            width: 100%;
+        }
     }
     .modal-body {
         .iconCenter {

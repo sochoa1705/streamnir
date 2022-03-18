@@ -20,7 +20,8 @@ import { AereolineasModule } from 'src/app/shared/components/aereolineas/aereoli
     PackageModule,
     RouterModule,
     CardModule,
-    AereolineasModule
+    AereolineasModule,
+    TabsModule,
   ],
   exports: [ FlightComponent ],
   providers:[FlightService]
