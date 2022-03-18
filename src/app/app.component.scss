@@ -70,3 +70,17 @@
     DISPLAY: BLOCK;
     PADDING-BOTTOM: 10PX;
 }
+.textPolitica{
+    button.link{
+        cursor: pointer;
+        font-family: Montserrat !important;
+        font-weight: 600 !important;
+        font-size: 12px !important;
+        line-height: 21px!important;
+        letter-spacing: 0.1px!important;
+        color: #009AED;
+        text-decoration: underline;
+        background: none;
+        padding: 0;
+    }
+}

@@ -190,7 +190,7 @@ export class DataPagePresenterService {
           {
             id: 3,
             text: "Responsabilidad Social Corporativa",
-            link: "https://www.nmviajes.com/resources/pdf/RSC_Nuevo_Mundo_Viajes.pdf"
+            link: "responsabilidad-social"
           },
           {
             id: 4,

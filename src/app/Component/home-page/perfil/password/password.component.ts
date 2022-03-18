@@ -93,7 +93,6 @@ export class PasswordComponent implements OnInit {
 
           this._passwordService.update(payload).subscribe({
             next: (response) => {
-              debugger
 
               const isSuccess = response.Result.IsSuccess;
 

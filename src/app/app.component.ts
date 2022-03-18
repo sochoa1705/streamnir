@@ -105,6 +105,16 @@ export class AppComponent implements OnInit {
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
+
+    // this.personalAccountForm.reset({
+    //   email: '',
+    //   password: ''
+    // });
+
+    // this.businessAccountForm.reset({
+    //   email: '',
+    //   password: ''
+    // });
   }
 
   loadUsuario() {
@@ -122,8 +132,8 @@ export class AppComponent implements OnInit {
       fatherLastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
       motherLastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
       email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]],
-      repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
+      repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
     }, {
       validators: [this._validatorsService.equalFields('password', 'repeatPassword')]
     });
@@ -131,7 +141,7 @@ export class AppComponent implements OnInit {
 
   createBusinessAccountForm(): FormGroup {
     return this._formBuilder.group({
-      ruc: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern(this._validatorsService.digitsPattern)]],
+      ruc: ['', [Validators.required, Validators.minLength(11), Validators.pattern(this._validatorsService.digitsPattern)]],
       businessName: ['', [Validators.required, Validators.minLength(3), Validators.pattern(this._validatorsService.lettersPattern)]],
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.pattern(this._validatorsService.lettersPattern)]],
       fatherLastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
@@ -139,10 +149,11 @@ export class AppComponent implements OnInit {
       // documentType: ['', [Validators.required, Validators.minLength(1)]],
       // documentNumber: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this._validatorsService.digitsPattern)]],
       email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]],
-      repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
+      repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
     }, {
-      validators: [this._validatorsService.equalFields('password', 'repeatPassword')]
+      validators: [this._validatorsService.equalFields('password', 'repeatPassword'),
+      this._validatorsService.validateRUC('ruc')]
     });
   }
 
@@ -154,6 +165,48 @@ export class AppComponent implements OnInit {
   validateBusinessAccountForm(field: string) {
     return this.businessAccountForm.controls[field].errors
       && this.businessAccountForm.controls[field].touched;
+  }
+
+  get personalAccountEmailErrorMessage(): string {
+    const errors = this.personalAccountForm.get('email')?.errors;
+
+    if (errors?.required) {
+      return 'Ingresa tu email';
+    } else if (errors?.minlength) {
+      return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
+    } else if (errors?.pattern) {
+      return 'El valor ingresado no tiene formato de email.';
+    }
+
+    return '';
+  }
+
+  get businessAccountEmailErrorMessage(): string {
+    const errors = this.businessAccountForm.get('email')?.errors;
+
+    if (errors?.required) {
+      return 'Ingresa tu email';
+    } else if (errors?.minlength) {
+      return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
+    } else if (errors?.pattern) {
+      return 'El valor ingresado no tiene formato de email.';
+    }
+
+    return '';
+  }
+
+  get businessAccountRUCErrorMessage(): string {
+    const errors = this.businessAccountForm.get('ruc')?.errors;
+
+    if (errors?.required) {
+      return 'Ingresa el número de RUC';
+    } else if (errors?.minlength) {
+      return `Un RUC válido tiene ${errors?.minlength.requiredLength} dígitos.`;
+    } else if (errors?.notValid) {
+      return 'Ingresa un número de RUC válido.';
+    }
+
+    return '';
   }
 
   saveAccount(): void {
@@ -355,16 +408,15 @@ export class AppComponent implements OnInit {
             this.toggleModalVerificaCorreo();
 
 
+            this.personalAccountForm.reset();
+
             this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
               verticalPosition: 'top',
               duration: 2000
             });
           } else {
-            this.notification.showNotificacion("Error", "Error del servidor", 10);
+            this.notification.showNotificacion("Error", response.Result.Message || "Error", 10);
           }
-
-          this.personalAccountForm.reset();
-
           //this.loaderSubjectService.closeLoader()
         },
         error: (err) => {

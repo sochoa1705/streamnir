@@ -28,6 +28,8 @@ import { NuestrasAgenciasModule } from './nuestras-agencias/nuestras-agencias.mo
 import { NuestraEmpresaModule } from './nuestra-empresa/nuestra-empresa.module';
 import { MainService } from '../../Services/presenter/main/main.service';
 import { LibroReclamacionesModule } from './libro-reclamaciones/libro-reclamaciones.module';
+import { PoliticasModule } from './politicas/politicas.module';
+import { ResponsabilidadSocialModule } from './resonsabilidad-social/responsabilidad-social.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -52,6 +54,8 @@ import { LibroReclamacionesModule } from './libro-reclamaciones/libro-reclamacio
     NuestrasAgenciasModule,
     NuestraEmpresaModule,
     LibroReclamacionesModule,
+    PoliticasModule,
+    ResponsabilidadSocialModule,
   ],
   exports: [HomePageComponent],
   providers: [MainService, IpClienteService, DollarChangeService, OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
