@@ -48,6 +48,8 @@ export class ActivityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    debugger
+
     this._activatedRoute.params.subscribe(params => {
 
       let city: string = this.city || params.city;

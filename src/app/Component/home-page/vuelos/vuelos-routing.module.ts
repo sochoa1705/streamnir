@@ -9,12 +9,13 @@ import { OffersContinentComponent } from './commons/components/offers-continent/
 
 const routes: Routes = [
   {
-    path: '', component: VuelosComponent,
+    path: '',
     children: [
       { path: '', component: FlightComponent },
       { path: 'lista', component: FlightComponent },
-      { path: 'destinos/:codigoCiudad', component: DestinosComponent },
-      { path: ':slug', component: OffersContinentComponent }
+      { path: 'destino/:codigoCiudad', component: DestinosComponent },
+      { path: ':slug', component: OffersContinentComponent },
+      { path: '**', component: FlightComponent }
     ]
   },
 ]

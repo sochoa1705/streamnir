@@ -231,8 +231,8 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       // window.location.href="#/home/seguros/planes"
       // this.route.navigateByUrl('/home/comprar', { skipLocationChange: true });
       // this.route.navigate(["/home/seguros/planes"]);
-      this.route.navigateByUrl('/home/seguros', { skipLocationChange: true }).then(() =>
-        this.route.navigate(["/home/seguros/planes"]));
+      this.route.navigateByUrl('/seguros', { skipLocationChange: true }).then(() =>
+        this.route.navigate(["/seguros/planes"]));
     }
   }
 
@@ -303,8 +303,8 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       this.ageCustomers = Ages.join(';')
       console.log(Ages);
       console.log(this.ageCustomers);
-      
-      
+
+
       let omac2 = { 'Edad': String(age), 'FechaNacimiento': String(dayFech + '/' + monthFech + '/' + yearFech) }
       // omac.push(omac2)
       console.log(omac2);

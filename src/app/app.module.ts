@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatTabsModule } from '@angular/material/tabs';
@@ -38,7 +38,7 @@ import { NotificationModule } from './shared/components/notification/notificatio
     ReactiveFormsModule,
     NotificationModule
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy },
+  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy },
   {
     provide: 'SocialAuthServiceConfig',
     useValue: {

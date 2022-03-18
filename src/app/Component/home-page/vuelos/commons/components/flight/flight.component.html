@@ -36,8 +36,8 @@
     </div>
     <div class="row">
         <div *ngFor="let vuelo of $vuelosInternacionales | async" class="col-12 col-md-3">
-            <app-package [fly]="'true'" btn="Ver Tarifas" [codigo_ciudad]="vuelo.DestinationCode" [image]="vuelo.Image" [city]="vuelo.Destination" 
-                [span]="vuelo | generateprice"></app-package>
+            <app-package [fly]="'true'" btn="Ver Tarifas" [codigo_ciudad]="vuelo.DestinationCode" [image]="vuelo.Image"
+                [city]="vuelo.Destination" [span]="vuelo | generateprice"></app-package>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -112,8 +112,5 @@
         </div>
     </div>
 </section>
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/add/social-login
 <app-aereolineas [aereolineas]="$aereolineas | async" (redirigir)="toLine($event)"></app-aereolineas>

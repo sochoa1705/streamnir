@@ -22,7 +22,7 @@ export class DataPagePresenterService {
         img: "bannersIBKcancun.jpg",
         titulo: 'detalle slider 1',
         detalle: 'detalle slider 1',
-                key: true,
+        key: true,
       },
       {
 
@@ -175,12 +175,12 @@ export class DataPagePresenterService {
           {
             id: 0,
             text: "Nuestra Empresa NM Viajes",
-            link: "/home/nuestra-empresa"
+            link: "/nuestra-empresa"
           },
           {
             id: 1,
             text: "Nuestras Agencias NM Viajes",
-            link: "/home/nuestras-agencias/"
+            link: "/nuestras-agencias/"
           },
           {
             id: 2,
@@ -207,7 +207,7 @@ export class DataPagePresenterService {
         span: "Agencias de Viajes en Lima Perú",
         addrees: "Av. José Pardo 801 Miraflores - Lima 18, Perú.",
         libro: "Libro de reclamaciones",
-        linkLibro: "/home/libro-reclamaciones"
+        linkLibro: "/libro-reclamaciones"
       }
     ],
     string: "Hello World"

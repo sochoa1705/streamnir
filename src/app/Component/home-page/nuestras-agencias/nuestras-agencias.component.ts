@@ -71,7 +71,7 @@ export class NuestrasAgenciasComponent implements OnInit {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
       'event': 'virtualPageView',
-      'virtualPagePath': '/home/nuestras-agencias',
+      'virtualPagePath': '/nuestras-agencias',
       'virtualPageTitle': 'Nuestras agencias'
     })
   }

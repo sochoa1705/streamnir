@@ -61,7 +61,7 @@ export class FlightComponent implements OnInit {
   }
 
   toLine(e: any) {
-    this.route.navigateByUrl('/home/aerolineas')
+    this.route.navigateByUrl('/aerolineas')
   }
 
 
@@ -96,12 +96,12 @@ export class FlightComponent implements OnInit {
   redirigirVuelo(vuelo: IVuelos) {
 
     console.log(vuelo);
-    this.route.navigate(['/home/vuelos/', vuelo.Slug])
+    this.route.navigate(['/vuelos/', vuelo.Slug])
   }
 
 
   toDestiny(vuelo: IFlightRates) {
-    this.route.navigate(['/home/vuelos/destinos', vuelo.DestinationCode])
+    this.route.navigate(['/vuelos/destino', vuelo.DestinationCode])
   }
 
   /* end code */

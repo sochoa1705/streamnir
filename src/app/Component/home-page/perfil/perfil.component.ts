@@ -213,53 +213,53 @@ export class PerfilComponent implements OnInit {
     let data = this.formPreference.value
     if (this.validForm()) {
 
-    let payload = {
-      "TrackingCode": "000001",
-      "MuteExceptions": false,
-      "Caller": {
-        "Company": "Agil",
-        "Application": "Interagencias"
-      },
-      "Parameter": {
-        "Firstname": data.nombres,
-        "FatherLastname": data.apellidoPaterno,
-        "MotherLastname": data.apellidoMaterno,
-        "Email": data.email,
-        "Gender": "M",
-        "Phone": data.telefono,
-        "Birthdate": data.anio + '-' + data.mes + '-' + data.dia,
-        "Nationality": data.nacionalidad,
-        "DocumentType": data.tipoDocumento,
-        "DocumentNumber": data.numeroDocumento,
-        "CountryId": 132,
-        "DepartmentId": 14,
-        "DistrictId": 1245,
-        "Preferences": [
-          {
-            "Id": "SHO",
-            "Name": "Shopping"
-          }
-        ],
-        "Categories": [
-          {
-            "Id": "LUJ",
-            "Name": "Lujo"
-          }
-        ],
-        "Companions": [
-          {
-            "Id": "PAR",
-            "Name": "Pareja"
-          }
-        ],
-        "DataAuthorization": true
+      let payload = {
+        "TrackingCode": "000001",
+        "MuteExceptions": false,
+        "Caller": {
+          "Company": "Agil",
+          "Application": "Interagencias"
+        },
+        "Parameter": {
+          "Firstname": data.nombres,
+          "FatherLastname": data.apellidoPaterno,
+          "MotherLastname": data.apellidoMaterno,
+          "Email": data.email,
+          "Gender": "M",
+          "Phone": data.telefono,
+          "Birthdate": data.anio + '-' + data.mes + '-' + data.dia,
+          "Nationality": data.nacionalidad,
+          "DocumentType": data.tipoDocumento,
+          "DocumentNumber": data.numeroDocumento,
+          "CountryId": 132,
+          "DepartmentId": 14,
+          "DistrictId": 1245,
+          "Preferences": [
+            {
+              "Id": "SHO",
+              "Name": "Shopping"
+            }
+          ],
+          "Categories": [
+            {
+              "Id": "LUJ",
+              "Name": "Lujo"
+            }
+          ],
+          "Companions": [
+            {
+              "Id": "PAR",
+              "Name": "Pareja"
+            }
+          ],
+          "DataAuthorization": true
+        }
       }
-    }
-    console.log(payload)
+      console.log(payload)
 
-    this.preferenceService.preference(payload).subscribe({
-      next: response => console.log(response)
-    })
+      this.preferenceService.preference(payload).subscribe({
+        next: response => console.log(response)
+      })
     }
   }
 
@@ -367,20 +367,20 @@ export class PerfilComponent implements OnInit {
   }
 
 
-  toggleModalEliminar(){
+  toggleModalEliminar() {
     const modal = document.getElementById("ModalEliminaCorreo");
 
-    if(!modal){
-      return ;
+    if (!modal) {
+      return;
     }
 
     bootstrap.Modal.getOrCreateInstance(modal).toggle();
   }
 
 
-  eliminarCuenta(){
-    this.accountService.deleteAccount(this.userStorage.id).subscribe(data=>{
-      if(data.IsSuccess){
+  eliminarCuenta() {
+    this.accountService.deleteAccount(this.userStorage.id).subscribe(data => {
+      if (data.IsSuccess) {
         this.toggleModalEliminar();
         this.accountService.signOut();
         this.router.navigateByUrl("/")
@@ -427,7 +427,7 @@ export class PerfilComponent implements OnInit {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
       'event': 'virtualPageView',
-      'virtualPagePath': '/home/perfil',
+      'virtualPagePath': '/perfil',
       'virtualPageTitle': 'Perfil'
     })
   }

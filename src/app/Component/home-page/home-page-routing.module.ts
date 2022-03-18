@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { ComprarComponent } from './comprar/comprar.component';
 import { ConformidadComponent } from './conformidad/conformidad.component';
 import { HomePageComponent } from './home-page.component';
@@ -17,13 +17,14 @@ import { LibroReclamacionesComponent } from './libro-reclamaciones/libro-reclama
 import { AppComponent } from 'src/app/app.component';
 import { CitaComponent } from './cita/cita.component';
 import { PoliticasComponent } from './politicas/politicas.component';
+import { ActivityComponent } from './vuelos/commons/components/destinos/activity/activity.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomePageComponent,
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      //{ path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '', component: HomeComponent },
       { path: 'filtro/:tab', component: HomeComponent },
       { path: 'paquetes', component: PaquetesComponent },
@@ -37,21 +38,18 @@ const routes: Routes = [
       { path: 'confirmacion/:id', component: HomeComponent },
       {
         path: 'seguros',
-        loadChildren: () => import('./seguros/seguros.module').then(
-          m => m.SegurosModule
-        )
+        loadChildren: () => import('./seguros/seguros.module').then(m => m.SegurosModule)
       },
       {
         path: 'vuelos',
-        loadChildren: () => import('./vuelos/vuelos.module').then(
-          m => m.VuelosModule
-        )
+        loadChildren: () => import('./vuelos/vuelos.module').then(m => m.VuelosModule)
       },
       { path: 'nuestra-empresa', component: NuestraEmpresaComponent },
       { path: 'nuestras-agencias', component: NuestrasAgenciasComponent },
       { path: 'libro-reclamaciones', component: LibroReclamacionesComponent },
       { path: 'agendar-cita', component: CitaComponent },
-      { path: 'politicas', component: PoliticasComponent }
+      { path: 'politicas', component: PoliticasComponent },
+      // { path: 'actividades/ciudad/:city/sitio/:site/vuelos/:isflight', component: ActivityComponent },
     ]
   }
 ];

@@ -449,7 +449,7 @@ export class ResultadosComponent implements OnInit {
   shop() {
     //console.log(this.form.value);
     const navigationExtras: NavigationExtras = { state: this.json };
-    this.route.navigateByUrl('/home/comprar', navigationExtras);
+    this.route.navigateByUrl('/comprar', navigationExtras);
   }
 
   showTab() {
@@ -605,7 +605,7 @@ export class ResultadosComponent implements OnInit {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
       'event': 'virtualPageView',
-      'virtualPagePath': '/home/vuelos/resultados',
+      'virtualPagePath': '/vuelos/resultados',
       'virtualPageTitle': 'Resultados'
     })
   }
