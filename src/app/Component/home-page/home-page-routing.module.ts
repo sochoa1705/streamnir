@@ -17,6 +17,7 @@ import { LibroReclamacionesComponent } from './libro-reclamaciones/libro-reclama
 import { AppComponent } from 'src/app/app.component';
 import { CitaComponent } from './cita/cita.component';
 import { PoliticasComponent } from './politicas/politicas.component';
+import { ResponsabilidadSocialComponent } from './resonsabilidad-social/responsabilidad-social.component';
 
 const routes: Routes = [
   {
@@ -51,7 +52,8 @@ const routes: Routes = [
       { path: 'nuestras-agencias', component: NuestrasAgenciasComponent },
       { path: 'libro-reclamaciones', component: LibroReclamacionesComponent },
       { path: 'agendar-cita', component: CitaComponent },
-      { path: 'politicas', component: PoliticasComponent }
+      { path: 'politicas', component: PoliticasComponent },
+      { path: 'responsabilidad-social', component: ResponsabilidadSocialComponent }
     ]
   }
 ];

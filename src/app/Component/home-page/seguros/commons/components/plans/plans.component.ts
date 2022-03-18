@@ -10,6 +10,7 @@ import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { CotizarSeguroRQ } from 'src/app/Models/seguros/cotizacionRQ.interface';
 import { environment } from 'src/environments/environment';
 import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface';
+import { NotificationService } from 'src/app/Services/notification.service';
 
 @Component({
   selector: 'app-plans',
@@ -47,6 +48,7 @@ export class PlansComponent implements OnInit {
     public plansACService: PlansACService,
     public coverageService: CoverageService,
     public loaderSubjectService: LoaderSubjectService,
+    private notification: NotificationService,
   ) {
     this.result = localStorage.getItem('Datasafe')
     this.resultJson = JSON.parse(this.result)
@@ -235,6 +237,7 @@ export class PlansComponent implements OnInit {
       },
       error: error => {
         console.log(error)
+        this.notification.showNotificacion("Error", "Error de autenticación", 10);
         this.loaderSubjectService.closeLoader()
         this.route.navigateByUrl('/home/seguros');
       }
@@ -250,7 +253,8 @@ export class PlansComponent implements OnInit {
       Sucursal: this.unidadNegocio.sucursal_ac,
       CodigoProducto: data.codProducto,
       CodigoTarifa: data.codTarifa,
-      Edad: this.resultJson.ClienteCotizacion.shift().Edad,     // COLOCAR LA PRIMERA EDAD DE BUSQUEDA
+      // Edad: this.resultJson.ClienteCotizacion.shift().Edad,     // COLOCAR LA PRIMERA EDAD DE BUSQUEDA
+      Edad: this.resultJson.ClienteCotizacion[0].Edad,     // COLOCAR LA PRIMERA EDAD DE BUSQUEDA
       TipoModalidad: data.codModalidad
     }
 

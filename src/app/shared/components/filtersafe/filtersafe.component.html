@@ -3,7 +3,7 @@
         <!-- COMBOS -->
         <div class="row filter espaciado versionMobile">
             <div class="w-130">
-                <span class="valid" *ngIf="getMessage(MSG_CUSTOMERS) != MSG_EMPTY">{{ getMessage(MSG_CUSTOMERS) }}</span>
+                <!-- <span class="valid" *ngIf="getMessage(MSG_CUSTOMERS) != MSG_EMPTY">{{ getMessage(MSG_CUSTOMERS) }}</span> -->
                 <!-- PASAJEROS -->
                 <div class="boxFlotante seguro" *ngIf="!showOption">
                     <!-- <div class="boxTwoPasajero d-flex flex-row align-items-center p-2">
@@ -31,7 +31,7 @@
                             </div>
                             <div class="d-flex flex-row number">
                                 <div class="d-flex flex-row textBtn">
-                                    <input formControlName="age" class="inputEdadPasajero" type="text" placeholder="Edad">
+                                    <input formControlName="age" class="inputEdadPasajero" type="text" placeholder="Edad"  [ngClass]="getMessage(MSG_CUSTOMERS) != MSG_EMPTY ? 'isvalid' : ''">
                                 </div>
                                 <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
                                     <img (click)="removePassenger(i)" src="./assets/filter/delete.png" alt="">
@@ -45,7 +45,7 @@
                         <button type="button" (click)="fechNac()">Listo</button>
                     </div>
                 </div>
-                <button class="customers" (click)="showPasajero()">{{limit}} Pasajero(s)</button>
+                <button class="customers" [ngClass]="(getMessage(MSG_CUSTOMERS) != MSG_EMPTY) ? 'text-red' : 'Omac'" (click)="showPasajero()">{{limit}} Pasajero(s)</button>
             </div>
 
 
