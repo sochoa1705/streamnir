@@ -62,7 +62,6 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     this.inputTxt = target.value
 
     const value: string = target.value || '';
-    console.log(value)
     
     if (value.length >= this.minTermLength) {
       this.showBoxOrigen(true)

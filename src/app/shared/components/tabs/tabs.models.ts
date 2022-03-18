@@ -195,12 +195,12 @@ export class ParamsVuelos implements ParamsTabs{
         public citysOrigenSelect:any[],
     ){}
 
-    getParams(){
+    getParams(){        
         let startDateStr =  `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
-        let endDateStr =  `${(this.toDate!.day).toString()}/${(this.toDate!.month).toString()}/${(this.toDate!.year).toString()}`;
+        let endDateStr = this.toDate?`${(this.toDate!.day).toString()}/${(this.toDate!.month).toString()}/${(this.toDate!.year).toString()}`:"";
     
         let startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
-        let endDate =  moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
+        let endDate =  endDateStr?moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY'):"";
         let origen = this.form.controls['origen'].value;
         let destino = this.form.controls['destino'].value;
         let businessClass = this.form.controls['clase'].value === 'business';        
