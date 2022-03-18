@@ -5617,7 +5617,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         line-height: 21px;
         letter-spacing: 0.15px;
         color: #4B4B4B;
-        padding: 0px 15px;
+        padding: 0px 15px 15px;
     }
     .cardDuracion {
         font-family: Montserrat;
@@ -5625,7 +5625,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         line-height: 21px;
         letter-spacing: 0.1px;
         color: #4B4B4B;
-        padding: 0 25px 10px 25px;
+        padding: 0 25px 15px 25px;
         font-weight: 500;
         display: flex;
         align-items: center;
@@ -5700,9 +5700,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
                 .cardDuracion,
                 .cardOpinion,
-                .cardActividad,
-                .cardStar {
-                    padding: 0 10px 5px 10px;
+                .cardActividad{
+                //.cardStar {
+                    padding: 0 10px 10px 10px;
                     font-size: 10px;
                     line-height: 15px;
                 }
@@ -5747,6 +5747,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             justify-content: center;
             cursor: pointer !important;
             background-color: #DADADA !important;
+            margin-bottom: 115px;
             &:hover {
                 background-color: rgba(223, 12, 48, 1)!important;
                 ;
