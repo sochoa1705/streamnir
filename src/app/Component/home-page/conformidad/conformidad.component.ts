@@ -54,7 +54,7 @@ export class ConformidadComponent implements OnInit {
   detalleVuelos: any
   reservaJSON: any
   reservaStr: any
-  
+
   constructor(
     public route: Router,
     public secureBookingService: SecureBookingService,
@@ -282,7 +282,7 @@ export class ConformidadComponent implements OnInit {
         // })
 
         // si ocurre un error
-        this.route.navigateByUrl('/home/seguros');
+        this.route.navigateByUrl('/seguros');
       }
     })
   }
@@ -353,7 +353,7 @@ export class ConformidadComponent implements OnInit {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
       'event': 'virtualPageView',
-      'virtualPagePath': '/home/conformidad',
+      'virtualPagePath': '/conformidad',
       'virtualPageTitle': 'Conformidad'
     })
   }

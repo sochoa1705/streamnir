@@ -23,6 +23,7 @@ import { IAerolineas, ParamsVuelos, Returns } from './models/resultados.interfac
 import { FareBreakPipe } from './pipes/fare-break-downs.pipe';
 import { ResultadosService } from './services/resultados.service';
 import { objectToQueryString, toUp } from 'src/app/shared/utils';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-resultados',
@@ -159,7 +160,7 @@ export class ResultadosComponent implements OnInit {
 
     this.ar.queryParams.subscribe((resp) => {
 
-      this.urlIframe = "http://52.177.246.241/#/nmviajes/vuelos/resultados";
+      this.urlIframe = environment.urlIframeMotorVuelos ;
 
 
       const respVuelos: ParamsVuelos = resp as ParamsVuelos;
@@ -182,9 +183,13 @@ export class ResultadosComponent implements OnInit {
       // this.loader.showText('Cargando los vuelos');
       // this.loader.showLoader();
 
-      arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
-      departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
 
+      arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("DD-MM-YYYY");
+      departureDate = moment(departureDate, 'DD/MM/YYYY').format("DD-MM-YYYY");
+
+      // arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
+      // departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
+      
       const payload = new DisponibilidadPayload(
         Number(flightType),
         departure,
@@ -450,7 +455,7 @@ export class ResultadosComponent implements OnInit {
   shop() {
     //console.log(this.form.value);
     const navigationExtras: NavigationExtras = { state: this.json };
-    this.route.navigateByUrl('/home/comprar', navigationExtras);
+    this.route.navigateByUrl('/comprar', navigationExtras);
   }
 
   showTab() {
@@ -606,7 +611,7 @@ export class ResultadosComponent implements OnInit {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
       'event': 'virtualPageView',
-      'virtualPagePath': '/home/vuelos/resultados',
+      'virtualPagePath': '/vuelos/resultados',
       'virtualPageTitle': 'Resultados'
     })
   }

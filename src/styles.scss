@@ -5141,6 +5141,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         background: #DF0C30;
         padding: 60px 50px;
         margin-bottom: 50px;
+        @media (max-width: 768px) {
+            padding: 50px 10px;
+        }
         .titulo,
         .subtitulo {
             color: #ffffff !important;
@@ -6401,7 +6404,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .tabContentDest {
         margin: 0;
         padding: 0 15px;

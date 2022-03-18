@@ -116,6 +116,9 @@ h {
 
 .titleBold {
     font-weight: bold;
+    @media (max-width: 640px) {
+        width: 50%
+    }
 }
 
 @media (max-width: 640px) {

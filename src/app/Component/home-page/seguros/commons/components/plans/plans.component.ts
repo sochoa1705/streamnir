@@ -75,7 +75,7 @@ export class PlansComponent implements OnInit {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
       'event': 'virtualPageView',
-      'virtualPagePath': '/home/seguros/planes',
+      'virtualPagePath': '/seguros/planes',
       'virtualPageTitle': 'Seguros-Planes'
     })
   }
@@ -239,7 +239,7 @@ export class PlansComponent implements OnInit {
         console.log(error)
         this.notification.showNotificacion("Error", "Error de autenticación", 10);
         this.loaderSubjectService.closeLoader()
-        this.route.navigateByUrl('/home/seguros');
+        this.route.navigateByUrl('/seguros');
       }
     })
   }
@@ -296,7 +296,7 @@ export class PlansComponent implements OnInit {
     let state2 = { ...this.json, ...service }
     localStorage.setItem('safe0', JSON.stringify(state2));
     const navigationExtras: NavigationExtras = { state: { ...this.json, ...service } };
-    this.route.navigateByUrl('/home/comprar', navigationExtras);
+    this.route.navigateByUrl('/comprar', navigationExtras);
   }
   // price() {
   //   let price = Number(this.plansAC[0].precioEmision)

@@ -54,7 +54,7 @@ export class MainService {
     {
       id: 6,
       text: "Seguros",
-      link: "/home/seguros",
+      link: "/seguros",
       header: true,
       tab: '',
       icon: '/assets/menu/seguros.svg'

@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { EnumFlightType } from '../flights/models/flights.interface';
 import { ClassValueCalendar } from './calendar.models';
 
 
@@ -14,6 +15,10 @@ export class CalendarComponent implements AfterViewInit{
 
   @Input() toDate: NgbDate | null;
   @Input() fromDate: NgbDate | null;
+
+  @Input() typeValue: number = EnumFlightType.ida_vuelta;
+
+  EnumFlightType = EnumFlightType;
 
   hoveredDate: NgbDate | null = null;
 
@@ -53,6 +58,13 @@ export class CalendarComponent implements AfterViewInit{
       }
       const value = new ClassValueCalendar(this.toDate,this.fromDate);
 
+      this.changeDate.emit(value);
+    }
+
+    onDateSelectionIda(date: NgbDate) {
+      this.toDate = null;
+      this.fromDate = date;
+      const value = new ClassValueCalendar(this.toDate,this.fromDate);
       this.changeDate.emit(value);
     }
 

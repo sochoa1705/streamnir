@@ -20,7 +20,7 @@
                 </mat-form-field>
             </div>
             <div class="padRight">
-                <app-pop-up-pasajero #popUp [onlyPasajeros]="true" [adultos]="vuelosTab?.pasajeros?.adultos || 0" [ninos]="vuelosTab?.pasajeros?.ninos || 0"
+                <app-pop-up-pasajero #popUp [onlyPasajeros]="true" [adultos]="vuelosTab?.pasajeros?.adultos || 1" [ninos]="vuelosTab?.pasajeros?.ninos || 0"
                     [infantes]="vuelosTab?.pasajeros?.infantes || 0" (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero>
             </div>
         </div>
@@ -41,7 +41,7 @@
 
             </div>
 
-            <app-calendar [toDate]="vuelosTab?.toDate || null" [fromDate]="vuelosTab?.fromDate || null" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
+            <app-calendar [typeValue]="viajesForm" [toDate]="vuelosTab?.toDate || null" [fromDate]="vuelosTab?.fromDate || null" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
 
 
             <div class="colBoxtab w-10 ms-md-2">
