@@ -14,7 +14,7 @@
             <h1 class="mt-5 titleBold" *ngIf="validate">Se envio la suscripción</h1>
             <h1 class="mt-5 titleBold" *ngIf="!validate">{{ title }}</h1>
             <h3 class="mb-5" *ngIf="!validate">{{ span }}</h3>
-            <form [formGroup]="formMAiling"  *ngIf="!validate">
+            <form [formGroup]="formMAiling" *ngIf="!validate">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-md-4 offset-0 offset-md-1 input-group-lg px-0  text-start">
@@ -30,6 +30,30 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <div class="row">
+                        <div class="msgBoxBoletin success">
+                            <div class="iconBoletin">
+                                <img src="./assets/svg/success-boletin.svg" alt="">
+                            </div>
+                            <div class="titleBol">
+                                ¡Gracias por suscribirte!
+                            </div>
+                            <div class="descripBol">
+                                Recibe todas nuestras ofertas de <strong>NMviajes.com</strong>
+                            </div>
+                        </div>
+                        <div class="msgBoxBoletin error">
+                            <div class="iconBoletin">
+                                <img src="./assets/svg/error-boletin.svg" alt="">
+                            </div>
+                            <div class="titleBol">
+                                ¡Hola Hugo!
+                            </div>
+                            <div class="descripBol">
+                                Tu e-mail ya se encuentra registrado a nuestro boletín.
+                            </div>
+                        </div>
+                    </div>
                     <div class="row py-md-3 py-0">
                         <div class="col-md-10 offset-md-1 col-12 offset-0 text-center text-md-start px-4">
                             <mat-checkbox formControlName="politicasMail" class="check-link"></mat-checkbox>
@@ -42,8 +66,8 @@
                                     <path d="M5.9409 7.70555C5.84327 7.80318 5.84327 7.96147 5.9409 8.0591C6.03853 8.15673 6.19682 8.15673 6.29445 8.0591L5.9409 7.70555ZM13.25 0.999971C13.25 0.8619 13.1381 0.749972 13 0.749971L10.75 0.749971C10.612 0.749971 10.5 0.8619 10.5 0.999971C10.5 1.13804 10.612 1.24997 10.75 1.24997L12.75 1.24997L12.75 3.24997C12.75 3.38804 12.862 3.49997 13 3.49997C13.1381 3.49997 13.25 3.38804 13.25 3.24997L13.25 0.999971ZM6.29445 8.0591L13.1768 1.17675L12.8233 0.823195L5.9409 7.70555L6.29445 8.0591Z"
                                         fill="#009AED" />
                                 </svg> Datos opcionales</a>
-                                
-                                <span class="valid" *ngIf="getMessage(MSG_POLITICA) != MSG_EMPTY">{{ getMessage(MSG_POLITICA) }}</span>
+
+                            <span class="valid" *ngIf="getMessage(MSG_POLITICA) != MSG_EMPTY">{{ getMessage(MSG_POLITICA) }}</span>
                         </div>
                         <!-- <div class="col-md-3 offset-md-0 col-12 offset-0 text-md-start text-center">
                     </div> -->
@@ -78,24 +102,17 @@
                         <p>
                             <strong>En cumplimiento de la Ley N° 29733 – Ley de Protección de Datos Personales- y su Reglamento N°
                                 003-2013-JUS
-                            </strong>, autorizo y otorgo a Promotora de Turismo Nuevo Mundo S.A.C. . (en adelante Nuevo Mundo
-                            Viajes), de manera indefinida, mi consentimiento libre, previo, expreso, inequí voco e informado
-                            para que (por sí mismo o a travé s de terceros): Recopile, de tratamiento o suprima, transfiera
-                            o importe, exporte mis datos personales, para elaborar Bases de Datos, transferirlas a terceras
-                            personas vinculadas o no a Nuevo Mundo Viajes (sean socios comerciales o no, nacionales o extranjeros,
-                            pú blicos o privados) con la finalidad de:
+                            </strong>, autorizo y otorgo a Promotora de Turismo Nuevo Mundo S.A.C. . (en adelante Nuevo Mundo Viajes), de manera indefinida, mi consentimiento libre, previo, expreso, inequí voco e informado
+                            para que (por sí mismo o a travé s de terceros): Recopile, de tratamiento o suprima, transfiera o importe, exporte mis datos personales, para elaborar Bases de Datos, transferirlas a terceras personas vinculadas o no a Nuevo
+                            Mundo Viajes (sean socios comerciales o no, nacionales o extranjeros, pú blicos o privados) con la finalidad de:
                         </p>
 
                         <ul>
-                            <li>Cumplir con la prestación de los servicios turísticos contratados: programación y reserva de
-                                vuelos, paquetes turí sticos, reserva de hoteles, programación de itinerarios; así como servicios
-                                de alquiler de autos y seguros, entre otros.</li>
-                            <li>Contactar con el cliente antes y durante la prestación de los servicios turísticos contratados
-                                a fin de responder dudas, consultas y solicitudes.</li>
-                            <li>Enviar información relativa a la naturaleza del servicio y/o disposiciones de obligatorio conocimiento
-                                y cumplimiento durante el servicio o paquete turístico adquirido, como las condiciones de
-                                contratación y/u otras condiciones dentro de las que podrían incluirse políticas internas
-                                de la empresa.</li>
+                            <li>Cumplir con la prestación de los servicios turísticos contratados: programación y reserva de vuelos, paquetes turí sticos, reserva de hoteles, programación de itinerarios; así como servicios de alquiler de autos y seguros,
+                                entre otros.</li>
+                            <li>Contactar con el cliente antes y durante la prestación de los servicios turísticos contratados a fin de responder dudas, consultas y solicitudes.</li>
+                            <li>Enviar información relativa a la naturaleza del servicio y/o disposiciones de obligatorio conocimiento y cumplimiento durante el servicio o paquete turístico adquirido, como las condiciones de contratación y/u otras condiciones
+                                dentro de las que podrían incluirse políticas internas de la empresa.</li>
                         </ul>
 
                         <p>
@@ -106,12 +123,9 @@
                             He sido informado que:
                         </p>
                         <p>
-                            Si no otorgo este consentimiento, mi información solo será utilizada (tratada) para la ejecución (desarrollo) y cumplimiento
-                            del servicio que contrate, podré revocar, en cualquier momento mi consentimiento, comunicando
-                            mi decisión por escrito en cualquiera de las oficinas de Nuevo Mundo Viajes, la cual no afectará
-                            el uso de mis datos ni el contenido de las Bases de Datos para la ejecución y cumplimiento de
-                            la transacción que celebre con ustedes, podré ejercer mis derechos de acceso, rectificación,
-                            cancelación y oposición de mis datos de acuerdo a la legislación vigente.
+                            Si no otorgo este consentimiento, mi información solo será utilizada (tratada) para la ejecución (desarrollo) y cumplimiento del servicio que contrate, podré revocar, en cualquier momento mi consentimiento, comunicando mi decisión por escrito en cualquiera
+                            de las oficinas de Nuevo Mundo Viajes, la cual no afectará el uso de mis datos ni el contenido de las Bases de Datos para la ejecución y cumplimiento de la transacción que celebre con ustedes, podré ejercer mis derechos de
+                            acceso, rectificación, cancelación y oposición de mis datos de acuerdo a la legislación vigente.
                         </p>
                         <p>
                             Mayor información sobre la política de protección y tratamiento de datos
