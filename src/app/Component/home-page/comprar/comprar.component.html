@@ -2528,10 +2528,10 @@
                                         </span>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <span class="price_old" *ngIf="safe0Json?.DsctoPromcional !== null">PEN {{
-                                            safe0Json?.change }}</span>
-                                        <span class="price_new">PEN {{ safe0Json?.DsctoPromcional === null ?
-                                            safe0Json?.change : '0'}}</span>
+                                        <span class="price_old" *ngIf="safe0Json?.DsctoPromcional !== null">{{safe0Json?.monedaLista}} {{
+                                            safe0Json?.precioEmisionLocal | currency: 'USD'}}</span>
+                                        <span class="price_new">{{safe0Json?.monedaLista}} {{ safe0Json?.DsctoPromcional === null ?
+                                            safe0Json?.precioEmisionLocal : '0'}}</span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -2541,7 +2541,7 @@
                                         </span>
                                     </div>
                                     <div class="col-5 text-end">
-                                        <span class="price_Desc">PEN {{ safe0Json?.DsctoPromcional === null ? '0' :
+                                        <span class="price_Desc">{{safe0Json?.monedaLista}} {{ safe0Json?.DsctoPromcional === null ? '0' :
                                             safe0Json?.DsctoPromcional }}</span>
                                     </div>
                                     <div class="clearfix"></div>
@@ -2553,9 +2553,8 @@
                                 <span class="price_end">TOTAL A PAGAR</span>
                             </div>
                             <div class="col-5 text-end">
-                                S/.
-                                <span class="price_end_number">{{ safe0Json?.change * resultJson.passenger.length |
-                                    number:'1.2-2'}}</span>
+                                    {{safe0Json?.monedaLista}}
+                                <span class="price_end_number">{{ safe0Json?.precioEmisionLocal * resultJson.passenger.length | currency: 'USD'}}</span>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -3322,7 +3321,7 @@
                     <div class="row py-3 footerPopup">
                         <div class="col-3 borderRight">
                             <p>Total</p>
-                            <span>PEN
+                            <span>{{safe0Json?.monedaLista}}
                                 <strong>{{pop.change}}</strong>
                             </span>
                             <!-- <button (click)="shop(pop.idProducto)">Comprar</!-->

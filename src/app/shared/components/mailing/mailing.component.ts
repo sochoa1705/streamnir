@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { MailingService } from '../../../Services/mailing/mailing.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { validate } from 'json-schema';
+import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 
 @Component({
   selector: 'app-mailing',
@@ -21,11 +22,11 @@ export class MailingComponent implements OnInit {
   validate: boolean
   @Input() title!: string;
   @Input() span!: string;
-
+  message: string
   constructor(
     private mailingService: MailingService,
     private notification: NotificationService,
-
+    public loaderSubjectService: LoaderSubjectService,
   ) {
     this.validate = false
     this.ipCliente = localStorage.getItem('ipCliente')
@@ -43,7 +44,10 @@ export class MailingComponent implements OnInit {
     })
   }
   subscribe(e: any) {
-    if(this.validForm()) {
+    if (this.validForm()) {
+      const textSend = 'Validando suscripción'
+      this.loaderSubjectService.showText(textSend)
+      this.loaderSubjectService.showLoader()
       let data = this.formMAiling.value
       let payload = {
         "TrackingCode": "000001",
@@ -62,18 +66,30 @@ export class MailingComponent implements OnInit {
         }
       }
       this.mailingService.goMailing(payload).subscribe({
-        next: () => {
+        next: (response) => {
           this.addTag()
           this.validate = true
+          let message = response['body'].Result.Message
+          this.message = message
+          this.loaderSubjectService.closeLoader()
+
+          this.timeMAiling()
         },
         error: (err) => {
           console.log(err)
           this.addTagError(err.TrackingCode, err.State.Ok, err.State.Messages[0].Value)
+          this.loaderSubjectService.closeLoader()
           this.notification.showNotificacion("Error", "No se envio la suscripción", 10)
 
         }
       })
     }
+  }
+  timeMAiling() {
+    setTimeout(() => {
+      this.validate = false
+      this.formMAiling.reset()
+    }, 10000)
   }
   validForm() {
     this.errors = []

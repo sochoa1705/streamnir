@@ -11,7 +11,7 @@
                 <path d="M35.7493 78.002C35.0929 78.002 34.4364 77.807 33.8645 77.3975C32.4021 76.3511 32.0641 74.3232 33.1105 72.8608L65.6083 27.364C66.6547 25.9016 68.6826 25.5636 70.145 26.61C71.6074 27.6499 71.9388 29.6843 70.8989 31.1402L38.4011 76.6371C37.7577 77.5275 36.7633 78.002 35.7493 78.002Z"
                     fill="#FAFAFA" />
             </svg>
-            <h1 class="mt-5 titleBold" *ngIf="validate">Se envio la suscripción</h1>
+            <h1 class="mt-5 titleBold" *ngIf="validate">{{ message }}</h1>
             <h1 class="mt-5 titleBold" *ngIf="!validate">{{ title }}</h1>
             <h3 class="mb-5" *ngIf="!validate">{{ span }}</h3>
             <form [formGroup]="formMAiling"  *ngIf="!validate">
