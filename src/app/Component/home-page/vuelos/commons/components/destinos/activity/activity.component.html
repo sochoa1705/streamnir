@@ -1,4 +1,4 @@
-<div class="rowDestino center" *ngIf="tickets?.length">
+<div class="rowDestino center" *ngIf="tickets?.length && city">
   <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_117:1334)">
       <path
@@ -34,11 +34,12 @@
   </svg>
 </div>
 
-<div class="rowDestino titulo" *ngIf="tickets?.length">Actividades</div>
-<div class="rowDestino subtitulo mt-4" *ngIf="tickets?.length">Reserva experiencias inolvidables en todo el mundo.
+<div class="rowDestino titulo" *ngIf="tickets?.length && city">Actividades</div>
+<div class="rowDestino subtitulo mt-4" *ngIf="tickets?.length && city">Reserva experiencias inolvidables en todo el
+  mundo.
 </div>
 
-<div class="boxPackage" *ngIf="tickets?.length">
+<div class="boxPackage" *ngIf="tickets?.length && city">
   <div class="package">
     <div class="icono">
       <img src="./assets/vuelos/calendar.png" alt="">
