@@ -115,9 +115,10 @@
       <div class="product-item">
         <div class="product-item-content">
 
-          <p-galleria [value]="product.ImageUrls" [responsiveOptions]="responsiveOptions"
-            [containerStyle]="{'max-width': '640px'}" [numVisible]="1" [circular]="true" [showItemNavigators]="true"
-            [showThumbnails]="false">
+          <p-galleria [(value)]="product.ImageUrls" [responsiveOptions]="responsiveOptions"
+            [containerStyle]="{'max-width': '640px'}" [numVisible]="1" [showThumbnails]="false" [showIndicators]="true"
+            [showIndicatorsOnItem]="true">
+
             <ng-template pTemplate="item" let-item>
               <img [src]="item" [title]="product.Name" style="width: 100%; display: block;" />
             </ng-template>
