@@ -10,6 +10,7 @@ import { OffersContinentComponent } from './commons/components/offers-continent/
 const routes: Routes = [
   {
     path: '',
+    component: VuelosComponent,
     children: [
       { path: '', component: FlightComponent },
       { path: 'lista', component: FlightComponent },

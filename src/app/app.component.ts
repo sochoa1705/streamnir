@@ -466,10 +466,11 @@ export class AppComponent implements OnInit {
         this.closeModalRecovery();
         this.toggleModalGetPass();
       } else {
-        this.notification.showNotificacion("Error", "Error del servidor", 10);
+        this.notification.showNotificacion("Error", resp.Message, 10);
       }
     }, () => {
       this.closeLoading();
+      this.notification.showNotificacion("Error", "Error del servidor", 10);
     })
   }
 
