@@ -1,4 +1,4 @@
-<div class="rowDestino center" *ngIf="hotels?.length">
+<div class="rowDestino center" *ngIf="hotels?.length && city">
     <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_135:1996)">
             <path
@@ -16,7 +16,7 @@
     </svg>
 </div>
 
-<div class="rowDestino titulo" style="margin-bottom: 50px;" *ngIf="hotels?.length">Reserva un hotel</div>
+<div class="rowDestino titulo" style="margin-bottom: 50px;" *ngIf="hotels?.length && city">Reserva un hotel</div>
 
 <div class="cardHotel" [ngClass]="{show : hotels?.length}">
 
@@ -34,9 +34,10 @@
             <div class="product-item">
                 <div class="product-item-content">
 
-                    <p-galleria [value]="product.Images" [responsiveOptions]="responsiveOptions"
-                        [containerStyle]="{'max-width': '640px'}" [numVisible]="1" [circular]="true"
-                        [showItemNavigators]="true" [showThumbnails]="false">
+                    <p-galleria [(value)]="product.Images" [responsiveOptions]="responsiveOptions"
+                        [containerStyle]="{'max-width': '640px'}" [numVisible]="1" [showThumbnails]="false"
+                        [showIndicators]="true" [showIndicatorsOnItem]="true">
+
                         <ng-template pTemplate="item" let-item>
                             <img [src]="item" [title]="product.Name" style="width: 100%; display: block;" />
                         </ng-template>
