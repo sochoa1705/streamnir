@@ -4,7 +4,7 @@ import { fromEvent } from 'rxjs';
 import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { Guid } from '../../utils';
 import { DistributionObject, IDistributionObject } from './pop-up-pasajero.model';
-
+import { NotificationService } from '../../../Services/notification.service';
 
 @Component({
   selector: 'app-pop-up-pasajero',
@@ -43,7 +43,7 @@ export class PopUpPasajeroComponent implements OnInit{
 
   @Output() emitDistributionObject= new EventEmitter<IDistributionObject[]>();
 
-  constructor(private popupService:PopupService) {
+  constructor(private popupService:PopupService, private notificationService:NotificationService) {
     this.idContent = `popup_${Guid()}`;
   }
 
@@ -60,6 +60,21 @@ export class PopUpPasajeroComponent implements OnInit{
     
   }
 
+  changeInputEdad(e:any,item:{edad:number}){
+    let value = e.target.value;
+
+
+
+    if(value < 0 ){
+      e.target.value = 0;
+    }else if(value > 17){
+      e.target.value = 17;
+    }
+
+
+    item.edad = e.target.value;
+
+  }
 
   agregarHabitacion(){
     const distributionInitial = new DistributionObject();
@@ -83,8 +98,19 @@ export class PopUpPasajeroComponent implements OnInit{
   closePopUp(){
     this.popupService.closePopUp(this.idContent);
   }
+  
 
   public calculateDistributionTravel(distribution:IDistributionObject, optionTravel:'ninos' | 'adultos', optionAddRemove: number): void {
+
+    if(distribution.nroNinos > 3 && optionTravel == 'ninos' && optionAddRemove ===1){
+      this.notificationService.showNotificacion("Error", "Solo se permiten 4 niños");
+      return ;
+    }
+
+    if(distribution.nroNinos + distribution.nroAdultos > 9  && optionAddRemove ===1){
+      this.notificationService.showNotificacion("Error", "Se permiten máximo 10 personas");
+      return ;
+    }
 
     switch(optionTravel) {
       case 'adultos' :
