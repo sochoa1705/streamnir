@@ -12,6 +12,8 @@ import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountsService } from 'src/app/Services/accounts.service';
 import * as bootstrap from 'bootstrap';
+import { FlightService } from 'src/app/api/api-nmviajes/services';
+import { Guid } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-home',
@@ -19,40 +21,56 @@ import * as bootstrap from 'bootstrap';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
   destiny: any = []
   destinyString: any
 
+  airfare: any;
+
   constructor(
-    public packagesService: PackagesService,
+    //public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
     public asidePresenterService: AsidePresenterService,
     public destinyService: DestinyService,
-    private ar: ActivatedRoute,
-    private router: Router,
-    private accountsService: AccountsService
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router,
+    private _accountsService: AccountsService,
+    private _flightService: FlightService
   ) { }
 
   ngOnInit(): void {
     this.addTag()
     this.listDestiny()
     this.getConfirmacion();
+    //this.getAirfare();
   }
 
   getConfirmacion() {
-    this.ar.params.pipe(
+    this._activatedRoute.params.pipe(
       filter(params => params.id),
-      switchMap(param => this.accountsService.confirmationAccount(param.id))
+      switchMap(param => this._accountsService.confirmationAccount(param.id))
     ).subscribe(resp => {
       if (resp.IsSuccess) {
-        this.accountsService.dispatchConfirmate(true);
+        this._accountsService.dispatchConfirmate(true);
         this.toggleConfirmation();
       }
     })
   }
 
+  // getAirfare() {
+  //   this._flightService.v1ApiFlightGetMostWantedGet({
+  //     TrackingCode: Guid(),
+  //     MuteExceptions: environment.muteExceptions,
+  //     'Caller.Company': "Agil",
+  //     'Caller.Application': "Interagencias"
+  //   }).subscribe((res: any) => {
+  //     this.airfare = JSON.parse(res).Result;
+  //   });
+  // }
+
   aceptConfirm() {
     this.toggleConfirmation();
-    this.router.navigateByUrl("/");
+    this._router.navigateByUrl("/");
     this.openModalSession();
   }
 
@@ -92,6 +110,7 @@ export class HomeComponent implements OnInit {
     }
     )
   }
+
   addTag() {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
@@ -100,4 +119,5 @@ export class HomeComponent implements OnInit {
       'virtualPageTitle': 'Home'
     })
   }
+
 }
