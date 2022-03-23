@@ -12,16 +12,18 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    <app-card [itemList]="packagesService.packages"></app-card>
-    <div class="row text-end py-5 d-none d-md-block">
+
+    <!-- <app-card [itemList]="packagesService.packages"></app-card> -->
+    <app-flightdeals></app-flightdeals>
+
+    <!-- <div class="row text-end py-5 d-none d-md-block">
         <div class="col-12">
-            <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                <button class="plus dropdown-toggle px-4" *ngIf="section.section === 'Vuelos'">{{ section.btn }}
-                </button>
+            <ng-container>
+                <button class="plus dropdown-toggle px-4">Más ofertas</button>
             </ng-container>
         </div>
         <div class="clearfix"></div>
-    </div>
+    </div> -->
 </section>
 <!-- END VUELOS -->
 
