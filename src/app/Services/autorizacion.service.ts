@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
-import { CloseSession } from '../shared/utils';
 import { HttpErrorResponse } from '@angular/common/http';
 
 declare var iError: number;
@@ -22,7 +21,6 @@ export class AutorizacionService {
       } else {
         localStorage.setItem('errorPmao', JSON.stringify(0));
       }
-      CloseSession();
     } else if (error.status === 500) {
       // _this.iziToast.show({position: 'center', color: 'red', message: 'Error al procesar la solicitud'});
     }
