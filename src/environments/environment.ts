@@ -21,14 +21,14 @@ export const environment = {
   },
   urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
 
-  urlNmviajes: "https://servicio.nmviajes.com/homevuelos/v1/api",
+  urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
 
-  urlLibro: "https://servicio.nmviajes.com/libroreclamacion",
+  urlLibro: "https://servicio.nmviajes.com:9443/libroreclamacion",
   urlApiTickets: "https://servicios.expertiatravel.com/widgetactividades",
   urlApiHotels: "https://servicios.expertiatravel.com/widgethotel",
-  urlNmviajesAccount: "https://servicio.nmviajes.com/ZonaPrivada",
-  urlNewsletter: 'https://servicio.nmviajes.com/suscripcion',
-  urlSeguros: 'https://servicio.nmviajes.com/segurosrv/',
+  urlNmviajesAccount: "https://servicio.nmviajes.com:9443/ZonaPrivada",
+  urlNewsletter: 'https://servicio.nmviajes.com:9443/suscripcion',
+  urlSeguros: 'https://servicio.nmviajes.com:9443/segurosrv/',
 
 
   urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',               
@@ -42,7 +42,7 @@ export const environment = {
 
 
 
-// https://servicio.nmviajes.com/segurosrv/index.html
+// https://servicio.nmviajes.com:9443/segurosrv/index.html
 
 }
 
