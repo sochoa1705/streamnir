@@ -55,7 +55,7 @@ import { ResponsabilidadSocialModule } from './resonsabilidad-social/responsabil
     NuestraEmpresaModule,
     LibroReclamacionesModule,
     PoliticasModule,
-    ResponsabilidadSocialModule,
+    ResponsabilidadSocialModule
   ],
   exports: [HomePageComponent],
   providers: [MainService, IpClienteService, DollarChangeService, OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
