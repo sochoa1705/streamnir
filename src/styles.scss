@@ -8151,13 +8151,13 @@
             border: 0;
             outline: 0;
             text-decoration: none;
-            font-size: 100%;
+            font-size: 14px;
             list-style: none;
             background: rgba(0, 0, 0, 0.5);
-            padding: 15px 0;
+            padding: 10px 0;
             .p-galleria-indicator {
                 margin-right: 0.5rem;
-                height: 24px;
+                height: 14px;
                 &.p-highlight {
                     .p-link {
                         background-color: #3B82F6;
@@ -8170,8 +8170,8 @@
                     background-color: #ced4da;
                     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
                     border-radius: 50%;
-                    width: 24px;
-                    height: 24px;
+                    width: 14px;
+                    height: 14px;
                     padding: 0;
                 }
             }
