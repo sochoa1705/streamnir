@@ -23,6 +23,7 @@ export class MailingComponent implements OnInit {
   @Input() title!: string;
   @Input() span!: string;
   message: string
+  imgMailing: string
   constructor(
     private mailingService: MailingService,
     private notification: NotificationService,
@@ -70,7 +71,9 @@ export class MailingComponent implements OnInit {
           this.addTag()
           this.validate = true
           let message = response['body'].Result.Message
+          let img = response['body'].Result.IsSuccess
           this.message = message
+          this.imgMailing = img
           this.loaderSubjectService.closeLoader()
 
           this.timeMAiling()
@@ -79,6 +82,7 @@ export class MailingComponent implements OnInit {
           console.log(err)
           this.addTagError(err.TrackingCode, err.State.Ok, err.State.Messages[0].Value)
           this.loaderSubjectService.closeLoader()
+          
           this.notification.showNotificacion("Error", "No se envio la suscripción", 10)
 
         }
