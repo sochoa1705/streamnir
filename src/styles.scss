@@ -7205,11 +7205,11 @@
                                 margin-bottom: 0px !important;
                                 border: 0.5px solid #F44336;
                             }
-                            .msgError {
+                            .textError {
                                 display: flex;
                             }
                         }
-                        .msgError {
+                        .textError {
                             display: none;
                             margin-left: 15px;
                             font-weight: 300;
@@ -7302,7 +7302,7 @@
                 .recoveryRight {
                     .elementRow {
                         .form-control {
-                            margin-bottom: 55px;
+                            margin-bottom: 40px;
                             @media (max-width: 640px) {
                                 margin-bottom: 35px;
                             }

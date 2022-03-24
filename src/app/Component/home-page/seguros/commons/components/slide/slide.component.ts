@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PackagesService } from 'src/app/Services/mock/packages.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { Router } from '@angular/router';
 
@@ -11,7 +10,6 @@ import { Router } from '@angular/router';
 export class SlideComponent implements OnInit {
 
   constructor(
-    public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
     public route: Router,
   ) { }
