@@ -1,71 +1,71 @@
 <!-- PERFIL -->
 <div class="box-container">
-    <div class="box-perfil">
+  <div class="box-perfil">
 
-        <app-file [name]="userStorage.name"></app-file>
+    <app-file [name]="userStorage.name"></app-file>
 
-        <div class="perfilName">{{userStorage.name}}</div>
-        <div class="perfilMail">{{userStorage.email}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                <path
-                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-            </svg>
-        </div>
-        <div class="boxContact" *ngIf="id === 'mnuPerfil'">
-            <div class="contacto">
-                <div class="titleContact">
-                    Datos de contacto
-                </div>
-                <div class="linkContact" (click)="showOption('mnuContacto')">
-                    Agregar datos personales
-                </div>
-            </div>
-            <div class="contacto">
-                <div class="titleContact">
-                    Teléfono
-                </div>
-                <div class="linkContact" (click)="showOption('mnuContacto')">
-                    Agregar teléfono
-                </div>
-            </div>
-            <div class="contacto">
-                <div class="titleContact">
-                    Email
-                </div>
-                <div class="linkContact disabled">
-                    {{userStorage.email}}
-                </div>
-            </div>
-        </div>
+    <div class="perfilName">{{userStorage.name}}</div>
+    <div class="perfilMail">{{userStorage.email}}
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill"
+        viewBox="0 0 16 16">
+        <path
+          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+      </svg>
     </div>
-    <div class="box-content">
-        <div class="portlet-izq">
-            <div class="iconViaje">
-                <img src="./assets/perfil/viajes.png" alt="">
-            </div>
-            <div class="boxMenu">
-                <ul class="">
-                    <li id="mnuPerfil" [class.selected]="id === 'mnuPerfil'" (click)="showOption('mnuPerfil')">Mi Perfil
-                    </li>
-                    <li id="mnuContacto" [class.selected]="id === 'mnuContacto'" (click)="showOption('mnuContacto')">
-                        Datos de contacto</li>
-                    <li id="preferencia" [class.selected]="id === 'preferencia'" (click)="showOption('preferencia')">
-                        Preferencias</li>
-                    <li id="mnuPago" [class.selected]="id === 'mnuPago'" (click)="showOption('mnuPago')">Métodos de pago
-                    </li>
-                    <li id="mnuPasajero" [class.selected]="id === 'mnuPasajero'" (click)="showOption('mnuPasajero')">
-                        Pasajeros</li>
-                    <!-- <li id="mnuEliminar" (click)="preference()">Logout</li> -->
-                </ul>
-            </div>
+    <div class="boxContact" *ngIf="id === 'mnuPerfil'">
+      <div class="contacto">
+        <div class="titleContact">
+          Datos de contacto
         </div>
+        <div class="linkContact" (click)="showOption('mnuContacto')">
+          Agregar datos personales
+        </div>
+      </div>
+      <div class="contacto">
+        <div class="titleContact">
+          Teléfono
+        </div>
+        <div class="linkContact" (click)="showOption('mnuContacto')">
+          Agregar teléfono
+        </div>
+      </div>
+      <div class="contacto">
+        <div class="titleContact">
+          Email
+        </div>
+        <div class="linkContact disabled">
+          {{userStorage.email}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-content">
+    <div class="portlet-izq">
+      <div class="iconViaje">
+        <img src="./assets/perfil/viajes.png" alt="">
+      </div>
+      <div class="boxMenu">
+        <ul class="">
+          <li id="mnuPerfil" [class.selected]="id === 'mnuPerfil'" (click)="showOption('mnuPerfil')">
+            Mi Perfil
+          </li>
+          <li id="mnuContacto" [class.selected]="id === 'mnuContacto'" (click)="showOption('mnuContacto')">
+            Datos de contacto</li>
+          <li id="preferencia" [class.selected]="id === 'preferencia'" (click)="showOption('preferencia')">
+            Preferencias</li>
+          <!-- <li id="mnuPago" [class.selected]="id === 'mnuPago'" (click)="showOption('mnuPago')">Métodos de pago</li> -->
+          <li id="mnuPasajero" [class.selected]="id === 'mnuPasajero'" (click)="showOption('mnuPasajero')">
+            Pasajeros</li>
+          <!-- <li id="mnuEliminar" (click)="preference()">Logout</li> -->
+        </ul>
+      </div>
+    </div>
 
 
-        <div class="portlet-der">
-            <!-- vista perfil -->
-            <div class="viewPerfil" *ngIf="id === 'mnuPerfil'">
-                <div class="boxContPerfil">
+    <div class="portlet-der">
+      <!-- vista perfil -->
+      <div class="viewPerfil" *ngIf="id === 'mnuPerfil'">
+        <!-- <div class="boxContPerfil">
                     <div class="boxLeft">
                         <img src="./assets/perfil/pago.png" alt="">
                     </div>
@@ -85,45 +85,148 @@
                             </div>
                         </div>
                     </div>
+                </div> -->
+        <div class="boxContPerfil">
+          <div class="boxLeft">
+            <img src="./assets/perfil/estudiante.png" alt="">
+          </div>
+          <div class="boxRight">
+            <div class="subTitle">
+              Agrega
+            </div>
+            <div class="title">
+              Pasajeros
+            </div>
+            <div class="descrip">
+              Reserva más rápido y sin complicaciones, agrega los datos de quienes suelen viajar a tu
+              lado.
+            </div>
+            <div class="boxBtn">
+              <div class="btnPerfil primary" (click)="showOption('mnuPasajero')">
+                Agregar
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="boxContPerfil btnBox boxContPerfil--row" (click)="toggleModalEliminar()">
+          <div class="boxCenter">
+            <div class="subTitle">
+              Eliminar mi cuenta
+            </div>
+            <div class="descrip">
+              Si eliminas tu cuenta no podrás recuperarla.
+            </div>
+          </div>
+          <div class="iconBox">
+            <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M-8.21774e-08 14.12L6.18084 8L-6.17205e-07 1.88L1.90283 -8.31755e-08L10 8L1.90283 16L-8.21774e-08 14.12Z"
+                fill="#DF0C30" />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <!-- END perfil -->
+
+      <!-- PREFERENCIAS -->
+      <div class="viewDocument" *ngIf="id === 'preferencia'">
+        <div class="personalDocument">
+          <div class="headerPortlet">
+            <div class="titleBoxRight">Preferencias</div>
+            <div class="subtitleBoxRight">Datos de contacto</div>
+          </div>
+          <form [formGroup]="formPreference">
+            <div class="content">
+              <div class="rowContent">
+                <div class="inputGroup col-md-">
+                  <span class="">Nombres</span>
+                  <input type="text" formControlName="nombres" class="form-control"
+                    placeholder="El que figura en el documento de viaje."
+                    [ngClass]="getMessage(MSG_NOMBRES) !== MSG_EMPTY ? 'isvalid' : ''">
+                  <span class="valid" *ngIf="getMessage(MSG_NOMBRES) !== MSG_EMPTY">{{
+                    getMessage(MSG_NOMBRES) }}</span>
                 </div>
-                <div class="boxContPerfil">
-                    <div class="boxLeft">
-                        <img src="./assets/perfil/estudiante.png" alt="">
-                    </div>
-                    <div class="boxRight">
-                        <div class="subTitle">
-                            Agrega
-                        </div>
-                        <div class="title">
-                            Pasajeros
-                        </div>
-                        <div class="descrip">
-                            Reserva más rápido y sin complicaciones, agrega los datos de quienes suelen viajar a tu
-                            lado.
-                        </div>
-                        <div class="boxBtn">
-                            <div class="btnPerfil primary" (click)="showOption('mnuPasajero')">
-                                Agregar
-                            </div>
-                        </div>
-                    </div>
+                <div class="inputGroup">
+                  <span class="">Apellido paterno</span>
+                  <input type="text" formControlName="apellidoPaterno" class="form-control"
+                    placeholder="El que figura en el documento de viaje."
+                    [ngClass]="getMessage(MSG_APELLIDO_PATERNO) !== MSG_EMPTY ? 'isvalid' : ''">
+                  <span class="valid" *ngIf="getMessage(MSG_APELLIDO_PATERNO) !== MSG_EMPTY">{{
+                    getMessage(MSG_APELLIDO_PATERNO) }}</span>
                 </div>
-                <div class="boxContPerfil btnBox boxContPerfil--row" (click)="toggleModalEliminar()">
-                    <div class="boxCenter">
-                        <div class="subTitle">
-                            Eliminar mi cuenta
-                        </div>
-                        <div class="descrip">
-                            Si eliminas tu cuenta no podrás recuperarla.
-                        </div>
+              </div>
+              <div class="rowContent">
+                <div class="inputGroup">
+                  <span class="">Apellido materno</span>
+                  <input type="text" formControlName="apellidoMaterno" class="form-control"
+                    placeholder="El que figura en el documento de viaje."
+                    [ngClass]="getMessage(MSG_APELLIDO_MATERNO) !== MSG_EMPTY ? 'isvalid' : ''">
+                  <span class="valid" *ngIf="getMessage(MSG_APELLIDO_MATERNO) !== MSG_EMPTY">{{
+                    getMessage(MSG_APELLIDO_MATERNO) }}</span>
+                </div>
+                <div class="inputGroup">
+                  <span class="">Correo electrónico</span>
+                  <input type="text" formControlName="email" class="form-control"
+                    placeholder="El que figura en el documento de viaje."
+                    [ngClass]="getMessage(MSG_MAIL) !== MSG_EMPTY ? 'isvalid' : ''">
+                  <span class="valid" *ngIf="getMessage(MSG_MAIL) !== MSG_EMPTY">{{
+                    getMessage(MSG_MAIL) }}</span>
+                </div>
+              </div>
+              <div class="rowContent">
+                <div class="inputGroup">
+                  <span class="">Fecha de nacimiento</span>
+                  <div class="rowElement">
+                    <input type="text" class="form-control marginRight10" formControlName="dia" placeholder="Dia">
+                    <select class="form-select marginRight10" formControlName="mes" aria-label="Default select example">
+                      <option selected>Mes</option>
+                      <option value="1">Enero</option>
+                      <option value="2">Febrero</option>
+                      <option value="3">Marzo</option>
+                    </select>
+                    <select class="form-select" formControlName="anio" aria-label="Default select example">
+                      <option selected>Año</option>
+                      <option value="1">1990</option>
+                      <option value="2">1991</option>
+                      <option value="3">1992</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="inputGroup">
+                  <span class="">Nacionalidad</span>
+                  <select class="form-select" formControlName="nacionalidad" aria-label="Default select example">
+                    <option selected>Perú</option>
+                    <option value="1">Argentina</option>
+                    <option value="2">Bolivia</option>
+                    <option value="3">Brazil</option>
+                  </select>
+                </div>
+              </div>
+              <div class="rowContent">
+                <div class="inputGroup flexNowrap">
+                  <div class="rowElement">
+                    <div class="nroDoc marginRight10">
+                      <span class="">Tipo de documento</span>
+                      <select class="form-select" formControlName="tipoDocumento" aria-label="Default select example"
+                        [ngClass]="getMessage(MSG_TIPO_DOCUMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
+                        <option selected>Seleccione</option>
+                        <option value="1">DNI</option>
+                        <option value="2">Pasaporte</option>
+                      </select>
+                      <span class="valid" *ngIf="getMessage(MSG_TIPO_DOCUMENTO) !== MSG_EMPTY">{{
+                        getMessage(MSG_TIPO_DOCUMENTO) }}</span>
                     </div>
-                    <div class="iconBox">
-                        <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M-8.21774e-08 14.12L6.18084 8L-6.17205e-07 1.88L1.90283 -8.31755e-08L10 8L1.90283 16L-8.21774e-08 14.12Z"
-                                fill="#DF0C30" />
-                        </svg>
+                  </div>
+                  <div class="rowElement">
+                    <div class="nroDoc">
+                      <span class="">N° de documento</span>
+                      <input type="text" class="form-control" formControlName="numeroDocumento"
+                        placeholder="Ingresar Nro"
+                        [ngClass]="getMessage(MSG_NUMERO_DOCUMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
+                      <span class="valid" *ngIf="getMessage(MSG_NUMERO_DOCUMENTO) !== MSG_EMPTY">{{
+                        getMessage(MSG_NUMERO_DOCUMENTO) }}</span>
                     </div>
+                  </div>
                 </div>
             </div>
             <!-- END perfil -->
@@ -208,10 +311,253 @@
                                     <span class="">Nacionalidad</span>
                                     <select class="form-select" formControlName="nacionalidad"
                                         aria-label="Default select example">
-                                        <option selected>Perú</option>
-                                        <option value="1">Argentina</option>
-                                        <option value="2">Bolivia</option>
-                                        <option value="3">Brazil</option>
+                                        <option value="PE" selected>Perú</option>
+                                        <option value="AF">Afganistan</option>
+                                        <option value="AX">Aland Island</option>
+                                        <option value="AL">Albania</option>
+                                        <option value="DE">Alemania</option>
+                                        <option value="DZ">Algeria</option>
+                                        <option value="DZ">American Samoa</option>
+                                        <option value="AD">Andorra</option>
+                                        <option value="AO">Angola</option>
+                                        <option value="AI">Anguilla</option>
+                                        <option value="AQ">Antartida</option>
+                                        <option value="AG">Antigua and Barbuda</option>
+                                        <option value="AN">Antillas Holandesas</option>
+                                        <option value="SA">Arabia Saudita</option>
+                                        <option value="AR">Argentina</option>
+                                        <option value="AM">Armenia</option>
+                                        <option value="AW">Aruba</option>
+                                        <option value="AC">Ascension Islands</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="AT">Austria</option>
+                                        <option value="AZ">Azerbaijan</option>
+                                        <option value="BS">Bahamas</option>
+                                        <option value="BH">Bahrain</option>
+                                        <option value="BD">Bangladesh</option>
+                                        <option value="BB">Barbados</option>
+                                        <option value="BY">Belarus</option>
+                                        <option value="BE">Belgica</option>
+                                        <option value="BZ">Belize</option>
+                                        <option value="BJ">Benin</option>
+                                        <option value="BM">Bermuda</option>
+                                        <option value="BT">Bhutan</option>
+                                        <option value="BO">Bolivia</option>
+                                        <option value="BA">Bosnia and Herzegovina</option>
+                                        <option value="BW">Botswana</option>
+                                        <option value="BV">Bouvet Island</option>
+                                        <option value="BR">Brasil</option>
+                                        <option value="IO">British Indian Ocean Territory</option>
+                                        <option value="BN">Brunei Darussalam</option>
+                                        <option value="BG">Bulgaria</option>
+                                        <option value="BF">Burkina Faso</option>
+                                        <option value="BI">Burundi</option>
+                                        <option value="CV">Cabo Verde</option>
+                                        <option value="KH">Cambodia</option>
+                                        <option value="CM">Camerun</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="CF">Central African Republic</option>
+                                        <option value="TD">Chad</option>
+                                        <option value="CL">Chile</option>
+                                        <option value="CN">China</option>
+                                        <option value="CX">Christmas Islands</option>
+                                        <option value="CC">Cocos (Keeling )Islands</option>
+                                        <option value="CO">Colombia</option>
+                                        <option value="KM">Comoros</option>
+                                        <option value="CG">Congo</option>
+                                        <option value="CK">Cook Islands</option>
+                                        <option value="KP">Corea del Norte</option>
+                                        <option value="KR">Corea del Sur</option>
+                                        <option value="CR">Costa Rica</option>
+                                        <option value="CI">Cote D'Ivoire</option>
+                                        <option value="HR">Croacia</option>
+                                        <option value="CU">Cuba</option>
+                                        <option value="CY">Cyprus</option>
+                                        <option value="DK">Dinamarca</option>
+                                        <option value="DJ">Djibouti</option>
+                                        <option value="DM">Dominica</option>
+                                        <option value="TP">East Timor</option>
+                                        <option value="EC">Ecuador</option>
+                                        <option value="EG">Egipto</option>
+                                        <option value="SV">El Salvador</option>
+                                        <option value="AE">Emiratos Arabes</option>
+                                        <option value="GQ">Equatorial Guinea</option>
+                                        <option value="ER">Eritrea</option>
+                                        <option value="SK">Eslovaquia</option>
+                                        <option value="SI">Eslovenia</option>
+                                        <option value="ES">España</option>
+                                        <option value="US">Estados Unidos</option>
+                                        <option value="EE">Estonia</option>
+                                        <option value="ET">Etiopia</option>
+                                        <option value="EU">Europa</option>
+                                        <option value="FO">Faroe Islands</option>
+                                        <option value="RU">Federacion Rusa</option>
+                                        <option value="FJ">Fiji</option>
+                                        <option value="PH">Filipinas</option>
+                                        <option value="FI">Finlandia</option>
+                                        <option value="FR">Francia</option>
+                                        <option value="TF">French Southern Territories</option>
+                                        <option value="GA">Gabon</option>
+                                        <option value="GM">Gambia</option>
+                                        <option value="GE">Georgia</option>
+                                        <option value="GH">Ghana</option>
+                                        <option value="GI">Gibraltar</option>
+                                        <option value="GD">Granada</option>
+                                        <option value="GR">Grecia</option>
+                                        <option value="GL">Groenlandia</option>
+                                        <option value="GP">Guadalupe</option>
+                                        <option value="GU">Guam</option>
+                                        <option value="GT">Guatemala</option>
+                                        <option value="GF">Guayana Francesa</option>
+                                        <option value="GN">Guinea</option>
+                                        <option value="GW">Guinea-Bissau</option>
+                                        <option value="GY">Guyana</option>
+                                        <option value="HT">Haiti</option>
+                                        <option value="HM">Heard Island and McDonald Islands</option>
+                                        <option value="VA">Holy See (Vatican City State)</option>
+                                        <option value="HN">Honduras</option>
+                                        <option value="HK">Hong Kong</option>
+                                        <option value="HU">Hungria</option>
+                                        <option value="IN">India</option>
+                                        <option value="ID">Indonesia</option>
+                                        <option value="IR">Iran</option>
+                                        <option value="IQ">Iraq</option>
+                                        <option value="IE">Irlanda</option>
+                                        <option value="IS">Islandia</option>
+                                        <option value="KY">Islas Caiman</option>
+                                        <option value="FK">Islas Malvinas</option>
+                                        <option value="VG">Islas Virgenes Britanicas</option>
+                                        <option value="VI">Islas Virgenes, USA</option>
+                                        <option value="IL">Israel</option>
+                                        <option value="IT">Italia</option>
+                                        <option value="JM">Jamaica</option>
+                                        <option value="JP">Japón</option>
+                                        <option value="JO">Jordan</option>
+                                        <option value="KZ">Kazakstan</option>
+                                        <option value="KE">Kenia</option>
+                                        <option value="KI">Kiribati</option>
+                                        <option value="KW">Kuwait</option>
+                                        <option value="KG">Kyrgyzstan</option>
+                                        <option value="LA">Lao People's Democratic Republic</option>
+                                        <option value="LS">Lesotho</option>
+                                        <option value="LV">Letonia</option>
+                                        <option value="LB">Libano</option>
+                                        <option value="LR">Liberia</option>
+                                        <option value="LY">Libia</option>
+                                        <option value="LI">Liechtenstein</option>
+                                        <option value="LT">Lituania</option>
+                                        <option value="LU">Luxemburgo</option>
+                                        <option value="MO">Macau</option>
+                                        <option value="MK">Macedonia</option>
+                                        <option value="MG">Madagascar</option>
+                                        <option value="MY">Malasia</option>
+                                        <option value="MW">Malawi</option>
+                                        <option value="MV">Maldivas</option>
+                                        <option value="ML">Mali</option>
+                                        <option value="MT">Malta</option>
+                                        <option value="MA">Marruecos</option>
+                                        <option value="MH">Marshall Islands</option>
+                                        <option value="MQ">Martinica</option>
+                                        <option value="MR">Mauritania</option>
+                                        <option value="MU">Mauritius</option>
+                                        <option value="YT">Mayotte</option>
+                                        <option value="MX">Mexico</option>
+                                        <option value="FM">Micronesia, Federated States of</option>
+                                        <option value="MD">Moldova, Republic of</option>
+                                        <option value="MC">Monaco</option>
+                                        <option value="MN">Mongolia</option>
+                                        <option value="ME">Montenegro</option>
+                                        <option value="MS">Montserrat</option>
+                                        <option value="MZ">Mozambique</option>
+                                        <option value="MM">Myanmar</option>
+                                        <option value="NA">Namibia</option>
+                                        <option value="NR">Nauru</option>
+                                        <option value="NP">Nepal</option>
+                                        <option value="NI">Nicaragua</option>
+                                        <option value="NE">Niger</option>
+                                        <option value="NG">Nigeria</option>
+                                        <option value="NU">Niue</option>
+                                        <option value="NL">Norfolk Island</option>
+                                        <option value="MP">Northern Mariana Islands</option>
+                                        <option value="NO">Noruega</option>
+                                        <option value="NC">Nueva Caledonia</option>
+                                        <option value="NZ">Nueva Zelandia</option>
+                                        <option value="OM">Oman</option>
+                                        <option value="NL">Paises Bajos</option>
+                                        <option value="PK">Pakistan</option>
+                                        <option value="PW">Palau</option>
+                                        <option value="PS">Palestinian Territory, Occupied</option>
+                                        <option value="PA">Panama</option>
+                                        <option value="PG">Papua Nueva Guinea</option>
+                                        <option value="PY">Paraguay</option>
+                                        <option value="PE">Peru</option>
+                                        <option value="PF">Polinesia Francesa</option>
+                                        <option value="PL">Polonia</option>
+                                        <option value="PT">Portugal</option>
+                                        <option value="PR">Puerto Rico</option>
+                                        <option value="QA">Qatar</option>
+                                        <option value="GB">Reino Unido</option>
+                                        <option value="SY">Republica Arabe Siria</option>
+                                        <option value="CZ">Republica Checa</option>
+                                        <option value="CD">Republica Democratica del Congo</option>
+                                        <option value="DO">Republica Dominicana</option>
+                                        <option value="RE">Reunion</option>
+                                        <option value="RO">Romania</option>
+                                        <option value="RW">Rwanda</option>
+                                        <option value="KN">Saint Kitts and Nevis</option>
+                                        <option value="LC">Saint Lucia</option>
+                                        <option value="VC">Saint Vincent and the Grenadines</option>
+                                        <option value="WS">Samoa</option>
+                                        <option value="SM">San Marino</option>
+                                        <option value="ST">Sao Tome and Principe</option>
+                                        <option value="SN">Senegal</option>
+                                        <option value="RS">Serbia</option>
+                                        <option value="CS">Serbia y Montenegro</option>
+                                        <option value="SC">Seychelles</option>
+                                        <option value="SL">Sierra Leona</option>
+                                        <option value="SG">Singapur</option>
+                                        <option value="SB">Solomon Islands</option>
+                                        <option value="SO">Somalia</option>
+                                        <option value="GS">South Georgia And The South Sandwich Island</option>
+                                        <option value="LK">Sri Lanka</option>
+                                        <option value="SH">St.Helena</option>
+                                        <option value="PM">St.Pierre And Miquelon</option>
+                                        <option value="SZ">Suazilandia</option>
+                                        <option value="ZA">Sudafrica</option>
+                                        <option value="SD">Sudan</option>
+                                        <option value="SE">Suecia</option>
+                                        <option value="CH">Suiza</option>
+                                        <option value="SR">Suriname</option>
+                                        <option value="SJ">Svalbard And Jan Mayen Islands</option>
+                                        <option value="TH">Tailandia</option>
+                                        <option value="TW">Taiwan</option>
+                                        <option value="TJ">Tajikistan</option>
+                                        <option value="TZ">Tanzania</option>
+                                        <option value="TL">Timor-Leste</option>
+                                        <option value="TG">Togo</option>
+                                        <option value="TK">Tokelau</option>
+                                        <option value="TO">Tonga</option>
+                                        <option value="TT">Trinidad and Tobago</option>
+                                        <option value="TN">Tunisia</option>
+                                        <option value="TM">Turkmenistan</option>
+                                        <option value="TC">Turks and Caicos Islands</option>
+                                        <option value="TR">Turquia</option>
+                                        <option value="TV">Tuvalu</option>
+                                        <option value="UG">Uganda</option>
+                                        <option value="UA">Ukraine</option>
+                                        <option value="UM">United States Minor Outlying Islands</option>
+                                        <option value="UY">Uruguay</option>
+                                        <option value="UZ">Uzbekistan</option>
+                                        <option value="VU">Vanuatu</option>
+                                        <option value="VE">Venezuela</option>
+                                        <option value="VN">Vietnam</option>
+                                        <option value="WF">Wallis And Futuna Islands</option>
+                                        <option value="YD">Yemen</option>
+                                        <option value="YE">Yemen</option>
+                                        <option value="YU">Yugoslavia</option>
+                                        <option value="ZR">Zaire</option>
+                                        <option value="ZM">Zambia</option>
+                                        <option value="ZW">Zimbabwe</option>
                                     </select>
                                 </div>
                             </div>
@@ -259,58 +605,56 @@
                                             </label>
                                         </div>
                                     </div> -->
-                                </div>
-                            </div>
-                            <div class="rowContent">
-                                <div class="inputGroup">
-                                    <span class="">País</span>
-                                    <select class="form-select marginRight10" (change)="optionDepartament($event)"
-                                        formControlName="pais" aria-label="Default select example"
-                                        [ngClass]="getMessage(MSG_PAIS) !== MSG_EMPTY ? 'isvalid' : ''">
-                                        <option selected>Seleccione país</option>
-                                        <option *ngFor="let option of paises" [value]="option.Code">{{ option.Name }}
-                                        </option>
-                                    </select>
-                                    <span class="valid" *ngIf="getMessage(MSG_PAIS) !== MSG_EMPTY">{{
-                                        getMessage(MSG_PAIS) }}</span>
-                                </div>
-                                <div class="inputGroup">
-                                    <span class="">Departamento</span>
-                                    <select class="form-select" (change)="optionDistrict($event)"
-                                        formControlName="departamento" aria-label="Default select example"
-                                        [ngClass]="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
-                                        <option selected>Seleccione departamento</option>
-                                        <option *ngFor="let option of departamentos" [value]="option.Code">{{
-                                            option.Name }}</option>
-                                    </select>
-                                    <span class="valid" *ngIf="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY">{{
-                                        getMessage(MSG_DEPARTAMENTO) }}</span>
-                                </div>
-                                <div class="inputGroup">
-                                    <span class="">Distrito</span>
-                                    <select class="form-select" formControlName="distrito"
-                                        aria-label="Default select example"
-                                        [ngClass]="getMessage(MSG_DISTRITO) !== MSG_EMPTY ? 'isvalid' : ''">
-                                        <option selected>Seleccione distrito</option>
-                                        <option *ngFor="let option of distritos" [value]="option.Code">{{ option.Name }}
-                                        </option>
-                                    </select>
-                                    <span class="valid" *ngIf="getMessage(MSG_DISTRITO) !== MSG_EMPTY">{{
-                                        getMessage(MSG_DISTRITO) }}</span>
-                                </div>
-                            </div>
+                </div>
+              </div>
+              <div class="rowContent">
+                <div class="inputGroup">
+                  <span class="">País</span>
+                  <select class="form-select marginRight10" (change)="optionDepartament($event)" formControlName="pais"
+                    aria-label="Default select example" [ngClass]="getMessage(MSG_PAIS) !== MSG_EMPTY ? 'isvalid' : ''">
+                    <option selected>Seleccione país</option>
+                    <option *ngFor="let option of paises" [value]="option.Code">{{ option.Name }}
+                    </option>
+                  </select>
+                  <span class="valid" *ngIf="getMessage(MSG_PAIS) !== MSG_EMPTY">{{
+                    getMessage(MSG_PAIS) }}</span>
+                </div>
+                <div class="inputGroup">
+                  <span class="">Departamento</span>
+                  <select class="form-select" (change)="optionDistrict($event)" formControlName="departamento"
+                    aria-label="Default select example"
+                    [ngClass]="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
+                    <option selected>Seleccione departamento</option>
+                    <option *ngFor="let option of departamentos" [value]="option.Code">{{
+                      option.Name }}</option>
+                  </select>
+                  <span class="valid" *ngIf="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY">{{
+                    getMessage(MSG_DEPARTAMENTO) }}</span>
+                </div>
+                <div class="inputGroup">
+                  <span class="">Distrito</span>
+                  <select class="form-select" formControlName="distrito" aria-label="Default select example"
+                    [ngClass]="getMessage(MSG_DISTRITO) !== MSG_EMPTY ? 'isvalid' : ''">
+                    <option selected>Seleccione distrito</option>
+                    <option *ngFor="let option of distritos" [value]="option.Code">{{ option.Name }}
+                    </option>
+                  </select>
+                  <span class="valid" *ngIf="getMessage(MSG_DISTRITO) !== MSG_EMPTY">{{
+                    getMessage(MSG_DISTRITO) }}</span>
+                </div>
+              </div>
 
-                            <div class="moreInfo">
-                                <div class="title">Mis preferencias</div>
-                                <div class="question">¿Cuáles son tus preferencias de viaje?
-                                    <span>(puedes elegir más de una opción)</span>
-                                </div>
-                                <div class="groupOption" formGroupName="preference">
-                                    <mat-checkbox *ngFor="let chk of listPreferent" [formControlName]="chk.name"
-                                        [value]="chk.value" class="checkOption">{{ chk.text }}</mat-checkbox>
-                                    <!-- <span class="valid" *ngIf="getMessage(MSG_CHK_PREFE) !== MSG_EMPTY">{{ getMessage(MSG_CHK_PREFE) }}</span> -->
+              <div class="moreInfo">
+                <div class="title">Mis preferencias</div>
+                <div class="question">¿Cuáles son tus preferencias de viaje?
+                  <span>(puedes elegir más de una opción)</span>
+                </div>
+                <div class="groupOption" formGroupName="preference">
+                  <mat-checkbox *ngFor="let chk of listPreferent" [formControlName]="chk.name" [value]="chk.value"
+                    class="checkOption">{{ chk.text }}</mat-checkbox>
+                  <!-- <span class="valid" *ngIf="getMessage(MSG_CHK_PREFE) !== MSG_EMPTY">{{ getMessage(MSG_CHK_PREFE) }}</span> -->
 
-                                    <!-- <mat-checkbox formControlName="playa" class="checkOption">Playa</mat-checkbox>
+                  <!-- <mat-checkbox formControlName="playa" class="checkOption">Playa</mat-checkbox>
                                             <mat-checkbox formControlName="aventura" class="checkOption">Aventura</mat-checkbox>
                                         <mat-checkbox formControlName="naturaleza" class="checkOption">Naturaleza</mat-checkbox>
                                         <mat-checkbox formControlName="exotico" class="checkOption">Exóticos</mat-checkbox>
@@ -319,328 +663,319 @@
                                         <mat-checkbox formControlName="crucero" class="checkOption">Cruceros</mat-checkbox>
                                         <mat-checkbox formControlName="cultural" class="checkOption">Cultural</mat-checkbox>
                                         <mat-checkbox formControlName="otros" class="checkOption">Otros</mat-checkbox> -->
-                                </div>
-
-                                <div class="question">¿Qué tipos de viaje te interesa?
-                                    <span>(puedes elegir más de una opción)</span>
-                                </div>
-                                <div class="groupOption">
-                                    <mat-checkbox formControlName="economico" class="checkOption">Económico
-                                    </mat-checkbox>
-                                    <mat-checkbox formControlName="clasico" class="checkOption">Clásico</mat-checkbox>
-                                    <mat-checkbox formControlName="lujo" class="checkOption">Lujo</mat-checkbox>
-                                </div>
-
-                                <div class="question">¿Con quién viajarías?
-                                    <span>(puedes elegir más de una opción)</span>
-                                </div>
-                                <div class="groupOption">
-                                    <mat-checkbox formControlName="solo" class="checkOption">Solo</mat-checkbox>
-                                    <mat-checkbox formControlName="pareja" class="checkOption">Pareja</mat-checkbox>
-                                    <mat-checkbox formControlName="familia" class="checkOption">Familia</mat-checkbox>
-                                    <mat-checkbox formControlName="amigos" class="checkOption">Amigos</mat-checkbox>
-                                </div>
-
-                                <div class="question">¿Cuántas veces al año te gustaría viajar?
-
-                                </div>
-                                <div class="groupOption">
-                                    <mat-radio-group formControlName="vecesAlAnio" class="groupRadio">
-                                        <mat-radio-button class="checkOption" value="1">1</mat-radio-button>
-                                        <mat-radio-button class="checkOption" value="2">2-3</mat-radio-button>
-                                        <mat-radio-button class="checkOption" value="3">4-6</mat-radio-button>
-                                        <mat-radio-button class="checkOption" value="4">7-10</mat-radio-button>
-                                        <mat-radio-button class="checkOption" value="5">Mas de 10</mat-radio-button>
-                                    </mat-radio-group>
-                                </div>
-
-                                <hr>
-                                <div class="groupOption">
-                                    <mat-checkbox formControlName="politicas" class="checkOption">Aceptar
-                                        <a href="#">política de protección de datos</a>
-                                    </mat-checkbox>
-                                </div>
-                                <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) !== MSG_EMPTY">{{
-                                    getMessage(MSG_CHK_POLITY) }}</span>
-                                <div class="groupOption">
-                                    <mat-checkbox formControlName="autorizo" class="checkOption">Autorizo el uso de mi
-                                        información para fines publicitarios</mat-checkbox>
-                                </div>
-                                <span class="valid" *ngIf="getMessage(MSG_CHK_AUTORIZO) !== MSG_EMPTY">{{
-                                    getMessage(MSG_CHK_AUTORIZO) }}</span>
-                            </div>
-                            <div class="rowContent">
-                                <div class="btnPerfil primary" (click)="save()">
-                                    Guardar mis datos
-                                </div>
-                            </div>
-
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-            <!-- END PREFERENCIAS -->
-
-            <div class="viewPay marginBottom40" *ngIf="id === 'mnuContacto'">
-                <app-contacto></app-contacto>
-            </div>
-
-            <!-- METODOS DE PAGO -->
-            <div class="viewPay marginBottom40" *ngIf="id === 'mnuPago'" [hidden]="!agregaTarjeta">
-                <div class="personalDocument">
-                    <div class="headerPortlet">
-                        <div class="titleBoxRight">Tarjeta de crédito o débito</div>
-                        <div class="subtitleBoxRight">Realiza reservas de manera más rápido guardando los datos de tu
-                            tarjeta. Nunca los usaremos sin tu
-                            permiso.
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div class="rowContent">
-                            <div class="boxGrid">
-                                <div class="rowGrid">
-                                    <div class="rowElement flexAuto">
-                                        <div class="marginRight10">
-                                            <img src="./assets/perfil/_visa.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="rowElement flexWrap">
-                                        <div class="descrip">
-                                            Tarjeta de crédito
-                                        </div>
-                                        <div class="descrip">
-                                            **** 5845
-                                        </div>
-                                    </div>
-                                    <div class="rowElement spaceEnd">
-                                        <div class="optModificar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M12.8972 4.81629L10.0978 2.01775L11.2181 0.898334C11.7168 0.399584 12.8592 0.300626 13.4569 0.898334L14.0166 1.45804C14.6143 2.05575 14.5161 3.19813 14.0166 3.69767L12.8972 4.81629ZM11.7778 5.9365L3.94026 13.774L0.301758 14.6132L1.14092 10.9747L8.97843 3.13717L11.7778 5.9365Z"
-                                                    fill="#009AED" />
-                                            </svg>
-                                        </div>
-                                        <div class="optEliminar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M6.25116 0.905457H8.7581V1.32729H9.66344V0.846405C9.66356 0.379715 9.28407 0 8.81761 0H6.19165C5.72519 0 5.3457 0.379715 5.3457 0.846405V1.32729H6.25116V0.905457Z"
-                                                    fill="#009AED" />
-                                                <path
-                                                    d="M11.7545 4.91455H3.25522C3.02233 4.91455 2.839 5.11322 2.85777 5.34542L3.56833 14.1317C3.60793 14.6222 4.01705 15 4.50858 15H10.501C10.9926 15 11.4017 14.6222 11.4413 14.1316L12.1519 5.34542C12.1707 5.11322 11.9874 4.91455 11.7545 4.91455ZM5.31321 14.0628C5.30371 14.0634 5.29422 14.0638 5.28483 14.0638C5.04748 14.0638 4.84824 13.8789 4.83348 13.6388L4.38819 6.42574C4.37285 6.17615 4.56271 5.96134 4.81219 5.94601C5.06087 5.9309 5.27659 6.1203 5.29193 6.37001L5.7371 13.5831C5.75255 13.8327 5.56269 14.0474 5.31321 14.0628ZM7.96263 13.611C7.96263 13.861 7.75996 14.0636 7.50991 14.0636C7.25985 14.0636 7.05718 13.861 7.05718 13.611V6.39782C7.05718 6.14777 7.25985 5.94509 7.50991 5.94509C7.75984 5.94509 7.96263 6.14777 7.96263 6.39782V13.611ZM10.6216 6.42448L10.1964 13.6376C10.1823 13.8781 9.98275 14.0636 9.74494 14.0636C9.73601 14.0636 9.72697 14.0634 9.71793 14.063C9.46833 14.0482 9.2779 13.834 9.29267 13.5844L9.7177 6.37115C9.73235 6.12156 9.9459 5.93113 10.1962 5.94589C10.4458 5.96054 10.6362 6.17489 10.6216 6.42448Z"
-                                                    fill="#009AED" />
-                                                <path
-                                                    d="M13.3198 3.51762L13.0224 2.62636C12.9441 2.39141 12.7241 2.23291 12.4763 2.23291H2.53268C2.28503 2.23291 2.06496 2.39141 1.98668 2.62636L1.68936 3.51762C1.63203 3.68951 1.70664 3.86484 1.84592 3.95227C1.90268 3.98786 1.96986 4.00926 2.04367 4.00926H12.9655C13.0393 4.00926 13.1066 3.98786 13.1632 3.95216C13.3025 3.86472 13.3771 3.6894 13.3198 3.51762Z"
-                                                    fill="#009AED" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="rowGrid">
-                                    <div class="rowElement flexAuto">
-                                        <div class="marginRight10">
-                                            <img src="./assets/perfil/_master.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="rowElement flexWrap">
-                                        <div class="descrip">
-                                            Tarjeta de crédito
-                                        </div>
-                                        <div class="descrip">
-                                            **** 5845
-                                        </div>
-                                    </div>
-                                    <div class="rowElement spaceEnd">
-                                        <div class="optModificar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M12.8972 4.81629L10.0978 2.01775L11.2181 0.898334C11.7168 0.399584 12.8592 0.300626 13.4569 0.898334L14.0166 1.45804C14.6143 2.05575 14.5161 3.19813 14.0166 3.69767L12.8972 4.81629ZM11.7778 5.9365L3.94026 13.774L0.301758 14.6132L1.14092 10.9747L8.97843 3.13717L11.7778 5.9365Z"
-                                                    fill="#009AED" />
-                                            </svg>
-                                        </div>
-                                        <div class="optEliminar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M6.25116 0.905457H8.7581V1.32729H9.66344V0.846405C9.66356 0.379715 9.28407 0 8.81761 0H6.19165C5.72519 0 5.3457 0.379715 5.3457 0.846405V1.32729H6.25116V0.905457Z"
-                                                    fill="#009AED" />
-                                                <path
-                                                    d="M11.7545 4.91455H3.25522C3.02233 4.91455 2.839 5.11322 2.85777 5.34542L3.56833 14.1317C3.60793 14.6222 4.01705 15 4.50858 15H10.501C10.9926 15 11.4017 14.6222 11.4413 14.1316L12.1519 5.34542C12.1707 5.11322 11.9874 4.91455 11.7545 4.91455ZM5.31321 14.0628C5.30371 14.0634 5.29422 14.0638 5.28483 14.0638C5.04748 14.0638 4.84824 13.8789 4.83348 13.6388L4.38819 6.42574C4.37285 6.17615 4.56271 5.96134 4.81219 5.94601C5.06087 5.9309 5.27659 6.1203 5.29193 6.37001L5.7371 13.5831C5.75255 13.8327 5.56269 14.0474 5.31321 14.0628ZM7.96263 13.611C7.96263 13.861 7.75996 14.0636 7.50991 14.0636C7.25985 14.0636 7.05718 13.861 7.05718 13.611V6.39782C7.05718 6.14777 7.25985 5.94509 7.50991 5.94509C7.75984 5.94509 7.96263 6.14777 7.96263 6.39782V13.611ZM10.6216 6.42448L10.1964 13.6376C10.1823 13.8781 9.98275 14.0636 9.74494 14.0636C9.73601 14.0636 9.72697 14.0634 9.71793 14.063C9.46833 14.0482 9.2779 13.834 9.29267 13.5844L9.7177 6.37115C9.73235 6.12156 9.9459 5.93113 10.1962 5.94589C10.4458 5.96054 10.6362 6.17489 10.6216 6.42448Z"
-                                                    fill="#009AED" />
-                                                <path
-                                                    d="M13.3198 3.51762L13.0224 2.62636C12.9441 2.39141 12.7241 2.23291 12.4763 2.23291H2.53268C2.28503 2.23291 2.06496 2.39141 1.98668 2.62636L1.68936 3.51762C1.63203 3.68951 1.70664 3.86484 1.84592 3.95227C1.90268 3.98786 1.96986 4.00926 2.04367 4.00926H12.9655C13.0393 4.00926 13.1066 3.98786 13.1632 3.95216C13.3025 3.86472 13.3771 3.6894 13.3198 3.51762Z"
-                                                    fill="#009AED" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="rowContent">
-                            <div class="btnAgregar" (click)="showAgregaTarjeta(false)">
-                                + Agregar otra tarjeta
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-            </div>
-
-            <div class="viewPay marginBottom40" *ngIf="id === 'mnuPago'" [hidden]="agregaTarjeta">
-                <div class="personalDocument">
-                    <div class="headerPortlet">
-                        <div class="titleBoxRight">Tarjeta de crédito o débito</div>
-                        <div class="subtitleBoxRight">Realiza reservas de manera más rápido guardando los datos de tu
-                            tarjeta. Nunca los usaremos sin tu
-                            permiso.
-                        </div>
-                    </div>
-                    <div class="cardLogo">
-                        <div class="boxCard">
-                            <img src="./assets/perfil/_visa.png" alt="">
-                        </div>
-                        <div class="boxCard">
-                            <img src="./assets/perfil/_master.png" alt="">
-                        </div>
-                        <div class="boxCard">
-                            <img src="./assets/perfil/_american.png" alt="">
-                        </div>
-                        <div class="boxCard">
-                            <img src="./assets/perfil/_dinners.png" alt="">
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div class="rowContent">
-                            <div class="inputGroup">
-                                <span class="">Número de la tarjeta</span>
-                                <input type="text" class="form-control" placeholder="Ingrese el número de su tarjeta">
-                            </div>
-                            <div class="inputGroup">
-                                <span class="">Titular de la tarjeta</span>
-                                <input type="text" class="form-control" placeholder="El que figura en la tarjeta">
-                            </div>
-                        </div>
-                        <div class="rowContent">
-                            <div class="inputGroup fecVen">
-                                <span class="">Vencimiento</span>
-                                <input type="text" class="form-control" placeholder="MM/AA">
-                            </div>
-                            <div class="inputGroup"></div>
-                        </div>
-                        <div class="rowContent spaceBetween">
-                            <div class="btnPerfil primary" (click)="showAgregaTarjeta(true)">
-                                Guardar
-                            </div>
-                            <div class="btnAgregar gris">
-                                + Agregar otra tarjeta
-                            </div>
-                        </div>
-                    </div>
+                <div class="question">¿Qué tipos de viaje te interesa?
+                  <span>(puedes elegir más de una opción)</span>
+                </div>
+                <div class="groupOption">
+                  <mat-checkbox formControlName="economico" class="checkOption">Económico
+                  </mat-checkbox>
+                  <mat-checkbox formControlName="clasico" class="checkOption">Clásico</mat-checkbox>
+                  <mat-checkbox formControlName="lujo" class="checkOption">Lujo</mat-checkbox>
                 </div>
 
-            </div>
-
-            <div class="viewPay" *ngIf="id === 'mnuPago'">
-                <div class="contentSecurity">
-                    <div class="rowContent">
-                        <div>
-                            <img src="./assets/perfil/security.png" alt="">
-                        </div>
-                        <div class="rowContent">
-                            <div class="title">
-                                Transacción segura
-                            </div>
-                            <div class="subtitle">
-                                Sitio seguro utilizamos conexiones seguras para ti
-                            </div>
-                        </div>
-                    </div>
+                <div class="question">¿Con quién viajarías?
+                  <span>(puedes elegir más de una opción)</span>
                 </div>
-            </div>
-
-            <!-- END METODOS DE PAGO -->
-
-            <!-- PASAJEROS -->
-            <div class="viewPay" *ngIf="id === 'mnuPasajero'">
-                <app-passenger></app-passenger>
-            </div>
-            <!-- END PASAJEROS -->
-
-            <!-- ELIMINAR CUENTA -->
-            <div class="viewCuenta" *ngIf="id === 'mnuEliminar'">
-                <div class="personalDocument">
-                    <div class="headerPortlet">
-                        <div class="titleBoxRight">Eliminar cuenta</div>
-                        <div class="subtitleBoxRight">Lamentamos que te vayas. Coméntanos, ¿por qué eliminarás tu
-                            cuenta?
-                        </div>
-                    </div>
-
-                    <div class="content">
-                        <div class="rowContent">
-                            <div class="inputGroup">
-                                <div class="optionCheck">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Razón 1
-                                    </label>
-                                </div>
-                                <div class="optionCheck">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault2">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Razón 2
-                                    </label>
-                                </div>
-                                <div class="optionCheck">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault3">
-                                    <label class="form-check-label" for="flexRadioDefault3">
-                                        Razón 3
-                                    </label>
-                                </div>
-                                <div class="optionCheck">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault4">
-                                    <label class="form-check-label" for="flexRadioDefault4">
-                                        Razón 4
-                                    </label>
-                                </div>
-                                <div class="optionCheck">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault5" checked>
-                                    <label class="form-check-label" for="flexRadioDefault5">
-                                        Otros
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="rowContent">
-                            <div class="btnPerfil primary">
-                                Eliminar
-                            </div>
-                        </div>
-                        <div class="rowContent">
-                            <div class="msgWarning">
-                                *Recuerda que perderás el acceso a tu historial de reservas y todos tus datos serán
-                                eliminados de manera permanente.
-                            </div>
-                        </div>
-                    </div>
+                <div class="groupOption">
+                  <mat-checkbox formControlName="solo" class="checkOption">Solo</mat-checkbox>
+                  <mat-checkbox formControlName="pareja" class="checkOption">Pareja</mat-checkbox>
+                  <mat-checkbox formControlName="familia" class="checkOption">Familia</mat-checkbox>
+                  <mat-checkbox formControlName="amigos" class="checkOption">Amigos</mat-checkbox>
                 </div>
 
+                <div class="question">¿Cuántas veces al año te gustaría viajar?
+
+                </div>
+                <div class="groupOption">
+                  <mat-radio-group formControlName="vecesAlAnio" class="groupRadio">
+                    <mat-radio-button class="checkOption" value="1">1</mat-radio-button>
+                    <mat-radio-button class="checkOption" value="2">2-3</mat-radio-button>
+                    <mat-radio-button class="checkOption" value="3">4-6</mat-radio-button>
+                    <mat-radio-button class="checkOption" value="4">7-10</mat-radio-button>
+                    <mat-radio-button class="checkOption" value="5">Mas de 10</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+                <hr>
+                <div class="groupOption">
+                  <mat-checkbox formControlName="politicas" class="checkOption">Aceptar
+                    <a href="#">política de protección de datos</a>
+                  </mat-checkbox>
+                </div>
+                <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) !== MSG_EMPTY">{{
+                  getMessage(MSG_CHK_POLITY) }}</span>
+                <div class="groupOption">
+                  <mat-checkbox formControlName="autorizo" class="checkOption">Autorizo el uso de mi
+                    información para fines publicitarios</mat-checkbox>
+                </div>
+                <span class="valid" *ngIf="getMessage(MSG_CHK_AUTORIZO) !== MSG_EMPTY">{{
+                  getMessage(MSG_CHK_AUTORIZO) }}</span>
+              </div>
+              <div class="rowContent">
+                <div class="btnPerfil primary" (click)="save()">
+                  Guardar mis datos
+                </div>
+              </div>
+
             </div>
-            <!-- END ELIMINAR CUENTA -->
+          </form>
+
         </div>
+      </div>
+      <!-- END PREFERENCIAS -->
+
+      <div class="viewPay marginBottom40" *ngIf="id === 'mnuContacto'">
+        <app-contacto></app-contacto>
+      </div>
+
+      <!-- METODOS DE PAGO -->
+      <div class="viewPay marginBottom40" *ngIf="id === 'mnuPago'" [hidden]="!agregaTarjeta">
+        <div class="personalDocument">
+          <div class="headerPortlet">
+            <div class="titleBoxRight">Tarjeta de crédito o débito</div>
+            <div class="subtitleBoxRight">Realiza reservas de manera más rápido guardando los datos de tu
+              tarjeta. Nunca los usaremos sin tu
+              permiso.
+            </div>
+          </div>
+          <div class="content">
+            <div class="rowContent">
+              <div class="boxGrid">
+                <div class="rowGrid">
+                  <div class="rowElement flexAuto">
+                    <div class="marginRight10">
+                      <img src="./assets/perfil/_visa.png" alt="">
+                    </div>
+                  </div>
+                  <div class="rowElement flexWrap">
+                    <div class="descrip">
+                      Tarjeta de crédito
+                    </div>
+                    <div class="descrip">
+                      **** 5845
+                    </div>
+                  </div>
+                  <div class="rowElement spaceEnd">
+                    <div class="optModificar">
+                      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M12.8972 4.81629L10.0978 2.01775L11.2181 0.898334C11.7168 0.399584 12.8592 0.300626 13.4569 0.898334L14.0166 1.45804C14.6143 2.05575 14.5161 3.19813 14.0166 3.69767L12.8972 4.81629ZM11.7778 5.9365L3.94026 13.774L0.301758 14.6132L1.14092 10.9747L8.97843 3.13717L11.7778 5.9365Z"
+                          fill="#009AED" />
+                      </svg>
+                    </div>
+                    <div class="optEliminar">
+                      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M6.25116 0.905457H8.7581V1.32729H9.66344V0.846405C9.66356 0.379715 9.28407 0 8.81761 0H6.19165C5.72519 0 5.3457 0.379715 5.3457 0.846405V1.32729H6.25116V0.905457Z"
+                          fill="#009AED" />
+                        <path
+                          d="M11.7545 4.91455H3.25522C3.02233 4.91455 2.839 5.11322 2.85777 5.34542L3.56833 14.1317C3.60793 14.6222 4.01705 15 4.50858 15H10.501C10.9926 15 11.4017 14.6222 11.4413 14.1316L12.1519 5.34542C12.1707 5.11322 11.9874 4.91455 11.7545 4.91455ZM5.31321 14.0628C5.30371 14.0634 5.29422 14.0638 5.28483 14.0638C5.04748 14.0638 4.84824 13.8789 4.83348 13.6388L4.38819 6.42574C4.37285 6.17615 4.56271 5.96134 4.81219 5.94601C5.06087 5.9309 5.27659 6.1203 5.29193 6.37001L5.7371 13.5831C5.75255 13.8327 5.56269 14.0474 5.31321 14.0628ZM7.96263 13.611C7.96263 13.861 7.75996 14.0636 7.50991 14.0636C7.25985 14.0636 7.05718 13.861 7.05718 13.611V6.39782C7.05718 6.14777 7.25985 5.94509 7.50991 5.94509C7.75984 5.94509 7.96263 6.14777 7.96263 6.39782V13.611ZM10.6216 6.42448L10.1964 13.6376C10.1823 13.8781 9.98275 14.0636 9.74494 14.0636C9.73601 14.0636 9.72697 14.0634 9.71793 14.063C9.46833 14.0482 9.2779 13.834 9.29267 13.5844L9.7177 6.37115C9.73235 6.12156 9.9459 5.93113 10.1962 5.94589C10.4458 5.96054 10.6362 6.17489 10.6216 6.42448Z"
+                          fill="#009AED" />
+                        <path
+                          d="M13.3198 3.51762L13.0224 2.62636C12.9441 2.39141 12.7241 2.23291 12.4763 2.23291H2.53268C2.28503 2.23291 2.06496 2.39141 1.98668 2.62636L1.68936 3.51762C1.63203 3.68951 1.70664 3.86484 1.84592 3.95227C1.90268 3.98786 1.96986 4.00926 2.04367 4.00926H12.9655C13.0393 4.00926 13.1066 3.98786 13.1632 3.95216C13.3025 3.86472 13.3771 3.6894 13.3198 3.51762Z"
+                          fill="#009AED" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="rowGrid">
+                  <div class="rowElement flexAuto">
+                    <div class="marginRight10">
+                      <img src="./assets/perfil/_master.png" alt="">
+                    </div>
+                  </div>
+                  <div class="rowElement flexWrap">
+                    <div class="descrip">
+                      Tarjeta de crédito
+                    </div>
+                    <div class="descrip">
+                      **** 5845
+                    </div>
+                  </div>
+                  <div class="rowElement spaceEnd">
+                    <div class="optModificar">
+                      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M12.8972 4.81629L10.0978 2.01775L11.2181 0.898334C11.7168 0.399584 12.8592 0.300626 13.4569 0.898334L14.0166 1.45804C14.6143 2.05575 14.5161 3.19813 14.0166 3.69767L12.8972 4.81629ZM11.7778 5.9365L3.94026 13.774L0.301758 14.6132L1.14092 10.9747L8.97843 3.13717L11.7778 5.9365Z"
+                          fill="#009AED" />
+                      </svg>
+                    </div>
+                    <div class="optEliminar">
+                      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M6.25116 0.905457H8.7581V1.32729H9.66344V0.846405C9.66356 0.379715 9.28407 0 8.81761 0H6.19165C5.72519 0 5.3457 0.379715 5.3457 0.846405V1.32729H6.25116V0.905457Z"
+                          fill="#009AED" />
+                        <path
+                          d="M11.7545 4.91455H3.25522C3.02233 4.91455 2.839 5.11322 2.85777 5.34542L3.56833 14.1317C3.60793 14.6222 4.01705 15 4.50858 15H10.501C10.9926 15 11.4017 14.6222 11.4413 14.1316L12.1519 5.34542C12.1707 5.11322 11.9874 4.91455 11.7545 4.91455ZM5.31321 14.0628C5.30371 14.0634 5.29422 14.0638 5.28483 14.0638C5.04748 14.0638 4.84824 13.8789 4.83348 13.6388L4.38819 6.42574C4.37285 6.17615 4.56271 5.96134 4.81219 5.94601C5.06087 5.9309 5.27659 6.1203 5.29193 6.37001L5.7371 13.5831C5.75255 13.8327 5.56269 14.0474 5.31321 14.0628ZM7.96263 13.611C7.96263 13.861 7.75996 14.0636 7.50991 14.0636C7.25985 14.0636 7.05718 13.861 7.05718 13.611V6.39782C7.05718 6.14777 7.25985 5.94509 7.50991 5.94509C7.75984 5.94509 7.96263 6.14777 7.96263 6.39782V13.611ZM10.6216 6.42448L10.1964 13.6376C10.1823 13.8781 9.98275 14.0636 9.74494 14.0636C9.73601 14.0636 9.72697 14.0634 9.71793 14.063C9.46833 14.0482 9.2779 13.834 9.29267 13.5844L9.7177 6.37115C9.73235 6.12156 9.9459 5.93113 10.1962 5.94589C10.4458 5.96054 10.6362 6.17489 10.6216 6.42448Z"
+                          fill="#009AED" />
+                        <path
+                          d="M13.3198 3.51762L13.0224 2.62636C12.9441 2.39141 12.7241 2.23291 12.4763 2.23291H2.53268C2.28503 2.23291 2.06496 2.39141 1.98668 2.62636L1.68936 3.51762C1.63203 3.68951 1.70664 3.86484 1.84592 3.95227C1.90268 3.98786 1.96986 4.00926 2.04367 4.00926H12.9655C13.0393 4.00926 13.1066 3.98786 13.1632 3.95216C13.3025 3.86472 13.3771 3.6894 13.3198 3.51762Z"
+                          fill="#009AED" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="rowContent">
+              <div class="btnAgregar" (click)="showAgregaTarjeta(false)">
+                + Agregar otra tarjeta
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="viewPay marginBottom40" *ngIf="id === 'mnuPago'" [hidden]="agregaTarjeta">
+        <div class="personalDocument">
+          <div class="headerPortlet">
+            <div class="titleBoxRight">Tarjeta de crédito o débito</div>
+            <div class="subtitleBoxRight">Realiza reservas de manera más rápido guardando los datos de tu
+              tarjeta. Nunca los usaremos sin tu
+              permiso.
+            </div>
+          </div>
+          <div class="cardLogo">
+            <div class="boxCard">
+              <img src="./assets/perfil/_visa.png" alt="">
+            </div>
+            <div class="boxCard">
+              <img src="./assets/perfil/_master.png" alt="">
+            </div>
+            <div class="boxCard">
+              <img src="./assets/perfil/_american.png" alt="">
+            </div>
+            <div class="boxCard">
+              <img src="./assets/perfil/_dinners.png" alt="">
+            </div>
+          </div>
+          <div class="content">
+            <div class="rowContent">
+              <div class="inputGroup">
+                <span class="">Número de la tarjeta</span>
+                <input type="text" class="form-control" placeholder="Ingrese el número de su tarjeta">
+              </div>
+              <div class="inputGroup">
+                <span class="">Titular de la tarjeta</span>
+                <input type="text" class="form-control" placeholder="El que figura en la tarjeta">
+              </div>
+            </div>
+            <div class="rowContent">
+              <div class="inputGroup fecVen">
+                <span class="">Vencimiento</span>
+                <input type="text" class="form-control" placeholder="MM/AA">
+              </div>
+              <div class="inputGroup"></div>
+            </div>
+            <div class="rowContent spaceBetween">
+              <div class="btnPerfil primary" (click)="showAgregaTarjeta(true)">
+                Guardar
+              </div>
+              <div class="btnAgregar gris">
+                + Agregar otra tarjeta
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="viewPay" *ngIf="id === 'mnuPago'">
+        <div class="contentSecurity">
+          <div class="rowContent">
+            <div>
+              <img src="./assets/perfil/security.png" alt="">
+            </div>
+            <div class="rowContent">
+              <div class="title">
+                Transacción segura
+              </div>
+              <div class="subtitle">
+                Sitio seguro utilizamos conexiones seguras para ti
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- END METODOS DE PAGO -->
+
+      <!-- PASAJEROS -->
+      <div class="viewPay" *ngIf="id === 'mnuPasajero'">
+        <app-passenger></app-passenger>
+      </div>
+      <!-- END PASAJEROS -->
+
+      <!-- ELIMINAR CUENTA -->
+      <div class="viewCuenta" *ngIf="id === 'mnuEliminar'">
+        <div class="personalDocument">
+          <div class="headerPortlet">
+            <div class="titleBoxRight">Eliminar cuenta</div>
+            <div class="subtitleBoxRight">Lamentamos que te vayas. Coméntanos, ¿por qué eliminarás tu
+              cuenta?
+            </div>
+          </div>
+
+          <div class="content">
+            <div class="rowContent">
+              <div class="inputGroup">
+                <div class="optionCheck">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Razón 1
+                  </label>
+                </div>
+                <div class="optionCheck">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Razón 2
+                  </label>
+                </div>
+                <div class="optionCheck">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                  <label class="form-check-label" for="flexRadioDefault3">
+                    Razón 3
+                  </label>
+                </div>
+                <div class="optionCheck">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                  <label class="form-check-label" for="flexRadioDefault4">
+                    Razón 4
+                  </label>
+                </div>
+                <div class="optionCheck">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5" checked>
+                  <label class="form-check-label" for="flexRadioDefault5">
+                    Otros
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="rowContent">
+              <div class="btnPerfil primary">
+                Eliminar
+              </div>
+            </div>
+            <div class="rowContent">
+              <div class="msgWarning">
+                *Recuerda que perderás el acceso a tu historial de reservas y todos tus datos serán
+                eliminados de manera permanente.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- END ELIMINAR CUENTA -->
     </div>
+  </div>
 </div>
 <!-- END PERFIL -->
 
@@ -648,31 +983,33 @@
 
 
 <!-- Modal Eliminar Correo -->
-<div class="modal fade" id="ModalEliminaCorreo" tabindex="-1" aria-labelledby="ModalEliminaCorreoLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="titleVerifica">¿Quieres eliminar tu cuenta?</div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="descripText">
-                    Perderás acceso a visualizar todas las reservas que tengas con el correo <span>{{userStorage.email}}</span>
-                </div>
-                <div class="descripText">
-                    Si quieres volver a visualizarlas tendrás que agregar y verificar nuevamente el correo.
-                </div>
-                <div class="action">
-                    <div data-bs-dismiss="modal" aria-label="Close" class="btn secundary">
-                        Cancelar
-                    </div>
-                    <div (click)="eliminarCuenta()" class="btn primary">
-                        Aceptar
-                    </div>
-                </div>
-            </div>
+<div class="modal fade" id="ModalEliminaCorreo" tabindex="-1" aria-labelledby="ModalEliminaCorreoLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="titleVerifica">¿Quieres eliminar tu cuenta?</div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="descripText">
+          Perderás acceso a visualizar todas las reservas que tengas con el correo
+          <span>{{userStorage.email}}</span>
         </div>
+        <div class="descripText">
+          Si quieres volver a visualizarlas tendrás que agregar y verificar nuevamente el correo.
+        </div>
+        <div class="action">
+          <div data-bs-dismiss="modal" aria-label="Close" class="btn secundary">
+            Cancelar
+          </div>
+          <div (click)="eliminarCuenta()" class="btn primary">
+            Aceptar
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 
