@@ -32,7 +32,7 @@ import { NotificationModule } from '../../../shared/components/notification/noti
     HttpClientModule,
     SlideModule,
     PlansModule,
-    NotificationModule,
+    NotificationModule
   ],
   exports: [SegurosComponent],
   providers: [DestinyService, DataPagePresenterService, OffersService, PackagesService]

@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { FlightService } from './flight.service';
 import { GeneratePricePipe } from './pipes/generate-price.pipe';
 import { AereolineasModule } from 'src/app/shared/components/aereolineas/aereolineas.module';
-import { AirfareModule } from 'src/app/Component/home-page/flightdeals/flightdeals.module';
+import { FlightDealsModule } from 'src/app/Component/home-page/flightdeals/flightdeals.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -23,7 +23,7 @@ import { AirfareModule } from 'src/app/Component/home-page/flightdeals/flightdea
     CardModule,
     AereolineasModule,
     TabsModule,
-    AirfareModule
+    FlightDealsModule
   ],
   exports: [FlightComponent],
   providers: [FlightService]
