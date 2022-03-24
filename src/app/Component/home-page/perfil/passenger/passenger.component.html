@@ -95,7 +95,8 @@
           <span class="">Fecha de nacimiento</span>
 
           <div class="rowElement">
-            <input type="text" class="form-control marginRight10" formControlName="birthDay" placeholder="Dia">
+            <input type="text" class="form-control marginRight10" maxlength="2" formControlName="birthDay"
+              placeholder="Dia">
 
             <select class="form-select marginRight10" formControlName="birthMonth" aria-label="Default select example">
               <option value="" selected>Seleccione mes</option>
@@ -123,7 +124,7 @@
 
           <div class="textError"
             *ngIf="validatePassengerForm('birthDay') || validatePassengerForm('birthMonth') || validatePassengerForm('birthYear')">
-            Ingresa una fecha de nacimiento
+            {{ passengerDateOfBirthErrorMessage }}
           </div>
         </div>
 

@@ -127,6 +127,33 @@ export class PassengerComponent implements OnInit {
       && this.passengerForm.controls[field].touched;
   }
 
+  get passengerDateOfBirthErrorMessage(): string {
+    const errorsBirthDay = this.passengerForm.get('birthDay')?.errors;
+    const errorsBirthMonth = this.passengerForm.get('birthMonth')?.errors;
+    const errorsBirthYear = this.passengerForm.get('birthYear')?.errors;
+
+    if (errorsBirthDay?.required) {
+      return 'Ingresa un día de nacimiento';
+    } else if (errorsBirthDay?.minlength) {
+      return `Un día de nacimiento válido tiene ${errorsBirthDay?.minlength.requiredLength} digito como mínimo.`;
+    } else if (errorsBirthDay?.maxLength) {
+      32
+      return `Un día de nacimiento válido tiene ${errorsBirthDay?.maxLength.requiredLength} digitos como máximo.`;
+    } else if (errorsBirthDay?.min) {
+      return `El día de nacimiento mínimo es ${errorsBirthDay?.min.min}.`;
+    } else if (errorsBirthDay?.max) {
+      return `El día de nacimiento máximo es ${errorsBirthDay?.max.max}.`;
+    } else if (errorsBirthDay?.pattern) {
+      return 'El día de nacimiento no tiene formato de día.';
+    } else if (errorsBirthMonth?.required) {
+      return 'Selecciona un mes de nacimiento';
+    } else if (errorsBirthYear?.required) {
+      return 'Selecciona un año de nacimiento';
+    }
+
+    return '';
+  }
+
   savePassenger(): void {
     if (this.passengerForm.invalid) {
       this.passengerForm.markAllAsTouched();
