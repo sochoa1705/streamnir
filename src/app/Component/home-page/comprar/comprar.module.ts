@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComprarComponent } from './comprar.component';
 import { CustomersModule } from 'src/app/shared/components/customers/customers.module';
@@ -18,6 +18,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [ ComprarComponent,FiltroDetallePipe,HoraPipe ],
   imports: [
     CommonModule,

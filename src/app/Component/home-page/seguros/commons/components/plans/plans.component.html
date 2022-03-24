@@ -1,6 +1,7 @@
 <div class="row pt-md-5">
     <h2 class="title px-0 pb-md-3">
-        <strong>Selecciona el plan que mejor se adapte a tu viaje |</strong> {{ resultJson.days }} días por {{ resultJson.destinyString.descripcion_destino}}
+        <strong>Selecciona el plan que mejor se adapte a tu viaje |</strong> {{ resultJson.days }} días por {{
+        resultJson.destinyString.descripcion_destino}}
     </h2>
 </div>
 <div class="row">
@@ -20,7 +21,7 @@
                     </div>
                     <span class="now">Ahora</span>
                     <p class="now">{{card.monedaLista}}
-                        <strong>{{card.precioEmisionLocal  | currency: 'USD'}}</strong>
+                        <strong>{{card.precioEmisionLocal | currency: 'USD'}}</strong>
                     </p>
                     <span [ngClass]="card.packFamiliar === 'false' ? 'invisible' : 'visible'">Ahorra</span>
                     <div [ngClass]="card.packFamiliar === 'false' ? 'invisible' : 'visible'" class="precioAhorra">
@@ -36,13 +37,15 @@
                         </div>
                     </div>
                     <div class="d-block text-center">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#ModalCoverage" (click)="data(card)">Ver detalle de los beneficios</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#ModalCoverage" (click)="data(card)">Ver
+                            detalle de los beneficios</a>
                     </div>
                     <div class="d-block text-center py-2">
                         <button (click)="shop(card.idProducto)">Seleccionar</button>
                     </div>
                     <p *ngIf="card.clase" class="card-text">Usa tu
-                        <b>Assist Card</b> en múltiples viajes por 1 año</p>
+                        <b>Assist Card</b> en múltiples viajes por 1 año
+                    </p>
                     <p *ngIf="!card.clase" class="card-text invisible">Asistencia médica: USD 60.000</p>
                     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                 </div>
@@ -78,7 +81,8 @@
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content {{ pop?.clase }}">
             <div class="modal-header">
-                <h2 class="modal-title" id="exampleModalLabel">{{pop?.producto}} - {{pop?.precioEmisionLocal  | currency: 'USD'}}</h2>
+                <h2 class="modal-title" id="exampleModalLabel">{{pop?.producto}} - {{pop?.precioEmisionLocal | currency:
+                    'USD'}}</h2>
                 <h5 class="modal-title" id="exampleModalLabel">Asistencia médica: {{ asistMedic }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -125,7 +129,8 @@
                             <p class="otroPlan">otros planes:</p>
                             <div class="row planBox">
                                 <div class="col-3" *ngFor="let p of plansAC; let index = index">
-                                    <button (click)="data(p)" *ngIf="index < 5" class="planes {{ p?.clase }}">{{ p?.nombreProducto.substr(0, 9) }}</button>
+                                    <button (click)="data(p)" *ngIf="index < 5" class="planes {{ p?.clase }}">{{
+                                        p?.nombreProducto.substr(0, 9) }}</button>
                                 </div>
                             </div>
                         </div>
