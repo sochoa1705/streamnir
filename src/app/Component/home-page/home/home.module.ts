@@ -16,7 +16,7 @@ import { MailingModule } from 'src/app/shared/components/mailing/mailing.module'
 import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer.module';
 import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
-import { AirfareModule } from '../flightdeals/flightdeals.module';
+import { FlightDealsModule } from '../flightdeals/flightdeals.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -33,7 +33,7 @@ import { AirfareModule } from '../flightdeals/flightdeals.module';
     CardInfoModule,
     MaterialModule,
     HttpClientModule,
-    AirfareModule
+    FlightDealsModule
   ],
   exports: [HomeComponent],
   providers: [DestinyService, AsidePresenterService, BusinessUnitService]

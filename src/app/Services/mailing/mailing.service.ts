@@ -14,7 +14,7 @@ export class MailingService {
   ) { }
 
   goMailing(payload: any): Observable<any> {
-    let url_api = `${environment.urlBAse23}:${environment.portNewsletter}/${ENDPOINT_API.NEWSLETTER}`
+    let url_api = `${environment.urlNewsletter}/${ENDPOINT_API.NEWSLETTER}`
 
     return this.http.post<any>(url_api, payload, { observe: 'response' })
   }

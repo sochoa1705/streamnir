@@ -1,10 +1,7 @@
 export const environment = {
   production: true,
   // urlBase: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',  // PRODUCCIÓN
-  urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',                 // DESARROLLO
-  serverUrlApi: 'http://localhost:8080/api/',
-  muteExceptions: true,// DESARROLLO
-  urlLogin: 'http://localhost:64238/login',
+  muteExceptions: false,                 // DESARROLLO
   nameAppAC: 'Intranet',
   identifierAC: 'NMViajes - Assist Card',
   codeEnvironmentAC: 'PROD/NMO/NMO',
@@ -20,25 +17,23 @@ export const environment = {
   },
   urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
 
-  urlNmviajes: "http://10.75.102.23:10001/v1/api",
-  urlGeo: "http://10.75.131.17:10515",
-  urlMaster: "http://10.75.131.17",
-  urlLibro: "http://10.75.102.23:10007/",
-  urlApiTickets: "http://10.75.102.23:10009",
-  urlApiHotels: "http://10.75.102.23:10008",
-  urlNmviajesAccount: "http://10.75.102.23:10006",
+  urlNmviajes: "https://servicio.nmviajes.com/homevuelos/v1/api",
+
+  urlLibro: "https://servicio.nmviajes.com/libroreclamacion",
+  urlApiTickets: "https://servicios.expertiatravel.com/widgetactividades",
+  urlApiHotels: "https://servicios.expertiatravel.com/widgethotel",
+  urlNmviajesAccount: "https://servicio.nmviajes.com/ZonaPrivada",
+  urlNewsletter: 'https://servicio.nmviajes.com/suscripcion',
+  urlSeguros: 'https://servicio.nmviajes.com/segurosrv/',
+
+
+  urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',               
+  urlGeo: "http://20.75.62.133",
+
   urlIframeMotorVuelos: "http://52.177.246.241/#/nmviajes/search/resultados",
 
-  // Rutas Nuevas
-  urlBAse23: "http://10.75.102.23",
-  urlBAse17: "http://10.75.131.17",
-  urlBAse241: "http://52.177.246.241",
 
-  portNmviajes: "10001",
-  portNmviajesAccount: "10006",
-  portLibro: "10007",
-  portApiHotels: "10008",
-  portApiTickets: "10009",
-  portNewsletter: "10010",
-  portGeo: "10015",
+  serverUrlApi: 'http://localhost:8080/api/'
+
+
 }

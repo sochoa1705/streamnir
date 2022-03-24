@@ -6,7 +6,7 @@
     </ng-container>
   </div>
   <div class="carousel-inner row">
-    <div *ngFor="let item of airfare.slice(0, limit)" class="col-md-3 col-12 active carousel-item">
+    <div *ngFor="let item of airfare?.slice(0, limit)" class="col-md-3 col-12 active carousel-item">
       <!-- CARD -->
       <div class="card">
         <div class="card__img">
@@ -56,7 +56,7 @@
 </div>
 
 <div class="row text-end py-5">
-  <div class="col-12" *ngIf="limit < airfare.length">
+  <div class="col-12" *ngIf="limit < airfare?.length">
     <ng-container>
       <button class="plus dropdown-toggle px-4" (click)="viewMoreOffers()">Más ofertas</button>
     </ng-container>

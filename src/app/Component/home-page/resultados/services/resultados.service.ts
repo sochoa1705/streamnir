@@ -13,13 +13,13 @@ export class ResultadosService {
     
     private getMotorDeReglas(): any {
         const url =
-          environment.urlMaster +
-          ':10517/v1/api/ReglasNegocio/ObtenerReglasDeNegocioXIdWeb/3?estado=1';
+          environment.urlGeo +
+          '/v1/api/ReglasNegocio/ObtenerReglasDeNegocioXIdWeb/3?estado=1';
         return this.http.get(url).toPromise();
       }
     
       async getToken():Promise<string> {
-        const url = environment.urlMaster + ':10530/api/auth/token';
+        const url = environment.urlGeo + '/api/auth/token';
         const rules = await this.getMotorDeReglas();
     
         const payload = {
@@ -38,8 +38,8 @@ export class ResultadosService {
       }
     
       async searchMv(body:any):Promise<IMotorVuelo>{
-        // const url = environment.urlMaster + ':10515/motor-vuelo/search';
-        const url = environment.urlMaster + ':10515/motor-vuelo/search-new';
+        // const url = environment.urlGeo + ':10515/motor-vuelo/search';
+        const url = environment.urlGeo + '/motor-vuelo/search-new';
     
         const token = await this.getToken();
         localStorage.setItem('token', JSON.stringify(token))

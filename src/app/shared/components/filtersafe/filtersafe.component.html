@@ -31,7 +31,7 @@
                             </div>
                             <div class="d-flex flex-row number">
                                 <div class="d-flex flex-row textBtn">
-                                    <input formControlName="age" class="inputEdadPasajero" type="text" placeholder="Edad"  [ngClass]="getMessage(MSG_CUSTOMERS) != MSG_EMPTY ? 'isvalid' : ''">
+                                    <input formControlName="age" class="inputEdadPasajero" type="text" placeholder="Edad" maxlength="2"  [ngClass]="getMessage(MSG_CUSTOMERS) != MSG_EMPTY ? 'isvalid' : ''">
                                 </div>
                                 <div class="d-flex flex-row jus justify-content-end align-items-center opcionBtn">
                                     <img (click)="removePassenger(i)" src="./assets/filter/delete.png" alt="">

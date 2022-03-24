@@ -11,4 +11,4 @@ import { FlightDealsComponent } from './flightdeals.component';
     CommonModule
   ]
 })
-export class AirfareModule { }
+export class FlightDealsModule { }

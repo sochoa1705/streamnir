@@ -14,6 +14,7 @@ import { RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface'
 import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
 import { toUp } from 'src/app/shared/utils';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 interface Methods {
   id: string;
@@ -180,7 +181,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
     this.current = this.route.getCurrentNavigation()!.extras.state as any
     if (!this.current) {
-      this.route.navigate([''])
+      this.route.navigate(['/seguros'])
     }
     this.selectedPay = (this.current['filter'] === 'filter') ? 'tarjeta' : 'safetypay'
     if (this.current['filter'] === 'filter') {
@@ -195,20 +196,20 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       ]
     }
   }
-
   showDataContacto: Boolean = true;
   showDataContact() {
     this.showDataContacto = this.showDataContacto ? false : true;
   }
-
   ngAfterViewInit() {
     for (let x = 0; x < this.formShop.getRawValue()['customers'].length; x++) {
       let checked = document.getElementById("sexMasc" + x);
       (<HTMLInputElement>checked).checked = false;
     }
   }
-
   ngOnInit(): void {
+    let test = this.resultJson.passenger
+    console.log(test)
+
     this.addTag()
     // this.showAdulto = 0
     console.log(this.selectedPay)
@@ -255,7 +256,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.listCoverage()
     }
   }
-
   toCustomer(e: any) {
     let chk = e.target.checked
 
@@ -279,14 +279,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.inputLastNameContactForm.nativeElement.value = ''
     }
   }
-
   selectYear() {
     for (let i = 1950; i < 2022; i++) {
       let year = String(i)
       this.listYears.push(year)
     }
   }
-
   validForm() {
     this.errors = []
     const letter = new RegExp('^[a-zA-Z ]+$', 'i')
@@ -367,13 +365,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         this.errors.push({ indice: x, name: this.MSG_LAST_NAME_CUSTOMER, message: 'Ingresa el apellido del pasajero' })
       }
 
-
       let dayCustomer: string = this.formShop.getRawValue()['customers'][x]['dayCustomer']
       if (dayCustomer === undefined || dayCustomer === null || dayCustomer.trim() === '') {
         this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'Ingresa día' })
       }
       if (!number.test(dayCustomer)) {
-        this.errors.push({ name: this.MSG_DAY_CUSTOMER, message: 'solo números' })
+        this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'solo números' })
       }
 
       let monthCustomer: string = this.formShop.getRawValue()['customers'][x]['monthCustomer']
@@ -459,22 +456,363 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
     //FORMCONTACT
 
+    return this.errors.length === 0
+  }
+  validFormMobileCustomers(x: any) {
+    this.errors = []
+    const letter = new RegExp('^[a-zA-Z ]+$', 'i')
+    const number = new RegExp('^[0-9]+$', 'i')
+    const alphanumeric = new RegExp('^[a-zA-Z0-9 ]+$', 'i')
+    const email = new RegExp('^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$', 'i')
+
+    // const typePay: string = this.formShop.getRawValue()['formCard']['select21']
+    // if (typePay === 'TARJETA') {
+    //   // TC
+    //   let numberCard: string = this.formShop.getRawValue()['formCard']['numberCard']
+    //   if (numberCard === undefined || numberCard === null || numberCard.trim() === '') {
+    //     this.errors.push({ name: this.MSG_NUMBER_CARD, message: 'Ingresa el número de tarjeta' })
+    //   }
+
+    //   let nameCard: string = this.formShop.getRawValue()['formCard']['nameCard']
+    //   if (nameCard === undefined || nameCard === null || nameCard.trim() === '') {
+    //     this.errors.push({ name: this.MSG_NAME_CARD, message: 'Ingresa el nombre del titular' })
+    //   }
+
+    //   let expiredCard: string = this.formShop.getRawValue()['formCard']['expiredCard']
+    //   if (expiredCard === undefined || expiredCard === null || expiredCard.trim() === '') {
+    //     this.errors.push({ name: this.MSG_EXPIRED_CARD, message: 'Campo requerido' })
+    //   }
+
+    //   let ccvCard: string = this.formShop.getRawValue()['formCard']['ccvCard']
+    //   if (ccvCard === undefined || ccvCard === null || ccvCard.trim() === '') {
+    //     this.errors.push({ name: this.MSG_CCV_CARD, message: 'Campo requerido' })
+    //   }
+    //   if (!number.test(ccvCard)) {
+    //     this.errors.push({ name: this.MSG_CCV_CARD, message: 'solo números' })
+    //   }
+
+    //   let tipoDoc: string = this.formShop.getRawValue()['formCard']['tipoDoc']
+    //   if (tipoDoc === undefined || tipoDoc === null || tipoDoc.trim() === '') {
+    //     this.errors.push({ name: this.MSG_TYPE_DOC, message: 'Campo requerido' })
+    //   }
+
+    //   let numDoc: string = this.formShop.getRawValue()['formCard']['numDoc']
+    //   if (numDoc === undefined || numDoc === null || numDoc.trim() === '') {
+    //     this.errors.push({ name: this.MSG_NUM_DOC, message: 'Ingrese su N° de documento' })
+    //   }
+    //   if (!number.test(numDoc)) {
+    //     this.errors.push({ name: this.MSG_NUM_DOC, message: 'solo números' })
+    //   }
+
+    //   let feePay: string = this.formShop.getRawValue()['formCard']['feePay']
+    //   if (feePay === undefined || feePay === null || feePay.trim() === '') {
+    //     this.errors.push({ name: this.MSG_QUOTE, message: 'Campo requerido' })
+    //   }
+
+    //   let cityCard: string = this.formShop.getRawValue()['formCard']['cityCard']
+    //   if (cityCard === undefined || cityCard === null || cityCard.trim() === '') {
+    //     this.errors.push({ name: this.MSG_CITY, message: 'Campo requerido' })
+    //   }
+
+    //   let address: string = this.formShop.getRawValue()['formCard']['address']
+    //   if (address === undefined || address === null || address.trim() === '') {
+    //     this.errors.push({ name: this.MSG_ADRESS, message: 'Campo requerido' })
+    //   }
+    // } else {
+    //   // SAFETYPAY
+    //   let bankPay: string = this.formShop.getRawValue()['formCard']['bankPay']
+    //   if (bankPay === undefined || bankPay === null || bankPay.trim() === '') {
+    //     this.errors.push({ name: this.MSG_BANK, message: 'Campo requerido' })
+    //   }
+    // }
+
+    //FORM PASAJERO
+    // for (let x = 0; x < this.formShop.getRawValue()['customers'].length; x++) {
+    let nameCustomer: string = this.formShop.getRawValue()['customers'][x]['nameCustomer']
+    if (nameCustomer === undefined || nameCustomer === null || nameCustomer.trim() === '') {
+      this.errors.push({ indice: x, name: this.MSG_NAME_CUSTOMER, message: 'Ingresa el nombre del pasajero' })
+    }
+
+    let lastNameCustomer: string = this.formShop.getRawValue()['customers'][x]['lastNameCustomer']
+    if (lastNameCustomer === undefined || lastNameCustomer === null || lastNameCustomer.trim() === '') {
+      this.errors.push({ indice: x, name: this.MSG_LAST_NAME_CUSTOMER, message: 'Ingresa el apellido del pasajero' })
+    }
+
+    let dayCustomer: string = this.formShop.getRawValue()['customers'][x]['dayCustomer']
+    if (dayCustomer === undefined || dayCustomer === null || dayCustomer.trim() === '') {
+      this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'Ingresa día' })
+    }
+    if (!number.test(dayCustomer)) {
+      this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'solo números' })
+    }
+
+    let monthCustomer: string = this.formShop.getRawValue()['customers'][x]['monthCustomer']
+    if (monthCustomer === undefined || monthCustomer === null || monthCustomer.trim() === '') {
+      this.errors.push({ indice: x, name: this.MSG_MONTH_CUSTOMER, message: 'Ingresa mes' })
+    }
+
+    let yearCustomer: string = this.formShop.getRawValue()['customers'][x]['yearCustomer']
+    if (yearCustomer === undefined || yearCustomer === null || yearCustomer.trim() === '') {
+      this.errors.push({ indice: x, name: this.MSG_YEAR_CUSTOMER, message: 'Ingresa año' })
+    }
+
+    let nationalityCustomer: string = this.formShop.getRawValue()['customers'][x]['nationalityCustomer']
+    if (nationalityCustomer === undefined || nationalityCustomer === null || nationalityCustomer.trim() === '') {
+      this.errors.push({ indice: x, name: this.MSG_NATIONALITY_CUSTOMER, message: 'Campo requerido' })
+    }
+
+    let typeDocCustomer: string = this.formShop.getRawValue()['customers'][x]['typeDocCustomer']
+    if (typeDocCustomer === undefined || typeDocCustomer === null || typeDocCustomer.trim() === '') {
+      this.errors.push({ indice: x, name: this.MSG_TYPE_DOC_CUSTOMER, message: 'Campo requerido' })
+    }
+
+    let numDocCustomer: string = this.formShop.getRawValue()['customers'][x]['numDocCustomer']
+    if (numDocCustomer === undefined || numDocCustomer === null || numDocCustomer.trim() === '') {
+      this.errors.push({ indice: x, name: this.MSG_NUM_DOC_CUSTOMER, message: 'Ingresa tu número de documento' })
+    }
+    if (!number.test(numDocCustomer)) {
+      this.errors.push({ name: this.MSG_NUM_DOC_CUSTOMER, message: 'solo números' })
+    }
+
+    // let sexCustomer: string = this.formShop.getRawValue()['customers'][x]['sexCustomer']
+    // if (sexCustomer === undefined || sexCustomer === null) {
+    //   this.errors.push({ indice: x, name: this.MSG_SEX, message: 'Elegir un sexo' })
+    // }
+    // }
+    //FORM PASAJERO
+
+    //FORMCONTACT
+
+    // let nameContacto: string = this.formShop.getRawValue()['formContact']['nameContacto']
+    // if (nameContacto === undefined || nameContacto === null || nameContacto.trim() === '') {
+    //   this.errors.push({ name: this.MSG_NAME_CONTACT, message: 'Nombre de contacto es requerido' })
+    // }
+    // let lastnameContacto: string = this.formShop.getRawValue()['formContact']['lastnameContacto']
+    // if (lastnameContacto === undefined || lastnameContacto === null || lastnameContacto.trim() === '') {
+    //   this.errors.push({ name: this.MSG_LASTNAME_CONTACT, message: 'Apellido de contacto es requerido' })
+    // }
+    // let mailContacto: string = this.formShop.getRawValue()['formContact']['mailContacto']
+    // if (mailContacto === undefined || mailContacto === null || mailContacto.trim() === '') {
+    //   this.errors.push({ name: this.MSG_EMAIL_CONTACT, message: 'Email de contacto es requerido' })
+    // }
+
+    // let mailConfirmContacto: string = this.formShop.getRawValue()['formContact']['mailConfirmContacto']
+    // if (mailConfirmContacto === undefined || mailConfirmContacto === null || mailConfirmContacto.trim() === '') {
+    //   this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Confirmación es requerida' })
+    // } else if (mailConfirmContacto.toUpperCase() !== mailContacto.toUpperCase()) {
+    //   this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Email no coincide' })
+    // }
+
+    // let typePhone0: string = this.formShop.getRawValue()['formContact']['typePhone0']
+    // if (typePhone0 === undefined || typePhone0 === null || typePhone0.trim() === '') {
+    //   this.errors.push({ name: this.MSG_TYPEPHONE_CONTACT, message: 'Campo requerido' })
+    // }
+    // let code0: string = this.formShop.getRawValue()['formContact']['code0']
+    // if (code0 === undefined || code0 === null || code0.trim() === '') {
+    //   this.errors.push({ name: this.MSG_CODE0_CONTACT, message: 'Código de país es requerido' })
+    // }
+    // let numberPhone0: string = this.formShop.getRawValue()['formContact']['numberPhone0']
+    // if (numberPhone0 === undefined || numberPhone0 === null || numberPhone0.trim() === '') {
+    //   this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'Teléfono es requerido' })
+    // }
+    // if (!number.test(numberPhone0)) {
+    //   this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'solo números' })
+    // }
+
+    // let chkPolity: boolean = this.formShop.getRawValue()['chkPolity']
+    // if (chkPolity === undefined || chkPolity === null || chkPolity == false) {
+    //   this.errors.push({ name: this.MSG_CHK_POLITY, message: 'Políticas  es requerido' })
+    // }
+    // let chkInfo: boolean = this.formShop.getRawValue()['chkInfo']
+    // if (chkInfo === undefined || chkInfo === null || chkInfo == false) {
+    //   this.errors.push({ name: this.MSG_CHK_INFO, message: 'Autorizar uso de información es requerido' })
+    // }
+    //FORMCONTACT
 
     return this.errors.length === 0
   }
+  validFormMobileContact() {
+    this.errors = []
+    const letter = new RegExp('^[a-zA-Z ]+$', 'i')
+    const number = new RegExp('^[0-9]+$', 'i')
+    const alphanumeric = new RegExp('^[a-zA-Z0-9 ]+$', 'i')
+    const email = new RegExp('^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$', 'i')
 
+    // const typePay: string = this.formShop.getRawValue()['formCard']['select21']
+    // if (typePay === 'TARJETA') {
+    //   // TC
+    //   let numberCard: string = this.formShop.getRawValue()['formCard']['numberCard']
+    //   if (numberCard === undefined || numberCard === null || numberCard.trim() === '') {
+    //     this.errors.push({ name: this.MSG_NUMBER_CARD, message: 'Ingresa el número de tarjeta' })
+    //   }
+
+    //   let nameCard: string = this.formShop.getRawValue()['formCard']['nameCard']
+    //   if (nameCard === undefined || nameCard === null || nameCard.trim() === '') {
+    //     this.errors.push({ name: this.MSG_NAME_CARD, message: 'Ingresa el nombre del titular' })
+    //   }
+
+    //   let expiredCard: string = this.formShop.getRawValue()['formCard']['expiredCard']
+    //   if (expiredCard === undefined || expiredCard === null || expiredCard.trim() === '') {
+    //     this.errors.push({ name: this.MSG_EXPIRED_CARD, message: 'Campo requerido' })
+    //   }
+
+    //   let ccvCard: string = this.formShop.getRawValue()['formCard']['ccvCard']
+    //   if (ccvCard === undefined || ccvCard === null || ccvCard.trim() === '') {
+    //     this.errors.push({ name: this.MSG_CCV_CARD, message: 'Campo requerido' })
+    //   }
+    //   if (!number.test(ccvCard)) {
+    //     this.errors.push({ name: this.MSG_CCV_CARD, message: 'solo números' })
+    //   }
+
+    //   let tipoDoc: string = this.formShop.getRawValue()['formCard']['tipoDoc']
+    //   if (tipoDoc === undefined || tipoDoc === null || tipoDoc.trim() === '') {
+    //     this.errors.push({ name: this.MSG_TYPE_DOC, message: 'Campo requerido' })
+    //   }
+
+    //   let numDoc: string = this.formShop.getRawValue()['formCard']['numDoc']
+    //   if (numDoc === undefined || numDoc === null || numDoc.trim() === '') {
+    //     this.errors.push({ name: this.MSG_NUM_DOC, message: 'Ingrese su N° de documento' })
+    //   }
+    //   if (!number.test(numDoc)) {
+    //     this.errors.push({ name: this.MSG_NUM_DOC, message: 'solo números' })
+    //   }
+
+    //   let feePay: string = this.formShop.getRawValue()['formCard']['feePay']
+    //   if (feePay === undefined || feePay === null || feePay.trim() === '') {
+    //     this.errors.push({ name: this.MSG_QUOTE, message: 'Campo requerido' })
+    //   }
+
+    //   let cityCard: string = this.formShop.getRawValue()['formCard']['cityCard']
+    //   if (cityCard === undefined || cityCard === null || cityCard.trim() === '') {
+    //     this.errors.push({ name: this.MSG_CITY, message: 'Campo requerido' })
+    //   }
+
+    //   let address: string = this.formShop.getRawValue()['formCard']['address']
+    //   if (address === undefined || address === null || address.trim() === '') {
+    //     this.errors.push({ name: this.MSG_ADRESS, message: 'Campo requerido' })
+    //   }
+    // } else {
+    //   // SAFETYPAY
+    //   let bankPay: string = this.formShop.getRawValue()['formCard']['bankPay']
+    //   if (bankPay === undefined || bankPay === null || bankPay.trim() === '') {
+    //     this.errors.push({ name: this.MSG_BANK, message: 'Campo requerido' })
+    //   }
+    // }
+
+    //FORM PASAJERO
+    // for (let x = 0; x < this.formShop.getRawValue()['customers'].length; x++) {
+    // let nameCustomer: string = this.formShop.getRawValue()['customers'][x]['nameCustomer']
+    // if (nameCustomer === undefined || nameCustomer === null || nameCustomer.trim() === '') {
+    //   this.errors.push({ indice: x, name: this.MSG_NAME_CUSTOMER, message: 'Ingresa el nombre del pasajero' })
+    // }
+
+    // let lastNameCustomer: string = this.formShop.getRawValue()['customers'][x]['lastNameCustomer']
+    // if (lastNameCustomer === undefined || lastNameCustomer === null || lastNameCustomer.trim() === '') {
+    //   this.errors.push({ indice: x, name: this.MSG_LAST_NAME_CUSTOMER, message: 'Ingresa el apellido del pasajero' })
+    // }
+
+    // let dayCustomer: string = this.formShop.getRawValue()['customers'][x]['dayCustomer']
+    // if (dayCustomer === undefined || dayCustomer === null || dayCustomer.trim() === '') {
+    //   this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'Ingresa día' })
+    // }
+    // if (!number.test(dayCustomer)) {
+    //   this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'solo números' })
+    // }
+
+    // let monthCustomer: string = this.formShop.getRawValue()['customers'][x]['monthCustomer']
+    // if (monthCustomer === undefined || monthCustomer === null || monthCustomer.trim() === '') {
+    //   this.errors.push({ indice: x, name: this.MSG_MONTH_CUSTOMER, message: 'Ingresa mes' })
+    // }
+
+    // let yearCustomer: string = this.formShop.getRawValue()['customers'][x]['yearCustomer']
+    // if (yearCustomer === undefined || yearCustomer === null || yearCustomer.trim() === '') {
+    //   this.errors.push({ indice: x, name: this.MSG_YEAR_CUSTOMER, message: 'Ingresa año' })
+    // }
+
+    // let nationalityCustomer: string = this.formShop.getRawValue()['customers'][x]['nationalityCustomer']
+    // if (nationalityCustomer === undefined || nationalityCustomer === null || nationalityCustomer.trim() === '') {
+    //   this.errors.push({ indice: x, name: this.MSG_NATIONALITY_CUSTOMER, message: 'Campo requerido' })
+    // }
+
+    // let typeDocCustomer: string = this.formShop.getRawValue()['customers'][x]['typeDocCustomer']
+    // if (typeDocCustomer === undefined || typeDocCustomer === null || typeDocCustomer.trim() === '') {
+    //   this.errors.push({ indice: x, name: this.MSG_TYPE_DOC_CUSTOMER, message: 'Campo requerido' })
+    // }
+
+    // let numDocCustomer: string = this.formShop.getRawValue()['customers'][x]['numDocCustomer']
+    // if (numDocCustomer === undefined || numDocCustomer === null || numDocCustomer.trim() === '') {
+    //   this.errors.push({ indice: x, name: this.MSG_NUM_DOC_CUSTOMER, message: 'Ingresa tu número de documento' })
+    // }
+    // if (!number.test(numDocCustomer)) {
+    //   this.errors.push({ name: this.MSG_NUM_DOC_CUSTOMER, message: 'solo números' })
+    // }
+
+    // let sexCustomer: string = this.formShop.getRawValue()['customers'][x]['sexCustomer']
+    // if (sexCustomer === undefined || sexCustomer === null) {
+    //   this.errors.push({ indice: x, name: this.MSG_SEX, message: 'Elegir un sexo' })
+    // }
+    // }
+    //FORM PASAJERO
+
+    //FORMCONTACT
+
+    let nameContacto: string = this.formShop.getRawValue()['formContact']['nameContacto']
+    if (nameContacto === undefined || nameContacto === null || nameContacto.trim() === '') {
+      this.errors.push({ name: this.MSG_NAME_CONTACT, message: 'Nombre de contacto es requerido' })
+    }
+    let lastnameContacto: string = this.formShop.getRawValue()['formContact']['lastnameContacto']
+    if (lastnameContacto === undefined || lastnameContacto === null || lastnameContacto.trim() === '') {
+      this.errors.push({ name: this.MSG_LASTNAME_CONTACT, message: 'Apellido de contacto es requerido' })
+    }
+    let mailContacto: string = this.formShop.getRawValue()['formContact']['mailContacto']
+    if (mailContacto === undefined || mailContacto === null || mailContacto.trim() === '') {
+      this.errors.push({ name: this.MSG_EMAIL_CONTACT, message: 'Email de contacto es requerido' })
+    }
+
+    let mailConfirmContacto: string = this.formShop.getRawValue()['formContact']['mailConfirmContacto']
+    if (mailConfirmContacto === undefined || mailConfirmContacto === null || mailConfirmContacto.trim() === '') {
+      this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Confirmación es requerida' })
+    } else if (mailConfirmContacto.toUpperCase() !== mailContacto.toUpperCase()) {
+      this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Email no coincide' })
+    }
+
+    let typePhone0: string = this.formShop.getRawValue()['formContact']['typePhone0']
+    if (typePhone0 === undefined || typePhone0 === null || typePhone0.trim() === '') {
+      this.errors.push({ name: this.MSG_TYPEPHONE_CONTACT, message: 'Campo requerido' })
+    }
+    let code0: string = this.formShop.getRawValue()['formContact']['code0']
+    if (code0 === undefined || code0 === null || code0.trim() === '') {
+      this.errors.push({ name: this.MSG_CODE0_CONTACT, message: 'Código de país es requerido' })
+    }
+    let numberPhone0: string = this.formShop.getRawValue()['formContact']['numberPhone0']
+    if (numberPhone0 === undefined || numberPhone0 === null || numberPhone0.trim() === '') {
+      this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'Teléfono es requerido' })
+    }
+    if (!number.test(numberPhone0)) {
+      this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'solo números' })
+    }
+
+    let chkPolity: boolean = this.formShop.getRawValue()['chkPolity']
+    if (chkPolity === undefined || chkPolity === null || chkPolity == false) {
+      this.errors.push({ name: this.MSG_CHK_POLITY, message: 'Políticas  es requerido' })
+    }
+    let chkInfo: boolean = this.formShop.getRawValue()['chkInfo']
+    if (chkInfo === undefined || chkInfo === null || chkInfo == false) {
+      this.errors.push({ name: this.MSG_CHK_INFO, message: 'Autorizar uso de información es requerido' })
+    }
+    //FORMCONTACT
+
+    return this.errors.length === 0
+  }
   getMessage(messageKey: any) {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
   }
-
   getMessageArray(index: any, messageKey: any) {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
-
   // validNumber(inputText: any): boolean {
   //   return new RegExp(/^[0-9]+$/).test(inputText)
   // }
-
   toFactura(e: any) {
     let chk = e.target.checked
     if (chk) {
@@ -483,7 +821,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.removeRecibo(0)
     }
   }
-
   createForm() {
     this.formShop = new FormGroup({
       customers: new FormArray([]),
@@ -517,11 +854,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       chkInfo: new FormControl(),
     })
   }
-
   getArrayCustomers() {
     return (<FormArray>this.formShop.get(['customers'])).controls
   }
-
   addCustomers(e: any) {
     // ((<any>this.formShop.controls['formContact']).controls['phones']).push(
     (<FormArray>this.formShop.controls['customers']).push(
@@ -538,12 +873,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         sexCustomer: new FormControl(),
       }))
   }
-
   ///RECIBO ADD FORMULARIO
   getArrayRecibo() {
     return (<FormArray>this.formShop.get(['formContact', 'recibo'])).controls
   }
-
   addRecibo() {
     ((<any>this.formShop.controls['formContact']).controls['recibo']).push(
       new FormGroup({
@@ -551,11 +884,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         ruc: new FormControl()
       }));
   }
-
   removeRecibo(index: any) {
     ((<any>this.formShop.controls['formContact']).controls['recibo']).removeAt(index);
   }
-
   ///PHONE ADD FORMULARIO
   getArrayPhone() {
     return (<FormArray>this.formShop.get(['formContact', 'phones'])).controls
@@ -569,7 +900,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         numberPhone: new FormControl()
       }));
   }
-
   removePhone(index: any) {
     ((<any>this.formShop.controls['formContact']).controls['phones']).removeAt(index);
   }
@@ -583,13 +913,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   //   elemento.setAttribute('style', `margin-top: ${n}px`);
   //   // elemento.style = `margin-top: ${scrolTop}`
   // }
-
   pasajeroClose() {
     let elemento = this.adulto.nativeElement;
     elemento.classList.remove('adultocdr');
     elemento.setAttribute('style', `display:none`);
   }
-
   loadShop() {
     this.detailPay = this.current.detailPay;
     this.filter = this.current.filter;
@@ -600,7 +928,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.detalleCobertura = this.current.detalleCobertura;
     this.cupon = this.current.cupon;
   }
-
   chkValuePopup(e: any) {
     const type = e.target.id;
     if (type === 'option1') {
@@ -624,7 +951,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.banca = i;
     this.id = ids;
   }
-
   shopEnd() {
     // console.log(this.validForm());
     console.log(this.errors);
@@ -655,13 +981,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       // this.route.navigateByUrl('/home/conformidad')
     }
   }
-
   otherPlan() {
     localStorage.removeItem('safe0')
     this.route.navigateByUrl('/seguros/slide')
   }
-
-
   selectVuelo(isIda: boolean) {
     this.modalDetalle = isIda ? this.detalleVuelos.segmentoDeparture : this.detalleVuelos.segmentoReturn;
   }
@@ -920,18 +1243,64 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return expiredFormatt
   }
   showDatosPasajero(e?: any) {
-    // console.log(this.showAdulto)
-    console.log(this.formShop.getRawValue()['customers'])
-
     this.showAgregarAdulto = !this.showAgregarAdulto
-    for (let x = 0; x < this.formShop.getRawValue()['customers'].length; x++) {
-      if (e === x) {
-        console.log(e)
-        console.log(x)
-        console.log(this.showAgregarAdulto)
-        this.showAdulto = e
+    this.showAdulto = e
+
+    // if (this.validFormMobile()) {
+    // console.log(this.formShop.getRawValue()['customers'][e])
+    // }
+
+    // let n = this.formShop.getRawValue()['customers'].length
+    // for (let x = 0; x < n; x++) {
+    //   if (e === x) {
+    //     console.log(e)
+    //     console.log(x)
+    //     console.log(this.showAgregarAdulto)
+    //     this.showAdulto = e
+    //   }
+    // }
+  }
+  savePasajero(e?: any) {
+    console.log('pasajero ' + e)
+
+    if (this.validFormMobileCustomers(e)) {
+      console.log(this.formShop.getRawValue()['customers'][e])
+    }
+  }
+  step1() {
+    console.log('Contacto')
+    console.log(this.errors)
+    // if (this.validForm()) {
+    //   console.log(this.formShop.getRawValue())
+    //   this.step1Complete = true
+    // }
+    for (let i in this.resultJson.passenger) {
+      if (this.validFormMobileCustomers(i) && this.validFormMobileContact()) {
+              this.step1Complete = true
+
+        // console.log(this.formShop.getRawValue()['customers'][i])
+        // console.log(i)
+        // this.savePasajero(i)
       }
     }
+
+    // if (this.validFormMobileContact()) {
+    //   console.log(this.formShop.getRawValue()['formContact'])
+    // }
+
+    // if(!this.validFormMobileContact()) {
+    //   for (let i in this.resultJson.passenger) {
+    //     console.log(i)
+    //     this.savePasajero(i)
+    //   }
+    // }
+  }
+  step1Complete = false
+  toggleStep1Complete() {
+    this.step1Complete = !this.step1Complete;
+  }
+  selectionChange(event: StepperSelectionEvent) {
+    console.log(event.selectedIndex)
   }
   addTag() {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
