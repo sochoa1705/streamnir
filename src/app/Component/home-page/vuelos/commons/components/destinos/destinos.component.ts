@@ -4,7 +4,7 @@ import { interval } from 'rxjs';
 import { ParamsVuelos } from 'src/app/Component/home-page/resultados/models/resultados.interfaces';
 import { DisponibilidadPayload } from 'src/app/shared/components/flights/models/flights.class';
 import { EnumCabins, EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
-import { objectToQueryString } from 'src/app/shared/utils';
+import { objectToQueryString, toUp } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 import { IDestinos } from './destino.models';
 import { DestinosService } from './services/destinos.service';
@@ -55,6 +55,7 @@ export class DestinosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    toUp()
     this.ar.params.subscribe(param => {
       this.loadCiudad(param)
     })
