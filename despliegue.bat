@@ -19,6 +19,7 @@ powershell -Command "docker push expertiafrontendreg.azurecr.io/nmviajes"
 
 echo "Desplegando al app"
 powershell -Command "kubectl replace -f deployment.yaml --force"
+powershell -Command "kubectl replace -f service.yaml --force"
 
 cls
 
