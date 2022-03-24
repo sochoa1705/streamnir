@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from 'src/app/api/api-nmviajes/services';
 import { Guid } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
@@ -15,21 +15,20 @@ export class OffersContinentComponent implements OnInit {
 
   constructor(
     private _flightService: FlightService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
   ) { }
 
   name: string = '';
   description: string = '';
 
   ngOnInit(): void {
-
     this._activatedRoute.params.subscribe(params => {
       this.getAllContinents(params.slug);
     });
   }
 
   getAllContinents(slug: string) {
-
     this._flightService.v1ApiFlightGetContinentsGet({
       'Parameter.Status': true,
       TrackingCode: Guid(),
@@ -59,9 +58,6 @@ export class OffersContinentComponent implements OnInit {
           this.rates = JSON.parse(res).Result;
         });
       }
-
-
-
     });
   }
 
@@ -78,4 +74,9 @@ export class OffersContinentComponent implements OnInit {
       this.rates = JSON.parse(res).Result;
     });
   }
+
+  viewRates(entity: any): void {
+    this._router.navigateByUrl(`/vuelos/destino/${entity.DestinationCode}`);
+  }
+
 }
