@@ -5,8 +5,6 @@ import { FlightComponent } from './commons/components/flight/flight.component';
 import { DestinosComponent } from './commons/components/destinos/destinos.component';
 import { OffersContinentComponent } from './commons/components/offers-continent/offers-continent.component';
 
-//TODO router destino
-
 const routes: Routes = [
   {
     path: '',
