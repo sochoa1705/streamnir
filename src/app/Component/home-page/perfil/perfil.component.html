@@ -177,7 +177,7 @@
                                 <div class="inputGroup">
                                     <span class="">Fecha de nacimiento</span>
                                     <div class="rowElement">
-                                        <input type="text" class="form-control marginRight10" formControlName="dia"
+                                        <input type="text" maxlength="2" class="form-control marginRight10" formControlName="dia"
                                             placeholder="Dia">
                                         <select class="form-select marginRight10" formControlName="mes"
                                             aria-label="Default select example">
@@ -185,22 +185,22 @@
                                             <option value="1">Enero</option>
                                             <option value="2">Febrero</option>
                                             <option value="3">Marzo</option>
-                                            <option value="1">Abril</option>
-                                            <option value="2">Mayo</option>
-                                            <option value="3">Junio</option>
-                                            <option value="1">Julio</option>
-                                            <option value="2">Agosto</option>
-                                            <option value="3">Setiembre</option>
-                                            <option value="1">Octubre</option>
-                                            <option value="2">Noviembre</option>
-                                            <option value="3">Dciembre</option>
+                                            <option value="4">Abril</option>
+                                            <option value="5">Mayo</option>
+                                            <option value="6">Junio</option>
+                                            <option value="7">Julio</option>
+                                            <option value="8">Agosto</option>
+                                            <option value="9">Setiembre</option>
+                                            <option value="10">Octubre</option>
+                                            <option value="11">Noviembre</option>
+                                            <option value="12">Dciembre</option>
                                         </select>
                                         <select class="form-select" formControlName="anio"
                                             aria-label="Default select example">
                                             <option selected>Año</option>
-                                            <option value="1">1990</option>
-                                            <option value="2">1991</option>
-                                            <option value="3">1992</option>
+                                            <option *ngFor="let anio of anios" [value]="anio">{{ anio }}</option>
+                                            <!-- <option value="2">1991</option>
+                                            <option value="3">1992</option> -->
                                         </select>
                                     </div>
                                 </div>
