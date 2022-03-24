@@ -82,7 +82,7 @@ export class FlightService extends BaseService {
   /**
    * Path part for operation v1ApiFlightGetMostWantedGet
    */
-  static readonly V1ApiFlightGetMostWantedGetPath = '/v1/api/Flight/GetMostWanted';
+  static readonly V1ApiFlightGetMostWantedGetPath = '/Flight/GetMostWanted';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

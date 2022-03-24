@@ -9,10 +9,11 @@ import { RouterModule } from '@angular/router';
 import { FlightService } from './flight.service';
 import { GeneratePricePipe } from './pipes/generate-price.pipe';
 import { AereolineasModule } from 'src/app/shared/components/aereolineas/aereolineas.module';
+import { AirfareModule } from 'src/app/Component/home-page/flightdeals/flightdeals.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [ FlightComponent,GeneratePricePipe ],
+  declarations: [FlightComponent, GeneratePricePipe],
   imports: [
     CommonModule,
     TabsModule,
@@ -22,9 +23,10 @@ import { AereolineasModule } from 'src/app/shared/components/aereolineas/aereoli
     CardModule,
     AereolineasModule,
     TabsModule,
+    AirfareModule
   ],
-  exports: [ FlightComponent ],
-  providers:[FlightService]
+  exports: [FlightComponent],
+  providers: [FlightService]
 
 })
 export class FlightModule { }
