@@ -14,11 +14,12 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NotificationModule } from './shared/components/notification/notification.module';
+import { GlobalHttpInterceptorService } from './interceptor/globalHttpInterceptorService.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -38,7 +39,10 @@ import { NotificationModule } from './shared/components/notification/notificatio
     ReactiveFormsModule,
     NotificationModule
   ],
-  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy },
+  providers: [
+    
+    { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  },  
+  { provide: LocationStrategy, useClass: PathLocationStrategy },
   {
     provide: 'SocialAuthServiceConfig',
     useValue: {
@@ -53,7 +57,7 @@ import { NotificationModule } from './shared/components/notification/notificatio
         {
           id: FacebookLoginProvider.PROVIDER_ID,
           provider: new FacebookLoginProvider('263646375921809')
-        }
+        },
       ]
     } as SocialAuthServiceConfig,
   }],
