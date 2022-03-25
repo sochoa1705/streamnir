@@ -261,6 +261,7 @@ export class TabsComponent implements OnInit {
 
   changeTab(value: MatTabChangeEvent) {
     (value.index == 1) ? this.navigateToResponseUrl(ROUTE_VIAJES.RUTA_PAQUETES) : null;
+    (value.index == 4) ? this.navigateToResponseUrl(ROUTE_VIAJES.RUTA_AUTOS) : null;
   }
 
 
