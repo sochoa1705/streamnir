@@ -7,7 +7,7 @@ import { ListaTarifaRequest } from 'src/app/Models/Request/ListaTarifasRequest';
 import { SignatureModel } from 'src/app/Models/Request/SignatureModel';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 
-import { interval, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FlightService } from './flight.service';
 import { IFlightRates, IVuelos, TYPE_PARAM } from './flight.models';
 import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
@@ -23,7 +23,6 @@ import { take } from 'rxjs/operators';
 export class FlightComponent implements OnInit {
 
   public OfertaVuelosRequest: ListaTarifaRequest = new ListaTarifaRequest();
-  //  ListaTarifa : any;
   destiny: any = []
   $vuelosInternacionales: Observable<IFlightRates[]>;
   $vuelosNacionales: Observable<IFlightRates[]>;
@@ -34,7 +33,6 @@ export class FlightComponent implements OnInit {
     public route: Router,
     public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
-    // private coreService: DestinyService,
     private flightService: FlightService,
     public destinyService: DestinyService,
   ) { }
@@ -65,7 +63,6 @@ export class FlightComponent implements OnInit {
   toLine(e: any) {
     this.route.navigateByUrl('/aerolineas')
   }
-
 
   OfertaVuelos() {
     this.OfertaVuelosRequest.IdLang = 1;

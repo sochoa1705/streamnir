@@ -71,7 +71,6 @@ export class DestinosComponent implements OnInit {
   }
 
   loadCiudad(param: Params) {
-
     this.codigoCiudad = param.codigoCiudad || '';
 
     this.service.getVuelos(this.codigoCiudad).subscribe(data => {
@@ -83,13 +82,8 @@ export class DestinosComponent implements OnInit {
       this.title = `Vuelos desde ${this.origen} a ${this.destino}`;
       this.subTitle = `Aprovecha ahora, encontramos los vuelos de ida y vuelta más baratos a ${this.destino}.`;
       this.description = `Las mejores ofertas de vuelos a ${this.destino} en las últimas 24 horas.`;
-
     })
   }
-
-
-  // http://52.177.246.241/#/nmviajes/vuelos/resultados?flightType=1&departureLocation=LIM%20Lima,%20Per%C3%BA&arrivalLocation=MAD%20Madrid%20(Todos%20Los%20Aeropuertos),%20Espa%C3%B1a&departureDate=2022-04-21&arrivalDate=2022-04-24&adults=1&children=1&infants=1
-  // MotorvuelosFront
 
   loadAereolineas() {
     this.$aereolineas = this.flightService.getAereolineas();
@@ -100,9 +94,7 @@ export class DestinosComponent implements OnInit {
   }
 
   generateParams(v: IVueloDestino) {
-
     return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${v.OriginCode} ${v.Origin}`, `${v.DestinationCode} ${v.Destination}`, v.DateStart, v.DateEnd, "1", "0", "0", EnumCabins.economico);
-
   }
 
   buscarVuelo(vuelo: IVueloDestino) {
