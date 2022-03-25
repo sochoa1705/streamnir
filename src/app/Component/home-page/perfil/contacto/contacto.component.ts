@@ -77,6 +77,9 @@ export class ContactoComponent implements OnInit {
         this.contactInformationForm.get("nationality")?.setValue(headerData.hasOwnProperty('CountryId') ? headerData.CountryId : '');
         this.contactInformationForm.get("documentType")?.setValue(headerData.hasOwnProperty('DocumentType') ? headerData.DocumentType : '');
         this.contactInformationForm.get("documentNumber")?.setValue(headerData.hasOwnProperty('DocumentNumber') ? headerData.DocumentNumber : '');
+
+        this.contactInformationForm.get("phone")?.setValue(detailData.hasOwnProperty('Phone') ? detailData.Phone : '');
+        this.contactInformationForm.get("mobilePhone")?.setValue(detailData.hasOwnProperty('MobilePhone') ? detailData.MobilePhone : '');
       });
     });
   }
@@ -107,7 +110,9 @@ export class ContactoComponent implements OnInit {
       birthYear: ['', [Validators.required]],
       nationality: ['', [Validators.required]],
       documentType: ['', [Validators.required]],
-      documentNumber: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this._validatorsService.digitsPattern)]]
+      documentNumber: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this._validatorsService.digitsPattern)]],
+      phone: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(12), Validators.pattern(this._validatorsService.digitsPattern)]],
+      mobilePhone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(12), Validators.pattern(this._validatorsService.digitsPattern)]]
     });
   }
 
@@ -129,7 +134,7 @@ export class ContactoComponent implements OnInit {
       let countryId: number = Number(this.contactInformationForm.get("nationality")?.value);
       let nationality: string = this.countries.find(x => x.Id === countryId).Iata;
 
-      const payload = {
+      const headerData = {
         TrackingCode: Guid(),
         MuteExceptions: environment.muteExceptions,
         Caller: {
@@ -150,27 +155,66 @@ export class ContactoComponent implements OnInit {
         }
       };
 
-      this._contactsService.updateContactInformationHeader(payload).subscribe({
+      const detailData = {
+        TrackingCode: Guid(),
+        MuteExceptions: environment.muteExceptions,
+        Caller: {
+          Company: "Agil",
+          Application: "Interagencias"
+        },
+        Parameter: {
+          UserId: this.userId,
+          CountryId: countryId,
+          ProvinceId: 1,
+          CityId: 1,
+          Address: ".",
+          Number: ".",
+          InteriorNumber: ".",
+          DistrictId: 1,
+          PostalCode: ".",
+          Phone: this.contactInformationForm.get("phone")?.value,
+          MobilePhone: this.contactInformationForm.get("mobilePhone")?.value
+        }
+      };
+
+      this._contactsService.updateContactInformationHeader(headerData).subscribe({
         next: (response) => {
-          // const isSuccess = response.Result.IsSuccess;
+          const isSuccess = response.Result.IsSuccess;
 
-          //if (isSuccess) {
-          this._matSnackBar.open(`${this.contactInformationForm.get("firstName")?.value} ${this.contactInformationForm.get("fatherLastname")?.value}, tus datos de contacto han sido registrados`, 'OK', {
-            verticalPosition: 'top',
-            duration: 2000
-          });
+          if (isSuccess) {
 
-          // } else {
-          //   this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
-          //     verticalPosition: 'top',
-          //     duration: 2000
-          //   });
-          // }
+            this._contactsService.updateContactInformationDetail(detailData).subscribe({
+              next: (response) => {
+                const isSuccess = response.Result.IsSuccess;
+
+                if (isSuccess) {
+                  this._matSnackBar.open(`${this.contactInformationForm.get("firstName")?.value} ${this.contactInformationForm.get("fatherLastname")?.value}, tus datos de contacto han sido registrados`, 'OK', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                  });
+                } else {
+                  this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
+                    verticalPosition: 'top',
+                    duration: 2000
+                  });
+                }
+              },
+              error: (err) => {
+                console.log(err);
+              },
+              complete: () => { }
+            });
+
+          } else {
+            this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
+              verticalPosition: 'top',
+              duration: 2000
+            });
+          }
 
           console.log(this.contactInformationForm.value);
         },
         error: (err) => {
-
           console.log(err);
         },
         complete: () => { }
@@ -187,5 +231,4 @@ export class ContactoComponent implements OnInit {
     this.agregaTelefono = valElem;
     //console.log(this.agregaTelefono);
   }
-
 }
