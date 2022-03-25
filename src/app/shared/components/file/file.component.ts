@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AccountsService } from 'src/app/Services/accounts.service';
+import { NotificationService } from 'src/app/Services/notification.service';
 import { FileService } from '../../../Services/file.service';
 import { Guid } from '../../utils';
 
@@ -25,7 +27,9 @@ export class FileComponent implements OnInit {
 
   imageSave:string;
 
-  constructor(private sanitizer: DomSanitizer,private _snackBar: MatSnackBar, private fileService:FileService, private accountsService:AccountsService) { }
+  constructor(private sanitizer: DomSanitizer,
+    private notificationService: NotificationService
+    ,private _snackBar: MatSnackBar, private fileService:FileService, private accountsService:AccountsService) { }
 
   ngOnInit(): void {
 
@@ -71,13 +75,13 @@ export class FileComponent implements OnInit {
             const url = res.Url + '?parame=' + Guid();
             this.accountsService.guardarImage(url);
             this.accountsService.dispatchLogged(true);
+          }else{
+            this.notificationService.showNotificacion("Error", res.Message,10);
           }
-
-        }, (err)=>{
+        }, (err:any)=>{
           this.archivo64 = this.accountsService.getUserStorage().image;
-          this.openSnackBar("Ocurrio un error en la subida, escoga otra imagen");
+          this.notificationService.showNotificacion("Error", err)
           this.loading = false;
-        
         });
     } catch (e) {
       this.openSnackBar("Ocurrio un error ")

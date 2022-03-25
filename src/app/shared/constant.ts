@@ -79,6 +79,7 @@ export enum ENDPOINT_API {
 
 export enum ROUTE_VIAJES {
   RUTA_PAQUETES = 'https://nmviajes.paquetedinamico.com/ES/holidays/search',
+  RUTA_AUTOS = 'https://autos.nmviajes.com/es/site/',
   RUTA_GET = 'https://nmviajes.paquetedinamico.com/home'
 }
 

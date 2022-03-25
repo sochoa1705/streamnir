@@ -11,7 +11,7 @@ export interface IGeoTree{
     state: string,
     state_id: string,
     tipo_busqueda:string,
-    tn_iata_padre?: "0" | "2"
+    tn_iata_padre_fn?: "0" | "2"
 }
 
 export interface IForm {
