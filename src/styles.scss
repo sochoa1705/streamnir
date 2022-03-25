@@ -6408,6 +6408,7 @@
         .tabColumna {
             display: flex;
             width: 100%;
+            gap: 30px;
             .contenidoTab {
                 width: 40%;
                 padding-top: 30px;
@@ -6415,9 +6416,9 @@
             .imagenTab {
                 display: flex;
                 justify-content: flex-end;
-                width: 60%;
+                flex: 1 1 auto;
                 .galeria {
-                    width: 660px;
+                    width: 100%;
                     overflow: hidden;
                     img {
                         width: 100%;
@@ -6548,7 +6549,7 @@
             height: 163px;
             img {
                 position: absolute;
-                left: -130px;
+                right: 0;
                 width: auto;
                 height: 163px;
             }
