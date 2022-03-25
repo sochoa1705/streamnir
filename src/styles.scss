@@ -1,5 +1,5 @@
     /* You can add global styles to this file, and also import other style files */
-
+    
     @import url("https://fonts.googleapis.com/css?family=Montserrat:400;500;600;700;800;900"); // @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap");
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400&display=swap');
     @import "scss/variables";
@@ -8,7 +8,7 @@
         animation-duration: 1s !important;
         animation-fill-mode: both !important;
     }
-
+    
     @keyframes fadeIn {
         from {
             opacity: 0;
@@ -17,7 +17,7 @@
             opacity: 1;
         }
     }
-
+    
     html,
     body {
         height: 100%;
@@ -27,7 +27,7 @@
         color: $gray;
         transition: 300ms ease;
     }
-
+    
     a {
         color: $red;
         font-size: 12px;
@@ -35,7 +35,7 @@
         font-family: "Montserrat";
         text-decoration: none;
     }
-
+    
     label {
         @include itemCard(600,
         16px,
@@ -43,7 +43,7 @@
         0.1px);
         padding-bottom: 26px;
     }
-
+    
     .form-control {
         background: $white;
         font-size: 16px;
@@ -56,7 +56,7 @@
             box-shadow: none !important;
         }
     }
-
+    
     button {
         font-family: "Montserrat";
         background-color: $red_light;
@@ -107,7 +107,7 @@
             }
         }
     }
-
+    
     .p {
         &r {
             &-0 {
@@ -186,17 +186,17 @@
             }
         }
     }
-
+    
     section {
         margin: 20px 0px;
     }
-
+    
     .mat-option-text {
         img {
             margin-right: 10px;
         }
     }
-
+    
     .card {
         background: $white;
         border-radius: 10px;
@@ -393,7 +393,7 @@
             }
         }
     }
-
+    
     .ng5-slider {
         height: 15px !important;
         font-family: "Montserrat";
@@ -473,7 +473,7 @@
         //     position: absolute;
         // }
     }
-
+    
     .mat-tab-body.mat-tab-body-active {
         position: initial !important;
     } // MODAL
@@ -583,7 +583,7 @@
             }
         }
     }
-
+    
     #cdr {
         position: absolute;
         z-index: 1000;
@@ -648,7 +648,7 @@
             }
         }
     }
-
+    
     #carouselSeguros {
         color: $red;
         background: $gray_light;
@@ -712,18 +712,17 @@
             }
         }
     }
-
     /* Importing Bootstrap SCSS file. */
-
+    
     // @import '~bootstrap/scss/bootstrap';
     /* datepicker styles  */
-
+    
     .onlyDate .ngb-dp-month:first-child {
         border-right: none;
         padding-right: 0;
         padding-bottom: 20px;
     }
-
+    
     .btnDatePicker {
         display: flex;
         justify-content: flex-end;
@@ -737,7 +736,7 @@
         text-transform: capitalize;
         color: #FFFFFF;
     }
-
+    
     .btnDatePicker button {
         font-family: Montserrat;
         font-style: normal;
@@ -749,7 +748,7 @@
         color: #FFFFFF;
         border-radius: 3px;
     }
-
+    
     .ngb-dp-content {
         padding: 0 40px;
         font-family: Montserrat;
@@ -761,24 +760,24 @@
         text-transform: capitalize;
         color: #4B4B4B;
     }
-
+    
     .ngb-dp-header {
         padding: 10px 30px 0 30px !important
     }
-
+    
     .ngb-dp-arrow .btn-link {
         color: #DF0C30 !important;
     }
-
+    
     .ngb-dp-arrow .btn-link:hover {
         color: #cb0728 !important;
     }
-
+    
     .ngb-dp-navigation-chevron {
         width: 0.5em !important;
         height: 0.5em !important;
     }
-
+    
     .ngb-dp-navigation-select select {
         border: none !important;
         font-family: Montserrat;
@@ -791,16 +790,16 @@
         color: #4B4B4B;
         text-align: end;
     }
-
+    
     .ngb-dp-navigation-select select:focus {
         outline: none;
     }
-
+    
     .ngb-dp-month:first-child {
         border-right: 1px solid #83898F;
         padding-right: 15px;
     }
-
+    
     .ngb-dp-month-name {
         font-family: Montserrat;
         font-style: normal;
@@ -812,22 +811,22 @@
         color: #4B4B4B;
         text-transform: uppercase;
     }
-
+    
     .ngb-dp-weekday {
         font-style: normal !important;
         width: 2.4rem !important;
         height: 2.4rem !important;
     }
-
+    
     .ngb-dp-weekdays {
         border-bottom: none !important;
     }
-
+    
     .ngb-dp-day {
         width: 2.4rem !important;
         height: 2.4rem !important;
     }
-
+    
     .ngb-dp-day span {
         width: 2.4rem !important;
         height: 2.4rem !important;
@@ -835,22 +834,22 @@
         align-items: center;
         justify-content: center;
     }
-
+    
     .portletFiltro {
         display: flex;
         flex: 1 1 100%;
     }
-
+    
     .portletFiltro .rowFiltro {
         display: flex;
         flex: 1 1 auto;
     }
-
+    
     .portletFiltro .rowFiltro .columnFiltro {
         flex: 1 1 100%;
         padding: 10px 0;
     }
-
+    
     .portletFiltro .rowFiltro .columnButton {
         padding: 10px 0;
         min-width: 150px;
@@ -865,7 +864,7 @@
             }
         }
     }
-
+    
     .portletFiltro .rowFiltro .columnFiltro .iconCalendar {
         position: absolute;
         display: flex;
@@ -877,15 +876,15 @@
             stroke: #009AED;
         }
     }
-
+    
     .flexCero {
         flex: 0 !important;
     }
-
+    
     .mat-tab-body-wrapper {
         z-index: auto !important;
     }
-
+    
     .portletFiltro .rowFiltro .columnFiltro input,
     .portletFiltro .rowFiltro .columnFiltro input[type="text"] {
         padding: 0 !important;
@@ -912,23 +911,23 @@
             width: 290px;
         }
     }
-
+    
     .portletFiltro .rowFiltro .columnFiltro input::-webkit-input-placeholder,
     .portletFiltro .rowFiltro .columnFiltro input[type="text"]::-webkit-input-placeholder {
         color: #B9BCBF;
         font-size: 16px;
     }
-
+    
     .portletFiltro .rowFiltro .columnFiltro.hideColumn {
         max-width: 0 !important;
         width: 0 !important;
     }
-
+    
     .portletFiltro .rowFiltro .columnFiltro.hideColumn input {
         border: none;
         color: #fff;
     }
-
+    
     .portletFiltro .rowFiltro .columnFiltro button {
         letter-spacing: 0.5px;
         max-width: 150px;
@@ -939,14 +938,14 @@
             background: $red
         }
     }
-
+    
     .form-group.hidden {
         width: 0;
         margin: 0;
         border: none;
         padding: 0;
     }
-
+    
     .custom-day {
         text-align: center;
         padding: 0.185rem 0.25rem;
@@ -954,32 +953,30 @@
         height: 2rem;
         width: 2rem;
     }
-
+    
     .custom-day.focused {
         background-color: #e6e6e6;
     }
-
+    
     .custom-day.range,
     .custom-day:hover {
         background: #009AED;
         border-radius: 3px;
         color: white;
     }
-
+    
     .custom-day.faded {
         background: #8FD0F3;
         color: #009AED;
         border-radius: 0;
     }
-
     /* end datepicker styles  */
-
     /* STYLE PERFIL  */
-
+    
     .mat-tab-body-content {
         overflow: hidden !important;
     }
-
+    
     .mat-tab-body {
         &-active {
             overflow: visible !important;
@@ -988,13 +985,13 @@
             }
         }
     }
-
+    
     .box-container {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
     }
-
+    
     .box-container .box-perfil {
         background-color: #fff;
         padding: 20px;
@@ -1006,7 +1003,7 @@
         flex-direction: column;
         z-index: 10;
     }
-
+    
     .box-container .box-perfil .perfilName {
         font-family: Open Sans;
         font-style: normal;
@@ -1015,7 +1012,7 @@
         line-height: 36px;
         color: #4B4B4B;
     }
-
+    
     .box-container .box-perfil .perfilMail {
         font-family: Montserrat;
         font-style: normal;
@@ -1025,7 +1022,7 @@
         letter-spacing: 0.1px;
         color: #1EAEA5;
     }
-
+    
     .box-container .box-perfil .boxContact {
         display: flex;
         flex-direction: column;
@@ -1037,12 +1034,12 @@
             padding: 20px 20px 0 20px;
         }
     }
-
+    
     .box-container .box-perfil .boxContact .contacto {
         display: flex;
         flex-wrap: wrap;
     }
-
+    
     .box-container .box-perfil .boxContact .contacto .titleContact {
         width: 100%;
         text-align: center;
@@ -1053,7 +1050,7 @@
         line-height: 18px;
         letter-spacing: 0.1px;
     }
-
+    
     .box-container .box-perfil .boxContact .contacto .linkContact {
         font-family: Montserrat;
         font-style: normal;
@@ -1066,18 +1063,18 @@
         text-align: center;
         cursor: pointer;
     }
-
+    
     .box-container .box-perfil .boxContact .contacto .linkContact.disabled {
         color: #4B4B4B;
         cursor: default;
     }
-
+    
     .box-container .box-content {
         display: flex;
         width: 100%;
         z-index: 9;
     }
-
+    
     .box-container .box-content .portlet-izq {
         display: none;
         @include tablet {
@@ -1094,19 +1091,19 @@
             z-index: 9;
         }
     }
-
+    
     .box-container .box-content .portlet-izq .iconViaje {
         display: flex;
         justify-content: center;
         padding: 30px 0 19px 0;
         border-bottom: 1px solid #E4E5E7;
     }
-
+    
     .box-container .box-content .portlet-izq .iconViaje img {
         width: 73px;
         height: 73px;
     }
-
+    
     .box-container .box-content .portlet-der {
         flex: 1 1 100%;
         box-sizing: border-box;
@@ -1119,13 +1116,13 @@
             padding: 0;
         }
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil {
         flex: 1 1 100%;
         display: flex;
         flex-wrap: wrap;
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil {
         background: #FFFFFF;
         border: 0.5px solid #E4E5E7;
@@ -1144,11 +1141,11 @@
             flex-direction: row;
         }
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil.btnBox {
         cursor: pointer;
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxLeft {
         display: flex;
         align-items: center;
@@ -1159,30 +1156,30 @@
             margin-right: 25px;
         }
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight {
         text-align: center;
         @include tablet {
             text-align: left;
         }
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxLeft img {
         width: 84px;
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .iconBox {
         width: 50px;
         display: flex;
         justify-content: end;
         align-items: center;
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxCenter {
         display: flex;
         flex-wrap: wrap;
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxCenter .subTitle {
         font-family: Montserrat;
         font-style: normal;
@@ -1192,7 +1189,7 @@
         letter-spacing: 0.1px;
         color: #DF0C30;
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxCenter .descrip {
         font-family: Montserrat;
         font-style: normal;
@@ -1203,7 +1200,7 @@
         color: #83898F;
         padding: 5px 0;
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight .subTitle {
         font-family: Montserrat;
         font-style: normal;
@@ -1213,7 +1210,7 @@
         letter-spacing: 0.1px;
         color: #F21037;
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight .title {
         font-family: Open Sans;
         font-style: normal;
@@ -1224,7 +1221,7 @@
         color: #4B4B4B;
         padding: 5px 0 12px 0;
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight .descrip {
         font-family: Montserrat;
         font-style: normal;
@@ -1233,7 +1230,7 @@
         letter-spacing: 0.1px;
         color: #4B4B4B;
     }
-
+    
     .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight .boxBtn {
         display: flex;
         justify-content: center;
@@ -1241,30 +1238,30 @@
             justify-content: end;
         }
     }
-
+    
     .contentSecuritySeg {
         padding: 10px 0 20px 0;
     }
-
+    
     .box-container .box-content .portlet-der .contentSecurity,
     .box-container .box-content .portlet-der .contentSecurity .rowContent,
     .contentSecuritySeg,
     .contentSecuritySeg .rowContent {
         display: flex;
     }
-
+    
     .box-container .box-content .portlet-der .contentSecurity .rowContent,
     .contentSecuritySeg .rowContent {
         flex-wrap: wrap;
         align-items: center;
     }
-
+    
     .box-container .box-content .portlet-der .contentSecurity .rowContent img,
     .contentSecuritySeg .rowContent img {
         width: 38px;
         margin-right: 10px;
     }
-
+    
     .box-container .box-content .portlet-der .contentSecurity .rowContent .title,
     .contentSecuritySeg .rowContent .title {
         font-family: Open Sans;
@@ -1279,7 +1276,7 @@
         display: flex;
         flex: 1 1 100%;
     }
-
+    
     .box-container .box-content .portlet-der .contentSecurity .rowContent .subtitle,
     .contentSecuritySeg .rowContent .subtitle {
         font-family: Montserrat;
@@ -1294,19 +1291,19 @@
         display: flex;
         flex: 1 1 100%;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument {
         background: #FFFFFF;
         border: 0.5px solid #E4E5E7;
         box-sizing: border-box;
         border-radius: 10px
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content {
         padding-top: 16px;
         padding-bottom: 25px;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent {
         display: flex;
         flex: 1 1 100%;
@@ -1316,7 +1313,7 @@
             flex-direction: row;
         }
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent {
         .inputGroup {
             &.error {
@@ -1338,21 +1335,21 @@
             }
         }
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid {
         display: flex;
         flex: 1 1 100%;
         margin-right: 20px;
         flex-wrap: wrap;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .rowGrid {
         display: flex;
         flex: 1 1 100%;
         padding: 10px 0;
         border-top: 1px solid #E4E5E7;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .linkGrid {
         font-family: Montserrat;
         font-style: normal;
@@ -1363,36 +1360,36 @@
         color: #009AED;
         cursor: pointer;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .rowGrid:first-child {
         border-top: none;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .rowGrid .descrip {
         display: flex;
         align-items: center;
         flex: 1 1 100%;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .rowGrid .descrip.titleDesc {
         font-size: 14px;
         font-weight: 600;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .rowGrid .descrip.subtitleDesc {
         font-size: 12px;
         font-weight: 500;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .descrip .iconFono {
         padding: 0 12px;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .descrip .textNroFono {
         display: flex;
         flex: 1 1 100%;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .optEliminar,
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .optModificar {
         width: 32px;
@@ -1402,7 +1399,7 @@
         justify-content: center;
         align-items: center;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .msgWarning {
         font-family: Montserrat;
         font-style: normal;
@@ -1414,7 +1411,7 @@
         letter-spacing: 0.25px;
         color: #B50A27;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .passLabel {
         font-family: Montserrat;
         font-style: normal;
@@ -1424,7 +1421,7 @@
         letter-spacing: 0.1px;
         color: #4B4B4B;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .passText {
         display: flex;
         align-items: center;
@@ -1437,14 +1434,14 @@
         letter-spacing: 0.1px;
         color: #83898F;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
         margin-right: 20px;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup span {
         font-family: Montserrat;
         font-style: normal;
@@ -1457,30 +1454,30 @@
         color: #4B4B4B;
         padding-bottom: 9px;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup.fecVen span {
         flex: 1 1 100%;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup.fecVen .form-control {
         max-width: 140px;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .nroDoc {
         width: 100%;
         position: relative;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .nroDoc .iconoPais {
         position: absolute;
         left: 10px;
         top: 42px;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .nroDoc .textPais {
         padding-left: 32px;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup label {
         padding-bottom: 0 !important;
         font-family: Montserrat;
@@ -1493,19 +1490,19 @@
         letter-spacing: 0.25px;
         color: #4B4B4B;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-input {
         margin-top: 0 !important;
         margin-right: 10px;
         width: 24px;
         height: 24px;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-input[type=radio],
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-label {
         cursor: pointer;
     }
-
+    
     .optionSel {
         display: flex;
         flex: 1 1 100%;
@@ -1540,13 +1537,13 @@
             margin-right: 0;
         }
     }
-
+    
     .form-check-inline {
         .form-check-label {
             padding-bottom: 0px;
         }
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .optionLeft {
         border: 0.5px solid #E4E5E7;
         box-sizing: border-box;
@@ -1557,7 +1554,7 @@
         padding: 0 15px;
         height: 47px;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .optionRight {
         border: 0.5px solid #E4E5E7;
         box-sizing: border-box;
@@ -1568,7 +1565,7 @@
         padding: 0 15px;
         height: 47px;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .optionCheck {
         flex: 1 1 100%;
         box-sizing: border-box;
@@ -1578,7 +1575,7 @@
         padding: 0 15px;
         height: 47px;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup input[type="text"],
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup select {
         border: 0.5px solid #E4E5E7;
@@ -1593,11 +1590,11 @@
         line-height: 21px;
         letter-spacing: 0.25px;
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup select {
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23DF0C30' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     }
-
+    
     .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup input::placeholder {
         font-family: Montserrat;
         font-style: normal;
@@ -1607,14 +1604,14 @@
         letter-spacing: 0.25px;
         color: #B9BCBF;
     }
-
+    
     .box-container .box-content .headerPortlet {
         display: flex;
         flex-wrap: wrap;
         padding: 11px 26px;
         border-bottom: 1px solid #E4E5E7;
     }
-
+    
     .box-container .box-content .headerPortlet .titleBoxRight {
         font-family: Open Sans;
         font-style: normal;
@@ -1626,7 +1623,7 @@
         color: #4B4B4B;
         width: 100%;
     }
-
+    
     .box-container .box-content .headerPortlet .subtitleBoxRight {
         font-family: Montserrat;
         font-style: normal;
@@ -1637,29 +1634,29 @@
         align-items: center;
         letter-spacing: 0.1px;
     }
-
+    
     .box-container .box-content .portlet-der .cardLogo {
         display: flex;
         justify-content: center;
         padding: 30px;
     }
-
+    
     .box-container .box-content .portlet-der .cardLogo .boxCard {
         width: 120px;
         height: 60px;
         margin: 0 10px;
     }
-
+    
     .boxMenu {
         width: 100%;
         margin-top: 24px;
     }
-
+    
     .boxMenu ul {
         padding: 0;
         margin: 0;
     }
-
+    
     .boxMenu ul li {
         display: flex;
         height: 35px;
@@ -1675,12 +1672,12 @@
         letter-spacing: 0.1px;
         transition: all 0.3s;
     }
-
+    
     .boxMenu ul li.selected,
     .boxMenu ul li:hover {
         color: #506370;
     }
-
+    
     .btnPerfil {
         margin-top: 10px;
         color: #ffffff;
@@ -1698,15 +1695,15 @@
         align-items: center;
         letter-spacing: 0.5px;
     }
-
+    
     .btnPerfil.primary {
         background: #DF0C30;
     }
-
+    
     .btnPerfil.primary:hover {
         background: #DF0C30;
     }
-
+    
     .btnAgregar {
         font-family: Montserrat;
         font-style: normal;
@@ -1720,85 +1717,84 @@
         cursor: pointer;
         transition: all 0.3s;
     }
-
+    
     .btnAgregar.gris {
         color: #CFD1D3;
     }
-
+    
     .rowElement {
         display: flex;
         flex: 1 1 100%;
         align-items: center;
     }
-
+    
     .marginRight10 {
         margin-right: 10px;
     }
-
+    
     .marginLeft10 {
         margin-left: 10px;
     }
-
+    
     .marginTop20 {
         margin-top: 20px;
     }
-
+    
     .marginTop40 {
         margin-top: 40px;
     }
-
+    
     .marginBottom40 {
         margin-bottom: 40px;
     }
-
+    
     .flexWrap {
         flex-wrap: wrap !important;
     }
-
+    
     .flexNowrap {
         flex-wrap: nowrap !important;
     }
-
+    
     .spaceBetween {
         justify-content: space-between;
     }
-
+    
     .spaceEnd {
         justify-content: end !important;
     }
-
+    
     .flexAuto {
         flex: auto !important;
     }
-
     /* END STYLE PERFIL */
-
+    
     .card.seguro {
         border: none !important;
     }
-
+    
     .precioAntes {
         text-decoration: line-through #DF0C30;
     }
-
+    
     .carousel-item .card .card-body {
         font-family: Open Sans;
     }
-
+    
     .carousel-item .card .card-body .cotainer a {
         padding: 10px 14.5px;
     }
-
+    
     .carousel-item .card .card-body .cotainer .row,
     .carousel-item .card .card-body .cotainer .row h5 {
         font-family: Montserrat !important;
     }
-
+    
     .carousel-item .card .card-body h5 {
         font-family: Montserrat !important;
         font-weight: bold;
     }
-
+    
     card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-family: Open Sans !important;
         font-style: normal;
@@ -1807,60 +1803,60 @@
         line-height: 36px;
         color: #4B4B4B;
     }
-
+    
     .card.seguro {
         margin-top: 15px;
     }
-
+    
     .card.seguro .card-header {
         padding: 8px 4px !important;
     }
-
+    
     .card.seguro .card-body a {
         text-decoration: none;
         font-size: 12px;
     }
-
+    
     .card.seguro .card-body h2 {
         font-weight: bold;
         padding-top: 15px;
     }
-
+    
     .card.seguro .card-body p.now strong {
         padding-left: 5px;
     }
-
+    
     .card.seguro .card-body p.now strong {
         padding-left: 5px;
     }
-
+    
     .card.seguro .card-body button:hover {
         background-color: #b50a27;
     }
-
+    
     .card.seguro .card-body button {
         border-radius: 3px;
         font-size: 14px;
         font-weight: normal;
     }
-
+    
     .card {
         font-family: Montserrat;
     }
-
+    
     .filtroBox {
         overflow: hidden; //border: 1px solid #E4E5E7;
     }
-
+    
     .postCard {
         overflow: hidden !important;
         position: inherit;
     }
-
+    
     .posFilter {
         z-index: 11;
     }
-
+    
     .input {
         &Der {
             border-radius: 3px 0 0 3px !important;
@@ -1881,7 +1877,7 @@
             }
         }
     }
-
+    
     .selectSeguro {
         border: 0.5px solid #E4E5E7;
         box-sizing: border-box;
@@ -1900,19 +1896,19 @@
             box-shadow: none;
         }
     }
-
+    
     .iconBandera {
         position: absolute;
         margin-top: 9px;
         margin-left: 10px;
     }
-
+    
     .width110 select,
     .width110 input {
         width: 110px;
         text-indent: 40px;
     }
-
+    
     .accordion {
         .accordion-item {
             .footerDet {
@@ -1921,11 +1917,11 @@
             }
         }
     }
-
+    
     .modal-body {
         font-family: Montserrat;
     }
-
+    
     .footerPopup {
         span {
             font-weight: bold;
@@ -1938,7 +1934,7 @@
             margin-top: 10px;
         }
     }
-
+    
     .footerPopup .alignFooterPopup {
         display: flex;
         flex-direction: column;
@@ -1947,21 +1943,21 @@
             color: #009AED;
         }
     }
-
+    
     .modal-header {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
     }
-
+    
     .narginColumn {
         margin-right: 10px;
     }
-
+    
     .espaciado {
         padding: 0 12px;
     }
-
+    
     .iconFlechaSup {
         display: none;
         position: absolute;
@@ -1970,7 +1966,7 @@
         transition: all 0.3s;
         transform: rotate(180deg);
     }
-
+    
     .textContactenos {
         font-family: 'Montserrat';
         font-size: 14px;
@@ -1980,7 +1976,7 @@
         letter-spacing: 0.1px;
         color: #4B4B4B;
     }
-
+    
     .boxGraphic {
         background: #FFFFFF;
         box-shadow: 0px 1px 8px rgb(0 0 0 / 10%);
@@ -2172,7 +2168,7 @@
             }
         }
     }
-
+    
     .boxPrecioAero,
     .boxPrecios {
         background: #FFFFFF; // box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
@@ -2284,7 +2280,7 @@
             }
         }
     }
-
+    
     .boxPrecios {
         .header {
             font-size: 12px !important;
@@ -2316,7 +2312,7 @@
             }
         }
     }
-
+    
     .viajero {
         .escala {
             padding-bottom: 5px;
@@ -2340,7 +2336,7 @@
             }
         }
     }
-
+    
     .boxMasUno {
         position: relative;
         .textMasUno {
@@ -2353,7 +2349,7 @@
             right: 5px;
         }
     }
-
+    
     .toolTip {
         position: relative;
         &:hover {
@@ -2439,23 +2435,23 @@
             }
         }
     }
-
+    
     .ng5-slider .ng5-slider-pointer.ng5-slider-pointer-min {
         width: 14px !important;
         height: 14px !important;
         top: -5px !important;
     }
-
+    
     .ng5-slider .ng5-slider-pointer.ng5-slider-pointer-max {
         width: 30px !important;
         height: 30px !important;
         top: -14px !important;
     }
-
+    
     .selectDestino {
         display: none;
     }
-
+    
     .footerLink {
         display: flex;
         font-family: Montserrat;
@@ -2472,7 +2468,7 @@
             cursor: pointer;
         }
     }
-
+    
     #politicaModal,
     #reservaModal {
         .modal-dialog {
@@ -2522,7 +2518,7 @@
             }
         }
     }
-
+    
     #reservaModal {
         .modal-dialog {
             max-width: 50% !important;
@@ -2566,7 +2562,7 @@
             }
         }
     }
-
+    
     #Modaltermino,
     #ModalCondicion {
         .modal-dialog {
@@ -2665,7 +2661,7 @@
             }
         }
     }
-
+    
     #ModalCondicion {
         .modal-content {
             .modal-body {
@@ -2752,7 +2748,7 @@
             }
         }
     }
-
+    
     @media (max-width: 640px) {
         .narginColumn {
             margin-right: 0px;
@@ -2783,7 +2779,7 @@
             justify-content: center;
         }
     }
-
+    
     .versionMobile {
         display: flex;
         flex-wrap: nowrap;
@@ -2794,25 +2790,25 @@
             padding-right: 0 !important;
         }
     }
-
+    
     .widthDesktop {
         width: 950px !important;
     }
-
+    
     .hideDesktop {
         display: none !important;
     }
-
+    
     .viajero {
         .time_duration {
             cursor: pointer;
         }
     }
-
+    
     #carouselSeguros .carousel-caption p {
         width: 100%;
     }
-
+    
     #modalDetVuelo {
         .modal-dialog {
             min-width: 70% !important;
@@ -2954,11 +2950,11 @@
             }
         }
     }
-
+    
     .nav-item .nav-link {
         padding: 0;
     }
-
+    
     .ng5-slider .ng5-slider-bubble {
         font-size: 14px;
         font-family: Montserrat;
@@ -2967,7 +2963,7 @@
         letter-spacing: 0.1px;
         color: #4B4B4B !important;
     }
-
+    
     #modalVerOpciones {
         .modal-dialog {
             min-width: 80% !important;
@@ -3284,20 +3280,20 @@
             }
         }
     }
-
+    
     .atribCard {
         padding: 0;
         background: transparent;
         border: none;
         overflow: hidden;
     }
-
+    
     .btnMobile {
         display: none;
         padding: 20px 0 10px 0;
         justify-content: center;
     }
-
+    
     .btnFooter {
         font-family: 'Montserrat';
         font-size: 16px;
@@ -3305,7 +3301,7 @@
         font-weight: 600;
         margin-bottom: 10px;
     }
-
+    
     .form-check-inline {
         display: flex;
         align-items: center;
@@ -3314,13 +3310,13 @@
             margin-bottom: 5px;
         }
     }
-
+    
     .colFono {
         align-items: center;
         display: flex;
         justify-content: flex-end;
     }
-
+    
     .accordion-body {
         border-bottom: 0px solid #E4E5E7;
         .textAcor {
@@ -3352,11 +3348,11 @@
             color: #009AED;
         }
     }
-
+    
     .totalItem {
         margin: 1rem 0.5rem;
     }
-
+    
     .boxFilter {
         .bodyFilter {
             font-family: Montserrat;
@@ -3372,7 +3368,7 @@
             }
         }
     }
-
+    
     .boxOferta {
         display: flex;
         flex-direction: column;
@@ -3468,7 +3464,7 @@
             }
         }
     }
-
+    
     .btnVerMas {
         font-family: Montserrat;
         font-weight: 600;
@@ -3476,7 +3472,7 @@
         line-height: 18px;
         letter-spacing: 0.5px;
     }
-
+    
     .edad {
         display: flex;
         flex: 1 1 100%;
@@ -3499,7 +3495,7 @@
             border: 0.5px solid #E4E5E7;
         }
     }
-
+    
     .boxFlotante {
         width: 330px;
         background: #FFFFFF;
@@ -3712,7 +3708,7 @@
             }
         }
     }
-
+    
     .titleHome {
         font-size: 24px;
         font-weight: 400;
@@ -3731,18 +3727,18 @@
             margin-bottom: 20px;
         }
     }
-
+    
     .comprarHideTitle {
         .textTitle {
             display: none;
         }
     }
-
+    
     .titleMob {
         line-height: 36px;
         padding-bottom: 10px;
     }
-
+    
     .boxImgDesktop {
         margin-bottom: 25px;
         img {
@@ -3751,7 +3747,7 @@
             border-radius: 5px;
         }
     }
-
+    
     .boxTab {
         width: 100%;
         .rowBoxTab {
@@ -3845,7 +3841,7 @@
             }
         }
     }
-
+    
     @media (max-width: 640px) {
         #modalVerOpciones {
             .boxPlanes {
@@ -4744,7 +4740,7 @@
             display: flex !important;
         }
     }
-
+    
     .boxVuelos {
         width: 100%;
         padding: 35px;
@@ -4793,11 +4789,11 @@
             }
         }
     }
-
+    
     .padTitle {
         padding: 20px 0 40px 0;
     }
-
+    
     .boxImgVuelo {
         padding: 0 20px 0 60px;
         .gridVuelo {
@@ -4825,7 +4821,7 @@
             }
         }
     }
-
+    
     .viajaBox {
         height: 550px;
         margin-top: -60px;
@@ -4872,7 +4868,7 @@
             }
         }
     }
-
+    
     .sliderOfertas {
         display: flex;
         align-items: center;
@@ -4917,7 +4913,7 @@
             }
         }
     }
-
+    
     @media (max-width: 640px) {
         .verMovil {
             .col-5,
@@ -5006,7 +5002,7 @@
             }
         }
     }
-
+    
     .boxDestino,
     .boxAero {
         // display: flex;
@@ -5190,7 +5186,7 @@
             }
         }
     }
-
+    
     .moreInfo {
         padding: 20px 26px 0 26px;
         .title {
@@ -5246,7 +5242,7 @@
             }
         }
     }
-
+    
     @media (max-width: 640px) {
         .boxDestino {
             .titulo {
@@ -5328,7 +5324,7 @@
             }
         }
     }
-
+    
     .boxAero {
         .logoAero {
             justify-content: center;
@@ -5436,11 +5432,11 @@
             }
         }
     }
-
+    
     .contentTabMobile {
         display: none;
     }
-
+    
     @media (max-width: 640px) {
         .verDesktop {
             display: none !important;
@@ -5545,7 +5541,7 @@
             }
         }
     }
-
+    
     .boxPackage {
         display: flex;
         justify-content: space-evenly;
@@ -5575,7 +5571,7 @@
             display: none;
         }
     }
-
+    
     .ofrecido {
         font-family: Montserrat;
         font-size: 14px;
@@ -5584,7 +5580,7 @@
         color: #4B4B4B;
         margin-bottom: 50px;
     }
-
+    
     .cardDestino {
         display: flex;
         justify-content: space-evenly;
@@ -5712,7 +5708,7 @@
             padding: 0 25px 20px 25px;
         }
     }
-
+    
     @media (max-width: 640px) {
         .cardDestino {
             flex-direction: column;
@@ -5777,7 +5773,7 @@
             }
         }
     }
-
+    
     .cardDestino {
         &.show {
             .p-carousel-prev,
@@ -5826,7 +5822,7 @@
             display: none;
         }
     }
-
+    
     .tabDestino {
         .p-galleria .p-galleria-close {
             margin: 0.5rem;
@@ -5925,7 +5921,7 @@
             color: #1D4ED8;
         }
     }
-
+    
     .cardHotel {
         display: flex;
         justify-content: space-evenly;
@@ -6169,7 +6165,7 @@
             }
         }
     }
-
+    
     @media (max-width: 640px) {
         .cardHotel {
             flex-direction: column;
@@ -6197,7 +6193,7 @@
             }
         }
     }
-
+    
     .companyCar {
         display: flex;
         flex-wrap: wrap;
@@ -6272,7 +6268,7 @@
             }
         }
     }
-
+    
     @media (max-width: 640px) {
         .companyCar {
             .carTitulo {
@@ -6300,7 +6296,7 @@
             }
         }
     }
-
+    
     .tabDestino {
         display: flex;
         width: 100%;
@@ -6339,7 +6335,7 @@
             }
         }
     }
-
+    
     @media (max-width: 640px) {
         .movDestino {
             flex-direction: column-reverse;
@@ -6355,7 +6351,7 @@
             }
         }
     }
-
+    
     .tabContentDest {
         flex: 1 1 40%;
         padding: 0 45px;
@@ -6439,7 +6435,7 @@
             color: #4B4B4B;
         }
     }
-
+    
     @media (max-width: 640px) {
         .tabContentDest {
             margin: 0;
@@ -6516,7 +6512,7 @@
             }
         }
     }
-
+    
     .portadaAero {
         width: 100%;
         position: relative;
@@ -6546,7 +6542,7 @@
             }
         }
     }
-
+    
     @media (max-width: 640px) {
         .portadaAero {
             height: 163px;
@@ -6571,9 +6567,8 @@
             }
         }
     }
-
     /* boton select */
-
+    
     .select-box {
         position: relative;
         display: block;
@@ -6683,7 +6678,7 @@
             }
         }
     }
-
+    
     @keyframes HideList {
         from {
             transform: scaleY(1);
@@ -6692,16 +6687,16 @@
             transform: scaleY(0);
         }
     }
-
+    
     span.valid {
         font-size: 10px !important;
         color: red !important;
     }
-
+    
     .isvalid {
         border: 1px solid red !important
     }
-
+    
     @media (min-width: 1400px) {
         .container {
             &-fluid {
@@ -6712,43 +6707,43 @@
             }
         }
     }
-
+    
     .ngb-dp-arrow-btn {
         background: transparent !important
     }
-
+    
     .font-12 {
         font-size: 12px !important;
     }
-
+    
     @media print {
         .doNotPrint {
             display: none !important;
         }
     }
-
+    
     input.inputDer,
     input.inputIzq {
         text-indent: 40px !important
     }
-
+    
     .hideDate {
         max-width: 0 !important;
         width: 0 !important;
         position: absolute; //right: 58%;
     }
-
+    
     .margin-filter {
         @include desktop {
             margin-right: 70px;
             margin-left: 70px;
         }
     }
-
+    
     .ignore-template {
         display: contents;
     }
-
+    
     .ngb-dp-week {
         [role="gridcell"].disabled {
             background: #e0e0e0;
@@ -6812,7 +6807,7 @@
             line-height: 20px;
         }
     }
-
+    
     $icon-size: 56px;
     $icon-size-mobile: 28px;
     .mat-icon.icon {
@@ -6834,14 +6829,14 @@
             @extend .capital;
         }
     }
-
+    
     .h659 {
         height: 659px !important;
         @media (max-width: 768px) {
             height: 165px !important;
         }
     }
-
+    
     .banner {
         width: 100%;
         height: 540px;
@@ -6860,17 +6855,17 @@
             height: 659px;
         }
     }
-
+    
     .video-responsive {
         margin-top: 260px;
     }
-
+    
     .bg-img {
         @media (max-width: 768px) {
             padding-bottom: 150px;
         }
     }
-
+    
     .img-responsive {
         @media (max-width: 768px) {
             width: 93% !important;
@@ -6880,7 +6875,7 @@
             // padding: 0 15px;
         }
     }
-
+    
     .text {
         &-white {
             color: white;
@@ -6889,7 +6884,7 @@
             text-align: justify;
         }
     }
-
+    
     .btn {
         &-agencias {
             border: 1px solid #E4E5E7;
@@ -6944,7 +6939,7 @@
             }
         }
     }
-
+    
     button.customers {
         position: relative;
         width: 160px;
@@ -6967,7 +6962,7 @@
             position: absolute
         }
     }
-
+    
     .scroll-to-top {
         position: fixed;
         bottom: 15px;
@@ -6975,14 +6970,14 @@
         opacity: 0;
         transition: all .2s ease-in-out;
     }
-
+    
     .show-scrollTop {
         opacity: 1;
         transition: all .2s ease-in-out;
         border-radius: 50%;
         background-color: hotpink;
     }
-
+    
     #ModalSesion {
         .mat-tab-label {
             width: 50%;
@@ -7131,7 +7126,7 @@
             }
         }
     }
-
+    
     #ModalRecovery,
     #ModalNewAccount {
         .modal-dialog {
@@ -7295,7 +7290,7 @@
             }
         }
     }
-
+    
     #ModalRecovery {
         .modal-dialog {
             .modal-content {
@@ -7312,7 +7307,7 @@
             }
         }
     }
-
+    
     #ModalVerificaCorreo {
         .modal-header {
             margin-top: 40px;
@@ -7355,7 +7350,7 @@
             }
         }
     }
-
+    
     #ModalUsuarioVerificado {
         .modal-header {
             .iconCenter {
@@ -7400,7 +7395,7 @@
             }
         }
     }
-
+    
     #ModalEliminaCorreo {
         .modal-header {
             .iconCenter {
@@ -7451,7 +7446,7 @@
             }
         }
     }
-
+    
     #ModalChangePass {
         .modal-header {
             .iconCenter {
@@ -7506,7 +7501,7 @@
             }
         }
     }
-
+    
     .boxReclamaciones {
         display: flex;
         .contLeft {
@@ -7786,7 +7781,7 @@
             flex-direction: column;
         }
     }
-
+    
     .notifyBox {
         min-width: 500px;
         display: none;
@@ -7829,7 +7824,7 @@
             left: 10px;
         }
     }
-
+    
     .boxUser {
         position: relative;
         .userlogged {
@@ -7897,11 +7892,11 @@
             }
         }
     }
-
+    
     .cursorPointer {
         cursor: pointer;
     }
-
+    
     #ModalNewAccount {
         .modal-dialog {
             .modal-content {
@@ -8028,7 +8023,7 @@
             }
         }
     }
-
+    
     mat-dialog-container {
         padding: 20px;
         .title {
@@ -8085,14 +8080,14 @@
             }
         }
     }
-
+    
     #carouselExampleIndicators {
         .carousel-control-prev,
         .carousel-control-next {
             z-index: unset !important;
         }
     }
-
+    
     .msgBoxBoletin {
         display: flex;
         align-items: center;
@@ -8132,7 +8127,7 @@
             margin-bottom: 10px;
         }
     }
-
+    
     .p-galleria-item-wrapper {
         .p-galleria-indicators {
             display: flex;
@@ -8169,7 +8164,7 @@
             }
         }
     }
-
+    
     .cardHotel {
         .p-carousel-items-container {
             gap: 20px;
@@ -8214,7 +8209,7 @@
             }
         }
     }
-
-    .modal-backdrop {
-        display: none;
-      }
+    
+    // .modal-backdrop {
+    //     display: none;
+    //   }
