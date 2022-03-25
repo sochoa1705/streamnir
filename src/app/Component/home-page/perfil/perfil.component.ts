@@ -371,7 +371,7 @@ export class PerfilComponent implements OnInit {
   toggleModalEliminar() {
     const modal = document.getElementById("ModalEliminaCorreo");
 
-    if (!modal) {
+    if (!modal) { 
       return;
     }
 
