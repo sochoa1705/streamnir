@@ -1,27 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { interval } from 'rxjs';
+import { interval, Observable } from 'rxjs';
 import { ParamsVuelos } from 'src/app/Component/home-page/resultados/models/resultados.interfaces';
+import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
 import { DisponibilidadPayload } from 'src/app/shared/components/flights/models/flights.class';
 import { EnumCabins, EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
 import { objectToQueryString, toUp } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
+import { FlightService } from '../flight/flight.service';
 import { IDestinos } from './destino.models';
 import { DestinosService } from './services/destinos.service';
 
 
 export interface IVueloDestino {
-  IataCode:        string;
-  OriginCode:      string;
-  Origin:          string;
+  IataCode: string;
+  OriginCode: string;
+  Origin: string;
   DestinationCode: string;
-  Destination:     string;
-  Rate:            number;
-  Tax:             number;
-  Total:           number;
-  DateStart:       string;
-  DateEnd:         string;
-  SearchTime:      string;
+  Destination: string;
+  Rate: number;
+  Tax: number;
+  Total: number;
+  DateStart: string;
+  DateEnd: string;
+  SearchTime: string;
 }
 
 
@@ -45,10 +47,14 @@ export class DestinosComponent implements OnInit {
 
   vuelos: IDestinos[];
 
+  $aereolineas: Observable<IAereolineas[]>;
+
   constructor(
     private ar: ActivatedRoute,
-    private router:Router,
-    private service: DestinosService
+    private router: Router,
+    private service: DestinosService,
+    private flightService: FlightService,
+    private _router: Router
   ) {
     this.site = "nm_viajes";
     this.isFlight = false;
@@ -60,6 +66,7 @@ export class DestinosComponent implements OnInit {
       this.loadCiudad(param)
     })
 
+    this.loadAereolineas();
     this.slider();
   }
 
@@ -81,20 +88,27 @@ export class DestinosComponent implements OnInit {
   }
 
 
-// http://52.177.246.241/#/nmviajes/vuelos/resultados?flightType=1&departureLocation=LIM%20Lima,%20Per%C3%BA&arrivalLocation=MAD%20Madrid%20(Todos%20Los%20Aeropuertos),%20Espa%C3%B1a&departureDate=2022-04-21&arrivalDate=2022-04-24&adults=1&children=1&infants=1
-// MotorvuelosFront
+  // http://52.177.246.241/#/nmviajes/vuelos/resultados?flightType=1&departureLocation=LIM%20Lima,%20Per%C3%BA&arrivalLocation=MAD%20Madrid%20(Todos%20Los%20Aeropuertos),%20Espa%C3%B1a&departureDate=2022-04-21&arrivalDate=2022-04-24&adults=1&children=1&infants=1
+  // MotorvuelosFront
 
-
-generateParams(v:IVueloDestino){
-
-    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${v.OriginCode} ${v.Origin}`, `${v.DestinationCode} ${v.Destination}`, v.DateStart,v.DateEnd,"1","0","0",EnumCabins.economico);
-    
+  loadAereolineas() {
+    this.$aereolineas = this.flightService.getAereolineas();
   }
 
-  buscarVuelo(vuelo:IVueloDestino){
+  toLine(e: any) {
+    this._router.navigateByUrl('/aerolineas')
+  }
+
+  generateParams(v: IVueloDestino) {
+
+    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${v.OriginCode} ${v.Origin}`, `${v.DestinationCode} ${v.Destination}`, v.DateStart, v.DateEnd, "1", "0", "0", EnumCabins.economico);
+
+  }
+
+  buscarVuelo(vuelo: IVueloDestino) {
     const params = this.generateParams(vuelo);
 
-    this.router.navigate(['/vuelos/resultados'], { queryParams: params});
+    this.router.navigate(['/vuelos/resultados'], { queryParams: params });
   }
 
   slider() {
