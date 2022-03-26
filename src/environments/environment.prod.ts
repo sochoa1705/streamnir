@@ -29,7 +29,7 @@ export const environment = {
   urlIframeMotorVuelos: "http://52.177.246.241/#/nmviajes/search/resultados",
 
 
-  urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',               
+  urlBase: 'https://10.75.131.17:10508/api/productoAsistencia/',               
 
 
 
