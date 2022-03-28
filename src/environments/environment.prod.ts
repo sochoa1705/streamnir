@@ -15,7 +15,8 @@ export const environment = {
     let fehcaHoy = `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
     return fehcaHoy
   },
-  urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
+  urlPaqueteDinamico: 'https://nm-viajes.paquetedinamico.com/',
+  // urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
 
