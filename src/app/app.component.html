@@ -19,25 +19,23 @@
         <mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMediaLogin($event)">
           <!-- PERSONAL -->
 
-          <!-- hugosanchez@expertiatravel.com -->
-
           <mat-tab label="Personal">
             <form #formUser="ngForm" (ngSubmit)="formUser.form.valid" action="">
-              <div class="elementRow">
-                <input type="text" email class="form-control" name="email" [(ngModel)]="login.email" placeholder="Email"
-                  required>
-                <div class="msgError">Ingresa tu email</div>
+              <div class="elementRow" [ngClass]="{'error': loginPEmail.invalid && submitPerson}">
+                <input #loginPEmail="ngModel" type="text" email class="form-control" name="email"
+                  [(ngModel)]="login.email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" placeholder="Email" required>
+                <div *ngIf="loginPEmail.invalid" class="msgError">Ingresa tu email</div>
               </div>
-              <div class="elementRow">
-                <input type="password" #passwordP class="form-control" name="password" [(ngModel)]="login.password"
-                  placeholder="Contraseña" required>
-                <div class="msgError">Ingresa tu contraseña</div>
+
+              <div class="elementRow" [ngClass]="{'error': loginPPassword.invalid && submitPerson}">
+                <input #loginPPassword="ngModel" type="password" #passwordP class="form-control" name="password"
+                  [(ngModel)]="login.password" placeholder="Contraseña" required>
+
+                <div *ngIf="loginPPassword.invalid" class="msgError">Ingresa tu contraseña</div>
                 <div (click)="togglePassword(passwordP)" class="iconPass">
                   <img src="./assets/modal/eye.png" alt="">
                 </div>
               </div>
-
-              <!-- <span class="sp-message">Ocurrio un error</span> -->
 
               <div class="row mx-0">
                 <div class="col-6">
@@ -73,14 +71,17 @@
                   pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" placeholder="Email" required>
                 <div *ngIf="loginBEmail.invalid" class="msgError">Ingresa tu email</div>
               </div>
+
               <div class="elementRow" [ngClass]="{'error': loginBPassword.invalid && submitBusiness}">
                 <input #loginBPassword="ngModel" type="password" class="form-control" #passwordB name="password"
                   [(ngModel)]="loginB.password" placeholder="Contraseña" required>
+
                 <div *ngIf="loginBPassword.invalid" class="msgError">Ingresa tu contraseña</div>
                 <div (click)="togglePassword(passwordB)" class="iconPass">
                   <img src="./assets/modal/eye.png" alt="">
                 </div>
               </div>
+
               <div class="row mx-0">
                 <div class="col-6">
                   <mat-checkbox [(ngModel)]="loginB.recorder" name="recorder" class="example-margin">
@@ -248,23 +249,23 @@
 
             <!-- <h5>Form Valid: {{ personalAccountForm.valid }}</h5>
 
-                        <h5>Form Errors</h5>
-                        <pre>{{ personalAccountForm.errors | json }}</pre>
+              <h5>Form Errors</h5>
+              <pre>{{ personalAccountForm.errors | json }}</pre>
 
-                        <h5>Json</h5>
-                        <pre> {{ personalAccountForm.value | json }}</pre>
+              <h5>Json</h5>
+              <pre> {{ personalAccountForm.value | json }}</pre>
 
-                        <h5>FirstName</h5>
-                        <pre>{{ personalAccountForm.controls.firstName.errors | json }}</pre>
+              <h5>FirstName</h5>
+              <pre>{{ personalAccountForm.controls.firstName.errors | json }}</pre>
 
-                        <h5>Email</h5>
-                        <pre>{{ personalAccountForm.controls.email.errors | json }}</pre>
+              <h5>Email</h5>
+              <pre>{{ personalAccountForm.controls.email.errors | json }}</pre>
 
-                        <h5>Password</h5>
-                        <pre>{{ personalAccountForm.controls.password.errors | json }}</pre>
+              <h5>Password</h5>
+              <pre>{{ personalAccountForm.controls.password.errors | json }}</pre>
 
-                        <h5>Repeat Password</h5>
-                        <pre>{{ personalAccountForm.controls.repeatPassword.errors | json }}</pre> -->
+              <h5>Repeat Password</h5>
+              <pre>{{ personalAccountForm.controls.repeatPassword.errors | json }}</pre> -->
 
 
           </mat-tab>
