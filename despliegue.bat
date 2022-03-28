@@ -21,8 +21,6 @@ echo "Desplegando al app"
 powershell -Command "kubectl replace -f deployment.yaml --force"
 powershell -Command "kubectl replace -f service.yaml --force"
 
-cls
-
 echo  %USERNAME% la aplicacion se desplego correctamente
 
 powershell -Command "kubectl get service nmviajes-balancer"
