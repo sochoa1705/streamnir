@@ -74,7 +74,6 @@ export class DestinosComponent implements OnInit {
     this.codigoCiudad = param.codigoCiudad || '';
 
     this.service.getVuelos(this.codigoCiudad).subscribe(data => {
-      debugger
       this.vuelos = data;
 
       this.origen = data[0].Origin;
