@@ -3,10 +3,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { interval, Observable } from 'rxjs';
 import { ParamsVuelos } from 'src/app/Component/home-page/resultados/models/resultados.interfaces';
 import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
-import { DisponibilidadPayload } from 'src/app/shared/components/flights/models/flights.class';
 import { EnumCabins, EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
-import { objectToQueryString, toUp } from 'src/app/shared/utils';
-import { environment } from 'src/environments/environment';
+import { toUp } from 'src/app/shared/utils';
 import { FlightService } from '../flight/flight.service';
 import { IDestinos } from './destino.models';
 import { DestinosService } from './services/destinos.service';
@@ -45,13 +43,15 @@ export class DestinosComponent implements OnInit {
   site: string = "";
   isFlight: boolean = false;
 
-  vuelos: IDestinos[];
+  limit: number = 5;
+
+  //vuelos: IDestinos[] = new Array();
+  vuelos: any;
 
   $aereolineas: Observable<IAereolineas[]>;
 
   constructor(
-    private ar: ActivatedRoute,
-    private router: Router,
+    private _activatedRoute: ActivatedRoute,
     private service: DestinosService,
     private flightService: FlightService,
     private _router: Router
@@ -62,7 +62,7 @@ export class DestinosComponent implements OnInit {
 
   ngOnInit(): void {
     toUp()
-    this.ar.params.subscribe(param => {
+    this._activatedRoute.params.subscribe(param => {
       this.loadCiudad(param)
     })
 
@@ -74,6 +74,7 @@ export class DestinosComponent implements OnInit {
     this.codigoCiudad = param.codigoCiudad || '';
 
     this.service.getVuelos(this.codigoCiudad).subscribe(data => {
+      debugger
       this.vuelos = data;
 
       this.origen = data[0].Origin;
@@ -100,7 +101,7 @@ export class DestinosComponent implements OnInit {
   buscarVuelo(vuelo: IVueloDestino) {
     const params = this.generateParams(vuelo);
 
-    this.router.navigate(['/vuelos/resultados'], { queryParams: params });
+    this._router.navigate(['/vuelos/resultados'], { queryParams: params });
   }
 
   slider() {
@@ -112,18 +113,23 @@ export class DestinosComponent implements OnInit {
   }
 
   id: any = "option1";
+
   showOption(ids: any) {
     this.id = ids;
   }
 
   counter: number = 1;
   counterMovil: number = 1;
+
   nextBtn() {
     this.counter < 3 ? this.counter++ : this.counter = 1;
   }
+
   afterBtn() {
     this.counter > 1 ? this.counter-- : this.counter = 3;
   }
+
+  viewMoreOffers(): void {
+    this.limit = this.limit + 5;
+  }
 }
-
-
