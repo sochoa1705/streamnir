@@ -273,6 +273,10 @@ export class LibroReclamacionesComponent implements OnInit {
   checkSelect(value: boolean) {
     this.isChecked = value;
   }
+  aAyuda() {
+   let link = 'https://ayuda.nmviajes.com/support/home'
+   window.location.href = link;
+  }
   addTag() {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
