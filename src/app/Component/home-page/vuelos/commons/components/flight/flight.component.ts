@@ -13,6 +13,7 @@ import { IFlightRates, IVuelos, TYPE_PARAM } from './flight.models';
 import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
 import { NMRequest } from 'src/app/Models/base/NMRequest';
 import { take } from 'rxjs/operators';
+import { toUp } from '../../../../../../shared/utils';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class FlightComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    toUp()
     this.listDestiny()
     this.OfertaVuelos();
 

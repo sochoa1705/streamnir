@@ -39,8 +39,10 @@ export class MainService {
     {
       id: 4,
       text: "Autos",
-      link: "filtro",
+      // link: "filtro",
+      link: "https://autos.nmviajes.com/es/site/",
       header: true,
+      external: true,
       tab: 'autos',
       icon: '/assets/menu/auto.svg'
     },
