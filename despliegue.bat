@@ -18,11 +18,11 @@ echo "Subiendo la imagen"
 powershell -Command "docker push expertiafrontendreg.azurecr.io/nmviajes"
 
 echo "Desplegando al app"
-powershell -Command "kubectl replace -f deployment.yaml --force"
-powershell -Command "kubectl replace -f service.yaml --force"
+powershell -Command "kubectl apply -f nmviajes.yaml -n nmviajes"
+powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n nmviajes"
 
 echo  %USERNAME% la aplicacion se desplego correctamente
 
-powershell -Command "kubectl get service nmviajes-balancer"
+powershell -Command "kubectl get ingress -n nmviajes"
 
 pause

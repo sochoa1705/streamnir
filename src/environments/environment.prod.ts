@@ -27,7 +27,7 @@ export const environment = {
   urlNewsletter: 'https://servicio.nmviajes.com:9443/suscripcion',
   urlSeguros: 'https://servicio.nmviajes.com:9443/segurosrv/',
   urlGeo: "http://20.75.62.133",
-  urlIframeMotorVuelos: "http://52.177.246.241/#/nmviajes/search/resultados",
+  urlIframeMotorVuelos: "https://motorwl.expertiatravel.com/#/nmviajes/search/resultados",
 
 
   urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',               
