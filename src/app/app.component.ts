@@ -66,6 +66,8 @@ export class AppComponent implements OnInit {
   submitBusiness = false;
   submitPerson = false;
 
+  message: string = '';
+
   constructor(
     private _popUpSubject: PopupService,
     private _authService: SocialAuthService,
@@ -470,15 +472,12 @@ export class AppComponent implements OnInit {
   closeModalRecovery() {
     const btn = document.getElementById("btncloseRecovery");
 
-
     if (!btn) {
       return;
     }
 
     btn.click();
   }
-
-
 
   getPassword(email: string) {
 
@@ -494,6 +493,7 @@ export class AppComponent implements OnInit {
       this.closeLoading();
       if (resp.IsSuccess) {
         this.closeModalRecovery();
+        this.message = resp.Message;
         this.toggleModalGetPass();
       } else {
         this.notification.showNotificacion("Error", resp.Message, 10);
@@ -594,9 +594,4 @@ export class AppComponent implements OnInit {
       }
     })
   }
-
-
-
-
-
 }
