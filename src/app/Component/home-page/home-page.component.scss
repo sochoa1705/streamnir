@@ -1,4 +1,4 @@
-.card{
+.card {
     &__content {
         position: relative;
         height: 372px;
@@ -7,7 +7,7 @@
         @media (max-width: 768px) {
             height: 180px;
         }
-        &>img{
+        &>img {
             border-radius: 2px;
             position: absolute;
             object-fit: cover;
@@ -22,22 +22,23 @@
         }
     }
 }
-.col-md-3{
+
+.col-md-3 {
     @media (min-width: 768px) {
         width: 25%;
     }
 }
 
-.carousel-item{
+.carousel-item {
     @media (min-width: 768px) {
         display: block;
         margin-right: 0;
-        transition:none;
+        transition: none;
     }
 }
 
-.carousel-inner{
-    &.row{
+.carousel-inner {
+    &.row {
         @media (max-width: 768px) {
             --bs-gutter-x: 0!important;
         }
@@ -47,13 +48,13 @@
     }
 }
 
-.carousel-indicators button{
+.carousel-indicators button {
     border: 1px solid white;
     background: red;
     border-radius: 50%;
     width: 10px;
     height: 10px;
-    &.active{
+    &.active {
         background: white;
     }
 }
