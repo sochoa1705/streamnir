@@ -17,12 +17,13 @@ powershell -Command "docker tag nmviajes expertiafrontendreg.azurecr.io/nmviajes
 echo "Subiendo la imagen"
 powershell -Command "docker push expertiafrontendreg.azurecr.io/nmviajes"
 
-echo "Desplegando al app"
-powershell -Command "kubectl apply -f nmviajes.yaml -n nmviajes"
-powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n nmviajes"
+@REM echo "Desplegando al app"
+@REM powershell -Command "kubectl apply -f nmviajes.yaml -n nmviajes"
+@REM powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n nmviajes"
 
 echo  %USERNAME% la aplicacion se desplego correctamente
 
-powershell -Command "kubectl get ingress -n nmviajes"
+powershell -Command "kubectl delete --all pods --namespace=nmviajes"
+powershell -Command "kubectl get pods -n nmviajes"
 
 pause

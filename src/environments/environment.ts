@@ -30,10 +30,13 @@ export const environment = {
   urlNmviajesAccount: "https://servicio.nmviajes.com:9443/ZonaPrivada",
   urlNewsletter: 'https://servicio.nmviajes.com:9443/suscripcion',
   urlSeguros: 'https://servicio.nmviajes.com:9443/segurosrv/',
-  urlGeo: "http://20.75.62.133",
+  urlGeo: "https://motorvuelos.expertiatravel.com/mv",
   urlIframeMotorVuelos: "https://motorwl.expertiatravel.com/#/nmviajes/search/resultados",
   urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',               
   serverUrlApi: 'http://localhost:8080/api/'
+
+
+  // https://motorvuelos.expertiatravel.com/mv/ubigeo/geotree/{city}
 
 
 // https://servicio.nmviajes.com:9443/segurosrv/index.html
