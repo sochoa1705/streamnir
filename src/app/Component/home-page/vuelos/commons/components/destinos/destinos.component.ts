@@ -54,7 +54,7 @@ export class DestinosComponent implements OnInit {
     private flightService: FlightService,
     private _router: Router
   ) {
-    this.site = "nm_viajes";
+    this.site = "nmviajes";
     this.isFlight = false;
   }
 
