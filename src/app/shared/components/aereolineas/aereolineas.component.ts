@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { interval } from 'rxjs';
+import { Router } from '@angular/router';
+import { interval, Observable } from 'rxjs';
+import { FlightService } from 'src/app/Component/home-page/vuelos/commons/components/flight/flight.service';
 import { IAereolineas } from './aereolineas.interfaces';
 
 
@@ -12,23 +14,23 @@ function isMobile() {
   templateUrl: './aereolineas.component.html',
   styleUrls: ['./aereolineas.component.scss'],
 })
-export class AereolineasComponent {
+export class AereolineasComponent implements OnInit {
   private _aereolineas: IAereolineas[];
 
   /* codigo para los sliders de las compañias */
   counter: number = 1;
   counterMovil: number = 1;
 
-  public maxCounter= 1;
-  public maxCounterMobile= 1;
+  public maxCounter = 1;
+  public maxCounterMobile = 1;
 
-  public imagenesPorSilder= 6;
-  public imagenesPorSilderMobile= 3;
+  public imagenesPorSilder = 6;
+  public imagenesPorSilderMobile = 3;
 
-  maxCounterArray:number[]= [];
-  maxCounterArrayMobile:number[]= [];
+  maxCounterArray: number[] = [];
+  maxCounterArrayMobile: number[] = [];
 
-  tiempoSlider:number | null;
+  tiempoSlider: number | null;
 
   isMobile = isMobile();
 
@@ -45,19 +47,34 @@ export class AereolineasComponent {
 
   @Output() redirigir = new EventEmitter<IAereolineas>();
 
-  constructor() {}
+  $aereolineas: Observable<IAereolineas[]>;
+
+  constructor(
+    private _router: Router,
+    private flightService: FlightService
+  ) {
+
+  }
+
+  ngOnInit(): void {
+    this.loadAereolineas();
+  }
+
+  loadAereolineas() {
+    this.$aereolineas = this.flightService.getAereolineas();
+  }
 
   calculateSlider(aereolineas: IAereolineas[]) {
     const nroData = aereolineas.length;
-    this.maxCounter = Math.ceil(nroData/this.imagenesPorSilder);
-    this.maxCounterMobile = Math.ceil(nroData/this.imagenesPorSilderMobile);
+    this.maxCounter = Math.ceil(nroData / this.imagenesPorSilder);
+    this.maxCounterMobile = Math.ceil(nroData / this.imagenesPorSilderMobile);
 
-    this.maxCounterArray = Array(this.maxCounter).fill(1).map((x,i)=>i+1);
-    this.maxCounterArrayMobile = Array(this.maxCounterMobile).fill(1).map((x,i)=>i+1);
+    this.maxCounterArray = Array(this.maxCounter).fill(1).map((x, i) => i + 1);
+    this.maxCounterArrayMobile = Array(this.maxCounterMobile).fill(1).map((x, i) => i + 1);
 
     // Entran 12 imagenes por slider
 
-    if(this.tiempoSlider){
+    if (this.tiempoSlider) {
       const contador = interval(this.tiempoSlider);
       contador.subscribe((n) => {
         this.counter < this.maxCounter ? this.counter++ : (this.counter = 1);
@@ -73,8 +90,7 @@ export class AereolineasComponent {
     this.counter > 1 ? this.counter-- : (this.counter = this.maxCounter);
   }
 
-  toLine(aereolinea: IAereolineas) {
-    this.redirigir.emit(aereolinea);
-    // this.route.navigateByUrl('/home/aerolineas')
+  toLine(entity: IAereolineas) {
+    this._router.navigateByUrl(`/aerolineas/${entity.IataCode}`);
   }
 }

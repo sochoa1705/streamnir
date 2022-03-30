@@ -4,8 +4,8 @@ echo Hola %USERNAME%
 set name="nmviajes"
 set url=%CD%
 
-echo "Haciendo el build de la aplicacion"
-powershell -Command "npm run build"
+REM echo "Haciendo el build de la aplicacion"
+REM powershell -Command "npm run build"
 
 echo "Logueandose en el Container"
 powershell -Command "az acr login -n expertiafrontendreg"
@@ -17,14 +17,13 @@ powershell -Command "docker tag nmviajes expertiafrontendreg.azurecr.io/nmviajes
 echo "Subiendo la imagen"
 powershell -Command "docker push expertiafrontendreg.azurecr.io/nmviajes"
 
-echo "Desplegando al app"
-powershell -Command "kubectl replace -f deployment.yaml --force"
-powershell -Command "kubectl replace -f service.yaml --force"
-
-cls
+@REM echo "Desplegando al app"
+@REM powershell -Command "kubectl apply -f nmviajes.yaml -n nmviajes"
+@REM powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n nmviajes"
 
 echo  %USERNAME% la aplicacion se desplego correctamente
 
-powershell -Command "kubectl get service nmviajes-balancer"
+powershell -Command "kubectl delete --all pods --namespace=nmviajes"
+powershell -Command "kubectl get pods -n nmviajes"
 
 pause

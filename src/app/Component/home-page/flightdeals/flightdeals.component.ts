@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { FlightService } from 'src/app/api/api-nmviajes/services/flight.service';
 import { Guid } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
-import { isThisTypeNode } from 'typescript';
 
 @Component({
   selector: 'app-flightdeals',

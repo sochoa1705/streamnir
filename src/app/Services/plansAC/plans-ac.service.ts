@@ -15,7 +15,7 @@ export class PlansACService {
   ) { }
 
   plansAC(payload: any): Observable<any> {
-    let url_api = `${environment.urlBase}${ENDPOINT_API.PLANSAC}`;
+    let url_api = `${environment.url_api}${ENDPOINT_API.PLANSAC}`;
 
     return this.http.post<any>(url_api, payload, { observe: 'response' }).pipe(
       map((observe: any) => observe['body']['Resultado'])
