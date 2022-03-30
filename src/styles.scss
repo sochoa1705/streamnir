@@ -5141,6 +5141,7 @@
         }
         .footerTable {
             margin: 40px 0;
+            padding-bottom: 20px;
             .text {
                 font-family: Montserrat;
                 font-size: 14px;
@@ -8209,6 +8210,7 @@
         }
     }
     
+
     app-flightdeals {
         button {
             background: none !important;
@@ -8220,7 +8222,7 @@
             }
         }
     }
-    
-    // .modal-backdrop {
-    //     display: none;
-    //   }
+
+    .modal-backdrop {
+        display: none;
+      }
