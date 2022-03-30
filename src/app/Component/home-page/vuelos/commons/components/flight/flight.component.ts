@@ -7,10 +7,13 @@ import { ListaTarifaRequest } from 'src/app/Models/Request/ListaTarifasRequest';
 import { SignatureModel } from 'src/app/Models/Request/SignatureModel';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 
-import { interval, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FlightService } from './flight.service';
 import { IFlightRates, IVuelos, TYPE_PARAM } from './flight.models';
 import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
+import { NMRequest } from 'src/app/Models/base/NMRequest';
+import { take } from 'rxjs/operators';
+import { toUp } from '../../../../../../shared/utils';
 
 
 @Component({
@@ -21,8 +24,7 @@ import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.
 export class FlightComponent implements OnInit {
 
   public OfertaVuelosRequest: ListaTarifaRequest = new ListaTarifaRequest();
-  //  ListaTarifa : any;
-
+  destiny: any = []
   $vuelosInternacionales: Observable<IFlightRates[]>;
   $vuelosNacionales: Observable<IFlightRates[]>;
   $aereolineas: Observable<IAereolineas[]>;
@@ -32,19 +34,19 @@ export class FlightComponent implements OnInit {
     public route: Router,
     public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
-    // private coreService: DestinyService,
-    private flightService: FlightService
+    private flightService: FlightService,
+    public destinyService: DestinyService,
   ) { }
 
   ngOnInit(): void {
-
+    toUp()
+    this.listDestiny()
     this.OfertaVuelos();
 
     this.loadVuelosInternacionales();
     this.loadVuelosNacionales();
     this.loadAereolineas();
     this.loadVuelos();
-
   }
 
   loadVuelosInternacionales() {
@@ -63,7 +65,6 @@ export class FlightComponent implements OnInit {
   toLine(e: any) {
     this.route.navigateByUrl('/aerolineas')
   }
-
 
   OfertaVuelos() {
     this.OfertaVuelosRequest.IdLang = 1;
@@ -94,7 +95,6 @@ export class FlightComponent implements OnInit {
   }
 
   redirigirVuelo(vuelo: IVuelos) {
-
     console.log(vuelo);
     this.route.navigate(['/vuelos/', vuelo.Slug])
   }
@@ -105,5 +105,17 @@ export class FlightComponent implements OnInit {
   }
 
   /* end code */
+  listDestiny() {
+    let payload = new NMRequest();
 
+    this.destinyService.getDestiny(payload).pipe(take(1)).subscribe({
+      next: (response) => {
+        this.destiny = response['Resultado']
+        localStorage.setItem('destiny', JSON.stringify(this.destiny));
+        console.log(this.destiny)
+      },
+      error: error => console.log(error),
+    }
+    )
+  }
 }

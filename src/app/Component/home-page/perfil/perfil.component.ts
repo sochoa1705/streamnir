@@ -70,6 +70,7 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setAnios()
     this.addTag()
     this.getCountries()
     this.listPreferent = [
@@ -370,7 +371,7 @@ export class PerfilComponent implements OnInit {
   toggleModalEliminar() {
     const modal = document.getElementById("ModalEliminaCorreo");
 
-    if (!modal) {
+    if (!modal) { 
       return;
     }
 
@@ -430,5 +431,13 @@ export class PerfilComponent implements OnInit {
       'virtualPagePath': '/perfil',
       'virtualPageTitle': 'Perfil'
     })
+  }
+  anios: any = []
+  setAnios() {
+    var d = new Date()
+    var n = d.getFullYear()
+    for(var i = n; i >= 1900; i--) {
+      this.anios.push(i)
+    }
   }
 }

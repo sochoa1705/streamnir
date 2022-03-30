@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { toUp } from '../../../shared/utils';
 
 @Component({
   selector: 'app-politicas',
@@ -10,6 +11,7 @@ export class PoliticasComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    toUp()
   }
 
 }

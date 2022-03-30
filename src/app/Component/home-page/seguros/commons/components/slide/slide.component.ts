@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PackagesService } from 'src/app/Services/mock/packages.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-slide',
@@ -10,8 +10,8 @@ import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-p
 export class SlideComponent implements OnInit {
 
   constructor(
-    public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
+    public route: Router,
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +25,12 @@ export class SlideComponent implements OnInit {
       'virtualPagePath': '/seguros',
       'virtualPageTitle': 'Seguros'
     })
+  }
+
+  portalAyuda() {
+    // this.route.navigateByUrl("https://ayuda.nmviajes.com/support/home")
+    // window.location.href="https://ayuda.nmviajes.com/support/home"
+    window.open("https://ayuda.nmviajes.com/support/home", "_blank")
   }
 
 }

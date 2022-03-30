@@ -111,6 +111,12 @@
     }
     & .hidden {
         display: none;
+        @media (max-width: 768px) {
+            display: block;
+            margin: auto;
+            font-size: 16px;
+            font-weight: 600;
+        }
     }
     &:hover .hidden {
         display: inline-block;

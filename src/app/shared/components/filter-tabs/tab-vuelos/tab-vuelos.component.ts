@@ -131,7 +131,7 @@ export class TabVuelosComponent implements OnInit {
 
       const elementFind = nuevoArray.find(item => item.id == x.aerocodiata);
 
-      if (!elementFind && x.tn_iata_padre == "0") {
+      if (!elementFind && x.tn_iata_padre_fn == "0") {
         const obj = {
           id: x.aerocodiata,
           codigo: x.city_code,
@@ -139,7 +139,7 @@ export class TabVuelosComponent implements OnInit {
           children: []
         }
         nuevoArray.push(obj)
-      } else if (!elementFind && x.tn_iata_padre == "2") {
+      } else if (!elementFind && x.tn_iata_padre_fn == "2") {
 
         const obj = {
           id: x.aerocodiata,
@@ -157,7 +157,7 @@ export class TabVuelosComponent implements OnInit {
 
         nuevoArray.push(obj)
 
-      } else if (elementFind && x.tn_iata_padre == "2") {
+      } else if (elementFind && x.tn_iata_padre_fn == "2") {
 
         elementFind.children.push(
           {

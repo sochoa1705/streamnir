@@ -7,6 +7,8 @@ import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng
 import { Injectable } from '@angular/core';
 import { NgbDateAdapter, } from '@ng-bootstrap/ng-bootstrap';
 import { FlightsService } from 'src/app/Services/flights/flights.service';
+import { NotificationService } from 'src/app/Services/notification.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
@@ -116,6 +118,9 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     private dateAdapter: NgbDateAdapter<string>,
     public elementRef: ElementRef,
     private renderer: Renderer2,
+    private _matSnackBar: MatSnackBar,
+    private notification: NotificationService,
+
   ) {
     this.fromDate = null
     this.toDate = null
@@ -171,7 +176,9 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
 
     let age: string = this.form.getRawValue()['passenger'][0]['age']
     if (age === undefined || age === null || age.trim() === '') {
+      this.notification.showNotificacion("Error", "Debe ingresar la edad del pasajero", 10)
       this.errors.push({ name: this.MSG_CUSTOMERS, message: 'Debe ingresar la edad' })
+      this.showPasajero()
     }
 
     let destinoSafe: string = this.form.getRawValue()['destinoSafe']
@@ -305,12 +312,12 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       console.log(this.ageCustomers);
 
 
-      let omac2 = { 'Edad': String(age), 'FechaNacimiento': String(dayFech + '/' + monthFech + '/' + yearFech) }
-      // omac.push(omac2)
-      console.log(omac2);
+      let newStr = { 'Edad': String(age), 'FechaNacimiento': String(dayFech + '/' + monthFech + '/' + yearFech) }
+      // omac.push(newStr)
+      console.log(newStr);
       //  console.log(fech);
       //  console.log(age);
-      this.ClienteCotizacion.push(omac2)
+      this.ClienteCotizacion.push(newStr)
       //  console.log(this.form.controls);
     }
     // console.log(this.form.controls['passenger'].value[0].age);

@@ -61,10 +61,12 @@ export class AppComponent implements OnInit {
 
   personalAccountForm: FormGroup;
   businessAccountForm: FormGroup;
-
+  recoverPasswordForm: FormGroup;
 
   submitBusiness = false;
   submitPerson = false;
+
+  message: string = '';
 
   constructor(
     private _popUpSubject: PopupService,
@@ -105,6 +107,8 @@ export class AppComponent implements OnInit {
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
+    this.recoverPasswordForm = this.createRecoverPasswordForm();
+
 
     // this.personalAccountForm.reset({
     //   email: '',
@@ -157,6 +161,12 @@ export class AppComponent implements OnInit {
     });
   }
 
+  createRecoverPasswordForm(): FormGroup {
+    return this._formBuilder.group({
+      email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]]
+    });
+  }
+
   validatePersonalAccountForm(field: string) {
     return this.personalAccountForm.controls[field].errors
       && this.personalAccountForm.controls[field].touched;
@@ -165,6 +175,11 @@ export class AppComponent implements OnInit {
   validateBusinessAccountForm(field: string) {
     return this.businessAccountForm.controls[field].errors
       && this.businessAccountForm.controls[field].touched;
+  }
+
+  validateRecoverPasswordForm(field: string) {
+    return this.recoverPasswordForm.controls[field].errors
+      && this.recoverPasswordForm.controls[field].touched;
   }
 
   get personalAccountEmailErrorMessage(): string {
@@ -183,6 +198,20 @@ export class AppComponent implements OnInit {
 
   get businessAccountEmailErrorMessage(): string {
     const errors = this.businessAccountForm.get('email')?.errors;
+
+    if (errors?.required) {
+      return 'Ingresa tu email';
+    } else if (errors?.minlength) {
+      return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
+    } else if (errors?.pattern) {
+      return 'El valor ingresado no tiene formato de email.';
+    }
+
+    return '';
+  }
+
+  get recoverPasswordEmailErrorMessage(): string {
+    const errors = this.recoverPasswordForm.get('email')?.errors;
 
     if (errors?.required) {
       return 'Ingresa tu email';
@@ -443,7 +472,6 @@ export class AppComponent implements OnInit {
   closeModalRecovery() {
     const btn = document.getElementById("btncloseRecovery");
 
-
     if (!btn) {
       return;
     }
@@ -451,25 +479,28 @@ export class AppComponent implements OnInit {
     btn.click();
   }
 
-
-
   getPassword(email: string) {
 
     this.initLoading();
 
-    if (email.length <= 5) {
-      this.notification.showNotificacion("Error", "Ingrese email valido", 5);
+    if (this.recoverPasswordForm.invalid) {
+      this.closeLoading();
+      this.recoverPasswordForm.markAllAsTouched();
+      return;
     }
+
     this._accountService.passwordSend(email).subscribe(resp => {
       this.closeLoading();
       if (resp.IsSuccess) {
         this.closeModalRecovery();
+        this.message = resp.Message;
         this.toggleModalGetPass();
       } else {
-        this.notification.showNotificacion("Error", "Error del servidor", 10);
+        this.notification.showNotificacion("Error", resp.Message, 10);
       }
     }, () => {
       this.closeLoading();
+      this.notification.showNotificacion("Error", "Error del servidor", 10);
     })
   }
 
@@ -563,9 +594,4 @@ export class AppComponent implements OnInit {
       }
     })
   }
-
-
-
-
-
 }

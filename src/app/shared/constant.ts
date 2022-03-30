@@ -53,7 +53,7 @@ export enum ENDPOINT_API {
   CARD_PAYMENT = 'v1/api/Insurance',
 
   //CHECKCARD
-  CHECK_CARD = 'v1/api/Card/Check?Parameter.Number=49133712345678900&TrackingCode=qwertyuiiop&MuteExceptions=false&Caller.Company=Agil&Caller.Application=Expertia',
+  CHECK_CARD = 'v1/api/Card/Check',
 
   //CARDPAYMENT
   LIBRO_RECLAMO = 'v1/api/Complaint',
@@ -72,10 +72,14 @@ export enum ENDPOINT_API {
 
   // DISTRICTS
   DISTRICTS = 'v1/api/Master/Soap/Districts',
+
+  // NEWSLETTER
+  NEWSLETTER = 'v1/api/Newsletter',
 }
 
 export enum ROUTE_VIAJES {
   RUTA_PAQUETES = 'https://nmviajes.paquetedinamico.com/ES/holidays/search',
+  RUTA_AUTOS = 'https://autos.nmviajes.com/es/site/',
   RUTA_GET = 'https://nmviajes.paquetedinamico.com/home'
 }
 

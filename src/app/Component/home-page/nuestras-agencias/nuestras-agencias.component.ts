@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { toUp } from '../../../shared/utils';
 
 @Component({
   selector: 'app-nuestras-agencias',
@@ -48,6 +49,7 @@ export class NuestrasAgenciasComponent implements OnInit {
     this.agenciaView(1)
   }
   ngOnInit(): void {
+    toUp()
     this.addTag()
   }
   agenciaView(id: number) {

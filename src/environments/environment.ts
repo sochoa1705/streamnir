@@ -5,10 +5,7 @@
 export const environment = {
   production: false,
   // urlBase: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',  // PRODUCCIÓN
-  urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',
   muteExceptions: false,                 // DESARROLLO
-  serverUrlApi: 'http://localhost:8080/api/',
-  urlLogin: 'http://localhost:64238/login',
   nameAppAC: 'Intranet',
   identifierAC: 'NMViajes - Assist Card',
   codeEnvironmentAC: 'PROD/NMO/NMO',
@@ -22,16 +19,29 @@ export const environment = {
     let fehcaHoy = `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
     return fehcaHoy
   },
-  urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
-  urlNmviajes: "http://10.75.102.23:10001/v1/api",
-  urlGeo: "http://10.75.131.17:10515",
-  urlMaster: "http://10.75.131.17",
-  urlLibro: "http://10.75.102.23:10007/",
-  urlApiTickets: "http://10.75.102.23:10009",
-  urlApiHotels: "http://10.75.102.23:10008",
-  urlNmviajesAccount: "http://10.75.102.23:10006",
-  urlIframeMotorVuelos: "http://52.177.246.241/#/nmviajes/search/resultados"
-};
+  urlPaqueteDinamico: 'https://nm-viajes.paquetedinamico.com/',
+  // /home
+
+  urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
+
+  urlLibro: "https://servicio.nmviajes.com:9443/libroreclamacion",
+  urlApiTickets: "https://servicios.expertiatravel.com/widgetactividades",
+  urlApiHotels: "https://servicios.expertiatravel.com/widgethotel",
+  urlNmviajesAccount: "https://servicio.nmviajes.com:9443/ZonaPrivada",
+  urlNewsletter: 'https://servicio.nmviajes.com:9443/suscripcion',
+  urlSeguros: 'https://servicio.nmviajes.com:9443/segurosrv/',
+  urlGeo: "https://motorvuelos.expertiatravel.com/mv",
+  urlIframeMotorVuelos: "https://motorwl.expertiatravel.com/#/nmviajes/search/resultados",
+  urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',               
+  serverUrlApi: 'http://localhost:8080/api/'
+
+
+  // https://motorvuelos.expertiatravel.com/mv/ubigeo/geotree/{city}
+
+
+// https://servicio.nmviajes.com:9443/segurosrv/index.html
+
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

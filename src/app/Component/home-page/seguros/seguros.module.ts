@@ -16,6 +16,7 @@ import { PlansModule } from './commons/components/plans/plans.module';
 import { SafebannerModule } from 'src/app/shared/components/safebanner/safebanner.module';
 import { PlansACService } from '../../../Services/plansAC/plans-ac.service';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
+import { NotificationModule } from '../../../shared/components/notification/notification.module';
 
 @NgModule({
   declarations: [SegurosComponent],
@@ -31,6 +32,7 @@ import { DestinyService } from '../../../Services/destiny/destiny.service';
     HttpClientModule,
     SlideModule,
     PlansModule,
+    NotificationModule
   ],
   exports: [SegurosComponent],
   providers: [DestinyService, DataPagePresenterService, OffersService, PackagesService]

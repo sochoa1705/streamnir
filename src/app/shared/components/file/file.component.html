@@ -1,6 +1,6 @@
 
 <ng-container *ngIf="!loading">
-    <label  *ngIf="!archivo64  && isErrorImagenUrl" class="perfilCicle pointer" for="file-upload">
+    <label  *ngIf="!archivo64  || isErrorImagenUrl" class="perfilCicle pointer" for="file-upload">
         {{name | slice:0:1}}
             <div class="blueIcon">
                 <ng-container >
@@ -26,8 +26,6 @@
     <label *ngIf="archivo64" class="pointer"  for="file-upload">
         <img style="width: 90px; height: auto;" [src]="archivo64" alt="">
     </label>
-
-
     
     <input id="file-upload" (change)="getFile($event)" type="file" name="myInputFile" style="display:none;" />
 

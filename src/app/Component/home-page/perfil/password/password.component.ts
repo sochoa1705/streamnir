@@ -41,9 +41,9 @@ export class PasswordComponent implements OnInit {
 
   createChangePasswordForm(): FormGroup {
     return this._formBuilder.group({
-      currentPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]],
-      newPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.alphanumericPattern)]]
+      currentPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
+      newPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]]
     }, {
       validators: [this._validatorsService.equalFields('newPassword', 'confirmPassword')]
     });
