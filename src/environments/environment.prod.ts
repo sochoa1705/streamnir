@@ -15,7 +15,8 @@ export const environment = {
     let fehcaHoy = `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
     return fehcaHoy
   },
-  urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
+  urlPaqueteDinamico: 'https://nm-viajes.paquetedinamico.com/',
+  // urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
 
@@ -25,15 +26,14 @@ export const environment = {
   urlNmviajesAccount: "https://servicio.nmviajes.com:9443/ZonaPrivada",
   urlNewsletter: 'https://servicio.nmviajes.com:9443/suscripcion',
   urlSeguros: 'https://servicio.nmviajes.com:9443/segurosrv/',
-  urlGeo: "http://20.75.62.133",
-  urlIframeMotorVuelos: "http://52.177.246.241/#/nmviajes/search/resultados",
+  urlGeo: "https://motorvuelos.expertiatravel.com/mv",
+  urlIframeMotorVuelos: "https://motorwl.expertiatravel.com/#/nmviajes/search/resultados",
 
 
-  urlDestinoSeguros: 'http://10.75.131.17:8091/api/',
-  urlBase: 'http://10.75.131.17:8091/api/productoAsistencia/',
-  // urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',               
-  // url_api: 'http://10.75.131.17:8091/api/',
+  urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',               
   url_api: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',
+
+
   serverUrlApi: 'http://localhost:8080/api/'
 
 

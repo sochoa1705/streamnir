@@ -5141,6 +5141,7 @@
         }
         .footerTable {
             margin: 40px 0;
+            padding-bottom: 20px;
             .text {
                 font-family: Montserrat;
                 font-size: 14px;
@@ -7011,9 +7012,9 @@
                 .msgError {
                     display: none;
                     margin-left: 15px;
-                    font-family: Montserrat;
+                    //font-family: Montserrat;
                     font-weight: 300;
-                    font-size: 12px;
+                    font-size: 11px;
                     line-height: 18px;
                     letter-spacing: 0.25px;
                     color: #F44336;
@@ -7209,7 +7210,8 @@
                             display: none;
                             margin-left: 15px;
                             font-weight: 300;
-                            font-size: 12px;
+                            font-size: 11px;
+                            font-family: Roboto, "Helvetica Neue", sans-serif;
                             line-height: 18px;
                             color: #F44336;
                             margin-bottom: 10px;
@@ -7298,7 +7300,7 @@
                 .recoveryRight {
                     .elementRow {
                         .form-control {
-                            margin-bottom: 40px;
+                            margin-bottom: 30px;
                             @media (max-width: 640px) {
                                 margin-bottom: 35px;
                             }
@@ -7930,16 +7932,13 @@
                         gap: 15px;
                         .form-control,
                         .form-select {
-                            margin-bottom: 20px;
-                            font-family: Montserrat;
+                            margin-bottom: 30px;
+                            //font-family: Montserrat;
                             font-size: 14px; // text-transform: capitalize;
                             // color: #B9BCBF;
                             border-radius: 5px;
                             height: 41px;
                             border: 1px solid #ced4da;
-                        }
-                        .form-select {
-                            //width: calc(100% - 30px);
                         }
                         .form-email-input {
                             text-transform: none;
@@ -8214,4 +8213,20 @@
     .modal-backdrop {
         display: none;
         // z-index:90
+      }
+
+    app-flightdeals {
+        button {
+            background: none !important;
+            @media (max-width: 640px) {
+                background: none !important;
+                &:hover {
+                    background: none !important;
+                }
+            }
+        }
+    }
+
+    .modal-backdrop {
+        display: none;
       }
