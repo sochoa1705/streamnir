@@ -9,6 +9,12 @@ import * as moment from 'moment';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
 import { ROUTE_VIAJES } from '../../constant';
 import { ParamsHoteles, ParamsVueloHotel, PasajerosConHabitacion, PasajerosSinHabitacion, URLHotel, URLVueloHotel } from './tabs.models';
+import { ChangeRQ } from '../../../Models/general/changeRQ.interface';
+import { environment } from '../../../../environments/environment.prod';
+import { NMRequestBy } from '../../../Models/base/NMRequestBy';
+import { DollarChangeService } from '../../../Services/dollarChange/dollar-change.service';
+import { take } from 'rxjs/operators';
+import { NMRequest } from '../../../Models/base/NMRequest';
 export interface State {
   flag: string;
   name: string;
@@ -70,7 +76,8 @@ export class TabsComponent implements OnInit {
     public formatter: NgbDateParserFormatter,
     private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>,
-    private destineService: DestinyService
+    private destineService: DestinyService,
+    public dollarChangeService: DollarChangeService,
   ) {
     this.fromDate = calendar.getToday();
     this.fromDate2 = calendar.getToday();
@@ -262,6 +269,9 @@ export class TabsComponent implements OnInit {
   changeTab(value: MatTabChangeEvent) {
     (value.index == 1) ? this.navigateToResponseUrl(ROUTE_VIAJES.RUTA_PAQUETES) : null;
     (value.index == 4) ? this.navigateToResponseUrl(ROUTE_VIAJES.RUTA_AUTOS) : null;
+    if(value.index == 6) {
+      this.callService();
+    }
   }
 
 
@@ -295,6 +305,37 @@ export class TabsComponent implements OnInit {
       },
       err => console.log(err),
       () => console.log('Ciudades cargadas')
+    )
+  }
+
+  callService(): void {
+    this.getChange();
+    this.listDestiny();
+  }
+
+  getChange() {
+    let lChange: ChangeRQ = {
+      Fecha: environment.today(new Date()),
+      IdMoneda: "SOL",
+      IdEmpresa: "1"
+    }
+    let payload = new NMRequestBy<ChangeRQ>(lChange)
+    this.dollarChangeService.changeDollar(payload).pipe(take(5)).subscribe({
+      next: (response) => {
+        localStorage.setItem('tipoCambio', response);
+      }
+    })
+  }
+
+  listDestiny() {
+    let payload = new NMRequest();
+
+    this.destineService.getDestiny(payload).pipe(take(1)).subscribe({
+      next: (response) => {
+        localStorage.setItem('destiny', JSON.stringify(response['Resultado']));
+      },
+      error: error => console.log(error),
+    }
     )
   }
 

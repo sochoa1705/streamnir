@@ -36,12 +36,11 @@
             "allowedCommonJsDependencies":[
               "moment-precise-range-plugin",
               "rxjs-compat"
-
             ],
             "styles": [
+              "src/styles.scss",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "./node_modules/bootstrap/scss/bootstrap.scss",
-              "src/styles.scss"
+              "./node_modules/bootstrap/scss/bootstrap.scss"
             ],
             "scripts": [
               "./node_modules/bootstrap/dist/js/bootstrap.min.js"
