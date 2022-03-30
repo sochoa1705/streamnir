@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { interval } from 'rxjs';
-import { IAerolineaInf } from './models/aerolineas.interface';
-import { AerolineasService } from './services/aerolineas.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { interval, Observable } from 'rxjs';
+import { AirlineService, FlightService } from 'src/app/api/api-nmviajes/services';
+import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
+import { Guid } from 'src/app/shared/utils';
+import { environment } from 'src/environments/environment';
+import { FlightService as AerolineaService } from '../vuelos/commons/components/flight/flight.service';
+import * as moment from 'moment';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 @Component({
   selector: 'app-aerolineas',
   templateUrl: './aerolineas.component.html',
@@ -10,36 +16,127 @@ import { AerolineasService } from './services/aerolineas.service';
 })
 export class AerolineasComponent implements OnInit {
 
-  public information: IAerolineaInf;
+  $aereolineas: Observable<IAereolineas[]>;
 
-  constructor(private service: AerolineasService) { }
+  airline: any;
+  nationalFlightDeals: any;
+  internationalFlightDeals: any;
+
+  currentDate: string;
+  isNational: boolean = false;
+
+  nationalLimit: number = 5;
+  internationalLimit: number = 5;
+
+  indexTab: number = 0;
+
+  displayGallery: boolean;
+
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1024px',
+      numVisible: 5
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 3
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1
+    }
+  ];
+
+  constructor(
+    private _aerolineaService: AerolineaService,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute,
+    private _airlineService: AirlineService,
+    private _flightService: FlightService
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.addTag()
-    this.loadData();
+    this.loadAereolineas();
+
+    this.currentDate = moment().format('DD/MM/YYYY');
 
     const contador = interval(4000);
+
     contador.subscribe((n) => {
       this.counter < 3 ? this.counter++ : this.counter = 1;
       this.counterMovil < 8 ? this.counterMovil++ : this.counterMovil = 1;
     })
+
+    this._activatedRoute.params.subscribe(params => {
+      this.getAirline(params.code);
+      this.getNationalFlightDeals(params.code);
+      this.getInternationalFlightDeals(params.code);
+    });
   }
 
-  loadData() {
-    this.service.getInformation('LA').subscribe(data => {
-      this.information = data;
-    })
+  getAirline(code: string) {
+    this._airlineService.v1ApiAirlineIataCodeGet({
+      'Parameter.IataCode': code,
+      TrackingCode: Guid(),
+      MuteExceptions: environment.muteExceptions,
+      'Caller.Company': "Agil",
+      'Caller.Application': "Interagencias"
+    }).subscribe((res: any) => {
+      this.airline = JSON.parse(res).Result;
+    });
   }
 
-  id: any = "Internacional";
-  showOption(ids: any) {
-    this.id = ids;
+  getNationalFlightDeals(code: string): void {
+    this._flightService.v1ApiFlightGetLastSearchesByAirlineGet({
+      'Parameter.IataCode': code,
+      'Parameter.Type': 'N',
+      TrackingCode: Guid(),
+      MuteExceptions: environment.muteExceptions,
+      'Caller.Company': "Agil",
+      'Caller.Application': "Interagencias"
+    }).subscribe((res: any) => {
+      debugger
+
+      this.nationalFlightDeals = JSON.parse(res).Result;
+    });
   }
 
-  aeroId: any = "Historia";
-  showOptionAero(ids: any) {
-    this.aeroId = ids;
+  getInternationalFlightDeals(code: string): void {
+    this._flightService.v1ApiFlightGetLastSearchesByAirlineGet({
+      'Parameter.IataCode': code,
+      'Parameter.Type': 'I',
+      TrackingCode: Guid(),
+      MuteExceptions: environment.muteExceptions,
+      'Caller.Company': "Agil",
+      'Caller.Application': "Interagencias"
+    }).subscribe((res: any) => {
+      this.internationalFlightDeals = JSON.parse(res).Result;
+    });
   }
+
+  viewMoreNationalOffers(): void {
+    this.nationalLimit = this.nationalLimit + 5;
+  }
+
+  viewMoreInternationalOffers(): void {
+    this.internationalLimit = this.internationalLimit + 5;
+  }
+
+  activateTab(index: number): void {
+    this.indexTab = index;
+  }
+
+  loadAereolineas() {
+    this.$aereolineas = this._aerolineaService.getAereolineas();
+  }
+
+  // aeroId: any = "Historia";
+  // showOptionAero(ids: any) {
+  //   this.aeroId = ids;
+  // }
 
   /* codigo para los sliders de las compañias */
   counter: number = 1;
@@ -58,5 +155,9 @@ export class AerolineasComponent implements OnInit {
       'virtualPagePath': '/seguros',
       'virtualPageTitle': 'Aerolineas'
     })
+  }
+
+  toLine(entity: IAereolineas) {
+    this._router.navigateByUrl(`/aerolineas/${entity.IataCode}`);
   }
 }

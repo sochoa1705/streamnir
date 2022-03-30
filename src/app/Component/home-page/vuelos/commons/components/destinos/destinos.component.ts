@@ -6,9 +6,7 @@ import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.
 import { EnumCabins, EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
 import { toUp } from 'src/app/shared/utils';
 import { FlightService } from '../flight/flight.service';
-import { IDestinos } from './destino.models';
 import { DestinosService } from './services/destinos.service';
-
 
 export interface IVueloDestino {
   IataCode: string;
@@ -89,8 +87,8 @@ export class DestinosComponent implements OnInit {
     this.$aereolineas = this.flightService.getAereolineas();
   }
 
-  toLine(e: any) {
-    this._router.navigateByUrl('/aerolineas')
+  toLine(entity: IAereolineas) {
+    this._router.navigateByUrl(`/aerolineas/${entity.IataCode}`);
   }
 
   generateParams(v: IVueloDestino) {

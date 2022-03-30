@@ -29,7 +29,7 @@ const routes: Routes = [
       { path: 'comprar', component: ComprarComponent },
       { path: 'vuelos/resultados', component: ResultadosComponent },
       { path: 'conformidad', component: ConformidadComponent },
-      { path: 'aerolineas', component: AerolineasComponent },
+      { path: 'aerolineas/:code', component: AerolineasComponent },
       { path: 'perfil', component: PerfilComponent },
       { path: 'terminos-condiciones', component: TerminosCondicionesComponent },
       { path: 'documentacion-viaje', component: DocumentacionViajeComponent },

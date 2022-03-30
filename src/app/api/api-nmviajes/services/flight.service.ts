@@ -323,7 +323,7 @@ export class FlightService extends BaseService {
   /**
    * Path part for operation v1ApiFlightGetLastSearchesByAirlineGet
    */
-  static readonly V1ApiFlightGetLastSearchesByAirlineGetPath = '/v1/api/Flight/GetLastSearchesByAirline';
+  static readonly V1ApiFlightGetLastSearchesByAirlineGetPath = '/Flight/GetLastSearchesByAirline';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

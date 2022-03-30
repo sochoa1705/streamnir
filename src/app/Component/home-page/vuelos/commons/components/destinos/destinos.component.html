@@ -51,6 +51,7 @@
         <div class="colDestino">Tarifas</div>
         <div class="colDestino"></div>
       </div>
+
       <div class="rowDestino tableDestino" *ngFor="let item of vuelos?.slice(0, limit)">
         <div class="colDestino">
           <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -123,7 +124,7 @@
 
     <div class="rowDestino footerTable">
       <div class="text">Tarifas publicadas sujetos a cambio. Precios basados en disponibilidad. Algunas
-        restricciones y fechas de bloqueo son aplicables. Tarifa no Incluye Gastos Administrativos.</div>
+        restricciones y fechas de bloqueo son aplicables. Tarifa no incluye Gastos Administrativos.</div>
       <div class="masOfertas" *ngIf="limit < vuelos?.length">
         <button class="plus dropdown-toggle" (click)="viewMoreOffers()">Más ofertas</button>
       </div>
@@ -202,8 +203,8 @@
           <img src="./assets/vuelos/company-06.png" alt="">
           <img src="./assets/vuelos/company-07.png" alt="">
         </div>
-        <div class="centerCard">
 
+        <div class="centerCard">
           <a href="https://autos.nmviajes.com/es" target="_blank">
             <div class="btnReservar">Reservar</div>
           </a>

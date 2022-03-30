@@ -1,7 +1,7 @@
 <section class="tabDestino movDestino" *ngIf="destination">
   <div class="tabImgDest">
     <div class="mascara"></div>
-    <img src="./assets/vuelos/madrid.png" alt="">
+    <img [src]="destination.Galleries[0]" alt="">
     <div class="galeriaText">
       <div class="texto" *ngIf="destination.Galleries.length > 1" (click)="displayGallery = true">Ver Galería
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
