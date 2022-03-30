@@ -9,6 +9,7 @@ import { NgbDateAdapter, } from '@ng-bootstrap/ng-bootstrap';
 import { FlightsService } from 'src/app/Services/flights/flights.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as moment from "moment";
 
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
@@ -82,6 +83,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   ageCustomers: any
   // ClienteCotizacion: Array<{'Edad': string; 'FechaNacimiento': string;}> = []
   ClienteCotizacion: Array<any> = []
+  anios: Array<any> = []
   showOption: Boolean = true;
   limitePassenger = false
   limit = 0
@@ -206,27 +208,33 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   }
 
   send() {
+    
     if (this.validForm()) {
+      let fechaSalida = this.FromDate2.nativeElement.value
+      let fechaVuelta = this.ToDate2.nativeElement.value
+      let startDate = moment(fechaSalida, 'D/M/YYYY').format('DD/MM/YYYY')
+      let endDate = moment(fechaVuelta, 'D/M/YYYY').format('DD/MM/YYYY')
       // console.log(this.form);
       // console.log(this.form.controls['passenger'].value[0].age);
       // this.form.removeControl('passenger');
-      this.form.removeControl('fromDate');
-      this.form.removeControl('toDate');
-      this.form.addControl('ClienteCotizacion', new FormControl(this.ClienteCotizacion));
-      this.form.addControl('Edades', new FormControl(this.ageCustomers));
-      this.form.addControl('fromDate', new FormControl(this.FromDate2.nativeElement.value));
-      this.form.addControl('toDate', new FormControl(this.ToDate2.nativeElement.value));
+      this.form.removeControl('fromDate')
+      this.form.removeControl('toDate')
+      this.form.addControl('ClienteCotizacion', new FormControl(this.ClienteCotizacion))
+      this.form.addControl('Edades', new FormControl(this.ageCustomers))
+      this.form.addControl('fromDate', new FormControl(startDate))
+      this.form.addControl('toDate', new FormControl(endDate))
       this.form.removeControl('days')
       this.form.addControl('days', new FormControl(this.diffDays()))
-      this.form.removeControl('destinyString');
-      this.form.addControl('destinyString', new FormControl(this.destinySring()));
+      this.form.removeControl('destinyString')
+      this.form.addControl('destinyString', new FormControl(this.destinySring()))
+      //validacion fecha de nacimiento ▼
+      this.form.addControl('aniosNacimiento', new FormControl(this.anios))
 
       //console.log(this.fromDate);
       let form = this.form.value
       localStorage.removeItem('Datasafe')
       console.log(form)
-      localStorage.setItem('Datasafe', JSON.stringify(form));
-      console.log('Enviado-Plan');
+      localStorage.setItem('Datasafe', JSON.stringify(form))
       // console.log(this.destino.nativeElement.value);
 
       // const navigationExtras: NavigationExtras = { state: this.plan };
@@ -238,6 +246,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       // window.location.href="#/home/seguros/planes"
       // this.route.navigateByUrl('/home/comprar', { skipLocationChange: true });
       // this.route.navigate(["/home/seguros/planes"]);
+
       this.route.navigateByUrl('/seguros', { skipLocationChange: true }).then(() =>
         this.route.navigate(["/seguros/planes"]));
     }
@@ -303,6 +312,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       let dayFech: any = String(fechaString).substr(0, 2)
       let monthFech: any = String(fechaString).substr(2, 2)
       let yearFech: any = String(fechaString).substr(4, 4)
+      let anioNacio: any = fechaString.substr(4, 4)
       console.log(fecha);
       console.log(age);
       console.log(fechaString);
@@ -317,6 +327,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       console.log(newStr);
       //  console.log(fech);
       //  console.log(age);
+      this.anios.push({anio:Number(anioNacio), edad: age})
       this.ClienteCotizacion.push(newStr)
       //  console.log(this.form.controls);
     }

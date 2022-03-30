@@ -9,8 +9,8 @@ export const environment = {
   nameAppAC: 'Intranet',
   identifierAC: 'NMViajes - Assist Card',
   codeEnvironmentAC: 'PROD/NMO/NMO',
-  undidadNegocioAC: 1,
-  dkAgenciaAC: '339',
+  undidadNegocioAC: 8,
+  dkAgenciaAC: '29581',
   subcodigoAgenciaAC: '1',
   sucursalAgenciaAC: '3',
   ptoventaAgenciaAC: '1',
@@ -32,17 +32,17 @@ export const environment = {
   urlGeo: "http://20.75.62.133",
   urlIframeMotorVuelos: "http://52.177.246.241/#/nmviajes/search/resultados",
 
-
-  urlBase: 'https://10.75.131.17:10508/api/productoAsistencia/',               
-
-
-
+  urlDestinoSeguros: 'http://10.75.131.17:8091/api/',
+  urlBase: 'http://10.75.131.17:8091/api/productoAsistencia/',
+  // urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',               
+  // url_api: 'http://10.75.131.17:8091/api/',
+  url_api: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',
   serverUrlApi: 'http://localhost:8080/api/'
 
 
 
 
-// https://servicio.nmviajes.com:9443/segurosrv/index.html
+  // https://servicio.nmviajes.com:9443/segurosrv/index.html
 
 }
 

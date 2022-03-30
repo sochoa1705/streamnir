@@ -350,9 +350,9 @@
                     <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
                     <!-- END DETALLE DE COBERTURA -->
                     <div *ngIf="safe0Json.detalleCobertura">
-                        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="coverage.Valor" [txtOrigen]=""
+                        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [txtOrigen]=""
                         [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
-                        [txtPasajeros]="resultJson?.ClienteCotizacion?.length +1" [plan]="safe0Json"></app-coverage>
+                        [txtPasajeros]="resultJson?.ClienteCotizacion?.length" [plan]="safe0Json"></app-coverage>
                     </div>
 
                     <div class="card pasajeros">
@@ -386,7 +386,7 @@
                                             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12.8033 9.69668C11.9864 8.87982 11.0141 8.27511 9.95329 7.90904C11.0895 7.12649 11.8359 5.81684 11.8359 4.33594C11.8359 1.94511 9.89083 0 7.5 0C5.10917 0 3.16406 1.94511 3.16406 4.33594C3.16406 5.81684 3.91052 7.12649 5.04674 7.90904C3.9859 8.27511 3.01359 8.87982 2.19671 9.69668C0.780147 11.1133 0 12.9967 0 15H1.17188C1.17188 11.5107 4.01065 8.67188 7.5 8.67188C10.9893 8.67188 13.8281 11.5107 13.8281 15H15C15 12.9967 14.2199 11.1133 12.8033 9.69668ZM7.5 7.5C5.75534 7.5 4.33594 6.08063 4.33594 4.33594C4.33594 2.59125 5.75534 1.17188 7.5 1.17188C9.24466 1.17188 10.6641 2.59125 10.6641 4.33594C10.6641 6.08063 9.24466 7.5 7.5 7.5Z"
                                                     fill="#009AED" />
-                                            </svg> &nbsp; Pasajero {{ i + 1 }}
+                                            </svg> &nbsp; Pasajero {{ i + 1 }} <strong> {{ this.resultJson['aniosNacimiento'][i].edad }} años</strong>
                                         </h4>
                                         <div style="background:red" *ngIf="showAdulto === i" (click)="showDatosPasajero()">
                                             <img src="./assets/comprar/flecha-der.png" alt="">
@@ -1041,8 +1041,8 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-6 offset-3 py-4 lessViewMob">1
-                                                    <select class="selectBank" formControlName="bank" placeholder="Selecciona tu banco">
+                                                <div class="col-6 offset-3 py-4 lessViewMob" *ngIf="mobile">1
+                                                    <select class="selectBank" formControlName="bankPay" placeholder="Selecciona tu banco">
                                                         <option *ngFor="let b of banks" value="{{b.value}}">{{b.name}}
                                                         </option>
                                                     </select>
@@ -1296,7 +1296,7 @@
                                         <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M12.8033 9.69668C11.9864 8.87982 11.0141 8.27511 9.95329 7.90904C11.0895 7.12649 11.8359 5.81684 11.8359 4.33594C11.8359 1.94511 9.89083 0 7.5 0C5.10917 0 3.16406 1.94511 3.16406 4.33594C3.16406 5.81684 3.91052 7.12649 5.04674 7.90904C3.9859 8.27511 3.01359 8.87982 2.19671 9.69668C0.780147 11.1133 0 12.9967 0 15H1.17188C1.17188 11.5107 4.01065 8.67188 7.5 8.67188C10.9893 8.67188 13.8281 11.5107 13.8281 15H15C15 12.9967 14.2199 11.1133 12.8033 9.69668ZM7.5 7.5C5.75534 7.5 4.33594 6.08063 4.33594 4.33594C4.33594 2.59125 5.75534 1.17188 7.5 1.17188C9.24466 1.17188 10.6641 2.59125 10.6641 4.33594C10.6641 6.08063 9.24466 7.5 7.5 7.5Z"
                                                 fill="#009AED" />
-                                        </svg> &nbsp; Pasajero {{ i + 1 }}
+                                        </svg> &nbsp; Pasajero {{ i + 1 }} &nbsp; (<strong> {{ this.resultJson['aniosNacimiento'][i].edad }} años</strong>)
                                     </h4>
                                 </ng-template>
 
@@ -1348,8 +1348,10 @@
                                             <div class="col-4">
                                                 <select formControlName="yearCustomer" class="form-select-f" [ngClass]="getMessage(MSG_YEAR_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_YEAR_CUSTOMER) ? 'isvalid' : ''">
                                                     <option disabled>Seleccione</option>
-                                                    <option *ngFor="let year of listYears" value="{{year}}">{{year}}
-                                                    </option>
+                                                    <!-- <option *ngFor="let year of this.resultJson['aniosNacimiento'][i]" value="{{year.anio}}">{{year.anio}}
+                                                    </option> -->
+                                                    <option value="{{this.resultJson['aniosNacimiento'][i].anio}}">{{this.resultJson['aniosNacimiento'][i].anio}}</option>
+                                                    <option value="{{this.resultJson['aniosNacimiento'][i].anio + 1}}">{{this.resultJson['aniosNacimiento'][i].anio + 1}}</option>
                                                 </select>
                                                 <span class="valid" *ngIf="getMessage(MSG_YEAR_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_YEAR_CUSTOMER)">{{ getMessage(MSG_YEAR_CUSTOMER) }}</span>
                                             </div>
@@ -1624,7 +1626,7 @@
                                     </div>
                                     <div class="col-3 viewMobileWidth">
                                         <label for="lastname">N° de documento</label>
-                                        <input class="form-control" formControlName="numDocCustomer" type="text" name="ndocumento" [ngClass]="getMessage(MSG_NUM_DOC_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_NUM_DOC_CUSTOMER) ? 'isvalid' : ''">
+                                        <input class="form-control" formControlName="numDocCustomer" maxlength="8" type="text" name="ndocumento" [ngClass]="getMessage(MSG_NUM_DOC_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_NUM_DOC_CUSTOMER) ? 'isvalid' : ''">
                                         <span class="valid" *ngIf="getMessage(MSG_NUM_DOC_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_NUM_DOC_CUSTOMER)">{{ getMessage(MSG_NUM_DOC_CUSTOMER) }}</span>
                                     </div>
                                     <div class="col-6 viewMobileWidth">
@@ -2077,7 +2079,7 @@
                                             </div>
                                             <div class="col-7">
                                                 <label for="numberPhone0">Número de teléfono</label>
-                                                <input formControlName="numberPhone0" class="form-control" [ngClass]="getMessage(MSG_PHONE0_CONTACT) !== MSG_EMPTY ? 'isvalid' : ''"
+                                                <input formControlName="numberPhone0" maxlength="9" class="form-control" [ngClass]="getMessage(MSG_PHONE0_CONTACT) !== MSG_EMPTY ? 'isvalid' : ''"
                                                     placeholder="Ingresa N°" type="text" name="numberPhone0">
                                                 <span class="valid" *ngIf="getMessage(MSG_PHONE0_CONTACT) !== MSG_EMPTY">{{ getMessage(MSG_PHONE0_CONTACT) }}</span>
                                             </div>
@@ -2317,9 +2319,12 @@
 
                 <!-- COBERTURA -->
                 <div *ngIf="safe0Json.detalleCobertura" class="order-0">
-                    <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="coverage.Valor" [txtOrigen]=""
+                    <!-- <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="coverage.Valor" [txtOrigen]=""
                         [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
-                        [txtPasajeros]="resultJson?.ClienteCotizacion?.length +1" [plan]="safe0Json"></app-coverage>
+                        [txtPasajeros]="resultJson?.ClienteCotizacion?.length +1" [plan]="safe0Json"></app-coverage> -->
+                        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [txtOrigen]=""
+                        [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
+                        [txtPasajeros]="resultJson?.ClienteCotizacion?.length" [plan]="safe0Json"></app-coverage>
                 </div>
                 <!-- end COBERTURA -->
 

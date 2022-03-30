@@ -15,7 +15,7 @@ export class BusinessUnitService {
   ) { }
 
   businessUnit(payload: any): Observable<any> {
-    let url_api = `${environment.urlBase}${ENDPOINT_API.BUSINESS_UNIT}`;
+    let url_api = `${environment.url_api}${ENDPOINT_API.BUSINESS_UNIT}`;
 
     return this.http.post<any>(url_api, payload, { observe: 'response' }).pipe(
       map((observe: any) => observe['body'])

@@ -15,7 +15,7 @@ export class DestinyService {
   constructor(private http: HttpClient) {}
 
   getDestiny(payload: any): Observable<any> {
-    let url_api = `${environment.urlBase}${ENDPOINT_API.DESTINY}`;
+    let url_api = `${environment.url_api}${ENDPOINT_API.DESTINY}`;
     return this.http
       .post<any>(url_api, payload, { observe: 'response' })
       .pipe(map((observe: any) => observe['body']));

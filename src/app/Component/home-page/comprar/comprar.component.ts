@@ -15,6 +15,11 @@ import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
 import { toUp } from 'src/app/shared/utils';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { GenerarSafetyPayRQ } from 'src/app/Models/seguros/generarSafetypayRQ.interface';
+import { CardPaymentService } from 'src/app/Services/cardPayment/card-payment.service';
+import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
+import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interface';
+import { SafetyPayRQ } from 'src/app/Models/seguros/safetypayRQ.interface';
 
 interface Methods {
   id: string;
@@ -42,6 +47,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   coverageL: any
   asistMedic: any
   pop: any
+  listBank: any
+  timeShow!: number
+  ShowComponentTime!: boolean
 
   MSG_NAME_CUSTOMER: string = 'nameCustomer'
   MSG_LAST_NAME_CUSTOMER: string = 'lastNameCustomer'
@@ -129,6 +137,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   coverage: any
   reservation: any
   dataShop: any
+  ipCliente: any
+  bankSteps: any
 
   @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>
 
@@ -147,6 +157,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     public loaderSubjectService: LoaderSubjectService,
     public reservaVuelosService: ReservaVuelosService,
     public secureBookingService: SecureBookingService,
+    public cardPaymentService: CardPaymentService,
+    public generatePayService: GeneratePayService,
   ) {
     // COBERTURA
     this.coverageList = localStorage.getItem('coverage')
@@ -164,10 +176,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.filtroVueloJson = JSON.parse(this.filtroVuelo)
     this.safe0 = localStorage.getItem('safe0');
     this.safe0Json = JSON.parse(this.safe0)
-    this.result = localStorage.getItem('Datasafe');
     const detalleVuelosStr: any = localStorage.getItem('detalleVuelo');
     this.detalleVuelos = JSON.parse(detalleVuelosStr);
+    this.result = localStorage.getItem('Datasafe');
     this.resultJson = JSON.parse(this.result);
+    // IP DEL CLIENTE
+    this.ipCliente = localStorage.getItem('ipCliente')
 
     this.unidadNegocio = localStorage.getItem('businessunit')
     this.businessunit = JSON.parse(this.unidadNegocio)
@@ -208,7 +222,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     let test = this.resultJson.passenger
-    console.log(test)
+    console.log(this.coverage)
+    // console.log(this.shopString['customers'].length)
 
     this.addTag()
     // this.showAdulto = 0
@@ -255,6 +270,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (this.current['filter'] !== 'filter') {
       this.listCoverage()
     }
+
   }
   toCustomer(e: any) {
     let chk = e.target.checked
@@ -983,7 +999,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
   otherPlan() {
     localStorage.removeItem('safe0')
-    this.route.navigateByUrl('/seguros/slide')
+    this.route.navigateByUrl('/seguros/planes')
+    // this.route.navigateByUrl('/seguros/slide')
   }
   selectVuelo(isIda: boolean) {
     this.modalDetalle = isIda ? this.detalleVuelos.segmentoDeparture : this.detalleVuelos.segmentoReturn;
@@ -1081,7 +1098,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     let lregistro: RegistrarSeguroRQ = {
       fec_salida: this.resultJson.fromDate,                       // FECHA DE PARTIDA
       fec_retorno: this.resultJson.toDate,                        // FECHA DE RETORNO
-      cant_paxes: this.shopString.customers.length,               // CANTIDAD DE PASAJEROS
+      cant_paxes: this.shopString['customers'].length,               // CANTIDAD DE PASAJEROS
       destino: this.resultJson.destinyString.descripcion_destino, // NOMBRE DEL DESTINO
       edades: `${this.agesCustomers};`,                           // EDADES CONCATENADAS CON PUNTO Y COMA
       prod_id: this.safe0Json.idProducto,                         // obtener desde plansAC.idProducto
@@ -1181,10 +1198,17 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
 
     let payload = new NMRequestBy<RegistrarSeguroRQ>(lregistro);
+    console.log(payload)
 
     this.secureBookingService.secureBooking(payload).subscribe((response: any) => {
       this.reservation = response
       this.loaderSubjectService.closeLoader()
+      if (this.shopString.formCard.select21 === 'SAFETYPAY') {
+        this.getGeneratePay()
+      } else {
+        this.getCardPayment()
+      }
+
     })
   }
   // RESERVA VUELOS
@@ -1276,7 +1300,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     // }
     for (let i in this.resultJson.passenger) {
       if (this.validFormMobileCustomers(i) && this.validFormMobileContact()) {
-              this.step1Complete = true
+        this.step1Complete = true
 
         // console.log(this.formShop.getRawValue()['customers'][i])
         // console.log(i)
@@ -1301,6 +1325,160 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
   selectionChange(event: StepperSelectionEvent) {
     console.log(event.selectedIndex)
+  }
+  // SAFETYPAY
+  getGeneratePay() {
+    const textSend = 'SE ESTA PROCESANDO TU PAGO!'
+    this.loaderSubjectService.showText(textSend)
+    this.loaderSubjectService.showLoader()
+
+    let lsafetypay: GenerarSafetyPayRQ = {
+      PromoterName: this.shopString.customers[0].nameCustomer,                 //NOMBRE DEL PRIMER PASAJERO ADULTO
+      CustomerName: this.shopString.customers[0].nameCustomer,                 //NOMBRE DEL PRIMER PASAJERO ADULTO
+      CustomerDocumentNumber: this.shopString.customers[0].numDocCustomer,     //DOCUMENTO DEL PRIMER PASAJERO ADULTO
+      IdClient: Number(environment.dkAgenciaAC),
+      WebId: '7',
+      Mail: this.shopString.formContact.mailContacto,   //MAIL DEL PASAJERO
+      DKClient: environment.dkAgenciaAC,
+      UserAgent: environment.identifierAC,
+      IdUser: '56190',
+      IpUser: this.ipCliente,                           //IP DEL CLIENTE
+      Amount: {
+        FeeAmount: 0,
+        RechargeAmount: (this.safe0Json['reservaVuelos']) ? this.detalleVuelos.pricingInfo.precioFinal : (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal, //COSTO TOTAL DEL SEGURO; SOLO SI destiny.EsDestinoNacional = 'S' ENTONCES MULTIPLICAR POR 1.18 (IGV)
+        Currency: 'USD'
+      }
+    }
+    let payload = new NMRequestBy<GenerarSafetyPayRQ>(lsafetypay)
+    this.generatePayService.generatePay(payload).subscribe({
+      next: (response) => {
+        this.listBank = response
+        this.timeShop(this.listBank['ExpirationDateTime'])
+        this.bankSteps = this.listBank.PaymentLocations.filter((e: any) => {
+          let namco = this.shopString.formCard.bankPay
+          if (namco === e.ID) {
+            return e
+          }
+        })
+
+        this.loaderSubjectService.closeLoader()
+
+        let lactualizar: SafetyPayRQ = {
+          res_seguro_id: (this.safe0Json['reservaVuelos']) ? this.resevaVuelo.idCotizacion : this.reservation.Reserva,                // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
+          usosafetypay: 'S',
+          codigo_safetypay: this.listBank.TransactionIdentifier,  // obtener desde this.listBank.TransactionIdentifier
+          nro_pedido_srv: this.listBank.IDPedido,                 // obtener desde this.listBank.IDPedido
+          fee_safetypay: 0
+        }
+
+        let payloadupdate = new NMRequestBy<SafetyPayRQ>(lactualizar)
+        this.route.navigateByUrl('/conformidad')
+
+        //>>>> EJECUTAR SERVICIO EN CASO SE HAYA GENERADO CORRECTAMENTE LOS DATOS DE PAGO DE SAFETYPAY
+        // this.updatePayService.updatePay(payloadupdate).subscribe({
+        //   next: _ => {
+        //     console.log('Update SafetyPay');
+        //   }
+        // })
+      }
+      ,
+      error: error => {
+        console.log(error)
+        this.loaderSubjectService.closeLoader()
+
+        //>>>> EN CASO SALGA ERROR SE DEBE DE ELIMINAR LA SOLICITUD
+
+        let lanular: CambiarEstadoRQ = {
+          res_seguro_id: (this.safe0Json['reservaVuelos']) ? this.resevaVuelo.idCotizacion : this.reservation.Reserva,  // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
+          estado: 7
+        }
+
+        let payloadanular = new NMRequestBy<CambiarEstadoRQ>(lanular)
+
+        // this.statePayService.updateState(payloadanular).subscribe({
+        //   next: _ => {
+        //     console.log('Actualizar Estado');
+        //   }
+        // })
+
+        // si ocurre un error
+        this.route.navigateByUrl('/seguros');
+      }
+    })
+  }
+  // TARJETA
+  getCardPayment() {
+    const textSend = 'SE ESTA GENERANDO SU PAGO!'
+    this.loaderSubjectService.showText(textSend)
+
+    const payload = {
+      TrackingCode: "000",
+      MuteExceptions: false,
+      Caller: {
+        Company: "Agil",
+        Application: "Expertia"
+      },
+      Parameter: {
+        Ip: this.ipCliente,
+        Browser: this.shopString.browser,
+        Client: {
+          Firstname: this.shopString.formContact.nameContacto,
+          Lastname: this.shopString.formContact.lastnameContacto,
+          Address: this.shopString.formCard.address,
+          DocumentType: this.shopString.formCard.tipoDoc,
+          DocumentNumber: this.shopString.formCard.numDoc,
+          Email: this.shopString.formContact.mailContacto
+        },
+        Booking: {
+          NumberInsurance: (this.safe0Json['reservaVuelos']) ? this.resevaVuelo.idCotizacion : this.reservation.Reserva,
+          DateStart: this.resultJson.fromDate, // AAAA-MM-DD
+          DateEnd: this.resultJson.toDate,
+          NumberOfAdult: this.shopString.customers.length,
+          NumberOfChildren: 0
+        },
+        Payment: {
+          Card: {
+            HolderName: this.shopString.formCard.nameCard,
+            Number: this.shopString.formCard.numberCard,
+            Expiration: this.expired(this.shopString.formCard.expiredCard), // 2022/05
+            SecurityCode: Number(this.shopString.formCard.ccvCard)
+          },
+          AmountOfFees: Number(this.shopString.formCard.feePay),
+          Amount: (this.safe0Json['reservaVuelos']) ? this.detalleVuelos.pricingInfo.precioFinal : (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal,
+        }
+      }
+    }
+    console.log(payload)
+
+    this.cardPaymentService.cardPayment(payload).subscribe({
+      next: (response) => {
+        console.log(response)
+        // this.reservation = response
+        this.loaderSubjectService.closeLoader()
+        this.route.navigateByUrl('/conformidad')
+      },
+      error: (err) => {
+        console.log(err)
+        this.loaderSubjectService.closeLoader()
+      }
+    })
+  }
+  timeShop(data: string) {
+    let dayPay = data
+    let day = dayPay.substr(0, 2)
+    let month = dayPay.substr(3, 2)
+    let year = dayPay.substr(6, 4)
+    let hour = dayPay.substr(11, 5)
+    let newDate = `${year}/${month}/${day} ${hour}`
+    let datePay = new Date(newDate)
+
+    var dayStart = new Date();
+    var difference = datePay.getTime() - dayStart.getTime()
+    var resultInMinutes = Math.round(difference / 60000)
+    var totalSeconds = resultInMinutes * 60
+    this.timeShow = totalSeconds
+    this.ShowComponentTime = true
+    // return totalSeconds
   }
   addTag() {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];

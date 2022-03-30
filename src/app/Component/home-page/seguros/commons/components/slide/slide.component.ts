@@ -16,6 +16,7 @@ export class SlideComponent implements OnInit {
 
   ngOnInit(): void {
     this.addTag()
+    localStorage.removeItem('planes')
   }
 
   addTag() {
