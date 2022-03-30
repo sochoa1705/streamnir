@@ -6300,9 +6300,13 @@
     
     .tabDestino {
         display: flex;
-        width: 100%;
+        max-height: 460px;
+        max-width: 660px;
+        min-width: 660px;
         padding: 50px 0 10px 0;
         .tabImgDest {
+            border-radius: 50px 0 0 50px;
+            overflow: hidden;
             flex: 1 1 60%;
             position: relative;
             .mascara {
@@ -6409,9 +6413,10 @@
         .tabColumna {
             display: flex;
             width: 100%;
-            gap: 30px;
+            gap: 180px;
             .contenidoTab {
-                width: 40%;
+                //width: 40%;
+                flex: 1 1 auto;
                 padding-top: 30px;
             }
             .imagenTab {
@@ -8210,7 +8215,6 @@
         }
     }
     
-
     app-flightdeals {
         button {
             background: none !important;
@@ -8222,7 +8226,7 @@
             }
         }
     }
-
+    
     .modal-backdrop {
         display: none;
-      }
+    }
