@@ -6300,9 +6300,13 @@
     
     .tabDestino {
         display: flex;
-        width: 100%;
+        max-height: 460px;
+        max-width: 660px;
+        min-width: 660px;
         padding: 50px 0 10px 0;
         .tabImgDest {
+            border-radius: 50px 0 0 50px;
+            overflow: hidden;
             flex: 1 1 60%;
             position: relative;
             .mascara {
@@ -6409,9 +6413,10 @@
         .tabColumna {
             display: flex;
             width: 100%;
-            gap: 30px;
+            gap: 180px;
             .contenidoTab {
-                width: 40%;
+                //width: 40%;
+                flex: 1 1 auto;
                 padding-top: 30px;
             }
             .imagenTab {
@@ -8209,11 +8214,6 @@
             }
         }
     }
-    
-    .modal-backdrop {
-        display: none;
-        // z-index:90
-      }
 
     app-flightdeals {
         button {
@@ -8227,6 +8227,54 @@
         }
     }
 
-    .modal-backdrop {
-        display: none;
-      }
+    
+    .p-galleria .p-galleria-close {
+        margin: 0.5rem;
+        background: transparent;
+        color: #f8f9fa;
+        width: 4rem;
+        height: 4rem;
+        transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    
+    .p-galleria-mask {
+        background: rgba(0, 0, 0, 0.8) !important;
+        .p-galleria .p-galleria-close .p-galleria-close-icon {
+            font-size: 2rem;
+        }
+        .p-galleria .p-galleria-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #f8f9fa;
+        }
+        .p-galleria .p-galleria-item-nav {
+            background: transparent;
+            color: #f8f9fa;
+            width: 4rem;
+            height: 4rem;
+            transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+            border-radius: 6px;
+            margin: 0 0.5rem;
+            cursor: pointer;
+        }
+        .p-galleria-close-icon {
+            background: url(./assets/svg/close.svg) center center no-repeat;
+            width: 24px;
+            height: 24px;
+        }
+        .p-galleria .p-galleria-item-nav .p-galleria-item-prev-icon {
+            background: url(./assets/left-white.png) center center no-repeat;
+            width: 24px;
+            height: 24px;
+        }
+        .p-galleria .p-galleria-item-nav .p-galleria-item-next-icon {
+            background: url(./assets/right-white.png) center center no-repeat;
+            width: 24px;
+            height: 24px;
+        }
+        .p-galleria .p-galleria-item-nav:not(.p-disabled):hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #f8f9fa;
+        }
+    }
