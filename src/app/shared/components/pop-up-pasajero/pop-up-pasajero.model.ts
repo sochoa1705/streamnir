@@ -1,3 +1,10 @@
+export interface IDistributionObjectVuelos{
+  habitacion: number,
+  adultos:number,
+  ninos: number,
+  infantes:number,
+  pasajeros: any[]
+}
 export interface IDistributionObject{
   nroAdultos:number,
   nroNinos:number,

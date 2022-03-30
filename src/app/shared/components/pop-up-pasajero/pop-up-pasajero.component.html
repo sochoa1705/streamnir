@@ -57,7 +57,7 @@
     </div>
 
     <div class="d-flex flex-row justify-content-between align-items-center p-3 btnPasajero">
-        <button class="green" type="button" (click)="agregarHabitacion()">Añadir habitación</button>
+        <button *ngIf="!onlyPasajeros" class="green" type="button" (click)="agregarHabitacion()">Añadir habitación</button>
         <button type="button" (click)="savePasajeros()">Listo</button>
     </div>
 

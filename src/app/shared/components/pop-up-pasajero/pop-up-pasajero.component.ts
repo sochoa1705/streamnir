@@ -20,6 +20,7 @@ import { Guid } from '../../utils';
 import {
   DistributionObject,
   IDistributionObject,
+  IDistributionObjectVuelos,
 } from './pop-up-pasajero.model';
 import { NotificationService } from '../../../Services/notification.service';
 
@@ -54,7 +55,7 @@ export class PopUpPasajeroComponent implements OnInit {
 
   @Output() emitDistribution = new EventEmitter<string>();
 
-  @Output() emitDistributionObject = new EventEmitter<IDistributionObject[]>();
+  @Output() emitDistributionObject = new EventEmitter<IDistributionObjectVuelos>();
 
   constructor(
     private popupService: PopupService,
@@ -69,8 +70,11 @@ export class PopUpPasajeroComponent implements OnInit {
       this.idStateOpen = state.id;
 
       if (!state.open) {
-        const distribution = this.getDistributionUrl(this.habitaciones);
-        this.emitDistribution.emit(distribution);
+        const distributionStr = this.getDistributionUrl(this.habitaciones);
+        const objDistribution = this.getDistributionObj(this.habitaciones);
+                
+        this.emitDistributionObject.emit( objDistribution );
+        this.emitDistribution.emit(distributionStr);
       }
     });
 
@@ -134,7 +138,7 @@ export class PopUpPasajeroComponent implements OnInit {
     ) {
       this.notificationService.showNotificacion(
         'Error',
-        'Se permiten máximo 10 personas por habitación'
+        'Se permiten máximo 10 personas'
       );
       return;
     }
@@ -162,6 +166,40 @@ export class PopUpPasajeroComponent implements OnInit {
 
   savePasajeros() {
     this.popupService.closePopUp(this.idContent);
+  }
+
+
+  getDistributionObj(habitaciones: IDistributionObject[]){
+
+    let ninos = 0;
+    let infantes = 0;
+
+    if(habitaciones.length == 0){
+      return {
+        habitacion: 0,
+        adultos:0,
+        ninos: ninos,
+        infantes:infantes,
+        pasajeros: []
+      }
+    }
+
+    habitaciones[0].ninos.forEach(item=>{
+      if(item.edad <= 11 && item.edad >= 2){
+        ninos ++;
+      }else if (item.edad <2){
+        infantes ++;
+      }
+    })
+
+  return   {
+      habitacion: 0,
+      adultos:habitaciones[0].nroAdultos,
+      ninos: ninos,
+      infantes:infantes,
+      pasajeros: []
+    }
+
   }
 
   public getDistributionUrl(habitaciones: IDistributionObject[]) {

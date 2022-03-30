@@ -11,6 +11,7 @@ import { ICardAutocomplete } from '../../card-autocomplete/card-autocomplete.int
 import { DisponibilidadPayload } from '../../flights/models/flights.class';
 import { EnumCabins, EnumFlightType } from '../../flights/models/flights.interface';
 import {  PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
+import { IDistributionObjectVuelos } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos } from '../../tabs/tabs.models';
 import { IGeoTree } from './tab-vuelos.interfaces';
 
@@ -49,7 +50,7 @@ export class TabVuelosComponent implements OnInit {
   origenHotel: any;
   toDate: NgbDate | null;
 
-  distributionObject: any;
+  distributionObject: IDistributionObjectVuelos; 
   hoveredDate: NgbDate | null = null;
 
   EnumFlightType = EnumFlightType;
