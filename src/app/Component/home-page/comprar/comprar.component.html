@@ -350,9 +350,9 @@
                     <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
                     <!-- END DETALLE DE COBERTURA -->
                     <div *ngIf="safe0Json.detalleCobertura">
-                        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [txtOrigen]=""
-                        [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
-                        [txtPasajeros]="resultJson?.ClienteCotizacion?.length" [plan]="safe0Json"></app-coverage>
+                        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [txtOrigen]="" [txtDestino]="resultJson?.destinyString.descripcion_destino"
+                            [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion?.length"
+                            [plan]="safe0Json"></app-coverage>
                     </div>
 
                     <div class="card pasajeros">
@@ -386,7 +386,8 @@
                                             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12.8033 9.69668C11.9864 8.87982 11.0141 8.27511 9.95329 7.90904C11.0895 7.12649 11.8359 5.81684 11.8359 4.33594C11.8359 1.94511 9.89083 0 7.5 0C5.10917 0 3.16406 1.94511 3.16406 4.33594C3.16406 5.81684 3.91052 7.12649 5.04674 7.90904C3.9859 8.27511 3.01359 8.87982 2.19671 9.69668C0.780147 11.1133 0 12.9967 0 15H1.17188C1.17188 11.5107 4.01065 8.67188 7.5 8.67188C10.9893 8.67188 13.8281 11.5107 13.8281 15H15C15 12.9967 14.2199 11.1133 12.8033 9.69668ZM7.5 7.5C5.75534 7.5 4.33594 6.08063 4.33594 4.33594C4.33594 2.59125 5.75534 1.17188 7.5 1.17188C9.24466 1.17188 10.6641 2.59125 10.6641 4.33594C10.6641 6.08063 9.24466 7.5 7.5 7.5Z"
                                                     fill="#009AED" />
-                                            </svg> &nbsp; Pasajero {{ i + 1 }} <strong> {{ this.resultJson['aniosNacimiento'][i].edad }} años</strong>
+                                            </svg> &nbsp; Pasajero {{ i + 1 }}
+                                            <strong> {{ this.resultJson['aniosNacimiento'][i].edad }} años</strong>
                                         </h4>
                                         <div style="background:red" *ngIf="showAdulto === i" (click)="showDatosPasajero()">
                                             <img src="./assets/comprar/flecha-der.png" alt="">
@@ -960,8 +961,8 @@
                                     </div>
                                     <div class="col-6 viewMobileWidth">
                                         <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" formControlName="chkInfo" id="chkInfo" value="option1">
-                                                <label class="form-check-label" for="inlineRadio1">Autorizo el uso de mi Información para la Publicidad.</label>
+                                            <input class="form-check-input" type="checkbox" formControlName="chkInfo" id="chkInfo" value="option1">
+                                            <label class="form-check-label" for="inlineRadio1">Autorizo el uso de mi Información para la Publicidad.</label>
                                         </div>
                                         <span class="valid" *ngIf="getMessage(MSG_CHK_INFO) !== MSG_EMPTY">{{getMessage(MSG_CHK_INFO)}}</span>
 
@@ -1296,7 +1297,8 @@
                                         <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M12.8033 9.69668C11.9864 8.87982 11.0141 8.27511 9.95329 7.90904C11.0895 7.12649 11.8359 5.81684 11.8359 4.33594C11.8359 1.94511 9.89083 0 7.5 0C5.10917 0 3.16406 1.94511 3.16406 4.33594C3.16406 5.81684 3.91052 7.12649 5.04674 7.90904C3.9859 8.27511 3.01359 8.87982 2.19671 9.69668C0.780147 11.1133 0 12.9967 0 15H1.17188C1.17188 11.5107 4.01065 8.67188 7.5 8.67188C10.9893 8.67188 13.8281 11.5107 13.8281 15H15C15 12.9967 14.2199 11.1133 12.8033 9.69668ZM7.5 7.5C5.75534 7.5 4.33594 6.08063 4.33594 4.33594C4.33594 2.59125 5.75534 1.17188 7.5 1.17188C9.24466 1.17188 10.6641 2.59125 10.6641 4.33594C10.6641 6.08063 9.24466 7.5 7.5 7.5Z"
                                                 fill="#009AED" />
-                                        </svg> &nbsp; Pasajero {{ i + 1 }} &nbsp; (<strong> {{ this.resultJson['aniosNacimiento'][i].edad }} años</strong>)
+                                        </svg> &nbsp; Pasajero {{ i + 1 }} &nbsp; (
+                                        <strong> {{ this.resultJson['aniosNacimiento'][i].edad }} años</strong>)
                                     </h4>
                                 </ng-template>
 
@@ -2235,7 +2237,8 @@
                                     </div>
                                     <div class="col-5 text-end">
                                         <span class="price_Desc">{{safe0Json?.monedaLista}} {{ safe0Json?.DsctoPromcional === null ? '0' : safe0Json?.DsctoPromcional
-                                            }}</span>
+                                            }}
+                                        </span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -2322,9 +2325,9 @@
                     <!-- <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="coverage.Valor" [txtOrigen]=""
                         [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
                         [txtPasajeros]="resultJson?.ClienteCotizacion?.length +1" [plan]="safe0Json"></app-coverage> -->
-                        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [txtOrigen]=""
-                        [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
-                        [txtPasajeros]="resultJson?.ClienteCotizacion?.length" [plan]="safe0Json"></app-coverage>
+                    <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [txtOrigen]="" [txtDestino]="resultJson?.destinyString.descripcion_destino"
+                        [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion?.length"
+                        [plan]="safe0Json"></app-coverage>
                 </div>
                 <!-- end COBERTURA -->
 
@@ -2807,9 +2810,11 @@
             <div class="modal-body text-justify">
                 <p>
                     <strong>En cumplimiento de la Ley N° 29733 – Ley de Protección de Datos Personales- y su Reglamento N° 003-2013-JUS</strong>,
-                    autorizo y otorgo a Promotora de Turismo Nuevo Mundo S.A.C. . (en adelante Nuevo Mundo Viajes), de manera indefinida, mi consentimiento libre, previo, expreso, inequívoco e informado para que (por sí mismo
-                    o a travé s de terceros): Recopile, de tratamiento o suprima, transfiera o importe, exporte mis datos personales, para elaborar Bases de Datos, transferirlas a terceras personas vinculadas o no a Nuevo Mundo
-                    Viajes (sean socios comerciales o no, nacionales o extranjeros, pú blicos o privados) con la finalidad de:
+                    autorizo y otorgo a Promotora de Turismo Nuevo Mundo S.A.C. . (en adelante Nuevo Mundo Viajes), de manera
+                    indefinida, mi consentimiento libre, previo, expreso, inequívoco e informado para que (por sí mismo o
+                    a travé s de terceros): Recopile, de tratamiento o suprima, transfiera o importe, exporte mis datos personales,
+                    para elaborar Bases de Datos, transferirlas a terceras personas vinculadas o no a Nuevo Mundo Viajes
+                    (sean socios comerciales o no, nacionales o extranjeros, pú blicos o privados) con la finalidad de:
                 </p>
 
                 <ul class="listModal">
