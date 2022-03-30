@@ -60,16 +60,24 @@ export class PlansComponent implements OnInit {
   }
   ngOnInit(): void {
     this.addTag()
-    let lcadena: any = localStorage.getItem('businessunit');
-    this.unidadNegocio = JSON.parse(lcadena);
-    if (localStorage.getItem('safe0')) {
-      localStorage.removeItem('safe0')
-      this.listPlansAC()
-      // this.route.navigateByUrl('/home/seguros');
-    } else {
-      this.listPlansAC()
+    let lcadena: any = localStorage.getItem('businessunit')
+    this.unidadNegocio = JSON.parse(lcadena)
 
+    if(localStorage.getItem('planes')) {
+      let planesAC: any = localStorage.getItem('planes')
+      this.plansAC = JSON.parse(planesAC)
+  
+    } else {
+      if (localStorage.getItem('safe0')) {
+        localStorage.removeItem('safe0')
+        this.listPlansAC()
+        // this.route.navigateByUrl('/home/seguros');
+      } else {
+        this.listPlansAC()
+      }
     }
+
+
   }
   addTag() {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
@@ -110,7 +118,10 @@ export class PlansComponent implements OnInit {
       }
     };
 
-    let payload = new NMRequestBy<CotizarSeguroRQ>(lcotizacion);
+    let payload = new NMRequestBy<CotizarSeguroRQ>(lcotizacion)
+
+    console.log(payload)
+    
 
     this.plansACService.plansAC(payload).pipe(take(1)).subscribe({
       next: (response) => {
@@ -234,6 +245,10 @@ export class PlansComponent implements OnInit {
         this.loaderSubjectService.closeLoader()
         // this.price()
         console.log(this.plansAC)
+        console.log(this.plans)
+
+        localStorage.setItem('planes', JSON.stringify(this.plansAC))
+
       },
       error: error => {
         console.log(error)

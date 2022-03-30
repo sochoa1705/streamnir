@@ -5,8 +5,8 @@ export const environment = {
   nameAppAC: 'Intranet',
   identifierAC: 'NMViajes - Assist Card',
   codeEnvironmentAC: 'PROD/NMO/NMO',
-  undidadNegocioAC: 1,
-  dkAgenciaAC: '339',
+  undidadNegocioAC: 8,
+  dkAgenciaAC: '29581',
   subcodigoAgenciaAC: '1',
   sucursalAgenciaAC: '3',
   ptoventaAgenciaAC: '1',
@@ -31,11 +31,10 @@ export const environment = {
 
 
   urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',               
-
+  url_api: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',
 
 
   serverUrlApi: 'http://localhost:8080/api/'
-
 
 
 }

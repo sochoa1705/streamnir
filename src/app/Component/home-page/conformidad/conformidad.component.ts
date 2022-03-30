@@ -122,6 +122,12 @@ export class ConformidadComponent implements OnInit {
     //   this.getSecureBooking()
     // }
     // this.getGeneratePay()
+    // this.getCardPayment()
+    // if (this.shopString.formCard.select21 === 'SAFETYPAY') {
+    //   this.getGeneratePay()
+    // } else {
+    //   this.getCardPayment()
+    // }
   }
 
   timeShop(data: string) {
@@ -333,6 +339,7 @@ export class ConformidadComponent implements OnInit {
     this.cardPaymentService.cardPayment(payload).subscribe({
       next: (response) => {
         console.log(response)
+        // this.reservation = response
         this.loaderSubjectService.closeLoader()
       },
       error: (err) => {

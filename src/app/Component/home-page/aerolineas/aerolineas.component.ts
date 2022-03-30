@@ -8,6 +8,9 @@ import { environment } from 'src/environments/environment';
 import { FlightService as AerolineaService } from '../vuelos/commons/components/flight/flight.service';
 import * as moment from 'moment';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ParamsVuelos } from '../resultados/models/resultados.interfaces';
+import { EnumCabins, EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
+import { IVueloDestino } from '../vuelos/commons/components/destinos/destinos.component';
 
 @Component({
   selector: 'app-aerolineas',
@@ -127,6 +130,16 @@ export class AerolineasComponent implements OnInit {
 
   activateTab(index: number): void {
     this.indexTab = index;
+  }
+
+  generateParams(entity: any) {
+    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${entity.OriginCode} ${entity.Origin}`, `${entity.DestinationCode} ${entity.Destination}`, entity.DateStart, entity.DateEnd, "1", "0", "0", EnumCabins.economico);
+  }
+
+  searchFlight(entity: any) {
+    const params = this.generateParams(entity);
+
+    this._router.navigate(['/vuelos/resultados'], { queryParams: params });
   }
 
   loadAereolineas() {
