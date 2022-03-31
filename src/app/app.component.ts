@@ -24,6 +24,7 @@ export class LoginPerson {
     public recorder = false
   ) { }
 }
+
 export class LoginBusiness {
   constructor(
     public email = "",
@@ -61,7 +62,7 @@ export class AppComponent implements OnInit {
 
   personalAccountForm: FormGroup;
   businessAccountForm: FormGroup;
-  recoverPasswordForm: FormGroup;
+  //recoverPasswordForm: FormGroup;
 
   submitBusiness = false;
   submitPerson = false;
@@ -107,7 +108,7 @@ export class AppComponent implements OnInit {
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
-    this.recoverPasswordForm = this.createRecoverPasswordForm();
+    //this.recoverPasswordForm = this.createRecoverPasswordForm();
 
 
     // this.personalAccountForm.reset({
@@ -161,11 +162,11 @@ export class AppComponent implements OnInit {
     });
   }
 
-  createRecoverPasswordForm(): FormGroup {
-    return this._formBuilder.group({
-      email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]]
-    });
-  }
+  // createRecoverPasswordForm(): FormGroup {
+  //   return this._formBuilder.group({
+  //     email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]]
+  //   });
+  // }
 
   validatePersonalAccountForm(field: string) {
     return this.personalAccountForm.controls[field].errors
@@ -177,10 +178,10 @@ export class AppComponent implements OnInit {
       && this.businessAccountForm.controls[field].touched;
   }
 
-  validateRecoverPasswordForm(field: string) {
-    return this.recoverPasswordForm.controls[field].errors
-      && this.recoverPasswordForm.controls[field].touched;
-  }
+  // validateRecoverPasswordForm(field: string) {
+  //   return this.recoverPasswordForm.controls[field].errors
+  //     && this.recoverPasswordForm.controls[field].touched;
+  // }
 
   get personalAccountEmailErrorMessage(): string {
     const errors = this.personalAccountForm.get('email')?.errors;
@@ -210,19 +211,19 @@ export class AppComponent implements OnInit {
     return '';
   }
 
-  get recoverPasswordEmailErrorMessage(): string {
-    const errors = this.recoverPasswordForm.get('email')?.errors;
+  // get recoverPasswordEmailErrorMessage(): string {
+  //   const errors = this.recoverPasswordForm.get('email')?.errors;
 
-    if (errors?.required) {
-      return 'Ingresa tu email';
-    } else if (errors?.minlength) {
-      return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
-    } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de email.';
-    }
+  //   if (errors?.required) {
+  //     return 'Ingresa tu email';
+  //   } else if (errors?.minlength) {
+  //     return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
+  //   } else if (errors?.pattern) {
+  //     return 'El valor ingresado no tiene formato de email.';
+  //   }
 
-    return '';
-  }
+  //   return '';
+  // }
 
   get businessAccountRUCErrorMessage(): string {
     const errors = this.businessAccountForm.get('ruc')?.errors;
@@ -251,75 +252,14 @@ export class AppComponent implements OnInit {
   }
 
 
-  openSnackBar(message: string, action: string = "Error") {
-    this._matSnackBar.open(message, "", {
-      duration: 2000,
-      panelClass: ['mat-toolbar', 'mat-warn']
-    });
-  }
-
-
-  validationFormLogin(form: NgForm) {
-    if (form.invalid) {
-      return false;
-    }
-    return true;
-  }
 
 
 
-  signIn(formPerson: NgForm, formBussines: NgForm) {
-
-    const validPerson = this.validationFormLogin(formPerson);
-    const validBusiness = this.validationFormLogin(formBussines);
-
-    this.initLoading();
-
-    if (this.isPersonLoggin && validPerson) {
-      this._accountService.signIn(this.login, this.isPersonLoggin).subscribe(resp => {
-        this.closeLoading();
-        if (resp.IsSuccess) {
-          this._accountService.guardarStorage(resp);
-          this.closeModal();
-        } else {
-          this.notification.showNotificacion("Error", "Error de autenticación", 10);
-          this.closeLoading();
-        }
-      }, () => {
-        this.notification.showNotificacion("Error", "Error de autenticación", 10);
-        this.closeLoading();
-      })
 
 
-    } else if (!this.isPersonLoggin && validBusiness) {
-      this._accountService.signIn(this.loginB, this.isPersonLoggin).subscribe(resp => {
-        if (resp.IsSuccess) {
-          this.closeLoading();
-          this._accountService.guardarStorage(resp);
-          this.closeModal();
-        }
-      }, () => {
-        this.notification.showNotificacion("Error", "Error de validación", 5);
-        this.closeLoading();
-      })
 
-    } else if (!validPerson && this.isPersonLoggin) {
-      this.submitPerson = true;
-      this.notification.showNotificacion("Error", "Error de validación", 5);
-      this.closeLoading();
-      // this.openSnackBar("El usuario y la contraseña son requeridos")
-    } else if (!validBusiness && !this.isPersonLoggin) {
-      this.submitBusiness = true;
-      this.notification.showNotificacion("Error", "Error de validación", 5);
-      this.closeLoading();
-      // this.openSnackBar("El usuario y la contraseña son requeridos")
-    } else {
-      this.openSnackBar("Ocurrio un error");
-      this.notification.showNotificacion("Error", "Error de validación", 5);
-      this.closeLoading();
-    }
 
-  }
+
 
   toggleModalVerificaCorreo() {
     const modal = document.getElementById("ModalVerificaCorreo");
@@ -388,13 +328,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  togglePassword(pass: HTMLInputElement) {
-    if (pass.type == "password") {
-      pass.type = "text";
-    } else {
-      pass.type = "password";
-    }
-  }
+
 
   savePersonalAccount(): void {
     this.initLoading();
@@ -459,50 +393,50 @@ export class AppComponent implements OnInit {
     }
   }
 
-  toggleModalGetPass() {
-    const modal = document.getElementById("ModalChangePass");
+  // toggleModalGetPass() {
+  //   const modal = document.getElementById("ModalChangePass");
 
-    if (!modal) {
-      return;
-    }
+  //   if (!modal) {
+  //     return;
+  //   }
 
-    bootstrap.Modal.getOrCreateInstance(modal).toggle();
-  }
+  //   bootstrap.Modal.getOrCreateInstance(modal).toggle();
+  // }
 
-  closeModalRecovery() {
-    const btn = document.getElementById("btncloseRecovery");
+  // closeModalRecovery() {
+  //   const btn = document.getElementById("btncloseRecovery");
 
-    if (!btn) {
-      return;
-    }
+  //   if (!btn) {
+  //     return;
+  //   }
 
-    btn.click();
-  }
+  //   btn.click();
+  // }
 
-  getPassword(email: string) {
+  // getPassword(email: string) {
 
-    this.initLoading();
+  //   this.initLoading();
 
-    if (this.recoverPasswordForm.invalid) {
-      this.closeLoading();
-      this.recoverPasswordForm.markAllAsTouched();
-      return;
-    }
+  //   if (this.recoverPasswordForm.invalid) {
+  //     this.closeLoading();
+  //     this.recoverPasswordForm.markAllAsTouched();
+  //     return;
+  //   }
 
-    this._accountService.passwordSend(email).subscribe(resp => {
-      this.closeLoading();
-      if (resp.IsSuccess) {
-        this.closeModalRecovery();
-        this.message = resp.Message;
-        this.toggleModalGetPass();
-      } else {
-        this.notification.showNotificacion("Error", resp.Message, 10);
-      }
-    }, () => {
-      this.closeLoading();
-      this.notification.showNotificacion("Error", "Error del servidor", 10);
-    })
-  }
+  //   this._accountService.passwordSend(email).subscribe(resp => {
+  //     this.closeLoading();
+  //     if (resp.IsSuccess) {
+  //       this.closeModalRecovery();
+  //       this.message = resp.Message;
+  //       this.toggleModalGetPass();
+  //     } else {
+  //       this.notification.showNotificacion("Error", resp.Message, 10);
+  //     }
+  //   }, () => {
+  //     this.closeLoading();
+  //     this.notification.showNotificacion("Error", "Error del servidor", 10);
+  //   })
+  // }
 
   saveBusinessAccount(): void {
     if (this.businessAccountForm.invalid) {
@@ -559,14 +493,6 @@ export class AppComponent implements OnInit {
     }
   }
 
-  signInWithGoogle(): void {
-    this._authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-  }
-
-  signInWithFB(): void {
-    this._authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  }
-
   signOut(): void {
     this._authService.signOut();
   }
@@ -578,9 +504,7 @@ export class AppComponent implements OnInit {
     this.isPerson = $event.index == 0 ? true : false;
   }
 
-  showSocialMediaLogin($event: { index: string | number; }) {
-    this.isPersonLoggin = $event.index == 0 ? true : false;
-  }
+
 
   cerrarBoxClicFuera() {
     combineLatest([fromEvent(document, 'click'), this._popUpSubject.state()]).pipe(
