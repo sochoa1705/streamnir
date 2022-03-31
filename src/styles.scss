@@ -6128,7 +6128,7 @@
             background: url("./assets/next.png")no-repeat;
         }
         .p-galleria-item {
-            height: 340px;
+            height: 215px;
             border-radius: 11px 11px 0 0;
             overflow: hidden;
             img {
@@ -6147,8 +6147,11 @@
             display: flex;
             justify-content: space-between;
             padding: 10px 25px 20px 25px;
+            flex-direction: column;
+            gap: 12px;
             .estrellas {
                 display: flex;
+                width: 100%;
                 gap: 5px;
                 .star {
                     width: 18px;
@@ -6168,6 +6171,8 @@
             }
             .iconos {
                 display: flex;
+                width: 100%;
+                justify-content: flex-end;
                 gap: 5px;
                 .car,
                 .restaurant,
@@ -6206,6 +6211,7 @@
             display: flex;
             flex-wrap: wrap;
             width: 100%;
+            padding: 0 25px 10px 25px;
             .groupItems {
                 display: flex;
                 justify-content: space-between;
@@ -6244,7 +6250,7 @@
             }
             .cardStar,
             .cardOpinion {
-                padding: 0 15px 10px 15px !important;
+                padding: 0 25px 10px 25px !important;
             }
             .precio {
                 .desde {
@@ -8214,21 +8220,22 @@
             text-decoration: none;
             font-size: 14px;
             list-style: none;
-            background: rgba(0, 0, 0, 0.5);
+            //background: rgba(0, 0, 0, 0.5);
             padding: 10px 0;
+            bottom: -310px !important;
             .p-galleria-indicator {
                 margin-right: 0.5rem;
                 height: 14px;
                 &.p-highlight {
                     .p-link {
-                        background-color: #3B82F6;
-                        color: #1D4ED8;
+                        background-color: #DF0C30;
+                        //color: #1D4ED8;
                     }
                 }
                 .p-link {
                     display: inline-flex;
                     align-items: center;
-                    background-color: #ced4da;
+                    background-color: #CFD1D3;
                     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
                     border-radius: 50%;
                     width: 14px;
@@ -8247,7 +8254,7 @@
                 .product-item {
                     background: #ffffff;
                     border-radius: 11px;
-                    border: 1px solid #e4e5e7;
+                    //border: 1px solid #e4e5e7;
                     .product-item-content {
                         margin: 0;
                     }
@@ -8265,6 +8272,7 @@
                     }
                     .btnNext {
                         width: 38px;
+                        min-width: 38px;
                         height: 38px;
                         display: flex;
                         align-items: center;
@@ -8283,7 +8291,7 @@
             }
         }
     }
-
+    
     app-flightdeals {
         button {
             background: none !important;
@@ -8295,7 +8303,6 @@
             }
         }
     }
-
     
     .p-galleria .p-galleria-close {
         margin: 0.5rem;
@@ -8347,11 +8354,24 @@
             color: #f8f9fa;
         }
     }
-
-
-
-
+    
     .oneWayCalendar .ngb-dp-month:first-child {
         border-right: 0!important;
         padding-right: 0!important;
+    }
+    
+    .cardHotel {
+        .p-element {
+            .p-carousel-content {
+                .p-carousel-container {
+                    .p-carousel-prev,
+                    .p-carousel-next {
+                        display: none !important;
+                    }
+                    .p-carousel-items-content {
+                        padding-bottom: 30px;
+                    }
+                }
+            }
+        }
     }
