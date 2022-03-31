@@ -20,7 +20,7 @@ export interface DistributionNinos  {
 
 export class DistributionObject implements IDistributionObject{
   constructor(
-    public nroAdultos: number = 0,
+    public nroAdultos: number = 1,
     public nroNinos: number = 0,
     public ninos: DistributionNinos[] = []
   ){}
