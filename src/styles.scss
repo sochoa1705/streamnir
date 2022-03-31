@@ -3765,6 +3765,10 @@
                 }
             }
         }
+        @media (max-width: 640px) {
+            left: 15px;
+            top: 55px;
+        }
     }
     
     .titleHome {
@@ -6561,6 +6565,9 @@
                 .customers {
                     width: 90px;
                     padding-top: 18px;
+                    @media (max-width: 640px) {
+                        width: auto;
+                    }
                 }
                 .boxFlotante {
                     right: 0;

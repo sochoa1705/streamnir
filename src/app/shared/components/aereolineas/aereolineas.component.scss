@@ -43,6 +43,7 @@
     box-sizing: border-box;
     border-radius: 10px;
     height: 105px;
+    overflow: hidden;
     .contentImg {
         transition: opacity 1s ease-out;
         opacity: 0;
@@ -87,12 +88,13 @@
     }
 }
 
-.contentSliderImg{
+.contentSliderImg {
     display: none;
-    &.active{
+    &.active {
         display: flex;
+        justify-content: space-around;
         width: 100%;
-        &>a>img{
+        &>a>img {
             @media (max-width: 768px) {
                 height: 15px;
             }
@@ -100,5 +102,4 @@
             margin: 0 6px;
         }
     }
-
 }
