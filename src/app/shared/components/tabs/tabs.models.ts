@@ -27,6 +27,25 @@ interface Params {
     flightType?: string
 }
 
+
+
+export class PasajerosConHabitacion implements Pasajeros {
+    constructor(
+        public adultos: number,
+        public ninos: number,
+        public infantes: number,
+        public habitacion: number
+    ) { }
+}
+
+export class PasajerosSinHabitacion implements Pasajeros {
+    constructor(
+        public adultos: number,
+        public ninos: number,
+        public infantes: number
+    ) { }
+}
+
 export type tapType = 'ONLY_HOTEL' | 'ONLY_CAR' | 'FLIGHT_HOTEL' | 'ONLY_HOTEL' | 'ONLY_TICKET' | 'ONLY_FLIGHT';
 interface UrlNmViajes {
     url: string;
