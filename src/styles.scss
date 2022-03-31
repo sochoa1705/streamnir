@@ -8328,3 +8328,11 @@
             color: #f8f9fa;
         }
     }
+
+
+
+
+    .oneWayCalendar .ngb-dp-month:first-child {
+        border-right: 0!important;
+        padding-right: 0!important;
+    }
