@@ -347,11 +347,11 @@
 
                     <ng-template matStepLabel>Reserva</ng-template>
                     <!-- DETALLE DE COBERTURA -->
-                    <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
+                    <h2 *ngIf="safe0Json.detalleCobertura && resultJson" class="titleCobertura mt-3">Detalle de cobertura</h2>
                     <!-- END DETALLE DE COBERTURA -->
                     <div *ngIf="safe0Json.detalleCobertura">
                         <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [txtOrigen]="" [txtDestino]="resultJson?.destinyString.descripcion_destino"
-                            [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion?.length"
+                            [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson['ClienteCotizacion'].length"
                             [plan]="safe0Json"></app-coverage>
                     </div>
 
@@ -2317,16 +2317,16 @@
                 <!-- END ACORDION VUELOS -->
 
                 <!-- DETALLE DE COBERTURA -->
-                <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
+                <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de coberturaN</h2>
                 <!-- END DETALLE DE COBERTURA -->
 
                 <!-- COBERTURA -->
-                <div *ngIf="safe0Json.detalleCobertura" class="order-0">
+                <div *ngIf="safe0Json.detalleCobertura && resultJson" class="order-0">
                     <!-- <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="coverage.Valor" [txtOrigen]=""
                         [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
                         [txtPasajeros]="resultJson?.ClienteCotizacion?.length +1" [plan]="safe0Json"></app-coverage> -->
                     <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [txtOrigen]="" [txtDestino]="resultJson?.destinyString.descripcion_destino"
-                        [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.ClienteCotizacion?.length"
+                        [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson.countCustomers"
                         [plan]="safe0Json"></app-coverage>
                 </div>
                 <!-- end COBERTURA -->

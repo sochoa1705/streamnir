@@ -1,16 +1,16 @@
 export const environment = {
-  production: true,
+  production: false,
   // urlBase: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',  // PRODUCCIÓN
   muteExceptions: false,                 // DESARROLLO
   nameAppAC: 'Intranet',
   identifierAC: 'NMViajes - Assist Card',
   codeEnvironmentAC: 'PROD/NMO/NMO',
-  undidadNegocioAC: 1,
-  dkAgenciaAC: '339',
+  undidadNegocioAC: 13,
+  dkAgenciaAC: '29581',
   subcodigoAgenciaAC: '1',
   sucursalAgenciaAC: '3',
   ptoventaAgenciaAC: '1',
-  comisionistaAgenciaAC: '146',
+  comisionistaAgenciaAC: '',
   today: (hoy: any) => {
     let fehcaHoy = `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
     return fehcaHoy

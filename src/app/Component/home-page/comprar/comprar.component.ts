@@ -20,6 +20,7 @@ import { CardPaymentService } from 'src/app/Services/cardPayment/card-payment.se
 import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
 import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interface';
 import { SafetyPayRQ } from 'src/app/Models/seguros/safetypayRQ.interface';
+import { PaymentService } from 'src/app/Services/payment/payment.service';
 
 interface Methods {
   id: string;
@@ -139,7 +140,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   dataShop: any
   ipCliente: any
   bankSteps: any
-
+  paymenData: any
   @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>
 
   @ViewChild('nameContactForm', { static: false }) inputNameContactForm!: ElementRef<HTMLInputElement>
@@ -159,6 +160,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     public secureBookingService: SecureBookingService,
     public cardPaymentService: CardPaymentService,
     public generatePayService: GeneratePayService,
+    public paymentService: PaymentService,
   ) {
     // COBERTURA
     this.coverageList = localStorage.getItem('coverage')
@@ -224,6 +226,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     let test = this.resultJson.passenger
     console.log(this.coverage)
     // console.log(this.shopString['customers'].length)
+    console.log(this.resultJson['ClienteCotizacion'].length)
 
     this.addTag()
     // this.showAdulto = 0
@@ -973,24 +976,25 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     // let varrr = this.formShop.controls['formContact'].controls['nameContacto'].errors.pattern
     console.log(this.formShop.getRawValue());
     // console.log(this.formShop.getRawValue()['formContact']['numberPhone0']);
-    console.log(this.safe0Json['reservaVuelos'])
+    // console.log(this.safe0Json['reservaVuelos'])
 
     if (this.validForm()) {
       // console.log(this.formShop);
-      console.log(this.formShop.value);
+      console.log(this.formShop.value)
       this.formShop.addControl('tipoRecibo', new FormControl('BV'))
-      // this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson.passenger.length));
+      this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson.passenger.length));
       this.dataShop = this.formShop.value
       let dataShop = this.formShop.value
       localStorage.setItem('shop', JSON.stringify(dataShop))
+      this.getSecureBooking(dataShop)
 
-      if (this.safe0Json['reservaVuelos']) {
-        console.log('Reseva Vuelos')
-        this.getReserva()
-      } else {
-        console.log('Reserva Seguros')
-        this.getSecureBooking()
-      }
+      // if (this.safe0Json['reservaVuelos']) {
+      //   console.log('Reseva Vuelos')
+      //   this.getReserva()
+      // } else {
+      //   console.log('Reserva Seguros')
+      //   this.getSecureBooking()
+      // }
       // console.log((this.formShop.controls));
       // console.log((<FormArray>this.formShop.get(['formContact', 'phones'])).controls)
       // this.route.navigateByUrl('/home/comprar', navigationExtras);
@@ -1028,6 +1032,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           }
         })
         // this.coverageDisplay = true
+        console.log(this.coverageList)
+
         localStorage.setItem('coverage', JSON.stringify(this.coverageList))
       },
       error: error => console.log(error),
@@ -1035,9 +1041,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       // data => console.log(data['Resultado']),
     )
   }
-  pasajerosArr() {
+  pasajerosArr(data: any) {
     let pasajeros: any = []
-    this.shopString.customers.forEach((value: any, index: number) => {
+    data.customers.forEach((value: any, index: number) => {
       let jsonPasajeros = {
         pax_nom: value.nameCustomer,
         pax_ape_pat: value.lastNameCustomer,
@@ -1092,13 +1098,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     // return Edad
   }
   // RESERVA DE SEGUROS
-  getSecureBooking() {
+  getSecureBooking(data: any) {
+    console.log(data)
+
     const textSend = 'SE ESTA GENERANDO SU RESERVA!'
     this.loaderSubjectService.showText(textSend)
     let lregistro: RegistrarSeguroRQ = {
       fec_salida: this.resultJson.fromDate,                       // FECHA DE PARTIDA
       fec_retorno: this.resultJson.toDate,                        // FECHA DE RETORNO
-      cant_paxes: this.shopString['customers'].length,               // CANTIDAD DE PASAJEROS
+      cant_paxes: this.resultJson.countCustomers,               // CANTIDAD DE PASAJEROS
       destino: this.resultJson.destinyString.descripcion_destino, // NOMBRE DEL DESTINO
       edades: `${this.agesCustomers};`,                           // EDADES CONCATENADAS CON PUNTO Y COMA
       prod_id: this.safe0Json.idProducto,                         // obtener desde plansAC.idProducto
@@ -1113,24 +1121,24 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       precio_unitario: this.safe0Json.precioUnitario,            // obtener desde plansAC.precioUnitario
       tipo_cambio: this.tipodeCambio,                            // TIPO DE CAMBIO DEL DIA
       vuelo_res_id: 0,
-      contacto_nom: this.shopString.formContact.nameContacto,           // NOMBRE DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
-      contacto_ape: this.shopString.formContact.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
-      contacto_email: this.shopString.formContact.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_direccion: (this.shopString.formContact.chkFac) ? this.shopString.formContact.recibo[0].direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_telfs: this.shopString.formContact.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
-      contacto_emerg_nom: this.shopString.formContact.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
-      contacto_emerg_ape: this.shopString.formContact.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
-      contacto_emerg_email: this.shopString.formContact.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
-      contacto_emerg_telf: this.shopString.formContact.numberPhone0,    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
-      ruc: (this.shopString.formContact.recibo.length === 0) ? `BV-${this.shopString.customers[0].numDocCustomer}` : this.shopString.formContact.recibo[0].ruc, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
-      razon_social: this.shopString.formContact.nameContacto + ' ' + this.shopString.formContact.lastnameContacto,  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
-      direccion_fiscal: (this.shopString.formContact.recibo.length === 0) ? '' : this.shopString.formContact.recibo[0].direccion, // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
+      contacto_nom: data.formContact.nameContacto,           // NOMBRE DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
+      contacto_ape: data.formContact.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
+      contacto_email: data.formContact.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
+      contacto_direccion: (data.formContact.chkFac) ? data.formContact.recibo[0].direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
+      contacto_telfs: data.formContact.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
+      contacto_emerg_nom: data.formContact.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
+      contacto_emerg_ape: data.formContact.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
+      contacto_emerg_email: data.formContact.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
+      contacto_emerg_telf: data.formContact.numberPhone0,    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
+      ruc: (data.formContact.recibo.length === 0) ? `BV-${data.customers[0].numDocCustomer}` : data.formContact.recibo[0].ruc, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
+      razon_social: data.formContact.nameContacto + ' ' + data.formContact.lastnameContacto,  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
+      direccion_fiscal: (data.formContact.recibo.length === 0) ? '' : data.formContact.recibo[0].direccion, // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
       comentario: '',
       webs_cid: 7,
       usuweb_id: 339,
       destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'N' : 'I', // obtener desde destiny.EsDestinoNacional
-      numeroruc: (this.shopString.formContact.recibo.length === 0) ? `BV-${this.shopString.customers[0].numDocCustomer}` : this.shopString.formContact.recibo[0].ruc,
-      comprobantepago: (this.shopString.formContact.chkFac) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
+      numeroruc: (data.formContact.recibo.length === 0) ? `BV-${data.customers[0].numDocCustomer}` : data.formContact.recibo[0].ruc,
+      comprobantepago: (data.formContact.chkFac) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
       usobilletera: 'N',
       codigobloqueo: '',
       dkcliente: environment.dkAgenciaAC,
@@ -1156,20 +1164,20 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       aplica_descuento: 0,
       id_unidad_negocio: environment.undidadNegocioAC,
       aplica_factura_comision: 0,
-      forma_de_pago: this.shopString.formCard.select21, // TARJETA, SAFETYPAY
+      forma_de_pago: data.formCard.select21, // TARJETA, SAFETYPAY
       porcentaje_descuento: 0,
       usosafetypay: 'N',
       codigo_safetypay: '',
       nro_pedido_srv: 0,
       fee_safetypay: 0,
       validarDuplicidad: false,
-      pasajeros: this.pasajerosArr(),
+      pasajeros: this.pasajerosArr(data),
       // pasajeros: [
       //   {
-      //     pax_nom: this.shopString.customers[0].nameCustomer,                   // NOMBRE DEL PASAJERO
-      //     pax_ape_pat: this.shopString.customers[0].lastNameCustomer,           // APELLIDOS DEL PASAJERO
-      //     doc_cid: (this.shopString.customers[0].typeDocCustomer).toLowerCase(),// TIPO DE DOUMENTO DE IDENTIDAD (DNI, PSP, CE)
-      //     pax_num_doc: this.shopString.customers[0].numDocCustomer,             // DOCUMENTO DE IDENTIDAD
+      //     pax_nom: data.customers[0].nameCustomer,                   // NOMBRE DEL PASAJERO
+      //     pax_ape_pat: data.customers[0].lastNameCustomer,           // APELLIDOS DEL PASAJERO
+      //     doc_cid: (data.customers[0].typeDocCustomer).toLowerCase(),// TIPO DE DOUMENTO DE IDENTIDAD (DNI, PSP, CE)
+      //     pax_num_doc: data.customers[0].numDocCustomer,             // DOCUMENTO DE IDENTIDAD
       //     pax_fec_nac: new Date(this.formattFecha()),                           // FECHA DE NACIMIENTO
       //     pax_voucher_travelace: '-',
       //     pax_control_travelace: '-',
@@ -1184,9 +1192,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       // ],
       cobertura: [
         {
-          unidad: this.coverage.Unidad,                                 // obtener desde coverageList.Unidad
-          atr_nom: this.coverage.Codigo + ' ' + this.coverage.Nombre,   // obtener desde coverageList.Codigo + ' ' + coverageList.Nombre
-          valor: this.coverage.Valor                                    // obtener desde coverageList.Valor
+          unidad: this.coverageList.Unidad,                                 // obtener desde coverageList.Unidad
+          atr_nom: this.coverageList.Codigo + ' ' + this.coverageList.Nombre,   // obtener desde coverageList.Codigo + ' ' + coverageList.Nombre
+          valor: this.coverageList.Valor                                    // obtener desde coverageList.Valor
         }
       ],
       nro_intentos_facturacion: 0,
@@ -1203,12 +1211,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.secureBookingService.secureBooking(payload).subscribe((response: any) => {
       this.reservation = response
       this.loaderSubjectService.closeLoader()
-      if (this.shopString.formCard.select21 === 'SAFETYPAY') {
-        this.getGeneratePay()
-      } else {
-        this.getCardPayment()
-      }
-
+      // if (data.formCard.select21 === 'SAFETYPAY') {
+      //   this.getGeneratePay(data)
+      // } else {
+      //   this.getCardPayment()
+      // }
+      this.toPayment(data)
     })
   }
   // RESERVA VUELOS
@@ -1327,35 +1335,39 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log(event.selectedIndex)
   }
   // SAFETYPAY
-  getGeneratePay() {
+  getGeneratePay(datos: any) {
     const textSend = 'SE ESTA PROCESANDO TU PAGO!'
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
 
     let lsafetypay: GenerarSafetyPayRQ = {
-      PromoterName: this.shopString.customers[0].nameCustomer,                 //NOMBRE DEL PRIMER PASAJERO ADULTO
-      CustomerName: this.shopString.customers[0].nameCustomer,                 //NOMBRE DEL PRIMER PASAJERO ADULTO
-      CustomerDocumentNumber: this.shopString.customers[0].numDocCustomer,     //DOCUMENTO DEL PRIMER PASAJERO ADULTO
-      IdClient: Number(environment.dkAgenciaAC),
+      PromoterName: datos.customers[0].nameCustomer,                 //NOMBRE DEL PRIMER PASAJERO ADULTO
+      CustomerName: datos.customers[0].nameCustomer,                 //NOMBRE DEL PRIMER PASAJERO ADULTO
+      CustomerDocumentNumber: datos.customers[0].numDocCustomer,     //DOCUMENTO DEL PRIMER PASAJERO ADULTO
+      IdClient: Number(environment.dkAgenciaAC), // 29581
       WebId: '7',
-      Mail: this.shopString.formContact.mailContacto,   //MAIL DEL PASAJERO
+      Mail: datos.formContact.mailContacto,   //MAIL DEL PASAJERO
       DKClient: environment.dkAgenciaAC,
       UserAgent: environment.identifierAC,
       IdUser: '56190',
       IpUser: this.ipCliente,                           //IP DEL CLIENTE
       Amount: {
         FeeAmount: 0,
-        RechargeAmount: (this.safe0Json['reservaVuelos']) ? this.detalleVuelos.pricingInfo.precioFinal : (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal, //COSTO TOTAL DEL SEGURO; SOLO SI destiny.EsDestinoNacional = 'S' ENTONCES MULTIPLICAR POR 1.18 (IGV)
+        // RechargeAmount: (this.safe0Json['reservaVuelos']) ? this.detalleVuelos.pricingInfo.precioFinal : (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal, //COSTO TOTAL DEL SEGURO; SOLO SI destiny.EsDestinoNacional = 'S' ENTONCES MULTIPLICAR POR 1.18 (IGV)
+        RechargeAmount: (this.resultJson.destinyString.es_nacional === 1) ? (datos.PriceTotal * 1.18) : datos.PriceTotal, //COSTO TOTAL DEL SEGURO; SOLO SI destiny.EsDestinoNacional = 'S' ENTONCES MULTIPLICAR POR 1.18 (IGV)
         Currency: 'USD'
       }
     }
     let payload = new NMRequestBy<GenerarSafetyPayRQ>(lsafetypay)
+    console.log(payload)
+
     this.generatePayService.generatePay(payload).subscribe({
       next: (response) => {
+        console.log(response)
         this.listBank = response
         this.timeShop(this.listBank['ExpirationDateTime'])
         this.bankSteps = this.listBank.PaymentLocations.filter((e: any) => {
-          let namco = this.shopString.formCard.bankPay
+          let namco = datos.formCard.bankPay
           if (namco === e.ID) {
             return e
           }
@@ -1487,5 +1499,82 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       'virtualPagePath': '/comprar',
       'virtualPageTitle': 'Checkout'
     })
+  }
+  toPayment(datos: any) {
+    const textSend = 'SE ESTA PROCESANDO TU PAGO!'
+    this.loaderSubjectService.showText(textSend)
+    this.loaderSubjectService.showLoader()
+    let payload = {
+      "TrackingCode": "0001234567890",
+      "MuteExceptions": false,
+      "Caller": {
+        "Company": "TravelCNMV",
+        "Application": "NM_Viajes",
+        "FromIP": this.ipCliente,
+        "FromBrowser": "Chrome"
+      },
+      "Parameter": {
+        "Method": "CreditCard",
+        "TransactionCode": "9aafccac-ebdb-49ff-81dc-4da6ac048d79",
+        "TypeOfOperation": "SEG",
+        "SignIn": {
+          "Username": "hugo.sanchez@expertiatravel.com"
+        },
+        "Customer": {
+          "Firstname": datos.nameCard,
+          "Lastname": "Oshiro",
+          "City": datos.cityCard,
+          "Address": datos.address,
+          "DocumentType": datos.tipoDoc,
+          "DocumentNumber": datos.numDoc,
+          "Email": "joshirog@gmail.com"
+        },
+        "Card": {
+          "Number": datos.formCard.numberCard,
+          "SecurityCode": datos.formCard.ccvCard,
+          "ExpirationDate": datos.formCard.expiredCard
+        },
+        "Amount": {
+          "Value": 11.00,
+          "Currency": "USD",
+          "OfFees": 0
+        },
+        "Bank": {
+          "Id": datos.formCard.bankPay,
+          "Name": "Banco de Crédito"
+        },
+        "Booking": {
+          "NumberInsurance": 10000,
+          "DateStart": "2022-03-31",
+          "DateEnd": "2022-03-31",
+          "NumberOfAdult": 1,
+          "NumberOfChildren": 0,
+          "RateCancellation": {
+            "Fee": 0,
+            "IsPercentage": true
+          }
+        },
+        "Setting": {
+          "HasAutomaticPayment": true,
+          "HasAQuoteCode": true
+        }
+      }
+    }
+    this.paymentService.payment(payload).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.paymenData = response
+        this.loaderSubjectService.closeLoader()
+
+        this.route.navigateByUrl('/conformidad')
+
+      },
+      error: (err) => {
+        console.log(err)
+        this.loaderSubjectService.closeLoader()
+
+      }
+    })
+
   }
 }

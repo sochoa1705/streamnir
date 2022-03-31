@@ -220,6 +220,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       this.form.removeControl('fromDate')
       this.form.removeControl('toDate')
       this.form.addControl('ClienteCotizacion', new FormControl(this.ClienteCotizacion))
+      this.form.addControl('countCustomers', new FormControl(this.ClienteCotizacion.length))
       this.form.addControl('Edades', new FormControl(this.ageCustomers))
       this.form.addControl('fromDate', new FormControl(startDate))
       this.form.addControl('toDate', new FormControl(endDate))
