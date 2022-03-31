@@ -5,7 +5,6 @@ import * as moment from "moment";
 import { ROUTE_VIAJES } from "../../constant";
 import { ICardAutocomplete } from "../card-autocomplete/card-autocomplete.interface";
 import { IForm } from "../filter-tabs/tab-vuelos/tab-vuelos.interfaces";
-import { IDistributionObject } from "../pop-up-pasajero/pop-up-pasajero.component";
 
 interface Pasajeros {
     adultos: number;
@@ -14,6 +13,21 @@ interface Pasajeros {
 }
 
 // habitacion:number;
+
+interface Params {
+    startDate: string;
+    endDate: string;
+    destino: any;
+    idDestino: string;
+    origen?: any;
+    businessClass?: boolean,
+    idOrigen?: string;
+    horaInicio?: string;
+    horaDestino?: string;
+    flightType?: string
+}
+
+
 
 export class PasajerosConHabitacion implements Pasajeros {
     constructor(
@@ -30,19 +44,6 @@ export class PasajerosSinHabitacion implements Pasajeros {
         public ninos: number,
         public infantes: number
     ) { }
-}
-
-interface Params {
-    startDate: string;
-    endDate: string;
-    destino: any;
-    idDestino: string;
-    origen?: any;
-    businessClass?: boolean,
-    idOrigen?: string;
-    horaInicio?: string;
-    horaDestino?: string;
-    flightType?: string
 }
 
 export type tapType = 'ONLY_HOTEL' | 'ONLY_CAR' | 'FLIGHT_HOTEL' | 'ONLY_HOTEL' | 'ONLY_TICKET' | 'ONLY_FLIGHT';
@@ -75,9 +76,9 @@ export class URLVuelos implements UrlNmViajes {
 
     private tab: tapType;
     private params: Params;
-    private distribution: IDistributionObject;
+    private distribution: any;
 
-    constructor(params: Params, distribution: IDistributionObject) {
+    constructor(params: Params, distribution: any) {
         this.tab = 'ONLY_FLIGHT';
         this.params = params;
         this.distribution = distribution;

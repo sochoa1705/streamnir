@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
-import { ParamsVueloHotel, PasajerosConHabitacion, URLVueloHotel } from '../../tabs/tabs.models';
+import { ParamsVueloHotel, URLVueloHotel } from '../../tabs/tabs.models';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 

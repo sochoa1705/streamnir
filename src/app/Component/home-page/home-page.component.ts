@@ -30,7 +30,7 @@ export class HomePageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getChange()
+    //this.getChange()
     this.getBusinessUnit()
     this.getIpCliente()
     this.getMain()
@@ -45,20 +45,7 @@ export class HomePageComponent implements OnInit {
       }
     })
   }
-  getChange() {
-    let lChange: ChangeRQ = {
-      Fecha: environment.today(new Date()),
-      IdMoneda: "SOL",
-      IdEmpresa: "1"
-    }
-    let payload = new NMRequestBy<ChangeRQ>(lChange)
-    this.dollarChangeService.changeDollar(payload).pipe(take(5)).subscribe({
-      next: (response) => {
-        localStorage.setItem('tipoCambio', response)
-        this.dollar = response
-      }
-    })
-  }
+  
   getBusinessUnit() {
     if (localStorage.getItem('businessunit') === null) {
       let payload = new NMRequest();

@@ -8283,7 +8283,7 @@
             }
         }
     }
-    
+
     app-flightdeals {
         button {
             background: none !important;
@@ -8295,10 +8295,7 @@
             }
         }
     }
-    
-    .modal-backdrop {
-        display: none;
-    }
+
     
     .p-galleria .p-galleria-close {
         margin: 0.5rem;
@@ -8349,4 +8346,12 @@
             background: rgba(255, 255, 255, 0.1);
             color: #f8f9fa;
         }
+    }
+
+
+
+
+    .oneWayCalendar .ngb-dp-month:first-child {
+        border-right: 0!important;
+        padding-right: 0!important;
     }

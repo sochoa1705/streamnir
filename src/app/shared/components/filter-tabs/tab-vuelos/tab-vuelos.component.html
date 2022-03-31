@@ -20,8 +20,7 @@
                 </mat-form-field>
             </div>
             <div class="padRight">
-                <app-pop-up-pasajero #popUp [onlyPasajeros]="true" [adultos]="vuelosTab?.pasajeros?.adultos || 1" [ninos]="vuelosTab?.pasajeros?.ninos || 0"
-                    [infantes]="vuelosTab?.pasajeros?.infantes || 0" (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero>
+                <app-pop-up-pasajero-vuelos #popUp [onlyPasajeros]="true" (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero-vuelos>
             </div>
         </div>
 

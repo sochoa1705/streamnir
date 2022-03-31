@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PopUpPasajeroComponent } from './pop-up-pasajero.component';
 import { GetNombrePipe } from './pipes/getNombrePopUp.pipe';
-import { FormsModule } from '@angular/forms';
+import { PopUpPasajeroVuelosComponent } from './pop-up-pasajero-vuelos.component';
 
 
 
 @NgModule({
   declarations: [
-    PopUpPasajeroComponent,
+    PopUpPasajeroVuelosComponent,
     GetNombrePipe
   ],
   imports: [
-    CommonModule,
-    FormsModule
+    CommonModule
   ],
   exports:[
-    PopUpPasajeroComponent
+    PopUpPasajeroVuelosComponent
   ]
 })
-export class PopUpPasajeroModule { }
+export class PopUpPasajerVuelosoModule { }

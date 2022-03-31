@@ -20,28 +20,28 @@ export enum ENDPOINT_API {
   ciudad = 'pStrIdCiudad',
 
   // COBERTURA
-  COVERAGE = 'ObtenerCobertura',
+  COVERAGE = 'tarjetaAsistencia/ObtenerCobertura',
 
   // UNIDAD DE NEGOCIOS
-  BUSINESS_UNIT = 'ObtenerUnidadesNegocio',
+  BUSINESS_UNIT = 'productoAsistencia/ObtenerUnidadesNegocio',
 
   // UNIDAD DE NEGOCIOS VENDEDOR
   BUSINESS_UNIT_SELLER = 'ObtenerUnidadNegocioByVendedor',
 
   // DESTINOS
-  DESTINY = 'Destinos',
+  DESTINY = 'generales/Destinos',
 
   // PLANSAC
-  PLANSAC = 'ObtenerPlanesAC',
+  PLANSAC = 'tarjetaAsistencia/ObtenerPlanesAC',
 
   // SECUREBOOKING
-  SECURE_BOOKING = 'RegistrarReservaSeguro',
+  SECURE_BOOKING = 'reservas/RegistrarReservaSeguro',
 
   // GENERATEPAY
-  GENERATE_PAY = 'GenerarPagoSafetyPay',
+  GENERATE_PAY = 'safetypay/GenerarPagoSafetyPay',
 
   // UPDATESAFETYPAY
-  UPDATE_PAY = 'ActualizarSafetyPayReservaSeguro',
+  UPDATE_PAY = 'reservas/ActualizarSafetyPayReservaSeguro',
 
   // UPDATESAFETYPAY
   UPDATE_STATE = 'ActualizarEstadoReservaSeguro',

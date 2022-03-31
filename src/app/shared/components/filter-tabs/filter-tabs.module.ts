@@ -14,6 +14,7 @@ import { TabActividadesComponent } from './tab-actividades/tab-actividades.compo
 import { CalendarModule } from '../calendar/calendar.module';
 import { TabVuelosComponent } from './tab-vuelos/tab-vuelos.component';
 import { InputAutocompleteModule } from '../input-autocomplete/input-autocomplete.module';
+import { PopUpPasajerVuelosoModule } from '../pop-up-pasajero-vuelos/pop-up-pasajero-vuelos.module';
 
 
 
@@ -30,7 +31,8 @@ import { InputAutocompleteModule } from '../input-autocomplete/input-autocomplet
     PopUpPasajeroModule,
     MaterialModule,
     CalendarModule,
-    InputAutocompleteModule
+    InputAutocompleteModule,
+    PopUpPasajerVuelosoModule
   ],
   providers: [
     MatSnackBar

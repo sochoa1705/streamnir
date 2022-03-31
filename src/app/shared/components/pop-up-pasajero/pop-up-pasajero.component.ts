@@ -1,93 +1,109 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { Guid } from '../../utils';
-import { PasajerosConHabitacion, PasajerosSinHabitacion } from '../tabs/tabs.models';
-
-export interface IDistributionObject{
-  habitacion:number,
-  adultos:number,
-  ninos:number,
-  infantes:number,
-  pasajeros: any[],
-}
+import {
+  DistributionObject,
+  IDistributionObject,
+  IDistributionObjectVuelos,
+} from './pop-up-pasajero.model';
+import { NotificationService } from '../../../Services/notification.service';
 
 @Component({
   selector: 'app-pop-up-pasajero',
   templateUrl: './pop-up-pasajero.component.html',
   styleUrls: ['./pop-up-pasajero.component.scss'],
-  animations:[
-    trigger('openClose',[
+  animations: [
+    trigger('openClose', [
       transition(':enter', [
         style({ opacity: 0 }),
         animate('300ms', style({ opacity: 1 })),
       ]),
-      transition(':leave', [
-        animate('100ms', style({ opacity: 0 }))
-      ])
-    ])
-  ]
+      transition(':leave', [animate('100ms', style({ opacity: 0 }))]),
+    ]),
+  ],
 })
-export class PopUpPasajeroComponent implements OnInit{
-
+export class PopUpPasajeroComponent implements OnInit {
   showOption: Boolean = true;
-  
-  habitacion = 1;
 
-  @Input() adultos  = 0;
-  @Input() ninos = 0;
-  @Input() infantes = 0;
-
-  pasajeros = 0
+  pasajeros = 0;
   validPasajeros = false;
 
-  idContent:string;
+  idContent: string;
 
-  idStateOpen:string = '';
+  idStateOpen: string = '';
+
+  habitaciones: IDistributionObject[] = [];
 
   @Input() onlyPasajeros = false;
   @Input() habitacionDisabled = true;
 
-  @Output() emitDistribution= new EventEmitter<string>();
+  @Output() emitDistribution = new EventEmitter<string>();
 
-  @Output() emitDistributionObject= new EventEmitter<IDistributionObject>();
+  @Output() emitDistributionObject = new EventEmitter<IDistributionObjectVuelos>();
 
-  constructor(private popupService:PopupService) {
+  constructor(
+    private popupService: PopupService,
+    private notificationService: NotificationService
+  ) {
     this.idContent = `popup_${Guid()}`;
   }
 
-  ngOnInit(){
-    this.popupService.state().subscribe(state=>{
+  ngOnInit() {
+    this.popupService.state().subscribe((state) => {
       this.showOption = state.open;
       this.idStateOpen = state.id;
 
-      const popUpPasajeroModel = new PasajerosConHabitacion(this.adultos,this.ninos,this.infantes,this.habitacion);
-
-      if(!state.open){
-        const distribution = this.getDistributionUrl(popUpPasajeroModel);
-        
-          this.emitDistributionObject.emit(
-            {
-              habitacion:this.habitacion,
-              adultos:this.adultos,
-              ninos:this.ninos,
-              infantes:this.infantes,
-              pasajeros: []
-            }
-          );
-
-          this.emitDistribution.emit(distribution);
+      if (!state.open) {
+        const distributionStr = this.getDistributionUrl(this.habitaciones);
+        const objDistribution = this.getDistributionObj(this.habitaciones);
+                
+        this.emitDistributionObject.emit( objDistribution );
+        this.emitDistribution.emit(distributionStr);
       }
-    }) 
-    
+    });
+
+    this.agregarHabitacion();
   }
 
-  isValid(){
-    if(this.adultos>0){
-      return true
+  changeInputEdad(e: any, item: { edad: number }) {
+    let value = e.target.value;
+
+    if (value < 0) {
+      e.target.value = 0;
+    } else if (value > 17) {
+      e.target.value = 17;
     }
-    return false
+
+    item.edad = e.target.value;
+  }
+
+  agregarHabitacion() {
+    const distributionInitial = new DistributionObject();
+    this.habitaciones.push(distributionInitial);
+  }
+
+  eliminarHabitacion(i: number) {
+    this.habitaciones.splice(i, 1);
+  }
+
+  isValid() {
+    return true;
   }
 
   showPasajero() {
@@ -95,52 +111,128 @@ export class PopUpPasajeroComponent implements OnInit{
     // this.showOption = this.showOption ? false : true;
   }
 
-  closePopUp(){
+  closePopUp() {
     this.popupService.closePopUp(this.idContent);
   }
 
-  public calculateDistributionTravel(optionTravel:string, optionAddRemove: number): void {
+  public calculateDistributionTravel(
+    distribution: IDistributionObject,
+    optionTravel: 'ninos' | 'adultos',
+    optionAddRemove: number
+  ): void {
+    if (
+      distribution.nroNinos === 4 &&
+      optionTravel == 'ninos' &&
+      optionAddRemove === 1
+    ) {
+      this.notificationService.showNotificacion(
+        'Error',
+        'Solo se permiten 4 niños'
+      );
+      return;
+    }
 
-    switch(optionTravel) {
-      case 'habitacion' :
-        if(!this.habitacionDisabled){
-          this.habitacion += this.habitacion === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
+    if (
+      distribution.nroNinos + distribution.nroAdultos === 10 &&
+      optionAddRemove === 1
+    ) {
+      this.notificationService.showNotificacion(
+        'Error',
+        'Se permiten máximo 10 personas'
+      );
+      return;
+    }
+
+    switch (optionTravel) {
+      case 'adultos':
+        distribution.nroAdultos +=
+          distribution.nroAdultos === 0 && optionAddRemove === 0
+            ? 0
+            : optionAddRemove === 1
+            ? 1
+            : -1;
+        break;
+      case 'ninos':
+        if (distribution.nroNinos == 0 && optionAddRemove === 0) {
+          return;
+        } else if (optionAddRemove === 1) {
+          distribution.addNino();
+        } else if (distribution.nroNinos > 0 && optionAddRemove === 0) {
+          distribution.deleteNino();
         }
         break;
-      case 'adultos' :
-        this.adultos += this.adultos === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        break;
-      case 'ninos' :
-        this.ninos += this.ninos === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        break;
-      case 'infantes' :
-        this.infantes += this.infantes === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
-        break;
     }
   }
 
-
-  savePasajeros(){    
+  savePasajeros() {
     this.popupService.closePopUp(this.idContent);
   }
 
-  public getDistributionUrl(pasajeros:PasajerosSinHabitacion){
-    let urlDistributon = pasajeros.adultos.toString();
 
-    let ninos = pasajeros.infantes + pasajeros.ninos;
+  getDistributionObj(habitaciones: IDistributionObject[]){
 
-    if(ninos > 0) {
-      urlDistributon += `-${ninos}-`;
-    } else{
-      urlDistributon += "-0";
+    let ninos = 0;
+    let infantes = 0;
+
+    if(habitaciones.length == 0){
+      return {
+        habitacion: 0,
+        adultos:0,
+        ninos: ninos,
+        infantes:infantes,
+        pasajeros: []
+      }
     }
-    for(let i=0;i<pasajeros.ninos;i++) {
-      urlDistributon += "10,"
+
+    habitaciones[0].ninos.forEach(item=>{
+      if(item.edad <= 11 && item.edad >= 2){
+        ninos ++;
+      }else if (item.edad <2){
+        infantes ++;
+      }
+    })
+
+  return   {
+      habitacion: 0,
+      adultos:habitaciones[0].nroAdultos,
+      ninos: ninos,
+      infantes:infantes,
+      pasajeros: []
     }
-    for(let i=0;i<pasajeros.infantes;i++) {
-      urlDistributon += "2,"
-    }
-    urlDistributon = urlDistributon.charAt(urlDistributon.length - 1 ) === ',' ? urlDistributon.substring(0, urlDistributon.length - 1) : urlDistributon;
+
+  }
+
+  public getDistributionUrl(habitaciones: IDistributionObject[]) {
+    // 2-0::3-3-12,15,12
+
+    let urlDistributon = '';
+
+    habitaciones.forEach((habitacion, i, arr) => {
+      let adultos = habitacion.nroAdultos;
+      let ninos = habitacion.nroNinos;
+
+      if (i == 0) {
+        urlDistributon = adultos.toString();
+      } else {
+        urlDistributon += '::' + adultos.toString();
+      }
+
+      if (ninos > 0) {
+        urlDistributon += `-${ninos}-`;
+      } else {
+        urlDistributon += '-0';
+      }
+
+      habitacion.ninos.forEach((nino, i, arr) => {
+        urlDistributon += nino.edad.toString() + ',';
+      });
+
+      urlDistributon =
+        urlDistributon.charAt(urlDistributon.length - 1) === ','
+          ? urlDistributon.substring(0, urlDistributon.length - 1)
+          : urlDistributon;
+    });
+
     return urlDistributon;
   }
 }
