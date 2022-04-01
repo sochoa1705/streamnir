@@ -101,8 +101,6 @@ export class AerolineasComponent implements OnInit {
       'Caller.Company': "Agil",
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
-      debugger
-
       this.nationalFlightDeals = JSON.parse(res).Result;
     });
   }
