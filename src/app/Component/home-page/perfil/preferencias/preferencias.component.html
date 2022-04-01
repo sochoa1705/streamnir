@@ -1,0 +1,492 @@
+<!-- PREFERENCIAS -->
+<div class="viewDocument">
+    <div class="personalDocument">
+        <div class="headerPortlet">
+            <div class="titleBoxRight">Preferencias</div>
+            <div class="subtitleBoxRight">Datos de contacto</div>
+        </div>
+        <form [formGroup]="formPreference">
+            <div class="content">
+                <div class="rowContent">
+                    <div class="inputGroup col-md-">
+                        <span class="">Nombres</span>
+                        <input type="text" formControlName="nombres" class="form-control"
+                            placeholder="El que figura en el documento de viaje."
+                            [ngClass]="getMessage(MSG_NOMBRES) !== MSG_EMPTY ? 'isvalid' : ''">
+                        <span class="valid" *ngIf="getMessage(MSG_NOMBRES) !== MSG_EMPTY">{{ getMessage(MSG_NOMBRES)
+                            }}</span>
+                    </div>
+                    <div class="inputGroup">
+                        <span class="">Apellido paterno</span>
+                        <input type="text" formControlName="apellidoPaterno" class="form-control"
+                            placeholder="El que figura en el documento de viaje."
+                            [ngClass]="getMessage(MSG_APELLIDO_PATERNO) !== MSG_EMPTY ? 'isvalid' : ''">
+                        <span class="valid" *ngIf="getMessage(MSG_APELLIDO_PATERNO) !== MSG_EMPTY">{{
+                            getMessage(MSG_APELLIDO_PATERNO) }}</span>
+                    </div>
+                </div>
+                <div class="rowContent">
+                    <div class="inputGroup">
+                        <span class="">Apellido materno</span>
+                        <input type="text" formControlName="apellidoMaterno" class="form-control"
+                            placeholder="El que figura en el documento de viaje."
+                            [ngClass]="getMessage(MSG_APELLIDO_MATERNO) !== MSG_EMPTY ? 'isvalid' : ''">
+                        <span class="valid" *ngIf="getMessage(MSG_APELLIDO_MATERNO) !== MSG_EMPTY">{{
+                            getMessage(MSG_APELLIDO_MATERNO) }}</span>
+                    </div>
+                    <div class="inputGroup">
+                        <span class="">Correo electrónico</span>
+                        <input type="text" formControlName="email" class="form-control"
+                            placeholder="El que figura en el documento de viaje."
+                            [ngClass]="getMessage(MSG_MAIL) !== MSG_EMPTY ? 'isvalid' : ''">
+                        <span class="valid" *ngIf="getMessage(MSG_MAIL) !== MSG_EMPTY">{{ getMessage(MSG_MAIL) }}</span>
+                    </div>
+                </div>
+                <div class="rowContent">
+                    <div class="inputGroup">
+                        <span class="">Fecha de nacimiento</span>
+                        <div class="rowElement">
+                            <input type="text" maxlength="2" class="form-control marginRight10" formControlName="dia"
+                                placeholder="Dia">
+                            <select class="form-select marginRight10" formControlName="mes"
+                                aria-label="Default select example">
+                                <option selected>Mes</option>
+                                <option value="1">Enero</option>
+                                <option value="2">Febrero</option>
+                                <option value="3">Marzo</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Mayo</option>
+                                <option value="6">Junio</option>
+                                <option value="7">Julio</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Setiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Dciembre</option>
+                            </select>
+                            <select class="form-select" formControlName="anio" aria-label="Default select example">
+                                <option selected>Año</option>
+                                <option *ngFor="let anio of anios" [value]="anio">{{ anio }}</option>
+                                <!-- <option value="2">1991</option>
+                                            <option value="3">1992</option> -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="inputGroup">
+                        <span class="">Nacionalidad</span>
+                        <select class="form-select" formControlName="nacionalidad" aria-label="Default select example">
+                            <option value="PE" selected>Perú</option>
+                            <option value="AF">Afganistan</option>
+                            <option value="AX">Aland Island</option>
+                            <option value="AL">Albania</option>
+                            <option value="DE">Alemania</option>
+                            <option value="DZ">Algeria</option>
+                            <option value="DZ">American Samoa</option>
+                            <option value="AD">Andorra</option>
+                            <option value="AO">Angola</option>
+                            <option value="AI">Anguilla</option>
+                            <option value="AQ">Antartida</option>
+                            <option value="AG">Antigua and Barbuda</option>
+                            <option value="AN">Antillas Holandesas</option>
+                            <option value="SA">Arabia Saudita</option>
+                            <option value="AR">Argentina</option>
+                            <option value="AM">Armenia</option>
+                            <option value="AW">Aruba</option>
+                            <option value="AC">Ascension Islands</option>
+                            <option value="AU">Australia</option>
+                            <option value="AT">Austria</option>
+                            <option value="AZ">Azerbaijan</option>
+                            <option value="BS">Bahamas</option>
+                            <option value="BH">Bahrain</option>
+                            <option value="BD">Bangladesh</option>
+                            <option value="BB">Barbados</option>
+                            <option value="BY">Belarus</option>
+                            <option value="BE">Belgica</option>
+                            <option value="BZ">Belize</option>
+                            <option value="BJ">Benin</option>
+                            <option value="BM">Bermuda</option>
+                            <option value="BT">Bhutan</option>
+                            <option value="BO">Bolivia</option>
+                            <option value="BA">Bosnia and Herzegovina</option>
+                            <option value="BW">Botswana</option>
+                            <option value="BV">Bouvet Island</option>
+                            <option value="BR">Brasil</option>
+                            <option value="IO">British Indian Ocean Territory</option>
+                            <option value="BN">Brunei Darussalam</option>
+                            <option value="BG">Bulgaria</option>
+                            <option value="BF">Burkina Faso</option>
+                            <option value="BI">Burundi</option>
+                            <option value="CV">Cabo Verde</option>
+                            <option value="KH">Cambodia</option>
+                            <option value="CM">Camerun</option>
+                            <option value="CA">Canada</option>
+                            <option value="CF">Central African Republic</option>
+                            <option value="TD">Chad</option>
+                            <option value="CL">Chile</option>
+                            <option value="CN">China</option>
+                            <option value="CX">Christmas Islands</option>
+                            <option value="CC">Cocos (Keeling )Islands</option>
+                            <option value="CO">Colombia</option>
+                            <option value="KM">Comoros</option>
+                            <option value="CG">Congo</option>
+                            <option value="CK">Cook Islands</option>
+                            <option value="KP">Corea del Norte</option>
+                            <option value="KR">Corea del Sur</option>
+                            <option value="CR">Costa Rica</option>
+                            <option value="CI">Cote D'Ivoire</option>
+                            <option value="HR">Croacia</option>
+                            <option value="CU">Cuba</option>
+                            <option value="CY">Cyprus</option>
+                            <option value="DK">Dinamarca</option>
+                            <option value="DJ">Djibouti</option>
+                            <option value="DM">Dominica</option>
+                            <option value="TP">East Timor</option>
+                            <option value="EC">Ecuador</option>
+                            <option value="EG">Egipto</option>
+                            <option value="SV">El Salvador</option>
+                            <option value="AE">Emiratos Arabes</option>
+                            <option value="GQ">Equatorial Guinea</option>
+                            <option value="ER">Eritrea</option>
+                            <option value="SK">Eslovaquia</option>
+                            <option value="SI">Eslovenia</option>
+                            <option value="ES">España</option>
+                            <option value="US">Estados Unidos</option>
+                            <option value="EE">Estonia</option>
+                            <option value="ET">Etiopia</option>
+                            <option value="EU">Europa</option>
+                            <option value="FO">Faroe Islands</option>
+                            <option value="RU">Federacion Rusa</option>
+                            <option value="FJ">Fiji</option>
+                            <option value="PH">Filipinas</option>
+                            <option value="FI">Finlandia</option>
+                            <option value="FR">Francia</option>
+                            <option value="TF">French Southern Territories</option>
+                            <option value="GA">Gabon</option>
+                            <option value="GM">Gambia</option>
+                            <option value="GE">Georgia</option>
+                            <option value="GH">Ghana</option>
+                            <option value="GI">Gibraltar</option>
+                            <option value="GD">Granada</option>
+                            <option value="GR">Grecia</option>
+                            <option value="GL">Groenlandia</option>
+                            <option value="GP">Guadalupe</option>
+                            <option value="GU">Guam</option>
+                            <option value="GT">Guatemala</option>
+                            <option value="GF">Guayana Francesa</option>
+                            <option value="GN">Guinea</option>
+                            <option value="GW">Guinea-Bissau</option>
+                            <option value="GY">Guyana</option>
+                            <option value="HT">Haiti</option>
+                            <option value="HM">Heard Island and McDonald Islands</option>
+                            <option value="VA">Holy See (Vatican City State)</option>
+                            <option value="HN">Honduras</option>
+                            <option value="HK">Hong Kong</option>
+                            <option value="HU">Hungria</option>
+                            <option value="IN">India</option>
+                            <option value="ID">Indonesia</option>
+                            <option value="IR">Iran</option>
+                            <option value="IQ">Iraq</option>
+                            <option value="IE">Irlanda</option>
+                            <option value="IS">Islandia</option>
+                            <option value="KY">Islas Caiman</option>
+                            <option value="FK">Islas Malvinas</option>
+                            <option value="VG">Islas Virgenes Britanicas</option>
+                            <option value="VI">Islas Virgenes, USA</option>
+                            <option value="IL">Israel</option>
+                            <option value="IT">Italia</option>
+                            <option value="JM">Jamaica</option>
+                            <option value="JP">Japón</option>
+                            <option value="JO">Jordan</option>
+                            <option value="KZ">Kazakstan</option>
+                            <option value="KE">Kenia</option>
+                            <option value="KI">Kiribati</option>
+                            <option value="KW">Kuwait</option>
+                            <option value="KG">Kyrgyzstan</option>
+                            <option value="LA">Lao People's Democratic Republic</option>
+                            <option value="LS">Lesotho</option>
+                            <option value="LV">Letonia</option>
+                            <option value="LB">Libano</option>
+                            <option value="LR">Liberia</option>
+                            <option value="LY">Libia</option>
+                            <option value="LI">Liechtenstein</option>
+                            <option value="LT">Lituania</option>
+                            <option value="LU">Luxemburgo</option>
+                            <option value="MO">Macau</option>
+                            <option value="MK">Macedonia</option>
+                            <option value="MG">Madagascar</option>
+                            <option value="MY">Malasia</option>
+                            <option value="MW">Malawi</option>
+                            <option value="MV">Maldivas</option>
+                            <option value="ML">Mali</option>
+                            <option value="MT">Malta</option>
+                            <option value="MA">Marruecos</option>
+                            <option value="MH">Marshall Islands</option>
+                            <option value="MQ">Martinica</option>
+                            <option value="MR">Mauritania</option>
+                            <option value="MU">Mauritius</option>
+                            <option value="YT">Mayotte</option>
+                            <option value="MX">Mexico</option>
+                            <option value="FM">Micronesia, Federated States of</option>
+                            <option value="MD">Moldova, Republic of</option>
+                            <option value="MC">Monaco</option>
+                            <option value="MN">Mongolia</option>
+                            <option value="ME">Montenegro</option>
+                            <option value="MS">Montserrat</option>
+                            <option value="MZ">Mozambique</option>
+                            <option value="MM">Myanmar</option>
+                            <option value="NA">Namibia</option>
+                            <option value="NR">Nauru</option>
+                            <option value="NP">Nepal</option>
+                            <option value="NI">Nicaragua</option>
+                            <option value="NE">Niger</option>
+                            <option value="NG">Nigeria</option>
+                            <option value="NU">Niue</option>
+                            <option value="NL">Norfolk Island</option>
+                            <option value="MP">Northern Mariana Islands</option>
+                            <option value="NO">Noruega</option>
+                            <option value="NC">Nueva Caledonia</option>
+                            <option value="NZ">Nueva Zelandia</option>
+                            <option value="OM">Oman</option>
+                            <option value="NL">Paises Bajos</option>
+                            <option value="PK">Pakistan</option>
+                            <option value="PW">Palau</option>
+                            <option value="PS">Palestinian Territory, Occupied</option>
+                            <option value="PA">Panama</option>
+                            <option value="PG">Papua Nueva Guinea</option>
+                            <option value="PY">Paraguay</option>
+                            <option value="PE">Peru</option>
+                            <option value="PF">Polinesia Francesa</option>
+                            <option value="PL">Polonia</option>
+                            <option value="PT">Portugal</option>
+                            <option value="PR">Puerto Rico</option>
+                            <option value="QA">Qatar</option>
+                            <option value="GB">Reino Unido</option>
+                            <option value="SY">Republica Arabe Siria</option>
+                            <option value="CZ">Republica Checa</option>
+                            <option value="CD">Republica Democratica del Congo</option>
+                            <option value="DO">Republica Dominicana</option>
+                            <option value="RE">Reunion</option>
+                            <option value="RO">Romania</option>
+                            <option value="RW">Rwanda</option>
+                            <option value="KN">Saint Kitts and Nevis</option>
+                            <option value="LC">Saint Lucia</option>
+                            <option value="VC">Saint Vincent and the Grenadines</option>
+                            <option value="WS">Samoa</option>
+                            <option value="SM">San Marino</option>
+                            <option value="ST">Sao Tome and Principe</option>
+                            <option value="SN">Senegal</option>
+                            <option value="RS">Serbia</option>
+                            <option value="CS">Serbia y Montenegro</option>
+                            <option value="SC">Seychelles</option>
+                            <option value="SL">Sierra Leona</option>
+                            <option value="SG">Singapur</option>
+                            <option value="SB">Solomon Islands</option>
+                            <option value="SO">Somalia</option>
+                            <option value="GS">South Georgia And The South Sandwich Island</option>
+                            <option value="LK">Sri Lanka</option>
+                            <option value="SH">St.Helena</option>
+                            <option value="PM">St.Pierre And Miquelon</option>
+                            <option value="SZ">Suazilandia</option>
+                            <option value="ZA">Sudafrica</option>
+                            <option value="SD">Sudan</option>
+                            <option value="SE">Suecia</option>
+                            <option value="CH">Suiza</option>
+                            <option value="SR">Suriname</option>
+                            <option value="SJ">Svalbard And Jan Mayen Islands</option>
+                            <option value="TH">Tailandia</option>
+                            <option value="TW">Taiwan</option>
+                            <option value="TJ">Tajikistan</option>
+                            <option value="TZ">Tanzania</option>
+                            <option value="TL">Timor-Leste</option>
+                            <option value="TG">Togo</option>
+                            <option value="TK">Tokelau</option>
+                            <option value="TO">Tonga</option>
+                            <option value="TT">Trinidad and Tobago</option>
+                            <option value="TN">Tunisia</option>
+                            <option value="TM">Turkmenistan</option>
+                            <option value="TC">Turks and Caicos Islands</option>
+                            <option value="TR">Turquia</option>
+                            <option value="TV">Tuvalu</option>
+                            <option value="UG">Uganda</option>
+                            <option value="UA">Ukraine</option>
+                            <option value="UM">United States Minor Outlying Islands</option>
+                            <option value="UY">Uruguay</option>
+                            <option value="UZ">Uzbekistan</option>
+                            <option value="VU">Vanuatu</option>
+                            <option value="VE">Venezuela</option>
+                            <option value="VN">Vietnam</option>
+                            <option value="WF">Wallis And Futuna Islands</option>
+                            <option value="YD">Yemen</option>
+                            <option value="YE">Yemen</option>
+                            <option value="YU">Yugoslavia</option>
+                            <option value="ZR">Zaire</option>
+                            <option value="ZM">Zambia</option>
+                            <option value="ZW">Zimbabwe</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="rowContent">
+                    <div class="inputGroup flexNowrap">
+                        <div class="rowElement">
+                            <div class="nroDoc marginRight10">
+                                <span class="">Tipo de documento</span>
+                                <select class="form-select" formControlName="tipoDocumento"
+                                    aria-label="Default select example"
+                                    [ngClass]="getMessage(MSG_TIPO_DOCUMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
+                                    <option selected>Seleccione</option>
+                                    <option value="1">DNI</option>
+                                    <option value="2">Pasaporte</option>
+                                </select>
+                                <span class="valid" *ngIf="getMessage(MSG_TIPO_DOCUMENTO) !== MSG_EMPTY">{{
+                                    getMessage(MSG_TIPO_DOCUMENTO) }}</span>
+                            </div>
+                        </div>
+                        <div class="rowElement">
+                            <div class="nroDoc">
+                                <span class="">N° de documento</span>
+                                <input type="text" class="form-control" formControlName="numeroDocumento"
+                                    placeholder="Ingresar Nro"
+                                    [ngClass]="getMessage(MSG_NUMERO_DOCUMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
+                                <span class="valid" *ngIf="getMessage(MSG_NUMERO_DOCUMENTO) !== MSG_EMPTY">{{
+                                    getMessage(MSG_NUMERO_DOCUMENTO) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inputGroup">
+                        <!-- <span class="">Sexo</span>
+                                    <div class="rowElement">
+                                        <div class="optionLeft">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Femenino
+                                            </label>
+                                        </div>
+                                        <div class="optionRight">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                Masculino
+                                            </label>
+                                        </div>
+                                    </div> -->
+                    </div>
+                </div>
+                <div class="rowContent">
+                    <div class="inputGroup">
+                        <span class="">País</span>
+                        <select class="form-select marginRight10" (change)="optionDepartament($event)"
+                            formControlName="pais" aria-label="Default select example"
+                            [ngClass]="getMessage(MSG_PAIS) !== MSG_EMPTY ? 'isvalid' : ''">
+                            <option selected>Seleccione país</option>
+                            <option *ngFor="let option of paises" [value]="option.Code">{{ option.Name }}
+                            </option>
+                        </select>
+                        <span class="valid" *ngIf="getMessage(MSG_PAIS) !== MSG_EMPTY">{{ getMessage(MSG_PAIS) }}</span>
+                    </div>
+                    <div class="inputGroup">
+                        <span class="">Departamento</span>
+                        <select class="form-select" (change)="optionDistrict($event)" formControlName="departamento"
+                            aria-label="Default select example"
+                            [ngClass]="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
+                            <option selected>Seleccione departamento</option>
+                            <option *ngFor="let option of departamentos" [value]="option.Code">{{ option.Name }}
+                            </option>
+                        </select>
+                        <span class="valid" *ngIf="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY">{{
+                            getMessage(MSG_DEPARTAMENTO)
+                            }}</span>
+                    </div>
+                    <div class="inputGroup">
+                        <span class="">Distrito</span>
+                        <select class="form-select" formControlName="distrito" aria-label="Default select example"
+                            [ngClass]="getMessage(MSG_DISTRITO) !== MSG_EMPTY ? 'isvalid' : ''">
+                            <option selected>Seleccione distrito</option>
+                            <option *ngFor="let option of distritos" [value]="option.Code">{{ option.Name }}
+                            </option>
+                        </select>
+                        <span class="valid" *ngIf="getMessage(MSG_DISTRITO) !== MSG_EMPTY">{{ getMessage(MSG_DISTRITO)
+                            }}</span>
+                    </div>
+                </div>
+
+                <div class="moreInfo">
+                    <div class="title">Mis preferencias</div>
+                    <div class="question">¿Cuáles son tus preferencias de viaje?
+                        <span>(puedes elegir más de una opción)</span>
+                    </div>
+                    <div class="groupOption" formGroupName="preference">
+                        <mat-checkbox *ngFor="let chk of listPreferent" [formControlName]="chk.name" [value]="chk.value"
+                            class="checkOption">{{ chk.text }}</mat-checkbox>
+                        <!-- <span class="valid" *ngIf="getMessage(MSG_CHK_PREFE) !== MSG_EMPTY">{{ getMessage(MSG_CHK_PREFE) }}</span> -->
+
+                        <!-- <mat-checkbox formControlName="playa" class="checkOption">Playa</mat-checkbox>
+                                            <mat-checkbox formControlName="aventura" class="checkOption">Aventura</mat-checkbox>
+                                        <mat-checkbox formControlName="naturaleza" class="checkOption">Naturaleza</mat-checkbox>
+                                        <mat-checkbox formControlName="exotico" class="checkOption">Exóticos</mat-checkbox>
+                                        <mat-checkbox formControlName="tematico" class="checkOption">Temático</mat-checkbox>
+                                        <mat-checkbox formControlName="shopping" class="checkOption">Shopping</mat-checkbox>
+                                        <mat-checkbox formControlName="crucero" class="checkOption">Cruceros</mat-checkbox>
+                                        <mat-checkbox formControlName="cultural" class="checkOption">Cultural</mat-checkbox>
+                                        <mat-checkbox formControlName="otros" class="checkOption">Otros</mat-checkbox> -->
+                    </div>
+
+                    <div class="question">¿Qué tipos de viaje te interesa?
+                        <span>(puedes elegir más de una opción)</span>
+                    </div>
+                    <div class="groupOption">
+                        <mat-checkbox formControlName="economico" class="checkOption">Económico
+                        </mat-checkbox>
+                        <mat-checkbox formControlName="clasico" class="checkOption">Clásico</mat-checkbox>
+                        <mat-checkbox formControlName="lujo" class="checkOption">Lujo</mat-checkbox>
+                    </div>
+
+                    <div class="question">¿Con quién viajarías?
+                        <span>(puedes elegir más de una opción)</span>
+                    </div>
+                    <div class="groupOption">
+                        <mat-checkbox formControlName="solo" class="checkOption">Solo</mat-checkbox>
+                        <mat-checkbox formControlName="pareja" class="checkOption">Pareja</mat-checkbox>
+                        <mat-checkbox formControlName="familia" class="checkOption">Familia</mat-checkbox>
+                        <mat-checkbox formControlName="amigos" class="checkOption">Amigos</mat-checkbox>
+                    </div>
+
+                    <div class="question">¿Cuántas veces al año te gustaría viajar?
+
+                    </div>
+                    <div class="groupOption">
+                        <mat-radio-group formControlName="vecesAlAnio" class="groupRadio">
+                            <mat-radio-button class="checkOption" value="1">1</mat-radio-button>
+                            <mat-radio-button class="checkOption" value="2">2-3</mat-radio-button>
+                            <mat-radio-button class="checkOption" value="3">4-6</mat-radio-button>
+                            <mat-radio-button class="checkOption" value="4">7-10</mat-radio-button>
+                            <mat-radio-button class="checkOption" value="5">Mas de 10</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <hr>
+                    <div class="groupOption">
+                        <mat-checkbox formControlName="politicas" class="checkOption">Aceptar
+                            <a href="#">política de protección de datos</a>
+                        </mat-checkbox>
+                    </div>
+                    <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) !== MSG_EMPTY">{{ getMessage(MSG_CHK_POLITY)
+                        }}</span>
+                    <div class="groupOption">
+                        <mat-checkbox formControlName="autorizo" class="checkOption">Autorizo el uso de mi información
+                            para fines publicitarios</mat-checkbox>
+                    </div>
+                    <span class="valid" *ngIf="getMessage(MSG_CHK_AUTORIZO) !== MSG_EMPTY">{{
+                        getMessage(MSG_CHK_AUTORIZO)
+                        }}</span>
+                </div>
+                <div class="rowContent">
+                    <div class="btnPerfil primary" (click)="save()">
+                        Guardar mis datos
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+<!-- END PREFERENCIAS -->

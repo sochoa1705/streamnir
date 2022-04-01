@@ -25,6 +25,7 @@ import { ChangePasswordModule } from './components/change-password/change-passwo
 import { CheckMailModule } from './components/check-mail/check-mail.module';
 import { ForgotPasswordModule } from './components/forgot-password/forgot-password.module';
 import { NewAccountModule } from './components/new-account/new-account.module';
+import { PerfilModule } from './Component/home-page/perfil/perfil.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -47,7 +48,8 @@ import { NewAccountModule } from './components/new-account/new-account.module';
     ChangePasswordModule,
     CheckMailModule,
     ForgotPasswordModule,
-    NewAccountModule
+    NewAccountModule,
+    PerfilModule
   ],
   providers: [
 

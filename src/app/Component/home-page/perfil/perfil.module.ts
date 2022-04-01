@@ -19,9 +19,10 @@ import { FileModule } from 'src/app/shared/components/file/file.module';
 import { PasswordComponent } from './password/password.component';
 import { PassengersService } from './passenger/passengers.service';
 import { PasswordService } from './password/password.service';
+import { PreferenciasComponent } from './preferencias/preferencias.component';
 
 @NgModule({
-  declarations: [PerfilComponent, ContactoComponent, PassengerComponent, PasswordComponent],
+  declarations: [PerfilComponent, ContactoComponent, PassengerComponent, PasswordComponent, PreferenciasComponent],
   imports: [
     CommonModule,
     PerfilRoutingModule,
@@ -34,7 +35,7 @@ import { PasswordService } from './password/password.service';
     FormsModule,
     FileModule
   ],
-  exports: [PerfilComponent],
+  exports: [PerfilComponent,PreferenciasComponent],
   providers: [DataPagePresenterService, PreferenceService, ContactoService, PassengersService, PasswordService]
 
 })
