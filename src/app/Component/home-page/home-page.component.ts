@@ -64,7 +64,6 @@ export class HomePageComponent implements OnInit {
     this.ipClienteService.ipCliente().subscribe((res: any) => {
       this.ipAddress = res.ip;
       localStorage.setItem('ipCliente', this.ipAddress)
-      console.log(res);
     });
   }
 

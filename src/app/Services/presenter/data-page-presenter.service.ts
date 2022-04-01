@@ -196,12 +196,12 @@ export class DataPagePresenterService {
             id: 4,
             text: "Mapa de Sitio",
             link: "#"
-          },
-          {
-            id: 5,
-            text: "SIT - Travel Outlet",
-            link: "#"
           }
+          // {
+          //   id: 5,
+          //   text: "SIT - Travel Outlet",
+          //   link: "#"
+          // }
         ],
         title3: "Contáctanos",
         span: "Agencias de Viajes en Lima Perú",

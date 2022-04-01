@@ -55,7 +55,7 @@
             <!-- OCULTAR CAMPO -->
             <input name="datepicker3" [minDate]="minDate" ngbDatepicker #datepicker3="ngbDatepicker" [footerTemplate]="footerTemplate3"
                 [autoClose]="'outside'" (dateSelect)="onDateSelectionIda($event)"
-               outsideDays="hidden" [startDate]="fromDate!" tabindex="-1">
+               outsideDays="hidden" [startDate]="fromDate!" tabindex="-1"  [displayMonths]="1">
             <ng-template #footerTemplate3>
                 <div class="btnDatePicker">
                     <hr class="my-0">

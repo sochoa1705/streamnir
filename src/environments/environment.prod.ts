@@ -5,8 +5,8 @@ export const environment = {
   nameAppAC: 'Intranet',
   identifierAC: 'NMViajes - Assist Card',
   codeEnvironmentAC: 'PROD/NMO/NMO',
-  undidadNegocioAC: 8,
-  dkAgenciaAC: '29581',
+  undidadNegocioAC: 1,
+  dkAgenciaAC: '339',
   subcodigoAgenciaAC: '1',
   sucursalAgenciaAC: '3',
   ptoventaAgenciaAC: '1',
@@ -15,7 +15,7 @@ export const environment = {
     let fehcaHoy = `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
     return fehcaHoy
   },
-  urlPaqueteDinamico: 'https://nm-viajes.paquetedinamico.com/',
+  urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   // urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
@@ -35,6 +35,7 @@ export const environment = {
 
 
   serverUrlApi: 'http://localhost:8080/api/'
+
 
 
 }
