@@ -1,159 +1,12 @@
 <router-outlet></router-outlet>
 
-<!-- Modal -->
-<div class="modal" style="display: none;" aria-hidden="true" data-backdrop="false" id="ModalSesion" tabindex="-1" aria-labelledby="ModalSesionLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="text-end">
-          <button #closeModalSesion type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <img src="./assets/modal/Logo_modal.png" alt="">
-        <h1 class="modal-title" id="ModalSesionLabel">Iniciar sesión</h1>
-        <p>Ingresa con tus datos de siempre</p>
-        <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
-      </div>
-      <div class="modal-body">
-        <!-- <mat-tab-group mat-align-tabs="center" [(selectedIndex)]="selectedIndex"> -->
-        <mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMediaLogin($event)">
-          <!-- PERSONAL -->
+<app-login></app-login>
 
-          <mat-tab label="Personal">
-            <form #formUser="ngForm" (ngSubmit)="formUser.form.valid" action="">
-              <div class="elementRow" [ngClass]="{'error': loginPEmail.invalid && submitPerson}">
-                <input #loginPEmail="ngModel" type="text" email class="form-control" name="email"
-                  [(ngModel)]="login.email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" placeholder="Email" required>
-                <div *ngIf="loginPEmail.invalid" class="msgError">Ingresa tu email</div>
-              </div>
-
-              <div class="elementRow" [ngClass]="{'error': loginPPassword.invalid && submitPerson}">
-                <input #loginPPassword="ngModel" type="password" #passwordP class="form-control" name="password"
-                  [(ngModel)]="login.password" placeholder="Contraseña" required>
-
-                <div *ngIf="loginPPassword.invalid" class="msgError">Ingresa tu contraseña</div>
-                <div (click)="togglePassword(passwordP)" class="iconPass">
-                  <img src="./assets/modal/eye.png" alt="">
-                </div>
-              </div>
-
-              <div class="row mx-0">
-                <div class="col-6">
-                  <mat-checkbox [(ngModel)]="login.recorder" name="recorder" class="example-margin">
-                    Recordar datos</mat-checkbox>
-                </div>
-                <div class="col-6 text-end">
-                  <a href="#" class="subRayado" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la
-                    contraseña?</a>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-              <hr>
-              <p class="textConecta">O conéctate con uno de estos servicios</p>
-              <div class="socialMedia">
-                <div (click)="signInWithFB()" class="btnFacebook">
-                  <img src="./assets/modal/facebook-logo.png" alt="">Facebook
-                </div>
-                <div (click)="signInWithGoogle()" class="btnGoogle">
-                  <img src="./assets/modal/google-logo.png" alt="">Google
-                </div>
-              </div>
-            </form>
-          </mat-tab>
-
-          <!-- END PERSONAL -->
-
-          <!-- EMPRESA -->
-          <mat-tab label="Empresa">
-            <form #formBusiness="ngForm" (ngSubmit)="formBusiness.form.valid" action="">
-              <div class="elementRow" [ngClass]="{'error': loginBEmail.invalid && submitBusiness}">
-                <input #loginBEmail="ngModel" type="text" class="form-control" name="email" [(ngModel)]="loginB.email"
-                  pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" placeholder="Email" required>
-                <div *ngIf="loginBEmail.invalid" class="msgError">Ingresa tu email</div>
-              </div>
-
-              <div class="elementRow" [ngClass]="{'error': loginBPassword.invalid && submitBusiness}">
-                <input #loginBPassword="ngModel" type="password" class="form-control" #passwordB name="password"
-                  [(ngModel)]="loginB.password" placeholder="Contraseña" required>
-
-                <div *ngIf="loginBPassword.invalid" class="msgError">Ingresa tu contraseña</div>
-                <div (click)="togglePassword(passwordB)" class="iconPass">
-                  <img src="./assets/modal/eye.png" alt="">
-                </div>
-              </div>
-
-              <div class="row mx-0">
-                <div class="col-6">
-                  <mat-checkbox [(ngModel)]="loginB.recorder" name="recorder" class="example-margin">
-                    Recordar datos</mat-checkbox>
-                </div>
-                <div class="col-6 text-end">
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la
-                    contraseña?</a>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-            </form>
-          </mat-tab>
-          <!-- END EMPRESA -->
-        </mat-tab-group>
-      </div>
-      <div class="modal-footer">
-        <button (click)="signIn(formUser, formBusiness)" class="w-100">Iniciar sesión</button>
-        <div class="account">
-          <div class="notRegister">¿No estás registrado?</div>
-          <a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalNewAccount">Crea una cuenta</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Recuperar contraseña-->
-<div class="modal" style="display: none;" aria-hidden="true" data-backdrop="false" id="ModalRecovery" tabindex="-1" aria-labelledby="modalRecoveryLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content ">
-      <div class="recoveryLeft ">
-        <div class="titleRecovery ">¡Únete a NMViajes y recibe nuestras ofertas exclusivas!</div>
-        <img src="./assets/modal/logo-white.png " alt=" ">
-      </div>
-      <div class="recoveryRight">
-        <div class="modal-header">
-          <button type="button" id="btncloseRecovery" class="btn-close" data-bs-dismiss="modal"
-            aria-label="Close"></button>
-        </div>
-        <div class="titleRecovery">Recuperar contraseña</div>
-        <form name="recoverPasswordForm" [formGroup]="recoverPasswordForm" autocomplete="false">
-          <div class="elementRow">
-
-            <div class="divValida" [ngClass]="{error : validateRecoverPasswordForm('email')}">
-              <input type="text" #password class="form-control" formControlName="email" placeholder="Email">
-
-              <div class="textError" *ngIf="validateRecoverPasswordForm('email')">
-                {{ recoverPasswordEmailErrorMessage }}
-              </div>
-            </div>
-
-          </div>
-
-        </form>
-        <div class="d-flex justify-content-center">
-          <button (click)="getPassword(password.value)" class="w-75">Recuperar contraseña</button>
-        </div>
-        <hr>
-        <div class="account">
-          <div class="notRegister">¿Ya tienes cuenta?</div>
-          <a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalSesion">Inicia sesión</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-forgot-password></app-forgot-password>
 
 <!-- Modal Create Account-->
-<div class="modal" style="display: none;" aria-hidden="true" data-backdrop="false" id="ModalNewAccount" tabindex="-1" aria-labelledby="modalNewAccountLabel"
-  aria-hidden="true">
+<div class="modal" style="display: none;" aria-hidden="true" data-backdrop="false" id="ModalNewAccount" tabindex="-1"
+  aria-labelledby="modalNewAccountLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content ">
       <div class="recoveryLeft ">
@@ -404,8 +257,8 @@
 </div>
 
 <!-- Modal Verifica Correo -->
-<div class="modal" style="display: none;" aria-hidden="true" data-backdrop="false" id="ModalVerificaCorreo" tabindex="-1"
-  aria-labelledby="ModalVerificaCorreoLabel" aria-hidden="true">
+<div class="modal" style="display: none;" aria-hidden="true" data-backdrop="false" id="ModalVerificaCorreo"
+  tabindex="-1" aria-labelledby="ModalVerificaCorreoLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -429,8 +282,8 @@
 </div>
 
 <!-- Modal Cambio de password -->
-<div class="modal" style="display: none;" aria-hidden="true" data-backdrop="false" id="ModalChangePass" tabindex="-1" aria-labelledby="ModalChangePassLabel"
-  aria-hidden="true">
+<div class="modal" style="display: none;" aria-hidden="true" data-backdrop="false" id="ModalChangePass" tabindex="-1"
+  aria-labelledby="ModalChangePassLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

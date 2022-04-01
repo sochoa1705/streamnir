@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import * as moment from 'moment';
 import { interval, Observable } from 'rxjs';
 import { ParamsVuelos } from 'src/app/Component/home-page/resultados/models/resultados.interfaces';
 import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
@@ -92,7 +93,11 @@ export class DestinosComponent implements OnInit {
   }
 
   generateParams(v: IVueloDestino) {
-    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${v.OriginCode} ${v.Origin}`, `${v.DestinationCode} ${v.Destination}`, v.DateStart, v.DateEnd, "1", "0", "0", EnumCabins.economico);
+
+    const dateStart = moment(v.DateStart, "DD/MM/YYYY").format("YYYY-MM-DD");
+    const dateEnd = moment(v.DateEnd, "DD/MM/YYYY").format("YYYY-MM-DD");
+
+    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${v.OriginCode} ${v.Origin}`, `${v.DestinationCode} ${v.Destination}`, dateStart, dateEnd, "1", "0", "0", EnumCabins.economico);
   }
 
   buscarVuelo(vuelo: IVueloDestino) {
