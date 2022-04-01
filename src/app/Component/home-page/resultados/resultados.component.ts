@@ -95,6 +95,14 @@ export class ResultadosComponent implements OnInit {
     // this.loader.showText('Cargando los vuelos');
     // this.loader.showLoader();
     this.getParams();
+
+    window.addEventListener('message', function(event) {
+      console.log('data ', event.data);
+      let frm = document.getElementById("iframePrueba");
+      let height = event.data + 50;
+      // @ts-ignore: Object is possibly 'null'.
+      (frm || {}).style.height = height + 'px';
+    }); 
   }
 
   vuelosLogicInit(respVuelos: ParamsVuelos, obj: Returns | null) {
