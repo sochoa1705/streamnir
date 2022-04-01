@@ -7,7 +7,6 @@ import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
-import { ROUTE_VIAJES } from '../../constant';
 import { ParamsHoteles, ParamsVueloHotel,  URLHotel, URLVueloHotel } from './tabs.models';
 import { ChangeRQ } from '../../../Models/general/changeRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
@@ -63,6 +62,9 @@ export class TabsComponent implements OnInit {
   origenHotel: any;
 
   validPasajeros = false;
+
+  RUTA_PAQUETES = environment.urlPaqueteDinamico +  'ES/holidays/search';
+  RUTA_AUTOS =  environment.url_autos;
 
 
   selectedTab: string
@@ -233,8 +235,8 @@ export class TabsComponent implements OnInit {
   }
 
   changeTab(value: MatTabChangeEvent) {
-    (value.index == 1) ? this.navigateToResponseUrl(ROUTE_VIAJES.RUTA_PAQUETES) : null;
-    (value.index == 4) ? this.navigateToResponseUrl(ROUTE_VIAJES.RUTA_AUTOS) : null;
+    (value.index == 1) ? this.navigateToResponseUrl(this.RUTA_PAQUETES) : null;
+    (value.index == 4) ? this.navigateToResponseUrl(this.RUTA_AUTOS) : null;
     if(value.index == 6) {
       this.callService();
     }

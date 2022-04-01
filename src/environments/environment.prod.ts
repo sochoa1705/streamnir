@@ -34,8 +34,9 @@ export const environment = {
   url_api: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',
 
 
-  serverUrlApi: 'http://localhost:8080/api/'
+  serverUrlApi: 'http://localhost:8080/api/',
 
+  url_autos: 'https://autos.nmviajes.com/es/site/'
 
 
 }

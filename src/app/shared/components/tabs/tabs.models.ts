@@ -2,7 +2,7 @@ import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
 import { FormGroup } from "@angular/forms";
 import { NgbDate } from "@ng-bootstrap/ng-bootstrap/datepicker/ngb-date";
 import * as moment from "moment";
-import { ROUTE_VIAJES } from "../../constant";
+import { environment } from "src/environments/environment";
 import { ICardAutocomplete } from "../card-autocomplete/card-autocomplete.interface";
 import { IForm } from "../filter-tabs/tab-vuelos/tab-vuelos.interfaces";
 
@@ -53,7 +53,7 @@ interface UrlNmViajes {
 }
 export class URLVueloHotel implements UrlNmViajes {
 
-    public url = ROUTE_VIAJES.RUTA_GET;
+    public url =  environment.urlPaqueteDinamico + 'home';
 
     private tab: tapType;
     private params: Params;
@@ -90,7 +90,7 @@ export class URLVuelos implements UrlNmViajes {
 }
 export class URLHotel implements UrlNmViajes {
 
-    public url = ROUTE_VIAJES.RUTA_GET;
+    public url =  environment.urlPaqueteDinamico + 'home';
 
     private tab: tapType;
     private params: Params;
@@ -108,7 +108,7 @@ export class URLHotel implements UrlNmViajes {
 }
 export class URLActividades implements UrlNmViajes {
 
-    public url = ROUTE_VIAJES.RUTA_GET;
+    public url =  environment.urlPaqueteDinamico + 'home';
 
     private tab: tapType;
     private params: Params;

@@ -77,11 +77,6 @@ export enum ENDPOINT_API {
   NEWSLETTER = 'v1/api/Newsletter',
 }
 
-export enum ROUTE_VIAJES {
-  RUTA_PAQUETES = 'https://nmviajes.paquetedinamico.com/ES/holidays/search',
-  RUTA_AUTOS = 'https://autos.nmviajes.com/es/site/',
-  RUTA_GET = 'https://nmviajes.paquetedinamico.com/home'
-}
 
 export const FilterTypes = {
   equipajemano: 1,
