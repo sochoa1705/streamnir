@@ -97,8 +97,7 @@ export class ResultadosComponent implements OnInit {
     this.getParams();
 
     window.addEventListener('message', function(event) {
-      console.log('data ', event.data);
-      let frm = document.getElementById("iframePrueba");
+      let frm = document.getElementById("iframeMotorVuelos");
       let height = event.data + 50;
       // @ts-ignore: Object is possibly 'null'.
       (frm || {}).style.height = height + 'px';
