@@ -67,17 +67,18 @@
       </div>
 
       <div class="rowAero opcionTab">
-        <div class="tabName" *ngIf="internationalFlightDeals" [ngClass]="{'active': !isNational}"
-          (click)="isNational=false">
+        <div class="tabName" *ngIf="internationalFlightDeals"
+          [ngClass]="{'active': !isNational || !nationalFlightDeals}" (click)="isNational=false">
           Salidas Internacionales
         </div>
 
-        <div class="tabName" *ngIf="nationalFlightDeals" [ngClass]="{'active': isNational}" (click)="isNational=true">
+        <div class="tabName" *ngIf="nationalFlightDeals" [ngClass]="{'active': isNational || !internationalFlightDeals}"
+          (click)="isNational=true">
           Salidas Nacionales
         </div>
       </div>
 
-      <div class="contentTab" *ngIf="!isNational && internationalFlightDeals">
+      <div class="contentTab" *ngIf="!isNational && internationalFlightDeals?.length > 0">
         <div class="verDesktop">
           <div class="rowAero">
             <div class="ida">
@@ -214,7 +215,7 @@
         </div>
       </div>
 
-      <div class="contentTab" *ngIf="isNational && nationalFlightDeals">
+      <div class="contentTab" *ngIf="isNational && nationalFlightDeals?.length > 0">
         <div class="verDesktop">
           <div class="rowAero">
             <div class="ida">
@@ -433,4 +434,4 @@
 </p-galleria>
 
 
-<app-aereolineas [aereolineas]="$aereolineas | async" (redirigir)="toLine($event)"></app-aereolineas>
+<app-aereolineas [aereolineas]="$aereolineas | async" (redirigir)="onClick($event)"></app-aereolineas>

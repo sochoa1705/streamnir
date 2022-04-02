@@ -7,10 +7,8 @@ import { Guid } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 import { FlightService as AerolineaService } from '../vuelos/commons/components/flight/flight.service';
 import * as moment from 'moment';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ParamsVuelos } from '../resultados/models/resultados.interfaces';
-import { EnumCabins, EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
-import { IVueloDestino } from '../vuelos/commons/components/destinos/destinos.component';
+import { EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
 
 @Component({
   selector: 'app-aerolineas',
@@ -102,6 +100,7 @@ export class AerolineasComponent implements OnInit {
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
       this.nationalFlightDeals = JSON.parse(res).Result;
+      this.isNational = this.nationalFlightDeals?.length > 0 ? true : false;
     });
   }
 
@@ -115,6 +114,7 @@ export class AerolineasComponent implements OnInit {
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
       this.internationalFlightDeals = JSON.parse(res).Result;
+      this.isNational = this.internationalFlightDeals?.length > 0 ? false : true;
     });
   }
 
@@ -147,21 +147,17 @@ export class AerolineasComponent implements OnInit {
     this.$aereolineas = this._aerolineaService.getAereolineas();
   }
 
-  // aeroId: any = "Historia";
-  // showOptionAero(ids: any) {
-  //   this.aeroId = ids;
-  // }
-
-  /* codigo para los sliders de las compañias */
   counter: number = 1;
   counterMovil: number = 1;
+
   nextBtn() {
     this.counter < 3 ? this.counter++ : this.counter = 1;
   }
+
   afterBtn() {
     this.counter > 1 ? this.counter-- : this.counter = 3;
   }
-  /* end code */
+
   addTag() {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
@@ -171,7 +167,9 @@ export class AerolineasComponent implements OnInit {
     })
   }
 
-  toLine(entity: IAereolineas) {
-    this._router.navigateByUrl(`/aerolineas/${entity.IataCode}`);
+  onClick(entity: IAereolineas) {
+    debugger
+    this.nationalLimit = 5;
+    this.internationalLimit = 5;
   }
 }
