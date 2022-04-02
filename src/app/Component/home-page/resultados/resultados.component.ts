@@ -96,34 +96,35 @@ export class ResultadosComponent implements OnInit {
     // this.loader.showLoader();
     this.getParams();
 
-    window.addEventListener('message', function(event) {
+    window.addEventListener('message', function (event) {
       let frm = document.getElementById("iframeMotorVuelos");
       let height = event.data + 50;
       // @ts-ignore: Object is possibly 'null'.
       (frm || {}).style.height = height + 'px';
-    }); 
+    });
   }
 
   vuelosLogicInit(respVuelos: ParamsVuelos, obj: Returns | null) {
 
     const origen: ICardAutocomplete = {
-      id: obj?.originCity?.code || respVuelos.departure,
-      codigo: obj?.originCity.code || respVuelos.departure,
-      title: obj?.originCity.name || respVuelos.departure,
+      id: obj?.originCity?.code || respVuelos.departureLocation,
+      codigo: obj?.originCity.code || respVuelos.departureLocation,
+      title: obj?.originCity.name || respVuelos.departureLocation,
       children: [],
     };
 
     const destino: ICardAutocomplete = {
-      id: obj?.destinationCity.code || respVuelos.destination,
-      codigo: obj?.destinationCity.code || respVuelos.destination,
-      title: obj?.destinationCity.name || respVuelos.destination,
+      id: obj?.destinationCity.code || respVuelos.arrivalLocation,
+      codigo: obj?.destinationCity.code || respVuelos.arrivalLocation,
+      title: obj?.destinationCity.name || respVuelos.arrivalLocation,
       children: [],
     };
 
     const formModel: IForm = {
-      clase: respVuelos.businessCabin
-        ? EnumCabins.economico
-        : EnumCabins.economico,
+      // clase: respVuelos.businessCabin
+      //   ? EnumCabins.economico
+      //   : EnumCabins.economico,
+      clase: EnumCabins.economico,
       viajes: Number(respVuelos.flightType),
       origen: origen,
       destino: destino,
@@ -167,48 +168,43 @@ export class ResultadosComponent implements OnInit {
 
     this.ar.queryParams.subscribe((resp) => {
 
-      this.urlIframe = environment.urlIframeMotorVuelos ;
-
+      this.urlIframe = environment.urlIframeMotorVuelos;
 
       const respVuelos: ParamsVuelos = resp as ParamsVuelos;
 
       let {
-        arrivalDate,
-        businessCabin,
-        departure,
-        departureDate,
-        destination,
-        adults,
-        infants,
-        children,
         flightType,
+        departureLocation,
+        arrivalLocation,
+        departureDate,
+        arrivalDate,
+        adults,
+        children,
+        infants
       } = resp as ParamsVuelos;
-
 
       this.vuelosLogicInit(respVuelos, null)
 
       // this.loader.showText('Cargando los vuelos');
       // this.loader.showLoader();
 
+      const dateStart = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
+      const dateEnd = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
 
-      arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
-      departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
 
       // arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
       // departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
-      
+
       const payload = new DisponibilidadPayload(
-        Number(flightType),
-        departure,
-        destination,
+        flightType,
+        departureLocation,
+        arrivalLocation,
         departureDate,
         arrivalDate,
-        Number(adults),
-        Number(children),
-        Number(infants),
-        businessCabin
+        adults,
+        children,
+        infants
       );
-
 
       const params = objectToQueryString(payload);
 

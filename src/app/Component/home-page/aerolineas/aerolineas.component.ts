@@ -134,7 +134,7 @@ export class AerolineasComponent implements OnInit {
     const dateStart = moment(entity.DateStart, "DD/MM/YYYY").format("YYYY-MM-DD");
     const dateEnd = moment(entity.DateEnd, "DD/MM/YYYY").format("YYYY-MM-DD");
 
-    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${entity.OriginCode} ${entity.Origin}`, `${entity.DestinationCode} ${entity.Destination}`, dateStart, dateEnd, "1", "0", "0", EnumCabins.economico);
+    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${entity.OriginCode} ${entity.Origin}`, `${entity.DestinationCode} ${entity.Destination}`, dateStart, dateEnd, "1", "0", "0");
   }
 
   searchFlight(entity: any) {

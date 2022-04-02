@@ -30,14 +30,14 @@ export class NmvModel {
       .set('Caller.Application', 'Interagencias');
   }
 
-  getPayload(){
+  getPayload() {
     return {
-      TrackingCode:  Guid(),
-      MuteExceptions:  environment.muteExceptions,
+      TrackingCode: Guid(),
+      MuteExceptions: environment.muteExceptions,
       Caller: {
-        Company:  'Agil',
-        Application:  'Interagencias'
-      } 
+        Company: 'Agil',
+        Application: 'Interagencias'
+      }
     }
   }
 }
@@ -58,22 +58,21 @@ export function removeTimeZonePart(dateString: string) {
   return finalDate;
 }
 
-
-export function toUp(){
-  window.scroll({ 
-    top: 0, 
-    left: 0, 
-    behavior: 'smooth' 
+export function toUp() {
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'
   })
 }
+
 export function roundNumber(numero: number, decimal: number) {
   let n = numero * Math.pow(10, decimal);
   n = Math.round(n) / Math.pow(10, decimal);
   return n;
 }
 
-
-export function objectToQueryString(obj:any) {
+export function objectToQueryString(obj: any) {
   var str = [];
   for (var p in obj)
     if (obj.hasOwnProperty(p)) {

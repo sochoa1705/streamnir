@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.addTag()
-    //this.listDestiny()
+    this.listDestiny()
     this.getConfirmacion();
     //this.getAirfare();
   }
