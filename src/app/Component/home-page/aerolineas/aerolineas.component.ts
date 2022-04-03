@@ -100,7 +100,7 @@ export class AerolineasComponent implements OnInit {
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
       this.nationalFlightDeals = JSON.parse(res).Result;
-      this.isNational = this.nationalFlightDeals?.length > 0 ? true : false;
+      this.isNational = this.nationalFlightDeals ? true : false;
     });
   }
 
@@ -114,7 +114,7 @@ export class AerolineasComponent implements OnInit {
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
       this.internationalFlightDeals = JSON.parse(res).Result;
-      this.isNational = this.internationalFlightDeals?.length > 0 ? false : true;
+      this.isNational = this.internationalFlightDeals ? false : true;
     });
   }
 
