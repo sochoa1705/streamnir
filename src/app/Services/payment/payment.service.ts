@@ -3,20 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ENDPOINT_API } from 'src/app/shared/constant';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CardPaymentService {
+export class PaymentService {
 
   constructor(
     public http: HttpClient,
   ) { }
 
-  cardPayment(payload: any): Observable<any> {
-    const url =  environment.url_api
-    const url_api = `${url}${ENDPOINT_API.CARD_PAYMENT}`
+  payment(payload: any): Observable<any> {
+    // const url =  environment.url_api
+    const url =  'http://10.75.102.23:10005/v1/api/'
+    const url_api = `${url}${ENDPOINT_API.PAYMENT}`
     return this.http.post<any>(url_api, payload)
   }
 }
