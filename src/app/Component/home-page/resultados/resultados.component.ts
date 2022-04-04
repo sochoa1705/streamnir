@@ -13,7 +13,7 @@ import {
 } from 'src/app/shared/components/filter-result/models/filter-result.interfaces';
 import { IForm } from 'src/app/shared/components/filter-tabs/tab-vuelos/tab-vuelos.interfaces';
 import { DisponibilidadPayload } from 'src/app/shared/components/flights/models/flights.class';
-import { EnumCabins } from 'src/app/shared/components/flights/models/flights.interface';
+import { EnumCabins, EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { IVuelos } from '../vuelos/commons/components/flight/flight.models';
@@ -169,7 +169,6 @@ export class ResultadosComponent implements OnInit {
 
       this.urlIframe = environment.urlIframeMotorVuelos ;
 
-
       const respVuelos: ParamsVuelos = resp as ParamsVuelos;
 
       let {
@@ -187,17 +186,13 @@ export class ResultadosComponent implements OnInit {
 
       this.vuelosLogicInit(respVuelos, null)
 
-      // this.loader.showText('Cargando los vuelos');
-      // this.loader.showLoader();
-
-
       arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
       departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
 
       // arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
       // departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
       
-      const payload = new DisponibilidadPayload(
+      const disponibilidadPayload = new DisponibilidadPayload(
         Number(flightType),
         departure,
         destination,
@@ -209,130 +204,16 @@ export class ResultadosComponent implements OnInit {
         businessCabin
       );
 
+      let payload = {...disponibilidadPayload};
 
+      if(payload.flightType == EnumFlightType.ida){
+        delete payload.arrivalDate
+      }
+      
       const params = objectToQueryString(payload);
 
       this.urlIframe = this.urlIframe + "?" + params;
 
-      console.log(this.urlIframe);
-
-
-      // this.service
-      //   .searchMv(payload)
-      //   .then((resp) => {
-      //     this.error.isError = false;
-      //     this.flights = resp.groups;
-
-      //     let pf: RangeFilter = { min: 0, max: 0 };
-      //     let durationExit: RangeFilter = { min: 0, max: 0 };
-      //     let elapsedExit: RangeFilter = { min: 0, max: 0 };
-
-      //     if (this.flights.length > 0) {
-      //       pf.min =
-      //         this.flights[0].pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare;
-      //       durationExit.min = Number(
-      //         this.flights[0].departure[0].segments[0].flightDuration
-      //       );
-      //       elapsedExit.min = Number(
-      //         this.flights[0].departure[0].segments[0].flightSegments[0]
-      //           .elapsedTime
-      //       );
-      //     }
-
-      //     for (const x of this.flights) {
-      //       if (
-      //         x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
-      //           .totalFare > pf.max
-      //       )
-      //         pf.max =
-      //           x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare;
-
-      //       if (
-      //         x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
-      //           .totalFare < pf.min
-      //       )
-      //         pf.min =
-      //           x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare;
-
-      //       if (
-      //         Number(x.departure[0].segments[0].flightDuration) >
-      //         durationExit.max
-      //       )
-      //         durationExit.max = Number(
-      //           x.departure[0].segments[0].flightDuration
-      //         );
-
-      //       if (
-      //         Number(x.departure[0].segments[0].flightDuration) <
-      //         durationExit.min
-      //       )
-      //         durationExit.min = Number(
-      //           x.departure[0].segments[0].flightDuration
-      //         );
-
-      //       if (
-      //         Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) >
-      //         elapsedExit.max
-      //       )
-      //         elapsedExit.max = Number(
-      //           x.departure[0].segments[0].flightSegments[0].elapsedTime
-      //         );
-
-      //       if (
-      //         Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) <
-      //         elapsedExit.min
-      //       )
-      //         elapsedExit.min = Number(
-      //           x.departure[0].segments[0].flightSegments[0].elapsedTime
-      //         );
-      //     }
-
-      //     this.filtersObj.price = pf;
-      //     this.filtersObj.flightDurationExit = durationExit;
-      //     this.filtersObj.flightElapsedExit = elapsedExit;
-
-      //     this.conversion = resp.exchangeRate.amount;
-      //     this.flightsOri = resp.groups;
-
-      //     this.filtersObj.airlines = resp.airlinesFilter.map((x) => {
-      //       let airline: AirlineFilter = {
-      //         code: x.code,
-      //         name: x.name,
-      //         imageUrl: x.imageUrl,
-      //         checked: false,
-      //       };
-
-      //       return airline;
-      //     });
-
-      //     this.filtersObj.exchangeRate = resp.exchangeRate.amount;
-
-      //     this.filtersObj = { ...this.filtersObj };
-
-      //     this.exchangeRate = resp.exchangeRate;
-
-      //     if(this.flights.length == 0){
-      //       throw new Error('No hay vuelos disponibles');
-      //     }
-
-      //     const obj = this.flights[0].departure[0];
-
-      //     this.vuelosLogicInit(respVuelos, obj);
-
-      //     this.loader.closeLoader();
-      //   })
-      //   .catch((err: HttpErrorResponse) => {
-      //     console.error(err);
-
-      //     this.error = {
-      //       isError: true,
-      //       errorMessage: err.message,
-      //     };
-
-      //     this.openSnackBar(err.message);
-
-      //     this.loader.closeLoader();
-      //   });
     });
   }
 
