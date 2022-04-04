@@ -102,6 +102,7 @@ h2 {
     letter-spacing: 0.25px;
     width: 420px;
 }
+
 .form-select-f {
     display: block;
     width: 100%;
@@ -123,7 +124,8 @@ h2 {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    &:focus-visible{
+    height: 47px;
+    &:focus-visible {
         outline: none;
         border: 0.5px solid #009AED!important;
         box-shadow: none !important;
@@ -242,19 +244,19 @@ h2 {
             background: #1eaea5;
             font-family: "Montserrat";
         }
-        input{
+        input {
             font-family: "Montserrat";
             font-size: 14px;
             border: .5px solid #83898F;
-            &:placeholder{
+            &:placeholder {
                 font-family: "Montserrat";
-                font-size: 14px;    
+                font-size: 14px;
             }
         }
     }
     &.pasajeros {
         border-radius: 10px;
-        & .card-header{
+        & .card-header {
             border-radius: 10px 10px 0 0;
         }
         .card {
@@ -304,19 +306,19 @@ h2 {
     }
     &-body {
         .input-group {
-            & input{
-            border: .5px solid #83898F;
-            border-right: 0px;
-            &:focus{
-                border: .5px solid #83898F!important;
-                border-right: 0px!important;
+            & input {
+                border: .5px solid #83898F;
+                border-right: 0px;
+                &:focus {
+                    border: .5px solid #83898F!important;
+                    border-right: 0px!important;
+                }
             }
-            }
-            & label.input-group-text{
+            & label.input-group-text {
                 background: white;
                 border: .5px solid #83898F;
                 border-left: 0px;
-                & .mat-icon{
+                & .mat-icon {
                     color: #B9BCBF;
                 }
             }
@@ -331,7 +333,7 @@ h2 {
             a {
                 color: red;
                 text-decoration: none;
-                &.ver{
+                &.ver {
                     color: #DF0C30 !important;
                 }
                 &:hover {
@@ -361,9 +363,9 @@ h2 {
                 font-size: 14px;
                 font-weight: 500;
             }
-                    span.destinos{
-                        font-weight:600!important;
-                    }
+            span.destinos {
+                font-weight: 600!important;
+            }
             .equipaje {
                 & svg {
                     margin-right: 7px;
@@ -534,7 +536,7 @@ h2 {
 }
 
 .accordion {
-    &-item{
+    &-item {
         border-radius: 10px;
     }
     &-header {
@@ -548,6 +550,7 @@ h2 {
             border-radius: 10px 10px 0 0;
             cursor: pointer;
             gap: 10px;
+            text-decoration: none;
             &::after {
                 content: none;
             }
@@ -600,7 +603,7 @@ input[type="checkbox"]+label {
 
 input[type="radio"] {
     display: none;
-    &.sex{
+    &.sex {
         display: block
     }
 }
@@ -616,7 +619,7 @@ input[type="radio"] {
     box-sizing: border-box;
     box-shadow: 0px 4px 8px rgb(0 0 0 / 25%);
     border-radius: 10px;
-    @media (max-width: 768px){
+    @media (max-width: 768px) {
         height: auto
     }
 }
@@ -638,7 +641,9 @@ input[type="radio"] {
     color: #4b4b4b;
 }
 
+
 /* METODO DE PAGO */
+
 #optionm-1:checked:checked~.optionm-1,
 #optionm-2:checked:checked~.optionm-2 {
     background: #ffffff;
@@ -709,29 +714,32 @@ p {
     }
 }
 
-.btnEliminar{
+.btnEliminar {
     color: #DF0C30!important;
+    text-decoration: none;
 }
 
 #politicaModal {
-    .modal{
-        &-header{
-        border:0 !important;
+    .modal {
+        &-header {
+            border: 0 !important;
         }
-        &-content{
+        &-content {
             background: white !important;
         }
     }
 }
-.text-justify{
+
+.text-justify {
     text-align: justify
 }
+
 .modal {
     &-content {
         // background: #54d834;
         border: 0;
         border-radius: 20px;
-        &.best{
+        &.best {
             background-color: #f00;
         }
     }
@@ -818,13 +826,9 @@ p {
     }
 }
 
-
-
 .toolTip .boxTooltip {
     /* display: none; */
-
     left: calc(100% - 210px);
-
 }
 
 input.readonly {
@@ -833,14 +837,15 @@ input.readonly {
     font-size: 18px;
     font-weight: 700;
     border: 0;
-    &:focus-visible{
+    &:focus-visible {
         border: 0;
         outline: 0;
     }
 }
-a{
-    cursor:pointer;
-    &:hover{
+
+a {
+    cursor: pointer;
+    &:hover {
         color: red
     }
 }

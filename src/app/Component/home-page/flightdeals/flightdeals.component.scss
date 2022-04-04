@@ -129,6 +129,7 @@ a {
     &:hover {
         border-radius: 30px;
         padding: 10px 10px;
+        min-width: 80px;
         &>.arrow {
             width: 6px;
         }
