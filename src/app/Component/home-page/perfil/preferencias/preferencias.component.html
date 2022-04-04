@@ -447,8 +447,8 @@
 
                                 <hr>
                                 <div class="groupOption">
-                                    <mat-checkbox formControlName="politicas" class="checkOption">Aceptar
-                                        <a href="#">política de protección de datos</a>
+                                    <mat-checkbox  formControlName="politicas" class="checkOption">Aceptar
+                                        <a routerLink="/politicas" target="_blank">política de protección de datos</a>
                                     </mat-checkbox>
                                 </div>
                                 <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) !== MSG_EMPTY">{{ getMessage(MSG_CHK_POLITY)
