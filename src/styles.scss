@@ -7668,6 +7668,21 @@ button.customers {
     }
 }
 
+#ModalDatosOpcionales {
+    .titleVerifica {
+        font-family: 'Open Sans';
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 36px;
+        display: flex;
+        align-items: center;
+        color: #4B4B4B;
+    }
+    .portlet-der {
+        margin: 0;
+    }
+}
+
 #ModalRecovery {
     .modal-dialog {
         .modal-content {
