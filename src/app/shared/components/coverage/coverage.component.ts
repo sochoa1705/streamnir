@@ -13,7 +13,7 @@ export class CoverageComponent implements OnInit {
   @Input() txtDestino: any
   @Input() txtSalida: any
   @Input() txtRegreso: any
-  @Input() txtPasajeros: any
+  @Input() txtPasajeros: number
   @Input() plan: any
   constructor() { }
 

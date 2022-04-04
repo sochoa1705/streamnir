@@ -15,7 +15,7 @@ export class CheckCardService {
   ) { } 
   
   checkCard(card: any): Observable<any> {
-    const url = `${environment.urlSeguros}${ENDPOINT_API.CHECK_CARD} ?Parameter.Number=${card}&TrackingCode=qwertyuiiop&MuteExceptions=false&Caller.Company=Agil&Caller.Application=Expertia`
+    const url = `${environment.url_api}${ENDPOINT_API.CHECK_CARD} ?Parameter.Number=${card}&TrackingCode=qwertyuiiop&MuteExceptions=false&Caller.Company=Agil&Caller.Application=Expertia`
     return this.http.get<any>(url)
     // return this.http.post<any>(url_api, payload, { observe: 'response' }).pipe(map((observe: any) => observe))
   }

@@ -75,6 +75,9 @@ export enum ENDPOINT_API {
 
   // NEWSLETTER
   NEWSLETTER = 'v1/api/Newsletter',
+
+  //PAYMENT
+  PAYMENT = 'Payment'
 }
 
 

@@ -93,11 +93,7 @@ export class DestinosComponent implements OnInit {
   }
 
   generateParams(v: IVueloDestino) {
-
-    const dateStart = moment(v.DateStart, "DD/MM/YYYY").format("YYYY-MM-DD");
-    const dateEnd = moment(v.DateEnd, "DD/MM/YYYY").format("YYYY-MM-DD");
-
-    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${v.OriginCode} ${v.Origin}`, `${v.DestinationCode} ${v.Destination}`, dateStart, dateEnd, "1", "0", "0", EnumCabins.economico);
+    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${v.OriginCode} ${v.Origin}`, `${v.DestinationCode} ${v.Destination}`, v.DateStart, v.DateEnd, "1", "0", "0", EnumCabins.economico);
   }
 
   buscarVuelo(vuelo: IVueloDestino) {

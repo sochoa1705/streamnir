@@ -1,0 +1,676 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "expertia.api.payment 1.0",
+    "description": "",
+    "version": "1.0"
+  },
+  "paths": {
+    "/v1/api/Card": {
+      "get": {
+        "tags": [
+          "Card"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.Bin",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.FromIP",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.FromBrowser",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Payment": {
+      "get": {
+        "tags": [
+          "Payment"
+        ],
+        "parameters": [
+          {
+            "name": "trackingCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Payment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PaymentCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PaymentCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PaymentCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Setting": {
+      "get": {
+        "tags": [
+          "Setting"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.Method",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.FromIP",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.FromBrowser",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Transaction": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.TransactionCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.FromIP",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.FromBrowser",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PostTransactionCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PostTransactionCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PostTransactionCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CE_RequestCaller": {
+        "required": [
+          "Application",
+          "Company"
+        ],
+        "type": "object",
+        "properties": {
+          "Company": {
+            "type": "string"
+          },
+          "Application": {
+            "type": "string"
+          },
+          "FromIP": {
+            "type": "string",
+            "nullable": true
+          },
+          "FromBrowser": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentMethodEnum": {
+        "enum": [
+          "None",
+          "CreditCard",
+          "SafetyPay"
+        ],
+        "type": "string"
+      },
+      "RQ_Ammount": {
+        "type": "object",
+        "properties": {
+          "Value": {
+            "type": "number",
+            "format": "double"
+          },
+          "Currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "OfFees": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_Bank": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_Booking": {
+        "type": "object",
+        "properties": {
+          "NumberInsurance": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DepartureDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ArrivalDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "NumberOfAdult": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "NumberOfChildren": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "HasCancellationFee": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_Card": {
+        "type": "object",
+        "properties": {
+          "Number": {
+            "type": "string",
+            "nullable": true
+          },
+          "SecurityCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "ExpirationDate": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_Customer": {
+        "type": "object",
+        "properties": {
+          "Firstname": {
+            "type": "string",
+            "nullable": true
+          },
+          "Lastname": {
+            "type": "string",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "nullable": true
+          },
+          "Address": {
+            "type": "string",
+            "nullable": true
+          },
+          "DocumentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "DocumentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "Email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_Payment": {
+        "type": "object",
+        "properties": {
+          "Method": {
+            "$ref": "#/components/schemas/PaymentMethodEnum"
+          },
+          "TransactionCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "TypeOfOperation": {
+            "type": "string",
+            "nullable": true
+          },
+          "SignIn": {
+            "$ref": "#/components/schemas/RQ_SignIn"
+          },
+          "Customer": {
+            "$ref": "#/components/schemas/RQ_Customer"
+          },
+          "Card": {
+            "$ref": "#/components/schemas/RQ_Card"
+          },
+          "Amount": {
+            "$ref": "#/components/schemas/RQ_Ammount"
+          },
+          "Bank": {
+            "$ref": "#/components/schemas/RQ_Bank"
+          },
+          "Booking": {
+            "$ref": "#/components/schemas/RQ_Booking"
+          },
+          "Setting": {
+            "$ref": "#/components/schemas/RQ_Setting"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PaymentCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_Payment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PostTransaction": {
+        "type": "object",
+        "properties": {
+          "Identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "TypeOfOperation": {
+            "type": "string",
+            "nullable": true
+          },
+          "TypeOfSale": {
+            "type": "string",
+            "nullable": true
+          },
+          "SignIn": {
+            "$ref": "#/components/schemas/RQ_TransactionSignIn"
+          },
+          "Amount": {
+            "$ref": "#/components/schemas/RQ_TransactionAmount"
+          },
+          "External": {
+            "$ref": "#/components/schemas/RQ_TransactionExternal"
+          },
+          "HolderCard": {
+            "$ref": "#/components/schemas/RQ_TransactionHolderCard"
+          },
+          "Booking": {
+            "$ref": "#/components/schemas/RQ_TransactionBooking"
+          },
+          "Setting": {
+            "$ref": "#/components/schemas/RQ_TransactionSetting"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PostTransactionCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_PostTransaction"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_Setting": {
+        "type": "object",
+        "properties": {
+          "HasAutomaticPayment": {
+            "type": "boolean"
+          },
+          "HasAQuoteCode": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_SignIn": {
+        "type": "object",
+        "properties": {
+          "Username": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_TransactionAmount": {
+        "type": "object",
+        "properties": {
+          "Currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "Value": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_TransactionBooking": {
+        "type": "object",
+        "properties": {
+          "DepartureDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ArrivalDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "HasCancellationFee": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_TransactionExternal": {
+        "type": "object",
+        "properties": {
+          "RedirectSuccess": {
+            "type": "string",
+            "nullable": true
+          },
+          "RedirectError": {
+            "type": "string",
+            "nullable": true
+          },
+          "NotificationUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_TransactionHolderCard": {
+        "type": "object",
+        "properties": {
+          "Firstname": {
+            "type": "string",
+            "nullable": true
+          },
+          "Lastname": {
+            "type": "string",
+            "nullable": true
+          },
+          "Number": {
+            "type": "string",
+            "nullable": true
+          },
+          "Expiration": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_TransactionSetting": {
+        "type": "object",
+        "properties": {
+          "HasAutomaticPayment": {
+            "type": "boolean"
+          },
+          "HasASrvCode": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_TransactionSignIn": {
+        "type": "object",
+        "properties": {
+          "Username": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { interval, Observable } from 'rxjs';
 import { FlightService } from 'src/app/Component/home-page/vuelos/commons/components/flight/flight.service';
+import { toUp } from '../../utils';
 import { IAereolineas } from './aereolineas.interfaces';
 
 
@@ -45,7 +46,7 @@ export class AereolineasComponent implements OnInit {
     return this._aereolineas;
   }
 
-  @Output() redirigir = new EventEmitter<IAereolineas>();
+  @Output() redirigir: EventEmitter<IAereolineas> = new EventEmitter();
 
   $aereolineas: Observable<IAereolineas[]>;
 
@@ -86,11 +87,14 @@ export class AereolineasComponent implements OnInit {
   nextBtn() {
     this.counter < this.maxCounter ? this.counter++ : (this.counter = 1);
   }
+
   afterBtn() {
     this.counter > 1 ? this.counter-- : (this.counter = this.maxCounter);
   }
 
   toLine(entity: IAereolineas) {
+    toUp();
+    this.redirigir.emit(entity);
     this._router.navigateByUrl(`/aerolineas/${entity.IataCode}`);
   }
 }

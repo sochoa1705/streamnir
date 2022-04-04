@@ -171,7 +171,7 @@ export class ResultadosComponent implements OnInit {
 
       const respVuelos: ParamsVuelos = resp as ParamsVuelos;
 
-      let {
+      let { 
         arrivalDate,
         businessCabin,
         departure,
@@ -350,149 +350,8 @@ export class ResultadosComponent implements OnInit {
     this.showTabs = false;
   }
 
-  // filterChange(filter: any) {
-  //   this.loader.showText('Cargando los vuelos');
-  //   this.loader.showLoader();
-
-  //   console.log('aplicando filtro');
-  //   console.log(filter);
-
-  //   let aFlights: IAerolineas[];
-
-  //   if (filter.price.currency == 'soles') {
-  //     aFlights = this.flightsOri.filter(
-  //       (x) =>
-  //         x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
-  //           .totalFare *
-  //           this.exchangeRate.amount >=
-  //           filter.price.min &&
-  //         x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
-  //           .totalFare *
-  //           this.exchangeRate.amount <=
-  //           filter.price.max
-  //     );
-  //   } else {
-  //     aFlights = this.flightsOri.filter(
-  //       (x) =>
-  //         x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
-  //           .totalFare >= filter.price.min &&
-  //         x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
-  //           .totalFare <= filter.price.max
-  //     );
-  //   }
-
-  //   console.log(this.flights);
-
-  //   aFlights = aFlights.filter(
-  //     (x) =>
-  //       Number(x.departure[0].segments[0].flightDuration) >=
-  //         filter.durationExit.min &&
-  //       Number(x.departure[0].segments[0].flightDuration) <=
-  //         filter.durationExit.max
-  //   );
-
-  //   aFlights = aFlights.filter(
-  //     (x) =>
-  //       Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) >=
-  //         filter.elapsedExit.min &&
-  //       Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) <=
-  //         filter.elapsedExit.max
-  //   );
-
-  //   if (filter.airline.length > 0) {
-  //     let af: any = aFlights.map((x) => {
-  //       let df = x.departure[0].segments[0].flightSegments[0]
-  //         ? x.departure[0].segments[0].flightSegments[0].marketingAirline.code
-  //         : '';
-
-  //       let rf = x.returns.segments[0].flightSegments[0]
-  //         ? x.returns.segments[0].flightSegments[0].marketingAirline.code
-  //         : '';
-
-  //       if (
-  //         filter.airline.find((ff: any) => ff == df) ||
-  //         filter.airline.find((ff: any) => ff == rf)
-  //       ) {
-  //         return x;
-  //       }
-  //       return null;
-  //     });
-
-  //     aFlights = af.filter((x: any) => x != null);
-  //   }
-
-  //   if (filter.equipaje.mano || filter.equipaje.bodega) {
-  //     let eql: any = aFlights.map((x) => {
-  //       if (
-  //         (filter.equipaje.mano &&
-  //           x.departure[0].segments[0].equipaje != undefined &&
-  //           x.departure[0].segments[0].equipaje.cabina != undefined &&
-  //           x.departure[0].segments[0].equipaje.cabina.piezas > 0) ||
-  //         (filter.equipaje.mano &&
-  //           x.returns.segments[0].equipaje != undefined &&
-  //           x.returns.segments[0].equipaje.cabina != undefined &&
-  //           x.returns.segments[0].equipaje.cabina.piezas > 0) ||
-  //         (filter.equipaje.bodega &&
-  //           x.departure[0].segments[0].equipaje != undefined &&
-  //           x.departure[0].segments[0].equipaje.piezas > 0) ||
-  //         (filter.equipaje.bodega &&
-  //           x.returns.segments[0].equipaje != undefined &&
-  //           x.returns.segments[0].equipaje.piezas > 0)
-  //       ) {
-  //         return x;
-  //       } else {
-  //         return null;
-  //       }
-  //     });
-
-  //     aFlights = eql.filter((x: any) => x != null);
-  //   }
-
-  //   if (filter.escala.directo || filter.escala.uno || filter.escala.mas) {
-  //     console.log(this.flights);
-  //     let esl: any = aFlights.map((x) => {
-  //       if (
-  //         (filter.escala.directo &&
-  //           x.departure[0].segments[0].flightSegments != undefined &&
-  //           x.departure[0].segments[0].flightSegments.length == 1) ||
-  //         (filter.escala.directo &&
-  //           x.returns.segments[0].flightSegments != undefined &&
-  //           x.returns.segments[0].flightSegments.length == 1) ||
-  //         (filter.escala.uno &&
-  //           x.departure[0].segments[0].flightSegments != undefined &&
-  //           x.departure[0].segments[0].flightSegments.length == 2) ||
-  //         (filter.escala.uno &&
-  //           x.returns.segments[0].flightSegments != undefined &&
-  //           x.returns.segments[0].flightSegments.length == 2) ||
-  //         (filter.escala.mas &&
-  //           x.departure[0].segments[0].flightSegments != undefined &&
-  //           x.departure[0].segments[0].flightSegments.length > 2) ||
-  //         (filter.escala.mas &&
-  //           x.returns.segments[0].flightSegments != undefined &&
-  //           x.returns.segments[0].flightSegments.length > 2)
-  //       ) {
-  //         return x;
-  //       } else {
-  //         return null;
-  //       }
-  //     });
-
-  //     console.log(esl);
-
-  //     aFlights = esl.filter((x: any) => x != null);
-  //   }
-
-  //   this.flights = [...aFlights];
-
-  //   if (this.orderByActive && this.orderByActive > 0)
-  //     this.orderBy(this.orderByActive);
-
-  //   // console.log(filter);
-  //   this.loader.closeLoader();
-  // }
 
   currencyChangeEvent(currency: string) {
-    console.log(currency);
     this.currency = currency;
   }
   addTag() {
