@@ -15,6 +15,8 @@ export class SecureBookingService {
   ) { }
 
   secureBooking(payload: any): Observable<any> {
+    debugger
+
     let url_api = `${environment.url_api}${ENDPOINT_API.SECURE_BOOKING}`;
 
     return this.http.post<any>(url_api, payload, { observe: 'response' }).pipe(

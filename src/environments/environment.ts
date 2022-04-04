@@ -29,14 +29,15 @@ export const environment = {
   urlGeo: "https://motorvuelos.expertiatravel.com/mv",
   urlIframeMotorVuelos: "https://motorwl.expertiatravel.com/#/nmviajes/search/resultados",
 
-
-  urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',               
+  urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',
   url_api: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',
-
 
   serverUrlApi: 'http://localhost:8080/api/',
 
-  url_autos: 'https://autos.nmviajes.com/es/site/'
+  url_autos: 'https://autos.nmviajes.com/es/site/',
+
+
+  urlApiPayment: "https://pasarella.expertiatravel.com/devpasarela"
 
 
 }

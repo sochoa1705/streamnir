@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SecureBookingService } from 'src/app/Services/secureBooking/secure-booking.service';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
@@ -6,7 +7,6 @@ import { Router } from '@angular/router';
 import { GenerarSafetyPayRQ } from 'src/app/Models/seguros/generarSafetypayRQ.interface';
 import { environment } from 'src/environments/environment';
 import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
-import { RegistrarSeguroRQ } from 'src/app/Models/seguros/registroRQ.interface';
 import { SafetyPayRQ } from 'src/app/Models/seguros/safetypayRQ.interface';
 import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interface';
 import { UpdatePayService } from 'src/app/Services/updatePay/update-pay.service';
@@ -55,6 +55,13 @@ export class ConformidadComponent implements OnInit {
   reservaJSON: any
   reservaStr: any
 
+  paymentDataStr: any;
+  paymentData: any;
+
+  reservationCode: string;
+  timeLimit: string;
+  deadLine: string;
+
   constructor(
     public route: Router,
     public secureBookingService: SecureBookingService,
@@ -63,10 +70,8 @@ export class ConformidadComponent implements OnInit {
     public updatePayService: UpdatePayService,
     public statePayService: StatePayService,
     public reservaVuelosService: ReservaVuelosService,
-    public cardPaymentService: CardPaymentService,
-
+    public cardPaymentService: CardPaymentService
   ) {
-
     // RESERVA
     this.reservaJSON = localStorage.getItem('reserva')
     this.reservaStr = JSON.parse(this.reservaJSON)
@@ -104,17 +109,33 @@ export class ConformidadComponent implements OnInit {
     this.ipCliente = localStorage.getItem('ipCliente')
     // TIPO DE PAGO
     this.typePay = this.shopString.formCard.select21
+
+    this.paymentDataStr = localStorage.getItem('paymentData');
+    this.paymentData = JSON.parse(this.paymentDataStr);
   }
 
   ngOnInit(): void {
     this.addTag()
     toUp()
+
     this.ShowComponentTime = false
     let lcadena: any = localStorage.getItem('businessunit');
     this.unidadNegocio = JSON.parse(lcadena);
     this.edades()
     console.log(this.safe0Json['reservaVuelos'])
 
+    debugger
+
+    if (JSON.parse(this.paymentData).Result.ServiceResponse.Status === 'SUCCESS') {
+      debugger
+
+      this.reservationCode = JSON.parse(this.paymentData).Result.ServiceResponse.Code;
+      this.timeShop(JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime);
+      this.timeLimit = JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(11, 5);
+      this.deadLine = JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(0, 10);
+
+
+    }
     // if (this.safe0Json['reservaVuelos']) {
     //   console.log('INICIA RESERVA V');
     //   this.getReserva()
@@ -130,21 +151,21 @@ export class ConformidadComponent implements OnInit {
     // }
   }
 
-  timeShop(data: string) {
-    let dayPay = data
-    let day = dayPay.substr(0, 2)
-    let month = dayPay.substr(3, 2)
-    let year = dayPay.substr(6, 4)
-    let hour = dayPay.substr(11, 5)
-    let newDate = `${year}/${month}/${day} ${hour}`
-    let datePay = new Date(newDate)
+  timeShop(expirationDatetime: string) {
+    let dayPay = expirationDatetime;
+    let day = dayPay.substr(0, 2);
+    let month = dayPay.substr(3, 2);
+    let year = dayPay.substr(6, 4);
+    let hour = dayPay.substr(11, 5);
+    let newDate = `${year}/${month}/${day} ${hour}`;
+    let datePay = new Date(newDate);
 
     var dayStart = new Date();
-    var difference = datePay.getTime() - dayStart.getTime()
-    var resultInMinutes = Math.round(difference / 60000)
-    var totalSeconds = resultInMinutes * 60
-    this.timeShow = totalSeconds
-    this.ShowComponentTime = true
+    var difference = datePay.getTime() - dayStart.getTime();
+    var resultInMinutes = Math.round(difference / 60000);
+    var totalSeconds = resultInMinutes * 60;
+    this.timeShow = totalSeconds;
+    this.ShowComponentTime = true;
     // return totalSeconds
   }
 
@@ -236,6 +257,7 @@ export class ConformidadComponent implements OnInit {
         Currency: 'USD'
       }
     }
+
     let payload = new NMRequestBy<GenerarSafetyPayRQ>(lsafetypay)
     this.generatePayService.generatePay(payload).subscribe({
       next: (response) => {
@@ -351,11 +373,13 @@ export class ConformidadComponent implements OnInit {
 
   // fecha de expiracion tarjeta
   expired(e: any) {
-    const year = e.substring(0, 4)
-    const month = e.substring(4, 6)
-    const expiredFormatt = `${year}/${month}`
-    return expiredFormatt
+    const year = e.substring(0, 4);
+    const month = e.substring(4, 6);
+    const expiredFormatt = `${year}/${month}`;
+
+    return expiredFormatt;
   }
+
   addTag() {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({

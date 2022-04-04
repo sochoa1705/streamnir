@@ -1,5 +1,6 @@
+
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OffersService } from 'src/app/Services/mock/offers.service';
 import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface';
@@ -13,14 +14,16 @@ import { LoaderSubjectService } from '../../../shared/components/loader/service/
 import { RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
-import { toUp } from 'src/app/shared/utils';
+import { Guid, toUp } from 'src/app/shared/utils';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { GenerarSafetyPayRQ } from 'src/app/Models/seguros/generarSafetypayRQ.interface';
 import { CardPaymentService } from 'src/app/Services/cardPayment/card-payment.service';
 import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
 import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interface';
 import { SafetyPayRQ } from 'src/app/Models/seguros/safetypayRQ.interface';
-import { PaymentService } from 'src/app/Services/payment/payment.service';
+import { PaymentService } from 'src/app/api/api-payment/services';
+import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/models';
+//import { PaymentService } from 'src/app/Services/payment/payment.service';
 
 interface Methods {
   id: string;
@@ -140,7 +143,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   dataShop: any
   ipCliente: any
   bankSteps: any
-  paymenData: any
+  paymentData: any
   @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>
 
   @ViewChild('nameContactForm', { static: false }) inputNameContactForm!: ElementRef<HTMLInputElement>
@@ -160,7 +163,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     public secureBookingService: SecureBookingService,
     public cardPaymentService: CardPaymentService,
     public generatePayService: GeneratePayService,
-    public paymentService: PaymentService,
+    private _paymentService: PaymentService
+
   ) {
     // COBERTURA
     this.coverageList = localStorage.getItem('coverage')
@@ -832,6 +836,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   // validNumber(inputText: any): boolean {
   //   return new RegExp(/^[0-9]+$/).test(inputText)
   // }
+
   toFactura(e: any) {
     let chk = e.target.checked
     if (chk) {
@@ -840,6 +845,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.removeRecibo(0)
     }
   }
+
   createForm() {
     this.formShop = new FormGroup({
       customers: new FormArray([]),
@@ -873,9 +879,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       chkInfo: new FormControl(),
     })
   }
+
   getArrayCustomers() {
     return (<FormArray>this.formShop.get(['customers'])).controls
   }
+
   addCustomers(e: any) {
     // ((<any>this.formShop.controls['formContact']).controls['phones']).push(
     (<FormArray>this.formShop.controls['customers']).push(
@@ -896,6 +904,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   getArrayRecibo() {
     return (<FormArray>this.formShop.get(['formContact', 'recibo'])).controls
   }
+
   addRecibo() {
     ((<any>this.formShop.controls['formContact']).controls['recibo']).push(
       new FormGroup({
@@ -903,9 +912,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         ruc: new FormControl()
       }));
   }
+
   removeRecibo(index: any) {
     ((<any>this.formShop.controls['formContact']).controls['recibo']).removeAt(index);
   }
+
   ///PHONE ADD FORMULARIO
   getArrayPhone() {
     return (<FormArray>this.formShop.get(['formContact', 'phones'])).controls
@@ -919,6 +930,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         numberPhone: new FormControl()
       }));
   }
+
   removePhone(index: any) {
     ((<any>this.formShop.controls['formContact']).controls['phones']).removeAt(index);
   }
@@ -937,6 +949,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     elemento.classList.remove('adultocdr');
     elemento.setAttribute('style', `display:none`);
   }
+
   loadShop() {
     this.detailPay = this.current.detailPay;
     this.filter = this.current.filter;
@@ -947,6 +960,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.detalleCobertura = this.current.detalleCobertura;
     this.cupon = this.current.cupon;
   }
+
   chkValuePopup(e: any) {
     const type = e.target.id;
     if (type === 'option1') {
@@ -956,6 +970,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
     //console.log(this.selectedPopup);
   }
+
   chkValue(e: any) {
     console.log(e);
     if (e === 'optionm-1' || e === 'option-1') {
@@ -964,12 +979,14 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.selectedPay = 'safety';
     }
   }
+
   id: any = "banca";
   optionPay(e: any, i: any, ids: any) {
     console.log(i);
     this.banca = i;
     this.id = ids;
   }
+
   shopEnd() {
     // console.log(this.validForm());
     console.log(this.errors);
@@ -1001,6 +1018,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       // this.route.navigateByUrl('/home/conformidad')
     }
   }
+
   otherPlan() {
     localStorage.removeItem('safe0')
     this.route.navigateByUrl('/seguros/planes')
@@ -1209,6 +1227,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log(payload)
 
     this.secureBookingService.secureBooking(payload).subscribe((response: any) => {
+      console.log('Registrando reserva');
+
       this.reservation = response
       this.loaderSubjectService.closeLoader()
       // if (data.formCard.select21 === 'SAFETYPAY') {
@@ -1219,6 +1239,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.toPayment(data)
     })
   }
+
   // RESERVA VUELOS
   getReserva() {
     const textSend = 'SE ESTA GENERANDO SU RESERVA!'
@@ -1475,6 +1496,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }
     })
   }
+
   timeShop(data: string) {
     let dayPay = data
     let day = dayPay.substr(0, 2)
@@ -1492,6 +1514,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.ShowComponentTime = true
     // return totalSeconds
   }
+
   addTag() {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
     (<any><any>window).dataLayer.push({
@@ -1500,13 +1523,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       'virtualPageTitle': 'Checkout'
     })
   }
+
   toPayment(datos: any) {
     const textSend = 'SE ESTA PROCESANDO TU PAGO!'
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
-    let payload = {
-      "TrackingCode": "0001234567890",
-      "MuteExceptions": false,
+
+    const payload: RqPaymentCeRequest1 = {
+      "TrackingCode": Guid(),
+      "MuteExceptions": environment.muteExceptions,
       "Caller": {
         "Company": "TravelCNMV",
         "Application": "NM_Viajes",
@@ -1514,11 +1539,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         "FromBrowser": "Chrome"
       },
       "Parameter": {
-        "Method": "CreditCard",
-        "TransactionCode": "9aafccac-ebdb-49ff-81dc-4da6ac048d79",
+        "Method": PaymentMethodEnum.SafetyPay,
+        "TransactionCode": "978c585602011501eb0f3fb2",
         "TypeOfOperation": "SEG",
         "SignIn": {
-          "Username": "hugo.sanchez@expertiatravel.com"
+          "Username": "proyectos.expertiatravel@gmail.com"// TODO: Despues se definirá
         },
         "Customer": {
           "Firstname": datos.nameCard,
@@ -1535,24 +1560,21 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "ExpirationDate": datos.formCard.expiredCard
         },
         "Amount": {
-          "Value": 11.00,
+          "Value": 11.00, // TODO: Agregar el monto
           "Currency": "USD",
-          "OfFees": 0
+          "OfFees": 0 // TODO: Agregar el numero de cuotas
         },
         "Bank": {
           "Id": datos.formCard.bankPay,
-          "Name": "Banco de Crédito"
+          "Name": "Banco de Crédito"// TODO: Agregar nombre del banco
         },
         "Booking": {
-          "NumberInsurance": 10000,
-          "DateStart": "2022-03-31",
-          "DateEnd": "2022-03-31",
+          "NumberInsurance": 10000,// TODO: Agregar codigo de reserva del seguro
+          "ArrivalDate": "2022-03-31",// TODO: Agregar fecha de inicio
+          "DepartureDate": "2022-03-31",// TODO: Agregar fecha de fin
           "NumberOfAdult": 1,
           "NumberOfChildren": 0,
-          "RateCancellation": {
-            "Fee": 0,
-            "IsPercentage": true
-          }
+          "HasCancellationFee": true
         },
         "Setting": {
           "HasAutomaticPayment": true,
@@ -1560,10 +1582,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         }
       }
     }
-    this.paymentService.payment(payload).subscribe({
+
+    this._paymentService.v1ApiPaymentPost({ body: payload }).subscribe({
       next: (response) => {
+        debugger
+
         console.log(response)
-        this.paymenData = response
+        this.paymentData = response
+        localStorage.setItem('paymentData', JSON.stringify(this.paymentData))
+
         this.loaderSubjectService.closeLoader()
 
         this.route.navigateByUrl('/conformidad')
