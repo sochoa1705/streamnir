@@ -124,16 +124,22 @@ export class ConformidadComponent implements OnInit {
     console.log(this.safe0Json['reservaVuelos'])
 
 
-    if (JSON.parse(this.paymentData).Result.ServiceResponse.Status === 'SUCCESS') {
+    if (this.paymentData.Result.ServiceResponse.Status === 'SUCCESS') {
       debugger
 
-      this.reservationCode = JSON.parse(this.paymentData).Result.ServiceResponse.Code;
-      this.timeShop(JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime);
-      this.timeLimit = JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(11, 5);
-      this.deadLine = JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(0, 10);
+      this.reservationCode = this.paymentData.Result.ServiceResponse.Code;
+      const expirationDatetime = this.paymentData.Result.ServiceResponse.Result.Payment_Expiration_Datetime;
 
+      this.timeShop(expirationDatetime);
+      this.timeLimit = this.paymentData.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(11, 5);
+      this.deadLine = this.paymentData.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(0, 10);
 
+      // this.reservationCode = JSON.parse(this.paymentData).Result.ServiceResponse.Code;
+      // this.timeShop(JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime);
+      // this.timeLimit = JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(11, 5);
+      // this.deadLine = JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(0, 10);
     }
+
     // if (this.safe0Json['reservaVuelos']) {
     //   console.log('INICIA RESERVA V');
     //   this.getReserva()
@@ -164,7 +170,6 @@ export class ConformidadComponent implements OnInit {
     var totalSeconds = resultInMinutes * 60;
     this.timeShow = totalSeconds;
     this.ShowComponentTime = true;
-    // return totalSeconds
   }
 
   edades() {

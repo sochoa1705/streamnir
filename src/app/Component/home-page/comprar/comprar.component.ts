@@ -25,6 +25,7 @@ import { PaymentService } from 'src/app/api/api-payment/services';
 import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/models';
 
 import { Guid } from "guid-typescript";
+import * as moment from 'moment';
 
 interface Methods {
   id: string;
@@ -667,128 +668,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   validFormMobileContact() {
     this.errors = []
-    const letter = new RegExp('^[a-zA-Z ]+$', 'i')
-    const number = new RegExp('^[0-9]+$', 'i')
-    const alphanumeric = new RegExp('^[a-zA-Z0-9 ]+$', 'i')
-    const email = new RegExp('^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$', 'i')
-
-    // const typePay: string = this.formShop.getRawValue()['formCard']['select21']
-    // if (typePay === 'TARJETA') {
-    //   // TC
-    //   let numberCard: string = this.formShop.getRawValue()['formCard']['numberCard']
-    //   if (numberCard === undefined || numberCard === null || numberCard.trim() === '') {
-    //     this.errors.push({ name: this.MSG_NUMBER_CARD, message: 'Ingresa el número de tarjeta' })
-    //   }
-
-    //   let nameCard: string = this.formShop.getRawValue()['formCard']['nameCard']
-    //   if (nameCard === undefined || nameCard === null || nameCard.trim() === '') {
-    //     this.errors.push({ name: this.MSG_NAME_CARD, message: 'Ingresa el nombre del titular' })
-    //   }
-
-    //   let expiredCard: string = this.formShop.getRawValue()['formCard']['expiredCard']
-    //   if (expiredCard === undefined || expiredCard === null || expiredCard.trim() === '') {
-    //     this.errors.push({ name: this.MSG_EXPIRED_CARD, message: 'Campo requerido' })
-    //   }
-
-    //   let ccvCard: string = this.formShop.getRawValue()['formCard']['ccvCard']
-    //   if (ccvCard === undefined || ccvCard === null || ccvCard.trim() === '') {
-    //     this.errors.push({ name: this.MSG_CCV_CARD, message: 'Campo requerido' })
-    //   }
-    //   if (!number.test(ccvCard)) {
-    //     this.errors.push({ name: this.MSG_CCV_CARD, message: 'solo números' })
-    //   }
-
-    //   let tipoDoc: string = this.formShop.getRawValue()['formCard']['tipoDoc']
-    //   if (tipoDoc === undefined || tipoDoc === null || tipoDoc.trim() === '') {
-    //     this.errors.push({ name: this.MSG_TYPE_DOC, message: 'Campo requerido' })
-    //   }
-
-    //   let numDoc: string = this.formShop.getRawValue()['formCard']['numDoc']
-    //   if (numDoc === undefined || numDoc === null || numDoc.trim() === '') {
-    //     this.errors.push({ name: this.MSG_NUM_DOC, message: 'Ingrese su N° de documento' })
-    //   }
-    //   if (!number.test(numDoc)) {
-    //     this.errors.push({ name: this.MSG_NUM_DOC, message: 'solo números' })
-    //   }
-
-    //   let feePay: string = this.formShop.getRawValue()['formCard']['feePay']
-    //   if (feePay === undefined || feePay === null || feePay.trim() === '') {
-    //     this.errors.push({ name: this.MSG_QUOTE, message: 'Campo requerido' })
-    //   }
-
-    //   let cityCard: string = this.formShop.getRawValue()['formCard']['cityCard']
-    //   if (cityCard === undefined || cityCard === null || cityCard.trim() === '') {
-    //     this.errors.push({ name: this.MSG_CITY, message: 'Campo requerido' })
-    //   }
-
-    //   let address: string = this.formShop.getRawValue()['formCard']['address']
-    //   if (address === undefined || address === null || address.trim() === '') {
-    //     this.errors.push({ name: this.MSG_ADRESS, message: 'Campo requerido' })
-    //   }
-    // } else {
-    //   // SAFETYPAY
-    //   let bankPay: string = this.formShop.getRawValue()['formCard']['bankPay']
-    //   if (bankPay === undefined || bankPay === null || bankPay.trim() === '') {
-    //     this.errors.push({ name: this.MSG_BANK, message: 'Campo requerido' })
-    //   }
-    // }
-
-    //FORM PASAJERO
-    // for (let x = 0; x < this.formShop.getRawValue()['customers'].length; x++) {
-    // let nameCustomer: string = this.formShop.getRawValue()['customers'][x]['nameCustomer']
-    // if (nameCustomer === undefined || nameCustomer === null || nameCustomer.trim() === '') {
-    //   this.errors.push({ indice: x, name: this.MSG_NAME_CUSTOMER, message: 'Ingresa el nombre del pasajero' })
-    // }
-
-    // let lastNameCustomer: string = this.formShop.getRawValue()['customers'][x]['lastNameCustomer']
-    // if (lastNameCustomer === undefined || lastNameCustomer === null || lastNameCustomer.trim() === '') {
-    //   this.errors.push({ indice: x, name: this.MSG_LAST_NAME_CUSTOMER, message: 'Ingresa el apellido del pasajero' })
-    // }
-
-    // let dayCustomer: string = this.formShop.getRawValue()['customers'][x]['dayCustomer']
-    // if (dayCustomer === undefined || dayCustomer === null || dayCustomer.trim() === '') {
-    //   this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'Ingresa día' })
-    // }
-    // if (!number.test(dayCustomer)) {
-    //   this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'solo números' })
-    // }
-
-    // let monthCustomer: string = this.formShop.getRawValue()['customers'][x]['monthCustomer']
-    // if (monthCustomer === undefined || monthCustomer === null || monthCustomer.trim() === '') {
-    //   this.errors.push({ indice: x, name: this.MSG_MONTH_CUSTOMER, message: 'Ingresa mes' })
-    // }
-
-    // let yearCustomer: string = this.formShop.getRawValue()['customers'][x]['yearCustomer']
-    // if (yearCustomer === undefined || yearCustomer === null || yearCustomer.trim() === '') {
-    //   this.errors.push({ indice: x, name: this.MSG_YEAR_CUSTOMER, message: 'Ingresa año' })
-    // }
-
-    // let nationalityCustomer: string = this.formShop.getRawValue()['customers'][x]['nationalityCustomer']
-    // if (nationalityCustomer === undefined || nationalityCustomer === null || nationalityCustomer.trim() === '') {
-    //   this.errors.push({ indice: x, name: this.MSG_NATIONALITY_CUSTOMER, message: 'Campo requerido' })
-    // }
-
-    // let typeDocCustomer: string = this.formShop.getRawValue()['customers'][x]['typeDocCustomer']
-    // if (typeDocCustomer === undefined || typeDocCustomer === null || typeDocCustomer.trim() === '') {
-    //   this.errors.push({ indice: x, name: this.MSG_TYPE_DOC_CUSTOMER, message: 'Campo requerido' })
-    // }
-
-    // let numDocCustomer: string = this.formShop.getRawValue()['customers'][x]['numDocCustomer']
-    // if (numDocCustomer === undefined || numDocCustomer === null || numDocCustomer.trim() === '') {
-    //   this.errors.push({ indice: x, name: this.MSG_NUM_DOC_CUSTOMER, message: 'Ingresa tu número de documento' })
-    // }
-    // if (!number.test(numDocCustomer)) {
-    //   this.errors.push({ name: this.MSG_NUM_DOC_CUSTOMER, message: 'solo números' })
-    // }
-
-    // let sexCustomer: string = this.formShop.getRawValue()['customers'][x]['sexCustomer']
-    // if (sexCustomer === undefined || sexCustomer === null) {
-    //   this.errors.push({ indice: x, name: this.MSG_SEX, message: 'Elegir un sexo' })
-    // }
-    // }
-    //FORM PASAJERO
-
-    //FORMCONTACT
+    const number = new RegExp('^[0-9]+$', 'i');
 
     let nameContacto: string = this.formShop.getRawValue()['formContact']['nameContacto']
     if (nameContacto === undefined || nameContacto === null || nameContacto.trim() === '') {
@@ -834,9 +714,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (chkInfo === undefined || chkInfo === null || chkInfo == false) {
       this.errors.push({ name: this.MSG_CHK_INFO, message: 'Autorizar uso de información es requerido' })
     }
-    //FORMCONTACT
 
-    return this.errors.length === 0
+    return this.errors.length === 0;
   }
 
   getMessage(messageKey: any) {
@@ -848,7 +727,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   toFactura(e: any) {
-    let chk = e.target.checked
+    let chk = e.target.checked;
 
     if (chk)
       this.addRecibo()
@@ -967,12 +846,18 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  generateInsuranceReserve(data: any) {
-    console.log('2. generateInsuranceReserve');
+  generatePayloadForInsurance(data: any): RegistrarSeguroRQ {
 
-    this.loaderSubjectService.showText('SE ESTA GENERANDO SU RESERVA!');
+    console.log('generatePayloadForInsurance');
 
-    let lregistro: RegistrarSeguroRQ = {
+    debugger
+
+    data.customers[0].typeDocCustomer;
+
+
+    this.getPassengerAges();
+
+    const payload: RegistrarSeguroRQ = {
       fec_salida: this.resultJson.fromDate,                       // FECHA DE PARTIDA
       fec_retorno: this.resultJson.toDate,                        // FECHA DE RETORNO
       cant_paxes: this.resultJson.countCustomers,               // CANTIDAD DE PASAJEROS
@@ -1004,9 +889,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       direccion_fiscal: (data.formContact.recibo.length === 0) ? '' : data.formContact.recibo[0].direccion, // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
       comentario: '',
       webs_cid: 7,
-      usuweb_id: 339,
+      usuweb_id: 56190,
       destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'N' : 'I', // obtener desde destiny.EsDestinoNacional
-      numeroruc: (data.formContact.recibo.length === 0) ? `BV-${data.customers[0].numDocCustomer}` : data.formContact.recibo[0].ruc,
+      numeroruc: (data.formContact.recibo.length === 0) ? `${data.customers[0].typeDocCustomer}-${data.customers[0].numDocCustomer}` : `RUC-${data.formContact.recibo[0].ruc}`,
       comprobantepago: (data.formContact.chkFac) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
       usobilletera: 'N',
       codigobloqueo: '',
@@ -1054,15 +939,32 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       xPagarSafetyPay: 0,
       idTipoTarifa: 0,
       idReciboSafetyPay: 0
-    }
+    };
 
-    let payload = new NMRequestBy<RegistrarSeguroRQ>(lregistro);
-    console.log(payload)
+    return payload;
+  }
+
+  generateInsuranceReserve(data: any) {
+    console.log('2. generateInsuranceReserve');
+
+    debugger
+
+    this.loaderSubjectService.showText('SE ESTA GENERANDO SU RESERVA!');
+
+    const payload = new NMRequestBy<RegistrarSeguroRQ>(this.generatePayloadForInsurance(data));
+
+    console.log(payload);
 
     this.secureBookingService.secureBooking(payload).subscribe((response: any) => {
       console.log('3. Registrando reserva');
 
+      debugger
+
+      console.log(response);
+
       this.reservation = response;
+      console.log('Codigo de resevra: ' + this.reservation.Reserva);
+
       this.loaderSubjectService.closeLoader();
 
       this.makePayment(data);
@@ -1073,11 +975,14 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log('4. makePayment');
     console.log(data);
 
-    const textSend = 'SE ESTA PROCESANDO TU PAGO!'
-    this.loaderSubjectService.showText(textSend)
-    this.loaderSubjectService.showLoader()
+    const textSend = 'SE ESTA PROCESANDO TU PAGO!';
+
+    this.loaderSubjectService.showText(textSend);
+    this.loaderSubjectService.showLoader();
 
     const payload: RqPaymentCeRequest1 = this.generatePayloadToPay(data);
+
+    localStorage.setItem('payloadPayment', JSON.stringify(payload));
 
     this._paymentService.v1ApiPaymentPost({ body: payload }).subscribe({
       next: (response) => {
@@ -1085,12 +990,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
         console.log(response);
         this.paymentData = response;
-        localStorage.setItem('paymentData', JSON.stringify(this.paymentData));
+        localStorage.setItem('paymentData', this.paymentData);
 
         this.loaderSubjectService.closeLoader();
 
         this._router.navigateByUrl('/conformidad');
-
       },
       error: (err) => {
         debugger
@@ -1098,7 +1002,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         console.log('Error en el registro del pago');
         console.log(err);
         this.loaderSubjectService.closeLoader();
-
       }
     })
   }
@@ -1138,7 +1041,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "Lastname": data.customers[0].lastNameCustomer,
           "City": "",
           "Address": "",
-          "DocumentType": data.customers[0].typeDocCustomer.toUpperCase(),
+          "DocumentType": data.customers[0].typeDocCustomer,
           "DocumentNumber": data.customers[0].numDocCustomer,
           "Email": data.formContact.mailContacto
         },
@@ -1148,19 +1051,18 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "ExpirationDate": data.formCard.expiredCard
         },
         "Amount": {
-          "Value": data.PriceTotal, // TODO: Agregar el monto
+          "Value": data.PriceTotal,
           "Currency": "USD",
-          "OfFees": data.feePay || 0, // TODO: Agregar el numero de cuotas
+          "OfFees": data.feePay || 0,
         },
         "Bank": {
-          "Id": data.formCard.bankPay,
-          "Name": "Banco de Crédito"// TODO: Agregar nombre del banco
+          "Id": data.formCard.bankPay
         },
         "Booking": {
           "CodeSrv": 0,
-          "CodeInsurance": 10000,
-          "ArrivalDate": "2022-03-31",// TODO: Agregar fecha de inicio
-          "DepartureDate": "2022-03-31",// TODO: Agregar fecha de fin
+          "CodeInsurance": this.reservation.Reserva,
+          "ArrivalDate": moment(this.resultJson.fromDate, "DD/MM/YYYY").format("YYYY-MM-DD"),
+          "DepartureDate": moment(this.resultJson.toDate, "DD/MM/YYYY").format("YYYY-MM-DD"),
           "NumberOfAdult": 1,
           "NumberOfChildren": 0,
           "HasCancellationFee": true
@@ -1178,7 +1080,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   otherPlan() {
     localStorage.removeItem('safe0')
     this._router.navigateByUrl('/seguros/planes')
-    // this.route.navigateByUrl('/seguros/slide')
   }
 
   selectVuelo(isIda: boolean) {
@@ -1217,6 +1118,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       // data => console.log(data['Resultado']),
     )
   }
+
   pasajerosArr(data: any) {
     let pasajeros: any = []
     data.customers.forEach((value: any, index: number) => {
@@ -1240,6 +1142,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     })
     return pasajeros
   }
+
   pasajerosVuelos() {
     let pasajeros: any = []
     this.dataShop.customers.forEach((value: any, index: number) => {
@@ -1248,7 +1151,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         name: value.nameCustomer,
         lastName: value.lastNameCustomer,
         birthday: value.yearCustomer + '-' + value.monthCustomer.padStart(2, '0') + '-' + value.dayCustomer.padStart(2, '0'),
-        documentType: (value.typeDocCustomer === 'dni') ? 0 : 1,
+        documentType: (value.typeDocCustomer === 'DNI') ? 0 : 1,
         documentNumber: value.numDocCustomer,
         gender: (value.sexCustomer === 'masculino') ? 'M' : '',
         email: this.dataShop.formContact.mailContacto,
@@ -1259,9 +1162,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return pasajeros
   }
 
-  edades() {
+  getPassengerAges() {
     let Ages = []
-    // Obtiene la fecha de hoy
+
     let Today = new Date()
     let day = String(Today.getDate()).padStart(2, '0') + String(Today.getMonth() + 1).padStart(2, '0') + String(Today.getFullYear())
     // Obtiene la fecha de nacimiento
@@ -1272,7 +1175,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       Ages.push(Edad)
     }
     this.agesCustomers = Ages.join(';')
-    // return Edad
   }
 
   // RESERVA VUELOS
@@ -1301,6 +1203,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         ]
       }
     }
+
     console.log(payload)
 
     this.reservaVuelosService.reserva(payload, this.tokenJson).subscribe({

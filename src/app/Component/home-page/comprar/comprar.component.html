@@ -784,10 +784,12 @@
                       <select formControlName="typeDocCustomer" class="form-select-f"
                         [ngClass]="getMessage(MSG_TYPE_DOC_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_TYPE_DOC_CUSTOMER) ? 'isvalid' : ''">
                         <option disabled>Seleccione</option>
-                        <option value="dni">DNI</option>
-                        <option value="pasaporte">Pasaporte</option>
-                        <option value="CE">C.Extranjería</option>
+                        <option value="DNI">DNI</option>
+                        <option value="RUC">RUC</option>
+                        <option value="PSP">Pasaporte</option>
+                        <option value="CEX">C.Extranjería</option>
                       </select>
+
                       <span class="valid"
                         *ngIf="getMessage(MSG_TYPE_DOC_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_TYPE_DOC_CUSTOMER)">{{
                         getMessage(MSG_TYPE_DOC_CUSTOMER) }}</span>
@@ -1006,29 +1008,26 @@
                             <div class="clearfix"></div>
                           </div>
                         </div>
+
                         <div class="clearfix"></div>
 
-                        <div class="col-6 viewMobileWidth colFon" *ngIf="getArrayPhone().length > 0">
+                        <!-- <div class="col-6 viewMobileWidth colFon" *ngIf="getArrayPhone().length > 0">
                           <a (click)="removePhone(i)" class="btnEliminar">- Eliminar teléfono
                           </a>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
-                    <div class="col-6 offset-6 viewMobileWidth colFono" style="margin-top: -25px;">
+
+                    <!-- <div class="col-6 offset-6 viewMobileWidth colFono" style="margin-top: -25px;">
                       <a (click)="addPhone()">+ Agregar otro teléfono</a>
-                    </div>
+                    </div> -->
+
                     <div class="clearfix"></div>
                   </div>
-                  <!-- <h5 class="card-title">Special title treatment</h5>
-                                            <p class="card-text">With supporting text below as a natural lead-in to additional
-                                                content.</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a> -->
                 </div>
-
-
               </div>
-
             </div>
+
             <div class="col-12 ">
               <div class="card checkPopup">
                 <div class="row rowMobileCard">
@@ -1297,7 +1296,7 @@
                         <div class="row">
                           <div class="col-5">
                             <label for="names">Vencimiento</label>
-                            <input class="form-control" placeholder="MM/AA" type="text" name="names">
+                            <input class="form-control" placeholder="AAAA/MM" type="text" name="names">
                           </div>
                           <div class="col-6">
                             <label for="lastname">Código de seguridad</label>
@@ -1764,9 +1763,10 @@
                     <select formControlName="typeDocCustomer" class="form-select-f"
                       [ngClass]="getMessage(MSG_TYPE_DOC_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_TYPE_DOC_CUSTOMER) ? 'isvalid' : ''">
                       <option disabled>Seleccione</option>
-                      <option value="dni">DNI</option>
-                      <option value="pasaporte">Pasaporte</option>
-                      <option value="CE">C.Extranjería</option>
+                      <option value="DNI">DNI</option>
+                      <option value="RUC">RUC</option>
+                      <option value="PSP">Pasaporte</option>
+                      <option value="CEX">C.Extranjería</option>
                     </select>
                     <span class="valid"
                       *ngIf="getMessage(MSG_TYPE_DOC_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_TYPE_DOC_CUSTOMER)">{{
@@ -1885,6 +1885,7 @@
                 <div class="row card_ py-4 justify-content-evenly cardMob" *ngIf="!mobile">
                   <input *ngFor="let chk of metodoPago" formControlName="select21" value="{{chk.value}}" type="radio"
                     name="select21" id="{{ chk.name }}" (click)="chkValue(chk.name)" [checked]="chk.checked">
+
                   <label *ngFor="let chk of metodoPago" for="{{ chk.name }}"
                     class="optionm {{chk.name}} col-4 offset-1 py-3 lessMarginLeft boxMob">
                     <div class="dot"></div>
@@ -1932,7 +1933,7 @@
                           <label for="names">Vencimiento</label>
                           <input class="form-control" formControlName="expiredCard"
                             [ngClass]="getMessage(MSG_EXPIRED_CARD) !== MSG_EMPTY ? 'isvalid' : ''" mask="9999/99"
-                            placeholder="MM/AA" type="text" name="names">
+                            placeholder="AAAA/MM" type="text" name="names">
                           <span class="valid" *ngIf="getMessage(MSG_EXPIRED_CARD) !== MSG_EMPTY">{{
                             getMessage(MSG_EXPIRED_CARD) }}</span>
                         </div>
@@ -2075,6 +2076,7 @@
                           <option *ngFor="let b of banks" value="{{b.value}}">{{b.name}}
                           </option>
                         </select>
+
                         <span class="valid" *ngIf="getMessage(MSG_BANK) !== MSG_EMPTY">{{
                           getMessage(MSG_BANK) }}</span>
                         <!-- <select class="selectBank" formControlName="bankPay" placeholder="Selecciona tu banco">
@@ -2343,17 +2345,19 @@
                           <div class="clearfix"></div>
                         </div>
                       </div>
+
                       <div class="clearfix"></div>
 
-                      <div class="col-6 viewMobileWidth colFon" *ngIf="getArrayPhone().length > 0">
+                      <!-- <div class="col-6 viewMobileWidth colFon" *ngIf="getArrayPhone().length > 0">
                         <a (click)="removePhone(i)" class="btnEliminar">- Eliminar teléfono</a>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
 
-                  <div class="col-6 offset-6 viewMobileWidth colFono mTop">
+                  <!-- <div class="col-6 offset-6 viewMobileWidth colFono mTop">
                     <a (click)="addPhone()">+ Agregar otro teléfono</a>
-                  </div>
+                  </div> -->
+
                   <div class="clearfix"></div>
                 </div>
               </div>
