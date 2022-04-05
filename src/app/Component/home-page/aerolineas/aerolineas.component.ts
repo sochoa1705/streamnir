@@ -128,7 +128,7 @@ export class AerolineasComponent implements OnInit {
   activateTab(index: number): void {
     this.indexTab = index;
   }
-  
+
 
   generateParams(entity: any) {
     return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${entity.OriginCode} ${entity.Origin}`, `${entity.DestinationCode} ${entity.Destination}`, entity.DateStart, entity.DateEnd, "1", "0", "0", EnumCabins.economico);
@@ -158,7 +158,6 @@ export class AerolineasComponent implements OnInit {
 
 
   onClick(entity: IAereolineas) {
-    debugger
     this.nationalLimit = 5;
     this.internationalLimit = 5;
   }

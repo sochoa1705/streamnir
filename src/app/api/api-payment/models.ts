@@ -14,6 +14,6 @@ export { RqSignIn } from './models/rq-sign-in';
 export { RqTransactionAmount } from './models/rq-transaction-amount';
 export { RqTransactionBooking } from './models/rq-transaction-booking';
 export { RqTransactionExternal } from './models/rq-transaction-external';
-export { RqTransactionHolderCard } from './models/rq-transaction-holder-card';
+export { RqTransactionHolder } from './models/rq-transaction-holder';
 export { RqTransactionSetting } from './models/rq-transaction-setting';
 export { RqTransactionSignIn } from './models/rq-transaction-sign-in';

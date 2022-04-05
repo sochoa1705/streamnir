@@ -356,7 +356,11 @@
       "RQ_Booking": {
         "type": "object",
         "properties": {
-          "NumberInsurance": {
+          "CodeSrv": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "CodeInsurance": {
             "type": "integer",
             "format": "int32"
           },
@@ -520,8 +524,8 @@
           "External": {
             "$ref": "#/components/schemas/RQ_TransactionExternal"
           },
-          "HolderCard": {
-            "$ref": "#/components/schemas/RQ_TransactionHolderCard"
+          "Holder": {
+            "$ref": "#/components/schemas/RQ_TransactionHolder"
           },
           "Booking": {
             "$ref": "#/components/schemas/RQ_TransactionBooking"
@@ -627,7 +631,7 @@
         },
         "additionalProperties": false
       },
-      "RQ_TransactionHolderCard": {
+      "RQ_TransactionHolder": {
         "type": "object",
         "properties": {
           "Firstname": {
@@ -638,11 +642,23 @@
             "type": "string",
             "nullable": true
           },
-          "Number": {
+          "DocumentType": {
             "type": "string",
             "nullable": true
           },
-          "Expiration": {
+          "DocumentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "Address": {
+            "type": "string",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "nullable": true
+          },
+          "Email": {
             "type": "string",
             "nullable": true
           }

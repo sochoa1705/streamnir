@@ -1,12 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormArray, AbstractControl } from '@angular/forms';
-import { Router, NavigationExtras } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Injectable } from '@angular/core';
 import { NgbDateAdapter, } from '@ng-bootstrap/ng-bootstrap';
-import { FlightsService } from 'src/app/Services/flights/flights.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from "moment";
@@ -174,6 +171,8 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   }
 
   validForm() {
+    debugger
+
     this.errors = []
 
     let age: string = this.form.getRawValue()['passenger'][0]['age']
@@ -208,7 +207,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
   }
 
   send() {
-    
+
     if (this.validForm()) {
       let fechaSalida = this.FromDate2.nativeElement.value
       let fechaVuelta = this.ToDate2.nativeElement.value
@@ -328,7 +327,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       console.log(newStr);
       //  console.log(fech);
       //  console.log(age);
-      this.anios.push({anio:Number(anioNacio), edad: age})
+      this.anios.push({ anio: Number(anioNacio), edad: age })
       this.ClienteCotizacion.push(newStr)
       //  console.log(this.form.controls);
     }

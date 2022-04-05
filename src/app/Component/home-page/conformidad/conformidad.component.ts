@@ -123,7 +123,6 @@ export class ConformidadComponent implements OnInit {
     this.edades()
     console.log(this.safe0Json['reservaVuelos'])
 
-    debugger
 
     if (JSON.parse(this.paymentData).Result.ServiceResponse.Status === 'SUCCESS') {
       debugger

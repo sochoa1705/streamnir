@@ -2,9 +2,10 @@
 /* eslint-disable */
 export interface RqBooking {
   ArrivalDate?: string;
+  CodeInsurance?: number;
+  CodeSrv?: number;
   DepartureDate?: string;
   HasCancellationFee?: boolean;
-  NumberInsurance?: number;
   NumberOfAdult?: number;
   NumberOfChildren?: number;
 }
