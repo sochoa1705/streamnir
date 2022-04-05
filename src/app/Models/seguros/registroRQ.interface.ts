@@ -1,3 +1,4 @@
+
 export interface RegistrarSeguroRQ {
   res_seguro_id?: number;
   fec_salida: Date;

@@ -8,7 +8,6 @@ import { RqCard } from './rq-card';
 import { RqCustomer } from './rq-customer';
 import { RqSetting } from './rq-setting';
 import { RqSignIn } from './rq-sign-in';
-
 export interface RqPayment {
   Amount?: RqAmmount;
   Bank?: RqBank;

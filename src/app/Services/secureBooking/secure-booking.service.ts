@@ -15,7 +15,6 @@ export class SecureBookingService {
   ) { }
 
   secureBooking(payload: any): Observable<any> {
-    debugger
 
     let url_api = `${environment.url_api}${ENDPOINT_API.SECURE_BOOKING}`;
 
