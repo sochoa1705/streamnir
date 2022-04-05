@@ -59,7 +59,6 @@ export class AerolineasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addTag()
     this.loadAereolineas();
 
     this.currentDate = moment().format('DD/MM/YYYY');
@@ -156,14 +155,7 @@ export class AerolineasComponent implements OnInit {
     this.counter > 1 ? this.counter-- : this.counter = 3;
   }
 
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/seguros',
-      'virtualPageTitle': 'Aerolineas'
-    })
-  }
+
 
   onClick(entity: IAereolineas) {
     debugger

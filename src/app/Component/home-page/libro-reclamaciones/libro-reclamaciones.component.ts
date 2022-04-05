@@ -53,10 +53,8 @@ export class LibroReclamacionesComponent implements OnInit {
     this.today = String(day.getDate()).padStart(2, '0') + "/" + String((day.getMonth() + 1)).padStart(2, '0') + "/" + day.getFullYear()
   }
   ngOnInit(): void {
-    this.addTag()
     this.createForm()
     toUp()
-    console.log(this.numCode)
   }
   createForm() {
     this.formLibro = new FormGroup({
@@ -277,12 +275,5 @@ export class LibroReclamacionesComponent implements OnInit {
    let link = 'https://ayuda.nmviajes.com/support/home'
    window.location.href = link;
   }
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/libro-reclamaciones',
-      'virtualPageTitle': 'Libro de Reclamaciones'
-    })
-  }
+
 }

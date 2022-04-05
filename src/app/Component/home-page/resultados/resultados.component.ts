@@ -83,7 +83,6 @@ export class ResultadosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.addTag()
     toUp()
     this.filtersObj = {
       airlines: [],
@@ -354,12 +353,5 @@ export class ResultadosComponent implements OnInit {
   currencyChangeEvent(currency: string) {
     this.currency = currency;
   }
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/vuelos/resultados',
-      'virtualPageTitle': 'Resultados'
-    })
-  }
+
 }

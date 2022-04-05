@@ -59,7 +59,6 @@ export class PlansComponent implements OnInit {
     // console.log(this.resultJson.ClienteCotizacion);
   }
   ngOnInit(): void {
-    this.addTag()
     let lcadena: any = localStorage.getItem('businessunit')
     this.unidadNegocio = JSON.parse(lcadena)
 
@@ -79,14 +78,7 @@ export class PlansComponent implements OnInit {
 
 
   }
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/seguros/planes',
-      'virtualPageTitle': 'Seguros-Planes'
-    })
-  }
+
   bestPlan() {
     let arrai = this.plansAC
     arrai.sort((a: any, b: any) => a['change'] - b['change'])

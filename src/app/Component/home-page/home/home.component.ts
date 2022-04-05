@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.addTag()
     this.listDestiny()
     this.getConfirmacion();
     //this.getAirfare();
@@ -104,20 +103,12 @@ export class HomeComponent implements OnInit {
       next: (response) => {
         this.destiny = response['Resultado']
         localStorage.setItem('destiny', JSON.stringify(this.destiny));
-        console.log(this.destiny)
       },
       error: error => console.log(error),
     }
     )
   }
 
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/',
-      'virtualPageTitle': 'Home'
-    })
-  }
+
 
 }

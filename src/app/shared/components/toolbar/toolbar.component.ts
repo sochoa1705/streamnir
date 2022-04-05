@@ -31,7 +31,6 @@ export class ToolbarComponent implements OnInit {
           if(event.url.includes('/home/')) {
             title = event.url.replace('/home/', '')
           }
-          this.addTag(event.url, title)
         }
       });
 
@@ -66,15 +65,7 @@ export class ToolbarComponent implements OnInit {
   }
   close() {
     this.sidenav.close()
-    console.log('cerro');
   }
-  addTag(d: any, t: any) {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': d,
-      'virtualPageTitle': t
-    })
-  }
+
 
 }

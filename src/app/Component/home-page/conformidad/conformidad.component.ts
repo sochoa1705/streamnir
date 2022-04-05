@@ -115,7 +115,6 @@ export class ConformidadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addTag()
     toUp()
 
     this.ShowComponentTime = false
@@ -380,14 +379,7 @@ export class ConformidadComponent implements OnInit {
     return expiredFormatt;
   }
 
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/conformidad',
-      'virtualPageTitle': 'Conformidad'
-    })
-  }
+
 
 }
 

@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NavigationEnd, Router } from '@angular/router';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import * as bootstrap from 'bootstrap';
 import { combineLatest, fromEvent } from 'rxjs';
@@ -10,6 +11,7 @@ import { filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 //import { ConfirmDialogComponent } from './Component/confirm-dialog/confirm-dialog.component';
 import { AccountsService } from './Services/accounts.service';
+import { TaggingService } from './Services/analytics/tagging.service';
 import { NotificationService } from './Services/notification.service';
 import { PopupService } from './Services/pop-up/popup.service';
 import { LoaderSubjectService } from './shared/components/loader/service/loader-subject.service';
@@ -78,8 +80,8 @@ export class AppComponent implements OnInit {
     private _matSnackBar: MatSnackBar,
     private _validatorsService: ValidatorsService,
     public loaderSubjectService: LoaderSubjectService,
-    private notification: NotificationService
-
+    private notification: NotificationService,
+    private  readonly router: Router,
   ) {
     this.cerrarBoxClicFuera();
 
@@ -103,23 +105,23 @@ export class AppComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
 
+  ngOnInit(): void {
+    this.taggingPageView();
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
     //this.recoverPasswordForm = this.createRecoverPasswordForm();
 
+  }
 
-    // this.personalAccountForm.reset({
-    //   email: '',
-    //   password: ''
-    // });
+  taggingPageView(){
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        TaggingService.pageView(event.urlAfterRedirects)
+      }
+    });
 
-    // this.businessAccountForm.reset({
-    //   email: '',
-    //   password: ''
-    // });
   }
 
   loadUsuario() {

@@ -48,7 +48,6 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addTag()
     this.userStorage = this.accountService.getUserStorage();
   }
 
@@ -75,15 +74,5 @@ export class PerfilComponent implements OnInit {
   }
 
 
-
-
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/perfil',
-      'virtualPageTitle': 'Perfil'
-    })
-  }
 
 }

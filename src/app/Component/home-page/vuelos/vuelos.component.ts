@@ -5,6 +5,7 @@ import { CoreService } from 'src/app/Services/core.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { NMRequest } from 'src/app/Models/base/NMRequest';
 import { take } from 'rxjs/operators';
+import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 
 @Component({
   selector: 'app-vuelos',
@@ -20,24 +21,15 @@ export class VuelosComponent implements OnInit {
     private coreService: DestinyService
   ) { }
   ngOnInit(): void {
-    this.addTag()
     this.listDestiny()
   }
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/vuelos',
-      'virtualPageTitle': 'Vuelos'
-    })
-  }
+
   listDestiny() {
     let payload = new NMRequest();
     this.coreService.getDestiny(payload).pipe(take(1)).subscribe({
       next: (response) => {
         this.destiny = response['Resultado']
         localStorage.setItem('destiny', JSON.stringify(this.destiny));
-        console.log(this.destiny)
       },
       error: error => console.log(error),
     }

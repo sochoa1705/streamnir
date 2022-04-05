@@ -191,9 +191,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     this.unidadNegocio = localStorage.getItem('businessunit')
     this.businessunit = JSON.parse(this.unidadNegocio)
-    console.log(this.resultJson);
-    console.log(this.safe0Json);
-    console.log(screen.width);
+
     if (screen.width < 769) {
       this.mobile = true
     } else {
@@ -228,19 +226,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     let test = this.resultJson.passenger
-    console.log(this.coverage)
     // console.log(this.shopString['customers'].length)
-    console.log(this.resultJson['ClienteCotizacion'].length)
 
-    this.addTag()
     // this.showAdulto = 0
-    console.log(this.selectedPay)
     toUp()
-    console.log(this.showAdulto)
 
     this.pop = this.safe0Json
     // this.getSecureBooking()
-    console.log(this.current);
     this.loadShop();
     //console.log(this.safe0Json.detailPay);
     // this.firstFormGroup = new FormGroup({ //FORMULARIO DE CONTACTO EN MOBILE
@@ -1380,7 +1372,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }
     }
     let payload = new NMRequestBy<GenerarSafetyPayRQ>(lsafetypay)
-    console.log(payload)
 
     this.generatePayService.generatePay(payload).subscribe({
       next: (response) => {
@@ -1481,7 +1472,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         }
       }
     }
-    console.log(payload)
 
     this.cardPaymentService.cardPayment(payload).subscribe({
       next: (response) => {
@@ -1515,14 +1505,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     // return totalSeconds
   }
 
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/comprar',
-      'virtualPageTitle': 'Checkout'
-    })
-  }
+
 
   toPayment(datos: any) {
     const textSend = 'SE ESTA PROCESANDO TU PAGO!'
