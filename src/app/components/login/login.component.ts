@@ -30,7 +30,7 @@ export class LoginBusiness {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   isPersonLoggin: boolean = true;
 
@@ -55,9 +55,6 @@ export class LoginComponent implements OnInit {
     private notification: NotificationService
   ) { }
 
-  ngOnInit(): void {
-
-  }
 
   initLoading() {
     const textSend = 'CARGANDO'
