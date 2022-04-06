@@ -22,6 +22,7 @@ html,
 body {
     height: 100%;
     background: $gray_light;
+    background-color: $gray_light !important;
     margin: 0;
     font-family: "Montserrat";
     color: $gray;
@@ -1016,7 +1017,7 @@ section {
 .box-container .box-perfil {
     background-color: #fff;
     padding: 20px;
-    box-shadow: 0px 1px 10px rgb(0 0 0 / 10%);
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2007,7 +2008,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .boxGraphic {
     background: #FFFFFF;
-    box-shadow: 0px 1px 8px rgb(0 0 0 / 10%);
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px; // margin-top: 10px;
     padding: 20px 19px;
     .row {
@@ -2495,6 +2496,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         color: #009AED;
         cursor: pointer;
     }
+    @media (max-width: 640px) {
+        display: block;
+    }
 }
 
 #politicaModal,
@@ -2857,7 +2861,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             justify-content: center;
             .boxDescrip {
                 background: #F7F7F7;
-                box-shadow: 0px 1px 8px rgb(0 0 0 / 15%);
+                box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
                 border-radius: 5px;
                 width: 320px;
                 text-align: center;
@@ -3047,7 +3051,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
             }
             &:hover {
-                box-shadow: 0px 1px 8px rgb(0 0 0 / 25%);
+                box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25);
             }
             .title {
                 border-radius: 5px 5px 0px 0px;
@@ -3404,6 +3408,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-weight: bold;
             letter-spacing: 0.5px;
         }
+        .d-flex {
+            @media (max-width: 640px) {
+                margin-bottom: 10px;
+            }
+        }
+        @media (max-width: 640px) {
+            flex-wrap: wrap;
+            padding-bottom: 0 !important;
+        }
+    }
+    @media (max-width: 640px) {
+        padding: 25px 25px 15px 25px !important;
     }
 }
 
@@ -3537,7 +3553,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .boxFlotante {
     width: 330px;
     background: #FFFFFF;
-    box-shadow: 0px 0px 8px rgb(0 0 0 / 5%);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
     position: absolute;
     top: 25px;
@@ -3848,6 +3864,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 4px 10px 10px 10px;
             position: relative;
         }
+        @include tablet {
+            display: flex;
+            padding: 4px 10px 10px 10px;
+            position: relative;
+        }
         &.right {
             justify-content: end;
         }
@@ -4013,6 +4034,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .viewMobileWidth {
         width: 100% !important;
+        .form-check {
+            display: flex!important;
+            align-items: center!important;
+            margin-bottom: 10px;
+        }
     }
     .py-5 {
         padding-top: 2rem !important;
@@ -4317,7 +4343,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .boxFlotante {
             width: 330px;
             background: #FFFFFF;
-            box-shadow: 0px 0px 8px rgb(0 0 0 / 5%);
+            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
             border-radius: 5px;
             position: absolute;
             top: 25px;
