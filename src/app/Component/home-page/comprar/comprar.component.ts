@@ -884,14 +884,14 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       contacto_emerg_ape: data.formContact.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_email: data.formContact.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
       contacto_emerg_telf: data.formContact.numberPhone0,    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
-      ruc: (data.formContact.recibo.length === 0) ? `BV-${data.customers[0].numDocCustomer}` : data.formContact.recibo[0].ruc, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
+      ruc: (data.formContact.chkFac) ? `RUC-${data.formContact.recibo[0].ruc}` : `${data.customers[0].typeDocCustomer}-${data.customers[0].numDocCustomer}`, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
       razon_social: data.formContact.nameContacto + ' ' + data.formContact.lastnameContacto,  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
       direccion_fiscal: (data.formContact.recibo.length === 0) ? '' : data.formContact.recibo[0].direccion, // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
       comentario: '',
       webs_cid: 7,
       usuweb_id: 56190,
       destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'N' : 'I', // obtener desde destiny.EsDestinoNacional
-      numeroruc: (data.formContact.recibo.length === 0) ? `${data.customers[0].typeDocCustomer}-${data.customers[0].numDocCustomer}` : `RUC-${data.formContact.recibo[0].ruc}`,
+      numeroruc: '',
       comprobantepago: (data.formContact.chkFac) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
       usobilletera: 'N',
       codigobloqueo: '',
@@ -975,7 +975,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log('4. makePayment');
     console.log(data);
 
-    const textSend = 'SE ESTA PROCESANDO TU PAGO!';
+    const textSend = 'SE ESTA GESTIONANDO TU PAGO!';
 
     this.loaderSubjectService.showText(textSend);
     this.loaderSubjectService.showLoader();
@@ -1048,7 +1048,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         "Card": {
           "Number": data.formCard.numberCard,
           "SecurityCode": data.formCard.ccvCard,
-          "ExpirationDate": data.formCard.expiredCard
+          "ExpirationDate": `${data.formCard.expiredCard.substring(4)}/${data.formCard.expiredCard.substring(2, 4)}`
         },
         "Amount": {
           "Value": data.PriceTotal,
