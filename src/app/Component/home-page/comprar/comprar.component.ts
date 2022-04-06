@@ -189,7 +189,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.result = localStorage.getItem('Datasafe');
     this.resultJson = JSON.parse(this.result);
     // IP DEL CLIENTE
-    this.ipCliente = localStorage.getItem('ipCliente')
+    this.ipCliente = "192.168.2.2";//localStorage.getItem('ipCliente')
 
     this.unidadNegocio = localStorage.getItem('businessunit')
     this.businessunit = JSON.parse(this.unidadNegocio)
@@ -963,6 +963,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       fee_safetypay: 0,
       validarDuplicidad: false,
       pasajeros: this.pasajerosArr(data),
+      //cobertura: this.generateCoverages(),
       cobertura: [
         {
           unidad: this.coverageList.Unidad,                                 // obtener desde coverageList.Unidad
@@ -1158,6 +1159,20 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return pasajeros
   }
 
+  generateCoverages(): any {
+    let coverages: any;
+
+    for (let index = 0; index < this.coverageList.length; index++) {
+      coverages.push({
+        unidad: this.coverageList[index].Unidad,
+        atr_nom: this.coverageList[index].Codigo + ' ' + this.coverageList[index].Nombre,
+        valor: this.coverageList[index].Valor
+      });
+    }
+
+    return coverages;
+  }
+
   pasajerosVuelos() {
     let pasajeros: any = []
     this.dataShop.customers.forEach((value: any, index: number) => {
@@ -1178,18 +1193,20 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   getPassengerAges() {
-    let Ages = []
+    let ages = []
 
-    let Today = new Date()
-    let day = String(Today.getDate()).padStart(2, '0') + String(Today.getMonth() + 1).padStart(2, '0') + String(Today.getFullYear())
+    let currentDate = new Date();
+    let day = String(currentDate.getDate()).padStart(2, '0') + String(currentDate.getMonth() + 1).padStart(2, '0') + String(currentDate.getFullYear());
+
     // Obtiene la fecha de nacimiento
-    let fNac = this.dataShop.customers
     for (let e of this.dataShop.customers) {
-      let customer = e.dayCustomer.padStart(2, '0') + e.monthCustomer.padStart(2, '0') + e.yearCustomer
-      let Edad = Math.ceil((Number(day) - Number(customer)) / (1000 * 300)) + 1
-      Ages.push(Edad)
+      let customer = e.dayCustomer.padStart(2, '0') + e.monthCustomer.padStart(2, '0') + e.yearCustomer;
+      const age = Math.ceil((Number(day) - Number(customer)) / (1000 * 300)) + 1;
+
+      ages.push(age);
     }
-    this.agesCustomers = Ages.join(';')
+
+    this.agesCustomers = ages.join(';');
   }
 
   // RESERVA VUELOS
