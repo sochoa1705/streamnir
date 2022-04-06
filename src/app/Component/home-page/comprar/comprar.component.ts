@@ -14,7 +14,7 @@ import { LoaderSubjectService } from '../../../shared/components/loader/service/
 import { RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
-import { toUp } from 'src/app/shared/utils';
+import { Guid, toUp } from 'src/app/shared/utils';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { GenerarSafetyPayRQ } from 'src/app/Models/seguros/generarSafetypayRQ.interface';
 import { CardPaymentService } from 'src/app/Services/cardPayment/card-payment.service';
@@ -23,8 +23,6 @@ import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interfac
 import { SafetyPayRQ } from 'src/app/Models/seguros/safetypayRQ.interface';
 import { PaymentService } from 'src/app/api/api-payment/services';
 import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/models';
-
-import { Guid } from "guid-typescript";
 import * as moment from 'moment';
 
 interface Methods {
@@ -240,6 +238,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
 
     this.selectYear();
+
+
+    debugger
 
     if (this.current['filter'] !== 'filter') {
       this.listCoverage();
@@ -846,13 +847,49 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
   }
 
+  generateInsuranceReserve(data: any) {
+    console.log('2. generateInsuranceReserve');
+
+    debugger
+
+    this.loaderSubjectService.showText('SE ESTA GENERANDO SU RESERVA!');
+
+    const payload = new NMRequestBy<RegistrarSeguroRQ>(this.generatePayloadForInsurance(data));
+
+    console.log(payload);
+
+    this.secureBookingService.secureBooking(payload).subscribe((response: any) => {
+      console.log('3. Registrando reserva');
+
+      debugger
+
+      console.log(response);
+
+      this.reservation = response;
+      console.log('Codigo de resevra: ' + this.reservation.Reserva);
+
+      this.loaderSubjectService.closeLoader();
+
+      this.makePayment(data);
+    })
+  }
+
   generatePayloadForInsurance(data: any): RegistrarSeguroRQ {
 
     console.log('generatePayloadForInsurance');
 
     debugger
 
-    data.customers[0].typeDocCustomer;
+    console.log(this.coverageList.Unidad);
+    console.log(this.coverageList.Codigo);
+    console.log(this.coverageList.Nombre);
+    console.log(this.coverageList.Valor);
+
+    console.log('pais / agencia');
+
+    console.log(this.businessunit.id_pais_ac);
+    console.log(this.businessunit.codigo_ac);
+    console.log(this.businessunit.sucursal_ac);
 
 
     this.getPassengerAges();
@@ -879,7 +916,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       contacto_ape: data.formContact.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_email: data.formContact.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
       contacto_direccion: (data.formContact.chkFac) ? data.formContact.recibo[0].direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_telfs: data.formContact.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
+      contacto_telfs: '2,51,,986378431;',//data.formContact.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
       contacto_emerg_nom: data.formContact.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_ape: data.formContact.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_email: data.formContact.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
@@ -898,9 +935,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       dkcliente: environment.dkAgenciaAC,
       producto: this.safe0Json.nombreProducto,      // obtener desde plansAC.producto
       pnr: '',
-      pais_ac: this.unidadNegocio.id_pais_ac,
-      agencia_ac: this.unidadNegocio.codigo_ac,
-      sucursal_ac: this.unidadNegocio.sucursal_ac,
+      pais_ac: this.businessunit.id_pais_ac,
+      agencia_ac: this.businessunit.codigo_ac,
+      sucursal_ac: this.businessunit.sucursal_ac,
       counter_ac: 'ACNET',
       id_destino: this.resultJson.destinoSafe,     // obtener desde destiny.id_destino
       facturar_pta: 1,
@@ -944,33 +981,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return payload;
   }
 
-  generateInsuranceReserve(data: any) {
-    console.log('2. generateInsuranceReserve');
-
-    debugger
-
-    this.loaderSubjectService.showText('SE ESTA GENERANDO SU RESERVA!');
-
-    const payload = new NMRequestBy<RegistrarSeguroRQ>(this.generatePayloadForInsurance(data));
-
-    console.log(payload);
-
-    this.secureBookingService.secureBooking(payload).subscribe((response: any) => {
-      console.log('3. Registrando reserva');
-
-      debugger
-
-      console.log(response);
-
-      this.reservation = response;
-      console.log('Codigo de resevra: ' + this.reservation.Reserva);
-
-      this.loaderSubjectService.closeLoader();
-
-      this.makePayment(data);
-    })
-  }
-
   makePayment(data: any) {
     console.log('4. makePayment');
     console.log(data);
@@ -1008,6 +1018,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   generatePayloadToPay(data: any): RqPaymentCeRequest1 {
 
+    debugger
+
     console.log('5. generatePayloadToPay');
 
     let email: string = '';
@@ -1021,7 +1033,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     const paymentMethod: PaymentMethodEnum = data.formCard.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
 
     const payload: RqPaymentCeRequest1 = {
-      "TrackingCode": Guid.create().toString(),
+      "TrackingCode": Guid(),
       "MuteExceptions": environment.muteExceptions,
       "Caller": {
         "Company": "TravelCNMV",
@@ -1048,7 +1060,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         "Card": {
           "Number": data.formCard.numberCard,
           "SecurityCode": data.formCard.ccvCard,
-          "ExpirationDate": `${data.formCard.expiredCard.substring(4)}/${data.formCard.expiredCard.substring(2, 4)}`
+          "ExpirationDate": data.formCard.expiredCard ? `${data.formCard.expiredCard.substring(4)}/${data.formCard.expiredCard.substring(2, 4)}` : null
         },
         "Amount": {
           "Value": data.PriceTotal,
@@ -1068,7 +1080,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "HasCancellationFee": true
         },
         "Setting": {
-          "HasAutomaticPayment": true,
+          "HasAutomaticPayment": data.formCard.select21 === "SAFETYPAY" ? true : false,
           "HasAQuoteCode": true
         }
       }
@@ -1087,7 +1099,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   listCoverage() {
-    // this.coverageDisplay = false
     let lcobertura: CoberturaSeguroRQ = {
       CodigoISOPais: this.businessunit.id_pais_ac,
       Agencia: this.businessunit.codigo_ac,
@@ -1103,12 +1114,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.coverageService.getCoverage(payload).pipe(take(5)).subscribe({
       next: (response) => {
         this.coverageL = response
+
         this.coverageList = response['Resultado'].find((e: any) => {
           if (e.Codigo === 'C.4.1.10.1') {
             return e
           }
         })
-        // this.coverageDisplay = true
+
+        //this.coverageList = response['Resultado'];
+
         console.log(this.coverageList)
 
         localStorage.setItem('coverage', JSON.stringify(this.coverageList))
@@ -1140,6 +1154,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }
       pasajeros.push(jsonPasajeros)
     })
+
     return pasajeros
   }
 

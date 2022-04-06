@@ -895,8 +895,8 @@
                       <label for="typePhone0">Tipo de teléfono</label>
                       <select formControlName="typePhone0" class="form-select-f" name="typePhone0"
                         [ngClass]="getMessage(MSG_EMAILC_CONTACT) != MSG_EMPTY ? 'isvalid' : ''">
-                        <option value="celular">Celular</option>
-                        <option value="fijo">Fijo</option>
+                        <option value="1">Fijo</option>
+                        <option value="2">Celular</option>
                       </select>
                       <span class="valid" *ngIf="getMessage(MSG_TYPEPHONE_CONTACT) != MSG_EMPTY">{{
                         getMessage(MSG_TYPEPHONE_CONTACT) }}</span>
@@ -2233,8 +2233,8 @@
                     <label for="typePhone0">Tipo de teléfono</label>
                     <select formControlName="typePhone0" class="form-select-f" name="typePhone0"
                       [ngClass]="getMessage(MSG_EMAILC_CONTACT) !== MSG_EMPTY ? 'isvalid' : ''">
-                      <option value="celular">Celular</option>
-                      <option value="fijo">Fijo</option>
+                      <option value="1">Fijo</option>
+                      <option value="2">Celular</option>
                     </select>
                     <span class="valid" *ngIf="getMessage(MSG_TYPEPHONE_CONTACT) !== MSG_EMPTY">{{
                       getMessage(MSG_TYPEPHONE_CONTACT) }}</span>
