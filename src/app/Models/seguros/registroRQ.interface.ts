@@ -108,3 +108,16 @@ export interface Pasajero {
   pax_precio_neto: number;
   idtipodoc_ac?: number;
 }
+
+export interface ActualizarEstadoSeguroRQ {
+  res_seguro_id: number,
+  usosafetypay: number
+}
+
+export interface ActualizarCodigoSafetyPaySeguroRQ {
+  res_seguro_id: number,
+  usosafetypay: string,
+  codigo_safetypay: string,
+  nro_pedido_srv: number,
+  fee_safetypay: number
+}
