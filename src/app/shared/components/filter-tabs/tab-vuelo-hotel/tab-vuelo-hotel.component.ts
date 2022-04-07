@@ -6,6 +6,11 @@ import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.co
 import { ParamsVueloHotel, URLVueloHotel } from '../../tabs/tabs.models';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
+import { ModelTaggingVuelosHoteles } from 'src/app/Services/analytics/tagging.models';
+import * as moment from 'moment';
+import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
+import { TaggingService } from 'src/app/Services/analytics/tagging.service';
+moment.locale('es')
 
 @Component({
   selector: 'app-tab-vuelo-hotel',
@@ -26,6 +31,7 @@ export class TabVueloHotelComponent  {
   toDate: NgbDate | null;
 
   distribution = '';
+  distributionObject:DistributionObjectA;
   hoveredDate: NgbDate | null = null;
 
 
@@ -63,7 +69,39 @@ export class TabVueloHotelComponent  {
       return ;
     }
     const url = this.getUrlVueloHotel();
-    this.navigateToResponseUrl(url);
+
+    // this.navigateToResponseUrl(url);
+  }
+
+  insertTag(params:any){
+
+    const getCodigoIata = (id:string)=>{
+      return id.split("::")[1];
+    }
+  
+    const nombre = `${getCodigoIata(params.idOrigen)}_${getCodigoIata(params.idDestino)}_${params.businessClass?'BS':'EC'}`;
+    const diasAnticipacion = moment( params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
+    const duracionViaje =  moment( params.endDate, "DD/MM/YYYY").diff(moment( params.startDate, "DD/MM/YYYY"), 'days');
+
+
+    const model = new ModelTaggingVuelosHoteles(
+      nombre,
+      params.origen,
+      params.destino,
+      params.businessClass?'BS':'EC',
+      this.distributionObject.pasajeros,
+      this.distributionObject.adultos,
+      this.distributionObject.ninos,
+      0,
+      this.distributionObject.habitacion,
+      moment( params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment( params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      diasAnticipacion,
+      duracionViaje
+    )
+    
+    TaggingService.buscarVuelosHoteles(model);
+
   }
 
   getParamsVueloHotel() {
@@ -79,6 +117,8 @@ export class TabVueloHotelComponent  {
   public getUrlVueloHotel(): string {
     let url = ''
     let params = this.getParamsVueloHotel();
+    this.insertTag(params);
+
     url = new URLVueloHotel(params, this.distribution).getUrl();
     return url;
   }

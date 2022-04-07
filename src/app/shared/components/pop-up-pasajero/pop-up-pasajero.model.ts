@@ -5,6 +5,24 @@ export interface IDistributionObjectVuelos{
   infantes:number,
   pasajeros: any[]
 }
+
+
+export interface IDistributionObjectA{
+  habitacion: number,
+  adultos:number,
+  ninos: number,
+  pasajeros: number
+}
+
+export class DistributionObjectA implements IDistributionObjectA{
+  constructor(
+    public habitacion: number,
+    public adultos:number,
+    public ninos: number,
+    public pasajeros: number
+  ){}
+  
+}
 export interface IDistributionObject{
   nroAdultos:number,
   nroNinos:number,

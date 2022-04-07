@@ -11,6 +11,7 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
   ViewChild,
@@ -19,7 +20,9 @@ import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { Guid } from '../../utils';
 import {
   DistributionObject,
+  DistributionObjectA,
   IDistributionObject,
+  IDistributionObjectA,
   IDistributionObjectVuelos,
 } from './pop-up-pasajero.model';
 import { NotificationService } from '../../../Services/notification.service';
@@ -38,7 +41,7 @@ import { NotificationService } from '../../../Services/notification.service';
     ]),
   ],
 })
-export class PopUpPasajeroComponent implements OnInit {
+export class PopUpPasajeroComponent implements OnInit,OnChanges {
   showOption: Boolean = true;
 
   pasajeros = 0;
@@ -55,7 +58,7 @@ export class PopUpPasajeroComponent implements OnInit {
 
   @Output() emitDistribution = new EventEmitter<string>();
 
-  @Output() emitDistributionObject = new EventEmitter<IDistributionObjectVuelos>();
+  @Output() emitDistributionObject = new EventEmitter<IDistributionObjectA>();
 
   constructor(
     private popupService: PopupService,
@@ -71,14 +74,17 @@ export class PopUpPasajeroComponent implements OnInit {
 
       if (!state.open) {
         const distributionStr = this.getDistributionUrl(this.habitaciones);
-        const objDistribution = this.getDistributionObj(this.habitaciones);
                 
-        this.emitDistributionObject.emit( objDistribution );
+        this.emitDistributionObject.emit( this.distributionObject(this.habitaciones) );
         this.emitDistribution.emit(distributionStr);
       }
     });
 
     this.agregarHabitacion();
+  }
+
+  ngOnChanges(){
+    this.popupService.dispatch();
   }
 
   changeInputEdad(e: any, item: { edad: number }) {
@@ -199,6 +205,19 @@ export class PopUpPasajeroComponent implements OnInit {
       infantes:infantes,
       pasajeros: []
     }
+
+  }
+
+  public distributionObject(habitaciones: IDistributionObject[]){
+
+
+    const pasajeros =  habitaciones.reduce((acc,item)=>(acc += item.nroAdultos + item.nroNinos) , 0);
+    const adultos =  habitaciones.reduce((acc,item)=>(acc += item.nroAdultos) , 0);
+    const ninos =  habitaciones.reduce((acc,item)=>(acc += item.nroNinos ) , 0);
+
+
+
+    return new DistributionObjectA(habitaciones.length, adultos,ninos,pasajeros);
 
   }
 

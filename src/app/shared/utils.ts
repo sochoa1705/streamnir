@@ -95,3 +95,11 @@ export function routerToCapitalice(route:string){
 
 
 }
+
+
+export function generateLabelTag() {
+
+ const pathname =  window.location.pathname;
+
+  return pathname ? routerToCapitalice(pathname) : '';
+}
