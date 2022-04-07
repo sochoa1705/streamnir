@@ -66,4 +66,22 @@ export class ModelTaggingVuelos {
     ){}
 }
 
-
+export class ModelTaggingActividades {
+    constructor(
+        public nombre: string | number,
+        public destino: string | number,
+        public numPasajeros: string | number,
+        public adultos: string | number,
+        public ninos: string | number,
+        public infantes: string | number,
+        public habitaciones: string | number,
+        public fechaSalida: string | number,
+        public fechaRegreso: string | number,
+        public diasAnticipacion:  string | number,
+        public duracionViaje:  string | number,
+        public eLabel = generateLabelTag(),
+        public eCategory = 'Vertical Actividades',
+        public eAction = 'Buscar Actividades',
+        public event = 'nmv.actividades_ga_buscar'
+    ){}
+}

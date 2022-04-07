@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {  routerToCapitalice } from 'src/app/shared/utils';
-import { ModelTaggingHoteles, ModelTaggingVuelos, ModelTaggingVuelosHoteles } from './tagging.models';
+import { ModelTaggingActividades, ModelTaggingHoteles, ModelTaggingVuelos, ModelTaggingVuelosHoteles } from './tagging.models';
 
 @Injectable({ providedIn: 'root' })
 export class TaggingService {
@@ -39,6 +39,10 @@ export class TaggingService {
 
   public static buscarVuelos(modelTaggingVuelos: ModelTaggingVuelos) {
     this.triggerTag(modelTaggingVuelos);
+  }
+  
+  public static buscarActividades(modelTaggingActividades: ModelTaggingActividades) {
+    this.triggerTag(modelTaggingActividades);
   }
 
 
