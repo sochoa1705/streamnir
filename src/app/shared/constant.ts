@@ -44,7 +44,7 @@ export enum ENDPOINT_API {
   UPDATE_PAY = 'reservas/ActualizarSafetyPayReservaSeguro',
 
   // UPDATESAFETYPAY
-  UPDATE_STATE = 'ActualizarEstadoReservaSeguro',
+  UPDATE_STATE = 'reservas/ActualizarEstadoReservaSeguro',
 
   //LOCATIONSEARCH
   LOCATION_SEARCH = 'jsonp/locationSearch',

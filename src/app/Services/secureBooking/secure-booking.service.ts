@@ -11,15 +11,31 @@ import { environment } from 'src/environments/environment';
 export class SecureBookingService {
 
   constructor(
-    private http: HttpClient
+    private _httpClient: HttpClient
   ) { }
 
-  secureBooking(payload: any): Observable<any> {
+  generateInsuranceReserve(payload: any): Observable<any> {
+    const url_api = `${environment.url_api}${ENDPOINT_API.SECURE_BOOKING}`;
 
-    let url_api = `${environment.url_api}${ENDPOINT_API.SECURE_BOOKING}`;
-
-    return this.http.post<any>(url_api, payload, { observe: 'response' }).pipe(
+    return this._httpClient.post<any>(url_api, payload, { observe: 'response' }).pipe(
       map((observe: any) => observe['body']['Resultado'])
     )
   }
+
+  updateSafetypayPaymentCode(payload: any): Observable<any> {
+    const url_api = `${environment.url_api}${ENDPOINT_API.UPDATE_PAY}`;
+
+    return this._httpClient.post<any>(url_api, payload, { observe: 'response' }).pipe(
+      map((observe: any) => observe['body']['Resultado'])
+    )
+  }
+
+  updateStatusInInsuranceReserve(payload: any): Observable<any> {
+    const url_api = `${environment.url_api}${ENDPOINT_API.UPDATE_STATE}`;
+
+    return this._httpClient.post<any>(url_api, payload, { observe: 'response' }).pipe(
+      map((observe: any) => observe['body']['Resultado'])
+    )
+  }
+
 }
