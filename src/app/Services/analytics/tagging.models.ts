@@ -23,20 +23,22 @@ export class ModelTaggingVuelosHoteles {
 }
 
 
-// event: 'nmv.vuelosHoteles_ga_buscar',  
-// nombre: '<Cod Origen>_<Cod Destino>_<Cod Clase>', //Ejemplo: LIM_CUN_EC
-// origen: '<Origen Seleccionado>', //Ejemplo: Lima, Perú
-// destino: '<Destino Seleccionado>', //Ejemplo: Cancún, México
-// clase: '<Clase de Vuelo>',
-// numPasajeros: '<Cantidad Total Pasajeros>', // Integer
-// adultos: '<Número de pasajeros Adultos>', // Integer
-// ninos: '<Número de pasajeros Niños>', // Integer
-// infantes: '<Número de pasajeros Infantes>', // Integer
-// habitaciones: '<Número total de Habitaciones>', // Integer
-// fechaSalida: '<Fecha de Salida>',
-// fechaRegreso: '<Fecha de Regreso>',
-// diasAnticipacion:  '<Días de anticipación>', 
-// duracionViaje:  '<Duración del viaje>', 
-// eCategory: 'Vertical Vuelos + Hoteles',
-// eAction: 'Buscar V+H',
-// eLabel: '<Nombre del Widget>' 
+export class ModelTaggingHoteles {
+    constructor(
+        public nombre:string | number,
+        public destino:string | number,
+        public numPasajeros:string | number,
+        public adultos:string | number,
+        public ninos:string | number,
+        public infantes:string | number,
+        public habitaciones:string | number,
+        public fechaSalida:string | number,
+        public fechaRegreso:string | number,
+        public diasAnticipacion: string | number,
+        public duracionViaje: string | number,
+        public eLabel = generateLabelTag(),
+        public eCategory = 'Vertical Hoteles',
+        public eAction = 'Buscar Hoteles',
+        public event = 'nmv.hoteles_ga_buscar',  
+    ){}
+}

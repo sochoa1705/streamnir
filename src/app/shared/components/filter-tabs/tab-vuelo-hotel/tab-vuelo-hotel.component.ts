@@ -70,7 +70,7 @@ export class TabVueloHotelComponent  {
     }
     const url = this.getUrlVueloHotel();
 
-    // this.navigateToResponseUrl(url);
+    this.navigateToResponseUrl(url);
   }
 
   insertTag(params:any){
