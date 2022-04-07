@@ -22,7 +22,6 @@ export class ModelTaggingVuelosHoteles {
     ){}
 }
 
-
 export class ModelTaggingHoteles {
     constructor(
         public nombre:string | number,
@@ -42,3 +41,29 @@ export class ModelTaggingHoteles {
         public event = 'nmv.hoteles_ga_buscar',  
     ){}
 }
+
+
+export class ModelTaggingVuelos {
+    constructor(
+        public nombre: number | string,
+        public origen: number | string,
+        public destino: number | string,
+        public clase: number | string,
+        public tipo: number | string,
+        public numPasajeros: number | string,
+        public adultos: number | string,
+        public ninos: number | string,
+        public infantes: number | string,
+        public habitaciones: number | string,
+        public fechaSalida: number | string,
+        public fechaRegreso: number | string,
+        public diasAnticipacion:  number | string,
+        public duracionViaje:  number | string,
+        public eLabel = generateLabelTag(),
+        public eCategory = 'Vertical Vuelos',
+        public eAction = 'Buscar Vuelos',
+        public event = 'nmv.vuelos_ga_buscar'
+    ){}
+}
+
+
