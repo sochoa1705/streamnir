@@ -857,7 +857,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     this._secureBookingService.generateInsuranceReserve(payload).subscribe((response: any) => {
       this.reservation = response;
-      console.log('Codigo de reserva: ' + this.reservation.Reserva);
+      //console.log('Codigo de reserva: ' + this.reservation.Reserva);
+
+      debugger
 
       this.loaderSubjectService.closeLoader();
 
@@ -998,23 +1000,24 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             usosafetypay: paymentMethod === PaymentMethodEnum.SafetyPay ? "S" : "N",
             codigo_safetypay: result.Result.ServiceResponse.Code,
             nro_pedido_srv: result.Result.OrderId,
-            fee_safetypay: 0    // TODO: Consultar que valor va aquí
+            fee_safetypay: 0
           };
 
           const body = new NMRequestBy<ActualizarCodigoSafetyPaySeguroRQ>(parameters);
 
           this._secureBookingService.updateSafetypayPaymentCode(body).subscribe((response: any) => { });
 
-          if (paymentMethod === PaymentMethodEnum.CreditCard) {
-            const parameters: ActualizarEstadoSeguroRQ = {
-              res_seguro_id: this.reservation.Reserva,
-              usosafetypay: 8
-            };
+          // TODO: Se comentará hasta la aprobación de Hugo Sanchez
+          // if (paymentMethod === PaymentMethodEnum.CreditCard) {
+          //   const parameters: ActualizarEstadoSeguroRQ = {
+          //     res_seguro_id: this.reservation.Reserva,
+          //     usosafetypay: 8
+          //   };
 
-            const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
+          //   const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
 
-            this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
-          }
+          //   this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
+          // }
 
           this.loaderSubjectService.closeLoader();
 
@@ -1089,7 +1092,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "HasCancellationFee": true
         },
         "Setting": {
-          "HasAutomaticPayment": data.formCard.select21 === "SAFETYPAY" ? true : false,
+          //"HasAutomaticPayment": data.formCard.select21 === "SAFETYPAY" ? true : false,
+          "HasAutomaticPayment": true, // TDDO: Se pone esto de momento para que el servicio retorne como aprobado.
           "HasAQuoteCode": true
         }
       }
