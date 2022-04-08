@@ -243,17 +243,29 @@ export class TabVuelosComponent implements OnInit {
     const getTipoTag = ((tipo:EnumFlightType)=>{
 
       if(tipo == EnumFlightType.ida ){
-        return 'SI'
+        return {
+          codigo: 'SI',
+          descripcion: 'Solo Ida'
+        }
       }else if( tipo == EnumFlightType.ida_vuelta){
-        return 'IV'
+        return {
+          codigo: 'IV',
+          descripcion: 'Ida y Vuelta'
+        }
       }else if (tipo == EnumFlightType.multy_city){
-        return 'MC'
+        return {
+          codigo: 'MC',
+          descripcion: 'Multi City'
+        }
       }else{
-        return ''
+        return {
+          codigo: '',
+          descripcion: ''
+        }
       }
     }) 
 
-    const nombre = `${params.idOrigen}_${params.idDestino}_${params.businessClass?'BS':'EC'}_${getTipoTag(params.flightType)}`;
+    const nombre = `${params.idOrigen}_${params.idDestino}_${params.businessClass?'BS':'EC'}_${getTipoTag(params.flightType).codigo}`;
 
     let diasAnticipacion = moment( params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
     let duracionViaje = 0;
@@ -270,9 +282,9 @@ export class TabVuelosComponent implements OnInit {
       nombre,
       params.origen.title,
       params.destino.title,
-      params.businessClass?'BS':'EC',
-      getTipoTag(params.flightType),
-      this.distributionObject.adultos + this.distributionObject.ninos,
+      params.businessClass?'Business':'Economy',
+      getTipoTag(params.flightType).descripcion,
+      this.distributionObject.adultos + this.distributionObject.ninos + this.distributionObject.infantes,
       this.distributionObject.adultos,
       this.distributionObject.ninos,
       this.distributionObject.infantes,
