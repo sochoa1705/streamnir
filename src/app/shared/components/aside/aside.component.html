@@ -3,16 +3,17 @@
         <div class="col-md-6 col-12">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                    <ng-container *ngFor="let b of slider; let indice = index">
-                        <button *ngIf="b.key" type="button" data-bs-target="#carouselExampleIndicators"
-                            [attr.data-bs-slide-to]="indice" class="{{ b.class }}" aria-current="true"
+                    <ng-container *ngFor="let b of slider; let indice = index; let first = first">
+                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                            [attr.data-bs-slide-to]="indice"  [ngClass]="{'active':first}" aria-current="true"
                             aria-label="Slide 1"></button>
                     </ng-container>
                 </div>
+
                 <div class="carousel-inner">
-                    <ng-container *ngFor="let i of slider">
-                        <div *ngIf="i.key" class="aside__content carousel-item {{ i.class }}">
-                            <img (click)="toSlider(i)" src="./assets/aside/slider/{{ i.img }}" class="d-block w-100" alt="...">
+                    <ng-container *ngFor="let image of slider; let first = first">
+                        <div  class="aside__content carousel-item" [ngClass]="{'active': first}">
+                            <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image)" [src]="image.PathImage" class="d-block w-100" alt="...">
                         </div>
                     </ng-container>
                 </div>
@@ -31,9 +32,9 @@
         <div class="col-md-6 col-12">
             <div class="row">
                 <div class="col-12">
-                    <ng-container *ngFor="let i of slider">
-                        <div *ngIf="!i.key" class="aside__content_2">
-                            <img src="./assets/aside/{{ i.img }}">
+                    <ng-container *ngFor="let image of images">
+                        <div  class="aside__content_2">
+                            <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image)" [src]="image.PathImage">
                         </div>
                     </ng-container>
                 </div>

@@ -1,24 +1,26 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Aside } from 'src/app/Models/general/aside';
+import { IGalleryImage, IGalleryService } from 'src/app/Services/presenter/data-page-presenter.models';
 
 @Component({
   selector: 'app-aside',
   templateUrl: './aside.component.html',
   styleUrls: ['./aside.component.scss']
 })
-export class AsideComponent implements OnInit {
+export class AsideComponent {
   @Input()
-  slider!: Aside[];
+  slider!: IGalleryImage[];
   @Input()
-  images!: Aside[];
+  images!: IGalleryImage[];
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-  toSlider(e: any) {
-    console.log(e)
-    this.addTag(e.titulo, e.detalle)
+
+  toSlider(e: IGalleryImage) {
+    // this.addTag(e.titulo, e.detalle)
+    if(e.RedirectLink){
+      window.open(e.RedirectLink, '_blank');
+    }
   }
   addTag(titulo: string, detalle: string) {
     (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];

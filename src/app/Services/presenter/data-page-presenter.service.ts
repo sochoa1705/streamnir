@@ -1,4 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { from } from 'rxjs';
+import { filter, map, mergeMap, tap } from 'rxjs/operators';
+import { ResponseModelT } from 'src/app/shared/models';
+import { NmvModel } from 'src/app/shared/utils';
+import { environment } from 'src/environments/environment';
+import { EGalleryCode, IGalleryService } from './data-page-presenter.models';
 
 @Injectable({
   providedIn: 'root'
@@ -212,5 +219,22 @@ export class DataPagePresenterService {
     ],
     string: "Hello World"
   }
-  constructor() { }
+
+  constructor(private httpClient:HttpClient) { }
+
+
+  getDataGallery(){
+    const nmvModel = new NmvModel()
+
+    const options = {
+        params: nmvModel.params.set('Parameter.Status', true)
+    }
+    const url = environment.urlNmviajes + '/Gallery';
+    return this.httpClient.get<ResponseModelT<IGalleryService[]>>(url, options).pipe(
+        map(resp=> resp.Result)
+    )
+  }
+
+
+
 }
