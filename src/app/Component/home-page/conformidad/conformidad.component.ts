@@ -108,7 +108,7 @@ export class ConformidadComponent implements OnInit {
     // IP DEL CLIENTE
     this.ipCliente = localStorage.getItem('ipCliente')
     // TIPO DE PAGO
-    this.typePay = this.shopString.formCard.select21
+    this.typePay = this.shopString.paymentMethodForm.select21
 
     this.paymentDataStr = localStorage.getItem('paymentData');
     this.paymentData = JSON.parse(this.paymentDataStr);
@@ -148,7 +148,7 @@ export class ConformidadComponent implements OnInit {
     // }
     // this.getGeneratePay()
     // this.getCardPayment()
-    // if (this.shopString.formCard.select21 === 'SAFETYPAY') {
+    // if (this.shopString.paymentMethodForm.select21 === 'SAFETYPAY') {
     //   this.getGeneratePay()
     // } else {
     //   this.getCardPayment()
@@ -205,8 +205,8 @@ export class ConformidadComponent implements OnInit {
         documentType: (value.typeDocCustomer === 'dni') ? 0 : 1,
         documentNumber: value.numDocCustomer,
         gender: (value.sexCustomer === 'masculino') ? 'M' : '',
-        email: this.shopString.formContact.mailContacto,
-        phone: this.shopString.formContact.numberPhone0
+        email: this.shopString.contactForm.mailContacto,
+        phone: this.shopString.contactForm.numberPhone0
       }
       pasajeros.push(jsonPasajeros)
     })
@@ -249,7 +249,7 @@ export class ConformidadComponent implements OnInit {
       CustomerDocumentNumber: this.shopString.customers[0].numDocCustomer,     //DOCUMENTO DEL PRIMER PASAJERO ADULTO
       IdClient: Number(environment.dkAgenciaAC),
       WebId: '7',
-      Mail: this.shopString.formContact.mailContacto,   //MAIL DEL PASAJERO
+      Mail: this.shopString.contactForm.mailContacto,   //MAIL DEL PASAJERO
       DKClient: environment.dkAgenciaAC,
       UserAgent: environment.identifierAC,
       IdUser: '56190',
@@ -267,7 +267,7 @@ export class ConformidadComponent implements OnInit {
         this.listBank = response
         this.timeShop(this.listBank['ExpirationDateTime'])
         this.bankSteps = this.listBank.PaymentLocations.filter((e: any) => {
-          let namco = this.shopString.formCard.bankPay
+          let namco = this.shopString.paymentMethodForm.bankPay
           if (namco === e.ID) {
             return e
           }
@@ -333,12 +333,12 @@ export class ConformidadComponent implements OnInit {
         Ip: this.ipCliente,
         Browser: this.shopString.browser,
         Client: {
-          Firstname: this.shopString.formContact.nameContacto,
-          Lastname: this.shopString.formContact.lastnameContacto,
-          Address: this.shopString.formCard.address,
-          DocumentType: this.shopString.formCard.tipoDoc,
-          DocumentNumber: this.shopString.formCard.numDoc,
-          Email: this.shopString.formContact.mailContacto
+          Firstname: this.shopString.contactForm.nameContacto,
+          Lastname: this.shopString.contactForm.lastnameContacto,
+          Address: this.shopString.paymentMethodForm.address,
+          DocumentType: this.shopString.paymentMethodForm.tipoDoc,
+          DocumentNumber: this.shopString.paymentMethodForm.numDoc,
+          Email: this.shopString.contactForm.mailContacto
         },
         Booking: {
           NumberInsurance: (this.safe0Json['reservaVuelos']) ? this.resevaVuelo.idCotizacion : this.reservation.Reserva,
@@ -349,12 +349,12 @@ export class ConformidadComponent implements OnInit {
         },
         Payment: {
           Card: {
-            HolderName: this.shopString.formCard.nameCard,
-            Number: this.shopString.formCard.numberCard,
-            Expiration: this.expired(this.shopString.formCard.expiredCard), // 2022/05
-            SecurityCode: Number(this.shopString.formCard.ccvCard)
+            HolderName: this.shopString.paymentMethodForm.nameCard,
+            Number: this.shopString.paymentMethodForm.numberCard,
+            Expiration: this.expired(this.shopString.paymentMethodForm.expiredCard), // 2022/05
+            SecurityCode: Number(this.shopString.paymentMethodForm.ccvCard)
           },
-          AmountOfFees: Number(this.shopString.formCard.feePay),
+          AmountOfFees: Number(this.shopString.paymentMethodForm.feePay),
           Amount: (this.safe0Json['reservaVuelos']) ? this.detalleVuelos.pricingInfo.precioFinal : (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal,
         }
       }

@@ -397,7 +397,7 @@
           </div>
           <!-- DETALLE DE COBERTURA -->
 
-          <!-- INFORMACION DE PASAJEROS -->
+          <!-- INFORMACION DE PASAJEROS DESKTOP -->
           <div class="card pasajeros">
             <div class="card-header">
               <h2>Información de pasajeros</h2>
@@ -415,7 +415,7 @@
             </div>
 
             <div formArrayName="customers">
-              <div [formGroupName]="i" *ngFor="let customer of getArrayCustomers(); let i = index"
+              <div [formGroupName]="i" *ngFor="let customer of customersArray.controls; let i = index"
                 class="ro rowMobileCard">
                 <div class="card-body card_pasajero">
                   <div *ngIf="this.safe0Json['reservaVuelos']; else vuelosTitle">
@@ -436,6 +436,7 @@
                       </svg> &nbsp; Pasajero {{ i + 1 }}
                       <strong> {{ this.resultJson['aniosNacimiento'][i].edad }} años</strong>
                     </h4>
+
                     <div style="background:red" *ngIf="showAdulto === i" (click)="showDatosPasajero()">
                       <img src="./assets/comprar/flecha-der.png" alt="">
                     </div>
@@ -452,375 +453,110 @@
 
                   <div class="row rowMobileCard hideMobile" [class.activoBox]="showAdulto === i">
                     <div class="col-6 viewMobileWidth">
-                      <label for="names1">Nombres</label>
-                      <input class="form-control"
-                        [ngClass]="getMessage(MSG_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_NAME_CUSTOMER) ? 'isvalid' : ''"
-                        formControlName="nameCustomer" placeholder="El que figura en el documento de viaje." type="text"
-                        name="names1">
-                      <span class="valid"
-                        *ngIf="getMessage(MSG_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_NAME_CUSTOMER)">{{
-                        getMessage(MSG_NAME_CUSTOMER) }}</span>
+                      <label>Nombres</label>
+
+                      <input class="form-control" type="text" formControlName="nameCustomer"
+                        placeholder="El que figura en el documento de viaje.">
                     </div>
+
                     <div class="col-6 viewMobileWidth">
                       <label for="lastname1">Apellidos</label>
-                      <input class="form-control"
-                        [ngClass]="getMessage(MSG_LAST_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_LAST_NAME_CUSTOMER) ? 'isvalid' : ''"
-                        formControlName="lastNameCustomer" placeholder="El que figura en el documento de viaje."
-                        type="text" name="lastname1">
-                      <span class="valid"
-                        *ngIf="getMessage(MSG_LAST_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_LAST_NAME_CUSTOMER)">{{
-                        getMessage(MSG_LAST_NAME_CUSTOMER) }}</span>
+
+                      <input class="form-control" type="text" formControlName="lastNameCustomer"
+                        placeholder="El que figura en el documento de viaje.">
                     </div>
+
                     <div class="clearfix"></div>
                   </div>
                   <div class="row rowMobileCard hideMobile" [class.activoBox]="showAdulto == i">
                     <div class="col-6 viewMobileWidth">
                       <label for="names">Fecha de nacimiento</label>
+
                       <div class="row">
-                        <div class="col-4">
-                          <input class="form-control" maxlength="2"
-                            [ngClass]="getMessage(MSG_DAY_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_DAY_CUSTOMER) ? 'isvalid' : ''"
-                            formControlName="dayCustomer" type="text" name="dayCustomer">
-                          <span class="valid"
-                            *ngIf="getMessage(MSG_DAY_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_DAY_CUSTOMER)">{{
-                            getMessage(MSG_DAY_CUSTOMER) }}</span>
+                        <div class="col-2">
+                          <input class="form-control" maxlength="2" formControlName="dayCustomer" type="text">
                         </div>
-                        <div class="col-4">
-                          <select formControlName="monthCustomer" class="form-select-f"
-                            [ngClass]="getMessage(MSG_MONTH_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_MONTH_CUSTOMER) ? 'isvalid' : ''">
-                            <option disabled>Seleccione</option>
-                            <option value="01">Enero</option>
-                            <option value="02">Febrero</option>
-                            <option value="03">Marzo</option>
-                            <option value="04">Abril</option>
-                            <option value="05">Mayo</option>
-                            <option value="06">Junio</option>
-                            <option value="07">Julio</option>
-                            <option value="08">Agosto</option>
-                            <option value="09">Setiembre</option>
-                            <option value="10">Octubre</option>
-                            <option value="11">Noviembre</option>
-                            <option value="12">Diciembre</option>
+
+                        <div class="col-6">
+                          <select formControlName="monthCustomer" class="form-select-f">
+                            <option value="" selected>Seleccione</option>
+                            <option *ngFor="let elem of months" [value]="elem.value">{{ elem.name }}</option>
                           </select>
-                          <span class="valid"
-                            *ngIf="getMessage(MSG_MONTH_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_MONTH_CUSTOMER)">{{
-                            getMessage(MSG_MONTH_CUSTOMER) }}</span>
                         </div>
+
                         <div class="col-4">
-                          <select formControlName="yearCustomer" class="form-select-f"
-                            [ngClass]="getMessage(MSG_YEAR_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_YEAR_CUSTOMER) ? 'isvalid' : ''">
-                            <option disabled>Seleccione</option>
-                            <option *ngFor="let year of listYears" value="{{year}}">{{year}}
+                          <select formControlName="yearCustomer" class="form-select-f">
+                            <option value="" selected>Seleccione</option>
+
+                            <option value="{{this.resultJson['aniosNacimiento'][i].anio}}">
+                              {{this.resultJson['aniosNacimiento'][i].anio}}
+                            </option>
+
+                            <option value="{{this.resultJson['aniosNacimiento'][i].anio - 1}}">
+                              {{this.resultJson['aniosNacimiento'][i].anio - 1}}
                             </option>
                           </select>
-                          <span class="valid"
-                            *ngIf="getMessage(MSG_YEAR_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_YEAR_CUSTOMER)">{{
-                            getMessage(MSG_YEAR_CUSTOMER) }}</span>
                         </div>
+
                         <div class="clearfix"></div>
                       </div>
                     </div>
+
                     <div class="col-6 viewMobileWidth">
                       <label for="names">Nacionalidad</label>
-                      <select formControlName="nationalityCustomer" class="form-select-f"
-                        [ngClass]="getMessage(MSG_NATIONALITY_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_NATIONALITY_CUSTOMER) ? 'isvalid' : ''">
-                        <option disabled>Seleccione</option>
-                        <option value="AF">Afganistan</option>
-                        <option value="AX">Aland Island</option>
-                        <option value="AL">Albania</option>
-                        <option value="DE">Alemania</option>
-                        <option value="DZ">Algeria</option>
-                        <option value="DZ">American Samoa</option>
-                        <option value="AD">Andorra</option>
-                        <option value="AO">Angola</option>
-                        <option value="AI">Anguilla</option>
-                        <option value="AQ">Antartida</option>
-                        <option value="AG">Antigua and Barbuda</option>
-                        <option value="AN">Antillas Holandesas</option>
-                        <option value="SA">Arabia Saudita</option>
-                        <option value="AR">Argentina</option>
-                        <option value="AM">Armenia</option>
-                        <option value="AW">Aruba</option>
-                        <option value="AC">Ascension Islands</option>
-                        <option value="AU">Australia</option>
-                        <option value="AT">Austria</option>
-                        <option value="AZ">Azerbaijan</option>
-                        <option value="BS">Bahamas</option>
-                        <option value="BH">Bahrain</option>
-                        <option value="BD">Bangladesh</option>
-                        <option value="BB">Barbados</option>
-                        <option value="BY">Belarus</option>
-                        <option value="BE">Belgica</option>
-                        <option value="BZ">Belize</option>
-                        <option value="BJ">Benin</option>
-                        <option value="BM">Bermuda</option>
-                        <option value="BT">Bhutan</option>
-                        <option value="BO">Bolivia</option>
-                        <option value="BA">Bosnia and Herzegovina</option>
-                        <option value="BW">Botswana</option>
-                        <option value="BV">Bouvet Island</option>
-                        <option value="BR">Brasil</option>
-                        <option value="IO">British Indian Ocean Territory</option>
-                        <option value="BN">Brunei Darussalam</option>
-                        <option value="BG">Bulgaria</option>
-                        <option value="BF">Burkina Faso</option>
-                        <option value="BI">Burundi</option>
-                        <option value="CV">Cabo Verde</option>
-                        <option value="KH">Cambodia</option>
-                        <option value="CM">Camerun</option>
-                        <option value="CA">Canada</option>
-                        <option value="CF">Central African Republic</option>
-                        <option value="TD">Chad</option>
-                        <option value="CL">Chile</option>
-                        <option value="CN">China</option>
-                        <option value="CX">Christmas Islands</option>
-                        <option value="CC">Cocos (Keeling )Islands</option>
-                        <option value="CO">Colombia</option>
-                        <option value="KM">Comoros</option>
-                        <option value="CG">Congo</option>
-                        <option value="CK">Cook Islands</option>
-                        <option value="KP">Corea del Norte</option>
-                        <option value="KR">Corea del Sur</option>
-                        <option value="CR">Costa Rica</option>
-                        <option value="CI">Cote D'Ivoire</option>
-                        <option value="HR">Croacia</option>
-                        <option value="CU">Cuba</option>
-                        <option value="CY">Cyprus</option>
-                        <option value="DK">Dinamarca</option>
-                        <option value="DJ">Djibouti</option>
-                        <option value="DM">Dominica</option>
-                        <option value="TP">East Timor</option>
-                        <option value="EC">Ecuador</option>
-                        <option value="EG">Egipto</option>
-                        <option value="SV">El Salvador</option>
-                        <option value="AE">Emiratos Arabes</option>
-                        <option value="GQ">Equatorial Guinea</option>
-                        <option value="ER">Eritrea</option>
-                        <option value="SK">Eslovaquia</option>
-                        <option value="SI">Eslovenia</option>
-                        <option value="ES">España</option>
-                        <option value="US">Estados Unidos</option>
-                        <option value="EE">Estonia</option>
-                        <option value="ET">Etiopia</option>
-                        <option value="EU">Europa</option>
-                        <option value="FO">Faroe Islands</option>
-                        <option value="RU">Federacion Rusa</option>
-                        <option value="FJ">Fiji</option>
-                        <option value="PH">Filipinas</option>
-                        <option value="FI">Finlandia</option>
-                        <option value="FR">Francia</option>
-                        <option value="TF">French Southern Territories</option>
-                        <option value="GA">Gabon</option>
-                        <option value="GM">Gambia</option>
-                        <option value="GE">Georgia</option>
-                        <option value="GH">Ghana</option>
-                        <option value="GI">Gibraltar</option>
-                        <option value="GD">Granada</option>
-                        <option value="GR">Grecia</option>
-                        <option value="GL">Groenlandia</option>
-                        <option value="GP">Guadalupe</option>
-                        <option value="GU">Guam</option>
-                        <option value="GT">Guatemala</option>
-                        <option value="GF">Guayana Francesa</option>
-                        <option value="GN">Guinea</option>
-                        <option value="GW">Guinea-Bissau</option>
-                        <option value="GY">Guyana</option>
-                        <option value="HT">Haiti</option>
-                        <option value="HM">Heard Island and McDonald Islands</option>
-                        <option value="VA">Holy See (Vatican City State)</option>
-                        <option value="HN">Honduras</option>
-                        <option value="HK">Hong Kong</option>
-                        <option value="HU">Hungria</option>
-                        <option value="IN">India</option>
-                        <option value="ID">Indonesia</option>
-                        <option value="IR">Iran</option>
-                        <option value="IQ">Iraq</option>
-                        <option value="IE">Irlanda</option>
-                        <option value="IS">Islandia</option>
-                        <option value="KY">Islas Caiman</option>
-                        <option value="FK">Islas Malvinas</option>
-                        <option value="VG">Islas Virgenes Britanicas</option>
-                        <option value="VI">Islas Virgenes, USA</option>
-                        <option value="IL">Israel</option>
-                        <option value="IT">Italia</option>
-                        <option value="JM">Jamaica</option>
-                        <option value="JP">Japón</option>
-                        <option value="JO">Jordan</option>
-                        <option value="KZ">Kazakstan</option>
-                        <option value="KE">Kenia</option>
-                        <option value="KI">Kiribati</option>
-                        <option value="KW">Kuwait</option>
-                        <option value="KG">Kyrgyzstan</option>
-                        <option value="LA">Lao People's Democratic Republic</option>
-                        <option value="LS">Lesotho</option>
-                        <option value="LV">Letonia</option>
-                        <option value="LB">Libano</option>
-                        <option value="LR">Liberia</option>
-                        <option value="LY">Libia</option>
-                        <option value="LI">Liechtenstein</option>
-                        <option value="LT">Lituania</option>
-                        <option value="LU">Luxemburgo</option>
-                        <option value="MO">Macau</option>
-                        <option value="MK">Macedonia</option>
-                        <option value="MG">Madagascar</option>
-                        <option value="MY">Malasia</option>
-                        <option value="MW">Malawi</option>
-                        <option value="MV">Maldivas</option>
-                        <option value="ML">Mali</option>
-                        <option value="MT">Malta</option>
-                        <option value="MA">Marruecos</option>
-                        <option value="MH">Marshall Islands</option>
-                        <option value="MQ">Martinica</option>
-                        <option value="MR">Mauritania</option>
-                        <option value="MU">Mauritius</option>
-                        <option value="YT">Mayotte</option>
-                        <option value="MX">Mexico</option>
-                        <option value="FM">Micronesia, Federated States of</option>
-                        <option value="MD">Moldova, Republic of</option>
-                        <option value="MC">Monaco</option>
-                        <option value="MN">Mongolia</option>
-                        <option value="ME">Montenegro</option>
-                        <option value="MS">Montserrat</option>
-                        <option value="MZ">Mozambique</option>
-                        <option value="MM">Myanmar</option>
-                        <option value="NA">Namibia</option>
-                        <option value="NR">Nauru</option>
-                        <option value="NP">Nepal</option>
-                        <option value="NI">Nicaragua</option>
-                        <option value="NE">Niger</option>
-                        <option value="NG">Nigeria</option>
-                        <option value="NU">Niue</option>
-                        <option value="NL">Norfolk Island</option>
-                        <option value="MP">Northern Mariana Islands</option>
-                        <option value="NO">Noruega</option>
-                        <option value="NC">Nueva Caledonia</option>
-                        <option value="NZ">Nueva Zelandia</option>
-                        <option value="OM">Oman</option>
-                        <option value="NL">Paises Bajos</option>
-                        <option value="PK">Pakistan</option>
-                        <option value="PW">Palau</option>
-                        <option value="PS">Palestinian Territory, Occupied</option>
-                        <option value="PA">Panama</option>
-                        <option value="PG">Papua Nueva Guinea</option>
-                        <option value="PY">Paraguay</option>
-                        <option value="PE">Peru</option>
-                        <option value="PF">Polinesia Francesa</option>
-                        <option value="PL">Polonia</option>
-                        <option value="PT">Portugal</option>
-                        <option value="PR">Puerto Rico</option>
-                        <option value="QA">Qatar</option>
-                        <option value="GB">Reino Unido</option>
-                        <option value="SY">Republica Arabe Siria</option>
-                        <option value="CZ">Republica Checa</option>
-                        <option value="CD">Republica Democratica del Congo</option>
-                        <option value="DO">Republica Dominicana</option>
-                        <option value="RE">Reunion</option>
-                        <option value="RO">Romania</option>
-                        <option value="RW">Rwanda</option>
-                        <option value="KN">Saint Kitts and Nevis</option>
-                        <option value="LC">Saint Lucia</option>
-                        <option value="VC">Saint Vincent and the Grenadines</option>
-                        <option value="WS">Samoa</option>
-                        <option value="SM">San Marino</option>
-                        <option value="ST">Sao Tome and Principe</option>
-                        <option value="SN">Senegal</option>
-                        <option value="RS">Serbia</option>
-                        <option value="CS">Serbia y Montenegro</option>
-                        <option value="SC">Seychelles</option>
-                        <option value="SL">Sierra Leona</option>
-                        <option value="SG">Singapur</option>
-                        <option value="SB">Solomon Islands</option>
-                        <option value="SO">Somalia</option>
-                        <option value="GS">South Georgia And The South Sandwich Island</option>
-                        <option value="LK">Sri Lanka</option>
-                        <option value="SH">St.Helena</option>
-                        <option value="PM">St.Pierre And Miquelon</option>
-                        <option value="SZ">Suazilandia</option>
-                        <option value="ZA">Sudafrica</option>
-                        <option value="SD">Sudan</option>
-                        <option value="SE">Suecia</option>
-                        <option value="CH">Suiza</option>
-                        <option value="SR">Suriname</option>
-                        <option value="SJ">Svalbard And Jan Mayen Islands</option>
-                        <option value="TH">Tailandia</option>
-                        <option value="TW">Taiwan</option>
-                        <option value="TJ">Tajikistan</option>
-                        <option value="TZ">Tanzania</option>
-                        <option value="TL">Timor-Leste</option>
-                        <option value="TG">Togo</option>
-                        <option value="TK">Tokelau</option>
-                        <option value="TO">Tonga</option>
-                        <option value="TT">Trinidad and Tobago</option>
-                        <option value="TN">Tunisia</option>
-                        <option value="TM">Turkmenistan</option>
-                        <option value="TC">Turks and Caicos Islands</option>
-                        <option value="TR">Turquia</option>
-                        <option value="TV">Tuvalu</option>
-                        <option value="UG">Uganda</option>
-                        <option value="UA">Ukraine</option>
-                        <option value="UM">United States Minor Outlying Islands</option>
-                        <option value="UY">Uruguay</option>
-                        <option value="UZ">Uzbekistan</option>
-                        <option value="VU">Vanuatu</option>
-                        <option value="VE">Venezuela</option>
-                        <option value="VN">Vietnam</option>
-                        <option value="WF">Wallis And Futuna Islands</option>
-                        <option value="YD">Yemen</option>
-                        <option value="YE">Yemen</option>
-                        <option value="YU">Yugoslavia</option>
-                        <option value="ZR">Zaire</option>
-                        <option value="ZM">Zambia</option>
-                        <option value="ZW">Zimbabwe</option>
+
+                      <select formControlName="nationalityCustomer" class="form-select-f">
+                        <option value="" selected>Seleccione nacionalidad</option>
+
+                        <option *ngFor="let elem of countries" [value]="elem.Iata">
+                          {{ elem.Name }}
+                        </option>
                       </select>
-                      <span class="valid"
-                        *ngIf="getMessage(MSG_NATIONALITY_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_NATIONALITY_CUSTOMER)">{{
-                        getMessage(MSG_NATIONALITY_CUSTOMER) }}</span>
                     </div>
+
                     <div class="clearfix"></div>
                   </div>
+
                   <div class="row rowMobileCard hideMobile" [class.activoBox]="showAdulto == i">
                     <div class="col-3 viewMobileWidth">
                       <label for="names">Tipo de documento</label>
-                      <select formControlName="typeDocCustomer" class="form-select-f"
-                        [ngClass]="getMessage(MSG_TYPE_DOC_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_TYPE_DOC_CUSTOMER) ? 'isvalid' : ''">
-                        <option disabled>Seleccione</option>
+
+                      <select formControlName="typeDocCustomer" class="form-select-f">
+                        <option value="" selected>Seleccione</option>
                         <option value="DNI">DNI</option>
                         <option value="RUC">RUC</option>
                         <option value="PSP">Pasaporte</option>
-                        <option value="CEX">C.Extranjería</option>
+                        <option value="CEX">C. Extranjería</option>
                       </select>
-
-                      <span class="valid"
-                        *ngIf="getMessage(MSG_TYPE_DOC_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_TYPE_DOC_CUSTOMER)">{{
-                        getMessage(MSG_TYPE_DOC_CUSTOMER) }}</span>
                     </div>
+
                     <div class="col-3 viewMobileWidth">
                       <label for="lastname">N° de documento</label>
                       <input class="form-control" maxlength="8" formControlName="numDocCustomer" type="text"
-                        name="ndocumento"
-                        [ngClass]="getMessage(MSG_NUM_DOC_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_NUM_DOC_CUSTOMER) ? 'isvalid' : ''">
-                      <span class="valid"
-                        *ngIf="getMessage(MSG_NUM_DOC_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_NUM_DOC_CUSTOMER)">{{
-                        getMessage(MSG_NUM_DOC_CUSTOMER) }}</span>
+                        name="ndocumento">
                     </div>
+
                     <div class="col-6 viewMobileWidth">
                       <label for="names">Sexo</label>
+
                       <div class="optionSel">
                         <div class="form-check form-check-inline optionLeft">
                           <input class="form-check-input sex" formControlName="sexCustomer" value="masculino"
                             type="radio" id="sexMasc{{i}}">
                           <label class="form-check-label" for="sexMasc{{i}}">Masculino</label>
                         </div>
+
                         <div class="form-check form-check-inline optionRight">
                           <input class="form-check-input sex" formControlName="sexCustomer" value="femenino"
                             type="radio" id="sexFem{{i}}">
                           <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
                         </div>
                       </div>
-                      <!-- <span class="valid" *ngIf="getMessage(MSG_SEX) != MSG_EMPTY && getMessageArray(i, MSG_SEX)">{{ getMessage(MSG_SEX) }}</span> -->
                     </div>
+
                     <div class="clearfix"></div>
                   </div>
+
                   <div class="row rowMobileCard hideMobile" [class.activoBox]="showAdulto == i">
                     <div class="col-12 text-center mt-3">
                       <button (click)="savePasajero(i)" class="px-5">Guardar</button>
@@ -846,25 +582,22 @@
                     el itinerario. </span>
                 </div>
 
-                <div formGroupName="formContact" class="card-body card_pasajero boxHideM shadow-none"
+                <div formGroupName="contactForm" class="card-body card_pasajero boxHideM shadow-none"
                   [class.activoBoxContact]="!showDataContacto">
+
                   <div class="row rowMobileCard">
                     <div class="col-6 viewMobileWidth">
                       <label for="names">Nombres</label>
                       <input class="form-control" #nameContactForm placeholder="Ingresa tu nombre"
-                        [ngClass]="getMessage(MSG_NAME_CONTACT) != MSG_EMPTY ? 'isvalid' : ''"
                         formControlName="nameContacto" type="text" value="" name="names">
-                      <span class="valid" *ngIf="getMessage(MSG_NAME_CONTACT) != MSG_EMPTY">{{
-                        getMessage(MSG_NAME_CONTACT) }}</span>
                     </div>
+
                     <div class="col-6 viewMobileWidth">
                       <label for="lastname">Apellidos</label>
                       <input class="form-control" #lastNameContactForm placeholder="Ingresa tu apellido"
-                        [ngClass]="getMessage(MSG_LASTNAME_CONTACT) != MSG_EMPTY ? 'isvalid' : ''"
-                        formControlName="lastnameContacto" type="text" name="lastname">
-                      <span class="valid" *ngIf="getMessage(MSG_LASTNAME_CONTACT) != MSG_EMPTY">{{
-                        getMessage(MSG_LASTNAME_CONTACT) }}</span>
+                        formControlName="lastnameContacto" type="text">
                     </div>
+
                     <div class="clearfix"></div>
                   </div>
 
@@ -872,19 +605,14 @@
                     <div class="col-6 viewMobileWidth">
                       <label for="Email">Email</label>
                       <input class="form-control" placeholder="Ingresa tu email de contacto"
-                        [ngClass]="getMessage(MSG_EMAIL_CONTACT) != MSG_EMPTY ? 'isvalid' : ''"
                         formControlName="mailContacto" type="text" name="Email">
-                      <span class="valid" *ngIf="getMessage(MSG_EMAIL_CONTACT) != MSG_EMPTY">{{
-                        getMessage(MSG_EMAIL_CONTACT) }}</span>
                     </div>
 
                     <div class="col-6 viewMobileWidth">
                       <label for="EmailC">Confirma tu email</label>
-                      <input class="form-control" formControlName="mailConfirmContacto"
-                        [ngClass]="getMessage(MSG_EMAILC_CONTACT) != MSG_EMPTY ? 'isvalid' : ''"
-                        placeholder="Ingresa tu email" type="text" name="EmailC">
-                      <span class="valid" *ngIf="getMessage(MSG_EMAILC_CONTACT) != MSG_EMPTY">{{
-                        getMessage(MSG_EMAILC_CONTACT) }}</span>
+
+                      <input class="form-control" formControlName="mailConfirmContacto" placeholder="Ingresa tu email"
+                        type="text" name="EmailC">
                     </div>
 
                     <div class="clearfix"></div>
@@ -893,13 +621,11 @@
                   <div class="row rowMobileCard">
                     <div class="col-6 viewMobileWidth">
                       <label for="typePhone0">Tipo de teléfono</label>
-                      <select formControlName="typePhone0" class="form-select-f" name="typePhone0"
-                        [ngClass]="getMessage(MSG_EMAILC_CONTACT) != MSG_EMPTY ? 'isvalid' : ''">
+
+                      <select formControlName="typePhone0" class="form-select-f" name="typePhone0">
                         <option value="1">Fijo</option>
                         <option value="2">Celular</option>
                       </select>
-                      <span class="valid" *ngIf="getMessage(MSG_TYPEPHONE_CONTACT) != MSG_EMPTY">{{
-                        getMessage(MSG_TYPEPHONE_CONTACT) }}</span>
                     </div>
 
                     <div class="col-6 viewMobileWidth">
@@ -932,20 +658,16 @@
                             </svg>
                           </div>
 
-                          <input formControlName="code0" class="form-control"
-                            [ngClass]="getMessage(MSG_CODE0_CONTACT) != MSG_EMPTY ? 'isvalid' : ''" placeholder=""
-                            type="text" name="code0">
-                          <span class="valid" *ngIf="getMessage(MSG_CODE0_CONTACT) != MSG_EMPTY">{{
-                            getMessage(MSG_CODE0_CONTACT) }}</span>
+                          <input formControlName="code0" class="form-control" placeholder="" type="text" name="code0">
                         </div>
+
                         <div class="col-7">
                           <label for="numberPhone0">Número de teléfono</label>
-                          <input formControlName="numberPhone0" class="form-control"
-                            [ngClass]="getMessage(MSG_PHONE0_CONTACT) != MSG_EMPTY ? 'isvalid' : ''"
-                            placeholder="Ingresa N°" type="text" name="numberPhone0">
-                          <span class="valid" *ngIf="getMessage(MSG_PHONE0_CONTACT) != MSG_EMPTY">{{
-                            getMessage(MSG_PHONE0_CONTACT) }}</span>
+
+                          <input formControlName="numberPhone0" class="form-control" placeholder="Ingresa N°"
+                            type="text" name="numberPhone0">
                         </div>
+
                         <div class="clearfix"></div>
                       </div>
                     </div>
@@ -953,74 +675,28 @@
                     <div class="clearfix"></div>
                   </div>
 
-                  <!-- FACTURA -->
-                  <div formArrayName="recibo" *ngIf="getArrayRecibo()">
-                    <div [formGroupName]="i" *ngFor="let rec of getArrayRecibo(); let i = index"
-                      class="row rowMobileCard">
-                      <div class="col-12 viewMobileWidth">
-                        <div class="row">
-                          <div class="col-4">
-                            <label for="ruc">Ruc</label>
-                            <input formControlName="ruc" class="form-control" placeholder="Ingresa N° deRuc" type="text"
-                              name="ruc">
-                          </div>
-                          <div class="col-8">
-                            <label for="dirección">Dirección</label>
-                            <input formControlName="direccion" class="form-control" placeholder="Ca. / Jr. / Av."
-                              type="text" name="dirección">
-                          </div>
-                          <div class="clearfix"></div>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
+                  <div class="row rowMobileCard">
+                    <div class="col-4 viewMobileWidth">
+                      <label for="ruc">RUC</label>
+                      <input formControlName="ruc" class="form-control" placeholder="Ingresa N° deRuc" type="text"
+                        name="ruc">
+                    </div>
+
+                    <div class="col-8 viewMobileWidth">
+                      <label for="dirección">Dirección</label>
+                      <input formControlName="direccion" class="form-control" placeholder="Ca. / Jr. / Av." type="text"
+                        name="dirección">
                     </div>
                   </div>
+
                   <div class="row rowMobileCard">
                     <div class="col-6 viewMobileWidth">
                       <div class="form-check">
-                        <input class="form-check-input" (change)="toFactura($event)" formControlName="chkFac"
+                        <input class="form-check-input" (change)="requestInvoice($event)" formControlName="chkFac"
                           type="checkbox" id="chkFac" value="option1">
                         <label class="form-check-label" for="chkFac">Solicitar factura</label>
                       </div>
                     </div>
-                    <div formArrayName="phones" *ngIf="getArrayPhone()">
-                      <div [formGroupName]="i" *ngFor="let phon of getArrayPhone(); let i = index"
-                        class="row rowMobileCard">
-                        <!-- <hr> -->
-                        <div class="col-6 viewMobileWidth">
-                          <label for="typePhone">Tipo de teléfono</label>
-                          <select formControlName="typePhone" name="typePhone" class="form-select-f">
-                            <option value="celular">Celular</option>
-                            <option value="fijo">Fijo</option>
-                          </select>
-                        </div>
-                        <div class="col-6 viewMobileWidth">
-                          <div class="row">
-                            <div class="col-5">
-                              <label for="code">Código de país</label>
-                              <input formControlName="code" class="form-control" placeholder="" type="text" name="code">
-                            </div>
-                            <div class="col-7">
-                              <label for="numberPhone">Número de teléfono</label>
-                              <input formControlName="numberPhone" class="form-control" placeholder="Ingresa N°"
-                                type="text" name="numberPhone">
-                            </div>
-                            <div class="clearfix"></div>
-                          </div>
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                        <!-- <div class="col-6 viewMobileWidth colFon" *ngIf="getArrayPhone().length > 0">
-                          <a (click)="removePhone(i)" class="btnEliminar">- Eliminar teléfono
-                          </a>
-                        </div> -->
-                      </div>
-                    </div>
-
-                    <!-- <div class="col-6 offset-6 viewMobileWidth colFono" style="margin-top: -25px;">
-                      <a (click)="addPhone()">+ Agregar otro teléfono</a>
-                    </div> -->
 
                     <div class="clearfix"></div>
                   </div>
@@ -1035,7 +711,7 @@
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="checkbox" formControlName="chkPolity" id="chkPolity"
                         value="option1">
-                      <!-- <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1"> -->
+
                       <label class="form-check-label" for="inlineRadio1">He leído y acepto la
                         <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#politicaModal">política de
                           protección de datos
@@ -1043,9 +719,8 @@
                         </a>
                       </label>
                     </div>
-                    <span class="valid"
-                      *ngIf="getMessage(MSG_CHK_POLITY) !== MSG_EMPTY">{{getMessage(MSG_CHK_POLITY)}}</span>
                   </div>
+
                   <div class="col-6 viewMobileWidth">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="checkbox" formControlName="chkInfo" id="chkInfo"
@@ -1053,12 +728,11 @@
                       <label class="form-check-label" for="inlineRadio1">Autorizo el uso de mi
                         Información para la Publicidad.</label>
                     </div>
-                    <span class="valid"
-                      *ngIf="getMessage(MSG_CHK_INFO) !== MSG_EMPTY">{{getMessage(MSG_CHK_INFO)}}</span>
-
                   </div>
+
                   <div class="clearfix"></div>
                 </div>
+
                 <div class="row">
                   <div class="col-12">
                     Al realizar esta compra, acepto los
@@ -1069,13 +743,14 @@
                     <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#ModalCondicion">&nbsp;documentación de
                       viaje</a>.
                   </div>
+
                   <div class="clearfix"></div>
                 </div>
               </div>
             </div>
+
             <div class="row rowMobileCard ">
               <div class="col-12 contentCenterMobile">
-                <!-- <button (click)="buyInsurance()" class="px-5">Continuar</button> -->
                 <button mat-button matStepperNext class="px-5" (click)="step1()">Continuar</button>
               </div>
             </div>
@@ -1112,6 +787,7 @@
 
                   <div class="boxCardPas" *ngIf="selectedPay == 'tarjeta'; else safety2">
                     <!-- TARJETA -->
+
                     <!-- END TARJETA -->
                   </div>
 
@@ -1204,6 +880,7 @@
 
               </div>
             </div>
+
             <div class="clearfix"></div>
           </div>
 
@@ -1283,11 +960,13 @@
                         <input class="form-control" placeholder="Ingrese el número de tarjeta." type="text"
                           name="names">
                       </div>
+
                       <div class="col-6 viewMobileWidth">
                         <label for="lastname">Titular de la tarjeta</label>
                         <input class="form-control" placeholder="El que figura en la tarjeta." type="text"
                           name="lastname">
                       </div>
+
                       <div class="clearfix"></div>
                     </div>
 
@@ -1296,18 +975,21 @@
                         <div class="row">
                           <div class="col-5">
                             <label for="names">Vencimiento</label>
-                            <input class="form-control" placeholder="AAAA/MM" type="text" name="names">
+                            <input class="form-control" placeholder="MM/AA" type="text" name="names">
                           </div>
+
                           <div class="col-6">
                             <label for="lastname">Código de seguridad</label>
                             <input class="form-control" placeholder="El que figura en el documento de viaje."
                               type="text" name="lastname">
                           </div>
+
                           <div class="col-1 colBoxInfo">
                             <div class="iconInfo">
                               <img src="./assets/comprar/card/info.png" alt="">
                             </div>
                           </div>
+
                           <div class="clearfix"></div>
                         </div>
                       </div>
@@ -1318,10 +1000,12 @@
                             <label for="names">Tipo de doc</label>
                             <input class="form-control" placeholder="" type="text" name="names">
                           </div>
+
                           <div class="col-7">
                             <label for="lastname">N° de documento</label>
                             <input class="form-control" placeholder="Ingresar N°" type="text" name="lastname">
                           </div>
+
                           <div class="clearfix"></div>
                         </div>
                       </div>
@@ -1334,11 +1018,13 @@
                         <label for="names">Cuotas</label>
                         <input class="form-control" placeholder="Sin cuotas" type="text" name="names">
                       </div>
+
                       <div class="col-6 viewMobileWidth">
                         <label for="lastname">Ciudad de facturación</label>
                         <input class="form-control" placeholder="Del titular de la tarjeta." type="text"
                           name="lastname">
                       </div>
+
                       <div class="clearfix"></div>
                     </div>
 
@@ -1347,10 +1033,12 @@
                         <label for="names">Dirección</label>
                         <input class="form-control" placeholder="Ingrese la dirección" type="text" name="names">
                       </div>
+
                       <div class="col-6 textDire viewMobileWidth">
                         <label for="names"></label>
                         <div>Emisión en max 24hrs aprox.</div>
                       </div>
+
                       <div class="clearfix"></div>
                     </div>
                     <!-- END TARJETA -->
@@ -1383,10 +1071,12 @@
     <div class="row pt-md-3">
       <div class="col-8 viewMobileWidth order-1 order-md-0 ">
         <h1 class="titleMob d-md-block d-none">{{ safe0Json?.title }}</h1>
+
         <!-- FORM PASAJEROS DESKTOP -->
         <div class="card pasajeros hideViewMobile">
           <div class="card-header">
             <h2>Información de pasajeros</h2>
+
             <span>
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="7.5" cy="7.5" r="7.25" stroke="#F29704" stroke-width="0.5" />
@@ -1400,7 +1090,7 @@
           </div>
 
           <div formArrayName="customers">
-            <div [formGroupName]="i" *ngFor="let customer of getArrayCustomers(); let i = index"
+            <div [formGroupName]="i" *ngFor="let customer of customersArray.controls; let i = index"
               class="row rowMobileCard">
               <div class="card-body card_pasajero">
                 <div *ngIf="this.safe0Json['reservaVuelos']; else vuelosTitle">
@@ -1409,6 +1099,7 @@
                       d="M12.8033 9.69668C11.9864 8.87982 11.0141 8.27511 9.95329 7.90904C11.0895 7.12649 11.8359 5.81684 11.8359 4.33594C11.8359 1.94511 9.89083 0 7.5 0C5.10917 0 3.16406 1.94511 3.16406 4.33594C3.16406 5.81684 3.91052 7.12649 5.04674 7.90904C3.9859 8.27511 3.01359 8.87982 2.19671 9.69668C0.780147 11.1133 0 12.9967 0 15H1.17188C1.17188 11.5107 4.01065 8.67188 7.5 8.67188C10.9893 8.67188 13.8281 11.5107 13.8281 15H15C15 12.9967 14.2199 11.1133 12.8033 9.69668ZM7.5 7.5C5.75534 7.5 4.33594 6.08063 4.33594 4.33594C4.33594 2.59125 5.75534 1.17188 7.5 1.17188C9.24466 1.17188 10.6641 2.59125 10.6641 4.33594C10.6641 6.08063 9.24466 7.5 7.5 7.5Z"
                       fill="#009AED" />
                   </svg> &nbsp;
+
                   <input class="readonly" readonly formControlName="typeCustomer" type="text">
                 </div>
 
@@ -1425,378 +1116,106 @@
 
                 <div class="row rowMobileCard hideMobile">
                   <div class="col-6 viewMobileWidth">
-                    <label for="names1">Nombres</label>
-                    <input class="form-control"
-                      [ngClass]="getMessage(MSG_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_NAME_CUSTOMER) ? 'isvalid' : ''"
-                      formControlName="nameCustomer" placeholder="El que figura en el documento de viaje." type="text"
-                      name="names1">
-                    <span class="valid"
-                      *ngIf="getMessage(MSG_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_NAME_CUSTOMER)">{{
-                      getMessage(MSG_NAME_CUSTOMER) }}</span>
+                    <label>Nombres</label>
+
+                    <input class="form-control" formControlName="nameCustomer"
+                      placeholder="El que figura en el documento de viaje." type="text">
                   </div>
+
                   <div class="col-6 viewMobileWidth">
-                    <label for="lastname1">Apellidos</label>
-                    <input class="form-control"
-                      [ngClass]="getMessage(MSG_LAST_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_LAST_NAME_CUSTOMER) ? 'isvalid' : ''"
-                      formControlName="lastNameCustomer" placeholder="El que figura en el documento de viaje."
-                      type="text" name="lastname1">
-                    <span class="valid"
-                      *ngIf="getMessage(MSG_LAST_NAME_CUSTOMER) != MSG_EMPTY &&  getMessageArray(i, MSG_LAST_NAME_CUSTOMER)">{{
-                      getMessage(MSG_LAST_NAME_CUSTOMER) }}</span>
+                    <label>Apellidos</label>
+
+                    <input class="form-control" formControlName="lastNameCustomer"
+                      placeholder="El que figura en el documento de viaje." type="text">
                   </div>
+
                   <div class="clearfix"></div>
                 </div>
 
                 <div class="row rowMobileCard hideMobile">
                   <div class="col-6 viewMobileWidth">
                     <label for="names">Fecha de nacimiento</label>
+
                     <div class="row">
-                      <div class="col-4">
-                        <input class="form-control" maxlength="2"
-                          [ngClass]="getMessage(MSG_DAY_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_DAY_CUSTOMER) ? 'isvalid' : ''"
-                          formControlName="dayCustomer" type="text" name="dayCustomer">
-                        <span class="valid"
-                          *ngIf="getMessage(MSG_DAY_CUSTOMER) != MSG_EMPTY && getMessageArray(i, MSG_DAY_CUSTOMER)">{{
-                          getMessage(MSG_DAY_CUSTOMER) }}</span>
+                      <div class="col-2">
+                        <input class="form-control" maxlength="2" formControlName="dayCustomer" type="text"
+                          name="dayCustomer">
                       </div>
-                      <div class="col-4">
-                        <select formControlName="monthCustomer" class="form-select-f"
-                          [ngClass]="getMessage(MSG_MONTH_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_MONTH_CUSTOMER) ? 'isvalid' : ''">
-                          <option disabled>Seleccione</option>
-                          <option value="01">Enero</option>
-                          <option value="02">Febrero</option>
-                          <option value="03">Marzo</option>
-                          <option value="04">Abril</option>
-                          <option value="05">Mayo</option>
-                          <option value="06">Junio</option>
-                          <option value="07">Julio</option>
-                          <option value="08">Agosto</option>
-                          <option value="09">Setiembre</option>
-                          <option value="10">Octubre</option>
-                          <option value="11">Noviembre</option>
-                          <option value="12">Diciembre</option>
+
+                      <div class="col-6">
+                        <select formControlName="monthCustomer" class="form-select-f">
+                          <option value="" selected>Seleccione</option>
+                          <option *ngFor="let elem of months" [value]="elem.value">{{ elem.name }}</option>
                         </select>
-                        <span class="valid"
-                          *ngIf="getMessage(MSG_MONTH_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_MONTH_CUSTOMER)">{{
-                          getMessage(MSG_MONTH_CUSTOMER) }}</span>
                       </div>
+
                       <div class="col-4">
-                        <select formControlName="yearCustomer" class="form-select-f"
-                          [ngClass]="getMessage(MSG_YEAR_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_YEAR_CUSTOMER) ? 'isvalid' : ''">
-                          <option disabled>Seleccione</option>
-                          <!-- <option *ngFor="let year of this.resultJson['aniosNacimiento'][i]" value="{{year.anio}}">{{year.anio}}
-                                                    </option> -->
+                        <select formControlName="yearCustomer" class="form-select-f">
+                          <option value="" selected>Seleccione</option>
+
                           <option value="{{this.resultJson['aniosNacimiento'][i].anio}}">
                             {{this.resultJson['aniosNacimiento'][i].anio}}</option>
-                          <option value="{{this.resultJson['aniosNacimiento'][i].anio + 1}}">
-                            {{this.resultJson['aniosNacimiento'][i].anio + 1}}</option>
+                          <option value="{{this.resultJson['aniosNacimiento'][i].anio - 1}}">
+                            {{this.resultJson['aniosNacimiento'][i].anio - 1}}</option>
                         </select>
-                        <span class="valid"
-                          *ngIf="getMessage(MSG_YEAR_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_YEAR_CUSTOMER)">{{
-                          getMessage(MSG_YEAR_CUSTOMER) }}</span>
                       </div>
+
                       <div class="clearfix"></div>
                     </div>
                   </div>
+
                   <div class="col-6 viewMobileWidth">
                     <label for="names">Nacionalidad</label>
-                    <select formControlName="nationalityCustomer" class="form-select-f"
-                      [ngClass]="getMessage(MSG_NATIONALITY_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_NATIONALITY_CUSTOMER) ? 'isvalid' : ''">
-                      <option disabled>Seleccione</option>
-                      <option value="AF">Afganistan</option>
-                      <option value="AX">Aland Island</option>
-                      <option value="AL">Albania</option>
-                      <option value="DE">Alemania</option>
-                      <option value="DZ">Algeria</option>
-                      <option value="DZ">American Samoa</option>
-                      <option value="AD">Andorra</option>
-                      <option value="AO">Angola</option>
-                      <option value="AI">Anguilla</option>
-                      <option value="AQ">Antartida</option>
-                      <option value="AG">Antigua and Barbuda</option>
-                      <option value="AN">Antillas Holandesas</option>
-                      <option value="SA">Arabia Saudita</option>
-                      <option value="AR">Argentina</option>
-                      <option value="AM">Armenia</option>
-                      <option value="AW">Aruba</option>
-                      <option value="AC">Ascension Islands</option>
-                      <option value="AU">Australia</option>
-                      <option value="AT">Austria</option>
-                      <option value="AZ">Azerbaijan</option>
-                      <option value="BS">Bahamas</option>
-                      <option value="BH">Bahrain</option>
-                      <option value="BD">Bangladesh</option>
-                      <option value="BB">Barbados</option>
-                      <option value="BY">Belarus</option>
-                      <option value="BE">Belgica</option>
-                      <option value="BZ">Belize</option>
-                      <option value="BJ">Benin</option>
-                      <option value="BM">Bermuda</option>
-                      <option value="BT">Bhutan</option>
-                      <option value="BO">Bolivia</option>
-                      <option value="BA">Bosnia and Herzegovina</option>
-                      <option value="BW">Botswana</option>
-                      <option value="BV">Bouvet Island</option>
-                      <option value="BR">Brasil</option>
-                      <option value="IO">British Indian Ocean Territory</option>
-                      <option value="BN">Brunei Darussalam</option>
-                      <option value="BG">Bulgaria</option>
-                      <option value="BF">Burkina Faso</option>
-                      <option value="BI">Burundi</option>
-                      <option value="CV">Cabo Verde</option>
-                      <option value="KH">Cambodia</option>
-                      <option value="CM">Camerun</option>
-                      <option value="CA">Canada</option>
-                      <option value="CF">Central African Republic</option>
-                      <option value="TD">Chad</option>
-                      <option value="CL">Chile</option>
-                      <option value="CN">China</option>
-                      <option value="CX">Christmas Islands</option>
-                      <option value="CC">Cocos (Keeling )Islands</option>
-                      <option value="CO">Colombia</option>
-                      <option value="KM">Comoros</option>
-                      <option value="CG">Congo</option>
-                      <option value="CK">Cook Islands</option>
-                      <option value="KP">Corea del Norte</option>
-                      <option value="KR">Corea del Sur</option>
-                      <option value="CR">Costa Rica</option>
-                      <option value="CI">Cote D'Ivoire</option>
-                      <option value="HR">Croacia</option>
-                      <option value="CU">Cuba</option>
-                      <option value="CY">Cyprus</option>
-                      <option value="DK">Dinamarca</option>
-                      <option value="DJ">Djibouti</option>
-                      <option value="DM">Dominica</option>
-                      <option value="TP">East Timor</option>
-                      <option value="EC">Ecuador</option>
-                      <option value="EG">Egipto</option>
-                      <option value="SV">El Salvador</option>
-                      <option value="AE">Emiratos Arabes</option>
-                      <option value="GQ">Equatorial Guinea</option>
-                      <option value="ER">Eritrea</option>
-                      <option value="SK">Eslovaquia</option>
-                      <option value="SI">Eslovenia</option>
-                      <option value="ES">España</option>
-                      <option value="US">Estados Unidos</option>
-                      <option value="EE">Estonia</option>
-                      <option value="ET">Etiopia</option>
-                      <option value="EU">Europa</option>
-                      <option value="FO">Faroe Islands</option>
-                      <option value="RU">Federacion Rusa</option>
-                      <option value="FJ">Fiji</option>
-                      <option value="PH">Filipinas</option>
-                      <option value="FI">Finlandia</option>
-                      <option value="FR">Francia</option>
-                      <option value="TF">French Southern Territories</option>
-                      <option value="GA">Gabon</option>
-                      <option value="GM">Gambia</option>
-                      <option value="GE">Georgia</option>
-                      <option value="GH">Ghana</option>
-                      <option value="GI">Gibraltar</option>
-                      <option value="GD">Granada</option>
-                      <option value="GR">Grecia</option>
-                      <option value="GL">Groenlandia</option>
-                      <option value="GP">Guadalupe</option>
-                      <option value="GU">Guam</option>
-                      <option value="GT">Guatemala</option>
-                      <option value="GF">Guayana Francesa</option>
-                      <option value="GN">Guinea</option>
-                      <option value="GW">Guinea-Bissau</option>
-                      <option value="GY">Guyana</option>
-                      <option value="HT">Haiti</option>
-                      <option value="HM">Heard Island and McDonald Islands</option>
-                      <option value="VA">Holy See (Vatican City State)</option>
-                      <option value="HN">Honduras</option>
-                      <option value="HK">Hong Kong</option>
-                      <option value="HU">Hungria</option>
-                      <option value="IN">India</option>
-                      <option value="ID">Indonesia</option>
-                      <option value="IR">Iran</option>
-                      <option value="IQ">Iraq</option>
-                      <option value="IE">Irlanda</option>
-                      <option value="IS">Islandia</option>
-                      <option value="KY">Islas Caiman</option>
-                      <option value="FK">Islas Malvinas</option>
-                      <option value="VG">Islas Virgenes Britanicas</option>
-                      <option value="VI">Islas Virgenes, USA</option>
-                      <option value="IL">Israel</option>
-                      <option value="IT">Italia</option>
-                      <option value="JM">Jamaica</option>
-                      <option value="JP">Japón</option>
-                      <option value="JO">Jordan</option>
-                      <option value="KZ">Kazakstan</option>
-                      <option value="KE">Kenia</option>
-                      <option value="KI">Kiribati</option>
-                      <option value="KW">Kuwait</option>
-                      <option value="KG">Kyrgyzstan</option>
-                      <option value="LA">Lao People's Democratic Republic</option>
-                      <option value="LS">Lesotho</option>
-                      <option value="LV">Letonia</option>
-                      <option value="LB">Libano</option>
-                      <option value="LR">Liberia</option>
-                      <option value="LY">Libia</option>
-                      <option value="LI">Liechtenstein</option>
-                      <option value="LT">Lituania</option>
-                      <option value="LU">Luxemburgo</option>
-                      <option value="MO">Macau</option>
-                      <option value="MK">Macedonia</option>
-                      <option value="MG">Madagascar</option>
-                      <option value="MY">Malasia</option>
-                      <option value="MW">Malawi</option>
-                      <option value="MV">Maldivas</option>
-                      <option value="ML">Mali</option>
-                      <option value="MT">Malta</option>
-                      <option value="MA">Marruecos</option>
-                      <option value="MH">Marshall Islands</option>
-                      <option value="MQ">Martinica</option>
-                      <option value="MR">Mauritania</option>
-                      <option value="MU">Mauritius</option>
-                      <option value="YT">Mayotte</option>
-                      <option value="MX">Mexico</option>
-                      <option value="FM">Micronesia, Federated States of</option>
-                      <option value="MD">Moldova, Republic of</option>
-                      <option value="MC">Monaco</option>
-                      <option value="MN">Mongolia</option>
-                      <option value="ME">Montenegro</option>
-                      <option value="MS">Montserrat</option>
-                      <option value="MZ">Mozambique</option>
-                      <option value="MM">Myanmar</option>
-                      <option value="NA">Namibia</option>
-                      <option value="NR">Nauru</option>
-                      <option value="NP">Nepal</option>
-                      <option value="NI">Nicaragua</option>
-                      <option value="NE">Niger</option>
-                      <option value="NG">Nigeria</option>
-                      <option value="NU">Niue</option>
-                      <option value="NL">Norfolk Island</option>
-                      <option value="MP">Northern Mariana Islands</option>
-                      <option value="NO">Noruega</option>
-                      <option value="NC">Nueva Caledonia</option>
-                      <option value="NZ">Nueva Zelandia</option>
-                      <option value="OM">Oman</option>
-                      <option value="NL">Paises Bajos</option>
-                      <option value="PK">Pakistan</option>
-                      <option value="PW">Palau</option>
-                      <option value="PS">Palestinian Territory, Occupied</option>
-                      <option value="PA">Panama</option>
-                      <option value="PG">Papua Nueva Guinea</option>
-                      <option value="PY">Paraguay</option>
-                      <option value="PE">Peru</option>
-                      <option value="PF">Polinesia Francesa</option>
-                      <option value="PL">Polonia</option>
-                      <option value="PT">Portugal</option>
-                      <option value="PR">Puerto Rico</option>
-                      <option value="QA">Qatar</option>
-                      <option value="GB">Reino Unido</option>
-                      <option value="SY">Republica Arabe Siria</option>
-                      <option value="CZ">Republica Checa</option>
-                      <option value="CD">Republica Democratica del Congo</option>
-                      <option value="DO">Republica Dominicana</option>
-                      <option value="RE">Reunion</option>
-                      <option value="RO">Romania</option>
-                      <option value="RW">Rwanda</option>
-                      <option value="KN">Saint Kitts and Nevis</option>
-                      <option value="LC">Saint Lucia</option>
-                      <option value="VC">Saint Vincent and the Grenadines</option>
-                      <option value="WS">Samoa</option>
-                      <option value="SM">San Marino</option>
-                      <option value="ST">Sao Tome and Principe</option>
-                      <option value="SN">Senegal</option>
-                      <option value="RS">Serbia</option>
-                      <option value="CS">Serbia y Montenegro</option>
-                      <option value="SC">Seychelles</option>
-                      <option value="SL">Sierra Leona</option>
-                      <option value="SG">Singapur</option>
-                      <option value="SB">Solomon Islands</option>
-                      <option value="SO">Somalia</option>
-                      <option value="GS">South Georgia And The South Sandwich Island</option>
-                      <option value="LK">Sri Lanka</option>
-                      <option value="SH">St.Helena</option>
-                      <option value="PM">St.Pierre And Miquelon</option>
-                      <option value="SZ">Suazilandia</option>
-                      <option value="ZA">Sudafrica</option>
-                      <option value="SD">Sudan</option>
-                      <option value="SE">Suecia</option>
-                      <option value="CH">Suiza</option>
-                      <option value="SR">Suriname</option>
-                      <option value="SJ">Svalbard And Jan Mayen Islands</option>
-                      <option value="TH">Tailandia</option>
-                      <option value="TW">Taiwan</option>
-                      <option value="TJ">Tajikistan</option>
-                      <option value="TZ">Tanzania</option>
-                      <option value="TL">Timor-Leste</option>
-                      <option value="TG">Togo</option>
-                      <option value="TK">Tokelau</option>
-                      <option value="TO">Tonga</option>
-                      <option value="TT">Trinidad and Tobago</option>
-                      <option value="TN">Tunisia</option>
-                      <option value="TM">Turkmenistan</option>
-                      <option value="TC">Turks and Caicos Islands</option>
-                      <option value="TR">Turquia</option>
-                      <option value="TV">Tuvalu</option>
-                      <option value="UG">Uganda</option>
-                      <option value="UA">Ukraine</option>
-                      <option value="UM">United States Minor Outlying Islands</option>
-                      <option value="UY">Uruguay</option>
-                      <option value="UZ">Uzbekistan</option>
-                      <option value="VU">Vanuatu</option>
-                      <option value="VE">Venezuela</option>
-                      <option value="VN">Vietnam</option>
-                      <option value="WF">Wallis And Futuna Islands</option>
-                      <option value="YD">Yemen</option>
-                      <option value="YE">Yemen</option>
-                      <option value="YU">Yugoslavia</option>
-                      <option value="ZR">Zaire</option>
-                      <option value="ZM">Zambia</option>
-                      <option value="ZW">Zimbabwe</option>
+
+                    <select formControlName="nationalityCustomer" class="form-select-f">
+                      <option value="" selected>Seleccione</option>
+                      <option *ngFor="let elem of countries" [value]="elem.Iata">
+                        {{ elem.Name }}
+                      </option>
                     </select>
-                    <span class="valid"
-                      *ngIf="getMessage(MSG_NATIONALITY_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_NATIONALITY_CUSTOMER)">{{
-                      getMessage(MSG_NATIONALITY_CUSTOMER) }}</span>
                   </div>
+
                   <div class="clearfix"></div>
                 </div>
 
                 <div class="row rowMobileCard hideMobile">
                   <div class="col-3 viewMobileWidth">
                     <label for="names">Tipo de documento</label>
-                    <select formControlName="typeDocCustomer" class="form-select-f"
-                      [ngClass]="getMessage(MSG_TYPE_DOC_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_TYPE_DOC_CUSTOMER) ? 'isvalid' : ''">
-                      <option disabled>Seleccione</option>
+
+                    <select formControlName="typeDocCustomer" class="form-select-f">
+                      <option value="" selected>Seleccione</option>
                       <option value="DNI">DNI</option>
                       <option value="RUC">RUC</option>
                       <option value="PSP">Pasaporte</option>
                       <option value="CEX">C.Extranjería</option>
                     </select>
-                    <span class="valid"
-                      *ngIf="getMessage(MSG_TYPE_DOC_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_TYPE_DOC_CUSTOMER)">{{
-                      getMessage(MSG_TYPE_DOC_CUSTOMER) }}</span>
                   </div>
+
                   <div class="col-3 viewMobileWidth">
                     <label for="lastname">N° de documento</label>
+
                     <input class="form-control" formControlName="numDocCustomer" maxlength="8" type="text"
-                      name="ndocumento"
-                      [ngClass]="getMessage(MSG_NUM_DOC_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_NUM_DOC_CUSTOMER) ? 'isvalid' : ''">
-                    <span class="valid"
-                      *ngIf="getMessage(MSG_NUM_DOC_CUSTOMER) !== MSG_EMPTY && getMessageArray(i, MSG_NUM_DOC_CUSTOMER)">{{
-                      getMessage(MSG_NUM_DOC_CUSTOMER) }}</span>
+                      name="ndocumento">
                   </div>
+
                   <div class="col-6 viewMobileWidth">
                     <label for="names">Sexo</label>
+
                     <div class="optionSel">
                       <div class="form-check form-check-inline optionLeft">
                         <input class="form-check-input sex" formControlName="sexCustomer" value="masculino" type="radio"
                           id="sexMasc{{i}}">
                         <label class="form-check-label" for="sexMasc{{i}}">Masculino</label>
                       </div>
+
                       <div class="form-check form-check-inline optionRight">
                         <input class="form-check-input sex" formControlName="sexCustomer" value="femenino" type="radio"
                           id="sexFem{{i}}">
                         <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
                       </div>
                     </div>
-                    <!-- <span class="valid" *ngIf="getMessage(MSG_SEX) !== MSG_EMPTY && getMessageArray(i, MSG_SEX)">{{ getMessage(MSG_SEX) }}</span> -->
                   </div>
+
                   <div class="clearfix"></div>
                 </div>
 
@@ -1818,10 +1237,12 @@
               <div class="card-header text-center border-0 rounded-top bCardHead">
                 <img src="./assets/comprar/card/_assist.png" alt=""> Asistencia al viajero
               </div>
+
               <div class="card-center text-center d-flex align-items-center">
                 <strong>$ 2.50</strong>
                 <span>por persona/por día</span>
               </div>
+
               <div class="card-body shadow-sm bg-white rounded-bottom">
                 <!-- <h5 class="card-title">Special title treatment</h5> -->
                 <ul>
@@ -1836,40 +1257,18 @@
                       d="M11.6713 2.10503L6.69472 0.0388191C6.57005 -0.012927 6.42992 -0.0129524 6.30528 0.0388191L1.32872 2.10503C1.13918 2.18374 1.01562 2.36879 1.01562 2.57402V5.08579C1.01562 8.54432 3.10601 11.6554 6.3081 12.9623C6.43109 13.0125 6.56889 13.0125 6.6919 12.9623C9.89394 11.6554 11.9844 8.54435 11.9844 5.08579V2.57402C11.9844 2.36879 11.8608 2.18374 11.6713 2.10503ZM10.9688 5.08579C10.9688 8.0259 9.24219 10.7325 6.5 11.9406C3.83109 10.7647 2.03125 8.10557 2.03125 5.08579V2.91304L6.5 1.05764L10.9688 2.91304V5.08579ZM5.93871 6.79747L8.12139 4.61482C8.3197 4.41652 8.64122 4.41649 8.83954 4.61482C9.03787 4.81315 9.03784 5.13467 8.83952 5.33297L6.29779 7.8747C6.09944 8.07305 5.77792 8.07297 5.57964 7.8747L4.16046 6.45551C3.96213 6.25719 3.96213 5.93567 4.16046 5.73737C4.35878 5.53906 4.6803 5.53904 4.87861 5.73737L5.93871 6.79747Z"
                       fill="#009AED" />
                   </svg> Ver cobertura de seguro</a>
+
                 <a href="#" class="button">Agregar seguro</a>
               </div>
             </div>
           </div>
-          <!-- <div class="col-sm-12 col-md-6 bCard" *ngIf="safe0Json.reembolso">
-                        <div class="card shadow-none border-0 bg-transparent">
-                            <div class="card-header text-center border-0 rounded-top bCardHead">
-                                <img src="./assets/comprar/card/_protect.png" alt=""> Reembolso por emergencia
-                            </div>
-                            <div class="card-center text-center d-flex align-items-center">
-                                <strong>$ 60</strong>
-                            </div>
-                            <div class="card-body shadow-sm  bg-white rounded-bottom">
-                                <ul>
-                                    <li>Asistencia médica en caso de accidente | Europa: Hasta EUR 30,000 | Resto del mundo:
-                                        USD 30,000
-                                    </li>
-                                    <li>Asistencia en caso de robo o extravío de documentos, etc</li>
-                                    <li>Indemnización por pérdida de equipaje Complementario - USD 40 por Kg</li>
-                                </ul>
-                                <a href="#" class="d-block text-end">
-                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11.6713 2.10503L6.69472 0.0388191C6.57005 -0.012927 6.42992 -0.0129524 6.30528 0.0388191L1.32872 2.10503C1.13918 2.18374 1.01562 2.36879 1.01562 2.57402V5.08579C1.01562 8.54432 3.10601 11.6554 6.3081 12.9623C6.43109 13.0125 6.56889 13.0125 6.6919 12.9623C9.89394 11.6554 11.9844 8.54435 11.9844 5.08579V2.57402C11.9844 2.36879 11.8608 2.18374 11.6713 2.10503ZM10.9688 5.08579C10.9688 8.0259 9.24219 10.7325 6.5 11.9406C3.83109 10.7647 2.03125 8.10557 2.03125 5.08579V2.91304L6.5 1.05764L10.9688 2.91304V5.08579ZM5.93871 6.79747L8.12139 4.61482C8.3197 4.41652 8.64122 4.41649 8.83954 4.61482C9.03787 4.81315 9.03784 5.13467 8.83952 5.33297L6.29779 7.8747C6.09944 8.07305 5.77792 8.07297 5.57964 7.8747L4.16046 6.45551C3.96213 6.25719 3.96213 5.93567 4.16046 5.73737C4.35878 5.53906 4.6803 5.53904 4.87861 5.73737L5.93871 6.79747Z"
-                                            fill="#009AED" />
-                                    </svg> Ver cobertura de seguro</a>
-                                <a href="#" class="button">Agregar seguro</a>
-                            </div>
-                        </div>
-                    </div> -->
+
           <div class="clearfix"></div>
         </div>
+
         <!-- END CDR -->
 
-        <!-- TIPO DE PAGO -->
+        <!-- MEDIO DE PAGO DESKTOP -->
         <div class="row hideViewMobile">
           <div class="col-12 medioPagoMobile">
             <div class="card cardPagoMobile">
@@ -1880,7 +1279,8 @@
                   al final del formulario).
                 </span>
               </div>
-              <div class="card-body" formGroupName="formCard">
+
+              <div class="card-body" formGroupName="paymentMethodForm">
                 <!-- OPCIONES DE PAGO -->
                 <div class="row card_ py-4 justify-content-evenly cardMob" *ngIf="!mobile">
                   <input *ngFor="let chk of metodoPago" formControlName="select21" value="{{chk.value}}" type="radio"
@@ -1892,6 +1292,7 @@
                     <img class="marginL" src="./assets{{ chk.img }}" alt="">
                     <span>{{ chk.text }}</span>
                   </label>
+
                   <div class="clearfix"></div>
                 </div>
                 <!-- END OPCIONES DE PAGO -->
@@ -1905,93 +1306,89 @@
                       <img src="./assets/comprar/_american.png" alt="">
                       <img src="./assets/comprar/_dinners.png" alt="">
                     </div>
+
                     <div class="clearfix"></div>
                   </div>
+
                   <div class="row card_pasajero rowMobileCard">
                     <div class="col-6 viewMobileWidth">
                       <label for="names">Número de tarjeta</label>
-                      <input class="form-control" formControlName="numberCard"
-                        [ngClass]="getMessage(MSG_NUMBER_CARD) !== MSG_EMPTY ? 'isvalid' : ''"
-                        mask="0000-0000-0000-0000" placeholder="Ingrese el número de tarjeta." type="text" name="names">
-                      <span class="valid" *ngIf="getMessage(MSG_NUMBER_CARD) !== MSG_EMPTY">{{
-                        getMessage(MSG_NUMBER_CARD) }}</span>
+
+                      <input class="form-control" formControlName="numberCard" mask="0000-0000-0000-0000"
+                        placeholder="Ingrese el número de tarjeta." type="text" name="names">
                     </div>
+
                     <div class="col-6 viewMobileWidth">
                       <label for="lastname">Titular de la tarjeta</label>
-                      <input class="form-control" [ngClass]="getMessage(MSG_NAME_CARD) !== MSG_EMPTY ? 'isvalid' : ''"
-                        formControlName="nameCard" placeholder="El que figura en la tarjeta." type="text"
-                        name="lastname">
-                      <span class="valid" *ngIf="getMessage(MSG_NAME_CARD) !== MSG_EMPTY">{{
-                        getMessage(MSG_NAME_CARD) }}</span>
+
+                      <input class="form-control" formControlName="nameCard" placeholder="El que figura en la tarjeta."
+                        type="text" name="lastname">
                     </div>
+
                     <div class="clearfix"></div>
                   </div>
-                  <div class="row  card_pasajero rowMobileCard">
+
+                  <div class="row card_pasajero rowMobileCard">
                     <div class="col-6 viewMobileWidth">
                       <div class="row">
                         <div class="col-5">
                           <label for="names">Vencimiento</label>
-                          <input class="form-control" formControlName="expiredCard"
-                            [ngClass]="getMessage(MSG_EXPIRED_CARD) !== MSG_EMPTY ? 'isvalid' : ''" mask="9999/99"
-                            placeholder="AAAA/MM" type="text" name="names">
-                          <span class="valid" *ngIf="getMessage(MSG_EXPIRED_CARD) !== MSG_EMPTY">{{
-                            getMessage(MSG_EXPIRED_CARD) }}</span>
+
+                          <input class="form-control" formControlName="expiredCard" mask="9999/99" placeholder="MM/AA"
+                            type="text" name="names">
                         </div>
+
                         <div class="col-6">
                           <label for="lastname">Código de seguridad</label>
+
                           <input class="form-control" formControlName="ccvCard"
-                            [ngClass]="getMessage(MSG_CCV_CARD) !== MSG_EMPTY ? 'isvalid' : ''"
                             placeholder="El que figura en el documento de viaje." type="text" name="lastname">
-                          <span class="valid" *ngIf="getMessage(MSG_CCV_CARD) !== MSG_EMPTY">{{
-                            getMessage(MSG_CCV_CARD) }}</span>
                         </div>
+
                         <div class="col-1 colBoxInfo">
                           <div class="iconInfo toolTip">
                             <img src="./assets/comprar/card/info.png" alt="">
                             <div class="boxTooltip2">
                               <div class="descripTooltip">El código de seguridad esta localizado en los 3 últimos
-                                digitos detras de tu tarjeta</div>
+                                dígitos detras de tu tarjeta</div>
                             </div>
                           </div>
                         </div>
+
                         <div class="clearfix"></div>
                       </div>
                     </div>
+
                     <div class="col-6 viewMobileWidth">
                       <div class="row">
                         <div class="col-5">
                           <label for="names">Tipo de doc</label>
-                          <select formControlName="tipoDoc" class="form-select-f"
-                            [ngClass]="getMessage(MSG_TYPE_DOC) !== MSG_EMPTY ? 'isvalid' : ''">
-                            <option disabled>Seleccione</option>
+                          <select formControlName="tipoDoc" class="form-select-f">
+                            <option value="" selected>-- SELECCIONE --</option>
                             <option value="celular">DNI</option>
                             <option value="celular">Pasaporte</option>
                             <option value="fijo">C. Extranjería</option>
                           </select>
-                          <span class="valid" *ngIf="getMessage(MSG_TYPE_DOC) !== MSG_EMPTY">{{
-                            getMessage(MSG_TYPE_DOC) }}</span>
-                          <!-- <input class="form-control"  placeholder="" type="text" name="names"> -->
                         </div>
+
                         <div class="col-7">
                           <label for="lastname">N° de documento</label>
-                          <input class="form-control" formControlName="numDoc"
-                            [ngClass]="getMessage(MSG_NUM_DOC) !== MSG_EMPTY ? 'isvalid' : ''" placeholder="Ingresar N°"
-                            type="text" name="lastname">
-                          <span class="valid" *ngIf="getMessage(MSG_NUM_DOC) !== MSG_EMPTY">{{
-                            getMessage(MSG_NUM_DOC) }}</span>
+                          <input class="form-control" formControlName="numDoc" placeholder="Ingresar N°" type="text"
+                            name="lastname">
                         </div>
+
                         <div class="clearfix"></div>
                       </div>
                     </div>
+
                     <div class="clearfix"></div>
                   </div>
+
                   <div class="row card_pasajero rowMobileCard">
                     <div class="col-6 viewMobileWidth">
                       <label for="names">Cuotas</label>
-                      <!-- <input class="form-control" formControlName="" placeholder="Sin cuotas" type="text" name="names"> -->
-                      <select formControlName="feePay" class="form-select-f"
-                        [ngClass]="getMessage(MSG_QUOTE) !== MSG_EMPTY ? 'isvalid' : ''">
-                        <!-- <option disabled>Seleccione</option> -->
+                      <select formControlName="feePay" class="form-select-f">
+                        <option value="" selected>Seleccione</option>
                         <option value="0">Sin cuotas</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -2006,32 +1403,31 @@
                         <option value="11">11</option>
                         <option value="12">12</option>
                       </select>
-                      <span class="valid" *ngIf="getMessage(MSG_QUOTE) !== MSG_EMPTY">{{
-                        getMessage(MSG_QUOTE) }}</span>
                     </div>
+
                     <div class="col-6 viewMobileWidth">
                       <label for="lastname">Ciudad de facturación</label>
-                      <input class="form-control" formControlName="cityCard"
-                        [ngClass]="getMessage(MSG_CITY) !== MSG_EMPTY ? 'isvalid' : ''"
-                        placeholder="Del titular de la tarjeta." type="text" name="lastname">
-                      <span class="valid" *ngIf="getMessage(MSG_CITY) !== MSG_EMPTY">{{
-                        getMessage(MSG_CITY) }}</span>
+
+                      <input class="form-control" formControlName="cityCard" placeholder="Del titular de la tarjeta."
+                        type="text" name="lastname">
                     </div>
+
                     <div class="clearfix"></div>
                   </div>
+
                   <div class="row card_pasajero rowMobileCard pb-sm-4">
                     <div class="col-6 viewMobileWidth">
                       <label for="names">Dirección</label>
-                      <input class="form-control" formControlName="address"
-                        [ngClass]="getMessage(MSG_ADRESS) !== MSG_EMPTY ? 'isvalid' : ''"
-                        placeholder="Ingrese la dirección" type="text" name="names">
-                      <span class="valid" *ngIf="getMessage(MSG_ADRESS) !== MSG_EMPTY">{{
-                        getMessage(MSG_ADRESS) }}</span>
+
+                      <input class="form-control" formControlName="address" placeholder="Ingrese la dirección"
+                        type="text" name="names">
                     </div>
+
                     <div class="col-6 textDire viewMobileWidth">
                       <label for="names"></label>
                       <div>Emisión en max 24hrs aprox.</div>
                     </div>
+
                     <div class="clearfix"></div>
                   </div>
                 </div>
@@ -2050,6 +1446,7 @@
                         (click)="optionPay($event, true, 'banca');">Banca por internet o Móvil
                       </a>
                     </div>
+
                     <div class="col-4 viewMobileWidth">
                       <a class="btnBlue" value="false" [class.active]="id === 'movil'"
                         (click)="optionPay($event, false,'movil')">Agencias/Agentes</a>
@@ -2067,24 +1464,24 @@
                         <img src="./assets/comprar/pago/_bbva.png" alt="">
                       </div>
                     </div>
+
                     <div class="row">
                       <div class="col-6 offset-3 py-4 lessViewMob">
-                        <select class="selectBank form-select-f" formControlName="bankPay"
-                          [ngClass]="getMessage(MSG_BANK) !== MSG_EMPTY ? 'isvalid' : ''">
-                          <option [ngValue]="null" [disabled]="true">Selecciona tu banco
-                          </option>
-                          <option *ngFor="let b of banks" value="{{b.value}}">{{b.name}}
+                        <select formControlName="bankPay" class="selectBank form-select-f"
+                          [ngClass]="{isvalid : validatePaymentMethodForm('bankPay')}">
+
+                          <option value="" selected>Selecciona tu banco</option>
+                          <option *ngFor="let elem of banks" value="{{elem.value}}">
+                            {{ elem.name }}
                           </option>
                         </select>
 
-                        <span class="valid" *ngIf="getMessage(MSG_BANK) !== MSG_EMPTY">{{
-                          getMessage(MSG_BANK) }}</span>
-                        <!-- <select class="selectBank" formControlName="bankPay" placeholder="Selecciona tu banco">
-                                                    <option disabled selected>Seleccione</option>
-                                                    <option *ngFor="let bank of listBank" value="{{ bank.ID }}">{{ bank.Name }}</option>
-                                                </select> -->
+                        <span class="valid" *ngIf="validatePaymentMethodForm('bankPay')">
+                          Selecciona el banco
+                        </span>
                       </div>
                     </div>
+
                     <div class="row py-4 marginLat">
                       <div class="col-6 ">
                         <a class="btnRed" href="#">Emisión automática después del pago.</a>
@@ -2094,6 +1491,7 @@
                           pagar con SafetyPay online?</a>
                       </div>
                     </div>
+
                     <div class="row boxLimite">
                       <div class="titleLimite">
                         Tiempo Límite
@@ -2116,6 +1514,7 @@
                         <img src="./assets/comprar/pago/_bbva.png" alt="">
                         <img src="./assets/comprar/pago/_wester.png" alt="">
                       </div>
+
                       <div class="d-flex justify-content-center imgBanca">
                         <img src="./assets/comprar/pago/_arequipa.png" alt="">
                         <img src="./assets/comprar/pago/_huancayo.png" alt="">
@@ -2123,11 +1522,13 @@
                         <img src="./assets/comprar/pago/_tacna.png" alt="">
                         <img src="./assets/comprar/pago/_tambo.png" alt="">
                       </div>
+
                       <div class="row">
                         <div class="col-12 text-end mb-3">
                           <a href="#">¿Como pagar con SafetyPay online?</a>
                         </div>
                       </div>
+
                       <div class="row boxLimite">
                         <div class="titleLimite">
                           Tiempo Límite
@@ -2145,6 +1546,7 @@
               </div>
             </div>
           </div>
+
           <div class="clearfix"></div>
         </div>
         <!-- END TIPO DE PAGO -->
@@ -2155,6 +1557,7 @@
             <div>
               <img src="./assets/perfil/security.png" alt="">
             </div>
+
             <div class="rowContent">
               <div class="title">
                 Transacción segura
@@ -2167,7 +1570,7 @@
         </div>
         <!-- END TRANSACCIÓN SEGURA -->
 
-        <!-- FORM CONTACT -->
+        <!-- FORM CONTACT DESKTOP-->
         <div class="row hideViewMobile">
           <div class="col-12">
             <div class="card">
@@ -2181,26 +1584,32 @@
                 </span>
               </div>
 
-              <div formGroupName="formContact" class="card-body card_pasajero boxHideM shadow-none"
+              <div formGroupName="contactForm" class="card-body card_pasajero boxHideM shadow-none"
                 [class.activoBoxContact]="!showDataContacto">
+
                 <div class="row rowMobileCard">
                   <div class="col-6 viewMobileWidth">
                     <label for="names">Nombres</label>
-                    <input class="form-control" #nameContactForm placeholder="Ingresa tu nombre"
-                      [ngClass]="getMessage(MSG_NAME_CONTACT) != MSG_EMPTY ? 'isvalid' : ''"
-                      formControlName="nameContacto" type="text" value="" name="names">
-                    <span class="valid" *ngIf="getMessage(MSG_NAME_CONTACT) !== MSG_EMPTY">
-                      {{ getMessage(MSG_NAME_CONTACT) }}
+
+                    <input class="form-control" #nameContactForm placeholder="Ingresa tu(s) nombre(s)"
+                      [ngClass]="{isvalid : validateContactForm('nameContacto')}" formControlName="nameContacto"
+                      type="text" value="" name="names">
+
+                    <span class="valid" *ngIf="validateContactForm('nameContacto')">
+                      Ingresa tus nombres de contacto
                     </span>
                   </div>
 
                   <div class="col-6 viewMobileWidth">
                     <label for="lastname">Apellidos</label>
-                    <input class="form-control" #lastNameContactForm placeholder="Ingresa tu apellido"
-                      [ngClass]="getMessage(MSG_LASTNAME_CONTACT) !== MSG_EMPTY ? 'isvalid' : ''"
-                      formControlName="lastnameContacto" type="text" name="lastname">
-                    <span class="valid" *ngIf="getMessage(MSG_LASTNAME_CONTACT) !== MSG_EMPTY">{{
-                      getMessage(MSG_LASTNAME_CONTACT) }}</span>
+
+                    <input class="form-control" #lastNameContactForm placeholder="Ingresa tus apellidos"
+                      [ngClass]="{isvalid : validateContactForm('lastnameContacto')}" formControlName="lastnameContacto"
+                      type="text" name="lastname">
+
+                    <span class="valid" *ngIf="validateContactForm('lastnameContacto')">
+                      Ingresa tus apellidos de contacto
+                    </span>
                   </div>
 
                   <div class="clearfix"></div>
@@ -2209,20 +1618,26 @@
                 <div class="row rowMobileCard">
                   <div class="col-6 viewMobileWidth">
                     <label for="Email">Email</label>
+
                     <input class="form-control" placeholder="Ingresa tu email de contacto"
-                      [ngClass]="getMessage(MSG_EMAIL_CONTACT) !== MSG_EMPTY ? 'isvalid' : ''"
-                      formControlName="mailContacto" type="text" name="Email">
-                    <span class="valid" *ngIf="getMessage(MSG_EMAIL_CONTACT) !== MSG_EMPTY">{{
-                      getMessage(MSG_EMAIL_CONTACT) }}</span>
+                      [ngClass]="{isvalid : validateContactForm('mailContacto')}" formControlName="mailContacto"
+                      type="text">
+
+                    <span class="valid" *ngIf="validateContactForm('mailContacto')">
+                      {{ contactEmailErrorMessage }}
+                    </span>
                   </div>
 
                   <div class="col-6 viewMobileWidth">
                     <label for="EmailC">Confirma tu email</label>
+
                     <input class="form-control" formControlName="mailConfirmContacto"
-                      [ngClass]="getMessage(MSG_EMAILC_CONTACT) !== MSG_EMPTY ? 'isvalid' : ''"
-                      placeholder="Ingresa tu email" type="text" name="EmailC">
-                    <span class="valid" *ngIf="getMessage(MSG_EMAILC_CONTACT) !== MSG_EMPTY">{{
-                      getMessage(MSG_EMAILC_CONTACT) }}</span>
+                      [ngClass]="{isvalid : validateContactForm('mailConfirmContacto')}"
+                      placeholder="Ingresa el mismo email" type="text">
+
+                    <span class="valid" *ngIf="validateContactForm('mailConfirmContacto')">
+                      Ingresa el mismo email
+                    </span>
                   </div>
 
                   <div class="clearfix"></div>
@@ -2231,19 +1646,23 @@
                 <div class="row rowMobileCard">
                   <div class="col-6 viewMobileWidth">
                     <label for="typePhone0">Tipo de teléfono</label>
-                    <select formControlName="typePhone0" class="form-select-f" name="typePhone0"
-                      [ngClass]="getMessage(MSG_EMAILC_CONTACT) !== MSG_EMPTY ? 'isvalid' : ''">
+
+                    <select formControlName="typePhone0" class="form-select-f"
+                      [ngClass]="{isvalid : validateContactForm('typePhone0')}">
                       <option value="1">Fijo</option>
                       <option value="2">Celular</option>
                     </select>
-                    <span class="valid" *ngIf="getMessage(MSG_TYPEPHONE_CONTACT) !== MSG_EMPTY">{{
-                      getMessage(MSG_TYPEPHONE_CONTACT) }}</span>
+
+                    <span class="valid" *ngIf="validateContactForm('typePhone0')">
+                      Selecciona el tipo de teléfono
+                    </span>
                   </div>
 
                   <div class="col-6 viewMobileWidth">
                     <div class="row">
                       <div class="col-5 width110">
                         <label for="code0">Código de país</label>
+
                         <div class="iconBandera">
                           <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -2269,94 +1688,64 @@
                             </defs>
                           </svg>
                         </div>
-                        <input formControlName="code0" class="form-control"
-                          [ngClass]="getMessage(MSG_CODE0_CONTACT) !== MSG_EMPTY ? 'isvalid' : ''" placeholder=""
-                          type="text" name="code0">
-                        <span class="valid" *ngIf="getMessage(MSG_CODE0_CONTACT) !== MSG_EMPTY">{{
-                          getMessage(MSG_CODE0_CONTACT) }}</span>
+
+                        <input type="text" formControlName="code0" class="form-control"
+                          [ngClass]="{isvalid : validateContactForm('code0')}" placeholder="">
+
+                        <span class="valid" *ngIf="validateContactForm('code0')">
+                          Selecciona el código de país
+                        </span>
                       </div>
+
                       <div class="col-7">
                         <label for="numberPhone0">Número de teléfono</label>
-                        <input formControlName="numberPhone0" maxlength="9" class="form-control"
-                          [ngClass]="getMessage(MSG_PHONE0_CONTACT) !== MSG_EMPTY ? 'isvalid' : ''"
-                          placeholder="Ingresa N°" type="text" name="numberPhone0">
-                        <span class="valid" *ngIf="getMessage(MSG_PHONE0_CONTACT) !== MSG_EMPTY">{{
-                          getMessage(MSG_PHONE0_CONTACT) }}</span>
+
+                        <input type="text" formControlName="numberPhone0" maxlength="10" class="form-control"
+                          [ngClass]="{isvalid : validateContactForm('numberPhone0')}" placeholder="Ingresa N°">
+
+                        <span class="valid" *ngIf="validateContactForm('numberPhone0')">
+                          Ingresa tu número de teléfono
+                        </span>
                       </div>
+
                       <div class="clearfix"></div>
                     </div>
                   </div>
                   <div class="clearfix"></div>
                 </div>
 
-                <!-- FACTURA -->
-                <div formArrayName="recibo" *ngIf="getArrayRecibo()">
-                  <div [formGroupName]="i" *ngFor="let rec of getArrayRecibo(); let i = index"
-                    class="row rowMobileCard">
-                    <div class="col-12 viewMobileWidth">
-                      <div class="row">
-                        <div class="col-4">
-                          <label for="ruc">Ruc</label>
-                          <input formControlName="ruc" class="form-control" placeholder="Ingresa N° deRuc" type="text"
-                            name="ruc">
-                        </div>
-                        <div class="col-8">
-                          <label for="dirección">Dirección</label>
-                          <input formControlName="direccion" class="form-control" placeholder="Ca. / Jr. / Av."
-                            type="text" name="dirección">
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                    </div>
-                    <div class="clearfix"></div>
+                <div class="row rowMobileCard" *ngIf="showInvoiceData">
+                  <div class="col-6 viewMobileWidth">
+                    <label for="ruc">RUC N°</label>
+                    <input type="text" formControlName="ruc" class="form-control"
+                      [ngClass]="{isvalid : validateContactForm('ruc')}" placeholder="Ingresa N° de Ruc">
+
+                    <span class="valid" *ngIf="validateContactForm('ruc')">
+                      {{ contactRUCErrorMessage }}
+                    </span>
                   </div>
+
+                  <div class="col-6 viewMobileWidth">
+                    <label for="dirección">Dirección</label>
+                    <input formControlName="direccion" class="form-control"
+                      [ngClass]="{isvalid : validateContactForm('direccion')}" placeholder="Ca. / Jr. / Av.">
+
+                    <span class="valid" *ngIf="validateContactForm('direccion')">
+                      Ingresa una dirección
+                    </span>
+                  </div>
+
+                  <div class="clearfix"></div>
                 </div>
 
                 <div class="row rowMobileCard">
                   <div class="col-6 viewMobileWidth">
                     <div class="form-check">
-                      <input class="form-check-input" (change)="toFactura($event)" formControlName="chkFac"
-                        type="checkbox" id="chkFac" value="option1">
+                      <input class="form-check-input" formControlName="chkFac" type="checkbox" id="chkFac"
+                        (change)="requestInvoice($event)">
                       <label class="form-check-label" for="chkFac">Solicitar factura</label>
                     </div>
                   </div>
-                  <div formArrayName="phones" *ngIf="getArrayPhone()">
-                    <div [formGroupName]="i" *ngFor="let phon of getArrayPhone(); let i = index"
-                      class="row rowMobileCard">
-                      <!-- <hr> -->
-                      <div class="col-6 viewMobileWidth">
-                        <label for="typePhone">Tipo de teléfono</label>
-                        <select formControlName="typePhone" name="typePhone" class="form-select-f">
-                          <option value="celular">Celular</option>
-                          <option value="fijo">Fijo</option>
-                        </select>
-                      </div>
-                      <div class="col-6 viewMobileWidth">
-                        <div class="row">
-                          <div class="col-5">
-                            <label for="code">Código de país</label>
-                            <input formControlName="code" class="form-control" placeholder="" type="text" name="code">
-                          </div>
-                          <div class="col-7">
-                            <label for="numberPhone">Número de teléfono</label>
-                            <input formControlName="numberPhone" class="form-control" placeholder="Ingresa N°"
-                              type="text" name="numberPhone">
-                          </div>
-                          <div class="clearfix"></div>
-                        </div>
-                      </div>
-
-                      <div class="clearfix"></div>
-
-                      <!-- <div class="col-6 viewMobileWidth colFon" *ngIf="getArrayPhone().length > 0">
-                        <a (click)="removePhone(i)" class="btnEliminar">- Eliminar teléfono</a>
-                      </div> -->
-                    </div>
-                  </div>
-
-                  <!-- <div class="col-6 offset-6 viewMobileWidth colFono mTop">
-                    <a (click)="addPhone()">+ Agregar otro teléfono</a>
-                  </div> -->
 
                   <div class="clearfix"></div>
                 </div>
@@ -2364,6 +1753,7 @@
             </div>
 
           </div>
+
           <div class="col-12 ">
             <div class="checkPopup shadow-none">
               <div class="row rowMobileCard">
@@ -2371,27 +1761,36 @@
                   <div class="form-check form-check-inline me-0">
                     <input class="form-check-input" type="checkbox" formControlName="chkPolity" id="chkPolity"
                       value="option1">
-                    <label class="form-check-label" for="chkPolity">He leído y acepto la
-                      <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#politicaModal">política de protección
-                        de datos
-                        personales.
+
+                    <label class="form-check-label" for="chkPolity">He leído y acepto las
+                      <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#politicaModal">políticas de protección
+                        de datos personales.
                       </a>
                     </label>
                   </div>
-                  <span class="valid"
-                    *ngIf="getMessage(MSG_CHK_POLITY) !== MSG_EMPTY">{{getMessage(MSG_CHK_POLITY)}}</span>
+
+                  <span class="valid" *ngIf="validateInsuranceForm('chkPolity')">
+                    Debe de aceptar las póliticas de porotección de datos personales.
+                  </span>
                 </div>
+
                 <div class="col-6 viewMobileWidth tex-end">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" formControlName="chkInfo" id="chkInfo"
                       value="option1">
+
                     <label class="form-check-label" for="chkInfo">Autorizo el uso de mi Información
-                      para la Publicidad.</label>
+                      para la publicidad.</label>
                   </div>
-                  <span class="valid" *ngIf="getMessage(MSG_CHK_INFO) !== MSG_EMPTY">{{getMessage(MSG_CHK_INFO)}}</span>
+
+                  <span class="valid" *ngIf="validateInsuranceForm('chkInfo')">
+                    Debe de aceptar el uso de su información para la publicidad.
+                  </span>
                 </div>
+
                 <div class="clearfix"></div>
               </div>
+
               <div class="row">
                 <div class="col-12 footerLink mt-md-4 mb-md-5">
                   Al realizar esta compra, acepto los
@@ -2407,6 +1806,24 @@
               </div>
             </div>
           </div>
+
+          <!-- <pre>Form valid: {{ formShop.valid }}</pre>
+
+          <pre>Form values</pre>
+          <pre>{{ formShop.value | json }}</pre>
+
+          <pre>Form errors</pre>
+          <pre>{{ formShop.errors | json }}</pre>
+
+
+          <pre>Form valid: {{ contactForm.valid }}</pre>
+
+          <pre>Form values</pre>
+          <pre>{{ contactForm.value | json }}</pre>
+
+          <pre>Form errors</pre>
+          <pre>{{ contactForm.errors | json }}</pre> -->
+
           <div class="row rowMobileCard ">
             <div class="col-12 contentCenterMobile">
               <button (click)="buyInsurance()" class="px-5">Comprar</button>
@@ -2430,6 +1847,7 @@
                 <img src="./assets/footer/flecha.png" alt="" class="iconFlecha">
               </a>
             </h2>
+
             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
               aria-labelledby="panelsStayOpen-headingOne">
               <div class="accordion-body" *ngFor="let price of resultJson.passenger">
@@ -2443,17 +1861,10 @@
                     <span class="price_new">{{safe0Json?.monedaLista}} {{ safe0Json?.DsctoPromcional === null ?
                       safe0Json?.precioEmisionLocal : '0'}}</span>
                   </div>
+
                   <div class="clearfix"></div>
                 </div>
-                <!-- <div class="row">
-                  <div class="col-7">
-                    <span class="textDesc">Descuento</span>
-                  </div>
-                  <div class="col-5 text-end">
-                    <span class="price_Desc">PEN -55,55</span>
-                  </div>
-                  <div class="clearfix"></div>
-                </div> -->
+
                 <div class="row" *ngIf="safe0Json?.DsctoPromcional !== null">
                   <div class="col-7">
                     <span class="textDesc">Descuento </span>
@@ -2466,15 +1877,18 @@
                 </div>
               </div>
             </div>
+
             <div class="row totalItem">
               <div class="col-7">
                 <span class="price_end">TOTAL A PAGAR</span>
               </div>
+
               <div class="col-5 text-end">
                 {{safe0Json?.monedaLista}}
                 <span class="price_end_number">{{ safe0Json?.precioEmisionLocal * resultJson.passenger.length |
                   currency: 'USD'}}</span>
               </div>
+
               <div class="clearfix"></div>
             </div>
           </div>
@@ -2492,6 +1906,7 @@
                   <img src="./assets/footer/flecha.png" alt="" class="iconFlecha">
                 </a>
               </h2>
+
               <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
                 aria-labelledby="panelsStayOpen-headingOne">
                 <div class="accordion-body">
@@ -2513,6 +1928,7 @@
                   <!-- <div class="separarBox"></div> -->
                 </div>
               </div>
+
               <div class="footerDet">
                 <div class="row">
                   <div class="col-7">
@@ -2524,6 +1940,7 @@
                   </div>
                   <div class="clearfix"></div>
                 </div>
+
                 <div class="row">
                   <div class="col-7">
                     <span class="price_reference">Precio referencial en soles.</span>
@@ -2533,6 +1950,7 @@
                       "+detalleVuelos.pricingInfo.precioSoles}}
                     </span>
                   </div>
+
                   <div class="clearfix"></div>
                 </div>
               </div>
@@ -2577,6 +1995,7 @@
                       fill="#4B4B4B" />
                   </svg>
                 </div>
+
                 <div class="col-10 ps-0">
                   <h1 class="d-inline">
                     {{this.detalleVuelos.segmentoDeparture.general.origen}}
@@ -2591,8 +2010,10 @@
                   </h1>
                   <span class="d-block">{{filtroVueloJson | filtroDetalle}}</span>
                 </div>
+
                 <div class="clearfix"></div>
               </div>
+
               <div class="viajero mt-3">
                 <div class="row">
                   <div class="col-6">
@@ -2604,8 +2025,10 @@
                   <div class="col-6 text-end">
                     <img [src]="detalleVuelos.segmentoDeparture.detalle[0].vuelo.logo" appImgDefault alt="">
                   </div>
+
                   <div class="clearfix"></div>
                 </div>
+
                 <div class="row py-4">
                   <div class="col-3 pr-0">
                     <h3 class="destinos">
@@ -2669,6 +2092,7 @@
                                         <div class="clearfix"></div>
                                     </div> -->
                   </div>
+
                   <div class="col-3 pr-0 text-end pl-0">
                     <h3 class="destinos">
                       {{detalleVuelos.segmentoDeparture.detalle[detalleVuelos.segmentoDeparture.detalle.length
@@ -2679,8 +2103,10 @@
                       -1].llegada.hora}}
                     </span>
                   </div>
+
                   <div class="clearfix"></div>
                 </div>
+
                 <div class="row">
                   <div class="col-6 equipaje">
 
@@ -2697,6 +2123,7 @@
                           fill="#54D834" />
                       </svg>
                     </div>
+
                     <div class="d-inline-flex align-items-end _not"
                       *ngIf="!detalleVuelos.segmentoDeparture.general.cabina">
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2711,6 +2138,7 @@
                           fill="#83898F" />
                       </svg>
                     </div>
+
                     <div class="d-inline-flex align-items-end _not"
                       *ngIf="!detalleVuelos.segmentoDeparture.general.piezas">
                       <svg width="13" height="22" viewBox="0 0 13 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2722,6 +2150,7 @@
                           fill="#83898F" />
                       </svg>
                     </div>
+
                     <div class="d-inline-flex align-items-end" *ngIf="detalleVuelos.segmentoDeparture.general.piezas">
                       <svg width="13" height="22" viewBox="0 0 13 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.09375 6.875H10.4688V7.5625H9.09375V6.875Z" fill="#54D834" />
@@ -2732,18 +2161,21 @@
                           fill="#54D834" />
                       </svg>
                     </div>
-
                   </div>
+
                   <div class="col-6 text-end">
                     <!-- <span  class="time_duration" data-bs-toggle="modal" data-bs-target="#modalDetVuelo">{{segment.flightDuration | horaPipe}}</span> -->
 
                     <a (click)="selectVuelo(true)" data-bs-toggle="modal" data-bs-target="#modalDetVuelo"
-                      class="font-12 ver">ver detalles</a>
+                      class="font-12 ver">Ver detalles</a>
                   </div>
+
                   <div class="clearfix"></div>
                 </div>
+
                 <hr *ngIf="filtroVueloJson.flightType === 2 || filtroVueloJson.flightType === 3">
               </div>
+
               <div class="viajero"
                 *ngIf="(filtroVueloJson.flightType === 2 || filtroVueloJson.flightType === 3) && detalleVuelos.segmentoReturn">
                 <div class="row">
@@ -2753,18 +2185,22 @@
                       detalleVuelos.segmentoReturn.detalle[0].salida.dia}}
                     </span>
                   </div>
+
                   <div class="col-6 text-end">
                     <img style="max-width:50px" [src]="detalleVuelos.segmentoReturn.detalle[0].vuelo.logo" appImgDefault
                       alt="">
                   </div>
+
                   <div class="clearfix"></div>
                 </div>
+
                 <div class="row py-4">
                   <div class="col-3 pr-0">
                     <h3 class="destinos">
                       {{detalleVuelos.segmentoReturn.detalle[0].salida.cod_ciudad}}</h3>
                     <span class="destinos">{{detalleVuelos.segmentoReturn.detalle[0].salida.hora}}</span>
                   </div>
+
                   <div class="col-6 text-center">
                     <div class="row">
                       <ng-container *ngIf="detalleVuelos.segmentoReturn.general.escalas.length === 0">
@@ -2822,6 +2258,7 @@
                                         <div class="clearfix"></div>
                                     </div> -->
                   </div>
+
                   <div class="col-3 pr-0 text-end pl-0">
                     <h3 class="destinos">{{this.detalleVuelos.segmentoReturn.general.destino}}</h3>
                     <span
@@ -2829,8 +2266,10 @@
                       -1].llegada.hora}}
                     </span>
                   </div>
+
                   <div class="clearfix"></div>
                 </div>
+
                 <div class="row">
                   <div class="col-6 equipaje">
 
@@ -2847,6 +2286,7 @@
                           fill="#54D834" />
                       </svg>
                     </div>
+
                     <div class="d-inline-flex align-items-end _not"
                       *ngIf="!detalleVuelos.segmentoReturn.general.cabina">
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2861,6 +2301,7 @@
                           fill="#83898F" />
                       </svg>
                     </div>
+
                     <div class="d-inline-flex align-items-end _not"
                       *ngIf="!detalleVuelos.segmentoReturn.general.piezas">
                       <svg width="13" height="22" viewBox="0 0 13 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2872,6 +2313,7 @@
                           fill="#83898F" />
                       </svg>
                     </div>
+
                     <div class="d-inline-flex align-items-end" *ngIf="detalleVuelos.segmentoReturn.general.piezas">
                       <svg width="13" height="22" viewBox="0 0 13 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.09375 6.875H10.4688V7.5625H9.09375V6.875Z" fill="#54D834" />
@@ -2883,9 +2325,10 @@
                       </svg>
                     </div>
                   </div>
+
                   <div class="col-6 text-end">
                     <a (click)="selectVuelo(false)" data-bs-toggle="modal" data-bs-target="#modalDetVuelo"
-                      class="font-12 ver">ver detalles</a>
+                      class="font-12 ver">Ver detalles</a>
                   </div>
                   <div class="clearfix"></div>
                 </div>
@@ -2929,53 +2372,9 @@
         </div>
         <!-- END CUPON -->
 
-        <!-- SLIDER -->
-        <div class="boxOferta">
-          <div class="ofertaRow zoom">
-            <img class="imgFondo" src="./assets/hotel.jpg" alt="">
-            <div class="flotante">
-              <div class="rowFlota">USD 85
-                <div class="line"></div>
-              </div>
-              <div class="rowFlota red">USD 46</div>
-              <div class="rowFlota descrip">precio por noche, por hab.</div>
-            </div>
-          </div>
-
-          <div class="ofertaRow title">
-            Hotel El Ejecutivo by Reforma Avenue
-          </div>
-          <div class="ofertaRow d-flex">
-            <div class="col-6">
-              <img height="18px" width="18px" src="./assets/star-llena.png" alt="">
-              <img height="18px" width="18px" src="./assets/star-llena.png" alt="">
-              <img height="18px" width="18px" src="./assets/star-llena.png" alt="">
-              <img height="18px" width="18px" src="./assets/star-mitad.png" alt="">
-              <img height="18px" width="18px" src="./assets/star-vacia.png" alt="">
-            </div>
-            <div class="col-6 d-flex justify-content-end">
-              <img class="iconOferta" height="20px" width="20px" src="./assets/icon-cart.png" alt="">
-              <img class="iconOferta" height="20px" width="20px" src="./assets/icon-cubierto.png" alt="">
-              <img class="iconOferta" height="20px" width="20px" src="./assets/icon-copa.png" alt="">
-              <img class="iconOferta" height="20px" width="20px" src="./assets/icon-wifi.png" alt="">
-            </div>
-          </div>
-          <div class="ofertaRow descrip">
-            <span>Evaluación de los huéspedes</span>
-            <br>
-            <span>8.2 de 10</span>
-          </div>
-        </div>
-        <!-- END SLIDER -->
-
-        <!-- MÁS OFERTAS -->
-        <div class="d-flex justify-content-center py-3">
-          <button class="btnVerMas">Ver más ofertas</button>
-        </div>
-        <!-- END MÁS OFERTAS -->
-
       </div>
       <!-- END DERECHA -->
+
       <div class="clearfix"></div>
     </div>
   </form>
@@ -3195,28 +2594,10 @@
               </tbody>
             </table>
           </div>
-
-          <!-- <div class="row py-3 footerPopup">
-            <div class="col-3 borderRight">
-              <p>Total</p>
-              <span>{{safe0Json?.monedaLista}}
-                <strong>{{pop.change}}</strong>
-              </span> -->
-          <!-- <button (click)="shop(pop.idProducto)">Comprar</!-->
-          <!-- </div> -->
-          <!-- <div class="col-9 alignFooterPopup">
-                            <p class="otroPlan">otros planes:</p>
-                            <div class="row planBox">
-                                <div class="col-3" *ngFor="let p of plansAC; let index = index">
-                                    <button (click)="data(p)" *ngIf="index < 5" class="planes {{ p?.clase }}">{{ p?.nombreProducto.substr(0, 9) }}</button>
-                                </div>
-                            </div> 
-                        </div>-->
-          <!-- </div>
-        </div> -->
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <app-modal-detalle-vuelo [modalDetalle]="modalDetalle"></app-modal-detalle-vuelo>
+<app-modal-detalle-vuelo [modalDetalle]="modalDetalle"></app-modal-detalle-vuelo>

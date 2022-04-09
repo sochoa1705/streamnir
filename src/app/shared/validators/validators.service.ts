@@ -7,7 +7,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 export class ValidatorsService {
 
   public lettersPattern: string = "^[a-zA-ZÁ-ú ]+$";
-  public emailPattern: string = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";//"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
+  public emailPattern: string = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";//"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
   public alphanumericPattern: string = "^[a-zA-Z0-9 ]+$";
   public passwordPattern: string = "^(?=.*[0-9])(?=.*[a-zA-Z]).{6,10}$";
   public digitsPattern: string = "^[0-9]+$";
@@ -18,8 +18,8 @@ export class ValidatorsService {
 
     return (formGroup: AbstractControl): ValidationErrors | null => {
 
-      const valueField1 = formGroup.get(field1)?.value;
-      const valueField2 = formGroup.get(field2)?.value;
+      const valueField1 = formGroup.get(field1)?.value.toUpperCase();
+      const valueField2 = formGroup.get(field2)?.value.toUpperCase();
 
       if (valueField1 !== valueField2) {
         formGroup.get(field2)?.setErrors({ notEquals: true });

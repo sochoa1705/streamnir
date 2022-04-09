@@ -1,6 +1,6 @@
 
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OffersService } from 'src/app/Services/mock/offers.service';
 import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface';
@@ -24,6 +24,8 @@ import { SafetyPayRQ } from 'src/app/Models/seguros/safetypayRQ.interface';
 import { PaymentService } from 'src/app/api/api-payment/services';
 import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/models';
 import * as moment from 'moment';
+import { PreferenceService } from 'src/app/Services/preference/preference.service';
+import { ValidatorsService } from 'src/app/shared/validators/validators.service';
 
 interface Methods {
   id: string;
@@ -41,54 +43,31 @@ interface Methods {
 })
 export class ComprarComponent implements OnInit, AfterViewInit {
 
-  formShop!: FormGroup
-  errors: any[] = []
-  MSG_EMPTY: string = 'none'
+  formShop!: FormGroup;
+  paymentMethodForm: FormGroup;
+  contactForm: FormGroup;
+
+  errors: any[] = [];
+  MSG_EMPTY: string = 'none';
   //COBERTURA
-  coverageDisplay: boolean = false
-  unidadNegocio: any
-  businessunit: any
+
+  showInvoiceData: boolean = false;
+
+
+  coverageDisplay: boolean = false;
+  unidadNegocio: any;
+  businessunit: any;
   // coverageList: any
-  coverageL: any
-  asistMedic: any
-  pop: any
-  listBank: any
-  timeShow!: number
-  ShowComponentTime!: boolean
+  coverageL: any;
+  asistMedic: any;
+  pop: any;
+  listBank: any;
+  timeShow!: number;
+  ShowComponentTime!: boolean;
 
-  MSG_NAME_CUSTOMER: string = 'nameCustomer'
-  MSG_LAST_NAME_CUSTOMER: string = 'lastNameCustomer'
-  MSG_DAY_CUSTOMER: string = 'dayCustomer'
-  MSG_MONTH_CUSTOMER: string = 'monthCustomer'
-  MSG_YEAR_CUSTOMER: string = 'yearCustomer'
-  MSG_NATIONALITY_CUSTOMER: string = 'nationalityCustomer'
-  MSG_TYPE_DOC_CUSTOMER: string = 'typeDocCustomer'
-  MSG_NUM_DOC_CUSTOMER: string = 'numDocCustomer'
-  MSG_SEX: string = 'sexCustomer'
+  countries: Array<any> = [];
+  months: Array<any> = [];
 
-  MSG_BANK: string = 'bankPay'
-
-  MSG_NUMBER_CARD: string = 'numberCard'
-  MSG_NAME_CARD: string = 'nameCard'
-  MSG_EXPIRED_CARD: string = 'expiredCard'
-  MSG_CCV_CARD: string = 'ccvCard'
-  MSG_TYPE_DOC: string = 'tipoDoc'
-  MSG_NUM_DOC: string = 'numDoc'
-  MSG_QUOTE: string = 'feePay'
-  MSG_CITY: string = 'cityCard'
-  MSG_ADRESS: string = 'address'
-
-  MSG_NAME_CONTACT: string = 'nameContacto'
-  MSG_LASTNAME_CONTACT: string = 'lastnameContacto'
-  MSG_EMAIL_CONTACT: string = 'mailContacto'
-  MSG_EMAILC_CONTACT: string = 'mailConfirmContacto'
-  MSG_TYPEPHONE_CONTACT: string = 'typePhone0'
-  MSG_CODE0_CONTACT: string = 'code0'
-  MSG_PHONE0_CONTACT: string = 'numberPhone0'
-  MSG_CHK_POLITY: string = 'chkPolity'
-  MSG_CHK_INFO: string = 'chkInfo'
-
-  listYears: string[] = []
   current: any
   detailPay!: string
   filter!: string
@@ -108,6 +87,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   filtroVuelo: any
   filtroVueloJson: IFiltroVuelo;
   banca: boolean = true
+
   banks = [
     { name: 'Banco de Crédito', value: 1005 },
     { name: 'Interbank', value: 1011 },
@@ -118,7 +98,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     { name: 'Caja Huancayo', value: 8250 },
     { name: 'Caja Tacna', value: 1024 },
     { name: 'Caja Trujillo', value: 1025 }
-  ]
+  ];
 
   metodoPago: Methods[]
 
@@ -145,10 +125,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   ipCliente: any
   bankSteps: any
   paymentData: any
-  @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>
 
+  @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>
   @ViewChild('nameContactForm', { static: false }) inputNameContactForm!: ElementRef<HTMLInputElement>
   @ViewChild('lastNameContactForm', { static: false }) inputLastNameContactForm!: ElementRef<HTMLInputElement>
+
   nombre: string
   apellido: string
   showAgregarAdulto: boolean = true
@@ -163,7 +144,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     private _secureBookingService: SecureBookingService,
     public cardPaymentService: CardPaymentService,
     public generatePayService: GeneratePayService,
-    private _paymentService: PaymentService
+    private _paymentService: PaymentService,
+    private _preferencesService: PreferenceService,
+    private _validatorsService: ValidatorsService,
+    private _formBuilder: FormBuilder
   ) {
     // COBERTURA
     this.coverageList = localStorage.getItem('coverage')
@@ -207,6 +191,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (!this.current) {
       this._router.navigate(['/seguros'])
     }
+
     this.selectedPay = (this.current['filter'] === 'filter') ? 'tarjeta' : 'safetypay'
     if (this.current['filter'] === 'filter') {
       this.metodoPago = [
@@ -225,60 +210,156 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     toUp();
     this.loadShop();
 
+    this.months = [
+      { value: "01", name: "Enero" },
+      { value: "02", name: "Febrero" },
+      { value: "03", name: "Marzo" },
+      { value: "04", name: "Abril" },
+      { value: "05", name: "Mayo" },
+      { value: "06", name: "Junio" },
+      { value: "07", name: "Julio" },
+      { value: "08", name: "Agosto" },
+      { value: "09", name: "Septiembre" },
+      { value: "10", name: "Octubre" },
+      { value: "11", name: "Noviembre" },
+      { value: "12", name: "Diciembre" }
+    ];
+
     this.formShop = this.createInsuranceForm();
 
     console.log(this.resultJson);
     console.log(this.filtroVueloJson);
 
-    let pasajeros = this.resultJson !== null ? this.resultJson['ClienteCotizacion'] : this.filtroVueloJson['pasajeros'];
+    const pasajeros = this.resultJson !== null ? this.resultJson['ClienteCotizacion'] : this.filtroVueloJson['pasajeros'];
     console.log(pasajeros);
 
-    for (const i of pasajeros) {
-      this.addCustomers(i.item);
-    }
+    pasajeros.forEach((element: any) => {
+      let formGroup = this.createCustomerForm();
 
-    this.selectYear();
+      formGroup.patchValue(element);
 
+      (<FormArray>this.formShop.controls['customers']).push(formGroup);
+    });
 
-    debugger
+    this.getCountries();
 
-    if (this.current['filter'] !== 'filter') {
-      this.listCoverage();
-    }
+    if (this.current['filter'] !== 'filter') this.listCoverage();
+  }
+
+  getCountries() {
+    this._preferencesService.getCountries().subscribe({
+      next: response => {
+        this.countries = response['Result'];
+      }
+    })
+  }
+
+  createPaymentMethodForm(): FormGroup {
+    return this._formBuilder.group({
+      bankPay: ['', [Validators.required]],
+      select21: [this.current['filter'] === 'filter' ? 'TARJETA' : 'SAFETYPAY'],
+      numberCard: [""],
+      nameCard: [""],
+      expiredCard: [""],
+      ccvCard: [""],
+      tipoDoc: [""],
+      numDoc: [""],
+      feePay: [""],
+      cityCard: [""],
+      address: [""]
+    });
+  }
+
+  createContactForm(): FormGroup {
+    return this._formBuilder.group({
+      chkCustomer: [""],
+      nameContacto: [this.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(this._validatorsService.lettersPattern)]],
+      lastnameContacto: [this.apellido, [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(this._validatorsService.lettersPattern)]],
+      mailContacto: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]],
+      mailConfirmContacto: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]],
+      typePhone0: ['', [Validators.required]],
+      code0: ['511', [Validators.required]],
+      numberPhone0: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(12), Validators.pattern(this._validatorsService.digitsPattern)]],
+      ruc: ['', [Validators.required, Validators.minLength(11), Validators.pattern(this._validatorsService.digitsPattern)]],
+      direccion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
+      chkFac: [false]
+    }, {
+      validators: [
+        this._validatorsService.equalFields('mailContacto', 'mailConfirmContacto'),
+        this._validatorsService.validateRUC('ruc')
+      ]
+    });
+  }
+
+  createCustomerForm(): FormGroup {
+    return this._formBuilder.group({
+      typeCustomer: [""],
+      nameCustomer: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(this._validatorsService.lettersPattern)]],
+      lastNameCustomer: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(this._validatorsService.lettersPattern)]],
+      dayCustomer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.min(1), Validators.max(31), Validators.pattern(this._validatorsService.digitsPattern)]],
+      monthCustomer: ['', [Validators.required]],
+      yearCustomer: ['', [Validators.required]],
+      nationalityCustomer: ['', [Validators.required]],
+      typeDocCustomer: ['', [Validators.required]],
+      numDocCustomer: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this._validatorsService.digitsPattern)]],
+      sexCustomer: ['', [Validators.required]]
+    });
   }
 
   createInsuranceForm(): FormGroup {
-    return new FormGroup({
-      customers: new FormArray([]),
-      formCard: new FormGroup({
-        bankPay: new FormControl(),
-        select21: new FormControl(this.current['filter'] === 'filter' ? 'TARJETA' : 'SAFETYPAY'),
-        numberCard: new FormControl(),
-        nameCard: new FormControl(),
-        expiredCard: new FormControl(),
-        ccvCard: new FormControl(),
-        tipoDoc: new FormControl(),
-        numDoc: new FormControl(),
-        feePay: new FormControl(),
-        cityCard: new FormControl(),
-        address: new FormControl(),
-      }),
-      formContact: new FormGroup({
-        chkCustomer: new FormControl(),
-        nameContacto: new FormControl(this.nombre),
-        lastnameContacto: new FormControl(this.apellido),
-        mailContacto: new FormControl(),
-        mailConfirmContacto: new FormControl(),
-        typePhone0: new FormControl(),
-        code0: new FormControl('511'),
-        numberPhone0: new FormControl(),
-        phones: new FormArray([]),
-        recibo: new FormArray([]),
-        chkFac: new FormControl()
-      }),
-      chkPolity: new FormControl(),
-      chkInfo: new FormControl(),
-    })
+    this.paymentMethodForm = this.createPaymentMethodForm();
+    this.contactForm = this.createContactForm();
+
+    return this._formBuilder.group({
+      customers: this._formBuilder.array([]),
+      paymentMethodForm: this.paymentMethodForm,
+      contactForm: this.contactForm,
+      chkPolity: ['', [Validators.required, Validators.requiredTrue]],
+      chkInfo: ['', [Validators.required, Validators.requiredTrue]]
+    });
+  }
+
+  validateInsuranceForm(field: string) {
+    return this.formShop.controls[field].errors
+      && this.formShop.controls[field].touched;
+  }
+
+  validateContactForm(field: string) {
+    return this.contactForm.controls[field].errors
+      && this.contactForm.controls[field].touched;
+  }
+
+  validatePaymentMethodForm(field: string) {
+    return this.paymentMethodForm.controls[field].errors
+      && this.paymentMethodForm.controls[field].touched;
+  }
+
+  get contactEmailErrorMessage(): string {
+    const errors = this.contactForm.get('mailContacto')?.errors;
+
+    if (errors?.required) {
+      return 'Ingresa tu email de contacto';
+    } else if (errors?.minlength) {
+      return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
+    } else if (errors?.pattern) {
+      return 'El valor ingresado no tiene formato de email.';
+    }
+
+    return '';
+  }
+
+  get contactRUCErrorMessage(): string {
+    const errors = this.contactForm.get('ruc')?.errors;
+
+    if (errors?.required) {
+      return 'Ingresa el número de RUC';
+    } else if (errors?.minlength) {
+      return `Un RUC válido tiene ${errors?.minlength.requiredLength} dígitos.`;
+    } else if (errors?.notValid) {
+      return 'Ingresa un número de RUC válido.';
+    }
+
+    return '';
   }
 
   showDataContacto: Boolean = true;
@@ -312,413 +393,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  selectYear() {
-    for (let i = 1950; i < 2022; i++) {
-      let year = String(i)
-      this.listYears.push(year)
-    }
-  }
-
-  validForm() {
-    this.errors = []
-    const letter = new RegExp('^[a-zA-Z ]+$', 'i')
-    const number = new RegExp('^[0-9]+$', 'i')
-    const alphanumeric = new RegExp('^[a-zA-Z0-9 ]+$', 'i')
-    const email = new RegExp('^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$', 'i')
-
-    const typePay: string = this.formShop.getRawValue()['formCard']['select21']
-    if (typePay === 'TARJETA') {
-      // TC
-      let numberCard: string = this.formShop.getRawValue()['formCard']['numberCard']
-      if (numberCard === undefined || numberCard === null || numberCard.trim() === '') {
-        this.errors.push({ name: this.MSG_NUMBER_CARD, message: 'Ingresa el número de tarjeta' })
-      }
-
-      let nameCard: string = this.formShop.getRawValue()['formCard']['nameCard']
-      if (nameCard === undefined || nameCard === null || nameCard.trim() === '') {
-        this.errors.push({ name: this.MSG_NAME_CARD, message: 'Ingresa el nombre del titular' })
-      }
-
-      let expiredCard: string = this.formShop.getRawValue()['formCard']['expiredCard']
-      if (expiredCard === undefined || expiredCard === null || expiredCard.trim() === '') {
-        this.errors.push({ name: this.MSG_EXPIRED_CARD, message: 'Campo requerido' })
-      }
-
-      let ccvCard: string = this.formShop.getRawValue()['formCard']['ccvCard']
-      if (ccvCard === undefined || ccvCard === null || ccvCard.trim() === '') {
-        this.errors.push({ name: this.MSG_CCV_CARD, message: 'Campo requerido' })
-      }
-      if (!number.test(ccvCard)) {
-        this.errors.push({ name: this.MSG_CCV_CARD, message: 'solo números' })
-      }
-
-      let tipoDoc: string = this.formShop.getRawValue()['formCard']['tipoDoc']
-      if (tipoDoc === undefined || tipoDoc === null || tipoDoc.trim() === '') {
-        this.errors.push({ name: this.MSG_TYPE_DOC, message: 'Campo requerido' })
-      }
-
-      let numDoc: string = this.formShop.getRawValue()['formCard']['numDoc']
-      if (numDoc === undefined || numDoc === null || numDoc.trim() === '') {
-        this.errors.push({ name: this.MSG_NUM_DOC, message: 'Ingrese su N° de documento' })
-      }
-      if (!number.test(numDoc)) {
-        this.errors.push({ name: this.MSG_NUM_DOC, message: 'solo números' })
-      }
-
-      let feePay: string = this.formShop.getRawValue()['formCard']['feePay']
-      if (feePay === undefined || feePay === null || feePay.trim() === '') {
-        this.errors.push({ name: this.MSG_QUOTE, message: 'Campo requerido' })
-      }
-
-      let cityCard: string = this.formShop.getRawValue()['formCard']['cityCard']
-      if (cityCard === undefined || cityCard === null || cityCard.trim() === '') {
-        this.errors.push({ name: this.MSG_CITY, message: 'Campo requerido' })
-      }
-
-      let address: string = this.formShop.getRawValue()['formCard']['address']
-      if (address === undefined || address === null || address.trim() === '') {
-        this.errors.push({ name: this.MSG_ADRESS, message: 'Campo requerido' })
-      }
-    } else {
-      // SAFETYPAY
-      let bankPay: string = this.formShop.getRawValue()['formCard']['bankPay']
-      if (bankPay === undefined || bankPay === null || bankPay.trim() === '') {
-        this.errors.push({ name: this.MSG_BANK, message: 'Campo requerido' })
-      }
-    }
-
-    //FORM PASAJERO
-    for (let x = 0; x < this.formShop.getRawValue()['customers'].length; x++) {
-      let nameCustomer: string = this.formShop.getRawValue()['customers'][x]['nameCustomer']
-      if (nameCustomer === undefined || nameCustomer === null || nameCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_NAME_CUSTOMER, message: 'Ingresa el nombre del pasajero' })
-      }
-
-      let lastNameCustomer: string = this.formShop.getRawValue()['customers'][x]['lastNameCustomer']
-      if (lastNameCustomer === undefined || lastNameCustomer === null || lastNameCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_LAST_NAME_CUSTOMER, message: 'Ingresa el apellido del pasajero' })
-      }
-
-      let dayCustomer: string = this.formShop.getRawValue()['customers'][x]['dayCustomer']
-      if (dayCustomer === undefined || dayCustomer === null || dayCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'Ingresa día' })
-      }
-      if (!number.test(dayCustomer)) {
-        this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'solo números' })
-      }
-
-      let monthCustomer: string = this.formShop.getRawValue()['customers'][x]['monthCustomer']
-      if (monthCustomer === undefined || monthCustomer === null || monthCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_MONTH_CUSTOMER, message: 'Ingresa mes' })
-      }
-
-      let yearCustomer: string = this.formShop.getRawValue()['customers'][x]['yearCustomer']
-      if (yearCustomer === undefined || yearCustomer === null || yearCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_YEAR_CUSTOMER, message: 'Ingresa año' })
-      }
-
-      let nationalityCustomer: string = this.formShop.getRawValue()['customers'][x]['nationalityCustomer']
-      if (nationalityCustomer === undefined || nationalityCustomer === null || nationalityCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_NATIONALITY_CUSTOMER, message: 'Campo requerido' })
-      }
-
-      let typeDocCustomer: string = this.formShop.getRawValue()['customers'][x]['typeDocCustomer']
-      if (typeDocCustomer === undefined || typeDocCustomer === null || typeDocCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_TYPE_DOC_CUSTOMER, message: 'Campo requerido' })
-      }
-
-      let numDocCustomer: string = this.formShop.getRawValue()['customers'][x]['numDocCustomer']
-      if (numDocCustomer === undefined || numDocCustomer === null || numDocCustomer.trim() === '') {
-        this.errors.push({ indice: x, name: this.MSG_NUM_DOC_CUSTOMER, message: 'Ingresa tu número de documento' })
-      }
-      if (!number.test(numDocCustomer)) {
-        this.errors.push({ name: this.MSG_NUM_DOC_CUSTOMER, message: 'solo números' })
-      }
-
-      // let sexCustomer: string = this.formShop.getRawValue()['customers'][x]['sexCustomer']
-      // if (sexCustomer === undefined || sexCustomer === null) {
-      //   this.errors.push({ indice: x, name: this.MSG_SEX, message: 'Elegir un sexo' })
-      // }
-    }
-    //FORM PASAJERO
-
-    //FORMCONTACT
-
-    let nameContacto: string = this.formShop.getRawValue()['formContact']['nameContacto']
-    if (nameContacto === undefined || nameContacto === null || nameContacto.trim() === '') {
-      this.errors.push({ name: this.MSG_NAME_CONTACT, message: 'Nombre de contacto es requerido' })
-    }
-    let lastnameContacto: string = this.formShop.getRawValue()['formContact']['lastnameContacto']
-    if (lastnameContacto === undefined || lastnameContacto === null || lastnameContacto.trim() === '') {
-      this.errors.push({ name: this.MSG_LASTNAME_CONTACT, message: 'Apellido de contacto es requerido' })
-    }
-    let mailContacto: string = this.formShop.getRawValue()['formContact']['mailContacto']
-    if (mailContacto === undefined || mailContacto === null || mailContacto.trim() === '') {
-      this.errors.push({ name: this.MSG_EMAIL_CONTACT, message: 'Email de contacto es requerido' })
-    }
-
-    let mailConfirmContacto: string = this.formShop.getRawValue()['formContact']['mailConfirmContacto']
-    if (mailConfirmContacto === undefined || mailConfirmContacto === null || mailConfirmContacto.trim() === '') {
-      this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Confirmación es requerida' })
-    } else if (mailConfirmContacto.toUpperCase() !== mailContacto.toUpperCase()) {
-      this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Email no coincide' })
-    }
-
-    let typePhone0: string = this.formShop.getRawValue()['formContact']['typePhone0']
-    if (typePhone0 === undefined || typePhone0 === null || typePhone0.trim() === '') {
-      this.errors.push({ name: this.MSG_TYPEPHONE_CONTACT, message: 'Campo requerido' })
-    }
-    let code0: string = this.formShop.getRawValue()['formContact']['code0']
-    if (code0 === undefined || code0 === null || code0.trim() === '') {
-      this.errors.push({ name: this.MSG_CODE0_CONTACT, message: 'Código de país es requerido' })
-    }
-    let numberPhone0: string = this.formShop.getRawValue()['formContact']['numberPhone0']
-    if (numberPhone0 === undefined || numberPhone0 === null || numberPhone0.trim() === '') {
-      this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'Teléfono es requerido' })
-    }
-    if (!number.test(numberPhone0)) {
-      this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'solo números' })
-    }
-
-    let chkPolity: boolean = this.formShop.getRawValue()['chkPolity']
-    if (chkPolity === undefined || chkPolity === null || chkPolity == false) {
-      this.errors.push({ name: this.MSG_CHK_POLITY, message: 'Políticas  es requerido' })
-    }
-    let chkInfo: boolean = this.formShop.getRawValue()['chkInfo']
-    if (chkInfo === undefined || chkInfo === null || chkInfo == false) {
-      this.errors.push({ name: this.MSG_CHK_INFO, message: 'Autorizar uso de información es requerido' })
-    }
-    //FORMCONTACT
-
-    return this.errors.length === 0
-  }
-
-  validFormMobileCustomers(x: any) {
-    this.errors = []
-    const letter = new RegExp('^[a-zA-Z ]+$', 'i')
-    const number = new RegExp('^[0-9]+$', 'i')
-    const alphanumeric = new RegExp('^[a-zA-Z0-9 ]+$', 'i')
-    const email = new RegExp('^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$', 'i')
-
-    // const typePay: string = this.formShop.getRawValue()['formCard']['select21']
-    // if (typePay === 'TARJETA') {
-    //   // TC
-    //   let numberCard: string = this.formShop.getRawValue()['formCard']['numberCard']
-    //   if (numberCard === undefined || numberCard === null || numberCard.trim() === '') {
-    //     this.errors.push({ name: this.MSG_NUMBER_CARD, message: 'Ingresa el número de tarjeta' })
-    //   }
-
-    //   let nameCard: string = this.formShop.getRawValue()['formCard']['nameCard']
-    //   if (nameCard === undefined || nameCard === null || nameCard.trim() === '') {
-    //     this.errors.push({ name: this.MSG_NAME_CARD, message: 'Ingresa el nombre del titular' })
-    //   }
-
-    //   let expiredCard: string = this.formShop.getRawValue()['formCard']['expiredCard']
-    //   if (expiredCard === undefined || expiredCard === null || expiredCard.trim() === '') {
-    //     this.errors.push({ name: this.MSG_EXPIRED_CARD, message: 'Campo requerido' })
-    //   }
-
-    //   let ccvCard: string = this.formShop.getRawValue()['formCard']['ccvCard']
-    //   if (ccvCard === undefined || ccvCard === null || ccvCard.trim() === '') {
-    //     this.errors.push({ name: this.MSG_CCV_CARD, message: 'Campo requerido' })
-    //   }
-    //   if (!number.test(ccvCard)) {
-    //     this.errors.push({ name: this.MSG_CCV_CARD, message: 'solo números' })
-    //   }
-
-    //   let tipoDoc: string = this.formShop.getRawValue()['formCard']['tipoDoc']
-    //   if (tipoDoc === undefined || tipoDoc === null || tipoDoc.trim() === '') {
-    //     this.errors.push({ name: this.MSG_TYPE_DOC, message: 'Campo requerido' })
-    //   }
-
-    //   let numDoc: string = this.formShop.getRawValue()['formCard']['numDoc']
-    //   if (numDoc === undefined || numDoc === null || numDoc.trim() === '') {
-    //     this.errors.push({ name: this.MSG_NUM_DOC, message: 'Ingrese su N° de documento' })
-    //   }
-    //   if (!number.test(numDoc)) {
-    //     this.errors.push({ name: this.MSG_NUM_DOC, message: 'solo números' })
-    //   }
-
-    //   let feePay: string = this.formShop.getRawValue()['formCard']['feePay']
-    //   if (feePay === undefined || feePay === null || feePay.trim() === '') {
-    //     this.errors.push({ name: this.MSG_QUOTE, message: 'Campo requerido' })
-    //   }
-
-    //   let cityCard: string = this.formShop.getRawValue()['formCard']['cityCard']
-    //   if (cityCard === undefined || cityCard === null || cityCard.trim() === '') {
-    //     this.errors.push({ name: this.MSG_CITY, message: 'Campo requerido' })
-    //   }
-
-    //   let address: string = this.formShop.getRawValue()['formCard']['address']
-    //   if (address === undefined || address === null || address.trim() === '') {
-    //     this.errors.push({ name: this.MSG_ADRESS, message: 'Campo requerido' })
-    //   }
-    // } else {
-    //   // SAFETYPAY
-    //   let bankPay: string = this.formShop.getRawValue()['formCard']['bankPay']
-    //   if (bankPay === undefined || bankPay === null || bankPay.trim() === '') {
-    //     this.errors.push({ name: this.MSG_BANK, message: 'Campo requerido' })
-    //   }
-    // }
-
-    //FORM PASAJERO
-    // for (let x = 0; x < this.formShop.getRawValue()['customers'].length; x++) {
-    let nameCustomer: string = this.formShop.getRawValue()['customers'][x]['nameCustomer']
-    if (nameCustomer === undefined || nameCustomer === null || nameCustomer.trim() === '') {
-      this.errors.push({ indice: x, name: this.MSG_NAME_CUSTOMER, message: 'Ingresa el nombre del pasajero' })
-    }
-
-    let lastNameCustomer: string = this.formShop.getRawValue()['customers'][x]['lastNameCustomer']
-    if (lastNameCustomer === undefined || lastNameCustomer === null || lastNameCustomer.trim() === '') {
-      this.errors.push({ indice: x, name: this.MSG_LAST_NAME_CUSTOMER, message: 'Ingresa el apellido del pasajero' })
-    }
-
-    let dayCustomer: string = this.formShop.getRawValue()['customers'][x]['dayCustomer']
-    if (dayCustomer === undefined || dayCustomer === null || dayCustomer.trim() === '') {
-      this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'Ingresa día' })
-    }
-    if (!number.test(dayCustomer)) {
-      this.errors.push({ indice: x, name: this.MSG_DAY_CUSTOMER, message: 'solo números' })
-    }
-
-    let monthCustomer: string = this.formShop.getRawValue()['customers'][x]['monthCustomer']
-    if (monthCustomer === undefined || monthCustomer === null || monthCustomer.trim() === '') {
-      this.errors.push({ indice: x, name: this.MSG_MONTH_CUSTOMER, message: 'Ingresa mes' })
-    }
-
-    let yearCustomer: string = this.formShop.getRawValue()['customers'][x]['yearCustomer']
-    if (yearCustomer === undefined || yearCustomer === null || yearCustomer.trim() === '') {
-      this.errors.push({ indice: x, name: this.MSG_YEAR_CUSTOMER, message: 'Ingresa año' })
-    }
-
-    let nationalityCustomer: string = this.formShop.getRawValue()['customers'][x]['nationalityCustomer']
-    if (nationalityCustomer === undefined || nationalityCustomer === null || nationalityCustomer.trim() === '') {
-      this.errors.push({ indice: x, name: this.MSG_NATIONALITY_CUSTOMER, message: 'Campo requerido' })
-    }
-
-    let typeDocCustomer: string = this.formShop.getRawValue()['customers'][x]['typeDocCustomer']
-    if (typeDocCustomer === undefined || typeDocCustomer === null || typeDocCustomer.trim() === '') {
-      this.errors.push({ indice: x, name: this.MSG_TYPE_DOC_CUSTOMER, message: 'Campo requerido' })
-    }
-
-    let numDocCustomer: string = this.formShop.getRawValue()['customers'][x]['numDocCustomer']
-    if (numDocCustomer === undefined || numDocCustomer === null || numDocCustomer.trim() === '') {
-      this.errors.push({ indice: x, name: this.MSG_NUM_DOC_CUSTOMER, message: 'Ingresa tu número de documento' })
-    }
-    if (!number.test(numDocCustomer)) {
-      this.errors.push({ name: this.MSG_NUM_DOC_CUSTOMER, message: 'solo números' })
-    }
-
-    // let sexCustomer: string = this.formShop.getRawValue()['customers'][x]['sexCustomer']
-    // if (sexCustomer === undefined || sexCustomer === null) {
-    //   this.errors.push({ indice: x, name: this.MSG_SEX, message: 'Elegir un sexo' })
-    // }
-    // }
-    //FORM PASAJERO
-
-    //FORMCONTACT
-
-    // let nameContacto: string = this.formShop.getRawValue()['formContact']['nameContacto']
-    // if (nameContacto === undefined || nameContacto === null || nameContacto.trim() === '') {
-    //   this.errors.push({ name: this.MSG_NAME_CONTACT, message: 'Nombre de contacto es requerido' })
-    // }
-    // let lastnameContacto: string = this.formShop.getRawValue()['formContact']['lastnameContacto']
-    // if (lastnameContacto === undefined || lastnameContacto === null || lastnameContacto.trim() === '') {
-    //   this.errors.push({ name: this.MSG_LASTNAME_CONTACT, message: 'Apellido de contacto es requerido' })
-    // }
-    // let mailContacto: string = this.formShop.getRawValue()['formContact']['mailContacto']
-    // if (mailContacto === undefined || mailContacto === null || mailContacto.trim() === '') {
-    //   this.errors.push({ name: this.MSG_EMAIL_CONTACT, message: 'Email de contacto es requerido' })
-    // }
-
-    // let mailConfirmContacto: string = this.formShop.getRawValue()['formContact']['mailConfirmContacto']
-    // if (mailConfirmContacto === undefined || mailConfirmContacto === null || mailConfirmContacto.trim() === '') {
-    //   this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Confirmación es requerida' })
-    // } else if (mailConfirmContacto.toUpperCase() !== mailContacto.toUpperCase()) {
-    //   this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Email no coincide' })
-    // }
-
-    // let typePhone0: string = this.formShop.getRawValue()['formContact']['typePhone0']
-    // if (typePhone0 === undefined || typePhone0 === null || typePhone0.trim() === '') {
-    //   this.errors.push({ name: this.MSG_TYPEPHONE_CONTACT, message: 'Campo requerido' })
-    // }
-    // let code0: string = this.formShop.getRawValue()['formContact']['code0']
-    // if (code0 === undefined || code0 === null || code0.trim() === '') {
-    //   this.errors.push({ name: this.MSG_CODE0_CONTACT, message: 'Código de país es requerido' })
-    // }
-    // let numberPhone0: string = this.formShop.getRawValue()['formContact']['numberPhone0']
-    // if (numberPhone0 === undefined || numberPhone0 === null || numberPhone0.trim() === '') {
-    //   this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'Teléfono es requerido' })
-    // }
-    // if (!number.test(numberPhone0)) {
-    //   this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'solo números' })
-    // }
-
-    // let chkPolity: boolean = this.formShop.getRawValue()['chkPolity']
-    // if (chkPolity === undefined || chkPolity === null || chkPolity == false) {
-    //   this.errors.push({ name: this.MSG_CHK_POLITY, message: 'Políticas  es requerido' })
-    // }
-    // let chkInfo: boolean = this.formShop.getRawValue()['chkInfo']
-    // if (chkInfo === undefined || chkInfo === null || chkInfo == false) {
-    //   this.errors.push({ name: this.MSG_CHK_INFO, message: 'Autorizar uso de información es requerido' })
-    // }
-    //FORMCONTACT
-
-    return this.errors.length === 0
-  }
-
-  validFormMobileContact() {
-    this.errors = []
-    const number = new RegExp('^[0-9]+$', 'i');
-
-    let nameContacto: string = this.formShop.getRawValue()['formContact']['nameContacto']
-    if (nameContacto === undefined || nameContacto === null || nameContacto.trim() === '') {
-      this.errors.push({ name: this.MSG_NAME_CONTACT, message: 'Nombre de contacto es requerido' })
-    }
-    let lastnameContacto: string = this.formShop.getRawValue()['formContact']['lastnameContacto']
-    if (lastnameContacto === undefined || lastnameContacto === null || lastnameContacto.trim() === '') {
-      this.errors.push({ name: this.MSG_LASTNAME_CONTACT, message: 'Apellido de contacto es requerido' })
-    }
-    let mailContacto: string = this.formShop.getRawValue()['formContact']['mailContacto']
-    if (mailContacto === undefined || mailContacto === null || mailContacto.trim() === '') {
-      this.errors.push({ name: this.MSG_EMAIL_CONTACT, message: 'Email de contacto es requerido' })
-    }
-
-    let mailConfirmContacto: string = this.formShop.getRawValue()['formContact']['mailConfirmContacto']
-    if (mailConfirmContacto === undefined || mailConfirmContacto === null || mailConfirmContacto.trim() === '') {
-      this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Confirmación es requerida' })
-    } else if (mailConfirmContacto.toUpperCase() !== mailContacto.toUpperCase()) {
-      this.errors.push({ name: this.MSG_EMAILC_CONTACT, message: 'Email no coincide' })
-    }
-
-    let typePhone0: string = this.formShop.getRawValue()['formContact']['typePhone0']
-    if (typePhone0 === undefined || typePhone0 === null || typePhone0.trim() === '') {
-      this.errors.push({ name: this.MSG_TYPEPHONE_CONTACT, message: 'Campo requerido' })
-    }
-    let code0: string = this.formShop.getRawValue()['formContact']['code0']
-    if (code0 === undefined || code0 === null || code0.trim() === '') {
-      this.errors.push({ name: this.MSG_CODE0_CONTACT, message: 'Código de país es requerido' })
-    }
-    let numberPhone0: string = this.formShop.getRawValue()['formContact']['numberPhone0']
-    if (numberPhone0 === undefined || numberPhone0 === null || numberPhone0.trim() === '') {
-      this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'Teléfono es requerido' })
-    }
-    if (!number.test(numberPhone0)) {
-      this.errors.push({ name: this.MSG_PHONE0_CONTACT, message: 'solo números' })
-    }
-
-    let chkPolity: boolean = this.formShop.getRawValue()['chkPolity']
-    if (chkPolity === undefined || chkPolity === null || chkPolity == false) {
-      this.errors.push({ name: this.MSG_CHK_POLITY, message: 'Políticas  es requerido' })
-    }
-    let chkInfo: boolean = this.formShop.getRawValue()['chkInfo']
-    if (chkInfo === undefined || chkInfo === null || chkInfo == false) {
-      this.errors.push({ name: this.MSG_CHK_INFO, message: 'Autorizar uso de información es requerido' })
-    }
-
-    return this.errors.length === 0;
-  }
-
   getMessage(messageKey: any) {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
   }
@@ -727,66 +401,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
 
-  toFactura(e: any) {
-    let chk = e.target.checked;
-
-    if (chk)
-      this.addRecibo()
-    else
-      this.removeRecibo(0)
+  requestInvoice(event: any) {
+    this.showInvoiceData = event.target.checked;
   }
 
-  getArrayCustomers() {
-    return (<FormArray>this.formShop.get(['customers'])).controls;
-  }
-
-  addCustomers(e: any) {
-    (<FormArray>this.formShop.controls['customers']).push(
-      new FormGroup({
-        typeCustomer: new FormControl(e),
-        nameCustomer: new FormControl(),
-        lastNameCustomer: new FormControl(),
-        dayCustomer: new FormControl(),
-        monthCustomer: new FormControl(),
-        yearCustomer: new FormControl(),
-        nationalityCustomer: new FormControl(),
-        typeDocCustomer: new FormControl(),
-        numDocCustomer: new FormControl(),
-        sexCustomer: new FormControl(),
-      }))
-  }
-
-  getArrayRecibo() {
-    return (<FormArray>this.formShop.get(['formContact', 'recibo'])).controls;
-  }
-
-  addRecibo() {
-    ((<any>this.formShop.controls['formContact']).controls['recibo']).push(
-      new FormGroup({
-        direccion: new FormControl(),
-        ruc: new FormControl()
-      }));
-  }
-
-  removeRecibo(index: any) {
-    ((<any>this.formShop.controls['formContact']).controls['recibo']).removeAt(index);
-  }
-
-  getArrayPhone() {
-    return (<FormArray>this.formShop.get(['formContact', 'phones'])).controls
-  }
-
-  addPhone() {
-    ((<any>this.formShop.controls['formContact']).controls['phones']).push(
-      new FormGroup({
-        typePhone: new FormControl(),
-        code: new FormControl(),
-        numberPhone: new FormControl()
-      }));
-  }
-
-  removePhone(index: any) {
-    ((<any>this.formShop.controls['formContact']).controls['phones']).removeAt(index);
+  get customersArray() {
+    return this.formShop.get('customers') as FormArray;
   }
 
   pasajeroClose() {
@@ -833,18 +453,30 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   buyInsurance(): void {
+    debugger
+
     console.log('1. buyInsurance');
 
-    if (this.validForm()) {
-      this.formShop.addControl('tipoRecibo', new FormControl('BV'));
-      this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson.passenger.length));
+    if (this.formShop.invalid)
+      this.formShop.markAllAsTouched();
 
-      this.dataShop = this.formShop.value;
-      let dataShop = this.formShop.value;
-      localStorage.setItem('shop', JSON.stringify(dataShop));
+    if (this.paymentMethodForm.invalid)
+      this.paymentMethodForm.markAllAsTouched();
 
-      this.generateInsuranceReserve(dataShop);
-    }
+    if (this.contactForm.invalid)
+      this.contactForm.markAllAsTouched();
+
+    if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
+      return;
+
+    this.formShop.addControl('tipoRecibo', new FormControl('BV'));
+    this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson.passenger.length));
+
+    this.dataShop = this.formShop.value;
+    let dataShop = this.formShop.value;
+    localStorage.setItem('shop', JSON.stringify(dataShop));
+
+    this.generateInsuranceReserve(dataShop);
   }
 
   generateInsuranceReserve(data: any) {
@@ -904,24 +536,24 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       precio_unitario: this.safe0Json.precioUnitario,            // obtener desde plansAC.precioUnitario
       tipo_cambio: this.tipodeCambio,                            // TIPO DE CAMBIO DEL DIA
       vuelo_res_id: 0,
-      contacto_nom: data.formContact.nameContacto,           // NOMBRE DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
-      contacto_ape: data.formContact.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
-      contacto_email: data.formContact.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_direccion: (data.formContact.chkFac) ? data.formContact.recibo[0].direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_telfs: '2,51,,986378431;',//data.formContact.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
-      contacto_emerg_nom: data.formContact.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
-      contacto_emerg_ape: data.formContact.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
-      contacto_emerg_email: data.formContact.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
-      contacto_emerg_telf: data.formContact.numberPhone0,    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
-      ruc: (data.formContact.chkFac) ? `RUC-${data.formContact.recibo[0].ruc}` : `${data.customers[0].typeDocCustomer}-${data.customers[0].numDocCustomer}`, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
-      razon_social: data.formContact.nameContacto + ' ' + data.formContact.lastnameContacto,  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
-      direccion_fiscal: (data.formContact.recibo.length === 0) ? '' : data.formContact.recibo[0].direccion, // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
+      contacto_nom: data.contactForm.nameContacto,           // NOMBRE DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
+      contacto_ape: data.contactForm.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
+      contacto_email: data.contactForm.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
+      contacto_direccion: (data.contactForm.chkFac) ? data.contactForm.direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
+      contacto_telfs: '2,51,,986378431;',//data.contactForm.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
+      contacto_emerg_nom: data.contactForm.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
+      contacto_emerg_ape: data.contactForm.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
+      contacto_emerg_email: data.contactForm.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
+      contacto_emerg_telf: data.contactForm.numberPhone0,    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
+      ruc: (data.contactForm.chkFac) ? `RUC-${data.contactForm.ruc}` : `${data.customers[0].typeDocCustomer}-${data.customers[0].numDocCustomer}`, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
+      razon_social: data.contactForm.nameContacto + ' ' + data.contactForm.lastnameContacto,  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
+      direccion_fiscal: (data.contactForm.chkFac) ? data.contactForm.direccion : '', // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
       comentario: '',
       webs_cid: 7,
       usuweb_id: 56190,
       destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'N' : 'I', // obtener desde destiny.EsDestinoNacional
       numeroruc: '',
-      comprobantepago: (data.formContact.chkFac) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
+      comprobantepago: (data.contactForm.chkFac) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
       usobilletera: 'N',
       codigobloqueo: '',
       dkcliente: environment.dkAgenciaAC,
@@ -947,7 +579,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       aplica_descuento: 0,
       id_unidad_negocio: environment.undidadNegocioAC,
       aplica_factura_comision: 0,
-      forma_de_pago: data.formCard.select21, // TARJETA, SAFETYPAY
+      forma_de_pago: data.paymentMethodForm.select21, // TARJETA, SAFETYPAY
       porcentaje_descuento: 0,
       usosafetypay: 'N',
       codigo_safetypay: '',
@@ -956,13 +588,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       validarDuplicidad: false,
       pasajeros: this.generatePassengersList(data),
       cobertura: this.generateCoverages(),
-      // cobertura: [
-      //   {
-      //     unidad: this.coverageList.Unidad,                                 // obtener desde coverageList.Unidad
-      //     atr_nom: this.coverageList.Codigo + ' ' + this.coverageList.Nombre,   // obtener desde coverageList.Codigo + ' ' + coverageList.Nombre
-      //     valor: this.coverageList.Valor                                    // obtener desde coverageList.Valor
-      //   }
-      // ],
       nro_intentos_facturacion: 0,
       nro_intentos_emision: 0,
       idfileautomatico: 0,
@@ -993,7 +618,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
         if (result.Result.IsSuccess) {
 
-          const paymentMethod: PaymentMethodEnum = data.formCard.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
+          const paymentMethod: PaymentMethodEnum = data.paymentMethodForm.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
 
           const parameters: ActualizarCodigoSafetyPaySeguroRQ = {
             res_seguro_id: this.reservation.Reserva,
@@ -1042,7 +667,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       email = credentialsJson.email;
     }
 
-    const paymentMethod: PaymentMethodEnum = data.formCard.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
+    const paymentMethod: PaymentMethodEnum = data.paymentMethodForm.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
 
     const payload: RqPaymentCeRequest1 = {
       "TrackingCode": Guid(),
@@ -1067,12 +692,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "Address": "",
           "DocumentType": data.customers[0].typeDocCustomer,
           "DocumentNumber": data.customers[0].numDocCustomer,
-          "Email": data.formContact.mailContacto
+          "Email": data.contactForm.mailContacto
         },
         "Card": {
-          "Number": data.formCard.numberCard,
-          "SecurityCode": data.formCard.ccvCard,
-          "ExpirationDate": data.formCard.expiredCard ? `${data.formCard.expiredCard.substring(4)}/${data.formCard.expiredCard.substring(2, 4)}` : null
+          "Number": data.paymentMethodForm.numberCard,
+          "SecurityCode": data.paymentMethodForm.ccvCard,
+          "ExpirationDate": data.paymentMethodForm.expiredCard ? `${data.paymentMethodForm.expiredCard.substring(4)}/${data.paymentMethodForm.expiredCard.substring(2, 4)}` : null
         },
         "Amount": {
           "Value": data.PriceTotal,
@@ -1080,7 +705,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "OfFees": data.feePay || 0,
         },
         "Bank": {
-          "Id": data.formCard.bankPay
+          "Id": data.paymentMethodForm.bankPay
         },
         "Booking": {
           "CodeSrv": 0,
@@ -1092,7 +717,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "HasCancellationFee": true
         },
         "Setting": {
-          //"HasAutomaticPayment": data.formCard.select21 === "SAFETYPAY" ? true : false,
+          //"HasAutomaticPayment": data.paymentMethodForm.select21 === "SAFETYPAY" ? true : false,
           "HasAutomaticPayment": true, // TDDO: Se pone esto de momento para que el servicio retorne como aprobado.
           "HasAQuoteCode": true
         }
@@ -1200,8 +825,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         documentType: (value.typeDocCustomer === 'DNI') ? 0 : 1,
         documentNumber: value.numDocCustomer,
         gender: (value.sexCustomer === 'masculino') ? 'M' : '',
-        email: this.dataShop.formContact.mailContacto,
-        phone: this.dataShop.formContact.numberPhone0
+        email: this.dataShop.contactForm.mailContacto,
+        phone: this.dataShop.contactForm.numberPhone0
       }
       pasajeros.push(jsonPasajeros)
     })
@@ -1230,7 +855,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     const textSend = 'SE ESTA GENERANDO SU RESERVA!'
     this.loaderSubjectService.showText(textSend)
 
-    console.log(this.dataShop.formContact.recibo);
+    console.log(this.dataShop.contactForm);
 
     let payload = {
       "segmentSelected": [
@@ -1239,14 +864,14 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       "IdGroup": this.safe0Json.idGroup,
       "passengers": this.pasajerosVuelos(),
       contact: {
-        name: this.dataShop.formContact.nameContacto,
-        lastName: this.dataShop.formContact.lastnameContacto,
-        email: this.dataShop.formContact.mailContacto,
-        // address: (this.dataShop.formContact.recibo === undefined) ? this.dataShop.formContact.recibo[0].direccion : this.dataShop.formCard.address,
-        address: (this.dataShop.formContact.recibo === undefined) ? this.dataShop.formContact.recibo[0].direccion : 'LIMA',
+        name: this.dataShop.contactForm.nameContacto,
+        lastName: this.dataShop.contactForm.lastnameContacto,
+        email: this.dataShop.contactForm.mailContacto,
+        // address: (this.dataShop.contactForm.recibo === undefined) ? this.dataShop.contactForm.recibo[0].direccion : this.dataShop.paymentMethodForm.address,
+        address: (this.dataShop.contactForm.chkFac) ? this.dataShop.contactForm.direccion : 'LIMA',
         phones: [
           {
-            phoneNumber: this.dataShop.formContact.numberPhone0
+            phoneNumber: this.dataShop.contactForm.numberPhone0
           }
         ]
       }
@@ -1286,9 +911,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   savePasajero(e?: any) {
     console.log('pasajero ' + e)
 
-    if (this.validFormMobileCustomers(e)) {
-      console.log(this.formShop.getRawValue()['customers'][e])
-    }
+    // if (this.validFormMobileCustomers(e)) {
+    //   console.log(this.formShop.getRawValue()['customers'][e])
+    // }
   }
 
   step1() {
@@ -1299,13 +924,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     //   this.step1Complete = true
     // }
     for (let i in this.resultJson.passenger) {
-      if (this.validFormMobileCustomers(i) && this.validFormMobileContact()) {
-        this.step1Complete = true
+      //if (this.validFormMobileCustomers(i) && this.validFormMobileContact()) {
+      this.step1Complete = true
 
-        // console.log(this.formShop.getRawValue()['customers'][i])
-        // console.log(i)
-        // this.savePasajero(i)
-      }
+      // console.log(this.formShop.getRawValue()['customers'][i])
+      // console.log(i)
+      // this.savePasajero(i)
+      //}
     }
   }
 
@@ -1330,7 +955,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       CustomerDocumentNumber: datos.customers[0].numDocCustomer,     //DOCUMENTO DEL PRIMER PASAJERO ADULTO
       IdClient: Number(environment.dkAgenciaAC), // 29581
       WebId: '7',
-      Mail: datos.formContact.mailContacto,   //MAIL DEL PASAJERO
+      Mail: datos.contactForm.mailContacto,   //MAIL DEL PASAJERO
       DKClient: environment.dkAgenciaAC,
       UserAgent: environment.identifierAC,
       IdUser: '56190',
@@ -1351,7 +976,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         this.listBank = response
         this.timeShop(this.listBank['ExpirationDateTime'])
         this.bankSteps = this.listBank.PaymentLocations.filter((e: any) => {
-          let namco = datos.formCard.bankPay
+          let namco = datos.paymentMethodForm.bankPay
           if (namco === e.ID) {
             return e
           }
@@ -1418,12 +1043,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         Ip: this.ipCliente,
         Browser: this.shopString.browser,
         Client: {
-          Firstname: this.shopString.formContact.nameContacto,
-          Lastname: this.shopString.formContact.lastnameContacto,
-          Address: this.shopString.formCard.address,
-          DocumentType: this.shopString.formCard.tipoDoc,
-          DocumentNumber: this.shopString.formCard.numDoc,
-          Email: this.shopString.formContact.mailContacto
+          Firstname: this.shopString.contactForm.nameContacto,
+          Lastname: this.shopString.contactForm.lastnameContacto,
+          Address: this.shopString.paymentMethodForm.address,
+          DocumentType: this.shopString.paymentMethodForm.tipoDoc,
+          DocumentNumber: this.shopString.paymentMethodForm.numDoc,
+          Email: this.shopString.contactForm.mailContacto
         },
         Booking: {
           NumberInsurance: (this.safe0Json['reservaVuelos']) ? this.resevaVuelo.idCotizacion : this.reservation.Reserva,
@@ -1434,12 +1059,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         },
         Payment: {
           Card: {
-            HolderName: this.shopString.formCard.nameCard,
-            Number: this.shopString.formCard.numberCard,
-            Expiration: this.expired(this.shopString.formCard.expiredCard), // 2022/05
-            SecurityCode: Number(this.shopString.formCard.ccvCard)
+            HolderName: this.shopString.paymentMethodForm.nameCard,
+            Number: this.shopString.paymentMethodForm.numberCard,
+            Expiration: this.expired(this.shopString.paymentMethodForm.expiredCard), // 2022/05
+            SecurityCode: Number(this.shopString.paymentMethodForm.ccvCard)
           },
-          AmountOfFees: Number(this.shopString.formCard.feePay),
+          AmountOfFees: Number(this.shopString.paymentMethodForm.feePay),
           Amount: (this.safe0Json['reservaVuelos']) ? this.detalleVuelos.pricingInfo.precioFinal : (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal,
         }
       }

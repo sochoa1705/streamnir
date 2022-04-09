@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
     private _validatorsService: ValidatorsService,
     public loaderSubjectService: LoaderSubjectService,
     private notification: NotificationService,
-    private  readonly router: Router,
+    private readonly router: Router,
   ) {
     this.cerrarBoxClicFuera();
 
@@ -115,7 +115,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  taggingPageView(){
+  taggingPageView() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         TaggingService.pageView(event.urlAfterRedirects)
@@ -164,12 +164,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // createRecoverPasswordForm(): FormGroup {
-  //   return this._formBuilder.group({
-  //     email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]]
-  //   });
-  // }
-
   validatePersonalAccountForm(field: string) {
     return this.personalAccountForm.controls[field].errors
       && this.personalAccountForm.controls[field].touched;
@@ -179,11 +173,6 @@ export class AppComponent implements OnInit {
     return this.businessAccountForm.controls[field].errors
       && this.businessAccountForm.controls[field].touched;
   }
-
-  // validateRecoverPasswordForm(field: string) {
-  //   return this.recoverPasswordForm.controls[field].errors
-  //     && this.recoverPasswordForm.controls[field].touched;
-  // }
 
   get personalAccountEmailErrorMessage(): string {
     const errors = this.personalAccountForm.get('email')?.errors;
