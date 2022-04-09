@@ -114,3 +114,33 @@ export class ModelTaggingSlidersBanners {
     };
   }
 }
+
+export class ModelTaggingOfertasVuelos {
+    constructor(
+      public src: string,
+      public title: string,
+      public nombre: 'Oferta de Vuelos',
+      public position: string
+    ) {}
+  
+    generateTag() {
+      return {
+        event: 'nmv.promos_eecga3_ofertasVuelos',
+        ecommerce: {
+          promoClick: {
+            promotions: [
+              {
+                id: this.src,
+                name: this.title,
+                creative: this.nombre,
+                position: this.position,
+              },
+            ],
+          },
+        },
+        eCategory: "Promociones: " + this.nombre,
+        eAction: this.title,
+        eLabel: generateLabelTag(),
+      };
+    }
+  }

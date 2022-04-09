@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {  routerToCapitalice } from 'src/app/shared/utils';
-import { ModelTaggingActividades, ModelTaggingHoteles, ModelTaggingSlidersBanners, ModelTaggingVuelos, ModelTaggingVuelosHoteles } from './tagging.models';
+import { ModelTaggingActividades, ModelTaggingHoteles, ModelTaggingOfertasVuelos, ModelTaggingSlidersBanners, ModelTaggingVuelos, ModelTaggingVuelosHoteles } from './tagging.models';
 
 @Injectable({ providedIn: 'root' })
 export class TaggingService {
@@ -48,6 +48,11 @@ export class TaggingService {
   public static clickSliderBanners(modelTaggingSlidersBanners: ModelTaggingSlidersBanners) {
     this.triggerTag(modelTaggingSlidersBanners.generateTag());
   }
+
+  public static clickOfertaVuelos(modelTaggingOfertasVuelos: ModelTaggingOfertasVuelos) {
+    this.triggerTag(modelTaggingOfertasVuelos.generateTag());
+  }
+
 
 
 

@@ -6,7 +6,7 @@
     </ng-container>
   </div>
   <div class="carousel-inner row">
-    <div *ngFor="let item of airfare?.slice(0, limit)" class="col-md-3 col-12 active carousel-item">
+    <div *ngFor="let item of airfare?.slice(0, limit); let i = index;" class="col-md-3 col-12 active carousel-item">
       <!-- CARD -->
       <div class="card">
         <div class="card__img">
@@ -25,7 +25,7 @@
               </div>
 
               <div class="col-4 pl-md-0 d-flex align-items-end justify-content-end">
-                <a (click)="viewRates(item)">
+                <a (click)="viewRates(item,i)">
                   <svg class="arrow" width="11" height="18" viewBox="0 0 11 18" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
