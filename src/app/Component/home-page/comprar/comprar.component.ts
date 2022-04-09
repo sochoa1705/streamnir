@@ -9,19 +9,19 @@ import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { take } from 'rxjs/operators';
 import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
 import { ClassDetalleLocalSt, ClassDetalleModalSegment } from 'src/app/shared/components/flights/models/flights.class';
-import { IFiltroVuelo } from './interfaces/comprar.interfaces';
+import { ICardRequest, IFiltroVuelo } from './interfaces/comprar.interfaces';
 import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
 import { ActualizarCodigoSafetyPaySeguroRQ, ActualizarEstadoSeguroRQ, RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
-import { Guid, toUp } from 'src/app/shared/utils';
+import { Guid, toUp, Utilities } from 'src/app/shared/utils';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { GenerarSafetyPayRQ } from 'src/app/Models/seguros/generarSafetypayRQ.interface';
 import { CardPaymentService } from 'src/app/Services/cardPayment/card-payment.service';
 import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
 import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interface';
 import { SafetyPayRQ } from 'src/app/Models/seguros/safetypayRQ.interface';
-import { PaymentService } from 'src/app/api/api-payment/services';
+import { CardService, PaymentService } from 'src/app/api/api-payment/services';
 import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/models';
 import * as moment from 'moment';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
@@ -135,6 +135,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   showAgregarAdulto: boolean = true
   showAdulto: number
 
+  checkedCard = false;
+
+  isVisa = false;
+  isMasterCard = false;
+  isAmericanExpress = false;
+  isDinners = false;
+
   constructor(
     private _router: Router,
     public offersService: OffersService,
@@ -147,6 +154,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     private _paymentService: PaymentService,
     private _preferencesService: PreferenceService,
     private _validatorsService: ValidatorsService,
+    private _cardService: CardService,
     private _formBuilder: FormBuilder
   ) {
     // COBERTURA
@@ -362,10 +370,59 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return '';
   }
 
-
-  onKeyup() {
-    console.log('onKeyup');
+  public validarTarjeta(): void {
+    this.checkedCard = false;
+    this.setCardsDefault();
+    this.checkCardService();
   }
+
+  private setCardsDefault() {
+    this.isVisa = false;
+    this.isMasterCard = false;
+    this.isAmericanExpress = false;
+    this.isDinners = false;
+  }
+
+  private checkCardService(): void {
+    let nroTarjeta: string = this.paymentMethodForm.controls['numberCard'].value;
+    if (nroTarjeta.length > 15) {
+      let data: ICardRequest = {
+        MuteExceptions: false,
+        TrackingCode: Guid(),
+        Caller: {
+          Application: 'Agil',
+          Company: 'Interagencias'
+        },
+        Parameter: {
+          Number: this.paymentMethodForm.controls['numberCard'].value
+        }
+      };
+
+      this._cardService.v1ApiCardGet({
+        'Parameter.Bin': this.paymentMethodForm.controls['numberCard'].value,
+        TrackingCode: Guid(),
+        MuteExceptions: environment.muteExceptions,
+        'Caller.Company': 'Agil',
+        'Caller.Application': 'Interagencias',
+        'Caller.FromIP': '',
+        'Caller.FromBrowser': ''
+      }).subscribe((res: any) => {
+        if (JSON.parse(res).Result.IsSuccess) {
+          this.setCardsDefault();
+          this.checkedCard = JSON.parse(res).Result.IsSuccess;
+          let typeCard = Utilities.getCardType(this.paymentMethodForm.controls['numberCard'].value);
+          if (typeCard === 'Visa') {
+            this.isVisa = true;
+          }
+        } else {
+          console.log('La tarjeta ingresada es inválida');
+
+          //this.showAlert('error', 'Error', 'La tarjeta ingresada es inválida');
+        }
+      });
+    }
+  }
+
 
 
 

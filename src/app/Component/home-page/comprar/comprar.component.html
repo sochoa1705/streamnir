@@ -474,7 +474,8 @@
 
                       <div class="row">
                         <div class="col-2">
-                          <input class="form-control" maxlength="2" formControlName="dayCustomer" type="text">
+                          <input class="form-control" minlength="1" maxlength="2" max="31" mask="0*"
+                            formControlName="dayCustomer" type="text">
                         </div>
 
                         <div class="col-6">
@@ -956,9 +957,9 @@
 
                     <div class="row card_pasajero rowMobileCard">
                       <div class="col-6 viewMobileWidth">
-                        <label for="names">Número de tarjeta</label>
-                        <input class="form-control" placeholder="Ingrese el número de tarjeta." type="text"
-                          name="names">
+                        <label>Número de tarjeta</label>
+                        <input class="form-control" placeholder="Ingrese el número de tarjeta." mask="0*" type="text"
+                          (blur)="validarTarjeta()">
                       </div>
 
                       <div class="col-6 viewMobileWidth">
@@ -974,14 +975,14 @@
                       <div class="col-6 viewMobileWidth">
                         <div class="row">
                           <div class="col-5">
-                            <label for="names">Vencimiento</label>
-                            <input class="form-control" placeholder="MM/AA" type="text" name="names">
+                            <label>Vencimiento</label>
+                            <input class="form-control" mask='99/99' placeholder="MM/AA" type="text">
                           </div>
 
                           <div class="col-6">
-                            <label for="lastname">Código de seguridad</label>
-                            <input class="form-control" placeholder="El que figura en el documento de viaje."
-                              type="text" name="lastname">
+                            <label>Código de seguridad</label>
+                            <input class="form-control" mask="0*" minlength="3" maxlength="3" type="password"
+                              class="form-control" placeholder="CVC">
                           </div>
 
                           <div class="col-1 colBoxInfo">
@@ -1138,8 +1139,8 @@
 
                     <div class="row">
                       <div class="col-2">
-                        <input class="form-control" maxlength="2" formControlName="dayCustomer" type="text"
-                          name="dayCustomer">
+                        <input class="form-control" minlength="1" maxlength="2" mask="0*" formControlName="dayCustomer"
+                          type="text" name="dayCustomer">
                       </div>
 
                       <div class="col-6">
@@ -1194,7 +1195,7 @@
                   <div class="col-3 viewMobileWidth">
                     <label for="lastname">N° de documento</label>
 
-                    <input class="form-control" formControlName="numDocCustomer" maxlength="8" type="text"
+                    <input class="form-control" formControlName="numDocCustomer" mask="0*" maxlength="12" type="text"
                       name="ndocumento">
                   </div>
 
@@ -1332,17 +1333,17 @@
                     <div class="col-6 viewMobileWidth">
                       <div class="row">
                         <div class="col-5">
-                          <label for="names">Vencimiento</label>
+                          <label>Vencimiento</label>
 
-                          <input class="form-control" formControlName="expiredCard" mask="9999/99" placeholder="MM/AA"
-                            type="text" name="names">
+                          <input class="form-control" formControlName="expiredCard" mask="99/99" placeholder="MM/AA"
+                            type="text">
                         </div>
 
                         <div class="col-6">
-                          <label for="lastname">Código de seguridad</label>
+                          <label>Código de seguridad</label>
 
-                          <input class="form-control" formControlName="ccvCard"
-                            placeholder="El que figura en el documento de viaje." type="text" name="lastname">
+                          <input class="form-control" formControlName="ccvCard" mask="0*" minlength="3" maxlength="3"
+                            type="password" placeholder="CVC">
                         </div>
 
                         <div class="col-1 colBoxInfo">
@@ -1374,7 +1375,7 @@
                         <div class="col-7">
                           <label for="lastname">N° de documento</label>
                           <input class="form-control" formControlName="numDoc" placeholder="Ingresar N°" type="text"
-                            name="lastname">
+                            mask="0*" maxlength="12">
                         </div>
 
                         <div class="clearfix"></div>
@@ -1592,8 +1593,8 @@
                     <label for="names">Nombres</label>
 
                     <input class="form-control" #nameContactForm placeholder="Ingresa tu(s) nombre(s)"
-                      (keyup)="onKeyup()" [ngClass]="{isvalid : validateContactForm('nameContacto')}"
-                      formControlName="nameContacto" type="text" value="" name="names">
+                      [ngClass]="{isvalid : validateContactForm('nameContacto')}" formControlName="nameContacto"
+                      type="text" value="" name="names">
 
                     <span class="valid" *ngIf="validateContactForm('nameContacto')">
                       Ingresa tus nombres de contacto
