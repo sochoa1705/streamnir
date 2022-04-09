@@ -11,9 +11,9 @@
                 </div>
 
                 <div class="carousel-inner">
-                    <ng-container *ngFor="let image of slider; let first = first">
+                    <ng-container *ngFor="let image of slider; let first = first; let i = index">
                         <div  class="aside__content carousel-item" [ngClass]="{'active': first}">
-                            <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image)" [src]="image.PathImage" class="d-block w-100" alt="...">
+                            <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image,'slider',i,slider.length)" [src]="image.PathImage" class="d-block w-100" alt="...">
                         </div>
                     </ng-container>
                 </div>
@@ -32,9 +32,9 @@
         <div class="col-md-6 col-12">
             <div class="row">
                 <div class="col-12">
-                    <ng-container *ngFor="let image of images">
+                    <ng-container *ngFor="let image of images; let i = index">
                         <div  class="aside__content_2">
-                            <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image)" [src]="image.PathImage">
+                            <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image, 'banner', i, images.length)" [src]="image.PathImage">
                         </div>
                     </ng-container>
                 </div>

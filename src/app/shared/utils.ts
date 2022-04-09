@@ -103,3 +103,8 @@ export function generateLabelTag() {
 
   return pathname ? routerToCapitalice(pathname) : '';
 }
+
+
+export function getFileName(src:string){
+  return src.replace(/^.*[\\\/]/, '');
+}
