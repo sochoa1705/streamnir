@@ -314,8 +314,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       customers: this._formBuilder.array([]),
       paymentMethodForm: this.paymentMethodForm,
       contactForm: this.contactForm,
-      chkPolity: ['', [Validators.required, Validators.requiredTrue]],
-      chkInfo: ['', [Validators.required, Validators.requiredTrue]]
+      chkPolity: [false, [Validators.requiredTrue]],
+      chkInfo: [false, [Validators.requiredTrue]]
     });
   }
 
@@ -361,6 +361,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     return '';
   }
+
+
+  onKeyup() {
+    console.log('onKeyup');
+  }
+
+
 
   showDataContacto: Boolean = true;
 

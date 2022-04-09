@@ -587,9 +587,9 @@
 
                   <div class="row rowMobileCard">
                     <div class="col-6 viewMobileWidth">
-                      <label for="names">Nombres</label>
+                      <label>Nombres</label>
                       <input class="form-control" #nameContactForm placeholder="Ingresa tu nombre"
-                        formControlName="nameContacto" type="text" value="" name="names">
+                        formControlName="nameContacto" type="text" value="">
                     </div>
 
                     <div class="col-6 viewMobileWidth">
@@ -1364,7 +1364,7 @@
                         <div class="col-5">
                           <label for="names">Tipo de doc</label>
                           <select formControlName="tipoDoc" class="form-select-f">
-                            <option value="" selected>-- SELECCIONE --</option>
+                            <option value="" selected>Seleccione</option>
                             <option value="celular">DNI</option>
                             <option value="celular">Pasaporte</option>
                             <option value="fijo">C. Extranjería</option>
@@ -1592,8 +1592,8 @@
                     <label for="names">Nombres</label>
 
                     <input class="form-control" #nameContactForm placeholder="Ingresa tu(s) nombre(s)"
-                      [ngClass]="{isvalid : validateContactForm('nameContacto')}" formControlName="nameContacto"
-                      type="text" value="" name="names">
+                      (keyup)="onKeyup()" [ngClass]="{isvalid : validateContactForm('nameContacto')}"
+                      formControlName="nameContacto" type="text" value="" name="names">
 
                     <span class="valid" *ngIf="validateContactForm('nameContacto')">
                       Ingresa tus nombres de contacto
