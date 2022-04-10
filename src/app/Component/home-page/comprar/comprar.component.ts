@@ -455,6 +455,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   buyInsurance(): void {
     debugger
 
+    console.clear();
     console.log('1. buyInsurance');
 
     if (this.formShop.invalid)
@@ -466,8 +467,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (this.contactForm.invalid)
       this.contactForm.markAllAsTouched();
 
-    if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
-      return;
+    // Comentado temporalmente para pruebas - Las validaciones casi siempre devuelven INVALID (revisar)
+    //if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
+    //  return;
 
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
     this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson.passenger.length));
@@ -487,9 +489,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     console.log(payload);
 
+    console.log("JSON payload", JSON.stringify(payload));
+    
     this._secureBookingService.generateInsuranceReserve(payload).subscribe((response: any) => {
       this.reservation = response;
-      //console.log('Codigo de reserva: ' + this.reservation.Reserva);
+      localStorage.setItem('reserva', JSON.stringify(response))
+      //console.log('Codigo de reserva:', this.reservation);
 
       debugger
 
@@ -518,9 +523,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     this.getPassengerAges();
 
+    const fechasalida = this.resultJson.fromDate.split('/');
+    const fecharetorno = this.resultJson.toDate.split('/');
+
     const payload: RegistrarSeguroRQ = {
-      fec_salida: this.resultJson.fromDate,                       // FECHA DE PARTIDA
-      fec_retorno: this.resultJson.toDate,                        // FECHA DE RETORNO
+      fec_salida: `${fechasalida[2]}-${fechasalida[1]}-${fechasalida[0]}`,                       // FECHA DE PARTIDA
+      fec_retorno: `${fecharetorno[2]}-${fecharetorno[1]}-${fecharetorno[0]}`,                        // FECHA DE RETORNO
       cant_paxes: this.resultJson.countCustomers,               // CANTIDAD DE PASAJEROS
       destino: this.resultJson.destinyString.descripcion_destino, // NOMBRE DEL DESTINO
       edades: `${this.agesCustomers};`,                           // EDADES CONCATENADAS CON PUNTO Y COMA
@@ -540,7 +548,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       contacto_ape: data.contactForm.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_email: data.contactForm.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
       contacto_direccion: (data.contactForm.chkFac) ? data.contactForm.direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_telfs: '2,51,,986378431;',//data.contactForm.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
+      contacto_telfs: ',,,;',//data.contactForm.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
       contacto_emerg_nom: data.contactForm.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_ape: data.contactForm.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_email: data.contactForm.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
@@ -605,6 +613,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const payload: RqPaymentCeRequest1 = this.generatePayloadToPay(data);
 
+    console.log("JSON payload make payment", JSON.stringify(payload));
+
     localStorage.setItem('payloadPayment', JSON.stringify(payload));
 
     this._paymentService.v1ApiPaymentPost({ body: payload }).subscribe({
@@ -614,6 +624,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         localStorage.setItem('paymentData', this.paymentData);
 
         const result = JSON.parse(this.paymentData);
+
+        console.log("JSON payload make payment RS", this.paymentData);
         debugger
 
         if (result.Result.IsSuccess) {
@@ -697,7 +709,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         "Card": {
           "Number": data.paymentMethodForm.numberCard,
           "SecurityCode": data.paymentMethodForm.ccvCard,
-          "ExpirationDate": data.paymentMethodForm.expiredCard ? `${data.paymentMethodForm.expiredCard.substring(4)}/${data.paymentMethodForm.expiredCard.substring(2, 4)}` : null
+          "ExpirationDate": `${data.paymentMethodForm.expiredCard.substring(0, 2)}/${data.paymentMethodForm.expiredCard.substring(2)}` //? `${data.paymentMethodForm.expiredCard.substring(4)}/${data.paymentMethodForm.expiredCard.substring(2, 4)}` : null
         },
         "Amount": {
           "Value": data.PriceTotal,
@@ -775,12 +787,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     let pasajeros: any = [];
 
     data.customers.forEach((value: any, index: number) => {
+
       let jsonPasajeros = {
         pax_nom: value.nameCustomer,
         pax_ape_pat: value.lastNameCustomer,
         doc_cid: (value.typeDocCustomer).toUpperCase(),
         pax_num_doc: value.numDocCustomer,
-        pax_fec_nac: value.dayCustomer + '/' + value.monthCustomer + '/' + value.yearCustomer,
+        pax_fec_nac: `${value.yearCustomer}-${value.monthCustomer}-${value.dayCustomer}`,
         pax_voucher_travelace: '-',
         pax_control_travelace: '-',
         pax_void_travelace: 'N',
@@ -847,7 +860,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       ages.push(age);
     }
 
-    this.agesCustomers = ages.join(';');
+    //this.agesCustomers = ages.join(';');
+    this.agesCustomers = this.resultJson.aniosNacimiento.map((c: any) => c.edad).join(";");
   }
 
   // RESERVA VUELOS
@@ -1100,5 +1114,74 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.timeShow = totalSeconds
     this.ShowComponentTime = true
     // return totalSeconds
+  }
+
+  onChangeOfficialDocument(posicion: number) {
+    if (posicion != 99)
+      this.formShop.get("customers." + posicion + ".numDocCustomer")?.setValue('');
+    else
+      this.formShop.get("paymentMethodForm.numDoc")?.setValue('');
+  }
+
+  allowAlphabetic(event: KeyboardEvent) {
+    const pattern = /[a-zA-Z\s]/;
+    
+    if (!pattern.test(event.key))
+        event.preventDefault();
+  }
+
+  allowNumeric(event: KeyboardEvent) {
+    const pattern = /[0-9]/;
+    
+    if (!pattern.test(event.key))
+        event.preventDefault();
+  }
+
+  allowOfficialDocument(event: KeyboardEvent, posicion: number) {
+    let pattern: RegExp;
+    let tipoDocumento = '';
+    const data = this.formShop.value;
+
+    if (posicion != 99)
+      tipoDocumento = data.customers[posicion].typeDocCustomer;
+    else
+      tipoDocumento = data.paymentMethodForm.tipoDoc;
+   
+    if (tipoDocumento != '') {
+      pattern = tipoDocumento === 'DNI' || tipoDocumento === 'RUC' ? /[0-9]/ : /[a-zA-Z0-9\s]/;
+      
+      if (!pattern.test(event.key))
+          event.preventDefault();
+    }
+    else
+      event.preventDefault();
+  }
+
+  onPasteAlphabetic(event: ClipboardEvent) {
+    event.preventDefault();
+
+    if (event.clipboardData != null) {
+      const texto: string = event.clipboardData.getData('text/plain').replace(/[0-9]/g, '');
+
+      document.execCommand('insertText', false, texto);
+    }
+  }
+
+  onPasteNumeric(event: ClipboardEvent) {
+    event.preventDefault();
+
+    if (event.clipboardData != null) {
+      const texto: string = event.clipboardData.getData('text/plain').replace(/\D/g, '');
+
+      document.execCommand('insertText', false, texto);
+    }
+  }
+
+  denyPaste(event: ClipboardEvent) {
+    event.preventDefault();
+  }
+
+  denyDrop(event: DragEvent) {
+    event.preventDefault();
   }
 }

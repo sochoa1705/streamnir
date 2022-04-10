@@ -35,6 +35,7 @@
               <div class="d-flex flex-row number">
                 <div class="d-flex flex-row textBtn">
                   <input formControlName="age" class="inputEdadPasajero" type="text" placeholder="Edad" maxlength="2"
+                    (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)"
                     [ngClass]="getMessage(MSG_CUSTOMERS) != MSG_EMPTY ? 'isvalid' : ''">
                 </div>
 
@@ -209,7 +210,7 @@
         <div class="columnButton">
           <!-- <button type="submit" [disabled]="form.invalid">Cotizar Ahora</button> -->
           <!-- <button type="submit" (click)="send()" [disabled]="!showOption || form.invalid">Cotizar Ahora</button> -->
-          <button type="submit" (click)="send()">Cotizar Ahora</button>
+          <button type="submit" (click)="send()">Cotizar Ahora 1</button>
         </div>
         <!-- END BOTOM -->
       </div>

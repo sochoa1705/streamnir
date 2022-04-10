@@ -26,9 +26,8 @@
   <!-- END BANNER -->
 
   <div class="row" *ngIf="typePay === 'TARJETA'">
-    <div class="col-12 subTitleConf" *ngIf="reservation; else vueloREserva">
-      Excelente elección.
-      <br> Tu solicitud de compra es {{ reservation.Reserva }} ha sido recibida y fue pagada correctamente.
+    <div class="col-12 subTitleConf" *ngIf="reservaStr; else vueloREserva">
+      <p>Excelente elección. Tu solicitud de compra es <b>{{ reservaStr.Reserva }}</b> ha sido recibida y fue pagada correctamente.</p>
     </div>
     <ng-template #vueloREserva>
       <div class="col-12 subTitleConf">
@@ -39,7 +38,7 @@
   </div>
   <div class="row" *ngIf="typePay === 'SAFETYPAY'">
     <div class="col-12 subTitleConf">
-      <br> Se ha completado la reserva y estamos a la espera del pago para completar tu compra!
+      <p>Excelente elección. Se ha completado la reserva y estamos a la espera del pago para completar tu compra!</p>
     </div>
   </div>
 

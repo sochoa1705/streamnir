@@ -456,6 +456,7 @@
                       <label>Nombres</label>
 
                       <input class="form-control" type="text" formControlName="nameCustomer"
+                        (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                         placeholder="El que figura en el documento de viaje.">
                     </div>
 
@@ -463,6 +464,7 @@
                       <label for="lastname1">Apellidos</label>
 
                       <input class="form-control" type="text" formControlName="lastNameCustomer"
+                        (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                         placeholder="El que figura en el documento de viaje.">
                     </div>
 
@@ -474,7 +476,8 @@
 
                       <div class="row">
                         <div class="col-2">
-                          <input class="form-control" maxlength="2" formControlName="dayCustomer" type="text">
+                          <input class="form-control" maxlength="2" formControlName="dayCustomer" type="text"
+                            keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)">
                         </div>
 
                         <div class="col-6">
@@ -521,7 +524,7 @@
                     <div class="col-3 viewMobileWidth">
                       <label for="names">Tipo de documento</label>
 
-                      <select formControlName="typeDocCustomer" class="form-select-f">
+                      <select formControlName="typeDocCustomer" class="form-select-f" (change)="onChangeOfficialDocument(i)">
                         <option value="" selected>Seleccione</option>
                         <option value="DNI">DNI</option>
                         <option value="RUC">RUC</option>
@@ -532,7 +535,8 @@
 
                     <div class="col-3 viewMobileWidth">
                       <label for="lastname">N° de documento</label>
-                      <input class="form-control" maxlength="8" formControlName="numDocCustomer" type="text"
+                      <input class="form-control" formControlName="numDocCustomer" type="text"
+                        (keypress)="allowOfficialDocument($event, i)" (paste)="denyPaste($event)" (drop)="denyDrop($event)"
                         name="ndocumento">
                     </div>
 
@@ -964,6 +968,7 @@
                       <div class="col-6 viewMobileWidth">
                         <label for="lastname">Titular de la tarjeta</label>
                         <input class="form-control" placeholder="El que figura en la tarjeta." type="text"
+                          (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                           name="lastname">
                       </div>
 
@@ -975,12 +980,14 @@
                         <div class="row">
                           <div class="col-5">
                             <label for="names">Vencimiento</label>
-                            <input class="form-control" placeholder="MM/AA" type="text" name="names">
+                            <input class="form-control" placeholder="MM/AA" type="text" name="names"
+                              (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)">
                           </div>
 
                           <div class="col-6">
                             <label for="lastname">Código de seguridad</label>
-                            <input class="form-control" placeholder="El que figura en el documento de viaje."
+                            <input class="form-control" placeholder="El que figura en el documento de viaje." maxlength="3"
+                              (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)"
                               type="text" name="lastname">
                           </div>
 
@@ -1003,7 +1010,8 @@
 
                           <div class="col-7">
                             <label for="lastname">N° de documento</label>
-                            <input class="form-control" placeholder="Ingresar N°" type="text" name="lastname">
+                            <input class="form-control" placeholder="Ingresar N°" type="text" name="lastname"
+                              (keypress)="allowOfficialDocument($event, 99)" (paste)="denyPaste($event)" (drop)="denyDrop($event)">
                           </div>
 
                           <div class="clearfix"></div>
@@ -1022,6 +1030,7 @@
                       <div class="col-6 viewMobileWidth">
                         <label for="lastname">Ciudad de facturación</label>
                         <input class="form-control" placeholder="Del titular de la tarjeta." type="text"
+                          (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                           name="lastname">
                       </div>
 
@@ -1119,6 +1128,7 @@
                     <label>Nombres</label>
 
                     <input class="form-control" formControlName="nameCustomer"
+                      (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                       placeholder="El que figura en el documento de viaje." type="text">
                   </div>
 
@@ -1126,6 +1136,7 @@
                     <label>Apellidos</label>
 
                     <input class="form-control" formControlName="lastNameCustomer"
+                      (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                       placeholder="El que figura en el documento de viaje." type="text">
                   </div>
 
@@ -1139,6 +1150,7 @@
                     <div class="row">
                       <div class="col-2">
                         <input class="form-control" maxlength="2" formControlName="dayCustomer" type="text"
+                          (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)"
                           name="dayCustomer">
                       </div>
 
@@ -1182,7 +1194,7 @@
                   <div class="col-3 viewMobileWidth">
                     <label for="names">Tipo de documento</label>
 
-                    <select formControlName="typeDocCustomer" class="form-select-f">
+                    <select formControlName="typeDocCustomer" class="form-select-f" (change)="onChangeOfficialDocument(i)">
                       <option value="" selected>Seleccione</option>
                       <option value="DNI">DNI</option>
                       <option value="RUC">RUC</option>
@@ -1194,7 +1206,8 @@
                   <div class="col-3 viewMobileWidth">
                     <label for="lastname">N° de documento</label>
 
-                    <input class="form-control" formControlName="numDocCustomer" maxlength="8" type="text"
+                    <input class="form-control" formControlName="numDocCustomer" type="text"
+                      (keypress)="allowOfficialDocument($event, i)" (paste)="denyPaste($event)" (drop)="denyDrop($event)"
                       name="ndocumento">
                   </div>
 
@@ -1322,6 +1335,7 @@
                       <label for="lastname">Titular de la tarjeta</label>
 
                       <input class="form-control" formControlName="nameCard" placeholder="El que figura en la tarjeta."
+                        (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                         type="text" name="lastname">
                     </div>
 
@@ -1334,14 +1348,16 @@
                         <div class="col-5">
                           <label for="names">Vencimiento</label>
 
-                          <input class="form-control" formControlName="expiredCard" mask="9999/99" placeholder="MM/AA"
+                          <input class="form-control" formControlName="expiredCard" mask="99/99" placeholder="MM/AA"
+                            (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)"
                             type="text" name="names">
                         </div>
 
                         <div class="col-6">
                           <label for="lastname">Código de seguridad</label>
 
-                          <input class="form-control" formControlName="ccvCard"
+                          <input class="form-control" formControlName="ccvCard" maxlength="3"
+                            (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)"
                             placeholder="El que figura en el documento de viaje." type="text" name="lastname">
                         </div>
 
@@ -1363,17 +1379,18 @@
                       <div class="row">
                         <div class="col-5">
                           <label for="names">Tipo de doc</label>
-                          <select formControlName="tipoDoc" class="form-select-f">
+                          <select formControlName="tipoDoc" class="form-select-f" (change)="onChangeOfficialDocument(99)">
                             <option value="" selected>-- SELECCIONE --</option>
-                            <option value="celular">DNI</option>
-                            <option value="celular">Pasaporte</option>
-                            <option value="fijo">C. Extranjería</option>
+                            <option value="DNI">DNI</option>
+                            <option value="PSP">Pasaporte</option>
+                            <option value="CEX">C. Extranjería</option>
                           </select>
                         </div>
 
                         <div class="col-7">
                           <label for="lastname">N° de documento</label>
                           <input class="form-control" formControlName="numDoc" placeholder="Ingresar N°" type="text"
+                            (keypress)="allowOfficialDocument($event, 99)" (paste)="denyPaste($event)" (drop)="denyDrop($event)"
                             name="lastname">
                         </div>
 
@@ -1409,6 +1426,7 @@
                       <label for="lastname">Ciudad de facturación</label>
 
                       <input class="form-control" formControlName="cityCard" placeholder="Del titular de la tarjeta."
+                        (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                         type="text" name="lastname">
                     </div>
 

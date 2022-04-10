@@ -1,8 +1,8 @@
 
 export interface RegistrarSeguroRQ {
   res_seguro_id?: number;
-  fec_salida: Date;
-  fec_retorno: Date;
+  fec_salida: string;
+  fec_retorno: string;
   cant_paxes: number;
   destino: string;
   edades: string;
@@ -75,7 +75,7 @@ export interface RegistrarSeguroRQ {
   cobertura: Cobertura[];
   idfileautomatico: number;
   validarDuplicidad: boolean;
-  fchExpiraSafetyPay?: Date;
+  fchExpiraSafetyPay?: string;
   xPagarSafetyPay: number;
   idTipoTarifa: number;
   idReciboSafetyPay: number;
