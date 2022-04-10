@@ -2,7 +2,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { OffersService } from 'src/app/Services/mock/offers.service';
 import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface';
 import { CoverageService } from 'src/app/Services/coverage/coverage.service';
 import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';

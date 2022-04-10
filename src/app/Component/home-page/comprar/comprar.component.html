@@ -1219,7 +1219,7 @@
                   <div class="col-3 viewMobileWidth">
                     <label>N° de documento</label>
 
-                    <input class="form-control" formControlName="numDocCustomer" mask="0*" maxlength="12" type="text"
+                    <input class="form-control" formControlName="numDocCustomer" maxlength="12" type="text"
                       (keypress)="allowOfficialDocument($event, i)" (paste)="denyPaste($event)"
                       (drop)="denyDrop($event)" name="ndocumento">
                   </div>
@@ -1405,7 +1405,7 @@
                           <label for="lastname">N° de documento</label>
                           <input class="form-control" formControlName="numDoc" placeholder="Ingresar N°" type="text"
                             (keypress)="allowOfficialDocument($event, 99)" (paste)="denyPaste($event)"
-                            (drop)="denyDrop($event)" mask="0*" maxlength="12">
+                            (drop)="denyDrop($event)" maxlength="12">
                         </div>
 
                         <div class="clearfix"></div>
