@@ -32,9 +32,39 @@ export class ValidatorsService {
     }
   }
 
-  validateRUC(field: string) {
+  validateAddress(dependentField: string, field: string) {
 
     return (formGroup: AbstractControl): ValidationErrors | null => {
+
+
+      if (!formGroup.get(dependentField)?.value) {
+        formGroup.get(field)?.setErrors(null);
+        return null;
+      }
+
+      debugger
+
+      const valueField = formGroup.get(field)?.value;
+
+      if (valueField.length < 10 || valueField.length > 50) {
+        formGroup.get(field)?.setErrors({ notValid: true });
+        return { notValid: true };
+      }
+
+      formGroup.get(field)?.setErrors(null);
+
+      return null;
+    }
+  }
+
+  validateRUC(dependentField: string, field: string) {
+
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+
+      if (dependentField === '' || !formGroup.get(dependentField)?.value) {
+        formGroup.get(field)?.setErrors(null);
+        return null;
+      }
 
       const valueField = formGroup.get(field)?.value;
 

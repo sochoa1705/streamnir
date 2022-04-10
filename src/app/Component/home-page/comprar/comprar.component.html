@@ -415,7 +415,7 @@
             </div>
 
             <div formArrayName="customers">
-              <div [formGroupName]="i" *ngFor="let customer of customersArray.controls; let i = index"
+              <div [formGroupName]="i" *ngFor="let customer of customers.controls; let i = index"
                 class="ro rowMobileCard">
                 <div class="card-body card_pasajero">
                   <div *ngIf="this.safe0Json['reservaVuelos']; else vuelosTitle">
@@ -698,9 +698,10 @@
                   <div class="row rowMobileCard">
                     <div class="col-6 viewMobileWidth">
                       <div class="form-check">
-                        <input class="form-check-input" (change)="requestInvoice($event)" formControlName="chkFac"
-                          type="checkbox" id="chkFac" value="option1">
-                        <label class="form-check-label" for="chkFac">Solicitar factura</label>
+                        <input class="form-check-input" [checked]="showInvoiceData"
+                          (change)="showInvoiceData = !showInvoiceData" formControlName="invoiceRequestBox"
+                          type="checkbox" id="invoiceRequestBox" value="option1">
+                        <label class="form-check-label" for="invoiceRequestBox">Solicitar factura</label>
                       </div>
                     </div>
 
@@ -981,27 +982,17 @@
                       <div class="col-6 viewMobileWidth">
                         <div class="row">
                           <div class="col-5">
-                            <<<<<<< HEAD <label>Vencimiento</label>
-                              <input class="form-control" mask='99/99' placeholder="MM/AA" type="text">
-                          </div>
-
-                          <div class="col-6">
-                            <label>Código de seguridad</label>
-                            <input class="form-control" mask="0*" minlength="3" maxlength="3" type="password"
-                              class="form-control" placeholder="CVC">
-                            =======
                             <label for="names">Vencimiento</label>
-                            <input class="form-control" placeholder="MM/AA" type="text" name="names"
+                            <input class="form-control" mask='99/99' placeholder="MM/AA" type="text" name="names"
                               (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
                               (drop)="denyDrop($event)">
                           </div>
 
                           <div class="col-6">
-                            <label for="lastname">Código de seguridad</label>
-                            <input class="form-control" placeholder="El que figura en el documento de viaje."
-                              maxlength="3" (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
-                              (drop)="denyDrop($event)" type="text" name="lastname">
-                            >>>>>>> add/fix-seguros-090422
+                            <label>Código de seguridad</label>
+                            <input class="form-control" placeholder="CVC" mask="0*" minlength="3" maxlength="3"
+                              type="password" (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
+                              (drop)="denyDrop($event)" type="text">
                           </div>
 
                           <div class="col-1 colBoxInfo">
@@ -1113,8 +1104,11 @@
           </div>
 
           <div formArrayName="customers">
-            <div [formGroupName]="i" *ngFor="let customer of customersArray.controls; let i = index"
+            <div [formGroupName]="i" *ngFor="let customer of customers.controls; let i = index"
               class="row rowMobileCard">
+
+              <hr *ngIf="i > 0">
+
               <div class="card-body card_pasajero">
                 <div *ngIf="this.safe0Json['reservaVuelos']; else vuelosTitle">
                   <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1132,8 +1126,8 @@
                       <path
                         d="M12.8033 9.69668C11.9864 8.87982 11.0141 8.27511 9.95329 7.90904C11.0895 7.12649 11.8359 5.81684 11.8359 4.33594C11.8359 1.94511 9.89083 0 7.5 0C5.10917 0 3.16406 1.94511 3.16406 4.33594C3.16406 5.81684 3.91052 7.12649 5.04674 7.90904C3.9859 8.27511 3.01359 8.87982 2.19671 9.69668C0.780147 11.1133 0 12.9967 0 15H1.17188C1.17188 11.5107 4.01065 8.67188 7.5 8.67188C10.9893 8.67188 13.8281 11.5107 13.8281 15H15C15 12.9967 14.2199 11.1133 12.8033 9.69668ZM7.5 7.5C5.75534 7.5 4.33594 6.08063 4.33594 4.33594C4.33594 2.59125 5.75534 1.17188 7.5 1.17188C9.24466 1.17188 10.6641 2.59125 10.6641 4.33594C10.6641 6.08063 9.24466 7.5 7.5 7.5Z"
                         fill="#009AED" />
-                    </svg> &nbsp; Pasajero {{ i + 1 }} &nbsp; (
-                    <strong> {{ this.resultJson['aniosNacimiento'][i].edad }} años</strong>)
+                    </svg> &nbsp; Pasajero {{ i + 1 }} &nbsp; (<strong> {{ this.resultJson['aniosNacimiento'][i].edad }}
+                      años</strong>)
                   </h4>
                 </ng-template>
 
@@ -1144,6 +1138,10 @@
                     <input class="form-control" formControlName="nameCustomer" (keypress)="allowAlphabetic($event)"
                       (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                       placeholder="El que figura en el documento de viaje." type="text">
+
+                    <span class="valid" *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required">
+                      Ingresa el nombre del pasajero
+                    </span>
                   </div>
 
                   <div class="col-6 viewMobileWidth">
@@ -1163,13 +1161,9 @@
 
                     <div class="row">
                       <div class="col-2">
-                        <<<<<<< HEAD <input class="form-control" minlength="1" maxlength="2" mask="0*"
-                          formControlName="dayCustomer" type="text" name="dayCustomer">
-                          =======
-                          <input class="form-control" maxlength="2" formControlName="dayCustomer" type="text"
-                            (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)"
-                            name="dayCustomer">
-                          >>>>>>> add/fix-seguros-090422
+                        <input class="form-control" minlength="1" maxlength="2" mask="0*" formControlName="dayCustomer"
+                          type="text" (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
+                          (drop)="denyDrop($event)" name="dayCustomer">
                       </div>
 
                       <div class="col-6">
@@ -1223,13 +1217,11 @@
                   </div>
 
                   <div class="col-3 viewMobileWidth">
-                    <label for="lastname">N° de documento</label>
+                    <label>N° de documento</label>
 
-                    <<<<<<< HEAD <input class="form-control" formControlName="numDocCustomer" mask="0*" maxlength="12"
-                      type="text"=======<input class="form-control" formControlName="numDocCustomer" type="text"
+                    <input class="form-control" formControlName="numDocCustomer" mask="0*" maxlength="12" type="text"
                       (keypress)="allowOfficialDocument($event, i)" (paste)="denyPaste($event)"
-                      (drop)="denyDrop($event)">>>>>>> add/fix-seguros-090422
-                      name="ndocumento">
+                      (drop)="denyDrop($event)" name="ndocumento">
                   </div>
 
                   <div class="col-6 viewMobileWidth">
@@ -1370,24 +1362,16 @@
                           <label>Vencimiento</label>
 
                           <input class="form-control" formControlName="expiredCard" mask="99/99" placeholder="MM/AA"
-                            <<<<<<< HEAD type="text">
-                          =======
-                          (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)"
-                          type="text" name="names">
-                          >>>>>>> add/fix-seguros-090422
+                            (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)"
+                            type="text">
                         </div>
 
                         <div class="col-6">
                           <label>Código de seguridad</label>
 
-                          <<<<<<< HEAD <input class="form-control" formControlName="ccvCard" mask="0*" minlength="3"
-                            maxlength="3" type="password" placeholder="CVC">
-                            =======
-                            <input class="form-control" formControlName="ccvCard" maxlength="3"
-                              (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
-                              (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje."
-                              type="text" name="lastname">
-                            >>>>>>> add/fix-seguros-090422
+                          <input class="form-control" formControlName="ccvCard" mask="0*" maxlength="3"
+                            (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)"
+                            placeholder="CVC" type="password">
                         </div>
 
                         <div class="col-1 colBoxInfo">
@@ -1408,31 +1392,20 @@
                       <div class="row">
                         <div class="col-5">
                           <label for="names">Tipo de doc</label>
-                          <<<<<<< HEAD <select formControlName="tipoDoc" class="form-select-f">
+                          <select formControlName="tipoDoc" class="form-select-f"
+                            (change)="onChangeOfficialDocument(99)">
                             <option value="" selected>Seleccione</option>
-                            <option value="celular">DNI</option>
-                            <option value="celular">Pasaporte</option>
-                            <option value="fijo">C. Extranjería</option>
-                            =======
-                            <select formControlName="tipoDoc" class="form-select-f"
-                              (change)="onChangeOfficialDocument(99)">
-                              <option value="" selected>-- SELECCIONE --</option>
-                              <option value="DNI">DNI</option>
-                              <option value="PSP">Pasaporte</option>
-                              <option value="CEX">C. Extranjería</option>
-                              >>>>>>> add/fix-seguros-090422
-                            </select>
+                            <option value="DNI">DNI</option>
+                            <option value="PSP">Pasaporte</option>
+                            <option value="CEX">C. Extranjería</option>
+                          </select>
                         </div>
 
                         <div class="col-7">
                           <label for="lastname">N° de documento</label>
                           <input class="form-control" formControlName="numDoc" placeholder="Ingresar N°" type="text"
-                            <<<<<<< HEAD mask="0*" maxlength="12">
-                          =======
-                          (keypress)="allowOfficialDocument($event, 99)" (paste)="denyPaste($event)"
-                          (drop)="denyDrop($event)"
-                          name="lastname">
-                          >>>>>>> add/fix-seguros-090422
+                            (keypress)="allowOfficialDocument($event, 99)" (paste)="denyPaste($event)"
+                            (drop)="denyDrop($event)" mask="0*" maxlength="12">
                         </div>
 
                         <div class="clearfix"></div>
@@ -1785,7 +1758,7 @@
                   </div>
 
                   <div class="col-6 viewMobileWidth">
-                    <label for="dirección">Dirección</label>
+                    <label for="direccion">Dirección</label>
                     <input formControlName="direccion" class="form-control"
                       [ngClass]="{isvalid : validateContactForm('direccion')}" placeholder="Ca. / Jr. / Av.">
 
@@ -1800,9 +1773,11 @@
                 <div class="row rowMobileCard">
                   <div class="col-6 viewMobileWidth">
                     <div class="form-check">
-                      <input class="form-check-input" formControlName="chkFac" type="checkbox" id="chkFac"
-                        (change)="requestInvoice($event)">
-                      <label class="form-check-label" for="chkFac">Solicitar factura</label>
+                      <input class="form-check-input" formControlName="invoiceRequestBox" type="checkbox"
+                        [checked]="showInvoiceData" (change)="showInvoiceData = !showInvoiceData"
+                        id="invoiceRequestBox">
+
+                      <label class="form-check-label" for="invoiceRequestBox">Solicitar factura</label>
                     </div>
                   </div>
 
@@ -1866,22 +1841,25 @@
             </div>
           </div>
 
-          <!-- <pre>Form valid: {{ formShop.valid }}</pre>
+          <!-- <pre>Validaciones de formularios</pre>
 
-          <pre>Form values</pre>
+          <pre>FormShop valid: {{ formShop.valid }}</pre>
+          <pre>FormShop values</pre>
           <pre>{{ formShop.value | json }}</pre>
 
-          <pre>Form errors</pre>
-          <pre>{{ formShop.errors | json }}</pre>
+          <pre>PaymentMethodForm valid: {{ paymentMethodForm.valid }}</pre>
+          <pre>PaymentMethodForm values</pre>
+          <pre>{{ paymentMethodForm.value | json }}</pre>
 
-
-          <pre>Form valid: {{ contactForm.valid }}</pre>
-
-          <pre>Form values</pre>
+          <pre>ContactForm valid: {{ contactForm.valid }}</pre>
+          <pre>ContactForm values</pre>
           <pre>{{ contactForm.value | json }}</pre>
 
-          <pre>Form errors</pre>
-          <pre>{{ contactForm.errors | json }}</pre> -->
+          <pre>ruc errors</pre>
+          <pre>{{ contactForm.controls.ruc.errors | json }}</pre>
+          <pre>direccion errors</pre>
+          <pre>{{ contactForm.controls.direccion.errors | json }}</pre> -->
+
 
           <div class="row rowMobileCard ">
             <div class="col-12 contentCenterMobile">

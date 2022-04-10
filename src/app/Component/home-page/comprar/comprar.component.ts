@@ -144,13 +144,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _router: Router,
-    public offersService: OffersService,
-    public coverageService: CoverageService,
-    public loaderSubjectService: LoaderSubjectService,
-    public reservaVuelosService: ReservaVuelosService,
+    private _coverageService: CoverageService,
+    private _loaderSubjectService: LoaderSubjectService,
+    private _reservaVuelosService: ReservaVuelosService,
     private _secureBookingService: SecureBookingService,
-    public cardPaymentService: CardPaymentService,
-    public generatePayService: GeneratePayService,
+    private _cardPaymentService: CardPaymentService,
+    private _generatePayService: GeneratePayService,
     private _paymentService: PaymentService,
     private _preferencesService: PreferenceService,
     private _validatorsService: ValidatorsService,
@@ -264,23 +263,23 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   createPaymentMethodForm(): FormGroup {
     return this._formBuilder.group({
-      bankPay: ['', [Validators.required]],
+      bankPay: [''],
       select21: [this.current['filter'] === 'filter' ? 'TARJETA' : 'SAFETYPAY'],
-      numberCard: [""],
-      nameCard: [""],
-      expiredCard: [""],
-      ccvCard: [""],
-      tipoDoc: [""],
-      numDoc: [""],
-      feePay: [""],
-      cityCard: [""],
-      address: [""]
+      numberCard: [''],
+      nameCard: [''],
+      expiredCard: [''],
+      ccvCard: [''],
+      tipoDoc: [''],
+      numDoc: [''],
+      feePay: [''],
+      cityCard: [''],
+      address: ['']
     });
   }
 
   createContactForm(): FormGroup {
     return this._formBuilder.group({
-      chkCustomer: [""],
+      chkCustomer: [''],
       nameContacto: [this.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(this._validatorsService.lettersPattern)]],
       lastnameContacto: [this.apellido, [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(this._validatorsService.lettersPattern)]],
       mailContacto: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]],
@@ -288,13 +287,14 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       typePhone0: ['', [Validators.required]],
       code0: ['511', [Validators.required]],
       numberPhone0: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(12), Validators.pattern(this._validatorsService.digitsPattern)]],
-      ruc: ['', [Validators.required, Validators.minLength(11), Validators.pattern(this._validatorsService.digitsPattern)]],
-      direccion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
-      chkFac: [false]
+      ruc: [''],
+      direccion: [''],
+      invoiceRequestBox: [false]
     }, {
       validators: [
         this._validatorsService.equalFields('mailContacto', 'mailConfirmContacto'),
-        this._validatorsService.validateRUC('ruc')
+        this._validatorsService.validateAddress('invoiceRequestBox', 'direccion'),
+        this._validatorsService.validateRUC('invoiceRequestBox', 'ruc')
       ]
     });
   }
@@ -309,7 +309,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       yearCustomer: ['', [Validators.required]],
       nationalityCustomer: ['', [Validators.required]],
       typeDocCustomer: ['', [Validators.required]],
-      numDocCustomer: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this._validatorsService.digitsPattern)]],
+      numDocCustomer: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern(this._validatorsService.alphanumericPattern)]],
       sexCustomer: ['', [Validators.required]]
     });
   }
@@ -323,7 +323,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       paymentMethodForm: this.paymentMethodForm,
       contactForm: this.contactForm,
       chkPolity: [false, [Validators.requiredTrue]],
-      chkInfo: [false, [Validators.requiredTrue]]
+      chkInfo: [false]
     });
   }
 
@@ -465,11 +465,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
 
-  requestInvoice(event: any) {
-    this.showInvoiceData = event.target.checked;
-  }
-
-  get customersArray() {
+  get customers() {
     return this.formShop.get('customers') as FormArray;
   }
 
@@ -531,9 +527,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (this.contactForm.invalid)
       this.contactForm.markAllAsTouched();
 
-    // Comentado temporalmente para pruebas - Las validaciones casi siempre devuelven INVALID (revisar)
-    //if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
-    //  return;
+    if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
+      return;
 
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
     this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson.passenger.length));
@@ -546,15 +541,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   generateInsuranceReserve(data: any) {
-    this.loaderSubjectService.showText('SE ESTA GENERANDO SU RESERVA!');
-    this.loaderSubjectService.showLoader();
+    this._loaderSubjectService.showText('SE ESTA GENERANDO SU RESERVA!');
+    this._loaderSubjectService.showLoader();
 
     const payload = new NMRequestBy<RegistrarSeguroRQ>(this.generatePayloadForInsurance(data));
 
     console.log(payload);
 
     console.log("JSON payload", JSON.stringify(payload));
-    
+
     this._secureBookingService.generateInsuranceReserve(payload).subscribe((response: any) => {
       this.reservation = response;
       localStorage.setItem('reserva', JSON.stringify(response))
@@ -562,7 +557,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
       debugger
 
-      this.loaderSubjectService.closeLoader();
+      this._loaderSubjectService.closeLoader();
 
       this.makePayment(data);
     })
@@ -611,21 +606,21 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       contacto_nom: data.contactForm.nameContacto,           // NOMBRE DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_ape: data.contactForm.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_email: data.contactForm.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_direccion: (data.contactForm.chkFac) ? data.contactForm.direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
+      contacto_direccion: (data.contactForm.invoiceRequestBox) ? data.contactForm.direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
       contacto_telfs: ',,,;',//data.contactForm.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
       contacto_emerg_nom: data.contactForm.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_ape: data.contactForm.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_email: data.contactForm.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
       contacto_emerg_telf: data.contactForm.numberPhone0,    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
-      ruc: (data.contactForm.chkFac) ? `RUC-${data.contactForm.ruc}` : `${data.customers[0].typeDocCustomer}-${data.customers[0].numDocCustomer}`, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
+      ruc: (data.contactForm.invoiceRequestBox) ? `RUC-${data.contactForm.ruc}` : `${data.customers[0].typeDocCustomer}-${data.customers[0].numDocCustomer}`, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
       razon_social: data.contactForm.nameContacto + ' ' + data.contactForm.lastnameContacto,  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
-      direccion_fiscal: (data.contactForm.chkFac) ? data.contactForm.direccion : '', // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
+      direccion_fiscal: (data.contactForm.invoiceRequestBox) ? data.contactForm.direccion : '', // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
       comentario: '',
       webs_cid: 7,
       usuweb_id: 56190,
       destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'N' : 'I', // obtener desde destiny.EsDestinoNacional
       numeroruc: '',
-      comprobantepago: (data.contactForm.chkFac) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
+      comprobantepago: (data.contactForm.invoiceRequestBox) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
       usobilletera: 'N',
       codigobloqueo: '',
       dkcliente: environment.dkAgenciaAC,
@@ -672,8 +667,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   makePayment(data: any) {
-    this.loaderSubjectService.showText('SE ESTA GESTIONANDO TU PAGO!');
-    this.loaderSubjectService.showLoader();
+    this._loaderSubjectService.showText('SE ESTA GESTIONANDO TU PAGO!');
+    this._loaderSubjectService.showLoader();
 
     const payload: RqPaymentCeRequest1 = this.generatePayloadToPay(data);
 
@@ -720,7 +715,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           //   this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
           // }
 
-          this.loaderSubjectService.closeLoader();
+          this._loaderSubjectService.closeLoader();
 
           this._router.navigateByUrl('/conformidad');
         }
@@ -729,7 +724,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         console.log('Error en el registro del pago');
         console.log(err);
 
-        this.loaderSubjectService.closeLoader();
+        this._loaderSubjectService.closeLoader();
       }
     })
   }
@@ -762,13 +757,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "Username": email,
         },
         "Customer": {
-          "Firstname": data.customers[0].nameCustomer,
-          "Lastname": data.customers[0].lastNameCustomer,
+          "Firstname": data.customers[0].nameCustomer.toUpperCase(),
+          "Lastname": data.customers[0].lastNameCustomer.toUpperCase(),
           "City": "",
           "Address": "",
           "DocumentType": data.customers[0].typeDocCustomer,
           "DocumentNumber": data.customers[0].numDocCustomer,
-          "Email": data.contactForm.mailContacto
+          "Email": data.contactForm.mailContacto.toUpperCase()
         },
         "Card": {
           "Number": data.paymentMethodForm.numberCard,
@@ -781,7 +776,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "OfFees": data.feePay || 0,
         },
         "Bank": {
-          "Id": data.paymentMethodForm.bankPay
+          "Id": data.paymentMethodForm.select21 === "SAFETYPAY" ? data.paymentMethodForm.bankPay : "",
         },
         "Booking": {
           "CodeSrv": 0,
@@ -825,7 +820,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     let payload = new NMRequestBy<CoberturaSeguroRQ>(lcobertura);
 
-    this.coverageService.getCoverage(payload).pipe(take(5)).subscribe({
+    this._coverageService.getCoverage(payload).pipe(take(5)).subscribe({
       next: (response) => {
         this.coverageL = response
 
@@ -931,7 +926,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   // RESERVA VUELOS
   getReserva() {
     const textSend = 'SE ESTA GENERANDO SU RESERVA!'
-    this.loaderSubjectService.showText(textSend)
+    this._loaderSubjectService.showText(textSend)
 
     console.log(this.dataShop.contactForm);
 
@@ -942,11 +937,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       "IdGroup": this.safe0Json.idGroup,
       "passengers": this.pasajerosVuelos(),
       contact: {
-        name: this.dataShop.contactForm.nameContacto,
-        lastName: this.dataShop.contactForm.lastnameContacto,
-        email: this.dataShop.contactForm.mailContacto,
+        name: this.dataShop.contactForm.nameContacto.toUpperCase(),
+        lastName: this.dataShop.contactForm.lastnameContacto.toUpperCase(),
+        email: this.dataShop.contactForm.mailContacto.toUpperCase(),
         // address: (this.dataShop.contactForm.recibo === undefined) ? this.dataShop.contactForm.recibo[0].direccion : this.dataShop.paymentMethodForm.address,
-        address: (this.dataShop.contactForm.chkFac) ? this.dataShop.contactForm.direccion : 'LIMA',
+        address: (this.dataShop.contactForm.invoiceRequestBox) ? this.dataShop.contactForm.direccion : 'LIMA',
         phones: [
           {
             phoneNumber: this.dataShop.contactForm.numberPhone0
@@ -957,18 +952,18 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     console.log(payload)
 
-    this.reservaVuelosService.reserva(payload, this.tokenJson).subscribe({
+    this._reservaVuelosService.reserva(payload, this.tokenJson).subscribe({
       next: (response: any) => {
         console.log(response)
         this.resevaVuelo = response
         localStorage.setItem('reserva', JSON.stringify(response))
         this._router.navigateByUrl('/conformidad')
 
-        this.loaderSubjectService.closeLoader()
+        this._loaderSubjectService.closeLoader()
       },
       error: (err) => {
         console.log(err)
-        this.loaderSubjectService.closeLoader()
+        this._loaderSubjectService.closeLoader()
       }
     })
   }
@@ -1024,8 +1019,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   // SAFETYPAY
   getGeneratePay(datos: any) {
     const textSend = 'SE ESTA PROCESANDO TU PAGO!'
-    this.loaderSubjectService.showText(textSend)
-    this.loaderSubjectService.showLoader()
+    this._loaderSubjectService.showText(textSend)
+    this._loaderSubjectService.showLoader()
 
     let lsafetypay: GenerarSafetyPayRQ = {
       PromoterName: datos.customers[0].nameCustomer,                 //NOMBRE DEL PRIMER PASAJERO ADULTO
@@ -1048,7 +1043,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     let payload = new NMRequestBy<GenerarSafetyPayRQ>(lsafetypay)
 
-    this.generatePayService.generatePay(payload).subscribe({
+    this._generatePayService.generatePay(payload).subscribe({
       next: (response) => {
         console.log(response)
         this.listBank = response
@@ -1060,7 +1055,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           }
         })
 
-        this.loaderSubjectService.closeLoader()
+        this._loaderSubjectService.closeLoader()
 
         let lactualizar: SafetyPayRQ = {
           res_seguro_id: (this.safe0Json['reservaVuelos']) ? this.resevaVuelo.idCotizacion : this.reservation.Reserva,                // CODIGO DE LA SOLICITUD DE REGISTRO GENERADO (this.secureBookingService.)
@@ -1082,7 +1077,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       },
       error: error => {
         console.log(error)
-        this.loaderSubjectService.closeLoader()
+        this._loaderSubjectService.closeLoader()
 
         //>>>> EN CASO SALGA ERROR SE DEBE DE ELIMINAR LA SOLICITUD
 
@@ -1108,7 +1103,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   // TARJETA
   getCardPayment() {
     const textSend = 'SE ESTA GENERANDO SU PAGO!'
-    this.loaderSubjectService.showText(textSend)
+    this._loaderSubjectService.showText(textSend)
 
     const payload = {
       TrackingCode: "000",
@@ -1148,16 +1143,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }
     }
 
-    this.cardPaymentService.cardPayment(payload).subscribe({
+    this._cardPaymentService.cardPayment(payload).subscribe({
       next: (response) => {
         console.log(response)
         // this.reservation = response
-        this.loaderSubjectService.closeLoader()
+        this._loaderSubjectService.closeLoader()
         this._router.navigateByUrl('/conformidad')
       },
       error: (err) => {
         console.log(err)
-        this.loaderSubjectService.closeLoader()
+        this._loaderSubjectService.closeLoader()
       }
     })
   }
@@ -1189,16 +1184,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   allowAlphabetic(event: KeyboardEvent) {
     const pattern = /[a-zA-Z\s]/;
-    
+
     if (!pattern.test(event.key))
-        event.preventDefault();
+      event.preventDefault();
   }
 
   allowNumeric(event: KeyboardEvent) {
     const pattern = /[0-9]/;
-    
+
     if (!pattern.test(event.key))
-        event.preventDefault();
+      event.preventDefault();
   }
 
   allowOfficialDocument(event: KeyboardEvent, posicion: number) {
@@ -1210,12 +1205,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       tipoDocumento = data.customers[posicion].typeDocCustomer;
     else
       tipoDocumento = data.paymentMethodForm.tipoDoc;
-   
+
     if (tipoDocumento != '') {
       pattern = tipoDocumento === 'DNI' || tipoDocumento === 'RUC' ? /[0-9]/ : /[a-zA-Z0-9\s]/;
-      
+
       if (!pattern.test(event.key))
-          event.preventDefault();
+        event.preventDefault();
     }
     else
       event.preventDefault();
