@@ -233,7 +233,7 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
       //console.log(this.fromDate);
       let form = this.form.value
       localStorage.removeItem('Datasafe')
-      console.log(form)
+      console.log('Datasafe', form)
       localStorage.setItem('Datasafe', JSON.stringify(form))
       // console.log(this.destino.nativeElement.value);
 
@@ -437,5 +437,24 @@ export class FiltersafeComponent implements OnInit, AfterViewInit {
     // adultos = adultos + valor
   }
 
-}
+  allowNumeric(event: KeyboardEvent) {
+    const pattern = /[0-9]/;
+    
+    if (!pattern.test(event.key))
+        event.preventDefault();
+  }
 
+  onPasteNumeric(event: ClipboardEvent) {
+    event.preventDefault();
+
+    if (event.clipboardData != null) {
+      const texto: string = event.clipboardData.getData('text/plain').replace(/\D/g, '');
+      
+      document.execCommand('insertText', false, texto);
+    }
+  }
+
+  denyDrop(event: DragEvent) {
+    event.preventDefault();
+  }
+}
