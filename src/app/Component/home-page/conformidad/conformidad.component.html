@@ -39,7 +39,8 @@
   </div>
   <div class="row" *ngIf="typePay === 'SAFETYPAY'">
     <div class="col-12 subTitleConf">
-      <p>Excelente elección. Se ha completado la reserva y estamos a la espera del pago para completar tu compra!</p>
+      <p>Excelente elección. Se ha completado la reserva N° <strong>{{ reservaStr.Reserva }}</strong> y estamos a la
+        espera del pago para completar tu compra!</p>
     </div>
   </div>
 
@@ -228,8 +229,8 @@
             <div class="fechaAsegurado">
               {{ safe.dayCustomer }} / {{ safe.monthCustomer }} / {{ safe.yearCustomer }}
             </div>
-
           </ng-container>
+
           <div class="descripAsegurado" *ngIf="reservation; else vueloReserv">
             Tu solicitud de compra es {{ reservation.Reserva }}.
           </div>

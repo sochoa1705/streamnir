@@ -422,9 +422,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
   }
 
-
-
-
   showDataContacto: Boolean = true;
 
   showDataContact() {
@@ -567,17 +564,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log('generatePayloadForInsurance');
 
     debugger
-
-    console.log(this.coverageList.Unidad);
-    console.log(this.coverageList.Codigo);
-    console.log(this.coverageList.Nombre);
-    console.log(this.coverageList.Valor);
-
-    console.log('pais / agencia');
-
-    console.log(this.businessunit.id_pais_ac);
-    console.log(this.businessunit.codigo_ac);
-    console.log(this.businessunit.sucursal_ac);
 
     this.getPassengerAges();
 

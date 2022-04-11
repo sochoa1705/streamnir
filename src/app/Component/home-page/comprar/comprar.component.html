@@ -31,6 +31,8 @@
 
 <div class="container-fluid pb-4 px-4">
   <form [formGroup]="formShop" novalidate>
+
+    <!-- VERSION MOBILE -->
     <div class="row stepCard d-md-none d-block">
 
       <mat-stepper [linear]="isLinear" #stepper label="Informacion de pasajeros"
@@ -397,7 +399,7 @@
           </div>
           <!-- DETALLE DE COBERTURA -->
 
-          <!-- INFORMACION DE PASAJEROS DESKTOP -->
+          <!-- INFORMACION DE PASAJEROS MOVIL-->
           <div class="card pasajeros">
             <div class="card-header">
               <h2>Información de pasajeros</h2>
@@ -572,7 +574,7 @@
               </div>
             </div>
           </div>
-          <!-- INFORMACION DE PASAJEROS -->
+          <!-- INFORMACION DE PASAJEROS MOVIL -->
 
           <!-- DATOS CONTACTO MOVIL-->
           <div class="row">
@@ -1068,7 +1070,9 @@
 
       <div class="clearfix"></div>
     </div>
+    <!-- VERSION MOBILE -->
 
+    <!-- VERSION DESKTOP -->
     <div class="row hideViewMobile" *ngIf="safe0Json.detailPay !== 'safe' ">
       <div class="col-12 py-3">
         <a routerLink="/vuelos/resultados">
@@ -1140,7 +1144,7 @@
                       placeholder="El que figura en el documento de viaje." type="text">
 
                     <span class="valid" *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required">
-                      Ingresa el nombre del pasajero
+                      Ingresa los nombres del pasajero
                     </span>
                   </div>
 
@@ -1150,6 +1154,10 @@
                     <input class="form-control" formControlName="lastNameCustomer" (keypress)="allowAlphabetic($event)"
                       (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                       placeholder="El que figura en el documento de viaje." type="text">
+
+                    <span class="valid" *ngIf="customers.controls[i].get('lastNameCustomer')?.errors?.required">
+                      Ingresa los apellidos del pasajero
+                    </span>
                   </div>
 
                   <div class="clearfix"></div>
@@ -2414,6 +2422,7 @@
 
       <div class="clearfix"></div>
     </div>
+    <!-- VERSION DESKTOP -->
   </form>
 </div>
 
