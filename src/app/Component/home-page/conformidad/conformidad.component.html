@@ -219,41 +219,24 @@
 
   <div class="row py-4">
     <div class="offset-3 col-6 viewMobile">
-      <div class="card">
-        <!-- <div class="card-body" *ngIf="!safe0Json.reservaVuelos; else vuelos"> -->
+      <div class="card" *ngFor="let customer of shopString.customers">
         <div class="card-body">
-          <ng-container *ngFor="let safe of shopString.customers">
+          <ng-container>
             <div class="titleAsegurado">
-              ADT - {{ safe.nameCustomer | titlecase }} {{ safe.lastNameCustomer | titlecase }}
+              {{ customer.nameCustomer | uppercase }} {{ customer.lastNameCustomer | uppercase }}
             </div>
             <div class="fechaAsegurado">
-              {{ safe.dayCustomer }} / {{ safe.monthCustomer }} / {{ safe.yearCustomer }}
+              {{ customer.dayCustomer }} / {{ customer.monthCustomer }} / {{ customer.yearCustomer }}
+            </div>
+
+            <div class="descripAsegurado" *ngIf="reservation">
+              Tu solicitud de compra es {{ reservation.Reserva }}.
             </div>
           </ng-container>
-
-          <div class="descripAsegurado" *ngIf="reservation; else vueloReserv">
-            Tu solicitud de compra es {{ reservation.Reserva }}.
-          </div>
-          <ng-template #vueloReserv>
-            <!-- Tu solicitud de compra es {{ resevaVuelo.idCotizacion }}. -->
-          </ng-template>
         </div>
-        <!-- <ng-template #vuelos>
-                    <ng-container *ngFor="let pasajero of shopString.customers">
-                        <div class="titleAsegurado">
-                            ADT - {{ safe.nameCustomer }} {{ safe.lastNameCustomer }}
-                        </div>
-                        <div class="fechaAsegurado">
-                            {{ safe.dayCustomer }} / {{ safe.monthCustomer }} / {{ safe.yearCustomer }}
-                        </div>
-
-                    </ng-container>
-                    <div class="descripAsegurado" *ngIf="reservation">
-                        Tu solicitud de compra es {{ reservation.Reserva }}.
-                    </div>
-                </ng-template> -->
       </div>
     </div>
+
     <div class="clearfix"></div>
   </div>
   <!-- END PASAJEROS -->
@@ -688,7 +671,8 @@
             Nombres y apellidos:
           </div>
           <div class="columnCard">
-            {{ shopString.contactForm.nameContacto }} {{ shopString.contactForm.lastnameContacto }}
+            {{ shopString.contactForm.nameContacto | uppercase }} {{ shopString.contactForm.lastnameContacto | uppercase
+            }}
           </div>
         </div>
         <div class="rowCard">
@@ -699,7 +683,7 @@
             Email:
           </div>
           <div class="columnCard">
-            {{ shopString.contactForm.mailContacto }}
+            {{ shopString.contactForm.mailContacto | uppercase}}
           </div>
         </div>
         <div class="rowCard">
@@ -710,7 +694,7 @@
             Teléfono(s):
           </div>
           <div class="columnCard">
-            Celular {{ shopString.contactForm.code0 }} {{ shopString.contactForm.numberPhone0 }}
+            CELULAR {{ shopString.contactForm.code0 | uppercase }} {{ shopString.contactForm.numberPhone0 }}
           </div>
         </div>
       </div>

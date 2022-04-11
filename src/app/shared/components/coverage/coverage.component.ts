@@ -20,10 +20,9 @@ export class CoverageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
+
   data(id: any) {
     console.log(id);
-    // this.pop = id
   }
 
 }
