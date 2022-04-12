@@ -1,6 +1,7 @@
 <mat-drawer-container class="example-container">
   <app-tabs [options]="destiny"></app-tabs>
-  <app-aside [slider]="dataPagePresenterService.data.aside" [images]="asidePresenterService.images"></app-aside>
+
+  <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"></app-aside>
   <!-- OFERTAS -->
   <!-- <div class="container">
     <div class="row">

@@ -19,7 +19,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NotificationModule } from './shared/components/notification/notification.module';
-import { GlobalHttpInterceptorService } from './interceptor/globalHttpInterceptorService.service';
+import { GlobalHttpInterceptorService } from './interceptors/globalHttpInterceptorService.service';
+import { LoginModule } from './components/login/login.module';
+import { ChangePasswordModule } from './components/change-password/change-password.module';
+import { CheckMailModule } from './components/check-mail/check-mail.module';
+import { ForgotPasswordModule } from './components/forgot-password/forgot-password.module';
+import { NewAccountModule } from './components/new-account/new-account.module';
+import { PerfilModule } from './Component/home-page/perfil/perfil.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -37,30 +43,36 @@ import { GlobalHttpInterceptorService } from './interceptor/globalHttpIntercepto
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NotificationModule
+    NotificationModule,
+    LoginModule,
+    ChangePasswordModule,
+    CheckMailModule,
+    ForgotPasswordModule,
+    NewAccountModule,
+    PerfilModule
   ],
   providers: [
-    
-    { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  },  
-  { provide: LocationStrategy, useClass: PathLocationStrategy },
-  {
-    provide: 'SocialAuthServiceConfig',
-    useValue: {
-      autoLogin: false,
-      providers: [
-        {
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider(
-            '377536376412-5ik9nvviq62v8dsin6tmbj2ap8i2g7dl.apps.googleusercontent.com'
-          )
-        },
-        {
-          id: FacebookLoginProvider.PROVIDER_ID,
-          provider: new FacebookLoginProvider('263646375921809')
-        },
-      ]
-    } as SocialAuthServiceConfig,
-  }],
+
+    { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '377536376412-5ik9nvviq62v8dsin6tmbj2ap8i2g7dl.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('263646375921809')
+          },
+        ]
+      } as SocialAuthServiceConfig,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

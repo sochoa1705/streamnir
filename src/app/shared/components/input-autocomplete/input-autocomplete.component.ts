@@ -34,13 +34,26 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     return this._items;
   }
 
+  public typeToSearchText: string;
+
+
   @Input() placeholder: string;
   @Input() loading: boolean = false;
 
   @Input() typeahead: Subject<string>;
-  @Input() minTermLength = 2;
+
+  _minTermLength:number;
+
+  get minTermLength():number{
+    return this._minTermLength;
+  }
+
+  @Input() set minTermLength(value:number){
+    this._minTermLength = value;
+    this.typeToSearchText = `Por favor ingrese ${this._minTermLength} o más caracteres`;
+  };
+
   viewIcon: boolean
-  public typeToSearchText: string;
 
   fromEventSubscripcion: Subscription;
 
@@ -51,7 +64,6 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
 
   constructor() {
     this.viewIcon = false
-    this.typeToSearchText = `Por favor ingrese ${this.minTermLength} o más caracteres`;
   }
 
   ngAfterViewInit() {

@@ -15,18 +15,10 @@ export class SlideComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.addTag()
     localStorage.removeItem('planes')
   }
 
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/seguros',
-      'virtualPageTitle': 'Seguros'
-    })
-  }
+
 
   portalAyuda() {
     // this.route.navigateByUrl("https://ayuda.nmviajes.com/support/home")

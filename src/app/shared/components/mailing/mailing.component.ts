@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MailingService } from '../../../Services/mailing/mailing.service';
 import { NotificationService } from 'src/app/Services/notification.service';
+import { InputValidationService } from 'src/app/Services/inputValidation.service';
 import { validate } from 'json-schema';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
+import { TaggingService } from 'src/app/Services/analytics/tagging.service';
+import { ModelTaggingSubscripcionOfertas } from 'src/app/Services/analytics/tagging.models';
 
 @Component({
   selector: 'app-mailing',
@@ -28,6 +31,7 @@ export class MailingComponent implements OnInit {
     private mailingService: MailingService,
     private notification: NotificationService,
     public loaderSubjectService: LoaderSubjectService,
+    public inputValidator : InputValidationService
   ) {
     this.validate = false
     this.ipCliente = localStorage.getItem('ipCliente')
@@ -44,6 +48,7 @@ export class MailingComponent implements OnInit {
       autorizoMail: new FormControl()
     })
   }
+
   subscribe(e: any) {
     if (this.validForm()) {
       const textSend = 'Validando suscripción'
@@ -79,8 +84,6 @@ export class MailingComponent implements OnInit {
           this.timeMAiling()
         },
         error: (err) => {
-          console.log(err)
-          this.addTagError(err.TrackingCode, err.State.Ok, err.State.Messages[0].Value)
           this.loaderSubjectService.closeLoader()
           
           this.notification.showNotificacion("Error", "No se envio la suscripción", 10)
@@ -130,18 +133,8 @@ export class MailingComponent implements OnInit {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
   addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'nav_ofertasSuscripcion'
-    })
+    const model = new ModelTaggingSubscripcionOfertas();
+    TaggingService.tagSubscripcionOfertas(model);
   }
-  addTagError(codigo: string, descripcion: string, mensaje: string) {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'error_ofertasSuscripcion',
-      'error_codigo': codigo,
-      'error_descripcion': descripcion,
-      'error_mensaje': mensaje
-    })
-  }
+
 }

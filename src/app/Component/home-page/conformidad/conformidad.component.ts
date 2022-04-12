@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SecureBookingService } from 'src/app/Services/secureBooking/secure-booking.service';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
@@ -6,7 +7,6 @@ import { Router } from '@angular/router';
 import { GenerarSafetyPayRQ } from 'src/app/Models/seguros/generarSafetypayRQ.interface';
 import { environment } from 'src/environments/environment';
 import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
-import { RegistrarSeguroRQ } from 'src/app/Models/seguros/registroRQ.interface';
 import { SafetyPayRQ } from 'src/app/Models/seguros/safetypayRQ.interface';
 import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interface';
 import { UpdatePayService } from 'src/app/Services/updatePay/update-pay.service';
@@ -55,6 +55,13 @@ export class ConformidadComponent implements OnInit {
   reservaJSON: any
   reservaStr: any
 
+  paymentDataStr: any;
+  paymentData: any;
+
+  reservationCode: string;
+  timeLimit: string;
+  deadLine: string;
+
   constructor(
     public route: Router,
     public secureBookingService: SecureBookingService,
@@ -63,10 +70,8 @@ export class ConformidadComponent implements OnInit {
     public updatePayService: UpdatePayService,
     public statePayService: StatePayService,
     public reservaVuelosService: ReservaVuelosService,
-    public cardPaymentService: CardPaymentService,
-
+    public cardPaymentService: CardPaymentService
   ) {
-
     // RESERVA
     this.reservaJSON = localStorage.getItem('reserva')
     this.reservaStr = JSON.parse(this.reservaJSON)
@@ -103,17 +108,37 @@ export class ConformidadComponent implements OnInit {
     // IP DEL CLIENTE
     this.ipCliente = localStorage.getItem('ipCliente')
     // TIPO DE PAGO
-    this.typePay = this.shopString.formCard.select21
+    this.typePay = this.shopString.paymentMethodForm.select21
+
+    this.paymentDataStr = localStorage.getItem('paymentData');
+    this.paymentData = JSON.parse(this.paymentDataStr);
   }
 
   ngOnInit(): void {
-    this.addTag()
     toUp()
+
     this.ShowComponentTime = false
     let lcadena: any = localStorage.getItem('businessunit');
     this.unidadNegocio = JSON.parse(lcadena);
     this.edades()
     console.log(this.safe0Json['reservaVuelos'])
+
+
+    if (this.paymentData.Result.ServiceResponse.Status === 'SUCCESS') {
+      debugger
+
+      this.reservationCode = this.paymentData.Result.ServiceResponse.Code;
+      const expirationDatetime = this.paymentData.Result.ServiceResponse.Result.Payment_Expiration_Datetime;
+
+      this.timeShop(expirationDatetime);
+      this.timeLimit = this.paymentData.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(11, 5);
+      this.deadLine = this.paymentData.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(0, 10);
+
+      // this.reservationCode = JSON.parse(this.paymentData).Result.ServiceResponse.Code;
+      // this.timeShop(JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime);
+      // this.timeLimit = JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(11, 5);
+      // this.deadLine = JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(0, 10);
+    }
 
     // if (this.safe0Json['reservaVuelos']) {
     //   console.log('INICIA RESERVA V');
@@ -123,29 +148,28 @@ export class ConformidadComponent implements OnInit {
     // }
     // this.getGeneratePay()
     // this.getCardPayment()
-    // if (this.shopString.formCard.select21 === 'SAFETYPAY') {
+    // if (this.shopString.paymentMethodForm.select21 === 'SAFETYPAY') {
     //   this.getGeneratePay()
     // } else {
     //   this.getCardPayment()
     // }
   }
 
-  timeShop(data: string) {
-    let dayPay = data
-    let day = dayPay.substr(0, 2)
-    let month = dayPay.substr(3, 2)
-    let year = dayPay.substr(6, 4)
-    let hour = dayPay.substr(11, 5)
-    let newDate = `${year}/${month}/${day} ${hour}`
-    let datePay = new Date(newDate)
+  timeShop(expirationDatetime: string) {
+    let dayPay = expirationDatetime;
+    let day = dayPay.substr(0, 2);
+    let month = dayPay.substr(3, 2);
+    let year = dayPay.substr(6, 4);
+    let hour = dayPay.substr(11, 5);
+    let newDate = `${year}/${month}/${day} ${hour}`;
+    let datePay = new Date(newDate);
 
     var dayStart = new Date();
-    var difference = datePay.getTime() - dayStart.getTime()
-    var resultInMinutes = Math.round(difference / 60000)
-    var totalSeconds = resultInMinutes * 60
-    this.timeShow = totalSeconds
-    this.ShowComponentTime = true
-    // return totalSeconds
+    var difference = datePay.getTime() - dayStart.getTime();
+    var resultInMinutes = Math.round(difference / 60000);
+    var totalSeconds = resultInMinutes * 60;
+    this.timeShow = totalSeconds;
+    this.ShowComponentTime = true;
   }
 
   edades() {
@@ -181,8 +205,8 @@ export class ConformidadComponent implements OnInit {
         documentType: (value.typeDocCustomer === 'dni') ? 0 : 1,
         documentNumber: value.numDocCustomer,
         gender: (value.sexCustomer === 'masculino') ? 'M' : '',
-        email: this.shopString.formContact.mailContacto,
-        phone: this.shopString.formContact.numberPhone0
+        email: this.shopString.contactForm.mailContacto,
+        phone: this.shopString.contactForm.numberPhone0
       }
       pasajeros.push(jsonPasajeros)
     })
@@ -225,7 +249,7 @@ export class ConformidadComponent implements OnInit {
       CustomerDocumentNumber: this.shopString.customers[0].numDocCustomer,     //DOCUMENTO DEL PRIMER PASAJERO ADULTO
       IdClient: Number(environment.dkAgenciaAC),
       WebId: '7',
-      Mail: this.shopString.formContact.mailContacto,   //MAIL DEL PASAJERO
+      Mail: this.shopString.contactForm.mailContacto,   //MAIL DEL PASAJERO
       DKClient: environment.dkAgenciaAC,
       UserAgent: environment.identifierAC,
       IdUser: '56190',
@@ -236,13 +260,14 @@ export class ConformidadComponent implements OnInit {
         Currency: 'USD'
       }
     }
+
     let payload = new NMRequestBy<GenerarSafetyPayRQ>(lsafetypay)
     this.generatePayService.generatePay(payload).subscribe({
       next: (response) => {
         this.listBank = response
         this.timeShop(this.listBank['ExpirationDateTime'])
         this.bankSteps = this.listBank.PaymentLocations.filter((e: any) => {
-          let namco = this.shopString.formCard.bankPay
+          let namco = this.shopString.paymentMethodForm.bankPay
           if (namco === e.ID) {
             return e
           }
@@ -308,12 +333,12 @@ export class ConformidadComponent implements OnInit {
         Ip: this.ipCliente,
         Browser: this.shopString.browser,
         Client: {
-          Firstname: this.shopString.formContact.nameContacto,
-          Lastname: this.shopString.formContact.lastnameContacto,
-          Address: this.shopString.formCard.address,
-          DocumentType: this.shopString.formCard.tipoDoc,
-          DocumentNumber: this.shopString.formCard.numDoc,
-          Email: this.shopString.formContact.mailContacto
+          Firstname: this.shopString.contactForm.nameContacto,
+          Lastname: this.shopString.contactForm.lastnameContacto,
+          Address: this.shopString.paymentMethodForm.address,
+          DocumentType: this.shopString.paymentMethodForm.tipoDoc,
+          DocumentNumber: this.shopString.paymentMethodForm.numDoc,
+          Email: this.shopString.contactForm.mailContacto
         },
         Booking: {
           NumberInsurance: (this.safe0Json['reservaVuelos']) ? this.resevaVuelo.idCotizacion : this.reservation.Reserva,
@@ -324,12 +349,12 @@ export class ConformidadComponent implements OnInit {
         },
         Payment: {
           Card: {
-            HolderName: this.shopString.formCard.nameCard,
-            Number: this.shopString.formCard.numberCard,
-            Expiration: this.expired(this.shopString.formCard.expiredCard), // 2022/05
-            SecurityCode: Number(this.shopString.formCard.ccvCard)
+            HolderName: this.shopString.paymentMethodForm.nameCard,
+            Number: this.shopString.paymentMethodForm.numberCard,
+            Expiration: this.expired(this.shopString.paymentMethodForm.expiredCard), // 2022/05
+            SecurityCode: Number(this.shopString.paymentMethodForm.ccvCard)
           },
-          AmountOfFees: Number(this.shopString.formCard.feePay),
+          AmountOfFees: Number(this.shopString.paymentMethodForm.feePay),
           Amount: (this.safe0Json['reservaVuelos']) ? this.detalleVuelos.pricingInfo.precioFinal : (this.resultJson.destinyString.es_nacional === 1) ? (this.shopString.PriceTotal * 1.18) : this.shopString.PriceTotal,
         }
       }
@@ -351,19 +376,14 @@ export class ConformidadComponent implements OnInit {
 
   // fecha de expiracion tarjeta
   expired(e: any) {
-    const year = e.substring(0, 4)
-    const month = e.substring(4, 6)
-    const expiredFormatt = `${year}/${month}`
-    return expiredFormatt
+    const year = e.substring(0, 4);
+    const month = e.substring(4, 6);
+    const expiredFormatt = `${year}/${month}`;
+
+    return expiredFormatt;
   }
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/conformidad',
-      'virtualPageTitle': 'Conformidad'
-    })
-  }
+
+
 
 }
 

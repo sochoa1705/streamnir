@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FlightService } from 'src/app/api/api-nmviajes/services/flight.service';
-import { Guid } from 'src/app/shared/utils';
+import { ModelTaggingOfertasVuelos } from 'src/app/Services/analytics/tagging.models';
+import { TaggingService } from 'src/app/Services/analytics/tagging.service';
+import { getFileName, Guid } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -34,8 +36,23 @@ export class FlightDealsComponent implements OnInit {
     });
   }
 
-  viewRates(entity: any): void {
+  viewRates(entity: any,index:number): void {
+    this.addTag(entity,index,this.limit);
     this._router.navigateByUrl(`/vuelos/destino/${entity.DestinationCode}`);
+  }
+
+  addTag(entity:any,index:number, array:number) {
+
+    let  position = `Card ${index + 1} de ${array}` 
+   
+    const tag = new ModelTaggingOfertasVuelos(
+      getFileName(entity.Image),
+      entity.Destination,
+      "Oferta de Vuelos",
+      position
+    )
+
+   TaggingService.clickOfertaVuelos(tag);
   }
 
   viewMoreOffers(): void {

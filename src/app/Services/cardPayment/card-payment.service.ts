@@ -15,7 +15,7 @@ export class CardPaymentService {
   ) { }
 
   cardPayment(payload: any): Observable<any> {
-    const url =  environment.urlSeguros
+    const url =  environment.url_api
     const url_api = `${url}${ENDPOINT_API.CARD_PAYMENT}`
     return this.http.post<any>(url_api, payload)
   }

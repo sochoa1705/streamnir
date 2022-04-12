@@ -13,7 +13,7 @@ import {
 } from 'src/app/shared/components/filter-result/models/filter-result.interfaces';
 import { IForm } from 'src/app/shared/components/filter-tabs/tab-vuelos/tab-vuelos.interfaces';
 import { DisponibilidadPayload } from 'src/app/shared/components/flights/models/flights.class';
-import { EnumCabins } from 'src/app/shared/components/flights/models/flights.interface';
+import { EnumCabins, EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { IVuelos } from '../vuelos/commons/components/flight/flight.models';
@@ -83,7 +83,6 @@ export class ResultadosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.addTag()
     toUp()
     this.filtersObj = {
       airlines: [],
@@ -95,6 +94,13 @@ export class ResultadosComponent implements OnInit {
     // this.loader.showText('Cargando los vuelos');
     // this.loader.showLoader();
     this.getParams();
+
+    window.addEventListener('message', function(event) {
+      let frm = document.getElementById("iframeMotorVuelos");
+      let height = event.data + 50;
+      // @ts-ignore: Object is possibly 'null'.
+      (frm || {}).style.height = height + 'px';
+    }); 
   }
 
   vuelosLogicInit(respVuelos: ParamsVuelos, obj: Returns | null) {
@@ -162,10 +168,9 @@ export class ResultadosComponent implements OnInit {
 
       this.urlIframe = environment.urlIframeMotorVuelos ;
 
-
       const respVuelos: ParamsVuelos = resp as ParamsVuelos;
 
-      let {
+      let { 
         arrivalDate,
         businessCabin,
         departure,
@@ -180,17 +185,13 @@ export class ResultadosComponent implements OnInit {
 
       this.vuelosLogicInit(respVuelos, null)
 
-      // this.loader.showText('Cargando los vuelos');
-      // this.loader.showLoader();
-
-
       arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
       departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
 
       // arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
       // departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
       
-      const payload = new DisponibilidadPayload(
+      const disponibilidadPayload = new DisponibilidadPayload(
         Number(flightType),
         departure,
         destination,
@@ -202,130 +203,16 @@ export class ResultadosComponent implements OnInit {
         businessCabin
       );
 
+      let payload = {...disponibilidadPayload};
 
+      if(payload.flightType == EnumFlightType.ida){
+        delete payload.arrivalDate
+      }
+      
       const params = objectToQueryString(payload);
 
       this.urlIframe = this.urlIframe + "?" + params;
 
-      console.log(this.urlIframe);
-
-
-      // this.service
-      //   .searchMv(payload)
-      //   .then((resp) => {
-      //     this.error.isError = false;
-      //     this.flights = resp.groups;
-
-      //     let pf: RangeFilter = { min: 0, max: 0 };
-      //     let durationExit: RangeFilter = { min: 0, max: 0 };
-      //     let elapsedExit: RangeFilter = { min: 0, max: 0 };
-
-      //     if (this.flights.length > 0) {
-      //       pf.min =
-      //         this.flights[0].pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare;
-      //       durationExit.min = Number(
-      //         this.flights[0].departure[0].segments[0].flightDuration
-      //       );
-      //       elapsedExit.min = Number(
-      //         this.flights[0].departure[0].segments[0].flightSegments[0]
-      //           .elapsedTime
-      //       );
-      //     }
-
-      //     for (const x of this.flights) {
-      //       if (
-      //         x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
-      //           .totalFare > pf.max
-      //       )
-      //         pf.max =
-      //           x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare;
-
-      //       if (
-      //         x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
-      //           .totalFare < pf.min
-      //       )
-      //         pf.min =
-      //           x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare.totalFare;
-
-      //       if (
-      //         Number(x.departure[0].segments[0].flightDuration) >
-      //         durationExit.max
-      //       )
-      //         durationExit.max = Number(
-      //           x.departure[0].segments[0].flightDuration
-      //         );
-
-      //       if (
-      //         Number(x.departure[0].segments[0].flightDuration) <
-      //         durationExit.min
-      //       )
-      //         durationExit.min = Number(
-      //           x.departure[0].segments[0].flightDuration
-      //         );
-
-      //       if (
-      //         Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) >
-      //         elapsedExit.max
-      //       )
-      //         elapsedExit.max = Number(
-      //           x.departure[0].segments[0].flightSegments[0].elapsedTime
-      //         );
-
-      //       if (
-      //         Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) <
-      //         elapsedExit.min
-      //       )
-      //         elapsedExit.min = Number(
-      //           x.departure[0].segments[0].flightSegments[0].elapsedTime
-      //         );
-      //     }
-
-      //     this.filtersObj.price = pf;
-      //     this.filtersObj.flightDurationExit = durationExit;
-      //     this.filtersObj.flightElapsedExit = elapsedExit;
-
-      //     this.conversion = resp.exchangeRate.amount;
-      //     this.flightsOri = resp.groups;
-
-      //     this.filtersObj.airlines = resp.airlinesFilter.map((x) => {
-      //       let airline: AirlineFilter = {
-      //         code: x.code,
-      //         name: x.name,
-      //         imageUrl: x.imageUrl,
-      //         checked: false,
-      //       };
-
-      //       return airline;
-      //     });
-
-      //     this.filtersObj.exchangeRate = resp.exchangeRate.amount;
-
-      //     this.filtersObj = { ...this.filtersObj };
-
-      //     this.exchangeRate = resp.exchangeRate;
-
-      //     if(this.flights.length == 0){
-      //       throw new Error('No hay vuelos disponibles');
-      //     }
-
-      //     const obj = this.flights[0].departure[0];
-
-      //     this.vuelosLogicInit(respVuelos, obj);
-
-      //     this.loader.closeLoader();
-      //   })
-      //   .catch((err: HttpErrorResponse) => {
-      //     console.error(err);
-
-      //     this.error = {
-      //       isError: true,
-      //       errorMessage: err.message,
-      //     };
-
-      //     this.openSnackBar(err.message);
-
-      //     this.loader.closeLoader();
-      //   });
     });
   }
 
@@ -462,157 +349,9 @@ export class ResultadosComponent implements OnInit {
     this.showTabs = false;
   }
 
-  // filterChange(filter: any) {
-  //   this.loader.showText('Cargando los vuelos');
-  //   this.loader.showLoader();
-
-  //   console.log('aplicando filtro');
-  //   console.log(filter);
-
-  //   let aFlights: IAerolineas[];
-
-  //   if (filter.price.currency == 'soles') {
-  //     aFlights = this.flightsOri.filter(
-  //       (x) =>
-  //         x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
-  //           .totalFare *
-  //           this.exchangeRate.amount >=
-  //           filter.price.min &&
-  //         x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
-  //           .totalFare *
-  //           this.exchangeRate.amount <=
-  //           filter.price.max
-  //     );
-  //   } else {
-  //     aFlights = this.flightsOri.filter(
-  //       (x) =>
-  //         x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
-  //           .totalFare >= filter.price.min &&
-  //         x.pricingInfo.itinTotalFare.fareBreakDowns[0].passengerFare
-  //           .totalFare <= filter.price.max
-  //     );
-  //   }
-
-  //   console.log(this.flights);
-
-  //   aFlights = aFlights.filter(
-  //     (x) =>
-  //       Number(x.departure[0].segments[0].flightDuration) >=
-  //         filter.durationExit.min &&
-  //       Number(x.departure[0].segments[0].flightDuration) <=
-  //         filter.durationExit.max
-  //   );
-
-  //   aFlights = aFlights.filter(
-  //     (x) =>
-  //       Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) >=
-  //         filter.elapsedExit.min &&
-  //       Number(x.departure[0].segments[0].flightSegments[0].elapsedTime) <=
-  //         filter.elapsedExit.max
-  //   );
-
-  //   if (filter.airline.length > 0) {
-  //     let af: any = aFlights.map((x) => {
-  //       let df = x.departure[0].segments[0].flightSegments[0]
-  //         ? x.departure[0].segments[0].flightSegments[0].marketingAirline.code
-  //         : '';
-
-  //       let rf = x.returns.segments[0].flightSegments[0]
-  //         ? x.returns.segments[0].flightSegments[0].marketingAirline.code
-  //         : '';
-
-  //       if (
-  //         filter.airline.find((ff: any) => ff == df) ||
-  //         filter.airline.find((ff: any) => ff == rf)
-  //       ) {
-  //         return x;
-  //       }
-  //       return null;
-  //     });
-
-  //     aFlights = af.filter((x: any) => x != null);
-  //   }
-
-  //   if (filter.equipaje.mano || filter.equipaje.bodega) {
-  //     let eql: any = aFlights.map((x) => {
-  //       if (
-  //         (filter.equipaje.mano &&
-  //           x.departure[0].segments[0].equipaje != undefined &&
-  //           x.departure[0].segments[0].equipaje.cabina != undefined &&
-  //           x.departure[0].segments[0].equipaje.cabina.piezas > 0) ||
-  //         (filter.equipaje.mano &&
-  //           x.returns.segments[0].equipaje != undefined &&
-  //           x.returns.segments[0].equipaje.cabina != undefined &&
-  //           x.returns.segments[0].equipaje.cabina.piezas > 0) ||
-  //         (filter.equipaje.bodega &&
-  //           x.departure[0].segments[0].equipaje != undefined &&
-  //           x.departure[0].segments[0].equipaje.piezas > 0) ||
-  //         (filter.equipaje.bodega &&
-  //           x.returns.segments[0].equipaje != undefined &&
-  //           x.returns.segments[0].equipaje.piezas > 0)
-  //       ) {
-  //         return x;
-  //       } else {
-  //         return null;
-  //       }
-  //     });
-
-  //     aFlights = eql.filter((x: any) => x != null);
-  //   }
-
-  //   if (filter.escala.directo || filter.escala.uno || filter.escala.mas) {
-  //     console.log(this.flights);
-  //     let esl: any = aFlights.map((x) => {
-  //       if (
-  //         (filter.escala.directo &&
-  //           x.departure[0].segments[0].flightSegments != undefined &&
-  //           x.departure[0].segments[0].flightSegments.length == 1) ||
-  //         (filter.escala.directo &&
-  //           x.returns.segments[0].flightSegments != undefined &&
-  //           x.returns.segments[0].flightSegments.length == 1) ||
-  //         (filter.escala.uno &&
-  //           x.departure[0].segments[0].flightSegments != undefined &&
-  //           x.departure[0].segments[0].flightSegments.length == 2) ||
-  //         (filter.escala.uno &&
-  //           x.returns.segments[0].flightSegments != undefined &&
-  //           x.returns.segments[0].flightSegments.length == 2) ||
-  //         (filter.escala.mas &&
-  //           x.departure[0].segments[0].flightSegments != undefined &&
-  //           x.departure[0].segments[0].flightSegments.length > 2) ||
-  //         (filter.escala.mas &&
-  //           x.returns.segments[0].flightSegments != undefined &&
-  //           x.returns.segments[0].flightSegments.length > 2)
-  //       ) {
-  //         return x;
-  //       } else {
-  //         return null;
-  //       }
-  //     });
-
-  //     console.log(esl);
-
-  //     aFlights = esl.filter((x: any) => x != null);
-  //   }
-
-  //   this.flights = [...aFlights];
-
-  //   if (this.orderByActive && this.orderByActive > 0)
-  //     this.orderBy(this.orderByActive);
-
-  //   // console.log(filter);
-  //   this.loader.closeLoader();
-  // }
 
   currencyChangeEvent(currency: string) {
-    console.log(currency);
     this.currency = currency;
   }
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/vuelos/resultados',
-      'virtualPageTitle': 'Resultados'
-    })
-  }
+
 }

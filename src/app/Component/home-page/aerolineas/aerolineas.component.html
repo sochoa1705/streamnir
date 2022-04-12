@@ -1,7 +1,7 @@
 <ng-container *ngIf="airline">
 
   <section class="portadaAero">
-    <img [src]="airline.BackgroundUrl" alt="">
+    <img *ngIf="airline.hasOwnProperty('BackgroundUrl')" [src]="airline.BackgroundUrl" alt="">
     <div class="textoPortada">
       <div class="aeroTitle">Ofertas por Aerolíneas</div>
       <div class="aeroDescrip">Las vacaciones que siempre has soñado.</div>
@@ -21,12 +21,13 @@
         <p [innerHTML]="airline.Information | sanitizeHtml"></p>
       </div>
     </div>
-    <div class="boxAbout">
+
+    <div class="boxAbout" *ngIf="airline.hasOwnProperty('AirlineDestination')">
       <div class="descrip">
         <p [innerHtml]="airline.AirlineDestination.Description | sanitizeHtml"></p>
       </div>
 
-      <div class="sliderAero">
+      <div class="sliderAero" *ngIf="airline.AirlineDestination.hasOwnProperty('AirlineGalleries')">
         <!-- <img src="./assets/aerolineas/about-01.png" alt=""> -->
         <!-- SLIDER -->
         <div id="carouselAero" class="carousel slide" data-bs-ride="carousel">
@@ -58,7 +59,6 @@
       </div>
     </div>
 
-
     <div class="tabSalidas">
       <div class="rowAero center">
         <div class="descripTab">
@@ -67,12 +67,18 @@
       </div>
 
       <div class="rowAero opcionTab">
-        <div class="tabName" [ngClass]="{'active': !isNational}" (click)="isNational=false">Salidas Internacionales
+        <div class="tabName" *ngIf="internationalFlightDeals"
+          [ngClass]="{'active': !isNational || !nationalFlightDeals}" (click)="isNational=false">
+          Salidas Internacionales
         </div>
-        <div class="tabName" [ngClass]="{'active': isNational}" (click)="isNational=true">Salidas Nacionales</div>
+
+        <div class="tabName" *ngIf="nationalFlightDeals" [ngClass]="{'active': isNational || !internationalFlightDeals}"
+          (click)="isNational=true">
+          Salidas Nacionales
+        </div>
       </div>
 
-      <div class="contentTab" *ngIf="!isNational">
+      <div class="contentTab" *ngIf="!isNational && internationalFlightDeals?.length > 0">
         <div class="verDesktop">
           <div class="rowAero">
             <div class="ida">
@@ -209,7 +215,7 @@
         </div>
       </div>
 
-      <div class="contentTab" *ngIf="isNational">
+      <div class="contentTab" *ngIf="isNational && nationalFlightDeals?.length > 0">
         <div class="verDesktop">
           <div class="rowAero">
             <div class="ida">
@@ -379,7 +385,7 @@
         </div>
       </div>
 
-      <div class="tabDestino">
+      <div class="tabDestino" *ngIf="airline.AirlineGalleries">
         <div class="tabImgDest">
           <div class="mascara"></div>
           <img [src]="airline.AirlineGalleries[0].Photo" alt="">
@@ -427,4 +433,5 @@
   </ng-template>
 </p-galleria>
 
-<app-aereolineas [aereolineas]="$aereolineas | async" (redirigir)="toLine($event)"></app-aereolineas>
+
+<app-aereolineas [aereolineas]="$aereolineas | async" (redirigir)="onClick($event)"></app-aereolineas>

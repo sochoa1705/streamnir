@@ -7,10 +7,8 @@ import { Guid } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 import { FlightService as AerolineaService } from '../vuelos/commons/components/flight/flight.service';
 import * as moment from 'moment';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ParamsVuelos } from '../resultados/models/resultados.interfaces';
 import { EnumCabins, EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
-import { IVueloDestino } from '../vuelos/commons/components/destinos/destinos.component';
 
 @Component({
   selector: 'app-aerolineas',
@@ -61,7 +59,6 @@ export class AerolineasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addTag()
     this.loadAereolineas();
 
     this.currentDate = moment().format('DD/MM/YYYY');
@@ -101,9 +98,8 @@ export class AerolineasComponent implements OnInit {
       'Caller.Company': "Agil",
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
-      debugger
-
       this.nationalFlightDeals = JSON.parse(res).Result;
+      this.isNational = this.nationalFlightDeals ? true : false;
     });
   }
 
@@ -117,6 +113,7 @@ export class AerolineasComponent implements OnInit {
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
       this.internationalFlightDeals = JSON.parse(res).Result;
+      this.isNational = this.internationalFlightDeals ? false : true;
     });
   }
 
@@ -132,6 +129,7 @@ export class AerolineasComponent implements OnInit {
     this.indexTab = index;
   }
 
+
   generateParams(entity: any) {
     return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${entity.OriginCode} ${entity.Origin}`, `${entity.DestinationCode} ${entity.Destination}`, entity.DateStart, entity.DateEnd, "1", "0", "0", EnumCabins.economico);
   }
@@ -146,31 +144,21 @@ export class AerolineasComponent implements OnInit {
     this.$aereolineas = this._aerolineaService.getAereolineas();
   }
 
-  // aeroId: any = "Historia";
-  // showOptionAero(ids: any) {
-  //   this.aeroId = ids;
-  // }
-
-  /* codigo para los sliders de las compañias */
   counter: number = 1;
   counterMovil: number = 1;
+
   nextBtn() {
     this.counter < 3 ? this.counter++ : this.counter = 1;
   }
+
   afterBtn() {
     this.counter > 1 ? this.counter-- : this.counter = 3;
   }
-  /* end code */
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/seguros',
-      'virtualPageTitle': 'Aerolineas'
-    })
-  }
 
-  toLine(entity: IAereolineas) {
-    this._router.navigateByUrl(`/aerolineas/${entity.IataCode}`);
+
+
+  onClick(entity: IAereolineas) {
+    this.nationalLimit = 5;
+    this.internationalLimit = 5;
   }
 }

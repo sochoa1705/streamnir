@@ -18,7 +18,7 @@ export class MainService {
     {
       id: 1,
       text: "Paquetes",
-      link: "https://nmviajes.paquetedinamico.com/ES/holidays/search",
+      link: "https://vacaciones.nmviajes.com/ES/holidays/search",
       external: true,
       icon: '/assets/menu/paquetes.svg'
     },

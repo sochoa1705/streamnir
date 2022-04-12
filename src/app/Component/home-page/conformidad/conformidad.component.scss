@@ -11,6 +11,7 @@
 
 .subTitleConf {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     text-align: center;
     font-family: Open Sans;
@@ -78,6 +79,9 @@
         letter-spacing: 0.15px;
         color: #83898F;
         padding-bottom: 10px;
+        &.lessPad {
+            padding-bottom: 0;
+        }
     }
     .descripAsegurado {
         font-family: Montserrat;
@@ -543,19 +547,19 @@
             background: #1eaea5;
             font-family: "Montserrat";
         }
-        input{
+        input {
             font-family: "Montserrat";
             font-size: 14px;
             border: .5px solid #83898F;
-            &:placeholder{
+            &:placeholder {
                 font-family: "Montserrat";
-                font-size: 14px;    
+                font-size: 14px;
             }
         }
     }
     &.pasajeros {
         border-radius: 10px;
-        & .card-header{
+        & .card-header {
             border-radius: 10px 10px 0 0;
         }
         .card {
@@ -605,19 +609,19 @@
     }
     &-body {
         .input-group {
-            & input{
-            border: .5px solid #83898F;
-            border-right: 0px;
-            &:focus{
-                border: .5px solid #83898F!important;
-                border-right: 0px!important;
+            & input {
+                border: .5px solid #83898F;
+                border-right: 0px;
+                &:focus {
+                    border: .5px solid #83898F!important;
+                    border-right: 0px!important;
+                }
             }
-            }
-            & label.input-group-text{
+            & label.input-group-text {
                 background: white;
                 border: .5px solid #83898F;
                 border-left: 0px;
-                & .mat-icon{
+                & .mat-icon {
                     color: #B9BCBF;
                 }
             }
@@ -632,7 +636,7 @@
             a {
                 color: red;
                 text-decoration: none;
-                &.ver{
+                &.ver {
                     color: #DF0C30 !important;
                 }
                 &:hover {
@@ -662,9 +666,9 @@
                 font-size: 14px;
                 font-weight: 500;
             }
-                    span.destinos{
-                        font-weight:600!important;
-                    }
+            span.destinos {
+                font-weight: 600!important;
+            }
             .equipaje {
                 & svg {
                     margin-right: 7px;

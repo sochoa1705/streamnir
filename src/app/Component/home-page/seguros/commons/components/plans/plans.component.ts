@@ -50,43 +50,41 @@ export class PlansComponent implements OnInit {
     public loaderSubjectService: LoaderSubjectService,
     private notification: NotificationService,
   ) {
-    this.result = localStorage.getItem('Datasafe')
-    this.resultJson = JSON.parse(this.result)
-    this.dollar = localStorage.getItem('tipoCambio')
 
-
-    // console.log(this.resultJson);
-    // console.log(this.resultJson.ClienteCotizacion);
   }
+
   ngOnInit(): void {
-    this.addTag()
-    let lcadena: any = localStorage.getItem('businessunit')
-    this.unidadNegocio = JSON.parse(lcadena)
+    debugger
 
-    if(localStorage.getItem('planes')) {
-      let planesAC: any = localStorage.getItem('planes')
-      this.plansAC = JSON.parse(planesAC)
-  
-    } else {
-      if (localStorage.getItem('safe0')) {
-        localStorage.removeItem('safe0')
-        this.listPlansAC()
-        // this.route.navigateByUrl('/home/seguros');
-      } else {
-        this.listPlansAC()
-      }
+    this.result = localStorage.getItem('Datasafe');
+    this.resultJson = JSON.parse(this.result);
+    this.dollar = localStorage.getItem('tipoCambio');
+
+    let lcadena: any = localStorage.getItem('businessunit');
+    this.unidadNegocio = JSON.parse(lcadena);
+
+
+    // if(localStorage.getItem('planes')) {
+    //   let planesAC: any = localStorage.getItem('planes')
+    //   this.plansAC = JSON.parse(planesAC)
+
+    // } else {
+    //   if (localStorage.getItem('safe0')) {
+    //     localStorage.removeItem('safe0');
+    //     this.listPlansAC()
+    //   } else {
+    //     this.listPlansAC()
+    //   }
+    // }
+
+    if (localStorage.getItem('safe0')) {
+      localStorage.removeItem('safe0');
+      this.getPlansAC()
     }
-
-
+    else
+      this.getPlansAC()
   }
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/seguros/planes',
-      'virtualPageTitle': 'Seguros-Planes'
-    })
-  }
+
   bestPlan() {
     let arrai = this.plansAC
     arrai.sort((a: any, b: any) => a['change'] - b['change'])
@@ -96,10 +94,18 @@ export class PlansComponent implements OnInit {
     return medium
   }
 
-  listPlansAC() {
-    const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!'
+  getPlansAC() {
+    const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!';
+
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
+
+    // const clienteCotizacion : Array<{Edad: string, FechaNacimiento: string}> = this.resultJson.forEach(element => {
+    //   'Edad': element.age,
+    //   'FechaNacimiento': element.fecha
+    // });
+
+    debugger
 
     let lcotizacion: CotizarSeguroRQ = {
       UnidadNegocio: environment.undidadNegocioAC,
@@ -113,15 +119,18 @@ export class PlansComponent implements OnInit {
         Destino: this.resultJson.destinoSafe,
         CantidadDias: this.resultJson.days,
         Clientes: {
-          ClienteCotizacion: this.resultJson.ClienteCotizacion
+          ClienteCotizacion: this.resultJson.passengers
         }
       }
     };
 
     let payload = new NMRequestBy<CotizarSeguroRQ>(lcotizacion)
 
-    console.log(payload)
-    
+    debugger
+
+    console.log('listPlansAC');
+    console.log(JSON.stringify(payload))
+
 
     this.plansACService.plansAC(payload).pipe(take(1)).subscribe({
       next: (response) => {
@@ -131,117 +140,13 @@ export class PlansComponent implements OnInit {
           return e
         }
         )
-        //   this.plansAC = response.filter((price: any) => {
-        //     if (price.precioEmisionLocal != '0') {
-        //     // console.log(price);
-        //     return price
-        //   }
-        // })
+
         let maxi = this.bestPlan()
         let clase = { clase: 'best' }
         this.plans = { ...this.plansAC[maxi], ...clase }
         this.plansAC.splice(maxi, 1)
         this.plansAC.unshift(this.plans)
 
-        // AGREGAR CPVERAGE
-        // this.plansAC.map((plan: any) => {
-        //   console.log(plan);
-
-        //   let planes: any = this.listCoverage(plan)
-
-        //   if (planes.Codigo === 'C.4.1.10.1') {
-        //     plan.aMedica = plan.valor
-        //   }
-        //   return plan
-
-        //           let payload = {
-        //             "Aplicacion": "Intranet",
-        //             "CodigoSeguimiento": "Test",
-        //             "CodigosEntorno": "DESA/NMO/NMO",
-        //             "Parametros": {
-        //               "CodigoISOPais": this.resultJson.destinoSafe,
-        //               "Agencia": "87823",
-        //               "Sucursal": "0",
-        //               "CodigoProducto": plan.codProducto,
-        //               "CodigoTarifa": plan.codTarifa,
-        //               "Edad": "40",
-        //               "TipoModalidad": plan.codModalidad
-        //             }
-        //           }
-
-        //           this.coverageService.getCoverage(payload).subscribe(
-        //             response.map((n: any)=>{
-        //               if(n.Codigo === 'C.4.1.10.1'){
-        //               plan.cobertura = n.valor
-        //               }
-
-        //             })
-
-        //             // data => console.log(data['Resultado']),
-        //           )
-        // return plan
-        // })
-        // this.listCoverage(this.plansAC)
-
-        // .map((e: any) => {
-        //   // let max = this.bestPlan()
-        //   let max = 2
-        //   console.log(e[max])
-        //   console.log(e);
-
-        //   if (e === e[max]) {
-        //     console.log(e);
-        //   }
-        //   // price[this.bestPlan()] = {...clase, ...price[this.bestPlan()]}
-        //   //price[0] = {...clase, ...price[0]}
-        //   //  console.log(e[this.bestPlan()]);
-
-        //   return e
-        // })
-        //console.log(this.bestPlan());
-
-
-        // .map((m: any, index: any) => {
-        //   let payload2 = {
-        //     "Aplicacion": "Intranet",
-        //     "CodigoSeguimiento": "Test",
-        //     "CodigosEntorno": "DESA/NMO/NMO",
-        //     "Parametros": {
-        //       "CodigoISOPais": this.resultJson.destinoSafe,
-        //       "Agencia": "87823",
-        //       "Sucursal": "0",
-        //       "CodigoProducto": m.codProducto,
-        //       "CodigoTarifa": m.codTarifa,
-        //       "Edad": "40",
-        //       "TipoModalidad": m.codModalidad
-        //     }
-        //   }
-        //   let omac
-        //   let medica = this.coverageService.getCoverage(payload2).subscribe({
-        //     next: (infoData)=>{
-        //       omac = infoData['Resultado'][index].map( (el:any) => {
-        //         if(el.Codigo = 'C.4.1.10.1'){
-        //           console.log(el.Valor);
-        //           return el.Valor
-        //         }
-        //       })
-        //   }
-        //   })
-        //   // this.listCoverage(response[index]).filter((medic: any) => {
-        //   //   return r
-        //   // })
-        //     m.AsistenciaMEdica = omac
-        //     return m
-        //   })
-        // .pipe(
-        //   map(money => {
-        //     return money.map((item: any, index: any) => {
-        //       return {
-        //         change: item[index].precioEmision * item[index].tipoCambio
-        //       }
-        //     })
-        //   })
-        // )
         this.loaderSubjectService.closeLoader()
         // this.price()
         console.log(this.plansAC)
@@ -292,7 +197,6 @@ export class PlansComponent implements OnInit {
       },
       error: error => console.log(error),
     }
-      // data => console.log(data['Resultado']),
     )
   }
 
@@ -307,18 +211,13 @@ export class PlansComponent implements OnInit {
       if (e.idProducto === id) {
         return e
       }
-    })
+    });
+
     let state2 = { ...this.json, ...service }
     localStorage.setItem('safe0', JSON.stringify(state2));
+
     const navigationExtras: NavigationExtras = { state: { ...this.json, ...service } };
+
     this.route.navigateByUrl('/comprar', navigationExtras);
   }
-  // price() {
-  //   let price = Number(this.plansAC[0].precioEmision)
-  //   let change = Number(this.plansAC.tipoCambio)
-  //   let priceSol = price * change
-  //   console.log(price);
-  //   this.priceSol = priceSol
-  //   return price
-  // }
 }
