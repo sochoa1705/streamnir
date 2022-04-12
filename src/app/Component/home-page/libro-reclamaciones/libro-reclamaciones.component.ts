@@ -5,6 +5,7 @@ import { LibroReclamacionesService } from '../../../Services/libro/libro-reclama
 import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
 import { ModelTaggingLibroReclamaciones } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
+import { InputValidationService } from 'src/app/Services/inputValidation.service';
 
 @Component({
   selector: 'app-libro-reclamaciones',
@@ -49,6 +50,7 @@ export class LibroReclamacionesComponent implements OnInit {
   constructor(
     public libroService: LibroReclamacionesService,
     public loaderSubjectService: LoaderSubjectService,
+    public inputValidator : InputValidationService
   ) {
     this.ipCliente = localStorage.getItem('ipCliente')
     let day = new Date()
@@ -91,7 +93,7 @@ export class LibroReclamacionesComponent implements OnInit {
     let data = this.formLibro.value
 
     if (this.validForm()) {
-      const textSend = 'SE ESTAN VALIDADNDO SUS DATOS!'
+      const textSend = 'SE ESTAN VALIDANDO SUS DATOS!'
       this.loaderSubjectService.showText(textSend)
       let payload = {
         "TrackingCode": "00000",
