@@ -154,20 +154,30 @@ export class ModelTaggingOfertasVuelos {
       public eLabel = generateLabelTag(),
     ){}
   }
-
+  
   export class ModelTaggingLogin {
     constructor(
-     accion: "Login" | "Signup",
-     userMetodo: "Password" | "Facebook" | "Google",
-     userEmail: string,
-     eCategory: string,
-     eAction: string,
-     eLabel: string,
-     event: string,
+     public accion: "Login" | "Signup",
+     public perfilUsuario: "Cuenta Personal" | "Cuenta Empresa",
+     public userMetodo: "Password" | "Facebook" | "Google",
+     public userEmail: string,
+     public userId: string,
+     public event: string
     ){}
+
+    generateTag(){
+      return {
+        event: "nmv.users_ga_" + this.accion,
+        userPerfil: this.perfilUsuario,
+        userMetodo: this.userMetodo,
+        userEmail: this.userEmail,
+        userId: this.userId,
+        eCategory: this.accion,
+        eAction: this.perfilUsuario,
+        eLabel: this.userMetodo
+      }
+    }
   }
-
-
 
   export class ModelTaggingLibroReclamaciones {
 
