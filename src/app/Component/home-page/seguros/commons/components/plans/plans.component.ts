@@ -174,7 +174,7 @@ export class PlansComponent implements OnInit {
       CodigoProducto: data.codProducto,
       CodigoTarifa: data.codTarifa,
       // Edad: this.resultJson.ClienteCotizacion.shift().Edad,     // COLOCAR LA PRIMERA EDAD DE BUSQUEDA
-      Edad: this.resultJson.ClienteCotizacion[0].Edad,     // COLOCAR LA PRIMERA EDAD DE BUSQUEDA
+      Edad: this.resultJson.passengers[0].edad,     // COLOCAR LA PRIMERA EDAD DE BUSQUEDA
       TipoModalidad: data.codModalidad
     }
 
