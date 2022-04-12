@@ -446,14 +446,14 @@
                                 </div>
 
                                 <hr>
-                                <div class="groupOption">
-                                    <mat-checkbox  formControlName="politicas" class="checkOption">Aceptar
+                                <div class="groupOption popup">
+                                    <mat-checkbox formControlName="politicas" class="checkOption">Aceptar
                                         <a routerLink="/politicas" target="_blank">política de protección de datos</a>
                                     </mat-checkbox>
                                 </div>
                                 <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) !== MSG_EMPTY">{{ getMessage(MSG_CHK_POLITY)
                                     }}</span>
-                                <div class="groupOption">
+                                <div class="groupOption popup">
                                     <mat-checkbox formControlName="autorizo" class="checkOption">Autorizo el uso de mi información para fines publicitarios</mat-checkbox>
                                 </div>
                                 <span class="valid" *ngIf="getMessage(MSG_CHK_AUTORIZO) !== MSG_EMPTY">{{
