@@ -2697,6 +2697,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+.titleMobile {
+    @media (max-width: 640px) {
+        h1 {
+            font-size: 14px !important;
+            font-weight: bold;
+        }
+    }
+}
+
 #ModalCondicion {
     .modal-content {
         .modal-body {
@@ -2997,6 +3006,49 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     line-height: 21px;
     letter-spacing: 0.1px;
     color: #4B4B4B !important;
+}
+
+#ModalCoverageI {
+    .modal-dialog {
+        min-width: 60% !important;
+        @media (max-width: 640px) {
+            width: calc(100% - 15px)!important;
+        }
+    }
+    .modal-header {
+        background: #54D834;
+        .modal-title {
+            font-family: 'Open Sans';
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 36px;
+            color: #FFFFFF;
+        }
+        .modal-subtitle {
+            font-family: Open Sans;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 27px;
+            letter-spacing: 0.18px;
+            color: #ffffff;
+        }
+    }
+    .modal-body {
+        border-radius: 20px;
+        margin-top: -20px;
+        @media (max-width: 640px) {
+            .table-bordered {
+                .row {
+                    .col {
+                        font-size: 12px;
+                        &:first-child {
+                            //min-width: 100px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 #modalVerOpciones {
