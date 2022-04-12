@@ -14,6 +14,7 @@ import { AccountsService } from 'src/app/Services/accounts.service';
 import * as bootstrap from 'bootstrap';
 import { FlightService } from 'src/app/api/api-nmviajes/services';
 import { Guid } from 'src/app/shared/utils';
+import { EGalleryCode, IGalleryImage, IGalleryService } from 'src/app/Services/presenter/data-page-presenter.models';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,11 @@ export class HomeComponent implements OnInit {
 
   airfare: any;
 
+  sliderDestacados:IGalleryImage[] = [];
+  bannersDestacados:IGalleryImage[] = [];
+
+  loadedGallery = false;
+
   constructor(
     //public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
@@ -39,9 +45,9 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.addTag()
     this.listDestiny()
     this.getConfirmacion();
+    this.getGallery();
     //this.getAirfare();
   }
 
@@ -56,6 +62,17 @@ export class HomeComponent implements OnInit {
       }
     })
   }
+
+
+  getGallery(){
+    this.dataPagePresenterService.getDataGallery().subscribe(data=>{
+      this.sliderDestacados = data.filter(item=>item.Code === EGalleryCode.slider_destacados).map(item=>item.Images)[0];
+      this.bannersDestacados = data.filter(item=>item.Code === EGalleryCode.banners_destacados).map(item=>item.Images)[0];
+
+      this.loadedGallery = true;
+    })
+  }
+
 
   // getAirfare() {
   //   this._flightService.v1ApiFlightGetMostWantedGet({
@@ -104,20 +121,12 @@ export class HomeComponent implements OnInit {
       next: (response) => {
         this.destiny = response['Resultado']
         localStorage.setItem('destiny', JSON.stringify(this.destiny));
-        console.log(this.destiny)
       },
       error: error => console.log(error),
     }
     )
   }
 
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/',
-      'virtualPageTitle': 'Home'
-    })
-  }
+
 
 }

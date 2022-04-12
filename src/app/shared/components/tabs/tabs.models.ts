@@ -2,10 +2,9 @@ import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
 import { FormGroup } from "@angular/forms";
 import { NgbDate } from "@ng-bootstrap/ng-bootstrap/datepicker/ngb-date";
 import * as moment from "moment";
-import { ROUTE_VIAJES } from "../../constant";
+import { environment } from "src/environments/environment";
 import { ICardAutocomplete } from "../card-autocomplete/card-autocomplete.interface";
 import { IForm } from "../filter-tabs/tab-vuelos/tab-vuelos.interfaces";
-import { IDistributionObject } from "../pop-up-pasajero/pop-up-pasajero.component";
 
 interface Pasajeros {
     adultos: number;
@@ -14,6 +13,21 @@ interface Pasajeros {
 }
 
 // habitacion:number;
+
+interface Params {
+    startDate: string;
+    endDate: string;
+    destino: any;
+    idDestino: string;
+    origen?: any;
+    businessClass?: boolean,
+    idOrigen?: string;
+    horaInicio?: string;
+    horaDestino?: string;
+    flightType?: string
+}
+
+
 
 export class PasajerosConHabitacion implements Pasajeros {
     constructor(
@@ -32,19 +46,6 @@ export class PasajerosSinHabitacion implements Pasajeros {
     ) { }
 }
 
-interface Params {
-    startDate: string;
-    endDate: string;
-    destino: any;
-    idDestino: string;
-    origen?: any;
-    businessClass?: boolean,
-    idOrigen?: string;
-    horaInicio?: string;
-    horaDestino?: string;
-    flightType?: string
-}
-
 export type tapType = 'ONLY_HOTEL' | 'ONLY_CAR' | 'FLIGHT_HOTEL' | 'ONLY_HOTEL' | 'ONLY_TICKET' | 'ONLY_FLIGHT';
 interface UrlNmViajes {
     url: string;
@@ -52,7 +53,7 @@ interface UrlNmViajes {
 }
 export class URLVueloHotel implements UrlNmViajes {
 
-    public url = ROUTE_VIAJES.RUTA_GET;
+    public url =  environment.urlPaqueteDinamico + 'home';
 
     private tab: tapType;
     private params: Params;
@@ -75,9 +76,9 @@ export class URLVuelos implements UrlNmViajes {
 
     private tab: tapType;
     private params: Params;
-    private distribution: IDistributionObject;
+    private distribution: any;
 
-    constructor(params: Params, distribution: IDistributionObject) {
+    constructor(params: Params, distribution: any) {
         this.tab = 'ONLY_FLIGHT';
         this.params = params;
         this.distribution = distribution;
@@ -89,7 +90,7 @@ export class URLVuelos implements UrlNmViajes {
 }
 export class URLHotel implements UrlNmViajes {
 
-    public url = ROUTE_VIAJES.RUTA_GET;
+    public url =  environment.urlPaqueteDinamico + 'home';
 
     private tab: tapType;
     private params: Params;
@@ -107,7 +108,7 @@ export class URLHotel implements UrlNmViajes {
 }
 export class URLActividades implements UrlNmViajes {
 
-    public url = ROUTE_VIAJES.RUTA_GET;
+    public url =  environment.urlPaqueteDinamico + 'home';
 
     private tab: tapType;
     private params: Params;

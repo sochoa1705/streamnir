@@ -16,6 +16,7 @@ import { HoraPipe } from './pipes/hora.pipe';
 import { ModalsModule } from 'src/app/shared/components/modals/modals.module';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
+import { PaymentService } from 'src/app/Services/payment/payment.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -37,6 +38,6 @@ import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vu
     ModalsModule
   ],
   exports: [ ComprarComponent ],
-  providers: [ ReservaVuelosService]
+  providers: [ ReservaVuelosService, PaymentService]
 })
 export class ComprarModule { }

@@ -7,7 +7,6 @@ import { NMRequestBy } from '../../Models/base/NMRequestBy';
 import { ChangeRQ } from '../../Models/general/changeRQ.interface';
 import { NMRequest } from 'src/app/Models/base/NMRequest';
 import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit.service';
-import { IpClienteService } from 'src/app/Services/ipCliente/ip-cliente.service';
 import { MainService } from '../../Services/presenter/main/main.service';
 
 @Component({
@@ -16,7 +15,7 @@ import { MainService } from '../../Services/presenter/main/main.service';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  ipAddress!: string
+  ipAddress: string = 'xyx'
   businessUnit!: string[]
   dollar!: number
   dataUtil!: string[]
@@ -25,12 +24,11 @@ export class HomePageComponent implements OnInit {
     public dataPagePresenterService: DataPagePresenterService,
     public dollarChangeService: DollarChangeService,
     public businessUnitService: BusinessUnitService,
-    public ipClienteService: IpClienteService,
     public mainService: MainService,
   ) { }
 
   ngOnInit(): void {
-    this.getChange()
+    //this.getChange()
     this.getBusinessUnit()
     this.getIpCliente()
     this.getMain()
@@ -45,20 +43,7 @@ export class HomePageComponent implements OnInit {
       }
     })
   }
-  getChange() {
-    let lChange: ChangeRQ = {
-      Fecha: environment.today(new Date()),
-      IdMoneda: "SOL",
-      IdEmpresa: "1"
-    }
-    let payload = new NMRequestBy<ChangeRQ>(lChange)
-    this.dollarChangeService.changeDollar(payload).pipe(take(5)).subscribe({
-      next: (response) => {
-        localStorage.setItem('tipoCambio', response)
-        this.dollar = response
-      }
-    })
-  }
+  
   getBusinessUnit() {
     if (localStorage.getItem('businessunit') === null) {
       let payload = new NMRequest();
@@ -74,11 +59,8 @@ export class HomePageComponent implements OnInit {
     }
   }
   getIpCliente() {
-    this.ipClienteService.ipCliente().subscribe((res: any) => {
-      this.ipAddress = res.ip;
-      localStorage.setItem('ipCliente', this.ipAddress)
-      console.log(res);
-    });
+    localStorage.setItem('ipCliente', this.ipAddress)
+
   }
 
 }

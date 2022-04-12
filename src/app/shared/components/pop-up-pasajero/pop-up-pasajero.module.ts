@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PopUpPasajeroComponent } from './pop-up-pasajero.component';
 import { GetNombrePipe } from './pipes/getNombrePopUp.pipe';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,8 @@ import { GetNombrePipe } from './pipes/getNombrePopUp.pipe';
     GetNombrePipe
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports:[
     PopUpPasajeroComponent

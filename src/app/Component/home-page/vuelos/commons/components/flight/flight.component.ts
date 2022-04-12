@@ -112,7 +112,6 @@ export class FlightComponent implements OnInit {
       next: (response) => {
         this.destiny = response['Resultado']
         localStorage.setItem('destiny', JSON.stringify(this.destiny));
-        console.log(this.destiny)
       },
       error: error => console.log(error),
     }

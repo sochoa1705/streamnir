@@ -24,6 +24,8 @@ export class HotelsComponent implements OnInit {
 
   responsiveOptions: any[];
 
+  urlPaqueteDinamico: string = '';
+
   constructor(
     private _hotelsService: HotelService,
     private _activatedRoute: ActivatedRoute
@@ -48,6 +50,8 @@ export class HotelsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.urlPaqueteDinamico = environment.urlPaqueteDinamico;
+
     this._activatedRoute.params.subscribe(params => {
 
       let city: string = this.city || params.city;

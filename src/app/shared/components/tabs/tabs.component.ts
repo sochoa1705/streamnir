@@ -7,8 +7,13 @@ import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
-import { ROUTE_VIAJES } from '../../constant';
-import { ParamsHoteles, ParamsVueloHotel, PasajerosConHabitacion, PasajerosSinHabitacion, URLHotel, URLVueloHotel } from './tabs.models';
+import { ParamsHoteles, ParamsVueloHotel,  URLHotel, URLVueloHotel } from './tabs.models';
+import { ChangeRQ } from '../../../Models/general/changeRQ.interface';
+import { environment } from '../../../../environments/environment.prod';
+import { NMRequestBy } from '../../../Models/base/NMRequestBy';
+import { DollarChangeService } from '../../../Services/dollarChange/dollar-change.service';
+import { take } from 'rxjs/operators';
+import { NMRequest } from '../../../Models/base/NMRequest';
 export interface State {
   flag: string;
   name: string;
@@ -58,9 +63,10 @@ export class TabsComponent implements OnInit {
 
   validPasajeros = false;
 
-  public pasajerosVueloHotel: PasajerosConHabitacion;
-  public pasajerosHoteles: PasajerosConHabitacion;
-  public pasajerosActividades: PasajerosSinHabitacion;
+  RUTA_PAQUETES = environment.urlPaqueteDinamico +  'ES/holidays/search';
+  RUTA_AUTOS =  environment.url_autos;
+
+
   selectedTab: string
 
   constructor(
@@ -70,7 +76,8 @@ export class TabsComponent implements OnInit {
     public formatter: NgbDateParserFormatter,
     private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>,
-    private destineService: DestinyService
+    private destineService: DestinyService,
+    public dollarChangeService: DollarChangeService,
   ) {
     this.fromDate = calendar.getToday();
     this.fromDate2 = calendar.getToday();
@@ -78,9 +85,7 @@ export class TabsComponent implements OnInit {
     this.fromDate4 = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
 
-    this.pasajerosVueloHotel = new PasajerosConHabitacion(0, 0, 0, 1);
-    this.pasajerosHoteles = new PasajerosConHabitacion(0, 0, 0, 1);
-    this.pasajerosActividades = new PasajerosSinHabitacion(0, 0, 0);
+
   }
   ngOnInit(): void {
     this.createForm()
@@ -182,35 +187,14 @@ export class TabsComponent implements OnInit {
 
 
 
-  public getDistributionUrl(pasajeros: PasajerosSinHabitacion) {
-    let urlDistributon = pasajeros.adultos.toString();
 
-    let ninos = pasajeros.infantes + pasajeros.ninos;
-
-    if (ninos > 0) {
-      urlDistributon += `-${ninos}-`;
-    } else {
-      urlDistributon += "-0";
-    }
-    for (let i = 0; i < pasajeros.ninos; i++) {
-      urlDistributon += "10,"
-    }
-    for (let i = 0; i < pasajeros.infantes; i++) {
-      urlDistributon += "2,"
-    }
-    urlDistributon = urlDistributon.charAt(urlDistributon.length - 1) === ',' ? urlDistributon.substring(0, urlDistributon.length - 1) : urlDistributon;
-    return urlDistributon;
-  }
 
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
   }
 
 
-  public searchVueloHotel() {
-    const url = this.getUrlVueloHotel();
-    this.navigateToResponseUrl(url);
-  }
+
 
   getParamsVueloHotel() {
     let params = new ParamsVueloHotel(
@@ -223,15 +207,6 @@ export class TabsComponent implements OnInit {
     return params;
   }
 
-  public getUrlVueloHotel(): string {
-    let url = ''
-    if (this.pasajerosVueloHotel.adultos > 0) {
-      let params = this.getParamsVueloHotel();
-      let distribution = this.getDistributionUrl(this.pasajerosVueloHotel);
-      url = new URLVueloHotel(params, distribution).getUrl();
-    }
-    return url;
-  }
 
 
 
@@ -260,8 +235,11 @@ export class TabsComponent implements OnInit {
   }
 
   changeTab(value: MatTabChangeEvent) {
-    (value.index == 1) ? this.navigateToResponseUrl(ROUTE_VIAJES.RUTA_PAQUETES) : null;
-    (value.index == 4) ? this.navigateToResponseUrl(ROUTE_VIAJES.RUTA_AUTOS) : null;
+    // (value.index == 1) ? this.navigateToResponseUrl(this.RUTA_PAQUETES) : null;
+    (value.index == 4) ? this.navigateToResponseUrl(this.RUTA_AUTOS) : null;
+    if(value.index == 6) {
+      this.callService();
+    }
   }
 
 
@@ -295,6 +273,37 @@ export class TabsComponent implements OnInit {
       },
       err => console.log(err),
       () => console.log('Ciudades cargadas')
+    )
+  }
+
+  callService(): void {
+    this.getChange();
+    this.listDestiny();
+  }
+
+  getChange() {
+    let lChange: ChangeRQ = {
+      Fecha: environment.today(new Date()),
+      IdMoneda: "SOL",
+      IdEmpresa: "1"
+    }
+    let payload = new NMRequestBy<ChangeRQ>(lChange)
+    this.dollarChangeService.changeDollar(payload).pipe(take(5)).subscribe({
+      next: (response) => {
+        localStorage.setItem('tipoCambio', response);
+      }
+    })
+  }
+
+  listDestiny() {
+    let payload = new NMRequest();
+
+    this.destineService.getDestiny(payload).pipe(take(1)).subscribe({
+      next: (response) => {
+        localStorage.setItem('destiny', JSON.stringify(response['Resultado']));
+      },
+      error: error => console.log(error),
+    }
     )
   }
 

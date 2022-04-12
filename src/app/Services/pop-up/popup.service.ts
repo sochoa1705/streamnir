@@ -31,4 +31,8 @@ export class PopupService {
     this.popUpSubject.next(popupClass);
   }
 
+  dispatch(){
+    this.popUpSubject.next( {...this.popUpSubject.value} );
+  }
+
 }

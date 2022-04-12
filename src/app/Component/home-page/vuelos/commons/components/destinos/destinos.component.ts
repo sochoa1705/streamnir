@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import * as moment from 'moment';
 import { interval, Observable } from 'rxjs';
 import { ParamsVuelos } from 'src/app/Component/home-page/resultados/models/resultados.interfaces';
 import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
@@ -54,7 +55,7 @@ export class DestinosComponent implements OnInit {
     private flightService: FlightService,
     private _router: Router
   ) {
-    this.site = "nm_viajes";
+    this.site = "nmviajes";
     this.isFlight = false;
   }
 

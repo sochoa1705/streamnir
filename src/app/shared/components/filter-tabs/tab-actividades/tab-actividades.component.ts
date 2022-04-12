@@ -2,9 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
+import { ModelTaggingActividades } from 'src/app/Services/analytics/tagging.models';
+import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
+import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { ParamsActividades, URLActividades } from '../../tabs/tabs.models';
 
 @Component({
@@ -23,6 +27,10 @@ export class TabActividadesComponent  {
 
   distribution = '';
   hoveredDate: NgbDate | null = null;
+
+
+  distributionObject:DistributionObjectA;
+
   
   @ViewChild('popUp') popUpElement:PopUpPasajeroComponent | undefined;
 
@@ -85,9 +93,40 @@ export class TabActividadesComponent  {
   public getUrlActividades(){
       let url = ''
       let params = this.getParamsActividades();
+      this.insertTag(params);
       url = new URLActividades(params, this.distribution).getUrl();
       return url;
   }
+
+
+  insertTag(params:any){
+
+    const getCodigoIata = (id:string)=>{
+      return id.split("::")[1];
+    }
+  
+    const nombre = `${getCodigoIata(params.idDestino)}`;
+    const diasAnticipacion = moment( params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
+    const duracionViaje =  moment( params.endDate, "DD/MM/YYYY").diff(moment( params.startDate, "DD/MM/YYYY"), 'days');
+
+
+    const model = new ModelTaggingActividades(
+      nombre,
+      params.destino,
+      this.distributionObject.pasajeros,
+      this.distributionObject.adultos,
+      this.distributionObject.ninos,
+      0,
+      this.distributionObject.habitacion,
+      moment( params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment( params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      diasAnticipacion,
+      duracionViaje
+    )
+    
+    TaggingService.buscarActividades(model);
+  }
+
 
   getParamsActividades(){
     let params = new ParamsActividades(

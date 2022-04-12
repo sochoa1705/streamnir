@@ -15,8 +15,12 @@
             width: 50%;
         }
      }
+}
 
- 
-
-
+.slider-container {
+    max-width: 1301px;
+    padding: 0 24px;
+    @media (max-width: 640px) {
+        padding: 0 27px;
+    }
 }

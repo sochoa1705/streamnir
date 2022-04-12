@@ -1,8 +1,11 @@
-:host{
+:host {
     position: relative;
+    @media (max-width: 640px) {
+        position: initial;
+    }
 }
 
-.disable{
+.disable {
     background: #c4c4c4;
     pointer-events: none;
 }

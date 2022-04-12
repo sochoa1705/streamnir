@@ -5,20 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './nuestra-empresa.component.html',
   styleUrls: ['./nuestra-empresa.component.scss']
 })
-export class NuestraEmpresaComponent implements OnInit {
+export class NuestraEmpresaComponent  {
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.addTag()
-  }
 
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/nuestra-empresa',
-      'virtualPageTitle': 'Nuestra empresa'
-    })
-  }
+
 }

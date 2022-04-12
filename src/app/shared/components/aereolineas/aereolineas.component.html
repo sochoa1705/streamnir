@@ -1,5 +1,5 @@
-<section class="container-fluid fluid px-5 ofertas">
-    <div class="row">
+<section class="container-fluid fluid ofertas px-0">
+    <div class="row mx-0">
         <div class="col-12">
             <h2 class="titleHome padTitle ms-3">
                 <strong>Ofertas por Líneas Aéreas</strong>
@@ -7,8 +7,8 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12">
+    <div class="row mx-0">
+        <div class="col-12 px-0">
             <div class="desktop-visible">
                 <div class="sliderOfertas">
                     <div class="btnSteps" (click)="afterBtn()">
@@ -19,8 +19,7 @@
                     </div>
                     <ng-container *ngFor="let contador of maxCounterArray">
                         <div *ngIf="aereolineas" class="contentSliderImg" [ngClass]="{active: counter===contador}">
-                            <a *ngFor="let item of aereolineas | porslide:contador:imagenesPorSilder"
-                                (click)="toLine(item)">
+                            <a *ngFor="let item of aereolineas | porslide:contador:imagenesPorSilder" (click)="toLine(item)">
                                 <img [src]="item.Logo" appImgDefault alt="">
                             </a>
                         </div>
@@ -39,8 +38,7 @@
                 <div class="sliderOfertasCel">
                     <ng-container *ngFor="let contador of maxCounterArrayMobile">
                         <div *ngIf="aereolineas" class="contentSliderImg" [ngClass]="{active: counter===contador}">
-                            <a *ngFor="let item of aereolineas | porslide:contador:imagenesPorSilderMobile"
-                                (click)="toLine(item)">
+                            <a *ngFor="let item of aereolineas | porslide:contador:imagenesPorSilderMobile" (click)="toLine(item)">
                                 <img [src]="item.Logo" appImgDefault alt="">
                             </a>
                         </div>

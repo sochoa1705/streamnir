@@ -3,6 +3,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { toUp } from '../../../shared/utils';
 import { LibroReclamacionesService } from '../../../Services/libro/libro-reclamaciones.service';
 import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
+import { ModelTaggingLibroReclamaciones } from 'src/app/Services/analytics/tagging.models';
+import { TaggingService } from 'src/app/Services/analytics/tagging.service';
+import { InputValidationService } from 'src/app/Services/inputValidation.service';
 
 @Component({
   selector: 'app-libro-reclamaciones',
@@ -47,16 +50,15 @@ export class LibroReclamacionesComponent implements OnInit {
   constructor(
     public libroService: LibroReclamacionesService,
     public loaderSubjectService: LoaderSubjectService,
+    public inputValidator : InputValidationService
   ) {
     this.ipCliente = localStorage.getItem('ipCliente')
     let day = new Date()
     this.today = String(day.getDate()).padStart(2, '0') + "/" + String((day.getMonth() + 1)).padStart(2, '0') + "/" + day.getFullYear()
   }
   ngOnInit(): void {
-    this.addTag()
     this.createForm()
     toUp()
-    console.log(this.numCode)
   }
   createForm() {
     this.formLibro = new FormGroup({
@@ -91,7 +93,7 @@ export class LibroReclamacionesComponent implements OnInit {
     let data = this.formLibro.value
 
     if (this.validForm()) {
-      const textSend = 'SE ESTAN VALIDADNDO SUS DATOS!'
+      const textSend = 'SE ESTAN VALIDANDO SUS DATOS!'
       this.loaderSubjectService.showText(textSend)
       let payload = {
         "TrackingCode": "00000",
@@ -134,6 +136,10 @@ export class LibroReclamacionesComponent implements OnInit {
         }
       }
       // console.log(payload)
+
+      const taggModel = new ModelTaggingLibroReclamaciones(data.bienContratado === "S" ? "Servicio" : "Producto" , data.descripcionBienContratado , data.tipoReclamo === "R" ? "Reclamo" :"Queja" );
+      this.addTag(taggModel);
+
       this.libroService.libroData(payload).subscribe({
         next: response => {
           this.numCode = response['Result']['Code']
@@ -147,6 +153,12 @@ export class LibroReclamacionesComponent implements OnInit {
 
     }
   }
+
+
+  addTag(model:ModelTaggingLibroReclamaciones){
+    TaggingService.tagLibroReclamaciones(model);
+  }
+
   validForm() {
     this.errors = []
     const letter = new RegExp('^[a-zA-Z ]+$', 'i')
@@ -277,12 +289,5 @@ export class LibroReclamacionesComponent implements OnInit {
    let link = 'https://ayuda.nmviajes.com/support/home'
    window.location.href = link;
   }
-  addTag() {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'virtualPageView',
-      'virtualPagePath': '/libro-reclamaciones',
-      'virtualPageTitle': 'Libro de Reclamaciones'
-    })
-  }
+
 }

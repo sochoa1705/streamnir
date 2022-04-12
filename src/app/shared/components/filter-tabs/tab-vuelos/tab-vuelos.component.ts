@@ -3,14 +3,18 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { concat, Observable, of, Subject } from 'rxjs';
 import { distinctUntilChanged, tap, switchMap, catchError, map, debounceTime } from 'rxjs/operators';
+import { ModelTaggingVuelos } from 'src/app/Services/analytics/tagging.models';
+import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { ICardAutocomplete } from '../../card-autocomplete/card-autocomplete.interface';
 import { DisponibilidadPayload } from '../../flights/models/flights.class';
 import { EnumCabins, EnumFlightType } from '../../flights/models/flights.interface';
-import { IDistributionObject, PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
+import {  PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
+import { IDistributionObjectVuelos } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos } from '../../tabs/tabs.models';
 import { IGeoTree } from './tab-vuelos.interfaces';
 
@@ -49,7 +53,7 @@ export class TabVuelosComponent implements OnInit {
   origenHotel: any;
   toDate: NgbDate | null;
 
-  distributionObject: IDistributionObject;
+  distributionObject: IDistributionObjectVuelos; 
   hoveredDate: NgbDate | null = null;
 
   EnumFlightType = EnumFlightType;
@@ -234,6 +238,68 @@ export class TabVuelosComponent implements OnInit {
   }
 
 
+
+  insertTag(params:any){
+    const getTipoTag = ((tipo:EnumFlightType)=>{
+
+      if(tipo == EnumFlightType.ida ){
+        return {
+          codigo: 'SI',
+          descripcion: 'Solo Ida'
+        }
+      }else if( tipo == EnumFlightType.ida_vuelta){
+        return {
+          codigo: 'IV',
+          descripcion: 'Ida y Vuelta'
+        }
+      }else if (tipo == EnumFlightType.multy_city){
+        return {
+          codigo: 'MC',
+          descripcion: 'Multi City'
+        }
+      }else{
+        return {
+          codigo: '',
+          descripcion: ''
+        }
+      }
+    }) 
+
+    const nombre = `${params.idOrigen}_${params.idDestino}_${params.businessClass?'BS':'EC'}_${getTipoTag(params.flightType).codigo}`;
+
+    let diasAnticipacion = moment( params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
+    let duracionViaje = 0;
+
+    let fechaRegreso = '';
+
+    if(params.flightType === EnumFlightType.ida_vuelta ){
+       duracionViaje =  moment( params.endDate, "DD/MM/YYYY").diff(moment( params.startDate, "DD/MM/YYYY"), 'days');
+       fechaRegreso = moment( params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD");
+    }
+  
+
+    const model = new ModelTaggingVuelos(
+      nombre,
+      params.origen.title,
+      params.destino.title,
+      params.businessClass?'Business':'Economy',
+      getTipoTag(params.flightType).descripcion,
+      this.distributionObject.adultos + this.distributionObject.ninos + this.distributionObject.infantes,
+      this.distributionObject.adultos,
+      this.distributionObject.ninos,
+      this.distributionObject.infantes,
+      0,
+      moment( params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      fechaRegreso,
+      diasAnticipacion,
+      duracionViaje
+    )
+    
+    TaggingService.buscarVuelos(model);
+
+  }
+
+
   getParams() {
     let params = new ParamsVuelos(
       this.fromDate,
@@ -247,9 +313,6 @@ export class TabVuelosComponent implements OnInit {
   public getUrl() {
     let url = ''
     let params = this.getParams();
-
-
-    this.addTag(params.idOrigen, params.idDestino, params.startDate, params.endDate)
 
     // nuevo
     let adultosCount = this.distributionObject['adultos'],
@@ -277,6 +340,9 @@ export class TabVuelosComponent implements OnInit {
       }
     }
 
+
+    this.insertTag(params);
+
     let vuelo = { ...params, ...this.distributionObject };
 
 
@@ -296,15 +362,5 @@ export class TabVuelosComponent implements OnInit {
   changeDate(value: ClassValueCalendar) {
     this.toDate = value.toDate;
     this.fromDate = value.fromDate;
-  }
-  addTag(origen: string, destino: string, startDate: string, endDate: string) {
-    (<any><any>window).dataLayer = (<any><any>window).dataLayer || [];
-    (<any><any>window).dataLayer.push({
-      'event': 'vuelosConsulta_Nmviajes',
-      'vuelos_origen_id': origen,
-      'vuelos_destino_id': destino,
-      'vuelos_fecha_salida': startDate,
-      'vuelos_fecha_regreso': endDate
-    })
   }
 }

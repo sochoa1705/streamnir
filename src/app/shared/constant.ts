@@ -44,7 +44,7 @@ export enum ENDPOINT_API {
   UPDATE_PAY = 'reservas/ActualizarSafetyPayReservaSeguro',
 
   // UPDATESAFETYPAY
-  UPDATE_STATE = 'ActualizarEstadoReservaSeguro',
+  UPDATE_STATE = 'reservas/ActualizarEstadoReservaSeguro',
 
   //LOCATIONSEARCH
   LOCATION_SEARCH = 'jsonp/locationSearch',
@@ -75,13 +75,11 @@ export enum ENDPOINT_API {
 
   // NEWSLETTER
   NEWSLETTER = 'v1/api/Newsletter',
+
+  //PAYMENT
+  PAYMENT = 'Payment'
 }
 
-export enum ROUTE_VIAJES {
-  RUTA_PAQUETES = 'https://nmviajes.paquetedinamico.com/ES/holidays/search',
-  RUTA_AUTOS = 'https://autos.nmviajes.com/es/site/',
-  RUTA_GET = 'https://nmviajes.paquetedinamico.com/home'
-}
 
 export const FilterTypes = {
   equipajemano: 1,
