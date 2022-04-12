@@ -221,6 +221,9 @@ section {
     .card.seguro:last-child {
       margin-left: 10px;
       margin-right: 0px; }
+      @media (max-width: 640px) {
+        .card.seguro:last-child {
+          margin-left: 0px; } }
     .card.seguro .card-header {
       font-weight: bold;
       font-size: 14px;
@@ -6319,6 +6322,32 @@ button.customers {
   margin: 0; }
 #ModalDatosOpcionales input.form-control {
   margin-bottom: 0 !important; }
+@media (max-width: 640px) {
+  #ModalDatosOpcionales .modal-body {
+    padding: 10px; }
+    #ModalDatosOpcionales .modal-body .personalDocument .headerPortlet .titleBoxRight {
+      font-size: 22px; }
+    #ModalDatosOpcionales .modal-body .personalDocument .rowContent {
+      padding: 0px 10px; }
+      #ModalDatosOpcionales .modal-body .personalDocument .rowContent .inputGroup {
+        margin-bottom: 10px; }
+    #ModalDatosOpcionales .modal-body .personalDocument .moreInfo {
+      padding: 0 20px; }
+      #ModalDatosOpcionales .modal-body .personalDocument .moreInfo .title {
+        font-size: 22px; }
+      #ModalDatosOpcionales .modal-body .personalDocument .moreInfo .question {
+        flex-direction: column;
+        align-items: flex-start; }
+      #ModalDatosOpcionales .modal-body .personalDocument .moreInfo .groupOption.popup .checkOption {
+        width: 100%; }
+        #ModalDatosOpcionales .modal-body .personalDocument .moreInfo .groupOption.popup .checkOption .mat-checkbox-layout {
+          white-space: initial; }
+          #ModalDatosOpcionales .modal-body .personalDocument .moreInfo .groupOption.popup .checkOption .mat-checkbox-layout .mat-checkbox-label {
+            margin-right: 0; }
+      #ModalDatosOpcionales .modal-body .personalDocument .moreInfo .groupOption .checkOption {
+        width: 50%; }
+      #ModalDatosOpcionales .modal-body .personalDocument .moreInfo .groupOption .groupRadio {
+        flex-wrap: wrap; } }
 
 #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .form-control {
   margin-bottom: 30px; }

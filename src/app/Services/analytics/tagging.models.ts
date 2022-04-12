@@ -144,3 +144,52 @@ export class ModelTaggingOfertasVuelos {
       };
     }
   }
+
+
+  export class ModelTaggingSubscripcionOfertas {
+    constructor(
+      public event = "nmv.users_ga_formSuscripcion",
+      public eCategory = "Form Ofertas Exclusivas",
+      public eAction = "Suscripción a Ofertas",
+      public eLabel = generateLabelTag(),
+    ){}
+  }
+
+  export class ModelTaggingLogin {
+    constructor(
+     accion: "Login" | "Signup",
+     userMetodo: "Password" | "Facebook" | "Google",
+     userEmail: string,
+     eCategory: string,
+     eAction: string,
+     eLabel: string,
+     event: string,
+    ){}
+  }
+
+
+
+  export class ModelTaggingLibroReclamaciones {
+
+    public eCategory: "Libro de Reclamaciones";
+    public event = "nmv.users_ga_libroReclamaciones";
+
+    constructor(
+      public bienTipo: "Servicio" | "Producto",
+      public bienDescripcion: string,
+      public tipoReclamo: "Reclamo" | "Queja",
+    ){}
+
+    generateTag(){
+      return {
+         event: this.event,
+         bienTipo: this.bienTipo,
+         bienDescripcion: this.bienDescripcion,
+         tipoReclamo:  this.tipoReclamo,
+         eCategory: this.eCategory,
+         eAction: this.bienTipo,
+         eLabel: this.bienDescripcion,
+      }
+    }
+  }
+  
