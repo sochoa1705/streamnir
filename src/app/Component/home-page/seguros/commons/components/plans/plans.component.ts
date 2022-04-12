@@ -50,14 +50,19 @@ export class PlansComponent implements OnInit {
     public loaderSubjectService: LoaderSubjectService,
     private notification: NotificationService,
   ) {
-    this.result = localStorage.getItem('Datasafe')
-    this.resultJson = JSON.parse(this.result)
-    this.dollar = localStorage.getItem('tipoCambio')
+
   }
 
   ngOnInit(): void {
-    let lcadena: any = localStorage.getItem('businessunit')
-    this.unidadNegocio = JSON.parse(lcadena)
+    debugger
+
+    this.result = localStorage.getItem('Datasafe');
+    this.resultJson = JSON.parse(this.result);
+    this.dollar = localStorage.getItem('tipoCambio');
+
+    let lcadena: any = localStorage.getItem('businessunit');
+    this.unidadNegocio = JSON.parse(lcadena);
+
 
     // if(localStorage.getItem('planes')) {
     //   let planesAC: any = localStorage.getItem('planes')
@@ -74,10 +79,10 @@ export class PlansComponent implements OnInit {
 
     if (localStorage.getItem('safe0')) {
       localStorage.removeItem('safe0');
-      this.listPlansAC()
+      this.getPlansAC()
     }
     else
-      this.listPlansAC()
+      this.getPlansAC()
   }
 
   bestPlan() {
@@ -89,11 +94,18 @@ export class PlansComponent implements OnInit {
     return medium
   }
 
-  listPlansAC() {
+  getPlansAC() {
     const textSend = '¡ESTAMOS BUSCANDO LOS MEJORES PLANES!';
 
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
+
+    // const clienteCotizacion : Array<{Edad: string, FechaNacimiento: string}> = this.resultJson.forEach(element => {
+    //   'Edad': element.age,
+    //   'FechaNacimiento': element.fecha
+    // });
+
+    debugger
 
     let lcotizacion: CotizarSeguroRQ = {
       UnidadNegocio: environment.undidadNegocioAC,
@@ -107,7 +119,7 @@ export class PlansComponent implements OnInit {
         Destino: this.resultJson.destinoSafe,
         CantidadDias: this.resultJson.days,
         Clientes: {
-          ClienteCotizacion: this.resultJson.ClienteCotizacion
+          ClienteCotizacion: this.resultJson.passengers
         }
       }
     };

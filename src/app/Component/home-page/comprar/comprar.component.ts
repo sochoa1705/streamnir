@@ -236,7 +236,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log(this.resultJson);
     console.log(this.filtroVueloJson);
 
-    const pasajeros = this.resultJson !== null ? this.resultJson['ClienteCotizacion'] : this.filtroVueloJson['pasajeros'];
+    debugger
+
+    const pasajeros = this.resultJson !== null ? this.resultJson['passengers'] : this.filtroVueloJson['pasajeros'];
     console.log(pasajeros);
 
     pasajeros.forEach((element: any) => {
@@ -526,8 +528,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
       return;
 
+    debugger
+
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
-    this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson.passenger.length));
+    this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson['passengers'].length));
 
     this.dataShop = this.formShop.value;
     let dataShop = this.formShop.value;
@@ -657,7 +661,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const payload: RqPaymentCeRequest1 = this.generatePayloadToPay(data);
 
-    console.log("JSON payload make payment", JSON.stringify(payload));
+    console.log("JSON payload", JSON.stringify(payload));
 
     localStorage.setItem('payloadPayment', JSON.stringify(payload));
 
@@ -753,7 +757,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         "Card": {
           "Number": data.paymentMethodForm.numberCard,
           "SecurityCode": data.paymentMethodForm.ccvCard,
-          "ExpirationDate": `${data.paymentMethodForm.expiredCard.substring(0, 2)}/${data.paymentMethodForm.expiredCard.substring(2)}` //? `${data.paymentMethodForm.expiredCard.substring(4)}/${data.paymentMethodForm.expiredCard.substring(2, 4)}` : null
+          "ExpirationDate": `${data.paymentMethodForm.expiredCard.substring(0, 2)}/${data.paymentMethodForm.expiredCard.substring(2)}`
         },
         "Amount": {
           "Value": data.PriceTotal,
@@ -799,7 +803,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       Sucursal: this.businessunit.sucursal_ac,
       CodigoProducto: this.safe0Json.codProducto,
       CodigoTarifa: this.safe0Json.codTarifa,
-      Edad: this.resultJson.ClienteCotizacion.shift().Edad,     // COLOCAR LA PRIMERA EDAD DE BUSQUEDA
+      Edad: this.resultJson.passengers[0].edad,     // COLOCAR LA PRIMERA EDAD DE BUSQUEDA
       TipoModalidad: this.safe0Json.codModalidad
     }
 
@@ -981,7 +985,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     //   console.log(this.formShop.getRawValue())
     //   this.step1Complete = true
     // }
-    for (let i in this.resultJson.passenger) {
+    for (let i in this.resultJson.passengers) {
       //if (this.validFormMobileCustomers(i) && this.validFormMobileContact()) {
       this.step1Complete = true
 
