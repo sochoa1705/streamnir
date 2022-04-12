@@ -300,6 +300,9 @@ section {
         &:last-child {
             margin-left: 10px;
             margin-right: 0px;
+            @media (max-width: 640px) {
+                margin-left: 0px;
+            }
         }
         .card {
             &-header {
@@ -7709,6 +7712,53 @@ button.customers {
     }
     input.form-control {
         margin-bottom: 0 !important;
+    }
+    @media (max-width: 640px) {
+        .modal-body {
+            padding: 10px;
+            .personalDocument {
+                .headerPortlet {
+                    .titleBoxRight {
+                        font-size: 22px;
+                    }
+                }
+                .rowContent {
+                    padding: 0px 10px;
+                    .inputGroup {
+                        margin-bottom: 10px;
+                    }
+                }
+                .moreInfo {
+                    padding: 0 20px;
+                    .title {
+                        font-size: 22px;
+                    }
+                    .question {
+                        flex-direction: column;
+                        align-items: flex-start;
+                    }
+                    .groupOption {
+                        &.popup {
+                            .checkOption {
+                                width: 100%;
+                                .mat-checkbox-layout {
+                                    white-space: initial;
+                                    .mat-checkbox-label {
+                                        margin-right: 0;
+                                    }
+                                }
+                            }
+                        }
+                        .checkOption {
+                            width: 50%;
+                        }
+                        .groupRadio {
+                            flex-wrap: wrap;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

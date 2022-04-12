@@ -15,6 +15,7 @@ import { CalendarModule } from '../calendar/calendar.module';
 import { TabVuelosComponent } from './tab-vuelos/tab-vuelos.component';
 import { InputAutocompleteModule } from '../input-autocomplete/input-autocomplete.module';
 import { PopUpPasajerVuelosoModule } from '../pop-up-pasajero-vuelos/pop-up-pasajero-vuelos.module';
+import { TabPaquetesComponent } from './tab-paquetes/tab-paquetes.component';
 
 
 
@@ -23,7 +24,8 @@ import { PopUpPasajerVuelosoModule } from '../pop-up-pasajero-vuelos/pop-up-pasa
     TabVueloHotelComponent,
     TabHotelComponent,
     TabActividadesComponent,
-    TabVuelosComponent
+    TabVuelosComponent,
+    TabPaquetesComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { PopUpPasajerVuelosoModule } from '../pop-up-pasajero-vuelos/pop-up-pasa
     TabVueloHotelComponent,
     TabHotelComponent,
     TabActividadesComponent,
-    TabVuelosComponent
+    TabVuelosComponent,
+    TabPaquetesComponent
   ]
 })
 export class FilterTabsModule { }

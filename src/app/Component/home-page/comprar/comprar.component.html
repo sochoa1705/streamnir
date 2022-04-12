@@ -24,13 +24,15 @@
     </div>
 
     <div class="d-flex align-items-center textBold">
-      <img src="./assets/user.png" alt=""> {{ resultJson.ClienteCotizacion.length + 1 }} Pasajero(s)
+      <img src="./assets/user.png" alt=""> {{ resultJson.passengers.length }} Pasajero(s)
     </div>
   </div>
 </div>
 
 <div class="container-fluid pb-4 px-4">
-  <form [formGroup]="formShop" novalidate>
+  <form [formGroup]="formShop" novalidate autocomplete="off">
+
+    <input autocomplete="false" name="hidden" type="text" style="display:none;">
 
     <!-- VERSION MOBILE -->
     <div class="row stepCard d-md-none d-block">
@@ -394,8 +396,8 @@
           <div *ngIf="safe0Json.detalleCobertura">
             <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [txtOrigen]=""
               [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate"
-              [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson['ClienteCotizacion'].length"
-              [plan]="safe0Json"></app-coverage>
+              [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson['passengers'].length" [plan]="safe0Json">
+            </app-coverage>
           </div>
           <!-- DETALLE DE COBERTURA -->
 
@@ -1379,7 +1381,7 @@
 
                           <input class="form-control" formControlName="ccvCard" mask="0*" maxlength="3"
                             (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)"
-                            placeholder="CVC" type="password">
+                            placeholder="CVC" type="text" autocomplete="false">
                         </div>
 
                         <div class="col-1 colBoxInfo">
@@ -1930,7 +1932,7 @@
 
               <div class="col-5 text-end">
                 {{safe0Json?.monedaLista}}
-                <span class="price_end_number">{{ safe0Json?.precioEmisionLocal * resultJson.passenger.length |
+                <span class="price_end_number">{{ safe0Json?.precioEmisionLocal * resultJson.passengers.length |
                   currency: 'USD'}}</span>
               </div>
 
@@ -2012,7 +2014,7 @@
         <div *ngIf="safe0Json.detalleCobertura && resultJson" class="order-0">
           <!-- <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [asistenciaMedica]="coverage.Valor" [txtOrigen]=""
                         [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
-                        [txtPasajeros]="resultJson?.ClienteCotizacion?.length +1" [plan]="safe0Json"></app-coverage> -->
+                        [txtPasajeros]="resultJson?.passengers?.length +1" [plan]="safe0Json"></app-coverage> -->
           <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [txtOrigen]=""
             [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate"
             [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson.countCustomers" [plan]="safe0Json">
