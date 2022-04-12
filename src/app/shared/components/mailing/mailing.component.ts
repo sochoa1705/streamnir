@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MailingService } from '../../../Services/mailing/mailing.service';
 import { NotificationService } from 'src/app/Services/notification.service';
+import { InputValidationService } from 'src/app/Services/inputValidation.service';
 import { validate } from 'json-schema';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 
@@ -28,6 +29,7 @@ export class MailingComponent implements OnInit {
     private mailingService: MailingService,
     private notification: NotificationService,
     public loaderSubjectService: LoaderSubjectService,
+    public inputValidator : InputValidationService
   ) {
     this.validate = false
     this.ipCliente = localStorage.getItem('ipCliente')
@@ -44,6 +46,7 @@ export class MailingComponent implements OnInit {
       autorizoMail: new FormControl()
     })
   }
+
   subscribe(e: any) {
     if (this.validForm()) {
       const textSend = 'Validando suscripción'

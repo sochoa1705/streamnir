@@ -216,4 +216,6 @@
   <app-destinations [city]="codigoCiudad"></app-destinations>
 </div>
 
-<app-aereolineas [aereolineas]="$aereolineas | async" (redirigir)="toLine($event)"></app-aereolineas>
+<section class="slider-container mx-auto">
+  <app-aereolineas [aereolineas]="$aereolineas | async" (redirigir)="toLine($event)"></app-aereolineas>
+</section>

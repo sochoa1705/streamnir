@@ -46,11 +46,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-md-4 offset-0 offset-md-1 input-group-lg px-0  text-start">
-                            <input class="form-control" formControlName="nombreMail" placeholder="Ingrese su nombre" type="text">
+                            <input class="form-control" formControlName="nombreMail" placeholder="Ingrese su nombre" type="text" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
                             <span class="valid" *ngIf="getMessage(MSG_NOMBRE) != MSG_EMPTY">{{ getMessage(MSG_NOMBRE) }}</span>
                         </div>
                         <div class="col-12 col-md-4 offset-0 input-group-lg px-0 px-md-3 text-start">
-                            <input class="form-control" formControlName="correoMail" placeholder="Correo electrónico" type="text">
+                            <input class="form-control" formControlName="correoMail" placeholder="Correo electrónico" type="text" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_MAIL)">
                             <span class="valid" *ngIf="getMessage(MSG_CORREO) != MSG_EMPTY">{{ getMessage(MSG_CORREO) }}</span>
                         </div>
                         <div class="col-md-2 col-12 text-center text-md-start px-0">

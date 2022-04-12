@@ -52,7 +52,6 @@
     "@angular-eslint/eslint-plugin-template": "12.5.0",
     "@angular-eslint/schematics": "12.5.0",
     "@angular-eslint/template-parser": "12.5.0",
-    "@angular/cli": "^12.2.7",
     "@angular/compiler-cli": "~12.1.1",
     "@briebug/jest-schematic": "^4.0.0",
     "@cypress/schematic": "^1.6.0",

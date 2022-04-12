@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { toUp } from '../../../shared/utils';
 import { LibroReclamacionesService } from '../../../Services/libro/libro-reclamaciones.service';
 import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
+import { InputValidationService } from 'src/app/Services/inputValidation.service';
 
 @Component({
   selector: 'app-libro-reclamaciones',
@@ -47,6 +48,7 @@ export class LibroReclamacionesComponent implements OnInit {
   constructor(
     public libroService: LibroReclamacionesService,
     public loaderSubjectService: LoaderSubjectService,
+    public inputValidator : InputValidationService
   ) {
     this.ipCliente = localStorage.getItem('ipCliente')
     let day = new Date()
@@ -91,7 +93,7 @@ export class LibroReclamacionesComponent implements OnInit {
     let data = this.formLibro.value
 
     if (this.validForm()) {
-      const textSend = 'SE ESTAN VALIDADNDO SUS DATOS!'
+      const textSend = 'SE ESTAN VALIDANDO SUS DATOS!'
       this.loaderSubjectService.showText(textSend)
       let payload = {
         "TrackingCode": "00000",
