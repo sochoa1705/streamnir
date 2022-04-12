@@ -2453,31 +2453,46 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   letter-spacing: 0.1px;
   color: #4B4B4B !important; }
 
-#ModalCoverageI .modal-dialog {
+#ModalCoverageI .modal-dialog,
+#ModalCoverage .modal-dialog {
   min-width: 60% !important; }
   @media (max-width: 640px) {
-    #ModalCoverageI .modal-dialog {
+    #ModalCoverageI .modal-dialog,
+    #ModalCoverage .modal-dialog {
       width: calc(100% - 15px) !important; } }
-#ModalCoverageI .modal-header {
+#ModalCoverageI .modal-header,
+#ModalCoverage .modal-header {
   background: #54D834; }
-  #ModalCoverageI .modal-header .modal-title {
+  #ModalCoverageI .modal-header .modal-title,
+  #ModalCoverage .modal-header .modal-title {
     font-family: 'Open Sans';
     font-weight: 700;
     font-size: 24px;
     line-height: 36px;
     color: #FFFFFF; }
-  #ModalCoverageI .modal-header .modal-subtitle {
+    @media (max-width: 640px) {
+      #ModalCoverageI .modal-header .modal-title,
+      #ModalCoverage .modal-header .modal-title {
+        font-size: 18px; } }
+  #ModalCoverageI .modal-header .modal-subtitle,
+  #ModalCoverage .modal-header .modal-subtitle {
     font-family: Open Sans;
     font-weight: bold;
     font-size: 14px;
     line-height: 27px;
     letter-spacing: 0.18px;
     color: #ffffff; }
-#ModalCoverageI .modal-body {
+    @media (max-width: 640px) {
+      #ModalCoverageI .modal-header .modal-subtitle,
+      #ModalCoverage .modal-header .modal-subtitle {
+        font-size: 12px; } }
+#ModalCoverageI .modal-body,
+#ModalCoverage .modal-body {
   border-radius: 20px;
   margin-top: -20px; }
   @media (max-width: 640px) {
-    #ModalCoverageI .modal-body .table-bordered .row .col {
+    #ModalCoverageI .modal-body .table-bordered .row .col,
+    #ModalCoverage .modal-body .table-bordered .row .col {
       font-size: 12px; } }
 
 #modalVerOpciones .modal-dialog {
