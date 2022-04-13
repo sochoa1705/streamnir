@@ -54,7 +54,7 @@ export class TaggingService {
   }
 
   public static tagLoginSignup(modelTaggingLogin:ModelTaggingLogin) {
-    this.triggerTag(modelTaggingLogin);
+    this.triggerTag(modelTaggingLogin.generateTag());
   }
 
   public static tagSubscripcionOfertas(modelTaggingSubscripcionOfertas:ModelTaggingSubscripcionOfertas) {

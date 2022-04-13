@@ -186,7 +186,7 @@ export class ModelTaggingOfertasVuelos {
     constructor(
       public bienTipo: "Servicio" | "Producto",
       public bienDescripcion: string,
-      public tipoReclamo: "Reclamo" | "Queja",
+      public tipoReclamo: "Reclamo" | "Queja"
     ){}
 
     generateTag(){
@@ -197,7 +197,7 @@ export class ModelTaggingOfertasVuelos {
          tipoReclamo:  this.tipoReclamo,
          eCategory: this.eCategory,
          eAction: this.bienTipo,
-         eLabel: this.bienDescripcion,
+         eLabel: this.bienDescripcion
       }
     }
   }
