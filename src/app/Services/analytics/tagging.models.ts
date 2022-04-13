@@ -120,7 +120,8 @@ export class ModelTaggingOfertasVuelos {
       public src: string,
       public title: string,
       public nombre: 'Oferta de Vuelos',
-      public position: string
+      public position: string,
+      public url: string,
     ) {}
   
     generateTag() {
@@ -140,7 +141,7 @@ export class ModelTaggingOfertasVuelos {
         },
         eCategory: "Promociones: " + this.nombre,
         eAction: this.title,
-        eLabel: generateLabelTag(),
+        eLabel: this.url
       };
     }
   }
