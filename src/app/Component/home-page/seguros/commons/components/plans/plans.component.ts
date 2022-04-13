@@ -54,7 +54,6 @@ export class PlansComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
 
     this.result = localStorage.getItem('Datasafe');
     this.resultJson = JSON.parse(this.result);
@@ -105,8 +104,6 @@ export class PlansComponent implements OnInit {
     //   'FechaNacimiento': element.fecha
     // });
 
-    debugger
-
     let lcotizacion: CotizarSeguroRQ = {
       UnidadNegocio: environment.undidadNegocioAC,
       Dk: environment.dkAgenciaAC,
@@ -126,12 +123,6 @@ export class PlansComponent implements OnInit {
 
     let payload = new NMRequestBy<CotizarSeguroRQ>(lcotizacion)
 
-    debugger
-
-    console.log('listPlansAC');
-    console.log(JSON.stringify(payload))
-
-
     this.plansACService.plansAC(payload).pipe(take(1)).subscribe({
       next: (response) => {
         this.plansAC = response.map((e: any, index: number) => {
@@ -148,9 +139,7 @@ export class PlansComponent implements OnInit {
         this.plansAC.unshift(this.plans)
 
         this.loaderSubjectService.closeLoader()
-        // this.price()
-        console.log(this.plansAC)
-        console.log(this.plans)
+
 
         localStorage.setItem('planes', JSON.stringify(this.plansAC))
 
@@ -201,7 +190,6 @@ export class PlansComponent implements OnInit {
   }
 
   data(id: any) {
-    console.log(id);
     this.pop = id
     this.listCoverage(id)
   }

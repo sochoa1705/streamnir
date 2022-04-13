@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { generateLabelTag } from 'src/app/shared/utils';
 
 export class ModelTaggingVuelosHoteles {
@@ -200,6 +201,37 @@ export class ModelTaggingOfertasVuelos {
          eAction: this.bienTipo,
          eLabel: this.bienDescripcion
       }
+    }
+  }
+  
+  export class ModelTaggingBuscarSeguros {
+    constructor(
+    public nombreRegionDestino:string,
+    public codigoRegionDestino:string,
+    public cantidadPasajeros:string | number,
+    public promedioEdad:string | number,
+    public fechaSalida:string | number,
+    public fechaRegreso:string | number,
+    public codigoPaisOrigen = "PE",
+    public nombrePaisOrigen = "peru"
+    ) {}
+
+    generateTag(){
+        return {
+         event:"nmv.seguros_ga_buscar",
+         nombre:this.nombrePaisOrigen + "_" + this.nombreRegionDestino,
+         numPasajeros: this.cantidadPasajeros,
+         promEdad: this.promedioEdad,
+         fechaSalida:  moment( this.fechaSalida, "DD/MM/YYYY").format("YYYY/MM/DD"),
+         fechaRegreso: moment( this.fechaRegreso, "DD/MM/YYYY").format("YYYY/MM/DD"),
+         diasAnticipacion: moment( this.fechaSalida, "DD/MM/YYYY").diff(moment(), 'days'),
+         duracionViaje: moment( this.fechaRegreso, "DD/MM/YYYY").diff(moment( this.fechaSalida, "DD/MM/YYYY"), 'days'),
+         paisOrigen:this.codigoPaisOrigen + '_' + this.nombrePaisOrigen,
+         regionDestino:this.codigoRegionDestino + '_' + this.nombreRegionDestino,
+         eCategory:"Vertical Seguros",
+         eAction:"Cotizar Seguros",
+         eLabel: generateLabelTag()
+        }  
     }
   }
   
