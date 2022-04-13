@@ -59,7 +59,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   // coverageList: any
   coverageL: any;
   asistMedic: any;
-  pop: any;
   listBank: any;
   timeShow!: number;
   ShowComponentTime!: boolean;
@@ -119,6 +118,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   tipodeCambio: any
   coverageList: any
   coverage: any
+
+  planesList: any
+  planes: any
+
   reservation: any
   dataShop: any
   ipCliente: any
@@ -156,8 +159,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     private _formBuilder: FormBuilder
   ) {
     // COBERTURA
-    this.coverageList = localStorage.getItem('coverage')
-    this.coverage = JSON.parse(this.coverageList)
+    this.coverageList = localStorage.getItem('coverage');
+    this.coverage = JSON.parse(this.coverageList);
+
+    this.planesList = localStorage.getItem('planes');
+    this.planes = JSON.parse(this.planesList);
+
     // Token
     this.token = localStorage.getItem('token')
     this.tokenJson = JSON.parse(this.token)
@@ -176,8 +183,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     const detalleVuelosStr: any = localStorage.getItem('detalleVuelo');
     this.detalleVuelos = JSON.parse(detalleVuelosStr);
 
-    this.result = localStorage.getItem('Datasafe');
-    this.resultJson = JSON.parse(this.result);
+
     // IP DEL CLIENTE
     this.ipCliente = "192.168.2.2";//localStorage.getItem('ipCliente')
 
@@ -215,6 +221,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     toUp();
     this.loadShop();
+
+    this.result = localStorage.getItem('Datasafe');
+    this.resultJson = JSON.parse(this.result);
 
     this.months = [
       { value: "01", name: "Enero" },
@@ -820,6 +829,19 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         // })
 
         this.coverageList = response['Resultado'];
+
+
+        if (Object.keys(this.coverageList).length === 0) {
+          this.asistMedic = 0
+        } else {
+          this.asistMedic = this.coverageList.find((e: any) => {
+            if (e.Codigo === 'C.4.1.10.1') {
+              return e
+            }
+          })['Valor']
+        }
+
+
 
         console.log(this.coverageList)
 

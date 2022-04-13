@@ -254,10 +254,9 @@
   <div class="row py-2" *ngIf="!safe0Json.reservaVuelos">
     <div class="offset-4 col-4 viewMobile">
       <div *ngIf="safe0Json.detalleCobertura" class="order-0">
-        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days"
-          [asistenciaMedica]="'USD 60.000'" [txtOrigen]="" [txtDestino]="resultJson?.destinyString.descripcion_destino"
-          [txtSalida]="resultJson?.fromDate" [txtRegreso]="resultJson?.toDate"
-          [txtPasajeros]="resultJson?.passengers.length">
+        <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [txtOrigen]=""
+          [txtDestino]="resultJson?.destinyString.descripcion_destino" [txtSalida]="resultJson?.fromDate"
+          [txtRegreso]="resultJson?.toDate" [txtPasajeros]="resultJson?.passengers.length" [plan]="safe0Json">
         </app-coverage>
       </div>
     </div>
@@ -781,3 +780,51 @@
     <div class="clearfix"></div>
   </div>
   <!-- END DATOS DE CONTACTO-->
+
+  <!-- MODAL COBERTURA -->
+  <div class="modal fade" id="ModalCoverageI" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">{{safe0Json?.producto}} - {{safe0Json?.precioEmisionLocal |
+            currency : 'USD'}}
+          </h2>
+          <h5 class="modal-subtitle" id="exampleModalLabel">Asistencia médica: {{ asistMedic }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" *ngIf="!coverage">
+          <div class="row">
+            <p class="text">!Cargando Cobertura¡</p>
+            <mat-spinner color="warn"></mat-spinner>
+          </div>
+        </div>
+        <div class="modal-body" *ngIf="coverage">
+          <div class="row">
+            <div class="col-12">
+              <div class="d-flex py-3">
+                <img src="./assets/seguros/covid.png" alt="">
+                <div class="px-2">
+                  <span class="covid">COBERTURA</span>
+                  <span class="covid">COVID</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row scrollBody">
+            <div class="col-10 offset-1">
+              <table class="table-bordered w-100">
+                <tbody *ngIf="coverage">
+                  <tr class="row" *ngFor="let text of coverage">
+                    <td class="col d-flex align-items-center">
+                      <strong>{{ text?.Valor }}</strong>
+                    </td>
+                    <td class="col">{{ text?.NombreVisible}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
