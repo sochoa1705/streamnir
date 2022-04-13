@@ -210,7 +210,9 @@ export class ModelTaggingOfertasVuelos {
     public codigoRegionDestino:string,
     public cantidadPasajeros:string | number,
     public promedioEdad:string | number,
+    /**Formato DD/MM/YYYY */
     public fechaSalida:string | number,
+    /**Formato DD/MM/YYYY */
     public fechaRegreso:string | number,
     public codigoPaisOrigen = "PE",
     public nombrePaisOrigen = "peru"
