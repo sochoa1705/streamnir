@@ -15,14 +15,19 @@ export class CoverageComponent implements OnInit {
   @Input() txtRegreso: any
   @Input() txtPasajeros: number
   @Input() plan: any
+
   constructor() { }
 
   ngOnInit(): void {
+    debugger
+
   }
 
 
   data(id: any) {
     console.log(id);
+    //this.pop = id
+    //this.listCoverage(id)
   }
 
 }

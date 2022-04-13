@@ -31,6 +31,8 @@ export class ConformidadComponent implements OnInit {
   //COBERTURA
   coverageList: any
   coverage: any
+  asistMedic: any;
+
   result: any
   resultJson: any
   safe0: any
@@ -138,6 +140,17 @@ export class ConformidadComponent implements OnInit {
       // this.timeShop(JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime);
       // this.timeLimit = JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(11, 5);
       // this.deadLine = JSON.parse(this.paymentData).Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(0, 10);
+
+      if (Object.keys(this.coverage).length === 0) {
+        this.asistMedic = 0
+      } else {
+        this.asistMedic = this.coverage.find((e: any) => {
+          if (e.Codigo === 'C.4.1.10.1') {
+            return e
+          }
+        })['Valor']
+      }
+
     }
 
     // if (this.safe0Json['reservaVuelos']) {
