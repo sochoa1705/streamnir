@@ -171,7 +171,6 @@ export class FiltersafeComponent implements OnInit {
 
   addPassenger(): void {
 
-    debugger
     const fechaFormat = moment().format('DD/MM/YYYY');
 
     let limite = this.insuranceQuoteForm.controls['passengers'].value.length + 1;

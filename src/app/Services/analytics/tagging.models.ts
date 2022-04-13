@@ -161,8 +161,7 @@ export class ModelTaggingOfertasVuelos {
      public perfilUsuario: "Cuenta Personal" | "Cuenta Empresa",
      public userMetodo: "Password" | "Facebook" | "Google",
      public userEmail: string,
-     public userId: string,
-     public event: string
+     public userId: string | number
     ){}
 
     generateTag(){
