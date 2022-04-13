@@ -343,8 +343,6 @@ export class FiltersafeComponent implements OnInit {
 
 
   insertTag(form:IFormSeguros){
-
-
     const edades =  form.Edades.split(';');
     const sum = edades.reduce((acc,el) => (acc = Number(el) + acc) , 0);
     const promEdades = sum/edades.length;
@@ -355,7 +353,7 @@ export class FiltersafeComponent implements OnInit {
       form.passengers.length,
       promEdades,
       form.fromDate,
-      form.toDate,
+      form.toDate
     ) 
 
     TaggingService.tagBuscarSeguros(tag);

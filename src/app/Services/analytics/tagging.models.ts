@@ -215,7 +215,7 @@ export class ModelTaggingOfertasVuelos {
     /**Formato DD/MM/YYYY */
     public fechaRegreso:string | number,
     public codigoPaisOrigen = "PE",
-    public nombrePaisOrigen = "peru"
+    public nombrePaisOrigen = "Peru"
     ) {}
 
     generateTag(){
