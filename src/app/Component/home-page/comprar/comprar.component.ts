@@ -733,7 +733,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       "TrackingCode": Guid(),
       "MuteExceptions": environment.muteExceptions,
       "Caller": {
-        "Company": "TravelCNMV",
+        "Company": "Expertia",
         "Application": "NMViajes",
         "FromIP": this.ipCliente,
         "FromBrowser": "Chrome"
