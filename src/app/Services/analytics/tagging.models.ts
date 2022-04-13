@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { generateLabelTag } from 'src/app/shared/utils';
 
 export class ModelTaggingVuelosHoteles {
@@ -120,7 +121,8 @@ export class ModelTaggingOfertasVuelos {
       public src: string,
       public title: string,
       public nombre: 'Oferta de Vuelos',
-      public position: string
+      public position: string,
+      public url: string,
     ) {}
   
     generateTag() {
@@ -140,7 +142,7 @@ export class ModelTaggingOfertasVuelos {
         },
         eCategory: "Promociones: " + this.nombre,
         eAction: this.title,
-        eLabel: generateLabelTag(),
+        eLabel: this.url
       };
     }
   }
@@ -161,8 +163,7 @@ export class ModelTaggingOfertasVuelos {
      public perfilUsuario: "Cuenta Personal" | "Cuenta Empresa",
      public userMetodo: "Password" | "Facebook" | "Google",
      public userEmail: string,
-     public userId: string,
-     public event: string
+     public userId: string | number
     ){}
 
     generateTag(){
@@ -187,7 +188,7 @@ export class ModelTaggingOfertasVuelos {
     constructor(
       public bienTipo: "Servicio" | "Producto",
       public bienDescripcion: string,
-      public tipoReclamo: "Reclamo" | "Queja",
+      public tipoReclamo: "Reclamo" | "Queja"
     ){}
 
     generateTag(){
@@ -198,8 +199,41 @@ export class ModelTaggingOfertasVuelos {
          tipoReclamo:  this.tipoReclamo,
          eCategory: this.eCategory,
          eAction: this.bienTipo,
-         eLabel: this.bienDescripcion,
+         eLabel: this.bienDescripcion
       }
+    }
+  }
+  
+  export class ModelTaggingBuscarSeguros {
+    constructor(
+    public nombreRegionDestino:string,
+    public codigoRegionDestino:string,
+    public cantidadPasajeros:string | number,
+    public promedioEdad:string | number,
+    /**Formato DD/MM/YYYY */
+    public fechaSalida:string | number,
+    /**Formato DD/MM/YYYY */
+    public fechaRegreso:string | number,
+    public codigoPaisOrigen = "PE",
+    public nombrePaisOrigen = "Peru"
+    ) {}
+
+    generateTag(){
+        return {
+         event:"nmv.seguros_ga_buscar",
+         nombre:this.nombrePaisOrigen + "_" + this.nombreRegionDestino,
+         numPasajeros: this.cantidadPasajeros,
+         promEdad: this.promedioEdad,
+         fechaSalida:  moment( this.fechaSalida, "DD/MM/YYYY").format("YYYY/MM/DD"),
+         fechaRegreso: moment( this.fechaRegreso, "DD/MM/YYYY").format("YYYY/MM/DD"),
+         diasAnticipacion: moment( this.fechaSalida, "DD/MM/YYYY").diff(moment(), 'days'),
+         duracionViaje: moment( this.fechaRegreso, "DD/MM/YYYY").diff(moment( this.fechaSalida, "DD/MM/YYYY"), 'days'),
+         paisOrigen:this.codigoPaisOrigen + '_' + this.nombrePaisOrigen,
+         regionDestino:this.codigoRegionDestino + '_' + this.nombreRegionDestino,
+         eCategory:"Vertical Seguros",
+         eAction:"Cotizar Seguros",
+         eLabel: generateLabelTag()
+        }  
     }
   }
   

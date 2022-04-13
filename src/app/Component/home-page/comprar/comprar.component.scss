@@ -489,6 +489,21 @@ h2 {
     }
 }
 
+p.text {
+    font-family: Montserrat;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 18px;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: $gray;
+    width: 100%;
+}
+
+.mat-spinner {
+    margin: 0 auto
+}
+
 .marginLat {
     padding: 0 10px;
 }
