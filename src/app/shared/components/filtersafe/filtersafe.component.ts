@@ -6,6 +6,42 @@ import { Injectable } from '@angular/core';
 import { NgbDateAdapter, } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from 'src/app/Services/notification.service';
 import * as moment from "moment";
+import { ModelTaggingBuscarSeguros } from 'src/app/Services/analytics/tagging.models';
+import { TaggingService } from 'src/app/Services/analytics/tagging.service';
+
+
+
+export interface IFormSeguros {
+  origenSafe:        string;
+  destinoSafe:       string;
+  passengers:        Passenger[];
+  ClienteCotizacion: any[];
+  countCustomers:    number;
+  Edades:            string;
+  fromDate:          string;
+  toDate:            string;
+  days:              string;
+  destinyString:     DestinyString;
+  aniosNacimiento:   AniosNacimiento[];
+}
+
+export interface AniosNacimiento {
+  anio: number;
+  edad: number;
+}
+
+export interface DestinyString {
+  id_destino:          string;
+  descripcion_destino: string;
+  es_nacional:         number;
+  ref_assistcard:      number;
+}
+
+export interface Passenger {
+  edad:            string;
+  fechaNacimiento: string;
+}
+
 
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
@@ -171,7 +207,6 @@ export class FiltersafeComponent implements OnInit {
 
   addPassenger(): void {
 
-    debugger
     const fechaFormat = moment().format('DD/MM/YYYY');
 
     let limite = this.insuranceQuoteForm.controls['passengers'].value.length + 1;
@@ -306,6 +341,24 @@ export class FiltersafeComponent implements OnInit {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
   }
 
+
+  insertTag(form:IFormSeguros){
+    const edades =  form.Edades.split(';');
+    const sum = edades.reduce((acc,el) => (acc = Number(el) + acc) , 0);
+    const promEdades = sum/edades.length;
+
+    const tag = new ModelTaggingBuscarSeguros(
+      form.destinyString.descripcion_destino,
+      form.destinyString.id_destino,
+      form.passengers.length,
+      promEdades,
+      form.fromDate,
+      form.toDate
+    ) 
+
+    TaggingService.tagBuscarSeguros(tag);
+  }
+
   quoteNow() {
 
     if (this.validForm()) {
@@ -331,9 +384,8 @@ export class FiltersafeComponent implements OnInit {
       //console.log(this.fromDate);
       let form = this.insuranceQuoteForm.value
       localStorage.removeItem('Datasafe')
-      console.log('Datasafe', form)
-
-      debugger
+      
+      this.insertTag(form);
 
       localStorage.setItem('Datasafe', JSON.stringify(form));
 

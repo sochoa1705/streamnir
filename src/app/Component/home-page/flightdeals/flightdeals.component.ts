@@ -49,7 +49,8 @@ export class FlightDealsComponent implements OnInit {
       getFileName(entity.Image),
       entity.Destination,
       "Oferta de Vuelos",
-      position
+      position,
+      `vuelos/destino/${entity.DestinationCode}`
     )
 
    TaggingService.clickOfertaVuelos(tag);

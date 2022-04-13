@@ -781,3 +781,92 @@
         }
     }
 }
+
+.modal {
+    &-content {
+        // background: #54d834;
+        border: 0;
+        border-radius: 20px;
+        &.best {
+            background-color: #f00;
+        }
+    }
+    &-header {
+        // border-radius: 20px;
+        color: white;
+        padding: 1rem 2rem 1rem 2rem;
+        h {
+            &2 {
+                font-family: "Open Sans";
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 36px;
+                margin-bottom: 0;
+            }
+            &5 {
+                font-family: "Montserrat";
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 21px;
+                letter-spacing: 0.1px;
+            }
+        }
+    }
+    &-body {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        overflow: auto;
+        table {
+            tr.row {
+                border-top: 0;
+                border-bottom: 1px solid #cfd1d3;
+                td {
+                    color: #4b4b4b;
+                    border-top: 0;
+                    border-left: 0;
+                    padding: 5px 10px;
+                    border-right: 1px solid #cfd1d3;
+                    &:last-child {
+                        border-right: 0;
+                    }
+                }
+            }
+        }
+        .covid {
+            //@include itemCard(bold, 16px, 20px, 0.5px, #1eaea5);
+            display: block;
+            text-transform: capitalize;
+            &:first-child {
+                font-size: 14px;
+            }
+        }
+        .scrollBody {
+            overflow-y: scroll;
+            height: 355px;
+        }
+        .otroPlan {
+            margin-top: 25px;
+            font-weight: normal;
+        }
+        .planBox {
+            font-family: "Open Sans";
+            font-weight: bold;
+            margin-left: 4px;
+            button.planes {
+                min-width: 124px !important;
+            }
+        }
+        .footerPopup {
+            padding-right: 15px;
+            .borderRight {
+                border-right: 1px solid #cfd1d3;
+                font-family: "Open Sans";
+                width: 22%;
+                p {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

@@ -62,8 +62,6 @@ export class AppComponent implements OnInit {
   isPerson: boolean = true;
   isPersonLoggin: boolean = true;
 
-  personalAccountForm: FormGroup;
-  businessAccountForm: FormGroup;
   //recoverPasswordForm: FormGroup;
 
   submitBusiness = false;
@@ -75,10 +73,8 @@ export class AppComponent implements OnInit {
     private _popUpSubject: PopupService,
     private _authService: SocialAuthService,
     private _accountService: AccountsService,
-    private _formBuilder: FormBuilder,
     public _matDialog: MatDialog,
     private _matSnackBar: MatSnackBar,
-    private _validatorsService: ValidatorsService,
     public loaderSubjectService: LoaderSubjectService,
     private notification: NotificationService,
     private readonly router: Router,
@@ -108,9 +104,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.taggingPageView();
-    this.loadUsuario();
-    this.personalAccountForm = this.createPersonalAccountForm();
-    this.businessAccountForm = this.createBusinessAccountForm();
     //this.recoverPasswordForm = this.createRecoverPasswordForm();
 
   }
@@ -124,115 +117,6 @@ export class AppComponent implements OnInit {
 
   }
 
-  loadUsuario() {
-    const userStr = this._accountService.getUserStorage();
-    if (userStr.id > 0) {
-      this._accountService.dispatchLogged(true);
-    } else {
-      this._accountService.dispatchLogged(false);
-    }
-  }
-
-  createPersonalAccountForm(): FormGroup {
-    return this._formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(3), Validators.pattern(this._validatorsService.lettersPattern)]],
-      fatherLastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
-      motherLastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
-      email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
-      repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
-    }, {
-      validators: [this._validatorsService.equalFields('password', 'repeatPassword')]
-    });
-  }
-
-  createBusinessAccountForm(): FormGroup {
-    return this._formBuilder.group({
-      ruc: ['', [Validators.required, Validators.minLength(11), Validators.pattern(this._validatorsService.digitsPattern)]],
-      businessName: ['', [Validators.required, Validators.minLength(3), Validators.pattern(this._validatorsService.lettersPattern)]],
-      firstName: ['', [Validators.required, Validators.minLength(3), Validators.pattern(this._validatorsService.lettersPattern)]],
-      fatherLastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
-      motherLastname: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
-      // documentType: ['', [Validators.required, Validators.minLength(1)]],
-      // documentNumber: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this._validatorsService.digitsPattern)]],
-      email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
-      repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.passwordPattern)]],
-    }, {
-      validators: [this._validatorsService.equalFields('password', 'repeatPassword'),
-      this._validatorsService.validateRUC('', 'ruc')]
-    });
-  }
-
-  validatePersonalAccountForm(field: string) {
-    return this.personalAccountForm.controls[field].errors
-      && this.personalAccountForm.controls[field].touched;
-  }
-
-  validateBusinessAccountForm(field: string) {
-    return this.businessAccountForm.controls[field].errors
-      && this.businessAccountForm.controls[field].touched;
-  }
-
-  get personalAccountEmailErrorMessage(): string {
-    const errors = this.personalAccountForm.get('email')?.errors;
-
-    if (errors?.required) {
-      return 'Ingresa tu email';
-    } else if (errors?.minlength) {
-      return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
-    } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de email.';
-    }
-
-    return '';
-  }
-
-  get businessAccountEmailErrorMessage(): string {
-    const errors = this.businessAccountForm.get('email')?.errors;
-
-    if (errors?.required) {
-      return 'Ingresa tu email';
-    } else if (errors?.minlength) {
-      return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
-    } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de email.';
-    }
-
-    return '';
-  }
-
-  // get recoverPasswordEmailErrorMessage(): string {
-  //   const errors = this.recoverPasswordForm.get('email')?.errors;
-
-  //   if (errors?.required) {
-  //     return 'Ingresa tu email';
-  //   } else if (errors?.minlength) {
-  //     return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
-  //   } else if (errors?.pattern) {
-  //     return 'El valor ingresado no tiene formato de email.';
-  //   }
-
-  //   return '';
-  // }
-
-  get businessAccountRUCErrorMessage(): string {
-    const errors = this.businessAccountForm.get('ruc')?.errors;
-
-    if (errors?.required) {
-      return 'Ingresa el número de RUC';
-    } else if (errors?.minlength) {
-      return `Un RUC válido tiene ${errors?.minlength.requiredLength} dígitos.`;
-    } else if (errors?.notValid) {
-      return 'Ingresa un número de RUC válido.';
-    }
-
-    return '';
-  }
-
-  saveAccount(): void {
-    this.isPerson ? this.savePersonalAccount() : this.saveBusinessAccount();
-  }
 
   closeModal() {
     const closeModalSesion: any = this.closeModalSesion.nativeElement;
@@ -241,15 +125,6 @@ export class AppComponent implements OnInit {
     closeModalSesion ? closeModalSesion.click() : null;
     closeModalNewAccount ? closeModalNewAccount.click() : null;
   }
-
-
-
-
-
-
-
-
-
 
 
   toggleModalVerificaCorreo() {
@@ -319,170 +194,6 @@ export class AppComponent implements OnInit {
   }
 
 
-
-
-  savePersonalAccount(): void {
-    this.initLoading();
-    if (this.personalAccountForm.invalid) {
-      this.closeLoading();
-      this.notification.showNotificacion("Error", "Error de validación")
-      this.personalAccountForm.markAllAsTouched();
-      return;
-    }
-
-    if (this.personalAccountForm.valid) {
-
-      const payload = {
-        TrackingCode: Guid(),
-        MuteExceptions: environment.muteExceptions,
-        Caller: {
-          Company: "Agil",
-          Application: "Interagencias"
-        },
-        Parameter: {
-          Firstname: this.personalAccountForm.get("firstName")?.value,
-          FatherLastname: this.personalAccountForm.get("fatherLastname")?.value,
-          MotherLastname: this.personalAccountForm.get("motherLastname")?.value,
-          Email: this.personalAccountForm.get("email")?.value,
-          Password: this.personalAccountForm.get("password")?.value,
-          IsPerson: true,
-          Ruc: "",
-          BusinessName: "",
-        }
-      };
-
-      this._accountService.saveAccount(payload).subscribe({
-        next: (response) => {
-          this.closeLoading();
-          const isSuccess = response.Result.IsSuccess;
-
-          if (isSuccess) {
-
-            this.closeModal();
-            this.toggleModalVerificaCorreo();
-
-
-            this.personalAccountForm.reset();
-
-            this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
-              verticalPosition: 'top',
-              duration: 2000
-            });
-          } else {
-            this.notification.showNotificacion("Error", response.Result.Message || "Error", 10);
-          }
-          //this.loaderSubjectService.closeLoader()
-        },
-        error: (err) => {
-          this.closeLoading();
-          this.notification.showNotificacion("Error", "Error del servidor", 10);
-
-          //this.loaderSubjectService.closeLoader()
-        },
-        complete: () => { }
-      });
-    }
-  }
-
-  // toggleModalGetPass() {
-  //   const modal = document.getElementById("ModalChangePass");
-
-  //   if (!modal) {
-  //     return;
-  //   }
-
-  //   bootstrap.Modal.getOrCreateInstance(modal).toggle();
-  // }
-
-  // closeModalRecovery() {
-  //   const btn = document.getElementById("btncloseRecovery");
-
-  //   if (!btn) {
-  //     return;
-  //   }
-
-  //   btn.click();
-  // }
-
-  // getPassword(email: string) {
-
-  //   this.initLoading();
-
-  //   if (this.recoverPasswordForm.invalid) {
-  //     this.closeLoading();
-  //     this.recoverPasswordForm.markAllAsTouched();
-  //     return;
-  //   }
-
-  //   this._accountService.passwordSend(email).subscribe(resp => {
-  //     this.closeLoading();
-  //     if (resp.IsSuccess) {
-  //       this.closeModalRecovery();
-  //       this.message = resp.Message;
-  //       this.toggleModalGetPass();
-  //     } else {
-  //       this.notification.showNotificacion("Error", resp.Message, 10);
-  //     }
-  //   }, () => {
-  //     this.closeLoading();
-  //     this.notification.showNotificacion("Error", "Error del servidor", 10);
-  //   })
-  // }
-
-  saveBusinessAccount(): void {
-    if (this.businessAccountForm.invalid) {
-      this.businessAccountForm.markAllAsTouched();
-      return;
-    }
-
-    if (this.businessAccountForm.valid) {
-
-      const payload = {
-        TrackingCode: Guid(),
-        MuteExceptions: environment.muteExceptions,
-        Caller: {
-          Company: "Agil",
-          Application: "Interagencias"
-        },
-        Parameter: {
-          Firstname: this.businessAccountForm.get("firstName")?.value,
-          FatherLastname: this.businessAccountForm.get("fatherLastname")?.value,
-          MotherLastname: this.businessAccountForm.get("motherLastname")?.value,
-          Email: this.businessAccountForm.get("email")?.value,
-          Password: this.businessAccountForm.get("password")?.value,
-          IsPerson: false,
-          Ruc: this.businessAccountForm.get("ruc")?.value,
-          BusinessName: this.businessAccountForm.get("businessName")?.value,
-          // DocumentType: this.businessAccountForm.get("documentType")?.value,
-          // DocumentNumber: this.businessAccountForm.get("documentNumber")?.value
-        }
-      };
-
-      this._accountService.saveAccount(payload).subscribe({
-        next: (response) => {
-          const isSuccess = response.Result.IsSuccess;
-
-          if (isSuccess) {
-            this._matSnackBar.open(`Gracias por registrar su empresa ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
-              verticalPosition: 'top',
-              duration: 2000
-            });
-          } else {
-            this.notification.showNotificacion("Error", "Ingrese datos correctos", 10);
-          }
-
-          //this.loaderSubjectService.closeLoader()
-        },
-        error: (err) => {
-
-          this.notification.showNotificacion("Error", "Error del servidor", 10);
-
-          //this.loaderSubjectService.closeLoader()
-        },
-        complete: () => { }
-      });
-    }
-  }
 
   signOut(): void {
     this._authService.signOut();
