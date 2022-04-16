@@ -203,3 +203,83 @@ export class ModelTaggingOfertasVuelos {
     }
   }
   
+  export class ModelTaggingMostrarResultados {   
+    constructor(
+      public  event: "nmv.seguros_eecga3_productimpression",
+      public  ecommerce: Ecommerce,
+    ){}
+  }
+  export class Ecommerce{
+    constructor(
+      public  currencyCode: string,
+      public  impressions:  Impression[]
+    ){}
+   
+  }
+  export class Impression {
+    constructor(
+      public name:        string,
+      public position:    number,
+      public list:        string,
+      public id:          string,
+      public price:       string,
+      public brand:       string,
+      public category:    string,
+      public category2:   string,
+      public variant:     string,
+      public quantity:    number,
+      public metric10:    number,
+      public dimension9:  string,
+      public dimension11: string,
+      public dimension12: string,
+      public metric11:    number,
+      public metric12:    number,
+    ){}
+   
+  }
+
+  export class ModelTaggingDetalleBeneficio{
+    constructor(
+      public event:     string,
+      public ecommerce: EcommerceDetalleBeneficio,
+    ){}
+  }
+  export class EcommerceDetalleBeneficio{
+    constructor(
+      public   detail: Detail,
+    ){}
+   
+  }
+  export class Detail{
+    constructor(
+      public  actionField: ActionField,
+      public products:    Product[]
+    ){}
+   
+  }
+  export class ActionField{
+    constructor(
+      public  list: string,
+    ){}
+   
+  }
+
+  export class Product{
+    constructor(
+      public  name:        string,
+      public  id:          string,
+      public  price:       string,
+      public  brand:       string,
+      public  category:    string,
+      public  category2:   string,
+      public  variant:     string,
+      public  quantity:    number,
+      public  metric10:    number,
+      public  dimension9:  string,
+      public  dimension11: string,
+      public  dimension12: string,
+      public  metric11:    number,
+      public  metric12:    number
+    ){}
+   
+  }

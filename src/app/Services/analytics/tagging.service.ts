@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {  routerToCapitalice } from 'src/app/shared/utils';
-import { ModelTaggingActividades, ModelTaggingHoteles, ModelTaggingLibroReclamaciones, ModelTaggingLogin, ModelTaggingOfertasVuelos, ModelTaggingSlidersBanners, ModelTaggingSubscripcionOfertas, ModelTaggingVuelos, ModelTaggingVuelosHoteles } from './tagging.models';
+import { ModelTaggingActividades, ModelTaggingDetalleBeneficio, ModelTaggingHoteles, ModelTaggingLibroReclamaciones, ModelTaggingLogin, ModelTaggingMostrarResultados, ModelTaggingOfertasVuelos, ModelTaggingSlidersBanners, ModelTaggingSubscripcionOfertas, ModelTaggingVuelos, ModelTaggingVuelosHoteles } from './tagging.models';
 
 @Injectable({ providedIn: 'root' })
 export class TaggingService {
@@ -67,7 +67,12 @@ export class TaggingService {
 
 
 
+  public static tagMostrarResultados(modelTaggingMostrarResultados:ModelTaggingMostrarResultados) {
+    this.triggerTag(modelTaggingMostrarResultados);
+  }
 
-
+  public static tagMostrarDetalleBeneficio(modelTaggingDetalleBeneficio:ModelTaggingDetalleBeneficio) {
+    this.triggerTag(modelTaggingDetalleBeneficio);
+  }
 
 }
