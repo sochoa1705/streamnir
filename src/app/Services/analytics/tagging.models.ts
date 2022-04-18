@@ -121,7 +121,8 @@ export class ModelTaggingOfertasVuelos {
     public src: string,
     public title: string,
     public nombre: 'Oferta de Vuelos',
-    public position: string
+    public position: string,
+    public url: string,
   ) { }
 
   generateTag() {
@@ -162,8 +163,7 @@ export class ModelTaggingLogin {
     public perfilUsuario: "Cuenta Personal" | "Cuenta Empresa",
     public userMetodo: "Password" | "Facebook" | "Google",
     public userEmail: string,
-    public userId: string,
-    public event: string
+    public userId: string | number
   ) { }
 
   generateTag() {
