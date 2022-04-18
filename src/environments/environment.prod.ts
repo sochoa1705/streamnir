@@ -17,6 +17,7 @@ export const environment = {
   },
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   // urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
+  urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
 
