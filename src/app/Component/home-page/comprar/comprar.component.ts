@@ -802,11 +802,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             'ecommerce.purchase.products.category2': '',
             'ecommerce.purchase.products.variant': '',
             'ecommerce.purchase.products.quantity': this.resultJson.passengers.length,
-            'ecommerce.purchase.products.metric10': '',
-            'ecommerce.purchase.products.dimension9': '',
+            'ecommerce.purchase.products.metric10': this.getPromedioEdades(this.resultJson),
+            'ecommerce.purchase.products.dimension9': this.asistMedic,
             'ecommerce.purchase.products.dimension11': `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
             'ecommerce.purchase.products.dimension12': `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
-            'ecommerce.purchase.products.metric11': '',
+            'ecommerce.purchase.products.metric11': this.getDiasAnticipacion(this.resultJson),
             'ecommerce.purchase.products.metric12': this.resultJson.days,
             'ecommerce.purchase.products.dimension16': 'PE-PERU',
             'ecommerce.purchase.products.dimension17': `${this.resultJson.destinyString.id_destino}-${this.resultJson.destinyString.descripcion_destino}`
@@ -1445,7 +1445,26 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   denyDrop(event: DragEvent) {
     event.preventDefault();
   }
+
   onFocus() {
     console.log("hola soy onFocus")
+  }
+
+  getDiasAnticipacion(fromDate: any): number {
+    let fechaFormats: number[] = fromDate.fromDate.split('/');
+    const _fromDate = new Date(fechaFormats[2], fechaFormats[1], fechaFormats[0]);
+    const _toDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
+    let diferencia = ((_fromDate.getTime() - _toDate.getTime()) / 1000 / 60 / 60 / 24) - 40;
+    return diferencia;
+  }
+
+  getPromedioEdades(resultJson: any): number {
+    let promedio: number = 0;
+    resultJson.passengers.forEach((element: any) => {
+      promedio = promedio + parseInt(element.edad);
+    });
+    //console.log("promedio:", promedio) 
+    //console.log("length:", resultJson.passengers.length) 
+    return (promedio / resultJson.passengers.length);
   }
 }
