@@ -39,6 +39,7 @@ export const environment = {
 
   url_autos: 'https://autos.nmviajes.com/es/site/',
 
-  urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela"
+  urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela",
+  urlSuggest: "https://suggest.agentcars.com/suggest/"
 
 }

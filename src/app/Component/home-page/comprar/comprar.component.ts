@@ -437,11 +437,17 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           const model = {
             event: 'nmv.seguros_eecga3_checkoutOption',
-            'ecommerce.checkout_option.actionField.step': 2,
-            'ecommerce.checkout_option.actionField.option': `Tarjeta de Credito o Debito ${typeCard}`
+            ecommerce: {
+              checkout_option: {
+                actionField: {
+                  step: 2,
+                  option: `Tarjeta de Credito o Debito - ${typeCard}`
+                }
+              }
+            }
           }
 
-          TaggingService.tagStartOfPaymentMethods(model);
+          TaggingService.tagSelectionOfPaymentMethod(model);
 
         } else {
           console.log('La tarjeta ingresada es inválida');
@@ -457,7 +463,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const model = {
       event: 'nmv.seguros_eecga3_checkout',
-      'ecommerce.checkout_option.actionField.step': 3
+      ecommerce: {
+        checkout: {
+          actionField: {
+            step: 3
+          }
+        }
+      }
     }
 
     TaggingService.tagStartOfContactData(model);
@@ -542,34 +554,36 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const model = {
       event: 'nmv.seguros_eecga3_checkout',
-      'ecommerce.checkout.actionField.step': 2
+      ecommerce: {
+        checkout: {
+          actionField: {
+            step: 2
+          }
+        }
+      }
     }
 
     TaggingService.tagStartOfPaymentMethods(model);
-
-    // if (this.selectedPay = 'tarjeta') {
-    //   const model = {
-    //     event: 'nmv.seguros_eecga3_checkoutOption',
-    //     'ecommerce.checkout_option.actionField.step': 2,
-    //     'ecommerce.checkout_option.actionField.option': 'Tarjeta de Credito o Debito'
-    //   }
-
-    //   TaggingService.tagStartOfPaymentMethods(model); 
-    // }
-
   }
 
   id: any = "banca";
 
   optionPay(e: any, i: any, ids: any) {
     console.log(i);
+
     this.banca = i;
     this.id = ids;
 
     const model = {
       event: 'nmv.seguros_eecga3_checkoutOption',
-      'ecommerce.checkout_option.actionField.step': 2,
-      'ecommerce.checkout_option.actionField.option': `SafetyPay - ${i ? 'Banca por Internet' : 'Agencias/Agentes'}`
+      ecommerce: {
+        checkout_option: {
+          actionField: {
+            step: 2,
+            option: `SafetyPay - ${i ? 'Banca por Internet' : 'Agencias/Agentes'}`
+          }
+        }
+      }
     }
 
     TaggingService.tagSelectionOfPaymentMethod(model);
@@ -597,16 +611,28 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const model = {
       event: 'nmv.seguros_eecga3_checkoutOption',
-      'ecommerce.checkout_option.actionField.step': 1,
-      'ecommerce.checkout_option.actionField.option': nationality
+      ecommerce: {
+        checkout_option: {
+          actionField: {
+            step: 1,
+            option: nationality
+          }
+        }
+      }
     }
 
     TaggingService.tagNationalitySelection(model);
 
     const model2 = {
       event: 'nmv.seguros_eecga3_checkoutOption',
-      'ecommerce.checkout_option.actionField.step': 3,
-      'ecommerce.checkout_option.actionField.option': this.showInvoiceData ? 'Factura Electrónica' : 'Boleta Electrónica'
+      ecommerce: {
+        checkout_option: {
+          actionField: {
+            step: 3,
+            option: this.showInvoiceData ? 'Factura Electrónica' : 'Boleta Electrónica'
+          }
+        }
+      }
     }
 
     TaggingService.tagVoucherSelection(model2);
@@ -790,26 +816,34 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           const model = {
             event: 'nmv.nmv.seguros_eecga3_purchase',
-            'ecommerce.currencyCode': '',
-            'ecommerce.purchase.actionField.id': '',
-            'ecommerce.purchase.actionField.revenue': '',
-            'ecommerce.purchase.actionField.cupon': '',
-            'ecommerce.purchase.products.name': this.safe0Json.producto,
-            'ecommerce.purchase.products.id': this.safe0Json.idProducto,
-            'ecommerce.purchase.products.price': this.safe0Json.precioEmisionLocal,
-            'ecommerce.purchase.products.brand': '',
-            'ecommerce.purchase.products.category': 'Seguros',
-            'ecommerce.purchase.products.category2': '',
-            'ecommerce.purchase.products.variant': '',
-            'ecommerce.purchase.products.quantity': this.resultJson.passengers.length,
-            'ecommerce.purchase.products.metric10': this.getPromedioEdades(this.resultJson),
-            'ecommerce.purchase.products.dimension9': this.asistMedic,
-            'ecommerce.purchase.products.dimension11': `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
-            'ecommerce.purchase.products.dimension12': `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
-            'ecommerce.purchase.products.metric11': this.getDiasAnticipacion(this.resultJson),
-            'ecommerce.purchase.products.metric12': this.resultJson.days,
-            'ecommerce.purchase.products.dimension16': 'PE-PERU',
-            'ecommerce.purchase.products.dimension17': `${this.resultJson.destinyString.id_destino}-${this.resultJson.destinyString.descripcion_destino}`
+            ecommerce: {
+              currencyCode: '',
+              purchase: {
+                actionField: {
+                  id: '',
+                  revenue: '',
+                  cupon: ''
+                },
+                products: {
+                  name: this.safe0Json.producto,
+                  id: this.safe0Json.idProducto,
+                  price: this.safe0Json.precioEmisionLocal,
+                  brand: 'AssistCard',
+                  category: 'Seguros',
+                  category2: '',
+                  variant: '',
+                  quantity: this.resultJson.passengers.length,
+                  metric10: this.getPromedioEdades(this.resultJson),
+                  dimension9: this.asistMedic,
+                  dimension11: `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
+                  dimension12: `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
+                  metric11: this.getDiasAnticipacion(this.resultJson),
+                  metric12: this.resultJson.days,
+                  dimension16: 'PE-PERU',
+                  dimension17: `${this.resultJson.destinyString.id_destino}-${this.resultJson.destinyString.descripcion_destino}`
+                }
+              }
+            }
           }
 
           TaggingService.tagTransactionCompleted(model);
