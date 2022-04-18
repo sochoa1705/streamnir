@@ -462,7 +462,7 @@
                       <input class="form-control" type="text" formControlName="nameCustomer"
                         (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
                         (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje."
-                        (OnPush)="onFocus()" >
+                        (OnPush)="onFocus()">
                     </div>
 
                     <div class="col-6 viewMobileWidth">
@@ -1636,7 +1636,7 @@
 
                     <input class="form-control" #nameContactForm placeholder="Ingresa tu(s) nombre(s)"
                       [ngClass]="{isvalid : validateContactForm('nameContacto')}" formControlName="nameContacto"
-                      type="text" value="" name="names">
+                      type="text" value="" name="names" (click)="startContactDetails()">
 
                     <span class="valid" *ngIf="validateContactForm('nameContacto')">
                       Ingresa tus nombres de contacto

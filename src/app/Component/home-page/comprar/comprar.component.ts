@@ -142,10 +142,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   isMasterCard = false;
   isAmericanExpress = false;
   isDinners = false;
-  count: number =0;
-  countInfante: number =0;
-  countNinio: number =0;
-  countAdulto: number =0;
+  count: number = 0;
+  countInfante: number = 0;
+  countNinio: number = 0;
+  countAdulto: number = 0;
 
   constructor(
     private _router: Router,
@@ -189,8 +189,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     this.unidadNegocio = localStorage.getItem('businessunit')
     this.businessunit = JSON.parse(this.unidadNegocio)
-    console.log("resultJson",this.resultJson);
-    console.log("safe0Json",this.safe0Json);
+    console.log("resultJson", this.resultJson);
+    console.log("safe0Json", this.safe0Json);
     console.log(screen.width);
 
     if (screen.width < 769) {
@@ -219,10 +219,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.count =0;
-    this.countAdulto =0;
-    this.countInfante =0;
-    this.countNinio =0;
+    this.count = 0;
+    this.countAdulto = 0;
+    this.countInfante = 0;
+    this.countNinio = 0;
     toUp();
     this.loadShop();
 
@@ -425,6 +425,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           if (typeCard === 'Visa') {
             this.isVisa = true;
           }
+
+          const model = {
+            event: 'nmv.seguros_eecga3_checkoutOption',
+            'ecommerce.checkout_option.actionField.step': 2,
+            'ecommerce.checkout_option.actionField.option': `Tarjeta de Credito o Debito ${typeCard}`
+          }
+
+          TaggingService.tagStartOfPaymentMethods(model);
+
         } else {
           console.log('La tarjeta ingresada es inválida');
 
@@ -432,6 +441,17 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         }
       });
     }
+  }
+
+  startContactDetails(): void {
+    console.log('startContactDetails');
+
+    const model = {
+      event: 'nmv.seguros_eecga3_checkout',
+      'ecommerce.checkout_option.actionField.step': 3
+    }
+
+    TaggingService.tagStartOfContactData(model);
   }
 
   showDataContacto: Boolean = true;
@@ -510,6 +530,24 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.selectedPay = 'tarjeta';
     else
       this.selectedPay = 'safety';
+
+    const model = {
+      event: 'nmv.seguros_eecga3_checkout',
+      'ecommerce.checkout.actionField.step': 2
+    }
+
+    TaggingService.tagStartOfPaymentMethods(model);
+
+    // if (this.selectedPay = 'tarjeta') {
+    //   const model = {
+    //     event: 'nmv.seguros_eecga3_checkoutOption',
+    //     'ecommerce.checkout_option.actionField.step': 2,
+    //     'ecommerce.checkout_option.actionField.option': 'Tarjeta de Credito o Debito'
+    //   }
+
+    //   TaggingService.tagStartOfPaymentMethods(model); 
+    // }
+
   }
 
   id: any = "banca";
@@ -518,6 +556,14 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log(i);
     this.banca = i;
     this.id = ids;
+
+    const model = {
+      event: 'nmv.seguros_eecga3_checkoutOption',
+      'ecommerce.checkout_option.actionField.step': 2,
+      'ecommerce.checkout_option.actionField.option': `SafetyPay - ${i ? 'Banca por Internet' : 'Agencias/Agentes'}`
+    }
+
+    TaggingService.tagSelectionOfPaymentMethod(model);
   }
 
   buyInsurance(): void {
@@ -538,7 +584,23 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
       return;
 
-    //debugger
+    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer']).Name;
+
+    const model = {
+      event: 'nmv.seguros_eecga3_checkoutOption',
+      'ecommerce.checkout_option.actionField.step': 1,
+      'ecommerce.checkout_option.actionField.option': nationality
+    }
+
+    TaggingService.tagNationalitySelection(model);
+
+    const model2 = {
+      event: 'nmv.seguros_eecga3_checkoutOption',
+      'ecommerce.checkout_option.actionField.step': 3,
+      'ecommerce.checkout_option.actionField.option': this.showInvoiceData ? 'Factura Electrónica' : 'Boleta Electrónica'
+    }
+
+    TaggingService.tagVoucherSelection(model2);
 
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
     this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson['passengers'].length));
@@ -713,6 +775,36 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           //   this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
           // }
+
+          const fechasalida = this.resultJson.fromDate.split('/');
+          const fecharetorno = this.resultJson.toDate.split('/');
+
+          const model = {
+            event: 'nmv.nmv.seguros_eecga3_purchase',
+            'ecommerce.currencyCode': '',
+            'ecommerce.purchase.actionField.id': '',
+            'ecommerce.purchase.actionField.revenue': '',
+            'ecommerce.purchase.actionField.cupon': '',
+            'ecommerce.purchase.products.name': this.safe0Json.producto,
+            'ecommerce.purchase.products.id': this.safe0Json.idProducto,
+            'ecommerce.purchase.products.price': this.safe0Json.precioEmisionLocal,
+            'ecommerce.purchase.products.brand': '',
+            'ecommerce.purchase.products.category': 'Seguros',
+            'ecommerce.purchase.products.category2': '',
+            'ecommerce.purchase.products.variant': '',
+            'ecommerce.purchase.products.quantity': this.resultJson.passengers.length,
+            'ecommerce.purchase.products.metric10': '',
+            'ecommerce.purchase.products.dimension9': '',
+            'ecommerce.purchase.products.dimension11': `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
+            'ecommerce.purchase.products.dimension12': `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
+            'ecommerce.purchase.products.metric11': '',
+            'ecommerce.purchase.products.metric12': this.resultJson.days,
+            'ecommerce.purchase.products.dimension16': 'PE-PERU',
+            'ecommerce.purchase.products.dimension17': `${this.resultJson.destinyString.id_destino}-${this.resultJson.destinyString.descripcion_destino}`
+          }
+
+          TaggingService.tagTransactionCompleted(model);
+
 
           this._loaderSubjectService.closeLoader();
 
@@ -1182,23 +1274,23 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   allowAlphabetic(event: KeyboardEvent) {
-    
+
     const pattern = /[a-zA-Z\s]/;
 
     if (!pattern.test(event.key))
       event.preventDefault();
-      if(this.count == 0){
-        this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
-      }
-      
-      this.count++;
+    if (this.count == 0) {
+      this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
+    }
+
+    this.count++;
   }
   dataLayerPushCheckout(safe0Json: any, resultJson: any) {
-    let actionField: ActionFieldCheckout ={
+    let actionField: ActionFieldCheckout = {
       step: 1
     }
-    let products:    ProductAddToCart[] = [];
-    let pp: ProductAddToCart={
+    let products: ProductAddToCart[] = [];
+    let pp: ProductAddToCart = {
       name: '',
       id: '',
       price: '',
@@ -1217,46 +1309,46 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       dimension17: ''
     }
 
-    let checkout: Checkout ={
+    let checkout: Checkout = {
       actionField: actionField,
       products: products
     }
-    let ecommerce: EcommerceCheckout ={
+    let ecommerce: EcommerceCheckout = {
       checkout: checkout
     }
-    let modelTaggingCheckout : ModelTaggingCheckout={
+    let modelTaggingCheckout: ModelTaggingCheckout = {
       event: 'nmv.seguros_eecga3_checkout',
       ecommerce: ecommerce
     }
-    
+
     for (let index = 0; index < parseInt(resultJson.passengers.length); index++) {
       const element = resultJson.passengers[index];
-      if(element.edad < 6){//infante
+      if (element.edad < 6) {//infante
         this.countInfante++;
 
-      }else if(element.edad >= 6 && element.edad < 18){//nuño
+      } else if (element.edad >= 6 && element.edad < 18) {//nuño
         this.countNinio++;
-      }else if(element.edad >= 18){// adulto
+      } else if (element.edad >= 18) {// adulto
         this.countAdulto++;
 
       }
     }
-    if(this.countInfante > 0){
+    if (this.countInfante > 0) {
       pp = this.llenarProduct(safe0Json, resultJson);
       products.push(pp);
     }
-    if(this.countNinio > 0){
+    if (this.countNinio > 0) {
       pp = this.llenarProduct(safe0Json, resultJson);
       products.push(pp);
     }
-    if(this.countAdulto > 0){
+    if (this.countAdulto > 0) {
       pp = this.llenarProduct(safe0Json, resultJson);
       products.push(pp);
     }
     TaggingService.tagMostrarCheckout(modelTaggingCheckout);
   }
   llenarProduct(safe0Json: any, resultJson: any): ProductAddToCart {
-    let pp: ProductAddToCart={
+    let pp: ProductAddToCart = {
       name: safe0Json.nombreProducto,
       id: safe0Json.idProducto,
       price: safe0Json.precioBrutochange,
@@ -1331,7 +1423,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   denyDrop(event: DragEvent) {
     event.preventDefault();
   }
-  onFocus(){
+  onFocus() {
     console.log("hola soy onFocus")
   }
 }
