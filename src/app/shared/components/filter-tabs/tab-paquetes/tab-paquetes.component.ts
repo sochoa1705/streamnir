@@ -75,7 +75,6 @@ import { filter } from 'rxjs/operators';
     let value = elemento.value;
 
     if (value.length >= 3) {
-      debugger;
       this.countriesSearch = this.countries;
       //this.getListCiudades(value, typeSearch);
       this.countriesSearch = this.countries.filter( (item) => item.label.toLowerCase().includes(value));

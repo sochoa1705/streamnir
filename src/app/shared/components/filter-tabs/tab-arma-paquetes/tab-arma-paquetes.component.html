@@ -12,9 +12,7 @@
             <div class="padRight">
                 <app-pop-up-pasajero #popUp (emitDistributionObject)="distributionObject = $event"  (emitDistribution)="distribution = $event"></app-pop-up-pasajero>
             </div>
-        </div>
-        <div class="rowBoxTab">
-            <div class="colBoxtab">
+            <div class="colBoxtab" style="display: none;">
                 <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)"
                      class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
                 <mat-autocomplete #auto="matAutocomplete">
@@ -26,11 +24,16 @@
             </div>
 
             <app-calendar [typeValue]="1" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
-
             <div class="colBoxtab">
                 <button class="fullWidht" (click)="searchPaquete()">Buscar</button>
             </div>
+
         </div>
+        <!-- <div class="rowBoxTab">
+            
+
+            
+        </div> -->
         <!-- <div class="rowBoxTab right text">Haciendo click en "Buscar", acepto las Condiciones Generales</div> -->
     </form>
 </div>

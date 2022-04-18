@@ -75,7 +75,7 @@
                 <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
         </div>
-        <input #dpFromDate3 class="form-control d-left" (click)="datepicker3.toggle()" (blur)="emitValue()" placeholder="Salida" name="dpFromDate3" [value]="formatter.format(fromDate)"
+        <input #dpFromDate3 class="form-control d-left" (click)="datepicker3.toggle()" (blur)="emitValue()" [placeholder]="placeHolder" name="dpFromDate3" [value]="formatter.format(fromDate)"
             (input)="fromDate = validateInput(fromDate, dpFromDate3.value)" autocomplete="off">
 
 

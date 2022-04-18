@@ -124,7 +124,8 @@
               </svg>
               <span>Autos</span>
             </ng-template>
-            <ng-container>
+            <app-tab-autos></app-tab-autos>
+            <!-- <ng-container>
               <div class="boxTab">
                 <form class="bg-white" [formGroup]="form3">
                   <div class="rowBoxTab">
@@ -136,7 +137,7 @@
                         <mat-option *ngFor="let state of citys" [value]="state.label">
                           <img class="example-option-img" aria-hidden src="./assets/origen.png">
                           <span>{{state.label}}</span>
-                          <!-- <small>Population: {{state.population}}</small> -->
+                           <small>Population: {{state.population}}</small>
                         </mat-option>
                       </mat-autocomplete>
                     </div>
@@ -148,7 +149,7 @@
                         <mat-option *ngFor="let state of citys" [value]="state.label">
                           <img class="example-option-img" aria-hidden src="./assets/origen.png">
                           <span>{{state.label}}</span>
-                          <!-- <small>Population: {{state.population}}</small> -->
+                          <!-- <small>Population: {{state.population}}</small>
                         </mat-option>
                       </mat-autocomplete>
                     </div>
@@ -156,7 +157,7 @@
                   <div class="rowBoxTab">
                     <div class="colBoxtab">
                       <div class="hideDate">
-                        <!-- OCULTAR CAMPO -->
+                        <!-- OCULTAR CAMPO
                         <input name="datepicker3" ngbDatepicker #datepicker3="ngbDatepicker"
                           [footerTemplate]="footerTemplate3" [autoClose]="'outside'"
                           (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
@@ -173,7 +174,7 @@
                             <button (click)="datepicker3.close()">Listo</button>
                           </div>
                         </ng-template>
-                        <!-- END OCULTAR CAMPO -->
+                        <!-- END OCULTAR CAMPO
                       </div>
                       <div class="iconCalendar">
                         <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -233,8 +234,7 @@
                   </div>
                 </form>
               </div>
-            </ng-container>
-            <mat-progress-bar mode="indeterminate" style="width: 60rem;"></mat-progress-bar>
+            </ng-container> -->
 
           </mat-tab>
           <!-- END AUTOS -->

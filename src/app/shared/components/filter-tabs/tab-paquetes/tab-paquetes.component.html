@@ -11,9 +11,16 @@
                     </mat-option>
                 </mat-autocomplete>
             </div>
-
             <app-calendar [typeValue]="1" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
+            <div class="colBoxTab">
+                <!-- <select formControlName="nationalityCustomer" class="form-select-f">
+                    <option value="" selected>Seleccione Mes</option>
 
+                    <option *ngFor="let elem of countries" [value]="elem.Iata">
+                      {{ elem.Name }}
+                    </option>
+                  </select> -->
+            </div>
             <div class="colBoxtab">
                 <button class="fullWidht" (click)="searchPaquete()">Buscar</button>
             </div>
