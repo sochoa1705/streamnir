@@ -35,4 +35,11 @@ export class DestinyService {
     const url = environment.urlGeo + `/ubigeo/geotree/${query}`;
     return this.http.get<IGeoTree[]>(url);
   }
+
+  getDestinyCountriesPaqueteDinamico(
+  ): Observable<any> {
+    let urlApiPaquete: string = environment.urlPaqueteDinamicoNmViajes;
+    let urlApi = `${urlApiPaquete}${ENDPOINT_API.LOCATION_SEARCH_COUNTRIES}?lang=ES&_=1650245018201`;
+    return this.http.jsonp(urlApi, 'callback=test');
+  }
 }

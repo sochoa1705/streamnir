@@ -1,11 +1,24 @@
 <div class="boxTab">
     <form class="bg-white" name="form" [formGroup]="form">
         <div class="rowBoxTab">
+            <div class="padRight">
+                <mat-form-field>
+                    <mat-select formControlName="clase" disableOptionCentering>
+                        <mat-option [value]="EnumCabins.economico">Economy</mat-option>
+                        <mat-option [value]="EnumCabins.business">Business</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="padRight">
+                <app-pop-up-pasajero #popUp (emitDistributionObject)="distributionObject = $event"  (emitDistribution)="distribution = $event"></app-pop-up-pasajero>
+            </div>
+        </div>
+        <div class="rowBoxTab">
             <div class="colBoxtab">
                 <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)"
                      class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
                 <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let state of countriesSearch" [value]="state.label">
+                    <mat-option *ngFor="let state of citys" [value]="state.label">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
                         <span>{{state.label}}</span>
                     </mat-option>

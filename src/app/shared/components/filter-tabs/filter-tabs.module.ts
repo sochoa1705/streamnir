@@ -15,6 +15,7 @@ import { CalendarModule } from '../calendar/calendar.module';
 import { TabVuelosComponent } from './tab-vuelos/tab-vuelos.component';
 import { InputAutocompleteModule } from '../input-autocomplete/input-autocomplete.module';
 import { PopUpPasajerVuelosoModule } from '../pop-up-pasajero-vuelos/pop-up-pasajero-vuelos.module';
+import { TabArmaPaquetesComponent } from './tab-arma-paquetes/tab-arma-paquetes.component';
 import { TabPaquetesComponent } from './tab-paquetes/tab-paquetes.component';
 
 
@@ -25,6 +26,7 @@ import { TabPaquetesComponent } from './tab-paquetes/tab-paquetes.component';
     TabHotelComponent,
     TabActividadesComponent,
     TabVuelosComponent,
+    TabArmaPaquetesComponent,
     TabPaquetesComponent
   ],
   imports: [
@@ -44,6 +46,7 @@ import { TabPaquetesComponent } from './tab-paquetes/tab-paquetes.component';
     TabHotelComponent,
     TabActividadesComponent,
     TabVuelosComponent,
+    TabArmaPaquetesComponent,
     TabPaquetesComponent
   ]
 })
