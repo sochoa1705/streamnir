@@ -25,6 +25,8 @@ import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/
 import * as moment from 'moment';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
+import { ActionFieldCheckout, Checkout, EcommerceCheckout, ModelTaggingCheckout, ProductAddToCart } from 'src/app/Services/analytics/tagging.models';
+import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 
 interface Methods {
   id: string;
@@ -140,6 +142,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   isMasterCard = false;
   isAmericanExpress = false;
   isDinners = false;
+  count: number =0;
+  countInfante: number =0;
+  countNinio: number =0;
+  countAdulto: number =0;
 
   constructor(
     private _router: Router,
@@ -183,8 +189,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     this.unidadNegocio = localStorage.getItem('businessunit')
     this.businessunit = JSON.parse(this.unidadNegocio)
-    console.log(this.resultJson);
-    console.log(this.safe0Json);
+    console.log("resultJson",this.resultJson);
+    console.log("safe0Json",this.safe0Json);
     console.log(screen.width);
 
     if (screen.width < 769) {
@@ -213,6 +219,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.count =0;
+    this.countAdulto =0;
+    this.countInfante =0;
+    this.countNinio =0;
     toUp();
     this.loadShop();
 
@@ -236,7 +246,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log(this.resultJson);
     console.log(this.filtroVueloJson);
 
-    debugger
+    //debugger
 
     const pasajeros = this.resultJson !== null ? this.resultJson['passengers'] : this.filtroVueloJson['pasajeros'];
     console.log(pasajeros);
@@ -511,7 +521,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   buyInsurance(): void {
-    debugger
+    //debugger
 
     console.clear();
     console.log('1. buyInsurance');
@@ -528,7 +538,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
       return;
 
-    debugger
+    //debugger
 
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
     this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson['passengers'].length));
@@ -555,7 +565,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       localStorage.setItem('reserva', JSON.stringify(response))
       //console.log('Codigo de reserva:', this.reservation);
 
-      debugger
+      //debugger
 
       this._loaderSubjectService.closeLoader();
 
@@ -567,7 +577,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     console.log('generatePayloadForInsurance');
 
-    debugger
+    //debugger
 
     this.getPassengerAges();
 
@@ -674,7 +684,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         const result = JSON.parse(this.paymentData);
 
         console.log("JSON payload make payment RS", this.paymentData);
-        debugger
+        //debugger
 
         if (result.Result.IsSuccess) {
 
@@ -860,7 +870,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   generateCoverages(): any {
-    debugger
+    //debugger
 
     let coverages: any = [];
 
@@ -1172,10 +1182,99 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   allowAlphabetic(event: KeyboardEvent) {
+    
     const pattern = /[a-zA-Z\s]/;
 
     if (!pattern.test(event.key))
       event.preventDefault();
+      if(this.count == 0){
+        this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
+      }
+      
+      this.count++;
+  }
+  dataLayerPushCheckout(safe0Json: any, resultJson: any) {
+    let actionField: ActionFieldCheckout ={
+      step: 1
+    }
+    let products:    ProductAddToCart[] = [];
+    let pp: ProductAddToCart={
+      name: '',
+      id: '',
+      price: '',
+      brand: '',
+      category: '',
+      category2: '',
+      variant: '',
+      quantity: 0,
+      metric10: 0,
+      dimension9: '',
+      dimension11: '',
+      dimension12: '',
+      metric11: 0,
+      metric12: 0,
+      dimension16: '',
+      dimension17: ''
+    }
+
+    let checkout: Checkout ={
+      actionField: actionField,
+      products: products
+    }
+    let ecommerce: EcommerceCheckout ={
+      checkout: checkout
+    }
+    let modelTaggingCheckout : ModelTaggingCheckout={
+      event: 'nmv.seguros_eecga3_checkout',
+      ecommerce: ecommerce
+    }
+    
+    for (let index = 0; index < parseInt(resultJson.passengers.length); index++) {
+      const element = resultJson.passengers[index];
+      if(element.edad < 6){//infante
+        this.countInfante++;
+
+      }else if(element.edad >= 6 && element.edad < 18){//nuño
+        this.countNinio++;
+      }else if(element.edad >= 18){// adulto
+        this.countAdulto++;
+
+      }
+    }
+    if(this.countInfante > 0){
+      pp = this.llenarProduct(safe0Json, resultJson);
+      products.push(pp);
+    }
+    if(this.countNinio > 0){
+      pp = this.llenarProduct(safe0Json, resultJson);
+      products.push(pp);
+    }
+    if(this.countAdulto > 0){
+      pp = this.llenarProduct(safe0Json, resultJson);
+      products.push(pp);
+    }
+    TaggingService.tagMostrarCheckout(modelTaggingCheckout);
+  }
+  llenarProduct(safe0Json: any, resultJson: any): ProductAddToCart {
+    let pp: ProductAddToCart={
+      name: safe0Json.nombreProducto,
+      id: safe0Json.idProducto,
+      price: safe0Json.precioBrutochange,
+      brand: 'Proveedor?',
+      category: 'Seguros',
+      category2: 'Fecha Flexible',
+      variant: resultJson.destinyString.descripcion_destino,
+      quantity: parseInt(resultJson.passengers.length),
+      metric10: 52.25,
+      dimension9: 'MontoAsistenciaMedica?',
+      dimension11: '2022/03/21',
+      dimension12: '2022/03/21',
+      metric11: 2,
+      metric12: 5,
+      dimension16: 'PE',
+      dimension17: 'EUROP'
+    }
+    return pp;
   }
 
   allowNumeric(event: KeyboardEvent) {
@@ -1231,5 +1330,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   denyDrop(event: DragEvent) {
     event.preventDefault();
+  }
+  onFocus(){
+    console.log("hola soy onFocus")
   }
 }

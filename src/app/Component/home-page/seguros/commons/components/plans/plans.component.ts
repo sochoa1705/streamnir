@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
-import { ActionField, Detail, Ecommerce, EcommerceDetalleBeneficio, Impression, ModelTaggingDetalleBeneficio, ModelTaggingMostrarResultados, Product } from 'src/app/Services/analytics/tagging.models';
+import { ActionField, ActionFieldAddToCart, Add, Detail, Ecommerce, EcommerceAddToCart, EcommerceDetalleBeneficio, Impression, ModelTaggingAddToCart, ModelTaggingDetalleBeneficio, ModelTaggingMostrarResultados, Product, ProductAddToCart } from 'src/app/Services/analytics/tagging.models';
 import * as moment from 'moment';
 
 @Component({
@@ -41,8 +41,7 @@ export class PlansComponent implements OnInit {
     detalleViaje: false,
     detalleCobertura: true,
     cupon: false,
-  }
-  
+  } 
   
   //datoUsuario:any = localStorage.getItem('form');
   constructor(
@@ -59,7 +58,7 @@ export class PlansComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //debugger
+    ////debugger
 
     this.result = localStorage.getItem('Datasafe');
     this.resultJson = JSON.parse(this.result);
@@ -110,7 +109,7 @@ export class PlansComponent implements OnInit {
     //   'FechaNacimiento': element.fecha
     // });
 
-    //debugger
+    ////debugger
 
     let lcotizacion: CotizarSeguroRQ = {
       UnidadNegocio: environment.undidadNegocioAC,
@@ -131,7 +130,7 @@ export class PlansComponent implements OnInit {
 
     let payload = new NMRequestBy<CotizarSeguroRQ>(lcotizacion)
 
-    //debugger
+    ////debugger
 
     console.log('listPlansAC');
     console.log(JSON.stringify(payload))
@@ -145,20 +144,15 @@ export class PlansComponent implements OnInit {
           return e
         }
         )
-
         let maxi = this.bestPlan()
         let clase = { clase: 'best' }
         this.plans = { ...this.plansAC[maxi], ...clase }
         this.plansAC.splice(maxi, 1)
         this.plansAC.unshift(this.plans)
-
         this.loaderSubjectService.closeLoader()
-        // this.price()
         console.log(this.plansAC)
         console.log(this.plans)
-
         localStorage.setItem('planes', JSON.stringify(this.plansAC))
-
       },
       error: error => {
         console.log(error)
@@ -206,15 +200,76 @@ export class PlansComponent implements OnInit {
   }
 
   data(id: any) {
-    this.sendDataLayerDetalleBeneficio(this.plansAC, this.resultJson);
+    this.sendDataLayerDetalleBeneficio(this.plansAC, this.resultJson);    
     console.log(id);
     this.pop = id;
-    this.listCoverage(id);
-    
+    this.listCoverage(id);    
 
   }
+  sendDataLayerAddToCart(plansAC: any, resultJson: any) {
+    let products:    ProductAddToCart[] = [];
+    let pp :ProductAddToCart={
+      name: '',
+      id: '',
+      price: '',
+      brand: '',
+      category: '',
+      category2: '',
+      variant: '',
+      quantity: 0,
+      metric10: 0,
+      dimension9: '',
+      dimension11: '',
+      dimension12: '',
+      metric11: 0,
+      metric12: 0,
+      dimension16: '',
+      dimension17: ''
+    }
+    let actionField : ActionFieldAddToCart ={
+      list: 'Resultados de Seguros'
+    }
+    let add :Add ={
+      actionField: actionField,
+      products: products
+    }
+    let ecommerce : EcommerceAddToCart={
+      currencyCode: '',
+      add: add
+    }
+    let modelTaggingAddToCart : ModelTaggingAddToCart ={
+      event: 'nmv.seguros_eecga3_addtocart',
+      ecommerce: ecommerce
+    }
+    let index: number = 0;
+    ecommerce.currencyCode = plansAC[0].monedaLocal;
+    plansAC.forEach((element : any) => {
+        pp = ({
+          name: element.nombreProducto,
+          id: element.codProducto,
+          price: element.precioEmisionLocal,
+          brand: 'AssistCard?',
+          category: 'Seguros',
+          category2: index === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+          variant: resultJson.destinyString.descripcion_destino,
+          quantity: resultJson.passengers.length,
+          metric10: this.getPromedioEdades(resultJson),
+          dimension9: 'MontoAsistenciaMedica?',
+          dimension11: resultJson.destinyString.fromDate,
+          dimension12: resultJson.passengers.toDate,
+          metric11: this.getDiasAnticipacion(resultJson),
+          metric12: this.getDuracionViaje(resultJson),
+          dimension16:'PE?',
+          dimension17:resultJson.destinyString.id_destino,
+      });
+      products.push(pp);
+      index++;
+    });
+    TaggingService.tagMostrarAddToCart(modelTaggingAddToCart);
+}
+
   sendDataLayerDetalleBeneficio(plansAC: any, resultJson: any) {
-    //debugger;
+    ////debugger;
     let actionField : ActionField ={
       list: 'Resultado de Seguros',
     }
@@ -276,6 +331,7 @@ export class PlansComponent implements OnInit {
     console.log("plansAC: ", this.plansAC);
     console.log("resultJson: ", this.resultJson);
     this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
+    this.sendDataLayerAddToCart(this.plansAC, this.resultJson);
     let service = this.plansAC.find((e: any) => {
       if (e.idProducto === card.idProducto) {
         return e

@@ -283,3 +283,68 @@ export class ModelTaggingOfertasVuelos {
     ){}
    
   }
+  export class ModelTaggingAddToCart{
+    constructor(
+      public  event:     string,
+      public  ecommerce: EcommerceAddToCart,
+    ){}    
+  }
+  export class EcommerceAddToCart{
+    constructor(
+      public  currencyCode: string,
+      public  add:          Add,
+    ){}
+  }
+  export class Add{
+    constructor(
+      public  actionField: ActionFieldAddToCart,
+      public  products:    ProductAddToCart[],
+    ){}
+  }
+  export class ActionFieldAddToCart{
+    constructor(
+      public  list: string,
+    ){}
+  }
+  export class ProductAddToCart{
+    constructor(
+      public  name:        string,
+      public  id:          string,
+      public  price:       string,
+      public  brand:       string,
+      public  category:    string,
+      public  category2:   string,
+      public  variant:     string,
+      public  quantity:    number,
+      public  metric10:    number,
+      public  dimension9:  string,
+      public  dimension11: string,
+      public  dimension12: string,
+      public  metric11:    number,
+      public  metric12:    number,
+      public  dimension16: string,
+      public  dimension17: string
+    ){}
+  }
+  export class ModelTaggingCheckout{
+    constructor(
+      public  event:     string,
+      public  ecommerce: EcommerceCheckout,
+    ){}
+  }
+export class EcommerceCheckout{
+  constructor(
+    public  checkout: Checkout,
+  ){}
+}
+export class Checkout{
+  constructor(
+    public  actionField: ActionFieldCheckout,
+    public  products:    ProductAddToCart[],
+  ){}
+}
+export class ActionFieldCheckout{
+  constructor(
+    public  step: number,
+  ){}
+}

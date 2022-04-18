@@ -461,7 +461,8 @@
 
                       <input class="form-control" type="text" formControlName="nameCustomer"
                         (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
-                        (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje.">
+                        (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje."
+                        (OnPush)="onFocus()" >
                     </div>
 
                     <div class="col-6 viewMobileWidth">
