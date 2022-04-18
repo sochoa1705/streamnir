@@ -1634,18 +1634,13 @@
                   <div class="col-6 viewMobileWidth">
                     <label for="names">Nombres</label>
 
-                    <<<<<<< HEAD <input class="form-control" #nameContactForm placeholder="Ingresa tu(s) nombre(s)"
+                    <input class="form-control" #nameContactForm placeholder="Ingresa tu(s) nombre(s)"
                       [ngClass]="{isvalid : validateContactForm('nameContacto')}" formControlName="nameContacto"
-                      type="text" value="" name="names">
-                      =======
-                      <input class="form-control" #nameContactForm placeholder="Ingresa tu(s) nombre(s)"
-                        [ngClass]="{isvalid : validateContactForm('nameContacto')}" formControlName="nameContacto"
-                        type="text" value="" name="names" (click)="startContactDetails()">
-                      >>>>>>> dev-walter
+                      type="text" value="" name="names" (click)="startContactDetails()">
 
-                      <span class="valid" *ngIf="validateContactForm('nameContacto')">
-                        Ingresa tus nombres de contacto
-                      </span>
+                    <span class="valid" *ngIf="validateContactForm('nameContacto')">
+                      Ingresa tus nombres de contacto
+                    </span>
                   </div>
 
                   <div class="col-6 viewMobileWidth">
