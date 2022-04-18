@@ -1,0 +1,34 @@
+<div class="boxTab">
+  <form class="bg-white" name="form" [formGroup]="form">
+      <div class="rowBoxTab">
+          <div class="colBoxtab">
+              <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)"
+                   class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
+              <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let state of countriesSearch" [value]="state.value" [attr.data-tag]="state.value">
+                      <img class="example-option-img" aria-hidden src="./assets/origen.png">
+                      <span>{{state.value}}</span>
+                  </mat-option>
+              </mat-autocomplete>
+          </div>
+      </div>
+      <div class="rowBoxTab">
+        <div class="colBoxtab">
+          <app-calendar [typeValue]="1" [placeHolder]="'Salida'" class="ignore-template" (changeDate)="changeDateFirst($event)"></app-calendar>
+        </div>
+        <div class="colBoxtab">
+          <input class="form-control" formControlName="initHour" type="time" placeholder="Hora de recogida">
+        </div>
+        <div class="colBoxtab">
+          <app-calendar [typeValue]="1" [placeHolder]="'Retorno'" class="ignore-template" (changeDate)="changeDateLast($event)"></app-calendar>
+        </div>
+        <div class="colBoxtab">
+          <input class="form-control" formControlName="lastHour" type="time" placeholder="Hora de llegada">
+        </div>
+        <div class="colBoxtab">
+          <button class="fullWidht" (click)="searchAuto()">Buscar</button>
+        </div>
+      </div>
+      <!-- <div class="rowBoxTab right text">Haciendo click en "Buscar", acepto las Condiciones Generales</div> -->
+  </form>
+</div>
