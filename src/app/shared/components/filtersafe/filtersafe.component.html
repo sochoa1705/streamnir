@@ -103,7 +103,7 @@
 
         <!-- OCULTAR CAMPO -->
         <div class="columnFiltro hideColumn">
-          <input name="datepicker" ngbDatepicker #datepicker="ngbDatepicker" [footerTemplate]="footerTemplate"
+          <input mask="d0/M0/0*" maxlength="11" name="datepicker" ngbDatepicker #datepicker="ngbDatepicker" [footerTemplate]="footerTemplate"
             [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
             outsideDays="hidden" [startDate]="fromDate!" tabindex="-1">
           <ng-template #t let-date let-focused="focused">
@@ -135,7 +135,7 @@
             </svg>
 
           </div>
-          <input class="form-control" (click)="d.toggle()" placeholder="Salida" name="dp" [(ngModel)]="model"
+          <input mask="d0/M0/0*" maxlength="11" class="form-control" (click)="d.toggle()" placeholder="Salida" name="dp" [(ngModel)]="model"
             ngbDatepicker #d="ngbDatepicker">
         </div>
         <!-- END SOLO IDA -->
@@ -152,7 +152,7 @@
               <path d="M1.46973 8.63647H20.5606" stroke="#009AED" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </div>
-          <input #dpFromDate autocomplete="off" [ngClass]="getMessage(MSG_OUTFLY) != MSG_EMPTY ? 'isvalid' : ''"
+          <input  mask="d0/M0/0*" maxlength="11" #dpFromDate autocomplete="off" [ngClass]="getMessage(MSG_OUTFLY) != MSG_EMPTY ? 'isvalid' : ''"
             formControlName="fromDate" class="form-control inputDer" (click)="datepicker.toggle()" placeholder="Salida"
             name="start" [value]="formatter.format(fromDate)"
             (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
@@ -169,7 +169,7 @@
               <path d="M1.46973 8.63647H20.5606" stroke="#009AED" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </div>
-          <input autocomplete="off" #dpToDate formControlName="toDate" class="form-control inputIzq"
+          <input mask="d0/M0/0*" maxlength="11" autocomplete="off" #dpToDate formControlName="toDate" class="form-control inputIzq"
             (click)="datepicker.toggle()" placeholder="Vuelta" name="dpToDate"
             [ngClass]="getMessage(MSG_INFLY) != MSG_EMPTY ? 'isvalid' : ''" [value]="formatter.format(toDate)"
             (input)="toDate = validateInput(toDate, dpToDate.value)">

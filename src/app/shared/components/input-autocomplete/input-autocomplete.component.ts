@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, forwardRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Subject, Subscription } from 'rxjs';
+import { InputValidationService } from 'src/app/Services/inputValidation.service';
 import { CardAutocompleteComponent } from '../card-autocomplete/card-autocomplete.component';
 import { ICardAutocomplete } from '../card-autocomplete/card-autocomplete.interface';
 @Component({
@@ -62,7 +63,7 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   onChange = (_: any) => { };
   onTouch = () => { };
 
-  constructor() {
+  constructor( public inputValidator : InputValidationService) {
     this.viewIcon = false
   }
 

@@ -26,6 +26,9 @@ interface Params {
     horaDestino?: string;
     flightType?: string;
     countryCode?: string;
+    idMonth?: string;
+    idNoche?: string;
+    idTheme?: string;
 }
 
 
@@ -121,7 +124,8 @@ export class URLAutos implements UrlNmViajes {
     }
 
     getUrl() {
-        return `${this.url}?pickUpDate=${this.params.startDate}&pickUpHour=${this.params.horaInicio}&dropOffDate=${this.params.endDate}&dropOffHour=${this.params.horaDestino}&pickUpLocation=${this.params.idDestino}&dropOffLocation=${this.params.idDestino}&rateType=best&Country=${this.params.countryCode}`;
+        let idOrigen = this.params.idOrigen || this.params.idDestino;
+        return `${this.url}?pickUpDate=${this.params.startDate}&pickUpHour=${this.params.horaInicio}&dropOffDate=${this.params.endDate}&dropOffHour=${this.params.horaDestino}&pickUpLocation=${this.params.idDestino}&dropOffLocation=${idOrigen}&rateType=best&Country=${this.params.countryCode}`;
     }
 }
 
@@ -176,9 +180,7 @@ export class URLPaquete implements UrlNmViajes {
     }
 
     getUrl() {
-        let date = this.params.startDate.split('/');
-        let month = date[2] + '-' + date[1];
-        return `${this.url}?country=${this.country}&month=${month}`;
+        return `${this.url}?country=${this.params.idDestino}&month=${this.params.idMonth}&nights=${this.params.idNoche}&themes=${this.params.idTheme}`;
     }
 }
 
@@ -216,7 +218,8 @@ export class ParamsAutos implements ParamsTabs {
         public fromDate: NgbDate | null,
         public toDate: NgbDate | null,
         public form: FormGroup,
-        public citysDestinosSelect: Array<any>
+        public citysDestinosSelect: Array<any>,
+        public citysRecojoSelect: Array<any>,
     ) { }
 
     getParams() {
@@ -225,12 +228,14 @@ export class ParamsAutos implements ParamsTabs {
         let startDate = moment(startDateStr, 'D/M/YYYY').format('YYYY-MM-DD');
         let endDate = moment(endDateStr, 'D/M/YYYY').format('YYYY-MM-DD');
         let destino = this.form.controls['destino'].value;
+        let recojo = this.form.controls['recojo'].value;
         let horaInicio = this.form.controls['initHour'].value.replace(':','');
         let horaDestino = this.form.controls['lastHour'].value.replace(':','');
         let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.value === destino)?.iata : '';
+        let idOrigen = recojo !== '' ? (this.citysRecojoSelect || []).find(item => item.value === recojo)?.iata : '';
         let countryCode = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.value === destino)?.countryCode : '';
 
-        return { startDate, endDate, destino, idDestino, countryCode, horaInicio, horaDestino };
+        return { startDate, endDate, destino, idDestino, countryCode, horaInicio, horaDestino, idOrigen };
     }
 }
 
@@ -261,20 +266,22 @@ export class ParamPaquete implements ParamsTabs {
         public fromDate: NgbDate | null,
         public toDate: NgbDate | null,
         public form: FormGroup,
-        public citysDestinosSelect: any[]
+        public citysDestinosSelect: any[],
+        public themes: any[],
+        public months: any[],
+        public noches: any[]
     ) { }
 
     getParams() {
-        let endDateNow = new Date();
-        let startDateStr = `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
-        let endDateStr = `${(endDateNow!.getDay()).toString()}/${(endDateNow!.getMonth()).toString()}/${(endDateNow!.getFullYear()).toString()}`;
-        let startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
-        let endDate = moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
+        let startDate = moment(new Date(), 'D/M/YYYY').format('DD/MM/YYYY');
+        let endDate = moment(new Date(), 'D/M/YYYY').format('DD/MM/YYYY');
         let destino = this.form.controls['destino'].value;
         let businessClass = false;
         let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.label === destino).code : 0;
-    
-        return { startDate, endDate, destino, businessClass, idDestino};
+        let idNoche = this.form.controls['noches'].value;
+        let idTheme = this.form.controls['themes'].value;
+        let idMonth = this.form.controls['months'].value;
+        return { startDate, endDate, destino, businessClass, idDestino, idTheme, idNoche, idMonth};
     }
 }
 export class ParamsActividades extends ParamsHoteles {

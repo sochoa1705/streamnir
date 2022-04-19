@@ -382,4 +382,26 @@ export class ActionFieldCheckout {
     public step: number,
   ) { }
 }
-
+export class ModelTaggingcheckoutOption{
+  constructor(
+    public  event:     string,
+    public  ecommerce: EcommercecheckoutOption,
+  ){}
+ 
+}
+export class EcommercecheckoutOption{
+  constructor(
+    public  checkout_option: CheckoutOption,
+  ){}
+}
+export class CheckoutOption{
+  constructor(
+    public   actionField: ActionFieldCheckoutOption,
+  ){}
+}
+export class ActionFieldCheckoutOption{
+  constructor(
+    public  step:   number,
+    public  option: string,
+  ){}
+}

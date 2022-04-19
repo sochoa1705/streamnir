@@ -20,7 +20,7 @@
         <div class="rowBoxTab">
             <div class="colBoxtab">
                 <input matInput aria-label="State" [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event,1)"
-                    class="form-control animated fadeIn" placeholder="Origen">
+                    class="form-control animated fadeIn" placeholder="Origen" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
                 <mat-autocomplete #auto1="matAutocomplete">
                     <mat-option *ngFor="let state of citysOrigenSelect" [value]="state.label">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
@@ -32,7 +32,7 @@
             </div>
             <div class="colBoxtab">
                 <input matInput aria-label="State2"  [matAutocomplete]="auto2" formControlName="destino" (keyup)="autoComplete($event,2)"
-                    class="form-control" placeholder="Destino">
+                    class="form-control" placeholder="Destino" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
                 <mat-autocomplete #auto2="matAutocomplete">
                     <mat-option *ngFor="let state of citysDestinosSelect" [value]="state.label">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
