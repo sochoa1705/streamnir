@@ -676,17 +676,17 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
   sendDataLayerCheckoutOption(value: any) {
     let nacionalidad = value.customers[0].nationalityCustomer;
-    let actionField: ActionFieldCheckoutOption={
+    let actionField: ActionFieldCheckoutOption = {
       step: 1,
       option: nacionalidad
     }
-    let checkout_option : CheckoutOption={
+    let checkout_option: CheckoutOption = {
       actionField: actionField
     }
-    let ecommerce : EcommercecheckoutOption={
+    let ecommerce: EcommercecheckoutOption = {
       checkout_option: checkout_option
     }
-    let modelTaggingcheckoutOption : ModelTaggingcheckoutOption={
+    let modelTaggingcheckoutOption: ModelTaggingcheckoutOption = {
       event: 'nmv.seguros_eecga3_checkoutOption',
       ecommerce: ecommerce
     }
@@ -869,10 +869,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           }
 
+          console.log("Tag purchase amtes");
+          console.log(JSON.stringify(model));
+
+
           TaggingService.tagTransactionCompleted(model);
 
-
-          console.log("Tag purchase");
+          console.log("Tag purchase despues");
           console.log(JSON.stringify(model));
 
 
@@ -1004,7 +1007,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           })['Valor'];
 
-          this.asistenciaMedicaMonto = this.asistMedic.includes('USD') ? this.asistMedic.substring(4) : this.asistMedic;
+          this.asistenciaMedicaMonto = this.asistMedic.includes('USD') ? Number(this.asistMedic.substring(4)) : this.asistMedic;
         }
 
 
@@ -1366,7 +1369,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (!pattern.test(event.key))
       event.preventDefault();
     if (this.count == 0) {
-      
+
     }
 
     this.count++;
