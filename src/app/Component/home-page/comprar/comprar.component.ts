@@ -847,7 +847,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
                   revenue: this.safe0Json.precioEmisionLocal,
                   cupon: ''
                 },
-                products: {
+                products: [{
                   name: this.safe0Json.producto,
                   id: this.safe0Json.idProducto,
                   price: this.safe0Json.precioEmisionLocal,
@@ -864,7 +864,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
                   metric12: Number(this.resultJson.days),
                   dimension16: 'PE-PERU',
                   dimension17: `${this.resultJson.destinyString.id_destino}-${this.resultJson.destinyString.descripcion_destino}`
-                }
+                }]
               }
             }
           }
