@@ -1,26 +1,28 @@
 <div class="boxTab">
     <form class="bg-white" name="form" [formGroup]="form">
         <div class="rowBoxTab">
-            <div class="padRight">
-                <app-pop-up-pasajero #popUp (emitDistributionObject)="distributionObject = $event"  (emitDistribution)="distribution = $event"></app-pop-up-pasajero>
-            </div>
-        </div>
-        <div class="rowBoxTab">
             <div class="colBoxtab">
                 <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)"
                      class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
                 <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let state of citys" [value]="state.label">
+                    <mat-option *ngFor="let state of countriesSearch" [value]="state.label">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
                         <span>{{state.label}}</span>
                     </mat-option>
                 </mat-autocomplete>
             </div>
-            
-            <app-calendar class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
+            <app-calendar [typeValue]="1" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
+            <div class="colBoxTab">
+                <!-- <select formControlName="nationalityCustomer" class="form-select-f">
+                    <option value="" selected>Seleccione Mes</option>
 
+                    <option *ngFor="let elem of countries" [value]="elem.Iata">
+                      {{ elem.Name }}
+                    </option>
+                  </select> -->
+            </div>
             <div class="colBoxtab">
-                <button class="fullWidht" (click)="searchAlojamiento()">Buscar</button>
+                <button class="fullWidht" (click)="searchPaquete()">Buscar</button>
             </div>
         </div>
         <!-- <div class="rowBoxTab right text">Haciendo click en "Buscar", acepto las Condiciones Generales</div> -->

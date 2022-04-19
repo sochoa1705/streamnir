@@ -115,6 +115,7 @@ export class TabVueloHotelComponent  {
     return params;
   }
   public getUrlVueloHotel(): string {
+    debugger;
     let url = ''
     let params = this.getParamsVueloHotel();
     this.insertTag(params);

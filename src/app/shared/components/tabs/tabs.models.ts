@@ -4,7 +4,7 @@ import { NgbDate } from "@ng-bootstrap/ng-bootstrap/datepicker/ngb-date";
 import * as moment from "moment";
 import { environment } from "src/environments/environment";
 import { ICardAutocomplete } from "../card-autocomplete/card-autocomplete.interface";
-import { IForm } from "../filter-tabs/tab-vuelos/tab-vuelos.interfaces";
+import { IForm, ISuggest } from '../filter-tabs/tab-vuelos/tab-vuelos.interfaces';
 
 interface Pasajeros {
     adultos: number;
@@ -24,7 +24,8 @@ interface Params {
     idOrigen?: string;
     horaInicio?: string;
     horaDestino?: string;
-    flightType?: string
+    flightType?: string;
+    countryCode?: string;
 }
 
 
@@ -46,7 +47,7 @@ export class PasajerosSinHabitacion implements Pasajeros {
     ) { }
 }
 
-export type tapType = 'ONLY_HOTEL' | 'ONLY_CAR' | 'FLIGHT_HOTEL' | 'ONLY_HOTEL' | 'ONLY_TICKET' | 'ONLY_FLIGHT';
+export type tapType = 'ONLY_HOTEL' | 'ONLY_CAR' | 'FLIGHT_HOTEL' | 'ONLY_HOTEL' | 'ONLY_TICKET' | 'ONLY_FLIGHT' | 'MULTI';
 interface UrlNmViajes {
     url: string;
     getUrl: () => string
@@ -106,6 +107,24 @@ export class URLHotel implements UrlNmViajes {
         return `${this.url}?directSubmit=true&tripType=${this.tab}&distribution=${this.distribution}&lang=ES&carRental=false&hotelDestination=${this.params.idDestino}&departureDate=${this.params.startDate}&arrivalDate=${this.params.endDate}`;
     }
 }
+
+export class URLAutos implements UrlNmViajes {
+
+    public url =  environment.urlAutosNmViajes + 'es/site/search';
+
+    private tab: tapType;
+    private params: Params;
+
+    constructor(params: Params) {
+        this.tab = "ONLY_HOTEL";
+        this.params = params;
+    }
+
+    getUrl() {
+        return `${this.url}?pickUpDate=${this.params.startDate}&pickUpHour=${this.params.horaInicio}&dropOffDate=${this.params.endDate}&dropOffHour=${this.params.horaDestino}&pickUpLocation=${this.params.idDestino}&dropOffLocation=${this.params.idDestino}&rateType=best&Country=${this.params.countryCode}`;
+    }
+}
+
 export class URLActividades implements UrlNmViajes {
 
     public url =  environment.urlPaqueteDinamico + 'home';
@@ -122,6 +141,44 @@ export class URLActividades implements UrlNmViajes {
 
     getUrl() {
         return `${this.url}?directSubmit=true&tripType=${this.tab}&destination=${this.params.idDestino}&departureDate=${this.params.startDate}&arrivalDate=${this.params.endDate}&distribution=${this.distribution}&lang=ES`;
+    }
+}
+
+export class URLArmaTuViaje implements UrlNmViajes {
+    public url =  environment.urlPaqueteDinamico + 'home';
+
+    private tab: tapType;
+    private params: Params;
+    private distribution: string;
+
+    constructor(params: Params, distribution: string) {
+        this.tab = "MULTI";
+        this.params = params;
+        this.distribution = distribution;
+    }
+
+    getUrl() {
+        return `${this.url}?directSubmit=true&tripType=${this.tab}&departureDate=${this.params.startDate}&distribution=${this.distribution}&businessCabin=${this.params.businessClass}&lang=ES`;
+    }
+}
+
+export class URLPaquete implements UrlNmViajes {
+    public url =  environment.urlPaqueteDinamico + 'ES/holidays/availability';
+
+    private tab: tapType;
+    private params: Params;
+    private country: string;
+
+    constructor(params: Params, country: string) {
+        this.tab = "MULTI";
+        this.params = params;
+        this.country = country;
+    }
+
+    getUrl() {
+        let date = this.params.startDate.split('/');
+        let month = date[2] + '-' + date[1];
+        return `${this.url}?country=${this.country}&month=${month}`;
     }
 }
 
@@ -151,6 +208,73 @@ export class ParamsHoteles implements ParamsTabs {
         let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.label === destino).id : 0;
 
         return { startDate, endDate, destino, idDestino };
+    }
+}
+
+export class ParamsAutos implements ParamsTabs {
+    constructor(
+        public fromDate: NgbDate | null,
+        public toDate: NgbDate | null,
+        public form: FormGroup,
+        public citysDestinosSelect: Array<any>
+    ) { }
+
+    getParams() {
+        let startDateStr = `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
+        let endDateStr = `${(this.toDate!.day).toString()}/${(this.toDate!.month).toString()}/${(this.toDate!.year).toString()}`;
+        let startDate = moment(startDateStr, 'D/M/YYYY').format('YYYY-MM-DD');
+        let endDate = moment(endDateStr, 'D/M/YYYY').format('YYYY-MM-DD');
+        let destino = this.form.controls['destino'].value;
+        let horaInicio = this.form.controls['initHour'].value.replace(':','');
+        let horaDestino = this.form.controls['lastHour'].value.replace(':','');
+        let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.value === destino)?.iata : '';
+        let countryCode = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.value === destino)?.countryCode : '';
+
+        return { startDate, endDate, destino, idDestino, countryCode, horaInicio, horaDestino };
+    }
+}
+
+export class ParamArmaTuViaje implements ParamsTabs {
+    constructor(
+        public fromDate: NgbDate | null,
+        public toDate: NgbDate | null,
+        public form: FormGroup,
+        public citysDestinosSelect: any[]
+    ) { }
+
+    getParams() {
+        let endDateNow = new Date();
+        let startDateStr = `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
+        let endDateStr = `${(endDateNow!.getDay()).toString()}/${(endDateNow!.getMonth()).toString()}/${(endDateNow!.getFullYear()).toString()}`;
+        let startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
+        let endDate = moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
+        let destino = this.form.controls['destino'].value;
+        let businessClass = false;
+        let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.label === destino).id : 0;
+    
+        return { startDate, endDate, destino, businessClass, idDestino};
+    }
+}
+
+export class ParamPaquete implements ParamsTabs {
+    constructor(
+        public fromDate: NgbDate | null,
+        public toDate: NgbDate | null,
+        public form: FormGroup,
+        public citysDestinosSelect: any[]
+    ) { }
+
+    getParams() {
+        let endDateNow = new Date();
+        let startDateStr = `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
+        let endDateStr = `${(endDateNow!.getDay()).toString()}/${(endDateNow!.getMonth()).toString()}/${(endDateNow!.getFullYear()).toString()}`;
+        let startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
+        let endDate = moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
+        let destino = this.form.controls['destino'].value;
+        let businessClass = false;
+        let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.label === destino).code : 0;
+    
+        return { startDate, endDate, destino, businessClass, idDestino};
     }
 }
 export class ParamsActividades extends ParamsHoteles {

@@ -49,6 +49,8 @@ export enum ENDPOINT_API {
   //LOCATIONSEARCH
   LOCATION_SEARCH = 'jsonp/locationSearch',
 
+  LOCATION_SEARCH_COUNTRIES = 'resources/autocomplete/allCountries',
+
   //CARDPAYMENT
   CARD_PAYMENT = 'v1/api/Insurance',
 

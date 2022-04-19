@@ -16,7 +16,8 @@ export const environment = {
     return fehcaHoy
   },
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
-  // urlPaqueteDinamico: 'https://nmviajes.paquetedinamico.com/',
+  urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
+  urlAutosNmViajes: 'https://autos.nmviajes.com/',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
 
@@ -38,6 +39,7 @@ export const environment = {
 
   url_autos: 'https://autos.nmviajes.com/es/site/',
 
-  urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela"
+  urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela",
+  urlSuggest: "https://suggest.agentcars.com/suggest/"
 
 }
