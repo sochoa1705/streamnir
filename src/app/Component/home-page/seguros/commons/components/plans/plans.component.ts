@@ -334,7 +334,8 @@ export class PlansComponent implements OnInit {
         return e
       }
     });
-    let state2 = { ...this.json, ...service }
+    let state2 = { ...this.json, ...service, planType: '' }
+
     localStorage.setItem('safe0', JSON.stringify(state2));
     const navigationExtras: NavigationExtras = { state: { ...this.json, ...service } };
     this.route.navigateByUrl('/comprar', navigationExtras);
