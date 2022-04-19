@@ -2,8 +2,8 @@
     <form class="bg-white" name="form" [formGroup]="form">
         <div class="rowBoxTab">
             <div class="colBoxtab w-30 me-md-1">
-                <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)"
-                     class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
+                <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)"
+                     class="form-control animated fadeIn" placeholder="¿A que país le gustaría ir?">
                 <mat-autocomplete #auto="matAutocomplete">
                     <mat-option *ngFor="let state of countriesPackageSearch" [value]="state.label">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
@@ -19,7 +19,12 @@
                     </option>
                 </select>
             </div>
-            <div class="colBoxTab w-30 me-md-1">
+            <div class="colBoxtab w-30 me-md-1">
+                <button class="fullWidht" (click)="searchPaquete()">Buscar</button>
+            </div>
+        </div>
+        <div class="rowBoxTab">
+            <div class="colBoxTab me-md-1" style="width: 100%;">
                 <select formControlName="noches" class="form-select selectSeguro">
                     <option value="" selected>Seleccione Noches</option>
                     <option *ngFor="let elem of noches" [value]="elem.code">
@@ -27,16 +32,13 @@
                     </option>
                 </select>
             </div>
-            <div class="colBoxTab w-30 me-md-1">
+            <div class="colBoxTab me-md-1" style="width: 100%;">
                 <select formControlName="themes" class="form-select selectSeguro">
                     <option value="" selected>Seleccione Tema</option>
                     <option *ngFor="let elem of themes" [value]="elem.code">
                       {{ elem.name }}
                     </option>
                 </select>
-            </div>
-            <div class="colBoxtab w-30 me-md-1">
-                <button class="fullWidht" (click)="searchPaquete()">Buscar</button>
             </div>
         </div>
         <!-- <div class="rowBoxTab right text">Haciendo click en "Buscar", acepto las Condiciones Generales</div> -->

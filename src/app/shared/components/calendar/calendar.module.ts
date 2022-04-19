@@ -4,6 +4,7 @@ import { CalendarComponent } from './calendar.component';
 import { NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { I18n, CustomDatepickerI18nService } from 'src/app/Services/datepicker/customDatepickerI18n.service';
 import { CustomAdapter, CustomDateParserFormatter } from '../filtersafe/filtersafe.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 
 
@@ -16,7 +17,8 @@ import { CustomAdapter, CustomDateParserFormatter } from '../filtersafe/filtersa
   ],
   imports: [
     CommonModule,
-    NgbModule
+    NgbModule,
+    NgxMaskModule.forRoot(),
   ],
   providers:[
     { provide: NgbDateAdapter, useClass: CustomAdapter },

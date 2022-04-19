@@ -14,6 +14,7 @@ import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { EnumCabins, EnumFlightType } from '../../flights/models/flights.interface';
 import { filter } from 'rxjs/operators';
 import { IPackageCountry } from '../tab-vuelos/tab-vuelos.interfaces';
+import { InputValidationService } from '../../../../Services/inputValidation.service';
 
 
 
@@ -65,7 +66,8 @@ import { IPackageCountry } from '../tab-vuelos/tab-vuelos.interfaces';
   }
 
   constructor(private calendar: NgbCalendar,private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar) {
+    private _snackBar: MatSnackBar,
+    public inputValidator : InputValidationService) {
     this.form = new FormGroup({
       destino: new FormControl(''),
       themes: new FormControl(''),
@@ -87,7 +89,7 @@ import { IPackageCountry } from '../tab-vuelos/tab-vuelos.interfaces';
 
     if (value.length >= 3) {
       //this.getListCiudades(value, typeSearch);
-      this.countriesPackageSearch = this.countriesPackage.filter( (item) => item.label.toLowerCase().includes(value));
+      this.countriesPackageSearch = this.countriesPackage.filter( (item) => item.label.toLowerCase().includes(value.toLowerCase()));
     }
   }
 

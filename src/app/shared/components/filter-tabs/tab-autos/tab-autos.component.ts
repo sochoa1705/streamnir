@@ -7,6 +7,7 @@ import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ParamsHoteles, ParamsAutos, URLAutos } from '../../tabs/tabs.models';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { InputValidationService } from 'src/app/Services/inputValidation.service';
 
 
 
@@ -25,7 +26,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     viewInputRecojo = false;
     conductor: Array<any> = [{code: '21', name: '21'},{code: '22', name: '22'},{code: '23', name: '23'},{code: '24', name: '24'},{code: '25', name: '25+'}];
 
-    constructor(private destineService: DestinyService, private _snackBar: MatSnackBar) {
+    constructor(private destineService: DestinyService, private _snackBar: MatSnackBar, public inputValidator : InputValidationService) {
       this.form = new FormGroup({
         destino: new FormControl(''),
         recojo: new FormControl(''),

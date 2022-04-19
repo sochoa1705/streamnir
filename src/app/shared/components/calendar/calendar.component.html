@@ -2,7 +2,7 @@
     <div class="colBoxtab w-15">
         <div class="hideDate">
             <!-- OCULTAR CAMPO -->
-            <input name="datepicker2" [minDate]="minDate" ngbDatepicker #datepicker2="ngbDatepicker" [footerTemplate]="footerTemplate2" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!"
+            <input name="datepicker2" mask="d0/M0/0*" maxlength="11" [minDate]="minDate" ngbDatepicker #datepicker2="ngbDatepicker" [footerTemplate]="footerTemplate2" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!"
                 tabindex="-1">
             <ng-template #t let-date let-focused="focused">
                 <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
@@ -25,7 +25,7 @@
                 <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
         </div>
-        <input #dpFromDate2 class="form-control d-left" (click)="datepicker2.toggle()" (blur)="emitValue()" placeholder="Salida" name="dpFromDate2" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate2.value)" autocomplete="off">
+        <input #dpFromDate2 mask="d0/M0/0*" maxlength="11" class="form-control d-left" (click)="datepicker2.toggle()" (blur)="emitValue()" placeholder="Salida" name="dpFromDate2" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate2.value)" autocomplete="off">
         <!-- <input class="form-control" type="text" placeholder="Salida"> -->
     </div>
     <div class="colBoxtab w-15">
@@ -38,7 +38,7 @@
                 <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
         </div>
-        <input #dpToDate2 class="form-control d-right" (click)="datepicker2.toggle()" (blur)="emitValue()" placeholder="Vuelta" name="dpToDate2" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate2.value)" autocomplete="off">
+        <input #dpToDate2 mask="d0/M0/0*" maxlength="11" class="form-control d-right" (click)="datepicker2.toggle()" (blur)="emitValue()" placeholder="Vuelta" name="dpToDate2" [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate2.value)" autocomplete="off">
         <!-- <input class="form-control" type="text" placeholder="Vuelta"> -->
     </div>
 </ng-container>
@@ -48,7 +48,7 @@
 
         <div class="hideDate">
             <!-- OCULTAR CAMPO -->
-            <input name="datepicker3" [minDate]="minDate" ngbDatepicker #datepicker3="ngbDatepicker" [footerTemplate]="footerTemplate3" [autoClose]="'outside'" (dateSelect)="onDateSelectionIda($event)" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" [displayMonths]="1">
+            <input name="datepicker3" mask="d0/M0/0*" maxlength="11" [minDate]="minDate" ngbDatepicker #datepicker3="ngbDatepicker" [footerTemplate]="footerTemplate3" [autoClose]="'outside'" (dateSelect)="onDateSelectionIda($event)" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" [displayMonths]="1">
             <ng-template #footerTemplate3>
                 <div class="btnDatePicker">
                     <hr class="my-0">
@@ -68,7 +68,7 @@
                 <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
         </div>
-        <input #dpFromDate3 class="form-control d-left" (click)="datepicker3.toggle()" (blur)="emitValue()" [placeholder]="placeHolder" name="dpFromDate3" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate3.value)" autocomplete="off">
+        <input id="txtInitDate" #dpFromDate3 mask="d0/M0/0*" maxlength="11" class="form-control d-left" (click)="datepicker3.toggle()" (blur)="emitValue()" [placeholder]="placeHolder" name="dpFromDate3" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate3.value)" autocomplete="off">
 
 
     </div>

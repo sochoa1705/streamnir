@@ -92,4 +92,8 @@ export class CalendarComponent implements AfterViewInit{
       return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
     }
 
+    validLength(){
+      console.log('e ', document.getElementById('txtInitDate')?.textContent);
+    }
+
 }

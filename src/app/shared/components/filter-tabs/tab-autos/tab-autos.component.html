@@ -3,7 +3,7 @@
       <div class="rowBoxTab">
           <div class="colBoxtab">
               <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)"
-                   class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
+                   class="form-control animated fadeIn" placeholder="Origen" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
               <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let state of countriesSearch" [value]="state.value" [attr.data-tag]="state.value">
                       <img class="example-option-img" aria-hidden src="./assets/origen.png">
@@ -37,7 +37,7 @@
           </div>
           <div class="colBoxtab" *ngIf="viewInputRecojo">
             <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="recojo" (keyup)="autocompleteRecojo($event)"
-                   class="form-control animated fadeIn" placeholder="¿Donde se le debe recoger?">
+                   class="form-control animated fadeIn" placeholder="Destino">
               <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let state of countriesSearchRecojo" [value]="state.value" [attr.data-tag]="state.value">
                       <img class="example-option-img" aria-hidden src="./assets/origen.png">
