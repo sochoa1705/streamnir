@@ -10,6 +10,7 @@ import { ModelTaggingVuelosHoteles } from 'src/app/Services/analytics/tagging.mo
 import * as moment from 'moment';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
+import { InputValidationService } from '../../../../Services/inputValidation.service';
 moment.locale('es')
 
 @Component({
@@ -36,7 +37,8 @@ export class TabVueloHotelComponent  {
 
 
   constructor(private calendar: NgbCalendar,private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public inputValidator : InputValidationService
     ) {
     this.createForm();
   }
