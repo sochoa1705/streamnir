@@ -100,7 +100,6 @@ import { filter } from 'rxjs/operators';
   getListCountries() {
     this.destineService.getDestinyCountriesPaqueteDinamico().subscribe(
       data => {
-        console.log('data countries ', data);
         this.countries = data;
       }
     )
