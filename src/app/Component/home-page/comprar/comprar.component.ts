@@ -838,7 +838,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           const fecharetorno = this.resultJson.toDate.split('/');
 
           const model = {
-            event: 'nmv.nmv.seguros_eecga3_purchase',
+            event: 'nmv.seguros_eecga3_purchase',
             ecommerce: {
               currencyCode: this.safe0Json.monedaLista,
               purchase: {
