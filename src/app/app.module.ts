@@ -63,7 +63,7 @@ import { PerfilModule } from './Component/home-page/perfil/perfil.module';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '377536376412-5ik9nvviq62v8dsin6tmbj2ap8i2g7dl.apps.googleusercontent.com'
+              '279534679478-2c8pkngieq5l97aa7t2d9t9mhvk904hf.apps.googleusercontent.com'
             )
           },
           {

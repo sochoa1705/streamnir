@@ -4,8 +4,8 @@ echo Hola %USERNAME%
 set name="nmviajes"
 set url=%CD%
 
-echo "Haciendo el build de la aplicacion"
-powershell -Command "npm run build-prod"
+@REM echo "Haciendo el build de la aplicacion"
+@REM powershell -Command "npm run build-prod"
 
 echo "Logueandose en el Container"
 powershell -Command "az acr login -n expertiafrontendreg"
