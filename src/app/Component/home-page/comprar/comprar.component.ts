@@ -25,7 +25,7 @@ import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/
 import * as moment from 'moment';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
-import { ActionFieldCheckout, Checkout, EcommerceCheckout, ModelTaggingCheckout, ProductAddToCart } from 'src/app/Services/analytics/tagging.models';
+import { ActionFieldCheckout, ActionFieldCheckoutOption, Checkout, CheckoutOption, EcommerceCheckout, EcommercecheckoutOption, ModelTaggingCheckout, ModelTaggingcheckoutOption, ProductAddToCart } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 
 interface Methods {
@@ -61,6 +61,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   // coverageList: any
   coverageL: any;
   asistMedic: any;
+  asistenciaMedicaMonto: number;
   listBank: any;
   timeShow!: number;
   ShowComponentTime!: boolean;
@@ -437,11 +438,17 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           const model = {
             event: 'nmv.seguros_eecga3_checkoutOption',
-            'ecommerce.checkout_option.actionField.step': 2,
-            'ecommerce.checkout_option.actionField.option': `Tarjeta de Credito o Debito ${typeCard}`
+            ecommerce: {
+              checkout_option: {
+                actionField: {
+                  step: 2,
+                  option: `Tarjeta de Credito o Debito - ${typeCard}`
+                }
+              }
+            }
           }
 
-          TaggingService.tagStartOfPaymentMethods(model);
+          TaggingService.tagSelectionOfPaymentMethod(model);
 
         } else {
           console.log('La tarjeta ingresada es inválida');
@@ -457,7 +464,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const model = {
       event: 'nmv.seguros_eecga3_checkout',
-      'ecommerce.checkout_option.actionField.step': 3
+      ecommerce: {
+        checkout: {
+          actionField: {
+            step: 3
+          }
+        }
+      }
     }
 
     TaggingService.tagStartOfContactData(model);
@@ -542,34 +555,36 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const model = {
       event: 'nmv.seguros_eecga3_checkout',
-      'ecommerce.checkout.actionField.step': 2
+      ecommerce: {
+        checkout: {
+          actionField: {
+            step: 2
+          }
+        }
+      }
     }
 
     TaggingService.tagStartOfPaymentMethods(model);
-
-    // if (this.selectedPay = 'tarjeta') {
-    //   const model = {
-    //     event: 'nmv.seguros_eecga3_checkoutOption',
-    //     'ecommerce.checkout_option.actionField.step': 2,
-    //     'ecommerce.checkout_option.actionField.option': 'Tarjeta de Credito o Debito'
-    //   }
-
-    //   TaggingService.tagStartOfPaymentMethods(model); 
-    // }
-
   }
 
   id: any = "banca";
 
   optionPay(e: any, i: any, ids: any) {
     console.log(i);
+
     this.banca = i;
     this.id = ids;
 
     const model = {
       event: 'nmv.seguros_eecga3_checkoutOption',
-      'ecommerce.checkout_option.actionField.step': 2,
-      'ecommerce.checkout_option.actionField.option': `SafetyPay - ${i ? 'Banca por Internet' : 'Agencias/Agentes'}`
+      ecommerce: {
+        checkout_option: {
+          actionField: {
+            step: 2,
+            option: `SafetyPay - ${i ? 'Banca por Internet' : 'Agencias/Agentes'}`
+          }
+        }
+      }
     }
 
     TaggingService.tagSelectionOfPaymentMethod(model);
@@ -597,16 +612,28 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const model = {
       event: 'nmv.seguros_eecga3_checkoutOption',
-      'ecommerce.checkout_option.actionField.step': 1,
-      'ecommerce.checkout_option.actionField.option': nationality
+      ecommerce: {
+        checkout_option: {
+          actionField: {
+            step: 1,
+            option: nationality
+          }
+        }
+      }
     }
 
     TaggingService.tagNationalitySelection(model);
 
     const model2 = {
       event: 'nmv.seguros_eecga3_checkoutOption',
-      'ecommerce.checkout_option.actionField.step': 3,
-      'ecommerce.checkout_option.actionField.option': this.showInvoiceData ? 'Factura Electrónica' : 'Boleta Electrónica'
+      ecommerce: {
+        checkout_option: {
+          actionField: {
+            step: 3,
+            option: this.showInvoiceData ? 'Factura Electrónica' : 'Boleta Electrónica'
+          }
+        }
+      }
     }
 
     TaggingService.tagVoucherSelection(model2);
@@ -622,6 +649,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   generateInsuranceReserve(data: any) {
+    this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
+    this.sendDataLayerCheckoutOption(this.formShop.value);
+    let dataShop = this.formShop.value;
+    console.log("dataShopForm:", dataShop)
     this._loaderSubjectService.showText('SE ESTA GENERANDO SU RESERVA!');
     this._loaderSubjectService.showLoader();
 
@@ -642,6 +673,24 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
       this.makePayment(data);
     })
+  }
+  sendDataLayerCheckoutOption(value: any) {
+    let nacionalidad = value.customers[0].nationalityCustomer;
+    let actionField: ActionFieldCheckoutOption={
+      step: 1,
+      option: nacionalidad
+    }
+    let checkout_option : CheckoutOption={
+      actionField: actionField
+    }
+    let ecommerce : EcommercecheckoutOption={
+      checkout_option: checkout_option
+    }
+    let modelTaggingcheckoutOption : ModelTaggingcheckoutOption={
+      event: 'nmv.seguros_eecga3_checkoutOption',
+      ecommerce: ecommerce
+    }
+    TaggingService.tagCheckoutOption(modelTaggingcheckoutOption);
   }
 
   generatePayloadForInsurance(data: any): RegistrarSeguroRQ {
@@ -790,29 +839,41 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           const model = {
             event: 'nmv.nmv.seguros_eecga3_purchase',
-            'ecommerce.currencyCode': '',
-            'ecommerce.purchase.actionField.id': '',
-            'ecommerce.purchase.actionField.revenue': '',
-            'ecommerce.purchase.actionField.cupon': '',
-            'ecommerce.purchase.products.name': this.safe0Json.producto,
-            'ecommerce.purchase.products.id': this.safe0Json.idProducto,
-            'ecommerce.purchase.products.price': this.safe0Json.precioEmisionLocal,
-            'ecommerce.purchase.products.brand': '',
-            'ecommerce.purchase.products.category': 'Seguros',
-            'ecommerce.purchase.products.category2': '',
-            'ecommerce.purchase.products.variant': '',
-            'ecommerce.purchase.products.quantity': this.resultJson.passengers.length,
-            'ecommerce.purchase.products.metric10': '',
-            'ecommerce.purchase.products.dimension9': '',
-            'ecommerce.purchase.products.dimension11': `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
-            'ecommerce.purchase.products.dimension12': `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
-            'ecommerce.purchase.products.metric11': '',
-            'ecommerce.purchase.products.metric12': this.resultJson.days,
-            'ecommerce.purchase.products.dimension16': 'PE-PERU',
-            'ecommerce.purchase.products.dimension17': `${this.resultJson.destinyString.id_destino}-${this.resultJson.destinyString.descripcion_destino}`
+            ecommerce: {
+              currencyCode: this.safe0Json.monedaLista,
+              purchase: {
+                actionField: {
+                  id: this.reservation.Reserva,
+                  revenue: this.safe0Json.precioEmisionLocal,
+                  cupon: ''
+                },
+                products: {
+                  name: this.safe0Json.producto,
+                  id: this.safe0Json.idProducto,
+                  price: this.safe0Json.precioEmisionLocal,
+                  brand: 'AssistCard',
+                  category: 'Seguros',
+                  category2: this.safe0Json.clase === 'best' ? 'El mejor plan' : 'Fecha Flexible',
+                  variant: this.resultJson.destinyString.descripcion_destino,
+                  quantity: this.resultJson.passengers.length,
+                  metric10: this.getPromedioEdades(this.resultJson),
+                  dimension9: this.asistenciaMedicaMonto,
+                  dimension11: `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
+                  dimension12: `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
+                  metric11: this.getDiasAnticipacion(this.resultJson),
+                  metric12: Number(this.resultJson.days),
+                  dimension16: 'PE-PERU',
+                  dimension17: `${this.resultJson.destinyString.id_destino}-${this.resultJson.destinyString.descripcion_destino}`
+                }
+              }
+            }
           }
 
           TaggingService.tagTransactionCompleted(model);
+
+
+          console.log("Tag purchase");
+          console.log(JSON.stringify(model));
 
 
           this._loaderSubjectService.closeLoader();
@@ -934,13 +995,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
 
         if (Object.keys(this.coverageList).length === 0) {
-          this.asistMedic = 0
+          this.asistMedic = 0;
+          this.asistenciaMedicaMonto = 0;
         } else {
           this.asistMedic = this.coverageList.find((e: any) => {
             if (e.Codigo === 'C.4.1.10.1') {
               return e
             }
-          })['Valor']
+          })['Valor'];
+
+          this.asistenciaMedicaMonto = this.asistMedic.includes('USD') ? this.asistMedic.substring(4) : this.asistMedic;
         }
 
 
@@ -1302,7 +1366,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (!pattern.test(event.key))
       event.preventDefault();
     if (this.count == 0) {
-      this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
+      
     }
 
     this.count++;
@@ -1374,21 +1438,28 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       name: safe0Json.nombreProducto,
       id: safe0Json.idProducto,
       price: safe0Json.precioBrutochange,
-      brand: 'Proveedor?',
+      brand: 'AssistCard',
       category: 'Seguros',
       category2: 'Fecha Flexible',
       variant: resultJson.destinyString.descripcion_destino,
       quantity: parseInt(resultJson.passengers.length),
-      metric10: 52.25,
-      dimension9: 'MontoAsistenciaMedica?',
-      dimension11: '2022/03/21',
-      dimension12: '2022/03/21',
-      metric11: 2,
-      metric12: 5,
+      metric10: this.getPromedioEdades(resultJson),
+      dimension9: this.asistMedic,
+      dimension11: resultJson.destinyString.fromDate,
+      dimension12: resultJson.passengers.toDate,
+      metric11: this.getDiasAnticipacion(resultJson),
+      metric12: this.getDuracionViaje(resultJson),
       dimension16: 'PE',
-      dimension17: 'EUROP'
+      dimension17: resultJson.destinyString.id_destino,
     }
     return pp;
+  }
+  getDuracionViaje(resultJson: any): number {
+    let fechaFormats: number[] = resultJson.fromDate.split('/');
+    const _fromDate = new Date(fechaFormats[2], fechaFormats[1], fechaFormats[0]);
+    const _toDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
+    let diferencia = ((_fromDate.getTime() - _toDate.getTime()) / 1000 / 60 / 60 / 24) - 40;
+    return diferencia;
   }
 
   allowNumeric(event: KeyboardEvent) {
@@ -1445,7 +1516,26 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   denyDrop(event: DragEvent) {
     event.preventDefault();
   }
+
   onFocus() {
     console.log("hola soy onFocus")
+  }
+
+  getDiasAnticipacion(fromDate: any): number {
+    let fechaFormats: number[] = fromDate.fromDate.split('/');
+    const _fromDate = new Date(fechaFormats[2], fechaFormats[1], fechaFormats[0]);
+    const _toDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
+    let diferencia = ((_fromDate.getTime() - _toDate.getTime()) / 1000 / 60 / 60 / 24) - 40;
+    return diferencia;
+  }
+
+  getPromedioEdades(resultJson: any): number {
+    let promedio: number = 0;
+    resultJson.passengers.forEach((element: any) => {
+      promedio = promedio + parseInt(element.edad);
+    });
+    //console.log("promedio:", promedio) 
+    //console.log("length:", resultJson.passengers.length) 
+    return (promedio / resultJson.passengers.length);
   }
 }

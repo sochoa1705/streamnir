@@ -3931,6 +3931,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 4px 10px 10px 10px;
             position: relative;
         }
+        @media (max-width: 640px) {
+            display: flex;
+            flex-wrap: wrap;
+            app-calendar {
+                width: 100%;
+            }
+        }
         &.right {
             justify-content: end;
         }
@@ -3976,6 +3983,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     border-radius: 3px 0 0 3px;
                     border: 0.5px solid #E4E5E7;
                     border-right: 0px;
+                    @media (max-width: 640px) {
+                        border-right: 0.5px solid #E4E5E7;
+                    }
                 }
                 &-right {
                     border-radius: 0 3px 3px 0;

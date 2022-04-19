@@ -245,13 +245,13 @@ export class PlansComponent implements OnInit {
         name: element.nombreProducto,
         id: element.codProducto,
         price: element.precioEmisionLocal,
-        brand: 'AssistCard?',
+        brand: 'AssistCard',
         category: 'Seguros',
         category2: index === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
         variant: resultJson.destinyString.descripcion_destino,
         quantity: resultJson.passengers.length,
         metric10: this.getPromedioEdades(resultJson),
-        dimension9: 'MontoAsistenciaMedica?',
+        dimension9: this.asistMedic,
         dimension11: resultJson.destinyString.fromDate,
         dimension12: resultJson.passengers.toDate,
         metric11: this.getDiasAnticipacion(resultJson),
@@ -334,7 +334,8 @@ export class PlansComponent implements OnInit {
         return e
       }
     });
-    let state2 = { ...this.json, ...service }
+    let state2 = { ...this.json, ...service, planType: '' }
+
     localStorage.setItem('safe0', JSON.stringify(state2));
     const navigationExtras: NavigationExtras = { state: { ...this.json, ...service } };
     this.route.navigateByUrl('/comprar', navigationExtras);
@@ -396,6 +397,7 @@ export class PlansComponent implements OnInit {
     modelTaggingMostrarResultados.ecommerce = ecommerce;
     TaggingService.tagMostrarResultados(modelTaggingMostrarResultados);
   }
+
   getDuracionViaje(fromDate: any): number {
     let fechaFormats: number[] = fromDate.fromDate.split('/');
     let fechaFormats2: number[] = fromDate.toDate.split('/');
@@ -405,6 +407,7 @@ export class PlansComponent implements OnInit {
     //console.log("DuracionViaje:", diferencia)    
     return diferencia;
   }
+
   getDiasAnticipacion(fromDate: any): number {
     let fechaFormats: number[] = fromDate.fromDate.split('/');
     const _fromDate = new Date(fechaFormats[2], fechaFormats[1], fechaFormats[0]);
