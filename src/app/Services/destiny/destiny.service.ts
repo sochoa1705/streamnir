@@ -6,6 +6,7 @@ import { ListaTarifaRequest } from 'src/app/Models/Request/ListaTarifasRequest';
 import { IGeoTree } from 'src/app/shared/components/filter-tabs/tab-vuelos/tab-vuelos.interfaces';
 import { ENDPOINT_API } from 'src/app/shared/constant';
 import { environment } from 'src/environments/environment';
+import { ISuggest } from '../../shared/components/filter-tabs/tab-vuelos/tab-vuelos.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +35,19 @@ export class DestinyService {
   getGeoTree(query: string) {
     const url = environment.urlGeo + `/ubigeo/geotree/${query}`;
     return this.http.get<IGeoTree[]>(url);
+  }
+
+  getDestinyCountriesPaqueteDinamico(
+  ): Observable<any> {
+    let urlApiPaquete: string = environment.urlPaqueteDinamicoNmViajes;
+    let urlApi = `${urlApiPaquete}${ENDPOINT_API.LOCATION_SEARCH_COUNTRIES}?lang=ES&_=1650245018201`;
+    return this.http.jsonp(urlApi, 'callback=test');
+  }
+
+  getSuggest(
+    search: string
+  ): Observable<any> {
+    const url = environment.urlSuggest + `?lang=es&query=${search}`;
+    return this.http.get<ISuggest[]>(url);
   }
 }

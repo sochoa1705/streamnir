@@ -9,19 +9,18 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { URLHotel, ParamsHoteles, ParamArmaTuViaje, URLArmaTuViaje, URLPaquete, ParamPaquete } from '../../tabs/tabs.models';
+import { URLHotel, ParamsHoteles, ParamArmaTuViaje, URLArmaTuViaje } from '../../tabs/tabs.models';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { EnumCabins, EnumFlightType } from '../../flights/models/flights.interface';
-import { filter } from 'rxjs/operators';
 
 
 
 @Component({
-    selector: 'app-tab-paquetes',
-    templateUrl: './tab-paquetes.component.html',
-    styleUrls: ['./tab-paquetes.component.scss']
+    selector: 'app-tab-arma-paquetes',
+    templateUrl: './tab-arma-paquetes.component.html',
+    styleUrls: ['./tab-arma-paquetes.component.scss']
   })
-  export class TabPaquetesComponent {
+  export class TabArmaPaquetesComponent {
   
     @ViewChild('popUp') popUpElement:PopUpPasajeroComponent | undefined;
 
@@ -44,9 +43,6 @@ import { filter } from 'rxjs/operators';
   EnumCabins = EnumCabins;
   EnumFlightType = EnumFlightType;
 
-  countries: Array<any> = [];
-  countriesSearch: Array<any> = [];
-
   @Input() set vuelosTab(value: SaveModelVuelos) {
     if (value) {
       this.form.setValue(value.form);
@@ -61,23 +57,25 @@ import { filter } from 'rxjs/operators';
   constructor(private calendar: NgbCalendar,private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar) {
     this.form = new FormGroup({
+      clase: new FormControl(EnumCabins.economico),
       destino: new FormControl(''),
     });
-    this.getListCountries();
 
    }
 
+
+   isValidate(){
+    return this.popUpElement?.isValid();
+  }
+
   autoComplete(e: any, typeSearch = 'FLIGHT_HOTEL') {
     // let elemento = this.origen.nativeElement;
-    this.countriesSearch = [];
     let elemento = e.target;
 
     let value = elemento.value;
 
     if (value.length >= 3) {
-      this.countriesSearch = this.countries;
-      //this.getListCiudades(value, typeSearch);
-      this.countriesSearch = this.countries.filter( (item) => item.label.toLowerCase().includes(value));
+      this.getListCiudades(value, typeSearch);
     }
   }
 
@@ -97,15 +95,6 @@ import { filter } from 'rxjs/operators';
     )
   }
 
-  getListCountries() {
-    this.destineService.getDestinyCountriesPaqueteDinamico().subscribe(
-      data => {
-        console.log('data countries ', data);
-        this.countries = data;
-      }
-    )
-  }
-
 
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
@@ -118,7 +107,21 @@ import { filter } from 'rxjs/operators';
   });
 }
 
+  public searchAlojamiento() {
+    if(!this.isValidate()){
+      this.openSnackBar("Error de validacion")
+      return ;
+    }
+
+    const url = this.getUrlAlojamiento();
+    this.navigateToResponseUrl(url);
+  }
+
   public searchPaquete() {
+    if(!this.isValidate()){
+      this.openSnackBar("Error de validacion")
+      return ;
+    }
     const url = this.getUrlPaquete();
     this.navigateToResponseUrl(url);
   }
@@ -135,7 +138,7 @@ import { filter } from 'rxjs/operators';
   public getUrlPaquete() {
     let url = ''
     let params = this.getParamsAlojamiento();
-    url = new URLPaquete(params, params.idDestino).getUrl();
+    url = new URLArmaTuViaje(params, this.distribution).getUrl();
     return url;
   }
 
@@ -170,11 +173,11 @@ import { filter } from 'rxjs/operators';
 
 
   getParamsAlojamiento(){
-    let params = new ParamPaquete(
+    let params = new ParamArmaTuViaje(
       this.fromDate,
       this.toDate,
       this.form,
-      this.countriesSearch,
+      this.citys,
     ).getParams();
     return params;
   }

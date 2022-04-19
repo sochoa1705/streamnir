@@ -3204,6 +3204,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       display: flex;
       padding: 4px 10px 10px 10px;
       position: relative; } }
+  @media (max-width: 640px) {
+    .boxTab .rowBoxTab {
+      display: flex;
+      flex-wrap: wrap; }
+      .boxTab .rowBoxTab app-calendar {
+        width: 100%; } }
   .boxTab .rowBoxTab.right {
     justify-content: end; }
   .boxTab .rowBoxTab.text,
@@ -3241,6 +3247,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       border-radius: 3px 0 0 3px;
       border: 0.5px solid #E4E5E7;
       border-right: 0px; }
+      @media (max-width: 640px) {
+        .boxTab .rowBoxTab .colBoxtab .d-left {
+          border-right: 0.5px solid #E4E5E7; } }
     .boxTab .rowBoxTab .colBoxtab .d-right {
       border-radius: 0 3px 3px 0;
       border: 0.5px solid #E4E5E7; }
@@ -5524,14 +5533,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       width: 40%; } }
 .tabDestino {
   display: flex;
-  max-height: 460px;
+  /*max-height: 460px;
   max-width: 660px;
-  min-width: 660px;
+  min-width: 660px;*/
   padding: 50px 0 10px 0; }
   .tabDestino .tabImgDest {
     border-radius: 50px 0 0 50px;
     overflow: hidden;
-    flex: 1 1 60%;
+    flex: 1 1 50%;
     position: relative; }
     .tabDestino .tabImgDest .mascara {
       position: absolute;
@@ -5556,7 +5565,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .tabDestino .tabImgDest .galeriaText .texto svg {
           margin-left: 10px; }
     .tabDestino .tabImgDest img {
-      width: 100%; }
+      width: 100%;
+      height: 100%; }
 
 @media (max-width: 640px) {
   .movDestino {

@@ -18,43 +18,47 @@ export class MainService {
     {
       id: 1,
       text: "Paquetes",
-      link: "https://vacaciones.nmviajes.com/ES/holidays/search",
-      external: true,
+      link: "filtro",
+      tab: 'paquetes',
       icon: '/assets/menu/paquetes.svg'
     },
     {
       id: 2,
+      text: "Arma tu viaje",
+      link: "filtro",
+      tab: 'armapaquete',
+      icon: '/assets/menu/paquetes.svg'
+    },
+    {
+      id: 3,
       text: "Vuelos + Hotel",
       link: "filtro",
       tab: 'vuelohotel',
       icon: '/assets/menu/vuelo-hotel.svg'
     },
     {
-      id: 3,
+      id: 4,
       text: "Hoteles",
       link: "filtro",
       tab: 'hoteles',
       icon: '/assets/menu/hoteles.svg'
     },
     {
-      id: 4,
+      id: 5,
       text: "Autos",
-      // link: "filtro",
-      link: "https://autos.nmviajes.com/es/site/",
-      header: true,
-      external: true,
+      link: "filtro",
       tab: 'autos',
       icon: '/assets/menu/auto.svg'
     },
     {
-      id: 5,
+      id: 6,
       text: "Actividades",
       link: "filtro",
       tab: 'actividades',
       icon: '/assets/menu/actividad.svg'
     },
     {
-      id: 6,
+      id: 7,
       text: "Seguros",
       link: "/seguros",
       header: true,
@@ -62,14 +66,14 @@ export class MainService {
       icon: '/assets/menu/seguros.svg'
     },
     {
-      id: 7,
+      id: 8,
       text: "Descubre",
       link: "https://descubre.nmviajes.com/",
       footer: true,
       external: true
     },
     {
-      id: 8,
+      id: 9,
       text: "Blog: Mundo Viajero",
       link: "https://blog.nmviajes.com/",
       footer: true,

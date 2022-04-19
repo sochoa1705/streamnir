@@ -22,3 +22,17 @@ export interface IForm {
     origenHotel: string;
 }
 
+export interface ISuggest {
+    airport?: boolean,
+    cityLoc?: boolean,
+    countryCode?: string,
+    hasoffice?: string,
+    iata?: string,
+    latitude?: number,
+    longitude?: number,
+    region?: string,
+    timezone?: string,
+    trainLoc?: boolean,
+    value?: string
+}
+

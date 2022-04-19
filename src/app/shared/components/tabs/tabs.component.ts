@@ -95,17 +95,23 @@ export class TabsComponent implements OnInit {
   }
   casos(e: any) {
     switch (e) {
-      case 'vuelohotel':
-        this.selectedTab = '2'
+      case 'paquetes':
+        this.selectedTab = '1'
         break;
-      case 'hoteles':
+        case 'armapaquete':
+          this.selectedTab = '2'
+          break;
+      case 'vuelohotel':
         this.selectedTab = '3'
         break;
-      case 'autos':
+      case 'hoteles':
         this.selectedTab = '4'
         break;
-      case 'actividades':
+      case 'autos':
         this.selectedTab = '5'
+        break;
+      case 'actividades':
+        this.selectedTab = '6'
         break;
       default:
       // code block
@@ -236,7 +242,7 @@ export class TabsComponent implements OnInit {
 
   changeTab(value: MatTabChangeEvent) {
     // (value.index == 1) ? this.navigateToResponseUrl(this.RUTA_PAQUETES) : null;
-    (value.index == 4) ? this.navigateToResponseUrl(this.RUTA_AUTOS) : null;
+    //(value.index == 4) ? this.navigateToResponseUrl(this.RUTA_AUTOS) : null;
     if(value.index == 6) {
       this.callService();
     }
