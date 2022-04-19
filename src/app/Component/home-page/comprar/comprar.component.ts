@@ -25,7 +25,7 @@ import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/
 import * as moment from 'moment';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
-import { ActionFieldCheckout, Checkout, EcommerceCheckout, ModelTaggingCheckout, ProductAddToCart } from 'src/app/Services/analytics/tagging.models';
+import { ActionFieldCheckout, ActionFieldCheckoutOption, Checkout, CheckoutOption, EcommerceCheckout, EcommercecheckoutOption, ModelTaggingCheckout, ModelTaggingcheckoutOption, ProductAddToCart } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 
 interface Methods {
@@ -648,6 +648,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   generateInsuranceReserve(data: any) {
+    this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
+    this.sendDataLayerCheckoutOption(this.formShop.value);
+    let dataShop = this.formShop.value;
+    console.log("dataShopForm:", dataShop)
     this._loaderSubjectService.showText('SE ESTA GENERANDO SU RESERVA!');
     this._loaderSubjectService.showLoader();
 
@@ -668,6 +672,24 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
       this.makePayment(data);
     })
+  }
+  sendDataLayerCheckoutOption(value: any) {
+    let nacionalidad = value.customers[0].nationalityCustomer;
+    let actionField: ActionFieldCheckoutOption={
+      step: 1,
+      option: nacionalidad
+    }
+    let checkout_option : CheckoutOption={
+      actionField: actionField
+    }
+    let ecommerce : EcommercecheckoutOption={
+      checkout_option: checkout_option
+    }
+    let modelTaggingcheckoutOption : ModelTaggingcheckoutOption={
+      event: 'nmv.seguros_eecga3_checkoutOption',
+      ecommerce: ecommerce
+    }
+    TaggingService.tagCheckoutOption(modelTaggingcheckoutOption);
   }
 
   generatePayloadForInsurance(data: any): RegistrarSeguroRQ {
@@ -1336,7 +1358,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (!pattern.test(event.key))
       event.preventDefault();
     if (this.count == 0) {
-      this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
+      
     }
 
     this.count++;
@@ -1408,21 +1430,28 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       name: safe0Json.nombreProducto,
       id: safe0Json.idProducto,
       price: safe0Json.precioBrutochange,
-      brand: 'Proveedor?',
+      brand: 'AssistCard',
       category: 'Seguros',
       category2: 'Fecha Flexible',
       variant: resultJson.destinyString.descripcion_destino,
       quantity: parseInt(resultJson.passengers.length),
-      metric10: 52.25,
-      dimension9: 'MontoAsistenciaMedica?',
-      dimension11: '2022/03/21',
-      dimension12: '2022/03/21',
-      metric11: 2,
-      metric12: 5,
+      metric10: this.getPromedioEdades(resultJson),
+      dimension9: this.asistMedic,
+      dimension11: resultJson.destinyString.fromDate,
+      dimension12: resultJson.passengers.toDate,
+      metric11: this.getDiasAnticipacion(resultJson),
+      metric12: this.getDuracionViaje(resultJson),
       dimension16: 'PE',
-      dimension17: 'EUROP'
+      dimension17: resultJson.destinyString.id_destino,
     }
     return pp;
+  }
+  getDuracionViaje(resultJson: any): number {
+    let fechaFormats: number[] = resultJson.fromDate.split('/');
+    const _fromDate = new Date(fechaFormats[2], fechaFormats[1], fechaFormats[0]);
+    const _toDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
+    let diferencia = ((_fromDate.getTime() - _toDate.getTime()) / 1000 / 60 / 60 / 24) - 40;
+    return diferencia;
   }
 
   allowNumeric(event: KeyboardEvent) {
