@@ -3243,6 +3243,42 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       @media (max-width: 768px) {
         .boxTab .rowBoxTab .colBoxtab.w-15 {
           width: 100%; } }
+    .boxTab .rowBoxTab .colBoxtab.widthBtn {
+      align-items: center;
+      width: 180px;
+      min-width: 180px; }
+      @media (max-width: 768px) {
+        .boxTab .rowBoxTab .colBoxtab.widthBtn {
+          width: 100%; } }
+    .boxTab .rowBoxTab .colBoxtab.colGrid {
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-right: 10px; }
+    .boxTab .rowBoxTab .colBoxtab .rowTab {
+      display: flex;
+      width: 100%;
+      gap: 10px; }
+      @media (max-width: 768px) {
+        .boxTab .rowBoxTab .colBoxtab .rowTab {
+          flex-wrap: wrap; } }
+      @media (max-width: 768px) {
+        .boxTab .rowBoxTab .colBoxtab .rowTab.width50 .colTab {
+          flex: 1 1 45%; } }
+      .boxTab .rowBoxTab .colBoxtab .rowTab .colTab {
+        flex: 1 1 100%; }
+        .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .w-15 {
+          width: 100%; }
+        .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .d-left {
+          border-radius: 3px;
+          border: 0.5px solid #E4E5E7; }
+        .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .form-check-input {
+          width: 24px;
+          height: 24px; }
+        .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .form-check-label {
+          cursor: pointer; }
+        @media (max-width: 768px) {
+          .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .colBoxtab {
+            padding: 0; } }
     .boxTab .rowBoxTab .colBoxtab .d-left {
       border-radius: 3px 0 0 3px;
       border: 0.5px solid #E4E5E7;
@@ -7207,3 +7243,33 @@ app-flightdeals button {
 
 .pointer {
   cursor: pointer; }
+
+.gridTab {
+  display: flex;
+  flex: 1 1 100%; }
+  .gridTab .rowGrid {
+    display: flex;
+    width: 100%;
+    gap: 10px; }
+    .gridTab .rowGrid .colGrid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      flex: 1 1 auto;
+      gap: 10px; }
+      .gridTab .rowGrid .colGrid.fullWidht button {
+        width: 100%;
+        height: 49px; }
+      .gridTab .rowGrid .colGrid .colElement {
+        display: flex;
+        width: 100%; }
+        .gridTab .rowGrid .colGrid .colElement input {
+          border: 0.5px solid #E4E5E7;
+          border-radius: 5px;
+          height: 48px;
+          padding: 0 10px; }
+    @media (max-width: 640px) {
+      .gridTab .rowGrid {
+        flex-direction: column; }
+        .gridTab .rowGrid .selectSeguro {
+          margin-bottom: 0; } }
