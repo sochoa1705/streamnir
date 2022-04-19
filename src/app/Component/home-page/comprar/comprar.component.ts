@@ -61,6 +61,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   // coverageList: any
   coverageL: any;
   asistMedic: any;
+  asistenciaMedicaMonto: number;
   listBank: any;
   timeShow!: number;
   ShowComponentTime!: boolean;
@@ -817,11 +818,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           const model = {
             event: 'nmv.nmv.seguros_eecga3_purchase',
             ecommerce: {
-              currencyCode: '',
+              currencyCode: this.safe0Json.monedaLista,
               purchase: {
                 actionField: {
-                  id: '',
-                  revenue: '',
+                  id: this.reservation.Reserva,
+                  revenue: this.safe0Json.precioEmisionLocal,
                   cupon: ''
                 },
                 products: {
@@ -830,15 +831,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
                   price: this.safe0Json.precioEmisionLocal,
                   brand: 'AssistCard',
                   category: 'Seguros',
-                  category2: '',
-                  variant: '',
+                  category2: this.safe0Json.clase === 'best' ? 'El mejor plan' : 'Fecha Flexible',
+                  variant: this.resultJson.destinyString.descripcion_destino,
                   quantity: this.resultJson.passengers.length,
                   metric10: this.getPromedioEdades(this.resultJson),
-                  dimension9: this.asistMedic,
+                  dimension9: this.asistenciaMedicaMonto,
                   dimension11: `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
                   dimension12: `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
                   metric11: this.getDiasAnticipacion(this.resultJson),
-                  metric12: this.resultJson.days,
+                  metric12: Number(this.resultJson.days),
                   dimension16: 'PE-PERU',
                   dimension17: `${this.resultJson.destinyString.id_destino}-${this.resultJson.destinyString.descripcion_destino}`
                 }
@@ -847,6 +848,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           }
 
           TaggingService.tagTransactionCompleted(model);
+
+
+          console.log("Tag purchase");
+          console.log(JSON.stringify(model));
 
 
           this._loaderSubjectService.closeLoader();
@@ -968,13 +973,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
 
         if (Object.keys(this.coverageList).length === 0) {
-          this.asistMedic = 0
+          this.asistMedic = 0;
+          this.asistenciaMedicaMonto = 0;
         } else {
           this.asistMedic = this.coverageList.find((e: any) => {
             if (e.Codigo === 'C.4.1.10.1') {
               return e
             }
-          })['Valor']
+          })['Valor'];
+
+          this.asistenciaMedicaMonto = this.asistMedic.includes('USD') ? this.asistMedic.substring(4) : this.asistMedic;
         }
 
 
