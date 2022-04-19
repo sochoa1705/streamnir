@@ -6,6 +6,7 @@ import { ISuggest } from '../tab-vuelos/tab-vuelos.interfaces';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ParamsHoteles, ParamsAutos, URLAutos } from '../../tabs/tabs.models';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -20,12 +21,18 @@ import { ParamsHoteles, ParamsAutos, URLAutos } from '../../tabs/tabs.models';
     fromDate: NgbDate | null;
     toDate: NgbDate | null;
     countriesSearch: Array<ISuggest> = [];
+    countriesSearchRecojo: Array<ISuggest> = [];
+    viewInputRecojo = false;
+    conductor: Array<any> = [{code: '21', name: '21'},{code: '22', name: '22'},{code: '23', name: '23'},{code: '24', name: '24'},{code: '25', name: '25+'}];
 
-    constructor(private destineService: DestinyService) {
+    constructor(private destineService: DestinyService, private _snackBar: MatSnackBar) {
       this.form = new FormGroup({
         destino: new FormControl(''),
+        recojo: new FormControl(''),
         initHour: new FormControl(''),
         lastHour: new FormControl(''),
+        conductor: new FormControl(''),
+        checkDevolver: new FormControl(true),
       });
 
     }
@@ -37,17 +44,32 @@ import { ParamsHoteles, ParamsAutos, URLAutos } from '../../tabs/tabs.models';
         let value = elemento.value;
     
         if (value.length >= 3) {
-          this.getListSuggestions(value);
+          this.getListSuggestions(value,1);
           //this.getListCiudades(value, typeSearch);
         }
-      }
+    }
 
-      getListSuggestions(e: any) {
-        this.destineService.getSuggest(e).subscribe(
-          data => {
+    autocompleteRecojo(e: any){
+      let elemento = e.target;
+    
+      let value = elemento.value;
+  
+      if (value.length >= 3) {
+        this.getListSuggestions(value,2);
+        //this.getListCiudades(value, typeSearch);
+      }
+    }
+
+    getListSuggestions(e: any, type: number) {
+      this.destineService.getSuggest(e).subscribe(
+        data => {
+          if(type === 1) {
             this.countriesSearch = data;
-          },
-          err => console.log(err)
+          } else {
+            this.countriesSearchRecojo = data;
+          }
+        },
+        err => console.log(err)
         )
       }
 
@@ -76,14 +98,49 @@ import { ParamsHoteles, ParamsAutos, URLAutos } from '../../tabs/tabs.models';
           this.toDate,
           this.form,
           this.countriesSearch,
+          this.countriesSearchRecojo
         ).getParams();
         console.log('params ', params);
         return params;
       }
 
       searchAuto(): void {
+        const errors = this.validateTab();
+
+    if (errors.length > 0) {
+      this.openSnackBar(errors.join(" - "))
+      return;
+    }
         const url = this.getUrlAutos();
         this.navigateToResponseUrl(url);
+      }
+
+      openSnackBar(message: string, action: string = "Error") {
+        this._snackBar.open(message, "", {
+          duration: 2000,
+          panelClass: ['mat-toolbar', 'mat-warn']
+        });
+      }
+
+      validateTab() {
+        const errors = [];
+        if (this.form.controls['destino'].value == '') {
+          errors.push("El destino es requerido");
+        }
+        if (this.form.controls['initHour'].value == '') {
+          errors.push("La hora de inicio es requerida");
+        }
+        if (this.form.controls['lastHour'].value == '') {
+          errors.push("La hora de fin es requerida");
+        }
+        if (!this.toDate) {
+          errors.push("La fecha final es requerida");
+        }
+        if (!this.fromDate) {
+          errors.push("La fecha de inicio es requerida");
+        }
+        return errors;
+    
       }
 
       navigateToResponseUrl(url: string): void {
@@ -95,6 +152,10 @@ import { ParamsHoteles, ParamsAutos, URLAutos } from '../../tabs/tabs.models';
       let params = this.getParamsAutos();
       url = new URLAutos(params).getUrl();
       return url;
-  }
+    }
+
+    changeChecked(): void {
+      this.viewInputRecojo = !this.form.controls['checkDevolver'].value;
+    }
 
   }

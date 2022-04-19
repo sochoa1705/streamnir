@@ -36,3 +36,8 @@ export interface ISuggest {
     value?: string
 }
 
+export interface IPackageCountry {
+    code?: string,
+    label?: string,
+    name?: string
+}

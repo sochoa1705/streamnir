@@ -1,27 +1,41 @@
 <div class="boxTab">
     <form class="bg-white" name="form" [formGroup]="form">
         <div class="rowBoxTab">
-            <div class="colBoxtab">
+            <div class="colBoxtab w-30 me-md-1">
                 <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)"
                      class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
                 <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let state of countriesSearch" [value]="state.label">
+                    <mat-option *ngFor="let state of countriesPackageSearch" [value]="state.label">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
                         <span>{{state.label}}</span>
                     </mat-option>
                 </mat-autocomplete>
             </div>
-            <app-calendar [typeValue]="1" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
-            <div class="colBoxTab">
-                <!-- <select formControlName="nationalityCustomer" class="form-select-f">
+            <div class="colBoxTab w-30 me-md-1">
+                <select formControlName="months" class="form-select selectSeguro">
                     <option value="" selected>Seleccione Mes</option>
-
-                    <option *ngFor="let elem of countries" [value]="elem.Iata">
-                      {{ elem.Name }}
+                    <option *ngFor="let elem of months" [value]="elem.code">
+                      {{ elem.label }}
                     </option>
-                  </select> -->
+                </select>
             </div>
-            <div class="colBoxtab">
+            <div class="colBoxTab w-30 me-md-1">
+                <select formControlName="noches" class="form-select selectSeguro">
+                    <option value="" selected>Seleccione Noches</option>
+                    <option *ngFor="let elem of noches" [value]="elem.code">
+                      {{ elem.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="colBoxTab w-30 me-md-1">
+                <select formControlName="themes" class="form-select selectSeguro">
+                    <option value="" selected>Seleccione Tema</option>
+                    <option *ngFor="let elem of themes" [value]="elem.code">
+                      {{ elem.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="colBoxtab w-30 me-md-1">
                 <button class="fullWidht" (click)="searchPaquete()">Buscar</button>
             </div>
         </div>

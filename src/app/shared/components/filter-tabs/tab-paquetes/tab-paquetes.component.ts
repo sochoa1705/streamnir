@@ -13,6 +13,7 @@ import { URLHotel, ParamsHoteles, ParamArmaTuViaje, URLArmaTuViaje, URLPaquete, 
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { EnumCabins, EnumFlightType } from '../../flights/models/flights.interface';
 import { filter } from 'rxjs/operators';
+import { IPackageCountry } from '../tab-vuelos/tab-vuelos.interfaces';
 
 
 
@@ -46,6 +47,11 @@ import { filter } from 'rxjs/operators';
 
   countries: Array<any> = [];
   countriesSearch: Array<any> = [];
+  countriesPackage: Array<any> = [];
+  countriesPackageSearch: Array<any> = [];
+  themes: Array<any> = [];
+  months: Array<any> = [];
+  noches: Array<any> = [{code: '3,4,5', name: 'de 1 a 5 noches'},{code: '6', name: 'de 6 a 10 noches'}];
 
   @Input() set vuelosTab(value: SaveModelVuelos) {
     if (value) {
@@ -62,22 +68,26 @@ import { filter } from 'rxjs/operators';
     private _snackBar: MatSnackBar) {
     this.form = new FormGroup({
       destino: new FormControl(''),
+      themes: new FormControl(''),
+      months: new FormControl(''),
+      noches: new FormControl(''),
     });
     this.getListCountries();
-
+    this.getPackageCountries();
+    this.getThemes();
+    this.getMonths();
    }
 
   autoComplete(e: any, typeSearch = 'FLIGHT_HOTEL') {
     // let elemento = this.origen.nativeElement;
-    this.countriesSearch = [];
+    this.countriesPackageSearch = [];
     let elemento = e.target;
 
     let value = elemento.value;
 
     if (value.length >= 3) {
-      this.countriesSearch = this.countries;
       //this.getListCiudades(value, typeSearch);
-      this.countriesSearch = this.countries.filter( (item) => item.label.toLowerCase().includes(value));
+      this.countriesPackageSearch = this.countriesPackage.filter( (item) => item.label.toLowerCase().includes(value));
     }
   }
 
@@ -97,12 +107,39 @@ import { filter } from 'rxjs/operators';
     )
   }
 
+  getThemes() {
+    this.destineService.getThemes().subscribe(
+      data => {
+        this.themes = data;
+
+      },
+      err => console.log(err)
+    )
+  }
+
+  getMonths() {
+    this.destineService.getFilters().subscribe(
+      data => {
+        this.months = data.months;
+      },
+      err => console.log(err)
+    )
+  }
+
   getListCountries() {
     this.destineService.getDestinyCountriesPaqueteDinamico().subscribe(
       data => {
         console.log('data countries ', data);
         this.countries = data;
       }
+    )
+  }
+
+  getPackageCountries(): void {
+    this.destineService.getPackageCountry().subscribe(data => {
+      this.countriesPackage = data;
+    },
+    err => console.log(err)
     )
   }
 
@@ -119,8 +156,26 @@ import { filter } from 'rxjs/operators';
 }
 
   public searchPaquete() {
+    const errors = this.validateTab();
+
+    if (errors.length > 0) {
+      this.openSnackBar(errors.join(" - "))
+      return;
+    }
     const url = this.getUrlPaquete();
     this.navigateToResponseUrl(url);
+  }
+
+  validateTab() {
+    const errors = [];
+    if (this.form.controls['destino'].value == '') {
+      errors.push("El destino es requerido");
+    }
+    if (this.form.controls['months'].value == '') {
+      errors.push("El mes es requerido");
+    }
+    return errors;
+
   }
 
 
@@ -174,7 +229,10 @@ import { filter } from 'rxjs/operators';
       this.fromDate,
       this.toDate,
       this.form,
-      this.countriesSearch,
+      this.countriesPackageSearch,
+      this.themes,
+      this.months,
+      this.noches
     ).getParams();
     return params;
   }
