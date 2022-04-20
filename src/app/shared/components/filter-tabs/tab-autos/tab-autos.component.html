@@ -1,59 +1,59 @@
-<div class="boxTab">
-  <form class="bg-white" name="form" [formGroup]="form">
-      <div class="rowBoxTab">
-          <div class="colBoxtab">
-              <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)"
-                   class="form-control animated fadeIn" placeholder="Origen" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
-              <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let state of countriesSearch" [value]="state.value" [attr.data-tag]="state.value">
-                      <img class="example-option-img" aria-hidden src="./assets/origen.png">
-                      <span>{{state.value}}</span>
-                  </mat-option>
-              </mat-autocomplete>
-          </div>
-      </div>
-      <div class="rowBoxTab">
-        <div class="colBoxtab">
-          <app-calendar [typeValue]="1" [placeHolder]="'Salida'" class="ignore-template" (changeDate)="changeDateFirst($event)"></app-calendar>
+<form class="bg-white" name="form" [formGroup]="form">
+    <div class="boxTab">
+        <div class="rowBoxTab">
+            <div class="colBoxtab colGrid">
+                <div class="rowTab">
+                    <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)" class="form-control animated fadeIn" placeholder="Origen" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let state of countriesSearch" [value]="state.value" [attr.data-tag]="state.value">
+                            <img class="example-option-img" aria-hidden src="./assets/origen.png">
+                            <span>{{state.value}}</span>
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+                <div class="rowTab width50">
+                    <div class="colTab">
+                        <app-calendar [typeValue]="1" [placeHolder]="'Salida'" class="ignore-template" (changeDate)="changeDateFirst($event)"></app-calendar>
+                    </div>
+                    <div class="colTab">
+                        <input class="form-control" formControlName="initHour" type="time" placeholder="Hora de recogida">
+                    </div>
+                    <div class="colTab">
+                        <app-calendar [typeValue]="1" [placeHolder]="'Retorno'" class="ignore-template" (changeDate)="changeDateLast($event)"></app-calendar>
+                    </div>
+                    <div class="colTab">
+                        <input class="form-control" formControlName="lastHour" type="time" placeholder="Hora de llegada">
+                    </div>
+                </div>
+                <div class="rowTab">
+                    <div class="colTab">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" (change)="changeChecked()" formControlName="checkDevolver" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <label class="form-check-label" for="inlineRadio1">Devolver en el mismo lugar</label>
+                        </div>
+                    </div>
+                    <div class="colTab" *ngIf="viewInputRecojo">
+                        <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="recojo" (keyup)="autocompleteRecojo($event)" class="form-control animated fadeIn" placeholder="Destino">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let state of countriesSearchRecojo" [value]="state.value" [attr.data-tag]="state.value">
+                                <img class="example-option-img" aria-hidden src="./assets/origen.png">
+                                <span>{{state.value}}</span>
+                            </mat-option>
+                        </mat-autocomplete>
+                    </div>
+                    <div class="colTab">
+                        <select formControlName="conductor" class="form-select selectSeguro">
+                          <option value="" selected>Seleccione edad conductor</option>
+                          <option *ngFor="let elem of conductor" [value]="elem.code">
+                            {{ elem.name }}
+                          </option>
+                      </select>
+                    </div>
+                </div>
+            </div>
+            <div class="colBoxtab widthBtn">
+                <button class="fullWidht" (click)="searchAuto()">Buscar</button>
+            </div>
         </div>
-        <div class="colBoxtab">
-          <input class="form-control" formControlName="initHour" type="time" placeholder="Hora de recogida">
-        </div>
-        <div class="colBoxtab">
-          <app-calendar [typeValue]="1" [placeHolder]="'Retorno'" class="ignore-template" (changeDate)="changeDateLast($event)"></app-calendar>
-        </div>
-        <div class="colBoxtab">
-          <input class="form-control" formControlName="lastHour" type="time" placeholder="Hora de llegada">
-        </div>
-        <div class="colBoxtab">
-          <button class="fullWidht" (click)="searchAuto()">Buscar</button>
-        </div>
-      </div>
-      <div class="rowBoxTab">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" (change)="changeChecked()" formControlName="checkDevolver"  name="inlineRadioOptions" id="inlineRadio1"
-              value="option1">
-            <label class="form-check-label" for="inlineRadio1">Devolver en el mismo lugar</label>
-          </div>
-          <div class="colBoxtab" *ngIf="viewInputRecojo">
-            <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="recojo" (keyup)="autocompleteRecojo($event)"
-                   class="form-control animated fadeIn" placeholder="Destino">
-              <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let state of countriesSearchRecojo" [value]="state.value" [attr.data-tag]="state.value">
-                      <img class="example-option-img" aria-hidden src="./assets/origen.png">
-                      <span>{{state.value}}</span>
-                  </mat-option>
-              </mat-autocomplete>
-          </div>
-          <div class="colBoxTab">
-            <select formControlName="conductor" class="form-select selectSeguro">
-              <option value="" selected>Seleccione edad conductor</option>
-              <option *ngFor="let elem of conductor" [value]="elem.code">
-                {{ elem.name }}
-              </option>
-          </select>
-          </div>
-      </div>
-      <!-- <div class="rowBoxTab right text">Haciendo click en "Buscar", acepto las Condiciones Generales</div> -->
-  </form>
-</div>
+    </div>
+</form>
