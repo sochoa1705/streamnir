@@ -546,10 +546,18 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   chkValue(e: any) {
-    console.log(e);
+    console.log("check", e);
 
     if (e === 'optionm-1' || e === 'option-1')
-      this.selectedPay = 'tarjeta';
+      {
+        this.selectedPay = 'tarjeta';
+        console.log("tarjeta");
+        if (this.count == 0) {
+          this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
+          this.sendDataLayerCheckoutOption(this.formShop.value);
+          this.count++;
+        }
+    }
     else
       this.selectedPay = 'safety';
 
@@ -571,7 +579,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   optionPay(e: any, i: any, ids: any) {
     console.log(i);
-
+    console.log("agentes");
+    if (this.count == 0) {
+      this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
+      this.sendDataLayerCheckoutOption(this.formShop.value);
+      this.count++;
+    }
     this.banca = i;
     this.id = ids;
 
@@ -649,8 +662,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   generateInsuranceReserve(data: any) {
-    this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
-    this.sendDataLayerCheckoutOption(this.formShop.value);
+    
     let dataShop = this.formShop.value;
     console.log("dataShopForm:", dataShop)
     this._loaderSubjectService.showText('SE ESTA GENERANDO SU RESERVA!');
@@ -690,6 +702,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       event: 'nmv.seguros_eecga3_checkoutOption',
       ecommerce: ecommerce
     }
+    console.log("modelTaggingcheckoutOption", modelTaggingcheckoutOption)
     TaggingService.tagCheckoutOption(modelTaggingcheckoutOption);
   }
 
@@ -1378,9 +1391,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     if (!pattern.test(event.key))
       event.preventDefault();
-    if (this.count == 0) {
-
-    }
+    
 
     this.count++;
   }
@@ -1444,6 +1455,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       pp = this.llenarProduct(safe0Json, resultJson);
       products.push(pp);
     }
+    console.log("modelTaggingCheckout:", modelTaggingCheckout)
     TaggingService.tagMostrarCheckout(modelTaggingCheckout);
   }
   llenarProduct(safe0Json: any, resultJson: any): ProductAddToCart {
@@ -1550,5 +1562,14 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     //console.log("promedio:", promedio) 
     //console.log("length:", resultJson.passengers.length) 
     return (promedio / resultJson.passengers.length);
+  }
+  onchangeBanco(){
+    console.log("banco")
+     if (this.count == 0) {
+          this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
+          this.sendDataLayerCheckoutOption(this.formShop.value);
+          this.count++;
+        }
+    
   }
 }
