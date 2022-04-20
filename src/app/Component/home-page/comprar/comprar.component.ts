@@ -837,37 +837,47 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           const fechasalida = this.resultJson.fromDate.split('/');
           const fecharetorno = this.resultJson.toDate.split('/');
 
+          //debugger
+
+
+          const currentDate = moment();
+          const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
+
+          const missingDays = fromDate.diff(currentDate, 'days');
+
           const model = {
             event: 'nmv.seguros_eecga3_purchase',
             ecommerce: {
               currencyCode: this.safe0Json.monedaLista,
               purchase: {
                 actionField: {
-                  id: this.reservation.Reserva,
+                  id: String(this.reservation.Reserva),
                   revenue: this.safe0Json.precioEmisionLocal,
                   cupon: ''
                 },
-                products: {
+                products: [{
                   name: this.safe0Json.producto,
                   id: this.safe0Json.idProducto,
                   price: this.safe0Json.precioEmisionLocal,
                   brand: 'AssistCard',
                   category: 'Seguros',
-                  category2: this.safe0Json.clase === 'best' ? 'El mejor plan' : 'Fecha Flexible',
+                  category2: this.safe0Json.clase === 'best' ? 'El mejor plan' : 'Fecha flexible',
                   variant: this.resultJson.destinyString.descripcion_destino,
                   quantity: this.resultJson.passengers.length,
                   metric10: this.getPromedioEdades(this.resultJson),
-                  dimension9: this.asistenciaMedicaMonto,
+                  dimension9: String(this.asistenciaMedicaMonto),
                   dimension11: `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
                   dimension12: `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
-                  metric11: this.getDiasAnticipacion(this.resultJson),
+                  metric11: missingDays,
                   metric12: Number(this.resultJson.days),
-                  dimension16: 'PE-PERU',
-                  dimension17: `${this.resultJson.destinyString.id_destino}-${this.resultJson.destinyString.descripcion_destino}`
-                }
+                  dimension16: 'Perú',
+                  dimension17: this.resultJson.destinyString.descripcion_destino
+                }]
               }
             }
           }
+
+          //metric11: range.asDuration("days"),
 
           console.log("Tag purchase amtes");
           console.log(JSON.stringify(model));
@@ -1007,7 +1017,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           })['Valor'];
 
-          this.asistenciaMedicaMonto = this.asistMedic.includes('USD') ? Number(this.asistMedic.substring(4)) : this.asistMedic;
+          this.asistenciaMedicaMonto = this.asistMedic.includes('USD') ? Number(this.asistMedic.substring(4).replace('.', '')) : this.asistMedic;
         }
 
 

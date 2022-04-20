@@ -36,6 +36,7 @@ const routes: Routes = [
       { path: 'confirmacion/:id', component: HomeComponent },
       { path: 'seguros', loadChildren: () => import('./seguros/seguros.module').then(m => m.SegurosModule) },
       { path: 'vuelos', loadChildren: () => import('./vuelos/vuelos.module').then(m => m.VuelosModule) },
+      { path: 'preferencias', loadChildren: () => import('./preferencias/preferencias/preferencias.module').then(m => m.PreferenciasModule) },
       { path: 'nuestra-empresa', component: NuestraEmpresaComponent },
       { path: 'nuestras-agencias', component: NuestrasAgenciasComponent },
       { path: 'libro-reclamaciones', component: LibroReclamacionesComponent },

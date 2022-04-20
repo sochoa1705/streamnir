@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NavigationEnd, Router } from '@angular/router';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import * as bootstrap from 'bootstrap';
+import * as moment from 'moment';
 import { combineLatest, fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -105,6 +106,14 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.taggingPageView();
     //this.recoverPasswordForm = this.createRecoverPasswordForm();
+
+    //debugger
+
+    // const currentDate = moment();
+    // const fromDate = moment('29/04/2022', 'DD/MM/YYYY');
+
+    // const missingDays = fromDate.diff(currentDate, 'days');
+
 
   }
 

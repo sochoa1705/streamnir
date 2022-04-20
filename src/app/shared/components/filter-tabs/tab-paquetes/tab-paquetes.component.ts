@@ -19,15 +19,15 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
 
 
 @Component({
-    selector: 'app-tab-paquetes',
-    templateUrl: './tab-paquetes.component.html',
-    styleUrls: ['./tab-paquetes.component.scss']
-  })
-  export class TabPaquetesComponent {
-  
-    @ViewChild('popUp') popUpElement:PopUpPasajeroComponent | undefined;
+  selector: 'app-tab-paquetes',
+  templateUrl: './tab-paquetes.component.html',
+  styleUrls: ['./tab-paquetes.component.scss']
+})
+export class TabPaquetesComponent {
 
-    form!: FormGroup;
+  @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
+
+  form!: FormGroup;
   fromDate: NgbDate | null
   citys: Array<any> = [];
   origen: any;
@@ -36,9 +36,9 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
 
   distribution = '';
 
-  distributionObject:DistributionObjectA;
+  distributionObject: DistributionObjectA;
 
-  
+
   hoveredDate: NgbDate | null = null;
 
   private _vuelosTab: SaveModelVuelos;
@@ -52,7 +52,7 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
   countriesPackageSearch: Array<any> = [];
   themes: Array<any> = [];
   months: Array<any> = [];
-  noches: Array<any> = [{code: '3,4,5', name: 'de 1 a 5 noches'},{code: '6', name: 'de 6 a 10 noches'}];
+  noches: Array<any> = [{ code: '3,4,5', name: 'de 1 a 5 noches' }, { code: '6', name: 'de 6 a 10 noches' }];
 
   @Input() set vuelosTab(value: SaveModelVuelos) {
     if (value) {
@@ -65,9 +65,9 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
     return this._vuelosTab;
   }
 
-  constructor(private calendar: NgbCalendar,private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
+  constructor(private calendar: NgbCalendar, private destineService: DestinyService, public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar,
-    public inputValidator : InputValidationService) {
+    public inputValidator: InputValidationService) {
     this.form = new FormGroup({
       destino: new FormControl(''),
       themes: new FormControl(''),
@@ -78,7 +78,7 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
     this.getPackageCountries();
     this.getThemes();
     this.getMonths();
-   }
+  }
 
   autoComplete(e: any, typeSearch = 'FLIGHT_HOTEL') {
     // let elemento = this.origen.nativeElement;
@@ -89,16 +89,16 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
 
     if (value.length >= 1) {
       //this.getListCiudades(value, typeSearch);
-      this.countriesPackageSearch = this.countriesPackage.filter( (item) => item.label.toLowerCase().includes(value.toLowerCase()));
+      this.countriesPackageSearch = this.countriesPackage.filter((item) => item.label.toLowerCase().includes(value.toLowerCase()));
     }
   }
 
-  get viajesForm(){
+  get viajesForm() {
     return this.form.get("destino")?.value;
   }
 
 
-  
+
   getListCiudades(e: any, typeSearch = 'FLIGHT_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
@@ -140,21 +140,21 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
     this.destineService.getPackageCountry().subscribe(data => {
       this.countriesPackage = data;
     },
-    err => console.log(err)
+      err => console.log(err)
     )
   }
 
 
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
- }
+  }
 
- openSnackBar(message: string, action: string = "Error") {
-  this._snackBar.open(message, "", {
-    duration: 2000,
-    panelClass: ['mat-toolbar', 'mat-warn']
-  });
-}
+  openSnackBar(message: string, action: string = "Error") {
+    this._snackBar.open(message, "", {
+      duration: 2000,
+      panelClass: ['mat-toolbar', 'mat-warn']
+    });
+  }
 
   public searchPaquete() {
     // const errors = this.validateTab();
@@ -180,12 +180,12 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
   // }
 
 
-  public getUrlAlojamiento(){
-      let url = ''
-      let params = this.getParamsAlojamiento();
-      this.insertTag(params);
-      url = new URLHotel(params, this.distribution).getUrl();
-      return url;
+  public getUrlAlojamiento() {
+    let url = ''
+    let params = this.getParamsAlojamiento();
+    this.insertTag(params);
+    url = new URLHotel(params, this.distribution).getUrl();
+    return url;
   }
 
   public getUrlPaquete() {
@@ -196,15 +196,15 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
   }
 
 
-  insertTag(params:any){
+  insertTag(params: any) {
 
-    const getCodigoIata = (id:string)=>{
+    const getCodigoIata = (id: string) => {
       return id.split("::")[1];
     }
-  
+
     const nombre = `${getCodigoIata(params.idDestino)}`;
-    const diasAnticipacion = moment( params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
-    const duracionViaje =  moment( params.endDate, "DD/MM/YYYY").diff(moment( params.startDate, "DD/MM/YYYY"), 'days');
+    const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
+    const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
 
 
     const model = new ModelTaggingHoteles(
@@ -215,17 +215,17 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
       this.distributionObject.ninos,
       0,
       this.distributionObject.habitacion,
-      moment( params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      moment( params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
       diasAnticipacion,
       duracionViaje
     )
-    
+
     TaggingService.buscarHoteles(model);
   }
 
 
-  getParamsAlojamiento(){
+  getParamsAlojamiento() {
     let params = new ParamPaquete(
       this.fromDate,
       this.toDate,
@@ -243,5 +243,5 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
     this.toDate = value.toDate;
     this.fromDate = value.fromDate;
   }
-  
-  }
+
+}

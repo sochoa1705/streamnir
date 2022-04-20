@@ -125,26 +125,29 @@
     </ng-container>
     <!-- END MAILING -->
 
-    <!-- Modal Usuario Verificado -->
-    <div class="modal" data-backdrop="false" id="ModalUsuarioVerificado" tabindex="-1" aria-labelledby="ModalUsuarioVerificadoLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="iconCenter">
-                        <img src="./assets/modal/usuario-verificado.svg" alt="">
-                    </div>
-                    <div class="titleVerifica">¡Perfecto!</div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+</mat-drawer-container>
+
+
+<!-- Modal Usuario Verificado -->
+<div class="modal" data-backdrop="false" id="ModalUsuarioVerificado" tabindex="-1" aria-labelledby="ModalUsuarioVerificadoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="iconCenter">
+                    <img src="./assets/modal/usuario-verificado.svg" alt="">
                 </div>
-                <div class="modal-body">
-                    <div class="descripText">
-                        Su usuario fue activado con éxito.
-                    </div>
-                    <div class="action">
-                        <button (click)="aceptConfirm()" type="button" class="">Aceptar</button>
-                    </div>
+                <div class="titleVerifica">¡Perfecto!</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="descripText">
+                    Su usuario fue activado con éxito.
+                </div>
+                <div class="action">
+                    <button (click)="aceptConfirm()" type="button" class="">Aceptar</button>
                 </div>
             </div>
         </div>
     </div>
-</mat-drawer-container>
+</div>
