@@ -87,7 +87,7 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
 
     let value = elemento.value;
 
-    if (value.length >= 3) {
+    if (value.length >= 1) {
       //this.getListCiudades(value, typeSearch);
       this.countriesPackageSearch = this.countriesPackage.filter( (item) => item.label.toLowerCase().includes(value.toLowerCase()));
     }
@@ -131,7 +131,6 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
   getListCountries() {
     this.destineService.getDestinyCountriesPaqueteDinamico().subscribe(
       data => {
-        console.log('data countries ', data);
         this.countries = data;
       }
     )
@@ -158,27 +157,27 @@ import { InputValidationService } from '../../../../Services/inputValidation.ser
 }
 
   public searchPaquete() {
-    const errors = this.validateTab();
+    // const errors = this.validateTab();
 
-    if (errors.length > 0) {
-      this.openSnackBar(errors.join(" - "))
-      return;
-    }
+    // if (errors.length > 0) {
+    //   this.openSnackBar(errors.join(" - "))
+    //   return;
+    // }
     const url = this.getUrlPaquete();
     this.navigateToResponseUrl(url);
   }
 
-  validateTab() {
-    const errors = [];
-    if (this.form.controls['destino'].value == '') {
-      errors.push("El destino es requerido");
-    }
-    if (this.form.controls['months'].value == '') {
-      errors.push("El mes es requerido");
-    }
-    return errors;
+  // validateTab() {
+  //   const errors = [];
+  //   if (this.form.controls['destino'].value == '') {
+  //     errors.push("El destino es requerido");
+  //   }
+  //   if (this.form.controls['months'].value == '') {
+  //     errors.push("El mes es requerido");
+  //   }
+  //   return errors;
 
-  }
+  // }
 
 
   public getUrlAlojamiento(){
