@@ -197,7 +197,7 @@ export class PlansComponent implements OnInit {
   }
 
   data(id: any) {
-    
+    this.sendDataLayerDetalleBeneficio(id, this.resultJson);
     console.log(id);
     this.pop = id;
     this.listCoverage(id);
@@ -256,7 +256,7 @@ export class PlansComponent implements OnInit {
         dimension12: resultJson.passengers.toDate,
         metric11: this.getDiasAnticipacion(resultJson),
         metric12: Number(this.resultJson.days),
-        dimension16: 'PE-PERU',
+        dimension16: 'PERU',
         dimension17: resultJson.destinyString.descripcion_destino,
       });
       products.push(pp);
@@ -315,7 +315,7 @@ export class PlansComponent implements OnInit {
         dimension11: resultJson.destinyString.fromDate,
         dimension12: resultJson.passengers.toDate,
         metric11: this.getDiasAnticipacion(resultJson),
-        metric12: this.getDuracionViaje(resultJson)
+        metric12:  Number(this.resultJson.days),
       }
       index++;
       products.push(pp);
@@ -329,8 +329,7 @@ export class PlansComponent implements OnInit {
     console.log("card: ", card);
     console.log("resultJson: ", this.resultJson);
     this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
-    this.sendDataLayerAddToCart(card, this.resultJson);
-    this.sendDataLayerDetalleBeneficio(card, this.resultJson);
+    this.sendDataLayerAddToCart(card, this.resultJson);    
     let service = this.plansAC.find((e: any) => {
       if (e.idProducto === card.idProducto) {
         return e
@@ -391,7 +390,7 @@ export class PlansComponent implements OnInit {
         dimension11: resultJson.destinyString.fromDate,
         dimension12: resultJson.passengers.toDate,
         metric11: this.getDiasAnticipacion(resultJson),
-        metric12: this.getDuracionViaje(resultJson)
+        metric12:  Number(this.resultJson.days),
       });
       impressions.push(ii);
       index++;
