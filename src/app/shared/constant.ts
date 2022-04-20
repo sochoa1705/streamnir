@@ -51,9 +51,9 @@ export enum ENDPOINT_API {
 
   LOCATION_SEARCH_COUNTRIES = 'resources/autocomplete/allCountries',
 
-  LOCATION_SEARCH_COUNTRIES_PACKAGE = 'resources/autocomplete/nm_viajes/holidayPackageCountries',
-  LOCATION_SEARCH_THEMES_PACKAGE = 'resources/autocomplete/nm_viajes/holidayPackageThemes',
-  RESOURCES_FILTERS = 'resources-internal/cruises/nm_viajes/filters',
+  LOCATION_SEARCH_COUNTRIES_PACKAGE = 'resources/autocomplete/nmviajes/holidayPackageCountries',
+  LOCATION_SEARCH_THEMES_PACKAGE = 'resources/autocomplete/nmviajes/holidayPackageThemes',
+  RESOURCES_FILTERS = 'resources-internal/cruises/nmviajes/filters',
 
   //CARDPAYMENT
   CARD_PAYMENT = 'v1/api/Insurance',
