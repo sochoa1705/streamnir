@@ -837,7 +837,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           const fechasalida = this.resultJson.fromDate.split('/');
           const fecharetorno = this.resultJson.toDate.split('/');
 
-          debugger
+          //debugger
 
 
           const currentDate = moment();
