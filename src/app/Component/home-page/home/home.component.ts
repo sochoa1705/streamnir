@@ -6,7 +6,7 @@ import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-p
 import { NMRequest } from 'src/app/Models/base/NMRequest';
 import { environment } from 'src/environments/environment';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
-import { concatMap, filter, mergeMap, switchMap, take } from 'rxjs/operators';
+import { concatMap, filter, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { combineLatest, fromEvent } from 'rxjs';
 import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,6 +15,7 @@ import * as bootstrap from 'bootstrap';
 import { FlightService } from 'src/app/api/api-nmviajes/services';
 import { Guid } from 'src/app/shared/utils';
 import { EGalleryCode, IGalleryImage, IGalleryService } from 'src/app/Services/presenter/data-page-presenter.models';
+import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 
 @Component({
   selector: 'app-home',
@@ -41,7 +42,8 @@ export class HomeComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _accountsService: AccountsService,
-    private _flightService: FlightService
+    private _flightService: FlightService,
+    public loaderSubjectService: LoaderSubjectService
   ) { }
 
   ngOnInit(): void {
@@ -52,17 +54,25 @@ export class HomeComponent implements OnInit {
   }
 
   getConfirmacion() {
+
     this._activatedRoute.params.pipe(
       filter(params => params.id),
+      tap(()=>this.initLoad()),
       switchMap(param => this._accountsService.confirmationAccount(param.id))
     ).subscribe(resp => {
+      this.loaderSubjectService.closeLoader();
       if (resp.IsSuccess) {
         this._accountsService.dispatchConfirmate(true);
         this.toggleConfirmation();
       }
     })
   }
-
+  
+  initLoad(){
+    const textSend = 'Cargando'
+    this.loaderSubjectService.showText(textSend)
+    this.loaderSubjectService.showLoader()
+  }
 
   getGallery(){
     this.dataPagePresenterService.getDataGallery().subscribe(data=>{
