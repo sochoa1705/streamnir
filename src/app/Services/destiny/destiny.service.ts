@@ -53,8 +53,8 @@ export class DestinyService {
 
   getPackageCountry(): Observable<any> {
     let urlApiPaquete: string = environment.urlPaqueteDinamicoNmViajes;
-    let urlApi = `${urlApiPaquete}${ENDPOINT_API.LOCATION_SEARCH_COUNTRIES_PACKAGE}?lang=ES&_=1650245018201`;
-    return this.http.jsonp(urlApi, 'callback=test');
+    let urlApi = `${urlApiPaquete}${ENDPOINT_API.LOCATION_SEARCH_COUNTRIES_PACKAGE}?lang=ES&_=1650392708010`;
+    return this.http.jsonp(urlApi, 'callback=jQuery112402763568406322572_1650392708009');
   }
 
   getThemes(): Observable<any> {

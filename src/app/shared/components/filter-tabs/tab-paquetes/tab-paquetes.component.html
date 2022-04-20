@@ -13,7 +13,7 @@
                 </div>
                 <div class="colElement">
                     <select formControlName="noches" class="form-select selectSeguro">
-                        <option value="" selected>Seleccione Noches</option>
+                        <option value="" selected>Número de noches</option>
                         <option *ngFor="let elem of noches" [value]="elem.code">
                           {{ elem.name }}
                         </option>
@@ -23,7 +23,7 @@
             <div class="colGrid">
                 <div class="colElement">
                     <select formControlName="months" class="form-select selectSeguro">
-                        <option value="" selected>Seleccione Mes</option>
+                        <option value="" selected>Todos los meses</option>
                         <option *ngFor="let elem of months" [value]="elem.code">
                           {{ elem.label }}
                         </option>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="colElement">
                     <select formControlName="themes" class="form-select selectSeguro">
-                        <option value="" selected>Seleccione Tema</option>
+                        <option value="" selected>Temas</option>
                         <option *ngFor="let elem of themes" [value]="elem.code">
                           {{ elem.name }}
                         </option>
