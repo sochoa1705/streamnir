@@ -58,7 +58,7 @@ export class PlansComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
     this.result = localStorage.getItem('Datasafe');
     this.resultJson = JSON.parse(this.result);
     this.dollar = localStorage.getItem('tipoCambio');
@@ -327,8 +327,7 @@ export class PlansComponent implements OnInit {
   shop(card: any) {
     console.log("plansAC: ", this.plansAC);
     console.log("card: ", card);
-    console.log("resultJson: ", this.resultJson);
-    this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
+    console.log("resultJson: ", this.resultJson);    
     this.sendDataLayerAddToCart(card, this.resultJson);    
     let service = this.plansAC.find((e: any) => {
       if (e.idProducto === card.idProducto) {
