@@ -1510,7 +1510,7 @@
 
                     <div class="row">
                       <div class="col-6 offset-3 py-4 lessViewMob">
-                        <select formControlName="bankPay" class="selectBank form-select-f"
+                        <select formControlName="bankPay" class="selectBank form-select-f" (change)="onchangeBanco()"
                           [ngClass]="{isvalid : validatePaymentMethodForm('bankPay')}">
 
                           <option value="" selected>Selecciona tu banco</option>
@@ -1805,7 +1805,7 @@
                 <div class="col-6 viewMobileWidth pe-0">
                   <div class="form-check form-check-inline me-0">
                     <input class="form-check-input" type="checkbox" formControlName="chkPolity" id="chkPolity"
-                      value="option1">
+                      value="option1" (change)="onChangeProtectionPolicies()">
 
                     <label class="form-check-label" for="chkPolity">He leído y acepto las
                       <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#politicaModal">políticas de protección

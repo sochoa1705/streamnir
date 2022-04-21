@@ -436,20 +436,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             this.isVisa = true;
           }
 
-          const model = {
-            event: 'nmv.seguros_eecga3_checkoutOption',
-            ecommerce: {
-              checkout_option: {
-                actionField: {
-                  step: 2,
-                  option: `Tarjeta de Credito o Debito - ${typeCard}`
-                }
-              }
-            }
-          }
-
-          TaggingService.tagSelectionOfPaymentMethod(model);
-
         } else {
           console.log('La tarjeta ingresada es inválida');
 
@@ -460,9 +446,23 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   startContactDetails(): void {
-    console.log('startContactDetails');
+    const option: string = this.selectedPay === 'tarjeta' ? 'Tarjeta de Credito o Debito' : `SafetyPay - ${this.banca ? 'Banca por Internet' : 'Agencias/Agentes'}`;
 
     const model = {
+      event: 'nmv.seguros_eecga3_checkoutOption',
+      ecommerce: {
+        checkout_option: {
+          actionField: {
+            step: 2,
+            option: option
+          }
+        }
+      }
+    }
+
+    TaggingService.tagSelectionOfPaymentMethod(model);
+
+    const model2 = {
       event: 'nmv.seguros_eecga3_checkout',
       ecommerce: {
         checkout: {
@@ -473,7 +473,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }
     }
 
-    TaggingService.tagStartOfContactData(model);
+    TaggingService.tagStartOfContactData(model2);
   }
 
   showDataContacto: Boolean = true;
@@ -546,12 +546,31 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   chkValue(e: any) {
-    console.log(e);
+    const model = {
+      event: 'nmv.seguros_eecga3_checkout',
+      ecommerce: {
+        checkout: {
+          actionField: {
+            step: 2
+          }
+        }
+      }
+    }
+
+    TaggingService.tagStartOfPaymentMethods(model);
 
     if (e === 'optionm-1' || e === 'option-1')
       this.selectedPay = 'tarjeta';
     else
       this.selectedPay = 'safety';
+  }
+
+  id: any = "banca";
+
+  optionPay(e: any, i: any, ids: any) {
+
+    this.banca = i;
+    this.id = ids;
 
     const model = {
       event: 'nmv.seguros_eecga3_checkout',
@@ -565,29 +584,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
 
     TaggingService.tagStartOfPaymentMethods(model);
-  }
-
-  id: any = "banca";
-
-  optionPay(e: any, i: any, ids: any) {
-    console.log(i);
-
-    this.banca = i;
-    this.id = ids;
-
-    const model = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
-      ecommerce: {
-        checkout_option: {
-          actionField: {
-            step: 2,
-            option: `SafetyPay - ${i ? 'Banca por Internet' : 'Agencias/Agentes'}`
-          }
-        }
-      }
-    }
-
-    TaggingService.tagSelectionOfPaymentMethod(model);
   }
 
   buyInsurance(): void {
@@ -624,20 +620,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     TaggingService.tagNationalitySelection(model);
 
-    const model2 = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
-      ecommerce: {
-        checkout_option: {
-          actionField: {
-            step: 3,
-            option: this.showInvoiceData ? 'Factura Electrónica' : 'Boleta Electrónica'
-          }
-        }
-      }
-    }
-
-    TaggingService.tagVoucherSelection(model2);
-
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
     this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson['passengers'].length));
 
@@ -649,8 +631,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   generateInsuranceReserve(data: any) {
-    this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
-    this.sendDataLayerCheckoutOption(this.formShop.value);
+
     let dataShop = this.formShop.value;
     console.log("dataShopForm:", dataShop)
     this._loaderSubjectService.showText('SE ESTA GENERANDO SU RESERVA!');
@@ -690,6 +671,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       event: 'nmv.seguros_eecga3_checkoutOption',
       ecommerce: ecommerce
     }
+    console.log("modelTaggingcheckoutOption", modelTaggingcheckoutOption)
     TaggingService.tagCheckoutOption(modelTaggingcheckoutOption);
   }
 
@@ -1378,9 +1360,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     if (!pattern.test(event.key))
       event.preventDefault();
-    if (this.count == 0) {
 
-    }
 
     this.count++;
   }
@@ -1444,6 +1424,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       pp = this.llenarProduct(safe0Json, resultJson);
       products.push(pp);
     }
+    console.log("modelTaggingCheckout:", modelTaggingCheckout)
     TaggingService.tagMostrarCheckout(modelTaggingCheckout);
   }
   llenarProduct(safe0Json: any, resultJson: any): ProductAddToCart {
@@ -1550,5 +1531,38 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     //console.log("promedio:", promedio) 
     //console.log("length:", resultJson.passengers.length) 
     return (promedio / resultJson.passengers.length);
+  }
+
+  onchangeBanco(): void {
+
+    const model = {
+      event: 'nmv.seguros_eecga3_checkout',
+      ecommerce: {
+        checkout: {
+          actionField: {
+            step: 2
+          }
+        }
+      }
+    }
+
+    TaggingService.tagStartOfPaymentMethods(model);
+  }
+
+  onChangeProtectionPolicies(): void {
+    const model = {
+      event: 'nmv.seguros_eecga3_checkoutOption',
+      ecommerce: {
+        checkout_option: {
+          actionField: {
+            step: 3,
+            option: this.showInvoiceData ? 'Factura Electrónica' : 'Boleta Electrónica'
+          }
+        }
+      }
+    }
+
+    TaggingService.tagVoucherSelection(model);
+
   }
 }

@@ -1,23 +1,13 @@
 
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
-import * as bootstrap from 'bootstrap';
-import * as moment from 'moment';
 import { combineLatest, fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-//import { ConfirmDialogComponent } from './Component/confirm-dialog/confirm-dialog.component';
-import { AccountsService } from './Services/accounts.service';
 import { TaggingService } from './Services/analytics/tagging.service';
-import { NotificationService } from './Services/notification.service';
 import { PopupService } from './Services/pop-up/popup.service';
 import { LoaderSubjectService } from './shared/components/loader/service/loader-subject.service';
-import { Guid } from './shared/utils';
-import { ValidatorsService } from './shared/validators/validators.service';
 
 
 export class LoginPerson {
@@ -47,7 +37,7 @@ export class AppComponent implements OnInit {
 
   @ViewChild("closeModalSesion") closeModalSesion: ElementRef;
   @ViewChild("closeModalNewAccount") closeModalNewAccount: ElementRef;
-
+  
 
 
   message: string = '';

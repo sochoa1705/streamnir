@@ -87,7 +87,7 @@ export class TabPaquetesComponent {
 
     let value = elemento.value;
 
-    if (value.length >= 3) {
+    if (value.length >= 1) {
       //this.getListCiudades(value, typeSearch);
       this.countriesPackageSearch = this.countriesPackage.filter((item) => item.label.toLowerCase().includes(value.toLowerCase()));
     }
@@ -167,17 +167,17 @@ export class TabPaquetesComponent {
     this.navigateToResponseUrl(url);
   }
 
-  validateTab() {
-    const errors = [];
-    if (this.form.controls['destino'].value == '') {
-      errors.push("El destino es requerido");
-    }
-    if (this.form.controls['months'].value == '') {
-      errors.push("El mes es requerido");
-    }
-    return errors;
+  // validateTab() {
+  //   const errors = [];
+  //   if (this.form.controls['destino'].value == '') {
+  //     errors.push("El destino es requerido");
+  //   }
+  //   if (this.form.controls['months'].value == '') {
+  //     errors.push("El mes es requerido");
+  //   }
+  //   return errors;
 
-  }
+  // }
 
 
   public getUrlAlojamiento() {

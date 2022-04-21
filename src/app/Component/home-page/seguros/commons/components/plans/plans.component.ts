@@ -66,26 +66,12 @@ export class PlansComponent implements OnInit {
     let lcadena: any = localStorage.getItem('businessunit');
     this.unidadNegocio = JSON.parse(lcadena);
 
-
-    // if(localStorage.getItem('planes')) {
-    //   let planesAC: any = localStorage.getItem('planes')
-    //   this.plansAC = JSON.parse(planesAC)
-
-    // } else {
-    //   if (localStorage.getItem('safe0')) {
-    //     localStorage.removeItem('safe0');
-    //     this.listPlansAC()
-    //   } else {
-    //     this.listPlansAC()
-    //   }
-    // }
-
-    if (localStorage.getItem('safe0')) {
+    if (localStorage.getItem('safe0'))
       localStorage.removeItem('safe0');
-      this.getPlansAC()
-    }
-    else
-      this.getPlansAC()
+
+    this.getPlansAC()
+
+    this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
   }
 
   bestPlan() {
@@ -197,7 +183,7 @@ export class PlansComponent implements OnInit {
   }
 
   data(id: any) {
-    
+    this.sendDataLayerDetalleBeneficio(id, this.resultJson);
     console.log(id);
     this.pop = id;
     this.listCoverage(id);
@@ -241,26 +227,26 @@ export class PlansComponent implements OnInit {
     let index: number = 0;
     ecommerce.currencyCode = plansAC.monedaLocal;
     //plansAC.map((element: any) => {
-      pp = ({
-        name: plansAC.nombreProducto,
-        id: plansAC.codProducto,
-        price: plansAC.precioEmisionLocal,
-        brand: 'AssistCard',
-        category: 'Seguros',
-        category2: index === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-        variant: resultJson.destinyString.descripcion_destino,
-        quantity: resultJson.passengers.length,
-        metric10: this.getPromedioEdades(resultJson),
-        dimension9: this.asistMedic,
-        dimension11: resultJson.destinyString.fromDate,
-        dimension12: resultJson.passengers.toDate,
-        metric11: this.getDiasAnticipacion(resultJson),
-        metric12: Number(this.resultJson.days),
-        dimension16: 'PE-PERU',
-        dimension17: resultJson.destinyString.descripcion_destino,
-      });
-      products.push(pp);
-      index++;
+    pp = ({
+      name: plansAC.nombreProducto,
+      id: plansAC.codProducto,
+      price: plansAC.precioEmisionLocal,
+      brand: 'AssistCard',
+      category: 'Seguros',
+      category2: index === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+      variant: resultJson.destinyString.descripcion_destino,
+      quantity: resultJson.passengers.length,
+      metric10: this.getPromedioEdades(resultJson),
+      dimension9: this.asistMedic,
+      dimension11: resultJson.destinyString.fromDate,
+      dimension12: resultJson.passengers.toDate,
+      metric11: this.getDiasAnticipacion(resultJson),
+      metric12: Number(this.resultJson.days),
+      dimension16: 'PERU',
+      dimension17: resultJson.destinyString.descripcion_destino,
+    });
+    products.push(pp);
+    index++;
     //});
     TaggingService.tagMostrarAddToCart(modelTaggingAddToCart);
   }
@@ -301,24 +287,24 @@ export class PlansComponent implements OnInit {
     }
     let index: number = 0;
     //plansAC.forEach((element: any) => {
-      pp = {
-        name: plansAC.nombreProducto,
-        id: plansAC.codProducto,
-        price: plansAC.precioEmisionLocal,
-        brand: 'Assist Card',
-        category: 'Seguros',
-        category2: index === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-        variant: resultJson.destinyString.descripcion_destino,
-        quantity: resultJson.passengers.length,
-        metric10: this.getPromedioEdades(resultJson),
-        dimension9: this.asistMedic,
-        dimension11: resultJson.destinyString.fromDate,
-        dimension12: resultJson.passengers.toDate,
-        metric11: this.getDiasAnticipacion(resultJson),
-        metric12: this.getDuracionViaje(resultJson)
-      }
-      index++;
-      products.push(pp);
+    pp = {
+      name: plansAC.nombreProducto,
+      id: plansAC.codProducto,
+      price: plansAC.precioEmisionLocal,
+      brand: 'Assist Card',
+      category: 'Seguros',
+      category2: index === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+      variant: resultJson.destinyString.descripcion_destino,
+      quantity: resultJson.passengers.length,
+      metric10: this.getPromedioEdades(resultJson),
+      dimension9: this.asistMedic,
+      dimension11: resultJson.destinyString.fromDate,
+      dimension12: resultJson.passengers.toDate,
+      metric11: this.getDiasAnticipacion(resultJson),
+      metric12: Number(this.resultJson.days),
+    }
+    index++;
+    products.push(pp);
     //});
     console.log("modelTaggingDetalleBeneficio", modelTaggingDetalleBeneficio)
     TaggingService.tagMostrarDetalleBeneficio(modelTaggingDetalleBeneficio);
@@ -328,9 +314,7 @@ export class PlansComponent implements OnInit {
     console.log("plansAC: ", this.plansAC);
     console.log("card: ", card);
     console.log("resultJson: ", this.resultJson);
-    this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
     this.sendDataLayerAddToCart(card, this.resultJson);
-    this.sendDataLayerDetalleBeneficio(card, this.resultJson);
     let service = this.plansAC.find((e: any) => {
       if (e.idProducto === card.idProducto) {
         return e
@@ -373,7 +357,7 @@ export class PlansComponent implements OnInit {
     };
     let index: number = 0;
     ecommerce.currencyCode = plansAC[0].monedaLocal;
-   
+
     plansAC.forEach((element: any) => {
       ii = ({
         name: element.nombreProducto,
@@ -391,7 +375,7 @@ export class PlansComponent implements OnInit {
         dimension11: resultJson.destinyString.fromDate,
         dimension12: resultJson.passengers.toDate,
         metric11: this.getDiasAnticipacion(resultJson),
-        metric12: this.getDuracionViaje(resultJson)
+        metric12: Number(this.resultJson.days),
       });
       impressions.push(ii);
       index++;
