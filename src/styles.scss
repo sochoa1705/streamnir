@@ -1894,6 +1894,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             border: 0.5px solid #009AED !important;
             box-shadow: none;
         }
+        @media (max-width: 640px) {
+            border-left: 0.5px solid #E4E5E7!important;
+        }
     }
     &Izq {
         border-radius: 0 3px 3px 0 !important;
@@ -1901,8 +1904,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         border-left: 0px !important;
         &:focus {
             border: 0.5px solid #009AED !important;
-            ;
             box-shadow: none;
+        }
+        @media (max-width: 640px) {
+            border-left: 0.5px solid #E4E5E7!important;
         }
     }
 }

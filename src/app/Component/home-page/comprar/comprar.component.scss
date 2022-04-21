@@ -29,7 +29,7 @@
     }
     &-horizontal-stepper-header {
         flex-direction: column;
-        width: 30%;
+        width: 25%;
         padding: 0;
     }
     &-stepper-horizontal-line {
@@ -39,6 +39,14 @@
         /* min-width: 32px; */
         margin-top: -20px;
         background: linear-gradient(90deg, rgba(181, 10, 39, 1) 10%, rgba(207, 209, 211, 1) 100%);
+    }
+}
+
+.fecNacTab {
+    @media (max-width: 640px) {
+        .col-2, .col-6 {
+            padding-right: 0;
+        }
     }
 }
 

@@ -15,6 +15,12 @@
     }
 }
 
+.invisible {
+    @media (max-width: 640px) {
+        display: none;
+    }
+}
+
 .tachado {
     border-bottom: 1px solid #df0c30;
     width: 70px;
@@ -53,7 +59,7 @@
         background: #54d834;
         border: 0;
         border-radius: 20px;
-        &.best{
+        &.best {
             background-color: #f00;
         }
     }
@@ -175,7 +181,7 @@
     }
 }
 
-p.text{
+p.text {
     font-family: Montserrat;
     font-weight: bold;
     font-size: 25px;
@@ -185,6 +191,7 @@ p.text{
     color: $gray;
     width: 100%;
 }
-.mat-spinner{
+
+.mat-spinner {
     margin: 0 auto
 }
