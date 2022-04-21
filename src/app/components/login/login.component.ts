@@ -68,6 +68,18 @@ export class LoginComponent implements OnInit{
   ) { }
   ngOnInit(): void {
     // this.taggingPageView();
+
+
+    
+    this._authService.authState.subscribe((user) => {
+
+      if (user.provider == "GOOGLE") {
+        this.saveSocialAccount(user.firstName, user.lastName, user.email, "G", user.id, user.photoUrl)
+      }
+
+    });
+
+    
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
@@ -80,6 +92,66 @@ export class LoginComponent implements OnInit{
     this.loaderSubjectService.showLoader();
   }
 
+
+  saveSocialAccount(Firstname: string, FatherLastname: string, Email: string, SocialNetwork: "G" | "F", IdSocialNetwork: string, image: string) {
+
+    this.initLoading();
+
+    const payload = {
+      TrackingCode: Guid(),
+      MuteExceptions: environment.muteExceptions,
+      Caller: {
+        Company: "Agil",
+        Application: "Interagencias"
+      },
+      Parameter: {
+        Firstname,
+        FatherLastname,
+        MotherLastname: "",
+        Email,
+        Password: "",
+        IsPerson: true,
+        Ruc: "",
+        BusinessName: "",
+        SocialNetwork,
+        IdSocialNetwork
+      }
+    };
+
+    this._accountService.saveAccount(payload).subscribe({
+      next: (response) => {
+        this.closeLoading();
+        const isSuccess = response.Result.IsSuccess;
+
+        if (isSuccess) {
+          this._accountService.guardarStorage(response.Result, image);
+          this.closeModal();
+          this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
+            verticalPosition: 'top',
+            duration: 2000
+          });
+        } else {
+          this.notification.showNotificacion("Error", response.Result.Message , 10);
+        }
+
+
+        //this.loaderSubjectService.closeLoader()
+      },
+      error: (err) => {
+        this.closeLoading();
+        this.notification.showNotificacion("Error", "Error del servidor", 10);
+
+        //this.loaderSubjectService.closeLoader()
+      },
+      complete: () => { }
+    });
+
+  }
+
+
+  signOut(): void {
+    this._authService.signOut();
+  }
 
   
   loadUsuario() {
