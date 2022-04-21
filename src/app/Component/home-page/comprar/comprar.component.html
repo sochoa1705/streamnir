@@ -35,10 +35,11 @@
 
     <!-- VERSION MOBILE -->
     <div class="row stepCard d-md-none d-block">
-
       <mat-stepper [linear]="isLinear" #stepper label="Informacion de pasajeros"
         (selectionChange)="selectionChange($event)">
-        <mat-step [stepControl]="firstFormGroup" [completed]="step1Complete">
+
+        <mat-step [stepControl]="firstFormGroup">
+          <!-- <mat-step [stepControl]="firstFormGroup" [completed]="step1Complete"> -->
           <!-- DETALLE DE TU VIAJE -->
           <div>
             <h2 *ngIf="safe0Json.detalleViaje" class=" mt-3">Detalle de tu viaje</h2>
@@ -418,8 +419,10 @@
             </div>
 
             <div formArrayName="customers">
+
               <div [formGroupName]="i" *ngFor="let customer of customers.controls; let i = index"
-                class="ro rowMobileCard">
+                class="row rowMobileCard">
+
                 <div class="card-body card_pasajero">
                   <div *ngIf="this.safe0Json['reservaVuelos']; else vuelosTitle">
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -437,7 +440,8 @@
                           d="M12.8033 9.69668C11.9864 8.87982 11.0141 8.27511 9.95329 7.90904C11.0895 7.12649 11.8359 5.81684 11.8359 4.33594C11.8359 1.94511 9.89083 0 7.5 0C5.10917 0 3.16406 1.94511 3.16406 4.33594C3.16406 5.81684 3.91052 7.12649 5.04674 7.90904C3.9859 8.27511 3.01359 8.87982 2.19671 9.69668C0.780147 11.1133 0 12.9967 0 15H1.17188C1.17188 11.5107 4.01065 8.67188 7.5 8.67188C10.9893 8.67188 13.8281 11.5107 13.8281 15H15C15 12.9967 14.2199 11.1133 12.8033 9.69668ZM7.5 7.5C5.75534 7.5 4.33594 6.08063 4.33594 4.33594C4.33594 2.59125 5.75534 1.17188 7.5 1.17188C9.24466 1.17188 10.6641 2.59125 10.6641 4.33594C10.6641 6.08063 9.24466 7.5 7.5 7.5Z"
                           fill="#009AED" />
                       </svg> &nbsp; Pasajero {{ i + 1 }}
-                      <strong> {{ this.resultJson['aniosNacimiento'][i].edad }} años</strong>
+                      (<strong> {{ resultJson['aniosNacimiento'][i].edad }} años</strong>
+                      )
                     </h4>
 
                     <div style="background:red" *ngIf="showAdulto === i" (click)="showDatosPasajero()">
@@ -447,15 +451,15 @@
 
                   <div class="agregarAdultoPas" *ngIf="showAdulto !== i" (click)="showDatosPasajero(i)">
                     <div class="textAgregar">
-                      Agrega tus datos {{i}}
+                      Agrega tus datos {{ i + 1 }}
                     </div>
+
                     <div>
                       <img src="./assets/comprar/flecha-der.png" alt="">
                     </div>
                   </div>
 
-
-                  <div class="row rowMobileCard hideMobile" [class.activoBox]="showAdulto === i">
+                  <div class="row rowMobileCard" [class.activoBox]="showAdulto === i">
                     <div class="col-6 viewMobileWidth">
                       <label>Nombres</label>
 
@@ -463,125 +467,431 @@
                         (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
                         (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje."
                         (OnPush)="onFocus()">
-
-
                     </div>
 
-                    <div class="col-6 viewMobileWidth">
-                      <label for="lastname1">Apellidos</label>
-
-                      <input class="form-control" type="text" formControlName="lastNameCustomer"
-                        (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
-                        (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje.">
-                    </div>
-
-                    <div class="clearfix"></div>
                   </div>
-                  <div class="row rowMobileCard hideMobile" [class.activoBox]="showAdulto == i">
-                    <div class="col-6 viewMobileWidth">
-                      <label for="names">Fecha de nacimiento</label>
+
+                  <input class="form-control" type="text" formControlName="lastNameCustomer"
+                    (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
+                    placeholder="El que figura en el documento de viaje.">
+                </div>
+
+                <div class="row rowMobileCard" [class.activoBox]="showAdulto == i">
+                  <div class="col-6 viewMobileWidth">
+                    <label>Fecha de nacimiento</label>
+
+                    <div class="row">
+                      <div class="col-2">
+                        <input class="form-control" minlength="1" maxlength="2" max="31" mask="0*"
+                          formControlName="dayCustomer" type="text" (keypress)="allowNumeric($event)"
+                          (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)">
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-6">
+                    <select formControlName="monthCustomer" class="form-select-f">
+                      <option value="" selected>Seleccione</option>
+                      <option *ngFor="let elem of months" [value]="elem.value">{{ elem.name }}</option>
+                    </select>
+                  </div>
+
+                  <div class="col-4">
+                    <select formControlName="yearCustomer" class="form-select-f">
+                      <option value="" selected>Seleccione</option>
+
+                      <option value="{{this.resultJson['aniosNacimiento'][i].anio}}">
+                        {{this.resultJson['aniosNacimiento'][i].anio}}</option>
+                      <option value="{{this.resultJson['aniosNacimiento'][i].anio - 1}}">
+                        {{this.resultJson['aniosNacimiento'][i].anio - 1}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-6 viewMobileWidth">
+                  <label for="names">Nacionalidad</label>
+
+                  <select formControlName="nationalityCustomer" class="form-select-f">
+                    <option value="" selected>Seleccione nacionalidad</option>
+
+                    <option *ngFor="let elem of countries" [value]="elem.Iata">
+                      {{ elem.Name }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="row rowMobileCard" [class.activoBox]="showAdulto == i">
+                  <div class="col-3 viewMobileWidth">
+                    <label for="names">Tipo de documento</label>
+
+                    <select formControlName="typeDocCustomer" class="form-select-f"
+                      (change)="onChangeOfficialDocument(i)">
+                      <option value="" selected>Seleccione</option>
+                      <option value="DNI">DNI</option>
+                      <option value="PSP">Pasaporte</option>
+                      <option value="CEX">C. Extranjería</option>
+                    </select>
+                  </div>
+
+                  <div class="col-3 viewMobileWidth">
+                    <label for="lastname">N° de documento</label>
+                    <input class="form-control" formControlName="numDocCustomer" type="text"
+                      (keypress)="allowOfficialDocument($event, i)" (paste)="denyPaste($event)"
+                      (drop)="denyDrop($event)" name="ndocumento">
+                  </div>
+
+                  <div class="col-6 viewMobileWidth">
+                    <label for="names">Sexo</label>
+
+                    <div class="optionSel">
+                      <div class="form-check form-check-inline optionLeft">
+                        <input class="form-check-input sex" formControlName="sexCustomer" value="masculino" type="radio"
+                          id="sexMasc{{i}}">
+                        <label class="form-check-label" for="sexMasc{{i}}">Masculino</label>
+                      </div>
+
+                      <div class="form-check form-check-inline optionRight">
+                        <input class="form-check-input sex" formControlName="sexCustomer" value="femenino" type="radio"
+                          id="sexFem{{i}}">
+                        <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row rowMobileCard" [class.activoBox]="showAdulto == i">
+                  <div class="col-12 text-center mt-3">
+                    <button (click)="savePasajero(i)" class="px-5">Guardar</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- INFORMACION DE PASAJEROS MOVIL -->
+              <div class="row rowMobileCard ">
+                <div class="col-12 contentCenterMobile">
+                  <button mat-button matStepperNext class="px-5" (click)="step1()">Continuar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-step>
+
+        <mat-step [stepControl]="secondFormGroup">
+          <div class="row">
+            <div class="col-12 medioPagoMobile">
+              <div class="card cardPagoMobile">
+                <div class="card-header shadow-none">
+                  <h2>Selecciona el medio de pago</h2>
+                  <span>Selecciona tu método de pago (el pago se llevará a cabo una vez presiones el
+                    botón pagar
+                    al final del formulario).
+                  </span>
+                </div>
+
+                <div class="card-body">
+                  <div class="row card_ py-4 justify-content-evenly cardMob" *ngIf="mobile">
+                    <input *ngFor="let chk of metodoPago" type="radio" name="select" id="{{ chk.name }}"
+                      (click)="chkValue(chk.name)" [checked]="chk.checked">
+
+                    <label *ngFor="let chk of metodoPago" for="{{ chk.name }}"
+                      class="option {{ chk.name }} col-4 offset-1 py-3 lessMarginLeft boxMob">
+                      <div class="dot"></div>
+                      <img class="marginL" src="./assets{{ chk.img }}" alt="">
+                      <span>{{ chk.text }}</span>
+                    </label>
+
+                    <div class="textEmision">Emisión automática después del pago.</div>
+                  </div>
+
+                  <div class="boxCardPas" *ngIf="selectedPay == 'tarjeta'; else safety2">
+                    <!-- TARJETA -->
+
+                    <!-- END TARJETA -->
+                  </div>
+
+                  <ng-template #safety2>
+                    <!-- MOVILE -->
+                    <div class="col-5 offset-1 py-3 textSafMob">
+                      <p class="textSafety">Seleccione una opción para pagar</p>
+                    </div>
+
+                    <div class="row btnSafe">
+                      <div class="col-4 viewMobileWidth">
+                        <a class="btnBlue" [class.active]="id === 'banca'" value="true"
+                          (click)="optionPay($event, true, 'banca');">Banca por internet o
+                          Móvil
+                        </a>
+                      </div>
+
+                      <div class="col-4 viewMobileWidth">
+                        <a class="btnBlue" value="false" [class.active]="id === 'movil'"
+                          (click)="optionPay($event, false,'movil')">Agencias/Agentes</a>
+                      </div>
+                    </div>
+
+                    <ng-container *ngIf="banca; else agencia">
+                      <div class="row boxAgencia">
+                        <div class="d-flex justify-content-center imgBanca">
+                          <img src="./assets/comprar/pago/_bcp.png" alt="">
+                          <img src="./assets/comprar/pago/_scotiabank.png" alt="">
+                          <img src="./assets/comprar/pago/_interbank.png" alt="">
+                          <img src="./assets/comprar/pago/_bbva.png" alt="">
+                        </div>
+                      </div>
 
                       <div class="row">
-                        <div class="col-2">
-                          <input class="form-control" minlength="1" maxlength="2" max="31" mask="0*"
-                            formControlName="dayCustomer" type="text" keypress)="allowNumeric($event)"
-                            (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)">
+                        <div class="col-6 offset-3 py-4 lessViewMob" *ngIf="mobile">
+                          <select class="selectBank" formControlName="bankPay" placeholder="Selecciona tu banco">
+                            <option *ngFor="let b of banks" value="{{b.value}}">{{b.name}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row py-4 marginLat">
+                        <div class="col-6 ">
+                          <a class="btnRed" href="#">Emisión automática después del pago.
+                          </a>
                         </div>
 
+                        <div class="col-6 text-end">
+                          <a href="#" data-bs-toggle="modal" data-bs-target="#ModalBlue">¿Como
+                            pagar con SafetyPay online?</a>
+                        </div>
+                      </div>
+
+                      <div class="row boxLimite">
+                        <div class="titleLimite">Tiempo Límite</div>
+                        <div class="descripLimite">
+                          Recuerda que una vez generado tu código safetypay, deberás pagar dentro de las
+                          <strong>próximas 2 horas</strong>. De lo contrario la reserva será cancelada.
+                        </div>
+                      </div>
+                    </ng-container>
+
+                    <ng-template #agencia>
+                      <div class="row boxAgencia">
+                        <div class="d-flex justify-content-center imgBanca">
+                          <img src="./assets/comprar/pago/_bcp.png" alt="">
+                          <img src="./assets/comprar/pago/_scotiabank.png" alt="">
+                          <img src="./assets/comprar/pago/_interbank.png" alt="">
+                          <img src="./assets/comprar/pago/_bbva.png" alt="">
+                          <img src="./assets/comprar/pago/_wester.png" alt="">
+                        </div>
+                        <div class="d-flex justify-content-center imgBanca">
+                          <img src="./assets/comprar/pago/_arequipa.png" alt="">
+                          <img src="./assets/comprar/pago/_huancayo.png" alt="">
+                          <img src="./assets/comprar/pago/_trujillo.png" alt="">
+                          <img src="./assets/comprar/pago/_tacna.png" alt="">
+                          <img src="./assets/comprar/pago/_tambo.png" alt="">
+                        </div>
+
+                        <div class="row">
+                          <div class="col-12 text-end">
+                            <a href="#">¿Como pagar con SafetyPay online?</a>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ng-template>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 ">
+              <div *ngIf="safe0Json.detailPay === 'safe'; else detail" class="accordion"
+                id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <a class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
+                      aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                      Ver detalles
+                    </a>
+                  </h2>
+                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                    aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                      <div class="row">
                         <div class="col-6">
-                          <select formControlName="monthCustomer" class="form-select-f">
-                            <option value="" selected>Seleccione</option>
-                            <option *ngFor="let elem of months" [value]="elem.value">{{ elem.name }}</option>
-                          </select>
+                          <span class="textAcor">1 Adulto(s)</span>
                         </div>
-
-                        <div class="col-4">
-                          <select formControlName="yearCustomer" class="form-select-f">
-                            <option value="" selected>Seleccione</option>
-
-                            <option value="{{this.resultJson['aniosNacimiento'][i].anio}}">
-                              {{this.resultJson['aniosNacimiento'][i].anio}}
-                            </option>
-
-                            <option value="{{this.resultJson['aniosNacimiento'][i].anio - 1}}">
-                              {{this.resultJson['aniosNacimiento'][i].anio - 1}}
-                            </option>
-                          </select>
+                        <div class="col-6 text-end">
+                          <span class="price_old">PEN 370,35</span>
+                          <span class="price_new">PEN 314,80</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-7">
+                          <span class="textDesc">Descuento</span>
+                        </div>
+                        <div class="col-5 text-end">
+                          <span class="price_Desc">PEN -55,55</span>
                         </div>
 
                         <div class="clearfix"></div>
                       </div>
                     </div>
-
-                    <div class="col-6 viewMobileWidth">
-                      <label for="names">Nacionalidad</label>
-
-                      <select formControlName="nationalityCustomer" class="form-select-f">
-                        <option value="" selected>Seleccione nacionalidad</option>
-
-                        <option *ngFor="let elem of countries" [value]="elem.Iata">
-                          {{ elem.Name }}
-                        </option>
-                      </select>
-                    </div>
-
-                    <div class="clearfix"></div>
                   </div>
 
-                  <div class="row rowMobileCard hideMobile" [class.activoBox]="showAdulto == i">
-                    <div class="col-3 viewMobileWidth">
-                      <label for="names">Tipo de documento</label>
-
-                      <select formControlName="typeDocCustomer" class="form-select-f"
-                        (change)="onChangeOfficialDocument(i)">
-                        <option value="" selected>Seleccione</option>
-                        <option value="DNI">DNI</option>
-                        <option value="PSP">Pasaporte</option>
-                        <option value="CEX">C. Extranjería</option>
-                      </select>
+                  <div class="row totalItem">
+                    <div class="col-7">
+                      <span class="price_end">TOTAL A PAGAR</span>
                     </div>
-
-                    <div class="col-3 viewMobileWidth">
-                      <label for="lastname">N° de documento</label>
-                      <input class="form-control" formControlName="numDocCustomer" type="text"
-                        (keypress)="allowOfficialDocument($event, i)" (paste)="denyPaste($event)"
-                        (drop)="denyDrop($event)" name="ndocumento">
+                    <div class="col-5 text-end">
+                      $
+                      <span class="price_end_number">314.80</span>
                     </div>
-
-                    <div class="col-6 viewMobileWidth">
-                      <label for="names">Sexo</label>
-
-                      <div class="optionSel">
-                        <div class="form-check form-check-inline optionLeft">
-                          <input class="form-check-input sex" formControlName="sexCustomer" value="masculino"
-                            type="radio" id="sexMasc{{i}}">
-                          <label class="form-check-label" for="sexMasc{{i}}">Masculino</label>
-                        </div>
-
-                        <div class="form-check form-check-inline optionRight">
-                          <input class="form-check-input sex" formControlName="sexCustomer" value="femenino"
-                            type="radio" id="sexFem{{i}}">
-                          <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
-                        </div>
-                      </div>
-                    </div>
-
                     <div class="clearfix"></div>
-                  </div>
-
-                  <div class="row rowMobileCard hideMobile" [class.activoBox]="showAdulto == i">
-                    <div class="col-12 text-center mt-3">
-                      <button (click)="savePasajero(i)" class="px-5">Guardar</button>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- INFORMACION DE PASAJEROS MOVIL -->
 
-          <!-- DATOS CONTACTO MOVIL-->
+          <div class="row rowMobileCard marginTop20">
+            <div class="col-12 contentCenterMobile">
+              <button mat-button matStepperNext class="px-5" (click)="step1()">Continuar</button>
+            </div>
+          </div>
+        </mat-step>
+
+        <mat-step>
           <div class="row">
+            <div class="col-12 medioPagoMobile">
+              <div class="card cardPagoMobile">
+                <div class="card-body">
+                  <div class="boxCardPas">
+                    <!-- TARJETA -->
+                    <div class="row py-5">
+                      <div class="col-12 text-center pago">
+                        <img src="./assets/comprar/_visa.png" alt="">
+                        <img src="./assets/comprar/_master.png" alt="">
+                        <img src="./assets/comprar/_american.png" alt="">
+                        <img src="./assets/comprar/_dinners.png" alt="">
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+
+                    <div class="row card_pasajero rowMobileCard">
+                      <div class="col-6 viewMobileWidth">
+                        <label>Número de tarjeta</label>
+                        <input class="form-control" placeholder="Ingrese el número de tarjeta." mask="0*" type="text"
+                          (blur)="validarTarjeta()">
+                      </div>
+
+                      <div class="col-6 viewMobileWidth">
+                        <label for="lastname">Titular de la tarjeta</label>
+                        <input class="form-control" placeholder="El que figura en la tarjeta." type="text"
+                          (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
+                          (drop)="denyDrop($event)" name="lastname">
+                      </div>
+
+                      <div class="clearfix"></div>
+                    </div>
+
+                    <div class="row  card_pasajero rowMobileCard">
+                      <div class="col-6 viewMobileWidth">
+                        <div class="row">
+                          <div class="col-5">
+                            <label for="names">Vencimiento</label>
+                            <input class="form-control" mask='99/99' placeholder="MM/AA" type="text" name="names"
+                              (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
+                              (drop)="denyDrop($event)">
+                          </div>
+
+                          <div class="col-6">
+                            <label>Código de seguridad</label>
+                            <input class="form-control" placeholder="CVC" mask="0*" minlength="3" maxlength="3"
+                              type="password" (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
+                              (drop)="denyDrop($event)" type="text">
+                          </div>
+
+                          <div class="col-1 colBoxInfo">
+                            <div class="iconInfo">
+                              <img src="./assets/comprar/card/info.png" alt="">
+                            </div>
+                          </div>
+
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+
+                      <div class="col-6 viewMobileWidth">
+                        <div class="row">
+                          <div class="col-5">
+                            <label for="names">Tipo de doc</label>
+                            <input class="form-control" placeholder="" type="text" name="names">
+                          </div>
+
+                          <div class="col-7">
+                            <label for="lastname">N° de documento</label>
+                            <input class="form-control" placeholder="Ingresar N°" type="text" name="lastname"
+                              (keypress)="allowOfficialDocument($event, 99)" (paste)="denyPaste($event)"
+                              (drop)="denyDrop($event)">
+                          </div>
+
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+
+                      <div class="clearfix"></div>
+                    </div>
+
+                    <div class="row card_pasajero rowMobileCard">
+                      <div class="col-6 viewMobileWidth">
+                        <label for="names">Cuotas</label>
+                        <input class="form-control" placeholder="Sin cuotas" type="text" name="names">
+                      </div>
+
+                      <div class="col-6 viewMobileWidth">
+                        <label for="lastname">Ciudad de facturación</label>
+                        <input class="form-control" placeholder="Del titular de la tarjeta." type="text"
+                          (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
+                          (drop)="denyDrop($event)" name="lastname">
+                      </div>
+
+                      <div class="clearfix"></div>
+                    </div>
+
+                    <div class="row card_pasajero rowMobileCard">
+                      <div class="col-6 viewMobileWidth">
+                        <label for="names">Dirección</label>
+                        <input class="form-control" placeholder="Ingrese la dirección" type="text" name="names">
+                      </div>
+
+                      <div class="col-6 textDire viewMobileWidth">
+                        <label for="names"></label>
+                        <div>Emisión en max 24hrs aprox.</div>
+                      </div>
+
+                      <div class="clearfix"></div>
+                    </div>
+                    <!-- END TARJETA -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row rowMobileCard ">
+              <div class="col-12 contentCenterMobile">
+                <button mat-button matStepperNext class="px-5" (click)="step1()">Continuar</button>
+              </div>
+            </div>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <!-- DATOS CONTACTO MOVIL-->
+          <div class="row marginTop20">
             <div class="col-12">
               <div class="card">
                 <div class="card-header shadow-none" (click)="showDataContact()">
@@ -770,309 +1080,7 @@
           </div>
           <!-- DATOS CONTACTO MOVIL -->
         </mat-step>
-
-        <mat-step [stepControl]="secondFormGroup">
-          <div class="row">
-            <div class="col-12 medioPagoMobile">
-              <div class="card cardPagoMobile">
-                <div class="card-header shadow-none">
-                  <h2>Selecciona el medio de pago</h2>
-                  <span>Selecciona tu método de pago (el pago se llevará a cabo una vez presiones el
-                    botón pagar
-                    al final del formulario).
-                  </span>
-                </div>
-
-                <div class="card-body">
-                  <div class="row card_ py-4 justify-content-evenly cardMob" *ngIf="mobile">
-                    <input *ngFor="let chk of metodoPago" type="radio" name="select" id="{{ chk.name }}"
-                      (click)="chkValue(chk.name)" [checked]="chk.checked">
-
-                    <label *ngFor="let chk of metodoPago" for="{{ chk.name }}"
-                      class="option {{ chk.name }} col-4 offset-1 py-3 lessMarginLeft boxMob">
-                      <div class="dot"></div>
-                      <img class="marginL" src="./assets{{ chk.img }}" alt="">
-                      <span>{{ chk.text }}</span>
-                    </label>
-
-                    <div class="textEmision">Emisión automática después del pago.</div>
-                  </div>
-
-                  <div class="boxCardPas" *ngIf="selectedPay == 'tarjeta'; else safety2">
-                    <!-- TARJETA -->
-
-                    <!-- END TARJETA -->
-                  </div>
-
-                  <ng-template #safety2>
-                    <!-- MOVILE -->
-                    <div class="col-5 offset-1 py-3 textSafMob">
-                      <p class="textSafety">Seleccione una opción para pagar</p>
-                    </div>
-
-                    <div class="row btnSafe">
-                      <div class="col-4 viewMobileWidth">
-                        <a class="btnBlue" [class.active]="id === 'banca'" value="true"
-                          (click)="optionPay($event, true, 'banca');">Banca por internet o
-                          Móvil
-                        </a>
-                      </div>
-
-                      <div class="col-4 viewMobileWidth">
-                        <a class="btnBlue" value="false" [class.active]="id === 'movil'"
-                          (click)="optionPay($event, false,'movil')">Agencias/Agentes</a>
-                      </div>
-                    </div>
-
-                    <ng-container *ngIf="banca; else agencia">
-                      <div class="row boxAgencia">
-                        <div class="d-flex justify-content-center imgBanca">
-                          <img src="./assets/comprar/pago/_bcp.png" alt="">
-                          <img src="./assets/comprar/pago/_scotiabank.png" alt="">
-                          <img src="./assets/comprar/pago/_interbank.png" alt="">
-                          <img src="./assets/comprar/pago/_bbva.png" alt="">
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-6 offset-3 py-4 lessViewMob" *ngIf="mobile">1
-                          <select class="selectBank" formControlName="bankPay" placeholder="Selecciona tu banco">
-                            <option *ngFor="let b of banks" value="{{b.value}}">{{b.name}}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="row py-4 marginLat">
-                        <div class="col-6 ">
-                          <a class="btnRed" href="#">Emisión automática después del pago.
-                          </a>
-                        </div>
-
-                        <div class="col-6 text-end">
-                          <a href="#" data-bs-toggle="modal" data-bs-target="#ModalBlue">¿Como
-                            pagar con SafetyPay online?</a>
-                        </div>
-                      </div>
-
-                      <div class="row boxLimite">
-                        <div class="titleLimite">Tiempo Límite</div>
-                        <div class="descripLimite">
-                          Recuerda que una vez generado tu código safetypay, deberás pagar dentro de las
-                          <strong>próximas 2 horas</strong>. De lo contrario la reserva será cancelada.
-                        </div>
-                      </div>
-                    </ng-container>
-
-                    <ng-template #agencia>
-                      <div class="row boxAgencia">
-                        <div class="d-flex justify-content-center imgBanca">
-                          <img src="./assets/comprar/pago/_bcp.png" alt="">
-                          <img src="./assets/comprar/pago/_scotiabank.png" alt="">
-                          <img src="./assets/comprar/pago/_interbank.png" alt="">
-                          <img src="./assets/comprar/pago/_bbva.png" alt="">
-                          <img src="./assets/comprar/pago/_wester.png" alt="">
-                        </div>
-                        <div class="d-flex justify-content-center imgBanca">
-                          <img src="./assets/comprar/pago/_arequipa.png" alt="">
-                          <img src="./assets/comprar/pago/_huancayo.png" alt="">
-                          <img src="./assets/comprar/pago/_trujillo.png" alt="">
-                          <img src="./assets/comprar/pago/_tacna.png" alt="">
-                          <img src="./assets/comprar/pago/_tambo.png" alt="">
-                        </div>
-
-                        <div class="row">
-                          <div class="col-12 text-end">
-                            <a href="#">¿Como pagar con SafetyPay online?</a>
-                          </div>
-                        </div>
-                      </div>
-                    </ng-template>
-                  </ng-template>
-                </div>
-
-              </div>
-            </div>
-
-            <div class="clearfix"></div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 ">
-              <div *ngIf="safe0Json.detailPay === 'safe'; else detail" class="accordion"
-                id="accordionPanelsStayOpenExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <a class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
-                      aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                      Ver detalles
-                    </a>
-                  </h2>
-                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-                    aria-labelledby="panelsStayOpen-headingOne">
-                    <div class="accordion-body">
-                      <div class="row">
-                        <div class="col-6">
-                          <span class="textAcor">1 Adulto(s)</span>
-                        </div>
-                        <div class="col-6 text-end">
-                          <span class="price_old">PEN 370,35</span>
-                          <span class="price_new">PEN 314,80</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="row">
-                        <div class="col-7">
-                          <span class="textDesc">Descuento</span>
-                        </div>
-                        <div class="col-5 text-end">
-                          <span class="price_Desc">PEN -55,55</span>
-                        </div>
-
-                        <div class="clearfix"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row totalItem">
-                    <div class="col-7">
-                      <span class="price_end">TOTAL A PAGAR</span>
-                    </div>
-                    <div class="col-5 text-end">
-                      $
-                      <span class="price_end_number">314.80</span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </mat-step>
-
-        <mat-step>
-          <div class="row">
-            <div class="col-12 medioPagoMobile">
-              <div class="card cardPagoMobile">
-                <div class="card-body">
-                  <div class="boxCardPas">
-                    <!-- TARJETA -->
-                    <div class="row py-5">
-                      <div class="col-12 text-center pago">
-                        <img src="./assets/comprar/_visa.png" alt="">
-                        <img src="./assets/comprar/_master.png" alt="">
-                        <img src="./assets/comprar/_american.png" alt="">
-                        <img src="./assets/comprar/_dinners.png" alt="">
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-
-                    <div class="row card_pasajero rowMobileCard">
-                      <div class="col-6 viewMobileWidth">
-                        <label>Número de tarjeta</label>
-                        <input class="form-control" placeholder="Ingrese el número de tarjeta." mask="0*" type="text"
-                          (blur)="validarTarjeta()">
-                      </div>
-
-                      <div class="col-6 viewMobileWidth">
-                        <label for="lastname">Titular de la tarjeta</label>
-                        <input class="form-control" placeholder="El que figura en la tarjeta." type="text"
-                          (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
-                          (drop)="denyDrop($event)" name="lastname">
-                      </div>
-
-                      <div class="clearfix"></div>
-                    </div>
-
-                    <div class="row  card_pasajero rowMobileCard">
-                      <div class="col-6 viewMobileWidth">
-                        <div class="row">
-                          <div class="col-5">
-                            <label for="names">Vencimiento</label>
-                            <input class="form-control" mask='99/99' placeholder="MM/AA" type="text" name="names"
-                              (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
-                              (drop)="denyDrop($event)">
-                          </div>
-
-                          <div class="col-6">
-                            <label>Código de seguridad</label>
-                            <input class="form-control" placeholder="CVC" mask="0*" minlength="3" maxlength="3"
-                              type="password" (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
-                              (drop)="denyDrop($event)" type="text">
-                          </div>
-
-                          <div class="col-1 colBoxInfo">
-                            <div class="iconInfo">
-                              <img src="./assets/comprar/card/info.png" alt="">
-                            </div>
-                          </div>
-
-                          <div class="clearfix"></div>
-                        </div>
-                      </div>
-
-                      <div class="col-6 viewMobileWidth">
-                        <div class="row">
-                          <div class="col-5">
-                            <label for="names">Tipo de doc</label>
-                            <input class="form-control" placeholder="" type="text" name="names">
-                          </div>
-
-                          <div class="col-7">
-                            <label for="lastname">N° de documento</label>
-                            <input class="form-control" placeholder="Ingresar N°" type="text" name="lastname"
-                              (keypress)="allowOfficialDocument($event, 99)" (paste)="denyPaste($event)"
-                              (drop)="denyDrop($event)">
-                          </div>
-
-                          <div class="clearfix"></div>
-                        </div>
-                      </div>
-
-                      <div class="clearfix"></div>
-                    </div>
-
-                    <div class="row card_pasajero rowMobileCard">
-                      <div class="col-6 viewMobileWidth">
-                        <label for="names">Cuotas</label>
-                        <input class="form-control" placeholder="Sin cuotas" type="text" name="names">
-                      </div>
-
-                      <div class="col-6 viewMobileWidth">
-                        <label for="lastname">Ciudad de facturación</label>
-                        <input class="form-control" placeholder="Del titular de la tarjeta." type="text"
-                          (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
-                          (drop)="denyDrop($event)" name="lastname">
-                      </div>
-
-                      <div class="clearfix"></div>
-                    </div>
-
-                    <div class="row card_pasajero rowMobileCard">
-                      <div class="col-6 viewMobileWidth">
-                        <label for="names">Dirección</label>
-                        <input class="form-control" placeholder="Ingrese la dirección" type="text" name="names">
-                      </div>
-
-                      <div class="col-6 textDire viewMobileWidth">
-                        <label for="names"></label>
-                        <div>Emisión en max 24hrs aprox.</div>
-                      </div>
-
-                      <div class="clearfix"></div>
-                    </div>
-                    <!-- END TARJETA -->
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="clearfix"></div>
-          </div>
-        </mat-step>
       </mat-stepper>
-
-      <div class="clearfix"></div>
     </div>
     <!-- VERSION MOBILE -->
 
@@ -1086,8 +1094,6 @@
               fill="#B50A27" />
           </svg> Vuelve a la página anterior</a>
       </div>
-
-      <div class="clearfix"></div>
     </div>
 
     <div class="row pt-md-3">
@@ -1134,7 +1140,8 @@
                       <path
                         d="M12.8033 9.69668C11.9864 8.87982 11.0141 8.27511 9.95329 7.90904C11.0895 7.12649 11.8359 5.81684 11.8359 4.33594C11.8359 1.94511 9.89083 0 7.5 0C5.10917 0 3.16406 1.94511 3.16406 4.33594C3.16406 5.81684 3.91052 7.12649 5.04674 7.90904C3.9859 8.27511 3.01359 8.87982 2.19671 9.69668C0.780147 11.1133 0 12.9967 0 15H1.17188C1.17188 11.5107 4.01065 8.67188 7.5 8.67188C10.9893 8.67188 13.8281 11.5107 13.8281 15H15C15 12.9967 14.2199 11.1133 12.8033 9.69668ZM7.5 7.5C5.75534 7.5 4.33594 6.08063 4.33594 4.33594C4.33594 2.59125 5.75534 1.17188 7.5 1.17188C9.24466 1.17188 10.6641 2.59125 10.6641 4.33594C10.6641 6.08063 9.24466 7.5 7.5 7.5Z"
                         fill="#009AED" />
-                    </svg> &nbsp; Pasajero {{ i + 1 }} &nbsp; (<strong> {{ this.resultJson['aniosNacimiento'][i].edad }}
+                    </svg> &nbsp; Pasajero {{ i + 1 }} &nbsp; (<strong> {{ this.resultJson['aniosNacimiento'][i].edad
+                      }}
                       años</strong>)
                   </h4>
                 </ng-template>
@@ -1299,10 +1306,7 @@
               </div>
             </div>
           </div>
-
-          <div class="clearfix"></div>
         </div>
-
         <!-- END CDR -->
 
         <!-- MEDIO DE PAGO DESKTOP -->
@@ -1390,7 +1394,8 @@
                             <img src="./assets/comprar/card/info.png" alt="">
                             <div class="boxTooltip2">
                               <div class="descripTooltip">El código de seguridad esta localizado en los 3 últimos
-                                dígitos detras de tu tarjeta</div>
+                                dígitos
+                                detras de tu tarjeta</div>
                             </div>
                           </div>
                         </div>
@@ -1510,7 +1515,7 @@
 
                     <div class="row">
                       <div class="col-6 offset-3 py-4 lessViewMob">
-                        <select formControlName="bankPay" class="selectBank form-select-f" (change)="onchangeBanco()"
+                        <select formControlName="bankPay" class="selectBank form-select-f"
                           [ngClass]="{isvalid : validatePaymentMethodForm('bankPay')}">
 
                           <option value="" selected>Selecciona tu banco</option>
@@ -1589,8 +1594,6 @@
               </div>
             </div>
           </div>
-
-          <div class="clearfix"></div>
         </div>
         <!-- END TIPO DE PAGO -->
 
@@ -1805,10 +1808,11 @@
                 <div class="col-6 viewMobileWidth pe-0">
                   <div class="form-check form-check-inline me-0">
                     <input class="form-check-input" type="checkbox" formControlName="chkPolity" id="chkPolity"
-                      value="option1" (change)="onChangeProtectionPolicies()">
+                      value="option1">
 
                     <label class="form-check-label" for="chkPolity">He leído y acepto las
-                      <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#politicaModal">políticas de protección
+                      <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#politicaModal">políticas de
+                        protección
                         de datos personales.
                       </a>
                     </label>
@@ -1839,7 +1843,8 @@
               <div class="row">
                 <div class="col-12 footerLink mt-md-4 mb-md-5">
                   Al realizar esta compra, acepto los
-                  <a class="linkBlue" routerLink="/terminos-condiciones" target="_blank">&nbsp;términos y condiciones de
+                  <a class="linkBlue" routerLink="/terminos-condiciones" target="_blank">&nbsp;términos y condiciones
+                    de
                     compra</a>,
                   <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#reservaModal">&nbsp;condiciones de
                     reserva&nbsp;</a> y
@@ -2292,7 +2297,8 @@
                             <div class="escala_line"></div>
                             <div class="twoEscala">
                               <div *ngFor="let item of detalleVuelos.segmentoReturn.general.escalas"
-                                class="escala_punto"></div>
+                                class="escala_punto">
+                              </div>
                             </div>
                           </div>
                           <div class="clearfix"></div>
@@ -2422,8 +2428,6 @@
 
       </div>
       <!-- END DERECHA -->
-
-      <div class="clearfix"></div>
     </div>
     <!-- VERSION DESKTOP -->
   </form>

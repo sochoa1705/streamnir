@@ -52,27 +52,9 @@ import { PerfilModule } from './Component/home-page/perfil/perfil.module';
     PerfilModule
   ],
   providers: [
-
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '279534679478-2c8pkngieq5l97aa7t2d9t9mhvk904hf.apps.googleusercontent.com'
-            )
-          },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('263646375921809')
-          },
-        ]
-      } as SocialAuthServiceConfig,
-    }],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2760,6 +2760,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .checkPopup {
   padding: 12px; }
+  @media (max-width: 640px) {
+    .checkPopup {
+      font-size: 12px; }
+      .checkPopup .form-check-input {
+        width: 15px;
+        height: 15px;
+        min-width: 15px;
+        min-height: 15px; }
+      .checkPopup a {
+        color: #009aed !important;
+        font-weight: 600;
+        font-size: 12px; } }
 
 .btnMobile {
   display: none;
@@ -3436,7 +3448,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
   .cardPagoMobile {
     background: transparent;
-    border: none; }
+    border: none;
+    box-shadow: none; }
     .cardPagoMobile .card-header {
       background: transparent;
       box-shadow: none !important;
@@ -3452,7 +3465,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       padding: 0;
       margin: 0; }
       .medioPagoMobile .cardMob .boxMob {
-        width: 100%; }
+        width: 100%;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-evenly; }
 
   .btnSafe {
     flex-direction: column;
@@ -3604,11 +3620,19 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     flex-wrap: nowrap !important;
     height: 70px; }
     .card_ .option .dot {
-      min-width: 20px; }
+      min-width: 20px; } }
+    @media (max-width: 640px) and (max-width: 640px) {
+      .card_ .option .dot {
+        display: none; } }
+@media (max-width: 640px) {
     .card_ .option .py-4 {
       padding-top: 0 !important;
-      padding-bottom: 0 !important; }
+      padding-bottom: 0 !important; } }
+  @media (max-width: 640px) and (max-width: 640px) {
+    .card_ .option .marginL {
+      margin-left: 0; } }
 
+@media (max-width: 640px) {
   .textEmision {
     font-family: Montserrat;
     font-weight: 600;
