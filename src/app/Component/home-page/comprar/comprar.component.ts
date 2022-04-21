@@ -256,7 +256,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log(this.resultJson);
     console.log(this.filtroVueloJson);
 
-    //debugger
+    debugger
 
     const pasajeros = this.resultJson !== null ? this.resultJson['passengers'] : this.filtroVueloJson['pasajeros'];
     console.log(pasajeros);
