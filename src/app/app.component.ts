@@ -6,7 +6,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NavigationEnd, Router } from '@angular/router';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import * as bootstrap from 'bootstrap';
-import * as moment from 'moment';
 import { combineLatest, fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -17,8 +16,6 @@ import { NotificationService } from './Services/notification.service';
 import { PopupService } from './Services/pop-up/popup.service';
 import { LoaderSubjectService } from './shared/components/loader/service/loader-subject.service';
 import { Guid } from './shared/utils';
-import { ValidatorsService } from './shared/validators/validators.service';
-
 
 export class LoginPerson {
   constructor(
@@ -114,6 +111,8 @@ export class AppComponent implements OnInit {
 
     // const missingDays = fromDate.diff(currentDate, 'days');
 
+
+    console.log('inicio oninit');
 
   }
 

@@ -446,9 +446,23 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   startContactDetails(): void {
-    console.log('startContactDetails');
+    const option: string = this.selectedPay === 'tarjeta' ? 'Tarjeta de Credito o Debito' : `SafetyPay - ${this.banca ? 'Banca por Internet' : 'Agencias/Agentes'}`;
 
     const model = {
+      event: 'nmv.seguros_eecga3_checkoutOption',
+      ecommerce: {
+        checkout_option: {
+          actionField: {
+            step: 2,
+            option: option
+          }
+        }
+      }
+    }
+
+    TaggingService.tagSelectionOfPaymentMethod(model);
+
+    const model2 = {
       event: 'nmv.seguros_eecga3_checkout',
       ecommerce: {
         checkout: {
@@ -459,7 +473,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }
     }
 
-    TaggingService.tagStartOfContactData(model);
+    TaggingService.tagStartOfContactData(model2);
   }
 
   showDataContacto: Boolean = true;
@@ -532,27 +546,31 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   chkValue(e: any) {
-    console.log("check", e);
-
-    if (e === 'optionm-1' || e === 'option-1') {
-      this.selectedPay = 'tarjeta';
-
-      const model = {
-        event: 'nmv.seguros_eecga3_checkoutOption',
-        ecommerce: {
-          checkout_option: {
-            actionField: {
-              step: 2,
-              option: `Tarjeta de Credito o Debito`
-            }
+    const model = {
+      event: 'nmv.seguros_eecga3_checkout',
+      ecommerce: {
+        checkout: {
+          actionField: {
+            step: 2
           }
         }
       }
-
-      TaggingService.tagSelectionOfPaymentMethod(model);
     }
+
+    TaggingService.tagStartOfPaymentMethods(model);
+
+    if (e === 'optionm-1' || e === 'option-1')
+      this.selectedPay = 'tarjeta';
     else
       this.selectedPay = 'safety';
+  }
+
+  id: any = "banca";
+
+  optionPay(e: any, i: any, ids: any) {
+
+    this.banca = i;
+    this.id = ids;
 
     const model = {
       event: 'nmv.seguros_eecga3_checkout',
@@ -566,30 +584,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
 
     TaggingService.tagStartOfPaymentMethods(model);
-  }
-
-  id: any = "banca";
-
-  optionPay(e: any, i: any, ids: any) {
-    console.log(i);
-    console.log("agentes");
-
-    this.banca = i;
-    this.id = ids;
-
-    const model = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
-      ecommerce: {
-        checkout_option: {
-          actionField: {
-            step: 2,
-            option: `SafetyPay - ${i ? 'Banca por Internet' : 'Agencias/Agentes'}`
-          }
-        }
-      }
-    }
-
-    TaggingService.tagSelectionOfPaymentMethod(model);
   }
 
   buyInsurance(): void {
@@ -1542,18 +1536,17 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   onchangeBanco(): void {
 
     const model = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
+      event: 'nmv.seguros_eecga3_checkout',
       ecommerce: {
-        checkout_option: {
+        checkout: {
           actionField: {
-            step: 2,
-            option: `SafetyPay - ${this.banca ? 'Banca por Internet' : 'Agencias/Agentes'}`
+            step: 2
           }
         }
       }
     }
 
-    TaggingService.tagSelectionOfPaymentMethod(model);
+    TaggingService.tagStartOfPaymentMethods(model);
   }
 
   onChangeProtectionPolicies(): void {
