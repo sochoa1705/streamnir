@@ -1519,7 +1519,7 @@
 
                     <div class="row">
                       <div class="col-6 offset-3 py-4 lessViewMob">
-                        <select formControlName="bankPay" class="selectBank form-select-f"
+                        <select formControlName="bankPay" class="selectBank form-select-f" (change)="onchangeBanco()"
                           [ngClass]="{isvalid : validatePaymentMethodForm('bankPay')}">
 
                           <option value="" selected>Selecciona tu banco</option>
