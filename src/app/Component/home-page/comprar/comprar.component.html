@@ -477,90 +477,89 @@
                         (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje.">
                     </div>
 
-                    <div class="row rowMobileCard" [class.activoBox]="showAdulto == i">
-                      <div class="col-6 viewMobileWidth">
-                        <label>Fecha de nacimiento</label>
 
-                        <div class="row">
-                          <div class="col-2">
-                            <input class="form-control" minlength="1" maxlength="2" max="31" mask="0*"
-                              formControlName="dayCustomer" type="text" (keypress)="allowNumeric($event)"
-                              (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)">
-                          </div>
+                    <div class="col-6 viewMobileWidth">
+                      <label>Fecha de nacimiento</label>
 
-
-                          <div class="col-6">
-                            <select formControlName="monthCustomer" class="form-select-f">
-                              <option value="" selected>Seleccione</option>
-                              <option *ngFor="let elem of months" [value]="elem.value">{{ elem.name }}</option>
-                            </select>
-                          </div>
-
-                          <div class="col-4">
-                            <select formControlName="yearCustomer" class="form-select-f">
-                              <option value="" selected>Seleccione</option>
-
-                              <option value="{{this.resultJson['aniosNacimiento'][i].anio}}">
-                                {{this.resultJson['aniosNacimiento'][i].anio}}</option>
-                              <option value="{{this.resultJson['aniosNacimiento'][i].anio - 1}}">
-                                {{this.resultJson['aniosNacimiento'][i].anio - 1}}</option>
-                            </select>
-                          </div>
+                      <div class="row">
+                        <div class="col-2">
+                          <input class="form-control" minlength="1" maxlength="2" max="31" mask="0*"
+                            formControlName="dayCustomer" type="text" (keypress)="allowNumeric($event)"
+                            (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)">
                         </div>
 
+
+                        <div class="col-6">
+                          <select formControlName="monthCustomer" class="form-select-f">
+                            <option value="" selected>Seleccione</option>
+                            <option *ngFor="let elem of months" [value]="elem.value">{{ elem.name }}</option>
+                          </select>
+                        </div>
+
+                        <div class="col-4">
+                          <select formControlName="yearCustomer" class="form-select-f">
+                            <option value="" selected>Seleccione</option>
+
+                            <option value="{{this.resultJson['aniosNacimiento'][i].anio}}">
+                              {{this.resultJson['aniosNacimiento'][i].anio}}</option>
+                            <option value="{{this.resultJson['aniosNacimiento'][i].anio - 1}}">
+                              {{this.resultJson['aniosNacimiento'][i].anio - 1}}</option>
+                          </select>
+                        </div>
                       </div>
 
-                      <div class="col-6 viewMobileWidth">
-                        <label for="names">Nacionalidad</label>
-
-                        <select formControlName="nationalityCustomer" class="form-select-f">
-                          <option value="" selected>Seleccione nacionalidad</option>
-
-                          <option *ngFor="let elem of countries" [value]="elem.Iata">
-                            {{ elem.Name }}
-                          </option>
-                        </select>
-                      </div>
                     </div>
 
-                    <div class="row rowMobileCard" [class.activoBox]="showAdulto == i">
-                      <div class="col-3 viewMobileWidth">
-                        <label for="names">Tipo de documento</label>
+                    <div class="col-6 viewMobileWidth">
+                      <label for="names">Nacionalidad</label>
 
-                        <select formControlName="typeDocCustomer" class="form-select-f"
-                          (change)="onChangeOfficialDocument(i)">
-                          <option value="" selected>Seleccione</option>
-                          <option value="DNI">DNI</option>
-                          <option value="PSP">Pasaporte</option>
-                          <option value="CEX">C. Extranjería</option>
-                        </select>
-                      </div>
+                      <select formControlName="nationalityCustomer" class="form-select-f">
+                        <option value="" selected>Seleccione nacionalidad</option>
 
-                      <div class="col-3 viewMobileWidth">
-                        <label for="lastname">N° de documento</label>
-                        <input class="form-control" formControlName="numDocCustomer" type="text"
-                          (keypress)="allowOfficialDocument($event, i)" (paste)="denyPaste($event)"
-                          (drop)="denyDrop($event)" name="ndocumento">
-                      </div>
+                        <option *ngFor="let elem of countries" [value]="elem.Iata">
+                          {{ elem.Name }}
+                        </option>
+                      </select>
+                    </div>
 
-                      <div class="col-6 viewMobileWidth">
-                        <label for="names">Sexo</label>
 
-                        <div class="optionSel">
-                          <div class="form-check form-check-inline optionLeft">
-                            <input class="form-check-input sex" formControlName="sexCustomer" value="masculino"
-                              type="radio" id="sexMasc{{i}}">
-                            <label class="form-check-label" for="sexMasc{{i}}">Masculino</label>
-                          </div>
+                    <div class="col-3 viewMobileWidth">
+                      <label for="names">Tipo de documento</label>
 
-                          <div class="form-check form-check-inline optionRight">
-                            <input class="form-check-input sex" formControlName="sexCustomer" value="femenino"
-                              type="radio" id="sexFem{{i}}">
-                            <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
-                          </div>
+                      <select formControlName="typeDocCustomer" class="form-select-f"
+                        (change)="onChangeOfficialDocument(i)">
+                        <option value="" selected>Seleccione</option>
+                        <option value="DNI">DNI</option>
+                        <option value="PSP">Pasaporte</option>
+                        <option value="CEX">C. Extranjería</option>
+                      </select>
+                    </div>
+
+                    <div class="col-3 viewMobileWidth">
+                      <label for="lastname">N° de documento</label>
+                      <input class="form-control" formControlName="numDocCustomer" type="text"
+                        (keypress)="allowOfficialDocument($event, i)" (paste)="denyPaste($event)"
+                        (drop)="denyDrop($event)" name="ndocumento">
+                    </div>
+
+                    <div class="col-6 viewMobileWidth">
+                      <label for="names">Sexo</label>
+
+                      <div class="optionSel">
+                        <div class="form-check form-check-inline optionLeft">
+                          <input class="form-check-input sex" formControlName="sexCustomer" value="masculino"
+                            type="radio" id="sexMasc{{i}}">
+                          <label class="form-check-label" for="sexMasc{{i}}">Masculino</label>
+                        </div>
+
+                        <div class="form-check form-check-inline optionRight">
+                          <input class="form-check-input sex" formControlName="sexCustomer" value="femenino"
+                            type="radio" id="sexFem{{i}}">
+                          <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
                         </div>
                       </div>
                     </div>
+
 
 
                     <div class="row rowMobileCard" [class.activoBox]="showAdulto == i">
