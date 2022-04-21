@@ -48,73 +48,23 @@ export class AppComponent implements OnInit {
   @ViewChild("closeModalSesion") closeModalSesion: ElementRef;
   @ViewChild("closeModalNewAccount") closeModalNewAccount: ElementRef;
 
-  pasajeros: any = [
-    {
-      adultos: 10,
-      ninos: 1,
-      infantes: 1
-    }
-  ]
 
-  //confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
-  login = new LoginPerson();
-  loginB = new LoginBusiness();
-
-  isPerson: boolean = true;
-  isPersonLoggin: boolean = true;
-
-  //recoverPasswordForm: FormGroup;
-
-  submitBusiness = false;
-  submitPerson = false;
 
   message: string = '';
 
   constructor(
     private _popUpSubject: PopupService,
-    private _authService: SocialAuthService,
-    private _accountService: AccountsService,
     public _matDialog: MatDialog,
-    private _matSnackBar: MatSnackBar,
     public loaderSubjectService: LoaderSubjectService,
-    private notification: NotificationService,
     private readonly router: Router,
   ) {
     this.cerrarBoxClicFuera();
 
-    this._authService.authState.subscribe((user) => {
-
-      if (user.provider == "GOOGLE") {
-        this.saveSocialAccount(user.firstName, user.lastName, user.email, "G", user.id, user.photoUrl)
-      }
-
-    });
   }
-
-  initLoading() {
-    const textSend = 'CARGANDO'
-    this.loaderSubjectService.showText(textSend)
-    this.loaderSubjectService.showLoader();
-  }
-
-  closeLoading() {
-    this.loaderSubjectService.closeLoader();
-  }
-
 
 
   ngOnInit(): void {
     this.taggingPageView();
-    //this.recoverPasswordForm = this.createRecoverPasswordForm();
-
-    //debugger
-
-    // const currentDate = moment();
-    // const fromDate = moment('29/04/2022', 'DD/MM/YYYY');
-
-    // const missingDays = fromDate.diff(currentDate, 'days');
-
-
   }
 
   taggingPageView() {
@@ -125,96 +75,6 @@ export class AppComponent implements OnInit {
     });
 
   }
-
-
-  closeModal() {
-    const closeModalSesion: any = this.closeModalSesion.nativeElement;
-    const closeModalNewAccount: any = this.closeModalNewAccount.nativeElement;
-
-    closeModalSesion ? closeModalSesion.click() : null;
-    closeModalNewAccount ? closeModalNewAccount.click() : null;
-  }
-
-
-  toggleModalVerificaCorreo() {
-    const modal = document.getElementById("ModalVerificaCorreo");
-
-    if (!modal) {
-      return;
-    }
-
-    bootstrap.Modal.getOrCreateInstance(modal).toggle();
-  }
-
-
-  saveSocialAccount(Firstname: string, FatherLastname: string, Email: string, SocialNetwork: "G" | "F", IdSocialNetwork: string, image: string) {
-
-    this.initLoading();
-
-    const payload = {
-      TrackingCode: Guid(),
-      MuteExceptions: environment.muteExceptions,
-      Caller: {
-        Company: "Agil",
-        Application: "Interagencias"
-      },
-      Parameter: {
-        Firstname,
-        FatherLastname,
-        MotherLastname: "",
-        Email,
-        Password: "",
-        IsPerson: true,
-        Ruc: "",
-        BusinessName: "",
-        SocialNetwork,
-        IdSocialNetwork
-      }
-    };
-
-    this._accountService.saveAccount(payload).subscribe({
-      next: (response) => {
-        this.closeLoading();
-        const isSuccess = response.Result.IsSuccess;
-
-        if (isSuccess) {
-          this._accountService.guardarStorage(response.Result, image);
-          this.closeModal();
-          this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
-            verticalPosition: 'top',
-            duration: 2000
-          });
-        } else {
-          this.notification.showNotificacion("Error", "Error del servidor", 10);
-        }
-
-
-        //this.loaderSubjectService.closeLoader()
-      },
-      error: (err) => {
-        this.closeLoading();
-        this.notification.showNotificacion("Error", "Error del servidor", 10);
-
-        //this.loaderSubjectService.closeLoader()
-      },
-      complete: () => { }
-    });
-
-  }
-
-
-
-  signOut(): void {
-    this._authService.signOut();
-  }
-
-  socialMedia: Boolean = true;
-
-  showSocialMedia($event: { index: string | number; }) {
-    this.socialMedia = $event.index == 0 ? true : false;
-    this.isPerson = $event.index == 0 ? true : false;
-  }
-
 
 
   cerrarBoxClicFuera() {
