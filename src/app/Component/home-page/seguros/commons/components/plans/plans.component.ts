@@ -66,26 +66,10 @@ export class PlansComponent implements OnInit {
     let lcadena: any = localStorage.getItem('businessunit');
     this.unidadNegocio = JSON.parse(lcadena);
 
-
-    // if(localStorage.getItem('planes')) {
-    //   let planesAC: any = localStorage.getItem('planes')
-    //   this.plansAC = JSON.parse(planesAC)
-
-    // } else {
-    //   if (localStorage.getItem('safe0')) {
-    //     localStorage.removeItem('safe0');
-    //     this.listPlansAC()
-    //   } else {
-    //     this.listPlansAC()
-    //   }
-    // }
-
-    if (localStorage.getItem('safe0')) {
+    if (localStorage.getItem('safe0'))
       localStorage.removeItem('safe0');
-      this.getPlansAC()
-    }
-    else
-      this.getPlansAC()
+
+    this.getPlansAC()
 
     this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
   }
