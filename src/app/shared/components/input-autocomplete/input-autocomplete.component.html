@@ -1,5 +1,6 @@
+
 <div class="tab-autocomplete">
-    <input (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)" #input [ngClass]="viewIcon ? 'icono' : 'icono-no'" [placeholder]="placeholder" [value]="value?.title || '' " [disabled]="isDisabled"
+    <input [(ngModel)]="valueInput" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)" #input [ngClass]="viewIcon ? 'icono' : 'icono-no'" [placeholder]="placeholder"  [disabled]="isDisabled"
         (focus)="showAutocomplete()" (keyup)="keyUp($event.target)" class="form-control animated fadeIn" type="text">
 
     <svg (click)="clean()" *ngIf="input.value.length>0 && !loading" class="input-icon pointer" width="461" height="461"

@@ -23,7 +23,6 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   private _items: ICardAutocomplete[];
 
   @ViewChild('cardAutocompleteComponent') cardAutocompleteComponent: ElementRef;
-  @ViewChild('input') input: ElementRef;
 
   @Input() set items(value: ICardAutocomplete[] | null) {
     if (value) {
@@ -36,6 +35,8 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   }
 
   public typeToSearchText: string;
+
+  valueInput = "";
 
 
   @Input() placeholder: string;
@@ -109,10 +110,13 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   writeValue(value: ICardAutocomplete): void {
     if (value) {
       this.value = value;
+      this.valueInput = value.title;
     } else {
       this.value = null;
+      this.valueInput = ""
     }
   }
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
@@ -138,7 +142,7 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
       if (!this.cardAutocompleteComponent.nativeElement.contains(e.target) && !((e.target as HTMLInputElement).tagName == 'INPUT')) {
         this.hideBoxOrigen();
 
-        if (this.input.nativeElement.value.length > 0 && !this.value) {
+        if (this.valueInput.length > 0 && !this.value) {
           this.clean();
         }
 
@@ -150,7 +154,7 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
 
   clean() {
     this.value = null;
-    this.input.nativeElement.value = "";
+    this.valueInput = "";
     this._items = [];
   }
 
