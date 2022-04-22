@@ -44,7 +44,7 @@ import { NotificationService } from '../../../Services/notification.service';
 export class PopUpPasajeroComponent implements OnInit,OnChanges {
 
 
-  numMaxPersonasHabitacion = 4;
+  numMaxPersonasHabitacion = 6;
   numMaxPersonas = 9;
   numMaxNroNinos = 4;
   numMaxHabitaciones = 4;
