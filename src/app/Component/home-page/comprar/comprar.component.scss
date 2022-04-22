@@ -29,7 +29,7 @@
     }
     &-horizontal-stepper-header {
         flex-direction: column;
-        width: 30%;
+        width: 25%;
         padding: 0;
     }
     &-stepper-horizontal-line {
@@ -39,6 +39,14 @@
         /* min-width: 32px; */
         margin-top: -20px;
         background: linear-gradient(90deg, rgba(181, 10, 39, 1) 10%, rgba(207, 209, 211, 1) 100%);
+    }
+}
+
+.fecNacTab {
+    @media (max-width: 640px) {
+        .col-2, .col-6 {
+            padding-right: 0;
+        }
     }
 }
 
@@ -81,6 +89,10 @@ h2 {
         margin-right: 28px;
         filter: grayscale(1);
         opacity: 0.3;
+        @media (max-width: 640px) {
+            width: 20%;
+            margin-right: 5px;
+        }
     }
 }
 
@@ -144,12 +156,14 @@ h2 {
                 margin-right: 0px;
             }
             @media (max-width: 640px) {
-                width: 20%;
+                width: 18%;
                 height: auto;
+                margin-right: 5px;
             }
         }
         @media (max-width: 640px) {
-            margin-bottom: 20px;
+            margin-bottom: 0px;
+            padding-bottom: 20px;
         }
     }
     @media (max-width: 640px) {
@@ -163,6 +177,9 @@ h2 {
 
 .boxCardPas .card_pasajero label {
     padding: 10px 0 10px 0 !important;
+    @media (max-width: 640px) {
+        padding: 0 !important;
+    }
 }
 
 .boxCardPas .card_pasajero .textDire {

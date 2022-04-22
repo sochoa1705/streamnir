@@ -256,7 +256,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log(this.resultJson);
     console.log(this.filtroVueloJson);
 
-    //debugger
+    debugger
 
     const pasajeros = this.resultJson !== null ? this.resultJson['passengers'] : this.filtroVueloJson['pasajeros'];
     console.log(pasajeros);
@@ -272,6 +272,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.getCountries();
 
     if (this.current['filter'] !== 'filter') this.listCoverage();
+    this.dataLayerPushCheckout(this.safe0Json, this.resultJson) ;
   }
 
   getCountries() {
@@ -546,6 +547,21 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   chkValue(e: any) {
+    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer']).Name;
+
+    const model1 = {
+      event: 'nmv.seguros_eecga3_checkoutOption',
+      ecommerce: {
+        checkout_option: {
+          actionField: {
+            step: 1,
+            option: nationality
+          }
+        }
+      }
+    }
+
+    TaggingService.tagNationalitySelection(model1);
     const model = {
       event: 'nmv.seguros_eecga3_checkout',
       ecommerce: {
@@ -571,6 +587,21 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     this.banca = i;
     this.id = ids;
+    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer']).Name;
+
+    const model1 = {
+      event: 'nmv.seguros_eecga3_checkoutOption',
+      ecommerce: {
+        checkout_option: {
+          actionField: {
+            step: 1,
+            option: nationality
+          }
+        }
+      }
+    }
+
+    TaggingService.tagNationalitySelection(model1);
 
     const model = {
       event: 'nmv.seguros_eecga3_checkout',
@@ -604,21 +635,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
       return;
 
-    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer']).Name;
-
-    const model = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
-      ecommerce: {
-        checkout_option: {
-          actionField: {
-            step: 1,
-            option: nationality
-          }
-        }
-      }
-    }
-
-    TaggingService.tagNationalitySelection(model);
+    
 
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
     this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson['passengers'].length));
@@ -1428,6 +1445,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     TaggingService.tagMostrarCheckout(modelTaggingCheckout);
   }
   llenarProduct(safe0Json: any, resultJson: any): ProductAddToCart {
+    const currentDate = moment();
+    const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
+    const missingDays = fromDate.diff(currentDate, 'days');
     let pp: ProductAddToCart = {
       name: safe0Json.nombreProducto,
       id: safe0Json.idProducto,
@@ -1439,12 +1459,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       quantity: parseInt(resultJson.passengers.length),
       metric10: this.getPromedioEdades(resultJson),
       dimension9: this.asistMedic,
-      dimension11: resultJson.destinyString.fromDate,
-      dimension12: resultJson.passengers.toDate,
-      metric11: this.getDiasAnticipacion(resultJson),
-      metric12: this.getDuracionViaje(resultJson),
-      dimension16: 'PE',
-      dimension17: resultJson.destinyString.id_destino,
+      dimension11: resultJson.fromDate,
+      dimension12: resultJson.toDate,
+      metric11: missingDays,
+      metric12: Number(this.resultJson.days),
+      dimension16: 'PERU',
+      dimension17: resultJson.destinyString.descripcion_destino,
     }
     return pp;
   }
@@ -1534,6 +1554,21 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   onchangeBanco(): void {
+    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer']).Name;
+
+    const model1 = {
+      event: 'nmv.seguros_eecga3_checkoutOption',
+      ecommerce: {
+        checkout_option: {
+          actionField: {
+            step: 1,
+            option: nationality
+          }
+        }
+      }
+    }
+
+    TaggingService.tagNationalitySelection(model1);
 
     const model = {
       event: 'nmv.seguros_eecga3_checkout',

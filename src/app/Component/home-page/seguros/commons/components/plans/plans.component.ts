@@ -42,6 +42,7 @@ export class PlansComponent implements OnInit {
     detalleCobertura: true,
     cupon: false,
   }
+  asistenciaMedicaMonto: any;
 
   //datoUsuario:any = localStorage.getItem('form');
   constructor(
@@ -71,7 +72,7 @@ export class PlansComponent implements OnInit {
 
     this.getPlansAC()
 
-    this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
+    
   }
 
   bestPlan() {
@@ -136,6 +137,7 @@ export class PlansComponent implements OnInit {
         console.log(this.plansAC)
         console.log(this.plans)
         localStorage.setItem('planes', JSON.stringify(this.plansAC))
+        this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
       },
       error: error => {
         console.log(error)
@@ -175,18 +177,23 @@ export class PlansComponent implements OnInit {
               return e
             }
           })['Valor']
+          this.asistenciaMedicaMonto = this.asistMedic.includes('USD') ? Number(this.asistMedic.substring(4).replace('.', '')) : this.asistMedic;
+          this.sendDataLayerDetalleBeneficio(data, this.resultJson);
         }
       },
       error: error => console.log(error),
     }
     )
+    
   }
 
   data(id: any) {
-    this.sendDataLayerDetalleBeneficio(id, this.resultJson);
+    this.listCoverage(id);
+    
+    
     console.log(id);
     this.pop = id;
-    this.listCoverage(id);
+    
 
   }
   sendDataLayerAddToCart(plansAC: any, resultJson: any) {
@@ -227,6 +234,9 @@ export class PlansComponent implements OnInit {
     let index: number = 0;
     ecommerce.currencyCode = plansAC.monedaLocal;
     //plansAC.map((element: any) => {
+      const currentDate = moment();
+      const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
+      const missingDays = fromDate.diff(currentDate, 'days');
     pp = ({
       name: plansAC.nombreProducto,
       id: plansAC.codProducto,
@@ -237,10 +247,10 @@ export class PlansComponent implements OnInit {
       variant: resultJson.destinyString.descripcion_destino,
       quantity: resultJson.passengers.length,
       metric10: this.getPromedioEdades(resultJson),
-      dimension9: this.asistMedic,
-      dimension11: resultJson.destinyString.fromDate,
-      dimension12: resultJson.passengers.toDate,
-      metric11: this.getDiasAnticipacion(resultJson),
+      dimension9: this.asistenciaMedicaMonto,
+      dimension11: resultJson.fromDate,
+      dimension12: resultJson.toDate,
+      metric11: missingDays,
       metric12: Number(this.resultJson.days),
       dimension16: 'PERU',
       dimension17: resultJson.destinyString.descripcion_destino,
@@ -287,20 +297,24 @@ export class PlansComponent implements OnInit {
     }
     let index: number = 0;
     //plansAC.forEach((element: any) => {
+      const currentDate = moment();
+      const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
+      const missingDays = fromDate.diff(currentDate, 'days');
+
     pp = {
       name: plansAC.nombreProducto,
       id: plansAC.codProducto,
       price: plansAC.precioEmisionLocal,
-      brand: 'Assist Card',
+      brand: 'AssistCard',
       category: 'Seguros',
       category2: index === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
       variant: resultJson.destinyString.descripcion_destino,
       quantity: resultJson.passengers.length,
       metric10: this.getPromedioEdades(resultJson),
-      dimension9: this.asistMedic,
-      dimension11: resultJson.destinyString.fromDate,
-      dimension12: resultJson.passengers.toDate,
-      metric11: this.getDiasAnticipacion(resultJson),
+      dimension9:  String(this.asistenciaMedicaMonto),
+      dimension11: resultJson.fromDate,
+      dimension12: resultJson.toDate,
+      metric11: missingDays,
       metric12: Number(this.resultJson.days),
     }
     index++;
@@ -328,6 +342,7 @@ export class PlansComponent implements OnInit {
 
   }
   sendDataLayerMostrarResultados(plansAC: any, resultJson: any) {
+    console.log("resultJson", resultJson)
     let ecommerce: Ecommerce = {
       currencyCode: '',
       impressions: []
@@ -355,9 +370,12 @@ export class PlansComponent implements OnInit {
       event: 'nmv.seguros_eecga3_productimpression',
       ecommerce: ecommerce
     };
-    let index: number = 0;
+    let index: number = 1;
     ecommerce.currencyCode = plansAC[0].monedaLocal;
-
+    const currentDate = moment();
+    const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
+    const missingDays = fromDate.diff(currentDate, 'days');
+    //this.asistenciaMedicaMonto = this.asistMedic.includes('USD') ? Number(this.asistMedic.substring(4).replace('.', '')) : this.asistMedic;
     plansAC.forEach((element: any) => {
       ii = ({
         name: element.nombreProducto,
@@ -371,10 +389,10 @@ export class PlansComponent implements OnInit {
         variant: resultJson.destinyString.descripcion_destino,
         quantity: resultJson.passengers.length,
         metric10: this.getPromedioEdades(resultJson),
-        dimension9: this.asistMedic,
-        dimension11: resultJson.destinyString.fromDate,
-        dimension12: resultJson.passengers.toDate,
-        metric11: this.getDiasAnticipacion(resultJson),
+        dimension9: String(this.asistenciaMedicaMonto),
+        dimension11: resultJson.fromDate,
+        dimension12: resultJson.toDate,
+        metric11: missingDays,
         metric12: Number(this.resultJson.days),
       });
       impressions.push(ii);

@@ -1894,6 +1894,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             border: 0.5px solid #009AED !important;
             box-shadow: none;
         }
+        @media (max-width: 640px) {
+            border-left: 0.5px solid #E4E5E7!important;
+        }
     }
     &Izq {
         border-radius: 0 3px 3px 0 !important;
@@ -1901,8 +1904,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         border-left: 0px !important;
         &:focus {
             border: 0.5px solid #009AED !important;
-            ;
             box-shadow: none;
+        }
+        @media (max-width: 640px) {
+            border-left: 0.5px solid #E4E5E7!important;
         }
     }
 }
@@ -3386,6 +3391,20 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .checkPopup {
     padding: 12px;
+    @media (max-width: 640px) {
+        .form-check-input {
+            width: 15px;
+            height: 15px;
+            min-width: 15px;
+            min-height: 15px;
+        }
+        font-size: 12px;
+        a {
+            color: #009aed !important;
+            font-weight: 600;
+            font-size: 12px;
+        }
+    }
 }
 
 .btnMobile {
@@ -4234,6 +4253,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .cardPagoMobile {
         background: transparent;
         border: none;
+        box-shadow: none;
         .card-header {
             background: transparent;
             box-shadow: none !important;
@@ -4252,6 +4272,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             margin: 0;
             .boxMob {
                 width: 100%;
+                display: flex !important;
+                align-items: center;
+                justify-content: space-evenly;
             }
         }
     }
@@ -4315,6 +4338,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         &.pasajeros {
             background: transparent;
             border: none;
+            box-shadow: none;
             .card-header {
                 background: transparent;
                 border-bottom: none;
@@ -4324,6 +4348,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 border: 0.5px solid #E4E5E7;
                 box-sizing: border-box;
                 border-radius: 10px;
+                margin-bottom: 10px;
             }
         }
         .py-4 {
@@ -4431,10 +4456,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         height: 70px;
         .dot {
             min-width: 20px;
+            @media (max-width: 640px) {
+                display: none;
+            }
         }
         .py-4 {
             padding-top: 0 !important;
             padding-bottom: 0 !important;
+        }
+        @media (max-width: 640px) {
+            .marginL {
+                margin-left: 0;
+            }
         }
     }
     .textEmision {
