@@ -5694,10 +5694,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         color: #ffffff; }
   .tabContentDest .tabColumna {
     display: flex;
+    justify-content: space-between;
     width: 100%;
     gap: 180px; }
     .tabContentDest .tabColumna .contenidoTab {
-      flex: 1 1 auto;
+      flex: 1 1 45%;
       padding-top: 30px; }
     .tabContentDest .tabColumna .imagenTab {
       display: flex;
@@ -5776,7 +5777,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       width: 50%; } }
 .portadaAero {
   width: 100%;
-  position: relative; }
+  position: relative;
+  margin-top: 0; }
   .portadaAero img {
     width: 100%; }
   .portadaAero .textoPortada {

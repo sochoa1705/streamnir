@@ -6950,11 +6950,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .tabColumna {
         display: flex;
+        justify-content: space-between;
         width: 100%;
         gap: 180px;
         .contenidoTab {
             //width: 40%;
-            flex: 1 1 auto;
+            flex: 1 1 45%;
             padding-top: 30px;
         }
         .imagenTab {
@@ -7064,6 +7065,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .portadaAero {
     width: 100%;
     position: relative;
+    margin-top: 0;
     img {
         width: 100%;
     }
