@@ -4338,6 +4338,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         &.pasajeros {
             background: transparent;
             border: none;
+            box-shadow: none;
             .card-header {
                 background: transparent;
                 border-bottom: none;
@@ -4347,6 +4348,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 border: 0.5px solid #E4E5E7;
                 box-sizing: border-box;
                 border-radius: 10px;
+                margin-bottom: 10px;
             }
         }
         .py-4 {

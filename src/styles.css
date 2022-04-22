@@ -3523,7 +3523,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       margin-right: 8px; }
   .card.pasajeros {
     background: transparent;
-    border: none; }
+    border: none;
+    box-shadow: none; }
     .card.pasajeros .card-header {
       background: transparent;
       border-bottom: none; }
@@ -3531,7 +3532,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       background: #FFFFFF;
       border: 0.5px solid #E4E5E7;
       box-sizing: border-box;
-      border-radius: 10px; }
+      border-radius: 10px;
+      margin-bottom: 10px; }
   .card .py-4 {
     padding-top: 0 !important;
     padding-bottom: 0 !important; }
