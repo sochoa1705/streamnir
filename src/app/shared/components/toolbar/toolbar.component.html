@@ -19,7 +19,7 @@
             </svg>
     </span>
     <span class="spacer"></span>
-    <ul class="d-none d-sm-none d-md-block">
+    <ul class="d-none d-sm-none d-md-none d-md-block d-lg-block">
         <li *ngFor="let m of menu" [ngClass]="m.footer ? 'd-none' : ''">
             <a [routerLink]="m.tab === '' ? m.link : [m.link, m.tab]" *ngIf="!m.footer && !m.external" routerLinkActive="active">
                 {{ m.text }}
@@ -88,7 +88,7 @@
     </ng-container>
 
 
-    <button (click)="drawer.toggle()" mat-icon-button class="main example-icon d-block d-md-none" aria-label="Example icon-button with menu icon">
+    <button (click)="drawer.toggle()" mat-icon-button class="main example-icon d-block d-lg-none" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
     </button>
     <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
