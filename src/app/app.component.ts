@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
 import { combineLatest, fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { DestinosService } from './Component/home-page/vuelos/commons/components/destinos/services/destinos.service';
 import { TaggingService } from './Services/analytics/tagging.service';
 import { PopupService } from './Services/pop-up/popup.service';
 import { LoaderSubjectService } from './shared/components/loader/service/loader-subject.service';
@@ -47,6 +48,7 @@ export class AppComponent implements OnInit {
     public _matDialog: MatDialog,
     public loaderSubjectService: LoaderSubjectService,
     private readonly router: Router,
+    private destinosService:DestinosService
   ) {
     this.cerrarBoxClicFuera();
 
@@ -60,6 +62,7 @@ export class AppComponent implements OnInit {
   taggingPageView() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+        this.destinosService.setParam(event.urlAfterRedirects)
         TaggingService.pageView(event.urlAfterRedirects)
       }
     });

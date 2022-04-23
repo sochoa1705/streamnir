@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { DestinosComponent } from './destinos.component';
 import { MaterialModule } from '../../../../../../shared/material.module';
 import { TabsModule } from '../../../../../../shared/components/tabs/tabs.module';
-import { DestinosService } from './services/destinos.service';
 import { ActivityComponent } from './activity/activity.component';
 import { HotelsComponent } from './hotels/hotels.component';
 import { CarouselModule } from 'primeng/carousel';
@@ -30,6 +29,6 @@ import { AereolineasModule } from 'src/app/shared/components/aereolineas/aereoli
   exports: [
     DestinosComponent
   ],
-  providers: [DestinosService]
+  providers: []
 })
 export class DestinosModule { }

@@ -1,11 +1,12 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
-import { concat, Observable, of, Subject } from 'rxjs';
-import { distinctUntilChanged, tap, switchMap, catchError, map, debounceTime } from 'rxjs/operators';
+import { concat, Observable, of, OperatorFunction, pipe, Subject, UnaryFunction } from 'rxjs';
+import { distinctUntilChanged, tap, switchMap, catchError, map, debounceTime, filter, takeUntil } from 'rxjs/operators';
+import { DestinosService } from 'src/app/Component/home-page/vuelos/commons/components/destinos/services/destinos.service';
 import { ModelTaggingVuelos } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
@@ -23,7 +24,7 @@ import { IGeoTree } from './tab-vuelos.interfaces';
   templateUrl: './tab-vuelos.component.html',
   styleUrls: ['./tab-vuelos.component.scss']
 })
-export class TabVuelosComponent implements OnInit {
+export class TabVuelosComponent implements OnInit,OnDestroy {
 
 
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
@@ -70,24 +71,60 @@ export class TabVuelosComponent implements OnInit {
 
   vuelosValue:EnumFlightType ; 
 
+  private readonly destroy$ = new Subject();
 
 
-  constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar, private router: Router
+  constructor(private destineService: DestinyService,public formatter: NgbDateParserFormatter,
+    private _snackBar: MatSnackBar, private router: Router,private destinosService: DestinosService
   ) {
     this.createForm();
-
-
-    //  const data = this.destineService.searchMv();
-    //  console.log(data);
-
   }
 
 
   ngOnInit(): void {
+
     this.loadVuelosOrigen();
     this.loadVuelosDestino();
+
+    this.logicPathVuelos();
+
   }
+
+
+
+  logicPathVuelos(){
+
+    this.destinosService.getParam().pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(codigo=>{
+      if(!codigo){
+        this.form.controls["origen"].patchValue(null);
+        this.form.controls["destino"].patchValue(null);
+      }else{
+        this.initCiudadDestino(codigo)
+      }
+    })
+
+  }
+
+
+  initCiudadDestino(codigoCiudad:string){
+    
+
+    this.form.controls["origen"].patchValue({
+      children: [],
+      codigo: "LIM",
+      id: "LIM",
+      title: "Lima"
+    })
+
+    this.destineService.getGeoTree(codigoCiudad).subscribe(data=>{
+      const ciudad = this.convertFormatAutocomplete(data);
+      this.form.controls["destino"].patchValue(ciudad[0]);
+    })
+
+  }
+  
 
 
   get viajesForm(){
@@ -362,5 +399,12 @@ export class TabVuelosComponent implements OnInit {
   changeDate(value: ClassValueCalendar) {
     this.toDate = value.toDate;
     this.fromDate = value.fromDate;
+  }
+
+
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
