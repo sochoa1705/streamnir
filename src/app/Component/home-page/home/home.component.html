@@ -1,79 +1,8 @@
 <mat-drawer-container class="example-container">
     <app-tabs [options]="destiny"></app-tabs>
 
-    <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"></app-aside>
-    <!-- OFERTAS -->
-    <!-- <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                <app-title *ngIf="section.section === 'Ofertas'" [title]="section.title"></app-title>
-            </ng-container>
+    <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados" [banners_corps]="bannersCorporativos"></app-aside>
 
-            <app-card [itemList]="offersService.offers"></app-card>
-
-            <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                <button class="plus dropdown-toggle d-none d-md-block" *ngIf="section.section === 'Ofertas'">{{
-                    section.btn }}</button>
-            </ng-container>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div> -->
-    <!-- END OFERTAS -->
-
-    <!-- PAQUETES -->
-    <!-- <div class="container-fluid px-5">
-        <div class="row pt-5 pb-md-3 mb-4">
-            <div class="col-12">
-                <h2 class="titleHome">
-                    <strong>Paquetes turísticos </strong> ¡Elige ahora tu paquete nacional o internacional!</h2>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="row">
-            <div *ngFor="let packb of packagesService.packages" class="col-12 col-md-{{ packb.banner }}">
-                <app-package *ngIf="packb.banner && !packb.fly" [image]="packb.image" [label]="packb.label" [banner]="packb.banner" [span]="packb.span"
-                    [pack]="packb.pack" [city]="packb.city" [price]="packb.price" [destiny]="packb.destiny"></app-package>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="row text-md-end text-center py-2 py-md-5">
-            <div class="col-12">
-                <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                    <button class="plus dropdown-toggle px-4" *ngIf="section.section === 'Paquetes'">{{ section.btn }}</button>
-                </ng-container>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div> -->
-    <!-- END PAQUETES -->
-
-    <!-- MAPA -->
-    <!-- <div class="row">
-    <div class="col-12">
-        <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-            <app-title *ngIf="section.section === 'Mapa'" [title]="section.title"></app-title>
-        </ng-container>
-    </div>
-    <div class="clearfix"></div>
-</div>
-<google-map height="500px" width="100%" [zoom]="zoom" [center]="center" [options]="options"></google-map> -->
-    <!-- END MAPA -->
-
-    <!-- PUBLICIDAD -->
-    <div class="container-fluid">
-        <div class="row mb-md-5">
-            <div class="col-12 col-md-6 publicidad pe-md-0">
-                <img class="left" src="/assets/publicidad/left.png" alt="publicidad">
-            </div>
-            <div class="col-12 col-md-6 publicidad ps-md-0">
-                <img class="right" src="/assets/publicidad/right.png" alt="publicidad">
-            </div>
-        </div>
-    </div>
-
-    <!-- END PUBLICIDAD -->
 
     <!-- VUELOS -->
     <div class="container-fluid">

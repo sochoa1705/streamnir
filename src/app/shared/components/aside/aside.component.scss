@@ -111,3 +111,21 @@ aside {
 .pointer {
     cursor: pointer;
 }
+
+
+.publicidad {
+    //height: 220px;
+    position: relative;
+    padding: 0;
+    // display: flex;
+
+    // width: 100%;
+    overflow: hidden;
+    margin-top: 50px;
+    
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+}
