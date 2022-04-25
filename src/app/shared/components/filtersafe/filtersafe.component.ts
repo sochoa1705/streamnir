@@ -9,20 +9,18 @@ import * as moment from "moment";
 import { ModelTaggingBuscarSeguros } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 
-
-
 export interface IFormSeguros {
-  origenSafe:        string;
-  destinoSafe:       string;
-  passengers:        Passenger[];
+  origenSafe: string;
+  destinoSafe: string;
+  passengers: Passenger[];
   ClienteCotizacion: any[];
-  countCustomers:    number;
-  Edades:            string;
-  fromDate:          string;
-  toDate:            string;
-  days:              string;
-  destinyString:     DestinyString;
-  aniosNacimiento:   AniosNacimiento[];
+  countCustomers: number;
+  Edades: string;
+  fromDate: string;
+  toDate: string;
+  days: string;
+  destinyString: DestinyString;
+  aniosNacimiento: AniosNacimiento[];
 }
 
 export interface AniosNacimiento {
@@ -31,14 +29,14 @@ export interface AniosNacimiento {
 }
 
 export interface DestinyString {
-  id_destino:          string;
+  id_destino: string;
   descripcion_destino: string;
-  es_nacional:         number;
-  ref_assistcard:      number;
+  es_nacional: number;
+  ref_assistcard: number;
 }
 
 export interface Passenger {
-  edad:            string;
+  edad: string;
   fechaNacimiento: string;
 }
 
@@ -342,10 +340,10 @@ export class FiltersafeComponent implements OnInit {
   }
 
 
-  insertTag(form:IFormSeguros){
-    const edades =  form.Edades.split(';');
-    const sum = edades.reduce((acc,el) => (acc = Number(el) + acc) , 0);
-    const promEdades = sum/edades.length;
+  insertTag(form: IFormSeguros) {
+    const edades = form.Edades.split(';');
+    const sum = edades.reduce((acc, el) => (acc = Number(el) + acc), 0);
+    const promEdades = sum / edades.length;
 
     const tag = new ModelTaggingBuscarSeguros(
       form.destinyString.descripcion_destino,
@@ -353,8 +351,14 @@ export class FiltersafeComponent implements OnInit {
       form.passengers.length,
       promEdades,
       form.fromDate,
-      form.toDate
-    ) 
+      form.toDate,
+      "PE",
+      "Peru",
+      Number(this.diffDays())
+    )
+
+    console.log('tagde buscar');
+    console.log(JSON.stringify(tag));
 
     TaggingService.tagBuscarSeguros(tag);
   }
@@ -384,20 +388,15 @@ export class FiltersafeComponent implements OnInit {
       //console.log(this.fromDate);
       let form = this.insuranceQuoteForm.value
       localStorage.removeItem('Datasafe')
-      
+
       this.insertTag(form);
 
       localStorage.setItem('Datasafe', JSON.stringify(form));
 
       this._router.navigateByUrl('/seguros', { skipLocationChange: true }).then(() =>
         this._router.navigate(["/seguros/planes"]));
-
-
-
     }
   }
-
-
 
   destinySring() {
     for (const i of this.options) {

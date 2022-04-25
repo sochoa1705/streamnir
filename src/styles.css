@@ -196,7 +196,6 @@ section {
       border: 0.5px solid #009AED !important;
       box-shadow: none; }
   .card.seguro {
-    width: calc(20% - 16px);
     display: inline-block;
     margin: 0 10px;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
@@ -256,6 +255,7 @@ section {
       .card.seguro .card-body h2 {
         margin-bottom: 10px; }
       .card.seguro .card-body p {
+        margin-top: 8px;
         font-weight: 500;
         font-size: 10px;
         line-height: 15px;
@@ -716,6 +716,11 @@ section {
   .portletFiltro .rowFiltro .columnFiltro input[type="text"].origen,
   .portletFiltro .rowFiltro .columnFiltro input[type="text"].destino {
     width: 290px; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .portletFiltro .rowFiltro .columnFiltro input,
+    .portletFiltro .rowFiltro .columnFiltro input[type="text"] {
+      font-size: 14px;
+      letter-spacing: 0; } }
 
 .portletFiltro .rowFiltro .columnFiltro input::-webkit-input-placeholder,
 .portletFiltro .rowFiltro .columnFiltro input[type="text"]::-webkit-input-placeholder {
@@ -1519,6 +1524,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .posFilter {
   z-index: 11; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .posFilter {
+      max-width: 90%; } }
 
 .inputDer {
   border-radius: 3px 0 0 3px !important;
@@ -2034,6 +2042,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     letter-spacing: 0.25px;
     color: #009AED;
     cursor: pointer; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .footerLink {
+      display: block; } }
   @media (max-width: 640px) {
     .footerLink {
       display: block; } }
@@ -3212,127 +3223,126 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .boxTab {
   width: 100%; }
-  @media (min-width: 1024px) {
-    .boxTab .rowBoxTab {
-      display: flex;
-      padding: 4px 10px 10px 10px;
-      position: relative; } }
-  @media (min-width: 768px) {
-    .boxTab .rowBoxTab {
-      display: flex;
-      padding: 4px 10px 10px 10px;
-      position: relative; } }
-  @media (max-width: 640px) {
-    .boxTab .rowBoxTab {
-      display: flex;
-      flex-wrap: wrap; }
-      .boxTab .rowBoxTab app-calendar {
-        width: 100%; } }
-  .boxTab .rowBoxTab.right {
-    justify-content: end; }
-  .boxTab .rowBoxTab.text,
-  .boxTab .rowBoxTab label {
-    font-family: Open Sans;
-    font-style: normal;
-    font-size: 14px;
-    line-height: 27px;
-    letter-spacing: 0.18px; }
-  .boxTab .rowBoxTab .padRight {
-    padding-right: 20px; }
-  .boxTab .rowBoxTab .fullWidht {
-    width: 100%;
-    height: 49px; }
-  .boxTab .rowBoxTab .colBoxtab {
+  .boxTab .rowBoxTab {
     display: flex;
-    flex: 1 1 auto;
-    padding: 10px 0; }
-    .boxTab .rowBoxTab .colBoxtab.w-30 {
-      width: 30%; }
-      @media (max-width: 768px) {
-        .boxTab .rowBoxTab .colBoxtab.w-30 {
+    padding: 4px 10px 10px 10px;
+    position: relative; }
+    @media (max-width: 990px) and (min-width: 640px) {
+      .boxTab .rowBoxTab {
+        display: flex;
+        padding: 4px 10px 0px 10px;
+        position: relative; } }
+    @media (max-width: 640px) {
+      .boxTab .rowBoxTab {
+        display: flex;
+        flex-wrap: wrap; }
+        .boxTab .rowBoxTab app-calendar {
           width: 100%; } }
-    .boxTab .rowBoxTab .colBoxtab.w-10 {
-      width: 10%; }
-      @media (max-width: 768px) {
-        .boxTab .rowBoxTab .colBoxtab.w-10 {
-          width: 100%; } }
-    .boxTab .rowBoxTab .colBoxtab.w-15 {
-      width: 15%; }
-      @media (max-width: 768px) {
-        .boxTab .rowBoxTab .colBoxtab.w-15 {
-          width: 100%; } }
-    .boxTab .rowBoxTab .colBoxtab.widthBtn {
-      align-items: center;
-      width: 180px;
-      min-width: 180px; }
-      @media (max-width: 768px) {
-        .boxTab .rowBoxTab .colBoxtab.widthBtn {
-          width: 100%; } }
-    .boxTab .rowBoxTab .colBoxtab.colGrid {
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-right: 10px; }
-    .boxTab .rowBoxTab .colBoxtab .rowTab {
+    .boxTab .rowBoxTab.right {
+      justify-content: end; }
+    .boxTab .rowBoxTab.text,
+    .boxTab .rowBoxTab label {
+      font-family: Open Sans;
+      font-style: normal;
+      font-size: 14px;
+      line-height: 27px;
+      letter-spacing: 0.18px; }
+    .boxTab .rowBoxTab .padRight {
+      padding-right: 20px; }
+    .boxTab .rowBoxTab .fullWidht {
+      width: 100%;
+      height: 49px; }
+    .boxTab .rowBoxTab .colBoxtab {
       display: flex;
-      width: 100%;
-      gap: 10px; }
-      @media (max-width: 768px) {
-        .boxTab .rowBoxTab .colBoxtab .rowTab {
-          flex-wrap: wrap; } }
-      @media (max-width: 768px) {
-        .boxTab .rowBoxTab .colBoxtab .rowTab.width50 .colTab {
-          flex: 1 1 45%; } }
-      .boxTab .rowBoxTab .colBoxtab .rowTab .colTab {
-        flex: 1 1 100%; }
-        .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .w-15 {
-          width: 100%; }
-        .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .d-left {
-          border-radius: 3px;
-          border: 0.5px solid #E4E5E7; }
-        .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .form-check-input {
-          width: 24px;
-          height: 24px; }
-        .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .form-check-label {
-          cursor: pointer; }
+      flex: 1 1 auto;
+      padding: 10px 0; }
+      .boxTab .rowBoxTab .colBoxtab.w-30 {
+        width: 30%; }
         @media (max-width: 768px) {
-          .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .colBoxtab {
-            padding: 0; } }
-    .boxTab .rowBoxTab .colBoxtab .d-left {
-      border-radius: 3px 0 0 3px;
-      border: 0.5px solid #E4E5E7;
-      border-right: 0px; }
-      @media (max-width: 640px) {
-        .boxTab .rowBoxTab .colBoxtab .d-left {
-          border-right: 0.5px solid #E4E5E7; } }
-    .boxTab .rowBoxTab .colBoxtab .d-right {
-      border-radius: 0 3px 3px 0;
-      border: 0.5px solid #E4E5E7; }
-    @media (min-width: 1024px) {
-      .boxTab .rowBoxTab .colBoxtab {
-        padding: 0; } }
-    .boxTab .rowBoxTab .colBoxtab input {
-      width: 100%;
-      padding: 0 !important;
-      height: 49px;
-      font-family: Montserrat;
-      font-size: 16px;
-      text-transform: capitalize;
-      color: #4B4B4B;
-      text-indent: 40px;
-      border: 0.5px solid #E4E5E7;
-      border-radius: 3px; }
-      .boxTab .rowBoxTab .colBoxtab input.icono {
+          .boxTab .rowBoxTab .colBoxtab.w-30 {
+            width: 100%; } }
+      .boxTab .rowBoxTab .colBoxtab.w-10 {
+        width: 10%; }
+        @media (max-width: 768px) {
+          .boxTab .rowBoxTab .colBoxtab.w-10 {
+            width: 100%; } }
+      .boxTab .rowBoxTab .colBoxtab.w-15 {
+        width: 15%; }
+        @media (max-width: 768px) {
+          .boxTab .rowBoxTab .colBoxtab.w-15 {
+            width: 100%; } }
+      .boxTab .rowBoxTab .colBoxtab.widthBtn {
+        align-items: center;
+        width: 180px;
+        min-width: 180px; }
+        @media (max-width: 768px) {
+          .boxTab .rowBoxTab .colBoxtab.widthBtn {
+            width: 100%; } }
+      .boxTab .rowBoxTab .colBoxtab.colGrid {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-right: 10px; }
+      .boxTab .rowBoxTab .colBoxtab .rowTab {
+        display: flex;
+        width: 100%;
+        gap: 10px; }
+        @media (max-width: 768px) {
+          .boxTab .rowBoxTab .colBoxtab .rowTab {
+            flex-wrap: wrap; } }
+        @media (max-width: 768px) {
+          .boxTab .rowBoxTab .colBoxtab .rowTab.width50 .colTab {
+            flex: 1 1 45%; } }
+        .boxTab .rowBoxTab .colBoxtab .rowTab .colTab {
+          flex: 1 1 100%; }
+          .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .w-15 {
+            width: 100%; }
+          .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .d-left {
+            border-radius: 3px;
+            border: 0.5px solid #E4E5E7; }
+          .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .form-check-input {
+            width: 24px;
+            height: 24px; }
+          .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .form-check-label {
+            cursor: pointer; }
+          @media (max-width: 768px) {
+            .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .colBoxtab {
+              padding: 0; } }
+      .boxTab .rowBoxTab .colBoxtab .d-left {
+        border-radius: 3px 0 0 3px;
+        border: 0.5px solid #E4E5E7;
+        border-right: 0px; }
+        @media (max-width: 640px) {
+          .boxTab .rowBoxTab .colBoxtab .d-left {
+            border-right: 0.5px solid #E4E5E7; } }
+      .boxTab .rowBoxTab .colBoxtab .d-right {
+        border-radius: 0 3px 3px 0;
+        border: 0.5px solid #E4E5E7; }
+      @media (min-width: 1024px) {
+        .boxTab .rowBoxTab .colBoxtab {
+          padding: 0; } }
+      .boxTab .rowBoxTab .colBoxtab input {
+        width: 100%;
+        padding: 0 !important;
+        height: 49px;
+        font-family: Montserrat;
+        font-size: 16px;
+        text-transform: capitalize;
+        color: #4B4B4B;
         text-indent: 40px;
-        background: url("./assets/origen.png") no-repeat 10px center; }
-        .boxTab .rowBoxTab .colBoxtab input.icono-no {
-          text-indent: 10px;
-          background: none; }
-    .boxTab .rowBoxTab .colBoxtab .iconCalendar {
-      position: relative; }
-      .boxTab .rowBoxTab .colBoxtab .iconCalendar svg {
-        position: absolute;
-        top: 12px;
-        left: 10px; }
+        border: 0.5px solid #E4E5E7;
+        border-radius: 3px; }
+        .boxTab .rowBoxTab .colBoxtab input.icono {
+          text-indent: 40px;
+          background: url("./assets/origen.png") no-repeat 10px center; }
+          .boxTab .rowBoxTab .colBoxtab input.icono-no {
+            text-indent: 10px;
+            background: none; }
+      .boxTab .rowBoxTab .colBoxtab .iconCalendar {
+        position: relative; }
+        .boxTab .rowBoxTab .colBoxtab .iconCalendar svg {
+          position: absolute;
+          top: 12px;
+          left: 10px; }
 
 .card .rowMobileCard {
   margin: 0; }
@@ -4294,6 +4304,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .boxVuelos {
   width: 100%;
   padding: 35px; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .boxVuelos {
+      padding: 10px; } }
   .boxVuelos .rowVuelo {
     display: flex;
     align-items: center;
@@ -4355,6 +4368,16 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .boxImgVuelo .gridVuelo img {
       height: 100%;
       width: 350px; }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .boxImgVuelo .gridVuelo img {
+          width: 100%; } }
+    @media (max-width: 990px) and (min-width: 640px) {
+      .boxImgVuelo .gridVuelo {
+        grid-column-gap: 10px;
+        grid-template-rows: 230px 115px 250px; } }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .boxImgVuelo {
+      padding: 0 20px; } }
 
 .viajaBox {
   height: 550px;
@@ -4899,6 +4922,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       line-height: 24px;
       letter-spacing: 0.5px;
       color: #FFFFFF; }
+    @media (max-width: 990px) and (min-width: 640px) {
+      .boxAero .boxAbout .descrip {
+        padding: 0 30px; } }
   .boxAero .boxAbout .sliderAero {
     margin-right: 5%; }
     .boxAero .boxAbout .sliderAero #carouselAero {
@@ -4912,6 +4938,19 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         opacity: 0.5;
         height: 78px;
         border-radius: 0; }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .boxAero .boxAbout .sliderAero #carouselAero {
+          width: 450px !important; }
+          .boxAero .boxAbout .sliderAero #carouselAero img {
+            width: 100%; } }
+      @media (max-width: 640px) {
+        .boxAero .boxAbout .sliderAero #carouselAero {
+          width: 100%; } }
+    @media (max-width: 990px) and (min-width: 640px) {
+      .boxAero .boxAbout .sliderAero {
+        width: 50%;
+        display: flex;
+        align-items: center; } }
 .boxAero .tabSalidas {
   width: 100%;
   padding: 0 10%;
@@ -5635,6 +5674,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .tabDestino .tabImgDest img {
       width: 100%;
       height: 100%; }
+  @media (max-width: 640px) {
+    .tabDestino {
+      padding: 0; } }
 
 @media (max-width: 640px) {
   .movDestino {
@@ -5700,6 +5742,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .tabContentDest .tabColumna .contenidoTab {
       flex: 1 1 45%;
       padding-top: 30px; }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .tabContentDest .tabColumna .contenidoTab {
+          flex: 1 1 70%; } }
     .tabContentDest .tabColumna .imagenTab {
       display: flex;
       justify-content: flex-end;
@@ -5709,6 +5754,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         overflow: hidden; }
         .tabContentDest .tabColumna .imagenTab .galeria img {
           width: 100%; }
+    @media (max-width: 990px) and (min-width: 640px) {
+      .tabContentDest .tabColumna {
+        gap: 50px; } }
+    @media (max-width: 640px) {
+      .tabContentDest .tabColumna {
+        gap: 20px; } }
   .tabContentDest .contOpcion {
     font-family: Montserrat;
     font-size: 16px;
@@ -5717,6 +5768,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     letter-spacing: 0.15px;
     margin-left: 20px;
     color: #4B4B4B; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .tabContentDest {
+      flex: 1 1 50%;
+      padding: 0 30px; } }
 
 @media (max-width: 640px) {
   .tabContentDest {
@@ -5733,7 +5788,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       .tabContentDest .opcionTab .tabName {
         font-size: 12px;
         line-height: 18px;
-        height: 30px; }
+        height: 30px;
+        width: 30%;
+        justify-content: center;
+        align-items: center; }
     .tabContentDest .tabColumna {
       flex-wrap: wrap; }
       .tabContentDest .tabColumna .contenidoTab {
