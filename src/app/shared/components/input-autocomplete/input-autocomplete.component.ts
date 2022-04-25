@@ -111,9 +111,11 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     if (value) {
       this.value = value;
       this.valueInput = value.title;
+      this.viewIcon = true;
     } else {
       this.value = null;
       this.valueInput = ""
+      this.viewIcon = false;
     }
   }
 
@@ -155,6 +157,7 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   clean() {
     this.value = null;
     this.valueInput = "";
+    this.viewIcon = false;
     this._items = [];
   }
 
