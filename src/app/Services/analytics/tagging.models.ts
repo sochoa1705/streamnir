@@ -215,7 +215,8 @@ export class ModelTaggingBuscarSeguros {
     /**Formato DD/MM/YYYY */
     public fechaRegreso: string | number,
     public codigoPaisOrigen = "PE",
-    public nombrePaisOrigen = "Peru"
+    public nombrePaisOrigen = "Peru",
+    public duration: number
   ) { }
 
   generateTag() {
@@ -227,9 +228,9 @@ export class ModelTaggingBuscarSeguros {
       fechaSalida: moment(this.fechaSalida, "DD/MM/YYYY").format("YYYY/MM/DD"),
       fechaRegreso: moment(this.fechaRegreso, "DD/MM/YYYY").format("YYYY/MM/DD"),
       diasAnticipacion: moment(this.fechaSalida, "DD/MM/YYYY").diff(moment(), 'days'),
-      duracionViaje: moment(this.fechaRegreso, "DD/MM/YYYY").diff(moment(this.fechaSalida, "DD/MM/YYYY"), 'days'),
-      paisOrigen: this.codigoPaisOrigen + '_' + this.nombrePaisOrigen,
-      regionDestino: this.codigoRegionDestino + '_' + this.nombreRegionDestino,
+      duracionViaje: this.duration,
+      paisOrigen: this.nombrePaisOrigen,
+      regionDestino: this.nombreRegionDestino,
       eCategory: "Vertical Seguros",
       eAction: "Cotizar Seguros",
       eLabel: generateLabelTag()
@@ -382,26 +383,26 @@ export class ActionFieldCheckout {
     public step: number,
   ) { }
 }
-export class ModelTaggingcheckoutOption{
+export class ModelTaggingcheckoutOption {
   constructor(
-    public  event:     string,
-    public  ecommerce: EcommercecheckoutOption,
-  ){}
- 
+    public event: string,
+    public ecommerce: EcommercecheckoutOption,
+  ) { }
+
 }
-export class EcommercecheckoutOption{
+export class EcommercecheckoutOption {
   constructor(
-    public  checkout_option: CheckoutOption,
-  ){}
+    public checkout_option: CheckoutOption,
+  ) { }
 }
-export class CheckoutOption{
+export class CheckoutOption {
   constructor(
-    public   actionField: ActionFieldCheckoutOption,
-  ){}
+    public actionField: ActionFieldCheckoutOption,
+  ) { }
 }
-export class ActionFieldCheckoutOption{
+export class ActionFieldCheckoutOption {
   constructor(
-    public  step:   number,
-    public  option: string,
-  ){}
+    public step: number,
+    public option: string,
+  ) { }
 }
