@@ -6170,6 +6170,9 @@ input.inputIzq {
   .btn.secundary:hover {
     background: #E4E5E7; }
 
+.carousel-indicators {
+  z-index: 1; }
+
 button.customers {
   position: relative;
   width: 190px;
@@ -6190,6 +6193,10 @@ button.customers {
     content: url(./assets/arrow.svg);
     right: 0;
     position: absolute; }
+
+@media (max-width: 640px) {
+  .dropdown-menu {
+    transform: translate(10px, 10px) !important; } }
 
 .scroll-to-top {
   position: fixed;
