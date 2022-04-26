@@ -185,8 +185,8 @@ export class ResultadosComponent implements OnInit {
 
       this.vuelosLogicInit(respVuelos, null)
 
-      arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
-      departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
+      // arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("DD-MM-YYYY");
+      // departureDate = moment(departureDate, 'DD/MM/YYYY').format("DD-MM-YYYY");
 
       // arrivalDate = moment(arrivalDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
       // departureDate = moment(departureDate, 'DD/MM/YYYY').format("YYYY-MM-DD");
@@ -212,6 +212,8 @@ export class ResultadosComponent implements OnInit {
       const params = objectToQueryString(payload);
 
       this.urlIframe = this.urlIframe + "?" + params;
+
+      // console.log( this.urlIframe);
 
     });
   }
