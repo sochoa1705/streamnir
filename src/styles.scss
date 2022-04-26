@@ -7559,6 +7559,10 @@ $icon-size-mobile: 28px;
     }
 }
 
+.carousel-indicators {
+    z-index: 1;
+}
+
 button.customers {
     position: relative;
     width: 190px;
@@ -7579,6 +7583,12 @@ button.customers {
         content: url(./assets/arrow.svg);
         right: 0;
         position: absolute
+    }
+}
+
+.dropdown-menu {
+    @media (max-width: 640px) {
+        transform: translate(10px, 10px) !important;
     }
 }
 

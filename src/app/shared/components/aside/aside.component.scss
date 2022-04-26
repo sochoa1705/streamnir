@@ -24,6 +24,9 @@ aside {
         @media (max-width: 768px) {
             bottom: 22px;
         }
+        @media (max-width: 640px) {
+            display: none;
+        }
         button {
             border: 1px solid $white;
             background: transparent;
@@ -112,20 +115,16 @@ aside {
     cursor: pointer;
 }
 
-
 .publicidad {
     //height: 220px;
     position: relative;
     padding: 0;
     // display: flex;
-
     // width: 100%;
     overflow: hidden;
     margin-top: 50px;
-    
     img {
         width: 100%;
         height: auto;
     }
-
 }
