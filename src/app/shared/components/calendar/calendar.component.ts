@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { EnumFlightType } from '../flights/models/flights.interface';
+import { EnumFlightType } from '../tabs/tabs.models';
 import { ClassValueCalendar } from './calendar.models';
 
 
@@ -90,6 +90,10 @@ export class CalendarComponent implements AfterViewInit{
   
     isInside(date: NgbDate) {
       return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
+    }
+
+    validLength(){
+      console.log('e ', document.getElementById('txtInitDate')?.textContent);
     }
 
 }

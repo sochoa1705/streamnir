@@ -1,21 +1,20 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
-import { concat, Observable, of, Subject } from 'rxjs';
-import { distinctUntilChanged, tap, switchMap, catchError, map, debounceTime } from 'rxjs/operators';
+import { concat, Observable, of, OperatorFunction, pipe, Subject, UnaryFunction } from 'rxjs';
+import { distinctUntilChanged, tap, switchMap, catchError, map, debounceTime, filter, takeUntil } from 'rxjs/operators';
+import { DestinosService } from 'src/app/Component/home-page/vuelos/commons/components/destinos/services/destinos.service';
 import { ModelTaggingVuelos } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { ICardAutocomplete } from '../../card-autocomplete/card-autocomplete.interface';
-import { DisponibilidadPayload } from '../../flights/models/flights.class';
-import { EnumCabins, EnumFlightType } from '../../flights/models/flights.interface';
 import {  PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { IDistributionObjectVuelos } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos } from '../../tabs/tabs.models';
+import { EnumCabinsVuelos, EnumFlightType, ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos } from '../../tabs/tabs.models';
 import { IGeoTree } from './tab-vuelos.interfaces';
 
 @Component({
@@ -23,7 +22,7 @@ import { IGeoTree } from './tab-vuelos.interfaces';
   templateUrl: './tab-vuelos.component.html',
   styleUrls: ['./tab-vuelos.component.scss']
 })
-export class TabVuelosComponent implements OnInit {
+export class TabVuelosComponent implements OnInit,OnDestroy {
 
 
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
@@ -57,7 +56,7 @@ export class TabVuelosComponent implements OnInit {
   hoveredDate: NgbDate | null = null;
 
   EnumFlightType = EnumFlightType;
-  EnumCabins = EnumCabins;
+  EnumCabins = EnumCabinsVuelos;
 
 
   vuelos$: Observable<ICardAutocomplete[]>;
@@ -70,24 +69,60 @@ export class TabVuelosComponent implements OnInit {
 
   vuelosValue:EnumFlightType ; 
 
+  private readonly destroy$ = new Subject();
 
 
-  constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar, private router: Router
+  constructor(private destineService: DestinyService,public formatter: NgbDateParserFormatter,
+    private _snackBar: MatSnackBar, private router: Router,private destinosService: DestinosService
   ) {
     this.createForm();
-
-
-    //  const data = this.destineService.searchMv();
-    //  console.log(data);
-
   }
 
 
   ngOnInit(): void {
+
     this.loadVuelosOrigen();
     this.loadVuelosDestino();
+
+    this.logicPathVuelos();
+
   }
+
+
+
+  logicPathVuelos(){
+
+    this.destinosService.getParam().pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(codigo=>{
+      if(!codigo){
+        this.form.controls["origen"].patchValue(null);
+        this.form.controls["destino"].patchValue(null);
+      }else{
+        this.initCiudadDestino(codigo)
+      }
+    })
+
+  }
+
+
+  initCiudadDestino(codigoCiudad:string){
+    
+
+    this.form.controls["origen"].patchValue({
+      children: [],
+      codigo: "LIM",
+      id: "LIM",
+      title: "Lima"
+    })
+
+    this.destineService.getGeoTree(codigoCiudad).subscribe(data=>{
+      const ciudad = this.convertFormatAutocomplete(data);
+      this.form.controls["destino"].patchValue(ciudad[0]);
+    })
+
+  }
+  
 
 
   get viajesForm(){
@@ -187,7 +222,7 @@ export class TabVuelosComponent implements OnInit {
 
   createForm() {
     this.form = new FormGroup({
-      clase: new FormControl(EnumCabins.economico),
+      clase: new FormControl(this.EnumCabins.economy),
       viajes: new FormControl(EnumFlightType.ida_vuelta),
       origen: new FormControl('', Validators.required),
       destino: new FormControl('', Validators.required),
@@ -234,9 +269,9 @@ export class TabVuelosComponent implements OnInit {
     }
 
     const url = this.getUrl();
+
     this.navigateToResponseUrl(url);
   }
-
 
 
   insertTag(params:any){
@@ -265,6 +300,21 @@ export class TabVuelosComponent implements OnInit {
       }
     }) 
 
+
+    const getCabinsVuelosCode = (cabin: string) =>{
+      switch (cabin) {
+        case  EnumCabinsVuelos.economy:
+           return "EC"
+        case  EnumCabinsVuelos.business:
+          return "BS"
+        case  EnumCabinsVuelos.first_class:
+          return "FC"
+        default:
+          return ""
+      }
+    }
+  
+
     const nombre = `${params.idOrigen}_${params.idDestino}_${params.businessClass?'BS':'EC'}_${getTipoTag(params.flightType).codigo}`;
 
     let diasAnticipacion = moment( params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
@@ -282,7 +332,7 @@ export class TabVuelosComponent implements OnInit {
       nombre,
       params.origen.title,
       params.destino.title,
-      params.businessClass?'Business':'Economy',
+      getCabinsVuelosCode(params.cabinsVuelos),
       getTipoTag(params.flightType).descripcion,
       this.distributionObject.adultos + this.distributionObject.ninos + this.distributionObject.infantes,
       this.distributionObject.adultos,
@@ -302,12 +352,14 @@ export class TabVuelosComponent implements OnInit {
 
   getParams() {
     let params = new ParamsVuelos(
-      this.fromDate,
-      this.toDate,
-      this.form,
-      this.citysDestinosSelect,
-      this.citysOrigenSelect
-    ).getParams();
+      {
+        fromDate: this.fromDate,
+        toDate: this.toDate,
+        form: this.form,
+        citysDestinosSelect: this.citysDestinosSelect,
+        citysOrigenSelect: this.citysOrigenSelect
+      }
+    );
     return params;
   }
   public getUrl() {
@@ -362,5 +414,12 @@ export class TabVuelosComponent implements OnInit {
   changeDate(value: ClassValueCalendar) {
     this.toDate = value.toDate;
     this.fromDate = value.fromDate;
+  }
+
+
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

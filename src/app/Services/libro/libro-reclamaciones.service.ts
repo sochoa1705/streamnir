@@ -12,7 +12,7 @@ export class LibroReclamacionesService {
 
   constructor(private http: HttpClient) {}
   libroData(payload: any): Observable<any> {
-    let url_api = `${environment.urlLibro}${ENDPOINT_API.LIBRO_RECLAMO}`
+    let url_api = `${environment.urlLibro}/${ENDPOINT_API.LIBRO_RECLAMO}`
     return this.http
       .post<any>(url_api, payload)}
 }

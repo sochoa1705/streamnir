@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputAutocompleteComponent } from './input-autocomplete.component';
 import { CardAutocompleteModule } from '../card-autocomplete/card-autocomplete.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,8 @@ import { CardAutocompleteModule } from '../card-autocomplete/card-autocomplete.m
   ],
   imports: [
     CommonModule,
-    CardAutocompleteModule
+    CardAutocompleteModule,
+    FormsModule
   ],
   exports:[InputAutocompleteComponent]
 })

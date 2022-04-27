@@ -15,6 +15,8 @@ export class AsideComponent {
   slider!: IGalleryImage[];
   @Input()
   images!: IGalleryImage[];
+  @Input()
+  banners_corps!: IGalleryImage[];
 
   constructor() { }
 
@@ -42,7 +44,7 @@ export class AsideComponent {
 
     const tag = new ModelTaggingSlidersBanners(
       getFileName(gallery.PathImage),
-      "...",
+      gallery.NameImage,
       nombreTagg,
       position
     )

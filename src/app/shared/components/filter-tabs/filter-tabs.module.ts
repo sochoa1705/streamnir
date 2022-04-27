@@ -18,7 +18,7 @@ import { PopUpPasajerVuelosoModule } from '../pop-up-pasajero-vuelos/pop-up-pasa
 import { TabArmaPaquetesComponent } from './tab-arma-paquetes/tab-arma-paquetes.component';
 import { TabPaquetesComponent } from './tab-paquetes/tab-paquetes.component';
 import { TabAutosComponent } from './tab-autos/tab-autos.component';
-
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 
 
 @NgModule({
@@ -38,7 +38,8 @@ import { TabAutosComponent } from './tab-autos/tab-autos.component';
     MaterialModule,
     CalendarModule,
     InputAutocompleteModule,
-    PopUpPasajerVuelosoModule
+    PopUpPasajerVuelosoModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     MatSnackBar

@@ -4,6 +4,7 @@ import { FiltersafeComponent } from './filtersafe.component';
 import { MaterialModule } from '../../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ FiltersafeComponent ],
@@ -13,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
+    NgxMaskModule.forRoot(),
   ],
   exports: [ FiltersafeComponent ],
   bootstrap: [FiltersafeComponent]

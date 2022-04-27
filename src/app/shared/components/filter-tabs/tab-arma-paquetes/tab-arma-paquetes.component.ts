@@ -9,9 +9,8 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { URLHotel, ParamsHoteles, ParamArmaTuViaje, URLArmaTuViaje } from '../../tabs/tabs.models';
+import { URLHotel, ParamsHoteles, ParamArmaTuViaje, URLArmaTuViaje, EnumCabins, EnumFlightType } from '../../tabs/tabs.models';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
-import { EnumCabins, EnumFlightType } from '../../flights/models/flights.interface';
 
 
 

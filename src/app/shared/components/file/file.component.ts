@@ -55,14 +55,13 @@ export class FileComponent implements OnInit {
   loadImages = (file:any) => {
     try {
 
-      const parameter = {
-        File:file,
-        UserId: 44290
-      }
+      const usuarioStorage:any = localStorage.getItem("usuario");
+      const usuarioDb:any = JSON.parse(usuarioStorage);
+
       const formData = new FormData();
-        formData.append('Parameter.UserId', "44290")
+        formData.append('Parameter.UserId', usuarioDb.id)
         formData.append('Parameter.File', file)
-        formData.append('TrackingCode', "3f3fef")
+        formData.append('TrackingCode',  Guid())
         formData.append('MuteExceptions', "true")
         formData.append('Caller.Company', "Agil")
         formData.append('Caller.Application', "Interagencias")

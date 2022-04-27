@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       { path: '', component: FlightComponent },
       { path: 'lista', component: FlightComponent },
-      { path: 'destino/:codigoCiudad', component: DestinosComponent },
+      { path: ':destino/:codigoCiudad', component: DestinosComponent },
       { path: ':slug', component: OffersContinentComponent },
       { path: '**', component: FlightComponent }
     ]

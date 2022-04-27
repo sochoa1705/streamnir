@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { routerToCapitalice } from 'src/app/shared/utils';
-import { ModelTaggingActividades, ModelTaggingAddToCart, ModelTaggingBuscarSeguros, ModelTaggingCheckout, ModelTaggingDetalleBeneficio, ModelTaggingHoteles, ModelTaggingLibroReclamaciones, ModelTaggingLogin, ModelTaggingMostrarResultados, ModelTaggingOfertasVuelos, ModelTaggingSlidersBanners, ModelTaggingSubscripcionOfertas, ModelTaggingVuelos, ModelTaggingVuelosHoteles } from './tagging.models';
+import { ModelTaggingActividades, ModelTaggingAddToCart, ModelTaggingBuscarSeguros, ModelTaggingCheckout, ModelTaggingcheckoutOption, ModelTaggingDetalleBeneficio, ModelTaggingHoteles, ModelTaggingLibroReclamaciones, ModelTaggingLogin, ModelTaggingMostrarResultados, ModelTaggingOfertasVuelos, ModelTaggingSlidersBanners, ModelTaggingSubscripcionOfertas, ModelTaggingVuelos, ModelTaggingVuelosHoteles } from './tagging.models';
 
 @Injectable({ providedIn: 'root' })
 export class TaggingService {
+  
 
 
   constructor() { }
@@ -75,6 +76,9 @@ export class TaggingService {
 
   public static tagMostrarResultados(modelTaggingMostrarResultados: ModelTaggingMostrarResultados) {
     this.triggerTag(modelTaggingMostrarResultados);
+  }
+  public static tagCheckoutOption(modelTaggingcheckoutOption: ModelTaggingcheckoutOption) {
+    this.triggerTag(modelTaggingcheckoutOption);
   }
 
   public static tagMostrarDetalleBeneficio(modelTaggingDetalleBeneficio: ModelTaggingDetalleBeneficio) {
