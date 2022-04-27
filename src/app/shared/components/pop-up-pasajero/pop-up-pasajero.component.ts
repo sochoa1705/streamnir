@@ -42,6 +42,13 @@ import { NotificationService } from '../../../Services/notification.service';
   ],
 })
 export class PopUpPasajeroComponent implements OnInit,OnChanges {
+
+
+  numMaxPersonasHabitacion = 6;
+  numMaxPersonas = 9;
+  numMaxNroNinos = 4;
+  numMaxHabitaciones = 4;
+
   showOption: Boolean = true;
 
   pasajeros = 0;
@@ -51,7 +58,7 @@ export class PopUpPasajeroComponent implements OnInit,OnChanges {
 
   idStateOpen: string = '';
 
-  habitaciones: IDistributionObject[] = [];
+  habitaciones: DistributionObject[] = [];
 
   @Input() onlyPasajeros = false;
   @Input() habitacionDisabled = true;
@@ -100,7 +107,32 @@ export class PopUpPasajeroComponent implements OnInit,OnChanges {
   }
 
   agregarHabitacion() {
+    // this.habitaciones
+
+
     const distributionInitial = new DistributionObject();
+
+
+    const objBefore = this.distributionObject(this.habitaciones);
+
+    const objAfter =this.distributionObject([distributionInitial]);
+
+    if( objBefore.pasajeros + objAfter.pasajeros > this.numMaxPersonas ){
+      this.notificationService.showNotificacion(
+        'Error',
+        `Se permiten máximo ${this.numMaxPersonas} personas`
+      );
+      return;
+    }if( objBefore.habitacion + objAfter.habitacion > this.numMaxHabitaciones){
+      this.notificationService.showNotificacion(
+        'Error',
+        `Se permiten máximo ${this.numMaxHabitaciones} habitaciones`
+      );
+      return;
+    }
+    
+
+
     this.habitaciones.push(distributionInitial);
   }
 
@@ -122,29 +154,44 @@ export class PopUpPasajeroComponent implements OnInit,OnChanges {
   }
 
   public calculateDistributionTravel(
-    distribution: IDistributionObject,
+    distribution: DistributionObject,
     optionTravel: 'ninos' | 'adultos',
     optionAddRemove: number
   ): void {
+
+    const objDistribution = this.distributionObject(this.habitaciones);
+
     if (
-      distribution.nroNinos === 4 &&
+      distribution.nroNinos + distribution.nroAdultos === this.numMaxPersonasHabitacion &&
+      optionAddRemove === 1
+    ) {
+      this.notificationService.showNotificacion(
+        'Error',
+         `Se permiten máximo ${this.numMaxPersonasHabitacion} personas por habitación `
+      );
+      return;
+    }
+
+
+    if (
+      objDistribution.ninos === this.numMaxNroNinos &&
       optionTravel == 'ninos' &&
       optionAddRemove === 1
     ) {
       this.notificationService.showNotificacion(
         'Error',
-        'Solo se permiten 4 niños'
+        `Solo se permiten ${this.numMaxNroNinos} niños`
       );
       return;
     }
 
     if (
-      distribution.nroNinos + distribution.nroAdultos === 10 &&
+      objDistribution.ninos + objDistribution.adultos === this.numMaxPersonas &&
       optionAddRemove === 1
     ) {
       this.notificationService.showNotificacion(
         'Error',
-        'Se permiten máximo 10 personas'
+         `Se permiten máximo ${this.numMaxPersonas} personas `
       );
       return;
     }
@@ -208,7 +255,7 @@ export class PopUpPasajeroComponent implements OnInit,OnChanges {
 
   }
 
-  public distributionObject(habitaciones: IDistributionObject[]){
+  public distributionObject(habitaciones: DistributionObject[]){
 
 
     const pasajeros =  habitaciones.reduce((acc,item)=>(acc += item.nroAdultos + item.nroNinos) , 0);

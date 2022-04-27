@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { ModelTaggingActividades } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
+import { InputValidationService } from 'src/app/Services/inputValidation.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
@@ -36,7 +37,7 @@ export class TabActividadesComponent  {
 
 
   constructor(private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar) {
+    private _snackBar: MatSnackBar, public inputValidator : InputValidationService) {
     this.form = new FormGroup({
       destino: new FormControl(''),
     });

@@ -23,14 +23,14 @@
         </div>
     </div>
     <div class="contRight text-center" *ngIf="numCode">
-        Se envio su {{(tipoReclamo === 'R') ? 'reclamo' : 'queja'}}
+        Gracias por su comentario. Su {{(tipoReclamo === 'R') ? 'reclamo' : 'queja'}} ha sido registrado
         <br>
         <strong> N° {{numCode }}</strong>
         <hr> Estaremos en contacto.
         <br>
         <br>
         <button (click)="reenviar()" class="btnEnviar">
-            Ir a fomrulario
+            Volver al formulario
         </button>
     </div>
 

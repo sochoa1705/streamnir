@@ -78,7 +78,7 @@ export class HotelsComponent implements OnInit {
     });
   }
 
-  validateScore(position: number, score: string): string {
-    return Math.round(Number(score)) < position ? 'star-null' : 'star';
+  validateScore(position: number, category: string): string {
+    return Math.round(Number(category.substring(1))) < position ? 'star-null' : 'star';
   }
 }

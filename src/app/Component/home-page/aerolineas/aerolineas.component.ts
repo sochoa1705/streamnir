@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 import { FlightService as AerolineaService } from '../vuelos/commons/components/flight/flight.service';
 import * as moment from 'moment';
 import { ParamsVuelos } from '../resultados/models/resultados.interfaces';
-import { EnumCabins, EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
+import { EnumCabinsVuelos, EnumFlightType } from 'src/app/shared/components/tabs/tabs.models';
 
 @Component({
   selector: 'app-aerolineas',
@@ -131,7 +131,7 @@ export class AerolineasComponent implements OnInit {
 
 
   generateParams(entity: any) {
-    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${entity.OriginCode} ${entity.Origin}`, `${entity.DestinationCode} ${entity.Destination}`, entity.DateStart, entity.DateEnd, "1", "0", "0", EnumCabins.economico);
+    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${entity.OriginCode} ${entity.Origin}`, `${entity.DestinationCode} ${entity.Destination}`, entity.DateStart, entity.DateEnd, "1", "0", "0", EnumCabinsVuelos.economy);
   }
 
   searchFlight(entity: any) {

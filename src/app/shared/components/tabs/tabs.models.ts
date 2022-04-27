@@ -1,10 +1,30 @@
 import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
-import { FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 import { NgbDate } from "@ng-bootstrap/ng-bootstrap/datepicker/ngb-date";
 import * as moment from "moment";
 import { environment } from "src/environments/environment";
 import { ICardAutocomplete } from "../card-autocomplete/card-autocomplete.interface";
 import { IForm, ISuggest } from '../filter-tabs/tab-vuelos/tab-vuelos.interfaces';
+
+
+export enum EnumFlightType {
+    ida_vuelta= 0,
+    ida=1,
+    multy_city=2
+}
+
+export enum EnumCabinsVuelos {
+    economy = '0',
+    business = '1',
+    first_class = '2'
+}
+
+
+export enum EnumCabins {
+    economico = 'Y',
+    business = 'B',
+}
+
 
 interface Pasajeros {
     adultos: number;
@@ -26,6 +46,9 @@ interface Params {
     horaDestino?: string;
     flightType?: string;
     countryCode?: string;
+    idMonth?: string;
+    idNoche?: string;
+    idTheme?: string;
 }
 
 
@@ -76,17 +99,17 @@ export class URLVuelos implements UrlNmViajes {
     public url = '/vuelos/resultados';
 
     private tab: tapType;
-    private params: Params;
+    private params: ParamsVuelos;
     private distribution: any;
 
-    constructor(params: Params, distribution: any) {
+    constructor(params: ParamsVuelos, distribution: any) {
         this.tab = 'ONLY_FLIGHT';
         this.params = params;
         this.distribution = distribution;
     }
 
     getUrl() {
-        return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&destination=${this.params.idDestino + "%20" + this.params.destino?.title || ''}&departure=${this.params.idOrigen + "%20" + this.params.origen?.title || ''}&departureDate=${this.params.startDate}&arrivalDate=${this.params.endDate}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&businessCabin=${this.params.businessClass}&lang=ES`;
+        return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&destination=${this.params.idDestino + "%20" + this.params.destino?.title || ''}&departure=${this.params.idOrigen + "%20" + this.params.origen?.title || ''}&departureDate=${this.params.startDate}&arrivalDate=${this.params.endDate}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.params.cabinsVuelos}&lang=ES`;
     }
 }
 export class URLHotel implements UrlNmViajes {
@@ -121,7 +144,8 @@ export class URLAutos implements UrlNmViajes {
     }
 
     getUrl() {
-        return `${this.url}?pickUpDate=${this.params.startDate}&pickUpHour=${this.params.horaInicio}&dropOffDate=${this.params.endDate}&dropOffHour=${this.params.horaDestino}&pickUpLocation=${this.params.idDestino}&dropOffLocation=${this.params.idDestino}&rateType=best&Country=${this.params.countryCode}`;
+        let idOrigen = this.params.idOrigen || this.params.idDestino;
+        return `${this.url}?pickUpDate=${this.params.startDate}&pickUpHour=${this.params.horaInicio}&dropOffDate=${this.params.endDate}&dropOffHour=${this.params.horaDestino}&pickUpLocation=${this.params.idDestino}&dropOffLocation=${idOrigen}&rateType=best&Country=${this.params.countryCode}`;
     }
 }
 
@@ -176,9 +200,7 @@ export class URLPaquete implements UrlNmViajes {
     }
 
     getUrl() {
-        let date = this.params.startDate.split('/');
-        let month = date[2] + '-' + date[1];
-        return `${this.url}?country=${this.country}&month=${month}`;
+        return `${this.url}?country=${this.params.idDestino}&month=${this.params.idMonth}&nights=${this.params.idNoche}&themes=${this.params.idTheme}`;
     }
 }
 
@@ -216,7 +238,8 @@ export class ParamsAutos implements ParamsTabs {
         public fromDate: NgbDate | null,
         public toDate: NgbDate | null,
         public form: FormGroup,
-        public citysDestinosSelect: Array<any>
+        public citysDestinosSelect: Array<any>,
+        public citysRecojoSelect: Array<any>,
     ) { }
 
     getParams() {
@@ -225,12 +248,14 @@ export class ParamsAutos implements ParamsTabs {
         let startDate = moment(startDateStr, 'D/M/YYYY').format('YYYY-MM-DD');
         let endDate = moment(endDateStr, 'D/M/YYYY').format('YYYY-MM-DD');
         let destino = this.form.controls['destino'].value;
+        let recojo = this.form.controls['recojo'].value;
         let horaInicio = this.form.controls['initHour'].value.replace(':','');
         let horaDestino = this.form.controls['lastHour'].value.replace(':','');
         let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.value === destino)?.iata : '';
+        let idOrigen = recojo !== '' ? (this.citysRecojoSelect || []).find(item => item.value === recojo)?.iata : '';
         let countryCode = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.value === destino)?.countryCode : '';
 
-        return { startDate, endDate, destino, idDestino, countryCode, horaInicio, horaDestino };
+        return { startDate, endDate, destino, idDestino, countryCode, horaInicio, horaDestino, idOrigen };
     }
 }
 
@@ -261,20 +286,22 @@ export class ParamPaquete implements ParamsTabs {
         public fromDate: NgbDate | null,
         public toDate: NgbDate | null,
         public form: FormGroup,
-        public citysDestinosSelect: any[]
+        public citysDestinosSelect: any[],
+        public themes: any[],
+        public months: any[],
+        public noches: any[]
     ) { }
 
     getParams() {
-        let endDateNow = new Date();
-        let startDateStr = `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
-        let endDateStr = `${(endDateNow!.getDay()).toString()}/${(endDateNow!.getMonth()).toString()}/${(endDateNow!.getFullYear()).toString()}`;
-        let startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
-        let endDate = moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
+        let startDate = moment(new Date(), 'D/M/YYYY').format('DD/MM/YYYY');
+        let endDate = moment(new Date(), 'D/M/YYYY').format('DD/MM/YYYY');
         let destino = this.form.controls['destino'].value;
         let businessClass = false;
         let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.label === destino).code : 0;
-    
-        return { startDate, endDate, destino, businessClass, idDestino};
+        let idNoche = this.form.controls['noches'].value;
+        let idTheme = this.form.controls['themes'].value;
+        let idMonth = this.form.controls['months'].value;
+        return { startDate, endDate, destino, businessClass, idDestino, idTheme, idNoche, idMonth};
     }
 }
 export class ParamsActividades extends ParamsHoteles {
@@ -311,30 +338,47 @@ export class ParamsVueloHotel implements ParamsTabs {
         return { startDate, endDate, origen, destino, businessClass, idOrigen, idDestino };
     }
 }
-export class ParamsVuelos implements ParamsTabs {
+
+
+export interface ParamsVuelosProps {
+    fromDate: NgbDate | null;
+    toDate: NgbDate | null;
+    form: FormGroup;
+    citysDestinosSelect: any[];
+    citysOrigenSelect: any[];
+}
+
+export class ParamsVuelos{
+    public startDate:string;
+    public endDate:string;
+    public origen:any;
+    public destino:any;
+    public cabinsVuelos:EnumCabinsVuelos;
+    public idOrigen:string;
+    public idDestino:string;
+    public flightType:EnumFlightType;    
     constructor(
-        public fromDate: NgbDate | null,
-        public toDate: NgbDate | null,
-        public form: FormGroup,
-        public citysDestinosSelect: any[],
-        public citysOrigenSelect: any[],
-    ) { }
+       {
+        fromDate,
+        toDate,
+        form,
+        citysDestinosSelect,
+        citysOrigenSelect
+       }:ParamsVuelosProps
+    ){ 
+        let startDateStr = `${(fromDate!.day).toString()}/${(fromDate!.month).toString()}/${(fromDate!.year).toString()}`;
+        let endDateStr = toDate ? `${(toDate!.day).toString()}/${(toDate!.month).toString()}/${(toDate!.year).toString()}` : "";
 
-    getParams() {
-        let startDateStr = `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
-        let endDateStr = this.toDate ? `${(this.toDate!.day).toString()}/${(this.toDate!.month).toString()}/${(this.toDate!.year).toString()}` : "";
-
-        let startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
-        let endDate = endDateStr ? moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY') : "";
-        let origen = this.form.controls['origen'].value;
-        let destino = this.form.controls['destino'].value;
-        let businessClass = this.form.controls['clase'].value === 'business';
-        let idOrigen = origen.codigo;
-        let flightType = this.form.controls['viajes'].value;
-        let idDestino = destino.codigo;
-
-        return { startDate, endDate, origen, destino, businessClass, idOrigen, idDestino, flightType };
+        this.startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
+        this.endDate = endDateStr ? moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY') : "";
+        this.origen = form.controls['origen'].value;
+        this.destino = form.controls['destino'].value;
+        this.cabinsVuelos = form.controls['clase'].value;
+        this.idOrigen = this.origen.codigo;
+        this.flightType = form.controls['viajes'].value;
+        this.idDestino = this.destino.codigo;
     }
+
 }
 export class SaveModelVuelos {
     constructor(

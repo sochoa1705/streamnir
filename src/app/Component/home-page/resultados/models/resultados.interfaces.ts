@@ -1,3 +1,4 @@
+import { EnumCabinsVuelos } from "src/app/shared/components/tabs/tabs.models";
 
 export interface IMotorVuelo {
     groups: IAerolineas[];
@@ -195,7 +196,7 @@ export interface IParamsVuelos {
     adults:        string;
     children:  string;
     infants:  string;
-    businessCabin: string;
+    flightClass: string;
     lang:          string;
     flightType:    string;
 }
@@ -211,7 +212,7 @@ export class ParamsVuelos implements IParamsVuelos{
         public adults: string,
         public children: string,
         public infants: string,
-        public businessCabin: string,
+        public flightClass: EnumCabinsVuelos,
         public excludedAirlines = null,
         public multicity = null, 
         public directSubmit: string = "",
@@ -221,3 +222,17 @@ export class ParamsVuelos implements IParamsVuelos{
 }
 
 
+export interface IframeMotorVuelosProps{
+    flightType:number;
+    departureLocation:string;
+    arrivalLocation:string;
+    departureDate:string;
+    arrivalDate?:string;
+    adults:number;
+    children:number;
+    infants:number;
+    flightClass:EnumCabinsVuelos;
+    selected_cabins?:string;
+    excludedAirlines?:string;
+    multicity?:string;
+}

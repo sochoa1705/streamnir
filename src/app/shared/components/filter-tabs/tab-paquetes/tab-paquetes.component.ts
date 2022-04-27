@@ -9,23 +9,24 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { URLHotel, ParamsHoteles, ParamArmaTuViaje, URLArmaTuViaje, URLPaquete, ParamPaquete } from '../../tabs/tabs.models';
+import { URLHotel, ParamsHoteles, ParamArmaTuViaje, URLArmaTuViaje, URLPaquete, ParamPaquete, EnumFlightType, EnumCabins } from '../../tabs/tabs.models';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
-import { EnumCabins, EnumFlightType } from '../../flights/models/flights.interface';
 import { filter } from 'rxjs/operators';
+import { IPackageCountry } from '../tab-vuelos/tab-vuelos.interfaces';
+import { InputValidationService } from '../../../../Services/inputValidation.service';
 
 
 
 @Component({
-    selector: 'app-tab-paquetes',
-    templateUrl: './tab-paquetes.component.html',
-    styleUrls: ['./tab-paquetes.component.scss']
-  })
-  export class TabPaquetesComponent {
-  
-    @ViewChild('popUp') popUpElement:PopUpPasajeroComponent | undefined;
+  selector: 'app-tab-paquetes',
+  templateUrl: './tab-paquetes.component.html',
+  styleUrls: ['./tab-paquetes.component.scss']
+})
+export class TabPaquetesComponent {
 
-    form!: FormGroup;
+  @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
+
+  form!: FormGroup;
   fromDate: NgbDate | null
   citys: Array<any> = [];
   origen: any;
@@ -34,9 +35,9 @@ import { filter } from 'rxjs/operators';
 
   distribution = '';
 
-  distributionObject:DistributionObjectA;
+  distributionObject: DistributionObjectA;
 
-  
+
   hoveredDate: NgbDate | null = null;
 
   private _vuelosTab: SaveModelVuelos;
@@ -46,6 +47,11 @@ import { filter } from 'rxjs/operators';
 
   countries: Array<any> = [];
   countriesSearch: Array<any> = [];
+  countriesPackage: Array<any> = [];
+  countriesPackageSearch: Array<any> = [];
+  themes: Array<any> = [];
+  months: Array<any> = [];
+  noches: Array<any> = [{ code: '3,4,5', name: 'de 1 a 5 noches' }, { code: '6', name: 'de 6 a 10 noches' }];
 
   @Input() set vuelosTab(value: SaveModelVuelos) {
     if (value) {
@@ -58,35 +64,40 @@ import { filter } from 'rxjs/operators';
     return this._vuelosTab;
   }
 
-  constructor(private calendar: NgbCalendar,private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar) {
+  constructor(private calendar: NgbCalendar, private destineService: DestinyService, public formatter: NgbDateParserFormatter,
+    private _snackBar: MatSnackBar,
+    public inputValidator: InputValidationService) {
     this.form = new FormGroup({
       destino: new FormControl(''),
+      themes: new FormControl(''),
+      months: new FormControl(''),
+      noches: new FormControl(''),
     });
     this.getListCountries();
-
-   }
+    this.getPackageCountries();
+    this.getThemes();
+    this.getMonths();
+  }
 
   autoComplete(e: any, typeSearch = 'FLIGHT_HOTEL') {
     // let elemento = this.origen.nativeElement;
-    this.countriesSearch = [];
+    this.countriesPackageSearch = [];
     let elemento = e.target;
 
     let value = elemento.value;
 
-    if (value.length >= 3) {
-      this.countriesSearch = this.countries;
+    if (value.length >= 1) {
       //this.getListCiudades(value, typeSearch);
-      this.countriesSearch = this.countries.filter( (item) => item.label.toLowerCase().includes(value));
+      this.countriesPackageSearch = this.countriesPackage.filter((item) => item.label.toLowerCase().includes(value.toLowerCase()));
     }
   }
 
-  get viajesForm(){
+  get viajesForm() {
     return this.form.get("destino")?.value;
   }
 
 
-  
+
   getListCiudades(e: any, typeSearch = 'FLIGHT_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
@@ -97,39 +108,83 @@ import { filter } from 'rxjs/operators';
     )
   }
 
+  getThemes() {
+    this.destineService.getThemes().subscribe(
+      data => {
+        this.themes = data;
+
+      },
+      err => console.log(err)
+    )
+  }
+
+  getMonths() {
+    this.destineService.getFilters().subscribe(
+      data => {
+        this.months = data.months;
+      },
+      err => console.log(err)
+    )
+  }
+
   getListCountries() {
     this.destineService.getDestinyCountriesPaqueteDinamico().subscribe(
       data => {
-        console.log('data countries ', data);
         this.countries = data;
       }
+    )
+  }
+
+  getPackageCountries(): void {
+    this.destineService.getPackageCountry().subscribe(data => {
+      this.countriesPackage = data;
+    },
+      err => console.log(err)
     )
   }
 
 
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
- }
+  }
 
- openSnackBar(message: string, action: string = "Error") {
-  this._snackBar.open(message, "", {
-    duration: 2000,
-    panelClass: ['mat-toolbar', 'mat-warn']
-  });
-}
+  openSnackBar(message: string, action: string = "Error") {
+    this._snackBar.open(message, "", {
+      duration: 2000,
+      panelClass: ['mat-toolbar', 'mat-warn']
+    });
+  }
 
   public searchPaquete() {
+    // const errors = this.validateTab();
+
+    // if (errors.length > 0) {
+    //   this.openSnackBar(errors.join(" - "))
+    //   return;
+    // }
     const url = this.getUrlPaquete();
     this.navigateToResponseUrl(url);
   }
 
+  // validateTab() {
+  //   const errors = [];
+  //   if (this.form.controls['destino'].value == '') {
+  //     errors.push("El destino es requerido");
+  //   }
+  //   if (this.form.controls['months'].value == '') {
+  //     errors.push("El mes es requerido");
+  //   }
+  //   return errors;
 
-  public getUrlAlojamiento(){
-      let url = ''
-      let params = this.getParamsAlojamiento();
-      this.insertTag(params);
-      url = new URLHotel(params, this.distribution).getUrl();
-      return url;
+  // }
+
+
+  public getUrlAlojamiento() {
+    let url = ''
+    let params = this.getParamsAlojamiento();
+    this.insertTag(params);
+    url = new URLHotel(params, this.distribution).getUrl();
+    return url;
   }
 
   public getUrlPaquete() {
@@ -140,15 +195,15 @@ import { filter } from 'rxjs/operators';
   }
 
 
-  insertTag(params:any){
+  insertTag(params: any) {
 
-    const getCodigoIata = (id:string)=>{
+    const getCodigoIata = (id: string) => {
       return id.split("::")[1];
     }
-  
+
     const nombre = `${getCodigoIata(params.idDestino)}`;
-    const diasAnticipacion = moment( params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
-    const duracionViaje =  moment( params.endDate, "DD/MM/YYYY").diff(moment( params.startDate, "DD/MM/YYYY"), 'days');
+    const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
+    const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
 
 
     const model = new ModelTaggingHoteles(
@@ -159,22 +214,25 @@ import { filter } from 'rxjs/operators';
       this.distributionObject.ninos,
       0,
       this.distributionObject.habitacion,
-      moment( params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      moment( params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
       diasAnticipacion,
       duracionViaje
     )
-    
+
     TaggingService.buscarHoteles(model);
   }
 
 
-  getParamsAlojamiento(){
+  getParamsAlojamiento() {
     let params = new ParamPaquete(
       this.fromDate,
       this.toDate,
       this.form,
-      this.countriesSearch,
+      this.countriesPackageSearch,
+      this.themes,
+      this.months,
+      this.noches
     ).getParams();
     return params;
   }
@@ -184,5 +242,5 @@ import { filter } from 'rxjs/operators';
     this.toDate = value.toDate;
     this.fromDate = value.fromDate;
   }
-  
-  }
+
+}

@@ -1,6 +1,6 @@
 
 <ng-container *ngIf="!loading">
-    <label  *ngIf="!archivo64  || isErrorImagenUrl" class="perfilCicle pointer" for="file-upload">
+    <label  *ngIf="!archivo64  && isErrorImagenUrl" class="perfilCicle pointer" for="file-upload">
         {{name | slice:0:1}}
             <div class="blueIcon">
                 <ng-container >

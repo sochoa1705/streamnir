@@ -8,10 +8,17 @@
 
 .oldPrice {
     position: relative;
+    height: 15px;
     p {
         strong {
             margin-left: 5px;
         }
+    }
+}
+
+.invisible {
+    @media (max-width: 640px) {
+        display: none;
     }
 }
 
@@ -53,7 +60,7 @@
         background: #54d834;
         border: 0;
         border-radius: 20px;
-        &.best{
+        &.best {
             background-color: #f00;
         }
     }
@@ -175,7 +182,7 @@
     }
 }
 
-p.text{
+p.text {
     font-family: Montserrat;
     font-weight: bold;
     font-size: 25px;
@@ -185,6 +192,7 @@ p.text{
     color: $gray;
     width: 100%;
 }
-.mat-spinner{
+
+.mat-spinner {
     margin: 0 auto
 }
