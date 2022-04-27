@@ -48,7 +48,7 @@ export class ModelTaggingVuelos {
     public nombre: number | string,
     public origen: number | string,
     public destino: number | string,
-    public clase: number | string,
+    public clase: string,
     public tipo: number | string,
     public numPasajeros: number | string,
     public adultos: number | string,

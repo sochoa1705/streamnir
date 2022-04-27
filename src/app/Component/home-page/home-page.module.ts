@@ -12,7 +12,6 @@ import { FlightsService } from 'src/app/Services/flights/flights.service';
 import { SegurosModule } from './seguros/seguros.module';
 import { PerfilModule } from './perfil/perfil.module';
 import { ToolbarModule } from 'src/app/shared/components/toolbar/toolbar.module';
-import { ComprarModule } from './comprar/comprar.module';
 import { ResultadosModule } from './resultados/resultados.module';
 import { HomeModule } from './home/home.module';
 import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer.module';
@@ -46,7 +45,6 @@ import { ResponsabilidadSocialModule } from './resonsabilidad-social/responsabil
     ToolbarModule,
     PreFooterModule,
     FooterModule,
-    ComprarModule,
     ConformidadModule,
     ResultadosModule,
     LoaderModule,

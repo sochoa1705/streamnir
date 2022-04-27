@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import { interval, Observable } from 'rxjs';
 import { ParamsVuelos } from 'src/app/Component/home-page/resultados/models/resultados.interfaces';
 import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
-import { EnumCabins, EnumFlightType } from 'src/app/shared/components/flights/models/flights.interface';
+import { EnumCabinsVuelos, EnumFlightType } from 'src/app/shared/components/tabs/tabs.models';
 import { toUp } from 'src/app/shared/utils';
 import { FlightService } from '../flight/flight.service';
 import { DestinosService } from './services/destinos.service';
@@ -93,7 +93,7 @@ export class DestinosComponent implements OnInit {
   }
 
   generateParams(v: IVueloDestino) {
-    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${v.OriginCode} ${v.Origin}`, `${v.DestinationCode} ${v.Destination}`, v.DateStart, v.DateEnd, "1", "0", "0", EnumCabins.economico);
+    return new ParamsVuelos(EnumFlightType.ida_vuelta.toString(), `${v.OriginCode} ${v.Origin}`, `${v.DestinationCode} ${v.Destination}`, v.DateStart, v.DateEnd, "1", "0", "0", EnumCabinsVuelos.economy);
   }
 
   buscarVuelo(vuelo: IVueloDestino) {

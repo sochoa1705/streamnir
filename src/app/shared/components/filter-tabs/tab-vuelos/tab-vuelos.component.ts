@@ -12,11 +12,9 @@ import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { ICardAutocomplete } from '../../card-autocomplete/card-autocomplete.interface';
-import { DisponibilidadPayload } from '../../flights/models/flights.class';
-import { EnumCabins, EnumFlightType } from '../../flights/models/flights.interface';
 import {  PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { IDistributionObjectVuelos } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos } from '../../tabs/tabs.models';
+import { EnumCabinsVuelos, EnumFlightType, ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos } from '../../tabs/tabs.models';
 import { IGeoTree } from './tab-vuelos.interfaces';
 
 @Component({
@@ -58,7 +56,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
   hoveredDate: NgbDate | null = null;
 
   EnumFlightType = EnumFlightType;
-  EnumCabins = EnumCabins;
+  EnumCabins = EnumCabinsVuelos;
 
 
   vuelos$: Observable<ICardAutocomplete[]>;
@@ -224,7 +222,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
 
   createForm() {
     this.form = new FormGroup({
-      clase: new FormControl(EnumCabins.economico),
+      clase: new FormControl(this.EnumCabins.economy),
       viajes: new FormControl(EnumFlightType.ida_vuelta),
       origen: new FormControl('', Validators.required),
       destino: new FormControl('', Validators.required),
@@ -271,9 +269,9 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
     }
 
     const url = this.getUrl();
+
     this.navigateToResponseUrl(url);
   }
-
 
 
   insertTag(params:any){
@@ -302,6 +300,21 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
       }
     }) 
 
+
+    const getCabinsVuelosCode = (cabin: string) =>{
+      switch (cabin) {
+        case  EnumCabinsVuelos.economy:
+           return "EC"
+        case  EnumCabinsVuelos.business:
+          return "BS"
+        case  EnumCabinsVuelos.first_class:
+          return "FC"
+        default:
+          return ""
+      }
+    }
+  
+
     const nombre = `${params.idOrigen}_${params.idDestino}_${params.businessClass?'BS':'EC'}_${getTipoTag(params.flightType).codigo}`;
 
     let diasAnticipacion = moment( params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
@@ -319,7 +332,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
       nombre,
       params.origen.title,
       params.destino.title,
-      params.businessClass?'Business':'Economy',
+      getCabinsVuelosCode(params.cabinsVuelos),
       getTipoTag(params.flightType).descripcion,
       this.distributionObject.adultos + this.distributionObject.ninos + this.distributionObject.infantes,
       this.distributionObject.adultos,
@@ -339,12 +352,14 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
 
   getParams() {
     let params = new ParamsVuelos(
-      this.fromDate,
-      this.toDate,
-      this.form,
-      this.citysDestinosSelect,
-      this.citysOrigenSelect
-    ).getParams();
+      {
+        fromDate: this.fromDate,
+        toDate: this.toDate,
+        form: this.form,
+        citysDestinosSelect: this.citysDestinosSelect,
+        citysOrigenSelect: this.citysOrigenSelect
+      }
+    );
     return params;
   }
   public getUrl() {
