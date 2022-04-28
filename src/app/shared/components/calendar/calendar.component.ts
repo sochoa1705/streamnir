@@ -19,6 +19,9 @@ export class CalendarComponent implements AfterViewInit{
   @Input() typeValue: number = EnumFlightType.ida_vuelta;
   @Input() placeHolder: string = 'Salida';
 
+  @Input() requiredToDate: boolean ;
+  @Input() requiredFromDate: boolean ;
+
   EnumFlightType = EnumFlightType;
 
   hoveredDate: NgbDate | null = null;

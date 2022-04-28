@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { InputValidationService } from '../../../../Services/inputValidation.service';
+import { NotificationService } from 'src/app/Services/notification.service';
 moment.locale('es')
 
 @Component({
@@ -35,9 +36,12 @@ export class TabVueloHotelComponent  {
   distributionObject:DistributionObjectA;
   hoveredDate: NgbDate | null = null;
 
+  isSubmit = false;
 
-  constructor(private calendar: NgbCalendar,private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
+  constructor(private calendar: NgbCalendar,
+    private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar,
+    private notification: NotificationService,
     public inputValidator : InputValidationService
     ) {
     this.createForm();
@@ -53,11 +57,9 @@ export class TabVueloHotelComponent  {
   createForm() {
     this.form = new FormGroup({
       clase: new FormControl('economy'),
-      origen: new FormControl(),
-      destino: new FormControl(''),
-      origenHotel: new FormControl(''),
-
-    });
+      origen: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      destino: new FormControl('',[Validators.required, Validators.minLength(3)])
+    }); 
   }
 
   navigateToResponseUrl(url: string): void {
@@ -65,11 +67,55 @@ export class TabVueloHotelComponent  {
  }
 
 
+ get origenField(){
+   return this.form.controls["origen"];
+ }
+
+ get destinoField(){
+  return this.form.controls["destino"];
+}
+
+  
+validateForm(field: string) {
+  return this.form.controls[field].errors
+    && this.isSubmit;
+}
+
+
+getErrorsForm(form:FormGroup): string[] {
+  let errors:any[] = [];
+
+  if (form.controls["origen"].invalid) {
+    errors.push('El campo origen es obligatorio');
+  } 
+  if (form.controls["destino"].invalid) {
+    errors.push('El campo destino es obligatorio');
+  } 
+
+  return errors;
+}
+
+
+
   public searchVueloHotel() {
-    if(!this.isValidate()){
-      this.openSnackBar("Error de validacion")
+
+    this.isSubmit = true;
+
+    let errosInputs = this.getErrorsForm(this.form);
+
+    if(errosInputs.length > 0){
+      this.notification.showNotificacion("Error", errosInputs.join(", "),10);
       return ;
     }
+    
+
+    let errorHabitaciones = this.popUpElement?.isValid();
+
+    if(!errorHabitaciones?.isValid){
+      this.notification.showNotificacion("Error", errorHabitaciones?.message || "Error en las habitaciones" )
+      return ;
+    }
+
     const url = this.getUrlVueloHotel();
 
     this.navigateToResponseUrl(url);
@@ -117,7 +163,6 @@ export class TabVueloHotelComponent  {
     return params;
   }
   public getUrlVueloHotel(): string {
-    debugger;
     let url = ''
     let params = this.getParamsVueloHotel();
     this.insertTag(params);
@@ -143,9 +188,6 @@ export class TabVueloHotelComponent  {
     }
   }
 
-  isValidate(){
-    return this.popUpElement?.isValid();
-  }
 
 
   getListCiudades(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {

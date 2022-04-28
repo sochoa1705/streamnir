@@ -19,8 +19,8 @@
 
         <div class="rowBoxTab">
             <div class="colBoxtab">
-                <input matInput aria-label="State" [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event,1)"
-                    class="form-control animated fadeIn" placeholder="Origen" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+                <input matInput aria-label="State"  [matAutocomplete]="auto1" formControlName="origen" (keyup)="autoComplete($event,1)"
+                    class="form-control animated fadeIn" [ngClass]="{'isvalid': validateForm('origen')}" placeholder="Origen" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
                 <mat-autocomplete #auto1="matAutocomplete">
                     <mat-option *ngFor="let state of citysOrigenSelect" [value]="state.label">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
@@ -32,7 +32,7 @@
             </div>
             <div class="colBoxtab">
                 <input matInput aria-label="State2"  [matAutocomplete]="auto2" formControlName="destino" (keyup)="autoComplete($event,2)"
-                    class="form-control" placeholder="Destino" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+                    class="form-control" placeholder="Destino" [ngClass]="{'isvalid': validateForm('destino')}" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
                 <mat-autocomplete #auto2="matAutocomplete">
                     <mat-option *ngFor="let state of citysDestinosSelect" [value]="state.label">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
@@ -42,7 +42,7 @@
                 </mat-autocomplete>
             </div>
 
-            <app-calendar class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
+            <app-calendar [requiredFromDate]="isSubmit" [requiredToDate]="isSubmit" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
 
 
             <div class="colBoxtab">
