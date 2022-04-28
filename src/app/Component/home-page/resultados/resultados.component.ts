@@ -51,7 +51,7 @@ export class ResultadosComponent implements OnInit {
 
     this.ar.queryParams.subscribe((resp) => {
 
-      this.urlIframe = environment.urlIframeMotorVuelos + '/?rand=' + Math.round(Math.random() * 10000000000);
+      this.urlIframe = environment.urlIframeMotorVuelos + '?rand=' + Math.round(Math.random() * 10000000000) + "&";
 
       let {  
         arrivalDate,
@@ -87,7 +87,7 @@ export class ResultadosComponent implements OnInit {
       
       const params = objectToQueryString(payload);
 
-      this.urlIframe = this.urlIframe + "?" + params;
+      this.urlIframe = this.urlIframe + params;
 
     });
   }
