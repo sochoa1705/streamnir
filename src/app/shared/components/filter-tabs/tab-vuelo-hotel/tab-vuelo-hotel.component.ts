@@ -83,7 +83,13 @@ getErrorsForm(form:FormGroup): string[] {
   } 
   if (form.controls["destino"].invalid) {
     errors.push('El campo destino es obligatorio');
-  } 
+  }     
+  if (!this.toDate) {
+    errors.push("La fecha final es requerido");
+  }
+  if (!this.fromDate) {
+    errors.push("La fecha de inicio es requerido");
+  }
 
   return errors;
 }

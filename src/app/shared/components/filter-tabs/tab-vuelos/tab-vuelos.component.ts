@@ -10,6 +10,7 @@ import { DestinosService } from 'src/app/Component/home-page/vuelos/commons/comp
 import { ModelTaggingVuelos } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
+import { NotificationService } from 'src/app/Services/notification.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { ICardAutocomplete } from '../../card-autocomplete/card-autocomplete.interface';
 import {  PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
@@ -69,11 +70,15 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
 
   vuelosValue:EnumFlightType ; 
 
+
+  isSubmit = false;
+
   private readonly destroy$ = new Subject();
 
 
   constructor(private destineService: DestinyService,public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar, private router: Router,private destinosService: DestinosService
+    private _snackBar: MatSnackBar, private router: Router,private destinosService: DestinosService,
+    private notification: NotificationService
   ) {
     this.createForm();
   }
@@ -261,10 +266,11 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
 
 
   public searchVueloHotel() {
+    this.isSubmit = true;
     const errors = this.validateTab();
 
     if (errors.length > 0) {
-      this.openSnackBar(errors.join(" - "))
+      this.notification.showNotificacion("Error", errors.join(" - "),10);
       return;
     }
 
