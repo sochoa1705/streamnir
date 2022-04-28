@@ -26,12 +26,23 @@ export class ResultadosComponent implements OnInit {
     toUp()
     this.getParams();
 
+    // window.addEventListener('message', function(event) {
+    //   let frm = document.getElementById("iframeMotorVuelos");
+    //   let height = event.data + 50;
+    //   // @ts-ignore: Object is possibly 'null'.
+    //   (frm || {}).style.height = height + 'px';
+    // }); 
+
     window.addEventListener('message', function(event) {
+      console.log('event height ', event);
       let frm = document.getElementById("iframeMotorVuelos");
-      let height = event.data + 50;
+      let height = event.data.data.height + 50;
+      if(event.data.data.scroolTop){
+        this.window.scrollTo(0,0);
+      }
       // @ts-ignore: Object is possibly 'null'.
       (frm || {}).style.height = height + 'px';
-    }); 
+    });
   }
 
 
@@ -40,7 +51,7 @@ export class ResultadosComponent implements OnInit {
 
     this.ar.queryParams.subscribe((resp) => {
 
-      this.urlIframe = environment.urlIframeMotorVuelos ;
+      this.urlIframe = environment.urlIframeMotorVuelos + '/?rand=' + Math.round(Math.random() * 10000000000);
 
       let {  
         arrivalDate,
