@@ -40,19 +40,12 @@ export class TabVueloHotelComponent  {
 
   constructor(private calendar: NgbCalendar,
     private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar,
     private notification: NotificationService,
     public inputValidator : InputValidationService
     ) {
     this.createForm();
   }
 
-  openSnackBar(message: string, action: string = "Error") {
-    this._snackBar.open(message, "", {
-      duration: 2000,
-      panelClass: ['mat-toolbar', 'mat-warn']
-    });
-  }
 
   createForm() {
     this.form = new FormGroup({
@@ -119,7 +112,7 @@ getErrorsForm(form:FormGroup): string[] {
     const url = this.getUrlVueloHotel();
 
     this.navigateToResponseUrl(url);
-  }
+  } 
 
   insertTag(params:any){
 

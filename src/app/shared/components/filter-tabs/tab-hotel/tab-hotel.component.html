@@ -8,7 +8,7 @@
         <div class="rowBoxTab">
             <div class="colBoxtab">
                 <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)"
-                     class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+                     class="form-control animated fadeIn" [ngClass]="{'isvalid': validateForm('destino')}" placeholder="¿Donde le gustaría ir?" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
                 <mat-autocomplete #auto="matAutocomplete">
                     <mat-option *ngFor="let state of citys" [value]="state.label">
                         <img class="example-option-img" aria-hidden src="./assets/origen.png">
@@ -17,7 +17,7 @@
                 </mat-autocomplete>
             </div>
             
-            <app-calendar class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
+            <app-calendar [requiredFromDate]="isSubmit" [requiredToDate]="isSubmit" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
 
             <div class="colBoxtab">
                 <button class="fullWidht" (click)="searchAlojamiento()">Buscar</button>

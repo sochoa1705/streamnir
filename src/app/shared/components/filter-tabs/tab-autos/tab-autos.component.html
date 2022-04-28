@@ -13,13 +13,13 @@
                 </div>
                 <div class="rowTab width50">
                     <div class="colTab">
-                        <app-calendar [typeValue]="1" [typeValidationDate]="1" [placeHolder]="'Salida'" class="ignore-template" (changeDate)="changeDateFirst($event)"></app-calendar>
+                        <app-calendar [typeValue]="1"  [placeHolder]="'Salida'" class="ignore-template" (changeDate)="changeDateFirst($event)"></app-calendar>
                     </div>
                     <div class="colTab">
                         <input class="form-control" formControlName="initHour" type="time" placeholder="Hora de recogida">
                     </div>
                     <div class="colTab">
-                        <app-calendar [typeValue]="1" [typeValidationDate]="2" [placeHolder]="'Retorno'" class="ignore-template" (changeDate)="changeDateLast($event)"></app-calendar>
+                        <app-calendar [typeValue]="1"  [placeHolder]="'Retorno'" class="ignore-template" (changeDate)="changeDateLast($event)"></app-calendar>
                     </div>
                     <div class="colTab">
                         <input class="form-control" formControlName="lastHour" type="time" placeholder="Hora de llegada">
