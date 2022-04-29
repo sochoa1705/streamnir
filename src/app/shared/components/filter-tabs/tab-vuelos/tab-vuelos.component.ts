@@ -180,6 +180,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
           id: x.aerocodiata,
           codigo: x.city_code,
           title: x.city,
+          country: x.country,
           children: []
         }
         nuevoArray.push(obj)
@@ -187,6 +188,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
 
         const obj = {
           id: x.aerocodiata,
+          country: "",
           codigo: "",
           title: "",
           children: [
@@ -194,6 +196,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
               id: x.aerocodiata,
               codigo: x.city_code,
               title: x.city,
+              country: x.country,
               children: []
             }
           ]
@@ -208,6 +211,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
             id: x.aerocodiata,
             codigo: x.city_code,
             title: x.city,
+            country: x.country,
             children: []
           }
         )
@@ -254,7 +258,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
     }
     if (!this.toDate && this.viajesForm !== EnumFlightType.ida) {
       errors.push("La fecha final es requerido");
-    }
+    } 
     if (!this.fromDate) {
       errors.push("La fecha de inicio es requerido");
     }

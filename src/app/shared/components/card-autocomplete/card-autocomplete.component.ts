@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
 import { ICardAutocomplete } from './card-autocomplete.interface';
-import { MockedCardAutocomplete } from './card-autocomplete.mocked';
+// import { MockedCardAutocomplete } from './card-autocomplete.mocked';
 
 @Component({
   selector: 'app-card-autocomplete',
@@ -8,7 +8,7 @@ import { MockedCardAutocomplete } from './card-autocomplete.mocked';
   styleUrls: ['./card-autocomplete.component.scss'],
 })
 export class CardAutocompleteComponent implements OnChanges {
-  @Input() cardAutocomplete: Array<ICardAutocomplete> = MockedCardAutocomplete;
+  @Input() cardAutocomplete: Array<ICardAutocomplete> ;
   @Input() boxOrigen: boolean = false;
   @Input() inputText: string
   @Output() itmSelected = new EventEmitter<ICardAutocomplete>()
