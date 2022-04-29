@@ -611,7 +611,7 @@
                     <div class="textEmision">Emisión automática después del pago.</div>
                   </div>
 
-                  <div class="boxCardPas" *ngIf="selectedPay == 'tarjeta'; else safety2">
+                  <div class="boxCardPas" *ngIf="selectedPay === 'tarjeta'; else safety2">
                     <!-- TARJETA -->
 
                     <!-- END TARJETA -->
@@ -723,6 +723,31 @@
                       Ver detalles
                     </a>
                   </h2>
+                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                    aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                      <div class="row">
+                        <div class="col-6">
+                          <span class="textAcor">1 Adulto(s)</span>
+                        </div>
+                        <div class="col-6 text-end">
+                          <span class="price_old">PEN 370,35</span>
+                          <span class="price_new">PEN 314,80</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-7">
+                          <span class="textDesc">Descuento</span>
+                        </div>
+                        <div class="col-5 text-end">
+                          <span class="price_Desc">PEN -55,55</span>
+                        </div>
+
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
 
                   <div class="row totalItem">
                     <div class="col-7">
@@ -802,6 +827,8 @@
                               <img src="./assets/comprar/card/info.png" alt="">
                             </div>
                           </div>
+
+                          <div class="clearfix"></div>
                         </div>
                       </div>
 

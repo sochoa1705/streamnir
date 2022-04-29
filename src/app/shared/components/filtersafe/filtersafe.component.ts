@@ -249,11 +249,7 @@ export class FiltersafeComponent implements OnInit {
     let array = this.insuranceQuoteForm.controls['passengers'].value;
     let Ages = []
 
-    debugger
-
     for (let i in array) {
-
-      debugger
 
       let indice = Number(i);
 

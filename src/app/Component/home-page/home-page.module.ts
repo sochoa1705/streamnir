@@ -28,6 +28,7 @@ import { MainService } from '../../Services/presenter/main/main.service';
 import { LibroReclamacionesModule } from './libro-reclamaciones/libro-reclamaciones.module';
 import { PoliticasModule } from './politicas/politicas.module';
 import { ResponsabilidadSocialModule } from './resonsabilidad-social/responsabilidad-social.module';
+import { ComprarModule } from './comprar/comprar.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -52,7 +53,8 @@ import { ResponsabilidadSocialModule } from './resonsabilidad-social/responsabil
     NuestraEmpresaModule,
     LibroReclamacionesModule,
     PoliticasModule,
-    ResponsabilidadSocialModule
+    ResponsabilidadSocialModule,
+    ComprarModule
   ],
   exports: [HomePageComponent],
   providers: [MainService, DollarChangeService, OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
