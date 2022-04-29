@@ -81,22 +81,10 @@ export class HomeComponent implements OnInit {
       this.bannersDestacados = data.filter(item=>item.Code === EGalleryCode.banners_destacados).map(item=>item.Images)[0];
       this.bannersCorporativos = data.filter(item=>item.Code === EGalleryCode.banners_corporativos).map(item=>item.Images)[0];
 
-
       this.loadedGallery = true; 
     })
   } 
 
-
-  // getAirfare() {
-  //   this._flightService.v1ApiFlightGetMostWantedGet({
-  //     TrackingCode: Guid(),
-  //     MuteExceptions: environment.muteExceptions,
-  //     'Caller.Company': "Agil",
-  //     'Caller.Application': "Interagencias"
-  //   }).subscribe((res: any) => {
-  //     this.airfare = JSON.parse(res).Result;
-  //   });
-  // }
 
   aceptConfirm() {
     this.toggleConfirmation();
