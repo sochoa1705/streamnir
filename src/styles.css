@@ -6196,7 +6196,7 @@ button.customers {
 
 @media (max-width: 640px) {
   .dropdown-menu {
-    transform: translate(10px, 10px) !important; } }
+    transform: translate(10px, 50px) !important; } }
 
 .scroll-to-top {
   position: fixed;
