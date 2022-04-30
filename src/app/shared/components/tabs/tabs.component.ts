@@ -7,7 +7,7 @@ import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
-import { ParamsHoteles, ParamsVueloHotel,  URLHotel, URLVueloHotel } from './tabs.models';
+import { ParamsHoteles, ParamsVueloHotel, URLHotel, URLVueloHotel } from './tabs.models';
 import { ChangeRQ } from '../../../Models/general/changeRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
 import { NMRequestBy } from '../../../Models/base/NMRequestBy';
@@ -63,8 +63,8 @@ export class TabsComponent implements OnInit {
 
   validPasajeros = false;
 
-  RUTA_PAQUETES = environment.urlPaqueteDinamico +  'ES/holidays/search';
-  RUTA_AUTOS =  environment.url_autos;
+  RUTA_PAQUETES = environment.urlPaqueteDinamico + 'ES/holidays/search';
+  RUTA_AUTOS = environment.url_autos;
 
 
   selectedTab: string
@@ -84,23 +84,21 @@ export class TabsComponent implements OnInit {
     this.fromDate3 = calendar.getToday();
     this.fromDate4 = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
-
-
   }
+
   ngOnInit(): void {
     this.createForm()
     this.router.params.subscribe((product) => this.casos(product.tab))
-
-    // this.getDestinyOrigin()
   }
+
   casos(e: any) {
     switch (e) {
       case 'paquetes':
         this.selectedTab = '1'
         break;
-        case 'armapaquete':
-          this.selectedTab = '2'
-          break;
+      case 'armapaquete':
+        this.selectedTab = '2'
+        break;
       case 'vuelohotel':
         this.selectedTab = '3'
         break;
@@ -117,9 +115,11 @@ export class TabsComponent implements OnInit {
       // code block
     }
   }
+
   get today() {
     return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
+
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
@@ -160,10 +160,7 @@ export class TabsComponent implements OnInit {
       origen: new FormControl(),
       destino: new FormControl(''),
       origenHotel: new FormControl(''),
-
     });
-
-
 
     this.form3 = new FormGroup({
       origen: new FormControl(''),
@@ -174,33 +171,15 @@ export class TabsComponent implements OnInit {
     });
   }
 
-
-  // customers() {
-  //   var cdr: any = document.getElementById('cdr');
-  //   cdr.style = 'display:block'
-
-  // }
-
   safeLink(e: any) {
     if (e.tab.textLabel === "seguros") {
       this.route.navigate(['/seguros'])
     }
   }
 
-
-
-
-
-
-
-
-
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
   }
-
-
-
 
   getParamsVueloHotel() {
     let params = new ParamsVueloHotel(
@@ -212,9 +191,6 @@ export class TabsComponent implements OnInit {
     ).getParams();
     return params;
   }
-
-
-
 
   public searchOnlyCar() {
     let tab = 'ONLY_CAR';
@@ -243,11 +219,10 @@ export class TabsComponent implements OnInit {
   changeTab(value: MatTabChangeEvent) {
     // (value.index == 1) ? this.navigateToResponseUrl(this.RUTA_PAQUETES) : null;
     //(value.index == 4) ? this.navigateToResponseUrl(this.RUTA_AUTOS) : null;
-    if(value.index == 6) {
+    if (value.index == 6) {
       this.callService();
     }
   }
-
 
   //TODO ELIMINAR
 

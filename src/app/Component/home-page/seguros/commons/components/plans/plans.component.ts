@@ -71,8 +71,6 @@ export class PlansComponent implements OnInit {
       localStorage.removeItem('safe0');
 
     this.getPlansAC()
-
-    
   }
 
   bestPlan() {
@@ -114,18 +112,18 @@ export class PlansComponent implements OnInit {
 
     let payload = new NMRequestBy<CotizarSeguroRQ>(lcotizacion)
 
-    ////debugger
-
     console.log('listPlansAC');
     console.log(JSON.stringify(payload))
 
 
     this.plansACService.plansAC(payload).pipe(take(1)).subscribe({
       next: (response) => {
-        this.plansAC = response.map((e: any, index: number) => {
-          e.change = (e.precioEmisionLocal * this.dollar).toFixed(2)
-          e.precioBrutochange = (e.precioBrutoLocal * this.dollar).toFixed(2)
-          return e
+        this.plansAC = response.map((elem: any, index: number) => {
+
+
+          elem.change = Number(elem.precioEmisionLocal ? elem.precioEmisionLocal : 0).toFixed(2)
+          elem.precioBrutochange = Number(elem.precioBrutoLocal ? elem.precioBrutoLocal : 0).toFixed(2)
+          return elem
         }
         )
         let maxi = this.bestPlan()
@@ -184,16 +182,16 @@ export class PlansComponent implements OnInit {
       error: error => console.log(error),
     }
     )
-    
+
   }
 
   data(id: any) {
     this.listCoverage(id);
-    
-    
+
+
     console.log(id);
     this.pop = id;
-    
+
 
   }
   sendDataLayerAddToCart(plansAC: any, resultJson: any) {
@@ -234,9 +232,9 @@ export class PlansComponent implements OnInit {
     let index: number = 0;
     ecommerce.currencyCode = plansAC.monedaLocal;
     //plansAC.map((element: any) => {
-      const currentDate = moment();
-      const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
-      const missingDays = fromDate.diff(currentDate, 'days');
+    const currentDate = moment();
+    const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
+    const missingDays = fromDate.diff(currentDate, 'days');
     pp = ({
       name: plansAC.nombreProducto,
       id: plansAC.codProducto,
@@ -262,7 +260,7 @@ export class PlansComponent implements OnInit {
   }
 
   sendDataLayerDetalleBeneficio(plansAC: any, resultJson: any) {
-    ////debugger;
+
     let actionField: ActionField = {
       list: 'Resultado de Seguros',
     }
@@ -297,9 +295,9 @@ export class PlansComponent implements OnInit {
     }
     let index: number = 0;
     //plansAC.forEach((element: any) => {
-      const currentDate = moment();
-      const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
-      const missingDays = fromDate.diff(currentDate, 'days');
+    const currentDate = moment();
+    const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
+    const missingDays = fromDate.diff(currentDate, 'days');
 
     pp = {
       name: plansAC.nombreProducto,
@@ -311,7 +309,7 @@ export class PlansComponent implements OnInit {
       variant: resultJson.destinyString.descripcion_destino,
       quantity: resultJson.passengers.length,
       metric10: this.getPromedioEdades(resultJson),
-      dimension9:  String(this.asistenciaMedicaMonto),
+      dimension9: String(this.asistenciaMedicaMonto),
       dimension11: resultJson.fromDate,
       dimension12: resultJson.toDate,
       metric11: missingDays,

@@ -2,8 +2,8 @@
 <app-toolbar [menu]="options"></app-toolbar>
 <router-outlet></router-outlet>
 <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-    <app-footer *ngIf="section.section === 'Footer'" [title1]="section.title1" [list1]="options"
-        [title2]="section.title2" [list2]="section.list2" [libro]="section.libro" [linkLibro]="section.linkLibro"
-        [span]="section.span" [addrees]="section.addrees" [title3]="section.title3"></app-footer>
+  <app-footer *ngIf="section.section === 'Footer'" [title1]="section.title1" [list1]="options" [title2]="section.title2"
+    [list2]="section.list2" [libro]="section.libro" [linkLibro]="section.linkLibro" [span]="section.span"
+    [addrees]="section.addrees" [title3]="section.title3"></app-footer>
 </ng-container>
 <app-pre-footer></app-pre-footer>

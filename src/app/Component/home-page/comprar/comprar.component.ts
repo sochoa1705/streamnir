@@ -255,8 +255,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log(this.resultJson);
     console.log(this.filtroVueloJson);
 
-    debugger
-
     const pasajeros = this.resultJson !== null ? this.resultJson['passengers'] : this.filtroVueloJson['pasajeros'];
     console.log(pasajeros);
 
@@ -271,7 +269,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.getCountries();
 
     if (this.current['filter'] !== 'filter') this.listCoverage();
-    this.dataLayerPushCheckout(this.safe0Json, this.resultJson) ;
+    this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
   }
 
   getCountries() {
@@ -617,8 +615,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   buyInsurance(): void {
-    //debugger
-
     console.clear();
     console.log('1. buyInsurance');
 
@@ -634,7 +630,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
       return;
 
-    
+
 
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
     this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson['passengers'].length));
@@ -664,8 +660,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       localStorage.setItem('reserva', JSON.stringify(response))
       //console.log('Codigo de reserva:', this.reservation);
 
-      //debugger
-
       this._loaderSubjectService.closeLoader();
 
       this.makePayment(data);
@@ -694,8 +688,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   generatePayloadForInsurance(data: any): RegistrarSeguroRQ {
 
     console.log('generatePayloadForInsurance');
-
-    //debugger
 
     this.getPassengerAges();
 
@@ -802,7 +794,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         const result = JSON.parse(this.paymentData);
 
         console.log("JSON payload make payment RS", this.paymentData);
-        //debugger
 
         if (result.Result.IsSuccess) {
 
@@ -834,9 +825,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           const fechasalida = this.resultJson.fromDate.split('/');
           const fecharetorno = this.resultJson.toDate.split('/');
-
-          //debugger
-
 
           const currentDate = moment();
           const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
@@ -1059,7 +1047,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   generateCoverages(): any {
-    //debugger
 
     let coverages: any = [];
 
