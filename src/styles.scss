@@ -81,7 +81,7 @@ button {
         color: $red_light;
         background: transparent;
         &:hover {
-            background: $red_light;
+            background: $red_light !important;
             color: $white;
         }
     }
@@ -209,7 +209,12 @@ section {
             font-size: 38px;
         }
         &>img {
-            width: 100% !important
+            //width: 100% !important
+            @media (max-width: 768px) {
+                width: 100% !important;
+                height: 100%;
+            }
+            @media (max-width: 640px) {}
         }
         &>.d-flex {
             height: 210px !important
@@ -221,6 +226,9 @@ section {
             span.d-md-none {
                 display: none !important;
             }
+        }
+        @media (max-width: 640px) {
+            height: auto;
         }
     }
     &-header {
@@ -270,14 +278,15 @@ section {
     }
     &.seguro {
         //width: calc(20% - 16px);
-        display: inline-block;
-        margin: 0 10px;
+        //display: inline-block;
+        //margin: 0 10px;
         box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
         background: $green;
         border-radius: 22px;
         overflow: hidden;
         box-sizing: border-box;
         font-family: "Montserrat";
+        width: 100%;
         @media (max-width: 768px) {
             width: 100%;
             margin: 0;
@@ -294,15 +303,15 @@ section {
             }
         }
         &:first-child {
-            margin-right: 10px;
-            margin-left: 0px;
+            //margin-right: 10px;
+            //margin-left: 0px;
         }
         &:last-child {
-            margin-left: 10px;
-            margin-right: 0px;
-            @media (max-width: 640px) {
-                margin-left: 0px;
-            }
+            //margin-left: 10px;
+            //margin-right: 0px;
+            // @media (max-width: 640px) {
+            //     margin-left: 0px;
+            // }
         }
         .card {
             &-header {

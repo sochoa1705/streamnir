@@ -37,9 +37,8 @@
         <div class="clearfix"></div>
     </div>
     <div class="row">
-        <div *ngFor="let vuelo of $vuelosInternacionales | async" class="col-12 col-md-3">
-            <app-package [fly]="'true'" btn="Ver Tarifas" [codigo_ciudad]="vuelo.DestinationCode" [image]="vuelo.Image"
-                [city]="vuelo.Destination" [span]="vuelo | generateprice"></app-package>
+        <div *ngFor="let vuelo of $vuelosInternacionales | async" class="col-12 col-md-3 col-sm-6">
+            <app-package [fly]="'true'" btn="Ver Tarifas" [codigo_ciudad]="vuelo.DestinationCode" [image]="vuelo.Image" [city]="vuelo.Destination" [span]="vuelo | generateprice"></app-package>
         </div>
         <div class="clearfix"></div>
     </div>
