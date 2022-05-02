@@ -32,6 +32,11 @@ export class HomePageComponent implements OnInit {
     this.getBusinessUnit()
     this.getIpCliente()
     this.getMain()
+
+    debugger
+
+
+
   }
   getMain() {
     this.mainService.getMenu().subscribe({
@@ -43,7 +48,7 @@ export class HomePageComponent implements OnInit {
       }
     })
   }
-  
+
   getBusinessUnit() {
     if (localStorage.getItem('businessunit') === null) {
       let payload = new NMRequest();

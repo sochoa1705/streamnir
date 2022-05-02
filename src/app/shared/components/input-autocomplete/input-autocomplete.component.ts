@@ -41,6 +41,7 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
 
   @Input() placeholder: string;
   @Input() loading: boolean = false;
+  @Input() validRequired: boolean = false;
 
   @Input() typeahead: Subject<string>;
 

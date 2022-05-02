@@ -7588,7 +7588,7 @@ button.customers {
 
 .dropdown-menu {
     @media (max-width: 640px) {
-        transform: translate(10px, 10px) !important;
+        transform: translate(10px, 50px) !important;
     }
 }
 
@@ -9050,3 +9050,16 @@ app-flightdeals {
         }
     }
 }
+
+// X-Large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) {
+//     .container-fluid {
+//         width: 1000px !important;
+//     }
+// }
+// XX-Large devices (larger desktops, 1400px and up)
+// @media (min-width: 1400px) {
+//     .container-fluid {
+//         width: 1200px !important;
+//     }
+// }

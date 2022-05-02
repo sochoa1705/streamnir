@@ -42,8 +42,6 @@ export class ValidatorsService {
         return null;
       }
 
-      debugger
-
       const valueField = formGroup.get(field)?.value;
 
       if (valueField.length < 10 || valueField.length > 50) {

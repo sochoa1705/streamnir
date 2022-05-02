@@ -29,9 +29,9 @@ export class HomeComponent implements OnInit {
 
   airfare: any;
 
-  sliderDestacados:IGalleryImage[] = [];
-  bannersDestacados:IGalleryImage[] = [];
-  bannersCorporativos:IGalleryImage[] = [];
+  sliderDestacados: IGalleryImage[] = [];
+  bannersDestacados: IGalleryImage[] = [];
+  bannersCorporativos: IGalleryImage[] = [];
 
   loadedGallery = false;
 
@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
 
     this._activatedRoute.params.pipe(
       filter(params => params.id),
-      tap(()=>this.initLoad()),
+      tap(() => this.initLoad()),
       switchMap(param => this._accountsService.confirmationAccount(param.id))
     ).subscribe(resp => {
       this.loaderSubjectService.closeLoader();
@@ -68,36 +68,23 @@ export class HomeComponent implements OnInit {
       }
     })
   }
-  
-  initLoad(){
+
+  initLoad() {
     const textSend = 'Cargando'
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
   }
 
-  getGallery(){
-    this.dataPagePresenterService.getDataGallery().subscribe(data=>{
-      console.log(data);
-      this.sliderDestacados = data.filter(item=>item.Code === EGalleryCode.slider_destacados).map(item=>item.Images)[0];
-      this.bannersDestacados = data.filter(item=>item.Code === EGalleryCode.banners_destacados).map(item=>item.Images)[0];
-      this.bannersCorporativos = data.filter(item=>item.Code === EGalleryCode.banners_corporativos).map(item=>item.Images)[0];
+  getGallery() {
+    this.dataPagePresenterService.getDataGallery().subscribe(data => {
+      this.sliderDestacados = data.filter(item => item.Code === EGalleryCode.slider_destacados).map(item => item.Images)[0];
+      this.bannersDestacados = data.filter(item => item.Code === EGalleryCode.banners_destacados).map(item => item.Images)[0];
+      this.bannersCorporativos = data.filter(item => item.Code === EGalleryCode.banners_corporativos).map(item => item.Images)[0];
 
-
-      this.loadedGallery = true; 
+      this.loadedGallery = true;
     })
-  } 
+  }
 
-
-  // getAirfare() {
-  //   this._flightService.v1ApiFlightGetMostWantedGet({
-  //     TrackingCode: Guid(),
-  //     MuteExceptions: environment.muteExceptions,
-  //     'Caller.Company': "Agil",
-  //     'Caller.Application': "Interagencias"
-  //   }).subscribe((res: any) => {
-  //     this.airfare = JSON.parse(res).Result;
-  //   });
-  // }
 
   aceptConfirm() {
     this.toggleConfirmation();

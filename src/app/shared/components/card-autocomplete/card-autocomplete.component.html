@@ -5,13 +5,13 @@
         <div class="rowVuelo" *ngFor="let item of cardAutocomplete">
             <div (click)="selectItm(item)" class="primaryTitle">
                 <img src="./assets/origen.png" alt="" class="me-3">
-                <span [innerHTML]="item.texto | sanitizeHtml">
+                <span [innerHTML]="item.texto +', ' +item.codigo + '-' + item.country | sanitizeHtml">
                 </span>
                 <!-- {{item.title}} -->
             </div>
             <div class="secondGroup">
                 <div class="secondTitle" *ngFor="let secondItem of item.children" (click)="selectItm(secondItem)" >
-                    <img src="./assets/svg/a-right.svg" alt=""> {{secondItem.title}} </div>
+                    <img src="./assets/svg/a-right.svg" alt=""> {{secondItem.title  +', ' +secondItem.codigo + '-' + secondItem.country}} </div>
             </div>
         </div>
     </ng-container>
