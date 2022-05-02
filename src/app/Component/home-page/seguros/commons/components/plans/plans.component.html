@@ -1,18 +1,12 @@
 <div class="row pt-md-5">
-  <<<<<<< Updated upstream <h2 class="title px-0 pb-md-3">
+  <h2 class="title px-0 pb-md-3" *ngIf="existPlans">
     <strong>Selecciona el plan que mejor se adapte a tu viaje |</strong> {{ resultJson.days }} días por {{
     resultJson.destinyString.descripcion_destino}}
-    </h2>
-    =======
-    <h2 class="title px-0 pb-md-3" *ngIf="existPlans">
-      <strong>Selecciona el plan que mejor se adapte a tu viaje |</strong> {{ resultJson.days }} días por {{
-      resultJson.destinyString.descripcion_destino}}
-    </h2>
-    <h2 class="title px-0 pb-md-3" *ngIf="!existPlans">
-      <strong>No se encontraron planes para los criterios seleccionados |</strong> {{ resultJson.days }} días por {{
-      resultJson.destinyString.descripcion_destino}}
-    </h2>
-    >>>>>>> Stashed changes
+  </h2>
+  <h2 class="title px-0 pb-md-3" *ngIf="!existPlans">
+    <strong>No se encontraron planes para los criterios seleccionados |</strong> {{ resultJson.days }} días por {{
+    resultJson.destinyString.descripcion_destino}}
+  </h2>
 </div>
 
 <div class="boxPlans">
