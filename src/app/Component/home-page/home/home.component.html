@@ -4,6 +4,15 @@
     <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados" [banners_corps]="bannersCorporativos"></app-aside>
 
 
+
+        <!-- MAILING -->
+        <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+            <app-mailing *ngIf="section.section === 'mailing'" [title]="section.title" [span]="section.span"></app-mailing>
+        </ng-container>
+        <!-- END MAILING -->
+
+        
+
     <!-- VUELOS -->
     <div class="container-fluid">
         <div class="row mb-5">
@@ -48,11 +57,6 @@
     </div>
     <!-- END COMPRAR -->
 
-    <!-- MAILING -->
-    <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-        <app-mailing *ngIf="section.section === 'mailing'" [title]="section.title" [span]="section.span"></app-mailing>
-    </ng-container>
-    <!-- END MAILING -->
 
 
 </mat-drawer-container>
