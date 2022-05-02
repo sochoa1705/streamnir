@@ -4,27 +4,19 @@
   <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
     [banners_corps]="bannersCorporativos"></app-aside>
 
-
   <!-- VUELOS -->
   <div class="container-fluid">
     <div class="row mb-5">
       <div class="col-12">
-        <!-- <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                <app-title *ngIf="section.section === 'Vuelos'" [title]="section.title"></app-title>
-            </ng-container> -->
         <h2 class="titleHome ms-4 mt-5">¡Corre y Vuela! con estas
           <strong>súper ofertas de Vuelos</strong> saliendo
           <strong> desde Lima</strong>
         </h2>
-        <div class="clearfix"></div>
       </div>
     </div>
 
-    <!-- <app-card [itemList]="airfare"></app-card> -->
-
     <app-flightdeals></app-flightdeals>
   </div>
-
   <!-- END VUELOS -->
 
   <!-- COMPRAR -->

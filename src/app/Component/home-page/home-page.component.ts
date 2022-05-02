@@ -33,10 +33,7 @@ export class HomePageComponent implements OnInit {
     this.getIpCliente()
     this.getMain()
 
-    debugger
-
-
-
+    localStorage.removeItem('filters');
   }
   getMain() {
     this.mainService.getMenu().subscribe({

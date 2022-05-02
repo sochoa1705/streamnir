@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-import { PackagesService } from 'src/app/Services/mock/packages.service';
-import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { PlansACService } from '../../../../../../Services/plansAC/plans-ac.service';
 import { LoaderSubjectService } from '../../../../../../shared/components/loader/service/loader-subject.service';
 import { take } from 'rxjs/operators';
@@ -32,6 +30,7 @@ export class PlansComponent implements OnInit {
   asistMedic: any
   unidadNegocio: any
   dollar: any
+
   json = {
     detailPay: 'safe',
     filter: 'filtersafe',
@@ -42,14 +41,15 @@ export class PlansComponent implements OnInit {
     detalleCobertura: true,
     cupon: false,
   }
+
   asistenciaMedicaMonto: any;
+
+  existPlans: boolean = true;
 
   //datoUsuario:any = localStorage.getItem('form');
   constructor(
     public route: Router,
     public router: ActivatedRoute,
-    public packagesService: PackagesService,
-    public dataPagePresenterService: DataPagePresenterService,
     public plansACService: PlansACService,
     public coverageService: CoverageService,
     public loaderSubjectService: LoaderSubjectService,
@@ -115,27 +115,32 @@ export class PlansComponent implements OnInit {
     console.log('listPlansAC');
     console.log(JSON.stringify(payload))
 
-
     this.plansACService.plansAC(payload).pipe(take(1)).subscribe({
       next: (response) => {
-        this.plansAC = response.map((elem: any, index: number) => {
 
+        if (response.length > 0) {
+          this.existPlans = true;
 
-          elem.change = Number(elem.precioEmisionLocal ? elem.precioEmisionLocal : 0).toFixed(2)
-          elem.precioBrutochange = Number(elem.precioBrutoLocal ? elem.precioBrutoLocal : 0).toFixed(2)
-          return elem
+          this.plansAC = response.map((elem: any, index: number) => {
+            elem.change = Number(elem.precioEmisionLocal ? elem.precioEmisionLocal : 0).toFixed(2)
+            elem.precioBrutochange = Number(elem.precioBrutoLocal ? elem.precioBrutoLocal : 0).toFixed(2)
+            return elem;
+          })
+
+          let maxi = this.bestPlan()
+          let clase = { clase: 'best' }
+          this.plans = { ...this.plansAC[maxi], ...clase }
+          this.plansAC.splice(maxi, 1)
+          this.plansAC.unshift(this.plans)
+
+          localStorage.setItem('planes', JSON.stringify(this.plansAC))
+          this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
         }
-        )
-        let maxi = this.bestPlan()
-        let clase = { clase: 'best' }
-        this.plans = { ...this.plansAC[maxi], ...clase }
-        this.plansAC.splice(maxi, 1)
-        this.plansAC.unshift(this.plans)
+        else {
+          this.existPlans = false;
+        }
+
         this.loaderSubjectService.closeLoader()
-        console.log(this.plansAC)
-        console.log(this.plans)
-        localStorage.setItem('planes', JSON.stringify(this.plansAC))
-        this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
       },
       error: error => {
         console.log(error)
@@ -182,18 +187,15 @@ export class PlansComponent implements OnInit {
       error: error => console.log(error),
     }
     )
-
   }
 
   data(id: any) {
     this.listCoverage(id);
 
-
     console.log(id);
     this.pop = id;
-
-
   }
+
   sendDataLayerAddToCart(plansAC: any, resultJson: any) {
     let products: ProductAddToCart[] = [];
     let pp: ProductAddToCart = {
@@ -399,6 +401,8 @@ export class PlansComponent implements OnInit {
     ecommerce.impressions = impressions;
     modelTaggingMostrarResultados.ecommerce = ecommerce;
     TaggingService.tagMostrarResultados(modelTaggingMostrarResultados);
+
+    localStorage.removeItem('filters');
   }
 
   getDuracionViaje(fromDate: any): number {

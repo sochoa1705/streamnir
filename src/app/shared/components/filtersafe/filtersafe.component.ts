@@ -185,7 +185,7 @@ export class FiltersafeComponent implements OnInit {
     // this.fromDate = calendar.getToday();
     // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
 
-    this.filters = localStorage.getItem('Datasafe');
+    this.filters = localStorage.getItem('filters');
     this.filtersJSON = JSON.parse(this.filters);
   }
 
@@ -201,7 +201,7 @@ export class FiltersafeComponent implements OnInit {
   createInsuranceQuoteForm(): FormGroup {
     return this._formBuilder.group({
       origenSafe: ['510'],
-      destinoSafe: [this.filtersJSON ? this.filtersJSON.destinoSafe : '', [Validators.required]],
+      destinoSafe: [this.filtersJSON ? this.filtersJSON.destination : '', [Validators.required]],
       fromDate: [this.filtersJSON ? this.filtersJSON.fromDate : ''],
       toDate: [this.filtersJSON ? this.filtersJSON.toDate : ''],
       passengers: this._formBuilder.array([])
@@ -352,7 +352,6 @@ export class FiltersafeComponent implements OnInit {
   }
 
   insertTag(form: IFormSeguros) {
-    debugger
 
     const edades = form.Edades.split(';');
     const sum = edades.reduce((acc, el) => (acc = Number(el) + acc), 0);
@@ -370,7 +369,6 @@ export class FiltersafeComponent implements OnInit {
       Number(this.diffDays())
     )
 
-    console.log('tagde buscar');
     console.log(JSON.stringify(tag));
 
     TaggingService.tagBuscarSeguros(tag);
@@ -398,12 +396,22 @@ export class FiltersafeComponent implements OnInit {
       this.insuranceQuoteForm.addControl('aniosNacimiento', new FormControl(this.anios))
 
       //console.log(this.fromDate);
-      let form = this.insuranceQuoteForm.value
+
+      let form = this.insuranceQuoteForm.value;
       localStorage.removeItem('Datasafe');
 
       this.insertTag(form);
 
       localStorage.setItem('Datasafe', JSON.stringify(form));
+
+      const filters = {
+        destination: this.insuranceQuoteForm.getRawValue()['destinoSafe'],
+        fromDate: startDate,
+        toDate: endDate,
+        passengers: this.insuranceQuoteForm.getRawValue()['passengers']
+      };
+
+      localStorage.setItem('filters', JSON.stringify(filters));
 
       this._router.navigateByUrl('/seguros', { skipLocationChange: true }).then(() =>
         this._router.navigate(["/seguros/planes"]));

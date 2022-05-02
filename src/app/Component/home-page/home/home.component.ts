@@ -52,6 +52,8 @@ export class HomeComponent implements OnInit {
     this.getConfirmacion();
     this.getGallery();
     //this.getAirfare();
+
+    localStorage.removeItem('filters');
   }
 
   getConfirmacion() {
