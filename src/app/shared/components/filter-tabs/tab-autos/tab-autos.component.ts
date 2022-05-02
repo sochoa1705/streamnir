@@ -25,8 +25,9 @@ import { InputValidationService } from 'src/app/Services/inputValidation.service
     countriesSearchRecojo: Array<ISuggest> = [];
     viewInputRecojo = false;
     conductor: Array<any> = [{code: '21', name: '21'},{code: '22', name: '22'},{code: '23', name: '23'},{code: '24', name: '24'},{code: '25', name: '25+'}];
+    dateLimit: NgbDate;
 
-    constructor(private destineService: DestinyService, private _snackBar: MatSnackBar, public inputValidator : InputValidationService) {
+    constructor(private destineService: DestinyService, private _snackBar: MatSnackBar, public inputValidator : InputValidationService, private calendar: NgbCalendar) {
       this.form = new FormGroup({
         destino: new FormControl(''),
         recojo: new FormControl(''),
@@ -35,7 +36,8 @@ import { InputValidationService } from 'src/app/Services/inputValidation.service
         conductor: new FormControl(''),
         checkDevolver: new FormControl(true),
       });
-
+      this.form.controls['initHour'].patchValue('12:00');
+      this.form.controls['lastHour'].patchValue('12:00');
     }
 
     autoComplete(e: any) {
@@ -87,6 +89,8 @@ import { InputValidationService } from 'src/app/Services/inputValidation.service
 
       changeDateFirst(value: ClassValueCalendar) {
         this.fromDate = value.fromDate;
+        const date = this.calendar.getNext(this.fromDate || this.calendar.getToday(), 'd', 1);
+        this.dateLimit = date;
       }
 
       changeDateLast(value: ClassValueCalendar) {
