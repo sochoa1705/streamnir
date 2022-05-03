@@ -71,6 +71,12 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
   vuelosValue:EnumFlightType ; 
 
 
+  minLengthAutocomplete = 3;
+  
+
+  valueInputOrigen= "";
+  valueInputDestino= "";
+
   isSubmit = false;
 
   private readonly destroy$ = new Subject();
@@ -233,8 +239,8 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
     this.form = new FormGroup({
       clase: new FormControl(this.EnumCabins.economy),
       viajes: new FormControl(EnumFlightType.ida_vuelta),
-      origen: new FormControl('', Validators.required),
-      destino: new FormControl('', Validators.required),
+      origen: new FormControl(''),
+      destino: new FormControl(''),
       origenHotel: new FormControl('')
 
     });
@@ -250,10 +256,11 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
     if (!this.isValidate()) {
       errors.push("Error al definir los pasajeros, debe agregar al menos uno");
     }
-    if (this.form.controls['origen'].invalid) {
+
+    if ( this.valueInputOrigen.length <= this.minLengthAutocomplete ) {
       errors.push("El origen es requerido");
     }
-    if (this.form.controls['destino'].invalid) {
+    if (this.valueInputDestino.length <= this.minLengthAutocomplete) {
       errors.push("El destino es requerido");
     }
     if (!this.toDate && this.viajesForm !== EnumFlightType.ida) {
@@ -271,7 +278,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
 
   public searchVueloHotel() {
     this.isSubmit = true;
-    const errors = this.validateTab();
+    const errors = this.validateTab(); 
 
     if (errors.length > 0) {
       this.notification.showNotificacion("Error", errors.join(" - "),10);
