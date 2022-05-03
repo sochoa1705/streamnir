@@ -29,7 +29,8 @@
     </div>
   </div>
 
-  <p-carousel [value]="hotels" [numVisible]="3" [numScroll]="3" [responsiveOptions]="responsiveOptions">
+  <p-carousel *ngIf="hotels.length > 0" [value]="hotels" [numVisible]="3" [numScroll]="3"
+    [responsiveOptions]="responsiveOptions">
     <ng-template let-product pTemplate="item">
       <div class="product-item">
         <div class="product-item-content">
@@ -95,5 +96,9 @@
       </div>
     </ng-template>
   </p-carousel>
+
+  <div *ngIf="hotels.length === 0">
+    <img [src]="images[0].PathImage" [title]="images[0].NameImage">
+  </div>
 
 </div>
