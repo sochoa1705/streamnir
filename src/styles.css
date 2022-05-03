@@ -4365,7 +4365,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       width: 350px; }
       @media (max-width: 990px) and (min-width: 640px) {
         .boxImgVuelo .gridVuelo img {
-          width: 100%; } }
+          width: 100%;
+          object-fit: cover;
+          object-position: bottom; } }
     @media (max-width: 990px) and (min-width: 640px) {
       .boxImgVuelo .gridVuelo {
         grid-column-gap: 10px;
