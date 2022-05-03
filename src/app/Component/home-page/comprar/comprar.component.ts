@@ -137,6 +137,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   nombre: string
   apellido: string
   showAgregarAdulto: boolean = true
+  showDetalle: boolean = true
   showAdulto: number
 
   checkedCard = false;
@@ -1157,6 +1158,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   showDatosPasajero(e?: any) {
     this.showAgregarAdulto = !this.showAgregarAdulto
     this.showAdulto = e
+  }
+
+  showVerDetalle(e?: any) {
+    this.showDetalle = !this.showDetalle
+    console.log(this.showDetalle)
   }
 
   savePasajero(e?: any) {
