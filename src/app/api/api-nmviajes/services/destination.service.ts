@@ -25,7 +25,7 @@ export class DestinationService extends BaseService {
   /**
    * Path part for operation v1ApiDestinationGet
    */
-  static readonly V1ApiDestinationGetPath = '/v1/api/Destination';
+  static readonly V1ApiDestinationGetPath = '/Destination';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -83,7 +83,7 @@ export class DestinationService extends BaseService {
   /**
    * Path part for operation v1ApiDestinationPut
    */
-  static readonly V1ApiDestinationPutPath = '/v1/api/Destination';
+  static readonly V1ApiDestinationPutPath = '/Destination';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -151,7 +151,7 @@ export class DestinationService extends BaseService {
   /**
    * Path part for operation v1ApiDestinationPost
    */
-  static readonly V1ApiDestinationPostPath = '/v1/api/Destination';
+  static readonly V1ApiDestinationPostPath = '/Destination';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -217,7 +217,7 @@ export class DestinationService extends BaseService {
   /**
    * Path part for operation v1ApiDestinationDelete
    */
-  static readonly V1ApiDestinationDeletePath = '/v1/api/Destination';
+  static readonly V1ApiDestinationDeletePath = '/Destination';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

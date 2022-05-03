@@ -25,7 +25,7 @@ export class GalleryService extends BaseService {
   /**
    * Path part for operation v1ApiGalleryGet
    */
-  static readonly V1ApiGalleryGetPath = '/v1/api/Gallery';
+  static readonly V1ApiGalleryGetPath = '/Gallery';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -83,7 +83,7 @@ export class GalleryService extends BaseService {
   /**
    * Path part for operation v1ApiGalleryPut
    */
-  static readonly V1ApiGalleryPutPath = '/v1/api/Gallery';
+  static readonly V1ApiGalleryPutPath = '/Gallery';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -93,15 +93,15 @@ export class GalleryService extends BaseService {
    */
   v1ApiGalleryPut$Response(params?: {
     body?: {
-'Parameter.Code'?: string;
-'Parameter.Name'?: string;
-'Parameter.Status'?: boolean;
-'Parameter.Images'?: Array<Blob>;
-'TrackingCode': string;
-'MuteExceptions': boolean;
-'Caller.Company': string;
-'Caller.Application': string;
-}
+      'Parameter.Code'?: string;
+      'Parameter.Name'?: string;
+      'Parameter.Status'?: boolean;
+      'Parameter.Images'?: Array<Blob>;
+      'TrackingCode': string;
+      'MuteExceptions': boolean;
+      'Caller.Company': string;
+      'Caller.Application': string;
+    }
   }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, GalleryService.V1ApiGalleryPutPath, 'put');
@@ -128,15 +128,15 @@ export class GalleryService extends BaseService {
    */
   v1ApiGalleryPut(params?: {
     body?: {
-'Parameter.Code'?: string;
-'Parameter.Name'?: string;
-'Parameter.Status'?: boolean;
-'Parameter.Images'?: Array<Blob>;
-'TrackingCode': string;
-'MuteExceptions': boolean;
-'Caller.Company': string;
-'Caller.Application': string;
-}
+      'Parameter.Code'?: string;
+      'Parameter.Name'?: string;
+      'Parameter.Status'?: boolean;
+      'Parameter.Images'?: Array<Blob>;
+      'TrackingCode': string;
+      'MuteExceptions': boolean;
+      'Caller.Company': string;
+      'Caller.Application': string;
+    }
   }): Observable<void> {
 
     return this.v1ApiGalleryPut$Response(params).pipe(
@@ -147,7 +147,7 @@ export class GalleryService extends BaseService {
   /**
    * Path part for operation v1ApiGalleryPost
    */
-  static readonly V1ApiGalleryPostPath = '/v1/api/Gallery';
+  static readonly V1ApiGalleryPostPath = '/Gallery';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -157,14 +157,14 @@ export class GalleryService extends BaseService {
    */
   v1ApiGalleryPost$Response(params?: {
     body?: {
-'Parameter.Code'?: string;
-'Parameter.Name'?: string;
-'Parameter.Images'?: Array<Blob>;
-'TrackingCode': string;
-'MuteExceptions': boolean;
-'Caller.Company': string;
-'Caller.Application': string;
-}
+      'Parameter.Code'?: string;
+      'Parameter.Name'?: string;
+      'Parameter.Images'?: Array<Blob>;
+      'TrackingCode': string;
+      'MuteExceptions': boolean;
+      'Caller.Company': string;
+      'Caller.Application': string;
+    }
   }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, GalleryService.V1ApiGalleryPostPath, 'post');
@@ -191,14 +191,14 @@ export class GalleryService extends BaseService {
    */
   v1ApiGalleryPost(params?: {
     body?: {
-'Parameter.Code'?: string;
-'Parameter.Name'?: string;
-'Parameter.Images'?: Array<Blob>;
-'TrackingCode': string;
-'MuteExceptions': boolean;
-'Caller.Company': string;
-'Caller.Application': string;
-}
+      'Parameter.Code'?: string;
+      'Parameter.Name'?: string;
+      'Parameter.Images'?: Array<Blob>;
+      'TrackingCode': string;
+      'MuteExceptions': boolean;
+      'Caller.Company': string;
+      'Caller.Application': string;
+    }
   }): Observable<void> {
 
     return this.v1ApiGalleryPost$Response(params).pipe(
@@ -209,7 +209,7 @@ export class GalleryService extends BaseService {
   /**
    * Path part for operation v1ApiGalleryDelete
    */
-  static readonly V1ApiGalleryDeletePath = '/v1/api/Gallery';
+  static readonly V1ApiGalleryDeletePath = '/Gallery';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -255,7 +255,7 @@ export class GalleryService extends BaseService {
   /**
    * Path part for operation v1ApiGalleryCodeGet
    */
-  static readonly V1ApiGalleryCodeGetPath = '/v1/api/Gallery/Code';
+  static readonly V1ApiGalleryCodeGetPath = '/Gallery/Code';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

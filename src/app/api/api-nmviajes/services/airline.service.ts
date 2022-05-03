@@ -84,7 +84,7 @@ export class AirlineService extends BaseService {
   /**
    * Path part for operation v1ApiAirlinePut
    */
-  static readonly V1ApiAirlinePutPath = '/v1/api/Airline';
+  static readonly V1ApiAirlinePutPath = '/Airline';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -130,7 +130,7 @@ export class AirlineService extends BaseService {
   /**
    * Path part for operation v1ApiAirlinePost
    */
-  static readonly V1ApiAirlinePostPath = '/v1/api/Airline';
+  static readonly V1ApiAirlinePostPath = '/Airline';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -176,7 +176,7 @@ export class AirlineService extends BaseService {
   /**
    * Path part for operation v1ApiAirlineDelete
    */
-  static readonly V1ApiAirlineDeletePath = '/v1/api/Airline';
+  static readonly V1ApiAirlineDeletePath = '/Airline';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
