@@ -141,7 +141,12 @@ export class PopUpPasajeroComponent implements OnInit,OnChanges {
   }
 
   isValid() {
-    return true;
+    const objDistribution = this.distributionObject(this.habitaciones);
+
+    return {
+      isValid:objDistribution.pasajeros >= 1?true:false,
+      message: "Requerido al menos un pasajero"
+    }
   }
 
   showPasajero() {

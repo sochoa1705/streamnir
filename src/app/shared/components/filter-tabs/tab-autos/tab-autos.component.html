@@ -3,7 +3,7 @@
         <div class="rowBoxTab">
             <div class="colBoxtab colGrid">
                 <div class="rowTab">
-                    <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)" class="form-control animated fadeIn" placeholder="Origen" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+                    <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)" class="form-control animated fadeIn" placeholder="Ingrese su destino" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
                     <mat-autocomplete #auto="matAutocomplete">
                         <mat-option *ngFor="let state of countriesSearch" [value]="state.value" [attr.data-tag]="state.value">
                             <img class="example-option-img" aria-hidden src="./assets/origen.png">
@@ -13,16 +13,16 @@
                 </div>
                 <div class="rowTab width50">
                     <div class="colTab">
-                        <app-calendar [typeValue]="1" [placeHolder]="'Salida'" class="ignore-template" (changeDate)="changeDateFirst($event)"></app-calendar>
+                        <app-calendar [typeValue]="1"  [placeHolder]="'Salida'" class="ignore-template" (changeDate)="changeDateFirst($event)"></app-calendar>
                     </div>
                     <div class="colTab">
-                        <input class="form-control" formControlName="initHour" type="time" placeholder="Hora de recogida">
+                        <input class="form-control" id="initHour" name="initHour" formControlName="initHour" type="time" placeholder="Hora de recogida">
                     </div>
                     <div class="colTab">
-                        <app-calendar [typeValue]="1" [placeHolder]="'Retorno'" class="ignore-template" (changeDate)="changeDateLast($event)"></app-calendar>
+                        <app-calendar-enddate [minDate]="dateLimit" [typeValue]="1"  [placeHolder]="'Retorno'" class="ignore-template" (changeDate)="changeDateLast($event)"></app-calendar-enddate>
                     </div>
                     <div class="colTab">
-                        <input class="form-control" formControlName="lastHour" type="time" placeholder="Hora de llegada">
+                        <input class="form-control" id="lastHour" name="lastHour" formControlName="lastHour" type="time" placeholder="Hora de llegada">
                     </div>
                 </div>
                 <div class="rowTab">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="colTab" *ngIf="viewInputRecojo">
-                        <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="recojo" (keyup)="autocompleteRecojo($event)" class="form-control animated fadeIn" placeholder="Destino">
+                        <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="recojo" (keyup)="autocompleteRecojo($event)" class="form-control animated fadeIn" placeholder="Ingrese lugar de devolución">
                         <mat-autocomplete #auto="matAutocomplete">
                             <mat-option *ngFor="let state of countriesSearchRecojo" [value]="state.value" [attr.data-tag]="state.value">
                                 <img class="example-option-img" aria-hidden src="./assets/origen.png">

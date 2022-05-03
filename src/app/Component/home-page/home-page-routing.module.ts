@@ -16,6 +16,7 @@ import { CitaComponent } from './cita/cita.component';
 import { PoliticasComponent } from './politicas/politicas.component';
 import { ResponsabilidadSocialComponent } from './resonsabilidad-social/responsabilidad-social.component';
 import { WidgetsComponent } from 'src/app/widgets/widgets.component';
+import { ComprarComponent } from './comprar/comprar.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,8 @@ const routes: Routes = [
       { path: 'libro-reclamaciones', component: LibroReclamacionesComponent },
       { path: 'agendar-cita', component: CitaComponent },
       { path: 'politicas', component: PoliticasComponent },
-      { path: 'responsabilidad-social', component: ResponsabilidadSocialComponent }
+      { path: 'responsabilidad-social', component: ResponsabilidadSocialComponent },
+      { path: 'comprar', component: ComprarComponent }
     ],
   },
   {

@@ -68,7 +68,7 @@ button {
     color: #df0c30;
     background: transparent; }
     button.plus:hover {
-      background: #df0c30;
+      background: #df0c30 !important;
       color: #fff; }
   button.planes {
     background: #fff;
@@ -149,8 +149,10 @@ section {
     height: 190px; }
     .card__internacional h1 {
       font-size: 38px; }
-    .card__internacional > img {
-      width: 100% !important; }
+    @media (max-width: 768px) {
+      .card__internacional > img {
+        width: 100% !important;
+        height: 100%; } }
     .card__internacional > .d-flex {
       height: 210px !important; }
     @media (max-width: 768px) {
@@ -158,6 +160,9 @@ section {
         margin-bottom: 32px !important; }
       .card__internacional span.d-md-none {
         display: none !important; } }
+    @media (max-width: 640px) {
+      .card__internacional {
+        height: auto; } }
   .card-header {
     background: #fff; }
   .card_pasajero h4 {
@@ -196,14 +201,13 @@ section {
       border: 0.5px solid #009AED !important;
       box-shadow: none; }
   .card.seguro {
-    display: inline-block;
-    margin: 0 10px;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
     background: #54d834;
     border-radius: 22px;
     overflow: hidden;
     box-sizing: border-box;
-    font-family: "Montserrat"; }
+    font-family: "Montserrat";
+    width: 100%; }
     @media (max-width: 768px) {
       .card.seguro {
         width: 100%;
@@ -214,15 +218,6 @@ section {
         background: #f21037; }
       .card.seguro.best .card-body {
         padding: 1rem; }
-    .card.seguro:first-child {
-      margin-right: 10px;
-      margin-left: 0px; }
-    .card.seguro:last-child {
-      margin-left: 10px;
-      margin-right: 0px; }
-      @media (max-width: 640px) {
-        .card.seguro:last-child {
-          margin-left: 0px; } }
     .card.seguro .card-header {
       font-weight: bold;
       font-size: 14px;
@@ -4370,7 +4365,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       width: 350px; }
       @media (max-width: 990px) and (min-width: 640px) {
         .boxImgVuelo .gridVuelo img {
-          width: 100%; } }
+          width: 100%;
+          object-fit: cover;
+          object-position: bottom; } }
     @media (max-width: 990px) and (min-width: 640px) {
       .boxImgVuelo .gridVuelo {
         grid-column-gap: 10px;
@@ -6196,7 +6193,7 @@ button.customers {
 
 @media (max-width: 640px) {
   .dropdown-menu {
-    transform: translate(10px, 10px) !important; } }
+    transform: translate(10px, 50px) !important; } }
 
 .scroll-to-top {
   position: fixed;

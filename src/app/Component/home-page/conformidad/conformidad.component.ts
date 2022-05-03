@@ -127,7 +127,6 @@ export class ConformidadComponent implements OnInit {
 
 
     if (this.paymentData.Result.ServiceResponse.Status === 'SUCCESS') {
-      debugger
 
       this.reservationCode = this.paymentData.Result.ServiceResponse.Code;
       const expirationDatetime = this.paymentData.Result.ServiceResponse.Result.Payment_Expiration_Datetime;

@@ -611,7 +611,7 @@
                     <div class="textEmision">Emisión automática después del pago.</div>
                   </div>
 
-                  <div class="boxCardPas" *ngIf="selectedPay == 'tarjeta'; else safety2">
+                  <div class="boxCardPas" *ngIf="selectedPay === 'tarjeta'; else safety2">
                     <!-- TARJETA -->
 
                     <!-- END TARJETA -->
@@ -708,14 +708,11 @@
 
               </div>
             </div>
-
-            <div class="clearfix"></div>
           </div>
 
           <div class="row">
             <div class="col-12 ">
-              <div *ngIf="safe0Json.detailPay === 'safe'; else detail" class="accordion"
-                id="accordionPanelsStayOpenExample">
+              <div class="accordion" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                     <a class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
@@ -723,6 +720,31 @@
                       Ver detalles
                     </a>
                   </h2>
+                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                    aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                      <div class="row">
+                        <div class="col-6">
+                          <span class="textAcor">1 Adulto(s)</span>
+                        </div>
+                        <div class="col-6 text-end">
+                          <span class="price_old">PEN 370,35</span>
+                          <span class="price_new">PEN 314,80</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-7">
+                          <span class="textDesc">Descuento</span>
+                        </div>
+                        <div class="col-5 text-end">
+                          <span class="price_Desc">PEN -55,55</span>
+                        </div>
+
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
 
                   <div class="row totalItem">
                     <div class="col-7">
@@ -802,6 +824,8 @@
                               <img src="./assets/comprar/card/info.png" alt="">
                             </div>
                           </div>
+
+                          <div class="clearfix"></div>
                         </div>
                       </div>
 
@@ -1882,7 +1906,7 @@
       <div class="col-4 viewMobileWidth order-0 order-md-0 hideViewMobile">
         <h2 class="titleMob">Detalle de tu pago</h2>
         <!-- ACORDION SEGUROS -->
-        <div *ngIf="safe0Json.detailPay == 'safe'; else detail" class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
               <a class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
@@ -1893,33 +1917,15 @@
             </h2>
 
             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-              aria-labelledby="panelsStayOpen-headingOne">
-              <div class="accordion-body" *ngFor="let price of resultJson.passenger">
-                <div class="row">
+              aria-labelledby="panelsStayOpen-headingOne" data-bs-parent="#accordionPanelsStayOpenExample">
+              <div class="accordion-body">
+                <div class="row" *ngFor="let elem of safe0Json.tarifario">
                   <div class="col-6">
-                    <span class="textAcor">1 Adulto(s)</span>
+                    <span class="textAcor">Pasajero de {{elem.Edad}} años</span>
                   </div>
                   <div class="col-6 text-end">
-                    <span class="price_old" *ngIf="safe0Json?.DsctoPromcional !== null">{{safe0Json?.monedaLista}}
-                      {{safe0Json?.precioEmisionLocal | currency: 'USD'}}</span>
-                    <span class="price_new">{{safe0Json?.monedaLista}} {{ safe0Json?.DsctoPromcional
-                      === null ?
-                      safe0Json?.precioEmisionLocal : '0'}}</span>
+                    <span class="price_new">US$ {{elem.precioEmisionLocal}}</span>
                   </div>
-
-                  <div class="clearfix"></div>
-                </div>
-
-                <div class="row" *ngIf="safe0Json?.DsctoPromcional !== null">
-                  <div class="col-7">
-                    <span class="textDesc">Descuento </span>
-                  </div>
-                  <div class="col-5 text-end">
-                    <span class="price_Desc">{{safe0Json?.monedaLista}} {{safe0Json?.DsctoPromcional
-                      === null ? '0' :
-                      safe0Json?.DsctoPromcional}}</span>
-                  </div>
-                  <div class="clearfix"></div>
                 </div>
               </div>
             </div>
@@ -1930,83 +1936,13 @@
               </div>
 
               <div class="col-5 text-end">
-                {{safe0Json?.monedaLista}}
-                <span class="price_end_number">{{ safe0Json?.precioEmisionLocal *
-                  resultJson.passengers.length |
-                  currency: 'USD'}}</span>
+                {{safe0Json?.monedaLista === 'USD' ? 'US$' : 'PEN'}}
+                <span class="price_end_number">{{ totalToPay }}</span>
               </div>
-
-              <div class="clearfix"></div>
             </div>
           </div>
         </div>
         <!-- END ACORDION SEGUROS -->
-
-        <!-- ACORDION VUELOS -->
-        <ng-template #detail>
-          <div class="accordion" id="accordionPanelsStayOpenExample" *ngIf="detalleVuelos.pricingInfo">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                <a class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
-                  aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-                  Ver detalles
-                  <img src="./assets/footer/flecha.png" alt="" class="iconFlecha">
-                </a>
-              </h2>
-
-              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
-                aria-labelledby="panelsStayOpen-headingOne">
-                <div class="accordion-body">
-                  <div class="row mgBottom">
-                    <div class="col-6 txtdet">{{detalleVuelos.pricingInfo.nroAdultos + "
-                      Pasajero(s)"}}
-                    </div>
-                    <div class="col-6 txtdet right">{{"$ "+
-                      detalleVuelos.pricingInfo.totalPrecioAdultos}}
-                    </div>
-                  </div>
-                  <div class="row mgBottom">
-                    <div class="col-6 txtdet">Impuestos</div>
-                    <div class="col-6 txtdet right">{{"$ "+detalleVuelos.pricingInfo.impuestos}}
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6 txtdet">Cargos</div>
-                    <div class="col-6  txtdet right">{{"$ "+detalleVuelos.pricingInfo.cargos}}</div>
-                  </div>
-                  <!-- <div class="separarBox"></div> -->
-                </div>
-              </div>
-
-              <div class="footerDet">
-                <div class="row">
-                  <div class="col-7">
-                    <span class="price_end">PRECIO FINAL</span>
-                  </div>
-                  <div class="col-5 text-end">
-                    <span class="price_end_number">{{"$ "+detalleVuelos.pricingInfo.precioFinal}}
-                    </span>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-
-                <div class="row">
-                  <div class="col-7">
-                    <span class="price_reference">Precio referencial en soles.</span>
-                  </div>
-                  <div class="col-5 text-end">
-                    <span class="price_reference_number">{{"S/
-                      "+detalleVuelos.pricingInfo.precioSoles}}
-                    </span>
-                  </div>
-
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-        <!-- END ACORDION VUELOS -->
 
         <!-- DETALLE DE COBERTURA -->
         <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
@@ -2028,9 +1964,6 @@
         <h2 *ngIf="safe0Json.detalleViaje" class=" mt-3">Detalle de tu viaje</h2>
         <!-- DESTINOS -->
         <div class="card" *ngIf="safe0Json.detalleViaje">
-          <!-- <div class="card-header">
-                    Featured
-                </div> -->
           <div class="card-body shadow-none" *ngIf="this.filtroVueloJson">
             <div class="container">
               <div class="row">

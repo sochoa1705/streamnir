@@ -10,6 +10,7 @@ import { DestinosService } from 'src/app/Component/home-page/vuelos/commons/comp
 import { ModelTaggingVuelos } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
+import { NotificationService } from 'src/app/Services/notification.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { ICardAutocomplete } from '../../card-autocomplete/card-autocomplete.interface';
 import {  PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
@@ -69,11 +70,21 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
 
   vuelosValue:EnumFlightType ; 
 
+
+  minLengthAutocomplete = 3;
+  
+
+  valueInputOrigen= "";
+  valueInputDestino= "";
+
+  isSubmit = false;
+
   private readonly destroy$ = new Subject();
 
 
   constructor(private destineService: DestinyService,public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar, private router: Router,private destinosService: DestinosService
+    private _snackBar: MatSnackBar, private router: Router,private destinosService: DestinosService,
+    private notification: NotificationService
   ) {
     this.createForm();
   }
@@ -175,6 +186,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
           id: x.aerocodiata,
           codigo: x.city_code,
           title: x.city,
+          country: x.country,
           children: []
         }
         nuevoArray.push(obj)
@@ -182,6 +194,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
 
         const obj = {
           id: x.aerocodiata,
+          country: "",
           codigo: "",
           title: "",
           children: [
@@ -189,6 +202,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
               id: x.aerocodiata,
               codigo: x.city_code,
               title: x.city,
+              country: x.country,
               children: []
             }
           ]
@@ -203,6 +217,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
             id: x.aerocodiata,
             codigo: x.city_code,
             title: x.city,
+            country: x.country,
             children: []
           }
         )
@@ -224,8 +239,8 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
     this.form = new FormGroup({
       clase: new FormControl(this.EnumCabins.economy),
       viajes: new FormControl(EnumFlightType.ida_vuelta),
-      origen: new FormControl('', Validators.required),
-      destino: new FormControl('', Validators.required),
+      origen: new FormControl(''),
+      destino: new FormControl(''),
       origenHotel: new FormControl('')
 
     });
@@ -241,15 +256,16 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
     if (!this.isValidate()) {
       errors.push("Error al definir los pasajeros, debe agregar al menos uno");
     }
-    if (this.form.controls['origen'].invalid) {
+
+    if ( this.valueInputOrigen.length <= this.minLengthAutocomplete ) {
       errors.push("El origen es requerido");
     }
-    if (this.form.controls['destino'].invalid) {
+    if (this.valueInputDestino.length <= this.minLengthAutocomplete) {
       errors.push("El destino es requerido");
     }
     if (!this.toDate && this.viajesForm !== EnumFlightType.ida) {
       errors.push("La fecha final es requerido");
-    }
+    } 
     if (!this.fromDate) {
       errors.push("La fecha de inicio es requerido");
     }
@@ -261,10 +277,11 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
 
 
   public searchVueloHotel() {
-    const errors = this.validateTab();
+    this.isSubmit = true;
+    const errors = this.validateTab(); 
 
     if (errors.length > 0) {
-      this.openSnackBar(errors.join(" - "))
+      this.notification.showNotificacion("Error", errors.join(" - "),10);
       return;
     }
 

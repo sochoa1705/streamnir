@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -7,6 +7,7 @@ import { ModelTaggingHoteles } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
+import { NotificationService } from 'src/app/Services/notification.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
@@ -36,21 +37,51 @@ export class TabHotelComponent {
 
   
   hoveredDate: NgbDate | null = null;
+
+  isSubmit = false;
   
 
-  constructor(private calendar: NgbCalendar,private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
+  constructor(private calendar: NgbCalendar,private destineService: DestinyService ,
+    public formatter: NgbDateParserFormatter,
+    private notification: NotificationService,
     private _snackBar: MatSnackBar,
     public inputValidator : InputValidationService) {
     this.form = new FormGroup({
-      destino: new FormControl(''),
+      destino: new FormControl('',[Validators.required, Validators.minLength(3)]),
     });
 
    }
 
-
-   isValidate(){
-    return this.popUpElement?.isValid();
+ 
+  get destinoField(){
+   return this.form.controls["destino"];
+ }
+ 
+   
+ validateForm(field: string) {
+   return this.form.controls[field]?.errors
+     && this.isSubmit;
+ }
+ 
+ 
+ getErrorsForm(form:FormGroup): string[] {
+   let errors:any[] = [];
+ 
+   if (form.controls["destino"].invalid) {
+     errors.push('El campo destino es obligatorio');
+   } 
+   if (!this.toDate) {
+    errors.push("La fecha final es requerido");
   }
+    if (!this.fromDate) {
+      errors.push("La fecha de inicio es requerido");
+    }
+ 
+   return errors;
+ }
+
+ 
+
 
   autoComplete(e: any, typeSearch = 'FLIGHT_HOTEL') {
     // let elemento = this.origen.nativeElement;
@@ -88,8 +119,20 @@ export class TabHotelComponent {
 }
 
   public searchAlojamiento() {
-    if(!this.isValidate()){
-      this.openSnackBar("Error de validacion")
+    this.isSubmit = true;
+
+    let errosInputs = this.getErrorsForm(this.form);
+
+    if(errosInputs.length > 0){
+      this.notification.showNotificacion("Error", errosInputs.join(", "),10);
+      return ;
+    }
+    
+
+    let errorHabitaciones = this.popUpElement?.isValid();
+
+    if(!errorHabitaciones?.isValid){
+      this.notification.showNotificacion("Error", errorHabitaciones?.message || "Error en las habitaciones" )
       return ;
     }
 
@@ -102,7 +145,7 @@ export class TabHotelComponent {
       let params = this.getParamsAlojamiento();
       this.insertTag(params);
       url = new URLHotel(params, this.distribution).getUrl();
-      return url;
+      return url; 
   }
 
 
