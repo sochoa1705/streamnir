@@ -150,6 +150,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   countNinio: number = 0;
   countAdulto: number = 0;
 
+  totalToPay: number = 0;
+
   constructor(
     private _router: Router,
     private _coverageService: CoverageService,
@@ -188,7 +190,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const detalleVuelosStr: any = localStorage.getItem('detalleVuelo');
     this.detalleVuelos = JSON.parse(detalleVuelosStr);
-
 
     // IP DEL CLIENTE
     this.ipCliente = "192.168.2.2";//localStorage.getItem('ipCliente')
@@ -234,6 +235,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     this.result = localStorage.getItem('Datasafe');
     this.resultJson = JSON.parse(this.result);
+
+    this.totalToPay = this.safe0Json.tarifario.reduce((acc: number, item: any) => acc + Number(item.precioEmisionLocal), 0).toFixed(2);
 
     this.months = [
       { value: "01", name: "Enero" },
