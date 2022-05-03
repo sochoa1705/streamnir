@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="rowBoxTab">
-            <app-calendar [typeValue]="1" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
+            <app-calendar [requiredFromDate]="isSubmit" [typeValue]="1" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
 
             <div class="colBoxtab">
                 <button class="fullWidht" (click)="searchPaquete()">Buscar</button>

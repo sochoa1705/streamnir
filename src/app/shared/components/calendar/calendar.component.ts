@@ -3,6 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { EnumFlightType } from '../tabs/tabs.models';
 import { ClassValueCalendar } from './calendar.models';
+import { PopupService } from 'src/app/Services/pop-up/popup.service';
 
 
 @Component({
@@ -19,6 +20,9 @@ export class CalendarComponent implements AfterViewInit{
   @Input() typeValue: number = EnumFlightType.ida_vuelta;
   @Input() placeHolder: string = 'Salida';
 
+  @Input() requiredToDate: boolean ;
+  @Input() requiredFromDate: boolean ;
+
   EnumFlightType = EnumFlightType;
 
   hoveredDate: NgbDate | null = null;
@@ -29,7 +33,8 @@ export class CalendarComponent implements AfterViewInit{
   @Output() changeDate = new EventEmitter<ClassValueCalendar>()
 
 
-  constructor(private calendar: NgbCalendar,public formatter: NgbDateParserFormatter,private cdRef:ChangeDetectorRef) { }
+  constructor(private calendar: NgbCalendar,public formatter: NgbDateParserFormatter,private cdRef:ChangeDetectorRef,
+    private _changePopupService: PopupService,) { }
 
   ngAfterViewInit(){
 
@@ -67,25 +72,34 @@ export class CalendarComponent implements AfterViewInit{
       this.fromDate = date;
       const value = new ClassValueCalendar(this.toDate,this.fromDate);
       this.changeDate.emit(value);
+      const firstDate = new Date(this.fromDate.year, this.fromDate.month - 1, this.fromDate.day);
+      this._changePopupService.sendObjectSourceFirstDate(firstDate);
     }
 
     emitValue(){
+      console.log('emit 5', this.fromDate);
       this.changeDate.emit( new ClassValueCalendar(this.toDate,this.fromDate) )
     }
   
     isHovered(date: NgbDate) {
+      console.log('emit 6');
       return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
     }
   
     
     isRange(date: NgbDate) {
+      console.log('emit 4');
       return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
     }
   
     validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+      console.log('emit 3', currentValue);
       // this.changeDate.emit(value);
       const parsed = this.formatter.parse(input);
+      const value = new ClassValueCalendar(this.toDate,this.fromDate);
+      this.changeDate.emit(value);
       return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+      
     }
   
     isInside(date: NgbDate) {

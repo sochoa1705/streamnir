@@ -11,6 +11,7 @@ import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.co
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { URLHotel, ParamsHoteles, ParamArmaTuViaje, URLArmaTuViaje, EnumCabins, EnumFlightType } from '../../tabs/tabs.models';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
+import { NotificationService } from 'src/app/Services/notification.service';
 
 
 
@@ -37,7 +38,9 @@ import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
   
   hoveredDate: NgbDate | null = null;
 
-  private _vuelosTab: SaveModelVuelos;
+  private _vuelosTab: SaveModelVuelos; 
+
+  isSubmit = false;
 
   EnumCabins = EnumCabins;
   EnumFlightType = EnumFlightType;
@@ -53,7 +56,10 @@ import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
     return this._vuelosTab;
   }
 
-  constructor(private calendar: NgbCalendar,private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
+  constructor(private calendar: NgbCalendar,
+    private destineService: DestinyService ,
+    private notification: NotificationService,
+    public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar) {
     this.form = new FormGroup({
       clase: new FormControl(EnumCabins.economico),
@@ -106,19 +112,37 @@ import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
   });
 }
 
-  public searchAlojamiento() {
-    if(!this.isValidate()){
-      this.openSnackBar("Error de validacion")
-      return ;
+
+  getErrorsForm(form:FormGroup): string[] {
+    let errors:any[] = [];
+
+    if (form.controls["destino"].invalid) {
+      errors.push('El campo destino es obligatorio');
+    }     
+
+    if (!this.fromDate) {
+      errors.push("La fecha de inicio es requerido");
     }
 
-    const url = this.getUrlAlojamiento();
-    this.navigateToResponseUrl(url);
+    return errors;
   }
 
+
   public searchPaquete() {
-    if(!this.isValidate()){
-      this.openSnackBar("Error de validacion")
+    this.isSubmit = true;
+
+    let errosInputs = this.getErrorsForm(this.form);
+
+    if(errosInputs.length > 0){
+      this.notification.showNotificacion("Error", errosInputs.join(", "),10);
+      return ;
+    }
+    
+
+    let errorHabitaciones = this.popUpElement?.isValid();
+
+    if(!errorHabitaciones?.isValid){
+      this.notification.showNotificacion("Error", errorHabitaciones?.message || "Error en las habitaciones" )
       return ;
     }
     const url = this.getUrlPaquete();

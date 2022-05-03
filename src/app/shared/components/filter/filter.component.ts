@@ -225,7 +225,7 @@ export class FilterComponent implements OnInit {
 
   send() {
     // console.log(this.form.value);
-    // debugger;
+
     var FeIni = this.fromDate!.month + "/" + this.fromDate!.day + "/" + this.fromDate!.year
     var FeFin = this.toDate!.month + "/" + this.toDate!.day + "/" + this.toDate!.year
 

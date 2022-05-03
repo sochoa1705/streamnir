@@ -1,58 +1,62 @@
 <mat-drawer-container class="example-container">
-    <app-tabs [options]="destiny"></app-tabs>
+  <app-tabs [options]="destiny"></app-tabs>
 
-    <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados" [banners_corps]="bannersCorporativos"></app-aside>
+  <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados" [banners_corps]="bannersCorporativos"></app-aside>
 
 
-    <!-- VUELOS -->
-    <div class="container-fluid">
-        <div class="row mb-5">
-            <div class="col-12">
-                <!-- <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                <app-title *ngIf="section.section === 'Vuelos'" [title]="section.title"></app-title>
-            </ng-container> -->
-                <h2 class="titleHome ms-4 mt-5">¡Corre y Vuela! con estas
-                    <strong>súper ofertas de Vuelos</strong> saliendo
-                    <strong> desde Lima</strong>
-                </h2>
-                <div class="clearfix"></div>
-            </div>
-        </div>
 
-        <!-- <app-card [itemList]="airfare"></app-card> -->
+      <!-- MAILING -->
+      <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+          <app-mailing *ngIf="section.section === 'mailing'" [title]="section.title" [span]="section.span"></app-mailing>
+      </ng-container>
+      <!-- END MAILING -->
 
-        <app-flightdeals></app-flightdeals>
-    </div>
+      
 
-    <!-- END VUELOS -->
+  <!-- VUELOS -->
+  <div class="container-fluid">
+      <div class="row mb-5">
+          <div class="col-12">
+              <!-- <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+              <app-title *ngIf="section.section === 'Vuelos'" [title]="section.title"></app-title>
+          </ng-container> -->
+              <h2 class="titleHome ms-4 mt-5">¡Corre y Vuela! con estas
+                  <strong>súper ofertas de Vuelos</strong> saliendo
+                  <strong> desde Lima</strong>
+              </h2>
+              <div class="clearfix"></div>
+          </div>
+      </div>
 
-    <!-- COMPRAR -->
-    <div class="container-fluid">
-        <h2 class="titleHome bold ms-4 mb-5">¿Por qué comprar en
-            <span class="red">NMVIAJES</span>?
-        </h2>
-        <div class="row comprarHideTitle">
-            <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-                <app-title class="textTitle" *ngIf="section.section === 'Comprar'" [title]="section.title"></app-title>
-                <div *ngIf="section.img" class="col-12 col-md-6 card__content">
-                    <img src="./assets/{{ section.img }}" class="d-block w-100">
-                </div>
-                <div class="col-12 col-md-6">
-                    <ng-container *ngIf="section.section === 'Comprar'">
-                        <app-card-info [title]="card.title" [description]="card.description" [image]="card.img" *ngFor="let card of section.card"></app-card-info>
-                    </ng-container>
-                </div>
-            </ng-container>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-    <!-- END COMPRAR -->
+      <!-- <app-card [itemList]="airfare"></app-card> -->
 
-    <!-- MAILING -->
-    <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-        <app-mailing *ngIf="section.section === 'mailing'" [title]="section.title" [span]="section.span"></app-mailing>
-    </ng-container>
-    <!-- END MAILING -->
+      <app-flightdeals></app-flightdeals>
+  </div>
+
+  <!-- END VUELOS -->
+
+  <!-- COMPRAR -->
+  <div class="container-fluid">
+      <h2 class="titleHome bold ms-4 mb-5">¿Por qué comprar en
+          <span class="red">NMVIAJES</span>?
+      </h2>
+      <div class="row comprarHideTitle">
+          <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+              <app-title class="textTitle" *ngIf="section.section === 'Comprar'" [title]="section.title"></app-title>
+              <div *ngIf="section.img" class="col-12 col-md-6 card__content">
+                  <img src="./assets/{{ section.img }}" class="d-block w-100">
+              </div>
+              <div class="col-12 col-md-6">
+                  <ng-container *ngIf="section.section === 'Comprar'">
+                      <app-card-info [title]="card.title" [description]="card.description" [image]="card.img" *ngFor="let card of section.card"></app-card-info>
+                  </ng-container>
+              </div>
+          </ng-container>
+          <div class="clearfix"></div>
+      </div>
+  </div>
+  <!-- END COMPRAR -->
+
 
 
 </mat-drawer-container>
@@ -60,23 +64,23 @@
 
 <!-- Modal Usuario Verificado -->
 <div class="modal" data-backdrop="false" id="ModalUsuarioVerificado" tabindex="-1" aria-labelledby="ModalUsuarioVerificadoLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="iconCenter">
-                    <img src="./assets/modal/usuario-verificado.svg" alt="">
-                </div>
-                <div class="titleVerifica">¡Perfecto!</div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="descripText">
-                    Su usuario fue activado con éxito.
-                </div>
-                <div class="action">
-                    <button (click)="aceptConfirm()" type="button" class="">Aceptar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <div class="iconCenter">
+                  <img src="./assets/modal/usuario-verificado.svg" alt="">
+              </div>
+              <div class="titleVerifica">¡Perfecto!</div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="descripText">
+                  Su usuario fue activado con éxito.
+              </div>
+              <div class="action">
+                  <button (click)="aceptConfirm()" type="button" class="">Aceptar</button>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, forwardRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
@@ -36,11 +36,13 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
 
   public typeToSearchText: string;
 
-  valueInput = "";
 
+  @Input() valueInput: string  = "";
+  @Output() valueInputChange = new EventEmitter();
 
   @Input() placeholder: string;
   @Input() loading: boolean = false;
+  @Input() validRequired: boolean = false;
 
   @Input() typeahead: Subject<string>;
 
@@ -76,6 +78,9 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     this.inputTxt = target.value
 
     const value: string = target.value || '';
+
+    this.valueInputChange.next(value)
+
     
     if (value.length >= this.minTermLength) {
       this.showBoxOrigen(true)
@@ -100,6 +105,7 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
 
   selectItm(itm: ICardAutocomplete) {
     this.onTouch();
+    this.valueInputChange.next(itm.title)
     this.value = itm;
     this.writeValue(itm)
     this.onChange(itm);
@@ -159,6 +165,7 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     this.valueInput = "";
     this.viewIcon = false;
     this._items = [];
+    this.valueInputChange.next("")
   }
 
   ngOnDestroy() {

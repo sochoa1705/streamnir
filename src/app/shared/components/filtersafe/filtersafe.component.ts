@@ -40,7 +40,6 @@ export interface Passenger {
   fechaNacimiento: string;
 }
 
-
 @Injectable()
 export class CustomAdapter extends NgbDateAdapter<string> {
   readonly DELIMITER = '-';
@@ -147,6 +146,9 @@ export class FiltersafeComponent implements OnInit {
   coverageList: any;
   asistMedic: any;
 
+  filters: any;
+  filtersJSON: any;
+
   json = {
     detailPay: 'safe',
     filter: 'filtersafe',
@@ -182,19 +184,26 @@ export class FiltersafeComponent implements OnInit {
     this.toDate = null
     // this.fromDate = calendar.getToday();
     // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+
+    this.filters = localStorage.getItem('filters');
+    this.filtersJSON = JSON.parse(this.filters);
   }
 
   ngOnInit(): void {
     this.insuranceQuoteForm = this.createInsuranceQuoteForm();
-    this.addPassenger();
+
+    if (this.filtersJSON)
+      this.getPassengers();
+    else
+      this.addPassenger();
   }
 
   createInsuranceQuoteForm(): FormGroup {
     return this._formBuilder.group({
       origenSafe: ['510'],
-      destinoSafe: ['', [Validators.required]],
-      fromDate: [''],
-      toDate: [''],
+      destinoSafe: [this.filtersJSON ? this.filtersJSON.destination : '', [Validators.required]],
+      fromDate: [this.filtersJSON ? this.filtersJSON.fromDate : ''],
+      toDate: [this.filtersJSON ? this.filtersJSON.toDate : ''],
       passengers: this._formBuilder.array([])
     });
   }
@@ -204,24 +213,32 @@ export class FiltersafeComponent implements OnInit {
   }
 
   addPassenger(): void {
+    this.limit = this.insuranceQuoteForm.controls['passengers'].value.length + 1;
 
-    const fechaFormat = moment().format('DD/MM/YYYY');
-
-    let limite = this.insuranceQuoteForm.controls['passengers'].value.length + 1;
-
-    this.limit = limite;
-    if (limite > 4) {
+    if (this.limit > 4)
       this.limitePassenger = true;
-    }
 
-    let passengerFormGroup = this.createPassengerForm();
+    let formGroup = this.createPassengerForm();
     const row: any = {
       edad: '',
       fechaNacimiento: moment().format('DD/MM/YYYY')
     };
 
-    passengerFormGroup.patchValue(row);
-    this.passengers.push(passengerFormGroup);
+    formGroup.patchValue(row);
+    this.passengers.push(formGroup);
+  }
+
+  getPassengers(): void {
+    this.limit = this.filtersJSON.passengers.length;
+
+    if (this.limit > 4)
+      this.limitePassenger = true;
+
+    this.filtersJSON.passengers.forEach((element: any) => {
+      let formGroup = this.createPassengerForm();
+      formGroup.patchValue(element);
+      this.passengers.push(formGroup);
+    });
   }
 
   createPassengerForm(): FormGroup {
@@ -242,18 +259,13 @@ export class FiltersafeComponent implements OnInit {
     this.passengers.removeAt(index);
   }
 
-
   confirmPassengers(): void {
     this.showPassengerBox = !this.showPassengerBox;
 
     let array = this.insuranceQuoteForm.controls['passengers'].value;
     let Ages = []
 
-    debugger
-
     for (let i in array) {
-
-      debugger
 
       let indice = Number(i);
 
@@ -339,8 +351,8 @@ export class FiltersafeComponent implements OnInit {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
   }
 
-
   insertTag(form: IFormSeguros) {
+
     const edades = form.Edades.split(';');
     const sum = edades.reduce((acc, el) => (acc = Number(el) + acc), 0);
     const promEdades = sum / edades.length;
@@ -357,14 +369,12 @@ export class FiltersafeComponent implements OnInit {
       Number(this.diffDays())
     )
 
-    console.log('tagde buscar');
     console.log(JSON.stringify(tag));
 
     TaggingService.tagBuscarSeguros(tag);
   }
 
   quoteNow() {
-
     if (this.validForm()) {
       let fechaSalida = this.FromDate2.nativeElement.value
       let fechaVuelta = this.ToDate2.nativeElement.value
@@ -386,12 +396,22 @@ export class FiltersafeComponent implements OnInit {
       this.insuranceQuoteForm.addControl('aniosNacimiento', new FormControl(this.anios))
 
       //console.log(this.fromDate);
-      let form = this.insuranceQuoteForm.value
-      localStorage.removeItem('Datasafe')
+
+      let form = this.insuranceQuoteForm.value;
+      localStorage.removeItem('Datasafe');
 
       this.insertTag(form);
 
       localStorage.setItem('Datasafe', JSON.stringify(form));
+
+      const filters = {
+        destination: this.insuranceQuoteForm.getRawValue()['destinoSafe'],
+        fromDate: startDate,
+        toDate: endDate,
+        passengers: this.insuranceQuoteForm.getRawValue()['passengers']
+      };
+
+      localStorage.setItem('filters', JSON.stringify(filters));
 
       this._router.navigateByUrl('/seguros', { skipLocationChange: true }).then(() =>
         this._router.navigate(["/seguros/planes"]));
@@ -433,33 +453,10 @@ export class FiltersafeComponent implements OnInit {
       default:
       // code block
     }
-    // let menor = this.pasajeros.menor
-    // let adultos: any = Number((document.getElementById('adultos') as HTMLInputElement).value);
 
-    // let menor = Number(this.menorEdad.nativeElement.value)
     let inputvalue = Number(customer.value)
     inputvalue = inputvalue + valor
     this.renderer.setAttribute(customer, 'value', String(inputvalue))
-
-
-    // (document.getElementById("num1") as HTMLInputElement).value
-    // let adultos: any = Number((document.getElementById('adultos') as HTMLInputElement).value);
-    // console.log(adultos.value);
-    // adultos = 10;
-    // let item = e.target.name;
-
-    // let pasajero = this.form.value.adultos;
-    // if (pasajero >= 100 && valor >= 0) {
-    //   return pasajero = 100
-    // }
-    // if (pasajero <= 0 && valor < 0) {
-    //   return pasajero = 0  
-    // }
-    // console.log(pasajero);
-    // console.log(pasajero + valor);
-    //console.log(this.pasajeros[0]);
-
-    // adultos = adultos + valor
   }
 
   allowNumeric(event: KeyboardEvent) {
@@ -482,6 +479,4 @@ export class FiltersafeComponent implements OnInit {
   denyDrop(event: DragEvent) {
     event.preventDefault();
   }
-
-
 }

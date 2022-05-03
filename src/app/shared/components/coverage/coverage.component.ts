@@ -19,7 +19,6 @@ export class CoverageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    debugger
 
   }
 
