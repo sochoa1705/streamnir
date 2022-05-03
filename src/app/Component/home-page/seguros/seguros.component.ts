@@ -15,13 +15,13 @@ import { NMRequest } from 'src/app/Models/base/NMRequest';
 export class SegurosComponent implements OnInit {
   destiny: any = []
   destinyString: any
-  
+
   constructor(
     public offersService: OffersService,
     public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
     public destinyService: DestinyService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     //localStorage.clear()
@@ -33,6 +33,7 @@ export class SegurosComponent implements OnInit {
       this.listDestiny()
     }
 
+    //localStorage.removeItem('Datasafe');
     // console.log(this.dataPagePresenterService.data.sections[0].id === 0)
   }
 

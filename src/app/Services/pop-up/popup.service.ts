@@ -14,11 +14,18 @@ class PopupClass{
 export class PopupService {
 
   private popUpSubject = new BehaviorSubject<PopupClass>(new PopupClass());
+  private objectSourceFirstDate  = new BehaviorSubject<Date>(new Date());
+
+  $getObjectSourceFirstDate = this.objectSourceFirstDate.asObservable();
 
   constructor() { }
 
   state(){
     return this.popUpSubject.asObservable();
+  }
+
+  sendObjectSourceFirstDate(data: Date) {
+    this.objectSourceFirstDate.next(data);
   }
 
   openPopUp(id:string){

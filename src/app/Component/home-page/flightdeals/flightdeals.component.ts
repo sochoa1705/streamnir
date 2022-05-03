@@ -36,15 +36,15 @@ export class FlightDealsComponent implements OnInit {
     });
   }
 
-  viewRates(entity: any,index:number): void {
-    this.addTag(entity,index,this.limit);
+  viewRates(entity: any, index: number): void {
+    this.addTag(entity, index, this.limit);
     this._router.navigateByUrl(`/vuelos/destino/${entity.DestinationCode}`);
   }
 
-  addTag(entity:any,index:number, array:number) {
+  addTag(entity: any, index: number, array: number) {
 
-    let  position = `Card ${index + 1} de ${array}` 
-   
+    let position = `Card ${index + 1} de ${array}`
+
     const tag = new ModelTaggingOfertasVuelos(
       getFileName(entity.Image),
       entity.Destination,
@@ -53,7 +53,7 @@ export class FlightDealsComponent implements OnInit {
       `vuelos/destino/${entity.DestinationCode}`
     )
 
-   TaggingService.clickOfertaVuelos(tag);
+    TaggingService.clickOfertaVuelos(tag);
   }
 
   viewMoreOffers(): void {

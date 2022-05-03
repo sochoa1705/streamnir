@@ -19,6 +19,7 @@ import { TabArmaPaquetesComponent } from './tab-arma-paquetes/tab-arma-paquetes.
 import { TabPaquetesComponent } from './tab-paquetes/tab-paquetes.component';
 import { TabAutosComponent } from './tab-autos/tab-autos.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { CalendarEndDateModule } from '../calendar-enddate/calendar-enddate.module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
     PopUpPasajeroModule,
     MaterialModule,
     CalendarModule,
+    CalendarEndDateModule,
     InputAutocompleteModule,
     PopUpPasajerVuelosoModule,
     NgxMaskModule.forRoot(),
