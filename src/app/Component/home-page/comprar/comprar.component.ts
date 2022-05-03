@@ -134,11 +134,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   @ViewChild('nameContactForm', { static: false }) inputNameContactForm!: ElementRef<HTMLInputElement>
   @ViewChild('lastNameContactForm', { static: false }) inputLastNameContactForm!: ElementRef<HTMLInputElement>
 
-  nombre: string
-  apellido: string
-  showAgregarAdulto: boolean = true
-  showDetalle: boolean = true
-  showAdulto: number
+  nombre: string;
+  apellido: string;
+  showAgregarAdulto: boolean = true;
+  showDetalle: boolean = false;
+  showAdulto: number;
 
   checkedCard = false;
 
