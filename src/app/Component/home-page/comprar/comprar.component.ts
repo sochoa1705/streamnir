@@ -6,7 +6,6 @@ import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface'
 import { CoverageService } from 'src/app/Services/coverage/coverage.service';
 import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { take } from 'rxjs/operators';
-import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
 import { ICardRequest, IFiltroVuelo } from './interfaces/comprar.interfaces';
 import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
 import { ActualizarCodigoSafetyPaySeguroRQ, ActualizarEstadoSeguroRQ, RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
@@ -52,7 +51,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   //COBERTURA
 
   showInvoiceData: boolean = false;
-
 
   coverageDisplay: boolean = false;
   unidadNegocio: any;
@@ -134,10 +132,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   @ViewChild('nameContactForm', { static: false }) inputNameContactForm!: ElementRef<HTMLInputElement>
   @ViewChild('lastNameContactForm', { static: false }) inputLastNameContactForm!: ElementRef<HTMLInputElement>
 
-  nombre: string
-  apellido: string
-  showAgregarAdulto: boolean = true
-  showAdulto: number
+  nombre: string;
+  apellido: string;
+  showAgregarAdulto: boolean = true;
+  showDetalle: boolean = false;
+  showAdulto: number;
 
   checkedCard = false;
 
@@ -156,7 +155,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     private _router: Router,
     private _coverageService: CoverageService,
     private _loaderSubjectService: LoaderSubjectService,
-    private _reservaVuelosService: ReservaVuelosService,
     private _secureBookingService: SecureBookingService,
     private _cardPaymentService: CardPaymentService,
     private _generatePayService: GeneratePayService,
@@ -174,16 +172,17 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.planes = JSON.parse(this.planesList);
 
     // Token
-    this.token = localStorage.getItem('token')
-    this.tokenJson = JSON.parse(this.token)
+    this.token = localStorage.getItem('token');
+    this.tokenJson = JSON.parse(this.token);
     // TIPO DE CAMBIO
-    this.cambio = localStorage.getItem('tipoCambio')
-    this.tipodeCambio = JSON.parse(this.cambio)
+    this.cambio = localStorage.getItem('tipoCambio');
+    this.tipodeCambio = JSON.parse(this.cambio);
     // shopdata
-    this.shopData = localStorage.getItem('shop')
-    this.shopString = JSON.parse(this.shopData)
-    this.filtroVuelo = localStorage.getItem('filtroVuelo')
-    this.filtroVueloJson = JSON.parse(this.filtroVuelo)
+    this.shopData = localStorage.getItem('shop');
+    this.shopString = JSON.parse(this.shopData);
+
+    this.filtroVuelo = localStorage.getItem('filtroVuelo');
+    this.filtroVueloJson = JSON.parse(this.filtroVuelo);
 
     this.safe0 = localStorage.getItem('safe0');
     this.safe0Json = JSON.parse(this.safe0);
@@ -439,7 +438,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
         } else {
           console.log('La tarjeta ingresada es inválida');
-
           //this.showAlert('error', 'Error', 'La tarjeta ingresada es inválida');
         }
       });
@@ -520,12 +518,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return this.formShop.get('customers') as FormArray;
   }
 
-  pasajeroClose() {
-    let elemento = this.adulto.nativeElement;
-    elemento.classList.remove('adultocdr');
-    elemento.setAttribute('style', `display:none`);
-  }
-
   loadShop(): void {
     this.detailPay = this.current.detailPay;
     this.filter = this.current.filter;
@@ -583,9 +575,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   id: any = "banca";
 
-  optionPay(e: any, i: any, ids: any) {
+  optionPay(e: any, isBankingOrMobile: boolean, ids: any) {
 
-    this.banca = i;
+    this.banca = isBankingOrMobile;
     this.id = ids;
     const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer']).Name;
 
@@ -633,8 +625,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
       return;
 
-
-
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
     this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson['passengers'].length));
 
@@ -668,6 +658,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.makePayment(data);
     })
   }
+
   sendDataLayerCheckoutOption(value: any) {
     let nacionalidad = value.customers[0].nationalityCustomer;
     let actionField: ActionFieldCheckoutOption = {
@@ -866,17 +857,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           }
 
-          //metric11: range.asDuration("days"),
-
           console.log("Tag purchase amtes");
           console.log(JSON.stringify(model));
-
 
           TaggingService.tagTransactionCompleted(model);
 
           console.log("Tag purchase despues");
           console.log(JSON.stringify(model));
-
 
           this._loaderSubjectService.closeLoader();
 
@@ -961,13 +948,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return payload;
   }
 
-  otherPlan() {
+  returnToPlans(): void {
     localStorage.removeItem('safe0')
     this._router.navigateByUrl('/seguros/planes')
-  }
-
-  selectVuelo(isIda: boolean) {
-    this.modalDetalle = isIda ? this.detalleVuelos.segmentoDeparture : this.detalleVuelos.segmentoReturn;
   }
 
   listCoverage() {
@@ -985,16 +968,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     this._coverageService.getCoverage(payload).pipe(take(5)).subscribe({
       next: (response) => {
-        this.coverageL = response
-
-        // this.coverageList = response['Resultado'].find((e: any) => {
-        //   if (e.Codigo === 'C.4.1.10.1') {
-        //     return e
-        //   }
-        // })
+        this.coverageL = response;
 
         this.coverageList = response['Resultado'];
-
 
         if (Object.keys(this.coverageList).length === 0) {
           this.asistMedic = 0;
@@ -1009,16 +985,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           this.asistenciaMedicaMonto = this.asistMedic.includes('USD') ? Number(this.asistMedic.substring(4).replace('.', '')) : this.asistMedic;
         }
 
-
-
         console.log(this.coverageList)
 
         localStorage.setItem('coverage', JSON.stringify(this.coverageList))
       },
       error: error => console.log(error),
-    }
-      // data => console.log(data['Resultado']),
-    )
+    })
   }
 
   generatePassengersList(data: any) {
@@ -1065,7 +1037,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   pasajerosVuelos() {
-    let pasajeros: any = []
+    let pasajeros: any = [];
+
     this.dataShop.customers.forEach((value: any, index: number) => {
       let jsonPasajeros = {
         type: "ADT",
@@ -1079,7 +1052,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         phone: this.dataShop.contactForm.numberPhone0
       }
       pasajeros.push(jsonPasajeros)
-    })
+    });
+
     return pasajeros
   }
 
@@ -1101,51 +1075,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.agesCustomers = this.resultJson.aniosNacimiento.map((c: any) => c.edad).join(";");
   }
 
-  // RESERVA VUELOS
-  getReserva() {
-    const textSend = 'SE ESTA GENERANDO SU RESERVA!'
-    this._loaderSubjectService.showText(textSend)
-
-    console.log(this.dataShop.contactForm);
-
-    let payload = {
-      "segmentSelected": [
-        this.safe0Json.departure, this.safe0Json.return
-      ],
-      "IdGroup": this.safe0Json.idGroup,
-      "passengers": this.pasajerosVuelos(),
-      contact: {
-        name: this.dataShop.contactForm.nameContacto.toUpperCase(),
-        lastName: this.dataShop.contactForm.lastnameContacto.toUpperCase(),
-        email: this.dataShop.contactForm.mailContacto.toUpperCase(),
-        // address: (this.dataShop.contactForm.recibo === undefined) ? this.dataShop.contactForm.recibo[0].direccion : this.dataShop.paymentMethodForm.address,
-        address: (this.dataShop.contactForm.invoiceRequestBox) ? this.dataShop.contactForm.direccion : 'LIMA',
-        phones: [
-          {
-            phoneNumber: this.dataShop.contactForm.numberPhone0
-          }
-        ]
-      }
-    }
-
-    console.log(payload)
-
-    this._reservaVuelosService.reserva(payload, this.tokenJson).subscribe({
-      next: (response: any) => {
-        console.log(response)
-        this.resevaVuelo = response
-        localStorage.setItem('reserva', JSON.stringify(response))
-        this._router.navigateByUrl('/conformidad')
-
-        this._loaderSubjectService.closeLoader()
-      },
-      error: (err) => {
-        console.log(err)
-        this._loaderSubjectService.closeLoader()
-      }
-    })
-  }
-
   // fecha de expiracion tarjeta
   expired(e: any) {
     const year = e.substring(0, 4)
@@ -1159,12 +1088,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.showAdulto = e
   }
 
+  showVerDetalle(e?: any) {
+    this.showDetalle = !this.showDetalle
+    console.log(this.showDetalle)
+  }
+
   savePasajero(e?: any) {
     console.log('pasajero ' + e)
-
-    // if (this.validFormMobileCustomers(e)) {
-    //   console.log(this.formShop.getRawValue()['customers'][e])
-    // }
   }
 
   step1() {
@@ -1361,15 +1291,14 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   allowAlphabetic(event: KeyboardEvent) {
-
     const pattern = /[a-zA-Z\s]/;
 
     if (!pattern.test(event.key))
       event.preventDefault();
 
-
     this.count++;
   }
+
   dataLayerPushCheckout(safe0Json: any, resultJson: any) {
     let actionField: ActionFieldCheckout = {
       step: 1
@@ -1433,6 +1362,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log("modelTaggingCheckout:", modelTaggingCheckout)
     TaggingService.tagMostrarCheckout(modelTaggingCheckout);
   }
+
   llenarProduct(safe0Json: any, resultJson: any): ProductAddToCart {
     const currentDate = moment();
     const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
@@ -1457,6 +1387,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
     return pp;
   }
+
   getDuracionViaje(resultJson: any): number {
     let fechaFormats: number[] = resultJson.fromDate.split('/');
     const _fromDate = new Date(fechaFormats[2], fechaFormats[1], fechaFormats[0]);
@@ -1587,6 +1518,5 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
 
     TaggingService.tagVoucherSelection(model);
-
   }
 }

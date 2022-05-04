@@ -3460,7 +3460,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 .accordion-body {
-    border-bottom: 0px solid #E4E5E7;
+    border-bottom: 1px solid #E4E5E7;
     .textAcor {
         font-family: Montserrat;
         font-size: 14px;
@@ -3488,6 +3488,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         line-height: 21px;
         letter-spacing: 0.1px;
         color: #009AED;
+    }
+    .row {
+        height: 32px;
     }
 }
 
@@ -5374,9 +5377,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         img {
             height: 100%;
             width: 350px;
-            @media (max-width: 990px) and (min-width: 640px) {
-                width: 100%;
-            }
+            object-fit: cover;
+            object-position: bottom;
+            // @media (max-width: 990px) and (min-width: 640px) {
+            //     width: 100%;
+            //     object-fit: cover;
+            //     object-position: bottom;
+            // }
         }
         @media (max-width: 990px) and (min-width: 640px) {
             grid-column-gap: 10px;

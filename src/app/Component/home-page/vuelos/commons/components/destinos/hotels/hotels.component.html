@@ -29,7 +29,8 @@
     </div>
   </div>
 
-  <p-carousel [value]="hotels" [numVisible]="3" [numScroll]="3" [responsiveOptions]="responsiveOptions">
+  <p-carousel *ngIf="hotels.length > 0" [value]="hotels" [numVisible]="3" [numScroll]="3"
+    [responsiveOptions]="responsiveOptions">
     <ng-template let-product pTemplate="item">
       <div class="product-item">
         <div class="product-item-content">
@@ -95,5 +96,11 @@
       </div>
     </ng-template>
   </p-carousel>
+
+  <div class="imgLoadHotel" *ngIf="hotels.length === 0">
+    <a href="{{ images[0].RedirectLink }}" target="_blank">
+      <img [src]="images[0].PathImage" [title]="images[0].NameImage">
+    </a>
+  </div>
 
 </div>

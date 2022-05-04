@@ -2812,7 +2812,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     margin-top: -25px; }
 
 .accordion-body {
-  border-bottom: 0px solid #E4E5E7; }
+  border-bottom: 1px solid #E4E5E7; }
   .accordion-body .textAcor {
     font-family: Montserrat;
     font-size: 14px;
@@ -2837,6 +2837,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     line-height: 21px;
     letter-spacing: 0.1px;
     color: #009AED; }
+  .accordion-body .row {
+    height: 32px; }
 
 .totalItem {
   margin: 1rem 0.5rem !important;
@@ -4362,10 +4364,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       grid-column: 2/3; }
     .boxImgVuelo .gridVuelo img {
       height: 100%;
-      width: 350px; }
-      @media (max-width: 990px) and (min-width: 640px) {
-        .boxImgVuelo .gridVuelo img {
-          width: 100%; } }
+      width: 350px;
+      object-fit: cover;
+      object-position: bottom; }
     @media (max-width: 990px) and (min-width: 640px) {
       .boxImgVuelo .gridVuelo {
         grid-column-gap: 10px;
