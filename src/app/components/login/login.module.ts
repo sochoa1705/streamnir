@@ -31,7 +31,7 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig } f
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('263646375921809')
+            provider: new FacebookLoginProvider('709409217174221')
           },
         ]
       } as SocialAuthServiceConfig
