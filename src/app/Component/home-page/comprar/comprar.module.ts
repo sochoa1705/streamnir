@@ -10,9 +10,7 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { FiltroDetallePipe } from './pipes/filtro-detalle.pipe';
 import { DirectivesModule } from 'src/app/shared/directives/directives.module';
-import { HoraPipe } from './pipes/hora.pipe';
 import { ModalsModule } from 'src/app/shared/components/modals/modals.module';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
@@ -20,7 +18,7 @@ import { PaymentService } from 'src/app/Services/payment/payment.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [ ComprarComponent,FiltroDetallePipe,HoraPipe ],
+  declarations: [ComprarComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -37,7 +35,7 @@ import { PaymentService } from 'src/app/Services/payment/payment.service';
     DirectivesModule,
     ModalsModule
   ],
-  exports: [ ComprarComponent ],
-  providers: [ ReservaVuelosService, PaymentService]
+  exports: [ComprarComponent],
+  providers: [ReservaVuelosService, PaymentService]
 })
 export class ComprarModule { }
