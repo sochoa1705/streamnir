@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ParamsVuelos } from './models/resultados.interfaces';
 import { objectToQueryString, toUp } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
-import { IframeMotorVuelos } from './models/resultados.class';
+import { IframeMotorVuelos, IframeMotorVuelosJson } from './models/resultados.class';
 import { EnumFlightType } from 'src/app/shared/components/tabs/tabs.models';
 @Component({
   selector: 'app-resultados',
@@ -50,7 +50,7 @@ export class ResultadosComponent implements OnInit {
   async getParams() {
 
     this.ar.queryParams.subscribe((resp) => {
-
+      debugger;
       this.urlIframe = environment.urlIframeMotorVuelos + '?rand=' + Math.round(Math.random() * 10000000000) + "&";
 
       let {  
@@ -63,26 +63,46 @@ export class ResultadosComponent implements OnInit {
         infants,
         children,
         flightType,
+        json
       } = resp as ParamsVuelos;
-      
-      const disponibilidadPayload = new IframeMotorVuelos(
-       {
-        flightType: Number(flightType),
-        flightClass: flightClass,
-        departureLocation:departure,
-        arrivalLocation: destination,
-        departureDate: departureDate,
-        arrivalDate:arrivalDate ,
-        adults:  Number(adults),
-        children: Number(children),
-        infants:  Number(infants)
-       }
-      );
 
-      let payload = {...disponibilidadPayload};
+      let disponibilidadPayload;
+      let payload;
+      if(resp.json) {
+        disponibilidadPayload = new IframeMotorVuelosJson(
+          {
+           flightType: Number(flightType),
+           flightClass: flightClass,
+           adults:  Number(adults),
+           children: Number(children),
+           infants:  Number(infants),
+           json: json
+          }
+         );
 
-      if(payload.flightType == EnumFlightType.ida){
-        delete payload.arrivalDate
+         payload = {...disponibilidadPayload};
+         
+      } else {
+
+         disponibilidadPayload = new IframeMotorVuelos(
+          {
+           flightType: Number(flightType),
+           flightClass: flightClass,
+           departureLocation:departure,
+           arrivalLocation: destination,
+           departureDate: departureDate,
+           arrivalDate:arrivalDate ,
+           adults:  Number(adults),
+           children: Number(children),
+           infants:  Number(infants)
+          }
+         );
+
+         payload = {...disponibilidadPayload};
+
+        if(payload.flightType == EnumFlightType.ida){
+          delete (payload.arrivalDate);
+        }
       }
       
       const params = objectToQueryString(payload);
