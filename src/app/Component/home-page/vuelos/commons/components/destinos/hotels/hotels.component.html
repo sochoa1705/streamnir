@@ -1,5 +1,5 @@
 <div class="rowDestino center" *ngIf="hotels?.length && city">
-  <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_135:1996)">
       <path
         d="M39.7181 1.51367H10.282C4.6125 1.51367 0 6.12617 0 11.7957C0 17.4652 4.6125 22.0777 10.282 22.0777H17.7687V30.3847L17.4031 30.078C15.5962 28.5617 12.7687 28.685 11.1006 30.3532C9.35254 32.1013 9.46699 34.8795 11.3679 36.4744L17.7686 41.8453V47.0215C17.7686 47.8305 18.4244 48.4863 19.2334 48.4863H36.8115C37.6205 48.4863 38.2764 47.8305 38.2764 47.0215V30.5609C38.2764 28.3484 36.6207 26.4736 34.4251 26.2001L26.5576 25.2199V22.0775H39.7181C45.3876 22.0775 50 17.465 50 11.7955C50 6.12598 45.3876 1.51367 39.7181 1.51367ZM20.6982 45.5566V42.627H35.3467V45.5566H20.6982ZM34.063 29.1073C34.7948 29.1985 35.3468 29.8234 35.3468 30.5609V39.6973H19.7666L13.251 34.2301C12.6727 33.7448 12.6376 32.9594 13.1722 32.4247C13.7726 31.8244 14.8696 31.7766 15.52 32.3223L18.2919 34.6481C19.2427 35.4458 20.6983 34.7691 20.6983 33.526V14.7949C20.6983 13.9872 21.3555 13.3301 22.1632 13.3301C22.9709 13.3301 23.628 13.9872 23.628 14.7949V26.5137C23.628 27.2526 24.1785 27.8759 24.9118 27.9673L34.063 29.1073ZM39.7181 19.1479H26.5576V14.7949C26.5576 12.3718 24.5862 10.4004 22.1631 10.4004C19.7399 10.4004 17.7686 12.3718 17.7686 14.7949V19.1479H10.2819C6.22793 19.1479 2.92969 15.8497 2.92969 11.7957C2.92969 7.7417 6.22793 4.44336 10.282 4.44336H39.7181C43.7721 4.44336 47.0703 7.7416 47.0703 11.7957C47.0703 15.8498 43.7721 19.1479 39.7181 19.1479Z"
@@ -20,87 +20,85 @@
 
 <div class="cardHotel" [ngClass]="{show : hotels?.length}">
 
-  <div class="loadingBoxCard" [ngClass]="{show : !hotels}">
-    <div class="iconLoading">
-      <img src="./assets/loader.gif" alt="">
-    </div>
-    <div class="texto">
-      Cargando hoteles...
-    </div>
-  </div>
-
-  <p-carousel *ngIf="hotels.length > 0" [value]="hotels" [numVisible]="3" [numScroll]="3"
-    [responsiveOptions]="responsiveOptions">
-    <ng-template let-product pTemplate="item">
-      <div class="product-item">
-        <div class="product-item-content">
-
-          <p-galleria [(value)]="product.Images" [responsiveOptions]="responsiveOptions"
-            [containerStyle]="{'max-width': '640px'}" [numVisible]="1" [showThumbnails]="false" [showIndicators]="true"
-            [showIndicatorsOnItem]="true">
-            <ng-template pTemplate="item" let-item>
-              <img [src]="item" [title]="product.Name" style="width: 100%; display: block;" />
-            </ng-template>
-          </p-galleria>
-
+    <div class="loadingBoxCard" [ngClass]="{show : !hotels}">
+        <div class="iconLoading">
+            <img src="./assets/loader.gif" alt="">
         </div>
+        <div class="texto">
+            Cargando hoteles...
+        </div>
+    </div>
 
-        <div class="cardTituloNext">
-          <div class="nameTitle">{{ product.Name }}</div>
-          <div class="btnNext">
-            <a href="{{urlPaqueteDinamico}}hotels/{{product.Id}}" target="_blank">
-              <svg class="arrow" width="11" height="18" viewBox="0 0 11 18" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+    <p-carousel *ngIf="hotels.length > 0" [value]="hotels" [numVisible]="3" [numScroll]="3" [responsiveOptions]="responsiveOptions">
+        <ng-template let-product pTemplate="item">
+            <div class="product-item">
+                <div class="product-item-content">
+
+                    <p-galleria [(value)]="product.Images" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="1" [showThumbnails]="false" [showIndicators]="true" [showIndicatorsOnItem]="true">
+                        <ng-template pTemplate="item" let-item>
+                            <img [src]="item" [title]="product.Name" style="width: 100%; display: block;" />
+                        </ng-template>
+                    </p-galleria>
+
+                </div>
+
+                <div class="cardTituloNext">
+                    <div class="nameTitle">{{ product.Name }}</div>
+                    <div class="btnNext">
+                        <a href="{{urlPaqueteDinamico}}hotels/{{product.Id}}" target="_blank">
+                            <svg class="arrow" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M-9.24496e-08 15.885L6.79892 9L-6.94355e-07 2.115L2.09312 -9.14931e-08L11 9L2.09312 18L-9.24496e-08 15.885Z"
                   fill="white" />
               </svg>
-            </a>
-          </div>
-        </div>
+                        </a>
+                    </div>
+                </div>
 
-        <div class="cardStar" style="clear:both">
-          <div class="estrellas">
-            <div [ngClass]="validateScore(1, product.Category)"></div>
-            <div [ngClass]="validateScore(2, product.Category)"></div>
-            <div [ngClass]="validateScore(3, product.Category)"></div>
-            <div [ngClass]="validateScore(4, product.Category)"></div>
-            <div [ngClass]="validateScore(5, product.Category)"></div>
-          </div>
-          <div class="iconos" *ngIf="product.Services">
-            <div *ngFor="let service of product.Services.slice(0, 4)" class="{{ service.Icon }}"></div>
-          </div>
-        </div>
+                <div class="cardStar" style="clear:both">
+                    <div class="estrellas">
+                        <div [ngClass]="validateScore(1, product.Category)"></div>
+                        <div [ngClass]="validateScore(2, product.Category)"></div>
+                        <div [ngClass]="validateScore(3, product.Category)"></div>
+                        <div [ngClass]="validateScore(4, product.Category)"></div>
+                        <div [ngClass]="validateScore(5, product.Category)"></div>
+                    </div>
+                    <div class="iconos" *ngIf="product.Services">
+                        <div *ngFor="let service of product.Services.slice(0, 4)" class="iconServHotel {{ service.Icon }}">
+                            <div class="tooltipIcon">Name Service {{ service.Name }} </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="cardOpinion">Evaluación de los huéspedes</div>
+                <div class="cardOpinion">Evaluación de los huéspedes</div>
 
-        <div class="cardEvaluacion">
-          <div class="groupItems">
-            <div class="itemsCardEvaluacion">
-              <img src="./assets/providers/tripadvisor.svg" alt="">
+                <div class="cardEvaluacion">
+                    <div class="groupItems">
+                        <div class="itemsCardEvaluacion">
+                            <img src="./assets/providers/tripadvisor.svg" alt="">
+                        </div>
+                        <div class="itemsCardEvaluacion aRight">
+                            {{product.Rating.Score}} / 10
+                        </div>
+                    </div>
+                    <div class="groupItems">
+                        <div class="itemsCardEvaluacion">
+                            <img src="./assets/svg/comment.svg" alt="">
+                        </div>
+                        <div class="itemsCardEvaluacion aRight">
+                            {{product.Rating.Review}}
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="itemsCardEvaluacion aRight">
-              {{product.Rating.Score}} / 10
-            </div>
-          </div>
-          <div class="groupItems">
-            <div class="itemsCardEvaluacion">
-              <img src="./assets/svg/comment.svg" alt="">
-            </div>
-            <div class="itemsCardEvaluacion aRight">
-              {{product.Rating.Review}}
-            </div>
-          </div>
-        </div>
+        </ng-template>
+    </p-carousel>
 
-      </div>
-    </ng-template>
-  </p-carousel>
-
-  <div class="imgLoadHotel" *ngIf="hotels.length === 0">
-    <a href="{{ images[0].RedirectLink }}" target="_blank">
-      <img [src]="images[0].PathImage" [title]="images[0].NameImage">
-    </a>
-  </div>
+    <div class="imgLoadHotel" *ngIf="hotels.length === 0">
+        <a href="{{ images[0].RedirectLink }}" target="_blank">
+            <img [src]="images[0].PathImage" [title]="images[0].NameImage">
+        </a>
+    </div>
 
 </div>
