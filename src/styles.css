@@ -43,7 +43,7 @@ label {
   border-radius: 3px; }
   .form-control:focus {
     outline: none;
-    border: 0.5px solid #009AED !important;
+    border: 0.5px solid #009aed !important;
     box-shadow: none !important; }
 
 button {
@@ -196,9 +196,9 @@ section {
       line-height: 21px;
       letter-spacing: 0.25px;
       font-family: "Montserrat";
-      color: #B9BCBF; }
+      color: #b9bcbf; }
     .card_pasajero input.form-control:focus {
-      border: 0.5px solid #009AED !important;
+      border: 0.5px solid #009aed !important;
       box-shadow: none; }
   .card.seguro {
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
@@ -561,7 +561,7 @@ section {
   line-height: 18px;
   letter-spacing: 0.5px;
   text-transform: capitalize;
-  color: #FFFFFF; }
+  color: #ffffff; }
 
 .btnDatePicker button {
   font-family: Montserrat;
@@ -571,7 +571,7 @@ section {
   line-height: 18px;
   letter-spacing: 0.5px;
   text-transform: capitalize;
-  color: #FFFFFF;
+  color: #ffffff;
   border-radius: 3px; }
 
 .ngb-dp-content {
@@ -583,13 +583,13 @@ section {
   line-height: 20px;
   letter-spacing: 0.5px;
   text-transform: capitalize;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
 
 .ngb-dp-header {
   padding: 10px 30px 0 30px !important; }
 
 .ngb-dp-arrow .btn-link {
-  color: #DF0C30 !important; }
+  color: #df0c30 !important; }
 
 .ngb-dp-arrow .btn-link:hover {
   color: #cb0728 !important; }
@@ -607,14 +607,14 @@ section {
   line-height: 20px;
   letter-spacing: 0.5px;
   text-transform: capitalize;
-  color: #4B4B4B;
+  color: #4b4b4b;
   text-align: end; }
 
 .ngb-dp-navigation-select select:focus {
   outline: none; }
 
 .ngb-dp-month:first-child {
-  border-right: 1px solid #83898F;
+  border-right: 1px solid #83898f;
   padding-right: 15px; }
 
 .ngb-dp-month-name {
@@ -625,7 +625,7 @@ section {
   line-height: 20px;
   letter-spacing: 0.5px;
   text-transform: capitalize;
-  color: #4B4B4B;
+  color: #4b4b4b;
   text-transform: uppercase; }
 
 .ngb-dp-weekday {
@@ -678,7 +678,7 @@ section {
   align-items: center;
   padding-left: 10px; }
   .portletFiltro .rowFiltro .columnFiltro .iconCalendar svg path {
-    stroke: #009AED; }
+    stroke: #009aed; }
 
 .flexCero {
   flex: 0 !important; }
@@ -696,16 +696,16 @@ section {
   font-size: 16px;
   line-height: 18px;
   text-transform: capitalize;
-  color: #4B4B4B;
+  color: #4b4b4b;
   text-indent: 10px;
-  border: 0.5px solid #E4E5E7; }
+  border: 0.5px solid #e4e5e7; }
   .portletFiltro .rowFiltro .columnFiltro input:focus,
   .portletFiltro .rowFiltro .columnFiltro input[type="text"]:focus {
-    border: 0.5px solid #009AED !important;
+    border: 0.5px solid #009aed !important;
     box-shadow: none; }
   .portletFiltro .rowFiltro .columnFiltro input::placeholder,
   .portletFiltro .rowFiltro .columnFiltro input[type="text"]::placeholder {
-    color: #B9BCBF !important;
+    color: #b9bcbf !important;
     font-size: 16px; }
   .portletFiltro .rowFiltro .columnFiltro input.origen, .portletFiltro .rowFiltro .columnFiltro input.destino,
   .portletFiltro .rowFiltro .columnFiltro input[type="text"].origen,
@@ -719,7 +719,7 @@ section {
 
 .portletFiltro .rowFiltro .columnFiltro input::-webkit-input-placeholder,
 .portletFiltro .rowFiltro .columnFiltro input[type="text"]::-webkit-input-placeholder {
-  color: #B9BCBF;
+  color: #b9bcbf;
   font-size: 16px; }
 
 .portletFiltro .rowFiltro .columnFiltro.hideColumn {
@@ -757,13 +757,13 @@ section {
 
 .custom-day.range,
 .custom-day:hover {
-  background: #009AED;
+  background: #009aed;
   border-radius: 3px;
   color: white; }
 
 .custom-day.faded {
-  background: #8FD0F3;
-  color: #009AED;
+  background: #8fd0f3;
+  color: #009aed;
   border-radius: 0; }
 
 /* end datepicker styles  */
@@ -798,7 +798,7 @@ section {
   font-weight: bold;
   font-size: 24px;
   line-height: 36px;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
 
 .box-container .box-perfil .perfilMail {
   font-family: Montserrat;
@@ -807,13 +807,13 @@ section {
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.1px;
-  color: #1EAEA5; }
+  color: #1eaea5; }
 
 .box-container .box-perfil .boxContact {
   display: flex;
   flex-direction: column;
   padding: 10px 0 10px 0;
-  border-top: 1px solid #E4E5E7;
+  border-top: 1px solid #e4e5e7;
   margin-top: 20px; }
   @media (min-width: 768px) {
     .box-container .box-perfil .boxContact {
@@ -841,13 +841,13 @@ section {
   font-size: 12px;
   line-height: 21px;
   letter-spacing: 0.1px;
-  color: #009AED;
+  color: #009aed;
   width: 100%;
   text-align: center;
   cursor: pointer; }
 
 .box-container .box-perfil .boxContact .contacto .linkContact.disabled {
-  color: #4B4B4B;
+  color: #4b4b4b;
   cursor: default; }
 
 .box-container .box-content {
@@ -863,7 +863,7 @@ section {
       width: 265px;
       margin-right: 35px;
       margin-top: -10px;
-      border: 0.5px solid #E4E5E7;
+      border: 0.5px solid #e4e5e7;
       box-sizing: border-box;
       border-radius: 5px 5px 5px 0px;
       height: 376px;
@@ -875,7 +875,7 @@ section {
   display: flex;
   justify-content: center;
   padding: 30px 0 19px 0;
-  border-bottom: 1px solid #E4E5E7; }
+  border-bottom: 1px solid #e4e5e7; }
 
 .box-container .box-content .portlet-izq .iconViaje img {
   width: 73px;
@@ -899,8 +899,8 @@ section {
   flex-wrap: wrap; }
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil {
-  background: #FFFFFF;
-  border: 0.5px solid #E4E5E7;
+  background: #ffffff;
+  border: 0.5px solid #e4e5e7;
   box-sizing: border-box;
   border-radius: 5px;
   display: flex;
@@ -954,7 +954,7 @@ section {
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.1px;
-  color: #DF0C30; }
+  color: #df0c30; }
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxCenter .descrip {
   font-family: Montserrat;
@@ -963,7 +963,7 @@ section {
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.1px;
-  color: #83898F;
+  color: #83898f;
   padding: 5px 0; }
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight .subTitle {
@@ -973,7 +973,7 @@ section {
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.1px;
-  color: #F21037; }
+  color: #f21037; }
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight .title {
   font-family: Open Sans;
@@ -982,7 +982,7 @@ section {
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.18px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   padding: 5px 0 12px 0; }
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight .descrip {
@@ -991,7 +991,7 @@ section {
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.1px;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight .boxBtn {
   display: flex;
@@ -1029,7 +1029,7 @@ section {
   display: flex;
   align-items: center;
   letter-spacing: 0.18px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   display: flex;
   flex: 1 1 100%; }
 
@@ -1043,13 +1043,13 @@ section {
   display: flex;
   align-items: center;
   letter-spacing: 0.25px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   display: flex;
   flex: 1 1 100%; }
 
 .box-container .box-content .portlet-der .personalDocument {
-  background: #FFFFFF;
-  border: 0.5px solid #E4E5E7;
+  background: #ffffff;
+  border: 0.5px solid #e4e5e7;
   box-sizing: border-box;
   border-radius: 10px; }
 
@@ -1068,7 +1068,7 @@ section {
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup.error .form-control,
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup.error .form-select {
-  border: 0.5px solid #F44336; }
+  border: 0.5px solid #f44336; }
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup.error .textError {
   opacity: 1; }
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .textError {
@@ -1076,7 +1076,7 @@ section {
   margin-left: 15px;
   font-weight: 300;
   font-size: 11px;
-  color: #F44336; }
+  color: #f44336; }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid {
   display: flex;
@@ -1088,7 +1088,7 @@ section {
   display: flex;
   flex: 1 1 100%;
   padding: 10px 0;
-  border-top: 1px solid #E4E5E7; }
+  border-top: 1px solid #e4e5e7; }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .linkGrid {
   font-family: Montserrat;
@@ -1097,7 +1097,7 @@ section {
   font-size: 10px;
   line-height: 15px;
   letter-spacing: 0.1px;
-  color: #009AED;
+  color: #009aed;
   cursor: pointer; }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .rowGrid:first-child {
@@ -1141,7 +1141,7 @@ section {
   display: flex;
   align-items: center;
   letter-spacing: 0.25px;
-  color: #B50A27; }
+  color: #b50a27; }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .passLabel {
   font-family: Montserrat;
@@ -1150,7 +1150,7 @@ section {
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0.1px;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .passText {
   display: flex;
@@ -1162,7 +1162,7 @@ section {
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0.1px;
-  color: #83898F; }
+  color: #83898f; }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup {
   display: flex;
@@ -1179,7 +1179,7 @@ section {
   display: flex;
   align-items: center;
   letter-spacing: 0.25px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   padding-bottom: 9px; }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup.fecVen span {
@@ -1210,7 +1210,7 @@ section {
   display: flex;
   align-items: center;
   letter-spacing: 0.25px;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-input {
   margin-top: 0 !important;
@@ -1218,7 +1218,7 @@ section {
   width: 24px;
   height: 24px; }
 
-.box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-input[type=radio],
+.box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-input[type="radio"],
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-label {
   cursor: pointer; }
 
@@ -1226,7 +1226,7 @@ section {
   display: flex;
   flex: 1 1 100%; }
   .optionSel .optionLeft {
-    border: 0.5px solid #E4E5E7;
+    border: 0.5px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 5px 0 0 5px;
     display: flex;
@@ -1236,7 +1236,7 @@ section {
     height: 47px;
     width: 50%; }
   .optionSel .optionRight {
-    border: 0.5px solid #E4E5E7;
+    border: 0.5px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 0 5px 5px 0;
     display: flex;
@@ -1258,7 +1258,7 @@ section {
   padding-bottom: 0px; }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .optionLeft {
-  border: 0.5px solid #E4E5E7;
+  border: 0.5px solid #e4e5e7;
   box-sizing: border-box;
   border-radius: 5px 0 0 5px;
   display: flex;
@@ -1268,7 +1268,7 @@ section {
   height: 47px; }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .optionRight {
-  border: 0.5px solid #E4E5E7;
+  border: 0.5px solid #e4e5e7;
   box-sizing: border-box;
   border-radius: 0 5px 5px 0;
   display: flex;
@@ -1288,11 +1288,11 @@ section {
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup input[type="text"],
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup select {
-  border: 0.5px solid #E4E5E7;
+  border: 0.5px solid #e4e5e7;
   box-sizing: border-box;
   border-radius: 5px;
   height: 47px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 300;
@@ -1310,13 +1310,13 @@ section {
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0.25px;
-  color: #B9BCBF; }
+  color: #b9bcbf; }
 
 .box-container .box-content .headerPortlet {
   display: flex;
   flex-wrap: wrap;
   padding: 11px 26px;
-  border-bottom: 1px solid #E4E5E7; }
+  border-bottom: 1px solid #e4e5e7; }
 
 .box-container .box-content .headerPortlet .titleBoxRight {
   font-family: Open Sans;
@@ -1326,7 +1326,7 @@ section {
   line-height: 36px;
   display: flex;
   align-items: center;
-  color: #4B4B4B;
+  color: #4b4b4b;
   width: 100%; }
 
 .box-container .box-content .headerPortlet .subtitleBoxRight {
@@ -1360,7 +1360,7 @@ section {
 .boxMenu ul li {
   display: flex;
   height: 35px;
-  color: #009AED;
+  color: #009aed;
   text-decoration: none;
   width: 100%;
   font-weight: 500;
@@ -1394,10 +1394,10 @@ section {
   letter-spacing: 0.5px; }
 
 .btnPerfil.primary {
-  background: #DF0C30; }
+  background: #df0c30; }
 
 .btnPerfil.primary:hover {
-  background: #DF0C30; }
+  background: #df0c30; }
 
 .btnAgregar {
   font-family: Montserrat;
@@ -1406,14 +1406,14 @@ section {
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0.1px;
-  color: #009AED;
+  color: #009aed;
   margin-top: 10px;
   padding: 10px 15px 10px 0;
   cursor: pointer;
   transition: all 0.3s; }
 
 .btnAgregar.gris {
-  color: #CFD1D3; }
+  color: #cfd1d3; }
 
 .rowElement {
   display: flex;
@@ -1455,7 +1455,7 @@ section {
   border: none !important; }
 
 .precioAntes {
-  text-decoration: line-through #DF0C30; }
+  text-decoration: line-through #df0c30; }
 
 .carousel-item .card .card-body {
   font-family: Open Sans; }
@@ -1477,7 +1477,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   font-weight: 700;
   font-size: 28px;
   line-height: 36px;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
 
 .card.seguro {
   margin-top: 15px; }
@@ -1527,28 +1527,28 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   border-radius: 3px 0 0 3px !important;
   letter-spacing: 2px; }
   .inputDer:focus {
-    border: 0.5px solid #009AED !important;
+    border: 0.5px solid #009aed !important;
     box-shadow: none; }
   @media (max-width: 640px) {
     .inputDer {
-      border-left: 0.5px solid #E4E5E7 !important; } }
+      border-left: 0.5px solid #e4e5e7 !important; } }
 .inputIzq {
   border-radius: 0 3px 3px 0 !important;
   letter-spacing: 2px;
   border-left: 0px !important; }
   .inputIzq:focus {
-    border: 0.5px solid #009AED !important;
+    border: 0.5px solid #009aed !important;
     box-shadow: none; }
   @media (max-width: 640px) {
     .inputIzq {
-      border-left: 0.5px solid #E4E5E7 !important; } }
+      border-left: 0.5px solid #e4e5e7 !important; } }
 
 .selectSeguro {
-  border: 0.5px solid #E4E5E7;
+  border: 0.5px solid #e4e5e7;
   box-sizing: border-box;
   border-radius: 5px;
   height: 49px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 300;
@@ -1557,7 +1557,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   letter-spacing: 0.25px;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23DF0C30' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"); }
   .selectSeguro:focus {
-    border: 0.5px solid #009AED;
+    border: 0.5px solid #009aed;
     box-shadow: none; }
 
 .iconBandera {
@@ -1574,7 +1574,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125); }
 .accordion .accordion-item .footerDet {
   padding: 1rem 1.25rem;
-  border-top: 1px solid #E4E5E7; }
+  border-top: 1px solid #e4e5e7; }
 
 .modal-body {
   font-family: Montserrat; }
@@ -1592,7 +1592,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   flex-direction: column;
   justify-content: space-between; }
   .footerPopup .alignFooterPopup p {
-    color: #009AED; }
+    color: #009aed; }
 
 .modal-header {
   display: flex;
@@ -1614,15 +1614,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   transform: rotate(180deg); }
 
 .textContactenos {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 14px;
   line-height: 21px;
   /* or 150% */
   letter-spacing: 0.1px;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
 
 .boxGraphic {
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 20px 19px; }
@@ -1634,17 +1634,17 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 18px;
       line-height: 27px;
       letter-spacing: 0.18px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     .boxGraphic .row.subtitle {
       font-family: Montserrat;
       font-size: 14px;
       line-height: 21px;
       font-weight: 500;
       letter-spacing: 0.1px;
-      color: #4B4B4B;
+      color: #4b4b4b;
       gap: 10px; }
     .boxGraphic .row .circleBlue {
-      background: #009AED;
+      background: #009aed;
       width: 9px;
       height: 9px;
       border-radius: 50%;
@@ -1654,7 +1654,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     display: flex;
     flex-wrap: nowrap;
     padding: 20px 0 0 0;
-    border-bottom: 0.5px solid #CFD1D3;
+    border-bottom: 0.5px solid #cfd1d3;
     position: relative; }
     .boxGraphic .contentGraphic.footer {
       border-bottom: none;
@@ -1664,7 +1664,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 16px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
       .boxGraphic .contentGraphic.footer .gCenter {
         height: 20px; }
       .boxGraphic .contentGraphic.footer .column {
@@ -1672,7 +1672,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .boxGraphic .contentGraphic .valorHor {
       position: absolute;
       top: 72%;
-      border-top: 1px dashed #CFD1D3;
+      border-top: 1px dashed #cfd1d3;
       left: 0;
       width: calc(100% - 185px);
       font-family: Montserrat;
@@ -1680,7 +1680,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 16px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #4B4B4B;
+      color: #4b4b4b;
       z-index: 4; }
     .boxGraphic .contentGraphic .anioVertical {
       position: absolute;
@@ -1690,11 +1690,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 16px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #4B4B4B;
+      color: #4b4b4b;
       left: 50%;
       top: -10px;
       height: 100%;
-      border-left: 1px solid #E4E5E7;
+      border-left: 1px solid #e4e5e7;
       padding-left: 10px;
       z-index: 2; }
     .boxGraphic .contentGraphic .gLeft {
@@ -1704,7 +1704,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 16px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #4B4B4B;
+      color: #4b4b4b;
       margin: auto 0; }
     .boxGraphic .contentGraphic .gCenter {
       width: 100%;
@@ -1726,11 +1726,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .boxGraphic .contentGraphic .gCenter .column:last-child {
           border-radius: 0 5px 0 0; }
         .boxGraphic .contentGraphic .gCenter .column.gris {
-          background: #CFD1D3; }
+          background: #cfd1d3; }
         .boxGraphic .contentGraphic .gCenter .column.red {
-          background: #B50A27; }
+          background: #b50a27; }
         .boxGraphic .contentGraphic .gCenter .column.blue {
-          background: #009AED; }
+          background: #009aed; }
         .boxGraphic .contentGraphic .gCenter .column.height-10 {
           height: 10%; }
         .boxGraphic .contentGraphic .gCenter .column.height-20 {
@@ -1758,29 +1758,29 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 14px;
         line-height: 21px;
         letter-spacing: 0.1px;
-        color: #009AED;
+        color: #009aed;
         padding-bottom: 10px; }
       .boxGraphic .contentGraphic .gRight .precio {
         font-weight: bold;
         font-size: 36px;
         line-height: 21px;
         letter-spacing: 0.1px;
-        color: #009AED;
+        color: #009aed;
         padding-bottom: 10px; }
       .boxGraphic .contentGraphic .gRight .descrip {
         font-size: 14px;
         line-height: 21px;
         letter-spacing: 0.1px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         padding-bottom: 5px; }
       .boxGraphic .contentGraphic .gRight .line {
-        background: #009AED;
+        background: #009aed;
         height: 3px;
         width: 100%; }
 
 .boxPrecioAero,
 .boxPrecios {
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 5px; }
   .boxPrecioAero table,
   .boxPrecios table {
@@ -1789,7 +1789,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 14px;
     line-height: 26px;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     text-align: center; }
     .boxPrecioAero table thead tr:first-child:hover,
     .boxPrecios table thead tr:first-child:hover {
@@ -1804,14 +1804,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .boxPrecios table td.green {
       font-weight: bold;
       letter-spacing: 0.1px;
-      color: #54D834; }
+      color: #54d834; }
     .boxPrecioAero table td.red,
     .boxPrecios table td.red {
       letter-spacing: 0.1px;
-      color: #B50A27; }
+      color: #b50a27; }
     .boxPrecioAero table td.selected,
     .boxPrecios table td.selected {
-      background: #009AED;
+      background: #009aed;
       font-weight: bold;
       color: #ffffff; }
     .boxPrecioAero table td.center,
@@ -1823,7 +1823,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-weight: bold;
     font-size: 14px;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     height: 46px;
     margin: 0;
     text-align: center; }
@@ -1845,9 +1845,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       letter-spacing: 0.1px;
       display: flex;
       align-items: center;
-      border-bottom: 1px solid #E4E5E7;
-      border-left: 1px solid #E4E5E7;
-      color: #4B4B4B;
+      border-bottom: 1px solid #e4e5e7;
+      border-left: 1px solid #e4e5e7;
+      color: #4b4b4b;
       height: 46px;
       display: flex;
       justify-content: center; }
@@ -1872,14 +1872,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       .boxPrecios .row .col.green {
         font-weight: bold;
         letter-spacing: 0.1px;
-        color: #54D834; }
+        color: #54d834; }
       .boxPrecioAero .row .col.red,
       .boxPrecios .row .col.red {
         letter-spacing: 0.1px;
-        color: #B50A27; }
+        color: #b50a27; }
       .boxPrecioAero .row .col.selected,
       .boxPrecios .row .col.selected {
-        background: #009AED;
+        background: #009aed;
         font-weight: bold;
         color: #ffffff; }
       .boxPrecioAero .row .col.center,
@@ -1895,7 +1895,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     display: flex;
     align-items: center; }
     .boxPrecios .header .twoRow:first-child {
-      border-bottom: 1px solid #E4E5E7; }
+      border-bottom: 1px solid #e4e5e7; }
     .boxPrecios .header .twoRow img {
       margin-left: 10px; }
 .boxPrecios .row .col {
@@ -1914,7 +1914,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   justify-content: space-between; }
   .viajero .directo .escala_directo {
     background: #fff;
-    border: 1px solid #83898F;
+    border: 1px solid #83898f;
     border-radius: 50%;
     width: 6px;
     height: 6px;
@@ -1931,7 +1931,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-family: Montserrat;
     font-size: 11px;
     letter-spacing: 0.1px;
-    color: #F21037;
+    color: #f21037;
     top: -12px;
     right: 5px; }
 
@@ -1945,9 +1945,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     position: absolute;
     padding: 10px;
     width: 230px;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 5px;
-    border: 1px solid #E4E5E7;
+    border: 1px solid #e4e5e7;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
     left: calc(100% - 160px);
     bottom: 32px;
@@ -1958,9 +1958,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       position: absolute;
       padding: 10px;
       width: 230px;
-      background: #FFFFFF;
+      background: #ffffff;
       border-radius: 5px;
-      border: 1px solid #E4E5E7;
+      border: 1px solid #e4e5e7;
       box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
       bottom: 32px;
       z-index: 20;
@@ -1984,7 +1984,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 12px;
         line-height: 18px;
         letter-spacing: 0.1px;
-        color: #83898F; }
+        color: #83898f; }
     .toolTip .boxTooltip:after {
       display: block;
       content: " ";
@@ -2002,13 +2002,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-weight: 600;
       font-size: 12px;
       letter-spacing: 0.1px;
-      color: #83898F; }
+      color: #83898f; }
     .toolTip .boxTooltip .descripTooltip {
       font-weight: 500;
       font-size: 12px;
       line-height: 18px;
       letter-spacing: 0.1px;
-      color: #83898F; }
+      color: #83898f; }
 
 .ng5-slider .ng5-slider-pointer.ng5-slider-pointer-min {
   width: 14px !important;
@@ -2030,12 +2030,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.25px;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
   .footerLink .linkBlue {
     font-weight: 600;
     line-height: 18px;
     letter-spacing: 0.25px;
-    color: #009AED;
+    color: #009aed;
     cursor: pointer; }
   @media (max-width: 990px) and (min-width: 640px) {
     .footerLink {
@@ -2050,14 +2050,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   #politicaModal .modal-dialog .modal-header,
   #reservaModal .modal-dialog .modal-header {
     padding-bottom: 2rem;
-    border-bottom: 1px solid #E4E5E7; }
+    border-bottom: 1px solid #e4e5e7; }
     #politicaModal .modal-dialog .modal-header .titleMod,
     #reservaModal .modal-dialog .modal-header .titleMod {
       font-family: Open Sans;
       font-weight: bold;
       font-size: 24px;
       line-height: 36px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
   #politicaModal .modal-dialog .modal-body,
   #reservaModal .modal-dialog .modal-body {
     padding: 30px 80px; }
@@ -2068,7 +2068,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 14px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     #politicaModal .modal-dialog .modal-body .listModal li,
     #reservaModal .modal-dialog .modal-body .listModal li {
       font-family: Montserrat;
@@ -2076,10 +2076,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 14px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
       #politicaModal .modal-dialog .modal-body .listModal li::marker,
       #reservaModal .modal-dialog .modal-body .listModal li::marker {
-        color: #B50A27; }
+        color: #b50a27; }
     #politicaModal .modal-dialog .modal-body .redLink,
     #reservaModal .modal-dialog .modal-body .redLink {
       font-family: Montserrat;
@@ -2087,7 +2087,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 14px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #B50A27; }
+      color: #b50a27; }
 
 #reservaModal .modal-dialog {
   max-width: 50% !important; }
@@ -2095,26 +2095,26 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     display: flex;
     align-items: center;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #E4E5E7;
-    background: #1EAEA5;
+    border-bottom: 1px solid #e4e5e7;
+    background: #1eaea5;
     border-radius: 10px 10px 0 0;
     color: #ffffff; }
   #reservaModal .modal-dialog .titleMod {
-    color: #FFFFFF !important; }
+    color: #ffffff !important; }
   #reservaModal .modal-dialog .titleModal {
     font-family: Montserrat;
     font-weight: bold;
     font-size: 16px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
   #reservaModal .modal-dialog .subtitleMod {
     font-family: Montserrat;
     font-weight: bold;
     font-size: 16px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    border-bottom: 1px solid #E4E5E7;
+    border-bottom: 1px solid #e4e5e7;
     color: #506370;
     margin: 45px 0;
     text-align: center;
@@ -2129,7 +2129,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   max-width: 100% !important; }
   #Modaltermino .modal-dialog .modal-content .headerRojo,
   #ModalCondicion .modal-dialog .modal-content .headerRojo {
-    background: #B50A27;
+    background: #b50a27;
     height: 70px;
     min-height: 70px;
     width: 100%;
@@ -2143,7 +2143,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     align-items: center;
     justify-content: space-between;
     padding: 0 55px;
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
     height: 128px;
     min-height: 128px;
@@ -2151,7 +2151,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-weight: bold;
     font-size: 32px;
     line-height: 48px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
     #Modaltermino .modal-dialog .modal-content .cabeceraModal .btnModal,
     #ModalCondicion .modal-dialog .modal-content .cabeceraModal .btnModal {
       display: flex;
@@ -2164,8 +2164,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 14px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #DF0C30;
-      border: 1px solid #DF0C30;
+      color: #df0c30;
+      border: 1px solid #df0c30;
       box-sizing: border-box;
       border-radius: 3px;
       padding: 0 10px;
@@ -2173,7 +2173,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       transition: 0.3s; }
       #Modaltermino .modal-dialog .modal-content .cabeceraModal .btnModal:hover,
       #ModalCondicion .modal-dialog .modal-content .cabeceraModal .btnModal:hover {
-        background: #DF0C30;
+        background: #df0c30;
         color: #ffffff; }
   #Modaltermino .modal-dialog .modal-body,
   #ModalCondicion .modal-dialog .modal-body {
@@ -2185,7 +2185,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 24px;
       line-height: 36px;
       padding-bottom: 30px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     #Modaltermino .modal-dialog .modal-body .linkRed,
     #ModalCondicion .modal-dialog .modal-body .linkRed {
       font-family: Montserrat;
@@ -2194,7 +2194,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       line-height: 21px;
       letter-spacing: 0.1px;
       padding-bottom: 10px;
-      color: #B50A27; }
+      color: #b50a27; }
     #Modaltermino .modal-dialog .modal-body .subtitleModal,
     #ModalCondicion .modal-dialog .modal-body .subtitleModal {
       font-family: Montserrat;
@@ -2223,7 +2223,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 #ModalCondicion .modal-content .modal-body {
   padding: 0;
-  background: #E5E5E5; }
+  background: #e5e5e5; }
   #ModalCondicion .modal-content .modal-body .contentModal {
     padding: 55px;
     background: #ffffff; }
@@ -2235,7 +2235,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       margin-bottom: 40px;
       justify-content: center; }
   #ModalCondicion .modal-content .modal-body .contentModBox {
-    border: 0.5px solid #E4E5E7;
+    border: 0.5px solid #e4e5e7;
     margin: 55px;
     border-radius: 10px;
     background: #ffffff; }
@@ -2248,8 +2248,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-weight: bold;
       font-size: 24px;
       line-height: 36px;
-      color: #FFFFFF;
-      background: #1EAEA5;
+      color: #ffffff;
+      background: #1eaea5;
       height: 60px; }
     #ModalCondicion .modal-content .modal-body .contentModBox .listModal {
       padding: 30px 60px; }
@@ -2264,7 +2264,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       line-height: 21px;
       letter-spacing: 0.1px;
       padding-left: 45px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     #ModalCondicion .modal-content .modal-body .contentModBox .tablaModal {
       padding: 0 150px; }
       #ModalCondicion .modal-content .modal-body .contentModBox .tablaModal .rowModal {
@@ -2285,9 +2285,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     line-height: 21px;
     text-align: justify;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     height: 60px;
-    border: 1px solid #DF0C30;
+    border: 1px solid #df0c30;
     box-sizing: border-box;
     border-radius: 10px; }
 
@@ -2311,9 +2311,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     height: 0;
     flex: auto; }
 
-  .portletFiltro .rowFiltro .columnFiltro input[type=text] {
+  .portletFiltro .rowFiltro .columnFiltro input[type="text"] {
     padding-bottom: 0 !important;
-    border: 0.5px solid #E4E5E7; }
+    border: 0.5px solid #e4e5e7; }
 
   .columnButton {
     display: flex;
@@ -2346,7 +2346,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   font-family: Open Sans;
   font-weight: bold;
   font-size: 22px;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
 #modalDetVuelo .boxVuelos .content {
   display: flex;
   flex-wrap: nowrap; }
@@ -2354,7 +2354,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   display: flex;
   justify-content: center; }
   #modalDetVuelo .boxVuelos .boxCenter .boxDescrip {
-    background: #F7F7F7;
+    background: #f7f7f7;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     width: 320px;
@@ -2365,9 +2365,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #009AED; }
+    color: #009aed; }
 #modalDetVuelo .boxVuelos .boxFooter {
-  background: #F7F7F7;
+  background: #f7f7f7;
   border-radius: 5px;
   width: 100%;
   padding: 20px;
@@ -2376,7 +2376,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   font-size: 12px;
   line-height: 21px;
   letter-spacing: 0.1px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   margin-bottom: 30px;
   z-index: 1; }
   #modalDetVuelo .boxVuelos .boxFooter .title {
@@ -2393,20 +2393,20 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   font-weight: bold;
   font-size: 22px;
   line-height: 36px;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
 #modalDetVuelo .boxVuelos .subtitle {
   font-family: Montserrat;
   font-weight: 500;
   font-size: 16px;
   letter-spacing: 0.15px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   display: flex;
   gap: 10px;
   padding-bottom: 30px; }
 #modalDetVuelo .boxVuelos .column {
   flex: 1 1 100%; }
   #modalDetVuelo .boxVuelos .column.alignRight {
-    border-right: 2px dashed #8FD0F3;
+    border-right: 2px dashed #8fd0f3;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -2428,13 +2428,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 14px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
       #modalDetVuelo .boxVuelos .column .boxSeg .text.blue {
-        color: #009AED; }
+        color: #009aed; }
       #modalDetVuelo .boxVuelos .column .boxSeg .text.red {
-        color: #DF0C30; }
+        color: #df0c30; }
       #modalDetVuelo .boxVuelos .column .boxSeg .text.borde {
-        color: #009AED;
+        color: #009aed;
         font-weight: 600;
         background-color: rgba(143, 208, 243, 0.2);
         border-radius: 5px;
@@ -2463,7 +2463,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   font-weight: 500;
   line-height: 21px;
   letter-spacing: 0.1px;
-  color: #4B4B4B !important; }
+  color: #4b4b4b !important; }
 
 #ModalCoverageI .modal-dialog,
 #ModalCoverage .modal-dialog {
@@ -2474,14 +2474,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       width: calc(100% - 15px) !important; } }
 #ModalCoverageI .modal-header,
 #ModalCoverage .modal-header {
-  background: #54D834; }
+  background: #54d834; }
   #ModalCoverageI .modal-header .modal-title,
   #ModalCoverage .modal-header .modal-title {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-weight: 700;
     font-size: 24px;
     line-height: 36px;
-    color: #FFFFFF; }
+    color: #ffffff; }
     @media (max-width: 640px) {
       #ModalCoverageI .modal-header .modal-title,
       #ModalCoverage .modal-header .modal-title {
@@ -2515,33 +2515,33 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.18px;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
 #modalVerOpciones .boxPlanes {
   margin-bottom: 30px;
   display: flex;
   justify-content: space-between; }
   #modalVerOpciones .boxPlanes .cardPlan {
     width: 22%;
-    border: 1px solid #83898F;
+    border: 1px solid #83898f;
     box-sizing: border-box;
     border-radius: 5px;
     padding: 0px 12px 10px 12px; }
     #modalVerOpciones .boxPlanes .cardPlan.green .title {
-      background: #54D834; }
+      background: #54d834; }
     #modalVerOpciones .boxPlanes .cardPlan.green:hover {
-      border: 1px solid #54D834; }
+      border: 1px solid #54d834; }
     #modalVerOpciones .boxPlanes .cardPlan.orange .title {
-      background: #F29704; }
+      background: #f29704; }
     #modalVerOpciones .boxPlanes .cardPlan.orange:hover {
-      border: 1px solid #F29704; }
+      border: 1px solid #f29704; }
     #modalVerOpciones .boxPlanes .cardPlan.blue .title {
-      background: #009AED; }
+      background: #009aed; }
     #modalVerOpciones .boxPlanes .cardPlan.blue:hover {
-      border: 1px solid #009AED; }
+      border: 1px solid #009aed; }
     #modalVerOpciones .boxPlanes .cardPlan.red .title {
-      background: #B50A27; }
+      background: #b50a27; }
     #modalVerOpciones .boxPlanes .cardPlan.red:hover {
-      border: 1px solid #B50A27; }
+      border: 1px solid #b50a27; }
     #modalVerOpciones .boxPlanes .cardPlan:hover {
       box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25); }
     #modalVerOpciones .boxPlanes .cardPlan .title {
@@ -2550,19 +2550,19 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-weight: 500;
       font-size: 16px;
       letter-spacing: 0.15px;
-      color: #FFFFFF;
+      color: #ffffff;
       height: 39px;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #4B4B4B; }
+      background: #4b4b4b; }
     #modalVerOpciones .boxPlanes .cardPlan .precio {
-      background: #EBEBEB;
+      background: #ebebeb;
       font-family: Montserrat;
       font-weight: 500;
       font-size: 12px;
       letter-spacing: 0.15px;
-      color: #4B4B4B;
+      color: #4b4b4b;
       height: 75px;
       display: flex;
       justify-content: center; }
@@ -2577,13 +2577,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-weight: 600;
       font-size: 12px;
       letter-spacing: 0.1px;
-      color: #4B4B4B;
+      color: #4b4b4b;
       padding: 15px;
       position: relative; }
       #modalVerOpciones .boxPlanes .cardPlan .titleContent .lineT {
         width: 60px;
         height: 0.5px;
-        background: #83898F;
+        background: #83898f;
         position: absolute;
         bottom: 12px; }
     #modalVerOpciones .boxPlanes .cardPlan .row .descrip {
@@ -2592,7 +2592,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-weight: 500;
       font-size: 12px;
       letter-spacing: 0.1px;
-      color: #4B4B4B;
+      color: #4b4b4b;
       display: flex;
       align-items: center;
       gap: 10px; }
@@ -2614,7 +2614,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 18px;
     line-height: 27px;
     letter-spacing: 0.18px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
   #modalVerOpciones .boxFooter .descrip {
     font-family: Montserrat;
     font-weight: 500;
@@ -2622,21 +2622,21 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     line-height: 15px;
     text-align: center;
     letter-spacing: 0.1px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
   #modalVerOpciones .boxFooter .simbolo {
     font-family: Montserrat;
     font-weight: 500;
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
   #modalVerOpciones .boxFooter .precio {
     font-family: Montserrat;
     font-weight: 600;
     font-size: 24px;
     line-height: 24px;
     letter-spacing: 0.15px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
 
 #ModalBlue .modal-dialog {
   min-width: 70% !important; }
@@ -2655,14 +2655,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     line-height: 36px;
     display: flex;
     align-items: center;
-    color: #FFFFFF; }
+    color: #ffffff; }
   #ModalBlue .modal-header .modal-subtitle {
     font-family: Open Sans;
     font-size: 20px;
     line-height: 36px;
     display: flex;
     align-items: center;
-    color: #FFFFFF; }
+    color: #ffffff; }
 #ModalBlue .contentRow {
   display: flex;
   flex: 1 1 100%;
@@ -2698,15 +2698,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         margin: 10px;
         background: #ffffff;
         padding: 42px;
-        border: 1px solid #E4E5E7;
+        border: 1px solid #e4e5e7;
         box-sizing: border-box;
         border-radius: 10px;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start; }
       #ModalBlue .modal-body .rowModal .columnModal.inputCheck.activo {
-        background: #FFFFFF;
-        border: 1px solid #009AED;
+        background: #ffffff;
+        border: 1px solid #009aed;
         box-sizing: border-box;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
@@ -2719,7 +2719,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         display: flex;
         align-items: center;
         letter-spacing: 0.18px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         background: rgba(235, 235, 235, 0.2);
         border-radius: 10px;
         width: 233px;
@@ -2733,14 +2733,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         height: 80px; }
         #ModalBlue .modal-body .rowModal .columnModal .headPaso .number {
           display: flex;
-          background: #009AED;
+          background: #009aed;
           width: 40px;
           height: 40px;
           border-radius: 20px;
           color: #ffffff;
           align-items: center;
           justify-content: center;
-          font-family: 'Open Sans';
+          font-family: "Open Sans";
           font-weight: bold;
           font-size: 18px;
           line-height: 27px; }
@@ -2752,9 +2752,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         align-items: center;
         text-align: center;
         letter-spacing: 0.18px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         flex-direction: column; }
-      #ModalBlue .modal-body .rowModal .columnModal input[type=radio] {
+      #ModalBlue .modal-body .rowModal .columnModal input[type="radio"] {
         display: flex !important;
         position: absolute;
         left: 50px;
@@ -2791,7 +2791,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   justify-content: center; }
 
 .btnFooter {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 16px;
   margin-top: 20px;
   font-weight: 600;
@@ -2812,19 +2812,19 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     margin-top: -25px; }
 
 .accordion-body {
-  border-bottom: 1px solid #E4E5E7; }
+  border-bottom: 1px solid #e4e5e7; }
   .accordion-body .textAcor {
     font-family: Montserrat;
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #83898F; }
+    color: #83898f; }
   .accordion-body .text-end {
     font-family: Montserrat;
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #83898F; }
+    color: #83898f; }
   .accordion-body .price_old {
     text-decoration: line-through red;
     padding-right: 10px; }
@@ -2836,7 +2836,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #009AED; }
+    color: #009aed; }
   .accordion-body .row {
     height: 32px; }
 
@@ -2848,7 +2848,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   font-family: Montserrat;
   font-size: 16px;
   line-height: 18px;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
   .boxFilter .bodyFilter img {
     margin-right: 10px; }
   .boxFilter .bodyFilter .textBold {
@@ -2868,8 +2868,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .boxOferta {
   display: flex;
   flex-direction: column;
-  background: #FFFFFF;
-  border: 0.5px solid #E4E5E7;
+  background: #ffffff;
+  border: 0.5px solid #e4e5e7;
   box-sizing: border-box;
   border-radius: 10px; }
   .boxOferta .ofertaRow {
@@ -2901,7 +2901,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           font-size: 30px;
           line-height: 36px;
           height: 45px;
-          background: #DF0C30;
+          background: #df0c30;
           border-radius: 5px 0px 0px 5px;
           display: flex;
           align-items: center;
@@ -2914,7 +2914,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           padding-left: 5px; }
         .boxOferta .ofertaRow .flotante .rowFlota .line {
           position: absolute;
-          background: #DF0C30;
+          background: #df0c30;
           height: 2px;
           width: 70px;
           top: 8px;
@@ -2934,14 +2934,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-weight: bold;
       font-size: 28px;
       line-height: 36px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     .boxOferta .ofertaRow.descrip {
       font-family: Montserrat;
       font-weight: 500;
       font-size: 14px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #1EAEA5; }
+      color: #1eaea5; }
     .boxOferta .ofertaRow .iconOferta {
       margin: 0 5px; }
 
@@ -2970,11 +2970,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     height: 40px;
     padding: 0;
     text-align: center;
-    border: 0.5px solid #E4E5E7; }
+    border: 0.5px solid #e4e5e7; }
 
 .boxFlotante {
   width: 330px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
   position: absolute;
@@ -2996,7 +2996,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .boxFlotante.seguro .boxTwoPasajero {
       border-bottom: none; }
     .boxFlotante.seguro .btnPasajero {
-      border-top: 0.5px solid #E4E5E7;
+      border-top: 0.5px solid #e4e5e7;
       margin: 10px 0 0 0; }
   .boxFlotante .textBtn .inputPasajero {
     width: 25px;
@@ -3016,7 +3016,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-family: Montserrat;
     font-weight: normal;
     font-size: 12px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     height: 29px;
     padding: 0;
     margin: 0;
@@ -3032,7 +3032,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       width: 12px;
       height: 15px; }
   .boxFlotante .boxTwoPasajero {
-    border-bottom: 0.5px solid #E4E5E7;
+    border-bottom: 0.5px solid #e4e5e7;
     padding: 15px 20px !important; }
     .boxFlotante .boxTwoPasajero .groupItem {
       display: flex;
@@ -3053,14 +3053,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         transition: 0.3s all;
         border-radius: 3px; }
         .boxFlotante .boxTwoPasajero .groupItem .closeBtn:hover {
-          background: #E4E5E7; }
+          background: #e4e5e7; }
       .boxFlotante .boxTwoPasajero .groupItem .boxNumber {
         width: auto;
         display: flex;
         align-items: center;
         margin-right: 10px; }
         .boxFlotante .boxTwoPasajero .groupItem .boxNumber .numberItem {
-          background: #DF0C30;
+          background: #df0c30;
           width: 20px;
           height: 20px;
           display: flex;
@@ -3082,7 +3082,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           transition: 0.3s all;
           cursor: pointer; }
           .boxFlotante .boxTwoPasajero .groupItem .boxNumber .cerrarbtn:hover {
-            background: #DF0C30; }
+            background: #df0c30; }
           .boxFlotante .boxTwoPasajero .groupItem .boxNumber .cerrarbtn.inactive {
             display: none; }
       .boxFlotante .boxTwoPasajero .groupItem .itemPasajero {
@@ -3094,7 +3094,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .boxFlotante .boxTwoPasajero .groupItem .itemPasajero.w100 {
           width: 100px; }
         .boxFlotante .boxTwoPasajero .groupItem .itemPasajero .inputEdad {
-          border: 0.5px solid #E4E5E7;
+          border: 0.5px solid #e4e5e7;
           border-radius: 3px;
           width: 100%;
           text-align: center; }
@@ -3104,7 +3104,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           font-weight: 500;
           line-height: 18px;
           letter-spacing: 0.4px;
-          color: #4B4B4B; }
+          color: #4b4b4b; }
     .boxFlotante .boxTwoPasajero .iconTwo {
       width: 25px; }
     .boxFlotante .boxTwoPasajero .textSection {
@@ -3115,14 +3115,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-weight: 500;
       line-height: 18px;
       letter-spacing: 0.4px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     .boxFlotante .boxTwoPasajero .text2 {
       font-family: Montserrat;
       font-weight: 300;
       font-size: 10px;
       line-height: 15px;
       letter-spacing: 0.25px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     .boxFlotante .boxTwoPasajero .number {
       display: flex;
       justify-content: space-between;
@@ -3130,12 +3130,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       gap: 5px; }
       .boxFlotante .boxTwoPasajero .number .btnNWhite {
         display: flex;
-        border: 0.5px solid #DF0C30;
+        border: 0.5px solid #df0c30;
         box-sizing: border-box;
         border-radius: 3px;
         font-weight: 600;
         font-size: 14px;
-        color: #83898F;
+        color: #83898f;
         width: 28px;
         min-width: 28px;
         height: 28px;
@@ -3144,14 +3144,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         cursor: pointer;
         transition: all 0.3s; }
         .boxFlotante .boxTwoPasajero .number .btnNWhite:hover {
-          background: #DF0C30;
-          color: #FFFFFF; }
+          background: #df0c30;
+          color: #ffffff; }
       .boxFlotante .boxTwoPasajero .number .textBtn {
         font-weight: 600;
         font-size: 12px;
         line-height: 24px;
         letter-spacing: 0.5px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         width: 28px;
         height: 28px;
         align-items: center;
@@ -3162,14 +3162,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-weight: 600;
     font-size: 12px; }
     .boxFlotante .btnPasajero button:hover {
-      background: #B50A27; }
+      background: #b50a27; }
     .boxFlotante .btnPasajero button.gray {
-      background: #EBEBEB;
-      color: #4B4B4B; }
+      background: #ebebeb;
+      color: #4b4b4b; }
       .boxFlotante .btnPasajero button.gray:hover {
-        background: #CFD1D3; }
+        background: #cfd1d3; }
     .boxFlotante .btnPasajero button.green {
-      background: #54D834;
+      background: #54d834;
       color: #ffffff; }
       .boxFlotante .btnPasajero button.green:hover {
         background: #3eb322; }
@@ -3179,7 +3179,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-weight: 600;
     font-size: 12px;
     letter-spacing: 0.1px;
-    color: #009AED; }
+    color: #009aed; }
     .boxFlotante .btnPasajero .Agregar:hover {
       background: transparent; }
     .boxFlotante .btnPasajero .Agregar:disabled {
@@ -3196,12 +3196,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   .titleHome.bold {
     font-weight: 700; }
   .titleHome .red {
-    color: #DF0C30; }
+    color: #df0c30; }
   .titleHome.red {
     font-weight: bold;
     font-size: 24px;
     line-height: 36px;
-    color: #DF0C30;
+    color: #df0c30;
     margin-bottom: 20px; }
 
 .comprarHideTitle .textTitle {
@@ -3295,7 +3295,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             width: 100%; }
           .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .d-left {
             border-radius: 3px;
-            border: 0.5px solid #E4E5E7; }
+            border: 0.5px solid #e4e5e7; }
           .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .form-check-input {
             width: 24px;
             height: 24px; }
@@ -3306,14 +3306,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
               padding: 0; } }
       .boxTab .rowBoxTab .colBoxtab .d-left {
         border-radius: 3px 0 0 3px;
-        border: 0.5px solid #E4E5E7;
+        border: 0.5px solid #e4e5e7;
         border-right: 0px; }
         @media (max-width: 640px) {
           .boxTab .rowBoxTab .colBoxtab .d-left {
-            border-right: 0.5px solid #E4E5E7; } }
+            border-right: 0.5px solid #e4e5e7; } }
       .boxTab .rowBoxTab .colBoxtab .d-right {
         border-radius: 0 3px 3px 0;
-        border: 0.5px solid #E4E5E7; }
+        border: 0.5px solid #e4e5e7; }
       @media (min-width: 1024px) {
         .boxTab .rowBoxTab .colBoxtab {
           padding: 0; } }
@@ -3324,9 +3324,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-family: Montserrat;
         font-size: 16px;
         text-transform: capitalize;
-        color: #4B4B4B;
+        color: #4b4b4b;
         text-indent: 40px;
-        border: 0.5px solid #E4E5E7;
+        border: 0.5px solid #e4e5e7;
         border-radius: 3px; }
         .boxTab .rowBoxTab .colBoxtab input.icono {
           text-indent: 40px;
@@ -3374,7 +3374,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     #ModalBlue .modal-body .rowModal .columnModal.inputCheck span {
       width: 160px;
       height: 80px; }
-    #ModalBlue .modal-body .rowModal .columnModal input[type=radio] {
+    #ModalBlue .modal-body .rowModal .columnModal input[type="radio"] {
       left: 15px;
       top: 32px; }
 
@@ -3536,8 +3536,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       background: transparent;
       border-bottom: none; }
     .card.pasajeros .card-body {
-      background: #FFFFFF;
-      border: 0.5px solid #E4E5E7;
+      background: #ffffff;
+      border: 0.5px solid #e4e5e7;
       box-sizing: border-box;
       border-radius: 10px;
       margin-bottom: 10px; }
@@ -3550,7 +3550,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
   .agregarAdultoPas {
     display: flex !important;
-    background: #F21037;
+    background: #f21037;
     border-radius: 5px;
     justify-content: space-between;
     align-items: center; }
@@ -3561,13 +3561,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       display: flex;
       align-items: center;
       letter-spacing: 0.1px;
-      color: #FFFFFF;
+      color: #ffffff;
       padding: 10px 10px; }
 
   .atribCard {
     padding: 18px;
-    background: #FFFFFF;
-    border: 0.5px solid #E4E5E7;
+    background: #ffffff;
+    border: 0.5px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 10px; }
 
@@ -3654,7 +3654,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.5px;
-    color: #DF0C30; }
+    color: #df0c30; }
 
   .card.padCard {
     padding: 10px 25px !important; }
@@ -3670,7 +3670,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         margin-left: 30px !important; }
     .card.padCard .boxFlotante {
       width: 330px;
-      background: #FFFFFF;
+      background: #ffffff;
       box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
       border-radius: 5px;
       position: absolute;
@@ -3692,7 +3692,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .card.padCard .boxFlotante.seguro .boxTwoPasajero {
           border-bottom: none; }
         .card.padCard .boxFlotante.seguro .btnPasajero {
-          border-top: 0.5px solid #E4E5E7;
+          border-top: 0.5px solid #e4e5e7;
           margin: 10px 0 0 0; }
       .card.padCard .boxFlotante .textBtn .inputPasajero {
         width: 25px;
@@ -3712,7 +3712,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-family: Montserrat;
         font-weight: normal;
         font-size: 12px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         height: 29px;
         padding: 0;
         margin: 0;
@@ -3728,7 +3728,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           width: 12px;
           height: 15px; }
       .card.padCard .boxFlotante .boxTwoPasajero {
-        border-bottom: 0.5px solid #E4E5E7;
+        border-bottom: 0.5px solid #e4e5e7;
         padding: 15px 20px !important; }
         .card.padCard .boxFlotante .boxTwoPasajero .groupItem {
           display: flex;
@@ -3749,14 +3749,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             transition: 0.3s all;
             border-radius: 3px; }
             .card.padCard .boxFlotante .boxTwoPasajero .groupItem .closeBtn:hover {
-              background: #E4E5E7; }
+              background: #e4e5e7; }
           .card.padCard .boxFlotante .boxTwoPasajero .groupItem .boxNumber {
             width: auto;
             display: flex;
             align-items: center;
             margin-right: 10px; }
             .card.padCard .boxFlotante .boxTwoPasajero .groupItem .boxNumber .numberItem {
-              background: #DF0C30;
+              background: #df0c30;
               width: 20px;
               height: 20px;
               display: flex;
@@ -3778,7 +3778,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
               transition: 0.3s all;
               cursor: pointer; }
               .card.padCard .boxFlotante .boxTwoPasajero .groupItem .boxNumber .cerrarbtn:hover {
-                background: #DF0C30; }
+                background: #df0c30; }
               .card.padCard .boxFlotante .boxTwoPasajero .groupItem .boxNumber .cerrarbtn.inactive {
                 display: none; }
           .card.padCard .boxFlotante .boxTwoPasajero .groupItem .itemPasajero {
@@ -3790,7 +3790,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             .card.padCard .boxFlotante .boxTwoPasajero .groupItem .itemPasajero.w100 {
               width: 100px; }
             .card.padCard .boxFlotante .boxTwoPasajero .groupItem .itemPasajero .inputEdad {
-              border: 0.5px solid #E4E5E7;
+              border: 0.5px solid #e4e5e7;
               border-radius: 3px;
               width: 100%;
               text-align: center; }
@@ -3800,7 +3800,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
               font-weight: 500;
               line-height: 18px;
               letter-spacing: 0.4px;
-              color: #4B4B4B; }
+              color: #4b4b4b; }
         .card.padCard .boxFlotante .boxTwoPasajero .iconTwo {
           width: 25px;
           padding-right: 10px; }
@@ -3812,14 +3812,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           font-weight: 500;
           line-height: 18px;
           letter-spacing: 0.4px;
-          color: #4B4B4B; }
+          color: #4b4b4b; }
         .card.padCard .boxFlotante .boxTwoPasajero .text2 {
           font-family: Montserrat;
           font-weight: 300;
           font-size: 10px;
           line-height: 15px;
           letter-spacing: 0.25px;
-          color: #4B4B4B; }
+          color: #4b4b4b; }
         .card.padCard .boxFlotante .boxTwoPasajero .number {
           display: flex;
           justify-content: space-between;
@@ -3827,12 +3827,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           gap: 5px; }
           .card.padCard .boxFlotante .boxTwoPasajero .number .btnNWhite {
             display: flex;
-            border: 0.5px solid #DF0C30;
+            border: 0.5px solid #df0c30;
             box-sizing: border-box;
             border-radius: 3px;
             font-weight: 600;
             font-size: 14px;
-            color: #83898F;
+            color: #83898f;
             width: 28px;
             min-width: 28px;
             height: 28px;
@@ -3841,14 +3841,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             cursor: pointer;
             transition: all 0.3s; }
             .card.padCard .boxFlotante .boxTwoPasajero .number .btnNWhite:hover {
-              background: #DF0C30;
-              color: #FFFFFF; }
+              background: #df0c30;
+              color: #ffffff; }
           .card.padCard .boxFlotante .boxTwoPasajero .number .textBtn {
             font-weight: 600;
             font-size: 12px;
             line-height: 24px;
             letter-spacing: 0.5px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             width: 28px;
             height: 28px;
             align-items: center;
@@ -3859,14 +3859,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-weight: 600;
         font-size: 12px; }
         .card.padCard .boxFlotante .btnPasajero button:hover {
-          background: #B50A27; }
+          background: #b50a27; }
         .card.padCard .boxFlotante .btnPasajero button.gray {
-          background: #EBEBEB;
-          color: #4B4B4B; }
+          background: #ebebeb;
+          color: #4b4b4b; }
           .card.padCard .boxFlotante .btnPasajero button.gray:hover {
-            background: #CFD1D3; }
+            background: #cfd1d3; }
         .card.padCard .boxFlotante .btnPasajero button.green {
-          background: #54D834;
+          background: #54d834;
           color: #ffffff; }
           .card.padCard .boxFlotante .btnPasajero button.green:hover {
             background: #3eb322; }
@@ -3876,7 +3876,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-weight: 600;
         font-size: 12px;
         letter-spacing: 0.1px;
-        color: #009AED; }
+        color: #009aed; }
         .card.padCard .boxFlotante .btnPasajero .Agregar:hover {
           background: transparent; }
         .card.padCard .boxFlotante .btnPasajero .Agregar:disabled {
@@ -3898,14 +3898,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 12px;
       line-height: 18px;
       letter-spacing: 0.1px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     .boxViaje .subtitle {
       font-style: normal;
       font-weight: 500;
       font-size: 12px;
       line-height: 18px;
       letter-spacing: 0.1px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
 
   .edad {
     display: none; }
@@ -3915,21 +3915,21 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-weight: bold;
     font-size: 20px;
     line-height: 36px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
   .boxComprar .descrip {
     font-family: Montserrat;
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.1px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
   .boxComprar .btnDetalles {
     font-family: Montserrat;
     font-size: 12px;
     line-height: 18px;
     text-align: center;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
-    background: #F7F7F7;
+    color: #4b4b4b;
+    background: #f7f7f7;
     border-radius: 5px;
     cursor: pointer;
     padding: 0px 20px;
@@ -3948,7 +3948,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       display: flex;
       align-items: center;
       letter-spacing: 0.15px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     .boxConveniente label,
     .boxMoneda label {
       font-size: 12px;
@@ -3956,12 +3956,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       display: flex;
       align-items: center;
       letter-spacing: 0.4px;
-      color: #4B4B4B;
+      color: #4b4b4b;
       padding-bottom: 0;
       font-weight: normal; }
     .boxConveniente .flex-row,
     .boxMoneda .flex-row {
-      border-bottom: 1px solid #E4E5E7; }
+      border-bottom: 1px solid #e4e5e7; }
       .boxConveniente .flex-row:first-child,
       .boxMoneda .flex-row:first-child {
         padding: 1rem 0 !important; }
@@ -3984,7 +3984,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     border-left: none; }
 
   .boxModalDetalle .header {
-    border-bottom: 1px solid #E4E5E7;
+    border-bottom: 1px solid #e4e5e7;
     margin-bottom: 10px;
     font-family: Montserrat;
     font-style: normal;
@@ -4001,14 +4001,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 30px;
       line-height: 36px;
       text-align: center;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     .boxModalDetalle .price span {
       font-family: Montserrat;
       font-weight: 600;
       font-size: 12px;
       line-height: 15px;
       letter-spacing: 0.1px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
   .boxModalDetalle .descrip span {
     font-family: Montserrat;
     font-size: 12px;
@@ -4021,28 +4021,28 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.1px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
   .boxModalDetalle .priceMont {
     font-family: Montserrat;
     font-weight: bold;
     font-size: 25px;
     line-height: 18px;
     letter-spacing: 0.1px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
 
   #modalConveniente .modal-body,
   #modalMoneda .modal-body {
     padding: 0rem 1rem 0rem 1rem; }
 
   #modalViajes .header {
-    border-bottom: 1px solid #E4E5E7; }
+    border-bottom: 1px solid #e4e5e7; }
     #modalViajes .header .title {
       font-family: Montserrat;
       font-weight: 600;
       font-size: 14px;
       line-height: 24px;
       letter-spacing: 0.15px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
   #modalViajes .modal-body {
     padding: 0; }
     #modalViajes .modal-body .boxTipoViaje {
@@ -4055,7 +4055,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 14px;
       line-height: 24px;
       letter-spacing: 0.15px;
-      color: #4B4B4B;
+      color: #4b4b4b;
       padding-left: 30px; }
     #modalViajes .modal-body .agregaTramo {
       font-family: Montserrat;
@@ -4069,8 +4069,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       transition: all 0.3s;
       width: 110px; }
     #modalViajes .modal-body .btnTipoViaje {
-      background: #FFFFFF;
-      border: 1px solid #E4E5E7;
+      background: #ffffff;
+      border: 1px solid #e4e5e7;
       box-sizing: border-box;
       border-radius: 5px;
       font-family: Montserrat;
@@ -4080,12 +4080,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       align-items: center;
       letter-spacing: 0.5px;
       text-transform: capitalize;
-      color: #4B4B4B;
+      color: #4b4b4b;
       cursor: pointer;
       transition: all 0.3s;
       padding: 0 15px; }
       #modalViajes .modal-body .btnTipoViaje:hover {
-        background: #F7F7F7; }
+        background: #f7f7f7; }
     #modalViajes .modal-body .contentViaje {
       width: 100%;
       padding: 10px 30px 0px 10px; }
@@ -4096,7 +4096,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         height: 35px;
         font-size: 10px !important; }
       #modalViajes .modal-body .contentViaje .btnConfirm {
-        background: #DF0C30;
+        background: #df0c30;
         border-radius: 3px;
         width: 80%;
         font-family: Montserrat;
@@ -4105,12 +4105,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         line-height: 18px;
         letter-spacing: 0.5px;
         height: 35px;
-        color: #FFFFFF;
+        color: #ffffff;
         cursor: pointer;
         margin-bottom: 15px; }
 
   #modalTwoPasajero .header {
-    border-bottom: 0.5px solid #E4E5E7; }
+    border-bottom: 0.5px solid #e4e5e7; }
   #modalTwoPasajero .modal-body {
     padding: 0 20px; }
   #modalTwoPasajero .title {
@@ -4119,9 +4119,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 14px;
     line-height: 24px;
     letter-spacing: 0.15px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
   #modalTwoPasajero .boxTwoPasajero {
-    border-bottom: 0.5px solid #E4E5E7; }
+    border-bottom: 0.5px solid #e4e5e7; }
     #modalTwoPasajero .boxTwoPasajero .iconTwo {
       width: 40px; }
     #modalTwoPasajero .boxTwoPasajero .text1 {
@@ -4129,24 +4129,24 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 13px;
       line-height: 18px;
       letter-spacing: 0.4px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     #modalTwoPasajero .boxTwoPasajero .text2 {
       font-family: Montserrat;
       font-weight: 300;
       font-size: 10px;
       line-height: 15px;
       letter-spacing: 0.25px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     #modalTwoPasajero .boxTwoPasajero .number {
       font-family: Montserrat;
       gap: 10px; }
       #modalTwoPasajero .boxTwoPasajero .number .btnNWhite {
-        border: 0.5px solid #DF0C30;
+        border: 0.5px solid #df0c30;
         box-sizing: border-box;
         border-radius: 3px;
         font-weight: 600;
         font-size: 14px;
-        color: #83898F;
+        color: #83898f;
         width: 22.5px;
         height: 22.5px;
         align-items: center;
@@ -4156,17 +4156,17 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 12px;
         line-height: 24px;
         letter-spacing: 0.5px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         width: 22.5px;
         height: 22.5px;
         align-items: center;
         justify-content: center; }
       #modalTwoPasajero .boxTwoPasajero .number .btnNRed {
-        background: #DF0C30;
+        background: #df0c30;
         border-radius: 3px;
         font-weight: 600;
         font-size: 14px;
-        color: #FFFFFF;
+        color: #ffffff;
         width: 22.5px;
         height: 22.5px;
         align-items: center;
@@ -4187,7 +4187,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     line-height: 24px;
     align-items: center;
     letter-spacing: 0.15px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
   #modalFiltro .btnFiltro {
     border: 1px solid #506370;
     box-sizing: border-box;
@@ -4309,20 +4309,20 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     align-items: center;
     font-family: Montserrat;
     height: 53px;
-    border-bottom: 1px solid #CFD1D3;
+    border-bottom: 1px solid #cfd1d3;
     transition: all 0.3s;
     cursor: pointer; }
     .boxVuelos .rowVuelo:first-child {
-      border-top: 1px solid #CFD1D3; }
+      border-top: 1px solid #cfd1d3; }
     .boxVuelos .rowVuelo:hover {
-      background: #FFFFFF;
+      background: #ffffff;
       filter: drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.15)); }
     .boxVuelos .rowVuelo .lugar {
       font-weight: 500;
       font-size: 14px;
       line-height: 24px;
       letter-spacing: 0.15px;
-      color: #34495E;
+      color: #34495e;
       padding-left: 45px;
       width: 100%; }
     .boxVuelos .rowVuelo .desde {
@@ -4330,14 +4330,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 14px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #34495E;
+      color: #34495e;
       width: 80px; }
     .boxVuelos .rowVuelo .precio {
       font-weight: bold;
       font-size: 16px;
       line-height: 24px;
       letter-spacing: 0.15px;
-      color: #34495E;
+      color: #34495e;
       width: 100px; }
     .boxVuelos .rowVuelo .btnCircle {
       display: none; }
@@ -4379,7 +4379,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   height: 550px;
   margin-top: -60px;
   background-image: url("./assets/vuelos/footer-vuelos.png");
-  background-color: #DF0C30;
+  background-color: #df0c30;
   background-repeat: no-repeat;
   background-position: center; }
   .viajaBox .mnuViaja {
@@ -4398,18 +4398,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 16px;
       line-height: 24px;
       letter-spacing: 0.15px;
-      color: #FFFFFF;
+      color: #ffffff;
       cursor: pointer;
       height: 42px;
       padding: 0 15px;
       transition: all 0.5s;
       margin-bottom: 10px; }
       .viajaBox .mnuViaja .subMenu:hover {
-        background: #F7F7F7;
+        background: #f7f7f7;
         border-radius: 20px;
-        color: #4B4B4B; }
+        color: #4b4b4b; }
         .viajaBox .mnuViaja .subMenu:hover svg {
-          fill: #4B4B4B; }
+          fill: #4b4b4b; }
       .viajaBox .mnuViaja .subMenu svg {
         margin-right: 15px;
         fill: #ffffff; }
@@ -4419,8 +4419,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   align-items: center;
   justify-content: space-between;
   padding: 0 25px;
-  background: #FFFFFF;
-  border: 1px solid #E4E5E7;
+  background: #ffffff;
+  border: 1px solid #e4e5e7;
   box-sizing: border-box;
   border-radius: 10px;
   height: 105px; }
@@ -4432,7 +4432,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     justify-content: center;
     border-radius: 50%;
     box-sizing: border-box;
-    border: 1px solid #DF0C30;
+    border: 1px solid #df0c30;
     cursor: pointer; }
   .sliderOfertas .contentSliderImg {
     transition: opacity 1s ease-out;
@@ -4519,7 +4519,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       height: 30px;
       min-height: 30px;
       border-radius: 15px;
-      background: #DF0C30; } }
+      background: #df0c30; } }
 .boxDestino,
 .boxAero {
   flex-wrap: wrap;
@@ -4554,8 +4554,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .boxAero .rowAero.ordenCol .boxVuelos .rowVuelo {
           width: calc(33% - 35px);
           cursor: pointer !important;
-          border-bottom: 1px solid #CFD1D3;
-          border-top: 1px solid #CFD1D3;
+          border-bottom: 1px solid #cfd1d3;
+          border-top: 1px solid #cfd1d3;
           min-height: 53px;
           height: auto; }
           @media (max-width: 640px) {
@@ -4655,7 +4655,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 18px;
       line-height: 27px;
       letter-spacing: 0.18px;
-      color: #4B4B4B;
+      color: #4b4b4b;
       margin-right: 20px; }
       .boxDestino .rowDestino .ida svg,
       .boxDestino .rowDestino .vuelta svg,
@@ -4681,7 +4681,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0.15px;
-    border-bottom: 1px solid #CFD1D3;
+    border-bottom: 1px solid #cfd1d3;
     transition: all 0.3s; }
     .boxDestino .tableDestino.bold,
     .boxAero .tableDestino.bold {
@@ -4700,12 +4700,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-weight: bold;
       font-size: 24px;
       line-height: 36px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     .boxDestino .tableDestino .btnBuscar,
     .boxAero .tableDestino .btnBuscar {
       display: flex;
       align-items: center;
-      background: #DF0C30;
+      background: #df0c30;
       border-radius: 3px;
       cursor: pointer;
       height: 43px;
@@ -4714,7 +4714,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       transition: all 0.3ms; }
       .boxDestino .tableDestino .btnBuscar:hover,
       .boxAero .tableDestino .btnBuscar:hover {
-        background: #B50A27; }
+        background: #b50a27; }
   .boxDestino .footerTable,
   .boxAero .footerTable {
     margin: 40px 0;
@@ -4725,7 +4725,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 14px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #4B4B4B;
+      color: #4b4b4b;
       margin: 0 20px 0 60px; }
     .boxDestino .footerTable .masOfertas,
     .boxAero .footerTable .masOfertas {
@@ -4739,7 +4739,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 24px;
     line-height: 36px;
     margin-top: 20px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
   .boxDestino .subtitulo,
   .boxAero .subtitulo {
     display: flex;
@@ -4747,12 +4747,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-family: Open Sans;
     font-size: 20px;
     line-height: 36px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     margin-bottom: 50px; }
   .boxDestino .boxSearchHotel,
   .boxAero .boxSearchHotel {
     width: 100%;
-    background: #DF0C30;
+    background: #df0c30;
     padding: 60px 50px;
     margin-bottom: 50px; }
     @media (max-width: 768px) {
@@ -4775,7 +4775,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     line-height: 36px;
     display: flex;
     align-items: center;
-    color: #4B4B4B;
+    color: #4b4b4b;
     width: 100%; }
   .moreInfo .question {
     margin-top: 20px;
@@ -4786,7 +4786,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     padding-bottom: 9px; }
     .moreInfo .question span {
       font-weight: 300;
@@ -4807,7 +4807,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         display: flex;
         align-items: center;
         letter-spacing: 0.25px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         padding-bottom: 9px; }
     .moreInfo .groupOption .groupRadio {
       display: flex;
@@ -4839,8 +4839,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     display: flex;
     align-items: center;
     width: 100%;
-    background: #FFFFFF;
-    border: 1px solid #E4E5E7;
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 10px 0px;
     padding: 10px 20px;
@@ -4861,7 +4861,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 10px;
         line-height: 12px;
         text-align: center;
-        color: #4B4B4B;
+        color: #4b4b4b;
         margin-top: 10px; }
 
   .verMov {
@@ -4889,7 +4889,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   line-height: 24px;
   text-align: center;
   letter-spacing: 0.15px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   text-align: center; }
   @media (max-width: 640px) {
     .boxAero .textAbout {
@@ -4900,7 +4900,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .boxAero .boxAbout {
   display: flex;
   width: 100%;
-  background: #B50A27 url("./assets/aerolineas/lineas.png") no-repeat top left;
+  background: #b50a27 url("./assets/aerolineas/lineas.png") no-repeat top left;
   padding: 25px 0;
   margin: 70px 0 0 0; }
   .boxAero .boxAbout .descrip {
@@ -4917,7 +4917,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       font-size: 16px;
       line-height: 24px;
       letter-spacing: 0.5px;
-      color: #FFFFFF; }
+      color: #ffffff; }
     @media (max-width: 990px) and (min-width: 640px) {
       .boxAero .boxAbout .descrip {
         padding: 0 30px; } }
@@ -4930,7 +4930,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       .boxAero .boxAbout .sliderAero #carouselAero .carousel-control-next {
         top: 40%;
         width: 47px;
-        background: #4B4B4B;
+        background: #4b4b4b;
         opacity: 0.5;
         height: 78px;
         border-radius: 0; }
@@ -4959,8 +4959,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   .boxAero .tabSalidas .tabName {
     display: flex;
     align-items: center;
-    background: #F7F7F7;
-    border: 1px solid #E4E5E7;
+    background: #f7f7f7;
+    border: 1px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 15px;
     font-family: Montserrat;
@@ -4972,10 +4972,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     padding: 0 20px;
     cursor: pointer;
     transition: all 0.3s;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
     .boxAero .tabSalidas .tabName:hover, .boxAero .tabSalidas .tabName.active {
-      background: #DF0C30;
-      border: 1px solid #DF0C30;
+      background: #df0c30;
+      border: 1px solid #df0c30;
       color: #ffffff; }
     .boxAero .tabSalidas .tabName:first-child {
       margin-right: 30px; }
@@ -4991,7 +4991,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     margin: 30px 0 0 0;
     flex-direction: column;
     padding: 85px 30px 120px 30px;
-    background: #B50A27 url("./assets/aerolineas/lineas-movil.png") no-repeat top left; }
+    background: #b50a27 url("./assets/aerolineas/lineas-movil.png") no-repeat top left; }
     .boxAero .boxAbout .descrip p {
       font-size: 12px;
       line-height: 18px; }
@@ -5026,7 +5026,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
   .contentTabMobile {
     display: block;
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
     padding: 25px 24px; }
     .contentTabMobile .headerRow {
@@ -5043,7 +5043,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         width: 100%;
         font-family: Montserrat;
         font-size: 14px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         margin-bottom: 5px;
         margin-top: 10px; }
       .contentTabMobile .tableDestino .rowTab {
@@ -5071,8 +5071,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     align-items: center;
     width: 310px;
     height: 90px;
-    background: #FFFFFF;
-    border: 1px solid #E4E5E7;
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 10px 0px;
     padding: 40px;
@@ -5091,7 +5091,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0.1px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   margin-bottom: 50px; }
 
 .cardDestino {
@@ -5101,8 +5101,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   margin-bottom: 20px; }
   .cardDestino .boxCards {
     max-width: 434px;
-    background: #FFFFFF;
-    border: 1px solid #E4E5E7;
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 10px;
     cursor: pointer;
@@ -5131,7 +5131,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       .cardDestino .loadingBoxCard .iconLoading img {
         width: 100%; }
       .cardDestino .loadingBoxCard .iconLoading .texto {
-        color: #DF0C30; }
+        color: #df0c30; }
   .cardDestino .p-carousel-prev,
   .cardDestino .p-galleria-item-prev {
     background: url("./assets/prev.png") no-repeat;
@@ -5150,14 +5150,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 16px;
     line-height: 21px;
     letter-spacing: 0.15px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     padding: 0px 15px 15px; }
   .cardDestino .cardDuracion {
     font-family: Montserrat;
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     padding: 0 25px 15px 25px;
     font-weight: 500;
     display: flex;
@@ -5183,7 +5183,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     padding: 0 25px 20px 25px;
     font-weight: 500;
     display: flex;
@@ -5193,7 +5193,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     padding: 0 25px 20px 25px; }
 
 @media (max-width: 640px) {
@@ -5249,7 +5249,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   align-items: center;
   justify-content: center;
   cursor: pointer !important;
-  background-color: #DADADA !important;
+  background-color: #dadada !important;
   margin-bottom: 115px; }
   .cardDestino.show .p-carousel-prev:hover,
   .cardDestino.show .p-carousel-next:hover {
@@ -5325,8 +5325,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .tabDestino .p-galleria .p-galleria-indicators .p-galleria-indicator button:hover {
   background: #adb5bd; }
 .tabDestino .p-galleria .p-galleria-indicators .p-galleria-indicator.p-highlight button {
-  background: #EFF6FF;
-  color: #1D4ED8; }
+  background: #eff6ff;
+  color: #1d4ed8; }
 .tabDestino .p-galleria.p-galleria-indicators-bottom .p-galleria-indicator,
 .tabDestino .p-galleria.p-galleria-indicators-top .p-galleria-indicator {
   margin-right: 0.5rem; }
@@ -5340,8 +5340,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .tabDestino .p-galleria.p-galleria-indicator-onitem .p-galleria-indicators .p-galleria-indicator button:hover {
   background: rgba(255, 255, 255, 0.6); }
 .tabDestino .p-galleria.p-galleria-indicator-onitem .p-galleria-indicators .p-galleria-indicator.p-highlight button {
-  background: #EFF6FF;
-  color: #1D4ED8; }
+  background: #eff6ff;
+  color: #1d4ed8; }
 
 .cardHotel {
   display: flex;
@@ -5356,7 +5356,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     align-items: center;
     justify-content: center;
     cursor: pointer !important;
-    background-color: #DADADA !important; }
+    background-color: #dadada !important; }
     .cardHotel.show .p-carousel-prev:hover,
     .cardHotel.show .p-carousel-next:hover {
       background-color: #df0c30 !important; }
@@ -5381,8 +5381,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     display: none; }
   .cardHotel .boxCards {
     max-width: 434px;
-    background: #FFFFFF;
-    border: 1px solid #E4E5E7;
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 10px;
     cursor: pointer;
@@ -5408,10 +5408,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           letter-spacing: 0.1px;
           padding-left: 15px;
           padding-bottom: 5px;
-          color: #FFFFFF; }
+          color: #ffffff; }
           .cardHotel .boxCards .imageHead .precio .desde .linea {
             position: absolute;
-            background: #DF0C30;
+            background: #df0c30;
             height: 2px;
             bottom: 12px;
             left: 10px;
@@ -5425,8 +5425,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           line-height: 36px;
           display: flex;
           align-items: center;
-          color: #FFFFFF;
-          background: #DF0C30;
+          color: #ffffff;
+          background: #df0c30;
           border-radius: 0 5px 5px 0;
           height: 45px;
           padding: 0 20px; }
@@ -5446,7 +5446,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       .cardHotel .loadingBoxCard .iconLoading img {
         width: 100%; }
       .cardHotel .loadingBoxCard .iconLoading .texto {
-        color: #DF0C30; }
+        color: #df0c30; }
   .cardHotel .p-carousel-prev,
   .cardHotel .p-galleria-item-prev {
     background: url("./assets/prev.png") no-repeat; }
@@ -5464,7 +5464,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-weight: bold;
     font-size: 20px;
     line-height: 36px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     padding: 0px 15px; }
   .cardHotel .cardStar {
     display: flex;
@@ -5515,7 +5515,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #1EAEA5;
+    color: #1eaea5;
     padding: 0 25px 20px 25px; }
   .cardHotel .cardEvaluacion {
     display: flex;
@@ -5573,7 +5573,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-weight: bold;
     font-size: 24px;
     line-height: 36px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
   .companyCar .carSubtitulo {
     display: flex;
     justify-content: center;
@@ -5581,7 +5581,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-family: Open Sans;
     font-size: 20px;
     line-height: 36px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     margin-bottom: 50px; }
   .companyCar .contentCompany {
     display: flex; }
@@ -5608,7 +5608,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .companyCar .contentCompany .logosCompany .centerCard .btnReservar {
           display: flex;
           align-items: center;
-          background: #DF0C30;
+          background: #df0c30;
           border-radius: 3px;
           color: #ffffff;
           padding: 0 40px;
@@ -5616,7 +5616,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           cursor: pointer;
           transition: all 0.3s; }
           .companyCar .contentCompany .logosCompany .centerCard .btnReservar:hover {
-            background: #B50A27; }
+            background: #b50a27; }
 
 @media (max-width: 640px) {
   .companyCar .carTitulo {
@@ -5664,7 +5664,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 18px;
         line-height: 27px;
         letter-spacing: 0.18px;
-        color: #FFFFFF; }
+        color: #ffffff; }
         .tabDestino .tabImgDest .galeriaText .texto svg {
           margin-left: 10px; }
     .tabDestino .tabImgDest img {
@@ -5695,14 +5695,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
-    border-bottom: 1px solid #E4E5E7; }
+    color: #4b4b4b;
+    border-bottom: 1px solid #e4e5e7; }
   .tabContentDest .nameCity {
     font-family: Open Sans;
     font-weight: bold;
     font-size: 32px;
     line-height: 48px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     margin: 30px 0 30px 20px; }
   .tabContentDest .opcionTab {
     display: flex;
@@ -5712,8 +5712,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .tabContentDest .opcionTab .tabName {
       display: flex;
       align-items: center;
-      background: #F7F7F7;
-      border: 1px solid #E4E5E7;
+      background: #f7f7f7;
+      border: 1px solid #e4e5e7;
       box-sizing: border-box;
       border-radius: 5px;
       font-family: Montserrat;
@@ -5725,10 +5725,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       padding: 0 20px;
       cursor: pointer;
       transition: all 0.3s;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
       .tabContentDest .opcionTab .tabName:hover, .tabContentDest .opcionTab .tabName.active {
-        background: #DF0C30;
-        border: 1px solid #DF0C30;
+        background: #df0c30;
+        border: 1px solid #df0c30;
         color: #ffffff; }
   .tabContentDest .tabColumna {
     display: flex;
@@ -5763,7 +5763,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     text-align: justify;
     letter-spacing: 0.15px;
     margin-left: 20px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
   @media (max-width: 990px) and (min-width: 640px) {
     .tabContentDest {
       flex: 1 1 50%;
@@ -5846,14 +5846,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       line-height: 72px;
       text-align: center;
       letter-spacing: -0.5px;
-      color: #DF0C30; }
+      color: #df0c30; }
     .portadaAero .textoPortada .aeroDescrip {
       font-family: Open Sans;
       font-size: 18px;
       line-height: 27px;
       text-align: center;
       letter-spacing: 0.18px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
 
 @media (max-width: 640px) {
   .portadaAero {
@@ -5880,7 +5880,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   width: 100%; }
   .select-box__current {
     position: relative;
-    border: 1px solid #E4E5E7;
+    border: 1px solid #e4e5e7;
     height: 45px;
     border-radius: 5px;
     font-family: Montserrat;
@@ -5889,7 +5889,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     letter-spacing: 0.25px;
     font-size: 14px;
     overflow: hidden;
-    color: #B9BCBF;
+    color: #b9bcbf;
     cursor: pointer;
     outline: none; }
     .select-box__current:focus + .select-box__list {
@@ -5923,7 +5923,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     line-height: 21px;
     letter-spacing: 0.25px;
     font-size: 14px;
-    color: #B9BCBF;
+    color: #b9bcbf;
     display: none;
     width: 100%;
     margin: 0;
@@ -5957,10 +5957,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       padding-left: 12px;
       background: #ffffff;
       font-size: 14px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
       .select-box__list .select-box__option:hover, .select-box__list .select-box__option:focus {
-        color: #4B4B4B;
-        background-color: #EBEBEB; }
+        color: #4b4b4b;
+        background-color: #ebebeb; }
     .select-box__list li {
       margin-bottom: 0 !important;
       background: none !important;
@@ -6033,14 +6033,14 @@ input.inputIzq {
   font-weight: 700;
   font-size: 40px;
   letter-spacing: -0.5px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   line-height: 54px; }
   @media (max-width: 768px) {
     .capital, .mat-icon.icon + div {
       font-size: 32px;
       line-height: 32px; } }
   .capital .raya, .mat-icon.icon + div .raya {
-    background: #F29704;
+    background: #f29704;
     height: 2px;
     width: 43px;
     margin-bottom: 10px; }
@@ -6056,7 +6056,7 @@ input.inputIzq {
     font-weight: 600;
     font-size: 12px;
     letter-spacing: 0.5px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     line-height: 16px; }
     @media (max-width: 768px) {
       .capital span, .mat-icon.icon + div span {
@@ -6121,9 +6121,9 @@ input.inputIzq {
   text-align: justify; }
 
 .btn-agencias {
-  border: 1px solid #E4E5E7;
+  border: 1px solid #e4e5e7;
   background: white;
-  color: #4B4B4B;
+  color: #4b4b4b;
   border-radius: 10px;
   letter-spacing: 0.15px;
   font-family: Open Sans;
@@ -6134,37 +6134,37 @@ input.inputIzq {
     .btn-agencias {
       font-size: 10px; } }
   .btn-agencias:hover {
-    background: #E4E5E7; }
+    background: #e4e5e7; }
   .btn-agencias.activa {
-    border: 1px solid #DF0C30;
-    background: #DF0C30;
+    border: 1px solid #df0c30;
+    background: #df0c30;
     color: white; }
 .btn.primary {
   font-family: Montserrat;
   font-weight: 600;
   font-size: 12px;
-  border: 1px solid #DF0C30;
-  background: #DF0C30;
+  border: 1px solid #df0c30;
+  background: #df0c30;
   color: white;
   border-radius: 3px;
   padding: 10px 16px;
   cursor: pointer;
   transition: 0.3s all; }
   .btn.primary:hover {
-    background: #B50A27; }
+    background: #b50a27; }
 .btn.secundary {
   font-family: Montserrat;
   font-weight: 600;
   font-size: 12px;
-  border: 1px solid #EBEBEB;
-  background: #EBEBEB;
-  color: #4B4B4B;
+  border: 1px solid #ebebeb;
+  background: #ebebeb;
+  color: #4b4b4b;
   border-radius: 3px;
   padding: 10px 16px;
   cursor: pointer;
   transition: 0.3s all; }
   .btn.secundary:hover {
-    background: #E4E5E7; }
+    background: #e4e5e7; }
 
 .carousel-indicators {
   z-index: 1; }
@@ -6199,11 +6199,11 @@ button.customers {
   bottom: 15px;
   right: 15px;
   opacity: 0;
-  transition: all .2s ease-in-out; }
+  transition: all 0.2s ease-in-out; }
 
 .show-scrollTop {
   opacity: 1;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   border-radius: 50%;
   background-color: hotpink; }
 
@@ -6223,7 +6223,7 @@ button.customers {
     flex-direction: column; }
     #ModalSesion .modal-body .elementRow.error .form-control {
       margin-bottom: 0px !important;
-      border: 0.5px solid #F44336; }
+      border: 0.5px solid #f44336; }
     #ModalSesion .modal-body .elementRow.error .msgError {
       display: flex; }
   #ModalSesion .modal-body .elementRow .msgError {
@@ -6233,7 +6233,7 @@ button.customers {
     font-size: 11px;
     line-height: 18px;
     letter-spacing: 0.25px;
-    color: #F44336;
+    color: #f44336;
     margin-bottom: 10px; }
   #ModalSesion .modal-body .elementRow .form-control {
     margin-bottom: 20px;
@@ -6252,14 +6252,14 @@ button.customers {
 #ModalSesion .modal-body .mat-ink-bar {
   height: 3px; }
 #ModalSesion .modal-body hr {
-  border: 1px solid #E4E5E7; }
+  border: 1px solid #e4e5e7; }
 #ModalSesion .modal-body .textConecta {
   font-family: Montserrat;
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.1px;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
 #ModalSesion .modal-body .socialMedia {
   display: flex;
   gap: 20px;
@@ -6268,7 +6268,7 @@ button.customers {
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0.15px;
-  color: #FFFFFF; }
+  color: #ffffff; }
   #ModalSesion .modal-body .socialMedia .btnFacebook,
   #ModalSesion .modal-body .socialMedia .btnGoogle {
     width: calc(50% - 10px);
@@ -6286,15 +6286,15 @@ button.customers {
       max-height: 25.19px;
       margin-right: 12px; }
   #ModalSesion .modal-body .socialMedia .btnFacebook {
-    background: #4267B2; }
+    background: #4267b2; }
   #ModalSesion .modal-body .socialMedia .btnGoogle {
-    background: #518EF8; }
+    background: #518ef8; }
 #ModalSesion .modal-footer {
   padding: 0rem 2rem 0rem 2rem;
   margin: 0 0 18px 0;
   border-top: none; }
   #ModalSesion .modal-footer button {
-    background: #DF0C30;
+    background: #df0c30;
     border-radius: 5px;
     margin: 0 0 18px 0;
     font-family: Open Sans;
@@ -6303,7 +6303,7 @@ button.customers {
     line-height: 27px;
     text-align: center;
     letter-spacing: 0.18px;
-    color: #FFFFFF; }
+    color: #ffffff; }
   #ModalSesion .modal-footer .account {
     display: flex;
     justify-content: center;
@@ -6315,7 +6315,7 @@ button.customers {
       font-size: 12px;
       line-height: 18px;
       letter-spacing: 0.25px;
-      color: #4B4B4B; }
+      color: #4b4b4b; }
     #ModalSesion .modal-footer .account .newAccount {
       cursor: pointer;
       font-family: Montserrat;
@@ -6323,7 +6323,7 @@ button.customers {
       font-size: 12px;
       line-height: 21px;
       letter-spacing: 0.1px;
-      color: #009AED;
+      color: #009aed;
       text-decoration: underline; }
 
 #ModalRecovery .modal-dialog,
@@ -6355,7 +6355,7 @@ button.customers {
         line-height: 18px;
         text-align: center;
         letter-spacing: 0.1px;
-        color: #FFFFFF;
+        color: #ffffff;
         text-align: center;
         margin-top: 40px;
         padding-bottom: 13px; }
@@ -6392,7 +6392,7 @@ button.customers {
         font-size: 24px;
         line-height: 36px;
         text-align: center;
-        color: #4B4B4B;
+        color: #4b4b4b;
         margin: 40px 0 25px 0; }
         @media (max-width: 640px) {
           #ModalRecovery .modal-dialog .modal-content .recoveryRight .titleRecovery,
@@ -6410,7 +6410,7 @@ button.customers {
           #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow.error .form-select,
           #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow.error .form-control {
             margin-bottom: 0px !important;
-            border: 0.5px solid #F44336; }
+            border: 0.5px solid #f44336; }
           #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow.error .textError,
           #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow.error .textError {
             display: flex; }
@@ -6422,7 +6422,7 @@ button.customers {
           font-size: 11px;
           font-family: Roboto, "Helvetica Neue", sans-serif;
           line-height: 18px;
-          color: #F44336;
+          color: #f44336;
           margin-bottom: 10px; }
         #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .form-control,
         #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .form-control {
@@ -6441,7 +6441,7 @@ button.customers {
           #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .form-select,
           #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .form-control,
           #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .form-select {
-            border: 0.5px solid #F44336; }
+            border: 0.5px solid #f44336; }
           #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .textError,
           #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .textError {
             display: flex; }
@@ -6452,7 +6452,7 @@ button.customers {
             margin-left: 15px;
             font-weight: 300;
             font-size: 11px;
-            color: #F44336;
+            color: #f44336;
             bottom: 3px; }
       #ModalRecovery .modal-dialog .modal-content .recoveryRight button,
       #ModalNewAccount .modal-dialog .modal-content .recoveryRight button {
@@ -6481,7 +6481,7 @@ button.customers {
           font-size: 12px;
           line-height: 18px;
           letter-spacing: 0.25px;
-          color: #4B4B4B; }
+          color: #4b4b4b; }
         #ModalRecovery .modal-dialog .modal-content .recoveryRight .account .newAccount,
         #ModalNewAccount .modal-dialog .modal-content .recoveryRight .account .newAccount {
           cursor: pointer;
@@ -6490,7 +6490,7 @@ button.customers {
           font-size: 12px;
           line-height: 21px;
           letter-spacing: 0.1px;
-          color: #009AED;
+          color: #009aed;
           text-decoration: underline; }
     @media (max-width: 640px) {
       #ModalRecovery .modal-dialog .modal-content,
@@ -6499,13 +6499,13 @@ button.customers {
         overflow: hidden; } }
 
 #ModalDatosOpcionales .titleVerifica {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-weight: 700;
   font-size: 24px;
   line-height: 36px;
   display: flex;
   align-items: center;
-  color: #4B4B4B; }
+  color: #4b4b4b; }
 #ModalDatosOpcionales .portlet-der {
   margin: 0; }
 #ModalDatosOpcionales input.form-control {
@@ -6553,7 +6553,7 @@ button.customers {
     font-size: 18px;
     line-height: 27px;
     letter-spacing: 0.18px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     width: 100%; }
 #ModalVerificaCorreo .modal-dialog {
   width: 490px; }
@@ -6569,7 +6569,7 @@ button.customers {
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.1px;
-  color: #83898F;
+  color: #83898f;
   padding-bottom: 20px; }
 #ModalVerificaCorreo .modal-body .action {
   display: flex;
@@ -6587,7 +6587,7 @@ button.customers {
   font-weight: bold;
   font-size: 24px;
   line-height: 36px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   margin-bottom: 10px;
   width: 100%; }
 #ModalUsuarioVerificado .modal-header img {
@@ -6602,7 +6602,7 @@ button.customers {
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0.1px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   padding-bottom: 20px; }
 #ModalUsuarioVerificado .modal-body .action {
   display: flex;
@@ -6620,7 +6620,7 @@ button.customers {
   font-weight: bold;
   font-size: 24px;
   line-height: 36px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   margin-bottom: 10px;
   width: 100%; }
 #ModalEliminaCorreo .modal-header img {
@@ -6635,12 +6635,12 @@ button.customers {
   font-size: 12px;
   line-height: 21px;
   letter-spacing: 0.1px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   padding-bottom: 20px; }
   #ModalEliminaCorreo .modal-body .descripText span {
     font-weight: 600;
     font-size: 12px;
-    color: #009AED; }
+    color: #009aed; }
 #ModalEliminaCorreo .modal-body .action {
   display: flex;
   justify-content: center;
@@ -6658,7 +6658,7 @@ button.customers {
   font-weight: bold;
   font-size: 24px;
   line-height: 36px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   margin-bottom: 10px;
   width: 100%; }
 #ModalChangePass .modal-header img {
@@ -6676,12 +6676,12 @@ button.customers {
   font-size: 12px;
   line-height: 21px;
   letter-spacing: 0.1px;
-  color: #4B4B4B;
+  color: #4b4b4b;
   padding-bottom: 20px; }
   #ModalChangePass .modal-body .descripText span {
     font-weight: 600;
     font-size: 12px;
-    color: #009AED; }
+    color: #009aed; }
 #ModalChangePass .modal-body .action {
   display: flex;
   justify-content: center;
@@ -6693,7 +6693,7 @@ button.customers {
   .boxReclamaciones .contLeft {
     width: 35%; }
     .boxReclamaciones .contLeft .virtual {
-      color: #4B4B4B;
+      color: #4b4b4b;
       font-family: Montserrat;
       padding: 68px 30px 30px 50px; }
       .boxReclamaciones .contLeft .virtual .titleVirtual {
@@ -6705,7 +6705,7 @@ button.customers {
         line-height: 48px;
         padding-bottom: 45px; }
         .boxReclamaciones .contLeft .virtual .titleVirtual span {
-          color: #B50A27;
+          color: #b50a27;
           font-weight: bold; }
         @media (max-width: 640px) {
           .boxReclamaciones .contLeft .virtual .titleVirtual {
@@ -6728,7 +6728,7 @@ button.customers {
         height: 2px;
         left: 59px;
         top: 476px;
-        background: #F29704;
+        background: #f29704;
         margin-bottom: 41px; }
       .boxReclamaciones .contLeft .virtual .boxImg {
         width: 100%;
@@ -6747,7 +6747,7 @@ button.customers {
           .boxReclamaciones .contLeft .virtual .text {
             font-size: 14px; } }
       .boxReclamaciones .contLeft .virtual .btnHelp {
-        background: #DF0C30;
+        background: #df0c30;
         border-radius: 3px;
         padding: 14px 0;
         cursor: pointer;
@@ -6769,12 +6769,12 @@ button.customers {
         width: 100%; } }
   .boxReclamaciones .contRight {
     width: 65%;
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     margin: 68px 60px 20px 30px;
     padding: 45px 70px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     font-family: Montserrat; }
     .boxReclamaciones .contRight .rowGroup {
       display: flex;
@@ -6863,18 +6863,18 @@ button.customers {
         .boxReclamaciones .contRight .rowGroup {
           flex-wrap: wrap; } }
     .boxReclamaciones .contRight .form-control {
-      border: 1px solid #E4E5E7;
+      border: 1px solid #e4e5e7;
       border-radius: 5px;
       height: 45px; }
     .boxReclamaciones .contRight textarea {
-      border: 1px solid #E4E5E7;
+      border: 1px solid #e4e5e7;
       border-radius: 5px;
       width: 100%; }
     .boxReclamaciones .contRight .separador {
       margin: 42px 0;
       width: 100%;
       height: 1px;
-      background: #E4E5E7; }
+      background: #e4e5e7; }
       @media (max-width: 640px) {
         .boxReclamaciones .contRight .separador {
           margin: 30px 0; } }
@@ -6892,9 +6892,9 @@ button.customers {
       font-size: 12px;
       line-height: 18px;
       letter-spacing: 0.25px;
-      color: #009AED; }
+      color: #009aed; }
       .boxReclamaciones .contRight .form-check-label a {
-        color: #B50A27; }
+        color: #b50a27; }
     .boxReclamaciones .contRight .form-radio-label {
       font-weight: normal;
       font-size: 14px;
@@ -6902,7 +6902,7 @@ button.customers {
       letter-spacing: 0.18px;
       padding-bottom: 0; }
     .boxReclamaciones .contRight .btnEnviar {
-      background: #DF0C30;
+      background: #df0c30;
       border-radius: 3px;
       padding: 14px 0;
       cursor: pointer;
@@ -6995,19 +6995,19 @@ button.customers {
       font-weight: 600;
       font-size: 14px;
       letter-spacing: 0.1px;
-      color: #009AED;
+      color: #009aed;
       cursor: pointer;
       transition: 0.3s all;
       padding: 2px 0; }
       .boxUser .divFlotante .option:hover {
         color: #506370; }
       .boxUser .divFlotante .option.red {
-        color: #DF0C30; }
+        color: #df0c30; }
         .boxUser .divFlotante .option.red:hover {
-          color: #B50A27; }
+          color: #b50a27; }
     .boxUser .divFlotante .line {
       height: 1px;
-      background: #E4E5E7;
+      background: #e4e5e7;
       margin: 2px 0; }
     .boxUser .divFlotante .correo {
       display: flex;
@@ -7078,7 +7078,7 @@ button.customers {
     line-height: 21px;
     letter-spacing: 0.1px;
     font-weight: 600;
-    color: #009AED; }
+    color: #009aed; }
 #ModalNewAccount .modal-dialog .modal-content .recoveryRight .socialMedia {
   display: none;
   flex-direction: column;
@@ -7088,7 +7088,7 @@ button.customers {
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0.15px;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-bottom: 10px; }
   #ModalNewAccount .modal-dialog .modal-content .recoveryRight .socialMedia.active {
     display: flex; }
@@ -7112,9 +7112,9 @@ button.customers {
       max-height: 25.19px;
       margin-right: 12px; }
   #ModalNewAccount .modal-dialog .modal-content .recoveryRight .socialMedia .btnFacebook {
-    background: #4267B2; }
+    background: #4267b2; }
   #ModalNewAccount .modal-dialog .modal-content .recoveryRight .socialMedia .btnGoogle {
-    background: #518EF8; }
+    background: #518ef8; }
 
 mat-dialog-container {
   padding: 20px; }
@@ -7123,7 +7123,7 @@ mat-dialog-container {
     font-weight: bold;
     font-size: 24px;
     line-height: 36px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     text-align: center;
     margin-bottom: 15px; }
   mat-dialog-container .descrip {
@@ -7134,7 +7134,7 @@ mat-dialog-container {
     display: flex;
     align-items: center;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     padding-bottom: 20px; }
   mat-dialog-container .groupBtn {
     display: flex;
@@ -7153,16 +7153,16 @@ mat-dialog-container {
       transition: 300ms ease; }
       mat-dialog-container .groupBtn .boton.primary {
         background-color: #df0c30;
-        border: 1px solid #B60A35;
+        border: 1px solid #b60a35;
         color: #ffffff; }
         mat-dialog-container .groupBtn .boton.primary:hover {
-          background: #B60A35; }
+          background: #b60a35; }
       mat-dialog-container .groupBtn .boton.secundary {
-        background: #D9E2E8;
-        border: 1px solid #BBCBD4;
-        color: #1C2A40; }
+        background: #d9e2e8;
+        border: 1px solid #bbcbd4;
+        color: #1c2a40; }
         mat-dialog-container .groupBtn .boton.secundary:hover {
-          background: #BBCBD4; }
+          background: #bbcbd4; }
 
 #carouselExampleIndicators .carousel-control-prev,
 #carouselExampleIndicators .carousel-control-next {
@@ -7175,15 +7175,15 @@ mat-dialog-container {
   flex-direction: column;
   margin: 20px 0; }
   .msgBoxBoletin.success .iconBoletin {
-    background: #ADD172; }
+    background: #add172; }
   .msgBoxBoletin.success .titleBol {
-    color: #86A258; }
+    color: #86a258; }
   .msgBoxBoletin.error .iconBoletin {
-    background: #FF6969; }
+    background: #ff6969; }
   .msgBoxBoletin.error .titleBol {
-    color: #DF0C30; }
+    color: #df0c30; }
   .msgBoxBoletin .titleBol {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
@@ -7214,11 +7214,11 @@ mat-dialog-container {
     margin-right: 0.5rem;
     height: 14px; }
     .p-galleria-item-wrapper .p-galleria-indicators .p-galleria-indicator.p-highlight .p-link {
-      background-color: #DF0C30; }
+      background-color: #df0c30; }
     .p-galleria-item-wrapper .p-galleria-indicators .p-galleria-indicator .p-link {
       display: inline-flex;
       align-items: center;
-      background-color: #CFD1D3;
+      background-color: #cfd1d3;
       transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
       border-radius: 50%;
       width: 14px;
@@ -7243,7 +7243,7 @@ mat-dialog-container {
         font-weight: bold;
         font-size: 20px;
         line-height: 36px;
-        color: #4B4B4B; }
+        color: #4b4b4b; }
       .cardHotel .p-carousel-items-container .p-carousel-item .cardTituloNext .btnNext {
         width: 38px;
         min-width: 38px;
@@ -7324,15 +7324,15 @@ app-flightdeals button {
 .boxBotones {
   gap: 10px; }
   .boxBotones .btnMovil {
-    background: #FFFFFF;
-    border: 1px solid #E4E5E7;
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 5px;
     font-family: Montserrat;
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.1px;
-    color: #4B4B4B; }
+    color: #4b4b4b; }
     .boxBotones .btnMovil img {
       margin-right: 7px; }
 
@@ -7359,7 +7359,7 @@ app-flightdeals button {
         display: flex;
         width: 100%; }
         .gridTab .rowGrid .colGrid .colElement input {
-          border: 0.5px solid #E4E5E7;
+          border: 0.5px solid #e4e5e7;
           border-radius: 5px;
           height: 48px;
           padding: 0 10px; }
@@ -7368,3 +7368,225 @@ app-flightdeals button {
         flex-direction: column; }
         .gridTab .rowGrid .selectSeguro {
           margin-bottom: 0; } }
+
+.no-minusvalidos {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 0 0; }
+
+.multilingue {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 225px 0; }
+
+.aperitivos {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 200px 0; }
+
+.recepcion {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 175px 0; }
+
+.barbacoa {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 150px 0; }
+
+.wifi {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 125px 0; }
+
+.no-fumador {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 100px 0; }
+
+.desayuno {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 75px 0; }
+
+.ascensor {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 50px 0; }
+
+.lavanderia {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 25px 0; }
+
+.banio-minusvalidos {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 0 75px; }
+
+.caja-fuerte {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 225px 75px; }
+
+.sala-equipaje {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 200px 75px; }
+
+.restaurante {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 175px 75px; }
+
+.hab-minusvalidos {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 150px 75px; }
+
+.cafeteria {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 125px 75px; }
+
+.sala-reuniones {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 100px 75px; }
+
+.sala-tv {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 75px 75px; }
+
+.minusvalidos {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 50px 75px; }
+
+.parking {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 25px 75px; }
+
+.sala-conferencia {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 0 50px; }
+
+.prensa {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 225px 50px; }
+
+.negocios {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 200px 50px; }
+
+.internet {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 175px 50px; }
+
+.serv-limpieza {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 150px 50px; }
+
+.terraza {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 125px 50px; }
+
+.jardin {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 100px 50px; }
+
+.bicicletas {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 75px 50px; }
+
+.biblioteca {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 50px 50px; }
+
+.spa {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 25px 50px; }
+
+.chimenea {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 0 25px; }
+
+.stand-prensa {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 225px 25px; }
+
+.microondas {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 200px 25px; }
+
+.tienda {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 175px 25px; }
+
+.aparcamiento {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 150px 25px; }
+
+.desayuno-cont {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 125px 25px; }
+
+.desayuno-buffet {
+  width: 25px;
+  height: 25px;
+  background: transparent url("./assets/sprite-iconos-hotel.png");
+  background-position: 100px 25px; }

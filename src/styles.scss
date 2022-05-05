@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400;500;600;700;800;900"); // @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400&display=swap");
 @import "scss/variables";
-@import 'scss/mixin';
+@import "scss/mixin";
 .animated {
     animation-duration: 1s !important;
     animation-fill-mode: both !important;
@@ -53,7 +53,7 @@ label {
     border-radius: 3px;
     &:focus {
         outline: none;
-        border: 0.5px solid #009AED !important;
+        border: 0.5px solid #009aed !important;
         box-shadow: none !important;
     }
 }
@@ -68,7 +68,7 @@ button {
     border-radius: 3px;
     transition: 300ms ease;
     &:hover {
-        background: $red
+        background: $red;
     }
     @media (max-width: 768px) {
         font-size: 12px;
@@ -217,7 +217,7 @@ section {
             @media (max-width: 640px) {}
         }
         &>.d-flex {
-            height: 210px !important
+            height: 210px !important;
         }
         @media (max-width: 768px) {
             button.hidden {
@@ -268,10 +268,10 @@ section {
                 21px,
                 0.25px);
                 font-family: "Montserrat";
-                color: #B9BCBF;
+                color: #b9bcbf;
             }
             &:focus {
-                border: 0.5px solid #009AED !important;
+                border: 0.5px solid #009aed !important;
                 box-shadow: none;
             }
         }
@@ -765,7 +765,7 @@ section {
     line-height: 18px;
     letter-spacing: 0.5px;
     text-transform: capitalize;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .btnDatePicker button {
@@ -776,7 +776,7 @@ section {
     line-height: 18px;
     letter-spacing: 0.5px;
     text-transform: capitalize;
-    color: #FFFFFF;
+    color: #ffffff;
     border-radius: 3px;
 }
 
@@ -789,15 +789,15 @@ section {
     line-height: 20px;
     letter-spacing: 0.5px;
     text-transform: capitalize;
-    color: #4B4B4B;
+    color: #4b4b4b;
 }
 
 .ngb-dp-header {
-    padding: 10px 30px 0 30px !important
+    padding: 10px 30px 0 30px !important;
 }
 
 .ngb-dp-arrow .btn-link {
-    color: #DF0C30 !important;
+    color: #df0c30 !important;
 }
 
 .ngb-dp-arrow .btn-link:hover {
@@ -818,7 +818,7 @@ section {
     line-height: 20px;
     letter-spacing: 0.5px;
     text-transform: capitalize;
-    color: #4B4B4B;
+    color: #4b4b4b;
     text-align: end;
 }
 
@@ -827,7 +827,7 @@ section {
 }
 
 .ngb-dp-month:first-child {
-    border-right: 1px solid #83898F;
+    border-right: 1px solid #83898f;
     padding-right: 15px;
 }
 
@@ -839,7 +839,7 @@ section {
     line-height: 20px;
     letter-spacing: 0.5px;
     text-transform: capitalize;
-    color: #4B4B4B;
+    color: #4b4b4b;
     text-transform: uppercase;
 }
 
@@ -887,11 +887,11 @@ section {
     button {
         height: 40px;
         &:hover {
-            background: $red
+            background: $red;
         }
         &:disabled {
             color: $gray_light;
-            background: $red !important
+            background: $red !important;
         }
     }
 }
@@ -904,7 +904,7 @@ section {
     align-items: center;
     padding-left: 10px;
     svg path {
-        stroke: #009AED;
+        stroke: #009aed;
     }
 }
 
@@ -926,15 +926,15 @@ section {
     font-size: 16px;
     line-height: 18px;
     text-transform: capitalize;
-    color: #4B4B4B;
+    color: #4b4b4b;
     text-indent: 10px;
-    border: 0.5px solid #E4E5E7;
+    border: 0.5px solid #e4e5e7;
     &:focus {
-        border: 0.5px solid #009AED !important;
+        border: 0.5px solid #009aed !important;
         box-shadow: none;
     }
     &::placeholder {
-        color: #B9BCBF !important;
+        color: #b9bcbf !important;
         font-size: 16px;
     }
     &.origen,
@@ -949,7 +949,7 @@ section {
 
 .portletFiltro .rowFiltro .columnFiltro input::-webkit-input-placeholder,
 .portletFiltro .rowFiltro .columnFiltro input[type="text"]::-webkit-input-placeholder {
-    color: #B9BCBF;
+    color: #b9bcbf;
     font-size: 16px;
 }
 
@@ -970,7 +970,7 @@ section {
     margin-left: 10px;
     background: $red_light;
     &:hover {
-        background: $red
+        background: $red;
     }
 }
 
@@ -995,14 +995,14 @@ section {
 
 .custom-day.range,
 .custom-day:hover {
-    background: #009AED;
+    background: #009aed;
     border-radius: 3px;
     color: white;
 }
 
 .custom-day.faded {
-    background: #8FD0F3;
-    color: #009AED;
+    background: #8fd0f3;
+    color: #009aed;
     border-radius: 0;
 }
 
@@ -1049,7 +1049,7 @@ section {
     font-weight: bold;
     font-size: 24px;
     line-height: 36px;
-    color: #4B4B4B;
+    color: #4b4b4b;
 }
 
 .box-container .box-perfil .perfilMail {
@@ -1059,14 +1059,14 @@ section {
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.1px;
-    color: #1EAEA5;
+    color: #1eaea5;
 }
 
 .box-container .box-perfil .boxContact {
     display: flex;
     flex-direction: column;
     padding: 10px 0 10px 0;
-    border-top: 1px solid #E4E5E7;
+    border-top: 1px solid #e4e5e7;
     margin-top: 20px;
     @include tablet {
         flex-direction: row;
@@ -1097,14 +1097,14 @@ section {
     font-size: 12px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #009AED;
+    color: #009aed;
     width: 100%;
     text-align: center;
     cursor: pointer;
 }
 
 .box-container .box-perfil .boxContact .contacto .linkContact.disabled {
-    color: #4B4B4B;
+    color: #4b4b4b;
     cursor: default;
 }
 
@@ -1121,7 +1121,7 @@ section {
         width: 265px;
         margin-right: 35px;
         margin-top: -10px;
-        border: 0.5px solid #E4E5E7;
+        border: 0.5px solid #e4e5e7;
         box-sizing: border-box;
         border-radius: 5px 5px 5px 0px;
         height: 376px;
@@ -1135,7 +1135,7 @@ section {
     display: flex;
     justify-content: center;
     padding: 30px 0 19px 0;
-    border-bottom: 1px solid #E4E5E7;
+    border-bottom: 1px solid #e4e5e7;
 }
 
 .box-container .box-content .portlet-izq .iconViaje img {
@@ -1163,8 +1163,8 @@ section {
 }
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil {
-    background: #FFFFFF;
-    border: 0.5px solid #E4E5E7;
+    background: #ffffff;
+    border: 0.5px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 5px;
     display: flex;
@@ -1226,7 +1226,7 @@ section {
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.1px;
-    color: #DF0C30;
+    color: #df0c30;
 }
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxCenter .descrip {
@@ -1236,7 +1236,7 @@ section {
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.1px;
-    color: #83898F;
+    color: #83898f;
     padding: 5px 0;
 }
 
@@ -1247,7 +1247,7 @@ section {
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.1px;
-    color: #F21037;
+    color: #f21037;
 }
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight .title {
@@ -1257,7 +1257,7 @@ section {
     font-size: 18px;
     line-height: 27px;
     letter-spacing: 0.18px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     padding: 5px 0 12px 0;
 }
 
@@ -1267,7 +1267,7 @@ section {
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
+    color: #4b4b4b;
 }
 
 .box-container .box-content .portlet-der .viewPerfil .boxContPerfil .boxRight .boxBtn {
@@ -1311,7 +1311,7 @@ section {
     display: flex;
     align-items: center;
     letter-spacing: 0.18px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     display: flex;
     flex: 1 1 100%;
 }
@@ -1326,16 +1326,16 @@ section {
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     display: flex;
     flex: 1 1 100%;
 }
 
 .box-container .box-content .portlet-der .personalDocument {
-    background: #FFFFFF;
-    border: 0.5px solid #E4E5E7;
+    background: #ffffff;
+    border: 0.5px solid #e4e5e7;
     box-sizing: border-box;
-    border-radius: 10px
+    border-radius: 10px;
 }
 
 .box-container .box-content .portlet-der .personalDocument .content {
@@ -1358,7 +1358,7 @@ section {
         &.error {
             .form-control,
             .form-select {
-                border: 0.5px solid #F44336;
+                border: 0.5px solid #f44336;
             }
             .textError {
                 //display: flex;
@@ -1370,7 +1370,7 @@ section {
             margin-left: 15px;
             font-weight: 300;
             font-size: 11px;
-            color: #F44336;
+            color: #f44336;
         }
     }
 }
@@ -1386,7 +1386,7 @@ section {
     display: flex;
     flex: 1 1 100%;
     padding: 10px 0;
-    border-top: 1px solid #E4E5E7;
+    border-top: 1px solid #e4e5e7;
 }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .boxGrid .linkGrid {
@@ -1396,7 +1396,7 @@ section {
     font-size: 10px;
     line-height: 15px;
     letter-spacing: 0.1px;
-    color: #009AED;
+    color: #009aed;
     cursor: pointer;
 }
 
@@ -1448,7 +1448,7 @@ section {
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
-    color: #B50A27;
+    color: #b50a27;
 }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .passLabel {
@@ -1458,7 +1458,7 @@ section {
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
+    color: #4b4b4b;
 }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .passText {
@@ -1471,7 +1471,7 @@ section {
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #83898F;
+    color: #83898f;
 }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup {
@@ -1490,7 +1490,7 @@ section {
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     padding-bottom: 9px;
 }
 
@@ -1527,7 +1527,7 @@ section {
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
-    color: #4B4B4B;
+    color: #4b4b4b;
 }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-input {
@@ -1537,7 +1537,7 @@ section {
     height: 24px;
 }
 
-.box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-input[type=radio],
+.box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-input[type="radio"],
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .form-check-label {
     cursor: pointer;
 }
@@ -1546,7 +1546,7 @@ section {
     display: flex;
     flex: 1 1 100%;
     .optionLeft {
-        border: 0.5px solid #E4E5E7;
+        border: 0.5px solid #e4e5e7;
         box-sizing: border-box;
         border-radius: 5px 0 0 5px;
         display: flex;
@@ -1557,7 +1557,7 @@ section {
         width: 50%;
     }
     .optionRight {
-        border: 0.5px solid #E4E5E7;
+        border: 0.5px solid #e4e5e7;
         box-sizing: border-box;
         border-radius: 0 5px 5px 0;
         display: flex;
@@ -1586,7 +1586,7 @@ section {
 }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .optionLeft {
-    border: 0.5px solid #E4E5E7;
+    border: 0.5px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 5px 0 0 5px;
     display: flex;
@@ -1597,7 +1597,7 @@ section {
 }
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup .optionRight {
-    border: 0.5px solid #E4E5E7;
+    border: 0.5px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 0 5px 5px 0;
     display: flex;
@@ -1619,11 +1619,11 @@ section {
 
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup input[type="text"],
 .box-container .box-content .portlet-der .personalDocument .content .rowContent .inputGroup select {
-    border: 0.5px solid #E4E5E7;
+    border: 0.5px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 5px;
     height: 47px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     font-family: Montserrat;
     font-style: normal;
     font-weight: 300;
@@ -1643,14 +1643,14 @@ section {
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.25px;
-    color: #B9BCBF;
+    color: #b9bcbf;
 }
 
 .box-container .box-content .headerPortlet {
     display: flex;
     flex-wrap: wrap;
     padding: 11px 26px;
-    border-bottom: 1px solid #E4E5E7;
+    border-bottom: 1px solid #e4e5e7;
 }
 
 .box-container .box-content .headerPortlet .titleBoxRight {
@@ -1661,7 +1661,7 @@ section {
     line-height: 36px;
     display: flex;
     align-items: center;
-    color: #4B4B4B;
+    color: #4b4b4b;
     width: 100%;
 }
 
@@ -1701,7 +1701,7 @@ section {
 .boxMenu ul li {
     display: flex;
     height: 35px;
-    color: #009AED;
+    color: #009aed;
     text-decoration: none;
     width: 100%;
     font-weight: 500;
@@ -1738,11 +1738,11 @@ section {
 }
 
 .btnPerfil.primary {
-    background: #DF0C30;
+    background: #df0c30;
 }
 
 .btnPerfil.primary:hover {
-    background: #DF0C30;
+    background: #df0c30;
 }
 
 .btnAgregar {
@@ -1752,7 +1752,7 @@ section {
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #009AED;
+    color: #009aed;
     margin-top: 10px;
     padding: 10px 15px 10px 0;
     cursor: pointer;
@@ -1760,7 +1760,7 @@ section {
 }
 
 .btnAgregar.gris {
-    color: #CFD1D3;
+    color: #cfd1d3;
 }
 
 .rowElement {
@@ -1817,7 +1817,7 @@ section {
 }
 
 .precioAntes {
-    text-decoration: line-through #DF0C30;
+    text-decoration: line-through #df0c30;
 }
 
 .carousel-item .card .card-body {
@@ -1844,7 +1844,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-weight: 700;
     font-size: 28px;
     line-height: 36px;
-    color: #4B4B4B;
+    color: #4b4b4b;
 }
 
 .card.seguro {
@@ -1908,11 +1908,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         border-radius: 3px 0 0 3px !important;
         letter-spacing: 2px;
         &:focus {
-            border: 0.5px solid #009AED !important;
+            border: 0.5px solid #009aed !important;
             box-shadow: none;
         }
         @media (max-width: 640px) {
-            border-left: 0.5px solid #E4E5E7!important;
+            border-left: 0.5px solid #e4e5e7 !important;
         }
     }
     &Izq {
@@ -1920,21 +1920,21 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         letter-spacing: 2px;
         border-left: 0px !important;
         &:focus {
-            border: 0.5px solid #009AED !important;
+            border: 0.5px solid #009aed !important;
             box-shadow: none;
         }
         @media (max-width: 640px) {
-            border-left: 0.5px solid #E4E5E7!important;
+            border-left: 0.5px solid #e4e5e7 !important;
         }
     }
 }
 
 .selectSeguro {
-    border: 0.5px solid #E4E5E7;
+    border: 0.5px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 5px;
     height: 49px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     font-family: Montserrat;
     font-style: normal;
     font-weight: 300;
@@ -1943,7 +1943,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     letter-spacing: 0.25px;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23DF0C30' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     &:focus {
-        border: 0.5px solid #009AED;
+        border: 0.5px solid #009aed;
         box-shadow: none;
     }
 }
@@ -1967,7 +1967,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
         .footerDet {
             padding: 1rem 1.25rem;
-            border-top: 1px solid #E4E5E7;
+            border-top: 1px solid #e4e5e7;
         }
     }
 }
@@ -1994,7 +1994,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     flex-direction: column;
     justify-content: space-between;
     p {
-        color: #009AED;
+        color: #009aed;
     }
 }
 
@@ -2022,17 +2022,17 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 .textContactenos {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-size: 14px;
     line-height: 21px;
     /* or 150% */
     // text-align: left;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
+    color: #4b4b4b;
 }
 
 .boxGraphic {
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px; // margin-top: 10px;
     padding: 20px 19px;
@@ -2044,7 +2044,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 18px;
             line-height: 27px;
             letter-spacing: 0.18px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         &.subtitle {
             font-family: Montserrat;
@@ -2052,11 +2052,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             line-height: 21px;
             font-weight: 500;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             gap: 10px;
         }
         .circleBlue {
-            background: #009AED;
+            background: #009aed;
             width: 9px;
             height: 9px;
             border-radius: 50%;
@@ -2068,7 +2068,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         display: flex;
         flex-wrap: nowrap;
         padding: 20px 0 0 0;
-        border-bottom: 0.5px solid #CFD1D3;
+        border-bottom: 0.5px solid #cfd1d3;
         position: relative;
         &.footer {
             border-bottom: none;
@@ -2078,7 +2078,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 16px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             .gCenter {
                 height: 20px;
             }
@@ -2089,7 +2089,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .valorHor {
             position: absolute;
             top: 72%;
-            border-top: 1px dashed #CFD1D3;
+            border-top: 1px dashed #cfd1d3;
             left: 0;
             width: calc(100% - 185px);
             font-family: Montserrat;
@@ -2097,7 +2097,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 16px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             z-index: 4;
         }
         .anioVertical {
@@ -2108,11 +2108,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 16px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             left: 50%;
             top: -10px;
             height: 100%;
-            border-left: 1px solid #E4E5E7;
+            border-left: 1px solid #e4e5e7;
             padding-left: 10px;
             z-index: 2;
         }
@@ -2123,7 +2123,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 16px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             margin: auto 0;
         }
         .gCenter {
@@ -2149,13 +2149,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     border-radius: 0 5px 0 0;
                 }
                 &.gris {
-                    background: #CFD1D3;
+                    background: #cfd1d3;
                 }
                 &.red {
-                    background: #B50A27;
+                    background: #b50a27;
                 }
                 &.blue {
-                    background: #009AED;
+                    background: #009aed;
                 }
                 &.height-10 {
                     height: 10%;
@@ -2196,7 +2196,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 14px;
                 line-height: 21px;
                 letter-spacing: 0.1px;
-                color: #009AED;
+                color: #009aed;
                 padding-bottom: 10px;
             }
             .precio {
@@ -2204,18 +2204,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 36px;
                 line-height: 21px;
                 letter-spacing: 0.1px;
-                color: #009AED;
+                color: #009aed;
                 padding-bottom: 10px;
             }
             .descrip {
                 font-size: 14px;
                 line-height: 21px;
                 letter-spacing: 0.1px;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 padding-bottom: 5px;
             }
             .line {
-                background: #009AED;
+                background: #009aed;
                 height: 3px;
                 width: 100%;
             }
@@ -2225,7 +2225,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .boxPrecioAero,
 .boxPrecios {
-    background: #FFFFFF; // box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
+    background: #ffffff; // box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
     // box-shadow: 0px 1px 8px rgb(0 0 0 / 10%);
     border-radius: 5px; // margin-top: 10px;
     table {
@@ -2234,13 +2234,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 14px;
         line-height: 26px;
         letter-spacing: 0.1px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         text-align: center;
         & thead tr:first-child:hover {
             background: none;
         }
         & tr:hover {
-            background: rgba(#8FD0F3, .2)
+            background: rgba(#8fd0f3, 0.2);
         }
         & tr td:first-child {
             font-weight: bold;
@@ -2249,14 +2249,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             &.green {
                 font-weight: bold;
                 letter-spacing: 0.1px;
-                color: #54D834;
+                color: #54d834;
             }
             &.red {
                 letter-spacing: 0.1px;
-                color: #B50A27;
+                color: #b50a27;
             }
             &.selected {
-                background: #009AED;
+                background: #009aed;
                 font-weight: bold;
                 color: #ffffff;
             }
@@ -2270,7 +2270,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-weight: bold;
         font-size: 14px;
         letter-spacing: 0.1px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         height: 46px;
         margin: 0;
         text-align: center;
@@ -2281,7 +2281,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             background: white;
         }
         &:hover {
-            background: rgba(#8FD0F3, .2)
+            background: rgba(#8fd0f3, 0.2);
         }
         .col {
             font-family: Montserrat;
@@ -2291,9 +2291,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             letter-spacing: 0.1px;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid #E4E5E7;
-            border-left: 1px solid #E4E5E7;
-            color: #4B4B4B;
+            border-bottom: 1px solid #e4e5e7;
+            border-left: 1px solid #e4e5e7;
+            color: #4b4b4b;
             height: 46px;
             display: flex;
             justify-content: center;
@@ -2317,14 +2317,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             &.green {
                 font-weight: bold;
                 letter-spacing: 0.1px;
-                color: #54D834;
+                color: #54d834;
             }
             &.red {
                 letter-spacing: 0.1px;
-                color: #B50A27;
+                color: #b50a27;
             }
             &.selected {
-                background: #009AED;
+                background: #009aed;
                 font-weight: bold;
                 color: #ffffff;
             }
@@ -2345,7 +2345,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             display: flex;
             align-items: center;
             &:first-child {
-                border-bottom: 1px solid #E4E5E7;
+                border-bottom: 1px solid #e4e5e7;
             }
             img {
                 margin-left: 10px;
@@ -2376,7 +2376,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         justify-content: space-between;
         .escala_directo {
             background: #fff;
-            border: 1px solid #83898F;
+            border: 1px solid #83898f;
             border-radius: 50%;
             width: 6px;
             height: 6px;
@@ -2398,7 +2398,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-family: Montserrat;
         font-size: 11px;
         letter-spacing: 0.1px;
-        color: #F21037;
+        color: #f21037;
         top: -12px;
         right: 5px;
     }
@@ -2417,9 +2417,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         position: absolute;
         padding: 10px;
         width: 230px;
-        background: #FFFFFF;
+        background: #ffffff;
         border-radius: 5px;
-        border: 1px solid #E4E5E7;
+        border: 1px solid #e4e5e7;
         box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
         left: calc(100% - 160px);
         bottom: 32px;
@@ -2430,9 +2430,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             position: absolute;
             padding: 10px;
             width: 230px;
-            background: #FFFFFF;
+            background: #ffffff;
             border-radius: 5px;
-            border: 1px solid #E4E5E7;
+            border: 1px solid #e4e5e7;
             box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
             bottom: 32px;
             z-index: 20;
@@ -2457,7 +2457,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 12px;
                 line-height: 18px;
                 letter-spacing: 0.1px;
-                color: #83898F;
+                color: #83898f;
             }
         }
         &:after {
@@ -2478,14 +2478,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-weight: 600;
             font-size: 12px;
             letter-spacing: 0.1px;
-            color: #83898F;
+            color: #83898f;
         }
         .descripTooltip {
             font-weight: 500;
             font-size: 12px;
             line-height: 18px;
             letter-spacing: 0.1px;
-            color: #83898F;
+            color: #83898f;
         }
     }
 }
@@ -2513,12 +2513,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0.25px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     .linkBlue {
         font-weight: 600;
         line-height: 18px;
         letter-spacing: 0.25px;
-        color: #009AED;
+        color: #009aed;
         cursor: pointer;
     }
     @media (max-width: 990px) and (min-width: 640px) {
@@ -2535,13 +2535,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         max-width: 60% !important;
         .modal-header {
             padding-bottom: 2rem;
-            border-bottom: 1px solid #E4E5E7;
+            border-bottom: 1px solid #e4e5e7;
             .titleMod {
                 font-family: Open Sans;
                 font-weight: bold;
                 font-size: 24px;
                 line-height: 36px;
-                color: #4B4B4B;
+                color: #4b4b4b;
             }
         }
         .modal-body {
@@ -2552,7 +2552,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 14px;
                 line-height: 21px;
                 letter-spacing: 0.1px;
-                color: #4B4B4B;
+                color: #4b4b4b;
             }
             .listModal {
                 li {
@@ -2561,9 +2561,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     font-size: 14px;
                     line-height: 21px;
                     letter-spacing: 0.1px;
-                    color: #4B4B4B;
+                    color: #4b4b4b;
                     &::marker {
-                        color: #B50A27;
+                        color: #b50a27;
                     }
                 }
             }
@@ -2573,7 +2573,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 14px;
                 line-height: 21px;
                 letter-spacing: 0.1px;
-                color: #B50A27;
+                color: #b50a27;
             }
         }
     }
@@ -2586,13 +2586,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             display: flex;
             align-items: center;
             padding-bottom: 1rem;
-            border-bottom: 1px solid #E4E5E7;
-            background: #1EAEA5;
+            border-bottom: 1px solid #e4e5e7;
+            background: #1eaea5;
             border-radius: 10px 10px 0 0;
             color: #ffffff;
         }
         .titleMod {
-            color: #FFFFFF !important;
+            color: #ffffff !important;
         }
         .titleModal {
             font-family: Montserrat;
@@ -2600,7 +2600,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 16px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .subtitleMod {
             font-family: Montserrat;
@@ -2608,7 +2608,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 16px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            border-bottom: 1px solid #E4E5E7;
+            border-bottom: 1px solid #e4e5e7;
             color: #506370;
             margin: 45px 0;
             text-align: center;
@@ -2629,7 +2629,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         max-width: 100% !important;
         .modal-content {
             .headerRojo {
-                background: #B50A27;
+                background: #b50a27;
                 height: 70px;
                 min-height: 70px;
                 width: 100%;
@@ -2643,7 +2643,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 align-items: center;
                 justify-content: space-between;
                 padding: 0 55px;
-                background: #FFFFFF;
+                background: #ffffff;
                 box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
                 height: 128px;
                 min-height: 128px;
@@ -2651,7 +2651,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-weight: bold;
                 font-size: 32px;
                 line-height: 48px;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 .btnModal {
                     display: flex;
                     align-items: center;
@@ -2663,15 +2663,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     font-size: 14px;
                     line-height: 21px;
                     letter-spacing: 0.1px;
-                    color: #DF0C30;
-                    border: 1px solid #DF0C30;
+                    color: #df0c30;
+                    border: 1px solid #df0c30;
                     box-sizing: border-box;
                     border-radius: 3px;
                     padding: 0 10px;
                     cursor: pointer;
                     transition: 0.3s;
                     &:hover {
-                        background: #DF0C30;
+                        background: #df0c30;
                         color: #ffffff;
                     }
                 }
@@ -2685,7 +2685,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 24px;
                 line-height: 36px;
                 padding-bottom: 30px;
-                color: #4B4B4B;
+                color: #4b4b4b;
             }
             .linkRed {
                 font-family: Montserrat;
@@ -2694,7 +2694,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 line-height: 21px;
                 letter-spacing: 0.1px;
                 padding-bottom: 10px;
-                color: #B50A27;
+                color: #b50a27;
             }
             .subtitleModal {
                 font-family: Montserrat;
@@ -2735,7 +2735,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .modal-content {
         .modal-body {
             padding: 0;
-            background: #E5E5E5;
+            background: #e5e5e5;
             .contentModal {
                 padding: 55px;
                 background: #ffffff;
@@ -2749,7 +2749,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
             }
             .contentModBox {
-                border: 0.5px solid #E4E5E7;
+                border: 0.5px solid #e4e5e7;
                 margin: 55px;
                 border-radius: 10px;
                 background: #ffffff;
@@ -2762,8 +2762,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     font-weight: bold;
                     font-size: 24px;
                     line-height: 36px;
-                    color: #FFFFFF;
-                    background: #1EAEA5;
+                    color: #ffffff;
+                    background: #1eaea5;
                     height: 60px;
                 }
                 .listModal {
@@ -2782,7 +2782,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     line-height: 21px;
                     letter-spacing: 0.1px;
                     padding-left: 45px;
-                    color: #4B4B4B;
+                    color: #4b4b4b;
                 }
                 .tablaModal {
                     padding: 0 150px;
@@ -2808,9 +2808,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 line-height: 21px;
                 text-align: justify;
                 letter-spacing: 0.1px;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 height: 60px;
-                border: 1px solid #DF0C30;
+                border: 1px solid #df0c30;
                 box-sizing: border-box;
                 border-radius: 10px;
             }
@@ -2838,9 +2838,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         height: 0;
         flex: auto;
     }
-    .portletFiltro .rowFiltro .columnFiltro input[type=text] {
+    .portletFiltro .rowFiltro .columnFiltro input[type="text"] {
         padding-bottom: 0 !important;
-        border: 0.5px solid #E4E5E7;
+        border: 0.5px solid #e4e5e7;
     }
     .columnButton {
         display: flex;
@@ -2886,7 +2886,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-family: Open Sans;
         font-weight: bold;
         font-size: 22px;
-        color: #4B4B4B;
+        color: #4b4b4b;
     }
     .boxVuelos {
         .content {
@@ -2897,7 +2897,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             display: flex;
             justify-content: center;
             .boxDescrip {
-                background: #F7F7F7;
+                background: #f7f7f7;
                 box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
                 border-radius: 5px;
                 width: 320px;
@@ -2908,11 +2908,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 14px;
                 line-height: 21px;
                 letter-spacing: 0.1px;
-                color: #009AED;
+                color: #009aed;
             }
         }
         .boxFooter {
-            background: #F7F7F7;
+            background: #f7f7f7;
             border-radius: 5px;
             width: 100%;
             padding: 20px;
@@ -2921,7 +2921,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 12px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             margin-bottom: 30px;
             z-index: 1;
             .title {
@@ -2941,14 +2941,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-weight: bold;
             font-size: 22px;
             line-height: 36px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .subtitle {
             font-family: Montserrat;
             font-weight: 500;
             font-size: 16px;
             letter-spacing: 0.15px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             display: flex;
             gap: 10px;
             padding-bottom: 30px;
@@ -2956,7 +2956,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .column {
             flex: 1 1 100%;
             &.alignRight {
-                border-right: 2px dashed #8FD0F3;
+                border-right: 2px dashed #8fd0f3;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-end;
@@ -2982,15 +2982,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     font-size: 14px;
                     line-height: 21px;
                     letter-spacing: 0.1px;
-                    color: #4B4B4B;
+                    color: #4b4b4b;
                     &.blue {
-                        color: #009AED;
+                        color: #009aed;
                     }
                     &.red {
-                        color: #DF0C30;
+                        color: #df0c30;
                     }
                     &.borde {
-                        color: #009AED;
+                        color: #009aed;
                         font-weight: 600;
                         background-color: rgba(143, 208, 243, 0.2);
                         border-radius: 5px;
@@ -3030,7 +3030,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-weight: 500;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #4B4B4B !important;
+    color: #4b4b4b !important;
 }
 
 #ModalCoverageI,
@@ -3038,17 +3038,17 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .modal-dialog {
         min-width: 60% !important;
         @media (max-width: 640px) {
-            width: calc(100% - 15px)!important;
+            width: calc(100% - 15px) !important;
         }
     }
     .modal-header {
-        background: #54D834;
+        background: #54d834;
         .modal-title {
-            font-family: 'Open Sans';
+            font-family: "Open Sans";
             font-weight: 700;
             font-size: 24px;
             line-height: 36px;
-            color: #FFFFFF;
+            color: #ffffff;
             @media (max-width: 640px) {
                 font-size: 18px;
             }
@@ -3093,7 +3093,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 18px;
         line-height: 27px;
         letter-spacing: 0.18px;
-        color: #4B4B4B;
+        color: #4b4b4b;
     }
     .boxPlanes {
         margin-bottom: 30px;
@@ -3101,40 +3101,40 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         justify-content: space-between;
         .cardPlan {
             width: 22%;
-            border: 1px solid #83898F;
+            border: 1px solid #83898f;
             box-sizing: border-box;
             border-radius: 5px;
             padding: 0px 12px 10px 12px;
             &.green {
                 .title {
-                    background: #54D834;
+                    background: #54d834;
                 }
                 &:hover {
-                    border: 1px solid #54D834;
+                    border: 1px solid #54d834;
                 }
             }
             &.orange {
                 .title {
-                    background: #F29704;
+                    background: #f29704;
                 }
                 &:hover {
-                    border: 1px solid #F29704;
+                    border: 1px solid #f29704;
                 }
             }
             &.blue {
                 .title {
-                    background: #009AED;
+                    background: #009aed;
                 }
                 &:hover {
-                    border: 1px solid #009AED;
+                    border: 1px solid #009aed;
                 }
             }
             &.red {
                 .title {
-                    background: #B50A27;
+                    background: #b50a27;
                 }
                 &:hover {
-                    border: 1px solid #B50A27;
+                    border: 1px solid #b50a27;
                 }
             }
             &:hover {
@@ -3146,20 +3146,20 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-weight: 500;
                 font-size: 16px;
                 letter-spacing: 0.15px;
-                color: #FFFFFF;
+                color: #ffffff;
                 height: 39px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background: #4B4B4B;
+                background: #4b4b4b;
             }
             .precio {
-                background: #EBEBEB;
+                background: #ebebeb;
                 font-family: Montserrat;
                 font-weight: 500;
                 font-size: 12px;
                 letter-spacing: 0.15px;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 height: 75px;
                 display: flex;
                 justify-content: center;
@@ -3177,13 +3177,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-weight: 600;
                 font-size: 12px;
                 letter-spacing: 0.1px;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 padding: 15px;
                 position: relative;
                 .lineT {
                     width: 60px;
                     height: 0.5px;
-                    background: #83898F;
+                    background: #83898f;
                     position: absolute;
                     bottom: 12px;
                 }
@@ -3194,7 +3194,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-weight: 500;
                 font-size: 12px;
                 letter-spacing: 0.1px;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 display: flex;
                 align-items: center;
                 gap: 10px;
@@ -3221,7 +3221,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 18px;
             line-height: 27px;
             letter-spacing: 0.18px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .descrip {
             font-family: Montserrat;
@@ -3230,7 +3230,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             line-height: 15px;
             text-align: center;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .simbolo {
             font-family: Montserrat;
@@ -3238,7 +3238,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 14px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .precio {
             font-family: Montserrat;
@@ -3246,7 +3246,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 24px;
             line-height: 24px;
             letter-spacing: 0.15px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
     }
 }
@@ -3271,7 +3271,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             line-height: 36px;
             display: flex;
             align-items: center;
-            color: #FFFFFF;
+            color: #ffffff;
         }
         .modal-subtitle {
             font-family: Open Sans;
@@ -3279,7 +3279,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             line-height: 36px;
             display: flex;
             align-items: center;
-            color: #FFFFFF;
+            color: #ffffff;
         }
     }
     .contentRow {
@@ -3322,7 +3322,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     margin: 10px;
                     background: #ffffff;
                     padding: 42px;
-                    border: 1px solid #E4E5E7;
+                    border: 1px solid #e4e5e7;
                     box-sizing: border-box;
                     border-radius: 10px;
                     flex-direction: column;
@@ -3331,8 +3331,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
                 &.inputCheck {
                     &.activo {
-                        background: #FFFFFF;
-                        border: 1px solid #009AED;
+                        background: #ffffff;
+                        border: 1px solid #009aed;
                         box-sizing: border-box;
                         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
                         border-radius: 10px;
@@ -3346,7 +3346,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                         display: flex;
                         align-items: center;
                         letter-spacing: 0.18px;
-                        color: #4B4B4B;
+                        color: #4b4b4b;
                         background: rgba(235, 235, 235, 0.2);
                         border-radius: 10px;
                         width: 233px;
@@ -3362,14 +3362,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     height: 80px;
                     .number {
                         display: flex;
-                        background: #009AED;
+                        background: #009aed;
                         width: 40px;
                         height: 40px;
                         border-radius: 20px;
                         color: #ffffff;
                         align-items: center;
                         justify-content: center;
-                        font-family: 'Open Sans';
+                        font-family: "Open Sans";
                         font-weight: bold;
                         font-size: 18px;
                         line-height: 27px;
@@ -3383,10 +3383,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     align-items: center;
                     text-align: center;
                     letter-spacing: 0.18px;
-                    color: #4B4B4B;
+                    color: #4b4b4b;
                     flex-direction: column;
                 }
-                input[type=radio] {
+                input[type="radio"] {
                     display: flex !important;
                     position: absolute;
                     left: 50px;
@@ -3434,7 +3434,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 .btnFooter {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-size: 16px;
     margin-top: 20px;
     font-weight: 600;
@@ -3460,20 +3460,20 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 .accordion-body {
-    border-bottom: 1px solid #E4E5E7;
+    border-bottom: 1px solid #e4e5e7;
     .textAcor {
         font-family: Montserrat;
         font-size: 14px;
         line-height: 21px;
         letter-spacing: 0.1px;
-        color: #83898F;
+        color: #83898f;
     }
     .text-end {
         font-family: Montserrat;
         font-size: 14px;
         line-height: 21px;
         letter-spacing: 0.1px;
-        color: #83898F;
+        color: #83898f;
     }
     .price_old {
         text-decoration: line-through red;
@@ -3487,7 +3487,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 14px;
         line-height: 21px;
         letter-spacing: 0.1px;
-        color: #009AED;
+        color: #009aed;
     }
     .row {
         height: 32px;
@@ -3504,7 +3504,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-family: Montserrat;
         font-size: 16px;
         line-height: 18px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         img {
             margin-right: 10px;
         }
@@ -3530,8 +3530,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .boxOferta {
     display: flex;
     flex-direction: column;
-    background: #FFFFFF;
-    border: 0.5px solid #E4E5E7;
+    background: #ffffff;
+    border: 0.5px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 10px;
     .ofertaRow {
@@ -3564,7 +3564,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     font-size: 30px;
                     line-height: 36px;
                     height: 45px;
-                    background: #DF0C30;
+                    background: #df0c30;
                     border-radius: 5px 0px 0px 5px;
                     display: flex;
                     align-items: center;
@@ -3579,7 +3579,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
                 .line {
                     position: absolute;
-                    background: #DF0C30;
+                    background: #df0c30;
                     height: 2px;
                     width: 70px;
                     top: 8px;
@@ -3607,7 +3607,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-weight: bold;
             font-size: 28px;
             line-height: 36px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         &.descrip {
             font-family: Montserrat;
@@ -3615,7 +3615,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 14px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #1EAEA5;
+            color: #1eaea5;
         }
         .iconOferta {
             margin: 0 5px;
@@ -3650,13 +3650,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         height: 40px;
         padding: 0;
         text-align: center;
-        border: 0.5px solid #E4E5E7;
+        border: 0.5px solid #e4e5e7;
     }
 }
 
 .boxFlotante {
     width: 330px;
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
     position: absolute;
@@ -3683,7 +3683,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             border-bottom: none;
         }
         .btnPasajero {
-            border-top: 0.5px solid #E4E5E7;
+            border-top: 0.5px solid #e4e5e7;
             margin: 10px 0 0 0;
         }
     }
@@ -3708,7 +3708,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-family: Montserrat;
             font-weight: normal;
             font-size: 12px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             height: 29px;
             padding: 0;
             margin: 0;
@@ -3729,7 +3729,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
     }
     .boxTwoPasajero {
-        border-bottom: 0.5px solid #E4E5E7;
+        border-bottom: 0.5px solid #e4e5e7;
         padding: 15px 20px !important;
         .groupItem {
             display: flex;
@@ -3751,7 +3751,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 transition: 0.3s all;
                 border-radius: 3px;
                 &:hover {
-                    background: #E4E5E7;
+                    background: #e4e5e7;
                 }
             }
             .boxNumber {
@@ -3760,7 +3760,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 align-items: center;
                 margin-right: 10px;
                 .numberItem {
-                    background: #DF0C30;
+                    background: #df0c30;
                     width: 20px;
                     height: 20px;
                     display: flex;
@@ -3783,7 +3783,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     transition: 0.3s all;
                     cursor: pointer;
                     &:hover {
-                        background: #DF0C30;
+                        background: #df0c30;
                     }
                     &.inactive {
                         display: none;
@@ -3801,7 +3801,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     width: 100px;
                 }
                 .inputEdad {
-                    border: 0.5px solid #E4E5E7;
+                    border: 0.5px solid #e4e5e7;
                     border-radius: 3px;
                     width: 100%;
                     text-align: center;
@@ -3812,7 +3812,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     font-weight: 500;
                     line-height: 18px;
                     letter-spacing: 0.4px;
-                    color: #4B4B4B;
+                    color: #4b4b4b;
                 }
             }
         }
@@ -3828,7 +3828,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-weight: 500;
             line-height: 18px;
             letter-spacing: 0.4px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .text2 {
             font-family: Montserrat;
@@ -3836,7 +3836,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 10px;
             line-height: 15px;
             letter-spacing: 0.25px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .number {
             display: flex;
@@ -3845,12 +3845,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             gap: 5px;
             .btnNWhite {
                 display: flex;
-                border: 0.5px solid #DF0C30;
+                border: 0.5px solid #df0c30;
                 box-sizing: border-box;
                 border-radius: 3px;
                 font-weight: 600;
                 font-size: 14px;
-                color: #83898F;
+                color: #83898f;
                 width: 28px;
                 min-width: 28px;
                 height: 28px;
@@ -3859,8 +3859,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 cursor: pointer;
                 transition: all 0.3s;
                 &:hover {
-                    background: #DF0C30;
-                    color: #FFFFFF;
+                    background: #df0c30;
+                    color: #ffffff;
                 }
             }
             .textBtn {
@@ -3868,7 +3868,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 12px;
                 line-height: 24px;
                 letter-spacing: 0.5px;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 width: 28px;
                 height: 28px;
                 align-items: center;
@@ -3883,17 +3883,17 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-weight: 600;
             font-size: 12px;
             &:hover {
-                background: #B50A27;
+                background: #b50a27;
             }
             &.gray {
-                background: #EBEBEB;
-                color: #4B4B4B;
+                background: #ebebeb;
+                color: #4b4b4b;
                 &:hover {
-                    background: #CFD1D3;
+                    background: #cfd1d3;
                 }
             }
             &.green {
-                background: #54D834;
+                background: #54d834;
                 color: #ffffff;
                 &:hover {
                     background: #3eb322;
@@ -3906,12 +3906,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-weight: 600;
             font-size: 12px;
             letter-spacing: 0.1px;
-            color: #009AED;
+            color: #009aed;
             &:hover {
                 background: transparent;
             }
             &:disabled {
-                color: $gray
+                color: $gray;
             }
         }
     }
@@ -3929,13 +3929,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-weight: 700;
     }
     .red {
-        color: #DF0C30;
+        color: #df0c30;
     }
     &.red {
         font-weight: bold;
         font-size: 24px;
         line-height: 36px;
-        color: #DF0C30;
+        color: #df0c30;
         margin-bottom: 20px;
     }
 }
@@ -4008,13 +4008,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             &.w-30 {
                 width: 30%;
                 @media (max-width: 768px) {
-                    width: 100%
+                    width: 100%;
                 }
             }
             &.w-10 {
                 width: 10%;
                 @media (max-width: 768px) {
-                    width: 100%
+                    width: 100%;
                 }
             }
             &.w-15 {
@@ -4057,7 +4057,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     }
                     .d-left {
                         border-radius: 3px;
-                        border: 0.5px solid #E4E5E7;
+                        border: 0.5px solid #e4e5e7;
                     }
                     .form-check-input {
                         width: 24px;
@@ -4076,15 +4076,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             .d {
                 &-left {
                     border-radius: 3px 0 0 3px;
-                    border: 0.5px solid #E4E5E7;
+                    border: 0.5px solid #e4e5e7;
                     border-right: 0px;
                     @media (max-width: 640px) {
-                        border-right: 0.5px solid #E4E5E7;
+                        border-right: 0.5px solid #e4e5e7;
                     }
                 }
                 &-right {
                     border-radius: 0 3px 3px 0;
-                    border: 0.5px solid #E4E5E7;
+                    border: 0.5px solid #e4e5e7;
                 }
             }
             @include desktop {
@@ -4098,9 +4098,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-family: Montserrat;
                 font-size: 16px;
                 text-transform: capitalize;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 text-indent: 40px;
-                border: 0.5px solid #E4E5E7;
+                border: 0.5px solid #e4e5e7;
                 border-radius: 3px;
                 &.icono {
                     text-indent: 40px;
@@ -4174,7 +4174,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                             height: 80px;
                         }
                     }
-                    input[type=radio] {
+                    input[type="radio"] {
                         left: 15px;
                         top: 32px;
                     }
@@ -4202,8 +4202,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .viewMobileWidth {
         width: 100% !important;
         .form-check {
-            display: flex!important;
-            align-items: center!important;
+            display: flex !important;
+            align-items: center !important;
             margin-bottom: 10px;
         }
     }
@@ -4370,8 +4370,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 border-bottom: none;
             }
             .card-body {
-                background: #FFFFFF;
-                border: 0.5px solid #E4E5E7;
+                background: #ffffff;
+                border: 0.5px solid #e4e5e7;
                 box-sizing: border-box;
                 border-radius: 10px;
                 margin-bottom: 10px;
@@ -4387,7 +4387,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .agregarAdultoPas {
         display: flex !important;
-        background: #F21037;
+        background: #f21037;
         border-radius: 5px;
         justify-content: space-between;
         align-items: center;
@@ -4398,14 +4398,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             display: flex;
             align-items: center;
             letter-spacing: 0.1px;
-            color: #FFFFFF;
+            color: #ffffff;
             padding: 10px 10px;
         }
     }
     .atribCard {
         padding: 18px;
-        background: #FFFFFF;
-        border: 0.5px solid #E4E5E7;
+        background: #ffffff;
+        border: 0.5px solid #e4e5e7;
         box-sizing: border-box;
         border-radius: 10px;
     }
@@ -4502,7 +4502,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 12px;
         line-height: 18px;
         letter-spacing: 0.5px;
-        color: #DF0C30;
+        color: #df0c30;
     }
     .card.padCard {
         padding: 10px 25px !important;
@@ -4523,7 +4523,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
         .boxFlotante {
             width: 330px;
-            background: #FFFFFF;
+            background: #ffffff;
             box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
             border-radius: 5px;
             position: absolute;
@@ -4550,7 +4550,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     border-bottom: none;
                 }
                 .btnPasajero {
-                    border-top: 0.5px solid #E4E5E7;
+                    border-top: 0.5px solid #e4e5e7;
                     margin: 10px 0 0 0;
                 }
             }
@@ -4575,7 +4575,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     font-family: Montserrat;
                     font-weight: normal;
                     font-size: 12px;
-                    color: #4B4B4B;
+                    color: #4b4b4b;
                     height: 29px;
                     padding: 0;
                     margin: 0;
@@ -4596,7 +4596,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 }
             }
             .boxTwoPasajero {
-                border-bottom: 0.5px solid #E4E5E7;
+                border-bottom: 0.5px solid #e4e5e7;
                 padding: 15px 20px !important;
                 .groupItem {
                     display: flex;
@@ -4618,7 +4618,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                         transition: 0.3s all;
                         border-radius: 3px;
                         &:hover {
-                            background: #E4E5E7;
+                            background: #e4e5e7;
                         }
                     }
                     .boxNumber {
@@ -4627,7 +4627,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                         align-items: center;
                         margin-right: 10px;
                         .numberItem {
-                            background: #DF0C30;
+                            background: #df0c30;
                             width: 20px;
                             height: 20px;
                             display: flex;
@@ -4650,7 +4650,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                             transition: 0.3s all;
                             cursor: pointer;
                             &:hover {
-                                background: #DF0C30;
+                                background: #df0c30;
                             }
                             &.inactive {
                                 display: none;
@@ -4668,7 +4668,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                             width: 100px;
                         }
                         .inputEdad {
-                            border: 0.5px solid #E4E5E7;
+                            border: 0.5px solid #e4e5e7;
                             border-radius: 3px;
                             width: 100%;
                             text-align: center;
@@ -4679,7 +4679,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                             font-weight: 500;
                             line-height: 18px;
                             letter-spacing: 0.4px;
-                            color: #4B4B4B;
+                            color: #4b4b4b;
                         }
                     }
                 }
@@ -4696,7 +4696,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     font-weight: 500;
                     line-height: 18px;
                     letter-spacing: 0.4px;
-                    color: #4B4B4B;
+                    color: #4b4b4b;
                 }
                 .text2 {
                     font-family: Montserrat;
@@ -4704,7 +4704,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     font-size: 10px;
                     line-height: 15px;
                     letter-spacing: 0.25px;
-                    color: #4B4B4B;
+                    color: #4b4b4b;
                 }
                 .number {
                     display: flex;
@@ -4713,12 +4713,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     gap: 5px;
                     .btnNWhite {
                         display: flex;
-                        border: 0.5px solid #DF0C30;
+                        border: 0.5px solid #df0c30;
                         box-sizing: border-box;
                         border-radius: 3px;
                         font-weight: 600;
                         font-size: 14px;
-                        color: #83898F;
+                        color: #83898f;
                         width: 28px;
                         min-width: 28px;
                         height: 28px;
@@ -4727,8 +4727,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                         cursor: pointer;
                         transition: all 0.3s;
                         &:hover {
-                            background: #DF0C30;
-                            color: #FFFFFF;
+                            background: #df0c30;
+                            color: #ffffff;
                         }
                     }
                     .textBtn {
@@ -4736,7 +4736,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                         font-size: 12px;
                         line-height: 24px;
                         letter-spacing: 0.5px;
-                        color: #4B4B4B;
+                        color: #4b4b4b;
                         width: 28px;
                         height: 28px;
                         align-items: center;
@@ -4751,17 +4751,17 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     font-weight: 600;
                     font-size: 12px;
                     &:hover {
-                        background: #B50A27;
+                        background: #b50a27;
                     }
                     &.gray {
-                        background: #EBEBEB;
-                        color: #4B4B4B;
+                        background: #ebebeb;
+                        color: #4b4b4b;
                         &:hover {
-                            background: #CFD1D3;
+                            background: #cfd1d3;
                         }
                     }
                     &.green {
-                        background: #54D834;
+                        background: #54d834;
                         color: #ffffff;
                         &:hover {
                             background: #3eb322;
@@ -4774,12 +4774,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     font-weight: 600;
                     font-size: 12px;
                     letter-spacing: 0.1px;
-                    color: #009AED;
+                    color: #009aed;
                     &:hover {
                         background: transparent;
                     }
                     &:disabled {
-                        color: $gray
+                        color: $gray;
                     }
                 }
             }
@@ -4801,7 +4801,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 12px;
             line-height: 18px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .subtitle {
             font-style: normal;
@@ -4809,7 +4809,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 12px;
             line-height: 18px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
     }
     .edad {
@@ -4821,14 +4821,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-weight: bold;
             font-size: 20px;
             line-height: 36px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .descrip {
             font-family: Montserrat;
             font-size: 12px;
             line-height: 18px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .btnDetalles {
             font-family: Montserrat;
@@ -4836,8 +4836,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             line-height: 18px;
             text-align: center;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
-            background: #F7F7F7;
+            color: #4b4b4b;
+            background: #f7f7f7;
             border-radius: 5px;
             cursor: pointer;
             padding: 0px 20px;
@@ -4857,7 +4857,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             display: flex;
             align-items: center;
             letter-spacing: 0.15px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         label {
             font-size: 12px;
@@ -4865,12 +4865,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             display: flex;
             align-items: center;
             letter-spacing: 0.4px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             padding-bottom: 0;
             font-weight: normal;
         }
         .flex-row {
-            border-bottom: 1px solid #E4E5E7;
+            border-bottom: 1px solid #e4e5e7;
             &:first-child {
                 padding: 1rem 0 !important;
             }
@@ -4903,7 +4903,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .boxModalDetalle {
         .header {
-            border-bottom: 1px solid #E4E5E7;
+            border-bottom: 1px solid #e4e5e7;
             margin-bottom: 10px;
             font-family: Montserrat;
             font-style: normal;
@@ -4921,7 +4921,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 30px;
                 line-height: 36px;
                 text-align: center;
-                color: #4B4B4B;
+                color: #4b4b4b;
             }
             span {
                 font-family: Montserrat;
@@ -4929,7 +4929,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 12px;
                 line-height: 15px;
                 letter-spacing: 0.1px;
-                color: #4B4B4B;
+                color: #4b4b4b;
             }
         }
         .descrip span {
@@ -4945,7 +4945,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 12px;
             line-height: 18px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .priceMont {
             font-family: Montserrat;
@@ -4953,7 +4953,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 25px;
             line-height: 18px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
     }
     #modalConveniente,
@@ -4964,14 +4964,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     #modalViajes {
         .header {
-            border-bottom: 1px solid #E4E5E7;
+            border-bottom: 1px solid #e4e5e7;
             .title {
                 font-family: Montserrat;
                 font-weight: 600;
                 font-size: 14px;
                 line-height: 24px;
                 letter-spacing: 0.15px;
-                color: #4B4B4B;
+                color: #4b4b4b;
             }
         }
         .modal-body {
@@ -4988,7 +4988,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 14px;
                 line-height: 24px;
                 letter-spacing: 0.15px;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 padding-left: 30px;
             }
             .agregaTramo {
@@ -5004,8 +5004,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 width: 110px;
             }
             .btnTipoViaje {
-                background: #FFFFFF;
-                border: 1px solid #E4E5E7;
+                background: #ffffff;
+                border: 1px solid #e4e5e7;
                 box-sizing: border-box;
                 border-radius: 5px;
                 font-family: Montserrat;
@@ -5015,12 +5015,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 align-items: center;
                 letter-spacing: 0.5px;
                 text-transform: capitalize;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 cursor: pointer;
                 transition: all 0.3s;
                 padding: 0 15px;
                 &:hover {
-                    background: #F7F7F7;
+                    background: #f7f7f7;
                 }
             }
             .contentViaje {
@@ -5037,7 +5037,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     }
                 }
                 .btnConfirm {
-                    background: #DF0C30;
+                    background: #df0c30;
                     border-radius: 3px;
                     width: 80%;
                     font-family: Montserrat;
@@ -5046,7 +5046,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     line-height: 18px;
                     letter-spacing: 0.5px;
                     height: 35px;
-                    color: #FFFFFF;
+                    color: #ffffff;
                     cursor: pointer;
                     margin-bottom: 15px;
                 }
@@ -5055,7 +5055,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     #modalTwoPasajero {
         .header {
-            border-bottom: 0.5px solid #E4E5E7;
+            border-bottom: 0.5px solid #e4e5e7;
         }
         .modal-body {
             padding: 0 20px;
@@ -5066,10 +5066,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 14px;
             line-height: 24px;
             letter-spacing: 0.15px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .boxTwoPasajero {
-            border-bottom: 0.5px solid #E4E5E7;
+            border-bottom: 0.5px solid #e4e5e7;
             .iconTwo {
                 width: 40px;
             }
@@ -5078,7 +5078,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 13px;
                 line-height: 18px;
                 letter-spacing: 0.4px;
-                color: #4B4B4B;
+                color: #4b4b4b;
             }
             .text2 {
                 font-family: Montserrat;
@@ -5086,18 +5086,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 10px;
                 line-height: 15px;
                 letter-spacing: 0.25px;
-                color: #4B4B4B;
+                color: #4b4b4b;
             }
             .number {
                 font-family: Montserrat;
                 gap: 10px;
                 .btnNWhite {
-                    border: 0.5px solid #DF0C30;
+                    border: 0.5px solid #df0c30;
                     box-sizing: border-box;
                     border-radius: 3px;
                     font-weight: 600;
                     font-size: 14px;
-                    color: #83898F;
+                    color: #83898f;
                     width: 22.5px;
                     height: 22.5px;
                     align-items: center;
@@ -5108,18 +5108,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     font-size: 12px;
                     line-height: 24px;
                     letter-spacing: 0.5px;
-                    color: #4B4B4B;
+                    color: #4b4b4b;
                     width: 22.5px;
                     height: 22.5px;
                     align-items: center;
                     justify-content: center;
                 }
                 .btnNRed {
-                    background: #DF0C30;
+                    background: #df0c30;
                     border-radius: 3px;
                     font-weight: 600;
                     font-size: 14px;
-                    color: #FFFFFF;
+                    color: #ffffff;
                     width: 22.5px;
                     height: 22.5px;
                     align-items: center;
@@ -5147,7 +5147,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             line-height: 24px;
             align-items: center;
             letter-spacing: 0.15px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .btnFiltro {
             border: 1px solid #506370;
@@ -5308,14 +5308,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         align-items: center;
         font-family: Montserrat;
         height: 53px;
-        border-bottom: 1px solid #CFD1D3;
+        border-bottom: 1px solid #cfd1d3;
         transition: all 0.3s;
         cursor: pointer;
         &:first-child {
-            border-top: 1px solid #CFD1D3;
+            border-top: 1px solid #cfd1d3;
         }
         &:hover {
-            background: #FFFFFF;
+            background: #ffffff;
             filter: drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.15));
         }
         .lugar {
@@ -5323,7 +5323,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 14px;
             line-height: 24px;
             letter-spacing: 0.15px;
-            color: #34495E;
+            color: #34495e;
             padding-left: 45px;
             width: 100%;
         }
@@ -5332,7 +5332,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 14px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #34495E;
+            color: #34495e;
             width: 80px;
         }
         .precio {
@@ -5340,7 +5340,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 16px;
             line-height: 24px;
             letter-spacing: 0.15px;
-            color: #34495E;
+            color: #34495e;
             width: 100px;
         }
         .btnCircle {
@@ -5399,7 +5399,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     height: 550px;
     margin-top: -60px;
     background-image: url("./assets/vuelos/footer-vuelos.png");
-    background-color: #DF0C30;
+    background-color: #df0c30;
     background-repeat: no-repeat;
     background-position: center;
     .mnuViaja {
@@ -5420,18 +5420,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 16px;
             line-height: 24px;
             letter-spacing: 0.15px;
-            color: #FFFFFF;
+            color: #ffffff;
             cursor: pointer;
             height: 42px;
             padding: 0 15px; // width: max-content;
             transition: all 0.5s;
             margin-bottom: 10px;
             &:hover {
-                background: #F7F7F7;
+                background: #f7f7f7;
                 border-radius: 20px;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 svg {
-                    fill: #4B4B4B;
+                    fill: #4b4b4b;
                 }
             }
             svg {
@@ -5447,8 +5447,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     align-items: center;
     justify-content: space-between;
     padding: 0 25px;
-    background: #FFFFFF;
-    border: 1px solid #E4E5E7;
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
     box-sizing: border-box;
     border-radius: 10px;
     height: 105px;
@@ -5460,7 +5460,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         justify-content: center;
         border-radius: 50%;
         box-sizing: border-box;
-        border: 1px solid #DF0C30;
+        border: 1px solid #df0c30;
         cursor: pointer;
     }
     .contentSliderImg {
@@ -5481,7 +5481,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         a {
             cursor: pointer;
             img {
-                max-height: 30px
+                max-height: 30px;
             }
         }
     }
@@ -5571,7 +5571,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             height: 30px;
             min-height: 30px;
             border-radius: 15px;
-            background: #DF0C30;
+            background: #df0c30;
         }
     }
 }
@@ -5598,8 +5598,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 .rowVuelo {
                     width: calc(33% - 35px);
                     cursor: pointer !important;
-                    border-bottom: 1px solid #CFD1D3;
-                    border-top: 1px solid #CFD1D3;
+                    border-bottom: 1px solid #cfd1d3;
+                    border-top: 1px solid #cfd1d3;
                     min-height: 53px;
                     height: auto;
                     @media (max-width: 640px) {
@@ -5658,7 +5658,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 18px;
             line-height: 27px;
             letter-spacing: 0.18px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             margin-right: 20px;
             svg {
                 margin-right: 10px;
@@ -5677,7 +5677,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 16px;
         line-height: 24px;
         letter-spacing: 0.15px;
-        border-bottom: 1px solid #CFD1D3;
+        border-bottom: 1px solid #cfd1d3;
         transition: all 0.3s;
         &.bold {
             font-weight: bold;
@@ -5695,12 +5695,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-weight: bold;
             font-size: 24px;
             line-height: 36px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .btnBuscar {
             display: flex;
             align-items: center;
-            background: #DF0C30;
+            background: #df0c30;
             border-radius: 3px;
             cursor: pointer;
             height: 43px;
@@ -5708,7 +5708,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 0 15px;
             transition: all 0.3ms;
             &:hover {
-                background: #B50A27;
+                background: #b50a27;
             }
         }
     }
@@ -5720,7 +5720,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             font-size: 14px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             margin: 0 20px 0 60px;
         }
         .masOfertas {
@@ -5735,7 +5735,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 24px;
         line-height: 36px;
         margin-top: 20px;
-        color: #4B4B4B;
+        color: #4b4b4b;
     }
     .subtitulo {
         display: flex;
@@ -5743,12 +5743,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-family: Open Sans;
         font-size: 20px;
         line-height: 36px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         margin-bottom: 50px;
     }
     .boxSearchHotel {
         width: 100%;
-        background: #DF0C30;
+        background: #df0c30;
         padding: 60px 50px;
         margin-bottom: 50px;
         @media (max-width: 768px) {
@@ -5771,7 +5771,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         line-height: 36px;
         display: flex;
         align-items: center;
-        color: #4B4B4B;
+        color: #4b4b4b;
         width: 100%;
     }
     .question {
@@ -5783,7 +5783,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         display: flex;
         align-items: center;
         letter-spacing: 0.25px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         padding-bottom: 9px;
         span {
             font-weight: 300;
@@ -5806,7 +5806,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 display: flex;
                 align-items: center;
                 letter-spacing: 0.25px;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 padding-bottom: 9px;
             }
         }
@@ -5852,8 +5852,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 display: flex;
                 align-items: center;
                 width: 100%;
-                background: #FFFFFF;
-                border: 1px solid #E4E5E7;
+                background: #ffffff;
+                border: 1px solid #e4e5e7;
                 box-sizing: border-box;
                 border-radius: 10px 0px;
                 padding: 10px 20px;
@@ -5876,7 +5876,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                         font-size: 10px;
                         line-height: 12px;
                         text-align: center;
-                        color: #4B4B4B;
+                        color: #4b4b4b;
                         margin-top: 10px;
                     }
                 }
@@ -5915,7 +5915,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         line-height: 24px;
         text-align: center;
         letter-spacing: 0.15px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         text-align: center;
         @media (max-width: 640px) {
             font-size: 12px;
@@ -5927,7 +5927,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .boxAbout {
         display: flex;
         width: 100%;
-        background: #B50A27 url('./assets/aerolineas/lineas.png') no-repeat top left;
+        background: #b50a27 url("./assets/aerolineas/lineas.png") no-repeat top left;
         padding: 25px 0;
         margin: 70px 0 0 0;
         .descrip {
@@ -5944,7 +5944,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 16px;
                 line-height: 24px;
                 letter-spacing: 0.5px;
-                color: #FFFFFF;
+                color: #ffffff;
             }
             @media (max-width: 990px) and (min-width: 640px) {
                 padding: 0 30px;
@@ -5959,7 +5959,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 .carousel-control-next {
                     top: 40%;
                     width: 47px;
-                    background: #4B4B4B;
+                    background: #4b4b4b;
                     opacity: 0.5;
                     height: 78px;
                     border-radius: 0;
@@ -5997,8 +5997,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .tabName {
             display: flex;
             align-items: center;
-            background: #F7F7F7;
-            border: 1px solid #E4E5E7;
+            background: #f7f7f7;
+            border: 1px solid #e4e5e7;
             box-sizing: border-box;
             border-radius: 15px;
             font-family: Montserrat;
@@ -6010,11 +6010,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 0 20px;
             cursor: pointer;
             transition: all 0.3s;
-            color: #4B4B4B;
+            color: #4b4b4b;
             &:hover,
             &.active {
-                background: #DF0C30;
-                border: 1px solid #DF0C30;
+                background: #df0c30;
+                border: 1px solid #df0c30;
                 color: #ffffff;
             }
             &:first-child {
@@ -6037,7 +6037,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             margin: 30px 0 0 0;
             flex-direction: column;
             padding: 85px 30px 120px 30px;
-            background: #B50A27 url('./assets/aerolineas/lineas-movil.png') no-repeat top left;
+            background: #b50a27 url("./assets/aerolineas/lineas-movil.png") no-repeat top left;
             .descrip p {
                 font-size: 12px;
                 line-height: 18px;
@@ -6085,7 +6085,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .contentTabMobile {
         display: block;
-        background: #FFFFFF;
+        background: #ffffff;
         box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
         padding: 25px 24px;
         .headerRow {
@@ -6105,7 +6105,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 width: 100%;
                 font-family: Montserrat;
                 font-size: 14px;
-                color: #4B4B4B;
+                color: #4b4b4b;
                 margin-bottom: 5px;
                 margin-top: 10px;
             }
@@ -6143,8 +6143,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         align-items: center;
         width: 310px;
         height: 90px;
-        background: #FFFFFF;
-        border: 1px solid #E4E5E7;
+        background: #ffffff;
+        border: 1px solid #e4e5e7;
         box-sizing: border-box;
         border-radius: 10px 0px;
         padding: 40px;
@@ -6168,7 +6168,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.1px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     margin-bottom: 50px;
 }
 
@@ -6180,8 +6180,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .boxCards {
         //max-width: 426px;
         max-width: 434px;
-        background: #FFFFFF;
-        border: 1px solid #E4E5E7;
+        background: #ffffff;
+        border: 1px solid #e4e5e7;
         box-sizing: border-box;
         border-radius: 10px;
         cursor: pointer;
@@ -6219,7 +6219,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 width: 100%;
             }
             .texto {
-                color: #DF0C30;
+                color: #df0c30;
             }
         }
     }
@@ -6236,7 +6236,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .p-galleria-item {
         height: 340px;
         img {
-            height: 100%
+            height: 100%;
         }
     }
     .cardTitulo {
@@ -6245,7 +6245,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 16px;
         line-height: 21px;
         letter-spacing: 0.15px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         padding: 0px 15px 15px;
     }
     .cardDuracion {
@@ -6253,7 +6253,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 14px;
         line-height: 21px;
         letter-spacing: 0.1px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         padding: 0 25px 15px 25px;
         font-weight: 500;
         display: flex;
@@ -6284,7 +6284,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 14px;
         line-height: 21px;
         letter-spacing: 0.1px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         padding: 0 25px 20px 25px;
         font-weight: 500;
         display: flex;
@@ -6295,7 +6295,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 12px;
         line-height: 18px;
         letter-spacing: 0.1px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         padding: 0 25px 20px 25px;
     }
 }
@@ -6375,11 +6375,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             align-items: center;
             justify-content: center;
             cursor: pointer !important;
-            background-color: #DADADA !important;
+            background-color: #dadada !important;
             margin-bottom: 115px;
             &:hover {
                 background-color: rgba(223, 12, 48, 1) !important;
-                ;
             }
         }
         .p-carousel-prev {
@@ -6488,8 +6487,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         background: #adb5bd;
     }
     .p-galleria .p-galleria-indicators .p-galleria-indicator.p-highlight button {
-        background: #EFF6FF;
-        color: #1D4ED8;
+        background: #eff6ff;
+        color: #1d4ed8;
     }
     .p-galleria.p-galleria-indicators-bottom .p-galleria-indicator,
     .p-galleria.p-galleria-indicators-top .p-galleria-indicator {
@@ -6509,8 +6508,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         background: rgba(255, 255, 255, 0.6);
     }
     .p-galleria.p-galleria-indicator-onitem .p-galleria-indicators .p-galleria-indicator.p-highlight button {
-        background: #EFF6FF;
-        color: #1D4ED8;
+        background: #eff6ff;
+        color: #1d4ed8;
     }
 }
 
@@ -6528,7 +6527,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             align-items: center;
             justify-content: center;
             cursor: pointer !important;
-            background-color: #DADADA !important;
+            background-color: #dadada !important;
             &:hover {
                 background-color: rgba(223, 12, 48, 1) !important;
             }
@@ -6568,8 +6567,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
     .boxCards {
         max-width: 434px;
-        background: #FFFFFF;
-        border: 1px solid #E4E5E7;
+        background: #ffffff;
+        border: 1px solid #e4e5e7;
         box-sizing: border-box;
         border-radius: 10px;
         cursor: pointer;
@@ -6597,10 +6596,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     letter-spacing: 0.1px;
                     padding-left: 15px;
                     padding-bottom: 5px;
-                    color: #FFFFFF;
+                    color: #ffffff;
                     .linea {
                         position: absolute;
-                        background: #DF0C30;
+                        background: #df0c30;
                         height: 2px;
                         bottom: 12px;
                         left: 10px;
@@ -6616,8 +6615,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     line-height: 36px;
                     display: flex;
                     align-items: center;
-                    color: #FFFFFF;
-                    background: #DF0C30;
+                    color: #ffffff;
+                    background: #df0c30;
                     border-radius: 0 5px 5px 0;
                     height: 45px;
                     padding: 0 20px;
@@ -6644,7 +6643,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 width: 100%;
             }
             .texto {
-                color: #DF0C30;
+                color: #df0c30;
             }
         }
     }
@@ -6661,7 +6660,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         border-radius: 11px 11px 0 0;
         overflow: hidden;
         img {
-            height: 100%
+            height: 100%;
         }
     }
     .cardTitulo {
@@ -6669,7 +6668,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-weight: bold;
         font-size: 20px;
         line-height: 36px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         padding: 0px 15px;
     }
     .cardStar {
@@ -6733,7 +6732,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 14px;
         line-height: 21px;
         letter-spacing: 0.1px;
-        color: #1EAEA5;
+        color: #1eaea5;
         padding: 0 25px 20px 25px;
     }
     .cardEvaluacion {
@@ -6811,7 +6810,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-weight: bold;
         font-size: 24px;
         line-height: 36px;
-        color: #4B4B4B;
+        color: #4b4b4b;
     }
     .carSubtitulo {
         display: flex;
@@ -6820,7 +6819,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-family: Open Sans;
         font-size: 20px;
         line-height: 36px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         margin-bottom: 50px;
     }
     .contentCompany {
@@ -6851,7 +6850,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 .btnReservar {
                     display: flex;
                     align-items: center;
-                    background: #DF0C30;
+                    background: #df0c30;
                     border-radius: 3px;
                     color: #ffffff;
                     padding: 0 40px;
@@ -6859,7 +6858,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     cursor: pointer;
                     transition: all 0.3s;
                     &:hover {
-                        background: #B50A27;
+                        background: #b50a27;
                     }
                 }
             }
@@ -6908,7 +6907,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         position: relative;
         .mascara {
             position: absolute;
-            background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 44.18%);
+            background: linear-gradient( 90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 44.18%);
             border-radius: 0px 50px 50px 0px;
             top: 0;
             left: 0;
@@ -6926,7 +6925,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 font-size: 18px;
                 line-height: 27px;
                 letter-spacing: 0.18px;
-                color: #FFFFFF;
+                color: #ffffff;
                 svg {
                     margin-left: 10px;
                 }
@@ -6970,15 +6969,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         font-size: 12px;
         line-height: 18px;
         letter-spacing: 0.1px;
-        color: #4B4B4B;
-        border-bottom: 1px solid #E4E5E7;
+        color: #4b4b4b;
+        border-bottom: 1px solid #e4e5e7;
     }
     .nameCity {
         font-family: Open Sans;
         font-weight: bold;
         font-size: 32px;
         line-height: 48px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         margin: 30px 0 30px 20px;
     }
     .opcionTab {
@@ -6989,8 +6988,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .tabName {
             display: flex;
             align-items: center;
-            background: #F7F7F7;
-            border: 1px solid #E4E5E7;
+            background: #f7f7f7;
+            border: 1px solid #e4e5e7;
             box-sizing: border-box;
             border-radius: 5px;
             font-family: Montserrat;
@@ -7002,11 +7001,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding: 0 20px;
             cursor: pointer;
             transition: all 0.3s;
-            color: #4B4B4B;
+            color: #4b4b4b;
             &:hover,
             &.active {
-                background: #DF0C30;
-                border: 1px solid #DF0C30;
+                background: #df0c30;
+                border: 1px solid #df0c30;
                 color: #ffffff;
             }
         }
@@ -7050,7 +7049,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         text-align: justify;
         letter-spacing: 0.15px;
         margin-left: 20px;
-        color: #4B4B4B;
+        color: #4b4b4b;
     }
     @media (max-width: 990px) and (min-width: 640px) {
         flex: 1 1 50%;
@@ -7159,7 +7158,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             line-height: 72px;
             text-align: center;
             letter-spacing: -0.5px;
-            color: #DF0C30;
+            color: #df0c30;
         }
         .aeroDescrip {
             font-family: Open Sans;
@@ -7167,7 +7166,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             line-height: 27px;
             text-align: center;
             letter-spacing: 0.18px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
     }
 }
@@ -7206,7 +7205,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     width: 100%;
     &__current {
         position: relative;
-        border: 1px solid #E4E5E7;
+        border: 1px solid #e4e5e7;
         height: 45px;
         border-radius: 5px;
         font-family: Montserrat;
@@ -7215,7 +7214,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         letter-spacing: 0.25px;
         font-size: 14px;
         overflow: hidden;
-        color: #B9BCBF;
+        color: #b9bcbf;
         cursor: pointer;
         outline: none;
         &:focus {
@@ -7259,7 +7258,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         line-height: 21px;
         letter-spacing: 0.25px;
         font-size: 14px;
-        color: #B9BCBF;
+        color: #b9bcbf;
         display: none;
         width: 100%;
         margin: 0;
@@ -7294,11 +7293,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             padding-left: 12px;
             background: #ffffff;
             font-size: 14px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             &:hover,
             &:focus {
-                color: #4B4B4B;
-                background-color: #EBEBEB;
+                color: #4b4b4b;
+                background-color: #ebebeb;
             }
         }
         li {
@@ -7325,7 +7324,7 @@ span.valid {
 }
 
 .isvalid {
-    border: 1px solid red !important
+    border: 1px solid red !important;
 }
 
 @media (min-width: 1400px) {
@@ -7340,7 +7339,7 @@ span.valid {
 }
 
 .ngb-dp-arrow-btn {
-    background: transparent !important
+    background: transparent !important;
 }
 
 .font-12 {
@@ -7355,7 +7354,7 @@ span.valid {
 
 input.inputDer,
 input.inputIzq {
-    text-indent: 40px !important
+    text-indent: 40px !important;
 }
 
 .hideDate {
@@ -7405,14 +7404,14 @@ input.inputIzq {
     font-weight: 700;
     font-size: 40px;
     letter-spacing: -0.5px;
-    color: #4B4B4B;
+    color: #4b4b4b;
     line-height: 54px;
     @media (max-width: 768px) {
         font-size: 32px;
         line-height: 32px;
     }
     .raya {
-        background: #F29704;
+        background: #f29704;
         height: 2px;
         width: 43px;
         margin-bottom: 10px;
@@ -7430,7 +7429,7 @@ input.inputIzq {
         font-weight: 600;
         font-size: 12px;
         letter-spacing: 0.5px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         line-height: 16px;
         @media (max-width: 768px) {
             font-size: 10px;
@@ -7522,9 +7521,9 @@ $icon-size-mobile: 28px;
 
 .btn {
     &-agencias {
-        border: 1px solid #E4E5E7;
+        border: 1px solid #e4e5e7;
         background: white;
-        color: #4B4B4B;
+        color: #4b4b4b;
         border-radius: 10px;
         letter-spacing: 0.15px;
         font-family: Open Sans;
@@ -7535,11 +7534,11 @@ $icon-size-mobile: 28px;
             font-size: 10px;
         }
         &:hover {
-            background: #E4E5E7;
+            background: #e4e5e7;
         }
         &.activa {
-            border: 1px solid #DF0C30;
-            background: #DF0C30;
+            border: 1px solid #df0c30;
+            background: #df0c30;
             color: white;
         }
     }
@@ -7547,30 +7546,30 @@ $icon-size-mobile: 28px;
         font-family: Montserrat;
         font-weight: 600;
         font-size: 12px;
-        border: 1px solid #DF0C30;
-        background: #DF0C30;
+        border: 1px solid #df0c30;
+        background: #df0c30;
         color: white;
         border-radius: 3px;
         padding: 10px 16px;
         cursor: pointer;
         transition: 0.3s all;
         &:hover {
-            background: #B50A27;
+            background: #b50a27;
         }
     }
     &.secundary {
         font-family: Montserrat;
         font-weight: 600;
         font-size: 12px;
-        border: 1px solid #EBEBEB;
-        background: #EBEBEB;
-        color: #4B4B4B;
+        border: 1px solid #ebebeb;
+        background: #ebebeb;
+        color: #4b4b4b;
         border-radius: 3px;
         padding: 10px 16px;
         cursor: pointer;
         transition: 0.3s all;
         &:hover {
-            background: #E4E5E7;
+            background: #e4e5e7;
         }
     }
 }
@@ -7598,7 +7597,7 @@ button.customers {
     &:before {
         content: url(./assets/arrow.svg);
         right: 0;
-        position: absolute
+        position: absolute;
     }
 }
 
@@ -7613,12 +7612,12 @@ button.customers {
     bottom: 15px;
     right: 15px;
     opacity: 0;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .show-scrollTop {
     opacity: 1;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     border-radius: 50%;
     background-color: hotpink;
 }
@@ -7646,7 +7645,7 @@ button.customers {
                 flex-direction: column;
                 .form-control {
                     margin-bottom: 0px !important;
-                    border: 0.5px solid #F44336;
+                    border: 0.5px solid #f44336;
                 }
                 .msgError {
                     display: flex;
@@ -7660,7 +7659,7 @@ button.customers {
                 font-size: 11px;
                 line-height: 18px;
                 letter-spacing: 0.25px;
-                color: #F44336;
+                color: #f44336;
                 margin-bottom: 10px;
             }
             .form-control {
@@ -7685,7 +7684,7 @@ button.customers {
             height: 3px;
         }
         hr {
-            border: 1px solid #E4E5E7;
+            border: 1px solid #e4e5e7;
         }
         .textConecta {
             font-family: Montserrat;
@@ -7693,7 +7692,7 @@ button.customers {
             font-size: 12px;
             line-height: 18px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
         }
         .socialMedia {
             display: flex;
@@ -7703,7 +7702,7 @@ button.customers {
             font-size: 14px;
             line-height: 21px;
             letter-spacing: 0.15px;
-            color: #FFFFFF;
+            color: #ffffff;
             .btnFacebook,
             .btnGoogle {
                 width: calc(50% - 10px);
@@ -7722,10 +7721,10 @@ button.customers {
                 }
             }
             .btnFacebook {
-                background: #4267B2;
+                background: #4267b2;
             }
             .btnGoogle {
-                background: #518EF8;
+                background: #518ef8;
             }
         }
     }
@@ -7734,7 +7733,7 @@ button.customers {
         margin: 0 0 18px 0;
         border-top: none;
         button {
-            background: #DF0C30;
+            background: #df0c30;
             border-radius: 5px;
             margin: 0 0 18px 0;
             font-family: Open Sans;
@@ -7743,7 +7742,7 @@ button.customers {
             line-height: 27px;
             text-align: center;
             letter-spacing: 0.18px;
-            color: #FFFFFF;
+            color: #ffffff;
         }
         .account {
             display: flex;
@@ -7756,7 +7755,7 @@ button.customers {
                 font-size: 12px;
                 line-height: 18px;
                 letter-spacing: 0.25px;
-                color: #4B4B4B;
+                color: #4b4b4b;
             }
             .newAccount {
                 cursor: pointer;
@@ -7765,7 +7764,7 @@ button.customers {
                 font-size: 12px;
                 line-height: 21px;
                 letter-spacing: 0.1px;
-                color: #009AED;
+                color: #009aed;
                 text-decoration: underline;
             }
         }
@@ -7790,7 +7789,7 @@ button.customers {
                 flex-direction: column;
                 width: 419px;
                 height: 363px;
-                background: url('./assets/modal/bg-recovery.png');
+                background: url("./assets/modal/bg-recovery.png");
                 .titleRecovery {
                     font-family: Montserrat;
                     font-weight: bold;
@@ -7798,7 +7797,7 @@ button.customers {
                     line-height: 18px;
                     text-align: center;
                     letter-spacing: 0.1px;
-                    color: #FFFFFF;
+                    color: #ffffff;
                     text-align: center;
                     margin-top: 40px;
                     padding-bottom: 13px;
@@ -7833,7 +7832,7 @@ button.customers {
                     font-size: 24px;
                     line-height: 36px;
                     text-align: center;
-                    color: #4B4B4B;
+                    color: #4b4b4b;
                     margin: 40px 0 25px 0;
                     @media (max-width: 640px) {
                         margin: 15px 0 15px 0;
@@ -7847,7 +7846,7 @@ button.customers {
                         .form-select,
                         .form-control {
                             margin-bottom: 0px !important;
-                            border: 0.5px solid #F44336;
+                            border: 0.5px solid #f44336;
                         }
                         .textError {
                             display: flex;
@@ -7860,7 +7859,7 @@ button.customers {
                         font-size: 11px;
                         font-family: Roboto, "Helvetica Neue", sans-serif;
                         line-height: 18px;
-                        color: #F44336;
+                        color: #f44336;
                         margin-bottom: 10px;
                     }
                     .form-control {
@@ -7878,7 +7877,7 @@ button.customers {
                         &.error {
                             .form-control,
                             .form-select {
-                                border: 0.5px solid #F44336;
+                                border: 0.5px solid #f44336;
                             }
                             .textError {
                                 display: flex;
@@ -7890,7 +7889,7 @@ button.customers {
                             margin-left: 15px;
                             font-weight: 300;
                             font-size: 11px;
-                            color: #F44336;
+                            color: #f44336;
                             bottom: 3px;
                         }
                     }
@@ -7919,7 +7918,7 @@ button.customers {
                         font-size: 12px;
                         line-height: 18px;
                         letter-spacing: 0.25px;
-                        color: #4B4B4B;
+                        color: #4b4b4b;
                     }
                     .newAccount {
                         cursor: pointer;
@@ -7928,7 +7927,7 @@ button.customers {
                         font-size: 12px;
                         line-height: 21px;
                         letter-spacing: 0.1px;
-                        color: #009AED;
+                        color: #009aed;
                         text-decoration: underline;
                     }
                 }
@@ -7943,13 +7942,13 @@ button.customers {
 
 #ModalDatosOpcionales {
     .titleVerifica {
-        font-family: 'Open Sans';
+        font-family: "Open Sans";
         font-weight: 700;
         font-size: 24px;
         line-height: 36px;
         display: flex;
         align-items: center;
-        color: #4B4B4B;
+        color: #4b4b4b;
     }
     .portlet-der {
         margin: 0;
@@ -8034,7 +8033,7 @@ button.customers {
             font-size: 18px;
             line-height: 27px;
             letter-spacing: 0.18px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             width: 100%;
         }
     }
@@ -8055,7 +8054,7 @@ button.customers {
             font-size: 12px;
             line-height: 18px;
             letter-spacing: 0.1px;
-            color: #83898F;
+            color: #83898f;
             padding-bottom: 20px;
         }
         .action {
@@ -8080,7 +8079,7 @@ button.customers {
             font-weight: bold;
             font-size: 24px;
             line-height: 36px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             margin-bottom: 10px;
             width: 100%;
         }
@@ -8100,7 +8099,7 @@ button.customers {
             font-size: 14px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             padding-bottom: 20px;
         }
         .action {
@@ -8125,7 +8124,7 @@ button.customers {
             font-weight: bold;
             font-size: 24px;
             line-height: 36px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             margin-bottom: 10px;
             width: 100%;
         }
@@ -8145,12 +8144,12 @@ button.customers {
             font-size: 12px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             padding-bottom: 20px;
             span {
                 font-weight: 600;
                 font-size: 12px;
-                color: #009AED;
+                color: #009aed;
             }
         }
         .action {
@@ -8176,7 +8175,7 @@ button.customers {
             font-weight: bold;
             font-size: 24px;
             line-height: 36px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             margin-bottom: 10px;
             width: 100%;
         }
@@ -8200,12 +8199,12 @@ button.customers {
             font-size: 12px;
             line-height: 21px;
             letter-spacing: 0.1px;
-            color: #4B4B4B;
+            color: #4b4b4b;
             padding-bottom: 20px;
             span {
                 font-weight: 600;
                 font-size: 12px;
-                color: #009AED;
+                color: #009aed;
             }
         }
         .action {
@@ -8222,7 +8221,7 @@ button.customers {
     .contLeft {
         width: 35%;
         .virtual {
-            color: #4B4B4B;
+            color: #4b4b4b;
             font-family: Montserrat;
             padding: 68px 30px 30px 50px;
             .titleVirtual {
@@ -8234,7 +8233,7 @@ button.customers {
                 line-height: 48px;
                 padding-bottom: 45px;
                 span {
-                    color: #B50A27;
+                    color: #b50a27;
                     font-weight: bold;
                 }
                 @media (max-width: 640px) {
@@ -8260,7 +8259,7 @@ button.customers {
                 height: 2px;
                 left: 59px;
                 top: 476px;
-                background: #F29704;
+                background: #f29704;
                 margin-bottom: 41px;
             }
             .boxImg {
@@ -8283,7 +8282,7 @@ button.customers {
                 }
             }
             .btnHelp {
-                background: #DF0C30;
+                background: #df0c30;
                 border-radius: 3px;
                 padding: 14px 0;
                 cursor: pointer;
@@ -8308,12 +8307,12 @@ button.customers {
     }
     .contRight {
         width: 65%;
-        background: #FFFFFF;
+        background: #ffffff;
         box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
         border-radius: 10px;
         margin: 68px 60px 20px 30px;
         padding: 45px 70px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         font-family: Montserrat;
         .rowGroup {
             display: flex;
@@ -8423,12 +8422,12 @@ button.customers {
             }
         }
         .form-control {
-            border: 1px solid #E4E5E7;
+            border: 1px solid #e4e5e7;
             border-radius: 5px;
             height: 45px;
         }
         textarea {
-            border: 1px solid #E4E5E7;
+            border: 1px solid #e4e5e7;
             border-radius: 5px;
             width: 100%;
         }
@@ -8436,7 +8435,7 @@ button.customers {
             margin: 42px 0;
             width: 100%;
             height: 1px;
-            background: #E4E5E7;
+            background: #e4e5e7;
             @media (max-width: 640px) {
                 margin: 30px 0;
             }
@@ -8457,9 +8456,9 @@ button.customers {
             font-size: 12px;
             line-height: 18px;
             letter-spacing: 0.25px;
-            color: #009AED;
+            color: #009aed;
             a {
-                color: #B50A27;
+                color: #b50a27;
             }
         }
         .form-radio-label {
@@ -8470,7 +8469,7 @@ button.customers {
             padding-bottom: 0;
         }
         .btnEnviar {
-            background: #DF0C30;
+            background: #df0c30;
             border-radius: 3px;
             padding: 14px 0;
             cursor: pointer;
@@ -8574,7 +8573,7 @@ button.customers {
             font-weight: 600;
             font-size: 14px;
             letter-spacing: 0.1px;
-            color: #009AED;
+            color: #009aed;
             cursor: pointer;
             transition: 0.3s all;
             padding: 2px 0;
@@ -8582,15 +8581,15 @@ button.customers {
                 color: #506370;
             }
             &.red {
-                color: #DF0C30;
+                color: #df0c30;
                 &:hover {
-                    color: #B50A27;
+                    color: #b50a27;
                 }
             }
         }
         .line {
             height: 1px;
-            background: #E4E5E7;
+            background: #e4e5e7;
             margin: 2px 0;
         }
         .correo {
@@ -8617,7 +8616,7 @@ button.customers {
         .modal-content {
             .recoveryLeft {
                 //height: 637px;
-                background: url('./assets/modal/bg-newAccount.png');
+                background: url("./assets/modal/bg-newAccount.png");
                 height: auto;
                 background-size: cover;
             }
@@ -8687,7 +8686,7 @@ button.customers {
                         line-height: 21px;
                         letter-spacing: 0.1px;
                         font-weight: 600;
-                        color: #009AED;
+                        color: #009aed;
                     }
                 }
                 .socialMedia {
@@ -8699,7 +8698,7 @@ button.customers {
                     font-size: 14px;
                     line-height: 21px;
                     letter-spacing: 0.15px;
-                    color: #FFFFFF;
+                    color: #ffffff;
                     margin-bottom: 10px;
                     &.active {
                         display: flex;
@@ -8725,10 +8724,10 @@ button.customers {
                         }
                     }
                     .btnFacebook {
-                        background: #4267B2;
+                        background: #4267b2;
                     }
                     .btnGoogle {
-                        background: #518EF8;
+                        background: #518ef8;
                     }
                 }
             }
@@ -8743,7 +8742,7 @@ mat-dialog-container {
         font-weight: bold;
         font-size: 24px;
         line-height: 36px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         text-align: center;
         margin-bottom: 15px;
     }
@@ -8755,7 +8754,7 @@ mat-dialog-container {
         display: flex;
         align-items: center;
         letter-spacing: 0.1px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         padding-bottom: 20px;
     }
     .groupBtn {
@@ -8775,18 +8774,18 @@ mat-dialog-container {
             transition: 300ms ease;
             &.primary {
                 background-color: #df0c30;
-                border: 1px solid #B60A35;
+                border: 1px solid #b60a35;
                 color: #ffffff;
                 &:hover {
-                    background: #B60A35;
+                    background: #b60a35;
                 }
             }
             &.secundary {
-                background: #D9E2E8;
-                border: 1px solid #BBCBD4;
-                color: #1C2A40;
+                background: #d9e2e8;
+                border: 1px solid #bbcbd4;
+                color: #1c2a40;
                 &:hover {
-                    background: #BBCBD4;
+                    background: #bbcbd4;
                 }
             }
         }
@@ -8808,22 +8807,22 @@ mat-dialog-container {
     margin: 20px 0;
     &.success {
         .iconBoletin {
-            background: #ADD172;
+            background: #add172;
         }
         .titleBol {
-            color: #86A258;
+            color: #86a258;
         }
     }
     &.error {
         .iconBoletin {
-            background: #FF6969;
+            background: #ff6969;
         }
         .titleBol {
-            color: #DF0C30;
+            color: #df0c30;
         }
     }
     .titleBol {
-        font-family: 'Montserrat';
+        font-family: "Montserrat";
         font-weight: 500;
         font-size: 16px;
         line-height: 24px;
@@ -8859,13 +8858,13 @@ mat-dialog-container {
             height: 14px;
             &.p-highlight {
                 .p-link {
-                    background-color: #DF0C30;
+                    background-color: #df0c30;
                 }
             }
             .p-link {
                 display: inline-flex;
                 align-items: center;
-                background-color: #CFD1D3;
+                background-color: #cfd1d3;
                 transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
                 border-radius: 50%;
                 width: 14px;
@@ -8898,7 +8897,7 @@ mat-dialog-container {
                     font-weight: bold;
                     font-size: 20px;
                     line-height: 36px;
-                    color: #4B4B4B;
+                    color: #4b4b4b;
                 }
                 .btnNext {
                     width: 38px;
@@ -9009,15 +9008,15 @@ app-flightdeals {
 .boxBotones {
     gap: 10px;
     .btnMovil {
-        background: #FFFFFF;
-        border: 1px solid #E4E5E7;
+        background: #ffffff;
+        border: 1px solid #e4e5e7;
         box-sizing: border-box;
         border-radius: 5px;
         font-family: Montserrat;
         font-size: 12px;
         line-height: 18px;
         letter-spacing: 0.1px;
-        color: #4B4B4B;
+        color: #4b4b4b;
         img {
             margin-right: 7px;
         }
@@ -9051,7 +9050,7 @@ app-flightdeals {
                 display: flex;
                 width: 100%;
                 input {
-                    border: 0.5px solid #E4E5E7;
+                    border: 0.5px solid #e4e5e7;
                     border-radius: 5px;
                     height: 48px;
                     padding: 0 10px;
@@ -9065,6 +9064,303 @@ app-flightdeals {
             }
         }
     }
+}
+
+// ICONOS SERVICIOS HOTEL
+.no-minusvalidos {
+    @include spriteImg(25px,
+    25px,
+    0,
+    0,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.multilingue {
+    @include spriteImg(25px,
+    25px,
+    225px,
+    0,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.aperitivos {
+    @include spriteImg(25px,
+    25px,
+    200px,
+    0,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.recepcion {
+    @include spriteImg(25px,
+    25px,
+    175px,
+    0,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.barbacoa {
+    @include spriteImg(25px,
+    25px,
+    150px,
+    0,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.wifi {
+    @include spriteImg(25px,
+    25px,
+    125px,
+    0,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.no-fumador {
+    @include spriteImg(25px,
+    25px,
+    100px,
+    0,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.desayuno {
+    @include spriteImg(25px,
+    25px,
+    75px,
+    0,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.ascensor {
+    @include spriteImg(25px,
+    25px,
+    50px,
+    0,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.lavanderia {
+    @include spriteImg(25px,
+    25px,
+    25px,
+    0,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.banio-minusvalidos {
+    @include spriteImg(25px,
+    25px,
+    0,
+    75px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.caja-fuerte {
+    @include spriteImg(25px,
+    25px,
+    225px,
+    75px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.sala-equipaje {
+    @include spriteImg(25px,
+    25px,
+    200px,
+    75px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.restaurante {
+    @include spriteImg(25px,
+    25px,
+    175px,
+    75px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.hab-minusvalidos {
+    @include spriteImg(25px,
+    25px,
+    150px,
+    75px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.cafeteria {
+    @include spriteImg(25px,
+    25px,
+    125px,
+    75px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.sala-reuniones {
+    @include spriteImg(25px,
+    25px,
+    100px,
+    75px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.sala-tv {
+    @include spriteImg(25px,
+    25px,
+    75px,
+    75px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.minusvalidos {
+    @include spriteImg(25px,
+    25px,
+    50px,
+    75px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.parking {
+    @include spriteImg(25px,
+    25px,
+    25px,
+    75px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.sala-conferencia {
+    @include spriteImg(25px,
+    25px,
+    0,
+    50px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.prensa {
+    @include spriteImg(25px,
+    25px,
+    225px,
+    50px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.negocios {
+    @include spriteImg(25px,
+    25px,
+    200px,
+    50px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.internet {
+    @include spriteImg(25px,
+    25px,
+    175px,
+    50px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.serv-limpieza {
+    @include spriteImg(25px,
+    25px,
+    150px,
+    50px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.terraza {
+    @include spriteImg(25px,
+    25px,
+    125px,
+    50px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.jardin {
+    @include spriteImg(25px,
+    25px,
+    100px,
+    50px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.bicicletas {
+    @include spriteImg(25px,
+    25px,
+    75px,
+    50px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.biblioteca {
+    @include spriteImg(25px,
+    25px,
+    50px,
+    50px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.spa {
+    @include spriteImg(25px,
+    25px,
+    25px,
+    50px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.chimenea {
+    @include spriteImg(25px,
+    25px,
+    0,
+    25px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.stand-prensa {
+    @include spriteImg(25px,
+    25px,
+    225px,
+    25px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.microondas {
+    @include spriteImg(25px,
+    25px,
+    200px,
+    25px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.tienda {
+    @include spriteImg(25px,
+    25px,
+    175px,
+    25px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.aparcamiento {
+    @include spriteImg(25px,
+    25px,
+    150px,
+    25px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.desayuno-cont {
+    @include spriteImg(25px,
+    25px,
+    125px,
+    25px,
+    "./assets/sprite-iconos-hotel.png");
+}
+
+.desayuno-buffet {
+    @include spriteImg(25px,
+    25px,
+    100px,
+    25px,
+    "./assets/sprite-iconos-hotel.png");
 }
 
 // X-Large devices (large desktops, 1200px and up)
