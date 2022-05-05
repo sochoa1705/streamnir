@@ -433,7 +433,7 @@ export class LoginComponent implements OnInit{
           this._accountService.guardarStorage(resp);
           this.closeModal();
         } else {
-          this.notification.showNotificacion("Error", "Error de autenticación", 10);
+          this.notification.showNotificacion("Error", resp.Message , 10);
           this.closeLoading();
         }
       }, () => {
