@@ -24,7 +24,7 @@ export class FlightService extends BaseService {
   /**
    * Path part for operation v1ApiFlightGetRatesGet
    */
-  static readonly V1ApiFlightGetRatesGetPath = '/v1/api/Flight/GetRates';
+  static readonly V1ApiFlightGetRatesGetPath = '/Flight/GetRates';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -140,7 +140,7 @@ export class FlightService extends BaseService {
   /**
    * Path part for operation v1ApiFlightGetLastSearchesByCityGet
    */
-  static readonly V1ApiFlightGetLastSearchesByCityGetPath = '/v1/api/Flight/GetLastSearchesByCity';
+  static readonly V1ApiFlightGetLastSearchesByCityGetPath = '/Flight/GetLastSearchesByCity';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

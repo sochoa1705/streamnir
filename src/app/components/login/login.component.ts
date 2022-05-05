@@ -77,6 +77,10 @@ export class LoginComponent implements OnInit{
         this.saveSocialAccount(user.firstName, user.lastName, user.email, "G", user.id, user.photoUrl)
       }
 
+      if (user.provider == "FACEBOOK") {
+        this.saveSocialAccount(user.firstName, user.lastName, user.email, "F", user.id, user.photoUrl)
+      }
+
     });
 
     

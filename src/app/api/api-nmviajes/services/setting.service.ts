@@ -24,7 +24,7 @@ export class SettingService extends BaseService {
   /**
    * Path part for operation v1ApiSettingGet
    */
-  static readonly V1ApiSettingGetPath = '/v1/api/Setting';
+  static readonly V1ApiSettingGetPath = '/Setting';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
