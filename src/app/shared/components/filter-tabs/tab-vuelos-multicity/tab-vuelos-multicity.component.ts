@@ -172,7 +172,7 @@ import * as moment from 'moment';
       const formGroup = this.controls[groupIndex] as FormGroup;
       this.controls.push(
         this.fb.group({
-          origen: [formGroup.controls.origen.value],
+          origen: [formGroup.controls.destino.value],
           destino: [''],
           departureDate: [''],
         })
