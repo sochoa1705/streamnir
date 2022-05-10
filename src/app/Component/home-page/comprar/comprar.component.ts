@@ -613,8 +613,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   buyInsurance(): void {
-    console.clear();
+
     console.log('1. buyInsurance');
+    debugger
 
     if (this.formShop.invalid)
       this.formShop.markAllAsTouched();

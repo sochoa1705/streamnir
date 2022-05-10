@@ -95,6 +95,10 @@
                         (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
                         (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje."
                         (OnPush)="onFocus()">
+
+                      <span class="valid" *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required">
+                        Ingresa los nombres del pasajero
+                      </span>
                     </div>
 
                     <div class="col-6 viewMobileWidth">
@@ -103,6 +107,10 @@
                       <input class="form-control" type="text" formControlName="lastNameCustomer"
                         (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
                         (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje.">
+
+                      <span class="valid" *ngIf="customers.controls[i].get('lastNameCustomer')?.errors?.required">
+                        Ingresa los apellidos del pasajero
+                      </span>
                     </div>
 
                     <div class="col-6 viewMobileWidth">
@@ -211,7 +219,7 @@
                   </span>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body" formGroupName="paymentMethodForm">
                   <div class="row card_ py-4 justify-content-evenly cardMob" *ngIf="mobile">
                     <input *ngFor="let chk of metodoPago" type="radio" name="select" id="{{ chk.name }}"
                       (click)="chkValue(chk.name)" [checked]="chk.checked">
@@ -239,15 +247,17 @@
                     <div class="row card_pasajero rowMobileCard">
                       <div class="col-6 viewMobileWidth">
                         <label>Número de tarjeta</label>
-                        <input class="form-control" placeholder="Ingrese el número de tarjeta." mask="0*" type="text"
-                          (blur)="validarTarjeta()">
+
+                        <input class="form-control" formControlName="numberCard" mask="0000-0000-0000-0000"
+                          placeholder="Ingrese el número de tarjeta." type="text" (blur)="validarTarjeta()">
                       </div>
 
                       <div class="col-6 viewMobileWidth">
-                        <label for="lastname">Titular de la tarjeta</label>
-                        <input class="form-control" placeholder="El que figura en la tarjeta." type="text"
-                          (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
-                          (drop)="denyDrop($event)" name="lastname">
+                        <label>Titular de la tarjeta</label>
+
+                        <input class="form-control" formControlName="nameCard"
+                          placeholder="El que figura en la tarjeta." (keypress)="allowAlphabetic($event)"
+                          (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)" type="text">
                       </div>
                     </div>
 
@@ -255,17 +265,19 @@
                       <div class="col-6 viewMobileWidth">
                         <div class="row">
                           <div class="col-5">
-                            <label for="names">Vencimiento</label>
-                            <input class="form-control" mask='99/99' placeholder="MM/AA" type="text" name="names"
+                            <label>Vencimiento</label>
+
+                            <input class="form-control" formControlName="expiredCard" mask="99/99" placeholder="MM/AA"
                               (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
-                              (drop)="denyDrop($event)">
+                              (drop)="denyDrop($event)" type="text">
                           </div>
 
                           <div class="col-6">
                             <label>Código de seguridad</label>
-                            <input class="form-control" placeholder="CVC" mask="0*" minlength="3" maxlength="3"
-                              type="password" (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
-                              (drop)="denyDrop($event)" type="text">
+
+                            <input class="form-control" formControlName="ccvCard" mask="0*" maxlength="3"
+                              (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
+                              (drop)="denyDrop($event)" placeholder="CVC" type="text" autocomplete="false">
                           </div>
 
                           <div class="col-1 colBoxInfo">
@@ -279,8 +291,14 @@
                       <div class="col-6 viewMobileWidth">
                         <div class="row">
                           <div class="col-5">
-                            <label for="names">Tipo de doc</label>
-                            <input class="form-control" placeholder="" type="text" name="names">
+                            <label>Tipo de doc</label>
+                            <select formControlName="tipoDoc" class="form-select-f"
+                              (change)="onChangeOfficialDocument(99)">
+                              <option value="" selected>Seleccione</option>
+                              <option value="DNI">DNI</option>
+                              <option value="PSP">Pasaporte</option>
+                              <option value="CEX">C. Extranjería</option>
+                            </select>
                           </div>
 
                           <div class="col-7">
@@ -295,8 +313,23 @@
 
                     <div class="row card_pasajero rowMobileCard">
                       <div class="col-6 viewMobileWidth">
-                        <label for="names">Cuotas</label>
-                        <input class="form-control" placeholder="Sin cuotas" type="text" name="names">
+                        <label>Cuotas</label>
+                        <select formControlName="feePay" class="form-select-f">
+                          <option value="" selected>Seleccione</option>
+                          <option value="0">Sin cuotas</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                        </select>
                       </div>
 
                       <div class="col-6 viewMobileWidth">
@@ -352,10 +385,17 @@
 
                       <div class="row">
                         <div class="col-6 offset-3 py-4 lessViewMob" *ngIf="mobile">
-                          <select class="selectBank" formControlName="bankPay" placeholder="Selecciona tu banco">
-                            <option *ngFor="let b of banks" value="{{b.value}}">{{b.name}}
+                          <select formControlName="bankPay" class="selectBank form-select-f" (change)="onchangeBanco()"
+                            [ngClass]="{isvalid : validatePaymentMethodForm('bankPay')}">
+                            <option value="" selected>Selecciona tu banco</option>
+                            <option *ngFor="let elem of banks" value="{{elem.value}}">
+                              {{ elem.name }}
                             </option>
                           </select>
+
+                          <span class="valid" *ngIf="validatePaymentMethodForm('bankPay')">
+                            Selecciona el banco
+                          </span>
                         </div>
                       </div>
 
@@ -476,29 +516,52 @@
                   <div class="row rowMobileCard">
                     <div class="col-6 viewMobileWidth">
                       <label>Nombres</label>
-                      <input class="form-control" #nameContactForm placeholder="Ingresa tu nombre"
-                        formControlName="nameContacto" type="text" value="">
+
+                      <input class="form-control" #nameContactForm placeholder="Ingresa tu(s) nombre(s)"
+                        [ngClass]="{isvalid : validateContactForm('nameContacto')}" formControlName="nameContacto"
+                        type="text" value="" name="names" (click)="startContactDetails()">
+
+                      <span class="valid" *ngIf="validateContactForm('nameContacto')">
+                        Ingresa tus nombres de contacto
+                      </span>
                     </div>
 
                     <div class="col-6 viewMobileWidth">
-                      <label for="lastname">Apellidos</label>
-                      <input class="form-control" #lastNameContactForm placeholder="Ingresa tu apellido"
-                        formControlName="lastnameContacto" type="text">
+                      <label>Apellidos</label>
+
+                      <input class="form-control" #lastNameContactForm placeholder="Ingresa tus apellidos"
+                        [ngClass]="{isvalid : validateContactForm('lastnameContacto')}"
+                        formControlName="lastnameContacto" type="text" name="lastname">
+
+                      <span class="valid" *ngIf="validateContactForm('lastnameContacto')">
+                        Ingresa tus apellidos de contacto
+                      </span>
                     </div>
                   </div>
 
                   <div class="row rowMobileCard">
                     <div class="col-6 viewMobileWidth">
                       <label for="Email">Email</label>
+
                       <input class="form-control" placeholder="Ingresa tu email de contacto"
-                        formControlName="mailContacto" type="text" name="Email">
+                        [ngClass]="{isvalid : validateContactForm('mailContacto')}" formControlName="mailContacto"
+                        type="text">
+
+                      <span class="valid" *ngIf="validateContactForm('mailContacto')">
+                        {{ contactEmailErrorMessage }}
+                      </span>
                     </div>
 
                     <div class="col-6 viewMobileWidth">
                       <label for="EmailC">Confirma tu email</label>
 
-                      <input class="form-control" formControlName="mailConfirmContacto" placeholder="Ingresa tu email"
-                        type="text" name="EmailC">
+                      <input class="form-control" formControlName="mailConfirmContacto"
+                        [ngClass]="{isvalid : validateContactForm('mailConfirmContacto')}"
+                        placeholder="Ingresa el mismo email" type="text">
+
+                      <span class="valid" *ngIf="validateContactForm('mailConfirmContacto')">
+                        Ingresa el mismo email
+                      </span>
                     </div>
                   </div>
 
@@ -506,16 +569,22 @@
                     <div class="col-6 viewMobileWidth">
                       <label for="typePhone0">Tipo de teléfono</label>
 
-                      <select formControlName="typePhone0" class="form-select-f" name="typePhone0">
+                      <select formControlName="typePhone0" class="form-select-f"
+                        [ngClass]="{isvalid : validateContactForm('typePhone0')}">
                         <option value="1">Fijo</option>
                         <option value="2">Celular</option>
                       </select>
+
+                      <span class="valid" *ngIf="validateContactForm('typePhone0')">
+                        Selecciona el tipo de teléfono
+                      </span>
                     </div>
 
                     <div class="col-6 viewMobileWidth">
                       <div class="row">
                         <div class="col-5 width110">
                           <label for="code0">Código de país</label>
+
                           <div class="iconBandera">
                             <svg width="29" height="28" viewBox="0 0 29 28" fill="none"
                               xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -542,14 +611,23 @@
                             </svg>
                           </div>
 
-                          <input formControlName="code0" class="form-control" placeholder="" type="text" name="code0">
+                          <input type="text" formControlName="code0" class="form-control"
+                            [ngClass]="{isvalid : validateContactForm('code0')}" placeholder="">
+
+                          <span class="valid" *ngIf="validateContactForm('code0')">
+                            Selecciona el código de país
+                          </span>
                         </div>
 
                         <div class="col-7">
                           <label for="numberPhone0">Número de teléfono</label>
 
-                          <input formControlName="numberPhone0" class="form-control" placeholder="Ingresa N°"
-                            type="text" name="numberPhone0">
+                          <input type="text" formControlName="numberPhone0" maxlength="10" class="form-control"
+                            [ngClass]="{isvalid : validateContactForm('numberPhone0')}" placeholder="Ingresa N°">
+
+                          <span class="valid" *ngIf="validateContactForm('numberPhone0')">
+                            Ingresa tu número de teléfono
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -558,23 +636,32 @@
                   <div class="row rowMobileCard" *ngIf="showInvoiceData">
                     <div class="col-4 viewMobileWidth">
                       <label for="ruc">RUC</label>
-                      <input formControlName="ruc" class="form-control" placeholder="Ingresa N° deRuc" type="text"
-                        name="ruc">
+                      <input type="text" formControlName="ruc" class="form-control"
+                        [ngClass]="{isvalid : validateContactForm('ruc')}" placeholder="Ingresa N° de Ruc">
+
+                      <span class="valid" *ngIf="validateContactForm('ruc')">
+                        {{ contactRUCErrorMessage }}
+                      </span>
                     </div>
 
                     <div class="col-8 viewMobileWidth">
                       <label for="dirección">Dirección</label>
-                      <input formControlName="direccion" class="form-control" placeholder="Ca. / Jr. / Av." type="text"
-                        name="dirección">
+                      <input formControlName="direccion" class="form-control"
+                        [ngClass]="{isvalid : validateContactForm('direccion')}" placeholder="Ca. / Jr. / Av.">
+
+                      <span class="valid" *ngIf="validateContactForm('direccion')">
+                        Ingresa una dirección
+                      </span>
                     </div>
                   </div>
 
                   <div class="row rowMobileCard">
                     <div class="col-6 viewMobileWidth">
                       <div class="form-check">
-                        <input class="form-check-input" [checked]="showInvoiceData"
-                          (change)="showInvoiceData = !showInvoiceData" formControlName="invoiceRequestBox"
-                          type="checkbox" id="invoiceRequestBox" value="option1">
+                        <input class="form-check-input" formControlName="invoiceRequestBox" type="checkbox"
+                          [checked]="showInvoiceData" (change)="showInvoiceData = !showInvoiceData"
+                          id="invoiceRequestBox">
+
                         <label class="form-check-label" for="invoiceRequestBox">Solicitar
                           factura</label>
                       </div>
@@ -592,22 +679,31 @@
                       <input class="form-check-input" type="checkbox" formControlName="chkPolity" id="chkPolity"
                         value="option1">
 
-                      <label class="form-check-label" for="inlineRadio1">He leído y acepto la
-                        <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#politicaModal">política de
-                          protección de datos
-                          personales.
+                      <label class="form-check-label" for="chkPolity">He leído y acepto las
+                        <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#politicaModal">políticas de
+                          protección
+                          de datos personales.
                         </a>
                       </label>
                     </div>
+
+                    <span class="valid" *ngIf="validateInsuranceForm('chkPolity')">
+                      Debe de aceptar las póliticas de porotección de datos personales.
+                    </span>
                   </div>
 
                   <div class="col-6 viewMobileWidth">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="checkbox" formControlName="chkInfo" id="chkInfo"
                         value="option1">
-                      <label class="form-check-label" for="inlineRadio1">Autorizo el uso de mi
-                        Información para la Publicidad.</label>
+
+                      <label class="form-check-label" for="chkInfo">Autorizo el uso de mi Información
+                        para la publicidad.</label>
                     </div>
+
+                    <span class="valid" *ngIf="validateInsuranceForm('chkInfo')">
+                      Debe de aceptar el uso de su información para la publicidad.
+                    </span>
                   </div>
                 </div>
 
@@ -625,6 +721,25 @@
               </div>
             </div>
 
+            <!-- <pre>Validaciones de formularios</pre>
+          
+                    <pre>FormShop valid: {{ formShop.valid }}</pre>
+                    <pre>FormShop values</pre>
+                    <pre>{{ formShop.value | json }}</pre>
+          
+                    <pre>PaymentMethodForm valid: {{ paymentMethodForm.valid }}</pre>
+                    <pre>PaymentMethodForm values</pre>
+                    <pre>{{ paymentMethodForm.value | json }}</pre>
+          
+                    <pre>ContactForm valid: {{ contactForm.valid }}</pre>
+                    <pre>ContactForm values</pre>
+                    <pre>{{ contactForm.value | json }}</pre>
+          
+                    <pre>ruc errors</pre>
+                    <pre>{{ contactForm.controls.ruc.errors | json }}</pre>
+                    <pre>direccion errors</pre>
+                    <pre>{{ contactForm.controls.direccion.errors | json }}</pre> -->
+
             <div class="row rowMobileCard ">
               <div class="col-12 contentCenterMobile">
                 <button mat-button class="px-5" (click)="buyInsurance()">Comprar</button>
@@ -635,12 +750,14 @@
         </mat-step>
       </mat-stepper>
     </div>
+    <!-- END VERSION MOBILE -->
 
-    <!-- VERSION MOBILE -->
+    <!-- VERSION DESKTOP -->
     <div class="row pt-md-3">
       <div class="col-8 viewMobileWidth order-1 order-md-0 ">
         <h1 class="titleMob d-md-block d-none">{{ safe0Json?.title }}</h1>
 
+        <!-- IZQUIERDA -->
         <!-- FORM PASAJEROS DESKTOP -->
         <div class="card pasajeros hideViewMobile">
           <div class="card-header">
@@ -659,6 +776,7 @@
           </div>
 
           <div formArrayName="customers">
+
             <div [formGroupName]="i" *ngFor="let customer of customers.controls; let i = index"
               class="row rowMobileCard">
 
@@ -680,9 +798,9 @@
                   <div class="col-6 viewMobileWidth">
                     <label>Nombres</label>
 
-                    <input class="form-control" formControlName="nameCustomer" (keypress)="allowAlphabetic($event)"
-                      (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
-                      placeholder="El que figura en el documento de viaje." type="text">
+                    <input class="form-control" type="text" formControlName="nameCustomer"
+                      (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
+                      placeholder="El que figura en el documento de viaje." (OnPush)="onFocus()">
 
                     <span class="valid" *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required">
                       Ingresa los nombres del pasajero
@@ -708,9 +826,9 @@
 
                     <div class="row">
                       <div class="col-2">
-                        <input class="form-control" minlength="1" maxlength="2" mask="0*" formControlName="dayCustomer"
-                          type="text" (keypress)="allowNumeric($event)" (paste)="onPasteNumeric($event)"
-                          (drop)="denyDrop($event)" name="dayCustomer">
+                        <input class="form-control" minlength="1" maxlength="2" max="31" mask="0*"
+                          formControlName="dayCustomer" type="text" (keypress)="allowNumeric($event)"
+                          (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)">
                       </div>
 
                       <div class="col-6">
@@ -754,8 +872,7 @@
                       (change)="onChangeOfficialDocument(i)">
                       <option value="" selected>Seleccione</option>
                       <option value="DNI">DNI</option>
-                      <option value="PSP">Pasaporte</option>
-                      <option value="CEX">C.Extranjería</option>
+                      <option value="CEX">C. Extranjería</option>
                     </select>
                   </div>
 
@@ -837,18 +954,18 @@
 
                   <div class="row card_pasajero rowMobileCard">
                     <div class="col-6 viewMobileWidth">
-                      <label for="names">Número de tarjeta</label>
+                      <label>Número de tarjeta</label>
 
                       <input class="form-control" formControlName="numberCard" mask="0000-0000-0000-0000"
-                        placeholder="Ingrese el número de tarjeta." type="text" name="names">
+                        placeholder="Ingrese el número de tarjeta." type="text" (blur)="validarTarjeta()">
                     </div>
 
                     <div class="col-6 viewMobileWidth">
-                      <label for="lastname">Titular de la tarjeta</label>
+                      <label>Titular de la tarjeta</label>
 
                       <input class="form-control" formControlName="nameCard" placeholder="El que figura en la tarjeta."
                         (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
-                        (drop)="denyDrop($event)" type="text" name="lastname">
+                        (drop)="denyDrop($event)" type="text">
                     </div>
                   </div>
 
@@ -887,7 +1004,7 @@
                     <div class="col-6 viewMobileWidth">
                       <div class="row">
                         <div class="col-5">
-                          <label for="names">Tipo de doc</label>
+                          <label>Tipo de doc</label>
                           <select formControlName="tipoDoc" class="form-select-f"
                             (change)="onChangeOfficialDocument(99)">
                             <option value="" selected>Seleccione</option>
@@ -909,7 +1026,7 @@
 
                   <div class="row card_pasajero rowMobileCard">
                     <div class="col-6 viewMobileWidth">
-                      <label for="names">Cuotas</label>
+                      <label>Cuotas</label>
                       <select formControlName="feePay" class="form-select-f">
                         <option value="" selected>Seleccione</option>
                         <option value="0">Sin cuotas</option>
@@ -1107,7 +1224,7 @@
 
                 <div class="row rowMobileCard">
                   <div class="col-6 viewMobileWidth">
-                    <label for="names">Nombres</label>
+                    <label>Nombres</label>
 
                     <input class="form-control" #nameContactForm placeholder="Ingresa tu(s) nombre(s)"
                       [ngClass]="{isvalid : validateContactForm('nameContacto')}" formControlName="nameContacto"
@@ -1129,8 +1246,6 @@
                       Ingresa tus apellidos de contacto
                     </span>
                   </div>
-
-                  <div class="clearfix"></div>
                 </div>
 
                 <div class="row rowMobileCard">
@@ -1404,7 +1519,7 @@
       </div>
       <!-- END DERECHA -->
     </div>
-    <!-- VERSION DESKTOP -->
+    <!-- END VERSION DESKTOP -->
   </form>
 </div>
 
