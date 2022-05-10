@@ -38,6 +38,7 @@
       <mat-stepper [linear]="isLinear" #stepper label="Informacion de pasajeros"
         (selectionChange)="selectionChange($event)">
 
+        <!-- PASO 1 -->
         <mat-step [stepControl]="firstFormGroup">
 
           <ng-template matStepLabel>Reserva</ng-template>
@@ -84,24 +85,9 @@
                         fill="#009AED" />
                     </svg> &nbsp; Pasajero {{ i + 1 }} (
                     <strong>{{ resultJson['aniosNacimiento'][i].edad }} años</strong> )
-
                   </h4>
 
-                  <div style="background:red" *ngIf="showAdulto === i" (click)="showDatosPasajero()">
-                    <img src="./assets/comprar/flecha-der.png" alt="">
-                  </div>
-
-                  <div class="agregarAdultoPas" *ngIf="showAdulto !== i" (click)="showDatosPasajero(i)">
-                    <div class="textAgregar">
-                      Agrega tus datos {{ i + 1 }}
-                    </div>
-
-                    <div>
-                      <img src="./assets/comprar/flecha-der.png" alt="">
-                    </div>
-                  </div>
-
-                  <div class="row rowMobileCard" [class.activoBox]="showAdulto === i">
+                  <div class="row rowMobileCard">
                     <div class="col-6 viewMobileWidth">
                       <label>Nombres</label>
 
@@ -213,6 +199,7 @@
           </div>
         </mat-step>
 
+        <!-- PASO 2 -->
         <mat-step [stepControl]="secondFormGroup">
           <div class="row">
             <div class="col-12 medioPagoMobile">
@@ -240,166 +227,6 @@
                   </div>
 
                   <div class="boxCardPas" *ngIf="selectedPay === 'tarjeta'; else safety2">
-                    <!-- TARJETA -->
-
-                    <!-- END TARJETA -->
-                  </div>
-
-                  <ng-template #safety2>
-                    <!-- MOVILE -->
-                    <div class="col-5 offset-1 py-3 textSafMob">
-                      <p class="textSafety">Seleccione una opción para pagar</p>
-                    </div>
-
-                    <div class="row btnSafe">
-                      <div class="col-4 viewMobileWidth">
-                        <a class="btnBlue" [class.active]="id === 'banca'" value="true"
-                          (click)="optionPay($event, true, 'banca');">Banca por internet o
-                          Móvil
-                        </a>
-                      </div>
-
-                      <div class="col-4 viewMobileWidth">
-                        <a class="btnBlue" value="false" [class.active]="id === 'movil'"
-                          (click)="optionPay($event, false, 'movil')">Agencias / Agentes</a>
-                      </div>
-                    </div>
-
-                    <ng-container *ngIf="banca; else agencia">
-                      <div class="row boxAgencia">
-                        <div class="d-flex justify-content-center imgBanca">
-                          <img src="./assets/comprar/pago/_bcp.png" alt="">
-                          <img src="./assets/comprar/pago/_scotiabank.png" alt="">
-                          <img src="./assets/comprar/pago/_interbank.png" alt="">
-                          <img src="./assets/comprar/pago/_bbva.png" alt="">
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-6 offset-3 py-4 lessViewMob" *ngIf="mobile">
-                          <select class="selectBank" formControlName="bankPay" placeholder="Selecciona tu banco">
-                            <option *ngFor="let b of banks" value="{{b.value}}">{{b.name}}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="row py-4 marginLat">
-                        <div class="col-6 ">
-                          <a class="btnRed" href="#">Emisión automática después del pago.
-                          </a>
-                        </div>
-
-                        <div class="col-6 text-end">
-                          <a href="#" data-bs-toggle="modal" data-bs-target="#ModalBlue">¿Como
-                            pagar con SafetyPay online?</a>
-                        </div>
-                      </div>
-
-                      <div class="row boxLimite">
-                        <div class="titleLimite">Tiempo Límite</div>
-                        <div class="descripLimite">
-                          Recuerda que una vez generado tu código safetypay, deberás pagar dentro de las
-                          <strong>próximas 2 horas</strong>. De lo contrario la reserva será cancelada.
-                        </div>
-                      </div>
-                    </ng-container>
-
-                    <ng-template #agencia>
-                      <div class="row boxAgencia">
-                        <div class="d-flex justify-content-center imgBanca">
-                          <img src="./assets/comprar/pago/_bcp.png" alt="">
-                          <img src="./assets/comprar/pago/_scotiabank.png" alt="">
-                          <img src="./assets/comprar/pago/_interbank.png" alt="">
-                          <img src="./assets/comprar/pago/_bbva.png" alt="">
-                          <img src="./assets/comprar/pago/_wester.png" alt="">
-                        </div>
-                        <div class="d-flex justify-content-center imgBanca">
-                          <img src="./assets/comprar/pago/_arequipa.png" alt="">
-                          <img src="./assets/comprar/pago/_huancayo.png" alt="">
-                          <img src="./assets/comprar/pago/_trujillo.png" alt="">
-                          <img src="./assets/comprar/pago/_tacna.png" alt="">
-                          <img src="./assets/comprar/pago/_tambo.png" alt="">
-                        </div>
-
-                        <div class="row">
-                          <div class="col-12 text-end">
-                            <a href="#">¿Como pagar con SafetyPay online?</a>
-                          </div>
-                        </div>
-                      </div>
-                    </ng-template>
-                  </ng-template>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 ">
-              <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <a class="accordion-button" data-bs-toggle="collapse" href="#collapseDetalle" role="button"
-                      aria-expanded="false" aria-controls="collapseDetalle">
-                      Ver detalles
-                    </a>
-                  </h2>
-                  <div class="collapse" id="collapseDetalle">
-                    <div class="accordion-body">
-                      <div class="row">
-                        <div class="col-6">
-                          <span class="textAcor">1 Adulto(s)</span>
-                        </div>
-                        <div class="col-6 text-end">
-                          <span class="price_old">PEN 370,35</span>
-                          <span class="price_new">PEN 314,80</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="row">
-                        <div class="col-7">
-                          <span class="textDesc">Descuento</span>
-                        </div>
-                        <div class="col-5 text-end">
-                          <span class="price_Desc">PEN -55,55</span>
-                        </div>
-
-                        <div class="clearfix"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row totalItem">
-                    <div class="col-7">
-                      <span class="price_end">TOTAL A PAGAR</span>
-                    </div>
-                    <div class="col-5 text-end">
-                      $
-                      <span class="price_end_number">314.80</span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row rowMobileCard marginTop20">
-            <div class="col-12 contentCenterMobile">
-              <button mat-button matStepperNext class="px-5" (click)="step1()">Continuar</button>
-            </div>
-          </div>
-        </mat-step>
-
-        <mat-step>
-          <div class="row">
-            <div class="col-12 medioPagoMobile">
-              <div class="card cardPagoMobile">
-                <div class="card-body">
-                  <div class="boxCardPas">
-                    <!-- TARJETA -->
                     <div class="row py-5">
                       <div class="col-12 text-center pago">
                         <img src="./assets/comprar/_visa.png" alt="">
@@ -491,20 +318,143 @@
                         <div>Emisión en max 24hrs aprox.</div>
                       </div>
                     </div>
-                    <!-- END TARJETA -->
+                  </div>
+
+                  <ng-template #safety2>
+                    <!-- MOVILE -->
+                    <div class="col-5 offset-1 py-3 textSafMob">
+                      <p class="textSafety">Seleccione una opción para pagar</p>
+                    </div>
+
+                    <div class="row btnSafe">
+                      <div class="col-4 viewMobileWidth">
+                        <a class="btnBlue" [class.active]="id === 'banca'" value="true"
+                          (click)="optionPay($event, true, 'banca');">Banca por internet o
+                          Móvil
+                        </a>
+                      </div>
+
+                      <div class="col-4 viewMobileWidth">
+                        <a class="btnBlue" value="false" [class.active]="id === 'movil'"
+                          (click)="optionPay($event, false, 'movil')">Agencias / Agentes</a>
+                      </div>
+                    </div>
+
+                    <ng-container *ngIf="banca; else agencia">
+                      <div class="row boxAgencia">
+                        <div class="d-flex justify-content-center imgBanca">
+                          <img src="./assets/comprar/pago/_bcp.png" alt="">
+                          <img src="./assets/comprar/pago/_scotiabank.png" alt="">
+                          <img src="./assets/comprar/pago/_interbank.png" alt="">
+                          <img src="./assets/comprar/pago/_bbva.png" alt="">
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6 offset-3 py-4 lessViewMob" *ngIf="mobile">
+                          <select class="selectBank" formControlName="bankPay" placeholder="Selecciona tu banco">
+                            <option *ngFor="let b of banks" value="{{b.value}}">{{b.name}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row py-4 marginLat">
+                        <div class="col-6 ">
+                          <a class="btnRed" href="#">Emisión automática después del pago.
+                          </a>
+                        </div>
+
+                        <div class="col-6 text-end">
+                          <a href="#" data-bs-toggle="modal" data-bs-target="#ModalBlue">¿Como
+                            pagar con SafetyPay online?</a>
+                        </div>
+                      </div>
+
+                      <div class="row boxLimite">
+                        <div class="titleLimite">Tiempo Límite</div>
+                        <div class="descripLimite">
+                          Recuerda que una vez generado tu código safetypay, deberás pagar dentro de las
+                          <strong>próximas 2 horas</strong>. De lo contrario la reserva será cancelada.
+                        </div>
+                      </div>
+                    </ng-container>
+
+                    <ng-template #agencia>
+                      <div class="row boxAgencia">
+                        <div class="d-flex justify-content-center imgBanca">
+                          <img src="./assets/comprar/pago/_bcp.png" alt="">
+                          <img src="./assets/comprar/pago/_scotiabank.png" alt="">
+                          <img src="./assets/comprar/pago/_interbank.png" alt="">
+                          <img src="./assets/comprar/pago/_bbva.png" alt="">
+                          <img src="./assets/comprar/pago/_wester.png" alt="">
+                        </div>
+                        <div class="d-flex justify-content-center imgBanca">
+                          <img src="./assets/comprar/pago/_arequipa.png" alt="">
+                          <img src="./assets/comprar/pago/_huancayo.png" alt="">
+                          <img src="./assets/comprar/pago/_trujillo.png" alt="">
+                          <img src="./assets/comprar/pago/_tacna.png" alt="">
+                          <img src="./assets/comprar/pago/_tambo.png" alt="">
+                        </div>
+
+                        <div class="row">
+                          <div class="col-12 text-end">
+                            <a href="#">¿Como pagar con SafetyPay online?</a>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 ">
+              <div class="accordion">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <a class="accordion-button" (click)="showVerDetalle()">
+                      Ver detalles
+                    </a>
+                  </h2>
+
+                  <div *ngIf="showDetalle == true">
+                    <div class="accordion-body">
+                      <div class="row" *ngFor="let elem of safe0Json.tarifario">
+                        <div class="col-6">
+                          <span class="textAcor">Pasajero de {{elem.Edad}} años</span>
+                        </div>
+                        <div class="col-6 text-end">
+                          <span class="price_new">US$ {{elem.precioEmisionLocal}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row totalItem">
+                    <div class="col-7">
+                      <span class="price_end">TOTAL A PAGAR</span>
+                    </div>
+                    <div class="col-5 text-end">
+                      {{safe0Json?.monedaLista === 'USD' ? 'US$' : 'PEN'}}
+                      <span class="price_end_number">{{ totalToPay }}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="row rowMobileCard ">
-              <div class="col-12 contentCenterMobile">
-                <button mat-button matStepperNext class="px-5" (click)="step1()">Continuar</button>
-              </div>
+          <div class="row rowMobileCard marginTop20">
+            <div class="col-12 contentCenterMobile">
+              <button mat-button matStepperNext class="px-5" (click)="step1()">Continuar</button>
             </div>
           </div>
         </mat-step>
 
+        <!-- PASO 3-->
         <mat-step>
           <!-- DATOS CONTACTO MOVIL-->
           <div class="row marginTop20">
@@ -605,7 +555,7 @@
                     </div>
                   </div>
 
-                  <div class="row rowMobileCard">
+                  <div class="row rowMobileCard" *ngIf="showInvoiceData">
                     <div class="col-4 viewMobileWidth">
                       <label for="ruc">RUC</label>
                       <input formControlName="ruc" class="form-control" placeholder="Ingresa N° deRuc" type="text"
@@ -677,7 +627,7 @@
 
             <div class="row rowMobileCard ">
               <div class="col-12 contentCenterMobile">
-                <button mat-button matStepperNext class="px-5" (click)="step1()">Continuar</button>
+                <button mat-button class="px-5" (click)="buyInsurance()">Comprar</button>
               </div>
             </div>
           </div>
@@ -1313,7 +1263,6 @@
                 </div>
               </div>
             </div>
-
           </div>
 
           <div class="col-12 ">

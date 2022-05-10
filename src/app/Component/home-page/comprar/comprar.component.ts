@@ -567,6 +567,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     TaggingService.tagStartOfPaymentMethods(model);
 
+    debugger
+
+
     if (e === 'optionm-1' || e === 'option-1')
       this.selectedPay = 'tarjeta';
     else
@@ -1083,11 +1086,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return expiredFormatt
   }
 
-  showDatosPasajero(e?: any) {
-    this.showAgregarAdulto = !this.showAgregarAdulto
-    this.showAdulto = e
-  }
-
   showVerDetalle(e?: any) {
     this.showDetalle = !this.showDetalle
     console.log(this.showDetalle)
@@ -1098,21 +1096,21 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   step1() {
-    console.log('Contacto')
-    console.log(this.errors)
-    // if (this.validForm()) {
-    //   console.log(this.formShop.getRawValue())
+    // console.log('Contacto')
+    // console.log(this.errors)
+    // // if (this.validForm()) {
+    // //   console.log(this.formShop.getRawValue())
+    // //   this.step1Complete = true
+    // // }
+    // for (let i in this.resultJson.passengers) {
+    //   //if (this.validFormMobileCustomers(i) && this.validFormMobileContact()) {
     //   this.step1Complete = true
-    // }
-    for (let i in this.resultJson.passengers) {
-      //if (this.validFormMobileCustomers(i) && this.validFormMobileContact()) {
-      this.step1Complete = true
 
-      // console.log(this.formShop.getRawValue()['customers'][i])
-      // console.log(i)
-      // this.savePasajero(i)
-      //}
-    }
+    //   // console.log(this.formShop.getRawValue()['customers'][i])
+    //   // console.log(i)
+    //   // this.savePasajero(i)
+    //   //}
+    // }
   }
 
   step1Complete = false
