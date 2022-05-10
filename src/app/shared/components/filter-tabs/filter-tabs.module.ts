@@ -20,6 +20,7 @@ import { TabPaquetesComponent } from './tab-paquetes/tab-paquetes.component';
 import { TabAutosComponent } from './tab-autos/tab-autos.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { CalendarEndDateModule } from '../calendar-enddate/calendar-enddate.module';
+import { TabVuelosMulticityComponent } from './tab-vuelos-multicity/tab-vuelos-multicity.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { CalendarEndDateModule } from '../calendar-enddate/calendar-enddate.modu
     TabVuelosComponent,
     TabArmaPaquetesComponent,
     TabPaquetesComponent,
-    TabAutosComponent
+    TabAutosComponent,
+    TabVuelosMulticityComponent
   ],
   imports: [
     CommonModule,
