@@ -26,8 +26,8 @@ export class NmvModel {
     this.params = new HttpParams()
       .set('TrackingCode', Guid())
       .set('MuteExceptions', environment.muteExceptions)
-      .set('Caller.Company', 'Agil')
-      .set('Caller.Application', 'Interagencias');
+      .set('Caller.Company', 'Expertia')
+      .set('Caller.Application', 'NMViajes');
   }
 
   getPayload() {
@@ -35,8 +35,8 @@ export class NmvModel {
       TrackingCode: Guid(),
       MuteExceptions: environment.muteExceptions,
       Caller: {
-        Company: 'Agil',
-        Application: 'Interagencias',
+        Company: 'Expertia',
+        Application: 'NMViajes',
       },
     };
   }

@@ -49,6 +49,31 @@ export class ResultadosComponent implements OnInit {
 
   async getParams() {
 
+
+    
+    function getLinkerParam(uaNumber?:string) {
+
+      var _ga:any = window[(window as any).GoogleAnalyticsObject];
+
+      var trackers = _ga.getAll();
+
+      var i;   
+
+      for (i = 0; i < trackers.length; i++) {
+
+        var _tracker = trackers[i];
+
+        if (!uaNumber || _tracker.get('trackingId') === uaNumber) {
+
+          return _tracker.get('linkerParam');
+
+        }
+      }
+
+    }
+
+
+
     this.ar.queryParams.subscribe((resp) => {
 
       this.urlIframe = environment.urlIframeMotorVuelos + '?rand=' + Math.round(Math.random() * 10000000000) + "&";
@@ -87,7 +112,7 @@ export class ResultadosComponent implements OnInit {
       
       const params = objectToQueryString(payload);
 
-      this.urlIframe = this.urlIframe + params;
+      this.urlIframe = this.urlIframe + params + "&" + getLinkerParam();
 
     });
   }

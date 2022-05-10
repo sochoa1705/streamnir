@@ -77,23 +77,19 @@ export class CalendarComponent implements AfterViewInit{
     }
 
     emitValue(){
-      console.log('emit 5', this.fromDate);
       this.changeDate.emit( new ClassValueCalendar(this.toDate,this.fromDate) )
     }
   
     isHovered(date: NgbDate) {
-      console.log('emit 6');
       return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
     }
   
     
     isRange(date: NgbDate) {
-      console.log('emit 4');
       return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
     }
   
     validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-      console.log('emit 3', currentValue);
       // this.changeDate.emit(value);
       const parsed = this.formatter.parse(input);
       const value = new ClassValueCalendar(this.toDate,this.fromDate);
