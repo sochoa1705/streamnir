@@ -105,8 +105,8 @@ export class LoginComponent implements OnInit {
       TrackingCode: Guid(),
       MuteExceptions: environment.muteExceptions,
       Caller: {
-        Company: "Agil",
-        Application: "Interagencias"
+        Company: "Expertia",
+        Application: "NMViajes"
       },
       Parameter: {
         Firstname,
@@ -128,7 +128,7 @@ export class LoginComponent implements OnInit {
         const isSuccess = response.Result.IsSuccess;
 
         if (isSuccess) {
-          this._accountService.guardarStorage(response.Result, image);
+          this._accountService.guardarStorage(response.Result, image, SocialNetwork);
           this.closeModal();
           this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
             verticalPosition: 'top',
@@ -282,8 +282,8 @@ export class LoginComponent implements OnInit {
         TrackingCode: Guid(),
         MuteExceptions: environment.muteExceptions,
         Caller: {
-          Company: "Agil",
-          Application: "Interagencias"
+          Company: "Expertia",
+          Application: "NMViajes"
         },
         Parameter: {
           Firstname: this.businessAccountForm.get("firstName")?.value,
@@ -345,8 +345,8 @@ export class LoginComponent implements OnInit {
         TrackingCode: Guid(),
         MuteExceptions: environment.muteExceptions,
         Caller: {
-          Company: "Agil",
-          Application: "Interagencias"
+          Company: "Expertia",
+          Application: "NMViajes"
         },
         Parameter: {
           Firstname: this.personalAccountForm.get("firstName")?.value,
@@ -430,7 +430,7 @@ export class LoginComponent implements OnInit {
           this._accountService.guardarStorage(resp);
           this.closeModal();
         } else {
-          this.notification.showNotificacion("Error", "Error de autenticación", 10);
+          this.notification.showNotificacion("Error", resp.Message , 10);
           this.closeLoading();
         }
       }, () => {

@@ -51,7 +51,7 @@ export class TabPaquetesComponent {
   countriesPackageSearch: Array<any> = [];
   themes: Array<any> = [];
   months: Array<any> = [];
-  noches: Array<any> = [{ code: '3,4,5', name: 'de 1 a 5 noches' }, { code: '6', name: 'de 6 a 10 noches' }, { code: '11', name: 'de 11 a 15 noches' }, { code: '15', name: 'más de 15 noches' }];
+  noches: Array<any> = [{ code: '3,4,5', name: 'de 1 a 5 noches' }, { code: '6', name: 'de 6 a 10 noches' }];
 
   @Input() set vuelosTab(value: SaveModelVuelos) {
     if (value) {

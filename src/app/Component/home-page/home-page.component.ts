@@ -32,6 +32,8 @@ export class HomePageComponent implements OnInit {
     this.getBusinessUnit()
     this.getIpCliente()
     this.getMain()
+
+    localStorage.removeItem('filters');
   }
   getMain() {
     this.mainService.getMenu().subscribe({

@@ -59,8 +59,8 @@ export class MailingComponent implements OnInit {
         "TrackingCode": "000001",
         "MuteExceptions": true,
         "Caller": {
-          "Company": "Agil",
-          "Application": "Interagencias",
+          "Company": "Expertia",
+          "Application": "NMViajes",
           "FromIP": this.ipCliente,
           "FromBrowser": "CHROME"
         },

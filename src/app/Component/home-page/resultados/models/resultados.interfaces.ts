@@ -218,16 +218,15 @@ export class ParamsVuelos implements IParamsVuelos{
         public directSubmit: string = "",
         public tripType: string = "",
         public lang: string = "",
-        public json: string = ""
     ){}
 }
 
 
 export interface IframeMotorVuelosProps{
     flightType:number;
-    departureLocation?:string;
-    arrivalLocation?:string;
-    departureDate?:string;
+    departureLocation:string;
+    arrivalLocation:string;
+    departureDate:string;
     arrivalDate?:string;
     adults:number;
     children:number;
@@ -236,17 +235,4 @@ export interface IframeMotorVuelosProps{
     selected_cabins?:string;
     excludedAirlines?:string;
     multicity?:string;
-    json?: string
-}
-
-export interface IframeMotorVuelosJsonProps{
-    flightType:number;
-    adults:number;
-    children:number;
-    infants:number;
-    flightClass:EnumCabinsVuelos;
-    selected_cabins?:string;
-    excludedAirlines?:string;
-    multicity?:string;
-    json?: string
 }

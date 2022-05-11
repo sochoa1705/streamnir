@@ -108,41 +108,8 @@ export class URLVuelos implements UrlNmViajes {
         this.distribution = distribution;
     }
 
-    setDistributor(distribution: any) {
-        this.tab = 'ONLY_FLIGHT';
-        this.distribution = distribution;
-    }
-
     getUrl() {
         return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&destination=${this.params.idDestino + "%20" + this.params.destino?.title || ''}&departure=${this.params.idOrigen + "%20" + this.params.origen?.title || ''}&departureDate=${this.params.startDate}&arrivalDate=${this.params.endDate}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.params.cabinsVuelos}&lang=ES`;
-    }
-
-    getUrlMulti(json: string) {
-        return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.params.cabinsVuelos}&lang=ES&json=${json}`;
-    }
-}
-
-export class URLVuelosMulti implements UrlNmViajes {
-    public url = '/vuelos/resultados';
-
-    private tab: tapType;
-    private distribution: any;
-    private flightType:EnumFlightType;
-    private cabinsVuelos:EnumCabinsVuelos;
-
-    constructor(cabinsVuelos: any, flightType: any, distribution: any) {
-        this.tab = 'ONLY_FLIGHT';
-        this.distribution = distribution;
-        this.flightType = flightType;
-        this.cabinsVuelos = cabinsVuelos;
-    }
-
-    getUrl() {
-        return "";
-    }
-
-    getUrlMulti(json: string) {
-        return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.flightType}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.cabinsVuelos}&lang=ES&json=${json}`;
     }
 }
 export class URLHotel implements UrlNmViajes {

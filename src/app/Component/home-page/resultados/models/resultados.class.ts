@@ -1,5 +1,5 @@
 import { EnumCabinsVuelos } from "src/app/shared/components/tabs/tabs.models";
-import { IframeMotorVuelosProps, IframeMotorVuelosJsonProps } from './resultados.interfaces';
+import { IframeMotorVuelosProps } from "./resultados.interfaces";
 
 export class ResultadosPaginacion {
 
@@ -14,17 +14,16 @@ export class ResultadosPaginacion {
 export class IframeMotorVuelos{
     public flightType:number;
     public flightClass:EnumCabinsVuelos;
-    public departureLocation?:string = "";
-    public arrivalLocation?:string = "";
-    public departureDate?:string = "";
-    public arrivalDate?:string = "";
+    public departureLocation:string;
+    public arrivalLocation:string;
+    public departureDate:string;
+    public arrivalDate?:string;
     public adults:number = 1;
     public children:number = 0;
     public infants:number = 0;
     public selected_cabins:string = "";
     public excludedAirlines = null;
     public multicity = null; 
-    public json: string = "";
     constructor({
             flightType,
             flightClass,
@@ -34,8 +33,7 @@ export class IframeMotorVuelos{
             arrivalDate,
             adults,
             children,
-            infants,
-            json
+            infants
     }:IframeMotorVuelosProps
     ){
         this.flightType = flightType;
@@ -47,36 +45,5 @@ export class IframeMotorVuelos{
         this.adults = adults;
         this.children = children;
         this.infants = infants;
-        this.json = json || "";
-    }
-}
-
-
-
-export class IframeMotorVuelosJson{
-    public flightType:number;
-    public flightClass:EnumCabinsVuelos;
-    public adults:number = 1;
-    public children:number = 0;
-    public infants:number = 0;
-    public selected_cabins:string = "";
-    public excludedAirlines = null;
-    public multicity = null; 
-    public json: string = "";
-    constructor({
-            flightType,
-            flightClass,
-            adults,
-            children,
-            infants,
-            json
-    }:IframeMotorVuelosJsonProps
-    ){
-        this.flightType = flightType;
-        this.flightClass = flightClass;
-        this.adults = adults;
-        this.children = children;
-        this.infants = infants;
-        this.json = json || "";
     }
 }

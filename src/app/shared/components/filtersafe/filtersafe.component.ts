@@ -352,6 +352,7 @@ export class FiltersafeComponent implements OnInit {
   }
 
   insertTag(form: IFormSeguros) {
+
     const edades = form.Edades.split(';');
     const sum = edades.reduce((acc, el) => (acc = Number(el) + acc), 0);
     const promEdades = sum / edades.length;
