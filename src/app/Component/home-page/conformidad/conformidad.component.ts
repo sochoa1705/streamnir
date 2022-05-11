@@ -110,7 +110,7 @@ export class ConformidadComponent implements OnInit {
     // IP DEL CLIENTE
     this.ipCliente = localStorage.getItem('ipCliente')
     // TIPO DE PAGO
-    this.typePay = this.shopString.paymentMethodForm.select21
+    this.typePay = this.shopString.paymentMethodForm.select21;
 
     this.paymentDataStr = localStorage.getItem('paymentData');
     this.paymentData = JSON.parse(this.paymentDataStr);
@@ -394,9 +394,4 @@ export class ConformidadComponent implements OnInit {
 
     return expiredFormatt;
   }
-
-
-
 }
-
-

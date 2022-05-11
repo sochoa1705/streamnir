@@ -630,7 +630,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       return;
 
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
-    this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal * this.resultJson['passengers'].length));
+    this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal));
 
     this.dataShop = this.formShop.value;
     let dataShop = this.formShop.value;
@@ -653,6 +653,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log("JSON payload", JSON.stringify(payload));
 
     this._secureBookingService.generateInsuranceReserve(payload).subscribe((response: any) => {
+      debugger
+
       this.reservation = response;
       localStorage.setItem('reserva', JSON.stringify(response))
       //console.log('Codigo de reserva:', this.reservation);
@@ -779,12 +781,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const payload: RqPaymentCeRequest1 = this.generatePayloadToPay(data);
 
+    debugger
+
     console.log("JSON payload", JSON.stringify(payload));
 
     localStorage.setItem('payloadPayment', JSON.stringify(payload));
 
     this._paymentService.v1ApiPaymentPost({ body: payload }).subscribe({
       next: (response) => {
+
+        debugger
 
         this.paymentData = response;
         localStorage.setItem('paymentData', this.paymentData);

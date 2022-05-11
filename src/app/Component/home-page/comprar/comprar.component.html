@@ -221,8 +221,8 @@
 
                 <div class="card-body" formGroupName="paymentMethodForm">
                   <div class="row card_ py-4 justify-content-evenly cardMob" *ngIf="mobile">
-                    <input *ngFor="let chk of metodoPago" type="radio" name="select" id="{{ chk.name }}"
-                      (click)="chkValue(chk.name)" [checked]="chk.checked">
+                    <input *ngFor="let chk of metodoPago" formControlName="select21" value="{{chk.value}}" type="radio"
+                      name="select21" id="{{ chk.name }}" (click)="chkValue(chk.name)" [checked]="chk.checked">
 
                     <label *ngFor="let chk of metodoPago" for="{{ chk.name }}"
                       class="option {{ chk.name }} col-4 offset-1 py-3 lessMarginLeft boxMob">
