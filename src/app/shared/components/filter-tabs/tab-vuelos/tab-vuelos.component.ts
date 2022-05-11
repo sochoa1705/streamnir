@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
@@ -15,7 +15,7 @@ import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { ICardAutocomplete } from '../../card-autocomplete/card-autocomplete.interface';
 import {  PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { IDistributionObjectVuelos } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { EnumCabinsVuelos, EnumFlightType, ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos } from '../../tabs/tabs.models';
+import { EnumCabinsVuelos, EnumFlightType, ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos, URLVuelosMulti } from '../../tabs/tabs.models';
 import { IGeoTree } from './tab-vuelos.interfaces';
 
 @Component({
@@ -80,13 +80,15 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
   isSubmit = false;
 
   private readonly destroy$ = new Subject();
+  flightSearchForm!: FormGroup;
 
 
   constructor(private destineService: DestinyService,public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar, private router: Router,private destinosService: DestinosService,
-    private notification: NotificationService
+    private notification: NotificationService, private fb: FormBuilder
   ) {
     this.createForm();
+    this.createFormMultiCity();
   }
 
 
@@ -133,9 +135,6 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
     })
 
   }
-  
-
-
   get viajesForm(){
     return this.form.get("viajes")?.value;
   }
@@ -171,6 +170,10 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
         map(item => this.convertFormatAutocomplete(item))
       )
     )
+  }
+
+  getControls() {
+    return (this.flightSearchForm.get('multicity') as FormArray).controls;
   }
 
   convertFormatAutocomplete(array: IGeoTree[]): ICardAutocomplete[] {
@@ -242,8 +245,23 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
       origen: new FormControl(''),
       destino: new FormControl(''),
       origenHotel: new FormControl('')
-
     });
+  }
+
+  createFormMultiCity() {
+    this.flightSearchForm = this.fb.group({
+      multicity: this.jsonMulticityToFormGroup()
+    });
+  }
+
+  jsonMulticityToFormGroup() {
+    return this.fb.array([
+      this.fb.group({
+        origen: [''],
+        destino: [''],
+        departureDate: [''],
+      }),
+    ]);
   }
 
   navigateToResponseUrl(url: string): void {
@@ -370,11 +388,11 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
   getParams() {
     let params = new ParamsVuelos(
       {
-        fromDate: this.fromDate,
-        toDate: this.toDate,
+        fromDate: this.fromDate || null,
+        toDate: this.toDate || null,
         form: this.form,
-        citysDestinosSelect: this.citysDestinosSelect,
-        citysOrigenSelect: this.citysOrigenSelect
+        citysDestinosSelect: this.citysDestinosSelect || null,
+        citysOrigenSelect: this.citysOrigenSelect || null
       }
     );
     return params;
@@ -433,10 +451,39 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
     this.fromDate = value.fromDate;
   }
 
-
+  get multicity() {
+    return this.flightSearchForm.get('multicity') as FormArray;
+  }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  searchVueloHotelMulti(): void {
+    let jsonArray = this.setMultiCityArray();
+    let url = new URLVuelosMulti(this.form.controls['clase'].value,this.form.controls['viajes'].value,this.distributionObject).getUrlMulti(jsonArray);
+    this.navigateToResponseUrl(url);
+  }
+
+  setMultiCityArray(): string {
+    let json: Array<any> = [];
+    for(let i=0; i< this.multicity.length; i++) {
+      let dataOrigen: any = this.getControlForm('origen', i);
+      let dataDestino: any = this.getControlForm('destino', i);
+      let dataDate = this.getControlForm('departureDate', i);
+      let data: any = {
+        departureLocation : dataOrigen.codigo + " " + dataOrigen.title + ", " + dataOrigen.country,
+        arrivalLocation : dataDestino.codigo + " " + dataDestino.title + ", " + dataDestino.country,
+        departureDate : dataDate
+      }
+      json.push(data);
+    }
+    return JSON.stringify(json);
+  }
+
+  getControlForm(key: any, index: number): string {
+    const control = <FormArray>this.multicity.controls[index];
+    return control.controls[key].value;
   }
 }
