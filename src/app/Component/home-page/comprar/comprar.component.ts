@@ -931,7 +931,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "ExpirationDate": `${data.paymentMethodForm.expiredCard.substring(0, 2)}/${data.paymentMethodForm.expiredCard.substring(2)}`
         },
         "Amount": {
-          "Value": data.PriceTotal,
+          "Value": Number(data.PriceTotal),
           "Currency": "USD",
           "OfFees": data.feePay || 0,
         },
