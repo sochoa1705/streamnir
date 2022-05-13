@@ -567,9 +567,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     TaggingService.tagStartOfPaymentMethods(model);
 
-    debugger
-
-
     if (e === 'optionm-1' || e === 'option-1')
       this.selectedPay = 'tarjeta';
     else
@@ -615,7 +612,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   buyInsurance(): void {
 
     console.log('1. buyInsurance');
-    debugger
 
     if (this.formShop.invalid)
       this.formShop.markAllAsTouched();
@@ -653,8 +649,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log("JSON payload", JSON.stringify(payload));
 
     this._secureBookingService.generateInsuranceReserve(payload).subscribe((response: any) => {
-      debugger
-
       this.reservation = response;
       localStorage.setItem('reserva', JSON.stringify(response))
       //console.log('Codigo de reserva:', this.reservation);
@@ -781,16 +775,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const payload: RqPaymentCeRequest1 = this.generatePayloadToPay(data);
 
-    debugger
-
     console.log("JSON payload", JSON.stringify(payload));
 
     localStorage.setItem('payloadPayment', JSON.stringify(payload));
 
     this._paymentService.v1ApiPaymentPost({ body: payload }).subscribe({
       next: (response) => {
-
-        debugger
 
         this.paymentData = response;
         localStorage.setItem('paymentData', this.paymentData);
