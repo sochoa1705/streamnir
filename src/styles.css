@@ -2838,7 +2838,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     letter-spacing: 0.1px;
     color: #009aed; }
   .accordion-body .row {
-    height: 32px; }
+    min-height: 32px; }
 
 .totalItem {
   margin: 1rem 0.5rem !important;
@@ -3403,8 +3403,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       margin-bottom: 10px; }
 
   .py-5 {
-    padding-top: 2rem !important;
+    padding-top: 1rem !important;
     padding-bottom: 1rem !important; }
+
+  .py-4 {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important; }
 
   .lessViewMob {
     width: 100% !important;

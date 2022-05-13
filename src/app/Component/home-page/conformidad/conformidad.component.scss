@@ -124,6 +124,9 @@
                 letter-spacing: 0.18px;
                 color: #4B4B4B;
                 padding-bottom: 37px;
+                @media (max-width: 640px) {
+                    padding-bottom: 15px;
+                }
             }
             &.colCenter {
                 display: flex;
@@ -142,6 +145,9 @@
             }
             .iconCard {
                 padding-bottom: 40px;
+                @media (max-width: 640px) {
+                    padding-bottom: 15px;
+                }
             }
             .boxBank {
                 width: 220px;
