@@ -585,6 +585,10 @@ section {
   text-transform: capitalize;
   color: #4b4b4b; }
 
+@media (max-width: 640px) {
+  .ngb-dp-content .ngb-dp-month:nth-child(2) {
+    display: none; } }
+
 .ngb-dp-header {
   padding: 10px 30px 0 30px !important; }
 
@@ -3234,7 +3238,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         display: flex;
         flex-wrap: wrap; }
         .boxTab .rowBoxTab app-calendar {
-          width: 100%; } }
+          width: 100%;
+          flex-wrap: wrap; }
+          .boxTab .rowBoxTab app-calendar .colBoxtab {
+            width: 100% !important; } }
     .boxTab .rowBoxTab.right {
       justify-content: end; }
     .boxTab .rowBoxTab.text,
