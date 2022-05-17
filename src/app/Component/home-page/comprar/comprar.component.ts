@@ -8,7 +8,7 @@ import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { take } from 'rxjs/operators';
 import { ICardRequest, IFiltroVuelo } from './interfaces/comprar.interfaces';
 import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
-import { ActualizarCodigoSafetyPaySeguroRQ, ActualizarEstadoSeguroRQ, RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
+import { ActualizarCodigoSafetyPaySeguroRQ, RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
 import { Guid, toUp, Utilities } from 'src/app/shared/utils';
@@ -25,6 +25,8 @@ import { PreferenceService } from 'src/app/Services/preference/preference.servic
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
 import { ActionFieldCheckout, ActionFieldCheckoutOption, Checkout, CheckoutOption, EcommerceCheckout, EcommercecheckoutOption, ModelTaggingCheckout, ModelTaggingcheckoutOption, ProductAddToCart } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
+import { NotificationService } from 'src/app/Services/notification.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Methods {
   id: string;
@@ -162,7 +164,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     private _preferencesService: PreferenceService,
     private _validatorsService: ValidatorsService,
     private _cardService: CardService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private notification: NotificationService
   ) {
     // COBERTURA
     this.coverageList = localStorage.getItem('coverage');
@@ -539,74 +542,91 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   chkValue(e: any) {
-    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer']).Name;
+    debugger
 
-    const model1 = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
-      ecommerce: {
-        checkout_option: {
-          actionField: {
-            step: 1,
-            option: nationality
+
+    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer'])?.Name;
+
+    if (nationality === undefined) {
+      this.notification.showNotificacion("Error", "Debe ingresar previamente los datos del pasajero");
+      return;
+    }
+    else {
+      const model1 = {
+        event: 'nmv.seguros_eecga3_checkoutOption',
+        ecommerce: {
+          checkout_option: {
+            actionField: {
+              step: 1,
+              option: nationality
+            }
           }
         }
       }
-    }
 
-    TaggingService.tagNationalitySelection(model1);
-    const model = {
-      event: 'nmv.seguros_eecga3_checkout',
-      ecommerce: {
-        checkout: {
-          actionField: {
-            step: 2
+      TaggingService.tagNationalitySelection(model1);
+      const model = {
+        event: 'nmv.seguros_eecga3_checkout',
+        ecommerce: {
+          checkout: {
+            actionField: {
+              step: 2
+            }
           }
         }
       }
+
+      TaggingService.tagStartOfPaymentMethods(model);
+
+      if (e === 'optionm-1' || e === 'option-1')
+        this.selectedPay = 'tarjeta';
+      else
+        this.selectedPay = 'safety';
     }
-
-    TaggingService.tagStartOfPaymentMethods(model);
-
-    if (e === 'optionm-1' || e === 'option-1')
-      this.selectedPay = 'tarjeta';
-    else
-      this.selectedPay = 'safety';
   }
 
   id: any = "banca";
 
   optionPay(e: any, isBankingOrMobile: boolean, ids: any) {
 
+    debugger
+
     this.banca = isBankingOrMobile;
     this.id = ids;
-    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer']).Name;
+    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer'])?.Name;
 
-    const model1 = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
-      ecommerce: {
-        checkout_option: {
-          actionField: {
-            step: 1,
-            option: nationality
+    if (nationality === undefined) {
+      this.notification.showNotificacion("Error", "Debe ingresar previamente los datos del pasajero");
+      return;
+    }
+    else {
+      const model1 = {
+        event: 'nmv.seguros_eecga3_checkoutOption',
+        ecommerce: {
+          checkout_option: {
+            actionField: {
+              step: 1,
+              option: nationality
+            }
           }
         }
       }
-    }
 
-    TaggingService.tagNationalitySelection(model1);
+      TaggingService.tagNationalitySelection(model1);
 
-    const model = {
-      event: 'nmv.seguros_eecga3_checkout',
-      ecommerce: {
-        checkout: {
-          actionField: {
-            step: 2
+      const model = {
+        event: 'nmv.seguros_eecga3_checkout',
+        ecommerce: {
+          checkout: {
+            actionField: {
+              step: 2
+            }
           }
         }
       }
-    }
 
-    TaggingService.tagStartOfPaymentMethods(model);
+      TaggingService.tagStartOfPaymentMethods(model);
+    }
   }
 
   buyInsurance(): void {
@@ -1469,34 +1489,40 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   onchangeBanco(): void {
-    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer']).Name;
+    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer'])?.Name;
 
-    const model1 = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
-      ecommerce: {
-        checkout_option: {
-          actionField: {
-            step: 1,
-            option: nationality
+    if (nationality === undefined) {
+      this.notification.showNotificacion("Error", "Debe ingresar previamente los datos del pasajero");
+      return;
+    }
+    else {
+      const model1 = {
+        event: 'nmv.seguros_eecga3_checkoutOption',
+        ecommerce: {
+          checkout_option: {
+            actionField: {
+              step: 1,
+              option: nationality
+            }
           }
         }
       }
-    }
 
-    TaggingService.tagNationalitySelection(model1);
+      TaggingService.tagNationalitySelection(model1);
 
-    const model = {
-      event: 'nmv.seguros_eecga3_checkout',
-      ecommerce: {
-        checkout: {
-          actionField: {
-            step: 2
+      const model = {
+        event: 'nmv.seguros_eecga3_checkout',
+        ecommerce: {
+          checkout: {
+            actionField: {
+              step: 2
+            }
           }
         }
       }
-    }
 
-    TaggingService.tagStartOfPaymentMethods(model);
+      TaggingService.tagStartOfPaymentMethods(model);
+    }
   }
 
   onChangeProtectionPolicies(): void {
