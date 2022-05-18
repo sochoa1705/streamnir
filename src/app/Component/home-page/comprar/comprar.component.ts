@@ -27,6 +27,8 @@ import { ActionFieldCheckout, ActionFieldCheckoutOption, Checkout, CheckoutOptio
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MessageService } from 'src/app/api/api-correos/services';
+import { CeReservaCeEmailParameterCustomCeRequest1, CeResponse, CeSeguroCeEmailParameterCustomCeRequest1, EnumRequestApplications, EnumRequestCompanies } from 'src/app/api/api-correos/models';
 
 interface Methods {
   id: string;
@@ -165,7 +167,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     private _validatorsService: ValidatorsService,
     private _cardService: CardService,
     private _formBuilder: FormBuilder,
-    private notification: NotificationService
+    private _notification: NotificationService,
+    private _messageService: MessageService
   ) {
     // COBERTURA
     this.coverageList = localStorage.getItem('coverage');
@@ -548,7 +551,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer'])?.Name;
 
     if (nationality === undefined) {
-      this.notification.showNotificacion("Error", "Debe ingresar previamente los datos del pasajero");
+      this._notification.showNotificacion("Error", "Debe ingresar previamente los datos del pasajero");
       return;
     }
     else {
@@ -596,7 +599,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer'])?.Name;
 
     if (nationality === undefined) {
-      this.notification.showNotificacion("Error", "Debe ingresar previamente los datos del pasajero");
+      this._notification.showNotificacion("Error", "Debe ingresar previamente los datos del pasajero");
       return;
     }
     else {
@@ -877,17 +880,80 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           }
 
-          console.log("Tag purchase amtes");
-          console.log(JSON.stringify(model));
-
           TaggingService.tagTransactionCompleted(model);
 
-          console.log("Tag purchase despues");
-          console.log(JSON.stringify(model));
 
-          this._loaderSubjectService.closeLoader();
+          const asegurados: any = [];
 
-          this._router.navigateByUrl('/conformidad');
+          this.dataShop.customers.forEach((value: any, index: number) => {
+            let asegurado = {
+              NumeroSolicitudCompra: String(this.reservation.Reserva),
+              NombresApellidos: `ADT - ${value.nameCustomer.toUpperCase()
+                } ${value.lastNameCustomer.toUpperCase()}`,
+              FechaNacimiento: `${value.dayCustomer.padStart(2, '0')}/${value.monthCustomer.padStart(2, '0')}/${value.yearCustomer}`
+            }
+
+            asegurados.push(asegurado);
+          });
+
+          debugger
+
+          //TODO: Revisar 
+          const timeLimit = result.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(11, 5);
+          const deadLine = result.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(0, 10);
+
+          const notificationBody: CeSeguroCeEmailParameterCustomCeRequest1 = {
+            Caller: {
+              Company: EnumRequestCompanies.Agil,
+              Application: EnumRequestApplications.Interagencias
+            },
+            TrackingCode: Guid(),
+            MuteExceptions: false,
+            Parameter: {
+              To: [data.contactForm.mailContacto.toUpperCase()],
+              BCC: [""],
+              CC: [""],
+              Subject: `NMViajes - Confirmación de compra de seguro #${this.reservation.Reserva}`,
+              Data: {
+                Contacto: {
+                  NombresApellidos: `${data.contactForm.nameContacto.toUpperCase()
+                    } ${data.contactForm.lastnameContacto.toUpperCase()
+                    }`,
+                  CorreoElectronico: data.contactForm.mailContacto.toUpperCase(),
+                  Telefonos: data.contactForm.numberPhone0
+                },
+                Pago: {
+                  CodigoSafetypay: result.Result.ServiceResponse.Code,
+                  TextoExpiracion: `Solo tienes hasta las ${timeLimit} del ${deadLine}`,
+                  TiempoExpiracion: "1h 59m 47s"
+                },
+                Asegurados: asegurados,
+                Precio: {
+                  PrecioDolares: `${this.safe0Json.monedaLista} ${this.safe0Json.precioEmisionLocal}`
+                },
+                Cobertura: {
+                  TipoCobertura: this.safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+                  MontoAsistenciaMedica: String(this.asistenciaMedicaMonto),
+                  DuracionCobertura: `${this.resultJson.days} días`,
+                  CiudadOrigen: "(PE) Perú",
+                  CiudadDestino: this.resultJson.destinyString.descripcion_destino,
+                  FechaSalida: `${fechasalida[0]}/${fechasalida[1]}/${fechasalida[2]}`,
+                  FechaRegreso: `${fecharetorno[0]}/${fecharetorno[1]}/${fecharetorno[2]}`,
+                  Pasajeros: `${this.resultJson.passengers.length} Adulto(s)`
+                }
+              }
+            }
+          };
+
+          this._messageService.v1ApiMessageSendConfirmacionSeguroPost({ body: notificationBody }).subscribe((res: CeResponse) => {
+            debugger
+
+            if (res.State.Ok) {
+              this._loaderSubjectService.closeLoader();
+
+              this._router.navigateByUrl('/conformidad');
+            }
+          });
         }
       },
       error: (err) => {
@@ -1492,7 +1558,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer'])?.Name;
 
     if (nationality === undefined) {
-      this.notification.showNotificacion("Error", "Debe ingresar previamente los datos del pasajero");
+      this._notification.showNotificacion("Error", "Debe ingresar previamente los datos del pasajero");
       return;
     }
     else {
