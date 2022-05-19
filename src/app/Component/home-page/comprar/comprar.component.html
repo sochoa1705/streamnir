@@ -93,8 +93,7 @@
 
                       <input class="form-control" type="text" formControlName="nameCustomer"
                         (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
-                        (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje."
-                        (OnPush)="onFocus()">
+                        (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje.">
 
                       <span class="valid" *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required">
                         Ingresa los nombres del pasajero
@@ -489,7 +488,7 @@
 
           <div class="row rowMobileCard marginTop20">
             <div class="col-12 contentCenterMobile">
-              <button mat-button matStepperNext class="px-5" (click)="step1()">Continuar</button>
+              <button mat-button matStepperNext class="px-5">Continuar</button>
             </div>
           </div>
         </mat-step>
@@ -800,7 +799,7 @@
 
                     <input class="form-control" type="text" formControlName="nameCustomer"
                       (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
-                      placeholder="El que figura en el documento de viaje." (OnPush)="onFocus()">
+                      placeholder="El que figura en el documento de viaje.">
 
                     <span class="valid" *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required">
                       Ingresa los nombres del pasajero
