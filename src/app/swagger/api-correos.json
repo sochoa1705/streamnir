@@ -523,6 +523,10 @@
       "CE_Seguro_Cobertura": {
         "type": "object",
         "properties": {
+          "NombreCobertura": {
+            "type": "string",
+            "nullable": true
+          },
           "TipoCobertura": {
             "type": "string",
             "nullable": true

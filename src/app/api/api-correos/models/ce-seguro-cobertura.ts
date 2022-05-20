@@ -7,6 +7,7 @@ export interface CeSeguroCobertura {
   FechaRegreso?: null | string;
   FechaSalida?: null | string;
   MontoAsistenciaMedica?: null | string;
+  NombreCobertura?: null | string;
   Pasajeros?: null | string;
   TipoCobertura?: null | string;
 }

@@ -653,7 +653,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.generateInsuranceReserve(dataShop);
   }
 
-  generateInsuranceReserve(data: any) {
+  generateInsuranceReserve(data: any): void {
 
     let dataShop = this.formShop.value;
     console.log("dataShopForm:", dataShop)
@@ -673,7 +673,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     })
   }
 
-  sendDataLayerCheckoutOption(value: any) {
+  sendDataLayerCheckoutOption(value: any): void {
     let nacionalidad = value.customers[0].nationalityCustomer;
     let actionField: ActionFieldCheckoutOption = {
       step: 1,
@@ -783,7 +783,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return payload;
   }
 
-  makePayment(data: any) {
+  makePayment(data: any): void {
     this._loaderSubjectService.showText('SE ESTA GESTIONANDO TU PAGO!');
     this._loaderSubjectService.showLoader();
 
@@ -915,6 +915,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
                   PrecioDolares: `${this.safe0Json.monedaLista} ${this.safe0Json.precioEmisionLocal}`
                 },
                 Cobertura: {
+                  NombreCobertura: this.safe0Json?.nombreProducto,
                   TipoCobertura: this.safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
                   MontoAsistenciaMedica: String(this.asistenciaMedicaMonto),
                   DuracionCobertura: `${this.resultJson.days} días`,
