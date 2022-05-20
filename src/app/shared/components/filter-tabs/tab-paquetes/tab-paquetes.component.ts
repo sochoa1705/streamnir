@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ModelTaggingHoteles } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
@@ -9,13 +9,11 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { URLHotel, ParamsHoteles, ParamArmaTuViaje, URLArmaTuViaje, URLPaquete, ParamPaquete, EnumFlightType, EnumCabins } from '../../tabs/tabs.models';
+import { URLHotel, URLPaquete, ParamPaquete, EnumFlightType, EnumCabins } from '../../tabs/tabs.models';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
-import { filter } from 'rxjs/operators';
-import { IPackageCountry } from '../tab-vuelos/tab-vuelos.interfaces';
 import { InputValidationService } from '../../../../Services/inputValidation.service';
-
-
+import { HttpClient } from '@angular/common/http';
+import { AccountsService } from 'src/app/Services/accounts.service';
 
 @Component({
   selector: 'app-tab-paquetes',
@@ -36,7 +34,6 @@ export class TabPaquetesComponent {
   distribution = '';
 
   distributionObject: DistributionObjectA;
-
 
   hoveredDate: NgbDate | null = null;
 
@@ -64,9 +61,13 @@ export class TabPaquetesComponent {
     return this._vuelosTab;
   }
 
-  constructor(private calendar: NgbCalendar, private destineService: DestinyService, public formatter: NgbDateParserFormatter,
+  constructor(
+    private destineService: DestinyService,
+    public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar,
-    public inputValidator: InputValidationService) {
+    public inputValidator: InputValidationService,
+    private _accountsService: AccountsService
+  ) {
     this.form = new FormGroup({
       destino: new FormControl(''),
       themes: new FormControl(''),
@@ -96,13 +97,10 @@ export class TabPaquetesComponent {
     return this.form.get("destino")?.value;
   }
 
-
-
   getListCiudades(e: any, typeSearch = 'FLIGHT_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
         this.citys = data;
-
       },
       err => console.log(err)
     )
@@ -112,7 +110,6 @@ export class TabPaquetesComponent {
     this.destineService.getThemes().subscribe(
       data => {
         this.themes = data;
-
       },
       err => console.log(err)
     )
@@ -143,7 +140,6 @@ export class TabPaquetesComponent {
     )
   }
 
-
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
   }
@@ -155,14 +151,24 @@ export class TabPaquetesComponent {
     });
   }
 
-  public searchPaquete() {
+  public async searchPaquete() {
     // const errors = this.validateTab();
 
     // if (errors.length > 0) {
     //   this.openSnackBar(errors.join(" - "))
     //   return;
     // }
-    const url = this.getUrlPaquete();
+
+    let url = this.getUrlPaquete();
+    const result = await this._accountsService.getAccountToken();
+
+    if (result) {
+      if (result.Result.IsSuccess) {
+        const token: string = result.Result.Token;
+        url = `${url}&token=${token}&submit=true`;
+      }
+    }
+
     this.navigateToResponseUrl(url);
   }
 
@@ -175,9 +181,7 @@ export class TabPaquetesComponent {
   //     errors.push("El mes es requerido");
   //   }
   //   return errors;
-
   // }
-
 
   public getUrlAlojamiento() {
     let url = ''
@@ -194,9 +198,7 @@ export class TabPaquetesComponent {
     return url;
   }
 
-
   insertTag(params: any) {
-
     const getCodigoIata = (id: string) => {
       return id.split("::")[1];
     }
@@ -204,7 +206,6 @@ export class TabPaquetesComponent {
     const nombre = `${getCodigoIata(params.idDestino)}`;
     const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
     const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
-
 
     const model = new ModelTaggingHoteles(
       nombre,
@@ -223,7 +224,6 @@ export class TabPaquetesComponent {
     TaggingService.buscarHoteles(model);
   }
 
-
   getParamsAlojamiento() {
     let params = new ParamPaquete(
       this.fromDate,
@@ -234,13 +234,12 @@ export class TabPaquetesComponent {
       this.months,
       this.noches
     ).getParams();
+
     return params;
   }
-
 
   changeDate(value: ClassValueCalendar) {
     this.toDate = value.toDate;
     this.fromDate = value.fromDate;
   }
-
 }

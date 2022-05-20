@@ -12,19 +12,20 @@ import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model
 import { URLHotel, ParamsHoteles, ParamArmaTuViaje, URLArmaTuViaje, EnumCabins, EnumFlightType } from '../../tabs/tabs.models';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { NotificationService } from 'src/app/Services/notification.service';
+import { AccountsService } from 'src/app/Services/accounts.service';
 
 
 
 @Component({
-    selector: 'app-tab-arma-paquetes',
-    templateUrl: './tab-arma-paquetes.component.html',
-    styleUrls: ['./tab-arma-paquetes.component.scss']
-  })
-  export class TabArmaPaquetesComponent {
-  
-    @ViewChild('popUp') popUpElement:PopUpPasajeroComponent | undefined;
+  selector: 'app-tab-arma-paquetes',
+  templateUrl: './tab-arma-paquetes.component.html',
+  styleUrls: ['./tab-arma-paquetes.component.scss']
+})
+export class TabArmaPaquetesComponent {
 
-    form!: FormGroup;
+  @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
+
+  form!: FormGroup;
   fromDate: NgbDate | null
   citys: Array<any> = [];
   origen: any;
@@ -33,12 +34,12 @@ import { NotificationService } from 'src/app/Services/notification.service';
 
   distribution = '';
 
-  distributionObject:DistributionObjectA;
+  distributionObject: DistributionObjectA;
 
-  
+
   hoveredDate: NgbDate | null = null;
 
-  private _vuelosTab: SaveModelVuelos; 
+  private _vuelosTab: SaveModelVuelos;
 
   isSubmit = false;
 
@@ -57,19 +58,21 @@ import { NotificationService } from 'src/app/Services/notification.service';
   }
 
   constructor(private calendar: NgbCalendar,
-    private destineService: DestinyService ,
+    private destineService: DestinyService,
     private notification: NotificationService,
     public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar) {
+    private _snackBar: MatSnackBar,
+    private _accountsService: AccountsService
+  ) {
     this.form = new FormGroup({
       clase: new FormControl(EnumCabins.economico),
       destino: new FormControl(''),
     });
 
-   }
+  }
 
 
-   isValidate(){
+  isValidate() {
     return this.popUpElement?.isValid();
   }
 
@@ -84,12 +87,12 @@ import { NotificationService } from 'src/app/Services/notification.service';
     }
   }
 
-  get viajesForm(){
+  get viajesForm() {
     return this.form.get("destino")?.value;
   }
 
 
-  
+
   getListCiudades(e: any, typeSearch = 'FLIGHT_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
@@ -103,22 +106,22 @@ import { NotificationService } from 'src/app/Services/notification.service';
 
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
- }
+  }
 
- openSnackBar(message: string, action: string = "Error") {
-  this._snackBar.open(message, "", {
-    duration: 2000,
-    panelClass: ['mat-toolbar', 'mat-warn']
-  });
-}
+  openSnackBar(message: string, action: string = "Error") {
+    this._snackBar.open(message, "", {
+      duration: 2000,
+      panelClass: ['mat-toolbar', 'mat-warn']
+    });
+  }
 
 
-  getErrorsForm(form:FormGroup): string[] {
-    let errors:any[] = [];
+  getErrorsForm(form: FormGroup): string[] {
+    let errors: any[] = [];
 
     if (form.controls["destino"].invalid) {
       errors.push('El campo destino es obligatorio');
-    }     
+    }
 
     if (!this.fromDate) {
       errors.push("La fecha de inicio es requerido");
@@ -128,34 +131,45 @@ import { NotificationService } from 'src/app/Services/notification.service';
   }
 
 
-  public searchPaquete() {
+  public async searchPaquete() {
     this.isSubmit = true;
 
     let errosInputs = this.getErrorsForm(this.form);
 
-    if(errosInputs.length > 0){
-      this.notification.showNotificacion("Error", errosInputs.join(", "),10);
-      return ;
+    if (errosInputs.length > 0) {
+      this.notification.showNotificacion("Error", errosInputs.join(", "), 10);
+      return;
     }
-    
+
 
     let errorHabitaciones = this.popUpElement?.isValid();
 
-    if(!errorHabitaciones?.isValid){
-      this.notification.showNotificacion("Error", errorHabitaciones?.message || "Error en las habitaciones" )
-      return ;
+    if (!errorHabitaciones?.isValid) {
+      this.notification.showNotificacion("Error", errorHabitaciones?.message || "Error en las habitaciones")
+      return;
     }
-    const url = this.getUrlPaquete();
+
+    let url = this.getUrlPaquete();
+
+    const result = await this._accountsService.getAccountToken();
+
+    if (result) {
+      if (result.Result.IsSuccess) {
+        const token: string = result.Result.Token;
+        url = `${url}&token=${token}&submit=true`;
+      }
+    }
+
     this.navigateToResponseUrl(url);
   }
 
 
-  public getUrlAlojamiento(){
-      let url = ''
-      let params = this.getParamsAlojamiento();
-      this.insertTag(params);
-      url = new URLHotel(params, this.distribution).getUrl();
-      return url;
+  public getUrlAlojamiento() {
+    let url = ''
+    let params = this.getParamsAlojamiento();
+    this.insertTag(params);
+    url = new URLHotel(params, this.distribution).getUrl();
+    return url;
   }
 
   public getUrlPaquete() {
@@ -166,15 +180,15 @@ import { NotificationService } from 'src/app/Services/notification.service';
   }
 
 
-  insertTag(params:any){
+  insertTag(params: any) {
 
-    const getCodigoIata = (id:string)=>{
+    const getCodigoIata = (id: string) => {
       return id.split("::")[1];
     }
-  
+
     const nombre = `${getCodigoIata(params.idDestino)}`;
-    const diasAnticipacion = moment( params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
-    const duracionViaje =  moment( params.endDate, "DD/MM/YYYY").diff(moment( params.startDate, "DD/MM/YYYY"), 'days');
+    const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
+    const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
 
 
     const model = new ModelTaggingHoteles(
@@ -185,17 +199,17 @@ import { NotificationService } from 'src/app/Services/notification.service';
       this.distributionObject.ninos,
       0,
       this.distributionObject.habitacion,
-      moment( params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      moment( params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
       diasAnticipacion,
       duracionViaje
     )
-    
+
     TaggingService.buscarHoteles(model);
   }
 
 
-  getParamsAlojamiento(){
+  getParamsAlojamiento() {
     let params = new ParamArmaTuViaje(
       this.fromDate,
       this.toDate,
@@ -210,5 +224,5 @@ import { NotificationService } from 'src/app/Services/notification.service';
     this.toDate = value.toDate;
     this.fromDate = value.fromDate;
   }
-  
-  }
+
+}
