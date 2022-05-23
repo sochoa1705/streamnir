@@ -21,6 +21,7 @@ import { TabAutosComponent } from './tab-autos/tab-autos.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { CalendarEndDateModule } from '../calendar-enddate/calendar-enddate.module';
 import { TabVuelosMulticityComponent } from './tab-vuelos-multicity/tab-vuelos-multicity.component';
+import { CalendarPriceModule } from '../calendar-price/calendar-price.module';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { TabVuelosMulticityComponent } from './tab-vuelos-multicity/tab-vuelos-m
     MaterialModule,
     CalendarModule,
     CalendarEndDateModule,
+    CalendarPriceModule,
     InputAutocompleteModule,
     PopUpPasajerVuelosoModule,
     NgbModule,

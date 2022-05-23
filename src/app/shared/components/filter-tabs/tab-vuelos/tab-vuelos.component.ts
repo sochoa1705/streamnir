@@ -17,6 +17,7 @@ import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.co
 import { IDistributionObjectVuelos } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { EnumCabinsVuelos, EnumFlightType, ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos, URLVuelosMulti } from '../../tabs/tabs.models';
 import { IGeoTree } from './tab-vuelos.interfaces';
+import { IntermediaryService } from '../../../../Services/intermediary.service';
 
 @Component({
   selector: 'app-tab-vuelos',
@@ -81,11 +82,13 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject();
   flightSearchForm!: FormGroup;
+  displayCalendar = false;
+  flightData: any;
 
 
   constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar, private router: Router, private destinosService: DestinosService,
-    private notification: NotificationService, private fb: FormBuilder
+    private notification: NotificationService, private fb: FormBuilder, private intermediaryService: IntermediaryService
   ) {
     this.createForm();
     this.createFormMultiCity();
@@ -489,5 +492,38 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   getControlForm(key: any, index: number): string {
     const control = <FormArray>this.multicity.controls[index];
     return control.controls[key].value;
+  }
+
+  insertDates(inputDates: any) {
+    let flightType = this.flightSearchForm.get('flightType')?.value;
+    let departureDate = inputDates.departure == null ? '' : inputDates.departure?.date;
+    let arrivalDate = inputDates.arrival == null ? '' : inputDates.arrival?.date;
+
+    this.flightSearchForm.get('departureDate')?.setValue(departureDate);
+    if (flightType == 0)
+      this.flightSearchForm.get('arrivalDate')?.setValue(arrivalDate);
+
+    this.displayCalendar = false;
+  }
+
+  onFocus() {
+    let flightType = this.form.get('clase')?.value;
+    let departureCity = this.form.get('origen')?.value.codigo;
+    let arrivalCity = this.form.get('destino')?.value.codigo;
+    let departureDate = this.form.get('departureDate')?.value;
+    let arrivalDate = flightType == 0 ? this.form.get('arrivalDate')?.value : '';
+
+    if (departureCity != '' && arrivalCity != '') {
+      this.flightData = {
+        flightType: flightType,
+        departureCity: departureCity,
+        arrivalCity: arrivalCity,
+        departureDate: departureDate,
+        arrivalDate: arrivalDate,
+      };
+
+      this.displayCalendar = true;
+      this.intermediaryService.sendChangeCalendarPrice(true);
+    }
   }
 }

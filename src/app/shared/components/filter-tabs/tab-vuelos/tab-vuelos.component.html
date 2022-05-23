@@ -40,7 +40,12 @@
 
             </div>
 
-            <app-calendar [requiredFromDate]="isSubmit" [requiredToDate]="isSubmit" [typeValue]="viajesForm" [toDate]="vuelosTab?.toDate || null" [fromDate]="vuelosTab?.fromDate || null" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
+            <input type="text" class="form-control textIndent" formControlName="departureDate" (focus)="onFocus()" placeholder="dd/mm/yyyy" />
+            <input type="text" class="form-control textIndent" formControlName="arrivalDate" (focus)="onFocus()" placeholder="dd/mm/yyyy" />
+
+            <app-calendar-price *ngIf="displayCalendar" [flightData]="flightData" (inputDates)="insertDates($event)"></app-calendar-price>
+
+            <!-- <app-calendar [requiredFromDate]="isSubmit" [requiredToDate]="isSubmit" [typeValue]="viajesForm" [toDate]="vuelosTab?.toDate || null" [fromDate]="vuelosTab?.fromDate || null" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar> -->
 
 
             <div class="colBoxtab w-10 ms-md-2">
