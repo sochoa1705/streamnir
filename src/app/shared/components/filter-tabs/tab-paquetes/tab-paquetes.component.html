@@ -1,69 +1,48 @@
 <form class="bg-white" name="form" [formGroup]="form">
-    <div class="gridTab">
-        <div class="rowGrid">
-            <div class="colGrid">
-                <div class="colElement">
-                    <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)" class="form-control animated fadeIn" placeholder="¿A que país le gustaría ir?">
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let state of countriesPackageSearch" [value]="state.label">
-                            <img class="example-option-img" aria-hidden src="./assets/origen.png">
-                            <span>{{state.label}}</span>
-                        </mat-option>
-                    </mat-autocomplete>
-                </div>
-                <div class="colElement">
-                    <select formControlName="noches" class="form-select selectSeguro">
-                        <option value="" selected>Número de noches</option>
-                        <option *ngFor="let elem of noches" [value]="elem.code">
-                          {{ elem.name }}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="colGrid">
-                <div class="colElement">
-                    <select formControlName="months" class="form-select selectSeguro">
-                        <option value="" selected>Todos los meses</option>
-                        <option *ngFor="let elem of months" [value]="elem.code">
-                          {{ elem.label }}
-                        </option>
-                    </select>
-                </div>
-                <div class="colElement">
-                    <select formControlName="themes" class="form-select selectSeguro">
-                        <option value="" selected>Temas</option>
-                        <option *ngFor="let elem of themes" [value]="elem.code">
-                          {{ elem.name }}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="colGrid fullWidht">
-                <button (click)="searchPaquete()">Buscar</button>
-            </div>
+  <div class="gridTab">
+    <div class="rowGrid">
+      <div class="colGrid">
+        <div class="colElement">
+          <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino"
+            (keyup)="autoComplete($event)" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)"
+            class="form-control animated fadeIn" placeholder="¿A que país le gustaría ir?">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let state of countriesPackageSearch" [value]="state.label">
+              <img class="example-option-img" aria-hidden src="./assets/origen.png">
+              <span>{{state.label}}</span>
+            </mat-option>
+          </mat-autocomplete>
         </div>
+        <div class="colElement">
+          <select formControlName="noches" class="form-select selectSeguro">
+            <option value="" selected>Número de noches</option>
+            <option *ngFor="let elem of noches" [value]="elem.code">
+              {{ elem.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="colGrid">
+        <div class="colElement">
+          <select formControlName="months" class="form-select selectSeguro">
+            <option value="" selected>Todos los meses</option>
+            <option *ngFor="let elem of months" [value]="elem.code">
+              {{ elem.label }}
+            </option>
+          </select>
+        </div>
+        <div class="colElement">
+          <select formControlName="themes" class="form-select selectSeguro">
+            <option value="" selected>Temas</option>
+            <option *ngFor="let elem of themes" [value]="elem.code">
+              {{ elem.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="colGrid fullWidht">
+        <button (click)="searchPaquete()">Buscar</button>
+      </div>
     </div>
-
-    <!-- <div class="boxTab">
-
-        <div class="rowBoxTab">
-            <div class="colBoxtab w-30 me-md-1">
-                
-            </div>
-            <div class="colBoxTab w-30 me-md-1">
-                
-            </div>
-            <div class="colBoxtab w-30 me-md-1">
-                
-            </div>
-        </div>
-        <div class="rowBoxTab">
-            <div class="colBoxTab me-md-1" style="width: 100%;">
-                
-            </div>
-            <div class="colBoxTab me-md-1" style="width: 100%;">
-                
-            </div>
-        </div>
-    </div> -->
+  </div>
 </form>

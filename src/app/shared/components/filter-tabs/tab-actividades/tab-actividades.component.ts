@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
+import { AccountsService } from 'src/app/Services/accounts.service';
 import { ModelTaggingActividades } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
@@ -17,7 +18,7 @@ import { ParamsActividades, URLActividades } from '../../tabs/tabs.models';
   templateUrl: './tab-actividades.component.html',
   styleUrls: ['./tab-actividades.component.scss']
 })
-export class TabActividadesComponent  {
+export class TabActividadesComponent {
 
   form!: FormGroup;
   public fromDate: NgbDate | null;
@@ -30,18 +31,23 @@ export class TabActividadesComponent  {
   hoveredDate: NgbDate | null = null;
 
 
-  distributionObject:DistributionObjectA;
-
-  
-  @ViewChild('popUp') popUpElement:PopUpPasajeroComponent | undefined;
+  distributionObject: DistributionObjectA;
 
 
-  constructor(private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar, public inputValidator : InputValidationService) {
+  @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
+
+
+  constructor(
+    private destineService: DestinyService,
+    public formatter: NgbDateParserFormatter,
+    private _snackBar: MatSnackBar,
+    public inputValidator: InputValidationService,
+    private _accountsService: AccountsService
+  ) {
     this.form = new FormGroup({
       destino: new FormControl(''),
     });
-   }
+  }
 
 
   autoComplete(e: any, typeSearch = 'ONLY_TICKET') {
@@ -55,7 +61,7 @@ export class TabActividadesComponent  {
     }
   }
 
-  isValidate(){
+  isValidate() {
     return this.popUpElement?.isValid();
   }
 
@@ -71,44 +77,54 @@ export class TabActividadesComponent  {
 
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
- }
+  }
 
 
- openSnackBar(message: string, action: string = "Error") {
-  this._snackBar.open(message, "", {
-    duration: 2000,
-    panelClass: ['mat-toolbar', 'mat-warn']
-  });
-}
+  openSnackBar(message: string, action: string = "Error") {
+    this._snackBar.open(message, "", {
+      duration: 2000,
+      panelClass: ['mat-toolbar', 'mat-warn']
+    });
+  }
 
 
-  public search() {
-    if(!this.isValidate()){
+  public async search() {
+    if (!this.isValidate()) {
       this.openSnackBar("Error de validacion")
-      return ;
+      return;
     }
-    const url = this.getUrlActividades();
+    let url = this.getUrlActividades();
+
+    const result = await this._accountsService.getAccountToken();
+
+    if (result) {
+      if (result.Result.IsSuccess) {
+        const token: string = result.Result.Token;
+        url = `${url}&token=${token}&submit=true`;
+      }
+    }
+
     this.navigateToResponseUrl(url);
   }
 
-  public getUrlActividades(){
-      let url = ''
-      let params = this.getParamsActividades();
-      this.insertTag(params);
-      url = new URLActividades(params, this.distribution).getUrl();
-      return url;
+  public getUrlActividades() {
+    let url = ''
+    let params = this.getParamsActividades();
+    this.insertTag(params);
+    url = new URLActividades(params, this.distribution).getUrl();
+    return url;
   }
 
 
-  insertTag(params:any){
+  insertTag(params: any) {
 
-    const getCodigoIata = (id:string)=>{
+    const getCodigoIata = (id: string) => {
       return id.split("::")[1];
     }
-  
+
     const nombre = `${getCodigoIata(params.idDestino)}`;
-    const diasAnticipacion = moment( params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
-    const duracionViaje =  moment( params.endDate, "DD/MM/YYYY").diff(moment( params.startDate, "DD/MM/YYYY"), 'days');
+    const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
+    const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
 
 
     const model = new ModelTaggingActividades(
@@ -119,17 +135,17 @@ export class TabActividadesComponent  {
       this.distributionObject.ninos,
       0,
       this.distributionObject.habitacion,
-      moment( params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      moment( params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
       diasAnticipacion,
       duracionViaje
     )
-    
+
     TaggingService.buscarActividades(model);
   }
 
 
-  getParamsActividades(){
+  getParamsActividades() {
     let params = new ParamsActividades(
       this.fromDate,
       this.toDate,
@@ -140,10 +156,10 @@ export class TabActividadesComponent  {
   }
 
 
-    changeDate(value: ClassValueCalendar) {
-      this.toDate = value.toDate;
-      this.fromDate = value.fromDate;
-    }
+  changeDate(value: ClassValueCalendar) {
+    this.toDate = value.toDate;
+    this.fromDate = value.fromDate;
+  }
 
 
 }

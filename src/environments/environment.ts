@@ -40,7 +40,7 @@ export const environment = {
 
 
   urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela",
-  urlSuggest: "https://suggest.agentcars.com/suggest/"
+  urlSuggest: "https://suggest.agentcars.com/suggest/",
 
-
+  urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo"
 }

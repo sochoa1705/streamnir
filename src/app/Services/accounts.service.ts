@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LoginPerson } from 'src/app/app.component';
 import { ResponseModelT } from 'src/app/shared/models';
-import { NmvModel } from 'src/app/shared/utils';
+import { Guid, NmvModel } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
 export interface AuthDTO {
@@ -22,8 +22,8 @@ export interface UserStorage {
   email: string;
   name: string;
   id: number;
-  image:string;
-  socialNetwork:"G" | "F" | null;
+  image: string;
+  socialNetwork: "G" | "F" | null;
 }
 
 @Injectable({
@@ -34,7 +34,7 @@ export class AccountsService {
 
   private userConfirmate = new BehaviorSubject<boolean>(false);
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
 
   saveAccount(payload: any): Observable<any> {
     const url = environment.urlNmviajesAccount + '/v1/api/Account/Signup';
@@ -94,9 +94,9 @@ export class AccountsService {
     return this.userLogged.asObservable();
   }
 
-  guardarStorage(usuario: AuthDTO, image?:string, socialNetwork?:"G" | "F") {
+  guardarStorage(usuario: AuthDTO, image?: string, socialNetwork?: "G" | "F") {
     const user = {
-      email: usuario.Email, 
+      email: usuario.Email,
       name: usuario.Firstname + ' ' + usuario.FatherLastname,
       id: usuario.Id,
       image: image || "",
@@ -108,7 +108,7 @@ export class AccountsService {
     this.dispatchLogged(true);
   }
 
-  guardarImage(image:string){
+  guardarImage(image: string) {
     const user = this.getUserStorage();
     user.image = image;
     localStorage.setItem('usuario', JSON.stringify(user));
@@ -142,12 +142,12 @@ export class AccountsService {
     const url = environment.urlNmviajesAccount + '/v1/api/Account';
 
     return this._http
-      .delete<ResponseModelT<any>>(url,{body:payload})
+      .delete<ResponseModelT<any>>(url, { body: payload })
       .pipe(map((resp) => resp.Result));
   }
 
 
-  passwordSend(Email:string){
+  passwordSend(Email: string) {
     let payload: any = {};
 
     const parameter = {
@@ -163,5 +163,17 @@ export class AccountsService {
     return this._http
       .post<ResponseModelT<any>>(url, payload)
       .pipe(map((resp) => resp.Result));
+  }
+
+  getAccountToken(): any {
+    const userStorage: any = localStorage.getItem("usuario");
+
+    if (userStorage) {
+      const user: any = JSON.parse(userStorage);
+
+      const url = `${environment.urlNmviajesAccount}/v1/api/Account/token?Parameter.email=${user.email}&TrackingCode=${Guid()
+        }&MuteExceptions=${environment.muteExceptions}&Caller.Company=Expertia&Caller.Application=NMViajes`;
+      return this._http.get(url).toPromise();
+    }
   }
 }

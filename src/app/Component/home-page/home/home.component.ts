@@ -1,20 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit.service';
-import { PackagesService } from 'src/app/Services/mock/packages.service';
 import { AsidePresenterService } from 'src/app/Services/presenter/aside/aside-presenter.service';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { NMRequest } from 'src/app/Models/base/NMRequest';
-import { environment } from 'src/environments/environment';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
-import { concatMap, filter, mergeMap, switchMap, take, tap } from 'rxjs/operators';
-import { combineLatest, fromEvent } from 'rxjs';
-import { PopupService } from 'src/app/Services/pop-up/popup.service';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountsService } from 'src/app/Services/accounts.service';
 import * as bootstrap from 'bootstrap';
 import { FlightService } from 'src/app/api/api-nmviajes/services';
-import { Guid } from 'src/app/shared/utils';
-import { EGalleryCode, IGalleryImage, IGalleryService } from 'src/app/Services/presenter/data-page-presenter.models';
+import { EGalleryCode, IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 
 @Component({
@@ -36,14 +30,12 @@ export class HomeComponent implements OnInit {
   loadedGallery = false;
 
   constructor(
-    //public packagesService: PackagesService,
     public dataPagePresenterService: DataPagePresenterService,
     public asidePresenterService: AsidePresenterService,
     public destinyService: DestinyService,
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _accountsService: AccountsService,
-    private _flightService: FlightService,
     public loaderSubjectService: LoaderSubjectService
   ) { }
 

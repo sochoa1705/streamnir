@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { DollarChangeService } from '../../Services/dollarChange/dollar-change.service';
-import { take } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { NMRequestBy } from '../../Models/base/NMRequestBy';
-import { ChangeRQ } from '../../Models/general/changeRQ.interface';
 import { NMRequest } from 'src/app/Models/base/NMRequest';
 import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit.service';
 import { MainService } from '../../Services/presenter/main/main.service';
@@ -35,6 +32,7 @@ export class HomePageComponent implements OnInit {
 
     localStorage.removeItem('filters');
   }
+
   getMain() {
     this.mainService.getMenu().subscribe({
       next: (response: any) => {
@@ -60,9 +58,8 @@ export class HomePageComponent implements OnInit {
       )
     }
   }
+
   getIpCliente() {
     localStorage.setItem('ipCliente', this.ipAddress)
-
   }
-
 }
