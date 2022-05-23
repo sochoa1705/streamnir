@@ -9591,6 +9591,13 @@ app-flightdeals {
     }
 }
 
+.onlyMobile {
+    display: none !important;
+    @media (max-width: 640px) {
+        display: flex !important;
+    }
+}
+
 // X-Large devices (large desktops, 1200px and up)
 // @media (min-width: 1200px) {
 //     .container-fluid {

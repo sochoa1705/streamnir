@@ -7800,3 +7800,9 @@ app-flightdeals button {
   @media (max-width: 640px) {
     .boxCalendar {
       width: 100%; } }
+
+.onlyMobile {
+  display: none !important; }
+  @media (max-width: 640px) {
+    .onlyMobile {
+      display: flex !important; } }
