@@ -21,6 +21,7 @@ export class PasswordComponent implements OnInit {
   changePasswordForm: FormGroup;
 
   userId: number;
+  email: string;
 
   confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
 
@@ -33,6 +34,7 @@ export class PasswordComponent implements OnInit {
     public _matDialog: MatDialog
   ) {
     this.userId = this._accountService.getUserStorage().id;
+    this.email = this._accountService.getUserStorage().email;
   }
 
   ngOnInit(): void {
@@ -65,9 +67,6 @@ export class PasswordComponent implements OnInit {
     }
 
     if (this.changePasswordForm.valid) {
-
-      // TODO: Validar que la actual contraseña sea la correcta.
-
       this.confirmDialogRef = this._matDialog.open(ConfirmDialogComponent, {
         disableClose: false
       });
@@ -81,13 +80,15 @@ export class PasswordComponent implements OnInit {
             TrackingCode: Guid(),
             MuteExceptions: environment.muteExceptions,
             Caller: {
-              Company: "Agil",
-              Application: "Interagencias"
+              Company: "Expertia",
+              Application: "NMViajes"
             },
             Parameter: {
               Id: 0,
               UserId: this.userId,
-              Password: this.changePasswordForm.get("newPassword")?.value
+              Email: this.email,
+              CurrentPassword: this.changePasswordForm.get("currentPassword")?.value,
+              NewPassword: this.changePasswordForm.get("newPassword")?.value
             }
           };
 
