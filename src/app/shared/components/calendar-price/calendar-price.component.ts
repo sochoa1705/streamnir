@@ -49,7 +49,7 @@ export class CalendarPriceComponent implements OnInit {
 
   chargeCalendarPrice(){
     let firstMonth = new Date();
-    if ((this.flightData.departureDate == '' || this.flightData.departureDate == undefined) && (this.flightData.arrivalDate == '' || this.flightData.arrivalDate == undefined)) {
+    if (this.flightData.departureDate == '' && this.flightData.arrivalDate == '') {
       let currentDate = new Date();
       firstMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     } else
@@ -58,19 +58,11 @@ export class CalendarPriceComponent implements OnInit {
     this.calendarMonths.push(this.getCalendar(firstMonth));
     this.calendarMonths.push(this.getCalendar(new Date(firstMonth.setMonth(firstMonth.getMonth() + 1))));
 
-    if ((this.flightData.departureDate == '' || this.flightData.departureDate == undefined) && (this.flightData.arrivalDate == '' || this.flightData.arrivalDate == undefined)) {
-      
-      // this.departureDate = {
-      //   day: this.flightData.departureDate.split('/')[0],
-      //   date: this.flightData.departureDate,
-      //   formatYMD: this.flightData.departureDate.split('/')[2] + this.flightData.departureDate.split('/')[1] + this.flightData.departureDate.split('/')[0],
-      //   price: '-',
-      // };
-
+    if (this.flightData.departureDate != '' && this.flightData.arrivalDate != '') {
       this.departureDate = {
         day: this.flightData.departureDate.split('/')[0],
         date: this.flightData.departureDate,
-        formatYMD: '20220601',
+        formatYMD: this.flightData.departureDate.split('/')[2] + this.flightData.departureDate.split('/')[1] + this.flightData.departureDate.split('/')[0],
         price: '-',
       };
 
@@ -253,16 +245,13 @@ export class CalendarPriceComponent implements OnInit {
     let daysinMonth = new Date(Number.parseInt(this.calendarMonths[1].year), Number.parseInt(this.calendarMonths[1].month), 0).getDate();
     let fecFin = this.calendarMonths[1].year + this.calendarMonths[1].month + daysinMonth;
 
-    //fecFin = '20220706';
-    item.formatYMD = '20220524';
-
     let requestRate = {
       fecIni: '',
       fecFin: '',
-      fecDep: '20220601',
-      fecRet: '20220630',
+      fecDep: item.formatYMD,
+      fecRet: item.formatYMD,
       tipoDur: 'V',
-      diasDur: '29',
+      diasDur: '0',
       origen: this.flightData.departureCity?.substring(0, 3),
       destino: this.flightData.arrivalCity?.substring(0, 3),
       itiTipo: this.flightData.flightType == 0 ? 'RT' : 'OW',
@@ -272,7 +261,7 @@ export class CalendarPriceComponent implements OnInit {
       infs: 0,
     };
 
-    this.searchService.getRates(requestRate, '20220524', '20220706').subscribe({
+    this.searchService.getRates(requestRate, item.formatYMD, fecFin).subscribe({
       next: (response) => {
         let date: string = item.formatYMD;
         let detalle = response[0].detalle;

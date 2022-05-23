@@ -251,7 +251,9 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
       viajes: new FormControl(EnumFlightType.ida_vuelta),
       origen: new FormControl(''),
       destino: new FormControl(''),
-      origenHotel: new FormControl('')
+      origenHotel: new FormControl(''),
+      departureDate: new FormControl(''),
+      arrivalDate: new FormControl(''),
     });
   }
 
@@ -495,7 +497,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   }
 
   insertDates(inputDates: any) {
-    let flightType = this.flightSearchForm.get('flightType')?.value;
+    let flightType = this.flightSearchForm.get('viajes')?.value;
     let departureDate = inputDates.departure == null ? '' : inputDates.departure?.date;
     let arrivalDate = inputDates.arrival == null ? '' : inputDates.arrival?.date;
 
@@ -507,7 +509,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   }
 
   onFocus() {
-    let flightType = this.form.get('clase')?.value;
+    let flightType = this.form.get('viajes')?.value;
     let departureCity = this.form.get('origen')?.value.codigo;
     let arrivalCity = this.form.get('destino')?.value.codigo;
     let departureDate = this.form.get('departureDate')?.value;
