@@ -12,7 +12,6 @@ import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model
 import { URLHotel, URLPaquete, ParamPaquete, EnumFlightType, EnumCabins } from '../../tabs/tabs.models';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { InputValidationService } from '../../../../Services/inputValidation.service';
-import { HttpClient } from '@angular/common/http';
 import { AccountsService } from 'src/app/Services/accounts.service';
 
 @Component({
@@ -151,7 +150,7 @@ export class TabPaquetesComponent {
     });
   }
 
-  public async searchPaquete() {
+  public searchPaquete() {
     // const errors = this.validateTab();
 
     // if (errors.length > 0) {
@@ -160,14 +159,10 @@ export class TabPaquetesComponent {
     // }
 
     let url = this.getUrlPaquete();
-    const result = await this._accountsService.getAccountToken();
+    const token = this._accountsService.getAccountTokenOfLocalStorage();
 
-    if (result) {
-      if (result.Result.IsSuccess) {
-        const token: string = result.Result.Token;
-        url = `${url}&token=${token}&submit=true`;
-      }
-    }
+    if (token.length > 0)
+      url = `${url}&token=${token}&submit=true`;
 
     this.navigateToResponseUrl(url);
   }

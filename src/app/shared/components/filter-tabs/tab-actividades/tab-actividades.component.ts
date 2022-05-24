@@ -88,21 +88,17 @@ export class TabActividadesComponent {
   }
 
 
-  public async search() {
+  public search() {
     if (!this.isValidate()) {
       this.openSnackBar("Error de validacion")
       return;
     }
+
     let url = this.getUrlActividades();
+    const token = this._accountsService.getAccountTokenOfLocalStorage();
 
-    const result = await this._accountsService.getAccountToken();
-
-    if (result) {
-      if (result.Result.IsSuccess) {
-        const token: string = result.Result.Token;
-        url = `${url}&token=${token}&submit=true`;
-      }
-    }
+    if (token.length > 0)
+      url = `${url}&token=${token}&submit=true`;
 
     this.navigateToResponseUrl(url);
   }

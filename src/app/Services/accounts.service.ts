@@ -127,7 +127,6 @@ export class AccountsService {
     this.dispatchLogged(false);
   }
 
-
   deleteAccount(Id: number) {
     let payload: any = {};
 
@@ -145,7 +144,6 @@ export class AccountsService {
       .delete<ResponseModelT<any>>(url, { body: payload })
       .pipe(map((resp) => resp.Result));
   }
-
 
   passwordSend(Email: string) {
     let payload: any = {};
@@ -176,4 +174,11 @@ export class AccountsService {
       return this._http.get(url).toPromise();
     }
   }
+
+  getAccountTokenOfLocalStorage(): string {
+    const token: string = localStorage.getItem('token') || '';
+
+    return token;
+  }
+
 }

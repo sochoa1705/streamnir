@@ -121,7 +121,7 @@ export class TabHotelComponent {
     });
   }
 
-  public async searchAlojamiento() {
+  public searchAlojamiento() {
     this.isSubmit = true;
 
     let errosInputs = this.getErrorsForm(this.form);
@@ -140,15 +140,10 @@ export class TabHotelComponent {
     }
 
     let url = this.getUrlAlojamiento();
+    const token = this._accountsService.getAccountTokenOfLocalStorage();
 
-    const result = await this._accountsService.getAccountToken();
-
-    if (result) {
-      if (result.Result.IsSuccess) {
-        const token: string = result.Result.Token;
-        url = `${url}&token=${token}&submit=true`;
-      }
-    }
+    if (token.length > 0)
+      url = `${url}&token=${token}&submit=true`;
 
     this.navigateToResponseUrl(url);
   }
