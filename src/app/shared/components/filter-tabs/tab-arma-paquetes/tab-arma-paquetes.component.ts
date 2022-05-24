@@ -152,7 +152,6 @@ export class TabArmaPaquetesComponent {
     let url = this.getUrlPaquete();
 
     const result = await this._accountsService.getAccountToken();
-
     if (result) {
       if (result.Result.IsSuccess) {
         const token: string = result.Result.Token;

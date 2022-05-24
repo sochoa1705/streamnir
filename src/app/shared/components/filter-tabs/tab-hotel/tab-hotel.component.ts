@@ -131,7 +131,6 @@ export class TabHotelComponent {
       return;
     }
 
-
     let errorHabitaciones = this.popUpElement?.isValid();
 
     if (!errorHabitaciones?.isValid) {
@@ -142,7 +141,6 @@ export class TabHotelComponent {
     let url = this.getUrlAlojamiento();
 
     const result = await this._accountsService.getAccountToken();
-
     if (result) {
       if (result.Result.IsSuccess) {
         const token: string = result.Result.Token;

@@ -93,10 +93,10 @@ export class TabActividadesComponent {
       this.openSnackBar("Error de validacion")
       return;
     }
+
     let url = this.getUrlActividades();
 
     const result = await this._accountsService.getAccountToken();
-
     if (result) {
       if (result.Result.IsSuccess) {
         const token: string = result.Result.Token;

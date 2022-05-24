@@ -98,7 +98,6 @@ export class TabVueloHotelComponent {
 
 
   public async searchVueloHotel() {
-
     this.isSubmit = true;
 
     let errosInputs = this.getErrorsForm(this.form);
@@ -107,7 +106,6 @@ export class TabVueloHotelComponent {
       this.notification.showNotificacion("Error", errosInputs.join(", "), 10);
       return;
     }
-
 
     let errorHabitaciones = this.popUpElement?.isValid();
 
@@ -119,7 +117,6 @@ export class TabVueloHotelComponent {
     let url = this.getUrlVueloHotel();
 
     const result = await this._accountsService.getAccountToken();
-
     if (result) {
       if (result.Result.IsSuccess) {
         const token: string = result.Result.Token;
