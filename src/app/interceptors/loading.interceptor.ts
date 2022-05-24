@@ -6,7 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { delay, finalize } from 'rxjs/operators';
+import { finalize, delay, debounceTime } from 'rxjs/operators';
 import { LoadingService } from '../Services/intermediary/loading.service';
 
 

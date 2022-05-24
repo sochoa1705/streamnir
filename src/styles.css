@@ -10833,28 +10833,32 @@ app-flightdeals button {
     .onlyMobile {
       display: flex !important; } }
 
-      .preloader.show {
-        display: block;
-      }
-      
-      .preloader .loaderSpin {
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        border-radius: 50%;
-        width: 16px;
-        height: 16px;
-        position: relative;
-        animation: loaderCircle 1s linear infinite;
-        top: 50%;
-        margin: -8px auto 0;
-      }
-      
-      .preloader .textPreload {
-        color: #ffffff;
-        font-size: 16px;
-        margin: 0 auto;
-        width: 50%;
-        text-align: center;
-        top: 40%;
-        position: relative;
-      }
+      .preloader {
+        display: none;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0; }
+        .preloader.show {
+          display: block; }
+        .preloader .loaderSpin {
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          border-radius: 50%;
+          width: 16px;
+          height: 16px;
+          position: relative;
+          animation: loaderCircle 1s linear infinite;
+          top: 50%;
+          margin: -8px auto 0; }
+        .preloader .textPreload {
+          color: #ffffff;
+          font-size: 16px;
+          margin: 0 auto;
+          width: 50%;
+          text-align: center;
+          top: 40%;
+          position: relative; }
