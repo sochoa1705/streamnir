@@ -18,6 +18,7 @@ import { IDistributionObjectVuelos } from '../../pop-up-pasajero/pop-up-pasajero
 import { EnumCabinsVuelos, EnumFlightType, ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos, URLVuelosMulti } from '../../tabs/tabs.models';
 import { IGeoTree } from './tab-vuelos.interfaces';
 import { IntermediaryService } from '../../../../Services/intermediary.service';
+import { UserStorage, AccountsService } from '../../../../Services/accounts.service';
 
 @Component({
   selector: 'app-tab-vuelos',
@@ -85,9 +86,11 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   displayCalendar = false;
   flightData: any;
 
+  userStorage: UserStorage;
 
-  constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar, private router: Router, private destinosService: DestinosService,
+
+  constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter,private calendar: NgbCalendar,
+    private _snackBar: MatSnackBar, private router: Router, private destinosService: DestinosService,public accountService: AccountsService,
     private notification: NotificationService, private fb: FormBuilder, private intermediaryService: IntermediaryService
   ) {
     this.createForm();
@@ -100,7 +103,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     this.loadVuelosDestino();
 
     this.logicPathVuelos();
-
+    this.userStorage = this.accountService.getUserStorage();
   }
 
 
@@ -401,12 +404,16 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
         toDate: this.toDate || null,
         form: this.form,
         citysDestinosSelect: this.citysDestinosSelect || null,
-        citysOrigenSelect: this.citysOrigenSelect || null
+        citysOrigenSelect: this.citysOrigenSelect || null,
+        email: this.userStorage.email || ''
       }
     );
     return params;
   }
   public getUrl() {
+
+    this.userStorage = this.accountService.getUserStorage();
+    
     let url = ''
     let params = this.getParams();
 
@@ -497,13 +504,17 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   }
 
   insertDates(inputDates: any) {
-    let flightType = this.flightSearchForm.get('viajes')?.value;
+    let flightType = this.form.get('viajes')?.value;
+
     let departureDate = inputDates.departure == null ? '' : inputDates.departure?.date;
     let arrivalDate = inputDates.arrival == null ? '' : inputDates.arrival?.date;
 
-    this.flightSearchForm.get('departureDate')?.setValue(departureDate);
+    this.fromDate  = departureDate == '' ? this.calendar.getToday() : inputDates.departure?.date;
+    this.toDate = arrivalDate == '' ? this.calendar.getToday() : inputDates.arrival?.date;
+
+    this.form.get('departureDate')?.setValue(departureDate);
     if (flightType == 0)
-      this.flightSearchForm.get('arrivalDate')?.setValue(arrivalDate);
+      this.form.get('arrivalDate')?.setValue(arrivalDate);
 
     this.displayCalendar = false;
   }

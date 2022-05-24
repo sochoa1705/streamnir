@@ -111,7 +111,7 @@ export class URLVuelos implements UrlNmViajes {
   }
 
   getUrl() {
-    return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&destination=${this.params.idDestino + "%20" + this.params.destino?.title || ''}&departure=${this.params.idOrigen + "%20" + this.params.origen?.title || ''}&departureDate=${this.params.startDate}&arrivalDate=${this.params.endDate}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.params.cabinsVuelos}&lang=ES`;
+    return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&destination=${this.params.idDestino + "%20" + this.params.destino?.title || ''}&departure=${this.params.idOrigen + "%20" + this.params.origen?.title || ''}&departureDate=${this.params.startDate}&arrivalDate=${this.params.endDate}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.params.cabinsVuelos}&lang=ES&email=${this.params.email}`;
   }
 }
 
@@ -376,6 +376,7 @@ export interface ParamsVuelosProps {
   form: FormGroup;
   citysDestinosSelect: any[];
   citysOrigenSelect: any[];
+  email?: string;
 }
 
 export class ParamsVuelos {
@@ -387,17 +388,19 @@ export class ParamsVuelos {
   public idOrigen: string;
   public idDestino: string;
   public flightType: EnumFlightType;
+  public email?: string;
   constructor(
     {
       fromDate,
       toDate,
       form,
       citysDestinosSelect,
-      citysOrigenSelect
+      citysOrigenSelect,
+      email
     }: ParamsVuelosProps
   ) {
-    let startDateStr = `${(fromDate!.day).toString()}/${(fromDate!.month).toString()}/${(fromDate!.year).toString()}`;
-    let endDateStr = toDate ? `${(toDate!.day).toString()}/${(toDate!.month).toString()}/${(toDate!.year).toString()}` : "";
+    let startDateStr = fromDate!.day != undefined ? `${(fromDate!.day).toString()}/${(fromDate!.month).toString()}/${(fromDate!.year).toString()}` : fromDate;
+    let endDateStr = toDate!.day != undefined ? toDate ? `${(toDate!.day).toString()}/${(toDate!.month).toString()}/${(toDate!.year).toString()}` : "" : toDate;
 
     this.startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
     this.endDate = endDateStr ? moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY') : "";
@@ -407,6 +410,7 @@ export class ParamsVuelos {
     this.idOrigen = this.origen.codigo;
     this.flightType = form.controls['viajes'].value;
     this.idDestino = this.destino.codigo;
+    this.email = email;
   }
 
 }
