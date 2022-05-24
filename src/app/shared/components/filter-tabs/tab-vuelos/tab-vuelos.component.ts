@@ -89,8 +89,8 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   userStorage: UserStorage;
 
 
-  constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter,private calendar: NgbCalendar,
-    private _snackBar: MatSnackBar, private router: Router, private destinosService: DestinosService,public accountService: AccountsService,
+  constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter, private calendar: NgbCalendar,
+    private _snackBar: MatSnackBar, private router: Router, private destinosService: DestinosService, public accountService: AccountsService,
     private notification: NotificationService, private fb: FormBuilder, private intermediaryService: IntermediaryService
   ) {
     this.createForm();
@@ -413,7 +413,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   public getUrl() {
 
     this.userStorage = this.accountService.getUserStorage();
-    
+
     let url = ''
     let params = this.getParams();
 
@@ -509,7 +509,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     let departureDate = inputDates.departure == null ? '' : inputDates.departure?.date;
     let arrivalDate = inputDates.arrival == null ? '' : inputDates.arrival?.date;
 
-    this.fromDate  = departureDate == '' ? this.calendar.getToday() : inputDates.departure?.date;
+    this.fromDate = departureDate == '' ? this.calendar.getToday() : inputDates.departure?.date;
     this.toDate = arrivalDate == '' ? this.calendar.getToday() : inputDates.arrival?.date;
 
     this.form.get('departureDate')?.setValue(departureDate);
@@ -520,23 +520,25 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   }
 
   onFocus() {
-    let flightType = this.form.get('viajes')?.value;
-    let departureCity = this.form.get('origen')?.value.codigo;
-    let arrivalCity = this.form.get('destino')?.value.codigo;
-    let departureDate = this.form.get('departureDate')?.value;
-    let arrivalDate = flightType == 0 ? this.form.get('arrivalDate')?.value : '';
+    if (!this.displayCalendar) {
+      let flightType = this.form.get('viajes')?.value;
+      let departureCity = this.form.get('origen')?.value.codigo;
+      let arrivalCity = this.form.get('destino')?.value.codigo;
+      let departureDate = this.form.get('departureDate')?.value;
+      let arrivalDate = flightType == 0 ? this.form.get('arrivalDate')?.value : '';
 
-    if (departureCity != '' && arrivalCity != '') {
-      this.flightData = {
-        flightType: flightType,
-        departureCity: departureCity,
-        arrivalCity: arrivalCity,
-        departureDate: departureDate,
-        arrivalDate: arrivalDate,
-      };
+      if (departureCity != '' && arrivalCity != '') {
+        this.flightData = {
+          flightType: flightType,
+          departureCity: departureCity,
+          arrivalCity: arrivalCity,
+          departureDate: departureDate,
+          arrivalDate: arrivalDate,
+        };
 
-      this.displayCalendar = true;
-      this.intermediaryService.sendChangeCalendarPrice(true);
+        this.displayCalendar = true;
+        this.intermediaryService.sendChangeCalendarPrice(true);
+      }
     }
   }
 }
