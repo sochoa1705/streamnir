@@ -218,20 +218,9 @@ export class TabsComponent implements OnInit {
     return { startDate, endDate, origen, destino, businessClass, idOrigen, idDestino, horaInicio, horaDestino };
   }
 
-  async changeTab(value: MatTabChangeEvent) {
+  changeTab(value: MatTabChangeEvent) {
     // (value.index == 1) ? this.navigateToResponseUrl(this.RUTA_PAQUETES) : null;
     //(value.index == 4) ? this.navigateToResponseUrl(this.RUTA_AUTOS) : null;
-
-    debugger
-
-    const result = await this._accountsService.getAccountToken();
-
-    if (result) {
-      if (result.Result.IsSuccess) {
-        const token: string = result.Result.Token;
-        localStorage.setItem('token', token);
-      }
-    }
 
     if (value.index == 6) {
       this.callService();

@@ -97,7 +97,7 @@ export class TabVueloHotelComponent {
 
 
 
-  public searchVueloHotel() {
+  public async searchVueloHotel() {
     this.isSubmit = true;
 
     let errosInputs = this.getErrorsForm(this.form);
@@ -115,10 +115,14 @@ export class TabVueloHotelComponent {
     }
 
     let url = this.getUrlVueloHotel();
-    const token = this._accountsService.getAccountTokenOfLocalStorage();
 
-    if (token.length > 0)
-      url = `${url}&token=${token}&submit=true`;
+    const result = await this._accountsService.getAccountToken();
+    if (result) {
+      if (result.Result.IsSuccess) {
+        const token: string = result.Result.Token;
+        url = `${url}&token=${token}&submit=true`;
+      }
+    }
 
     this.navigateToResponseUrl(url);
   }

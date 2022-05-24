@@ -121,7 +121,7 @@ export class TabHotelComponent {
     });
   }
 
-  public searchAlojamiento() {
+  public async searchAlojamiento() {
     this.isSubmit = true;
 
     let errosInputs = this.getErrorsForm(this.form);
@@ -131,7 +131,6 @@ export class TabHotelComponent {
       return;
     }
 
-
     let errorHabitaciones = this.popUpElement?.isValid();
 
     if (!errorHabitaciones?.isValid) {
@@ -140,10 +139,14 @@ export class TabHotelComponent {
     }
 
     let url = this.getUrlAlojamiento();
-    const token = this._accountsService.getAccountTokenOfLocalStorage();
 
-    if (token.length > 0)
-      url = `${url}&token=${token}&submit=true`;
+    const result = await this._accountsService.getAccountToken();
+    if (result) {
+      if (result.Result.IsSuccess) {
+        const token: string = result.Result.Token;
+        url = `${url}&token=${token}&submit=true`;
+      }
+    }
 
     this.navigateToResponseUrl(url);
   }

@@ -150,7 +150,7 @@ export class TabPaquetesComponent {
     });
   }
 
-  public searchPaquete() {
+  public async searchPaquete() {
     // const errors = this.validateTab();
 
     // if (errors.length > 0) {
@@ -159,10 +159,14 @@ export class TabPaquetesComponent {
     // }
 
     let url = this.getUrlPaquete();
-    const token = this._accountsService.getAccountTokenOfLocalStorage();
+    const result = await this._accountsService.getAccountToken();
 
-    if (token.length > 0)
-      url = `${url}&token=${token}&submit=true`;
+    if (result) {
+      if (result.Result.IsSuccess) {
+        const token: string = result.Result.Token;
+        url = `${url}&token=${token}&submit=true`;
+      }
+    }
 
     this.navigateToResponseUrl(url);
   }

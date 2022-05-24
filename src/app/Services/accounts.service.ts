@@ -174,11 +174,4 @@ export class AccountsService {
       return this._http.get(url).toPromise();
     }
   }
-
-  getAccountTokenOfLocalStorage(): string {
-    const token: string = localStorage.getItem('token') || '';
-
-    return token;
-  }
-
 }
