@@ -17,6 +17,8 @@ import { PoliticasComponent } from './politicas/politicas.component';
 import { ResponsabilidadSocialComponent } from './resonsabilidad-social/responsabilidad-social.component';
 import { WidgetsComponent } from 'src/app/widgets/widgets.component';
 import { ComprarComponent } from './comprar/comprar.component';
+import { PromocionesComponent } from '../promociones/promociones.component';
+import { TuscitasComponent } from './tuscitas/tuscitas.component';
 
 const routes: Routes = [
   {
@@ -41,6 +43,7 @@ const routes: Routes = [
       { path: 'libro-reclamaciones', component: LibroReclamacionesComponent },
       { path: 'agendar-cita', component: CitaComponent },
       { path: 'politicas', component: PoliticasComponent },
+      { path: 'promociones', component: PromocionesComponent },
       { path: 'responsabilidad-social', component: ResponsabilidadSocialComponent },
       { path: 'comprar', component: ComprarComponent }
     ],
@@ -49,6 +52,11 @@ const routes: Routes = [
     path: 'widgets',
     component: WidgetsComponent,
     loadChildren: () => import('../../../app/widgets/widgets.module').then(m => m.WidgetsModule)
+  },
+  {
+    path: 'tuscitas',
+    component: TuscitasComponent,
+    loadChildren: () => import('../../../app/Component/home-page/tuscitas/tuscitas.module').then(m => m.TuscitasModule)
   }
 ];
 

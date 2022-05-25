@@ -11,15 +11,20 @@ echo "Logueandose en el Container"
 powershell -Command "az acr login -n expertiafrontendreg"
 
 echo "Generando la imagen"
+
 powershell -Command "docker build -t nmviajes ."
 powershell -Command "docker tag nmviajes expertiafrontendreg.azurecr.io/nmviajes"
 
 echo "Subiendo la imagen"
 powershell -Command "docker push expertiafrontendreg.azurecr.io/nmviajes"
 
-@REM echo "Desplegando al app"
-@REM powershell -Command "kubectl apply -f nmviajes.yaml -n nmviajes"
-@REM powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n nmviajes"
+echo "Cambiando a la carpeta de produccion"
+cd .\yamls\prod\
+echo %CD%
+
+echo "Desplegando al app"
+powershell -Command "kubectl apply -f nmviajes.yaml -n nmviajes"
+powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n nmviajes"
 
 echo  %USERNAME% la aplicacion se desplego correctamente
 
