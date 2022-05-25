@@ -400,7 +400,7 @@ export class ParamsVuelos {
     }: ParamsVuelosProps
   ) {
     let startDateStr = fromDate!.day != undefined ? `${(fromDate!.day).toString()}/${(fromDate!.month).toString()}/${(fromDate!.year).toString()}` : fromDate;
-    let endDateStr = toDate!.day != undefined ? toDate ? `${(toDate!.day).toString()}/${(toDate!.month).toString()}/${(toDate!.year).toString()}` : "" : toDate;
+    let endDateStr = !toDate ? '' : toDate!.day != undefined ? toDate ? `${(toDate!.day).toString()}/${(toDate!.month).toString()}/${(toDate!.year).toString()}` : "" : toDate;
 
     this.startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
     this.endDate = endDateStr ? moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY') : "";
