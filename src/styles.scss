@@ -9667,6 +9667,156 @@ app-flightdeals {
     }
 }
 
+.promociones {
+    max-width: 1370px;
+    width: 80%;
+    margin: auto;
+    .titleM {
+        border-left: 6px solid #b01630;
+        padding-left: 9px;
+        margin: 30px 0 40px;
+        font-size: 25px;
+        text-transform: uppercase;
+        color: #000000;
+        font-weight: 300;
+        line-height: 33px;
+        letter-spacing: .7px;
+        padding-bottom: 0;
+        border-bottom: none;
+        @media (max-width: 640px) {
+            font-size: 16px;
+            margin: 20px 0;
+        }
+    }
+    ul {
+        li {
+            color: #130101;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 29px;
+            text-align: justify;
+            h1 {
+                font-size: 16px;
+                font-weight: 600;
+                @media (max-width: 640px) {
+                    font-size: 14px;
+                }
+            }
+            .subtitleP {
+                margin-bottom: 20px;
+                border-bottom: 1px solid #000;
+            }
+            @media (max-width: 640px) {
+                font-size: 12px;
+            }
+        }
+        @media (max-width: 640px) {
+            padding-left: 20px;
+        }
+    }
+    @media (max-width: 990px) and (min-width: 640px) {
+        width: 90%;
+    }
+    @media (max-width: 640px) {
+        width: calc(100% - 20px);
+    }
+}
+
+.boxCita {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background: url(./assets/img/background.jpg);
+    background-position: 50% 50%;
+    .boxLogo {
+        width: 80%;
+        margin: 0 auto 40px auto;
+    }
+    .boxGroupCita {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        .boxOption {
+            width: calc(50% - 30px);
+            background: #ffffff;
+            padding: 20px 30px;
+            .titleOption {
+                font-weight: 700;
+                font-size: 22px;
+                color: #cf152d;
+                margin-bottom: 15px;
+                @media (max-width: 990px) and (min-width: 640px) {
+                    font-size: 18px;
+                }
+                @media (max-width: 640px) {
+                    font-size: 14px;
+                }
+            }
+            .contentOption {
+                display: flex;
+                gap: 30px;
+                margin-bottom: 20px;
+                .iconLeft {
+                    min-width: 80px;
+                    img {
+                        width: 100%;
+                    }
+                    @media (max-width: 990px) and (min-width: 640px) {
+                        min-width: 65px;
+                    }
+                    @media (max-width: 640px) {
+                        min-width: 40px;
+                    }
+                }
+                .textContent {
+                    font-size: 16px;
+                    text-align: justify;
+                    @media (max-width: 990px) and (min-width: 640px) {
+                        font-size: 14px;
+                    }
+                    @media (max-width: 640px) {
+                        font-size: 12px;
+                    }
+                }
+                @media (max-width: 990px) and (min-width: 640px) {
+                    gap: 20px;
+                }
+                @media (max-width: 640px) {
+                    gap: 10px;
+                }
+            }
+            .boxActionCita {
+                display: flex;
+                justify-content: flex-end;
+                .btn {
+                    font-size: 14px;
+                    @media (max-width: 990px) and (min-width: 640px) {
+                        font-size: 13px;
+                    }
+                    @media (max-width: 640px) {
+                        font-size: 12px;
+                    }
+                }
+            }
+            @media (max-width: 640px) {
+                width: 100%;
+            }
+        }
+        @media (max-width: 990px) and (min-width: 640px) {
+            width: 90%;
+            justify-content: space-between;
+        }
+        @media (max-width: 640px) {
+            width: calc(100% - 20px);
+        }
+    }
+}
+
 // X-Large devices (large desktops, 1200px and up)
 // @media (min-width: 1200px) {
 //     .container-fluid {
