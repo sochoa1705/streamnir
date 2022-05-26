@@ -4,6 +4,7 @@ import { fromEvent } from 'rxjs';
 import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { Guid } from '../../utils';
 import { PasajerosConHabitacion, PasajerosSinHabitacion } from '../tabs/tabs.models';
+import { IntermediaryService } from '../../../Services/intermediary.service';
 
 export interface IDistributionObject{
   habitacion:number,
@@ -52,8 +53,10 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
   @Output() emitDistribution= new EventEmitter<string>();
 
   @Output() emitDistributionObject= new EventEmitter<IDistributionObject>();
+  @Output() emitValidation = new EventEmitter<string>();
+  maxPasajeros = 9;
 
-  constructor(private popupService:PopupService) {
+  constructor(private popupService:PopupService, private intermediaryService: IntermediaryService) {
     this.idContent = `popup_${Guid()}`;
   }
 
@@ -79,7 +82,13 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
 
           this.emitDistribution.emit(distribution);
       }
-    }) 
+    });
+    
+    this.intermediaryService.$getObjectPopupPasajerosValidation.subscribe(res => {
+      if(res) {
+        this.validationPasajeros();
+      }
+    });
     
   }
 
@@ -96,6 +105,7 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
   }
 
   closePopUp(){
+    this.validationPasajeros();
     this.popupService.closePopUp(this.idContent);
   }
 
@@ -120,7 +130,8 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
   }
 
 
-  savePasajeros(){    
+  savePasajeros(){
+    this.validationPasajeros();    
     this.popupService.closePopUp(this.idContent);
   }
 
@@ -142,5 +153,27 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
     }
     urlDistributon = urlDistributon.charAt(urlDistributon.length - 1 ) === ',' ? urlDistributon.substring(0, urlDistributon.length - 1) : urlDistributon;
     return urlDistributon;
+  }
+
+  validationPasajeros(){
+    let cantidadMaxima = this.adultos + this.ninos;
+    if(this.adultos == 0) {
+      this.emitValidation.emit('Debe viajar al menos un adulto');
+      this.resetPasajeros();
+    }
+    else if(cantidadMaxima > this.maxPasajeros) {
+      this.emitValidation.emit('La cantidad máxima de pasajeros debe ser 9');
+      this.resetPasajeros();
+    }
+    else if(this.infantes > this.adultos){
+      this.emitValidation.emit('La cantidad de infantes no debe ser mayor a los adultos');
+      this.resetPasajeros();
+    }
+  }
+
+  resetPasajeros(){
+    this.adultos = 1;
+    this.ninos = 0;
+    this.infantes = 0;
   }
 }

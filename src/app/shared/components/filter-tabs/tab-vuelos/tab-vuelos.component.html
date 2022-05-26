@@ -21,7 +21,7 @@
                 </mat-form-field>
             </div>
             <div class="padRight">
-                <app-pop-up-pasajero-vuelos #popUp [onlyPasajeros]="true" (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero-vuelos>
+                <app-pop-up-pasajero-vuelos (emitValidation)="emitValidation($event)" #popUp [onlyPasajeros]="true" (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero-vuelos>
             </div>
         </div>
 

@@ -87,6 +87,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   flightData: any;
 
   userStorage: UserStorage;
+  processOk = true;
 
 
   constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter, private calendar: NgbCalendar,
@@ -304,20 +305,40 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
   }
 
-
-
-  public searchVueloHotel() {
-    this.isSubmit = true;
-    const errors = this.validateTab();
-
+  emitValidation(validation: string) {
+    const errors = [];
+    errors.push(validation);
     if (errors.length > 0) {
+      this.processOk = false;
       this.notification.showNotificacion("Error", errors.join(" - "), 10);
       return;
     }
+  }
 
-    const url = this.getUrl();
 
-    this.navigateToResponseUrl(url);
+
+  public searchVueloHotel() {
+    this.processOk = true;
+    this.intermediaryService.sendChangePopupPasajerosValidation(true);
+
+    setTimeout(() => {
+      
+    }, 1000);
+
+    if(this.processOk) {
+
+      this.isSubmit = true;
+      const errors = this.validateTab();
+  
+      if (errors.length > 0) {
+        this.notification.showNotificacion("Error", errors.join(" - "), 10);
+        return;
+      }
+  
+      const url = this.getUrl();
+  
+      this.navigateToResponseUrl(url);
+    }
   }
 
 
