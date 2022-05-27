@@ -56,7 +56,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    //{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
   ],
   bootstrap: [AppComponent]

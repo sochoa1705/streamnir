@@ -1,6 +1,5 @@
 
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
 import { combineLatest, fromEvent } from 'rxjs';
@@ -9,7 +8,6 @@ import { DestinosService } from './Component/home-page/vuelos/commons/components
 import { TaggingService } from './Services/analytics/tagging.service';
 import { PopupService } from './Services/pop-up/popup.service';
 import { LoaderSubjectService } from './shared/components/loader/service/loader-subject.service';
-
 
 export class LoginPerson {
   constructor(
@@ -38,8 +36,6 @@ export class AppComponent implements OnInit {
 
   @ViewChild("closeModalSesion") closeModalSesion: ElementRef;
   @ViewChild("closeModalNewAccount") closeModalNewAccount: ElementRef;
-  
-
 
   message: string = '';
 
@@ -48,12 +44,10 @@ export class AppComponent implements OnInit {
     public _matDialog: MatDialog,
     public loaderSubjectService: LoaderSubjectService,
     private readonly router: Router,
-    private destinosService:DestinosService
+    private destinosService: DestinosService
   ) {
     this.cerrarBoxClicFuera();
-
   }
-
 
   ngOnInit(): void {
     this.taggingPageView();
@@ -66,9 +60,7 @@ export class AppComponent implements OnInit {
         TaggingService.pageView(event.urlAfterRedirects)
       }
     });
-
   }
-
 
   cerrarBoxClicFuera() {
     combineLatest([fromEvent(document, 'click'), this._popUpSubject.state()]).pipe(

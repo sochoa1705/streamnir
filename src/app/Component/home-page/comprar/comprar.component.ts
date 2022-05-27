@@ -13,11 +13,8 @@ import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
 import { Guid, toUp, Utilities } from 'src/app/shared/utils';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { GenerarSafetyPayRQ } from 'src/app/Models/seguros/generarSafetypayRQ.interface';
 import { CardPaymentService } from 'src/app/Services/cardPayment/card-payment.service';
 import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
-import { CambiarEstadoRQ } from 'src/app/Models/seguros/cambiarEstadoRQ.interface';
-import { SafetyPayRQ } from 'src/app/Models/seguros/safetypayRQ.interface';
 import { CardService, PaymentService } from 'src/app/api/api-payment/services';
 import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/models';
 import * as moment from 'moment';
@@ -26,9 +23,9 @@ import { ValidatorsService } from 'src/app/shared/validators/validators.service'
 import { ActionFieldCheckout, ActionFieldCheckoutOption, Checkout, CheckoutOption, EcommerceCheckout, EcommercecheckoutOption, ModelTaggingCheckout, ModelTaggingcheckoutOption, ProductAddToCart } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { NotificationService } from 'src/app/Services/notification.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MessageService } from 'src/app/api/api-correos/services';
-import { CeReservaCeEmailParameterCustomCeRequest1, CeResponse, CeSeguroCeEmailParameterCustomCeRequest1, EnumRequestApplications, EnumRequestCompanies } from 'src/app/api/api-correos/models';
+import { CeResponse, CeSeguroCeEmailParameterCustomCeRequest1, EnumRequestApplications, EnumRequestCompanies } from 'src/app/api/api-correos/models';
+import { UtilService } from 'src/app/Services/util/util.service';
 
 interface Methods {
   id: string;
@@ -90,6 +87,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   filtroVueloJson: IFiltroVuelo;
   banca: boolean = true
 
+  pressedToBuy: boolean = false;
+
   banks = [
     { name: 'Banco de Crédito', value: 1005 },
     { name: 'Interbank', value: 1011 },
@@ -128,7 +127,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   reservation: any
   dataShop: any
-  ipCliente: any
   bankSteps: any
   paymentData: any
 
@@ -155,6 +153,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   totalToPay: number = 0;
 
+  ip: string = '';
+
   constructor(
     private _router: Router,
     private _coverageService: CoverageService,
@@ -168,7 +168,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     private _cardService: CardService,
     private _formBuilder: FormBuilder,
     private _notification: NotificationService,
-    private _messageService: MessageService
+    private _messageService: MessageService,
+    public utilService: UtilService
   ) {
     // COBERTURA
     this.coverageList = localStorage.getItem('coverage');
@@ -195,9 +196,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const detalleVuelosStr: any = localStorage.getItem('detalleVuelo');
     this.detalleVuelos = JSON.parse(detalleVuelosStr);
-
-    // IP DEL CLIENTE
-    this.ipCliente = "192.168.2.2";//localStorage.getItem('ipCliente')
 
     this.unidadNegocio = localStorage.getItem('businessunit')
     this.businessunit = JSON.parse(this.unidadNegocio)
@@ -230,7 +228,14 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
   }
 
+  getIp(): void {
+    this.utilService.getIP().subscribe(res => {
+      this.ip = res.ip;
+    });
+  }
+
   ngOnInit(): void {
+    this.getIp();
     this.count = 0;
     this.countAdulto = 0;
     this.countInfante = 0;
@@ -628,7 +633,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   buyInsurance(): void {
-
     console.log('1. buyInsurance');
 
     if (this.formShop.invalid)
@@ -642,6 +646,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
       return;
+
+    this.pressedToBuy = true;
 
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
     this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal));
@@ -705,7 +711,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     const payload: RegistrarSeguroRQ = {
       fec_salida: `${fechasalida[2]}-${fechasalida[1]}-${fechasalida[0]}`,                       // FECHA DE PARTIDA
       fec_retorno: `${fecharetorno[2]}-${fecharetorno[1]}-${fecharetorno[0]}`,                        // FECHA DE RETORNO
-      cant_paxes: this.resultJson.countCustomers,               // CANTIDAD DE PASAJEROS
+      cant_paxes: this.resultJson.passengers.length,             // CANTIDAD DE PASAJEROS
       destino: this.resultJson.destinyString.descripcion_destino, // NOMBRE DEL DESTINO
       edades: `${this.agesCustomers};`,                           // EDADES CONCATENADAS CON PUNTO Y COMA
       prod_id: this.safe0Json.idProducto,                         // obtener desde plansAC.idProducto
@@ -713,7 +719,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       prod_familia: '',
       moneda_lista: 'USD',
       moneda_local: 'USD',
-      precio_bruto: this.safe0Json.precioBruto,                  // obtener desde plansAC.precioBruto
+      precio_bruto: this.safe0Json.precioEmisionLocal,                  // obtener desde plansAC.precioBruto
       precio_bruto_local: this.safe0Json.precioBrutoLocal,       // obtener desde plansAC.precioBrutoLocal
       precio_emision: this.safe0Json.precioEmision,              // obtener desde plansAC.precioEmision
       precio_emision_local: this.safe0Json.precioEmisionLocal,   // obtener desde plansAC.precioEmisionLocal
@@ -964,7 +970,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       "Caller": {
         "Company": "Expertia",
         "Application": "NMViajes",
-        "FromIP": this.ipCliente,
+        "FromIP": this.ip,
         "FromBrowser": "Chrome"
       },
       "Parameter": {
