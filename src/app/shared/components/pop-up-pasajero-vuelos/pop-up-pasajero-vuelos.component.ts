@@ -110,7 +110,10 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
   }
 
   public calculateDistributionTravel(optionTravel:string, optionAddRemove: number): void {
-
+    const habitacion = this.habitacion;
+    const ninos = this.ninos;
+    const adultos = this.adultos;
+    const infantes = this.infantes;
     switch(optionTravel) {
       case 'habitacion' :
         if(!this.habitacionDisabled){
@@ -126,6 +129,12 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
       case 'infantes' :
         this.infantes += this.infantes === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
         break;
+    }
+    if(!this.validationPasajeros()) {
+      this.habitacion = habitacion;
+      this.adultos = adultos;
+      this.ninos = ninos;
+      this.infantes = infantes;
     }
   }
 
@@ -155,20 +164,24 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
     return urlDistributon;
   }
 
-  validationPasajeros(){
+  validationPasajeros(): boolean{
     let cantidadMaxima = this.adultos + this.ninos;
     if(this.adultos == 0) {
       this.emitValidation.emit('Debe viajar al menos un adulto');
-      this.resetPasajeros();
+      return false;
+      //this.resetPasajeros();
     }
     else if(cantidadMaxima > this.maxPasajeros) {
       this.emitValidation.emit('La cantidad máxima de pasajeros debe ser 9');
-      this.resetPasajeros();
+      return false;
+      //this.resetPasajeros();
     }
     else if(this.infantes > this.adultos){
       this.emitValidation.emit('La cantidad de infantes no debe ser mayor a los adultos');
-      this.resetPasajeros();
+      return false;
+      //this.resetPasajeros();
     }
+    return true;
   }
 
   resetPasajeros(){
