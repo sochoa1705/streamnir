@@ -3955,6 +3955,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
         }
     }
+    @media (max-width: 990px) and (min-width: 640px) {
+        right: 10%;
+    }
     @media (max-width: 640px) {
         left: 15px;
         top: 55px;

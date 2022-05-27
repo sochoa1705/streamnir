@@ -3207,6 +3207,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       background: transparent; }
     .boxFlotante .btnPasajero .Agregar:disabled {
       color: #4b4b4b; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .boxFlotante {
+      right: 10%; } }
   @media (max-width: 640px) {
     .boxFlotante {
       left: 15px;
