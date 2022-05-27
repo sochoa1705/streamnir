@@ -35,8 +35,6 @@ export class ValidatorsService {
   validateAddress(dependentField: string, field: string) {
 
     return (formGroup: AbstractControl): ValidationErrors | null => {
-
-
       if (!formGroup.get(dependentField)?.value) {
         formGroup.get(field)?.setErrors(null);
         return null;
@@ -55,10 +53,30 @@ export class ValidatorsService {
     }
   }
 
+  validateBusinessName(dependentField: string, field: string) {
+
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      if (!formGroup.get(dependentField)?.value) {
+        formGroup.get(field)?.setErrors(null);
+        return null;
+      }
+
+      const valueField = formGroup.get(field)?.value;
+
+      if (valueField.length < 3 || valueField.length > 80) {
+        formGroup.get(field)?.setErrors({ notValid: true });
+        return { notValid: true };
+      }
+
+      formGroup.get(field)?.setErrors(null);
+
+      return null;
+    }
+  }
+
   validateRUC(dependentField: string, field: string) {
 
     return (formGroup: AbstractControl): ValidationErrors | null => {
-
       if (dependentField === '' || !formGroup.get(dependentField)?.value) {
         formGroup.get(field)?.setErrors(null);
         return null;

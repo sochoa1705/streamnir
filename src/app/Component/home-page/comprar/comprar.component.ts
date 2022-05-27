@@ -320,12 +320,14 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       code0: ['511', [Validators.required]],
       numberPhone0: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(12), Validators.pattern(this._validatorsService.digitsPattern)]],
       ruc: [''],
+      razonSocial: [''],
       direccion: [''],
       invoiceRequestBox: [false]
     }, {
       validators: [
         this._validatorsService.equalFields('mailContacto', 'mailConfirmContacto'),
         this._validatorsService.validateAddress('invoiceRequestBox', 'direccion'),
+        this._validatorsService.validateBusinessName('invoiceRequestBox', 'razonSocial'),
         this._validatorsService.validateRUC('invoiceRequestBox', 'ruc')
       ]
     });
@@ -736,7 +738,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       contacto_emerg_email: data.contactForm.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
       contacto_emerg_telf: data.contactForm.numberPhone0,    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
       ruc: (data.contactForm.invoiceRequestBox) ? `RUC-${data.contactForm.ruc}` : `${data.customers[0].typeDocCustomer}-${data.customers[0].numDocCustomer}`, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
-      razon_social: data.contactForm.nameContacto + ' ' + data.contactForm.lastnameContacto,  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
+      razon_social: (data.contactForm.invoiceRequestBox) ? data.contactForm.razonSocial : '',  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
       direccion_fiscal: (data.contactForm.invoiceRequestBox) ? data.contactForm.direccion : '', // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
       comentario: '',
       webs_cid: 7,
@@ -804,6 +806,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         localStorage.setItem('paymentData', this.paymentData);
 
         const result = JSON.parse(this.paymentData);
+
+        debugger
 
         if (result.Result.IsSuccess) {
 
