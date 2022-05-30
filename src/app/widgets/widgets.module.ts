@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { WidgetsRoutingModule } from './widgets-routing.module';
+import { WidgetsRoutingModule } from './widgets.routing';
 
 import { WidgetsComponent } from './widgets.component';
 

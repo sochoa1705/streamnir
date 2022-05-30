@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TuscitasComponent } from './tuscitas.component';
+import { TusCitasRoutingModule } from './tuscitas.routing';
 
 
 
@@ -9,7 +10,8 @@ import { TuscitasComponent } from './tuscitas.component';
     TuscitasComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    TusCitasRoutingModule
   ]
 })
 export class TuscitasModule { }

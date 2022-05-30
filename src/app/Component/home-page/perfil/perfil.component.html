@@ -1,419 +1,92 @@
 <!-- PERFIL -->
+
 <div class="box-container">
-    <div class="box-perfil">
-        <app-file [name]="userStorage.name"></app-file>
-        <div class="perfilName">{{userStorage.name}}</div>
-        <div class="perfilMail">{{userStorage.email}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+  <div class="box-perfil">
+    <app-file [name]="userStorage.name"></app-file>
+    <div class="perfilName">{{userStorage.name}}</div>
+    <div class="perfilMail">{{userStorage.email}}
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill"
+        viewBox="0 0 16 16">
         <path
           d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
       </svg>
-        </div>
-        <div class="boxContact" *ngIf="id === 'mnuPerfil'">
-            <div class="contacto">
-                <div class="titleContact">
-                    Datos de contacto
-                </div>
-                <div class="linkContact" (click)="showOption('mnuContacto')">
-                    Agregar datos personales
-                </div>
-            </div>
-            <div class="contacto">
-                <div class="titleContact">
-                    Teléfono
-                </div>
-                <div class="linkContact" (click)="showOption('mnuContacto')">
-                    Agregar teléfono
-                </div>
-            </div>
-            <div class="contacto">
-                <div class="titleContact">
-                    Email
-                </div>
-                <div class="linkContact disabled">
-                    {{userStorage.email}}
-                </div>
-            </div>
-        </div>
     </div>
-    <div class="box-content">
-        <div class="portlet-izq">
-            <div class="iconViaje">
-                <img src="./assets/perfil/viajes.png" alt="">
-            </div>
-            <div class="boxMenu">
-                <ul class="">
-                    <li id="mnuPerfil" [class.selected]="id === 'mnuPerfil'" (click)="showOption('mnuPerfil')">
-                        Mi Perfil
-                    </li>
-                    <li id="mnuContacto" [class.selected]="id === 'mnuContacto'" (click)="showOption('mnuContacto')">
-                        Datos de contacto</li>
-                    <li id="preferencia" [class.selected]="id === 'preferencia'" (click)="showOption('preferencia')">
-                        Preferencias</li>
-                    <!-- <li id="mnuPago" [class.selected]="id === 'mnuPago'" (click)="showOption('mnuPago')">Métodos de pago</li> -->
-                    <li id="mnuPasajero" [class.selected]="id === 'mnuPasajero'" (click)="showOption('mnuPasajero')">
-                        Pasajeros</li>
-                    <!-- <li id="mnuEliminar" (click)="preference()">Logout</li> -->
-                </ul>
-            </div>
+
+    <div class="boxContact" *ngIf="route === './mi-perfil'">
+      <div class="contacto">
+        <div class="titleContact">
+          Datos de contacto
         </div>
-
-
-        <div class="portlet-der">
-            <!-- vista perfil -->
-            <div class="viewPerfil" *ngIf="id === 'mnuPerfil'">
-                <!-- <div class="boxContPerfil">
-                    <div class="boxLeft">
-                        <img src="./assets/perfil/pago.png" alt="">
-                    </div>
-                    <div class="boxRight">
-                        <div class="subTitle">
-                            Agrega
-                        </div>
-                        <div class="title">
-                            Métodos de pago
-                        </div>
-                        <div class="descrip">
-                            No demores el pago de tu próxima compra, agrega los datos de tu tarjeta de forma segura.
-                        </div>
-                        <div class="boxBtn">
-                            <div class="btnPerfil primary" (click)="showOption('mnuPago')">
-                                Agregar
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <div class="boxContPerfil">
-                    <div class="boxLeft">
-                        <img src="./assets/perfil/estudiante.png" alt="">
-                    </div>
-                    <div class="boxRight">
-                        <div class="subTitle">
-                            Agrega
-                        </div>
-                        <div class="title">
-                            Pasajeros
-                        </div>
-                        <div class="descrip">
-                            Reserva más rápido y sin complicaciones, agrega los datos de quienes suelen viajar a tu lado.
-                        </div>
-                        <div class="boxBtn">
-                            <div class="btnPerfil primary" (click)="showOption('mnuPasajero')">
-                                Agregar
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="boxContPerfil btnBox boxContPerfil--row" (click)="toggleModalEliminar()">
-                    <div class="boxCenter">
-                        <div class="subTitle">
-                            Eliminar mi cuenta
-                        </div>
-                        <div class="descrip">
-                            Si eliminas tu cuenta no podrás recuperarla.
-                        </div>
-                    </div>
-                    <div class="iconBox">
-                        <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M-8.21774e-08 14.12L6.18084 8L-6.17205e-07 1.88L1.90283 -8.31755e-08L10 8L1.90283 16L-8.21774e-08 14.12Z"
-                fill="#DF0C30" />
-            </svg>
-                    </div>
-                </div>
-            </div>
-            <!-- END perfil -->
-
-            <!-- PREFERENCIAS -->
-            <div class="viewDocument" *ngIf="id === 'preferencia'">
-                <app-preferencias></app-preferencias>
-            </div>
-            <!-- END PREFERENCIAS -->
-
-            <div class="viewPay marginBottom40" *ngIf="id === 'mnuContacto'">
-                <app-contacto></app-contacto>
-            </div>
-
-            <!-- METODOS DE PAGO -->
-            <div class="viewPay marginBottom40" *ngIf="id === 'mnuPago'" [hidden]="!agregaTarjeta">
-                <div class="personalDocument">
-                    <div class="headerPortlet">
-                        <div class="titleBoxRight">Tarjeta de crédito o débito</div>
-                        <div class="subtitleBoxRight">Realiza reservas de manera más rápido guardando los datos de tu tarjeta. Nunca los usaremos sin tu permiso.
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div class="rowContent">
-                            <div class="boxGrid">
-                                <div class="rowGrid">
-                                    <div class="rowElement flexAuto">
-                                        <div class="marginRight10">
-                                            <img src="./assets/perfil/_visa.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="rowElement flexWrap">
-                                        <div class="descrip">
-                                            Tarjeta de crédito
-                                        </div>
-                                        <div class="descrip">
-                                            **** 5845
-                                        </div>
-                                    </div>
-                                    <div class="rowElement spaceEnd">
-                                        <div class="optModificar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M12.8972 4.81629L10.0978 2.01775L11.2181 0.898334C11.7168 0.399584 12.8592 0.300626 13.4569 0.898334L14.0166 1.45804C14.6143 2.05575 14.5161 3.19813 14.0166 3.69767L12.8972 4.81629ZM11.7778 5.9365L3.94026 13.774L0.301758 14.6132L1.14092 10.9747L8.97843 3.13717L11.7778 5.9365Z"
-                          fill="#009AED" />
-                      </svg>
-                                        </div>
-                                        <div class="optEliminar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M6.25116 0.905457H8.7581V1.32729H9.66344V0.846405C9.66356 0.379715 9.28407 0 8.81761 0H6.19165C5.72519 0 5.3457 0.379715 5.3457 0.846405V1.32729H6.25116V0.905457Z"
-                          fill="#009AED" />
-                        <path
-                          d="M11.7545 4.91455H3.25522C3.02233 4.91455 2.839 5.11322 2.85777 5.34542L3.56833 14.1317C3.60793 14.6222 4.01705 15 4.50858 15H10.501C10.9926 15 11.4017 14.6222 11.4413 14.1316L12.1519 5.34542C12.1707 5.11322 11.9874 4.91455 11.7545 4.91455ZM5.31321 14.0628C5.30371 14.0634 5.29422 14.0638 5.28483 14.0638C5.04748 14.0638 4.84824 13.8789 4.83348 13.6388L4.38819 6.42574C4.37285 6.17615 4.56271 5.96134 4.81219 5.94601C5.06087 5.9309 5.27659 6.1203 5.29193 6.37001L5.7371 13.5831C5.75255 13.8327 5.56269 14.0474 5.31321 14.0628ZM7.96263 13.611C7.96263 13.861 7.75996 14.0636 7.50991 14.0636C7.25985 14.0636 7.05718 13.861 7.05718 13.611V6.39782C7.05718 6.14777 7.25985 5.94509 7.50991 5.94509C7.75984 5.94509 7.96263 6.14777 7.96263 6.39782V13.611ZM10.6216 6.42448L10.1964 13.6376C10.1823 13.8781 9.98275 14.0636 9.74494 14.0636C9.73601 14.0636 9.72697 14.0634 9.71793 14.063C9.46833 14.0482 9.2779 13.834 9.29267 13.5844L9.7177 6.37115C9.73235 6.12156 9.9459 5.93113 10.1962 5.94589C10.4458 5.96054 10.6362 6.17489 10.6216 6.42448Z"
-                          fill="#009AED" />
-                        <path
-                          d="M13.3198 3.51762L13.0224 2.62636C12.9441 2.39141 12.7241 2.23291 12.4763 2.23291H2.53268C2.28503 2.23291 2.06496 2.39141 1.98668 2.62636L1.68936 3.51762C1.63203 3.68951 1.70664 3.86484 1.84592 3.95227C1.90268 3.98786 1.96986 4.00926 2.04367 4.00926H12.9655C13.0393 4.00926 13.1066 3.98786 13.1632 3.95216C13.3025 3.86472 13.3771 3.6894 13.3198 3.51762Z"
-                          fill="#009AED" />
-                      </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="rowGrid">
-                                    <div class="rowElement flexAuto">
-                                        <div class="marginRight10">
-                                            <img src="./assets/perfil/_master.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="rowElement flexWrap">
-                                        <div class="descrip">
-                                            Tarjeta de crédito
-                                        </div>
-                                        <div class="descrip">
-                                            **** 5845
-                                        </div>
-                                    </div>
-                                    <div class="rowElement spaceEnd">
-                                        <div class="optModificar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M12.8972 4.81629L10.0978 2.01775L11.2181 0.898334C11.7168 0.399584 12.8592 0.300626 13.4569 0.898334L14.0166 1.45804C14.6143 2.05575 14.5161 3.19813 14.0166 3.69767L12.8972 4.81629ZM11.7778 5.9365L3.94026 13.774L0.301758 14.6132L1.14092 10.9747L8.97843 3.13717L11.7778 5.9365Z"
-                          fill="#009AED" />
-                      </svg>
-                                        </div>
-                                        <div class="optEliminar">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M6.25116 0.905457H8.7581V1.32729H9.66344V0.846405C9.66356 0.379715 9.28407 0 8.81761 0H6.19165C5.72519 0 5.3457 0.379715 5.3457 0.846405V1.32729H6.25116V0.905457Z"
-                          fill="#009AED" />
-                        <path
-                          d="M11.7545 4.91455H3.25522C3.02233 4.91455 2.839 5.11322 2.85777 5.34542L3.56833 14.1317C3.60793 14.6222 4.01705 15 4.50858 15H10.501C10.9926 15 11.4017 14.6222 11.4413 14.1316L12.1519 5.34542C12.1707 5.11322 11.9874 4.91455 11.7545 4.91455ZM5.31321 14.0628C5.30371 14.0634 5.29422 14.0638 5.28483 14.0638C5.04748 14.0638 4.84824 13.8789 4.83348 13.6388L4.38819 6.42574C4.37285 6.17615 4.56271 5.96134 4.81219 5.94601C5.06087 5.9309 5.27659 6.1203 5.29193 6.37001L5.7371 13.5831C5.75255 13.8327 5.56269 14.0474 5.31321 14.0628ZM7.96263 13.611C7.96263 13.861 7.75996 14.0636 7.50991 14.0636C7.25985 14.0636 7.05718 13.861 7.05718 13.611V6.39782C7.05718 6.14777 7.25985 5.94509 7.50991 5.94509C7.75984 5.94509 7.96263 6.14777 7.96263 6.39782V13.611ZM10.6216 6.42448L10.1964 13.6376C10.1823 13.8781 9.98275 14.0636 9.74494 14.0636C9.73601 14.0636 9.72697 14.0634 9.71793 14.063C9.46833 14.0482 9.2779 13.834 9.29267 13.5844L9.7177 6.37115C9.73235 6.12156 9.9459 5.93113 10.1962 5.94589C10.4458 5.96054 10.6362 6.17489 10.6216 6.42448Z"
-                          fill="#009AED" />
-                        <path
-                          d="M13.3198 3.51762L13.0224 2.62636C12.9441 2.39141 12.7241 2.23291 12.4763 2.23291H2.53268C2.28503 2.23291 2.06496 2.39141 1.98668 2.62636L1.68936 3.51762C1.63203 3.68951 1.70664 3.86484 1.84592 3.95227C1.90268 3.98786 1.96986 4.00926 2.04367 4.00926H12.9655C13.0393 4.00926 13.1066 3.98786 13.1632 3.95216C13.3025 3.86472 13.3771 3.6894 13.3198 3.51762Z"
-                          fill="#009AED" />
-                      </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="rowContent">
-                            <div class="btnAgregar" (click)="showAgregaTarjeta(false)">
-                                + Agregar otra tarjeta
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="viewPay marginBottom40" *ngIf="id === 'mnuPago'" [hidden]="agregaTarjeta">
-                <div class="personalDocument">
-                    <div class="headerPortlet">
-                        <div class="titleBoxRight">Tarjeta de crédito o débito</div>
-                        <div class="subtitleBoxRight">Realiza reservas de manera más rápido guardando los datos de tu tarjeta. Nunca los usaremos sin tu permiso.
-                        </div>
-                    </div>
-                    <div class="cardLogo">
-                        <div class="boxCard">
-                            <img src="./assets/perfil/_visa.png" alt="">
-                        </div>
-                        <div class="boxCard">
-                            <img src="./assets/perfil/_master.png" alt="">
-                        </div>
-                        <div class="boxCard">
-                            <img src="./assets/perfil/_american.png" alt="">
-                        </div>
-                        <div class="boxCard">
-                            <img src="./assets/perfil/_dinners.png" alt="">
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div class="rowContent">
-                            <div class="inputGroup">
-                                <span class="">Número de la tarjeta</span>
-                                <input type="text" class="form-control" placeholder="Ingrese el número de su tarjeta">
-                            </div>
-                            <div class="inputGroup">
-                                <span class="">Titular de la tarjeta</span>
-                                <input type="text" class="form-control" placeholder="El que figura en la tarjeta">
-                            </div>
-                        </div>
-                        <div class="rowContent">
-                            <div class="inputGroup fecVen">
-                                <span class="">Vencimiento</span>
-                                <input type="text" class="form-control" placeholder="MM/AA">
-                            </div>
-                            <div class="inputGroup"></div>
-                        </div>
-                        <div class="rowContent spaceBetween">
-                            <div class="btnPerfil primary" (click)="showAgregaTarjeta(true)">
-                                Guardar
-                            </div>
-                            <div class="btnAgregar gris">
-                                + Agregar otra tarjeta
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="viewPay" *ngIf="id === 'mnuPago'">
-                <div class="contentSecurity">
-                    <div class="rowContent">
-                        <div>
-                            <img src="./assets/perfil/security.png" alt="">
-                        </div>
-                        <div class="rowContent">
-                            <div class="title">
-                                Transacción segura
-                            </div>
-                            <div class="subtitle">
-                                Sitio seguro utilizamos conexiones seguras para ti
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- END METODOS DE PAGO -->
-
-            <!-- PASAJEROS -->
-            <div class="viewPay" *ngIf="id === 'mnuPasajero'">
-                <app-passenger></app-passenger>
-            </div>
-            <!-- END PASAJEROS -->
+        <div class="linkContact" [routerLink]="['./datos-de-contacto']">
+          Agregar datos personales
         </div>
+      </div>
+      <div class="contacto">
+        <div class="titleContact">
+          Teléfono
+        </div>
+        <div class="linkContact" [routerLink]="['./datos-de-contacto']">
+          Agregar teléfono
+        </div>
+      </div>
+      <div class="contacto">
+        <div class="titleContact">
+          Email
+        </div>
+        <div class="linkContact disabled">
+          {{userStorage.email}}
+        </div>
+      </div>
     </div>
+  </div>
+
+  <div class="box-content">
+    <div class="portlet-izq">
+      <div class="iconViaje">
+        <img src="./assets/perfil/viajes.png" alt="">
+      </div>
+      <div class="boxMenu">
+        <ul class="">
+          <li *ngFor="let item of menus" [routerLink]="[item.ruta]" routerLinkActive="selected"
+            (click)="route = item.ruta">
+            {{item.texto}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="portlet-der">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
-<!-- ELIMINAR CUENTA -->
-<div class="viewCuenta" *ngIf="id === 'mnuEliminar'">
-    <div class="personalDocument">
-        <div class="headerPortlet">
-            <div class="titleBoxRight">Eliminar cuenta</div>
-            <div class="subtitleBoxRight">Lamentamos que te vayas. Coméntanos, ¿por qué eliminarás tu cuenta?
-            </div>
-        </div>
-
-        <div class="content">
-            <div class="rowContent">
-                <div class="inputGroup">
-                    <div class="optionCheck">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-              Razón 1
-            </label>
-                    </div>
-                    <div class="optionCheck">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                        <label class="form-check-label" for="flexRadioDefault2">
-              Razón 2
-            </label>
-                    </div>
-                    <div class="optionCheck">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-                        <label class="form-check-label" for="flexRadioDefault3">
-              Razón 3
-            </label>
-                    </div>
-                    <div class="optionCheck">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
-                        <label class="form-check-label" for="flexRadioDefault4">
-              Razón 4
-            </label>
-                    </div>
-                    <div class="optionCheck">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5" checked>
-                        <label class="form-check-label" for="flexRadioDefault5">
-              Otros
-            </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="rowContent">
-                <div class="btnPerfil primary">
-                    Eliminar
-                </div>
-            </div>
-            <div class="rowContent">
-                <div class="msgWarning">
-                    *Recuerda que perderás el acceso a tu historial de reservas y todos tus datos serán eliminados de manera permanente.
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-<!-- END ELIMINAR CUENTA -->
-
-
-<!-- END PERFIL -->
-
-
-
 
 <!-- Modal Eliminar Correo -->
-<div class="modal" data-backdrop="false" id="ModalEliminaCorreo" aria-labelledby="ModalEliminaCorreoLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="titleVerifica">¿Quieres eliminar tu cuenta?</div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="descripText">
-                    Perderás acceso a visualizar todas las reservas que tengas con el correo
-                    <span>{{userStorage.email}}</span>
-                </div>
-                <div class="descripText">
-                    Si quieres volver a visualizarlas tendrás que agregar y verificar nuevamente el correo.
-                </div>
-                <div class="action">
-                    <div data-bs-dismiss="modal" aria-label="Close" class="btn secundary">
-                        Cancelar
-                    </div>
-                    <div (click)="eliminarCuenta()" class="btn primary">
-                        Aceptar
-                    </div>
-                </div>
-            </div>
+<div class="modal" data-backdrop="false" id="ModalEliminaCorreo" aria-labelledby="ModalEliminaCorreoLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="titleVerifica">¿Quieres eliminar tu cuenta?</div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="descripText">
+          Perderás acceso a visualizar todas las reservas que tengas con el correo
+          <span>{{userStorage.email}}</span>
         </div>
+        <div class="descripText">
+          Si quieres volver a visualizarlas tendrás que agregar y verificar nuevamente el correo.
+        </div>
+        <div class="action">
+          <div data-bs-dismiss="modal" aria-label="Close" class="btn secundary">
+            Cancelar
+          </div>
+          <div (click)="eliminarCuenta()" class="btn primary">
+            Aceptar
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
-
-
-<!-- FOOTER -->
-<!-- <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-    <app-footer *ngIf="section.section === 'Footer'" [title1]="section.title1" [list1]="section.list1" [title2]="section.title2"
-        [list2]="section.list2" [libro]="section.libro" [linkLibro]="section.linkLibro" [span]="section.span" [addrees]="section.addrees"
-        [title3]="section.title3"></app-footer>
-</ng-container> -->
