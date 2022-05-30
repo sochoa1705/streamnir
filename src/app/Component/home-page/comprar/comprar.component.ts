@@ -652,7 +652,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.pressedToBuy = true;
 
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
-    this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioBrutoLocal));
+    this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioEmisionLocal));
 
     this.dataShop = this.formShop.value;
     let dataShop = this.formShop.value;
