@@ -78,9 +78,6 @@ export class HotelsComponent implements OnInit {
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
 
-      debugger
-
-
       this.hotels = JSON.parse(res).Result;
 
       if (this.hotels.length === 0) {

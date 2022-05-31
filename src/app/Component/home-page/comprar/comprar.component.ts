@@ -807,8 +807,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
         const result = JSON.parse(this.paymentData);
 
-        debugger
-
         if (result.Result.IsSuccess) {
 
           const paymentMethod: PaymentMethodEnum = data.paymentMethodForm.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;

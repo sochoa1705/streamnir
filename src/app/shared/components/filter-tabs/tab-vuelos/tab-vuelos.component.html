@@ -1,73 +1,83 @@
 <div class="boxTab">
 
-    <form class="bg-white" [formGroup]="form">
-        <div class="rowBoxTab">
-            <div class="padRight " style="position: relative;">
-                <mat-form-field>
-                    <mat-select formControlName="viajes" disableOptionCentering>
-                        <mat-option [value]="EnumFlightType.ida_vuelta">Ida y Vuelta</mat-option>
-                        <mat-option [value]="EnumFlightType.ida">Solo Ida</mat-option>
-                        <mat-option [value]="EnumFlightType.multy_city">Multi City</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="padRight">
-                <mat-form-field>
-                    <mat-select formControlName="clase" disableOptionCentering>
-                        <mat-option [value]="EnumCabins.economy">Economy</mat-option>
-                        <mat-option [value]="EnumCabins.business">Business</mat-option>
-                        <mat-option [value]="EnumCabins.first_class">First Class</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="padRight">
-                <app-pop-up-pasajero-vuelos (emitValidation)="emitValidation($event)" #popUp [onlyPasajeros]="true" (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero-vuelos>
-            </div>
-        </div>
+  <form class="bg-white" [formGroup]="form">
+    <div class="rowBoxTab">
+      <div class="padRight " style="position: relative;">
+        <mat-form-field>
+          <mat-select formControlName="viajes" disableOptionCentering>
+            <mat-option [value]="EnumFlightType.ida_vuelta">Ida y Vuelta</mat-option>
+            <mat-option [value]="EnumFlightType.ida">Solo Ida</mat-option>
+            <mat-option [value]="EnumFlightType.multy_city">Multi City</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="padRight">
+        <mat-form-field>
+          <mat-select formControlName="clase" disableOptionCentering>
+            <mat-option [value]="EnumCabins.economy">Economy</mat-option>
+            <mat-option [value]="EnumCabins.business">Business</mat-option>
+            <mat-option [value]="EnumCabins.first_class">First Class</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="padRight">
+        <app-pop-up-pasajero-vuelos (emitValidation)="emitValidation($event)" #popUp [onlyPasajeros]="true"
+          (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero-vuelos>
+      </div>
+    </div>
 
 
-        <div class="rowBoxTab" *ngIf="form.controls.viajes.value != EnumFlightType.multy_city; else multicity">
+    <div class="rowBoxTab" *ngIf="form.controls.viajes.value != EnumFlightType.multy_city; else multicity">
 
-            <div class="colBoxtab w-30 me-md-1">
-                <app-input-autocomplete [(valueInput)]="valueInputOrigen" [validRequired]="isSubmit" [minTermLength]="minLengthAutocomplete" placeholder="Origen" [items]="vuelos$ | async" [loading]="vuelosLoading" [typeahead]="vuelosInput$" formControlName="origen"></app-input-autocomplete>
-            </div>
+      <div class="colBoxtab w-30 me-md-1">
+        <app-input-autocomplete [(valueInput)]="valueInputOrigen" [validRequired]="isSubmit"
+          [minTermLength]="minLengthAutocomplete" placeholder="Origen" [items]="vuelos$ | async"
+          [loading]="vuelosLoading" [typeahead]="vuelosInput$" formControlName="origen">
+        </app-input-autocomplete>
+      </div>
 
-            <div class="colBoxtab w-30 me-md-1">
+      <div class="colBoxtab w-30 me-md-1">
 
-                <app-input-autocomplete [(valueInput)]="valueInputDestino" [validRequired]="isSubmit" [minTermLength]="minLengthAutocomplete" placeholder="Destino" [items]="vuelos2$ | async" [loading]="vuelosLoading2" [typeahead]="vuelosInput2$" formControlName="destino"></app-input-autocomplete>
+        <app-input-autocomplete [(valueInput)]="valueInputDestino" [validRequired]="isSubmit"
+          [minTermLength]="minLengthAutocomplete" placeholder="Destino" [items]="vuelos2$ | async"
+          [loading]="vuelosLoading2" [typeahead]="vuelosInput2$" formControlName="destino">
+        </app-input-autocomplete>
 
-            </div>
+      </div>
+
+      <div class="colBoxtab w-30" *ngIf="form.controls.viajes.value == EnumFlightType.ida_vuelta">
+        <input type="text" class="form-control textIndent" formControlName="departureDate" (focus)="onFocus()"
+          placeholder="dd/mm/yyyy" mask="d0/M0/0*" />
+      </div>
+      <div class="colBoxtab w-30" *ngIf="form.controls.viajes.value == EnumFlightType.ida_vuelta">
+        <input type="text" class="form-control textIndent" formControlName="arrivalDate" (focus)="onFocus()"
+          placeholder="dd/mm/yyyy" mask="d0/M0/0*" />
+      </div>
+
+      <app-calendar-price *ngIf="displayCalendar && form.controls.viajes.value == EnumFlightType.ida_vuelta"
+        [flightData]="flightData" (inputDates)="insertDates($event)"></app-calendar-price>
+
+      <app-calendar *ngIf="form.controls.viajes.value != EnumFlightType.ida_vuelta" [requiredFromDate]="isSubmit"
+        [requiredToDate]="isSubmit" [typeValue]="viajesForm" [toDate]="vuelosTab?.toDate || null"
+        [fromDate]="vuelosTab?.fromDate || null" class="ignore-template" (changeDate)="changeDate($event)">
+      </app-calendar>
 
 
-            <div class="colBoxtab w-30" *ngIf="form.controls.viajes.value == EnumFlightType.ida_vuelta">
-                <input type="text" class="form-control textIndent" formControlName="departureDate" (focus)="onFocus()" placeholder="dd/mm/yyyy" />
-            </div>
-            <div class="colBoxtab w-30" *ngIf="form.controls.viajes.value == EnumFlightType.ida_vuelta">
-                <input type="text" class="form-control textIndent" formControlName="arrivalDate" (focus)="onFocus()" placeholder="dd/mm/yyyy" />
-            </div>
+      <div class="colBoxtab w-10 ms-md-2">
+        <button class="fullWidht" type="button" (click)="searchVueloHotel()">Buscar</button>
+      </div>
+    </div>
 
+    <ng-template #multicity>
+      <app-tab-vuelos-multicity [controls]="getControls()" [requiredFromDate]="isSubmit">
+      </app-tab-vuelos-multicity>
+      <div class="colTabFilter w100">
+        <button class="fullWidht" type="button" (click)="searchVueloHotelMulti()">Buscar</button>
+      </div>
+    </ng-template>
 
-
-            <app-calendar-price *ngIf="displayCalendar && form.controls.viajes.value == EnumFlightType.ida_vuelta" [flightData]="flightData" (inputDates)="insertDates($event)"></app-calendar-price>
-
-            <app-calendar *ngIf="form.controls.viajes.value != EnumFlightType.ida_vuelta" [requiredFromDate]="isSubmit" [requiredToDate]="isSubmit" [typeValue]="viajesForm" [toDate]="vuelosTab?.toDate || null" [fromDate]="vuelosTab?.fromDate || null" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
-
-
-            <div class="colBoxtab w-10 ms-md-2">
-                <button class="fullWidht" type="button" (click)="searchVueloHotel()">Buscar</button>
-            </div>
-        </div>
-
-        <ng-template #multicity>
-            <app-tab-vuelos-multicity [controls]="getControls()" [requiredFromDate]="isSubmit">
-            </app-tab-vuelos-multicity>
-            <div class="colTabFilter w100">
-                <button class="fullWidht" type="button" (click)="searchVueloHotelMulti()">Buscar</button>
-            </div>
-        </ng-template>
-
-        <span class="valid" *ngIf="false">Debe seleccionar la cantidad de pasajeros</span>
-    </form>
+    <span class="valid" *ngIf="false">Debe seleccionar la cantidad de pasajeros</span>
+  </form>
 </div>
 
 
