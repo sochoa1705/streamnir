@@ -7995,3 +7995,86 @@ app-flightdeals button {
     @media (max-width: 640px) {
       .boxCita .boxGroupCita {
         width: calc(100% - 20px); } }
+
+.containerError {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(270deg, #04074a 0%, #2a246d 100%);
+  height: 100vh;
+  width: 100%;
+  gap: 100px;
+  padding: 0 10%; }
+  .containerError .imgBoxError {
+    display: flex;
+    width: 150px;
+    position: absolute;
+    top: 18%;
+    left: calc(50% - 75px); }
+    .containerError .imgBoxError img {
+      width: 100%; }
+    @media (max-width: 640px) {
+      .containerError .imgBoxError {
+        width: 70px;
+        left: calc(50% - 35px); } }
+  .containerError .msgError {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Montserrat';
+    color: #ffffff;
+    position: relative; }
+    .containerError .msgError .titulo {
+      font-weight: 700;
+      font-size: 250px; }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .containerError .msgError .titulo {
+          font-size: 250px; } }
+      @media (max-width: 640px) {
+        .containerError .msgError .titulo {
+          font-size: 120px;
+          line-height: 250px; } }
+    .containerError .msgError .mensaje {
+      font-weight: 500;
+      text-align: center;
+      font-size: 24px; }
+      .containerError .msgError .mensaje span {
+        font-size: 14px;
+        font-weight: 400; }
+        @media (max-width: 640px) {
+          .containerError .msgError .mensaje span {
+            font-size: 12px; } }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .containerError .msgError .mensaje {
+          font-size: 20px; } }
+      @media (max-width: 640px) {
+        .containerError .msgError .mensaje {
+          font-size: 18px; } }
+    .containerError .msgError .boton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      transition: 0.3s all;
+      font-weight: 400;
+      gap: 15px;
+      font-size: 14px;
+      padding: 10px 20px;
+      margin-top: 30px;
+      cursor: pointer;
+      border: 1px solid #ffffff; }
+      .containerError .msgError .boton:hover {
+        background: #ffffff;
+        color: #4b4b4b; }
+        .containerError .msgError .boton:hover .white {
+          display: none; }
+        .containerError .msgError .boton:hover .gris {
+          display: block; }
+      .containerError .msgError .boton .gris {
+        display: none; }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .containerError .msgError .boton {
+          font-size: 14px; } }
+      @media (max-width: 640px) {
+        .containerError .msgError .boton {
+          font-size: 12px; } }
