@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
-import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import * as bootstrap from 'bootstrap';
+import { StringMappingType } from 'typescript';
+
+interface MenuItem {
+  texto: string,
+  ruta: string
+}
 
 @Component({
   selector: 'app-perfil',
@@ -20,48 +25,48 @@ export class PerfilComponent implements OnInit {
 
   userStorage: UserStorage;
 
+  route: string = '';
+
+  menus: MenuItem[] = [
+    {
+      texto: 'Mi Perfil',
+      ruta: './mi-perfil'
+    },
+    {
+      texto: 'Datos de contacto',
+      ruta: './datos-de-contacto'
+    },
+    {
+      texto: 'Preferencias',
+      ruta: './preferencias'
+    },
+    {
+      texto: 'Pasajeros',
+      ruta: './pasajeros'
+    }
+  ];
+
   constructor(
-    public dataPagePresenterService: DataPagePresenterService,
     public accountService: AccountsService,
-    private router: Router,
+    private router: Router
   ) {
     this.user = localStorage.getItem('usuario')
     this.userData = JSON.parse(this.user)
-  }
-
-  id: any = "mnuPerfil";
-  showOption(ids: any) {
-    this.id = ids;
-    //console.log(this.id);
-  }
-
-  agregaTarjeta = false;
-  showAgregaTarjeta(valElem: boolean) {
-    this.agregaTarjeta = valElem;
-    //console.log(this.agregaTarjeta);
-  }
-
-  agregaPasajero = false;
-  showAgregaPasajero(valElem: boolean) {
-    this.agregaPasajero = valElem;
-    //console.log(this.agregaPasajero);
   }
 
   ngOnInit(): void {
     this.userStorage = this.accountService.getUserStorage();
   }
 
-
-  toggleModalEliminar() {
-    const modal = document.getElementById("ModalEliminaCorreo");
-
-    if (!modal) { 
-      return;
-    }
-
-    bootstrap.Modal.getOrCreateInstance(modal).toggle();
+  agregaTarjeta = false;
+  showAgregaTarjeta(valElem: boolean) {
+    this.agregaTarjeta = valElem;
   }
 
+  agregaPasajero = false;
+  showAgregaPasajero(valElem: boolean) {
+    this.agregaPasajero = valElem;
+  }
 
   eliminarCuenta() {
     this.accountService.deleteAccount(this.userStorage.id).subscribe(data => {
@@ -73,6 +78,13 @@ export class PerfilComponent implements OnInit {
     })
   }
 
+  toggleModalEliminar() {
+    const modal = document.getElementById("ModalEliminaCorreo");
 
+    if (!modal) {
+      return;
+    }
 
+    bootstrap.Modal.getOrCreateInstance(modal).toggle();
+  }
 }

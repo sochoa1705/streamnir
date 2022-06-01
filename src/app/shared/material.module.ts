@@ -21,6 +21,7 @@ import {
   MatSidenavModule,
   MAT_DRAWER_DEFAULT_AUTOSIZE
 } from "@angular/material/sidenav";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -66,6 +67,6 @@ import {
   ],
   providers: [
     { provide: MAT_DRAWER_DEFAULT_AUTOSIZE, useValue: { autosize: true } }
-  ],
+  ]
 })
 export class MaterialModule { }
