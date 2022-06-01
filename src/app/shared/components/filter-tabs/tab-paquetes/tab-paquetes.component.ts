@@ -79,6 +79,11 @@ export class TabPaquetesComponent {
     this.getMonths();
   }
 
+  autoCompleteInit(): void {
+    this.countriesPackageSearch = [];
+    this.countriesPackageSearch = this.countriesPackage;
+  }
+
   autoComplete(e: any, typeSearch = 'FLIGHT_HOTEL') {
     // let elemento = this.origen.nativeElement;
     this.countriesPackageSearch = [];

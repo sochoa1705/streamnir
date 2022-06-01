@@ -5,7 +5,7 @@
         <div class="colElement">
           <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino"
             (keyup)="autoComplete($event)" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)"
-            class="form-control animated fadeIn" placeholder="¿A que país le gustaría ir?">
+            class="form-control animated fadeIn" placeholder="¿A que país le gustaría ir?" (click)="autoCompleteInit()">
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let state of countriesPackageSearch" [value]="state.label">
               <img class="example-option-img" aria-hidden src="./assets/origen.png">
