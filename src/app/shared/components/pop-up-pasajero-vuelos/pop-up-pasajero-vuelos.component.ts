@@ -4,6 +4,7 @@ import { fromEvent } from 'rxjs';
 import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { Guid } from '../../utils';
 import { PasajerosConHabitacion, PasajerosSinHabitacion } from '../tabs/tabs.models';
+import { IntermediaryService } from '../../../Services/intermediary.service';
 
 export interface IDistributionObject{
   habitacion:number,
@@ -52,8 +53,10 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
   @Output() emitDistribution= new EventEmitter<string>();
 
   @Output() emitDistributionObject= new EventEmitter<IDistributionObject>();
+  @Output() emitValidation = new EventEmitter<string>();
+  maxPasajeros = 9;
 
-  constructor(private popupService:PopupService) {
+  constructor(private popupService:PopupService, private intermediaryService: IntermediaryService) {
     this.idContent = `popup_${Guid()}`;
   }
 
@@ -79,7 +82,13 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
 
           this.emitDistribution.emit(distribution);
       }
-    }) 
+    });
+    
+    this.intermediaryService.$getObjectPopupPasajerosValidation.subscribe(res => {
+      if(res) {
+        this.validationPasajeros();
+      }
+    });
     
   }
 
@@ -96,11 +105,15 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
   }
 
   closePopUp(){
+    this.validationPasajeros();
     this.popupService.closePopUp(this.idContent);
   }
 
   public calculateDistributionTravel(optionTravel:string, optionAddRemove: number): void {
-
+    const habitacion = this.habitacion;
+    const ninos = this.ninos;
+    const adultos = this.adultos;
+    const infantes = this.infantes;
     switch(optionTravel) {
       case 'habitacion' :
         if(!this.habitacionDisabled){
@@ -117,10 +130,17 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
         this.infantes += this.infantes === 0 && optionAddRemove === 0 ? 0 : optionAddRemove === 1 ? 1 : -1;
         break;
     }
+    if(!this.validationPasajeros()) {
+      this.habitacion = habitacion;
+      this.adultos = adultos;
+      this.ninos = ninos;
+      this.infantes = infantes;
+    }
   }
 
 
-  savePasajeros(){    
+  savePasajeros(){
+    this.validationPasajeros();    
     this.popupService.closePopUp(this.idContent);
   }
 
@@ -142,5 +162,31 @@ export class PopUpPasajeroVuelosComponent implements OnInit{
     }
     urlDistributon = urlDistributon.charAt(urlDistributon.length - 1 ) === ',' ? urlDistributon.substring(0, urlDistributon.length - 1) : urlDistributon;
     return urlDistributon;
+  }
+
+  validationPasajeros(): boolean{
+    let cantidadMaxima = this.adultos + this.ninos;
+    if(this.adultos == 0) {
+      this.emitValidation.emit('Debe viajar al menos un adulto');
+      return false;
+      //this.resetPasajeros();
+    }
+    else if(cantidadMaxima > this.maxPasajeros) {
+      this.emitValidation.emit('La cantidad máxima de pasajeros debe ser 9');
+      return false;
+      //this.resetPasajeros();
+    }
+    else if(this.infantes > this.adultos){
+      this.emitValidation.emit('La cantidad de infantes no debe ser mayor a los adultos');
+      return false;
+      //this.resetPasajeros();
+    }
+    return true;
+  }
+
+  resetPasajeros(){
+    this.adultos = 1;
+    this.ninos = 0;
+    this.infantes = 0;
   }
 }

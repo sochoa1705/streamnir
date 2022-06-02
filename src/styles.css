@@ -3207,6 +3207,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       background: transparent; }
     .boxFlotante .btnPasajero .Agregar:disabled {
       color: #4b4b4b; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .boxFlotante {
+      right: 10%; } }
   @media (max-width: 640px) {
     .boxFlotante {
       left: 15px;
@@ -7832,32 +7835,246 @@ app-flightdeals button {
     .onlyMobile {
       display: flex !important; } }
 
-      .preloader {
-        display: none;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 1000;
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0; }
-        .preloader.show {
-          display: block; }
-        .preloader .loaderSpin {
-          -webkit-border-radius: 50%;
-          -moz-border-radius: 50%;
-          border-radius: 50%;
-          width: 16px;
-          height: 16px;
-          position: relative;
-          animation: loaderCircle 1s linear infinite;
-          top: 50%;
-          margin: -8px auto 0; }
-        .preloader .textPreload {
-          color: #ffffff;
+.preloader {
+  display: none;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+  .preloader.show {
+    display: block; }
+  .preloader .loaderSpin {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    animation: loaderCircle 1s linear infinite;
+    top: 50%;
+    margin: -8px auto 0; }
+  .preloader .textPreload {
+    color: #ffffff;
+    font-size: 12px;
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+    top: 40%;
+    position: relative; }
+
+.promociones {
+  max-width: 1370px;
+  width: 80%;
+  margin: auto; }
+  .promociones .titleM {
+    border-left: 6px solid #b01630;
+    padding-left: 9px;
+    margin: 30px 0 40px;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #000000;
+    font-weight: 300;
+    line-height: 33px;
+    letter-spacing: .7px;
+    padding-bottom: 0;
+    border-bottom: none; }
+    @media (max-width: 640px) {
+      .promociones .titleM {
+        font-size: 16px;
+        margin: 20px 0; } }
+  .promociones ul li {
+    color: #130101;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 29px;
+    text-align: justify; }
+    .promociones ul li h1 {
+      font-size: 16px;
+      font-weight: 600; }
+      @media (max-width: 640px) {
+        .promociones ul li h1 {
+          font-size: 14px; } }
+    .promociones ul li .subtitleP {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #000; }
+    @media (max-width: 640px) {
+      .promociones ul li {
+        font-size: 12px; } }
+  @media (max-width: 640px) {
+    .promociones ul {
+      padding-left: 20px; } }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .promociones {
+      width: 90%; } }
+  @media (max-width: 640px) {
+    .promociones {
+      width: calc(100% - 20px); } }
+
+.boxCita {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: url(./assets/img/background.jpg) no-repeat;
+  background-position: 50% 50%;
+  background-size: cover; }
+  .boxCita .boxLogo {
+    width: 80%;
+    margin: 0 auto 40px auto; }
+  .boxCita .boxGroupCita {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; }
+    .boxCita .boxGroupCita .boxOption {
+      width: calc(50% - 30px);
+      background: #ffffff;
+      padding: 20px 30px; }
+      .boxCita .boxGroupCita .boxOption .titleOption {
+        font-weight: 700;
+        font-size: 22px;
+        color: #cf152d;
+        margin-bottom: 15px; }
+        @media (max-width: 990px) and (min-width: 640px) {
+          .boxCita .boxGroupCita .boxOption .titleOption {
+            font-size: 18px; } }
+        @media (max-width: 640px) {
+          .boxCita .boxGroupCita .boxOption .titleOption {
+            font-size: 14px; } }
+      .boxCita .boxGroupCita .boxOption .contentOption {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 20px; }
+        .boxCita .boxGroupCita .boxOption .contentOption .iconLeft {
+          min-width: 80px; }
+          .boxCita .boxGroupCita .boxOption .contentOption .iconLeft img {
+            width: 100%; }
+          @media (max-width: 990px) and (min-width: 640px) {
+            .boxCita .boxGroupCita .boxOption .contentOption .iconLeft {
+              min-width: 65px; } }
+          @media (max-width: 640px) {
+            .boxCita .boxGroupCita .boxOption .contentOption .iconLeft {
+              min-width: 40px; } }
+        .boxCita .boxGroupCita .boxOption .contentOption .textContent {
           font-size: 16px;
-          margin: 0 auto;
-          width: 50%;
-          text-align: center;
-          top: 40%;
-          position: relative; }
+          text-align: justify; }
+          @media (max-width: 990px) and (min-width: 640px) {
+            .boxCita .boxGroupCita .boxOption .contentOption .textContent {
+              font-size: 14px; } }
+          @media (max-width: 640px) {
+            .boxCita .boxGroupCita .boxOption .contentOption .textContent {
+              font-size: 12px; } }
+        @media (max-width: 990px) and (min-width: 640px) {
+          .boxCita .boxGroupCita .boxOption .contentOption {
+            gap: 20px; } }
+        @media (max-width: 640px) {
+          .boxCita .boxGroupCita .boxOption .contentOption {
+            gap: 10px; } }
+      .boxCita .boxGroupCita .boxOption .boxActionCita {
+        display: flex;
+        justify-content: flex-end; }
+        .boxCita .boxGroupCita .boxOption .boxActionCita .btn {
+          font-size: 14px; }
+          @media (max-width: 990px) and (min-width: 640px) {
+            .boxCita .boxGroupCita .boxOption .boxActionCita .btn {
+              font-size: 13px; } }
+          @media (max-width: 640px) {
+            .boxCita .boxGroupCita .boxOption .boxActionCita .btn {
+              font-size: 12px; } }
+      @media (max-width: 640px) {
+        .boxCita .boxGroupCita .boxOption {
+          width: 100%; } }
+    @media (max-width: 990px) and (min-width: 640px) {
+      .boxCita .boxGroupCita {
+        width: 90%;
+        justify-content: space-between; } }
+    @media (max-width: 640px) {
+      .boxCita .boxGroupCita {
+        width: calc(100% - 20px); } }
+
+.containerError {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(270deg, #04074a 0%, #2a246d 100%);
+  height: 100vh;
+  width: 100%;
+  gap: 100px;
+  padding: 0 10%; }
+  .containerError .imgBoxError {
+    display: flex;
+    width: 150px;
+    position: absolute;
+    top: 18%;
+    left: calc(50% - 75px); }
+    .containerError .imgBoxError img {
+      width: 100%; }
+    @media (max-width: 640px) {
+      .containerError .imgBoxError {
+        width: 70px;
+        left: calc(50% - 35px); } }
+  .containerError .msgError {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Montserrat';
+    color: #ffffff;
+    position: relative; }
+    .containerError .msgError .titulo {
+      font-weight: 700;
+      font-size: 250px; }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .containerError .msgError .titulo {
+          font-size: 250px; } }
+      @media (max-width: 640px) {
+        .containerError .msgError .titulo {
+          font-size: 120px;
+          line-height: 250px; } }
+    .containerError .msgError .mensaje {
+      font-weight: 500;
+      text-align: center;
+      font-size: 24px; }
+      .containerError .msgError .mensaje span {
+        font-size: 14px;
+        font-weight: 400; }
+        @media (max-width: 640px) {
+          .containerError .msgError .mensaje span {
+            font-size: 12px; } }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .containerError .msgError .mensaje {
+          font-size: 20px; } }
+      @media (max-width: 640px) {
+        .containerError .msgError .mensaje {
+          font-size: 18px; } }
+    .containerError .msgError .boton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      transition: 0.3s all;
+      font-weight: 400;
+      gap: 15px;
+      font-size: 14px;
+      padding: 10px 20px;
+      margin-top: 30px;
+      cursor: pointer;
+      border: 1px solid #ffffff; }
+      .containerError .msgError .boton:hover {
+        background: #ffffff;
+        color: #4b4b4b; }
+        .containerError .msgError .boton:hover .white {
+          display: none; }
+        .containerError .msgError .boton:hover .gris {
+          display: block; }
+      .containerError .msgError .boton .gris {
+        display: none; }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .containerError .msgError .boton {
+          font-size: 14px; } }
+      @media (max-width: 640px) {
+        .containerError .msgError .boton {
+          font-size: 12px; } }

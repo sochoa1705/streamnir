@@ -3955,6 +3955,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
         }
     }
+    @media (max-width: 990px) and (min-width: 640px) {
+        right: 10%;
+    }
     @media (max-width: 640px) {
         left: 15px;
         top: 55px;
@@ -9664,6 +9667,253 @@ app-flightdeals {
         text-align: center;
         top: 40%;
         position: relative;
+    }
+}
+
+.promociones {
+    max-width: 1370px;
+    width: 80%;
+    margin: auto;
+    .titleM {
+        border-left: 6px solid #b01630;
+        padding-left: 9px;
+        margin: 30px 0 40px;
+        font-size: 25px;
+        text-transform: uppercase;
+        color: #000000;
+        font-weight: 300;
+        line-height: 33px;
+        letter-spacing: .7px;
+        padding-bottom: 0;
+        border-bottom: none;
+        @media (max-width: 640px) {
+            font-size: 16px;
+            margin: 20px 0;
+        }
+    }
+    ul {
+        li {
+            color: #130101;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 29px;
+            text-align: justify;
+            h1 {
+                font-size: 16px;
+                font-weight: 600;
+                @media (max-width: 640px) {
+                    font-size: 14px;
+                }
+            }
+            .subtitleP {
+                margin-bottom: 20px;
+                border-bottom: 1px solid #000;
+            }
+            @media (max-width: 640px) {
+                font-size: 12px;
+            }
+        }
+        @media (max-width: 640px) {
+            padding-left: 20px;
+        }
+    }
+    @media (max-width: 990px) and (min-width: 640px) {
+        width: 90%;
+    }
+    @media (max-width: 640px) {
+        width: calc(100% - 20px);
+    }
+}
+
+.boxCita {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background: url(./assets/img/background.jpg) no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    .boxLogo {
+        width: 80%;
+        margin: 0 auto 40px auto;
+    }
+    .boxGroupCita {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        .boxOption {
+            width: calc(50% - 30px);
+            background: #ffffff;
+            padding: 20px 30px;
+            .titleOption {
+                font-weight: 700;
+                font-size: 22px;
+                color: #cf152d;
+                margin-bottom: 15px;
+                @media (max-width: 990px) and (min-width: 640px) {
+                    font-size: 18px;
+                }
+                @media (max-width: 640px) {
+                    font-size: 14px;
+                }
+            }
+            .contentOption {
+                display: flex;
+                gap: 30px;
+                margin-bottom: 20px;
+                .iconLeft {
+                    min-width: 80px;
+                    img {
+                        width: 100%;
+                    }
+                    @media (max-width: 990px) and (min-width: 640px) {
+                        min-width: 65px;
+                    }
+                    @media (max-width: 640px) {
+                        min-width: 40px;
+                    }
+                }
+                .textContent {
+                    font-size: 16px;
+                    text-align: justify;
+                    @media (max-width: 990px) and (min-width: 640px) {
+                        font-size: 14px;
+                    }
+                    @media (max-width: 640px) {
+                        font-size: 12px;
+                    }
+                }
+                @media (max-width: 990px) and (min-width: 640px) {
+                    gap: 20px;
+                }
+                @media (max-width: 640px) {
+                    gap: 10px;
+                }
+            }
+            .boxActionCita {
+                display: flex;
+                justify-content: flex-end;
+                .btn {
+                    font-size: 14px;
+                    @media (max-width: 990px) and (min-width: 640px) {
+                        font-size: 13px;
+                    }
+                    @media (max-width: 640px) {
+                        font-size: 12px;
+                    }
+                }
+            }
+            @media (max-width: 640px) {
+                width: 100%;
+            }
+        }
+        @media (max-width: 990px) and (min-width: 640px) {
+            width: 90%;
+            justify-content: space-between;
+        }
+        @media (max-width: 640px) {
+            width: calc(100% - 20px);
+        }
+    }
+}
+
+.containerError {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //background: linear-gradient(270deg, #9DB6C8 0%, #B6CAD7 100%);
+    background: linear-gradient(270deg, #04074a 0%, #2a246d 100%);
+    height: 100vh;
+    width: 100%;
+    gap: 100px;
+    padding: 0 10%;
+    .imgBoxError {
+        display: flex;
+        width: 150px;
+        position: absolute;
+        top: 18%;
+        left: calc(50% - 75px);
+        img {
+            width: 100%;
+        }
+        @media (max-width: 640px) {
+            width: 70px;
+            left: calc(50% - 35px);
+        }
+    }
+    .msgError {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        font-family: 'Montserrat';
+        color: #ffffff;
+        position: relative;
+        .titulo {
+            font-weight: 700;
+            font-size: 250px;
+            @media (max-width: 990px) and (min-width: 640px) {
+                font-size: 250px;
+            }
+            @media (max-width: 640px) {
+                font-size: 120px;
+                line-height: 250px;
+            }
+        }
+        .mensaje {
+            font-weight: 500;
+            text-align: center;
+            font-size: 24px;
+            span {
+                font-size: 14px;
+                font-weight: 400;
+                @media (max-width: 640px) {
+                    font-size: 12px;
+                }
+            }
+            @media (max-width: 990px) and (min-width: 640px) {
+                font-size: 20px;
+            }
+            @media (max-width: 640px) {
+                font-size: 18px;
+            }
+        }
+        .boton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            transition: 0.3s all;
+            font-weight: 400;
+            gap: 15px;
+            font-size: 14px;
+            padding: 10px 20px;
+            margin-top: 30px;
+            cursor: pointer;
+            border: 1px solid #ffffff;
+            &:hover {
+                background: #ffffff;
+                color: #4b4b4b;
+                .white {
+                    display: none;
+                }
+                .gris {
+                    display: block;
+                }
+            }
+            .gris {
+                display: none;
+            }
+            @media (max-width: 990px) and (min-width: 640px) {
+                font-size: 14px;
+            }
+            @media (max-width: 640px) {
+                font-size: 12px;
+            }
+        }
     }
 }
 

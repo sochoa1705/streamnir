@@ -86,7 +86,7 @@ export class TabHotelComponent {
 
 
 
-  autoComplete(e: any, typeSearch = 'FLIGHT_HOTEL') {
+  autoComplete(e: any, typeSearch = 'ONLY_HOTEL') {
     // let elemento = this.origen.nativeElement;
     let elemento = e.target;
 
@@ -99,7 +99,7 @@ export class TabHotelComponent {
 
 
 
-  getListCiudades(e: any, typeSearch = 'FLIGHT_HOTEL') {
+  getListCiudades(e: any, typeSearch = 'ONLY_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
         this.citys = data;

@@ -20,11 +20,14 @@ import { PasswordComponent } from './password/password.component';
 import { PassengersService } from './passenger/passengers.service';
 import { PasswordService } from './password/password.service';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
+import { RouterModule } from '@angular/router';
+import { MyProfyleComponent } from './my-profyle/my-profyle.component';
 
 @NgModule({
-  declarations: [PerfilComponent, ContactoComponent, PassengerComponent, PasswordComponent, PreferenciasComponent],
+  declarations: [PerfilComponent, ContactoComponent, PassengerComponent, PasswordComponent, PreferenciasComponent, MyProfyleComponent],
   imports: [
     CommonModule,
+    RouterModule,
     PerfilRoutingModule,
     FooterModule,
     MatCheckboxModule,
@@ -35,7 +38,7 @@ import { PreferenciasComponent } from './preferencias/preferencias.component';
     FormsModule,
     FileModule
   ],
-  exports: [PerfilComponent,PreferenciasComponent],
+  exports: [PerfilComponent, PreferenciasComponent],
   providers: [DataPagePresenterService, PreferenceService, ContactoService, PassengersService, PasswordService]
 
 })

@@ -11,6 +11,7 @@ export const environment = {
   sucursalAgenciaAC: '3',
   ptoventaAgenciaAC: '1',
   comisionistaAgenciaAC: '',
+  apiIp: 'https://api.ipify.org/?format=json',
   today: (hoy: any) => {
     let fehcaHoy = `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
     return fehcaHoy

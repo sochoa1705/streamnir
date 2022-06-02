@@ -643,6 +643,17 @@
                       </span>
                     </div>
 
+                    <div class="col-4 viewMobileWidth">
+                      <label for="ruc">Razón social</label>
+                      <input type="text" formControlName="razonSocial" class="form-control"
+                        [ngClass]="{isvalid : validateContactForm('razonSocial')}"
+                        placeholder="Ingresa la razón social">
+
+                      <span class="valid" *ngIf="validateContactForm('razonSocial')">
+                        Ingresa la razón social
+                      </span>
+                    </div>
+
                     <div class="col-8 viewMobileWidth">
                       <label for="dirección">Dirección</label>
                       <input formControlName="direccion" class="form-control"
@@ -741,7 +752,7 @@
 
             <div class="row rowMobileCard ">
               <div class="col-12 contentCenterMobile">
-                <button mat-button class="px-5" (click)="buyInsurance()">Comprar</button>
+                <button mat-button class="px-5" [disabled]="pressedToBuy" (click)="buyInsurance()">Comprar</button>
               </div>
             </div>
           </div>
@@ -1342,7 +1353,7 @@
                 </div>
 
                 <div class="row rowMobileCard" *ngIf="showInvoiceData">
-                  <div class="col-6 viewMobileWidth">
+                  <div class="col-4 viewMobileWidth">
                     <label for="ruc">RUC N°</label>
                     <input type="text" formControlName="ruc" class="form-control"
                       [ngClass]="{isvalid : validateContactForm('ruc')}" placeholder="Ingresa N° de Ruc">
@@ -1352,7 +1363,17 @@
                     </span>
                   </div>
 
-                  <div class="col-6 viewMobileWidth">
+                  <div class="col-8 viewMobileWidth">
+                    <label for="ruc">Razón social</label>
+                    <input type="text" formControlName="razonSocial" class="form-control"
+                      [ngClass]="{isvalid : validateContactForm('razonSocial')}" placeholder="Ingresa la razón social">
+
+                    <span class="valid" *ngIf="validateContactForm('razonSocial')">
+                      Ingresa la razón social
+                    </span>
+                  </div>
+
+                  <div class="col-12 viewMobileWidth">
                     <label for="direccion">Dirección</label>
                     <input formControlName="direccion" class="form-control"
                       [ngClass]="{isvalid : validateContactForm('direccion')}" placeholder="Ca. / Jr. / Av.">
@@ -1452,7 +1473,7 @@
 
           <div class="row rowMobileCard ">
             <div class="col-12 contentCenterMobile">
-              <button (click)="buyInsurance()" class="px-5">Comprar</button>
+              <button [disabled]="pressedToBuy" (click)="buyInsurance()" class="px-5">Comprar</button>
             </div>
           </div>
         </div>

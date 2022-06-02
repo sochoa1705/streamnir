@@ -7,10 +7,16 @@ import { BehaviorSubject } from 'rxjs';
 export class IntermediaryService {
 
   private objectCalendarPriceSource = new BehaviorSubject<boolean>(false);
+  private objectPopupPasajerosValidation = new BehaviorSubject<boolean>(false);
 
   $getObjectCalendarPriceSource = this.objectCalendarPriceSource.asObservable();
+  $getObjectPopupPasajerosValidation = this.objectPopupPasajerosValidation.asObservable();
 
   sendChangeCalendarPrice(data: boolean) {
     this.objectCalendarPriceSource.next(data);
+  }
+
+  sendChangePopupPasajerosValidation(data: boolean) {
+    this.objectPopupPasajerosValidation.next(data);
   }
 }
