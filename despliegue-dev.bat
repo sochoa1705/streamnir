@@ -4,22 +4,27 @@ echo Hola %USERNAME%
 set name="nmviajes"
 set url=%CD%
 
-@REM echo "Haciendo el build de la aplicacion"
-@REM powershell -Command "npm run build-prod"
+echo "Haciendo el build de la aplicacion"
+powershell -Command "npm run build-prod"
 
 echo "Logueandose en el Container"
-powershell -Command "az acr login -n ExpertiaNmViajesDev"
+powershell -Command "az acr login -n expertianmviajesdev"
 
 echo "Generando la imagen"
-powershell -Command "docker build -t nmviajes ."
-powershell -Command "docker tag nmviajes expertianmviajesdev.azurecr.io/nmviajes"
+
+powershell -Command "docker build -t nmviajes-dev ."
+powershell -Command "docker tag nmviajes-dev expertianmviajesdev.azurecr.io/nmviajes-dev"
 
 echo "Subiendo la imagen"
-powershell -Command "docker push expertianmviajesdev.azurecr.io/nmviajes"
+powershell -Command "docker push expertianmviajesdev.azurecr.io/nmviajes-dev"
 
-@REM echo "Desplegando al app"
-@REM powershell -Command "kubectl apply -f nmviajes.yaml -n nmviajes"
-@REM powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n nmviajes"
+echo "Cambiando a la carpeta de desarrollo"
+cd .\yamls\dev\
+echo %CD%
+
+echo "Desplegando al app"
+powershell -Command "kubectl apply -f nmviajes.yaml -n nmviajes"
+powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n nmviajes"
 
 echo  %USERNAME% la aplicacion se desplego correctamente
 
