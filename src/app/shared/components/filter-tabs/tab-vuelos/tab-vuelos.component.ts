@@ -88,6 +88,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
   userStorage: UserStorage;
   processOk = true;
+  disabledInput = true;
 
 
   constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter, private calendar: NgbCalendar,
@@ -541,7 +542,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   }
 
   onFocus() {
-    if (!this.displayCalendar) {
+    if (!this.displayCalendar && this.valueInputOrigen != '' && this.valueInputDestino != '') {
       if (this.form.get('origen')?.value && this.form.get('destino')?.value) {
         let flightType = this.form.get('viajes')?.value;
         let departureCity = this.form.get('origen')?.value.codigo;
@@ -564,4 +565,13 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  cleanInput(): void{
+    this.disabledInput = this.valueInputDestino == '' || this.valueInputDestino == '';
+    if(this.disabledInput) {
+      this.form.get('departureDate')?.setValue('');
+      this.form.get('arrivalDate')?.setValue('');
+    }
+  }
 }
+
