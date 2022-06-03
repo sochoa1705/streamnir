@@ -2529,6 +2529,58 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     #ModalCoverageI .modal-body .table-bordered .row .col,
     #ModalCoverage .modal-body .table-bordered .row .col {
       font-size: 12px; } }
+@media (max-width: 640px) {
+  #ModalCoverageI .footerPopup .borderRight button,
+  #ModalCoverage .footerPopup .borderRight button {
+    width: 100% !important;
+    font-size: 18px; } }
+@media (max-width: 640px) {
+  #ModalCoverageI .footerPopup .borderRight,
+  #ModalCoverage .footerPopup .borderRight {
+    width: 100% !important; } }
+@media (max-width: 640px) {
+  #ModalCoverageI .footerPopup,
+  #ModalCoverage .footerPopup {
+    padding: 0 !important;
+    margin: 0 !important; } }
+#ModalCoverageI .boxTableCoverage,
+#ModalCoverage .boxTableCoverage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 12px; }
+  #ModalCoverageI .boxTableCoverage .rowTableCover,
+  #ModalCoverage .boxTableCoverage .rowTableCover {
+    display: flex;
+    border-bottom: 1px solid #cfd1d3; }
+    @media (max-width: 640px) {
+      #ModalCoverageI .boxTableCoverage .rowTableCover:nth-child(2n+1),
+      #ModalCoverage .boxTableCoverage .rowTableCover:nth-child(2n+1) {
+        background: #F0F3F5; } }
+    #ModalCoverageI .boxTableCoverage .rowTableCover .colTabletCover,
+    #ModalCoverage .boxTableCoverage .rowTableCover .colTabletCover {
+      display: flex;
+      align-items: center;
+      flex: 1 1 50%;
+      padding: 15px; }
+      #ModalCoverageI .boxTableCoverage .rowTableCover .colTabletCover:first-child,
+      #ModalCoverage .boxTableCoverage .rowTableCover .colTabletCover:first-child {
+        border-right: 1px solid #cfd1d3; }
+        @media (max-width: 640px) {
+          #ModalCoverageI .boxTableCoverage .rowTableCover .colTabletCover:first-child,
+          #ModalCoverage .boxTableCoverage .rowTableCover .colTabletCover:first-child {
+            border-right: none; } }
+      @media (max-width: 640px) {
+        #ModalCoverageI .boxTableCoverage .rowTableCover .colTabletCover,
+        #ModalCoverage .boxTableCoverage .rowTableCover .colTabletCover {
+          padding: 0;
+          flex: 1 1 100%; } }
+    @media (max-width: 640px) {
+      #ModalCoverageI .boxTableCoverage .rowTableCover,
+      #ModalCoverage .boxTableCoverage .rowTableCover {
+        border-bottom: none;
+        padding: 10px;
+        flex-wrap: wrap; } }
 
 #modalVerOpciones .modal-dialog {
   min-width: 80% !important; }
