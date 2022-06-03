@@ -6135,6 +6135,9 @@ input.inputIzq {
     border-radius: 0px 0px 20px 20px; }
   .banner > .contentEmpresa {
     height: 659px; }
+  @media (max-width: 640px) {
+    .banner {
+      height: 740px; } }
 
 .video-responsive {
   margin-top: 260px; }

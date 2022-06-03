@@ -19,6 +19,9 @@ aside {
         .carousel-inner {
             height: 100%;
         }
+        @media (max-width: 640px) {
+            padding-bottom: 4px;
+        }
     }
     .carousel-indicators {
         @media (max-width: 768px) {
@@ -123,11 +126,16 @@ aside {
     // width: 100%;
     overflow: hidden;
     margin-top: 50px;
-    @media (max-width: 640px) {
-        margin-top: 0px;
-    }
     img {
         width: 100%;
         height: auto;
+        padding-right: 5px;
+        @media (max-width: 640px) {
+            padding-right: 0px;
+        }
+    }
+    @media (max-width: 640px) {
+        margin-top: 0px;
+        padding-bottom: 4px;
     }
 }
