@@ -7543,6 +7543,9 @@ $icon-size-mobile: 28px;
         @extend .contentImg;
         height: 659px;
     }
+    @media (max-width: 640px) {
+        height: 740px;
+    }
 }
 
 .video-responsive {
