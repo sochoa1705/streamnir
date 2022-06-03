@@ -2,7 +2,7 @@
     <form class="bg-white" name="form" [formGroup]="form">
         <div class="rowBoxTab">
             <div class="padRight">
-                <app-pop-up-pasajero #popUp (emitDistributionObject)="distributionObject = $event"  (emitDistribution)="distribution = $event"></app-pop-up-pasajero>
+                <app-pop-up-pasajero [nroAdultos]="2" #popUp (emitDistributionObject)="distributionObject = $event"  (emitDistribution)="distribution = $event"></app-pop-up-pasajero>
             </div>
         </div>
         <div class="rowBoxTab">
