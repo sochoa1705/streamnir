@@ -1,10 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { ParamsVueloHotel, URLVueloHotel } from '../../tabs/tabs.models';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { ModelTaggingVuelosHoteles } from 'src/app/Services/analytics/tagging.models';
 import * as moment from 'moment';
@@ -12,6 +11,7 @@ import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { InputValidationService } from '../../../../Services/inputValidation.service';
 import { NotificationService } from 'src/app/Services/notification.service';
+import { AccountsService } from 'src/app/Services/accounts.service';
 moment.locale('es')
 
 @Component({
@@ -19,10 +19,10 @@ moment.locale('es')
   templateUrl: './tab-vuelo-hotel.component.html',
   styleUrls: ['./tab-vuelo-hotel.component.scss']
 })
-export class TabVueloHotelComponent  {
+export class TabVueloHotelComponent {
 
-  @ViewChild('popUp') popUpElement:PopUpPasajeroComponent | undefined;
- 
+  @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
+
   form!: FormGroup;
   fromDate: NgbDate | null
   citysOrigenSelect: Array<any> = [];
@@ -33,16 +33,17 @@ export class TabVueloHotelComponent  {
   toDate: NgbDate | null;
 
   distribution = '';
-  distributionObject:DistributionObjectA;
+  distributionObject: DistributionObjectA;
   hoveredDate: NgbDate | null = null;
 
   isSubmit = false;
 
   constructor(private calendar: NgbCalendar,
-    private destineService: DestinyService ,public formatter: NgbDateParserFormatter,
+    private destineService: DestinyService, public formatter: NgbDateParserFormatter,
     private notification: NotificationService,
-    public inputValidator : InputValidationService
-    ) {
+    public inputValidator: InputValidationService,
+    private _accountsService: AccountsService
+  ) {
     this.createForm();
   }
 
@@ -51,102 +52,108 @@ export class TabVueloHotelComponent  {
     this.form = new FormGroup({
       clase: new FormControl('economy'),
       origen: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      destino: new FormControl('',[Validators.required, Validators.minLength(3)])
-    }); 
+      destino: new FormControl('', [Validators.required, Validators.minLength(3)])
+    });
   }
 
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
- }
-
-
- get origenField(){
-   return this.form.controls["origen"];
- }
-
- get destinoField(){
-  return this.form.controls["destino"];
-}
-
-  
-validateForm(field: string) {
-  return this.form.controls[field].errors
-    && this.isSubmit;
-}
-
-
-getErrorsForm(form:FormGroup): string[] {
-  let errors:any[] = [];
-
-  if (form.controls["origen"].invalid) {
-    errors.push('El campo origen es obligatorio');
-  } 
-  if (form.controls["destino"].invalid) {
-    errors.push('El campo destino es obligatorio');
-  }     
-  if (!this.toDate) {
-    errors.push("La fecha final es requerido");
-  }
-  if (!this.fromDate) {
-    errors.push("La fecha de inicio es requerido");
   }
 
-  return errors;
-}
+
+  get origenField() {
+    return this.form.controls["origen"];
+  }
+
+  get destinoField() {
+    return this.form.controls["destino"];
+  }
+
+
+  validateForm(field: string) {
+    return this.form.controls[field].errors
+      && this.isSubmit;
+  }
+
+
+  getErrorsForm(form: FormGroup): string[] {
+    let errors: any[] = [];
+
+    if (form.controls["origen"].invalid) {
+      errors.push('El campo origen es obligatorio');
+    }
+    if (form.controls["destino"].invalid) {
+      errors.push('El campo destino es obligatorio');
+    }
+    if (!this.toDate) {
+      errors.push("La fecha final es requerido");
+    }
+    if (!this.fromDate) {
+      errors.push("La fecha de inicio es requerido");
+    }
+
+    return errors;
+  }
 
 
 
-  public searchVueloHotel() {
-
+  public async searchVueloHotel() {
     this.isSubmit = true;
 
     let errosInputs = this.getErrorsForm(this.form);
 
-    if(errosInputs.length > 0){
-      this.notification.showNotificacion("Error", errosInputs.join(", "),10);
-      return ;
+    if (errosInputs.length > 0) {
+      this.notification.showNotificacion("Error", errosInputs.join(", "), 10);
+      return;
     }
-    
 
     let errorHabitaciones = this.popUpElement?.isValid();
 
-    if(!errorHabitaciones?.isValid){
-      this.notification.showNotificacion("Error", errorHabitaciones?.message || "Error en las habitaciones" )
-      return ;
+    if (!errorHabitaciones?.isValid) {
+      this.notification.showNotificacion("Error", errorHabitaciones?.message || "Error en las habitaciones")
+      return;
     }
 
-    const url = this.getUrlVueloHotel();
+    let url = this.getUrlVueloHotel();
+
+    const result = await this._accountsService.getAccountToken();
+    if (result) {
+      if (result.Result.IsSuccess) {
+        const token: string = result.Result.Token;
+        url = `${url}&token=${token}&submit=true`;
+      }
+    }
 
     this.navigateToResponseUrl(url);
-  } 
+  }
 
-  insertTag(params:any){
+  insertTag(params: any) {
 
-    const getCodigoIata = (id:string)=>{
+    const getCodigoIata = (id: string) => {
       return id.split("::")[1];
     }
-  
-    const nombre = `${getCodigoIata(params.idOrigen)}_${getCodigoIata(params.idDestino)}_${params.businessClass?'BS':'EC'}`;
-    const diasAnticipacion = moment( params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
-    const duracionViaje =  moment( params.endDate, "DD/MM/YYYY").diff(moment( params.startDate, "DD/MM/YYYY"), 'days');
+
+    const nombre = `${getCodigoIata(params.idOrigen)}_${getCodigoIata(params.idDestino)}_${params.businessClass ? 'BS' : 'EC'}`;
+    const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
+    const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
 
 
     const model = new ModelTaggingVuelosHoteles(
       nombre,
       params.origen,
       params.destino,
-      params.businessClass?'BS':'EC',
+      params.businessClass ? 'BS' : 'EC',
       this.distributionObject.pasajeros,
       this.distributionObject.adultos,
       this.distributionObject.ninos,
       0,
       this.distributionObject.habitacion,
-      moment( params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      moment( params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
       diasAnticipacion,
       duracionViaje
     )
-    
+
     TaggingService.buscarVuelosHoteles(model);
 
   }
@@ -192,7 +199,7 @@ getErrorsForm(form:FormGroup): string[] {
   getListCiudades(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
-        if(type === 1) {
+        if (type === 1) {
           this.citysOrigenSelect = data;
         } else {
           this.citysDestinosSelect = data;

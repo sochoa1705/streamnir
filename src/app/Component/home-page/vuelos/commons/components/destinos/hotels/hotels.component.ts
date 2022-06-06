@@ -77,7 +77,6 @@ export class HotelsComponent implements OnInit {
       'Caller.Company': "Agil",
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
-      debugger
 
       this.hotels = JSON.parse(res).Result;
 
@@ -91,7 +90,6 @@ export class HotelsComponent implements OnInit {
           'Caller.Application': "Interagencias"
         }).subscribe((res: any) => {
 
-          debugger
           this.images = JSON.parse(res).Result.Images;
         });
 

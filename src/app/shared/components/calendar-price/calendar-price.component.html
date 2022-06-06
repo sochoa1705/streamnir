@@ -1,0 +1,49 @@
+<div class="boxCalendar">
+    <div class="groupCalendario">
+        <div *ngFor="let calendarMonth of  calendarMonths; let indexMonth = index" [ngClass]="{'calendarStart': indexMonth == 0, 'calendarEnd': indexMonth == 1}">
+            <div class="headCalendar">
+                <div *ngIf="indexMonth == 0" class="iconMes" (click)="previousMonth(calendarMonth)">
+                    <img class="gray" src="../../../../assets/svg/arrowL-gris.svg" alt="">
+                    <img class="red" src="../../../../assets/svg/arrowL-red.svg" alt="">
+                </div>
+                <div class="nameMes">{{calendarMonth.monthLetters}}
+                    <div class="anio">
+                        <span>{{calendarMonth.year}}</span>
+                    </div>
+                </div>
+                <div *ngIf="indexMonth == 1" class="iconMes" (click)="nextMonth(calendarMonth)">
+                    <img class="gray" src="../../../../assets/svg/arrowR-gris.svg" alt="">
+                    <img class="red" src="../../../../assets/svg/arrowR-red.svg" alt="">
+                </div>
+                <!-- btn solo mobile -->
+                <div class="iconMes alignRigth onlyMobile" (click)="nextMonth(calendarMonths[1])">
+                    <img class="gray" src="../../../../assets/svg/arrowR-gris.svg" alt="">
+                    <img class="red" src="../../../../assets/svg/arrowR-red.svg" alt="">
+                </div>
+            </div>
+            <div class="bodyCalendar">
+                <div class="groupName">
+                    <div class="nameDay">Lu</div>
+                    <div class="nameDay">Ma</div>
+                    <div class="nameDay">Mi</div>
+                    <div class="nameDay">Ju</div>
+                    <div class="nameDay">Vi</div>
+                    <div class="nameDay">Sa</div>
+                    <div class="nameDay">Do</div>
+                </div>
+                <div *ngFor="let week of calendarMonth.calendar" class="groupDay">
+                    <div *ngFor="let day of week" (click)="selectDate(day)" class="dayNumber" [ngClass]="{'selectStar': departureActive(day), 'selectEnd': arrivalActive(day), 'bgBlue': rangeActive(day), 'disabled': disableDate(day)}">
+                        {{day.day}}
+                        <span *ngIf="day.day">{{day.price}}</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="indexMonth == 1" class="btnAction">
+                <div class="btnReady" (click)="selectDateTravel()">Listo</div>
+            </div>
+        </div>
+        <div class="btnAction onlyMobile">
+            <div class="btnReady" (click)="selectDateTravel()">Listo</div>
+        </div>
+    </div>
+</div>

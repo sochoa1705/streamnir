@@ -15,6 +15,8 @@ export class DestinyService {
   //private httpOptions: any;
   constructor(private http: HttpClient) {}
 
+  private sessionRequestRates = 'ratesRequestExpertia';
+
   getDestiny(payload: any): Observable<any> {
     let url_api = `${environment.url_api}${ENDPOINT_API.DESTINY}`;
     return this.http
@@ -22,6 +24,21 @@ export class DestinyService {
       .pipe(map((observe: any) => observe['body']));
   }
 
+  getRates(request: any, fecIni: string, fecFin: string): Observable<any> {
+    request.fecIni = fecIni;
+    request.fecFin = fecFin;
+    this.saveRequestRates(request);
+    let url = `${environment.urlGeo}/search-rates`;
+    return this.http.post<any>(url, request, {
+      headers: {
+        'not-loading': 'true',
+      },
+    });
+  }
+
+  saveRequestRates(request: any) {
+    sessionStorage.setItem(this.sessionRequestRates, JSON.stringify(request));
+  }
 
   getDestinyPaqueteDinamico(
     search: string,

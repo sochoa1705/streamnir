@@ -35,7 +35,7 @@ export class LoginBusiness {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
   isPersonLoggin: boolean = true;
   isPerson: boolean = true;
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit{
     // this.taggingPageView();
 
 
-    
+
     this._authService.authState.subscribe((user) => {
 
       if (user.provider == "GOOGLE") {
@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit{
 
     });
 
-    
+
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
@@ -105,8 +105,8 @@ export class LoginComponent implements OnInit{
       TrackingCode: Guid(),
       MuteExceptions: environment.muteExceptions,
       Caller: {
-        Company: "Agil",
-        Application: "Interagencias"
+        Company: "Expertia",
+        Application: "NMViajes"
       },
       Parameter: {
         Firstname,
@@ -128,14 +128,14 @@ export class LoginComponent implements OnInit{
         const isSuccess = response.Result.IsSuccess;
 
         if (isSuccess) {
-          this._accountService.guardarStorage(response.Result, image);
+          this._accountService.guardarStorage(response.Result, image, SocialNetwork);
           this.closeModal();
           this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
             verticalPosition: 'top',
             duration: 2000
           });
         } else {
-          this.notification.showNotificacion("Error", response.Result.Message , 10);
+          this.notification.showNotificacion("Error", response.Result.Message, 10);
         }
 
 
@@ -157,7 +157,7 @@ export class LoginComponent implements OnInit{
     this._authService.signOut();
   }
 
-  
+
   loadUsuario() {
     const userStr = this._accountService.getUserStorage();
     if (userStr.id > 0) {
@@ -178,8 +178,8 @@ export class LoginComponent implements OnInit{
     return this.personalAccountForm.controls[field].errors
       && this.personalAccountForm.controls[field].touched;
   }
-  
-  
+
+
   get personalAccountEmailErrorMessage(): string {
     const errors = this.personalAccountForm.get('email')?.errors;
 
@@ -196,7 +196,7 @@ export class LoginComponent implements OnInit{
 
 
 
-  
+
   createBusinessAccountForm(): FormGroup {
     return this._formBuilder.group({
       ruc: ['', [Validators.required, Validators.minLength(11), Validators.pattern(this._validatorsService.digitsPattern)]],
@@ -230,7 +230,7 @@ export class LoginComponent implements OnInit{
   }
 
 
-  
+
   validateBusinessAccountForm(field: string) {
     return this.businessAccountForm.controls[field].errors
       && this.businessAccountForm.controls[field].touched;
@@ -269,7 +269,7 @@ export class LoginComponent implements OnInit{
   saveAccount(): void {
     this.isPerson ? this.savePersonalAccount() : this.saveBusinessAccount();
   }
-  
+
   saveBusinessAccount(): void {
     if (this.businessAccountForm.invalid) {
       this.businessAccountForm.markAllAsTouched();
@@ -282,8 +282,8 @@ export class LoginComponent implements OnInit{
         TrackingCode: Guid(),
         MuteExceptions: environment.muteExceptions,
         Caller: {
-          Company: "Agil",
-          Application: "Interagencias"
+          Company: "Expertia",
+          Application: "NMViajes"
         },
         Parameter: {
           Firstname: this.businessAccountForm.get("firstName")?.value,
@@ -305,7 +305,7 @@ export class LoginComponent implements OnInit{
 
           if (isSuccess) {
 
-            const modelTag = new ModelTaggingLogin("Signup", "Cuenta Empresa", "Password", response.Result.Email,response.Result.Id );
+            const modelTag = new ModelTaggingLogin("Signup", "Cuenta Empresa", "Password", response.Result.Email, response.Result.Id);
             this.tagging(modelTag);
 
 
@@ -330,9 +330,6 @@ export class LoginComponent implements OnInit{
     }
   }
 
-
-
-
   savePersonalAccount(): void {
     this.initLoading();
     if (this.personalAccountForm.invalid) {
@@ -348,8 +345,8 @@ export class LoginComponent implements OnInit{
         TrackingCode: Guid(),
         MuteExceptions: environment.muteExceptions,
         Caller: {
-          Company: "Agil",
-          Application: "Interagencias"
+          Company: "Expertia",
+          Application: "NMViajes"
         },
         Parameter: {
           Firstname: this.personalAccountForm.get("firstName")?.value,
@@ -370,7 +367,7 @@ export class LoginComponent implements OnInit{
 
           if (isSuccess) {
 
-            const modelTag = new ModelTaggingLogin("Signup", "Cuenta Personal", "Password", response.Result.Email,response.Result.Id );
+            const modelTag = new ModelTaggingLogin("Signup", "Cuenta Personal", "Password", response.Result.Email, response.Result.Id);
             this.tagging(modelTag);
 
             this.closeModal();
@@ -398,7 +395,7 @@ export class LoginComponent implements OnInit{
       });
     }
   }
-  
+
 
   toggleModalVerificaCorreo() {
     const modal = document.getElementById("ModalVerificaCorreo");
@@ -409,11 +406,11 @@ export class LoginComponent implements OnInit{
 
     bootstrap.Modal.getOrCreateInstance(modal).toggle();
   }
-  
-  tagging(model:ModelTaggingLogin){
+
+  tagging(model: ModelTaggingLogin) {
     TaggingService.tagLoginSignup(model);
   }
-  
+
 
   signIn(formPerson: NgForm, formBussines: NgForm) {
 
@@ -427,13 +424,13 @@ export class LoginComponent implements OnInit{
         this.closeLoading();
         if (resp.IsSuccess) {
 
-          const modelTag = new ModelTaggingLogin("Login", "Cuenta Personal", "Password", resp.Email,resp.Id );
+          const modelTag = new ModelTaggingLogin("Login", "Cuenta Personal", "Password", resp.Email, resp.Id);
           this.tagging(modelTag);
-          
+
           this._accountService.guardarStorage(resp);
           this.closeModal();
         } else {
-          this.notification.showNotificacion("Error", "Error de autenticación", 10);
+          this.notification.showNotificacion("Error", resp.Message , 10);
           this.closeLoading();
         }
       }, () => {
@@ -446,8 +443,8 @@ export class LoginComponent implements OnInit{
       this._accountService.signIn(this.loginB, this.isPersonLoggin).subscribe(resp => {
         if (resp.IsSuccess) {
           this.closeLoading();
-          
-          const modelTag = new ModelTaggingLogin("Login", "Cuenta Empresa", "Password", resp.Email,resp.Id );
+
+          const modelTag = new ModelTaggingLogin("Login", "Cuenta Empresa", "Password", resp.Email, resp.Id);
           this.tagging(modelTag);
 
           this._accountService.guardarStorage(resp);

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
@@ -7,13 +7,14 @@ import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
-import { ParamsHoteles, ParamsVueloHotel, URLHotel, URLVueloHotel } from './tabs.models';
+import { ParamsVueloHotel } from './tabs.models';
 import { ChangeRQ } from '../../../Models/general/changeRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
 import { NMRequestBy } from '../../../Models/base/NMRequestBy';
 import { DollarChangeService } from '../../../Services/dollarChange/dollar-change.service';
 import { take } from 'rxjs/operators';
 import { NMRequest } from '../../../Models/base/NMRequest';
+import { AccountsService } from 'src/app/Services/accounts.service';
 export interface State {
   flag: string;
   name: string;
@@ -78,6 +79,7 @@ export class TabsComponent implements OnInit {
     private dateAdapter: NgbDateAdapter<string>,
     private destineService: DestinyService,
     public dollarChangeService: DollarChangeService,
+    private _accountsService: AccountsService
   ) {
     this.fromDate = calendar.getToday();
     this.fromDate2 = calendar.getToday();
@@ -219,6 +221,7 @@ export class TabsComponent implements OnInit {
   changeTab(value: MatTabChangeEvent) {
     // (value.index == 1) ? this.navigateToResponseUrl(this.RUTA_PAQUETES) : null;
     //(value.index == 4) ? this.navigateToResponseUrl(this.RUTA_AUTOS) : null;
+
     if (value.index == 6) {
       this.callService();
     }

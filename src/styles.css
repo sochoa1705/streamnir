@@ -11,6 +11,25 @@
     opacity: 0; }
   to {
     opacity: 1; } }
+@keyframes loaderCircle {
+  0% {
+    box-shadow: 0 -27px 0 0 rgba(232, 32, 63, 0.05), 19px -19px 0 0 rgba(232, 32, 63, 0.1), 27px 0 0 0 rgba(232, 32, 63, 0.2), 19px 19px 0 0 rgba(232, 32, 63, 0.3), 0 27px 0 0 rgba(232, 32, 63, 0.4), -19px 19px 0 0 rgba(232, 32, 63, 0.6), -27px 0 0 0 rgba(232, 32, 63, 0.8), -19px -19px 0 0 #E8203F; }
+  12.5% {
+    box-shadow: 0 -27px 0 0 #E8203F, 19px -19px 0 0 rgba(232, 32, 63, 0.05), 27px 0 0 0 rgba(232, 32, 63, 0.1), 19px 19px 0 0 rgba(232, 32, 63, 0.2), 0 27px 0 0 rgba(232, 32, 63, 0.3), -19px 19px 0 0 rgba(232, 32, 63, 0.4), -27px 0 0 0 rgba(232, 32, 63, 0.6), -19px -19px 0 0 rgba(232, 32, 63, 0.8); }
+  25% {
+    box-shadow: 0 -27px 0 0 rgba(232, 32, 63, 0.8), 19px -19px 0 0 #E8203F, 27px 0 0 0 rgba(232, 32, 63, 0.05), 19px 19px 0 0 rgba(232, 32, 63, 0.1), 0 27px 0 0 rgba(232, 32, 63, 0.2), -19px 19px 0 0 rgba(232, 32, 63, 0.3), -27px 0 0 0 rgba(232, 32, 63, 0.4), -19px -19px 0 0 rgba(232, 32, 63, 0.6); }
+  37.5% {
+    box-shadow: 0 -27px 0 0 rgba(232, 32, 63, 0.6), 19px -19px 0 0 rgba(232, 32, 63, 0.8), 27px 0 0 0 #E8203F, 19px 19px 0 0 rgba(232, 32, 63, 0.05), 0 27px 0 0 rgba(232, 32, 63, 0.1), -19px 19px 0 0 rgba(232, 32, 63, 0.2), -27px 0 0 0 rgba(232, 32, 63, 0.3), -19px -19px 0 0 rgba(232, 32, 63, 0.4); }
+  50% {
+    box-shadow: 0 -27px 0 0 rgba(232, 32, 63, 0.4), 19px -19px 0 0 rgba(232, 32, 63, 0.6), 27px 0 0 0 rgba(232, 32, 63, 0.8), 19px 19px 0 0 #E8203F, 0 27px 0 0 rgba(232, 32, 63, 0.05), -19px 19px 0 0 rgba(232, 32, 63, 0.1), -27px 0 0 0 rgba(232, 32, 63, 0.2), -19px -19px 0 0 rgba(232, 32, 63, 0.3); }
+  62.5% {
+    box-shadow: 0 -27px 0 0 rgba(232, 32, 63, 0.3), 19px -19px 0 0 rgba(232, 32, 63, 0.4), 27px 0 0 0 rgba(232, 32, 63, 0.6), 19px 19px 0 0 rgba(232, 32, 63, 0.8), 0 27px 0 0 #E8203F, -19px 19px 0 0 rgba(232, 32, 63, 0.05), -27px 0 0 0 rgba(232, 32, 63, 0.1), -19px -19px 0 0 rgba(232, 32, 63, 0.2); }
+  75% {
+    box-shadow: 0 -27px 0 0 rgba(232, 32, 63, 0.2), 19px -19px 0 0 rgba(232, 32, 63, 0.3), 27px 0 0 0 rgba(232, 32, 63, 0.4), 19px 19px 0 0 rgba(232, 32, 63, 0.6), 0 27px 0 0 rgba(232, 32, 63, 0.8), -19px 19px 0 0 #E8203F, -27px 0 0 0 rgba(232, 32, 63, 0.05), -19px -19px 0 0 rgba(232, 32, 63, 0.1); }
+  87.5% {
+    box-shadow: 0 -27px 0 0 rgba(232, 32, 63, 0.1), 19px -19px 0 0 rgba(232, 32, 63, 0.2), 27px 0 0 0 rgba(232, 32, 63, 0.3), 19px 19px 0 0 rgba(232, 32, 63, 0.4), 0 27px 0 0 rgba(232, 32, 63, 0.6), -19px 19px 0 0 rgba(232, 32, 63, 0.8), -27px 0 0 0 #E8203F, -19px -19px 0 0 rgba(232, 32, 63, 0.05); }
+  100% {
+    box-shadow: 0 -27px 0 0 rgba(232, 32, 63, 0.05), 19px -19px 0 0 rgba(232, 32, 63, 0.1), 27px 0 0 0 rgba(232, 32, 63, 0.2), 19px 19px 0 0 rgba(232, 32, 63, 0.3), 0 27px 0 0 rgba(232, 32, 63, 0.4), -19px 19px 0 0 rgba(232, 32, 63, 0.6), -27px 0 0 0 rgba(232, 32, 63, 0.8), -19px -19px 0 0 #E8203F; } }
 html,
 body {
   height: 100%;
@@ -584,6 +603,10 @@ section {
   letter-spacing: 0.5px;
   text-transform: capitalize;
   color: #4b4b4b; }
+
+@media (max-width: 640px) {
+  .ngb-dp-content .ngb-dp-month:nth-child(2) {
+    display: none; } }
 
 .ngb-dp-header {
   padding: 10px 30px 0 30px !important; }
@@ -2506,6 +2529,58 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     #ModalCoverageI .modal-body .table-bordered .row .col,
     #ModalCoverage .modal-body .table-bordered .row .col {
       font-size: 12px; } }
+@media (max-width: 640px) {
+  #ModalCoverageI .footerPopup .borderRight button,
+  #ModalCoverage .footerPopup .borderRight button {
+    width: 100% !important;
+    font-size: 18px; } }
+@media (max-width: 640px) {
+  #ModalCoverageI .footerPopup .borderRight,
+  #ModalCoverage .footerPopup .borderRight {
+    width: 100% !important; } }
+@media (max-width: 640px) {
+  #ModalCoverageI .footerPopup,
+  #ModalCoverage .footerPopup {
+    padding: 0 !important;
+    margin: 0 !important; } }
+#ModalCoverageI .boxTableCoverage,
+#ModalCoverage .boxTableCoverage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 12px; }
+  #ModalCoverageI .boxTableCoverage .rowTableCover,
+  #ModalCoverage .boxTableCoverage .rowTableCover {
+    display: flex;
+    border-bottom: 1px solid #cfd1d3; }
+    @media (max-width: 640px) {
+      #ModalCoverageI .boxTableCoverage .rowTableCover:nth-child(2n+1),
+      #ModalCoverage .boxTableCoverage .rowTableCover:nth-child(2n+1) {
+        background: #F0F3F5; } }
+    #ModalCoverageI .boxTableCoverage .rowTableCover .colTabletCover,
+    #ModalCoverage .boxTableCoverage .rowTableCover .colTabletCover {
+      display: flex;
+      align-items: center;
+      flex: 1 1 50%;
+      padding: 15px; }
+      #ModalCoverageI .boxTableCoverage .rowTableCover .colTabletCover:first-child,
+      #ModalCoverage .boxTableCoverage .rowTableCover .colTabletCover:first-child {
+        border-right: 1px solid #cfd1d3; }
+        @media (max-width: 640px) {
+          #ModalCoverageI .boxTableCoverage .rowTableCover .colTabletCover:first-child,
+          #ModalCoverage .boxTableCoverage .rowTableCover .colTabletCover:first-child {
+            border-right: none; } }
+      @media (max-width: 640px) {
+        #ModalCoverageI .boxTableCoverage .rowTableCover .colTabletCover,
+        #ModalCoverage .boxTableCoverage .rowTableCover .colTabletCover {
+          padding: 0;
+          flex: 1 1 100%; } }
+    @media (max-width: 640px) {
+      #ModalCoverageI .boxTableCoverage .rowTableCover,
+      #ModalCoverage .boxTableCoverage .rowTableCover {
+        border-bottom: none;
+        padding: 10px;
+        flex-wrap: wrap; } }
 
 #modalVerOpciones .modal-dialog {
   min-width: 80% !important; }
@@ -2838,7 +2913,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     letter-spacing: 0.1px;
     color: #009aed; }
   .accordion-body .row {
-    height: 32px; }
+    min-height: 32px; }
 
 .totalItem {
   margin: 1rem 0.5rem !important;
@@ -3184,6 +3259,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       background: transparent; }
     .boxFlotante .btnPasajero .Agregar:disabled {
       color: #4b4b4b; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .boxFlotante {
+      right: 10%; } }
   @media (max-width: 640px) {
     .boxFlotante {
       left: 15px;
@@ -3234,7 +3312,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         display: flex;
         flex-wrap: wrap; }
         .boxTab .rowBoxTab app-calendar {
-          width: 100%; } }
+          width: 100%;
+          flex-wrap: wrap; }
+          .boxTab .rowBoxTab app-calendar .colBoxtab {
+            width: 100% !important; } }
     .boxTab .rowBoxTab.right {
       justify-content: end; }
     .boxTab .rowBoxTab.text,
@@ -3330,6 +3411,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         border-radius: 3px; }
         .boxTab .rowBoxTab .colBoxtab input.icono {
           text-indent: 40px;
+          padding-right: 33px !important;
           background: url("./assets/origen.png") no-repeat 10px center; }
           .boxTab .rowBoxTab .colBoxtab input.icono-no {
             text-indent: 10px;
@@ -3403,8 +3485,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       margin-bottom: 10px; }
 
   .py-5 {
-    padding-top: 2rem !important;
+    padding-top: 1rem !important;
     padding-bottom: 1rem !important; }
+
+  .py-4 {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important; }
 
   .lessViewMob {
     width: 100% !important;
@@ -6101,6 +6187,9 @@ input.inputIzq {
     border-radius: 0px 0px 20px 20px; }
   .banner > .contentEmpresa {
     height: 659px; }
+  @media (max-width: 640px) {
+    .banner {
+      height: 740px; } }
 
 .video-responsive {
   margin-top: 260px; }
@@ -7590,3 +7679,497 @@ app-flightdeals button {
   height: 25px;
   background: transparent url("./assets/sprite-iconos-hotel.png");
   background-position: 100px 25px; }
+
+.boxCalendar {
+  background: #FFFFFF;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  width: 600px;
+  padding: 20px;
+  position: absolute;
+  top: 51px;
+  z-index: 100;
+  left: 46.5% !important; }
+  .boxCalendar .groupCalendario {
+    display: flex;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    color: #4B4B4B; }
+    .boxCalendar .groupCalendario .calendarStart,
+    .boxCalendar .groupCalendario .calendarEnd {
+      width: 100%;
+      display: flex;
+      flex-direction: column; }
+      .boxCalendar .groupCalendario .calendarStart .headCalendar,
+      .boxCalendar .groupCalendario .calendarEnd .headCalendar {
+        display: flex;
+        width: 260px; }
+        .boxCalendar .groupCalendario .calendarStart .headCalendar .iconMes,
+        .boxCalendar .groupCalendario .calendarEnd .headCalendar .iconMes {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          width: 37px;
+          cursor: pointer;
+          transition: 0.3s all; }
+          .boxCalendar .groupCalendario .calendarStart .headCalendar .iconMes:hover .red,
+          .boxCalendar .groupCalendario .calendarEnd .headCalendar .iconMes:hover .red {
+            display: flex; }
+          .boxCalendar .groupCalendario .calendarStart .headCalendar .iconMes:hover .gray,
+          .boxCalendar .groupCalendario .calendarEnd .headCalendar .iconMes:hover .gray {
+            display: none; }
+          .boxCalendar .groupCalendario .calendarStart .headCalendar .iconMes.alignRigth,
+          .boxCalendar .groupCalendario .calendarEnd .headCalendar .iconMes.alignRigth {
+            justify-content: flex-end; }
+          .boxCalendar .groupCalendario .calendarStart .headCalendar .iconMes .red,
+          .boxCalendar .groupCalendario .calendarEnd .headCalendar .iconMes .red {
+            display: none; }
+        .boxCalendar .groupCalendario .calendarStart .headCalendar .nameMes,
+        .boxCalendar .groupCalendario .calendarEnd .headCalendar .nameMes {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: calc(100% - 74px);
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 20px;
+          letter-spacing: 0.5px;
+          text-transform: capitalize;
+          color: #4B4B4B;
+          gap: 5px; }
+          .boxCalendar .groupCalendario .calendarStart .headCalendar .nameMes .anio .form-select,
+          .boxCalendar .groupCalendario .calendarEnd .headCalendar .nameMes .anio .form-select {
+            border: none;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 20px;
+            letter-spacing: 0.5px;
+            text-transform: capitalize;
+            color: #4B4B4B;
+            padding: 5px 2.25rem 5px 5px;
+            cursor: pointer; }
+            .boxCalendar .groupCalendario .calendarStart .headCalendar .nameMes .anio .form-select:focus,
+            .boxCalendar .groupCalendario .calendarEnd .headCalendar .nameMes .anio .form-select:focus {
+              box-shadow: none; }
+        @media (max-width: 640px) {
+          .boxCalendar .groupCalendario .calendarStart .headCalendar,
+          .boxCalendar .groupCalendario .calendarEnd .headCalendar {
+            width: 100%; } }
+      .boxCalendar .groupCalendario .calendarStart .bodyCalendar,
+      .boxCalendar .groupCalendario .calendarEnd .bodyCalendar {
+        display: flex;
+        flex-direction: column;
+        width: 260px; }
+        .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupName,
+        .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupName {
+          display: flex; }
+          .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupName .nameDay,
+          .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupName .nameDay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 37px;
+            height: 40px; }
+            @media (max-width: 640px) {
+              .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupName .nameDay,
+              .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupName .nameDay {
+                width: auto;
+                flex: 0 1 15%; } }
+        .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupDay,
+        .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupDay {
+          display: flex;
+          margin-bottom: 4px; }
+          .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupDay .dayNumber,
+          .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupDay .dayNumber {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            cursor: pointer;
+            transition: 0.3s all;
+            width: 37px;
+            height: 40px; }
+            .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupDay .dayNumber.disabled,
+            .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupDay .dayNumber.disabled {
+              color: rgba(75, 75, 75, 0.3); }
+            .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupDay .dayNumber.selectStar,
+            .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupDay .dayNumber.selectStar {
+              background: #009AED;
+              border-radius: 3px;
+              color: #ffffff; }
+              .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupDay .dayNumber.selectStar span,
+              .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupDay .dayNumber.selectStar span {
+                background: #54D834;
+                color: #ffffff; }
+            .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupDay .dayNumber.selectEnd,
+            .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupDay .dayNumber.selectEnd {
+              flex-direction: column;
+              background: #009AED;
+              border-radius: 3px;
+              color: #ffffff; }
+              .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupDay .dayNumber.selectEnd span,
+              .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupDay .dayNumber.selectEnd span {
+                background: #54D834;
+                color: #ffffff; }
+            .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupDay .dayNumber.bgBlue,
+            .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupDay .dayNumber.bgBlue {
+              background: #8FD0F3;
+              color: #fff; }
+              .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupDay .dayNumber.bgBlue span,
+              .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupDay .dayNumber.bgBlue span {
+                color: #ffffff; }
+            .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupDay .dayNumber span,
+            .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupDay .dayNumber span {
+              color: #009AED;
+              width: 37px;
+              height: 20px;
+              font-weight: 500;
+              font-size: 9px;
+              text-align: center;
+              border-radius: 0 0 3px 3px; }
+              @media (max-width: 640px) {
+                .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupDay .dayNumber span,
+                .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupDay .dayNumber span {
+                  width: 100%; } }
+            @media (max-width: 640px) {
+              .boxCalendar .groupCalendario .calendarStart .bodyCalendar .groupDay .dayNumber,
+              .boxCalendar .groupCalendario .calendarEnd .bodyCalendar .groupDay .dayNumber {
+                width: auto;
+                flex: 0 1 15%; } }
+        @media (max-width: 640px) {
+          .boxCalendar .groupCalendario .calendarStart .bodyCalendar,
+          .boxCalendar .groupCalendario .calendarEnd .bodyCalendar {
+            width: 100%; } }
+    .boxCalendar .groupCalendario .btnAction {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%; }
+      .boxCalendar .groupCalendario .btnAction .btnReady {
+        background: #DF0C30;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: 0.3s all;
+        padding: 9px 16px;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+        color: #FFFFFF; }
+    .boxCalendar .groupCalendario .calendarStart {
+      border-right: 1px solid #83898F; }
+      @media (max-width: 640px) {
+        .boxCalendar .groupCalendario .calendarStart {
+          border: none; } }
+    .boxCalendar .groupCalendario .calendarEnd {
+      align-items: flex-end; }
+      .boxCalendar .groupCalendario .calendarEnd .headCalendar {
+        justify-content: flex-end; }
+        .boxCalendar .groupCalendario .calendarEnd .headCalendar .iconMes {
+          justify-content: flex-end; }
+      @media (max-width: 640px) {
+        .boxCalendar .groupCalendario .calendarEnd {
+          display: none; } }
+    @media (max-width: 640px) {
+      .boxCalendar .groupCalendario {
+        flex-direction: column; } }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .boxCalendar {
+      left: 8% !important; } }
+  @media (max-width: 640px) {
+    .boxCalendar {
+      width: 100%;
+      left: 0 !important; } }
+
+.onlyMobile {
+  display: none !important; }
+  @media (max-width: 640px) {
+    .onlyMobile {
+      display: flex !important; } }
+
+.preloader {
+  display: none;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+  .preloader.show {
+    display: block; }
+  .preloader .loaderSpin {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    animation: loaderCircle 1s linear infinite;
+    top: 50%;
+    margin: -8px auto 0; }
+  .preloader .textPreload {
+    color: #ffffff;
+    font-size: 12px;
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+    top: 40%;
+    position: relative; }
+
+.promociones {
+  max-width: 1370px;
+  width: 80%;
+  margin: auto; }
+  .promociones .titleM {
+    border-left: 6px solid #b01630;
+    padding-left: 9px;
+    margin: 30px 0 40px;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #000000;
+    font-weight: 300;
+    line-height: 33px;
+    letter-spacing: .7px;
+    padding-bottom: 0;
+    border-bottom: none; }
+    @media (max-width: 640px) {
+      .promociones .titleM {
+        font-size: 16px;
+        margin: 20px 0; } }
+  .promociones ul li {
+    color: #130101;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 29px;
+    text-align: justify; }
+    .promociones ul li h1 {
+      font-size: 16px;
+      font-weight: 600; }
+      @media (max-width: 640px) {
+        .promociones ul li h1 {
+          font-size: 14px; } }
+    .promociones ul li .subtitleP {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #000; }
+    @media (max-width: 640px) {
+      .promociones ul li {
+        font-size: 12px; } }
+  @media (max-width: 640px) {
+    .promociones ul {
+      padding-left: 20px; } }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .promociones {
+      width: 90%; } }
+  @media (max-width: 640px) {
+    .promociones {
+      width: calc(100% - 20px); } }
+
+.boxCita {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: url(./assets/img/background.jpg) no-repeat;
+  background-position: 50% 50%;
+  background-size: cover; }
+  .boxCita .boxLogo {
+    width: 80%;
+    margin: 0 auto 40px auto; }
+  .boxCita .boxGroupCita {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; }
+    .boxCita .boxGroupCita .boxOption {
+      width: calc(50% - 30px);
+      background: #ffffff;
+      padding: 20px 30px; }
+      .boxCita .boxGroupCita .boxOption .titleOption {
+        font-weight: 700;
+        font-size: 22px;
+        color: #cf152d;
+        margin-bottom: 15px; }
+        @media (max-width: 990px) and (min-width: 640px) {
+          .boxCita .boxGroupCita .boxOption .titleOption {
+            font-size: 18px; } }
+        @media (max-width: 640px) {
+          .boxCita .boxGroupCita .boxOption .titleOption {
+            font-size: 14px; } }
+      .boxCita .boxGroupCita .boxOption .contentOption {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 20px; }
+        .boxCita .boxGroupCita .boxOption .contentOption .iconLeft {
+          min-width: 80px; }
+          .boxCita .boxGroupCita .boxOption .contentOption .iconLeft img {
+            width: 100%; }
+          @media (max-width: 990px) and (min-width: 640px) {
+            .boxCita .boxGroupCita .boxOption .contentOption .iconLeft {
+              min-width: 65px; } }
+          @media (max-width: 640px) {
+            .boxCita .boxGroupCita .boxOption .contentOption .iconLeft {
+              min-width: 40px; } }
+        .boxCita .boxGroupCita .boxOption .contentOption .textContent {
+          font-size: 16px;
+          text-align: justify; }
+          @media (max-width: 990px) and (min-width: 640px) {
+            .boxCita .boxGroupCita .boxOption .contentOption .textContent {
+              font-size: 14px; } }
+          @media (max-width: 640px) {
+            .boxCita .boxGroupCita .boxOption .contentOption .textContent {
+              font-size: 12px; } }
+        @media (max-width: 990px) and (min-width: 640px) {
+          .boxCita .boxGroupCita .boxOption .contentOption {
+            gap: 20px; } }
+        @media (max-width: 640px) {
+          .boxCita .boxGroupCita .boxOption .contentOption {
+            gap: 10px; } }
+      .boxCita .boxGroupCita .boxOption .boxActionCita {
+        display: flex;
+        justify-content: flex-end; }
+        .boxCita .boxGroupCita .boxOption .boxActionCita .btn {
+          font-size: 14px; }
+          @media (max-width: 990px) and (min-width: 640px) {
+            .boxCita .boxGroupCita .boxOption .boxActionCita .btn {
+              font-size: 13px; } }
+          @media (max-width: 640px) {
+            .boxCita .boxGroupCita .boxOption .boxActionCita .btn {
+              font-size: 12px; } }
+      @media (max-width: 640px) {
+        .boxCita .boxGroupCita .boxOption {
+          width: 100%; } }
+    @media (max-width: 990px) and (min-width: 640px) {
+      .boxCita .boxGroupCita {
+        width: 90%;
+        justify-content: space-between; } }
+    @media (max-width: 640px) {
+      .boxCita .boxGroupCita {
+        width: calc(100% - 20px); } }
+
+.divPasMov .divPas .groupPasajero {
+  display: flex;
+  align-items: center;
+  gap: 30px; }
+  .divPasMov .divPas .groupPasajero .boxHelp {
+    display: flex;
+    align-items: center;
+    margin-top: 7px;
+    padding: 10px 20px;
+    background-color: rgba(255, 162, 43, 0.1);
+    color: #f7b731;
+    border-radius: 5px;
+    gap: 10px; }
+    .divPasMov .divPas .groupPasajero .boxHelp .iconArrow {
+      display: flex;
+      align-items: center; }
+    .divPasMov .divPas .groupPasajero .boxHelp .descrip {
+      font-size: 14px; }
+      @media (max-width: 640px) {
+        .divPasMov .divPas .groupPasajero .boxHelp .descrip {
+          font-size: 12px; } }
+    @media (max-width: 640px) {
+      .divPasMov .divPas .groupPasajero .boxHelp {
+        margin-top: 0;
+        padding: 10px; } }
+  @media (max-width: 640px) {
+    .divPasMov .divPas .groupPasajero {
+      gap: 10px;
+      margin-bottom: 15px; } }
+@media (max-width: 640px) {
+  .divPasMov .divPas {
+    margin: 0;
+    padding: 0; } }
+@media (max-width: 640px) {
+  .divPasMov .selectDestino {
+    padding: 0; } }
+@media (max-width: 640px) {
+  .divPasMov {
+    flex-direction: column; } }
+
+.containerError {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(270deg, #04074a 0%, #2a246d 100%);
+  height: 100vh;
+  width: 100%;
+  gap: 100px;
+  padding: 0 10%; }
+  .containerError .imgBoxError {
+    display: flex;
+    width: 150px;
+    position: absolute;
+    top: 18%;
+    left: calc(50% - 75px); }
+    .containerError .imgBoxError img {
+      width: 100%; }
+    @media (max-width: 640px) {
+      .containerError .imgBoxError {
+        width: 70px;
+        left: calc(50% - 35px); } }
+  .containerError .msgError {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Montserrat';
+    color: #ffffff;
+    position: relative; }
+    .containerError .msgError .titulo {
+      font-weight: 700;
+      font-size: 250px; }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .containerError .msgError .titulo {
+          font-size: 250px; } }
+      @media (max-width: 640px) {
+        .containerError .msgError .titulo {
+          font-size: 120px;
+          line-height: 250px; } }
+    .containerError .msgError .mensaje {
+      font-weight: 500;
+      text-align: center;
+      font-size: 24px; }
+      .containerError .msgError .mensaje span {
+        font-size: 14px;
+        font-weight: 400; }
+        @media (max-width: 640px) {
+          .containerError .msgError .mensaje span {
+            font-size: 12px; } }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .containerError .msgError .mensaje {
+          font-size: 20px; } }
+      @media (max-width: 640px) {
+        .containerError .msgError .mensaje {
+          font-size: 18px; } }
+    .containerError .msgError .boton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      transition: 0.3s all;
+      font-weight: 400;
+      gap: 15px;
+      font-size: 14px;
+      padding: 10px 20px;
+      margin-top: 30px;
+      cursor: pointer;
+      border: 1px solid #ffffff; }
+      .containerError .msgError .boton:hover {
+        background: #ffffff;
+        color: #4b4b4b; }
+        .containerError .msgError .boton:hover .white {
+          display: none; }
+        .containerError .msgError .boton:hover .gris {
+          display: block; }
+      .containerError .msgError .boton .gris {
+        display: none; }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .containerError .msgError .boton {
+          font-size: 14px; } }
+      @media (max-width: 640px) {
+        .containerError .msgError .boton {
+          font-size: 12px; } }

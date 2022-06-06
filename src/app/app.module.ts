@@ -26,6 +26,8 @@ import { CheckMailModule } from './components/check-mail/check-mail.module';
 import { ForgotPasswordModule } from './components/forgot-password/forgot-password.module';
 import { NewAccountModule } from './components/new-account/new-account.module';
 import { PerfilModule } from './Component/home-page/perfil/perfil.module';
+import { LoadingModule } from './components/loading/loading.module';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -49,10 +51,12 @@ import { PerfilModule } from './Component/home-page/perfil/perfil.module';
     CheckMailModule,
     ForgotPasswordModule,
     NewAccountModule,
-    PerfilModule
+    PerfilModule,
+    LoadingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
   ],
   bootstrap: [AppComponent]

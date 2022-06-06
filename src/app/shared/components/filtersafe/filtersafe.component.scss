@@ -1,6 +1,6 @@
 @import "/src/scss/variables";
 .w-130 {
-    width: 130px;
+    width: 130px !important;
     display: inline-block;
     margin-right: 5px;
     padding-left: 0;
@@ -10,9 +10,11 @@
         padding-left: 0;
     }
 }
-.boxFlotante + .customers:before{
+
+.boxFlotante+.customers:before {
     transform: rotate(-180deg);
 }
+
 .customers {
     position: relative;
     width: 100%;
@@ -30,8 +32,8 @@
     @media (max-width: 768px) {
         font-size: 10px;
     }
-    &:before{
-        content:  url(../../../../assets/arrow.svg);
+    &:before {
+        content: url(../../../../assets/arrow.svg);
         right: 0;
         position: absolute
     }
@@ -41,8 +43,8 @@
     overflow: hidden !important;
 }
 
-.position-relative{
-    div{
+.position-relative {
+    div {
         font-family: "Montserrat";
         font-size: 10px;
         color: $red_light;
@@ -50,9 +52,10 @@
         top: -15px;
         font-weight: bold;
         letter-spacing: 0.1px;
-        margin-left:5px
+        margin-left: 5px
     }
 }
-.text-red{
+
+.text-red {
     color: red
 }
