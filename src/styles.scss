@@ -9877,6 +9877,56 @@ app-flightdeals {
     }
 }
 
+.divPasMov {
+    .divPas {
+        .groupPasajero {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            .boxHelp {
+                display: flex;
+                align-items: center;
+                margin-top: 7px;
+                padding: 10px 20px;
+                background-color: rgba(255, 162, 43, 0.1);
+                color: #f7b731;
+                border-radius: 5px;
+                gap: 10px;
+                .iconArrow {
+                    display: flex;
+                    align-items: center;
+                }
+                .descrip {
+                    font-size: 14px;
+                    @media (max-width: 640px) {
+                        font-size: 12px;
+                    }
+                }
+                @media (max-width: 640px) {
+                    margin-top: 0;
+                    padding: 10px;
+                }
+            }
+            @media (max-width: 640px) {
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+        }
+        @media (max-width: 640px) {
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .selectDestino {
+        @media (max-width: 640px) {
+            padding: 0;
+        }
+    }
+    @media (max-width: 640px) {
+        flex-direction: column;
+    }
+}
+
 .containerError {
     display: flex;
     align-items: center;
