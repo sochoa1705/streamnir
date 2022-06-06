@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AccountsService } from 'src/app/Services/accounts.service';
 import { NotificationService } from 'src/app/Services/notification.service';
+import { textChangeRangeIsUnchanged } from 'typescript';
 import { FileService } from '../../../Services/file.service';
 import { Guid } from '../../utils';
 
@@ -27,16 +28,35 @@ export class FileComponent implements OnInit {
 
   imageSave:string;
 
+  socialNetwork:"G" | "F" | null  = null;
+
   constructor(private sanitizer: DomSanitizer,
     private notificationService: NotificationService
-    ,private _snackBar: MatSnackBar, private fileService:FileService, private accountsService:AccountsService) { }
+    ,private _snackBar: MatSnackBar, private fileService:FileService, private accountsService:AccountsService,
+    private notification: NotificationService) { }
 
   ngOnInit(): void {
 
     this.imagenUrl = this.accountsService.getUserStorage().image;
+    this.socialNetwork = this.accountsService.getUserStorage().socialNetwork;
+
     // console.log("object");
   
   }
+
+  showNotification(){
+    if(this.socialNetwork == "G"){
+      this.notification.showNotificacion("Error", "Debe cambiar la imagen por Google",10);
+
+    }else if(this.socialNetwork == "F"){
+      this.notification.showNotificacion("Error", "Debe cambiar la imagen por Facebook",10);
+
+    }
+
+
+  }
+
+  
 
   async getFile(evento:any){
     const archivoTmp = evento.target.files[0];

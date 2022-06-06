@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nmviajes-dev-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: classnmviajes
+  tls:
+  - hosts:
+    - dev.nmviajes.com
+    secretName: aks-ingress-tls-nmviajes
+  defaultBackend:
+    service:
+      name: nmviajes-dev
+      port:
+        number: 80
+  rules:
+  - host: dev.nmviajes.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nmviajes-dev
+            port:
+              number: 80

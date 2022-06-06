@@ -7,7 +7,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 export class ValidatorsService {
 
   public lettersPattern: string = "^[a-zA-ZÁ-ú ]+$";
-  public emailPattern: string = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";//"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
+  public emailPattern: string = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
   public alphanumericPattern: string = "^[a-zA-Z0-9 ]+$";
   public passwordPattern: string = "^(?=.*[0-9])(?=.*[a-zA-Z]).{6,10}$";
   public digitsPattern: string = "^[0-9]+$";
@@ -35,8 +35,6 @@ export class ValidatorsService {
   validateAddress(dependentField: string, field: string) {
 
     return (formGroup: AbstractControl): ValidationErrors | null => {
-
-
       if (!formGroup.get(dependentField)?.value) {
         formGroup.get(field)?.setErrors(null);
         return null;
@@ -55,10 +53,30 @@ export class ValidatorsService {
     }
   }
 
+  validateBusinessName(dependentField: string, field: string) {
+
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      if (!formGroup.get(dependentField)?.value) {
+        formGroup.get(field)?.setErrors(null);
+        return null;
+      }
+
+      const valueField = formGroup.get(field)?.value;
+
+      if (valueField.length < 3 || valueField.length > 80) {
+        formGroup.get(field)?.setErrors({ notValid: true });
+        return { notValid: true };
+      }
+
+      formGroup.get(field)?.setErrors(null);
+
+      return null;
+    }
+  }
+
   validateRUC(dependentField: string, field: string) {
 
     return (formGroup: AbstractControl): ValidationErrors | null => {
-
       if (dependentField === '' || !formGroup.get(dependentField)?.value) {
         formGroup.get(field)?.setErrors(null);
         return null;

@@ -29,9 +29,10 @@ import { LibroReclamacionesModule } from './libro-reclamaciones/libro-reclamacio
 import { PoliticasModule } from './politicas/politicas.module';
 import { ResponsabilidadSocialModule } from './resonsabilidad-social/responsabilidad-social.module';
 import { ComprarModule } from './comprar/comprar.module';
+import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [HomePageComponent],
+  declarations: [HomePageComponent, PageNotFoundComponent],
   imports: [
     CommonModule,
     HomePageRoutingModule,

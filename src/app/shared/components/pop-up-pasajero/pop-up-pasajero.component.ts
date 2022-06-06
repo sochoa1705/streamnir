@@ -62,6 +62,7 @@ export class PopUpPasajeroComponent implements OnInit,OnChanges {
 
   @Input() onlyPasajeros = false;
   @Input() habitacionDisabled = true;
+  @Input() nroAdultos = 1;
 
   @Output() emitDistribution = new EventEmitter<string>();
 
@@ -110,7 +111,7 @@ export class PopUpPasajeroComponent implements OnInit,OnChanges {
     // this.habitaciones
 
 
-    const distributionInitial = new DistributionObject();
+    const distributionInitial = new DistributionObject(this.nroAdultos);
 
 
     const objBefore = this.distributionObject(this.habitaciones);

@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
@@ -13,17 +13,19 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { ICardAutocomplete } from '../../card-autocomplete/card-autocomplete.interface';
-import {  PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
+import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { IDistributionObjectVuelos } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { EnumCabinsVuelos, EnumFlightType, ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos } from '../../tabs/tabs.models';
+import { EnumCabinsVuelos, EnumFlightType, ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos, URLVuelosMulti } from '../../tabs/tabs.models';
 import { IGeoTree } from './tab-vuelos.interfaces';
+import { IntermediaryService } from '../../../../Services/intermediary.service';
+import { UserStorage, AccountsService } from '../../../../Services/accounts.service';
 
 @Component({
   selector: 'app-tab-vuelos',
   templateUrl: './tab-vuelos.component.html',
   styleUrls: ['./tab-vuelos.component.scss']
 })
-export class TabVuelosComponent implements OnInit,OnDestroy {
+export class TabVuelosComponent implements OnInit, OnDestroy {
 
 
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
@@ -53,7 +55,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
   origenHotel: any;
   toDate: NgbDate | null;
 
-  distributionObject: IDistributionObjectVuelos; 
+  distributionObject: IDistributionObjectVuelos;
   hoveredDate: NgbDate | null = null;
 
   EnumFlightType = EnumFlightType;
@@ -68,48 +70,56 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
   vuelosLoading2 = false;
   vuelosInput2$ = new Subject<string>();
 
-  vuelosValue:EnumFlightType ; 
+  vuelosValue: EnumFlightType;
 
 
   minLengthAutocomplete = 3;
-  
 
-  valueInputOrigen= "";
-  valueInputDestino= "";
+
+  valueInputOrigen = "";
+  valueInputDestino = "";
 
   isSubmit = false;
 
   private readonly destroy$ = new Subject();
+  flightSearchForm!: FormGroup;
+  displayCalendar = false;
+  flightData: any;
+
+  userStorage: UserStorage;
+  processOk = true;
+  disabledInput = true;
 
 
-  constructor(private destineService: DestinyService,public formatter: NgbDateParserFormatter,
-    private _snackBar: MatSnackBar, private router: Router,private destinosService: DestinosService,
-    private notification: NotificationService
+  constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter, private calendar: NgbCalendar,
+    private _snackBar: MatSnackBar, private router: Router, private destinosService: DestinosService, public accountService: AccountsService,
+    private notification: NotificationService, private fb: FormBuilder, private intermediaryService: IntermediaryService
   ) {
     this.createForm();
+    this.createFormMultiCity();
   }
 
 
   ngOnInit(): void {
-
     this.loadVuelosOrigen();
     this.loadVuelosDestino();
 
     this.logicPathVuelos();
-
+    this.userStorage = this.accountService.getUserStorage();
   }
 
 
 
-  logicPathVuelos(){
+  logicPathVuelos() {
 
     this.destinosService.getParam().pipe(
       takeUntil(this.destroy$)
-    ).subscribe(codigo=>{
-      if(!codigo){
+    ).subscribe(codigo => {
+      if (!codigo) {
+
         this.form.controls["origen"].patchValue(null);
         this.form.controls["destino"].patchValue(null);
-      }else{
+      } else {
         this.initCiudadDestino(codigo)
       }
     })
@@ -117,8 +127,8 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
   }
 
 
-  initCiudadDestino(codigoCiudad:string){
-    
+  initCiudadDestino(codigoCiudad: string) {
+
 
     this.form.controls["origen"].patchValue({
       children: [],
@@ -127,16 +137,17 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
       title: "Lima"
     })
 
-    this.destineService.getGeoTree(codigoCiudad).subscribe(data=>{
+    this.valueInputOrigen = "Lima";
+
+    this.destineService.getGeoTree(codigoCiudad).subscribe(data => {
       const ciudad = this.convertFormatAutocomplete(data);
       this.form.controls["destino"].patchValue(ciudad[0]);
+
+      this.valueInputDestino = ciudad[0].title;
     })
 
   }
-  
-
-
-  get viajesForm(){
+  get viajesForm() {
     return this.form.get("viajes")?.value;
   }
 
@@ -171,6 +182,10 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
         map(item => this.convertFormatAutocomplete(item))
       )
     )
+  }
+
+  getControls() {
+    return (this.flightSearchForm.get('multicity') as FormArray).controls;
   }
 
   convertFormatAutocomplete(array: IGeoTree[]): ICardAutocomplete[] {
@@ -241,9 +256,26 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
       viajes: new FormControl(EnumFlightType.ida_vuelta),
       origen: new FormControl(''),
       destino: new FormControl(''),
-      origenHotel: new FormControl('')
-
+      origenHotel: new FormControl(''),
+      departureDate: new FormControl(''),
+      arrivalDate: new FormControl(''),
     });
+  }
+
+  createFormMultiCity() {
+    this.flightSearchForm = this.fb.group({
+      multicity: this.jsonMulticityToFormGroup()
+    });
+  }
+
+  jsonMulticityToFormGroup() {
+    return this.fb.array([
+      this.fb.group({
+        origen: [''],
+        destino: [''],
+        departureDate: [''],
+      }),
+    ]);
   }
 
   navigateToResponseUrl(url: string): void {
@@ -257,7 +289,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
       errors.push("Error al definir los pasajeros, debe agregar al menos uno");
     }
 
-    if ( this.valueInputOrigen.length <= this.minLengthAutocomplete ) {
+    if (this.valueInputOrigen.length <= this.minLengthAutocomplete) {
       errors.push("El origen es requerido");
     }
     if (this.valueInputDestino.length <= this.minLengthAutocomplete) {
@@ -265,7 +297,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
     }
     if (!this.toDate && this.viajesForm !== EnumFlightType.ida) {
       errors.push("La fecha final es requerido");
-    } 
+    }
     if (!this.fromDate) {
       errors.push("La fecha de inicio es requerido");
     }
@@ -274,76 +306,96 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
 
   }
 
-
-
-  public searchVueloHotel() {
-    this.isSubmit = true;
-    const errors = this.validateTab(); 
-
+  emitValidation(validation: string) {
+    const errors = [];
+    errors.push(validation);
     if (errors.length > 0) {
-      this.notification.showNotificacion("Error", errors.join(" - "),10);
+      this.processOk = false;
+      this.notification.showNotificacion("Error", errors.join(" - "), 10);
       return;
     }
-
-    const url = this.getUrl();
-
-    this.navigateToResponseUrl(url);
   }
 
 
-  insertTag(params:any){
-    const getTipoTag = ((tipo:EnumFlightType)=>{
 
-      if(tipo == EnumFlightType.ida ){
+  public searchVueloHotel() {
+    this.processOk = true;
+    this.intermediaryService.sendChangePopupPasajerosValidation(true);
+
+    setTimeout(() => {
+
+    }, 1000);
+
+    if (this.processOk) {
+
+      this.isSubmit = true;
+      const errors = this.validateTab();
+
+      if (errors.length > 0) {
+        this.notification.showNotificacion("Error", errors.join(" - "), 10);
+        return;
+      }
+
+      const url = this.getUrl();
+
+      this.navigateToResponseUrl(url);
+    }
+  }
+
+
+  insertTag(params: any) {
+    const getTipoTag = ((tipo: EnumFlightType) => {
+
+      if (tipo == EnumFlightType.ida) {
         return {
           codigo: 'SI',
           descripcion: 'Solo Ida'
         }
-      }else if( tipo == EnumFlightType.ida_vuelta){
+      } else if (tipo == EnumFlightType.ida_vuelta) {
         return {
           codigo: 'IV',
           descripcion: 'Ida y Vuelta'
         }
-      }else if (tipo == EnumFlightType.multy_city){
+      } else if (tipo == EnumFlightType.multy_city) {
         return {
           codigo: 'MC',
           descripcion: 'Multi City'
         }
-      }else{
+      } else {
         return {
           codigo: '',
           descripcion: ''
         }
       }
-    }) 
+    })
 
 
-    const getCabinsVuelosCode = (cabin: string) =>{
+    const getCabinsVuelosCode = (cabin: string) => {
       switch (cabin) {
-        case  EnumCabinsVuelos.economy:
-           return "EC"
-        case  EnumCabinsVuelos.business:
+        case EnumCabinsVuelos.economy:
+          return "EC"
+        case EnumCabinsVuelos.business:
           return "BS"
-        case  EnumCabinsVuelos.first_class:
+        case EnumCabinsVuelos.first_class:
           return "FC"
         default:
           return ""
       }
     }
-  
 
-    const nombre = `${params.idOrigen}_${params.idDestino}_${params.businessClass?'BS':'EC'}_${getTipoTag(params.flightType).codigo}`;
 
-    let diasAnticipacion = moment( params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
+    const nombre = `${params.idOrigen}_${params.idDestino}_${params.businessClass ? 'BS' : 'EC'}_${getTipoTag(params.flightType).codigo}`;
+
+    let diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
     let duracionViaje = 0;
 
     let fechaRegreso = '';
 
-    if(params.flightType === EnumFlightType.ida_vuelta ){
-       duracionViaje =  moment( params.endDate, "DD/MM/YYYY").diff(moment( params.startDate, "DD/MM/YYYY"), 'days');
-       fechaRegreso = moment( params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD");
+    if (params.flightType === EnumFlightType.ida_vuelta) {
+      duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
+      fechaRegreso = moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD");
     }
-  
+
 
     const model = new ModelTaggingVuelos(
       nombre,
@@ -356,12 +408,12 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
       this.distributionObject.ninos,
       this.distributionObject.infantes,
       0,
-      moment( params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
       fechaRegreso,
       diasAnticipacion,
       duracionViaje
     )
-    
+
     TaggingService.buscarVuelos(model);
 
   }
@@ -370,16 +422,20 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
   getParams() {
     let params = new ParamsVuelos(
       {
-        fromDate: this.fromDate,
-        toDate: this.toDate,
+        fromDate: this.fromDate || null,
+        toDate: this.toDate || null,
         form: this.form,
-        citysDestinosSelect: this.citysDestinosSelect,
-        citysOrigenSelect: this.citysOrigenSelect
+        citysDestinosSelect: this.citysDestinosSelect || null,
+        citysOrigenSelect: this.citysOrigenSelect || null,
+        email: this.userStorage.email || ''
       }
     );
     return params;
   }
   public getUrl() {
+
+    this.userStorage = this.accountService.getUserStorage();
+
     let url = ''
     let params = this.getParams();
 
@@ -424,7 +480,7 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
 
 
   isValidate() {
-    return this.popUpElement ?.isValid();
+    return this.popUpElement?.isValid();
   }
 
 
@@ -433,10 +489,89 @@ export class TabVuelosComponent implements OnInit,OnDestroy {
     this.fromDate = value.fromDate;
   }
 
-
+  get multicity() {
+    return this.flightSearchForm.get('multicity') as FormArray;
+  }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  searchVueloHotelMulti(): void {
+    let jsonArray = this.setMultiCityArray();
+    let url = new URLVuelosMulti(this.form.controls['clase'].value, this.form.controls['viajes'].value, this.distributionObject).getUrlMulti(jsonArray);
+    this.navigateToResponseUrl(url);
+  }
+
+  setMultiCityArray(): string {
+    let json: Array<any> = [];
+    for (let i = 0; i < this.multicity.length; i++) {
+      let dataOrigen: any = this.getControlForm('origen', i);
+      let dataDestino: any = this.getControlForm('destino', i);
+      let dataDate = this.getControlForm('departureDate', i);
+      let data: any = {
+        departureLocation: dataOrigen.codigo + " " + dataOrigen.title + ", " + dataOrigen.country,
+        arrivalLocation: dataDestino.codigo + " " + dataDestino.title + ", " + dataDestino.country,
+        departureDate: dataDate
+      }
+      json.push(data);
+    }
+    return JSON.stringify(json);
+  }
+
+  getControlForm(key: any, index: number): string {
+    const control = <FormArray>this.multicity.controls[index];
+    return control.controls[key].value;
+  }
+
+  insertDates(inputDates: any) {
+    let flightType = this.form.get('viajes')?.value;
+
+    let departureDate = inputDates.departure == null ? '' : inputDates.departure?.date;
+    let arrivalDate = inputDates.arrival == null ? '' : inputDates.arrival?.date;
+
+    this.fromDate = departureDate == '' ? this.calendar.getToday() : inputDates.departure?.date;
+    this.toDate = arrivalDate == '' ? this.calendar.getToday() : inputDates.arrival?.date;
+
+    this.form.get('departureDate')?.setValue(departureDate);
+    if (flightType == 0)
+      this.form.get('arrivalDate')?.setValue(arrivalDate);
+
+    this.displayCalendar = false;
+  }
+
+  onFocus() {
+    if (!this.displayCalendar && this.valueInputOrigen != '' && this.valueInputDestino != '') {
+      if (this.form.get('origen')?.value && this.form.get('destino')?.value) {
+        let flightType = this.form.get('viajes')?.value;
+        let departureCity = this.form.get('origen')?.value.codigo;
+        let arrivalCity = this.form.get('destino')?.value.codigo;
+        let departureDate = this.form.get('departureDate')?.value;
+        let arrivalDate = flightType == 0 ? this.form.get('arrivalDate')?.value : '';
+
+        if (departureCity != '' && arrivalCity != '') {
+          this.flightData = {
+            flightType: flightType,
+            departureCity: departureCity,
+            arrivalCity: arrivalCity,
+            departureDate: departureDate,
+            arrivalDate: arrivalDate,
+          };
+
+          this.displayCalendar = true;
+          this.intermediaryService.sendChangeCalendarPrice(true);
+        }
+      }
+    }
+  }
+
+  cleanInput(): void{
+    this.disabledInput = this.valueInputDestino == '' || this.valueInputDestino == '';
+    if(this.disabledInput) {
+      this.form.get('departureDate')?.setValue('');
+      this.form.get('arrivalDate')?.setValue('');
+    }
+  }
 }
+
