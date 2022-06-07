@@ -1,55 +1,62 @@
 <section class="container-fluid">
-    <aside class="row mt-5">
-        <div class="col-md-6 col-12">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <ng-container *ngFor="let b of slider; let indice = index; let first = first">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="indice" [ngClass]="{'active':first}" aria-current="true" aria-label="Slide 1"></button>
-                    </ng-container>
-                </div>
+  <aside class="row mt-5">
+    <div class="col-md-6 col-12">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <ng-container *ngFor="let b of slider; let indice = index; let first = first">
+            <button type="button" data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="indice"
+              [ngClass]="{'active':first}" aria-current="true" aria-label="Slide 1"></button>
+          </ng-container>
+        </div>
 
-                <div class="carousel-inner">
-                    <ng-container *ngFor="let image of slider; let first = first; let i = index">
-                        <div class="aside__content carousel-item" [ngClass]="{'active': first}">
-                            <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image,'slider',i,slider.length)" [src]="image.PathImage" class="d-block w-100" [alt]="image.NameImage">
-                        </div>
-                    </ng-container>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+        <div class="carousel-inner">
+          <ng-container *ngFor="let image of slider; let first = first; let i = index">
+            <div class="aside__content carousel-item" [ngClass]="{'active': first}">
+              <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image,'slider',i,slider.length)"
+                [src]="image.PathImage" class="d-block w-100" [alt]="image.NameImage">
             </div>
+          </ng-container>
         </div>
-        <div class="col-md-6 col-12">
-            <div class="row">
-                <div class="col-12">
-                    <ng-container *ngFor="let image of images; let i = index">
-                        <div class="aside__content_2">
-                            <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image, 'banner', i, images.length)" [src]="image.PathImage" [alt]="image.NameImage">
-                        </div>
-                    </ng-container>
-                </div>
-                <div class="clearfix"></div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6 col-12">
+      <div class="row">
+        <div class="col-12">
+          <ng-container *ngFor="let image of images; let i = index">
+            <div class="aside__content_2">
+              <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image, 'banner', i, images.length)"
+                [src]="image.PathImage" [alt]="image.NameImage">
             </div>
+          </ng-container>
         </div>
-        <div class="clearfix"></div>
-    </aside>
+      </div>
+    </div>
+  </aside>
 </section>
 
-
+<!-- MAILING -->
+<ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+  <app-mailing *ngIf="section.section === 'mailing'" [title]="section.title" [span]="section.span"></app-mailing>
+</ng-container> -->
+<!-- END MAILING
 
 <!-- PUBLICIDAD -->
 <div class="container-fluid">
-    <div class="row mb-md-5 ">
-        <div *ngFor="let img of banners_corps; let i = index" class="col-md-6 col-12 publicidad">
-            <img [ngClass]="{'pointer': img.RedirectLink}" (click)="toSlider(img, 'banner', i, banners_corps.length)" [src]="img.PathImage" [alt]="img.NameImage">
-        </div>
+  <div class="row mb-md-5 ">
+    <div *ngFor="let img of banners_corps; let i = index" class="col-md-6 col-12 publicidad">
+      <img [ngClass]="{'pointer': img.RedirectLink}" (click)="toSlider(img, 'banner', i, banners_corps.length)"
+        [src]="img.PathImage" [alt]="img.NameImage">
     </div>
+  </div>
 </div>
-
 <!-- END PUBLICIDAD -->
