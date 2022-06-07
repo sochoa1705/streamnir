@@ -5,9 +5,11 @@ set name="nmviajes"
 set url=%CD%
 
 echo "Haciendo el build de la aplicacion"
-powershell -Command "npm run build-prod"
+powershell -Command "npm run build-dev"
 
 echo "Logueandose en el Container"
+powershell -Command "az account set --subscription f7864d4b-f7ba-4627-976f-a749d462f414"
+powershell -Command "az aks get-credentials --resource-group EXPERTIA-NMVIAJES-DESARROLLO --name ExpertiaNmViajesDev"
 powershell -Command "az acr login -n expertianmviajesdev"
 
 echo "Generando la imagen"
