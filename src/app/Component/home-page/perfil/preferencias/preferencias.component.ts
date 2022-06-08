@@ -17,24 +17,7 @@ export class PreferenciasComponent implements OnInit {
   preferenceForm: FormGroup;
 
   errors: any[] = []
-  MSG_EMPTY: string = 'none'
-  MSG_NOMBRES: string = 'nombres'
-  MSG_APELLIDO_PATERNO: string = 'apellidoPaterno'
-  MSG_APELLIDO_MATERNO: string = 'apellidoMaterno'
-  MSG_MAIL: string = 'email'
-  MSG_DIA: string = 'dia'
-  MSG_MES: string = 'mes'
-  MSG_ANIO: string = 'anio'
-  MSG_NACIONALIDAD: string = 'nacionalidad'
-  MSG_TIPO_DOCUMENTO: string = 'tipoDocumento'
-  MSG_NUMERO_DOCUMENTO: string = 'numeroDocumento'
-  MSG_PAIS: string = 'pais'
-  MSG_DEPARTAMENTO: string = 'departamento'
-  MSG_DISTRITO: string = 'distrito'
-  MSG_CHK_POLITY: string = 'politicas'
-  MSG_CHK_AUTORIZO: string = 'autorizo'
-  MSG_CHK_PREFE: string = 'playa'
-  listPreferent: any[]
+  preferenceList: any[]
   user: any
   userData: any
   distritos: any
@@ -59,7 +42,7 @@ export class PreferenciasComponent implements OnInit {
     this.getCountries();
     this.makeYears();
 
-    this.listPreferent = [
+    this.preferenceList = [
       {
         id: 1,
         text: 'Playa',
@@ -156,8 +139,8 @@ export class PreferenciasComponent implements OnInit {
 
       vecesAlAnio: [''],
 
-      politicas: [false],
-      autorizo: [false],
+      politicas: [false, [Validators.requiredTrue]],
+      autorizo: [false, [Validators.requiredTrue]]
     })
   }
 
@@ -201,8 +184,6 @@ export class PreferenciasComponent implements OnInit {
       }
     })
   }
-
-
 
   savePreferenceForm(): void {
     if (this.preferenceForm.invalid) {
@@ -283,13 +264,5 @@ export class PreferenciasComponent implements OnInit {
     for (let index = currentYear - 100; index < currentYear; index++) {
       this.years.push(index);
     }
-  }
-
-  getMessage(messageKey: any) {
-    return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
-  }
-
-  getMessageArray(index: any, messageKey: any) {
-    return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
 }

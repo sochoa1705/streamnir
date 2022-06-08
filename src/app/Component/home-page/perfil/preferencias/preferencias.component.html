@@ -1,4 +1,3 @@
-<!-- PREFERENCIAS -->
 <div class="box-container">
   <div class="box-content">
     <div class="portlet-der">
@@ -39,24 +38,33 @@
                   <span class="">Apellido materno</span>
                   <input type="text" formControlName="apellidoMaterno" class="form-control"
                     placeholder="El que figura en el documento de viaje."
-                    [ngClass]="getMessage(MSG_APELLIDO_MATERNO) !== MSG_EMPTY ? 'isvalid' : ''">
-                  <span class="valid" *ngIf="getMessage(MSG_APELLIDO_MATERNO) !== MSG_EMPTY">{{
-                    getMessage(MSG_APELLIDO_MATERNO) }}</span>
+                    [ngClass]="{isvalid : validatePreferenceForm('apellidoMaterno')}">
+
+                  <span class="valid" *ngIf="validatePreferenceForm('apellidoMaterno')">
+                    Ingresa tu apellido materno
+                  </span>
                 </div>
+
                 <div class="inputGroup">
                   <span class="">Correo electrónico</span>
                   <input type="text" formControlName="email" class="form-control"
                     placeholder="El que figura en el documento de viaje."
-                    [ngClass]="getMessage(MSG_MAIL) !== MSG_EMPTY ? 'isvalid' : ''">
-                  <span class="valid" *ngIf="getMessage(MSG_MAIL) !== MSG_EMPTY">{{ getMessage(MSG_MAIL) }}</span>
+                    [ngClass]="{isvalid : validatePreferenceForm('email')}">
+
+                  <span class="valid" *ngIf="validatePreferenceForm('email')">
+                    Ingresa tu correo electrónico
+                  </span>
                 </div>
               </div>
+
               <div class="rowContent">
                 <div class="inputGroup">
                   <span class="">Fecha de nacimiento</span>
-                  <div class="rowElement">
+                  <div class="rowElement"
+                    [ngClass]="{isvalid : validatePreferenceForm('dia') || validatePreferenceForm('mes') || validatePreferenceForm('anio')}">
                     <input type="text" maxlength="2" class="form-control marginRight10" formControlName="dia"
                       placeholder="Dia">
+
                     <select class="form-select marginRight10" formControlName="mes" aria-label="Default select example">
                       <option value="" selected>Mes</option>
                       <option value="1">Enero</option>
@@ -72,85 +80,108 @@
                       <option value="11">Noviembre</option>
                       <option value="12">Dciembre</option>
                     </select>
+
                     <select class="form-select" formControlName="anio" aria-label="Default select example">
-                      <option selected>Año</option>
+                      <option value="" selected>Año</option>
                       <option *ngFor="let elem of years" [value]="elem">{{ elem }}</option>
                     </select>
                   </div>
+
+                  <span class="valid"
+                    *ngIf="validatePreferenceForm('dia') || validatePreferenceForm('mes') || validatePreferenceForm('anio')">
+                    Ingresa tu fecha de nacimiento
+                  </span>
                 </div>
+
                 <div class="inputGroup">
                   <span class="">Nacionalidad</span>
-                  <select class="form-select" formControlName="nacionalidad" aria-label="Default select example">
+                  <select class="form-select" formControlName="nacionalidad" aria-label="Default select example"
+                    [ngClass]="{isvalid : validatePreferenceForm('nacionalidad')}">
                     <option value="" selected>Seleccione nacionalidad</option>
                     <option *ngFor="let elem of countries" [value]="elem.Id">
                       {{ elem.Name }}
                     </option>
                   </select>
+
+                  <span class="valid" *ngIf="validatePreferenceForm('nacionalidad')">
+                    Selecciona una nacionalidad
+                  </span>
                 </div>
               </div>
+
               <div class="rowContent">
                 <div class="inputGroup flexNowrap">
                   <div class="rowElement">
                     <div class="nroDoc marginRight10">
                       <span class="">Tipo de documento</span>
                       <select class="form-select" formControlName="tipoDocumento" aria-label="Default select example"
-                        [ngClass]="getMessage(MSG_TIPO_DOCUMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
-                        <option selected>Seleccione</option>
+                        [ngClass]="{isvalid : validatePreferenceForm('tipoDocumento')}">
+                        <option value="" selected>Seleccione</option>
                         <option value="1">DNI</option>
                         <option value="2">Pasaporte</option>
                       </select>
-                      <span class="valid" *ngIf="getMessage(MSG_TIPO_DOCUMENTO) !== MSG_EMPTY">{{
-                        getMessage(MSG_TIPO_DOCUMENTO) }}</span>
+
+                      <span class="valid" *ngIf="validatePreferenceForm('tipoDocumento')">
+                        Selecciona tu tipo de documento
+                      </span>
                     </div>
                   </div>
+
                   <div class="rowElement">
                     <div class="nroDoc">
                       <span class="">N° de documento</span>
                       <input type="text" class="form-control" formControlName="numeroDocumento"
-                        placeholder="Ingresar Nro"
-                        [ngClass]="getMessage(MSG_NUMERO_DOCUMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
-                      <span class="valid" *ngIf="getMessage(MSG_NUMERO_DOCUMENTO) !== MSG_EMPTY">{{
-                        getMessage(MSG_NUMERO_DOCUMENTO) }}</span>
+                        placeholder="Ingresar Nro" [ngClass]="{isvalid : validatePreferenceForm('numeroDocumento')}">
+
+                      <span class="valid" *ngIf="validatePreferenceForm('numeroDocumento')">
+                        Ingresa tu número de documento
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
+
               <div class="rowContent">
                 <div class="inputGroup">
                   <span class="">País</span>
                   <select class="form-select marginRight10" (change)="optionDepartament($event)" formControlName="pais"
-                    aria-label="Default select example" [ngClass]="getMessage(MSG_PAIS) !== MSG_EMPTY ? 'isvalid' : ''">
+                    aria-label="Default select example" [ngClass]="{isvalid : validatePreferenceForm('pais')}">
                     <option value="" selected>Seleccione país</option>
                     <option *ngFor="let elem of countries" [value]="elem.Code">
                       {{ elem.Name }}
                     </option>
                   </select>
-                  <span class="valid" *ngIf="getMessage(MSG_PAIS) !== MSG_EMPTY">{{ getMessage(MSG_PAIS) }}</span>
+
+                  <span class="valid" *ngIf="validatePreferenceForm('pais')">
+                    Selecciona una país
+                  </span>
                 </div>
 
                 <div class="inputGroup">
                   <span class="">Departamento</span>
                   <select class="form-select" (change)="optionDistrict($event)" formControlName="departamento"
-                    aria-label="Default select example"
-                    [ngClass]="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY ? 'isvalid' : ''">
-                    <option selected>Seleccione departamento</option>
+                    aria-label="Default select example" [ngClass]="{isvalid : validatePreferenceForm('departamento')}">
+                    <option value="" selected>Seleccione departamento</option>
                     <option *ngFor="let option of departamentos" [value]="option.Code">{{ option.Name }}
                     </option>
                   </select>
-                  <span class="valid" *ngIf="getMessage(MSG_DEPARTAMENTO) !== MSG_EMPTY">{{
-                    getMessage(MSG_DEPARTAMENTO)
-                    }}</span>
+
+                  <span class="valid" *ngIf="validatePreferenceForm('departamento')">
+                    Selecciona una departamento
+                  </span>
                 </div>
                 <div class="inputGroup">
                   <span class="">Distrito</span>
                   <select class="form-select" formControlName="distrito" aria-label="Default select example"
-                    [ngClass]="getMessage(MSG_DISTRITO) !== MSG_EMPTY ? 'isvalid' : ''">
-                    <option selected>Seleccione distrito</option>
+                    [ngClass]="{isvalid : validatePreferenceForm('distrito')}">
+                    <option value="" selected>Seleccione distrito</option>
                     <option *ngFor="let option of distritos" [value]="option.Code">{{ option.Name }}
                     </option>
                   </select>
-                  <span class="valid" *ngIf="getMessage(MSG_DISTRITO) !== MSG_EMPTY">{{ getMessage(MSG_DISTRITO)
-                    }}</span>
+
+                  <span class="valid" *ngIf="validatePreferenceForm('distrito')">
+                    Selecciona un distrito
+                  </span>
                 </div>
               </div>
 
@@ -160,13 +191,14 @@
                   <span>(puedes elegir más de una opción)</span>
                 </div>
                 <div class="groupOption" formGroupName="preference">
-                  <mat-checkbox *ngFor="let chk of listPreferent" [formControlName]="chk.name" [value]="chk.value"
+                  <mat-checkbox *ngFor="let chk of preferenceList" [formControlName]="chk.name" [value]="chk.value"
                     class="checkOption">{{ chk.text }}</mat-checkbox>
                 </div>
 
                 <div class="question">¿Qué tipos de viaje te interesa?
                   <span>(puedes elegir más de una opción)</span>
                 </div>
+
                 <div class="groupOption">
                   <mat-checkbox formControlName="economico" class="checkOption">Económico</mat-checkbox>
                   <mat-checkbox formControlName="clasico" class="checkOption">Clásico</mat-checkbox>
@@ -202,16 +234,21 @@
                     <a routerLink="/politicas" target="_blank">política de protección de datos</a>
                   </mat-checkbox>
                 </div>
-                <span class="valid" *ngIf="getMessage(MSG_CHK_POLITY) !== MSG_EMPTY">{{ getMessage(MSG_CHK_POLITY)
-                  }}</span>
+
+                <span class="valid" *ngIf="validatePreferenceForm('politicas')">
+                  Es necesario la aceptación de políticas de protección de Datos
+                </span>
+
                 <div class="groupOption popup">
                   <mat-checkbox formControlName="autorizo" class="checkOption">Autorizo el uso de mi información para
                     fines publicitarios</mat-checkbox>
                 </div>
-                <span class="valid" *ngIf="getMessage(MSG_CHK_AUTORIZO) !== MSG_EMPTY">{{
-                  getMessage(MSG_CHK_AUTORIZO)
-                  }}</span>
+
+                <span class="valid" *ngIf="validatePreferenceForm('autorizo')">
+                  Es necesario la autorización del uso de información
+                </span>
               </div>
+
               <div class="rowContent">
                 <div class="btnPerfil primary" (click)="savePreferenceForm()">
                   Guardar mis datos
@@ -226,5 +263,3 @@
     </div>
   </div>
 </div>
-
-<!-- END PREFERENCIAS -->
