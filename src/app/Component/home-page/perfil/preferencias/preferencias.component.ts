@@ -10,7 +10,7 @@ import { PreferenceService } from 'src/app/Services/preference/preference.servic
 export class PreferenciasComponent implements OnInit {
 
 
-  formPreference: FormGroup 
+  formPreference: FormGroup
   errors: any[] = []
   MSG_EMPTY: string = 'none'
   MSG_NOMBRES: string = 'nombres'

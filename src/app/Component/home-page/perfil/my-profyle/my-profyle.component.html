@@ -1,5 +1,5 @@
 <!-- vista perfil -->
-<div class="viewPerfil" *ngIf="id === 'mnuPerfil'">
+<div class="viewPerfil">
   <div class="boxContPerfil">
     <div class="boxLeft">
       <img src="./assets/perfil/estudiante.png" alt="">
@@ -15,7 +15,7 @@
         Reserva más rápido y sin complicaciones, agrega los datos de quienes suelen viajar a tu lado.
       </div>
       <div class="boxBtn">
-        <div class="btnPerfil primary" (click)="showOption('mnuPasajero')">
+        <div class="btnPerfil primary" routerLink="/perfil/pasajeros">
           Agregar
         </div>
       </div>
