@@ -194,9 +194,6 @@ export class LoginComponent implements OnInit {
     return '';
   }
 
-
-
-
   createBusinessAccountForm(): FormGroup {
     return this._formBuilder.group({
       ruc: ['', [Validators.required, Validators.minLength(11), Validators.pattern(this._validatorsService.digitsPattern)]],
@@ -430,7 +427,7 @@ export class LoginComponent implements OnInit {
           this._accountService.guardarStorage(resp);
           this.closeModal();
         } else {
-          this.notification.showNotificacion("Error", resp.Message , 10);
+          this.notification.showNotificacion("Error", resp.Message, 10);
           this.closeLoading();
         }
       }, () => {

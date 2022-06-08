@@ -41,7 +41,6 @@ export class ContactoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.userStorage = this._accountsService.getUserStorage();
 
     this.contactInformationForm = this.createContactInformationForm();

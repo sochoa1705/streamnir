@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as moment from 'moment';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
+import { Guid } from 'src/app/shared/utils';
+import { ValidatorsService } from 'src/app/shared/validators/validators.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-preferencias',
@@ -10,7 +14,8 @@ import { PreferenceService } from 'src/app/Services/preference/preference.servic
 })
 export class PreferenciasComponent implements OnInit {
 
-  formPreference: FormGroup
+  preferenceForm: FormGroup;
+
   errors: any[] = []
   MSG_EMPTY: string = 'none'
   MSG_NOMBRES: string = 'nombres'
@@ -34,20 +39,25 @@ export class PreferenciasComponent implements OnInit {
   userData: any
   distritos: any
   departamentos: any
-  paises: any
+  countries: Array<any> = [];
 
+  years: Array<any> = [];
 
   constructor(
-    public preferenceService: PreferenceService,
+    private _preferenceService: PreferenceService,
+    private _validatorsService: ValidatorsService,
+    private _formBuilder: FormBuilder,
     private _matSnackBar: MatSnackBar
   ) {
-    this.createform();
+
   }
 
   ngOnInit(): void {
 
-    this.setAnios();
-    this.getCountries()
+    this.preferenceForm = this.createPreferenceForm();
+
+    this.getCountries();
+    this.makeYears();
 
     this.listPreferent = [
       {
@@ -107,10 +117,59 @@ export class PreferenciasComponent implements OnInit {
     ]
   }
 
+  createPreferenceForm(): FormGroup {
+    return this._formBuilder.group({
+      nombres: ['', [Validators.required, Validators.minLength(3), Validators.pattern(this._validatorsService.lettersPattern)]],
+      apellidoPaterno: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
+      apellidoMaterno: ['', [Validators.required, Validators.minLength(2), Validators.pattern(this._validatorsService.lettersPattern)]],
+      email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this._validatorsService.emailPattern)]],
+      dia: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.min(1), Validators.max(31), Validators.pattern(this._validatorsService.digitsPattern)]],
+      mes: ['', [Validators.required]],
+      anio: ['', [Validators.required]],
+      nacionalidad: ['', [Validators.required]],
+      tipoDocumento: ['', [Validators.required]],
+      numeroDocumento: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this._validatorsService.digitsPattern)]],
+      pais: ['', [Validators.required]],
+      departamento: [''],
+      distrito: [''],
+
+      preference: this._formBuilder.group({
+        playa: [false],
+        aventura: [false],
+        naturaleza: [false],
+        exoticos: [false],
+        tematico: [false],
+        shopping: [false],
+        cruceros: [false],
+        cultural: [false],
+        otros: [false]
+      }),
+
+      economico: [false],
+      clasico: [false],
+      lujo: [false],
+
+      solo: [false],
+      pareja: [false],
+      familia: [false],
+      amigos: [false],
+
+      vecesAlAnio: [''],
+
+      politicas: [false],
+      autorizo: [false],
+    })
+  }
+
+  validatePreferenceForm(field: string) {
+    return this.preferenceForm.controls[field].errors
+      && this.preferenceForm.controls[field].touched;
+  }
+
   getCountries() {
-    this.preferenceService.countries().subscribe({
+    this._preferenceService.countries().subscribe({
       next: response => {
-        this.paises = response['Result']
+        this.countries = response['Result'];
       }
     })
   }
@@ -121,7 +180,7 @@ export class PreferenciasComponent implements OnInit {
   }
 
   getDepartament(option: string) {
-    this.preferenceService.departments(option).subscribe({
+    this._preferenceService.departments(option).subscribe({
       next: response => {
         console.log(response['Result'])
         this.departamentos = response['Result']
@@ -135,7 +194,7 @@ export class PreferenciasComponent implements OnInit {
   }
 
   getDistrict(option: string) {
-    this.preferenceService.districts(option).subscribe({
+    this._preferenceService.districts(option).subscribe({
       next: response => {
         console.log(response['Result'])
         this.distritos = response['Result']
@@ -143,101 +202,64 @@ export class PreferenciasComponent implements OnInit {
     })
   }
 
-  createform() {
-    this.formPreference = new FormGroup({
-      nombres: new FormControl(),
-      apellidoPaterno: new FormControl(),
-      apellidoMaterno: new FormControl(),
-      email: new FormControl(),
-      dia: new FormControl(),
-      mes: new FormControl(),
-      anio: new FormControl(),
-      nacionalidad: new FormControl(),
-      tipoDocumento: new FormControl(),
-      numeroDocumento: new FormControl(),
-      pais: new FormControl(),
-      departamento: new FormControl(),
-      distrito: new FormControl(),
 
-      preference: new FormGroup({
-        playa: new FormControl(false),
-        aventura: new FormControl(false),
-        naturaleza: new FormControl(false),
-        exoticos: new FormControl(false),
-        tematico: new FormControl(false),
-        shopping: new FormControl(false),
-        cruceros: new FormControl(false),
-        cultural: new FormControl(false),
-        otros: new FormControl(false),
-      }),
 
-      economico: new FormControl(),
-      clasico: new FormControl(),
-      lujo: new FormControl(),
+  savePreferenceForm(): void {
+    if (this.preferenceForm.invalid) {
+      this.preferenceForm.markAllAsTouched();
+      return;
+    }
 
-      solo: new FormControl(),
-      pareja: new FormControl(),
-      familia: new FormControl(),
-      amigos: new FormControl(),
+    debugger
 
-      vecesAlAnio: new FormControl(),
-
-      politicas: new FormControl(),
-      autorizo: new FormControl(),
-    })
-  }
-
-  save(): void {
-    let data = this.formPreference.value
-    if (this.validForm()) {
+    if (this.preferenceForm.valid) {
+      let data = this.preferenceForm.value
 
       let payload = {
-        "TrackingCode": "000001",
-        "MuteExceptions": false,
-        "Caller": {
-          "Company": "Agil",
-          "Application": "Interagencias"
+        TrackingCode: Guid(),
+        MuteExceptions: environment.muteExceptions,
+        Caller: {
+          Company: "Agil",
+          Application: "Interagencias"
         },
-        "Parameter": {
-          "Firstname": data.nombres,
-          "FatherLastname": data.apellidoPaterno,
-          "MotherLastname": data.apellidoMaterno,
-          "Email": data.email,
-          "Gender": "M",
-          "Phone": data.telefono,
-          "Birthdate": data.anio + '-' + data.mes + '-' + data.dia,
-          "Nationality": data.nacionalidad,
-          "DocumentType": data.tipoDocumento,
-          "DocumentNumber": data.numeroDocumento,
-          "CountryId": 132,
-          "DepartmentId": 14,
-          "DistrictId": 1245,
-          "Preferences": [
+        Parameter: {
+          Firstname: data.nombres,
+          FatherLastname: data.apellidoPaterno,
+          MotherLastname: data.apellidoMaterno,
+          Email: data.email,
+          Gender: "M",
+          Phone: data.telefono,
+          Birthdate: data.anio + '-' + data.mes + '-' + data.dia,
+          Nationality: data.nacionalidad,
+          DocumentType: data.tipoDocumento,
+          DocumentNumber: data.numeroDocumento,
+          CountryId: 132,
+          DepartmentId: 14,
+          DistrictId: 1245,
+          Preferences: [
             {
-              "Id": "SHO",
-              "Name": "Shopping"
+              Id: "SHO",
+              Name: "Shopping"
             }
           ],
-          "Categories": [
+          Categories: [
             {
-              "Id": "LUJ",
-              "Name": "Lujo"
+              Id: "LUJ",
+              Name: "Lujo"
             }
           ],
-          "Companions": [
+          Companions: [
             {
-              "Id": "PAR",
-              "Name": "Pareja"
+              Id: "PAR",
+              Name: "Pareja"
             }
           ],
-          "DataAuthorization": true
+          DataAuthorization: true
         }
-      }
+      };
 
-      this.preferenceService.preference(payload).subscribe({
+      this._preferenceService.preference(payload).subscribe({
         next: (response) => {
-          debugger
-
           if (response.Result.IsSuccess) {
             this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
               verticalPosition: 'top',
@@ -255,87 +277,12 @@ export class PreferenciasComponent implements OnInit {
     }
   }
 
-  anios: any = []
-  setAnios() {
-    var d = new Date()
-    var n = d.getFullYear()
-    for (var i = n; i >= 1900; i--) {
-      this.anios.push(i)
-    }
-  }
+  makeYears() {
+    let currentYear = moment().year();
 
-  validForm() {
-    this.errors = []
-    const letter = new RegExp('^[a-zA-Z ]+$', 'i')
-    const number = new RegExp('^[0-9]+$', 'i')
-    const alphanumeric = new RegExp('^[a-zA-Z0-9 ]+$', 'i')
-    const mail = new RegExp('^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$', 'i')
-
-    let nombres: string = this.formPreference.getRawValue()['nombres']
-    if (nombres === undefined || nombres === null || nombres.trim() === '') {
-      this.errors.push({ name: this.MSG_NOMBRES, message: 'Campo requerido' })
+    for (let index = currentYear - 100; index < currentYear; index++) {
+      this.years.push(index);
     }
-    let apellidoPaterno: string = this.formPreference.getRawValue()['apellidoPaterno']
-    if (apellidoPaterno === undefined || apellidoPaterno === null || apellidoPaterno.trim() === '') {
-      this.errors.push({ name: this.MSG_APELLIDO_PATERNO, message: 'Campo requerido' })
-    }
-    let apellidoMaterno: string = this.formPreference.getRawValue()['apellidoMaterno']
-    if (apellidoMaterno === undefined || apellidoMaterno === null || apellidoMaterno.trim() === '') {
-      this.errors.push({ name: this.MSG_APELLIDO_MATERNO, message: 'Campo requerido' })
-    }
-    let email: string = this.formPreference.getRawValue()['email']
-    if (email === undefined || email === null || email.trim() === '') {
-      this.errors.push({ name: this.MSG_MAIL, message: 'Campo requerido' })
-    }
-    let dia: string = this.formPreference.getRawValue()['dia']
-    if (dia === undefined || dia === null || dia.trim() === '') {
-      this.errors.push({ name: this.MSG_DIA, message: 'Campo requerido' })
-    }
-    let mes: string = this.formPreference.getRawValue()['mes']
-    if (mes === undefined || mes === null || mes.trim() === '') {
-      this.errors.push({ name: this.MSG_MES, message: 'Campo requerido' })
-    }
-    let anio: string = this.formPreference.getRawValue()['anio']
-    if (anio === undefined || anio === null || anio.trim() === '') {
-      this.errors.push({ name: this.MSG_ANIO, message: 'Campo requerido' })
-    }
-    let nacionalidad: string = this.formPreference.getRawValue()['nacionalidad']
-    if (nacionalidad === undefined || nacionalidad === null || nacionalidad.trim() === '') {
-      this.errors.push({ name: this.MSG_NACIONALIDAD, message: 'Campo requerido' })
-    }
-    let tipoDocumento: string = this.formPreference.getRawValue()['tipoDocumento']
-    if (tipoDocumento === undefined || tipoDocumento === null || tipoDocumento.trim() === '') {
-      this.errors.push({ name: this.MSG_TIPO_DOCUMENTO, message: 'Campo requerido' })
-    }
-    let numeroDocumento: string = this.formPreference.getRawValue()['numeroDocumento']
-    if (numeroDocumento === undefined || numeroDocumento === null || numeroDocumento.trim() === '') {
-      this.errors.push({ name: this.MSG_NUMERO_DOCUMENTO, message: 'Campo requerido' })
-    }
-    if (!number.test(numeroDocumento)) {
-      this.errors.push({ name: this.MSG_NUMERO_DOCUMENTO, message: 'solo números' })
-    }
-    let pais: string = this.formPreference.getRawValue()['pais']
-    if (pais === undefined || pais === null || pais.trim() === '') {
-      this.errors.push({ name: this.MSG_PAIS, message: 'Campo requerido' })
-    }
-    let departamento: string = this.formPreference.getRawValue()['departamento']
-    if (departamento === undefined || departamento === null || departamento.trim() === '') {
-      this.errors.push({ name: this.MSG_DEPARTAMENTO, message: 'Campo requerido' })
-    }
-    let distrito: string = this.formPreference.getRawValue()['distrito']
-    if (distrito === undefined || distrito === null || distrito.trim() === '') {
-      this.errors.push({ name: this.MSG_DISTRITO, message: 'Campo requerido' })
-    }
-    let politicas: boolean = this.formPreference.getRawValue()['politicas']
-    if (politicas === undefined || politicas === null || politicas == false) {
-      this.errors.push({ name: this.MSG_CHK_POLITY, message: 'Aceptar Politicas requerido' })
-    }
-    let autorizo: boolean = this.formPreference.getRawValue()['autorizo']
-    if (autorizo === undefined || autorizo === null || autorizo == false) {
-      this.errors.push({ name: this.MSG_CHK_AUTORIZO, message: 'Autorizar uso de información requerido' })
-    }
-
-    return this.errors.length === 0
   }
 
   getMessage(messageKey: any) {
