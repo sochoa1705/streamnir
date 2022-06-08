@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
 
 @Component({
@@ -8,7 +9,6 @@ import { PreferenceService } from 'src/app/Services/preference/preference.servic
   styleUrls: ['./preferencias.component.scss']
 })
 export class PreferenciasComponent implements OnInit {
-
 
   formPreference: FormGroup
   errors: any[] = []
@@ -37,15 +37,17 @@ export class PreferenciasComponent implements OnInit {
   paises: any
 
 
-  constructor( public preferenceService: PreferenceService) {
-    this.createform()
-   }
+  constructor(
+    public preferenceService: PreferenceService,
+    private _matSnackBar: MatSnackBar
+  ) {
+    this.createform();
+  }
 
   ngOnInit(): void {
 
     this.setAnios();
     this.getCountries()
-
 
     this.listPreferent = [
       {
@@ -105,8 +107,6 @@ export class PreferenciasComponent implements OnInit {
     ]
   }
 
-
-  
   getCountries() {
     this.preferenceService.countries().subscribe({
       next: response => {
@@ -114,10 +114,12 @@ export class PreferenciasComponent implements OnInit {
       }
     })
   }
+
   optionDepartament(e: any) {
     let countrie = e.target.value
     this.getDepartament(countrie)
   }
+
   getDepartament(option: string) {
     this.preferenceService.departments(option).subscribe({
       next: response => {
@@ -126,10 +128,12 @@ export class PreferenciasComponent implements OnInit {
       }
     })
   }
+
   optionDistrict(e: any) {
     let departament = e.target.value
     this.getDistrict(departament)
   }
+
   getDistrict(option: string) {
     this.preferenceService.districts(option).subscribe({
       next: response => {
@@ -138,9 +142,6 @@ export class PreferenciasComponent implements OnInit {
       }
     })
   }
-
-
-
 
   createform() {
     this.formPreference = new FormGroup({
@@ -186,9 +187,7 @@ export class PreferenciasComponent implements OnInit {
     })
   }
 
-
-  save() {
-    // console.log(this.formPreference.value)
+  save(): void {
     let data = this.formPreference.value
     if (this.validForm()) {
 
@@ -234,10 +233,24 @@ export class PreferenciasComponent implements OnInit {
           "DataAuthorization": true
         }
       }
-      console.log(payload)
 
       this.preferenceService.preference(payload).subscribe({
-        next: response => console.log(response)
+        next: (response) => {
+          debugger
+
+          if (response.Result.IsSuccess) {
+            this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
+              verticalPosition: 'top',
+              duration: 2000
+            });
+          }
+          else {
+            this._matSnackBar.open('Error en el registro de preferencias', 'OK', {
+              verticalPosition: 'top',
+              duration: 2000
+            });
+          }
+        }
       })
     }
   }
@@ -246,11 +259,10 @@ export class PreferenciasComponent implements OnInit {
   setAnios() {
     var d = new Date()
     var n = d.getFullYear()
-    for(var i = n; i >= 1900; i--) {
+    for (var i = n; i >= 1900; i--) {
       this.anios.push(i)
     }
   }
-
 
   validForm() {
     this.errors = []
@@ -323,39 +335,8 @@ export class PreferenciasComponent implements OnInit {
       this.errors.push({ name: this.MSG_CHK_AUTORIZO, message: 'Autorizar uso de información requerido' })
     }
 
-    // let playa: boolean = this.formPreference.getRawValue()['playa'],
-    //   aventura: boolean = this.formPreference.getRawValue()['aventura'],
-    //   naturaleza: boolean = this.formPreference.getRawValue()['naturaleza'],
-    //   exoticos: boolean = this.formPreference.getRawValue()['exoticos'],
-    //   tematico: boolean = this.formPreference.getRawValue()['tematico'],
-    //   shopping: boolean = this.formPreference.getRawValue()['shopping'],
-    //   cruceros: boolean = this.formPreference.getRawValue()['cruceros'],
-    //   cultura: boolean = this.formPreference.getRawValue()['cultura'],
-    //   otros: boolean = this.formPreference.getRawValue()['otros']
-    // if (
-    //   playa == false ||
-    //   aventura == false ||
-    //   naturaleza == false ||
-    //   exoticos == false ||
-    //   tematico == false ||
-    //   shopping == false ||
-    //   cruceros == false ||
-    //   cultura == false ||
-    //   otros == false
-    // ) {
-    //   this.errors.push({ name: this.MSG_CHK_PREFE, message: 'Debe elegir al menos una opción' })
-    // }
-
-    // for (let x = 0; x < this.listPreferent.length; x++) {
-    //   let prefe: string = this.formPreference.getRawValue()['playa']
-    //   console.log(prefe);
-
-    // }
-
     return this.errors.length === 0
   }
-
-
 
   getMessage(messageKey: any) {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
@@ -364,6 +345,4 @@ export class PreferenciasComponent implements OnInit {
   getMessageArray(index: any, messageKey: any) {
     return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
-
-
 }
