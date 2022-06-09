@@ -99,3 +99,8 @@ export const FilterTypes = {
   duracionSalida: 9,
   duracionEscala: 10,
 }
+
+export const CALLER_TYPE = {
+  company: 'Expertia',
+  application: 'NMViajes'
+}

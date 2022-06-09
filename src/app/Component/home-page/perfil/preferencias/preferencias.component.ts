@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
+import { CALLER_TYPE } from 'src/app/shared/constant';
 import { Guid } from 'src/app/shared/utils';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
 import { environment } from 'src/environments/environment';
@@ -16,13 +17,14 @@ export class PreferenciasComponent implements OnInit {
 
   preferenceForm: FormGroup;
 
-  errors: any[] = []
-  preferenceList: any[]
-  user: any
-  userData: any
-  distritos: any
-  departamentos: any
+  errors: any[] = [];
+  preferenceList: any[];
+  user: any;
+  userData: any;
+  distritos: any;
+  departamentos: any;
   countries: Array<any> = [];
+  nationalities: Array<any> = [];
 
   years: Array<any> = [];
 
@@ -40,6 +42,7 @@ export class PreferenciasComponent implements OnInit {
     this.preferenceForm = this.createPreferenceForm();
 
     this.getCountries();
+    this.getNationalities();
     this.makeYears();
 
     this.preferenceList = [
@@ -157,6 +160,14 @@ export class PreferenciasComponent implements OnInit {
     })
   }
 
+  getNationalities() {
+    this._preferenceService.getCountries().subscribe({
+      next: response => {
+        this.nationalities = response['Result'];
+      }
+    })
+  }
+
   optionDepartament(e: any) {
     let countrie = e.target.value
     this.getDepartament(countrie)
@@ -191,57 +202,75 @@ export class PreferenciasComponent implements OnInit {
       return;
     }
 
-    debugger
+    let preferences: any[] = [];
+
+    this.preferenceList.forEach(element => {
+      if (this.preferenceForm.get("preference")?.value[element.name]) {
+        preferences.push({ Id: element.value, Name: element.name });
+      }
+    });
+
+    let categories: any[] = [];
+
+    if (this.preferenceForm.get("economico")?.value)
+      categories.push({ Id: 'ECO', Name: 'Económico' });
+
+    if (this.preferenceForm.get("clasico")?.value)
+      categories.push({ Id: 'CLA', Name: 'Clásico' });
+
+    if (this.preferenceForm.get("lujo")?.value)
+      categories.push({ Id: 'LUJ', Name: 'Económico' });
+
+    let companions: any[] = [];
+
+    if (this.preferenceForm.get("solo")?.value)
+      companions.push({ Id: 'SOL', Name: 'Solo' });
+
+    if (this.preferenceForm.get("pareja")?.value)
+      companions.push({ Id: 'PAR', Name: 'Pareja' });
+
+    if (this.preferenceForm.get("familia")?.value)
+      companions.push({ Id: 'FAM', Name: 'Familia' });
+
+    if (this.preferenceForm.get("amigos")?.value)
+      companions.push({ Id: 'AMI', Name: 'Amigos' });
 
     if (this.preferenceForm.valid) {
-      let data = this.preferenceForm.value
+      //TODO: 
+      // - El servicio soporta la propiedad de genero Gender.
+      // - El front tiene inputs de frecuencia de viajes al año.
+      // - El front tiene input de aceptacion de politicas de proteccion de datos.
 
-      let payload = {
+      const payload = {
         TrackingCode: Guid(),
         MuteExceptions: environment.muteExceptions,
         Caller: {
-          Company: "Agil",
-          Application: "Interagencias"
+          Company: CALLER_TYPE.company,
+          Application: CALLER_TYPE.application
         },
         Parameter: {
-          Firstname: data.nombres,
-          FatherLastname: data.apellidoPaterno,
-          MotherLastname: data.apellidoMaterno,
-          Email: data.email,
-          Gender: "M",
-          Phone: data.telefono,
-          Birthdate: data.anio + '-' + data.mes + '-' + data.dia,
-          Nationality: data.nacionalidad,
-          DocumentType: data.tipoDocumento,
-          DocumentNumber: data.numeroDocumento,
-          CountryId: 132,
-          DepartmentId: 14,
-          DistrictId: 1245,
-          Preferences: [
-            {
-              Id: "SHO",
-              Name: "Shopping"
-            }
-          ],
-          Categories: [
-            {
-              Id: "LUJ",
-              Name: "Lujo"
-            }
-          ],
-          Companions: [
-            {
-              Id: "PAR",
-              Name: "Pareja"
-            }
-          ],
-          DataAuthorization: true
+          Firstname: this.preferenceForm.get("nombres")?.value,
+          FatherLastname: this.preferenceForm.get("apellidoPaterno")?.value,
+          MotherLastname: this.preferenceForm.get("apellidoMaterno")?.value,
+          Email: this.preferenceForm.get("email")?.value,
+          Birthdate: `${this.preferenceForm.get("anio")?.value}-${this.preferenceForm.get("mes")?.value}-${this.preferenceForm.get("dia")?.value}`,
+          Nationality: this.preferenceForm.get("nacionalidad")?.value,
+          DocumentType: this.preferenceForm.get("tipoDocumento")?.value,
+          DocumentNumber: this.preferenceForm.get("numeroDocumento")?.value,
+          CountryId: Number(this.preferenceForm.get("pais")?.value),
+          DepartmentId: Number(this.preferenceForm.get("departamento")?.value),
+          DistrictId: Number(this.preferenceForm.get("distrito")?.value),
+          Preferences: preferences,
+          Categories: categories,
+          Companions: companions,
+          DataAuthorization: this.preferenceForm.get("autorizo")?.value
         }
       };
 
       this._preferenceService.preference(payload).subscribe({
         next: (response) => {
           if (response.Result.IsSuccess) {
+            //TODO: Mejorar el mensaje que retorna del servicio.
             this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
               verticalPosition: 'top',
               duration: 2000

@@ -2,7 +2,7 @@
   <div class="personalDocument">
     <div class="headerPortlet">
       <div class="titleBoxRight">Preferencias</div>
-      <div class="subtitleBoxRight">Datos de contacto</div>
+      <div class="subtitleBoxRight">Registra los datos de tus preferencias</div>
     </div>
     <form name="preferenceForm" [formGroup]="preferenceForm">
       <div class="content">
@@ -95,7 +95,7 @@
             <select class="form-select" formControlName="nacionalidad" aria-label="Default select example"
               [ngClass]="{isvalid : validatePreferenceForm('nacionalidad')}">
               <option value="" selected>Seleccione nacionalidad</option>
-              <option *ngFor="let elem of countries" [value]="elem.Id">
+              <option *ngFor="let elem of nationalities" [value]="elem.Iata">
                 {{ elem.Name }}
               </option>
             </select>
