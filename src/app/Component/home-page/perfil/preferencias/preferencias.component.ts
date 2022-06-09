@@ -16,16 +16,11 @@ import { environment } from 'src/environments/environment';
 export class PreferenciasComponent implements OnInit {
 
   preferenceForm: FormGroup;
-
-  errors: any[] = [];
   preferenceList: any[];
-  user: any;
-  userData: any;
   distritos: any;
   departamentos: any;
   countries: Array<any> = [];
   nationalities: Array<any> = [];
-
   years: Array<any> = [];
 
   constructor(
