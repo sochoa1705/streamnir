@@ -284,5 +284,6 @@ export class OptionalDataComponent implements OnInit {
 
   resetPreferenceForm(): void {
     this.preferenceForm.reset();
+    this.message = '';
   }
 }
