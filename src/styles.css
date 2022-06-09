@@ -4463,7 +4463,6 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .viajaBox {
   height: 550px;
-  margin-top: -60px;
   background-image: url("./assets/vuelos/footer-vuelos.png");
   background-color: #df0c30;
   background-repeat: no-repeat;
@@ -6597,6 +6596,8 @@ button.customers {
   color: #4b4b4b; }
 #ModalDatosOpcionales .portlet-der {
   margin: 0; }
+#ModalDatosOpcionales .headerPortlet .imgHead {
+  width: 100%; }
 #ModalDatosOpcionales input.form-control {
   margin-bottom: 0 !important; }
 @media (max-width: 640px) {

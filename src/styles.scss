@@ -5505,7 +5505,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .viajaBox {
     height: 550px;
-    margin-top: -60px;
+    //margin-top: -60px;
     background-image: url("./assets/vuelos/footer-vuelos.png");
     background-color: #df0c30;
     background-repeat: no-repeat;
@@ -8063,6 +8063,11 @@ button.customers {
     }
     .portlet-der {
         margin: 0;
+    }
+    .headerPortlet {
+        .imgHead {
+            width: 100%;
+        }
     }
     input.form-control {
         margin-bottom: 0 !important;
