@@ -8052,6 +8052,47 @@ button.customers {
 }
 
 #ModalDatosOpcionales {
+    .modal-header {
+        padding: 20px 2rem;
+    }
+    .modal-body {
+        .personalDocument {
+            border: none;
+            .headerPortlet {
+                padding: 0;
+                .titleBoxRight {
+                    margin: 10px 0;
+                }
+            }
+            .rowContent {
+                //padding: 0 6px 0px 26px;
+                .inputGroup {
+                    display: block !important;
+                }
+            }
+            .msgBox {
+                flex: 1 1 auto;
+                padding: 10px;
+                border-radius: 10px;
+                &.success {
+                    color: #306391;
+                    background-color: #dcedfc;
+                    border-color: #cbe4fb;
+                }
+            }
+            .mat-checkbox {
+                label {
+                    padding-bottom: 0!important;
+                }
+            }
+            span {
+                &.option {
+                    display: block;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
     .titleVerifica {
         font-family: "Open Sans";
         font-weight: 700;

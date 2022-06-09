@@ -6586,6 +6586,29 @@ button.customers {
         flex-direction: column;
         overflow: hidden; } }
 
+#ModalDatosOpcionales .modal-header {
+  padding: 20px 2rem; }
+#ModalDatosOpcionales .modal-body .personalDocument {
+  border: none; }
+  #ModalDatosOpcionales .modal-body .personalDocument .headerPortlet {
+    padding: 0; }
+    #ModalDatosOpcionales .modal-body .personalDocument .headerPortlet .titleBoxRight {
+      margin: 10px 0; }
+  #ModalDatosOpcionales .modal-body .personalDocument .rowContent .inputGroup {
+    display: block !important; }
+  #ModalDatosOpcionales .modal-body .personalDocument .msgBox {
+    flex: 1 1 auto;
+    padding: 10px;
+    border-radius: 10px; }
+    #ModalDatosOpcionales .modal-body .personalDocument .msgBox.success {
+      color: #306391;
+      background-color: #dcedfc;
+      border-color: #cbe4fb; }
+  #ModalDatosOpcionales .modal-body .personalDocument .mat-checkbox label {
+    padding-bottom: 0 !important; }
+  #ModalDatosOpcionales .modal-body .personalDocument span.option {
+    display: block;
+    margin-bottom: 10px; }
 #ModalDatosOpcionales .titleVerifica {
   font-family: "Open Sans";
   font-weight: 700;
