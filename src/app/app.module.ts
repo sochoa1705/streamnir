@@ -28,6 +28,7 @@ import { NewAccountModule } from './components/new-account/new-account.module';
 import { PerfilModule } from './Component/home-page/perfil/perfil.module';
 import { LoadingModule } from './components/loading/loading.module';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { OptionalDataModule } from './components/optional-data/optional-data.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -37,7 +38,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    MatCheckboxModule,
+    //MatCheckboxModule,
     MatSnackBarModule,
     MatDialogModule,
     NgbModule,
@@ -52,7 +53,8 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     ForgotPasswordModule,
     NewAccountModule,
     PerfilModule,
-    LoadingModule
+    LoadingModule,
+    OptionalDataModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
