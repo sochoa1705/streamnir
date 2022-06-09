@@ -8,7 +8,7 @@ import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { take } from 'rxjs/operators';
 import { ICardRequest, IFiltroVuelo } from './interfaces/comprar.interfaces';
 import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
-import { ActualizarCodigoSafetyPaySeguroRQ, RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
+import { ActualizarCodigoSafetyPaySeguroRQ, ActualizarEstadoSeguroRQ, RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
 import { Guid, toUp, Utilities } from 'src/app/shared/utils';
@@ -824,7 +824,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           this._secureBookingService.updateSafetypayPaymentCode(body).subscribe((response: any) => { });
 
           // TODO: Se comentará hasta la aprobación de Hugo Sanchez
-          // if (paymentMethod === PaymentMethodEnum.CreditCard) {
+          // if (paymentMethod === PaymentMethodEnum.CreditCard && result.Result.ServiceResponse.Status === 'APPROVED') {
           //   const parameters: ActualizarEstadoSeguroRQ = {
           //     res_seguro_id: this.reservation.Reserva,
           //     usosafetypay: 8
