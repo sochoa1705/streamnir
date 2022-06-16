@@ -8119,7 +8119,7 @@ app-flightdeals button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(270deg, #04074a 0%, #2a246d 100%);
+  background: linear-gradient(270deg, #b50a27 0%, #df0c30 100%);
   height: 100vh;
   width: 100%;
   gap: 100px;
@@ -8181,7 +8181,8 @@ app-flightdeals button {
       padding: 10px 20px;
       margin-top: 30px;
       cursor: pointer;
-      border: 1px solid #ffffff; }
+      border: 1px solid #ffffff;
+      color: #ffffff; }
       .containerError .msgError .boton:hover {
         background: #ffffff;
         color: #4b4b4b; }
