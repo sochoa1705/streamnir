@@ -424,6 +424,9 @@ section {
                         font-size: 14px;
                     }
                 }
+                .imgCovid {
+                    width: 60px;
+                }
                 a {
                     @include itemCard(500,
                     11px,
@@ -2547,7 +2550,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 .footerLink {
-    display: flex;
+    display: block;
     font-family: Montserrat;
     font-weight: normal;
     font-size: 12px;
@@ -2560,12 +2563,6 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         letter-spacing: 0.25px;
         color: #009aed;
         cursor: pointer;
-    }
-    @media (max-width: 990px) and (min-width: 640px) {
-        display: block;
-    }
-    @media (max-width: 640px) {
-        display: block;
     }
 }
 
@@ -4230,6 +4227,26 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+.onlydesktop {
+    display: flex !important;
+    @media (max-width: 990px) and (min-width: 640px) {
+        display: none!important;
+    }
+    @media (max-width: 640px) {
+        display: none!important;
+    }
+}
+
+.onlyMovTablet {
+    display: none!important;
+    @media (max-width: 990px) and (min-width: 640px) {
+        display: block!important;
+    }
+    @media (max-width: 640px) {
+        display: block!important;
+    }
+}
+
 @media (max-width: 640px) {
     #modalVerOpciones {
         .boxPlanes {
@@ -4582,6 +4599,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         background: #f6f7f9;
         .mat-horizontal-stepper-header-container {
             background: #ffffff;
+        }
+        @media (max-width: 990px) and (min-width: 640px) {
+            padding-top: 20px;
         }
     }
     .card_ .option {

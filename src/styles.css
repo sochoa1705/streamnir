@@ -305,6 +305,8 @@ section {
         text-transform: capitalize; }
         .card.seguro .card-body .covid:first-child {
           font-size: 14px; }
+      .card.seguro .card-body .imgCovid {
+        width: 60px; }
       .card.seguro .card-body a {
         font-weight: 500;
         font-size: 11px;
@@ -2047,7 +2049,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   display: none; }
 
 .footerLink {
-  display: flex;
+  display: block;
   font-family: Montserrat;
   font-weight: normal;
   font-size: 12px;
@@ -2060,12 +2062,6 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     letter-spacing: 0.25px;
     color: #009aed;
     cursor: pointer; }
-  @media (max-width: 990px) and (min-width: 640px) {
-    .footerLink {
-      display: block; } }
-  @media (max-width: 640px) {
-    .footerLink {
-      display: block; } }
 
 #politicaModal .modal-dialog,
 #reservaModal .modal-dialog {
@@ -3426,6 +3422,24 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .card .rowMobileCard {
   margin: 0; }
 
+.onlydesktop {
+  display: flex !important; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .onlydesktop {
+      display: none !important; } }
+  @media (max-width: 640px) {
+    .onlydesktop {
+      display: none !important; } }
+
+.onlyMovTablet {
+  display: none !important; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .onlyMovTablet {
+      display: block !important; } }
+  @media (max-width: 640px) {
+    .onlyMovTablet {
+      display: block !important; } }
+
 @media (max-width: 640px) {
   #modalVerOpciones .boxPlanes {
     gap: 15px; }
@@ -3714,8 +3728,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   .mat-stepper-horizontal {
     background: #f6f7f9; }
     .mat-stepper-horizontal .mat-horizontal-stepper-header-container {
-      background: #ffffff; }
+      background: #ffffff; } }
+  @media (max-width: 640px) and (max-width: 990px) and (min-width: 640px) {
+    .mat-stepper-horizontal {
+      padding-top: 20px; } }
 
+@media (max-width: 640px) {
   .card_ .option {
     margin-bottom: 20px;
     flex-wrap: nowrap !important;
