@@ -118,12 +118,8 @@
                     <div class="col-6 viewMobileWidth">
                       <label>Fecha de nacimiento</label>
 
-                      <div class="row  fecNacTab">
-                        <div class="col-2">
-                          <!-- <input class="form-control" minlength="1" maxlength="2" max="31" mask="0*"
-                            formControlName="dayCustomer" type="text" (keypress)="allowNumeric($event)"
-                            (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)"> -->
-
+                      <div class="row fecNacTab">
+                        <div class="col-3">
                           <select formControlName="dayCustomer" class="form-select-f">
                             <option value="">Día</option>
                             <option *ngFor="let day of days" value="{{day}}">{{day}}</option>
@@ -138,7 +134,7 @@
                           </select>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-3">
                           <select formControlName="yearCustomer" class="form-select-f">
                             <option value="" selected>Seleccione</option>
 
@@ -149,7 +145,6 @@
                           </select>
                         </div>
                       </div>
-
                     </div>
 
                     <div class="col-6 viewMobileWidth">
@@ -844,7 +839,7 @@
                     <label for="names">Fecha de nacimiento</label>
 
                     <div class="row">
-                      <div class="col-2">
+                      <div class="col-3">
                         <select formControlName="dayCustomer" class="form-select-f">
                           <option value="">Día</option>
                           <option *ngFor="let day of days" value="{{day}}">{{day}}</option>
@@ -853,15 +848,15 @@
 
                       <div class="col-6">
                         <select formControlName="monthCustomer" class="form-select-f">
-                          <option value="" selected>Seleccione</option>
+                          <option value="" selected>Mes</option>
                           <option *ngFor="let elem of months" [value]="elem.value">{{
                             elem.name }}</option>
                         </select>
                       </div>
 
-                      <div class="col-4">
+                      <div class="col-3">
                         <select formControlName="yearCustomer" class="form-select-f">
-                          <option value="" selected>Seleccione</option>
+                          <option value="" selected>Año</option>
 
                           <option value="{{this.resultJson['aniosNacimiento'][i].anio}}">
                             {{this.resultJson['aniosNacimiento'][i].anio}}</option>
