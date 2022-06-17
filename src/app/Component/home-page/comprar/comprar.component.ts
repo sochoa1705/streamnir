@@ -13,8 +13,6 @@ import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
 import { Guid, toUp, Utilities } from 'src/app/shared/utils';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { CardPaymentService } from 'src/app/Services/cardPayment/card-payment.service';
-import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
 import { CardService, PaymentService } from 'src/app/api/api-payment/services';
 import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/models';
 import * as moment from 'moment';
@@ -156,13 +154,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   ip: string = '';
 
+  days: any[] = [];
+
   constructor(
     private _router: Router,
     private _coverageService: CoverageService,
     private _loaderSubjectService: LoaderSubjectService,
     private _secureBookingService: SecureBookingService,
-    private _cardPaymentService: CardPaymentService,
-    private _generatePayService: GeneratePayService,
     private _paymentService: PaymentService,
     private _preferencesService: PreferenceService,
     private _validatorsService: ValidatorsService,
@@ -237,6 +235,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getIp();
+
+    let daysDef = 31;
+
+    for (let i = 1; i <= daysDef; i++) {
+      this.days.push(i);
+    }
+
     this.count = 0;
     this.countAdulto = 0;
     this.countInfante = 0;
@@ -339,7 +344,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       typeCustomer: [""],
       nameCustomer: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(this._validatorsService.lettersPattern)]],
       lastNameCustomer: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(this._validatorsService.lettersPattern)]],
-      dayCustomer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.min(1), Validators.max(31), Validators.pattern(this._validatorsService.digitsPattern)]],
+      //dayCustomer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.min(1), Validators.max(31), Validators.pattern(this._validatorsService.digitsPattern)]],
+      dayCustomer: ['', Validators.required],
       monthCustomer: ['', [Validators.required]],
       yearCustomer: ['', [Validators.required]],
       nationalityCustomer: ['', [Validators.required]],
