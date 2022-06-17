@@ -340,15 +340,15 @@
                     </div>
 
                     <div class="row card_pasajero rowMobileCard">
-                      <div class="col-6 viewMobileWidth">
+                      <div class="col-12 viewMobileWidth">
                         <label for="names">Dirección</label>
                         <input class="form-control" placeholder="Ingrese la dirección" type="text" name="names">
                       </div>
 
-                      <div class="col-6 textDire viewMobileWidth">
+                      <!-- <div class="col-6 textDire viewMobileWidth">
                         <label for="names"></label>
                         <div>Emisión en max 24hrs aprox.</div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
 
@@ -400,8 +400,9 @@
 
                       <div class="row py-4 marginLat">
                         <div class="col-6 ">
-                          <a class="btnRed" href="#">Emisión automática después del pago.
-                          </a>
+                          <span
+                            style="font-family: Montserrat; font-weight: 600; font-size: 14px; line-height: 21px; letter-spacing: 0.1px; color: #df0c30;">Emisión
+                            automática después del pago.</span>
                         </div>
 
                         <div class="col-6 text-end">
@@ -1065,17 +1066,17 @@
                   </div>
 
                   <div class="row card_pasajero rowMobileCard pb-sm-4">
-                    <div class="col-6 viewMobileWidth">
+                    <div class="col-12 viewMobileWidth">
                       <label for="names">Dirección</label>
 
                       <input class="form-control" formControlName="address" placeholder="Ingrese la dirección"
                         type="text" name="names">
                     </div>
 
-                    <div class="col-6 textDire viewMobileWidth">
+                    <!-- <div class="col-6 textDire viewMobileWidth">
                       <label for="names"></label>
                       <div>Emisión en max 24hrs aprox.</div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 <!-- END FORM TARJETA -->
@@ -1130,8 +1131,10 @@
                     </div>
 
                     <div class="row py-4 marginLat">
-                      <div class="col-6 ">
-                        <a class="btnRed" href="#">Emisión automática después del pago.</a>
+                      <div class="col-6">
+                        <span
+                          style="font-family: Montserrat; font-weight: 600; font-size: 14px; line-height: 21px; letter-spacing: 0.1px; color: #df0c30;">Emisión
+                          automática después del pago.</span>
                       </div>
                       <div class="col-6 text-end">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#ModalBlue">¿Como pagar con SafetyPay
@@ -1671,7 +1674,7 @@
         </p>
 
         <p>Mayor información sobre la política de protección y tratamiento de datos
-          <a class="redLink" href="#">aquí.</a>
+          <a routerLink="/politicas" target="_blank">aquí.</a>
         </p>
       </div>
     </div>
