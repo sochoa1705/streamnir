@@ -939,6 +939,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           this._messageService.v1ApiMessageSendConfirmacionSeguroPost({ body: notificationBody }).subscribe((res: CeResponse) => {
             if (res.State.Ok) {
+              this.pressedToBuy = false;
+
               this._loaderSubjectService.closeLoader();
 
               this._router.navigateByUrl('/conformidad');
