@@ -88,6 +88,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   banca: boolean = true
 
   pressedToBuy: boolean = false;
+  callFirstService: boolean = false;
 
   banks = [
     { name: 'Banco de Crédito', value: 1005 },
@@ -635,6 +636,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   buyInsurance(): void {
+    this.pressedToBuy = true;
+    this.callFirstService = true;
+
     console.log('1. buyInsurance');
 
     if (this.formShop.invalid)
@@ -648,8 +652,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
       return;
-
-    this.pressedToBuy = true;
 
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
     this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioEmisionLocal));
@@ -676,6 +678,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       //console.log('Codigo de reserva:', this.reservation);
 
       this._loaderSubjectService.closeLoader();
+
+      this.callFirstService = false;
 
       this.makePayment(data);
     })
