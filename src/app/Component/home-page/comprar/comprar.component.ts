@@ -824,16 +824,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           this._secureBookingService.updateSafetypayPaymentCode(body).subscribe((response: any) => { });
 
           // TODO: Se comentará hasta la aprobación de Hugo Sanchez
-          // if (paymentMethod === PaymentMethodEnum.CreditCard && result.Result.ServiceResponse.Status === 'APPROVED') {
-          //   const parameters: ActualizarEstadoSeguroRQ = {
-          //     res_seguro_id: this.reservation.Reserva,
-          //     usosafetypay: 8
-          //   };
+          if (paymentMethod === PaymentMethodEnum.CreditCard && result.Result.ServiceResponse.Status === 'APPROVED') {
+            const parameters: ActualizarEstadoSeguroRQ = {
+              res_seguro_id: this.reservation.Reserva,
+              usosafetypay: 8
+            };
 
-          //   const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
+            const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
 
-          //   this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
-          // }
+            this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
+          }
 
           const fechasalida = this.resultJson.fromDate.split('/');
           const fecharetorno = this.resultJson.toDate.split('/');
