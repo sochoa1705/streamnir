@@ -10090,6 +10090,31 @@ app-flightdeals {
     }
 }
 
+.boxAlertMsg {
+    padding: 15px 20px;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 30px;
+    &.warning {
+        border-radius: 5px;
+        background: #fff3cd;
+        border: 1px solid #ffecb5;
+        box-sizing: border-box;
+        color: #664d03;
+    }
+    &.error {
+        color: #924040;
+        background: #fde1e1;
+        border: 1px solid #fcd2d2;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    img {
+        margin-right: 12px;
+    }
+}
+
 // X-Large devices (large desktops, 1200px and up)
 // @media (min-width: 1200px) {
 //     .container-fluid {
