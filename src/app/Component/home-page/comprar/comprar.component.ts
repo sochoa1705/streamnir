@@ -156,6 +156,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   days: any[] = [];
 
+  replyMessage: string = '';
+
   constructor(
     private _router: Router,
     private _coverageService: CoverageService,
@@ -833,7 +835,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           this._secureBookingService.updateSafetypayPaymentCode(body).subscribe((response: any) => { });
 
-          // TODO: Se comentará hasta la aprobación de Hugo Sanchez
           if (paymentMethod === PaymentMethodEnum.CreditCard && result.Result.ServiceResponse.Status === 'APPROVED') {
             const parameters: ActualizarEstadoSeguroRQ = {
               res_seguro_id: this.reservation.Reserva,
@@ -957,10 +958,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           });
         }
+        else {
+          // CAVH: Entra en el caso de pago con tarjeta: La transacci\u00F3n fue rechazada por el sistema anti-fraude.
+          this.replyMessage = "No se pudo realizar la transacción con la tarjeta ingresada, por favor intente con otro medio de pago.";
+        }
       },
       error: (err) => {
         console.log('Error en el registro del pago');
         console.log(err);
+
+        this.replyMessage = "No se pudo realizar la transacción con la tarjeta ingresada, por favor intente con otro medio de pago.";
 
         this._loaderSubjectService.closeLoader();
       }

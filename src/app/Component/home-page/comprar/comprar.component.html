@@ -166,6 +166,7 @@
                         (change)="onChangeOfficialDocument(i)">
                         <option value="" selected>Seleccione</option>
                         <option value="DNI">DNI</option>
+                        <option value="PSP">Pasaporte</option>
                         <option value="CEX">C. Extranjería</option>
                       </select>
                     </div>
@@ -753,6 +754,11 @@
                     <pre>direccion errors</pre>
                     <pre>{{ contactForm.controls.direccion.errors | json }}</pre> -->
 
+            <div class="boxHelp" *ngIf="replyMessage.length > 0">
+              <div class="iconArrow"><img src="./assets/svg/arrow-left.svg" alt=""></div>
+              <div class="descrip">{{replyMessage}}</div>
+            </div>
+
             <div class="row rowMobileCard ">
               <div class="col-12 contentCenterMobile">
                 <button mat-button class="px-5" id="btnComprar1" [disabled]="pressedToBuy"
@@ -887,6 +893,7 @@
                       (change)="onChangeOfficialDocument(i)">
                       <option value="" selected>Seleccione</option>
                       <option value="DNI">DNI</option>
+                      <option value="PSP">Pasaporte</option>
                       <option value="CEX">C. Extranjería</option>
                     </select>
                   </div>
@@ -1477,6 +1484,10 @@
           <pre>direccion errors</pre>
           <pre>{{ contactForm.controls.direccion.errors | json }}</pre> -->
 
+          <div class="boxHelp" *ngIf="replyMessage.length > 0">
+            <div class="iconArrow"><img src="./assets/svg/arrow-left.svg" alt=""></div>
+            <div class="descrip">{{replyMessage}}</div>
+          </div>
 
           <div class="row rowMobileCard ">
             <div class="col-12 contentCenterMobile">
