@@ -961,6 +961,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         else {
           // CAVH: Entra en el caso de pago con tarjeta: La transacci\u00F3n fue rechazada por el sistema anti-fraude.
           this.replyMessage = "No se pudo realizar la transacción con la tarjeta ingresada, por favor intente con otro medio de pago.";
+          this.pressedToBuy = false;
         }
       },
       error: (err) => {
@@ -968,6 +969,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         console.log(err);
 
         this.replyMessage = "No se pudo realizar la transacción con la tarjeta ingresada, por favor intente con otro medio de pago.";
+        this.pressedToBuy = false;
 
         this._loaderSubjectService.closeLoader();
       }
