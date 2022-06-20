@@ -3517,6 +3517,17 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       display: none; }
       .card_pasajero .rowMobileCard.hideMobile.activoBox {
         display: flex; }
+    .card_pasajero .rowMobileCard .fecNacTab {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin: 0; }
+      .card_pasajero .rowMobileCard .fecNacTab .col-3,
+      .card_pasajero .rowMobileCard .fecNacTab .col-6 {
+        width: 100% !important;
+        margin: 0;
+        padding: 0; }
   .card_pasajero label {
     font-size: 12px !important; }
   .card_pasajero .form-check-label {

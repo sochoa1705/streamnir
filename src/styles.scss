@@ -4347,6 +4347,19 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     display: flex;
                 }
             }
+            .fecNacTab {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                margin: 0;
+                .col-3,
+                .col-6 {
+                    width: 100% !important;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
         }
         label {
             font-size: 12px !important;
