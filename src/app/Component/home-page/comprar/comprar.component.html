@@ -1370,7 +1370,7 @@
 
                   <div class="col-12 viewMobileWidth">
                     <label for="direccion">Dirección</label>
-                    <input formControlName="direccion" class="form-control"
+                    <input formControlName="direccion" class="form-control" maxlength="100"
                       [ngClass]="{isvalid : validateContactForm('direccion')}" placeholder="Ca. / Jr. / Av.">
 
                     <span class="valid" *ngIf="validateContactForm('direccion')">

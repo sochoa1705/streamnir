@@ -128,7 +128,7 @@
               <div class="nroDoc">
                 <span class="">N° de documento</span>
                 <input type="text" class="form-control" formControlName="numeroDocumento" placeholder="Ingresar Nro"
-                  [ngClass]="{isvalid : validatePreferenceForm('numeroDocumento')}">
+                  maxlength="12" [ngClass]="{isvalid : validatePreferenceForm('numeroDocumento')}">
 
                 <span class="valid" *ngIf="validatePreferenceForm('numeroDocumento')">
                   Ingresa tu número de documento
