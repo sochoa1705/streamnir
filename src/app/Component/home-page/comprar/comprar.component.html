@@ -345,7 +345,8 @@
                     <div class="row card_pasajero rowMobileCard">
                       <div class="col-12 viewMobileWidth">
                         <label for="names">Dirección</label>
-                        <input class="form-control" placeholder="Ingrese la dirección" type="text" name="names">
+                        <input class="form-control" placeholder="Ingrese la dirección" type="text" name="names"
+                          maxlength="100">
                       </div>
 
                       <!-- <div class="col-6 textDire viewMobileWidth">
@@ -660,7 +661,7 @@
 
                     <div class="col-8 viewMobileWidth">
                       <label for="dirección">Dirección</label>
-                      <input formControlName="direccion" class="form-control"
+                      <input formControlName="direccion" class="form-control" maxlength="100"
                         [ngClass]="{isvalid : validateContactForm('direccion')}" placeholder="Ca. / Jr. / Av.">
 
                       <span class="valid" *ngIf="validateContactForm('direccion')">

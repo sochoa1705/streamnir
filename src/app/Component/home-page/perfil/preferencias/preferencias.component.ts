@@ -109,7 +109,7 @@ export class PreferenciasComponent implements OnInit {
       anio: ['', [Validators.required]],
       nacionalidad: ['', [Validators.required]],
       tipoDocumento: ['', [Validators.required]],
-      numeroDocumento: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this._validatorsService.digitsPattern)]],
+      numeroDocumento: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern(this._validatorsService.alphanumericPattern)]],
       pais: ['', [Validators.required]],
       departamento: [''],
       distrito: [''],
