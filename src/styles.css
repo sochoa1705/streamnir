@@ -305,6 +305,8 @@ section {
         text-transform: capitalize; }
         .card.seguro .card-body .covid:first-child {
           font-size: 14px; }
+      .card.seguro .card-body .imgCovid {
+        width: 60px; }
       .card.seguro .card-body a {
         font-weight: 500;
         font-size: 11px;
@@ -2047,7 +2049,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   display: none; }
 
 .footerLink {
-  display: flex;
+  display: block;
   font-family: Montserrat;
   font-weight: normal;
   font-size: 12px;
@@ -2060,12 +2062,6 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     letter-spacing: 0.25px;
     color: #009aed;
     cursor: pointer; }
-  @media (max-width: 990px) and (min-width: 640px) {
-    .footerLink {
-      display: block; } }
-  @media (max-width: 640px) {
-    .footerLink {
-      display: block; } }
 
 #politicaModal .modal-dialog,
 #reservaModal .modal-dialog {
@@ -2873,8 +2869,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   margin-bottom: 10px; }
 
 .form-check-inline {
-  display: flex;
-  align-items: center; }
+  display: flex; }
   .form-check-inline .form-check-input {
     margin-right: 10px;
     margin-bottom: 5px; }
@@ -3426,6 +3421,24 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .card .rowMobileCard {
   margin: 0; }
 
+.onlydesktop {
+  display: flex !important; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .onlydesktop {
+      display: none !important; } }
+  @media (max-width: 640px) {
+    .onlydesktop {
+      display: none !important; } }
+
+.onlyMovTablet {
+  display: none !important; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .onlyMovTablet {
+      display: block !important; } }
+  @media (max-width: 640px) {
+    .onlyMovTablet {
+      display: block !important; } }
+
 @media (max-width: 640px) {
   #modalVerOpciones .boxPlanes {
     gap: 15px; }
@@ -3503,6 +3516,17 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       display: none; }
       .card_pasajero .rowMobileCard.hideMobile.activoBox {
         display: flex; }
+    .card_pasajero .rowMobileCard .fecNacTab {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin: 0; }
+      .card_pasajero .rowMobileCard .fecNacTab .col-3,
+      .card_pasajero .rowMobileCard .fecNacTab .col-6 {
+        width: 100% !important;
+        margin: 0;
+        padding: 0; }
   .card_pasajero label {
     font-size: 12px !important; }
   .card_pasajero .form-check-label {
@@ -3714,8 +3738,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   .mat-stepper-horizontal {
     background: #f6f7f9; }
     .mat-stepper-horizontal .mat-horizontal-stepper-header-container {
-      background: #ffffff; }
+      background: #ffffff; } }
+  @media (max-width: 640px) and (max-width: 990px) and (min-width: 640px) {
+    .mat-stepper-horizontal {
+      padding-top: 20px; } }
 
+@media (max-width: 640px) {
   .card_ .option {
     margin-bottom: 20px;
     flex-wrap: nowrap !important;
@@ -4463,7 +4491,6 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .viajaBox {
   height: 550px;
-  margin-top: -60px;
   background-image: url("./assets/vuelos/footer-vuelos.png");
   background-color: #df0c30;
   background-repeat: no-repeat;
@@ -6587,6 +6614,29 @@ button.customers {
         flex-direction: column;
         overflow: hidden; } }
 
+#ModalDatosOpcionales .modal-header {
+  padding: 20px 2rem; }
+#ModalDatosOpcionales .modal-body .personalDocument {
+  border: none; }
+  #ModalDatosOpcionales .modal-body .personalDocument .headerPortlet {
+    padding: 0; }
+    #ModalDatosOpcionales .modal-body .personalDocument .headerPortlet .titleBoxRight {
+      margin: 10px 0; }
+  #ModalDatosOpcionales .modal-body .personalDocument .rowContent .inputGroup {
+    display: block !important; }
+  #ModalDatosOpcionales .modal-body .personalDocument .msgBox {
+    flex: 1 1 auto;
+    padding: 10px;
+    border-radius: 10px; }
+    #ModalDatosOpcionales .modal-body .personalDocument .msgBox.success {
+      color: #306391;
+      background-color: #dcedfc;
+      border-color: #cbe4fb; }
+  #ModalDatosOpcionales .modal-body .personalDocument .mat-checkbox label {
+    padding-bottom: 0 !important; }
+  #ModalDatosOpcionales .modal-body .personalDocument span.option {
+    display: block;
+    margin-bottom: 10px; }
 #ModalDatosOpcionales .titleVerifica {
   font-family: "Open Sans";
   font-weight: 700;
@@ -6597,6 +6647,8 @@ button.customers {
   color: #4b4b4b; }
 #ModalDatosOpcionales .portlet-der {
   margin: 0; }
+#ModalDatosOpcionales .headerPortlet .imgHead {
+  width: 100%; }
 #ModalDatosOpcionales input.form-control {
   margin-bottom: 0 !important; }
 @media (max-width: 640px) {
@@ -8095,7 +8147,7 @@ app-flightdeals button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(270deg, #04074a 0%, #2a246d 100%);
+  background: linear-gradient(270deg, #b50a27 0%, #df0c30 100%);
   height: 100vh;
   width: 100%;
   gap: 100px;
@@ -8157,7 +8209,8 @@ app-flightdeals button {
       padding: 10px 20px;
       margin-top: 30px;
       cursor: pointer;
-      border: 1px solid #ffffff; }
+      border: 1px solid #ffffff;
+      color: #ffffff; }
       .containerError .msgError .boton:hover {
         background: #ffffff;
         color: #4b4b4b; }
@@ -8173,3 +8226,24 @@ app-flightdeals button {
       @media (max-width: 640px) {
         .containerError .msgError .boton {
           font-size: 12px; } }
+
+.boxAlertMsg {
+  padding: 15px 20px;
+  text-align: center;
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 30px; }
+  .boxAlertMsg.warning {
+    border-radius: 5px;
+    background: #fff3cd;
+    border: 1px solid #ffecb5;
+    box-sizing: border-box;
+    color: #664d03; }
+  .boxAlertMsg.error {
+    color: #924040;
+    background: #fde1e1;
+    border: 1px solid #fcd2d2;
+    border-radius: 5px;
+    box-sizing: border-box; }
+  .boxAlertMsg img {
+    margin-right: 12px; }

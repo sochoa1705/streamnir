@@ -8,13 +8,11 @@ import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { take } from 'rxjs/operators';
 import { ICardRequest, IFiltroVuelo } from './interfaces/comprar.interfaces';
 import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
-import { ActualizarCodigoSafetyPaySeguroRQ, RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
+import { ActualizarCodigoSafetyPaySeguroRQ, ActualizarEstadoSeguroRQ, RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
 import { Guid, toUp, Utilities } from 'src/app/shared/utils';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { CardPaymentService } from 'src/app/Services/cardPayment/card-payment.service';
-import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
 import { CardService, PaymentService } from 'src/app/api/api-payment/services';
 import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/models';
 import * as moment from 'moment';
@@ -88,6 +86,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   banca: boolean = true
 
   pressedToBuy: boolean = false;
+  callFirstService: boolean = false;
 
   banks = [
     { name: 'Banco de Crédito', value: 1005 },
@@ -155,13 +154,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   ip: string = '';
 
+  days: any[] = [];
+
+  replyMessage: string = '';
+
   constructor(
     private _router: Router,
     private _coverageService: CoverageService,
     private _loaderSubjectService: LoaderSubjectService,
     private _secureBookingService: SecureBookingService,
-    private _cardPaymentService: CardPaymentService,
-    private _generatePayService: GeneratePayService,
     private _paymentService: PaymentService,
     private _preferencesService: PreferenceService,
     private _validatorsService: ValidatorsService,
@@ -236,6 +237,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getIp();
+
+    let daysDef = 31;
+
+    for (let i = 1; i <= daysDef; i++) {
+      this.days.push(i);
+    }
+
     this.count = 0;
     this.countAdulto = 0;
     this.countInfante = 0;
@@ -338,7 +346,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       typeCustomer: [""],
       nameCustomer: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(this._validatorsService.lettersPattern)]],
       lastNameCustomer: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(this._validatorsService.lettersPattern)]],
-      dayCustomer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.min(1), Validators.max(31), Validators.pattern(this._validatorsService.digitsPattern)]],
+      //dayCustomer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.min(1), Validators.max(31), Validators.pattern(this._validatorsService.digitsPattern)]],
+      dayCustomer: ['', Validators.required],
       monthCustomer: ['', [Validators.required]],
       yearCustomer: ['', [Validators.required]],
       nationalityCustomer: ['', [Validators.required]],
@@ -405,12 +414,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   public validarTarjeta(): void {
+    debugger
+
     this.checkedCard = false;
     this.setCardsDefault();
     this.checkCardService();
   }
 
   private setCardsDefault() {
+    debugger
+
     this.isVisa = false;
     this.isMasterCard = false;
     this.isAmericanExpress = false;
@@ -635,21 +648,24 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   buyInsurance(): void {
+    this.pressedToBuy = true;
+    this.callFirstService = true;
+
+    debugger
+
     console.log('1. buyInsurance');
 
-    if (this.formShop.invalid)
-      this.formShop.markAllAsTouched();
+    // if (this.formShop.invalid)
+    //   this.formShop.markAllAsTouched();
 
-    if (this.paymentMethodForm.invalid)
-      this.paymentMethodForm.markAllAsTouched();
+    // if (this.paymentMethodForm.invalid)
+    //   this.paymentMethodForm.markAllAsTouched();
 
-    if (this.contactForm.invalid)
-      this.contactForm.markAllAsTouched();
+    // if (this.contactForm.invalid)
+    //   this.contactForm.markAllAsTouched();
 
-    if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
-      return;
-
-    this.pressedToBuy = true;
+    // if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
+    //   return;
 
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
     this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioEmisionLocal));
@@ -676,6 +692,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       //console.log('Codigo de reserva:', this.reservation);
 
       this._loaderSubjectService.closeLoader();
+
+      this.callFirstService = false;
 
       this.makePayment(data);
     })
@@ -704,6 +722,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   generatePayloadForInsurance(data: any): RegistrarSeguroRQ {
 
     console.log('generatePayloadForInsurance');
+    console.log(`${data.contactForm.typePhone0},51,1,${data.contactForm.numberPhone0}`);
+
 
     this.getPassengerAges();
 
@@ -732,11 +752,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       contacto_ape: data.contactForm.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_email: data.contactForm.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
       contacto_direccion: (data.contactForm.invoiceRequestBox) ? data.contactForm.direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_telfs: ',,,;',//data.contactForm.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
+      contacto_telfs: `${data.contactForm.typePhone0},51,1,${data.contactForm.numberPhone0}`,//',,,;',//data.contactForm.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
       contacto_emerg_nom: data.contactForm.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_ape: data.contactForm.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_email: data.contactForm.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
-      contacto_emerg_telf: data.contactForm.numberPhone0,    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
+      contacto_emerg_telf: '',    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
       ruc: (data.contactForm.invoiceRequestBox) ? `RUC-${data.contactForm.ruc}` : `${data.customers[0].typeDocCustomer}-${data.customers[0].numDocCustomer}`, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
       razon_social: (data.contactForm.invoiceRequestBox) ? data.contactForm.razonSocial : '',  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
       direccion_fiscal: (data.contactForm.invoiceRequestBox) ? data.contactForm.direccion : '', // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
@@ -823,17 +843,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           this._secureBookingService.updateSafetypayPaymentCode(body).subscribe((response: any) => { });
 
-          // TODO: Se comentará hasta la aprobación de Hugo Sanchez
-          // if (paymentMethod === PaymentMethodEnum.CreditCard) {
-          //   const parameters: ActualizarEstadoSeguroRQ = {
-          //     res_seguro_id: this.reservation.Reserva,
-          //     usosafetypay: 8
-          //   };
+          if (paymentMethod === PaymentMethodEnum.CreditCard && result.Result.ServiceResponse.Status === 'APPROVED') {
+            const parameters: ActualizarEstadoSeguroRQ = {
+              res_seguro_id: this.reservation.Reserva,
+              usosafetypay: 8
+            };
 
-          //   const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
+            const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
 
-          //   this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
-          // }
+            this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
+          }
 
           const fechasalida = this.resultJson.fromDate.split('/');
           const fecharetorno = this.resultJson.toDate.split('/');
@@ -939,16 +958,26 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           this._messageService.v1ApiMessageSendConfirmacionSeguroPost({ body: notificationBody }).subscribe((res: CeResponse) => {
             if (res.State.Ok) {
+              this.pressedToBuy = false;
+
               this._loaderSubjectService.closeLoader();
 
               this._router.navigateByUrl('/conformidad');
             }
           });
         }
+        else {
+          // CAVH: Entra en el caso de pago con tarjeta: La transacci\u00F3n fue rechazada por el sistema anti-fraude.
+          this.replyMessage = "No se pudo realizar la transacción con la tarjeta ingresada, por favor intente con otro medio de pago.";
+          this.pressedToBuy = false;
+        }
       },
       error: (err) => {
         console.log('Error en el registro del pago');
         console.log(err);
+
+        this.replyMessage = "No se pudo realizar la transacción con la tarjeta ingresada, por favor intente con otro medio de pago.";
+        this.pressedToBuy = false;
 
         this._loaderSubjectService.closeLoader();
       }

@@ -16,9 +16,6 @@ import { ContactoService } from './contacto.service';
 })
 export class ContactoComponent implements OnInit {
 
-  agregaTelefono = false;
-  agregaEmail = false;
-
   userId: number;
 
   contactInformationForm: FormGroup;
@@ -41,7 +38,6 @@ export class ContactoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.userStorage = this._accountsService.getUserStorage();
 
     this.contactInformationForm = this.createContactInformationForm();
@@ -220,15 +216,5 @@ export class ContactoComponent implements OnInit {
         complete: () => { }
       });
     }
-  }
-
-  showAgregaEmail(valElem: boolean) {
-    this.agregaEmail = valElem;
-    //console.log(this.agregaEmail);
-  }
-
-  showAgregaTelefono(valElem: boolean) {
-    this.agregaTelefono = valElem;
-    //console.log(this.agregaTelefono);
   }
 }

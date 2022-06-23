@@ -16,13 +16,13 @@
                     </ng-container>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
             </div>
         </div>
         <div class="col-md-6 col-12">
@@ -34,22 +34,23 @@
                         </div>
                     </ng-container>
                 </div>
-                <div class="clearfix"></div>
             </div>
         </div>
-        <div class="clearfix"></div>
     </aside>
 </section>
 
-
+<!-- MAILING -->
+<ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+    <app-mailing *ngIf="section.section === 'mailing'" [title]="section.title" [span]="section.span"></app-mailing>
+</ng-container>
+<!-- END MAILING -->
 
 <!-- PUBLICIDAD -->
 <div class="container-fluid">
     <div class="row mb-md-5 ">
         <div *ngFor="let img of banners_corps; let i = index" class="col-md-6 col-12 publicidad">
-            <img  [ngClass]="{'pointer': img.RedirectLink}" (click)="toSlider(img, 'banner', i, banners_corps.length)" [src]="img.PathImage"  [alt]="img.NameImage">
+            <img [ngClass]="{'pointer': img.RedirectLink}" (click)="toSlider(img, 'banner', i, banners_corps.length)" [src]="img.PathImage" [alt]="img.NameImage">
         </div>
     </div>
 </div>
-
 <!-- END PUBLICIDAD -->

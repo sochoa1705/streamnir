@@ -424,6 +424,9 @@ section {
                         font-size: 14px;
                     }
                 }
+                .imgCovid {
+                    width: 60px;
+                }
                 a {
                     @include itemCard(500,
                     11px,
@@ -2547,7 +2550,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 .footerLink {
-    display: flex;
+    display: block;
     font-family: Montserrat;
     font-weight: normal;
     font-size: 12px;
@@ -2560,12 +2563,6 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         letter-spacing: 0.25px;
         color: #009aed;
         cursor: pointer;
-    }
-    @media (max-width: 990px) and (min-width: 640px) {
-        display: block;
-    }
-    @media (max-width: 640px) {
-        display: block;
     }
 }
 
@@ -3536,7 +3533,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .form-check-inline {
     display: flex;
-    align-items: center;
+    //align-items: center;
     .form-check-input {
         margin-right: 10px;
         margin-bottom: 5px;
@@ -4230,6 +4227,26 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+.onlydesktop {
+    display: flex !important;
+    @media (max-width: 990px) and (min-width: 640px) {
+        display: none!important;
+    }
+    @media (max-width: 640px) {
+        display: none!important;
+    }
+}
+
+.onlyMovTablet {
+    display: none!important;
+    @media (max-width: 990px) and (min-width: 640px) {
+        display: block!important;
+    }
+    @media (max-width: 640px) {
+        display: block!important;
+    }
+}
+
 @media (max-width: 640px) {
     #modalVerOpciones {
         .boxPlanes {
@@ -4328,6 +4345,19 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 display: none;
                 &.activoBox {
                     display: flex;
+                }
+            }
+            .fecNacTab {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                margin: 0;
+                .col-3,
+                .col-6 {
+                    width: 100% !important;
+                    margin: 0;
+                    padding: 0;
                 }
             }
         }
@@ -4582,6 +4612,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         background: #f6f7f9;
         .mat-horizontal-stepper-header-container {
             background: #ffffff;
+        }
+        @media (max-width: 990px) and (min-width: 640px) {
+            padding-top: 20px;
         }
     }
     .card_ .option {
@@ -5505,7 +5538,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .viajaBox {
     height: 550px;
-    margin-top: -60px;
+    //margin-top: -60px;
     background-image: url("./assets/vuelos/footer-vuelos.png");
     background-color: #df0c30;
     background-repeat: no-repeat;
@@ -8052,6 +8085,47 @@ button.customers {
 }
 
 #ModalDatosOpcionales {
+    .modal-header {
+        padding: 20px 2rem;
+    }
+    .modal-body {
+        .personalDocument {
+            border: none;
+            .headerPortlet {
+                padding: 0;
+                .titleBoxRight {
+                    margin: 10px 0;
+                }
+            }
+            .rowContent {
+                //padding: 0 6px 0px 26px;
+                .inputGroup {
+                    display: block !important;
+                }
+            }
+            .msgBox {
+                flex: 1 1 auto;
+                padding: 10px;
+                border-radius: 10px;
+                &.success {
+                    color: #306391;
+                    background-color: #dcedfc;
+                    border-color: #cbe4fb;
+                }
+            }
+            .mat-checkbox {
+                label {
+                    padding-bottom: 0!important;
+                }
+            }
+            span {
+                &.option {
+                    display: block;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
     .titleVerifica {
         font-family: "Open Sans";
         font-weight: 700;
@@ -8063,6 +8137,11 @@ button.customers {
     }
     .portlet-der {
         margin: 0;
+    }
+    .headerPortlet {
+        .imgHead {
+            width: 100%;
+        }
     }
     input.form-control {
         margin-bottom: 0 !important;
@@ -9932,7 +10011,7 @@ app-flightdeals {
     align-items: center;
     justify-content: center;
     //background: linear-gradient(270deg, #9DB6C8 0%, #B6CAD7 100%);
-    background: linear-gradient(270deg, #04074a 0%, #2a246d 100%);
+    background: linear-gradient(270deg, #b50a27 0%, #df0c30 100%);
     height: 100vh;
     width: 100%;
     gap: 100px;
@@ -10000,6 +10079,7 @@ app-flightdeals {
             margin-top: 30px;
             cursor: pointer;
             border: 1px solid #ffffff;
+            color: #ffffff;
             &:hover {
                 background: #ffffff;
                 color: #4b4b4b;
@@ -10020,6 +10100,31 @@ app-flightdeals {
                 font-size: 12px;
             }
         }
+    }
+}
+
+.boxAlertMsg {
+    padding: 15px 20px;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 30px;
+    &.warning {
+        border-radius: 5px;
+        background: #fff3cd;
+        border: 1px solid #ffecb5;
+        box-sizing: border-box;
+        color: #664d03;
+    }
+    &.error {
+        color: #924040;
+        background: #fde1e1;
+        border: 1px solid #fcd2d2;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    img {
+        margin-right: 12px;
     }
 }
 

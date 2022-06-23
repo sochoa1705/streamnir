@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
@@ -9,11 +9,11 @@ import { ValidatorsService } from 'src/app/shared/validators/validators.service'
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-preferencias',
-  templateUrl: './preferencias.component.html',
-  styleUrls: ['./preferencias.component.scss']
+  selector: 'app-optional-data',
+  templateUrl: './optional-data.component.html',
+  styleUrls: ['./optional-data.component.scss']
 })
-export class PreferenciasComponent implements OnInit {
+export class OptionalDataComponent implements OnInit {
 
   preferenceForm: FormGroup;
   preferenceList: any[];
@@ -22,18 +22,16 @@ export class PreferenciasComponent implements OnInit {
   countries: Array<any> = [];
   nationalities: Array<any> = [];
   years: Array<any> = [];
+  message: string = '';
 
   constructor(
     private _preferenceService: PreferenceService,
     private _validatorsService: ValidatorsService,
     private _formBuilder: FormBuilder,
     private _matSnackBar: MatSnackBar
-  ) {
-
-  }
+  ) { }
 
   ngOnInit(): void {
-
     this.preferenceForm = this.createPreferenceForm();
 
     this.getCountries();
@@ -109,7 +107,7 @@ export class PreferenciasComponent implements OnInit {
       anio: ['', [Validators.required]],
       nacionalidad: ['', [Validators.required]],
       tipoDocumento: ['', [Validators.required]],
-      numeroDocumento: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern(this._validatorsService.alphanumericPattern)]],
+      numeroDocumento: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this._validatorsService.digitsPattern)]],
       pais: ['', [Validators.required]],
       departamento: [''],
       distrito: [''],
@@ -266,17 +264,11 @@ export class PreferenciasComponent implements OnInit {
         next: (response) => {
           if (response.Result.IsSuccess) {
             //TODO: Mejorar el mensaje que retorna del servicio.
-            this._matSnackBar.open(`${response.Result.Message}`, 'OK', {
-              verticalPosition: 'top',
-              duration: 2000
-            });
+
+            this.message = response.Result.Message;
           }
-          else {
-            this._matSnackBar.open('Error en el registro de preferencias', 'OK', {
-              verticalPosition: 'top',
-              duration: 2000
-            });
-          }
+          else
+            this.message = 'Error en el registro de preferencias';
         }
       })
     }
@@ -288,5 +280,10 @@ export class PreferenciasComponent implements OnInit {
     for (let index = currentYear - 100; index < currentYear; index++) {
       this.years.push(index);
     }
+  }
+
+  resetPreferenceForm(): void {
+    this.preferenceForm.reset();
+    this.message = '';
   }
 }

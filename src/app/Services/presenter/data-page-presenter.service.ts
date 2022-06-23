@@ -182,27 +182,38 @@ export class DataPagePresenterService {
           {
             id: 0,
             text: "Nuestra Empresa NM Viajes",
-            link: "/nuestra-empresa"
+            link: "/nuestra-empresa",
+            target: "_self"
           },
           {
             id: 1,
             text: "Nuestras Agencias NM Viajes",
-            link: "/nuestras-agencias/"
+            link: "/nuestras-agencias/",
+            target: "_self"
           },
           {
             id: 2,
-            text: "Política de Protección de datos Personales",
-            link: "politicas"
+            text: "Trabaja con nosotros",
+            link: "https://expertiatravel.hiringroom.com/jobs",
+            target: "_blank"
           },
           {
             id: 3,
-            text: "Responsabilidad Social Corporativa",
-            link: "responsabilidad-social"
+            text: "Política de Protección de datos Personales",
+            link: "politicas",
+            target: "_self"
           },
           {
             id: 4,
+            text: "Responsabilidad Social Corporativa",
+            link: "responsabilidad-social",
+            target: "_self"
+          },
+          {
+            id: 5,
             text: "Mapa de Sitio",
-            link: "#"
+            link: "#",
+            target: "_self"
           }
           // {
           //   id: 5,
@@ -220,18 +231,18 @@ export class DataPagePresenterService {
     string: "Hello World"
   }
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
 
-  getDataGallery(){
+  getDataGallery() {
     const nmvModel = new NmvModel()
 
     const options = {
-        params: nmvModel.params.set('Parameter.Status', true)
+      params: nmvModel.params.set('Parameter.Status', true)
     }
     const url = environment.urlNmviajes + '/Gallery';
     return this.httpClient.get<ResponseModelT<IGalleryService[]>>(url, options).pipe(
-        map(resp=> resp.Result)
+      map(resp => resp.Result)
     )
   }
 
