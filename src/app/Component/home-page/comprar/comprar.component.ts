@@ -716,6 +716,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   generatePayloadForInsurance(data: any): RegistrarSeguroRQ {
 
     console.log('generatePayloadForInsurance');
+    console.log(`${data.contactForm.typePhone0},51,1,${data.contactForm.numberPhone0}`);
+
 
     this.getPassengerAges();
 
@@ -744,11 +746,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       contacto_ape: data.contactForm.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_email: data.contactForm.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
       contacto_direccion: (data.contactForm.invoiceRequestBox) ? data.contactForm.direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_telfs: ',,,;',//data.contactForm.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
+      contacto_telfs: `${data.contactForm.typePhone0},51,1,${data.contactForm.numberPhone0}`,//',,,;',//data.contactForm.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
       contacto_emerg_nom: data.contactForm.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_ape: data.contactForm.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_email: data.contactForm.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
-      contacto_emerg_telf: data.contactForm.numberPhone0,    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
+      contacto_emerg_telf: '',    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
       ruc: (data.contactForm.invoiceRequestBox) ? `RUC-${data.contactForm.ruc}` : `${data.customers[0].typeDocCustomer}-${data.customers[0].numDocCustomer}`, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
       razon_social: (data.contactForm.invoiceRequestBox) ? data.contactForm.razonSocial : '',  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
       direccion_fiscal: (data.contactForm.invoiceRequestBox) ? data.contactForm.direccion : '', // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
