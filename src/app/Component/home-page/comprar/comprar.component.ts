@@ -414,12 +414,16 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   public validarTarjeta(): void {
+    debugger
+
     this.checkedCard = false;
     this.setCardsDefault();
     this.checkCardService();
   }
 
   private setCardsDefault() {
+    debugger
+
     this.isVisa = false;
     this.isMasterCard = false;
     this.isAmericanExpress = false;
@@ -646,6 +650,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   buyInsurance(): void {
     this.pressedToBuy = true;
     this.callFirstService = true;
+
+    debugger
 
     console.log('1. buyInsurance');
 

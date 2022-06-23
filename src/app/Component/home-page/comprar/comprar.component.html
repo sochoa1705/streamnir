@@ -575,6 +575,7 @@
 
                       <select formControlName="typePhone0" class="form-select-f"
                         [ngClass]="{isvalid : validateContactForm('typePhone0')}">
+                        <option value="" selected>Seleccione</option>
                         <option value="2">Fijo</option>
                         <option value="1">Celular</option>
                       </select>
@@ -959,7 +960,10 @@
                     <div class="col-6 viewMobileWidth">
                       <label>Número de tarjeta</label>
 
-                      <input class="form-control" formControlName="numberCard" mask="0000-0000-0000-0000"
+                      <!-- <input class="form-control" formControlName="numberCard" mask="0000-0000-0000-0000"
+                        placeholder="Ingrese el número de tarjeta." type="text" (blur)="validarTarjeta()"> -->
+
+                      <input class="form-control" formControlName="numberCard"
                         placeholder="Ingrese el número de tarjeta." type="text" (blur)="validarTarjeta()">
                     </div>
 
@@ -1285,6 +1289,7 @@
 
                     <select formControlName="typePhone0" class="form-select-f"
                       [ngClass]="{isvalid : validateContactForm('typePhone0')}">
+                      <option value="" selected>Seleccione</option>
                       <option value="2">Fijo</option>
                       <option value="1">Celular</option>
                     </select>
