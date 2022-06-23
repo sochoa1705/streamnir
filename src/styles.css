@@ -2869,8 +2869,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   margin-bottom: 10px; }
 
 .form-check-inline {
-  display: flex;
-  align-items: center; }
+  display: flex; }
   .form-check-inline .form-check-input {
     margin-right: 10px;
     margin-bottom: 5px; }
