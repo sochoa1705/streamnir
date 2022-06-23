@@ -655,17 +655,17 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     console.log('1. buyInsurance');
 
-    if (this.formShop.invalid)
-      this.formShop.markAllAsTouched();
+    // if (this.formShop.invalid)
+    //   this.formShop.markAllAsTouched();
 
-    if (this.paymentMethodForm.invalid)
-      this.paymentMethodForm.markAllAsTouched();
+    // if (this.paymentMethodForm.invalid)
+    //   this.paymentMethodForm.markAllAsTouched();
 
-    if (this.contactForm.invalid)
-      this.contactForm.markAllAsTouched();
+    // if (this.contactForm.invalid)
+    //   this.contactForm.markAllAsTouched();
 
-    if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
-      return;
+    // if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
+    //   return;
 
     this.formShop.addControl('tipoRecibo', new FormControl('BV'));
     this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioEmisionLocal));
