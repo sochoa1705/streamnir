@@ -14,7 +14,7 @@ export class LoadingService {
     this.spinnerService.show(undefined, {
       type: '',
       size: "large",
-      bdColor: 'rgba(144,160,236,0.37)',
+      bdColor: 'rgba(0, 0, 0, 0.8)',
       color: "#051977",
 
     });

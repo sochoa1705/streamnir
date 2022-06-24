@@ -46,6 +46,8 @@ export class PlansComponent implements OnInit {
 
   existPlans: boolean = true;
 
+  callFirstService: boolean = false;
+
   //datoUsuario:any = localStorage.getItem('form');
   constructor(
     public route: Router,
@@ -113,7 +115,11 @@ export class PlansComponent implements OnInit {
     let payload = new NMRequestBy<CotizarSeguroRQ>(lcotizacion)
 
     console.log('listPlansAC');
-    console.log(JSON.stringify(payload))
+    console.log(JSON.stringify(payload));
+
+    setTimeout(() => {
+      this.callFirstService = true;
+    }, 500);
 
     this.plansACService.plansAC(payload).pipe(take(1)).subscribe({
       next: (response) => {
@@ -140,13 +146,15 @@ export class PlansComponent implements OnInit {
           this.existPlans = false;
         }
 
-        this.loaderSubjectService.closeLoader()
+        this.loaderSubjectService.closeLoader();
+        this.callFirstService = false;
       },
       error: error => {
         console.log(error)
         this.notification.showNotificacion("Error", "Error de autenticación", 10);
         this.loaderSubjectService.closeLoader()
         this.route.navigateByUrl('/seguros');
+        this.callFirstService = false;
       }
     })
   }

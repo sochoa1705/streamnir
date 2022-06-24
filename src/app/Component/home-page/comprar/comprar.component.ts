@@ -651,7 +651,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.pressedToBuy = true;
     this.callFirstService = true;
 
-    debugger
+    debugger;
 
     console.log('1. buyInsurance');
 
