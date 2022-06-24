@@ -83,7 +83,10 @@ export enum ENDPOINT_API {
   NEWSLETTER = 'v1/api/Newsletter',
 
   //PAYMENT
-  PAYMENT = 'Payment'
+  PAYMENT = 'Payment',
+
+  //BOOKINGSTATUS
+  BOOKINGSTATUS = 'v1/api/Booking/status'
 }
 
 

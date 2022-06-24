@@ -45,12 +45,15 @@ export class NuestrasAgenciasComponent implements OnInit {
   telefono2: string
   btnActivo: number
   map: number
+
   constructor() {
     this.agenciaView(1)
   }
+
   ngOnInit(): void {
     toUp()
   }
+
   agenciaView(id: number) {
     this.agencias.filter((agencia: any) => {
       const agenciaId = agencia.id
@@ -69,4 +72,9 @@ export class NuestrasAgenciasComponent implements OnInit {
     })
   }
 
+  portalAyuda() {
+    // this.route.navigateByUrl("https://ayuda.nmviajes.com/support/home")
+    // window.location.href="https://ayuda.nmviajes.com/support/home"
+    window.open("https://ayuda.nmviajes.com/support/home", "_blank")
+  }
 }

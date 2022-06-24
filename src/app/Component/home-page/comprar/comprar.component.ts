@@ -737,6 +737,46 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     const fechasalida = this.resultJson.fromDate.split('/');
     const fecharetorno = this.resultJson.toDate.split('/');
 
+    /*
+    SI ES RUC
+              DIRECCION = DIRECCIÓN DE la factura
+              DIRECCION_FISCAL = DIRECCIÓN DE LOS DATOS DE FACTURACIÓN
+              RAZON SOCIAL = NOMBRE DE LOS DATOS DE LA FACTURACIÓN
+    SINO
+      SI ( PAGO = TARJETA)
+      si es boleta
+              DIRECCION = DIRECCIÓN DE LA TARJETA
+              DIRECCION_FISCAL = DIRECCIÓN DE LA TARJETA
+              RAZON SOCIAL = NOMBRE DEL PASAJERO / APELLIDO DEL PASAJERO
+            sino
+              DIRECCION = LIMA
+              DIRECCION_FISCAL = LIMA
+        RAZON SOCIAL = NOMBRE DEL PASAJERO / APELLIDO DEL PASAJERO
+
+    */
+
+    let direccion: string = '';
+    let direccion_fiscal: string = '';
+    let razon_social: string = '';
+
+    if (data.contactForm.invoiceRequestBox) {
+      direccion = data.contactForm.direccion.toUpperCase();
+      direccion_fiscal = data.contactForm.direccion.toUpperCase();
+      razon_social = data.contactForm.razonSocial;
+    }
+    else {
+      razon_social = `${data.customers[0].nameCustomer}/${data.customers[0].lastNameCustomer}`;
+
+      if (data.paymentMethodForm.select21 === 'TARJETA') {
+        direccion = data.paymentMethodForm.address.toUpperCase();
+        direccion_fiscal = data.paymentMethodForm.address.toUpperCase();
+      }
+      else {
+        direccion = 'LIMA';
+        direccion_fiscal = 'LIMA';
+      }
+    }
+
     const payload: RegistrarSeguroRQ = {
       fec_salida: `${fechasalida[2]}-${fechasalida[1]}-${fechasalida[0]}`,                       // FECHA DE PARTIDA
       fec_retorno: `${fecharetorno[2]}-${fecharetorno[1]}-${fecharetorno[0]}`,                        // FECHA DE RETORNO
@@ -758,15 +798,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       contacto_nom: data.contactForm.nameContacto,           // NOMBRE DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_ape: data.contactForm.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_email: data.contactForm.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_direccion: (data.contactForm.invoiceRequestBox) ? data.contactForm.direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
+      contacto_direccion: direccion,  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
       contacto_telfs: `${data.contactForm.typePhone0},51,1,${data.contactForm.numberPhone0}`,//',,,;',//data.contactForm.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
       contacto_emerg_nom: data.contactForm.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_ape: data.contactForm.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_email: data.contactForm.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
       contacto_emerg_telf: '',    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
       ruc: (data.contactForm.invoiceRequestBox) ? `RUC-${data.contactForm.ruc}` : `${data.customers[0].typeDocCustomer}-${data.customers[0].numDocCustomer}`, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
-      razon_social: (data.contactForm.invoiceRequestBox) ? data.contactForm.razonSocial : '',  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
-      direccion_fiscal: (data.contactForm.invoiceRequestBox) ? data.contactForm.direccion : '', // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
+      razon_social: razon_social,  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
+      direccion_fiscal: direccion_fiscal, // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
       comentario: '',
       webs_cid: 7,
       usuweb_id: userid,
@@ -853,14 +893,33 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           }
 
           if (paymentMethod === PaymentMethodEnum.CreditCard && result.Result.ServiceResponse.Status === 'APPROVED') {
-            const parameters: ActualizarEstadoSeguroRQ = {
-              res_seguro_id: this.reservation.Reserva,
-              usosafetypay: 8
+            // const parameters: ActualizarEstadoSeguroRQ = {
+            //   res_seguro_id: this.reservation.Reserva,
+            //   usosafetypay: 8
+            // };
+
+            // const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
+
+            // this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
+
+            const payload: any = {
+              "TrackingCode": Guid(),
+              "MuteExceptions": false,
+              "Caller": {
+                "Company": 'Agil',
+                "Application": 'Interagencias'
+              },
+              "Parameter": {
+                "BookingId": this.reservation.Reserva,
+                "Status": 8
+              }
             };
 
-            const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
-
-            this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
+            this._preferencesService.updateBookingStatus(payload).subscribe({
+              next: response => {
+                const result = response['Result'];
+              }
+            })
           }
 
           const fechasalida = this.resultJson.fromDate.split('/');

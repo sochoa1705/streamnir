@@ -4,7 +4,6 @@ import { ConformidadComponent } from './conformidad/conformidad.component';
 import { HomePageComponent } from './home-page.component';
 import { HomeComponent } from './home/home.component';
 import { PaquetesComponent } from './paquetes/paquetes.component';
-import { PerfilComponent } from './perfil/perfil.component';
 import { ResultadosComponent } from './resultados/resultados.component';
 import { AerolineasComponent } from './aerolineas/aerolineas.component';
 import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
@@ -15,9 +14,9 @@ import { LibroReclamacionesComponent } from './libro-reclamaciones/libro-reclama
 import { CitaComponent } from './cita/cita.component';
 import { PoliticasComponent } from './politicas/politicas.component';
 import { ResponsabilidadSocialComponent } from './resonsabilidad-social/responsabilidad-social.component';
-import { ComprarComponent } from './comprar/comprar.component';
 import { PromocionesComponent } from '../promociones/promociones.component';
 import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/page-not-found.component';
+import { ComprarComponent } from './comprar/comprar.component';
 
 const routes: Routes = [
   {
@@ -118,10 +117,10 @@ const routes: Routes = [
     path: '404',
     component: PageNotFoundComponent
   },
-  // {
-  //   path: '**',
-  //   redirectTo: '404'
-  // }
+  {
+    path: '**',
+    redirectTo: '404'
+  }
 ];
 
 @NgModule({

@@ -222,7 +222,7 @@ export class TabsComponent implements OnInit {
     // (value.index == 1) ? this.navigateToResponseUrl(this.RUTA_PAQUETES) : null;
     //(value.index == 4) ? this.navigateToResponseUrl(this.RUTA_AUTOS) : null;
 
-    if (value.index == 6) {
+    if (value.index == 7) {
       this.callService();
     }
   }

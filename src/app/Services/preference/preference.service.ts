@@ -56,4 +56,9 @@ export class PreferenceService {
       .get<any>(url_api, options)
   }
 
+  updateBookingStatus(payload: any): Observable<any> {
+    let url_api = `${environment.urlApiPayment}/${ENDPOINT_API.BOOKINGSTATUS}`
+    return this.http
+      .put<any>(url_api, payload)
+  }
 }
