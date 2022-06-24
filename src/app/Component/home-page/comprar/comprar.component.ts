@@ -1086,8 +1086,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         "Booking": {
           "CodeSrv": 0,
           "CodeInsurance": this.reservation.Reserva,
-          "ArrivalDate": moment(this.resultJson.fromDate, "DD/MM/YYYY").format("YYYY-MM-DD"),
-          "DepartureDate": moment(this.resultJson.toDate, "DD/MM/YYYY").format("YYYY-MM-DD"),
+          "DepartureDate": moment(this.resultJson.fromDate, "DD/MM/YYYY").format("YYYY-MM-DD"),
+          "ArrivalDate": moment(this.resultJson.toDate, "DD/MM/YYYY").format("YYYY-MM-DD"),
           "NumberOfAdult": 1,
           "NumberOfChildren": 0,
           "HasCancellationFee": true
