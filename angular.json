@@ -34,7 +34,9 @@
                         "tsConfig": "tsconfig.app.json",
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets"
+                            "src/assets",
+                            "src/Images",
+                            "src/resources"
                         ],
                         "allowedCommonJsDependencies": [
                             "moment-precise-range-plugin",
@@ -106,7 +108,9 @@
                         "tsConfig": "tsconfig.spec.json",
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets"
+                            "src/assets",
+                            "src/Images",
+                            "src/resources"
                         ],
                         "styles": [
                             "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
