@@ -8,15 +8,15 @@ spec:
   ingressClassName: classnmviajes
   tls:
   - hosts:
-    - demo.nmviajes.com
-    secretName: aks-ingress-tls-nmviajes
+    - www.nmviajes.com
+    secretName: aks-ingress-tls-nmviajes-prd
   defaultBackend:
     service:
       name: nmviajes2
       port:
         number: 80
   rules:
-  - host: demo.nmviajes.com
+  - host: www.nmviajes.com
     http:
       paths:
       - path: /

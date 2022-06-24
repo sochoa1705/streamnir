@@ -831,17 +831,19 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           const paymentMethod: PaymentMethodEnum = data.paymentMethodForm.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
 
-          const parameters: ActualizarCodigoSafetyPaySeguroRQ = {
-            res_seguro_id: this.reservation.Reserva,
-            usosafetypay: paymentMethod === PaymentMethodEnum.SafetyPay ? "S" : "N",
-            codigo_safetypay: result.Result.ServiceResponse.Code,
-            nro_pedido_srv: result.Result.OrderId,
-            fee_safetypay: 0
-          };
+          if (paymentMethod === PaymentMethodEnum.SafetyPay) {
+            const parameters: ActualizarCodigoSafetyPaySeguroRQ = {
+              res_seguro_id: this.reservation.Reserva,
+              usosafetypay: "S",
+              codigo_safetypay: result.Result.ServiceResponse.Code,
+              nro_pedido_srv: result.Result.OrderId,
+              fee_safetypay: 0
+            };
 
-          const body = new NMRequestBy<ActualizarCodigoSafetyPaySeguroRQ>(parameters);
+            const body = new NMRequestBy<ActualizarCodigoSafetyPaySeguroRQ>(parameters);
 
-          this._secureBookingService.updateSafetypayPaymentCode(body).subscribe((response: any) => { });
+            this._secureBookingService.updateSafetypayPaymentCode(body).subscribe((response: any) => { });
+          }
 
           if (paymentMethod === PaymentMethodEnum.CreditCard && result.Result.ServiceResponse.Status === 'APPROVED') {
             const parameters: ActualizarEstadoSeguroRQ = {
