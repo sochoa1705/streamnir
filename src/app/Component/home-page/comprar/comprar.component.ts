@@ -737,24 +737,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     const fechasalida = this.resultJson.fromDate.split('/');
     const fecharetorno = this.resultJson.toDate.split('/');
 
-    /*
-    SI ES RUC
-              DIRECCION = DIRECCIÓN DE la factura
-              DIRECCION_FISCAL = DIRECCIÓN DE LOS DATOS DE FACTURACIÓN
-              RAZON SOCIAL = NOMBRE DE LOS DATOS DE LA FACTURACIÓN
-    SINO
-      SI ( PAGO = TARJETA)
-      si es boleta
-              DIRECCION = DIRECCIÓN DE LA TARJETA
-              DIRECCION_FISCAL = DIRECCIÓN DE LA TARJETA
-              RAZON SOCIAL = NOMBRE DEL PASAJERO / APELLIDO DEL PASAJERO
-            sino
-              DIRECCION = LIMA
-              DIRECCION_FISCAL = LIMA
-        RAZON SOCIAL = NOMBRE DEL PASAJERO / APELLIDO DEL PASAJERO
-
-    */
-
     let direccion: string = '';
     let direccion_fiscal: string = '';
     let razon_social: string = '';
@@ -762,10 +744,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (data.contactForm.invoiceRequestBox) {
       direccion = data.contactForm.direccion.toUpperCase();
       direccion_fiscal = data.contactForm.direccion.toUpperCase();
-      razon_social = data.contactForm.razonSocial;
+      razon_social = data.contactForm.razonSocial.toUpperCase();
     }
     else {
-      razon_social = `${data.customers[0].nameCustomer}/${data.customers[0].lastNameCustomer}`;
+      razon_social = `${data.customers[0].nameCustomer.toUpperCase()}/${data.customers[0].lastNameCustomer.toUpperCase()}`;
 
       if (data.paymentMethodForm.select21 === 'TARJETA') {
         direccion = data.paymentMethodForm.address.toUpperCase();
@@ -810,7 +792,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       comentario: '',
       webs_cid: 7,
       usuweb_id: userid,
-      destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'N' : 'I', // obtener desde destiny.EsDestinoNacional
+      destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'S' : 'N', // obtener desde destiny.EsDestinoNacional
       numeroruc: '',
       comprobantepago: (data.contactForm.invoiceRequestBox) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
       usobilletera: 'N',

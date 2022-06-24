@@ -13,7 +13,7 @@ export const environment = {
   comisionistaAgenciaAC: '',
   apiIp: 'https://api.ipify.org/?format=json',
   today: (hoy: any) => {
-    let fehcaHoy = `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
+    let fehcaHoy = `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`
     return fehcaHoy
   },
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',

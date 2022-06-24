@@ -266,6 +266,8 @@ export class TabsComponent implements OnInit {
   }
 
   getChange() {
+    console.log(new Date());
+
     let lChange: ChangeRQ = {
       Fecha: environment.today(new Date()),
       IdMoneda: "SOL",
