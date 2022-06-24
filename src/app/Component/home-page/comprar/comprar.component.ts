@@ -724,6 +724,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log('generatePayloadForInsurance');
     console.log(`${data.contactForm.typePhone0},51,1,${data.contactForm.numberPhone0}`);
 
+    let userid: number = 0;
+    const credentials = localStorage.getItem('usuario');
+
+    if (credentials) {
+      const credentialsJson = JSON.parse(credentials);
+      userid = credentialsJson.id;
+    }
 
     this.getPassengerAges();
 
@@ -762,7 +769,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       direccion_fiscal: (data.contactForm.invoiceRequestBox) ? data.contactForm.direccion : '', // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
       comentario: '',
       webs_cid: 7,
-      usuweb_id: 56190,
+      usuweb_id: userid,
       destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'N' : 'I', // obtener desde destiny.EsDestinoNacional
       numeroruc: '',
       comprobantepago: (data.contactForm.invoiceRequestBox) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
@@ -922,7 +929,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
               To: [data.contactForm.mailContacto.toUpperCase()],
               BCC: [""],
               CC: [""],
-              Subject: `NMViajes - Confirmación de compra de seguro #${this.reservation.Reserva}`,
+              Subject: `NMViajes - Solicitud de compra de seguro #${result.Result.QuoteId}`,
               Data: {
                 Contacto: {
                   NombresApellidos: `${data.contactForm.nameContacto.toUpperCase()
