@@ -13,5 +13,4 @@ export class PoliticasComponent implements OnInit {
   ngOnInit(): void {
     toUp()
   }
-
 }

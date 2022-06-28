@@ -17,6 +17,7 @@ import { ResponsabilidadSocialComponent } from './resonsabilidad-social/responsa
 import { PromocionesComponent } from '../promociones/promociones.component';
 import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/page-not-found.component';
 import { ComprarComponent } from './comprar/comprar.component';
+import { CondicionesDeReservaComponent } from './condiciones-de-reserva/condiciones-de-reserva.component';
 
 const routes: Routes = [
   {
@@ -90,6 +91,10 @@ const routes: Routes = [
       {
         path: 'politicas',
         component: PoliticasComponent
+      },
+      {
+        path: 'condiciones-de-reserva',
+        component: CondicionesDeReservaComponent
       },
       {
         path: 'promociones',
