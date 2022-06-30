@@ -648,33 +648,112 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   buyInsurance(): void {
-    this.pressedToBuy = true;
-    this.callFirstService = true;
+    if(this.validateForm()) {
+      this.pressedToBuy = true;
+      this.callFirstService = true;
+  
+      debugger;
+  
+      console.log('1. buyInsurance');
+  
+      // if (this.formShop.invalid)
+      //   this.formShop.markAllAsTouched();
+  
+      // if (this.paymentMethodForm.invalid)
+      //   this.paymentMethodForm.markAllAsTouched();
+  
+      // if (this.contactForm.invalid)
+      //   this.contactForm.markAllAsTouched();
+  
+      // if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
+      //   return;
+  
+      this.formShop.addControl('tipoRecibo', new FormControl('BV'));
+      this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioEmisionLocal));
+  
+      this.dataShop = this.formShop.value;
+      let dataShop = this.formShop.value;
+      localStorage.setItem('shop', JSON.stringify(dataShop));
+  
+      this.generateInsuranceReserve(dataShop);
+    }
+  }
 
-    debugger;
+  validateForm(): boolean {
+    const dataShop = this.formShop.value;
+    console.log('data shop', dataShop);
+    if(!this.validateFormCustomers())  {
+      window.scrollTo(0,0);
+      return false;
+    }
+    if(!this.validateCheckFormCustomers()) {
+      return false;
+    }
+    if(!this.validateFormContact()) {
+      return false;
+    }
 
-    console.log('1. buyInsurance');
+    if(dataShop.paymentMethodForm.select21 == 'TARJETA') {
+      if(!this.validateFormPayment()){
+        return false;
+      }
+    }
+    return true;
+  }
 
-    // if (this.formShop.invalid)
-    //   this.formShop.markAllAsTouched();
+  validateFormCustomers(): boolean {
+    let validate = true;
+    let candidates: [] = this.formShop.value.customers;
+    if(candidates.length == 0) return false;
+    candidates.forEach((x: any) => {
+      if(x.nameCustomer == '' || x.lastNameCustomer == '' || x.dayCustomer == '' || x.monthCustomer == '' || x.yearCustomer == '' || x.nationalityCustomer == '' || 
+      x.typeDocCustomer == '' || x.numDocCustomer == '' || x.sexCustomer == '') {
+        validate = false;
+        return;
+      }
+    });
+    if(!validate) {
+      this._notification.showNotificacion("Error", "Debe ingresar todos los datos obligatorios del(os) pasajero(s)");
+    }
+    return validate;
+  }
 
-    // if (this.paymentMethodForm.invalid)
-    //   this.paymentMethodForm.markAllAsTouched();
+  validateCheckFormCustomers(): boolean {
+    let data = this.formShop.value;
+    if(!data.chkInfo) {
+      this._notification.showNotificacion("Error", "Debe aceptar las políticas de protección de datos personales");
+      return false;
+    } else if(!data.chkPolity) {
+      this._notification.showNotificacion("Error", "Debe aceptar el uso de la información de publicidad");
+      return false;
+    }
+    return true;
+  }
 
-    // if (this.contactForm.invalid)
-    //   this.contactForm.markAllAsTouched();
+  validateFormContact(): boolean {
+    let validate = true;
+    let data = this.formShop.value.contactForm;
+    if(data.nameContacto == '' || data.lastnameContacto == '' || data.mailContacto == '' || data.mailConfirmContacto == '' || data.typePhone0 == '' || data.numberPhone0 == '') {
+      validate = false;
+    }
 
-    // if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
-    //   return;
+    if(data.invoiceRequestBox && (data.ruc == '' || data.razonSocial == '' || data.direccion == '')) {
+      validate = false;
+    }
 
-    this.formShop.addControl('tipoRecibo', new FormControl('BV'));
-    this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioEmisionLocal));
+    if(!validate) {
+      this._notification.showNotificacion("Error", "Debe ingresar todos los datos de contacto");
+    }
+    return validate;
+  }
 
-    this.dataShop = this.formShop.value;
-    let dataShop = this.formShop.value;
-    localStorage.setItem('shop', JSON.stringify(dataShop));
-
-    this.generateInsuranceReserve(dataShop);
+  validateFormPayment(): boolean {
+    let validate = true;
+    let data = this.formShop.value.paymentMethodForm;
+    if(data.nameCard == '' || data.numberCard == '' || data.expiredCard == '' || data.ccvCard == '' || data.tipoDoc == '' || data.numDoc == '' || data.feePay == '' || data.address == '' || data.cityCard == '') {
+      validate = false;
+    }
+    return validate;
   }
 
   generateInsuranceReserve(data: any): void {
