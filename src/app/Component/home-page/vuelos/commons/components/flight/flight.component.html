@@ -50,8 +50,8 @@
             </h2>
         </div>
     </div>
-    <div class="row verMovil">
-        <div class="col-5">
+    <div class="row boxVueloNac verMovil">
+        <div class="col-5 boxVueloPackage">
             <div class="boxVuelos">
                 <div (click)="toDestiny(packb)" *ngFor="let packb of $vuelosNacionales | async" class="rowVuelo">
                     <div class="lugar">{{packb.Destination}}</div>

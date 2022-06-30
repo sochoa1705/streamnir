@@ -29,7 +29,7 @@ export class NuestrasAgenciasComponent implements OnInit {
       distrito: 'Monterrico - Surco',
       horario: 'Lun - Vie 10:00 am a 07:00 pm',
       horario2: 'Sab 10:00 am - 2:00 pm',
-      correo: 'vacaciones@nmviajes.com',
+      correo: 'primavera@nmviajes.com',
       telefono: '745-7638',
       telefono2: '745-7639',
     }
