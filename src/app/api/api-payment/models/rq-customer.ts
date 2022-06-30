@@ -8,4 +8,5 @@ export interface RqCustomer {
   Email?: null | string;
   Firstname?: null | string;
   Lastname?: null | string;
+  Phone?: null | string;
 }

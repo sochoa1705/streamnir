@@ -3,10 +3,12 @@
 </div>
 <div class="row pt-md-5">
     <h2 class="title px-0 pb-md-3" *ngIf="existPlans">
-        <strong>Selecciona el plan que mejor se adapte a tu viaje |</strong> {{ resultJson.days }} días por {{ resultJson.destinyString.descripcion_destino}}
+        <strong>Selecciona el plan que mejor se adapte a tu viaje |</strong> {{ resultJson.days }} días por {{
+        resultJson.destinyString.descripcion_destino}}
     </h2>
     <h2 class="title px-0 pb-md-3" *ngIf="!existPlans">
-        <strong>No se encontraron planes para los criterios seleccionados |</strong> {{ resultJson.days }} días por {{ resultJson.destinyString.descripcion_destino}}
+        <strong>No se encontraron planes para los criterios seleccionados |</strong> {{ resultJson.days }} días por {{
+        resultJson.destinyString.descripcion_destino}}
     </h2>
 </div>
 
@@ -44,7 +46,7 @@
                     </div>
                     <div class="d-block text-center">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#ModalCoverage" (click)="data(card)">Ver
-              detalle de los beneficios</a>
+                            detalle de los beneficios</a>
                     </div>
                     <div class="d-block text-center py-2">
                         <button (click)="shop(card)">Seleccionar</button>
@@ -59,7 +61,7 @@
 </div>
 
 <!-- VUELOS -->
-<div class="">
+<div class="container">
     <!-- <div class="container"> -->
     <div class="row mb-5">
         <div class="col-12">
@@ -79,7 +81,8 @@
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content {{ pop?.clase }}">
             <div class="modal-header">
-                <h2 class="modal-title" id="exampleModalLabel">{{pop?.producto}} - {{pop?.precioEmisionLocal | currency: 'USD'}}
+                <h2 class="modal-title" id="exampleModalLabel">{{pop?.producto}} - {{pop?.precioEmisionLocal | currency:
+                    'USD'}}
                 </h2>
                 <h5 class="modal-subtitle" id="exampleModalLabel">Asistencia médica: {{ asistMedic }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -118,8 +121,8 @@
                         <div class="col-3 borderRight">
                             <p>Total</p>
                             <span>USD
-                <strong>{{pop.change}}</strong>
-              </span>
+                                <strong>{{pop.change}}</strong>
+                            </span>
                             <button (click)="shop(pop.idProducto)">Comprar</button>
                         </div>
                         <div class="col-9 alignFooterPopup">
@@ -127,7 +130,7 @@
                             <div class="row planBox">
                                 <div class="col-3" *ngFor="let p of plansAC; let index = index">
                                     <button (click)="data(p)" *ngIf="index < 5" class="planes {{ p?.clase }}">{{
-                    p?.nombreProducto.substr(0, 9) }}</button>
+                                        p?.nombreProducto.substr(0, 9) }}</button>
                                 </div>
                             </div>
                         </div>

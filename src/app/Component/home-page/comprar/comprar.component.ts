@@ -1154,7 +1154,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "Address": "",
           "DocumentType": data.customers[0].typeDocCustomer,
           "DocumentNumber": data.customers[0].numDocCustomer,
-          "Email": data.contactForm.mailContacto.toUpperCase()
+          "Email": data.contactForm.mailContacto.toUpperCase(),
+          "Phone": `+51 ${data.contactForm.numberPhone0}`
         },
         "Card": {
           "Number": data.paymentMethodForm.numberCard,
