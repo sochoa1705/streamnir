@@ -648,33 +648,33 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   buyInsurance(): void {
-    if(this.validateForm()) {
+    if (this.validateForm()) {
       this.pressedToBuy = true;
       this.callFirstService = true;
-  
+
       debugger;
-  
+
       console.log('1. buyInsurance');
-  
+
       // if (this.formShop.invalid)
       //   this.formShop.markAllAsTouched();
-  
+
       // if (this.paymentMethodForm.invalid)
       //   this.paymentMethodForm.markAllAsTouched();
-  
+
       // if (this.contactForm.invalid)
       //   this.contactForm.markAllAsTouched();
-  
+
       // if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
       //   return;
-  
+
       this.formShop.addControl('tipoRecibo', new FormControl('BV'));
       this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioEmisionLocal));
-  
+
       this.dataShop = this.formShop.value;
       let dataShop = this.formShop.value;
       localStorage.setItem('shop', JSON.stringify(dataShop));
-  
+
       this.generateInsuranceReserve(dataShop);
     }
   }
@@ -682,19 +682,19 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   validateForm(): boolean {
     const dataShop = this.formShop.value;
     console.log('data shop', dataShop);
-    if(!this.validateFormCustomers())  {
-      window.scrollTo(0,0);
+    if (!this.validateFormCustomers()) {
+      window.scrollTo(0, 0);
       return false;
     }
-    if(!this.validateCheckFormCustomers()) {
+    if (!this.validateCheckFormCustomers()) {
       return false;
     }
-    if(!this.validateFormContact()) {
+    if (!this.validateFormContact()) {
       return false;
     }
 
-    if(dataShop.paymentMethodForm.select21 == 'TARJETA') {
-      if(!this.validateFormPayment()){
+    if (dataShop.paymentMethodForm.select21 == 'TARJETA') {
+      if (!this.validateFormPayment()) {
         return false;
       }
     }
@@ -704,44 +704,47 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   validateFormCustomers(): boolean {
     let validate = true;
     let candidates: [] = this.formShop.value.customers;
-    if(candidates.length == 0) return false;
+    if (candidates.length == 0) return false;
     candidates.forEach((x: any) => {
-      if(x.nameCustomer == '' || x.lastNameCustomer == '' || x.dayCustomer == '' || x.monthCustomer == '' || x.yearCustomer == '' || x.nationalityCustomer == '' || 
-      x.typeDocCustomer == '' || x.numDocCustomer == '' || x.sexCustomer == '') {
+      if (x.nameCustomer == '' || x.lastNameCustomer == '' || x.dayCustomer == '' || x.monthCustomer == '' || x.yearCustomer == '' || x.nationalityCustomer == '' ||
+        x.typeDocCustomer == '' || x.numDocCustomer == '' || x.sexCustomer == '') {
         validate = false;
         return;
       }
     });
-    if(!validate) {
+    if (!validate) {
       this._notification.showNotificacion("Error", "Debe ingresar todos los datos obligatorios del(os) pasajero(s)");
     }
     return validate;
   }
 
   validateCheckFormCustomers(): boolean {
+    debugger
+
     let data = this.formShop.value;
-    if(!data.chkInfo) {
+    if (!data.chkPolity) {
       this._notification.showNotificacion("Error", "Debe aceptar las políticas de protección de datos personales");
       return false;
-    } else if(!data.chkPolity) {
-      this._notification.showNotificacion("Error", "Debe aceptar el uso de la información de publicidad");
-      return false;
     }
+    // } else if (!data.chkPolity) {
+    //   this._notification.showNotificacion("Error", "Debe aceptar el uso de la información de publicidad");
+    //   return false;
+    // }
     return true;
   }
 
   validateFormContact(): boolean {
     let validate = true;
     let data = this.formShop.value.contactForm;
-    if(data.nameContacto == '' || data.lastnameContacto == '' || data.mailContacto == '' || data.mailConfirmContacto == '' || data.typePhone0 == '' || data.numberPhone0 == '') {
+    if (data.nameContacto == '' || data.lastnameContacto == '' || data.mailContacto == '' || data.mailConfirmContacto == '' || data.typePhone0 == '' || data.numberPhone0 == '') {
       validate = false;
     }
 
-    if(data.invoiceRequestBox && (data.ruc == '' || data.razonSocial == '' || data.direccion == '')) {
+    if (data.invoiceRequestBox && (data.ruc == '' || data.razonSocial == '' || data.direccion == '')) {
       validate = false;
     }
 
-    if(!validate) {
+    if (!validate) {
       this._notification.showNotificacion("Error", "Debe ingresar todos los datos de contacto");
     }
     return validate;
@@ -750,7 +753,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   validateFormPayment(): boolean {
     let validate = true;
     let data = this.formShop.value.paymentMethodForm;
-    if(data.nameCard == '' || data.numberCard == '' || data.expiredCard == '' || data.ccvCard == '' || data.tipoDoc == '' || data.numDoc == '' || data.feePay == '' || data.address == '' || data.cityCard == '') {
+    if (data.nameCard == '' || data.numberCard == '' || data.expiredCard == '' || data.ccvCard == '' || data.tipoDoc == '' || data.numDoc == '' || data.feePay == '' || data.address == '' || data.cityCard == '') {
       validate = false;
     }
     return validate;
@@ -991,6 +994,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           const missingDays = fromDate.diff(currentDate, 'days');
 
+          debugger
+
           const model = {
             event: 'nmv.seguros_eecga3_purchase',
             ecommerce: {
@@ -1037,6 +1042,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
             asegurados.push(asegurado);
           });
+
+          debugger
 
           const notificationBody: CeSeguroCeEmailParameterCustomCeRequest1 = {
             Caller: {
