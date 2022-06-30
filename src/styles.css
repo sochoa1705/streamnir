@@ -4460,7 +4460,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   padding: 20px 0 40px 0; }
 
 .boxImgVuelo {
-  padding: 0 20px 0 60px; }
+  padding: 0; }
   .boxImgVuelo .gridVuelo {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -8268,4 +8268,4 @@ app-flightdeals button {
     width: auto !important; }
 
   .mnuViaja .padLeft70 img {
-    width: 85% !important; } }
+    width: 60% !important; } }
