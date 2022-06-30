@@ -918,7 +918,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
               currencyCode: this.safe0Json.monedaLista,
               purchase: {
                 actionField: {
-                  id: String(this.reservation.Reserva),
+                  id: String(result.Result.QuoteId),
                   revenue: this.safe0Json.precioEmisionLocal,
                   cupon: ''
                 },
