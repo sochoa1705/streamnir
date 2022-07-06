@@ -7,13 +7,68 @@ section {
     background-size: cover;
     width: 100%!important;
 }
-h1{
-    font-size: 3.75rem;
-    font-weight: 700;
-    color: white
-}
-p, a{
-    font-size: 1.5rem;
-    line-height: 1.35;
-    color: white
+
+.boxAgendaCita {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    .rowCita {
+        display: flex;
+        width: 80%;
+        gap: 50px;
+        .colCita {
+            flex: 1 1 50%;
+            text-align: center;
+        }
+        @media (max-width: 990px) and (min-width: 640px) {
+            width: 90%;
+            gap: 40px;
+        }
+        @media (max-width: 640px) {
+            flex-wrap: wrap;
+            width: 100%;
+            gap: 10px;
+            font-size: 1.5rem;
+        }
+    }
+    h1 {
+        font-size: 3.75rem;
+        font-weight: 700;
+        color: white;
+        @media (max-width: 990px) and (min-width: 640px) {
+            font-size: 2.75rem;
+        }
+        @media (max-width: 640px) {
+            font-size: 1.5rem;
+        }
+    }
+    p,
+    a {
+        font-size: 1.5rem;
+        line-height: 1.35;
+        color: white;
+        @media (max-width: 990px) and (min-width: 640px) {
+            font-size: 1rem;
+        }
+        @media (max-width: 640px) {
+            font-size: 1rem;
+        }
+    }
+    .iframeCita {
+        height: 630px;
+        .heightIframe {
+            height: 630px;
+        }
+        @media (max-width: 990px) and (min-width: 640px) {
+            font-size: 14px;
+        }
+        @media (max-width: 640px) {
+            font-size: 12px;
+        }
+    }
+    @media (max-width: 640px) {
+        padding: 20px;
+        height: auto;
+    }
 }
