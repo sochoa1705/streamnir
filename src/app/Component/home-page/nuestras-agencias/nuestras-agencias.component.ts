@@ -14,6 +14,7 @@ export class NuestrasAgenciasComponent implements OnInit {
       distrito: 'Miraflores',
       horario: 'Lun - Vie 10:00 am a 07:00 pm',
       correo: 'vacaciones@nmviajes.com',
+      imagen: './assets/agencias/agencia_.png'
     },
     {
       id: 2,
@@ -22,6 +23,7 @@ export class NuestrasAgenciasComponent implements OnInit {
       horario: 'Lun - Vie 10:00 am a 07:00 pm',
       horario2: 'Sab 10:00 am - 2:00 pm',
       correo: 'vacaciones@nmviajes.com',
+      imagen: './assets/agencias/Pardo.png'
     },
     {
       id: 3,
@@ -32,6 +34,29 @@ export class NuestrasAgenciasComponent implements OnInit {
       correo: 'primavera@nmviajes.com',
       telefono: '745-7638',
       telefono2: '745-7639',
+      imagen: './assets/agencias/Primavera.png'
+    },
+    {
+      id: 4,
+      direccion: 'Av. Caminos del Inca 257 tienda 215 -',
+      distrito: 'Chacarilla, Surco',
+      horario: 'Lun - Vie 10:00 am a 07:00 pm',
+      horario2: 'Sab 10:00 am - 1:00 pm',
+      correo: 'caminosdelinca@nmviajes.com',
+      telefono: '',
+      telefono2: '',
+      imagen: './assets/agencias/CaminosDelInca.png'
+    },
+    {
+      id: 5,
+      direccion: 'Av. Javier Prado Este 5268 tienda 213 –',
+      distrito: 'La Molina',
+      horario: 'Lun - Vie 10:00 am a 07:00 pm',
+      horario2: 'Sab 10:00 am - 1:00 pm',
+      correo: 'fontana@nmviajes.com',
+      telefono: '782-4812',
+      telefono2: '',
+      imagen: './assets/agencias/LaFontana.png'
     }
   ]
 
@@ -45,6 +70,7 @@ export class NuestrasAgenciasComponent implements OnInit {
   telefono2: string
   btnActivo: number
   map: number
+  imagen: string
 
   constructor() {
     this.agenciaView(1)
@@ -68,6 +94,7 @@ export class NuestrasAgenciasComponent implements OnInit {
         this.telefono = agencia.telefono
         this.telefono2 = agencia.telefono2
         this.map = agencia.id
+        this.imagen = agencia.imagen
       }
     })
   }

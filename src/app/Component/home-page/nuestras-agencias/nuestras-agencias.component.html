@@ -1,104 +1,113 @@
 <div class="buscador">
-    <div class="mat-div d-flex w-75">
-        <mat-icon>search</mat-icon>
-        <input type="text" placeholder="Ingresa tu calle o distrito">
-    </div>
-    <hr>
-    <div class="boxbtn">
-        <button (click)="agenciaView(1)" class="btn-agencias ms-md-4 ms-2 ms-md-3" [ngClass]="btnActivo === 1 ? 'activa' : ''">NM TRAVEL STORE</button>
-        <button (click)="agenciaView(2)" class="btn-agencias ms-md-4 ms-2 ms-md-3" [ngClass]="btnActivo === 2 ? 'activa' : ''">NM PARDO</button>
-        <button (click)="agenciaView(3)" class="btn-agencias ms-md-4 ms-2 ms-md-3" [ngClass]="btnActivo === 3 ? 'activa' : ''">NM PRIMAVERA</button>
-
-        <button (click)="agenciaView(4)" class="btn-agencias ms-md-4 ms-2 ms-md-3" [ngClass]="btnActivo === 4 ? 'activa' : ''">NM CC. Caminos del Inca</button>
-        <button (click)="agenciaView(5)" class="btn-agencias ms-md-4 ms-2 ms-md-3" [ngClass]="btnActivo === 5 ? 'activa' : ''">NM CC. La Fontana</button>
-    </div>
+  <div class="mat-div d-flex w-75">
+    <mat-icon>search</mat-icon>
+    <input type="text" placeholder="Ingresa tu calle o distrito">
+  </div>
+  <hr>
+  <div class="boxbtn">
+    <button (click)="agenciaView(1)" class="btn-agencias ms-md-4 ms-2 ms-md-3"
+      [ngClass]="btnActivo === 1 ? 'activa' : ''">NM TRAVEL STORE</button>
+    <button (click)="agenciaView(2)" class="btn-agencias ms-md-4 ms-2 ms-md-3"
+      [ngClass]="btnActivo === 2 ? 'activa' : ''">NM PARDO</button>
+    <button (click)="agenciaView(3)" class="btn-agencias ms-md-4 ms-2 ms-md-3"
+      [ngClass]="btnActivo === 3 ? 'activa' : ''">NM PRIMAVERA</button>
+    <button (click)="agenciaView(4)" class="btn-agencias ms-md-4 ms-2 ms-md-3"
+      [ngClass]="btnActivo === 4 ? 'activa' : ''">NM CC. Caminos del Inca</button>
+    <button (click)="agenciaView(5)" class="btn-agencias ms-md-4 ms-2 ms-md-3"
+      [ngClass]="btnActivo === 5 ? 'activa' : ''">NM CC. La Fontana</button>
+  </div>
 </div>
 <div class="direccion">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 d-flex">
-                <mat-icon>pin_drop</mat-icon>
-                <div>
-                    <span>{{ direccion }}
+  <div class="container">
+    <div class="row">
+      <div class="col-12 d-flex">
+        <mat-icon>pin_drop</mat-icon>
+        <div>
+          <span>{{ direccion }}
             <strong>{{ distrito }}</strong>
           </span>
-                </div>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-12 d-flex">
-                <mat-icon>schedule</mat-icon>
-                <div>
-                    <span>{{ horario }}</span>
-                    <span *ngIf="horario2">{{ horario2 }}</span>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex">
+        <mat-icon>schedule</mat-icon>
+        <div>
+          <span>{{ horario }}</span>
+          <span *ngIf="horario2">{{ horario2 }}</span>
         </div>
-        <div class="row">
-            <div class="col-12 d-flex">
-                <mat-icon>mail_outline</mat-icon>
-                <div>
-                    <span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex">
+        <mat-icon>mail_outline</mat-icon>
+        <div>
+          <span>
             <a href="mailto:{{ correo }}">{{ correo }}</a>
           </span>
-                </div>
-            </div>
         </div>
-        <div class="row" *ngIf="telefono">
-            <div class="col-12 d-flex">
-                <mat-icon>phone</mat-icon>
-                <div>
-                    <span>{{ telefono }}</span>
-                    <span>{{ telefono2 }}</span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 d-flex">
-                <div>
-                    <span>
-            <img src="./assets/agencias/agencia_.png" alt="">
-          </span>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </div>
+    <div class="row" *ngIf="telefono">
+      <div class="col-12 d-flex">
+        <mat-icon>phone</mat-icon>
+        <div>
+          <span>{{ telefono }}</span>
+          <span>{{ telefono2 }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex">
+        <div>
+          <span>
+            <img [src]="imagen" alt="">
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 <!-- PARDO -->
-<iframe *ngIf="map === 1" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.7341024818293!2d-77.02351018578644!3d-12.130336746762024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b7fd50f9f5db%3A0x129c4b7ccf8c2dc2!2sAv.%2028%20de%20Julio%201136%2C%20Miraflores%2015047!5e0!3m2!1ses!2spe!4v1642009579784!5m2!1ses!2spe"
-    width="100%" height="792" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+<iframe *ngIf="map === 1"
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.7341024818293!2d-77.02351018578644!3d-12.130336746762024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b7fd50f9f5db%3A0x129c4b7ccf8c2dc2!2sAv.%2028%20de%20Julio%201136%2C%20Miraflores%2015047!5e0!3m2!1ses!2spe!4v1642009579784!5m2!1ses!2spe"
+  width="100%" height="792" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 <!-- END PARDO -->
 
 <!-- 28 DE JULIO -->
-<iframe *ngIf="map === 2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.8965805966145!2d-77.03940318578668!3d-12.119228146550975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c83ccc55db55%3A0xee1a21d484b9cd6f!2sAv.%20Jos%C3%A9%20Pardo%20801%2C%20Lima%2015074!5e0!3m2!1ses!2spe!4v1642007934192!5m2!1ses!2spe"
-    width="100%" height="792" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+<iframe *ngIf="map === 2"
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.8965805966145!2d-77.03940318578668!3d-12.119228146550975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c83ccc55db55%3A0xee1a21d484b9cd6f!2sAv.%20Jos%C3%A9%20Pardo%20801%2C%20Lima%2015074!5e0!3m2!1ses!2spe!4v1642007934192!5m2!1ses!2spe"
+  width="100%" height="792" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 <!-- END 28 DE JULIO -->
 
 <!-- PRIMAVERA -->
-<iframe *ngIf="map === 3" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.030625753682!2d-76.9767242491876!3d-12.110055946337173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c799ed7225b7%3A0xdae3aa58637fb50c!2sAv.%20Primavera%201352%2C%20Santiago%20de%20Surco%2015023!5e0!3m2!1ses!2spe!4v1642002369582!5m2!1ses!2spe"
-    width="100%" height="792" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+<iframe *ngIf="map === 3"
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.030625753682!2d-76.9767242491876!3d-12.110055946337173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c799ed7225b7%3A0xdae3aa58637fb50c!2sAv.%20Primavera%201352%2C%20Santiago%20de%20Surco%2015023!5e0!3m2!1ses!2spe!4v1642002369582!5m2!1ses!2spe"
+  width="100%" height="792" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 <!-- END PRIMAVERA -->
 
 <div class="container fluid py-4">
-    <!-- AYUDA -->
-    <div class="row pb-3">
-        <div class="col-12">
-            <h2 class="title">
-                <strong>¿Necesitas ayuda?</strong>
-            </h2>
-        </div>
+  <!-- AYUDA -->
+  <div class="row pb-3">
+    <div class="col-12">
+      <h2 class="title">
+        <strong>¿Necesitas ayuda?</strong>
+      </h2>
     </div>
-    <div class="row pb-5">
-        <div class="col-12 col-md-7 text-center">
-            <img class="vidthMobile" src="./assets/seguros/ayuda.svg" alt="">
-        </div>
-        <div class="col-md-4 col-12 text-center mt-5">
-            <p class="text-justify mt-sm-3">En <strong>Nmviajes</strong> queremos brindarte el mejor de los servicios. Si necesitas ayuda con tus reservas ponemos a tu disposición nuestro portal de ayuda. Aquí podrás encontrar información valiosa para tu próximo viaje y podrás ponerte
-                en contacto con nosotros si es que tuvieras algún inconveniente.</p>
+  </div>
+  <div class="row pb-5">
+    <div class="col-12 col-md-7 text-center">
+      <img class="vidthMobile" src="./assets/seguros/ayuda.svg" alt="">
+    </div>
+    <div class="col-md-4 col-12 text-center mt-5">
+      <p class="text-justify mt-sm-3">En <strong>Nmviajes</strong> queremos brindarte el mejor de los servicios. Si
+        necesitas ayuda con tus reservas ponemos a tu disposición nuestro portal de ayuda. Aquí podrás encontrar
+        información valiosa para tu próximo viaje y podrás ponerte
+        en contacto con nosotros si es que tuvieras algún inconveniente.</p>
 
-            <button class="my-5" (click)="portalAyuda()">Portal de ayuda</button>
-        </div>
+      <button class="my-5" (click)="portalAyuda()">Portal de ayuda</button>
     </div>
-    <!-- END AYUDA  -->
+  </div>
+  <!-- END AYUDA  -->
 </div>
