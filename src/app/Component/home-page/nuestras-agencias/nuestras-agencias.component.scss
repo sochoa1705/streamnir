@@ -21,6 +21,13 @@ img {
     }
 }
 
+.boxbtn {
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
 h2.titleHome {
     @media (max-width: 768px) {
         font-size: 18px !important
@@ -29,7 +36,7 @@ h2.titleHome {
 
 .direccion {
     @extend .flotante;
-    top: 328px;
+    top: 355px;
     left: 100px;
     padding: 10px 20px;
     @media (max-width: 768px) {
@@ -51,7 +58,7 @@ h2.titleHome {
     top: 180px;
     left: 100px;
     @media (max-width: 768px) {
-        top:124px;
+        top: 124px;
     }
     .mat-div {
         margin: auto
