@@ -27,37 +27,39 @@
     </div>
 
 
-    <div class="rowBoxTab" *ngIf="form.controls.viajes.value != EnumFlightType.multy_city; else multicity">
+    <div class="rowBoxTab" *ngIf="form.controls.viajes.value !== EnumFlightType.multy_city; else multicity">
 
       <div class="colBoxtab w-30 me-md-1">
-        <app-input-autocomplete [(valueInput)]="valueInputOrigen" [validRequired]="isSubmit" (valueInputChange)="cleanInput()"
-          [minTermLength]="minLengthAutocomplete" placeholder="Origen" [items]="vuelos$ | async"
-          [loading]="vuelosLoading" [typeahead]="vuelosInput$" formControlName="origen">
+        <app-input-autocomplete [(valueInput)]="valueInputOrigen" [validRequired]="isSubmit"
+          (valueInputChange)="cleanInput()" [minTermLength]="minLengthAutocomplete" placeholder="Origen"
+          [items]="vuelos$ | async" [loading]="vuelosLoading" [typeahead]="vuelosInput$" formControlName="origen">
         </app-input-autocomplete>
       </div>
 
       <div class="colBoxtab w-30 me-md-1">
 
-        <app-input-autocomplete [(valueInput)]="valueInputDestino" [validRequired]="isSubmit" (valueInputChange)="cleanInput()"
-          [minTermLength]="minLengthAutocomplete" placeholder="Destino" [items]="vuelos2$ | async"
-          [loading]="vuelosLoading2" [typeahead]="vuelosInput2$" formControlName="destino">
+        <app-input-autocomplete [(valueInput)]="valueInputDestino" [validRequired]="isSubmit"
+          (valueInputChange)="cleanInput()" [minTermLength]="minLengthAutocomplete" placeholder="Destino"
+          [items]="vuelos2$ | async" [loading]="vuelosLoading2" [typeahead]="vuelosInput2$" formControlName="destino">
         </app-input-autocomplete>
 
       </div>
 
-      <div class="colBoxtab w-30" *ngIf="form.controls.viajes.value == EnumFlightType.ida_vuelta">
-        <input type="text" class="form-control textIndent" formControlName="departureDate" (focus)="onFocus()" [readonly]="disabledInput"
-          placeholder="dd/mm/yyyy" mask="d0/M0/0*" maxlength="10" style="background-color: #fff;"/>
+      <div class="colBoxtab w-30" *ngIf="form.controls.viajes.value === EnumFlightType.ida_vuelta">
+        <input type="text" class="form-control textIndent" formControlName="departureDate" (focus)="onFocus()"
+          [readonly]="disabledInput" placeholder="dd/mm/yyyy" mask="d0/M0/0*" maxlength="10"
+          style="background-color: #fff;" />
       </div>
-      <div class="colBoxtab w-30" *ngIf="form.controls.viajes.value == EnumFlightType.ida_vuelta">
-        <input type="text" class="form-control textIndent" formControlName="arrivalDate" (focus)="onFocus()" [readonly]="disabledInput"
-          placeholder="dd/mm/yyyy" mask="d0/M0/0*" maxlength="10" style="background-color: #fff;"/>
+      <div class="colBoxtab w-30" *ngIf="form.controls.viajes.value === EnumFlightType.ida_vuelta">
+        <input type="text" class="form-control textIndent" formControlName="arrivalDate" (focus)="onFocus()"
+          [readonly]="disabledInput" placeholder="dd/mm/yyyy" mask="d0/M0/0*" maxlength="10"
+          style="background-color: #fff;" />
       </div>
 
-      <app-calendar-price *ngIf="displayCalendar && form.controls.viajes.value == EnumFlightType.ida_vuelta"
+      <app-calendar-price *ngIf="displayCalendar && form.controls.viajes.value === EnumFlightType.ida_vuelta"
         [flightData]="flightData" (inputDates)="insertDates($event)"></app-calendar-price>
 
-      <app-calendar *ngIf="form.controls.viajes.value != EnumFlightType.ida_vuelta" [requiredFromDate]="isSubmit"
+      <app-calendar *ngIf="form.controls.viajes.value !== EnumFlightType.ida_vuelta" [requiredFromDate]="isSubmit"
         [requiredToDate]="isSubmit" [typeValue]="viajesForm" [toDate]="vuelosTab?.toDate || null"
         [fromDate]="vuelosTab?.fromDate || null" class="ignore-template" (changeDate)="changeDate($event)">
       </app-calendar>
