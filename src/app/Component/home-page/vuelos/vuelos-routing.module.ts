@@ -13,7 +13,7 @@ const routes: Routes = [
       { path: '', component: FlightComponent },
       { path: 'lista', component: FlightComponent },
       //{ path: 'destino/LIM/:codigoCiudad', component: DestinosComponent },
-      { path: 'destino/AQP/:codigoCiudad', component: DestinosComponent },
+      { path: 'destino/LIM/:codigoCiudad', component: DestinosComponent },
       { path: ':slug', component: OffersContinentComponent },
       { path: '**', component: FlightComponent }
     ]

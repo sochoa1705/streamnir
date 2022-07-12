@@ -15,48 +15,44 @@ export class DestinosService {
 
   private paramCiudad = new BehaviorSubject<string>("");
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
 
-  setParam(path:string){
+  setParam(path: string) {
 
-    const pathArray =path.split("/");
+    const pathArray = path.split("/");
 
     const indiceDestino = pathArray.indexOf("destino");
 
+    debugger
 
-    if(indiceDestino === -1){
-
+    if (indiceDestino === -1) {
       this.paramCiudad.next("");
-      
-    }else{
-      const codigoCiudad = pathArray[indiceDestino + 1];
+    } else {
+      const codigoCiudad = pathArray[indiceDestino + 2];
 
       this.paramCiudad.next(codigoCiudad);
-  
     }
-    
   }
 
-  getParam(){
+  getParam() {
     return this.paramCiudad.asObservable();
   }
 
-
-  getVuelos(codeDestination:string,codeOrigin:string='LIM',type:string='A'){
+  getVuelos(codeDestination: string, codeOrigin: string = 'LIM', type: string = 'A') {
     const nmvModel = new NmvModel()
 
     const options = {
       params: nmvModel.params
-              .set('Parameter.CodeDestination', codeDestination)
-              .set('Parameter.CodeOrigin', codeOrigin)
-              .set('Parameter.Type', type)
-      }
+        .set('Parameter.CodeDestination', codeDestination)
+        .set('Parameter.CodeOrigin', codeOrigin)
+        .set('Parameter.Type', type)
+    }
 
-      const url = environment.urlNmviajes + '/Flight/GetLastSearchesByCity';
+    const url = environment.urlNmviajes + '/Flight/GetLastSearchesByCity';
 
-      return this.httpClient.get<ResponseModelT<IDestinos[]>>(url, options).pipe(
-        map(resp=> resp.Result)
+    return this.httpClient.get<ResponseModelT<IDestinos[]>>(url, options).pipe(
+      map(resp => resp.Result)
     )
   }
 

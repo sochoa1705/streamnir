@@ -101,7 +101,7 @@ export class FlightComponent implements OnInit {
 
 
   toDestiny(vuelo: IFlightRates) {
-    this.route.navigate(['/vuelos/destino', vuelo.DestinationCode])
+    this.route.navigate(['/vuelos/destino/LIM', vuelo.DestinationCode])
   }
 
   /* end code */
