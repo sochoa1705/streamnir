@@ -25,9 +25,12 @@ export class VuelosComponent implements OnInit {
   }
 
   listDestiny() {
+    debugger
+
     let payload = new NMRequest();
     this.coreService.getDestiny(payload).pipe(take(1)).subscribe({
       next: (response) => {
+        debugger
         this.destiny = response['Resultado']
         localStorage.setItem('destiny', JSON.stringify(this.destiny));
       },
