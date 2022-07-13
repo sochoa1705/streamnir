@@ -38,7 +38,8 @@ export class FlightDealsComponent implements OnInit {
 
   viewRates(entity: any, index: number): void {
     this.addTag(entity, index, this.limit);
-    this._router.navigateByUrl(`/vuelos/destino/${entity.DestinationCode}`);
+    this._router.navigateByUrl(`/vuelos/destino/LIM/${entity.DestinationCode}`);
+    //this._router.navigateByUrl(`/vuelos/destino/${entity.DestinationCode}`);
   }
 
   addTag(entity: any, index: number, array: number) {
