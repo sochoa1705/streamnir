@@ -4498,6 +4498,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       padding-left: 70px; }
       .viajaBox .mnuViaja .padLeft70 img {
         width: 100%; }
+        @media (max-width: 990px) and (min-width: 640px) {
+          .viajaBox .mnuViaja .padLeft70 img {
+            width: 95%; } }
+        @media (max-width: 640px) {
+          .viajaBox .mnuViaja .padLeft70 img {
+            width: 75%; } }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .viajaBox .mnuViaja .padLeft70 {
+          padding-left: 30px; } }
+    @media (max-width: 640px) {
+      .viajaBox .mnuViaja .vuelos {
+        padding-bottom: 20px; } }
     .viajaBox .mnuViaja .subMenu {
       display: flex;
       align-items: center;
@@ -4521,6 +4533,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       .viajaBox .mnuViaja .subMenu svg {
         margin-right: 15px;
         fill: #ffffff; }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .viajaBox .mnuViaja .subMenu {
+          font-size: 14px; } }
+      @media (max-width: 640px) {
+        .viajaBox .mnuViaja .subMenu {
+          font-size: 12px; } }
+    @media (max-width: 990px) and (min-width: 640px) {
+      .viajaBox .mnuViaja {
+        padding-top: 150px; } }
 
 .sliderOfertas {
   display: flex;

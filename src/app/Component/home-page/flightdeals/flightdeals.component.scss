@@ -106,6 +106,9 @@ span {
             background: $white;
         }
     }
+    @media (max-width: 640px) {
+        display: none !important;
+    }
 }
 
 p {
