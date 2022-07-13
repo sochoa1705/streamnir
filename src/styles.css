@@ -4463,9 +4463,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   padding: 0; }
   .boxImgVuelo .gridVuelo {
     display: grid;
-    grid-template-rows: 15rem 8rem 15rem;
-    grid-column-gap: 1rem;
-    grid-row-gap: 1rem; }
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 270px 115px 270px;
+    grid-column-gap: 30px;
+    grid-row-gap: 10px; }
     .boxImgVuelo .gridVuelo .gridItem1 {
       grid-column: 1/2;
       grid-row: 1/1; }
@@ -4477,9 +4478,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       grid-column: 2/3; }
     .boxImgVuelo .gridVuelo img {
       height: 100%;
+      width: 350px;
       object-fit: cover;
-      object-position: bottom;
-      width: 100%; }
+      object-position: bottom; }
+    @media (max-width: 990px) and (min-width: 640px) {
+      .boxImgVuelo .gridVuelo {
+        grid-column-gap: 10px;
+        grid-template-rows: 230px 115px 250px; } }
   @media (max-width: 990px) and (min-width: 640px) {
     .boxImgVuelo {
       padding: 0 20px; } }
