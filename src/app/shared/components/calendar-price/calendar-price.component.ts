@@ -58,7 +58,7 @@ export class CalendarPriceComponent implements OnInit {
     this.calendarMonths.push(this.getCalendar(firstMonth));
     this.calendarMonths.push(this.getCalendar(new Date(firstMonth.setMonth(firstMonth.getMonth() + 1))));
 
-    if (this.flightData.departureDate != '' && this.flightData.arrivalDate != '') {
+    if (this.flightData.departureDate != '') {
       this.departureDate = {
         day: this.flightData.departureDate.split('/')[0],
         date: this.flightData.departureDate,
@@ -66,13 +66,15 @@ export class CalendarPriceComponent implements OnInit {
         price: '-',
       };
 
-      this.arrivalDate = {
-        day: this.flightData.arrivalDate.split('/')[0],
-        date: this.flightData.arrivalDate,
-        formatYMD: this.flightData.arrivalDate.split('/')[2] + this.flightData.arrivalDate.split('/')[1] + this.flightData.arrivalDate.split('/')[0],
-        price: '-',
-      };
-
+      if (this.flightData.arrivalDate != '') {
+        this.arrivalDate = {
+          day: this.flightData.arrivalDate.split('/')[0],
+          date: this.flightData.arrivalDate,
+          formatYMD: this.flightData.arrivalDate.split('/')[2] + this.flightData.arrivalDate.split('/')[1] + this.flightData.arrivalDate.split('/')[0],
+          price: '-',
+        };
+      }
+      
       this.getTarifas(this.departureDate);
     } else {
       this.departureDate = null;

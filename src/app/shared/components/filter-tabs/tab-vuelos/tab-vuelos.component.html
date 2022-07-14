@@ -4,7 +4,7 @@
     <div class="rowBoxTab">
       <div class="padRight " style="position: relative;">
         <mat-form-field>
-          <mat-select formControlName="viajes" disableOptionCentering>
+          <mat-select formControlName="viajes" disableOptionCentering (valueChange)="changeSelect()">
             <mat-option [value]="EnumFlightType.ida_vuelta">Ida y Vuelta</mat-option>
             <mat-option [value]="EnumFlightType.ida">Solo Ida</mat-option>
             <mat-option [value]="EnumFlightType.multy_city">Multi City</mat-option>
