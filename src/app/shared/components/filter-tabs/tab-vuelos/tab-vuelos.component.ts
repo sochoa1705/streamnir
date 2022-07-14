@@ -573,5 +573,10 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
       this.form.get('arrivalDate')?.setValue('');
     }
   }
+
+  changeSelect(): void {
+    this.form.get('departureDate')?.setValue('');
+    this.form.get('arrivalDate')?.setValue('');
+  }
 }
 
