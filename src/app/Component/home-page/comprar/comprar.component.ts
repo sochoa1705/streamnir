@@ -414,16 +414,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   public validarTarjeta(): void {
-    debugger
-
     this.checkedCard = false;
     this.setCardsDefault();
     this.checkCardService();
   }
 
   private setCardsDefault() {
-    debugger
-
     this.isVisa = false;
     this.isMasterCard = false;
     this.isAmericanExpress = false;
@@ -652,8 +648,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       this.pressedToBuy = true;
       this.callFirstService = true;
 
-      debugger;
-
       console.log('1. buyInsurance');
 
       // if (this.formShop.invalid)
@@ -719,8 +713,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   validateCheckFormCustomers(): boolean {
-    debugger
-
     let data = this.formShop.value;
     if (!data.chkPolity) {
       this._notification.showNotificacion("Error", "Debe aceptar las políticas de protección de datos personales");
@@ -994,8 +986,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
           const missingDays = fromDate.diff(currentDate, 'days');
 
-          debugger
-
           const model = {
             event: 'nmv.seguros_eecga3_purchase',
             ecommerce: {
@@ -1042,8 +1032,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
             asegurados.push(asegurado);
           });
-
-          debugger
 
           const notificationBody: CeSeguroCeEmailParameterCustomCeRequest1 = {
             Caller: {

@@ -120,6 +120,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
         this.form.controls["origen"].patchValue(null);
         this.form.controls["destino"].patchValue(null);
       } else {
+        debugger
         this.initCiudadDestino(codigo)
       }
     })
@@ -129,6 +130,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
   initCiudadDestino(codigoCiudad: string) {
 
+    debugger
 
     this.form.controls["origen"].patchValue({
       children: [],
@@ -566,9 +568,9 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     }
   }
 
-  cleanInput(): void{
+  cleanInput(): void {
     this.disabledInput = this.valueInputDestino == '' || this.valueInputDestino == '';
-    if(this.disabledInput) {
+    if (this.disabledInput) {
       this.form.get('departureDate')?.setValue('');
       this.form.get('arrivalDate')?.setValue('');
     }
