@@ -76,7 +76,7 @@ export class OffersContinentComponent implements OnInit {
   }
 
   viewRates(entity: any): void {
-    this._router.navigateByUrl(`/vuelos/destino/${entity.DestinationCode}`);
+    this._router.navigateByUrl(`/vuelos/destino/LIM/${entity.DestinationCode}`);
   }
 
 }
