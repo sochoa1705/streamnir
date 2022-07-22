@@ -8,7 +8,7 @@ img {
 
 .flotante {
     position: absolute;
-    width: 510px;
+    width: 460px;
     height: auto;
     background: #FFFFFF;
     border-radius: 5px;
@@ -26,6 +26,26 @@ img {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+    gap: 5px;
+    .btn-agencias {
+        @media (max-width: 990px) and (min-width: 640px) {
+            line-height: 20px;
+            font-size: 10px;
+            padding: 5px 10px;
+        }
+        @media (max-width: 640px) {
+            line-height: 20px;
+            font-size: 10px;
+            padding: 5px 10px;
+        }
+    }
+    @media (max-width: 990px) and (min-width: 640px) {
+        height: auto;
+    }
+    @media (max-width: 640px) {
+        height: auto;
+    }
 }
 
 h2.titleHome {
@@ -36,30 +56,47 @@ h2.titleHome {
 
 .direccion {
     @extend .flotante;
-    top: 355px;
-    left: 100px;
+    top: 356px;
+    left: 10px;
     padding: 10px 20px;
-    @media (max-width: 768px) {
-        top: 260px;
-    }
     .row {
         margin: 10px 0;
-        span {
-            display: block;
-            @media (max-width: 768px) {
-                font-size: 16px !important
+        &:last-child {
+            @media (max-width: 640px) {
+                display: none;
             }
         }
+        span {
+            display: block;
+            img {
+                @media (max-width: 990px) and (min-width: 640px) {
+                    height: 60px;
+                }
+            }
+            @media (max-width: 990px) and (min-width: 640px) {
+                font-size: 14px !important
+            }
+            @media (max-width: 640px) {
+                font-size: 12px !important
+            }
+        }
+    }
+    @media (max-width: 990px) and (min-width: 640px) {
+        top: inherit;
+        left: 10px;
+        width: 350px;
+        bottom: 10px;
+    }
+    @media (max-width: 640px) {
+        top: inherit;
+        bottom: 0px;
     }
 }
 
 .buscador {
     @extend .flotante;
     top: 180px;
-    left: 100px;
-    @media (max-width: 768px) {
-        top: 124px;
-    }
+    left: 10px;
     .mat-div {
         margin: auto
     }
@@ -70,6 +107,24 @@ h2.titleHome {
         &:focus-visible {
             outline: 0;
         }
+    }
+    hr {
+        @media (max-width: 990px) and (min-width: 640px) {
+            margin: 10px 0;
+        }
+        @media (max-width: 640px) {
+            margin: 10px 0;
+        }
+    }
+    @media (max-width: 990px) and (min-width: 640px) {
+        top: 124px;
+        left: 10px;
+        width: 350px;
+    }
+    @media (max-width: 640px) {
+        top: 60px;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 }
 
