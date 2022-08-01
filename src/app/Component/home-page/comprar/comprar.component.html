@@ -98,7 +98,8 @@
                         (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
                         (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje.">
 
-                      <span class="valid" *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required && customers.controls[i].get('nameCustomer')?.touched">
+                      <span class="valid"
+                        *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required && customers.controls[i].get('nameCustomer')?.touched">
                         Ingresa los nombres del pasajero
                       </span>
                     </div>
@@ -110,7 +111,8 @@
                         (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
                         (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje.">
 
-                      <span class="valid" *ngIf="customers.controls[i].get('lastNameCustomer')?.errors?.required && customers.controls[i].get('lastNameCustomer')?.touched">
+                      <span class="valid"
+                        *ngIf="customers.controls[i].get('lastNameCustomer')?.errors?.required && customers.controls[i].get('lastNameCustomer')?.touched">
                         Ingresa los apellidos del pasajero
                       </span>
                     </div>
@@ -124,7 +126,8 @@
                             <option value="">Día</option>
                             <option *ngFor="let day of days" value="{{day}}">{{day}}</option>
                           </select>
-                          <span class="valid" *ngIf="customers.controls[i].get('dayCustomer')?.errors?.required && customers.controls[i].get('dayCustomer')?.touched">
+                          <span class="valid"
+                            *ngIf="customers.controls[i].get('dayCustomer')?.errors?.required && customers.controls[i].get('dayCustomer')?.touched">
                             Selecciona el día
                           </span>
                         </div>
@@ -135,7 +138,8 @@
                             <option *ngFor="let elem of months" [value]="elem.value">{{
                               elem.name }}</option>
                           </select>
-                          <span class="valid" *ngIf="customers.controls[i].get('monthCustomer')?.errors?.required && customers.controls[i].get('monthCustomer')?.touched">
+                          <span class="valid"
+                            *ngIf="customers.controls[i].get('monthCustomer')?.errors?.required && customers.controls[i].get('monthCustomer')?.touched">
                             Selecciona el mes
                           </span>
                         </div>
@@ -149,7 +153,8 @@
                             <option value="{{this.resultJson['aniosNacimiento'][i].anio - 1}}">
                               {{this.resultJson['aniosNacimiento'][i].anio - 1}}</option>
                           </select>
-                          <span class="valid" *ngIf="customers.controls[i].get('yearCustomer')?.errors?.required && customers.controls[i].get('yearCustomer')?.touched">
+                          <span class="valid"
+                            *ngIf="customers.controls[i].get('yearCustomer')?.errors?.required && customers.controls[i].get('yearCustomer')?.touched">
                             Selecciona el año
                           </span>
                         </div>
@@ -166,7 +171,8 @@
                           {{ elem.Name }}
                         </option>
                       </select>
-                      <span class="valid" *ngIf="customers.controls[i].get('nationalityCustomer')?.errors?.required && customers.controls[i].get('nationalityCustomer')?.touched">
+                      <span class="valid"
+                        *ngIf="customers.controls[i].get('nationalityCustomer')?.errors?.required && customers.controls[i].get('nationalityCustomer')?.touched">
                         Selecciona la nacionalidad
                       </span>
                     </div>
@@ -181,7 +187,8 @@
                         <option value="PSP">Pasaporte</option>
                         <option value="CEX">C. Extranjería</option>
                       </select>
-                      <span class="valid" *ngIf="customers.controls[i].get('typeDocCustomer')?.errors?.required && customers.controls[i].get('typeDocCustomer')?.touched">
+                      <span class="valid"
+                        *ngIf="customers.controls[i].get('typeDocCustomer')?.errors?.required && customers.controls[i].get('typeDocCustomer')?.touched">
                         Seleccione el tipo de documento
                       </span>
                     </div>
@@ -191,9 +198,10 @@
                       <input class="form-control" formControlName="numDocCustomer" type="text"
                         (keypress)="allowOfficialDocument($event, i)" (paste)="denyPaste($event)"
                         (drop)="denyDrop($event)" name="ndocumento">
-                        <span class="valid" *ngIf="customers.controls[i].get('numDocCustomer')?.errors?.required && customers.controls[i].get('numDocCustomer')?.touched">
-                          Seleccione el número de documento
-                        </span>
+                      <span class="valid"
+                        *ngIf="customers.controls[i].get('numDocCustomer')?.errors?.required && customers.controls[i].get('numDocCustomer')?.touched">
+                        Seleccione el número de documento
+                      </span>
                     </div>
 
                     <div class="col-6 viewMobileWidth">
@@ -212,7 +220,8 @@
                           <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
                         </div>
                       </div>
-                      <span class="valid" *ngIf="customers.controls[i].get('sexCustomer')?.errors?.required && customers.controls[i].get('sexCustomer')?.touched">
+                      <span class="valid"
+                        *ngIf="customers.controls[i].get('sexCustomer')?.errors?.required && customers.controls[i].get('sexCustomer')?.touched">
                         Seleccione el sexo
                       </span>
                     </div>
@@ -485,7 +494,7 @@
                     </a>
                   </h2>
 
-                  <div *ngIf="showDetalle == true">
+                  <div *ngIf="showDetalle === true">
                     <div class="accordion-body">
                       <div class="row" *ngFor="let elem of safe0Json.tarifario">
                         <div class="col-7">
@@ -825,7 +834,8 @@
                       (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                       placeholder="El que figura en el documento de viaje.">
 
-                    <span class="valid" *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required && customers.controls[i].get('nameCustomer')?.touched">
+                    <span class="valid"
+                      *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required && customers.controls[i].get('nameCustomer')?.touched">
                       Ingresa los nombres del pasajero
                     </span>
                   </div>
@@ -837,7 +847,8 @@
                       (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                       placeholder="El que figura en el documento de viaje." type="text">
 
-                    <span class="valid" *ngIf="customers.controls[i].get('lastNameCustomer')?.errors?.required && customers.controls[i].get('lastNameCustomer')?.touched">
+                    <span class="valid"
+                      *ngIf="customers.controls[i].get('lastNameCustomer')?.errors?.required && customers.controls[i].get('lastNameCustomer')?.touched">
                       Ingresa los apellidos del pasajero
                     </span>
                   </div>
@@ -853,7 +864,8 @@
                           <option value="">Día</option>
                           <option *ngFor="let day of days" value="{{day}}">{{day}}</option>
                         </select>
-                        <span class="valid" *ngIf="customers.controls[i].get('dayCustomer')?.errors?.required && customers.controls[i].get('dayCustomer')?.touched">
+                        <span class="valid"
+                          *ngIf="customers.controls[i].get('dayCustomer')?.errors?.required && customers.controls[i].get('dayCustomer')?.touched">
                           Selecciona el día
                         </span>
                       </div>
@@ -864,7 +876,8 @@
                           <option *ngFor="let elem of months" [value]="elem.value">{{
                             elem.name }}</option>
                         </select>
-                        <span class="valid" *ngIf="customers.controls[i].get('monthCustomer')?.errors?.required && customers.controls[i].get('monthCustomer')?.touched">
+                        <span class="valid"
+                          *ngIf="customers.controls[i].get('monthCustomer')?.errors?.required && customers.controls[i].get('monthCustomer')?.touched">
                           Selecciona el mes
                         </span>
                       </div>
@@ -878,7 +891,8 @@
                           <option value="{{this.resultJson['aniosNacimiento'][i].anio - 1}}">
                             {{this.resultJson['aniosNacimiento'][i].anio - 1}}</option>
                         </select>
-                        <span class="valid" *ngIf="customers.controls[i].get('yearCustomer')?.errors?.required && customers.controls[i].get('yearCustomer')?.touched">
+                        <span class="valid"
+                          *ngIf="customers.controls[i].get('yearCustomer')?.errors?.required && customers.controls[i].get('yearCustomer')?.touched">
                           Selecciona el año
                         </span>
                       </div>
@@ -894,7 +908,8 @@
                         {{ elem.Name }}
                       </option>
                     </select>
-                    <span class="valid" *ngIf="customers.controls[i].get('nationalityCustomer')?.errors?.required && customers.controls[i].get('nationalityCustomer')?.touched">
+                    <span class="valid"
+                      *ngIf="customers.controls[i].get('nationalityCustomer')?.errors?.required && customers.controls[i].get('nationalityCustomer')?.touched">
                       Selecciona la nacionalidad
                     </span>
                   </div>
@@ -911,7 +926,8 @@
                       <option value="PSP">Pasaporte</option>
                       <option value="CEX">C. Extranjería</option>
                     </select>
-                    <span class="valid" *ngIf="customers.controls[i].get('typeDocCustomer')?.errors?.required && customers.controls[i].get('typeDocCustomer')?.touched">
+                    <span class="valid"
+                      *ngIf="customers.controls[i].get('typeDocCustomer')?.errors?.required && customers.controls[i].get('typeDocCustomer')?.touched">
                       Seleccione el tipo de documento
                     </span>
                   </div>
@@ -922,9 +938,10 @@
                     <input class="form-control" formControlName="numDocCustomer" maxlength="12" type="text"
                       (keypress)="allowOfficialDocument($event, i)" (paste)="denyPaste($event)"
                       (drop)="denyDrop($event)" name="ndocumento">
-                      <span class="valid" *ngIf="customers.controls[i].get('numDocCustomer')?.errors?.required && customers.controls[i].get('numDocCustomer')?.touched">
-                        Seleccione el número de documento
-                      </span>
+                    <span class="valid"
+                      *ngIf="customers.controls[i].get('numDocCustomer')?.errors?.required && customers.controls[i].get('numDocCustomer')?.touched">
+                      Seleccione el número de documento
+                    </span>
                   </div>
 
                   <div class="col-6 viewMobileWidth">
@@ -943,7 +960,8 @@
                         <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
                       </div>
                     </div>
-                    <span class="valid" *ngIf="customers.controls[i].get('sexCustomer')?.errors?.required && customers.controls[i].get('sexCustomer')?.touched">
+                    <span class="valid"
+                      *ngIf="customers.controls[i].get('sexCustomer')?.errors?.required && customers.controls[i].get('sexCustomer')?.touched">
                       Seleccione el sexo
                     </span>
                   </div>
