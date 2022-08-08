@@ -18,6 +18,9 @@ import { PromocionesComponent } from '../promociones/promociones.component';
 import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/page-not-found.component';
 import { ComprarComponent } from './comprar/comprar.component';
 import { CondicionesDeReservaComponent } from './condiciones-de-reserva/condiciones-de-reserva.component';
+import { CierrapuertasComponent } from './cierrapuertas/cierrapuertas.component';
+import { CierrapuertasOfertasComponent } from './cierrapuertas-ofertas/cierrapuertas-ofertas.component';
+import { TusdatosComponent } from './tusdatos/tusdatos.component';
 
 const routes: Routes = [
   {
@@ -85,8 +88,21 @@ const routes: Routes = [
         component: LibroReclamacionesComponent
       },
       {
+        path: 'cierrapuertas',
+        component: CierrapuertasComponent,
+      },
+      {
+        path: 'cierrapuertas/ofertas',
+        component: CierrapuertasOfertasComponent,
+      },
+      {
+        path: 'tusdatos',
+        component: TusdatosComponent,
+      },
+      {
         path: 'agendar-cita',
         component: CitaComponent
+
       },
       {
         path: 'politicas',
