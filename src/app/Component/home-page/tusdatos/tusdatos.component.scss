@@ -1,0 +1,15 @@
+.iframeTusDatos {
+  height: 100%;
+
+  .heightIframe {
+    height: 100%;
+  }
+
+  @media (max-width: 990px) and (min-width: 640px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 12px;
+  }
+}
