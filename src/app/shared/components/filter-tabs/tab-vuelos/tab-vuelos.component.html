@@ -30,24 +30,26 @@
     <div class="rowBoxTab" *ngIf="form.controls.viajes.value !== EnumFlightType.multy_city; else multicity">
 
       <div class="colBoxtab w-30 me-md-1">
-        <app-input-autocomplete [(valueInput)]="valueInputOrigen" [validRequired]="isSubmit"
+        <app-input-autocomplete #inputOrigen [(valueInput)]="valueInputOrigen" [validRequired]="isSubmit"
           (valueInputChange)="cleanInput()" [minTermLength]="minLengthAutocomplete" placeholder="Origen"
-          [items]="vuelos$ | async" [loading]="vuelosLoading" [typeahead]="vuelosInput$" formControlName="origen">
+          [items]="vuelos$ | async" [loading]="vuelosLoading" [typeahead]="vuelosInput$" formControlName="origen"
+          (keypress)="onkeypressSource($event)">
         </app-input-autocomplete>
       </div>
 
       <div class="colBoxtab w-30 me-md-1">
 
-        <app-input-autocomplete [(valueInput)]="valueInputDestino" [validRequired]="isSubmit"
+        <app-input-autocomplete #inputDestino [(valueInput)]="valueInputDestino" [validRequired]="isSubmit"
           (valueInputChange)="cleanInput()" [minTermLength]="minLengthAutocomplete" placeholder="Destino"
-          [items]="vuelos2$ | async" [loading]="vuelosLoading2" [typeahead]="vuelosInput2$" formControlName="destino">
+          [items]="vuelos2$ | async" [loading]="vuelosLoading2" [typeahead]="vuelosInput2$" formControlName="destino"
+          (keypress)="onkeypressDestiny($event)">
         </app-input-autocomplete>
 
       </div>
 
       <div class="colBoxtab w-30" *ngIf="form.controls.viajes.value === EnumFlightType.ida_vuelta">
-        <input type="text" class="form-control textIndent" formControlName="departureDate" (focus)="onFocus()"
-          [readonly]="disabledInput" placeholder="dd/mm/yyyy" mask="d0/M0/0*" maxlength="10"
+        <input #inputDepartureDate type="text" class="form-control textIndent" formControlName="departureDate"
+          (focus)="onFocus()" [readonly]="disabledInput" placeholder="dd/mm/yyyy" mask="d0/M0/0*" maxlength="10"
           style="background-color: #fff;" />
       </div>
       <div class="colBoxtab w-30" *ngIf="form.controls.viajes.value === EnumFlightType.ida_vuelta">

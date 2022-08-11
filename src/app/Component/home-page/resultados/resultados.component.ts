@@ -13,7 +13,7 @@ import { EnumFlightType } from 'src/app/shared/components/tabs/tabs.models';
 export class ResultadosComponent implements OnInit {
 
 
-  urlIframe:string;
+  urlIframe: string;
 
   constructor(
     public route: Router,
@@ -33,12 +33,12 @@ export class ResultadosComponent implements OnInit {
     //   (frm || {}).style.height = height + 'px';
     // }); 
 
-    window.addEventListener('message', function(event) {
+    window.addEventListener('message', function (event) {
       console.log('event height ', event);
       let frm = document.getElementById("iframeMotorVuelos");
       let height = event.data?.data?.height + 50;
-      if(event.data?.data?.scroolTop){
-        this.window.scrollTo(0,0);
+      if (event.data?.data?.scroolTop) {
+        this.window.scrollTo(0, 0);
       }
       // @ts-ignore: Object is possibly 'null'.
       (frm || {}).style?.height = height + 'px';
@@ -52,7 +52,7 @@ export class ResultadosComponent implements OnInit {
     this.ar.queryParams.subscribe((resp) => {
       this.urlIframe = environment.urlIframeMotorVuelos + '?rand=' + Math.round(Math.random() * 10000000000) + "&";
 
-      let {  
+      let {
         arrivalDate,
         flightClass,
         departure,
@@ -62,49 +62,57 @@ export class ResultadosComponent implements OnInit {
         infants,
         children,
         flightType,
-        json
+        json,
+        email
       } = resp as ParamsVuelos;
 
       let disponibilidadPayload;
       let payload;
-      if(resp.json) {
+      if (resp.json) {
         disponibilidadPayload = new IframeMotorVuelosJson(
           {
-           flightType: Number(flightType),
-           flightClass: flightClass,
-           adults:  Number(adults),
-           children: Number(children),
-           infants:  Number(infants),
-           json: json
+            flightType: Number(flightType),
+            flightClass: flightClass,
+            adults: Number(adults),
+            children: Number(children),
+            infants: Number(infants),
+            json: json,
+            email: email
           }
-         );
+        );
 
-         payload = {...disponibilidadPayload};
-         
+        payload = { ...disponibilidadPayload };
+
       } else {
 
-         disponibilidadPayload = new IframeMotorVuelos(
+        disponibilidadPayload = new IframeMotorVuelos(
           {
-           flightType: Number(flightType),
-           flightClass: flightClass,
-           departureLocation:departure,
-           arrivalLocation: destination,
-           departureDate: departureDate,
-           arrivalDate:arrivalDate ,
-           adults:  Number(adults),
-           children: Number(children),
-           infants:  Number(infants)
+            flightType: Number(flightType),
+            flightClass: flightClass,
+            departureLocation: departure,
+            arrivalLocation: destination,
+            departureDate: departureDate,
+            arrivalDate: arrivalDate,
+            adults: Number(adults),
+            children: Number(children),
+            infants: Number(infants),
+            email: email
           }
-         );
+        );
 
-         payload = {...disponibilidadPayload};
+        payload = { ...disponibilidadPayload };
 
-        if(payload.flightType == EnumFlightType.ida){
+        if (payload.flightType == EnumFlightType.ida) {
           delete (payload.arrivalDate);
         }
       }
-      
+
       const params = objectToQueryString(payload);
+
+      debugger
+      console.log('url iframe');
+      console.log(this.urlIframe + params);
+
 
       this.urlIframe = this.urlIframe + params;
 

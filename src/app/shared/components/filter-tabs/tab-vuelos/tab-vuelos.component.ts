@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -27,6 +27,8 @@ import { UserStorage, AccountsService } from '../../../../Services/accounts.serv
 })
 export class TabVuelosComponent implements OnInit, OnDestroy {
 
+  @ViewChild('inputDestino', { static: false }) inputDestino!: any;//ElementRef<HTMLInputElement>
+  @ViewChild('inputDepartureDate') inputDepartureDate: ElementRef;
 
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
 
@@ -75,7 +77,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
   minLengthAutocomplete = 3;
 
-
   valueInputOrigen = "";
   valueInputDestino = "";
 
@@ -90,7 +91,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   processOk = true;
   disabledInput = true;
 
-
   constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter, private calendar: NgbCalendar,
     private _snackBar: MatSnackBar, private router: Router, private destinosService: DestinosService, public accountService: AccountsService,
     private notification: NotificationService, private fb: FormBuilder, private intermediaryService: IntermediaryService
@@ -98,7 +98,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     this.createForm();
     this.createFormMultiCity();
   }
-
 
   ngOnInit(): void {
     this.loadVuelosOrigen();
@@ -108,10 +107,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     this.userStorage = this.accountService.getUserStorage();
   }
 
-
-
   logicPathVuelos() {
-
     this.destinosService.getParam().pipe(
       takeUntil(this.destroy$)
     ).subscribe(codigo => {
@@ -119,19 +115,13 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
         this.form.controls["origen"].patchValue(null);
         this.form.controls["destino"].patchValue(null);
-      } else {
-        debugger
+      } else
         this.initCiudadDestino(codigo)
-      }
     })
 
   }
 
-
   initCiudadDestino(codigoCiudad: string) {
-
-    debugger
-
     this.form.controls["origen"].patchValue({
       children: [],
       codigo: "LIM",
@@ -147,12 +137,11 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
       this.valueInputDestino = ciudad[0].title;
     })
-
   }
+
   get viajesForm() {
     return this.form.get("viajes")?.value;
   }
-
 
   private loadVuelosOrigen() {
     this.vuelos$ = concat(
@@ -245,7 +234,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     return nuevoArray;
   }
 
-
   openSnackBar(message: string, action: string = "Error") {
     this._snackBar.open(message, "", {
       duration: 10000,
@@ -305,7 +293,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     }
 
     return errors;
-
   }
 
   emitValidation(validation: string) {
@@ -317,8 +304,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
       return;
     }
   }
-
-
 
   public searchVueloHotel() {
     this.processOk = true;
@@ -371,7 +356,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
       }
     })
 
-
     const getCabinsVuelosCode = (cabin: string) => {
       switch (cabin) {
         case EnumCabinsVuelos.economy:
@@ -384,7 +368,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
           return ""
       }
     }
-
 
     const nombre = `${params.idOrigen}_${params.idDestino}_${params.businessClass ? 'BS' : 'EC'}_${getTipoTag(params.flightType).codigo}`;
 
@@ -420,7 +403,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
   }
 
-
   getParams() {
     let params = new ParamsVuelos(
       {
@@ -432,10 +414,11 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
         email: this.userStorage.email || ''
       }
     );
+
     return params;
   }
-  public getUrl() {
 
+  public getUrl() {
     this.userStorage = this.accountService.getUserStorage();
 
     let url = ''
@@ -579,6 +562,16 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   changeSelect(): void {
     this.form.get('departureDate')?.setValue('');
     this.form.get('arrivalDate')?.setValue('');
+  }
+
+  onkeypressSource(event: any) {
+    if (event.keyCode === 13)
+      this.inputDestino.inputSearch.nativeElement.focus();
+  }
+
+  onkeypressDestiny(event: any) {
+    if (event.keyCode === 13)
+      this.inputDepartureDate.nativeElement.focus();
   }
 }
 

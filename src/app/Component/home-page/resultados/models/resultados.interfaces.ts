@@ -187,22 +187,22 @@ export type CodePassenger = "ADT" | "CNN" | "INF" | "CH" | "CHD";
 
 
 export interface IParamsVuelos {
-    directSubmit:  string;
-    tripType:      string;
-    destination:   string;
-    departure:     string;
+    directSubmit: string;
+    tripType: string;
+    destination: string;
+    departure: string;
     departureDate: string;
-    arrivalDate:   string;
-    adults:        string;
-    children:  string;
-    infants:  string;
+    arrivalDate: string;
+    adults: string;
+    children: string;
+    infants: string;
     flightClass: string;
-    lang:          string;
-    flightType:    string;
+    lang: string;
+    flightType: string;
 }
 
 
-export class ParamsVuelos implements IParamsVuelos{
+export class ParamsVuelos implements IParamsVuelos {
     constructor(
         public flightType: string,
         public departure: string,
@@ -214,39 +214,42 @@ export class ParamsVuelos implements IParamsVuelos{
         public infants: string,
         public flightClass: EnumCabinsVuelos,
         public excludedAirlines = null,
-        public multicity = null, 
+        public multicity = null,
         public directSubmit: string = "",
         public tripType: string = "",
         public lang: string = "",
-        public json: string = ""
-    ){}
+        public json: string = "",
+        public email: string = ""
+    ) { }
 }
 
 
-export interface IframeMotorVuelosProps{
-    flightType:number;
-    departureLocation?:string;
-    arrivalLocation?:string;
-    departureDate?:string;
-    arrivalDate?:string;
-    adults:number;
-    children:number;
-    infants:number;
-    flightClass:EnumCabinsVuelos;
-    selected_cabins?:string;
-    excludedAirlines?:string;
-    multicity?:string;
+export interface IframeMotorVuelosProps {
+    flightType: number;
+    departureLocation?: string;
+    arrivalLocation?: string;
+    departureDate?: string;
+    arrivalDate?: string;
+    adults: number;
+    children: number;
+    infants: number;
+    flightClass: EnumCabinsVuelos;
+    selected_cabins?: string;
+    excludedAirlines?: string;
+    multicity?: string;
     json?: string
+    email?: string
 }
 
-export interface IframeMotorVuelosJsonProps{
-    flightType:number;
-    adults:number;
-    children:number;
-    infants:number;
-    flightClass:EnumCabinsVuelos;
-    selected_cabins?:string;
-    excludedAirlines?:string;
-    multicity?:string;
-    json?: string
+export interface IframeMotorVuelosJsonProps {
+    flightType: number;
+    adults: number;
+    children: number;
+    infants: number;
+    flightClass: EnumCabinsVuelos;
+    selected_cabins?: string;
+    excludedAirlines?: string;
+    multicity?: string;
+    json?: string;
+    email?: string;
 }

@@ -36,8 +36,7 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
 
   public typeToSearchText: string;
 
-
-  @Input() valueInput: string  = "";
+  @Input() valueInput: string = "";
   @Output() valueInputChange = new EventEmitter();
 
   @Input() placeholder: string;
@@ -46,13 +45,15 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
 
   @Input() typeahead: Subject<string>;
 
-  _minTermLength:number;
+  @ViewChild('inputSearch') inputSearch: ElementRef;
 
-  get minTermLength():number{
+  _minTermLength: number;
+
+  get minTermLength(): number {
     return this._minTermLength;
   }
 
-  @Input() set minTermLength(value:number){
+  @Input() set minTermLength(value: number) {
     this._minTermLength = value;
     this.typeToSearchText = `Por favor ingrese ${this._minTermLength} o más caracteres`;
   };
@@ -66,7 +67,7 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   onChange = (_: any) => { };
   onTouch = () => { };
 
-  constructor( public inputValidator : InputValidationService) {
+  constructor(public inputValidator: InputValidationService) {
     this.viewIcon = false
   }
 
@@ -74,14 +75,27 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     this.hideBoxLogic();
   }
 
-  keyUp(target: any) {
-    this.inputTxt = target.value
+  onkeypress(event: any) {
+    if (event.keyCode === 13)
+      event.preventDefault();
+  }
 
-    const value: string = target.value || '';
+  onBlur() {
+    if (this.items?.length) {
+      this.valueInput = this._items[0].title;
+      this.valueInputChange.next(this.valueInput);
 
-    this.valueInputChange.next(value)
+      this.selectItm(this._items[0]);
+    }
+  }
 
-    
+  keyUp(event: any) {
+    this.inputTxt = event.target.value
+
+    const value: string = event.target.value || '';
+
+    this.valueInputChange.next(value);
+
     if (value.length >= this.minTermLength) {
       this.showBoxOrigen(true)
       this.viewIcon = true
@@ -98,7 +112,6 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     if (this._items.length > 0) {
       setTimeout(() => {
         this.showBoxOrigen(false)
-
       }, 600);
     }
   }
@@ -111,7 +124,6 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     this.onChange(itm);
     this.hideBoxOrigen();
   }
-
 
   writeValue(value: ICardAutocomplete): void {
     if (value) {
@@ -128,9 +140,11 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any): void {
     this.onTouch = fn;
   }
+
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
@@ -155,8 +169,6 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
         }
 
       }
-
-
     });
   }
 
@@ -164,8 +176,8 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     this.value = null;
     this.valueInput = "";
     this.viewIcon = false;
-    this._items = [];
-    this.valueInputChange.next("")
+
+    this.inputSearch.nativeElement.focus();
   }
 
   ngOnDestroy() {
