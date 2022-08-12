@@ -22,9 +22,10 @@ import { PasswordService } from './password/password.service';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
 import { RouterModule } from '@angular/router';
 import { MyProfyleComponent } from './my-profyle/my-profyle.component';
+import { MisReservasComponent } from './mis-reservas/mis-reservas.component';
 
 @NgModule({
-  declarations: [PerfilComponent, ContactoComponent, PassengerComponent, PasswordComponent, PreferenciasComponent, MyProfyleComponent],
+  declarations: [PerfilComponent, ContactoComponent, PassengerComponent, PasswordComponent, PreferenciasComponent, MyProfyleComponent, MisReservasComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -36,7 +37,8 @@ import { MyProfyleComponent } from './my-profyle/my-profyle.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    FileModule
+    FileModule,
+
   ],
   exports: [PerfilComponent, PreferenciasComponent],
   providers: [DataPagePresenterService, PreferenceService, ContactoService, PassengersService, PasswordService]
