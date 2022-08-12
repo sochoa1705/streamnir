@@ -1,15 +1,26 @@
 .iframeTusDatos {
-  height: 100%;
+  width: 100%;
+  min-height: 1500px;
 
-  .heightIframe {
-    height: 100%;
+  @media (max-width: 500px) and (min-width: 276px) {
+    min-height: 3200px;
   }
 
-  @media (max-width: 990px) and (min-width: 640px) {
-    font-size: 14px;
-  }
-
-  @media (max-width: 640px) {
-    font-size: 12px;
+  @media (max-width: 1280px) and (min-width: 800px) {
+    min-height: 1800px;
   }
 }
+
+// .iframeTusDatos {
+//   // height: 100%;
+
+
+
+//   @media (max-width: 990px) and (min-width: 640px) {
+//     font-size: 14px;
+//   }
+
+//   @media (max-width: 640px) {
+//     font-size: 12px;
+//   }
+// }

@@ -11,15 +11,17 @@ export class TusdatosComponent implements OnInit {
 
   ngOnInit(): void {
     window.addEventListener('message', function (event) {
-      console.log('event height ', event);
+      debugger
+      //console.log('event height ', event);
+
       let frm = document.getElementById("iframeTusDatos");
-      let height = event.data?.data?.height + 50;
-      if (event.data?.data?.scroolTop) {
+      let height = event.data + 50;
+      if (event.data?.scroolTop) {
         this.window.scrollTo(0, 0);
       }
+
       // @ts-ignore: Object is possibly 'null'.
       (frm || {}).style?.height = height + 'px';
     });
   }
-
 }
