@@ -1337,6 +1337,44 @@ section {
   letter-spacing: 0.25px;
   color: #b9bcbf; }
 
+.personalDocument .rowContent.gridVuelo {
+  padding: 10px 26px !important;
+  flex-direction: column !important;
+  gap: 15px; }
+.personalDocument .rowContent .rowVuelo {
+  display: flex;
+  flex: 1 1 100%;
+  gap: 10px;
+  border-radius: 5px;
+  border: 1px solid #E4E5E7;
+  padding: 10px;
+  transition: 0.3s all; }
+  .personalDocument .rowContent .rowVuelo:hover {
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15); }
+  .personalDocument .rowContent .rowVuelo .colVuelo {
+    display: flex;
+    align-items: center;
+    gap: 10px; }
+    .personalDocument .rowContent .rowVuelo .colVuelo.fullAuto {
+      flex: 1 1 auto;
+      font-weight: 400;
+      font-size: 14px; }
+    .personalDocument .rowContent .rowVuelo .colVuelo.flexCol {
+      flex: 1 1 auto;
+      flex-direction: column;
+      font-weight: 600;
+      font-size: 14px; }
+    .personalDocument .rowContent .rowVuelo .colVuelo .msgLabel {
+      font-weight: 500;
+      font-size: 9px;
+      padding: 10px;
+      color: #ffffff; }
+      .personalDocument .rowContent .rowVuelo .colVuelo .msgLabel.success {
+        background: rgba(19, 191, 166, 0.75);
+        border-radius: 10px; }
+      .personalDocument .rowContent .rowVuelo .colVuelo .msgLabel.disabled {
+        visibility: hidden; }
+
 .box-container .box-content .headerPortlet {
   display: flex;
   flex-wrap: wrap;
@@ -2708,6 +2746,128 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     line-height: 24px;
     letter-spacing: 0.15px;
     color: #4b4b4b; }
+
+#ModalDetResarva .modal-dialog {
+  min-width: 80% !important; }
+#ModalDetResarva .modal-header {
+  font-family: 'Open Sans';
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px !important;
+  background: #F6F7F9;
+  border-radius: 10px; }
+  #ModalDetResarva .modal-header .title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding-right: 60px; }
+    #ModalDetResarva .modal-header .title .textTitle {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      color: #4B4B4B; }
+    #ModalDetResarva .modal-header .title .msgTag {
+      padding: 15px;
+      background: rgba(19, 191, 166, 0.75);
+      border-radius: 5px;
+      height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px; }
+#ModalDetResarva .modal-body {
+  padding: 20px !important;
+  background: #F6F7F9;
+  border-radius: 10px; }
+  #ModalDetResarva .modal-body .msgAlert {
+    background: #FFF3CD;
+    border: 1px solid #FFECB5;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.25px;
+    color: #664D03;
+    text-align: center;
+    padding: 15px; }
+  #ModalDetResarva .modal-body .portletReserva {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    gap: 20px; }
+    #ModalDetResarva .modal-body .portletReserva .boxDetReserva {
+      background: #ffffff;
+      border: 0.5px solid #e4e5e7;
+      box-sizing: border-box;
+      border-radius: 5px; }
+      #ModalDetResarva .modal-body .portletReserva .boxDetReserva .headerPortlet {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 11px 26px;
+        border-bottom: 1px solid #e4e5e7; }
+        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .headerPortlet .titleBoxRight {
+          font-family: Open Sans;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 36px;
+          display: flex;
+          align-items: center;
+          color: #4b4b4b;
+          width: 100%; }
+      #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet {
+        margin: 20px; }
+        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet ul {
+          font-size: 14px;
+          line-height: 26px; }
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet ul li span {
+            font-weight: 600; }
+        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth {
+          display: flex;
+          justify-content: flex-end; }
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago {
+            width: 250px; }
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago .labelTotal {
+              font-family: 'Montserrat';
+              font-style: normal;
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 24px; }
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago .montoTotal {
+              font-family: 'Montserrat';
+              font-style: normal;
+              font-weight: 600;
+              font-size: 32px;
+              line-height: 24px; }
+        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje,
+        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero {
+          gap: 10px;
+          display: flex;
+          flex-direction: column; }
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero {
+            display: flex;
+            gap: 10px; }
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje .iconEquipaje,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero .iconEquipaje,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje .iconEquipaje,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .iconEquipaje {
+              width: 25px;
+              display: flex;
+              justify-content: center;
+              align-items: center; }
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje .labelEquipaje,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero .labelEquipaje,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje .labelEquipaje,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .labelEquipaje {
+              font-family: 'Montserrat';
+              font-style: normal;
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 24px; }
 
 #ModalBlue .modal-dialog {
   min-width: 70% !important; }

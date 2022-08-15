@@ -1689,6 +1689,57 @@ section {
     color: #b9bcbf;
 }
 
+.personalDocument {
+    .rowContent {
+        &.gridVuelo {
+            padding: 10px 26px !important;
+            flex-direction: column !important;
+            gap: 15px;
+        }
+        .rowVuelo {
+            display: flex;
+            flex: 1 1 100%;
+            gap: 10px;
+            border-radius: 5px;
+            border: 1px solid #E4E5E7;
+            padding: 10px;
+            transition: 0.3s all;
+            &:hover {
+                box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
+            }
+            .colVuelo {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                &.fullAuto {
+                    flex: 1 1 auto;
+                    font-weight: 400;
+                    font-size: 14px;
+                }
+                &.flexCol {
+                    flex: 1 1 auto;
+                    flex-direction: column;
+                    font-weight: 600;
+                    font-size: 14px;
+                }
+                .msgLabel {
+                    font-weight: 500;
+                    font-size: 9px;
+                    padding: 10px;
+                    color: #ffffff;
+                    &.success {
+                        background: rgba(19, 191, 166, 0.75);
+                        border-radius: 10px;
+                    }
+                    &.disabled {
+                        visibility: hidden;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .box-container .box-content .headerPortlet {
     display: flex;
     flex-wrap: wrap;
@@ -3337,6 +3388,147 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             line-height: 24px;
             letter-spacing: 0.15px;
             color: #4b4b4b;
+        }
+    }
+}
+
+//modal det reserva
+#ModalDetResarva {
+    .modal-dialog {
+        min-width: 80% !important;
+    }
+    .modal-header {
+        font-family: 'Open Sans';
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px !important;
+        background: #F6F7F9;
+        border-radius: 10px;
+        .title {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            padding-right: 60px;
+            .textTitle {
+                font-style: normal;
+                font-weight: 700;
+                font-size: 18px;
+                color: #4B4B4B;
+            }
+            .msgTag {
+                padding: 15px;
+                background: rgba(19, 191, 166, 0.75);
+                border-radius: 5px;
+                height: 25px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 12px;
+            }
+        }
+    }
+    .modal-body {
+        padding: 20px !important;
+        background: #F6F7F9;
+        border-radius: 10px;
+        .msgAlert {
+            background: #FFF3CD;
+            border: 1px solid #FFECB5;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 18px;
+            letter-spacing: 0.25px;
+            color: #664D03;
+            text-align: center;
+            padding: 15px;
+        }
+        .portletReserva {
+            display: flex;
+            flex-direction: column;
+            margin: 20px 0;
+            gap: 20px;
+            .boxDetReserva {
+                background: #ffffff;
+                border: 0.5px solid #e4e5e7;
+                box-sizing: border-box;
+                border-radius: 5px;
+                .headerPortlet {
+                    display: flex;
+                    flex-wrap: wrap;
+                    padding: 11px 26px;
+                    border-bottom: 1px solid #e4e5e7;
+                    .titleBoxRight {
+                        font-family: Open Sans;
+                        font-style: normal;
+                        font-weight: bold;
+                        font-size: 16px;
+                        line-height: 36px;
+                        display: flex;
+                        align-items: center;
+                        color: #4b4b4b;
+                        width: 100%;
+                    }
+                }
+                .contentPortlet {
+                    margin: 20px;
+                    ul {
+                        font-size: 14px;
+                        line-height: 26px;
+                        li {
+                            span {
+                                font-weight: 600;
+                            }
+                        }
+                    }
+                    .alignRigth {
+                        display: flex;
+                        justify-content: flex-end;
+                        .totalInfoPago {
+                            width: 250px;
+                            .labelTotal {
+                                font-family: 'Montserrat';
+                                font-style: normal;
+                                font-weight: 500;
+                                font-size: 14px;
+                                line-height: 24px;
+                            }
+                            .montoTotal {
+                                font-family: 'Montserrat';
+                                font-style: normal;
+                                font-weight: 600;
+                                font-size: 32px;
+                                line-height: 24px;
+                            }
+                        }
+                    }
+                    .rowEquipaje,
+                    .rowPasajero {
+                        gap: 10px;
+                        display: flex;
+                        flex-direction: column;
+                        .itemEquipaje,
+                        .itemPasajero {
+                            display: flex;
+                            gap: 10px;
+                            .iconEquipaje {
+                                width: 25px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+                            .labelEquipaje {
+                                font-family: 'Montserrat';
+                                font-style: normal;
+                                font-weight: 500;
+                                font-size: 14px;
+                                line-height: 24px;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

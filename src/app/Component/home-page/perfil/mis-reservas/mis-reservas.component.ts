@@ -10,7 +10,7 @@ export class MisReservasComponent implements OnInit {
    *
    */
   constructor() {
-    super();
+    //super();
 
   }
   ngOnInit(): void {
