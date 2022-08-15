@@ -30,6 +30,7 @@ import { PoliticasModule } from './politicas/politicas.module';
 import { ResponsabilidadSocialModule } from './resonsabilidad-social/responsabilidad-social.module';
 import { ComprarModule } from './comprar/comprar.module';
 import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/page-not-found.component';
+import { ItineraryModule } from './itinerary/itinerary.module';
 
 @NgModule({
   declarations: [HomePageComponent, PageNotFoundComponent],
@@ -49,6 +50,7 @@ import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/
     FooterModule,
     ConformidadModule,
     ResultadosModule,
+    ItineraryModule,
     LoaderModule,
     NuestrasAgenciasModule,
     NuestraEmpresaModule,

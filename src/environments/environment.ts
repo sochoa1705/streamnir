@@ -26,12 +26,15 @@ export const environment = {
   urlApiTickets: "https://servicios.expertiatravel.com/widgetactividades",
   urlApiHotels: "https://servicios.expertiatravel.com/widgethotel",
   urlNmviajesAccount: "https://servicio.nmviajes.com:9443/ZonaPrivada",
-  urlNewsletter: 'https://servicio.nmviajes.com:9443/suscripcion',
+  //urlNewsletter: 'https://servicio.nmviajes.com:9443/suscripcion',
+  urlNewsletter: 'https://servicios.expertiatravel.com/subscription',//desarrollo
   urlSeguros: 'https://servicio.nmviajes.com:9443/segurosrv/',
-  urlGeo: "https://motorvuelos-dev.expertiatravel.com/mv",
-  //urlGeo: "https://motorvuelos.expertiatravel.com/mv",
+  //urlGeo: "https://motorvuelos-dev.expertiatravel.com/mv",
+  urlGeo: "https://motorvuelos.expertiatravel.com/mv",
   urlIframeMotorVuelos: "https://motorwl-dev.expertiatravel.com/#/nmviajes/search/resultados",
   //urlIframeMotorVuelos: "http://localhost:4200/#/nmviajes/search/resultados",
+
+  urlIframeMotorVuelosItinerary: "https://motorwl.expertiatravel.com/#/nmviajes/booking/itinerary",
 
   urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',
   url_api: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',

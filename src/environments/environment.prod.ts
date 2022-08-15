@@ -30,7 +30,7 @@ export const environment = {
   urlSeguros: 'https://servicio.nmviajes.com:9443/segurosrv/',
   urlGeo: "https://motorvuelos.expertiatravel.com/mv",
   urlIframeMotorVuelos: "https://motorwl.expertiatravel.com/#/nmviajes/search/resultados",
-
+  urlIframeMotorVuelosItinerary: "https://motorwl.expertiatravel.com/#/nmviajes/booking/itinerary",
 
   urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',
   url_api: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',

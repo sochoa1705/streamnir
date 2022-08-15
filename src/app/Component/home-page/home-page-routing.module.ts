@@ -21,6 +21,7 @@ import { CondicionesDeReservaComponent } from './condiciones-de-reserva/condicio
 import { CierrapuertasComponent } from './cierrapuertas/cierrapuertas.component';
 import { CierrapuertasOfertasComponent } from './cierrapuertas-ofertas/cierrapuertas-ofertas.component';
 import { TusdatosComponent } from './tusdatos/tusdatos.component';
+import { ItineraryComponent } from './itinerary/itinerary.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,10 @@ const routes: Routes = [
       {
         path: 'vuelos/resultados',
         component: ResultadosComponent
+      },
+      {
+        path: 'booking/itinerary/:transactionId/:idGroup/:segments/:flightType/:departureLocation/:arrivalLocation/:departureDate/:arrivalDate/:adults/:children/:infants/:flightClass',
+        component: ItineraryComponent
       },
       {
         path: 'conformidad',
