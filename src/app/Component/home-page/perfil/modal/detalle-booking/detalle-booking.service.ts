@@ -2,14 +2,13 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
-import { GetMyBookings } from "./mis-reservas.models";
 
 @Injectable({
   providedIn: 'root'
 })
-export class MisReservasService{
+export class DetalleBookingService{
   constructor(private http: HttpClient) { }
-  getAllBooking(userId: string): Observable<GetMyBookings[]>{
-    return this.http.get<GetMyBookings[]>(`${environment.urlApiMotorVuelos}get-all-bookings?userId=${userId}`);
+  getBookingDetail(idClicot: string, reservaId: string, tipo: string ): Observable<any>{
+    return this.http.get<any>(`${environment.urlApiMotorVuelos}get-booking-detail?IdClicot=${idClicot}&ReservaId=${reservaId}&Tipo=${tipo}`);
   }
 }

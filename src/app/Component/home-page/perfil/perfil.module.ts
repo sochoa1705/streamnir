@@ -23,9 +23,10 @@ import { PreferenciasComponent } from './preferencias/preferencias.component';
 import { RouterModule } from '@angular/router';
 import { MyProfyleComponent } from './my-profyle/my-profyle.component';
 import { MisReservasComponent } from './mis-reservas/mis-reservas.component';
+import { DetalleBookingComponent } from './modal/detalle-booking/detalle-booking.component';
 
 @NgModule({
-  declarations: [PerfilComponent, ContactoComponent, PassengerComponent, PasswordComponent, PreferenciasComponent, MyProfyleComponent, MisReservasComponent],
+  declarations: [PerfilComponent, ContactoComponent, PassengerComponent, PasswordComponent, PreferenciasComponent, MyProfyleComponent, MisReservasComponent, DetalleBookingComponent],
   imports: [
     CommonModule,
     RouterModule,

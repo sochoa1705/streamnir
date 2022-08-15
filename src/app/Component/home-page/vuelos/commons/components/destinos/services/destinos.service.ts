@@ -24,8 +24,6 @@ export class DestinosService {
 
     const indiceDestino = pathArray.indexOf("destino");
 
-    debugger
-
     if (indiceDestino === -1) {
       this.paramCiudad.next("");
     } else {
