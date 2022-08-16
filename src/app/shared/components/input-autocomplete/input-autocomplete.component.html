@@ -2,8 +2,8 @@
     <input #inputSearch [(ngModel)]="valueInput"
         (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME); onkeypress($event)" #input
         [ngClass]="{'icono' : viewIcon, 'icono-no': !viewIcon, 'isvalid':(input.value.length<minTermLength && validRequired)}"
-        [placeholder]="placeholder" [disabled]="isDisabled" (keyup)="keyUp($event)" (focus)="showAutocomplete()"
-        (blur)="onBlur()" class="form-control animated fadeIn" type="text">
+        [placeholder]="placeholder" [disabled]="isDisabled" (keyup)="keyUp($event)" (keydown)="keyDown($event)"
+        (focus)="showAutocomplete()" class="form-control animated fadeIn" type="text">
 
     <svg (click)="clean()" *ngIf="input.value.length>0 && !loading" class="input-icon pointer" width="461" height="461"
         viewBox="0 0 461 461" fill="none" xmlns="http://www.w3.org/2000/svg">
