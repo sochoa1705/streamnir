@@ -76,20 +76,23 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   }
 
   onkeypress(event: any) {
-    if (event.keyCode === 13)
+    debugger
+
+    if (event.keyCode === 13) {
       event.preventDefault();
-  }
 
-  onBlur() {
-    if (this.items?.length) {
-      this.valueInput = this._items[0].title;
-      this.valueInputChange.next(this.valueInput);
+      if (this.items?.length) {
+        this.valueInput = this._items[0].title;
+        this.valueInputChange.next(this.valueInput);
 
-      this.selectItm(this._items[0]);
+        this.selectItm(this._items[0]);
+      }
     }
   }
 
   keyUp(event: any) {
+    debugger
+
     this.inputTxt = event.target.value
 
     const value: string = event.target.value || '';
@@ -107,6 +110,26 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
       this.showBoxOrigen(false)
     }
   }
+
+  keyDown(event: any) {
+    if (event.keyCode === 9) {
+      if (this.items?.length) {
+        this.valueInput = this._items[0].title;
+        this.valueInputChange.next(this.valueInput);
+
+        this.selectItm(this._items[0]);
+      }
+    }
+  }
+
+  //onBlur() {
+  // if (this.items?.length) {
+  //   this.valueInput = this._items[0].title;
+  //   this.valueInputChange.next(this.valueInput);
+
+  //   this.selectItm(this._items[0]);
+  // }
+  //}
 
   showAutocomplete() {
     if (this._items.length > 0) {
