@@ -21,7 +21,7 @@ export class NuestrasAgenciasComponent implements OnInit {
       direccion: 'Av. José Pardo 801 -',
       distrito: 'Miraflores',
       horario: 'Lun - Vie 10:00 am a 07:00 pm',
-      horario2: 'Sab 10:00 am - 2:00 pm',
+      horario2: 'Sab 10:00 am - 6:00 pm',
       correo: 'vacaciones@nmviajes.com',
       imagen: './assets/agencias/Pardo.png'
     },
