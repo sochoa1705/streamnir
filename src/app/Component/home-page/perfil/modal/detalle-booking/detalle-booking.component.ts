@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DetalleBookingService } from './detalle-booking.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class DetalleBookingComponent implements OnInit {
   @Input() reserva_Id: string = '';
   @Input() tipo_Vuelo: string = '';
   data: any;
-  constructor(private detalleBookingService: DetalleBookingService) {
+  constructor(private detalleBookingService: DetalleBookingService, 
+    public ngbActiveModal: NgbActiveModal) {
   }
 
   ngOnInit(): void {

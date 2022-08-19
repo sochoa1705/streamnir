@@ -7,8 +7,7 @@
     <button
       type="button"
       class="btn-close"
-      data-bs-dismiss="modal"
-      aria-label="Close"
+      (click)="ngbActiveModal.close()"
     ></button>
   </div>
   <div class="modal-body">
@@ -59,13 +58,15 @@
             </div>
             <div class="itemEquipaje">
               <div class="iconEquipaje">
-                <img src="./assets/modal/mochila.svg" alt="" />
+                <img src="./assets/modal/equipaje-mano.svg" alt="" *ngIf="data.cantidadMaletas != '0' && data.cantidadMaletas"/>
+                <img src="./assets/modal/equipaje-no.svg" alt="" *ngIf="data.cantidadMaletas == '0' || !data.cantidadMaletas"/>
               </div>
               <div class="labelEquipaje">Incluye equipaje de mano</div>
             </div>
             <div class="itemEquipaje">
               <div class="iconEquipaje">
-                <img src="./assets/modal/bodega-no.svg" alt="" />
+                <img src="./assets/modal/bodega-no.svg" alt="" *ngIf="data.cantidadMaletas == '0' || !data.cantidadMaletas" />
+                <img src="./assets/modal/bodega-si.svg" alt="" *ngIf="data.cantidadMaletas != '0' && data.cantidadMaletas" />
               </div>
               <div class="labelEquipaje">No incluye equipaje en bodega</div>
             </div>
