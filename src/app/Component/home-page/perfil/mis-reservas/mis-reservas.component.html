@@ -3,134 +3,36 @@
     <div class="personalDocument">
         <div class="headerPortlet">
             <div class="titleBoxRight">Mis Vuelos</div>
-            <div class="subtitleBoxRight">A continuación, te listamos todas los vuelos asociadas a tu correo: joserios.digital@gmail.com</div>
+            <div class="subtitleBoxRight">A continuación, te listamos todas los vuelos asociadas a tu correo: {{userStorage.email}}</div>
         </div>
         <form class="content">
             <div class="rowContent gridVuelo">
-
-                <div class="rowVuelo">
+                <div class="rowVuelo" *ngFor="let item of bookings">
                     <div class="colVuelo">
                         <img src="./assets/Avion2.svg" alt="">
                     </div>
                     <div class="colVuelo flexCol">
-                        Vuelo Lima
-                        <div class="msgLabel success">
-                            Comprado
+                        Vuelo {{item.vuelos[0].city_Source}}
+                        <div class="msgLabel" [ngClass]="{'bg-danger': item.estado_Reserva == 'Solicitud Cancelada', 'success': item.estado_Reserva != 'Solicitud Cancelada'}">
+                          {{item.estado_Reserva}}
                         </div>
                     </div>
                     <div class="colVuelo flexCol">
-                        Cusco
+                      {{item.vuelos[0].city_Target}}
                         <div class="msgLabel disabled"> </div>
                     </div>
                     <div class="colVuelo fullAuto">
-                        <img src="./assets/arrow-inf.svg" alt=""> Jue 28 Jul 2022
+                        <img src="./assets/arrow-inf.svg" alt=""> {{item.fec_Salida}}
                     </div>
                     <div class="colVuelo fullAuto">
-                        <img src="./assets/arrow-sup.svg" alt=""> Vie 31 Jul 2022
+                        <img src="./assets/arrow-sup.svg" alt=""> {{item.fec_Llegada}}
                     </div>
                     <div class="colVuelo">
-                        <div class="btn primary" data-bs-toggle="modal" data-bs-target="#ModalDetResarva">Detalles</div>
+                        <div class="btn primary" (click)="openDetailBooking(item)">Detalles</div>
                     </div>
                 </div>
-
-                <div class="rowVuelo">
-                    <div class="colVuelo">
-                        <img src="./assets/Avion2.svg" alt="">
-                    </div>
-                    <div class="colVuelo flexCol">
-                        Vuelo Lima
-                        <div class="msgLabel success">
-                            Comprado
-                        </div>
-                    </div>
-                    <div class="colVuelo flexCol">
-                        Cusco
-                        <div class="msgLabel disabled"> </div>
-                    </div>
-                    <div class="colVuelo fullAuto">
-                        <img src="./assets/arrow-inf.svg" alt=""> Jue 28 Jul 2022
-                    </div>
-                    <div class="colVuelo fullAuto">
-                        <img src="./assets/arrow-sup.svg" alt=""> Vie 31 Jul 2022
-                    </div>
-                    <div class="colVuelo">
-                        <div class="btn primary" data-bs-toggle="modal" data-bs-target="#ModalDetResarva">Detalles</div>
-                    </div>
-                </div>
-
-                <div class="rowVuelo">
-                    <div class="colVuelo">
-                        <img src="./assets/Avion2.svg" alt="">
-                    </div>
-                    <div class="colVuelo flexCol">
-                        Vuelo Lima
-                        <div class="msgLabel success">
-                            Comprado
-                        </div>
-                    </div>
-                    <div class="colVuelo flexCol">
-                        Cusco
-                        <div class="msgLabel disabled"> </div>
-                    </div>
-                    <div class="colVuelo fullAuto">
-                        <img src="./assets/arrow-inf.svg" alt=""> Jue 28 Jul 2022
-                    </div>
-                    <div class="colVuelo fullAuto">
-                        <img src="./assets/arrow-sup.svg" alt=""> Vie 31 Jul 2022
-                    </div>
-                    <div class="colVuelo">
-                        <div class="btn primary" data-bs-toggle="modal" data-bs-target="#ModalDetResarva">Detalles</div>
-                    </div>
-                </div>
-
-                <div class="rowVuelo">
-                    <div class="colVuelo">
-                        <img src="./assets/Avion2.svg" alt="">
-                    </div>
-                    <div class="colVuelo flexCol">
-                        Vuelo Lima
-                        <div class="msgLabel success">
-                            Comprado
-                        </div>
-                    </div>
-                    <div class="colVuelo flexCol">
-                        Cusco
-                        <div class="msgLabel disabled"> </div>
-                    </div>
-                    <div class="colVuelo fullAuto">
-                        <img src="./assets/arrow-inf.svg" alt=""> Jue 28 Jul 2022
-                    </div>
-                    <div class="colVuelo fullAuto">
-                        <img src="./assets/arrow-sup.svg" alt=""> Vie 31 Jul 2022
-                    </div>
-                    <div class="colVuelo">
-                        <div class="btn primary" data-bs-toggle="modal" data-bs-target="#ModalDetResarva">Detalles</div>
-                    </div>
-                </div>
-
-                <div class="rowVuelo">
-                    <div class="colVuelo">
-                        <img src="./assets/Avion2.svg" alt="">
-                    </div>
-                    <div class="colVuelo flexCol">
-                        Vuelo Lima
-                        <div class="msgLabel success">
-                            Comprado
-                        </div>
-                    </div>
-                    <div class="colVuelo flexCol">
-                        Cusco
-                        <div class="msgLabel disabled"> </div>
-                    </div>
-                    <div class="colVuelo fullAuto">
-                        <img src="./assets/arrow-inf.svg" alt=""> Jue 28 Jul 2022
-                    </div>
-                    <div class="colVuelo fullAuto">
-                        <img src="./assets/arrow-sup.svg" alt=""> Vie 31 Jul 2022
-                    </div>
-                    <div class="colVuelo">
-                        <div class="btn primary" data-bs-toggle="modal" data-bs-target="#ModalDetResarva">Detalles</div>
-                    </div>
+                <div class="alert alert-warning" role="alert" *ngIf="bookings.length == 0">
+                  Aún no cuenta con reservas.
                 </div>
 
                 <div class="rowVuelo">
