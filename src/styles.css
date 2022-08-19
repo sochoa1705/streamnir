@@ -1354,12 +1354,14 @@ section {
   .personalDocument .rowContent .rowVuelo .colVuelo {
     display: flex;
     align-items: center;
-    gap: 10px; }
+    gap: 5px; }
     .personalDocument .rowContent .rowVuelo .colVuelo.fullAuto {
       flex: 1 1 auto;
       font-weight: 400;
       font-size: 14px; }
     .personalDocument .rowContent .rowVuelo .colVuelo.flexCol {
+      align-items: flex-start;
+      margin-left: 20px;
       flex: 1 1 auto;
       flex-direction: column;
       font-weight: 600;
@@ -1367,13 +1369,21 @@ section {
     .personalDocument .rowContent .rowVuelo .colVuelo .msgLabel {
       font-weight: 500;
       font-size: 9px;
-      padding: 10px;
+      padding: 5px 10px;
       color: #ffffff; }
       .personalDocument .rowContent .rowVuelo .colVuelo .msgLabel.success {
         background: rgba(19, 191, 166, 0.75);
         border-radius: 10px; }
       .personalDocument .rowContent .rowVuelo .colVuelo .msgLabel.disabled {
         visibility: hidden; }
+    .personalDocument .rowContent .rowVuelo .colVuelo .Labelseguro {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px; }
+    .personalDocument .rowContent .rowVuelo .colVuelo .Descrip {
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 18px; }
 
 .box-container .box-content .headerPortlet {
   display: flex;
@@ -2747,9 +2757,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     letter-spacing: 0.15px;
     color: #4b4b4b; }
 
-#ModalDetResarva .modal-dialog {
+#ModalDetResarva .modal-dialog,
+#ModalDetSeguro .modal-dialog {
   min-width: 80% !important; }
-#ModalDetResarva .modal-header {
+#ModalDetResarva .modal-header,
+#ModalDetSeguro .modal-header {
   font-family: 'Open Sans';
   display: flex;
   justify-content: space-between;
@@ -2757,18 +2769,21 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   padding: 20px !important;
   background: #F6F7F9;
   border-radius: 10px; }
-  #ModalDetResarva .modal-header .title {
+  #ModalDetResarva .modal-header .title,
+  #ModalDetSeguro .modal-header .title {
     display: flex;
     justify-content: space-between;
     width: 100%;
     align-items: center;
     padding-right: 60px; }
-    #ModalDetResarva .modal-header .title .textTitle {
+    #ModalDetResarva .modal-header .title .textTitle,
+    #ModalDetSeguro .modal-header .title .textTitle {
       font-style: normal;
       font-weight: 700;
       font-size: 18px;
       color: #4B4B4B; }
-    #ModalDetResarva .modal-header .title .msgTag {
+    #ModalDetResarva .modal-header .title .msgTag,
+    #ModalDetSeguro .modal-header .title .msgTag {
       padding: 15px;
       background: rgba(19, 191, 166, 0.75);
       border-radius: 5px;
@@ -2777,11 +2792,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       justify-content: center;
       align-items: center;
       font-size: 12px; }
-#ModalDetResarva .modal-body {
+#ModalDetResarva .modal-body,
+#ModalDetSeguro .modal-body {
   padding: 20px !important;
   background: #F6F7F9;
   border-radius: 10px; }
-  #ModalDetResarva .modal-body .msgAlert {
+  #ModalDetResarva .modal-body .msgAlert,
+  #ModalDetSeguro .modal-body .msgAlert {
     background: #FFF3CD;
     border: 1px solid #FFECB5;
     border-radius: 5px;
@@ -2791,22 +2808,29 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     color: #664D03;
     text-align: center;
     padding: 15px; }
-  #ModalDetResarva .modal-body .portletReserva {
+  #ModalDetResarva .modal-body .portletReserva,
+  #ModalDetSeguro .modal-body .portletReserva {
     display: flex;
     flex-direction: column;
     margin: 20px 0;
     gap: 20px; }
-    #ModalDetResarva .modal-body .portletReserva .boxDetReserva {
+    #ModalDetResarva .modal-body .portletReserva.lessMargin,
+    #ModalDetSeguro .modal-body .portletReserva.lessMargin {
+      margin: 0 !important; }
+    #ModalDetResarva .modal-body .portletReserva .boxDetReserva,
+    #ModalDetSeguro .modal-body .portletReserva .boxDetReserva {
       background: #ffffff;
       border: 0.5px solid #e4e5e7;
       box-sizing: border-box;
       border-radius: 5px; }
-      #ModalDetResarva .modal-body .portletReserva .boxDetReserva .headerPortlet {
+      #ModalDetResarva .modal-body .portletReserva .boxDetReserva .headerPortlet,
+      #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .headerPortlet {
         display: flex;
         flex-wrap: wrap;
         padding: 11px 26px;
         border-bottom: 1px solid #e4e5e7; }
-        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .headerPortlet .titleBoxRight {
+        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .headerPortlet .titleBoxRight,
+        #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .headerPortlet .titleBoxRight {
           font-family: Open Sans;
           font-style: normal;
           font-weight: bold;
@@ -2816,45 +2840,84 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           align-items: center;
           color: #4b4b4b;
           width: 100%; }
-      #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet {
+      #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet,
+      #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet {
         margin: 20px; }
-        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet ul {
+        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet ul,
+        #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet ul {
           font-size: 14px;
           line-height: 26px; }
-          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet ul li span {
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet ul li span,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet ul li span {
             font-weight: 600; }
-        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth {
+        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth,
+        #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth {
           display: flex;
           justify-content: flex-end; }
-          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago {
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago {
             width: 250px; }
-            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago .labelTotal {
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago .labelTotal,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago .labelTotal {
               font-family: 'Montserrat';
               font-style: normal;
               font-weight: 500;
               font-size: 14px;
               line-height: 24px; }
-            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago .montoTotal {
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago .montoTotal,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago .montoTotal {
               font-family: 'Montserrat';
               font-style: normal;
               font-weight: 600;
               font-size: 32px;
               line-height: 24px; }
         #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje,
-        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero {
+        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero,
+        #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje,
+        #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero {
           gap: 10px;
           display: flex;
           flex-direction: column; }
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headCol,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headCol,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headCol,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headCol {
+            flex-direction: row;
+            padding: 10px 0; }
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headCol .colPasajero,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headCol .colPasajero,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headCol .colPasajero,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headCol .colPasajero {
+              font-weight: 600;
+              font-size: 14px; }
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.rowItem,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.rowItem,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.rowItem,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.rowItem {
+            flex-direction: row; }
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.rowItem .colPasajero,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.rowItem .colPasajero,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.rowItem .colPasajero,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.rowItem .colPasajero {
+              font-size: 14px; }
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje,
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero,
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje,
-          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero {
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero {
             display: flex;
             gap: 10px; }
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje .iconEquipaje,
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero .iconEquipaje,
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje .iconEquipaje,
-            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .iconEquipaje {
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .iconEquipaje,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje .iconEquipaje,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero .iconEquipaje,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje .iconEquipaje,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .iconEquipaje {
               width: 25px;
               display: flex;
               justify-content: center;
@@ -2862,12 +2925,26 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje .labelEquipaje,
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero .labelEquipaje,
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje .labelEquipaje,
-            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .labelEquipaje {
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .labelEquipaje,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje .labelEquipaje,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero .labelEquipaje,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje .labelEquipaje,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .labelEquipaje {
               font-family: 'Montserrat';
               font-style: normal;
               font-weight: 500;
               font-size: 14px;
               line-height: 24px; }
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .colPasajero,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .colPasajero,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .colPasajero,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .colPasajero {
+            flex: 1 1 20%; }
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .colPasajero:first-child,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .colPasajero:first-child,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .colPasajero:first-child,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .colPasajero:first-child {
+              flex: 0 1 80px; }
 
 #ModalBlue .modal-dialog {
   min-width: 70% !important; }

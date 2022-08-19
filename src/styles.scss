@@ -1710,13 +1710,15 @@ section {
             .colVuelo {
                 display: flex;
                 align-items: center;
-                gap: 10px;
+                gap: 5px;
                 &.fullAuto {
                     flex: 1 1 auto;
                     font-weight: 400;
                     font-size: 14px;
                 }
                 &.flexCol {
+                    align-items: flex-start;
+                    margin-left: 20px;
                     flex: 1 1 auto;
                     flex-direction: column;
                     font-weight: 600;
@@ -1725,7 +1727,7 @@ section {
                 .msgLabel {
                     font-weight: 500;
                     font-size: 9px;
-                    padding: 10px;
+                    padding: 5px 10px;
                     color: #ffffff;
                     &.success {
                         background: rgba(19, 191, 166, 0.75);
@@ -1734,6 +1736,16 @@ section {
                     &.disabled {
                         visibility: hidden;
                     }
+                }
+                .Labelseguro {
+                    font-weight: 600;
+                    font-size: 12px;
+                    line-height: 18px;
+                }
+                .Descrip {
+                    font-weight: 400;
+                    font-size: 10px;
+                    line-height: 18px;
                 }
             }
         }
@@ -3393,7 +3405,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 }
 
 //modal det reserva
-#ModalDetResarva {
+#ModalDetResarva,
+#ModalDetSeguro {
     .modal-dialog {
         min-width: 80% !important;
     }
@@ -3449,6 +3462,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             flex-direction: column;
             margin: 20px 0;
             gap: 20px;
+            &.lessMargin {
+                margin: 0 !important;
+            }
             .boxDetReserva {
                 background: #ffffff;
                 border: 0.5px solid #e4e5e7;
@@ -3508,6 +3524,20 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                         gap: 10px;
                         display: flex;
                         flex-direction: column;
+                        &.headCol {
+                            flex-direction: row;
+                            padding: 10px 0;
+                            .colPasajero {
+                                font-weight: 600;
+                                font-size: 14px;
+                            }
+                        }
+                        &.rowItem {
+                            flex-direction: row;
+                            .colPasajero {
+                                font-size: 14px;
+                            }
+                        }
                         .itemEquipaje,
                         .itemPasajero {
                             display: flex;
@@ -3524,6 +3554,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                                 font-weight: 500;
                                 font-size: 14px;
                                 line-height: 24px;
+                            }
+                        }
+                        .colPasajero {
+                            flex: 1 1 20%;
+                            &:first-child {
+                                flex: 0 1 80px;
                             }
                         }
                     }
