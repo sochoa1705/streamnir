@@ -3498,29 +3498,56 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                             }
                         }
                     }
-                    .alignRigth {
+                    .footerReserva {
                         display: flex;
-                        justify-content: flex-end;
-                        .totalInfoPago {
-                            width: 250px;
-                            .labelTotal {
-                                font-family: 'Montserrat';
-                                font-style: normal;
-                                font-weight: 500;
-                                font-size: 14px;
-                                line-height: 24px;
+                        .alignLeft {
+                            display: flex;
+                            justify-content: flex-start;
+                            flex: 1 1 auto;
+                            margin-left: 20px;
+                            .totalSafetypay {
+                                flex: 1 1 auto;
+                                .labelTotal {
+                                    font-family: 'Montserrat';
+                                    font-style: normal;
+                                    font-weight: 500;
+                                    font-size: 14px;
+                                    line-height: 24px;
+                                }
+                                .montoTotal {
+                                    font-family: 'Montserrat';
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    font-size: 32px;
+                                    line-height: 24px;
+                                }
                             }
-                            .montoTotal {
-                                font-family: 'Montserrat';
-                                font-style: normal;
-                                font-weight: 600;
-                                font-size: 32px;
-                                line-height: 24px;
+                        }
+                        .alignRigth {
+                            display: flex;
+                            justify-content: flex-end;
+                            .totalInfoPago {
+                                width: 250px;
+                                .labelTotal {
+                                    font-family: 'Montserrat';
+                                    font-style: normal;
+                                    font-weight: 500;
+                                    font-size: 14px;
+                                    line-height: 24px;
+                                }
+                                .montoTotal {
+                                    font-family: 'Montserrat';
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    font-size: 32px;
+                                    line-height: 24px;
+                                }
                             }
                         }
                     }
                     .rowEquipaje,
-                    .rowPasajero {
+                    .rowPasajero,
+                    .rowVuelo {
                         gap: 10px;
                         display: flex;
                         flex-direction: column;
@@ -3536,6 +3563,92 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                             flex-direction: row;
                             .colPasajero {
                                 font-size: 14px;
+                            }
+                        }
+                        &.headVueloIda,
+                        &.headVueloVuelta {
+                            flex-direction: row;
+                            background-color: rgba(0, 230, 130, 0.1);
+                            padding: 15px;
+                            border-radius: 5px;
+                            .colVuelo {
+                                display: flex;
+                                flex: 1 1 auto;
+                                font-size: 14px;
+                                align-items: center;
+                                &.iconVuelo {
+                                    width: 50px;
+                                    max-width: 50px;
+                                }
+                                &.labelIda {
+                                    flex: 1 1 auto;
+                                    font-weight: 600;
+                                }
+                                &.labelvuelo {
+                                    flex: 1 1 auto;
+                                    border: 1px solid #09ad95;
+                                    color: #09ad95;
+                                    justify-content: center;
+                                    border-radius: 5px;
+                                    padding: 5px 10px;
+                                }
+                                &.duracion {
+                                    flex: 1 1 50%;
+                                    justify-content: flex-end;
+                                    gap: 10px;
+                                }
+                            }
+                        }
+                        &.headVueloVuelta {
+                            background-color: rgba(5, 193, 250, 0.2);
+                            .colVuelo {
+                                &.labelvuelo {
+                                    border: 1px solid #05c3fb;
+                                    color: #05c3fb;
+                                }
+                            }
+                        }
+                        &.contentVuelo {
+                            display: flex;
+                            flex-direction: row;
+                            padding: 15px;
+                            .colVuelo {
+                                display: flex;
+                                flex-direction: column;
+                                flex: 1 1 auto;
+                                .icoIda {
+                                    align-items: center;
+                                }
+                                .aerolinea {
+                                    font-weight: 600;
+                                    font-size: 14px;
+                                }
+                                .codigo {
+                                    span {
+                                        border: 1px solid #09ad95;
+                                        color: #09ad95;
+                                        border-radius: 5px;
+                                        padding: 2px 10px;
+                                        font-size: 12px;
+                                    }
+                                }
+                                .operador {
+                                    font-size: 12px;
+                                }
+                                .descrip {
+                                    font-size: 12px;
+                                }
+                                .fecha {
+                                    font-size: 14px;
+                                    span {
+                                        color: #df0c30;
+                                        font-weight: 600;
+                                    }
+                                }
+                                .lugar {
+                                    font-size: 12px;
+                                    font-weight: 600;
+                                }
                             }
                         }
                         .itemEquipaje,

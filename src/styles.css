@@ -2850,74 +2850,301 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet ul li span,
           #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet ul li span {
             font-weight: 600; }
-        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth,
-        #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth {
-          display: flex;
-          justify-content: flex-end; }
-          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago,
-          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago {
-            width: 250px; }
-            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago .labelTotal,
-            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago .labelTotal {
-              font-family: 'Montserrat';
-              font-style: normal;
-              font-weight: 500;
-              font-size: 14px;
-              line-height: 24px; }
-            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago .montoTotal,
-            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .alignRigth .totalInfoPago .montoTotal {
-              font-family: 'Montserrat';
-              font-style: normal;
-              font-weight: 600;
-              font-size: 32px;
-              line-height: 24px; }
+        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva,
+        #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva {
+          display: flex; }
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignLeft,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignLeft {
+            display: flex;
+            justify-content: flex-start;
+            flex: 1 1 auto;
+            margin-left: 20px; }
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignLeft .totalSafetypay,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignLeft .totalSafetypay {
+              flex: 1 1 auto; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignLeft .totalSafetypay .labelTotal,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignLeft .totalSafetypay .labelTotal {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 24px; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignLeft .totalSafetypay .montoTotal,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignLeft .totalSafetypay .montoTotal {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 32px;
+                line-height: 24px; }
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignRigth,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignRigth {
+            display: flex;
+            justify-content: flex-end; }
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignRigth .totalInfoPago,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignRigth .totalInfoPago {
+              width: 250px; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignRigth .totalInfoPago .labelTotal,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignRigth .totalInfoPago .labelTotal {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 24px; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignRigth .totalInfoPago .montoTotal,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .footerReserva .alignRigth .totalInfoPago .montoTotal {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 32px;
+                line-height: 24px; }
         #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje,
         #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero,
+        #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo,
         #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje,
-        #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero {
+        #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero,
+        #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo {
           gap: 10px;
           display: flex;
           flex-direction: column; }
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headCol,
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headCol,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headCol,
           #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headCol,
-          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headCol {
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headCol,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headCol {
             flex-direction: row;
             padding: 10px 0; }
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headCol .colPasajero,
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headCol .colPasajero,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headCol .colPasajero,
             #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headCol .colPasajero,
-            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headCol .colPasajero {
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headCol .colPasajero,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headCol .colPasajero {
               font-weight: 600;
               font-size: 14px; }
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.rowItem,
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.rowItem,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.rowItem,
           #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.rowItem,
-          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.rowItem {
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.rowItem,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.rowItem {
             flex-direction: row; }
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.rowItem .colPasajero,
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.rowItem .colPasajero,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.rowItem .colPasajero,
             #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.rowItem .colPasajero,
-            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.rowItem .colPasajero {
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.rowItem .colPasajero,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.rowItem .colPasajero {
               font-size: 14px; }
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloIda, #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloIda,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloIda,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloIda,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloIda,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloIda,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta {
+            flex-direction: row;
+            background-color: rgba(0, 230, 130, 0.1);
+            padding: 15px;
+            border-radius: 5px; }
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloIda .colVuelo, #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta .colVuelo,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloIda .colVuelo,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta .colVuelo,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloIda .colVuelo,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta .colVuelo,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloIda .colVuelo,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta .colVuelo,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloIda .colVuelo,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta .colVuelo,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloIda .colVuelo,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta .colVuelo {
+              display: flex;
+              flex: 1 1 auto;
+              font-size: 14px;
+              align-items: center; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloIda .colVuelo.iconVuelo, #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta .colVuelo.iconVuelo,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloIda .colVuelo.iconVuelo,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta .colVuelo.iconVuelo,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloIda .colVuelo.iconVuelo,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta .colVuelo.iconVuelo,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloIda .colVuelo.iconVuelo,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta .colVuelo.iconVuelo,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloIda .colVuelo.iconVuelo,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta .colVuelo.iconVuelo,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloIda .colVuelo.iconVuelo,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta .colVuelo.iconVuelo {
+                width: 50px;
+                max-width: 50px; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloIda .colVuelo.labelIda, #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta .colVuelo.labelIda,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloIda .colVuelo.labelIda,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta .colVuelo.labelIda,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloIda .colVuelo.labelIda,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta .colVuelo.labelIda,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloIda .colVuelo.labelIda,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta .colVuelo.labelIda,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloIda .colVuelo.labelIda,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta .colVuelo.labelIda,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloIda .colVuelo.labelIda,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta .colVuelo.labelIda {
+                flex: 1 1 auto;
+                font-weight: 600; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloIda .colVuelo.labelvuelo, #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta .colVuelo.labelvuelo,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloIda .colVuelo.labelvuelo,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta .colVuelo.labelvuelo,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloIda .colVuelo.labelvuelo,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta .colVuelo.labelvuelo,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloIda .colVuelo.labelvuelo,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta .colVuelo.labelvuelo,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloIda .colVuelo.labelvuelo,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta .colVuelo.labelvuelo,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloIda .colVuelo.labelvuelo,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta .colVuelo.labelvuelo {
+                flex: 1 1 auto;
+                border: 1px solid #09ad95;
+                color: #09ad95;
+                justify-content: center;
+                border-radius: 5px;
+                padding: 5px 10px; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloIda .colVuelo.duracion, #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta .colVuelo.duracion,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloIda .colVuelo.duracion,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta .colVuelo.duracion,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloIda .colVuelo.duracion,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta .colVuelo.duracion,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloIda .colVuelo.duracion,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta .colVuelo.duracion,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloIda .colVuelo.duracion,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta .colVuelo.duracion,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloIda .colVuelo.duracion,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta .colVuelo.duracion {
+                flex: 1 1 50%;
+                justify-content: flex-end;
+                gap: 10px; }
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta {
+            background-color: rgba(5, 193, 250, 0.2); }
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta .colVuelo.labelvuelo,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta .colVuelo.labelvuelo,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta .colVuelo.labelvuelo,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.headVueloVuelta .colVuelo.labelvuelo,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.headVueloVuelta .colVuelo.labelvuelo,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.headVueloVuelta .colVuelo.labelvuelo {
+              border: 1px solid #05c3fb;
+              color: #05c3fb; }
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo {
+            display: flex;
+            flex-direction: row;
+            padding: 15px; }
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo {
+              display: flex;
+              flex-direction: column;
+              flex: 1 1 auto; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .icoIda,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .icoIda,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .icoIda,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .icoIda,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .icoIda,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .icoIda {
+                align-items: center; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .aerolinea,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .aerolinea,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .aerolinea,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .aerolinea,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .aerolinea,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .aerolinea {
+                font-weight: 600;
+                font-size: 14px; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .codigo span,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .codigo span,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .codigo span,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .codigo span,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .codigo span,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .codigo span {
+                border: 1px solid #09ad95;
+                color: #09ad95;
+                border-radius: 5px;
+                padding: 2px 10px;
+                font-size: 12px; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .operador,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .operador,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .operador,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .operador,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .operador,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .operador {
+                font-size: 12px; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .descrip,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .descrip,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .descrip,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .descrip,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .descrip,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .descrip {
+                font-size: 12px; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .fecha,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .fecha,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .fecha,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .fecha,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .fecha,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .fecha {
+                font-size: 14px; }
+                #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .fecha span,
+                #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .fecha span,
+                #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .fecha span,
+                #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .fecha span,
+                #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .fecha span,
+                #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .fecha span {
+                  color: #df0c30;
+                  font-weight: 600; }
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .lugar,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .lugar,
+              #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .lugar,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje.contentVuelo .colVuelo .lugar,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero.contentVuelo .colVuelo .lugar,
+              #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo.contentVuelo .colVuelo .lugar {
+                font-size: 12px;
+                font-weight: 600; }
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje,
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero,
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje,
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .itemEquipaje,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .itemPasajero,
           #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje,
           #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero,
           #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje,
-          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero {
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .itemEquipaje,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .itemPasajero {
             display: flex;
             gap: 10px; }
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje .iconEquipaje,
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero .iconEquipaje,
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje .iconEquipaje,
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .iconEquipaje,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .itemEquipaje .iconEquipaje,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .itemPasajero .iconEquipaje,
             #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje .iconEquipaje,
             #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero .iconEquipaje,
             #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje .iconEquipaje,
-            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .iconEquipaje {
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .iconEquipaje,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .itemEquipaje .iconEquipaje,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .itemPasajero .iconEquipaje {
               width: 25px;
               display: flex;
               justify-content: center;
@@ -2926,10 +3153,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero .labelEquipaje,
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje .labelEquipaje,
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .labelEquipaje,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .itemEquipaje .labelEquipaje,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .itemPasajero .labelEquipaje,
             #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemEquipaje .labelEquipaje,
             #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .itemPasajero .labelEquipaje,
             #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemEquipaje .labelEquipaje,
-            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .labelEquipaje {
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .itemPasajero .labelEquipaje,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .itemEquipaje .labelEquipaje,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .itemPasajero .labelEquipaje {
               font-family: 'Montserrat';
               font-style: normal;
               font-weight: 500;
@@ -2937,13 +3168,17 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
               line-height: 24px; }
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .colPasajero,
           #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .colPasajero,
+          #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .colPasajero,
           #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .colPasajero,
-          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .colPasajero {
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .colPasajero,
+          #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .colPasajero {
             flex: 1 1 20%; }
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .colPasajero:first-child,
             #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .colPasajero:first-child,
+            #ModalDetResarva .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .colPasajero:first-child,
             #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowEquipaje .colPasajero:first-child,
-            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .colPasajero:first-child {
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowPasajero .colPasajero:first-child,
+            #ModalDetSeguro .modal-body .portletReserva .boxDetReserva .contentPortlet .rowVuelo .colPasajero:first-child {
               flex: 0 1 80px; }
 
 #ModalBlue .modal-dialog {
