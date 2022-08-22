@@ -49,5 +49,5 @@ export const environment = {
 
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
 
-  urlApiMotorVuelos: "https://localhost:44306/mv/"
+  urlApiMotorVuelos: "https://motorvuelos-dev.expertiatravel.com/mv/"
 }
