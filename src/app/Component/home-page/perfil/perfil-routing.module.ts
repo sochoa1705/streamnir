@@ -1,3 +1,4 @@
+import { MisReservasComponent } from './mis-reservas/mis-reservas.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContactoComponent } from './contacto/contacto.component';
@@ -27,6 +28,10 @@ const routes: Routes = [
         path: 'pasajeros',
         component: PassengerComponent
       },
+      {
+        path: 'mis-reservas',
+        component: MisReservasComponent
+      }
     ]
   }
 ];
