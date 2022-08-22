@@ -21,7 +21,6 @@ export class DetalleBookingComponent implements OnInit {
   }
   private getDetalleBooking(){
     this.detalleBookingService.getBookingDetail(this.cot_Id, this.reserva_Id, this.tipo_Vuelo).subscribe((data) => {
-      console.log(data);
       this.data = data;
     });
   }

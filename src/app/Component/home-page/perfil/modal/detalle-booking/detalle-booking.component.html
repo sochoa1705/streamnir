@@ -1,195 +1,258 @@
-<div class="modal-header">
-    <div class="title">
-        <div class="textTitle">Solicitud de Compra de tu Vuelo N{{cot_Id}}</div>
-        <div class="msgTag">{{data.estado_Reserva}}</div>
+<ng-container *ngIf="data">
+    <div class="modal-header">
+        <div class="title">
+            <div class="textTitle">Solicitud de Compra de tu Vuelo N{{cot_Id}}</div>
+            <div class="msgTag">{{data.estado_Reserva}}</div>
+        </div>
+        <button type="button" class="btn-close" (click)="ngbActiveModal.close()"></button>
     </div>
-    <button type="button" class="btn-close" (click)="ngbActiveModal.close()"></button>
-</div>
-<div class="modal-body">
-    <div class="msgAlert">
-        Excelente elección. Tu solicitud de reserva es {{reserva_Id}} ha sido recibida y está siendo procesada
+    <div class="modal-body">
+        <div class="msgAlert">
+            Excelente elección. Tu solicitud de reserva es {{reserva_Id}} ha sido recibida y está siendo procesada
+        </div>
+
+        <div class="portletReserva">
+            <div class="boxDetReserva">
+                <div class="headerPortlet">
+                    <div class="titleBoxRight">
+                        Información de pago con Tarjeta de Crédito
+                    </div>
+                </div>
+                <div class="contentPortlet">
+                    <ul *ngIf="data.codigo_Pago_Safetypay == ''">
+                        <li><span>Tipo de tarjeta:</span> {{data.tipo_Tarjeta}}</li>
+                        <li><span>Titular de la tarjeta:</span> {{data.titular_Tarjeta}}</li>
+                        <li><span>Documento del titular:</span> {{data.tipo_Doc_Titular_Tarjeta}}
+                            {{data.num_Doc_Titular_Tarjeta}}</li>
+                        <li>
+                            <span>Dirección:</span> {{data.contac_Direccion}}
+                        </li>
+                        <li><span>Estado de reserva:</span> {{data.estado_Reserva}}</li>
+                    </ul>
+                    <div class="footerReserva">
+                        <div class="alignLeft">
+                            <div class="totalSafetypay" *ngIf="data.codigo_Pago_Safetypay != ''">
+                                <div class="labelTotal">CODIGO SAFETYPAY:</div>
+                                <div class="montoTotal">365978</div>
+                            </div>
+                        </div>
+                        <div class="alignRigth">
+                            <div class="totalInfoPago">
+                                <div class="labelTotal">TOTAL:</div>
+                                <div class="montoTotal">USD {{data.importe}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boxDetReserva">
+                <div class="headerPortlet">
+                    <div class="titleBoxRight">
+                        Equipajes que incluyen en tu vuelo (Ida y vuelta)
+                    </div>
+                </div>
+                <div class="contentPortlet">
+                    <div class="rowEquipaje">
+                        <div class="itemEquipaje">
+                            <div class="iconEquipaje">
+                                <img src="./assets/modal/mochila.svg" alt="" />
+                            </div>
+                            <div class="labelEquipaje">Incluye bolso de mano</div>
+                        </div>
+                        <div class="itemEquipaje">
+                            <div class="iconEquipaje">
+                                <img src="./assets/modal/equipaje-mano.svg" alt=""
+                                    *ngIf="data.cantidadMaletas != '0' && data.cantidadMaletas" />
+                                <img src="./assets/modal/equipaje-no.svg" alt=""
+                                    *ngIf="data.cantidadMaletas == '0' || !data.cantidadMaletas" />
+                            </div>
+                            <div class="labelEquipaje">Incluye equipaje de mano</div>
+                        </div>
+                        <div class="itemEquipaje">
+                            <div class="iconEquipaje">
+                                <img src="./assets/modal/bodega-no.svg" alt=""
+                                    *ngIf="data.cantidadMaletas == '0' || !data.cantidadMaletas" />
+                                <img src="./assets/modal/bodega-si.svg" alt=""
+                                    *ngIf="data.cantidadMaletas != '0' && data.cantidadMaletas" />
+                            </div>
+                            <div class="labelEquipaje">No incluye equipaje en bodega</div>
+                        </div>
+                        <div class="itemEquipaje">
+                            <div class="iconEquipaje">
+                                <img src="./assets/modal/incluye.svg" alt="" />
+                            </div>
+                            <div class="labelEquipaje">
+                                Puedes agregar maletas por un cargo adicional en el aeropuerto
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boxDetReserva">
+                <div class="headerPortlet">
+                    <div class="titleBoxRight">Datos del Pasajero(s)</div>
+                </div>
+                <div class="contentPortlet">
+                    <div class="rowPasajero">
+                        <div class="itemPasajero" *ngFor="let item of data.pasajeros">
+                            <div class="iconEquipaje">
+                                <img src="./assets/contact.svg" alt="" />
+                            </div>
+                            <div class="labelEquipaje">
+                                {{item.pasaj_Tipo}} - {{item.pasaj_Nombre}} {{item.pasaj_Apellido}} -
+                                {{item.tipo_Documento}} {{item.pasaj_Dni}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boxDetReserva">
+                <div class="headerPortlet">
+                    <div class="titleBoxRight">Detalle de tu vuelo</div>
+                </div>
+                <ng-container *ngIf="data.tipo_Vuelo == 'Solo Ida'">
+                    <div class="contentPortlet">
+                        <ng-container *ngFor="let itemDeparture of data.destinos">
+                            <div class="rowVuelo headVueloIda">
+                                <div class="colVuelo iconVuelo">
+                                    <img src="./assets/Avion2.svg" alt="">
+                                </div>
+                                <div class="colVuelo labelIda">IDA</div>
+                                <div class="colVuelo labelvuelo">{{itemDeparture.iata}}</div>
+                                <div class="colVuelo duracion"><img src="./assets/alarm.svg" alt=""> Duración total
+                                    {{itemDeparture.duracion}}</div>
+                            </div>
+                            <div class="rowVuelo contentVuelo">
+                                <div class="colVuelo">
+                                    <div class="aerolinea">{{itemDeparture.nombre_Aerolinea}}</div>
+                                    <div class="codigo"><span>{{itemDeparture.numero_Vuelo}}</span> </div>
+                                    <div class="operador">Operado por: {{itemDeparture.nombre_Operador}}</div>
+                                </div>
+                                <div class="colVuelo">
+                                    <div class="descrip">Salida</div>
+                                    <div class="fecha">{{itemDeparture.fec_Salida_Texto}}
+                                        <span>{{itemDeparture.hora_Salida_Texto}}</span>
+                                    </div>
+                                    <div class="lugar">{{itemDeparture.city_Source}}</div>
+                                </div>
+                                <div class="colVuelo">
+                                    <div class="descrip">Llegada</div>
+                                    <div class="fecha">{{itemDeparture.fec_Llegada_Texto}}
+                                        <span>{{itemDeparture.hora_Llegada_Texto}}</span>
+                                    </div>
+                                    <div class="lugar">{{itemDeparture.city_Target}}</div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="data.tipo_Vuelo != 'Solo Ida'">
+
+                    <div class="contentPortlet">
+                        <ng-container *ngFor="let itemDeparture of data.destinosIda">
+                            <div class="rowVuelo headVueloIda">
+                                <div class="colVuelo iconVuelo">
+                                    <img src="./assets/Avion2.svg" alt="">
+                                </div>
+                                <div class="colVuelo labelIda">IDA</div>
+                                <div class="colVuelo labelvuelo">{{itemDeparture.iata}}</div>
+                                <div class="colVuelo duracion"><img src="./assets/alarm.svg" alt=""> Duración total
+                                    {{itemDeparture.duracion}}</div>
+                            </div>
+                            <div class="rowVuelo contentVuelo">
+                                <div class="colVuelo">
+                                    <div class="aerolinea">{{itemDeparture.nombre_Aerolinea}}</div>
+                                    <div class="codigo"><span>{{itemDeparture.numero_Vuelo}}</span> </div>
+                                    <div class="operador">Operado por: {{itemDeparture.nombre_Operador}}</div>
+                                </div>
+                                <div class="colVuelo">
+                                    <div class="descrip">Salida</div>
+                                    <div class="fecha">{{itemDeparture.fec_Salida_Texto}}
+                                        <span>{{itemDeparture.hora_Salida_Texto}}</span>
+                                    </div>
+                                    <div class="lugar">{{itemDeparture.city_Source}}</div>
+                                </div>
+                                <div class="colVuelo">
+                                    <div class="descrip">Llegada</div>
+                                    <div class="fecha">{{itemDeparture.fec_Llegada_Texto}}
+                                        <span>{{itemDeparture.hora_Llegada_Texto}}</span>
+                                    </div>
+                                    <div class="lugar">{{itemDeparture.city_Target}}</div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                    </div>
+                    <div class="contentPortlet">
+                        <ng-container *ngFor="let itemReturn of data.destinosVuelta">
+                            <div class="rowVuelo headVueloVuelta">
+                                <div class="colVuelo iconVuelo">
+                                    <img src="./assets/Avion2.svg" alt="">
+                                </div>
+                                <div class="colVuelo labelIda">VUELTA</div>
+                                <div class="colVuelo labelvuelo">{{itemReturn.iata}}</div>
+                                <div class="colVuelo duracion"><img src="./assets/alarm.svg" alt=""> Duración total
+                                    {{itemReturn.duracion}}</div>
+                            </div>
+                            <div class="rowVuelo contentVuelo">
+                                <div class="colVuelo">
+                                    <div class="aerolinea">{{itemReturn.nombre_Aerolinea}}</div>
+                                    <div class="codigo"><span>{{itemReturn.numero_Vuelo}}</span> </div>
+                                    <div class="operador">Operado por: {{itemReturn.nombre_Operador}}</div>
+                                </div>
+                                <div class="colVuelo">
+                                    <div class="descrip">Salida</div>
+                                    <div class="fecha">{{itemReturn.fec_Salida_Texto}}
+                                        <span>{{itemReturn.hora_Salida_Texto}}</span>
+                                    </div>
+                                    <div class="lugar">{{itemReturn.city_Source}}</div>
+                                </div>
+                                <div class="colVuelo">
+                                    <div class="descrip">Llegada</div>
+                                    <div class="fecha">{{itemReturn.fec_Llegada_Texto}}
+                                        <span>{{itemReturn.hora_Llegada_Texto}}</span>
+                                    </div>
+                                    <div class="lugar">{{itemReturn.city_Target}}</div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="boxDetReserva">
+                <div class="headerPortlet">
+                    <div class="titleBoxRight">Datos de Contacto</div>
+                </div>
+                <div class="contentPortlet">
+                    <div class="rowPasajero">
+                        <div class="itemPasajero">
+                            <div class="iconEquipaje">
+                                <img src="./assets/confirm-user.svg" alt="" />
+                            </div>
+                            <div class="labelEquipaje">
+                                Nombre: {{data.contac_Nombre}} {{data.contac_Apellido}}
+                            </div>
+                        </div>
+                        <div class="itemPasajero">
+                            <div class="iconEquipaje">
+                                <img src="./assets/confirm-mail.svg" alt="" />
+                            </div>
+                            <div class="labelEquipaje">Email: {{data.contac_Email}}</div>
+                        </div>
+                        <div class="itemPasajero">
+                            <div class="iconEquipaje">
+                                <img src="./assets/confirm-phone.svg" alt="" />
+                            </div>
+                            <div class="labelEquipaje">Telefono: (51) {{data.contac_Telefono}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="portletReserva">
-        <div class="boxDetReserva">
-            <div class="headerPortlet">
-                <div class="titleBoxRight">
-                    Información de pago con Tarjeta de Crédito
-                </div>
-            </div>
-            <div class="contentPortlet">
-                <ul>
-                    <li><span>Tipo de tarjeta:</span></li>
-                    <li><span>Titular de la tarjeta:</span> JOSE RIOS MAZUELOS</li>
-                    <li><span>Documento del titular:</span> DNI 43942556</li>
-                    <li>
-                        <span>Dirección:</span> ANDRES CASTELLO 109 DPTO 301 SAN MIGUEL
-                    </li>
-                    <li><span>Estado de reserva:</span> {{data.estado_Reserva}}</li>
-                </ul>
-                <div class="footerReserva">
-                    <div class="alignLeft">
-                        <div class="totalSafetypay">
-                            <div class="labelTotal">CODIGO SAFETYPAY:</div>
-                            <div class="montoTotal">365978</div>
-                        </div>
-                    </div>
-                    <div class="alignRigth">
-                        <div class="totalInfoPago">
-                            <div class="labelTotal">TOTAL:</div>
-                            <div class="montoTotal">USD {{data.importe}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="boxDetReserva">
-            <div class="headerPortlet">
-                <div class="titleBoxRight">
-                    Equipajes que incluyen en tu vuelo (Ida y vuelta)
-                </div>
-            </div>
-            <div class="contentPortlet">
-                <div class="rowEquipaje">
-                    <div class="itemEquipaje">
-                        <div class="iconEquipaje">
-                            <img src="./assets/modal/mochila.svg" alt="" />
-                        </div>
-                        <div class="labelEquipaje">Incluye bolso de mano</div>
-                    </div>
-                    <div class="itemEquipaje">
-                        <div class="iconEquipaje">
-                            <img src="./assets/modal/equipaje-mano.svg" alt="" *ngIf="data.cantidadMaletas != '0' && data.cantidadMaletas" />
-                            <img src="./assets/modal/equipaje-no.svg" alt="" *ngIf="data.cantidadMaletas == '0' || !data.cantidadMaletas" />
-                        </div>
-                        <div class="labelEquipaje">Incluye equipaje de mano</div>
-                    </div>
-                    <div class="itemEquipaje">
-                        <div class="iconEquipaje">
-                            <img src="./assets/modal/bodega-no.svg" alt="" *ngIf="data.cantidadMaletas == '0' || !data.cantidadMaletas" />
-                            <img src="./assets/modal/bodega-si.svg" alt="" *ngIf="data.cantidadMaletas != '0' && data.cantidadMaletas" />
-                        </div>
-                        <div class="labelEquipaje">No incluye equipaje en bodega</div>
-                    </div>
-                    <div class="itemEquipaje">
-                        <div class="iconEquipaje">
-                            <img src="./assets/modal/incluye.svg" alt="" />
-                        </div>
-                        <div class="labelEquipaje">
-                            Puedes agregar maletas por un cargo adicional en el aeropuerto
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="boxDetReserva">
-            <div class="headerPortlet">
-                <div class="titleBoxRight">Datos del Pasajero(s)</div>
-            </div>
-            <div class="contentPortlet">
-                <div class="rowPasajero">
-                    <div class="itemPasajero" *ngFor="let item of data.pasajeros">
-                        <div class="iconEquipaje">
-                            <img src="./assets/contact.svg" alt="" />
-                        </div>
-                        <div class="labelEquipaje">
-                            {{item.pasaj_Tipo}} - {{item.pasaj_Nombre}} {{item.pasaj_Apellido}} - {{item.tipo_Documento}} {{item.pasaj_Dni}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="boxDetReserva">
-            <div class="headerPortlet">
-                <div class="titleBoxRight">Detalle de tu vuelo</div>
-            </div>
-            <div class="contentPortlet">
-                <div class="rowVuelo headVueloIda">
-                    <div class="colVuelo iconVuelo">
-                        <img src="./assets/Avion2.svg" alt="">
-                    </div>
-                    <div class="colVuelo labelIda">IDA</div>
-                    <div class="colVuelo labelvuelo">LIM - BOG</div>
-                    <div class="colVuelo duracion"><img src="./assets/alarm.svg" alt=""> Duración total 03h 30m</div>
-                </div>
-                <div class="rowVuelo contentVuelo">
-                    <div class="colVuelo">
-                        <div class="aerolinea">Sky Airline</div>
-                        <div class="codigo"><span>5556</span> </div>
-                        <div class="operador">Operado por: Sky Airline</div>
-                    </div>
-                    <div class="colVuelo">
-                        <div class="descrip">Salida</div>
-                        <div class="fecha">Sab 25 Jul <span>HORA 05:25am</span></div>
-                        <div class="lugar">LIMA</div>
-                    </div>
-                    <div class="colVuelo">
-                        <div class="descrip">Llegada</div>
-                        <div class="fecha">Sab 25 Jul <span>HORA 08:25am</span></div>
-                        <div class="lugar">BOGOTA</div>
-                    </div>
-                </div>
-            </div>
-            <div class="contentPortlet">
-                <div class="rowVuelo headVueloVuelta">
-                    <div class="colVuelo iconVuelo">
-                        <img src="./assets/Avion2.svg" alt="">
-                    </div>
-                    <div class="colVuelo labelIda">VUELTA</div>
-                    <div class="colVuelo labelvuelo">BOG - LIM</div>
-                    <div class="colVuelo duracion"><img src="./assets/alarm.svg" alt=""> Duración total 03h 30m</div>
-                </div>
-                <div class="rowVuelo contentVuelo">
-                    <div class="colVuelo">
-                        <div class="aerolinea">Sky Airline</div>
-                        <div class="codigo"><span>5556</span> </div>
-                        <div class="operador">Operado por: Sky Airline</div>
-                    </div>
-                    <div class="colVuelo">
-                        <div class="descrip">Salida</div>
-                        <div class="fecha">Sab 25 Jul <span>HORA 05:25am</span></div>
-                        <div class="lugar">LIMA</div>
-                    </div>
-                    <div class="colVuelo">
-                        <div class="descrip">Llegada</div>
-                        <div class="fecha">Sab 25 Jul <span>HORA 08:25am</span></div>
-                        <div class="lugar">BOGOTA</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="boxDetReserva">
-            <div class="headerPortlet">
-                <div class="titleBoxRight">Datos de Contacto</div>
-            </div>
-            <div class="contentPortlet">
-                <div class="rowPasajero">
-                    <div class="itemPasajero">
-                        <div class="iconEquipaje">
-                            <img src="./assets/confirm-user.svg" alt="" />
-                        </div>
-                        <div class="labelEquipaje">
-                            Nombre: {{data.contac_Nombre}} {{data.contac_Apellido}}
-                        </div>
-                    </div>
-                    <div class="itemPasajero">
-                        <div class="iconEquipaje">
-                            <img src="./assets/confirm-mail.svg" alt="" />
-                        </div>
-                        <div class="labelEquipaje">Email: {{data.contac_Email}}</div>
-                    </div>
-                    <div class="itemPasajero">
-                        <div class="iconEquipaje">
-                            <img src="./assets/confirm-phone.svg" alt="" />
-                        </div>
-                        <div class="labelEquipaje">Telefono: (51) {{data.contac_Telefono}}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</ng-container>

@@ -25,9 +25,7 @@ export class MisReservasComponent implements OnInit {
   }
   private getAllBookings(){
     this.userStorage = this.accountService.getUserStorage();
-  
-    //this.userStorage.id.toString()
-    this.misReservasService.getAllBooking("19182").subscribe((data) => {
+    this.misReservasService.getAllBooking(this.userStorage.id.toString()).subscribe((data) => {
       this.bookings = data;
     });
   }
