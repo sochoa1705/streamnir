@@ -8,4 +8,5 @@ export interface RqBooking {
   HasCancellationFee?: boolean;
   NumberOfAdult?: number;
   NumberOfChildren?: number;
+  Origin?: string;
 }

@@ -1165,6 +1165,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "ArrivalDate": moment(this.resultJson.toDate, "DD/MM/YYYY").format("YYYY-MM-DD"),
           "NumberOfAdult": 1,
           "NumberOfChildren": 0,
+          "Origin": this.resultJson?.destinyString.descripcion_destino,
           "HasCancellationFee": true
         },
         "Setting": {
