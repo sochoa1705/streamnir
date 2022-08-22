@@ -1715,6 +1715,10 @@ section {
                     flex: 1 1 auto;
                     font-weight: 400;
                     font-size: 14px;
+                    @media (max-width: 640px) {
+                        flex: 1 1 calc(50% - 10px);
+                        font-size: 12px;
+                    }
                 }
                 &.flexCol {
                     align-items: flex-start;
@@ -1723,6 +1727,9 @@ section {
                     flex-direction: column;
                     font-weight: 600;
                     font-size: 14px;
+                    @media (max-width: 640px) {
+                        font-size: 12px;
+                    }
                 }
                 .msgLabel {
                     font-weight: 500;
@@ -1747,6 +1754,9 @@ section {
                     font-size: 10px;
                     line-height: 18px;
                 }
+            }
+            @media (max-width: 640px) {
+                flex-wrap: wrap;
             }
         }
     }
@@ -3456,6 +3466,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             color: #664D03;
             text-align: center;
             padding: 15px;
+            @media (max-width: 640px) {
+                font-size: 12px;
+            }
         }
         .portletReserva {
             display: flex;
@@ -3485,13 +3498,29 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                         align-items: center;
                         color: #4b4b4b;
                         width: 100%;
+                        @media (max-width: 640px) {
+                            font-size: 14px;
+                        }
                     }
                 }
                 .contentPortlet {
                     margin: 20px;
+                    &.tablet {
+                        .rowPasajero {
+                            @media (max-width: 640px) {
+                                min-width: 700px;
+                            }
+                        }
+                        @media (max-width: 640px) {
+                            overflow-x: scroll;
+                        }
+                    }
                     ul {
                         font-size: 14px;
                         line-height: 26px;
+                        @media (max-width: 640px) {
+                            font-size: 12px;
+                        }
                         li {
                             span {
                                 font-weight: 600;
@@ -3513,6 +3542,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                                     font-weight: 500;
                                     font-size: 14px;
                                     line-height: 24px;
+                                    @media (max-width: 640px) {
+                                        font-size: 12px;
+                                    }
                                 }
                                 .montoTotal {
                                     font-family: 'Montserrat';
@@ -3534,6 +3566,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                                     font-weight: 500;
                                     font-size: 14px;
                                     line-height: 24px;
+                                    @media (max-width: 640px) {
+                                        font-size: 12px;
+                                    }
                                 }
                                 .montoTotal {
                                     font-family: 'Montserrat';
@@ -3541,6 +3576,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                                     font-weight: 600;
                                     font-size: 32px;
                                     line-height: 24px;
+                                    @media (max-width: 640px) {
+                                        font-size: 18px;
+                                    }
                                 }
                             }
                         }
@@ -3557,12 +3595,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                             .colPasajero {
                                 font-weight: 600;
                                 font-size: 14px;
+                                @media (max-width: 640px) {
+                                    font-size: 12px;
+                                }
                             }
                         }
                         &.rowItem {
                             flex-direction: row;
                             .colPasajero {
                                 font-size: 14px;
+                                @media (max-width: 640px) {
+                                    font-size: 12px;
+                                }
                             }
                         }
                         &.headVueloIda,
@@ -3597,6 +3641,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                                     justify-content: flex-end;
                                     gap: 10px;
                                 }
+                                @media (max-width: 640px) {
+                                    font-size: 12px;
+                                }
                             }
                         }
                         &.headVueloVuelta {
@@ -3622,6 +3669,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                                 .aerolinea {
                                     font-weight: 600;
                                     font-size: 14px;
+                                    @media (max-width: 640px) {
+                                        font-size: 12px;
+                                    }
                                 }
                                 .codigo {
                                     span {
@@ -3643,6 +3693,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                                     span {
                                         color: #df0c30;
                                         font-weight: 600;
+                                    }
+                                    @media (max-width: 640px) {
+                                        font-size: 12px;
                                     }
                                 }
                                 .lugar {
@@ -3667,6 +3720,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                                 font-weight: 500;
                                 font-size: 14px;
                                 line-height: 24px;
+                                @media (max-width: 640px) {
+                                    font-size: 12px;
+                                }
                             }
                         }
                         .colPasajero {
@@ -3675,6 +3731,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                                 flex: 0 1 80px;
                             }
                         }
+                    }
+                    @media (max-width: 640px) {
+                        margin: 10px;
                     }
                 }
             }
