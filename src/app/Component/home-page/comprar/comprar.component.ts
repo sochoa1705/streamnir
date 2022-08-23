@@ -922,8 +922,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     localStorage.setItem('payloadPayment', JSON.stringify(payload));
 
+    debugger
+
     this._paymentService.v1ApiPaymentPost({ body: payload }).subscribe({
       next: (response) => {
+
+        debugger
 
         this.paymentData = response;
         localStorage.setItem('paymentData', this.paymentData);
@@ -931,6 +935,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         const result = JSON.parse(this.paymentData);
 
         if (result.Result.IsSuccess) {
+
+          debugger
 
           const paymentMethod: PaymentMethodEnum = data.paymentMethodForm.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
 
@@ -949,6 +955,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           }
 
           if (paymentMethod === PaymentMethodEnum.CreditCard && result.Result.ServiceResponse.Status === 'APPROVED') {
+            debugger
+
             // const parameters: ActualizarEstadoSeguroRQ = {
             //   res_seguro_id: this.reservation.Reserva,
             //   usosafetypay: 8
@@ -1044,7 +1052,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
               To: [data.contactForm.mailContacto.toUpperCase()],
               BCC: [""],
               CC: [""],
-              Subject: `NMViajes - Solicitud de compra de seguro #${result.Result.QuoteId}`,
+              Subject: `NMViajes - Solicitud de compra de seguro #${this.reservation.Reserva}`,
               Data: {
                 Contacto: {
                   NombresApellidos: `${data.contactForm.nameContacto.toUpperCase()
