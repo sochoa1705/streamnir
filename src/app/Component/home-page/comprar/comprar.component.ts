@@ -1033,7 +1033,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
             this.dataShop.customers.forEach((value: any, index: number) => {
               let asegurado = {
-                NumeroSolicitudCompra: String(this.reservation.Reserva),
+                NumeroSolicitudCompra: String(result.Result.QuoteId),//this.reservation.Reserva
                 NombresApellidos: `ADT - ${value.nameCustomer.toUpperCase()
                   } ${value.lastNameCustomer.toUpperCase()}`,
                 FechaNacimiento: `${value.dayCustomer.padStart(2, '0')}/${value.monthCustomer.padStart(2, '0')}/${value.yearCustomer}`
@@ -1053,7 +1053,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
                 To: [data.contactForm.mailContacto.toUpperCase()],
                 BCC: [""],
                 CC: [""],
-                Subject: `NMViajes - Solicitud de compra de seguro #${this.reservation.Reserva}`,
+                Subject: `NMViajes - Solicitud de compra de seguro #${result.Result.QuoteId}`,//this.reservation.Reserva
                 Data: {
                   Contacto: {
                     NombresApellidos: `${data.contactForm.nameContacto.toUpperCase()
