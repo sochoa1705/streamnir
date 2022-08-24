@@ -934,181 +934,187 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
         const result = JSON.parse(this.paymentData);
 
-        if (result.Result.IsSuccess) {
+        if (result.State.Ok) {
+          if (result.Result.IsSuccess) {
 
-          debugger
-
-          const paymentMethod: PaymentMethodEnum = data.paymentMethodForm.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
-
-          if (paymentMethod === PaymentMethodEnum.SafetyPay) {
-            const parameters: ActualizarCodigoSafetyPaySeguroRQ = {
-              res_seguro_id: this.reservation.Reserva,
-              usosafetypay: "S",
-              codigo_safetypay: result.Result.ServiceResponse.Code,
-              nro_pedido_srv: result.Result.OrderId,
-              fee_safetypay: 0
-            };
-
-            const body = new NMRequestBy<ActualizarCodigoSafetyPaySeguroRQ>(parameters);
-
-            this._secureBookingService.updateSafetypayPaymentCode(body).subscribe((response: any) => { });
-          }
-
-          if (paymentMethod === PaymentMethodEnum.CreditCard && result.Result.ServiceResponse.Status === 'APPROVED') {
             debugger
 
-            // const parameters: ActualizarEstadoSeguroRQ = {
-            //   res_seguro_id: this.reservation.Reserva,
-            //   usosafetypay: 8
-            // };
+            const paymentMethod: PaymentMethodEnum = data.paymentMethodForm.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
 
-            // const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
+            if (paymentMethod === PaymentMethodEnum.SafetyPay) {
+              const parameters: ActualizarCodigoSafetyPaySeguroRQ = {
+                res_seguro_id: this.reservation.Reserva,
+                usosafetypay: "S",
+                codigo_safetypay: result.Result.ServiceResponse.Code,
+                nro_pedido_srv: result.Result.OrderId,
+                fee_safetypay: 0
+              };
 
-            // this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
+              const body = new NMRequestBy<ActualizarCodigoSafetyPaySeguroRQ>(parameters);
 
-            const payload: any = {
-              "TrackingCode": Guid(),
-              "MuteExceptions": false,
-              "Caller": {
-                "Company": 'Agil',
-                "Application": 'Interagencias'
-              },
-              "Parameter": {
-                "BookingId": this.reservation.Reserva,
-                "Status": 8
-              }
-            };
-
-            this._preferencesService.updateBookingStatus(payload).subscribe({
-              next: response => {
-                const result = response['Result'];
-              }
-            })
-          }
-
-          const fechasalida = this.resultJson.fromDate.split('/');
-          const fecharetorno = this.resultJson.toDate.split('/');
-
-          const currentDate = moment();
-          const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
-
-          const missingDays = fromDate.diff(currentDate, 'days');
-
-          const model = {
-            event: 'nmv.seguros_eecga3_purchase',
-            ecommerce: {
-              currencyCode: this.safe0Json.monedaLista,
-              purchase: {
-                actionField: {
-                  id: String(result.Result.QuoteId),
-                  revenue: this.safe0Json.precioEmisionLocal,
-                  cupon: ''
-                },
-                products: [{
-                  name: this.safe0Json.producto,
-                  id: this.safe0Json.idProducto,
-                  price: this.safe0Json.precioEmisionLocal,
-                  brand: 'AssistCard',
-                  category: 'Seguros',
-                  category2: this.safe0Json.clase === 'best' ? 'El mejor plan' : 'Fecha flexible',
-                  variant: this.resultJson.destinyString.descripcion_destino,
-                  quantity: this.resultJson.passengers.length,
-                  metric10: this.getPromedioEdades(this.resultJson),
-                  dimension9: String(this.asistenciaMedicaMonto),
-                  dimension11: `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
-                  dimension12: `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
-                  metric11: missingDays,
-                  metric12: Number(this.resultJson.days),
-                  dimension16: 'Perú',
-                  dimension17: this.resultJson.destinyString.descripcion_destino
-                }]
-              }
-            }
-          }
-
-          TaggingService.tagTransactionCompleted(model);
-
-          const asegurados: any = [];
-
-          this.dataShop.customers.forEach((value: any, index: number) => {
-            let asegurado = {
-              NumeroSolicitudCompra: String(this.reservation.Reserva),
-              NombresApellidos: `ADT - ${value.nameCustomer.toUpperCase()
-                } ${value.lastNameCustomer.toUpperCase()}`,
-              FechaNacimiento: `${value.dayCustomer.padStart(2, '0')}/${value.monthCustomer.padStart(2, '0')}/${value.yearCustomer}`
+              this._secureBookingService.updateSafetypayPaymentCode(body).subscribe((response: any) => { });
             }
 
-            asegurados.push(asegurado);
-          });
+            if (paymentMethod === PaymentMethodEnum.CreditCard && result.Result.ServiceResponse.Status === 'APPROVED') {
+              debugger
 
-          const notificationBody: CeSeguroCeEmailParameterCustomCeRequest1 = {
-            Caller: {
-              Company: EnumRequestCompanies.Agil,
-              Application: EnumRequestApplications.Interagencias
-            },
-            TrackingCode: Guid(),
-            MuteExceptions: false,
-            Parameter: {
-              To: [data.contactForm.mailContacto.toUpperCase()],
-              BCC: [""],
-              CC: [""],
-              Subject: `NMViajes - Solicitud de compra de seguro #${this.reservation.Reserva}`,
-              Data: {
-                Contacto: {
-                  NombresApellidos: `${data.contactForm.nameContacto.toUpperCase()
-                    } ${data.contactForm.lastnameContacto.toUpperCase()
-                    }`,
-                  CorreoElectronico: data.contactForm.mailContacto.toUpperCase(),
-                  Telefonos: `CELULAR ${data.contactForm.code0} ${data.contactForm.numberPhone0}`
+              // const parameters: ActualizarEstadoSeguroRQ = {
+              //   res_seguro_id: this.reservation.Reserva,
+              //   usosafetypay: 8
+              // };
+
+              // const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
+
+              // this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
+
+              const payload: any = {
+                "TrackingCode": Guid(),
+                "MuteExceptions": false,
+                "Caller": {
+                  "Company": 'Agil',
+                  "Application": 'Interagencias'
                 },
-                Pago: {
-                  TipoPago: this.selectedPay === 'tarjeta' ? 'TARJETA' : 'SAFETYPAY',
-                  CodigoSafetypay: result.Result.ServiceResponse.Code,
-                  TextoExpiracion: this.selectedPay !== 'tarjeta' ? `El pago puede ser completado hasta el ${result.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(0, 10)
-                    } a las ${result.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(11, 5)
-                    }` : "",
-                  TiempoExpiracion: ""
-                },
-                Asegurados: asegurados,
-                Precio: {
-                  PrecioDolares: `${this.safe0Json.monedaLista} ${this.safe0Json.precioEmisionLocal}`
-                },
-                Cobertura: {
-                  NombreCobertura: this.safe0Json?.nombreProducto,
-                  TipoCobertura: this.safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-                  MontoAsistenciaMedica: String(this.asistenciaMedicaMonto),
-                  DuracionCobertura: `${this.resultJson.days} días`,
-                  CiudadOrigen: "(PE) Perú",
-                  CiudadDestino: this.resultJson.destinyString.descripcion_destino,
-                  FechaSalida: `${fechasalida[0]}/${fechasalida[1]}/${fechasalida[2]}`,
-                  FechaRegreso: `${fecharetorno[0]}/${fecharetorno[1]}/${fecharetorno[2]}`,
-                  Pasajeros: `${this.resultJson.passengers.length} Adulto(s)`
+                "Parameter": {
+                  "BookingId": this.reservation.Reserva,
+                  "Status": 8
+                }
+              };
+
+              this._preferencesService.updateBookingStatus(payload).subscribe({
+                next: response => {
+                  const result = response['Result'];
+                }
+              })
+            }
+
+            const fechasalida = this.resultJson.fromDate.split('/');
+            const fecharetorno = this.resultJson.toDate.split('/');
+
+            const currentDate = moment();
+            const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
+
+            const missingDays = fromDate.diff(currentDate, 'days');
+
+            const model = {
+              event: 'nmv.seguros_eecga3_purchase',
+              ecommerce: {
+                currencyCode: this.safe0Json.monedaLista,
+                purchase: {
+                  actionField: {
+                    id: String(result.Result.QuoteId),
+                    revenue: this.safe0Json.precioEmisionLocal,
+                    cupon: ''
+                  },
+                  products: [{
+                    name: this.safe0Json.producto,
+                    id: this.safe0Json.idProducto,
+                    price: this.safe0Json.precioEmisionLocal,
+                    brand: 'AssistCard',
+                    category: 'Seguros',
+                    category2: this.safe0Json.clase === 'best' ? 'El mejor plan' : 'Fecha flexible',
+                    variant: this.resultJson.destinyString.descripcion_destino,
+                    quantity: this.resultJson.passengers.length,
+                    metric10: this.getPromedioEdades(this.resultJson),
+                    dimension9: String(this.asistenciaMedicaMonto),
+                    dimension11: `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
+                    dimension12: `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
+                    metric11: missingDays,
+                    metric12: Number(this.resultJson.days),
+                    dimension16: 'Perú',
+                    dimension17: this.resultJson.destinyString.descripcion_destino
+                  }]
                 }
               }
             }
-          };
 
-          this._messageService.v1ApiMessageSendConfirmacionSeguroPost({ body: notificationBody }).subscribe((res: CeResponse) => {
-            if (res.State.Ok) {
-              this.pressedToBuy = false;
+            TaggingService.tagTransactionCompleted(model);
 
-              this._loaderSubjectService.closeLoader();
+            const asegurados: any = [];
 
-              this._router.navigateByUrl('/conformidad');
-            }
-          });
+            this.dataShop.customers.forEach((value: any, index: number) => {
+              let asegurado = {
+                NumeroSolicitudCompra: String(this.reservation.Reserva),
+                NombresApellidos: `ADT - ${value.nameCustomer.toUpperCase()
+                  } ${value.lastNameCustomer.toUpperCase()}`,
+                FechaNacimiento: `${value.dayCustomer.padStart(2, '0')}/${value.monthCustomer.padStart(2, '0')}/${value.yearCustomer}`
+              }
+
+              asegurados.push(asegurado);
+            });
+
+            const notificationBody: CeSeguroCeEmailParameterCustomCeRequest1 = {
+              Caller: {
+                Company: EnumRequestCompanies.Agil,
+                Application: EnumRequestApplications.Interagencias
+              },
+              TrackingCode: Guid(),
+              MuteExceptions: false,
+              Parameter: {
+                To: [data.contactForm.mailContacto.toUpperCase()],
+                BCC: [""],
+                CC: [""],
+                Subject: `NMViajes - Solicitud de compra de seguro #${this.reservation.Reserva}`,
+                Data: {
+                  Contacto: {
+                    NombresApellidos: `${data.contactForm.nameContacto.toUpperCase()
+                      } ${data.contactForm.lastnameContacto.toUpperCase()
+                      }`,
+                    CorreoElectronico: data.contactForm.mailContacto.toUpperCase(),
+                    Telefonos: `CELULAR ${data.contactForm.code0} ${data.contactForm.numberPhone0}`
+                  },
+                  Pago: {
+                    TipoPago: this.selectedPay === 'tarjeta' ? 'TARJETA' : 'SAFETYPAY',
+                    CodigoSafetypay: result.Result.ServiceResponse.Code,
+                    TextoExpiracion: this.selectedPay !== 'tarjeta' ? `El pago puede ser completado hasta el ${result.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(0, 10)
+                      } a las ${result.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(11, 5)
+                      }` : "",
+                    TiempoExpiracion: ""
+                  },
+                  Asegurados: asegurados,
+                  Precio: {
+                    PrecioDolares: `${this.safe0Json.monedaLista} ${this.safe0Json.precioEmisionLocal}`
+                  },
+                  Cobertura: {
+                    NombreCobertura: this.safe0Json?.nombreProducto,
+                    TipoCobertura: this.safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+                    MontoAsistenciaMedica: String(this.asistenciaMedicaMonto),
+                    DuracionCobertura: `${this.resultJson.days} días`,
+                    CiudadOrigen: "(PE) Perú",
+                    CiudadDestino: this.resultJson.destinyString.descripcion_destino,
+                    FechaSalida: `${fechasalida[0]}/${fechasalida[1]}/${fechasalida[2]}`,
+                    FechaRegreso: `${fecharetorno[0]}/${fecharetorno[1]}/${fecharetorno[2]}`,
+                    Pasajeros: `${this.resultJson.passengers.length} Adulto(s)`
+                  }
+                }
+              }
+            };
+
+            this._messageService.v1ApiMessageSendConfirmacionSeguroPost({ body: notificationBody }).subscribe((res: CeResponse) => {
+              if (res.State.Ok) {
+                this.pressedToBuy = false;
+
+                this._loaderSubjectService.closeLoader();
+
+                this._router.navigateByUrl('/conformidad');
+              }
+            });
+          }
+          else {
+            this.replyMessage = result.Result.Message;
+            this.pressedToBuy = false;
+          }
         }
-        else {
-          // CAVH: Entra en el caso de pago con tarjeta: La transacci\u00F3n fue rechazada por el sistema anti-fraude.
-          this.replyMessage = "No se pudo realizar la transacción con la tarjeta ingresada, por favor intente con otro medio de pago.";
-          this.pressedToBuy = false;
-        }
+        // else {
+        //   // CAVH: Entra en el caso de pago con tarjeta: La transacci\u00F3n fue rechazada por el sistema anti-fraude.
+        //   this.replyMessage = "No se pudo realizar la transacción con la tarjeta ingresada, por favor intente con otro medio de pago.";
+        //   this.pressedToBuy = false;
+        // }
       },
       error: (err) => {
         console.log('Error en el registro del pago');
         console.log(err);
 
-        this.replyMessage = "No se pudo realizar la transacción con la tarjeta ingresada, por favor intente con otro medio de pago.";
+        this.replyMessage = "Ocurrió un error interno al procesar el pago.";
         this.pressedToBuy = false;
 
         this._loaderSubjectService.closeLoader();
