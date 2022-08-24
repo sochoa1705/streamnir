@@ -44,10 +44,13 @@ export const environment = {
   url_autos: 'https://autos.nmviajes.com/es/site/',
 
 
-  urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela",
+  //urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela",
+  //urlApiPayment: "http://10.75.102.23:15001/pasarelaservicio",
+  urlApiPayment: 'http://localhost:30850',
+
   urlSuggest: "https://suggest.agentcars.com/suggest/",
 
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
 
-  urlApiMotorVuelos: "https://localhost:44306/mv/"
+  urlApiMotorVuelos: "https://motorvuelos-dev.expertiatravel.com/mv/"
 }

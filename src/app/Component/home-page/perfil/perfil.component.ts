@@ -43,11 +43,11 @@ export class PerfilComponent implements OnInit {
     {
       texto: 'Pasajeros',
       ruta: './pasajeros'
-    },
-    {
-      texto: 'Mis Reservas',
-      ruta: './mis-reservas'
-    }
+    }//,
+    // {
+    //   texto: 'Mis Reservas',
+    //   ruta: './mis-reservas'
+    // }
   ];
 
   constructor(
