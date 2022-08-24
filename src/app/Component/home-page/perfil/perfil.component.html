@@ -46,8 +46,9 @@
             </div>
             <div class="boxMenu">
                 <ul class="">
-                    <li *ngFor="let item of menus" [routerLink]="[item.ruta]" routerLinkActive="selected" (click)="route = item.ruta">
-                        {{item.texto}}
+                    <li *ngFor="let item of menus">
+                      <a *ngIf="!item.newWindow" [routerLink]="[item.ruta]" routerLinkActive="selected" (click)="route = item.ruta">{{item.texto}}</a>
+                      <a *ngIf="item.newWindow" target="_blank" [href]="item.ruta">{{item.texto}}</a>
                     </li>
                 </ul>
             </div>
