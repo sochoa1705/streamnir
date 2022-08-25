@@ -15,7 +15,7 @@
                         <ng-container *ngFor="let itemVuelo of item.vuelos">
                             Vuelo {{itemVuelo.city_Source}}<br/>
                         </ng-container>
-                        
+
                         <div class="msgLabel" [ngClass]="{'bg-danger': item.estado_Reserva == 'Solicitud Cancelada', 'success': item.estado_Reserva != 'Solicitud Cancelada'}">
                           {{item.estado_Reserva}}
                         </div>
@@ -40,7 +40,7 @@
                   Aún no cuenta con reservas.
                 </div>
 
-                <div class="rowVuelo">
+                <!-- <div class="rowVuelo">
                     <div class="colVuelo">
                         <img src="./assets/Avion2.svg" alt="">
                     </div>
@@ -60,7 +60,7 @@
                     <div class="colVuelo">
                         <div class="btn primary" data-bs-toggle="modal" data-bs-target="#ModalDetSeguro">Detalles</div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </form>
     </div>
