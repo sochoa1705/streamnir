@@ -1,0 +1,18 @@
+.boxMenu ul li a.selected, .boxMenu ul li a:hover {
+  color: #506370;
+}
+.boxMenu ul li a{
+  display: flex;
+  height: 35px;
+  color: #009aed;
+  text-decoration: none;
+  width: 100%;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: Montserrat;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 21px;
+  letter-spacing: 0.1px;
+  transition: all 0.3s;
+}

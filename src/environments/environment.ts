@@ -29,6 +29,7 @@ export const environment = {
   //urlNewsletter: 'https://servicio.nmviajes.com:9443/suscripcion',
   urlNewsletter: 'https://servicios.expertiatravel.com/subscription',//desarrollo
   urlSeguros: 'https://servicio.nmviajes.com:9443/segurosrv/',
+  urlZonaPrivada: 'https://servicio.nmviajes.com:9443/zonaprivada/',
   //urlGeo: "https://motorvuelos-dev.expertiatravel.com/mv",
   urlGeo: "https://motorvuelos.expertiatravel.com/mv",
   urlIframeMotorVuelos: "https://motorwl-dev.expertiatravel.com/#/nmviajes/search/resultados",
