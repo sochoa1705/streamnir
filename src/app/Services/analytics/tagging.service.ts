@@ -4,14 +4,25 @@ import { ModelTaggingActividades, ModelTaggingAddToCart, ModelTaggingBuscarSegur
 
 @Injectable({ providedIn: 'root' })
 export class TaggingService {
-  
+
 
 
   constructor() { }
 
   public static triggerTag(datos: any) {
     const dataLayer = (<any>(<any>window)).dataLayer || [];
+
+    // dataLayer.push({
+    //   originalLocation: document.location.protocol + '//' +
+    //     document.location.hostname +
+    //     document.location.pathname +
+    //     document.location.search
+    // });
+
     dataLayer.push(datos);
+
+    console.log('dataLayer:')
+    console.log(dataLayer)
   }
 
   public static pageView(url: string) {
