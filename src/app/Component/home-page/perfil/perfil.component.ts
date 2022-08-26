@@ -47,8 +47,12 @@ export class PerfilComponent implements OnInit {
       ruta: './pasajeros'
     },
     {
-      texto: 'Mis Reservas',
-      ruta: './mis-reservas'
+      texto: 'Mis Reservas Vuelos',
+      ruta: './mis-reservas-vuelos'
+    },
+    {
+      texto: 'Mis Reservas Seguros',
+      ruta: './mis-reservas-seguros'
     }
   ];
 
