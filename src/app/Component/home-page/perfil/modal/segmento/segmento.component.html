@@ -1,0 +1,33 @@
+<div class="rowVuelo" [ngClass]="{'headVueloIda':isDeparture, 'headVueloVuelta': !isDeparture}">
+  <div class="colVuelo iconVuelo">
+      <img src="./assets/Avion2.svg" alt="">
+  </div>
+  <div class="colVuelo labelIda">
+    <ng-container *ngIf="isDeparture">IDA</ng-container>
+    <ng-container *ngIf="!isDeparture">VUELTA</ng-container>
+  </div>
+  <div class="colVuelo labelvuelo">{{data.iata}}</div>
+  <div class="colVuelo duracion"><img src="./assets/alarm.svg" alt=""> Duración total
+      {{data.duracion}}</div>
+</div>
+<div class="rowVuelo contentVuelo">
+  <div class="colVuelo">
+      <div class="aerolinea">{{getAirlineName(data.nombre_Aerolinea)}}</div>
+      <div class="codigo"><span>{{data.numero_Vuelo}}</span> </div>
+      <div class="operador">Operado por: {{data.nombre_Operador}}</div>
+  </div>
+  <div class="colVuelo">
+      <div class="descrip">Salida</div>
+      <div class="fecha">{{data.fec_Salida_Texto}}
+          <span>{{data.hora_Salida_Texto}}</span>
+      </div>
+      <div class="lugar">{{data.city_Source}}</div>
+  </div>
+  <div class="colVuelo">
+      <div class="descrip">Llegada</div>
+      <div class="fecha">{{data.fec_Llegada_Texto}}
+          <span>{{data.hora_Llegada_Texto}}</span>
+      </div>
+      <div class="lugar">{{data.city_Target}}</div>
+  </div>
+</div>
