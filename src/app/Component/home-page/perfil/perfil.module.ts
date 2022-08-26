@@ -22,12 +22,15 @@ import { PasswordService } from './password/password.service';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
 import { RouterModule } from '@angular/router';
 import { MyProfyleComponent } from './my-profyle/my-profyle.component';
-import { MisReservasComponent } from './mis-reservas/mis-reservas.component';
+import { MisReservasVuelosComponent } from './mis-reservas-vuelos/mis-reservas-vuelos.component';
 import { DetalleBookingComponent } from './modal/detalle-booking/detalle-booking.component';
 import { SegmentoComponent } from './modal/segmento/segmento.component';
+import { MisReservasSegurosComponent } from './mis-reservas-seguros/mis-reservas-seguros.component';
+import { DetalleSecureComponent } from './modal/detalle-secure/detalle-secure.component';
 
 @NgModule({
-  declarations: [PerfilComponent, ContactoComponent, PassengerComponent, PasswordComponent, PreferenciasComponent, MyProfyleComponent, MisReservasComponent, DetalleBookingComponent, SegmentoComponent],
+  declarations: [PerfilComponent, ContactoComponent, PassengerComponent, PasswordComponent, PreferenciasComponent, MyProfyleComponent, MisReservasVuelosComponent, MisReservasSegurosComponent, DetalleBookingComponent,
+    DetalleSecureComponent, SegmentoComponent],
   imports: [
     CommonModule,
     RouterModule,
