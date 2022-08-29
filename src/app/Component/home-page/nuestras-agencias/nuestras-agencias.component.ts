@@ -57,6 +57,17 @@ export class NuestrasAgenciasComponent implements OnInit {
       telefono: '782-4812',
       telefono2: '',
       imagen: './assets/agencias/LaFontana.png'
+    },
+    {
+      id: 6,
+      direccion: 'Av. Alfredo Mendiola 3698 tienda L140-B –',
+      distrito: 'Independencia',
+      horario: 'Lun - Dom 10:00 am a 10:00 pm',
+      horario2: '',
+      correo: 'vacaciones@nmviajes.com',
+      telefono: '',
+      telefono2: '',
+      imagen: './assets/agencias/MegaPlaza.png'
     }
   ]
 
