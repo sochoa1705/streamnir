@@ -15,9 +15,9 @@
             <img src="./assets/Avion2.svg" alt="" />
           </div>
           <div class="colVuelo flexCol">
-            <div class="Labelseguro">Seguro </div>
-            <div class="Descrip">Travel Ace: Plan Master</div>
-            <div class="msgLabel success">(Solicitud Aprobaba)</div>
+            <div class="Labelseguro">{{item.plan}}</div>
+            <!-- <div class="Descrip">Travel Ace: Plan Master</div> -->
+            <div class="msgLabel success">({{!item.estado_Reserva ? 'No encontrado' : item.estado_Reserva}})</div>
           </div>
           <div class="colVuelo fullAuto">
             <img src="./assets/arrow-inf.svg" alt="" /> {{item.fec_Salida}}

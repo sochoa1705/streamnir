@@ -1,7 +1,7 @@
 <ng-container *ngIf="data">
   <div class="modal-header">
     <div class="title">
-      <div class="textTitle">-- Seguro Sudamerica - Travel Ace: Plan Master</div>
+      <div class="textTitle">{{data.plan}}</div>
     </div>
     <button
       type="button"
@@ -19,10 +19,10 @@
         <div class="contentPortlet">
           <ul>
             <li><span>Código de Reserva:</span> {{data.seguro_Res_Id}}</li>
-            <li><span>Fecha de Creación:</span> -- 17/08/2022 03:28:54 p.m.</li>
+            <li><span>Fecha de Creación:</span> {{data.fec_Registro}}</li>
             <li><span>Estado de Venta:</span> {{data.estado_Reserva}}</li>
-            <li><span>Counter Asignado(a):</span></li>
-            <li><span>Cotización SRV:</span></li>
+            <li><span>Counter Asignado(a): {{data.counter_Asignado}}</span></li>
+            <li><span>Cotización SRV: {{data.cot_Id}}</span></li>
           </ul>
         </div>
       </div>
@@ -64,13 +64,13 @@
               <div class="iconEquipaje">
                 <img src="./assets/razons.svg" alt="" />
               </div>
-              <div class="labelEquipaje">Razón Social: --</div>
+              <div class="labelEquipaje">Razón Social: {{data.razon_Social}}</div>
             </div>
             <div class="itemPasajero">
               <div class="iconEquipaje">
                 <img src="./assets/ruc.svg" alt="" />
               </div>
-              <div class="labelEquipaje">RUC: --</div>
+              <div class="labelEquipaje">RUC: {{data.ruc}}</div>
             </div>
           </div>
         </div>
@@ -87,7 +87,7 @@
                 <img src="./assets/plan.svg" alt="" />
               </div>
               <div class="labelEquipaje">
-                Plan: --
+                Plan: {{data.plan}}
               </div>
             </div>
             <div class="itemPasajero">
@@ -124,7 +124,7 @@
               <div class="iconEquipaje">
                 <img src="./assets/plan.svg" alt="" />
               </div>
-              <div class="labelEquipaje">Monto Reserva: USD --</div>
+              <div class="labelEquipaje">Monto Reserva: USD {{data.importe}}</div>
             </div>
           </div>
         </div>

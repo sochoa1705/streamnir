@@ -1,6 +1,7 @@
 export class GetMyBookings {
   constructor(
       public cot_Id:             string,
+      public plan: string,
       public city_Source:          string,
       public city_Target:     string,
       public fec_Salida:     string,
