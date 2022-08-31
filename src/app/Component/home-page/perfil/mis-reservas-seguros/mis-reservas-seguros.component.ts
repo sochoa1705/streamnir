@@ -30,7 +30,7 @@ export class MisReservasSegurosComponent implements OnInit {
     });
   }
   openDetailBooking(item: GetMyBookings){
-    const modalRef = this.modalService.open(DetalleSecureComponent, { size: 'lg', windowClass: 'modalDetalle' });
+    const modalRef = this.modalService.open(DetalleSecureComponent, { size: 'lg', windowClass: 'modalDetalleSeguro' });
     modalRef.componentInstance.cot_Id = item.cot_Id;
     modalRef.componentInstance.reserva_Id = item.reserva_Id;
     modalRef.componentInstance.tipo_Vuelo = item.tipo_Vuelo;
