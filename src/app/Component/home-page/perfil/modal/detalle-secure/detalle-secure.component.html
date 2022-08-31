@@ -3,12 +3,7 @@
     <div class="title">
       <div class="textTitle">{{data.plan}}</div>
     </div>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="modal"
-      aria-label="Close"
-    ></button>
+    <button type="button" class="btn-close" (click)="ngbActiveModal.close()"></button>
   </div>
   <div class="modal-body">
     <div class="portletReserva lessMargin">
