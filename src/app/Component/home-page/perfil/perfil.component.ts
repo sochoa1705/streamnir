@@ -49,11 +49,11 @@ export class PerfilComponent implements OnInit {
     {
       texto: 'Mis Reservas Vuelos',
       ruta: './mis-reservas-vuelos'
-    }//,
-    // {
-    //   texto: 'Mis Reservas Seguros',
-    //   ruta: './mis-reservas-seguros'
-    // }
+    },
+    {
+      texto: 'Mis Reservas Seguros',
+      ruta: './mis-reservas-seguros'
+    }
   ];
 
   constructor(
