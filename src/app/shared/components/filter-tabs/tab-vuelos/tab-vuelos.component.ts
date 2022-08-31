@@ -485,7 +485,8 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
   searchVueloHotelMulti(): void {
     let jsonArray = this.setMultiCityArray();
-    let url = new URLVuelosMulti(this.form.controls['clase'].value, this.form.controls['viajes'].value, this.distributionObject).getUrlMulti(jsonArray);
+    const email: string = this.userStorage.email || '';
+    let url = new URLVuelosMulti(this.form.controls['clase'].value, this.form.controls['viajes'].value, this.distributionObject, email).getUrlMulti(jsonArray);
     this.navigateToResponseUrl(url);
   }
 

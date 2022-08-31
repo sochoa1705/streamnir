@@ -122,12 +122,14 @@ export class URLVuelosMulti implements UrlNmViajes {
   private distribution: any;
   private flightType: EnumFlightType;
   private cabinsVuelos: EnumCabinsVuelos;
+  private email: string;
 
-  constructor(cabinsVuelos: any, flightType: any, distribution: any) {
+  constructor(cabinsVuelos: any, flightType: any, distribution: any, email: string) {
     this.tab = 'ONLY_FLIGHT';
     this.distribution = distribution;
     this.flightType = flightType;
     this.cabinsVuelos = cabinsVuelos;
+    this.email = email;
   }
 
   getUrl() {
@@ -135,7 +137,7 @@ export class URLVuelosMulti implements UrlNmViajes {
   }
 
   getUrlMulti(json: string) {
-    return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.flightType}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.cabinsVuelos}&lang=ES&json=${json}`;
+    return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.flightType}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.cabinsVuelos}&lang=ES&json=${json}&email=${this.email}`;
   }
 }
 
