@@ -11,6 +11,6 @@ export class PoliticasComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    toUp()
+    toUp();
   }
 }
