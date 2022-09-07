@@ -19,6 +19,7 @@ import { EnumCabinsVuelos, EnumFlightType, ParamsVueloHotel, ParamsVuelos, SaveM
 import { IGeoTree } from './tab-vuelos.interfaces';
 import { IntermediaryService } from '../../../../Services/intermediary.service';
 import { UserStorage, AccountsService } from '../../../../Services/accounts.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-tab-vuelos',
@@ -268,9 +269,12 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     ]);
   }
 
-  navigateToResponseUrl(url: string): void {
-    this.router.navigateByUrl(url);
-  }
+  // navigateToResponseUrl(url: string): void {
+  //   debugger
+  //   //this.router.navigateByUrl(url);
+  //   //window.open(url, '_blank');
+  //   window.location.href = url;
+  // }
 
   validateTab() {
     const errors = [];
@@ -325,7 +329,10 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
       const url = this.getUrl();
 
-      this.navigateToResponseUrl(url);
+      debugger
+
+      //this.navigateToResponseUrl(url);
+      window.location.href = url;
     }
   }
 
@@ -458,7 +465,14 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
     localStorage.setItem('filtroVuelo', JSON.stringify(vuelo))
 
-    url = new URLVuelos(params, this.distributionObject).getUrl();
+    //url = new URLVuelos(params, this.distributionObject).getUrl();
+    url = environment.urlIframeMotorVuelos + '?rand=' + Math.round(Math.random() * 10000000000) + "&";
+
+    url += `departureLocation=${params.idOrigen + "%20" + params.origen?.title || ''}&arrivalLocation=${params.idDestino + "%20" + params.destino?.title || ''}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&adults=${this.distributionObject['adultos']}&children=${this.distributionObject['ninos']}&infants=${this.distributionObject['infantes']}&flightType=${params.flightType}&flightClass=${params.cabinsVuelos}&lang=ES&email=${params.email}`;
+
+    // return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&destination=${this.params.idDestino + "%20" + this.params.destino?.title || ''}
+    // &departure=${this.params.idOrigen + "%20" + this.params.origen?.title || ''}&departureDate=${this.params.startDate}
+    // &arrivalDate=${this.params.endDate}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.params.cabinsVuelos}&lang=ES&email=${this.params.email}`;    
 
     return url;
   }
@@ -487,7 +501,10 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     let jsonArray = this.setMultiCityArray();
     const email: string = this.userStorage.email || '';
     let url = new URLVuelosMulti(this.form.controls['clase'].value, this.form.controls['viajes'].value, this.distributionObject, email).getUrlMulti(jsonArray);
-    this.navigateToResponseUrl(url);
+
+    debugger
+    window.location.href = url;
+    //this.navigateToResponseUrl(url);
   }
 
   setMultiCityArray(): string {

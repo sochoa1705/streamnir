@@ -116,7 +116,8 @@ export class URLVuelos implements UrlNmViajes {
 }
 
 export class URLVuelosMulti implements UrlNmViajes {
-  public url = '/vuelos/resultados';
+  //public url = '/vuelos/resultados';
+  public url = environment.urlIframeMotorVuelos;
 
   private tab: tapType;
   private distribution: any;
@@ -137,7 +138,17 @@ export class URLVuelosMulti implements UrlNmViajes {
   }
 
   getUrlMulti(json: string) {
-    return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.flightType}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.cabinsVuelos}&lang=ES&json=${json}&email=${this.email}`;
+    //let url = `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.flightType}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.cabinsVuelos}&lang=ES&json=${json}&email=${this.email}`;
+
+    this.url += '?rand=' + Math.round(Math.random() * 10000000000) + "&";
+    this.url += `adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&selected_cabins=&excludedAirlines=null&multicity=null&json=${json}&email=${this.email}&flightType=${this.flightType}&flightClass=${this.cabinsVuelos}`;
+
+    //url = "/vuelos/resultados?directSubmit=true&tripType=ONLY_FLIGHT&flightType=2&adults=1&children=0&infants=0&flightClass=0&lang=ES&json=[{"departureLocation":"LIM Lima, Perú","arrivalLocation":"BOG Bogotá, Colombia","departureDate":"08/09/2022"},{"departureLocation":"LIM Lima, Perú","arrivalLocation":"BUE Buenos Aires (Todos Los Aeropuertos), Argentina","departureDate":"23/09/2022"}]&email="
+    //https://vuelos.nmviajes.com/#/nmviajes/search/resultados?rand=5547733007&adults=1&children=0&infants=0&selected_cabins=&excludedAirlines=null&multicity=null&json=%5B%7B%22departureLocation%22%3A%22LIM%20Lima%2C%20Per%C3%BA%22%2C%22arrivalLocation%22%3A%22BOG%20Bogot%C3%A1%2C%20Colombia%22%2C%22departureDate%22%3A%2208%2F09%2F2022%22%7D%2C%7B%22departureLocation%22%3A%22LIM%20Lima%2C%20Per%C3%BA%22%2C%22arrivalLocation%22%3A%22BUE%20Buenos%20Aires%20(Todos%20Los%20Aeropuertos)%2C%20Argentina%22%2C%22departureDate%22%3A%2223%2F09%2F2022%22%7D%5D&email=&flightType=2&flightClass=0
+
+    debugger
+
+    return this.url;
   }
 }
 
