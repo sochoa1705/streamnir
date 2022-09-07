@@ -68,6 +68,17 @@ export class NuestrasAgenciasComponent implements OnInit {
       telefono: '',
       telefono2: '',
       imagen: './assets/agencias/MegaPlaza.png'
+    },
+    {
+      id: 7,
+      direccion: 'Av. Rivera Navarrete 723 –',
+      distrito: 'San Isidro',
+      horario: 'Lun - Vie 10:00 am a 07:00 pm',
+      horario2: '',
+      correo: 'vacaciones@nmviajes.com',
+      telefono: '',
+      telefono2: '',
+      imagen: './assets/agencias/SanIsidro.png'
     }
   ]
 
