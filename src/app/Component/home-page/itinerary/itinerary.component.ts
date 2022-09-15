@@ -37,7 +37,9 @@ export class ItineraryComponent implements OnInit {
     this._activatedRoute.params.subscribe(params => {
       const parameters = `/${params.transactionId}/${params.idGroup}/${params.segments}/${params.flightType}/${params.departureLocation}/${params.arrivalLocation}/${params.departureDate}/${params.arrivalDate}/${params.adults}/${params.children}/${params.infants}/${params.flightClass}`;
 
-      this.urlIframe = environment.urlIframeMotorVuelosItinerary + parameters;
+      //this.urlIframe = environment.urlIframeMotorVuelosItinerary + parameters;
+
+      window.location.href = environment.urlIframeMotorVuelosItinerary + parameters;
     });
   }
 }
