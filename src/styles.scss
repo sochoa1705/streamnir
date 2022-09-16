@@ -9411,6 +9411,29 @@ mat-dialog-container {
     .carousel-control-next {
         z-index: unset !important;
     }
+    .carousel-control-prev {
+        &:hover {
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
+            border-radius: 10px 0px 0px 10px;
+            .carousel-prev-icon {
+                opacity: 1;
+            }
+        }
+    }
+    .carousel-control-next {
+        &:hover {
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+            border-radius: 0px;
+            .carousel-next-icon {
+                opacity: 1;
+            }
+        }
+    }
+    .carousel-prev-icon,
+    .carousel-next-icon {
+        opacity: 0;
+        transition: 0.3s all;
+    }
 }
 
 .msgBoxBoletin {
