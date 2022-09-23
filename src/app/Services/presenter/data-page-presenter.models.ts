@@ -1,18 +1,19 @@
 export interface IGalleryService {
-    Code: EGalleryCode,
-    Name: string,
-    Status: boolean,
-    Images: IGalleryImage[]
-  }
+  Code: EGalleryCode,
+  Name: string,
+  Status: boolean,
+  Images: IGalleryImage[]
+}
 
-  export interface IGalleryImage {
-    PathImage:string,
-    RedirectLink:string,
-    NameImage:string
-  }
+export interface IGalleryImage {
+  PathImage: string,
+  RedirectLink: string,
+  NameImage: string
+}
 
 export enum EGalleryCode {
-    slider_destacados= "SLIDER_DESTACADOS",
-    banners_destacados= "BANNERS_DESTACADOS",
-    banners_corporativos= "BANNERS_CORPORATIVO",
+  slider_destacados = "SLIDER_DESTACADOS",
+  slider_destacados2 = "SLIDER_DESTACADOS2",
+  banners_destacados = "BANNERS_DESTACADOS",
+  banners_corporativos = "BANNERS_CORPORATIVO",
 } 
