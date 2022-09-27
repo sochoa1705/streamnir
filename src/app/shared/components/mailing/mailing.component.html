@@ -31,19 +31,7 @@
             {{ message }}
           </div>
         </div>
-        <!-- <div class="msgBoxBoletin error">
-                        <div class="iconBoletin">
-                            <img src="./assets/svg/error-boletin.svg" alt="">
-                        </div>
-                        <div class="titleBol">
-                            ¡Hola Hugo!
-                        </div>
-                        <div class="descripBol">
-                                {{ message }}
-                        </div>
-                    </div> -->
       </div>
-
 
       <h1 class="mt-5 titleBold" *ngIf="!validate">{{ title }}</h1>
       <h2 class="mb-5 subtitleHome" *ngIf="!validate">{{ span }}</h2>
@@ -162,14 +150,9 @@
           </mat-checkbox>
           <span class="valid" *ngIf="getMessage(MSG_AUTORIZO) !== MSG_EMPTY">{{
             getMessage(MSG_AUTORIZO) }}</span>
-
         </div>
-        <div class="clearfix"></div>
       </div>
     </div>
   </form>
-</div>
-<div class="clearfix"></div>
-</div>
 </div>
 <!-- ModalDatosOpcionales -->
