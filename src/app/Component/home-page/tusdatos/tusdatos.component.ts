@@ -11,7 +11,6 @@ export class TusdatosComponent implements OnInit {
 
   ngOnInit(): void {
     window.addEventListener('message', function (event) {
-      debugger
       //console.log('event height ', event);
 
       let frm = document.getElementById("iframeTusDatos");

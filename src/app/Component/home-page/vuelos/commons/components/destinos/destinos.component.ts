@@ -99,7 +99,6 @@ export class DestinosComponent implements OnInit {
   }
 
   buscarVuelo(vuelo: IVueloDestino) {
-    debugger
     const params = this.generateParams(vuelo);
     //this._router.navigate(['/vuelos/resultados'], { queryParams: params });
 

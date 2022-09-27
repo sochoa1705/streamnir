@@ -270,7 +270,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   }
 
   // navigateToResponseUrl(url: string): void {
-  //   debugger
   //   //this.router.navigateByUrl(url);
   //   //window.open(url, '_blank');
   //   window.location.href = url;
@@ -328,8 +327,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
       }
 
       const url = this.getUrl();
-
-      debugger
 
       //this.navigateToResponseUrl(url);
       window.location.href = url;
@@ -502,7 +499,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     const email: string = this.userStorage.email || '';
     let url = new URLVuelosMulti(this.form.controls['clase'].value, this.form.controls['viajes'].value, this.distributionObject, email).getUrlMulti(jsonArray);
 
-    debugger
     window.location.href = url;
     //this.navigateToResponseUrl(url);
   }
