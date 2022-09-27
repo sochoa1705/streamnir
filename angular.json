@@ -35,6 +35,7 @@
                         "assets": [
                             "src/favicon.ico",
                             "src/sw.js",
+                            "src/sitemap.xml",
                             "src/assets",
                             "src/Images",
                             "src/resources"
