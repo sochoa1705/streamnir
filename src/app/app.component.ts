@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
 import { combineLatest, fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { DestinosService } from './Component/home-page/vuelos/commons/components/destinos/services/destinos.service';
 import { TaggingService } from './Services/analytics/tagging.service';
 import { PopupService } from './Services/pop-up/popup.service';
