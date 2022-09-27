@@ -31,10 +31,22 @@
             {{ message }}
           </div>
         </div>
+        <!-- <div class="msgBoxBoletin error">
+                        <div class="iconBoletin">
+                            <img src="./assets/svg/error-boletin.svg" alt="">
+                        </div>
+                        <div class="titleBol">
+                            ¡Hola Hugo!
+                        </div>
+                        <div class="descripBol">
+                                {{ message }}
+                        </div>
+                    </div> -->
       </div>
 
+
       <h1 class="mt-5 titleBold" *ngIf="!validate">{{ title }}</h1>
-      <h2 class="mb-5" *ngIf="!validate">{{ span }}</h2>
+      <h2 class="mb-5 subtitleHome" *ngIf="!validate">{{ span }}</h2>
       <form [formGroup]="formMAiling" *ngIf="!validate">
         <div class="container">
           <div class="row">
@@ -94,7 +106,70 @@
         </div>
       </form>
     </div>
-    <div class="clearfix"></div>
   </div>
+
+  <h1 class="mt-5 titleBold" *ngIf="!validate">{{ title }}</h1>
+  <h2 class="mb-5" *ngIf="!validate">{{ span }}</h2>
+  <form [formGroup]="formMAiling" *ngIf="!validate">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-4 offset-0 offset-md-1 input-group-lg px-0  text-start">
+          <input class="form-control" formControlName="nombreMail" placeholder="Ingrese su nombre" type="text"
+            (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+          <span class="valid" *ngIf="getMessage(MSG_NOMBRE) !== MSG_EMPTY">{{ getMessage(MSG_NOMBRE)
+            }}</span>
+        </div>
+        <div class="col-12 col-md-4 offset-0 input-group-lg px-0 px-md-3 text-start">
+          <input class="form-control" formControlName="correoMail" placeholder="Correo electrónico" type="text"
+            (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_MAIL)">
+          <span class="valid" *ngIf="getMessage(MSG_CORREO) !== MSG_EMPTY">{{ getMessage(MSG_CORREO)
+            }}</span>
+        </div>
+        <div class="col-md-2 col-12 text-center text-md-start px-0">
+          <button (click)="subscribe(true)">Suscríbete</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="row py-md-3 py-0 rowMailing">
+        <div class="col-md-10 offset-md-1 col-12 offset-0 text-center text-md-start">
+          <mat-checkbox formControlName="politicasMail" class="check-link"></mat-checkbox>
+
+          <a routerLink="/politicas" target="_blank">
+            Acepto la Política De Protección De Datos
+          </a>
+
+          <a data-bs-toggle="modal" data-bs-target="#ModalDatosOpcionales" class="pl-md-3 centerMobile pointer">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M6.11766 1.76465H1C0.447715 1.76465 0 2.21236 0 2.76465V12.9999C0 13.5522 0.447716 13.9999 1 13.9999H10.4706C11.0229 13.9999 11.4706 13.5522 11.4706 12.9999V7.88235H10.9706V12.9999C10.9706 13.2761 10.7467 13.4999 10.4706 13.4999H1C0.723858 13.4999 0.5 13.2761 0.5 12.9999V2.76465C0.5 2.48851 0.723858 2.26465 1 2.26465H6.11766V1.76465Z"
+                fill="#009AED" />
+              <path
+                d="M5.9409 7.70555C5.84327 7.80318 5.84327 7.96147 5.9409 8.0591C6.03853 8.15673 6.19682 8.15673 6.29445 8.0591L5.9409 7.70555ZM13.25 0.999971C13.25 0.8619 13.1381 0.749972 13 0.749971L10.75 0.749971C10.612 0.749971 10.5 0.8619 10.5 0.999971C10.5 1.13804 10.612 1.24997 10.75 1.24997L12.75 1.24997L12.75 3.24997C12.75 3.38804 12.862 3.49997 13 3.49997C13.1381 3.49997 13.25 3.38804 13.25 3.24997L13.25 0.999971ZM6.29445 8.0591L13.1768 1.17675L12.8233 0.823195L5.9409 7.70555L6.29445 8.0591Z"
+                fill="#009AED" />
+            </svg> Datos opcionales</a>
+
+          <span class="valid" *ngIf="getMessage(MSG_POLITICA) !== MSG_EMPTY">{{
+            getMessage(MSG_POLITICA) }}</span>
+        </div>
+        <!-- <div class="col-md-3 offset-md-0 col-12 offset-0 text-md-start text-center">
+                    </div> -->
+        <div class="clearfix"></div>
+      </div>
+      <div class="row rowMailing">
+        <div class="col-md-10 offset-md-1 col-12 text-md-start text-center">
+          <mat-checkbox formControlName="autorizoMail" class="example-margin">Autorizo el uso de mi Información para
+            la publicidad
+          </mat-checkbox>
+          <span class="valid" *ngIf="getMessage(MSG_AUTORIZO) !== MSG_EMPTY">{{
+            getMessage(MSG_AUTORIZO) }}</span>
+
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="clearfix"></div>
+</div>
 </div>
 <!-- ModalDatosOpcionales -->
