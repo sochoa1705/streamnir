@@ -8549,6 +8549,10 @@ app-flightdeals button {
     .onlyMobile {
       display: flex !important; } }
 
+@media (max-width: 640px) {
+  .hideMobile {
+    display: none !important; } }
+
 .preloader {
   display: none;
   background: rgba(0, 0, 0, 0.8);

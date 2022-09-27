@@ -10219,6 +10219,12 @@ app-flightdeals {
     }
 }
 
+.hideMobile {
+    @media (max-width: 640px) {
+        display: none !important;
+    }
+}
+
 .preloader {
     display: none;
     background: rgba(0, 0, 0, 0.8);
