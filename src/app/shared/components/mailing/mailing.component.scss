@@ -124,6 +124,12 @@ h {
     }
 }
 
+.subtitleHome {
+    font-family: "Montserrat";
+    font-size: 16px;
+    @media (max-width: 640px) {}
+}
+
 @media (max-width: 640px) {
     .centerMobile {
         display: flex;
