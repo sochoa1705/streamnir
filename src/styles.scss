@@ -4418,6 +4418,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     font-size: 24px;
     font-weight: 400;
     font-family: Open Sans;
+    &.marginMovil {
+        @media (max-width: 640px) {
+            margin: 0 !important;
+            padding: 15px 0 15px 0;
+        }
+    }
     &.bold {
         font-weight: 700;
     }
