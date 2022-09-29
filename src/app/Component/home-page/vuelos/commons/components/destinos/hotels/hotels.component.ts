@@ -62,6 +62,15 @@ export class HotelsComponent implements OnInit {
       let isflight: boolean = this.isflight === undefined ? params.isflight : this.isflight;
 
       this.getAllHotels(city, site, isflight);
+
+      let intervalId = setInterval(() => {
+        let olark = document.getElementById("hbl-live-chat-wrapper");
+
+        if (olark != null) {
+          olark?.remove();
+          clearInterval(intervalId);
+        }
+      }, 100);
     });
   }
 

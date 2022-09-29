@@ -55,6 +55,15 @@ export class ActivityComponent implements OnInit {
       let isflight: boolean = this.isflight === undefined ? params.isflight : this.isflight;
 
       this.getAllTickets(city, site, isflight);
+
+      let intervalId = setInterval(() => {
+        let olark = document.getElementById("hbl-live-chat-wrapper");
+
+        if (olark != null) {
+          olark?.remove();
+          clearInterval(intervalId);
+        }
+      }, 100);
     });
   }
 

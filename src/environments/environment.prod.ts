@@ -53,28 +53,28 @@ export const environment = {
       url: 'https://www.nmviajes.com/',
       title: 'Ofertas de Viajes, Vuelos, Paquetes Turísticos en NM Viajes',
       description: 'Encuentra el mejor precio en pasajes aereos, paquetes turísticos, vuela a Miami, Cusco, Arequipa y más destinos con NMViajes',
-      image: '',
-      height: '200',
-      width: '400',
-      logo: ''
+      image: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png',
+      height: '450',
+      width: '900',
+      logo: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png'
     },
     flights: {
       url: 'https://www.nmviajes.com/vuelos',
       title: 'Vuelos Nacionales e Internacionales. Ofertas en pasajes aéreos',
       description: 'Aprovecha los Pasajes Aéreos Baratos. Vuelos Internacionales Lima a Miami, New York, Buenos Aires. Vuelos Nacionales a Cusco, Tumbes, Piura.',
-      image: '',
-      height: '200',
-      width: '400',
-      logo: ''
+      image: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png',
+      height: '450',
+      width: '900',
+      logo: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png'
     },
     insurance: {
       url: 'https://www.nmviajes.com/seguros/',
       title: 'Seguro de viaje. Viaja seguro con Assist Card y NM Viajes',
       description: 'Viaja seguro con Assist Card y NM Viajes. Visítanos y conoce todos nuestros planes y coberturas de seguros de viajes.',
-      image: '',
-      height: '200',
-      width: '400',
-      logo: ''
+      image: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png',
+      height: '450',
+      width: '900',
+      logo: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png'
     }
   }
 }
