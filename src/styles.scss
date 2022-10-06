@@ -6490,7 +6490,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
     }
     .boxAbout {
-        display: flex;
+        //display: flex;
+        display: none;
         width: 100%;
         background: #b50a27 url("./assets/aerolineas/lineas.png") no-repeat top left;
         padding: 25px 0;
