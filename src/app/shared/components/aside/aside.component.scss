@@ -18,6 +18,13 @@ aside {
         height: 100%;
         .carousel-inner {
             height: 100%;
+            .carousel-prev-icon,
+            .carousel-next-icon {
+                display: none;
+                &:hover {
+                    display: flex;
+                }
+            }
         }
         @media (max-width: 640px) {
             padding-bottom: 4px;

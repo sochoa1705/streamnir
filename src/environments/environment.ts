@@ -21,6 +21,7 @@ export const environment = {
   urlAutosNmViajes: 'https://autos.nmviajes.com/',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
+  //urlNmviajes: "http://localhost:12639/v1/api",
 
   urlLibro: "https://servicio.nmviajes.com:9443/libroreclamacion",
   urlApiTickets: "https://servicios.expertiatravel.com/widgetactividades",
