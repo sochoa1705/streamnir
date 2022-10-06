@@ -1,3 +1,47 @@
+<div class="newBoxTab" style="display:none">
+    <div class="sectionTab">
+        <div class="columnBox">
+            <div class="titleBox">Vuelos</div>
+        </div>
+        <div class="columnBox">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="rdoVuelo" id="rdoVuelo1">
+                <label class="form-check-label" for="rdoVuelo1">
+                  Ida y yuelta
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="rdoVuelo" id="rdoVuelo2" checked>
+                <label class="form-check-label" for="rdoVuelo2">
+                  Solo ida
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="rdoVuelo" id="rdoVuelo3">
+                <label class="form-check-label" for="rdoVuelo3">
+                  Multidestino
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="sectionTab">
+        <div class="columnBox">
+            <input type="text" placeholder="Origen" class="form-control">
+            <input type="text" placeholder="Destino" class="form-control">
+        </div>
+        <div class="columnBox">
+            <input type="text" placeholder="Salida" class="form-control">
+            <input type="text" placeholder="Retorno" class="form-control">
+        </div>
+        <div class="columnBox">
+            <input type="text" placeholder="Pasajeros" class="form-control">
+        </div>
+        <div class="columnBox">
+            <div class="btn primary">Buscar</div>
+        </div>
+    </div>
+</div>
+
 <div class="boxTab">
 
     <form class="bg-white" [formGroup]="form">
