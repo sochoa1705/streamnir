@@ -7703,6 +7703,155 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   }
 }
 
+.newBoxTab {
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 23px;
+}
+
+.newBoxTab .sectionTab {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 100%;
+  gap: 15px;
+}
+
+.newBoxTab .sectionTab:first-child {
+  margin-bottom: 15px;
+}
+
+.newBoxTab .sectionTab .columnBox {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+.newBoxTab .sectionTab .columnBox.gap20 {
+  gap: 20px;
+}
+
+@media (max-width: 640px) {
+  .newBoxTab .sectionTab .columnBox.gap20 {
+    gap: 10px;
+  }
+}
+
+.newBoxTab .sectionTab .columnBox.bntFullW {
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.newBoxTab .sectionTab .columnBox.bntFullW .btn {
+  display: flex;
+  height: 50px;
+  flex: 1 1 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.newBoxTab .sectionTab .columnBox .boxDestino {
+  flex: 1 1 100%;
+  position: relative;
+}
+
+.newBoxTab .sectionTab .columnBox .boxDestino .iconDestino {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  z-index: 1;
+}
+
+.newBoxTab .sectionTab .columnBox .boxDate {
+  flex: 1 1 100%;
+  position: relative;
+}
+
+.newBoxTab .sectionTab .columnBox .boxDate .iconCalendar {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.newBoxTab .sectionTab .columnBox .titleBox {
+  font-weight: 500;
+  margin-right: 50px;
+}
+
+@media (max-width: 640px) {
+  .newBoxTab .sectionTab .columnBox .titleBox {
+    flex: 1 1 100%;
+  }
+}
+
+.newBoxTab .sectionTab .columnBox .form-check {
+  margin: 0;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.newBoxTab .sectionTab .columnBox .form-check label {
+  padding: 5px 0 0 0;
+  font-weight: normal;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.newBoxTab .sectionTab .columnBox .form-control {
+  width: 100%;
+  padding: 0 !important;
+  height: 50px;
+  font-family: Montserrat;
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #4b4b4b;
+  text-indent: 40px;
+  border: 0.5px solid #e4e5e7;
+  border-radius: 3px;
+}
+
+@media (max-width: 990px) and (min-width: 640px) {
+  .newBoxTab .sectionTab .columnBox {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .newBoxTab .sectionTab .columnBox {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 990px) and (min-width: 640px) {
+  .newBoxTab .sectionTab {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .newBoxTab .sectionTab {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 990px) and (min-width: 640px) {
+  .newBoxTab {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  .newBoxTab {
+    padding: 15px;
+  }
+}
+
 .boxAero .logoAero {
   justify-content: center;
   margin: 70px 0 40px 0;
@@ -9626,26 +9775,28 @@ button.customers {
   width: 190px;
   font-weight: 600;
   border: 0px;
-  font-size: 14px;
-  color: #222;
-  margin-top: 7px;
   background-color: #fff;
-  padding-left: 0;
-  text-align: left;
   font-family: "Montserrat";
-  padding-top: 13px;
+  height: 50px;
+  font-size: 16px;
+  color: #4b4b4b;
+  text-align: center;
+  border: 0.5px solid #e4e5e7;
+  border-radius: 3px;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  transition: 0.3s all;
+}
+
+button.customers:hover {
+  background: #e4e5e7;
 }
 
 @media (max-width: 768px) {
   button.customers {
     font-size: 10px;
   }
-}
-
-button.customers:before {
-  content: url(./assets/arrow.svg);
-  right: 0;
-  position: absolute;
 }
 
 @media (max-width: 640px) {
