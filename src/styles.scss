@@ -6470,6 +6470,117 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+.newBoxTab {
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 23px;
+    .sectionTab {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1 1 100%;
+        gap: 15px;
+        &:first-child {
+            margin-bottom: 15px;
+        }
+        .columnBox {
+            display: flex;
+            flex: 1 1 auto;
+            align-items: center;
+            &.gap20 {
+                gap: 20px;
+                @media (max-width: 640px) {
+                    gap: 10px;
+                }
+            }
+            &.bntFullW {
+                display: flex;
+                height: 50px;
+                justify-content: center;
+                align-items: center;
+                .btn {
+                    display: flex;
+                    height: 50px;
+                    flex: 1 1 100%;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+            .boxDestino {
+                flex: 1 1 100%;
+                position: relative;
+                .iconDestino {
+                    position: absolute;
+                    left: 10px;
+                    top: 12px;
+                    z-index: 1;
+                }
+            }
+            .boxDate {
+                flex: 1 1 100%;
+                position: relative;
+                .iconCalendar {
+                    position: absolute;
+                    left: 10px;
+                    top: 10px;
+                }
+            }
+            .titleBox {
+                font-weight: 500;
+                margin-right: 50px;
+                @media (max-width: 640px) {
+                    flex: 1 1 100%;
+                }
+            }
+            .form-check {
+                margin: 0;
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                label {
+                    padding: 5px 0 0 0;
+                    font-weight: normal;
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+            }
+            .form-control {
+                width: 100%;
+                padding: 0 !important;
+                height: 50px;
+                font-family: Montserrat;
+                font-size: 16px;
+                text-transform: capitalize;
+                color: #4b4b4b;
+                text-indent: 40px;
+                border: 0.5px solid #e4e5e7;
+                border-radius: 3px;
+            }
+            @media (max-width: 990px) and (min-width: 640px) {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            @media (max-width: 640px) {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+        @media (max-width: 990px) and (min-width: 640px) {
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        @media (max-width: 640px) {
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    }
+    @media (max-width: 990px) and (min-width: 640px) {
+        padding: 15px;
+    }
+    @media (max-width: 640px) {
+        padding: 15px;
+    }
+}
+
 .boxAero {
     .logoAero {
         justify-content: center;
@@ -8158,22 +8269,35 @@ button.customers {
     width: 190px;
     font-weight: 600;
     border: 0px;
-    font-size: 14px;
-    color: #222;
-    margin-top: 7px;
+    //font-size: 14px;
+    //color: #222;
+    //margin-top: 7px;
     background-color: $white; // background: url(../../../../assets/arrow.svg) no-repeat center right;
-    padding-left: 0;
-    text-align: left;
+    //padding-left: 0;
+    //text-align: left;
     font-family: "Montserrat";
-    padding-top: 13px;
+    //padding-top: 13px;
+    height: 50px;
+    font-size: 16px;
+    color: #4b4b4b;
+    text-align: center;
+    border: 0.5px solid #e4e5e7;
+    border-radius: 3px;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    transition: 0.3s all;
+    &:hover {
+        background: #e4e5e7;
+    }
     @media (max-width: 768px) {
         font-size: 10px;
     }
-    &:before {
-        content: url(./assets/arrow.svg);
-        right: 0;
-        position: absolute;
-    }
+    // &:before {
+    //     content: url(./assets/arrow.svg);
+    //     right: 0;
+    //     position: absolute;
+    // }
 }
 
 .dropdown-menu {
