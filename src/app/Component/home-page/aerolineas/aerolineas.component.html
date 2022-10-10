@@ -22,12 +22,14 @@
       </div>
     </div>
 
-    <div class="boxAbout" *ngIf="airline.hasOwnProperty('AirlineDestination')">
+    <div class="boxAbout">
       <div class="descrip">
         <p [innerHtml]="airline.AirlineDestination.Description | sanitizeHtml"></p>
       </div>
 
-      <div class="sliderAero" *ngIf="airline.AirlineDestination.hasOwnProperty('AirlineGalleries')">
+      <!-- <pre>{{airline.AirlineDestination.AirlineGalleries | json}}</pre> -->
+
+      <div class="sliderAero">
         <!-- <img src="./assets/aerolineas/about-01.png" alt=""> -->
         <!-- SLIDER -->
         <div id="carouselAero" class="carousel slide" data-bs-ride="carousel">
@@ -385,7 +387,7 @@
         </div>
       </div>
 
-      <div class="tabDestino" *ngIf="airline.AirlineGalleries">
+      <div class="tabDestino" *ngIf="airline.AirlineGalleries && airline.AirlineGalleries.length > 0">
         <div class="tabImgDest">
           <div class="mascara"></div>
           <img [src]="airline.AirlineGalleries[0].Photo" alt="">

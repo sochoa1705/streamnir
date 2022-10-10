@@ -33,7 +33,7 @@ export const environment = {
   urlZonaPrivada: 'https://servicio.nmviajes.com:9443/zonaprivada/',
   //urlGeo: "https://motorvuelos-dev.expertiatravel.com/mv",
   urlGeo: "https://motorvuelos.expertiatravel.com/mv",
-  urlIframeMotorVuelos: "https://vuelos.nmviajes.com/#/nmviajes/search/resultados",
+  urlIframeMotorVuelos: "https://vuelos-dev.nmviajes.com/#/nmviajes/search/resultados",
   //urlIframeMotorVuelos: "http://localhost:4200/#/nmviajes/search/resultados",
 
   urlIframeMotorVuelosItinerary: "https://vuelos.nmviajes.com/#/nmviajes/booking/itinerary",
