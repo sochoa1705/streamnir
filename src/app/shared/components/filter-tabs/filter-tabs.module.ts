@@ -5,7 +5,7 @@ import { NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n, NgbModule, N
 import { CustomAdapter } from 'src/app/Services/datepicker/customAdapter.service';
 import { CustomDateParserFormatter } from 'src/app/Services/datepicker/customDateParserFormatter.service';
 import { I18n, CustomDatepickerI18nService } from 'src/app/Services/datepicker/customDatepickerI18n.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopUpPasajeroModule } from '../pop-up-pasajero/pop-up-pasajero.module';
 import { MaterialModule } from '../../material.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -37,6 +37,7 @@ import { CalendarPriceModule } from '../calendar-price/calendar-price.module';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     PopUpPasajeroModule,
     MaterialModule,
@@ -52,9 +53,9 @@ import { CalendarPriceModule } from '../calendar-price/calendar-price.module';
     MatSnackBar,
     { provide: NgbDateAdapter, useClass: CustomAdapter },
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
-    {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18nService}
+    { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18nService }
   ],
-  exports:[
+  exports: [
     TabVueloHotelComponent,
     TabHotelComponent,
     TabActividadesComponent,

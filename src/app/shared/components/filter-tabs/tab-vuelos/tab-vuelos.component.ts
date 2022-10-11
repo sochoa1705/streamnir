@@ -35,6 +35,8 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
   private _vuelosTab: SaveModelVuelos;
 
+  tipoVuelo: number = 0;
+
   @Input() set vuelosTab(value: SaveModelVuelos) {
     if (value) {
       this.form.setValue(value.form);
@@ -573,7 +575,11 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     }
   }
 
-  changeSelect(): void {
+  changeSelect(tipoVuelo: number): void {
+    debugger
+
+    this.tipoVuelo = tipoVuelo;
+
     this.form.get('departureDate')?.setValue('');
     this.form.get('arrivalDate')?.setValue('');
   }
