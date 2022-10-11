@@ -1,12 +1,10 @@
 <div class="rowBoxTab" *ngFor="let formGroup of controls; let index = index" [formGroup]="formGroup">
     <div class="colBoxtab w-30 me-md-1">
-        <app-input-autocomplete [validRequired]="isSubmit" [minTermLength]="3" placeholder="Origen" [items]="vuelos$ | async" [loading]="vuelosLoading" [typeahead]="vuelosInput$"
-            formControlName="origen"></app-input-autocomplete>
+        <app-input-autocomplete [validRequired]="isSubmit" [minTermLength]="3" placeholder="Origen" [items]="vuelos$ | async" [loading]="vuelosLoading" [typeahead]="vuelosInput$" formControlName="origen"></app-input-autocomplete>
     </div>
     <div class="colBoxtab w-30 me-md-1">
 
-        <app-input-autocomplete [validRequired]="isSubmit" [minTermLength]="3" placeholder="Destino" [items]="vuelos2$ | async" [loading]="vuelosLoading2" [typeahead]="vuelosInput2$"
-            formControlName="destino"></app-input-autocomplete>
+        <app-input-autocomplete [validRequired]="isSubmit" [minTermLength]="3" placeholder="Destino" [items]="vuelos2$ | async" [loading]="vuelosLoading2" [typeahead]="vuelosInput2$" formControlName="destino"></app-input-autocomplete>
     </div>
     <div class="colBoxtab w-30 me-md-1">
         <!-- <div class="colBoxtab w-15">
@@ -51,12 +49,12 @@
 
         <div class="hideDate">
             <!-- OCULTAR CAMPO -->
-            <input name="datepicker3" mask="d0/M0/0*" ngbDatepicker #d="ngbDatepicker" placement="bottom right" [minDate]="index > 0
+            <input class="hideInput" name="datepicker3" mask="d0/M0/0*" ngbDatepicker #d="ngbDatepicker" placement="bottom right" [minDate]="index > 0
             ? dateToNgbDateStruct(
                 controls[index - 1].controls.departureDate.value
               )
             : dateToNgbDateStruct(systemCurrentDate)
-        "  [displayMonths]="1" (dateSelect)="onDateSelection(formGroup, $event)">
+        " [displayMonths]="1" (dateSelect)="onDateSelection(formGroup, $event)">
             <ng-template #footerTemplate3>
                 <div class="btnDatePicker">
                     <hr class="my-0">
@@ -76,14 +74,14 @@
             </svg>
         </div>
 
-        <input [ngClass]="{'isvalid': requiredFromDate && ( formatter.format(fromDate) === '')}"  #dpFromDate3 mask="d0/M0/0*" placement="bottom right" maxlength="11" class="form-control d-left isvalid" (click)="d.toggle()" [placeholder]="placeHolder" [value]="formatter.format(fromDate)"
-        (input)="validateInput( dpFromDate3.value)" autocomplete="off" formControlName="departureDate">
+        <input [ngClass]="{'isvalid': requiredFromDate && ( formatter.format(fromDate) === '')}" #dpFromDate3 mask="d0/M0/0*" placement="bottom right" maxlength="11" class="form-control d-left isvalid" (click)="d.toggle()" [placeholder]="placeHolder" [value]="formatter.format(fromDate)"
+            (input)="validateInput( dpFromDate3.value)" autocomplete="off" formControlName="departureDate">
         <!-- <input #dpFromDate2 mask="d0/M0/0*" 
         [ngClass]="{'isvalid': isSubmit && ( formatter.format(fromDate) === '')}" placement="bottom right" maxlength="11" class="form-control d-left"  (click)="datepicker2.toggle()" (blur)="emitValue()" placeholder="Salida" name="dpFromDate2" [value]="formatter.format(fromDate)" (input)="fromDate = validateInput2(fromDate, dpFromDate2.value)"
             autocomplete="off"> -->
         <!-- <app-calendar [requiredFromDate]="isSubmit" [requiredToDate]="isSubmit" [toDate]="toDate || null" [fromDate]="fromDate || null" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar> -->
     </div>
-    <div class="colBoxtab w-10 ms-md-2">
+    <div class="colBoxtab w-10 ms-md-2 gap10">
         <button class="fullWidht" type="button" (click)="addTramo(index)" *ngIf="index == controls.length - 1 && index < maxTramo - 1">+</button>
         <button type="button" class="fullWidht" (click)="deleteTramo(formGroup)" *ngIf="index <= controls.length - 1 && controls.length > 1"> - </button>
     </div>

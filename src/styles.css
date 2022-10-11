@@ -3625,7 +3625,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
   position: absolute;
-  top: 25px;
+  top: 130px;
   z-index: 2; }
   .boxFlotante.seguro {
     top: inherit;
@@ -3874,7 +3874,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .rowBoxTab {
   display: flex;
-  padding: 4px 10px 10px 10px;
+  padding: 4px 0 10px 0;
   position: relative; }
   @media (max-width: 990px) and (min-width: 640px) {
     .rowBoxTab {
@@ -5596,7 +5596,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       margin-bottom: 15px; }
     .newBoxTab .sectionTab .columnBox {
       display: flex;
-      flex: 1 1 auto;
+      flex: 1 1 25%;
       align-items: center; }
       .newBoxTab .sectionTab .columnBox.gap20 {
         gap: 20px; }
@@ -5605,6 +5605,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             gap: 10px; } }
       .newBoxTab .sectionTab .columnBox.bntFullW {
         display: flex;
+        flex: 1 1 auto;
         height: 50px;
         justify-content: center;
         align-items: center; }
@@ -5614,6 +5615,16 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           flex: 1 1 100%;
           justify-content: center;
           align-items: center; }
+      .newBoxTab .sectionTab .columnBox.maxW {
+        flex: 1 1 10%;
+        max-width: 10%; }
+      .newBoxTab .sectionTab .columnBox app-pop-up-pasajero-vuelos {
+        width: 100%; }
+        .newBoxTab .sectionTab .columnBox app-pop-up-pasajero-vuelos .colBoxtab {
+          gap: 0; }
+      .newBoxTab .sectionTab .columnBox .fullWidht {
+        width: 100%;
+        height: 50px; }
       .newBoxTab .sectionTab .columnBox .boxDestino {
         flex: 1 1 100%;
         position: relative; }
@@ -5668,15 +5679,34 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         position: relative;
         display: flex;
         flex: 1 1 100%; }
+        .newBoxTab .sectionTab .columnBox .colBoxtab .hideDate {
+          left: 10px; }
+        .newBoxTab .sectionTab .columnBox .colBoxtab .form-control {
+          z-index: 1; }
         .newBoxTab .sectionTab .columnBox .colBoxtab .iconCalendar {
           position: absolute;
           left: 10px;
           top: 10px;
-          z-index: 1; }
+          z-index: 2; }
     .newBoxTab .sectionTab app-tab-vuelos-multicity {
       width: 100%; }
-      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab {
+      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab.gap10 {
         gap: 10px; }
+      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .hideDate {
+        left: 10px; }
+      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .hideInput {
+        left: -10px;
+        position: absolute; }
+      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .form-control {
+        text-indent: 40px; }
+      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .d-left {
+        border: 0.5px solid #e4e5e7 !important;
+        border-radius: 0 3px 3px 0; }
+      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .tab-autocomplete .iconDestino {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        z-index: 2; }
     @media (max-width: 990px) and (min-width: 640px) {
       .newBoxTab .sectionTab {
         flex-wrap: wrap;
@@ -6991,7 +7021,7 @@ input.inputIzq {
 
 button.customers {
   position: relative;
-  width: 190px;
+  width: 100%;
   font-weight: 600;
   border: 0px;
   background-color: #fff;
@@ -8459,9 +8489,9 @@ app-flightdeals button {
   width: 600px;
   padding: 20px;
   position: absolute;
-  top: 51px;
   z-index: 100;
-  left: 46.5% !important; }
+  top: 130px;
+  left: 36.5% !important; }
   .boxCalendar .groupCalendario {
     display: flex;
     font-family: 'Montserrat';
