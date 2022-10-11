@@ -3872,132 +3872,130 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     height: 70px;
     border-radius: 5px; }
 
-.boxTab {
-  width: 100%; }
-  .boxTab .rowBoxTab {
-    display: flex;
-    padding: 4px 10px 10px 10px;
-    position: relative; }
-    @media (max-width: 990px) and (min-width: 640px) {
-      .boxTab .rowBoxTab {
-        display: flex;
-        padding: 4px 10px 0px 10px;
-        position: relative; } }
-    @media (max-width: 640px) {
-      .boxTab .rowBoxTab {
-        display: flex;
-        flex-wrap: wrap; }
-        .boxTab .rowBoxTab app-calendar {
-          width: 100%;
-          flex-wrap: wrap; }
-          .boxTab .rowBoxTab app-calendar .colBoxtab {
-            width: 100% !important; } }
-    .boxTab .rowBoxTab.right {
-      justify-content: end; }
-    .boxTab .rowBoxTab.text,
-    .boxTab .rowBoxTab label {
-      font-family: Open Sans;
-      font-style: normal;
-      font-size: 14px;
-      line-height: 27px;
-      letter-spacing: 0.18px; }
-    .boxTab .rowBoxTab .padRight {
-      padding-right: 20px; }
-    .boxTab .rowBoxTab .fullWidht {
-      width: 100%;
-      height: 49px; }
-    .boxTab .rowBoxTab .colBoxtab {
+.rowBoxTab {
+  display: flex;
+  padding: 4px 10px 10px 10px;
+  position: relative; }
+  @media (max-width: 990px) and (min-width: 640px) {
+    .rowBoxTab {
       display: flex;
-      flex: 1 1 auto;
-      padding: 10px 0; }
-      .boxTab .rowBoxTab .colBoxtab.w-30 {
-        width: 30%; }
-        @media (max-width: 768px) {
-          .boxTab .rowBoxTab .colBoxtab.w-30 {
-            width: 100%; } }
-      .boxTab .rowBoxTab .colBoxtab.w-10 {
-        width: 10%; }
-        @media (max-width: 768px) {
-          .boxTab .rowBoxTab .colBoxtab.w-10 {
-            width: 100%; } }
-      .boxTab .rowBoxTab .colBoxtab.w-15 {
-        width: 15%; }
-        @media (max-width: 768px) {
-          .boxTab .rowBoxTab .colBoxtab.w-15 {
-            width: 100%; } }
-      .boxTab .rowBoxTab .colBoxtab.widthBtn {
-        align-items: center;
-        width: 180px;
-        min-width: 180px; }
-        @media (max-width: 768px) {
-          .boxTab .rowBoxTab .colBoxtab.widthBtn {
-            width: 100%; } }
-      .boxTab .rowBoxTab .colBoxtab.colGrid {
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-right: 10px; }
-      .boxTab .rowBoxTab .colBoxtab .rowTab {
-        display: flex;
+      padding: 4px 10px 0px 10px;
+      position: relative; } }
+  @media (max-width: 640px) {
+    .rowBoxTab {
+      display: flex;
+      flex-wrap: wrap; }
+      .rowBoxTab app-calendar {
         width: 100%;
-        gap: 10px; }
+        flex-wrap: wrap; }
+        .rowBoxTab app-calendar .colBoxtab {
+          width: 100% !important; } }
+  .rowBoxTab.right {
+    justify-content: end; }
+  .rowBoxTab.text,
+  .rowBoxTab label {
+    font-family: Open Sans;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 27px;
+    letter-spacing: 0.18px; }
+  .rowBoxTab .padRight {
+    padding-right: 20px; }
+  .rowBoxTab .fullWidht {
+    width: 100%;
+    height: 49px; }
+  .rowBoxTab .colBoxtab {
+    display: flex;
+    flex: 1 1 auto;
+    padding: 10px 0; }
+    .rowBoxTab .colBoxtab.w-30 {
+      width: 30%; }
+      @media (max-width: 768px) {
+        .rowBoxTab .colBoxtab.w-30 {
+          width: 100%; } }
+    .rowBoxTab .colBoxtab.w-10 {
+      width: 10%; }
+      @media (max-width: 768px) {
+        .rowBoxTab .colBoxtab.w-10 {
+          width: 100%; } }
+    .rowBoxTab .colBoxtab.w-15 {
+      width: 15%; }
+      @media (max-width: 768px) {
+        .rowBoxTab .colBoxtab.w-15 {
+          width: 100%; } }
+    .rowBoxTab .colBoxtab.widthBtn {
+      align-items: center;
+      width: 180px;
+      min-width: 180px; }
+      @media (max-width: 768px) {
+        .rowBoxTab .colBoxtab.widthBtn {
+          width: 100%; } }
+    .rowBoxTab .colBoxtab.colGrid {
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-right: 10px; }
+    .rowBoxTab .colBoxtab .rowTab {
+      display: flex;
+      width: 100%;
+      gap: 10px; }
+      @media (max-width: 768px) {
+        .rowBoxTab .colBoxtab .rowTab {
+          flex-wrap: wrap; } }
+      @media (max-width: 768px) {
+        .rowBoxTab .colBoxtab .rowTab.width50 .colTab {
+          flex: 1 1 45%; } }
+      .rowBoxTab .colBoxtab .rowTab .colTab {
+        flex: 1 1 100%; }
+        .rowBoxTab .colBoxtab .rowTab .colTab .w-15 {
+          width: 100%; }
+        .rowBoxTab .colBoxtab .rowTab .colTab .d-left {
+          border-radius: 3px;
+          border: 0.5px solid #e4e5e7; }
+        .rowBoxTab .colBoxtab .rowTab .colTab .form-check-input {
+          width: 24px;
+          height: 24px; }
+        .rowBoxTab .colBoxtab .rowTab .colTab .form-check-label {
+          cursor: pointer; }
         @media (max-width: 768px) {
-          .boxTab .rowBoxTab .colBoxtab .rowTab {
-            flex-wrap: wrap; } }
-        @media (max-width: 768px) {
-          .boxTab .rowBoxTab .colBoxtab .rowTab.width50 .colTab {
-            flex: 1 1 45%; } }
-        .boxTab .rowBoxTab .colBoxtab .rowTab .colTab {
-          flex: 1 1 100%; }
-          .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .w-15 {
-            width: 100%; }
-          .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .d-left {
-            border-radius: 3px;
-            border: 0.5px solid #e4e5e7; }
-          .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .form-check-input {
-            width: 24px;
-            height: 24px; }
-          .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .form-check-label {
-            cursor: pointer; }
-          @media (max-width: 768px) {
-            .boxTab .rowBoxTab .colBoxtab .rowTab .colTab .colBoxtab {
-              padding: 0; } }
-      .boxTab .rowBoxTab .colBoxtab .d-left {
-        border-radius: 3px 0 0 3px;
-        border: 0.5px solid #e4e5e7;
-        border-right: 0px; }
-        @media (max-width: 640px) {
-          .boxTab .rowBoxTab .colBoxtab .d-left {
-            border-right: 0.5px solid #e4e5e7; } }
-      .boxTab .rowBoxTab .colBoxtab .d-right {
-        border-radius: 0 3px 3px 0;
-        border: 0.5px solid #e4e5e7; }
-      @media (min-width: 1024px) {
-        .boxTab .rowBoxTab .colBoxtab {
-          padding: 0; } }
-      .boxTab .rowBoxTab .colBoxtab input {
-        width: 100%;
-        padding: 0 !important;
-        height: 49px;
-        font-family: Montserrat;
-        font-size: 16px;
-        text-transform: capitalize;
-        color: #4b4b4b;
+          .rowBoxTab .colBoxtab .rowTab .colTab .colBoxtab {
+            padding: 0; } }
+    .rowBoxTab .colBoxtab .d-left {
+      border-radius: 3px 0 0 3px;
+      border: 0.5px solid #e4e5e7;
+      border-right: 0px; }
+      @media (max-width: 640px) {
+        .rowBoxTab .colBoxtab .d-left {
+          border-right: 0.5px solid #e4e5e7; } }
+    .rowBoxTab .colBoxtab .d-right {
+      border-radius: 0 3px 3px 0;
+      border: 0.5px solid #e4e5e7; }
+    @media (min-width: 1024px) {
+      .rowBoxTab .colBoxtab {
+        padding: 0; } }
+    .rowBoxTab .colBoxtab input {
+      width: 100%;
+      padding: 0 !important;
+      height: 49px;
+      font-family: Montserrat;
+      font-size: 16px;
+      text-transform: capitalize;
+      color: #4b4b4b;
+      text-indent: 40px;
+      border: 0.5px solid #e4e5e7;
+      border-radius: 3px; }
+      .rowBoxTab .colBoxtab input.icono {
         text-indent: 40px;
-        border: 0.5px solid #e4e5e7;
-        border-radius: 3px; }
-        .boxTab .rowBoxTab .colBoxtab input.icono {
-          text-indent: 40px;
-          padding-right: 33px !important;
-          background: url("./assets/origen.png") no-repeat 10px center; }
-          .boxTab .rowBoxTab .colBoxtab input.icono-no {
-            text-indent: 10px;
-            background: none; }
-      .boxTab .rowBoxTab .colBoxtab .iconCalendar {
-        position: relative; }
-        .boxTab .rowBoxTab .colBoxtab .iconCalendar svg {
-          position: absolute;
-          top: 12px;
-          left: 10px; }
+        padding-right: 33px !important;
+        background: url("./assets/origen.png") no-repeat 10px center; }
+        .rowBoxTab .colBoxtab input.icono-no {
+          text-indent: 10px;
+          background: none; }
+    .rowBoxTab .colBoxtab .iconCalendar {
+      position: relative; }
+      .rowBoxTab .colBoxtab .iconCalendar svg {
+        position: absolute;
+        top: 12px;
+        left: 10px; }
 
 .card .rowMobileCard {
   margin: 0; }
@@ -5670,13 +5668,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         position: relative;
         display: flex;
         flex: 1 1 100%; }
-        .newBoxTab .sectionTab .columnBox .colBoxtab .hideDate {
-          opacity: 0; }
         .newBoxTab .sectionTab .columnBox .colBoxtab .iconCalendar {
           position: absolute;
           left: 10px;
-          top: 12px;
+          top: 10px;
           z-index: 1; }
+    .newBoxTab .sectionTab app-tab-vuelos-multicity {
+      width: 100%; }
+      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab {
+        gap: 10px; }
     @media (max-width: 990px) and (min-width: 640px) {
       .newBoxTab .sectionTab {
         flex-wrap: wrap;
