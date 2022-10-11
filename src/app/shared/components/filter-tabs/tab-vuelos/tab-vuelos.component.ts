@@ -576,7 +576,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   }
 
   changeSelect(tipoVuelo: number): void {
-    debugger
+   // debugger
 
     this.tipoVuelo = tipoVuelo;
 

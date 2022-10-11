@@ -6563,6 +6563,20 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 flex-wrap: wrap;
                 gap: 10px;
             }
+            .colBoxtab {
+                position: relative;
+                display: flex;
+                flex: 1 1 100%;
+                .hideDate {
+                    opacity: 0;
+                }
+                .iconCalendar {
+                    position: absolute;
+                    left: 10px;
+                    top: 12px;
+                    z-index: 1;
+                }
+            }
         }
         @media (max-width: 990px) and (min-width: 640px) {
             flex-wrap: wrap;
