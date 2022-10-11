@@ -68,7 +68,7 @@
             (focus)="onFocus()" [readonly]="disabledInput" placeholder="Salida" mask="d0/M0/0*" maxlength="10"
             style="background-color: #fff;" />
         </div>
-        <div class="boxDate" *ngIf="tipoVuelo=== EnumFlightType.ida_vuelta">
+        <div class="boxDate" *ngIf="tipoVuelo === EnumFlightType.ida_vuelta">
           <div class="iconCalendar">
             <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -85,10 +85,10 @@
         </div>
       </div>
 
-      <div class="columnBox" *ngIf="displayCalendar && tipoVuelo=== EnumFlightType.ida_vuelta">
+      <div class="columnBox" *ngIf="displayCalendar && tipoVuelo === EnumFlightType.ida_vuelta">
         <app-calendar-price [flightData]="flightData" (inputDates)="insertDates($event)"></app-calendar-price>
       </div>
-      <div class="columnBox" *ngIf="tipoVuelo!== EnumFlightType.ida_vuelta">
+      <div class="columnBox" *ngIf="tipoVuelo === EnumFlightType.ida">
         <app-calendar [requiredFromDate]="isSubmit" [requiredToDate]="isSubmit" [typeValue]="tipoVuelo"
           [toDate]="vuelosTab?.toDate || null" [fromDate]="vuelosTab?.fromDate || null" class="ignore-template"
           (changeDate)="changeDate($event)">
@@ -99,12 +99,9 @@
           (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero-vuelos>
       </div>
 
-
-
-
-      <div class="columnBox bntFullW">
+      <!-- <div class="columnBox bntFullW">
         <div class="btn primary">Buscar</div>
-      </div>
+      </div> -->
     </div>
 
     <!-- Multicity  -->

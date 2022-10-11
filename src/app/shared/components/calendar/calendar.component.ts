@@ -18,7 +18,7 @@ export class CalendarComponent implements AfterViewInit {
   @Input() fromDate: NgbDate | null;
 
   @Input() typeValue: number = EnumFlightType.ida_vuelta;
-  @Input() placeHolder: string = 'Salidax';
+  @Input() placeHolder: string = 'Salida';
 
   @Input() requiredToDate: boolean;
   @Input() requiredFromDate: boolean;
