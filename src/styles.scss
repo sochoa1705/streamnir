@@ -6484,6 +6484,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         }
         &.active {
             flex-direction: row-reverse;
+            .columnBox {
+                position: relative;
+                .boxFlotante {
+                    top: 50px !important;
+                }
+            }
         }
         .columnBox {
             display: flex;
@@ -6587,6 +6593,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 flex: 1 1 100%;
                 .hideDate {
                     left: 10px;
+                    .dropdown-menu {
+                        transform: initial !important;
+                        top: 50px !important;
+                    }
                 }
                 .form-control {
                     z-index: 1;
@@ -6610,11 +6620,16 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             width: 100%;
             .colBoxtab {
                 //gap: 10px;
+                position: relative;
                 &.gap10 {
                     gap: 10px;
                 }
                 .hideDate {
                     left: 10px;
+                    .dropdown-menu {
+                        transform: initial !important;
+                        top: 50px !important;
+                    }
                 }
                 .hideInput {
                     left: -10px;

@@ -5596,6 +5596,10 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       margin-bottom: 15px; }
     .newBoxTab .sectionTab.active {
       flex-direction: row-reverse; }
+      .newBoxTab .sectionTab.active .columnBox {
+        position: relative; }
+        .newBoxTab .sectionTab.active .columnBox .boxFlotante {
+          top: 50px !important; }
     .newBoxTab .sectionTab .columnBox {
       display: flex;
       flex: 1 1 25%;
@@ -5683,6 +5687,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         flex: 1 1 100%; }
         .newBoxTab .sectionTab .columnBox .colBoxtab .hideDate {
           left: 10px; }
+          .newBoxTab .sectionTab .columnBox .colBoxtab .hideDate .dropdown-menu {
+            transform: initial !important;
+            top: 50px !important; }
         .newBoxTab .sectionTab .columnBox .colBoxtab .form-control {
           z-index: 1; }
         .newBoxTab .sectionTab .columnBox .colBoxtab .iconCalendar {
@@ -5697,23 +5704,28 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         width: 100%; }
     .newBoxTab .sectionTab app-tab-vuelos-multicity {
       width: 100%; }
-      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab.gap10 {
-        gap: 10px; }
-      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .hideDate {
-        left: 10px; }
-      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .hideInput {
-        left: -10px;
-        position: absolute; }
-      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .form-control {
-        text-indent: 40px; }
-      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .d-left {
-        border: 0.5px solid #e4e5e7 !important;
-        border-radius: 0 3px 3px 0; }
-      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .tab-autocomplete .iconDestino {
-        position: absolute;
-        left: 10px;
-        top: 10px;
-        z-index: 2; }
+      .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab {
+        position: relative; }
+        .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab.gap10 {
+          gap: 10px; }
+        .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .hideDate {
+          left: 10px; }
+          .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .hideDate .dropdown-menu {
+            transform: initial !important;
+            top: 50px !important; }
+        .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .hideInput {
+          left: -10px;
+          position: absolute; }
+        .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .form-control {
+          text-indent: 40px; }
+        .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .d-left {
+          border: 0.5px solid #e4e5e7 !important;
+          border-radius: 0 3px 3px 0; }
+        .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab .tab-autocomplete .iconDestino {
+          position: absolute;
+          left: 10px;
+          top: 10px;
+          z-index: 2; }
     @media (max-width: 990px) and (min-width: 640px) {
       .newBoxTab .sectionTab {
         flex-wrap: wrap;
