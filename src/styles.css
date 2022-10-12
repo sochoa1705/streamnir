@@ -3879,7 +3879,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   @media (max-width: 990px) and (min-width: 640px) {
     .rowBoxTab {
       display: flex;
-      padding: 4px 10px 0px 10px;
+      padding: 4px 0 10px 0;
       position: relative; } }
   @media (max-width: 640px) {
     .rowBoxTab {
@@ -5594,6 +5594,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     gap: 15px; }
     .newBoxTab .sectionTab:first-child {
       margin-bottom: 15px; }
+    .newBoxTab .sectionTab.active {
+      flex-direction: row-reverse; }
     .newBoxTab .sectionTab .columnBox {
       display: flex;
       flex: 1 1 25%;
@@ -5617,7 +5619,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           align-items: center; }
       .newBoxTab .sectionTab .columnBox.maxW {
         flex: 1 1 10%;
-        max-width: 10%; }
+        max-width: 15%; }
       .newBoxTab .sectionTab .columnBox app-pop-up-pasajero-vuelos {
         width: 100%; }
         .newBoxTab .sectionTab .columnBox app-pop-up-pasajero-vuelos .colBoxtab {
@@ -5688,6 +5690,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           left: 10px;
           top: 10px;
           z-index: 2; }
+    .newBoxTab .sectionTab .colTabFilter {
+      width: 10%; }
+      .newBoxTab .sectionTab .colTabFilter .fullWidht {
+        height: 50px;
+        width: 100%; }
     .newBoxTab .sectionTab app-tab-vuelos-multicity {
       width: 100%; }
       .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab.gap10 {

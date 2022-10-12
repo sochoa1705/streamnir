@@ -4472,7 +4472,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     // }
     @media (max-width: 990px) and (min-width: 640px) {
         display: flex;
-        padding: 4px 10px 0px 10px;
+        padding: 4px 0 10px 0;
         position: relative;
     }
     @media (max-width: 640px) {
@@ -6482,6 +6482,9 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         &:first-child {
             margin-bottom: 15px;
         }
+        &.active {
+            flex-direction: row-reverse;
+        }
         .columnBox {
             display: flex;
             flex: 1 1 25%;
@@ -6508,7 +6511,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             }
             &.maxW {
                 flex: 1 1 10%;
-                max-width: 10%;
+                max-width: 15%;
             }
             app-pop-up-pasajero-vuelos {
                 width: 100%;
@@ -6594,6 +6597,13 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     top: 10px;
                     z-index: 2;
                 }
+            }
+        }
+        .colTabFilter {
+            width: 10%;
+            .fullWidht {
+                height: 50px;
+                width: 100%;
             }
         }
         app-tab-vuelos-multicity {
