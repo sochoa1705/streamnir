@@ -1,104 +1,119 @@
 <form class="bg-white" [formGroup]="form">
-    <div class="newBoxTab">
-        <div class="sectionTab">
-            <div class="columnBox gap20">
-                <div class="titleBox">Vuelos</div>
-                <!-- (valueChange)="changeSelect()" -->
-                <div class="form-check">
-                    <input class="form-check-input" (change)="changeSelect(0)" value="0" type="radio" name="rdoVuelo" id="rdoVuelo1" checked>
-                    <label class="form-check-label" for="rdoVuelo1">
+  <div class="newBoxTab">
+    <div class="sectionTab">
+      <div class="columnBox gap20">
+        <div class="titleBox">Vuelos</div>
+        <!-- (valueChange)="changeSelect()" -->
+        <div class="form-check">
+          <input class="form-check-input" (change)="changeSelect(0)" value="0" type="radio" name="rdoVuelo"
+            id="rdoVuelo1" checked>
+          <label class="form-check-label" for="rdoVuelo1">
             Ida y vuelta
           </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" (change)="changeSelect(1)" value="1" type="radio" name="rdoVuelo" id="rdoVuelo2">
-                    <label class="form-check-label" for="rdoVuelo2">
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" (change)="changeSelect(1)" value="1" type="radio" name="rdoVuelo"
+            id="rdoVuelo2">
+          <label class="form-check-label" for="rdoVuelo2">
             Solo ida
           </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" (change)="changeSelect(2)" value="2" type="radio" name="rdoVuelo" id="rdoVuelo3">
-                    <label class="form-check-label" for="rdoVuelo3">
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" (change)="changeSelect(2)" value="2" type="radio" name="rdoVuelo"
+            id="rdoVuelo3">
+          <label class="form-check-label" for="rdoVuelo3">
             Multidestino
           </label>
-                </div>
-            </div>
         </div>
-
-        <!-- Ida y Vuelta & Solo Ida-->
-        <div class="sectionTab">
-            <div class="columnBox" *ngIf="tipoVuelo !== EnumFlightType.multy_city; else multicity">
-                <div class="boxDestino">
-                    <div class="iconDestino">
-                        <img src="./assets/origen.png" alt="">
-                    </div>
-                    <app-input-autocomplete #inputOrigen [(valueInput)]="valueInputOrigen" [validRequired]="isSubmit" (valueInputChange)="cleanInput()" [minTermLength]="minLengthAutocomplete" placeholder="Origen" [items]="vuelos$ | async" [loading]="vuelosLoading" [typeahead]="vuelosInput$"
-                        formControlName="origen" (keypress)="onkeypressSource($event)">
-                    </app-input-autocomplete>
-                </div>
-                <div class="boxDestino">
-                    <div class="iconDestino">
-                        <img src="./assets/origen.png" alt="">
-                    </div>
-                    <app-input-autocomplete #inputDestino [(valueInput)]="valueInputDestino" [validRequired]="isSubmit" (valueInputChange)="cleanInput()" [minTermLength]="minLengthAutocomplete" placeholder="Destino" [items]="vuelos2$ | async" [loading]="vuelosLoading2" [typeahead]="vuelosInput2$"
-                        formControlName="destino" (keypress)="onkeypressDestiny($event)">
-                    </app-input-autocomplete>
-                </div>
-            </div>
-            <div class="columnBox" *ngIf="tipoVuelo === EnumFlightType.ida_vuelta">
-                <div class="boxDate">
-                    <div class="iconCalendar">
-                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
-                stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-                    </div>
-                    <input #inputDepartureDate type="text" class="form-control" formControlName="departureDate" (focus)="onFocus()" [readonly]="disabledInput" placeholder="Salida" mask="d0/M0/0*" maxlength="10" style="background-color: #fff;" />
-                </div>
-                <div class="boxDate" *ngIf="tipoVuelo === EnumFlightType.ida_vuelta">
-                    <div class="iconCalendar">
-                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
-                stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-                    </div>
-                    <input type="text" class="form-control textIndent" formControlName="arrivalDate" (focus)="onFocus()" [readonly]="disabledInput" placeholder="Retorno" mask="d0/M0/0*" maxlength="10" style="background-color: #fff;" />
-                </div>
-            </div>
-
-
-            <app-calendar-price *ngIf="displayCalendar && tipoVuelo === EnumFlightType.ida_vuelta" [flightData]="flightData" (inputDates)="insertDates($event)"></app-calendar-price>
-
-            <div class="columnBox" *ngIf="tipoVuelo === EnumFlightType.ida">
-                <app-calendar [requiredFromDate]="isSubmit" [requiredToDate]="isSubmit" [typeValue]="tipoVuelo" [toDate]="vuelosTab?.toDate || null" [fromDate]="vuelosTab?.fromDate || null" class="ignore-template" (changeDate)="changeDate($event)">
-                </app-calendar>
-            </div>
-            <div class="columnBox maxW">
-                <app-pop-up-pasajero-vuelos (emitValidation)="emitValidation($event)" #popUp [onlyPasajeros]="true" (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero-vuelos>
-            </div>
-
-            <div class="columnBox bntFullW" *ngIf="tipoVuelo !== EnumFlightType.multy_city; else multicity">
-                <button class="fullWidht" type="button" (click)="searchVueloHotel()">Buscar</button>
-            </div>
-        </div>
-
-        <!-- Multicity  -->
-        <ng-template #multicity>
-            <app-tab-vuelos-multicity [controls]="getControls()" [requiredFromDate]="isSubmit">
-            </app-tab-vuelos-multicity>
-            <div class="colTabFilter w100">
-                <button class="fullWidht" type="button" (click)="searchVueloHotelMulti()">Buscar</button>
-            </div>
-        </ng-template>
+      </div>
     </div>
+
+    <!-- Ida y Vuelta & Solo Ida-->
+    <div class="sectionTab">
+      <div class="columnBox" *ngIf="tipoVuelo !== EnumFlightType.multy_city; else multicity">
+        <div class="boxDestino">
+          <div class="iconDestino">
+            <img src="./assets/origen.png" alt="">
+          </div>
+          <app-input-autocomplete #inputOrigen [(valueInput)]="valueInputOrigen" [validRequired]="isSubmit"
+            (valueInputChange)="cleanInput()" [minTermLength]="minLengthAutocomplete" placeholder="Origen"
+            [items]="vuelos$ | async" [loading]="vuelosLoading" [typeahead]="vuelosInput$" formControlName="origen"
+            (keypress)="onkeypressSource($event)">
+          </app-input-autocomplete>
+        </div>
+        <div class="boxDestino">
+          <div class="iconDestino">
+            <img src="./assets/origen.png" alt="">
+          </div>
+          <app-input-autocomplete #inputDestino [(valueInput)]="valueInputDestino" [validRequired]="isSubmit"
+            (valueInputChange)="cleanInput()" [minTermLength]="minLengthAutocomplete" placeholder="Destino"
+            [items]="vuelos2$ | async" [loading]="vuelosLoading2" [typeahead]="vuelosInput2$" formControlName="destino"
+            (keypress)="onkeypressDestiny($event)">
+          </app-input-autocomplete>
+        </div>
+      </div>
+      <div class="columnBox" *ngIf="tipoVuelo === EnumFlightType.ida_vuelta">
+        <div class="boxDate">
+          <div class="iconCalendar">
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
+                stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <input #inputDepartureDate type="text" class="form-control" formControlName="departureDate"
+            (focus)="onFocus()" [readonly]="disabledInput" placeholder="Salida" mask="d0/M0/0*" maxlength="10"
+            style="background-color: #fff;" />
+        </div>
+        <div class="boxDate" *ngIf="tipoVuelo === EnumFlightType.ida_vuelta">
+          <div class="iconCalendar">
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16.6365 3.09082H5.18195C3.07323 3.09082 1.36377 4.80028 1.36377 6.909V16.4545C1.36377 18.5632 3.07323 20.2726 5.18195 20.2726H16.6365C18.7452 20.2726 20.4547 18.5632 20.4547 16.4545V6.909C20.4547 4.80028 18.7452 3.09082 16.6365 3.09082Z"
+                stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M7.09082 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M14.7275 1.18164V4.99982" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M1.36377 8.81787H20.4547" stroke="#B9BCBF" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <input type="text" class="form-control textIndent" formControlName="arrivalDate" (focus)="onFocus()"
+            [readonly]="disabledInput" placeholder="Retorno" mask="d0/M0/0*" maxlength="10"
+            style="background-color: #fff;" />
+        </div>
+      </div>
+
+
+      <app-calendar-price *ngIf="displayCalendar && tipoVuelo === EnumFlightType.ida_vuelta" [flightData]="flightData"
+        (inputDates)="insertDates($event)"></app-calendar-price>
+
+      <div class="columnBox" *ngIf="tipoVuelo === EnumFlightType.ida">
+        <app-calendar [requiredFromDate]="isSubmit" [requiredToDate]="isSubmit" [typeValue]="tipoVuelo"
+          [toDate]="vuelosTab?.toDate || null" [fromDate]="vuelosTab?.fromDate || null" class="ignore-template"
+          (changeDate)="changeDate($event)">
+        </app-calendar>
+      </div>
+      <div class="columnBox maxW">
+        <app-pop-up-pasajero-vuelos (emitValidation)="emitValidation($event)" #popUp [onlyPasajeros]="true"
+          (emitDistributionObject)="distributionObject = $event"></app-pop-up-pasajero-vuelos>
+      </div>
+
+      <div class="columnBox bntFullW" *ngIf="tipoVuelo !== EnumFlightType.multy_city">
+        <button class="fullWidht" type="button" (click)="searchVueloHotel()">Buscar</button>
+      </div>
+    </div>
+
+    <!-- Multicity  -->
+    <ng-template #multicity>
+      <app-tab-vuelos-multicity [controls]="getControls()" [requiredFromDate]="isSubmit">
+      </app-tab-vuelos-multicity>
+      <div class="colTabFilter w100">
+        <button class="fullWidht" type="button" (click)="searchVueloHotelMulti()">Buscar</button>
+      </div>
+    </ng-template>
+  </div>
 </form>
 
 <!-- <div class="boxTab" style="display:none ;">
