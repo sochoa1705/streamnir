@@ -121,7 +121,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
       } else
         this.initCiudadDestino(codigo)
     })
-
   }
 
   initCiudadDestino(codigoCiudad: string) {
@@ -140,10 +139,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
       this.valueInputDestino = ciudad[0].title;
     })
-  }
-
-  get viajesForm() {
-    return this.form.get("viajes")?.value;
   }
 
   private loadVuelosOrigen() {
@@ -245,7 +240,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
 
   createForm() {
     this.form = new FormGroup({
-      clase: new FormControl(this.EnumCabins.economy),
+      //clase: new FormControl(this.EnumCabins.economy),
       viajes: new FormControl(EnumFlightType.ida_vuelta),
       origen: new FormControl(''),
       destino: new FormControl(''),
@@ -290,7 +285,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     if (this.valueInputDestino.length <= this.minLengthAutocomplete) {
       errors.push("El destino es requerido");
     }
-    if (!this.toDate && this.viajesForm !== EnumFlightType.ida) {
+    if (!this.toDate && this.tipoVuelo !== EnumFlightType.ida) {
       errors.push("La fecha final es requerido");
     }
     if (!this.fromDate) {
@@ -329,6 +324,8 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
       }
 
       const url = this.getUrl();
+
+      debugger
 
       //this.navigateToResponseUrl(url);
       window.location.href = url;
@@ -417,7 +414,8 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
         form: this.form,
         citysDestinosSelect: this.citysDestinosSelect || null,
         citysOrigenSelect: this.citysOrigenSelect || null,
-        email: this.userStorage.email || ''
+        email: this.userStorage.email || '',
+        clase: this.distributionObject['clase']
       }
     );
 
@@ -436,38 +434,32 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
       infantesCount = this.distributionObject['infantes'],
       pasajeros = this.distributionObject['pasajeros']
 
-    let adultosN = { item: 'Adulto' }
-    let ninosN = { item: 'Niño' }
-    let infantesN = { item: 'Infante' }
+    let adultosN = { item: 'Adulto' };
+    let ninosN = { item: 'Niño' };
+    let infantesN = { item: 'Infante' };
 
-    if (adultosCount > 0) {
-      for (let i = 0; i < adultosCount; i++) {
-        pasajeros.push(adultosN)
-      }
-    }
-    if (ninosCount > 0) {
-      for (let i = 0; i < ninosCount; i++) {
-        pasajeros.push(ninosN)
-      }
-    }
-    if (infantesCount > 0) {
-      for (let i = 0; i < infantesCount; i++) {
-        pasajeros.push(infantesN)
-      }
-    }
+    if (adultosCount > 0)
+      for (let i = 0; i < adultosCount; i++)
+        pasajeros.push(adultosN);
 
+    if (ninosCount > 0)
+      for (let i = 0; i < ninosCount; i++)
+        pasajeros.push(ninosN);
+
+    if (infantesCount > 0)
+      for (let i = 0; i < infantesCount; i++)
+        pasajeros.push(infantesN);
 
     this.insertTag(params);
 
     let vuelo = { ...params, ...this.distributionObject };
 
-
-    localStorage.setItem('filtroVuelo', JSON.stringify(vuelo))
+    localStorage.setItem('filtroVuelo', JSON.stringify(vuelo));
 
     //url = new URLVuelos(params, this.distributionObject).getUrl();
     url = environment.urlIframeMotorVuelos + '?rand=' + Math.round(Math.random() * 10000000000) + "&";
 
-    url += `departureLocation=${params.idOrigen + "%20" + params.origen?.title || ''}&arrivalLocation=${params.idDestino + "%20" + params.destino?.title || ''}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&adults=${this.distributionObject['adultos']}&children=${this.distributionObject['ninos']}&infants=${this.distributionObject['infantes']}&flightType=${params.flightType}&flightClass=${params.cabinsVuelos}&lang=ES&email=${params.email}`;
+    url += `departureLocation=${params.idOrigen + "%20" + params.origen?.title || ''}&arrivalLocation=${params.idDestino + "%20" + params.destino?.title || ''}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&adults=${this.distributionObject['adultos']}&children=${this.distributionObject['ninos']}&infants=${this.distributionObject['infantes']}&flightType=${params.flightType}&flightClass=${this.distributionObject['clase']}&lang=ES&email=${params.email}`;
 
     // return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&destination=${this.params.idDestino + "%20" + this.params.destino?.title || ''}
     // &departure=${this.params.idOrigen + "%20" + this.params.origen?.title || ''}&departureDate=${this.params.startDate}
@@ -476,11 +468,9 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     return url;
   }
 
-
   isValidate() {
     return this.popUpElement?.isValid();
   }
-
 
   changeDate(value: ClassValueCalendar) {
     this.toDate = value.toDate;
@@ -499,7 +489,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   searchVueloHotelMulti(): void {
     let jsonArray = this.setMultiCityArray();
     const email: string = this.userStorage.email || '';
-    let url = new URLVuelosMulti(this.form.controls['clase'].value, this.form.controls['viajes'].value, this.distributionObject, email).getUrlMulti(jsonArray);
+    let url = new URLVuelosMulti(this.form.controls['viajes'].value, this.distributionObject, email).getUrlMulti(jsonArray);
 
     window.location.href = url;
     //this.navigateToResponseUrl(url);
@@ -576,7 +566,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   }
 
   changeSelect(tipoVuelo: number): void {
-   // debugger
+    // debugger
 
     this.tipoVuelo = tipoVuelo;
 
