@@ -22,6 +22,7 @@ import { CierrapuertasComponent } from './cierrapuertas/cierrapuertas.component'
 import { CierrapuertasOfertasComponent } from './cierrapuertas-ofertas/cierrapuertas-ofertas.component';
 import { TusdatosComponent } from './tusdatos/tusdatos.component';
 import { ItineraryComponent } from './itinerary/itinerary.component';
+import { EventosComponent } from './eventos/eventos.component';
 
 const routes: Routes = [
   {
@@ -103,6 +104,10 @@ const routes: Routes = [
       {
         path: 'tusdatos',
         component: TusdatosComponent,
+      },
+      {
+        path: 'eventos',
+        component: EventosComponent,
       },
       {
         path: 'agendar-cita',

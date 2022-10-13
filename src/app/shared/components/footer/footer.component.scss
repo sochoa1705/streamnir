@@ -145,6 +145,9 @@ footer {
     }
     .marginTop35 {
         margin-top: 35px;
+        @media (max-width: 640px) {
+            margin-top: 15px;
+        }
     }
     h3 {
         font-size: 18px !important;

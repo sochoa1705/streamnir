@@ -1,108 +1,94 @@
-<div class="fluid px-0">
-    <div class="row bg-white text-center py-md-5 py-3 mx-2 mx-md-0 mailing">
-        <div class="col-12 offset-0 col-md-10 offset-md-1">
-            <svg *ngIf="!validate" width="104" height="104" viewBox="0 0 104 104" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M99.2181 52.0037L103.781 40.103C104.281 38.7901 103.891 37.3017 102.793 36.4112L92.9006 28.3908L90.8987 15.8011C90.6777 14.4102 89.5858 13.3248 88.1949 13.1038L75.6052 11.1019L67.5913 1.20312C66.7073 0.104694 65.1864 -0.285279 63.906 0.215186L51.9988 4.78437L40.0982 0.221686C38.7787 -0.285279 37.3033 0.117693 36.4129 1.20962L28.3925 11.1084L15.8028 13.1103C14.4184 13.3313 13.3265 14.4232 13.1055 15.8076L11.1036 28.3973L1.20481 36.4177C0.112884 37.3017 -0.283589 38.7901 0.216877 40.103L4.77956 52.0037L0.216877 63.9043C-0.290089 65.2172 0.112884 66.7056 1.20481 67.5896L11.1036 75.6035L13.1055 88.1932C13.3265 89.5841 14.4119 90.676 15.8028 90.897L28.3925 92.8989L36.4129 102.791C37.3033 103.896 38.7917 104.286 40.1047 103.779L51.9988 99.2229L63.8995 103.786C64.2765 103.929 64.6665 104 65.063 104C66.0184 104 66.9608 103.578 67.5913 102.791L75.6052 92.8989L88.1949 90.897C89.5858 90.676 90.6777 89.5841 90.8987 88.1932L92.9006 75.6035L102.793 67.5896C103.891 66.6991 104.281 65.2172 103.781 63.9043L99.2181 52.0037Z"
-                    fill="#F44336" />
-                <path
-                    d="M42.2484 45.5053C36.8732 45.5053 32.499 41.1311 32.499 35.7559C32.499 30.3808 36.8732 26.0066 42.2484 26.0066C47.6235 26.0066 51.9977 30.3808 51.9977 35.7559C51.9977 41.1311 47.6235 45.5053 42.2484 45.5053ZM42.2484 32.5061C40.4545 32.5061 38.9986 33.962 38.9986 35.7559C38.9986 37.5498 40.4545 39.0057 42.2484 39.0057C44.0422 39.0057 45.4981 37.5498 45.4981 35.7559C45.4981 33.962 44.0422 32.5061 42.2484 32.5061Z"
-                    fill="#FAFAFA" />
-                <path
-                    d="M61.7469 78.0021C56.3718 78.0021 51.9976 73.6279 51.9976 68.2528C51.9976 62.8776 56.3718 58.5034 61.7469 58.5034C67.122 58.5034 71.4962 62.8776 71.4962 68.2528C71.4962 73.6279 67.122 78.0021 61.7469 78.0021ZM61.7469 65.003C59.9595 65.003 58.4971 66.4654 58.4971 68.2528C58.4971 70.0401 59.9595 71.5025 61.7469 71.5025C63.5343 71.5025 64.9967 70.0401 64.9967 68.2528C64.9967 66.4654 63.5343 65.003 61.7469 65.003Z"
-                    fill="#FAFAFA" />
-                <path
-                    d="M35.7493 78.002C35.0929 78.002 34.4364 77.807 33.8645 77.3975C32.4021 76.3511 32.0641 74.3232 33.1105 72.8608L65.6083 27.364C66.6547 25.9016 68.6826 25.5636 70.145 26.61C71.6074 27.6499 71.9388 29.6843 70.8989 31.1402L38.4011 76.6371C37.7577 77.5275 36.7633 78.002 35.7493 78.002Z"
-                    fill="#FAFAFA" />
-            </svg>
-            <!-- <h1 class="mt-5 titleBold" *ngIf="validate">{{ message }}</h1> -->
+<div class="fluid px-0 mailingBox">
+  <div class="row bg-white text-center py-md-5 py-3 mx-2 mx-md-0 mailing">
+    <div class="col-12 offset-0 col-md-10 offset-md-1">
+      <svg class="iconMailing" *ngIf="!validate" width="104" height="104" viewBox="0 0 104 104" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M99.2181 52.0037L103.781 40.103C104.281 38.7901 103.891 37.3017 102.793 36.4112L92.9006 28.3908L90.8987 15.8011C90.6777 14.4102 89.5858 13.3248 88.1949 13.1038L75.6052 11.1019L67.5913 1.20312C66.7073 0.104694 65.1864 -0.285279 63.906 0.215186L51.9988 4.78437L40.0982 0.221686C38.7787 -0.285279 37.3033 0.117693 36.4129 1.20962L28.3925 11.1084L15.8028 13.1103C14.4184 13.3313 13.3265 14.4232 13.1055 15.8076L11.1036 28.3973L1.20481 36.4177C0.112884 37.3017 -0.283589 38.7901 0.216877 40.103L4.77956 52.0037L0.216877 63.9043C-0.290089 65.2172 0.112884 66.7056 1.20481 67.5896L11.1036 75.6035L13.1055 88.1932C13.3265 89.5841 14.4119 90.676 15.8028 90.897L28.3925 92.8989L36.4129 102.791C37.3033 103.896 38.7917 104.286 40.1047 103.779L51.9988 99.2229L63.8995 103.786C64.2765 103.929 64.6665 104 65.063 104C66.0184 104 66.9608 103.578 67.5913 102.791L75.6052 92.8989L88.1949 90.897C89.5858 90.676 90.6777 89.5841 90.8987 88.1932L92.9006 75.6035L102.793 67.5896C103.891 66.6991 104.281 65.2172 103.781 63.9043L99.2181 52.0037Z"
+          fill="#F44336" />
+        <path
+          d="M42.2484 45.5053C36.8732 45.5053 32.499 41.1311 32.499 35.7559C32.499 30.3808 36.8732 26.0066 42.2484 26.0066C47.6235 26.0066 51.9977 30.3808 51.9977 35.7559C51.9977 41.1311 47.6235 45.5053 42.2484 45.5053ZM42.2484 32.5061C40.4545 32.5061 38.9986 33.962 38.9986 35.7559C38.9986 37.5498 40.4545 39.0057 42.2484 39.0057C44.0422 39.0057 45.4981 37.5498 45.4981 35.7559C45.4981 33.962 44.0422 32.5061 42.2484 32.5061Z"
+          fill="#FAFAFA" />
+        <path
+          d="M61.7469 78.0021C56.3718 78.0021 51.9976 73.6279 51.9976 68.2528C51.9976 62.8776 56.3718 58.5034 61.7469 58.5034C67.122 58.5034 71.4962 62.8776 71.4962 68.2528C71.4962 73.6279 67.122 78.0021 61.7469 78.0021ZM61.7469 65.003C59.9595 65.003 58.4971 66.4654 58.4971 68.2528C58.4971 70.0401 59.9595 71.5025 61.7469 71.5025C63.5343 71.5025 64.9967 70.0401 64.9967 68.2528C64.9967 66.4654 63.5343 65.003 61.7469 65.003Z"
+          fill="#FAFAFA" />
+        <path
+          d="M35.7493 78.002C35.0929 78.002 34.4364 77.807 33.8645 77.3975C32.4021 76.3511 32.0641 74.3232 33.1105 72.8608L65.6083 27.364C66.6547 25.9016 68.6826 25.5636 70.145 26.61C71.6074 27.6499 71.9388 29.6843 70.8989 31.1402L38.4011 76.6371C37.7577 77.5275 36.7633 78.002 35.7493 78.002Z"
+          fill="#FAFAFA" />
+      </svg>
+      <!-- <h1 class="mt-5 titleBold" *ngIf="validate">{{ message }}</h1> -->
 
-            <div class="row" *ngIf="validate">
-                <div class="msgBoxBoletin {{ imgMailing ? 'success' : 'error'}} ">
-                    <div class="iconBoletin">
-                        <img src="./assets/svg/{{ imgMailing ? 'success-boletin.svg' : 'error-boletin.svg' }}" alt="">
-                        <!-- <img src="./assets/svg/success-boletin.svg" alt=""> -->
-                    </div>
-                    <div class="titleBol" *ngIf="imgMailing">
-                        ¡Gracias por suscribirte!
-                    </div>
-                    <div class="descripBol">
-                        {{ message }}
-                    </div>
-                </div>
-                <!-- <div class="msgBoxBoletin error">
-                        <div class="iconBoletin">
-                            <img src="./assets/svg/error-boletin.svg" alt="">
-                        </div>
-                        <div class="titleBol">
-                            ¡Hola Hugo!
-                        </div>
-                        <div class="descripBol">
-                                {{ message }}
-                        </div>
-                    </div> -->
-            </div>
-
-
-            <h1 class="mt-5 titleBold" *ngIf="!validate">{{ title }}</h1>
-            <h3 class="mb-5" *ngIf="!validate">{{ span }}</h3>
-            <form [formGroup]="formMAiling" *ngIf="!validate">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-4 offset-0 offset-md-1 input-group-lg px-0  text-start">
-                            <input class="form-control" formControlName="nombreMail" placeholder="Ingrese su nombre" type="text" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
-                            <span class="valid" *ngIf="getMessage(MSG_NOMBRE) !== MSG_EMPTY">{{ getMessage(MSG_NOMBRE)
-                                }}</span>
-                        </div>
-                        <div class="col-12 col-md-4 offset-0 input-group-lg px-0 px-md-3 text-start">
-                            <input class="form-control" formControlName="correoMail" placeholder="Correo electrónico" type="text" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_MAIL)">
-                            <span class="valid" *ngIf="getMessage(MSG_CORREO) !== MSG_EMPTY">{{ getMessage(MSG_CORREO)
-                                }}</span>
-                        </div>
-                        <div class="col-md-2 col-12 text-center text-md-start px-0">
-                            <button (click)="subscribe(true)">Suscríbete</button>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="row py-md-3 py-0">
-                        <div class="col-md-10 offset-md-1 col-12 offset-0 text-center text-md-start">
-                            <mat-checkbox formControlName="politicasMail" class="check-link"></mat-checkbox>
-
-                            <a routerLink="/politicas" target="_blank">
-                                Acepto la Política De Protección De Datos
-                            </a>
-
-                            <a data-bs-toggle="modal" data-bs-target="#ModalDatosOpcionales" class="pl-md-3 centerMobile pointer">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M6.11766 1.76465H1C0.447715 1.76465 0 2.21236 0 2.76465V12.9999C0 13.5522 0.447716 13.9999 1 13.9999H10.4706C11.0229 13.9999 11.4706 13.5522 11.4706 12.9999V7.88235H10.9706V12.9999C10.9706 13.2761 10.7467 13.4999 10.4706 13.4999H1C0.723858 13.4999 0.5 13.2761 0.5 12.9999V2.76465C0.5 2.48851 0.723858 2.26465 1 2.26465H6.11766V1.76465Z"
-                                        fill="#009AED" />
-                                    <path
-                                        d="M5.9409 7.70555C5.84327 7.80318 5.84327 7.96147 5.9409 8.0591C6.03853 8.15673 6.19682 8.15673 6.29445 8.0591L5.9409 7.70555ZM13.25 0.999971C13.25 0.8619 13.1381 0.749972 13 0.749971L10.75 0.749971C10.612 0.749971 10.5 0.8619 10.5 0.999971C10.5 1.13804 10.612 1.24997 10.75 1.24997L12.75 1.24997L12.75 3.24997C12.75 3.38804 12.862 3.49997 13 3.49997C13.1381 3.49997 13.25 3.38804 13.25 3.24997L13.25 0.999971ZM6.29445 8.0591L13.1768 1.17675L12.8233 0.823195L5.9409 7.70555L6.29445 8.0591Z"
-                                        fill="#009AED" />
-                                </svg> Datos opcionales</a>
-
-                            <span class="valid" *ngIf="getMessage(MSG_POLITICA) !== MSG_EMPTY">{{
-                                getMessage(MSG_POLITICA) }}</span>
-                        </div>
-                        <!-- <div class="col-md-3 offset-md-0 col-12 offset-0 text-md-start text-center">
-                    </div> -->
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-10 offset-md-1 col-12 text-md-start text-center">
-                            <mat-checkbox formControlName="autorizoMail" class="example-margin">Autorizo el uso de mi Información para la publicidad
-                            </mat-checkbox>
-                            <span class="valid" *ngIf="getMessage(MSG_AUTORIZO) !== MSG_EMPTY">{{
-                                getMessage(MSG_AUTORIZO) }}</span>
-
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </form>
+      <div class="row" *ngIf="validate">
+        <div class="msgBoxBoletin {{ imgMailing ? 'success' : 'error'}} ">
+          <div class="iconBoletin">
+            <img src="./assets/svg/{{ imgMailing ? 'success-boletin.svg' : 'error-boletin.svg' }}" alt="">
+            <!-- <img src="./assets/svg/success-boletin.svg" alt=""> -->
+          </div>
+          <div class="titleBol" *ngIf="imgMailing">
+            ¡Gracias por suscribirte!
+          </div>
+          <div class="descripBol">
+            {{ message }}
+          </div>
         </div>
-        <div class="clearfix"></div>
+      </div>
+
+      <h1 class="mt-5 titleBold" *ngIf="!validate">{{ title }}</h1>
+      <h2 class="mb-5 subtitleHome" *ngIf="!validate">{{ span }}</h2>
+      <form [formGroup]="formMAiling" *ngIf="!validate">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-4 offset-0 offset-md-1 input-group-lg px-0  text-start">
+              <input class="form-control" formControlName="nombreMail" placeholder="Ingrese su nombre" type="text"
+                (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+              <span class="valid" *ngIf="getMessage(MSG_NOMBRE) !== MSG_EMPTY">{{ getMessage(MSG_NOMBRE)
+                }}</span>
+            </div>
+            <div class="col-12 col-md-4 offset-0 input-group-lg px-0 px-md-3 text-start">
+              <input class="form-control" formControlName="correoMail" placeholder="Correo electrónico" type="text"
+                (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_MAIL)">
+              <span class="valid" *ngIf="getMessage(MSG_CORREO) !== MSG_EMPTY">{{ getMessage(MSG_CORREO)
+                }}</span>
+            </div>
+            <div class="col-md-2 col-12 text-center text-md-start px-0">
+              <button (click)="subscribe(true)">Suscríbete</button>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="row py-md-3 py-0 rowMailing">
+            <div class="col-md-10 offset-md-1 col-12 offset-0 text-center text-md-start">
+              <mat-checkbox formControlName="politicasMail" class="check-link"></mat-checkbox>
+
+              <a routerLink="/politicas" target="_blank">
+                Acepto la Política De Protección De Datos
+              </a>
+
+              <a data-bs-toggle="modal" data-bs-target="#ModalDatosOpcionales" class="pl-md-3 centerMobile pointer">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M6.11766 1.76465H1C0.447715 1.76465 0 2.21236 0 2.76465V12.9999C0 13.5522 0.447716 13.9999 1 13.9999H10.4706C11.0229 13.9999 11.4706 13.5522 11.4706 12.9999V7.88235H10.9706V12.9999C10.9706 13.2761 10.7467 13.4999 10.4706 13.4999H1C0.723858 13.4999 0.5 13.2761 0.5 12.9999V2.76465C0.5 2.48851 0.723858 2.26465 1 2.26465H6.11766V1.76465Z"
+                    fill="#009AED" />
+                  <path
+                    d="M5.9409 7.70555C5.84327 7.80318 5.84327 7.96147 5.9409 8.0591C6.03853 8.15673 6.19682 8.15673 6.29445 8.0591L5.9409 7.70555ZM13.25 0.999971C13.25 0.8619 13.1381 0.749972 13 0.749971L10.75 0.749971C10.612 0.749971 10.5 0.8619 10.5 0.999971C10.5 1.13804 10.612 1.24997 10.75 1.24997L12.75 1.24997L12.75 3.24997C12.75 3.38804 12.862 3.49997 13 3.49997C13.1381 3.49997 13.25 3.38804 13.25 3.24997L13.25 0.999971ZM6.29445 8.0591L13.1768 1.17675L12.8233 0.823195L5.9409 7.70555L6.29445 8.0591Z"
+                    fill="#009AED" />
+                </svg> Datos opcionales</a>
+
+              <span class="valid" *ngIf="getMessage(MSG_POLITICA) !== MSG_EMPTY">{{
+                getMessage(MSG_POLITICA) }}</span>
+            </div>
+          </div>
+          <div class="row rowMailing">
+            <div class="col-md-10 offset-md-1 col-12 text-md-start text-center">
+              <mat-checkbox formControlName="autorizoMail" class="example-margin">Autorizo el uso de mi Información para
+                la publicidad
+              </mat-checkbox>
+              <span class="valid" *ngIf="getMessage(MSG_AUTORIZO) !== MSG_EMPTY">{{
+                getMessage(MSG_AUTORIZO) }}</span>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 <!-- ModalDatosOpcionales -->

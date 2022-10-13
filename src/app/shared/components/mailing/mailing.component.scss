@@ -68,7 +68,7 @@ button {
     font-weight: 500;
     font-weight: normal;
     @media (max-width: 768px) {
-        font-size: 10px;
+        font-size: 11px;
         padding-bottom: 0px;
         font-weight: normal;
     }
@@ -124,9 +124,85 @@ h {
     }
 }
 
+.subtitleHome {
+    font-family: "Montserrat";
+    font-size: 16px;
+    @media (max-width: 640px) {}
+}
+
 @media (max-width: 640px) {
     .centerMobile {
         display: flex;
         justify-content: center;
+    }
+}
+
+.mailingBox {
+    .iconMailing {
+        @media (max-width: 640px) {
+            position: absolute;
+            width: 80px;
+            left: calc(50% - 40px);
+            top: -50px;
+        }
+    }
+    .titleBold {
+        @media (max-width: 640px) {
+            width: 100%;
+            margin: 40px 0 0 0 !important;
+            font-size: 22px;
+        }
+    }
+    h3 {
+        @media (max-width: 640px) {
+            font-size: 12px;
+            margin-bottom: 20px !important;
+        }
+    }
+    input {
+        @media (max-width: 640px) {
+            font-size: 14px !important;
+        }
+    }
+    button {
+        @media (max-width: 640px) {
+            width: 100%;
+            font-size: 14px !important;
+            margin-bottom: 10px;
+            padding: 8px 8px;
+        }
+    }
+    .rowMailing {
+        .col-md-10 {
+            a {
+                svg {
+                    @media (max-width: 640px) {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+                @media (max-width: 640px) {
+                    font-size: 11px;
+                    margin: 10px 0;
+                    justify-content: flex-start;
+                    padding-left: 0px;
+                    gap: 8px;
+                }
+            }
+            @media (max-width: 640px) {
+                padding: 0;
+                margin: 0;
+                text-align: initial !important;
+            }
+        }
+        @media (max-width: 640px) {
+            padding: 0;
+            margin: 0 -10px;
+        }
+    }
+    @media (max-width: 640px) {
+        margin-top: 60px;
+        position: relative;
+        margin-bottom: 20px;
     }
 }

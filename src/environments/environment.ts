@@ -21,6 +21,7 @@ export const environment = {
   urlAutosNmViajes: 'https://autos.nmviajes.com/',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
+  //urlNmviajes: "http://localhost:12639/v1/api",
 
   urlLibro: "https://servicio.nmviajes.com:9443/libroreclamacion",
   urlApiTickets: "https://servicios.expertiatravel.com/widgetactividades",
@@ -32,7 +33,7 @@ export const environment = {
   urlZonaPrivada: 'https://servicio.nmviajes.com:9443/zonaprivada/',
   //urlGeo: "https://motorvuelos-dev.expertiatravel.com/mv",
   urlGeo: "https://motorvuelos.expertiatravel.com/mv",
-  urlIframeMotorVuelos: "https://vuelos.nmviajes.com/#/nmviajes/search/resultados",
+  urlIframeMotorVuelos: "https://vuelos-dev.nmviajes.com/#/nmviajes/search/resultados",
   //urlIframeMotorVuelos: "http://localhost:4200/#/nmviajes/search/resultados",
 
   urlIframeMotorVuelosItinerary: "https://vuelos.nmviajes.com/#/nmviajes/booking/itinerary",
@@ -53,5 +54,35 @@ export const environment = {
 
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
 
-  urlApiMotorVuelos: "https://motorvuelos-dev.expertiatravel.com/mv/"
+  urlApiMotorVuelos: "https://motorvuelos-dev.expertiatravel.com/mv/",
+
+  SEO: {
+    home: {
+      url: 'https://www.nmviajes.com/',
+      title: 'Ofertas de Viajes, Vuelos, Paquetes Turísticos en NM Viajes',
+      description: 'Encuentra el mejor precio en pasajes aereos, paquetes turísticos, vuela a Miami, Cusco, Arequipa y más destinos con NMViajes',
+      image: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png',
+      height: '450',
+      width: '900',
+      logo: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png'
+    },
+    flights: {
+      url: 'https://www.nmviajes.com/vuelos',
+      title: 'Vuelos Nacionales e Internacionales. Ofertas en pasajes aéreos',
+      description: 'Aprovecha los Pasajes Aéreos Baratos. Vuelos Internacionales Lima a Miami, New York, Buenos Aires. Vuelos Nacionales a Cusco, Tumbes, Piura.',
+      image: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png',
+      height: '450',
+      width: '900',
+      logo: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png'
+    },
+    insurance: {
+      url: 'https://www.nmviajes.com/seguros/',
+      title: 'Seguro de viaje. Viaja seguro con Assist Card y NM Viajes',
+      description: 'Viaja seguro con Assist Card y NM Viajes. Visítanos y conoce todos nuestros planes y coberturas de seguros de viajes.',
+      image: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png',
+      height: '450',
+      width: '900',
+      logo: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png'
+    }
+  }
 }

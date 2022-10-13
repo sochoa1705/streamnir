@@ -76,8 +76,6 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   }
 
   onkeypress(event: any) {
-    debugger
-
     if (event.keyCode === 13) {
       event.preventDefault();
 
@@ -91,8 +89,6 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   }
 
   keyUp(event: any) {
-    debugger
-
     this.inputTxt = event.target.value
 
     const value: string = event.target.value || '';

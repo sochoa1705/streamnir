@@ -71,7 +71,10 @@ export class HomeComponent implements OnInit {
 
   getGallery() {
     this.dataPagePresenterService.getDataGallery().subscribe(data => {
-      this.sliderDestacados = data.filter(item => item.Code === EGalleryCode.slider_destacados).map(item => item.Images)[0];
+      //this.sliderDestacados = data.filter(item => item.Code === EGalleryCode.slider_destacados).map(item => item.Images)[0];
+      this.sliderDestacados = data.filter(item => item.Code === EGalleryCode.slider_destacados || item.Code === EGalleryCode.slider_destacados2).map(item => item.Images)[0];
+      this.sliderDestacados.push(this.sliderDestacados[0]);
+
       this.bannersDestacados = data.filter(item => item.Code === EGalleryCode.banners_destacados).map(item => item.Images)[0];
       this.bannersCorporativos = data.filter(item => item.Code === EGalleryCode.banners_corporativos).map(item => item.Images)[0];
 
