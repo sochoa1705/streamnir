@@ -3625,7 +3625,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
   position: absolute;
-  top: 130px;
+  top: 25px;
   z-index: 2; }
   .boxFlotante.seguro {
     top: inherit;
@@ -5624,6 +5624,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       .newBoxTab .sectionTab .columnBox.maxW {
         flex: 1 1 10%;
         max-width: 15%; }
+      .newBoxTab .sectionTab .columnBox .boxFlotante {
+        top: 130px; }
       .newBoxTab .sectionTab .columnBox app-pop-up-pasajero-vuelos {
         width: 100%; }
         .newBoxTab .sectionTab .columnBox app-pop-up-pasajero-vuelos .colBoxtab {
@@ -7038,7 +7040,7 @@ input.inputIzq {
 .carousel-indicators {
   z-index: 1; }
 
-button.customers {
+button.pasajero {
   position: relative;
   width: 100%;
   font-weight: 600;
@@ -7055,11 +7057,32 @@ button.customers {
   padding: 0;
   font-weight: normal;
   transition: 0.3s all; }
-  button.customers:hover {
+  button.pasajero:hover {
     background: #e4e5e7; }
+  @media (max-width: 768px) {
+    button.pasajero {
+      font-size: 10px; } }
+
+button.customers {
+  position: relative;
+  width: 190px;
+  font-weight: 600;
+  border: 0px;
+  font-size: 14px;
+  color: #222;
+  margin-top: 7px;
+  background-color: #fff;
+  padding-left: 0;
+  text-align: left;
+  font-family: "Montserrat";
+  padding-top: 13px; }
   @media (max-width: 768px) {
     button.customers {
       font-size: 10px; } }
+  button.customers:before {
+    content: url(./assets/arrow.svg);
+    right: 0;
+    position: absolute; }
 
 @media (max-width: 640px) {
   .dropdown-menu {
