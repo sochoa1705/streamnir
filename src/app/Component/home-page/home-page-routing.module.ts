@@ -145,6 +145,10 @@ const routes: Routes = [
     loadChildren: () => import('../../../app/Component/home-page/tuscitas/tuscitas.module').then(m => m.TuscitasModule)
   },
   {
+    path: 'canales-atencion',
+    loadChildren: () => import('../../../app/Component/home-page/canales-atencion/canales-atencion.module').then(m => m.CanalesAtencionModule)
+  },
+  {
     path: '404',
     component: PageNotFoundComponent
   },
