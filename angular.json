@@ -112,7 +112,8 @@
                             "src/favicon.ico",
                             "src/assets",
                             "src/Images",
-                            "src/resources"
+                            "src/resources",
+                            "src/metabuscador"
                         ],
                         "styles": [
                             "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
