@@ -5590,7 +5590,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .newBoxTab {
   display: flex;
   flex-wrap: wrap;
-  padding-right: 23px; }
+  padding-right: 23px;
+  font-family: 'Montserrat'; }
   .newBoxTab .sectionTab {
     display: flex;
     flex-wrap: wrap;
@@ -5628,8 +5629,17 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       .newBoxTab .sectionTab .columnBox.maxW {
         flex: 1 1 10%;
         max-width: 15%; }
+        @media (max-width: 640px) {
+          .newBoxTab .sectionTab .columnBox.maxW {
+            flex: 1 1 100%;
+            max-width: 100%; } }
       .newBoxTab .sectionTab .columnBox .boxFlotante {
         top: 130px; }
+        @media (max-width: 640px) {
+          .newBoxTab .sectionTab .columnBox .boxFlotante {
+            top: 50px;
+            left: auto;
+            right: 0; } }
       .newBoxTab .sectionTab .columnBox app-pop-up-pasajero-vuelos {
         width: 100%; }
         .newBoxTab .sectionTab .columnBox app-pop-up-pasajero-vuelos .colBoxtab {
@@ -5665,7 +5675,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         align-items: center; }
         .newBoxTab .sectionTab .columnBox .form-check label {
           padding: 5px 0 0 0;
-          font-weight: normal;
+          font-weight: 600;
           font-size: 14px;
           cursor: pointer; }
       .newBoxTab .sectionTab .columnBox .form-control {
@@ -5679,14 +5689,6 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         text-indent: 40px;
         border: 0.5px solid #e4e5e7;
         border-radius: 3px; }
-      @media (max-width: 990px) and (min-width: 640px) {
-        .newBoxTab .sectionTab .columnBox {
-          flex-wrap: wrap;
-          gap: 10px; } }
-      @media (max-width: 640px) {
-        .newBoxTab .sectionTab .columnBox {
-          flex-wrap: wrap;
-          gap: 10px; } }
       .newBoxTab .sectionTab .columnBox .colBoxtab {
         position: relative;
         display: flex;
@@ -5703,11 +5705,28 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           left: 10px;
           top: 10px;
           z-index: 2; }
+      @media (max-width: 640px) {
+        .newBoxTab .sectionTab .columnBox button {
+          font-size: 14px; } }
+      @media (max-width: 990px) and (min-width: 640px) {
+        .newBoxTab .sectionTab .columnBox {
+          flex-wrap: wrap;
+          gap: 10px; } }
+      @media (max-width: 640px) {
+        .newBoxTab .sectionTab .columnBox {
+          flex-wrap: wrap;
+          gap: 10px;
+          flex: 1 1 100%;
+          position: relative; } }
     .newBoxTab .sectionTab .colTabFilter {
       width: 10%; }
       .newBoxTab .sectionTab .colTabFilter .fullWidht {
         height: 50px;
         width: 100%; }
+      @media (max-width: 640px) {
+        .newBoxTab .sectionTab .colTabFilter {
+          width: 100%;
+          order: 3; } }
     .newBoxTab .sectionTab app-tab-vuelos-multicity {
       width: 100%; }
       .newBoxTab .sectionTab app-tab-vuelos-multicity .colBoxtab {
@@ -5732,6 +5751,15 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
           left: 10px;
           top: 10px;
           z-index: 2; }
+      @media (max-width: 640px) {
+        .newBoxTab .sectionTab app-tab-vuelos-multicity .rowBoxTab {
+          padding: 0; } }
+      @media (max-width: 640px) {
+        .newBoxTab .sectionTab app-tab-vuelos-multicity .rowBoxTab .colBoxtab.w-10 {
+          max-width: 120px; } }
+      @media (max-width: 640px) {
+        .newBoxTab .sectionTab app-tab-vuelos-multicity .rowBoxTab .colBoxtab {
+          padding: 0 0 10px 0 !important; } }
     @media (max-width: 990px) and (min-width: 640px) {
       .newBoxTab .sectionTab {
         flex-wrap: wrap;
@@ -5739,7 +5767,8 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     @media (max-width: 640px) {
       .newBoxTab .sectionTab {
         flex-wrap: wrap;
-        gap: 10px; } }
+        gap: 10px;
+        flex-wrap: wrap; } }
   @media (max-width: 990px) and (min-width: 640px) {
     .newBoxTab {
       padding: 15px; } }
@@ -7063,9 +7092,9 @@ button.pasajero {
   transition: 0.3s all; }
   button.pasajero:hover {
     background: #e4e5e7; }
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     button.pasajero {
-      font-size: 10px; } }
+      font-size: 14px; } }
 
 button.customers {
   position: relative;

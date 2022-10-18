@@ -6480,6 +6480,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     display: flex;
     flex-wrap: wrap;
     padding-right: 23px;
+    font-family: 'Montserrat';
     .sectionTab {
         display: flex;
         flex-wrap: wrap;
@@ -6524,9 +6525,18 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             &.maxW {
                 flex: 1 1 10%;
                 max-width: 15%;
+                @media (max-width: 640px) {
+                    flex: 1 1 100%;
+                    max-width: 100%;
+                }
             }
             .boxFlotante {
                 top: 130px;
+                @media (max-width: 640px) {
+                    top: 50px;
+                    left: auto;
+                    right: 0;
+                }
             }
             app-pop-up-pasajero-vuelos {
                 width: 100%;
@@ -6571,7 +6581,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 align-items: center;
                 label {
                     padding: 5px 0 0 0;
-                    font-weight: normal;
+                    font-weight: 600;
                     font-size: 14px;
                     cursor: pointer;
                 }
@@ -6587,14 +6597,6 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                 text-indent: 40px;
                 border: 0.5px solid #e4e5e7;
                 border-radius: 3px;
-            }
-            @media (max-width: 990px) and (min-width: 640px) {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            @media (max-width: 640px) {
-                flex-wrap: wrap;
-                gap: 10px;
             }
             .colBoxtab {
                 position: relative;
@@ -6617,12 +6619,31 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     z-index: 2;
                 }
             }
+            button {
+                @media (max-width: 640px) {
+                    font-size: 14px;
+                }
+            }
+            @media (max-width: 990px) and (min-width: 640px) {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            @media (max-width: 640px) {
+                flex-wrap: wrap;
+                gap: 10px;
+                flex: 1 1 100%;
+                position: relative;
+            }
         }
         .colTabFilter {
             width: 10%;
             .fullWidht {
                 height: 50px;
                 width: 100%;
+            }
+            @media (max-width: 640px) {
+                width: 100%;
+                order: 3;
             }
         }
         app-tab-vuelos-multicity {
@@ -6660,6 +6681,21 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
                     }
                 }
             }
+            .rowBoxTab {
+                @media (max-width: 640px) {
+                    padding: 0;
+                }
+                .colBoxtab {
+                    &.w-10 {
+                        @media (max-width: 640px) {
+                            max-width: 120px;
+                        }
+                    }
+                    @media (max-width: 640px) {
+                        padding: 0 0 10px 0 !important;
+                    }
+                }
+            }
         }
         @media (max-width: 990px) and (min-width: 640px) {
             flex-wrap: wrap;
@@ -6668,6 +6704,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         @media (max-width: 640px) {
             flex-wrap: wrap;
             gap: 10px;
+            flex-wrap: wrap;
         }
     }
     @media (max-width: 990px) and (min-width: 640px) {
@@ -8381,8 +8418,8 @@ button.pasajero {
     &:hover {
         background: #e4e5e7;
     }
-    @media (max-width: 768px) {
-        font-size: 10px;
+    @media (max-width: 640px) {
+        font-size: 14px;
     }
 }
 
