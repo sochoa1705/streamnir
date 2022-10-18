@@ -38,7 +38,8 @@
                             "src/sitemap.xml",
                             "src/assets",
                             "src/Images",
-                            "src/resources"
+                            "src/resources",
+                            "src/metabuscador"
                         ],
                         "allowedCommonJsDependencies": [
                             "moment-precise-range-plugin",
