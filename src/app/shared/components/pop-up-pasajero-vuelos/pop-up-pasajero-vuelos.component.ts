@@ -54,9 +54,9 @@ export class PopUpPasajeroVuelosComponent implements OnInit {
   idStateOpen: string = '';
 
   classes: IClass[] = [
-    { id: 1, name: 'Economy' },
-    { id: 2, name: 'Business' },
-    { id: 3, name: 'First Class ' }
+    { id: 0, name: 'Economy' },
+    { id: 1, name: 'Business' },
+    { id: 2, name: 'First Class ' }
   ];
 
   classId: number = 0;
