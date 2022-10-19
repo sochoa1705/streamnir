@@ -1,64 +1,65 @@
-export interface IDistributionObjectVuelos{
+export interface IDistributionObjectVuelos {
   habitacion: number,
-  adultos:number,
+  adultos: number,
   ninos: number,
-  infantes:number,
-  pasajeros: any[]
+  infantes: number,
+  pasajeros: any[],
+  clase: number,
 }
 
 
-export interface IDistributionObjectA{
+export interface IDistributionObjectA {
   habitacion: number,
-  adultos:number,
+  adultos: number,
   ninos: number,
   pasajeros: number
 }
 
-export class DistributionObjectA implements IDistributionObjectA{
+export class DistributionObjectA implements IDistributionObjectA {
   constructor(
     public habitacion: number,
-    public adultos:number,
+    public adultos: number,
     public ninos: number,
     public pasajeros: number
-  ){}
-  
+  ) { }
+
 }
-export interface IDistributionObject{
-  nroAdultos:number,
-  nroNinos:number,
+export interface IDistributionObject {
+  nroAdultos: number,
+  nroNinos: number,
   ninos: DistributionNinos[]
 
-  addNino():void;
-  deleteNino():void;
+  addNino(): void;
+  deleteNino(): void;
 }
 
-export interface DistributionNinos  {
-  edad:number;
+export interface DistributionNinos {
+  edad: number;
 };
 
-export class DistributionObject implements IDistributionObject{
+export class DistributionObject implements IDistributionObject {
   constructor(
     public nroAdultos: number = 1,
     public nroNinos: number = 0,
     public ninos: DistributionNinos[] = []
-  ){}
+  ) { }
 
-  addNino(){
+  addNino() {
 
     const obj = {
-      edad:0
+      edad: 0
     }
 
     this.ninos.push(obj);
     this.calculateNinos();
   }
 
-  deleteNino(){
-    this.ninos.splice(this.nroNinos - 1 ,1);
+  deleteNino() {
+    this.ninos.splice(this.nroNinos - 1, 1);
     this.calculateNinos();
   }
 
-  private calculateNinos(){
+  private calculateNinos() {
     this.nroNinos = this.ninos.length;
   }
 }

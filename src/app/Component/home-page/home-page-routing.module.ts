@@ -133,7 +133,11 @@ const routes: Routes = [
       {
         path: 'comprar',
         component: ComprarComponent
-      }
+      },
+      {
+        path: 'canales-atencion',
+        loadChildren: () => import('../../../app/Component/home-page/canales-atencion/canales-atencion.module').then(m => m.CanalesAtencionModule)
+      },
     ],
   },
   {
