@@ -415,7 +415,8 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
         citysDestinosSelect: this.citysDestinosSelect || null,
         citysOrigenSelect: this.citysOrigenSelect || null,
         email: this.userStorage.email || '',
-        clase: this.distributionObject['clase']
+        clase: this.distributionObject['clase'],
+        tipoVuelo: this.tipoVuelo
       }
     );
 
@@ -459,6 +460,8 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     //url = new URLVuelos(params, this.distributionObject).getUrl();
     url = environment.urlIframeMotorVuelos + '?rand=' + Math.round(Math.random() * 10000000000) + "&";
 
+    debugger
+
     url += `departureLocation=${params.idOrigen + "%20" + params.origen?.title || ''}&arrivalLocation=${params.idDestino + "%20" + params.destino?.title || ''}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&adults=${this.distributionObject['adultos']}&children=${this.distributionObject['ninos']}&infants=${this.distributionObject['infantes']}&flightType=${params.flightType}&flightClass=${this.distributionObject['clase']}&lang=ES&email=${params.email}`;
 
     // return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&destination=${this.params.idDestino + "%20" + this.params.destino?.title || ''}
@@ -489,7 +492,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   searchVueloHotelMulti(): void {
     let jsonArray = this.setMultiCityArray();
     const email: string = this.userStorage.email || '';
-    let url = new URLVuelosMulti(this.form.controls['viajes'].value, this.distributionObject, email).getUrlMulti(jsonArray);
+    let url = new URLVuelosMulti(this.tipoVuelo, this.distributionObject, email).getUrlMulti(jsonArray);
 
     window.location.href = url;
     //this.navigateToResponseUrl(url);
@@ -566,7 +569,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   }
 
   changeSelect(tipoVuelo: number): void {
-    // debugger
+    debugger
 
     this.tipoVuelo = tipoVuelo;
 

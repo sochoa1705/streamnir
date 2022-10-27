@@ -389,6 +389,7 @@ export interface ParamsVuelosProps {
   citysOrigenSelect: any[];
   email?: string;
   clase: number;
+  tipoVuelo: number;
 }
 
 export class ParamsVuelos {
@@ -409,7 +410,8 @@ export class ParamsVuelos {
       citysDestinosSelect,
       citysOrigenSelect,
       email,
-      clase
+      clase,
+      tipoVuelo
     }: ParamsVuelosProps
   ) {
     let startDateStr = fromDate!.day != undefined ? `${(fromDate!.day).toString()}/${(fromDate!.month).toString()}/${(fromDate!.year).toString()}` : fromDate;
@@ -421,7 +423,7 @@ export class ParamsVuelos {
     this.destino = form.controls['destino'].value;
     this.cabinsVuelos = clase;
     this.idOrigen = this.origen.codigo;
-    this.flightType = form.controls['viajes'].value;
+    this.flightType = tipoVuelo;
     this.idDestino = this.destino.codigo;
     this.email = email;
   }
