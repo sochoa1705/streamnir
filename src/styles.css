@@ -5676,7 +5676,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
         .newBoxTab .sectionTab .columnBox .form-check label {
           padding: 5px 0 0 0;
           font-weight: 600;
-          font-size: 14px;
+          font-size: 12px;
           cursor: pointer; }
       .newBoxTab .sectionTab .columnBox .form-control {
         width: 100%;
@@ -9027,6 +9027,7 @@ app-flightdeals button {
         margin-bottom: 15px;
         display: flex;
         justify-content: center;
+        text-align: center;
         width: 100%; }
       .containerBox .boxCanales .boxCardCanal .descripCanal {
         width: 100%;
