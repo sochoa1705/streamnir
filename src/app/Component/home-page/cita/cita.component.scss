@@ -1,5 +1,5 @@
 section {
-    background-image: url("/assets/citas/bg-nmviajes-citas.jpg");
+    background-image: url("/assets/citas/AgendaTuCita.webp");
     background-position: 50% 50%;
     height: -moz-calc(100vh - (20px + 30px));
     height: -webkit-calc(100vh - (20px + 30px));
@@ -13,22 +13,18 @@ section {
     justify-content: center;
     align-items: center;
     margin: 0;
-
     .rowCita {
         display: flex;
         width: 80%;
         gap: 50px;
-
         .colCita {
             flex: 1 1 50%;
             text-align: center;
         }
-
         @media (max-width: 990px) and (min-width: 640px) {
             width: 90%;
             gap: 40px;
         }
-
         @media (max-width: 640px) {
             flex-wrap: wrap;
             width: 100%;
@@ -36,52 +32,48 @@ section {
             font-size: 1.5rem;
         }
     }
-
     h1 {
         font-size: 3.75rem;
         font-weight: 700;
         color: white;
-
         @media (max-width: 990px) and (min-width: 640px) {
             font-size: 2.75rem;
         }
-
         @media (max-width: 640px) {
             font-size: 1.5rem;
         }
     }
-
+    h2 {
+        line-height: 1.35;
+        color: white;
+        font-size: 1rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
     p,
     a {
         font-size: 1.5rem;
         line-height: 1.35;
         color: white;
-
         @media (max-width: 990px) and (min-width: 640px) {
             font-size: 1rem;
         }
-
         @media (max-width: 640px) {
             font-size: 1rem;
         }
     }
-
     .iframeCita {
         height: 630px;
-
         .heightIframe {
             height: 630px;
         }
-
         @media (max-width: 990px) and (min-width: 640px) {
             font-size: 14px;
         }
-
         @media (max-width: 640px) {
             font-size: 12px;
         }
     }
-
     @media (max-width: 640px) {
         padding: 20px;
         height: auto;
