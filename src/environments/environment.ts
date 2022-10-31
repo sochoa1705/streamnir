@@ -83,6 +83,14 @@ export const environment = {
       height: '450',
       width: '900',
       logo: 'https://www.nmviajes.com/Images/seo/logo_nmviajes.png'
+    },
+    scheduleYourAppointment: {
+      title: 'Agenda un cita virtual con una asesor de NM Viajes',
+      description: 'Recibe la asesoría de una especialista en viajes y haz que el viaje de tus sueños sea una realidad.'
+    },
+    careChannels: {
+      title: 'Conoce todos los canales de atención de NM Viajes',
+      description: 'Elije el canal de atención de tu preferencia y planifica tu viaje a los mejores precios.'
     }
   }
 }
