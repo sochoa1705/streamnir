@@ -110,7 +110,7 @@ const routes: Routes = [
         component: EventosComponent,
       },
       {
-        path: 'agendar-cita',
+        path: 'agenda-tu-cita',
         component: CitaComponent
 
       },
@@ -135,7 +135,7 @@ const routes: Routes = [
         component: ComprarComponent
       },
       {
-        path: 'canales-atencion',
+        path: 'canales-de-atencion',
         loadChildren: () => import('../../../app/Component/home-page/canales-atencion/canales-atencion.module').then(m => m.CanalesAtencionModule)
       },
     ],

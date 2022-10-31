@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <span (click)="toHome()" id="top">
+  <span (click)="toHome()" id="top">
     <svg class="logo" width="128" height="30" viewBox="0 0 128 30" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clip-path="url(#clip0_3430_3190)">
         <path
@@ -34,72 +34,75 @@
       </defs>
     </svg>
   </span>
-    <span class="spacer"></span>
-    <ul class="d-none d-sm-none d-md-none d-md-block d-lg-block">
-        <li *ngFor="let m of menu" [ngClass]="m.footer ? 'd-none' : ''">
-            <a [routerLink]="m.tab === '' ? m.link : [m.link, m.tab]" *ngIf="!m.footer && !m.external" routerLinkActive="active">
+  <span class="spacer"></span>
+  <ul class="d-none d-sm-none d-md-none d-md-block d-lg-block">
+    <li *ngFor="let m of menu" [ngClass]="m.footer ? 'd-none' : ''">
+      <a [routerLink]="m.tab === '' ? m.link : [m.link, m.tab]" *ngIf="!m.footer && !m.external"
+        routerLinkActive="active">
         {{ m.text }}
       </a>
-            <a (click)="to(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
+      <a (click)="to(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
         {{ m.text }}
       </a>
-        </li>
-    </ul>
-    <span class="spacer  border border-bottom-0 border-top-0 border-start-0 h-50"></span>
+    </li>
+  </ul>
+  <span class="spacer  border border-bottom-0 border-top-0 border-start-0 h-50"></span>
 
-    <!-- <a href="https://www.nmviajes.com/tuscitas/index.html" target="_blank" class="ps-3"> -->
-    <a routerLink="/canales-atencion" class="ps-3">
-        <img style="width: 24px" src="assets/svg/iconContact.svg" alt="">
-        <span>Contactanos</span>
+  <!-- <a href="https://www.nmviajes.com/tuscitas/index.html" target="_blank" class="ps-3"> -->
+  <a routerLink="/canales-de-atencion" class="ps-3">
+    <img src="assets/iconCita.png" alt="">
+    <span>Contactanos</span>
+  </a>
+  <a href="https://ayuda.nmviajes.com/support/home" target="_blank">
+    <img src="assets/svg/help.svg" alt="">
+    <span>Ayuda</span>
+  </a>
+
+  <ng-container *ngIf="!isLogged">
+    <a data-bs-toggle="modal" data-bs-target="#ModalSesion">
+      <img src="assets/svg/login.svg" alt="">
+      <span>Iniciar sesión</span>
     </a>
-    <a href="https://ayuda.nmviajes.com/support/home" target="_blank">
-        <img src="assets/svg/help.svg" alt="">
-        <span>Ayuda</span>
-    </a>
+  </ng-container>
 
-    <ng-container *ngIf="!isLogged">
-        <a data-bs-toggle="modal" data-bs-target="#ModalSesion">
-            <img src="assets/svg/login.svg" alt="">
-            <span>Iniciar sesión</span>
-        </a>
-    </ng-container>
-
-    <ng-container *ngIf="isLogged">
-        <div class="boxUser">
-            <div class="userlogged" (click)="showOption()">
-                <img class="img-perfil" appImgDefault [default]="'./assets/user-conect.svg'" [src]="userStorage.image" alt="">
-            </div>
-            <div class="divFlotante" *ngIf="showOptionUser">
-                <div class="option" routerLink="/perfil/mi-perfil">Mi Perfil</div>
-                <div class="line"></div>
-                <div class="option red" (click)="logout()">Cerrar sesión</div>
-                <div class="correo">
-                    <img src="./assets/usuario.svg" alt=""> {{userStorage.email}}
-                </div>
-            </div>
+  <ng-container *ngIf="isLogged">
+    <div class="boxUser">
+      <div class="userlogged" (click)="showOption()">
+        <img class="img-perfil" appImgDefault [default]="'./assets/user-conect.svg'" [src]="userStorage.image" alt="">
+      </div>
+      <div class="divFlotante" *ngIf="showOptionUser">
+        <div class="option" routerLink="/perfil/mi-perfil">Mi Perfil</div>
+        <div class="line"></div>
+        <div class="option red" (click)="logout()">Cerrar sesión</div>
+        <div class="correo">
+          <img src="./assets/usuario.svg" alt=""> {{userStorage.email}}
         </div>
-    </ng-container>
+      </div>
+    </div>
+  </ng-container>
 
 
-    <button (click)="drawer.toggle()" mat-icon-button class="main example-icon d-block d-lg-none" aria-label="Example icon-button with menu icon">
+  <button (click)="drawer.toggle()" mat-icon-button class="main example-icon d-block d-lg-none"
+    aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>
 
 <mat-drawer-container>
-    <mat-drawer fxFlex #drawer mode="side" position="end">
-        <a class="m-3 close" (keydown.escape)="close()" (click)="drawer.toggle()">x</a>
-        <ul>
-            <li *ngFor="let m of menu" [ngClass]="m.footer ? 'd-none' : ''">
-                <img [src]="m.icon" alt="">
-                <a [routerLink]="m.tab === '' ? m.link : [m.link, m.tab]" *ngIf="!m.footer && !m.external" routerLinkActive="active">
+  <mat-drawer fxFlex #drawer mode="side" position="end">
+    <a class="m-3 close" (keydown.escape)="close()" (click)="drawer.toggle()">x</a>
+    <ul>
+      <li *ngFor="let m of menu" [ngClass]="m.footer ? 'd-none' : ''">
+        <img [src]="m.icon" alt="">
+        <a [routerLink]="m.tab === '' ? m.link : [m.link, m.tab]" *ngIf="!m.footer && !m.external"
+          routerLinkActive="active">
           {{ m.text }}
         </a>
-                <a (click)="to(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
+        <a (click)="to(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
           {{ m.text }}
         </a>
-                <hr>
-            </li>
-        </ul>
-    </mat-drawer>
+        <hr>
+      </li>
+    </ul>
+  </mat-drawer>
 </mat-drawer-container>
