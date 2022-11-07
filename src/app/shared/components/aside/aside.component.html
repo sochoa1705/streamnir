@@ -36,12 +36,14 @@
     <div class="col-md-6 col-12">
       <div class="row">
         <div class="col-12">
-          <ng-container *ngFor="let image of images; let i = index">
+          <!-- <ng-container *ngFor="let image of images; let i = index">
             <div class="aside__content_2">
               <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image, 'banner', i, images.length)"
                 [src]="image.PathImage" [alt]="image.NameImage">
             </div>
-          </ng-container>
+          </ng-container> -->
+
+          <app-package-video></app-package-video>
         </div>
       </div>
     </div>
