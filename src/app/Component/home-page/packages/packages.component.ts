@@ -1,34 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Aside } from 'src/app/Models/general/aside';
 import { ModelTaggingSlidersBanners } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
-import { IGalleryImage, IGalleryService } from 'src/app/Services/presenter/data-page-presenter.models';
-import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
-import { getFileName } from '../../utils';
+import { IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
+import { getFileName } from 'src/app/shared/utils';
 
 @Component({
-  selector: 'app-aside',
-  templateUrl: './aside.component.html',
-  styleUrls: ['./aside.component.scss']
+  selector: 'app-packages',
+  templateUrl: './packages.component.html',
+  styleUrls: ['./packages.component.scss']
 })
-export class AsideComponent {
+export class PackagesComponent implements OnInit {
 
   @Input()
   slider!: IGalleryImage[];
 
-  @Input()
-  images!: IGalleryImage[];
+  constructor() { }
 
-  @Input()
-  banners_corps!: IGalleryImage[];
-
-  @Input()
-  selectedTab: string;
-
-  constructor(
-    public dataPagePresenterService: DataPagePresenterService
-  ) {
-
+  ngOnInit(): void {
   }
 
   toSlider(e: IGalleryImage, nombre: "slider" | "banner", index: number, array: number) {

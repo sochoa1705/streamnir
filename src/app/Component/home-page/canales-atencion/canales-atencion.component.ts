@@ -11,8 +11,6 @@ export class CanalesAtencionComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    debugger
-
     // Renombrando valores para SEO - Inicio
     document.getElementsByTagName("title")[0].innerHTML = environment.SEO.careChannels.title;
 

@@ -54,10 +54,7 @@ export class TabVuelosMulticityComponent implements OnInit {
     this.loadVuelosOrigen();
     this.loadVuelosDestino();
 
-    debugger
-
     //this.logicPathVuelos();
-
   }
 
   validateInput(input: string): NgbDate | null {
@@ -170,8 +167,6 @@ export class TabVuelosMulticityComponent implements OnInit {
   }
 
   addTramo(groupIndex: number): void {
-    debugger
-
     if (groupIndex >= this.maxTramo) return;
     const formGroup = this.controls[groupIndex] as FormGroup;
     this.controls.push(
@@ -184,7 +179,6 @@ export class TabVuelosMulticityComponent implements OnInit {
   }
 
   deleteTramo(group: any) {
-    debugger
     this.controls.splice(this.controls.indexOf(group), 1);
   }
 

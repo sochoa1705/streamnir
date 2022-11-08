@@ -77,7 +77,6 @@ export class CalendarComponent implements AfterViewInit {
   }
 
   emitValue() {
-    //debugger
     this.changeDate.emit(new ClassValueCalendar(this.toDate, this.fromDate))
   }
 
@@ -91,8 +90,6 @@ export class CalendarComponent implements AfterViewInit {
   }
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-    debugger
-
     // this.changeDate.emit(value);
     const parsed = this.formatter.parse(input);
     const value = new ClassValueCalendar(this.toDate, this.fromDate);

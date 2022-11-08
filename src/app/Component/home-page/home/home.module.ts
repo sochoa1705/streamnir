@@ -13,10 +13,10 @@ import { CardModule } from 'src/app/shared/components/card/card.module';
 import { TitleModule } from 'src/app/shared/components/title/title.module';
 import { CardInfoModule } from 'src/app/shared/components/card-info/card-info.module';
 import { MailingModule } from 'src/app/shared/components/mailing/mailing.module';
-import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer.module';
 import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { FlightDealsModule } from '../flightdeals/flightdeals.module';
+import { PackagesModule } from '../packages/packages.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -33,7 +33,8 @@ import { FlightDealsModule } from '../flightdeals/flightdeals.module';
     CardInfoModule,
     MaterialModule,
     HttpClientModule,
-    FlightDealsModule
+    FlightDealsModule,
+    PackagesModule
   ],
   exports: [HomeComponent],
   providers: [DestinyService, AsidePresenterService, BusinessUnitService]

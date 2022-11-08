@@ -4,7 +4,6 @@ import { FlightComponent } from './commons/components/flight/flight.component';
 import { DestinosComponent } from './commons/components/destinos/destinos.component';
 import { OffersContinentComponent } from './commons/components/offers-continent/offers-continent.component';
 import { VuelosComponent } from './vuelos.component';
-import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {

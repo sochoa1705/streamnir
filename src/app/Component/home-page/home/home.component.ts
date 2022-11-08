@@ -29,6 +29,8 @@ export class HomeComponent implements OnInit {
 
   loadedGallery = false;
 
+  selectedTab: string
+
   constructor(
     public dataPagePresenterService: DataPagePresenterService,
     public asidePresenterService: AsidePresenterService,
@@ -40,6 +42,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this._activatedRoute.params.subscribe((product) => this.casos(product.tab))
+
     this.listDestiny()
     this.getConfirmacion();
     this.getGallery();
@@ -48,8 +52,35 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('filters');
   }
 
-  getConfirmacion() {
+  casos(tab: any) {
+    debugger
 
+    switch (tab) {
+      case 'paquetes':
+        this.selectedTab = 'paquetes'
+        break;
+      case 'armapaquete':
+        this.selectedTab = 'armapaquete'
+        break;
+      case 'vuelohotel':
+        this.selectedTab = 'vuelohotel'
+        break;
+      case 'hoteles':
+        this.selectedTab = 'hoteles'
+        break;
+      case 'autos':
+        this.selectedTab = 'autos'
+        break;
+      case 'actividades':
+        this.selectedTab = 'actividades'
+        break;
+      default:
+        this.selectedTab = 'home'
+        break;
+    }
+  }
+
+  getConfirmacion() {
     this._activatedRoute.params.pipe(
       filter(params => params.id),
       tap(() => this.initLoad()),
