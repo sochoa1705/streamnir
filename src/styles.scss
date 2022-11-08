@@ -10998,3 +10998,15 @@ app-flightdeals {
         }
     }
 }
+
+.boxVideo {
+    .row {
+        height: 100%;
+        .col-12 {
+            height: 100%;
+            .videoYoutube {
+                height: 100%;
+            }
+        }
+    }
+}

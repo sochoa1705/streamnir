@@ -9184,3 +9184,9 @@ app-flightdeals button {
 
   .mnuViaja .padLeft70 img {
     width: 60% !important; } }
+.boxVideo .row {
+  height: 100%; }
+  .boxVideo .row .col-12 {
+    height: 100%; }
+    .boxVideo .row .col-12 .videoYoutube {
+      height: 100%; }
