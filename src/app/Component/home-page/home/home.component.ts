@@ -53,8 +53,6 @@ export class HomeComponent implements OnInit {
   }
 
   casos(tab: any) {
-    debugger
-
     switch (tab) {
       case 'paquetes':
         this.selectedTab = 'paquetes'
@@ -112,7 +110,6 @@ export class HomeComponent implements OnInit {
       this.loadedGallery = true;
     })
   }
-
 
   aceptConfirm() {
     this.toggleConfirmation();

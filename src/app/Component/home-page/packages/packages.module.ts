@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PackagesComponent } from './packages.component';
+import { FlightDealsModule } from '../flightdeals/flightdeals.module';
+import { CardInfoModule } from 'src/app/shared/components/card-info/card-info.module';
+import { TitleModule } from 'src/app/shared/components/title/title.module';
 
 
 
@@ -9,7 +12,10 @@ import { PackagesComponent } from './packages.component';
     PackagesComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FlightDealsModule,
+    TitleModule,
+    CardInfoModule
   ],
   exports: [PackagesComponent]
 })

@@ -18,8 +18,8 @@ export class MainService {
     {
       id: 1,
       text: "Paquetes",
-      link: "filtro",
-      tab: 'paquetes',
+      link: "paquetes",
+      tab: '',
       icon: '/assets/menu/paquetes.svg'
     },
     {

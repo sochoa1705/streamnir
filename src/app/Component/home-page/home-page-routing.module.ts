@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ConformidadComponent } from './conformidad/conformidad.component';
 import { HomePageComponent } from './home-page.component';
 import { HomeComponent } from './home/home.component';
-import { PaquetesComponent } from './paquetes/paquetes.component';
 import { ResultadosComponent } from './resultados/resultados.component';
 import { AerolineasComponent } from './aerolineas/aerolineas.component';
 import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
@@ -36,10 +35,6 @@ const routes: Routes = [
       {
         path: 'filtro/:tab',
         component: HomeComponent
-      },
-      {
-        path: 'paquetes',
-        component: PaquetesComponent
       },
       {
         path: 'vuelos/resultados',
@@ -80,6 +75,10 @@ const routes: Routes = [
       {
         path: 'vuelos',
         loadChildren: () => import('./vuelos/vuelos.module').then(m => m.VuelosModule)
+      },
+      {
+        path: 'paquetes',
+        loadChildren: () => import('./paquetes/paquetes.module').then(m => m.PaquetesModule)
       },
       {
         path: 'nuestra-empresa',

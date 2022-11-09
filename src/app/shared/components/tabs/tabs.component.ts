@@ -68,18 +68,17 @@ export class TabsComponent implements OnInit {
   RUTA_AUTOS = environment.url_autos;
 
 
-  selectedTab: string
+  selectedTab: string;
 
   constructor(
-    public route: Router,
-    public router: ActivatedRoute,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute,
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
     private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>,
     private destineService: DestinyService,
-    public dollarChangeService: DollarChangeService,
-    private _accountsService: AccountsService
+    public dollarChangeService: DollarChangeService
   ) {
     this.fromDate = calendar.getToday();
     this.fromDate2 = calendar.getToday();
@@ -90,12 +89,25 @@ export class TabsComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm()
-    this.router.params.subscribe((product) => this.casos(product.tab))
+
+    this._activatedRoute.params.subscribe((product) => {
+      const url = this._router.url;
+
+      if (url === '/paquetes' || url === '/vuelos')
+        this.casos(url);
+      else
+        this.casos(product.tab);
+    });
   }
 
   casos(e: any) {
     switch (e) {
+      case 'vuelos':
+      case '/vuelos':
+        this.selectedTab = '0'
+        break;
       case 'paquetes':
+      case '/paquetes':
         this.selectedTab = '1'
         break;
       case 'armapaquete':
@@ -175,7 +187,7 @@ export class TabsComponent implements OnInit {
 
   safeLink(e: any) {
     if (e.tab.textLabel === "seguros") {
-      this.route.navigate(['/seguros'])
+      this._router.navigate(['/seguros'])
     }
   }
 
