@@ -4456,6 +4456,178 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     }
 }
 
+.subTitleHome {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Montserrat';
+}
+
+.boxItemPackages {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex: 1 1 100%;
+    gap: 20px;
+    margin-top: 20px;
+    .boxItem {
+        width: calc(25% - 20px);
+        max-width: calc(25% - 20px);
+        position: relative;
+        border-radius: 6px;
+        transition: all 0.6s;
+        overflow: hidden;
+        img {
+            width: 100%;
+        }
+        .groupCardTour {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0px;
+            right: 0px;
+            overflow: hidden;
+            transition: all 0.6s;
+            background: rgba(0, 0, 0, 0.2);
+            &:hover {
+                .cardTour {
+                    top: 0;
+                    background: rgba(0, 0, 0, 0.6);
+                    .titleCard {
+                        background: none;
+                    }
+                    .descripCard {
+                        display: flex;
+                    }
+                    .btnSearch {
+                        display: flex;
+                    }
+                }
+                .priceCard {
+                    display: none;
+                }
+            }
+            .priceCard {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0px 5px;
+                background: #d8d5d1;
+                position: absolute;
+                right: 0;
+                height: 30px;
+                padding: 0 15px;
+                color: #D40E2D;
+                font-size: 16px;
+                font-weight: 600;
+                font-family: Open Sans;
+            }
+            .cardTour {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0px 5px;
+                flex-direction: column;
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                .titleCard {
+                    text-align: center;
+                    font-size: 22px;
+                    color: #ffffff;
+                    width: 100%;
+                    //background: rgba(0, 0, 0, 0.25);
+                    font-weight: 600;
+                    font-family: Open Sans;
+                    padding-bottom: 10px;
+                    // @include media(mobile) {
+                    //     font-size: 20px;
+                    // }
+                }
+                .descripCard {
+                    display: none;
+                    text-align: center;
+                    font-size: 12px;
+                    color: #ffffff;
+                    margin-bottom: 10px;
+                }
+                .btnSearch {
+                    display: none;
+                    align-items: center;
+                    border-radius: 15px;
+                    color: #ffffff;
+                    background: #D40E2D;
+                    height: 30px;
+                    padding: 0 18px;
+                    font-size: 14px;
+                    font-family: Open Sans;
+                    cursor: pointer;
+                }
+            }
+            // @include media(mobile) {
+            //     right: 0;
+            //     left: 0;
+            // }
+        }
+        // @include media(mobile) {
+        //     max-height: 260px;
+        // }
+    }
+    // @include media(mobile) {
+    //     @include flexDirection(column);
+    //     padding: 0px !important;
+    //     margin: 10px 20px 0 20px;
+    // }
+}
+
+.boxMailing {
+    margin: 40px 0;
+}
+
+.boxCanalPackage {
+    display: flex;
+    flex: 1 1 100%;
+    justify-content: space-between;
+    margin: 40px 0 20px 0;
+    .boxCanal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1 1 15%;
+        flex-direction: column;
+        .iconCanal {
+            display: flex;
+            height: 48px;
+        }
+        .titleCanal {
+            padding: 20px 0;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: Open Sans;
+        }
+        .boxAction {
+            display: flex;
+            a {
+                height: 44px;
+                border-radius: 22px;
+                width: 150px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: "Montserrat";
+                background-color: #df0c30;
+                color: #ffffff;
+                font-size: 14px;
+                font-weight: 600;
+                transition: all 0.3s;
+                &:hover {
+                    background: #b50a27;
+                }
+            }
+        }
+    }
+}
+
 .comprarHideTitle {
     .textTitle {
         display: none;
