@@ -78,7 +78,7 @@ button {
     background: #b50a27; }
   @media (max-width: 768px) {
     button {
-      font-size: 12px; } }
+      font-size: 14px; } }
   button.plus {
     font-family: "Montserrat";
     letter-spacing: 0.5px;
@@ -1595,6 +1595,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 
 .filtroBox {
   overflow: hidden; }
+  @media (max-width: 640px) {
+    .filtroBox .container .portletFiltro .rowFiltro .columnFiltro:last-child {
+      margin-top: 15px; } }
+  @media (max-width: 640px) {
+    .filtroBox .container {
+      padding: 0; } }
 
 .postCard {
   overflow: hidden !important;
@@ -4018,6 +4024,12 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     .onlyMovTablet {
       display: block !important; } }
 
+.onlyMovil {
+  display: none !important; }
+  @media (max-width: 640px) {
+    .onlyMovil {
+      display: block !important; } }
+
 @media (max-width: 640px) {
   #modalVerOpciones .boxPlanes {
     gap: 15px; }
@@ -5774,7 +5786,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       padding: 15px; } }
   @media (max-width: 640px) {
     .newBoxTab {
-      padding: 15px; } }
+      padding: 0; } }
 
 .boxAero .logoAero {
   justify-content: center;
@@ -6717,7 +6729,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     padding-right: 10px; }
   .boxTab .rowBoxTab .customers {
     width: 90px;
-    padding-top: 18px; } }
+    padding-top: 15px; } }
   @media (max-width: 640px) and (max-width: 640px) {
     .boxTab .rowBoxTab .customers {
       width: auto; } }
@@ -6730,6 +6742,16 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     display: flex; }
     .boxTab .rowBoxTab .ignore-template .colBoxtab {
       width: 50%; } }
+@media (max-width: 640px) and (max-width: 640px) {
+  .boxTab .rowBoxTab {
+    flex-wrap: wrap;
+    width: 100%; } }
+@media (max-width: 640px) and (max-width: 640px) {
+  .boxTab {
+    display: flex;
+    flex: 1 1 100%;
+    flex-wrap: wrap; } }
+
 .portadaAero {
   width: 100%;
   position: relative;
@@ -7111,7 +7133,7 @@ button.customers {
   padding-top: 13px; }
   @media (max-width: 768px) {
     button.customers {
-      font-size: 10px; } }
+      font-size: 12px; } }
   button.customers:before {
     content: url(./assets/arrow.svg);
     right: 0;
@@ -9184,6 +9206,64 @@ app-flightdeals button {
 
   .mnuViaja .padLeft70 img {
     width: 60% !important; } }
+.nexBoxTabs {
+  display: block;
+  transition: opacity .2s;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  width: 100%;
+  padding: 10px 0;
+  margin: 20px 0 0 0;
+  scroll-behavior: smooth;
+  position: relative;
+  scrollbar-width: none; }
+  .nexBoxTabs .boxTabList {
+    display: flex;
+    transition: all .3s ease-out;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 10px; }
+    .nexBoxTabs .boxTabList .tabItem {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      width: 100px;
+      min-width: 100px;
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #e4e5e7;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+      padding: 5px; }
+      .nexBoxTabs .boxTabList .tabItem.active {
+        color: #DF0C30;
+        border: 1px solid #DF0C30; }
+        .nexBoxTabs .boxTabList .tabItem.active svg {
+          fill: #df0c30; }
+          .nexBoxTabs .boxTabList .tabItem.active svg path {
+            fill: #df0c30; }
+      .nexBoxTabs .boxTabList .tabItem span {
+        font-size: 12px; }
+
+.contentTabs {
+  display: none;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  background: #ffffff;
+  box-shadow: 0px 1px 8px rgba(122, 88, 88, 0.05);
+  padding: 15px;
+  border-radius: 7px;
+  margin-bottom: 15px; }
+  .contentTabs.active {
+    display: flex; }
+  .contentTabs .optionTab {
+    display: none; }
+    .contentTabs .optionTab.active {
+      display: flex;
+      flex: 1 1 100%; }
+
 .boxVideo .row {
   height: 100%; }
   .boxVideo .row .col-12 {

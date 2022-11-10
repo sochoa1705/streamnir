@@ -28,7 +28,8 @@ export interface State {
 export class TabsComponent implements OnInit {
   @Input() show!: boolean
   @Input() options: any
-
+  
+  
   form!: FormGroup;
   form2!: FormGroup;
   form3!: FormGroup;
@@ -37,6 +38,8 @@ export class TabsComponent implements OnInit {
   dpFromDate: any;
   dpToDate: any;
 
+  tabResult: any = 'tab1';
+  
   dpFromDate2: any;
   dpToDate2: any;
 
