@@ -17,6 +17,7 @@ import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { FlightDealsModule } from '../flightdeals/flightdeals.module';
 import { PackagesModule } from '../packages/packages.module';
+import { BuildYourTripModule } from '../build-your-trip/build-your-trip.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -34,7 +35,8 @@ import { PackagesModule } from '../packages/packages.module';
     MaterialModule,
     HttpClientModule,
     FlightDealsModule,
-    PackagesModule
+    PackagesModule,
+    BuildYourTripModule
   ],
   exports: [HomeComponent],
   providers: [DestinyService, AsidePresenterService, BusinessUnitService]

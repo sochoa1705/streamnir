@@ -22,7 +22,6 @@ export class PaquetesComponent implements OnInit {
   }
 
   listDestiny() {
-
     let payload = new NMRequest();
     this.coreService.getDestiny(payload).pipe(take(1)).subscribe({
       next: (response) => {

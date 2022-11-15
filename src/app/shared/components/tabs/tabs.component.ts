@@ -28,8 +28,8 @@ export interface State {
 export class TabsComponent implements OnInit {
   @Input() show!: boolean
   @Input() options: any
-  
-  
+
+
   form!: FormGroup;
   form2!: FormGroup;
   form3!: FormGroup;
@@ -39,7 +39,7 @@ export class TabsComponent implements OnInit {
   dpToDate: any;
 
   tabResult: any = 'tab1';
-  
+
   dpFromDate2: any;
   dpToDate2: any;
 
@@ -96,7 +96,13 @@ export class TabsComponent implements OnInit {
     this._activatedRoute.params.subscribe((product) => {
       const url = this._router.url;
 
-      if (url === '/paquetes' || url === '/vuelos')
+      if (url === '/vuelos' ||
+        url === '/paquetes' ||
+        url === '/armapaquete' ||
+        url === '/vuelohotel' ||
+        url === '/hoteles' ||
+        url === '/autos' ||
+        url === '/actividades')
         this.casos(url);
       else
         this.casos(product.tab);
@@ -114,18 +120,23 @@ export class TabsComponent implements OnInit {
         this.selectedTab = '1'
         break;
       case 'armapaquete':
+      case '/armapaquete':
         this.selectedTab = '2'
         break;
       case 'vuelohotel':
+      case '/vuelohotel':
         this.selectedTab = '3'
         break;
       case 'hoteles':
+      case '/hoteles':
         this.selectedTab = '4'
         break;
       case 'autos':
+      case '/autos':
         this.selectedTab = '5'
         break;
       case 'actividades':
+      case '/actividades':
         this.selectedTab = '6'
         break;
       default:

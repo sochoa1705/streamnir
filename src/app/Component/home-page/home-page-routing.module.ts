@@ -69,16 +69,36 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'seguros',
-        loadChildren: () => import('./seguros/seguros.module').then(m => m.SegurosModule)
-      },
-      {
         path: 'vuelos',
         loadChildren: () => import('./vuelos/vuelos.module').then(m => m.VuelosModule)
       },
       {
         path: 'paquetes',
         loadChildren: () => import('./paquetes/paquetes.module').then(m => m.PaquetesModule)
+      },
+      {
+        path: 'armapaquete',
+        loadChildren: () => import('./build-your-trip/build-your-trip.module').then(m => m.BuildYourTripModule)
+      },
+      {
+        path: 'vuelohotel',
+        loadChildren: () => import('./flights-plus-hotel/flights-plus-hotel.module').then(m => m.FlightsPlusHotelModule)
+      },
+      {
+        path: 'hoteles',
+        loadChildren: () => import('./hotels/hotels.module').then(m => m.HotelsModule)
+      },
+      {
+        path: 'autos',
+        loadChildren: () => import('./cars/cars.module').then(m => m.CarsModule)
+      },
+      {
+        path: 'actividades',
+        loadChildren: () => import('./activities/activities.module').then(m => m.ActivitiesModule)
+      },
+      {
+        path: 'seguros',
+        loadChildren: () => import('./seguros/seguros.module').then(m => m.SegurosModule)
       },
       {
         path: 'nuestra-empresa',

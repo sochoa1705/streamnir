@@ -1,276 +1,282 @@
 <section class="container-fluid">
-    <aside class="row mt-5">
-        <div class="col-md-6 col-12">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <ng-container *ngFor="let b of slider; let indice = index; let first = first">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="indice" [ngClass]="{'active':first}" aria-current="true" aria-label="Slide 1"></button>
-                    </ng-container>
-                </div>
+  <aside class="row mt-5">
+    <div class="col-md-6 col-12">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <ng-container *ngFor="let b of slider; let indice = index; let first = first">
+            <button type="button" data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="indice"
+              [ngClass]="{'active':first}" aria-current="true" aria-label="Slide 1"></button>
+          </ng-container>
+        </div>
 
-                <div class="carousel-inner">
-                    <ng-container *ngFor="let image of slider; let first = first; let i = index">
-                        <div class="aside__content carousel-item" [ngClass]="{'active': first}">
-                            <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image,'slider',i,slider.length)" [src]="image.PathImage" class="d-block w-100" [alt]="image.NameImage">
-                        </div>
-                    </ng-container>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <div class="carousel-inner">
+          <ng-container *ngFor="let image of slider; let first = first; let i = index">
+            <div class="aside__content carousel-item" [ngClass]="{'active': first}">
+              <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image,'slider',i,slider.length)"
+                [src]="image.PathImage" class="d-block w-100" [alt]="image.NameImage">
+            </div>
+          </ng-container>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev">
           <span class="carousel-prev-icon" aria-hidden="true">
             <img src="./assets/icon-left.svg" alt="">
           </span>
           <span class="visually-hidden">Previous</span>
         </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next">
           <span class="carousel-next-icon" aria-hidden="true">
             <img src="./assets/icon-right.svg" alt="">
           </span>
           <span class="visually-hidden">Next</span>
         </button>
-            </div>
-        </div>
-        <div class="col-md-6 col-12 boxVideo">
-            <div class="row">
-                <div class="col-12">
-                    <div class="videoYoutube">
-                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/xGp-LguvTQk" title="NmMViajes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                    <!-- <ng-container *ngFor="let image of images; let i = index">
+      </div>
+    </div>
+    <div class="col-md-6 col-12 boxVideo">
+      <div class="row">
+        <div class="col-12">
+          <div class="videoYoutube">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/xGp-LguvTQk" title="NmMViajes"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+          <!-- <ng-container *ngFor="let image of images; let i = index">
             <div class="aside__content_2">
               <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image, 'banner', i, images.length)"
                 [src]="image.PathImage" [alt]="image.NameImage">
             </div>
           </ng-container> -->
-                </div>
-            </div>
         </div>
-    </aside>
+      </div>
+    </div>
+  </aside>
 </section>
-
 
 <!-- PAQUETES -->
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="titleHome packageTitle">
-                <strong>Paquetes para toda ocasión</strong>
-            </h2>
-            <h3 class="subTitleHome">Vuelve el viaje de tus sueños realidad</h3>
-        </div>
+  <div class="row">
+    <div class="col-12">
+      <h2 class="titleHome packageTitle">
+        <strong>Paquetes para toda ocasión</strong>
+      </h2>
+      <h3 class="subTitleHome">Vuelve el viaje de tus sueños realidad</h3>
     </div>
+  </div>
 
-    <div class="boxItemPackages">
-        <div class="boxItem">
-            <div class="groupCardTour">
-                <div class="priceCard">desde $595</div>
-                <div class="cardTour">
-                    <div class="titleCard">CARIBE</div>
-                    <div class="descripCard">description</div>
-                    <div class="btnSearch">Click aqui</div>
-                </div>
-            </div>
-            <img src="https://www.nmviajes.com/Images/vuelos/cancun.webp" alt="...">
+  <div class="boxItemPackages">
+    <div class="boxItem">
+      <div class="groupCardTour">
+        <div class="priceCard">desde $595</div>
+        <div class="cardTour">
+          <div class="titleCard">CARIBE</div>
+          <div class="descripCard">description</div>
+          <div class="btnSearch">Click aqui</div>
         </div>
-        <div class="boxItem">
-            <div class="groupCardTour">
-                <div class="priceCard">desde $595</div>
-                <div class="cardTour">
-                    <div class="titleCard">ECONOVIAJES</div>
-                    <div class="descripCard">description</div>
-                    <div class="btnSearch">Click aqui</div>
-                </div>
-            </div>
-            <img src="https://www.nmviajes.com/Images/vuelos/mexico.webp" alt="...">
-        </div>
-        <div class="boxItem">
-            <div class="groupCardTour">
-                <div class="priceCard">desde $595</div>
-                <div class="cardTour">
-                    <div class="titleCard">FIN DE SEMANA</div>
-                    <div class="descripCard">description</div>
-                    <div class="btnSearch">Click aqui</div>
-                </div>
-            </div>
-            <img src="https://www.nmviajes.com/Images/vuelos/bogota.webp" alt="...">
-        </div>
-        <div class="boxItem">
-            <div class="groupCardTour">
-                <div class="priceCard">desde $595</div>
-                <div class="cardTour">
-                    <div class="titleCard">NACIONAL</div>
-                    <div class="descripCard">description</div>
-                    <div class="btnSearch">Click aqui</div>
-                </div>
-            </div>
-            <img src="https://www.nmviajes.com/Images/vuelos/barcelona.webp" alt="...">
-        </div>
-        <div class="boxItem">
-            <div class="groupCardTour">
-                <div class="priceCard">desde $595</div>
-                <div class="cardTour">
-                    <div class="titleCard">EUROPA</div>
-                    <div class="descripCard">description</div>
-                    <div class="btnSearch">Click aqui</div>
-                </div>
-            </div>
-            <img src="https://www.nmviajes.com/Images/vuelos/madrid.webp" alt="...">
-        </div>
-        <div class="boxItem">
-            <div class="groupCardTour">
-                <div class="priceCard">desde $595</div>
-                <div class="cardTour">
-                    <div class="titleCard">SUDAMERICA</div>
-                    <div class="descripCard">description</div>
-                    <div class="btnSearch">Click aqui</div>
-                </div>
-            </div>
-            <img src="https://www.nmviajes.com/Images/vuelos/miami.webp" alt="...">
-        </div>
-        <div class="boxItem">
-            <div class="groupCardTour">
-                <div class="priceCard">desde $595</div>
-                <div class="cardTour">
-                    <div class="titleCard">VIAJA 2023</div>
-                    <div class="descripCard">description</div>
-                    <div class="btnSearch">Click aqui</div>
-                </div>
-            </div>
-            <img src="https://www.nmviajes.com/Images/vuelos/buenos-aires.webp" alt="...">
-        </div>
-        <div class="boxItem">
-            <div class="groupCardTour">
-                <div class="priceCard">desde $595</div>
-                <div class="cardTour">
-                    <div class="titleCard">PRIMAVERA</div>
-                    <div class="descripCard">description</div>
-                    <div class="btnSearch">Click aqui</div>
-                </div>
-            </div>
-            <img src="https://www.nmviajes.com/Images/vuelos/caracas.webp" alt="...">
-        </div>
-        <div class="boxItem">
-            <div class="groupCardTour">
-                <div class="priceCard">desde $595</div>
-                <div class="cardTour">
-                    <div class="titleCard">ROMANCE</div>
-                    <div class="descripCard">description</div>
-                    <div class="btnSearch">Click aqui</div>
-                </div>
-            </div>
-            <img src="https://www.nmviajes.com/Images/vuelos/cucuta.webp" alt="...">
-        </div>
-        <div class="boxItem">
-            <div class="groupCardTour">
-                <div class="priceCard">desde $595</div>
-                <div class="cardTour">
-                    <div class="titleCard">FAMILIA</div>
-                    <div class="descripCard">description</div>
-                    <div class="btnSearch">Click aqui</div>
-                </div>
-            </div>
-            <img src="https://www.nmviajes.com/Images/vuelos/san-francisco.jpg" alt="...">
-        </div>
-        <div class="boxItem">
-            <div class="groupCardTour">
-                <div class="priceCard">desde $595</div>
-                <div class="cardTour">
-                    <div class="titleCard">USA</div>
-                    <div class="descripCard">description</div>
-                    <div class="btnSearch">Click aqui</div>
-                </div>
-            </div>
-            <img src="https://www.nmviajes.com/Images/vuelos/cusco.webp" alt="...">
-        </div>
-        <div class="boxItem">
-            <div class="groupCardTour">
-                <div class="priceCard">desde $595</div>
-                <div class="cardTour">
-                    <div class="titleCard">AÑO NUEVO</div>
-                    <div class="descripCard">description</div>
-                    <div class="btnSearch">Click aqui</div>
-                </div>
-            </div>
-            <img src="https://www.nmviajes.com/Images/vuelos/arequipa.webp" alt="...">
-        </div>
+      </div>
+      <img src="https://www.nmviajes.com/Images/vuelos/cancun.webp" alt="...">
     </div>
+    <div class="boxItem">
+      <div class="groupCardTour">
+        <div class="priceCard">desde $595</div>
+        <div class="cardTour">
+          <div class="titleCard">ECONOVIAJES</div>
+          <div class="descripCard">description</div>
+          <div class="btnSearch">Click aqui</div>
+        </div>
+      </div>
+      <img src="https://www.nmviajes.com/Images/vuelos/mexico.webp" alt="...">
+    </div>
+    <div class="boxItem">
+      <div class="groupCardTour">
+        <div class="priceCard">desde $595</div>
+        <div class="cardTour">
+          <div class="titleCard">FIN DE SEMANA</div>
+          <div class="descripCard">description</div>
+          <div class="btnSearch">Click aqui</div>
+        </div>
+      </div>
+      <img src="https://www.nmviajes.com/Images/vuelos/bogota.webp" alt="...">
+    </div>
+    <div class="boxItem">
+      <div class="groupCardTour">
+        <div class="priceCard">desde $595</div>
+        <div class="cardTour">
+          <div class="titleCard">NACIONAL</div>
+          <div class="descripCard">description</div>
+          <div class="btnSearch">Click aqui</div>
+        </div>
+      </div>
+      <img src="https://www.nmviajes.com/Images/vuelos/barcelona.webp" alt="...">
+    </div>
+    <div class="boxItem">
+      <div class="groupCardTour">
+        <div class="priceCard">desde $595</div>
+        <div class="cardTour">
+          <div class="titleCard">EUROPA</div>
+          <div class="descripCard">description</div>
+          <div class="btnSearch">Click aqui</div>
+        </div>
+      </div>
+      <img src="https://www.nmviajes.com/Images/vuelos/madrid.webp" alt="...">
+    </div>
+    <div class="boxItem">
+      <div class="groupCardTour">
+        <div class="priceCard">desde $595</div>
+        <div class="cardTour">
+          <div class="titleCard">SUDAMERICA</div>
+          <div class="descripCard">description</div>
+          <div class="btnSearch">Click aqui</div>
+        </div>
+      </div>
+      <img src="https://www.nmviajes.com/Images/vuelos/miami.webp" alt="...">
+    </div>
+    <div class="boxItem">
+      <div class="groupCardTour">
+        <div class="priceCard">desde $595</div>
+        <div class="cardTour">
+          <div class="titleCard">VIAJA 2023</div>
+          <div class="descripCard">description</div>
+          <div class="btnSearch">Click aqui</div>
+        </div>
+      </div>
+      <img src="https://www.nmviajes.com/Images/vuelos/buenos-aires.webp" alt="...">
+    </div>
+    <div class="boxItem">
+      <div class="groupCardTour">
+        <div class="priceCard">desde $595</div>
+        <div class="cardTour">
+          <div class="titleCard">PRIMAVERA</div>
+          <div class="descripCard">description</div>
+          <div class="btnSearch">Click aqui</div>
+        </div>
+      </div>
+      <img src="https://www.nmviajes.com/Images/vuelos/caracas.webp" alt="...">
+    </div>
+    <div class="boxItem">
+      <div class="groupCardTour">
+        <div class="priceCard">desde $595</div>
+        <div class="cardTour">
+          <div class="titleCard">ROMANCE</div>
+          <div class="descripCard">description</div>
+          <div class="btnSearch">Click aqui</div>
+        </div>
+      </div>
+      <img src="https://www.nmviajes.com/Images/vuelos/cucuta.webp" alt="...">
+    </div>
+    <div class="boxItem">
+      <div class="groupCardTour">
+        <div class="priceCard">desde $595</div>
+        <div class="cardTour">
+          <div class="titleCard">FAMILIA</div>
+          <div class="descripCard">description</div>
+          <div class="btnSearch">Click aqui</div>
+        </div>
+      </div>
+      <img src="https://www.nmviajes.com/Images/vuelos/san-francisco.jpg" alt="...">
+    </div>
+    <div class="boxItem">
+      <div class="groupCardTour">
+        <div class="priceCard">desde $595</div>
+        <div class="cardTour">
+          <div class="titleCard">USA</div>
+          <div class="descripCard">description</div>
+          <div class="btnSearch">Click aqui</div>
+        </div>
+      </div>
+      <img src="https://www.nmviajes.com/Images/vuelos/cusco.webp" alt="...">
+    </div>
+    <div class="boxItem">
+      <div class="groupCardTour">
+        <div class="priceCard">desde $595</div>
+        <div class="cardTour">
+          <div class="titleCard">AÑO NUEVO</div>
+          <div class="descripCard">description</div>
+          <div class="btnSearch">Click aqui</div>
+        </div>
+      </div>
+      <img src="https://www.nmviajes.com/Images/vuelos/arequipa.webp" alt="...">
+    </div>
+  </div>
 </div>
 <!-- END PAQUETES -->
 
 <!-- MAILING -->
 <div class="boxMailing">
-    <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
-        <app-mailing *ngIf="section.section === 'mailing'" [title]="section.title" [span]="section.span"></app-mailing>
-    </ng-container>
+  <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+    <app-mailing *ngIf="section.section === 'mailing'" [title]="section.title" [span]="section.span"></app-mailing>
+  </ng-container>
 </div>
 <!-- END MAILING -->
 
 <!-- CANALES DE ATENCION -->
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="titleHome packageTitle">
-                <strong>Canales de atención</strong>
-            </h2>
-            <h3 class="subTitleHome">Planifica tu viaje y hazlo realidad a través de cualquiera de nuestros canales</h3>
-        </div>
+  <div class="row">
+    <div class="col-12">
+      <h2 class="titleHome packageTitle">
+        <strong>Canales de atención</strong>
+      </h2>
+      <h3 class="subTitleHome">Planifica tu viaje y hazlo realidad a través de cualquiera de nuestros canales</h3>
     </div>
+  </div>
 
-    <div class="boxCanalPackage">
-        <div class="boxCanal">
-            <div class="iconCanal">
-                <img src="./assets/svg/AsesoriaVirtual.svg" alt="">
-            </div>
-            <div class="titleCanal">
-                Asesoría Virtual
-            </div>
-            <div class="boxAction">
-                <a routerLink="/agenda-tu-cita">Agenda tu cita</a>
-            </div>
-        </div>
-        <div class="boxCanal">
-            <div class="iconCanal">
-                <img src="./assets/svg/PortalDeAyuda.svg" alt="">
-            </div>
-            <div class="titleCanal">
-                Portal de Ayuda
-            </div>
-            <div class="boxAction">
-                <a href="https://ayuda.nmviajes.com/support/home">Recibe ayuda</a>
-            </div>
-        </div>
-        <div class="boxCanal">
-            <div class="iconCanal">
-                <img src="./assets/svg/WhatsApp.svg" alt="">
-            </div>
-            <div class="titleCanal">
-                WhatsApp
-            </div>
-            <div class="boxAction">
-                <a href="http://wa.link/1bwr6r">Escríbenos</a>
-            </div>
-        </div>
-        <div class="boxCanal">
-            <div class="iconCanal">
-                <img src="./assets/svg/ContactCenter.svg" alt="">
-            </div>
-            <div class="titleCanal">
-                Central Telefónica
-            </div>
-            <div class="boxAction">
-                <a href="tel:+516194200">619-4200</a>
-            </div>
-        </div>
-        <div class="boxCanal">
-            <div class="iconCanal">
-                <img src="./assets/svg/Tiendas.svg" alt="">
-            </div>
-            <div class="titleCanal">
-                Tiendas
-            </div>
-            <div class="boxAction">
-                <a href="https://www.nmviajes.com/nuestras-agencias">Visítanos</a>
-            </div>
-        </div>
+  <div class="boxCanalPackage">
+    <div class="boxCanal">
+      <div class="iconCanal">
+        <img src="./assets/svg/AsesoriaVirtual.svg" alt="">
+      </div>
+      <div class="titleCanal">
+        Asesoría Virtual
+      </div>
+      <div class="boxAction">
+        <a routerLink="/agenda-tu-cita">Agenda tu cita</a>
+      </div>
     </div>
+    <div class="boxCanal">
+      <div class="iconCanal">
+        <img src="./assets/svg/PortalDeAyuda.svg" alt="">
+      </div>
+      <div class="titleCanal">
+        Portal de Ayuda
+      </div>
+      <div class="boxAction">
+        <a href="https://ayuda.nmviajes.com/support/home">Recibe ayuda</a>
+      </div>
+    </div>
+    <div class="boxCanal">
+      <div class="iconCanal">
+        <img src="./assets/svg/WhatsApp.svg" alt="">
+      </div>
+      <div class="titleCanal">
+        WhatsApp
+      </div>
+      <div class="boxAction">
+        <a href="http://wa.link/1bwr6r">Escríbenos</a>
+      </div>
+    </div>
+    <div class="boxCanal">
+      <div class="iconCanal">
+        <img src="./assets/svg/ContactCenter.svg" alt="">
+      </div>
+      <div class="titleCanal">
+        Central Telefónica
+      </div>
+      <div class="boxAction">
+        <a href="tel:+516194200">619-4200</a>
+      </div>
+    </div>
+    <div class="boxCanal">
+      <div class="iconCanal">
+        <img src="./assets/svg/Tiendas.svg" alt="">
+      </div>
+      <div class="titleCanal">
+        Tiendas
+      </div>
+      <div class="boxAction">
+        <a href="https://www.nmviajes.com/nuestras-agencias">Visítanos</a>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- END CANALES DE ATENCION -->

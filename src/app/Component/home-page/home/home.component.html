@@ -4,18 +4,18 @@
 
 
   <ng-container [ngSwitch]="selectedTab">
-
     <ng-container *ngSwitchCase="'home'">
       <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
         [banners_corps]="bannersCorporativos" [selectedTab]="selectedTab"></app-aside>
     </ng-container>
 
     <app-packages [slider]="sliderDestacados" *ngSwitchCase="'paquetes'"></app-packages>
+    <app-build-your-trip [slider]="sliderDestacados" *ngSwitchCase="'armapaquete'"></app-build-your-trip>
 
-    <ng-container *ngSwitchCase="'armapaquete'">
+    <!-- <ng-container *ngSwitchCase="'armapaquete'">
       <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
         [banners_corps]="bannersCorporativos" [selectedTab]="selectedTab"></app-aside>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container *ngSwitchCase="'vuelohotel'">
       <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
@@ -36,7 +36,6 @@
       <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
         [banners_corps]="bannersCorporativos" [selectedTab]="selectedTab"></app-aside>
     </ng-container>
-
   </ng-container>
 
 
