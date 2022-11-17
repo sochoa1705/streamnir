@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { RqAirlineDeleteCeRequest1 } from '../models/rq-airline-delete-ce-request-1';
-import { RqAirlineFullGetCeRequest1 } from '../models/rq-airline-full-get-ce-request-1';
+import { RqAirlineImgDeleteCeRequest1 } from '../models/rq-airline-img-delete-ce-request-1';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +40,9 @@ export class AirlineService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, AirlineService.V1ApiAirlineGetPath, 'get');
     if (params) {
@@ -53,7 +55,8 @@ export class AirlineService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -74,7 +77,9 @@ export class AirlineService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiAirlineGet$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -90,20 +95,46 @@ export class AirlineService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `v1ApiAirlinePut()` instead.
    *
-   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
   v1ApiAirlinePut$Response(params?: {
-    body?: RqAirlineFullGetCeRequest1
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+    body?: {
+      'Parameter.IataCode'?: string;
+      'Parameter.Name'?: string;
+      'Parameter.Information'?: string;
+      'Parameter.SmallLogo'?: Blob;
+      'Parameter.Logo'?: Blob;
+      'Parameter.BackgroundUrl'?: Blob;
+      'Parameter.Status'?: boolean;
+      'Parameter.ConceptHistory'?: string;
+      'Parameter.ConceptDestination'?: string;
+      'Parameter.ConceptFleet'?: string;
+      'Parameter.ConceptBaggage'?: string;
+      'Parameter.ConceptMeal'?: string;
+      'Parameter.ConceptCheckIn'?: string;
+      'Parameter.DestinationDescription'?: string;
+      'Parameter.DestinationGalleries'?: Array<Blob>;
+      'Parameter.DestinationTooltips'?: Array<string>;
+      'Parameter.Galleries'?: Array<Blob>;
+      'Parameter.GalleryTooltips'?: Array<string>;
+      'TrackingCode': string;
+      'MuteExceptions': boolean;
+      'Caller.Company': string;
+      'Caller.Application': string;
+    }
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, AirlineService.V1ApiAirlinePutPath, 'put');
     if (params) {
-      rb.body(params.body, 'application/*+json');
+      rb.body(params.body, 'multipart/form-data');
     }
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -116,11 +147,36 @@ export class AirlineService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `v1ApiAirlinePut$Response()` instead.
    *
-   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
   v1ApiAirlinePut(params?: {
-    body?: RqAirlineFullGetCeRequest1
-  }): Observable<void> {
+    context?: HttpContext
+    body?: {
+      'Parameter.IataCode'?: string;
+      'Parameter.Name'?: string;
+      'Parameter.Information'?: string;
+      'Parameter.SmallLogo'?: Blob;
+      'Parameter.Logo'?: Blob;
+      'Parameter.BackgroundUrl'?: Blob;
+      'Parameter.Status'?: boolean;
+      'Parameter.ConceptHistory'?: string;
+      'Parameter.ConceptDestination'?: string;
+      'Parameter.ConceptFleet'?: string;
+      'Parameter.ConceptBaggage'?: string;
+      'Parameter.ConceptMeal'?: string;
+      'Parameter.ConceptCheckIn'?: string;
+      'Parameter.DestinationDescription'?: string;
+      'Parameter.DestinationGalleries'?: Array<Blob>;
+      'Parameter.DestinationTooltips'?: Array<string>;
+      'Parameter.Galleries'?: Array<Blob>;
+      'Parameter.GalleryTooltips'?: Array<string>;
+      'TrackingCode': string;
+      'MuteExceptions': boolean;
+      'Caller.Company': string;
+      'Caller.Application': string;
+    }
+  }
+  ): Observable<void> {
 
     return this.v1ApiAirlinePut$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -136,20 +192,46 @@ export class AirlineService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `v1ApiAirlinePost()` instead.
    *
-   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
   v1ApiAirlinePost$Response(params?: {
-    body?: RqAirlineFullGetCeRequest1
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+    body?: {
+      'Parameter.IataCode'?: string;
+      'Parameter.Name'?: string;
+      'Parameter.Information'?: string;
+      'Parameter.SmallLogo'?: Blob;
+      'Parameter.Logo'?: Blob;
+      'Parameter.BackgroundUrl'?: Blob;
+      'Parameter.Status'?: boolean;
+      'Parameter.ConceptHistory'?: string;
+      'Parameter.ConceptDestination'?: string;
+      'Parameter.ConceptFleet'?: string;
+      'Parameter.ConceptBaggage'?: string;
+      'Parameter.ConceptMeal'?: string;
+      'Parameter.ConceptCheckIn'?: string;
+      'Parameter.DestinationDescription'?: string;
+      'Parameter.DestinationGalleries'?: Array<Blob>;
+      'Parameter.DestinationTooltips'?: Array<string>;
+      'Parameter.Galleries'?: Array<Blob>;
+      'Parameter.GalleryTooltips'?: Array<string>;
+      'TrackingCode': string;
+      'MuteExceptions': boolean;
+      'Caller.Company': string;
+      'Caller.Application': string;
+    }
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, AirlineService.V1ApiAirlinePostPath, 'post');
     if (params) {
-      rb.body(params.body, 'application/*+json');
+      rb.body(params.body, 'multipart/form-data');
     }
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -162,11 +244,36 @@ export class AirlineService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `v1ApiAirlinePost$Response()` instead.
    *
-   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
   v1ApiAirlinePost(params?: {
-    body?: RqAirlineFullGetCeRequest1
-  }): Observable<void> {
+    context?: HttpContext
+    body?: {
+      'Parameter.IataCode'?: string;
+      'Parameter.Name'?: string;
+      'Parameter.Information'?: string;
+      'Parameter.SmallLogo'?: Blob;
+      'Parameter.Logo'?: Blob;
+      'Parameter.BackgroundUrl'?: Blob;
+      'Parameter.Status'?: boolean;
+      'Parameter.ConceptHistory'?: string;
+      'Parameter.ConceptDestination'?: string;
+      'Parameter.ConceptFleet'?: string;
+      'Parameter.ConceptBaggage'?: string;
+      'Parameter.ConceptMeal'?: string;
+      'Parameter.ConceptCheckIn'?: string;
+      'Parameter.DestinationDescription'?: string;
+      'Parameter.DestinationGalleries'?: Array<Blob>;
+      'Parameter.DestinationTooltips'?: Array<string>;
+      'Parameter.Galleries'?: Array<Blob>;
+      'Parameter.GalleryTooltips'?: Array<string>;
+      'TrackingCode': string;
+      'MuteExceptions': boolean;
+      'Caller.Company': string;
+      'Caller.Application': string;
+    }
+  }
+  ): Observable<void> {
 
     return this.v1ApiAirlinePost$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -185,8 +292,10 @@ export class AirlineService extends BaseService {
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   v1ApiAirlineDelete$Response(params?: {
+    context?: HttpContext
     body?: RqAirlineDeleteCeRequest1
-  }): Observable<StrictHttpResponse<void>> {
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, AirlineService.V1ApiAirlineDeletePath, 'delete');
     if (params) {
@@ -195,7 +304,8 @@ export class AirlineService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -211,8 +321,10 @@ export class AirlineService extends BaseService {
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   v1ApiAirlineDelete(params?: {
+    context?: HttpContext
     body?: RqAirlineDeleteCeRequest1
-  }): Observable<void> {
+  }
+  ): Observable<void> {
 
     return this.v1ApiAirlineDelete$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -236,7 +348,9 @@ export class AirlineService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, AirlineService.V1ApiAirlineIataCodeGetPath, 'get');
     if (params) {
@@ -249,7 +363,8 @@ export class AirlineService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -270,9 +385,62 @@ export class AirlineService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiAirlineIataCodeGet$Response(params).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
+    );
+  }
+
+  /**
+   * Path part for operation v1ApiAirlineImageDelete
+   */
+  static readonly V1ApiAirlineImageDeletePath = '/Airline/Image';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `v1ApiAirlineImageDelete()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  v1ApiAirlineImageDelete$Response(params?: {
+    context?: HttpContext
+    body?: RqAirlineImgDeleteCeRequest1
+  }
+  ): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, AirlineService.V1ApiAirlineImageDeletePath, 'delete');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `v1ApiAirlineImageDelete$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  v1ApiAirlineImageDelete(params?: {
+    context?: HttpContext
+    body?: RqAirlineImgDeleteCeRequest1
+  }
+  ): Observable<void> {
+
+    return this.v1ApiAirlineImageDelete$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

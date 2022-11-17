@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { RqDestinationGetByIdCeRequest1 } from '../models/rq-destination-get-by-id-ce-request-1';
+import { RqDestinationImgDeleteCeRequest1 } from '../models/rq-destination-img-delete-ce-request-1';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +40,9 @@ export class DestinationService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, DestinationService.V1ApiDestinationGetPath, 'get');
     if (params) {
@@ -52,7 +55,8 @@ export class DestinationService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -73,7 +77,9 @@ export class DestinationService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiDestinationGet$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -92,6 +98,7 @@ export class DestinationService extends BaseService {
    * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
   v1ApiDestinationPut$Response(params?: {
+    context?: HttpContext
     body?: {
       'Parameter.Code'?: string;
       'Parameter.Name'?: string;
@@ -104,7 +111,8 @@ export class DestinationService extends BaseService {
       'Caller.Company': string;
       'Caller.Application': string;
     }
-  }): Observable<StrictHttpResponse<void>> {
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, DestinationService.V1ApiDestinationPutPath, 'put');
     if (params) {
@@ -113,7 +121,8 @@ export class DestinationService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -129,6 +138,7 @@ export class DestinationService extends BaseService {
    * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
   v1ApiDestinationPut(params?: {
+    context?: HttpContext
     body?: {
       'Parameter.Code'?: string;
       'Parameter.Name'?: string;
@@ -141,7 +151,8 @@ export class DestinationService extends BaseService {
       'Caller.Company': string;
       'Caller.Application': string;
     }
-  }): Observable<void> {
+  }
+  ): Observable<void> {
 
     return this.v1ApiDestinationPut$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -160,6 +171,7 @@ export class DestinationService extends BaseService {
    * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
   v1ApiDestinationPost$Response(params?: {
+    context?: HttpContext
     body?: {
       'Parameter.Code'?: string;
       'Parameter.Name'?: string;
@@ -171,7 +183,8 @@ export class DestinationService extends BaseService {
       'Caller.Company': string;
       'Caller.Application': string;
     }
-  }): Observable<StrictHttpResponse<void>> {
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, DestinationService.V1ApiDestinationPostPath, 'post');
     if (params) {
@@ -180,7 +193,8 @@ export class DestinationService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -196,6 +210,7 @@ export class DestinationService extends BaseService {
    * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
   v1ApiDestinationPost(params?: {
+    context?: HttpContext
     body?: {
       'Parameter.Code'?: string;
       'Parameter.Name'?: string;
@@ -207,7 +222,8 @@ export class DestinationService extends BaseService {
       'Caller.Company': string;
       'Caller.Application': string;
     }
-  }): Observable<void> {
+  }
+  ): Observable<void> {
 
     return this.v1ApiDestinationPost$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -226,8 +242,10 @@ export class DestinationService extends BaseService {
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   v1ApiDestinationDelete$Response(params?: {
+    context?: HttpContext
     body?: RqDestinationGetByIdCeRequest1
-  }): Observable<StrictHttpResponse<void>> {
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, DestinationService.V1ApiDestinationDeletePath, 'delete');
     if (params) {
@@ -236,7 +254,8 @@ export class DestinationService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -252,8 +271,10 @@ export class DestinationService extends BaseService {
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   v1ApiDestinationDelete(params?: {
+    context?: HttpContext
     body?: RqDestinationGetByIdCeRequest1
-  }): Observable<void> {
+  }
+  ): Observable<void> {
 
     return this.v1ApiDestinationDelete$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -277,7 +298,9 @@ export class DestinationService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, DestinationService.V1ApiDestinationCodeGetPath, 'get');
     if (params) {
@@ -290,7 +313,8 @@ export class DestinationService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -311,9 +335,62 @@ export class DestinationService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiDestinationCodeGet$Response(params).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
+    );
+  }
+
+  /**
+   * Path part for operation v1ApiDestinationImageDelete
+   */
+  static readonly V1ApiDestinationImageDeletePath = '/Destination/Image';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `v1ApiDestinationImageDelete()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  v1ApiDestinationImageDelete$Response(params?: {
+    context?: HttpContext
+    body?: RqDestinationImgDeleteCeRequest1
+  }
+  ): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, DestinationService.V1ApiDestinationImageDeletePath, 'delete');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `v1ApiDestinationImageDelete$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  v1ApiDestinationImageDelete(params?: {
+    context?: HttpContext
+    body?: RqDestinationImgDeleteCeRequest1
+  }
+  ): Observable<void> {
+
+    return this.v1ApiDestinationImageDelete$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

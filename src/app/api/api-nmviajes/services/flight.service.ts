@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -38,7 +38,9 @@ export class FlightService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, FlightService.V1ApiFlightGetRatesGetPath, 'get');
     if (params) {
@@ -51,7 +53,8 @@ export class FlightService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -72,7 +75,9 @@ export class FlightService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiFlightGetRatesGet$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -96,7 +101,9 @@ export class FlightService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, FlightService.V1ApiFlightGetMostWantedGetPath, 'get');
     if (params) {
@@ -109,7 +116,8 @@ export class FlightService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -130,7 +138,9 @@ export class FlightService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiFlightGetMostWantedGet$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -156,7 +166,9 @@ export class FlightService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, FlightService.V1ApiFlightGetLastSearchesByCityGetPath, 'get');
     if (params) {
@@ -171,7 +183,8 @@ export class FlightService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -194,7 +207,9 @@ export class FlightService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiFlightGetLastSearchesByCityGet$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -218,7 +233,9 @@ export class FlightService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, FlightService.V1ApiFlightGetContinentsGetPath, 'get');
     if (params) {
@@ -231,7 +248,8 @@ export class FlightService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -252,7 +270,9 @@ export class FlightService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiFlightGetContinentsGet$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -277,7 +297,9 @@ export class FlightService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, FlightService.V1ApiFlightGetLastSearchesByContinentGetPath, 'get');
     if (params) {
@@ -291,7 +313,8 @@ export class FlightService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -313,7 +336,9 @@ export class FlightService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiFlightGetLastSearchesByContinentGet$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -338,7 +363,9 @@ export class FlightService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, FlightService.V1ApiFlightGetLastSearchesByAirlineGetPath, 'get');
     if (params) {
@@ -352,7 +379,8 @@ export class FlightService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -374,7 +402,9 @@ export class FlightService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiFlightGetLastSearchesByAirlineGet$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
