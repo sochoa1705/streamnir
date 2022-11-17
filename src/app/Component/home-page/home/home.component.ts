@@ -42,7 +42,9 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._activatedRoute.params.subscribe((product) => this.casos(product.tab))
+    this._activatedRoute.params.subscribe((product) =>
+      this.casos(product.tab)
+    );
 
     this.listDestiny()
     this.getConfirmacion();

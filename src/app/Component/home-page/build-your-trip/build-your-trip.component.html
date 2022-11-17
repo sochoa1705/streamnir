@@ -38,24 +38,23 @@
     <div class="col-md-6 col-12 boxVideo">
       <div class="row">
         <div class="col-12">
-          <div class="videoYoutube">
+          <!-- <div class="videoYoutube">
             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/xGp-LguvTQk" title="NmMViajes"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen></iframe>
-          </div>
-          <!-- <ng-container *ngFor="let image of images; let i = index">
-                      <div class="aside__content_2">
-                        <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image, 'banner', i, images.length)"
-                          [src]="image.PathImage" [alt]="image.NameImage">
-                      </div>
-                    </ng-container> -->
+          </div> -->
+          <ng-container *ngFor="let image of images; let i = index">
+            <div class="aside__content_2">
+              <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image, 'banner', i, images.length)"
+                [src]="image.PathImage" [alt]="image.NameImage">
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
   </aside>
 </section>
-
 
 
 <!-- MAILING -->
@@ -65,3 +64,51 @@
   </ng-container>
 </div>
 <!-- END MAILING -->
+
+<!-- PUBLICIDAD -->
+<div class="container-fluid">
+  <div class="row mb-md-5 ">
+    <div *ngFor="let img of banners_corps; let i = index" class="col-md-6 col-12 publicidad">
+      <img [ngClass]="{'pointer': img.RedirectLink}" (click)="toSlider(img, 'banner', i, banners_corps.length)"
+        [src]="img.PathImage" [alt]="img.NameImage">
+    </div>
+  </div>
+</div>
+<!-- END PUBLICIDAD -->
+
+<!-- VUELOS -->
+<div class="container-fluid">
+  <div class="row mb-5">
+    <div class="col-12">
+      <h2 class="titleHome ms-4 mt-5">¡Corre y Vuela! con estas
+        <strong>súper ofertas de Vuelos</strong> saliendo
+        <strong> desde Lima</strong>
+      </h2>
+    </div>
+  </div>
+
+  <app-flightdeals></app-flightdeals>
+</div>
+<!-- END VUELOS -->
+
+<!-- COMPRAR -->
+<div class="container-fluid">
+  <h2 class="titleHome bold ms-4 mb-5 marginMovil">¿Por qué comprar en
+    <span class="red">NMVIAJES</span>?
+  </h2>
+  <div class="row comprarHideTitle">
+    <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+      <app-title class="textTitle" *ngIf="section.section === 'Comprar'" [title]="section.title"></app-title>
+      <div *ngIf="section.img" class="col-12 col-md-6 card__content">
+        <img src="./assets/{{ section.img }}" class="d-block w-100">
+      </div>
+      <div class="col-12 col-md-6">
+        <ng-container *ngIf="section.section === 'Comprar'">
+          <app-card-info [title]="card.title" [description]="card.description" [image]="card.img"
+            *ngFor="let card of section.card"></app-card-info>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<!-- END COMPRAR -->

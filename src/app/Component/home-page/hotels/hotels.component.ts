@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { NMRequest } from 'src/app/Models/base/NMRequest';
 import { ModelTaggingSlidersBanners } from 'src/app/Services/analytics/tagging.models';
@@ -17,12 +17,9 @@ export class HotelsComponent implements OnInit {
 
   destiny: any = [];
 
-  //@Input()
-  //slider!: IGalleryImage[];
-
   slider: IGalleryImage[] = [];
-  bannersDestacados: IGalleryImage[] = [];
-  bannersCorporativos: IGalleryImage[] = [];
+  images: IGalleryImage[] = [];
+  banners_corps: IGalleryImage[] = [];
 
   loadedGallery = false;
 
@@ -59,8 +56,8 @@ export class HotelsComponent implements OnInit {
       this.slider = data.filter(item => item.Code === EGalleryCode.slider_destacados || item.Code === EGalleryCode.slider_destacados2).map(item => item.Images)[0];
       this.slider.push(this.slider[0]);
 
-      this.bannersDestacados = data.filter(item => item.Code === EGalleryCode.banners_destacados).map(item => item.Images)[0];
-      this.bannersCorporativos = data.filter(item => item.Code === EGalleryCode.banners_corporativos).map(item => item.Images)[0];
+      this.images = data.filter(item => item.Code === EGalleryCode.banners_destacados).map(item => item.Images)[0];
+      this.banners_corps = data.filter(item => item.Code === EGalleryCode.banners_corporativos).map(item => item.Images)[0];
 
       this.loadedGallery = true;
     })

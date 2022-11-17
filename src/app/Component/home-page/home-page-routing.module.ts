@@ -32,10 +32,10 @@ const routes: Routes = [
         path: '',
         component: HomeComponent
       },
-      {
-        path: 'filtro/:tab',
-        component: HomeComponent
-      },
+      // {
+      //   path: 'filtro/:tab',
+      //   component: HomeComponent
+      // },
       {
         path: 'vuelos/resultados',
         component: ResultadosComponent

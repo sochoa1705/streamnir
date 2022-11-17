@@ -10,35 +10,17 @@
     </ng-container>
 
     <app-packages [slider]="sliderDestacados" *ngSwitchCase="'paquetes'"></app-packages>
-    <app-build-your-trip [slider]="sliderDestacados" *ngSwitchCase="'armapaquete'"></app-build-your-trip>
 
-    <!-- <ng-container *ngSwitchCase="'armapaquete'">
-      <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
-        [banners_corps]="bannersCorporativos" [selectedTab]="selectedTab"></app-aside>
-    </ng-container> -->
+    <app-build-your-trip *ngSwitchCase="'armapaquete'"></app-build-your-trip>
 
-    <ng-container *ngSwitchCase="'vuelohotel'">
-      <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
-        [banners_corps]="bannersCorporativos" [selectedTab]="selectedTab"></app-aside>
-    </ng-container>
+    <app-flights-plus-hotel *ngSwitchCase="'vuelohotel'"></app-flights-plus-hotel>
 
-    <ng-container *ngSwitchCase="'hoteles'">
-      <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
-        [banners_corps]="bannersCorporativos" [selectedTab]="selectedTab"></app-aside>
-    </ng-container>
+    <app-hotels *ngSwitchCase="'hoteles'"></app-hotels>
 
-    <ng-container *ngSwitchCase="'autos'">
-      <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
-        [banners_corps]="bannersCorporativos" [selectedTab]="selectedTab"></app-aside>
-    </ng-container>
+    <app-cars *ngSwitchCase="'autos'"></app-cars>
 
-    <ng-container *ngSwitchCase="'actividades'">
-      <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
-        [banners_corps]="bannersCorporativos" [selectedTab]="selectedTab"></app-aside>
-    </ng-container>
+    <app-activities *ngSwitchCase="'actividades'"></app-activities>
   </ng-container>
-
-
 
   <!-- VUELOS -->
   <div class="container-fluid">
@@ -77,7 +59,6 @@
   </div>
   <!-- END COMPRAR -->
 </mat-drawer-container>
-
 
 <!-- Modal Usuario Verificado -->
 <div class="modal" data-backdrop="false" id="ModalUsuarioVerificado" tabindex="-1"

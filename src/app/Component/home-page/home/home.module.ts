@@ -18,6 +18,10 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { FlightDealsModule } from '../flightdeals/flightdeals.module';
 import { PackagesModule } from '../packages/packages.module';
 import { BuildYourTripModule } from '../build-your-trip/build-your-trip.module';
+import { HotelsModule } from '../hotels/hotels.module';
+import { CarsModule } from '../cars/cars.module';
+import { ActivitiesModule } from '../activities/activities.module';
+import { FlightsPlusHotelModule } from '../flights-plus-hotel/flights-plus-hotel.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -36,7 +40,11 @@ import { BuildYourTripModule } from '../build-your-trip/build-your-trip.module';
     HttpClientModule,
     FlightDealsModule,
     PackagesModule,
-    BuildYourTripModule
+    BuildYourTripModule,
+    FlightsPlusHotelModule,
+    HotelsModule,
+    CarsModule,
+    ActivitiesModule
   ],
   exports: [HomeComponent],
   providers: [DestinyService, AsidePresenterService, BusinessUnitService]
