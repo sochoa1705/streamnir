@@ -65,6 +65,17 @@
 </div>
 <!-- END MAILING -->
 
+<!-- PUBLICIDAD -->
+<div class="container-fluid">
+  <div class="row mb-md-5 ">
+    <div *ngFor="let img of banners_corps; let i = index" class="col-md-6 col-12 publicidad">
+      <img [ngClass]="{'pointer': img.RedirectLink}" (click)="toSlider(img, 'banner', i, banners_corps.length)"
+        [src]="img.PathImage" [alt]="img.NameImage">
+    </div>
+  </div>
+</div>
+<!-- END PUBLICIDAD -->
+
 <!-- VUELOS -->
 <div class="container-fluid">
   <div class="row mb-5">
