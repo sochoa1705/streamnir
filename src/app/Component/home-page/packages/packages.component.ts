@@ -61,8 +61,6 @@ export class PackagesComponent implements OnInit {
       'Caller.Company': "Agil",
       'Caller.Application': "Interagencias"
     }).subscribe((res: any) => {
-      debugger
-
       this.themes = JSON.parse(res).Result;
     });
   }
