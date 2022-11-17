@@ -66,137 +66,16 @@
   </div>
 
   <div class="boxItemPackages">
-    <div class="boxItem">
+    <div class="boxItem" *ngFor="let elem of themes">
       <div class="groupCardTour">
-        <div class="priceCard">desde $595</div>
+        <div class="priceCard">desde ${{elem.Price}}</div>
         <div class="cardTour">
-          <div class="titleCard">CARIBE</div>
-          <div class="descripCard">description</div>
-          <div class="btnSearch">Click aqui</div>
+          <div class="titleCard">{{elem.Name}}</div>
+          <div class="descripCard">{{elem.Description}}</div>
+          <a class="btnSearch" href="{{elem.RedirectUrl}}" target="_blank">Click aquí</a>
         </div>
       </div>
-      <img src="https://www.nmviajes.com/Images/vuelos/cancun.webp" alt="...">
-    </div>
-    <div class="boxItem">
-      <div class="groupCardTour">
-        <div class="priceCard">desde $595</div>
-        <div class="cardTour">
-          <div class="titleCard">ECONOVIAJES</div>
-          <div class="descripCard">description</div>
-          <div class="btnSearch">Click aqui</div>
-        </div>
-      </div>
-      <img src="https://www.nmviajes.com/Images/vuelos/mexico.webp" alt="...">
-    </div>
-    <div class="boxItem">
-      <div class="groupCardTour">
-        <div class="priceCard">desde $595</div>
-        <div class="cardTour">
-          <div class="titleCard">FIN DE SEMANA</div>
-          <div class="descripCard">description</div>
-          <div class="btnSearch">Click aqui</div>
-        </div>
-      </div>
-      <img src="https://www.nmviajes.com/Images/vuelos/bogota.webp" alt="...">
-    </div>
-    <div class="boxItem">
-      <div class="groupCardTour">
-        <div class="priceCard">desde $595</div>
-        <div class="cardTour">
-          <div class="titleCard">NACIONAL</div>
-          <div class="descripCard">description</div>
-          <div class="btnSearch">Click aqui</div>
-        </div>
-      </div>
-      <img src="https://www.nmviajes.com/Images/vuelos/barcelona.webp" alt="...">
-    </div>
-    <div class="boxItem">
-      <div class="groupCardTour">
-        <div class="priceCard">desde $595</div>
-        <div class="cardTour">
-          <div class="titleCard">EUROPA</div>
-          <div class="descripCard">description</div>
-          <div class="btnSearch">Click aqui</div>
-        </div>
-      </div>
-      <img src="https://www.nmviajes.com/Images/vuelos/madrid.webp" alt="...">
-    </div>
-    <div class="boxItem">
-      <div class="groupCardTour">
-        <div class="priceCard">desde $595</div>
-        <div class="cardTour">
-          <div class="titleCard">SUDAMERICA</div>
-          <div class="descripCard">description</div>
-          <div class="btnSearch">Click aqui</div>
-        </div>
-      </div>
-      <img src="https://www.nmviajes.com/Images/vuelos/miami.webp" alt="...">
-    </div>
-    <div class="boxItem">
-      <div class="groupCardTour">
-        <div class="priceCard">desde $595</div>
-        <div class="cardTour">
-          <div class="titleCard">VIAJA 2023</div>
-          <div class="descripCard">description</div>
-          <div class="btnSearch">Click aqui</div>
-        </div>
-      </div>
-      <img src="https://www.nmviajes.com/Images/vuelos/buenos-aires.webp" alt="...">
-    </div>
-    <div class="boxItem">
-      <div class="groupCardTour">
-        <div class="priceCard">desde $595</div>
-        <div class="cardTour">
-          <div class="titleCard">PRIMAVERA</div>
-          <div class="descripCard">description</div>
-          <div class="btnSearch">Click aqui</div>
-        </div>
-      </div>
-      <img src="https://www.nmviajes.com/Images/vuelos/caracas.webp" alt="...">
-    </div>
-    <div class="boxItem">
-      <div class="groupCardTour">
-        <div class="priceCard">desde $595</div>
-        <div class="cardTour">
-          <div class="titleCard">ROMANCE</div>
-          <div class="descripCard">description</div>
-          <div class="btnSearch">Click aqui</div>
-        </div>
-      </div>
-      <img src="https://www.nmviajes.com/Images/vuelos/cucuta.webp" alt="...">
-    </div>
-    <div class="boxItem">
-      <div class="groupCardTour">
-        <div class="priceCard">desde $595</div>
-        <div class="cardTour">
-          <div class="titleCard">FAMILIA</div>
-          <div class="descripCard">description</div>
-          <div class="btnSearch">Click aqui</div>
-        </div>
-      </div>
-      <img src="https://www.nmviajes.com/Images/vuelos/san-francisco.jpg" alt="...">
-    </div>
-    <div class="boxItem">
-      <div class="groupCardTour">
-        <div class="priceCard">desde $595</div>
-        <div class="cardTour">
-          <div class="titleCard">USA</div>
-          <div class="descripCard">description</div>
-          <div class="btnSearch">Click aqui</div>
-        </div>
-      </div>
-      <img src="https://www.nmviajes.com/Images/vuelos/cusco.webp" alt="...">
-    </div>
-    <div class="boxItem">
-      <div class="groupCardTour">
-        <div class="priceCard">desde $595</div>
-        <div class="cardTour">
-          <div class="titleCard">AÑO NUEVO</div>
-          <div class="descripCard">description</div>
-          <div class="btnSearch">Click aqui</div>
-        </div>
-      </div>
-      <img src="https://www.nmviajes.com/Images/vuelos/arequipa.webp" alt="...">
+      <img [src]="elem.ImageUrl" alt="...">
     </div>
   </div>
 </div>

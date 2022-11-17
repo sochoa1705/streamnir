@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ThemeService } from 'src/app/api/api-nmviajes/services';
 import { ModelTaggingSlidersBanners } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { EGalleryCode, IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
-import { getFileName } from 'src/app/shared/utils';
+import { getFileName, Guid } from 'src/app/shared/utils';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-packages',
@@ -21,12 +23,16 @@ export class PackagesComponent implements OnInit {
 
   loadedGallery = false;
 
+  themes: any;
+
   constructor(
-    public dataPagePresenterService: DataPagePresenterService
+    public dataPagePresenterService: DataPagePresenterService,
+    private _themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
     this.getGallery();
+    this.getThemes();
   }
 
   toSlider(e: IGalleryImage, nombre: "slider" | "banner", index: number, array: number) {
@@ -45,6 +51,20 @@ export class PackagesComponent implements OnInit {
 
       this.loadedGallery = true;
     })
+  }
+
+  getThemes() {
+    this._themeService.v1ApiThemeGet({
+      'Parameter.Active': true,
+      TrackingCode: Guid(),
+      MuteExceptions: environment.muteExceptions,
+      'Caller.Company': "Agil",
+      'Caller.Application': "Interagencias"
+    }).subscribe((res: any) => {
+      debugger
+
+      this.themes = JSON.parse(res).Result;
+    });
   }
 
   addTag(gallery: IGalleryImage, nombre: "slider" | "banner", index: number, array: number) {
