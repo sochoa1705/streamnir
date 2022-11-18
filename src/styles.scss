@@ -772,6 +772,10 @@ section {
             color: $red;
         }
     }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        display: none !important;
+    }
 }
 
 
@@ -11224,6 +11228,9 @@ app-flightdeals {
         max-width: 85% !important;
     }
     .card__content {
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
         .w-100 {
             width: auto !important;
         }

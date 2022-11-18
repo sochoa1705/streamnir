@@ -563,6 +563,9 @@ section {
     color: #4b4b4b; }
     #carouselSeguros h2 span {
       color: #b50a27; }
+  #carouselSeguros .carousel-control-prev-icon,
+  #carouselSeguros .carousel-control-next-icon {
+    display: none !important; }
 
 /* Importing Bootstrap SCSS file. */
 /* datepicker styles  */
@@ -9367,8 +9370,12 @@ app-flightdeals button {
     width: 85% !important;
     max-width: 85% !important; }
 
-  .card__content .w-100 {
-    width: auto !important; }
+  .card__content {
+    overflow: hidden;
+    display: flex;
+    justify-content: center; }
+    .card__content .w-100 {
+      width: auto !important; }
 
   .mnuViaja .padLeft70 img {
     width: 60% !important; } }
