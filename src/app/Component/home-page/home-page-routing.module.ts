@@ -22,6 +22,7 @@ import { CierrapuertasOfertasComponent } from './cierrapuertas-ofertas/cierrapue
 import { TusdatosComponent } from './tusdatos/tusdatos.component';
 import { ItineraryComponent } from './itinerary/itinerary.component';
 import { EventosComponent } from './eventos/eventos.component';
+import { GifCardComponent } from './gif-card/gif-card.component';
 
 const routes: Routes = [
   {
@@ -152,6 +153,10 @@ const routes: Routes = [
       {
         path: 'comprar',
         component: ComprarComponent
+      },
+      {
+        path: 'gif-card',
+        component: GifCardComponent
       },
       {
         path: 'canales-de-atencion',
