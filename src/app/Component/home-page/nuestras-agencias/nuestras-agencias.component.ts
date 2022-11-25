@@ -60,7 +60,7 @@ export class NuestrasAgenciasComponent implements OnInit {
     },
     {
       id: 6,
-      direccion: 'Av. Alfredo Mendiola 3698 tienda L140-B –',
+      direccion: 'Av. Alfredo Mendiola 25017 –',
       distrito: 'Independencia',
       horario: 'Lun - Dom 10:00 am a 10:00 pm',
       horario2: '',
