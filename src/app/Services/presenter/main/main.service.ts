@@ -18,42 +18,42 @@ export class MainService {
     {
       id: 1,
       text: "Paquetes",
-      link: "paquetes",
+      link: "filtro/paquetes",
       tab: '',
       icon: '/assets/menu/paquetes.svg'
     },
     {
       id: 2,
       text: "Arma tu viaje",
-      link: "armapaquete",
+      link: "filtro/armapaquete",
       tab: '',
       icon: '/assets/menu/paquetes.svg'
     },
     {
       id: 3,
       text: "Vuelos + Hotel",
-      link: "vuelohotel",
+      link: "filtro/vuelohotel",
       tab: '',
       icon: '/assets/menu/vuelo-hotel.svg'
     },
     {
       id: 4,
       text: "Hoteles",
-      link: "hoteles",
+      link: "filtro/hoteles",
       tab: '',
       icon: '/assets/menu/hoteles.svg'
     },
     {
       id: 5,
       text: "Autos",
-      link: "autos",
+      link: "filtro/autos",
       tab: '',
       icon: '/assets/menu/auto.svg'
     },
     {
       id: 6,
       text: "Actividades",
-      link: "actividades",
+      link: "filtro/actividades",
       tab: '',
       icon: '/assets/menu/actividad.svg'
     },
