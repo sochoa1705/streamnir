@@ -125,8 +125,8 @@ export class DataPagePresenterService {
       {
         id: 5,
         section: "mailing",
-        title: "OFERTAS EXCLUSIVAS",
-        span: "Se el primero en recibir nuestras ofertas de viajes"
+        title: "¡SUSCRÍBETE!",
+        span: "Se el primero en recibir nuestras novedades y promociones"
       },
       {
         id: 6,
