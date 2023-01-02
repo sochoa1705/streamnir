@@ -99,12 +99,12 @@ export class TabsComponent implements OnInit {
       debugger
 
       if (url === '/vuelos' ||
-        url === '/filtro/paquetes' ||
-        url === '/filtro/armapaquete' ||
-        url === '/filtro/vuelohotel' ||
-        url === '/filtro/hoteles' ||
-        url === '/filtro/autos' ||
-        url === '/filtro/actividades')
+        url === '/paquetes' ||
+        url === '/armapaquete' ||
+        url === '/vuelohotel' ||
+        url === '/hoteles' ||
+        url === '/autos' ||
+        url === '/actividades')
         this.casos(url);
       else
         this.casos(product.tab);
@@ -118,27 +118,27 @@ export class TabsComponent implements OnInit {
         this.selectedTab = '0'
         break;
       case 'paquetes':
-      case '/filtro/paquetes':
+      case '/paquetes':
         this.selectedTab = '1'
         break;
       case 'armapaquete':
-      case '/filtro/armapaquete':
+      case '/armapaquete':
         this.selectedTab = '2'
         break;
       case 'vuelohotel':
-      case '/filtro/vuelohotel':
+      case '/vuelohotel':
         this.selectedTab = '3'
         break;
       case 'hoteles':
-      case '/filtro/hoteles':
+      case '/hoteles':
         this.selectedTab = '4'
         break;
       case 'autos':
-      case '/filtro/autos':
+      case '/autos':
         this.selectedTab = '5'
         break;
       case 'actividades':
-      case '/filtro/actividades':
+      case '/actividades':
         this.selectedTab = '6'
         break;
       default:
