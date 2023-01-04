@@ -1,12 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
+import { ThemeService } from 'src/app/api/api-nmviajes/services';
 import { NMRequest } from 'src/app/Models/base/NMRequest';
 import { ModelTaggingSlidersBanners } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { EGalleryCode, IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
-import { getFileName } from 'src/app/shared/utils';
+import { getFileName, Guid } from 'src/app/shared/utils';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-build-your-trip',
@@ -32,14 +34,18 @@ export class BuildYourTripComponent implements OnInit {
 
   loadedGallery = false;
 
+  themes: any;
+
   constructor(
     private coreService: DestinyService,
-    public dataPagePresenterService: DataPagePresenterService
+    public dataPagePresenterService: DataPagePresenterService,
+    private _themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
     this.listDestiny();
     this.getGallery();
+    this.getThemes();
   }
 
   listDestiny() {
@@ -70,6 +76,18 @@ export class BuildYourTripComponent implements OnInit {
 
       this.loadedGallery = true;
     })
+  }
+
+  getThemes() {
+    this._themeService.v1ApiThemeGet({
+      'Parameter.Active': true,
+      TrackingCode: Guid(),
+      MuteExceptions: environment.muteExceptions,
+      'Caller.Company': "Agil",
+      'Caller.Application': "Interagencias"
+    }).subscribe((res: any) => {
+      this.themes = JSON.parse(res).Result;
+    });
   }
 
   addTag(gallery: IGalleryImage, nombre: "slider" | "banner", index: number, array: number) {

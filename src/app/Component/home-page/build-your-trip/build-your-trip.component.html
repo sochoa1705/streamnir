@@ -56,6 +56,32 @@
   </aside>
 </section>
 
+<!-- PAQUETES -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="titleHome packageTitle">
+        <strong>Paquetes para toda ocasión</strong>
+      </h2>
+      <h3 class="subTitleHome">Vuelve el viaje de tus sueños realidad</h3>
+    </div>
+  </div>
+
+  <div class="boxItemPackages">
+    <div class="boxItem" *ngFor="let elem of themes">
+      <div class="groupCardTour">
+        <!-- <div class="priceCard">desde ${{elem.Price}}</div> -->
+        <div class="cardTour">
+          <div class="titleCard">{{elem.Name}}</div>
+          <div class="descripCard">{{elem.Description}}</div>
+          <a class="btnSearch" href="{{elem.RedirectUrl}}" target="_blank">Click aquí</a>
+        </div>
+      </div>
+      <img [src]="elem.ImageUrl" alt="...">
+    </div>
+  </div>
+</div>
+<!-- END PAQUETES -->
 
 <!-- MAILING -->
 <div class="boxMailing">
