@@ -10,27 +10,22 @@
 
   <!-- Google Tag Manager -->
   <script>
-    const dataLayer = window.dataLayer || [];
-    dataLayer.push({
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
       originalLocation: document.location.protocol + '//' +
         document.location.hostname +
         document.location.pathname +
         document.location.search
     });
 
+
     (function (w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({
-        'gtm.start': new Date().getTime(),
-        event: 'gtm.js'
-      });
-      var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s),
-        dl = l != 'dataLayer' ? '&l=' + l : '';
-      j.async = true;
-      j.src =
-        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-      f.parentNode.insertBefore(j, f);
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-KD6QHFT');
   </script>
   <!-- End Google Tag Manager -->
@@ -151,6 +146,8 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD6QHFT" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+
+
   <!-- <div class="px-0"> -->
   <app-root>
     <div class="loader-init"></div>
