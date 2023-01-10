@@ -4,7 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import * as bootstrap from 'bootstrap';
-import { AccountsService } from 'src/app/Services/accounts.service';
+import { MisReservasService } from 'src/app/Component/home-page/perfil/mis-reservas-vuelos/mis-reservas-vuelos.service';
+import { AccountsService, AuthDTO } from 'src/app/Services/accounts.service';
 import { ModelTaggingLogin } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { NotificationService } from 'src/app/Services/notification.service';
@@ -64,7 +65,8 @@ export class LoginComponent implements OnInit {
     private _matSnackBar: MatSnackBar,
     private _validatorsService: ValidatorsService,
     public loaderSubjectService: LoaderSubjectService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private misReservasService: MisReservasService
   ) { }
   ngOnInit(): void {
     // this.taggingPageView();
@@ -408,6 +410,11 @@ export class LoginComponent implements OnInit {
     TaggingService.tagLoginSignup(model);
   }
 
+  private getAllBookings(usuario: AuthDTO) {
+    this.misReservasService.getAllBooking(usuario.Id.toString()).subscribe((data) => {
+      localStorage.setItem('bookings', JSON.stringify(data));
+    });
+  }
 
   signIn(formPerson: NgForm, formBussines: NgForm) {
 
@@ -425,6 +432,7 @@ export class LoginComponent implements OnInit {
           this.tagging(modelTag);
 
           this._accountService.guardarStorage(resp);
+          this.getAllBookings(resp);
           this.closeModal();
         } else {
           this.notification.showNotificacion("Error", resp.Message, 10);
@@ -445,6 +453,7 @@ export class LoginComponent implements OnInit {
           this.tagging(modelTag);
 
           this._accountService.guardarStorage(resp);
+          this.getAllBookings(resp);
           this.closeModal();
         }
       }, () => {

@@ -64,10 +64,14 @@ export class LibroReclamacionesComponent implements OnInit {
     let userID: string = '';
     let user_existingCustomer: boolean = false;
     const credentials = localStorage.getItem('usuario');
+    const bookings = localStorage.getItem('bookings');
 
     if (credentials) {
       const credentialsJson = JSON.parse(credentials);
       userID = this._cryptoService.encrypt(credentialsJson.email);
+
+      if (bookings)
+        user_existingCustomer = JSON.parse(bookings).length > 0;
     }
 
     (window as any).dataLayer = (window as any).dataLayer || [];
