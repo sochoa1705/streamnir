@@ -24,6 +24,7 @@ import { NotificationService } from 'src/app/Services/notification.service';
 import { MessageService } from 'src/app/api/api-correos/services';
 import { CeResponse, CeSeguroCeEmailParameterCustomCeRequest1, EnumRequestApplications, EnumRequestCompanies } from 'src/app/api/api-correos/models';
 import { UtilService } from 'src/app/Services/util/util.service';
+import { CryptoService } from 'src/app/Services/util/crypto.service';
 
 interface Methods {
   id: string;
@@ -170,7 +171,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     private _formBuilder: FormBuilder,
     private _notification: NotificationService,
     private _messageService: MessageService,
-    public utilService: UtilService
+    public utilService: UtilService,
+    private _cryptoService: CryptoService
   ) {
     // COBERTURA
     this.coverageList = localStorage.getItem('coverage');
@@ -236,6 +238,28 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    let userID: string = '';
+    let user_existingCustomer: boolean = false;
+    const credentials = localStorage.getItem('usuario');
+
+    if (credentials) {
+      const credentialsJson = JSON.parse(credentials);
+      userID = this._cryptoService.encrypt(credentialsJson.email);
+    }
+
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({
+      event: "user_info",
+      userID: userID,
+      user_existingCustomer: user_existingCustomer
+    });
+
+    (window as any).dataLayer.push({
+      event: "virtualPageView",
+      virtualPagePath: "/comprar",
+      virtualPageTitle: "NMV: Compra de seguro"
+    });
+
     this.getIp();
 
     let daysDef = 31;

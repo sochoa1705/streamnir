@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CryptoService } from 'src/app/Services/util/crypto.service';
 import { toUp } from '../../../shared/utils';
 
 @Component({
@@ -94,12 +95,34 @@ export class NuestrasAgenciasComponent implements OnInit {
   map: number
   imagen: string
 
-  constructor() {
+  constructor(private _cryptoService: CryptoService) {
     this.agenciaView(1)
   }
 
   ngOnInit(): void {
-    toUp()
+    toUp();
+
+    let userID: string = '';
+    let user_existingCustomer: boolean = false;
+    const credentials = localStorage.getItem('usuario');
+
+    if (credentials) {
+      const credentialsJson = JSON.parse(credentials);
+      userID = this._cryptoService.encrypt(credentialsJson.email);
+    }
+
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({
+      event: "user_info",
+      userID: userID,
+      user_existingCustomer: user_existingCustomer
+    });
+
+    (window as any).dataLayer.push({
+      event: "virtualPageView",
+      virtualPagePath: "/nuestras-agencias",
+      virtualPageTitle: "NMV: Nuestras agencias"
+    });
   }
 
   agenciaView(id: number) {

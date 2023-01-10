@@ -5,6 +5,7 @@ import { objectToQueryString, toUp } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 import { IframeMotorVuelos, IframeMotorVuelosJson } from './models/resultados.class';
 import { EnumFlightType } from 'src/app/shared/components/tabs/tabs.models';
+import { CryptoService } from 'src/app/Services/util/crypto.service';
 @Component({
   selector: 'app-resultados',
   templateUrl: './resultados.component.html',
@@ -18,13 +19,35 @@ export class ResultadosComponent implements OnInit {
   constructor(
     public route: Router,
     private ar: ActivatedRoute,
-
+    private _cryptoService: CryptoService
   ) {
   }
 
   ngOnInit() {
-    toUp()
+    toUp();
     this.getParams();
+
+    let userID: string = '';
+    let user_existingCustomer: boolean = false;
+    const credentials = localStorage.getItem('usuario');
+
+    if (credentials) {
+      const credentialsJson = JSON.parse(credentials);
+      userID = this._cryptoService.encrypt(credentialsJson.email);
+    }
+
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({
+      event: "user_info",
+      userID: userID,
+      user_existingCustomer: user_existingCustomer
+    });
+
+    (window as any).dataLayer.push({
+      event: "virtualPageView",
+      virtualPagePath: "/nmviajes/search/resultados",
+      virtualPageTitle: "NMV: Resultados"
+    });
 
     // window.addEventListener('message', function(event) {
     //   let frm = document.getElementById("iframeMotorVuelos");
