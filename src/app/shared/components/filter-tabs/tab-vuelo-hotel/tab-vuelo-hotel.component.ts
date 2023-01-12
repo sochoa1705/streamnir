@@ -133,7 +133,8 @@ export class TabVueloHotelComponent {
       return id.split("::")[1];
     }
 
-    const nombre = `${getCodigoIata(params.idOrigen)}_${getCodigoIata(params.idDestino)}_${params.businessClass ? 'BS' : 'EC'}`;
+    //const nombre = `${getCodigoIata(params.idOrigen)}_${getCodigoIata(params.idDestino)}_${params.businessClass ? 'BS' : 'EC'}`;
+    const nombre = `${getCodigoIata(params.idOrigen)}_${getCodigoIata(params.idDestino)}`;
     const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
     const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
 
