@@ -369,7 +369,8 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
       }
     }
 
-    const nombre = `${params.idOrigen}_${params.idDestino}_${params.businessClass ? 'BS' : 'EC'}_${getTipoTag(params.flightType).codigo}`;
+    //const nombre = `${params.idOrigen}_${params.idDestino}_${params.businessClass ? 'BS' : 'EC'}_${getTipoTag(params.flightType).codigo}`;
+    const nombre = `${params.idOrigen}_${params.idDestino}`;
 
     let diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
     let duracionViaje = 0;

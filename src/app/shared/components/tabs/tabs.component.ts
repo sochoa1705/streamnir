@@ -96,8 +96,6 @@ export class TabsComponent implements OnInit {
     this._activatedRoute.params.subscribe((product) => {
       const url = this._router.url;
 
-      debugger
-
       if (url === '/vuelos' ||
         url === '/paquetes' ||
         url === '/armapaquete' ||

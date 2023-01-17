@@ -123,6 +123,7 @@ export class AccountsService {
   signOut(): void {
     // this.authService.signOut();
     localStorage.removeItem('usuario');
+    localStorage.removeItem('bookings');
 
     this.dispatchLogged(false);
   }

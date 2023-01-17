@@ -15,6 +15,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
     "target": "es2017",
     "module": "esnext",
     "lib": [

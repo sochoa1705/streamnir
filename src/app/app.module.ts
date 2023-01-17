@@ -29,6 +29,7 @@ import { PerfilModule } from './Component/home-page/perfil/perfil.module';
 import { LoadingModule } from './components/loading/loading.module';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { OptionalDataModule } from './components/optional-data/optional-data.module';
+import { CryptoService } from './Services/util/crypto.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -60,6 +61,7 @@ import { OptionalDataModule } from './components/optional-data/optional-data.mod
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
+    CryptoService
   ],
   bootstrap: [AppComponent]
 })

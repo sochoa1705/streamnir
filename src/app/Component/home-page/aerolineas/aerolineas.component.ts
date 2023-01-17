@@ -9,6 +9,7 @@ import { FlightService as AerolineaService } from '../vuelos/commons/components/
 import * as moment from 'moment';
 import { ParamsVuelos } from '../resultados/models/resultados.interfaces';
 import { EnumCabinsVuelos, EnumFlightType } from 'src/app/shared/components/tabs/tabs.models';
+import { CryptoService } from 'src/app/Services/util/crypto.service';
 
 @Component({
   selector: 'app-aerolineas',
@@ -53,7 +54,8 @@ export class AerolineasComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _airlineService: AirlineService,
-    private _flightService: FlightService
+    private _flightService: FlightService,
+    private _cryptoService: CryptoService
   ) {
 
   }
@@ -71,6 +73,32 @@ export class AerolineasComponent implements OnInit {
     })
 
     this._activatedRoute.params.subscribe(params => {
+      let userID: string = '';
+      let user_existingCustomer: boolean = false;
+      const credentials = localStorage.getItem('usuario');
+      const bookings = localStorage.getItem('bookings');
+
+      if (credentials) {
+        const credentialsJson = JSON.parse(credentials);
+        userID = this._cryptoService.encrypt(credentialsJson.email);
+
+        if (bookings)
+          user_existingCustomer = JSON.parse(bookings).length > 0;
+      }
+
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        event: "user_info",
+        userID: userID,
+        user_existingCustomer: user_existingCustomer
+      });
+
+      (window as any).dataLayer.push({
+        event: "virtualPageView",
+        virtualPagePath: `/aerolineas/${params.code}`,
+        virtualPageTitle: "NMV: Resultados"
+      });
+
       this.getAirline(params.code);
       this.getNationalFlightDeals(params.code);
       this.getInternationalFlightDeals(params.code);

@@ -14,6 +14,7 @@ import { StatePayService } from 'src/app/Services/statePay/state-pay.service';
 import { ReservaVuelosService } from '../../../Services/reservaVuelos/reserva-vuelos.service';
 import { CardPaymentService } from '../../../Services/cardPayment/card-payment.service';
 import { toUp } from 'src/app/shared/utils';
+import { CryptoService } from 'src/app/Services/util/crypto.service';
 
 @Component({
   selector: 'app-conformidad',
@@ -72,7 +73,8 @@ export class ConformidadComponent implements OnInit {
     public updatePayService: UpdatePayService,
     public statePayService: StatePayService,
     public reservaVuelosService: ReservaVuelosService,
-    public cardPaymentService: CardPaymentService
+    public cardPaymentService: CardPaymentService,
+    private _cryptoService: CryptoService
   ) {
     // RESERVA
     this.reservaJSON = localStorage.getItem('reserva')
@@ -117,7 +119,33 @@ export class ConformidadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    toUp()
+    toUp();
+
+    let userID: string = '';
+    let user_existingCustomer: boolean = false;
+    const credentials = localStorage.getItem('usuario');
+    const bookings = localStorage.getItem('bookings');
+
+    if (credentials) {
+      const credentialsJson = JSON.parse(credentials);
+      userID = this._cryptoService.encrypt(credentialsJson.email);
+
+      if (bookings)
+        user_existingCustomer = JSON.parse(bookings).length > 0;
+    }
+
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({
+      event: "user_info",
+      userID: userID,
+      user_existingCustomer: user_existingCustomer
+    });
+
+    (window as any).dataLayer.push({
+      event: "virtualPageView",
+      virtualPagePath: "/conformidad",
+      virtualPageTitle: "NMV: Conformidad"
+    });
 
     this.ShowComponentTime = false
     let lcadena: any = localStorage.getItem('businessunit');

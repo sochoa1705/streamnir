@@ -11,8 +11,10 @@ import { AccountsService, UserStorage } from 'src/app/Services/accounts.service'
   styleUrls: ['./mis-reservas-vuelos.component.scss']
 })
 export class MisReservasVuelosComponent implements OnInit {
+
   bookings: GetMyBookings[] = [];
   userStorage: UserStorage;
+
   constructor(private misReservasService: MisReservasService,
     private modalService: NgbModal,
     public accountService: AccountsService) {
@@ -23,13 +25,14 @@ export class MisReservasVuelosComponent implements OnInit {
 
     this.getAllBookings();
   }
-  private getAllBookings(){
+  private getAllBookings() {
     this.userStorage = this.accountService.getUserStorage();
     this.misReservasService.getAllBooking(this.userStorage.id.toString()).subscribe((data) => {
       this.bookings = data;
+      localStorage.setItem('bookings', JSON.stringify(data));
     });
   }
-  openDetailBooking(item: GetMyBookings){
+  openDetailBooking(item: GetMyBookings) {
     const modalRef = this.modalService.open(DetalleBookingComponent, { size: 'lg', windowClass: 'modalDetalle' });
     modalRef.componentInstance.cot_Id = item.cot_Id;
     modalRef.componentInstance.reserva_Id = item.reserva_Id;
