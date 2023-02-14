@@ -80,6 +80,17 @@ export class NuestrasAgenciasComponent implements OnInit {
       telefono: '',
       telefono2: '',
       imagen: './assets/agencias/SanIsidro.png'
+    },
+    {
+      id: 8,
+      direccion: 'Av. La Marina 2000 tienda 236-A 2do piso –',
+      distrito: 'San Miguel',
+      horario: 'Lun - Vie 10:00 am a 07:00 pm',
+      horario2: '',
+      correo: 'vacaciones@nmviajes.com',
+      telefono: '',
+      telefono2: '',
+      imagen: './assets/agencias/SanIsidro.png'
     }
   ]
 

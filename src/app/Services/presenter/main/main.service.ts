@@ -43,22 +43,22 @@ export class MainService {
       tab: '',
       icon: '/assets/menu/hoteles.svg'
     },
+    // {
+    //   id: 5,
+    //   text: "Autos",
+    //   link: "autos",
+    //   tab: '',
+    //   icon: '/assets/menu/auto.svg'
+    // },
     {
       id: 5,
-      text: "Autos",
-      link: "autos",
-      tab: '',
-      icon: '/assets/menu/auto.svg'
-    },
-    {
-      id: 6,
       text: "Actividades",
       link: "actividades",
       tab: '',
       icon: '/assets/menu/actividad.svg'
     },
     {
-      id: 7,
+      id: 6,
       text: "Seguros",
       link: "/seguros",
       header: true,
@@ -66,14 +66,14 @@ export class MainService {
       icon: '/assets/menu/seguros.svg'
     },
     {
-      id: 8,
+      id: 7,
       text: "Descubre",
       link: "https://descubre.nmviajes.com/",
       footer: true,
       external: true
     },
     {
-      id: 9,
+      id: 8,
       text: "Blog: Mundo Viajero",
       link: "https://blog.nmviajes.com/",
       footer: true,
