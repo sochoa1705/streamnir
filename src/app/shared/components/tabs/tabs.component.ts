@@ -15,6 +15,8 @@ import { DollarChangeService } from '../../../Services/dollarChange/dollar-chang
 import { take } from 'rxjs/operators';
 import { NMRequest } from '../../../Models/base/NMRequest';
 import { AccountsService } from 'src/app/Services/accounts.service';
+import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
+import { EGalleryCode, IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
 export interface State {
   flag: string;
   name: string;
@@ -70,8 +72,10 @@ export class TabsComponent implements OnInit {
   RUTA_PAQUETES = environment.urlPaqueteDinamico + 'ES/holidays/search';
   RUTA_AUTOS = environment.url_autos;
 
-
   selectedTab: string;
+
+  banner: any;
+  bannerMobile: any;
 
   constructor(
     private _router: Router,
@@ -81,7 +85,8 @@ export class TabsComponent implements OnInit {
     private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>,
     private destineService: DestinyService,
-    public dollarChangeService: DollarChangeService
+    public dollarChangeService: DollarChangeService,
+    public dataPagePresenterService: DataPagePresenterService
   ) {
     this.fromDate = calendar.getToday();
     this.fromDate2 = calendar.getToday();
@@ -91,7 +96,7 @@ export class TabsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createForm()
+    this.createForm();
 
     this._activatedRoute.params.subscribe((product) => {
       const url = this._router.url;
@@ -107,6 +112,15 @@ export class TabsComponent implements OnInit {
       else
         this.casos(product.tab);
     });
+
+    this.getMainBanner();
+  }
+
+  getMainBanner() {
+    this.dataPagePresenterService.getDataGallery().subscribe(data => {
+      this.banner = data.filter(item => item.Code === EGalleryCode.banner_principal)[0].Images[0];
+      this.bannerMobile = data.filter(item => item.Code === EGalleryCode.banner_principal_mobile)[0].Images[0];
+    })
   }
 
   casos(e: any) {
