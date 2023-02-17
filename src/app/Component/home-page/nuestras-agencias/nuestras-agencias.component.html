@@ -19,8 +19,9 @@
       Molina</button>
     <button (click)="agenciaView(4)" class="btn-agencias" [ngClass]="btnActivo === 4 ? 'activa' : ''">NM CC. Caminos
       del Inca</button>
-    <button (click)="agenciaView(8)" class="btn-agencias" [ngClass]="btnActivo === 8 ? 'activa' : ''">NM San
-      Miguel</button>
+    <button (click)="agenciaView(8)" class="btn-agencias" [ngClass]="btnActivo === 8 ? 'activa' : ''">
+      NM Plaza San Miguel
+    </button>
   </div>
 </div>
 <div class="direccion">
@@ -67,7 +68,7 @@
       <div class="col-12 d-flex">
         <div>
           <span>
-            <img [src]="imagen" alt="">
+            <img style="border-radius: 10px" [src]="imagen" alt="">
           </span>
         </div>
       </div>
