@@ -20,17 +20,24 @@ export class FooterComponent {
   constructor(
     public route: Router,
   ) { }
+
   showMenuProd: Boolean = true;
+
   showProducto() {
     this.showMenuProd = this.showMenuProd ? false : true;
   }
+
   showMenuConocenos: Boolean = true;
+
   showConocenos() {
     this.showMenuConocenos = this.showMenuConocenos ? false : true;
   }
-  to(e: any) {
-    window.location.href = e;
+
+  redirect(e: any) {
+    //window.location.href = e;
+    window.open(e, '_blank');
   }
+
   toOficinas() {
     this.route.navigate(['/nuestras-agencias'])
   }

@@ -18,23 +18,29 @@ export class MainService {
     {
       id: 1,
       text: "Paquetes",
-      link: "paquetes",
+      //link: "paquetes",
+      link: "https://vacaciones.nmviajes.com/ES/holidays/search",
       tab: '',
-      icon: '/assets/menu/paquetes.svg'
+      icon: '/assets/menu/paquetes.svg',
+      external: true
     },
     {
       id: 2,
       text: "Arma tu viaje",
-      link: "armapaquete",
+      //link: "armapaquete",
+      link: "https://vacaciones.nmviajes.com/multidestination/",
       tab: '',
-      icon: '/assets/menu/paquetes.svg'
+      icon: '/assets/menu/paquetes.svg',
+      external: true,
     },
     {
       id: 3,
       text: "Vuelos + Hotel",
-      link: "vuelohotel",
+      //link: "vuelohotel",
+      link: "https://vacaciones.nmviajes.com/flight+hotel/",
       tab: '',
-      icon: '/assets/menu/vuelo-hotel.svg'
+      icon: '/assets/menu/vuelo-hotel.svg',
+      external: true,
     },
     {
       id: 4,

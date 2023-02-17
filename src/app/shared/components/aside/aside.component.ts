@@ -1,17 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ThemeService } from 'src/app/api/api-nmviajes/services';
 import { Aside } from 'src/app/Models/general/aside';
 import { ModelTaggingSlidersBanners } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { IGalleryImage, IGalleryService } from 'src/app/Services/presenter/data-page-presenter.models';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
-import { getFileName } from '../../utils';
+import { environment } from 'src/environments/environment';
+import { getFileName, Guid } from '../../utils';
 
 @Component({
   selector: 'app-aside',
   templateUrl: './aside.component.html',
   styleUrls: ['./aside.component.scss']
 })
-export class AsideComponent {
+export class AsideComponent implements OnInit {
 
   @Input()
   slider!: IGalleryImage[];
@@ -25,10 +27,29 @@ export class AsideComponent {
   @Input()
   selectedTab: string;
 
+  themes: any;
+
   constructor(
-    public dataPagePresenterService: DataPagePresenterService
+    public dataPagePresenterService: DataPagePresenterService,
+    private _themeService: ThemeService
   ) {
 
+  }
+
+  ngOnInit(): void {
+    this.getThemes();
+  }
+
+  getThemes() {
+    this._themeService.v1ApiThemeGet({
+      'Parameter.Active': true,
+      TrackingCode: Guid(),
+      MuteExceptions: environment.muteExceptions,
+      'Caller.Company': "Agil",
+      'Caller.Application': "Interagencias"
+    }).subscribe((res: any) => {
+      this.themes = JSON.parse(res).Result;
+    });
   }
 
   toSlider(e: IGalleryImage, nombre: "slider" | "banner", index: number, array: number) {

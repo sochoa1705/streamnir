@@ -88,8 +88,9 @@ export class ToolbarComponent implements OnInit {
     // Renombrando valores para SEO - Fin
   }
 
-  to(e: any) {
-    window.location.href = e;
+  redirect(e: any) {
+    //window.location.href = e;
+    window.open(e, '_blank');
   }
 
   showOptionUser: Boolean = false;

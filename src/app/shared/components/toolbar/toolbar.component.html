@@ -41,7 +41,7 @@
         routerLinkActive="active">
         {{ m.text }}
       </a>
-      <a (click)="to(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
+      <a (click)="redirect(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
         {{ m.text }}
       </a>
     </li>
@@ -99,7 +99,7 @@
           routerLinkActive="active">
           {{ m.text }}
         </a>
-        <a (click)="to(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
+        <a (click)="redirect(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
           {{ m.text }}
         </a>
         <hr>

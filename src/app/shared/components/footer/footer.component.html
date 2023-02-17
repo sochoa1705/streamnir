@@ -62,7 +62,7 @@
             <a *ngIf="!option.external && !option.header"
               [routerLink]="option.tab === '' ? option.link : [option.link, option.tab]">{{ option.text
               }}</a>
-            <a *ngIf="option.external && !option.header" (click)="to(option.link)">{{ option.text }}</a>
+            <a *ngIf="option.external && !option.header" (click)="redirect(option.link)">{{ option.text }}</a>
           </li>
         </ul>
       </div>
