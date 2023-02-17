@@ -90,7 +90,7 @@ export class NuestrasAgenciasComponent implements OnInit {
       correo: 'vacaciones@nmviajes.com',
       telefono: '',
       telefono2: '',
-      imagen: './assets/agencias/SanIsidro.png'
+      imagen: './assets/agencias/SanMiguel.png'
     }
   ]
 

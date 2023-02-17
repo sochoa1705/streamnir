@@ -145,13 +145,13 @@ export class TabsComponent implements OnInit {
       case '/hoteles':
         this.selectedTab = '4'
         break;
-      // case 'autos':
-      // case '/autos':
-      //   this.selectedTab = '5'
-      //   break;
+      case 'autos':
+      case '/autos':
+        this.selectedTab = '5'
+        break;
       case 'actividades':
       case '/actividades':
-        this.selectedTab = '5'
+        this.selectedTab = '6'
         break;
       default:
       // code block
