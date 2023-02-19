@@ -85,7 +85,7 @@ export class NuestrasAgenciasComponent implements OnInit {
       id: 8,
       direccion: 'Av. La Marina 2000 tienda 236-A 2do piso –',
       distrito: 'San Miguel',
-      horario: 'Lun - Vie 10:00 am a 07:00 pm',
+      horario: 'Lun - Dom 10:00 am a 10:00 pm',
       horario2: '',
       correo: 'vacaciones@nmviajes.com',
       telefono: '',
