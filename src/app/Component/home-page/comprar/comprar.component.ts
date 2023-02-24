@@ -221,11 +221,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (this.current['filter'] === 'filter') {
       this.metodoPago = [
         { name: 'optionm-1', value: 'TARJETA', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: true, id: "0" },
-        { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: false, id: "1" },
+        { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/safety.webp', text: 'Banca por internet / Agencias', checked: false, id: "1" },
       ]
     } else {
       this.metodoPago = [
-        { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "1" },
+        { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/safety.webp', text: 'Banca por internet / Agencias', checked: true, id: "1" },
         { name: 'optionm-1', value: 'TARJETA', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "0" },
       ]
     }
@@ -1563,8 +1563,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     resultJson.passengers.forEach((element: any) => {
       promedio = promedio + parseInt(element.edad);
     });
-    //console.log("promedio:", promedio) 
-    //console.log("length:", resultJson.passengers.length) 
+    //console.log("promedio:", promedio)
+    //console.log("length:", resultJson.passengers.length)
     return (promedio / resultJson.passengers.length);
   }
 

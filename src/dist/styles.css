@@ -527,8 +527,8 @@ section {
   margin-bottom: 0;
 }
 .modal-header p {
-  font-weight: 14px;
-  font-size: 300;
+  font-weight: 300;
+  font-size: 14px;
   line-height: 21px;
   letter-spacing: 0.25px;
   font-family: "Montserrat";
@@ -11129,8 +11129,7 @@ app-flightdeals button {
   justify-content: center;
   height: 100vh;
   margin: 0;
-  background: url(./assets/img/background.jpg) no-repeat;
-  background-position: 50% 50%;
+  background: url(./assets/img/background.webp) no-repeat 50% 50%;
   background-size: cover;
 }
 .boxCita .boxLogo {

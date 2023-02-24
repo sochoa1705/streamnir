@@ -100,7 +100,7 @@ export class DataPagePresenterService {
         id: 4,
         section: "Comprar",
         title: "¿Por qué comprar en NMVIAJES?",
-        img: "comprar.jpg",
+        img: "comprar.webp",
         card: [
           {
             id: 0,
