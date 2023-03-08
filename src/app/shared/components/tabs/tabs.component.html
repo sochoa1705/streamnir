@@ -1,18 +1,14 @@
 <div class="banner" [ngClass]="show ? 'bannerHide' : ' ' ">
   <div class="content" [ngClass]="show ? 'd-none' : ' ' ">
-    <!-- <img src="./assets/banner/nmviajes-cover.webp"> -->
-    <!-- <img class="onlyMovil" src="./assets/banner/nmviajes-cover.webp"> -->
 
-    <img [src]="banner?.PathImage">
-    <img class="onlyMovil" [src]="bannerMobile?.PathImage">
+    <img class="onlydesktop" [src]="banner?.PathImage" alt="Banner">
+    <img class="onlyMovil" [src]="bannerMobile?.PathImage" alt="Banner">
   </div>
   <article class="container-fluid margin-filter-">
     <div class="row">
       <div class="col-12 hideMobile">
-        <!-- <mat-tab-group mat-align-tabs="start"  (selectedTabChange)="safeLink($event)"> -->
         <mat-tab-group mat-align-tabs="start" (selectedTabChange)="changeTab($event)"
-          [selectedIndex]="show ? '3' : selectedTab ">
-          <!-- <mat-tab-group mat-align-tabs="start" (selectedTabChange)="changeTab($event)" [selectedIndex]="selectedTab"> -->
+          [selectedIndex]="show ? 3 : selectedTab">
           <!-- VUELOS -->
           <mat-tab>
             <ng-template mat-tab-label>
@@ -23,11 +19,9 @@
               </svg>
               <span>
                 Vuelos
-                <!-- <a href="http://localhost:4200/vuelos">Vuelos</a> -->
               </span>
             </ng-template>
             <app-tab-vuelos></app-tab-vuelos>
-            <!-- <app-filter></app-filter> -->
           </mat-tab>
           <!-- END VUELOS -->
 
