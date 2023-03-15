@@ -12,6 +12,44 @@ article {
   max-height: 110px;
 }
 
+@media (min-width: 641px) {
+  .banner {
+    max-height: 60vh;
+  }
+
+  ::ng-deep .content {
+    max-height: 22vh;
+  }
+  ::ng-deep div.mat-tab-label.mat-focus-indicator {
+    box-shadow: 0 0 8px 1px rgb(0, 0, 0, 0.08);
+
+    &.mat-tab-label-active {
+      box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @media (min-width: 991px) {
+    .banner {
+      max-height: 70vh;
+    }
+
+    ::ng-deep .content {
+      max-height: 35vh;
+    }
+
+  }
+
+  @media (min-width: 1440px) {
+    ::ng-deep mat-tab-header.mat-tab-header {
+      overflow: inherit;
+
+      .mat-tab-label-container {
+        overflow: inherit;
+      }
+    }
+  }
+}
+
 @media (max-width: 640px) {
   .banner {
     height: auto;
