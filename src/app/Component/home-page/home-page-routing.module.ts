@@ -66,6 +66,10 @@ const routes: Routes = [
         component: DocumentacionViajeComponent
       },
       {
+        path: 'documentacion_de_viaje.html',
+        component: DocumentacionViajeComponent
+      },
+      {
         path: 'confirmacion/:id',
         component: HomeComponent
       },
