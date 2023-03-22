@@ -14,6 +14,9 @@ import { FlightDealsModule } from '../flightdeals/flightdeals.module';
   declarations: [
     ActivitiesComponent
   ],
+  exports: [
+    ActivitiesComponent
+  ],
   imports: [
     CommonModule,
     ActivitiesRoutingModule,

@@ -14,6 +14,9 @@ import { FlightDealsModule } from '../flightdeals/flightdeals.module';
   declarations: [
     CarsComponent
   ],
+  exports: [
+    CarsComponent
+  ],
   imports: [
     CommonModule,
     CarsRoutingModule,

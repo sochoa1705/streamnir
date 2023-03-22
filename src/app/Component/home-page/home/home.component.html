@@ -1,15 +1,13 @@
 <mat-drawer-container class="example-container">
   <app-tabs [options]="destiny"></app-tabs>
 
-
-
   <ng-container [ngSwitch]="selectedTab">
     <ng-container *ngSwitchCase="'home'">
       <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
         [banners_corps]="bannersCorporativos" [selectedTab]="selectedTab"></app-aside>
     </ng-container>
 
-    <app-packages [slider]="sliderDestacados" *ngSwitchCase="'paquetes'"></app-packages>
+    <app-packages *ngSwitchCase="'paquetes'"></app-packages>
 
     <app-build-your-trip *ngSwitchCase="'armapaquete'"></app-build-your-trip>
 
@@ -24,12 +22,12 @@
 
   <!-- VUELOS -->
   <div class="container-fluid">
-    <div class="row mb-5">
+    <div class="row mb-4">
       <div class="col-12">
-        <h2 class="titleHome ms-4 mt-5">¡Corre y Vuela! con estas
-          <strong>súper ofertas de Vuelos</strong> saliendo
-          <strong> desde Lima</strong>
+        <h2 class="titleHome ms-4 mt-5">
+          ¡Corre y Vuela! con estas <strong>súper ofertas de Vuelos</strong> saliendo <strong> desde Lima</strong>
         </h2>
+        <h3 class="mat-checkbox-label ms-md-4 mb-1">* Precios sin incluir impuestos y cargos</h3>
       </div>
     </div>
 
@@ -46,7 +44,7 @@
       <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
         <app-title class="textTitle" *ngIf="section.section === 'Comprar'" [title]="section.title"></app-title>
         <div *ngIf="section.img" class="col-12 col-md-6 card__content">
-          <img src="./assets/{{ section.img }}" class="d-block w-100">
+          <img src="./assets/{{ section.img }}" class="d-block w-100" alt="">
         </div>
         <div class="col-12 col-md-6">
           <ng-container *ngIf="section.section === 'Comprar'">
