@@ -241,7 +241,7 @@ export class URLPaquete implements UrlNmViajes {
   }
 
   getUrl() {
-    return `${this.url}?country=${this.params.idDestino}&month=${this.params.idMonth}&nights=${this.params.idNoche}&themes=${this.params.idTheme}`;
+    return `${this.url}?country=${this.params.idDestino}&month=${this.params.idMonth}&nights=${this.params.idNoche}&theme=${this.params.idTheme}`;
   }
 }
 
