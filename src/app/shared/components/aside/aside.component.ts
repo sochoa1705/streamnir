@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ThemeService } from 'src/app/api/api-nmviajes/services';
-import { Aside } from 'src/app/Models/general/aside';
 import { ModelTaggingSlidersBanners } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
-import { IGalleryImage, IGalleryService } from 'src/app/Services/presenter/data-page-presenter.models';
+import { IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
 import { environment } from 'src/environments/environment';
 import { getFileName, Guid } from '../../utils';
+
+declare function expandBox(): void
 
 @Component({
   selector: 'app-aside',
@@ -40,6 +41,10 @@ export class AsideComponent implements OnInit {
     this.getThemes();
   }
 
+  onImageClicked() {
+    expandBox();
+  }
+
   getThemes() {
     this._themeService.v1ApiThemeGet({
       'Parameter.Active': true,
@@ -58,8 +63,7 @@ export class AsideComponent implements OnInit {
   }
 
   addTag(gallery: IGalleryImage, nombre: "slider" | "banner", index: number, array: number) {
-
-    let position = "";
+    let position: string;
     let nombreTagg: "Slider Principal" | "Banner Principal";
 
     if (nombre === "slider") {
