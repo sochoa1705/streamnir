@@ -13,7 +13,7 @@
           <ng-container *ngFor="let image of slider; let first = first; let i = index">
             <div class="aside__content carousel-item" [ngClass]="{'active': first}">
               <img class="d-block w-100" [src]="image.PathImage" [ngClass]="{'pointer': image.RedirectLink}"
-                   [alt]="image.NameImage" (click)="onImageClicked()" />
+                   [alt]="image.NameImage" (click)="toSlider(image,'slider',i,slider.length)" />
             </div>
           </ng-container>
         </div>
@@ -38,7 +38,10 @@
         <div class="col-12">
           <ng-container *ngFor="let image of images; let i = index">
             <div class="aside__content_2">
-              <img class="pointer" [src]="image.PathImage" [alt]="image.NameImage" (click)="onImageClicked()">
+              <img class="pointer" [src]="image.PathImage" [alt]="image.NameImage" (click)="onImageClicked()"
+                    *ngIf="!image.RedirectLink">
+              <img class="pointer" [src]="image.PathImage" [alt]="image.NameImage"
+                    (click)="toSlider(image, 'banner', i, images.length)" *ngIf="image.RedirectLink">
             </div>
           </ng-container>
         </div>
