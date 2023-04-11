@@ -82,7 +82,7 @@ export class DestinosComponent implements OnInit {
 
       this.title = `Vuelos desde ${this.origen} a ${this.destino}`;
       this.subTitle = `Aprovecha ahora, encontramos los vuelos de ida y vuelta más baratos a ${this.destino}.`;
-      this.description = `Las mejores ofertas de vuelos a ${this.destino} en las últimas 24 horas.`;
+      this.description = `Las mejores ofertas de vuelos a ${this.destino} en los últimos 15 minutos.`;
     })
   }
 
