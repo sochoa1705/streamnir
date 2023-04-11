@@ -411,8 +411,6 @@ export class LoginComponent implements OnInit {
   }
 
   private getAllBookings(usuario: AuthDTO) {
-    debugger
-
     this.misReservasService.getAllBooking(usuario.Id.toString()).subscribe((data) => {
       localStorage.setItem('bookings', JSON.stringify(data));
     });

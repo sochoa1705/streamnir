@@ -271,6 +271,8 @@ export class FiltersafeComponent implements OnInit {
 
       let age = Number(this.insuranceQuoteForm.controls['passengers'].value[i].edad);
 
+      this.insuranceQuoteForm.controls['passengers'].value[i].fechaNacimiento = moment().subtract(age, 'years').format('DD/MM/YYYY');
+
       let fecha = this.insuranceQuoteForm.controls['passengers'].value[i].fechaNacimiento;
       const anio = moment(fecha, 'DD/MM/YYYY').year();
 
@@ -395,6 +397,11 @@ export class FiltersafeComponent implements OnInit {
       this.insuranceQuoteForm.addControl('aniosNacimiento', new FormControl(this.anios))
 
       //console.log(this.fromDate);
+
+      for (let i in this.insuranceQuoteForm.controls['passengers'].value) {
+        let age = Number(this.insuranceQuoteForm.controls['passengers'].value[i].edad);
+        this.insuranceQuoteForm.controls['passengers'].value[i].fechaNacimiento = moment().subtract(age, 'years').format('DD/MM/YYYY');
+      }
 
       let form = this.insuranceQuoteForm.value;
       localStorage.removeItem('Datasafe');
