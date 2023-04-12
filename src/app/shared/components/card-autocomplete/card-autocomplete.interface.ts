@@ -4,5 +4,6 @@ export interface ICardAutocomplete {
     country:string,
     title: string,
     children: ICardAutocomplete[],
-    texto?: string | undefined
+    texto?: string | undefined,
+    isSelected?: boolean
 }
