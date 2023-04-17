@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
-import { CardAutocompleteComponent } from '../card-autocomplete/card-autocomplete.component';
 import { ICardAutocomplete } from '../card-autocomplete/card-autocomplete.interface';
+
 @Component({
   selector: 'app-input-autocomplete',
   templateUrl: './input-autocomplete.component.html',
@@ -13,7 +13,7 @@ import { ICardAutocomplete } from '../card-autocomplete/card-autocomplete.interf
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => InputAutocompleteComponent),
       multi: true,
-    },
+    }
   ],
 })
 export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
@@ -27,6 +27,9 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   @Input() set items(value: ICardAutocomplete[] | null) {
     if (value) {
       this._items = value;
+      this._items.forEach((item: ICardAutocomplete) => {
+        if (item.isSelected) this.selectItm(item);
+      });
     }
   }
 
@@ -118,21 +121,20 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  //onBlur() {
-  // if (this.items?.length) {
-  //   this.valueInput = this._items[0].title;
-  //   this.valueInputChange.next(this.valueInput);
+  /*onBlur() {
+    if (this.items?.length) {
+      this.valueInput = this._items[0].title;
+      this.valueInputChange.next(this.valueInput);
 
-  //   this.selectItm(this._items[0]);
-  // }
-  //}
+      this.selectItm(this._items[0]);
+    }
+  }*/
 
   showAutocomplete() {
-    if (this._items.length > 0) {
+    if (this._items.length > 0)
       setTimeout(() => {
-        this.showBoxOrigen(false)
+		  this.showBoxOrigen(false)
       }, 600);
-    }
   }
 
   selectItm(itm: ICardAutocomplete) {
@@ -178,15 +180,11 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
 
   hideBoxLogic() {
     this.fromEventSubscripcion = fromEvent(document, 'click').subscribe((e) => {
-      // cerrar al darle click fuera de la caja
-
-      if (!this.cardAutocompleteComponent.nativeElement.contains(e.target) && !((e.target as HTMLInputElement).tagName == 'INPUT')) {
+      // cerrar al darle clic fuera de la caja
+      if (!this.cardAutocompleteComponent.nativeElement.contains(e.target) &&
+          !((e.target as HTMLInputElement).tagName == 'INPUT')) {
         this.hideBoxOrigen();
-
-        if (this.valueInput.length > 0 && !this.value) {
-          this.clean();
-        }
-
+        if (this.valueInput.length > 0 && !this.value) this.clean();
       }
     });
   }

@@ -1,33 +1,34 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
+import {NgbCalendar, NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
-import { concat, Observable, of, OperatorFunction, pipe, Subject, UnaryFunction } from 'rxjs';
-import { distinctUntilChanged, tap, switchMap, catchError, map, debounceTime, filter, takeUntil } from 'rxjs/operators';
-import { DestinosService } from 'src/app/Component/home-page/vuelos/commons/components/destinos/services/destinos.service';
-import { ModelTaggingVuelos } from 'src/app/Services/analytics/tagging.models';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
-import { DestinyService } from 'src/app/Services/destiny/destiny.service';
-import { NotificationService } from 'src/app/Services/notification.service';
-import { ClassValueCalendar } from '../../calendar/calendar.models';
-import { ICardAutocomplete } from '../../card-autocomplete/card-autocomplete.interface';
-import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
-import { IDistributionObjectVuelos } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { EnumCabinsVuelos, EnumFlightType, ParamsVueloHotel, ParamsVuelos, SaveModelVuelos, URLVueloHotel, URLVuelos, URLVuelosMulti } from '../../tabs/tabs.models';
-import { IGeoTree } from './tab-vuelos.interfaces';
-import { IntermediaryService } from '../../../../Services/intermediary.service';
-import { UserStorage, AccountsService } from '../../../../Services/accounts.service';
-import { environment } from 'src/environments/environment';
+import {concat, Observable, of, Subject} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUntil, tap} from 'rxjs/operators';
+import {
+  DestinosService
+} from 'src/app/Component/home-page/vuelos/commons/components/destinos/services/destinos.service';
+import {ModelTaggingVuelos} from 'src/app/Services/analytics/tagging.models';
+import {TaggingService} from 'src/app/Services/analytics/tagging.service';
+import {DestinyService} from 'src/app/Services/destiny/destiny.service';
+import {NotificationService} from 'src/app/Services/notification.service';
+import {ClassValueCalendar} from '../../calendar/calendar.models';
+import {ICardAutocomplete} from '../../card-autocomplete/card-autocomplete.interface';
+import {PopUpPasajeroComponent} from '../../pop-up-pasajero/pop-up-pasajero.component';
+import {IDistributionObjectVuelos} from '../../pop-up-pasajero/pop-up-pasajero.model';
+import {EnumCabinsVuelos, EnumFlightType, ParamsVuelos, SaveModelVuelos, URLVuelosMulti} from '../../tabs/tabs.models';
+import {IGeoTree} from './tab-vuelos.interfaces';
+import {IntermediaryService} from '../../../../Services/intermediary.service';
+import {AccountsService, UserStorage} from '../../../../Services/accounts.service';
+import {environment} from 'src/environments/environment';
 
 @Component({
   selector: 'app-tab-vuelos',
   templateUrl: './tab-vuelos.component.html',
   styleUrls: ['./tab-vuelos.component.scss']
 })
-export class TabVuelosComponent implements OnInit, OnDestroy {
-
+export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('inputDestino', { static: false }) inputDestino!: any;//ElementRef<HTMLInputElement>
   @ViewChild('inputDepartureDate') inputDepartureDate: ElementRef;
 
@@ -48,24 +49,18 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     return this._vuelosTab;
   }
 
-  vuelosEscogidos: {} = {};
-
-
   form!: FormGroup;
   fromDate: NgbDate | null
   citysOrigenSelect: IGeoTree[] = [];
   citysDestinosSelect: IGeoTree[] = [];
   origen: any;
   destino: any;
-  origenHotel: any;
   toDate: NgbDate | null;
 
   distributionObject: IDistributionObjectVuelos;
   hoveredDate: NgbDate | null = null;
 
   EnumFlightType = EnumFlightType;
-  EnumCabins = EnumCabinsVuelos;
-
 
   vuelos$: Observable<ICardAutocomplete[]>;
   vuelosLoading = false;
@@ -75,15 +70,13 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   vuelosLoading2 = false;
   vuelosInput2$ = new Subject<string>();
 
-  vuelosValue: EnumFlightType;
-
-
   minLengthAutocomplete = 3;
 
   valueInputOrigen = "";
   valueInputDestino = "";
 
   isSubmit = false;
+  isViewInitialized: boolean;
 
   private readonly destroy$ = new Subject();
   flightSearchForm!: FormGroup;
@@ -110,12 +103,17 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     this.userStorage = this.accountService.getUserStorage();
   }
 
+  ngAfterViewInit() {
+    this.isViewInitialized = true;
+    this.valueInputOrigen = 'Lima';
+    this.vuelosInput$.next('Lima');
+  }
+
   logicPathVuelos() {
     this.destinosService.getParam().pipe(
       takeUntil(this.destroy$)
     ).subscribe(codigo => {
       if (!codigo) {
-
         this.form.controls["origen"].patchValue(null);
         this.form.controls["destino"].patchValue(null);
       } else
@@ -152,9 +150,9 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
           catchError(() => of([])), // empty list on error
           tap(() => this.vuelosLoading = false)
         )),
-        map(item => this.convertFormatAutocomplete(item))
+        map(item => this.convertFormatAutocomplete(item, true))
       )
-    )
+    );
   }
 
   private loadVuelosDestino() {
@@ -177,16 +175,12 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     return (this.flightSearchForm.get('multicity') as FormArray).controls;
   }
 
-  convertFormatAutocomplete(array: IGeoTree[]): ICardAutocomplete[] {
-
+  convertFormatAutocomplete(array: IGeoTree[], isOrigin: boolean = false): ICardAutocomplete[] {
     const nuevoArray: ICardAutocomplete[] = [];
-
-    array.forEach((x) => {
-
+    array.forEach((x: IGeoTree) => {
       const elementFind = nuevoArray.find(item => item.id == x.aerocodiata);
-
       if (!elementFind && x.tn_iata_padre_fn == "0") {
-        const obj = {
+        const obj: ICardAutocomplete = {
           id: x.aerocodiata,
           codigo: x.city_code,
           title: x.city,
@@ -195,7 +189,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
         }
         nuevoArray.push(obj)
       } else if (!elementFind && x.tn_iata_padre_fn == "2") {
-
         const obj = {
           id: x.aerocodiata,
           country: "",
@@ -211,28 +204,24 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
             }
           ]
         }
-
         nuevoArray.push(obj)
-
-      } else if (elementFind && x.tn_iata_padre_fn == "2") {
-
-        elementFind.children.push(
-          {
-            id: x.aerocodiata,
-            codigo: x.city_code,
-            title: x.city,
-            country: x.country,
-            children: []
-          }
-        )
-      }
-
+      } else if (elementFind && x.tn_iata_padre_fn == "2")
+        elementFind.children.push({
+          id: x.aerocodiata,
+          codigo: x.city_code,
+          title: x.city,
+          country: x.country,
+          children: []
+        });
     });
+
+    if (this.isViewInitialized && isOrigin) nuevoArray[0].isSelected = true;
+    this.isViewInitialized = false;
 
     return nuevoArray;
   }
 
-  openSnackBar(message: string, action: string = "Error") {
+  openSnackBar(message: string) {
     this._snackBar.open(message, "", {
       duration: 10000,
     });
@@ -266,11 +255,11 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
     ]);
   }
 
-  // navigateToResponseUrl(url: string): void {
-  //   //this.router.navigateByUrl(url);
-  //   //window.open(url, '_blank');
-  //   window.location.href = url;
-  // }
+  /*navigateToResponseUrl(url: string): void {
+    //this.router.navigateByUrl(url);
+    //window.open(url, '_blank');
+    window.location.href = url;
+  }*/
 
   validateTab() {
     const errors = [];
@@ -322,10 +311,8 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
         return;
       }
 
-      const url = this.getUrl();
-
       //this.navigateToResponseUrl(url);
-      window.location.href = url;
+      window.location.href = this.getUrl();
     }
   }
 
@@ -382,7 +369,6 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
       fechaRegreso = moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD");
     }
 
-
     const model = new ModelTaggingVuelos(
       nombre,
       params.origen.title,
@@ -398,33 +384,28 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
       fechaRegreso,
       diasAnticipacion,
       duracionViaje
-    )
+    );
 
     TaggingService.buscarVuelos(model);
-
   }
 
   getParams() {
-    let params = new ParamsVuelos(
-      {
-        fromDate: this.fromDate || null,
-        toDate: this.toDate || null,
-        form: this.form,
-        citysDestinosSelect: this.citysDestinosSelect || null,
-        citysOrigenSelect: this.citysOrigenSelect || null,
-        email: this.userStorage.email || '',
-        clase: this.distributionObject['clase'],
-        tipoVuelo: this.tipoVuelo
-      }
-    );
-
-    return params;
+    return new ParamsVuelos({
+      fromDate: this.fromDate || null,
+      toDate: this.toDate || null,
+      form: this.form,
+      citysDestinosSelect: this.citysDestinosSelect || null,
+      citysOrigenSelect: this.citysOrigenSelect || null,
+      email: this.userStorage.email || '',
+      clase: this.distributionObject['clase'],
+      tipoVuelo: this.tipoVuelo
+    });
   }
 
   public getUrl() {
     this.userStorage = this.accountService.getUserStorage();
 
-    let url = ''
+    let url: string;
     let params = this.getParams();
 
     // nuevo
@@ -488,9 +469,7 @@ export class TabVuelosComponent implements OnInit, OnDestroy {
   searchVueloHotelMulti(): void {
     let jsonArray = this.setMultiCityArray();
     const email: string = this.userStorage.email || '';
-    let url = new URLVuelosMulti(this.tipoVuelo, this.distributionObject, email).getUrlMulti(jsonArray);
-
-    window.location.href = url;
+    window.location.href = new URLVuelosMulti(this.tipoVuelo, this.distributionObject, email).getUrlMulti(jsonArray);
     //this.navigateToResponseUrl(url);
   }
 
