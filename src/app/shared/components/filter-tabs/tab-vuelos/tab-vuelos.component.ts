@@ -72,7 +72,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   minLengthAutocomplete = 3;
 
-  valueInputOrigen = "";
+  valueInputOrigen = 'Lima';
   valueInputDestino = "";
 
   isSubmit = false;
@@ -105,7 +105,6 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.isViewInitialized = true;
-    this.valueInputOrigen = 'Lima';
     this.vuelosInput$.next('Lima');
   }
 
@@ -219,12 +218,6 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isViewInitialized = false;
 
     return nuevoArray;
-  }
-
-  openSnackBar(message: string) {
-    this._snackBar.open(message, "", {
-      duration: 10000,
-    });
   }
 
   createForm() {
