@@ -276,7 +276,7 @@ export class FiltersafeComponent implements OnInit {
       let fecha = this.insuranceQuoteForm.controls['passengers'].value[i].fechaNacimiento;
       const anio = moment(fecha, 'DD/MM/YYYY').year();
 
-      let anioNacio: any = anio - age;
+      let anioNacio: any = anio;
 
       Ages.push(age);
       this.ageCustomers = Ages.join(';');
