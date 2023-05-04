@@ -13,9 +13,9 @@ export const environment = {
   comisionistaAgenciaAC: '',
   apiIp: 'https://api.ipify.org/?format=json',
   today: (hoy: any) => {
-    let fehcaHoy = `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`
-    return fehcaHoy
+    return `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`
   },
+  offerExpireDate: '2023-05-05', //YYYY-MM-DD
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
   urlAutosNmViajes: 'https://autos.nmviajes.com/',

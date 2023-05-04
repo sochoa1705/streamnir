@@ -22,6 +22,7 @@ import { HotelsModule } from '../hotels/hotels.module';
 import { CarsModule } from '../cars/cars.module';
 import { ActivitiesModule } from '../activities/activities.module';
 import { FlightsPlusHotelModule } from '../flights-plus-hotel/flights-plus-hotel.module';
+import { TimerBannerModule } from '../../../shared/components/timer-banner/timer-banner.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -44,7 +45,8 @@ import { FlightsPlusHotelModule } from '../flights-plus-hotel/flights-plus-hotel
     FlightsPlusHotelModule,
     HotelsModule,
     CarsModule,
-    ActivitiesModule
+    ActivitiesModule,
+    TimerBannerModule
   ],
   exports: [HomeComponent],
   providers: [DestinyService, AsidePresenterService, BusinessUnitService]
