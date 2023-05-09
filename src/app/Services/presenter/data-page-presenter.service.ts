@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from } from 'rxjs';
-import { filter, map, mergeMap, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ResponseModelT } from 'src/app/shared/models';
 import { NmvModel } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
-import { EGalleryCode, IGalleryService } from './data-page-presenter.models';
+import { IGalleryService } from './data-page-presenter.models';
 
 @Injectable({
   providedIn: 'root'
@@ -214,6 +213,12 @@ export class DataPagePresenterService {
             text: "Mapa de Sitio",
             link: "#",
             target: "_self"
+          },
+          {
+            id: 6,
+            text: 'Zona Tiendas',
+            link: 'zona-tiendas',
+            target: '_self'
           }
           // {
           //   id: 5,
