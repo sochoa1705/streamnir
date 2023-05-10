@@ -31,6 +31,7 @@ import { ResponsabilidadSocialModule } from './resonsabilidad-social/responsabil
 import { ComprarModule } from './comprar/comprar.module';
 import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/page-not-found.component';
 import { ItineraryModule } from './itinerary/itinerary.module';
+import { RetailModule } from './retail/retail.module';
 
 @NgModule({
   declarations: [HomePageComponent, PageNotFoundComponent],
@@ -57,7 +58,8 @@ import { ItineraryModule } from './itinerary/itinerary.module';
     LibroReclamacionesModule,
     PoliticasModule,
     ResponsabilidadSocialModule,
-    ComprarModule
+    ComprarModule,
+    RetailModule
   ],
   exports: [HomePageComponent],
   providers: [MainService, DollarChangeService, OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]

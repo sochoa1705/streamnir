@@ -1,0 +1,47 @@
+.h659 img {
+  object-fit: cover;
+  object-position: top;
+}
+
+.banner-title {
+  bottom: 7%;
+  left: 7%;
+
+  h1.text-white {
+    font-family: "Open Sans", serif;
+    font-size: 3.75em;
+    font-weight: normal;
+    letter-spacing: -0.5px;
+    line-height: 80px;
+  }
+
+  h6 {
+    color: #E40E33;
+    font-family: "Open Sans", serif;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: 0.18px;
+  }
+}
+
+p.text-justify {
+  font-weight: 500;
+  font-size: .875em;
+  letter-spacing: 0.1px;
+  color: #4B4B4B;
+}
+
+@media (max-width: 640px) {
+  p.text-justify {
+    font-size: .75em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  h1.text-white {
+    font-size: 1.125rem !important;
+    font-weight: bold !important;
+    letter-spacing: 0.18px !important;
+    line-height: 25px !important;
+  }
+}

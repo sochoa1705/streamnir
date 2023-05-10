@@ -23,6 +23,7 @@ import { TusdatosComponent } from './tusdatos/tusdatos.component';
 import { ItineraryComponent } from './itinerary/itinerary.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { GifCardComponent } from './gif-card/gif-card.component';
+import {RetailComponent} from "./retail/retail.component";
 
 const routes: Routes = [
   {
@@ -112,6 +113,10 @@ const routes: Routes = [
       {
         path: 'nuestras-agencias',
         component: NuestrasAgenciasComponent
+      },
+      {
+        path: 'zona-tiendas',
+        component: RetailComponent
       },
       {
         path: 'libro-reclamaciones',
