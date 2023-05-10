@@ -1,3 +1,33 @@
-<div class="w-100 px-3 py-2 py-lg-3 text-center" *ngIf="isDisplayed">
-	<countdown-timer [countDownTimerConfig]="timerConfig"></countdown-timer>
+<div class="w-100 px-3 py-1 py-md-2 text-center d-md-flex flex-md-row flex-md-wrap align-items-md-center justify-content-md-center"
+     *ngIf="isDisplayed">
+	<span id="timer_text" class="fw-bold text-black mb-1 mb-md-0 me-md-3">{{offerDescription}}</span>
+	<div class="g-1 justify-content-center justify-content-md-start row">
+		<div class="col-auto">
+			<h5 class="time-unit mb-0">{{hoursFormatted}}</h5>
+			<p class="time-text mb-0" [ngPlural]="hours">
+				<ng-template ngPluralCase="=1">hora</ng-template>
+				<ng-template ngPluralCase="other">horas</ng-template>
+			</p>
+		</div>
+		<div class="col-auto">
+			<h5 class="time-unit mb-auto">:</h5>
+		</div>
+		<div class="col-auto">
+			<h5 class="time-unit mb-0">{{minutesFormatted}}</h5>
+			<p class="time-text mb-0" [ngPlural]="minutes">
+				<ng-template ngPluralCase="=1">minuto</ng-template>
+				<ng-template ngPluralCase="other">minutos</ng-template>
+			</p>
+		</div>
+		<div class="col-auto">
+			<h5 class="time-unit mb-auto">:</h5>
+		</div>
+		<div class="col-auto">
+			<h5 class="time-unit mb-0">{{secondsFormatted}}</h5>
+			<p class="time-text mb-0" [ngPlural]="seconds">
+				<ng-template ngPluralCase="=1">segundo</ng-template>
+				<ng-template ngPluralCase="other">segundos</ng-template>
+			</p>
+		</div>
+	</div>
 </div>

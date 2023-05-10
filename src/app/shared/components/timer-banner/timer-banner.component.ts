@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {countDownTimerConfigModel, CountdownTimerService, countDownTimerTexts} from "ngx-timer";
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 
 @Component({
@@ -7,36 +6,50 @@ import {environment} from "../../../../environments/environment";
 	templateUrl: './timer-banner.component.html',
 	styleUrls: ['./timer-banner.component.scss']
 })
-export class TimerBannerComponent implements OnInit {
+export class TimerBannerComponent implements OnInit, OnDestroy {
 	isDisplayed = false;
-	expireDate: Date;
-	timerConfig: countDownTimerConfigModel;
+	offerDescription = '';
 
-	constructor(private countdownService: CountdownTimerService) { }
+	startTime: number = Date.now();
+	hours: number = 0;
+	minutes: number = 0;
+	seconds: number = 0;
+	interval: any;
+
+	constructor() { }
 
 	ngOnInit(): void {
+		this.offerDescription = environment.offerText;
 		this.configTimer();
 	}
 
 	configTimer() {
-		const currentDate = new Date();
 		const expireDateSeparated = environment.offerExpireDate.split('-');
-		this.expireDate = new Date(+expireDateSeparated[0], +expireDateSeparated[1] - 1, +expireDateSeparated[2]);
-
-		if (this.expireDate > currentDate) {
+		this.startTime = new Date(+expireDateSeparated[0], +expireDateSeparated[1] - 1, +expireDateSeparated[2]).getTime();
+		if (this.startTime > Date.now()) {
 			this.isDisplayed = true;
-
-			this.timerConfig = new countDownTimerConfigModel();
-			this.timerConfig.timerClass = 'countdown-timer';
-
-			this.timerConfig.timerTexts = new countDownTimerTexts();
-			this.timerConfig.timerTexts.hourText = 'HH';
-			this.timerConfig.timerTexts.minuteText = 'MM';
-			this.timerConfig.timerTexts.secondsText = 'SS';
-
-			this.countdownService.startTimer(this.expireDate);
+			this.interval = setInterval(() => {
+				const elapsed = Math.abs(Date.now() - this.startTime);
+				this.hours = Math.floor(elapsed / (60 * 60 * 1000));
+				this.minutes = Math.floor((elapsed % (60 * 60 * 1000)) / (60 * 1000));
+				this.seconds = Math.floor((elapsed % (60 * 1000)) / 1000);
+			}, 1000);
 		}
-
 	}
 
+	get hoursFormatted(): string {
+		return this.hours < 10 ? `0${this.hours}` : `${this.hours}`;
+	}
+
+	get minutesFormatted(): string {
+		return this.minutes < 10 ? `0${this.minutes}` : `${this.minutes}`;
+	}
+
+	get secondsFormatted(): string {
+		return this.seconds < 10 ? `0${this.seconds}` : `${this.seconds}`;
+	}
+
+	ngOnDestroy() {
+		clearInterval(this.interval);
+	}
 }
