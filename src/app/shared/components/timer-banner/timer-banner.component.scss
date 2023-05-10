@@ -1,0 +1,30 @@
+.w-100 {
+  background-color: #D4D4D4;
+  font-family: "Open Sans", serif !important;
+
+  span.text-black {
+    font-size: .875em;
+  }
+
+  h5.time-unit {
+    color: #EB2B4C;
+    font-size: 1.25em;
+    text-shadow: 1px 1px 2px #00000057;
+  }
+
+  p.time-text {
+    font-size: .75em;
+    color: #EB2B4C;
+  }
+}
+
+@media (min-width: 768px) {
+  span.text-black {
+    font-size: 1.5em !important;
+  }
+
+  h5.time-unit {
+    font-size: 2em !important;
+    text-shadow: 1px 1px 3px #00000057 !important;
+  }
+}
