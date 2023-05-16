@@ -16,7 +16,7 @@ export const environment = {
     return `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`
   },
   offerText: '¡Regresó el Travel Outlet NMViajes! Regístrate solo falta',
-  offerExpireDate: '2023-05-12 T 13:30:00', //YYYY-MM-DD T hh:mm:ss
+  offerExpireDate: '2023-05-18 T 09:00:00', //YYYY-MM-DD T hh:mm:ss
   offerLink: 'https://www.nmviajes.com/tusdatos',
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
