@@ -9,6 +9,7 @@ import {environment} from "../../../../environments/environment";
 export class TimerBannerComponent implements OnInit, OnDestroy {
 	isDisplayed = false;
 	offerDescription = '';
+	offerLink = '';
 
 	startTime: number = Date.now();
 	hours: number = 0;
@@ -20,12 +21,22 @@ export class TimerBannerComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		this.offerDescription = environment.offerText;
+		this.offerLink = environment.offerLink;
 		this.configTimer();
 	}
 
 	configTimer() {
-		const expireDateSeparated = environment.offerExpireDate.split('-');
-		this.startTime = new Date(+expireDateSeparated[0], +expireDateSeparated[1] - 1, +expireDateSeparated[2]).getTime();
+		const expireDateSeparated = environment.offerExpireDate.split('T')[0].trim().split('-');
+		const expireTimeSeparated = environment.offerExpireDate.split('T')[1].trim().split(':');
+		this.startTime = new Date(
+			+expireDateSeparated[0],
+			+expireDateSeparated[1] - 1,
+			+expireDateSeparated[2],
+			+expireTimeSeparated[0],
+			+expireTimeSeparated[1],
+			+expireTimeSeparated[2]
+		).getTime();
+
 		if (this.startTime > Date.now()) {
 			this.isDisplayed = true;
 			this.interval = setInterval(() => {
@@ -35,6 +46,10 @@ export class TimerBannerComponent implements OnInit, OnDestroy {
 				this.seconds = Math.floor((elapsed % (60 * 1000)) / 1000);
 			}, 1000);
 		}
+	}
+
+	onClick() {
+		if (this.offerLink) window.open(this.offerLink, '_blank')?.focus();
 	}
 
 	get hoursFormatted(): string {
