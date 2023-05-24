@@ -15,9 +15,9 @@ export const environment = {
   today: (hoy: any) => {
     return `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
   },
-  offerText: '¡Regresó el Travel Outlet NMViajes! Regístrate solo falta',
-  offerExpireDate: '2023-05-15 T 13:30:00', //YYYY-MM-DD T hh:mm:ss
-  offerLink: 'https://www.nmviajes.com/tusdatos',
+  offerText: '¡Apúrate! Estas ofertas acaban en:',
+  offerExpireDate: '2023-05-27 T 23:59:00', //YYYY-MM-DD T hh:mm:ss
+  offerLink: 'https://www.nmviajes.com/vuelos/?utm_source=web&utm_medium=email&utm_campaign=20OFF_VUELOS&utm_id=20OFF_VUELOS&utm_term=header_20off_vuelos&utm_content=header_20off_vuelos',
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
   urlAutosNmViajes: 'https://autos.nmviajes.com/',
