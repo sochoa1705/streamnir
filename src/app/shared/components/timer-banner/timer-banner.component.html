@@ -3,18 +3,16 @@
 		[ngClass]="{'pointer': offerLink}" (click)="onClick()" *ngIf="isDisplayed">
 	<span id="timer_text" class="fw-bold text-black mb-1 mb-md-0 me-md-3">{{offerDescription}}</span>
 	<div class="g-1 justify-content-center justify-content-md-start row">
-		<ng-container *ngIf="days >= 1">
-			<div class="col-auto">
-				<h5 class="time-unit mb-0">{{daysFormatted}}</h5>
-				<p class="time-text mb-0" [ngPlural]="days">
-					<ng-template ngPluralCase="=1">d&iacute;a</ng-template>
-					<ng-template ngPluralCase="other">d&iacute;as</ng-template>
-				</p>
-			</div>
-			<div class="col-auto">
-				<h5 class="time-unit mb-auto">:</h5>
-			</div>
-		</ng-container>
+		<div class="col-auto">
+			<h5 class="time-unit mb-0">{{daysFormatted}}</h5>
+			<p class="time-text mb-0" [ngPlural]="days">
+				<ng-template ngPluralCase="=1">d&iacute;a</ng-template>
+				<ng-template ngPluralCase="other">d&iacute;as</ng-template>
+			</p>
+		</div>
+		<div class="col-auto">
+			<h5 class="time-unit mb-auto">:</h5>
+		</div>
 		<div class="col-auto">
 			<h5 class="time-unit mb-0">{{hoursFormatted}}</h5>
 			<p class="time-text mb-0" [ngPlural]="hours">
@@ -32,17 +30,15 @@
 				<ng-template ngPluralCase="other">minutos</ng-template>
 			</p>
 		</div>
-		<ng-container *ngIf="days < 1">
-			<div class="col-auto">
-				<h5 class="time-unit mb-auto">:</h5>
-			</div>
-			<div class="col-auto">
-				<h5 class="time-unit mb-0">{{secondsFormatted}}</h5>
-				<p class="time-text mb-0" [ngPlural]="seconds">
-					<ng-template ngPluralCase="=1">segundo</ng-template>
-					<ng-template ngPluralCase="other">segundos</ng-template>
-				</p>
-			</div>
-		</ng-container>
+		<div class="col-auto">
+			<h5 class="time-unit mb-auto">:</h5>
+		</div>
+		<div class="col-auto">
+			<h5 class="time-unit mb-0">{{secondsFormatted}}</h5>
+			<p class="time-text mb-0" [ngPlural]="seconds">
+				<ng-template ngPluralCase="=1">segundo</ng-template>
+				<ng-template ngPluralCase="other">segundos</ng-template>
+			</p>
+		</div>
 	</div>
 </div>
