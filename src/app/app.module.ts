@@ -30,33 +30,35 @@ import { LoadingModule } from './components/loading/loading.module';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { OptionalDataModule } from './components/optional-data/optional-data.module';
 import { CryptoService } from './Services/util/crypto.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatTabsModule,
-    //MatCheckboxModule,
-    MatSnackBarModule,
-    MatDialogModule,
-    NgbModule,
-    SocialLoginModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NotificationModule,
-    LoginModule,
-    ChangePasswordModule,
-    CheckMailModule,
-    ForgotPasswordModule,
-    NewAccountModule,
-    PerfilModule,
-    LoadingModule,
-    OptionalDataModule
-  ],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		MatTabsModule,
+		//MatCheckboxModule,
+		MatSnackBarModule,
+		MatDialogModule,
+		NgbModule,
+		SocialLoginModule,
+		HttpClientModule,
+		FormsModule,
+		ReactiveFormsModule,
+		NotificationModule,
+		LoginModule,
+		ChangePasswordModule,
+		CheckMailModule,
+		ForgotPasswordModule,
+		NewAccountModule,
+		PerfilModule,
+		LoadingModule,
+		OptionalDataModule,
+		MatTooltipModule
+	],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },

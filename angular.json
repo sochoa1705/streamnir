@@ -51,8 +51,7 @@
                             "src/styles.css"
                         ],
                         "scripts": [
-                            "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-                            "src/Scripts/olark-functions.js"
+                            "./node_modules/bootstrap/dist/js/bootstrap.min.js"
                         ]
                     },
                     "configurations": {

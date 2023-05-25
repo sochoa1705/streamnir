@@ -56,21 +56,10 @@ export class HotelsComponent implements OnInit {
     this.urlPaqueteDinamico = environment.urlPaqueteDinamico;
 
     this._activatedRoute.params.subscribe(params => {
-
       let city: string = this.city || params.city;
       let site: string = this.site || params.site;
-      let isflight: boolean = this.isflight === undefined ? params.isflight : this.isflight;
-
-      this.getAllHotels(city, site, isflight);
-
-      let intervalId = setInterval(() => {
-        let olark = document.getElementById("hbl-live-chat-wrapper");
-
-        if (olark != null) {
-          olark?.remove();
-          clearInterval(intervalId);
-        }
-      }, 100);
+      let isFlight: boolean = this.isflight === undefined ? params.isflight : this.isflight;
+      this.getAllHotels(city, site, isFlight);
     });
   }
 
