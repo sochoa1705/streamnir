@@ -1,88 +1,89 @@
-// #cdr {
-//     position: absolute;
-//     z-index: 1000;
-//     display: none;
-//     min-width: 10rem;
-//     padding: 15px 10px 10px 10px;
-//     list-style: none;
-//     background-color: #fff;
-//     background-clip: padding-box;
-//     border: 1px solid rgba(0, 0, 0, 0.15);
-//     border-radius: 5px;
-//     li {
-//         margin-bottom: 10px;
-//     }
-//     // ul {
-//     //     list-style: none;
-//     //     padding: 0px;
-//     // }
-//     svg {
-//         margin-right: 6px;
-//     }
-//     h4 {
-//         width: auto;
-//         font-size: 16px;
-//         margin-bottom: 0;
-//         line-height: 16px;
-//         padding: 0;
-//         font-family: "Montserrat";
-//         font-weight: 500;
-//     }
-//     span {
-//         font-size: 10px;
-//         line-height: 10px;
-//         padding: 0;
-//         font-family: "Montserrat";
-//     }
-//     input {
-//         border: 0;
-//         text-align: center;
-//         width: 30px;
-//         max-width: 30px;
-//         min-width: 30px;
-//         display: block;
-//         font-family: "Montserrat";
-//         font-size: 12px;
-//     }
-//     button {
-//         background: #df0c30;
-//         font-family: "Montserrat";
-//         &.cancel {
-//             background: #ebebeb;
-//             color: #4b4b4b;
-//         }
-//         &.count {
-//             border: 1px solid #e5e6e7;
-//             background: white;
-//             color: #009aed;
-//             &:hover {
-//                 background: #df0c30;
-//                 color: white;
-//             }
-//         }
-//     }
-// }
+/*#cdr {
+		position: absolute;
+		z-index: 1000;
+		display: none;
+		min-width: 10rem;
+		padding: 15px 10px 10px 10px;
+		list-style: none;
+		background-color: #fff;
+		background-clip: padding-box;
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		border-radius: 5px;
+		li {
+				margin-bottom: 10px;
+		}
+		// ul {
+		//     list-style: none;
+		//     padding: 0px;
+		// }
+		svg {
+				margin-right: 6px;
+		}
+		h4 {
+				width: auto;
+				font-size: 16px;
+				margin-bottom: 0;
+				line-height: 16px;
+				padding: 0;
+				font-family: "Montserrat";
+				font-weight: 500;
+		}
+		span {
+				font-size: 10px;
+				line-height: 10px;
+				padding: 0;
+				font-family: "Montserrat";
+		}
+		input {
+				border: 0;
+				text-align: center;
+				width: 30px;
+				max-width: 30px;
+				min-width: 30px;
+				display: block;
+				font-family: "Montserrat";
+				font-size: 12px;
+		}
+		button {
+				background: #df0c30;
+				font-family: "Montserrat";
+				&.cancel {
+						background: #ebebeb;
+						color: #4b4b4b;
+				}
+				&.count {
+						border: 1px solid #e5e6e7;
+						background: white;
+						color: #009aed;
+						&:hover {
+								background: #df0c30;
+								color: white;
+						}
+				}
+		}
+}*/
 
 
-.sp-message{
-    COLOR: RED;
-    FONT-WEIGHT: BOLD;
-    DISPLAY: BLOCK;
-    PADDING-BOTTOM: 10PX;
+.sp-message {
+	COLOR: RED;
+	FONT-WEIGHT: BOLD;
+	DISPLAY: BLOCK;
+	PADDING-BOTTOM: 10PX;
 }
-.textPolitica{
-    button.link{
-        cursor: pointer;
-        font-family: Montserrat !important;
-        font-weight: 600 !important;
-        font-size: 12px !important;
-        line-height: 21px!important;
-        letter-spacing: 0.1px!important;
-        color: #009AED;
-        text-decoration: underline;
-        background: none;
-        padding: 0;
-    }
+
+.textPolitica {
+	button.link {
+		cursor: pointer;
+		font-family: Montserrat, serif !important;
+		font-weight: 600 !important;
+		font-size: 12px !important;
+		line-height: 21px !important;
+		letter-spacing: 0.1px !important;
+		color: #009aed;
+		text-decoration: underline;
+		background: none;
+		padding: 0;
+	}
 }
 
 a#btn-whatsapp {
@@ -91,7 +92,7 @@ a#btn-whatsapp {
 	bottom: 15px;
 	z-index: 9999;
 	background-color: #25C763;
-	transition: .25s ease-in-out;
+	transition: all .25s ease-in-out;
 
 	&:hover {
 		padding-right: 1.125rem;

@@ -7,14 +7,9 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider
-} from 'angularx-social-login';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SocialLoginModule } from 'angularx-social-login';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -30,33 +25,35 @@ import { LoadingModule } from './components/loading/loading.module';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { OptionalDataModule } from './components/optional-data/optional-data.module';
 import { CryptoService } from './Services/util/crypto.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatTabsModule,
-    //MatCheckboxModule,
-    MatSnackBarModule,
-    MatDialogModule,
-    NgbModule,
-    SocialLoginModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NotificationModule,
-    LoginModule,
-    ChangePasswordModule,
-    CheckMailModule,
-    ForgotPasswordModule,
-    NewAccountModule,
-    PerfilModule,
-    LoadingModule,
-    OptionalDataModule
-  ],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		MatTabsModule,
+		//MatCheckboxModule,
+		MatSnackBarModule,
+		MatDialogModule,
+		NgbModule,
+		SocialLoginModule,
+		HttpClientModule,
+		FormsModule,
+		ReactiveFormsModule,
+		NotificationModule,
+		LoginModule,
+		ChangePasswordModule,
+		CheckMailModule,
+		ForgotPasswordModule,
+		NewAccountModule,
+		PerfilModule,
+		LoadingModule,
+		OptionalDataModule,
+		MatTooltipModule
+	],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
