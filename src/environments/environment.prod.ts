@@ -15,9 +15,9 @@ export const environment = {
   today: (hoy: any) => {
     return `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`
   },
-  offerText: '¡Apúrate! Estas ofertas acaban en:',
-  offerExpireDate: '2023-05-27 T 23:59:00', //YYYY-MM-DD T hh:mm:ss
-  offerLink: 'https://www.nmviajes.com/vuelos/?utm_source=web&utm_medium=email&utm_campaign=20OFF_VUELOS&utm_id=20OFF_VUELOS&utm_term=header_20off_vuelos&utm_content=header_20off_vuelos',
+  offerText: 'Aprovecha el Flash Sale, acaba en:',
+  offerExpireDate: '2023-06-01 T 00:00:00', //YYYY-MM-DD T hh:mm:ss
+  offerLink: 'https://nam02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.nmviajes.com%2Fvuelos%3Futm_source%3Dweb%26utm_medium%3Dreloj%26utm_campaign%3Dflashsale%26utm_id%3Dflashsale%26utm_term%3Dheader_flash_vuelos%26utm_content%3Dheader_flash_vuelos&data=05%7C01%7Csamuel.huaman%40expertiatravel.com%7C728f20478ff44c7d52c408db609ed10d%7Cf47010b409cd41ffa9ca7e9b411249f6%7C0%7C0%7C638210007479309947%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=FUuls7YiDadCZlcgQBSLcp7YUwm9xX9j8FSkyig0IcI%3D&reserved=0',
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
   urlAutosNmViajes: 'https://autos.nmviajes.com/',
