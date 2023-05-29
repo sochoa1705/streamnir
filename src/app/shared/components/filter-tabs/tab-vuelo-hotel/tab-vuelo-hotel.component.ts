@@ -5,216 +5,250 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { ParamsVueloHotel, URLVueloHotel } from '../../tabs/tabs.models';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
-import { ModelTaggingVuelosHoteles } from 'src/app/Services/analytics/tagging.models';
+import { ModelTaggingVuelosHoteles, SearchFlightHotel } from 'src/app/Services/analytics/tagging.models';
 import * as moment from 'moment';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { InputValidationService } from '../../../../Services/inputValidation.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { AccountsService } from 'src/app/Services/accounts.service';
+
 moment.locale('es')
 
 @Component({
-  selector: 'app-tab-vuelo-hotel',
-  templateUrl: './tab-vuelo-hotel.component.html',
-  styleUrls: ['./tab-vuelo-hotel.component.scss']
+	selector: 'app-tab-vuelo-hotel',
+	templateUrl: './tab-vuelo-hotel.component.html',
+	styleUrls: [ './tab-vuelo-hotel.component.scss' ]
 })
 export class TabVueloHotelComponent {
 
-  @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
+	@ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
 
-  form!: FormGroup;
-  fromDate: NgbDate | null
-  citysOrigenSelect: Array<any> = [];
-  citysDestinosSelect: Array<any> = [];
-  origen: any;
-  destino: any;
-  origenHotel: any;
-  toDate: NgbDate | null;
+	form!: FormGroup;
+	fromDate: NgbDate | null
+	citysOrigenSelect: Array<any> = [];
+	citysDestinosSelect: Array<any> = [];
+	origen: any;
+	destino: any;
+	origenHotel: any;
+	toDate: NgbDate | null;
 
-  distribution = '';
-  distributionObject: DistributionObjectA;
-  hoveredDate: NgbDate | null = null;
+	distribution = '';
+	distributionObject: DistributionObjectA;
+	hoveredDate: NgbDate | null = null;
 
-  isSubmit = false;
+	isSubmit = false;
 
-  constructor(private calendar: NgbCalendar,
-    private destineService: DestinyService, public formatter: NgbDateParserFormatter,
-    private notification: NotificationService,
-    public inputValidator: InputValidationService,
-    private _accountsService: AccountsService
-  ) {
-    this.createForm();
-  }
-
-
-  createForm() {
-    this.form = new FormGroup({
-      clase: new FormControl('economy'),
-      origen: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      destino: new FormControl('', [Validators.required, Validators.minLength(3)])
-    });
-  }
-
-  navigateToResponseUrl(url: string): void {
-    window.location.href = url;
-  }
+	constructor(private calendar: NgbCalendar,
+	            private destineService: DestinyService, public formatter: NgbDateParserFormatter,
+	            private notification: NotificationService,
+	            public inputValidator: InputValidationService,
+	            private _accountsService: AccountsService
+	) {
+		this.createForm();
+	}
 
 
-  get origenField() {
-    return this.form.controls["origen"];
-  }
+	createForm() {
+		this.form = new FormGroup({
+			clase: new FormControl('economy'),
+			origen: new FormControl('', [ Validators.required, Validators.minLength(3) ]),
+			destino: new FormControl('', [ Validators.required, Validators.minLength(3) ])
+		});
+	}
 
-  get destinoField() {
-    return this.form.controls["destino"];
-  }
-
-
-  validateForm(field: string) {
-    return this.form.controls[field].errors
-      && this.isSubmit;
-  }
+	navigateToResponseUrl(url: string): void {
+		window.location.href = url;
+	}
 
 
-  getErrorsForm(form: FormGroup): string[] {
-    let errors: any[] = [];
+	get origenField() {
+		return this.form.controls['origen'];
+	}
 
-    if (form.controls["origen"].invalid) {
-      errors.push('El campo origen es obligatorio');
-    }
-    if (form.controls["destino"].invalid) {
-      errors.push('El campo destino es obligatorio');
-    }
-    if (!this.toDate) {
-      errors.push("La fecha final es requerido");
-    }
-    if (!this.fromDate) {
-      errors.push("La fecha de inicio es requerido");
-    }
-
-    return errors;
-  }
+	get destinoField() {
+		return this.form.controls['destino'];
+	}
 
 
-
-  public async searchVueloHotel() {
-    this.isSubmit = true;
-
-    let errosInputs = this.getErrorsForm(this.form);
-
-    if (errosInputs.length > 0) {
-      this.notification.showNotificacion("Error", errosInputs.join(", "), 10);
-      return;
-    }
-
-    let errorHabitaciones = this.popUpElement?.isValid();
-
-    if (!errorHabitaciones?.isValid) {
-      this.notification.showNotificacion("Error", errorHabitaciones?.message || "Error en las habitaciones")
-      return;
-    }
-
-    let url = this.getUrlVueloHotel();
-
-    const result = await this._accountsService.getAccountToken();
-    if (result) {
-      if (result.Result.IsSuccess) {
-        const token: string = result.Result.Token;
-        url = `${url}&token=${token}&submit=true`;
-      }
-    }
-
-    this.navigateToResponseUrl(url);
-  }
-
-  insertTag(params: any) {
-
-    const getCodigoIata = (id: string) => {
-      return id.split("::")[1];
-    }
-
-    //const nombre = `${getCodigoIata(params.idOrigen)}_${getCodigoIata(params.idDestino)}_${params.businessClass ? 'BS' : 'EC'}`;
-    const nombre = `${getCodigoIata(params.idOrigen)}_${getCodigoIata(params.idDestino)}`;
-    const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
-    const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
+	validateForm(field: string) {
+		return this.form.controls[field].errors
+				&& this.isSubmit;
+	}
 
 
-    const model = new ModelTaggingVuelosHoteles(
-      nombre,
-      params.origen,
-      params.destino,
-      params.businessClass ? 'BS' : 'EC',
-      this.distributionObject.pasajeros,
-      this.distributionObject.adultos,
-      this.distributionObject.ninos,
-      0,
-      this.distributionObject.habitacion,
-      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      diasAnticipacion,
-      duracionViaje
-    )
+	getErrorsForm(form: FormGroup): string[] {
+		let errors: any[] = [];
 
-    TaggingService.buscarVuelosHoteles(model);
+		if (form.controls['origen'].invalid) {
+			errors.push('El campo origen es obligatorio');
+		}
+		if (form.controls['destino'].invalid) {
+			errors.push('El campo destino es obligatorio');
+		}
+		if (!this.toDate) {
+			errors.push('La fecha final es requerido');
+		}
+		if (!this.fromDate) {
+			errors.push('La fecha de inicio es requerido');
+		}
 
-  }
-
-  getParamsVueloHotel() {
-    let params = new ParamsVueloHotel(
-      this.fromDate,
-      this.toDate,
-      this.form,
-      this.citysDestinosSelect,
-      this.citysOrigenSelect
-    ).getParams();
-    return params;
-  }
-  public getUrlVueloHotel(): string {
-    let url = ''
-    let params = this.getParamsVueloHotel();
-    this.insertTag(params);
-
-    url = new URLVueloHotel(params, this.distribution).getUrl();
-    return url;
-  }
-
-  autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
-    // let elemento = this.origen.nativeElement;
-    let elemento = e.target;
-
-    // console.log(elemento,type);
-
-    let value = elemento.value;
-    // if (value.length == 0) {
-    //   elemento.classList.remove('auto');
-    // } else {
-    //   elemento.classList.add('auto');
-    // }
-    if (value.length >= 3) {
-      this.getListCiudades(value, type, typeSearch);
-    }
-  }
+		return errors;
+	}
 
 
+	public async searchVueloHotel() {
+		this.isSubmit = true;
 
-  getListCiudades(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
-    this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
-      data => {
-        if (type === 1) {
-          this.citysOrigenSelect = data;
-        } else {
-          this.citysDestinosSelect = data;
-        }
-      },
-      err => console.log(err)
-    )
-  }
+		let errosInputs = this.getErrorsForm(this.form);
 
-  changeDate(value: ClassValueCalendar) {
-    this.toDate = value.toDate;
-    this.fromDate = value.fromDate;
-  }
+		if (errosInputs.length > 0) {
+			this.notification.showNotificacion('Error', errosInputs.join(', '), 10);
+			return;
+		}
 
+		let errorHabitaciones = this.popUpElement?.isValid();
+
+		if (!errorHabitaciones?.isValid) {
+			this.notification.showNotificacion('Error', errorHabitaciones?.message || 'Error en las habitaciones')
+			return;
+		}
+
+		let url = this.getUrlVueloHotel();
+
+		const result = await this._accountsService.getAccountToken();
+		if (result) {
+			if (result.Result.IsSuccess) {
+				const token: string = result.Result.Token;
+				url = `${url}&token=${token}&submit=true`;
+			}
+		}
+
+		this.navigateToResponseUrl(url);
+	}
+
+	insertTag(params: any) {
+
+		const getCodigoIata = (id: string) => {
+			return id.split('::')[1];
+		}
+
+		//const nombre = `${getCodigoIata(params.idOrigen)}_${getCodigoIata(params.idDestino)}_${params.businessClass ? 'BS' : 'EC'}`;
+		const nombre = `${getCodigoIata(params.idOrigen)}_${getCodigoIata(params.idDestino)}`;
+		const diasAnticipacion = moment(params.startDate, 'DD/MM/YYYY').diff(moment(), 'days');
+		const duracionViaje = moment(params.endDate, 'DD/MM/YYYY').diff(moment(params.startDate, 'DD/MM/YYYY'), 'days');
+
+
+		const model = new ModelTaggingVuelosHoteles(
+				nombre,
+				params.origen,
+				params.destino,
+				params.businessClass ? 'BS' : 'EC',
+				this.distributionObject.pasajeros,
+				this.distributionObject.adultos,
+				this.distributionObject.ninos,
+				0,
+				this.distributionObject.habitacion,
+				moment(params.startDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
+				moment(params.endDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
+				diasAnticipacion,
+				duracionViaje
+		)
+
+		TaggingService.buscarVuelosHoteles(model);
+
+		const newModel = new SearchFlightHotel(
+				'nmv_vuelosMasHotel_buscar',
+				{
+					dias_anticipacion: diasAnticipacion
+				},
+				{
+					nombre: params.origen.split(',')[0],
+					codigo: params.origen.split(',')[0].slice(0, 3).toUpperCase(),
+					pais: params.origen.split(',')[1].trim()
+				},
+				{
+					nombre: params.destino.split(',')[0],
+					codigo: params.destino.split(',')[0].slice(0, 3).toUpperCase(),
+					pais: params.destino.split(',')[1].trim()
+				},
+				{
+					habitaciones: this.distributionObject.habitacion
+				},
+				{
+					clase: params.businessClass ? 'BS' : 'EC'
+				},
+				{
+					adultos: this.distributionObject.adultos,
+					ninos: this.distributionObject.ninos,
+					infantes: 0,
+					total: this.distributionObject.pasajeros
+				},
+				{
+					salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
+					retorno: moment(params.endDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
+					estadia: duracionViaje
+				}
+		);
+
+		TaggingService.tagSearchFlightHotel(newModel);
+	}
+
+	getParamsVueloHotel() {
+		let params = new ParamsVueloHotel(
+				this.fromDate,
+				this.toDate,
+				this.form,
+				this.citysDestinosSelect,
+				this.citysOrigenSelect
+		).getParams();
+		return params;
+	}
+
+	public getUrlVueloHotel(): string {
+		let url = ''
+		let params = this.getParamsVueloHotel();
+		this.insertTag(params);
+
+		url = new URLVueloHotel(params, this.distribution).getUrl();
+		return url;
+	}
+
+	autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
+		// let elemento = this.origen.nativeElement;
+		let elemento = e.target;
+
+		// console.log(elemento,type);
+
+		let value = elemento.value;
+		// if (value.length == 0) {
+		//   elemento.classList.remove('auto');
+		// } else {
+		//   elemento.classList.add('auto');
+		// }
+		if (value.length >= 3) {
+			this.getListCiudades(value, type, typeSearch);
+		}
+	}
+
+
+	getListCiudades(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
+		this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
+				data => {
+					if (type === 1) {
+						this.citysOrigenSelect = data;
+					} else {
+						this.citysDestinosSelect = data;
+					}
+				},
+				err => console.log(err)
+		)
+	}
+
+	changeDate(value: ClassValueCalendar) {
+		this.toDate = value.toDate;
+		this.fromDate = value.fromDate;
+	}
 
 
 }

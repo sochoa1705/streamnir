@@ -1,12 +1,16 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
+import { Component, ElementRef, Injectable, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { Injectable } from '@angular/core';
-import { NgbDateAdapter, } from '@ng-bootstrap/ng-bootstrap';
+import {
+	NgbCalendar,
+	NgbDate,
+	NgbDateAdapter,
+	NgbDateParserFormatter,
+	NgbDateStruct
+} from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from 'src/app/Services/notification.service';
-import * as moment from "moment";
-import { ModelTaggingBuscarSeguros } from 'src/app/Services/analytics/tagging.models';
+import * as moment from 'moment';
+import { ModelTaggingBuscarSeguros, SearchTravelInsurance } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 
 export interface IFormSeguros {
@@ -370,9 +374,39 @@ export class FiltersafeComponent implements OnInit {
       Number(this.diffDays())
     )
 
-    console.log(JSON.stringify(tag));
-
     TaggingService.tagBuscarSeguros(tag);
+
+	  const daysFromNow = moment(form.fromDate, 'DD/MM/YYYY').diff(moment(), 'days');
+
+	  const model = new SearchTravelInsurance(
+			  'nmv_seguros_buscar',
+			  {
+				  dias_anticipacion: daysFromNow
+			  },
+			  {
+				  nombre: 'Peru',
+				  codigo: 'PE',
+				  pais: 'Peru'
+			  },
+			  {
+				  nombre: form.destinyString.descripcion_destino,
+				  codigo: form.destinyString.id_destino,
+				  pais: ''
+			  },
+			  {
+				  total: form.passengers.length,
+				  infantes: form.passengers.filter(p => Number(p.edad) <= 5).length,
+				  ninos: form.passengers.filter(p => Number(p.edad) > 5 && Number(p.edad) < 18).length,
+				  adultos: form.passengers.filter(p => Number(p.edad) >= 18).length
+			  },
+			  {
+				  salida: form.fromDate,
+				  retorno: form.toDate,
+				  estadia: Number(this.diffDays())
+			  }
+	  );
+
+	  TaggingService.tagSearchTravelInsurance(model);
   }
 
   quoteNow() {

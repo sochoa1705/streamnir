@@ -1,27 +1,33 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {Router} from '@angular/router';
-import {NgbCalendar, NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
-import {concat, Observable, of, Subject} from 'rxjs';
-import {catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUntil, tap} from 'rxjs/operators';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { concat, Observable, of, Subject } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import {
   DestinosService
 } from 'src/app/Component/home-page/vuelos/commons/components/destinos/services/destinos.service';
-import {ModelTaggingVuelos} from 'src/app/Services/analytics/tagging.models';
-import {TaggingService} from 'src/app/Services/analytics/tagging.service';
-import {DestinyService} from 'src/app/Services/destiny/destiny.service';
-import {NotificationService} from 'src/app/Services/notification.service';
-import {ClassValueCalendar} from '../../calendar/calendar.models';
-import {ICardAutocomplete} from '../../card-autocomplete/card-autocomplete.interface';
-import {PopUpPasajeroComponent} from '../../pop-up-pasajero/pop-up-pasajero.component';
-import {IDistributionObjectVuelos} from '../../pop-up-pasajero/pop-up-pasajero.model';
-import {EnumCabinsVuelos, EnumFlightType, ParamsVuelos, SaveModelVuelos, URLVuelosMulti} from '../../tabs/tabs.models';
-import {IGeoTree} from './tab-vuelos.interfaces';
-import {IntermediaryService} from '../../../../Services/intermediary.service';
-import {AccountsService, UserStorage} from '../../../../Services/accounts.service';
-import {environment} from 'src/environments/environment';
+import { ModelTaggingVuelos, SearchFlights } from 'src/app/Services/analytics/tagging.models';
+import { TaggingService } from 'src/app/Services/analytics/tagging.service';
+import { DestinyService } from 'src/app/Services/destiny/destiny.service';
+import { NotificationService } from 'src/app/Services/notification.service';
+import { ClassValueCalendar } from '../../calendar/calendar.models';
+import { ICardAutocomplete } from '../../card-autocomplete/card-autocomplete.interface';
+import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
+import { IDistributionObjectVuelos } from '../../pop-up-pasajero/pop-up-pasajero.model';
+import {
+  EnumCabinsVuelos,
+  EnumFlightType,
+  ParamsVuelos,
+  SaveModelVuelos,
+  URLVuelosMulti
+} from '../../tabs/tabs.models';
+import { IGeoTree } from './tab-vuelos.interfaces';
+import { IntermediaryService } from '../../../../Services/intermediary.service';
+import { AccountsService, UserStorage } from '../../../../Services/accounts.service';
+import { environment } from 'src/environments/environment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tab-vuelos',
@@ -87,9 +93,17 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
   processOk = true;
   disabledInput = true;
 
-  constructor(private destineService: DestinyService, public formatter: NgbDateParserFormatter, private calendar: NgbCalendar,
-    private _snackBar: MatSnackBar, private router: Router, private destinosService: DestinosService, public accountService: AccountsService,
-    private notification: NotificationService, private fb: FormBuilder, private intermediaryService: IntermediaryService
+  constructor(
+      private destineService: DestinyService,
+      public formatter: NgbDateParserFormatter,
+      private calendar: NgbCalendar,
+      private _snackBar: MatSnackBar,
+      private router: Router,
+      private destinosService: DestinosService,
+      public accountService: AccountsService,
+      private notification: NotificationService,
+      private fb: FormBuilder,
+      private intermediaryService: IntermediaryService
   ) {
     this.createForm();
     this.createFormMultiCity();
@@ -380,6 +394,35 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     TaggingService.buscarVuelos(model);
+
+    const  newModel = new SearchFlights(
+				'nmv_vuelos_buscar',
+        {
+          dias_anticipacion: diasAnticipacion
+        },
+        {
+          nombre: params.origen.title,
+          codigo: params.origen.codigo,
+          pais: params.destino.country
+        },
+        {
+          nombre: params.destino.title,
+          codigo: params.destino.codigo,
+          pais: params.destino.country
+        },
+        {
+          adultos: this.distributionObject.adultos,
+          ninos: this.distributionObject.ninos,
+          infantes: this.distributionObject.infantes,
+          total: this.distributionObject.adultos + this.distributionObject.ninos + this.distributionObject.infantes,
+        },
+        {
+          salida: moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
+          retorno: fechaRegreso,
+          estadia: duracionViaje
+        }
+    );
+    TaggingService.tagSearchFlights(newModel);
   }
 
   getParams() {
@@ -436,7 +479,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&destination=${this.params.idDestino + "%20" + this.params.destino?.title || ''}
     // &departure=${this.params.idOrigen + "%20" + this.params.origen?.title || ''}&departureDate=${this.params.startDate}
-    // &arrivalDate=${this.params.endDate}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.params.cabinsVuelos}&lang=ES&email=${this.params.email}`;    
+    // &arrivalDate=${this.params.endDate}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.params.cabinsVuelos}&lang=ES&email=${this.params.email}`;
 
     return url;
   }
