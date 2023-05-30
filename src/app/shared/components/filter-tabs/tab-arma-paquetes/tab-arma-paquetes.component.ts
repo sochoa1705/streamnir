@@ -1,20 +1,18 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, Input, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
-import { ModelTaggingHoteles } from 'src/app/Services/analytics/tagging.models';
+import { ModelTaggingHoteles, SearchAssemblePackages } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { URLHotel, ParamsHoteles, ParamArmaTuViaje, URLArmaTuViaje, EnumCabins, EnumFlightType } from '../../tabs/tabs.models';
+import { EnumCabins, EnumFlightType, ParamArmaTuViaje, URLArmaTuViaje, URLHotel } from '../../tabs/tabs.models';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { AccountsService } from 'src/app/Services/accounts.service';
-
-
 
 @Component({
   selector: 'app-tab-arma-paquetes',
@@ -174,6 +172,7 @@ export class TabArmaPaquetesComponent {
   public getUrlPaquete() {
     let url = ''
     let params = this.getParamsAlojamiento();
+    this.newInsertTag(params);
     url = new URLArmaTuViaje(params, this.distribution).getUrl();
     return url;
   }
@@ -207,17 +206,45 @@ export class TabArmaPaquetesComponent {
     TaggingService.buscarHoteles(model);
   }
 
+  newInsertTag(params: any) {
+    const daysFromNow = moment(params.startDate, 'DD/MM/YYYY').diff(moment(), 'days');
+
+    const model = new SearchAssemblePackages(
+        'nmv_armaTuViaje_buscar',
+        {
+          dias_anticipacion: daysFromNow
+        },
+        {
+          clase: params.businessClass ? 'BS' : 'EC'
+        },
+        {
+          habitaciones: this.distributionObject.habitacion
+        },
+        {
+          adultos: this.distributionObject.adultos,
+          ninos: this.distributionObject.ninos,
+          infantes: 0,
+          total: this.distributionObject.pasajeros
+        },
+        {
+          salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
+          retorno: '',
+          estadia: 0
+        }
+    );
+
+    TaggingService.tagSearchAssemblePackages(model);
+  }
 
   getParamsAlojamiento() {
     let params = new ParamArmaTuViaje(
-      this.fromDate,
-      this.toDate,
-      this.form,
-      this.citys,
+        this.fromDate,
+        this.toDate,
+        this.form,
+        this.citys
     ).getParams();
     return params;
   }
-
 
   changeDate(value: ClassValueCalendar) {
     this.toDate = value.toDate;

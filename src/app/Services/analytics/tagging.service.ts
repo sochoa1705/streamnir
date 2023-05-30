@@ -15,7 +15,7 @@ import {
 	ModelTaggingSlidersBanners,
 	ModelTaggingSubscripcionOfertas,
 	ModelTaggingVuelos,
-	ModelTaggingVuelosHoteles, SearchCarRent, SearchFlightHotel,
+	ModelTaggingVuelosHoteles, SearchAssemblePackages, SearchCarRent, SearchExperiences, SearchFlightHotel,
 	SearchFlights, SearchHotels, SearchItineraries, SearchTravelInsurance
 } from './tagging.models';
 
@@ -165,6 +165,14 @@ export class TaggingService {
 	}
 
 	public static tagSearchCarRent(model: SearchCarRent) {
+		this.triggerTag(model);
+	}
+
+	public static tagSearchAssemblePackages(model: SearchAssemblePackages) {
+		this.triggerTag(model);
+	}
+
+	public static tagSearchExperiences(model: SearchExperiences) {
 		this.triggerTag(model);
 	}
 }

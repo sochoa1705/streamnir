@@ -486,6 +486,27 @@ export class SearchCarRent {
 	) {}
 }
 
+export class SearchAssemblePackages {
+	constructor(
+			public event: string,
+			public operacion: Operation,
+			public vuelo: Flight,
+			public hotel: Hotel,
+			public pasajeros: Passengers,
+			public fechas: Dates
+	) {}
+}
+
+export class SearchExperiences {
+	constructor(
+			public event: string,
+			public operacion: Operation,
+			public destino: Location,
+			public pasajeros: Passengers,
+			public fechas: Dates
+	) {}
+}
+
 export class Operation {
 	constructor(public dias_anticipacion: number) {}
 }
