@@ -60,9 +60,8 @@
 <app-optional-data></app-optional-data>
 
 <app-notificacion-error></app-notificacion-error>
-<a #tooltip="matTooltip"
-   href="https://api.whatsapp.com/send?phone=51919294628&text=%C2%A1Hola!%20necesito%20ayuda%20con%20un%20vuelo%20en%20www.nmviajes.com"
-   target="_blank" rel="noreferrer noopenner" role="button" id="btn-whatsapp" class="position-fixed text-end"
-   matTooltip="¿Necesitas ayuda?" matTooltipPosition="left" [matTooltipHideDelay]="2000">
+<a #tooltip="matTooltip" id="btn-whatsapp" class="position-fixed text-end rounded-start"
+   href="https://api.whatsapp.com/send?phone=51919294628" target="_blank" rel="noreferrer noopenner" role="button"
+   matTooltip="Cont&aacute;ctanos" matTooltipPosition="left" [matTooltipHideDelay]="2000">
 	<img src="./assets/whatsapp-icon.svg" alt="Whatsapp chat" class="img-fluid"/>
 </a>

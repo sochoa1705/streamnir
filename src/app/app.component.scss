@@ -87,9 +87,16 @@
 }
 
 a#btn-whatsapp {
-	right: 10px;
+	width: fit-content;
+	right: 0;
 	bottom: 15px;
 	z-index: 9999;
+	background-color: #25C763;
+	transition: .25s ease-in-out;
+
+	&:hover {
+		padding-right: 1.125rem;
+	}
 
 	img {
 		width: 4rem;
@@ -102,7 +109,7 @@ a#btn-whatsapp {
 
 @media (min-width: 991px) {
 	a#btn-whatsapp {
-		right: 20px;
+		right: 0;
 		bottom: 20px;
 
 		img {
