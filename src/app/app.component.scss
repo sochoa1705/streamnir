@@ -91,11 +91,13 @@ a#btn-whatsapp {
 	right: 0;
 	bottom: 15px;
 	z-index: 9999;
-	background-color: #25C763;
+	background-color: #43d854;
 	transition: all .25s ease-in-out;
+	box-shadow: 0 0 15px 0 rgba(0,0,0,.2);
 
 	&:hover {
 		padding-right: .75rem;
+		background-color: #28c039;
 	}
 
 	img {
