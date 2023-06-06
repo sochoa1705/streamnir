@@ -102,11 +102,12 @@ a#btn-whatsapp {
 
 	img {
 		width: 4rem;
-
-		.tooltip {
-			white-space: nowrap !important;
-		}
 	}
+}
+
+::ng-deep.mat-tooltip {
+	display: none;
+	white-space: nowrap !important;
 }
 
 @media (min-width: 991px) {
@@ -117,5 +118,9 @@ a#btn-whatsapp {
 		img {
 			width: 5rem;
 		}
+	}
+
+	::ng-deep.mat-tooltip {
+		display: block;
 	}
 }
