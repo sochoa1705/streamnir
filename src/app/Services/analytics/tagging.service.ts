@@ -15,8 +15,17 @@ import {
 	ModelTaggingSlidersBanners,
 	ModelTaggingSubscripcionOfertas,
 	ModelTaggingVuelos,
-	ModelTaggingVuelosHoteles, SearchAssemblePackages, SearchCarRent, SearchExperiences, SearchFlightHotel,
-	SearchFlights, SearchHotels, SearchItineraries, SearchTravelInsurance
+	ModelTaggingVuelosHoteles,
+	SearchAssemblePackages,
+	SearchCarRent,
+	SearchExperiences,
+	SearchFlightHotel,
+	SearchFlights,
+	SearchHotels,
+	SearchItineraries,
+	SearchTravelInsurance, TravelInsuranceCheckout,
+	TravelInsuranceListResults, TravelInsurancePassengerInfo, TravelInsurancePaymentMethodSelected,
+	TravelInsuranceSelected, TravelInsuranceSuccess
 } from './tagging.models';
 
 @Injectable({ providedIn: 'root' })
@@ -157,6 +166,30 @@ export class TaggingService {
 	}
 
 	public static tagSearchTravelInsurance(model: SearchTravelInsurance) {
+		this.triggerTag(model);
+	}
+
+	public static tagTravelInsuranceListResults(model: TravelInsuranceListResults) {
+		this.triggerTag(model);
+	}
+
+	public static tagTravelInsuranceSelected(model: TravelInsuranceSelected) {
+		this.triggerTag(model);
+	}
+
+	public static tagTravelInsuranceCheckout(model: TravelInsuranceCheckout) {
+		this.triggerTag(model);
+	}
+
+	public static tagTravelInsurancePassengerInfo(model: TravelInsurancePassengerInfo) {
+		this.triggerTag(model);
+	}
+
+	public static tagTravelInsurancePaymentMethodSelected(model: TravelInsurancePaymentMethodSelected) {
+		this.triggerTag(model);
+	}
+
+	public static tagTravelInsuranceSuccess(model: TravelInsuranceSuccess) {
 		this.triggerTag(model);
 	}
 

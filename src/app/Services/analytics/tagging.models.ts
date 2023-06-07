@@ -507,8 +507,92 @@ export class SearchExperiences {
 	) {}
 }
 
+export class TravelInsuranceListResults {
+	constructor(
+			public event: string,
+			public precio: InsurancePrice,
+			public origen: Location,
+			public destino: Location,
+			public resultados: InsuranceResult[],
+			public pasajeros: Passengers,
+			public fechas: Dates
+	) {}
+}
+
+export class TravelInsuranceSelected {
+	constructor(
+			public event: string,
+			public operacion: Operation,
+			public precio: InsurancePrice,
+			public origen: Location,
+			public destino: Location,
+			public seguro: InsuranceResult,
+			public pasajeros: Passengers,
+			public fechas: Dates
+	) {}
+}
+
+export class TravelInsuranceCheckout {
+	constructor(
+			public event: string,
+			public operacion: Operation,
+			public precio: InsurancePrice,
+			public origen: Location,
+			public destino: Location,
+			public seguro: InsuranceResult,
+			public pasajeros: Passengers,
+			public fechas: Dates
+	) {}
+}
+
+export class TravelInsurancePassengerInfo {
+	constructor(
+			public event: string,
+			public precio: InsurancePrice,
+			public usuario: InsuranceUser,
+			public origen: Location,
+			public destino: Location,
+			public seguro: InsuranceResult,
+			public pasajeros: Passengers,
+			public fechas: Dates
+	) {}
+}
+
+export class TravelInsurancePaymentMethodSelected {
+	constructor(
+			public event: string,
+			public precio: InsurancePrice,
+			public metodo_pago: InsurancePaymentMethod,
+			public usuario: InsuranceUser,
+			public origen: Location,
+			public destino: Location,
+			public seguro: InsuranceResult,
+			public pasajeros: Passengers,
+			public fechas: Dates
+	) {}
+}
+
+export class TravelInsuranceSuccess {
+	constructor(
+			public event: string,
+			public operacion: OperationSuccess,
+			public precio: InsurancePrice,
+			public metodo_pago: InsurancePaymentMethod,
+			public usuario: InsuranceUser,
+			public origen: Location,
+			public destino: Location,
+			public seguro: InsuranceResult,
+			public pasajeros: Passengers,
+			public fechas: Dates
+	) {}
+}
+
 export class Operation {
 	constructor(public dias_anticipacion: number) {}
+}
+
+export class OperationSuccess {
+	constructor(public id: string, public dias_anticipacion: number) {}
 }
 
 export class Location {
@@ -541,4 +625,41 @@ export class Package {
 
 export class CarRent {
 	constructor(public edad_conductor: string, public lugar_devolucion: string) {}
+}
+
+export class InsurancePrice {
+	constructor(public moneda: string, public precioNormal: number, public precioFinal: number) {}
+}
+
+export class InsuranceResult {
+	constructor(
+			public posicion: number,
+			public precioFinal: number,
+			public plan: string,
+			public codigo: string,
+			public opcion: string,
+			public emisor: string,
+			public monto_asistencia: number
+	) {}
+}
+
+export class InsurancePaymentMethod {
+	constructor(public opcion: string) {}
+}
+
+export class InsuranceUser {
+	constructor(
+			public email: string,
+			public primerNombre: string,
+			public primerApellido: string,
+			public fechaNacimiento: string,
+			public nacionalidad: string,
+			public genero: string,
+			public documento_tipo: string,
+			public documento_numero: string,
+			public telefono_tipo: string,
+			public telefono_codigo: string,
+			public telefono_numero: string,
+			public frecuencia: string
+	) {}
 }
