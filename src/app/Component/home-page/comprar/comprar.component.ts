@@ -1,14 +1,13 @@
-
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface';
 import { CoverageService } from 'src/app/Services/coverage/coverage.service';
 import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { take } from 'rxjs/operators';
-import { ICardRequest, IFiltroVuelo } from './interfaces/comprar.interfaces';
+import { IFiltroVuelo } from './interfaces/comprar.interfaces';
 import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
-import { ActualizarCodigoSafetyPaySeguroRQ, ActualizarEstadoSeguroRQ, RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
+import { ActualizarCodigoSafetyPaySeguroRQ, RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
 import { Guid, toUp, Utilities } from 'src/app/shared/utils';
@@ -18,11 +17,25 @@ import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/
 import * as moment from 'moment';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
-import { ActionFieldCheckout, ActionFieldCheckoutOption, Checkout, CheckoutOption, EcommerceCheckout, EcommercecheckoutOption, ModelTaggingCheckout, ModelTaggingcheckoutOption, ProductAddToCart } from 'src/app/Services/analytics/tagging.models';
+import {
+  ActionFieldCheckout,
+  Checkout,
+  EcommerceCheckout,
+  ModelTaggingCheckout,
+  ProductAddToCart,
+  TravelInsuranceCheckout,
+  TravelInsurancePassengerInfo,
+  TravelInsurancePaymentMethodSelected
+} from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { MessageService } from 'src/app/api/api-correos/services';
-import { CeResponse, CeSeguroCeEmailParameterCustomCeRequest1, EnumRequestApplications, EnumRequestCompanies } from 'src/app/api/api-correos/models';
+import {
+  CeResponse,
+  CeSeguroCeEmailParameterCustomCeRequest1,
+  EnumRequestApplications,
+  EnumRequestCompanies
+} from 'src/app/api/api-correos/models';
 import { UtilService } from 'src/app/Services/util/util.service';
 import { CryptoService } from 'src/app/Services/util/crypto.service';
 
@@ -47,19 +60,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   contactForm: FormGroup;
 
   errors: any[] = [];
-  MSG_EMPTY: string = 'none';
-  //COBERTURA
+//COBERTURA
 
   showInvoiceData: boolean = false;
-
-  coverageDisplay: boolean = false;
   unidadNegocio: any;
   businessunit: any;
   // coverageList: any
   coverageL: any;
   asistMedic: any;
   asistenciaMedicaMonto: number;
-  listBank: any;
   timeShow!: number;
   ShowComponentTime!: boolean;
 
@@ -110,8 +119,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   detalleVuelos: any;
 
   modalDetalle: any | null;
-
-  resevaVuelo: any
   shopData: any
   shopString: any
   token: any
@@ -127,7 +134,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   reservation: any
   dataShop: any
-  bankSteps: any
   paymentData: any
 
   @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>
@@ -136,10 +142,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   nombre: string;
   apellido: string;
-  showAgregarAdulto: boolean = true;
   showDetalle: boolean = false;
-  showAdulto: number;
-
   checkedCard = false;
 
   isVisa = false;
@@ -206,11 +209,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log("safe0Json", this.safe0Json);
     console.log(screen.width);
 
-    if (screen.width < 769) {
-      this.mobile = true
-    } else {
-      this.mobile = false
-    }
+    this.mobile = screen.width < 769;
 
     this.current = this._router.getCurrentNavigation()!.extras.state as any
     if (!this.current) {
@@ -318,7 +317,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.getCountries();
 
     if (this.current['filter'] !== 'filter') this.listCoverage();
+
     this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
+    this.sendEventOnLoad(this.safe0Json, this.resultJson)
+    this.listenFormCustomers();
   }
 
   getCountries() {
@@ -457,18 +459,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   private checkCardService(): void {
     let nroTarjeta: string = this.paymentMethodForm.controls['numberCard'].value;
     if (nroTarjeta.length > 15) {
-      let data: ICardRequest = {
-        MuteExceptions: false,
-        TrackingCode: Guid(),
-        Caller: {
-          Application: 'Agil',
-          Company: 'Interagencias'
-        },
-        Parameter: {
-          Number: this.paymentMethodForm.controls['numberCard'].value
-        }
-      };
-
       this._cardService.v1ApiCardGet({
         'Parameter.Bin': this.paymentMethodForm.controls['numberCard'].value,
         TrackingCode: Guid(),
@@ -528,7 +518,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   showDataContacto: Boolean = true;
 
   showDataContact() {
-    this.showDataContacto = this.showDataContacto ? false : true;
+    this.showDataContacto = !this.showDataContacto;
   }
 
   ngAfterViewInit() {
@@ -538,34 +528,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  toCustomer(e: any) {
-    let chk = e.target.checked
-
-    let customerName = this.formShop.getRawValue()['customers'][0]['nameCustomer'];
-    let customerLastName = this.formShop.getRawValue()['customers'][0]['lastNameCustomer'];
-
-    if (chk) {
-      this.inputNameContactForm.nativeElement.value = customerName
-      this.inputLastNameContactForm.nativeElement.value = customerLastName
-
-      this.inputNameContactForm.nativeElement.focus()
-
-    } else {
-      this.inputNameContactForm.nativeElement.value = ''
-      this.inputLastNameContactForm.nativeElement.value = ''
-    }
-  }
-
-  getMessage(messageKey: any) {
-    return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
-  }
-
-  getMessageArray(index: any, messageKey: any) {
-    return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
-  }
-
-  get customers() {
-    return this.formShop.get('customers') as FormArray;
+  get customers(): any {
+    return this.formShop ? this.formShop.get('customers') as FormArray : null;
   }
 
   loadShop(): void {
@@ -625,14 +589,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       if (e === 'optionm-1' || e === 'option-1')
         this.selectedPay = 'tarjeta';
       else
-        this.selectedPay = 'safety';
+        this.selectedPay = 'safety'
+
+      this.sendPaymentMethodSelectEvent(this.selectedPay);
     }
   }
 
   id: any = "banca";
 
   optionPay(e: any, isBankingOrMobile: boolean, ids: any) {
-
     this.banca = isBankingOrMobile;
     this.id = ids;
     const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer'])?.Name;
@@ -652,8 +617,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           }
         }
-      }
-
+      };
       TaggingService.tagNationalitySelection(model1);
 
       const model = {
@@ -665,9 +629,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           }
         }
-      }
-
+      };
       TaggingService.tagStartOfPaymentMethods(model);
+      this.sendPaymentMethodSelectEvent(`${this.selectedPay} - ${this.id}`);
     }
   }
 
@@ -678,17 +642,17 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
       console.log('1. buyInsurance');
 
-      // if (this.formShop.invalid)
-      //   this.formShop.markAllAsTouched();
+      /* if (this.formShop.invalid)
+        this.formShop.markAllAsTouched();
 
-      // if (this.paymentMethodForm.invalid)
-      //   this.paymentMethodForm.markAllAsTouched();
+      if (this.paymentMethodForm.invalid)
+        this.paymentMethodForm.markAllAsTouched();
 
-      // if (this.contactForm.invalid)
-      //   this.contactForm.markAllAsTouched();
+      if (this.contactForm.invalid)
+        this.contactForm.markAllAsTouched();
 
-      // if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
-      //   return;
+      if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
+        return; */
 
       this.formShop.addControl('tipoRecibo', new FormControl('BV'));
       this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioEmisionLocal));
@@ -698,6 +662,102 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       localStorage.setItem('shop', JSON.stringify(dataShop));
 
       this.generateInsuranceReserve(dataShop);
+    }
+  }
+
+  listenFormCustomers() {
+    this.formShop.get('customers')!.valueChanges.subscribe((forms: FormArray) => {
+      if (this.validateFormCustomers(forms))
+        this.sendPassengerInfoEvent();
+    });
+  }
+
+  sendPassengerInfoEvent() {
+    const model = new TravelInsurancePassengerInfo(
+        'nmv_seguros_checkout_ingresarDatos',
+        {
+          moneda: this.safe0Json.monedaLocal,
+          precioFinal: Number(this.totalToPay),
+          precioNormal: Number(this.safe0Json.precioBrutoLocal)
+        },
+        this.getGenericCheckoutDataForEvent().usuario,
+        this.getGenericCheckoutDataForEvent().origen,
+        this.getGenericCheckoutDataForEvent().destino,
+        this.getGenericCheckoutDataForEvent().seguro,
+        this.getGenericCheckoutDataForEvent().pasajeros,
+        this.getGenericCheckoutDataForEvent().fechas
+    );
+    TaggingService.tagTravelInsurancePassengerInfo(model);
+  }
+
+  sendPaymentMethodSelectEvent(paymentMethod: string) {
+    const model = new TravelInsurancePaymentMethodSelected(
+        'nmv_seguros_checkout_ingresarDatos',
+        {
+          moneda: this.safe0Json.monedaLocal,
+          precioFinal: Number(this.totalToPay),
+          precioNormal: Number(this.safe0Json.precioBrutoLocal)
+        },
+        {
+          opcion: paymentMethod
+        },
+        this.getGenericCheckoutDataForEvent().usuario,
+        this.getGenericCheckoutDataForEvent().origen,
+        this.getGenericCheckoutDataForEvent().destino,
+        this.getGenericCheckoutDataForEvent().seguro,
+        this.getGenericCheckoutDataForEvent().pasajeros,
+        this.getGenericCheckoutDataForEvent().fechas
+    );
+    TaggingService.tagTravelInsurancePaymentMethodSelected(model);
+  }
+
+  private getGenericCheckoutDataForEvent() {
+    const firstCustomer = (<FormArray>this.formShop.controls['customers']).controls[0];
+    return {
+      usuario: {
+        email: this.contactForm.get('mailContacto')?.value || '',
+        primerNombre: firstCustomer.get('nameCustomer')!.value,
+        primerApellido: firstCustomer.get('lastNameCustomer')!.value,
+        fechaNacimiento: `${firstCustomer.get('yearCustomer')!.value}-${firstCustomer.get('monthCustomer')!.value}-${firstCustomer.get('dayCustomer')!.value}`,
+        nacionalidad: firstCustomer.get('nationalityCustomer')!.value,
+        genero: firstCustomer.get('sexCustomer')!.value,
+        documento_tipo: firstCustomer.get('typeDocCustomer')!.value,
+        documento_numero: firstCustomer.get('numDocCustomer')!.value,
+        telefono_tipo: this.contactForm.get('typePhone0')?.value || '',
+        telefono_codigo: this.contactForm.get('code0')?.value || '',
+        telefono_numero: this.contactForm.get('numberPhone0')?.value || '',
+        frecuencia: firstCustomer.get('typeCustomer')!.value
+      },
+      origen: {
+        nombre: 'Perú',
+        codigo: 'PE',
+        pais: 'Perú'
+      },
+      destino: {
+        nombre: this.resultJson.destinyString.descripcion_destino,
+        codigo: this.resultJson.destinyString.id_destino,
+        pais: ''
+      },
+      seguro: {
+        plan: this.safe0Json.nombreProducto,
+        codigo: this.safe0Json.codProducto,
+        opcion: this.safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+        emisor: 'AssistCard',
+        monto_asistencia: this.asistenciaMedicaMonto,
+        precioFinal: Number(this.totalToPay),
+        posicion: 0
+      },
+      pasajeros: {
+        adultos: this.countAdulto,
+        ninos: this.countNinio,
+        infantes: this.countInfante,
+        total: this.resultJson.passengers.length
+      },
+      fechas: {
+        salida: moment(this.resultJson.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: moment(this.resultJson.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        estadia: Number(this.resultJson.days)
+      }
     }
   }
 
@@ -723,9 +783,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return true;
   }
 
-  validateFormCustomers(): boolean {
+  validateFormCustomers(forms?: FormArray): boolean {
     let validate = true;
-    let candidates: [] = this.formShop.value.customers;
+    let candidates: [] = forms || this.formShop.value.customers;
     if (candidates.length == 0) return false;
     candidates.forEach((x: any) => {
       if (x.nameCustomer == '' || x.lastNameCustomer == '' || x.dayCustomer == '' || x.monthCustomer == '' || x.yearCustomer == '' || x.nationalityCustomer == '' ||
@@ -734,7 +794,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         return;
       }
     });
-    if (!validate) {
+    if (!validate && !forms) {
       this._notification.showNotificacion("Error", "Debe ingresar todos los datos obligatorios del(os) pasajero(s)");
     }
     return validate;
@@ -801,26 +861,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     })
   }
 
-  sendDataLayerCheckoutOption(value: any): void {
-    let nacionalidad = value.customers[0].nationalityCustomer;
-    let actionField: ActionFieldCheckoutOption = {
-      step: 1,
-      option: nacionalidad
-    }
-    let checkout_option: CheckoutOption = {
-      actionField: actionField
-    }
-    let ecommerce: EcommercecheckoutOption = {
-      checkout_option: checkout_option
-    }
-    let modelTaggingcheckoutOption: ModelTaggingcheckoutOption = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
-      ecommerce: ecommerce
-    }
-
-    TaggingService.tagCheckoutOption(modelTaggingcheckoutOption);
-  }
-
   generatePayloadForInsurance(data: any): RegistrarSeguroRQ {
 
     console.log('generatePayloadForInsurance');
@@ -839,9 +879,9 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     const fechasalida = this.resultJson.fromDate.split('/');
     const fecharetorno = this.resultJson.toDate.split('/');
 
-    let direccion: string = '';
-    let direccion_fiscal: string = '';
-    let razon_social: string = '';
+    let direccion: string;
+    let direccion_fiscal: string;
+    let razon_social: string;
 
     if (data.contactForm.invoiceRequestBox) {
       direccion = data.contactForm.direccion.toUpperCase();
@@ -861,7 +901,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       }
     }
 
-    const payload: RegistrarSeguroRQ = {
+    return {
       fec_salida: `${fechasalida[2]}-${fechasalida[1]}-${fechasalida[0]}`,                       // FECHA DE PARTIDA
       fec_retorno: `${fecharetorno[2]}-${fecharetorno[1]}-${fecharetorno[0]}`,                        // FECHA DE RETORNO
       cant_paxes: this.resultJson.passengers.length,             // CANTIDAD DE PASAJEROS
@@ -938,8 +978,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       idTipoTarifa: 0,
       idReciboSafetyPay: 0
     };
-
-    return payload;
   }
 
   makePayment(data: any): void {
@@ -974,18 +1012,18 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
               const body = new NMRequestBy<ActualizarCodigoSafetyPaySeguroRQ>(parameters);
 
-              this._secureBookingService.updateSafetypayPaymentCode(body).subscribe((response: any) => { });
+              this._secureBookingService.updateSafetypayPaymentCode(body).subscribe(() => { });
             }
 
             if (paymentMethod === PaymentMethodEnum.CreditCard && result.Result.ServiceResponse.Status === 'APPROVED') {
-              // const parameters: ActualizarEstadoSeguroRQ = {
-              //   res_seguro_id: this.reservation.Reserva,
-              //   usosafetypay: 8
-              // };
+              /*const parameters: ActualizarEstadoSeguroRQ = {
+                res_seguro_id: this.reservation.Reserva,
+                usosafetypay: 8
+              };
 
-              // const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
+              const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
 
-              // this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
+              this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });*/
 
               const payload: any = {
                 "TrackingCode": Guid(),
@@ -1001,10 +1039,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
               };
 
               this._preferencesService.updateBookingStatus(payload).subscribe({
-                next: response => {
-                  const result = response['Result'];
-                }
-              })
+                next: () => { }
+              });
             }
 
             const fechasalida = this.resultJson.fromDate.split('/');
@@ -1051,7 +1087,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
             const asegurados: any = [];
 
-            this.dataShop.customers.forEach((value: any, index: number) => {
+            this.dataShop.customers.forEach((value: any) => {
               let asegurado = {
                 NumeroSolicitudCompra: String(result.Result.QuoteId),//this.reservation.Reserva
                 NombresApellidos: `ADT - ${value.nameCustomer.toUpperCase()
@@ -1153,7 +1189,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const paymentMethod: PaymentMethodEnum = data.paymentMethodForm.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
 
-    const payload: RqPaymentCeRequest1 = {
+    return {
       "TrackingCode": Guid(),
       "MuteExceptions": environment.muteExceptions,
       "Caller": {
@@ -1208,9 +1244,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "HasAQuoteCode": true
         }
       }
-    }
-
-    return payload;
+    };
   }
 
   returnToPlans(): void {
@@ -1299,27 +1333,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return coverages;
   }
 
-  pasajerosVuelos() {
-    let pasajeros: any = [];
-
-    this.dataShop.customers.forEach((value: any, index: number) => {
-      let jsonPasajeros = {
-        type: "ADT",
-        name: value.nameCustomer,
-        lastName: value.lastNameCustomer,
-        birthday: value.yearCustomer + '-' + value.monthCustomer.padStart(2, '0') + '-' + value.dayCustomer.padStart(2, '0'),
-        documentType: (value.typeDocCustomer === 'DNI') ? 0 : 1,
-        documentNumber: value.numDocCustomer,
-        gender: (value.sexCustomer === 'masculino') ? 'M' : '',
-        email: this.dataShop.contactForm.mailContacto,
-        phone: this.dataShop.contactForm.numberPhone0
-      }
-      pasajeros.push(jsonPasajeros)
-    });
-
-    return pasajeros
-  }
-
   getPassengerAges() {
     let ages = []
 
@@ -1338,48 +1351,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.agesCustomers = this.resultJson.aniosNacimiento.map((c: any) => c.edad).join(";");
   }
 
-  // fecha de expiracion tarjeta
-  expired(e: any) {
-    const year = e.substring(0, 4)
-    const month = e.substring(4, 6)
-    const expiredFormatt = `${year}/${month}`
-    return expiredFormatt
-  }
-
-  showVerDetalle(e?: any) {
+  showVerDetalle() {
     this.showDetalle = !this.showDetalle
     console.log(this.showDetalle)
   }
 
-  savePasajero(e?: any) {
-    console.log('pasajero ' + e)
-  }
-
-  step1Complete = false;
-  toggleStep1Complete() {
-    this.step1Complete = !this.step1Complete;
-  }
-
   selectionChange(event: StepperSelectionEvent) {
     console.log(event.selectedIndex)
-  }
-
-  timeShop(data: string) {
-    let dayPay = data
-    let day = dayPay.substr(0, 2)
-    let month = dayPay.substr(3, 2)
-    let year = dayPay.substr(6, 4)
-    let hour = dayPay.substr(11, 5)
-    let newDate = `${year}/${month}/${day} ${hour}`
-    let datePay = new Date(newDate)
-
-    var dayStart = new Date();
-    var difference = datePay.getTime() - dayStart.getTime()
-    var resultInMinutes = Math.round(difference / 60000)
-    var totalSeconds = resultInMinutes * 60
-    this.timeShow = totalSeconds
-    this.ShowComponentTime = true
-    // return totalSeconds
   }
 
   onChangeOfficialDocument(posicion: number) {
@@ -1462,11 +1440,58 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     TaggingService.tagMostrarCheckout(modelTaggingCheckout);
   }
 
+  sendEventOnLoad(safe0Json: any, resultJson: any) {
+	  const fromDate = moment(resultJson.fromDate, 'DD/MM/YYYY');
+	  const daysFromNow = fromDate.diff(moment(), 'days');
+    const model = new TravelInsuranceCheckout(
+        'nmv_seguros_checkout_cargarCheckout',
+        {
+          dias_anticipacion: daysFromNow
+        },
+        {
+          moneda: safe0Json.monedaLocal,
+          precioFinal: safe0Json.precioEmisionLocal,
+          precioNormal: safe0Json.precioEmisionLocal
+        },
+        {
+          nombre: 'Peru',
+          codigo: 'PE',
+          pais: 'Peru'
+        },
+        {
+          nombre: resultJson.destinyString.descripcion_destino,
+          codigo: resultJson.destinyString.id_destino,
+          pais: ''
+        },
+        {
+          codigo: safe0Json.codProducto,
+          opcion: safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+          precioFinal: safe0Json.precioEmisionLocal,
+	        plan: safe0Json.nombreProducto,
+	        emisor: 'AssistCard',
+          monto_asistencia: 0,
+          posicion: 0
+        },
+        {
+	        adultos: resultJson.passengers.filter((p: any) => Number(p.edad) >= 18).length,
+	        infantes: resultJson.passengers.filter((p: any) => Number(p.edad) <= 5).length,
+	        ninos: resultJson.passengers.filter((p: any) => Number(p.edad) > 5 && Number(p.edad) < 18).length,
+	        total: resultJson.passengers.length
+        },
+        {
+	        estadia: Number(resultJson.days),
+	        salida: moment(resultJson.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+	        retorno: moment(resultJson.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
+        }
+    );
+    TaggingService.tagTravelInsuranceCheckout(model);
+  }
+
   llenarProduct(safe0Json: any, resultJson: any): ProductAddToCart {
     const currentDate = moment();
     const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
     const missingDays = fromDate.diff(currentDate, 'days');
-    let pp: ProductAddToCart = {
+    return {
       name: safe0Json.nombreProducto,
       id: safe0Json.idProducto,
       price: safe0Json.precioBrutochange,
@@ -1483,16 +1508,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       metric12: Number(this.resultJson.days),
       dimension16: 'PERU',
       dimension17: resultJson.destinyString.descripcion_destino,
-    }
-    return pp;
-  }
-
-  getDuracionViaje(resultJson: any): number {
-    let fechaFormats: number[] = resultJson.fromDate.split('/');
-    const _fromDate = new Date(fechaFormats[2], fechaFormats[1], fechaFormats[0]);
-    const _toDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
-    let diferencia = ((_fromDate.getTime() - _toDate.getTime()) / 1000 / 60 / 60 / 24) - 40;
-    return diferencia;
+    };
   }
 
   allowNumeric(event: KeyboardEvent) {
@@ -1504,7 +1520,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   allowOfficialDocument(event: KeyboardEvent, posicion: number) {
     let pattern: RegExp;
-    let tipoDocumento = '';
+    let tipoDocumento: string;
     const data = this.formShop.value;
 
     if (posicion != 99)
@@ -1550,14 +1566,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     event.preventDefault();
   }
 
-  getDiasAnticipacion(fromDate: any): number {
-    let fechaFormats: number[] = fromDate.fromDate.split('/');
-    const _fromDate = new Date(fechaFormats[2], fechaFormats[1], fechaFormats[0]);
-    const _toDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
-    let diferencia = ((_fromDate.getTime() - _toDate.getTime()) / 1000 / 60 / 60 / 24) - 40;
-    return diferencia;
-  }
-
   getPromedioEdades(resultJson: any): number {
     let promedio: number = 0;
     resultJson.passengers.forEach((element: any) => {
@@ -1569,13 +1577,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   onchangeBanco(): void {
-    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer'])?.Name;
+    const nationality = this.countries
+        .find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer'])?.Name;
 
     if (nationality === undefined) {
-      this._notification.showNotificacion("Error", "Debe ingresar previamente los datos del pasajero");
+      this._notification.showNotificacion('Error', 'Debe ingresar previamente los datos del pasajero');
       return;
-    }
-    else {
+    } else {
       const model1 = {
         event: 'nmv.seguros_eecga3_checkoutOption',
         ecommerce: {
@@ -1586,8 +1594,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           }
         }
-      }
-
+      };
       TaggingService.tagNationalitySelection(model1);
 
       const model = {
@@ -1599,25 +1606,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           }
         }
-      }
-
+      };
       TaggingService.tagStartOfPaymentMethods(model);
-    }
-  }
 
-  onChangeProtectionPolicies(): void {
-    const model = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
-      ecommerce: {
-        checkout_option: {
-          actionField: {
-            step: 3,
-            option: this.showInvoiceData ? 'Factura Electrónica' : 'Boleta Electrónica'
-          }
-        }
-      }
+      this.sendPaymentMethodSelectEvent(`${this.selectedPay} - ${this.id} - ${this.paymentMethodForm.get('bankPay')?.value || ''}`);
     }
-
-    TaggingService.tagVoucherSelection(model);
   }
 }

@@ -315,7 +315,7 @@ export class ParamArmaTuViaje implements ParamsTabs {
     let startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
     let endDate = moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
     let destino = this.form.controls['destino'].value;
-    let businessClass = false;
+    let businessClass = this.form.controls['clase'].value == 'B';
     let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.label === destino).id : 0;
 
     return { startDate, endDate, destino, businessClass, idDestino };

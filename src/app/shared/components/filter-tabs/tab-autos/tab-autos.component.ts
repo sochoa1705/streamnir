@@ -8,8 +8,8 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ParamsHoteles, ParamsAutos, URLAutos } from '../../tabs/tabs.models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
-
-
+import { SearchCarRent } from '../../../../Services/analytics/tagging.models';
+import { TaggingService } from '../../../../Services/analytics/tagging.service';
 
 @Component({
     selector: 'app-tab-autos',
@@ -109,16 +109,16 @@ import { InputValidationService } from 'src/app/Services/inputValidation.service
         return params;
       }
 
-      searchAuto(): void {
-        const errors = this.validateTab();
+  searchAuto(): void {
+    const errors = this.validateTab();
 
     if (errors.length > 0) {
-      this.openSnackBar(errors.join(" - "))
+      this.openSnackBar(errors.join(' - '))
       return;
     }
-        const url = this.getUrlAutos();
-        this.navigateToResponseUrl(url);
-      }
+    const url = this.getUrlAutos();
+    this.navigateToResponseUrl(url);
+  }
 
       openSnackBar(message: string, action: string = "Error") {
         this._snackBar.open(message, "", {
@@ -162,12 +162,42 @@ import { InputValidationService } from 'src/app/Services/inputValidation.service
         window.location.href = url;
      }
 
-     public getUrlAutos(){
-      let url = ''
-      let params = this.getParamsAutos();
-      url = new URLAutos(params).getUrl();
-      return url;
-    }
+  public getUrlAutos() {
+    let url = ''
+    let params = this.getParamsAutos();
+    url = new URLAutos(params).getUrl();
+    this.insertTag(params);
+    return url;
+  }
+
+  insertTag(params: any) {
+    const daysFromNow = moment(params.startDate, "YYYY-MM-DD").diff(moment(), 'days');
+    const duracionViaje = moment(params.endDate, "YYYY-MM-DD")
+        .diff(moment(params.startDate, "YYYY-MM-DD"), 'days');
+
+    const model = new SearchCarRent(
+        'nmv_autos_buscar',
+        {
+          dias_anticipacion: daysFromNow
+        },
+        {
+          nombre: params.destino,
+          codigo: params.idDestino,
+          pais: params.countryCode
+        },
+        {
+          edad_conductor: this.form.get('conductor')!.value,
+          lugar_devolucion: this.form.get('recojo')!.value
+        },
+        {
+          salida: moment(params.startDate, 'YYYY-MM-DD').format('YYYY/MM/DD'),
+          retorno: moment(params.endDate, 'YYYY-MM-DD').format('YYYY/MM/DD'),
+          estadia: duracionViaje
+        }
+    );
+
+    TaggingService.tagSearchCarRent(model);
+  }
 
     changeChecked(): void {
       this.viewInputRecojo = !this.form.controls['checkDevolver'].value;

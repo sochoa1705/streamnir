@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AccountsService } from 'src/app/Services/accounts.service';
-import { ModelTaggingHoteles } from 'src/app/Services/analytics/tagging.models';
+import { ModelTaggingHoteles, SearchHotels } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
@@ -12,7 +11,8 @@ import { NotificationService } from 'src/app/Services/notification.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { URLHotel, ParamsHoteles } from '../../tabs/tabs.models';
+import { ParamsHoteles, URLHotel } from '../../tabs/tabs.models';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tab-hotel',
@@ -152,7 +152,7 @@ export class TabHotelComponent {
   }
 
   public getUrlAlojamiento() {
-    let url = ''
+    let url: string;
     let params = this.getParamsAlojamiento();
     this.insertTag(params);
     url = new URLHotel(params, this.distribution).getUrl();
@@ -161,7 +161,6 @@ export class TabHotelComponent {
 
 
   insertTag(params: any) {
-
     const getCodigoIata = (id: string) => {
       return id.split("::")[1];
     }
@@ -186,17 +185,44 @@ export class TabHotelComponent {
     )
 
     TaggingService.buscarHoteles(model);
+
+    const newModel = new SearchHotels(
+        'nmv_hoteles_buscar',
+        {
+          dias_anticipacion: diasAnticipacion
+        },
+        {
+          nombre: params.destino.split(',')[0],
+          codigo: params.destino.split(',')[0].slice(0, 3).toUpperCase(),
+          pais: params.destino.split(',')[1].trim()
+        },
+        {
+          habitaciones: this.distributionObject.habitacion
+        },
+        {
+          adultos: this.distributionObject.adultos,
+          ninos: this.distributionObject.ninos,
+          infantes: 0,
+          total: this.distributionObject.pasajeros
+        },
+        {
+          salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
+          retorno: moment(params.endDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
+          estadia: duracionViaje
+        }
+    );
+
+    TaggingService.tagSearchHotels(newModel);
   }
 
 
   getParamsAlojamiento() {
-    let params = new ParamsHoteles(
-      this.fromDate,
-      this.toDate,
-      this.form,
-      this.citys,
+    return new ParamsHoteles(
+        this.fromDate,
+        this.toDate,
+        this.form,
+        this.citys,
     ).getParams();
-    return params;
   }
 
 
