@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { ParamsVueloHotel, URLVueloHotel } from '../../tabs/tabs.models';
@@ -30,7 +30,6 @@ export class TabVueloHotelComponent {
 	citysDestinosSelect: Array<any> = [];
 	origen: any;
 	destino: any;
-	origenHotel: any;
 	toDate: NgbDate | null;
 
 	distribution = '';
@@ -60,16 +59,6 @@ export class TabVueloHotelComponent {
 	navigateToResponseUrl(url: string): void {
 		window.location.href = url;
 	}
-
-
-	get origenField() {
-		return this.form.controls['origen'];
-	}
-
-	get destinoField() {
-		return this.form.controls['destino'];
-	}
-
 
 	validateForm(field: string) {
 		return this.form.controls[field].errors
@@ -157,56 +146,55 @@ export class TabVueloHotelComponent {
 
 		TaggingService.buscarVuelosHoteles(model);
 
-		const newModel = new SearchFlightHotel(
-				'nmv_vuelosMasHotel_buscar',
-				{
-					dias_anticipacion: diasAnticipacion
-				},
-				{
-					nombre: params.origen.split(',')[0],
-					codigo: params.origen.split(',')[0].slice(0, 3).toUpperCase(),
-					pais: params.origen.split(',')[1].trim()
-				},
-				{
-					nombre: params.destino.split(',')[0],
-					codigo: params.destino.split(',')[0].slice(0, 3).toUpperCase(),
-					pais: params.destino.split(',')[1].trim()
-				},
-				{
-					habitaciones: this.distributionObject.habitacion
-				},
-				{
-					clase: params.businessClass ? 'BS' : 'EC'
-				},
-				{
-					adultos: this.distributionObject.adultos,
-					ninos: this.distributionObject.ninos,
-					infantes: 0,
-					total: this.distributionObject.pasajeros
-				},
-				{
-					salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
-					retorno: moment(params.endDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
-					estadia: duracionViaje
-				}
-		);
+		const newModel: SearchFlightHotel = {
+			event: 'nmv_vuelosMasHotel_buscar',
+			operacion: {
+				dias_anticipacion: diasAnticipacion
+			},
+			origen: {
+				nombre: params.origen.split(',')[0],
+				codigo: params.origen.split(',')[0].slice(0, 3).toUpperCase(),
+				pais: params.origen.split(',')[1].trim()
+			},
+			destino: {
+				nombre: params.destino.split(',')[0],
+				codigo: params.destino.split(',')[0].slice(0, 3).toUpperCase(),
+				pais: params.destino.split(',')[1].trim()
+			},
+			hotel: {
+				habitaciones: this.distributionObject.habitacion
+			},
+			vuelo: {
+				clase: params.businessClass ? 'BS' : 'EC'
+			},
+			pasajeros: {
+				adultos: this.distributionObject.adultos,
+				ninos: this.distributionObject.ninos,
+				infantes: 0,
+				total: this.distributionObject.pasajeros
+			},
+			fechas: {
+				salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+				retorno: moment(params.endDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+				estadia: duracionViaje
+			}
+		};
 
 		TaggingService.tagSearchFlightHotel(newModel);
 	}
 
 	getParamsVueloHotel() {
-		let params = new ParamsVueloHotel(
+		return new ParamsVueloHotel(
 				this.fromDate,
 				this.toDate,
 				this.form,
 				this.citysDestinosSelect,
 				this.citysOrigenSelect
 		).getParams();
-		return params;
 	}
 
 	public getUrlVueloHotel(): string {
-		let url = ''
+		let url: string;
 		let params = this.getParamsVueloHotel();
 		this.insertTag(params);
 
@@ -221,11 +209,11 @@ export class TabVueloHotelComponent {
 		// console.log(elemento,type);
 
 		let value = elemento.value;
-		// if (value.length == 0) {
-		//   elemento.classList.remove('auto');
-		// } else {
-		//   elemento.classList.add('auto');
-		// }
+		/* if (value.length == 0) {
+		  elemento.classList.remove('auto');
+		} else {
+		  elemento.classList.add('auto');
+		} */
 		if (value.length >= 3) {
 			this.getListCiudades(value, type, typeSearch);
 		}
@@ -249,6 +237,5 @@ export class TabVueloHotelComponent {
 		this.toDate = value.toDate;
 		this.fromDate = value.fromDate;
 	}
-
 
 }

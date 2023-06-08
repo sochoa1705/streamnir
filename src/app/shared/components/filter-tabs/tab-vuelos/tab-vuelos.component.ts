@@ -395,33 +395,33 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
     TaggingService.buscarVuelos(model);
 
-    const  newModel = new SearchFlights(
-				'nmv_vuelos_buscar',
-        {
-          dias_anticipacion: diasAnticipacion
-        },
-        {
-          nombre: params.origen.title,
-          codigo: params.origen.codigo,
-          pais: params.destino.country
-        },
-        {
-          nombre: params.destino.title,
-          codigo: params.destino.codigo,
-          pais: params.destino.country
-        },
-        {
-          adultos: this.distributionObject.adultos,
-          ninos: this.distributionObject.ninos,
-          infantes: this.distributionObject.infantes,
-          total: this.distributionObject.adultos + this.distributionObject.ninos + this.distributionObject.infantes,
-        },
-        {
-          salida: moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-          retorno: fechaRegreso,
-          estadia: duracionViaje
-        }
-    );
+    const newModel: SearchFlights = {
+      event: 'nmv_vuelos_buscar',
+      operacion: {
+        dias_anticipacion: diasAnticipacion
+      },
+      origen: {
+        nombre: params.origen.title,
+        codigo: params.origen.codigo,
+        pais: params.destino.country
+      },
+      destino: {
+        nombre: params.destino.title,
+        codigo: params.destino.codigo,
+        pais: params.destino.country
+      },
+      pasajeros: {
+        adultos: this.distributionObject.adultos,
+        ninos: this.distributionObject.ninos,
+        infantes: this.distributionObject.infantes,
+        total: this.distributionObject.adultos + this.distributionObject.ninos + this.distributionObject.infantes
+      },
+      fechas: {
+        salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: fechaRegreso.replace(/\//g, '-'),
+        estadia: duracionViaje
+      }
+    };
     TaggingService.tagSearchFlights(newModel);
   }
 

@@ -92,11 +92,6 @@ export interface State {
   population: string;
 }
 
-export interface Clientes {
-  Edad: string;
-  FechaNacimiento: string;
-}
-
 @Component({
   selector: 'app-filtersafe',
   templateUrl: './filtersafe.component.html',
@@ -115,8 +110,6 @@ export class FiltersafeComponent implements OnInit {
 
   model!: NgbDateStruct;
   selected = 'idavuelta';
-  stateCtrl = new FormControl();
-  stateCtrl2 = new FormControl();
   customers!: number;
   ageCustomers: any;
   ClienteCotizacion: Array<any> = [];
@@ -133,22 +126,12 @@ export class FiltersafeComponent implements OnInit {
   MSG_OUTFLY: string = 'fromDate'
   MSG_INFLY: string = 'toDate'
 
-  model1: string | undefined;
-  model2: string | undefined;
-
   hoveredDate: NgbDate | null = null;
 
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
 
-  unidadNegocio: any;
-  plansAC: any = [];
-  plans: any = [];
-  dollar: any;
   pop: any;
-  coverageDisplay: boolean = false;
-  coverageList: any;
-  asistMedic: any;
 
   filters: any;
   filtersJSON: any;
@@ -179,7 +162,6 @@ export class FiltersafeComponent implements OnInit {
     public formatter: NgbDateParserFormatter,
     private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>,
-    public elementRef: ElementRef,
     private renderer: Renderer2,
     private notification: NotificationService,
     private _formBuilder: FormBuilder
@@ -285,10 +267,6 @@ export class FiltersafeComponent implements OnInit {
     }
   }
 
-  get today() {
-    return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
-  }
-
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
@@ -374,33 +352,33 @@ export class FiltersafeComponent implements OnInit {
 
     const daysFromNow = moment(form.fromDate, 'DD/MM/YYYY').diff(moment(), 'days');
 
-    const model = new SearchTravelInsurance(
-        'nmv_seguros_buscar',
-        {
-          dias_anticipacion: daysFromNow
-        },
-        {
-          nombre: 'Peru',
-          codigo: 'PE',
-          pais: 'Peru'
-        },
-        {
-          nombre: form.destinyString.descripcion_destino,
-          codigo: form.destinyString.id_destino,
-          pais: ''
-        },
-        {
-          total: form.passengers.length,
-          infantes: form.passengers.filter(p => Number(p.edad) <= 5).length,
-          ninos: form.passengers.filter(p => Number(p.edad) > 5 && Number(p.edad) < 18).length,
-          adultos: form.passengers.filter(p => Number(p.edad) >= 18).length
-        },
-        {
-          salida: form.fromDate,
-          retorno: form.toDate,
-          estadia: Number(this.diffDays())
-        }
-    );
+    const model: SearchTravelInsurance = {
+      event: 'nmv_seguros_buscar',
+      operacion: {
+        dias_anticipacion: daysFromNow
+      },
+      origen: {
+        nombre: 'Peru',
+        codigo: 'PE',
+        pais: 'Peru'
+      },
+      destino: {
+        nombre: form.destinyString.descripcion_destino,
+        codigo: form.destinyString.id_destino,
+        pais: ''
+      },
+      pasajeros: {
+        total: form.passengers.length,
+        infantes: form.passengers.filter(p => Number(p.edad) <= 5).length,
+        ninos: form.passengers.filter(p => Number(p.edad) > 5 && Number(p.edad) < 18).length,
+        adultos: form.passengers.filter(p => Number(p.edad) >= 18).length
+      },
+      fechas: {
+        salida: moment(form.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: moment(form.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        estadia: Number(this.diffDays())
+      }
+    };
 
     TaggingService.tagSearchTravelInsurance(model);
   }

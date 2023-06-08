@@ -2,17 +2,17 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
-import { ModelTaggingHoteles, SearchAssemblePackages } from 'src/app/Services/analytics/tagging.models';
+import { SearchAssemblePackages } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { EnumCabins, EnumFlightType, ParamArmaTuViaje, URLArmaTuViaje, URLHotel } from '../../tabs/tabs.models';
+import { EnumCabins, EnumFlightType, ParamArmaTuViaje, URLArmaTuViaje } from '../../tabs/tabs.models';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { AccountsService } from 'src/app/Services/accounts.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tab-arma-paquetes',
@@ -66,12 +66,6 @@ export class TabArmaPaquetesComponent {
       clase: new FormControl(EnumCabins.economico),
       destino: new FormControl(''),
     });
-
-  }
-
-
-  isValidate() {
-    return this.popUpElement?.isValid();
   }
 
   autoComplete(e: any, typeSearch = 'FLIGHT_HOTEL') {
@@ -85,12 +79,6 @@ export class TabArmaPaquetesComponent {
     }
   }
 
-  get viajesForm() {
-    return this.form.get("destino")?.value;
-  }
-
-
-
   getListCiudades(e: any, typeSearch = 'FLIGHT_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
@@ -101,18 +89,9 @@ export class TabArmaPaquetesComponent {
     )
   }
 
-
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
   }
-
-  openSnackBar(message: string, action: string = "Error") {
-    this._snackBar.open(message, "", {
-      duration: 2000,
-      panelClass: ['mat-toolbar', 'mat-warn']
-    });
-  }
-
 
   getErrorsForm(form: FormGroup): string[] {
     let errors: any[] = [];
@@ -128,7 +107,6 @@ export class TabArmaPaquetesComponent {
     return errors;
   }
 
-
   public async searchPaquete() {
     this.isSubmit = true;
 
@@ -138,7 +116,6 @@ export class TabArmaPaquetesComponent {
       this.notification.showNotificacion("Error", errosInputs.join(", "), 10);
       return;
     }
-
 
     let errorHabitaciones = this.popUpElement?.isValid();
 
@@ -160,90 +137,51 @@ export class TabArmaPaquetesComponent {
     this.navigateToResponseUrl(url);
   }
 
-
-  public getUrlAlojamiento() {
-    let url = ''
-    let params = this.getParamsAlojamiento();
-    this.insertTag(params);
-    url = new URLHotel(params, this.distribution).getUrl();
-    return url;
-  }
-
   public getUrlPaquete() {
-    let url = ''
+    let url: string;
     let params = this.getParamsAlojamiento();
     this.newInsertTag(params);
     url = new URLArmaTuViaje(params, this.distribution).getUrl();
     return url;
   }
 
-
-  insertTag(params: any) {
-
-    const getCodigoIata = (id: string) => {
-      return id.split("::")[1];
-    }
-
-    const nombre = `${getCodigoIata(params.idDestino)}`;
-    const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
-    const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
-
-
-    const model = new ModelTaggingHoteles(
-      nombre,
-      params.destino,
-      this.distributionObject.pasajeros,
-      this.distributionObject.adultos,
-      this.distributionObject.ninos,
-      0,
-      this.distributionObject.habitacion,
-      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      diasAnticipacion,
-      duracionViaje
-    )
-
-    TaggingService.buscarHoteles(model);
-  }
-
   newInsertTag(params: any) {
     const daysFromNow = moment(params.startDate, 'DD/MM/YYYY').diff(moment(), 'days');
 
-    const model = new SearchAssemblePackages(
-        'nmv_armaTuViaje_buscar',
-        {
-          dias_anticipacion: daysFromNow
-        },
-        {
-          clase: params.businessClass ? 'BS' : 'EC'
-        },
-        {
-          habitaciones: this.distributionObject.habitacion
-        },
-        {
-          adultos: this.distributionObject.adultos,
-          ninos: this.distributionObject.ninos,
-          infantes: 0,
-          total: this.distributionObject.pasajeros
-        },
-        {
-          salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
-          retorno: '',
-          estadia: 0
-        }
-    );
+    const model: SearchAssemblePackages = {
+      event: 'nmv_armaTuViaje_buscar',
+      operacion: {
+        dias_anticipacion: daysFromNow
+      },
+      vuelo: {
+        clase: params.businessClass ? 'BS' : 'EC'
+      },
+      hotel: {
+        habitaciones: this.distributionObject.habitacion
+      },
+      pasajeros: {
+        adultos: this.distributionObject.adultos,
+        ninos: this.distributionObject.ninos,
+        infantes: 0,
+        total: this.distributionObject.pasajeros
+      },
+      fechas: {
+        salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: '',
+        estadia: 0
+      }
+    };
 
     TaggingService.tagSearchAssemblePackages(model);
   }
 
   getParamsAlojamiento() {
-    let params = new ParamArmaTuViaje(
+    return new ParamArmaTuViaje(
         this.fromDate,
         this.toDate,
         this.form,
         this.citys
     ).getParams();
-    return params;
   }
 
   changeDate(value: ClassValueCalendar) {

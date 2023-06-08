@@ -69,8 +69,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   coverageL: any;
   asistMedic: any;
   asistenciaMedicaMonto: number;
-  timeShow!: number;
-  ShowComponentTime!: boolean;
 
   countries: Array<any> = [];
   months: Array<any> = [];
@@ -673,41 +671,41 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   sendPassengerInfoEvent() {
-    const model = new TravelInsurancePassengerInfo(
-        'nmv_seguros_checkout_ingresarDatos',
-        {
-          moneda: this.safe0Json.monedaLocal,
-          precioFinal: Number(this.totalToPay),
-          precioNormal: Number(this.safe0Json.precioBrutoLocal)
-        },
-        this.getGenericCheckoutDataForEvent().usuario,
-        this.getGenericCheckoutDataForEvent().origen,
-        this.getGenericCheckoutDataForEvent().destino,
-        this.getGenericCheckoutDataForEvent().seguro,
-        this.getGenericCheckoutDataForEvent().pasajeros,
-        this.getGenericCheckoutDataForEvent().fechas
-    );
+    const model: TravelInsurancePassengerInfo = {
+      event: 'nmv_seguros_checkout_ingresarDatos',
+      precio: {
+        moneda: this.safe0Json.monedaLocal,
+        precioFinal: Number(this.totalToPay),
+        precioNormal: Number(this.safe0Json.precioBrutoLocal)
+      },
+      usuario: this.getGenericCheckoutDataForEvent().usuario,
+      origen: this.getGenericCheckoutDataForEvent().origen,
+      destino: this.getGenericCheckoutDataForEvent().destino,
+      seguro: this.getGenericCheckoutDataForEvent().seguro,
+      pasajeros: this.getGenericCheckoutDataForEvent().pasajeros,
+      fechas: this.getGenericCheckoutDataForEvent().fechas
+    };
     TaggingService.tagTravelInsurancePassengerInfo(model);
   }
 
   sendPaymentMethodSelectEvent(paymentMethod: string) {
-    const model = new TravelInsurancePaymentMethodSelected(
-        'nmv_seguros_checkout_ingresarDatos',
-        {
-          moneda: this.safe0Json.monedaLocal,
-          precioFinal: Number(this.totalToPay),
-          precioNormal: Number(this.safe0Json.precioBrutoLocal)
-        },
-        {
-          opcion: paymentMethod
-        },
-        this.getGenericCheckoutDataForEvent().usuario,
-        this.getGenericCheckoutDataForEvent().origen,
-        this.getGenericCheckoutDataForEvent().destino,
-        this.getGenericCheckoutDataForEvent().seguro,
-        this.getGenericCheckoutDataForEvent().pasajeros,
-        this.getGenericCheckoutDataForEvent().fechas
-    );
+    const model: TravelInsurancePaymentMethodSelected = {
+      event: 'nmv_seguros_checkout_seleccionarPago',
+      precio: {
+        moneda: this.safe0Json.monedaLocal,
+        precioFinal: Number(this.totalToPay),
+        precioNormal: Number(this.safe0Json.precioBrutoLocal)
+      },
+      metodo_pago: {
+        opcion: paymentMethod
+      },
+      usuario: this.getGenericCheckoutDataForEvent().usuario,
+      origen: this.getGenericCheckoutDataForEvent().origen,
+      destino: this.getGenericCheckoutDataForEvent().destino,
+      seguro: this.getGenericCheckoutDataForEvent().seguro,
+      pasajeros: this.getGenericCheckoutDataForEvent().pasajeros,
+      fechas: this.getGenericCheckoutDataForEvent().fechas
+    };
     TaggingService.tagTravelInsurancePaymentMethodSelected(model);
   }
 
@@ -1160,11 +1158,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             this.pressedToBuy = false;
           }
         }
-        // else {
-        //   // CAVH: Entra en el caso de pago con tarjeta: La transacci\u00F3n fue rechazada por el sistema anti-fraude.
-        //   this.replyMessage = "No se pudo realizar la transacción con la tarjeta ingresada, por favor intente con otro medio de pago.";
-        //   this.pressedToBuy = false;
-        // }
+        /* else {
+          // CAVH: Entra en el caso de pago con tarjeta: La transacci\u00F3n fue rechazada por el sistema anti-fraude.
+          this.replyMessage = "No se pudo realizar la transacción con la tarjeta ingresada, por favor intente con otro medio de pago.";
+          this.pressedToBuy = false;
+        } */
       },
       error: (err) => {
         console.log('Error en el registro del pago');
@@ -1443,47 +1441,47 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   sendEventOnLoad(safe0Json: any, resultJson: any) {
 	  const fromDate = moment(resultJson.fromDate, 'DD/MM/YYYY');
 	  const daysFromNow = fromDate.diff(moment(), 'days');
-    const model = new TravelInsuranceCheckout(
-        'nmv_seguros_checkout_cargarCheckout',
-        {
-          dias_anticipacion: daysFromNow
-        },
-        {
-          moneda: safe0Json.monedaLocal,
-          precioFinal: safe0Json.precioEmisionLocal,
-          precioNormal: safe0Json.precioEmisionLocal
-        },
-        {
-          nombre: 'Peru',
-          codigo: 'PE',
-          pais: 'Peru'
-        },
-        {
-          nombre: resultJson.destinyString.descripcion_destino,
-          codigo: resultJson.destinyString.id_destino,
-          pais: ''
-        },
-        {
-          codigo: safe0Json.codProducto,
-          opcion: safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-          precioFinal: safe0Json.precioEmisionLocal,
-	        plan: safe0Json.nombreProducto,
-	        emisor: 'AssistCard',
-          monto_asistencia: 0,
-          posicion: 0
-        },
-        {
-	        adultos: resultJson.passengers.filter((p: any) => Number(p.edad) >= 18).length,
-	        infantes: resultJson.passengers.filter((p: any) => Number(p.edad) <= 5).length,
-	        ninos: resultJson.passengers.filter((p: any) => Number(p.edad) > 5 && Number(p.edad) < 18).length,
-	        total: resultJson.passengers.length
-        },
-        {
-	        estadia: Number(resultJson.days),
-	        salida: moment(resultJson.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-	        retorno: moment(resultJson.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
-        }
-    );
+    const model: TravelInsuranceCheckout = {
+      event: 'nmv_seguros_checkout_cargarCheckout',
+      operacion: {
+        dias_anticipacion: daysFromNow
+      },
+      precio: {
+        moneda: safe0Json.monedaLocal,
+        precioFinal: safe0Json.precioEmisionLocal,
+        precioNormal: safe0Json.precioEmisionLocal
+      },
+      origen: {
+        nombre: 'Peru',
+        codigo: 'PE',
+        pais: 'Peru'
+      },
+      destino: {
+        nombre: resultJson.destinyString.descripcion_destino,
+        codigo: resultJson.destinyString.id_destino,
+        pais: ''
+      },
+      seguro: {
+        codigo: safe0Json.codProducto,
+        opcion: safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+        precioFinal: safe0Json.precioEmisionLocal,
+        plan: safe0Json.nombreProducto,
+        emisor: 'AssistCard',
+        monto_asistencia: 0,
+        posicion: 0
+      },
+      pasajeros: {
+        adultos: resultJson.passengers.filter((p: any) => Number(p.edad) >= 18).length,
+        infantes: resultJson.passengers.filter((p: any) => Number(p.edad) <= 5).length,
+        ninos: resultJson.passengers.filter((p: any) => Number(p.edad) > 5 && Number(p.edad) < 18).length,
+        total: resultJson.passengers.length
+      },
+      fechas: {
+        estadia: Number(resultJson.days),
+        salida: moment(resultJson.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: moment(resultJson.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
+      }
+    };
     TaggingService.tagTravelInsuranceCheckout(model);
   }
 

@@ -5,7 +5,6 @@ import {
 	ModelTaggingAddToCart,
 	ModelTaggingBuscarSeguros,
 	ModelTaggingCheckout,
-	ModelTaggingcheckoutOption,
 	ModelTaggingDetalleBeneficio,
 	ModelTaggingHoteles,
 	ModelTaggingLibroReclamaciones,
@@ -23,10 +22,15 @@ import {
 	SearchFlights,
 	SearchHotels,
 	SearchItineraries,
-	SearchTravelInsurance, TravelInsuranceCheckout,
-	TravelInsuranceListResults, TravelInsurancePassengerInfo, TravelInsurancePaymentMethodSelected,
-	TravelInsuranceSelected, TravelInsuranceSuccess
+	SearchTravelInsurance,
+	TravelInsuranceCheckout,
+	TravelInsuranceListResults,
+	TravelInsurancePassengerInfo,
+	TravelInsurancePaymentMethodSelected,
+	TravelInsuranceSelected,
+	TravelInsuranceSuccess
 } from './tagging.models';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class TaggingService {
@@ -37,17 +41,17 @@ export class TaggingService {
 	public static triggerTag(datos: any) {
 		const dataLayer = (<any>(<any>window)).dataLayer || [];
 
-		// dataLayer.push({
-		//   originalLocation: document.location.protocol + '//' +
-		//     document.location.hostname +
-		//     document.location.pathname +
-		//     document.location.search
-		// });
+		/* dataLayer.push({
+		  originalLocation: document.location.protocol + '//' +
+		    document.location.hostname +
+		    document.location.pathname +
+		    document.location.search
+		}); */
 
 		dataLayer.push(datos);
 
-		console.log('dataLayer:')
-		console.log(dataLayer)
+		if (!environment.production)
+			console.info('dataLayer', dataLayer);
 	}
 
 	public static pageView(url: string) {
@@ -113,10 +117,6 @@ export class TaggingService {
 		this.triggerTag(modelTaggingMostrarResultados);
 	}
 
-	public static tagCheckoutOption(modelTaggingcheckoutOption: ModelTaggingcheckoutOption) {
-		this.triggerTag(modelTaggingcheckoutOption);
-	}
-
 	public static tagMostrarDetalleBeneficio(modelTaggingDetalleBeneficio: ModelTaggingDetalleBeneficio) {
 		this.triggerTag(modelTaggingDetalleBeneficio);
 	}
@@ -142,10 +142,6 @@ export class TaggingService {
 	}
 
 	public static tagStartOfContactData(model: any) {
-		this.triggerTag(model);
-	}
-
-	public static tagVoucherSelection(model: any) {
 		this.triggerTag(model);
 	}
 
