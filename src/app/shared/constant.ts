@@ -6,15 +6,7 @@ export const Core = {
   GetUserId: 'GetUserId',
 };
 
-export const LogoutType = {
-  cognito: 1,
-  azure: 2,
-};
-
 export enum ENDPOINT_API {
-  // DOLLAR
-  CHANGE = 'generales/TipoCambio',
-
   // AUTOCOMPLETE
   CIUDADES = 'GetCiudades_AutoComplete',
   ciudad = 'pStrIdCiudad',
@@ -78,9 +70,6 @@ export enum ENDPOINT_API {
 
   // DISTRICTS
   DISTRICTS = 'v1/api/Master/Soap/Districts',
-
-  // NEWSLETTER
-  NEWSLETTER = 'v1/api/Newsletter',
 
   //PAYMENT
   PAYMENT = 'Payment',
