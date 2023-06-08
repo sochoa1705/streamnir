@@ -180,65 +180,65 @@ export class ConformidadComponent implements OnInit {
     const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
     const daysFromNow = fromDate.diff(moment(), 'days');
     const customerBirthday = `${this.shopString.customers[0].yearCustomer}-${this.shopString.customers[0].monthCustomer}-${this.shopString.customers[0].dayCustomer}`;
-    const model = new TravelInsuranceSuccess(
-        'nmv_seguros_transaccionExitosa',
-        {
-          id: this.reservationCode,
-          dias_anticipacion: daysFromNow
-        },
-        {
-          moneda: this.safe0Json.monedaLocal,
-          precioFinal: Number(this.shopString.PriceTotal),
-          precioNormal: Number(this.safe0Json.precioBrutoLocal)
-        },
-        {
-          opcion: this.typePay
-        },
-        {
-          email: this.shopString.contactForm.mailContacto,
-          primerNombre: this.shopString.customers[0].nameCustomer,
-          primerApellido: this.shopString.customers[0].lastNameCustomer,
-          fechaNacimiento: customerBirthday,
-          nacionalidad: this.shopString.customers[0].nationalityCustomer,
-          genero: this.shopString.customers[0].sexCustomer,
-          documento_tipo: this.shopString.customers[0].typeDocCustomer,
-          documento_numero: this.shopString.customers[0].numDocCustomer,
-          telefono_tipo: this.shopString.contactForm.typePhone0,
-          telefono_codigo: this.shopString.contactForm.code0,
-          telefono_numero: this.shopString.contactForm.numberPhone0,
-          frecuencia: this.shopString.customers[0].typeCustomer
-        },
-        {
-          nombre: 'Perú',
-          codigo: 'PE',
-          pais: 'Perú'
-        },
-        {
-          nombre: this.resultJson.destinyString.descripcion_destino,
-          codigo: this.resultJson.destinyString.id_destino,
-          pais: ''
-        },
-        {
-          plan: this.safe0Json.nombreProducto,
-          codigo: this.safe0Json.codProducto,
-          opcion: this.safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-          emisor: 'AssistCard',
-          monto_asistencia: Number(this.asistMedic.split(' ')[1]),
-          precioFinal: Number(this.shopString.PriceTotal),
-          posicion: 0
-        },
-        {
-          adultos: this.resultJson.passengers.filter((p: any) => Number(p.edad) >= 18).length,
-          infantes: this.resultJson.passengers.filter((p: any) => Number(p.edad) <= 5).length,
-          ninos: this.resultJson.passengers.filter((p: any) => Number(p.edad) > 5 && Number(p.edad) < 18).length,
-          total: this.resultJson.passengers.length
-        },
-        {
-          salida: moment(this.resultJson.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-          retorno: moment(this.resultJson.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-          estadia: Number(this.resultJson.days)
-        }
-    );
+    const model: TravelInsuranceSuccess = {
+      event: 'nmv_seguros_transaccionExitosa',
+      operacion: {
+        id: this.reservationCode,
+        dias_anticipacion: daysFromNow
+      },
+      precio: {
+        moneda: this.safe0Json.monedaLocal,
+        precioFinal: Number(this.shopString.PriceTotal),
+        precioNormal: Number(this.safe0Json.precioBrutoLocal)
+      },
+      metodo_pago: {
+        opcion: this.typePay
+      },
+      usuario: {
+        email: this.shopString.contactForm.mailContacto,
+        primerNombre: this.shopString.customers[0].nameCustomer,
+        primerApellido: this.shopString.customers[0].lastNameCustomer,
+        fechaNacimiento: customerBirthday,
+        nacionalidad: this.shopString.customers[0].nationalityCustomer,
+        genero: this.shopString.customers[0].sexCustomer,
+        documento_tipo: this.shopString.customers[0].typeDocCustomer,
+        documento_numero: this.shopString.customers[0].numDocCustomer,
+        telefono_tipo: this.shopString.contactForm.typePhone0,
+        telefono_codigo: this.shopString.contactForm.code0,
+        telefono_numero: this.shopString.contactForm.numberPhone0,
+        frecuencia: this.shopString.customers[0].typeCustomer
+      },
+      origen: {
+        nombre: 'Perú',
+        codigo: 'PE',
+        pais: 'Perú'
+      },
+      destino: {
+        nombre: this.resultJson.destinyString.descripcion_destino,
+        codigo: this.resultJson.destinyString.id_destino,
+        pais: ''
+      },
+      seguro: {
+        plan: this.safe0Json.nombreProducto,
+        codigo: this.safe0Json.codProducto,
+        opcion: this.safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+        emisor: 'AssistCard',
+        monto_asistencia: Number(this.asistMedic.split(' ')[1]),
+        precioFinal: Number(this.shopString.PriceTotal),
+        posicion: 0
+      },
+      pasajeros: {
+        adultos: this.resultJson.passengers.filter((p: any) => Number(p.edad) >= 18).length,
+        infantes: this.resultJson.passengers.filter((p: any) => Number(p.edad) <= 5).length,
+        ninos: this.resultJson.passengers.filter((p: any) => Number(p.edad) > 5 && Number(p.edad) < 18).length,
+        total: this.resultJson.passengers.length
+      },
+      fechas: {
+        salida: moment(this.resultJson.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: moment(this.resultJson.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        estadia: Number(this.resultJson.days)
+      }
+    };
     TaggingService.tagTravelInsuranceSuccess(model);
   }
 

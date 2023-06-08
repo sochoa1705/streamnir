@@ -1,18 +1,18 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
-import { ModelTaggingHoteles, SearchItineraries } from 'src/app/Services/analytics/tagging.models';
+import { SearchItineraries } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { URLHotel, URLPaquete, ParamPaquete, EnumFlightType, EnumCabins } from '../../tabs/tabs.models';
+import { EnumFlightType, ParamPaquete, URLPaquete } from '../../tabs/tabs.models';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { InputValidationService } from '../../../../Services/inputValidation.service';
 import { AccountsService } from 'src/app/Services/accounts.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tab-paquetes',
@@ -25,7 +25,6 @@ export class TabPaquetesComponent {
 
   form!: FormGroup;
   fromDate: NgbDate | null
-  citys: Array<any> = [];
   origen: any;
   destino: any;
   toDate: NgbDate | null;
@@ -38,11 +37,9 @@ export class TabPaquetesComponent {
 
   private _vuelosTab: SaveModelVuelos;
 
-  EnumCabins = EnumCabins;
   EnumFlightType = EnumFlightType;
 
   countries: Array<any> = [];
-  countriesSearch: Array<any> = [];
   countriesPackage: Array<any> = [];
   countriesPackageSearch: Array<any> = [];
   themes: Array<any> = [];
@@ -84,7 +81,7 @@ export class TabPaquetesComponent {
     this.countriesPackageSearch = this.countriesPackage;
   }
 
-  autoComplete(e: any, typeSearch = 'FLIGHT_HOTEL') {
+  autoComplete(e: any) {
     // let elemento = this.origen.nativeElement;
     this.countriesPackageSearch = [];
     let elemento = e.target;
@@ -95,19 +92,6 @@ export class TabPaquetesComponent {
       //this.getListCiudades(value, typeSearch);
       this.countriesPackageSearch = this.countriesPackage.filter((item) => item.label.toLowerCase().includes(value.toLowerCase()));
     }
-  }
-
-  get viajesForm() {
-    return this.form.get("destino")?.value;
-  }
-
-  getListCiudades(e: any, typeSearch = 'FLIGHT_HOTEL') {
-    this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
-      data => {
-        this.citys = data;
-      },
-      err => console.log(err)
-    )
   }
 
   getThemes() {
@@ -148,20 +132,13 @@ export class TabPaquetesComponent {
     window.location.href = url;
   }
 
-  openSnackBar(message: string, action: string = "Error") {
-    this._snackBar.open(message, "", {
-      duration: 2000,
-      panelClass: ['mat-toolbar', 'mat-warn']
-    });
-  }
-
   public async searchPaquete() {
     // const errors = this.validateTab();
 
-    // if (errors.length > 0) {
-    //   this.openSnackBar(errors.join(" - "))
-    //   return;
-    // }
+    /* if (errors.length > 0) {
+      this.openSnackBar(errors.join(" - "))
+      return;
+    } */
 
     let url = this.getUrlPaquete();
     const result = await this._accountsService.getAccountToken();
@@ -176,90 +153,54 @@ export class TabPaquetesComponent {
     this.navigateToResponseUrl(url);
   }
 
-  // validateTab() {
-  //   const errors = [];
-  //   if (this.form.controls['destino'].value == '') {
-  //     errors.push("El destino es requerido");
-  //   }
-  //   if (this.form.controls['months'].value == '') {
-  //     errors.push("El mes es requerido");
-  //   }
-  //   return errors;
-  // }
-
-  public getUrlAlojamiento() {
-    let url = ''
-    let params = this.getParamsAlojamiento();
-    this.insertTag(params);
-    url = new URLHotel(params, this.distribution).getUrl();
-    return url;
-  }
+  /* validateTab() {
+    const errors = [];
+    if (this.form.controls['destino'].value == '') {
+      errors.push("El destino es requerido");
+    }
+    if (this.form.controls['months'].value == '') {
+      errors.push("El mes es requerido");
+    }
+    return errors;
+  } */
 
   public getUrlPaquete() {
-    let url = ''
+    let url: string;
     let params = this.getParamsAlojamiento();
     this.insertNewTag(params);
     url = new URLPaquete(params, params.idDestino).getUrl();
     return url;
   }
 
-  insertTag(params: any) {
-    const getCodigoIata = (id: string) => {
-      return id.split("::")[1];
-    }
-
-    const nombre = `${getCodigoIata(params.idDestino)}`;
-    const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
-    const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
-
-    const model = new ModelTaggingHoteles(
-      nombre,
-      params.destino,
-      this.distributionObject.pasajeros,
-      this.distributionObject.adultos,
-      this.distributionObject.ninos,
-      0,
-      this.distributionObject.habitacion,
-      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      diasAnticipacion,
-      duracionViaje
-    )
-
-    TaggingService.buscarHoteles(model);
-  }
-
   insertNewTag(params: any) {
     const daysFromNow = moment(params.idMonth, "YYYY-MM").diff(new Date(), 'days');
-    const model = new SearchItineraries(
-        'nmv_paquetes_buscar',
-        {
-          dias_anticipacion: daysFromNow
-        },
-        {
-          pais: params.destino
-        },
-        {
-          fecha_salida: this.months.find(m => m.code == params.idMonth).label,
-          tema: this.themes.find(t => t.code == params.idTheme).label,
-          noches: this.noches.find(n => n.code == params.idNoche).name
-        }
-    );
+    const model: SearchItineraries = {
+      event: 'nmv_paquetes_buscar',
+      operacion: {
+        dias_anticipacion: daysFromNow
+      },
+      destino: {
+        pais: params.destino
+      },
+      paquete: {
+        fecha_salida: this.months.find(m => m.code == params.idMonth).label,
+        tema: this.themes.find(t => t.code == params.idTheme).label,
+        noches: this.noches.find(n => n.code == params.idNoche).name
+      }
+    };
     TaggingService.tagSearchItineraries(model);
   }
 
   getParamsAlojamiento() {
-    let params = new ParamPaquete(
-      this.fromDate,
-      this.toDate,
-      this.form,
-      this.countriesPackageSearch,
-      this.themes,
-      this.months,
-      this.noches
+    return new ParamPaquete(
+        this.fromDate,
+        this.toDate,
+        this.form,
+        this.countriesPackageSearch,
+        this.themes,
+        this.months,
+        this.noches
     ).getParams();
-
-    return params;
   }
 
   changeDate(value: ClassValueCalendar) {

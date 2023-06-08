@@ -268,38 +268,38 @@ export class PlansComponent implements OnInit {
   sendSelectInsuranceEvent(planAC: any, resultJson: any) {
     const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
     const daysFromNow = fromDate.diff(moment(), 'days');
-    const model = new TravelInsuranceSelected(
-        'nmv_seguros_seleccionarProducto',
-        {
-          dias_anticipacion: daysFromNow
-        },
-        {
-          moneda: planAC.monedaLocal || 'USD',
-          precioNormal: Number(planAC.precioEmisionLocal || '0'),
-          precioFinal: Number(planAC.precioEmisionLocal || '0')
-        },
-        {
-          nombre: 'Peru',
-          codigo: 'PE',
-          pais: 'Peru'
-        },
-        {
-          nombre: resultJson.destinyString.descripcion_destino,
-          codigo: resultJson.destinyString.id_destino,
-          pais: ''
-        },
-        {
-          posicion: 0,
-          precioFinal: Number(planAC.precioEmisionLocal || '0'),
-          plan: planAC.nombreProducto || planAC,
-          codigo: planAC.codProducto || planAC,
-          opcion: '',
-          emisor: 'AssistCard',
-          monto_asistencia: 0
-        },
-        this.getResultJsonData(resultJson).pasajeros,
-        this.getResultJsonData(resultJson).fechas
-    );
+    const model: TravelInsuranceSelected = {
+      event: 'nmv_seguros_seleccionarProducto',
+      operacion: {
+        dias_anticipacion: daysFromNow
+      },
+      precio: {
+        moneda: planAC.monedaLocal || 'USD',
+        precioNormal: Number(planAC.precioEmisionLocal || '0'),
+        precioFinal: Number(planAC.precioEmisionLocal || '0')
+      },
+      origen: {
+        nombre: 'Peru',
+        codigo: 'PE',
+        pais: 'Peru'
+      },
+      destino: {
+        nombre: resultJson.destinyString.descripcion_destino,
+        codigo: resultJson.destinyString.id_destino,
+        pais: ''
+      },
+      seguro: {
+        posicion: 0,
+        precioFinal: Number(planAC.precioEmisionLocal || '0'),
+        plan: planAC.nombreProducto || planAC,
+        codigo: planAC.codProducto || planAC,
+        opcion: '',
+        emisor: 'AssistCard',
+        monto_asistencia: 0
+      },
+      pasajeros: this.getResultJsonData(resultJson).pasajeros,
+      fechas: this.getResultJsonData(resultJson).fechas
+    };
     TaggingService.tagTravelInsuranceSelected(model);
   }
 
@@ -429,37 +429,37 @@ export class PlansComponent implements OnInit {
   }
 
   sendResultsEvent(plansAC: any[], resultJson: any) {
-    const model = new TravelInsuranceListResults(
-      'nmv_seguros_verResultados',
-        {
-          moneda: plansAC[0].monedaLocal,
-          precioNormal: 0,
-          precioFinal: 0
-        },
-        {
-          nombre: 'Peru',
-          codigo: 'PE',
-          pais: 'Peru'
-        },
-        {
-          nombre: resultJson.destinyString.descripcion_destino,
-          codigo: resultJson.destinyString.id_destino,
-          pais: ''
-        },
-        plansAC.map((plan: any, i: number): InsuranceResult =>
-            new InsuranceResult(
-                i + 1,
-                Number(plan.precioEmisionLocal),
-                plan.nombreProducto,
-                plan.codProducto,
-                i === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-                'AssistCard',
-                Number(plan.precioComision)
-            )
-        ),
-        this.getResultJsonData(resultJson).pasajeros,
-        this.getResultJsonData(resultJson).fechas
-    );
+    const model: TravelInsuranceListResults = {
+      event: 'nmv_seguros_verResultados',
+      precio: {
+        moneda: plansAC[0].monedaLocal,
+        precioNormal: 0,
+        precioFinal: 0
+      },
+      origen: {
+        nombre: 'Peru',
+        codigo: 'PE',
+        pais: 'Peru'
+      },
+      destino: {
+        nombre: resultJson.destinyString.descripcion_destino,
+        codigo: resultJson.destinyString.id_destino,
+        pais: ''
+      },
+      resultados: plansAC.map((plan: any, i: number): InsuranceResult =>
+          new InsuranceResult(
+              i + 1,
+              Number(plan.precioEmisionLocal),
+              plan.nombreProducto,
+              plan.codProducto,
+              i === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+              'AssistCard',
+              Number(plan.precioComision)
+          )
+      ),
+      pasajeros: this.getResultJsonData(resultJson).pasajeros,
+      fechas: this.getResultJsonData(resultJson).fechas
+    };
     TaggingService.tagTravelInsuranceListResults(model);
   }
 

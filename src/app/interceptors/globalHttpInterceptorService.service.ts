@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import {
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-  HttpResponse,
-  HttpErrorResponse,
+  HttpResponse
 } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { NotificationService } from '../Services/notification.service';
 import { TaggingService } from '../Services/analytics/tagging.service';
 import { routerToCapitalice } from '../shared/utils';
 
@@ -44,24 +43,22 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
 
   getErrorHttp200(resp: HttpEvent<IBodyResponse>, req: HttpRequest<any>) {
     if (resp instanceof HttpResponse) {
-      if (!resp?.body?.Result?.IsSuccess) {
+      if (!resp.ok || !resp.body) {
         TaggingService.errorService(
-          this.generateErrorCategory(req.url, req.method, resp.status),
-          resp?.body?.Result?.Message || 'Error Genérico',
-          req.url
+            this.generateErrorCategory(req.url, req.method, resp.status),
+            resp?.body?.Result?.Message || 'Error Genérico',
+            req.url
         );
       }
     }
   }
 
   getErrorHttpResponse(resp: HttpErrorResponse, req: HttpRequest<any>) {
-    if (resp instanceof HttpErrorResponse) {
-      TaggingService.errorService(
+    TaggingService.errorService(
         this.generateErrorCategory(req.url, req.method, resp.status),
         resp?.error.State.Messages[0].Value || resp.name,
         req.url
-      );
-    }
+    );
   }
 
   generateErrorCategory(url: string, method: string, status: number) {

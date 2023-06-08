@@ -20,10 +20,7 @@ import * as moment from 'moment';
   styleUrls: ['./tab-hotel.component.scss']
 })
 export class TabHotelComponent {
-
-
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
-
 
   form!: FormGroup;
   fromDate: NgbDate | null
@@ -36,11 +33,9 @@ export class TabHotelComponent {
 
   distributionObject: DistributionObjectA;
 
-
   hoveredDate: NgbDate | null = null;
 
   isSubmit = false;
-
 
   constructor(private calendar: NgbCalendar, private destineService: DestinyService,
     public formatter: NgbDateParserFormatter,
@@ -52,20 +47,12 @@ export class TabHotelComponent {
     this.form = new FormGroup({
       destino: new FormControl('', [Validators.required, Validators.minLength(3)]),
     });
-
   }
-
-
-  get destinoField() {
-    return this.form.controls["destino"];
-  }
-
 
   validateForm(field: string) {
     return this.form.controls[field]?.errors
       && this.isSubmit;
   }
-
 
   getErrorsForm(form: FormGroup): string[] {
     let errors: any[] = [];
@@ -83,9 +70,6 @@ export class TabHotelComponent {
     return errors;
   }
 
-
-
-
   autoComplete(e: any, typeSearch = 'ONLY_HOTEL') {
     // let elemento = this.origen.nativeElement;
     let elemento = e.target;
@@ -97,8 +81,6 @@ export class TabHotelComponent {
     }
   }
 
-
-
   getListCiudades(e: any, typeSearch = 'ONLY_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
@@ -109,16 +91,8 @@ export class TabHotelComponent {
     )
   }
 
-
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
-  }
-
-  openSnackBar(message: string, action: string = "Error") {
-    this._snackBar.open(message, "", {
-      duration: 2000,
-      panelClass: ['mat-toolbar', 'mat-warn']
-    });
   }
 
   public async searchAlojamiento() {
@@ -159,7 +133,6 @@ export class TabHotelComponent {
     return url;
   }
 
-
   insertTag(params: any) {
     const getCodigoIata = (id: string) => {
       return id.split("::")[1];
@@ -168,7 +141,6 @@ export class TabHotelComponent {
     const nombre = `${getCodigoIata(params.idDestino)}`;
     const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
     const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
-
 
     const model = new ModelTaggingHoteles(
       nombre,
@@ -186,35 +158,34 @@ export class TabHotelComponent {
 
     TaggingService.buscarHoteles(model);
 
-    const newModel = new SearchHotels(
-        'nmv_hoteles_buscar',
-        {
-          dias_anticipacion: diasAnticipacion
-        },
-        {
-          nombre: params.destino.split(',')[0],
-          codigo: params.destino.split(',')[0].slice(0, 3).toUpperCase(),
-          pais: params.destino.split(',')[1].trim()
-        },
-        {
-          habitaciones: this.distributionObject.habitacion
-        },
-        {
-          adultos: this.distributionObject.adultos,
-          ninos: this.distributionObject.ninos,
-          infantes: 0,
-          total: this.distributionObject.pasajeros
-        },
-        {
-          salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
-          retorno: moment(params.endDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
-          estadia: duracionViaje
-        }
-    );
+    const newModel: SearchHotels = {
+      event: 'nmv_hoteles_buscar',
+      operacion: {
+        dias_anticipacion: diasAnticipacion
+      },
+      destino: {
+        nombre: params.destino.split(',')[0],
+        codigo: params.destino.split(',')[0].slice(0, 3).toUpperCase(),
+        pais: params.destino.split(',')[1].trim()
+      },
+      hotel: {
+        habitaciones: this.distributionObject.habitacion
+      },
+      pasajeros: {
+        adultos: this.distributionObject.adultos,
+        ninos: this.distributionObject.ninos,
+        infantes: 0,
+        total: this.distributionObject.pasajeros
+      },
+      fechas: {
+        salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: moment(params.endDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        estadia: duracionViaje
+      }
+    };
 
     TaggingService.tagSearchHotels(newModel);
   }
-
 
   getParamsAlojamiento() {
     return new ParamsHoteles(
@@ -225,11 +196,9 @@ export class TabHotelComponent {
     ).getParams();
   }
 
-
   changeDate(value: ClassValueCalendar) {
     this.toDate = value.toDate;
     this.fromDate = value.fromDate;
   }
-
 
 }
