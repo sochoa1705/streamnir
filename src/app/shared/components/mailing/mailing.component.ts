@@ -92,12 +92,9 @@ export class MailingComponent implements OnInit {
           this.message = 'Se registró correctamente a nuestro boletín.';
 
           this.timeMAiling();
-
-          console.log('BREVO', response);
-        }, error: (err: any) => {
-          this.notification.showNotificacion("Error", "No se envió la suscripción", 10);
-          console.error('BREVO', err);
-        }, complete: () => this.loaderSubjectService.closeLoader()
+        },
+        error: () => this.notification.showNotificacion('Error', 'No se envió la suscripción', 10),
+        complete: () => this.loaderSubjectService.closeLoader()
       });
     }
   }
