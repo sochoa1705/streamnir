@@ -20,12 +20,12 @@
       <!-- <h1 class="mt-5 titleBold" *ngIf="validate">{{ message }}</h1> -->
 
       <div class="row" *ngIf="validate">
-        <div class="msgBoxBoletin {{ imgMailing ? 'success' : 'error'}} ">
+        <div class="msgBoxBoletin {{ imgMailing > 0 ? 'success' : 'error'}} ">
           <div class="iconBoletin">
-            <img src="./assets/svg/{{ imgMailing ? 'success-boletin.svg' : 'error-boletin.svg' }}" alt="">
+            <img src="./assets/svg/{{ imgMailing > 0 ? 'success-boletin.svg' : 'error-boletin.svg' }}" alt="">
             <!-- <img src="./assets/svg/success-boletin.svg" alt=""> -->
           </div>
-          <div class="titleBol" *ngIf="imgMailing">
+          <div class="titleBol" *ngIf="imgMailing > 0">
             ¡Gracias por suscribirte!
           </div>
           <div class="descripBol">
@@ -52,7 +52,7 @@
                 }}</span>
             </div>
             <div class="col-md-2 col-12 text-center text-md-start px-0">
-              <button (click)="subscribe(true)">Suscríbete</button>
+              <button (click)="subscribe()">Suscríbete</button>
             </div>
             <div class="clearfix"></div>
           </div>

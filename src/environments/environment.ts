@@ -30,7 +30,8 @@ export const environment = {
   urlApiHotels: "https://servicios.expertiatravel.com/widgethotel",
   urlNmviajesAccount: "https://servicio.nmviajes.com:9443/ZonaPrivada",
   //urlNewsletter: 'https://servicio.nmviajes.com:9443/suscripcion',
-  urlNewsletter: 'https://servicios.expertiatravel.com/subscription',//desarrollo
+  brevoBaseUrl: 'https://api.brevo.com/v3',
+  brevoApiKey: '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',
   urlSeguros: 'https://servicio.nmviajes.com:9443/segurosrv/',
   urlZonaPrivada: 'https://servicio.nmviajes.com:9443/zonaprivada/',
   //urlGeo: "https://motorvuelos-dev.expertiatravel.com/mv",
