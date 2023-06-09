@@ -395,6 +395,34 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
     TaggingService.buscarVuelos(model);
 
+    let flightType = '';
+    switch (params.flightType) {
+      case 0:
+        flightType = 'ida y vuelta';
+        break;
+      case 1:
+        flightType = 'solo ida';
+        break;
+      case 2:
+        flightType = 'multidestino';
+        break;
+      default:
+        break;
+    }
+    let flightClass = '';
+    switch (Number(this.distributionObject['clase'])) {
+      case 0:
+        flightClass = 'economic';
+        break;
+      case 1:
+        flightClass = 'business';
+        break;
+      case 2:
+        flightClass = 'first class';
+        break;
+      default:
+        break;
+    }
     const newModel: SearchFlights = {
       event: 'nmv_vuelos_buscar',
       operacion: {
@@ -409,6 +437,10 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
         nombre: params.destino.title,
         codigo: params.destino.codigo,
         pais: params.destino.country
+      },
+      vuelo: {
+        clase: flightClass,
+        tipo: flightType
       },
       pasajeros: {
         adultos: this.distributionObject.adultos,

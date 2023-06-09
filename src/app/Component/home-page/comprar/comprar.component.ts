@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface';
@@ -14,7 +14,6 @@ import { Guid, toUp, Utilities } from 'src/app/shared/utils';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { CardService, PaymentService } from 'src/app/api/api-payment/services';
 import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/models';
-import * as moment from 'moment';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
 import {
@@ -38,6 +37,8 @@ import {
 } from 'src/app/api/api-correos/models';
 import { UtilService } from 'src/app/Services/util/util.service';
 import { CryptoService } from 'src/app/Services/util/crypto.service';
+import { Subscription } from 'rxjs';
+import * as moment from 'moment';
 
 interface Methods {
   id: string;
@@ -53,11 +54,13 @@ interface Methods {
   templateUrl: './comprar.component.html',
   styleUrls: ['./comprar.component.scss']
 })
-export class ComprarComponent implements OnInit, AfterViewInit {
+export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   formShop!: FormGroup;
   paymentMethodForm: FormGroup;
   contactForm: FormGroup;
+  docTypeSubscription = new Subscription();
+  genderSubscription = new Subscription();
 
   errors: any[] = [];
 //COBERTURA
@@ -589,7 +592,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       else
         this.selectedPay = 'safety'
 
-      this.sendPaymentMethodSelectEvent(this.selectedPay);
+      this.sendPaymentMethodSelectEvent(this.selectedPay.toUpperCase());
     }
   }
 
@@ -629,7 +632,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         }
       };
       TaggingService.tagStartOfPaymentMethods(model);
-      this.sendPaymentMethodSelectEvent(`${this.selectedPay} - ${this.id}`);
+      this.sendPaymentMethodSelectEvent(this.selectedPay.toUpperCase());
     }
   }
 
@@ -664,10 +667,18 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   listenFormCustomers() {
-    this.formShop.get('customers')!.valueChanges.subscribe((forms: FormArray) => {
-      if (this.validateFormCustomers(forms))
-        this.sendPassengerInfoEvent();
-    });
+    this.docTypeSubscription = this.getControlValueChangeSubscription('typeDocCustomer');
+    this.genderSubscription = this.getControlValueChangeSubscription('sexCustomer');
+  }
+
+  private getControlValueChangeSubscription (control: string): Subscription {
+    return this.formShop.get(['customers', 0, control])!.valueChanges
+        .subscribe(() => {
+          setTimeout(() => {
+            if (this.validateFormCustomers(true))
+              this.sendPassengerInfoEvent();
+          }, 500);
+        });
   }
 
   sendPassengerInfoEvent() {
@@ -697,7 +708,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         precioNormal: Number(this.safe0Json.precioBrutoLocal)
       },
       metodo_pago: {
-        opcion: paymentMethod
+        opcion: paymentMethod == 'SAFETY' ? 'SAFETYPAY' : paymentMethod
       },
       usuario: this.getGenericCheckoutDataForEvent().usuario,
       origen: this.getGenericCheckoutDataForEvent().origen,
@@ -711,12 +722,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   private getGenericCheckoutDataForEvent() {
     const firstCustomer = (<FormArray>this.formShop.controls['customers']).controls[0];
+    const fechaNacimiento = `${firstCustomer.get('yearCustomer')!.value}-${firstCustomer.get('monthCustomer')!.value}-${firstCustomer.get('dayCustomer')!.value}`;
     return {
       usuario: {
         email: this.contactForm.get('mailContacto')?.value || '',
         primerNombre: firstCustomer.get('nameCustomer')!.value,
         primerApellido: firstCustomer.get('lastNameCustomer')!.value,
-        fechaNacimiento: `${firstCustomer.get('yearCustomer')!.value}-${firstCustomer.get('monthCustomer')!.value}-${firstCustomer.get('dayCustomer')!.value}`,
+        fechaNacimiento: moment(fechaNacimiento, 'YYYY-MM-D').format('YYYY-MM-DD'),
         nacionalidad: firstCustomer.get('nationalityCustomer')!.value,
         genero: firstCustomer.get('sexCustomer')!.value,
         documento_tipo: firstCustomer.get('typeDocCustomer')!.value,
@@ -781,20 +793,23 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return true;
   }
 
-  validateFormCustomers(forms?: FormArray): boolean {
+  validateFormCustomers(fromSubscription: boolean = false): boolean {
     let validate = true;
-    let candidates: [] = forms || this.formShop.value.customers;
+    let candidates: [] = this.formShop.value.customers;
+
     if (candidates.length == 0) return false;
+
     candidates.forEach((x: any) => {
-      if (x.nameCustomer == '' || x.lastNameCustomer == '' || x.dayCustomer == '' || x.monthCustomer == '' || x.yearCustomer == '' || x.nationalityCustomer == '' ||
-        x.typeDocCustomer == '' || x.numDocCustomer == '' || x.sexCustomer == '') {
+      if (x.nameCustomer == '' || x.lastNameCustomer == '' || x.dayCustomer == '' || x.monthCustomer == '' || x.yearCustomer == '' ||
+          x.nationalityCustomer == '' || x.typeDocCustomer == '' || x.numDocCustomer == '' || x.sexCustomer == '') {
         validate = false;
         return;
       }
     });
-    if (!validate && !forms) {
+
+    if (!validate && !fromSubscription)
       this._notification.showNotificacion("Error", "Debe ingresar todos los datos obligatorios del(os) pasajero(s)");
-    }
+
     return validate;
   }
 
@@ -1607,7 +1622,12 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       };
       TaggingService.tagStartOfPaymentMethods(model);
 
-      this.sendPaymentMethodSelectEvent(`${this.selectedPay} - ${this.id} - ${this.paymentMethodForm.get('bankPay')?.value || ''}`);
+      this.sendPaymentMethodSelectEvent(this.selectedPay.toUpperCase());
     }
+  }
+
+  ngOnDestroy() {
+    this.docTypeSubscription.unsubscribe();
+    this.genderSubscription.unsubscribe();
   }
 }

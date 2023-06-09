@@ -165,7 +165,8 @@ export class TabVueloHotelComponent {
 				habitaciones: this.distributionObject.habitacion
 			},
 			vuelo: {
-				clase: params.businessClass ? 'BS' : 'EC'
+				clase: params.businessClass ? 'business' : 'economic',
+				tipo: ''
 			},
 			pasajeros: {
 				adultos: this.distributionObject.adultos,

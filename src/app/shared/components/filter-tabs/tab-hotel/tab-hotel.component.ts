@@ -138,7 +138,7 @@ export class TabHotelComponent {
       return id.split("::")[1];
     }
 
-    const nombre = `${getCodigoIata(params.idDestino)}`;
+    const nombre = getCodigoIata(params.idDestino);
     const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
     const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
 
@@ -164,9 +164,9 @@ export class TabHotelComponent {
         dias_anticipacion: diasAnticipacion
       },
       destino: {
-        nombre: params.destino.split(',')[0],
-        codigo: params.destino.split(',')[0].slice(0, 3).toUpperCase(),
-        pais: params.destino.split(',')[1].trim()
+        nombre: params.destino,
+        codigo: nombre,
+        pais: this.citys[0].country
       },
       hotel: {
         habitaciones: this.distributionObject.habitacion

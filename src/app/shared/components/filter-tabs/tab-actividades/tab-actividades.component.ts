@@ -138,9 +138,9 @@ export class TabActividadesComponent {
         dias_anticipacion: diasAnticipacion
       },
       destino: {
-        nombre: params.destino.split(',')[0],
-        codigo: params.destino.split(',')[0].slice(0, 3).toUpperCase(),
-        pais: params.destino.split(',')[1].trim()
+        nombre: params.destino,
+        codigo: nombre,
+        pais: this.citys[0].country
       },
       pasajeros: {
         adultos: this.distributionObject.adultos,

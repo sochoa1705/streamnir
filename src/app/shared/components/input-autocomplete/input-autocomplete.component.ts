@@ -61,8 +61,6 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     this.typeToSearchText = `Por favor ingrese ${this._minTermLength} o más caracteres`;
   };
 
-  viewIcon: boolean
-
   fromEventSubscripcion: Subscription;
 
   value: ICardAutocomplete | null;
@@ -71,7 +69,6 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   onTouch = () => { };
 
   constructor(public inputValidator: InputValidationService) {
-    this.viewIcon = false
   }
 
   ngAfterViewInit() {
@@ -85,7 +82,6 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
       if (this.items?.length) {
         this.valueInput = this._items[0].title;
         this.valueInputChange.next(this.valueInput);
-
         this.selectItm(this._items[0]);
       }
     }
@@ -95,30 +91,25 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     this.inputTxt = event.target.value
 
     const value: string = event.target.value || '';
-
     this.valueInputChange.next(value);
 
     if (value.length >= this.minTermLength) {
       this.showBoxOrigen(true)
-      this.viewIcon = true
       this.boxOrigenTerm = false;
       this.typeahead.next(value);
     } else {
-      this.viewIcon = false
-      this.boxOrigenTerm = true
-      this.showBoxOrigen(false)
+      this.boxOrigenTerm = true;
+      this.showBoxOrigen(false);
     }
   }
 
   keyDown(event: any) {
-    if (event.keyCode === 9) {
+    if (event.keyCode === 9)
       if (this.items?.length) {
         this.valueInput = this._items[0].title;
         this.valueInputChange.next(this.valueInput);
-
         this.selectItm(this._items[0]);
       }
-    }
   }
 
   /*onBlur() {
@@ -133,7 +124,7 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   showAutocomplete() {
     if (this._items.length > 0)
       setTimeout(() => {
-		  this.showBoxOrigen(false)
+        this.showBoxOrigen(false);
       }, 600);
   }
 
@@ -150,11 +141,9 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     if (value) {
       this.value = value;
       this.valueInput = value.title;
-      this.viewIcon = true;
     } else {
       this.value = null;
       this.valueInput = ""
-      this.viewIcon = false;
     }
   }
 
@@ -192,12 +181,11 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   clean() {
     this.value = null;
     this.valueInput = "";
-    this.viewIcon = false;
-
     this.inputSearch.nativeElement.focus();
   }
 
   ngOnDestroy() {
     this.fromEventSubscripcion.unsubscribe();
   }
+
 }

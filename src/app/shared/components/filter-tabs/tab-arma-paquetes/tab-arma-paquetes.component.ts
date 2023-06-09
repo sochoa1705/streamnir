@@ -154,7 +154,8 @@ export class TabArmaPaquetesComponent {
         dias_anticipacion: daysFromNow
       },
       vuelo: {
-        clase: params.businessClass ? 'BS' : 'EC'
+        clase: params.businessClass ? 'business' : 'economic',
+        tipo: ''
       },
       hotel: {
         habitaciones: this.distributionObject.habitacion

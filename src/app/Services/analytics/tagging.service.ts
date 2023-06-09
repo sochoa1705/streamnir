@@ -35,19 +35,10 @@ import { environment } from '../../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class TaggingService {
 
-
 	constructor() { }
 
 	public static triggerTag(datos: any) {
 		const dataLayer = (<any>(<any>window)).dataLayer || [];
-
-		/* dataLayer.push({
-		  originalLocation: document.location.protocol + '//' +
-		    document.location.hostname +
-		    document.location.pathname +
-		    document.location.search
-		}); */
-
 		dataLayer.push(datos);
 
 		if (!environment.production)
@@ -204,4 +195,5 @@ export class TaggingService {
 	public static tagSearchExperiences(model: SearchExperiences) {
 		this.triggerTag(model);
 	}
+
 }

@@ -31,9 +31,6 @@
     <div class="sectionTab" [ngClass]="{'active': tipoVuelo == 2}">
       <div class="columnBox" *ngIf="tipoVuelo !== EnumFlightType.multy_city; else multicity">
         <div class="boxDestino">
-          <div class="iconDestino">
-            <img src="./assets/origen.png" alt="">
-          </div>
           <app-input-autocomplete #inputOrigen [(valueInput)]="valueInputOrigen" [validRequired]="isSubmit"
             (valueInputChange)="cleanInput()" [minTermLength]="minLengthAutocomplete" placeholder="Origen"
             [items]="vuelos$ | async" [loading]="vuelosLoading" [typeahead]="vuelosInput$" formControlName="origen"
@@ -41,9 +38,6 @@
           </app-input-autocomplete>
         </div>
         <div class="boxDestino">
-          <div class="iconDestino">
-            <img src="./assets/origen.png" alt="">
-          </div>
           <app-input-autocomplete #inputDestino [(valueInput)]="valueInputDestino" [validRequired]="isSubmit"
             (valueInputChange)="cleanInput()" [minTermLength]="minLengthAutocomplete" placeholder="Destino"
             [items]="vuelos2$ | async" [loading]="vuelosLoading2" [typeahead]="vuelosInput2$" formControlName="destino"
@@ -209,7 +203,5 @@
         <span class="valid" *ngIf="false">Debe seleccionar la cantidad de pasajeros</span>
     </form>
 </div> -->
-
-
 
 <!-- <iframe style="height: auto;" width="100%" src="http://52.177.246.241/#/nmviajes"></iframe> -->

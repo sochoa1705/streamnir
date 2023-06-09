@@ -431,6 +431,7 @@ export class SearchFlights {
 			public operacion: Operation,
 			public origen: Location,
 			public destino: Location,
+			public vuelo: Flight,
 			public pasajeros: Passengers,
 			public fechas: Dates
 	) {}
@@ -608,7 +609,7 @@ export class Hotel {
 }
 
 export class Flight {
-	constructor(public clase: string) {}
+	constructor(public clase: string, public tipo: string) {}
 }
 
 export class Passengers {
