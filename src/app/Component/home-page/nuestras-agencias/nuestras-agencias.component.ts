@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CryptoService } from 'src/app/Services/util/crypto.service';
 import { toUp } from '../../../shared/utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nuestras-agencias',
@@ -106,7 +107,7 @@ export class NuestrasAgenciasComponent implements OnInit {
   map: number
   imagen: string
 
-  constructor(private _cryptoService: CryptoService) {
+  constructor(private _cryptoService: CryptoService, private router: Router) {
     this.agenciaView(1)
   }
 
@@ -157,6 +158,11 @@ export class NuestrasAgenciasComponent implements OnInit {
         this.imagen = agencia.imagen
       }
     })
+  }
+
+  onVerMasClick() {
+    if (this.btnActivo === 1)
+      this.router.navigate(['/28dejulio/']);
   }
 
   portalAyuda() {

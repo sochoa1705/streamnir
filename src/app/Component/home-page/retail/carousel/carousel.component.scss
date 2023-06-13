@@ -1,0 +1,45 @@
+.carousel-indicators {
+
+	button {
+		opacity: 1 !important;
+		border: 1px solid transparent;
+		background: #A5A5A5;
+		border-radius: 50%;
+		width: 10px;
+		height: 10px;
+
+		&.active {
+			background: #B50A27;
+		}
+
+		&:hover {
+			border: 1px solid #B50A27;
+		}
+	}
+}
+
+.carousel-control {
+	&-prev, &-next {
+		opacity: 1 !important;
+
+		&:hover {
+			background: none;
+		}
+	}
+
+	&-next-icon {
+		transform: rotate(135deg);
+		height: 0;
+		width: 0;
+		border: 16px solid;
+		border-color: white transparent transparent white;
+	}
+
+	&-prev-icon {
+		height: 0;
+		width: 0;
+		border: 1rem solid;
+		border-color: transparent white white transparent;
+		transform: rotate(135deg);
+	}
+}
