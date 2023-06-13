@@ -59,11 +59,10 @@ export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
   formShop!: FormGroup;
   paymentMethodForm: FormGroup;
   contactForm: FormGroup;
-  docTypeSubscription = new Subscription();
-  genderSubscription = new Subscription();
+	genderSubscription = new Subscription();
 
   errors: any[] = [];
-//COBERTURA
+  //COBERTURA
 
   showInvoiceData: boolean = false;
   unidadNegocio: any;
@@ -666,20 +665,16 @@ export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  listenFormCustomers() {
-    this.docTypeSubscription = this.getControlValueChangeSubscription('typeDocCustomer');
-    this.genderSubscription = this.getControlValueChangeSubscription('sexCustomer');
-  }
-
-  private getControlValueChangeSubscription (control: string): Subscription {
-    return this.formShop.get(['customers', 0, control])!.valueChanges
-        .subscribe(() => {
-          setTimeout(() => {
-            if (this.validateFormCustomers(true))
-              this.sendPassengerInfoEvent();
-          }, 500);
-        });
-  }
+	listenFormCustomers() {
+		this.genderSubscription = this.formShop
+				.get([ 'customers', (<FormArray>this.formShop.get('customers')).length - 1, 'sexCustomer' ])!.valueChanges
+				.subscribe(() => {
+					setTimeout(() => {
+						if (this.validateFormCustomers(true))
+							this.sendPassengerInfoEvent();
+					}, 500);
+				});
+	}
 
   sendPassengerInfoEvent() {
     const model: TravelInsurancePassengerInfo = {
@@ -1627,7 +1622,6 @@ export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.docTypeSubscription.unsubscribe();
     this.genderSubscription.unsubscribe();
   }
 }

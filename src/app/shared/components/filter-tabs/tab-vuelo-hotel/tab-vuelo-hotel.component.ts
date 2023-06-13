@@ -127,7 +127,6 @@ export class TabVueloHotelComponent {
 		const diasAnticipacion = moment(params.startDate, 'DD/MM/YYYY').diff(moment(), 'days');
 		const duracionViaje = moment(params.endDate, 'DD/MM/YYYY').diff(moment(params.startDate, 'DD/MM/YYYY'), 'days');
 
-
 		const model = new ModelTaggingVuelosHoteles(
 				nombre,
 				params.origen,
@@ -146,20 +145,22 @@ export class TabVueloHotelComponent {
 
 		TaggingService.buscarVuelosHoteles(model);
 
+		const origen = this.citysOrigenSelect.find(o => o.id == params.idOrigen);
+		const destino = this.citysDestinosSelect.find(o => o.id == params.idDestino);
 		const newModel: SearchFlightHotel = {
 			event: 'nmv_vuelosMasHotel_buscar',
 			operacion: {
 				dias_anticipacion: diasAnticipacion
 			},
 			origen: {
-				nombre: params.origen.split(',')[0],
-				codigo: params.origen.split(',')[0].slice(0, 3).toUpperCase(),
-				pais: params.origen.split(',')[1].trim()
+				nombre: origen.label,
+				codigo: getCodigoIata(origen.id),
+				pais: origen.country
 			},
 			destino: {
-				nombre: params.destino.split(',')[0],
-				codigo: params.destino.split(',')[0].slice(0, 3).toUpperCase(),
-				pais: params.destino.split(',')[1].trim()
+				nombre: destino.label,
+				codigo: getCodigoIata(destino.id),
+				pais: destino.country
 			},
 			hotel: {
 				habitaciones: this.distributionObject.habitacion
