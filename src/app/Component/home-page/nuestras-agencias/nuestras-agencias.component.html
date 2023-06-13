@@ -64,12 +64,12 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 d-flex">
-        <div>
-          <span>
-            <img [src]="imagen" alt="">
-          </span>
-        </div>
+      <div class="col-12 d-flex position-relative">
+        <img class="img-fluid" [src]="imagen" alt="{{direccion}} {{distrito}}">
+        <button class="btn-agencias activa position-absolute text-uppercase" (click)="onVerMasClick()"
+                *ngIf="btnActivo === 1">
+          Ver m&aacute;s
+        </button>
       </div>
     </div>
 

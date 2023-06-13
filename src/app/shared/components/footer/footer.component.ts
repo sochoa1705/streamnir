@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,13 +24,13 @@ export class FooterComponent {
   showMenuProd: Boolean = true;
 
   showProducto() {
-    this.showMenuProd = this.showMenuProd ? false : true;
+    this.showMenuProd = !this.showMenuProd;
   }
 
   showMenuConocenos: Boolean = true;
 
   showConocenos() {
-    this.showMenuConocenos = this.showMenuConocenos ? false : true;
+    this.showMenuConocenos = !this.showMenuConocenos;
   }
 
   redirect(e: any) {
@@ -39,6 +39,6 @@ export class FooterComponent {
   }
 
   toOficinas() {
-    this.route.navigate(['/nuestras-agencias'])
+    this.route.navigate(['/tiendas']);
   }
 }

@@ -187,7 +187,7 @@ export class DataPagePresenterService {
           {
             id: 1,
             text: "Nuestras Agencias NM Viajes",
-            link: "/nuestras-agencias/",
+            link: "/tiendas/",
             target: "_self"
           },
           {
@@ -217,7 +217,7 @@ export class DataPagePresenterService {
           {
             id: 6,
             text: 'Zona Tiendas',
-            link: 'zona-tiendas',
+            link: '28dejulio',
             target: '_self'
           }
           // {
