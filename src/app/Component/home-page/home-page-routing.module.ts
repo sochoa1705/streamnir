@@ -111,7 +111,7 @@ const routes: Routes = [
         component: NuestraEmpresaComponent
       },
       {
-        path: 'tiendas',
+        path: 'nuestras-agencias',
         component: NuestrasAgenciasComponent
       },
       {
