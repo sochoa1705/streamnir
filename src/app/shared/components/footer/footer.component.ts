@@ -39,6 +39,6 @@ export class FooterComponent {
   }
 
   toOficinas() {
-    this.route.navigate(['/tiendas']);
+    this.route.navigate(['/nuestras-agencias']);
   }
 }
