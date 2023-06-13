@@ -111,11 +111,11 @@ const routes: Routes = [
         component: NuestraEmpresaComponent
       },
       {
-        path: 'nuestras-agencias',
+        path: 'tiendas',
         component: NuestrasAgenciasComponent
       },
       {
-        path: 'zona-tiendas',
+        path: '28dejulio',
         component: RetailComponent
       },
       {
