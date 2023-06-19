@@ -15,8 +15,8 @@ export const environment = {
   today: (hoy: any) => {
     return `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
   },
-  offerText: '¡Aprovecha los precios de nuestro Happy Hour!',
-  offerExpireDate: '2023-06-15 T 22:00:00', //YYYY-MM-DD T hh:mm:ss
+  offerText: '¡Llegaron los DIASNM! Apúrate acaba en',
+  offerExpireDate: '2023-06-23 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
   offerLink: '',
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
