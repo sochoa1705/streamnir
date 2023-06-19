@@ -26,6 +26,9 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { OptionalDataModule } from './components/optional-data/optional-data.module';
 import { CryptoService } from './Services/util/crypto.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -52,7 +55,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 		PerfilModule,
 		LoadingModule,
 		OptionalDataModule,
-		MatTooltipModule
+		MatTooltipModule,
+		provideFirebaseApp(() => initializeApp(environment.firebase)),
+		provideFirestore(() => getFirestore())
 	],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },

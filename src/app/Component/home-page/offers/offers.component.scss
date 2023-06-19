@@ -1,0 +1,15 @@
+img.img-fluid.position-absolute {
+	top: .875rem;
+	right: 1.125rem;
+}
+
+p {
+	&.small {
+		font-size: .75rem !important;
+	}
+
+	&.card-price {
+		font-size: 1.875rem !important;
+		color: #BD2C33;
+	}
+}
