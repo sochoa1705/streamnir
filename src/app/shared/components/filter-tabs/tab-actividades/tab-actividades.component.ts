@@ -88,23 +88,27 @@ export class TabActividadesComponent {
 
     let url = this.getUrlActividades();
 
-    const result = await this._accountsService.getAccountToken();
-    if (result) {
-      if (result.Result.IsSuccess) {
-        const token: string = result.Result.Token;
-        url = `${url}&token=${token}&submit=true`;
+    if (url && url.length > 0) {
+      const result = await this._accountsService.getAccountToken();
+      if (result) {
+        if (result.Result.IsSuccess) {
+          const token: string = result.Result.Token;
+          url = `${url}&token=${token}&submit=true`;
+        }
       }
-    }
 
-    this.navigateToResponseUrl(url);
+      this.navigateToResponseUrl(url);
+    }
   }
 
   public getUrlActividades() {
     let url: string;
     let params = this.getParamsActividades();
-    this.insertTag(params);
-    url = new URLActividades(params, this.distribution).getUrl();
-    return url;
+    if (params) {
+      this.insertTag(params);
+      url = new URLActividades(params, this.distribution).getUrl();
+      return url;
+    } else return '';
   }
 
   insertTag(params: any) {
@@ -159,12 +163,17 @@ export class TabActividadesComponent {
   }
 
   getParamsActividades() {
-    return new ParamsActividades(
-        this.fromDate,
-        this.toDate,
-        this.form,
-        this.citys,
-    ).getParams();
+    if (this.fromDate && this.toDate)
+      return new ParamsActividades(
+          this.fromDate,
+          this.toDate,
+          this.form,
+          this.citys,
+      ).getParams();
+    else {
+      this.openSnackBar('Las fechas de Salida y de Vuelta son obligatorias');
+      return null;
+    }
   }
 
   changeDate(value: ClassValueCalendar) {

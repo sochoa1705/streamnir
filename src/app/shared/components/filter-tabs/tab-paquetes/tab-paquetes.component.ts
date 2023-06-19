@@ -180,12 +180,12 @@ export class TabPaquetesComponent {
         dias_anticipacion: daysFromNow
       },
       destino: {
-        pais: params.destino
+        pais: params.destino || ''
       },
       paquete: {
-        fecha_salida: this.months.find(m => m.code == params.idMonth).label,
-        tema: this.themes.find(t => t.code == params.idTheme).label,
-        noches: this.noches.find(n => n.code == params.idNoche).name
+        fecha_salida: this.months.find(m => m.code == params.idMonth)?.label || '',
+        tema: this.themes.find(t => t.code == params.idTheme)?.label || '',
+        noches: this.noches.find(n => n.code == params.idNoche)?.name || ''
       }
     };
     TaggingService.tagSearchItineraries(model);

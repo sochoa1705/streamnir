@@ -144,15 +144,17 @@ import * as moment from 'moment';
     if (!this.fromDate)
       errors.push('La fecha de inicio es requerida');
 
-    let startDateStr = `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
-    let endDateStr = `${(this.toDate!.day).toString()}/${(this.toDate!.month).toString()}/${(this.toDate!.year).toString()}`;
-    let startDate = moment(startDateStr, 'D/M/YYYY').format('YYYY-MM-DD');
-    let endDate = moment(endDateStr, 'D/M/YYYY').format('YYYY-MM-DD');
-    const startDateTime = new Date(startDate);
-    const endDateTime = new Date(endDate);
+    if (this.fromDate && this.toDate) {
+      let startDateStr = `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
+      let endDateStr = `${(this.toDate!.day).toString()}/${(this.toDate!.month).toString()}/${(this.toDate!.year).toString()}`;
+      let startDate = moment(startDateStr, 'D/M/YYYY').format('YYYY-MM-DD');
+      let endDate = moment(endDateStr, 'D/M/YYYY').format('YYYY-MM-DD');
+      const startDateTime = new Date(startDate);
+      const endDateTime = new Date(endDate);
 
-    if (endDateTime < startDateTime)
-      errors.push('La fecha final no puede ser menor a la fecha de inicio');
+      if (endDateTime < startDateTime)
+        errors.push('La fecha final no puede ser menor a la fecha de inicio');
+    }
 
     return errors;
   }
