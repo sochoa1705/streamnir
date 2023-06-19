@@ -15,9 +15,9 @@ export const environment = {
   today: (hoy: any) => {
     return `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`
   },
-  offerText: '¡Aprovecha los precios de nuestro Happy Hour!',
-  offerExpireDate: '2023-06-15 T 22:00:00', //YYYY-MM-DD T hh:mm:ss
-  offerLink: '',
+  offerText: '¡Llegaron los DIASNM! Apúrate acaba en',
+  offerExpireDate: '2023-06-23 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
+  offerLink: 'https://vacaciones.nmviajes.com/ES/holidays/availability?utm_source=web&utm_medium=reloj&utm_campaign=diasnm&utm_id=diasnm&utm_term=diasnm&utm_content=diasnm',
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
   urlAutosNmViajes: 'https://autos.nmviajes.com/',

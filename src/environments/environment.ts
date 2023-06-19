@@ -17,7 +17,7 @@ export const environment = {
   },
   offerText: '¡Llegaron los DIASNM! Apúrate acaba en',
   offerExpireDate: '2023-06-23 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
-  offerLink: '',
+  offerLink: 'https://vacaciones.nmviajes.com/ES/holidays/availability?utm_source=web&utm_medium=reloj&utm_campaign=diasnm&utm_id=diasnm&utm_term=diasnm&utm_content=diasnm',
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
   urlAutosNmViajes: 'https://autos.nmviajes.com/',
