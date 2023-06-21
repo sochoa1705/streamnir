@@ -31,6 +31,7 @@ export const environment = {
     messagingSenderId: '1068048799100',
     measurementId: 'G-FE42H792WL',
   },
+  reCaptchaPublicKey: '6Lc9CbsmAAAAANpAUZ5Ubxl2s25BwmhZVgp7Yrev',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
   //urlNmviajes: "http://localhost:12639/v1/api",

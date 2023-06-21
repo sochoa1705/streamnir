@@ -8,5 +8,8 @@ export interface Offers {
 	link: string,
 	tyc: string,
 	mostrar: boolean,
-	esNacional: boolean
+	esNacional: boolean,
+	incluye: string[],
+	noches: number,
+	tipoAlojamiento: string
 }

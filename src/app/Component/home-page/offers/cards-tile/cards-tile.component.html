@@ -1,0 +1,39 @@
+<div class="card-slider" [class.hide-arrows-sm]="list.length <= 2" [class.hide-arrows-md]="list.length <= 4">
+	<div class="card-slider-inner">
+		<div class="card-wrapper" *ngFor="let item of list">
+			<div class="card">
+				<div class="card-img-top" (click)="onClick(item.link)">
+					<img class="img-fluid" [src]="item.image" [alt]="item.destination">
+				</div>
+				<div class="card-body position-relative">
+					<img src="./assets/svg/diagonal-plane.svg" alt="Vuelo" class="img-fluid position-absolute"
+					     *ngIf="item.type == 1">
+					<img src="./assets/svg/suitcase.svg" alt="Paquete" class="img-fluid position-absolute"
+					     *ngIf="item.type == 2">
+					<h5 class="card-title mb-0 fs-5 inter-semibold">{{item.destination}}</h5>
+					<p class="card-text small mb-2 inter-medium" *ngIf="item.type == 1">
+						Vuelo <span class="text-lowercase">{{item.flightType}}</span><br>desde {{item.origin}}
+					</p>
+					<p class="card-text small mb-2 inter-medium" *ngIf="item.type == 2">
+						{{item.nights}} noches - alojamiento {{item.accommodationType}}<br>{{item.packageIncludes}}
+					</p>
+					<p class="card-text card-price mb-0 inter-medium">
+						{{item.price | currency:'USD':'$':'1.0-2'}}
+					</p>
+					<div class="row gx-0 justify-content-between">
+						<p class="card-text small mb-0 w-auto align-self-center inter-medium">{{item.condition}}</p>
+						<button class="btn-agencias activa text-uppercase w-auto py-1 px-4" (click)="onClick(item.link)">
+							<small>VER MAS</small>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<button class="prev-btn py-1 px-2" (click)="slide(-1)">
+		<img src="../../../../../assets/icon-left.svg" alt="Anterior" class="mb-1 img-fluid">
+	</button>
+	<button class="next-btn py-1 px-2" (click)="slide(1)">
+		<img src="../../../../../assets/icon-right.svg" alt="Siguiente" class="mb-1 img-fluid">
+	</button>
+</div>

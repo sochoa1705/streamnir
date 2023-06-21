@@ -9,6 +9,7 @@ export const environment = {
     messagingSenderId: '1068048799100',
     measurementId: 'G-FE42H792WL',
   },
+  reCaptchaPublicKey: '6Lc9CbsmAAAAANpAUZ5Ubxl2s25BwmhZVgp7Yrev',
   production: true,
   // urlBase: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',  // PRODUCCIÓN
   muteExceptions: false,                 // DESARROLLO

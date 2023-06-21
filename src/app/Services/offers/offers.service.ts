@@ -1,8 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { collection, collectionData, Firestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Offers } from '../../Models/offers/offers.model';
-import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +15,7 @@ export class OffersService {
     this.items$ = collectionData(itemCollection);
   }
 
-  public getFlightsOffers() {
+  public getFlightsOffers(): Observable<Offers[]> {
     return this.items$;
   }
 }

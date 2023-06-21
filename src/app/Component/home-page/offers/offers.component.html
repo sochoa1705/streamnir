@@ -1,9 +1,11 @@
 <section class="mt-0 position-relative">
-	<img src="./assets/img/ofertas-banner.webp" alt="Ofertas" class="img-fluid">
+	<img class="img-fluid" [src]="bannerImgSrc.urlImagen" [alt]="bannerImgSrc.descripcion">
 	<div class="container position-absolute end-0 bottom-0 start-0">
 		<div class="row">
 			<div class="col">
-				<h1 class="text-white mb-3 mb-md-4 mb-lg-5 inter-bold">Ofertas</h1>
+				<h1 class="text-white mb-3 mb-md-4 mb-lg-5 inter-bold" [class.d-none]="!bannerImgSrc.urlImagen">
+					Ofertas
+				</h1>
 			</div>
 		</div>
 	</div>
@@ -18,26 +20,22 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-6 col-md-3" *ngFor="let item of internationalFlights">
-			<div class="card w-100">
-				<img class="card-img-top" [src]="item.image" [alt]="item.destination">
-				<div class="card-body position-relative">
-					<img src="assets/svg/diagonal-plane.svg" alt="Vuelo" class="img-fluid position-absolute">
-					<h5 class="card-title mb-0 fs-5 inter-semibold">{{item.destination}}</h5>
-					<p class="card-text small mb-2 inter-medium">
-						Vuelo <span class="text-lowercase">{{item.flightType}}</span><br>desde {{item.origin}}
-					</p>
-					<p class="card-text card-price mb-0 inter-medium">
-						{{item.price | currency:'USD':'$':'1.0-2'}}
-					</p>
-					<div class="row gx-0 justify-content-between">
-						<p class="card-text small mb-0 w-auto align-self-center inter-medium">{{item.condition}}</p>
-						<button class="btn-agencias activa text-uppercase w-auto py-1 px-4" (click)="onClick(item.link)">
-							<small>VER MAS</small>
-						</button>
-					</div>
-				</div>
-			</div>
+		<app-cards-tile [list]="internationalFlights" (clickCard)="onClick($event)"></app-cards-tile>
+	</div>
+	<div class="row">
+		<div class="col">
+			<h4 class="inter-bold mt-4 mt-lg-5 mb-3 text-uppercase text-red">VUELOS NACIONALES</h4>
 		</div>
+	</div>
+	<div class="row">
+		<app-cards-tile [list]="nationalFlights" (clickCard)="onClick($event)"></app-cards-tile>
+	</div>
+	<div class="row">
+		<div class="col">
+			<h4 class="inter-bold mt-4 mt-lg-5 mb-3 text-uppercase text-red">PAQUETES TUR&Iacute;STICOS</h4>
+		</div>
+	</div>
+	<div class="row">
+		<app-cards-tile [list]="itineraries" (clickCard)="onClick($event)"></app-cards-tile>
 	</div>
 </section>
