@@ -20,7 +20,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<app-cards-tile [list]="internationalFlights" (clickCard)="onClick($event)"></app-cards-tile>
+		<app-cards-tile id="international" [list]="internationalFlights" (clickCard)="onClick($event)"></app-cards-tile>
 	</div>
 	<div class="row">
 		<div class="col">
@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<app-cards-tile [list]="nationalFlights" (clickCard)="onClick($event)"></app-cards-tile>
+		<app-cards-tile id="national" [list]="nationalFlights" (clickCard)="onClick($event)"></app-cards-tile>
 	</div>
 	<div class="row">
 		<div class="col">
@@ -36,6 +36,6 @@
 		</div>
 	</div>
 	<div class="row">
-		<app-cards-tile [list]="itineraries" (clickCard)="onClick($event)"></app-cards-tile>
+		<app-cards-tile id="itineraries" [list]="itineraries" (clickCard)="onClick($event)"></app-cards-tile>
 	</div>
 </section>
