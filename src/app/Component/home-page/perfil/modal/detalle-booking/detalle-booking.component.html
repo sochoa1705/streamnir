@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="contentPortlet">
-                    <ul *ngIf="data.codigo_Pago_Safetypay == ''">
+                    <ul *ngIf="data.codigo_Pago_Safetypay === ''">
                         <li><span>Tipo de tarjeta:</span> {{data.tipo_Tarjeta}}</li>
                         <li><span>Titular de la tarjeta:</span> {{data.titular_Tarjeta}}</li>
                         <li><span>Documento del titular:</span> {{data.tipo_Doc_Titular_Tarjeta}}
@@ -31,7 +31,7 @@
                     </ul>
                     <div class="footerReserva">
                         <div class="alignLeft">
-                            <div class="totalSafetypay" *ngIf="data.codigo_Pago_Safetypay != ''">
+                            <div class="totalSafetypay" *ngIf="data.codigo_Pago_Safetypay !== ''">
                                 <div class="labelTotal">CODIGO SAFETYPAY:</div>
                                 <div class="montoTotal">{{data.codigo_Pago_Safetypay}}</div>
                             </div>
@@ -56,34 +56,34 @@
                     <div class="rowEquipaje">
                         <div class="itemEquipaje">
                             <div class="iconEquipaje">
-                                <img src="./assets/modal/mochila.svg" alt="" />
+                                <img src="./assets/modal/mochila.svg" alt="" class="img-fluid" style="width: 22px" />
+                                <span class="labelEquipaje ms-2">Incluye bolso de mano</span>
                             </div>
-                            <div class="labelEquipaje">Incluye bolso de mano</div>
                         </div>
                         <div class="itemEquipaje">
                             <div class="iconEquipaje">
                                 <img src="./assets/modal/equipaje-mano.svg" alt=""
-                                    *ngIf="data.cantidadMaletas != '0' && data.cantidadMaletas" />
+                                    *ngIf="data.cantidadMaletas !== '0' && data.cantidadMaletas" />
                                 <img src="./assets/modal/equipaje-no.svg" alt=""
-                                    *ngIf="data.cantidadMaletas == '0' || !data.cantidadMaletas" />
+                                    *ngIf="data.cantidadMaletas === '0' || !data.cantidadMaletas" />
+                                <span class="labelEquipaje ms-2">Incluye equipaje de mano</span>
                             </div>
-                            <div class="labelEquipaje">Incluye equipaje de mano</div>
                         </div>
                         <div class="itemEquipaje">
                             <div class="iconEquipaje">
                                 <img src="./assets/modal/bodega-no.svg" alt=""
-                                    *ngIf="data.cantidadMaletas == '0' || !data.cantidadMaletas" />
+                                    *ngIf="data.cantidadMaletas === '0' || !data.cantidadMaletas" />
                                 <img src="./assets/modal/bodega-si.svg" alt=""
-                                    *ngIf="data.cantidadMaletas != '0' && data.cantidadMaletas" />
+                                    *ngIf="data.cantidadMaletas !== '0' && data.cantidadMaletas" />
+                                <span class="labelEquipaje ms-2">No incluye equipaje en bodega</span>
                             </div>
-                            <div class="labelEquipaje">No incluye equipaje en bodega</div>
                         </div>
                         <div class="itemEquipaje">
                             <div class="iconEquipaje">
                                 <img src="./assets/modal/incluye.svg" alt="" />
-                            </div>
-                            <div class="labelEquipaje">
-                                Puedes agregar maletas por un cargo adicional en el aeropuerto
+                                <span class="labelEquipaje ms-2">
+                                    Puedes agregar maletas por un cargo adicional en el aeropuerto
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -99,10 +99,10 @@
                         <div class="itemPasajero" *ngFor="let item of data.pasajeros">
                             <div class="iconEquipaje">
                                 <img src="./assets/contact.svg" alt="" />
-                            </div>
-                            <div class="labelEquipaje">
-                                {{item.pasaj_Tipo}} - {{item.pasaj_Nombre}} {{item.pasaj_Apellido}} -
-                                {{item.tipo_Documento}} {{item.pasaj_Dni}}
+                                <span class="labelEquipaje ms-2">
+                                    {{item.pasaj_Tipo}} - {{item.pasaj_Nombre}} {{item.pasaj_Apellido}} -
+                                    {{item.tipo_Documento}} {{item.pasaj_Dni}}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -113,12 +113,12 @@
                 <div class="headerPortlet">
                     <div class="titleBoxRight">Detalle de tu vuelo</div>
                 </div>
-                <ng-container *ngIf="data.tipo_Vuelo == 'Solo Ida'">
+                <ng-container *ngIf="data.tipo_Vuelo === 'Solo Ida'">
                     <div class="contentPortlet">
                         <app-segmento [data]="data.destinos[0]"></app-segmento>
                     </div>
                 </ng-container>
-                <ng-container *ngIf="data.tipo_Vuelo != 'Solo Ida'">
+                <ng-container *ngIf="data.tipo_Vuelo !== 'Solo Ida'">
 
                     <div class="contentPortlet">
                         <ng-container *ngFor="let itemDeparture of data.destinosIda">
@@ -143,22 +143,22 @@
                         <div class="itemPasajero">
                             <div class="iconEquipaje">
                                 <img src="./assets/confirm-user.svg" alt="" />
-                            </div>
-                            <div class="labelEquipaje">
-                                Nombre: {{data.contac_Nombre}} {{data.contac_Apellido}}
+                                <span class="labelEquipaje ms-2">
+                                    Nombre: {{data.contac_Nombre}} {{data.contac_Apellido}}
+                                </span>
                             </div>
                         </div>
                         <div class="itemPasajero">
                             <div class="iconEquipaje">
                                 <img src="./assets/confirm-mail.svg" alt="" />
+                                <span class="labelEquipaje ms-2">Email: {{data.contac_Email}}</span>
                             </div>
-                            <div class="labelEquipaje">Email: {{data.contac_Email}}</div>
                         </div>
                         <div class="itemPasajero">
-                            <div class="iconEquipaje">
+                            <div class="iconEquipaje mb-3">
                                 <img src="./assets/confirm-phone.svg" alt="" />
+                                <span class="labelEquipaje ms-2">Teléfono: (51) {{data.contac_Telefono}}</span>
                             </div>
-                            <div class="labelEquipaje">Telefono: (51) {{data.contac_Telefono}}</div>
                         </div>
                     </div>
                 </div>
