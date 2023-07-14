@@ -6,6 +6,7 @@ import { ParamsVuelos } from 'src/app/Component/home-page/resultados/models/resu
 import { IAereolineas } from 'src/app/shared/components/aereolineas/aereolineas.interfaces';
 import { EnumCabinsVuelos, EnumFlightType } from 'src/app/shared/components/tabs/tabs.models';
 import { toUp } from 'src/app/shared/utils';
+import { environment } from 'src/environments/environment';
 import { FlightService } from '../flight/flight.service';
 import { DestinosService } from './services/destinos.service';
 
@@ -70,6 +71,7 @@ export class DestinosComponent implements OnInit {
   }
 
   loadCiudad(param: Params) {
+
     this.codigoCiudad = param.codigoCiudad || '';
 
     this.service.getVuelos(this.codigoCiudad).subscribe(data => {
@@ -80,7 +82,7 @@ export class DestinosComponent implements OnInit {
 
       this.title = `Vuelos desde ${this.origen} a ${this.destino}`;
       this.subTitle = `Aprovecha ahora, encontramos los vuelos de ida y vuelta más baratos a ${this.destino}.`;
-      this.description = `Las mejores ofertas de vuelos a ${this.destino} en las últimas 24 horas.`;
+      this.description = `Las mejores ofertas de vuelos a ${this.destino} en los últimos 15 minutos.`;
     })
   }
 
@@ -98,8 +100,13 @@ export class DestinosComponent implements OnInit {
 
   buscarVuelo(vuelo: IVueloDestino) {
     const params = this.generateParams(vuelo);
+    //this._router.navigate(['/vuelos/resultados'], { queryParams: params });
 
-    this._router.navigate(['/vuelos/resultados'], { queryParams: params });
+    let url = environment.urlIframeMotorVuelos + '?rand=' + Math.round(Math.random() * 10000000000) + "&";
+
+    url += `departureLocation=${params.departure}&arrivalLocation=${params.destination}&departureDate=${params.departureDate}&arrivalDate=${params.arrivalDate}&adults=${params.adults}&children=${params.children}&infants=${params.infants}&flightType=${params.flightType}&flightClass=${params.flightClass}&lang=ES&email=${params.email}`;
+
+    window.location.href = url;
   }
 
   slider() {

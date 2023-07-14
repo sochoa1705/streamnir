@@ -12,12 +12,13 @@ const routes: Routes = [
     children: [
       { path: '', component: FlightComponent },
       { path: 'lista', component: FlightComponent },
-      { path: ':destino/:codigoCiudad', component: DestinosComponent },
+      { path: 'destino/LIM/:codigoCiudad', component: DestinosComponent },
       { path: ':slug', component: OffersContinentComponent },
-      { path: '**', component: FlightComponent }
+      //{ path: '**', component: FlightComponent }
     ]
   },
-]
+];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

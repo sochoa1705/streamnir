@@ -1,3 +1,6 @@
+<div class="preloader show" *ngIf="callFirstService">
+    <div class="loaderSpin"></div>
+</div>
 <div class="row pt-md-5">
     <h2 class="title px-0 pb-md-3" *ngIf="existPlans">
         <strong>Selecciona el plan que mejor se adapte a tu viaje |</strong> {{ resultJson.days }} días por {{ resultJson.destinyString.descripcion_destino}}
@@ -33,7 +36,7 @@
                         </p>
                     </div>
                     <div class="d-flex py-3">
-                        <img src="./assets/seguros/covid.png" alt="">
+                        <img class="imgCovid" src="./assets/seguros/covid.png" alt="">
                         <div class="px-2">
                             <span class="covid">COBERTURA</span>
                             <span class="covid">COVID</span>
@@ -41,7 +44,7 @@
                     </div>
                     <div class="d-block text-center">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#ModalCoverage" (click)="data(card)">Ver
-              detalle de los beneficios</a>
+                            detalle de los beneficios</a>
                     </div>
                     <div class="d-block text-center py-2">
                         <button (click)="shop(card)">Seleccionar</button>
@@ -56,7 +59,8 @@
 </div>
 
 <!-- VUELOS -->
-<div class="container-fluid">
+<div class="">
+    <!-- <div class="container"> -->
     <div class="row mb-5">
         <div class="col-12">
             <h2 class="titleHome ms-4 mt-5">¡Corre y Vuela! con estas
@@ -90,7 +94,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex py-3">
-                            <img src="./assets/seguros/covid.png" alt="">
+                            <img class="imgCovid" src="./assets/seguros/covid.png" alt="">
                             <div class="px-2">
                                 <span class="covid">COBERTURA</span>
                                 <span class="covid">COVID</span>
@@ -114,16 +118,16 @@
                         <div class="col-3 borderRight">
                             <p>Total</p>
                             <span>USD
-                <strong>{{pop.change}}</strong>
-              </span>
-                            <button (click)="shop(pop.idProducto)">Comprar</button>
+                                <strong>{{pop.change}}</strong>
+                            </span>
+                            <button data-bs-dismiss="modal" aria-label="Close" (click)="shop(pop)">Comprar</button>
                         </div>
                         <div class="col-9 alignFooterPopup">
                             <p class="otroPlan">otros planes:</p>
                             <div class="row planBox">
                                 <div class="col-3" *ngFor="let p of plansAC; let index = index">
                                     <button (click)="data(p)" *ngIf="index < 5" class="planes {{ p?.clase }}">{{
-                    p?.nombreProducto.substr(0, 9) }}</button>
+                                        p?.nombreProducto.substr(0, 9) }}</button>
                                 </div>
                             </div>
                         </div>

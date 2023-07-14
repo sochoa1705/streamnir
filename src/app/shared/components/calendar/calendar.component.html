@@ -3,21 +3,21 @@
     <div class="hideDate">
       <!-- OCULTAR CAMPO -->
       <input name="datepicker2" style="border: 0.5px;" mask="d0/M0/0*" maxlength="11" placement="bottom right"
-        [minDate]="minDate" ngbDatepicker #datepicker2="ngbDatepicker" [footerTemplate]="footerTemplate2"
-        [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
-        outsideDays="hidden" [startDate]="fromDate!" tabindex="-1">
+        [minDate]="minDate" ngbDatepicker #datepicker2="ngbDatepicker" [autoClose]="'outside'"
+        (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden"
+        [startDate]="fromDate!" tabindex="-1">
       <ng-template #t let-date let-focused="focused">
         <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
           [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
           (mouseleave)="hoveredDate = null">
           {{ date.day }}</span>
       </ng-template>
-      <ng-template #footerTemplate2>
+      <!-- <ng-template #footerTemplate2>
         <div class="btnDatePicker">
           <hr class="my-0">
           <button (click)="datepicker2.close()">Listo</button>
         </div>
-      </ng-template>
+      </ng-template> -->
       <!-- END OCULTAR CAMPO -->
     </div>
     <div class="iconCalendar">
@@ -61,15 +61,14 @@
     <div class="hideDate">
       <!-- OCULTAR CAMPO -->
       <input name="datepicker3" mask="d0/M0/0*" placement="bottom right" maxlength="11" [minDate]="minDate"
-        ngbDatepicker #datepicker3="ngbDatepicker" [footerTemplate]="footerTemplate3" [autoClose]="'outside'"
-        (dateSelect)="onDateSelectionIda($event)" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1"
-        [displayMonths]="1">
-      <ng-template #footerTemplate3>
+        ngbDatepicker #datepicker3="ngbDatepicker" [autoClose]="'outside'" (dateSelect)="onDateSelectionIda($event)"
+        outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" [displayMonths]="1">
+      <!-- <ng-template #footerTemplate3>
         <div class="btnDatePicker">
           <hr class="my-0">
           <button (click)="datepicker3.close()">Listo</button>
         </div>
-      </ng-template>
+      </ng-template> -->
       <!-- END OCULTAR CAMPO -->
     </div>
 

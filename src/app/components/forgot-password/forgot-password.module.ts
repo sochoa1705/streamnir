@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ForgotPasswordComponent } from './forgot-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
   declarations: [
     ForgotPasswordComponent

@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from } from 'rxjs';
-import { filter, map, mergeMap, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ResponseModelT } from 'src/app/shared/models';
 import { NmvModel } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
-import { EGalleryCode, IGalleryService } from './data-page-presenter.models';
+import { IGalleryService } from './data-page-presenter.models';
 
 @Injectable({
   providedIn: 'root'
@@ -100,7 +99,7 @@ export class DataPagePresenterService {
         id: 4,
         section: "Comprar",
         title: "¿Por qué comprar en NMVIAJES?",
-        img: "comprar.jpg",
+        img: "comprar.webp",
         card: [
           {
             id: 0,
@@ -125,8 +124,8 @@ export class DataPagePresenterService {
       {
         id: 5,
         section: "mailing",
-        title: "OFERTAS EXCLUSIVAS",
-        span: "Se el primero en recibir nuestras ofertas de viajes"
+        title: "¡SUSCRÍBETE!",
+        span: "Se el primero en recibir nuestras novedades y promociones"
       },
       {
         id: 6,
@@ -182,27 +181,38 @@ export class DataPagePresenterService {
           {
             id: 0,
             text: "Nuestra Empresa NM Viajes",
-            link: "/nuestra-empresa"
+            link: "/nuestra-empresa",
+            target: "_self"
           },
           {
             id: 1,
             text: "Nuestras Agencias NM Viajes",
-            link: "/nuestras-agencias/"
+            link: "/nuestras-agencias/",
+            target: "_self"
           },
           {
             id: 2,
-            text: "Política de Protección de datos Personales",
-            link: "politicas"
+            text: "Trabaja con nosotros",
+            link: "https://expertiatravel.hiringroom.com/jobs",
+            target: "_blank"
           },
           {
             id: 3,
-            text: "Responsabilidad Social Corporativa",
-            link: "responsabilidad-social"
+            text: "Política de Protección de datos Personales",
+            link: "politicas",
+            target: "_self"
           },
           {
             id: 4,
+            text: "Responsabilidad Social Corporativa",
+            link: "responsabilidad-social",
+            target: "_self"
+          },
+          {
+            id: 5,
             text: "Mapa de Sitio",
-            link: "#"
+            link: "#",
+            target: "_self"
           }
           // {
           //   id: 5,
@@ -220,18 +230,18 @@ export class DataPagePresenterService {
     string: "Hello World"
   }
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
 
-  getDataGallery(){
+  getDataGallery() {
     const nmvModel = new NmvModel()
 
     const options = {
-        params: nmvModel.params.set('Parameter.Status', true)
+      params: nmvModel.params.set('Parameter.Status', true)
     }
     const url = environment.urlNmviajes + '/Gallery';
     return this.httpClient.get<ResponseModelT<IGalleryService[]>>(url, options).pipe(
-        map(resp=> resp.Result)
+      map(resp => resp.Result)
     )
   }
 

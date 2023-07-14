@@ -17,6 +17,7 @@ export class HomePageComponent implements OnInit {
   dollar!: number
   dataUtil!: string[]
   options: string[]
+
   constructor(
     public dataPagePresenterService: DataPagePresenterService,
     public dollarChangeService: DollarChangeService,
@@ -31,6 +32,37 @@ export class HomePageComponent implements OnInit {
     this.getMain()
 
     localStorage.removeItem('filters');
+
+    // Renombrando valores para SEO - Inicio
+    document.getElementsByTagName("title")[0].innerHTML = environment.SEO.home.title;
+
+    let description = document.getElementsByName('description')[0];
+    description.setAttribute("content", environment.SEO.home.description);
+
+    const canonical = document.querySelector("link[rel='canonical']")
+    canonical?.setAttribute("href", environment.SEO.home.url);
+
+    const alternate = document.querySelector("link[rel='alternate']")
+    alternate?.setAttribute("href", environment.SEO.home.url);
+
+    const og_title = document.querySelector("meta[property='og:title']")
+    og_title?.setAttribute("content", environment.SEO.home.title);
+
+    const og_description = document.querySelector("meta[property='og:description']")
+    og_description?.setAttribute("content", environment.SEO.home.description);
+
+    const og_image = document.querySelector("meta[property='og:image']")
+    og_image?.setAttribute("content", environment.SEO.home.image);
+
+    const og_image_height = document.querySelector("meta[property='og:image:height']")
+    og_image_height?.setAttribute("content", environment.SEO.home.height);
+
+    const og_image_width = document.querySelector("meta[property='og:image:width']")
+    og_image_width?.setAttribute("content", environment.SEO.home.width);
+
+    const og_url = document.querySelector("meta[property='og:url']")
+    og_url?.setAttribute("content", environment.SEO.home.url);
+    // Renombrando valores para SEO - Fin
   }
 
   getMain() {

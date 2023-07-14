@@ -1,165 +1,174 @@
 {
-    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-    "cli": {
-        "analytics": "576b9f94-b2b3-4d7f-bc03-50383306e296",
-        "defaultCollection": "@angular-eslint/schematics",
-        "cache": {
-            "enabled": false
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "576b9f94-b2b3-4d7f-bc03-50383306e296",
+    "cache": {
+      "enabled": false
+    }
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "NuevoMundoViajes": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:application": {
+          "name": "nuevo-mundo-viajes",
+          "strict": true
+        },
+        "@schematics/angular:component": {
+          "style": "scss",
+          "name": "",
+          "project": ""
         }
-    },
-    "version": 1,
-    "newProjectRoot": "projects",
-    "projects": {
-        "NuevoMundoViajes": {
-            "projectType": "application",
-            "schematics": {
-                "@schematics/angular:application": {
-                    "strict": true
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/NuevoMundoViajes",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/sw.js",
+              "src/sitemap.xml",
+              "src/assets",
+              "src/Images",
+              "src/resources",
+              "src/metabuscador"
+            ],
+            "allowedCommonJsDependencies": [
+              "moment-precise-range-plugin",
+              "rxjs-compat"
+            ],
+            "styles": [
+              "src/bootstrap.min.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
-                "@schematics/angular:component": {
-                    "style": "scss"
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kb",
+                  "maximumError": "20kb"
                 }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
             },
-            "root": "",
-            "sourceRoot": "src",
-            "prefix": "app",
-            "architect": {
-                "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
-                    "options": {
-                        "outputPath": "dist/NuevoMundoViajes",
-                        "index": "src/index.html",
-                        "main": "src/main.ts",
-                        "polyfills": "src/polyfills.ts",
-                        "tsConfig": "tsconfig.app.json",
-                        "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
-                        ],
-                        "allowedCommonJsDependencies": [
-                            "moment-precise-range-plugin",
-                            "rxjs-compat"
-                        ],
-                        "styles": [
-                            "src/bootstrap.min.css",
-                            "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-                            "src/styles.css"
-                        ],
-                        "scripts": [
-                            "./node_modules/bootstrap/dist/js/bootstrap.min.js"
-                        ]
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "initial",
-                                    "maximumWarning": "2mb",
-                                    "maximumError": "5mb"
-                                },
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "10kb",
-                                    "maximumError": "20kb"
-                                }
-                            ],
-                            "fileReplacements": [
-                                {
-                                    "replace": "src/environments/environment.ts",
-                                    "with": "src/environments/environment.prod.ts"
-                                }
-                            ],
-                            "outputHashing": "all"
-                        },
-                        "development": {
-                            "buildOptimizer": false,
-                            "optimization": false,
-                            "vendorChunk": true,
-                            "extractLicenses": false,
-                            "sourceMap": true,
-                            "namedChunks": true
-                        }
-                    },
-                    "defaultConfiguration": "production"
-                },
-                "serve": {
-                    "builder": "@angular-devkit/build-angular:dev-server",
-                    "configurations": {
-                        "production": {
-                            "browserTarget": "NuevoMundoViajes:build:production"
-                        },
-                        "development": {
-                            "browserTarget": "NuevoMundoViajes:build:development"
-                        }
-                    },
-                    "defaultConfiguration": "development"
-                },
-                "extract-i18n": {
-                    "builder": "@angular-devkit/build-angular:extract-i18n",
-                    "options": {
-                        "browserTarget": "NuevoMundoViajes:build"
-                    }
-                },
-                "test": {
-                    "builder": "@angular-builders/jest:run",
-                    "options": {
-                        "tsConfig": "tsconfig.spec.json",
-                        "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
-                        ],
-                        "styles": [
-                            "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-                            "./node_modules/bootstrap/scss/bootstrap.scss",
-                            "src/styles.scss"
-                        ],
-                        "scripts": [
-                            "./node_modules/bootstrap/dist/js/bootstrap.min.js"
-                        ]
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-eslint/builder:lint",
-                    "options": {
-                        "lintFilePatterns": [
-                            "src/**/*.ts",
-                            "src/**/*.html"
-                        ]
-                    }
-                },
-                "cypress-run": {
-                    "builder": "@cypress/schematic:cypress",
-                    "options": {
-                        "devServerTarget": "NuevoMundoViajes:serve"
-                    },
-                    "configurations": {
-                        "production": {
-                            "devServerTarget": "NuevoMundoViajes:serve:production"
-                        }
-                    }
-                },
-                "cypress-open": {
-                    "builder": "@cypress/schematic:cypress",
-                    "options": {
-                        "watch": true,
-                        "headless": false
-                    }
-                },
-                "e2e": {
-                    "builder": "@cypress/schematic:cypress",
-                    "options": {
-                        "devServerTarget": "NuevoMundoViajes:serve",
-                        "watch": true,
-                        "headless": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "devServerTarget": "NuevoMundoViajes:serve:production"
-                        }
-                    }
-                }
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "NuevoMundoViajes:build:production"
+            },
+            "development": {
+              "browserTarget": "NuevoMundoViajes:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "NuevoMundoViajes:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/Images",
+              "src/resources",
+              "src/metabuscador"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/bootstrap/scss/bootstrap.scss",
+              "src/styles.scss"
+            ],
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "NuevoMundoViajes:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "NuevoMundoViajes:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "NuevoMundoViajes:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "NuevoMundoViajes:serve:production"
+            }
+          }
         }
-    },
-    "defaultProject": "NuevoMundoViajes"
+      }
+    }
+  }
 }

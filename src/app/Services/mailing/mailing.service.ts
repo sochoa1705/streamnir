@@ -2,20 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { ENDPOINT_API } from 'src/app/shared/constant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MailingService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) { }
 
-  goMailing(payload: any): Observable<any> {
-    let url_api = `${environment.urlNewsletter}/${ENDPOINT_API.NEWSLETTER}`
-
-    return this.http.post<any>(url_api, payload, { observe: 'response' })
+  createContact(payload: any): Observable<any> {
+    let url = `${environment.brevoBaseUrl}/contacts`;
+    return this.http.post(url, payload, { headers: {'api-key': environment.brevoApiKey}});
   }
 }

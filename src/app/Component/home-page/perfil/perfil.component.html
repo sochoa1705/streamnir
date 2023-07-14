@@ -1,92 +1,301 @@
 <!-- PERFIL -->
 
 <div class="box-container">
-  <div class="box-perfil">
-    <app-file [name]="userStorage.name"></app-file>
-    <div class="perfilName">{{userStorage.name}}</div>
-    <div class="perfilMail">{{userStorage.email}}
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill"
-        viewBox="0 0 16 16">
+    <div class="box-perfil">
+        <app-file [name]="userStorage.name"></app-file>
+        <div class="perfilName">{{userStorage.name}}</div>
+        <div class="perfilMail">{{userStorage.email}}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
         <path
           d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
       </svg>
+        </div>
+
+        <div class="boxContact" *ngIf="route === './mi-perfil'">
+            <div class="contacto">
+                <div class="titleContact">
+                    Datos de contacto
+                </div>
+                <div class="linkContact" [routerLink]="['./datos-de-contacto']">
+                    Agregar datos personales
+                </div>
+            </div>
+            <div class="contacto">
+                <div class="titleContact">
+                    Teléfono
+                </div>
+                <div class="linkContact" [routerLink]="['./datos-de-contacto']">
+                    Agregar teléfono
+                </div>
+            </div>
+            <div class="contacto">
+                <div class="titleContact">
+                    Email
+                </div>
+                <div class="linkContact disabled">
+                    {{userStorage.email}}
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="boxContact" *ngIf="route === './mi-perfil'">
-      <div class="contacto">
-        <div class="titleContact">
-          Datos de contacto
+    <div class="box-content">
+        <div class="portlet-izq">
+            <div class="iconViaje">
+                <img src="./assets/perfil/viajes.png" alt="">
+            </div>
+            <div class="boxMenu">
+                <ul class="">
+                    <li *ngFor="let item of menus">
+                      <a *ngIf="!item.newWindow" [routerLink]="[item.ruta]" routerLinkActive="selected" (click)="route = item.ruta">{{item.texto}}</a>
+                      <a *ngIf="item.newWindow" target="_blank" [href]="item.ruta">{{item.texto}}</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="linkContact" [routerLink]="['./datos-de-contacto']">
-          Agregar datos personales
-        </div>
-      </div>
-      <div class="contacto">
-        <div class="titleContact">
-          Teléfono
-        </div>
-        <div class="linkContact" [routerLink]="['./datos-de-contacto']">
-          Agregar teléfono
-        </div>
-      </div>
-      <div class="contacto">
-        <div class="titleContact">
-          Email
-        </div>
-        <div class="linkContact disabled">
-          {{userStorage.email}}
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="box-content">
-    <div class="portlet-izq">
-      <div class="iconViaje">
-        <img src="./assets/perfil/viajes.png" alt="">
-      </div>
-      <div class="boxMenu">
-        <ul class="">
-          <li *ngFor="let item of menus" [routerLink]="[item.ruta]" routerLinkActive="selected"
-            (click)="route = item.ruta">
-            {{item.texto}}
-          </li>
-        </ul>
-      </div>
+        <div class="portlet-der">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-
-    <div class="portlet-der">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
 </div>
 
 <!-- Modal Eliminar Correo -->
-<div class="modal" data-backdrop="false" id="ModalEliminaCorreo" aria-labelledby="ModalEliminaCorreoLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="titleVerifica">¿Quieres eliminar tu cuenta?</div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="descripText">
-          Perderás acceso a visualizar todas las reservas que tengas con el correo
-          <span>{{userStorage.email}}</span>
+<div class="modal" data-backdrop="false" id="ModalEliminaCorreo" aria-labelledby="ModalEliminaCorreoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="titleVerifica">¿Quieres eliminar tu cuenta?</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="descripText">
+                    Perderás acceso a visualizar todas las reservas que tengas con el correo
+                    <span>{{userStorage.email}}</span>
+                </div>
+                <div class="descripText">
+                    Si quieres volver a visualizarlas tendrás que agregar y verificar nuevamente el correo.
+                </div>
+                <div class="action">
+                    <div data-bs-dismiss="modal" aria-label="Close" class="btn secundary">
+                        Cancelar
+                    </div>
+                    <div (click)="eliminarCuenta()" class="btn primary">
+                        Aceptar
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="descripText">
-          Si quieres volver a visualizarlas tendrás que agregar y verificar nuevamente el correo.
-        </div>
-        <div class="action">
-          <div data-bs-dismiss="modal" aria-label="Close" class="btn secundary">
-            Cancelar
-          </div>
-          <div (click)="eliminarCuenta()" class="btn primary">
-            Aceptar
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
+<!-- MODAL DETALLE SEGUROS-->
+<div class="modal fade" id="ModalDetSeguro" data-backdrop="false" tabindex="-1" aria-labelledby="labelModalDetSeguro" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="title">
+                    <div class="textTitle">Seguro Sudamerica - Travel Ace: Plan Master</div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="portletReserva lessMargin">
+                    <div class="boxDetReserva">
+                        <div class="headerPortlet">
+                            <div class="titleBoxRight">Detalle de Reserva de Seguro</div>
+                        </div>
+                        <div class="contentPortlet">
+                            <ul>
+                                <li><span>Código de Reserva:</span> 41000</li>
+                                <li><span>Fecha de Creación:</span> 17/08/2022 03:28:54 p.m.</li>
+                                <li><span>Estado de Venta:</span> Facturado</li>
+                                <li><span>Counter Asignado(a):</span> </li>
+                                <li><span>Cotización SRV:</span> </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="boxDetReserva">
+                        <div class="headerPortlet">
+                            <div class="titleBoxRight">Datos de Contacto</div>
+                        </div>
+                        <div class="contentPortlet">
+                            <div class="rowPasajero">
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/confirm-user.svg" alt=""></div>
+                                    <div class="labelEquipaje">Nombre: JOSE ANTONIO RIOS MAZUELOS</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/confirm-mail.svg" alt=""></div>
+                                    <div class="labelEquipaje">Email: joserios.digital@gmail.com</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/direccion.svg" alt=""></div>
+                                    <div class="labelEquipaje">Dirección: No Especificado</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/confirm-phone.svg" alt=""></div>
+                                    <div class="labelEquipaje">Teléfono: (51) 984984124</div>
+                                </div>
+
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/razons.svg" alt=""></div>
+                                    <div class="labelEquipaje">Razón Social: Inkasegur SAC</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/ruc.svg" alt=""></div>
+                                    <div class="labelEquipaje">RUC: 20522810593</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="boxDetReserva">
+                        <div class="headerPortlet">
+                            <div class="titleBoxRight">Plan Seleccionado</div>
+                        </div>
+                        <div class="contentPortlet">
+                            <div class="rowPasajero">
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/plan.svg" alt=""></div>
+                                    <div class="labelEquipaje">Plan: AC 300 NM DIARIA 5 A 30 (60% OFF)</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/plan.svg" alt=""></div>
+                                    <div class="labelEquipaje">Destino: Varios Destinos</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/plan.svg" alt=""></div>
+                                    <div class="labelEquipaje">Pasajeros: 3</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/plan.svg" alt=""></div>
+                                    <div class="labelEquipaje">Edades: 70, 58, 70</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/plan.svg" alt=""></div>
+                                    <div class="labelEquipaje">Fecha Salida: 24/08/2022</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/plan.svg" alt=""></div>
+                                    <div class="labelEquipaje">Fecha Retorno: 12/09/2022</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/plan.svg" alt=""></div>
+                                    <div class="labelEquipaje">Monto Reserva: USD 0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="boxDetReserva">
+                        <div class="headerPortlet">
+                            <div class="titleBoxRight">Pasajeros Seguro</div>
+                        </div>
+                        <div class="contentPortlet tablet">
+                            <div class="rowPasajero headCol">
+                                <div class="colPasajero">Nro.</div>
+                                <div class="colPasajero">Nombre</div>
+                                <div class="colPasajero">Apellidos</div>
+                                <div class="colPasajero">Fec. Nac.</div>
+                                <div class="colPasajero">Tipo Doc.</div>
+                                <div class="colPasajero">Nro. Doc.</div>
+                            </div>
+                            <div class="rowPasajero rowItem">
+                                <div class="colPasajero">1</div>
+                                <div class="colPasajero">Willians</div>
+                                <div class="colPasajero">Mori Chavez</div>
+                                <div class="colPasajero">20/07/2022</div>
+                                <div class="colPasajero">DNI</div>
+                                <div class="colPasajero">43228541</div>
+                            </div>
+                            <div class="rowPasajero rowItem">
+                                <div class="colPasajero">2</div>
+                                <div class="colPasajero">Antonieta</div>
+                                <div class="colPasajero">Arcaya Moncaya</div>
+                                <div class="colPasajero">26/05/2022</div>
+                                <div class="colPasajero">DNI</div>
+                                <div class="colPasajero">09568426 </div>
+                            </div>
+                            <div class="rowPasajero rowItem">
+                                <div class="colPasajero">3</div>
+                                <div class="colPasajero">Maria Josefa</div>
+                                <div class="colPasajero">Arcaya Moncaya de mori</div>
+                                <div class="colPasajero">08/12/2022</div>
+                                <div class="colPasajero">DNI</div>
+                                <div class="colPasajero">07589642</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="boxDetReserva">
+                        <div class="headerPortlet">
+                            <div class="titleBoxRight">Contacto de Emergencia</div>
+                        </div>
+                        <div class="contentPortlet">
+                            <div class="rowPasajero">
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/confirm-user.svg" alt=""></div>
+                                    <div class="labelEquipaje">Nombre: JOSE ANTONIO RIOS MAZUELOS</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/confirm-phone.svg" alt=""></div>
+                                    <div class="labelEquipaje">Teléfono: (51) 984984124</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="boxDetReserva">
+                        <div class="headerPortlet">
+                            <div class="titleBoxRight">Cobertura</div>
+                            <!-- <div class="iconCollapse" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                                xxxx
+                            </div> -->
+                        </div>
+                        <div class="contentPortlet">
+                            <!-- <div class="collapse multi-collapse" id="multiCollapseExample1"> -->
+                            <div class="rowPasajero">
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/cobertura.svg" alt=""></div>
+                                    <div class="labelEquipaje">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores harum quibusdam et numquam deserunt?</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/cobertura.svg" alt=""></div>
+                                    <div class="labelEquipaje">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores harum quibusdam et numquam deserunt?</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/cobertura.svg" alt=""></div>
+                                    <div class="labelEquipaje">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores harum quibusdam et numquam deserunt?</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/cobertura.svg" alt=""></div>
+                                    <div class="labelEquipaje">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores harum quibusdam et numquam deserunt?</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/cobertura.svg" alt=""></div>
+                                    <div class="labelEquipaje">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores harum quibusdam et numquam deserunt?</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/cobertura.svg" alt=""></div>
+                                    <div class="labelEquipaje">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores harum quibusdam et numquam deserunt?</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/cobertura.svg" alt=""></div>
+                                    <div class="labelEquipaje">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores harum quibusdam et numquam deserunt?</div>
+                                </div>
+                                <div class="itemPasajero">
+                                    <div class="iconEquipaje"><img src="./assets/cobertura.svg" alt=""></div>
+                                    <div class="labelEquipaje">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores harum quibusdam et numquam deserunt?</div>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

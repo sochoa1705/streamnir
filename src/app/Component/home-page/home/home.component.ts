@@ -10,6 +10,7 @@ import * as bootstrap from 'bootstrap';
 import { FlightService } from 'src/app/api/api-nmviajes/services';
 import { EGalleryCode, IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
+import { CryptoService } from 'src/app/Services/util/crypto.service';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +30,8 @@ export class HomeComponent implements OnInit {
 
   loadedGallery = false;
 
+  selectedTab: string
+
   constructor(
     public dataPagePresenterService: DataPagePresenterService,
     public asidePresenterService: AsidePresenterService,
@@ -36,10 +39,45 @@ export class HomeComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _accountsService: AccountsService,
-    public loaderSubjectService: LoaderSubjectService
-  ) { }
+    public loaderSubjectService: LoaderSubjectService,
+    private _cryptoService: CryptoService
+  ) {
+
+  }
 
   ngOnInit(): void {
+    this._activatedRoute.params.subscribe((product) => {
+      let userID: string = '';
+      let user_existingCustomer: boolean = false;
+      const credentials = localStorage.getItem('usuario');
+      const bookings = localStorage.getItem('bookings');
+
+      if (credentials) {
+        const credentialsJson = JSON.parse(credentials);
+        userID = this._cryptoService.encrypt(credentialsJson.email);
+
+        if (bookings)
+          user_existingCustomer = JSON.parse(bookings).length > 0;
+      }
+
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        event: "user_info",
+        userID: userID,
+        user_existingCustomer: user_existingCustomer
+      });
+
+      (window as any).dataLayer.push({
+        event: "virtualPageView",
+        virtualPagePath: `/confirmacion/${product.tab}`,
+        virtualPageTitle: "NMV: Confirmacion"
+      });
+
+      this.casos(product.tab);
+    }
+
+    );
+
     this.listDestiny()
     this.getConfirmacion();
     this.getGallery();
@@ -48,8 +86,33 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('filters');
   }
 
-  getConfirmacion() {
+  casos(tab: any) {
+    switch (tab) {
+      case 'paquetes':
+        this.selectedTab = 'paquetes'
+        break;
+      case 'armapaquete':
+        this.selectedTab = 'armapaquete'
+        break;
+      case 'vuelohotel':
+        this.selectedTab = 'vuelohotel'
+        break;
+      case 'hoteles':
+        this.selectedTab = 'hoteles'
+        break;
+      case 'autos':
+        this.selectedTab = 'autos'
+        break;
+      case 'actividades':
+        this.selectedTab = 'actividades'
+        break;
+      default:
+        this.selectedTab = 'home'
+        break;
+    }
+  }
 
+  getConfirmacion() {
     this._activatedRoute.params.pipe(
       filter(params => params.id),
       tap(() => this.initLoad()),
@@ -71,14 +134,16 @@ export class HomeComponent implements OnInit {
 
   getGallery() {
     this.dataPagePresenterService.getDataGallery().subscribe(data => {
-      this.sliderDestacados = data.filter(item => item.Code === EGalleryCode.slider_destacados).map(item => item.Images)[0];
+      //this.sliderDestacados = data.filter(item => item.Code === EGalleryCode.slider_destacados).map(item => item.Images)[0];
+      this.sliderDestacados = data.filter(item => item.Code === EGalleryCode.slider_destacados || item.Code === EGalleryCode.slider_destacados2).map(item => item.Images)[0];
+      this.sliderDestacados.push(this.sliderDestacados[0]);
+
       this.bannersDestacados = data.filter(item => item.Code === EGalleryCode.banners_destacados).map(item => item.Images)[0];
       this.bannersCorporativos = data.filter(item => item.Code === EGalleryCode.banners_corporativos).map(item => item.Images)[0];
 
       this.loadedGallery = true;
     })
   }
-
 
   aceptConfirm() {
     this.toggleConfirmation();

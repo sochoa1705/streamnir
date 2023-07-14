@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AccountsService } from 'src/app/Services/accounts.service';
-import { ModelTaggingActividades } from 'src/app/Services/analytics/tagging.models';
+import { ModelTaggingActividades, SearchExperiences } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
@@ -12,6 +11,7 @@ import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { ParamsActividades, URLActividades } from '../../tabs/tabs.models';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tab-actividades',
@@ -19,7 +19,6 @@ import { ParamsActividades, URLActividades } from '../../tabs/tabs.models';
   styleUrls: ['./tab-actividades.component.scss']
 })
 export class TabActividadesComponent {
-
   form!: FormGroup;
   public fromDate: NgbDate | null;
   public toDate: NgbDate | null;
@@ -30,12 +29,9 @@ export class TabActividadesComponent {
   distribution = '';
   hoveredDate: NgbDate | null = null;
 
-
   distributionObject: DistributionObjectA;
 
-
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
-
 
   constructor(
     private destineService: DestinyService,
@@ -48,7 +44,6 @@ export class TabActividadesComponent {
       destino: new FormControl(''),
     });
   }
-
 
   autoComplete(e: any, typeSearch = 'ONLY_TICKET') {
     // let elemento = this.origen.nativeElement;
@@ -74,19 +69,16 @@ export class TabActividadesComponent {
     )
   }
 
-
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
   }
 
-
-  openSnackBar(message: string, action: string = "Error") {
+  openSnackBar(message: string) {
     this._snackBar.open(message, "", {
       duration: 2000,
       panelClass: ['mat-toolbar', 'mat-warn']
     });
   }
-
 
   public async search() {
     if (!this.isValidate()) {
@@ -96,70 +88,97 @@ export class TabActividadesComponent {
 
     let url = this.getUrlActividades();
 
-    const result = await this._accountsService.getAccountToken();
-    if (result) {
-      if (result.Result.IsSuccess) {
-        const token: string = result.Result.Token;
-        url = `${url}&token=${token}&submit=true`;
+    if (url && url.length > 0) {
+      const result = await this._accountsService.getAccountToken();
+      if (result) {
+        if (result.Result.IsSuccess) {
+          const token: string = result.Result.Token;
+          url = `${url}&token=${token}&submit=true`;
+        }
       }
-    }
 
-    this.navigateToResponseUrl(url);
+      this.navigateToResponseUrl(url);
+    }
   }
 
   public getUrlActividades() {
-    let url = ''
+    let url: string;
     let params = this.getParamsActividades();
-    this.insertTag(params);
-    url = new URLActividades(params, this.distribution).getUrl();
-    return url;
+    if (params) {
+      this.insertTag(params);
+      url = new URLActividades(params, this.distribution).getUrl();
+      return url;
+    } else return '';
   }
 
-
   insertTag(params: any) {
-
     const getCodigoIata = (id: string) => {
-      return id.split("::")[1];
+      return id.split('::')[1];
     }
 
     const nombre = `${getCodigoIata(params.idDestino)}`;
-    const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
-    const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
-
+    const diasAnticipacion = moment(params.startDate, 'DD/MM/YYYY').diff(moment(), 'days');
+    const duracionViaje = moment(params.endDate, 'DD/MM/YYYY').diff(moment(params.startDate, 'DD/MM/YYYY'), 'days');
 
     const model = new ModelTaggingActividades(
-      nombre,
-      params.destino,
-      this.distributionObject.pasajeros,
-      this.distributionObject.adultos,
-      this.distributionObject.ninos,
-      0,
-      this.distributionObject.habitacion,
-      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      diasAnticipacion,
-      duracionViaje
+        nombre,
+        params.destino,
+        this.distributionObject.pasajeros,
+        this.distributionObject.adultos,
+        this.distributionObject.ninos,
+        0,
+        this.distributionObject.habitacion,
+        moment(params.startDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
+        moment(params.endDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
+        diasAnticipacion,
+        duracionViaje
     )
 
     TaggingService.buscarActividades(model);
-  }
 
+    const newModel: SearchExperiences = {
+      event: 'nmv_actividades_buscar',
+      operacion: {
+        dias_anticipacion: diasAnticipacion
+      },
+      destino: {
+        nombre: params.destino,
+        codigo: nombre,
+        pais: this.citys[0].country
+      },
+      pasajeros: {
+        adultos: this.distributionObject.adultos,
+        ninos: this.distributionObject.ninos,
+        infantes: 0,
+        total: this.distributionObject.pasajeros
+      },
+      fechas: {
+        salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: moment(params.endDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        estadia: duracionViaje
+      }
+    };
+
+    TaggingService.tagSearchExperiences(newModel);
+  }
 
   getParamsActividades() {
-    let params = new ParamsActividades(
-      this.fromDate,
-      this.toDate,
-      this.form,
-      this.citys,
-    ).getParams();
-    return params;
+    if (this.fromDate && this.toDate)
+      return new ParamsActividades(
+          this.fromDate,
+          this.toDate,
+          this.form,
+          this.citys,
+      ).getParams();
+    else {
+      this.openSnackBar('Las fechas de Salida y de Vuelta son obligatorias');
+      return null;
+    }
   }
-
 
   changeDate(value: ClassValueCalendar) {
     this.toDate = value.toDate;
     this.fromDate = value.fromDate;
   }
-
 
 }

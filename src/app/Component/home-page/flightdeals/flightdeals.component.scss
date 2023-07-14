@@ -24,6 +24,9 @@ h1 {
     color: $gray;
     text-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
     margin-bottom: 2px;
+    @media (max-width: 640px) {
+        line-height: 10px;
+    }
 }
 
 h5 {
@@ -54,6 +57,9 @@ span {
         color: $red_light;
         letter-spacing: 0.5px;
         margin: 6px 0;
+    }
+    @media (max-width: 640px) {
+        margin-top: 0px !important;
     }
 }
 
@@ -106,6 +112,9 @@ span {
             background: $white;
         }
     }
+    @media (max-width: 640px) {
+        display: none !important;
+    }
 }
 
 p {
@@ -130,6 +139,19 @@ a {
     cursor: pointer;
     transition: all 200ms ease-in-out;
     &:hover {
+        border-radius: 30px;
+        padding: 10px 10px;
+        min-width: 80px;
+        &>.arrow {
+            width: 6px;
+        }
+        &::before {
+            font-family: Montserrat;
+            content: "Vamos ";
+            -webkit-transition: all 0.5s ease-in-out;
+        }
+    }
+    @media (max-width: 640px) {
         border-radius: 30px;
         padding: 10px 10px;
         min-width: 80px;

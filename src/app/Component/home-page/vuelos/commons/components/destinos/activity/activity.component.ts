@@ -49,12 +49,10 @@ export class ActivityComponent implements OnInit {
 
   ngOnInit(): void {
     this._activatedRoute.params.subscribe(params => {
-
       let city: string = this.city || params.city;
       let site: string = this.site || params.site;
-      let isflight: boolean = this.isflight === undefined ? params.isflight : this.isflight;
-
-      this.getAllTickets(city, site, isflight);
+      let isFlight: boolean = this.isflight === undefined ? params.isflight : this.isflight;
+      this.getAllTickets(city, site, isFlight);
     });
   }
 

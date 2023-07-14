@@ -1,12 +1,16 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
+import { Component, ElementRef, Injectable, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { Injectable } from '@angular/core';
-import { NgbDateAdapter, } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbCalendar,
+  NgbDate,
+  NgbDateAdapter,
+  NgbDateParserFormatter,
+  NgbDateStruct
+} from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from 'src/app/Services/notification.service';
-import * as moment from "moment";
-import { ModelTaggingBuscarSeguros } from 'src/app/Services/analytics/tagging.models';
+import * as moment from 'moment';
+import { ModelTaggingBuscarSeguros, SearchTravelInsurance } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 
 export interface IFormSeguros {
@@ -88,11 +92,6 @@ export interface State {
   population: string;
 }
 
-export interface Clientes {
-  Edad: string;
-  FechaNacimiento: string;
-}
-
 @Component({
   selector: 'app-filtersafe',
   templateUrl: './filtersafe.component.html',
@@ -111,8 +110,6 @@ export class FiltersafeComponent implements OnInit {
 
   model!: NgbDateStruct;
   selected = 'idavuelta';
-  stateCtrl = new FormControl();
-  stateCtrl2 = new FormControl();
   customers!: number;
   ageCustomers: any;
   ClienteCotizacion: Array<any> = [];
@@ -129,22 +126,12 @@ export class FiltersafeComponent implements OnInit {
   MSG_OUTFLY: string = 'fromDate'
   MSG_INFLY: string = 'toDate'
 
-  model1: string | undefined;
-  model2: string | undefined;
-
   hoveredDate: NgbDate | null = null;
 
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
 
-  unidadNegocio: any;
-  plansAC: any = [];
-  plans: any = [];
-  dollar: any;
   pop: any;
-  coverageDisplay: boolean = false;
-  coverageList: any;
-  asistMedic: any;
 
   filters: any;
   filtersJSON: any;
@@ -175,7 +162,6 @@ export class FiltersafeComponent implements OnInit {
     public formatter: NgbDateParserFormatter,
     private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>,
-    public elementRef: ElementRef,
     private renderer: Renderer2,
     private notification: NotificationService,
     private _formBuilder: FormBuilder
@@ -249,8 +235,7 @@ export class FiltersafeComponent implements OnInit {
   }
 
   deletePassenger(index: number): void {
-    let limite = this.insuranceQuoteForm.controls['passengers'].value.length - 1
-    this.limit = limite
+    this.limit = this.insuranceQuoteForm.controls['passengers'].value.length - 1
 
     if (this.limit < 5) {
       this.limitePassenger = false
@@ -266,25 +251,20 @@ export class FiltersafeComponent implements OnInit {
     let Ages = []
 
     for (let i in array) {
-
-      let indice = Number(i);
+      Number(i);
 
       let age = Number(this.insuranceQuoteForm.controls['passengers'].value[i].edad);
 
-      let fecha = this.insuranceQuoteForm.controls['passengers'].value[i].fechaNacimiento;
-      const anio = moment(fecha, 'DD/MM/YYYY').year();
+      this.insuranceQuoteForm.controls['passengers'].value[i].fechaNacimiento = moment().subtract(age, 'years').format('DD/MM/YYYY');
 
-      let anioNacio: any = anio - age;
+      let fecha = this.insuranceQuoteForm.controls['passengers'].value[i].fechaNacimiento;
+      let anioNacio: any = moment(fecha, 'DD/MM/YYYY').year();
 
       Ages.push(age);
       this.ageCustomers = Ages.join(';');
 
       this.anios.push({ anio: Number(anioNacio), edad: age });
     }
-  }
-
-  get today() {
-    return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
 
   onDateSelection(date: NgbDate) {
@@ -353,7 +333,7 @@ export class FiltersafeComponent implements OnInit {
 
   insertTag(form: IFormSeguros) {
     const edades = form.Edades.split(';');
-    const sum = edades.reduce((acc, el) => (acc = Number(el) + acc), 0);
+    const sum = edades.reduce((acc, el) => (Number(el) + acc), 0);
     const promEdades = sum / edades.length;
 
     const tag = new ModelTaggingBuscarSeguros(
@@ -368,9 +348,39 @@ export class FiltersafeComponent implements OnInit {
       Number(this.diffDays())
     )
 
-    console.log(JSON.stringify(tag));
-
     TaggingService.tagBuscarSeguros(tag);
+
+    const daysFromNow = moment(form.fromDate, 'DD/MM/YYYY').diff(moment(), 'days');
+
+    const model: SearchTravelInsurance = {
+      event: 'nmv_seguros_buscar',
+      operacion: {
+        dias_anticipacion: daysFromNow
+      },
+      origen: {
+        nombre: 'Peru',
+        codigo: 'PE',
+        pais: 'Peru'
+      },
+      destino: {
+        nombre: form.destinyString.descripcion_destino,
+        codigo: form.destinyString.id_destino,
+        pais: ''
+      },
+      pasajeros: {
+        total: form.passengers.length,
+        infantes: form.passengers.filter(p => Number(p.edad) <= 5).length,
+        ninos: form.passengers.filter(p => Number(p.edad) > 5 && Number(p.edad) < 18).length,
+        adultos: form.passengers.filter(p => Number(p.edad) >= 18).length
+      },
+      fechas: {
+        salida: moment(form.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: moment(form.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        estadia: Number(this.diffDays())
+      }
+    };
+
+    TaggingService.tagSearchTravelInsurance(model);
   }
 
   quoteNow() {
@@ -390,11 +400,16 @@ export class FiltersafeComponent implements OnInit {
       this.insuranceQuoteForm.removeControl('days')
       this.insuranceQuoteForm.addControl('days', new FormControl(this.diffDays()))
       this.insuranceQuoteForm.removeControl('destinyString')
-      this.insuranceQuoteForm.addControl('destinyString', new FormControl(this.destinySring()))
+      this.insuranceQuoteForm.addControl('destinyString', new FormControl(this.destinyString()))
       //validacion fecha de nacimiento ▼
       this.insuranceQuoteForm.addControl('aniosNacimiento', new FormControl(this.anios))
 
       //console.log(this.fromDate);
+
+      for (let i in this.insuranceQuoteForm.controls['passengers'].value) {
+        let age = Number(this.insuranceQuoteForm.controls['passengers'].value[i].edad);
+        this.insuranceQuoteForm.controls['passengers'].value[i].fechaNacimiento = moment().subtract(age, 'years').format('DD/MM/YYYY');
+      }
 
       let form = this.insuranceQuoteForm.value;
       localStorage.removeItem('Datasafe');
@@ -417,28 +432,25 @@ export class FiltersafeComponent implements OnInit {
     }
   }
 
-  destinySring() {
+  destinyString() {
     for (const i of this.options) {
-      if (String(i.ref_assistcard) === this.destino.nativeElement.value) {
-        console.log(i.descripcion_destino);
-        return i
-      }
+      if (String(i.ref_assistcard) === this.destino.nativeElement.value)
+        return i;
     }
   }
 
   diffDays() {
-    var FeIni = this.fromDate!.month + "/" + this.fromDate!.day + "/" + this.fromDate!.year
-    var FeFin = this.toDate!.month + "/" + this.toDate!.day + "/" + this.toDate!.year
+    const FeIni = this.fromDate!.month + '/' + this.fromDate!.day + '/' + this.fromDate!.year;
+    const FeFin = this.toDate!.month + '/' + this.toDate!.day + '/' + this.toDate!.year;
     const date1 = new Date(FeIni)
     const date2 = new Date(FeFin)
-    var diff = Math.abs(date1.getTime() - date2.getTime())
-    var diffDays = Math.ceil(diff / (1000 * 3600 * 24)) + 1
+    const diff = Math.abs(date1.getTime() - date2.getTime());
+    const diffDays = Math.ceil(diff / (1000 * 3600 * 24)) + 1;
     return String(diffDays);
   }
 
   count(valor: number, e: any) {
     let customer: any;
-    console.log(valor);
     switch (e) {
       case 'menor':
         customer = this.menor.nativeElement
@@ -450,7 +462,7 @@ export class FiltersafeComponent implements OnInit {
         customer = this.mayor.nativeElement
         break;
       default:
-      // code block
+        // code block
     }
 
     let inputvalue = Number(customer.value)

@@ -42,7 +42,7 @@ export class ValidatorsService {
 
       const valueField = formGroup.get(field)?.value;
 
-      if (valueField.length < 10 || valueField.length > 50) {
+      if (valueField.length < 10 || valueField.length > 100) {
         formGroup.get(field)?.setErrors({ notValid: true });
         return { notValid: true };
       }

@@ -41,7 +41,7 @@ export class PackageComponent {
 
 
   toDestiny(e: any) {
-    this.route.navigate(['/vuelos/destino', this.codigo_ciudad])
+    this.route.navigate(['/vuelos/destino/LIM', this.codigo_ciudad])
   }
 
 }

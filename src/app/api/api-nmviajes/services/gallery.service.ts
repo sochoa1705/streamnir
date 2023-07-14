@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { RqGalleryGetByIdCeRequest1 } from '../models/rq-gallery-get-by-id-ce-request-1';
+import { RqGalleryImgDeleteCeRequest1 } from '../models/rq-gallery-img-delete-ce-request-1';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +40,9 @@ export class GalleryService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, GalleryService.V1ApiGalleryGetPath, 'get');
     if (params) {
@@ -52,7 +55,8 @@ export class GalleryService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -73,7 +77,9 @@ export class GalleryService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiGalleryGet$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -92,17 +98,21 @@ export class GalleryService extends BaseService {
    * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
   v1ApiGalleryPut$Response(params?: {
+    context?: HttpContext
     body?: {
       'Parameter.Code'?: string;
       'Parameter.Name'?: string;
       'Parameter.Status'?: boolean;
-      'Parameter.Images'?: Array<Blob>;
+      'Parameter.NameImages'?: Array<string>;
+      'Parameter.Redirects'?: Array<string>;
+      'Parameter.Files'?: Array<Blob>;
       'TrackingCode': string;
       'MuteExceptions': boolean;
       'Caller.Company': string;
       'Caller.Application': string;
     }
-  }): Observable<StrictHttpResponse<void>> {
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, GalleryService.V1ApiGalleryPutPath, 'put');
     if (params) {
@@ -111,7 +121,8 @@ export class GalleryService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -127,17 +138,21 @@ export class GalleryService extends BaseService {
    * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
   v1ApiGalleryPut(params?: {
+    context?: HttpContext
     body?: {
       'Parameter.Code'?: string;
       'Parameter.Name'?: string;
       'Parameter.Status'?: boolean;
-      'Parameter.Images'?: Array<Blob>;
+      'Parameter.NameImages'?: Array<string>;
+      'Parameter.Redirects'?: Array<string>;
+      'Parameter.Files'?: Array<Blob>;
       'TrackingCode': string;
       'MuteExceptions': boolean;
       'Caller.Company': string;
       'Caller.Application': string;
     }
-  }): Observable<void> {
+  }
+  ): Observable<void> {
 
     return this.v1ApiGalleryPut$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -156,16 +171,20 @@ export class GalleryService extends BaseService {
    * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
   v1ApiGalleryPost$Response(params?: {
+    context?: HttpContext
     body?: {
       'Parameter.Code'?: string;
       'Parameter.Name'?: string;
-      'Parameter.Images'?: Array<Blob>;
+      'Parameter.NameImages'?: Array<string>;
+      'Parameter.Redirects'?: Array<string>;
+      'Parameter.Files'?: Array<Blob>;
       'TrackingCode': string;
       'MuteExceptions': boolean;
       'Caller.Company': string;
       'Caller.Application': string;
     }
-  }): Observable<StrictHttpResponse<void>> {
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, GalleryService.V1ApiGalleryPostPath, 'post');
     if (params) {
@@ -174,7 +193,8 @@ export class GalleryService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -190,16 +210,20 @@ export class GalleryService extends BaseService {
    * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
   v1ApiGalleryPost(params?: {
+    context?: HttpContext
     body?: {
       'Parameter.Code'?: string;
       'Parameter.Name'?: string;
-      'Parameter.Images'?: Array<Blob>;
+      'Parameter.NameImages'?: Array<string>;
+      'Parameter.Redirects'?: Array<string>;
+      'Parameter.Files'?: Array<Blob>;
       'TrackingCode': string;
       'MuteExceptions': boolean;
       'Caller.Company': string;
       'Caller.Application': string;
     }
-  }): Observable<void> {
+  }
+  ): Observable<void> {
 
     return this.v1ApiGalleryPost$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -218,8 +242,10 @@ export class GalleryService extends BaseService {
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   v1ApiGalleryDelete$Response(params?: {
+    context?: HttpContext
     body?: RqGalleryGetByIdCeRequest1
-  }): Observable<StrictHttpResponse<void>> {
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, GalleryService.V1ApiGalleryDeletePath, 'delete');
     if (params) {
@@ -228,7 +254,8 @@ export class GalleryService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -244,8 +271,10 @@ export class GalleryService extends BaseService {
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
   v1ApiGalleryDelete(params?: {
+    context?: HttpContext
     body?: RqGalleryGetByIdCeRequest1
-  }): Observable<void> {
+  }
+  ): Observable<void> {
 
     return this.v1ApiGalleryDelete$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
@@ -269,7 +298,9 @@ export class GalleryService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, GalleryService.V1ApiGalleryCodeGetPath, 'get');
     if (params) {
@@ -282,7 +313,8 @@ export class GalleryService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -303,9 +335,62 @@ export class GalleryService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiGalleryCodeGet$Response(params).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
+    );
+  }
+
+  /**
+   * Path part for operation v1ApiGalleryImageDelete
+   */
+  static readonly V1ApiGalleryImageDeletePath = '/Gallery/Image';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `v1ApiGalleryImageDelete()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  v1ApiGalleryImageDelete$Response(params?: {
+    context?: HttpContext
+    body?: RqGalleryImgDeleteCeRequest1
+  }
+  ): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, GalleryService.V1ApiGalleryImageDeletePath, 'delete');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `v1ApiGalleryImageDelete$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  v1ApiGalleryImageDelete(params?: {
+    context?: HttpContext
+    body?: RqGalleryImgDeleteCeRequest1
+  }
+  ): Observable<void> {
+
+    return this.v1ApiGalleryImageDelete$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

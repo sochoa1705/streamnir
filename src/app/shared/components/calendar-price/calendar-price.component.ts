@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { IntermediaryService } from '../../../Services/intermediary.service';
@@ -34,6 +34,8 @@ export class CalendarPriceComponent implements OnInit {
   calendarMonths: any[] = [];
   departureDate: any = null;
   arrivalDate: any = null;
+  inside: boolean = false;
+  countOutside: number = 0;
 
   constructor(private searchService: DestinyService, private intermediaryService: IntermediaryService) {
     moment.locale('es');
@@ -41,13 +43,13 @@ export class CalendarPriceComponent implements OnInit {
 
   ngOnInit(): void {
     this.intermediaryService.$getObjectCalendarPriceSource.subscribe(res => {
-      if(res) {
+      if (res) {
         this.chargeCalendarPrice();
       }
     });
   }
 
-  chargeCalendarPrice(){
+  chargeCalendarPrice() {
     let firstMonth = new Date();
     if (this.flightData.departureDate == '' && this.flightData.arrivalDate == '') {
       let currentDate = new Date();
@@ -58,7 +60,7 @@ export class CalendarPriceComponent implements OnInit {
     this.calendarMonths.push(this.getCalendar(firstMonth));
     this.calendarMonths.push(this.getCalendar(new Date(firstMonth.setMonth(firstMonth.getMonth() + 1))));
 
-    if (this.flightData.departureDate != '' && this.flightData.arrivalDate != '') {
+    if (this.flightData.departureDate != '') {
       this.departureDate = {
         day: this.flightData.departureDate.split('/')[0],
         date: this.flightData.departureDate,
@@ -66,12 +68,14 @@ export class CalendarPriceComponent implements OnInit {
         price: '-',
       };
 
-      this.arrivalDate = {
-        day: this.flightData.arrivalDate.split('/')[0],
-        date: this.flightData.arrivalDate,
-        formatYMD: this.flightData.arrivalDate.split('/')[2] + this.flightData.arrivalDate.split('/')[1] + this.flightData.arrivalDate.split('/')[0],
-        price: '-',
-      };
+      if (this.flightData.arrivalDate != '') {
+        this.arrivalDate = {
+          day: this.flightData.arrivalDate.split('/')[0],
+          date: this.flightData.arrivalDate,
+          formatYMD: this.flightData.arrivalDate.split('/')[2] + this.flightData.arrivalDate.split('/')[1] + this.flightData.arrivalDate.split('/')[0],
+          price: '-',
+        };
+      }
 
       this.getTarifas(this.departureDate);
     } else {
@@ -232,11 +236,25 @@ export class CalendarPriceComponent implements OnInit {
 
         this.getTarifas(item);
       } else {
-        let departure = Number.parseInt(this.departureDate.formatYMD);
-        let arrival = Number.parseInt(item.formatYMD);
+        if (Number.parseInt(item.formatYMD) == this.departureDate.formatYMD) {
+          this.departureDate = null;
 
-        if (arrival > departure)
-          this.arrivalDate = item;
+          this.calendarMonths.forEach((month: any) => {
+            month.calendar.forEach((week: any) => {
+              week.forEach((day: any) => {
+                day.price = '-';
+              });
+            });
+          });
+        } else {
+          let departure = Number.parseInt(this.departureDate.formatYMD);
+          let arrival = Number.parseInt(item.formatYMD);
+
+          if (arrival > departure) {
+            this.arrivalDate = item;
+            this.selectDateTravel();
+          }
+        }
       }
     }
   }
@@ -313,5 +331,22 @@ export class CalendarPriceComponent implements OnInit {
     let departure = this.departureDate == undefined ? null : this.departureDate;
     let arrival = this.arrivalDate == undefined ? null : this.arrivalDate;
     this.inputDates.emit({ departure: departure, arrival: arrival });
+  }
+
+  @HostListener("click")
+  clicked() {
+    this.inside = true;
+  }
+
+  @HostListener("document:click")
+  clickedOut() {
+    if (!this.inside) this.countOutside++;
+    this.inside = false;
+
+    if (!this.inside && this.countOutside > 1) {
+      let departure = this.departureDate == undefined ? null : this.departureDate;
+      let arrival = this.arrivalDate == undefined ? null : this.arrivalDate;
+      this.inputDates.emit({ departure: departure, arrival: arrival });
+    }
   }
 }

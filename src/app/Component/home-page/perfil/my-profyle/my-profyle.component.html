@@ -1,42 +1,45 @@
 <!-- vista perfil -->
-<div class="viewPerfil" *ngIf="id === 'mnuPerfil'">
-  <div class="boxContPerfil">
-    <div class="boxLeft">
-      <img src="./assets/perfil/estudiante.png" alt="">
-    </div>
-    <div class="boxRight">
-      <div class="subTitle">
-        Agrega
-      </div>
-      <div class="title">
-        Pasajeros
-      </div>
-      <div class="descrip">
-        Reserva más rápido y sin complicaciones, agrega los datos de quienes suelen viajar a tu lado.
-      </div>
-      <div class="boxBtn">
-        <div class="btnPerfil primary" (click)="showOption('mnuPasajero')">
-          Agregar
+<div class="viewPerfil">
+    <div class="boxContPerfil">
+        <div class="boxLeft">
+            <img src="./assets/perfil/estudiante.png" alt="">
         </div>
-      </div>
+        <div class="boxRight">
+            <div class="subTitle">
+                Agrega
+            </div>
+            <div class="title">
+                Pasajeros
+            </div>
+            <div class="descrip">
+                Reserva más rápido y sin complicaciones, agrega los datos de quienes suelen viajar a tu lado.
+            </div>
+            <div class="boxBtn">
+                <div class="btnPerfil primary" routerLink="/perfil/pasajeros">
+                    Agregar
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="boxContPerfil btnBox boxContPerfil--row" (click)="toggleModalEliminar()">
-    <div class="boxCenter">
-      <div class="subTitle">
-        Eliminar mi cuenta
-      </div>
-      <div class="descrip">
-        Si eliminas tu cuenta no podrás recuperarla.
-      </div>
-    </div>
-    <div class="iconBox">
-      <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="boxContPerfil btnBox boxContPerfil--row" (click)="toggleModalEliminar()">
+        <div class="boxCenter">
+            <div class="subTitle">
+                Eliminar mi cuenta
+            </div>
+            <div class="descrip">
+                Si eliminas tu cuenta no podrás recuperarla.
+            </div>
+        </div>
+        <div class="iconBox">
+            <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M-8.21774e-08 14.12L6.18084 8L-6.17205e-07 1.88L1.90283 -8.31755e-08L10 8L1.90283 16L-8.21774e-08 14.12Z"
           fill="#DF0C30" />
       </svg>
+        </div>
     </div>
-  </div>
 </div>
 <!-- END perfil -->
+
+
+

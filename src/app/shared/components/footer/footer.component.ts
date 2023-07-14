@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,18 +20,25 @@ export class FooterComponent {
   constructor(
     public route: Router,
   ) { }
+
   showMenuProd: Boolean = true;
+
   showProducto() {
-    this.showMenuProd = this.showMenuProd ? false : true;
+    this.showMenuProd = !this.showMenuProd;
   }
+
   showMenuConocenos: Boolean = true;
+
   showConocenos() {
-    this.showMenuConocenos = this.showMenuConocenos ? false : true;
+    this.showMenuConocenos = !this.showMenuConocenos;
   }
-  to(e: any) {
-    window.location.href = e;
+
+  redirect(e: any) {
+    //window.location.href = e;
+    window.open(e, '_blank');
   }
+
   toOficinas() {
-    this.route.navigate(['/nuestras-agencias'])
+    this.route.navigate(['/nuestras-agencias']);
   }
 }

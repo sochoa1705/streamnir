@@ -116,18 +116,21 @@ export class URLVuelos implements UrlNmViajes {
 }
 
 export class URLVuelosMulti implements UrlNmViajes {
-  public url = '/vuelos/resultados';
+  //public url = '/vuelos/resultados';
+  public url = environment.urlIframeMotorVuelos;
 
   private tab: tapType;
   private distribution: any;
   private flightType: EnumFlightType;
   private cabinsVuelos: EnumCabinsVuelos;
+  private email: string;
 
-  constructor(cabinsVuelos: any, flightType: any, distribution: any) {
+  constructor(flightType: any, distribution: any, email: string) {
     this.tab = 'ONLY_FLIGHT';
     this.distribution = distribution;
     this.flightType = flightType;
-    this.cabinsVuelos = cabinsVuelos;
+    //this.cabinsVuelos = cabinsVuelos;
+    this.email = email;
   }
 
   getUrl() {
@@ -135,7 +138,15 @@ export class URLVuelosMulti implements UrlNmViajes {
   }
 
   getUrlMulti(json: string) {
-    return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.flightType}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.cabinsVuelos}&lang=ES&json=${json}`;
+    //let url = `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.flightType}&adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&flightClass=${this.cabinsVuelos}&lang=ES&json=${json}&email=${this.email}`;
+
+    this.url += '?rand=' + Math.round(Math.random() * 10000000000) + "&";
+    this.url += `adults=${this.distribution.adultos}&children=${this.distribution.ninos}&infants=${this.distribution.infantes}&selected_cabins=&excludedAirlines=null&multicity=null&json=${json}&email=${this.email}&flightType=${this.flightType}&flightClass=${this.distribution.clase}`;
+
+    //url = "/vuelos/resultados?directSubmit=true&tripType=ONLY_FLIGHT&flightType=2&adults=1&children=0&infants=0&flightClass=0&lang=ES&json=[{"departureLocation":"LIM Lima, Perú","arrivalLocation":"BOG Bogotá, Colombia","departureDate":"08/09/2022"},{"departureLocation":"LIM Lima, Perú","arrivalLocation":"BUE Buenos Aires (Todos Los Aeropuertos), Argentina","departureDate":"23/09/2022"}]&email="
+    //https://vuelos.nmviajes.com/#/nmviajes/search/resultados?rand=5547733007&adults=1&children=0&infants=0&selected_cabins=&excludedAirlines=null&multicity=null&json=%5B%7B%22departureLocation%22%3A%22LIM%20Lima%2C%20Per%C3%BA%22%2C%22arrivalLocation%22%3A%22BOG%20Bogot%C3%A1%2C%20Colombia%22%2C%22departureDate%22%3A%2208%2F09%2F2022%22%7D%2C%7B%22departureLocation%22%3A%22LIM%20Lima%2C%20Per%C3%BA%22%2C%22arrivalLocation%22%3A%22BUE%20Buenos%20Aires%20(Todos%20Los%20Aeropuertos)%2C%20Argentina%22%2C%22departureDate%22%3A%2223%2F09%2F2022%22%7D%5D&email=&flightType=2&flightClass=0
+
+    return this.url;
   }
 }
 
@@ -230,7 +241,7 @@ export class URLPaquete implements UrlNmViajes {
   }
 
   getUrl() {
-    return `${this.url}?country=${this.params.idDestino}&month=${this.params.idMonth}&nights=${this.params.idNoche}&themes=${this.params.idTheme}`;
+    return `${this.url}?country=${this.params.idDestino}&month=${this.params.idMonth}&nights=${this.params.idNoche}&theme=${this.params.idTheme}`;
   }
 }
 
@@ -304,7 +315,7 @@ export class ParamArmaTuViaje implements ParamsTabs {
     let startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
     let endDate = moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
     let destino = this.form.controls['destino'].value;
-    let businessClass = false;
+    let businessClass = this.form.controls['clase'].value == 'B';
     let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.label === destino).id : 0;
 
     return { startDate, endDate, destino, businessClass, idDestino };
@@ -377,6 +388,8 @@ export interface ParamsVuelosProps {
   citysDestinosSelect: any[];
   citysOrigenSelect: any[];
   email?: string;
+  clase: number;
+  tipoVuelo: number;
 }
 
 export class ParamsVuelos {
@@ -384,7 +397,7 @@ export class ParamsVuelos {
   public endDate: string;
   public origen: any;
   public destino: any;
-  public cabinsVuelos: EnumCabinsVuelos;
+  public cabinsVuelos: number;
   public idOrigen: string;
   public idDestino: string;
   public flightType: EnumFlightType;
@@ -396,7 +409,9 @@ export class ParamsVuelos {
       form,
       citysDestinosSelect,
       citysOrigenSelect,
-      email
+      email,
+      clase,
+      tipoVuelo
     }: ParamsVuelosProps
   ) {
     let startDateStr = fromDate!.day != undefined ? `${(fromDate!.day).toString()}/${(fromDate!.month).toString()}/${(fromDate!.year).toString()}` : fromDate;
@@ -406,9 +421,9 @@ export class ParamsVuelos {
     this.endDate = endDateStr ? moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY') : "";
     this.origen = form.controls['origen'].value;
     this.destino = form.controls['destino'].value;
-    this.cabinsVuelos = form.controls['clase'].value;
+    this.cabinsVuelos = clase;
     this.idOrigen = this.origen.codigo;
-    this.flightType = form.controls['viajes'].value;
+    this.flightType = tipoVuelo;
     this.idDestino = this.destino.codigo;
     this.email = email;
   }

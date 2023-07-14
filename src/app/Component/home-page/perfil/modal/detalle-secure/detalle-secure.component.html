@@ -1,0 +1,197 @@
+<ng-container *ngIf="data">
+  <div class="modal-header">
+    <div class="title">
+      <div class="textTitle">{{data.plan}}</div>
+    </div>
+    <button type="button" class="btn-close" (click)="ngbActiveModal.close()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="portletReserva lessMargin">
+      <div class="boxDetReserva">
+        <div class="headerPortlet">
+          <div class="titleBoxRight">Detalle de Reserva de Seguro</div>
+        </div>
+        <div class="contentPortlet">
+          <ul>
+            <li><span>Código de Reserva:</span> {{data.seguro_Res_Id}}</li>
+            <li><span>Fecha de Creación:</span> {{data.fec_Registro}}</li>
+            <li><span>Estado de Venta:</span> {{data.estado_Reserva}}</li>
+            <li><span>Counter Asignado(a): {{data.counter_Asignado}}</span></li>
+            <li><span>Cotización SRV: {{data.cot_Id}}</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="boxDetReserva">
+        <div class="headerPortlet">
+          <div class="titleBoxRight">Datos de Contacto</div>
+        </div>
+        <div class="contentPortlet">
+          <div class="rowPasajero">
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/confirm-user.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">
+                Nombre: {{data.contacto_Nom}} {{data.contacto_Ape}}
+              </div>
+            </div>
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/confirm-mail.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">Email: {{data.contacto_Email}}</div>
+            </div>
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/direccion.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">Dirección: <ng-container *ngIf="data.contacto_Direccion == ''">No Especificado</ng-container> <ng-container *ngIf="data.contacto_Direccion != ''">{{data.contacto_Direccion}}</ng-container></div>
+            </div>
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/confirm-phone.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">Teléfono: ({{data.telefono_Contacto.split(',')[1]}}) {{data.telefono_Contacto.replace(';','').split(',')[3]}}</div>
+            </div>
+
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/razons.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">Razón Social: {{data.razon_Social}}</div>
+            </div>
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/ruc.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">RUC: {{data.ruc}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boxDetReserva">
+        <div class="headerPortlet">
+          <div class="titleBoxRight">Plan Seleccionado</div>
+        </div>
+        <div class="contentPortlet">
+          <div class="rowPasajero">
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/plan.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">
+                Plan: {{data.plan}}
+              </div>
+            </div>
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/plan.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">Destino: {{data.destino}}</div>
+            </div>
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/plan.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">Pasajeros: {{data.asegurados.length}}</div>
+            </div>
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/plan.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">Edades:  {{this.edades}}</div>
+            </div>
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/plan.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">Fecha Salida: {{data.fec_Salida}}</div>
+            </div>
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/plan.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">Fecha Retorno: {{data.fec_Retorno}}</div>
+            </div>
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/plan.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">Monto Reserva: USD {{data.importe}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boxDetReserva">
+        <div class="headerPortlet">
+          <div class="titleBoxRight">Pasajeros Seguro</div>
+        </div>
+        <div class="contentPortlet tablet">
+          <div class="rowPasajero headCol">
+            <div class="colPasajero">Nro.</div>
+            <div class="colPasajero">Nombre</div>
+            <div class="colPasajero">Apellidos</div>
+            <div class="colPasajero">Fec. Nac.</div>
+            <div class="colPasajero">Tipo Doc.</div>
+            <div class="colPasajero">Nro. Doc.</div>
+          </div>
+          <div class="rowPasajero rowItem" *ngFor="let item of data.asegurados; let $index = index">
+            <div class="colPasajero">{{$index + 1}}</div>
+            <div class="colPasajero">{{item.asegurado_Nombre}}</div>
+            <div class="colPasajero">{{item.asegurado_Apellido}}</div>
+            <div class="colPasajero">{{item.fecha_Hb.split(' ')[0]}}</div>
+            <div class="colPasajero">{{item.tipo_Documento}}</div>
+            <div class="colPasajero">{{item.asegurado_Dni}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boxDetReserva">
+        <div class="headerPortlet">
+          <div class="titleBoxRight">Contacto de Emergencia</div>
+        </div>
+        <div class="contentPortlet">
+          <div class="rowPasajero">
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/confirm-user.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">
+                Nombre: {{data.contacto_Nom}} {{data.contacto_Ape}}
+              </div>
+            </div>
+            <div class="itemPasajero">
+              <div class="iconEquipaje">
+                <img src="./assets/confirm-phone.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">Teléfono: ({{data.telefono_Contacto.split(',')[1]}}) {{data.telefono_Contacto.replace(';','').split(',')[3]}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boxDetReserva">
+        <div class="headerPortlet">
+          <div class="titleBoxRight">Cobertura</div>
+        </div>
+        <div class="contentPortlet">
+          <!-- <div class="collapse multi-collapse" id="multiCollapseExample1"> -->
+          <div class="rowPasajero">
+            <div class="itemPasajero" *ngFor="let item of data.cobertura">
+              <div class="iconEquipaje">
+                <img src="./assets/cobertura.svg" alt="" />
+              </div>
+              <div class="labelEquipaje">
+                {{item}}
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

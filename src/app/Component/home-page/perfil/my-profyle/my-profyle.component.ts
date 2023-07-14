@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
 import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
 import * as bootstrap from 'bootstrap';
 
@@ -13,13 +11,11 @@ export class MyProfyleComponent implements OnInit {
 
   userStorage: UserStorage;
 
-  constructor(public accountService: AccountsService,
-    private router: Router) { }
+  constructor(public accountService: AccountsService) { }
 
   ngOnInit(): void {
     this.userStorage = this.accountService.getUserStorage();
   }
-
 
   toggleModalEliminar() {
     const modal = document.getElementById("ModalEliminaCorreo");
@@ -30,14 +26,4 @@ export class MyProfyleComponent implements OnInit {
 
     bootstrap.Modal.getOrCreateInstance(modal).toggle();
   }
-
-
-
-
-  id: any = "mnuPerfil";
-  showOption(ids: any) {
-    this.id = ids;
-    //console.log(this.id);
-  }
-
 }

@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -38,7 +38,9 @@ export class SettingService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+  ): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, SettingService.V1ApiSettingGetPath, 'get');
     if (params) {
@@ -51,7 +53,8 @@ export class SettingService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -72,7 +75,9 @@ export class SettingService extends BaseService {
     MuteExceptions: boolean;
     'Caller.Company': string;
     'Caller.Application': string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+  ): Observable<void> {
 
     return this.v1ApiSettingGet$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)

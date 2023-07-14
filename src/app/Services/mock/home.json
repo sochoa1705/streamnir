@@ -69,7 +69,7 @@
             "id": 4,
             "section": "Comprar",
             "title": "¿Por qué comprar en NMVIAJES?",
-            "img": "comprar.jpg",
+            "img": "comprar.webp",
             "card": [
                 {
                     "id": 0,
@@ -94,8 +94,8 @@
         {
             "id": 5,
             "section": "mailing",
-            "title": "Ofertas exclusivas",
-            "span": "Se el primero en recibir nuestras ofertas de viajes"
+            "title": "¡SUSCRÍBETE!",
+            "span": "Se el primero en recibir nuestras novedades y promociones"
         },
         {
             "id": 6,

@@ -6,6 +6,7 @@ import { CoverageService } from '../../../Services/coverage/coverage.service';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
 import { take } from 'rxjs/operators';
 import { NMRequest } from 'src/app/Models/base/NMRequest';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-seguros',
@@ -24,7 +25,7 @@ export class SegurosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    //localStorage.clear()
+
     //Se conecta al servicio destinos por unica vez
     if (localStorage.getItem('destiny') !== null) {
       this.destinyString = localStorage.getItem('destiny')
@@ -33,8 +34,36 @@ export class SegurosComponent implements OnInit {
       this.listDestiny()
     }
 
-    //localStorage.removeItem('Datasafe');
-    // console.log(this.dataPagePresenterService.data.sections[0].id === 0)
+    // Renombrando valores para SEO - Inicio
+    document.getElementsByTagName("title")[0].innerHTML = environment.SEO.insurance.title;
+
+    let description = document.getElementsByName('description')[0];
+    description.setAttribute("content", environment.SEO.insurance.description);
+
+    const canonical = document.querySelector("link[rel='canonical']")
+    canonical?.setAttribute("href", environment.SEO.insurance.url);
+
+    const alternate = document.querySelector("link[rel='alternate']")
+    alternate?.setAttribute("href", environment.SEO.insurance.url);
+
+    const og_title = document.querySelector("meta[property='og:title']")
+    og_title?.setAttribute("content", environment.SEO.insurance.title);
+
+    const og_description = document.querySelector("meta[property='og:description']")
+    og_description?.setAttribute("content", environment.SEO.insurance.description);
+
+    const og_image = document.querySelector("meta[property='og:image']")
+    og_image?.setAttribute("content", environment.SEO.insurance.image);
+
+    const og_image_height = document.querySelector("meta[property='og:image:height']")
+    og_image_height?.setAttribute("content", environment.SEO.insurance.height);
+
+    const og_image_width = document.querySelector("meta[property='og:image:width']")
+    og_image_width?.setAttribute("content", environment.SEO.insurance.width);
+
+    const og_url = document.querySelector("meta[property='og:url']")
+    og_url?.setAttribute("content", environment.SEO.insurance.url);
+    // Renombrando valores para SEO - Fin
   }
 
   listDestiny() {

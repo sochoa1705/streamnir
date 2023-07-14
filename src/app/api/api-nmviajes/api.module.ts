@@ -8,7 +8,10 @@ import { AirlineService } from './services/airline.service';
 import { DestinationService } from './services/destination.service';
 import { FlightService } from './services/flight.service';
 import { GalleryService } from './services/gallery.service';
+import { LocationService } from './services/location.service';
+import { MasterService } from './services/master.service';
 import { SettingService } from './services/setting.service';
+import { ThemeService } from './services/theme.service';
 
 /**
  * Module that provides all services and configuration.
@@ -22,7 +25,10 @@ import { SettingService } from './services/setting.service';
     DestinationService,
     FlightService,
     GalleryService,
+    LocationService,
+    MasterService,
     SettingService,
+    ThemeService,
     ApiConfiguration
   ],
 })

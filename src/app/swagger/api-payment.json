@@ -6,6 +6,37 @@
     "version": "1.0"
   },
   "paths": {
+    "/v1/api/Booking/status": {
+      "put": {
+        "tags": [
+          "Booking"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PutBookingCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PutBookingCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PutBookingCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/v1/api/Card": {
       "get": {
         "tags": [
@@ -14,6 +45,80 @@
         "parameters": [
           {
             "name": "Parameter.Bin",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.FromIP",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.FromBrowser",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Discount": {
+      "get": {
+        "tags": [
+          "Discount"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.Bin",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Parameter.TransactionCode",
             "in": "query",
             "schema": {
               "type": "string"
@@ -112,6 +217,248 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/RQ_PaymentCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Payment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PutPaymentCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PutPaymentCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PutPaymentCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/PayU/Confirm": {
+      "post": {
+        "tags": [
+          "PayU"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "response_code_pol": {
+                    "type": "string"
+                  },
+                  "test": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  },
+                  "payment_method_type": {
+                    "type": "string"
+                  },
+                  "email_buyer": {
+                    "type": "string"
+                  },
+                  "transaction_id": {
+                    "type": "string"
+                  },
+                  "sign": {
+                    "type": "string"
+                  },
+                  "payment_method_name": {
+                    "type": "string"
+                  },
+                  "state_pol": {
+                    "type": "string"
+                  },
+                  "reference_pol": {
+                    "type": "string"
+                  },
+                  "currency": {
+                    "type": "string"
+                  },
+                  "risk": {
+                    "type": "string"
+                  },
+                  "attempts": {
+                    "type": "string"
+                  },
+                  "merchant_id": {
+                    "type": "string"
+                  },
+                  "installments_number": {
+                    "type": "string"
+                  },
+                  "payment_method_id": {
+                    "type": "string"
+                  },
+                  "response_message_pol": {
+                    "type": "string"
+                  },
+                  "authorization_code": {
+                    "type": "string"
+                  },
+                  "transaction_date": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "response_code_pol": {
+                  "style": "form"
+                },
+                "test": {
+                  "style": "form"
+                },
+                "description": {
+                  "style": "form"
+                },
+                "value": {
+                  "style": "form"
+                },
+                "payment_method_type": {
+                  "style": "form"
+                },
+                "email_buyer": {
+                  "style": "form"
+                },
+                "transaction_id": {
+                  "style": "form"
+                },
+                "sign": {
+                  "style": "form"
+                },
+                "payment_method_name": {
+                  "style": "form"
+                },
+                "state_pol": {
+                  "style": "form"
+                },
+                "reference_pol": {
+                  "style": "form"
+                },
+                "currency": {
+                  "style": "form"
+                },
+                "risk": {
+                  "style": "form"
+                },
+                "attempts": {
+                  "style": "form"
+                },
+                "merchant_id": {
+                  "style": "form"
+                },
+                "installments_number": {
+                  "style": "form"
+                },
+                "payment_method_id": {
+                  "style": "form"
+                },
+                "response_message_pol": {
+                  "style": "form"
+                },
+                "authorization_code": {
+                  "style": "form"
+                },
+                "transaction_date": {
+                  "style": "form"
+                },
+                "date": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/PayU/Capture": {
+      "put": {
+        "tags": [
+          "PayU"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PaymentDeleteCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PaymentDeleteCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PaymentDeleteCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/PayU/Void": {
+      "delete": {
+        "tags": [
+          "PayU"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PaymentDeleteCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PaymentDeleteCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PaymentDeleteCE_Request1"
               }
             }
           }
@@ -284,6 +631,35 @@
             "description": "Success"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Transaction"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PutTransactionCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PutTransactionCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PutTransactionCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
       }
     }
   },
@@ -364,6 +740,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "BookingCode": {
+            "type": "integer",
+            "format": "int32"
+          },
           "DepartureDate": {
             "type": "string",
             "format": "date-time"
@@ -438,6 +818,28 @@
         },
         "additionalProperties": false
       },
+      "RQ_Document": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "Series": {
+            "type": "string",
+            "nullable": true
+          },
+          "Number": {
+            "type": "string",
+            "nullable": true
+          },
+          "Amount": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "RQ_Payment": {
         "type": "object",
         "properties": {
@@ -449,6 +851,14 @@
             "nullable": true
           },
           "TypeOfOperation": {
+            "type": "string",
+            "nullable": true
+          },
+          "ServiceDetail": {
+            "type": "string",
+            "nullable": true
+          },
+          "Validator": {
             "type": "string",
             "nullable": true
           },
@@ -500,6 +910,44 @@
         },
         "additionalProperties": false
       },
+      "RQ_PaymentDelete": {
+        "type": "object",
+        "properties": {
+          "TransactionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "OrderId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PaymentDeleteCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_PaymentDelete"
+          }
+        },
+        "additionalProperties": false
+      },
       "RQ_PostTransaction": {
         "type": "object",
         "properties": {
@@ -529,6 +977,13 @@
           },
           "Booking": {
             "$ref": "#/components/schemas/RQ_TransactionBooking"
+          },
+          "Documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RQ_Document"
+            },
+            "nullable": true
           },
           "Setting": {
             "$ref": "#/components/schemas/RQ_TransactionSetting"
@@ -560,6 +1015,127 @@
         },
         "additionalProperties": false
       },
+      "RQ_PutBooking": {
+        "type": "object",
+        "properties": {
+          "BookingId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Status": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PutBookingCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_PutBooking"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PutPayment": {
+        "type": "object",
+        "properties": {
+          "Method": {
+            "$ref": "#/components/schemas/PaymentMethodEnum"
+          },
+          "PaymentCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TypeOfOperation": {
+            "type": "string",
+            "nullable": true
+          },
+          "QuoteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "BookingId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PutPaymentCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_PutPayment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PutTransaction": {
+        "type": "object",
+        "properties": {
+          "TransactionCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PutTransactionCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_PutTransaction"
+          }
+        },
+        "additionalProperties": false
+      },
       "RQ_Setting": {
         "type": "object",
         "properties": {
@@ -568,6 +1144,10 @@
           },
           "HasAQuoteCode": {
             "type": "boolean"
+          },
+          "ExpirationTimeMinutes": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

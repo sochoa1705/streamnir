@@ -1,3 +1,6 @@
+<div class="preloader show" *ngIf="callFirstService">
+  <div class="loaderSpin"></div>
+</div>
 <div class="d-flex flex-row bg-white flex-column py-3 px-5 boxFilter hideMov" *ngIf="safe0Json.detailPay === 'safe'">
   <div class="d-flex flex-row">
     <a (click)="returnToPlans()">
@@ -34,7 +37,7 @@
     <input autocomplete="false" name="hidden" type="text" style="display:none;">
 
     <!-- VERSION MOBILE -->
-    <div class="row stepCard d-md-none d-block">
+    <div class="row stepCard onlyMovTablet">
       <mat-stepper [linear]="isLinear" #stepper label="Informacion de pasajeros"
         (selectionChange)="selectionChange($event)">
 
@@ -89,13 +92,14 @@
 
                   <div class="row rowMobileCard">
                     <div class="col-6 viewMobileWidth">
-                      <label>Nombres</label>
+                      <label>Nombres Modificado</label>
 
                       <input class="form-control" type="text" formControlName="nameCustomer"
                         (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
                         (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje.">
 
-                      <span class="valid" *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required">
+                      <span class="valid"
+                        *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required && customers.controls[i].get('nameCustomer')?.touched">
                         Ingresa los nombres del pasajero
                       </span>
                     </div>
@@ -107,7 +111,8 @@
                         (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)"
                         (drop)="denyDrop($event)" placeholder="El que figura en el documento de viaje.">
 
-                      <span class="valid" *ngIf="customers.controls[i].get('lastNameCustomer')?.errors?.required">
+                      <span class="valid"
+                        *ngIf="customers.controls[i].get('lastNameCustomer')?.errors?.required && customers.controls[i].get('lastNameCustomer')?.touched">
                         Ingresa los apellidos del pasajero
                       </span>
                     </div>
@@ -115,13 +120,17 @@
                     <div class="col-6 viewMobileWidth">
                       <label>Fecha de nacimiento</label>
 
-                      <div class="row  fecNacTab">
-                        <div class="col-2">
-                          <input class="form-control" minlength="1" maxlength="2" max="31" mask="0*"
-                            formControlName="dayCustomer" type="text" (keypress)="allowNumeric($event)"
-                            (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)">
+                      <div class="row fecNacTab">
+                        <div class="col-3">
+                          <select formControlName="dayCustomer" class="form-select-f">
+                            <option value="">Día</option>
+                            <option *ngFor="let day of days" value="{{day}}">{{day}}</option>
+                          </select>
+                          <span class="valid"
+                            *ngIf="customers.controls[i].get('dayCustomer')?.errors?.required && customers.controls[i].get('dayCustomer')?.touched">
+                            Selecciona el día
+                          </span>
                         </div>
-
 
                         <div class="col-6">
                           <select formControlName="monthCustomer" class="form-select-f">
@@ -129,9 +138,13 @@
                             <option *ngFor="let elem of months" [value]="elem.value">{{
                               elem.name }}</option>
                           </select>
+                          <span class="valid"
+                            *ngIf="customers.controls[i].get('monthCustomer')?.errors?.required && customers.controls[i].get('monthCustomer')?.touched">
+                            Selecciona el mes
+                          </span>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-3">
                           <select formControlName="yearCustomer" class="form-select-f">
                             <option value="" selected>Seleccione</option>
 
@@ -140,9 +153,12 @@
                             <option value="{{this.resultJson['aniosNacimiento'][i].anio - 1}}">
                               {{this.resultJson['aniosNacimiento'][i].anio - 1}}</option>
                           </select>
+                          <span class="valid"
+                            *ngIf="customers.controls[i].get('yearCustomer')?.errors?.required && customers.controls[i].get('yearCustomer')?.touched">
+                            Selecciona el año
+                          </span>
                         </div>
                       </div>
-
                     </div>
 
                     <div class="col-6 viewMobileWidth">
@@ -155,6 +171,10 @@
                           {{ elem.Name }}
                         </option>
                       </select>
+                      <span class="valid"
+                        *ngIf="customers.controls[i].get('nationalityCustomer')?.errors?.required && customers.controls[i].get('nationalityCustomer')?.touched">
+                        Selecciona la nacionalidad
+                      </span>
                     </div>
 
                     <div class="col-3 viewMobileWidth">
@@ -164,8 +184,13 @@
                         (change)="onChangeOfficialDocument(i)">
                         <option value="" selected>Seleccione</option>
                         <option value="DNI">DNI</option>
+                        <option value="PSP">Pasaporte</option>
                         <option value="CEX">C. Extranjería</option>
                       </select>
+                      <span class="valid"
+                        *ngIf="customers.controls[i].get('typeDocCustomer')?.errors?.required && customers.controls[i].get('typeDocCustomer')?.touched">
+                        Seleccione el tipo de documento
+                      </span>
                     </div>
 
                     <div class="col-3 viewMobileWidth">
@@ -173,6 +198,10 @@
                       <input class="form-control" formControlName="numDocCustomer" type="text"
                         (keypress)="allowOfficialDocument($event, i)" (paste)="denyPaste($event)"
                         (drop)="denyDrop($event)" name="ndocumento">
+                      <span class="valid"
+                        *ngIf="customers.controls[i].get('numDocCustomer')?.errors?.required && customers.controls[i].get('numDocCustomer')?.touched">
+                        Seleccione el número de documento
+                      </span>
                     </div>
 
                     <div class="col-6 viewMobileWidth">
@@ -191,6 +220,10 @@
                           <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
                         </div>
                       </div>
+                      <span class="valid"
+                        *ngIf="customers.controls[i].get('sexCustomer')?.errors?.required && customers.controls[i].get('sexCustomer')?.touched">
+                        Seleccione el sexo
+                      </span>
                     </div>
                   </div>
 
@@ -340,15 +373,16 @@
                     </div>
 
                     <div class="row card_pasajero rowMobileCard">
-                      <div class="col-6 viewMobileWidth">
+                      <div class="col-12 viewMobileWidth">
                         <label for="names">Dirección</label>
-                        <input class="form-control" placeholder="Ingrese la dirección" type="text" name="names">
+                        <input class="form-control" placeholder="Ingrese la dirección" type="text" name="names"
+                          maxlength="100">
                       </div>
 
-                      <div class="col-6 textDire viewMobileWidth">
+                      <!-- <div class="col-6 textDire viewMobileWidth">
                         <label for="names"></label>
                         <div>Emisión en max 24hrs aprox.</div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
 
@@ -359,14 +393,14 @@
                     </div>
 
                     <div class="row btnSafe">
-                      <div class="col-4 viewMobileWidth">
+                      <div class="col-5 viewMobileWidth">
                         <a class="btnBlue" [class.active]="id === 'banca'" value="true"
                           (click)="optionPay($event, true, 'banca');">Banca por internet o
                           Móvil
                         </a>
                       </div>
 
-                      <div class="col-4 viewMobileWidth">
+                      <div class="col-5 viewMobileWidth">
                         <a class="btnBlue" value="false" [class.active]="id === 'movil'"
                           (click)="optionPay($event, false, 'movil')">Agencias / Agentes</a>
                       </div>
@@ -400,8 +434,9 @@
 
                       <div class="row py-4 marginLat">
                         <div class="col-6 ">
-                          <a class="btnRed" href="#">Emisión automática después del pago.
-                          </a>
+                          <span
+                            style="font-family: Montserrat; font-weight: 600; font-size: 14px; line-height: 21px; letter-spacing: 0.1px; color: #df0c30;">Emisión
+                            automática después del pago.</span>
                         </div>
 
                         <div class="col-6 text-end">
@@ -459,7 +494,7 @@
                     </a>
                   </h2>
 
-                  <div *ngIf="showDetalle == true">
+                  <div *ngIf="showDetalle === true">
                     <div class="accordion-body">
                       <div class="row" *ngFor="let elem of safe0Json.tarifario">
                         <div class="col-7">
@@ -570,8 +605,9 @@
 
                       <select formControlName="typePhone0" class="form-select-f"
                         [ngClass]="{isvalid : validateContactForm('typePhone0')}">
-                        <option value="1">Fijo</option>
-                        <option value="2">Celular</option>
+                        <option value="" selected>Seleccione</option>
+                        <option value="2">Fijo</option>
+                        <option value="1">Celular</option>
                       </select>
 
                       <span class="valid" *ngIf="validateContactForm('typePhone0')">
@@ -656,7 +692,7 @@
 
                     <div class="col-8 viewMobileWidth">
                       <label for="dirección">Dirección</label>
-                      <input formControlName="direccion" class="form-control"
+                      <input formControlName="direccion" class="form-control" maxlength="100"
                         [ngClass]="{isvalid : validateContactForm('direccion')}" placeholder="Ca. / Jr. / Av.">
 
                       <span class="valid" *ngIf="validateContactForm('direccion')">
@@ -722,7 +758,7 @@
                     Al realizar esta compra, acepto los
                     <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#Modaltermino">&nbsp;términos y
                       condiciones de compra</a>,
-                    <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#reservaModal">&nbsp;condiciones de
+                    <a class="linkBlue" routerLink="/condiciones-de-reserva" target="_blank">&nbsp;condiciones de
                       reserva&nbsp;</a> y
                     <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#ModalCondicion">&nbsp;documentación de
                       viaje</a>.
@@ -731,28 +767,14 @@
               </div>
             </div>
 
-            <!-- <pre>Validaciones de formularios</pre>
-          
-                    <pre>FormShop valid: {{ formShop.valid }}</pre>
-                    <pre>FormShop values</pre>
-                    <pre>{{ formShop.value | json }}</pre>
-          
-                    <pre>PaymentMethodForm valid: {{ paymentMethodForm.valid }}</pre>
-                    <pre>PaymentMethodForm values</pre>
-                    <pre>{{ paymentMethodForm.value | json }}</pre>
-          
-                    <pre>ContactForm valid: {{ contactForm.valid }}</pre>
-                    <pre>ContactForm values</pre>
-                    <pre>{{ contactForm.value | json }}</pre>
-          
-                    <pre>ruc errors</pre>
-                    <pre>{{ contactForm.controls.ruc.errors | json }}</pre>
-                    <pre>direccion errors</pre>
-                    <pre>{{ contactForm.controls.direccion.errors | json }}</pre> -->
+            <div class="boxAlertMsg error" *ngIf="replyMessage.length > 0">
+              {{replyMessage}}
+            </div>
 
             <div class="row rowMobileCard ">
               <div class="col-12 contentCenterMobile">
-                <button mat-button class="px-5" [disabled]="pressedToBuy" (click)="buyInsurance()">Comprar</button>
+                <button mat-button class="px-5" id="btnComprar1" [disabled]="pressedToBuy"
+                  (click)="buyInsurance()">Comprar</button>
               </div>
             </div>
           </div>
@@ -763,7 +785,7 @@
     <!-- END VERSION MOBILE -->
 
     <!-- VERSION DESKTOP -->
-    <div class="row pt-md-3">
+    <div class="row pt-md-3 onlydesktop">
       <div class="col-8 viewMobileWidth order-1 order-md-0 ">
         <h1 class="titleMob d-md-block d-none">{{ safe0Json?.title }}</h1>
 
@@ -812,7 +834,8 @@
                       (keypress)="allowAlphabetic($event)" (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                       placeholder="El que figura en el documento de viaje.">
 
-                    <span class="valid" *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required">
+                    <span class="valid"
+                      *ngIf="customers.controls[i].get('nameCustomer')?.errors?.required && customers.controls[i].get('nameCustomer')?.touched">
                       Ingresa los nombres del pasajero
                     </span>
                   </div>
@@ -824,7 +847,8 @@
                       (paste)="onPasteAlphabetic($event)" (drop)="denyDrop($event)"
                       placeholder="El que figura en el documento de viaje." type="text">
 
-                    <span class="valid" *ngIf="customers.controls[i].get('lastNameCustomer')?.errors?.required">
+                    <span class="valid"
+                      *ngIf="customers.controls[i].get('lastNameCustomer')?.errors?.required && customers.controls[i].get('lastNameCustomer')?.touched">
                       Ingresa los apellidos del pasajero
                     </span>
                   </div>
@@ -835,29 +859,42 @@
                     <label for="names">Fecha de nacimiento</label>
 
                     <div class="row">
-                      <div class="col-2">
-                        <input class="form-control" minlength="1" maxlength="2" max="31" mask="0*"
-                          formControlName="dayCustomer" type="text" (keypress)="allowNumeric($event)"
-                          (paste)="onPasteNumeric($event)" (drop)="denyDrop($event)">
+                      <div class="col-3">
+                        <select formControlName="dayCustomer" class="form-select-f">
+                          <option value="">Día</option>
+                          <option *ngFor="let day of days" value="{{day}}">{{day}}</option>
+                        </select>
+                        <span class="valid"
+                          *ngIf="customers.controls[i].get('dayCustomer')?.errors?.required && customers.controls[i].get('dayCustomer')?.touched">
+                          Selecciona el día
+                        </span>
                       </div>
 
                       <div class="col-6">
                         <select formControlName="monthCustomer" class="form-select-f">
-                          <option value="" selected>Seleccione</option>
+                          <option value="" selected>Mes</option>
                           <option *ngFor="let elem of months" [value]="elem.value">{{
                             elem.name }}</option>
                         </select>
+                        <span class="valid"
+                          *ngIf="customers.controls[i].get('monthCustomer')?.errors?.required && customers.controls[i].get('monthCustomer')?.touched">
+                          Selecciona el mes
+                        </span>
                       </div>
 
-                      <div class="col-4">
+                      <div class="col-3">
                         <select formControlName="yearCustomer" class="form-select-f">
-                          <option value="" selected>Seleccione</option>
+                          <option value="" selected>Año</option>
 
                           <option value="{{this.resultJson['aniosNacimiento'][i].anio}}">
                             {{this.resultJson['aniosNacimiento'][i].anio}}</option>
                           <option value="{{this.resultJson['aniosNacimiento'][i].anio - 1}}">
                             {{this.resultJson['aniosNacimiento'][i].anio - 1}}</option>
                         </select>
+                        <span class="valid"
+                          *ngIf="customers.controls[i].get('yearCustomer')?.errors?.required && customers.controls[i].get('yearCustomer')?.touched">
+                          Selecciona el año
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -871,6 +908,10 @@
                         {{ elem.Name }}
                       </option>
                     </select>
+                    <span class="valid"
+                      *ngIf="customers.controls[i].get('nationalityCustomer')?.errors?.required && customers.controls[i].get('nationalityCustomer')?.touched">
+                      Selecciona la nacionalidad
+                    </span>
                   </div>
                 </div>
 
@@ -882,8 +923,13 @@
                       (change)="onChangeOfficialDocument(i)">
                       <option value="" selected>Seleccione</option>
                       <option value="DNI">DNI</option>
+                      <option value="PSP">Pasaporte</option>
                       <option value="CEX">C. Extranjería</option>
                     </select>
+                    <span class="valid"
+                      *ngIf="customers.controls[i].get('typeDocCustomer')?.errors?.required && customers.controls[i].get('typeDocCustomer')?.touched">
+                      Seleccione el tipo de documento
+                    </span>
                   </div>
 
                   <div class="col-3 viewMobileWidth">
@@ -892,6 +938,10 @@
                     <input class="form-control" formControlName="numDocCustomer" maxlength="12" type="text"
                       (keypress)="allowOfficialDocument($event, i)" (paste)="denyPaste($event)"
                       (drop)="denyDrop($event)" name="ndocumento">
+                    <span class="valid"
+                      *ngIf="customers.controls[i].get('numDocCustomer')?.errors?.required && customers.controls[i].get('numDocCustomer')?.touched">
+                      Seleccione el número de documento
+                    </span>
                   </div>
 
                   <div class="col-6 viewMobileWidth">
@@ -910,6 +960,10 @@
                         <label class="form-check-label" for="sexFem{{i}}">Femenino</label>
                       </div>
                     </div>
+                    <span class="valid"
+                      *ngIf="customers.controls[i].get('sexCustomer')?.errors?.required && customers.controls[i].get('sexCustomer')?.touched">
+                      Seleccione el sexo
+                    </span>
                   </div>
                 </div>
 
@@ -966,8 +1020,11 @@
                     <div class="col-6 viewMobileWidth">
                       <label>Número de tarjeta</label>
 
-                      <input class="form-control" formControlName="numberCard" mask="0000-0000-0000-0000"
-                        placeholder="Ingrese el número de tarjeta." type="text" (blur)="validarTarjeta()">
+                      <!-- <input class="form-control" formControlName="numberCard" mask="0000-0000-0000-0000"
+                        placeholder="Ingrese el número de tarjeta." type="text" (blur)="validarTarjeta()"> -->
+
+                      <input class="form-control" formControlName="numberCard"
+                        placeholder="Ingrese el número de tarjeta." type="text">
                     </div>
 
                     <div class="col-6 viewMobileWidth">
@@ -1065,17 +1122,17 @@
                   </div>
 
                   <div class="row card_pasajero rowMobileCard pb-sm-4">
-                    <div class="col-6 viewMobileWidth">
+                    <div class="col-12 viewMobileWidth">
                       <label for="names">Dirección</label>
 
                       <input class="form-control" formControlName="address" placeholder="Ingrese la dirección"
                         type="text" name="names">
                     </div>
 
-                    <div class="col-6 textDire viewMobileWidth">
+                    <!-- <div class="col-6 textDire viewMobileWidth">
                       <label for="names"></label>
                       <div>Emisión en max 24hrs aprox.</div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 <!-- END FORM TARJETA -->
@@ -1088,13 +1145,13 @@
 
                   <!-- OPCIONES SAFETYPAY -->
                   <div class="row btnSafe">
-                    <div class="col-4 viewMobileWidth">
+                    <div class="col-5 viewMobileWidth">
                       <a class="btnBlue" [class.active]="id === 'banca'" value="true"
                         (click)="optionPay($event, true, 'banca');">Banca por internet o Móvil
                       </a>
                     </div>
 
-                    <div class="col-4 viewMobileWidth">
+                    <div class="col-5 viewMobileWidth">
                       <a class="btnBlue" value="false" [class.active]="id === 'movil'"
                         (click)="optionPay($event, false,'movil')">Agencias/Agentes</a>
                     </div>
@@ -1130,8 +1187,10 @@
                     </div>
 
                     <div class="row py-4 marginLat">
-                      <div class="col-6 ">
-                        <a class="btnRed" href="#">Emisión automática después del pago.</a>
+                      <div class="col-6">
+                        <span
+                          style="font-family: Montserrat; font-weight: 600; font-size: 14px; line-height: 21px; letter-spacing: 0.1px; color: #df0c30;">Emisión
+                          automática después del pago.</span>
                       </div>
                       <div class="col-6 text-end">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#ModalBlue">¿Como pagar con SafetyPay
@@ -1290,8 +1349,9 @@
 
                     <select formControlName="typePhone0" class="form-select-f"
                       [ngClass]="{isvalid : validateContactForm('typePhone0')}">
-                      <option value="1">Fijo</option>
-                      <option value="2">Celular</option>
+                      <option value="" selected>Seleccione</option>
+                      <option value="2">Fijo</option>
+                      <option value="1">Celular</option>
                     </select>
 
                     <span class="valid" *ngIf="validateContactForm('typePhone0')">
@@ -1375,7 +1435,7 @@
 
                   <div class="col-12 viewMobileWidth">
                     <label for="direccion">Dirección</label>
-                    <input formControlName="direccion" class="form-control"
+                    <input formControlName="direccion" class="form-control" maxlength="100"
                       [ngClass]="{isvalid : validateContactForm('direccion')}" placeholder="Ca. / Jr. / Av.">
 
                     <span class="valid" *ngIf="validateContactForm('direccion')">
@@ -1442,7 +1502,7 @@
                   <a class="linkBlue" routerLink="/terminos-condiciones" target="_blank">&nbsp;términos y condiciones
                     de
                     compra</a>,
-                  <a class="linkBlue" data-bs-toggle="modal" data-bs-target="#reservaModal">&nbsp;condiciones de
+                  <a class="linkBlue" routerLink="/condiciones-de-reserva" target="_blank">&nbsp;condiciones de
                     reserva&nbsp;</a> y
                   <a class="linkBlue" routerLink="/documentacion-viaje" target="_blank">&nbsp;documentación de
                     viaje</a>.
@@ -1470,10 +1530,13 @@
           <pre>direccion errors</pre>
           <pre>{{ contactForm.controls.direccion.errors | json }}</pre> -->
 
+          <div class="boxAlertMsg error" *ngIf="replyMessage.length > 0">
+            {{replyMessage}}
+          </div>
 
           <div class="row rowMobileCard ">
             <div class="col-12 contentCenterMobile">
-              <button [disabled]="pressedToBuy" (click)="buyInsurance()" class="px-5">Comprar</button>
+              <button [disabled]="pressedToBuy" id="btnComprar2" (click)="buyInsurance()" class="px-5">Comprar</button>
             </div>
           </div>
         </div>
@@ -1490,11 +1553,11 @@
             <h2 class="accordion-header">
               <a class="accordion-button" (click)="showVerDetalle()">
                 Ver detalles
-                <img src="./assets/footer/flecha.png" alt="" class="iconFlecha">
+                <img src="./assets/footer/flecha.webp" alt="" class="iconFlecha">
               </a>
             </h2>
 
-            <div *ngIf="showDetalle == true">
+            <div *ngIf="showDetalle === true">
               <div class="accordion-body">
                 <div class="row" *ngFor="let elem of safe0Json.tarifario">
                   <div class="col-6">
@@ -1671,45 +1734,7 @@
         </p>
 
         <p>Mayor información sobre la política de protección y tratamiento de datos
-          <a class="redLink" href="#">aquí.</a>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL CONDICIONES DE RESERVA -->
-<div class="modal fade" id="reservaModal" tabindex="-1" aria-labelledby="reservaModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="titleMod">Condiciones de Reserva de tu Vuelo</div>
-        <div class="d-flex">
-          <svg width="19" height="7" viewBox="0 0 19 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.5834 7L0 0H19L9.5834 7Z" fill="white" />
-          </svg>
-        </div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="titleModal">
-          ESTA TARIFA ES
-        </div>
-        <ul class="listModal">
-          <li>No reembolsable</li>
-          <li>No permite cambios</li>
-        </ul>
-        <div class="subtitleMod">
-          Tarifa sujeta a cambios hasta el momento de emisión
-        </div>
-        <p>
-          <strong>Recomendación :</strong>
-        </p>
-
-        <p>Los cambios de nombres NO están permitidos, revise los nombres y apellidos de los pasajeros deben coincidir
-          con la documentación que presenten en el aeropuerto el día del vuelo. Si los datos del boleto electrónico, no
-          coinciden, las aerolíneas
-          y/o proveedores podrán negar el derecho a embarque o uso del servicio.
+          <a routerLink="/politicas" target="_blank">aquí.</a>
         </p>
       </div>
     </div>

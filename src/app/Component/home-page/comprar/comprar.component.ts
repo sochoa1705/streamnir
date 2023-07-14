@@ -1,31 +1,44 @@
-
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface';
 import { CoverageService } from 'src/app/Services/coverage/coverage.service';
 import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { take } from 'rxjs/operators';
-import { ICardRequest, IFiltroVuelo } from './interfaces/comprar.interfaces';
+import { IFiltroVuelo } from './interfaces/comprar.interfaces';
 import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
 import { ActualizarCodigoSafetyPaySeguroRQ, RegistrarSeguroRQ } from '../../../Models/seguros/registroRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
 import { SecureBookingService } from '../../../Services/secureBooking/secure-booking.service';
 import { Guid, toUp, Utilities } from 'src/app/shared/utils';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { CardPaymentService } from 'src/app/Services/cardPayment/card-payment.service';
-import { GeneratePayService } from 'src/app/Services/generatePay/generate-pay.service';
 import { CardService, PaymentService } from 'src/app/api/api-payment/services';
 import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/models';
-import * as moment from 'moment';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
-import { ActionFieldCheckout, ActionFieldCheckoutOption, Checkout, CheckoutOption, EcommerceCheckout, EcommercecheckoutOption, ModelTaggingCheckout, ModelTaggingcheckoutOption, ProductAddToCart } from 'src/app/Services/analytics/tagging.models';
+import {
+  ActionFieldCheckout,
+  Checkout,
+  EcommerceCheckout,
+  ModelTaggingCheckout,
+  ProductAddToCart,
+  TravelInsuranceCheckout,
+  TravelInsurancePassengerInfo,
+  TravelInsurancePaymentMethodSelected
+} from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { MessageService } from 'src/app/api/api-correos/services';
-import { CeResponse, CeSeguroCeEmailParameterCustomCeRequest1, EnumRequestApplications, EnumRequestCompanies } from 'src/app/api/api-correos/models';
+import {
+  CeResponse,
+  CeSeguroCeEmailParameterCustomCeRequest1,
+  EnumRequestApplications,
+  EnumRequestCompanies
+} from 'src/app/api/api-correos/models';
 import { UtilService } from 'src/app/Services/util/util.service';
+import { CryptoService } from 'src/app/Services/util/crypto.service';
+import { Subscription } from 'rxjs';
+import * as moment from 'moment';
 
 interface Methods {
   id: string;
@@ -41,28 +54,23 @@ interface Methods {
   templateUrl: './comprar.component.html',
   styleUrls: ['./comprar.component.scss']
 })
-export class ComprarComponent implements OnInit, AfterViewInit {
+export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   formShop!: FormGroup;
   paymentMethodForm: FormGroup;
   contactForm: FormGroup;
+	genderSubscription = new Subscription();
 
   errors: any[] = [];
-  MSG_EMPTY: string = 'none';
   //COBERTURA
 
   showInvoiceData: boolean = false;
-
-  coverageDisplay: boolean = false;
   unidadNegocio: any;
   businessunit: any;
   // coverageList: any
   coverageL: any;
   asistMedic: any;
   asistenciaMedicaMonto: number;
-  listBank: any;
-  timeShow!: number;
-  ShowComponentTime!: boolean;
 
   countries: Array<any> = [];
   months: Array<any> = [];
@@ -88,6 +96,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   banca: boolean = true
 
   pressedToBuy: boolean = false;
+  callFirstService: boolean = false;
 
   banks = [
     { name: 'Banco de Crédito', value: 1005 },
@@ -110,8 +119,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   detalleVuelos: any;
 
   modalDetalle: any | null;
-
-  resevaVuelo: any
   shopData: any
   shopString: any
   token: any
@@ -127,7 +134,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   reservation: any
   dataShop: any
-  bankSteps: any
   paymentData: any
 
   @ViewChild('adultoCdr', { static: false }) adulto!: ElementRef<HTMLInputElement>
@@ -136,10 +142,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   nombre: string;
   apellido: string;
-  showAgregarAdulto: boolean = true;
   showDetalle: boolean = false;
-  showAdulto: number;
-
   checkedCard = false;
 
   isVisa = false;
@@ -155,13 +158,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   ip: string = '';
 
+  days: any[] = [];
+
+  replyMessage: string = '';
+
   constructor(
     private _router: Router,
     private _coverageService: CoverageService,
     private _loaderSubjectService: LoaderSubjectService,
     private _secureBookingService: SecureBookingService,
-    private _cardPaymentService: CardPaymentService,
-    private _generatePayService: GeneratePayService,
     private _paymentService: PaymentService,
     private _preferencesService: PreferenceService,
     private _validatorsService: ValidatorsService,
@@ -169,7 +174,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     private _formBuilder: FormBuilder,
     private _notification: NotificationService,
     private _messageService: MessageService,
-    public utilService: UtilService
+    public utilService: UtilService,
+    private _cryptoService: CryptoService
   ) {
     // COBERTURA
     this.coverageList = localStorage.getItem('coverage');
@@ -203,11 +209,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     console.log("safe0Json", this.safe0Json);
     console.log(screen.width);
 
-    if (screen.width < 769) {
-      this.mobile = true
-    } else {
-      this.mobile = false
-    }
+    this.mobile = screen.width < 769;
 
     this.current = this._router.getCurrentNavigation()!.extras.state as any
     if (!this.current) {
@@ -218,11 +220,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     if (this.current['filter'] === 'filter') {
       this.metodoPago = [
         { name: 'optionm-1', value: 'TARJETA', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: true, id: "0" },
-        { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: false, id: "1" },
+        { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/safety.webp', text: 'Banca por internet / Agencias', checked: false, id: "1" },
       ]
     } else {
       this.metodoPago = [
-        { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/_safety.png', text: 'Banca por internet / Agencias', checked: true, id: "1" },
+        { name: 'optionm-2', value: 'SAFETYPAY', img: '/footer/safety.webp', text: 'Banca por internet / Agencias', checked: true, id: "1" },
         { name: 'optionm-1', value: 'TARJETA', img: '/credit-card.png', text: 'Tarjeta de crédito o débito', checked: false, id: "0" },
       ]
     }
@@ -235,7 +237,40 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    let userID: string = '';
+    let user_existingCustomer: boolean = false;
+    const credentials = localStorage.getItem('usuario');
+    const bookings = localStorage.getItem('bookings');
+
+    if (credentials) {
+      const credentialsJson = JSON.parse(credentials);
+      userID = this._cryptoService.encrypt(credentialsJson.email);
+
+      if (bookings)
+        user_existingCustomer = JSON.parse(bookings).length > 0;
+    }
+
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({
+      event: "user_info",
+      userID: userID,
+      user_existingCustomer: user_existingCustomer
+    });
+
+    (window as any).dataLayer.push({
+      event: "virtualPageView",
+      virtualPagePath: "/comprar",
+      virtualPageTitle: "NMV: Compra de seguro"
+    });
+
     this.getIp();
+
+    let daysDef = 31;
+
+    for (let i = 1; i <= daysDef; i++) {
+      this.days.push(i);
+    }
+
     this.count = 0;
     this.countAdulto = 0;
     this.countInfante = 0;
@@ -282,7 +317,10 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.getCountries();
 
     if (this.current['filter'] !== 'filter') this.listCoverage();
+
     this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
+    this.sendEventOnLoad(this.safe0Json, this.resultJson)
+    this.listenFormCustomers();
   }
 
   getCountries() {
@@ -338,7 +376,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       typeCustomer: [""],
       nameCustomer: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(this._validatorsService.lettersPattern)]],
       lastNameCustomer: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(this._validatorsService.lettersPattern)]],
-      dayCustomer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.min(1), Validators.max(31), Validators.pattern(this._validatorsService.digitsPattern)]],
+      //dayCustomer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.min(1), Validators.max(31), Validators.pattern(this._validatorsService.digitsPattern)]],
+      dayCustomer: ['', Validators.required],
       monthCustomer: ['', [Validators.required]],
       yearCustomer: ['', [Validators.required]],
       nationalityCustomer: ['', [Validators.required]],
@@ -420,18 +459,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   private checkCardService(): void {
     let nroTarjeta: string = this.paymentMethodForm.controls['numberCard'].value;
     if (nroTarjeta.length > 15) {
-      let data: ICardRequest = {
-        MuteExceptions: false,
-        TrackingCode: Guid(),
-        Caller: {
-          Application: 'Agil',
-          Company: 'Interagencias'
-        },
-        Parameter: {
-          Number: this.paymentMethodForm.controls['numberCard'].value
-        }
-      };
-
       this._cardService.v1ApiCardGet({
         'Parameter.Bin': this.paymentMethodForm.controls['numberCard'].value,
         TrackingCode: Guid(),
@@ -491,7 +518,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
   showDataContacto: Boolean = true;
 
   showDataContact() {
-    this.showDataContacto = this.showDataContacto ? false : true;
+    this.showDataContacto = !this.showDataContacto;
   }
 
   ngAfterViewInit() {
@@ -501,34 +528,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  toCustomer(e: any) {
-    let chk = e.target.checked
-
-    let customerName = this.formShop.getRawValue()['customers'][0]['nameCustomer'];
-    let customerLastName = this.formShop.getRawValue()['customers'][0]['lastNameCustomer'];
-
-    if (chk) {
-      this.inputNameContactForm.nativeElement.value = customerName
-      this.inputLastNameContactForm.nativeElement.value = customerLastName
-
-      this.inputNameContactForm.nativeElement.focus()
-
-    } else {
-      this.inputNameContactForm.nativeElement.value = ''
-      this.inputLastNameContactForm.nativeElement.value = ''
-    }
-  }
-
-  getMessage(messageKey: any) {
-    return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
-  }
-
-  getMessageArray(index: any, messageKey: any) {
-    return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
-  }
-
-  get customers() {
-    return this.formShop.get('customers') as FormArray;
+  get customers(): any {
+    return this.formShop ? this.formShop.get('customers') as FormArray : null;
   }
 
   loadShop(): void {
@@ -588,14 +589,15 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       if (e === 'optionm-1' || e === 'option-1')
         this.selectedPay = 'tarjeta';
       else
-        this.selectedPay = 'safety';
+        this.selectedPay = 'safety'
+
+      this.sendPaymentMethodSelectEvent(this.selectedPay.toUpperCase());
     }
   }
 
   id: any = "banca";
 
   optionPay(e: any, isBankingOrMobile: boolean, ids: any) {
-
     this.banca = isBankingOrMobile;
     this.id = ids;
     const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer'])?.Name;
@@ -615,8 +617,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           }
         }
-      }
-
+      };
       TaggingService.tagNationalitySelection(model1);
 
       const model = {
@@ -628,37 +629,222 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           }
         }
-      }
-
+      };
       TaggingService.tagStartOfPaymentMethods(model);
+      this.sendPaymentMethodSelectEvent(this.selectedPay.toUpperCase());
     }
   }
 
   buyInsurance(): void {
-    console.log('1. buyInsurance');
+    if (this.validateForm()) {
+      this.pressedToBuy = true;
+      this.callFirstService = true;
 
-    if (this.formShop.invalid)
-      this.formShop.markAllAsTouched();
+      console.log('1. buyInsurance');
 
-    if (this.paymentMethodForm.invalid)
-      this.paymentMethodForm.markAllAsTouched();
+      /* if (this.formShop.invalid)
+        this.formShop.markAllAsTouched();
 
-    if (this.contactForm.invalid)
-      this.contactForm.markAllAsTouched();
+      if (this.paymentMethodForm.invalid)
+        this.paymentMethodForm.markAllAsTouched();
 
-    if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
-      return;
+      if (this.contactForm.invalid)
+        this.contactForm.markAllAsTouched();
 
-    this.pressedToBuy = true;
+      if (this.formShop.invalid || this.paymentMethodForm.invalid || this.contactForm.invalid)
+        return; */
 
-    this.formShop.addControl('tipoRecibo', new FormControl('BV'));
-    this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioEmisionLocal));
+      this.formShop.addControl('tipoRecibo', new FormControl('BV'));
+      this.formShop.addControl('PriceTotal', new FormControl(this.safe0Json.precioEmisionLocal));
 
-    this.dataShop = this.formShop.value;
-    let dataShop = this.formShop.value;
-    localStorage.setItem('shop', JSON.stringify(dataShop));
+      this.dataShop = this.formShop.value;
+      let dataShop = this.formShop.value;
+      localStorage.setItem('shop', JSON.stringify(dataShop));
 
-    this.generateInsuranceReserve(dataShop);
+      this.generateInsuranceReserve(dataShop);
+    }
+  }
+
+	listenFormCustomers() {
+		this.genderSubscription = this.formShop
+				.get([ 'customers', (<FormArray>this.formShop.get('customers')).length - 1, 'sexCustomer' ])!.valueChanges
+				.subscribe(() => {
+					setTimeout(() => {
+						if (this.validateFormCustomers(true))
+							this.sendPassengerInfoEvent();
+					}, 500);
+				});
+	}
+
+  sendPassengerInfoEvent() {
+    const model: TravelInsurancePassengerInfo = {
+      event: 'nmv_seguros_checkout_ingresarDatos',
+      precio: {
+        moneda: this.safe0Json.monedaLocal,
+        precioFinal: Number(this.totalToPay),
+        precioNormal: Number(this.safe0Json.precioBrutoLocal)
+      },
+      usuario: this.getGenericCheckoutDataForEvent().usuario,
+      origen: this.getGenericCheckoutDataForEvent().origen,
+      destino: this.getGenericCheckoutDataForEvent().destino,
+      seguro: this.getGenericCheckoutDataForEvent().seguro,
+      pasajeros: this.getGenericCheckoutDataForEvent().pasajeros,
+      fechas: this.getGenericCheckoutDataForEvent().fechas
+    };
+    TaggingService.tagTravelInsurancePassengerInfo(model);
+  }
+
+  sendPaymentMethodSelectEvent(paymentMethod: string) {
+    const model: TravelInsurancePaymentMethodSelected = {
+      event: 'nmv_seguros_checkout_seleccionarPago',
+      precio: {
+        moneda: this.safe0Json.monedaLocal,
+        precioFinal: Number(this.totalToPay),
+        precioNormal: Number(this.safe0Json.precioBrutoLocal)
+      },
+      metodo_pago: {
+        opcion: paymentMethod == 'SAFETY' ? 'SAFETYPAY' : paymentMethod
+      },
+      usuario: this.getGenericCheckoutDataForEvent().usuario,
+      origen: this.getGenericCheckoutDataForEvent().origen,
+      destino: this.getGenericCheckoutDataForEvent().destino,
+      seguro: this.getGenericCheckoutDataForEvent().seguro,
+      pasajeros: this.getGenericCheckoutDataForEvent().pasajeros,
+      fechas: this.getGenericCheckoutDataForEvent().fechas
+    };
+    TaggingService.tagTravelInsurancePaymentMethodSelected(model);
+  }
+
+  private getGenericCheckoutDataForEvent() {
+    const firstCustomer = (<FormArray>this.formShop.controls['customers']).controls[0];
+    const fechaNacimiento = `${firstCustomer.get('yearCustomer')!.value}-${firstCustomer.get('monthCustomer')!.value}-${firstCustomer.get('dayCustomer')!.value}`;
+    return {
+      usuario: {
+        email: this.contactForm.get('mailContacto')?.value || '',
+        primerNombre: firstCustomer.get('nameCustomer')!.value,
+        primerApellido: firstCustomer.get('lastNameCustomer')!.value,
+        fechaNacimiento: moment(fechaNacimiento, 'YYYY-MM-D').format('YYYY-MM-DD'),
+        nacionalidad: firstCustomer.get('nationalityCustomer')!.value,
+        genero: firstCustomer.get('sexCustomer')!.value,
+        documento_tipo: firstCustomer.get('typeDocCustomer')!.value,
+        documento_numero: firstCustomer.get('numDocCustomer')!.value,
+        telefono_tipo: this.contactForm.get('typePhone0')?.value || '',
+        telefono_codigo: this.contactForm.get('code0')?.value || '',
+        telefono_numero: this.contactForm.get('numberPhone0')?.value || '',
+        frecuencia: firstCustomer.get('typeCustomer')!.value
+      },
+      origen: {
+        nombre: 'Perú',
+        codigo: 'PE',
+        pais: 'Perú'
+      },
+      destino: {
+        nombre: this.resultJson.destinyString.descripcion_destino,
+        codigo: this.resultJson.destinyString.id_destino,
+        pais: ''
+      },
+      seguro: {
+        plan: this.safe0Json.nombreProducto,
+        codigo: this.safe0Json.codProducto,
+        opcion: this.safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+        emisor: 'AssistCard',
+        monto_asistencia: this.asistenciaMedicaMonto,
+        precioFinal: Number(this.totalToPay),
+        posicion: 0
+      },
+      pasajeros: {
+        adultos: this.countAdulto,
+        ninos: this.countNinio,
+        infantes: this.countInfante,
+        total: this.resultJson.passengers.length
+      },
+      fechas: {
+        salida: moment(this.resultJson.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: moment(this.resultJson.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        estadia: Number(this.resultJson.days)
+      }
+    }
+  }
+
+  validateForm(): boolean {
+    const dataShop = this.formShop.value;
+    console.log('data shop', dataShop);
+    if (!this.validateFormCustomers()) {
+      window.scrollTo(0, 0);
+      return false;
+    }
+    if (!this.validateCheckFormCustomers()) {
+      return false;
+    }
+    if (!this.validateFormContact()) {
+      return false;
+    }
+
+    if (dataShop.paymentMethodForm.select21 == 'TARJETA') {
+      if (!this.validateFormPayment()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  validateFormCustomers(fromSubscription: boolean = false): boolean {
+    let validate = true;
+    let candidates: [] = this.formShop.value.customers;
+
+    if (candidates.length == 0) return false;
+
+    candidates.forEach((x: any) => {
+      if (x.nameCustomer == '' || x.lastNameCustomer == '' || x.dayCustomer == '' || x.monthCustomer == '' || x.yearCustomer == '' ||
+          x.nationalityCustomer == '' || x.typeDocCustomer == '' || x.numDocCustomer == '' || x.sexCustomer == '') {
+        validate = false;
+        return;
+      }
+    });
+
+    if (!validate && !fromSubscription)
+      this._notification.showNotificacion("Error", "Debe ingresar todos los datos obligatorios del(os) pasajero(s)");
+
+    return validate;
+  }
+
+  validateCheckFormCustomers(): boolean {
+    let data = this.formShop.value;
+    if (!data.chkPolity) {
+      this._notification.showNotificacion("Error", "Debe aceptar las políticas de protección de datos personales");
+      return false;
+    }
+    // } else if (!data.chkPolity) {
+    //   this._notification.showNotificacion("Error", "Debe aceptar el uso de la información de publicidad");
+    //   return false;
+    // }
+    return true;
+  }
+
+  validateFormContact(): boolean {
+    let validate = true;
+    let data = this.formShop.value.contactForm;
+    if (data.nameContacto == '' || data.lastnameContacto == '' || data.mailContacto == '' || data.mailConfirmContacto == '' || data.typePhone0 == '' || data.numberPhone0 == '') {
+      validate = false;
+    }
+
+    if (data.invoiceRequestBox && (data.ruc == '' || data.razonSocial == '' || data.direccion == '')) {
+      validate = false;
+    }
+
+    if (!validate) {
+      this._notification.showNotificacion("Error", "Debe ingresar todos los datos de contacto");
+    }
+    return validate;
+  }
+
+  validateFormPayment(): boolean {
+    let validate = true;
+    let data = this.formShop.value.paymentMethodForm;
+    if (data.nameCard == '' || data.numberCard == '' || data.expiredCard == '' || data.ccvCard == '' || data.tipoDoc == '' || data.numDoc == '' || data.feePay == '' || data.address == '' || data.cityCard == '') {
+      validate = false;
+    }
+    return validate;
   }
 
   generateInsuranceReserve(data: any): void {
@@ -677,40 +863,53 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
       this._loaderSubjectService.closeLoader();
 
+      this.callFirstService = false;
+
       this.makePayment(data);
     })
-  }
-
-  sendDataLayerCheckoutOption(value: any): void {
-    let nacionalidad = value.customers[0].nationalityCustomer;
-    let actionField: ActionFieldCheckoutOption = {
-      step: 1,
-      option: nacionalidad
-    }
-    let checkout_option: CheckoutOption = {
-      actionField: actionField
-    }
-    let ecommerce: EcommercecheckoutOption = {
-      checkout_option: checkout_option
-    }
-    let modelTaggingcheckoutOption: ModelTaggingcheckoutOption = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
-      ecommerce: ecommerce
-    }
-
-    TaggingService.tagCheckoutOption(modelTaggingcheckoutOption);
   }
 
   generatePayloadForInsurance(data: any): RegistrarSeguroRQ {
 
     console.log('generatePayloadForInsurance');
+    console.log(`${data.contactForm.typePhone0},51,1,${data.contactForm.numberPhone0}`);
+
+    let userid: number = 0;
+    const credentials = localStorage.getItem('usuario');
+
+    if (credentials) {
+      const credentialsJson = JSON.parse(credentials);
+      userid = credentialsJson.id;
+    }
 
     this.getPassengerAges();
 
     const fechasalida = this.resultJson.fromDate.split('/');
     const fecharetorno = this.resultJson.toDate.split('/');
 
-    const payload: RegistrarSeguroRQ = {
+    let direccion: string;
+    let direccion_fiscal: string;
+    let razon_social: string;
+
+    if (data.contactForm.invoiceRequestBox) {
+      direccion = data.contactForm.direccion.toUpperCase();
+      direccion_fiscal = data.contactForm.direccion.toUpperCase();
+      razon_social = data.contactForm.razonSocial.toUpperCase();
+    }
+    else {
+      razon_social = `${data.customers[0].nameCustomer.toUpperCase()}/${data.customers[0].lastNameCustomer.toUpperCase()}`;
+
+      if (data.paymentMethodForm.select21 === 'TARJETA') {
+        direccion = data.paymentMethodForm.address.toUpperCase();
+        direccion_fiscal = data.paymentMethodForm.address.toUpperCase();
+      }
+      else {
+        direccion = 'LIMA';
+        direccion_fiscal = 'LIMA';
+      }
+    }
+
+    return {
       fec_salida: `${fechasalida[2]}-${fechasalida[1]}-${fechasalida[0]}`,                       // FECHA DE PARTIDA
       fec_retorno: `${fecharetorno[2]}-${fecharetorno[1]}-${fecharetorno[0]}`,                        // FECHA DE RETORNO
       cant_paxes: this.resultJson.passengers.length,             // CANTIDAD DE PASAJEROS
@@ -731,19 +930,19 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       contacto_nom: data.contactForm.nameContacto,           // NOMBRE DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_ape: data.contactForm.lastnameContacto,       // APELLIDOS DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_email: data.contactForm.mailContacto,         // CORREO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_direccion: (data.contactForm.invoiceRequestBox) ? data.contactForm.direccion : '',  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
-      contacto_telfs: ',,,;',//data.contactForm.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
+      contacto_direccion: direccion,  // DIRECCION DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR VACIO
+      contacto_telfs: `${data.contactForm.typePhone0},51,1,${data.contactForm.numberPhone0}`,//',,,;',//data.contactForm.numberPhone0,         // TELEFONO DE LA PERSONA DE CONTACTO, CASO CONTRARIO COLOCAR CERO
       contacto_emerg_nom: data.contactForm.nameContacto,     // NOMBRE DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_ape: data.contactForm.lastnameContacto, // APELLIDOS DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR DATO DE PRIMER PASAJERO
       contacto_emerg_email: data.contactForm.mailContacto,   // CORREO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
-      contacto_emerg_telf: data.contactForm.numberPhone0,    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
+      contacto_emerg_telf: '',    // TELEFONO DE LA PERSONA DE EMERGENCIA, CASO CONTRARIO COLOCAR GUION
       ruc: (data.contactForm.invoiceRequestBox) ? `RUC-${data.contactForm.ruc}` : `${data.customers[0].typeDocCustomer}-${data.customers[0].numDocCustomer}`, // TIPO DE COMPROBANTE DE PAGO (BV / FC) Y DOCUMENTO (DNI / RUC) DEL PRIMER PASAJERO ADULTO
-      razon_social: (data.contactForm.invoiceRequestBox) ? data.contactForm.razonSocial : '',  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
-      direccion_fiscal: (data.contactForm.invoiceRequestBox) ? data.contactForm.direccion : '', // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
+      razon_social: razon_social,  // NOMBRE Y APELLIDO DEL PRIMER PASAJERO ADULTO O LA RAZON SOCIAL CUANDO SEA FACTURA
+      direccion_fiscal: direccion_fiscal, // DIRECCION DEL PRIMER PASAJERO ADULTO O DIRECCION DE LA EMPRESA
       comentario: '',
       webs_cid: 7,
-      usuweb_id: 56190,
-      destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'N' : 'I', // obtener desde destiny.EsDestinoNacional
+      usuweb_id: userid,
+      destinonacional: (this.resultJson.destinyString.es_nacional !== 0) ? 'S' : 'N', // obtener desde destiny.EsDestinoNacional
       numeroruc: '',
       comprobantepago: (data.contactForm.invoiceRequestBox) ? 'FC' : 'BV',  // TIPO DE COMPROBANTE DE PAGO (BV / FC)
       usobilletera: 'N',
@@ -787,8 +986,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       idTipoTarifa: 0,
       idReciboSafetyPay: 0
     };
-
-    return payload;
   }
 
   makePayment(data: any): void {
@@ -807,148 +1004,182 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
         const result = JSON.parse(this.paymentData);
 
-        if (result.Result.IsSuccess) {
+        if (result.State.Ok) {
+          if (result.Result.IsSuccess) {
 
-          const paymentMethod: PaymentMethodEnum = data.paymentMethodForm.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
+            const paymentMethod: PaymentMethodEnum = data.paymentMethodForm.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
 
-          const parameters: ActualizarCodigoSafetyPaySeguroRQ = {
-            res_seguro_id: this.reservation.Reserva,
-            usosafetypay: paymentMethod === PaymentMethodEnum.SafetyPay ? "S" : "N",
-            codigo_safetypay: result.Result.ServiceResponse.Code,
-            nro_pedido_srv: result.Result.OrderId,
-            fee_safetypay: 0
-          };
+            if (paymentMethod === PaymentMethodEnum.SafetyPay) {
+              const parameters: ActualizarCodigoSafetyPaySeguroRQ = {
+                res_seguro_id: this.reservation.Reserva,
+                usosafetypay: "S",
+                codigo_safetypay: result.Result.ServiceResponse.Code,
+                nro_pedido_srv: result.Result.OrderId,
+                fee_safetypay: 0
+              };
 
-          const body = new NMRequestBy<ActualizarCodigoSafetyPaySeguroRQ>(parameters);
+              const body = new NMRequestBy<ActualizarCodigoSafetyPaySeguroRQ>(parameters);
 
-          this._secureBookingService.updateSafetypayPaymentCode(body).subscribe((response: any) => { });
-
-          // TODO: Se comentará hasta la aprobación de Hugo Sanchez
-          // if (paymentMethod === PaymentMethodEnum.CreditCard) {
-          //   const parameters: ActualizarEstadoSeguroRQ = {
-          //     res_seguro_id: this.reservation.Reserva,
-          //     usosafetypay: 8
-          //   };
-
-          //   const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
-
-          //   this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });
-          // }
-
-          const fechasalida = this.resultJson.fromDate.split('/');
-          const fecharetorno = this.resultJson.toDate.split('/');
-
-          const currentDate = moment();
-          const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
-
-          const missingDays = fromDate.diff(currentDate, 'days');
-
-          const model = {
-            event: 'nmv.seguros_eecga3_purchase',
-            ecommerce: {
-              currencyCode: this.safe0Json.monedaLista,
-              purchase: {
-                actionField: {
-                  id: String(this.reservation.Reserva),
-                  revenue: this.safe0Json.precioEmisionLocal,
-                  cupon: ''
-                },
-                products: [{
-                  name: this.safe0Json.producto,
-                  id: this.safe0Json.idProducto,
-                  price: this.safe0Json.precioEmisionLocal,
-                  brand: 'AssistCard',
-                  category: 'Seguros',
-                  category2: this.safe0Json.clase === 'best' ? 'El mejor plan' : 'Fecha flexible',
-                  variant: this.resultJson.destinyString.descripcion_destino,
-                  quantity: this.resultJson.passengers.length,
-                  metric10: this.getPromedioEdades(this.resultJson),
-                  dimension9: String(this.asistenciaMedicaMonto),
-                  dimension11: `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
-                  dimension12: `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
-                  metric11: missingDays,
-                  metric12: Number(this.resultJson.days),
-                  dimension16: 'Perú',
-                  dimension17: this.resultJson.destinyString.descripcion_destino
-                }]
-              }
-            }
-          }
-
-          TaggingService.tagTransactionCompleted(model);
-
-          const asegurados: any = [];
-
-          this.dataShop.customers.forEach((value: any, index: number) => {
-            let asegurado = {
-              NumeroSolicitudCompra: String(this.reservation.Reserva),
-              NombresApellidos: `ADT - ${value.nameCustomer.toUpperCase()
-                } ${value.lastNameCustomer.toUpperCase()}`,
-              FechaNacimiento: `${value.dayCustomer.padStart(2, '0')}/${value.monthCustomer.padStart(2, '0')}/${value.yearCustomer}`
+              this._secureBookingService.updateSafetypayPaymentCode(body).subscribe(() => { });
             }
 
-            asegurados.push(asegurado);
-          });
+            if (paymentMethod === PaymentMethodEnum.CreditCard && result.Result.ServiceResponse.Status === 'APPROVED') {
+              /*const parameters: ActualizarEstadoSeguroRQ = {
+                res_seguro_id: this.reservation.Reserva,
+                usosafetypay: 8
+              };
 
-          const notificationBody: CeSeguroCeEmailParameterCustomCeRequest1 = {
-            Caller: {
-              Company: EnumRequestCompanies.Agil,
-              Application: EnumRequestApplications.Interagencias
-            },
-            TrackingCode: Guid(),
-            MuteExceptions: false,
-            Parameter: {
-              To: [data.contactForm.mailContacto.toUpperCase()],
-              BCC: [""],
-              CC: [""],
-              Subject: `NMViajes - Confirmación de compra de seguro #${this.reservation.Reserva}`,
-              Data: {
-                Contacto: {
-                  NombresApellidos: `${data.contactForm.nameContacto.toUpperCase()
-                    } ${data.contactForm.lastnameContacto.toUpperCase()
-                    }`,
-                  CorreoElectronico: data.contactForm.mailContacto.toUpperCase(),
-                  Telefonos: `CELULAR ${data.contactForm.code0} ${data.contactForm.numberPhone0}`
+              const body = new NMRequestBy<ActualizarEstadoSeguroRQ>(parameters);
+
+              this._secureBookingService.updateStatusInInsuranceReserve(body).subscribe((response: any) => { });*/
+
+              const payload: any = {
+                "TrackingCode": Guid(),
+                "MuteExceptions": false,
+                "Caller": {
+                  "Company": 'Agil',
+                  "Application": 'Interagencias'
                 },
-                Pago: {
-                  TipoPago: this.selectedPay === 'tarjeta' ? 'TARJETA' : 'SAFETYPAY',
-                  CodigoSafetypay: result.Result.ServiceResponse.Code,
-                  TextoExpiracion: this.selectedPay !== 'tarjeta' ? `El pago puede ser completado hasta el ${result.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(0, 10)
-                    } a las ${result.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(11, 5)
-                    }` : "",
-                  TiempoExpiracion: ""
-                },
-                Asegurados: asegurados,
-                Precio: {
-                  PrecioDolares: `${this.safe0Json.monedaLista} ${this.safe0Json.precioEmisionLocal}`
-                },
-                Cobertura: {
-                  NombreCobertura: this.safe0Json?.nombreProducto,
-                  TipoCobertura: this.safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-                  MontoAsistenciaMedica: String(this.asistenciaMedicaMonto),
-                  DuracionCobertura: `${this.resultJson.days} días`,
-                  CiudadOrigen: "(PE) Perú",
-                  CiudadDestino: this.resultJson.destinyString.descripcion_destino,
-                  FechaSalida: `${fechasalida[0]}/${fechasalida[1]}/${fechasalida[2]}`,
-                  FechaRegreso: `${fecharetorno[0]}/${fecharetorno[1]}/${fecharetorno[2]}`,
-                  Pasajeros: `${this.resultJson.passengers.length} Adulto(s)`
+                "Parameter": {
+                  "BookingId": this.reservation.Reserva,
+                  "Status": 8
+                }
+              };
+
+              this._preferencesService.updateBookingStatus(payload).subscribe({
+                next: () => { }
+              });
+            }
+
+            const fechasalida = this.resultJson.fromDate.split('/');
+            const fecharetorno = this.resultJson.toDate.split('/');
+
+            const currentDate = moment();
+            const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
+
+            const missingDays = fromDate.diff(currentDate, 'days');
+
+            const model = {
+              event: 'nmv.seguros_eecga3_purchase',
+              ecommerce: {
+                currencyCode: this.safe0Json.monedaLista,
+                purchase: {
+                  actionField: {
+                    id: String(result.Result.QuoteId),
+                    revenue: this.safe0Json.precioEmisionLocal,
+                    cupon: ''
+                  },
+                  products: [{
+                    name: this.safe0Json.producto,
+                    id: this.safe0Json.idProducto,
+                    price: this.safe0Json.precioEmisionLocal,
+                    brand: 'AssistCard',
+                    category: 'Seguros',
+                    category2: this.safe0Json.clase === 'best' ? 'El mejor plan' : 'Fecha flexible',
+                    variant: this.resultJson.destinyString.descripcion_destino,
+                    quantity: this.resultJson.passengers.length,
+                    metric10: this.getPromedioEdades(this.resultJson),
+                    dimension9: String(this.asistenciaMedicaMonto),
+                    dimension11: `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
+                    dimension12: `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
+                    metric11: missingDays,
+                    metric12: Number(this.resultJson.days),
+                    dimension16: 'Perú',
+                    dimension17: this.resultJson.destinyString.descripcion_destino
+                  }]
                 }
               }
             }
-          };
 
-          this._messageService.v1ApiMessageSendConfirmacionSeguroPost({ body: notificationBody }).subscribe((res: CeResponse) => {
-            if (res.State.Ok) {
-              this._loaderSubjectService.closeLoader();
+            TaggingService.tagTransactionCompleted(model);
 
-              this._router.navigateByUrl('/conformidad');
-            }
-          });
+            const asegurados: any = [];
+
+            this.dataShop.customers.forEach((value: any) => {
+              let asegurado = {
+                NumeroSolicitudCompra: String(result.Result.QuoteId),//this.reservation.Reserva
+                NombresApellidos: `ADT - ${value.nameCustomer.toUpperCase()
+                  } ${value.lastNameCustomer.toUpperCase()}`,
+                FechaNacimiento: `${value.dayCustomer.padStart(2, '0')}/${value.monthCustomer.padStart(2, '0')}/${value.yearCustomer}`
+              }
+
+              asegurados.push(asegurado);
+            });
+
+            const notificationBody: CeSeguroCeEmailParameterCustomCeRequest1 = {
+              Caller: {
+                Company: EnumRequestCompanies.Agil,
+                Application: EnumRequestApplications.Interagencias
+              },
+              TrackingCode: Guid(),
+              MuteExceptions: false,
+              Parameter: {
+                To: [data.contactForm.mailContacto.toUpperCase()],
+                BCC: [""],
+                CC: [""],
+                Subject: `NMViajes - Solicitud de compra de seguro #${result.Result.QuoteId}`,//this.reservation.Reserva
+                Data: {
+                  Contacto: {
+                    NombresApellidos: `${data.contactForm.nameContacto.toUpperCase()
+                      } ${data.contactForm.lastnameContacto.toUpperCase()
+                      }`,
+                    CorreoElectronico: data.contactForm.mailContacto.toUpperCase(),
+                    Telefonos: `CELULAR ${data.contactForm.code0} ${data.contactForm.numberPhone0}`
+                  },
+                  Pago: {
+                    TipoPago: this.selectedPay === 'tarjeta' ? 'TARJETA' : 'SAFETYPAY',
+                    CodigoSafetypay: result.Result.ServiceResponse.Code,
+                    TextoExpiracion: this.selectedPay !== 'tarjeta' ? `El pago puede ser completado hasta el ${result.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(0, 10)
+                      } a las ${result.Result.ServiceResponse.Result.Payment_Expiration_Datetime.substr(11, 5)
+                      }` : "",
+                    TiempoExpiracion: ""
+                  },
+                  Asegurados: asegurados,
+                  Precio: {
+                    PrecioDolares: `${this.safe0Json.monedaLista} ${this.safe0Json.precioEmisionLocal}`
+                  },
+                  Cobertura: {
+                    NombreCobertura: this.safe0Json?.nombreProducto,
+                    TipoCobertura: this.safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+                    MontoAsistenciaMedica: String(this.asistenciaMedicaMonto),
+                    DuracionCobertura: `${this.resultJson.days} días`,
+                    CiudadOrigen: "(PE) Perú",
+                    CiudadDestino: this.resultJson.destinyString.descripcion_destino,
+                    FechaSalida: `${fechasalida[0]}/${fechasalida[1]}/${fechasalida[2]}`,
+                    FechaRegreso: `${fecharetorno[0]}/${fecharetorno[1]}/${fecharetorno[2]}`,
+                    Pasajeros: `${this.resultJson.passengers.length} Adulto(s)`
+                  }
+                }
+              }
+            };
+
+            this._messageService.v1ApiMessageSendConfirmacionSeguroPost({ body: notificationBody }).subscribe((res: CeResponse) => {
+              if (res.State.Ok) {
+                this.pressedToBuy = false;
+
+                this._loaderSubjectService.closeLoader();
+
+                this._router.navigateByUrl('/conformidad');
+              }
+            });
+          }
+          else {
+            this.replyMessage = result.Result.Message;
+            this.pressedToBuy = false;
+          }
         }
+        /* else {
+          // CAVH: Entra en el caso de pago con tarjeta: La transacci\u00F3n fue rechazada por el sistema anti-fraude.
+          this.replyMessage = "No se pudo realizar la transacción con la tarjeta ingresada, por favor intente con otro medio de pago.";
+          this.pressedToBuy = false;
+        } */
       },
       error: (err) => {
         console.log('Error en el registro del pago');
         console.log(err);
+
+        this.replyMessage = "Ocurrió un error interno al procesar el pago.";
+        this.pressedToBuy = false;
 
         this._loaderSubjectService.closeLoader();
       }
@@ -966,7 +1197,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
     const paymentMethod: PaymentMethodEnum = data.paymentMethodForm.select21 === "SAFETYPAY" ? PaymentMethodEnum.SafetyPay : PaymentMethodEnum.CreditCard;
 
-    const payload: RqPaymentCeRequest1 = {
+    return {
       "TrackingCode": Guid(),
       "MuteExceptions": environment.muteExceptions,
       "Caller": {
@@ -989,7 +1220,8 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "Address": "",
           "DocumentType": data.customers[0].typeDocCustomer,
           "DocumentNumber": data.customers[0].numDocCustomer,
-          "Email": data.contactForm.mailContacto.toUpperCase()
+          "Email": data.contactForm.mailContacto.toUpperCase(),
+          "Phone": `+51 ${data.contactForm.numberPhone0}`
         },
         "Card": {
           "Number": data.paymentMethodForm.numberCard,
@@ -1007,10 +1239,11 @@ export class ComprarComponent implements OnInit, AfterViewInit {
         "Booking": {
           "CodeSrv": 0,
           "CodeInsurance": this.reservation.Reserva,
-          "ArrivalDate": moment(this.resultJson.fromDate, "DD/MM/YYYY").format("YYYY-MM-DD"),
-          "DepartureDate": moment(this.resultJson.toDate, "DD/MM/YYYY").format("YYYY-MM-DD"),
+          "DepartureDate": moment(this.resultJson.fromDate, "DD/MM/YYYY").format("YYYY-MM-DD"),
+          "ArrivalDate": moment(this.resultJson.toDate, "DD/MM/YYYY").format("YYYY-MM-DD"),
           "NumberOfAdult": 1,
           "NumberOfChildren": 0,
+          "Origin": this.resultJson?.destinyString.descripcion_destino,
           "HasCancellationFee": true
         },
         "Setting": {
@@ -1019,9 +1252,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
           "HasAQuoteCode": true
         }
       }
-    }
-
-    return payload;
+    };
   }
 
   returnToPlans(): void {
@@ -1110,27 +1341,6 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     return coverages;
   }
 
-  pasajerosVuelos() {
-    let pasajeros: any = [];
-
-    this.dataShop.customers.forEach((value: any, index: number) => {
-      let jsonPasajeros = {
-        type: "ADT",
-        name: value.nameCustomer,
-        lastName: value.lastNameCustomer,
-        birthday: value.yearCustomer + '-' + value.monthCustomer.padStart(2, '0') + '-' + value.dayCustomer.padStart(2, '0'),
-        documentType: (value.typeDocCustomer === 'DNI') ? 0 : 1,
-        documentNumber: value.numDocCustomer,
-        gender: (value.sexCustomer === 'masculino') ? 'M' : '',
-        email: this.dataShop.contactForm.mailContacto,
-        phone: this.dataShop.contactForm.numberPhone0
-      }
-      pasajeros.push(jsonPasajeros)
-    });
-
-    return pasajeros
-  }
-
   getPassengerAges() {
     let ages = []
 
@@ -1149,48 +1359,13 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     this.agesCustomers = this.resultJson.aniosNacimiento.map((c: any) => c.edad).join(";");
   }
 
-  // fecha de expiracion tarjeta
-  expired(e: any) {
-    const year = e.substring(0, 4)
-    const month = e.substring(4, 6)
-    const expiredFormatt = `${year}/${month}`
-    return expiredFormatt
-  }
-
-  showVerDetalle(e?: any) {
+  showVerDetalle() {
     this.showDetalle = !this.showDetalle
     console.log(this.showDetalle)
   }
 
-  savePasajero(e?: any) {
-    console.log('pasajero ' + e)
-  }
-
-  step1Complete = false;
-  toggleStep1Complete() {
-    this.step1Complete = !this.step1Complete;
-  }
-
   selectionChange(event: StepperSelectionEvent) {
     console.log(event.selectedIndex)
-  }
-
-  timeShop(data: string) {
-    let dayPay = data
-    let day = dayPay.substr(0, 2)
-    let month = dayPay.substr(3, 2)
-    let year = dayPay.substr(6, 4)
-    let hour = dayPay.substr(11, 5)
-    let newDate = `${year}/${month}/${day} ${hour}`
-    let datePay = new Date(newDate)
-
-    var dayStart = new Date();
-    var difference = datePay.getTime() - dayStart.getTime()
-    var resultInMinutes = Math.round(difference / 60000)
-    var totalSeconds = resultInMinutes * 60
-    this.timeShow = totalSeconds
-    this.ShowComponentTime = true
-    // return totalSeconds
   }
 
   onChangeOfficialDocument(posicion: number) {
@@ -1273,11 +1448,58 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     TaggingService.tagMostrarCheckout(modelTaggingCheckout);
   }
 
+  sendEventOnLoad(safe0Json: any, resultJson: any) {
+	  const fromDate = moment(resultJson.fromDate, 'DD/MM/YYYY');
+	  const daysFromNow = fromDate.diff(moment(), 'days');
+    const model: TravelInsuranceCheckout = {
+      event: 'nmv_seguros_checkout_cargarCheckout',
+      operacion: {
+        dias_anticipacion: daysFromNow
+      },
+      precio: {
+        moneda: safe0Json.monedaLocal,
+        precioFinal: safe0Json.precioEmisionLocal,
+        precioNormal: safe0Json.precioEmisionLocal
+      },
+      origen: {
+        nombre: 'Peru',
+        codigo: 'PE',
+        pais: 'Peru'
+      },
+      destino: {
+        nombre: resultJson.destinyString.descripcion_destino,
+        codigo: resultJson.destinyString.id_destino,
+        pais: ''
+      },
+      seguro: {
+        codigo: safe0Json.codProducto,
+        opcion: safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+        precioFinal: safe0Json.precioEmisionLocal,
+        plan: safe0Json.nombreProducto,
+        emisor: 'AssistCard',
+        monto_asistencia: 0,
+        posicion: 0
+      },
+      pasajeros: {
+        adultos: resultJson.passengers.filter((p: any) => Number(p.edad) >= 18).length,
+        infantes: resultJson.passengers.filter((p: any) => Number(p.edad) <= 5).length,
+        ninos: resultJson.passengers.filter((p: any) => Number(p.edad) > 5 && Number(p.edad) < 18).length,
+        total: resultJson.passengers.length
+      },
+      fechas: {
+        estadia: Number(resultJson.days),
+        salida: moment(resultJson.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: moment(resultJson.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
+      }
+    };
+    TaggingService.tagTravelInsuranceCheckout(model);
+  }
+
   llenarProduct(safe0Json: any, resultJson: any): ProductAddToCart {
     const currentDate = moment();
     const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
     const missingDays = fromDate.diff(currentDate, 'days');
-    let pp: ProductAddToCart = {
+    return {
       name: safe0Json.nombreProducto,
       id: safe0Json.idProducto,
       price: safe0Json.precioBrutochange,
@@ -1294,16 +1516,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
       metric12: Number(this.resultJson.days),
       dimension16: 'PERU',
       dimension17: resultJson.destinyString.descripcion_destino,
-    }
-    return pp;
-  }
-
-  getDuracionViaje(resultJson: any): number {
-    let fechaFormats: number[] = resultJson.fromDate.split('/');
-    const _fromDate = new Date(fechaFormats[2], fechaFormats[1], fechaFormats[0]);
-    const _toDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
-    let diferencia = ((_fromDate.getTime() - _toDate.getTime()) / 1000 / 60 / 60 / 24) - 40;
-    return diferencia;
+    };
   }
 
   allowNumeric(event: KeyboardEvent) {
@@ -1315,7 +1528,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
 
   allowOfficialDocument(event: KeyboardEvent, posicion: number) {
     let pattern: RegExp;
-    let tipoDocumento = '';
+    let tipoDocumento: string;
     const data = this.formShop.value;
 
     if (posicion != 99)
@@ -1361,32 +1574,24 @@ export class ComprarComponent implements OnInit, AfterViewInit {
     event.preventDefault();
   }
 
-  getDiasAnticipacion(fromDate: any): number {
-    let fechaFormats: number[] = fromDate.fromDate.split('/');
-    const _fromDate = new Date(fechaFormats[2], fechaFormats[1], fechaFormats[0]);
-    const _toDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
-    let diferencia = ((_fromDate.getTime() - _toDate.getTime()) / 1000 / 60 / 60 / 24) - 40;
-    return diferencia;
-  }
-
   getPromedioEdades(resultJson: any): number {
     let promedio: number = 0;
     resultJson.passengers.forEach((element: any) => {
       promedio = promedio + parseInt(element.edad);
     });
-    //console.log("promedio:", promedio) 
-    //console.log("length:", resultJson.passengers.length) 
+    //console.log("promedio:", promedio)
+    //console.log("length:", resultJson.passengers.length)
     return (promedio / resultJson.passengers.length);
   }
 
   onchangeBanco(): void {
-    const nationality = this.countries.find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer'])?.Name;
+    const nationality = this.countries
+        .find(x => x.Iata === this.formShop.getRawValue()['customers'][0]['nationalityCustomer'])?.Name;
 
     if (nationality === undefined) {
-      this._notification.showNotificacion("Error", "Debe ingresar previamente los datos del pasajero");
+      this._notification.showNotificacion('Error', 'Debe ingresar previamente los datos del pasajero');
       return;
-    }
-    else {
+    } else {
       const model1 = {
         event: 'nmv.seguros_eecga3_checkoutOption',
         ecommerce: {
@@ -1397,8 +1602,7 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           }
         }
-      }
-
+      };
       TaggingService.tagNationalitySelection(model1);
 
       const model = {
@@ -1410,25 +1614,14 @@ export class ComprarComponent implements OnInit, AfterViewInit {
             }
           }
         }
-      }
-
+      };
       TaggingService.tagStartOfPaymentMethods(model);
+
+      this.sendPaymentMethodSelectEvent(this.selectedPay.toUpperCase());
     }
   }
 
-  onChangeProtectionPolicies(): void {
-    const model = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
-      ecommerce: {
-        checkout_option: {
-          actionField: {
-            step: 3,
-            option: this.showInvoiceData ? 'Factura Electrónica' : 'Boleta Electrónica'
-          }
-        }
-      }
-    }
-
-    TaggingService.tagVoucherSelection(model);
+  ngOnDestroy() {
+    this.genderSubscription.unsubscribe();
   }
 }

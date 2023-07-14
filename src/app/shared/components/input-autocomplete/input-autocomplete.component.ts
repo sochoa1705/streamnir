@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
-import { CardAutocompleteComponent } from '../card-autocomplete/card-autocomplete.component';
 import { ICardAutocomplete } from '../card-autocomplete/card-autocomplete.interface';
+
 @Component({
   selector: 'app-input-autocomplete',
   templateUrl: './input-autocomplete.component.html',
@@ -13,7 +13,7 @@ import { ICardAutocomplete } from '../card-autocomplete/card-autocomplete.interf
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => InputAutocompleteComponent),
       multi: true,
-    },
+    }
   ],
 })
 export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
@@ -27,6 +27,9 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   @Input() set items(value: ICardAutocomplete[] | null) {
     if (value) {
       this._items = value;
+      this._items.forEach((item: ICardAutocomplete) => {
+        if (item.isSelected) this.selectItm(item);
+      });
     }
   }
 
@@ -36,8 +39,7 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
 
   public typeToSearchText: string;
 
-
-  @Input() valueInput: string  = "";
+  @Input() valueInput: string = "";
   @Output() valueInputChange = new EventEmitter();
 
   @Input() placeholder: string;
@@ -46,18 +48,18 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
 
   @Input() typeahead: Subject<string>;
 
-  _minTermLength:number;
+  @ViewChild('inputSearch') inputSearch: ElementRef;
 
-  get minTermLength():number{
+  _minTermLength: number;
+
+  get minTermLength(): number {
     return this._minTermLength;
   }
 
-  @Input() set minTermLength(value:number){
+  @Input() set minTermLength(value: number) {
     this._minTermLength = value;
     this.typeToSearchText = `Por favor ingrese ${this._minTermLength} o más caracteres`;
   };
-
-  viewIcon: boolean
 
   fromEventSubscripcion: Subscription;
 
@@ -66,41 +68,64 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
   onChange = (_: any) => { };
   onTouch = () => { };
 
-  constructor( public inputValidator : InputValidationService) {
-    this.viewIcon = false
+  constructor(public inputValidator: InputValidationService) {
   }
 
   ngAfterViewInit() {
     this.hideBoxLogic();
   }
 
-  keyUp(target: any) {
-    this.inputTxt = target.value
+  onkeypress(event: any) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
 
-    const value: string = target.value || '';
-
-    this.valueInputChange.next(value)
-
-    
-    if (value.length >= this.minTermLength) {
-      this.showBoxOrigen(true)
-      this.viewIcon = true
-      this.boxOrigenTerm = false;
-      this.typeahead.next(value);
-    } else {
-      this.viewIcon = false
-      this.boxOrigenTerm = true
-      this.showBoxOrigen(false)
+      if (this.items?.length) {
+        this.valueInput = this._items[0].title;
+        this.valueInputChange.next(this.valueInput);
+        this.selectItm(this._items[0]);
+      }
     }
   }
 
-  showAutocomplete() {
-    if (this._items.length > 0) {
-      setTimeout(() => {
-        this.showBoxOrigen(false)
+  keyUp(event: any) {
+    this.inputTxt = event.target.value
 
-      }, 600);
+    const value: string = event.target.value || '';
+    this.valueInputChange.next(value);
+
+    if (value.length >= this.minTermLength) {
+      this.showBoxOrigen(true)
+      this.boxOrigenTerm = false;
+      this.typeahead.next(value);
+    } else {
+      this.boxOrigenTerm = true;
+      this.showBoxOrigen(false);
     }
+  }
+
+  keyDown(event: any) {
+    if (event.keyCode === 9)
+      if (this.items?.length) {
+        this.valueInput = this._items[0].title;
+        this.valueInputChange.next(this.valueInput);
+        this.selectItm(this._items[0]);
+      }
+  }
+
+  /*onBlur() {
+    if (this.items?.length) {
+      this.valueInput = this._items[0].title;
+      this.valueInputChange.next(this.valueInput);
+
+      this.selectItm(this._items[0]);
+    }
+  }*/
+
+  showAutocomplete() {
+    if (this._items.length > 0)
+      setTimeout(() => {
+        this.showBoxOrigen(false);
+      }, 600);
   }
 
   selectItm(itm: ICardAutocomplete) {
@@ -112,25 +137,24 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
     this.hideBoxOrigen();
   }
 
-
   writeValue(value: ICardAutocomplete): void {
     if (value) {
       this.value = value;
       this.valueInput = value.title;
-      this.viewIcon = true;
     } else {
       this.value = null;
       this.valueInput = ""
-      this.viewIcon = false;
     }
   }
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any): void {
     this.onTouch = fn;
   }
+
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
@@ -145,30 +169,23 @@ export class InputAutocompleteComponent implements AfterViewInit, OnDestroy {
 
   hideBoxLogic() {
     this.fromEventSubscripcion = fromEvent(document, 'click').subscribe((e) => {
-      // cerrar al darle click fuera de la caja
-
-      if (!this.cardAutocompleteComponent.nativeElement.contains(e.target) && !((e.target as HTMLInputElement).tagName == 'INPUT')) {
+      // cerrar al darle clic fuera de la caja
+      if (!this.cardAutocompleteComponent.nativeElement.contains(e.target) &&
+          !((e.target as HTMLInputElement).tagName == 'INPUT')) {
         this.hideBoxOrigen();
-
-        if (this.valueInput.length > 0 && !this.value) {
-          this.clean();
-        }
-
+        if (this.valueInput.length > 0 && !this.value) this.clean();
       }
-
-
     });
   }
 
   clean() {
     this.value = null;
     this.valueInput = "";
-    this.viewIcon = false;
-    this._items = [];
-    this.valueInputChange.next("")
+    this.inputSearch.nativeElement.focus();
   }
 
   ngOnDestroy() {
     this.fromEventSubscripcion.unsubscribe();
   }
+
 }

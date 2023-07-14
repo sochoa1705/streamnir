@@ -13,10 +13,16 @@ import { CardModule } from 'src/app/shared/components/card/card.module';
 import { TitleModule } from 'src/app/shared/components/title/title.module';
 import { CardInfoModule } from 'src/app/shared/components/card-info/card-info.module';
 import { MailingModule } from 'src/app/shared/components/mailing/mailing.module';
-import { PreFooterModule } from 'src/app/shared/components/pre-footer/pre-footer.module';
 import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { FlightDealsModule } from '../flightdeals/flightdeals.module';
+import { PackagesModule } from '../packages/packages.module';
+import { BuildYourTripModule } from '../build-your-trip/build-your-trip.module';
+import { HotelsModule } from '../hotels/hotels.module';
+import { CarsModule } from '../cars/cars.module';
+import { ActivitiesModule } from '../activities/activities.module';
+import { FlightsPlusHotelModule } from '../flights-plus-hotel/flights-plus-hotel.module';
+import { TimerBannerModule } from '../../../shared/components/timer-banner/timer-banner.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -33,7 +39,14 @@ import { FlightDealsModule } from '../flightdeals/flightdeals.module';
     CardInfoModule,
     MaterialModule,
     HttpClientModule,
-    FlightDealsModule
+    FlightDealsModule,
+    PackagesModule,
+    BuildYourTripModule,
+    FlightsPlusHotelModule,
+    HotelsModule,
+    CarsModule,
+    ActivitiesModule,
+    TimerBannerModule
   ],
   exports: [HomeComponent],
   providers: [DestinyService, AsidePresenterService, BusinessUnitService]

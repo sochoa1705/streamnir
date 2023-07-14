@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { PlansACService } from '../../../../../../Services/plansAC/plans-ac.service';
 import { LoaderSubjectService } from '../../../../../../shared/components/loader/service/loader-subject.service';
 import { take } from 'rxjs/operators';
@@ -10,7 +10,24 @@ import { environment } from 'src/environments/environment';
 import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
-import { ActionField, ActionFieldAddToCart, Add, Detail, Ecommerce, EcommerceAddToCart, EcommerceDetalleBeneficio, Impression, ModelTaggingAddToCart, ModelTaggingDetalleBeneficio, ModelTaggingMostrarResultados, Product, ProductAddToCart } from 'src/app/Services/analytics/tagging.models';
+import {
+  ActionField,
+  ActionFieldAddToCart,
+  Add,
+  Detail,
+  Ecommerce,
+  EcommerceAddToCart,
+  EcommerceDetalleBeneficio,
+  Impression,
+  InsuranceResult,
+  ModelTaggingAddToCart,
+  ModelTaggingDetalleBeneficio,
+  ModelTaggingMostrarResultados,
+  Product,
+  ProductAddToCart,
+  TravelInsuranceListResults,
+  TravelInsuranceSelected
+} from 'src/app/Services/analytics/tagging.models';
 import * as moment from 'moment';
 
 @Component({
@@ -46,6 +63,8 @@ export class PlansComponent implements OnInit {
 
   existPlans: boolean = true;
 
+  callFirstService: boolean = false;
+
   //datoUsuario:any = localStorage.getItem('form');
   constructor(
     public route: Router,
@@ -74,12 +93,11 @@ export class PlansComponent implements OnInit {
   }
 
   bestPlan() {
-    let arrai = this.plansAC
-    arrai.sort((a: any, b: any) => a['change'] - b['change'])
-    var longitud = arrai.length;
+    let array = this.plansAC
+    array.sort((a: any, b: any) => a['change'] - b['change'])
+    let longitud = array.length;
     longitud = longitud / 2;
-    let medium = Math.floor(longitud - 1)
-    return medium
+    return Math.floor(longitud - 1)
   }
 
   getPlansAC() {
@@ -88,10 +106,10 @@ export class PlansComponent implements OnInit {
     this.loaderSubjectService.showText(textSend)
     this.loaderSubjectService.showLoader()
 
-    // const clienteCotizacion : Array<{Edad: string, FechaNacimiento: string}> = this.resultJson.forEach(element => {
-    //   'Edad': element.age,
-    //   'FechaNacimiento': element.fecha
-    // });
+    /* const clienteCotizacion : Array<{Edad: string, FechaNacimiento: string}> = this.resultJson.forEach(element => {
+      'Edad': element.age,
+      'FechaNacimiento': element.fecha
+    }); */
 
     let lcotizacion: CotizarSeguroRQ = {
       UnidadNegocio: environment.undidadNegocioAC,
@@ -112,8 +130,9 @@ export class PlansComponent implements OnInit {
 
     let payload = new NMRequestBy<CotizarSeguroRQ>(lcotizacion)
 
-    console.log('listPlansAC');
-    console.log(JSON.stringify(payload))
+    setTimeout(() => {
+      this.callFirstService = true;
+    }, 500);
 
     this.plansACService.plansAC(payload).pipe(take(1)).subscribe({
       next: (response) => {
@@ -121,7 +140,7 @@ export class PlansComponent implements OnInit {
         if (response.length > 0) {
           this.existPlans = true;
 
-          this.plansAC = response.map((elem: any, index: number) => {
+          this.plansAC = response.map((elem: any) => {
             elem.change = Number(elem.precioEmisionLocal ? elem.precioEmisionLocal : 0).toFixed(2)
             elem.precioBrutochange = Number(elem.precioBrutoLocal ? elem.precioBrutoLocal : 0).toFixed(2)
             return elem;
@@ -132,21 +151,26 @@ export class PlansComponent implements OnInit {
           this.plans = { ...this.plansAC[maxi], ...clase }
           this.plansAC.splice(maxi, 1)
           this.plansAC.unshift(this.plans)
-
           localStorage.setItem('planes', JSON.stringify(this.plansAC))
+
+          if (response.length >= 5)
+            this.sendResultsEvent(this.plansAC, this.resultJson);
+
           this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
         }
         else {
           this.existPlans = false;
         }
 
-        this.loaderSubjectService.closeLoader()
+        this.loaderSubjectService.closeLoader();
+        this.callFirstService = false;
       },
       error: error => {
-        console.log(error)
+        console.error(error);
         this.notification.showNotificacion("Error", "Error de autenticación", 10);
         this.loaderSubjectService.closeLoader()
         this.route.navigateByUrl('/seguros');
+        this.callFirstService = false;
       }
     })
   }
@@ -184,38 +208,18 @@ export class PlansComponent implements OnInit {
           this.sendDataLayerDetalleBeneficio(data, this.resultJson);
         }
       },
-      error: error => console.log(error),
-    }
-    )
+      error: error => console.error(error)
+    });
   }
 
   data(id: any) {
     this.listCoverage(id);
-
-    console.log(id);
     this.pop = id;
   }
 
   sendDataLayerAddToCart(plansAC: any, resultJson: any) {
     let products: ProductAddToCart[] = [];
-    let pp: ProductAddToCart = {
-      name: '',
-      id: '',
-      price: '',
-      brand: '',
-      category: '',
-      category2: '',
-      variant: '',
-      quantity: 0,
-      metric10: 0,
-      dimension9: '',
-      dimension11: '',
-      dimension12: '',
-      metric11: 0,
-      metric12: 0,
-      dimension16: '',
-      dimension17: ''
-    }
+    let pp: ProductAddToCart;
     let actionField: ActionFieldAddToCart = {
       list: 'Resultados de Seguros'
     }
@@ -261,28 +265,51 @@ export class PlansComponent implements OnInit {
     TaggingService.tagMostrarAddToCart(modelTaggingAddToCart);
   }
 
+  sendSelectInsuranceEvent(planAC: any, resultJson: any) {
+    const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
+    const daysFromNow = fromDate.diff(moment(), 'days');
+    const model: TravelInsuranceSelected = {
+      event: 'nmv_seguros_seleccionarProducto',
+      operacion: {
+        dias_anticipacion: daysFromNow
+      },
+      precio: {
+        moneda: planAC.monedaLocal || 'USD',
+        precioNormal: Number(planAC.precioEmisionLocal || '0'),
+        precioFinal: Number(planAC.precioEmisionLocal || '0')
+      },
+      origen: {
+        nombre: 'Peru',
+        codigo: 'PE',
+        pais: 'Peru'
+      },
+      destino: {
+        nombre: resultJson.destinyString.descripcion_destino,
+        codigo: resultJson.destinyString.id_destino,
+        pais: ''
+      },
+      seguro: {
+        posicion: 0,
+        precioFinal: Number(planAC.precioEmisionLocal || '0'),
+        plan: planAC.nombreProducto || planAC,
+        codigo: planAC.codProducto || planAC,
+        opcion: '',
+        emisor: 'AssistCard',
+        monto_asistencia: 0
+      },
+      pasajeros: this.getResultJsonData(resultJson).pasajeros,
+      fechas: this.getResultJsonData(resultJson).fechas
+    };
+    TaggingService.tagTravelInsuranceSelected(model);
+  }
+
   sendDataLayerDetalleBeneficio(plansAC: any, resultJson: any) {
 
     let actionField: ActionField = {
       list: 'Resultado de Seguros',
     }
     let products: Product[] = [];
-    let pp: Product = {
-      name: '',
-      id: '',
-      price: '',
-      brand: '',
-      category: '',
-      category2: '',
-      variant: '',
-      quantity: 0,
-      metric10: 0,
-      dimension9: '',
-      dimension11: '',
-      dimension12: '',
-      metric11: 0,
-      metric12: 0
-    }
+    let pp: Product;
 
     let detail: Detail = {
       actionField: actionField,
@@ -320,29 +347,25 @@ export class PlansComponent implements OnInit {
     index++;
     products.push(pp);
     //});
-    console.log("modelTaggingDetalleBeneficio", modelTaggingDetalleBeneficio)
     TaggingService.tagMostrarDetalleBeneficio(modelTaggingDetalleBeneficio);
   }
 
   shop(card: any) {
-    console.log("plansAC: ", this.plansAC);
-    console.log("card: ", card);
-    console.log("resultJson: ", this.resultJson);
     this.sendDataLayerAddToCart(card, this.resultJson);
+    this.sendSelectInsuranceEvent(card, this.resultJson);
+
     let service = this.plansAC.find((e: any) => {
-      if (e.idProducto === card.idProducto) {
-        return e
-      }
+      if (e.idProducto === card.idProducto) return e;
     });
     let state2 = { ...this.json, ...service, planType: '' }
 
     localStorage.setItem('safe0', JSON.stringify(state2));
+
     const navigationExtras: NavigationExtras = { state: { ...this.json, ...service } };
     this.route.navigateByUrl('/comprar', navigationExtras);
-
   }
+
   sendDataLayerMostrarResultados(plansAC: any, resultJson: any) {
-    console.log("resultJson", resultJson)
     let ecommerce: Ecommerce = {
       currencyCode: '',
       impressions: []
@@ -405,22 +428,55 @@ export class PlansComponent implements OnInit {
     localStorage.removeItem('filters');
   }
 
-  getDuracionViaje(fromDate: any): number {
-    let fechaFormats: number[] = fromDate.fromDate.split('/');
-    let fechaFormats2: number[] = fromDate.toDate.split('/');
-    const _fromDate = new Date(fechaFormats[2], fechaFormats[1], fechaFormats[0]);
-    const _toDate = new Date(fechaFormats2[2], fechaFormats2[1], fechaFormats2[0]);
-    let diferencia = (_toDate.getTime() - _fromDate.getTime()) / 1000 / 60 / 60 / 24;
-    //console.log("DuracionViaje:", diferencia)    
-    return diferencia;
+  sendResultsEvent(plansAC: any[], resultJson: any) {
+    const model: TravelInsuranceListResults = {
+      event: 'nmv_seguros_verResultados',
+      precio: {
+        moneda: plansAC[0].monedaLocal,
+        precioNormal: 0,
+        precioFinal: 0
+      },
+      origen: {
+        nombre: 'Peru',
+        codigo: 'PE',
+        pais: 'Peru'
+      },
+      destino: {
+        nombre: resultJson.destinyString.descripcion_destino,
+        codigo: resultJson.destinyString.id_destino,
+        pais: ''
+      },
+      resultados: plansAC.map((plan: any, i: number): InsuranceResult =>
+          new InsuranceResult(
+              i + 1,
+              Number(plan.precioEmisionLocal),
+              plan.nombreProducto,
+              plan.codProducto,
+              i === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
+              'AssistCard',
+              Number(plan.precioComision)
+          )
+      ),
+      pasajeros: this.getResultJsonData(resultJson).pasajeros,
+      fechas: this.getResultJsonData(resultJson).fechas
+    };
+    TaggingService.tagTravelInsuranceListResults(model);
   }
 
-  getDiasAnticipacion(fromDate: any): number {
-    let fechaFormats: number[] = fromDate.fromDate.split('/');
-    const _fromDate = new Date(fechaFormats[2], fechaFormats[1], fechaFormats[0]);
-    const _toDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
-    let diferencia = ((_fromDate.getTime() - _toDate.getTime()) / 1000 / 60 / 60 / 24) - 40;
-    return diferencia;
+  private getResultJsonData(resultJson: any): any {
+    return {
+      pasajeros: {
+        adultos: resultJson.passengers.filter((p: any) => Number(p.edad) >= 18).length,
+        ninos: resultJson.passengers.filter((p: any) => Number(p.edad) > 5 && Number(p.edad) < 18).length,
+        infantes: resultJson.passengers.filter((p: any) => Number(p.edad) <= 5).length,
+        total: resultJson.passengers.length
+      },
+      fechas: {
+        salida: moment(resultJson.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: moment(resultJson.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        estadia: Number(resultJson.days)
+      }
+    }
   }
 
   getPromedioEdades(resultJson: any): number {

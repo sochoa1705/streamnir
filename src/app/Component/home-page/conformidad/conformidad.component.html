@@ -28,8 +28,7 @@
   <div class="row" *ngIf="typePay === 'TARJETA'">
     <div class="col-12 subTitleConf">
       <p>Excelente elección. </p>
-      <p>Tu solicitud de compra N° <strong>{{ reservaStr.Reserva }}</strong> ha sido recibida y fue pagada
-        correctamente.
+      <p>Tu solicitud de compra N° <strong>{{ reservaStr.Reserva }}</strong> ha sido recibida y está siendo procesada.
       </p>
     </div>
   </div>
@@ -195,8 +194,8 @@
               {{ customer.dayCustomer }} / {{ customer.monthCustomer }} / {{ customer.yearCustomer }}
             </div>
 
-            <div class="descripAsegurado" *ngIf="reservation">
-              Tu solicitud de compra es {{ reservation.Reserva }}.
+            <div class="descripAsegurado">
+              Tu solicitud de compra es {{ paymentData.Result.QuoteId }}.
             </div>
           </ng-container>
         </div>

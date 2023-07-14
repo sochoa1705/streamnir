@@ -56,13 +56,26 @@ export class HotelsComponent implements OnInit {
     this.urlPaqueteDinamico = environment.urlPaqueteDinamico;
 
     this._activatedRoute.params.subscribe(params => {
-
       let city: string = this.city || params.city;
       let site: string = this.site || params.site;
-      let isflight: boolean = this.isflight === undefined ? params.isflight : this.isflight;
-
-      this.getAllHotels(city, site, isflight);
+      let isFlight: boolean = this.isflight === undefined ? params.isflight : this.isflight;
+      this.getAllHotels(city, site, isFlight);
     });
+
+    this.hideWhatsappBtn();
+  }
+
+  hideWhatsappBtn() {
+    const url = window.location.href;
+    if (url.indexOf('widgets') != -1) {
+      const btnWhatsapp = document.getElementById('btn-whatsapp');
+      if (btnWhatsapp) btnWhatsapp.style.display = 'none';
+      const tooltip = document.getElementsByClassName('mat-tooltip');
+      setTimeout(() => {
+        if (tooltip && tooltip.length > 0)
+          tooltip[0].parentElement!.style.display = 'none';
+      }, 1000);
+    }
   }
 
   getAllHotels(city: string, site: string, isflight: boolean) {

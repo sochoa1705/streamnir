@@ -41,7 +41,7 @@
         routerLinkActive="active">
         {{ m.text }}
       </a>
-      <a (click)="to(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
+      <a (click)="redirect(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
         {{ m.text }}
       </a>
     </li>
@@ -49,10 +49,11 @@
   <span class="spacer  border border-bottom-0 border-top-0 border-start-0 h-50"></span>
 
   <!-- <a href="https://www.nmviajes.com/tuscitas/index.html" target="_blank" class="ps-3"> -->
-  <a routerLink="/tuscitas" class="ps-3">
-    <img src="assets/svg/schedule.svg" alt="">
-    <span>Agendar cita</span>
+  <a routerLink="/canales-de-atencion" class="ps-3">
+    <img style="width: 24px" src="assets/svg/iconContact.svg" alt="">
+    <span>Contactanos</span>
   </a>
+
   <a href="https://ayuda.nmviajes.com/support/home" target="_blank">
     <img src="assets/svg/help.svg" alt="">
     <span>Ayuda</span>
@@ -71,7 +72,7 @@
         <img class="img-perfil" appImgDefault [default]="'./assets/user-conect.svg'" [src]="userStorage.image" alt="">
       </div>
       <div class="divFlotante" *ngIf="showOptionUser">
-        <div class="option" routerLink="/perfil">Mi Perfil</div>
+        <div class="option" routerLink="/perfil/mi-perfil">Mi Perfil</div>
         <div class="line"></div>
         <div class="option red" (click)="logout()">Cerrar sesión</div>
         <div class="correo">
@@ -98,7 +99,7 @@
           routerLinkActive="active">
           {{ m.text }}
         </a>
-        <a (click)="to(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
+        <a (click)="redirect(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
           {{ m.text }}
         </a>
         <hr>

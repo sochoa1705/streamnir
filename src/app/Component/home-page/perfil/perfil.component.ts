@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
 import * as bootstrap from 'bootstrap';
 import { StringMappingType } from 'typescript';
+import { PerfilService } from './perfil.service';
 
 interface MenuItem {
   texto: string,
-  ruta: string
+  ruta: string,
+  newWindow?: boolean;
 }
 
 @Component({
@@ -43,12 +45,21 @@ export class PerfilComponent implements OnInit {
     {
       texto: 'Pasajeros',
       ruta: './pasajeros'
+    },
+    {
+      texto: 'Mis Reservas Vuelos',
+      ruta: './mis-reservas-vuelos'
+    },
+    {
+      texto: 'Mis Reservas Seguros',
+      ruta: './mis-reservas-seguros'
     }
   ];
 
   constructor(
     public accountService: AccountsService,
-    private router: Router
+    private router: Router,
+    private perfilService: PerfilService,
   ) {
     this.user = localStorage.getItem('usuario')
     this.userData = JSON.parse(this.user)
@@ -56,6 +67,18 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.userStorage = this.accountService.getUserStorage();
+    this.perfilService.generarToken(this.userStorage.email).subscribe({
+      next: (data: any) => {
+        if(data.Result.IsSuccess){
+          this.menus.push({
+            texto: 'Otras Reservas',
+            ruta: `https://vacaciones.nmviajes.com/profile/dashboard.xhtml?selectedSection=BOOKINGS&token=${data.Result.Token}&submit=true`,
+            newWindow: true
+          })
+        }
+
+      }
+    })
   }
 
   agregaTarjeta = false;

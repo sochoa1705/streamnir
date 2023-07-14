@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AccountsService } from 'src/app/Services/accounts.service';
-import { ModelTaggingHoteles } from 'src/app/Services/analytics/tagging.models';
+import { ModelTaggingHoteles, SearchHotels } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
@@ -12,7 +11,8 @@ import { NotificationService } from 'src/app/Services/notification.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { URLHotel, ParamsHoteles } from '../../tabs/tabs.models';
+import { ParamsHoteles, URLHotel } from '../../tabs/tabs.models';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tab-hotel',
@@ -20,10 +20,7 @@ import { URLHotel, ParamsHoteles } from '../../tabs/tabs.models';
   styleUrls: ['./tab-hotel.component.scss']
 })
 export class TabHotelComponent {
-
-
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
-
 
   form!: FormGroup;
   fromDate: NgbDate | null
@@ -36,11 +33,9 @@ export class TabHotelComponent {
 
   distributionObject: DistributionObjectA;
 
-
   hoveredDate: NgbDate | null = null;
 
   isSubmit = false;
-
 
   constructor(private calendar: NgbCalendar, private destineService: DestinyService,
     public formatter: NgbDateParserFormatter,
@@ -52,20 +47,12 @@ export class TabHotelComponent {
     this.form = new FormGroup({
       destino: new FormControl('', [Validators.required, Validators.minLength(3)]),
     });
-
   }
-
-
-  get destinoField() {
-    return this.form.controls["destino"];
-  }
-
 
   validateForm(field: string) {
     return this.form.controls[field]?.errors
       && this.isSubmit;
   }
-
 
   getErrorsForm(form: FormGroup): string[] {
     let errors: any[] = [];
@@ -83,9 +70,6 @@ export class TabHotelComponent {
     return errors;
   }
 
-
-
-
   autoComplete(e: any, typeSearch = 'ONLY_HOTEL') {
     // let elemento = this.origen.nativeElement;
     let elemento = e.target;
@@ -97,8 +81,6 @@ export class TabHotelComponent {
     }
   }
 
-
-
   getListCiudades(e: any, typeSearch = 'ONLY_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
@@ -109,16 +91,8 @@ export class TabHotelComponent {
     )
   }
 
-
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
-  }
-
-  openSnackBar(message: string, action: string = "Error") {
-    this._snackBar.open(message, "", {
-      duration: 2000,
-      panelClass: ['mat-toolbar', 'mat-warn']
-    });
   }
 
   public async searchAlojamiento() {
@@ -152,24 +126,21 @@ export class TabHotelComponent {
   }
 
   public getUrlAlojamiento() {
-    let url = ''
+    let url: string;
     let params = this.getParamsAlojamiento();
     this.insertTag(params);
     url = new URLHotel(params, this.distribution).getUrl();
     return url;
   }
 
-
   insertTag(params: any) {
-
     const getCodigoIata = (id: string) => {
       return id.split("::")[1];
     }
 
-    const nombre = `${getCodigoIata(params.idDestino)}`;
+    const nombre = getCodigoIata(params.idDestino);
     const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
     const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
-
 
     const model = new ModelTaggingHoteles(
       nombre,
@@ -186,24 +157,48 @@ export class TabHotelComponent {
     )
 
     TaggingService.buscarHoteles(model);
-  }
 
+    const newModel: SearchHotels = {
+      event: 'nmv_hoteles_buscar',
+      operacion: {
+        dias_anticipacion: diasAnticipacion
+      },
+      destino: {
+        nombre: params.destino,
+        codigo: nombre,
+        pais: this.citys[0].country
+      },
+      hotel: {
+        habitaciones: this.distributionObject.habitacion
+      },
+      pasajeros: {
+        adultos: this.distributionObject.adultos,
+        ninos: this.distributionObject.ninos,
+        infantes: 0,
+        total: this.distributionObject.pasajeros
+      },
+      fechas: {
+        salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: moment(params.endDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        estadia: duracionViaje
+      }
+    };
+
+    TaggingService.tagSearchHotels(newModel);
+  }
 
   getParamsAlojamiento() {
-    let params = new ParamsHoteles(
-      this.fromDate,
-      this.toDate,
-      this.form,
-      this.citys,
+    return new ParamsHoteles(
+        this.fromDate,
+        this.toDate,
+        this.form,
+        this.citys,
     ).getParams();
-    return params;
   }
-
 
   changeDate(value: ClassValueCalendar) {
     this.toDate = value.toDate;
     this.fromDate = value.fromDate;
   }
-
 
 }

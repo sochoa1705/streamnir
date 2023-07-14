@@ -18,43 +18,49 @@ export class MainService {
     {
       id: 1,
       text: "Paquetes",
-      link: "filtro",
-      tab: 'paquetes',
-      icon: '/assets/menu/paquetes.svg'
+      //link: "paquetes",
+      link: "https://vacaciones.nmviajes.com/ES/holidays/search",
+      tab: '',
+      icon: '/assets/menu/paquetes.svg',
+      external: true
     },
     {
       id: 2,
       text: "Arma tu viaje",
-      link: "filtro",
-      tab: 'armapaquete',
-      icon: '/assets/menu/paquetes.svg'
+      //link: "armapaquete",
+      link: "https://vacaciones.nmviajes.com/multidestination/",
+      tab: '',
+      icon: '/assets/menu/paquetes.svg',
+      external: true,
     },
     {
       id: 3,
       text: "Vuelos + Hotel",
-      link: "filtro",
-      tab: 'vuelohotel',
-      icon: '/assets/menu/vuelo-hotel.svg'
+      //link: "vuelohotel",
+      link: "https://vacaciones.nmviajes.com/flight+hotel/",
+      tab: '',
+      icon: '/assets/menu/vuelo-hotel.svg',
+      external: true,
     },
     {
       id: 4,
       text: "Hoteles",
-      link: "filtro",
-      tab: 'hoteles',
+      link: "hoteles",
+      tab: '',
       icon: '/assets/menu/hoteles.svg'
     },
     {
       id: 5,
       text: "Autos",
-      link: "filtro",
-      tab: 'autos',
+      link: "autos",
+      tab: '',
       icon: '/assets/menu/auto.svg'
     },
     {
       id: 6,
       text: "Actividades",
-      link: "filtro",
-      tab: 'actividades',
+      link: "actividades",
+      tab: '',
       icon: '/assets/menu/actividad.svg'
     },
     {
@@ -73,7 +79,7 @@ export class MainService {
       external: true
     },
     {
-      id: 9,
+      id: 8,
       text: "Blog: Mundo Viajero",
       link: "https://blog.nmviajes.com/",
       footer: true,

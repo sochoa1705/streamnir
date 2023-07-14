@@ -5,16 +5,15 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
 import { DestinyService } from '../../../Services/destiny/destiny.service';
-import { ParamsVueloHotel } from './tabs.models';
 import { ChangeRQ } from '../../../Models/general/changeRQ.interface';
 import { environment } from '../../../../environments/environment.prod';
 import { NMRequestBy } from '../../../Models/base/NMRequestBy';
 import { DollarChangeService } from '../../../Services/dollarChange/dollar-change.service';
 import { take } from 'rxjs/operators';
 import { NMRequest } from '../../../Models/base/NMRequest';
-import { AccountsService } from 'src/app/Services/accounts.service';
+import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
+import { EGalleryCode, IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
 export interface State {
   flag: string;
   name: string;
@@ -26,27 +25,15 @@ export interface State {
   styleUrls: ['./tabs.component.scss']
 })
 export class TabsComponent implements OnInit {
+
   @Input() show!: boolean
   @Input() options: any
 
   form!: FormGroup;
-  form2!: FormGroup;
   form3!: FormGroup;
   selected = 'option1';
   model!: NgbDateStruct;
-  dpFromDate: any;
-  dpToDate: any;
-
-  dpFromDate2: any;
-  dpToDate2: any;
-
-  dpFromDate3: any;
-  dpToDate3: any;
-  dpFromDate4: any;
-  dpToDate4: any;
-  // fechaInicial : NgbDate | undefined;
-  // FechaFinal : NgbDate | undefined;
-  diffInDays: number | undefined
+  tabResult: any = 'tab1';
 
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null
@@ -55,31 +42,26 @@ export class TabsComponent implements OnInit {
   fromDate4: NgbDate | null
   toDate: NgbDate | null;
 
-  citys: Array<any> = [];
-  citysOrigenSelect: Array<any> = [];
-  citysDestinosSelect: Array<any> = [];
+  cities: Array<any> = [];
+  citiesOrigenSelect: Array<any> = [];
+  citiesDestinosSelect: Array<any> = [];
   origen: any;
   destino: any;
-  origenHotel: any;
+  selectedTab: number;
 
-  validPasajeros = false;
-
-  RUTA_PAQUETES = environment.urlPaqueteDinamico + 'ES/holidays/search';
-  RUTA_AUTOS = environment.url_autos;
-
-
-  selectedTab: string
+  banner: IGalleryImage;
+  bannerMobile: IGalleryImage;
 
   constructor(
-    public route: Router,
-    public router: ActivatedRoute,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute,
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
     private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>,
     private destineService: DestinyService,
     public dollarChangeService: DollarChangeService,
-    private _accountsService: AccountsService
+    public dataPagePresenterService: DataPagePresenterService
   ) {
     this.fromDate = calendar.getToday();
     this.fromDate2 = calendar.getToday();
@@ -89,37 +71,66 @@ export class TabsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createForm()
-    this.router.params.subscribe((product) => this.casos(product.tab))
+    this.createForm();
+
+    this._activatedRoute.params.subscribe((product) => {
+      const url = this._router.url;
+
+      if (url === '/vuelos' ||
+        url === '/paquetes' ||
+        url === '/armapaquete' ||
+        url === '/vuelohotel' ||
+        url === '/hoteles' ||
+        url === '/autos' ||
+        url === '/actividades')
+        this.casos(url);
+      else
+        this.casos(product.tab);
+    });
+
+    this.getMainBanner();
+  }
+
+  getMainBanner() {
+    this.dataPagePresenterService.getDataGallery().subscribe(data => {
+      this.banner = data.filter(item => item.Code === EGalleryCode.banner_principal)[0].Images[0];
+      this.bannerMobile = data.filter(item => item.Code === EGalleryCode.banner_principal_mobile)[0].Images[0];
+    })
   }
 
   casos(e: any) {
     switch (e) {
+      case 'vuelos':
+      case '/vuelos':
+        this.selectedTab = 0
+        break;
       case 'paquetes':
-        this.selectedTab = '1'
+      case '/paquetes':
+        this.selectedTab = 1
         break;
       case 'armapaquete':
-        this.selectedTab = '2'
+      case '/armapaquete':
+        this.selectedTab = 2
         break;
       case 'vuelohotel':
-        this.selectedTab = '3'
+      case '/vuelohotel':
+        this.selectedTab = 3
         break;
       case 'hoteles':
-        this.selectedTab = '4'
+      case '/hoteles':
+        this.selectedTab = 4
         break;
       case 'autos':
-        this.selectedTab = '5'
+      case '/autos':
+        this.selectedTab = 5
         break;
       case 'actividades':
-        this.selectedTab = '6'
+      case '/actividades':
+        this.selectedTab = 6
         break;
       default:
-      // code block
+        break;
     }
-  }
-
-  get today() {
-    return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
 
   onDateSelection(date: NgbDate) {
@@ -131,18 +142,6 @@ export class TabsComponent implements OnInit {
       this.toDate = null;
       this.fromDate = date;
     }
-  }
-
-  isHovered(date: NgbDate) {
-    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
-  }
-
-  isInside(date: NgbDate) {
-    return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
-  }
-
-  isRange(date: NgbDate) {
-    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
   }
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
@@ -173,64 +172,18 @@ export class TabsComponent implements OnInit {
     });
   }
 
-  safeLink(e: any) {
-    if (e.tab.textLabel === "seguros") {
-      this.route.navigate(['/seguros'])
-    }
-  }
-
   navigateToResponseUrl(url: string): void {
     window.location.href = url;
   }
 
-  getParamsVueloHotel() {
-    let params = new ParamsVueloHotel(
-      this.fromDate,
-      this.toDate,
-      this.form,
-      this.citysDestinosSelect,
-      this.citysOrigenSelect
-    ).getParams();
-    return params;
-  }
-
-  public searchOnlyCar() {
-    let tab = 'ONLY_CAR';
-    let params = this.getParamsTabs(3);
-    window.location.href = `https://nmviajes.paquetedinamico.com/home?directSubmit=true&tripType=${tab}&dropoffPoint=${params.idOrigen}&destination=${params.idDestino}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&useSameDropoff=false&pickupTime=${params.horaInicio}&dropoffTime=${params.horaDestino}&lang=ES`;
-  }
-
-  private getParamsTabs(typeTab: number): any {
-
-    let startDateStr = `${(this.fromDate!.day).toString()}/${(this.fromDate!.month).toString()}/${(this.fromDate!.year).toString()}`;
-    let endDateStr = `${(this.toDate!.day).toString()}/${(this.toDate!.month).toString()}/${(this.toDate!.year).toString()}`;
-
-    let startDate = moment(startDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
-    let endDate = moment(endDateStr, 'D/M/YYYY').format('DD/MM/YYYY');
-    let origen = typeTab === 1 ? this.form.controls['origen'].value : typeTab === 2 ? this.form2.controls['origenHotel'].value : this.form3.controls['origen'].value;
-    let destino = typeTab === 1 ? this.form.controls['destino'].value : this.form3.controls['destino'].value;
-    let businessClass = this.form.controls['clase'].value === 'business';
-    let idOrigen = (this.citysOrigenSelect || []).find(item => item.label === origen).id;
-    let idDestino = destino !== '' ? (this.citysDestinosSelect || []).find(item => item.label === destino).id : 0;
-    let horaInicio = this.form3.controls['initHour'].value;
-    let horaDestino = this.form3.controls['lastHour'].value;
-
-    return { startDate, endDate, origen, destino, businessClass, idOrigen, idDestino, horaInicio, horaDestino };
-  }
-
   changeTab(value: MatTabChangeEvent) {
-    // (value.index == 1) ? this.navigateToResponseUrl(this.RUTA_PAQUETES) : null;
-    //(value.index == 4) ? this.navigateToResponseUrl(this.RUTA_AUTOS) : null;
-
-    if (value.index == 6) {
+    if (value.index == 7) {
       this.callService();
     }
   }
 
-  //TODO ELIMINAR
-
   autoComplete(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
-    this.citys = [];
+    this.cities = [];
     // let elemento = this.origen.nativeElement;
     let elemento = e.target;
 
@@ -248,11 +201,11 @@ export class TabsComponent implements OnInit {
   getListCiudades(e: any, type: number, typeSearch = 'FLIGHT_HOTEL') {
     this.destineService.getDestinyPaqueteDinamico(e, typeSearch).subscribe(
       data => {
-        this.citys = data;
+        this.cities = data;
         if (type === 1) {
-          this.citysOrigenSelect = data;
+          this.citiesOrigenSelect = data;
         } else {
-          this.citysDestinosSelect = data;
+          this.citiesDestinosSelect = data;
         }
       },
       err => console.log(err),
@@ -266,6 +219,8 @@ export class TabsComponent implements OnInit {
   }
 
   getChange() {
+    console.log(new Date());
+
     let lChange: ChangeRQ = {
       Fecha: environment.today(new Date()),
       IdMoneda: "SOL",

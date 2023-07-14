@@ -1,0 +1,155 @@
+<!-- <section class="container-fluid">
+  <aside class="row mt-5">
+    <div class="col-md-6 col-12">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <ng-container *ngFor="let b of slider; let indice = index; let first = first">
+            <button type="button" data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="indice"
+              [ngClass]="{'active':first}" aria-current="true" aria-label="Slide 1"></button>
+          </ng-container>
+        </div>
+
+        <div class="carousel-inner">
+          <ng-container *ngFor="let image of slider; let first = first; let i = index">
+            <div class="aside__content carousel-item" [ngClass]="{'active': first}">
+              <img [ngClass]="{'pointer': image.RedirectLink}" (click)="toSlider(image,'slider',i,slider.length)"
+                [src]="image.PathImage" class="d-block w-100" [alt]="image.NameImage">
+            </div>
+          </ng-container>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev">
+          <span class="carousel-prev-icon" aria-hidden="true">
+            <img src="./assets/icon-left.svg" alt="">
+          </span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next">
+          <span class="carousel-next-icon" aria-hidden="true">
+            <img src="./assets/icon-right.svg" alt="">
+          </span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6 col-12 boxVideo">
+      <div class="row">
+        <div class="col-12">
+          <div class="videoYoutube">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/xGp-LguvTQk" title="NmMViajes"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</section> -->
+
+<!-- PAQUETES -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="titleHome packageTitle">
+        <strong>Paquetes para toda ocasión</strong>
+      </h2>
+      <h3 class="subTitleHome">Vuelve el viaje de tus sueños realidad</h3>
+    </div>
+  </div>
+
+  <div class="boxItemPackages">
+    <div class="boxItem" *ngFor="let elem of themes">
+      <div class="groupCardTour">
+        <!-- <div class="priceCard">desde ${{elem.Price}}</div> -->
+        <div class="cardTour">
+          <div class="titleCard">{{elem.Name}}</div>
+          <div class="descripCard">{{elem.Description}}</div>
+          <a class="btnSearch" href="{{elem.RedirectUrl}}" target="_blank">Click aquí</a>
+        </div>
+      </div>
+      <img [src]="elem.ImageUrl" alt="...">
+    </div>
+  </div>
+</div>
+<!-- END PAQUETES -->
+
+<!-- MAILING -->
+<div class="boxMailing">
+  <ng-container *ngFor="let section of dataPagePresenterService.data.sections">
+    <app-mailing *ngIf="section.section === 'mailing'" [title]="section.title" [span]="section.span"></app-mailing>
+  </ng-container>
+</div>
+<!-- END MAILING -->
+
+<!-- CANALES DE ATENCION -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="titleHome packageTitle">
+        <strong>Canales de atención</strong>
+      </h2>
+      <h3 class="subTitleHome">Planifica tu viaje y hazlo realidad a través de cualquiera de nuestros canales</h3>
+    </div>
+  </div>
+
+  <div class="boxCanalPackage">
+    <div class="boxCanal">
+      <div class="iconCanal">
+        <img src="./assets/svg/AsesoriaVirtual.svg" alt="">
+      </div>
+      <div class="titleCanal">
+        Asesoría Virtual
+      </div>
+      <div class="boxAction">
+        <a routerLink="/agenda-tu-cita">Agenda tu cita</a>
+      </div>
+    </div>
+    <div class="boxCanal">
+      <div class="iconCanal">
+        <img src="./assets/svg/PortalDeAyuda.svg" alt="">
+      </div>
+      <div class="titleCanal">
+        Portal de Ayuda
+      </div>
+      <div class="boxAction">
+        <a href="https://ayuda.nmviajes.com/support/home">Recibe ayuda</a>
+      </div>
+    </div>
+    <div class="boxCanal">
+      <div class="iconCanal">
+        <img src="./assets/svg/WhatsApp.svg" alt="">
+      </div>
+      <div class="titleCanal">
+        WhatsApp
+      </div>
+      <div class="boxAction">
+        <a href="http://wa.link/1bwr6r">Escríbenos</a>
+      </div>
+    </div>
+    <div class="boxCanal">
+      <div class="iconCanal">
+        <img src="./assets/svg/ContactCenter.svg" alt="">
+      </div>
+      <div class="titleCanal">
+        Central Telefónica
+      </div>
+      <div class="boxAction">
+        <a href="tel:+516194200">619-4200</a>
+      </div>
+    </div>
+    <div class="boxCanal">
+      <div class="iconCanal">
+        <img src="./assets/svg/Tiendas.svg" alt="">
+      </div>
+      <div class="titleCanal">
+        Tiendas
+      </div>
+      <div class="boxAction">
+        <a href="https://www.nmviajes.com/nuestras-agencias">Visítanos</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END CANALES DE ATENCION -->

@@ -64,19 +64,168 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/RQ_AirlineFullGetCE_Request1"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RQ_AirlineFullGetCE_Request1"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/RQ_AirlineFullGetCE_Request1"
+                "required": [
+                  "Caller.Application",
+                  "Caller.Company",
+                  "MuteExceptions",
+                  "TrackingCode"
+                ],
+                "type": "object",
+                "properties": {
+                  "Parameter.IataCode": {
+                    "type": "string"
+                  },
+                  "Parameter.Name": {
+                    "type": "string"
+                  },
+                  "Parameter.Information": {
+                    "type": "string"
+                  },
+                  "Parameter.SmallLogo": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Parameter.Logo": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Parameter.BackgroundUrl": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Parameter.Status": {
+                    "type": "boolean"
+                  },
+                  "Parameter.ConceptHistory": {
+                    "type": "string"
+                  },
+                  "Parameter.ConceptDestination": {
+                    "type": "string"
+                  },
+                  "Parameter.ConceptFleet": {
+                    "type": "string"
+                  },
+                  "Parameter.ConceptBaggage": {
+                    "type": "string"
+                  },
+                  "Parameter.ConceptMeal": {
+                    "type": "string"
+                  },
+                  "Parameter.ConceptCheckIn": {
+                    "type": "string"
+                  },
+                  "Parameter.DestinationDescription": {
+                    "type": "string"
+                  },
+                  "Parameter.DestinationGalleries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  },
+                  "Parameter.DestinationTooltips": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Parameter.Galleries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  },
+                  "Parameter.GalleryTooltips": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "TrackingCode": {
+                    "type": "string"
+                  },
+                  "MuteExceptions": {
+                    "type": "boolean"
+                  },
+                  "Caller.Company": {
+                    "type": "string"
+                  },
+                  "Caller.Application": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Parameter.IataCode": {
+                  "style": "form"
+                },
+                "Parameter.Name": {
+                  "style": "form"
+                },
+                "Parameter.Information": {
+                  "style": "form"
+                },
+                "Parameter.SmallLogo": {
+                  "style": "form"
+                },
+                "Parameter.Logo": {
+                  "style": "form"
+                },
+                "Parameter.BackgroundUrl": {
+                  "style": "form"
+                },
+                "Parameter.Status": {
+                  "style": "form"
+                },
+                "Parameter.ConceptHistory": {
+                  "style": "form"
+                },
+                "Parameter.ConceptDestination": {
+                  "style": "form"
+                },
+                "Parameter.ConceptFleet": {
+                  "style": "form"
+                },
+                "Parameter.ConceptBaggage": {
+                  "style": "form"
+                },
+                "Parameter.ConceptMeal": {
+                  "style": "form"
+                },
+                "Parameter.ConceptCheckIn": {
+                  "style": "form"
+                },
+                "Parameter.DestinationDescription": {
+                  "style": "form"
+                },
+                "Parameter.DestinationGalleries": {
+                  "style": "form"
+                },
+                "Parameter.DestinationTooltips": {
+                  "style": "form"
+                },
+                "Parameter.Galleries": {
+                  "style": "form"
+                },
+                "Parameter.GalleryTooltips": {
+                  "style": "form"
+                },
+                "TrackingCode": {
+                  "style": "form"
+                },
+                "MuteExceptions": {
+                  "style": "form"
+                },
+                "Caller.Company": {
+                  "style": "form"
+                },
+                "Caller.Application": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -93,19 +242,168 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/RQ_AirlineFullGetCE_Request1"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RQ_AirlineFullGetCE_Request1"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/RQ_AirlineFullGetCE_Request1"
+                "required": [
+                  "Caller.Application",
+                  "Caller.Company",
+                  "MuteExceptions",
+                  "TrackingCode"
+                ],
+                "type": "object",
+                "properties": {
+                  "Parameter.IataCode": {
+                    "type": "string"
+                  },
+                  "Parameter.Name": {
+                    "type": "string"
+                  },
+                  "Parameter.Information": {
+                    "type": "string"
+                  },
+                  "Parameter.SmallLogo": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Parameter.Logo": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Parameter.BackgroundUrl": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Parameter.Status": {
+                    "type": "boolean"
+                  },
+                  "Parameter.ConceptHistory": {
+                    "type": "string"
+                  },
+                  "Parameter.ConceptDestination": {
+                    "type": "string"
+                  },
+                  "Parameter.ConceptFleet": {
+                    "type": "string"
+                  },
+                  "Parameter.ConceptBaggage": {
+                    "type": "string"
+                  },
+                  "Parameter.ConceptMeal": {
+                    "type": "string"
+                  },
+                  "Parameter.ConceptCheckIn": {
+                    "type": "string"
+                  },
+                  "Parameter.DestinationDescription": {
+                    "type": "string"
+                  },
+                  "Parameter.DestinationGalleries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  },
+                  "Parameter.DestinationTooltips": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Parameter.Galleries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  },
+                  "Parameter.GalleryTooltips": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "TrackingCode": {
+                    "type": "string"
+                  },
+                  "MuteExceptions": {
+                    "type": "boolean"
+                  },
+                  "Caller.Company": {
+                    "type": "string"
+                  },
+                  "Caller.Application": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Parameter.IataCode": {
+                  "style": "form"
+                },
+                "Parameter.Name": {
+                  "style": "form"
+                },
+                "Parameter.Information": {
+                  "style": "form"
+                },
+                "Parameter.SmallLogo": {
+                  "style": "form"
+                },
+                "Parameter.Logo": {
+                  "style": "form"
+                },
+                "Parameter.BackgroundUrl": {
+                  "style": "form"
+                },
+                "Parameter.Status": {
+                  "style": "form"
+                },
+                "Parameter.ConceptHistory": {
+                  "style": "form"
+                },
+                "Parameter.ConceptDestination": {
+                  "style": "form"
+                },
+                "Parameter.ConceptFleet": {
+                  "style": "form"
+                },
+                "Parameter.ConceptBaggage": {
+                  "style": "form"
+                },
+                "Parameter.ConceptMeal": {
+                  "style": "form"
+                },
+                "Parameter.ConceptCheckIn": {
+                  "style": "form"
+                },
+                "Parameter.DestinationDescription": {
+                  "style": "form"
+                },
+                "Parameter.DestinationGalleries": {
+                  "style": "form"
+                },
+                "Parameter.DestinationTooltips": {
+                  "style": "form"
+                },
+                "Parameter.Galleries": {
+                  "style": "form"
+                },
+                "Parameter.GalleryTooltips": {
+                  "style": "form"
+                },
+                "TrackingCode": {
+                  "style": "form"
+                },
+                "MuteExceptions": {
+                  "style": "form"
+                },
+                "Caller.Company": {
+                  "style": "form"
+                },
+                "Caller.Application": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -192,6 +490,37 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Airline/Image": {
+      "delete": {
+        "tags": [
+          "Airline"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_AirlineImgDeleteCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_AirlineImgDeleteCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_AirlineImgDeleteCE_Request1"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -507,6 +836,37 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Destination/Image": {
+      "delete": {
+        "tags": [
+          "Destination"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_DestinationImgDeleteCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_DestinationImgDeleteCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_DestinationImgDeleteCE_Request1"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -934,7 +1294,19 @@
                   "Parameter.Name": {
                     "type": "string"
                   },
-                  "Parameter.Images": {
+                  "Parameter.NameImages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Parameter.Redirects": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Parameter.Files": {
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -962,7 +1334,13 @@
                 "Parameter.Name": {
                   "style": "form"
                 },
-                "Parameter.Images": {
+                "Parameter.NameImages": {
+                  "style": "form"
+                },
+                "Parameter.Redirects": {
+                  "style": "form"
+                },
+                "Parameter.Files": {
                   "style": "form"
                 },
                 "TrackingCode": {
@@ -1012,7 +1390,19 @@
                   "Parameter.Status": {
                     "type": "boolean"
                   },
-                  "Parameter.Images": {
+                  "Parameter.NameImages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Parameter.Redirects": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Parameter.Files": {
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -1043,7 +1433,13 @@
                 "Parameter.Status": {
                   "style": "form"
                 },
-                "Parameter.Images": {
+                "Parameter.NameImages": {
+                  "style": "form"
+                },
+                "Parameter.Redirects": {
+                  "style": "form"
+                },
+                "Parameter.Files": {
                   "style": "form"
                 },
                 "TrackingCode": {
@@ -1151,6 +1547,143 @@
         }
       }
     },
+    "/v1/api/Gallery/Image": {
+      "delete": {
+        "tags": [
+          "Gallery"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_GalleryImgDeleteCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_GalleryImgDeleteCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_GalleryImgDeleteCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Location": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.Country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Master/Nights": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.Status",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/v1/api/Setting": {
       "get": {
         "tags": [
@@ -1162,6 +1695,59 @@
             "in": "query",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Theme": {
+      "get": {
+        "tags": [
+          "Theme"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.Active",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -1257,50 +1843,25 @@
         },
         "additionalProperties": false
       },
-      "RQ_AirlineFullGet": {
+      "RQ_AirlineImgDelete": {
         "type": "object",
         "properties": {
-          "IataCode": {
+          "Code": {
             "type": "string",
             "nullable": true
           },
-          "Name": {
+          "Section": {
             "type": "string",
             "nullable": true
           },
-          "Information": {
+          "ImageUrl": {
             "type": "string",
-            "nullable": true
-          },
-          "SmallLogo": {
-            "type": "string",
-            "nullable": true
-          },
-          "Logo": {
-            "type": "string",
-            "nullable": true
-          },
-          "Status": {
-            "type": "boolean"
-          },
-          "AirlineDetails": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RS_AirlineDetail"
-            },
-            "nullable": true
-          },
-          "AirlineGalleries": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RS_AirlineGallery"
-            },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "RQ_AirlineFullGetCE_Request1": {
+      "RQ_AirlineImgDeleteCE_Request1": {
         "required": [
           "Caller",
           "MuteExceptions",
@@ -1319,7 +1880,7 @@
             "$ref": "#/components/schemas/CE_RequestCaller"
           },
           "Parameter": {
-            "$ref": "#/components/schemas/RQ_AirlineFullGet"
+            "$ref": "#/components/schemas/RQ_AirlineImgDelete"
           }
         },
         "additionalProperties": false
@@ -1358,6 +1919,44 @@
         },
         "additionalProperties": false
       },
+      "RQ_DestinationImgDelete": {
+        "type": "object",
+        "properties": {
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "ImageUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_DestinationImgDeleteCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_DestinationImgDelete"
+          }
+        },
+        "additionalProperties": false
+      },
       "RQ_GalleryGetById": {
         "type": "object",
         "properties": {
@@ -1392,30 +1991,40 @@
         },
         "additionalProperties": false
       },
-      "RS_AirlineDetail": {
+      "RQ_GalleryImgDelete": {
         "type": "object",
         "properties": {
-          "Type": {
+          "Code": {
             "type": "string",
             "nullable": true
           },
-          "Description": {
+          "ImageUrl": {
             "type": "string",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "RS_AirlineGallery": {
+      "RQ_GalleryImgDeleteCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
         "type": "object",
         "properties": {
-          "Photo": {
-            "type": "string",
-            "nullable": true
+          "TrackingCode": {
+            "type": "string"
           },
-          "Tooltip": {
-            "type": "string",
-            "nullable": true
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_GalleryImgDelete"
           }
         },
         "additionalProperties": false
