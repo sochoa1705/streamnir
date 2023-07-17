@@ -26,6 +26,12 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { OptionalDataModule } from './components/optional-data/optional-data.module';
 import { CryptoService } from './Services/util/crypto.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { initializeAppCheck, provideAppCheck, ReCaptchaV3Provider } from '@angular/fire/app-check';
+import { environment } from '../environments/environment';
+
+if (!environment.production) (<any>window).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -52,7 +58,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 		PerfilModule,
 		LoadingModule,
 		OptionalDataModule,
-		MatTooltipModule
+		MatTooltipModule,
+		provideFirebaseApp(() => initializeApp(environment.firebase)),
+		provideFirestore(() => getFirestore()),
+		provideAppCheck(() => initializeAppCheck(getApp(), {
+			provider: new ReCaptchaV3Provider(environment.reCaptchaPublicKey),
+			isTokenAutoRefreshEnabled: true
+		}))
 	],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },

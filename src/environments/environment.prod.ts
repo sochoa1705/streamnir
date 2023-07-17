@@ -1,4 +1,15 @@
 export const environment = {
+  firebase: {
+    projectId: 'nm-viajes',
+    appId: '1:1068048799100:web:d4c8ffb9c709136d8940f9',
+    storageBucket: 'nm-viajes.appspot.com',
+    locationId: 'us-central',
+    apiKey: 'AIzaSyDw9Pd5sBSKba1FuZyo_MaoKVhm5sX_JVM',
+    authDomain: 'nm-viajes.firebaseapp.com',
+    messagingSenderId: '1068048799100',
+    measurementId: 'G-FE42H792WL',
+  },
+  reCaptchaPublicKey: '6Lc9CbsmAAAAANpAUZ5Ubxl2s25BwmhZVgp7Yrev',
   production: true,
   // urlBase: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',  // PRODUCCIÓN
   muteExceptions: false,                 // DESARROLLO
