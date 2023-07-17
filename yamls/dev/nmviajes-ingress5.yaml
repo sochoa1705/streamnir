@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
     - dev.nmviajes.com
-    secretName: aks-ingress-tls-secret-nmviajesdev
+    secretName: aks-ingress-tls-secret-nmviajesdev # Modificar a cada cambio de certificado
   defaultBackend:
     service:
       name: nmviajes-dev
