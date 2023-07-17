@@ -89,6 +89,7 @@ export class LoginComponent implements OnInit {
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
+		this.openLoginModal();
   }
 
 
@@ -512,6 +513,21 @@ export class LoginComponent implements OnInit {
 
     closeModalSesion ? closeModalSesion.click() : null;
     //closeModalNewAccount ? closeModalNewAccount.click() : null;
+  }
+
+  openLoginModal() {
+    const hash = location.hash;
+    if (hash && hash.trim() === '#login') {
+      const modal = document.getElementById('ModalSesion');
+      if (modal)
+        setTimeout(() => {
+          bootstrap.Modal.getOrCreateInstance(modal).toggle();
+        }, 1000);
+    }
+  }
+
+  removeLoginHash() {
+    history.pushState('', document.title, window.location.pathname + location.search);
   }
 
   togglePassword(pass: HTMLInputElement) {

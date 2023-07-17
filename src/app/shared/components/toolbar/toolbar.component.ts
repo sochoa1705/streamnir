@@ -98,6 +98,10 @@ export class ToolbarComponent implements OnInit {
     this.showOptionUser = !this.showOptionUser
   }
 
+  addLoginHash() {
+    location.hash = 'login';
+  }
+
   logout() {
     this.accountService.signOut()
     this.route.navigateByUrl("/")
