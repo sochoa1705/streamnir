@@ -69,10 +69,17 @@
 		cursor: pointer;
 
 		img {
-			width: 100%;
+			width: 160px;
+			height: 115px;
 			transition: all .3s ease-in-out;
 			display: block;
 			transform: scale(1);
+			object-fit: cover;
+
+			@media (min-width: 768px) {
+				width: 290px;
+				height: 210px;
+			}
 		}
 
 		&:hover img {
