@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
     - dev.nmviajes.com
-    secretName: aks-ingress-tls-nmviajes
+    secretName: aks-ingress-tls-secret-nmviajesdev
   defaultBackend:
     service:
       name: nmviajes-dev
