@@ -1,5 +1,5 @@
-<div class="fluid px-0 mailingBox">
-  <div class="row bg-white text-center py-md-5 py-3 mx-2 mx-md-0 mailing">
+<div class="fluid overflow-hidden mt-4 px-0 mailingBox">
+  <div class="bg-white text-center py-md-5 py-3 mx-2 mx-md-0 mailing">
     <div class="col-12 offset-0 col-md-10 offset-md-1">
       <!-- <svg class="iconMailing" *ngIf="!validate" width="104" height="104" viewBox="0 0 104 104" fill="none"
         xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,7 @@
 
       <h1 class="mt-5 titleBold" *ngIf="!validate">{{ title }}</h1>
       <h2 class="mb-5 subtitleHome" *ngIf="!validate">{{ span }}</h2>
-      <form [formGroup]="formMAiling" *ngIf="!validate">
+      <form class="px-5 mx-3 mx-lg-5" [formGroup]="formMAiling" *ngIf="!validate">
         <div class="container">
           <div class="row">
             <div class="col-12 col-md-4 offset-0 offset-md-1 input-group-lg px-0  text-start">

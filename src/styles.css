@@ -884,20 +884,25 @@ section {
   z-index: 9; }
 
 .box-container .box-content .portlet-izq {
-  display: none; }
-  @media (min-width: 768px) {
-    .box-container .box-content .portlet-izq {
-      display: block;
-      width: 265px;
-      margin-right: 35px;
-      margin-top: -10px;
-      border: 0.5px solid #e4e5e7;
-      box-sizing: border-box;
-      border-radius: 5px 5px 5px 0px;
-      height: 376px;
-      background: #fff;
-      padding: 20px 34px;
-      z-index: 9; } }
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .box-container .box-content .portlet-izq {
+    display: block;
+    width: 265px !important;
+    margin-right: 35px;
+    margin-top: -10px;
+    border: 0.5px solid #e4e5e7;
+    box-sizing: border-box;
+    border-radius: 5px 5px 5px 0px;
+    height: 376px;
+    background: #fff;
+    padding: 20px 34px;
+    z-index: 9;
+  }
+}
 
 .box-container .box-content .portlet-izq .iconViaje {
   display: flex;
@@ -5687,7 +5692,14 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       margin-left: 10px; }
   .moreInfo .groupOption {
     display: flex;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;}
+
+@media (max-width: 767px) {
+  .moreInfo .groupOption {
+    flex-direction: column;
+    align-items: start;
+  }
+}
     .moreInfo .groupOption .checkOption {
       font-family: Montserrat;
       width: 20%;
