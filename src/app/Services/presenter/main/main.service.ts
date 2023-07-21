@@ -53,7 +53,7 @@ export class MainService {
       text: 'Ofertas',
       link: 'ofertas',
       tab: '',
-      icon: '/assets/menu/hoteles.svg'
+      icon: '/assets/menu/ofertas.svg'
     },
     {
       id: 6,
