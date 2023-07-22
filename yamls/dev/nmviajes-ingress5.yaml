@@ -27,7 +27,3 @@ spec:
             name: nmviajes-dev
             port:
               number: 80
-status:
-  loadBalancer:
-    ingress:
-    - ip: 20.1.253.19
