@@ -8,29 +8,29 @@ echo "Haciendo el build de la aplicacion"
 powershell -Command "npm run build-dev"
 
 echo "Logueandose en el Container"
-powershell -Command "az account set --subscription f7864d4b-f7ba-4627-976f-a749d462f414"
-powershell -Command "az aks get-credentials --resource-group EXPERTIA-NMVIAJES-DESARROLLO --name ExpertiaNmViajesDev"
-powershell -Command "az acr login -n expertianmviajesdev"
+powershell -Command "az account set --subscription 2ced612a-4052-43e4-a7d8-0cd466127cad"
+powershell -Command "az aks get-credentials --resource-group EXP-RG-QA --name exp-k8s-qa"
+powershell -Command "az acr login -n expcontainerregistryqa"
 
 echo "Generando la imagen"
 
 powershell -Command "docker build -t nmviajes-dev ."
-powershell -Command "docker tag nmviajes-dev expertianmviajesdev.azurecr.io/nmviajes-dev"
+powershell -Command "docker tag nmviajes-dev expcontainerregistryqa.azurecr.io/nmviajes-dev"
 
 echo "Subiendo la imagen"
-powershell -Command "docker push expertianmviajesdev.azurecr.io/nmviajes-dev"
+powershell -Command "docker push expcontainerregistryqa.azurecr.io/nmviajes-dev"
 
 echo "Cambiando a la carpeta de desarrollo"
 cd .\yamls\dev\
 echo %CD%
 
 echo "Desplegando al app"
-powershell -Command "kubectl apply -f nmviajes.yaml -n nmviajes"
-powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n nmviajes"
+powershell -Command "kubectl apply -f nmviajes.yaml -n exp-nmviajes"
+powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n exp-nmviajes"
 
 echo  %USERNAME% la aplicacion se desplego correctamente
 
-powershell -Command "kubectl delete --all pods --namespace=nmviajes"
-powershell -Command "kubectl get pods -n nmviajes"
+powershell -Command "kubectl delete --all pods --namespace=exp-nmviajes"
+powershell -Command "kubectl get pods -n exp-nmviajes"
 
 pause
