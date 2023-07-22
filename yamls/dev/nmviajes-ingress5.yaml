@@ -9,7 +9,7 @@ spec:
   ingressClassName: classnmviajesdev
   tls:
   - hosts:
-    - dev.nmviajes.com
+    - 20.75.100.240
     secretName: aks-ingress-tls-secret-nmviajesdev # Modificar a cada cambio de certificado
   defaultBackend:
     service:
@@ -17,7 +17,7 @@ spec:
       port:
         number: 80
   rules:
-  - host: dev.nmviajes.com
+  - host: 20.75.100.240
     http:
       paths:
       - path: /

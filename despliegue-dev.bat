@@ -25,12 +25,12 @@ cd .\yamls\dev\
 echo %CD%
 
 echo "Desplegando al app"
-powershell -Command "kubectl apply -f nmviajes.yaml -n exp-nmviajes"
-powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n exp-nmviajes"
+powershell -Command "kubectl apply -f nmviajes.yaml -n viajes"
+powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n viajes"
 
 echo  %USERNAME% la aplicacion se desplego correctamente
 
-powershell -Command "kubectl delete --all pods --namespace=exp-nmviajes"
-powershell -Command "kubectl get pods -n exp-nmviajes"
+powershell -Command "kubectl delete --all pods --namespace=viajes"
+powershell -Command "kubectl get pods -n viajes"
 
 pause
