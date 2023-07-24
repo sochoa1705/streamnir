@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
-  ingressClassName: classbalanceadoraks
+  ingressClassName: classbalanceadoraqa
   tls:
   - hosts:
     - qa.nm.nmviajes-it.com
