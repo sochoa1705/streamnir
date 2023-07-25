@@ -10,7 +10,7 @@ spec:
   tls:
   - hosts:
     - qa.nm.nmviajes-it.com
-    secretName: my-tls-secret # Modificar a cada cambio de certificado
+    secretName: my-tls-cert-v1
   defaultBackend:
     service:
       name: nmviajes-dev
