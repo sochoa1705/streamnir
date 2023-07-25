@@ -7,13 +7,13 @@ metadata:
     # nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-    cert-manager.io/cluster-issuer: letsencrypt
+    # cert-manager.io/cluster-issuer: letsencrypt
 spec:
   ingressClassName: classbalanceadoraqa
   tls:
   - hosts:
     - qa.nm.nmviajes-it.com
-    secretName: my-tls-cert
+    secretName: secret-nmvijes-it-v1
   defaultBackend:
     service:
       name: nmviajes-dev
