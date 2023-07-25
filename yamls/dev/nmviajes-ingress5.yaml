@@ -10,7 +10,7 @@ spec:
   tls:
   - hosts:
     - qa.nm.nmviajes-it.com
-    secretName: ingress-cert-aqa # Modificar a cada cambio de certificado
+    secretName: ingress-cert-aqa-v1 # Modificar a cada cambio de certificado
   defaultBackend:
     service:
       name: nmviajes-dev
