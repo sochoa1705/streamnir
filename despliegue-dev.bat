@@ -25,8 +25,8 @@ cd .\yamls\dev\
 echo %CD%
 
 echo "Desplegando al app"
-powershell -Command "kubectl apply -f yamls/dev/nmviajes.yaml -n nmviajes"
-powershell -Command "kubectl apply -f yamls/dev/nmviajes-ingress5.yaml -n nmviajes"
+powershell -Command "kubectl apply -f nmviajes.yaml -n nmviajes"
+powershell -Command "kubectl apply -f nmviajes-ingress5.yaml -n nmviajes"
 
 echo  %USERNAME% la aplicacion se desplego correctamente
 
