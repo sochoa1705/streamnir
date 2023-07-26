@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: nmviajes-dev-ingress
   annotations:
-    kubernetes.io/ingress.class: classbalanceadoraqa
+    kubernetes.io/ingress.class: ingress-nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
