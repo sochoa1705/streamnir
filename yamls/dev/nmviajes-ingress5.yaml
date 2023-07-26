@@ -11,7 +11,7 @@ spec:
   ingressClassName: classbalanceadoraqa
   tls:
   - hosts:
-    - nm.nmviajes-it.com
+    - qa-nm.nmviajes-it.com
     secretName: secretingressqanm
   defaultBackend:
     service:
@@ -19,7 +19,7 @@ spec:
       port:
         number: 80
   rules:
-  - host: nm.nmviajes-it.com
+  - host: qa-nm.nmviajes-it.com
     http:
       paths:
       - path: /
