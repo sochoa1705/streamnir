@@ -13,7 +13,7 @@ spec:
   tls:
   - hosts:
     - qa.nm.nmviajes-it.com
-    secretName: secret-nmvijes-it-v1
+    secretName: secret-nmvijes-it-v2
   defaultBackend:
     service:
       name: nmviajes-dev
