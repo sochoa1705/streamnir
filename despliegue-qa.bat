@@ -14,13 +14,13 @@ powershell -Command "az acr login -n expcontainerregistryqa"
 
 echo "Generando la imagen"
 
-powershell -Command "docker build -t nmviajes-dev ."
-powershell -Command "docker tag nmviajes-dev expcontainerregistryqa.azurecr.io/nmviajes-dev"
+powershell -Command "docker build -t nmviajes-qa ."
+powershell -Command "docker tag nmviajes-qa expcontainerregistryqa.azurecr.io/nmviajes-qa"
 
 echo "Subiendo la imagen"
-powershell -Command "docker push expcontainerregistryqa.azurecr.io/nmviajes-dev"
+powershell -Command "docker push expcontainerregistryqa.azurecr.io/nmviajes-qa"
 
-echo "Cambiando a la carpeta de desarrollo"
+echo "Cambiando a la carpeta de qa"
 cd .\yamls\qa\
 echo %CD%
 

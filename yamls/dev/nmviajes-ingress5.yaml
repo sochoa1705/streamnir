@@ -8,18 +8,18 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
-  ingressClassName: classbalanceadoraqa
+  ingressClassName: classbalanceadoradev
   tls:
   - hosts:
-    - qa-nm.nmviajes-it.com
-    secretName: secretingressqanm
+    - dev-nm.nmviajes-it.com
+    secretName: secretingressdevnm
   defaultBackend:
     service:
       name: nmviajes-dev
       port:
         number: 80
   rules:
-  - host: qa-nm.nmviajes-it.com
+  - host: dev-nm.nmviajes-it.com
     http:
       paths:
       - path: /
