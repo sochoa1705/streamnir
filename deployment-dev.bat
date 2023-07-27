@@ -1,12 +1,5 @@
 @echo off
 echo Hola %USERNAME%
-
-set name="nmviajes"
-set url=%CD%
-
-echo "Haciendo el build de la aplicacion"
-powershell -Command "npm run build-dev"
-
 echo "Logueandose en el Container"
 powershell -Command "az account set --subscription 2ced612a-4052-43e4-a7d8-0cd466127cad"
 powershell -Command "az aks get-credentials --resource-group EXP-RG-QA --name exp-k8s-qa"
