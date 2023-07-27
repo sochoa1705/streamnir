@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nmviajes-qa
-        image: expcontainerregistryqa.azurecr.io/nmviajes-qa:latest
+        image: expcontainerregistryqa.azurecr.io/nmviajes-dev:latest
         resources:
           requests:
             cpu: 100m
