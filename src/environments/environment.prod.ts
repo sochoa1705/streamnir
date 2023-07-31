@@ -45,7 +45,7 @@ export const environment = {
   urlZonaPrivada: 'https://servicio.nmviajes.com:9443/zonaprivada/',
   urlGeo: "https://motorvuelos.expertiatravel.com/mv",
   urlIframeMotorVuelos: "https://motorwl.nmviajes-it.com/#/nmviajes/search/resultados",
-  urlIframeMotorVuelosItinerary: "https://motorwl.nmviajes-it.com/#/nmviajes/booking/itinerary",
+  urlIframeMotorVuelosItinerary: "https://vuelos.nmviajes.com/#/nmviajes/booking/itinerary",
 
   urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',
   url_api: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',
