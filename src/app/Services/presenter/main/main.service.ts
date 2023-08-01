@@ -90,6 +90,14 @@ export class MainService {
       link: "https://blog.nmviajes.com/",
       footer: true,
       external: true
+    },
+    {
+      id: 11,
+      text: 'Beneficio bancos',
+      link: 'beneficios',
+	    tab: '',
+      footer: true,
+      external: false
     }
   ]
   constructor() { }
