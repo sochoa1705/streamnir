@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nmviajes-dev
+  name: nmviajes-qa
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nmviajes-dev
+      app: nmviajes-qa
   template:
     metadata:
       labels:
-        app: nmviajes-dev
+        app: nmviajes-qa
     spec:
       containers:
-      - name: nmviajes-dev
-        image: expcontainerregistrydev.azurecr.io/nmviajes-dev:latest
+      - name: nmviajes-qa
+        image: expcontainerregistryqa.azurecr.io/nmviajes-qa:latest
         resources:
           requests:
             cpu: 100m
@@ -28,10 +28,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nmviajes-dev
+  name: nmviajes-qa
 spec:
   type: ClusterIP
   ports:
   - port: 80
   selector:
-    app: nmviajes-dev
+    app: nmviajes-qa

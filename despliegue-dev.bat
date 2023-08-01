@@ -8,17 +8,17 @@ echo "Haciendo el build de la aplicacion"
 powershell -Command "npm run build-dev"
 
 echo "Logueandose en el Container"
-powershell -Command "az account set --subscription f7864d4b-f7ba-4627-976f-a749d462f414"
-powershell -Command "az aks get-credentials --resource-group EXPERTIA-NMVIAJES-DESARROLLO --name ExpertiaNmViajesDev"
-powershell -Command "az acr login -n expertianmviajesdev"
+powershell -Command "az account set --subscription 33d9474f-6004-49f1-a25a-4d8cc8912608"
+powershell -Command "az aks get-credentials --resource-group EXP-RG-DESARROLLO --name exp-k8s-dev"
+powershell -Command "az acr login -n expcontainerregistrydev"
 
 echo "Generando la imagen"
 
 powershell -Command "docker build -t nmviajes-dev ."
-powershell -Command "docker tag nmviajes-dev expertianmviajesdev.azurecr.io/nmviajes-dev"
+powershell -Command "docker tag nmviajes-dev expcontainerregistrydev.azurecr.io/nmviajes-dev"
 
 echo "Subiendo la imagen"
-powershell -Command "docker push expertianmviajesdev.azurecr.io/nmviajes-dev"
+powershell -Command "docker push expcontainerregistrydev.azurecr.io/nmviajes-dev"
 
 echo "Cambiando a la carpeta de desarrollo"
 cd .\yamls\dev\

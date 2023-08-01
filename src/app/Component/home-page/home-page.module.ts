@@ -32,36 +32,47 @@ import { ComprarModule } from './comprar/comprar.module';
 import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/page-not-found.component';
 import { ItineraryModule } from './itinerary/itinerary.module';
 import { RetailModule } from './retail/retail.module';
+import { OffersModule } from './offers/offers.module';
 
 @NgModule({
-  declarations: [HomePageComponent, PageNotFoundComponent],
-  imports: [
-    CommonModule,
-    HomePageRoutingModule,
-    HomeModule,
-    HttpClientModule,
-    SegurosModule,
-    VuelosModule,
-    AerolineasModule,
-    PerfilModule,
-    TerminosCondicionesModule,
-    DocumentacionViajeModule,
-    ToolbarModule,
-    PreFooterModule,
-    FooterModule,
-    ConformidadModule,
-    ResultadosModule,
-    ItineraryModule,
-    LoaderModule,
-    NuestrasAgenciasModule,
-    NuestraEmpresaModule,
-    LibroReclamacionesModule,
-    PoliticasModule,
-    ResponsabilidadSocialModule,
-    ComprarModule,
-    RetailModule
-  ],
-  exports: [HomePageComponent],
-  providers: [MainService, DollarChangeService, OffersService, PackagesService, AsidePresenterService, DataPagePresenterService, FlightsService]
+	declarations: [ HomePageComponent, PageNotFoundComponent ],
+	imports: [
+		CommonModule,
+		HomePageRoutingModule,
+		HomeModule,
+		HttpClientModule,
+		SegurosModule,
+		VuelosModule,
+		AerolineasModule,
+		PerfilModule,
+		TerminosCondicionesModule,
+		DocumentacionViajeModule,
+		ToolbarModule,
+		PreFooterModule,
+		FooterModule,
+		ConformidadModule,
+		ResultadosModule,
+		ItineraryModule,
+		LoaderModule,
+		NuestrasAgenciasModule,
+		NuestraEmpresaModule,
+		LibroReclamacionesModule,
+		PoliticasModule,
+		ResponsabilidadSocialModule,
+		ComprarModule,
+		RetailModule,
+		OffersModule
+	],
+	exports: [ HomePageComponent ],
+	providers: [
+		MainService,
+		DollarChangeService,
+		OffersService,
+		PackagesService,
+		AsidePresenterService,
+		DataPagePresenterService,
+		FlightsService
+	]
 })
-export class HomePageModule { }
+export class HomePageModule {
+}

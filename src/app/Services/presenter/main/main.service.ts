@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -51,20 +50,27 @@ export class MainService {
     },
     {
       id: 5,
+      text: 'Ofertas',
+      link: 'ofertas',
+      tab: '',
+      icon: '/assets/menu/ofertas.svg'
+    },
+    {
+      id: 6,
       text: "Autos",
       link: "autos",
       tab: '',
       icon: '/assets/menu/auto.svg'
     },
     {
-      id: 6,
+      id: 7,
       text: "Actividades",
       link: "actividades",
       tab: '',
       icon: '/assets/menu/actividad.svg'
     },
     {
-      id: 7,
+      id: 8,
       text: "Seguros",
       link: "/seguros",
       header: true,
@@ -72,14 +78,14 @@ export class MainService {
       icon: '/assets/menu/seguros.svg'
     },
     {
-      id: 8,
+      id: 9,
       text: "Descubre",
       link: "https://descubre.nmviajes.com/",
       footer: true,
       external: true
     },
     {
-      id: 8,
+      id: 10,
       text: "Blog: Mundo Viajero",
       link: "https://blog.nmviajes.com/",
       footer: true,
