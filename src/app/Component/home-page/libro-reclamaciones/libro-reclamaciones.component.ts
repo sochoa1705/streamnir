@@ -109,7 +109,7 @@ export class LibroReclamacionesComponent implements OnInit {
       telefonoMenor: new FormControl(null),
       direccionMenor: new FormControl(null),
       emailMenor: new FormControl(null),
-      bienContratado: new FormControl(),
+      bienContratado: new FormControl('S'),
       descripcionBienContratado: new FormControl(),
       montoReclamado: new FormControl(),
       tipoReclamo: new FormControl(),
