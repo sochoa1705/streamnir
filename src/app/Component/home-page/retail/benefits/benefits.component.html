@@ -1,0 +1,145 @@
+<div class="container py-4 mt-5 mt-md-3 mt-lg-4 mb-4 mb-lg-5">
+	<div class="row pb-3">
+		<div class="col-12">
+			<h2><strong>Compra tu viaje soñado en nuestras tiendas</strong></h2>
+			<h5 class="mb-lg-4">Paga hasta 12 meses sin intereses con nuestros bancos asociados</h5>
+		</div>
+	</div>
+	<div class="row row-cols-2 row-cols-lg-3 g-4 mb-3 mb-lg-4">
+		<div class="col">
+			<div class="card h-100">
+				<div class="card-body">
+					<img src="./assets/svg/bcp.svg" alt="BCP" class="img-fluid w-100 mt-1 mt-lg-2" style="max-width: 88px">
+					<h3 class="card-title fs-6 mt-3"><b>Hasta 12 meses sin intereses</b></h3>
+					<ul class="ps-3">
+						<li class="mb-0">Paquetes</li>
+						<li class="mb-0">Vuelo + Hotel</li>
+						<li class="mb-0">Hoteles & Servicios</li>
+					</ul>
+					<a role="button" class="fs-6 text-decoration-underline" (click)="scrollCondiciones()">Ver condiciones</a>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card h-100">
+				<div class="card-body">
+					<img src="./assets/svg/bbva.svg" alt="BBVA" class="img-fluid w-100 mt-1 mt-lg-2" style="max-width: 88px">
+					<h3 class="card-title fs-6 mt-3"><b>Hasta 12 meses sin intereses</b></h3>
+					<ul class="ps-3">
+						<li class="mb-0">Paquetes</li>
+						<li class="mb-0">Vuelo + Hotel</li>
+						<li class="mb-0">Hoteles & Servicios</li>
+					</ul>
+					<a role="button" class="fs-6 text-decoration-underline" (click)="scrollCondiciones()">Ver condiciones</a>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card h-100">
+				<div class="card-body">
+					<img src="./assets/svg/scotiabank.svg" alt="Scotiabank" class="img-fluid w-100 mt-1 mt-lg-2"
+					     style="max-width: 156px">
+					<h3 class="card-title fs-6 mt-3"><b>Hasta 12 meses sin intereses</b></h3>
+					<ul class="ps-3">
+						<li class="mb-0">Paquetes</li>
+						<li class="mb-0">Vuelo + Hotel</li>
+						<li class="mb-0">Hoteles & Servicios</li>
+					</ul>
+					<a role="button" class="fs-6 text-decoration-underline" (click)="scrollCondiciones()">Ver condiciones</a>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card h-100">
+				<div class="card-body">
+					<img src="./assets/svg/interbank.svg" alt="Interbank" class="img-fluid w-100 mt-1 mt-lg-2"
+					     style="max-width: 136px">
+					<h3 class="card-title fs-6 mt-3"><b>Hasta 12 meses sin intereses</b></h3>
+					<ul class="ps-3">
+						<li class="mb-0">Paquetes</li>
+						<li class="mb-0">Vuelo + Hotel</li>
+						<li class="mb-0">Hoteles & Servicios</li>
+					</ul>
+					<a role="button" class="fs-6 text-decoration-underline" (click)="scrollCondiciones()">Ver condiciones</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col" id="condiciones">
+			<div class="card" [ngbCollapse]="conditionsCollapsed">
+				<div class="card-body p-4 p-lg-5">
+					<div class="row g-lg-5 mx-4 mx-lg-5">
+						<div class="col text-center text-lg-end">
+							<img src="./assets/svg/bcp.svg" alt="BCP" class="img-fluid" style="max-width: 132px;">
+						</div>
+						<div class="col-12 col-md-8 col-lg-9">
+							<h6 class="card-subtitle small mt-1 mb-2"><b>Hasta 12 meses sin intereses con tarjetas BCP</b></h6>
+							<p class="small mb-lg-0">
+								<b>Meses Sin Intereses BCP:</b>
+								Hasta 12 cuotas sin intereses. Aplica para compra de paquetes, boleto+hotel, hoteles y servicios solos.
+								No aplica para boletos a&eacute;reos. Las cuotas sin intereses aplican en todas nuestras tiendas f&iacute;sicas,
+								contact center, whatsapp y asesor virtual. No aplica en nmviajes.com. Para condiciones de cuotas sin
+								intereses en eventos o campa&ntilde;as, ingresar a
+								<a href="https://www.nmviajes.com/promociones" target="_blank">nmviajes.com/promociones</a>.
+								Para mayor información sobre tasas, comisiones y gastos financieros, comuníquese directamente con su
+								banco.
+							</p>
+						</div>
+						<hr class="opacity-100 mb-1 mb-lg-2">
+						<div class="col text-center text-lg-end">
+							<img src="./assets/svg/bbva.svg" alt="BBVA" class="img-fluid" style="max-width: 132px;">
+						</div>
+						<div class="col-12 col-md-8 col-lg-9">
+							<h6 class="card-subtitle small mb-2"><b>Hasta 12 meses sin intereses con tarjetas BBVA</b></h6>
+							<p class="small mb-lg-0">
+								<b>Meses Sin Intereses BBVA:</b>
+								Hasta 12 cuotas sin intereses. Aplica para compra de paquetes, boleto+hotel, hoteles y servicios solos.
+								No aplica para boletos a&eacute;reos. Las cuotas sin intereses aplican en todas nuestras tiendas f&iacute;sicas,
+								contact center, whatsapp y asesor virtual. No aplica en nmviajes.com. Para condiciones de cuotas sin
+								intereses en eventos o campa&ntilde;as, ingresar a
+								<a href="https://www.nmviajes.com/promociones" target="_blank">nmviajes.com/promociones</a>. Para
+								mayor informaci&oacute;n sobre tasas, comisiones y gastos financieros, comun&iacute;quese directamente
+								con su banco.
+							</p>
+						</div>
+						<hr class="opacity-100 mb-1 mb-lg-2">
+						<div class="col text-center text-lg-end">
+							<img src="./assets/svg/scotiabank.svg" alt="Scotiabank" class="img-fluid" style="max-width: 132px;">
+						</div>
+						<div class="col-12 col-md-8 col-lg-9">
+							<h6 class="card-subtitle small mb-2"><b>Hasta 12 meses sin intereses con tarjetas Scotiabank</b></h6>
+							<p class="small mb-lg-0">
+								<b>Meses Sin Intereses Scotiabank:</b>
+								Hasta 12 cuotas sin intereses. Aplica para compra de paquetes, boleto+hotel, hoteles y servicios solos.
+								No aplica para boletos a&eacute;reos. Las cuotas sin intereses aplican en todas nuestras tiendas f&iacute;sicas,
+								contact center, whatsapp y asesor virtual. No aplica en nmviajes.com. Para condiciones de cuotas sin
+								intereses en eventos o campañas, ingresar a
+								<a href="https://www.nmviajes.com/promociones" target="_blank">nmviajes.com/promociones</a>. Para mayor
+								informaci&oacute;n sobre tasas, comisiones y gastos financieros, comun&iacute;quese directamente con su
+								banco.
+							</p>
+						</div>
+						<hr class="opacity-100 mb-1 mb-lg-2">
+						<div class="col text-center text-lg-end">
+							<img src="./assets/svg/interbank.svg" alt="Interbank" class="img-fluid" style="max-width: 132px;">
+						</div>
+						<div class="col-12 col-md-8 col-lg-9">
+							<h6 class="card-subtitle small mb-2"><b>Hasta 12 meses sin intereses con tarjetas Interbank</b></h6>
+							<p class="small mb-0">
+								<b>Meses Sin Intereses Interbank:</b>
+								Hasta 12 cuotas sin intereses. Aplica para compra de paquetes, boleto+hotel, hoteles y servicios solos.
+								No aplica para boletos a&eacute;reos. Las cuotas sin intereses aplican en todas nuestras tiendas f&iacute;sicas,
+								contact center, whatsapp y asesor virtual. No aplica en nmviajes.com. Para condiciones de cuotas sin
+								intereses en eventos o campa&ntilde;as, ingresar a
+								<a href="https://www.nmviajes.com/promociones" target="_blank">nmviajes.com/promociones</a>. Para mayor
+								informaci&oacute;n sobre tasas, comisiones y gastos financieros, comun&iacute;quese directamente con su
+								banco.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
