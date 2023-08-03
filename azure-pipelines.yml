@@ -1,4 +1,5 @@
 # Node.js with Angular
+
 # Build a Node.js project that uses Angular.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
@@ -10,15 +11,13 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: AzureRmWebAppDeployment@4
+- task: Docker@2
   inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Microsoft Azure – EXPERTIA(f7864d4b-f7ba-4627-976f-a749d462f414)'
-    appType: 'webAppLinux'
-    WebAppName: 'NmViajesWeb'
-    deployToSlotOrASE: true
-    ResourceGroupName: 'EXPERTIA-NMVIAJES-UAT'
-    SlotName: 'production'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    RuntimeStack: 'NODE|14-lts'
-    StartupCommand: 'npm install build'
+    containerRegistry: 'NMViajes - Producción'
+    command: 'login'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'NMViajes - Producción'
+    repository: 'nmviajes'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
