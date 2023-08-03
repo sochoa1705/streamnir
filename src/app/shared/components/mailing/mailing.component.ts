@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MailingService } from '../../../Services/mailing/mailing.service';
 import { NotificationService } from 'src/app/Services/notification.service';
@@ -8,138 +8,149 @@ import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { ModelTaggingSubscripcionOfertas } from 'src/app/Services/analytics/tagging.models';
 
 @Component({
-  selector: 'app-mailing',
-  templateUrl: './mailing.component.html',
-  styleUrls: ['./mailing.component.scss']
+	selector: 'app-mailing',
+	templateUrl: './mailing.component.html',
+	styleUrls: [ './mailing.component.scss' ]
 })
 export class MailingComponent implements OnInit {
-  formMAiling: FormGroup
-  MSG_NOMBRE: string = 'nombreMail'
-  MSG_CORREO: string = 'correoMail'
-  MSG_POLITICA: string = 'politicasMail'
-  MSG_AUTORIZO: string = 'autorizoMail'
-  MSG_EMPTY: string = 'none'
-  errors: any[] = []
-  ipCliente: any
-  validate: boolean
-  @Input() title!: string;
-  @Input() span!: string;
-  message: string
-  imgMailing: number;
+	@ViewChild('mailingBox') mailingBox: ElementRef;
+	@Input() title!: string;
+	@Input() span!: string;
 
-  constructor(
-    private mailingService: MailingService,
-    private notification: NotificationService,
-    public loaderSubjectService: LoaderSubjectService,
-    public inputValidator : InputValidationService
-  ) {
-    this.validate = false
-    this.ipCliente = localStorage.getItem('ipCliente')
-  }
+	formMAiling: FormGroup;
+	MSG_NOMBRE: string = 'nombreMail';
+	MSG_CORREO: string = 'correoMail';
+	MSG_POLITICA: string = 'politicasMail';
+	MSG_AUTORIZO: string = 'autorizoMail';
+	MSG_EMPTY: string = 'none';
+	errors: any[] = [];
+	ipCliente: any;
+	validate: boolean;
+	message: string;
+	imgMailing: number;
 
-  ngOnInit(): void {
-    this.createForm()
-  }
+	constructor(
+			private mailingService: MailingService,
+			private notification: NotificationService,
+			public loaderSubjectService: LoaderSubjectService,
+			public inputValidator: InputValidationService
+	) {
+		this.validate = false;
+		this.ipCliente = localStorage.getItem('ipCliente');
+	}
 
-  createForm() {
-    this.formMAiling = new FormGroup({
-      nombreMail: new FormControl(),
-      correoMail: new FormControl(),
-      politicasMail: new FormControl(),
-      autorizoMail: new FormControl()
-    });
-  }
+	ngOnInit(): void {
+		this.createForm();
+		this.doScroll();
+	}
 
-  subscribe() {
-    if (this.validForm()) {
-      const textSend = 'Validando suscripción'
-      this.loaderSubjectService.showText(textSend)
-      this.loaderSubjectService.showLoader()
-      let data = this.formMAiling.value
+	createForm() {
+		this.formMAiling = new FormGroup({
+			nombreMail: new FormControl(),
+			correoMail: new FormControl(),
+			politicasMail: new FormControl(),
+			autorizoMail: new FormControl()
+		});
+	}
 
-      const nameArr: string[] = data.nombreMail.split(' ');
-      const contact: any = {
-        email: data.correoMail,
-        attributes: {
-          EMAIL: data.correoMail,
-          APELLIDOS: nameArr.length > 1 ? nameArr[1] : '',
-          NOMBRE: nameArr[0],
-          SMS: '',
-          TIPO_DOCUMENTO: '',
-          NUM_DOCUMENTO: '',
-          FUENTE: 'API',
-          SEGMENTO_MAILC: '',
-          SEGMENTO_MODELO: '',
-          SEGMENTO_ADICIONAL: '',
-          GENERO: '',
-          FECHA_NACIMIENTO: ''
-        },
-        emailBlacklisted: false,
-        smsBlacklisted: false,
-        listIds: [ 7 ],
-        updateEnabled: false,
-        smtpBlacklistSender: [
-          "5l5on@XCyTwNVlbFYMuZJRtYQifJ.mvm",
-          "AHzfzNXj0fQ@ogSExyrBXmIaCyjopMPfNgGdxE.siws"
-        ]
-      };
-      this.mailingService.createContact(contact).subscribe({
-        next: (response: any) => {
-          this.addTag();
+	doScroll() {
+		const hash = location.hash;
+		if (hash && hash.trim() === '#subscribe')
+			setTimeout(() =>
+					this.mailingBox.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' }), 800);
+	}
 
-          this.validate = true;
-          this.imgMailing = response.id;
-          this.message = 'Se registró correctamente a nuestro boletín.';
+	subscribe() {
+		if (this.validForm()) {
+			const textSend = 'Validando suscripción';
+			this.loaderSubjectService.showText(textSend);
+			this.loaderSubjectService.showLoader();
+			let data = this.formMAiling.value;
 
-          this.timeMAiling();
-        },
-        error: () => this.notification.showNotificacion('Error', 'No se envió la suscripción', 10),
-        complete: () => this.loaderSubjectService.closeLoader()
-      });
-    }
-  }
-  timeMAiling() {
-    setTimeout(() => {
-      this.validate = false
-      this.formMAiling.reset()
-    }, 10000);
-  }
+			const nameArr: string[] = data.nombreMail.split(' ');
+			const contact: any = {
+				email: data.correoMail,
+				attributes: {
+					EMAIL: data.correoMail,
+					APELLIDOS: nameArr.length > 1 ? nameArr[1] : '',
+					NOMBRE: nameArr[0],
+					SMS: '',
+					TIPO_DOCUMENTO: '',
+					NUM_DOCUMENTO: '',
+					FUENTE: 'API',
+					SEGMENTO_MAILC: '',
+					SEGMENTO_MODELO: '',
+					SEGMENTO_ADICIONAL: '',
+					GENERO: '',
+					FECHA_NACIMIENTO: ''
+				},
+				emailBlacklisted: false,
+				smsBlacklisted: false,
+				listIds: [ 7 ],
+				updateEnabled: false,
+				smtpBlacklistSender: [
+					'5l5on@XCyTwNVlbFYMuZJRtYQifJ.mvm',
+					'AHzfzNXj0fQ@ogSExyrBXmIaCyjopMPfNgGdxE.siws'
+				]
+			};
+			this.mailingService.createContact(contact).subscribe({
+				next: (response: any) => {
+					this.addTag();
 
-  validForm() {
-    this.errors = []
-    new RegExp('^[a-zA-Z ]+$', 'i');
-    new RegExp('^[0-9]+$', 'i');
-    new RegExp('^[a-zA-Z0-9 ]+$', 'i');
-    const mail = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}')
+					this.validate = true;
+					this.imgMailing = response.id;
+					this.message = 'Se registró correctamente a nuestro boletín.';
 
-    let nombreMail: string = this.formMAiling.getRawValue()['nombreMail'];
-    if (nombreMail === undefined || nombreMail === null || nombreMail.trim() === '')
-      this.errors.push({ name: this.MSG_NOMBRE, message: 'Campo requerido' });
+					this.timeMAiling();
+				},
+				error: () => this.notification.showNotificacion('Error', 'No se envió la suscripción', 10),
+				complete: () => this.loaderSubjectService.closeLoader()
+			});
+		}
+	}
 
-    let correoMail: string = this.formMAiling.getRawValue()['correoMail'];
-    if (correoMail === undefined || correoMail === null || correoMail.trim() === '')
-      this.errors.push({ name: this.MSG_CORREO, message: 'Campo requerido' });
-    if (!mail.test(correoMail))
-      this.errors.push({ name: this.MSG_CORREO, message: 'Ingresar correo válido' });
+	timeMAiling() {
+		setTimeout(() => {
+			this.validate = false;
+			this.formMAiling.reset();
+		}, 10000);
+	}
 
-    let politicasMail: boolean = this.formMAiling.getRawValue()['politicasMail'];
-    if (politicasMail === undefined || politicasMail === null || !politicasMail)
-      this.errors.push({ name: this.MSG_POLITICA, message: 'Políticas es requerido' });
+	validForm() {
+		this.errors = [];
+		new RegExp('^[a-zA-Z ]+$', 'i');
+		new RegExp('^[0-9]+$', 'i');
+		new RegExp('^[a-zA-Z0-9 ]+$', 'i');
+		const mail = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 
-    let autorizoMail: boolean = this.formMAiling.getRawValue()['autorizoMail'];
-    if (autorizoMail === undefined || autorizoMail === null || !autorizoMail)
-      this.errors.push({ name: this.MSG_AUTORIZO, message: 'Campo requerido' });
+		let nombreMail: string = this.formMAiling.getRawValue()['nombreMail'];
+		if (nombreMail === undefined || nombreMail === null || nombreMail.trim() === '')
+			this.errors.push({ name: this.MSG_NOMBRE, message: 'Campo requerido' });
 
-    return this.errors.length === 0;
-  }
+		let correoMail: string = this.formMAiling.getRawValue()['correoMail'];
+		if (correoMail === undefined || correoMail === null || correoMail.trim() === '')
+			this.errors.push({ name: this.MSG_CORREO, message: 'Campo requerido' });
+		if (!mail.test(correoMail))
+			this.errors.push({ name: this.MSG_CORREO, message: 'Ingresar correo válido' });
 
-  getMessage(messageKey: any) {
-    return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
-  }
+		let politicasMail: boolean = this.formMAiling.getRawValue()['politicasMail'];
+		if (politicasMail === undefined || politicasMail === null || !politicasMail)
+			this.errors.push({ name: this.MSG_POLITICA, message: 'Políticas es requerido' });
 
-  addTag() {
-    const model = new ModelTaggingSubscripcionOfertas();
-    TaggingService.tagSubscripcionOfertas(model);
-  }
+		let autorizoMail: boolean = this.formMAiling.getRawValue()['autorizoMail'];
+		if (autorizoMail === undefined || autorizoMail === null || !autorizoMail)
+			this.errors.push({ name: this.MSG_AUTORIZO, message: 'Campo requerido' });
 
+		return this.errors.length === 0;
+	}
+
+	getMessage(messageKey: any) {
+		return this.errors.filter((item: any) => item.name === messageKey).length > 0
+				? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY;
+	}
+
+	addTag() {
+		const model = new ModelTaggingSubscripcionOfertas();
+		TaggingService.tagSubscripcionOfertas(model);
+	}
 }
