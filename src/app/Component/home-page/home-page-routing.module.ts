@@ -25,6 +25,7 @@ import { EventosComponent } from './eventos/eventos.component';
 import { GifCardComponent } from './gif-card/gif-card.component';
 import {RetailComponent} from "./retail/retail.component";
 import { OffersComponent } from './offers/offers.component';
+import { BenefitsComponent } from './retail/benefits/benefits.component';
 
 const routes: Routes = [
   {
@@ -118,6 +119,10 @@ const routes: Routes = [
       {
         path: '28dejulio',
         component: RetailComponent
+      },
+      {
+        path: 'beneficios',
+        component: BenefitsComponent
       },
       {
         path: 'libro-reclamaciones',

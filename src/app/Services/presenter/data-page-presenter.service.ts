@@ -213,6 +213,12 @@ export class DataPagePresenterService {
             text: "Mapa de Sitio",
             link: "#",
             target: "_self"
+          },
+          {
+            id: 6,
+            text: "Beneficios bancos",
+            link: "beneficios",
+            target: "_self"
           }
           // {
           //   id: 5,
