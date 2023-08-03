@@ -32,8 +32,7 @@ export class RetailComponent implements OnInit {
     'assets/retail/slider4/image-1.webp',
     'assets/retail/slider4/image-2.webp',
     'assets/retail/slider4/image-3.webp',
-    'assets/retail/slider4/image-4.webp',
-    'assets/retail/slider4/image-5.webp'
+    'assets/retail/slider4/image-4.webp'
   ];
 
   constructor(private carouselConfig: NgbCarouselConfig) {
