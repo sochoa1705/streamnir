@@ -24,6 +24,8 @@ import { ItineraryComponent } from './itinerary/itinerary.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { GifCardComponent } from './gif-card/gif-card.component';
 import {RetailComponent} from "./retail/retail.component";
+import { OffersComponent } from './offers/offers.component';
+import { BenefitsComponent } from './retail/benefits/benefits.component';
 
 const routes: Routes = [
   {
@@ -119,6 +121,10 @@ const routes: Routes = [
         component: RetailComponent
       },
       {
+        path: 'beneficios',
+        component: BenefitsComponent
+      },
+      {
         path: 'libro-reclamaciones',
         component: LibroReclamacionesComponent
       },
@@ -141,7 +147,6 @@ const routes: Routes = [
       {
         path: 'agenda-tu-cita',
         component: CitaComponent
-
       },
       {
         path: 'politicas',
@@ -166,6 +171,10 @@ const routes: Routes = [
       {
         path: 'gif-card',
         component: GifCardComponent
+      },
+      {
+        path: 'ofertas',
+        component: OffersComponent
       },
       {
         path: 'canales-de-atencion',

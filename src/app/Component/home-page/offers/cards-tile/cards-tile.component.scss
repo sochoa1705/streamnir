@@ -1,0 +1,115 @@
+.card {
+	width: 100%;
+
+	&-footer {
+		border-radius: 0 0 10px 10px;
+	}
+
+	&-wrapper {
+		flex: 0 0 50%;
+		padding: 0 10px;
+		transition: all 0.3s;
+
+		@media (min-width: 768px) {
+			flex: 0 0 25%;
+		}
+	}
+
+	&-slider {
+		position: relative;
+
+		&-inner {
+			display: flex;
+			overflow-x: hidden;
+		}
+
+		.prev-btn, .next-btn {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			padding: 5px 10px;
+			font-size: 24px;
+			opacity: .75;
+
+			&:hover {
+				background: #df0c30 !important;
+				opacity: 1;
+			}
+
+			img {
+				width: 25px;
+			}
+		}
+
+		.prev-btn {
+			left: 0;
+		}
+
+		.next-btn {
+			right: 0;
+		}
+
+		@media (min-width: 768px) {
+			&.hide-arrows-md {
+				.prev-btn, .next-btn {
+					display: none;
+				}
+			}
+		}
+
+		@media (max-width: 767px) {
+			&.hide-arrows-sm {
+				.prev-btn, .next-btn {
+					display: none;
+				}
+			}
+		}
+	}
+
+	&-img-top {
+		position: relative;
+		overflow: hidden;
+		border-radius: .625rem .625rem 0 0;
+		cursor: pointer;
+
+		img {
+			width: 160px;
+			height: 115px;
+			transition: all .3s ease-in-out;
+			display: block;
+			transform: scale(1);
+			object-fit: cover;
+
+			@media (min-width: 768px) {
+				width: 290px;
+				height: 210px;
+			}
+		}
+
+		&:hover img {
+			transform: scale(1.1);
+		}
+	}
+
+	img.img-fluid.position-absolute {
+		top: .875rem;
+		right: 1.125rem;
+		width: 20px;
+
+		@media (min-width: 768px) {
+			width: 35px;
+		}
+	}
+
+	p {
+		&.small {
+			font-size: .75rem !important;
+		}
+
+		&.card-price {
+			font-size: 1.875rem !important;
+			line-height: 1;
+			color: #bd2c33;
+		}
+	}
+}

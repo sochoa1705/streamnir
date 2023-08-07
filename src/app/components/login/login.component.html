@@ -1,11 +1,16 @@
 <!-- Modal -->
-<div class="modal" style="display: none;" data-backdrop="false" id="ModalSesion" tabindex="-1"
+<div class="modal" style="display: none;" data-backdrop="false" data-bs-backdrop="static" id="ModalSesion" tabindex="-1"
   aria-labelledby="ModalSesionLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <div class="text-end">
-          <button #closeModalSesion type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button #closeModalSesion
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                  (click)="removeLoginHash()"></button>
         </div>
         <img src="./assets/modal/logo-modal.webp" alt="">
         <h1 class="modal-title" id="ModalSesionLabel">Iniciar sesión</h1>
@@ -108,12 +113,8 @@
 </div>
 
 
-
-
-
-
 <!-- Modal Create Account-->
-<div class="modal" style="display: none;" aria-hidden="true" data-backdrop="false" id="ModalNewAccount" tabindex="-1"
+<div class="modal" style="display: none;" aria-hidden="true" data-backdrop="false" data-bs-backdrop="static" id="ModalNewAccount" tabindex="-1"
   aria-labelledby="modalNewAccountLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content ">
@@ -123,8 +124,12 @@
       </div>
       <div class="recoveryRight ">
         <div class="modal-header">
-          <button type="button" #closeModalNewAccount class="btn-close" data-bs-dismiss="modal"
-            aria-label="Close"></button>
+          <button type="button"
+                  #closeModalNewAccount
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                  (click)="removeLoginHash()"></button>
         </div>
         <div class="titleRecovery">Crear cuenta</div>
         <div class="socialMedia" [class.active]="socialMedia">

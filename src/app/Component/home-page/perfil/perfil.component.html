@@ -39,12 +39,12 @@
         </div>
     </div>
 
-    <div class="box-content">
+    <div class="box-content flex-column flex-lg-row">
         <div class="portlet-izq">
             <div class="iconViaje">
                 <img src="./assets/perfil/viajes.png" alt="">
             </div>
-            <div class="boxMenu">
+            <div class="boxMenu ps-5 ps-lg-0">
                 <ul class="">
                     <li *ngFor="let item of menus">
                       <a *ngIf="!item.newWindow" [routerLink]="[item.ruta]" routerLinkActive="selected" (click)="route = item.ruta">{{item.texto}}</a>

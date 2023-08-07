@@ -1,4 +1,15 @@
 export const environment = {
+  firebase: {
+    projectId: 'nm-viajes',
+    appId: '1:1068048799100:web:d4c8ffb9c709136d8940f9',
+    storageBucket: 'nm-viajes.appspot.com',
+    locationId: 'us-central',
+    apiKey: 'AIzaSyDw9Pd5sBSKba1FuZyo_MaoKVhm5sX_JVM',
+    authDomain: 'nm-viajes.firebaseapp.com',
+    messagingSenderId: '1068048799100',
+    measurementId: 'G-FE42H792WL',
+  },
+  reCaptchaPublicKey: '6Lc9CbsmAAAAANpAUZ5Ubxl2s25BwmhZVgp7Yrev',
   production: true,
   // urlBase: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',  // PRODUCCIÓN
   muteExceptions: false,                 // DESARROLLO
@@ -15,9 +26,9 @@ export const environment = {
   today: (hoy: any) => {
     return `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`
   },
-  offerText: '¡Aprovecha precios WOW antes que vuelen!',
-  offerExpireDate: '2023-07-07 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
-  offerLink: 'https://nam02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvacaciones.nmviajes.com%2FES%2Fholidays%2Favailability%3Futm_source%3Dweb%26utm_medium%3Dreloj%26utm_campaign%3Dcyberwow%26utm_id%3Dcybwerwow%26utm_term%3Dreloj%26utm_content%3Dreloj&data=05%7C01%7Csamuel.huaman%40expertiatravel.com%7Cdffc265a79cf4470269d08db7997dd15%7Cf47010b409cd41ffa9ca7e9b411249f6%7C0%7C0%7C638237465378807634%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=vNaYeb6zTygjuwEBzYnsQLZ8B7kBGY3gdNxoIeScY4I%3D&reserved=0',
+  offerText: '¡Apúrate que se acaban las ofertas!',
+  offerExpireDate: '2023-07-21 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
+  offerLink: 'https://nam02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvacaciones.nmviajes.com%2FES%2Fholidays%2Favailability%3Futm_source%3Dweb%26utm_medium%3Dreloj%26utm_campaign%3Dcybernm%26utm_id%3Dcybwernm%26utm_term%3Dreloj%26utm_content%3Dreloj&data=05%7C01%7Csamuel.huaman%40expertiatravel.com%7C0893aa74d8fe4b8bc2ad08db84968562%7Cf47010b409cd41ffa9ca7e9b411249f6%7C0%7C0%7C638249554253218709%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=LeUv5FjKl79M0JDbVUIeN3fgkbnL2nxMCnNXzYwFRxI%3D&reserved=0',
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
   urlAutosNmViajes: 'https://autos.nmviajes.com/',
@@ -33,7 +44,7 @@ export const environment = {
   urlSeguros: 'https://servicio.nmviajes.com:9443/segurosrv/',
   urlZonaPrivada: 'https://servicio.nmviajes.com:9443/zonaprivada/',
   urlGeo: "https://motorvuelos.expertiatravel.com/mv",
-  urlIframeMotorVuelos: "https://vuelos.nmviajes.com/#/nmviajes/search/resultados",
+  urlIframeMotorVuelos: "https://motorwl.nmviajes-it.com/#/nmviajes/search/resultados",
   urlIframeMotorVuelosItinerary: "https://vuelos.nmviajes.com/#/nmviajes/booking/itinerary",
 
   urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',

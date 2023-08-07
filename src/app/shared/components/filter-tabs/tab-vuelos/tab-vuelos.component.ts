@@ -412,7 +412,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
     let flightClass = '';
     switch (Number(this.distributionObject['clase'])) {
       case 0:
-        flightClass = 'economic';
+        flightClass = 'economy';
         break;
       case 1:
         flightClass = 'business';
@@ -507,7 +507,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
     //url = new URLVuelos(params, this.distributionObject).getUrl();
     url = environment.urlIframeMotorVuelos + '?rand=' + Math.round(Math.random() * 10000000000) + "&";
 
-    url += `departureLocation=${params.idOrigen + "%20" + params.origen?.title || ''}&arrivalLocation=${params.idDestino + "%20" + params.destino?.title || ''}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&adults=${this.distributionObject['adultos']}&children=${this.distributionObject['ninos']}&infants=${this.distributionObject['infantes']}&flightType=${params.flightType}&flightClass=${this.distributionObject['clase']}&lang=ES&email=${params.email}`;
+    url += `departureLocation=${params.idOrigen}%20${params.origen?.title || ''},%20${params.origen?.country || ''}&arrivalLocation=${params.idDestino}%20${params.destino?.title || ''},%20${params.destino?.country || ''}&departureDate=${params.startDate}&arrivalDate=${params.endDate}&adults=${this.distributionObject['adultos']}&children=${this.distributionObject['ninos']}&infants=${this.distributionObject['infantes']}&flightType=${params.flightType}&flightClass=${this.distributionObject['clase']}&lang=ES&email=${params.email}`;
 
     // return `${this.url}?directSubmit=true&tripType=${this.tab}&flightType=${this.params.flightType}&destination=${this.params.idDestino + "%20" + this.params.destino?.title || ''}
     // &departure=${this.params.idOrigen + "%20" + this.params.origen?.title || ''}&departureDate=${this.params.startDate}
