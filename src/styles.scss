@@ -8781,47 +8781,6 @@ button.customers {
         hr {
             border: 1px solid #e4e5e7;
         }
-        .textConecta {
-            font-family: Montserrat;
-            font-weight: 500;
-            font-size: 12px;
-            line-height: 18px;
-            letter-spacing: 0.1px;
-            color: #4b4b4b;
-        }
-        .socialMedia {
-            display: flex;
-            gap: 20px;
-            font-family: Open Sans;
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 21px;
-            letter-spacing: 0.15px;
-            color: #ffffff;
-            .btnFacebook,
-            .btnGoogle {
-                width: calc(50% - 10px);
-                height: 47px;
-                border-radius: 5px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                img {
-                    min-width: 25.19px;
-                    min-height: 25.19px;
-                    max-width: 25.19px;
-                    max-height: 25.19px;
-                    margin-right: 12px;
-                }
-            }
-            .btnFacebook {
-                background: #4267b2;
-            }
-            .btnGoogle {
-                background: #518ef8;
-            }
-        }
     }
     .modal-footer {
         padding: 0rem 2rem 0rem 2rem;
