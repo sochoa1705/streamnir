@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import * as bootstrap from 'bootstrap';
 import { MisReservasService } from 'src/app/Component/home-page/perfil/mis-reservas-vuelos/mis-reservas-vuelos.service';
 import { AccountsService, AuthDTO } from 'src/app/Services/accounts.service';
@@ -37,7 +37,6 @@ export class LoginBusiness {
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   isPersonLoggin: boolean = true;
   isPerson: boolean = true;
 
@@ -57,39 +56,30 @@ export class LoginComponent implements OnInit {
   @ViewChild("closeModalNewAccount") closeModalNewAccount: ElementRef;
 
   constructor(
-    private _popUpSubject: PopupService,
-    private _authService: SocialAuthService,
-    private _accountService: AccountsService,
-    private _formBuilder: FormBuilder,
-    public _matDialog: MatDialog,
-    private _matSnackBar: MatSnackBar,
-    private _validatorsService: ValidatorsService,
-    public loaderSubjectService: LoaderSubjectService,
-    private notification: NotificationService,
-    private misReservasService: MisReservasService
-  ) { }
+      private _popUpSubject: PopupService,
+      private _authService: SocialAuthService,
+      private _accountService: AccountsService,
+      private _formBuilder: FormBuilder,
+      public _matDialog: MatDialog,
+      private _matSnackBar: MatSnackBar,
+      private _validatorsService: ValidatorsService,
+      public loaderSubjectService: LoaderSubjectService,
+      private notification: NotificationService,
+      private misReservasService: MisReservasService
+  ) {
+  }
+
   ngOnInit(): void {
     // this.taggingPageView();
-
-
-
     this._authService.authState.subscribe((user) => {
-
-      if (user.provider == "GOOGLE") {
+      if (user && user.provider == "GOOGLE")
         this.saveSocialAccount(user.firstName, user.lastName, user.email, "G", user.id, user.photoUrl)
-      }
-
-      if (user.provider == "FACEBOOK") {
-        this.saveSocialAccount(user.firstName, user.lastName, user.email, "F", user.id, user.photoUrl)
-      }
-
     });
-
 
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
-		this.openLoginModal();
+    this.openLoginModal();
   }
 
 
@@ -144,7 +134,7 @@ export class LoginComponent implements OnInit {
 
         //this.loaderSubjectService.closeLoader()
       },
-      error: (err) => {
+      error: () => {
         this.closeLoading();
         this.notification.showNotificacion("Error", "Error del servidor", 10);
 
@@ -152,14 +142,7 @@ export class LoginComponent implements OnInit {
       },
       complete: () => { }
     });
-
   }
-
-
-  signOut(): void {
-    this._authService.signOut();
-  }
-
 
   loadUsuario() {
     const userStr = this._accountService.getUserStorage();
@@ -174,7 +157,7 @@ export class LoginComponent implements OnInit {
   socialMedia: Boolean = true;
 
   showSocialMedia($event: { index: string | number; }) {
-    this.socialMedia = $event.index == 0 ? true : false;
+    this.socialMedia = $event.index == 0;
   }
 
   validatePersonalAccountForm(field: string) {
@@ -319,10 +302,8 @@ export class LoginComponent implements OnInit {
 
           //this.loaderSubjectService.closeLoader()
         },
-        error: (err) => {
-
+        error: () => {
           this.notification.showNotificacion("Error", "Error del servidor", 10);
-
           //this.loaderSubjectService.closeLoader()
         },
         complete: () => { }
@@ -385,10 +366,9 @@ export class LoginComponent implements OnInit {
           }
           //this.loaderSubjectService.closeLoader()
         },
-        error: (err) => {
+        error: () => {
           this.closeLoading();
           this.notification.showNotificacion("Error", "Error del servidor", 10);
-
           //this.loaderSubjectService.closeLoader()
         },
         complete: () => { }
@@ -477,29 +457,21 @@ export class LoginComponent implements OnInit {
       this.notification.showNotificacion("Error", "Error de validación", 5);
       this.closeLoading();
     }
-
   }
 
   signInWithGoogle(): void {
     this._authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  signInWithFB(): void {
-    this._authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  }
-
   validationFormLogin(form: NgForm) {
-    if (form.invalid) {
-      return false;
-    }
-    return true;
+    return !form.invalid;
   }
 
   closeLoading() {
     this.loaderSubjectService.closeLoader();
   }
 
-  openSnackBar(message: string, action: string = "Error") {
+  openSnackBar(message: string) {
     this._matSnackBar.open(message, "", {
       duration: 2000,
       panelClass: ['mat-toolbar', 'mat-warn']
@@ -507,12 +479,15 @@ export class LoginComponent implements OnInit {
   }
 
   closeModal() {
+    if (this.closeModalSesion) {
+      const closeModalSession: any = this.closeModalSesion.nativeElement;
+      closeModalSession ? closeModalSession.click() : null;
+    }
 
-    const closeModalSesion: any = this.closeModalSesion.nativeElement;
-    //const closeModalNewAccount: any = this.closeModalNewAccount.nativeElement;
-
-    closeModalSesion ? closeModalSesion.click() : null;
-    //closeModalNewAccount ? closeModalNewAccount.click() : null;
+    if (this.closeModalNewAccount) {
+      const closeModalNewAccount: any = this.closeModalNewAccount.nativeElement;
+      closeModalNewAccount ? closeModalNewAccount.click() : null;
+    }
   }
 
   openLoginModal() {
@@ -539,7 +514,6 @@ export class LoginComponent implements OnInit {
   }
 
   showSocialMediaLogin($event: { index: string | number; }) {
-    this.isPersonLoggin = $event.index == 0 ? true : false;
+    this.isPersonLoggin = $event.index == 0;
   }
-
 }

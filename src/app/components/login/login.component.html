@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal" style="display: none;" data-backdrop="false" data-bs-backdrop="static" id="ModalSesion" tabindex="-1"
+<div class="modal fade" style="display: none;" data-backdrop="false" data-bs-backdrop="static" id="ModalSesion" tabindex="-1"
   aria-labelledby="ModalSesionLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -51,16 +51,6 @@
                 </div>
                 <div class="clearfix"></div>
               </div>
-              <hr>
-              <p class="textConecta">O conéctate con uno de estos servicios</p>
-              <div class="socialMedia">
-                <div (click)="signInWithFB()" class="btnFacebook">
-                  <img src="./assets/modal/facebook-logo.png" alt="">Facebook
-                </div>
-                <div (click)="signInWithGoogle()" class="btnGoogle">
-                  <img src="./assets/modal/google-logo.png" alt="">Google
-                </div>
-              </div>
             </form>
           </mat-tab>
 
@@ -107,6 +97,16 @@
           <div class="notRegister">¿No estás registrado?</div>
           <a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalNewAccount">Crea una cuenta</a>
         </div>
+        <div class="w-100 d-flex align-items-center justify-content-center">
+          <div class="line bg-secondary bg-opacity-25"></div>
+          <p class="text-center my-0 mx-2">&oacute;</p>
+          <div class="line bg-secondary bg-opacity-25"></div>
+        </div>
+        <div class="socialMedia">
+          <div (click)="signInWithGoogle()" class="btnGoogle">
+            <img src="./assets/modal/google-logo.png" alt=""> Continuar con Google
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -114,8 +114,8 @@
 
 
 <!-- Modal Create Account-->
-<div class="modal" style="display: none;" aria-hidden="true" data-backdrop="false" data-bs-backdrop="static" id="ModalNewAccount" tabindex="-1"
-  aria-labelledby="modalNewAccountLabel" aria-hidden="true">
+<div class="modal fade" aria-hidden="true" data-backdrop="false" data-bs-backdrop="static" id="ModalNewAccount" tabindex="-1"
+  aria-labelledby="modalNewAccountLabel">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content ">
       <div class="recoveryLeft ">
@@ -133,18 +133,19 @@
         </div>
         <div class="titleRecovery">Crear cuenta</div>
         <div class="socialMedia" [class.active]="socialMedia">
-          <div class="btnFacebook">
-            <img src="./assets/modal/facebook-logo.png" alt="">Regístrate con Facebook
-          </div>
-          <div class="btnGoogle">
+          <div class="btnGoogle mb-1" (click)="signInWithGoogle()">
             <img src="./assets/modal/google-logo.png" alt="">Regístrate con Google
           </div>
         </div>
-
+        <div class="w-100 mt-2 mb-3 d-flex align-items-center justify-content-center">
+          <div class="line bg-secondary bg-opacity-25"></div>
+          <p class="text-center my-0 mx-2">&oacute;</p>
+          <div class="line bg-secondary bg-opacity-25"></div>
+        </div>
         <mat-tab-group mat-align-tabs="center" (selectedTabChange)="showSocialMedia($event)">
           <!-- PERSONAL -->
           <mat-tab label="Personal">
-            <form name="personalAccountForm" [formGroup]="personalAccountForm" autocomplete="false">
+            <form name="personalAccountForm" [formGroup]="personalAccountForm" autocomplete="off">
 
               <div class="elementRow">
                 <div class="divValida" [ngClass]="{error : validatePersonalAccountForm('firstName')}">
@@ -239,7 +240,7 @@
 
           <!-- EMPRESA -->
           <mat-tab label="Empresa">
-            <form name="businessAccountForm" [formGroup]="businessAccountForm" autocomplete="false">
+            <form name="businessAccountForm" [formGroup]="businessAccountForm" autocomplete="off">
 
               <div class="elementRow">
                 <div class="divValida" [ngClass]="{error : validateBusinessAccountForm('ruc')}">
