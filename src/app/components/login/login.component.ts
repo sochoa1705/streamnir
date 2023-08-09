@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import * as bootstrap from 'bootstrap';
@@ -9,11 +8,11 @@ import { AccountsService, AuthDTO } from 'src/app/Services/accounts.service';
 import { ModelTaggingLogin } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { NotificationService } from 'src/app/Services/notification.service';
-import { PopupService } from 'src/app/Services/pop-up/popup.service';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 import { Guid } from 'src/app/shared/utils';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
 import { environment } from 'src/environments/environment';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class LoginPerson {
   constructor(
@@ -37,40 +36,37 @@ export class LoginBusiness {
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  isPersonLoggin: boolean = true;
-  isPerson: boolean = true;
+	@ViewChild('closeModalNewAccount') closeModalNewAccount: ElementRef;
 
-  submitBusiness = false;
-  submitPerson = false;
+	isPersonLoggin: boolean = true;
+	isPerson: boolean = true;
 
+	submitBusiness = false;
+	submitPerson = false;
 
-  personalAccountForm: FormGroup;
+	personalAccountForm: FormGroup;
 
-  businessAccountForm: FormGroup;
+	businessAccountForm: FormGroup;
 
+	login = new LoginPerson();
+	loginB = new LoginBusiness();
 
-  login = new LoginPerson();
-  loginB = new LoginBusiness();
-
-  @ViewChild("closeModalSesion") closeModalSesion: ElementRef;
-  @ViewChild("closeModalNewAccount") closeModalNewAccount: ElementRef;
+	socialMedia: Boolean = true;
 
   constructor(
-      private _popUpSubject: PopupService,
       private _authService: SocialAuthService,
       private _accountService: AccountsService,
       private _formBuilder: FormBuilder,
-      public _matDialog: MatDialog,
       private _matSnackBar: MatSnackBar,
       private _validatorsService: ValidatorsService,
       public loaderSubjectService: LoaderSubjectService,
       private notification: NotificationService,
-      private misReservasService: MisReservasService
+      private misReservasService: MisReservasService,
+      public activeModal: NgbActiveModal
   ) {
   }
 
   ngOnInit(): void {
-    // this.taggingPageView();
     this._authService.authState.subscribe((user) => {
       if (user && user.provider == "GOOGLE")
         this.saveSocialAccount(user.firstName, user.lastName, user.email, "G", user.id, user.photoUrl)
@@ -79,7 +75,6 @@ export class LoginComponent implements OnInit {
     this.loadUsuario();
     this.personalAccountForm = this.createPersonalAccountForm();
     this.businessAccountForm = this.createBusinessAccountForm();
-    this.openLoginModal();
   }
 
 
@@ -90,16 +85,19 @@ export class LoginComponent implements OnInit {
   }
 
 
-  saveSocialAccount(Firstname: string, FatherLastname: string, Email: string, SocialNetwork: "G" | "F", IdSocialNetwork: string, image: string) {
-
+  saveSocialAccount(Firstname: string,
+                    FatherLastname: string,
+                    Email: string,
+                    SocialNetwork: 'G' | 'F',
+                    IdSocialNetwork: string,
+                    image: string) {
     this.initLoading();
-
-    const payload = {
+    const payload: any = {
       TrackingCode: Guid(),
       MuteExceptions: environment.muteExceptions,
       Caller: {
-        Company: "Expertia",
-        Application: "NMViajes"
+        Company: 'Expertia',
+        Application: 'NMViajes'
       },
       Parameter: {
         Firstname,
@@ -122,14 +120,13 @@ export class LoginComponent implements OnInit {
 
         if (isSuccess) {
           this._accountService.guardarStorage(response.Result, image, SocialNetwork);
-          this.closeModal();
           this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
             verticalPosition: 'top',
             duration: 2000
           });
-        } else {
-          this.notification.showNotificacion("Error", response.Result.Message, 10);
-        }
+          this.activeModal.close(true);
+        } else
+          this.notification.showNotificacion('Error', response.Result.Message, 10);
 
 
         //this.loaderSubjectService.closeLoader()
@@ -151,33 +148,6 @@ export class LoginComponent implements OnInit {
     } else {
       this._accountService.dispatchLogged(false);
     }
-  }
-
-
-  socialMedia: Boolean = true;
-
-  showSocialMedia($event: { index: string | number; }) {
-    this.socialMedia = $event.index == 0;
-  }
-
-  validatePersonalAccountForm(field: string) {
-    return this.personalAccountForm.controls[field].errors
-      && this.personalAccountForm.controls[field].touched;
-  }
-
-
-  get personalAccountEmailErrorMessage(): string {
-    const errors = this.personalAccountForm.get('email')?.errors;
-
-    if (errors?.required) {
-      return 'Ingresa tu email';
-    } else if (errors?.minlength) {
-      return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
-    } else if (errors?.pattern) {
-      return 'El valor ingresado no tiene formato de email.';
-    }
-
-    return '';
   }
 
   createBusinessAccountForm(): FormGroup {
@@ -311,81 +281,63 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  savePersonalAccount(): void {
-    this.initLoading();
-    if (this.personalAccountForm.invalid) {
-      this.closeLoading();
-      this.notification.showNotificacion("Error", "Error de validación")
-      this.personalAccountForm.markAllAsTouched();
-      return;
-    }
+	savePersonalAccount(): void {
+		this.initLoading();
+		if (this.personalAccountForm.invalid) {
+			this.closeLoading();
+			this.notification.showNotificacion('Error', 'Error de validación');
+			this.personalAccountForm.markAllAsTouched();
+			return;
+		}
+		if (this.personalAccountForm.valid) {
+			const payload = {
+				TrackingCode: Guid(),
+				MuteExceptions: environment.muteExceptions,
+				Caller: {
+					Company: 'Expertia',
+					Application: 'NMViajes'
+				},
+				Parameter: {
+					Firstname: this.personalAccountForm.get('firstName')?.value,
+					FatherLastname: this.personalAccountForm.get('fatherLastname')?.value,
+					MotherLastname: this.personalAccountForm.get('motherLastname')?.value,
+					Email: this.personalAccountForm.get('email')?.value,
+					Password: this.personalAccountForm.get('password')?.value,
+					IsPerson: true,
+					Ruc: '',
+					BusinessName: ''
+				}
+			};
+			this._accountService.saveAccount(payload).subscribe({
+				next: (response) => {
+					this.closeLoading();
+					const isSuccess = response.Result.IsSuccess;
+					if (isSuccess) {
+						const modelTag = new ModelTaggingLogin('Signup', 'Cuenta Personal', 'Password', response.Result.Email, response.Result.Id);
+						this.tagging(modelTag);
+						this.toggleModalVerificaCorreo();
+						this.personalAccountForm.reset();
+						this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
+							verticalPosition: 'top',
+							duration: 2000
+						});
+						this.activeModal.close(true);
+					} else
+						this.notification.showNotificacion('Error', response.Result.Message || 'Error', 10);
+				},
+				error: () => {
+					this.closeLoading();
+					this.notification.showNotificacion('Error', 'Error del servidor', 10);
+				}
+			});
+		}
+	}
 
-    if (this.personalAccountForm.valid) {
-
-      const payload = {
-        TrackingCode: Guid(),
-        MuteExceptions: environment.muteExceptions,
-        Caller: {
-          Company: "Expertia",
-          Application: "NMViajes"
-        },
-        Parameter: {
-          Firstname: this.personalAccountForm.get("firstName")?.value,
-          FatherLastname: this.personalAccountForm.get("fatherLastname")?.value,
-          MotherLastname: this.personalAccountForm.get("motherLastname")?.value,
-          Email: this.personalAccountForm.get("email")?.value,
-          Password: this.personalAccountForm.get("password")?.value,
-          IsPerson: true,
-          Ruc: "",
-          BusinessName: "",
-        }
-      };
-
-      this._accountService.saveAccount(payload).subscribe({
-        next: (response) => {
-          this.closeLoading();
-          const isSuccess = response.Result.IsSuccess;
-
-          if (isSuccess) {
-
-            const modelTag = new ModelTaggingLogin("Signup", "Cuenta Personal", "Password", response.Result.Email, response.Result.Id);
-            this.tagging(modelTag);
-
-            this.closeModal();
-            this.toggleModalVerificaCorreo();
-
-
-            this.personalAccountForm.reset();
-
-            this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
-              verticalPosition: 'top',
-              duration: 2000
-            });
-          } else {
-            this.notification.showNotificacion("Error", response.Result.Message || "Error", 10);
-          }
-          //this.loaderSubjectService.closeLoader()
-        },
-        error: () => {
-          this.closeLoading();
-          this.notification.showNotificacion("Error", "Error del servidor", 10);
-          //this.loaderSubjectService.closeLoader()
-        },
-        complete: () => { }
-      });
-    }
-  }
-
-
-  toggleModalVerificaCorreo() {
-    const modal = document.getElementById("ModalVerificaCorreo");
-
-    if (!modal) {
-      return;
-    }
-
-    bootstrap.Modal.getOrCreateInstance(modal).toggle();
-  }
+	toggleModalVerificaCorreo() {
+		const modal = document.getElementById('ModalVerificaCorreo');
+		if (!modal) return;
+		bootstrap.Modal.getOrCreateInstance(modal).toggle();
+	}
 
   tagging(model: ModelTaggingLogin) {
     TaggingService.tagLoginSignup(model);
@@ -397,67 +349,57 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  signIn(formPerson: NgForm, formBussines: NgForm) {
+	signIn(formPerson: NgForm, fromBusiness: NgForm) {
+		const validPerson = this.validationFormLogin(formPerson);
+		const validBusiness = this.validationFormLogin(fromBusiness);
 
-    const validPerson = this.validationFormLogin(formPerson);
-    const validBusiness = this.validationFormLogin(formBussines);
+		this.initLoading();
 
-    this.initLoading();
-
-    if (this.isPersonLoggin && validPerson) {
-      this._accountService.signIn(this.login, this.isPersonLoggin).subscribe(resp => {
-        this.closeLoading();
-        if (resp.IsSuccess) {
-
-          const modelTag = new ModelTaggingLogin("Login", "Cuenta Personal", "Password", resp.Email, resp.Id);
-          this.tagging(modelTag);
-
-          this._accountService.guardarStorage(resp);
-          this.getAllBookings(resp);
-          this.closeModal();
-        } else {
-          this.notification.showNotificacion("Error", resp.Message, 10);
-          this.closeLoading();
-        }
-      }, () => {
-        this.notification.showNotificacion("Error", "Error de autenticación", 10);
-        this.closeLoading();
-      })
-
-
-    } else if (!this.isPersonLoggin && validBusiness) {
-      this._accountService.signIn(this.loginB, this.isPersonLoggin).subscribe(resp => {
-        if (resp.IsSuccess) {
-          this.closeLoading();
-
-          const modelTag = new ModelTaggingLogin("Login", "Cuenta Empresa", "Password", resp.Email, resp.Id);
-          this.tagging(modelTag);
-
-          this._accountService.guardarStorage(resp);
-          this.getAllBookings(resp);
-          this.closeModal();
-        }
-      }, () => {
-        this.notification.showNotificacion("Error", "Error de validación", 5);
-        this.closeLoading();
-      })
-
-    } else if (!validPerson && this.isPersonLoggin) {
-      this.submitPerson = true;
-      this.notification.showNotificacion("Error", "Error de validación", 5);
-      this.closeLoading();
-      // this.openSnackBar("El usuario y la contraseña son requeridos")
-    } else if (!validBusiness && !this.isPersonLoggin) {
-      this.submitBusiness = true;
-      this.notification.showNotificacion("Error", "Error de validación", 5);
-      this.closeLoading();
-      // this.openSnackBar("El usuario y la contraseña son requeridos")
-    } else {
-      this.openSnackBar("Ocurrio un error");
-      this.notification.showNotificacion("Error", "Error de validación", 5);
-      this.closeLoading();
-    }
-  }
+		if (this.isPersonLoggin && validPerson) {
+			this._accountService.signIn(this.login, this.isPersonLoggin).subscribe(resp => {
+				this.closeLoading();
+				if (resp.IsSuccess) {
+					const modelTag = new ModelTaggingLogin('Login', 'Cuenta Personal', 'Password', resp.Email, resp.Id);
+					this.tagging(modelTag);
+					this._accountService.guardarStorage(resp);
+					this.getAllBookings(resp);
+					this.activeModal.close(true);
+				} else {
+					this.notification.showNotificacion('Error', resp.Message, 10);
+					this.closeLoading();
+				}
+			}, () => {
+				this.notification.showNotificacion('Error', 'Error de autenticación', 10);
+				this.closeLoading();
+			});
+		} else if (!this.isPersonLoggin && validBusiness) {
+			this._accountService.signIn(this.loginB, this.isPersonLoggin).subscribe(resp => {
+				if (resp.IsSuccess) {
+					this.closeLoading();
+					const modelTag = new ModelTaggingLogin('Login', 'Cuenta Empresa', 'Password', resp.Email, resp.Id);
+					this.tagging(modelTag);
+					this._accountService.guardarStorage(resp);
+					this.getAllBookings(resp);
+					this.activeModal.close(true);
+				}
+			}, () => {
+				this.notification.showNotificacion('Error', 'Error de validación', 5);
+				this.closeLoading();
+			});
+		} else if (!validPerson && this.isPersonLoggin) {
+			this.submitPerson = true;
+			this.notification.showNotificacion('Error', 'Error de validación', 5);
+			this.closeLoading();
+		} else if (!validBusiness && !this.isPersonLoggin) {
+			this.submitBusiness = true;
+			this.notification.showNotificacion('Error', 'Error de validación', 5);
+			this.closeLoading();
+		} else {
+			this.openSnackBar('Ocurrió un error');
+			this.notification.showNotificacion('Error', 'Error de validación', 5);
+			this.closeLoading();
+		}
+	}
 
   signInWithGoogle(): void {
     this._authService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -476,33 +418,6 @@ export class LoginComponent implements OnInit {
       duration: 2000,
       panelClass: ['mat-toolbar', 'mat-warn']
     });
-  }
-
-  closeModal() {
-    if (this.closeModalSesion) {
-      const closeModalSession: any = this.closeModalSesion.nativeElement;
-      closeModalSession ? closeModalSession.click() : null;
-    }
-
-    if (this.closeModalNewAccount) {
-      const closeModalNewAccount: any = this.closeModalNewAccount.nativeElement;
-      closeModalNewAccount ? closeModalNewAccount.click() : null;
-    }
-  }
-
-  openLoginModal() {
-    const hash = location.hash;
-    if (hash && hash.trim() === '#login') {
-      const modal = document.getElementById('ModalSesion');
-      if (modal)
-        setTimeout(() => {
-          bootstrap.Modal.getOrCreateInstance(modal).toggle();
-        }, 1000);
-    }
-  }
-
-  removeLoginHash() {
-    history.pushState('', document.title, window.location.pathname + location.search);
   }
 
   togglePassword(pass: HTMLInputElement) {

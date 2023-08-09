@@ -30,6 +30,7 @@ import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { initializeAppCheck, provideAppCheck, ReCaptchaV3Provider } from '@angular/fire/app-check';
 import { environment } from '../environments/environment';
+import { SignUpModule } from './components/sign-up/sign-up.module';
 
 if (!environment.production) (<any>window).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 
@@ -41,7 +42,6 @@ if (!environment.production) (<any>window).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		MatTabsModule,
-		//MatCheckboxModule,
 		MatSnackBarModule,
 		MatDialogModule,
 		NgbModule,
@@ -64,7 +64,8 @@ if (!environment.production) (<any>window).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 		provideAppCheck(() => initializeAppCheck(getApp(), {
 			provider: new ReCaptchaV3Provider(environment.reCaptchaPublicKey),
 			isTokenAutoRefreshEnabled: true
-		}))
+		})),
+  SignUpModule
 	],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
