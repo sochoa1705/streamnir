@@ -14,6 +14,8 @@ FROM nginx:alpine
 
 # Copia los archivos de construcción desde la etapa 1
 COPY --from=build /app/dist/NuevoMundoViajes /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+CMD ["nginx", "-g", "daemon off;"]
 
 # Puerto en el que se ejecutará el servidor Nginx
 EXPOSE 80
