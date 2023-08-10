@@ -15,21 +15,16 @@ export class ValidatorsService {
   constructor() { }
 
   equalFields(field1: string, field2: string) {
-
     return (formGroup: AbstractControl): ValidationErrors | null => {
-
-      const valueField1 = formGroup.get(field1)?.value.toUpperCase();
-      const valueField2 = formGroup.get(field2)?.value.toUpperCase();
-
+      const valueField1 = formGroup.get(field1)?.value?.toUpperCase();
+      const valueField2 = formGroup.get(field2)?.value?.toUpperCase();
       if (valueField1 !== valueField2) {
         formGroup.get(field2)?.setErrors({ notEquals: true });
         return { notEquals: true };
       }
-
       formGroup.get(field2)?.setErrors(null);
-
       return null;
-    }
+    };
   }
 
   validateAddress(dependentField: string, field: string) {
