@@ -1,0 +1,30 @@
+<div class="container__page">
+	<div class="container__page__search">
+		<div class="container__page__search__form">
+			<h3>Encuentra vuelos para tu próximo viaje</h3>
+			<div class="container__page__search__form__metasearch">
+				<app-tab-vuelos></app-tab-vuelos>
+			</div>
+		</div>
+	</div>
+	<section>
+		<ng-container *ngIf="allDataGroups.length > 0">
+			<div>Filtros</div>
+			<div class="container__page__results">
+				<div class="container__page__results__filters">Filtros2</div>
+				<div class="container__page__results__cards">
+					<ng-container *ngFor="let item of dataGroupsPaginate">
+						<app-card-result-search [flight]="item"></app-card-result-search>
+					</ng-container>
+				</div>
+				<div class="container__page__results__button">
+					<app-button
+						[text]="'Mostrar más resultados'"
+						[color]="'outline-primary'"
+						(onClick)="showMoreResults()"
+					></app-button>
+				</div>
+			</div>
+		</ng-container>
+	</section>
+</div>

@@ -1,0 +1,125 @@
+@use '/src/scss/colors';
+
+.span__label{
+	color:colors.$neutral-900;
+	margin-left:3px;
+	font-weight: 500;
+	font-family: 'Montserrat';
+	font-size: 14px;
+	line-height: 20px;
+	
+	&__required{
+		color:colors.$red-400;
+	}
+	&.disabled{
+		color:colors.$neutral-400;
+	}
+}
+
+
+.select__box{
+    margin-top: 5px;
+	position: relative;
+	&__select{
+		width: 100%;
+        padding:8px 12px;
+		margin: 0px;
+		border:none;
+		border: 1px solid colors.$neutral-200;
+		box-sizing: border-box;
+		color:colors.$neutral-900;
+		font-weight: 400;
+		font-size: 14px;
+		padding-left: 0px;
+		line-height: 20px;
+		font-family: 'Montserrat';
+		padding: 8px 12px;
+		border-radius: 4px;
+        margin-left: 3px;
+		display: flex;
+		justify-content: space-between;
+		cursor: pointer;
+		&__placeholder{
+			color:colors.$neutral-400;
+		}
+		&.error{
+			border:1px solid colors.$red-400;
+		}
+	}
+	&__options{
+		width: 100%;
+		background: white;
+		position: absolute;
+		box-shadow: 0px 4px 6px -4px #1018281A;
+		box-shadow: 0px 10px 15px -3px #1018281A;
+		border: 1px solid colors.$neutral-200;
+		border-top: none;
+		max-height: 172px;
+		margin-left: 3px;
+		padding: 8px 6px 8px 6px;
+		border-radius: 0px 0px 4px 4px;
+		overflow-y: auto;
+		z-index: 2;
+		&__list{
+			display: flex;
+			flex-direction: column;
+			gap:4px;
+			margin-left: 0px;
+			padding: 0px;
+			&__input{
+				padding: 4px 8px;
+				>input{
+					width: 100%;
+					padding:8px 12px;
+					margin: 0px;
+					border:none;
+					border: 1px solid colors.$neutral-200;
+					box-sizing: border-box;
+					color:colors.$neutral-900;
+					font-weight: 400;
+					font-size: 14px;
+					padding-left: 0px;
+					line-height: 20px;
+					font-family: 'Montserrat';
+					padding: 8px 12px;
+					border-radius: 4px;
+					&::placeholder{
+						color:colors.$neutral-400;
+					}
+					&:focus {
+						outline: none;
+						box-shadow: none;
+						border:1px solid colors.$blue-300;
+					}
+				}
+
+			}
+			&__option{
+				padding: 4px 8px;
+				&:hover{
+					background:colors.$gris-50;
+				}
+				label{
+					font-family: Montserrat;
+					font-size: 14px;
+					font-weight: 400;
+					line-height: 20px;
+					letter-spacing: 0em;
+					padding-bottom: 0px;
+					cursor: pointer;
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+.span__error{
+	position: relative;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 14px;
+	margin-left:5px;
+	top: -3px;
+	color:colors.$red-400;
+}

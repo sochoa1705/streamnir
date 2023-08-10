@@ -1,0 +1,31 @@
+<button
+	*ngIf="right && icon"
+	[class]="color + ' btn'"
+	[disabled]="disabled"
+	(click)="clickButton()"
+	[class.w-100]="w100"
+>
+	{{ text }}
+	<img [src]="'./assets/svg/' + icon" />
+</button>
+
+<button
+	*ngIf="left && icon"
+	[class]="color + ' btn'"
+	[disabled]="disabled"
+	(click)="clickButton()"
+	[class.w-100]="w100"
+>
+	<img [src]="'./assets/svg/' + icon" />
+	{{ text }}
+</button>
+
+<button
+	*ngIf="!right && !left && !icon"
+	[class]="'btn ' + color"
+	[disabled]="disabled"
+	(click)="clickButton()"
+	[class.w-100]="w100"
+>
+	{{ text }}
+</button>

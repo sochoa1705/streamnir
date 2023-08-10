@@ -1,0 +1,39 @@
+<span *ngIf="label" class="span__label" [class.span__label__stroke]="labelStroke" [class.disabled]="disabled"
+	>{{ label }} <span *ngIf="isRequired" class="span__label__required">*</span><img *ngIf="isCheck" src="./assets/svg/checkSuccess.svg" /></span>
+<div class="group-input">
+	<input
+		*ngIf="isOnlyText"
+		[placeholder]="placeholder"
+		[value]="value"
+		[class]="class"
+		[class.label]="label"
+		[class.icon]="icon"
+		[name]="name"
+		[id]="name"
+		[formControlName]="name"
+		[readonly]="disabled"
+		autocomplete="off"
+		OnlyLetters
+		appRemoveAccents
+	/>
+
+	<input
+		*ngIf="!isOnlyText"
+		[placeholder]="placeholder"
+		[value]="value"
+		[class]="class"
+		[class.label]="label"
+		[class.icon]="icon"
+		[name]="name"
+		[id]="name"
+		[formControlName]="name"
+		[readonly]="disabled"
+		autocomplete="off"
+		[maxlength]="maxLenght"
+		OnlyNumber="{{isOnlyNumber ? 'number' : ''}}"
+		appRemoveAccents
+	/>
+
+</div>
+
+<span class="span__error" *ngIf="labelError !== ''">{{ labelError }}</span>

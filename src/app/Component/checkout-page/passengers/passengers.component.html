@@ -1,0 +1,178 @@
+<div class="container__page">
+	<div class="container__page__section">
+		<div class="container__page__section__title">
+			<div class="container__page__section__title__primary">
+				<div class="container__page__section__title__primary__text"><h1>Información de pasajeros</h1></div>
+			</div>
+			<div class="container__page__section__title__secondary">
+				Verifica que los datos ingresados sean correctos ya que una vez emitido el boleto, este no puede ser cambiado.
+			</div>
+		</div>
+		<div class="container__page__section__cards">
+			<card-passenger
+				*ngFor="let item of numberReturn(totalADT); let index = index"
+				[type]="'ADT'"
+				[arrayDays]="arrayDays"
+				[arrayMonths]="arrayMonths"
+				[arrayYears]="arrayYearsADT"
+				[index]="index + 1"
+				[contryList]="contryList"
+				[indexCard]="index"
+				(updateValidForm)="updateValidForm($event)"
+			></card-passenger>
+			<card-passenger
+				*ngFor="let item of numberReturn(totalCNN); let index = index"
+				[type]="'CNN'"
+				[arrayDays]="arrayDays"
+				[arrayMonths]="arrayMonths"
+				[arrayYears]="arrayYearsCNN"
+				[index]="index + 1"
+				[contryList]="contryList"
+				[indexCard]="index + totalADT"
+				(updateValidForm)="updateValidForm($event)"
+			></card-passenger>
+			<card-passenger
+				*ngFor="let item of numberReturn(totalINF); let index = index"
+				[type]="'INF'"
+				[arrayDays]="arrayDays"
+				[arrayMonths]="arrayMonths"
+				[arrayYears]="arrayYearsINF"
+				[index]="index + 1"
+				[contryList]="contryList"
+				[indexCard]="index + totalADT + totalCNN"
+				(updateValidForm)="updateValidForm($event)"
+			></card-passenger>
+		</div>
+
+		<form [formGroup]="formGroup" autocomplete="off">
+			<div class="container__page__section__check">
+				<app-input-check
+					[label]="'He leído y aceptado la'"
+					[name]="'acceptPolitics'"
+					[textLink]="'política de protección de datos personales.'"
+					[url]="'/politicas-de-privacidad'"
+					[labelError]="acceptPoliticsField.touched && acceptPoliticsField!.invalid ? 'Favor de aceptar la política de protección de datos personales.' : ''"
+				></app-input-check>
+			</div>
+			<div class="container__page__section__contact">
+				<div class="container__page__section__title">
+					<div class="container__page__section__title__primary">
+						<div class="container__page__section__title__primary__text">
+							<h1>Envío de información de vuelo</h1>
+						</div>
+					</div>
+					<div class="container__page__section__title__secondary">
+						La persona que recibe el comprobante será fundamental para gestionar la reserva y recibirá información importante sobre el viaje.
+					</div>
+				</div>
+				<app-card-checkout>
+					<div class="container__page__section__contact__form">
+						<div class="container__page__section__contact__form__name">
+							<app-input
+								[label]="'Nombre'"
+								[placeholder]="'Ingresar nombre'"
+								[name]="'name'"
+								[isRequired]="true"
+								[isOnlyText]="true"
+								[class]="nameField.touched && nameField!.invalid ? 'error' : ''"
+								[labelError]="
+									nameField.touched && nameField!.hasError('required')
+										? 'Nombre es obligatorio'
+										: nameField.touched && nameField!.hasError('maxlength')
+										? 'Debe tener max. 50 caracteres'
+										: nameField.touched && nameField!.hasError('whitespace')
+										? 'Nombre no válido'
+										: ''
+								"
+							></app-input>
+							<app-input
+								[label]="'Apellido Paterno'"
+								[placeholder]="'Ingresar apellido paterno'"
+								[name]="'lastName'"
+								[isOnlyText]="true"
+								[isRequired]="true"
+								[class]="lastNameField.touched && lastNameField!.invalid ? 'error' : ''"
+								[labelError]="
+									lastNameField.touched && lastNameField!.hasError('required')
+										? 'Apellido paterno es obligatorio'
+										: lastNameField.touched && lastNameField!.hasError('maxlength')
+										? 'Debe tener max. 50 caracteres'
+										: lastNameField.touched && lastNameField!.hasError('whitespace')
+										? 'Apellido paterno no válido'
+										: ''
+								"
+							></app-input>
+							<app-input
+								[label]="'Apellido Materno'"
+								[placeholder]="'Ingresar apellido materno'"
+								[name]="'motherLastname'"
+								[isOnlyText]="true"
+								[isRequired]="true"
+								[class]="motherLastnameField.touched && motherLastnameField!.invalid ? 'error' : ''"
+								[labelError]="
+									motherLastnameField.touched && motherLastnameField!.hasError('required')
+										? 'Apellido materno es obligatorio'
+										: motherLastnameField.touched && motherLastnameField!.hasError('maxlength')
+										? 'Debe tener max. 50 caracteres'
+										: motherLastnameField.touched && motherLastnameField!.hasError('whitespace')
+										? 'Apellido materno no válido'
+										: ''
+								"
+							></app-input>
+						</div>
+						<section>
+							<div class="container__page__section__contact__form__phone">
+								<span
+									>Código <span class="required">*</span>
+									<span class="text-left">Número de teléfono <span class="required">*</span></span></span
+								>
+								<ngx-intl-tel-input
+									[preferredCountries]="preferredCountries"
+									[enableAutoCountrySelect]="true"
+									[enablePlaceholder]="true"
+									[customPlaceholder]="'Ingresar número'"
+									[searchCountryFlag]="true"
+									[searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+									[selectFirstCountry]="false"
+									[selectedCountryISO]="CountryISO.Peru"
+									[maxLength]="12"
+									[phoneValidation]="true"
+									[separateDialCode]="separateDialCode"
+									[numberFormat]="PhoneNumberFormat.National"
+									name="fullPhone"
+									formControlName="fullPhone"
+								>
+								</ngx-intl-tel-input>
+								<span class="error" *ngIf="fullPhoneField.touched && fullPhoneField!.invalid">Número inválido</span>
+							</div>
+							<div  class="container__page__section__contact__form__email">
+								<app-input
+									[label]="'Email'"
+									[placeholder]="'Ingresar correo'"
+									[name]="'email'"
+									[isRequired]="true"
+									[class]="emailField.touched && emailField!.invalid ? 'error' : ''"
+									[labelError]="
+										emailField.touched && emailField!.hasError('required')
+											? 'Email es obligatorio'
+											: emailField.touched && emailField!.hasError('email')
+											? 'Email inválido'
+											: ''
+									"
+								></app-input>
+							</div>
+						</section>
+					</div>
+				</app-card-checkout>
+			</div>
+
+		</form>
+		<div class="container__page__section__button">
+			<app-button
+				[text]="'Continuar a pagar'"
+				[color]="'primary'"
+				(onClick)="setInfoPassengersInformation()"
+			></app-button>
+		</div>
+	</div>
+</div>

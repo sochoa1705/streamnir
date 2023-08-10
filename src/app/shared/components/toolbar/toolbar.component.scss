@@ -1,160 +1,167 @@
 @import "/src/scss/variables";
 .spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
-.mat-drawer{
-    position:fixed;
-    width: 300px;
-    // z-index:300;
-    ul{
-        list-style: none;
-        padding-left: 10px;
-        margin-top: 40px;
-        li{
-            display: block!important;
-            img{
-                width:20px;
-                height: auto;
-                margin-right:7px;
-            }
-            a{
-                color:#4B4B4B!important;
-                font-size: 12px;
-            }
-        }
+.mat-drawer {
+  position: fixed;
+  width: 300px;
+  // z-index:300;
+  ul {
+    list-style: none;
+    padding-left: 10px;
+    margin-top: 40px;
+    li {
+      display: block !important;
+      img {
+        width: 20px;
+        height: auto;
+        margin-right: 7px;
+      }
+      a {
+        color: #4b4b4b !important;
+        font-size: 12px;
+      }
     }
-    &-container{
-        z-index:300;
+  }
+  &-container {
+    z-index: 300;
+  }
+  .close {
+    float: right;
+    font-size: 14px;
+    padding: 7px;
+    &:hover {
+      background: rgb(231, 230, 230);
     }
-    .close{
-        float: right;
-        font-size: 14px;
-        padding: 7px;
-        &:hover{
-            background: rgb(231, 230, 230);
-        }
-    }
-
+  }
 }
 mat-drawer-container {
-    min-height: 0;
-    z-index:300;
-    max-height: 500px; /* doesn't work*/
-    height: fit-content; /* doesn't work*/
-    /* height: 100vh; This Gives 100% View Height with a scrollbar*/
-  }
+  min-height: 0;
+  z-index: 300;
+  max-height: 500px; /* doesn't work*/
+  height: fit-content; /* doesn't work*/
+  /* height: 100vh; This Gives 100% View Height with a scrollbar*/
+}
 
 .mat-toolbar {
-    background-color: $red;
+  background-color: $red;
+  color: $white;
+  &.fixed {
+    position: fixed;
+    z-index: 5;
+    #top {
+      max-width: 1450px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+  svg.logo {
+    cursor: pointer;
+    margin-left: 50px;
+    @media (max-width: 768px) {
+      width: 100px;
+      margin-left: 0;
+    }
+  }
+  & .main {
+    padding: 0;
+    line-height: 0;
+    background: transparent;
+    margin-left: 5px;
+  }
+  & > a {
+    margin-right: 5px;
     color: $white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    @media (max-width: 768px) {
+      margin: 0 9px;
+    }
+    & > span {
+      font-size: 6px;
+      line-height: 10px;
+      display: flex !important;
+      flex-direction: column;
+      align-items: center;
+      color: $red;
+      font-weight: normal;
+      white-space: pre-line;
+      width: 50px;
+      height: 2px;
+      @media (max-width: 768px) {
+        display: none !important;
+      }
+    }
+    &:hover > span {
+      font-size: 11px;
+      line-height: 14px;
+      color: $white;
+      height: auto;
+    }
 
-    svg.logo {
+    // &:first-child {
+    //     padding-left: 18px !important;
+    //     border-left: 1px solid blue !important;
+    // }
+  }
+  ul {
+    list-style: none;
+    margin-bottom: 0;
+    li {
+      display: inline-block;
+      margin: 0 20px;
+      a {
         cursor: pointer;
-        margin-left: 50px;
-        @media (max-width: 768px) {
-            width: 100px;
-            margin-left: 0;
-        }
-    }
-    & .main {
-        padding: 0;
-        line-height: 0;
-        background: transparent;
-        margin-left: 5px;
-    }
-    & > a {
-        margin-right: 5px;
-        color: $white;
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        color: rgba(255, 255, 255, 1);
         text-decoration: none;
-        cursor: pointer;
-        @media (max-width: 768px) {
-            margin: 0 9px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        line-height: 20px;
+        &:after {
+          content: "";
+          display: block;
+          margin: auto;
+          height: 2px;
+          width: 0;
+          transition: all 0.3s;
         }
-        & > span {
-            font-size: 6px;
-            line-height: 10px;
-            display: flex !important;
-            flex-direction: column;
-            align-items: center;
-            color: $red;
-            font-weight: normal;
-            white-space: pre-line;
-            width: 50px;
-            height: 2px;
-            @media (max-width: 768px) {
-                display: none !important;
-            }
+        &:hover {
+          color: rgba(255, 255, 255, 1);
+          &:after {
+            width: 100%;
+            background: $white;
+          }
         }
-        &:hover > span {
-            font-size: 11px;
-            line-height: 14px;
-            color: $white;
-            height: auto;
-        }
-
-        // &:first-child {
-        //     padding-left: 18px !important;
-        //     border-left: 1px solid blue !important;
-        // }
+      }
     }
-    ul {
-        list-style: none;
-        margin-bottom: 0;
-        li {
-            display: inline-block;
-            margin: 0 20px;
-            a {
-                cursor: pointer;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                position: relative;
-                color: rgba(255, 255, 255, 1);
-                text-decoration: none;
-                font-size: 14px;
-                font-weight: 600;
-                letter-spacing: 0.5px;
-                line-height: 20px;
-                &:after {
-                    content: "";
-                    display: block;
-                    margin: auto;
-                    height: 2px;
-                    width: 0;
-                    transition: all 0.3s;
-                }
-                &:hover {
-                    color: rgba(255, 255, 255, 1);
-                    &:after {
-                        width: 100%;
-                        background: $white;
-                    }
-                }
-            }
-        }
-    }
+  }
 }
 .active {
+  color: rgba(255, 255, 255, 1) !important;
+  &:after {
+    content: "" !important;
+    display: block !important;
+    margin: auto !important;
+    height: 2px !important;
+    transition: all 0.3s !important;
+    width: 100% !important;
+    background: $white !important;
     color: rgba(255, 255, 255, 1) !important;
-    &:after {
-        content: "" !important;
-        display: block !important;
-        margin: auto !important;
-        height: 2px !important;
-        transition: all 0.3s !important;
-        width: 100% !important;
-        background: $white !important;
-        color: rgba(255, 255, 255, 1) !important;
-    }
+  }
 }
 
-.border{
-    border-color: white!important
+.border {
+  border-color: white !important;
 }
 
-.img-perfil{
-    width: 32px;
-    height: 32px;
-    border-radius: 50px;
+.img-perfil {
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
 }

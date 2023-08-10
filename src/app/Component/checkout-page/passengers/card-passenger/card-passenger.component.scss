@@ -1,0 +1,89 @@
+@use '/src/scss/colors';
+.card__passenger {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    &__header {
+        padding: 24px;
+        border-bottom: 1px solid colors.$neutral-100;
+        display: flex;
+        justify-content: space-between;
+        &__title {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-start;
+            align-items: center;
+            span {
+                font-family: Open Sans;
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 28px;
+                letter-spacing: -0.02em;
+                color: black;
+            }
+        }
+        &.check {
+            border-bottom: none;
+        }
+        .arrow {
+            cursor: pointer;
+        }
+    }
+    &__body {
+        padding: 0px 24px 24px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        &__row,
+        &__column {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 20px;
+        }
+        &__group {
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+            padding-top: 2px;
+            width: 100%;
+            span {
+                color: colors.$neutral-900;
+                margin-left: 3px;
+                font-weight: 500;
+                font-family: 'Montserrat';
+                font-size: 14px;
+                line-height: 20px;
+                .required {
+                    color: colors.$red-400;
+                }
+                .text-left {
+                    margin-left: 75px;
+                }
+            }
+            .error{
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14px;
+                color:colors.$red-400;
+                margin-top: 8px;
+                margin-left: 135px;
+            }
+            &__selects {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                column-gap: 20px;
+            }
+            &.phone {
+                width: 50%;
+                padding-left: 3px;
+            }
+        }
+        &__actions{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

@@ -319,7 +319,8 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
       //this.navigateToResponseUrl(url);
-      window.location.href = this.getUrl();
+      //window.location.href = this.getUrl();
+      this.router.navigateByUrl(this.getUrl().split('search')[1]);
     }
   }
 
@@ -537,7 +538,8 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
   searchVueloHotelMulti(): void {
     let jsonArray = this.setMultiCityArray();
     const email: string = this.userStorage.email || '';
-    window.location.href = new URLVuelosMulti(this.tipoVuelo, this.distributionObject, email).getUrlMulti(jsonArray);
+    //window.location.href = new URLVuelosMulti(this.tipoVuelo, this.distributionObject, email).getUrlMulti(jsonArray);
+    this.router.navigateByUrl((new URLVuelosMulti(this.tipoVuelo, this.distributionObject, email).getUrlMulti(jsonArray)).split('search')[1]);
     //this.navigateToResponseUrl(url);
   }
 
@@ -628,4 +630,3 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
       this.inputDepartureDate.nativeElement.focus();
   }
 }
-

@@ -1,0 +1,159 @@
+@use '/src/scss/colors';
+.container__page {
+	width: 100%;
+	padding-bottom: 40%;
+	article {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+	h4 {
+		font-family: Open Sans;
+		font-size: 28px;
+		font-weight: 600;
+		line-height: 36px;
+		letter-spacing: -0.02em;
+		text-align: left;
+		color: colors.$neutral-900;
+		margin-bottom: 0;
+	}
+	span {
+		font-family: Montserrat;
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 28px;
+		letter-spacing: 0em;
+		color: colors.$neutral-900;
+	}
+	&__section {
+		display: flex;
+		flex-direction: column;
+		gap: 48px;
+		&__message {
+			padding: 24px 0px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 48px;
+			&__title {
+				font-family: Open Sans;
+				font-size: 52px;
+				font-weight: 600;
+				line-height: 56px;
+				letter-spacing: -0.02em;
+				color: colors.$red-500;
+				text-align: center;
+			}
+			&__description {
+				text-align: center;
+				max-width: 480px;
+			}
+		}
+
+		&__safetypay {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			&__title {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+			}
+		}
+
+		&__safetypay__card{
+			display: flex;
+			flex-direction: column;
+			gap:32px;
+			padding: 24px 0px;
+			&__banks{
+				display: flex;
+				justify-content: center;
+				gap:64px;
+				&__bank{
+					display: flex;
+					flex-direction: column;
+					gap:8px;
+					p{
+						font-family: Montserrat;
+						font-size: 12px;
+						font-weight: 600;
+						line-height: 20px;
+						letter-spacing: 0em;
+						margin-bottom: 0px;
+						text-align: center;
+						color:colors.$neutral-900;
+					}
+				}
+			}
+			&__alert{
+				background:#009AED1A;
+				width:100%;
+				height: 96px;
+				padding: 12px 16px;
+				border-radius: 8px;
+				display: flex;
+				gap:16px;
+				justify-content: center;
+				align-items: center;
+				span{
+					font-family: Montserrat;
+					font-size: 16px;
+					font-weight: 400;
+					line-height: 24px;
+					letter-spacing: 0em;
+					text-align: left;
+					color:colors.$neutral-600;
+				}
+			}
+
+			&__steps {
+				display: flex;
+				flex-direction: column;
+				gap: 16px;
+				&__item {
+					display: flex;
+					gap:16px;
+					justify-content: flex-start;
+					align-items: center;
+					padding:8px 12px 8px 12px;
+					.circle{
+						border-radius: 50%;
+						height: 32px;
+						min-width: 32px;
+						background: colors.$blue-500;
+						color: white;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						font-family: Open Sans;
+						font-size: 16px;
+						font-weight: 700;
+						line-height: 28px;
+					}
+					span{
+						color:colors.$gris-750;
+					}
+				}
+			}
+		}
+
+		&__row {
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+			&__colum {
+				display: grid;
+				column-gap: 24px;
+				grid-template-columns: 28px 220px auto;
+                span.item{
+                    font-weight: 500;
+                }
+                span.info{
+                    margin-left: 24px;
+                }
+			}
+		}
+	}
+}

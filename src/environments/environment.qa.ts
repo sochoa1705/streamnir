@@ -70,6 +70,10 @@ export const environment = {
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
 
   urlApiMotorVuelos: "https://motorvuelos-dev.expertiatravel.com/mv/",
+ 
+  urlTermsConditions: 'https://www.nmviajes.com/terminos-condiciones',
+  urlBookingConditions: 'https://www.nmviajes.com/condiciones-de-reserva',
+  urlTravelDocuments: 'https://www.nmviajes.com/documentacion-viaje',
 
   SEO: {
     home: {
