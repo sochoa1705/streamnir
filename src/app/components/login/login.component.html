@@ -31,8 +31,7 @@
 						</mat-checkbox>
 					</div>
 					<div class="col-6 text-end">
-						<a href="#" class="subRayado" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la
-							contraseña?</a>
+						<a href="#" class="subRayado" (click)="openForgotPassword()">¿Olvidaste la contraseña?</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -62,8 +61,7 @@
 						</mat-checkbox>
 					</div>
 					<div class="col-6 text-end">
-						<a href="#" data-bs-toggle="modal" data-bs-target="#ModalRecovery">¿Olvidaste la
-							contraseña?</a>
+						<a href="#" (click)="openForgotPassword()">¿Olvidaste la contraseña?</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -76,7 +74,7 @@
 	<button (click)="signIn(formUser, formBusiness)" class="w-100">Iniciar sesión</button>
 	<div class="account">
 		<div class="notRegister">¿No estás registrado?</div>
-		<a class="newAccount" data-bs-toggle="modal" data-bs-target="#ModalNewAccount">Crea una cuenta</a>
+		<a class="newAccount" (click)="openNewAccount()">Crea una cuenta</a>
 	</div>
 	<div class="w-100 d-flex align-items-center justify-content-center">
 		<div class="line bg-secondary bg-opacity-25"></div>

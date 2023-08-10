@@ -8718,18 +8718,19 @@ button.customers {
     background-color: hotpink;
 }
 
-#ModalRecovery,
-#ModalNewAccount {
+.modal.new-account-modal {
     .modal-dialog {
         width: 918px;
         max-width: 918px;
         @media (max-width: 640px) {
             width: calc(100% - 15px);
         }
+
         .modal-content {
             flex-direction: row;
             border: none;
             border-radius: 10px;
+
             .recoveryLeft {
                 display: flex;
                 align-items: center;
@@ -8737,6 +8738,7 @@ button.customers {
                 width: 419px;
                 height: 363px;
                 background: url("./assets/modal/bg-recovery.png");
+
                 .titleRecovery {
                     font-family: Montserrat;
                     font-weight: bold;
@@ -8749,21 +8751,26 @@ button.customers {
                     margin-top: 40px;
                     padding-bottom: 13px;
                 }
+
                 img {
                     width: 127.02px;
                 }
+
                 @media (max-width: 640px) {
                     width: 100%;
                     height: 320px;
                 }
             }
+
             .recoveryRight {
                 flex: 1 1 auto;
                 padding: 0 30px;
                 position: relative;
+
                 .modal-header {
                     border: none;
                 }
+
                 .btn-close {
                     position: absolute;
                     right: 20px;
@@ -8773,6 +8780,7 @@ button.customers {
                         width: 32px !important;
                     }
                 }
+
                 .titleRecovery {
                     font-family: Open Sans;
                     font-weight: bold;
@@ -8785,20 +8793,25 @@ button.customers {
                         margin: 15px 0 15px 0;
                     }
                 }
+
                 .elementRow {
                     display: flex;
                     margin-bottom: 0;
+
                     &.error {
                         flex-direction: column;
+
                         .form-select,
                         .form-control {
                             margin-bottom: 0px !important;
                             border: 0.5px solid #f44336;
                         }
+
                         .textError {
                             display: flex;
                         }
                     }
+
                     .textError {
                         display: none;
                         margin-left: 15px;
@@ -8809,6 +8822,7 @@ button.customers {
                         color: #f44336;
                         margin-bottom: 10px;
                     }
+
                     .form-control {
                         margin-bottom: 20px;
                         font-family: Montserrat;
@@ -8817,19 +8831,23 @@ button.customers {
                         height: 41px;
                         border: 1px solid #ced4da;
                     }
+
                     .divValida {
                         flex-direction: column;
                         flex: 1 1 auto;
                         position: relative;
+
                         &.error {
                             .form-control,
                             .form-select {
                                 border: 0.5px solid #f44336;
                             }
+
                             .textError {
                                 display: flex;
                             }
                         }
+
                         .textError {
                             display: none;
                             position: absolute;
@@ -8841,6 +8859,7 @@ button.customers {
                         }
                     }
                 }
+
                 button {
                     margin-bottom: 20px;
                     font-family: Open Sans;
@@ -8853,12 +8872,14 @@ button.customers {
                         width: 50% !important;
                     }
                 }
+
                 .account {
                     display: flex;
                     justify-content: center;
                     width: 100%;
                     gap: 10px;
                     margin-bottom: 20px;
+
                     .notRegister {
                         font-family: Montserrat;
                         font-weight: 300;
@@ -8867,6 +8888,7 @@ button.customers {
                         letter-spacing: 0.25px;
                         color: #4b4b4b;
                     }
+
                     .newAccount {
                         cursor: pointer;
                         font-family: Montserrat;
@@ -8879,6 +8901,7 @@ button.customers {
                     }
                 }
             }
+
             @media (max-width: 640px) {
                 flex-direction: column;
                 overflow: hidden;
@@ -8998,7 +9021,7 @@ button.customers {
     }
 }
 
-#ModalRecovery {
+.new-account-modal {
     .modal-dialog {
         .modal-content {
             .recoveryRight {

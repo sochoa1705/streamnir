@@ -7,6 +7,9 @@ import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../../../components/login/login.component';
 import { Subscription } from 'rxjs';
+import { NewAccountComponent } from '../../../components/new-account/new-account.component';
+import { ForgotPasswordComponent } from '../../../components/forgot-password/forgot-password.component';
+import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-toolbar',
@@ -24,8 +27,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	loginModalSubscription = new Subscription();
 
   constructor(private fileService: FileService,
-              public route: Router,
+              private _authService: SocialAuthService,
               private modalService: NgbModal,
+              public route: Router,
               public accountService: AccountsService) {
   }
 
@@ -45,7 +49,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 			}
 		});
 
-		this.openLoginFromUrl();
+		this.loadUsuario();
 	}
 
   downloadImage(user: UserStorage) {
@@ -100,6 +104,16 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     this.showOptionUser = !this.showOptionUser
   }
 
+	loadUsuario() {
+		const userStr = this.accountService.getUserStorage();
+		if (userStr.id > 0)
+			this.accountService.dispatchLogged(true);
+		else {
+			this.accountService.dispatchLogged(false);
+			this.openLoginFromUrl();
+		}
+	}
+
 	openLoginFromUrl() {
 		const hash = location.hash;
 		if (hash && hash.trim() === '#login')
@@ -107,19 +121,54 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	}
 
 	openLoginModal() {
-		location.hash = 'login';
 		const loginModalRef = this.modalService.open(LoginComponent, {
 			backdrop: 'static'
 		});
-		this.loginModalSubscription = loginModalRef.closed.subscribe(() => {
+		this.loginModalSubscription = loginModalRef.closed.subscribe((result: any) => {
 			history.pushState('', document.title, window.location.pathname + location.search);
+			if (result) {
+				if (!result.isLoggedIn && result.redirect)
+					switch (result.redirect) {
+						case 'NEW_ACCOUNT':
+							this.openNewAccountModal();
+							break;
+						case 'FORGOT_PASSWORD':
+							this.openForgotPasswordModal();
+							break;
+						default:
+							break;
+					}
+			}
 		});
 	}
 
-  logout() {
-    this.accountService.signOut()
-    this.route.navigateByUrl("/")
-  }
+	openNewAccountModal() {
+		const newAccountModalRef = this.modalService.open(NewAccountComponent, {
+			backdrop: 'static',
+			windowClass: 'new-account-modal'
+		});
+		newAccountModalRef.closed.subscribe((result: any) => {
+			if (result && result.openLogin)
+				this.openLoginModal();
+		});
+	}
+
+	openForgotPasswordModal() {
+		const forgotPasswordModalRef = this.modalService.open(ForgotPasswordComponent, {
+			windowClass: 'forgot-password-modal',
+			centered: true
+		});
+		forgotPasswordModalRef.closed.subscribe((result: any) => {
+			if (result && result.openLogin)
+				this.openLoginModal();
+		});
+	}
+
+	logout() {
+		this._authService.signOut();
+		this.accountService.signOut();
+		this.route.navigateByUrl('/');
+	}
 
   close() {
     this.sidenav.close()

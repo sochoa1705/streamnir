@@ -8,7 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { SocialLoginModule } from 'angularx-social-login';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -30,13 +30,12 @@ import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { initializeAppCheck, provideAppCheck, ReCaptchaV3Provider } from '@angular/fire/app-check';
 import { environment } from '../environments/environment';
-import { SignUpModule } from './components/sign-up/sign-up.module';
 
 if (!environment.production) (<any>window).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [AppComponent],
+	schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+	declarations: [ AppComponent ],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
@@ -64,15 +63,28 @@ if (!environment.production) (<any>window).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 		provideAppCheck(() => initializeAppCheck(getApp(), {
 			provider: new ReCaptchaV3Provider(environment.reCaptchaPublicKey),
 			isTokenAutoRefreshEnabled: true
-		})),
-  SignUpModule
+		}))
 	],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-    { provide: LocationStrategy, useClass: PathLocationStrategy },
-    CryptoService
-  ],
-  bootstrap: [AppComponent]
+	providers: [
+		{ provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+		{ provide: LocationStrategy, useClass: PathLocationStrategy },
+		{
+			provide: 'SocialAuthServiceConfig',
+			useValue: {
+				autoLogin: false,
+				providers: [
+					{
+						id: GoogleLoginProvider.PROVIDER_ID,
+						provider: new GoogleLoginProvider('279534679478-2c8pkngieq5l97aa7t2d9t9mhvk904hf.apps.googleusercontent.com')
+					}
+				],
+				onError: (err: Error) => console.error(err)
+			} as SocialAuthServiceConfig
+		},
+		CryptoService
+	],
+	bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+}
