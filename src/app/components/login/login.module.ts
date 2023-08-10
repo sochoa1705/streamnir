@@ -19,24 +19,7 @@ import { RouterModule } from '@angular/router';
 		FormsModule,
 		ReactiveFormsModule
 	],
-	exports: [ LoginComponent ],
-	providers: [
-		{
-			provide: 'SocialAuthServiceConfig',
-			useValue: {
-				autoLogin: false,
-				providers: [
-					{
-						id: GoogleLoginProvider.PROVIDER_ID,
-						provider: new GoogleLoginProvider('279534679478-2c8pkngieq5l97aa7t2d9t9mhvk904hf.apps.googleusercontent.com')
-					}
-				],
-				onError: (err: Error) => {
-					console.error(err);
-				}
-			} as SocialAuthServiceConfig
-		}
-	]
+	exports: [ LoginComponent ]
 })
 export class LoginModule {
 }

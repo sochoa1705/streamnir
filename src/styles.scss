@@ -60,6 +60,7 @@ body {
     font-family: "Montserrat";
     color: $gray;
     transition: 300ms ease;
+    overflow: hidden;
 }
 
 /** FONTS **/
@@ -8717,126 +8718,19 @@ button.customers {
     background-color: hotpink;
 }
 
-#ModalSesion {
-    .mat-tab-label {
-        width: 50%;
-    }
-    .modal-header {
-        p {
-            font-size: 14px;
-        }
-    }
-    .modal-dialog {
-        width: 490px;
-        @media (max-width: 640px) {
-            width: calc(100% - 15px);
-        }
-    }
-    .modal-body {
-        .elementRow {
-            display: flex;
-            position: relative;
-            &.error {
-                flex-direction: column;
-                .form-control {
-                    margin-bottom: 0px !important;
-                    border: 0.5px solid #f44336;
-                }
-                .msgError {
-                    display: flex;
-                }
-            }
-            .msgError {
-                display: none;
-                margin-left: 15px;
-                //font-family: Montserrat;
-                font-weight: 300;
-                font-size: 11px;
-                line-height: 18px;
-                letter-spacing: 0.25px;
-                color: #f44336;
-                margin-bottom: 10px;
-            }
-            .form-control {
-                margin-bottom: 20px;
-                font-family: Montserrat;
-                font-size: 14px;
-                border-radius: 5px;
-                height: 47px;
-                border: 1px solid #ced4da;
-            }
-            .iconPass {
-                position: absolute;
-                cursor: pointer;
-                right: 25px;
-                top: 10px;
-            }
-        }
-        .subRayado {
-            text-decoration: underline;
-        }
-        .mat-ink-bar {
-            height: 3px;
-        }
-        hr {
-            border: 1px solid #e4e5e7;
-        }
-    }
-    .modal-footer {
-        padding: 0rem 2rem 0rem 2rem;
-        margin: 0 0 18px 0;
-        border-top: none;
-        button {
-            background: #df0c30;
-            border-radius: 5px;
-            margin: 0 0 18px 0;
-            font-family: Open Sans;
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 27px;
-            text-align: center;
-            letter-spacing: 0.18px;
-            color: #ffffff;
-        }
-        .account {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            gap: 10px;
-            .notRegister {
-                font-family: Montserrat;
-                font-weight: 300;
-                font-size: 12px;
-                line-height: 18px;
-                letter-spacing: 0.25px;
-                color: #4b4b4b;
-            }
-            .newAccount {
-                cursor: pointer;
-                font-family: Montserrat;
-                font-weight: 600;
-                font-size: 12px;
-                line-height: 21px;
-                letter-spacing: 0.1px;
-                color: #009aed;
-                text-decoration: underline;
-            }
-        }
-    }
-}
-
-#ModalRecovery,
-#ModalNewAccount {
+.modal.new-account-modal {
     .modal-dialog {
         width: 918px;
         max-width: 918px;
         @media (max-width: 640px) {
             width: calc(100% - 15px);
         }
+
         .modal-content {
             flex-direction: row;
             border: none;
             border-radius: 10px;
+
             .recoveryLeft {
                 display: flex;
                 align-items: center;
@@ -8844,6 +8738,7 @@ button.customers {
                 width: 419px;
                 height: 363px;
                 background: url("./assets/modal/bg-recovery.png");
+
                 .titleRecovery {
                     font-family: Montserrat;
                     font-weight: bold;
@@ -8856,21 +8751,26 @@ button.customers {
                     margin-top: 40px;
                     padding-bottom: 13px;
                 }
+
                 img {
                     width: 127.02px;
                 }
+
                 @media (max-width: 640px) {
                     width: 100%;
                     height: 320px;
                 }
             }
+
             .recoveryRight {
                 flex: 1 1 auto;
                 padding: 0 30px;
                 position: relative;
+
                 .modal-header {
                     border: none;
                 }
+
                 .btn-close {
                     position: absolute;
                     right: 20px;
@@ -8880,6 +8780,7 @@ button.customers {
                         width: 32px !important;
                     }
                 }
+
                 .titleRecovery {
                     font-family: Open Sans;
                     font-weight: bold;
@@ -8892,20 +8793,25 @@ button.customers {
                         margin: 15px 0 15px 0;
                     }
                 }
+
                 .elementRow {
                     display: flex;
                     margin-bottom: 0;
+
                     &.error {
                         flex-direction: column;
+
                         .form-select,
                         .form-control {
                             margin-bottom: 0px !important;
                             border: 0.5px solid #f44336;
                         }
+
                         .textError {
                             display: flex;
                         }
                     }
+
                     .textError {
                         display: none;
                         margin-left: 15px;
@@ -8916,6 +8822,7 @@ button.customers {
                         color: #f44336;
                         margin-bottom: 10px;
                     }
+
                     .form-control {
                         margin-bottom: 20px;
                         font-family: Montserrat;
@@ -8924,19 +8831,23 @@ button.customers {
                         height: 41px;
                         border: 1px solid #ced4da;
                     }
+
                     .divValida {
                         flex-direction: column;
                         flex: 1 1 auto;
                         position: relative;
+
                         &.error {
                             .form-control,
                             .form-select {
                                 border: 0.5px solid #f44336;
                             }
+
                             .textError {
                                 display: flex;
                             }
                         }
+
                         .textError {
                             display: none;
                             position: absolute;
@@ -8948,6 +8859,7 @@ button.customers {
                         }
                     }
                 }
+
                 button {
                     margin-bottom: 20px;
                     font-family: Open Sans;
@@ -8960,12 +8872,14 @@ button.customers {
                         width: 50% !important;
                     }
                 }
+
                 .account {
                     display: flex;
                     justify-content: center;
                     width: 100%;
                     gap: 10px;
                     margin-bottom: 20px;
+
                     .notRegister {
                         font-family: Montserrat;
                         font-weight: 300;
@@ -8974,6 +8888,7 @@ button.customers {
                         letter-spacing: 0.25px;
                         color: #4b4b4b;
                     }
+
                     .newAccount {
                         cursor: pointer;
                         font-family: Montserrat;
@@ -8986,6 +8901,7 @@ button.customers {
                     }
                 }
             }
+
             @media (max-width: 640px) {
                 flex-direction: column;
                 overflow: hidden;
@@ -9105,7 +9021,7 @@ button.customers {
     }
 }
 
-#ModalRecovery {
+.new-account-modal {
     .modal-dialog {
         .modal-content {
             .recoveryRight {

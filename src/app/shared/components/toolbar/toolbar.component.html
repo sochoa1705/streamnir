@@ -55,9 +55,8 @@
   </a>
 
   <ng-container *ngIf="!isLogged">
-    <a data-bs-toggle="modal" data-bs-target="#ModalSesion" (click)="addLoginHash()">
-      <img src="assets/svg/login.svg" alt="">
-      <span>Iniciar sesión</span>
+    <a (click)="openLoginModal()">
+      <img src="assets/svg/login.svg" alt="">&nbsp;<span>Iniciar sesión</span>
     </a>
   </ng-container>
 
