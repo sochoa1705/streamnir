@@ -8,7 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { SocialLoginModule } from 'angularx-social-login';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -34,14 +34,13 @@ import { environment } from '../environments/environment';
 if (!environment.production) (<any>window).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [AppComponent],
+	schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+	declarations: [ AppComponent ],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		MatTabsModule,
-		//MatCheckboxModule,
 		MatSnackBarModule,
 		MatDialogModule,
 		NgbModule,
@@ -66,12 +65,26 @@ if (!environment.production) (<any>window).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 			isTokenAutoRefreshEnabled: true
 		}))
 	],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-    { provide: LocationStrategy, useClass: PathLocationStrategy },
-    CryptoService
-  ],
-  bootstrap: [AppComponent]
+	providers: [
+		{ provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+		{ provide: LocationStrategy, useClass: PathLocationStrategy },
+		{
+			provide: 'SocialAuthServiceConfig',
+			useValue: {
+				autoLogin: false,
+				providers: [
+					{
+						id: GoogleLoginProvider.PROVIDER_ID,
+						provider: new GoogleLoginProvider('279534679478-2c8pkngieq5l97aa7t2d9t9mhvk904hf.apps.googleusercontent.com')
+					}
+				],
+				onError: (err: Error) => console.error(err)
+			} as SocialAuthServiceConfig
+		},
+		CryptoService
+	],
+	bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+}

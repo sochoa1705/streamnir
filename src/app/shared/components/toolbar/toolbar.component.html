@@ -37,13 +37,8 @@
   <span class="spacer"></span>
   <ul class="d-none d-sm-none d-md-none d-md-block d-lg-block">
     <li *ngFor="let m of menu" [ngClass]="m.footer ? 'd-none' : ''">
-      <a [routerLink]="m.tab === '' ? m.link : [m.link, m.tab]" *ngIf="!m.footer && !m.external"
-        routerLinkActive="active">
-        {{ m.text }}
-      </a>
-      <a (click)="redirect(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
-        {{ m.text }}
-      </a>
+      <a routerLinkActive="active" [routerLink]="[m.link]" *ngIf="!m.footer && !m.external">{{ m.text }}</a>
+      <a routerLinkActive="active" (click)="redirect(m.link)" *ngIf="!m.footer && m.external">{{ m.text }}</a>
     </li>
   </ul>
   <span class="spacer  border border-bottom-0 border-top-0 border-start-0 h-50"></span>
@@ -60,9 +55,8 @@
   </a>
 
   <ng-container *ngIf="!isLogged">
-    <a data-bs-toggle="modal" data-bs-target="#ModalSesion" (click)="addLoginHash()">
-      <img src="assets/svg/login.svg" alt="">
-      <span>Iniciar sesión</span>
+    <a (click)="openLoginModal()">
+      <img src="assets/svg/login.svg" alt="">&nbsp;<span>Iniciar sesión</span>
     </a>
   </ng-container>
 
@@ -90,18 +84,13 @@
 </mat-toolbar>
 
 <mat-drawer-container>
-  <mat-drawer fxFlex #drawer mode="side" position="end">
+  <mat-drawer #drawer mode="side" position="end">
     <a class="m-3 close" (keydown.escape)="close()" (click)="drawer.toggle()">x</a>
     <ul>
       <li *ngFor="let m of menu" [ngClass]="m.footer ? 'd-none' : ''">
         <img [src]="m.icon" alt="">
-        <a [routerLink]="m.tab === '' ? m.link : [m.link, m.tab]" *ngIf="!m.footer && !m.external"
-          routerLinkActive="active">
-          {{ m.text }}
-        </a>
-        <a (click)="redirect(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">
-          {{ m.text }}
-        </a>
+        <a routerLinkActive="active" [routerLink]="[m.link]" *ngIf="!m.footer && !m.external">{{ m.text }}</a>
+        <a (click)="redirect(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">{{ m.text }}</a>
         <hr>
       </li>
     </ul>
