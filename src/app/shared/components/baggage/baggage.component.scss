@@ -1,0 +1,25 @@
+@use '/src/scss/colors';
+
+.container__baggage {
+	display: flex;
+	gap: 19px;
+	font-family: Montserrat;
+	font-size: 14px;
+	line-height: 20px;
+	&__contend {
+		&__title {
+			color: colors.$gris-600;
+			font-weight: 600;
+			&.active {
+				color: colors.$blue-500;
+			}
+		}
+		&__description {
+			color: colors.$gris-600;
+			font-weight: 400;
+			&.active {
+				color: colors.$gris-900;
+			}
+		}
+	}
+}

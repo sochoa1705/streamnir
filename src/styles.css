@@ -9475,3 +9475,22 @@ app-flightdeals button {
     height: 100%; }
     .boxVideo .row .col-12 .videoYoutube {
       height: 100%; }
+
+
+
+/********************************Scroll*****************************************/
+
+::-webkit-scrollbar-thumb {
+  background: #CFD1D3 !important;
+  padding: 0px 4px;
+  border-radius: 5px;
+}
+::-webkit-scrollbar {
+  height: 4px;
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+

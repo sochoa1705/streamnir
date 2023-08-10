@@ -1,0 +1,199 @@
+<app-card-checkout [padding]="false">
+	<div class="card__passenger">
+		<div class="card__passenger__header" [class.check]="!active">
+			<div class="card__passenger__header__title">
+				<img src="./assets/svg/passenger.svg" />
+				<span>{{ type == 'ADT' ? 'Adulto ' : type == 'CNN' ? ' Menor' : ' Infante' }} {{ index }}</span>
+				<img *ngIf="validForm" src="./assets/svg/checkSuccess.svg" />
+			</div>
+			<img
+				class="arrow"
+				[src]="active ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'"
+				(click)="active = !active"
+			/>
+		</div>
+		<form [formGroup]="formGroup" autocomplete="off" [hidden]="!active">
+			<div class="card__passenger__body">
+				<div class="card__passenger__body__row">
+					<app-input
+						[label]="'Nombres'"
+						[placeholder]="'Ingresar nombres'"
+						[name]="'name'"
+						[isRequired]="true"
+						[isOnlyText]="true"
+						[class]="nameField.touched && nameField!.invalid ? 'error' : ''"
+						[labelError]="
+							nameField.touched && nameField!.hasError('required')
+								? 'Nombre es obligatorio'
+								: nameField.touched && nameField!.hasError('maxlength')
+								? 'Debe tener max. 50 caracteres'
+								: nameField.touched && nameField!.hasError('whitespace')
+								? 'Nombre no válido'
+								: ''
+						"
+					></app-input>
+					<app-input
+						[label]="'Apellidos'"
+						[placeholder]="'Ingresar apellidos'"
+						[name]="'lastName'"
+						[isOnlyText]="true"
+						[isRequired]="true"
+						[class]="lastNameField.touched && lastNameField!.invalid ? 'error' : ''"
+						[labelError]="
+							lastNameField.touched && lastNameField!.hasError('required')
+								? 'Apellidos es obligatorio'
+								: lastNameField.touched && lastNameField!.hasError('maxlength')
+								? 'Debe tener max. 50 caracteres'
+								: lastNameField.touched && lastNameField!.hasError('whitespace')
+								? 'Apellidos no válido'
+								: ''
+						"
+					></app-input>
+				</div>
+				<div class="card__passenger__body__row">
+					<div class="card__passenger__body__column">
+						<app-select
+							[label]="'Tipo de documento'"
+							[placeholder]="'Seleccionar'"
+							[name]="'documentType'"
+							[isRequired]="true"
+							[listItems]="[
+								{
+									value: '0',
+									name: 'DNI'
+								},
+								{
+									value: '1',
+									name: 'C. EXTRANJERIA'
+								},
+								{
+									value: '2',
+									name: 'PASAPORTE'
+								}
+							]"
+							[labelError]="
+								documentTypeField.touched && documentTypeField!.hasError('required') ? 'Tipo es obligatorio' : ''
+							"
+						></app-select>
+						<app-input
+							[label]="'N° de documento'"
+							[placeholder]="'Ingresar número'"
+							[name]="'documentNumber'"
+							[isRequired]="true"
+							#InputDocumentNumber
+							[isOnlyNumber]="documentTypeField.value == 0 ? true : false"
+							[class]="documentNumberField.touched && documentNumberField!.invalid ? 'error' : ''"
+							[labelError]="
+								documentNumberField.touched && documentNumberField!.hasError('required')
+									? 'Número es obligatorio'
+									: documentNumberField.touched && documentNumberField!.hasError('pattern')
+									? 'Número inválido'
+									: ''
+							"
+						></app-input>
+					</div>
+					<div class="card__passenger__body__group">
+						<span>Fecha de nacimiento <span class="required">*</span></span>
+						<div class="card__passenger__body__group__selects">
+							<app-select
+								[placeholder]="'Día'"
+								[isRequired]="true"
+								[listItems]="daysFilter"
+								[name]="'day'"
+								[value]="dayField.value"
+								[labelError]="dayField.touched && dayField!.hasError('required') ? 'Dia inválido' : ''"
+							></app-select>
+							<app-select
+								[placeholder]="'Mes'"
+								[listItems]="arrayMonths"
+								[name]="'month'"
+								[labelError]="monthField.touched && monthField!.hasError('required') ? 'Mes inválido' : ''"
+								[value]="monthField.value"
+							></app-select>
+							<app-select
+								[placeholder]="'Año'"
+								[listItems]="arrayYears"
+								[name]="'year'"
+								[value]="yearField.value"
+								[labelError]="yearField.touched && yearField!.hasError('required') ? 'Año inválido' : ''"
+							></app-select>
+						</div>
+					</div>
+				</div>
+
+				<div class="card__passenger__body__row">
+					<app-select
+						[label]="'Nacionalidad'"
+						[placeholder]="'Seleccionar'"
+						[isRequired]="true"
+						[listItems]="contryList"
+						[name]="'nationality'"
+						[isSearch]="true"
+						[labelError]="
+							nationalityField.touched && nationalityField!.hasError('required') ? 'Nacionalidad es obligatorio' : ''
+						"
+					></app-select>
+					<app-select
+						[label]="'Género'"
+						[placeholder]="'Seleccionar'"
+						[isRequired]="true"
+						[name]="'gender'"
+						[listItems]="[
+							{
+								value: 'M',
+								name: 'Masculino'
+							},
+							{
+								value: 'F',
+								name: 'Femenino'
+							}
+						]"
+						[labelError]="genderField.touched && genderField!.hasError('required') ? 'Género es obligatorio' : ''"
+					></app-select>
+				</div>
+
+				<div class="card__passenger__body__row" [hidden]="type=='INF'">
+					<app-input
+						[label]="'Correo electrónico'"
+						[placeholder]="'Ingresar correo electrónico'"
+						[name]="'email'"
+						[class]="emailField.touched && emailField!.invalid ? 'error' : ''"
+						[labelError]="
+							emailField.touched && emailField!.hasError('email')
+								? 'Email no válido'
+								: emailField.touched && emailField!.hasError('maxlength')
+								? 'Debe tener max. 50 caracteres'
+								: ''
+						"
+					></app-input>
+					<div class="card__passenger__body__group">
+						<span>Código <span class="text-left">Número de teléfono</span></span>
+						<ngx-intl-tel-input
+							[cssClass]="phoneField.touched && phoneField!.invalid ? 'custom':''" 
+							[preferredCountries]="preferredCountries"
+							[enableAutoCountrySelect]="true"
+							[enablePlaceholder]="true"
+							[customPlaceholder]="'Ingresar número'"
+							[searchCountryFlag]="true"
+							[searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+							[selectFirstCountry]="false"
+							[selectedCountryISO]="CountryISO.Peru"
+							[maxLength]="12"
+							[phoneValidation]="true"
+							[separateDialCode]="separateDialCode"
+							[numberFormat]="PhoneNumberFormat.National"
+							name="fullPhone"
+							formControlName="fullPhone"
+						>
+						</ngx-intl-tel-input>
+						<span class="error" *ngIf="fullPhoneField.touched && fullPhoneField!.invalid">Número inválido</span>
+					</div>
+				</div>
+
+				<div class="card__passenger__body__actions">
+					<app-button [text]="'Guardar'" [color]="'outline-secondary'" (click)="clickButtonSave()"></app-button>
+				</div>
+			</div>
+		</form>
+	</div>
+</app-card-checkout>

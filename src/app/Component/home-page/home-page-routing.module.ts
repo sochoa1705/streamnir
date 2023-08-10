@@ -180,6 +180,10 @@ const routes: Routes = [
         path: 'canales-de-atencion',
         loadChildren: () => import('../../../app/Component/home-page/canales-atencion/canales-atencion.module').then(m => m.CanalesAtencionModule)
       },
+      { 
+        path: 'resultados',
+        loadChildren:() => import('../../../app/Component/results-search-page/results-search-page.module').then(m=>m.ResultsSearchPageModule)
+      }
     ],
   },
   {
@@ -189,6 +193,10 @@ const routes: Routes = [
   {
     path: 'tuscitas',
     loadChildren: () => import('../../../app/Component/home-page/tuscitas/tuscitas.module').then(m => m.TuscitasModule)
+  },
+  {
+    path: 'checkout',
+    loadChildren: () => import('../../../app/Component/checkout-page/checkout.module').then(m => m.CheckoutPageModule)
   },
   {
     path: '404',

@@ -1,0 +1,51 @@
+<div class="modal__contend">
+	<div class="modal__contend__header">
+		<h4>Contamos con {{dataUpSell.length}} tarifas disponibles:</h4>
+		<img src="./assets/svg/close-modal.svg" (click)="dialogRef.close(true)" />
+	</div>
+	<div class="modal__contend__body">
+		<img
+			*ngIf="isNavigate"
+			[src]="activeArrowLeft ? './assets/svg/arrow-circle-left-red.svg' : './assets/svg/arrow-circle-left.svg'"
+			[class.active__arrow]="activeArrowLeft"
+			(click)="slidePrev()"
+		/>
+
+		<swiper [config]="config" class="mySwiper" #swiperFee>
+			<ng-template swiperSlide *ngFor="let item of dataUpSell; let i=index">
+				<div class="modal__contend__body__card">
+					<section>
+						<div class="modal__contend__body__card__body">
+							<div class="modal__contend__body__card__header">
+								<span>{{item.description | titlecase}}</span>
+							</div>
+							<div class="modal__contend__body__card__options">
+								<ng-container *ngFor="let service of item.informationServices">
+									<div class="modal__contend__body__card__options__check" *ngIf="service.itsInclude">
+										<img src="./assets/svg/check-blue.svg" alt="v" />
+										<span>{{service.description}}</span>
+									</div>
+								</ng-container>
+							</div>
+						</div>
+					</section>
+					<!--[disabled]="indexCardSelect==i"-->
+					<div class="modal__contend__body__card__price">
+						<section>
+							<h5>US$ {{getTotalByUpSell(item.fareBreakDowns) | number : '1.2-2'}}</h5>
+							<span>{{pricingDetail.passengersCount > 1 ? 'Por los '+pricingDetail.passengersCount+' pasajeros':'Por un pasajero'}} </span>
+						</section>
+						<app-button (onClick)="clickSelectUpSell(item)" [text]="'Seleccionar'"></app-button>
+					</div>
+				</div>
+			</ng-template>
+		</swiper>
+
+		<img
+			*ngIf="isNavigate"
+			[src]="activeArrowRight ? './assets/svg/arrow-circle-right-red.svg' : './assets/svg/arrow-circle-right.svg'"
+			[class.active__arrow]="activeArrowRight"
+			(click)="slideNext()"
+		/>
+	</div>
+</div>

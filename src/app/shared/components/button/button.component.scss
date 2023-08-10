@@ -1,0 +1,106 @@
+@use '/src/scss/colors';
+
+.btn {
+	padding: 12px 20px 12px 20px;
+	border-radius: 8px;
+	border: none;
+	box-shadow: none;
+	text-transform: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: Montserrat;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 24px;
+	height: 48px !important;
+	letter-spacing: 0em;
+	gap: 8px;
+
+	&.primary {
+		background: colors.$red-500;
+		color: white;
+
+		&:hover {
+			background: colors.$red-600;
+			color: white;
+		}
+
+		&:disabled {
+			background: colors.$neutral-200;
+			color: colors.$neutral-400;
+		}
+	}
+
+	&.w-100{
+		width: 100%;
+	}
+
+	&.secondary {
+		background: colors.$blue-500;
+		color: white;
+
+		&:hover {
+			background: colors.$blue-600;
+			color: white;
+		}
+
+		&:disabled {
+			background: colors.$blue-300;
+			color: white;
+		}
+	}
+
+	&.outline-primary {
+		font-weight: 500;
+		border: 1px solid colors.$red-500;
+		color: colors.$red-500;
+		width: 100%;
+
+		&:hover {
+			background: colors.$red-500;
+			color: white;
+		}
+
+		&:disabled {
+			border: 1px solid colors.$red-300;
+			color: colors.$red-300;
+		}
+	}
+
+	&.outline-secondary {
+		font-weight: 500;
+		border: 1px solid colors.$blue-500;
+		color: colors.$blue-500;
+		background: white;
+
+		&:hover {
+			background: colors.$blue-500;
+			color: white;
+
+			img,
+			svg {
+				filter: brightness(0) invert(1);
+			}
+		}
+
+		&:disabled {
+			border: 1px solid colors.$blue-300;
+			color: colors.$blue-300;
+		}
+	}
+
+	&.link-secondary {
+		font-weight: 500;
+		color: colors.$blue-500;
+		padding: 0px;
+
+		&:hover {
+			background: white;
+		}
+
+		&:disabled {
+			color: colors.$blue-300;
+		}
+	}
+}

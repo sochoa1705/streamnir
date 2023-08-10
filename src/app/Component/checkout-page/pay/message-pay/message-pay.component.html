@@ -1,0 +1,131 @@
+<div class="container__page">
+	<div class="container__page__section">
+		<article>
+			<app-card-checkout>
+				<div class="container__page__section__message">
+					<h3 class="container__page__section__message__title">¡Todo listo para tu vuelo!</h3>
+					<img src="./assets/checkout/success_booking.svg" alt="" />
+					<span class="container__page__section__message__description"
+						>Su solicitud de compra ha sido procesada con éxito. N° de orden: <strong>958456</strong></span
+					>
+				</div>
+			</app-card-checkout>
+		</article>
+
+		<article *ngIf="codeSafetyPay!==0">
+			<div class="container__page__section__safetypay">
+				<div class="container__page__section__safetypay__title">
+					<h4>¿Cómo pagar con SafetyPay?</h4>
+					<span>Ingresa a la banca por Internet de tu preferencia y sigue las instrucciones.</span>
+				</div>
+				<img src="./assets/checkout/pay/safetypay.png" alt="sf" />
+			</div>
+			<app-card-checkout>
+				<div class="container__page__section__safetypay__card">
+					<div class="container__page__section__safetypay__card__banks">
+						<div class="container__page__section__safetypay__card__banks__bank" *ngFor="let bank of listBanksInternet">
+							<img [src]="bank.image" />
+							<p>{{ bank.name }}</p>
+						</div>
+					</div>
+					<div class="container__page__section__safetypay__card__alert">
+						<img src="./assets/checkout/info2.svg" alt="i" />
+						<span
+							>Para efectuar la transferencia ingresa a la versión en línea de <strong>Banco de Crédito del Perú</strong> y sigue las
+							instrucciones. (Ten en cuenta que el código de pago puede usarse para pagar en cualquiera de los otros
+							bancos habilitados).</span
+						>
+					</div>
+					<div class="container__page__section__safetypay__card__steps">
+						<div class="container__page__section__safetypay__card__steps__item">
+							<div class="circle">1</div>
+							<span>Ingresa a <strong>www.viabcp.com</strong> con tu clave de acceso.</span>
+						</div>
+						<div class="container__page__section__safetypay__card__steps__item">
+							<div class="circle">2</div>
+							<span>Selecciona la opción <strong>“Pagos y Transferencias”</strong> - <strong>“Pago de servicios”</strong>.</span>
+						</div>
+						<div class="container__page__section__safetypay__card__steps__item">
+							<div class="circle">3</div>
+							<span>Selecciona <strong>“Empresas Diversas”</strong> - <strong>“SafetyPay”</strong> y el tipo de moneda.</span>
+						</div>
+						<div class="container__page__section__safetypay__card__steps__item">
+							<div class="circle">4</div>
+							<span>Ingresa tu código de pago <strong>{{codeSafetyPay}}</strong>, verifica el monto, confirma el pago con tu clave <strong>token</strong>.</span>
+						</div>
+						<div class="container__page__section__safetypay__card__steps__item">
+							<div class="circle">5</div>
+							<span>¡Listo! Luego recibirás un email con la confirmación de NM Viajes y los vouchers de tu viaje.</span>
+						</div>
+					</div>
+				</div>
+			</app-card-checkout>
+		</article>
+
+		<article *ngIf="dataPassengers.length > 0">
+			<h4>Datos del pasajero</h4>
+			<app-card-checkout>
+				<div class="container__page__section__row" *ngFor="let item of dataPassengers">
+					<div class="container__page__section__row__colum">
+						<img src="./assets/checkout/pay/user.svg" />
+						<span class="item">Nombres y apellidos</span>
+						<span class="info">{{ item.name + ' ' + item.lastName }}</span>
+					</div>
+					<div class="container__page__section__row__colum">
+						<img src="./assets/checkout/pay/credit.svg" />
+						<span class="item">Tipo de documento</span>
+						<span class="info">{{
+							item.documentType == 0
+								? 'DNI '
+								: item.documentType == 1
+								? 'C. EXTRANJERIA '
+								: 'PASAPORTE ' + item.documentNumber
+						}}</span>
+					</div>
+					<div class="container__page__section__row__colum">
+						<img src="./assets/checkout/pay/date.svg" />
+						<span class="item">Fecha de nacimiento</span>
+						<span class="info">{{ item.birthday | date: 'mediumDate' }}</span>
+					</div>
+					<div class="container__page__section__row__colum">
+						<img src="./assets/checkout/pay/nationality.svg" />
+						<span class="item">Nacionalidad</span>
+						<span class="info">{{ item.nationality }}</span>
+					</div>
+					<div class="container__page__section__row__colum">
+						<img src="./assets/checkout/pay/gender.svg" />
+						<span class="item">Género</span>
+						<span class="info">{{ item.gender == 'M' ? 'Masculino' : 'Femenino' }}</span>
+					</div>
+					<div class="container__page__section__row__colum">
+						<img src="./assets/checkout/pay/email.svg" />
+						<span class="item">Correo</span>
+						<span class="info">{{ item.email }}</span>
+					</div>
+				</div>
+			</app-card-checkout>
+		</article>
+
+		<article *ngIf="dataContact.name !== ''">
+			<h4>Contacto de emergencia</h4>
+			<app-card-checkout>
+				<div class="container__page__section__row">
+					<div class="container__page__section__row__colum">
+						<img src="./assets/checkout/pay/user.svg" />
+						<span class="item">Nombres y apellidos</span>
+						<span class="info">{{
+							dataContact.name + ' ' + dataContact.lastName + ' ' + dataContact.motherLastname
+						}}</span>
+					</div>
+					<div class="container__page__section__row__colum">
+						<img src="./assets/checkout/pay/phone.svg" />
+						<span class="item">Télefono</span>
+						<span class="info">{{
+							'+' + dataContact.phones[0].countryCode + ' ' + dataContact.phones[0].phoneNumber
+						}}</span>
+					</div>
+				</div>
+			</app-card-checkout>
+		</article>
+	</div>
+</div>

@@ -4,6 +4,7 @@ import { AccountsService, UserStorage } from 'src/app/Services/accounts.service'
 import { FileService } from 'src/app/Services/file.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { environment } from 'src/environments/environment';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-toolbar',
@@ -17,12 +18,19 @@ export class ToolbarComponent implements OnInit {
   isLogged = false;
   userStorage: UserStorage;
   img: string;
+  isShowMenu=true;
 
   constructor(
     public route: Router,
     public accountService: AccountsService,
     private fileService: FileService
-  ) { }
+  ) { 
+    this.route.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: any) => {
+			if(event.url.includes('/checkout')){
+				this.isShowMenu=false;
+			}
+		})
+  }
 
   ngOnInit() {
     this.route.events

@@ -1,0 +1,143 @@
+@use '/src/scss/colors';
+
+.container__page {
+	display: flex;
+	gap: 48px;
+	width: 100%;
+	flex-direction: column;
+	padding-bottom: 40%;
+
+	&__section {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+
+		&__title {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			padding: 0px 16px;
+
+			&__primary {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				&__text{
+					display: flex;
+					align-items: center;
+					gap:16px;
+					h1{
+						font-family: Open Sans;
+						font-size: 28px;
+						font-weight: 600;
+						line-height: 36px;
+						letter-spacing: -0.02em;
+						text-align: left;
+						color: colors.$neutral-900;
+						margin-bottom: 0;
+					}
+					span{
+						font-family: Montserrat;
+						font-size: 16px;
+						font-weight: 500;
+						line-height: 24px;
+						color:colors.$blue-500;
+						margin-top: 3px;
+					}
+				}
+
+			}
+
+			&__secondary {
+				font-family: Montserrat;
+				font-size: 18px;
+				font-weight: 400;
+				line-height: 28px;
+				letter-spacing: 0em;
+				text-align: left;
+				color: colors.$neutral-900;
+			}
+		}
+
+		&__cards, &__contact{
+			display:flex;
+			flex-direction: column;
+			gap:24px;
+		}
+
+		&__contact{
+			margin-top: 46px;
+			&__form{
+				display: flex;
+				flex-direction: column;
+				gap:24px;
+				&__name{
+					display: grid;
+					column-gap: 20px;
+					grid-template-columns: repeat(3,1fr);
+				}
+				section{
+					width: 100%;
+					display: flex;
+					flex-direction: row;
+					gap:20px;
+				}
+				&__email{
+					width: 50%;
+				}
+				&__phone{
+					padding-left: 3px;
+					width: 50%;
+					span {
+						color: colors.$neutral-900;
+						margin-left: 3px;
+						font-weight: 500;
+						font-family: 'Montserrat';
+						font-size: 14px;
+						line-height: 20px;
+						.required {
+							color: colors.$red-400;
+						}
+						.text-left {
+							margin-left: 67px;
+						}
+					}
+					.error{
+						font-weight: 400;
+						font-size: 12px;
+						line-height: 14px;
+						color:colors.$red-400;
+						margin-top: 8px;
+						margin-left: 135px;
+					}
+				}
+			}
+		}
+
+		&__check{
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+			.check__container {
+				display: flex;
+				gap: 4px;
+				align-items: center;
+				span {
+					font-family: Montserrat;
+					font-size: 18px;
+					font-weight: 500;
+					line-height: 28px;
+					letter-spacing: 0em;
+					color: colors.$neutral-900;
+				}
+			}
+		}
+
+		&__button{
+			display: flex;
+			justify-content: flex-end;
+			margin-top: 36px;
+		}
+		
+	}
+}

@@ -1,0 +1,84 @@
+import { registerLocaleData } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Group, PricingDetail } from 'src/app/api/api-checkout/models/rq-checkout-search';
+import localeEs from '@angular/common/locales/es';
+import { GlobalComponent } from 'src/app/shared/global';
+import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
+import { ModalFeeComponent } from 'src/app/Component/checkout-page/modal-fee/modal-fee.component';
+import { Router } from '@angular/router';
+
+@Component({
+	selector: 'app-modal-flight-detail',
+	templateUrl: './modal-flight-detail.component.html',
+	styleUrls: ['./modal-flight-detail.component.scss']
+})
+export class ModalFlightDetailComponent implements OnInit {
+	@Input() flight: Group;
+	@Input() segmentDeparture: number[];
+	@Input() segmentReturn: number;
+	@Input() detailPricing: PricingDetail;
+	modalFeeDialogRef: MatDialogRef<ModalFeeComponent>;
+
+	constructor(
+		public dialogRef: MatDialogRef<ModalFlightDetailComponent>,
+		public _matDialog: MatDialog,
+		private _searchService: SearchService,
+		private router:Router
+	) {}
+
+	ngOnInit() {
+		registerLocaleData(localeEs, 'es');
+	}
+
+	isHoursNocturne(dateDeparture: any, dateArrival: any) {
+		const hourDeparture = Number(dateDeparture.slice(11, 13));
+		const hourArrival = Number(dateArrival.slice(11, 13));
+		return hourDeparture <= 5 || hourDeparture >= 19 || hourArrival <= 5 || hourArrival >= 19;
+	}
+
+	calcDurationScale(previousDate: string, currentDate: string) {
+		const start: any = new Date(previousDate);
+		const end: any = new Date(currentDate);
+		let differenceInMilliseconds = end - start;
+
+		let hours = Math.floor(differenceInMilliseconds / 3600000); // 1 hora = 3600000 milisegundos
+		differenceInMilliseconds %= 3600000;
+		let minutes = Math.floor(differenceInMilliseconds / 60000); // 1 minuto = 60000 milisegundos
+
+		return `${hours}h ${minutes < 9 ? '0' + minutes : minutes}m`;
+	}
+
+	getDataUpSell() {
+		GlobalComponent.appGroupSeleted = this.flight;
+		GlobalComponent.detailPricing = this.detailPricing;
+		console.log(GlobalComponent.detailPricing,'detal')
+		this._searchService.getUpSellGroup().subscribe({
+			next: (res) => {
+				GlobalComponent.upSellGroup = res;
+        		GlobalComponent.upSellSeleted = res[0];
+				if(res.length!==0){
+					this.modalFeeDialogRef = this._matDialog.open(ModalFeeComponent, {
+						disableClose: true
+					});
+				}else{
+					this.router.navigateByUrl('/checkout');
+				}
+        	this.dialogRef.close(true);
+			},
+			error: (err) => {
+				console.log(err);
+			}
+		});
+	}
+
+	openModalUpsell() {
+		const segmentArray: number[] = this.segmentDeparture.map((item) => item);
+		if (this.segmentReturn >= 0) segmentArray.push(this.segmentReturn);
+		GlobalComponent.segmentSelected =
+			this.flight.ndcInfo && segmentArray.every((elemento) => elemento === 0)
+				? this.flight.ndcInfo.segmentInfo[0].segments
+				: segmentArray;
+		this.getDataUpSell();
+	}
+}
