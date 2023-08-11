@@ -5,6 +5,7 @@ import { AccountsService } from 'src/app/Services/accounts.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,21 +13,20 @@ import { ValidatorsService } from 'src/app/shared/validators/validators.service'
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-
   recoverPasswordForm: FormGroup;
-
   message: string = '';
 
   constructor(
-    private _formBuilder: FormBuilder,
-    private _validatorsService: ValidatorsService,
-    private _accountService: AccountsService,
-    public loaderSubjectService: LoaderSubjectService,
-    private notification: NotificationService
-  ) { }
+      private _formBuilder: FormBuilder,
+      private _validatorsService: ValidatorsService,
+      private _accountService: AccountsService,
+      private notification: NotificationService,
+      public activeModal: NgbActiveModal,
+      public loaderSubjectService: LoaderSubjectService
+  ) {
+  }
 
   ngOnInit(): void {
-
     this.recoverPasswordForm = this.createRecoverPasswordForm();
   }
 
@@ -41,32 +41,27 @@ export class ForgotPasswordComponent implements OnInit {
       && this.recoverPasswordForm.controls[field].touched;
   }
 
+  openLoginModal() {
+    this.activeModal.close({
+      success: false,
+      openLogin: true
+    });
+  }
+
   get recoverPasswordEmailErrorMessage(): string {
     const errors = this.recoverPasswordForm.get('email')?.errors;
 
-    if (errors?.required) {
+    if (errors?.required)
       return 'Ingresa tu email';
-    } else if (errors?.minlength) {
+    else if (errors?.minlength)
       return `Un email válido tiene ${errors?.minlength.requiredLength} caracteres como mínimo.`;
-    } else if (errors?.pattern) {
+    else if (errors?.pattern)
       return 'El valor ingresado no tiene formato de email.';
-    }
 
     return '';
   }
 
-  closeModalRecovery() {
-    const btn = document.getElementById("btncloseRecovery");
-
-    if (!btn) {
-      return;
-    }
-
-    btn.click();
-  }
-
   getPassword(email: string) {
-
     this.initLoading();
 
     if (this.recoverPasswordForm.invalid) {
@@ -76,18 +71,17 @@ export class ForgotPasswordComponent implements OnInit {
     }
 
     this._accountService.passwordSend(email).subscribe(resp => {
-      this.closeLoading();
       if (resp.IsSuccess) {
-        this.closeModalRecovery();
         this.message = resp.Message;
         this.toggleModalGetPass();
-      } else {
-        this.notification.showNotificacion("Error", resp.Message, 10);
-      }
+        this.activeModal.close({
+          success: true
+        });
+      } else this.notification.showNotificacion('Error', resp.Message, 10);
     }, () => {
       this.closeLoading();
-      this.notification.showNotificacion("Error", "Error del servidor", 10);
-    })
+      this.notification.showNotificacion('Error', 'Error del servidor', 10);
+    }, () => this.closeLoading());
   }
 
   initLoading() {
@@ -101,12 +95,8 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   toggleModalGetPass() {
-    const modal = document.getElementById("ModalChangePass");
-
-    if (!modal) {
-      return;
-    }
-
+    const modal = document.getElementById('ModalChangePass');
+    if (!modal) return;
     bootstrap.Modal.getOrCreateInstance(modal).toggle();
   }
 }
