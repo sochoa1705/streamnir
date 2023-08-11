@@ -44,7 +44,7 @@ export const environment = {
   urlSeguros: 'https://servicio.nmviajes.com:9443/segurosrv/',
   urlZonaPrivada: 'https://servicio.nmviajes.com:9443/zonaprivada/',
   urlGeo: "https://motorvuelos.expertiatravel.com/mv",
-  urlIframeMotorVuelos: "https://motorwl.nmviajes-it.com/#/nmviajes/search/resultados",
+  urlIframeMotorVuelos: "https://motorwl.expertiatravel.com/#/nmviajes/search/resultados",
   urlIframeMotorVuelosItinerary: "https://vuelos.nmviajes.com/#/nmviajes/booking/itinerary",
 
   urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',
