@@ -54,7 +54,8 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
 
     openModalDetail(){
         this.modalDialogRef = this._matDialog.open(ModalFlightDetailComponent, {
-			disableClose: true
+			disableClose: true,
+            panelClass: 'custom-dialog-flight'
 		});
 		this.modalDialogRef.componentInstance.flight = this.flight;
         this.modalDialogRef.componentInstance.segmentDeparture=this.indexSegmentDeparture;

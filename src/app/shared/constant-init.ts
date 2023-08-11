@@ -21,21 +21,18 @@ export const dataSteps = [
         name: 'Beneficios',
         active: true,
         check: false,
-        url: 'checkout'
     },
     {
         id: 1,
         name: 'Pasajeros',
         active: false,
         check: false,
-        url: 'checkout/pasajeros'
     },
     {
         id: 2,
         name: 'Revisar y pagar',
         active: false,
         check: false,
-        url: 'checkout/booking'
     }
 ];
 

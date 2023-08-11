@@ -1,22 +1,19 @@
 <app-toolbar></app-toolbar>
-<app-steps></app-steps>
-<div class="container__page">
+<app-steps (clickedStep)="clickedStep($event)"></app-steps>
+<div class="container__page" >
 	<section>
 		<div>
 			<ng-container *ngIf="detailFlight">
-				<app-baggage-insurance
-					*ngIf="dataSteps[0].active && !dataSteps[1].active && !dataSteps[2].active"
-				></app-baggage-insurance>
-				<app-passengers 
-					*ngIf="dataSteps[1].active && dataSteps[0].check && !dataSteps[2].active"></app-passengers>
-				<app-pay *ngIf="dataSteps[2].active && dataSteps[1].check"></app-pay>
+				<app-baggage-insurance *ngIf="indexStepActive == 0" (changeStep)="clickedStep($event)"></app-baggage-insurance>
+				<app-passengers *ngIf="indexStepActive == 1" (changeStep)="clickedStep($event)"></app-passengers>
+				<app-pay *ngIf="indexStepActive == 2"></app-pay>
 			</ng-container>
 		</div>
 		<div class="container__page__detail" *ngIf="detailFlight">
-			<div class="container__page__detail__saftyPay" *ngIf="codeSafetyPay!==0">
+			<div class="container__page__detail__saftyPay" *ngIf="codeSafetyPay !== 0">
 				<span>Información para el pago a través de</span>
 				<span>Banca por Internet</span>
-				<span>{{codeSafetyPay}}</span>
+				<span>{{ codeSafetyPay }}</span>
 			</div>
 			<div class="container__page__detail__pay" *ngIf="pricing">
 				<span class="container__page__detail__pay__name">Detalles del pago</span>

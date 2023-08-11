@@ -71,7 +71,7 @@ import { OffersModule } from './offers/offers.module';
 		PackagesService,
 		AsidePresenterService,
 		DataPagePresenterService,
-		FlightsService
+		FlightsService,
 	]
 })
 export class HomePageModule {

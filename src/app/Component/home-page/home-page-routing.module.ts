@@ -26,6 +26,7 @@ import { GifCardComponent } from './gif-card/gif-card.component';
 import {RetailComponent} from "./retail/retail.component";
 import { OffersComponent } from './offers/offers.component';
 import { BenefitsComponent } from './retail/benefits/benefits.component';
+import { CanActivateCheckoutGuard } from 'src/app/Guards/checkout.guard';
 
 const routes: Routes = [
   {
@@ -196,7 +197,8 @@ const routes: Routes = [
   },
   {
     path: 'checkout',
-    loadChildren: () => import('../../../app/Component/checkout-page/checkout.module').then(m => m.CheckoutPageModule)
+    loadChildren: () => import('../../../app/Component/checkout-page/checkout.module').then(m => m.CheckoutPageModule),
+    canActivate: [CanActivateCheckoutGuard]
   },
   {
     path: '404',

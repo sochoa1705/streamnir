@@ -65,5 +65,4 @@ export interface Step {
   name:string,
   active:boolean,
   check:boolean,
-  url:string
 }

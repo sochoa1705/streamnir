@@ -3,13 +3,9 @@
 @import 'swiper/scss/navigation';
 @import 'swiper/scss/pagination';
 
-mat-dialog-container {
-	background-color: colors.$neutral-50 !important;
-	overflow-y: auto !important;
-	//height: 654px !important;
-	min-width: 1053px !important;
+mat-dialog-container{
+	padding: 0 !important;
 }
-
 .swiper{
 	width: 100% !important;
 }
@@ -32,12 +28,17 @@ mat-dialog-container {
 	width: auto !important;
 }
 
+.swiper-wrapper {
+	gap:15px !important;
+}
 section {
 	margin: 0px;
 }
 
 .modal__contend {
-	padding: 16px;
+	padding: 40px;
+	min-width: 1053px;
+	background: colors.$gris-100;
 	&__header {
 		display: flex;
 		justify-content: space-between;
@@ -64,6 +65,10 @@ section {
 		overflow-y: auto;
 		.active__arrow{
 			cursor: pointer;
+		}
+
+		&.not-swiper{
+			grid-template-columns:repeat(3,1fr);
 		}
 
 			&__card {

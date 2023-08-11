@@ -1,5 +1,5 @@
 import { registerLocaleData } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Group, PricingDetail } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import localeEs from '@angular/common/locales/es';
@@ -11,7 +11,11 @@ import { Router } from '@angular/router';
 @Component({
 	selector: 'app-modal-flight-detail',
 	templateUrl: './modal-flight-detail.component.html',
-	styleUrls: ['./modal-flight-detail.component.scss']
+	styleUrls: ['./modal-flight-detail.component.scss'],
+	encapsulation: ViewEncapsulation.None,
+	host: {
+		class: 'custom-dialog-flight'
+	}
 })
 export class ModalFlightDetailComponent implements OnInit {
 	@Input() flight: Group;
@@ -24,17 +28,16 @@ export class ModalFlightDetailComponent implements OnInit {
 		public dialogRef: MatDialogRef<ModalFlightDetailComponent>,
 		public _matDialog: MatDialog,
 		private _searchService: SearchService,
-		private router:Router
+		private router: Router
 	) {}
 
 	ngOnInit() {
 		registerLocaleData(localeEs, 'es');
 	}
 
-	isHoursNocturne(dateDeparture: any, dateArrival: any) {
+	isHoursNocturne(dateDeparture: any) {
 		const hourDeparture = Number(dateDeparture.slice(11, 13));
-		const hourArrival = Number(dateArrival.slice(11, 13));
-		return hourDeparture <= 5 || hourDeparture >= 19 || hourArrival <= 5 || hourArrival >= 19;
+		return hourDeparture <= 5 || hourDeparture >= 19;
 	}
 
 	calcDurationScale(previousDate: string, currentDate: string) {
@@ -52,22 +55,29 @@ export class ModalFlightDetailComponent implements OnInit {
 	getDataUpSell() {
 		GlobalComponent.appGroupSeleted = this.flight;
 		GlobalComponent.detailPricing = this.detailPricing;
-		console.log(GlobalComponent.detailPricing,'detal')
+		GlobalComponent.upSellGroup=[];
+		GlobalComponent.upSellSeleted=null;
 		this._searchService.getUpSellGroup().subscribe({
 			next: (res) => {
 				GlobalComponent.upSellGroup = res;
-        		GlobalComponent.upSellSeleted = res[0];
-				if(res.length!==0){
-					this.modalFeeDialogRef = this._matDialog.open(ModalFeeComponent, {
-						disableClose: true
-					});
-				}else{
+				this.dialogRef.close(true);
+				if (res && res.length  > 0) {
+					if(res.length  > 0){
+						GlobalComponent.upSellSeleted = res[0];
+						this.modalFeeDialogRef = this._matDialog.open(ModalFeeComponent, {
+							disableClose: true,
+							panelClass: 'custom-dialog-up'
+						});
+					}else{
+						this.router.navigateByUrl('/checkout');
+					}
+				} else {
 					this.router.navigateByUrl('/checkout');
 				}
-        	this.dialogRef.close(true);
 			},
 			error: (err) => {
-				console.log(err);
+				this.dialogRef.close(true);
+				this.router.navigateByUrl('/checkout');
 			}
 		});
 	}
