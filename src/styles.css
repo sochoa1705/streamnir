@@ -31,6 +31,7 @@
     box-shadow: 0 -27px 0 0 rgba(232, 32, 63, 0.1), 19px -19px 0 0 rgba(232, 32, 63, 0.2), 27px 0 0 0 rgba(232, 32, 63, 0.3), 19px 19px 0 0 rgba(232, 32, 63, 0.4), 0 27px 0 0 rgba(232, 32, 63, 0.6), -19px 19px 0 0 rgba(232, 32, 63, 0.8), -27px 0 0 0 #E8203F, -19px -19px 0 0 rgba(232, 32, 63, 0.05); }
   100% {
     box-shadow: 0 -27px 0 0 rgba(232, 32, 63, 0.05), 19px -19px 0 0 rgba(232, 32, 63, 0.1), 27px 0 0 0 rgba(232, 32, 63, 0.2), 19px 19px 0 0 rgba(232, 32, 63, 0.3), 0 27px 0 0 rgba(232, 32, 63, 0.4), -19px 19px 0 0 rgba(232, 32, 63, 0.6), -27px 0 0 0 rgba(232, 32, 63, 0.8), -19px -19px 0 0 #E8203F; } }
+
 html,
 body {
   height: 100%;
@@ -38,7 +39,10 @@ body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
   color: #4b4b4b;
-  transition: 300ms ease; }
+  transition: 300ms ease;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
 
 /** FONTS **/
 .inter-medium {
@@ -7421,7 +7425,7 @@ button.customers {
   color: #ffffff; }
   #ModalSesion .modal-body .socialMedia .btnFacebook,
   #ModalSesion .modal-body .socialMedia .btnGoogle {
-    width: calc(50% - 10px);
+    width: 100%;
     height: 47px;
     border-radius: 5px;
     display: flex;
@@ -7476,67 +7480,66 @@ button.customers {
       color: #009aed;
       text-decoration: underline; }
 
-#ModalRecovery .modal-dialog,
-#ModalNewAccount .modal-dialog {
+.forgot-password-modal .modal-dialog,
+.new-account-modal .modal-dialog {
   width: 918px;
   max-width: 918px; }
   @media (max-width: 640px) {
-    #ModalRecovery .modal-dialog,
-    #ModalNewAccount .modal-dialog {
+    .forgot-password-modal .modal-dialog,
+    .new-account-modal .modal-dialog {
       width: calc(100% - 15px); } }
-  #ModalRecovery .modal-dialog .modal-content,
-  #ModalNewAccount .modal-dialog .modal-content {
+  .forgot-password-modal .modal-dialog .modal-content .modal-content,
+  .new-account-modal .modal-dialog .modal-content {
     flex-direction: row;
     border: none;
     border-radius: 10px; }
-    #ModalRecovery .modal-dialog .modal-content .recoveryLeft,
-    #ModalNewAccount .modal-dialog .modal-content .recoveryLeft {
+    .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryLeft,
+    .new-account-modal .modal-dialog .modal-content .recoveryLeft {
       display: flex;
       align-items: center;
       flex-direction: column;
       width: 419px;
       height: 363px;
       background: url("./assets/modal/bg-recovery.png"); }
-      #ModalRecovery .modal-dialog .modal-content .recoveryLeft .titleRecovery,
-      #ModalNewAccount .modal-dialog .modal-content .recoveryLeft .titleRecovery {
-        font-family: Montserrat;
+      .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryLeft .titleRecovery,
+      .new-account-modal .modal-dialog .modal-content .recoveryLeft .titleRecovery {
+        font-family: Montserrat, sans-serif;
         font-weight: bold;
         font-size: 12px;
         line-height: 18px;
         text-align: center;
         letter-spacing: 0.1px;
         color: #ffffff;
-        text-align: center;
         margin-top: 40px;
         padding-bottom: 13px; }
-      #ModalRecovery .modal-dialog .modal-content .recoveryLeft img,
-      #ModalNewAccount .modal-dialog .modal-content .recoveryLeft img {
+      .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryLeft img,
+      .new-account-modal .modal-dialog .modal-content .recoveryLeft img {
         width: 127.02px; }
       @media (max-width: 640px) {
-        #ModalRecovery .modal-dialog .modal-content .recoveryLeft,
-        #ModalNewAccount .modal-dialog .modal-content .recoveryLeft {
+        .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryLeft,
+        .new-account-modal .modal-dialog .modal-content .recoveryLeft {
           width: 100%;
           height: 320px; } }
-    #ModalRecovery .modal-dialog .modal-content .recoveryRight,
-    #ModalNewAccount .modal-dialog .modal-content .recoveryRight {
+    .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight,
+    .new-account-modal .modal-dialog .modal-content .recoveryRight {
       flex: 1 1 auto;
       padding: 0 30px;
       position: relative; }
-      #ModalRecovery .modal-dialog .modal-content .recoveryRight .modal-header,
-      #ModalNewAccount .modal-dialog .modal-content .recoveryRight .modal-header {
+      .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .modal-header,
+      .new-account-modal .modal-dialog .modal-content .recoveryRight .modal-header {
         border: none; }
-      #ModalRecovery .modal-dialog .modal-content .recoveryRight .btn-close,
-      #ModalNewAccount .modal-dialog .modal-content .recoveryRight .btn-close {
+      .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .btn-close,
+      .new-account-modal .modal-dialog .modal-content .recoveryRight .btn-close {
         position: absolute;
         right: 20px;
         top: 20px;
         font-size: 12px; }
         @media (max-width: 640px) {
-          #ModalRecovery .modal-dialog .modal-content .recoveryRight .btn-close,
-          #ModalNewAccount .modal-dialog .modal-content .recoveryRight .btn-close {
+          .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .btn-close,
+          .new-account-modal .modal-dialog .modal-content .recoveryRight .btn-close {
             width: 32px !important; } }
-      #ModalRecovery .modal-dialog .modal-content .recoveryRight .titleRecovery,
-      #ModalNewAccount .modal-dialog .modal-content .recoveryRight .titleRecovery {
+      .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .titleRecovery,
+      .new-account-modal .modal-dialog .modal-content .recoveryRight .titleRecovery {
         font-family: Open Sans;
         font-weight: bold;
         font-size: 24px;
@@ -7545,27 +7548,27 @@ button.customers {
         color: #4b4b4b;
         margin: 40px 0 25px 0; }
         @media (max-width: 640px) {
-          #ModalRecovery .modal-dialog .modal-content .recoveryRight .titleRecovery,
-          #ModalNewAccount .modal-dialog .modal-content .recoveryRight .titleRecovery {
+          .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .titleRecovery,
+          .new-account-modal .modal-dialog .modal-content .recoveryRight .titleRecovery {
             margin: 15px 0 15px 0; } }
-      #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow,
-      #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow {
+      .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow,
+      .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow {
         display: flex;
         margin-bottom: 0; }
-        #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow.error,
-        #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow.error {
+        .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow.error,
+        .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow.error {
           flex-direction: column; }
-          #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow.error .form-select,
-          #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow.error .form-control,
-          #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow.error .form-select,
-          #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow.error .form-control {
+          .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow.error .form-select,
+          .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow.error .form-control,
+          .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow.error .form-select,
+          .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow.error .form-control {
             margin-bottom: 0px !important;
             border: 0.5px solid #f44336; }
-          #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow.error .textError,
-          #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow.error .textError {
+          .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow.error .textError,
+          .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow.error .textError {
             display: flex; }
-        #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .textError,
-        #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .textError {
+        .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow .textError,
+        .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow .textError {
           display: none;
           margin-left: 15px;
           font-weight: 300;
@@ -7574,29 +7577,29 @@ button.customers {
           line-height: 18px;
           color: #f44336;
           margin-bottom: 10px; }
-        #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .form-control,
-        #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .form-control {
+        .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow .form-control,
+        .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow .form-control {
           margin-bottom: 20px;
           font-family: Montserrat;
           font-size: 14px;
           border-radius: 5px;
           height: 41px;
           border: 1px solid #ced4da; }
-        #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .divValida,
-        #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .divValida {
+        .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow .divValida,
+        .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow .divValida {
           flex-direction: column;
           flex: 1 1 auto;
           position: relative; }
-          #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .form-control,
-          #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .form-select,
-          #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .form-control,
-          #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .form-select {
+          .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow .divValida.error .form-control,
+          .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow .divValida.error .form-select,
+          .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .form-control,
+          .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .form-select {
             border: 0.5px solid #f44336; }
-          #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .textError,
-          #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .textError {
+          .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow .divValida.error .textError,
+          .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow .divValida.error .textError {
             display: flex; }
-          #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .divValida .textError,
-          #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .divValida .textError {
+          .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow .divValida .textError,
+          .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow .divValida .textError {
             display: none;
             position: absolute;
             margin-left: 15px;
@@ -7604,8 +7607,8 @@ button.customers {
             font-size: 11px;
             color: #f44336;
             bottom: 3px; }
-      #ModalRecovery .modal-dialog .modal-content .recoveryRight button,
-      #ModalNewAccount .modal-dialog .modal-content .recoveryRight button {
+      .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight button,
+      .new-account-modal .modal-dialog .modal-content .recoveryRight button {
         margin-bottom: 20px;
         font-family: Open Sans;
         font-weight: bold;
@@ -7614,26 +7617,26 @@ button.customers {
         letter-spacing: 0.15px;
         border-radius: 5px; }
         @media (max-width: 640px) {
-          #ModalRecovery .modal-dialog .modal-content .recoveryRight button,
-          #ModalNewAccount .modal-dialog .modal-content .recoveryRight button {
+          .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight button,
+          .new-account-modal .modal-dialog .modal-content .recoveryRight button {
             width: 50% !important; } }
-      #ModalRecovery .modal-dialog .modal-content .recoveryRight .account,
-      #ModalNewAccount .modal-dialog .modal-content .recoveryRight .account {
+      .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .account,
+      .new-account-modal .modal-dialog .modal-content .recoveryRight .account {
         display: flex;
         justify-content: center;
         width: 100%;
         gap: 10px;
         margin-bottom: 20px; }
-        #ModalRecovery .modal-dialog .modal-content .recoveryRight .account .notRegister,
-        #ModalNewAccount .modal-dialog .modal-content .recoveryRight .account .notRegister {
+        .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .account .notRegister,
+        .new-account-modal .modal-dialog .modal-content .recoveryRight .account .notRegister {
           font-family: Montserrat;
           font-weight: 300;
           font-size: 12px;
           line-height: 18px;
           letter-spacing: 0.25px;
           color: #4b4b4b; }
-        #ModalRecovery .modal-dialog .modal-content .recoveryRight .account .newAccount,
-        #ModalNewAccount .modal-dialog .modal-content .recoveryRight .account .newAccount {
+        .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .account .newAccount,
+        .new-account-modal .modal-dialog .modal-content .recoveryRight .account .newAccount {
           cursor: pointer;
           font-family: Montserrat;
           font-weight: 600;
@@ -7643,8 +7646,8 @@ button.customers {
           color: #009aed;
           text-decoration: underline; }
     @media (max-width: 640px) {
-      #ModalRecovery .modal-dialog .modal-content,
-      #ModalNewAccount .modal-dialog .modal-content {
+      .forgot-password-modal .modal-dialog .modal-content .modal-content,
+      .new-account-modal .modal-dialog .modal-content {
         flex-direction: column;
         overflow: hidden; } }
 
@@ -7712,10 +7715,10 @@ button.customers {
       #ModalDatosOpcionales .modal-body .personalDocument .moreInfo .groupOption .groupRadio {
         flex-wrap: wrap; } }
 
-#ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .form-control {
+.forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow .form-control {
   margin-bottom: 30px; }
   @media (max-width: 640px) {
-    #ModalRecovery .modal-dialog .modal-content .recoveryRight .elementRow .form-control {
+    .forgot-password-modal .modal-dialog .modal-content .modal-content .recoveryRight .elementRow .form-control {
       margin-bottom: 35px; } }
 
 #ModalVerificaCorreo .modal-header {
@@ -8198,47 +8201,47 @@ button.customers {
 .cursorPointer {
   cursor: pointer; }
 
-#ModalNewAccount .modal-dialog .modal-content .recoveryLeft {
+.new-account-modal .modal-dialog .modal-content .recoveryLeft {
   background: url("./assets/modal/bg-newAccount.png");
   height: auto;
   background-size: cover; }
-#ModalNewAccount .modal-dialog .modal-content .recoveryRight .titleRecovery {
+.new-account-modal .modal-dialog .modal-content .recoveryRight .titleRecovery {
   margin: 10px 0 10px 0; }
-#ModalNewAccount .modal-dialog .modal-content .recoveryRight .mat-tab-header {
+.new-account-modal .modal-dialog .modal-content .recoveryRight .mat-tab-header {
   margin-bottom: 25px; }
-#ModalNewAccount .modal-dialog .modal-content .recoveryRight .mat-tab-label {
+.new-account-modal .modal-dialog .modal-content .recoveryRight .mat-tab-label {
   width: 50%; }
-#ModalNewAccount .modal-dialog .modal-content .recoveryRight .mat-ink-bar {
+.new-account-modal .modal-dialog .modal-content .recoveryRight .mat-ink-bar {
   background-color: #df0c30 !important;
   height: 3px !important;
   min-width: 219px !important; }
   @media (max-width: 640px) {
-    #ModalNewAccount .modal-dialog .modal-content .recoveryRight .mat-ink-bar {
+    .new-account-modal .modal-dialog .modal-content .recoveryRight .mat-ink-bar {
       min-width: 140px !important; } }
-#ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow {
+.new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow {
   display: flex;
   gap: 15px; }
-  #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .form-control,
-  #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .form-select {
+  .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow .form-control,
+  .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow .form-select {
     margin-bottom: 30px;
     font-size: 14px;
     border-radius: 5px;
     height: 41px;
     border: 1px solid #ced4da; }
-  #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .form-email-input {
+  .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow .form-email-input {
     text-transform: none; }
-  #ModalNewAccount .modal-dialog .modal-content .recoveryRight .elementRow .divValida.wSelect {
+  .new-account-modal .modal-dialog .modal-content .recoveryRight .elementRow .divValida.wSelect {
     min-width: calc(50% - 8px); }
-#ModalNewAccount .modal-dialog .modal-content .recoveryRight .textPass {
+.new-account-modal .modal-dialog .modal-content .recoveryRight .textPass {
   font-family: Montserrat;
   font-weight: 300;
   font-size: 10px;
   line-height: 15px;
   letter-spacing: 0.25px;
   margin-bottom: 10px; }
-#ModalNewAccount .modal-dialog .modal-content .recoveryRight button {
+.new-account-modal .modal-dialog .modal-content .recoveryRight button {
   margin-bottom: 10px; }
-#ModalNewAccount .modal-dialog .modal-content .recoveryRight .textPolitica {
+.new-account-modal .modal-dialog .modal-content .recoveryRight .textPolitica {
   display: block;
   font-family: Montserrat;
   font-weight: 300;
@@ -8246,7 +8249,7 @@ button.customers {
   line-height: 15px;
   letter-spacing: 0.25px;
   text-align: center; }
-  #ModalNewAccount .modal-dialog .modal-content .recoveryRight .textPolitica a {
+  .new-account-modal .modal-dialog .modal-content .recoveryRight .textPolitica a {
     font-family: Montserrat;
     font-weight: 600;
     font-size: 10px;
@@ -8254,21 +8257,21 @@ button.customers {
     letter-spacing: 0.1px;
     font-weight: 600;
     color: #009aed; }
-#ModalNewAccount .modal-dialog .modal-content .recoveryRight .socialMedia {
+.new-account-modal .modal-dialog .modal-content .recoveryRight .socialMedia {
   display: none;
   flex-direction: column;
   gap: 11px;
   font-family: Open Sans;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 21px;
   letter-spacing: 0.15px;
   color: #ffffff;
   margin-bottom: 10px; }
-  #ModalNewAccount .modal-dialog .modal-content .recoveryRight .socialMedia.active {
+  .new-account-modal .modal-dialog .modal-content .recoveryRight .socialMedia.active {
     display: flex; }
-  #ModalNewAccount .modal-dialog .modal-content .recoveryRight .socialMedia .btnFacebook,
-  #ModalNewAccount .modal-dialog .modal-content .recoveryRight .socialMedia .btnGoogle {
+  .new-account-modal .modal-dialog .modal-content .recoveryRight .socialMedia .btnFacebook,
+  .new-account-modal .modal-dialog .modal-content .recoveryRight .socialMedia .btnGoogle {
     position: relative;
     width: 100%;
     height: 41px;
@@ -8277,8 +8280,8 @@ button.customers {
     align-items: center;
     justify-content: center;
     cursor: pointer; }
-    #ModalNewAccount .modal-dialog .modal-content .recoveryRight .socialMedia .btnFacebook img,
-    #ModalNewAccount .modal-dialog .modal-content .recoveryRight .socialMedia .btnGoogle img {
+    .new-account-modal .modal-dialog .modal-content .recoveryRight .socialMedia .btnFacebook img,
+    .new-account-modal .modal-dialog .modal-content .recoveryRight .socialMedia .btnGoogle img {
       position: absolute;
       left: 33px;
       min-width: 25.19px;
@@ -8286,9 +8289,9 @@ button.customers {
       max-width: 25.19px;
       max-height: 25.19px;
       margin-right: 12px; }
-  #ModalNewAccount .modal-dialog .modal-content .recoveryRight .socialMedia .btnFacebook {
+  .new-account-modal .modal-dialog .modal-content .recoveryRight .socialMedia .btnFacebook {
     background: #4267b2; }
-  #ModalNewAccount .modal-dialog .modal-content .recoveryRight .socialMedia .btnGoogle {
+  .new-account-modal .modal-dialog .modal-content .recoveryRight .socialMedia .btnGoogle {
     background: #518ef8; }
 
 mat-dialog-container {

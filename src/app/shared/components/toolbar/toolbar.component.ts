@@ -1,50 +1,56 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
 import { FileService } from 'src/app/Services/file.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { environment } from 'src/environments/environment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from '../../../components/login/login.component';
+import { Subscription } from 'rxjs';
+import { NewAccountComponent } from '../../../components/new-account/new-account.component';
+import { ForgotPasswordComponent } from '../../../components/forgot-password/forgot-password.component';
+import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit, OnDestroy {
+	@Input() menu: any[];
+	@ViewChild('drawer') sidenav: MatSidenav;
 
-  @Input() menu: any[];
-  @ViewChild('drawer') sidenav: MatSidenav;
-  isLogged = false;
-  userStorage: UserStorage;
-  img: string;
+	isLogged = false;
+	userStorage: UserStorage;
+	img: string;
 
-  constructor(
-    public route: Router,
-    public accountService: AccountsService,
-    private fileService: FileService
-  ) { }
+	loginModalSubscription = new Subscription();
 
-  ngOnInit() {
-    this.route.events
-      .subscribe(
-        (event: any) => {
-          let title
-          if (event instanceof NavigationEnd) {
-            if (event.url.includes('/home/')) {
-              title = event.url.replace('/home/', '')
-            }
-          }
-        });
-
-    this.accountService.isLogged().subscribe(logged => {
-      this.isLogged = logged;
-      if (this.isLogged) {
-        this.userStorage = this.accountService.getUserStorage();
-        (!this.userStorage.image) ? this.downloadImage(this.userStorage) : null;
-        this.userStorage = this.accountService.getUserStorage();
-      }
-    })
+  constructor(private fileService: FileService,
+              private _authService: SocialAuthService,
+              private modalService: NgbModal,
+              public route: Router,
+              public accountService: AccountsService) {
   }
+
+	ngOnInit() {
+		this.route.events.subscribe((event: any) => {
+			if (event instanceof NavigationEnd)
+				if (event.url.includes('/home/'))
+					event.url.replace('/home/', '');
+		});
+
+		this.accountService.isLogged().subscribe(logged => {
+			this.isLogged = logged;
+			if (this.isLogged) {
+				this.userStorage = this.accountService.getUserStorage();
+				(!this.userStorage.image) ? this.downloadImage(this.userStorage) : null;
+				this.userStorage = this.accountService.getUserStorage();
+			}
+		});
+
+		this.loadUsuario();
+	}
 
   downloadImage(user: UserStorage) {
     this.fileService.getImage(user.id).subscribe(img => {
@@ -98,16 +104,77 @@ export class ToolbarComponent implements OnInit {
     this.showOptionUser = !this.showOptionUser
   }
 
-  addLoginHash() {
-    location.hash = 'login';
-  }
+	loadUsuario() {
+		const userStr = this.accountService.getUserStorage();
+		if (userStr.id > 0)
+			this.accountService.dispatchLogged(true);
+		else {
+			this.accountService.dispatchLogged(false);
+			this.openLoginFromUrl();
+		}
+	}
 
-  logout() {
-    this.accountService.signOut()
-    this.route.navigateByUrl("/")
-  }
+	openLoginFromUrl() {
+		const hash = location.hash;
+		if (hash && hash.trim() === '#login')
+			setTimeout(() => this.openLoginModal(), 1000);
+	}
+
+	openLoginModal() {
+		const loginModalRef = this.modalService.open(LoginComponent, {
+			backdrop: 'static'
+		});
+		this.loginModalSubscription = loginModalRef.closed.subscribe((result: any) => {
+			history.pushState('', document.title, window.location.pathname + location.search);
+			if (result) {
+				if (!result.isLoggedIn && result.redirect)
+					switch (result.redirect) {
+						case 'NEW_ACCOUNT':
+							this.openNewAccountModal();
+							break;
+						case 'FORGOT_PASSWORD':
+							this.openForgotPasswordModal();
+							break;
+						default:
+							break;
+					}
+			}
+		});
+	}
+
+	openNewAccountModal() {
+		const newAccountModalRef = this.modalService.open(NewAccountComponent, {
+			backdrop: 'static',
+			windowClass: 'new-account-modal'
+		});
+		newAccountModalRef.closed.subscribe((result: any) => {
+			if (result && result.openLogin)
+				this.openLoginModal();
+		});
+	}
+
+	openForgotPasswordModal() {
+		const forgotPasswordModalRef = this.modalService.open(ForgotPasswordComponent, {
+			windowClass: 'forgot-password-modal',
+			centered: true
+		});
+		forgotPasswordModalRef.closed.subscribe((result: any) => {
+			if (result && result.openLogin)
+				this.openLoginModal();
+		});
+	}
+
+	logout() {
+		this._authService.signOut();
+		this.accountService.signOut();
+		this.route.navigateByUrl('/');
+	}
 
   close() {
     this.sidenav.close()
   }
+
+	ngOnDestroy() {
+		this.loginModalSubscription.unsubscribe();
+	}
 }
