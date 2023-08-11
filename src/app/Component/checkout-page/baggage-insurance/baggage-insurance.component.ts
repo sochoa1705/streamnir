@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { data_insurance } from './utils';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalFeeComponent } from '../modal-fee/modal-fee.component';
@@ -7,6 +7,7 @@ import { InformationService } from 'src/app/api/api-checkout/models/rq-checkout-
 import { Group } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { GlobalComponent } from 'src/app/shared/global';
 import { dataSteps } from 'src/app/shared/constant-init';
+import { ModalInsuranceComponent } from './modal-insurance/modal-insurance.component';
 
 @Component({
 	selector: 'app-baggage-insurance',
@@ -31,6 +32,8 @@ export class BaggageInsuranceComponent implements OnInit {
 	detailFlight: Group;
 
 	listBenefitsUpSellSelect: InformationService[] = [];
+	@Output() changeStep = new EventEmitter();
+	modalDialogRef: MatDialogRef<ModalInsuranceComponent>;
 
 	ngOnInit() {
 		//es para ver si mostrar el button de ampliar beneficios
@@ -48,7 +51,8 @@ export class BaggageInsuranceComponent implements OnInit {
 
 	openModalFee() {
 		this.modalFeeDialogRef = this._matDialog.open(ModalFeeComponent, {
-			disableClose: true
+			disableClose: true,
+			panelClass: 'custom-dialog'
 		});
 
 		this.modalFeeDialogRef.afterClosed().subscribe((result) => {
@@ -72,9 +76,16 @@ export class BaggageInsuranceComponent implements OnInit {
 		window.scroll({ top: 0, behavior: 'smooth' });
 	}
 
+	openModalCoverage(){
+		this.modalDialogRef = this._matDialog.open(ModalInsuranceComponent, {
+			disableClose: true,
+		});
+	}
+
 	nextPage() {
 		dataSteps[0].check = true;
 		dataSteps[1].active = true;
+		this.changeStep.emit(1);
 		window.scroll({ top: 0, behavior: 'smooth' });
 	}
 }

@@ -42,7 +42,7 @@ export class CheckoutService {
 		let baseFareCNN = 0;
 		let baseFareTotal = 0;
 
-		GlobalComponent.upSellSeleted.fareBreakDowns.forEach((item: FareBreakDownUpSell) => {
+		GlobalComponent.upSellSeleted?.fareBreakDowns.forEach((item: FareBreakDownUpSell) => {
 			if (item.equivalentCode == 'ADT') baseFareADT = item.baseFare;
 
 			if (item.equivalentCode == 'CNN') baseFareCNN = item.baseFare;
@@ -76,7 +76,7 @@ export class CheckoutService {
 		};
 	}
 
-	filterSegmentBySelection() {
+	totalDaysTravel() {
 		const departure = GlobalComponent.appGroupSeleted.departure;
 		const returnFlight = GlobalComponent.appGroupSeleted.returns || null;
 		let totalDaysTravel = 0;
@@ -107,16 +107,14 @@ export class CheckoutService {
 
 	updateTotalInsurance(status: boolean) {
 		this.itsIncludeInsurance = status;
-		if(status==true) this.setSecurePrice();
-		if(status==false) delete GlobalComponent.appBooking.secure;
-		console.log(status,'ver')
+		if(status) this.setSecurePrice();
+		if(!status) delete GlobalComponent.appBooking.secure;
 		this.selectUpSell.emit();
 	}
 
 	//Obs: Multidestino y solo Ida no tienen Seguro, por tanto no se agrega al booking,
 	//y el departure de preferencia se pasa la posicion 0
-	setSecurePrice() {
-		console.log('pase, setsecure')
+	setIsDomestic() {
 		const departureFlight = GlobalComponent.appGroupSeleted.departure[0]
 		const returnFlight = GlobalComponent.appGroupSeleted.returns;
 		let country: string[] = [];
@@ -131,16 +129,21 @@ export class CheckoutService {
 
 		isDomestic = country.filter((x) => x != 'PE').length <= 0;
 		GlobalComponent.isDomestic=isDomestic;
-		const unitPrice = isDomestic ? 1.5 : 2.5;
+	}
+
+	setSecurePrice(){
+		const unitPrice = GlobalComponent.isDomestic ? 1.5 : 2.5;
 		const totalPrice = GlobalComponent.detailPricing.passengersCount * GlobalComponent.totalDaysTravel * unitPrice;
 		const moneyExchange = GlobalComponent.appExchangeRate.amount;
 		GlobalComponent.appBooking.secure = {
 			unitPrice,
 			totalPrice,
 			moneyExchange,
-			isDomestic
+			isDomestic:GlobalComponent.isDomestic
 		};
 	}
+
+
 
 	getDiffDays(sDate: string, eDate: string) {
 		const startDate = new Date(sDate);

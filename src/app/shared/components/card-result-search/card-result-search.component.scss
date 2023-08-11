@@ -1,4 +1,10 @@
 @use '/src/scss/colors';
+
+::ng-deep {
+	.custom-dialog-flight > mat-dialog-container{
+		padding: 0 !important;
+	}
+}
 .flex-column {
 	display: flex;
 	flex-direction: column;

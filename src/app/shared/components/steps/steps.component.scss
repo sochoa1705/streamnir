@@ -12,7 +12,6 @@
     z-index: 5;
     top:64px;
 
-
     section{ 
         max-width: 1222px;
         margin: 0 auto;
@@ -49,6 +48,7 @@
             }
             &.active{
                 background: colors.$red-500;
+                cursor: pointer;
                 color:white;
             }
             &.check{

@@ -169,6 +169,7 @@
 		</form>
 		<div class="container__page__section__button">
 			<app-button
+				[disabled]="dataStatusCards.includes(false) || !formGroup.valid"
 				[text]="'Continuar a pagar'"
 				[color]="'primary'"
 				(onClick)="setInfoPassengersInformation()"

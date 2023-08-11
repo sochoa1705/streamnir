@@ -1,0 +1,72 @@
+@use '/src/scss/colors';
+mat-dialog-container {
+	padding: 0 !important;
+}
+.modal__insurance {
+	padding: 24px 32px;
+	display: flex;
+	flex-direction: column;
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		padding-bottom: 26px;
+		h4 {
+			font-family: Open Sans;
+			font-size: 20px;
+			font-weight: 700;
+			line-height: 28px;
+			letter-spacing: -0.02em;
+			color: colors.$neutral-900;
+		}
+		img {
+			cursor: pointer;
+		}
+	}
+	&__body {
+		.boxTableMod {
+			display: flex;
+			flex-wrap: wrap;
+			width: 100%;
+			font-family: 'Montserrat';
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 21px;
+			letter-spacing: 0.1px;
+			color: colors.$gris-750;
+			max-height: 550px;
+			overflow-y: auto;
+
+			.rowMod {
+				display: flex;
+				width: 100%;
+				border-bottom: 1px solid colors.$gris-300;
+				padding: 10px;
+
+				&.lessBorder {
+					border: none;
+				}
+
+				.colMod {
+					flex: 1 1 auto;
+					text-align: right;
+
+					&.bold {
+						font-weight: bold;
+					}
+
+					&.w60 {
+						flex: 1 1 auto;
+						text-align: left;
+					}
+
+					&.w20 {
+						width: 160px;
+						min-width: 160px;
+						max-width: 160px;
+					}
+				}
+			}
+		}
+	}
+}

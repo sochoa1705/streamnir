@@ -14,7 +14,10 @@ SwiperCore.use([Pagination, Navigation]);
 	selector: 'modal-fee',
 	templateUrl: './modal-fee.component.html',
 	styleUrls: ['./modal-fee.component.scss'],
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	host: {
+		'class': 'custom-dialog-up'
+	}
 })
 export class ModalFeeComponent implements OnInit{
 	dataUpSell:IUpSell[]=GlobalComponent.upSellGroup;
@@ -51,6 +54,7 @@ export class ModalFeeComponent implements OnInit{
 		this.indexCardSelect=GlobalComponent.upSellSeleted?.index || 0;
 		this.pricingDetail=GlobalComponent.detailPricing;
 		this.dataUpSell=GlobalComponent.upSellGroup.map((item, index)=>{
+			this.isNavigate= this.dataUpSell.length > 3 ? true : false;
 			item.index=index;
 			item.informationServices = item.informationServices.sort((a, b) => {
 				if(this.conditionIncludeBag(a) && !this.conditionIncludeBag(b)) return -1

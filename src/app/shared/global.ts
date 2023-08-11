@@ -25,7 +25,7 @@ export class GlobalComponent {
     public static appReglasVentaAnticipada: RAdvanceSaleRule[]=[];
     public static segmentSelected:number[]=[];
     public static upSellGroup:IUpSell[]=[];
-    public static upSellSeleted:IUpSell;
+    public static upSellSeleted:IUpSell | null = null;
     public static detailPricing: PricingDetail=detailPricingInit;
     public static totalDaysTravel=0;
     public static isDomestic=false;

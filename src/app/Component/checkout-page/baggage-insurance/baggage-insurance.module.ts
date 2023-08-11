@@ -5,6 +5,7 @@ import { CardCheckoutModule } from 'src/app/shared/components/card-checkout/card
 import { ButtonModule } from 'src/app/shared/components/button/button.module';
 import { BaggageModule } from 'src/app/shared/components/baggage/baggage.module';
 import { ModalFeeModule } from '../modal-fee/modal-fee.module';
+import { ModalInsuranceComponent } from './modal-insurance/modal-insurance.component';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { ModalFeeModule } from '../modal-fee/modal-fee.module';
         ModalFeeModule
     ],
     exports: [BaggageInsuranceComponent],
-    declarations: [BaggageInsuranceComponent],
+    declarations: [BaggageInsuranceComponent, ModalInsuranceComponent],
     providers: [],
 })
 export class BaggageAndInsuranceModule { }

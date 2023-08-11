@@ -1,0 +1,208 @@
+<div class="modal__insurance">
+	<div class="modal__insurance__header">
+		<h4>Detalle de cobertura</h4>
+		<img src="./assets/svg/close-modal.svg" (click)="dialogRef.close(true)" />
+	</div>
+	<div class="modal__insurance__body">
+		<div *ngIf="!isDomestic" class="boxTableMod">
+			<div class="rowMod lessBorder">
+				<div class="colMod w60"></div>
+				<div class="colMod w20 bold">EUROPA</div>
+				<div class="colMod w20 bold">RESTO DEL MUNDO</div>
+			</div>
+			<div class="rowMod lessBorder">
+				<div class="colMod w60 bold">Monto Máximo Global</div>
+				<div class="colMod w20 bold">€ 30,000</div>
+				<div class="colMod w20 bold">USD 30,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Asistencia Médica en caso de Accidente *</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+				<div class="colMod w20">Hasta USD 30,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Asistencia Médica en caso de Enfermedad no preexistente *</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+				<div class="colMod w20">Hasta USD 30,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Primera Atención Médica en caso de Enfermedad preexistente *</div>
+				<div class="colMod w20">Hasta EUR 300</div>
+				<div class="colMod w20">Hasta EUR 300</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Odontología de urgencia</div>
+				<div class="colMod w20">Hasta USD 500</div>
+				<div class="colMod w20">Hasta USD 500</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Medicamentos ambulatorios</div>
+				<div class="colMod w20">Hasta EUR 800</div>
+				<div class="colMod w20">Hasta EUR 800</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Medicamentos en caso de hospitalización</div>
+				<div class="colMod w20">Incluido</div>
+				<div class="colMod w20">Incluido</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Práctica de deportes*</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Estado de embarazo *</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Prótesis y ortesis</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Traslados Sanitarios</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Repatriaciones (Sanitaria o funeraria)</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Regreso de Acompañante del titular repatriado</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Traslado de un familiar</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">Estancia de un familiar - Limite Diario</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+				<div class="colMod w20">Hasta EUR 30,000</div>
+			</div>
+		</div>
+		<div *ngIf="isDomestic" class="boxTableMod">
+			<div class="rowMod lessBorder">
+				<div class="colMod w60"></div>
+				<div class="colMod w20 bold">CÓDIGO</div>
+				<div class="colMod w20 bold">PERÚ</div>
+			</div>
+			<div class="rowMod lessBorder">
+				<div class="colMod w60 bold">MONTO MÁXIMO GLOBAL</div>
+				<div class="colMod w20 bold">C.4</div>
+				<div class="colMod w20 bold">USD 5,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">ASISTENCIA MÉDICA EN CASO DE ACCIDENTE:</div>
+				<div class="colMod w20">C.4.1.10.1</div>
+				<div class="colMod w20">Hasta USD 5.000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">ASISTENCIA MÉDICA EN CASO DE ENFERMEDAD NO PREEXISTENTE (INCLUIDO COVID-19):</div>
+				<div class="colMod w20">C.4.1.10.2</div>
+				<div class="colMod w20">Hasta USD 5,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">MEDICAMENTOS EN ASISTENCIAS AMBULATORIAS:</div>
+				<div class="colMod w20">C.4.1.5.1</div>
+				<div class="colMod w20">USD 100</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">ODONTOLOGÍA DE URGENCIA/ASISTENCIAS EN EL PAÍS DE EMISIÓN DE LA TARJETA</div>
+				<div class="colMod w20">C.4.1.6.2</div>
+				<div class="colMod w20">Hasta USD 100</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">PRÁCTICA DE DEPORTES</div>
+				<div class="colMod w20">C.4.21</div>
+				<div class="colMod w20">Hasta EUR 1,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">ESTADO DE EMBARAZO</div>
+				<div class="colMod w20">C.4.22</div>
+				<div class="colMod w20">Hasta EUR 1,000</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">TRASLADOS SANITARIOS</div>
+				<div class="colMod w20"></div>
+				<div class="colMod w20">INCLUIDO C.4</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">REPATRIACIÓN SANITARIA</div>
+				<div class="colMod w20"></div>
+				<div class="colMod w20">INCLUIDO C.4</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">ACOMPAÑAMIENTO DE MENORES Y MAYORES</div>
+				<div class="colMod w20"></div>
+				<div class="colMod w20">INCLUIDO C.4</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">TRASLADO DE UN FAMILIAR</div>
+				<div class="colMod w20"></div>
+				<div class="colMod w20">INCLUIDO C.4</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">DIFERENCIA DE TARIFA POR VIAJE DE REGRESO RETRASADO O ANTICIPADO</div>
+				<div class="colMod w20"></div>
+				<div class="colMod w20">INCLUIDO C.4</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">ASISTENCIA EN CASO DE ROBO O EXTRAVÍO DE DOCUMENTOS</div>
+				<div class="colMod w20"></div>
+				<div class="colMod w20">INCLUIDO C.4</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">REGRESO ANTICIPADO POR SINIESTRO GRAVE EN EL DOMICILIO</div>
+				<div class="colMod w20"></div>
+				<div class="colMod w20">INCLUIDO C.4</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">REPATRIACIÓN O TRASLADOS FUNERARIOS</div>
+				<div class="colMod w20"></div>
+				<div class="colMod w20">INCLUIDO C.4</div>
+			</div>
+
+			<div class="rowMod">
+				<div class="colMod w60">LOCALIZACIÓN DE EQUIPAJES</div>
+				<div class="colMod w20"></div>
+				<div class="colMod w20">INCLUIDO</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">ASISTENCIA LEGAL/ADELANTO EN CONCEPTO DE PRÉSTAMO</div>
+				<div class="colMod w20">C.4.17.1</div>
+				<div class="colMod w20">USD 100</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">ANTICIPO DE FONDOS PARA FIANZAS POR RESPONSABILIDAD EN UN ACCIDENTE</div>
+				<div class="colMod w20">C.4.18</div>
+				<div class="colMod w20">USD 150</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">ASISTENCIA LEGAL PARA REALIZAR RECLAMOS A RAÍZ DE ACCIDENTES</div>
+				<div class="colMod w20">C.4.19</div>
+				<div class="colMod w20">INCLUIDO</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">VALIDEZ TERRITORIAL</div>
+				<div class="colMod w20">NACIONAL</div>
+				<div class="colMod w20">A PARTIR DE LOS 100 KM</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">DIAS CONSECUTIVOS DE VIAJE/DENTRO DEL PAÍS DE EMISIÓN DE LA TARJETA</div>
+				<div class="colMod w20"></div>
+				<div class="colMod w20">HASTA 60 DÍAS</div>
+			</div>
+			<div class="rowMod">
+				<div class="colMod w60">LIMITACIONES Y EXCLUSIONES ESPECIALES POR EDAD</div>
+				<div class="colMod w20"></div>
+				<div class="colMod w20">NO APLICAN</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { dataUpSell } from './utils';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
 	Departure,
 	FareBreakDown,
@@ -21,7 +20,6 @@ import { dataSteps } from 'src/app/shared/constant-init';
 	styleUrls: ['./checkout-page.component.scss']
 })
 export class CheckoutPageComponent implements OnInit {
-	dataSteps: Step[] = [];
 	showGoingDropdown = false;
 	showLapDropdown = false;
 	classFligh = '';
@@ -44,6 +42,8 @@ export class CheckoutPageComponent implements OnInit {
 	showButtonReturn = false;
 	codeSafetyPay = 0;
 
+	indexStepActive = 0;
+
 	constructor(
 		private _checkoutService: CheckoutService,
 		private _router: Router,
@@ -53,7 +53,6 @@ export class CheckoutPageComponent implements OnInit {
 			next: () => {
 				this.nameUpSellSelect = GlobalComponent.upSellSeleted?.name || '';
 				this.totalInsurance = GlobalComponent.appBooking.secure ? GlobalComponent.appBooking.secure.totalPrice : 0;
-				console.log( GlobalComponent.appBooking.secure, 'pas')
 				this.pricing = GlobalComponent.detailPricing; //actualizamos los precios con el upsell seleccionado
 			}
 		});
@@ -66,14 +65,24 @@ export class CheckoutPageComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		window.scroll({
-			top: 0,
-			left: 0,
-			behavior: 'smooth'
-		});
-		this.dataSteps = dataSteps;
 		this.detailFlight = GlobalComponent.appGroupSeleted;
 		this.pricing = GlobalComponent.detailPricing;
+		this._checkoutService.totalDaysTravel();
+		this._checkoutService.setIsDomestic();
+	}
+
+	clickedStep($event: any) {
+		switch ($event) {
+			case 0:
+				this.indexStepActive = 0;
+				break;
+			case 1:
+				if (dataSteps[1].active == true && dataSteps[0].check) this.indexStepActive = 1;
+				break;
+			default:
+				if (dataSteps[2].active == true && dataSteps[1].check && dataSteps[0].check) this.indexStepActive = 2;
+				break;
+		}
 	}
 
 	//Verficar si aún esta disponible el grupoid

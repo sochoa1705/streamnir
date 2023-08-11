@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Step } from 'src/app/api/api-checkout/models/rq-checkout-up-sell';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
@@ -10,23 +10,18 @@ import { dataSteps } from '../../constant-init';
     styleUrls: ['./steps.component.scss']
 })
 
-export class StepsComponent implements OnInit {
-    dataSteps:Step[]=[];
+export class StepsComponent {
+    dataSteps:Step[]=dataSteps;
+    @Output() clickedStep = new EventEmitter();
     constructor(private _checkoutService:CheckoutService, private _router:Router) {
         this._checkoutService.changeStep.subscribe({
 			next: () => {
 				this.dataSteps=dataSteps;
 			}
 		});
-     }
-   
-    ngOnInit() { 
-        this.dataSteps = dataSteps
     }
-
+   
     clickStep(index:number){
-        if(this.dataSteps[index].check){
-            this._router.navigateByUrl(this.dataSteps[index].url)
-        }
+        this.clickedStep.emit(index);
     }
 }

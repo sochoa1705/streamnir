@@ -1,5 +1,10 @@
 @use '/src/scss/colors';
 
+::ng-deep {
+	.custom-dialog-up > mat-dialog-container{
+		padding: 0 !important;
+	}
+}
 .flex-16 {
 	display: flex;
 	flex-direction: column;
@@ -12,8 +17,8 @@
 	align-items: center;
 }
 
-.modal__contend {
-	padding: 8px;
+.modal__flight {
+	padding: 24px 32px;
     display: flex;
     flex-direction: column;
 	&__header {

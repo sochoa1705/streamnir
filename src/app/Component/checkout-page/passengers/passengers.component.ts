@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { ContryService } from 'src/app/api/api-nmviajes/services/country-list.service';
 import { months, days } from './utils';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
@@ -44,7 +44,7 @@ export class PassengersComponent implements OnInit {
 		CountryISO.Argentina,
 		CountryISO.Colombia
 	];
-
+	@Output() changeStep = new EventEmitter();
 	formGroup: FormGroup;
 	formContact = {
 		name: new FormControl('',Validators.required),
@@ -172,6 +172,7 @@ export class PassengersComponent implements OnInit {
 			};
 			dataSteps[1].check=true;
 			dataSteps[2].active=true;
+			this.changeStep.emit(2);
 		} else {
 			this.phonesField.setValue([]);
 			this.formGroup.markAllAsTouched();
@@ -217,3 +218,5 @@ export class PassengersComponent implements OnInit {
 		return this.formGroup.get('acceptPolitics')!;
 	}
 }
+
+

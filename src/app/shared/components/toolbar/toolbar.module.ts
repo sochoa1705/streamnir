@@ -4,16 +4,19 @@ import { ToolbarComponent } from './toolbar.component';
 import { MaterialModule } from '../../material.module';
 import { RouterModule } from '@angular/router';
 import { DirectivesModule } from '../../directives/directives.module';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [ ToolbarComponent ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    RouterModule,
-    DirectivesModule
-  ],
-  exports: [ ToolbarComponent ]
+	schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+	declarations: [ ToolbarComponent ],
+	imports: [
+		CommonModule,
+		MaterialModule,
+		MatButtonModule,
+		RouterModule,
+		DirectivesModule
+	],
+	exports: [ ToolbarComponent ]
 })
-export class ToolbarModule { }
+export class ToolbarModule {
+}
