@@ -15,52 +15,62 @@
 	</div>
 
 	<div class="container__card__info" [hidden]="!showDropdown">
-		<ng-container *ngFor="let scala of item.segments[0].flightSegments as fligh; let i = index">
-			<div class="container__card__info__plane" *ngIf="i == 0">
-				<div class="text">
-					<span class="bold">{{ scala.departureDateTime | date: 'HH:mm' }}</span>
-					<span>{{ scala.elapsedTime | flightDuration}}</span>
-				</div>
-				<img [src]="'./assets/svg/ph_airplane-thin.svg'" />
-				<div class="text">
-					<span class="bold left"
-						>{{ scala.departureAirport.airport | airport }} ({{ scala.departureAirport.code }})</span
-					>
-					<span class="left">{{ scala.operatingAirline.name }} | Vuelo {{ scala.flightNumber }}</span>
-				</div>
+		<ng-container  *ngFor="let scala of item.segments[0].flightSegments as fligh; let i = index">
+			
+			<div class="container__card__info__tag" *ngIf="i > 0 && i <= fligh.length - 1">
+				<span class="hour bold">{{
+					calcDurationScale(fligh[i - 1].arrivalDateTime, scala.departureDateTime)
+				}}</span>
+				<img src="./assets/svg/time.svg" />
+				<span
+					>Cambio de avión en <span class="bold">{{ scala.departureAirport.name | titlecase }}</span></span
+				>
 			</div>
 
-			<div class="container__card__info__plane" *ngIf="i > 0 && i <= fligh.length - 1">
-				<div class="text intermediate">
+			<div class="container__card__info__plane">
+				<div class="text">
+					<span>Salida:</span>
 					<span class="bold">{{ scala.departureDateTime | date: 'HH:mm' }}</span>
-					<span>{{ calcDurationScale(fligh[i - 1].arrivalDateTime, scala.departureDateTime) }}</span>
 				</div>
-				<img [src]="'./assets/svg/ellipse-plane.svg'" />
-				<div class="text intermediate">
+				<img [src]="'./assets/svg/ellipse2.svg'" />
+				<div class="text">
 					<span class="bold left"
 						>{{ scala.departureAirport.airport | airport }} ({{ scala.departureAirport.code }})</span
 					>
-					<span class="left">{{ scala.operatingAirline.name }} | Vuelo {{ scala.flightNumber }}</span>
 				</div>
 			</div>
 
 			<img class="container__card__info__img" src="./assets/svg/lineDots.svg" alt="|" />
 
-			<div class="container__card__info__plane" *ngIf="i == fligh.length - 1">
+			<div class="container__card__info__plane">
+				<div class="text intermediate">
+					<span>{{scala.elapsedTime | flightDuration}}</span>
+				</div>
+				<img [src]="'./assets/svg/airplane.svg'" />
+				<div class="flightNumber">
+					<div class="text">
+						<span class="bold left">Vuelo {{ scala.flightNumber }}</span>
+						<span class="left">{{ scala.operatingAirline.name }}</span>
+					</div>
+					<img [src]="scala.marketingAirline.imageUrl" onerror="this.src='https://www.nmviajes.com/resources/images/airlines/MULT.gif'">
+				</div>
+			</div>
+
+			<img class="container__card__info__img" src="./assets/svg/lineDots.svg" alt="|" />
+
+			<div class="container__card__info__plane">
 				<div class="text">
+					<span>Llegada:</span>
 					<span class="bold">{{ scala.arrivalDateTime | date: 'HH:mm' }}</span>
-					<span>{{
-						i !== 0 ? scala.elapsedTime.split('.')[0] + 'h ' + scala.elapsedTime.split('.')[1] + 'm' : ''
-					}}</span>
 				</div>
 				<img [src]="'./assets/svg/location-marker.svg'" />
 				<div class="text">
 					<span class="bold left"
 						>{{ scala.arrivalAirport.airport | airport }} ({{ scala.arrivalAirport.code }})</span
 					>
-					<!--<span class="left">{{scala.operatingAirline.name}} | Vuelo {{scala.flightNumber}}</span>-->
 				</div>
 			</div>
+
 		</ng-container>
 		<div class="container__card__info__luggage">
 			<span>Equipaje incluido:</span>
