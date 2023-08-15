@@ -1,0 +1,9 @@
+<div class="modal__error">
+    <div class="modal__error__header">
+        <img src="./assets/svg/close-modal.svg" (click)="dialogRef.close(true)" />
+    </div>
+    <div class="modal__error__body">
+        <span>{{message}}</span>
+        <app-button (onClick)="goHome()" [text]="txtButton"></app-button>
+    </div>
+</div>

@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PricingDetail } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { FareBreakDown, IUpSell, InformationService } from 'src/app/api/api-checkout/models/rq-checkout-up-sell';
+import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { GlobalComponent } from 'src/app/shared/global';
-import { getPricingFareBreakDowns } from 'src/app/shared/utils/fareBreakDowns';
 import SwiperCore, { Pagination, Navigation, SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 
@@ -21,7 +21,6 @@ SwiperCore.use([Pagination, Navigation]);
 })
 export class ModalFeeComponent implements OnInit{
 	dataUpSell:IUpSell[]=GlobalComponent.upSellGroup;
-
 	slidesPerGroup = 1;
 	slidesPerView = 1;
 	activeArrowLeft = false;
@@ -46,7 +45,10 @@ export class ModalFeeComponent implements OnInit{
 		}
 	};
 	constructor(
-		public dialogRef: MatDialogRef<ModalFeeComponent>, private router: Router
+		public dialogRef: MatDialogRef<ModalFeeComponent>, 
+		private router: Router, 
+		public _matDialog: MatDialog,
+		public _searchService:SearchService
 	) {
 	}
 	

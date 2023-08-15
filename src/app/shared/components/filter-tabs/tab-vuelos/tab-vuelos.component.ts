@@ -50,6 +50,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
       this._vuelosTab = value;
     }
   }
+  @Input() isBgWhite=true;
 
   get vuelosTab() {
     return this._vuelosTab;
@@ -92,7 +93,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
   userStorage: UserStorage;
   processOk = true;
   disabledInput = true;
-
+ 
   constructor(
       private destineService: DestinyService,
       public formatter: NgbDateParserFormatter,

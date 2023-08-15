@@ -26,33 +26,16 @@
 	}
 	&__search {
 		width: 100%;
-		padding: 48px 0px;
-		min-height: 368px;
-		background: url('/assets/result-search/banner_temp.png');
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: cover;
+		padding: 40px 0px;
+		height: 184px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		&__form {
-			max-width: 1248px;
-			@extend .flex-40;
-			h3 {
-				font-family: Open Sans;
-				font-size: 32px;
-				font-weight: 700;
-				line-height: 40px;
-				letter-spacing: -0.02em;
-				text-align: left;
-				color: white;
-			}
-			&__metasearch {
-				background: white;
-				padding: 32px;
-				padding-right: 14px;
-				border-radius: 8px;
-			}
+		background: colors.$gris-50;
+		box-shadow: 0px 1px 2px -1px #1018281A;
+		box-shadow: 0px 1px 3px 0px #1018281A;
+		&__metasearch {
+			max-width: 1218px;
 		}
 	}
 
@@ -63,8 +46,61 @@
 			width: 100%;
 			height: 84px;
 			padding: 4px 16px;
-			border-radius: 10px;
 			background: colors.$neutral-80;
+			display: flex;
+			border-radius: 10px;
+			gap:16px;
+			align-items: center;
+			justify-content: space-between;
+			&__line{
+				width: 0px;
+				height: 50px;
+				border-left: 1px solid colors.$gris-700;
+			}
+			&__tab{
+				display: flex;
+				cursor: pointer;
+				border-radius: 10px;
+				border-bottom: 4px solid colors.$neutral-80;
+				span{
+					font-family: Montserrat;
+					font-size: 16px;
+					line-height: 24px;
+					letter-spacing: 0em;
+					text-align: left;
+					color:colors.$gris-700;
+					font-weight: 400;
+					&.bold{
+						font-weight: 600;
+					}
+					&.active{
+						color:colors.$gris-900;
+					}
+				}
+				&:hover{
+					background: colors.$gris-200;
+				}
+				&.active{
+					border-bottom: 4px solid colors.$red-500;
+					border-radius: 0px;
+					&:hover{
+						background: none;
+					}
+				}
+				&.column{
+					flex-direction: column;
+					padding: 10px 16px;
+				}
+				&.row-10{
+					padding: 22px 16px;
+					flex-direction: row;
+					gap:10px;
+				}
+				img{
+					width: 24px;
+					height: 24px;
+				}
+			}
 		}
         &__cards{
             @extend .flex-24;

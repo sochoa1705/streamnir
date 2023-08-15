@@ -1,8 +1,8 @@
-<form class="bg-white" [formGroup]="form">
-  <div class="newBoxTab">
+<form class="bg-white" [formGroup]="form" [class.bg-white]="isBgWhite">
+  <div class="newBoxTab"  [ngStyle]="{'padding-right': isBgWhite ? '23px' : '0px'}">
     <div class="sectionTab">
       <div class="columnBox gap20">
-        <div class="titleBox">Vuelos</div>
+        <div class="titleBox" *ngIf="isBgWhite">Vuelos</div>
         <div class="form-check">
           <input class="form-check-input" (change)="changeSelect(0)" value="0" type="radio" name="rdoVuelo"
             id="rdoVuelo1" checked>

@@ -24,25 +24,8 @@ export class ResultsSearchPageComponent implements OnInit {
 	allDataGroups: Group[] = [];
 	dataGroupsPaginate: Group[] = [];
 	indexPaginate = 8;
-
-	objSearch = {
-		flightType: 0,
-		adults: 1,
-		children: 0,
-		infants: 0,
-		flightClass: 0,
-		email: ''
-	};
-
-	getDataGroups() {
-		this._searchService.getDataGroups().subscribe({
-			next: (res) => {
-				this.allDataGroups = res.groups;
-				this.dataGroupsPaginate = res.groups.slice(0, 8);
-				this.indexPaginate = this.indexPaginate + 8;
-			}
-		});
-	}
+	indexTabSelect = 1;
+	
 
 	showMoreResults() {
 		this.dataGroupsPaginate = this.dataGroupsPaginate.concat(

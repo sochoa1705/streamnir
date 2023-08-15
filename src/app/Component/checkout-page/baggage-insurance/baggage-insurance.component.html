@@ -3,7 +3,7 @@
 		<article>
 			<div class="container__page__section__title">
 				<span class="container__page__section__title__primary">Beneficios</span>
-				<span class="container__page__section__title__secondary"
+				<span *ngIf="itsIncludeUpSell" class="container__page__section__title__secondary"
 					>Elige tu mejor opción de tarifa y viaja sin preocupaciones.</span
 				>
 			</div>
@@ -41,7 +41,7 @@
 							</div>
 						</ng-container>
 					</div>
-					<div class="container__page__section__body__extras" *ngIf="itsIncludeUpSell">
+					<div class="container__page__section__body__extras" *ngIf="itsIncludeUpSell && listBenefitsUpSellSelect.length > 0">
 						<span (click)="showDropdownExtras = !showDropdownExtras" class="container__page__section__body__extras__title"
 							>Extras
 							<img class="arrow" [src]="showDropdownExtras ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'"
