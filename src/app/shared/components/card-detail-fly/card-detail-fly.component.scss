@@ -55,6 +55,12 @@
 			column-gap: 24px;
 			grid-template-columns: 65px auto auto;
 			justify-content: flex-start;
+			.flightNumber{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 30px;
+			}
 			.text {
 				display: flex;
 				flex-direction: column;
@@ -79,6 +85,40 @@
 				}
 			}
 		}
+		&__tag{
+			margin-top: 24px;
+			margin-bottom: 24px;
+			display: grid;
+			justify-content: space-between;
+			grid-template-columns: auto 40px auto;
+			align-items: center;
+			background: colors.$gris-100;
+			width: fit-content;
+			min-height: 36px;
+			padding: 8px 15px;
+			border-radius: 12px;
+			img {
+				justify-self: center;
+			}
+			span{
+				font-family: Montserrat;
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 20px;
+				letter-spacing: 0em;
+				color:colors.$neutral-900;
+				max-width: 100%;
+				white-space: nowrap; 
+			overflow: hidden; 
+			text-overflow: ellipsis; 
+				&.bold{
+					font-weight: 600;
+				}
+				&.hour{
+					font-size: 12px;
+				}
+			}
+		}
 		&__luggage {
 			margin-top: 24px;
 			display: flex;
@@ -92,7 +132,7 @@
 			}
 		}
 		&__img {
-			margin-left: 100px;
+			margin-left: 99.5px;
 		}
 	}
 }

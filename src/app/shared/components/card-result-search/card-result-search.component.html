@@ -76,7 +76,7 @@
 							<div class="card__result__flights__section__segment__hours">
 								<img
 									[src]="
-										i2 == indexSegmentDeparture[i] ? './assets/svg/checkbox-fill.svg' : './assets/svg/checkbox-box.svg'
+										i2 == indexSegmentDeparture[i] ? 'assets/svg/radio-check.svg' : './assets/svg/radio-circle.svg'
 									"
 									(click)="changeSegmentDeparture(i, i2)"
 								/>
@@ -186,7 +186,7 @@
 					>
 						<div class="card__result__flights__section__segment__hours">
 							<img
-								[src]="i == indexSegmentReturn ? './assets/svg/checkbox-fill.svg' : './assets/svg/checkbox-box.svg'"
+								[src]="i == indexSegmentReturn ? './assets/svg/radio-check.svg' : './assets/svg/radio-circle.svg'"
 								(click)="changeSegmentReturn(i)"
 							/>
 							<span class="hour"

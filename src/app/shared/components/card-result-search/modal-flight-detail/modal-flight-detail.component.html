@@ -11,7 +11,7 @@
 						>Salida a {{ departure.destinationCity.name | titlecase }} •
 						<span>{{ (departure.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</span></span
 					>
-					<span class="duration">{{ departure.segments[segmentDeparture[i]].flightDuration | flightDuration }}</span>
+					<span class="duration"> Duración total: <strong>{{ departure.segments[segmentDeparture[i]].flightDuration | flightDuration }}</strong></span>
 				</div>
 				<div class="modal__flight__body__flight__info">
 					<ng-container
@@ -100,7 +100,7 @@
 						>Vuelta a {{ returns.destinationCity.name | titlecase }} •
 						<span>{{ (returns.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</span></span
 					>
-					<span class="duration">{{ returns.segments[segmentReturn].flightDuration | flightDuration }}</span>
+					<span class="duration"> Duración total: <strong>{{ returns.segments[segmentReturn].flightDuration | flightDuration }}</strong></span>
 				</div>
 				<div class="modal__flight__body__flight__info">
 					<ng-container

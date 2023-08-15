@@ -5807,7 +5807,6 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .newBoxTab {
   display: flex;
   flex-wrap: wrap;
-  padding-right: 23px;
   font-family: 'Montserrat'; }
   .newBoxTab .sectionTab {
     display: flex;
