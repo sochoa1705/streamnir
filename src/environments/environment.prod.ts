@@ -27,8 +27,8 @@ export const environment = {
     return `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`
   },
   offerText: '¡Apúrate que se acaban las ofertas!',
-  offerExpireDate: '2023-07-21 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
-  offerLink: 'https://nam02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvacaciones.nmviajes.com%2FES%2Fholidays%2Favailability%3Futm_source%3Dweb%26utm_medium%3Dreloj%26utm_campaign%3Dcybernm%26utm_id%3Dcybwernm%26utm_term%3Dreloj%26utm_content%3Dreloj&data=05%7C01%7Csamuel.huaman%40expertiatravel.com%7C0893aa74d8fe4b8bc2ad08db84968562%7Cf47010b409cd41ffa9ca7e9b411249f6%7C0%7C0%7C638249554253218709%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=LeUv5FjKl79M0JDbVUIeN3fgkbnL2nxMCnNXzYwFRxI%3D&reserved=0',
+  offerExpireDate: '2023-08-20 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
+  offerLink: 'https://vacaciones.nmviajes.com/ES/holidays/availability?utm_source=web&utm_medium=reloj&utm_campaign=cp_bcp&utm_id=cp_bcp&utm_term=reloj&utm_content=reloj',
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
   urlAutosNmViajes: 'https://autos.nmviajes.com/',
@@ -44,7 +44,7 @@ export const environment = {
   urlSeguros: 'https://servicio.nmviajes.com:9443/segurosrv/',
   urlZonaPrivada: 'https://servicio.nmviajes.com:9443/zonaprivada/',
   urlGeo: "https://motorvuelos.expertiatravel.com/mv",
-  urlIframeMotorVuelos: "https://motorwl.nmviajes-it.com/#/nmviajes/search/resultados",
+  urlIframeMotorVuelos: "https://motorwl.expertiatravel.com/#/nmviajes/search/resultados",
   urlIframeMotorVuelosItinerary: "https://vuelos.nmviajes.com/#/nmviajes/booking/itinerary",
 
   urlBase: 'http://10.75.131.17:10508/api/productoAsistencia/',
