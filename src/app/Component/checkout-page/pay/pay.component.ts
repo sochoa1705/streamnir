@@ -240,35 +240,6 @@ export class PayComponent implements OnInit {
 		});
 	}
 
-	/*sendEmail(res:) {
-		const dataBooking=GlobalComponent.appBooking;
-		const subject = ''
-		const dataEmail:REmail = {
-			parameter: {
-				to: [dataBooking.contact.email],
-				subject,
-				data: {
-				  numeroSolicitudCompra: this.purchase.idCotizacion.toString(),
-				  messageConfirm: this.messageConfirm,
-				  allowVoid: this.isB2B && (this.booking.group.gds.idGDS == 5 || this.booking.group.gds.idGDS == 4),
-				  agil: GlobalComponent.appWebName == 'agil',
-				  precioFinal: {
-					precioDolares: '$ ' + (Number(this.purchase.pricing.totalFare) + Number(this.purchase.secure?.secureTotal ?? 0) - Number(this.purchase.dscto?.montoTotalDsto ?? 0)).toFixed(2),
-					precioSoles:
-					  'S/. ' +
-					  (
-						(Number(this.purchase.pricing.totalFare) + Number(this.purchase.secure?.secureTotal ?? 0) - Number(this.purchase.dscto?.montoTotalDsto ?? 0)) *
-						Number(this.booking.exchangeRate.amount)
-					  ).toFixed(2),
-				  },
-				  pasajeros: pasajeros,
-				  itinerario: itinerarios,
-				  contactos: contacts
-				},
-			  },
-		}
-	}*/
-
 	openModalError(message: string) {
 		this.modalDialogError = this._matDialog.open(ModalErrorComponent, {
 			disableClose: true
