@@ -6,7 +6,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './retail.component.html',
   styleUrls: ['./retail.component.scss']
 })
-export class RetailComponent implements OnInit {
+export class RetailComponent {
   slider1Images = [
       'assets/retail/slider1/image-1.webp',
       'assets/retail/slider1/image-2.webp',
@@ -42,11 +42,8 @@ export class RetailComponent implements OnInit {
     this.carouselConfig.pauseOnFocus = false;
   }
 
-  ngOnInit(): void {
-  }
-
   onRegistrationClick() {
-    location.href = 'https://www.nmviajes.com/eventos';
+    location.href = 'https://www.nmviajes.com/tusdatos';
   }
 
 }
