@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class TokenService {
 	constructor(private _httpClient: HttpClient) {}
-	URL_API = environment.urlApiMotorVuelos.split('mv')[0];
 	
 	getAndSaveToken(browser: string): Observable<RToken> {
 		const credentials = localStorage.getItem('usuario');
@@ -25,7 +24,7 @@ export class TokenService {
 			userCode: parseInt( credentials ? JSON.parse(credentials).id : '0')
 		};
 
-		let url = `https://motorvuelos.expertiatravel.com/auth/api/auth/token`;
+		let url = `${environment.urlApiMotorVuelos}/auth/api/auth/token`;
 		return this._httpClient
 			.post<RToken>(url, req, {
 				headers: {

@@ -2,13 +2,13 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { IUpSell } from '../models/rq-checkout-up-sell';
 import { FareBreakDown as FareBreakDownUpSell } from '../models/rq-checkout-up-sell';
 import { Router } from '@angular/router';
-import { IBooking} from '../models/rq-checkout-booking';
 import { environment } from 'src/environments/environment';
 import { dataUpSell } from 'src/app/Component/checkout-page/utils';
 import { GlobalComponent } from 'src/app/shared/global';
 import { dataSteps } from 'src/app/shared/constant-init';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import moment from 'moment';
+import { REmail } from '../models/rq-checkout-email';
 @Injectable({ providedIn: 'root' })
 export class CheckoutService {
 	constructor(
@@ -18,7 +18,6 @@ export class CheckoutService {
 	selectUpSell = new EventEmitter();
 	changeStep = new EventEmitter();
 	isFinishedPay = new EventEmitter();
-	
 
 	itsIncludeInsurance = false;
 	upSellSelect: IUpSell = dataUpSell[0];
@@ -28,9 +27,9 @@ export class CheckoutService {
 		this.selectUpSell.emit();
 	}
 
-	setValueChangeStep(index: number, status: boolean, next=true) {
+	setValueChangeStep(index: number, status: boolean, next = true) {
 		dataSteps[index + 1].active = true;
-	    dataSteps[index].check = status;
+		dataSteps[index].check = status;
 		this.changeStep.emit();
 	}
 
@@ -102,20 +101,20 @@ export class CheckoutService {
 		dateDeparture = new Date(departure[0].segments[0].flightSegments[0].departureDateTime);
 		totalDaysTravel =
 			this.getDiffDays(moment(dateDeparture).format('MM/DD/yyyy'), moment(dateArrival).format('MM/DD/yyyy')) + 1;
-		GlobalComponent.totalDaysTravel=totalDaysTravel-1;
+		GlobalComponent.totalDaysTravel = totalDaysTravel - 1;
 	}
 
 	updateTotalInsurance(status: boolean) {
 		this.itsIncludeInsurance = status;
-		if(status) this.setSecurePrice();
-		if(!status) delete GlobalComponent.appBooking.secure;
+		if (status) this.setSecurePrice();
+		if (!status) delete GlobalComponent.appBooking.secure;
 		this.selectUpSell.emit();
 	}
 
 	//Obs: Multidestino y solo Ida no tienen Seguro, por tanto no se agrega al booking,
 	//y el departure de preferencia se pasa la posicion 0
 	setIsDomestic() {
-		const departureFlight = GlobalComponent.appGroupSeleted.departure[0]
+		const departureFlight = GlobalComponent.appGroupSeleted.departure[0];
 		const returnFlight = GlobalComponent.appGroupSeleted.returns;
 		let country: string[] = [];
 		let isDomestic: boolean;
@@ -128,10 +127,10 @@ export class CheckoutService {
 		}
 
 		isDomestic = country.filter((x) => x != 'PE').length <= 0;
-		GlobalComponent.isDomestic=isDomestic;
+		GlobalComponent.isDomestic = isDomestic;
 	}
 
-	setSecurePrice(){
+	setSecurePrice() {
 		const unitPrice = GlobalComponent.isDomestic ? 1.5 : 2.5;
 		const totalPrice = GlobalComponent.detailPricing.passengersCount * GlobalComponent.totalDaysTravel * unitPrice;
 		const moneyExchange = GlobalComponent.appExchangeRate.amount;
@@ -139,11 +138,9 @@ export class CheckoutService {
 			unitPrice,
 			totalPrice,
 			moneyExchange,
-			isDomestic:GlobalComponent.isDomestic
+			isDomestic: GlobalComponent.isDomestic
 		};
 	}
-
-
 
 	getDiffDays(sDate: string, eDate: string) {
 		const startDate = new Date(sDate);
@@ -152,20 +149,32 @@ export class CheckoutService {
 		return Time / (1000 * 3600 * 24);
 	}
 
-	sendAndSavePay(){
-		const url = `https://motorvuelos.expertiatravel.com/mv/save-booking`;
+	sendAndSavePay() {
+		const url = `${environment.urlApiMotorVuelos}/mv/save-booking`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
-			return this._httpClient.post<any>(url, GlobalComponent.appBooking, { headers });
+		return this._httpClient.post<any>(url, GlobalComponent.appBooking, { headers });
 	}
 
-	/*getDiscounts(request: any): Observable<any> {
-		let url = `${environment.apiUrlMotorVuelos}payment/get-discounts?Bin=${request.bin}&GroupId=${request.groupId}&IncludeSecure=${request.includeSecure}&PromotionalCode=${request.promotionalCode}&BrandedFareName=${request.brandedFareName}`;
-		return this.http.get<any[]>(url, {
-		  headers: {
-			'not-loading': 'true',
-		  },
-		});
-	}*/
+	getPromocionalCode(code: string) {
+		const credentials = localStorage.getItem('usuario');
+		const url = `${environment.urlApiMotorVuelos}/mv/payment/get-promotional-code-by-code?Code=${code}&GroupId=${
+			GlobalComponent.appGroupSeleted.id
+		}&Email=${credentials ? JSON.parse(credentials).email : ''}&BrandedFareName=${
+			GlobalComponent.upSellSeleted?.name || ''
+		}`;
+		const headers = new HttpHeaders()
+		.set('Content-Type', 'application/json')
+		.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+		return this._httpClient.get<any>(url, { headers });
+	}
+
+	sendEmailBooking(data:REmail){
+		const url = `${environment.urlApiMotorVuelos}/mv/send-booking`;
+		const headers = new HttpHeaders()
+			.set('Content-Type', 'application/json')
+			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+		return this._httpClient.post<any>(url, data, { headers });
+	}
 }

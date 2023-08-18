@@ -4,6 +4,13 @@ import { cuotas } from '../passengers/utils';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { listAgencies, listBanksInternet, listCreditCard, listTypeDocument } from './utils';
 import { GlobalComponent } from 'src/app/shared/global';
+import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { REmail } from 'src/app/api/api-checkout/models/rq-checkout-email';
+import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
+
 interface Item {
 	value: any;
 	name: string;
@@ -19,19 +26,26 @@ export class PayComponent implements OnInit {
 	totalCounter = 1;
 	formGroupCard: FormGroup;
 	formGroupBooking: FormGroup;
-	formGroupBilling: FormGroup;
 	formGroupPolitics: FormGroup;
 	formInit: any;
-	formInitBilling:any;
-	urlsTermsAndConditions:any;
+	formInitBilling: any;
+	urlsTermsAndConditions: any;
 	arrayCuotas: Item[] = [];
 	isValidCupon = false;
-	listTypeDocument=listTypeDocument;
-	listCreditCard=listCreditCard;
-	listBanksInternet=listBanksInternet;
-	listAgencies=listAgencies;
-	codeSafetyPay=0;
-	showMessagePay=false;
+	listTypeDocument = listTypeDocument;
+	listCreditCard = listCreditCard;
+	listBanksInternet = listBanksInternet;
+	listAgencies = listAgencies;
+	codeSafetyPay = 0;
+	showMessagePay = false;
+	amountDiscount = 0;
+	dscto = null;
+	isValidPromotionalCode = false;
+	transactionId = 0;
+	counter = 0;
+
+	private destroy$ = new Subject<unknown>();
+	modalDialogError: MatDialogRef<ModalErrorComponent>;
 	formCreditCard = {
 		cardNumber: new FormControl(''),
 		cvv: new FormControl(''),
@@ -46,41 +60,66 @@ export class PayComponent implements OnInit {
 		counter: new FormControl(this.totalCounter)
 	};
 
-	formBilling = {
-		isBilling: new FormControl(false),
-		ruc: new FormControl(''),
-		company: new FormControl(''),
-		companyName: new FormControl(''),
-		companyAddress:new FormControl(''),
-		subCode: new FormControl(0),
-		idLoggin: new FormControl(0),
-	};
+	credentials = localStorage.getItem('usuario');
 
-	formBooking={
+	formBooking = {
 		CuponPromoWeb: new FormControl(''),
 		generateTicket: new FormControl(false),
 		paymentType: new FormControl(0),
 		deviceSessionId: new FormControl('')
-	}
+	};
 
-	formPolitics={
+	formPolitics = {
 		acceptPolitics: new FormControl(false, Validators.requiredTrue),
-		acceptAdvertising: new FormControl(false),
-	}
+		acceptAdvertising: new FormControl(false)
+	};
 
-	constructor(private _checkoutService: CheckoutService) {
+	constructor(
+		private _checkoutService: CheckoutService,
+		public _matDialog: MatDialog,
+		private _searchService: SearchService,
+	) {
 		this.formGroupCard = new FormGroup(this.formCreditCard);
 		this.formGroupBooking = new FormGroup(this.formBooking);
-		this.formGroupBilling = new FormGroup(this.formBilling);
-		this.formGroupPolitics = new FormGroup(this.formPolitics)
+		this.formGroupPolitics = new FormGroup(this.formPolitics);
 		this.formInit = this.formGroupCard.value;
-		this.formInitBilling = this.formGroupBilling.value;
 	}
 
 	ngOnInit() {
 		this.setCuotas();
 		this.chageTypeDocument();
-		this.urlsTermsAndConditions=this._checkoutService.getLinksTermsAndConditions();
+		this.urlsTermsAndConditions = this._checkoutService.getLinksTermsAndConditions();
+		this.changeCupon();
+	}
+
+	changeCupon() {
+		this.cuponPromoWebField.valueChanges
+			.pipe(
+				map((search) => search?.toLowerCase().trim()),
+				filter((search) => search !== '' && search !== undefined && search?.length > 1),
+				debounceTime(500),
+				tap((search) => this.validCuponWeb(search)),
+				takeUntil(this.destroy$)
+			)
+			.subscribe();
+	}
+
+	validCuponWeb(search: string) {
+		this._checkoutService.getPromocionalCode(search).subscribe({
+			next: (response) => {
+				if (response.result.isSuccess) {
+					this.dscto = response.result;
+					this.isValidPromotionalCode = true;
+				} else {
+					this.isValidPromotionalCode = false;
+					this.amountDiscount = 0;
+					this.dscto = null;
+				}
+			},
+			error: (err) => {
+				console.log(err);
+			}
+		});
 	}
 
 	setCuotas() {
@@ -91,23 +130,23 @@ export class PayComponent implements OnInit {
 
 	applyCupon() {}
 
-	clickTab(){
-		this.isPayCard=!this.isPayCard;
+	clickTab() {
+		this.isPayCard = !this.isPayCard;
 		this.paymentTypeField.setValue(this.isPayCard ? 0 : 1);
 		this.setValidatorsCreditCard();
 	}
 
-	setValidatorsCreditCard(){
-		if(this.isPayCard){
-			this.cardNumberField.setValidators([Validators.required, Validators.pattern(/^.{19,}$/)])
-			this.expirationField.setValidators([Validators.required])
-			this.cvvField.setValidators([Validators.required, Validators.pattern(/^.{3,}$/)])
-			this.cardOwnerField.setValidators([Validators.required])
-			this.cityField.setValidators([Validators.required])
-			this.addressField.setValidators([Validators.required])
-			this.documentTypeField.setValidators([Validators.required])
-			this.documentNumberField.setValidators([Validators.required])
-		}else{
+	setValidatorsCreditCard() {
+		if (this.isPayCard) {
+			this.cardNumberField.setValidators([Validators.required, Validators.pattern(/^.{19,}$/)]);
+			this.expirationField.setValidators([Validators.required]);
+			this.cvvField.setValidators([Validators.required, Validators.pattern(/^.{3,}$/)]);
+			this.cardOwnerField.setValidators([Validators.required]);
+			this.cityField.setValidators([Validators.required]);
+			this.addressField.setValidators([Validators.required]);
+			this.documentTypeField.setValidators([Validators.required]);
+			this.documentNumberField.setValidators([Validators.required]);
+		} else {
 			this.cardNumberField.clearValidators();
 			this.expirationField.clearValidators();
 			this.cvvField.clearValidators();
@@ -116,26 +155,11 @@ export class PayComponent implements OnInit {
 			this.addressField.clearValidators();
 			this.documentTypeField.clearValidators();
 			this.documentNumberField.clearValidators();
-			this.formGroupCard.reset(this.formInit)
+			this.formGroupCard.reset(this.formInit);
 		}
 	}
 
-	changeToogle($event:any){
-		if($event){
-			this.rucField.setValidators([Validators.required, Validators.pattern(/^.{11,}$/)]);
-			this.companyNameField.setValidators(Validators.required);
-			this.companyAddressField.setValidators(Validators.required);
-			this.formGroupBilling.updateValueAndValidity();
-		}else{
-			this.rucField.clearValidators();
-			this.companyNameField.clearValidators();
-			this.companyAddressField.clearValidators();
-		}
-		this.formGroupBilling.reset({...this.formInitBilling});
-		this.isBillingField.setValue($event);
-	}
-
-	chageTypeDocument(){
+	chageTypeDocument() {
 		this.documentTypeField.valueChanges.subscribe((res) => {
 			if (res !== '' && this.isPayCard) {
 				this.documentNumberField.setValue('');
@@ -146,47 +170,114 @@ export class PayComponent implements OnInit {
 		});
 	}
 
-	sendPayment(){
-		this.companyField.setValue({
-			companyName:this.companyNameField.value,
-			companyAddress:this.companyAddressField.value
-		})
-		const dataFormCredit= this.isPayCard ? this.formGroupCard.value :  {
-			documentType: null,
-			numberQuotes: 0,
-			counter: 1
-		};
 
-		const dataBilling = this.formGroupBilling.value;
-		delete dataBilling.companyName;
-		delete  dataBilling.companyAddress;
+	validateUpsell() {
+		this._searchService.validateAvailability().subscribe({
+			next: (res) => {
+				if (res.isAvailable) this.sendPayment();
+				else {
+					this.openModalError(
+						'El itinerario seleccionado ya no se encuentra disponible, favor de seleccionar un nuevo itinerario'
+					);
+				}
+			},
+			error: (err) => {
+					this.openModalError(
+						'El itinerario seleccionado ya no se encuentra disponible, favor de seleccionar un nuevo itinerario'
+					);
+			}
+		});
+	}
 
-		const previewData=GlobalComponent.appBooking;
+	sendPayment() {
+		this.counter++;
+		const dataFormCredit: any = this.isPayCard
+			? {
+					...this.formGroupCard.value,
+					documentType: Number(this.documentTypeField.value),
+					cardNumber: this.cardNumberField.value.replace(/[\s-]/g, ''),
+					expiration: this.expirationField.value.match(/.{1,2}/g).join('/'),
+					numberQuotes: 0,
+					counter: this.counter
+			  }
+			: {
+					documentType: null,
+					numberQuotes: 0,
+					counter: this.counter
+			  };
+
+		const previewData = GlobalComponent.appBooking;
 		GlobalComponent.appBooking = {
 			...previewData,
 			...this.formGroupBooking.value,
-			groupId:GlobalComponent.appGroupSeleted.id,
-			contact: {...previewData.contact, ... dataBilling},
-			customer:{
-				username: dataBilling.email,
+			groupId: GlobalComponent.appGroupSeleted.id,
+			contact: { ...previewData.contact },
+			customer: {
+				username: previewData.contact.email,
 				firstName: previewData.contact.name,
 				lastName: previewData.contact.lastName,
 				motherLastname: previewData.contact.motherLastname,
-				address: "Lima - Peru",
-				email: dataBilling.email
+				address: 'Lima - Peru',
+				email: previewData.contact.email
 			},
-			card:dataFormCredit
+			card: dataFormCredit
 		};
+
 		this._checkoutService.sendAndSavePay().subscribe({
-			next:(res)=>{
-				this.showMessagePay=true;
-				this.codeSafetyPay=res.ciP_SafetyPAY;
-				console.log(res)
+			next: (res) => {
+				if (res.confirmed) {
+					this.showMessagePay = true;
+					this.codeSafetyPay = res.ciP_SafetyPAY;
+					this.transactionId = res.resultPasarela.Transaction_id;
+					//this.sendEmail(res);
+				} else {
+					this.openModalError('Al parecer hubo un error en su reserva, por favor intentelo más tarde');
+				}
 			},
-			error:(err)=>{
-				console.log(err)
+			error: (err) => {
+				this.openModalError(this.getMessageErrorClient(err));
 			}
-		})
+		});
+	}
+
+	openModalError(message: string) {
+		this.modalDialogError = this._matDialog.open(ModalErrorComponent, {
+			disableClose: true
+		});
+		this.modalDialogError.componentInstance.message = message;
+		this.modalDialogError.componentInstance.isRedirect = true;
+		this.modalDialogError.componentInstance.txtButton = 'Volver al inicio';
+	}
+
+	private getMessageErrorClient(error: any): string {
+		switch (error.errorCode) {
+			case 1001:
+				return 'No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.';
+			case 1002:
+				return 'La tarifa ya no se encuentra disponible, favor de realizar una nueva búsqueda.';
+
+			case 2001:
+				return 'La tarjeta de crédito no es válida.';
+			case 2002:
+				return 'La fecha de expiración de la tarjeta de crédito no es válida.';
+			case 2003:
+				return 'El código de seguridad o la fecha de expiración estaba inválido.';
+			case 2004:
+				return 'La cuenta no tenía fondos suficientes.';
+			case 2100:
+				if (error.messages != null && error.messages.length > 0) {
+					return error.messages[0];
+				} else
+					return 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados o de lo contrario selecciona otra forma de pago.';
+			case 2101:
+				return 'No se puede realizar el pago correctamente.';
+			default:
+				return (
+					error.messages?.map((c: any) => c) ?? [
+						'No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.'
+					]
+				).join(' - ');
+		}
 	}
 
 	get cardNumberField(): AbstractControl {
@@ -239,31 +330,6 @@ export class PayComponent implements OnInit {
 
 	get deviceSessionIdField(): AbstractControl {
 		return this.formGroupBooking.get('deviceSessionId')!;
-	}
-
-
-	get emailField(): AbstractControl {
-		return this.formGroupBilling.get('email')!;
-	}
-
-	get isBillingField(): AbstractControl {
-		return this.formGroupBilling.get('isBilling')!;
-	}
-
-	get rucField(): AbstractControl {
-		return this.formGroupBilling.get('ruc')!;
-	}
-
-	get companyField(): AbstractControl {
-		return this.formGroupBilling.get('company')!;
-	}
-
-	get companyNameField(): AbstractControl {
-		return this.formGroupBilling.get('companyName')!;
-	}
-
-	get companyAddressField(): AbstractControl {
-		return this.formGroupBilling.get('companyAddress')!;
 	}
 
 	get acceptPoliticsField(): AbstractControl {

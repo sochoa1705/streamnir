@@ -15,6 +15,10 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
     constructor(public _matDialog: MatDialog) { }
     indexSegmentDeparture:number[];
     indexSegmentReturn:number;
+
+    segmentDeparture:number[];
+    segmentReturn:number;
+
     showHoursDeparture=false;
     showHoursReturn=false;
 
@@ -29,19 +33,33 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges){
         if (changes['flight']) {
 			if(changes['flight'].currentValue){
-                if(this.flight.returns) this.indexSegmentReturn=0;
-                this.indexSegmentDeparture = new Array(this.flight.departure.length).fill(0);
-                this.detailPricing=getPricingFareBreakDowns(this.flight.pricingInfo.itinTotalFare.fareBreakDowns);
+                if(this.flight.returns) {
+                    this.segmentReturn=this.flight.returns.segments[0].segmentId;
+                    this.indexSegmentReturn=0;
+                }
+
+                if( this.flight.departure){
+                    this.segmentDeparture = this.flight.departure.map(item=>item.segments[0].segmentId);
+                    this.indexSegmentDeparture = new Array(this.flight.departure.length).fill(0);
+                }
+
+                if(this.flight.pricingInfo){
+                    this.detailPricing=getPricingFareBreakDowns(this.flight.pricingInfo.itinTotalFare.fareBreakDowns);
+                }
             }
 		}
     }
 
-    changeSegmentDeparture(index:number, indexSegment:number){
+    changeSegmentDeparture(index:number, indexSegment:number, idSegment:number){
         this.indexSegmentDeparture[index]=indexSegment;
+        this.segmentDeparture[index]=idSegment;
+        console.log(this.segmentDeparture)
     }
 
-    changeSegmentReturn(index:number){
+    changeSegmentReturn(index:number, idSegment:number){
         this.indexSegmentReturn=index;
+        this.segmentReturn=idSegment;
+        console.log(this.segmentReturn)
     }
 
     hoverSegmentReturn(index:number, type:string){
@@ -58,8 +76,10 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
             panelClass: 'custom-dialog-flight'
 		});
 		this.modalDialogRef.componentInstance.flight = this.flight;
-        this.modalDialogRef.componentInstance.segmentDeparture=this.indexSegmentDeparture;
-        this.modalDialogRef.componentInstance.segmentReturn=this.indexSegmentReturn;
+        this.modalDialogRef.componentInstance.segmentDeparture=this.segmentDeparture;
+        this.modalDialogRef.componentInstance.segmentReturn=this.segmentReturn;
+        this.modalDialogRef.componentInstance.indexSegmentDeparture=this.indexSegmentDeparture;
+        this.modalDialogRef.componentInstance.indexSegmentReturn=this.indexSegmentReturn;
         this.modalDialogRef.componentInstance.detailPricing=this.detailPricing;
 
 		this.modalDialogRef.afterClosed().subscribe((result) => {
@@ -67,6 +87,14 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
 				console.log('close modal not x')
 			}
 		});
+    }
+
+    findPositionDeparture(indexDeparture:number){
+
+    }
+
+    findPositionReturn(){
+
     }
 
 }

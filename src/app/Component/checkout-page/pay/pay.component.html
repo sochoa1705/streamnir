@@ -198,7 +198,7 @@
 								<img src="./assets/checkout/info.svg" alt="i" />
 								<span
 									>Recuerda que una vez generado tu código SafetyPay, debería pagar dentro de las
-									<strong>próximas 2 horas</strong>. De los contrario la reserva será cancelada</span
+									<strong>próximas 2 horas</strong>. De lo contrario la reserva será cancelada</span
 								>
 							</div>
 						</div>
@@ -219,74 +219,17 @@
 						[label]="'Código'"
 						[placeholder]="'Ingresar código'"
 						[name]="'CuponPromoWeb'"
+						[maxLenght]="6"
 						[class]="cuponPromoWebField.touched && cuponPromoWebField!.invalid ? 'error' : ''"
 						[labelError]="
-							cuponPromoWebField.touched && !isValidCupon && cuponPromoWebField.value.length > 1
-								? 'Cupon no válido'
+							cuponPromoWebField.touched && !isValidPromotionalCode && dscto === null && cuponPromoWebField.value.length > 1
+								? 'Código inválido'
 								: ''
 						"
 					></app-input>
 					<app-button [text]="'Aplicar'" [color]="'outline-secondary'" (click)="applyCupon()"></app-button>
 				</div>
 			</app-card-checkout>
-		</article>
-
-		<article>
-			<form [formGroup]="formGroupBilling" class="container__page__section__billing">
-				<div class="check__container">
-					<span>¿Necesitas factura?</span>
-					<app-input-toogle
-						[isSmall]="true"
-						[name]="'toogle-billing'"
-						(clickChecked)="changeToogle($event)"
-					></app-input-toogle>
-				</div>
-
-				<app-card-checkout [hidden]="!isBillingField.value">
-					<div class="container__page__section__billing__row">
-						<app-input
-							[label]="'RUC'"
-							[placeholder]="'Ingresar RUC'"
-							[name]="'ruc'"
-							[maxLenght]="11"
-							[isRequired]="true"
-							[isOnlyNumber]="true"
-							[class]="rucField.touched && rucField!.invalid ? 'error' : ''"
-							[labelError]="
-								rucField.touched && rucField!.hasError('required')
-									? 'RUC es obligatorio'
-									: rucField.touched && rucField.hasError('pattern')
-									? 'RUC inválido'
-									: ''
-							"
-						></app-input>
-						<app-input
-							[label]="'Razón Social'"
-							[placeholder]="'Ingresar razón social'"
-							[name]="'companyName'"
-							[isRequired]="true"
-							[class]="companyNameField.touched && companyNameField!.invalid ? 'error' : ''"
-							[labelError]="
-								companyNameField.touched && companyNameField!.hasError('required') ? 'Razón social es obligatorio' : ''
-							"
-						></app-input>
-					</div>
-					<div class="container__page__section__billing__address">
-						<app-input
-							[label]="'Dirección razón social'"
-							[placeholder]="'Ingresar dirección'"
-							[name]="'companyAddress'"
-							[isRequired]="true"
-							[class]="companyAddressField.touched && companyAddressField!.invalid ? 'error' : ''"
-							[labelError]="
-								companyAddressField.touched && companyAddressField!.hasError('required')
-									? 'Dirección es obligatorio'
-									: ''
-							"
-						></app-input>
-					</div>
-				</app-card-checkout>
-			</form>
 		</article>
 
 		<article>
@@ -318,8 +261,8 @@
 			<app-button
 				[text]="'Realizar compra'"
 				[color]="'primary'"
-				[disabled]="!formGroupCard.valid || !formGroupBilling.valid || !formGroupPolitics.valid"
-				(onClick)="sendPayment()"
+				[disabled]="!formGroupCard.valid || !formGroupPolitics.valid"
+				(onClick)="validateUpsell()"
 			></app-button>
 		</div>
 	</div>
@@ -328,4 +271,6 @@
 	*ngIf="showMessagePay"
 	[listBanksInternet]="listBanksInternet"
 	[codeSafetyPay]="codeSafetyPay"
+	[isPayCard]="isPayCard"
+	[transactionId]="transactionId"
 ></app-message-pay>

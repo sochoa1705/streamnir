@@ -100,7 +100,7 @@
 							<div class="container__page__section__insurance__line"></div>
 							<div class="container__page__section__insurance__footer">
 								<span
-									>Agregar por <span class="price"> <span class="usd">USD</span> 2.50 </span> por persona y por día</span
+									>Agregar por <span class="price"> <span class="usd">USD</span> {{isDomestic ? '1.50' : '2.50'}} </span> por persona y por día</span
 								>
 								<app-button
 									[text]="'Agregar seguro'"

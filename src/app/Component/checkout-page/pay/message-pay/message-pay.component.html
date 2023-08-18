@@ -6,13 +6,13 @@
 					<h3 class="container__page__section__message__title">¡Todo listo para tu vuelo!</h3>
 					<img src="./assets/checkout/success_booking.svg" alt="" />
 					<span class="container__page__section__message__description"
-						>Su solicitud de compra ha sido procesada con éxito. N° de orden: <strong>958456</strong></span
+						>Su solicitud de compra ha sido procesada con éxito. N° de orden: <strong>{{transactionId}}</strong></span
 					>
 				</div>
 			</app-card-checkout>
 		</article>
 
-		<article *ngIf="codeSafetyPay!==0">
+		<article *ngIf="!isPayCard">
 			<div class="container__page__section__safetypay">
 				<div class="container__page__section__safetypay__title">
 					<h4>¿Cómo pagar con SafetyPay?</h4>
@@ -51,7 +51,7 @@
 						</div>
 						<div class="container__page__section__safetypay__card__steps__item">
 							<div class="circle">4</div>
-							<span>Ingresa tu código de pago <strong>{{codeSafetyPay}}</strong>, verifica el monto, confirma el pago con tu clave <strong>token</strong>.</span>
+							<span>Ingresa tu código de pago <strong>{{transactionId}}</strong>, verifica el monto, confirma el pago con tu clave <strong>token</strong>.</span>
 						</div>
 						<div class="container__page__section__safetypay__card__steps__item">
 							<div class="circle">5</div>

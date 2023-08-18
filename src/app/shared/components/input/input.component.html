@@ -4,7 +4,6 @@
 	<input
 		*ngIf="isOnlyText"
 		[placeholder]="placeholder"
-		[value]="value"
 		[class]="class"
 		[class.label]="label"
 		[class.icon]="icon"
@@ -12,6 +11,7 @@
 		[id]="name"
 		[formControlName]="name"
 		[readonly]="disabled"
+		[maxlength]="maxLenght"
 		autocomplete="off"
 		OnlyLetters
 		appRemoveAccents
@@ -20,18 +20,15 @@
 	<input
 		*ngIf="!isOnlyText"
 		[placeholder]="placeholder"
-		[value]="value"
 		[class]="class"
 		[class.label]="label"
 		[class.icon]="icon"
 		[name]="name"
-		[id]="name"
 		[formControlName]="name"
 		[readonly]="disabled"
 		autocomplete="off"
 		[maxlength]="maxLenght"
 		OnlyNumber="{{isOnlyNumber ? 'number' : ''}}"
-		appRemoveAccents
 	/>
 
 </div>

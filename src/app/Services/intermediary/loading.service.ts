@@ -6,6 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LoadingService {
   busyRequestCount = 0;
+  requestSearchCount = 0;
 
   constructor(private spinnerService: NgxSpinnerService) { }
 

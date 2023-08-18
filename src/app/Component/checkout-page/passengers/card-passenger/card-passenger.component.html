@@ -80,8 +80,8 @@
 							[placeholder]="'Ingresar número'"
 							[name]="'documentNumber'"
 							[isRequired]="true"
-							#InputDocumentNumber
-							[isOnlyNumber]="documentTypeField.value == 0 ? true : false"
+							[isOnlyText]="false"
+							[isOnlyNumber]="documentTypeField.value == 0 || documentTypeField.value== '0' ? true : false"
 							[class]="documentNumberField.touched && documentNumberField!.invalid ? 'error' : ''"
 							[labelError]="
 								documentNumberField.touched && documentNumberField!.hasError('required')

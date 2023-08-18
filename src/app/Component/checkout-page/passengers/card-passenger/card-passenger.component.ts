@@ -22,7 +22,6 @@ export class CardPassengerComponent implements OnInit {
 	@Input() arrayYears: Item[] = [];
 	@Output() updateValidForm = new EventEmitter();
 
-	@ViewChild('InputDocumentNumber') InputDocumentNumber: InputComponent;
 
 	formGroup: FormGroup;
 	formObject = {
@@ -59,7 +58,7 @@ export class CardPassengerComponent implements OnInit {
 	regexNroDocument!: RegExp;
 	daysFilter: Item[] = [];
 	validForm = false;
-
+	numberDocument=0;
 	constructor() {
 		this.formGroup = new FormGroup(this.formObject);
 	}
@@ -103,6 +102,7 @@ export class CardPassengerComponent implements OnInit {
 			this.validForm = false;
 			this.formGroup.markAllAsTouched();
 		}
+		this.numberDocument=this.formGroup.value.documentNumber;
 		this.updateValidForm.emit({ index: this.indexCard, isValid: this.validForm });
 	}
 
@@ -111,7 +111,8 @@ export class CardPassengerComponent implements OnInit {
 		const phoneNumber = this.fullPhoneField.value ? this.fullPhoneField.value.dialCode + '.' + this.fullPhoneField.value.number.replace(/\s+/g, '') : '';
 		this.birthdayField.setValue(dateBirthday);
 		this.phoneField.setValue(phoneNumber);
-		this.documentTypeField.setValue(1);
+		this.documentTypeField.setValue(Number(this.documentTypeField.value));
+	    this.documentNumberField.setValue(this.numberDocument.toString());
 		const dataPassenger = this.formGroup.value;
 		const keysToRemove = ['year', 'month', 'day', 'fullPhone'];
 		keysToRemove.forEach((key) => delete dataPassenger[key]);
@@ -135,7 +136,6 @@ export class CardPassengerComponent implements OnInit {
 			daysFilter.push({ name: i.toString(), value: i });
 		}
 		this.daysFilter = daysFilter;
-
 		if (!this.daysFilter.some((item) => item.value == day)) {
 			this.dayField.markAsTouched();
 			this.dayField.setValue('');

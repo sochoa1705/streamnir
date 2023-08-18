@@ -11,6 +11,7 @@ import { InputToggleModule } from 'src/app/shared/components/input-toggle/input-
 import { PayComponent } from './pay.component';
 import { InputCreditCardModule } from 'src/app/shared/components/input-credit-card/input-credit-card.module';
 import { MessagePayComponent } from './message-pay/message-pay.component';
+import { ModalErrorModule } from 'src/app/shared/components/modal-error/modal-error.module';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { MessagePayComponent } from './message-pay/message-pay.component';
         NgxIntlTelInputModule,
         InputCheckModule,
         InputToggleModule,
-        InputCreditCardModule
+        InputCreditCardModule,
+        ModalErrorModule
     ],
     exports: [PayComponent],
     declarations: [PayComponent, MessagePayComponent],
