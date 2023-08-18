@@ -34,10 +34,12 @@ export class BaggageInsuranceComponent implements OnInit {
 	listBenefitsUpSellSelect: InformationService[] = [];
 	@Output() changeStep = new EventEmitter();
 	modalDialogRef: MatDialogRef<ModalInsuranceComponent>;
+	isDomestic=false;
 
 	ngOnInit() {
 		//es para ver si mostrar el button de ampliar beneficios
 		this.detailFlight = GlobalComponent.appGroupSeleted;
+		this.isDomestic=GlobalComponent.isDomestic;
 		if (GlobalComponent.upSellSeleted) {
 			this.itsIncludeUpSell = true;
 			this.showBaggageDropdown = false;

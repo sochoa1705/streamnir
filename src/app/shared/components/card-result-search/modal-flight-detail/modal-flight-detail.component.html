@@ -11,11 +11,11 @@
 						>Salida a {{ departure.destinationCity.name | titlecase }} •
 						<span>{{ (departure.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</span></span
 					>
-					<span class="duration"> Duración total: <strong>{{ departure.segments[segmentDeparture[i]].flightDuration | flightDuration }}</strong></span>
+					<span class="duration"> Duración total: <strong>{{ departure.segments[indexSegmentDeparture[i]].flightDuration | flightDuration }}</strong></span>
 				</div>
 				<div class="modal__flight__body__flight__info">
 					<ng-container
-						*ngFor="let scala of departure.segments[segmentDeparture[i]].flightSegments as flightSegment; index as i2"
+						*ngFor="let scala of departure.segments[indexSegmentDeparture[i]].flightSegments as flightSegment; index as i2"
 					>
 						<div class="modal__flight__body__flight__info__airline">
 							<img [src]="scala.marketingAirline.imageUrl" alt="" />
@@ -75,14 +75,14 @@
 						<img src="./assets/svg/backpack.svg" />
 						<img
 							[src]="
-								departure.segments[segmentDeparture[i]].equipaje.cabina
+								departure.segments[indexSegmentDeparture[i]].equipaje.cabina
 									? './assets/svg/hand-luggage.svg'
 									: './assets/svg/no-hand-luggage.svg'
 							"
 						/>
 						<img
 							[src]="
-								departure.segments[segmentDeparture[i]].equipaje.piezas > 0
+								departure.segments[indexSegmentDeparture[i]].equipaje.piezas > 0
 									? './assets/svg/hold-luggage.svg'
 									: './assets/svg/no-hold-luggage.svg'
 							"
@@ -100,11 +100,11 @@
 						>Vuelta a {{ returns.destinationCity.name | titlecase }} •
 						<span>{{ (returns.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</span></span
 					>
-					<span class="duration"> Duración total: <strong>{{ returns.segments[segmentReturn].flightDuration | flightDuration }}</strong></span>
+					<span class="duration"> Duración total: <strong>{{ returns.segments[indexSegmentReturn].flightDuration | flightDuration }}</strong></span>
 				</div>
 				<div class="modal__flight__body__flight__info">
 					<ng-container
-						*ngFor="let scala of returns.segments[segmentReturn].flightSegments as flightSegment; index as i3"
+						*ngFor="let scala of returns.segments[indexSegmentReturn].flightSegments as flightSegment; index as i3"
 					>
 						<div class="modal__flight__body__flight__info__airline">
 							<img [src]="scala.marketingAirline.imageUrl" alt="" />
@@ -164,14 +164,14 @@
 						<img src="./assets/svg/backpack.svg" />
 						<img
 							[src]="
-								returns.segments[segmentReturn].equipaje.cabina
+								returns.segments[indexSegmentReturn].equipaje.cabina
 									? './assets/svg/hand-luggage.svg'
 									: './assets/svg/no-hand-luggage.svg'
 							"
 						/>
 						<img
 							[src]="
-								returns.segments[segmentReturn].equipaje.piezas > 0
+								returns.segments[indexSegmentReturn].equipaje.piezas > 0
 									? './assets/svg/hold-luggage.svg'
 									: './assets/svg/no-hold-luggage.svg'
 							"

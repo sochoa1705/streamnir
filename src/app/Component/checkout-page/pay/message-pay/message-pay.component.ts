@@ -15,10 +15,14 @@ export class MessagePayComponent implements OnInit {
     dataContact:Contact;
     @Input() listBanksInternet:any[] = []
     @Input() codeSafetyPay = 0;
+    @Input() transactionId = 0;
+    @Input() isPayCard=true;
     ngOnInit() {
         window.scroll({ top: 0, behavior: 'smooth' });
-        this._checkoutService.isFinishedPay.emit(this.codeSafetyPay);
+        this._checkoutService.isFinishedPay.emit({transactionId:this.transactionId, isPayCard:this.isPayCard});
         this.dataPassengers=GlobalComponent.appBooking.passengers;
         this.dataContact=GlobalComponent.appBooking.contact;
     }
 }
+
+//resultPasarela

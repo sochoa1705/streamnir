@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IAvailability, RAvailable } from '../models/rq-search-ce-request';
 import { environment } from 'src/environments/environment';
 import { GlobalComponent } from 'src/app/shared/global';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ISearchResponse } from '../../api-checkout/models/rq-checkout-search';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { IUpSell } from '../../api-checkout/models/rq-checkout-up-sell';
 
 @Injectable({ providedIn: 'root' })
@@ -21,12 +21,12 @@ export class SearchService {
 		.set('Content-Type', 'application/json')
 		.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
 
-		let url = `https://motorvuelos.expertiatravel.com/mv/validate-availability`;
+		let url = `${environment.urlApiMotorVuelos}/mv/validate-availability`;
 		return this._httpClient.post<RAvailable>(url, request, { headers });
 	}
 
 	getAllDataGroups(body:any): Observable<ISearchResponse> {
-		const url = 'https://motorvuelos.expertiatravel.com/mv/search';
+		const url = `${environment.urlApiMotorVuelos}/mv/search`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
@@ -40,8 +40,21 @@ export class SearchService {
 		);
 	}
 
+	getAllDataSearch(body:any): Observable<any> {
+		const listGDS = Object.values(environment.GDS);
+		const endpoint = environment.urlApiMotorVuelos.includes('qa') ? 'search-nm' : 'search'
+		const url = `${environment.urlApiMotorVuelos}/mv/${endpoint}`;
+		const headers = new HttpHeaders()
+			.set('Content-Type', 'application/json')
+			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+		
+		return of(...listGDS).pipe(
+				mergeMap(gds => this._httpClient.post(url, {...body, gds}, { headers }))
+		);
+	}
+
 	getUpSellGroup() {
-		const url = 'https://motorvuelos.expertiatravel.com/mv/up-sell';
+		const url = `${environment.urlApiMotorVuelos}/mv/up-sell`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);

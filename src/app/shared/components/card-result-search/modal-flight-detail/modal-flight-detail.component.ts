@@ -22,6 +22,8 @@ export class ModalFlightDetailComponent implements OnInit {
 	@Input() flight: Group;
 	@Input() segmentDeparture: number[];
 	@Input() segmentReturn: number;
+	@Input() indexSegmentDeparture: number[];
+	@Input() indexSegmentReturn: number;
 	@Input() detailPricing: PricingDetail;
 	modalFeeDialogRef: MatDialogRef<ModalFeeComponent>;
 	modalDialogError: MatDialogRef<ModalErrorComponent>;
@@ -84,17 +86,20 @@ export class ModalFlightDetailComponent implements OnInit {
 		const segmentArray: number[] = this.segmentDeparture.map((item) => item);
 		if (this.segmentReturn >= 0) segmentArray.push(this.segmentReturn);
 		GlobalComponent.segmentSelected =
-			this.flight.ndcInfo && segmentArray.every((elemento) => elemento === 0)
+			this.flight.ndcInfo
 				? this.flight.ndcInfo.segmentInfo[0].segments
 				: segmentArray;
-		this.validateUpsell();
-	}
 
-	validateUpsell() {
+		console.log(GlobalComponent.segmentSelected,'seleted')
+		GlobalComponent.appBooking.segmentSelected=GlobalComponent.segmentSelected;
 		GlobalComponent.appGroupSeleted = this.flight;
 		GlobalComponent.detailPricing = this.detailPricing;
 		GlobalComponent.upSellGroup = [];
 		GlobalComponent.upSellSeleted = null;
+		this.validateUpsell();
+	}
+
+	validateUpsell() {
 		this._searchService.validateAvailability().subscribe({
 			next: (res) => {
 				if (res.isAvailable) this.getDataUpSell();

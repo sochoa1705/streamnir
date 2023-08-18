@@ -1,5 +1,9 @@
 @use '/src/scss/colors';
 
+mat-dialog-container{
+	padding: 24px !important;
+}
+
 .modal__error {
 	max-width: 468px;
 	&__header {

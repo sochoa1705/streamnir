@@ -68,14 +68,27 @@ export const environment = {
   urlSuggest: "https://suggest.agentcars.com/suggest/",
 
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
-
-  urlApiMotorVuelos: "https://motorvuelos-dev.expertiatravel.com/mv/",
+  
+  //https://qa-bffdelfosti.nmviajes-it.com
+  urlApiMotorVuelos: "https://motorvuelos.expertiatravel.com",
 
     //url Terms and Conditions - Checkout
 
   urlTermsConditions: 'https://www.nmviajes.com/terminos-condiciones',
   urlBookingConditions: 'https://www.nmviajes.com/condiciones-de-reserva',
   urlTravelDocuments: 'https://www.nmviajes.com/documentacion-viaje',
+  
+  GDS:{
+      AMADEUS: 0,
+      SABRE: 1,
+      KIU: 2,
+      VIVAAIR: 4,
+      KIWI: 5,
+      SKY: 6,
+      MULTITICKET: 7,
+      AMADEUS_NDC: 21,
+      LATAM:22
+  },
 
   SEO: {
     home: {

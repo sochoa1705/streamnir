@@ -5,6 +5,7 @@ import { SearchService } from 'src/app/api/api-nmviajes/services/search.service'
 import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
 import { GlobalComponent } from 'src/app/shared/global';
 import { getParams } from 'src/app/shared/utils/getParams';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-results-search-page',
@@ -15,16 +16,17 @@ export class ResultsSearchPageComponent implements OnInit {
 	constructor(
 		private _searchService: SearchService,
 		private _tokenService: TokenService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
 	) {}
-	ngOnInit() {
-		this.getToken();
-	}
 
 	allDataGroups: Group[] = [];
 	dataGroupsPaginate: Group[] = [];
-	indexPaginate = 8;
-	indexTabSelect = 1;
+	indexPaginate = 16;
+	indexTabSelect = 0;
+
+	ngOnInit() {
+		this.getToken();
+	}
 	
 
 	showMoreResults() {
@@ -47,21 +49,44 @@ export class ResultsSearchPageComponent implements OnInit {
 
 	getObjectParams() {
 		this.route.queryParamMap.subscribe((params) => {
-			const objParams = getParams(params)
-            this.getAllDataGroups(objParams);
+			const objParams = getParams(params);
+			if(environment.urlApiMotorVuelos.includes('qa')) 
+			this.getAllDataSearch(objParams);
+			else this.getAllDataAnterior(objParams)
 		});
 	}
 
-    getAllDataGroups(objSearch:any){
-        this._searchService.getAllDataGroups(objSearch).subscribe({
+
+	getAllDataSearch(objSearch:any){
+		this._searchService.getAllDataSearch(objSearch).subscribe({
+			next:(res)=>{
+				//agregar contador referente a los GDS, si no hay nada cuando se llego a los GDS, LoaderService Contador
+				if(res.groups){
+					this.allDataGroups=this.allDataGroups.concat(res.groups);
+					this.allDataGroups.sort( (a,b) => a.pricingInfo.totalFare - b.pricingInfo.totalFare );
+					this.allDataGroups.forEach((item, index) => {
+						item.sequenceNumber = index;
+					})
+					this.dataGroupsPaginate=this.allDataGroups.slice(0, 8);
+				}
+				if(!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate=res.exchangeRate;
+				GlobalComponent.appResponseGroups=this.allDataGroups;
+			},
+			error:(err)=>{
+				console.log(err)
+			}
+		});
+	}
+
+	getAllDataAnterior(objSearch:any){
+		this._searchService.getAllDataGroups(objSearch).subscribe({
             next:(res)=>{
-                this.allDataGroups = res.groups;
-				this.dataGroupsPaginate = res.groups.slice(0, 8);
-				this.indexPaginate = this.indexPaginate + 8;
+                this.allDataGroups = res.groups.sort( (a,b) => a.sequenceNumber - b.sequenceNumber );
+				this.dataGroupsPaginate =  this.allDataGroups.slice(0, 8);
             },
             error:(err)=>{
                 console.log(err,'err')
             }
         })
-    }
+	}
 }

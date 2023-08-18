@@ -43,6 +43,7 @@ export class CheckoutPageComponent implements OnInit {
 	codeSafetyPay = 0;
 
 	indexStepActive = 0;
+	isSafetyPay=false;
 
 	constructor(
 		private _checkoutService: CheckoutService,
@@ -57,8 +58,9 @@ export class CheckoutPageComponent implements OnInit {
 			}
 		});
 		this._checkoutService.isFinishedPay.subscribe({
-			next: (codeSaftyPay: number = 0) => {
-				this.codeSafetyPay = codeSaftyPay;
+			next: (res:any) => {
+				this.codeSafetyPay=res.transactionId;
+				this.isSafetyPay=!res.isPayCard;
 				this.showButtonReturn = true;
 			}
 		});

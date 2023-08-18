@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PricingDetail } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { FareBreakDown, IUpSell, InformationService } from 'src/app/api/api-checkout/models/rq-checkout-up-sell';
+import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { GlobalComponent } from 'src/app/shared/global';
 import SwiperCore, { Pagination, Navigation, SwiperOptions } from 'swiper';
@@ -48,7 +49,8 @@ export class ModalFeeComponent implements OnInit{
 		public dialogRef: MatDialogRef<ModalFeeComponent>, 
 		private router: Router, 
 		public _matDialog: MatDialog,
-		public _searchService:SearchService
+		public _searchService:SearchService,
+		private _checkoutService: CheckoutService
 	) {
 	}
 	
@@ -95,6 +97,8 @@ export class ModalFeeComponent implements OnInit{
 		const route=this.router.routerState.snapshot.url;
 		if(route.includes('resultados')){
 			GlobalComponent.upSellSeleted=item;
+			GlobalComponent.appBooking.brandedFareName = item.name;
+			this._checkoutService.selectUpSellModal();
 			this.router.navigateByUrl('/checkout');
 		}
 		this.dialogRef.close(item);

@@ -30,8 +30,7 @@ export class PassengersComponent implements OnInit {
 	totalPassenger = 0;
 	dataPassengers: Passenger[] = [];
 	dataStatusCards: boolean[] = [];
-	showFormContact = false;
-
+	
 	separateDialCode = true;
 	SearchCountryField = SearchCountryField;
 	CountryISO = CountryISO;
@@ -46,6 +45,9 @@ export class PassengersComponent implements OnInit {
 	];
 	@Output() changeStep = new EventEmitter();
 	formGroup: FormGroup;
+	formBillingGroup: FormGroup;
+	credentials = localStorage.getItem('usuario');
+
 	formContact = {
 		name: new FormControl('',Validators.required),
 		lastName: new FormControl('',Validators.required),
@@ -53,8 +55,20 @@ export class PassengersComponent implements OnInit {
 		phones: new FormControl([]),
 		fullPhone: new FormControl('',Validators.required),
 		email:new FormControl('',[Validators.required, Validators.email]),
-		acceptPolitics: new FormControl(false, Validators.requiredTrue)
+		acceptPolitics: new FormControl(false, Validators.requiredTrue),
+		isBilling: new FormControl(false),
+		subCode: new FormControl(0),
+		address: new FormControl(''),
+		idLoggin: new FormControl(Number(this.credentials ? JSON.parse(this.credentials).id : 0)),
 	};
+
+	formBilling = {
+		ruc: new FormControl(''),
+		company: new FormControl(''),
+		companyName: new FormControl(''),
+		companyAddress:new FormControl(''),
+	};
+
 	initialValues:any;
 
 	@ViewChildren(CardPassengerComponent) passengersComponent: QueryList<CardPassengerComponent>;
@@ -64,7 +78,8 @@ export class PassengersComponent implements OnInit {
 		private _checkoutService: CheckoutService
 	) {
 		this.formGroup = new FormGroup(this.formContact);
-		this.initialValues=this.formGroup.value;
+		this.formBillingGroup = new FormGroup(this.formBilling);
+		this.initialValues=this.formBillingGroup.value;
 	}
 
 	ngOnInit() {
@@ -110,23 +125,21 @@ export class PassengersComponent implements OnInit {
 	numberReturn(length: number) {
 		return new Array(length);
 	}
-
+	//agregar validacion de facturacion 
 	changeToogle($event: any) {
-		this.showFormContact = $event;		
 		const acceptPolitics = this.acceptPoliticsField.value;
 		if ($event) {
-			this.nameField.setValidators([Validators.required, this.noWhitespaceValidator]);
-			this.lastNameField.setValidators([Validators.required, this.noWhitespaceValidator]);
-			this.motherLastnameField.setValidators([Validators.required, this.noWhitespaceValidator]);
-			this.fullPhoneField.setValidators(Validators.required);
+			this.rucField.setValidators([Validators.required, Validators.pattern(/^.{11,}$/)]);
+			this.companyNameField.setValidators(Validators.required);
+			this.companyAddressField.setValidators(Validators.required);
 		} else {
-			this.nameField.clearValidators();
-			this.lastNameField.clearValidators();
-			this.motherLastnameField.clearValidators();
-			this.fullPhoneField.clearValidators();
+			this.rucField.clearValidators();
+			this.companyNameField.clearValidators();
+			this.companyAddressField.clearValidators();
 		}
-		this.formGroup.reset(this.initialValues);
 		this.acceptPoliticsField.setValue(acceptPolitics);
+		this.isBillingField.setValue($event);
+		this.formBillingGroup.reset(this.initialValues);
 	}
 
 	noWhitespaceValidator(control: any) {
@@ -151,6 +164,10 @@ export class PassengersComponent implements OnInit {
 		}
 
 		if (this.formGroup.valid && isValidCards) {
+			this.companyField.setValue({
+				companyName:this.companyNameField.value,
+				companyAddress:this.companyAddressField.value
+			})
 			if (this.fullPhoneField.value !== '' ) {
 				const phoneNumber = [
 					{
@@ -162,14 +179,15 @@ export class PassengersComponent implements OnInit {
 				];
 				this.phonesField.setValue(phoneNumber);
 			}
-			const dataContact = this.formGroup.value;
-			const keysToRemove = ['acceptPolitics', 'fullPhone'];
+			const dataContact = {...this.formGroup.value, ...this.formBillingGroup.value};
+			const keysToRemove = ['acceptPolitics', 'fullPhone', 'companyAddress', 'companyName'];
 			keysToRemove.forEach((key) => delete dataContact[key]);
 			GlobalComponent.appBooking = {
 				...GlobalComponent.appBooking,
 				contact: dataContact,
 				passengers: this.dataPassengers
 			};
+			console.log(dataContact,'datacontact')
 			dataSteps[1].check=true;
 			dataSteps[2].active=true;
 			this.changeStep.emit(2);
@@ -217,6 +235,27 @@ export class PassengersComponent implements OnInit {
 	get acceptPoliticsField(): AbstractControl {
 		return this.formGroup.get('acceptPolitics')!;
 	}
+
+	get isBillingField(): AbstractControl {
+		return this.formGroup.get('isBilling')!;
+	}
+
+	get rucField(): AbstractControl {
+		return this.formBillingGroup.get('ruc')!;
+	}
+
+	get companyField(): AbstractControl {
+		return this.formBillingGroup.get('company')!;
+	}
+
+	get companyNameField(): AbstractControl {
+		return this.formBillingGroup.get('companyName')!;
+	}
+
+	get companyAddressField(): AbstractControl {
+		return this.formBillingGroup.get('companyAddress')!;
+	}
+
 }
 
 
