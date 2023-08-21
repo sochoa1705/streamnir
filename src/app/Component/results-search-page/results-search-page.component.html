@@ -5,8 +5,8 @@
 		</div>
 	</div>
 	<section>
-		<ng-container *ngIf="allDataGroups.length > 0">
-			<div>Filtros</div>
+		<ng-container  *ngIf="allDataGroups.length > 0">
+			<app-filters></app-filters>
 			<div class="container__page__results">
 				<div class="container__page__results__filters">
 					<div
@@ -40,7 +40,7 @@
 					<div class="container__page__results__filters__line"></div>
 					<div
 						class="container__page__results__filters__tab row-10"
-						[class.active]="indexTabSelect == 3"
+						[class.active]="indexTabSelect == 3 && selectedOptionFilter!==-1"
 						(click)="indexTabSelect = 3"
 					>
 						<img src="./assets/svg/filters.svg" />

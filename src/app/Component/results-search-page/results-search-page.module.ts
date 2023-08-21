@@ -6,6 +6,9 @@ import { CommonModule, registerLocaleData } from "@angular/common";
 import { FilterTabsModule } from 'src/app/shared/components/filter-tabs/filter-tabs.module';
 import { CardResultSearchModule } from 'src/app/shared/components/card-result-search/card-result-search.module';
 import { ButtonModule } from 'src/app/shared/components/button/button.module';
+import { SelectModule } from 'src/app/shared/components/select/select.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FiltersComponent } from './filters/filters.component';
 export const routes: Routes = [{ path: '', component: ResultsSearchPageComponent}]
 registerLocaleData(localeEs, "es");
 
@@ -16,9 +19,12 @@ registerLocaleData(localeEs, "es");
         CommonModule,
         FilterTabsModule,
         CardResultSearchModule,
-        ButtonModule
+        ButtonModule,
+        SelectModule,
+        ReactiveFormsModule, 
+        FormsModule
     ],
-    declarations:[ResultsSearchPageComponent],
+    declarations:[ResultsSearchPageComponent, FiltersComponent],
     exports: [ResultsSearchPageComponent],
     providers: [{ provide: LOCALE_ID, useValue: "es" }],
 })

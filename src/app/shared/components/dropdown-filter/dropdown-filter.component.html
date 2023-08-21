@@ -1,0 +1,12 @@
+<div class="dropdown__filter">
+    <div class="dropdown__filter__header" (click)="dropdownActive=!dropdownActive">
+        <h4>{{title}}</h4>
+        <img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
+    </div>
+    <div class="dropdown__filter__body" *ngIf="dropdownActive">
+        <div class="dropdown__filter__body__option" *ngFor="let option of listOptions" (click)="clickOption(option)">
+            <img [src]="option.active ? 'assets/svg/checkbox-fill.svg' : './assets/svg/checkbox-box.svg'" />
+            <span>{{option.name}} <span class="count">(1220)</span></span>
+        </div>
+    </div>
+</div>

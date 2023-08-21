@@ -2,7 +2,7 @@
 	>{{ label }} <span *ngIf="isRequired" class="span__label__required">*</span></span
 >
 
-<div class="select__box">
+<div class="select__box" [class.left-3px]="isLeft">
 	<div class="select__box__select" [class.error]="labelError !== ''" (click)="isVisibleOptions = !isVisibleOptions">
 		<span *ngIf="valueName !== ''">{{ valueName }}</span>
 		<span class="select__box__select__placeholder" *ngIf="valueName == ''">{{ placeholder }}</span>

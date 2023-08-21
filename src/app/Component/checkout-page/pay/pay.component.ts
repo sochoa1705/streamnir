@@ -8,13 +8,17 @@ import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { REmail } from 'src/app/api/api-checkout/models/rq-checkout-email';
+//import { REmail } from 'src/app/api/api-checkout/models/rq-checkout-email';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
+import { environment } from 'src/environments/environment';
+//import { RPurchare } from 'src/app/api/api-checkout/models/rq-checkout-save-booking';
 
 interface Item {
 	value: any;
 	name: string;
 }
+declare let window: any;
+
 @Component({
 	selector: 'app-pay',
 	templateUrl: './pay.component.html',
@@ -77,7 +81,7 @@ export class PayComponent implements OnInit {
 	constructor(
 		private _checkoutService: CheckoutService,
 		public _matDialog: MatDialog,
-		private _searchService: SearchService,
+		private _searchService: SearchService
 	) {
 		this.formGroupCard = new FormGroup(this.formCreditCard);
 		this.formGroupBooking = new FormGroup(this.formBooking);
@@ -90,6 +94,7 @@ export class PayComponent implements OnInit {
 		this.chageTypeDocument();
 		this.urlsTermsAndConditions = this._checkoutService.getLinksTermsAndConditions();
 		this.changeCupon();
+		this.initConfigurationOpenPay();
 	}
 
 	changeCupon() {
@@ -102,6 +107,19 @@ export class PayComponent implements OnInit {
 				takeUntil(this.destroy$)
 			)
 			.subscribe();
+	}
+
+	private initConfigurationOpenPay() {
+		try {
+			window.OpenPay.setId(environment.openPayConfiguration.Id);
+			window.OpenPay.setApiKey(environment.openPayConfiguration.ApiKey);
+			let data = window.OpenPay.deviceData.setup();
+			this.deviceSessionIdField.setValue(data);
+			console.log('Open pay id', data);
+		} catch (error) {
+			this.deviceSessionIdField.setValue('')
+			console.log('error Open pay ', error);
+		}
 	}
 
 	validCuponWeb(search: string) {
@@ -170,7 +188,6 @@ export class PayComponent implements OnInit {
 		});
 	}
 
-
 	validateUpsell() {
 		this._searchService.validateAvailability().subscribe({
 			next: (res) => {
@@ -182,12 +199,13 @@ export class PayComponent implements OnInit {
 				}
 			},
 			error: (err) => {
-					this.openModalError(
-						'El itinerario seleccionado ya no se encuentra disponible, favor de seleccionar un nuevo itinerario'
-					);
+				this.openModalError(
+					'El itinerario seleccionado ya no se encuentra disponible, favor de seleccionar un nuevo itinerario'
+				);
 			}
 		});
 	}
+
 
 	sendPayment() {
 		this.counter++;
@@ -228,7 +246,7 @@ export class PayComponent implements OnInit {
 				if (res.confirmed) {
 					this.showMessagePay = true;
 					this.codeSafetyPay = res.ciP_SafetyPAY;
-					this.transactionId = res.resultPasarela.Transaction_id;
+					this.transactionId = res.idCotizacion;
 					//this.sendEmail(res);
 				} else {
 					this.openModalError('Al parecer hubo un error en su reserva, por favor intentelo más tarde');
@@ -239,6 +257,41 @@ export class PayComponent implements OnInit {
 			}
 		});
 	}
+
+
+
+/*	sendEmail(purchare:RPurchare){
+		const dataBooking=GlobalComponent.appBooking;
+		let subject = purchare.esMultiticket ? `Felicidades tus reservas ${purchare.pnrMultiticket} se han generado correctamente` :
+		`Felicidades tu reserva ${purchare.pnr} se ha generado correctamente` :
+		`Solicitud de Compra Nro. ${purchare.idCotizacion} para ${dataBooking.contact.name} ${dataBooking.contact.lastName}`;
+
+		let sendMailRQ = {
+			parameter: {
+			  to: [dataBooking.contact.email],
+			  subject: subject,
+			  data: {
+				numeroSolicitudCompra:purchare.idCotizacion.toString(),
+				messageConfirm: this.messageConfirm,
+				allowVoid: this.isB2B && (this.booking.group.gds.idGDS == 5 || this.booking.group.gds.idGDS == 4),
+				agil: GlobalComponent.appWebName == 'agil',
+				precioFinal: {
+				  precioDolares: '$ ' + (Number(this.purchase.pricing.totalFare) + Number(this.purchase.secure?.secureTotal ?? 0) - Number(this.purchase.dscto?.montoTotalDsto ?? 0)).toFixed(2),
+				  precioSoles:
+					'S/. ' +
+					(
+					  (Number(this.purchase.pricing.totalFare) + Number(this.purchase.secure?.secureTotal ?? 0) - Number(this.purchase.dscto?.montoTotalDsto ?? 0)) *
+					  Number(this.booking.exchangeRate.amount)
+					).toFixed(2),
+				},
+				pasajeros: pasajeros,
+				itinerario: itinerarios,
+				contactos: contacts
+			  },
+			},
+		};
+	  
+	}*/
 
 	openModalError(message: string) {
 		this.modalDialogError = this._matDialog.open(ModalErrorComponent, {
