@@ -8,10 +8,11 @@ import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-//import { REmail } from 'src/app/api/api-checkout/models/rq-checkout-email';
+import { REmail } from 'src/app/api/api-checkout/models/rq-checkout-email';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { environment } from 'src/environments/environment';
-//import { RPurchare } from 'src/app/api/api-checkout/models/rq-checkout-save-booking';
+import { LstRptaBookingMT, RPurchare } from 'src/app/api/api-checkout/models/rq-checkout-save-booking';
+import { getBodyEmail } from 'src/app/shared/utils/bodyEmail';
 
 interface Item {
 	value: any;
@@ -247,7 +248,7 @@ export class PayComponent implements OnInit {
 					this.showMessagePay = true;
 					this.codeSafetyPay = res.ciP_SafetyPAY;
 					this.transactionId = res.idCotizacion;
-					//this.sendEmail(res);
+					this.sendEmail(res);
 				} else {
 					this.openModalError('Al parecer hubo un error en su reserva, por favor intentelo más tarde');
 				}
@@ -260,38 +261,13 @@ export class PayComponent implements OnInit {
 
 
 
-/*	sendEmail(purchare:RPurchare){
-		const dataBooking=GlobalComponent.appBooking;
-		let subject = purchare.esMultiticket ? `Felicidades tus reservas ${purchare.pnrMultiticket} se han generado correctamente` :
-		`Felicidades tu reserva ${purchare.pnr} se ha generado correctamente` :
-		`Solicitud de Compra Nro. ${purchare.idCotizacion} para ${dataBooking.contact.name} ${dataBooking.contact.lastName}`;
-
-		let sendMailRQ = {
-			parameter: {
-			  to: [dataBooking.contact.email],
-			  subject: subject,
-			  data: {
-				numeroSolicitudCompra:purchare.idCotizacion.toString(),
-				messageConfirm: this.messageConfirm,
-				allowVoid: this.isB2B && (this.booking.group.gds.idGDS == 5 || this.booking.group.gds.idGDS == 4),
-				agil: GlobalComponent.appWebName == 'agil',
-				precioFinal: {
-				  precioDolares: '$ ' + (Number(this.purchase.pricing.totalFare) + Number(this.purchase.secure?.secureTotal ?? 0) - Number(this.purchase.dscto?.montoTotalDsto ?? 0)).toFixed(2),
-				  precioSoles:
-					'S/. ' +
-					(
-					  (Number(this.purchase.pricing.totalFare) + Number(this.purchase.secure?.secureTotal ?? 0) - Number(this.purchase.dscto?.montoTotalDsto ?? 0)) *
-					  Number(this.booking.exchangeRate.amount)
-					).toFixed(2),
-				},
-				pasajeros: pasajeros,
-				itinerario: itinerarios,
-				contactos: contacts
-			  },
-			},
-		};
-	  
-	}*/
+	sendEmail(purchare:RPurchare){
+		const bodyEmail = getBodyEmail(purchare);
+		this._checkoutService.sendEmailBooking(bodyEmail).subscribe({
+			next: () => { },
+			error: () => { },
+		  });
+	}
 
 	openModalError(message: string) {
 		this.modalDialogError = this._matDialog.open(ModalErrorComponent, {

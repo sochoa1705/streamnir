@@ -69,7 +69,7 @@ export const environment = {
 
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
 
-  urlApiMotorVuelos: "https://motorvuelos-dev.expertiatravel.com/mv/",
+  urlApiMotorVuelos: "https://motorvuelos.expertiatravel.com",
 
   urlTermsConditions: 'https://www.nmviajes.com/terminos-condiciones',
   urlBookingConditions: 'https://www.nmviajes.com/condiciones-de-reserva',
