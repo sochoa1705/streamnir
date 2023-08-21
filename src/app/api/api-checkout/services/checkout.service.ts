@@ -9,6 +9,7 @@ import { dataSteps } from 'src/app/shared/constant-init';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import moment from 'moment';
 import { REmail } from '../models/rq-checkout-email';
+import { RPurchare } from '../models/rq-checkout-save-booking';
 @Injectable({ providedIn: 'root' })
 export class CheckoutService {
 	constructor(
@@ -154,7 +155,7 @@ export class CheckoutService {
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
-		return this._httpClient.post<any>(url, GlobalComponent.appBooking, { headers });
+		return this._httpClient.post<RPurchare>(url, GlobalComponent.appBooking, { headers });
 	}
 
 	getPromocionalCode(code: string) {

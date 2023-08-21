@@ -1,0 +1,57 @@
+@use '/src/scss/colors';
+.flex-24 {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.section-filter {
+	padding-bottom: 24px;
+	border-bottom: 1px solid colors.$gris-300;
+}
+
+.filters {
+	width: 100%;
+	@extend .flex-24;
+	h5 {
+		font-family: Montserrat;
+		letter-spacing: 0em;
+		margin-bottom: 0px;
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 28px;
+		color: colors.$neutral-900;
+	}
+
+	h3 {
+		font-family: Open Sans;
+		font-size: 24px;
+		font-weight: 700;
+		line-height: 32px;
+		letter-spacing: -0.02em;
+		color: colors.$neutral-900;
+	}
+
+	span {
+		font-family: Montserrat;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 20px;
+		letter-spacing: 0em;
+		text-align: left;
+	}
+	&__currency {
+		@extend .flex-24;
+		@extend .section-filter;
+		gap: 14px;
+	}
+
+	&__results {
+		@extend .section-filter;
+		span {
+			font-size: 18px;
+			line-height: 28px;
+		}
+	}
+
+}

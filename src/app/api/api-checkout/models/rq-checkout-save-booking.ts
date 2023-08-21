@@ -1,12 +1,12 @@
-export interface Root {
+export interface RPurchare {
     confirmed: boolean
-    rptaNative: RptaNative
-    rptaNativeString: string
+    rptaNative?: RptaNative
+    rptaNativeString?: string
     idGds: number
     pnr: string
     pnrAirline: string
     idCotizacion: number
-    resultPasarela: ResultPasarela
+    resultPasarela?: ResultPasarela
     esUATP: boolean
     ciP_SafetyPAY: number
     priceUpdated: number

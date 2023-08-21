@@ -23,6 +23,8 @@ export class ResultsSearchPageComponent implements OnInit {
 	dataGroupsPaginate: Group[] = [];
 	indexPaginate = 16;
 	indexTabSelect = 0;
+	selectedOptionFilter = -1;
+
 
 	ngOnInit() {
 		this.getToken();

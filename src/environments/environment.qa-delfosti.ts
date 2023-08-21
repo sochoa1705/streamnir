@@ -84,7 +84,12 @@ export const environment = {
     MULTITICKET: 7,
     AMADEUS_NDC: 21,
     LATAM:22
-},
+  },
+  openPayConfiguration: {
+    isProduction: false,
+    Id: 'mqxn16kmicqj2fde6fhi',
+    ApiKey: 'pk_c74367b872364e91b3143c5d87d64bb8'
+  },
   SEO: {
     home: {
       url: 'https://www.nmviajes.com/',

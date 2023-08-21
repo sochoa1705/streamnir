@@ -28,12 +28,13 @@ export class SelectComponent implements OnInit, OnChanges {
 	@Input() value:any = '';
 	@Input() fullLabel = false;
 	@Input() isSearch = false;
+	@Input() isLeft=true;
+	@Input() default:any;
 
 	isVisibleOptions=false;
 	valueName='';
 
 	showItems = false;
-	isSelected = false;
 	listFilter: Item[] = [];
 	valueSearch = new FormControl('');
 	idRand=Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -54,6 +55,10 @@ export class SelectComponent implements OnInit, OnChanges {
 
 		if (changes['value'] && changes['value'].currentValue == '') {
 			this.valueName=''
+		}
+
+		if (changes['default'] && changes['default'].currentValue) {
+			this.valueName=this.listItems.filter(item=>item.value=changes['default'].currentValue)[0].name;
 		}
 	}
 

@@ -1,0 +1,30 @@
+<form class="filters" [formGroup]="formGroup">
+	<div class="filters__currency">
+		<article>
+			<h5>Moneda</h5>
+			<span>Tipo de cambio: S/ 3.66</span>
+		</article>
+		<app-select
+			[placeholder]="'Seleccionar'"
+			[name]="'currency'"
+            [isLeft]="false"
+            [default]="'0'"
+			[listItems]="[
+				{
+					value: '0',
+					name: 'Dólares'
+				},
+				{
+					value: '1',
+					name: 'Soles'
+				}
+			]"
+		></app-select>
+	</div>
+	<div class="filters__results">
+        <h3>Filtros</h3>
+        <h5>7 <span>de 1480 resultados</span></h5>
+    </div>
+    
+	<div></div>
+</form>
