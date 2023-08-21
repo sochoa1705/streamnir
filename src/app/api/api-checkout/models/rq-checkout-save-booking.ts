@@ -3,19 +3,28 @@ export interface RPurchare {
     rptaNative?: RptaNative
     rptaNativeString?: string
     idGds: number
-    pnr: string
-    pnrAirline: string
+    pnr?: string
+    pnrAirline?: string
     idCotizacion: number
     resultPasarela?: ResultPasarela
     esUATP: boolean
     ciP_SafetyPAY: number
     priceUpdated: number
-    esMultiticket: boolean
+    esMultiticket: boolean,
+    lstRptaBookingMT?: LstRptaBookingMT[]
   }
   
   export interface RptaNative {
     dataLists: DataLists
     order: Order
+  }
+
+  export interface LstRptaBookingMT{
+    rptaNative: RptaNative
+    pnr: string
+    pnrAirline: string
+    pseudoReserva: string
+    idGds: number
   }
   
   export interface DataLists {
