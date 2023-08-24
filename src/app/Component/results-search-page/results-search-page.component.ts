@@ -7,7 +7,7 @@ import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
 import { GlobalComponent } from 'src/app/shared/global';
 import { getParams } from 'src/app/shared/utils/getParams';
 import { environment } from 'src/environments/environment';
-import { dataAirlineMulti, dataBagFilterInit, dataScaleFilterInit } from './utils';
+import { dataAirlineMulti, dataBagFilterInit, dataFiltersInit, dataScaleFilterInit } from './utils';
 
 interface Item {
 	value: any;
@@ -19,7 +19,8 @@ interface Item {
 interface Filter{
 	arrayAirline:string[],
 	arrayBaggage:string[],
-	arrayScales:string[]
+	arrayScales:string[],
+	isMultiticket:boolean,
 }
 @Component({
 	selector: 'app-results-search-page',
@@ -35,24 +36,26 @@ export class ResultsSearchPageComponent implements OnInit {
 
 	allDataGroups: Group[] = [];
 	dataGroupsPaginate: Group[] = [];
+	dataFilterGroups: Group[] = [];
+	dataPreviewFilter: Group[] = [];
+
 	indexPaginate = 8;
 	indexTabSelect = 0;
 	selectedOptionFilter = -1;
 	dataBagFilter: Item[] = [];
 	dataScaleFilter: Item[] = [];
 	dataAirlines: Item[] = [];
-	totalResults = 0;
-	filters:Filter[]=[];
+	filters:Filter=dataFiltersInit;
 
 	ngOnInit() {
 		this.getToken();
 	}
 
 	showMoreResults() {
-		this.dataGroupsPaginate = this.dataGroupsPaginate.concat(
-			this.allDataGroups.slice(this.dataGroupsPaginate.length, this.indexPaginate)
-		);
 		this.indexPaginate = this.indexPaginate + 8;
+		this.dataGroupsPaginate = this.dataGroupsPaginate.concat(
+			this.dataFilterGroups.slice(this.dataGroupsPaginate.length, this.indexPaginate)
+		);
 	}
 
 	getToken() {
@@ -103,7 +106,7 @@ export class ResultsSearchPageComponent implements OnInit {
 			next: (res) => {
 				this.allDataGroups = res.groups.sort((a, b) => a.sequenceNumber - b.sequenceNumber);
 				this.dataGroupsPaginate = this.allDataGroups.slice(0, 8);
-				this.totalResults = this.allDataGroups.length;
+				this.dataFilterGroups=this.allDataGroups;
 				this.getDataFilters(res);
 			},
 			error: (err) => {
@@ -167,22 +170,55 @@ export class ResultsSearchPageComponent implements OnInit {
 			if (item.isOneScale) dataScaleFilter[1].total++;
 			if (item.isMultiScale) dataScaleFilter[2].total++;
 		});
+		console.log(dataAirlines,'airlunes')
 		this.dataAirlines=dataAirlines;
 		this.dataBagFilter=dataBagFilter;
 		this.dataScaleFilter=dataScaleFilter;
 	}
 
 	changeArrayFilters($event:any){
-		/*const item = $event.item;
-		const key = $event.key.split('.')[0];
-		if(item.active){
-			
-		}else{
-			
-		}*/
+		const item = $event.item;
+		const key = $event.key;
+		switch (key) {
+			case 'multiticket':
+				this.filters.isMultiticket=item.active;
+				break;
+			case 'typeBag':
+				if(item.active)
+				this.filters.arrayBaggage.push(item.value)
+				else this.filters.arrayBaggage=this.filters.arrayBaggage.filter(bag=>bag!==item.value)
+				break;
+			case 'airlineCodeFilter':
+				if(item.active)
+				this.filters.arrayAirline.push(item.value)
+				else this.filters.arrayAirline=this.filters.arrayAirline.filter(airline=>airline!==item.value)
+				break;
+			default:
+				if(item.active)
+				this.filters.arrayScales.push(item.value)
+				else this.filters.arrayScales=this.filters.arrayScales.filter(bag=>bag!==item.value)
+				break;
+		}
+		this.applyFilters();
 	}
 
 	applyFilters(){
+		this.dataFilterGroups=this.allDataGroups.filter(item=>
+			(this.filters.isMultiticket ? item.airline.code=='MT':true) && 
+			(this.filters.arrayAirline.length > 0 ? this.filters.arrayAirline.includes(item.airlineCodeFilter || '') ? true: false :true) &&
+			(this.filters.arrayBaggage.length > 0 ? this.filters.arrayBaggage.includes(item.typeBag || '') ? true : false:true) && 
+			(this.filters.arrayScales.includes('isDirect')? item.isDirect : true) && 
+			(this.filters.arrayScales.includes('isOneScale')? item.isOneScale : true) &&
+			(this.filters.arrayScales.includes('isMultiScale')? item.isMultiScale : true)
+			)
+	
+		this.dataGroupsPaginate = this.dataFilterGroups.slice(0, 8);
+		this.indexPaginate=8;
 		//repaginacion y repintar results 
+	}
+
+	updateArrayAirlinesFilter($event:string[]){
+		this.filters.arrayAirline=$event;
+		this.applyFilters();
 	}
 }

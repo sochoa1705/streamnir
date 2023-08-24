@@ -40,3 +40,11 @@ export const dataScaleFilterInit = [
 		total: 0
 	},
 ];
+
+
+export const dataFiltersInit = {
+	arrayAirline:[],
+	arrayBaggage:[],
+	arrayScales:[],
+	isMultiticket:false,
+}

@@ -5,7 +5,7 @@
     </div>
     <div class="dropdown__filter__body" *ngIf="dropdownActive && listOptions.length > 0">
         <div class="dropdown__filter__body__select" *ngIf="isAirlines">
-            <span class="link">Seleccionar todo</span><span>|</span><span class="link">Borrar todo</span>
+            <span class="link" (click)="clickSelectedAirlines(false)">Seleccionar todo</span><span>|</span><span class="link" (click)="clickSelectedAirlines(true)">Borrar todo</span>
         </div>
         <ng-container *ngFor="let option of (isAirlines ? listOptionsAirlines : listOptions)">
             <div class="dropdown__filter__body__option" (click)="clickOption(option)" *ngIf="option.total > 0">
@@ -13,6 +13,6 @@
                 <span>{{option.name}} <span class="count">({{option.total}})</span></span>
             </div>
         </ng-container>
-        <span class="dropdown__filter__body__showMore" *ngIf="isAirlines && listOptions.length > 8" (click)="showMoreOptions()">{{isShowMoreAirlines ? 'Ver menos':'Ver ' +countRestAirlines+ ' aerolíneas más'}}</span>
+        <span class="dropdown__filter__body__showMore" *ngIf="isAirlines && listOptions.length > 8" (click)="showMoreOptions()">{{isShowMoreAirlines ? 'Ver menos':'Ver ' +countRestAirlines+ ' aerolínea(s) más'}}</span>
     </div>
 </div>

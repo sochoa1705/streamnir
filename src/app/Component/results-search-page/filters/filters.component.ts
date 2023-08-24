@@ -18,8 +18,9 @@ export class FiltersComponent implements OnInit {
   @Input() dataScaleFilter:Item[]=[];
   @Input() dataBagFilter:Item[]=[];
   @Input() totalResults=0;
-  @Input() totalPaginate=0;
+  @Input() totalResultsFilter=0;
   @Output() changeArrayFilters=new EventEmitter();
+  @Output() updateArrayAirlinesFilter=new EventEmitter();
   formGroup: FormGroup;
 
   formObject = {
@@ -41,10 +42,14 @@ export class FiltersComponent implements OnInit {
         case 'scales':
             this.changeArrayFilters.emit({key:$event.value,item:$event })
             break;
-        default:
-        this.changeArrayFilters.emit({key:$event.value=='MT' ? 'airline.code' : 'airlineCodeFilter',item:$event })
+        default://default es filtro aerolineas
+        this.changeArrayFilters.emit({key:$event.value=='MT' ? 'multiticket' : 'airlineCodeFilter',item:$event })
         break;
       }
+  }
+
+  selectedAirlines($event:string[]){
+    this.updateArrayAirlinesFilter.emit($event)
   }
 
 }

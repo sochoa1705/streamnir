@@ -258,6 +258,9 @@ export class PayComponent implements OnInit {
 						numberQuotes: Number(this.numberQuotesField.value),
 						counter: this.counter
 				  };
+		if(this.counter > 4){
+			this.paymentTypeField.setValue(1);
+		}
 
 		const previewData = GlobalComponent.appBooking;
 		GlobalComponent.appBooking = {

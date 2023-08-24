@@ -7,8 +7,8 @@
 		<app-select
 			[placeholder]="'Seleccionar'"
 			[name]="'currency'"
-            [isLeft]="false"
-            [default]="'0'"
+			[isLeft]="false"
+			[default]="'0'"
 			[listItems]="[
 				{
 					value: '0',
@@ -22,11 +22,27 @@
 		></app-select>
 	</div>
 	<div class="filters__results">
-        <h3>Filtros</h3>
-        <h5>8 <span>de {{totalResults}} resultados</span></h5>
-    </div>
-    <app-dropdown-filter [title]="'Equipaje'" [listOptions]="dataBagFilter" (clickedOption)="clickedOption($event, 'typeBag')"></app-dropdown-filter>
-	<app-dropdown-filter [title]="'Escalas'" [listOptions]="dataScaleFilter" (clickedOption)="clickedOption($event,'scales')"></app-dropdown-filter>
-	<app-dropdown-filter [title]="'Aerolíneas'" [isAirlines]="true" [listOptions]="dataAirlines" (clickedOption)="clickedOption($event,'airlines')"></app-dropdown-filter>
+		<h3>Filtros</h3>
+		<h5>
+			{{totalResultsFilter}} <span>de {{ totalResults }} resultados</span>
+		</h5>
+	</div>
+	<app-dropdown-filter
+		[title]="'Equipaje'"
+		[listOptions]="dataBagFilter"
+		(clickedOption)="clickedOption($event, 'typeBag')"
+	></app-dropdown-filter>
+	<app-dropdown-filter
+		[title]="'Escalas'"
+		[listOptions]="dataScaleFilter"
+		(clickedOption)="clickedOption($event, 'scales')"
+	></app-dropdown-filter>
+	<app-dropdown-filter
+		[title]="'Aerolíneas'"
+		[isAirlines]="true"
+		[listOptions]="dataAirlines"
+		(clickedOption)="clickedOption($event, 'airlines')"
+		(selectedAirlines)="selectedAirlines($event)"
+	></app-dropdown-filter>
 	<div></div>
 </form>

@@ -11,7 +11,9 @@
 				[dataScaleFilter]="dataScaleFilter"
 				[dataBagFilter]="dataBagFilter"
 				[totalResults]="allDataGroups.length"
+				[totalResultsFilter]="dataFilterGroups.length"
 				(changeArrayFilters)="changeArrayFilters($event)"
+				(updateArrayAirlinesFilter)="updateArrayAirlinesFilter($event)"
 			></app-filters>
 			<div class="container__page__results">
 				<div class="container__page__results__filters">
@@ -59,7 +61,7 @@
 						<app-card-result-search [flight]="item"></app-card-result-search>
 					</ng-container>
 				</div>
-				<div class="container__page__results__button">
+				<div class="container__page__results__button" *ngIf="dataGroupsPaginate.length !== dataFilterGroups.length">
 					<app-button
 						[text]="'Mostrar más resultados'"
 						[color]="'outline-primary'"
