@@ -51,24 +51,26 @@ h2.titleHome {
 }
 
 .direccion {
-	@extend .flotante;
-	top: 395px;
-	left: 10px;
 	padding: 10px 20px;
+
 	.row {
 		margin: 10px 0;
+
 		&:last-child {
 			@media (max-width: 640px) {
 				display: none;
 			}
 		}
+
 		span {
 			display: block;
+
 			img {
 				@media (max-width: 990px) and (min-width: 640px) {
 					height: 60px;
 				}
 			}
+
 			@media (max-width: 990px) and (min-width: 640px) {
 				font-size: 14px !important
 			}
@@ -77,6 +79,7 @@ h2.titleHome {
 			}
 		}
 	}
+
 	@media (max-width: 990px) and (min-width: 640px) {
 		top: inherit;
 		left: 10px;
@@ -95,20 +98,20 @@ h2.titleHome {
 }
 
 .buscador {
-	@extend .flotante;
-	top: 180px;
-	left: 10px;
 	.mat-div {
 		margin: auto
 	}
+
 	input {
 		width: calc(100% - 26px);
 		background: white;
 		border: 0;
+
 		&:focus-visible {
 			outline: 0;
 		}
 	}
+
 	hr {
 		@media (max-width: 990px) and (min-width: 640px) {
 			margin: 10px 0;
@@ -117,6 +120,7 @@ h2.titleHome {
 			margin: 10px 0;
 		}
 	}
+
 	@media (max-width: 990px) and (min-width: 640px) {
 		top: 124px;
 		left: 10px;
