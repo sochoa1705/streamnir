@@ -3,10 +3,16 @@
         <h4>{{title}}</h4>
         <img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
     </div>
-    <div class="dropdown__filter__body" *ngIf="dropdownActive">
-        <div class="dropdown__filter__body__option" *ngFor="let option of listOptions" (click)="clickOption(option)">
-            <img [src]="option.active ? 'assets/svg/checkbox-fill.svg' : './assets/svg/checkbox-box.svg'" />
-            <span>{{option.name}} <span class="count">(1220)</span></span>
+    <div class="dropdown__filter__body" *ngIf="dropdownActive && listOptions.length > 0">
+        <div class="dropdown__filter__body__select" *ngIf="isAirlines">
+            <span class="link">Seleccionar todo</span><span>|</span><span class="link">Borrar todo</span>
         </div>
+        <ng-container *ngFor="let option of (isAirlines ? listOptionsAirlines : listOptions)">
+            <div class="dropdown__filter__body__option" (click)="clickOption(option)" *ngIf="option.total > 0">
+                <img [src]="option.active ? 'assets/svg/checkbox-fill.svg' : './assets/svg/checkbox-box.svg'" />
+                <span>{{option.name}} <span class="count">({{option.total}})</span></span>
+            </div>
+        </ng-container>
+        <span class="dropdown__filter__body__showMore" *ngIf="isAirlines && listOptions.length > 8" (click)="showMoreOptions()">{{isShowMoreAirlines ? 'Ver menos':'Ver ' +countRestAirlines+ ' aerolíneas más'}}</span>
     </div>
 </div>

@@ -7,15 +7,18 @@ export class CardExpirationDateDirective {
 
   constructor(private el: ElementRef) {}
 
-  @HostListener('input', ['$event'])
-  onKeyDown(event: KeyboardEvent) {
-    const input = event.target as HTMLInputElement;
+  @HostListener('input', ['$event']) onInput(event: any) {
+    const inputValue: string = event.target.value;
 
-    const trimmed = input.value.replace(/\s+/g, '').slice(0, input.value.indexOf('/')==-1?4:5);
-    if (trimmed.length > 3) {
-      return (input.value = `${trimmed.slice(0, 2)}/${trimmed.slice(trimmed.indexOf('/')==-1?2:3)}`);
+    // Remove any non-numeric characters
+    const numericValue: string = inputValue.replace(/\D/g, '');
+
+    // Add '/' after the first two digits
+    if (numericValue.length > 2) {
+      event.target.value = numericValue.slice(0, 2) + '/' + numericValue.slice(2);
+    } else {
+      event.target.value = numericValue;
     }
-    return;
   }
 
 }

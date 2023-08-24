@@ -9,6 +9,7 @@ import { ButtonModule } from 'src/app/shared/components/button/button.module';
 import { SelectModule } from 'src/app/shared/components/select/select.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FiltersComponent } from './filters/filters.component';
+import { DropdownFilterModule } from 'src/app/shared/components/dropdown-filter/dropdown-filter.module';
 export const routes: Routes = [{ path: '', component: ResultsSearchPageComponent}]
 registerLocaleData(localeEs, "es");
 
@@ -22,7 +23,8 @@ registerLocaleData(localeEs, "es");
         ButtonModule,
         SelectModule,
         ReactiveFormsModule, 
-        FormsModule
+        FormsModule,
+        DropdownFilterModule
     ],
     declarations:[ResultsSearchPageComponent, FiltersComponent],
     exports: [ResultsSearchPageComponent],

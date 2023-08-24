@@ -1,4 +1,12 @@
 @use '/src/scss/colors';
+
+.paragraph{
+	font-family: Montserrat;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+	letter-spacing: 0em;
+}
 .container__page {
 	padding: 242px 96px 0px 96px;
 	min-height: calc(100% - 80px);
@@ -37,10 +45,7 @@
 						align-items: center;
 						justify-content: space-between;
 						span {
-							font-family: Montserrat;
-							font-size: 14px;
-							font-weight: 400;
-							line-height: 20px;
+							@extend .paragraph;
 							color: colors.$neutral-900;
 							.font-12 {
 								font-size: 12px;
@@ -53,8 +58,11 @@
 							}
 							.bold-15 {
 								font-weight: 600;
-								font-size: 15px;
+								font-size: 16px;
 								line-height: 24px;
+							}
+							&.discount{
+								color:colors.$red-500;
 							}
 						}
 					}
@@ -69,21 +77,43 @@
 				}
 				&__footer {
 					display: flex;
-					align-items: center;
-					justify-content: space-between;
-					padding: 12px 24px;
-					h6 {
-						font-family: Montserrat;
-						font-size: 20px;
-						font-weight: 600;
-						line-height: 28px;
-						letter-spacing: -0.02em;
-						text-align: left;
-						color: colors.$neutral-900;
-						.usd {
-							font-weight: 400;
-							line-height: 16px;
-							font-size: 16px;
+					flex-direction: column;
+					gap:8px;
+					padding: 24px 0px;
+					&__row{
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						padding: 0px 24px;
+						h6 {
+							font-family: Montserrat;
+							font-size: 20px;
+							font-weight: 600;
+							line-height: 28px;
+							letter-spacing: -0.02em;
+							text-align: left;
+							color: colors.$neutral-900;
+							margin-bottom: 0;
+							.usd-total {
+								font-weight: 400;
+								line-height: 16px;
+								font-size: 16px;
+								color: colors.$neutral-900;
+							}
+						}
+						span{
+							@extend .paragraph;
+							color:colors.$neutral-400;
+							&.bold{
+								font-weight: 600;
+							}
+							&.font-12{
+								font-size: 12px;
+							}
+							&.through{
+								text-decoration-line: line-through;
+							}
+
 						}
 					}
 				}

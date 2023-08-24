@@ -6,7 +6,13 @@
 	</div>
 	<section>
 		<ng-container *ngIf="allDataGroups.length > 0">
-			<app-filters></app-filters>
+			<app-filters
+				[dataAirlines]="dataAirlines"
+				[dataScaleFilter]="dataScaleFilter"
+				[dataBagFilter]="dataBagFilter"
+				[totalResults]="allDataGroups.length"
+				(changeArrayFilters)="changeArrayFilters($event)"
+			></app-filters>
 			<div class="container__page__results">
 				<div class="container__page__results__filters">
 					<div
@@ -24,7 +30,8 @@
 						(click)="indexTabSelect = 1"
 					>
 						<span class="bold" [class.active]="indexTabSelect == 1"
-							>Mejor opción <img [src]="indexTabSelect == 1 ? './assets/svg/infoRed2.svg':'./assets/svg/infoGris.svg'"
+							>Mejor opción
+							<img [src]="indexTabSelect == 1 ? './assets/svg/infoRed2.svg' : './assets/svg/infoGris.svg'"
 						/></span>
 						<span>$1052 • 08h 40m</span>
 					</div>
@@ -40,14 +47,14 @@
 					<div class="container__page__results__filters__line"></div>
 					<div
 						class="container__page__results__filters__tab row-10"
-						[class.active]="indexTabSelect == 3 && selectedOptionFilter!==-1"
+						[class.active]="indexTabSelect == 3 && selectedOptionFilter !== -1"
 						(click)="indexTabSelect = 3"
 					>
 						<img src="./assets/svg/filters.svg" />
 						<span class="bold active">Más opciones</span>
 					</div>
 				</div>
-				<div class="container__page__results__cards">
+				<div class="container__page__results__cards" *ngIf="allDataGroups.length > 0">
 					<ng-container *ngFor="let item of dataGroupsPaginate">
 						<app-card-result-search [flight]="item"></app-card-result-search>
 					</ng-container>

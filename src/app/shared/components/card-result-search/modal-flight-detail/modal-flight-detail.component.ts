@@ -8,6 +8,7 @@ import { SearchService } from 'src/app/api/api-nmviajes/services/search.service'
 import { ModalFeeComponent } from 'src/app/Component/checkout-page/modal-fee/modal-fee.component';
 import { Router } from '@angular/router';
 import { ModalErrorComponent } from '../../modal-error/modal-error.component';
+import { dataInitBooking } from 'src/app/shared/constant-init';
 
 @Component({
 	selector: 'app-modal-flight-detail',
@@ -90,7 +91,7 @@ export class ModalFlightDetailComponent implements OnInit {
 				? this.flight.ndcInfo.segmentInfo[0].segments
 				: segmentArray;
 
-		console.log(GlobalComponent.segmentSelected,'seleted')
+		GlobalComponent.appBooking=dataInitBooking;
 		GlobalComponent.appBooking.segmentSelected=GlobalComponent.segmentSelected;
 		GlobalComponent.appGroupSeleted = this.flight;
 		GlobalComponent.detailPricing = this.detailPricing;

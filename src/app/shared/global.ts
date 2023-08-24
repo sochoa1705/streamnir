@@ -1,7 +1,9 @@
 import { IBooking, Secure } from "../api/api-checkout/models/rq-checkout-booking";
+import { RDiscount } from "../api/api-checkout/models/rq-checkout-discount";
 import { ExchangeRate, Group, PricingDetail } from "../api/api-checkout/models/rq-checkout-search";
 import { IUpSell } from "../api/api-checkout/models/rq-checkout-up-sell";
 import { RAdvanceSaleRule } from "../api/api-nmviajes/models/rq-advance-sale-rule.request";
+import { ICountry } from "../api/api-nmviajes/models/rq-contries-get";
 import { Configuraciones } from "../api/api-nmviajes/models/rq-token-ce-request";
 import { dataInitBooking, detailPricingInit, detailSecureInit } from "./constant-init";
 
@@ -29,6 +31,9 @@ export class GlobalComponent {
     public static detailPricing: PricingDetail=detailPricingInit;
     public static totalDaysTravel=0;
     public static isDomestic=false;
+    public static discountCampaing:RDiscount | null = null;
+    public static listCountries:ICountry[]=[];
+    //public static discountCupon:
   }
 
 

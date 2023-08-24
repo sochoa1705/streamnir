@@ -1,4 +1,17 @@
 @use '/src/scss/colors';
+
+.flex-24 {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.paragraph{
+    font-family: Montserrat;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0em;
+}
 .dropdown__filter {
     padding-bottom: 24px;
 	border-bottom: 1px solid colors.$gris-300;
@@ -28,13 +41,41 @@
                 margin-right: 12px;
             }
             span {
-                font-size: 16px;
-                line-height: 24px;
-                font-family: Montserrat;
+                @extend .paragraph;
                 font-weight: 400;
-                letter-spacing: 0em;
                 &.count {
                     color: colors.$gris-600;
+                }
+            }
+        }
+        &__showMore{
+            @extend .paragraph;
+            font-weight: 550;
+            color:colors.$gris-700;
+            cursor: pointer;
+            margin-top: 8px;
+            &:hover{
+                color:colors.$red-500;
+            }
+        }
+
+        &__select{
+            display: flex;
+            gap:7px;
+            align-items: center;
+            margin-bottom: 8px;
+            span{
+                font-family: Montserrat;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 20px;
+                letter-spacing: 0em;
+                color:colors.$gris-700;
+            }
+            .link{
+                cursor: pointer;
+                &:hover{
+                    color:colors.$red-500;
                 }
             }
         }
