@@ -12,6 +12,7 @@ import { PayComponent } from './pay.component';
 import { InputCreditCardModule } from 'src/app/shared/components/input-credit-card/input-credit-card.module';
 import { MessagePayComponent } from './message-pay/message-pay.component';
 import { ModalErrorModule } from 'src/app/shared/components/modal-error/modal-error.module';
+import { NationalityPipe } from 'src/app/shared/pipes/nationality.pipe';
 
 @NgModule({
     imports: [
@@ -29,7 +30,7 @@ import { ModalErrorModule } from 'src/app/shared/components/modal-error/modal-er
         ModalErrorModule
     ],
     exports: [PayComponent],
-    declarations: [PayComponent, MessagePayComponent],
+    declarations: [PayComponent, MessagePayComponent,  NationalityPipe],
     providers: [],
 })
 export class PayModule { }

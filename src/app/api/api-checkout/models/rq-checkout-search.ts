@@ -20,6 +20,11 @@ export interface Group {
 	validate?: Validate;
 	ndcInfo?:any;
 	madBacValidation: number;
+	isDirect?:boolean;
+	isOneScale?:boolean;
+	isMultiScale?:boolean;
+	typeBag?:string;
+	airlineCodeFilter?:string;
 }
 
 export interface Airline {

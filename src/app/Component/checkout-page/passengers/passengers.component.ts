@@ -8,6 +8,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
 import { GlobalComponent } from 'src/app/shared/global';
 import { dataSteps } from 'src/app/shared/constant-init';
+import { AccountsService } from 'src/app/Services/accounts.service';
 interface Item {
 	value: any;
 	name: string;
@@ -75,7 +76,8 @@ export class PassengersComponent implements OnInit {
 
 	constructor(
 		private _contryService: ContryService,
-		private _checkoutService: CheckoutService
+		private _checkoutService: CheckoutService,
+		private _accountService:AccountsService
 	) {
 		this.formGroup = new FormGroup(this.formContact);
 		this.formBillingGroup = new FormGroup(this.formBilling);
@@ -90,6 +92,9 @@ export class PassengersComponent implements OnInit {
 		this.totalINF = GlobalComponent.detailPricing.totalINF;
 		this.totalPassenger = GlobalComponent.detailPricing.passengersCount;
 		this.setIndexValidCard();
+		const userStorage=this._accountService.getUserStorage();
+		if(userStorage.email) this.getDataContact(userStorage.email);
+		
 	}
 
 	setArrayDate() {
@@ -112,6 +117,7 @@ export class PassengersComponent implements OnInit {
 	getContryList() {
 		this._contryService.getContryList().subscribe({
 			next: (res) => {
+				GlobalComponent.listCountries=res;
 				this.contryList = res.map((obj) => {
 					return { value: obj.code, name: obj.name };
 				});
@@ -125,7 +131,17 @@ export class PassengersComponent implements OnInit {
 	numberReturn(length: number) {
 		return new Array(length);
 	}
-	//agregar validacion de facturacion 
+
+	getDataContact(email:string){
+		this._checkoutService.getDataContactByLogin(email).subscribe({
+			next:(res)=>{
+				this.nameField.setValue(res.result.firstname);
+				this.lastNameField.setValue(res.result.fatherLastname);
+				this.emailField.setValue(res.result.email);
+			}
+		})
+	}
+
 	changeToogle($event: any) {
 		const acceptPolitics = this.acceptPoliticsField.value;
 		if ($event) {
@@ -187,7 +203,6 @@ export class PassengersComponent implements OnInit {
 				contact: dataContact,
 				passengers: this.dataPassengers
 			};
-			console.log(dataContact,'datacontact')
 			dataSteps[1].check=true;
 			dataSteps[2].active=true;
 			this.changeStep.emit(2);

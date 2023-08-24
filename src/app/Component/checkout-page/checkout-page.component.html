@@ -1,11 +1,12 @@
 <app-toolbar></app-toolbar>
 <app-steps (clickedStep)="clickedStep($event)"></app-steps>
-<div class="container__page" >
+<div class="container__page">
 	<section>
+		<!--[hidden]="!detailFlight" <app-pay  [hidden]="indexStepActive !== 2"></app-pay>-->
 		<div [hidden]="!detailFlight">
-			<app-baggage-insurance *ngIf="indexStepActive == 0" (changeStep)="clickedStep($event)"></app-baggage-insurance>
-			<app-passengers *ngIf="indexStepActive == 1" (changeStep)="clickedStep($event)"></app-passengers>
-			<app-pay *ngIf="indexStepActive == 2"></app-pay>
+			<app-baggage-insurance [hidden]="indexStepActive !== 0" (changeStep)="clickedStep($event)"></app-baggage-insurance>
+			<app-passengers [hidden]="indexStepActive !== 1" (changeStep)="clickedStep($event)"></app-passengers>
+			<app-pay [hidden]="indexStepActive !== 2" #childPagePay></app-pay>
 		</div>
 		<div class="container__page__detail" *ngIf="detailFlight">
 			<div class="container__page__detail__saftyPay" *ngIf="isSafetyPay">
@@ -67,11 +68,46 @@
 									}}</span></span
 								>
 							</div>
+							<div class="container__page__detail__pay__contend__body__row" *ngIf="isShowDiscount">
+								<span class="discount"
+									>Descuento {{ discount.discount.value }}% (máx. <span class="font-12 discount">USD</span>
+									{{ discount.discount.max }})</span
+								>
+								<span class="font-12 discount"
+									>USD <span class="bold-15 discount"> -{{ discount.amountDiscount | number: '1.2-2' }}</span></span
+								>
+							</div>
+
+							<div class="container__page__detail__pay__contend__body__row" *ngIf="isShowDiscountCupon">
+								<span class="discount">Código de descuento</span>
+								<span class="font-12 discount"
+									>USD <span class="bold-15 discount"> -{{ totalDiscountCupon | number: '1.2-2' }}</span></span
+								>
+							</div>
 						</div>
 						<div class="container__page__detail__pay__contend__line"></div>
 						<div class="container__page__detail__pay__contend__footer">
-							<h6>Total</h6>
-							<h6><span class="usd">USD</span> {{ pricing.totalPay + totalInsurance | number: '1.2-2' }}</h6>
+							<div class="container__page__detail__pay__contend__footer__row" *ngIf="isShowDiscount || isShowDiscountCupon">
+								<span>Precio sin descuento</span>
+								<span
+									><span class="font-12">USD </span
+									><span class="through">{{ pricing.totalPay + totalInsurance | number: '1.2-2' }}</span></span
+								>
+							</div>
+							<div class="container__page__detail__pay__contend__footer__row">
+								<h6>Total</h6>
+								<h6>
+									<span class="usd-total">USD </span>
+									{{
+										(isShowDiscount
+											? discount.totalWithDiscount
+											: isShowDiscountCupon
+											? pricing.totalPay + totalInsurance - totalDiscountCupon
+											: pricing.totalPay + totalInsurance
+										) | number: '1.2-2'
+									}}
+								</h6>
+							</div>
 						</div>
 					</app-card-checkout>
 				</div>

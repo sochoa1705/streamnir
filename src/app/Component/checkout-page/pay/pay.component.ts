@@ -8,11 +8,13 @@ import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { REmail } from 'src/app/api/api-checkout/models/rq-checkout-email';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { environment } from 'src/environments/environment';
-import { LstRptaBookingMT, RPurchare } from 'src/app/api/api-checkout/models/rq-checkout-save-booking';
+import { RPurchare } from 'src/app/api/api-checkout/models/rq-checkout-save-booking';
 import { getBodyEmail } from 'src/app/shared/utils/bodyEmail';
+import { ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
+import { IValidateBooking, RValidateBooking } from 'src/app/api/api-checkout/models/rq-checkout-validate-booking';
+import { getBodyValidateBooking } from 'src/app/shared/utils/bodyValidateBooking';
 
 interface Item {
 	value: any;
@@ -43,10 +45,10 @@ export class PayComponent implements OnInit {
 	listAgencies = listAgencies;
 	codeSafetyPay = 0;
 	showMessagePay = false;
-	amountDiscount = 0;
-	dscto = null;
 	isValidPromotionalCode = false;
+	isApplyCupon = false;
 	transactionId = 0;
+	discountCupon: ResultCupon | null = null;
 	counter = 0;
 
 	private destroy$ = new Subject<unknown>();
@@ -75,7 +77,6 @@ export class PayComponent implements OnInit {
 	};
 
 	formPolitics = {
-		acceptPolitics: new FormControl(false, Validators.requiredTrue),
 		acceptAdvertising: new FormControl(false)
 	};
 
@@ -96,6 +97,7 @@ export class PayComponent implements OnInit {
 		this.urlsTermsAndConditions = this._checkoutService.getLinksTermsAndConditions();
 		this.changeCupon();
 		this.initConfigurationOpenPay();
+		this.setValidatorsCreditCard();
 	}
 
 	changeCupon() {
@@ -116,38 +118,53 @@ export class PayComponent implements OnInit {
 			window.OpenPay.setApiKey(environment.openPayConfiguration.ApiKey);
 			let data = window.OpenPay.deviceData.setup();
 			this.deviceSessionIdField.setValue(data);
-			console.log('Open pay id', data);
 		} catch (error) {
-			this.deviceSessionIdField.setValue('')
-			console.log('error Open pay ', error);
+			this.deviceSessionIdField.setValue('');
 		}
 	}
 
 	validCuponWeb(search: string) {
 		this._checkoutService.getPromocionalCode(search).subscribe({
 			next: (response) => {
+				console.log(response);
 				if (response.result.isSuccess) {
-					this.dscto = response.result;
 					this.isValidPromotionalCode = true;
-				} else {
-					this.isValidPromotionalCode = false;
-					this.amountDiscount = 0;
-					this.dscto = null;
-				}
+					this.discountCupon = response.result;
+				} else this.resetDiscountByCupon();
 			},
 			error: (err) => {
-				console.log(err);
+				this.resetDiscountByCupon();
 			}
 		});
 	}
 
+	resetDiscountByCupon() {
+		this.isValidPromotionalCode = false;
+		this.discountCupon = null;
+		if (this.isApplyCupon) {
+			this.isApplyCupon = false;
+			this._checkoutService.applyCupon.emit(null);
+		}
+	}
+
+	cleanInputCodeCupon() {
+		//Esto se ejecuta cuando el usuario decide volver al paso 2 y cambiar de tarifa
+		this.cuponPromoWebField.setValue('');
+		this.resetDiscountByCupon();
+	}
+
 	setCuotas() {
 		this.arrayCuotas = cuotas.map((item) => {
-			return { name: item.toString(), value: item };
+			return { name: item == 0 ? 'Sin cuotas' : item.toString(), value: item };
 		});
 	}
 
-	applyCupon() {}
+	applyCupon() {
+		if (this.discountCupon && this.isValidPromotionalCode) {
+			this.isApplyCupon = true;
+			this._checkoutService.applyCupon.emit(this.discountCupon);
+		}
+	}
 
 	clickTab() {
 		this.isPayCard = !this.isPayCard;
@@ -158,7 +175,7 @@ export class PayComponent implements OnInit {
 	setValidatorsCreditCard() {
 		if (this.isPayCard) {
 			this.cardNumberField.setValidators([Validators.required, Validators.pattern(/^.{19,}$/)]);
-			this.expirationField.setValidators([Validators.required]);
+			this.expirationField.setValidators([Validators.required, Validators.pattern(/^.{5,}$/)]);
 			this.cvvField.setValidators([Validators.required, Validators.pattern(/^.{3,}$/)]);
 			this.cardOwnerField.setValidators([Validators.required]);
 			this.cityField.setValidators([Validators.required]);
@@ -189,41 +206,61 @@ export class PayComponent implements OnInit {
 		});
 	}
 
-	validateUpsell() {
-		this._searchService.validateAvailability().subscribe({
+	validateBooking() {
+		const bodyValidateBooking: IValidateBooking = getBodyValidateBooking();
+		this._checkoutService.validateBooking(bodyValidateBooking).subscribe({
 			next: (res) => {
-				if (res.isAvailable) this.sendPayment();
-				else {
-					this.openModalError(
-						'El itinerario seleccionado ya no se encuentra disponible, favor de seleccionar un nuevo itinerario'
-					);
-				}
+				if (res.success) this.sendPayment();
+				else this.openModalError(this.getMessageValidateError(res));
 			},
 			error: (err) => {
-				this.openModalError(
-					'El itinerario seleccionado ya no se encuentra disponible, favor de seleccionar un nuevo itinerario'
-				);
+				this.openModalError(this.getMessageErrorClient(err.error));
 			}
 		});
 	}
 
+	getMessageValidateError(res: RValidateBooking) {
+		if (res.isChurning)
+			return 'Ud. ha excedido el número máximo de reservas generadas. Por favor, contactarse a nuestro Call Center.';
+		if (res.isDuplicate) {
+			if (res.isMT)
+				return (
+					'Ya ha realizado una reserva con las mismas fechas y horarios (Códigos ' +
+					res.bookings[0].pnrDuplicate +
+					',' +
+					res.bookings[1].pnrDuplicate +
+					"). Si deseas cancelar las reservas anteriores y generar una nueva por favor pulsa el boton 'Aceptar' de la parte inferior."
+				);
+			else
+				return (
+					'Ya ha realizado una reserva con las mismas fechas y horarios (Código ' +
+					res.bookings[0].pnrDuplicate +
+					"). Si deseas cancelar la reserva anterior y generar una nueva por favor pulsa el boton 'Aceptar' de la parte inferior."
+				);
+		}
+		return '';
+	}
 
 	sendPayment() {
 		this.counter++;
-		const dataFormCredit: any = this.isPayCard
-			? {
-					...this.formGroupCard.value,
-					documentType: Number(this.documentTypeField.value),
-					cardNumber: this.cardNumberField.value.replace(/[\s-]/g, ''),
-					expiration: this.expirationField.value.match(/.{1,2}/g).join('/'),
-					numberQuotes: 0,
-					counter: this.counter
-			  }
-			: {
-					documentType: null,
-					numberQuotes: 0,
-					counter: this.counter
-			  };
+		const dataFormCredit: any =
+			this.isPayCard && this.counter <= 4
+				? {
+						...this.formGroupCard.value,
+						documentType: Number(this.documentTypeField.value),
+						cardNumber: this.cardNumberField.value.replace(/[\s-]/g, ''),
+						expiration: this.expirationField.value.match(/.{1,2}/g).join('/'),
+						numberQuotes: Number(this.numberQuotesField.value),
+						counter: this.counter
+				  }
+				: {
+						documentType: null,
+						numberQuotes: Number(this.numberQuotesField.value),
+						counter: this.counter
+				  };
+		if(this.counter > 4){
+			this.paymentTypeField.setValue(1);
+		}
 
 		const previewData = GlobalComponent.appBooking;
 		GlobalComponent.appBooking = {
@@ -259,14 +296,17 @@ export class PayComponent implements OnInit {
 		});
 	}
 
-
-
-	sendEmail(purchare:RPurchare){
-		const bodyEmail = getBodyEmail(purchare);
+	sendEmail(purchare: RPurchare) {
+		const montoTotalDsto = this.isApplyCupon && this.isValidPromotionalCode
+			? this.discountCupon?.montoDescuento
+			: GlobalComponent.discountCampaing
+			? GlobalComponent.discountCampaing.result.amountDiscount
+			: 0;
+		const bodyEmail = getBodyEmail(purchare, montoTotalDsto);
 		this._checkoutService.sendEmailBooking(bodyEmail).subscribe({
-			next: () => { },
-			error: () => { },
-		  });
+			next: () => {},
+			error: () => {}
+		});
 	}
 
 	openModalError(message: string) {

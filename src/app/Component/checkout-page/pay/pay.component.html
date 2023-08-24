@@ -55,7 +55,7 @@
 										expirationField.touched && expirationField!.hasError('required')
 											? 'Vencimiento es obligatorio'
 											: expirationField.touched && expirationField!.hasError('pattern')
-											? 'Vencimiento inválida'
+											? 'Vencimiento inválido'
 											: ''
 									"
 								></app-input-credit-card>
@@ -71,7 +71,7 @@
 										cvvField.touched && cvvField!.hasError('required')
 											? 'CVV es obligatorio'
 											: cvvField.touched && cvvField!.hasError('pattern')
-											? 'CVV inválida'
+											? 'CVV inválido'
 											: ''
 									"
 								></app-input>
@@ -219,10 +219,11 @@
 						[label]="'Código'"
 						[placeholder]="'Ingresar código'"
 						[name]="'CuponPromoWeb'"
+						[isCheck]="isValidPromotionalCode && isApplyCupon"
 						[maxLenght]="6"
 						[class]="cuponPromoWebField.touched && cuponPromoWebField!.invalid ? 'error' : ''"
 						[labelError]="
-							cuponPromoWebField.touched && !isValidPromotionalCode && dscto === null && cuponPromoWebField.value.length > 1
+							cuponPromoWebField.touched && !isValidPromotionalCode && discountCupon === null && cuponPromoWebField.value.length > 1
 								? 'Código inválido'
 								: ''
 						"
@@ -234,17 +235,6 @@
 
 		<article>
 			<form [formGroup]="formGroupPolitics" class="container__page__section__politics">
-				<app-input-check
-					[label]="'He leído y aceptado la'"
-					[name]="'acceptPolitics'"
-					[textLink]="'política cancelación'"
-					[url]="'/'"
-					[labelError]="
-						acceptPoliticsField.touched && acceptPoliticsField!.invalid
-							? 'Favor de aceptar la política de cancelación'
-							: ''
-					"
-				></app-input-check>
 				<app-input-check
 					[label]="'Autorizo el uso de mi información para la publicidad.'"
 					[name]="'acceptAdvertising'"
@@ -262,7 +252,7 @@
 				[text]="'Realizar compra'"
 				[color]="'primary'"
 				[disabled]="!formGroupCard.valid || !formGroupPolitics.valid"
-				(onClick)="validateUpsell()"
+				(onClick)="validateBooking()"
 			></app-button>
 		</div>
 	</div>

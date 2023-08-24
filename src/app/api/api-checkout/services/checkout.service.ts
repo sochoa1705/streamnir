@@ -10,6 +10,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import moment from 'moment';
 import { REmail } from '../models/rq-checkout-email';
 import { RPurchare } from '../models/rq-checkout-save-booking';
+import { RDiscount, RDiscountCupon } from '../models/rq-checkout-discount';
+import { RContact } from '../models/rq-checkout-contact';
+import { IValidateBooking, RValidateBooking } from '../models/rq-checkout-validate-booking';
 @Injectable({ providedIn: 'root' })
 export class CheckoutService {
 	constructor(
@@ -19,6 +22,7 @@ export class CheckoutService {
 	selectUpSell = new EventEmitter();
 	changeStep = new EventEmitter();
 	isFinishedPay = new EventEmitter();
+	applyCupon = new EventEmitter();
 
 	itsIncludeInsurance = false;
 	upSellSelect: IUpSell = dataUpSell[0];
@@ -103,6 +107,7 @@ export class CheckoutService {
 		totalDaysTravel =
 			this.getDiffDays(moment(dateDeparture).format('MM/DD/yyyy'), moment(dateArrival).format('MM/DD/yyyy')) + 1;
 		GlobalComponent.totalDaysTravel = totalDaysTravel - 1;
+		console.log(GlobalComponent.totalDaysTravel, 'total days')
 	}
 
 	updateTotalInsurance(status: boolean) {
@@ -112,8 +117,6 @@ export class CheckoutService {
 		this.selectUpSell.emit();
 	}
 
-	//Obs: Multidestino y solo Ida no tienen Seguro, por tanto no se agrega al booking,
-	//y el departure de preferencia se pasa la posicion 0
 	setIsDomestic() {
 		const departureFlight = GlobalComponent.appGroupSeleted.departure[0];
 		const returnFlight = GlobalComponent.appGroupSeleted.returns;
@@ -166,16 +169,44 @@ export class CheckoutService {
 			GlobalComponent.upSellSeleted?.name || ''
 		}`;
 		const headers = new HttpHeaders()
-		.set('Content-Type', 'application/json')
-		.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
-		return this._httpClient.get<any>(url, { headers });
+			.set('Content-Type', 'application/json')
+			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+		return this._httpClient.get<RDiscountCupon>(url, { headers });
 	}
 
-	sendEmailBooking(data:REmail){
+	getDiscountByCampaing(bin = '') {
+		const url = `${environment.urlApiMotorVuelos}/mv/payment/get-discounts?Bin=${bin}&GroupId=${
+			GlobalComponent.appGroupSeleted.id
+		}&IncludeSecure=${GlobalComponent.appBooking.secure ? true : false}&PromotionalCode=&BrandedFareName=${
+			GlobalComponent.upSellSeleted?.name || ''
+		}`;
+		const headers = new HttpHeaders()
+			.set('Content-Type', 'application/json')
+			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+		return this._httpClient.get<RDiscount>(url, { headers });
+	}
+
+	sendEmailBooking(data: REmail) {
 		const url = `${environment.urlApiMotorVuelos}/mv/send-booking`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
 		return this._httpClient.post<any>(url, data, { headers });
+	}
+
+	getDataContactByLogin(email:string){
+		const url = `${environment.urlApiMotorVuelos}/mv/account/get-by-email?email=${email}`;
+		const headers = new HttpHeaders()
+			.set('Content-Type', 'application/json')
+			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+		return this._httpClient.get<RContact>(url, { headers });
+	}
+
+	validateBooking(data:IValidateBooking){
+		const url = `${environment.urlApiMotorVuelos}/mv/validate-booking`;
+		const headers = new HttpHeaders()
+			.set('Content-Type', 'application/json')
+			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+		return this._httpClient.post<RValidateBooking>(url, data, { headers });
 	}
 }

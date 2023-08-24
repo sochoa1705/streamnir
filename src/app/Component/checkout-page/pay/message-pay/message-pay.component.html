@@ -85,12 +85,12 @@
 					<div class="container__page__section__row__colum">
 						<img src="./assets/checkout/pay/date.svg" />
 						<span class="item">Fecha de nacimiento</span>
-						<span class="info">{{ item.birthday | date: 'mediumDate' }}</span>
+						<span class="info">{{ item.birthday | date: 'dd/MM/yyyy' }}</span>
 					</div>
 					<div class="container__page__section__row__colum">
 						<img src="./assets/checkout/pay/nationality.svg" />
 						<span class="item">Nacionalidad</span>
-						<span class="info">{{ item.nationality }}</span>
+						<span class="info">{{ item.nationality | nationality }}</span>
 					</div>
 					<div class="container__page__section__row__colum">
 						<img src="./assets/checkout/pay/gender.svg" />

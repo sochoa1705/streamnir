@@ -40,7 +40,7 @@ export class SearchService {
 		);
 	}
 
-	getAllDataSearch(body:any): Observable<any> {
+	getAllDataSearch(body:any, searchId:string): Observable<any> {
 		const listGDS = Object.values(environment.GDS);
 		const endpoint = environment.urlApiMotorVuelos.includes('qa') ? 'search-nm' : 'search'
 		const url = `${environment.urlApiMotorVuelos}/mv/${endpoint}`;
@@ -49,7 +49,7 @@ export class SearchService {
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
 		
 		return of(...listGDS).pipe(
-				mergeMap(gds => this._httpClient.post(url, {...body, gds}, { headers }))
+				mergeMap(gds => this._httpClient.post(url, {...body, gds, searchId}, { headers }))
 		);
 	}
 

@@ -7,12 +7,13 @@ import {
 	Returns,
 	Segment
 } from 'src/app/api/api-checkout/models/rq-checkout-search';
-import { Step } from 'src/app/api/api-checkout/models/rq-checkout-up-sell';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { Router } from '@angular/router';
 import { GlobalComponent } from 'src/app/shared/global';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { dataSteps } from 'src/app/shared/constant-init';
+import { Result, ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
+import { PayComponent } from './pay/pay.component';
 
 @Component({
 	selector: 'app-checkout-page',
@@ -44,17 +45,24 @@ export class CheckoutPageComponent implements OnInit {
 
 	indexStepActive = 0;
 	isSafetyPay=false;
+	discount:Result;
+	totalDiscountCupon=0;
+	isShowDiscount=false;
+	isShowDiscountCupon=false;
+
+	@ViewChild('childPagePay')
+	childPagePay!: PayComponent;
 
 	constructor(
 		private _checkoutService: CheckoutService,
-		private _router: Router,
-		private _searchService: SearchService
+		private _router: Router
 	) {
 		this._checkoutService.selectUpSell.subscribe({
 			next: () => {
 				this.nameUpSellSelect = GlobalComponent.upSellSeleted?.name || '';
 				this.totalInsurance = GlobalComponent.appBooking.secure ? GlobalComponent.appBooking.secure.totalPrice : 0;
 				this.pricing = GlobalComponent.detailPricing; //actualizamos los precios con el upsell seleccionado
+				this.getDiscounts(); //volvemos a ver si hay descuento para ese tarifario
 			}
 		});
 		this._checkoutService.isFinishedPay.subscribe({
@@ -64,6 +72,21 @@ export class CheckoutPageComponent implements OnInit {
 				this.showButtonReturn = true;
 			}
 		});
+		this._checkoutService.applyCupon.subscribe({
+			next: (res:ResultCupon | null) => {
+				this.isShowDiscount=false;
+				if(res){
+					this.isShowDiscountCupon=true;
+					this.totalDiscountCupon=res.montoDescuento;
+				}else{
+					this.isShowDiscountCupon=false;
+					this.totalDiscountCupon=0;
+					if(GlobalComponent.discountCampaing){
+						this.isShowDiscount=true;
+					}
+				}
+			}
+		})
 	}
 
 	ngOnInit() {
@@ -71,6 +94,7 @@ export class CheckoutPageComponent implements OnInit {
 		this.pricing = GlobalComponent.detailPricing;
 		this._checkoutService.totalDaysTravel();
 		this._checkoutService.setIsDomestic();
+		this.getDiscounts();
 	}
 
 	clickedStep($event: any) {
@@ -87,14 +111,23 @@ export class CheckoutPageComponent implements OnInit {
 		}
 	}
 
-	//Verficar si aún esta disponible el grupoid
-
-	getUpSellGroup() {
-		this._searchService.getUpSellGroup().subscribe({
-			next: () => {
-				this.nameUpSellSelect = GlobalComponent.upSellSeleted?.description || '';
+	getDiscounts(){
+		this._checkoutService.getDiscountByCampaing().subscribe({
+			next:(res)=>{
+				if(res.result.isSuccess){
+					GlobalComponent.discountCampaing=res;
+					this.discount=res.result;
+					this.isShowDiscount=true;
+					if(this.isShowDiscountCupon){
+						this.isShowDiscountCupon=false;
+						this.totalDiscountCupon=0;
+						this.childPagePay.cleanInputCodeCupon();
+					}
+				}else this.isShowDiscount=false;
+			},error:()=>{
+				this.isShowDiscount=false;
 			}
-		});
+		})
 	}
 
 	redirectHome() {
