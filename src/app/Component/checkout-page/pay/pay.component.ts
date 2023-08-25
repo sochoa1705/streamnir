@@ -279,9 +279,7 @@ export class PayComponent implements OnInit {
 			card: dataFormCredit
 		};
 
-		console.log(GlobalComponent.appBooking,'gg')
-
-		/*this._checkoutService.sendAndSavePay().subscribe({
+		this._checkoutService.sendAndSavePay().subscribe({
 			next: (res) => {
 				if (res.confirmed) {
 					this.showMessagePay = true;
@@ -295,7 +293,7 @@ export class PayComponent implements OnInit {
 			error: (err) => {
 				this.openModalError(this.getMessageErrorClient(err));
 			}
-		});*/
+		});
 	}
 
 	sendEmail(purchare: RPurchare) {
