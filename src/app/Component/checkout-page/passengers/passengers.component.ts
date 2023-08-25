@@ -135,9 +135,9 @@ export class PassengersComponent implements OnInit {
 	getDataContact(email:string){
 		this._checkoutService.getDataContactByLogin(email).subscribe({
 			next:(res)=>{
-				this.nameField.setValue(res.result.firstname);
-				this.lastNameField.setValue(res.result.fatherLastname);
-				this.emailField.setValue(res.result.email);
+				this.nameField.setValue(res.result?.firstname || '');
+				this.lastNameField.setValue(res.result?.fatherLastname || '');
+				this.emailField.setValue(res.result?.email || '');
 			}
 		})
 	}

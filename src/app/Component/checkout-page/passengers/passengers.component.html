@@ -79,6 +79,7 @@
 								[name]="'name'"
 								[isRequired]="true"
 								[isOnlyText]="true"
+								[maxLenght]="50"
 								[class]="nameField.touched && nameField!.invalid ? 'error' : ''"
 								[labelError]="
 									nameField.touched && nameField!.hasError('required')
@@ -96,6 +97,7 @@
 								[name]="'lastName'"
 								[isOnlyText]="true"
 								[isRequired]="true"
+								[maxLenght]="50"
 								[class]="lastNameField.touched && lastNameField!.invalid ? 'error' : ''"
 								[labelError]="
 									lastNameField.touched && lastNameField!.hasError('required')
@@ -112,6 +114,7 @@
 								[placeholder]="'Ingresar apellido materno'"
 								[name]="'motherLastname'"
 								[isOnlyText]="true"
+								[maxLenght]="50"
 								[isRequired]="true"
 								[class]="motherLastnameField.touched && motherLastnameField!.invalid ? 'error' : ''"
 								[labelError]="
@@ -156,6 +159,7 @@
 									[placeholder]="'Ingresar correo'"
 									[name]="'email'"
 									[isRequired]="true"
+									[maxLenght]="50"
 									[class]="emailField.touched && emailField!.invalid ? 'error' : ''"
 									[labelError]="
 										emailField.touched && emailField!.hasError('required')
@@ -204,6 +208,7 @@
 						[placeholder]="'Ingresar razón social'"
 						[name]="'companyName'"
 						[isRequired]="true"
+						[maxLenght]="100"
 						[class]="companyNameField.touched && companyNameField!.invalid ? 'error' : ''"
 						[labelError]="
 							companyNameField.touched && companyNameField!.hasError('required') ? 'Razón social es obligatorio' : ''
@@ -215,6 +220,7 @@
 						[label]="'Dirección razón social'"
 						[placeholder]="'Ingresar dirección'"
 						[name]="'companyAddress'"
+						[maxLenght]="100"
 						[isRequired]="true"
 						[class]="companyAddressField.touched && companyAddressField!.invalid ? 'error' : ''"
 						[labelError]="

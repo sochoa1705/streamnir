@@ -6,7 +6,7 @@
 	<div class="select__box__select" [class.left-3px]="isLeft" [class.error]="labelError !== ''" (click)="isVisibleOptions = !isVisibleOptions">
 		<span *ngIf="valueName !== ''">{{ valueName }}</span>
 		<span class="select__box__select__placeholder" *ngIf="valueName == ''">{{ placeholder }}</span>
-		<img src="./assets/svg/icon-select.svg" alt="v" />
+		<img [src]="isFilter ? './assets/svg/Right.svg':'./assets/svg/icon-select.svg'" alt="v" width="20" height="20"/>
 	</div>
 	<div class="select__box__options" [class.left-3px]="isLeft" [hidden]="!isVisibleOptions">
 		<div class="select__box__options__list">
@@ -16,7 +16,7 @@
 
 			<ng-container *ngIf="listFilter.length > 0">
 				<div class="select__box__options__list__option" *ngFor="let item of listFilter; index as i">
-					<input type="radio" [name]="name" [formControlName]="name" [value]="item.value" [id]="'inline-' + i + idRand" hidden />
+					<input type="radio" [formControlName]="name" [name]="name" [value]="item.value" [id]="'inline-' + i + idRand" hidden />
 					<label [for]="'inline-' + i + idRand" (click)="clickItem(item)">{{ item.name }}</label>
 				</div>
 			</ng-container>

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ControlContainer, FormControl, FormGroupDirective } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
@@ -30,6 +30,9 @@ export class SelectComponent implements OnInit, OnChanges {
 	@Input() isSearch = false;
 	@Input() isLeft=true;
 	@Input() default:any;
+	@Input() isFilter = false;
+	@Input() isEmitChanges = false;
+	@Output() seletedItem = new EventEmitter()
 
 	isVisibleOptions=false;
 	valueName='';
@@ -65,6 +68,7 @@ export class SelectComponent implements OnInit, OnChanges {
 	clickItem(item:Item){
 		this.valueName=item.name;
 		this.isVisibleOptions=false;
+		if(this.isEmitChanges)  this.seletedItem.emit(item.name);
 		this.valueSearch.setValue('');
 	}
 

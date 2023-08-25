@@ -249,7 +249,7 @@ export class PayComponent implements OnInit {
 						...this.formGroupCard.value,
 						documentType: Number(this.documentTypeField.value),
 						cardNumber: this.cardNumberField.value.replace(/[\s-]/g, ''),
-						expiration: this.expirationField.value.match(/.{1,2}/g).join('/'),
+						expiration: this.expirationField.value,
 						numberQuotes: Number(this.numberQuotesField.value),
 						counter: this.counter
 				  }
@@ -279,7 +279,9 @@ export class PayComponent implements OnInit {
 			card: dataFormCredit
 		};
 
-		this._checkoutService.sendAndSavePay().subscribe({
+		console.log(GlobalComponent.appBooking,'gg')
+
+		/*this._checkoutService.sendAndSavePay().subscribe({
 			next: (res) => {
 				if (res.confirmed) {
 					this.showMessagePay = true;
@@ -293,7 +295,7 @@ export class PayComponent implements OnInit {
 			error: (err) => {
 				this.openModalError(this.getMessageErrorClient(err));
 			}
-		});
+		});*/
 	}
 
 	sendEmail(purchare: RPurchare) {
