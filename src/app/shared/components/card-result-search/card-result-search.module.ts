@@ -9,11 +9,12 @@ import { ToolTipModule } from '../tooltip/tooltip.module';
 import { GetDaysPipe } from '../../pipes/get-days.pipe';
 import { ModalFlightDetailComponent } from './modal-flight-detail/modal-flight-detail.component';
 import { SwiperModule } from 'swiper/angular';
+import { ChangeCurrencyPipe } from '../../pipes/change-currency.pipe';
 registerLocaleData(localeEs, "es");
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ CardResultSearchComponent, GetDaysPipe,ModalFlightDetailComponent],
+  declarations: [ CardResultSearchComponent, GetDaysPipe,ModalFlightDetailComponent, ChangeCurrencyPipe],
   imports: [
     CommonModule, 
     ButtonModule,

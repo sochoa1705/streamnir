@@ -8,6 +8,7 @@ import { GlobalComponent } from 'src/app/shared/global';
 import { getParams } from 'src/app/shared/utils/getParams';
 import { environment } from 'src/environments/environment';
 import { dataAirlineMulti, dataBagFilterInit, dataFiltersInit, dataScaleFilterInit } from './utils';
+import { getPricingFareBreakDowns } from 'src/app/shared/utils/fareBreakDowns';
 
 interface Item {
 	value: any;
@@ -22,6 +23,12 @@ interface Filter{
 	arrayScales:string[],
 	isMultiticket:boolean,
 }
+
+interface Order{
+	price:number,
+	duration:string
+}
+
 @Component({
 	selector: 'app-results-search-page',
 	templateUrl: './results-search-page.component.html',
@@ -46,6 +53,22 @@ export class ResultsSearchPageComponent implements OnInit {
 	dataScaleFilter: Item[] = [];
 	dataAirlines: Item[] = [];
 	filters:Filter=dataFiltersInit;
+	exchangeRate=0;
+	currency='USD';
+
+	theCheapest:Order;
+	betterOption:Order;
+	shorterDuration:Order;
+
+	sortBy=0;
+
+	/*0 mas barato
+	1:mejor opcion
+	2:menor duracion
+	3:salida mas temp
+	4:salida mas tarde
+	5:llegada mas temprano
+	6:llegada mas tarde*/
 
 	ngOnInit() {
 		this.getToken();
@@ -104,9 +127,11 @@ export class ResultsSearchPageComponent implements OnInit {
 	getAllDataAnterior(objSearch: any) {
 		this._searchService.getAllDataGroups(objSearch).subscribe({
 			next: (res) => {
-				this.allDataGroups = res.groups.sort((a, b) => a.sequenceNumber - b.sequenceNumber);
+				//this.sortData(0);
+				this.allDataGroups = res.groups.sort((a, b) => a.sequenceNumber - b.sequenceNumber)
 				this.dataGroupsPaginate = this.allDataGroups.slice(0, 8);
 				this.dataFilterGroups=this.allDataGroups;
+				this.exchangeRate=res.exchangeRate.amount;
 				this.getDataFilters(res);
 			},
 			error: (err) => {
@@ -169,11 +194,16 @@ export class ResultsSearchPageComponent implements OnInit {
 			if (item.isDirect) dataScaleFilter[0].total++;
 			if (item.isOneScale) dataScaleFilter[1].total++;
 			if (item.isMultiScale) dataScaleFilter[2].total++;
+
+			item.detailPricing=getPricingFareBreakDowns(item.pricingInfo.itinTotalFare.fareBreakDowns);
 		});
-		console.log(dataAirlines,'airlunes')
 		this.dataAirlines=dataAirlines;
 		this.dataBagFilter=dataBagFilter;
 		this.dataScaleFilter=dataScaleFilter;
+	}
+
+	sortData(typeSort:number){
+
 	}
 
 	changeArrayFilters($event:any){
@@ -214,11 +244,16 @@ export class ResultsSearchPageComponent implements OnInit {
 	
 		this.dataGroupsPaginate = this.dataFilterGroups.slice(0, 8);
 		this.indexPaginate=8;
-		//repaginacion y repintar results 
 	}
 
 	updateArrayAirlinesFilter($event:string[]){
 		this.filters.arrayAirline=$event;
 		this.applyFilters();
 	}
+
+	changeExchangeRate($event:string){
+		this.currency = $event == 'Soles' ? 'PEN' : 'USD'; 
+	}
+
+
 }

@@ -81,6 +81,7 @@
 							[name]="'documentNumber'"
 							[isRequired]="true"
 							[isOnlyText]="false"
+							[maxLenght]="documentTypeField.value == 0 || documentTypeField.value== '0' ? 8 : 12"
 							[isOnlyNumber]="documentTypeField.value == 0 || documentTypeField.value== '0' ? true : false"
 							[class]="documentNumberField.touched && documentNumberField!.invalid ? 'error' : ''"
 							[labelError]="
@@ -158,6 +159,7 @@
 						[placeholder]="'Ingresar correo electrónico'"
 						[name]="'email'"
 						[class]="emailField.touched && emailField!.invalid ? 'error' : ''"
+						[maxLenght]="50"
 						[labelError]="
 							emailField.touched && emailField!.hasError('email')
 								? 'Email no válido'

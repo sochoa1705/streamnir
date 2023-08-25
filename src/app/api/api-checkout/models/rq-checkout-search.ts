@@ -25,6 +25,7 @@ export interface Group {
 	isMultiScale?:boolean;
 	typeBag?:string;
 	airlineCodeFilter?:string;
+	detailPricing?:IDetailPricing
 }
 
 export interface Airline {
@@ -331,3 +332,18 @@ export interface DetailFlight{
 	departure:Departure[],
 	return:Returns | null
 }
+
+
+export interface IDetailPricing{
+    passengersCount:number
+    baseFareADT:number
+    baseFareINF:number
+    baseFareCNN:number
+    taxes:number
+    feeNMV:number
+    feePTA:number
+    totalADT:number
+    totalINF:number
+    totalCNN:number
+    totalPay:number
+  }

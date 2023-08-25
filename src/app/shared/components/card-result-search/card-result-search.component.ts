@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Group } from 'src/app/api/api-checkout/models/rq-checkout-search';
+import { Group, IDetailPricing } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { getPricingFareBreakDowns } from '../../utils/fareBreakDowns';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalFlightDetailComponent } from './modal-flight-detail/modal-flight-detail.component';
@@ -12,6 +12,8 @@ import { ModalFlightDetailComponent } from './modal-flight-detail/modal-flight-d
 
 export class CardResultSearchComponent implements OnInit, OnChanges {
     @Input() flight:Group;
+    @Input() currency='USD';
+
     constructor(public _matDialog: MatDialog) { }
     indexSegmentDeparture:number[];
     indexSegmentReturn:number;
@@ -24,7 +26,7 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
 
     indexHoverReturn:number;
     indexHoverDeparture:number;
-    detailPricing:any;
+    detailPricing:IDetailPricing;
 
     modalDialogRef: MatDialogRef<ModalFlightDetailComponent>;
     ngOnInit() { 
@@ -43,8 +45,8 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
                     this.indexSegmentDeparture = new Array(this.flight.departure.length).fill(0);
                 }
 
-                if(this.flight.pricingInfo){
-                    this.detailPricing=getPricingFareBreakDowns(this.flight.pricingInfo.itinTotalFare.fareBreakDowns);
+                if(this.flight.detailPricing){
+                    this.detailPricing=this.flight.detailPricing;
                 }
             }
 		}
@@ -87,14 +89,6 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
 				console.log('close modal not x')
 			}
 		});
-    }
-
-    findPositionDeparture(indexDeparture:number){
-
-    }
-
-    findPositionReturn(){
-
     }
 
 }

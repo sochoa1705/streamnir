@@ -249,7 +249,7 @@ export class PayComponent implements OnInit {
 						...this.formGroupCard.value,
 						documentType: Number(this.documentTypeField.value),
 						cardNumber: this.cardNumberField.value.replace(/[\s-]/g, ''),
-						expiration: this.expirationField.value.match(/.{1,2}/g).join('/'),
+						expiration: this.expirationField.value,
 						numberQuotes: Number(this.numberQuotesField.value),
 						counter: this.counter
 				  }

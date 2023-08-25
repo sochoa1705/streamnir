@@ -106,6 +106,7 @@
 									[name]="'documentNumber'"
 									[isRequired]="true"
 									#InputDocumentNumber
+									[maxLenght]="documentTypeField.value == 0 || documentTypeField.value== '0' ? 8 : 12"
 									[isOnlyNumber]="documentTypeField.value == 0 ? true : false"
 									[class]="documentNumberField.touched && documentNumberField!.invalid ? 'error' : ''"
 									[labelError]="
@@ -132,6 +133,7 @@
 								[placeholder]="'Del titular de la tarjeta'"
 								[name]="'city'"
 								[isRequired]="true"
+								[maxLenght]="50"
 								[class]="cityField.touched && cityField!.invalid ? 'error' : ''"
 								[labelError]="cityField.touched && cityField!.hasError('required') ? 'Ciudad es obligatorio' : ''"
 							></app-input>
@@ -142,6 +144,7 @@
 								[placeholder]="'Ingresar Dirección'"
 								[name]="'address'"
 								[isRequired]="true"
+								[maxLenght]="100"
 								[class]="addressField.touched && addressField!.invalid ? 'error' : ''"
 								[labelError]="
 									addressField.touched && addressField!.hasError('required') ? 'Dirección es obligatorio' : ''

@@ -227,37 +227,37 @@
 	<!-------------------Section Pricing-------------------->
 	<div class="card__result__price">
 		<ng-container *ngIf="detailPricing">
-			<h4>US$ {{ detailPricing.totalPay | number: '1.2-2' }}</h4>
+			<h4><span>{{currency}}</span> {{ detailPricing.totalPay | changeCurrency:currency | number: '1.2-2' }}</h4>
 			<div class="card__result__price__detail">
 				<div class="card__result__price__detail__row">
 					<span>{{ detailPricing.totalADT }} {{ detailPricing.totalADT > 1 ? 'ADULTOS' : 'ADULTO' }}</span>
 					<span class="total"
-						><span class="usd">USD</span>{{ detailPricing.baseFareADT * detailPricing.totalADT | number: '1.2-2' }}
+						><span class="usd">{{currency}}</span>{{ detailPricing.baseFareADT * detailPricing.totalADT | changeCurrency:currency | number: '1.2-2' }}
 					</span>
 				</div>
 
 				<div class="card__result__price__detail__row" *ngIf="detailPricing.totalCNN > 0">
 					<span>{{ detailPricing.totalCNN }} {{ detailPricing.totalCNN > 1 ? 'NIÑOS' : 'NIÑO' }}</span>
 					<span class="total"
-						><span class="usd">USD</span>{{ detailPricing.baseFareCNN * detailPricing.totalCNN | number: '1.2-2' }}
+						><span class="usd">{{currency}}</span>{{ detailPricing.baseFareCNN * detailPricing.totalCNN | changeCurrency:currency | number: '1.2-2' }}
 					</span>
 				</div>
 
 				<div class="card__result__price__detail__row" *ngIf="detailPricing.totalINF > 0">
 					<span>{{ detailPricing.totalINF }} {{ detailPricing.totalINF > 1 ? 'INFANTES' : 'INFANTE' }}</span>
 					<span class="total"
-						><span class="usd">USD</span>{{ detailPricing.baseFareINF * detailPricing.totalINF | number: '1.2-2' }}
+						><span class="usd">{{currency}}</span>{{ detailPricing.baseFareINF * detailPricing.totalINF | changeCurrency:currency | number: '1.2-2' }}
 					</span>
 				</div>
 
 				<div class="card__result__price__detail__row">
 					<span>IMPUESTOS</span>
-					<span class="total"><span class="usd">USD</span>{{ detailPricing.taxes | number: '1.2-2' }}</span>
+					<span class="total"><span class="usd">{{currency}}</span>{{ detailPricing.taxes | changeCurrency:currency | number: '1.2-2' }}</span>
 				</div>
 				<div class="card__result__price__detail__row">
 					<span>CARGOS</span>
 					<span class="total"
-						><span class="usd">USD</span>{{ detailPricing.feeNMV + detailPricing.feePTA | number: '1.2-2' }}</span
+						><span class="usd">{{currency}}</span>{{ detailPricing.feeNMV + detailPricing.feePTA | changeCurrency:currency | number: '1.2-2' }}</span
 					>
 				</div>
 			</div>

@@ -12,8 +12,10 @@
 				[dataBagFilter]="dataBagFilter"
 				[totalResults]="allDataGroups.length"
 				[totalResultsFilter]="dataFilterGroups.length"
+				[exchangeRate]="exchangeRate"
 				(changeArrayFilters)="changeArrayFilters($event)"
 				(updateArrayAirlinesFilter)="updateArrayAirlinesFilter($event)"
+				(changeExchangeRate)="changeExchangeRate($event)"
 			></app-filters>
 			<div class="container__page__results">
 				<div class="container__page__results__filters">
@@ -23,7 +25,7 @@
 						(click)="indexTabSelect = 0"
 					>
 						<span class="bold" [class.active]="indexTabSelect == 0">El más barato</span>
-						<span>$980 • 16h 45m</span>
+						<span>${{56}} • 16h 45m</span>
 					</div>
 					<div class="container__page__results__filters__line"></div>
 					<div
@@ -58,7 +60,7 @@
 				</div>
 				<div class="container__page__results__cards" *ngIf="allDataGroups.length > 0">
 					<ng-container *ngFor="let item of dataGroupsPaginate">
-						<app-card-result-search [flight]="item"></app-card-result-search>
+						<app-card-result-search [flight]="item" [currency]="currency"></app-card-result-search>
 					</ng-container>
 				</div>
 				<div class="container__page__results__button" *ngIf="dataGroupsPaginate.length !== dataFilterGroups.length">
