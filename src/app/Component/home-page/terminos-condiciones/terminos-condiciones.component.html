@@ -4,36 +4,34 @@
             <h1>Condiciones de compra</h1>
         </div>
         <div class="col-6 text-end">
-            <!-- <button class="me-2">Descargar</button> -->
             <button class="btnModal" (click)="onPrint()">Imprimir</button>
         </div>
     </div>
-    <div class="container-fluid px-4" id="exports" #exports>
-
+    <div class="container-fluid px-4" id="exports">
         <div class="row">
             <div class="col-12">
-                <div class="titleModal doNotPrint">
-                    Contenido
-                </div>
-                <a href="terminos-condiciones#declaraciones" class="linkRed">A) Declaraciones generales</a>
-                <a href="terminos-condiciones#responsabilidad" class="linkRed">B) Responsabilidad</a>
-                <a href="terminos-condiciones#solicitudes" class="linkRed">C) Solicitudes y pagos</a>
-                <a href="terminos-condiciones#servicios" class="linkRed">D) Servicios no incluidos</a>
-                <a href="terminos-condiciones#documentacion" class="linkRed">E) Documentación</a>
-                <a href="terminos-condiciones#vuelos" class="linkRed">F) Vuelos Airline Mix</a>
-                <a href="terminos-condiciones#hoteles" class="linkRed">G) Hoteles</a>
-                <a href="terminos-condiciones#autos" class="linkRed">H) Autos</a>
-                <a href="terminos-condiciones#traslados" class="linkRed">I) Translados</a>
-                <a href="terminos-condiciones#cancelaciones" class="linkRed">J) Cancelaciones</a>
-                <a href="terminos-condiciones#cambio" class="linkRed">K) Cambio de fecha</a>
-                <a href="terminos-condiciones#procedimiento" class="linkRed">L) Procedimiento de consultas o
-                    reclamos</a>
-                <a href="terminos-condiciones#presentacion" class="linkRed">M) Presentación en el aeropuerto</a>
-                <a href="terminos-condiciones#seguros" class="linkRed">N) Seguros</a>
-                <a href="terminos-condiciones#equipaje" class="linkRed">Ñ) Equipaje</a>
-                <a href="terminos-condiciones#aceptacion" class="linkRed">O) Aceptación del cliente</a>
-                <a href="terminos-condiciones#autorizacion" class="linkRed">P) Autorización del cliente para el manejo
-                    de datos personales</a>
+                <div class="titleModal doNotPrint">Contenido</div>
+                <a role="button" class="linkRed" (click)="scrollToSection('declaraciones')">A) Declaraciones
+                    generales</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('responsabilidad')">B) Responsabilidad</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('solicitudes')">C) Solicitudes y pagos</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('servicios')">D) Servicios no incluidos</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('documentacion')">E) Documentación</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('vuelos')">F) Vuelos Airline Mix</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('hoteles')">G) Hoteles</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('autos')">H) Autos</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('traslados')">I) Traslados</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('cancelaciones')">J) Cancelaciones</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('cambio')">K) Cambio de fecha</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('procedimiento')">L) Procedimiento de
+                    consultas o reclamos</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('presentacion')">M) Presentación en el
+                    aeropuerto</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('seguros')">N) Seguros</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('equipaje')">Ñ) Equipaje</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('aceptacion')">O) Aceptación del cliente</a>
+                <a role="button" class="linkRed" (click)="scrollToSection('autorizacion')">P) Autorización del cliente
+                    para el manejo de datos personales</a>
             </div>
         </div>
         <div class="row">
@@ -162,6 +160,12 @@
                     <li>De no efectuarse la cancelación del precio, Promotora de Turismo Nuevo Mundo S.A.C. queda
                         facultada a cancelar los servicios con previo aviso al Cliente, no teniendo el Cliente derecho a
                         reintegro alguno.</li>
+                    <li>
+                        De generarse un doble cargo en su proceso de compra, tomar en cuenta que de manera inmediata
+                        procederemos con las gestiones de extorno, lo que no excederá del plazo de 30 días. De no verse
+                        regularizado en el periodo antes mencionado, por favor contactarse con nosotros a través del
+                        portal de ayuda para brindarle la asistencia particular a su caso.
+                    </li>
                 </ul>
 
                 <div class="subtitleModal" id="servicios">
