@@ -38,6 +38,11 @@ export class TerminosCondicionesComponent implements OnInit {
     });
   }
 
+  scrollToSection(id: string) {
+    const el = document.getElementById(id);
+    el?.scrollIntoView({ 'behavior': 'smooth' });
+  }
+
   onPrint() {
     window.print();
   }
