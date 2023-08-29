@@ -33,6 +33,7 @@ import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/
 import { ItineraryModule } from './itinerary/itinerary.module';
 import { RetailModule } from './retail/retail.module';
 import { OffersModule } from './offers/offers.module';
+import { SubscriptionModule } from './subscription/subscription.module';
 
 @NgModule({
 	declarations: [ HomePageComponent, PageNotFoundComponent ],
@@ -61,7 +62,8 @@ import { OffersModule } from './offers/offers.module';
 		ResponsabilidadSocialModule,
 		ComprarModule,
 		RetailModule,
-		OffersModule
+		OffersModule,
+		SubscriptionModule
 	],
 	exports: [ HomePageComponent ],
 	providers: [
