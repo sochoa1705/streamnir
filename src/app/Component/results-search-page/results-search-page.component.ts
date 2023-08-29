@@ -255,6 +255,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		}
 		this.allDataGroups = [...this.allDataGroups, ...res.groups];
 		this.dataFilterGroups = [...this.allDataGroups];
+		console.log(this.dataFilterGroups,'dataFilterGroups')
 		this.sortData();
 	}
 
