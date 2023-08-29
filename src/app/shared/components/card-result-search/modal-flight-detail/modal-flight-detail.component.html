@@ -1,7 +1,7 @@
 <div class="modal__flight">
 	<div class="modal__flight__header">
 		<h4>Detalle de itinerario</h4>
-		<img src="./assets/svg/close-modal.svg" (click)="dialogRef.close(true)" />
+		<img src="./assets/svg/close-modal.svg" (click)="activeModal.close()" />
 	</div>
 	<div class="modal__flight__body" *ngIf="flight">
 		<ng-container *ngFor="let departure of flight.departure; index as i">

@@ -8,6 +8,7 @@ import { Group } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { GlobalComponent } from 'src/app/shared/global';
 import { dataSteps } from 'src/app/shared/constant-init';
 import { ModalInsuranceComponent } from './modal-insurance/modal-insurance.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
 	selector: 'app-baggage-insurance',
@@ -16,7 +17,7 @@ import { ModalInsuranceComponent } from './modal-insurance/modal-insurance.compo
 })
 export class BaggageInsuranceComponent implements OnInit {
 	constructor(
-		public _matDialog: MatDialog,
+		private _modalService: NgbModal,
 		private _checkoutService: CheckoutService
 	) {}
 	showBaggageDropdown = true;
@@ -52,12 +53,13 @@ export class BaggageInsuranceComponent implements OnInit {
 	}
 
 	openModalFee() {
-		this.modalFeeDialogRef = this._matDialog.open(ModalFeeComponent, {
-			disableClose: true,
-			panelClass: 'custom-dialog'
-		});
+		const modalRef=this._modalService.open(ModalFeeComponent, {
+			centered: true,
+			backdrop: 'static',
+			windowClass: GlobalComponent.upSellGroup.length <= 3 ? 'modal-detail-fee' :'modal-detail-fee-swiper'
+		})
 
-		this.modalFeeDialogRef.afterClosed().subscribe((result) => {
+		modalRef.result.then((result) => {
 			if (result !== true) {
 				this.showBaggageDropdown = false;
 				this.nameSelectUpSell = result.description;
@@ -79,9 +81,11 @@ export class BaggageInsuranceComponent implements OnInit {
 	}
 
 	openModalCoverage(){
-		this.modalDialogRef = this._matDialog.open(ModalInsuranceComponent, {
-			disableClose: true,
-		});
+		this._modalService.open(ModalInsuranceComponent, {
+			centered: true,
+			backdrop: 'static',
+			size: 'xl'
+		})
 	}
 
 	nextPage() {

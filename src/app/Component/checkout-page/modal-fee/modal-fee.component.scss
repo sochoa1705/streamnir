@@ -3,9 +3,6 @@
 @import 'swiper/scss/navigation';
 @import 'swiper/scss/pagination';
 
-mat-dialog-container{
-	padding: 0 !important;
-}
 .swiper{
 	width: 100% !important;
 }
@@ -37,7 +34,7 @@ section {
 
 .modal__contend {
 	padding: 40px;
-	min-width: 1053px;
+	border-radius: 12px;
 	background: colors.$gris-100;
 	&__header {
 		display: flex;
@@ -68,7 +65,8 @@ section {
 		}
 
 		&.not-swiper{
-			grid-template-columns:repeat(3,1fr);
+			grid-template-columns:repeat(3,auto);
+			justify-content: flex-start;
 		}
 
 			&__card {
@@ -153,5 +151,14 @@ section {
 	}
 	section{
 		width: 100%;
+	}
+}
+
+@media (min-width: 1300px) {
+	.modal-detail-fee .modal-dialog-centered {
+		min-width: 1112px;
+	}
+	.modal-detail-fee-swiper .modal-dialog-centered {
+		min-width: 1212px;
 	}
 }

@@ -1,7 +1,7 @@
 <div class="modal__contend">
 	<div class="modal__contend__header">
 		<h4>Contamos con {{dataUpSell.length}} tarifas disponibles:</h4>
-		<img src="./assets/svg/close-modal.svg" (click)="dialogRef.close(true)" />
+		<img src="./assets/svg/close-modal.svg" (click)="activeModal.close(true)" />
 	</div>
 	<div class="modal__contend__body" [class.not-swiper]="!isNavigate">
 		<img

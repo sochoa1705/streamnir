@@ -1,6 +1,5 @@
 import { registerLocaleData } from '@angular/common';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Group, PricingDetail } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import localeEs from '@angular/common/locales/es';
 import { GlobalComponent } from 'src/app/shared/global';
@@ -9,15 +8,14 @@ import { ModalFeeComponent } from 'src/app/Component/checkout-page/modal-fee/mod
 import { Router } from '@angular/router';
 import { ModalErrorComponent } from '../../modal-error/modal-error.component';
 import { dataInitBooking } from 'src/app/shared/constant-init';
+import { LoadingService } from 'src/app/Services/intermediary/loading.service';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
 	selector: 'app-modal-flight-detail',
 	templateUrl: './modal-flight-detail.component.html',
 	styleUrls: ['./modal-flight-detail.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	host: {
-		class: 'custom-dialog-flight'
-	}
 })
 export class ModalFlightDetailComponent implements OnInit {
 	@Input() flight: Group;
@@ -26,15 +24,15 @@ export class ModalFlightDetailComponent implements OnInit {
 	@Input() indexSegmentDeparture: number[];
 	@Input() indexSegmentReturn: number;
 	@Input() detailPricing: PricingDetail;
-	modalFeeDialogRef: MatDialogRef<ModalFeeComponent>;
-	modalDialogError: MatDialogRef<ModalErrorComponent>;
-
+	messageError='El itinerario seleccionado ya no se encuentra disponible, favor de seleccionar un nuevo itinerario'
 	constructor(
-		public dialogRef: MatDialogRef<ModalFlightDetailComponent>,
-		public _matDialog: MatDialog,
+		public activeModal: NgbActiveModal,
+		private _modalService: NgbModal,
 		private _searchService: SearchService,
-		private router: Router
-	) {}
+		private router: Router,
+		private _loadingService: LoadingService
+	) {
+	}
 
 	ngOnInit() {
 		registerLocaleData(localeEs, 'es');
@@ -58,29 +56,27 @@ export class ModalFlightDetailComponent implements OnInit {
 	}
 
 	getDataUpSell() {
-		this._searchService.getUpSellGroup().subscribe({
-			next: (res) => {
-				GlobalComponent.upSellGroup = res;
-				this.dialogRef.close(true);
-				if (res && res.length > 0) {
-					if (res.length > 0) {
-						GlobalComponent.upSellSeleted = res[0];
-						this.modalFeeDialogRef = this._matDialog.open(ModalFeeComponent, {
-							disableClose: true,
-							panelClass: 'custom-dialog-up'
-						});
-					} else {
-						this.router.navigateByUrl('/checkout');
-					}
-				} else {
-					this.router.navigateByUrl('/checkout');
+			this._searchService.getUpSellGroup().subscribe({
+				next: (res) => {
+					GlobalComponent.upSellGroup = res;
+					if (res && res.length > 0) {
+						this._loadingService.idle();
+						if (res.length > 0) {
+							GlobalComponent.upSellSeleted = res[0];
+							this._modalService.open(ModalFeeComponent, {
+								centered: true,
+								backdrop: 'static',
+								windowClass: res.length <= 3 ? 'modal-detail-fee' :'modal-detail-fee-swiper'
+							});
+
+						} else this.redirectCheckout();
+					} else this.redirectCheckout();
+					this.activeModal.close();
+				},
+				error: (err) => {
+					this.redirectCheckout();
 				}
-			},
-			error: (err) => {
-				this.dialogRef.close(true);
-				this.router.navigateByUrl('/checkout');
-			}
-		});
+			});
 	}
 
 	openModalUpsell() {
@@ -97,35 +93,61 @@ export class ModalFlightDetailComponent implements OnInit {
 		GlobalComponent.detailPricing = this.detailPricing;
 		GlobalComponent.upSellGroup = [];
 		GlobalComponent.upSellSeleted = null;
-		this.validateUpsell();
+		this.processValidateUpsell();
+	}
+  
+	processValidateUpsell() {
+		if(this._loadingService.requestSearchCount==9) this.validateUpsell();
+		else this.endsearch();
 	}
 
-	validateUpsell() {
+	endsearch() {
+		this._loadingService.busy();
+		this._searchService.endSearch(true).subscribe({
+			next: (res) => {
+				console.log(res, 'upsell end');
+				if(res) this.validateUpsell();
+				else this.openModalError('Al parecer ocurrio un error, por favor intentelo más tarde.')
+			},
+			error: (err) => {
+
+				this.openModalError('Al parecer ocurrio un error, por favor intentelo más tarde.')
+			}
+		});
+	}
+
+	validateUpsell(){
+		this._loadingService.busy();
 		this._searchService.validateAvailability().subscribe({
 			next: (res) => {
+				console.log(res,'validate nm')
 				if (res.isAvailable) this.getDataUpSell();
 				else {
-					this.dialogRef.close(true);
-					this.openModalError(
-						'El itinerario seleccionado ya no se encuentra disponible, favor de seleccionar un nuevo itinerario'
-					);
+					this.openModalError(this.messageError);
 				}
 			},
 			error: (err) => {
-				this.dialogRef.close(true);
-					this.openModalError(
-						'El itinerario seleccionado ya no se encuentra disponible, favor de seleccionar un nuevo itinerario'
-					);
+				this.openModalError(this.messageError);
 			}
 		});
 	}
 
 	openModalError(message: string) {
-		this.modalDialogError = this._matDialog.open(ModalErrorComponent, {
-			disableClose: true
+		this.activeModal.close();
+		this._loadingService.idle();
+		const modalRef=this._modalService.open(ModalErrorComponent, {
+			centered: true,
+			backdrop: 'static',
+			windowClass: 'modal-detail-error'
 		});
-		this.modalDialogError.componentInstance.message = message;
-		this.modalDialogError.componentInstance.isRedirect = false;
-		this.modalDialogError.componentInstance.txtButton='Continuar';
+		modalRef.componentInstance.message = message;
+		modalRef.componentInstance.isRedirect = false;
+		modalRef.componentInstance.txtButton='Continuar';
+	}
+
+	redirectCheckout(){
+		this.activeModal.close();
+		this._loadingService.idle();
+		this.router.navigateByUrl('/checkout');
 	}
 }

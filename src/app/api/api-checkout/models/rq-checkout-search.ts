@@ -25,7 +25,17 @@ export interface Group {
 	isMultiScale?:boolean;
 	typeBag?:string;
 	airlineCodeFilter?:string;
-	detailPricing?:IDetailPricing
+	detailPricing?:IDetailPricing;
+	flightDurationProm?:number;
+	orderByScales?:number;
+	dateOrder?:DateOrder[]
+}
+
+export interface DateOrder {
+	dateEarlyDep:any,
+	dateLaterDep:any,
+	dateEarlyArr:any,
+	dateLaterArr:any,
 }
 
 export interface Airline {
@@ -65,6 +75,7 @@ export interface Segment {
 	flightDuration: string;
 	equipaje: Equipaje;
 	flightSegments: FlightSegment[];
+	flightDurationMin?:number
 }
 
 export interface Equipaje {
@@ -157,6 +168,7 @@ export interface Segment2 {
 	flightDuration: string;
 	equipaje: Equipaje2;
 	flightSegments: FlightSegment2[];
+	flightDurationMin?:number
 }
 
 export interface Equipaje2 {

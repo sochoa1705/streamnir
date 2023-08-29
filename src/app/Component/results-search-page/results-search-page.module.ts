@@ -10,7 +10,10 @@ import { SelectModule } from 'src/app/shared/components/select/select.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FiltersComponent } from './filters/filters.component';
 import { DropdownFilterModule } from 'src/app/shared/components/dropdown-filter/dropdown-filter.module';
-export const routes: Routes = [{ path: '', component: ResultsSearchPageComponent}]
+export const routes: Routes = [{ path: '', component: ResultsSearchPageComponent}];
+import { NgbPopoverModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { SortByComponent } from './sort-by/sort-by.component';
+import { MinutesFormatPipe } from 'src/app/shared/pipes/convert-duration.pipe';
 registerLocaleData(localeEs, "es");
 
 @NgModule({
@@ -24,9 +27,11 @@ registerLocaleData(localeEs, "es");
         SelectModule,
         ReactiveFormsModule, 
         FormsModule,
-        DropdownFilterModule
+        DropdownFilterModule,
+        NgbPopoverModule,
+        NgbTooltipModule
     ],
-    declarations:[ResultsSearchPageComponent, FiltersComponent],
+    declarations:[ResultsSearchPageComponent, FiltersComponent, SortByComponent, MinutesFormatPipe],
     exports: [ResultsSearchPageComponent],
     providers: [{ provide: LOCALE_ID, useValue: "es" }],
 })
