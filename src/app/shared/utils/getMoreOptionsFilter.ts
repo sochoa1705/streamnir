@@ -39,7 +39,7 @@ export const getMoreOptionsFilter = (objParams: any): IOption[] => {
 			arrayOptions.push({
 				value,
 				nameOption: `${isTextSalida?'Salida':'Llegada'} más ${i % 2==0 ? 'temprano' : 'tarde'} (${code})`,
-				nameSeleted: `${isTextSalida?'Salida':'Llegada'} de ${code}`,
+				nameSeleted: `${isTextSalida?'Salida':'Llegada'} ${isTextSalida?'de':'a'} ${code}`,
 				subNameSeled: i % 2==0 ? 'Más temprano ' : 'Más tarde '
 			});
 

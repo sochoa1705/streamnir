@@ -16,10 +16,12 @@
     "test:coverage": "jest --coverage",
     "e2e": "ng e2e",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {
+    "@angular-slider/ngx-slider": "^2.0.4",
     "@angular/animations": "~12.1.1",
     "@angular/cdk": "^12.2.7",
     "@angular/cli": "^12.1.4",

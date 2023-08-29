@@ -255,7 +255,6 @@ export class ResultsSearchPageComponent implements OnInit {
 		}
 		this.allDataGroups = [...this.allDataGroups, ...res.groups];
 		this.dataFilterGroups = [...this.allDataGroups];
-		console.log(this.dataFilterGroups,'dataFilterGroups')
 		this.sortData();
 	}
 
@@ -313,7 +312,7 @@ export class ResultsSearchPageComponent implements OnInit {
 
 		if(!isEarly && isStartDate){ //salida tarde x fecha inicio
 			return dataFilter.slice().sort((a, b) => {
-				if(a.dateOrder && b.dateOrder) return a.dateOrder[index].dateLaterDep - b.dateOrder[index].dateLaterDep;
+				if(a.dateOrder && b.dateOrder) return b.dateOrder[index].dateLaterDep - a.dateOrder[index].dateLaterDep;
 				if (!a.dateOrder) return 1;
 				if (!b.dateOrder) return -1;
 				return 0;
@@ -331,7 +330,7 @@ export class ResultsSearchPageComponent implements OnInit {
 
 		 //llegada  tarde x fecha fin
 		return dataFilter.slice().sort((a, b) => {
-				if(a.dateOrder && b.dateOrder) return a.dateOrder[index].dateLaterArr - b.dateOrder[index].dateLaterArr;
+				if(a.dateOrder && b.dateOrder) return b.dateOrder[index].dateLaterArr - a.dateOrder[index].dateLaterArr;
 				if (!a.dateOrder) return 1;
 				if (!b.dateOrder) return -1;
 				return 0;

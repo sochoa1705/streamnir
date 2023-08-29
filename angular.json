@@ -137,6 +137,9 @@
             },
             "development": {
               "browserTarget": "NuevoMundoViajes:build:development"
+            },
+            "qa-delfosti": {
+              "browserTarget": "NuevoMundoViajes:build:development"
             }
           },
           "defaultConfiguration": "development"
