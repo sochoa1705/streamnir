@@ -13,9 +13,3 @@ export const getDatesBySegment = (segments: Segment[]): DateOrder => {
 		dateLaterArr: orderByLater[orderByEarly.length - 1]
 	};
 };
-
-/*export const findIndexDateBySegment = (segments: Segment[]) => {
-	const startDateTime = segments.map((segment) => new Date(segment.startDateTime));
-	const orderByEarly = startDateTime.slice().sort((a: any, b: any) => a - b);
-	const orderByLater = startDateTime.slice().sort((a: any, b: any) => b - a);
-};*/

@@ -14,6 +14,7 @@ export const routes: Routes = [{ path: '', component: ResultsSearchPageComponent
 import { NgbPopoverModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortByComponent } from './sort-by/sort-by.component';
 import { MinutesFormatPipe } from 'src/app/shared/pipes/convert-duration.pipe';
+import { PriceFilterModule } from 'src/app/shared/components/price-filter/price-filter.module';
 registerLocaleData(localeEs, "es");
 
 @NgModule({
@@ -29,7 +30,8 @@ registerLocaleData(localeEs, "es");
         FormsModule,
         DropdownFilterModule,
         NgbPopoverModule,
-        NgbTooltipModule
+        NgbTooltipModule,
+        PriceFilterModule
     ],
     declarations:[ResultsSearchPageComponent, FiltersComponent, SortByComponent, MinutesFormatPipe],
     exports: [ResultsSearchPageComponent],
