@@ -226,38 +226,38 @@
 	</div>
 	<!-------------------Section Pricing-------------------->
 	<div class="card__result__price">
-		<ng-container *ngIf="detailPricing">
-			<h4><span>{{currency}}</span> {{ detailPricing.totalPay | changeCurrency:currency | number: '1.2-2' }}</h4>
+		<ng-container *ngIf="flight.detailPricing">
+			<h4><span>{{currency}}</span> {{ flight.detailPricing.totalPay | changeCurrency:currency | number: '1.2-2' }}</h4>
 			<div class="card__result__price__detail">
 				<div class="card__result__price__detail__row">
-					<span>{{ detailPricing.totalADT }} {{ detailPricing.totalADT > 1 ? 'ADULTOS' : 'ADULTO' }}</span>
+					<span>{{ flight.detailPricing.totalADT }} {{ flight.detailPricing.totalADT > 1 ? 'ADULTOS' : 'ADULTO' }}</span>
 					<span class="total"
-						><span class="usd">{{currency}}</span>{{ detailPricing.baseFareADT * detailPricing.totalADT | changeCurrency:currency | number: '1.2-2' }}
+						><span class="usd">{{currency}}</span>{{ flight.detailPricing.baseFareADT * flight.detailPricing.totalADT | changeCurrency:currency | number: '1.2-2' }}
 					</span>
 				</div>
 
-				<div class="card__result__price__detail__row" *ngIf="detailPricing.totalCNN > 0">
-					<span>{{ detailPricing.totalCNN }} {{ detailPricing.totalCNN > 1 ? 'NIÑOS' : 'NIÑO' }}</span>
+				<div class="card__result__price__detail__row" *ngIf="flight.detailPricing.totalCNN > 0">
+					<span>{{ flight.detailPricing.totalCNN }} {{ flight.detailPricing.totalCNN > 1 ? 'NIÑOS' : 'NIÑO' }}</span>
 					<span class="total"
-						><span class="usd">{{currency}}</span>{{ detailPricing.baseFareCNN * detailPricing.totalCNN | changeCurrency:currency | number: '1.2-2' }}
+						><span class="usd">{{currency}}</span>{{ flight.detailPricing.baseFareCNN * flight.detailPricing.totalCNN | changeCurrency:currency | number: '1.2-2' }}
 					</span>
 				</div>
 
-				<div class="card__result__price__detail__row" *ngIf="detailPricing.totalINF > 0">
-					<span>{{ detailPricing.totalINF }} {{ detailPricing.totalINF > 1 ? 'INFANTES' : 'INFANTE' }}</span>
+				<div class="card__result__price__detail__row" *ngIf="flight.detailPricing.totalINF > 0">
+					<span>{{ flight.detailPricing.totalINF }} {{ flight.detailPricing.totalINF > 1 ? 'INFANTES' : 'INFANTE' }}</span>
 					<span class="total"
-						><span class="usd">{{currency}}</span>{{ detailPricing.baseFareINF * detailPricing.totalINF | changeCurrency:currency | number: '1.2-2' }}
+						><span class="usd">{{currency}}</span>{{ flight.detailPricing.baseFareINF * flight.detailPricing.totalINF | changeCurrency:currency | number: '1.2-2' }}
 					</span>
 				</div>
 
 				<div class="card__result__price__detail__row">
 					<span>IMPUESTOS</span>
-					<span class="total"><span class="usd">{{currency}}</span>{{ detailPricing.taxes | changeCurrency:currency | number: '1.2-2' }}</span>
+					<span class="total"><span class="usd">{{currency}}</span>{{ flight.detailPricing.taxes | changeCurrency:currency | number: '1.2-2' }}</span>
 				</div>
 				<div class="card__result__price__detail__row">
 					<span>CARGOS</span>
 					<span class="total"
-						><span class="usd">{{currency}}</span>{{ detailPricing.feeNMV + detailPricing.feePTA | changeCurrency:currency | number: '1.2-2' }}</span
+						><span class="usd">{{currency}}</span>{{ flight.detailPricing.feeNMV + flight.detailPricing.feePTA | changeCurrency:currency | number: '1.2-2' }}</span
 					>
 				</div>
 			</div>

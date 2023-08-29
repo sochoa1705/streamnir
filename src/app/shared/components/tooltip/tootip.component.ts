@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 export class ToolTipComponent implements OnInit {
     @Input() isTop=false;
+    @Input() text='';
     constructor() { }
 
     ngOnInit() { }

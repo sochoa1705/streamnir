@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalComponent } from 'src/app/shared/global';
 
 @Component({
@@ -9,7 +9,7 @@ import { GlobalComponent } from 'src/app/shared/global';
 })
 export class ModalInsuranceComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ModalInsuranceComponent>) { }
+  constructor(public activeModal: NgbActiveModal) { }
   isDomestic=false;
   ngOnInit(): void {
     this.isDomestic=GlobalComponent.isDomestic;

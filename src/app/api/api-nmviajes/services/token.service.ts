@@ -28,7 +28,8 @@ export class TokenService {
 		return this._httpClient
 			.post<RToken>(url, req, {
 				headers: {
-					ignoreInterceptor: 'true'
+					ignoreInterceptor: 'true',
+					'not-loading': 'true'
 				}
 			});
 	}

@@ -1,11 +1,7 @@
 @use '/src/scss/colors';
 
-mat-dialog-container{
-	padding: 24px !important;
-}
-
 .modal__error {
-	max-width: 468px;
+    padding: 24px;
 	&__header {
 		display: flex;
 		justify-content: flex-end;
@@ -31,4 +27,8 @@ mat-dialog-container{
             color:colors.$neutral-900;
         }
     }
+}
+
+.modal-detail-error .modal-dialog-centered{
+        min-width: 468px;
 }

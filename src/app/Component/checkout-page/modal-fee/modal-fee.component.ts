@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PricingDetail } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { FareBreakDown, IUpSell, InformationService } from 'src/app/api/api-checkout/models/rq-checkout-up-sell';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
@@ -15,15 +15,10 @@ SwiperCore.use([Pagination, Navigation]);
 	selector: 'modal-fee',
 	templateUrl: './modal-fee.component.html',
 	styleUrls: ['./modal-fee.component.scss'],
-	encapsulation: ViewEncapsulation.None,
-	host: {
-		'class': 'custom-dialog-up'
-	}
+	encapsulation: ViewEncapsulation.None
 })
 export class ModalFeeComponent implements OnInit{
 	dataUpSell:IUpSell[]=GlobalComponent.upSellGroup;
-	slidesPerGroup = 1;
-	slidesPerView = 1;
 	activeArrowLeft = false;
 	activeArrowRight = true;
 	isNavigate=true;
@@ -33,7 +28,7 @@ export class ModalFeeComponent implements OnInit{
 
 	pricingDetail:PricingDetail;
 	config: SwiperOptions = {
-		slidesPerView: 'auto',
+		slidesPerView: 3.2,
 		slidesPerGroup: 1,
 		navigation: false,
 		loop: false,
@@ -46,9 +41,8 @@ export class ModalFeeComponent implements OnInit{
 		}
 	};
 	constructor(
-		public dialogRef: MatDialogRef<ModalFeeComponent>, 
+		public activeModal: NgbActiveModal,
 		private router: Router, 
-		public _matDialog: MatDialog,
 		public _searchService:SearchService,
 		private _checkoutService: CheckoutService
 	) {
@@ -101,6 +95,7 @@ export class ModalFeeComponent implements OnInit{
 			this._checkoutService.selectUpSellModal();
 			this.router.navigateByUrl('/checkout');
 		}
-		this.dialogRef.close(item);
+
+		this.activeModal.close(item);
 	}
 }

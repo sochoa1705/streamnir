@@ -15,7 +15,24 @@ export class SearchService {
 	validateAvailability(): Observable<RAvailable> {
 		const request: IAvailability = {
 			groupId: GlobalComponent.appGroupSeleted.id,
-			segmentSelected: GlobalComponent.segmentSelected
+			segmentSelected: GlobalComponent.segmentSelected,
+			gds:GlobalComponent.appGroupSeleted.gds.idGDS
+		};
+		const headers = new HttpHeaders()
+		.set('Content-Type', 'application/json')
+		.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+
+		const endpoint = environment.urlApiMotorVuelos.includes('qa') ? 'validate-availability-nm' : 'validate-availability'
+
+		let url = `${environment.urlApiMotorVuelos}/mv/${endpoint}`;
+		return this._httpClient.post<RAvailable>(url, request, { headers });
+	}
+
+	/*validateAvailabilityGnral(){
+		const request: IAvailability = {
+			groupId: GlobalComponent.appGroupSeleted.id,
+			segmentSelected: GlobalComponent.segmentSelected,
+			gds:GlobalComponent.appGroupSeleted.gds.idGDS
 		};
 		const headers = new HttpHeaders()
 		.set('Content-Type', 'application/json')
@@ -23,7 +40,7 @@ export class SearchService {
 
 		let url = `${environment.urlApiMotorVuelos}/mv/validate-availability`;
 		return this._httpClient.post<RAvailable>(url, request, { headers });
-	}
+	}*/
 
 	getAllDataGroups(body:any): Observable<ISearchResponse> {
 		const url = `${environment.urlApiMotorVuelos}/mv/search`;
@@ -32,29 +49,37 @@ export class SearchService {
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
 		return this._httpClient.post<ISearchResponse>(url, body, { headers }).pipe(
 			map((response) => {
-				response.groups.sort( (a,b) => a.sequenceNumber - b.sequenceNumber );
 				GlobalComponent.appExchangeRate=response.exchangeRate;
 				GlobalComponent.appResponseGroups=response.groups;
 				return response;
 			})
 		);
 	}
-
-	getAllDataSearch(body:any, searchId:string): Observable<any> {
+/**
+ * 
+ * @param body 
+ * headers: {
+        'not-loading': 'true',
+      }
+ * @returns 
+ */
+	getAllDataSearch(body:any): Observable<any> {
 		const listGDS = Object.values(environment.GDS);
 		const endpoint = environment.urlApiMotorVuelos.includes('qa') ? 'search-nm' : 'search'
 		const url = `${environment.urlApiMotorVuelos}/mv/${endpoint}`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
+			.set('not-loading', 'true')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
 		
 		return of(...listGDS).pipe(
-				mergeMap(gds => this._httpClient.post(url, {...body, gds, searchId}, { headers }))
+				mergeMap(gds => this._httpClient.post(url, {...body, gds}, { headers }))
 		);
 	}
 
 	getUpSellGroup() {
-		const url = `${environment.urlApiMotorVuelos}/mv/up-sell`;
+		const endpoint = environment.urlApiMotorVuelos.includes('qa') ? 'up-sell-nm' : 'up-sell'
+		const url = `${environment.urlApiMotorVuelos}/mv/${endpoint}`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
@@ -68,7 +93,8 @@ export class SearchService {
 			brandedFareName: '',
 			exchangeRate: GlobalComponent.appExchangeRate,
 			email: credentials ? JSON.parse(credentials).email : '',
-			totalFare:parseFloat(GlobalComponent.detailPricing.totalPay.toFixed(2))
+			totalFare:parseFloat(GlobalComponent.detailPricing.totalPay.toFixed(2)),
+			gds:GlobalComponent.appGroupSeleted.gds.idGDS
 		};
 		return this._httpClient.post<IUpSell[]>(url, payload, { headers }).pipe(
 			map((response) => {
@@ -80,6 +106,15 @@ export class SearchService {
 				return response;
 			})
 		);
+	}
+
+	endSearch(itsIncludeLoader=false){
+		const headers = new HttpHeaders()
+		.set('Content-Type', 'application/json')
+		.set('not-loading', itsIncludeLoader ? 'true': 'false')
+		.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+		let url = `${environment.urlApiMotorVuelos}/mv/search-nm-finish`;
+		return this._httpClient.post<any>(url,{}, { headers });
 	}
 
 }

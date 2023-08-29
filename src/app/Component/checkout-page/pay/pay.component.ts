@@ -15,6 +15,7 @@ import { getBodyEmail } from 'src/app/shared/utils/bodyEmail';
 import { ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
 import { IValidateBooking, RValidateBooking } from 'src/app/api/api-checkout/models/rq-checkout-validate-booking';
 import { getBodyValidateBooking } from 'src/app/shared/utils/bodyValidateBooking';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 interface Item {
 	value: any;
@@ -52,7 +53,6 @@ export class PayComponent implements OnInit {
 	counter = 0;
 
 	private destroy$ = new Subject<unknown>();
-	modalDialogError: MatDialogRef<ModalErrorComponent>;
 	formCreditCard = {
 		cardNumber: new FormControl(''),
 		cvv: new FormControl(''),
@@ -82,8 +82,7 @@ export class PayComponent implements OnInit {
 
 	constructor(
 		private _checkoutService: CheckoutService,
-		public _matDialog: MatDialog,
-		private _searchService: SearchService
+		private _modalService:NgbModal
 	) {
 		this.formGroupCard = new FormGroup(this.formCreditCard);
 		this.formGroupBooking = new FormGroup(this.formBooking);
@@ -310,12 +309,14 @@ export class PayComponent implements OnInit {
 	}
 
 	openModalError(message: string) {
-		this.modalDialogError = this._matDialog.open(ModalErrorComponent, {
-			disableClose: true
-		});
-		this.modalDialogError.componentInstance.message = message;
-		this.modalDialogError.componentInstance.isRedirect = true;
-		this.modalDialogError.componentInstance.txtButton = 'Volver al inicio';
+		const modalRef=this._modalService.open(ModalErrorComponent,{
+			centered: true,
+			backdrop: 'static',
+			windowClass: 'modal-detail-error'
+		})
+		modalRef.componentInstance.message = message;
+		modalRef.componentInstance.isRedirect = true;
+		modalRef.componentInstance.txtButton = 'Volver al inicio';
 	}
 
 	private getMessageErrorClient(error: any): string {

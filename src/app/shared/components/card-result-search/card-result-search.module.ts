@@ -22,7 +22,7 @@ registerLocaleData(localeEs, "es");
     ToolTipModule,
     SwiperModule
   ],
-  exports: [ CardResultSearchComponent,ModalFlightDetailComponent ],
+  exports: [ CardResultSearchComponent,ModalFlightDetailComponent,ChangeCurrencyPipe ],
   providers: [{ provide: LOCALE_ID, useValue: "es" }],
 })
 export class CardResultSearchModule { }
