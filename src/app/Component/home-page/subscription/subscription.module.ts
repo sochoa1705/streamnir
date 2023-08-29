@@ -3,17 +3,20 @@ import { CommonModule } from '@angular/common';
 import { SubscriptionComponent } from './subscription.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [
-    SubscriptionComponent
-  ],
+	declarations: [
+		SubscriptionComponent,
+		ConfirmationDialogComponent
+	],
 	imports: [
 		CommonModule,
 		MatCheckboxModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		NgbModalModule
 	]
 })
-export class SubscriptionModule { }
+export class SubscriptionModule {
+}

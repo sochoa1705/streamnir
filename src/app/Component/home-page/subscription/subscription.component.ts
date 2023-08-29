@@ -1,24 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
 import { MailingService } from '../../../Services/mailing/mailing.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-subscription',
 	templateUrl: './subscription.component.html',
 	styleUrls: [ './subscription.component.scss' ]
 })
-export class SubscriptionComponent implements OnInit {
+export class SubscriptionComponent implements OnInit, OnDestroy {
 	form: FormGroup;
 	submitAttempt = false;
+	isLoading = false;
 
 	mobileQuery: MediaQueryList;
 	isMobile = false;
 
+	modalSubscription: Subscription;
+
 	constructor(private formBuilder: FormBuilder,
 	            private mailingService: MailingService,
-	            private loaderService: LoaderSubjectService,
+	            private modalService: NgbModal,
 	            private media: MediaMatcher) {
 		this.checkMobileQuery();
 	}
@@ -47,20 +52,22 @@ export class SubscriptionComponent implements OnInit {
 
 	onSubmit() {
 		this.submitAttempt = true;
-		this.loaderService.showLoader();
 		if (this.form.valid) {
+			this.isLoading = true;
 			const data = {
 				...this.form.value
 			};
 			this.mailingService.createContact(data).subscribe({
 				next: (response: any) => {
-					console.info('CREATE_CONTACT', response);
+					if (response && response.id) {
+						const modalRef = this.modalService.open(ConfirmationDialogComponent, {
+							centered: true
+						});
+						this.modalSubscription = modalRef.dismissed.subscribe(() => this.form.reset());
+					}
 				},
-				error: (error: any) => {
-					this.loaderService.closeLoader();
-					console.error(error);
-				},
-				complete: () => this.loaderService.closeLoader()
+				error: () => this.isLoading = false,
+				complete: () => this.isLoading = false
 			});
 			this.submitAttempt = false;
 		}
@@ -84,5 +91,9 @@ export class SubscriptionComponent implements OnInit {
 
 	get dataPolicy() {
 		return this.form.controls['dataPolicy'];
+	}
+
+	ngOnDestroy() {
+		this.modalSubscription.unsubscribe();
 	}
 }

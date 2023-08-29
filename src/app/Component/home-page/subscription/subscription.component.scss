@@ -1,38 +1,49 @@
-h1 {
-	color: #b50a27;
+h1, h2 {
 	font-family: Open Sans, sans-serif;
-	font-size: 1.75rem;
+	font-size: 1.25rem;
+
+	@media (min-width: 992px) {
+		font-size: 1.75rem !important;
+	}
 
 	@media (min-width: 1441px) {
 		font-size: 2.25rem !important;
 	}
 }
 
+h1 {
+	color: #b50a27;
+}
+
 img.img-fluid {
 	object-position: right;
+	object-fit: cover;
 
 	@media (min-width: 992px) {
 		min-height: 75vh;
-		object-fit: cover;
 	}
 
 	@media (min-width: 1441px) {
 		min-height: 55vh;
 	}
 
-	.vw-100 {
+	&.vw-100 {
 		max-height: 35vh;
-		object-fit: fill;
 	}
 }
 
-.card {
+.card.form-card {
 	height: fit-content;
 	border-radius: 20px !important;
 	box-shadow: 0 5px 5px #0000004d;
+	margin-top: -6.5rem;
 
 	@media (min-width: 992px) {
 		width: 45%;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
 	}
 
 	@media (min-width: 1441px) {
