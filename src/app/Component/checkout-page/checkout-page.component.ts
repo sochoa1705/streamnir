@@ -93,7 +93,6 @@ export class CheckoutPageComponent implements OnInit {
 		this.detailFlight = GlobalComponent.appGroupSeleted;
 		this.pricing = GlobalComponent.detailPricing;
 		this._checkoutService.totalDaysTravel();
-		this._checkoutService.setIsDomestic();
 		this.getDiscounts();
 	}
 

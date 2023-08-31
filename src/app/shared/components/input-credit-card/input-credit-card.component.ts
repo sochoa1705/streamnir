@@ -20,8 +20,7 @@ export class InputCreditCard implements OnInit {
 	@Input() disabled = false;
 	@Input() isRequired = false;
 	@Input() isCreditCard = true;
-
-
+	
 	ngOnInit(): void {
 		//console.log(this.formControl)
 	}

@@ -105,6 +105,14 @@ section {
 					max-height: 220px;
 					overflow-y: auto;
 					padding-right: 8px;
+					&__title{
+						font-family: Montserrat;
+						font-size: 14px;
+						font-weight: 600;
+						line-height: 20px;
+						letter-spacing: 0em;
+						color:colors.$blue-500;
+					}
 					&__check {
 						display: flex;
 						gap: 10px;
@@ -112,11 +120,14 @@ section {
 							text-transform: lowercase;
 							font-family: Montserrat;
 							font-size: 14px;
-							font-weight: 600;
+							font-weight: 400;
 							line-height: 20px;
-							color: colors.$blue-500;
+							color: colors.$gris-900;
 							&::first-letter{
 								text-transform: capitalize;
+							}
+							&.muted{
+								color:colors.$gris-600;
 							}
 						}
 					}

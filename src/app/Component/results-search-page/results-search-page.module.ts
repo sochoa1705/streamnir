@@ -15,6 +15,8 @@ import { NgbPopoverModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortByComponent } from './sort-by/sort-by.component';
 import { MinutesFormatPipe } from 'src/app/shared/pipes/convert-duration.pipe';
 import { PriceFilterModule } from 'src/app/shared/components/price-filter/price-filter.module';
+import { DurationFilterModule } from 'src/app/shared/components/duration-filter/duration-filter.module';
+import { NotResultsComponent } from './not-results/not-results.component';
 registerLocaleData(localeEs, "es");
 
 @NgModule({
@@ -31,9 +33,10 @@ registerLocaleData(localeEs, "es");
         DropdownFilterModule,
         NgbPopoverModule,
         NgbTooltipModule,
-        PriceFilterModule
+        PriceFilterModule,
+        DurationFilterModule
     ],
-    declarations:[ResultsSearchPageComponent, FiltersComponent, SortByComponent, MinutesFormatPipe],
+    declarations:[ResultsSearchPageComponent, FiltersComponent, SortByComponent, MinutesFormatPipe, NotResultsComponent],
     exports: [ResultsSearchPageComponent],
     providers: [{ provide: LOCALE_ID, useValue: "es" }],
 })

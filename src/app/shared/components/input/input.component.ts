@@ -29,6 +29,7 @@ export class InputComponent implements OnInit {
 	@Input() isFocus = false;
 	@Input() isCheck = false;
 	@Input() maxLenght = 100;
+	@Input() isPassword = false;
 
 	ngOnInit(): void {
 		//console.log(this.formControl)

@@ -10,6 +10,8 @@ import { ModalErrorComponent } from '../../modal-error/modal-error.component';
 import { dataInitBooking } from 'src/app/shared/constant-init';
 import { LoadingService } from 'src/app/Services/intermediary/loading.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FareBreakDown } from 'src/app/api/api-checkout/models/rq-checkout-up-sell';
+import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 
 @Component({
 	selector: 'app-modal-flight-detail',
@@ -30,7 +32,8 @@ export class ModalFlightDetailComponent implements OnInit {
 		private _modalService: NgbModal,
 		private _searchService: SearchService,
 		private router: Router,
-		private _loadingService: LoadingService
+		private _loadingService: LoadingService,
+		private _checkoutService: CheckoutService,
 	) {
 	}
 
@@ -90,6 +93,7 @@ export class ModalFlightDetailComponent implements OnInit {
 		GlobalComponent.appBooking=dataInitBooking;
 		GlobalComponent.appBooking.segmentSelected=GlobalComponent.segmentSelected;
 		GlobalComponent.appGroupSeleted = this.flight;
+		this._checkoutService.setIsDomestic();
 		GlobalComponent.detailPricing = this.detailPricing;
 		GlobalComponent.upSellGroup = [];
 		GlobalComponent.upSellSeleted = null;

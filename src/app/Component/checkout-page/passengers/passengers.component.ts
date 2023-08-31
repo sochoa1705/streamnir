@@ -47,6 +47,7 @@ export class PassengersComponent implements OnInit {
 	@Output() changeStep = new EventEmitter();
 	formGroup: FormGroup;
 	formBillingGroup: FormGroup;
+	formPoliticsGroup: FormGroup;
 	credentials = localStorage.getItem('usuario');
 
 	formContact = {
@@ -56,12 +57,15 @@ export class PassengersComponent implements OnInit {
 		phones: new FormControl([]),
 		fullPhone: new FormControl('',Validators.required),
 		email:new FormControl('',[Validators.required, Validators.email]),
-		acceptPolitics: new FormControl(false, Validators.requiredTrue),
 		isBilling: new FormControl(false),
 		subCode: new FormControl(0),
 		address: new FormControl(''),
 		idLoggin: new FormControl(Number(this.credentials ? JSON.parse(this.credentials).id : 0)),
 	};
+
+	formPolitics = {
+		acceptPolitics: new FormControl(false, Validators.requiredTrue),
+	}
 
 	formBilling = {
 		ruc: new FormControl(''),
@@ -81,6 +85,7 @@ export class PassengersComponent implements OnInit {
 	) {
 		this.formGroup = new FormGroup(this.formContact);
 		this.formBillingGroup = new FormGroup(this.formBilling);
+		this.formPoliticsGroup = new FormGroup(this.formPolitics);
 		this.initialValues=this.formBillingGroup.value;
 	}
 
@@ -248,7 +253,7 @@ export class PassengersComponent implements OnInit {
 	}
 
 	get acceptPoliticsField(): AbstractControl {
-		return this.formGroup.get('acceptPolitics')!;
+		return this.formPoliticsGroup.get('acceptPolitics')!;
 	}
 
 	get isBillingField(): AbstractControl {

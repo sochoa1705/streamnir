@@ -15,7 +15,7 @@
 .container__page {
 	min-height: calc(100% - 80px);
 	background: white;
-	section {
+	.section {
 		max-width: 1440px;
 		margin: 0 auto;
 		padding: 40px 112px;
@@ -23,6 +23,9 @@
 		column-gap: 24px;
 		grid-template-columns: 312px auto;
 		min-height: 50vh;
+		@media (max-width: 1391px) {
+			padding: 40px 60px;
+		}
 	}
 	&__search {
 		width: 100%;

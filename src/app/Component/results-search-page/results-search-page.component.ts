@@ -23,7 +23,11 @@ interface Filter {
 	arrayAirline: string[];
 	arrayBaggage: string[];
 	arrayScales: string[];
+	minPrice: number;
+	maxPrice: number;
 	isMultiticket: boolean;
+	isPrices: boolean;
+	isDuration: boolean;
 }
 
 interface Order {
@@ -74,6 +78,13 @@ export class ResultsSearchPageComponent implements OnInit {
 	totalMultiticket = 0;
 	sortBy = 0;
 
+	minPrice = 0;
+	maxPrice = 0;
+
+	showError = false;
+	showNotResults = false;
+	titleNotResults = '';
+
 	ngOnInit() {
 		this.getToken();
 		this.dataBagFilter = dataBagFilterInit.map((item) => {
@@ -90,12 +101,16 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	getToken() {
+		this.showNotResults = false;
 		this._tokenService.getAndSaveToken('Chrome').subscribe({
 			next: (response) => {
 				GlobalComponent.tokenMotorVuelo = response.accessToken;
 				GlobalComponent.appReglasVentaAnticipada = response.reglasVentaAnticipada;
 				GlobalComponent.appConfigurations = response.configuraciones;
 				this.getObjectParams();
+			},
+			error: () => {
+				this.showError = true;
 			}
 		});
 	}
@@ -104,6 +119,10 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.route.queryParamMap.subscribe((params) => {
 			const objParams = getParams(params);
 			this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
+			this.titleNotResults =
+				objParams.flightType !== 2
+					? `No encontramos vuelos coincidentes entre ${objParams.departureLocation} y ${objParams.arrivalLocation} para estas fechas.`
+					: `No encontramos vuelos coincidentes para esas fechas.`;
 			if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
 			else this.getAllDataAnterior(objParams);
 		});
@@ -118,12 +137,17 @@ export class ResultsSearchPageComponent implements OnInit {
 					this.getDataFilters(res);
 					if (this._loadingService.requestSearchCount == 9) {
 						this.endsearch();
+						this.showNotResults = this.dataFilterGroups.length == 0 ? true : false;
+						this.minPrice = this.dataFilterGroups[0].detailPricing?.totalPay || 0;
+						this.maxPrice = this.dataFilterGroups[this.dataFilterGroups.length - 1].detailPricing?.totalPay || 0;
+						this.filters.minPrice = this.minPrice;
+						this.filters.maxPrice = this.maxPrice;
 					}
 				}
 				if (!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate = res.exchangeRate;
 			},
 			error: (err) => {
-				console.log(err);
+				this.showError = true;
 			}
 		});
 	}
@@ -134,7 +158,7 @@ export class ResultsSearchPageComponent implements OnInit {
 				console.log(res, 'end Results');
 			},
 			error: (err) => {
-				alert('Error');
+				this.showError = true;
 			}
 		});
 	}
@@ -144,11 +168,20 @@ export class ResultsSearchPageComponent implements OnInit {
 			next: (res) => {
 				this._loadingService.requestSearchCount = 9;
 				this.exchangeRate = res.exchangeRate.amount;
-				this.getDataFilters(res);
 				if (!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate = res.exchangeRate;
+				if (res.groups && res.groups.length > 0) {
+					this.getDataFilters(res);
+					this.minPrice = this.dataFilterGroups[0].detailPricing?.totalPay || 0;
+					this.maxPrice = this.dataFilterGroups[this.dataFilterGroups.length - 1].detailPricing?.totalPay || 0;
+					this.filters.minPrice = this.minPrice;
+					this.filters.maxPrice = this.maxPrice;
+				} else this.showNotResults = true;
 			},
 			error: (err) => {
-				console.log(err, 'err');
+				this.showError = true;
+			},
+			complete: () => {
+				if (this.dataFilterGroups.length == 0) this.showNotResults = true;
 			}
 		});
 	}
@@ -270,28 +303,28 @@ export class ResultsSearchPageComponent implements OnInit {
 				this.dataFilterGroups = [...this.orderByDuration()];
 				break;
 			case 3:
-				this.dataFilterGroups = [...this.orderByDate(true,true,0)];
+				this.dataFilterGroups = [...this.orderByDate(true, true, 0)];
 				break;
 			case 4:
-				this.dataFilterGroups = [...this.orderByDate(false,true,0)];
+				this.dataFilterGroups = [...this.orderByDate(false, true, 0)];
 				break;
 			case 5:
-				this.dataFilterGroups = [...this.orderByDate(true,false,0)];
+				this.dataFilterGroups = [...this.orderByDate(true, false, 0)];
 				break;
 			case 6:
-				this.dataFilterGroups = [...this.orderByDate(false, false,0)];
+				this.dataFilterGroups = [...this.orderByDate(false, false, 0)];
 				break;
 			case 7:
-				this.dataFilterGroups = [...this.orderByDate(true,true,1)];
+				this.dataFilterGroups = [...this.orderByDate(true, true, 1)];
 				break;
 			case 8:
-				this.dataFilterGroups = [...this.orderByDate(false,true,1)];
+				this.dataFilterGroups = [...this.orderByDate(false, true, 1)];
 				break;
 			case 9:
-				this.dataFilterGroups = [...this.orderByDate(true,false,1)];
+				this.dataFilterGroups = [...this.orderByDate(true, false, 1)];
 				break;
 			default:
-				this.dataFilterGroups = [...this.orderByDate(false,false,1)];
+				this.dataFilterGroups = [...this.orderByDate(false, false, 1)];
 				break;
 		}
 		this.dataGroupsPaginate = [...this.dataFilterGroups.slice(0, 8)];
@@ -299,43 +332,45 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.getValuesTabsSort();
 	}
 
-	orderByDate(isEarly:boolean, isStartDate:boolean, index:number){
+	orderByDate(isEarly: boolean, isStartDate: boolean, index: number) {
 		const dataFilter = [...this.dataFilterGroups];
-		if(isEarly && isStartDate){ //salida  temprano x fecha inicio
+		if (isEarly && isStartDate) {
+			//salida  temprano x fecha inicio
 			return dataFilter.slice().sort((a, b) => {
-				if(a.dateOrder && b.dateOrder) return a.dateOrder[index].dateEarlyDep - b.dateOrder[index].dateEarlyDep;
+				if (a.dateOrder && b.dateOrder) return a.dateOrder[index].dateEarlyDep - b.dateOrder[index].dateEarlyDep;
 				if (!a.dateOrder) return 1;
 				if (!b.dateOrder) return -1;
 				return 0;
-			})
+			});
 		}
 
-		if(!isEarly && isStartDate){ //salida tarde x fecha inicio
+		if (!isEarly && isStartDate) {
+			//salida tarde x fecha inicio
 			return dataFilter.slice().sort((a, b) => {
-				if(a.dateOrder && b.dateOrder) return b.dateOrder[index].dateLaterDep - a.dateOrder[index].dateLaterDep;
+				if (a.dateOrder && b.dateOrder) return b.dateOrder[index].dateLaterDep - a.dateOrder[index].dateLaterDep;
 				if (!a.dateOrder) return 1;
 				if (!b.dateOrder) return -1;
 				return 0;
-			})
+			});
 		}
 
-		if(isEarly && !isStartDate){ //llegada  temprano x fecha fin
+		if (isEarly && !isStartDate) {
+			//llegada  temprano x fecha fin
 			return dataFilter.slice().sort((a, b) => {
-				if(a.dateOrder && b.dateOrder) return a.dateOrder[index].dateEarlyArr - b.dateOrder[index].dateEarlyArr;
+				if (a.dateOrder && b.dateOrder) return a.dateOrder[index].dateEarlyArr - b.dateOrder[index].dateEarlyArr;
 				if (!a.dateOrder) return 1;
 				if (!b.dateOrder) return -1;
 				return 0;
-			})
+			});
 		}
 
-		 //llegada  tarde x fecha fin
+		//llegada  tarde x fecha fin
 		return dataFilter.slice().sort((a, b) => {
-				if(a.dateOrder && b.dateOrder) return b.dateOrder[index].dateLaterArr - a.dateOrder[index].dateLaterArr;
-				if (!a.dateOrder) return 1;
-				if (!b.dateOrder) return -1;
-				return 0;
-		})
-		
+			if (a.dateOrder && b.dateOrder) return b.dateOrder[index].dateLaterArr - a.dateOrder[index].dateLaterArr;
+			if (!a.dateOrder) return 1;
+			if (!b.dateOrder) return -1;
+			return 0;
+		});
 	}
 
 	getValuesTabsSort() {
@@ -407,10 +442,11 @@ export class ResultsSearchPageComponent implements OnInit {
 					: true) &&
 				(this.filters.arrayScales.includes('isDirect') ? item.isDirect : true) &&
 				(this.filters.arrayScales.includes('isOneScale') ? item.isOneScale : true) &&
-				(this.filters.arrayScales.includes('isMultiScale') ? item.isMultiScale : true)
+				(this.filters.arrayScales.includes('isMultiScale') ? item.isMultiScale : true) &&
+				(item.detailPricing?.totalPay || 0) >= this.filters.minPrice &&
+				(item.detailPricing?.totalPay || 0) <= this.filters.maxPrice
 		);
 		this.dataFilterGroups = [...dataFilter];
-		console.log(this.dataFilterGroups);
 		this.indexPaginate = 8;
 		this.sortData();
 	}
@@ -480,10 +516,41 @@ export class ResultsSearchPageComponent implements OnInit {
 
 	showMoreResults() {
 		this.indexPaginate = this.indexPaginate + 8;
+		console.log('qqq pso')
 		this.dataGroupsPaginate = [
 			...this.dataGroupsPaginate,
 			...this.dataFilterGroups.slice(this.dataGroupsPaginate.length, this.indexPaginate)
 		];
+	}
+
+	filterByPrice($event: any) {
+		this.filters.minPrice = $event.value;
+		this.filters.maxPrice = $event.highValue;
+		this.filters.isPrices = this.filters.minPrice !== this.minPrice || this.filters.maxPrice !== this.maxPrice;
+		this.applyFilters();
+	}
+	cleanFilters($event: Filter) {
+		this.filters = $event;
+		if (!this.filters.isPrices) {
+			this.filters.minPrice = this.minPrice;
+			this.filters.maxPrice = this.maxPrice;
+		}
+		if (this.filters.arrayBaggage.length == 0)
+			this.dataBagFilter = this.dataBagFilter.map((item) => {
+				item.active = false;
+				return item;
+			});
+		if (this.filters.arrayScales.length == 0)
+			this.dataScaleFilter = this.dataScaleFilter.map((item) => {
+				item.active = false;
+				return item;
+			});
+		if (this.filters.arrayAirline.length == 0)
+			this.dataAirlines = this.dataAirlines.map((item) => {
+				item.active = false;
+				return item;
+			});
+		this.applyFilters();
 	}
 	clickTabSort($event: any) {
 		this.sortBy = $event;

@@ -6,7 +6,10 @@ export interface IUpSell {
   modifyPriceBrandSelected: boolean
   fareBreakDowns: FareBreakDown[]
   fareFamilySegment: FareFamilySegment[]
-  informationServices: InformationService[]
+  informationServices: InformationService[],
+  dataBags?:InformationService[],
+  dataExtras?:InformationService[],
+  totalPay?:number
 }
 
 export interface FareBreakDown {
@@ -57,6 +60,7 @@ export interface InformationService {
   itsInclude: boolean
   itsSubjectToCharges: boolean
   description: string
+  isBag?:boolean
 }
 
 

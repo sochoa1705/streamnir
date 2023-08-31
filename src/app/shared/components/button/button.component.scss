@@ -51,6 +51,15 @@
 		}
 	}
 
+	&.dark{
+		background: colors.$gris-800;
+		color: white;
+		&:hover {
+			background: colors.$gris-900;
+			color: white;
+		}
+	}
+
 	&.outline-primary {
 		font-weight: 500;
 		border: 1px solid colors.$red-500;

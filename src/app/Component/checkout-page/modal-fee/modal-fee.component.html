@@ -19,12 +19,28 @@
 							<span>{{item.description | titlecase}}</span>
 						</div>
 						<div class="modal__contend__body__card__options">
-							<ng-container *ngFor="let service of item.informationServices">
-								<div class="modal__contend__body__card__options__check" *ngIf="service.itsInclude">
-									<img src="./assets/svg/check-blue.svg" alt="v" />
-									<span>{{service.description}}</span>
+							<span class="modal__contend__body__card__options__title"> {{isDomestic?'Equipaje':'Baggage'}} </span>
+								<ng-container *ngFor="let bag of item.dataBags">
+									<div class="modal__contend__body__card__options__check">
+										<img src="./assets/svg/check-blue.svg" alt="v" />
+										<span>{{bag.description}}</span>
+									</div>
+								</ng-container>
+								<div class="modal__contend__body__card__options__check" *ngIf="item.dataBags?.length==0">
+									<img src="./assets/svg/cross.svg" alt="v" />
+									<span class="muted">{{isDomestic?'No incluye equipaje':'No baggages allowed'}}</span>
 								</div>
-							</ng-container>
+								<span class="modal__contend__body__card__options__title"> Extras </span>
+								<ng-container *ngFor="let extra of item.dataExtras">
+									<div class="modal__contend__body__card__options__check">
+										<img src="./assets/svg/check-blue.svg" alt="v" />
+										<span>{{extra.description}}</span>
+									</div>
+								</ng-container>
+								<div class="modal__contend__body__card__options__check" *ngIf="item.dataExtras?.length==0">
+									<img src="./assets/svg/cross.svg" alt="v" />
+									<span class="muted">{{isDomestic?'No incluye servicios extras':'No extras allowed'}}</span>
+								</div>
 						</div>
 					</div>
 				</section>
@@ -48,19 +64,35 @@
 								<span>{{item.description | titlecase}}</span>
 							</div>
 							<div class="modal__contend__body__card__options">
-								<ng-container *ngFor="let service of item.informationServices">
-									<div class="modal__contend__body__card__options__check" *ngIf="service.itsInclude">
+								<span class="modal__contend__body__card__options__title"> {{isDomestic?'Equipaje':'Baggage'}} </span>
+								<ng-container *ngFor="let bag of item.dataBags">
+									<div class="modal__contend__body__card__options__check">
 										<img src="./assets/svg/check-blue.svg" alt="v" />
-										<span>{{service.description}}</span>
+										<span>{{bag.description}}</span>
 									</div>
 								</ng-container>
+								<div class="modal__contend__body__card__options__check" *ngIf="item.dataBags?.length==0">
+									<img src="./assets/svg/cross.svg" alt="v" />
+									<span class="muted">No baggages allowed</span>
+								</div>
+								<span class="modal__contend__body__card__options__title"> Extras </span>
+								<ng-container *ngFor="let extra of item.dataExtras">
+									<div class="modal__contend__body__card__options__check">
+										<img src="./assets/svg/check-blue.svg" alt="v" />
+										<span>{{extra.description}}</span>
+									</div>
+								</ng-container>
+								<div class="modal__contend__body__card__options__check" *ngIf="item.dataExtras?.length==0">
+									<img src="./assets/svg/cross.svg" alt="v" />
+									<span class="muted">No extras allowed</span>
+								</div>
 							</div>
 						</div>
 					</section>
 					<!--[disabled]="indexCardSelect==i"-->
 					<div class="modal__contend__body__card__price">
 						<section>
-							<h5>US$ {{getTotalByUpSell(item.fareBreakDowns) | number : '1.2-2'}}</h5>
+							<h5>US$ {{item.totalPay | number : '1.2-2'}}</h5>
 							<span>{{pricingDetail.passengersCount > 1 ? 'Por los '+pricingDetail.passengersCount+' pasajeros':'Por un pasajero'}} </span>
 						</section>
 						<app-button (onClick)="clickSelectUpSell(item)" [text]="'Seleccionar'"></app-button>

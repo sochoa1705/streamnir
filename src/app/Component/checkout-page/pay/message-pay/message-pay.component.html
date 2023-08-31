@@ -5,8 +5,11 @@
 				<div class="container__page__section__message">
 					<h3 class="container__page__section__message__title">¡Todo listo para tu vuelo!</h3>
 					<img src="./assets/checkout/success_booking.svg" alt="" />
-					<span class="container__page__section__message__description"
+					<span class="container__page__section__message__description" *ngIf="isPayCard"
 						>Su solicitud de compra ha sido procesada con éxito. N° de orden: <strong>{{transactionId}}</strong></span
+					>
+					<span class="container__page__section__message__description" *ngIf="!isPayCard"
+						>Se ha completado la reserva y estamos a la espera del pago para completar tu compra</span
 					>
 				</div>
 			</app-card-checkout>
@@ -64,8 +67,8 @@
 
 		<article *ngIf="dataPassengers.length > 0">
 			<h4>Datos del pasajero</h4>
-			<app-card-checkout>
-				<div class="container__page__section__row" *ngFor="let item of dataPassengers">
+			<app-card-checkout *ngFor="let item of dataPassengers">
+				<div class="container__page__section__row">
 					<div class="container__page__section__row__colum">
 						<img src="./assets/checkout/pay/user.svg" />
 						<span class="item">Nombres y apellidos</span>
@@ -78,8 +81,8 @@
 							item.documentType == 0
 								? 'DNI '
 								: item.documentType == 1
-								? 'C. EXTRANJERIA '
-								: 'PASAPORTE ' + item.documentNumber
+								? 'CE '
+								: 'PAS ' + item.documentNumber
 						}}</span>
 					</div>
 					<div class="container__page__section__row__colum">
@@ -97,7 +100,7 @@
 						<span class="item">Género</span>
 						<span class="info">{{ item.gender == 'M' ? 'Masculino' : 'Femenino' }}</span>
 					</div>
-					<div class="container__page__section__row__colum">
+					<div class="container__page__section__row__colum" *ngIf="item.email!==''">
 						<img src="./assets/checkout/pay/email.svg" />
 						<span class="item">Correo</span>
 						<span class="info">{{ item.email }}</span>
@@ -107,7 +110,7 @@
 		</article>
 
 		<article *ngIf="dataContact.name !== ''">
-			<h4>Contacto de emergencia</h4>
+			<h4>Envío de información de vuelo</h4>
 			<app-card-checkout>
 				<div class="container__page__section__row">
 					<div class="container__page__section__row__colum">
@@ -123,6 +126,11 @@
 						<span class="info">{{
 							'+' + dataContact.phones[0].countryCode + ' ' + dataContact.phones[0].phoneNumber
 						}}</span>
+					</div>
+					<div class="container__page__section__row__colum">
+						<img src="./assets/checkout/pay/email.svg" />
+						<span class="item">Correo</span>
+						<span class="info">{{ dataContact.email}}</span>
 					</div>
 				</div>
 			</app-card-checkout>

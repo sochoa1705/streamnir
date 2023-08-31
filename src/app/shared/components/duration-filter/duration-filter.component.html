@@ -1,1 +1,51 @@
-<p>duration-filter works!</p>
+<div class="dropdown__filter">
+	<div class="dropdown__filter__header" (click)="dropdownActive = !dropdownActive">
+		<h4>Duración</h4>
+		<img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
+	</div>
+	<div class="dropdown__filter__body" *ngIf="dropdownActive">
+		<span class="dropdown__filter__body__reset" (click)="resetFilter()">Restablecer</span>
+		<div class="dropdown__filter__body__actions">
+			<app-button
+				[text]="'Salida'"
+				[color]="isFilterDeparture ? 'primary' : 'outline-primary'"
+				(onClick)="changeFilterDuration()"
+			></app-button>
+			<app-button
+				[text]="'Regreso'"
+				[color]="!isFilterDeparture ? 'primary' : 'outline-primary'"
+				(onClick)="changeFilterDuration()"
+			></app-button>
+		</div>
+		<section>
+			<span class="dropdown__filter__body__name">Salida a LAX</span>
+			<div class="dropdown__filter__body__slider">
+				<ng5-slider
+					[(value)]="value"
+					[(highValue)]="highValue"
+					[options]="options"
+					(userChangeEnd)="filterDuration($event)"
+				></ng5-slider>
+			</div>
+			<div class="dropdown__filter__body__values">
+				<span>1h 20m</span>
+				<span>15h 26m</span>
+			</div>
+		</section>
+		<section class="section-scale">
+			<span class="dropdown__filter__body__name">Escala</span>
+			<div class="dropdown__filter__body__slider">
+				<ng5-slider
+					[(value)]="valueScale"
+					[(highValue)]="highValueScale"
+					[options]="optionsScale"
+					(userChangeEnd)="filterScale($event)"
+				></ng5-slider>
+			</div>
+			<div class="dropdown__filter__body__values">
+				<span>1h 20m</span>
+				<span>15h 26m</span>
+			</div>
+		</section>
+	</div>
+</div>
