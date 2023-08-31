@@ -35,14 +35,6 @@
       </defs>
     </svg>
   </span>
-  <span class="spacer"></span>
-  <ul class="d-none d-sm-none d-md-none d-md-block d-lg-block">
-    <li *ngFor="let m of menu" [ngClass]="m.footer ? 'd-none' : ''">
-      <a routerLinkActive="active" [routerLink]="[m.link]" *ngIf="!m.footer && !m.external">{{ m.text }}</a>
-      <a routerLinkActive="active" (click)="redirect(m.link)" *ngIf="!m.footer && m.external">{{ m.text }}</a>
-    </li>
-  </ul>
-  <span class="spacer  border border-bottom-0 border-top-0 border-start-0 h-50"></span>
 
 <span class="spacer" *ngIf="isShowMenu"></span>
 <ul class="d-none d-sm-none d-md-none d-md-block d-lg-block">

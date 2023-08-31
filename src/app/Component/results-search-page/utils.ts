@@ -46,5 +46,9 @@ export const dataFiltersInit = {
 	arrayAirline:[],
 	arrayBaggage:[],
 	arrayScales:[],
+	minPrice:0,
+	maxPrice:0,
 	isMultiticket:false,
+	isPrices:false,
+    isDuration:false
 }

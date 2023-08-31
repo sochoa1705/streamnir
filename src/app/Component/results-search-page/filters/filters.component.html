@@ -47,6 +47,13 @@
 		(clickedOption)="clickedOption($event, 'airlines')"
 		(selectedAirlines)="selectedAirlines($event)"
 	></app-dropdown-filter>
-	<app-price-filter></app-price-filter>
+	<app-price-filter
+		[minPrice]="minPrice"
+		[maxPrice]="maxPrice"
+		[currency]="currency"
+		(filterPriceRange)="filterPriceRange($event)"
+	></app-price-filter>
+	<app-duration-filter>
+	</app-duration-filter>
 	<div></div>
 </form>

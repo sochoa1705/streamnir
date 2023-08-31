@@ -45,19 +45,6 @@
 		</div>
 
 		<form [formGroup]="formGroup" autocomplete="off">
-			<div class="container__page__section__check">
-				<app-input-check
-					[label]="'He leído y aceptado la'"
-					[name]="'acceptPolitics'"
-					[textLink]="'política de protección de datos personales.'"
-					[url]="'/politicas-de-privacidad'"
-					[labelError]="
-						acceptPoliticsField.touched && acceptPoliticsField!.invalid
-							? 'Favor de aceptar la política de protección de datos personales.'
-							: ''
-					"
-				></app-input-check>
-			</div>
 			<div class="container__page__section__contact">
 				<div class="container__page__section__title">
 					<div class="container__page__section__title__primary">
@@ -230,9 +217,24 @@
 				</div>
 			</app-card-checkout>
 		</form>
+		<form [formGroup]="formPoliticsGroup" autocomplete="off">
+			<div class="container__page__section__check">
+				<app-input-check
+					[label]="'He leído y aceptado la'"
+					[name]="'acceptPolitics'"
+					[textLink]="'política de protección de datos personales.'"
+					[url]="'/politicas-de-privacidad'"
+					[labelError]="
+						acceptPoliticsField.touched && acceptPoliticsField!.invalid
+							? 'Favor de aceptar la política de protección de datos personales.'
+							: ''
+					"
+				></app-input-check>
+			</div>
+		</form>
 		<div class="container__page__section__button">
 			<app-button
-				[disabled]="dataStatusCards.includes(false) || !formGroup.valid || !formBillingGroup.valid"
+				[disabled]="dataStatusCards.includes(false) || !formGroup.valid || !formBillingGroup.valid || !formPoliticsGroup.valid"
 				[text]="'Continuar a pagar'"
 				[color]="'primary'"
 				(onClick)="setInfoPassengersInformation()"
