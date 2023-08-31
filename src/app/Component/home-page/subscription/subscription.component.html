@@ -3,15 +3,12 @@
 	<img src="assets/subscription-mobile-banner.webp" alt="Banner mobile" class="img-fluid vw-100" *ngIf="isMobile">
 	<div class="card form-card border-0 mx-3 my-lg-auto me-lg-auto ms-lg-4 ms-xl-5">
 		<div class="card-body">
-			<h1 class="my-lg-3 mb-xl-4 text-center">
+			<h1 class="mt-lg-2 mb-lg-3 text-center">
 				<strong>¡Suscr&iacute;bete y recibe las mejores<br>ofertas para tu pr&oacute;ximo viaje!</strong>
 			</h1>
-			<form novalidate
-			      class="row g-3 g-xl-4 mx-lg-3 mx-xl-4 pb-lg-1 pb-xl-2"
-			      [formGroup]="form"
-			      (ngSubmit)="onSubmit()">
+			<form novalidate class="row g-2 g-lg-3 mx-md-2 mx-xl-3 pb-lg-1" [formGroup]="form" (ngSubmit)="onSubmit()">
 				<div class="col-12 col-md-6">
-					<label for="name" class="form-label">Nombre</label>
+					<label for="name" class="form-label x-small">Nombre</label>
 					<input type="text"
 					       id="name"
 					       class="form-control"
@@ -20,7 +17,7 @@
 					       [class.is-invalid]="name.invalid && (name.touched || submitAttempt)">
 				</div>
 				<div class="col-12 col-md-6">
-					<label for="email" class="form-label">Correo</label>
+					<label for="email" class="form-label x-small">Correo</label>
 					<input type="email"
 					       id="email"
 					       class="form-control"
@@ -28,7 +25,7 @@
 					       [class.is-invalid]="email.invalid && (email.touched || submitAttempt)">
 				</div>
 				<div class="col-12">
-					<label for="destination" class="form-label">¿A d&oacute;nde quieres viajar?</label>
+					<label for="destination" class="form-label x-small">¿A d&oacute;nde quieres viajar?</label>
 					<select id="destination"
 					        class="form-select"
 					        formControlName="destination"
@@ -46,9 +43,9 @@
 					<div class="row">
 						<div class="col-12">
 							<mat-checkbox formControlName="privacyPolicy">
-								<span class="small fw-normal text-wrap lh-sm">
+								<span class="x-small fw-normal text-wrap lh-sm">
 									He le&iacute;do y acepto la Pol&iacute;tica de Privacidad.
-									<a href="https://www.nmviajes.com/politicas" target="_blank" class="small">
+									<a href="https://www.nmviajes.com/politicas" target="_blank" class="x-small">
 										Leer Pol&iacute;tica de Privacidad.
 									</a>
 								</span>
@@ -60,7 +57,7 @@
 						<div class="col-12">
 							<div class="col-12 mt-lg-1">
 								<mat-checkbox formControlName="dataPolicy">
-									<span class="small fw-normal text-wrap">Acepto el tratamiento de mis datos personales.</span>
+									<span class="x-small fw-normal text-wrap">Acepto el tratamiento de mis datos personales.</span>
 								</mat-checkbox>
 							</div>
 						</div>
@@ -76,36 +73,38 @@
 <section class="container mt-5 text-center">
 	<h2 class="fw-bold text-dark mb-4 mb-lg-5">S&eacute; el primero en enterarte de nuestras promociones exclusivas
 		en:</h2>
-	<div class="row gy-4 gy-lg-0">
-		<div class="col-10 col-md-6 col-lg-3 mx-auto">
-			<div class="card w-100">
-				<div class="card-body text-center">
-					<img src="assets/svg/paquetes-turisticos.svg" alt="Paquetes tur&iacute;sticos" class="mx-auto mt-2">
-					<h5 class="fs-5 mt-2 mt-lg-3"><strong>Paquetes tu&iacute;sticos</strong></h5>
+	<div class="row gy-4 gy-lg-0 gx-lg-4 gx-xl-5 mx-lg-4 mx-xl-5">
+		<div class="col-9 col-sm-8 col-md-6 col-lg-3 mx-auto">
+			<div class="card w-100 h-100">
+				<div class="card-body text-center d-lg-inline-flex flex-column">
+					<img src="assets/svg/paquetes-turisticos.svg"
+					     alt="Paquetes tur&iacute;sticos"
+					     class="card-img-top mt-2 mx-auto">
+					<h5 class="fs-6 mt-3"><strong>Paquetes tu&iacute;sticos</strong></h5>
 				</div>
 			</div>
 		</div>
-		<div class="col-10 col-md-6 col-lg-3 mx-auto">
-			<div class="card w-100">
-				<div class="card-body text-center">
-					<img src="assets/svg/vuelos.svg" alt="Vuelos" class="mx-auto mt-2">
-					<h5 class="fs-5 mt-2 mt-lg-3"><strong>Vuelos</strong></h5>
+		<div class="col-9 col-sm-8 col-md-6 col-lg-3 mx-auto">
+			<div class="card w-100 h-100">
+				<div class="card-body text-center d-lg-inline-flex flex-column">
+					<img src="assets/svg/vuelos.svg" alt="Vuelos" class="card-img-top mt-2 mx-auto">
+					<h5 class="fs-6 mt-3"><strong>Vuelos</strong></h5>
 				</div>
 			</div>
 		</div>
-		<div class="col-10 col-md-6 col-lg-3 mx-auto">
-			<div class="card w-100">
-				<div class="card-body text-center">
-					<img src="assets/svg/hoteles.svg" alt="Hoteles" class="mx-auto mt-2">
-					<h5 class="fs-5 mt-2 mt-lg-3"><strong>Hoteles</strong></h5>
+		<div class="col-9 col-sm-8 col-md-6 col-lg-3 mx-auto">
+			<div class="card w-100 h-100">
+				<div class="card-body text-center d-lg-inline-flex flex-column">
+					<img src="assets/svg/hoteles.svg" alt="Hoteles" class="card-img-top mt-2 mx-auto">
+					<h5 class="fs-6 mt-3"><strong>Hoteles</strong></h5>
 				</div>
 			</div>
 		</div>
-		<div class="col-10 col-md-6 col-lg-3 mx-auto">
-			<div class="card w-100">
-				<div class="card-body text-center">
-					<img src="assets/svg/actividades.svg" alt="Actividades" class="mx-auto mt-2">
-					<h5 class="fs-5 mt-2 mt-lg-3"><strong>Actividades</strong></h5>
+		<div class="col-9 col-sm-8 col-md-6 col-lg-3 mx-auto">
+			<div class="card w-100 h-100">
+				<div class="card-body text-center d-lg-inline-flex flex-column">
+					<img src="assets/svg/actividades.svg" alt="Actividades" class="card-img-top mt-2 mx-auto">
+					<h5 class="fs-6 mt-3"><strong>Actividades y m&aacute;s</strong></h5>
 				</div>
 			</div>
 		</div>
