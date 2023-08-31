@@ -5,6 +5,7 @@ import { MailingService } from '../../../Services/mailing/mailing.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-subscription',
@@ -24,7 +25,8 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
 	constructor(private formBuilder: FormBuilder,
 	            private mailingService: MailingService,
 	            private modalService: NgbModal,
-	            private media: MediaMatcher) {
+	            private media: MediaMatcher,
+	            public _snackBar: MatSnackBar) {
 		this.checkMobileQuery();
 	}
 
@@ -34,7 +36,7 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
 			'email': new FormControl('', Validators.compose([ Validators.required, Validators.email ])),
 			'destination': new FormControl('', Validators.required),
 			'privacyPolicy': new FormControl(false, Validators.requiredTrue),
-			'dataPolicy': new FormControl(false, Validators.nullValidator)
+			'dataPolicy': new FormControl(false, Validators.requiredTrue)
 		});
 	}
 
@@ -66,7 +68,13 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
 						this.modalSubscription = modalRef.dismissed.subscribe(() => this.form.reset());
 					}
 				},
-				error: () => this.isLoading = false,
+				error: (error: any) => {
+					if (error && error.error && error.error.code === 'duplicate_parameter')
+						this._snackBar.open('El correo ingresado ya fue registrado', 'Entendido', {
+							duration: 5000
+						});
+					this.isLoading = false;
+				},
 				complete: () => this.isLoading = false
 			});
 			this.submitAttempt = false;

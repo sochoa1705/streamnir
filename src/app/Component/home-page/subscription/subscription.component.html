@@ -59,6 +59,9 @@
 								<mat-checkbox formControlName="dataPolicy">
 									<span class="x-small fw-normal text-wrap">Acepto el tratamiento de mis datos personales.</span>
 								</mat-checkbox>
+								<p class="text-danger small" *ngIf="dataPolicy.invalid && submitAttempt">
+									Debes aceptar el tratamiento de tus datos personales.
+								</p>
 							</div>
 						</div>
 					</div>
