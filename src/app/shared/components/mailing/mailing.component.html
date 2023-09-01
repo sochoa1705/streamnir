@@ -40,8 +40,12 @@
         <div class="container">
           <div class="row">
             <div class="col-12 col-md-4 offset-0 offset-md-1 input-group-lg px-0  text-start">
-              <input class="form-control" formControlName="nombreMail" placeholder="Ingrese su nombre" type="text"
-                (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+              <input class="form-control"
+                     formControlName="nombreMail"
+                     placeholder="Ingrese su nombre"
+                     type="text"
+                     maxlength="100"
+                     (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
               <span class="valid" *ngIf="getMessage(MSG_NOMBRE) !== MSG_EMPTY">{{ getMessage(MSG_NOMBRE)
                 }}</span>
             </div>
