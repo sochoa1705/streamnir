@@ -33,6 +33,7 @@ export class GlobalComponent {
     public static isDomestic=false;
     public static discountCampaing:RDiscount | null = null;
     public static listCountries:ICountry[]=[];
+    public static classFligh='Economy'
     //public static discountCupon:
   }
 

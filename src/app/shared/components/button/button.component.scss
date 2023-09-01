@@ -11,7 +11,7 @@
 	align-items: center;
 	font-family: Montserrat;
 	font-size: 16px;
-	font-weight: 600;
+	font-weight: 600 !important;
 	line-height: 24px;
 	height: 48px !important;
 	letter-spacing: 0em;
@@ -101,7 +101,7 @@
 
 	&.link-secondary {
 		font-weight: 500;
-		color: colors.$blue-500;
+		color: colors.$blue-500 !important;
 		padding: 0px;
 
 		&:hover {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { data_insurance } from './utils';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalFeeComponent } from '../modal-fee/modal-fee.component';
@@ -9,6 +9,10 @@ import { GlobalComponent } from 'src/app/shared/global';
 import { dataSteps } from 'src/app/shared/constant-init';
 import { ModalInsuranceComponent } from './modal-insurance/modal-insurance.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import SwiperCore, { Pagination, Navigation, SwiperOptions } from 'swiper';
+import { SwiperComponent } from 'swiper/angular';
+
+SwiperCore.use([Pagination, Navigation]);
 
 @Component({
 	selector: 'app-baggage-insurance',
@@ -31,11 +35,16 @@ export class BaggageInsuranceComponent implements OnInit {
 	showSecure = true;
 
 	detailFlight: Group;
+	activeArrowLeft = false;
+	activeArrowRight = true;
 
 	listBenefitsUpSellSelect: InformationService[] = [];
 	@Output() changeStep = new EventEmitter();
 	modalDialogRef: MatDialogRef<ModalInsuranceComponent>;
 	isDomestic=false;
+
+	indexDepartureSlider=0;
+
 
 	ngOnInit() {
 		//es para ver si mostrar el button de ampliar beneficios
@@ -93,5 +102,13 @@ export class BaggageInsuranceComponent implements OnInit {
 		dataSteps[1].active = true;
 		this.changeStep.emit(1);
 		window.scroll({ top: 0, behavior: 'smooth' });
+	}
+
+	prevSlider(){
+
+	}
+
+	nextSlider(){
+		
 	}
 }

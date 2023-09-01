@@ -35,8 +35,8 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       tap((resp) => this.getErrorHttp200(resp, req)),
       catchError((error) => {
-        this.getErrorHttpResponse(error, req);
-        return throwError(error.message);
+        //this.getErrorHttpResponse(error, req);
+        return throwError(error.error);
       })
     );
   }

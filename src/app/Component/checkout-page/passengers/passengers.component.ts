@@ -9,6 +9,11 @@ import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-
 import { GlobalComponent } from 'src/app/shared/global';
 import { dataSteps } from 'src/app/shared/constant-init';
 import { AccountsService } from 'src/app/Services/accounts.service';
+import { IValidateBooking, RValidateBooking } from 'src/app/api/api-checkout/models/rq-checkout-validate-booking';
+import { getBodyValidateBooking } from 'src/app/shared/utils/bodyValidateBooking';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
+import { ModalValidateComponent } from './modal-validate/modal-validate.component';
 interface Item {
 	value: any;
 	name: string;
@@ -31,7 +36,7 @@ export class PassengersComponent implements OnInit {
 	totalPassenger = 0;
 	dataPassengers: Passenger[] = [];
 	dataStatusCards: boolean[] = [];
-	
+
 	separateDialCode = true;
 	SearchCountryField = SearchCountryField;
 	CountryISO = CountryISO;
@@ -51,42 +56,44 @@ export class PassengersComponent implements OnInit {
 	credentials = localStorage.getItem('usuario');
 
 	formContact = {
-		name: new FormControl('',Validators.required),
-		lastName: new FormControl('',Validators.required),
-		motherLastname: new FormControl('',Validators.required),
+		name: new FormControl('', Validators.required),
+		lastName: new FormControl('', Validators.required),
+		motherLastname: new FormControl('', Validators.required),
 		phones: new FormControl([]),
-		fullPhone: new FormControl('',Validators.required),
-		email:new FormControl('',[Validators.required, Validators.email]),
+		fullPhone: new FormControl('', Validators.required),
+		email: new FormControl('', [Validators.required, Validators.email]),
 		isBilling: new FormControl(false),
 		subCode: new FormControl(0),
 		address: new FormControl(''),
-		idLoggin: new FormControl(Number(this.credentials ? JSON.parse(this.credentials).id : 0)),
+		idLoggin: new FormControl(Number(this.credentials ? JSON.parse(this.credentials).id : 0))
 	};
 
 	formPolitics = {
-		acceptPolitics: new FormControl(false, Validators.requiredTrue),
-	}
+		acceptPolitics: new FormControl(false, Validators.requiredTrue)
+	};
 
 	formBilling = {
 		ruc: new FormControl(''),
 		company: new FormControl(''),
 		companyName: new FormControl(''),
-		companyAddress:new FormControl(''),
+		companyAddress: new FormControl('')
 	};
 
-	initialValues:any;
+	initialValues: any;
+	errorDefault = 'Al parecer hubo un error al validar su itinerario, por favor intentelo nuevamente';
 
 	@ViewChildren(CardPassengerComponent) passengersComponent: QueryList<CardPassengerComponent>;
 
 	constructor(
 		private _contryService: ContryService,
 		private _checkoutService: CheckoutService,
-		private _accountService:AccountsService
+		private _accountService: AccountsService,
+		private _modalService: NgbModal
 	) {
 		this.formGroup = new FormGroup(this.formContact);
 		this.formBillingGroup = new FormGroup(this.formBilling);
 		this.formPoliticsGroup = new FormGroup(this.formPolitics);
-		this.initialValues=this.formBillingGroup.value;
+		this.initialValues = this.formBillingGroup.value;
 	}
 
 	ngOnInit() {
@@ -97,9 +104,8 @@ export class PassengersComponent implements OnInit {
 		this.totalINF = GlobalComponent.detailPricing.totalINF;
 		this.totalPassenger = GlobalComponent.detailPricing.passengersCount;
 		this.setIndexValidCard();
-		const userStorage=this._accountService.getUserStorage();
-		if(userStorage.email) this.getDataContact(userStorage.email);
-		
+		const userStorage = this._accountService.getUserStorage();
+		if (userStorage.email) this.getDataContact(userStorage.email);
 	}
 
 	setArrayDate() {
@@ -108,13 +114,13 @@ export class PassengersComponent implements OnInit {
 			let yearMin = new Date().getFullYear() - (index == 0 ? 100 : index == 1 ? 11 : 2);
 			let yearMax = new Date().getFullYear() - (index == 0 ? 12 : index == 1 ? 2 : 0);
 
-			for (let i = yearMin; i <= yearMax; i++) {
+			for (let i = yearMax ; i >= yearMin; i--) {
 				if (index == 0) this.arrayYearsADT.push({ name: i.toString(), value: i });
 				if (index == 1) this.arrayYearsCNN.push({ name: i.toString(), value: i });
 				if (index == 2) this.arrayYearsINF.push({ name: i.toString(), value: i });
 			}
 		}
-		this.arrayDays = days.map((item) => {
+		this.arrayDays = days.map((item:any) => {
 			return { name: item.toString(), value: item };
 		});
 	}
@@ -122,7 +128,7 @@ export class PassengersComponent implements OnInit {
 	getContryList() {
 		this._contryService.getContryList().subscribe({
 			next: (res) => {
-				GlobalComponent.listCountries=res;
+				GlobalComponent.listCountries = res;
 				this.contryList = res.map((obj) => {
 					return { value: obj.code, name: obj.name };
 				});
@@ -137,14 +143,14 @@ export class PassengersComponent implements OnInit {
 		return new Array(length);
 	}
 
-	getDataContact(email:string){
+	getDataContact(email: string) {
 		this._checkoutService.getDataContactByLogin(email).subscribe({
-			next:(res)=>{
+			next: (res) => {
 				this.nameField.setValue(res.result?.firstname || '');
 				this.lastNameField.setValue(res.result?.fatherLastname || '');
 				this.emailField.setValue(res.result?.email || '');
 			}
-		})
+		});
 	}
 
 	changeToogle($event: any) {
@@ -186,13 +192,13 @@ export class PassengersComponent implements OnInit {
 
 		if (this.formGroup.valid && isValidCards) {
 			this.companyField.setValue({
-				companyName:this.companyNameField.value,
-				companyAddress:this.companyAddressField.value
-			})
-			if (this.fullPhoneField.value !== '' ) {
+				companyName: this.companyNameField.value,
+				companyAddress: this.companyAddressField.value
+			});
+			if (this.fullPhoneField.value !== '') {
 				const phoneNumber = [
 					{
-						type: "2",
+						type: '2',
 						phoneNumber: this.fullPhoneField.value.number.replace(/\s+/g, ''),
 						areaCode: '01',
 						countryCode: this.fullPhoneField.value.dialCode.slice(1)
@@ -200,7 +206,7 @@ export class PassengersComponent implements OnInit {
 				];
 				this.phonesField.setValue(phoneNumber);
 			}
-			const dataContact = {...this.formGroup.value, ...this.formBillingGroup.value};
+			const dataContact = { ...this.formGroup.value, ...this.formBillingGroup.value };
 			const keysToRemove = ['acceptPolitics', 'fullPhone', 'companyAddress', 'companyName'];
 			keysToRemove.forEach((key) => delete dataContact[key]);
 			GlobalComponent.appBooking = {
@@ -208,9 +214,7 @@ export class PassengersComponent implements OnInit {
 				contact: dataContact,
 				passengers: this.dataPassengers
 			};
-			dataSteps[1].check=true;
-			dataSteps[2].active=true;
-			this.changeStep.emit(2);
+			this.validateBooking();
 		} else {
 			this.phonesField.setValue([]);
 			this.formGroup.markAllAsTouched();
@@ -226,6 +230,76 @@ export class PassengersComponent implements OnInit {
 	//Actualiza el estado de cada formulario
 	updateValidForm($event: any) {
 		this.dataStatusCards[$event.index] = $event.isValid;
+	}
+
+	validateBooking() {
+		const bodyValidateBooking: IValidateBooking = getBodyValidateBooking();
+		this._checkoutService.validateBooking(bodyValidateBooking).subscribe({
+			next: (res) => {
+				if (res.success) {
+					dataSteps[1].check = true;
+					dataSteps[2].active = true;
+					this.changeStep.emit(2);
+				} else {
+					if (res.isChurning) {
+						this.openModalError(
+							'Ud. ha excedido el número máximo de reservas generadas. Por favor, contactarse a nuestro Call Center.'
+						);
+					} else {
+						const message = this.getMessageValidateError(res);
+						if (message == '') this.openModalError(this.errorDefault);
+						else this.openModalErrorValidate(message, res);
+					}
+				}
+			},
+			error: (err) => {
+				this.openModalError(this.errorDefault);
+			}
+		});
+	}
+
+	getMessageValidateError(res: RValidateBooking) {
+		if (res.isDuplicate) {
+			if (res.isMT)
+				return (
+					'Ya ha realizado una reserva con las mismas fechas y horarios (Códigos ' + res.bookings[0].pnrDuplicate + ',' + res.bookings[1].pnrDuplicate +')'
+				);
+			else
+				return (
+					'Ya ha realizado una reserva con las mismas fechas y horarios (Código ' + res.bookings[0].pnrDuplicate + ')'
+				);
+		}
+		return '';
+	}
+
+	openModalError(message: string, isSuccessCancel = false) {
+		const modalRef = this._modalService.open(ModalErrorComponent, {
+			centered: true,
+			backdrop: 'static',
+			windowClass: 'modal-detail-error'
+		});
+		modalRef.componentInstance.message = message;
+		modalRef.componentInstance.isRedirect = isSuccessCancel ? false : true;
+		modalRef.componentInstance.txtButton = isSuccessCancel ? 'Aceptar' : 'Volver al inicio';
+	}
+
+	openModalErrorValidate(message: string, validateBooking: RValidateBooking | null) {
+		const modalRef = this._modalService.open(ModalValidateComponent, {
+			centered: true,
+			backdrop: 'static',
+			size:'lg',
+			windowClass: 'modal-detail-validate'
+		});
+		modalRef.componentInstance.message = message;
+		modalRef.componentInstance.validateBooking = validateBooking;
+		modalRef.result.then((result) => {
+			if (result == 'success') {
+				dataSteps[1].check = true;
+				dataSteps[2].active = true;
+				this.changeStep.emit(2);
+				this.openModalError('Su reserva anterior, fue cancelada exitosamente', true);
+			}
+		});
 	}
 
 	get nameField(): AbstractControl {
@@ -275,7 +349,4 @@ export class PassengersComponent implements OnInit {
 	get companyAddressField(): AbstractControl {
 		return this.formBillingGroup.get('companyAddress')!;
 	}
-
 }
-
-

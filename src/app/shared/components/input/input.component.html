@@ -1,5 +1,21 @@
-<span *ngIf="label" class="span__label" [class.span__label__stroke]="labelStroke" [class.disabled]="disabled"
-	>{{ label }} <span *ngIf="isRequired" class="span__label__required">*</span><img *ngIf="isCheck" src="./assets/svg/checkSuccess.svg" /></span>
+
+<span *ngIf="label && !isCVV" class="span__label" [class.disabled]="disabled"
+>{{ label }} <span *ngIf="isRequired" class="span__label__required">*</span><img *ngIf="isCheck" class="check" src="./assets/svg/checkSuccess.svg" />
+</span>
+
+<div class="text-input" *ngIf="isCVV">
+	<span *ngIf="label" class="span__label" [class.disabled]="disabled"
+	>{{ label }} <span *ngIf="isRequired" class="span__label__required">*</span>
+	</span>
+	<div class="info">
+		<img  src="./assets/svg/infoBlue.svg" alt="i" (mouseenter) ="showInfoCVV=true"  (mouseleave) ="showInfoCVV=false">
+		<div class="info__tootip" *ngIf="showInfoCVV">
+			<img src="./assets/svg/credit-cvv.svg" alt="">
+			<span>Escribe tu <strong>código CVV</strong> que se encuentra en la <strong>parte trasera</strong> de tu tarjeta.</span>
+		</div>
+	</div>
+</div>
+
 <div class="group-input">
 	<input
 		*ngIf="isOnlyText"

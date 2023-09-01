@@ -11,6 +11,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { CardPassengerComponent } from './card-passenger/card-passenger.component';
 import { InputCheckModule } from 'src/app/shared/components/input-check/input-check.module';
 import { InputToggleModule } from 'src/app/shared/components/input-toggle/input-toggle.module';
+import { ModalValidateComponent } from './modal-validate/modal-validate.component';
 
 @NgModule({
     imports: [
@@ -26,7 +27,7 @@ import { InputToggleModule } from 'src/app/shared/components/input-toggle/input-
         InputToggleModule
     ],
     exports: [PassengersComponent],
-    declarations: [PassengersComponent, CardPassengerComponent],
+    declarations: [PassengersComponent, CardPassengerComponent, ModalValidateComponent],
     providers: [],
 })
 export class PassengersModule { }
