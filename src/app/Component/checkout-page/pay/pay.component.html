@@ -66,6 +66,7 @@
 									[isPassword]="true"
 									[isRequired]="true"
 									[maxLenght]="3"
+									[isCVV]="true"
 									[isOnlyNumber]="true"
 									[class]="cvvField.touched && cvvField!.invalid ? 'error' : ''"
 									[labelError]="
@@ -256,7 +257,7 @@
 				[text]="'Realizar compra'"
 				[color]="'primary'"
 				[disabled]="!formGroupCard.valid || !formGroupPolitics.valid"
-				(onClick)="validateBooking()"
+				(onClick)="sendPayment()"
 			></app-button>
 		</div>
 	</div>

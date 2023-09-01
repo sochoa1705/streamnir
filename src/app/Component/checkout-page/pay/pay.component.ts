@@ -51,6 +51,7 @@ export class PayComponent implements OnInit {
 	transactionId = 0;
 	discountCupon: ResultCupon | null = null;
 	counter = 0;
+	errorMessDefault='Al parecer hubo un error en su reserva, por favor intentelo más tarde'
 
 	private destroy$ = new Subject<unknown>();
 	formCreditCard = {
@@ -205,41 +206,6 @@ export class PayComponent implements OnInit {
 		});
 	}
 
-	validateBooking() {
-		const bodyValidateBooking: IValidateBooking = getBodyValidateBooking();
-		this._checkoutService.validateBooking(bodyValidateBooking).subscribe({
-			next: (res) => {
-				if (res.success) this.sendPayment();
-				else this.openModalError(this.getMessageValidateError(res));
-			},
-			error: (err) => {
-				this.openModalError(this.getMessageErrorClient(err.error));
-			}
-		});
-	}
-
-	getMessageValidateError(res: RValidateBooking) {
-		if (res.isChurning)
-			return 'Ud. ha excedido el número máximo de reservas generadas. Por favor, contactarse a nuestro Call Center.';
-		if (res.isDuplicate) {
-			if (res.isMT)
-				return (
-					'Ya ha realizado una reserva con las mismas fechas y horarios (Códigos ' +
-					res.bookings[0].pnrDuplicate +
-					',' +
-					res.bookings[1].pnrDuplicate +
-					"). Si deseas cancelar las reservas anteriores y generar una nueva por favor pulsa el boton 'Aceptar' de la parte inferior."
-				);
-			else
-				return (
-					'Ya ha realizado una reserva con las mismas fechas y horarios (Código ' +
-					res.bookings[0].pnrDuplicate +
-					"). Si deseas cancelar la reserva anterior y generar una nueva por favor pulsa el boton 'Aceptar' de la parte inferior."
-				);
-		}
-		return '';
-	}
-
 	sendPayment() {
 		this.counter++;
 		const dataFormCredit: any =
@@ -280,17 +246,17 @@ export class PayComponent implements OnInit {
 
 		this._checkoutService.sendAndSavePay().subscribe({
 			next: (res) => {
+				console.log(res,'res')
 				if (res.confirmed) {
 					this.showMessagePay = true;
 					this.codeSafetyPay = res.ciP_SafetyPAY;
 					this.transactionId = res.idCotizacion;
 					this.sendEmail(res);
-				} else {
-					this.openModalError('Al parecer hubo un error en su reserva, por favor intentelo más tarde');
-				}
+				} else  this.openModalError(this.errorMessDefault)
 			},
 			error: (err) => {
-				this.openModalError(this.getMessageErrorClient(err));
+				console.log(err,'see')
+				this.openModalError(err.messages.length > 0 ? err.messages[0] : this.errorMessDefault);
 			}
 		});
 	}
@@ -309,6 +275,7 @@ export class PayComponent implements OnInit {
 	}
 
 	openModalError(message: string) {
+		console.log('openModal')
 		const modalRef=this._modalService.open(ModalErrorComponent,{
 			centered: true,
 			backdrop: 'static',
@@ -317,37 +284,6 @@ export class PayComponent implements OnInit {
 		modalRef.componentInstance.message = message;
 		modalRef.componentInstance.isRedirect = true;
 		modalRef.componentInstance.txtButton = 'Volver al inicio';
-	}
-
-	private getMessageErrorClient(error: any): string {
-		switch (error.errorCode) {
-			case 1001:
-				return 'No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.';
-			case 1002:
-				return 'La tarifa ya no se encuentra disponible, favor de realizar una nueva búsqueda.';
-
-			case 2001:
-				return 'La tarjeta de crédito no es válida.';
-			case 2002:
-				return 'La fecha de expiración de la tarjeta de crédito no es válida.';
-			case 2003:
-				return 'El código de seguridad o la fecha de expiración estaba inválido.';
-			case 2004:
-				return 'La cuenta no tenía fondos suficientes.';
-			case 2100:
-				if (error.messages != null && error.messages.length > 0) {
-					return error.messages[0];
-				} else
-					return 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados o de lo contrario selecciona otra forma de pago.';
-			case 2101:
-				return 'No se puede realizar el pago correctamente.';
-			default:
-				return (
-					error.messages?.map((c: any) => c) ?? [
-						'No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.'
-					]
-				).join(' - ');
-		}
 	}
 
 	get cardNumberField(): AbstractControl {

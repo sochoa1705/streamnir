@@ -170,6 +170,7 @@ export class CheckoutService {
 		}`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
+			.set('not-loading', 'true')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
 		return this._httpClient.get<RDiscountCupon>(url, { headers });
 	}
@@ -208,5 +209,13 @@ export class CheckoutService {
 			.set('Content-Type', 'application/json')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
 		return this._httpClient.post<RValidateBooking>(url, data, { headers });
+	}
+
+	cancelBooking(cancelBookingRQ:any){
+		let url = `${environment.urlApiMotorVuelos}/cancel-booking`;
+		const headers = new HttpHeaders()
+		.set('Content-Type', 'application/json')
+		.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+		return this._httpClient.post<any>(url, cancelBookingRQ, { headers });
 	}
 }

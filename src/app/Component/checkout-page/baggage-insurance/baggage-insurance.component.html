@@ -23,45 +23,81 @@
 						(click)="openModalFee()"
 					></app-button>
 				</div>
-				<div class="container__page__section__body" [hidden]="!showBaggageDropdown">
-					<div class="container__page__section__body__baggage"  *ngIf="detailFlight">
-						<div class="container__page__section__body__baggage__column">
-							<span>Ida</span>
-							<app-baggage [active]="true"></app-baggage>
-							<app-baggage [type]="'hand-luggage'" [active]="detailFlight.departure[0].segments[0].equipaje.cabina ? true : false"></app-baggage>
-							<app-baggage [type]="'hold-luggage'" [active]="detailFlight.departure[0].segments[0].equipaje.piezas > 0 ? true : false"></app-baggage>
+				
+					<div class="container__page__section__multivuelo" *ngIf="detailFlight.departure.length > 1">
+						<img
+							[src]="activeArrowLeft ? './assets/svg/arrow-multi-left.svg' : './assets/svg/arrow-multi-left-red.svg'"
+							[class.active__arrow]="activeArrowLeft"
+							(click)="prevSlider()"
+						/>
+						<div class="container__page__section__multivuelo__title">
+							<h5>{{ detailFlight.departure[indexDepartureSlider].originCity.name | titlecase }} - {{ detailFlight.departure[indexDepartureSlider].destinationCity.name | titlecase }}</h5>
+							<span *ngIf="nameSelectUpSell !== ''">Tarifa {{ nameSelectUpSell | titlecase }}</span>
 						</div>
-						<ng-container *ngIf="detailFlight.returns && detailFlight.returns!==null">
-							<div class="container__page__section__body__baggage__line"></div>
+						<img
+							[src]="activeArrowRight ? './assets/svg/arrow-multi-right.svg' : './assets/svg/arrow-multi-right-red.svg'"
+							[class.active__arrow]="activeArrowRight"
+							(click)="nextSlider()"
+						/>
+					</div>
+					<div class="container__page__section__body">
+						<div class="container__page__section__body__baggage" *ngIf="detailFlight">
 							<div class="container__page__section__body__baggage__column">
-								<span>Vuelta</span>
+								<span>Ida</span>
 								<app-baggage [active]="true"></app-baggage>
-								<app-baggage [type]="'hand-luggage'" [active]="detailFlight.returns.segments[0].equipaje.cabina  ? true : false"></app-baggage>
-								<app-baggage [type]="'hold-luggage'" [active]="detailFlight.returns.segments[0].equipaje.piezas > 0  ? true : false"></app-baggage>
+								<app-baggage
+									[type]="'hand-luggage'"
+									[active]="detailFlight.departure[indexDepartureSlider].segments[0].equipaje.cabina ? true : false"
+								></app-baggage>
+								<app-baggage
+									[type]="'hold-luggage'"
+									[active]="detailFlight.departure[indexDepartureSlider].segments[0].equipaje.piezas > 0 ? true : false"
+								></app-baggage>
 							</div>
-						</ng-container>
-					</div>
-					<div class="container__page__section__body__extras" *ngIf="itsIncludeUpSell && listBenefitsUpSellSelect.length > 0">
-						<span (click)="showDropdownExtras = !showDropdownExtras" class="container__page__section__body__extras__title"
-							>Extras
-							<img class="arrow" [src]="showDropdownExtras ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'"
-						/></span>
-						<div class="container__page__section__body__extras__items" *ngIf="showDropdownExtras">
-							<div class="container__page__section__body__extras__items__row" *ngFor="let benefit of listBenefitsUpSellSelect">
-								<img src="./assets/svg/check-blue.svg"/> <label>{{benefit.description}}</label>
+							<ng-container *ngIf="detailFlight.returns && detailFlight.returns !== null">
+								<div class="container__page__section__body__baggage__line"></div>
+								<div class="container__page__section__body__baggage__column">
+									<span>Vuelta</span>
+									<app-baggage [active]="true"></app-baggage>
+									<app-baggage
+										[type]="'hand-luggage'"
+										[active]="detailFlight.returns.segments[0].equipaje.cabina ? true : false"
+									></app-baggage>
+									<app-baggage
+										[type]="'hold-luggage'"
+										[active]="detailFlight.returns.segments[0].equipaje.piezas > 0 ? true : false"
+									></app-baggage>
+								</div>
+							</ng-container>
+						</div>
+						<div
+							class="container__page__section__body__extras"
+							*ngIf="itsIncludeUpSell && listBenefitsUpSellSelect.length > 0"
+						>
+							<span
+								(click)="showDropdownExtras = !showDropdownExtras"
+								class="container__page__section__body__extras__title"
+								>Extras
+								<img class="arrow" [src]="showDropdownExtras ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'"
+							/></span>
+							<div class="container__page__section__body__extras__items" *ngIf="showDropdownExtras">
+								<div
+									class="container__page__section__body__extras__items__row"
+									*ngFor="let benefit of listBenefitsUpSellSelect"
+								>
+									<img src="./assets/svg/check-blue.svg" /> <label>{{ benefit.description }}</label>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+
 			</app-card-checkout>
 		</article>
 		<ng-container *ngIf="showSecure">
-			<article *ngIf="detailFlight.returns && detailFlight.returns!==null">
-				<div class="container__page__section__title" *ngIf="!itsIncludeInsurance && detailFlight.returns!==null">
+			<article *ngIf="detailFlight.returns && detailFlight.returns !== null">
+				<div class="container__page__section__title" *ngIf="!itsIncludeInsurance && detailFlight.returns !== null">
 					<span class="container__page__section__title__primary">Asistencia al viajero</span>
-					<span class="container__page__section__title__secondary"
-						>Protege tu viaje y asegura tu tranquilidad.</span
-					>
+					<span class="container__page__section__title__secondary">Protege tu viaje y asegura tu tranquilidad.</span>
 				</div>
 				<app-card-checkout [padding]="false">
 					<div class="container__page__section__insurance">
@@ -95,12 +131,14 @@
 								Te enviaremos la póliza y las instrucciones de activación a tu email luego que finalices la compra.
 							</div>
 						</div>
-		
+
 						<ng-container *ngIf="!itsIncludeInsurance">
 							<div class="container__page__section__insurance__line"></div>
 							<div class="container__page__section__insurance__footer">
 								<span
-									>Agregar por <span class="price"> <span class="usd">USD</span> {{isDomestic ? '1.50' : '2.50'}} </span> por persona y por día</span
+									>Agregar por
+									<span class="price"> <span class="usd">USD</span> {{ isDomestic ? '1.50' : '2.50' }} </span> por
+									persona y por día</span
 								>
 								<app-button
 									[text]="'Agregar seguro'"
@@ -113,7 +151,7 @@
 						</ng-container>
 					</div>
 				</app-card-checkout>
-			
+
 				<div class="container__page__section__actions">
 					<app-button
 						*ngIf="itsIncludeInsurance"

@@ -1,0 +1,16 @@
+<div class="modal__cancel">
+    <div class="modal__cancel__header">
+        <img src="./assets/svg/close-modal.svg" (click)="activeModal.close()" />
+    </div>
+    <div class="modal__cancel__body">
+        <h5>{{message}}</h5>
+        <section>
+            <span>Si deseas <strong>cancelar las reservas anteriores</strong> y continuar generando una nueva, por favor pulsa el botón <strong>“Cancelar”</strong>.</span>
+            <span>Caso contrario, si deseas <strong>mantener las reservas anteriores</strong> y no generar una nueva, por favor pulsa el botón <strong>“Mantener”</strong>.</span>
+        </section>
+        <div  class="modal__cancel__body__actions"><!---Es duplicate-->
+            <app-button  [text]="'Mantener'" [w100]="true" [color]="'outline-primary'" (onClick)="goHome()"></app-button>
+            <app-button  [text]="'Cancelar'" [w100]="true"  (onClick)="cancelBooking()"></app-button>
+        </div>
+    </div>
+</div>

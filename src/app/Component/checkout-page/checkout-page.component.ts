@@ -10,7 +10,6 @@ import {
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { Router } from '@angular/router';
 import { GlobalComponent } from 'src/app/shared/global';
-import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { dataSteps } from 'src/app/shared/constant-init';
 import { Result, ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
 import { PayComponent } from './pay/pay.component';
@@ -23,7 +22,7 @@ import { PayComponent } from './pay/pay.component';
 export class CheckoutPageComponent implements OnInit {
 	showGoingDropdown = false;
 	showLapDropdown = false;
-	classFligh = '';
+	classFligh = 'Economy';
 
 	fareBreakDowns: FareBreakDown;
 	totalInsurance = 0;
@@ -50,6 +49,7 @@ export class CheckoutPageComponent implements OnInit {
 	isShowDiscount=false;
 	isShowDiscountCupon=false;
 
+
 	@ViewChild('childPagePay')
 	childPagePay!: PayComponent;
 
@@ -59,7 +59,7 @@ export class CheckoutPageComponent implements OnInit {
 	) {
 		this._checkoutService.selectUpSell.subscribe({
 			next: () => {
-				this.nameUpSellSelect = GlobalComponent.upSellSeleted?.name || '';
+				this.nameUpSellSelect = GlobalComponent.upSellSeleted?.description || '';
 				this.totalInsurance = GlobalComponent.appBooking.secure ? GlobalComponent.appBooking.secure.totalPrice : 0;
 				this.pricing = GlobalComponent.detailPricing; //actualizamos los precios con el upsell seleccionado
 				this.getDiscounts(); //volvemos a ver si hay descuento para ese tarifario
@@ -92,7 +92,13 @@ export class CheckoutPageComponent implements OnInit {
 	ngOnInit() {
 		this.detailFlight = GlobalComponent.appGroupSeleted;
 		this.pricing = GlobalComponent.detailPricing;
+		this.classFligh = GlobalComponent.classFligh;
+		this.nameUpSellSelect = GlobalComponent.upSellSeleted?.description || '';
 		this._checkoutService.totalDaysTravel();
+		dataSteps.forEach((step, index)=>{
+			step.active=index==0 ? true : false;
+			step.check=false;
+		})
 		this.getDiscounts();
 	}
 

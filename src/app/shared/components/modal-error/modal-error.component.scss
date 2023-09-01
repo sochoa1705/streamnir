@@ -26,6 +26,12 @@
             text-align: center;
             color:colors.$neutral-900;
         }
+        &__actions{
+            display: flex;
+            gap:30px;
+            justify-content: center;
+            align-items: center;
+        }
     }
 }
 

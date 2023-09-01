@@ -119,6 +119,8 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.route.queryParamMap.subscribe((params) => {
 			const objParams = getParams(params);
 			this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
+			GlobalComponent.classFligh = objParams.flightClass == 0 ? 'Economy' : objParams.flightClass == 1 ? 'Business':'First Class';
+			console.log(objParams.classFligh,'fjdhskd')
 			this.titleNotResults =
 				objParams.flightType !== 2
 					? `No encontramos vuelos coincidentes entre ${objParams.departureLocation} y ${objParams.arrivalLocation} para estas fechas.`

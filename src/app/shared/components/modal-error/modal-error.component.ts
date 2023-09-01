@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,7 +11,8 @@ export class ModalErrorComponent implements OnInit {
 
   @Input() message='';
   @Input() isRedirect=true;
-  @Input() txtButton='Volver al inicio'
+  @Input() txtButton='Volver al inicio';
+
   constructor(public activeModal: NgbActiveModal, private _router:Router) { }
 
   ngOnInit(): void {

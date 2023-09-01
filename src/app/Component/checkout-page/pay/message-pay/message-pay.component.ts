@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Contact, Passenger } from 'src/app/api/api-checkout/models/rq-checkout-booking';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
+import { dataSteps } from 'src/app/shared/constant-init';
 import { GlobalComponent } from 'src/app/shared/global';
 
 @Component({
@@ -18,6 +19,7 @@ export class MessagePayComponent implements OnInit {
     @Input() transactionId = 0;
     @Input() isPayCard=true;
     ngOnInit() {
+        dataSteps[2].check = true;
         window.scroll({ top: 0, behavior: 'smooth' });
         this._checkoutService.isFinishedPay.emit({transactionId:this.transactionId, isPayCard:this.isPayCard});
         this.dataPassengers=GlobalComponent.appBooking.passengers;
