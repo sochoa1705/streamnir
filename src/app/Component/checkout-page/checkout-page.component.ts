@@ -27,9 +27,7 @@ export class CheckoutPageComponent implements OnInit {
 	fareBreakDowns: FareBreakDown;
 	totalInsurance = 0;
 	totalDaysTravel = 0;
-	departure: Departure[] = [];
-	segments: Segment[] = [];
-	return: Returns | null;
+
 	nameUpSellSelect = '';
 	detailFlight: Group;
 

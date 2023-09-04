@@ -61,8 +61,9 @@ export class ModalFlightDetailComponent implements OnInit {
 	getDataUpSell() {
 			this._searchService.getUpSellGroup().subscribe({
 				next: (res) => {
+					console.log(res,'ressssssss')
 					GlobalComponent.upSellGroup = res;
-					if (res && res.length > 0) {
+					if (res) {
 						this._loadingService.idle();
 						if (res.length > 0) {
 							GlobalComponent.upSellSeleted = res[0];
@@ -73,11 +74,18 @@ export class ModalFlightDetailComponent implements OnInit {
 							});
 
 						} else this.redirectCheckout();
-					} else this.redirectCheckout();
+					}else this.redirectCheckout();
 					this.activeModal.close();
 				},
 				error: (err) => {
-					this.redirectCheckout();
+					this.openModalError('Al parecer ocurrio un error, por favor intentelo más tarde.')
+				},
+				complete:()=>{
+					if(GlobalComponent.upSellSeleted==null){
+						setTimeout(() => {
+							this.redirectCheckout();
+						}, 250);
+					}
 				}
 			});
 	}
@@ -150,8 +158,9 @@ export class ModalFlightDetailComponent implements OnInit {
 	}
 
 	redirectCheckout(){
-		this.activeModal.close();
+		console.log('reduerctccc')
 		this._loadingService.idle();
 		this.router.navigateByUrl('/checkout');
+		this.activeModal.close();
 	}
 }

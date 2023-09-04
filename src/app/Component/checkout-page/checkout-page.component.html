@@ -118,7 +118,7 @@
 					<div class="container__page__detail__flight__contend">
 						<app-card-checkout>
 							<!---------------------------Departure----------------------------->
-							<ng-container *ngFor="let item of detailFlight.departure; let i = index">
+							<ng-container *ngFor="let item of detailFlight.departure as departure; let i = index">
 								<app-card-detail-fly
 									[item]="item"
 									[classFligh]="classFligh"

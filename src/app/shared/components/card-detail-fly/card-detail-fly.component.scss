@@ -5,9 +5,11 @@
 		justify-content: space-between;
 		cursor: pointer;
 		margin-bottom: 8px;
+		align-items: center;
 		&__title {
 			display: flex;
 			gap: 16px;
+			align-items: center;
 			h6 {
 				font-family: Open Sans;
 				font-size: 20px;
@@ -16,6 +18,7 @@
 				letter-spacing: -0.02em;
 				text-align: left;
 				color: colors.$neutral-900;
+				margin-bottom: 0;
 			}
 		}
 		.dropdown {
@@ -133,6 +136,29 @@
 		}
 		&__img {
 			margin-left: 99.5px;
+		}
+	}
+	@media (max-width: 950px) {
+		&__header{
+			&__title h6{
+				font-size: 18px;
+				line-height: 24px;
+			}
+		}
+		&__body span{
+			font-size: 12px;
+			line-height: 20px;
+			&.bold-16{
+				font-size: 16px;
+				line-height: 20px;
+			}
+		}
+
+		&__info {
+			&__tag span, &__luggage span, &__plane .text span{
+				
+				font-size: 12px;
+			}
 		}
 	}
 }

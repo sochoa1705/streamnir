@@ -166,10 +166,13 @@ section {
 }
 
 @media (min-width: 1300px) {
-	.modal-detail-fee .modal-dialog-centered {
-		min-width: 1112px;
-	}
 	.modal-detail-fee-swiper .modal-dialog-centered {
 		min-width: 1212px;
+	}
+}
+
+@media (min-width: 1199px){
+	.modal-detail-fee .modal-dialog-centered {
+		min-width: 1070px;
 	}
 }

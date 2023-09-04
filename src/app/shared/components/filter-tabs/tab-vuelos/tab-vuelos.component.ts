@@ -541,7 +541,9 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
     let jsonArray = this.setMultiCityArray();
     const email: string = this.userStorage.email || '';
     //window.location.href = new URLVuelosMulti(this.tipoVuelo, this.distributionObject, email).getUrlMulti(jsonArray);
-    this.router.navigateByUrl((new URLVuelosMulti(this.tipoVuelo, this.distributionObject, email).getUrlMulti(jsonArray)).split('search')[1]);
+    const route=(new URLVuelosMulti(this.tipoVuelo, this.distributionObject, email).getUrlMulti(jsonArray)).split('search')[1];
+    localStorage.setItem('searchParams',route);
+    this.router.navigateByUrl(route);
     //this.navigateToResponseUrl(url);
   }
 

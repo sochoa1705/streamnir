@@ -47,27 +47,27 @@
 				cursor: pointer;
 			}
 		}
-		&__multivuelo{
+		&__multivuelo {
 			display: grid;
 			grid-template-columns: 40px auto 40px;
 			padding: 0 0 16px 0;
 			align-items: center;
 			column-gap: 24px;
-			.active__arrow{
+			.active__arrow {
 				cursor: pointer;
 			}
-			img{
+			img {
 				width: 40px;
 				height: 40px;
 			}
-			&__title{
+			&__title {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				gap:5px;
+				gap: 5px;
 				margin-top: 40px;
-				h5{
+				h5 {
 					font-family: Open Sans;
 					font-size: 24px;
 					font-weight: 600;
@@ -75,7 +75,7 @@
 					letter-spacing: -0.02em;
 					margin: 0;
 				}
-				span{
+				span {
 					font-family: Montserrat;
 					font-size: 18px;
 					font-weight: 400;
@@ -87,35 +87,36 @@
 		&__body {
 			padding: 16px 16px 0px 16px;
 			max-width: 780px;
-		    &__baggage{
+			&__baggage {
 				display: grid;
 				grid-template-columns: 1fr auto 1fr;
 				column-gap: 24px;
-				&__column{
+				row-gap: 10px;
+				&__column {
 					display: flex;
 					flex-direction: column;
-					gap:16px;
+					gap: 16px;
 				}
-				&__line{
+				&__line {
 					width: 0px;
 					height: 100%;
 					border-left: 1px solid colors.$neutral-100;
 				}
 			}
-			&__extras{
+			&__extras {
 				padding-top: 24px;
-				&__title{
+				&__title {
 					cursor: pointer;
 				}
-				&__items{
+				&__items {
 					padding-top: 16px;
 					display: flex;
 					flex-direction: column;
-					gap:13px;
+					gap: 13px;
 					max-height: 176px;
 					overflow-y: auto;
-					&__row{
-						label{
+					&__row {
+						label {
 							font-family: Montserrat;
 							font-weight: 400;
 							line-height: 28px;
@@ -123,11 +124,11 @@
 							text-align: left;
 							padding-bottom: 0;
 							text-transform: lowercase;
-							&::first-letter{
+							&::first-letter {
 								text-transform: capitalize;
 							}
 						}
-						img{
+						img {
 							margin-right: 10px;
 							width: 20px;
 							height: 20px;
@@ -146,6 +147,13 @@
 				justify-content: flex-start;
 				img {
 					border-radius: 8px;
+					cursor: pointer;
+				}
+				#assist_card_mob {
+					display: none;
+					max-width: 291px;
+					min-width: 193px;
+    				width: 100%;
 				}
 				&__checks {
 					display: flex;
@@ -169,24 +177,24 @@
 				}
 			}
 
-			&__success{
+			&__success {
 				padding: 24px;
 				display: flex;
 				flex-direction: column;
 				gap: 16px;
 				color: colors.$neutral-900;
-				&__title{
+				&__title {
 					font-family: Montserrat;
 					font-size: 20px;
 					font-weight: 600;
 					line-height: 24px;
-					img{
+					img {
 						margin-left: 12px;
 						height: 24px;
 						width: 24px;
 					}
 				}
-				&__description{
+				&__description {
 					font-family: Montserrat;
 					font-size: 14px;
 					font-weight: 400;
@@ -212,6 +220,7 @@
 					line-height: 28px;
 					letter-spacing: 0em;
 					color: colors.$neutral-900;
+					text-align: center;
 					.price {
 						font-size: 36px;
 						line-height: 44px;
@@ -224,26 +233,112 @@
 						color: colors.$red-500;
 					}
 				}
-				@media (max-width: 1304px){
+			}
+		}
+
+		&__actions {
+			margin-left: 24px;
+			width: fit-content;
+		}
+
+		&__button {
+			align-self: flex-end;
+		}
+
+
+		@media (max-width: 1304px) {
+			&__insurance {
+				&__footer {
 					flex-direction: column;
-					gap:8px;
+					gap: 16px;
 					justify-content: center;
 					align-items: center;
 				}
 			}
 		}
+	
+		@media (max-width: 950px) {
+			gap:32px;
+			&__insurance {
+				&__header {
+					&__fee span {
+						font-size: 18px;
+						line-height: 24px;
+					}
+				}
+				&__body {
+					flex-direction: column !important;
+					padding: 24px 16px;
+					#assist_card {
+						display: none;
+					}
+					#assist_card_mob {
+						display: block;
+					}
+				}
+				&__success {
+					&__title{
+						font-size: 18px;
+						line-height: 20px;
+					}
+				}
+				&__footer {
+					padding: 24px 16px;
+					span {
+						font-size: 16px;
+						line-height: 24px;
+						.price {
+							font-size: 28px;
+							line-height: 36px;
+						}
+						.usd {
+							font-size: 16px;
+							line-height: 24px;
+						}
+					}
+				}
+			}
+	
+			&__title {
+				&__primary {
+					font-size: 24px;
+					line-height: 32px;
+				}
+	
+				&__secondary {
+					font-size: 16px;
+					line-height: 24px;
+				}
+			}
+			&__body{
+				&__baggage{
+					grid-template-columns: 1fr;
+				}
+			}
 
-		&__actions{
-			margin-left: 24px;
-			width:fit-content;
-		}
-
-		&__button{
-			align-self: flex-end;
+			&__multivuelo {
+				grid-template-columns: 32px auto 32px;
+				img {
+					width: 32px;
+					height: 32px;
+				}
+				&__title {
+					h5 {
+						font-size: 20px;
+						line-height: 24px;
+					}
+					span {
+						font-size: 14px;
+						line-height: 24px;
+					}
+				}
+			}
 		}
 	}
+	@media (max-width: 670px){
+		padding-bottom: 24px;
+	}
 }
-
 
 article {
 	display: flex;
@@ -251,7 +346,7 @@ article {
 	gap: 12px;
 }
 
-span{
+span {
 	font-family: Open Sans;
 	font-size: 20px;
 	font-weight: 600;

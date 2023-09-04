@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { data_insurance } from './utils';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { ModalFeeComponent } from '../modal-fee/modal-fee.component';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { InformationService } from 'src/app/api/api-checkout/models/rq-checkout-up-sell';
@@ -9,10 +9,6 @@ import { GlobalComponent } from 'src/app/shared/global';
 import { dataSteps } from 'src/app/shared/constant-init';
 import { ModalInsuranceComponent } from './modal-insurance/modal-insurance.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import SwiperCore, { Pagination, Navigation, SwiperOptions } from 'swiper';
-import { SwiperComponent } from 'swiper/angular';
-
-SwiperCore.use([Pagination, Navigation]);
 
 @Component({
 	selector: 'app-baggage-insurance',
@@ -22,7 +18,7 @@ SwiperCore.use([Pagination, Navigation]);
 export class BaggageInsuranceComponent implements OnInit {
 	constructor(
 		private _modalService: NgbModal,
-		private _checkoutService: CheckoutService
+		private _checkoutService: CheckoutService,
 	) {}
 	showBaggageDropdown = true;
 	showDropdownExtras = false;
@@ -36,20 +32,20 @@ export class BaggageInsuranceComponent implements OnInit {
 
 	detailFlight: Group;
 	activeArrowLeft = false;
-	activeArrowRight = true;
+	activeArrowRight = false;
 
 	listBenefitsUpSellSelect: InformationService[] = [];
 	@Output() changeStep = new EventEmitter();
 	modalDialogRef: MatDialogRef<ModalInsuranceComponent>;
-	isDomestic=false;
+	isDomestic = false;
 
-	indexDepartureSlider=0;
-
+	getScreenWidth=0;
 
 	ngOnInit() {
 		//es para ver si mostrar el button de ampliar beneficios
 		this.detailFlight = GlobalComponent.appGroupSeleted;
-		this.isDomestic=GlobalComponent.isDomestic;
+		this.activeArrowRight = this.detailFlight.departure.length > 1 ? true : false;
+		this.isDomestic = GlobalComponent.isDomestic;
 		if (GlobalComponent.upSellSeleted) {
 			this.itsIncludeUpSell = true;
 			this.showBaggageDropdown = false;
@@ -59,14 +55,15 @@ export class BaggageInsuranceComponent implements OnInit {
 			);
 		}
 		this.showSecure = GlobalComponent.appGroupSeleted.returns ? true : false;
+		this.getScreenWidth = window.innerWidth;
 	}
 
 	openModalFee() {
-		const modalRef=this._modalService.open(ModalFeeComponent, {
+		const modalRef = this._modalService.open(ModalFeeComponent, {
 			centered: true,
 			backdrop: 'static',
-			windowClass: GlobalComponent.upSellGroup.length <= 3 ? 'modal-detail-fee' :'modal-detail-fee-swiper'
-		})
+			windowClass: GlobalComponent.upSellGroup.length <= 3 ? 'modal-detail-fee' : 'modal-detail-fee-swiper'
+		});
 
 		modalRef.result.then((result) => {
 			if (result !== true) {
@@ -89,12 +86,19 @@ export class BaggageInsuranceComponent implements OnInit {
 		window.scroll({ top: 0, behavior: 'smooth' });
 	}
 
-	openModalCoverage(){
+	openModalCoverage() {
 		this._modalService.open(ModalInsuranceComponent, {
 			centered: true,
 			backdrop: 'static',
 			size: 'xl'
-		})
+		});
+	}
+
+	@HostListener('window:resize', ['$event'])
+	onResize(){
+		if (this.getScreenWidth !== window.innerWidth) {
+			this.getScreenWidth = window.innerWidth;
+		}
 	}
 
 	nextPage() {
@@ -104,11 +108,8 @@ export class BaggageInsuranceComponent implements OnInit {
 		window.scroll({ top: 0, behavior: 'smooth' });
 	}
 
-	prevSlider(){
-
-	}
-
-	nextSlider(){
-		
+	changeSlide($event:any){
+		this.activeArrowLeft= $event==0 ? false : true;
+		this.activeArrowRight = $event==this.detailFlight.departure.length-1 ? false : true;
 	}
 }
