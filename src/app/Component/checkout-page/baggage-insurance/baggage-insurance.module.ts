@@ -7,8 +7,7 @@ import { BaggageModule } from 'src/app/shared/components/baggage/baggage.module'
 import { ModalFeeModule } from '../modal-fee/modal-fee.module';
 import { ModalInsuranceComponent } from './modal-insurance/modal-insurance.component';
 import { ModalErrorModule } from 'src/app/shared/components/modal-error/modal-error.module';
-
-
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 @NgModule({
     imports: [
         CommonModule, 
@@ -16,7 +15,8 @@ import { ModalErrorModule } from 'src/app/shared/components/modal-error/modal-er
         ButtonModule,
         BaggageModule,
         ModalFeeModule,
-        ModalErrorModule
+        ModalErrorModule,
+        CarouselModule
     ],
     exports: [BaggageInsuranceComponent],
     declarations: [BaggageInsuranceComponent, ModalInsuranceComponent],

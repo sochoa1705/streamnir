@@ -10,7 +10,7 @@
 </button>
 
 <button
-	*ngIf="left && icon"
+	*ngIf="left && icon && icon!==''"
 	[class]="color + ' btn'"
 	[disabled]="disabled"
 	(click)="clickButton()"

@@ -8,4 +8,10 @@
   &.padding{
     padding: 24px;
   }
+
+  @media (max-width: 950px){
+    &.padding{
+      padding: 24px 16px;
+    }
+  }
 }

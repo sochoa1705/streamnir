@@ -1,6 +1,6 @@
 @use '/src/scss/colors';
 
-.paragraph{
+.paragraph {
 	font-family: Montserrat;
 	font-size: 14px;
 	font-weight: 400;
@@ -52,7 +52,7 @@
 							}
 							.bold {
 								font-weight: 600;
-								&::first-letter{
+								&::first-letter {
 									text-transform: capitalize;
 								}
 							}
@@ -61,8 +61,8 @@
 								font-size: 16px;
 								line-height: 24px;
 							}
-							&.discount{
-								color:colors.$red-500;
+							&.discount {
+								color: colors.$red-500;
 							}
 						}
 					}
@@ -78,9 +78,9 @@
 				&__footer {
 					display: flex;
 					flex-direction: column;
-					gap:8px;
+					gap: 8px;
 					padding: 24px 0px;
-					&__row{
+					&__row {
 						display: flex;
 						align-items: center;
 						justify-content: space-between;
@@ -101,19 +101,18 @@
 								color: colors.$neutral-900;
 							}
 						}
-						span{
+						span {
 							@extend .paragraph;
-							color:colors.$neutral-400;
-							&.bold{
+							color: colors.$neutral-400;
+							&.bold {
 								font-weight: 600;
 							}
-							&.font-12{
+							&.font-12 {
 								font-size: 12px;
 							}
-							&.through{
+							&.through {
 								text-decoration-line: line-through;
 							}
-
 						}
 					}
 				}
@@ -141,11 +140,12 @@
 			}
 		}
 
-		&__button,&__saftyPay{
+		&__button,
+		&__saftyPay {
 			width: 100%;
 		}
 
-		&__saftyPay{
+		&__saftyPay {
 			height: 180px;
 			padding: 24px;
 			border-radius: 12px;
@@ -154,29 +154,120 @@
 			justify-content: center;
 			align-items: center;
 			background: colors.$blue-500;
-			span{
-				color:white;
+			span {
+				color: white;
 				font-family: Open Sans;
 				font-weight: 600;
-				&:nth-child(1){
+				&:nth-child(1) {
 					font-size: 16px;
 					line-height: 24px;
 					margin-bottom: 4px;
 				}
-				&:nth-child(2){
+				&:nth-child(2) {
 					font-size: 24px;
-					color:white;
+					color: white;
 					line-height: 32px;
 					letter-spacing: -0.48px;
 					margin-bottom: 16px;
 				}
-				&:nth-child(3){
+				&:nth-child(3) {
 					font-weight: 700;
 					font-size: 52px;
 					line-height: 56px;
 					letter-spacing: -1.04px;
 				}
 			}
+		}
+	}
+
+	@media (max-width: 1304px) {
+		padding: 242px 60px 0px 60px;
+	}
+
+	@media (max-width: 1199px) {
+		padding: 232px 24px 0px 24px;
+		section {
+			grid-template-columns: 1fr 0.57fr;
+			column-gap: 24px;
+		}
+	}
+
+	@media (max-width: 950px) {
+		section {
+			grid-template-columns: 1fr 0.67fr;
+		}
+		&__detail {
+			padding: 0px;
+			&__pay {
+				&__name {
+					font-size: 18px;
+					line-height: 24px;
+					margin-left: 12px;
+				}
+				&__contend {
+					&__body {
+						padding: 16px;
+						&__row span {
+							font-size: 12px;
+							line-height: 20px;
+						}
+					}
+					&__footer {
+						padding: 16px 0;
+						&__row {
+							h6 {
+								font-size: 18px;
+								line-height: 24px;
+								.usd-total {
+									font-weight: 400;
+									line-height: 16px;
+									font-size: 16px;
+									color: colors.$neutral-900;
+								}
+							}
+							span {
+								font-size: 12px;
+								line-height: 24px;
+							}
+						}
+					}
+				}
+			}
+
+			&__flight {
+				&__name {
+					font-size: 18px;
+					line-height: 24px;
+				}
+			}
+			&__saftyPay {
+				span {
+					&:nth-child(1) {
+						font-size: 16px;
+						line-height: 24px;
+					}
+					&:nth-child(2) {
+						font-size: 20px;
+						line-height: 24px;
+					}
+					&:nth-child(3) {
+						font-size: 24px;
+						line-height: 32px;
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: 760px){
+		section {
+			grid-template-columns: 1fr 0.95fr;
+		}
+	}
+
+	@media (max-width: 670px){
+		section {
+			grid-template-columns: 1fr;
 		}
 	}
 }
