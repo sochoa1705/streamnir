@@ -1,10 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OffersService } from '../../../Services/offers/offers.service';
 import { Offers } from '../../../Models/offers/offers.model';
-import { GalleryService } from '../../../Services/gallery/gallery.service';
-import { GalleryItem } from '../../../Models/gallery/gallery-item.model';
-import { first, map } from 'rxjs/operators';
-import { flatMap } from 'rxjs/internal/operators';
+import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { getItemWithExpiration, Guid, setItemWithExpiration } from '../../../shared/utils';
 import { FlightService } from '../../../api/api-nmviajes/services/flight.service';
@@ -18,22 +15,14 @@ import { Router } from '@angular/router';
 })
 export class OffersComponent implements OnInit, OnDestroy {
 	isLoading = true;
-	bannerImgSrc: GalleryItem = {
-		codigo: '',
-		urlImagen: '',
-		descripcion: '',
-		link: ''
-	};
 
 	internationalFlights: any[] = [];
 	nationalFlights: any[] = [];
 	itineraries: any[] = [];
 
-	bannerSubscription = new Subscription();
 	offersSubscription = new Subscription();
 
 	constructor(private offersService: OffersService,
-	            private galleryService: GalleryService,
 	            private flightsService: FlightService,
 	            private router: Router) {
 	}
@@ -41,17 +30,6 @@ export class OffersComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.getFlights();
 		this.getOffers();
-		this.getBanner();
-	}
-
-	getBanner() {
-		this.bannerSubscription = this.galleryService.getGalleryItems().pipe(
-				flatMap(items => items),
-				first(items => items.codigo == 'OFERTAS_BANNER')
-		).subscribe({
-			next: (item: GalleryItem) => this.bannerImgSrc = item,
-			error: (err: any) => console.error(err)
-		});
 	}
 
 	getFlights() {
@@ -132,7 +110,6 @@ export class OffersComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.bannerSubscription.unsubscribe();
 		this.offersSubscription.unsubscribe();
 	}
 }
