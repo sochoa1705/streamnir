@@ -1,14 +1,15 @@
 <footer class="doNotPrint">
-  <div class="container-fluid fluid">
-    <div class="row">
-      <div class="col-8 offset-2 px-0">
-        <hr class="hideMobile">
-      </div>
-      <div class="clearfix"></div>
-    </div>
-    <div class="row marginTop35">
-      <div class="col-3 d-none d-md-inline-block text-center my-5 pt-4 order-md-1">
-        <img src="./assets/logo_rojo.svg" alt="NMVIAJES">
+  <div class="mx-md-5 p-md-5">
+    <div class="row marginTop35 d-flex justify-content-between">
+      <div class="col-12 col-md-3 d-md-inline-block text-left order-1">
+        <img src="./assets/logo_red_gray.svg" alt="NMVIAJES">
+        <div class="col-md-12 col-12 text-footer">
+          Copyright 2021 <span>nmviajes</span> All Rights Reserved.
+          <p class="mt-2 text-nowrap align-bottom"><small>Raz&oacute;n Social:</small></p>
+          <p class="mb-0 text-nowrap"><small>PROMOTORA DE TURISMO NUEVO MUNDO S.A.C.</small></p>
+          <p class="mb-0 text-nowrap"><small>RUC:</small></p>
+          <p class="mb-0 text-nowrap"><small>20106785288</small></p>
+        </div>
         <div class="icons justify-content-center mt-4">
           <a class="icon" href="https://www.facebook.com/nmviajes" target="_blank">
             <svg width="15" height="31" viewBox="0 0 15 31" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,11 +54,12 @@
           </a>
         </div>
       </div>
-      <div class="col-md-3 col-12 text-md-left text-center order-1 mb-md-5">
-        <h3 class="menuProd text-start" (click)="showProducto()">{{ title1 }}
+      <div class="col-md-2 col-12 text-md-left text-center order-2">
+        <p class="text-start" (click)="showProducto()">
+          <strong>{{ title1 }}</strong>
           <img class="iconFlecha" src="./assets/footer/flecha.webp" alt="">
-        </h3>
-        <ul class="showDesktop" [class.activoMnu]="!showMenuProd">
+        </p>
+        <ul class="showDesktop list-unstyled" [class.activoMnu]="!showMenuProd">
           <li *ngFor="let option of list1" [ngClass]="option.header ? 'd-none' : ''">
             <a *ngIf="!option.external && !option.header"
               [routerLink]="option.tab === '' ? option.link : [option.link, option.tab]">{{ option.text
@@ -66,32 +68,60 @@
           </li>
         </ul>
       </div>
-      <div class="col-md-2 p-md-0 col-12 order-2 text-md-left text-center">
-        <h3 class="menuProd text-start" (click)="showConocenos()">{{ title2 }}
+      <div class="col-md-2 p-md-0 col-12 order-3 text-md-left text-center">
+        <p class="menuProd text-start" (click)="showConocenos()">
+          <strong>
+            {{ title2 }}
+          </strong>
           <img class="iconFlecha" src="./assets/footer/flecha.webp" alt="">
-        </h3>
-        <ul class="showDesktop" [class.activoMnu]="!showMenuConocenos">
+        </p>
+        <ul class="showDesktop list-unstyled" [class.activoMnu]="!showMenuConocenos">
           <li *ngFor="let option of list2">
             <a [href]="option.link" [target]="option.target">{{ option.text }}</a>
           </li>
         </ul>
       </div>
-      <div class="col-md-3 offset-md-1 col-12 order-3 text-md-left marginTopMobile ">
-        <h3 class="text-start">{{ title3 }}</h3>
-        <span class="textContactenos">{{ span }}
-          <br>
-          <strong>{{ addrees }}</strong>
-        </span>
-        <div class="d-flex align-items-center centerBox justify-content-center">
-          <img src="./assets/libro.png" alt="Libro de reclamaciones">
-          <a class="_libro" routerLink="{{ linkLibro }}">{{ libro }}</a>
+      <div class="col-md-3 col-12 order-4 text-md-left marginTopMobile ">
+        <p class="text-start">
+          <strong>{{ title3 }}</strong>
+        </p>
+        <div>
+          <div class="row d-flex align-items-center">
+            <div class="col-auto">
+              <span>
+                <img src="./assets/footer/location.svg">
+              </span>
+            </div>
+            <div class="col">
+              <span>{{ addrees }}</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="row d-flex align-items-center">
+            <div class="col-auto">
+              <span>
+                <img src="./assets/footer/claim_book.svg">
+              </span>
+            </div>
+            <div class="col">
+              <a routerLink="{{ linkLibro }}">{{ libro }}</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-12 order-1 d-flex align-items-center order-md-2">
+          <button class="w-100 btnFooter" (click)="toOficinas()">Oficinas</button>
         </div>
       </div>
-      <div class="clearfix"></div>
     </div>
   </div>
 
-  <div class="container-fluid fluid bg-white order-4 pt-3">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-12 px-md-5">
+      <hr class="hr">
+    </div>
+  </div>
+  <!-- <div class="container-fluid fluid bg-white order-4 pt-3">
     <div class="container">
       <div class="row">
         <div class="col-md-4 col-6 text-center order-2 order-md-1">
@@ -109,12 +139,8 @@
         </div>
         <div class="clearfix"></div>
       </div>
+      
       <div class="row">
-        <div class="col-10 offset-1">
-          <hr class="hr">
-        </div>
-      </div>
-      <!-- <div class="row">
             <div class="col-md-6 col-12 text-footer">
                 Copyright 2021 <span>nmviajes</span> All Rights Reserved.
             </div>
@@ -127,7 +153,7 @@
                 <img src="./assets/footer/diners.webp" alt="">
             </div>
             <div class="clearfix"></div>
-        </div> -->
+        </div>
     </div>
-  </div>
+  </div> -->
 </footer>

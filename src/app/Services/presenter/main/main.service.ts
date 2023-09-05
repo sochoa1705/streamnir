@@ -16,15 +16,6 @@ export class MainService {
     },
     {
       id: 1,
-      text: "Paquetes",
-      //link: "paquetes",
-      link: "https://vacaciones.nmviajes.com/ES/holidays/search",
-      tab: '',
-      icon: '/assets/menu/paquetes.svg',
-      external: true
-    },
-    {
-      id: 2,
       text: "Arma tu viaje",
       //link: "armapaquete",
       link: "https://vacaciones.nmviajes.com/multidestination/",
@@ -33,27 +24,36 @@ export class MainService {
       external: true,
     },
     {
-      id: 3,
-      text: "Vuelos + Hotel",
-      //link: "vuelohotel",
-      link: "https://vacaciones.nmviajes.com/flight+hotel/",
-      tab: '',
-      icon: '/assets/menu/vuelo-hotel.svg',
-      external: true,
-    },
-    {
-      id: 4,
+      id: 2,
       text: "Hoteles",
       link: "hoteles",
       tab: '',
       icon: '/assets/menu/hoteles.svg'
     },
     {
-      id: 5,
-      text: 'Ofertas',
-      link: 'ofertas',
+      id: 3,
+      text: "Actividades",
+      link: "actividades",
       tab: '',
-      icon: '/assets/menu/ofertas.svg'
+      icon: '/assets/menu/actividad.svg'
+    },
+    {
+      id: 4,
+      text: "Paquetes",
+      //link: "paquetes",
+      link: "https://vacaciones.nmviajes.com/ES/holidays/search",
+      tab: '',
+      icon: '/assets/menu/paquetes.svg',
+      external: true
+    },
+    {
+      id: 5,
+      text: "Vuelos + Hotel",
+      //link: "vuelohotel",
+      link: "https://vacaciones.nmviajes.com/flight+hotel/",
+      tab: '',
+      icon: '/assets/menu/vuelo-hotel.svg',
+      external: true,
     },
     {
       id: 6,
@@ -64,32 +64,11 @@ export class MainService {
     },
     {
       id: 7,
-      text: "Actividades",
-      link: "actividades",
-      tab: '',
-      icon: '/assets/menu/actividad.svg'
-    },
-    {
-      id: 8,
       text: "Seguros",
       link: "/seguros",
-      header: true,
+      header: false,
       tab: '',
       icon: '/assets/menu/seguros.svg'
-    },
-    {
-      id: 9,
-      text: "Descubre",
-      link: "https://descubre.nmviajes.com/",
-      footer: true,
-      external: true
-    },
-    {
-      id: 10,
-      text: "Blog: Mundo Viajero",
-      link: "https://blog.nmviajes.com/",
-      footer: true,
-      external: true
     }
   ]
   constructor() { }
