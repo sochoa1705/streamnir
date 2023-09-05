@@ -20,6 +20,7 @@ export class FiltersComponent implements OnInit {
   @Input() totalResults:number;
   @Input() totalResultsFilter:number;
   @Input() exchangeRate:number;
+  @Input() isNotResult=false;
 
   @Input() minPrice=0;
   @Input() maxPrice=0;
