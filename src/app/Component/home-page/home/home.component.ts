@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   loadedGallery = false;
 
   selectedTab: string
+  indexSelectedTab=0;
 
   constructor(
     public dataPagePresenterService: DataPagePresenterService,

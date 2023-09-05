@@ -1,10 +1,10 @@
 <div class="container__page">
 	<div class="container__page__search">
 		<div class="container__page__search__metasearch">
-			<app-tab-vuelos [isBgWhite]="false"></app-tab-vuelos>
+			<app-tab-vuelos [isBgWhite]="false" [isPageResults]="true"></app-tab-vuelos>
 		</div>
 	</div>
-	<section class="section" *ngIf="allDataGroups.length > 0 && !showError && !showNotResults">
+	<section class="section"  *ngIf="!showError && !showNotResults">
 		<app-filters
 			[dataAirlines]="dataAirlines"
 			[dataScaleFilter]="dataScaleFilter"
@@ -21,7 +21,6 @@
 		></app-filters>
 		<div class="container__page__results">
 			<app-sort-by
-				*ngIf="dataFilterGroups.length > 0"
 				[theCheapest]="theCheapest"
 				[betterOption]="betterOption"
 				[currency]="currency"
@@ -29,6 +28,11 @@
 				[arrayMoreOptionsSort]="arrayMoreOptionsSort"
 				(clickTabSort)="clickTabSort($event)"
 			></app-sort-by>
+			<div class="container__page__results__cards" *ngIf="isLoader">
+				<ng-container *ngFor="let item of [].constructor(3)">
+					<app-card-loader-result></app-card-loader-result>
+				</ng-container>
+			</div>
 			<ng-container *ngIf="dataFilterGroups.length > 0">
 				<div class="container__page__results__cards" *ngIf="dataGroupsPaginate.length > 0">
 					<ng-container *ngFor="let item of dataGroupsPaginate">
@@ -40,7 +44,7 @@
 				</div>
 			</ng-container>
 			<app-not-results
-				*ngIf="dataFilterGroups.length == 0"
+				*ngIf="dataFilterGroups.length == 0 && !isLoader"
 				[filters]="filters"
 				[title]="titleNotResults"
 				[type]="'not-result-filter'"
@@ -48,6 +52,7 @@
 			></app-not-results>
 		</div>
 	</section>
+
 	<app-not-results *ngIf="showError"></app-not-results>
 	<app-not-results *ngIf="showNotResults" [title]="titleNotResults" [type]="'not-result'"></app-not-results>
 </div>

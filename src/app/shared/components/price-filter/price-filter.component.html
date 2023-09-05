@@ -1,10 +1,10 @@
-<div class="dropdown__filter">
+<div class="dropdown__filter" *ngIf="value > 0 && highValue > 0">
 	<div class="dropdown__filter__header" (click)="dropdownActive = !dropdownActive">
 		<h4>Precio</h4>
 		<img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
 	</div>
 	<div class="dropdown__filter__body" *ngIf="dropdownActive">
-		<ng-container *ngIf="value > 0 && highValue >0">
+		<ng-container>
 			<span class="dropdown__filter__body__reset" (click)="resetFilter()">Restablecer</span>
 			<div class="dropdown__filter__body__slider">
 				<ng5-slider
@@ -20,4 +20,10 @@
 			</div>
 		</ng-container>
 	</div>
+</div>
+
+<div class="dropdown__loader" *ngIf="value == 0 || highValue == 0">
+	<div class="skeleton dropdown__loader__skeleton_1"></div>
+	<div class="skeleton dropdown__loader__skeleton_2"></div>
+	<div class="skeleton dropdown__loader__skeleton_3"></div>
 </div>

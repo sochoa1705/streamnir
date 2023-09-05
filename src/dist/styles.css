@@ -10485,6 +10485,7 @@ app-flightdeals button {
   border-radius: 5px;
   height: 48px;
   padding: 0 10px;
+  background: white;
 }
 @media (max-width: 640px) {
   .gridTab .rowGrid {

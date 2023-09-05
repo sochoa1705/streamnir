@@ -1,7 +1,7 @@
-<div class="filters__order" [class.multivuelo]="arrayMoreOptionsSort.length == 0">
+<div class="filters__order" *ngIf="theCheapest && betterOption && shorterDuration" [class.multivuelo]="arrayMoreOptionsSort.length == 0">
 	<div class="filters__order__tab column" [class.active]="indexTabSelect == 0" (click)="clickTab(0)">
 		<span class="bold" [class.active]="indexTabSelect == 0">El más barato</span>
-		<span *ngIf="theCheapest">
+		<span>
 			{{ currency == 'PEN' ? 'S/. ' : '$ ' }}{{ theCheapest.price | changeCurrency: currency | number: '1.2-2' }} •
 			{{ theCheapest.duration | minutesFormat }}</span
 		>
@@ -17,7 +17,7 @@
 		<span class="bold" [class.active]="indexTabSelect == 1"
 			>Mejor opción <img [src]="indexTabSelect == 1 ? './assets/svg/infoRed2.svg' : './assets/svg/infoGris.svg'"
 		/></span>
-		<span *ngIf="betterOption">
+		<span>
 			{{ currency == 'PEN' ? 'S/. ' : '$ ' }}{{ betterOption.price | changeCurrency: currency | number: '1.2-2' }} •
 			{{ betterOption.duration | minutesFormat}}</span
 		>
@@ -25,7 +25,7 @@
 	<div class="filters__order__line"></div>
 	<div class="filters__order__tab column" [class.active]="indexTabSelect == 2" (click)="clickTab(2)">
 		<span class="bold" [class.active]="indexTabSelect == 2">Menor duración</span>
-		<span *ngIf="shorterDuration"
+		<span
 			>{{ currency == 'PEN' ? 'S/. ' : '$ ' }}{{ shorterDuration.price | changeCurrency: currency | number: '1.2-2' }} •
 			{{ shorterDuration.duration | minutesFormat }}</span
 		>
@@ -54,6 +54,19 @@
 	</ng-container>
 </div>
 
+<div class="filters__loader" *ngIf="!theCheapest || !betterOption || !shorterDuration">
+	<ng-container  *ngFor="let item of [].constructor(3)">
+		<div class="filters__loader__skeleton"> 
+			<div class="ghost filters__loader__skeleton__skeleton_1"></div>
+			<div class="ghost filters__loader__skeleton__skeleton_2"></div>
+		</div>
+		<div  class="filters__loader__line"></div>
+	</ng-container>
+	<div class="filters__loader__skeleton__skeleton_4">
+		<div class="ghost filters__loader__skeleton__skeleton_4__circle"></div>
+		<div class="ghost filters__loader__skeleton__skeleton_4__row"></div>
+	</div>
+</div>
 <ng-template #template>
 	<span>En base a la duración, precio y número de escalas, creemos que te gustarán estos vuelos.</span>
 </ng-template>

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IAvailability, RAvailable } from '../models/rq-search-ce-request';
 import { environment } from 'src/environments/environment';
 import { GlobalComponent } from 'src/app/shared/global';
-import { Observable, of } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { ISearchResponse } from '../../api-checkout/models/rq-checkout-search';
 import { map, mergeMap } from 'rxjs/operators';
 import { IUpSell } from '../../api-checkout/models/rq-checkout-up-sell';

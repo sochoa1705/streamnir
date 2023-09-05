@@ -1,4 +1,4 @@
-<div class="boxCalendar">
+<div class="boxCalendar" [ngClass]="!isPageResults ? 'top-390' : 'top-150'">
     <div class="groupCalendario">
         <div *ngFor="let calendarMonth of  calendarMonths; let indexMonth = index"
             [ngClass]="{'calendarStart': indexMonth === 0, 'calendarEnd': indexMonth === 1}">

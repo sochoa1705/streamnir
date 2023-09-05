@@ -61,11 +61,10 @@ export class ModalFlightDetailComponent implements OnInit {
 	getDataUpSell() {
 			this._searchService.getUpSellGroup().subscribe({
 				next: (res) => {
-					console.log(res,'ressssssss')
-					GlobalComponent.upSellGroup = res;
-					if (res) {
+					if (res && res!==null) {
 						this._loadingService.idle();
 						if (res.length > 0) {
+							GlobalComponent.upSellGroup = res;
 							GlobalComponent.upSellSeleted = res[0];
 							this._modalService.open(ModalFeeComponent, {
 								centered: true,
@@ -77,15 +76,8 @@ export class ModalFlightDetailComponent implements OnInit {
 					}else this.redirectCheckout();
 					this.activeModal.close();
 				},
-				error: (err) => {
-					this.openModalError('Al parecer ocurrio un error, por favor intentelo más tarde.')
-				},
-				complete:()=>{
-					if(GlobalComponent.upSellSeleted==null){
-						setTimeout(() => {
-							this.redirectCheckout();
-						}, 250);
-					}
+				error: () => {
+					this.redirectCheckout();
 				}
 			});
 	}
@@ -117,12 +109,10 @@ export class ModalFlightDetailComponent implements OnInit {
 		this._loadingService.busy();
 		this._searchService.endSearch(true).subscribe({
 			next: (res) => {
-				console.log(res, 'upsell end');
 				if(res) this.validateUpsell();
 				else this.openModalError('Al parecer ocurrio un error, por favor intentelo más tarde.')
 			},
 			error: (err) => {
-
 				this.openModalError('Al parecer ocurrio un error, por favor intentelo más tarde.')
 			}
 		});
@@ -132,7 +122,6 @@ export class ModalFlightDetailComponent implements OnInit {
 		this._loadingService.busy();
 		this._searchService.validateAvailability().subscribe({
 			next: (res) => {
-				console.log(res,'validate nm')
 				if (res.isAvailable) this.getDataUpSell();
 				else {
 					this.openModalError(this.messageError);
@@ -158,7 +147,6 @@ export class ModalFlightDetailComponent implements OnInit {
 	}
 
 	redirectCheckout(){
-		console.log('reduerctccc')
 		this._loadingService.idle();
 		this.router.navigateByUrl('/checkout');
 		this.activeModal.close();

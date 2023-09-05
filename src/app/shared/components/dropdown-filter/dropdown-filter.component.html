@@ -1,4 +1,4 @@
-<div class="dropdown__filter">
+<div class="dropdown__filter" *ngIf="!showLoader">
     <div class="dropdown__filter__header" (click)="dropdownActive=!dropdownActive">
         <h4>{{title}}</h4>
         <img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
@@ -14,5 +14,15 @@
             </div>
         </ng-container>
         <span class="dropdown__filter__body__showMore" *ngIf="isAirlines && listOptions.length > 8" (click)="showMoreOptions()">{{isShowMoreAirlines ? 'Ver menos':'Ver ' +countRestAirlines+ ' aerolínea(s) más'}}</span>
+    </div>
+</div>
+
+<div class="dropdown__loader" *ngIf="showLoader">
+    <div class="skeleton dropdown__loader__header"></div>
+    <div class="dropdown__loader__body">
+        <div class="dropdown__loader__body__row"  *ngFor="let item of [].constructor(isAirlines ? 7 : 3)">
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+        </div>
     </div>
 </div>
