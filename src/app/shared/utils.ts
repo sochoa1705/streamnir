@@ -42,22 +42,6 @@ export class NmvModel {
   }
 }
 
-export function removeTimeZonePart(dateString: string) {
-  let finalDate = '';
-  if (dateString.split('+').length > 1) {
-    let b = dateString.split('+');
-
-    finalDate = b[0];
-  } else {
-    let b = dateString.split('-');
-    if (b.length > 1) {
-      b.pop();
-      finalDate = b.join('-');
-    }
-  }
-  return finalDate;
-}
-
 export function toUp() {
   window.scroll({
     top: 0,
@@ -73,8 +57,8 @@ export function roundNumber(numero: number, decimal: number) {
 }
 
 export function objectToQueryString(obj: any) {
-  var str = [];
-  for (var p in obj)
+  const str = [];
+  for (const p in obj)
     if (obj.hasOwnProperty(p)) {
       str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
     }
@@ -82,10 +66,10 @@ export function objectToQueryString(obj: any) {
 }
 
 export function routerToCapitalice(route: string) {
-  var splitStr = route.slice(1).split('/');
+  const splitStr = route.slice(1).split('/');
 
-  for (var i = 0; i < splitStr.length; i++) {
-    // You do not need to check if i is larger than splitStr length, as your for does that for you
+  for (let i = 0; i < splitStr.length; i++) {
+    // You do not need to check if "i" is larger than splitStr length, as your for does that for you
     // Assign it back to the array
     splitStr[i] =
       splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
@@ -108,11 +92,37 @@ export function getFileName(src: string) {
   return src.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '');
 }
 
+export function setItemWithExpiration(key: string, value: string, minutes: number) {
+  const expirationDate = new Date();
+  expirationDate.setMinutes(expirationDate.getMinutes() + minutes);
+  const item: any = {
+    value: value,
+    expirationDate: expirationDate.getTime()
+  };
+  localStorage.setItem(key, JSON.stringify(item));
+}
+
+export function getItemWithExpiration(key: string): any {
+  const itemStr = localStorage.getItem(key);
+
+  if (!itemStr) return null;
+
+  const item = JSON.parse(itemStr);
+  const now = new Date();
+
+  if (now.getTime() > item.expirationDate) {
+    localStorage.removeItem(key);
+    return null;
+  }
+
+  return item.value;
+}
+
 export class Utilities {
   static getCardType(card: string): string {
     let result: string = '';
 
-    var re = new RegExp('^4');
+    let re = new RegExp('^4');
     if (card.match(re) != null) result = 'Visa';
 
     // Mastercard
@@ -133,7 +143,7 @@ export class Utilities {
     if (card.match(re) != null) result = 'Diners';
 
     // Diners
-    re = new RegExp('^3(?:0[0-59]{1}|[689])[0-9]{0,}');
+    re = new RegExp('^3(?:0[0-59]|[689])[0-9]*');
     if (card.match(re) != null) result = 'Diners';
 
     return result;

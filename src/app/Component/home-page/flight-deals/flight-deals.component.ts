@@ -3,47 +3,45 @@ import { Router } from '@angular/router';
 import { FlightService } from 'src/app/api/api-nmviajes/services/flight.service';
 import { ModelTaggingOfertasVuelos } from 'src/app/Services/analytics/tagging.models';
 import { TaggingService } from 'src/app/Services/analytics/tagging.service';
-import { getFileName, Guid } from 'src/app/shared/utils';
+import { getFileName, getItemWithExpiration, Guid, setItemWithExpiration } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-flightdeals',
-  templateUrl: './flightdeals.component.html',
-  styleUrls: ['./flightdeals.component.scss']
+  selector: 'app-flight-deals',
+  templateUrl: './flight-deals.component.html',
+  styleUrls: ['./flight-deals.component.scss']
 })
 export class FlightDealsComponent implements OnInit {
-
   airfare: any;
   limit: number = 4;
 
-  constructor(
-    private _flightService: FlightService,
-    private _router: Router
-  ) { }
+  constructor(private _flightService: FlightService, private _router: Router) {
+  }
 
   ngOnInit(): void {
     this.getAirfare();
   }
 
   getAirfare(): void {
-    this._flightService.v1ApiFlightGetMostWantedGet({
-      TrackingCode: Guid(),
-      MuteExceptions: environment.muteExceptions,
-      'Caller.Company': "Agil",
-      'Caller.Application': "Interagencias"
-    }).subscribe((res: any) => {
-      this.airfare = JSON.parse(res).Result;
-    });
+    this.airfare = getItemWithExpiration('mostWanted');
+    if (this.airfare == null)
+      this._flightService.v1ApiFlightGetMostWantedGet({
+        TrackingCode: Guid(),
+        MuteExceptions: environment.muteExceptions,
+        'Caller.Company': 'Expertia',
+        'Caller.Application': 'NMViajes'
+      }).subscribe((res: any) => {
+        this.airfare = JSON.parse(res).Result;
+        setItemWithExpiration('mostWanted', this.airfare, 5);
+      });
   }
 
   viewRates(entity: any, index: number): void {
     this.addTag(entity, index, this.limit);
     this._router.navigateByUrl(`/vuelos/destino/LIM/${entity.DestinationCode}`);
-    //this._router.navigateByUrl(`/vuelos/destino/${entity.DestinationCode}`);
   }
 
   addTag(entity: any, index: number, array: number) {
-
     let position = `Card ${index + 1} de ${array}`
 
     const tag = new ModelTaggingOfertasVuelos(
