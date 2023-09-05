@@ -180,13 +180,13 @@ export class DataPagePresenterService {
         list2: [
           {
             id: 0,
-            text: "Nuestra Empresa NM Viajes",
+            text: "Quienes somos",
             link: "/nuestra-empresa",
             target: "_self"
           },
           {
             id: 1,
-            text: "Nuestras Agencias NM Viajes",
+            text: "Nuestras tiendas",
             link: "/nuestras-agencias/",
             target: "_self"
           },
@@ -198,26 +198,14 @@ export class DataPagePresenterService {
           },
           {
             id: 3,
-            text: "Política de Protección de datos Personales",
-            link: "politicas",
-            target: "_self"
-          },
-          {
-            id: 4,
             text: "Responsabilidad Social Corporativa",
             link: "responsabilidad-social",
             target: "_self"
           },
           {
-            id: 5,
-            text: "Mapa de Sitio",
-            link: "#",
-            target: "_self"
-          },
-          {
-            id: 6,
-            text: "Beneficios bancos",
-            link: "beneficios",
+            id: 4,
+            text: "Política de Protección de datos Personales",
+            link: "politicas",
             target: "_self"
           }
           // {
