@@ -29,6 +29,7 @@ const I18N_VALUES = {
 export class CalendarPriceComponent implements OnInit {
 
   @Input() flightData: any;
+  @Input() isPageResults=false;
   @Output() inputDates = new EventEmitter<any>();
 
   calendarMonths: any[] = [];
@@ -45,6 +46,7 @@ export class CalendarPriceComponent implements OnInit {
     this.intermediaryService.$getObjectCalendarPriceSource.subscribe(res => {
       if (res) {
         this.chargeCalendarPrice();
+
       }
     });
   }

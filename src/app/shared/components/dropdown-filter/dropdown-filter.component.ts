@@ -16,13 +16,14 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 
 	dropdownActive = true;
 	@Input() title = '';
-	@Input() listOptions: Item[] = [];
+	@Input() listOptions: Item[]=[];
 	@Input() isAirlines = false;
 	@Output() clickedOption = new EventEmitter();
 	@Output() selectedAirlines = new EventEmitter();
 	isShowMoreAirlines = false;
 	listOptionsAirlines: Item[] = [];
 	countRestAirlines = 0;
+	showLoader=true;
 
 	ngOnInit(): void {}
 
@@ -31,11 +32,14 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 			if(changes['listOptions'].currentValue.length > 8){
 				this.listOptionsAirlines = this.listOptions.slice(0, 8);
 				this.countRestAirlines = this.listOptions.filter((item) => item.total > 0).length - 8;
+				this.showLoader=this.listOptions.some(item=>item.total > 0) ? false : true;
 			}else{
 				this.listOptionsAirlines = this.listOptions;
+				this.showLoader=this.listOptions.some(item=>item.total > 0) ? false : true;
 			}
 		} else {
 			this.listOptionsAirlines = this.listOptions;
+			this.showLoader=this.listOptions.some(item=>item.total > 0) ? false : true;
 		}
 	}
 	clickOption(item: Item) {

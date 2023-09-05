@@ -25,9 +25,9 @@ export class SortByComponent implements OnInit {
   textOptionSeleted='Más opciones';
   textOptionSortBy='';
 
-  @Input() theCheapest:Order; 
-  @Input() betterOption:Order; 
-  @Input() shorterDuration:Order; 
+  @Input() theCheapest:Order | null; 
+  @Input() betterOption:Order | null; 
+  @Input() shorterDuration:Order | null; 
   @Input() currency:string = 'USD';
   @Input() arrayMoreOptionsSort:IOption[] = [];
   @Output() clickTabSort= new EventEmitter();

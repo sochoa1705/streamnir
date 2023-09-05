@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { concat, Observable, of, Subject } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -28,6 +28,7 @@ import { IntermediaryService } from '../../../../Services/intermediary.service';
 import { AccountsService, UserStorage } from '../../../../Services/accounts.service';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
+import { getParamsSearch } from 'src/app/shared/utils/getParams';
 
 @Component({
   selector: 'app-tab-vuelos',
@@ -51,7 +52,8 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   @Input() isBgWhite=true;
-
+  @Input() isPageResults=false;
+ 
   get vuelosTab() {
     return this._vuelosTab;
   }
@@ -79,7 +81,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   minLengthAutocomplete = 3;
 
-  valueInputOrigen = 'Lima';
+  valueInputOrigen = '';
   valueInputDestino = "";
 
   isSubmit = false;
@@ -104,7 +106,8 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
       public accountService: AccountsService,
       private notification: NotificationService,
       private fb: FormBuilder,
-      private intermediaryService: IntermediaryService
+      private intermediaryService: IntermediaryService,
+      private route: ActivatedRoute,
   ) {
     this.createForm();
     this.createFormMultiCity();
@@ -116,6 +119,21 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.logicPathVuelos();
     this.userStorage = this.accountService.getUserStorage();
+    
+    this.route.queryParamMap.subscribe((params) => {
+      if(window.location.pathname.includes('resultados')){
+        const data=getParamsSearch(params);
+        this.tipoVuelo=data.flightType;
+        this.form.controls["rdoVuelo"].patchValue(data.flightType.toString())
+        this.form.controls["departureDate"].patchValue(data.departureDate)
+        this.initCiudadDestino(data.departureLocation, true)
+        this.initCiudadDestino(data.arrivalLocation, true,'destino')  
+        if(data.flightType==0){
+          this.form.controls["arrivalDate"].patchValue(data.arrivalDate) 
+        }
+        console.log(data)
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -123,10 +141,12 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
     this.vuelosInput$.next('Lima');
   }
 
+
   logicPathVuelos() {
     this.destinosService.getParam().pipe(
       takeUntil(this.destroy$)
     ).subscribe(codigo => {
+      console.log(codigo)
       if (!codigo) {
         this.form.controls["origen"].patchValue(null);
         this.form.controls["destino"].patchValue(null);
@@ -135,22 +155,29 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
 
-  initCiudadDestino(codigoCiudad: string) {
-    this.form.controls["origen"].patchValue({
-      children: [],
-      codigo: "LIM",
-      id: "LIM",
-      title: "Lima"
-    })
-
-    this.valueInputOrigen = "Lima";
-
-    this.destineService.getGeoTree(codigoCiudad).subscribe(data => {
-      const ciudad = this.convertFormatAutocomplete(data);
-      this.form.controls["destino"].patchValue(ciudad[0]);
-
-      this.valueInputDestino = ciudad[0].title;
-    })
+  initCiudadDestino(codigoCiudad: string, isParams=false, key='origen') {
+    if(!isParams){
+      this.form.controls["origen"].patchValue({
+        children: [],
+        codigo: "LIM",
+        id: "LIM",
+        title: "Lima"
+      })
+      this.valueInputOrigen = "Lima";
+      this.destineService.getGeoTree(codigoCiudad).subscribe(data => {
+        const ciudad = this.convertFormatAutocomplete(data);
+        this.form.controls["destino"].patchValue(ciudad[0]);
+  
+        this.valueInputDestino = ciudad[0].title;
+      })
+    }else{
+      this.destineService.getGeoTree(codigoCiudad).subscribe(data => {
+        const ciudad = this.convertFormatAutocomplete(data,key=='origen'?true:false);
+        this.form.controls[key].patchValue(ciudad[0]);
+        if(key=='origen') this.valueInputOrigen = ciudad[0].title
+        else this.valueInputDestino = ciudad[0].title;
+      })
+    }
   }
 
   private loadVuelosOrigen() {
@@ -244,6 +271,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
       origenHotel: new FormControl(''),
       departureDate: new FormControl(''),
       arrivalDate: new FormControl(''),
+      rdoVuelo:new FormControl('0')
     });
   }
 
@@ -619,7 +647,6 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   changeSelect(tipoVuelo: number): void {
     this.tipoVuelo = tipoVuelo;
-
     this.form.get('departureDate')?.setValue('');
     this.form.get('arrivalDate')?.setValue('');
   }

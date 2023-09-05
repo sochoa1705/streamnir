@@ -17,9 +17,9 @@ export class FiltersComponent implements OnInit {
   @Input() dataAirlines:Item[]=[];
   @Input() dataScaleFilter:Item[]=[];
   @Input() dataBagFilter:Item[]=[];
-  @Input() totalResults=0;
-  @Input() totalResultsFilter=0;
-  @Input() exchangeRate=0;
+  @Input() totalResults:number;
+  @Input() totalResultsFilter:number;
+  @Input() exchangeRate:number;
 
   @Input() minPrice=0;
   @Input() maxPrice=0;

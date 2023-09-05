@@ -25,6 +25,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	userStorage: UserStorage;
 	img: string;
 	isShowMenu = true;
+	showOptionsProfile=false;
 
 	loginModalSubscription = new Subscription();
 
@@ -170,6 +171,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	logout() {
 		this._authService.signOut();
 		this.accountService.signOut();
+		this.showOptionsProfile=false;
 		this.route.navigateByUrl('/');
 	}
 

@@ -11,6 +11,7 @@ import { getPricingFareBreakDowns } from 'src/app/shared/utils/fareBreakDowns';
 import { LoadingService } from 'src/app/Services/intermediary/loading.service';
 import { getMoreOptionsFilter } from 'src/app/shared/utils/getMoreOptionsFilter';
 import { getDatesBySegment } from 'src/app/shared/utils/getDatesBySort';
+import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 
 interface Item {
 	value: any;
@@ -53,7 +54,13 @@ export class ResultsSearchPageComponent implements OnInit {
 		private _tokenService: TokenService,
 		private route: ActivatedRoute,
 		private _loadingService: LoadingService
-	) {}
+	) {
+		/*this.route.queryParamMap.subscribe((params) => {
+			this.resetData()
+			
+		});*/
+
+	}
 
 	allDataGroups: Group[] = [];
 	dataGroupsPaginate: Group[] = [];
@@ -64,14 +71,18 @@ export class ResultsSearchPageComponent implements OnInit {
 	dataBagFilter: Item[] = [];
 	dataScaleFilter: Item[] = [];
 	dataAirlines: Item[] = [];
+
 	dataAirlinesTemp: Item[] = [];
-	filters: Filter = dataFiltersInit;
+	dataBagTemp: Item[] = [];
+	dataScaleTemp: Item[] = [];
+
+	filters: Filter = { ...dataFiltersInit};
 	exchangeRate = 0;
 	currency = 'USD';
 
-	theCheapest: Order;
-	betterOption: Order;
-	shorterDuration: Order;
+	theCheapest: Order | null;
+	betterOption: Order | null;
+	shorterDuration: Order | null;
 
 	arrayMoreOptionsSort: IOption[] = [];
 
@@ -85,8 +96,11 @@ export class ResultsSearchPageComponent implements OnInit {
 	showNotResults = false;
 	titleNotResults = '';
 
+	isLoader = true;
+	saveModel:SaveModelVuelos;
+
 	ngOnInit() {
-		this.getToken();
+		//this.resetData();
 		this.dataBagFilter = dataBagFilterInit.map((item) => {
 			item.total = 0;
 			return item;
@@ -95,9 +109,57 @@ export class ResultsSearchPageComponent implements OnInit {
 			item.total = 0;
 			return item;
 		});
-		this.dataAirlines = [];
-		this.dataAirlinesTemp = [];
+		this.dataBagTemp = [...this.dataBagFilter];
+		this.dataScaleTemp = [...this.dataScaleFilter];
+		this.arrayMoreOptionsSort=[];
 		this._loadingService.requestSearchCount = 0;
+		this.getToken();
+	}
+
+
+	resetData(){
+		this.isLoader = true;
+		this.dataBagFilter = dataBagFilterInit.map((item) => {
+			item.total = 0;
+			return item;
+		});
+		this.dataScaleFilter = dataScaleFilterInit.map((item) => {
+			item.total = 0;
+			return item;
+		});
+		this.allDataGroups = [];
+		this.dataGroupsPaginate = [];
+		this.dataFilterGroups = [];
+		this.dataPreviewFilter = [];
+
+		this.theCheapest=null;
+		this.betterOption=null;
+		this.shorterDuration=null;
+
+		this.indexPaginate = 8;
+		this.dataAirlines = [];
+		this.dataBagTemp = [...this.dataBagFilter];
+		this.dataScaleTemp = [...this.dataScaleFilter];
+		this._loadingService.requestSearchCount = 0;
+		this.minPrice = 0;
+		this.maxPrice = 0;
+		this.totalMultiticket = 0;
+		this.sortBy = 0;
+		this.arrayMoreOptionsSort = [];
+		this.exchangeRate=0;
+		this.showError = false;
+		this.showNotResults = false;
+		this.filters={
+			arrayAirline:[],
+			arrayBaggage:[],
+			arrayScales:[],
+			minPrice:0,
+			maxPrice:0,
+			isMultiticket:false,
+			isPrices:false,
+			isDuration:false
+		}
+		this.getToken();
 	}
 
 	getToken() {
@@ -110,6 +172,7 @@ export class ResultsSearchPageComponent implements OnInit {
 				this.getObjectParams();
 			},
 			error: () => {
+				this.isLoader=false;
 				this.showError = true;
 			}
 		});
@@ -120,12 +183,12 @@ export class ResultsSearchPageComponent implements OnInit {
 			const objParams = getParams(params);
 			this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
 			GlobalComponent.classFligh = objParams.flightClass == 0 ? 'Economy' : objParams.flightClass == 1 ? 'Business':'First Class';
-			console.log(objParams.classFligh,'fjdhskd')
 			this.titleNotResults =
 				objParams.flightType !== 2
 					? `No encontramos vuelos coincidentes entre ${objParams.departureLocation} y ${objParams.arrivalLocation} para estas fechas.`
 					: `No encontramos vuelos coincidentes para esas fechas.`;
-			if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
+			if (environment.urlApiMotorVuelos.includes('qa')) 
+			this.getAllDataSearch(objParams);
 			else this.getAllDataAnterior(objParams);
 		});
 	}
@@ -135,6 +198,7 @@ export class ResultsSearchPageComponent implements OnInit {
 			next: (res) => {
 				this._loadingService.requestSearchCount++;
 				if (res.groups) {
+					this.isLoader=false;
 					if (this.exchangeRate == 0) this.exchangeRate = res.exchangeRate.amount;
 					this.getDataFilters(res);
 					if (this._loadingService.requestSearchCount == 9) {
@@ -149,6 +213,7 @@ export class ResultsSearchPageComponent implements OnInit {
 				if (!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate = res.exchangeRate;
 			},
 			error: (err) => {
+				this.isLoader=false;
 				this.showError = true;
 			}
 		});
@@ -157,7 +222,7 @@ export class ResultsSearchPageComponent implements OnInit {
 	endsearch() {
 		this._searchService.endSearch().subscribe({
 			next: (res) => {
-				console.log(res, 'end Results');
+				console.log(res, 'end Results gneral');
 			},
 			error: (err) => {
 				this.showError = true;
@@ -172,6 +237,7 @@ export class ResultsSearchPageComponent implements OnInit {
 				this.exchangeRate = res.exchangeRate.amount;
 				if (!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate = res.exchangeRate;
 				if (res.groups && res.groups.length > 0) {
+					this.isLoader=false;
 					this.getDataFilters(res);
 					this.minPrice = this.dataFilterGroups[0].detailPricing?.totalPay || 0;
 					this.maxPrice = this.dataFilterGroups[this.dataFilterGroups.length - 1].detailPricing?.totalPay || 0;
@@ -226,8 +292,8 @@ export class ResultsSearchPageComponent implements OnInit {
 				!isBagHold;
 
 			item.typeBag = isBagHold ? 'holdbag' : isBagHand ? 'handbag' : 'backpack';
-			if (isBagHand) this.dataBagFilter[0].total++;
-			if (isBagHold) this.dataBagFilter[1].total++;
+			if (isBagHand) this.dataBagTemp[0].total++;
+			if (isBagHold) this.dataBagTemp[1].total++;
 
 			item.isDirect =
 				item.departure.some((departure) => departure.segments.some((segment) => segment.stops == 0)) &&
@@ -239,9 +305,9 @@ export class ResultsSearchPageComponent implements OnInit {
 				item.departure.some((departure) => departure.segments.some((segment) => segment.stops >= 2)) ||
 				(item.returns ? item.returns.segments.some((segment) => segment.stops >= 2) : false);
 
-			if (item.isDirect) this.dataScaleFilter[0].total++;
-			if (item.isOneScale) this.dataScaleFilter[1].total++;
-			if (item.isMultiScale) this.dataScaleFilter[2].total++;
+			if (item.isDirect) this.dataScaleTemp[0].total++;
+			if (item.isOneScale) this.dataScaleTemp[1].total++;
+			if (item.isMultiScale) this.dataScaleTemp[2].total++;
 			item.orderByScales =
 				item.isDirect && !item.isOneScale && !item.isMultiScale
 					? 1
@@ -284,10 +350,13 @@ export class ResultsSearchPageComponent implements OnInit {
 			item.dateOrder = [getDatesBySegment(item.departure[0].segments)];
 			if (item.returns) item.dateOrder.push(getDatesBySegment(item.returns.segments));
 		});
-		if (this._loadingService.requestSearchCount == 9) {
+		if (this._loadingService.requestSearchCount == 9) 
 			this.dataAirlinesTemp.push({ ...dataAirlineMulti, total: this.totalMultiticket });
-			this.dataAirlines = this.dataAirlinesTemp;
-		}
+
+		this.dataBagFilter = [...this.dataBagTemp];
+		this.dataScaleFilter = [...this.dataScaleTemp];
+		this.dataAirlines = [...this.dataAirlinesTemp];
+		
 		this.allDataGroups = [...this.allDataGroups, ...res.groups];
 		this.dataFilterGroups = [...this.allDataGroups];
 		this.sortData();
@@ -518,7 +587,6 @@ export class ResultsSearchPageComponent implements OnInit {
 
 	showMoreResults() {
 		this.indexPaginate = this.indexPaginate + 8;
-		console.log('qqq pso')
 		this.dataGroupsPaginate = [
 			...this.dataGroupsPaginate,
 			...this.dataFilterGroups.slice(this.dataGroupsPaginate.length, this.indexPaginate)

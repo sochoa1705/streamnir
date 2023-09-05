@@ -1,3 +1,4 @@
+@use '/src/scss/colors';
 .card {
     &__content {
         position: relative;
@@ -18,6 +19,40 @@
             @media (max-width: 768px) {
                 position: relative;
             }
+        }
+    }
+}
+
+.search__container{
+    width: 100%;
+    min-height: 368px;
+	padding: 48px 96px;
+	background-image: url("/assets/banner/home_search.png");
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+    &__metasearch{
+        max-width: 1440px;
+		margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap:48px;
+        h3{
+            margin:0;
+            font-family: Open Sans;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 40px;
+            letter-spacing: -0.02em;
+            text-align: left;
+            color:white;
+        }
+        &__form{
+            width: 100%;
+            min-height: 184px;
+            padding: 32px;
+            border-radius: 8px;
+            background: colors.$gris-50;
         }
     }
 }

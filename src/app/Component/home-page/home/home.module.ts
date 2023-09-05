@@ -23,6 +23,9 @@ import { CarsModule } from '../cars/cars.module';
 import { ActivitiesModule } from '../activities/activities.module';
 import { FlightsPlusHotelModule } from '../flights-plus-hotel/flights-plus-hotel.module';
 import { TimerBannerModule } from '../../../shared/components/timer-banner/timer-banner.module';
+import { NewTabsFilterModule } from 'src/app/shared/components/new-tabs-filters/new-tabs-filters.module';
+import { FilterTabsModule } from 'src/app/shared/components/filter-tabs/filter-tabs.module';
+import { FiltersafeModule } from 'src/app/shared/components/filtersafe/filtersafe.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -46,7 +49,10 @@ import { TimerBannerModule } from '../../../shared/components/timer-banner/timer
     HotelsModule,
     CarsModule,
     ActivitiesModule,
-    TimerBannerModule
+    TimerBannerModule,
+    NewTabsFilterModule,
+    FilterTabsModule,
+    FiltersafeModule
   ],
   exports: [HomeComponent],
   providers: [DestinyService, AsidePresenterService, BusinessUnitService]

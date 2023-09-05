@@ -1,167 +1,99 @@
-@import "/src/scss/variables";
-.spacer {
-  flex: 1 1 auto;
-}
-.mat-drawer {
-  position: fixed;
-  width: 300px;
-  // z-index:300;
-  ul {
-    list-style: none;
-    padding-left: 10px;
-    margin-top: 40px;
-    li {
-      display: block !important;
-      img {
-        width: 20px;
-        height: auto;
-        margin-right: 7px;
-      }
-      a {
-        color: #4b4b4b !important;
-        font-size: 12px;
-      }
-    }
-  }
-  &-container {
-    z-index: 300;
-  }
-  .close {
-    float: right;
-    font-size: 14px;
-    padding: 7px;
-    &:hover {
-      background: rgb(231, 230, 230);
-    }
-  }
-}
-mat-drawer-container {
-  min-height: 0;
-  z-index: 300;
-  max-height: 500px; /* doesn't work*/
-  height: fit-content; /* doesn't work*/
-  /* height: 100vh; This Gives 100% View Height with a scrollbar*/
-}
+@use '/src/scss/colors';
 
-.mat-toolbar {
-  background-color: $red;
-  color: $white;
+.toolbar {
+	min-height: 96px;
+	padding: 24px 96px;
+	background: white;
+  width: 100%;
+  box-shadow: 0px 1px 2px -1px #1018281A;
+  box-shadow: 0px 1px 3px 0px #1018281A;
+  border-bottom:1px solid #e9ebed; 
   &.fixed {
     position: fixed;
     z-index: 5;
-    #top {
-      max-width: 1450px;
-      margin: 0 auto;
-      width: 100%;
-    }
+    background: colors.$red-500;
+    padding: 16px 96px;
+    min-height: 70px;
+    border-bottom: transparent;
   }
-  svg.logo {
-    cursor: pointer;
-    margin-left: 50px;
-    @media (max-width: 768px) {
-      width: 100px;
-      margin-left: 0;
+
+  &__section{
+    max-width: 1440px;
+		margin: 0 auto;
+    display: flex;
+		justify-content: space-between;
+		align-items: center;
+    &__logo {
+      cursor: pointer;
     }
-  }
-  & .main {
-    padding: 0;
-    line-height: 0;
-    background: transparent;
-    margin-left: 5px;
-  }
-  & > a {
-    margin-right: 5px;
-    color: $white;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    @media (max-width: 768px) {
-      margin: 0 9px;
-    }
-    & > span {
-      font-size: 6px;
-      line-height: 10px;
-      display: flex !important;
-      flex-direction: column;
+    &__actions {
+      display: flex;
+      gap: 32px;
+      justify-content: flex-end;
       align-items: center;
-      color: $red;
-      font-weight: normal;
-      white-space: pre-line;
-      width: 50px;
-      height: 2px;
-      @media (max-width: 768px) {
-        display: none !important;
-      }
-    }
-    &:hover > span {
-      font-size: 11px;
-      line-height: 14px;
-      color: $white;
-      height: auto;
-    }
-
-    // &:first-child {
-    //     padding-left: 18px !important;
-    //     border-left: 1px solid blue !important;
-    // }
-  }
-  ul {
-    list-style: none;
-    margin-bottom: 0;
-    li {
-      display: inline-block;
-      margin: 0 20px;
-      a {
+      &__icon{
         cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        color: rgba(255, 255, 255, 1);
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        line-height: 20px;
-        &:after {
-          content: "";
-          display: block;
-          margin: auto;
-          height: 2px;
-          width: 0;
-          transition: all 0.3s;
-        }
-        &:hover {
-          color: rgba(255, 255, 255, 1);
-          &:after {
-            width: 100%;
-            background: $white;
-          }
-        }
+      }
+      &__profile{
+         display: flex;
+         gap:16px;
+         align-items: center;
+         &__image{
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+         }
+         &__dropdown{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            cursor: pointer;
+            position: relative;
+            span{
+                font-family: Montserrat;
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 28px;
+                letter-spacing: 0em;
+                text-align: left;
+            }
+            &__options{
+               position: absolute;
+               box-shadow: 0px 4px 6px -4px #1018281A;
+               box-shadow: 0px 10px 15px -3px #1018281A;
+               border: 1px solid colors.$neutral-200;
+               padding: 8px 6px 8px 6px;
+               border-radius: 4px;
+               width: 132px;
+                z-index: 11;
+                right: 5px;
+                top: 40px;
+                background: white;
+
+               .option{
+                padding: 4px 8px;
+                span{
+                  font-family: Montserrat;
+                  font-size: 14px;
+                  font-weight: 600;
+                  line-height: 20px;
+                  letter-spacing: 0em;
+                  padding-bottom: 0px;
+                  cursor: pointer;
+                  width: 100%;
+                  &.red{
+                    color:colors.$red-500;
+                  }
+                  &.blue{
+                    color:colors.$blue-500;
+                  }
+                }
+              }
+
+            }
+         }
       }
     }
   }
-}
-.active {
-  color: rgba(255, 255, 255, 1) !important;
-  &:after {
-    content: "" !important;
-    display: block !important;
-    margin: auto !important;
-    height: 2px !important;
-    transition: all 0.3s !important;
-    width: 100% !important;
-    background: $white !important;
-    color: rgba(255, 255, 255, 1) !important;
-  }
-}
-
-.border {
-  border-color: white !important;
-}
-
-.img-perfil {
-  width: 32px;
-  height: 32px;
-  border-radius: 50px;
 }

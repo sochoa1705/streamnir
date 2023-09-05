@@ -7086,7 +7086,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   }
 }
 .newBoxTab .sectionTab .columnBox .boxFlotante {
-  top: 130px;
+  top: 390px !important;
 }
 @media (max-width: 640px) {
   .newBoxTab .sectionTab .columnBox .boxFlotante {
@@ -10485,6 +10485,7 @@ app-flightdeals button {
   border-radius: 5px;
   height: 48px;
   padding: 0 10px;
+  background: white;
 }
 @media (max-width: 640px) {
   .gridTab .rowGrid {

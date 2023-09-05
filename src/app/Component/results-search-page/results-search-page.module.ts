@@ -17,6 +17,7 @@ import { MinutesFormatPipe } from 'src/app/shared/pipes/convert-duration.pipe';
 import { PriceFilterModule } from 'src/app/shared/components/price-filter/price-filter.module';
 import { DurationFilterModule } from 'src/app/shared/components/duration-filter/duration-filter.module';
 import { NotResultsComponent } from './not-results/not-results.component';
+import { CardLoaderResultModule } from 'src/app/shared/components/card-loader-result/card-loader-result.module';
 registerLocaleData(localeEs, "es");
 
 @NgModule({
@@ -34,7 +35,8 @@ registerLocaleData(localeEs, "es");
         NgbPopoverModule,
         NgbTooltipModule,
         PriceFilterModule,
-        DurationFilterModule
+        DurationFilterModule,
+        CardLoaderResultModule
     ],
     declarations:[ResultsSearchPageComponent, FiltersComponent, SortByComponent, MinutesFormatPipe, NotResultsComponent],
     exports: [ResultsSearchPageComponent],

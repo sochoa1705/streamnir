@@ -1,5 +1,5 @@
 <form class="filters" [formGroup]="formGroup">
-	<div class="filters__currency">
+	<div class="filters__currency" *ngIf="exchangeRate">
 		<article>
 			<h5>Moneda</h5>
 			<span>Tipo de cambio: S/ {{exchangeRate | number: '1.2-2'}}</span>
@@ -24,12 +24,25 @@
 			]"
 		></app-select>
 	</div>
-	<div class="filters__results">
+
+	<div class="filters__loader" *ngIf="!exchangeRate">
+		<div class="skeleton filters__loader__skeleton_1"></div>
+		<div class="skeleton filters__loader__skeleton_2"></div>
+		<div class="skeleton filters__loader__skeleton_3"></div>
+	</div>
+
+	<div class="filters__results" *ngIf="totalResultsFilter && totalResults">
 		<h3>Filtros</h3>
 		<h5>
 			{{totalResultsFilter}} <span>de {{ totalResults }} resultados</span>
 		</h5>
 	</div>
+
+	<div class="filters__loader result" *ngIf="!totalResultsFilter || !totalResults">
+		<div class="skeleton filters__loader__skeleton_4"></div>
+		<div class="skeleton filters__loader__skeleton_4"></div>
+	</div>
+
 	<app-dropdown-filter
 		[title]="'Equipaje'"
 		[listOptions]="dataBagFilter"
