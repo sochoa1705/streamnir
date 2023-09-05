@@ -31,14 +31,14 @@
 		<div class="skeleton filters__loader__skeleton_3"></div>
 	</div>
 
-	<div class="filters__results" *ngIf="totalResultsFilter && totalResults">
+	<div class="filters__results" *ngIf="totalResultsFilter || totalResults || isNotResult==true">
 		<h3>Filtros</h3>
 		<h5>
 			{{totalResultsFilter}} <span>de {{ totalResults }} resultados</span>
 		</h5>
 	</div>
 
-	<div class="filters__loader result" *ngIf="!totalResultsFilter || !totalResults">
+	<div class="filters__loader result" *ngIf="(!totalResultsFilter || !totalResults) && isNotResult==false && totalResultsFilter>0">
 		<div class="skeleton filters__loader__skeleton_4"></div>
 		<div class="skeleton filters__loader__skeleton_4"></div>
 	</div>
