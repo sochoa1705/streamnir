@@ -15,7 +15,7 @@ import { CardInfoModule } from 'src/app/shared/components/card-info/card-info.mo
 import { MailingModule } from 'src/app/shared/components/mailing/mailing.module';
 import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
-import { FlightDealsModule } from '../flightdeals/flightdeals.module';
+import { FlightDealsModule } from '../flight-deals/flight-deals.module';
 import { PackagesModule } from '../packages/packages.module';
 import { BuildYourTripModule } from '../build-your-trip/build-your-trip.module';
 import { HotelsModule } from '../hotels/hotels.module';

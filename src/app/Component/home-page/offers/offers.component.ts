@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OffersService } from '../../../Services/offers/offers.service';
 import { Offers } from '../../../Models/offers/offers.model';
-import { GalleryService } from '../../../Services/gallery/gallery.service';
-import { GalleryItem } from '../../../Models/gallery/gallery-item.model';
-import { first, map } from 'rxjs/operators';
-import { flatMap } from 'rxjs/internal/operators';
+import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { getItemWithExpiration, Guid, setItemWithExpiration } from '../../../shared/utils';
+import { FlightService } from '../../../api/api-nmviajes/services/flight.service';
+import { environment } from '../../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-offers',
@@ -13,34 +14,61 @@ import { Subscription } from 'rxjs';
 	styleUrls: [ './offers.component.scss' ]
 })
 export class OffersComponent implements OnInit, OnDestroy {
-	bannerImgSrc: GalleryItem = {
-		codigo: '',
-		urlImagen: '',
-		descripcion: '',
-		link: ''
-	};
+	isLoading = true;
 
 	internationalFlights: any[] = [];
 	nationalFlights: any[] = [];
 	itineraries: any[] = [];
 
-	bannerSubscription = new Subscription();
 	offersSubscription = new Subscription();
 
-	constructor(private offersService: OffersService, private galleryService: GalleryService) {}
-
-	ngOnInit(): void {
-		this.getOffers();
-		this.getBanner();
+	constructor(private offersService: OffersService,
+	            private flightsService: FlightService,
+	            private router: Router) {
 	}
 
-	getBanner() {
-		this.bannerSubscription = this.galleryService.getGalleryItems().pipe(
-				flatMap(items => items),
-				first(items => items.codigo == 'OFERTAS_BANNER')
-		).subscribe({
-			next: (item: GalleryItem) => this.bannerImgSrc = item,
-			error: (err: any) => console.error(err)
+	ngOnInit(): void {
+		this.getFlights();
+		this.getOffers();
+	}
+
+	getFlights() {
+		const storedFlights = getItemWithExpiration('mostWanted');
+		if (storedFlights != null) {
+			const mostWanted = this.mapFlights(storedFlights);
+			this.internationalFlights = mostWanted.filter((item: any) => !item.isDomestic).slice(0, 6);
+			this.nationalFlights = mostWanted.filter((item: any) => item.isDomestic).slice(0, 6);
+		} else {
+			this.flightsService.v1ApiFlightGetMostWantedGet({
+				TrackingCode: Guid(),
+				MuteExceptions: environment.muteExceptions,
+				'Caller.Company': 'Expertia',
+				'Caller.Application': 'NMViajes'
+			}).subscribe((res: any) => {
+				setItemWithExpiration('mostWanted', JSON.parse(res).Result, 5);
+				const resJson = this.mapFlights(JSON.parse(res).Result);
+				this.internationalFlights = resJson.filter((item: any) => !item.isDomestic).slice(0, 6);
+				this.nationalFlights = resJson.filter((item: any) => item.isDomestic).slice(0, 6);
+			});
+		}
+	}
+
+	private mapFlights(flights: any[]): any[] {
+		return flights.map((item: any) => {
+			return {
+				origin: 'Lima',
+				destination: item.Destination,
+				type: 1,
+				flightType: 'ida y vuelta',
+				price: item.Rate,
+				image: item.Image,
+				link: `/vuelos/destino/LIM/${item.DestinationCode}`,
+				condition: 'Tarifa por persona, las tarifas son dinámicas.',
+				isDomestic: item.Type === 'NAC',
+				nights: null,
+				packageIncludes: [],
+				accommodationType: null
+			};
 		});
 	}
 
@@ -49,7 +77,8 @@ export class OffersComponent implements OnInit, OnDestroy {
 				map(offers => offers.filter(o => o.mostrar))
 		).subscribe({
 			next: (flights: Offers[]) => {
-				const parsed = flights
+				this.itineraries = flights
+						.filter((f: Offers) => f.tipoOferta == 2)
 						.map((f: Offers) => {
 							return {
 								origin: f.origen,
@@ -64,22 +93,23 @@ export class OffersComponent implements OnInit, OnDestroy {
 								nights: f.noches,
 								packageIncludes: f.incluye?.join(' - '),
 								accommodationType: f.tipoAlojamiento
-							}
+							};
 						});
-				this.internationalFlights = [ ...parsed ].filter(f => f.type == 1 && !f.isDomestic);
-				this.nationalFlights = [ ...parsed ].filter(f => f.type == 1 && f.isDomestic);
-				this.itineraries = [ ...parsed ].filter(f => f.type == 2);
+				this.isLoading = false;
 			},
-			error: (err: any) => console.error(err)
+			error: (err: any) => {
+				this.isLoading = false;
+				console.error(err);
+			}
 		});
 	}
 
-	onClick(url: string) {
-		location.href = url;
+	onClick(url: string, useRouter: boolean) {
+		if (useRouter) this.router.navigateByUrl(url);
+		else location.href = url;
 	}
 
 	ngOnDestroy() {
-		this.bannerSubscription.unsubscribe();
 		this.offersSubscription.unsubscribe();
 	}
 }

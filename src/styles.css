@@ -8457,12 +8457,12 @@ mat-dialog-container {
         cursor: pointer;
         transition: all 200ms ease-in-out; }
 
-app-flightdeals button {
+app-flight-deals button {
   background: none !important; }
   @media (max-width: 640px) {
-    app-flightdeals button {
+    app-flight-deals button {
       background: none !important; }
-      app-flightdeals button:hover {
+      app-flight-deals button:hover {
         background: none !important; } }
 
 .p-galleria .p-galleria-close {
