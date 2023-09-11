@@ -31,6 +31,7 @@ export class SectionCarruselComponent implements OnInit {
     spaceBetween:48,
     pagination:{
       clickable: true,
+      dynamicBullets: true,
     },
     autoplay:{
       delay: 5000,

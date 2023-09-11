@@ -134,6 +134,7 @@ export class HomeComponent implements OnInit {
 
 	getGallery() {
 		this.dataPagePresenterService.getDataGallery().subscribe((data) => {
+			console.log(data,'datafull')
 			let sliderDestacados = data
 				.filter((item) => item.Code == EGalleryCode.slider_destacados)
 				.map((item) => item.Images)[0];

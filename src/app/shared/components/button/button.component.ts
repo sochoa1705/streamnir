@@ -14,6 +14,7 @@ export class ButtonComponent implements OnInit {
 	@Input() right?: boolean;
 	@Input() left?: boolean;
     @Input() w100=false;
+    @Input() size='md';
     @Output() onClick = new EventEmitter<MouseEvent>();
 
     constructor() { }

@@ -7,14 +7,10 @@ import { GlobalComponent } from 'src/app/shared/global';
 import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { environment } from 'src/environments/environment';
 import { RPurchare } from 'src/app/api/api-checkout/models/rq-checkout-save-booking';
 import { getBodyEmail } from 'src/app/shared/utils/bodyEmail';
 import { ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
-import { IValidateBooking, RValidateBooking } from 'src/app/api/api-checkout/models/rq-checkout-validate-booking';
-import { getBodyValidateBooking } from 'src/app/shared/utils/bodyValidateBooking';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 interface Item {
