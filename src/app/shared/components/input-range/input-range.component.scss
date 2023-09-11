@@ -1,0 +1,40 @@
+@use '/src/scss/colors';
+.container__range{
+    display: flex;
+    align-items: center;
+    gap:16px;
+    width: 100%;
+    &:focus{
+       &__date{
+          border: 1px solid colors.$red-500;
+       }
+    }
+    &__date{
+        cursor: pointer;
+        height: 60px;
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid colors.$gris-200;
+        box-shadow: 0px 1px 2px 0px #1018280D;
+        background: white;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap:8px;
+        width: 50%;
+        span{
+            font-family: Montserrat;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px;
+            letter-spacing: 0em;
+            text-align: left;
+            &.inactive{
+                color:colors.$gris-600;
+            }
+            &.active{
+                color:colors.$gris-900;
+            }
+        }
+    }
+}

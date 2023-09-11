@@ -11,12 +11,19 @@
               <app-tab-hotel [hidden]="indexSelectedTab!==4"></app-tab-hotel>
               <app-tab-autos  [hidden]="indexSelectedTab!==5"></app-tab-autos>
               <app-tab-actividades [hidden]="indexSelectedTab!==6"></app-tab-actividades>
-              <app-filtersafe  [hidden]="indexSelectedTab!==7"></app-filtersafe>
+              <app-filtersafe  [hidden]="indexSelectedTab!==7"></app-filtersafe> 
+
+            <!-- <app-tab-vuelos-v2></app-tab-vuelos-v2>--> 
           </div>
       </div>
   </div>
-
-  <ng-container [ngSwitch]="selectedTab">
+  <app-section-carrusel [slidersJoin]="slidersJoin"></app-section-carrusel>
+  <app-section-super-offers></app-section-super-offers>
+  <app-section-packages></app-section-packages>
+  <app-section-why-choose-us [dataSection]="dataPagePresenterService.data.sections[4].card"></app-section-why-choose-us>
+  <app-section-blog></app-section-blog>
+  <app-section-boletin></app-section-boletin>
+  <!--<ng-container [ngSwitch]="selectedTab">
     <ng-container *ngSwitchCase="'home'">
       <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
         [banners_corps]="bannersCorporativos" [selectedTab]="selectedTab"></app-aside>
@@ -35,7 +42,6 @@
     <app-activities *ngSwitchCase="'actividades'"></app-activities>
   </ng-container>
 
-  <!-- VUELOS -->
   <div class="container-fluid">
     <div class="row mb-4">
       <div class="col-12">
@@ -48,11 +54,11 @@
 
     <app-flightdeals></app-flightdeals>
   </div>
-  <!-- END VUELOS -->
 
-  <!-- COMPRAR -->
+
+
   <div class="container-fluid">
-    <h2 class="titleHome bold ms-4 mb-5 marginMovil">¿Por qué comprar en
+    <h2 class="titleHome bold ms-4 mb-5 marginMovil">¿Por qué comprar en.d,mhskgh
       <span class="red">NMVIAJES</span>?
     </h2>
     <div class="row comprarHideTitle">
@@ -70,8 +76,8 @@
       </ng-container>
     </div>
   </div>
-  <!-- END COMPRAR -->
-</mat-drawer-container>
+
+</mat-drawer-container>-->
 
 <!-- Modal Usuario Verificado -->
 <div class="modal" data-backdrop="false" id="ModalUsuarioVerificado" tabindex="-1"

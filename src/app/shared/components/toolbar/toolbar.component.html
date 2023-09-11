@@ -7,8 +7,24 @@
 			(click)="toHome()"
 		/>
 		<div class="toolbar__section__actions" *ngIf="isShowMenu">
-			<img class="toolbar__section__actions__icon" src="./assets/svg/bi_question-circle.svg" alt="" (click)="redirect('https://ayuda.nmviajes.com/support/home')" />
-			<img class="toolbar__section__actions__icon" src="./assets/svg/ph_headset.svg" alt="" routerLink="/canales-de-atencion"/>
+			<div class="toolbar__section__actions__icon">
+				<img
+					src="./assets/svg/bi_question-circle.svg"
+					alt=""
+					(click)="redirect('https://ayuda.nmviajes.com/support/home')"
+				/>
+				<div class="toolbar__section__actions__icon__arrow"></div>
+				<div class="toolbar__section__actions__icon__tooltip support">
+					<span>Ayuda</span>
+				</div>
+			</div>
+			<div class="toolbar__section__actions__icon">
+				<img src="./assets/svg/ph_headset.svg" alt="" routerLink="/canales-de-atencion" />
+				<div class="toolbar__section__actions__icon__arrow"></div>
+				<div class="toolbar__section__actions__icon__tooltip contact">
+					<span>Contáctanos</span>
+				</div>
+			</div>
 			<ng-container *ngIf="!isLogged">
 				<app-button [text]="'Iniciar sesión'" [color]="'outline-primary'" (click)="openLoginModal()"></app-button>
 			</ng-container>
@@ -19,17 +35,22 @@
 					[src]="userStorage.image"
 					class="toolbar__section__actions__profile__image"
 				/>
-				<div class="toolbar__section__actions__profile__dropdown" (click)="showOptionsProfile=!showOptionsProfile">
-					<span>{{ userStorage.name }}</span>
+				<div class="toolbar__section__actions__profile__dropdown" (click)="showOptionsProfile = !showOptionsProfile">
+					<span>{{ userStorage.name.split(' ')[0] }}</span>
 					<img src="./assets/svg/dropdown_login.svg" alt="" />
-					<div class="toolbar__section__actions__profile__dropdown__options" *ngIf="showOptionsProfile">
-						<div class="option">
-							<span class="blue" routerLink="/perfil/mi-perfil">Mi Perfil</span>
+					<ng-container *ngIf="showOptionsProfile">
+						<div class="toolbar__section__actions__profile__dropdown__arrow"></div>
+						<div class="toolbar__section__actions__profile__dropdown__options">
+							<div class="option">
+								<img src="./assets/svg/profile.svg" alt="" />
+								<span routerLink="/perfil/mi-perfil">Perfil</span>
+							</div>
+							<div class="option">
+								<img src="./assets/svg/logout.svg" alt="" />
+								<span class="logout" (click)="logout()">Cerrar sesión</span>
+							</div>
 						</div>
-						<div class="option">
-							<span class="red" (click)="logout()">Cerrar sesión</span>
-						</div>
-					</div>
+					</ng-container>
 				</div>
 			</div>
 		</div>

@@ -8105,36 +8105,37 @@ button.customers {
       flex-direction: column; } }
 
 .notifyBox {
-  min-width: 500px;
+  min-width: 560px;
   display: none;
-  align-items: center;
+  align-items: flex-start;
   top: 20px;
   z-index: 2000;
-  left: calc(50% - 258px);
+  left: 25%;
   gap: 15px;
   border-radius: 5px;
   box-shadow: 0 1rem 3rem rgba(244, 106, 106, 0.18);
   position: fixed;
   background: #ffffff;
   padding: 20px;
-  background-color: #f46a6a;
-  border-color: #f46a6a; }
+  background-color: #EF4444;
+  border-color: #EF4444; }
   .notifyBox.show {
-    display: flex; }
+    display: flex; 
+  }
   .notifyBox .groupText {
     color: #ffffff;
     flex: 1 1 auto; }
     .notifyBox .groupText .titulo {
       font-size: 16px;
+      margin-bottom: 4px;
       font-weight: bold; }
     .notifyBox .groupText .descripcion {
       font-size: 14px; }
   .notifyBox .iconClose {
-    width: 48px;
-    height: 48px;
+    width: 24px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    margin-top: -8px;
     cursor: pointer; }
   @media (max-width: 640px) {
     .notifyBox {

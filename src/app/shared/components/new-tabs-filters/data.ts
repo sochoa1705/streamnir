@@ -2,49 +2,41 @@ export const dataTabs = [
     {
         icon:'./assets/tabs/plane.svg',
         name:'Vuelos',
-        hover:'./assets/tabs/plane-dark.svg',
         active:'./assets/tabs/plane-red.svg',
     },
     {
         icon:'./assets/tabs/bag.svg',
         name:'Paquetes',
-        hover:'./assets/tabs/bag-dark.svg',
         active:'./assets/tabs/bag-red.svg',
     },
     {
         icon:'./assets/tabs/part.svg',
         name:'Arma tu viaje',
-        hover:'./assets/tabs/part-dark.svg',
         active:'./assets/tabs/part-red.svg',
     },
     {
         icon:'./assets/tabs/hotel.svg',
         name:'Vuelo + hotel',
-        hover:'./assets/tabs/hotel-dark.svg',
         active:'./assets/tabs/hotel-red.svg',
     },
     {
         icon:'./assets/tabs/room.svg',
         name:'Hoteles',
-        hover:'./assets/tabs/room-dark.svg',
         active:'./assets/tabs/room-red.svg',
     },
     {
-        icon:'./assets/tabs/cars.png',
+        icon:'./assets/tabs/car-red.svg',
         name:'Autos',
-        hover:'./assets/tabs/cars-dark.png',
-        active:'./assets/tabs/cars-red.png',
+        active:'./assets/tabs/car.svg',
     },
     {
         icon:'./assets/tabs/activity.svg',
         name:'Actividades',
-        hover:'./assets/tabs/activity-dark.svg',
         active:'./assets/tabs/activity-red.svg',
     },
     {
         icon:'./assets/tabs/secure.svg',
         name:'Seguros',
-        hover:'./assets/tabs/secure-dark.svg',
         active:'./assets/tabs/secure-red.svg',
     }
 ]

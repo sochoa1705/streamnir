@@ -26,6 +26,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	img: string;
 	isShowMenu = true;
 	showOptionsProfile=false;
+	showToolTipInfo=false;
+	showToolTipSupport=false;
 
 	loginModalSubscription = new Subscription();
 

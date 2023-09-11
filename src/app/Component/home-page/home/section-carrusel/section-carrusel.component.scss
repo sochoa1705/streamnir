@@ -1,0 +1,87 @@
+@use '/src/scss/colors';
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
+
+.swiper-pagination {
+    bottom: 0 !important;
+    visibility: visible;
+}
+
+.swiper{
+	width: 100% !important;
+    padding-bottom: 60px !important;
+}
+.swiper-slide {
+    font-size: 18px;
+    background: transparent;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+	width: 100% !important;
+    gap: 48px;
+}
+
+.swiper-pagination-bullet{
+    width: 40px;
+    height: 8px;
+    border-radius: 8px;
+    background: colors.$gris-400;
+    margin: 0 12px !important;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active{
+    background: colors.$gris-700;
+    width: 80px;
+    height: 12px;
+    margin: -2px 12px !important
+}
+
+
+.container__carrusel{
+    padding:  64px 96px 40px 96px;
+	width: 100%;
+    background: colors.$gris-50;
+    &__section {
+        max-width: 1440px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 48px;
+        &__swiper{
+            &__card{
+                height: 320px;
+                border-radius: 16px;
+                cursor: pointer;
+                img {			
+                    max-width: 100%;
+					display: block;
+					width: 100%;
+                    border-radius: 16px;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+					-o-object-fit: cover;
+					-o-object-position: center;
+				}
+                &.square{
+                    width: 30%;
+                }
+                &.banner{
+                    width: 70%;
+                }
+            }
+        }
+    }
+}

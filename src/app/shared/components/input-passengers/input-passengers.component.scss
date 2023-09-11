@@ -1,0 +1,118 @@
+@use '/src/scss/colors';
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.paragraph{
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0em;
+    color:colors.$neutral-900;
+}
+.container__passenger{
+    min-width: 118px;
+    height: 36px;
+    border: 1px solid colors.$gris-200;
+    box-shadow: 0px 1px 2px 0px #1018280D;
+    border-radius: 4px;
+    background: white;
+    position: relative;
+    &__name{
+        padding: 8px 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:12px;
+        cursor: pointer;
+        span{
+            font-family: Montserrat;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+            letter-spacing: 0em;
+            text-align: left;
+        }
+    }
+
+    &__floating{
+        position: absolute;
+        z-index: 3;
+        right: 0;
+        width: 340px;
+        &__body{
+            padding: 8px 12px;
+            padding-bottom: 16px;
+            border-radius: 8px;
+            border: 1px solid colors.$gris-200;
+            gap: 16px;
+            box-shadow: 0px 1px 3px 0px #1018281A;
+            background: white;
+            @extend .flex-column;
+            margin-top: 15px;
+            gap:8px;
+            &__passengers{
+                @extend .flex-column;
+                align-items: flex-start;
+                &__row{
+                    padding:8px 16px;
+                    width: 100%;
+                    display: flex;
+                    gap:16px;
+                    justify-content: space-between;
+                    align-items: center;
+                    &__info{
+                        @extend .flex-column;
+                        span:nth-child(1){
+                            @extend .paragraph;
+                        }
+                        span:nth-child(2){
+                            font-family: Montserrat;
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 20px;
+                            letter-spacing: 0em;
+                            color:colors.$gris-700;
+                        }
+                    }
+                    &__counters{
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        gap:16px;
+                        span{
+                            @extend .paragraph;
+                            font-weight: 600;
+                            text-align: center;
+                            width: 24px;
+                        }
+                        img{
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+            &__actions{
+                display: flex;
+                justify-content: space-between;
+                padding: 0px 12px;
+            }
+        }
+        &__arrow{
+            width: 19.9px;
+            height: 19.9px;
+            border-radius: 0px 4px 0px 0px;
+            transform: rotate(-45deg);
+            z-index: 4;
+            background: white;
+            right: 15px;
+            position: absolute;
+            top: 5px;
+            border: solid;
+            border-width: 1px 1px 0px 0px;
+            border-color: colors.$gris-200;
+        }
+    }
+}

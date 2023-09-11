@@ -1,0 +1,32 @@
+<!--assets/svg/radio-check.svg-->
+<div class="section__search">
+    <div class="section__search__options">
+        <div class="section__search__options__radios">
+            <div class="section__search__options__radios__radio">
+                <img src="./assets/svg/radio-circle.svg" alt="o">
+                <span>Ida y vuelta</span>
+            </div>
+            <div class="section__search__options__radios__radio">
+                <img src="./assets/svg/radio-circle.svg" alt="o">
+                <span>Solo ida</span>
+            </div>
+            <div class="section__search__options__radios__radio">
+                <img src="./assets/svg/radio-circle.svg" alt="o">
+                <span>Multidestino</span>
+            </div>
+        </div>
+        <div class="section__search__options__dropdowns">
+            <app-input-passengers></app-input-passengers>
+            <app-input-class></app-input-class>
+        </div>
+    </div>
+    <div  class="section__search__inputs">
+        <app-input-search-flight></app-input-search-flight>
+        <app-input-range></app-input-range>
+        <app-button
+			[text]="'Buscar'"
+			[left]="true"
+			[icon]="'search.svg'"
+		></app-button>
+    </div>
+</div>

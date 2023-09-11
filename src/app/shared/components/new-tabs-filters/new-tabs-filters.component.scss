@@ -30,19 +30,29 @@
                 color:colors.$gris-700;
                 &.active{
                     color:colors.$red-500;
-                    &:hover{
-                        color:colors.$red-500;
-                    }
                 }
-                /*&:hover{
-                    color:colors.$gris-900;
-                }*/
             }
             img{
                 width: 32px;
             }
             &.active{
                 border-bottom: 1.5px solid colors.$red-500;
+                &:hover{
+                    span{
+                        color:colors.$red-500;
+                    }
+                    img{
+                        filter: none;
+                    }
+                }
+            }
+            &:hover{
+                span{
+                    color:colors.$gris-900;
+                }
+                img{
+                    filter: brightness(0);
+                }
             }
         }
 	}
