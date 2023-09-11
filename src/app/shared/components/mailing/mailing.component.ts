@@ -65,35 +65,13 @@ export class MailingComponent implements OnInit {
 			const textSend = 'Validando suscripción';
 			this.loaderSubjectService.showText(textSend);
 			this.loaderSubjectService.showLoader();
-			let data = this.formMAiling.value;
-
-			const nameArr: string[] = data.nombreMail.split(' ');
-			const contact: any = {
-				email: data.correoMail,
-				attributes: {
-					EMAIL: data.correoMail,
-					APELLIDOS: nameArr.length > 1 ? nameArr[1] : '',
-					NOMBRE: nameArr[0],
-					SMS: '',
-					TIPO_DOCUMENTO: '',
-					NUM_DOCUMENTO: '',
-					FUENTE: 'API',
-					SEGMENTO_MAILC: '',
-					SEGMENTO_MODELO: '',
-					SEGMENTO_ADICIONAL: '',
-					GENERO: '',
-					FECHA_NACIMIENTO: ''
-				},
-				emailBlacklisted: false,
-				smsBlacklisted: false,
-				listIds: [ 7 ],
-				updateEnabled: false,
-				smtpBlacklistSender: [
-					'5l5on@XCyTwNVlbFYMuZJRtYQifJ.mvm',
-					'AHzfzNXj0fQ@ogSExyrBXmIaCyjopMPfNgGdxE.siws'
-				]
-			};
-			this.mailingService.createContact(contact).subscribe({
+			let data = {
+				name: this.formMAiling.value.nombreMail,
+				email: this.formMAiling.value.correoMail,
+				privacyPolicy: this.formMAiling.value.politicasMail,
+				dataPolicy: this.formMAiling.value.autorizoMail
+			}
+			this.mailingService.createContact(data).subscribe({
 				next: (response: any) => {
 					this.addTag();
 

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ConformidadComponent } from './conformidad/conformidad.component';
 import { HomePageComponent } from './home-page.component';
 import { HomeComponent } from './home/home.component';
@@ -23,10 +23,11 @@ import { TusdatosComponent } from './tusdatos/tusdatos.component';
 import { ItineraryComponent } from './itinerary/itinerary.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { GifCardComponent } from './gif-card/gif-card.component';
-import {RetailComponent} from "./retail/retail.component";
+import { RetailComponent } from './retail/retail.component';
 import { OffersComponent } from './offers/offers.component';
 import { BenefitsComponent } from './retail/benefits/benefits.component';
 import { CanActivateCheckoutGuard } from 'src/app/Guards/checkout.guard';
+import { SubscriptionComponent } from './subscription/subscription.component';
 
 const routes: Routes = [
   {
@@ -176,6 +177,10 @@ const routes: Routes = [
       {
         path: 'ofertas',
         component: OffersComponent
+      },
+      {
+        path: 'suscribirse',
+        component: SubscriptionComponent
       },
       {
         path: 'canales-de-atencion',
