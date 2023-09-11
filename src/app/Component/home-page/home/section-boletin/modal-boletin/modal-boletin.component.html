@@ -1,0 +1,35 @@
+<div class="container__suscription">
+    <img src="./assets/home/boletin-woman.png" class="container__suscription__image" />
+    <div class="container__suscription__contend">
+        <div class="container__suscription__contend__header">
+            <div class="container__suscription__contend__header__text">
+                <h3>Mantente actualizado</h3>
+                <span>Suscríbete a nuestro boletín y recibe ofertas exclusivas, consejos de viaje y destinos inspiradores.</span>
+            </div>
+            <img class="container__suscription__contend__header__close" src="./assets/svg/close-boletin.svg" (click)="activeModal.close()"/>
+        </div>
+        <div class="container__suscription__contend__form">
+            <div class="container__suscription__contend__form__group">
+                <input type="text" placeholder="Nombres" />
+		        <img src="./assets/svg/person.svg" alt="o" />
+            </div>
+            <div class="container__suscription__contend__form__group">
+                <input type="text" placeholder="Apellidos" />
+		        <img src="./assets/svg/person.svg" alt="o" />
+            </div>
+            <div class="container__suscription__contend__form__group w-100">
+                <input type="text" placeholder="Correo electrónico" />
+		        <img src="./assets/svg/email.svg" alt="o" />
+            </div>
+        </div>
+        <div class="container__suscription__contend__checks">
+            <div class="container__suscription__contend__checks__row" *ngFor="let item of arrayChecks; let i=index">
+                <img [src]="item.isCheked ? './assets/svg/checkbox-fill.svg':'./assets/svg/checkbox-box.svg'" (click)="checked(i)"/>
+                <span (click)="checked(i)">{{item.text}}</span>
+            </div>
+        </div>
+        <div class="container__suscription__contend__actions">
+            <app-button [text]="'Suscribirme'"></app-button>
+        </div>
+    </div>
+</div>

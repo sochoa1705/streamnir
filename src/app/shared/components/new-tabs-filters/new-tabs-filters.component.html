@@ -2,7 +2,7 @@
    <div class="new__tabs__section">
     <ng-container *ngFor="let tab of dataTabs; let i=index">
         <div class="new__tabs__section__tab" [class.active]="indexActive==i" (click)="clickTab(i)">
-            <img [src]="indexActive==i ? tab.active: indexHover == i ? tab.hover: tab.icon" alt="" >
+            <img [src]="indexActive==i ? tab.active: tab.icon" alt="" >
             <span [class.active]="indexActive==i">{{tab.name}}</span>
         </div>
     </ng-container>

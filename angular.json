@@ -35,6 +35,7 @@
               "src/sitemap.xml",
               "src/assets",
               "src/Images",
+              "src/newsletter",
               "src/resources",
               "src/metabuscador"
             ],
@@ -158,6 +159,7 @@
               "src/favicon.ico",
               "src/assets",
               "src/Images",
+              "src/newsletter",
               "src/resources",
               "src/metabuscador"
             ],

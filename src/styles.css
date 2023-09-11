@@ -32,9 +32,13 @@
   100% {
     box-shadow: 0 -27px 0 0 rgba(232, 32, 63, 0.05), 19px -19px 0 0 rgba(232, 32, 63, 0.1), 27px 0 0 0 rgba(232, 32, 63, 0.2), 19px 19px 0 0 rgba(232, 32, 63, 0.3), 0 27px 0 0 rgba(232, 32, 63, 0.4), -19px 19px 0 0 rgba(232, 32, 63, 0.6), -27px 0 0 0 rgba(232, 32, 63, 0.8), -19px -19px 0 0 #E8203F; } }
 
+html {
+  height: 100%;
+}
+
 html,
 body {
-  height: 100%;
+  min-height: 100%;
   background: #f6f7f9 !important;
   margin: 0;
   font-family: "Montserrat", sans-serif;
@@ -8105,36 +8109,37 @@ button.customers {
       flex-direction: column; } }
 
 .notifyBox {
-  min-width: 500px;
+  min-width: 560px;
   display: none;
-  align-items: center;
+  align-items: flex-start;
   top: 20px;
   z-index: 2000;
-  left: calc(50% - 258px);
+  left: 25%;
   gap: 15px;
   border-radius: 5px;
   box-shadow: 0 1rem 3rem rgba(244, 106, 106, 0.18);
   position: fixed;
   background: #ffffff;
   padding: 20px;
-  background-color: #f46a6a;
-  border-color: #f46a6a; }
+  background-color: #EF4444;
+  border-color: #EF4444; }
   .notifyBox.show {
-    display: flex; }
+    display: flex; 
+  }
   .notifyBox .groupText {
     color: #ffffff;
     flex: 1 1 auto; }
     .notifyBox .groupText .titulo {
       font-size: 16px;
+      margin-bottom: 4px;
       font-weight: bold; }
     .notifyBox .groupText .descripcion {
       font-size: 14px; }
   .notifyBox .iconClose {
-    width: 48px;
-    height: 48px;
+    width: 24px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    margin-top: -8px;
     cursor: pointer; }
   @media (max-width: 640px) {
     .notifyBox {

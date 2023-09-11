@@ -22,6 +22,12 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { CalendarEndDateModule } from '../calendar-enddate/calendar-enddate.module';
 import { TabVuelosMulticityComponent } from './tab-vuelos-multicity/tab-vuelos-multicity.component';
 import { CalendarPriceModule } from '../calendar-price/calendar-price.module';
+import { TabVuelosV2Component } from './tab-vuelos-v2/tab-vuelos-v2.component';
+import { InputSearchFlightModule } from '../input-search-flight/input-search-flight.module';
+import { InputRangeModule } from '../input-range/input-range.module';
+import { ButtonModule } from '../button/button.module';
+import { InputClassModule } from '../input-class/input-class.module';
+import { InputPassengersModule } from '../input-passengers/input-passengers.module';
 
 
 @NgModule({
@@ -33,7 +39,8 @@ import { CalendarPriceModule } from '../calendar-price/calendar-price.module';
     TabArmaPaquetesComponent,
     TabPaquetesComponent,
     TabAutosComponent,
-    TabVuelosMulticityComponent
+    TabVuelosMulticityComponent,
+    TabVuelosV2Component
   ],
   imports: [
     CommonModule,
@@ -47,6 +54,11 @@ import { CalendarPriceModule } from '../calendar-price/calendar-price.module';
     InputAutocompleteModule,
     PopUpPasajerVuelosoModule,
     NgbModule,
+    InputSearchFlightModule,
+    InputRangeModule,
+    ButtonModule,
+    InputClassModule,
+    InputPassengersModule,
     NgxMaskModule.forRoot(),
   ],
   providers: [
@@ -63,7 +75,8 @@ import { CalendarPriceModule } from '../calendar-price/calendar-price.module';
     TabArmaPaquetesComponent,
     TabPaquetesComponent,
     TabAutosComponent,
-    TabVuelosMulticityComponent
+    TabVuelosMulticityComponent,
+    TabVuelosV2Component
   ]
 })
 export class FilterTabsModule { }

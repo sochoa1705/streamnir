@@ -32,6 +32,16 @@
 		}
 	}
 
+	&.neutral{
+		background: white;
+		color:colors.$neutral-700;
+		border:1px solid colors.$neutral-200;
+		&:hover {
+			background: white;
+			color:colors.$neutral-900;
+		}
+	}
+
 	&.w-100{
 		width: 100%;
 	}

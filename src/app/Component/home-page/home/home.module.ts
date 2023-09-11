@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
@@ -26,10 +26,28 @@ import { TimerBannerModule } from '../../../shared/components/timer-banner/timer
 import { NewTabsFilterModule } from 'src/app/shared/components/new-tabs-filters/new-tabs-filters.module';
 import { FilterTabsModule } from 'src/app/shared/components/filter-tabs/filter-tabs.module';
 import { FiltersafeModule } from 'src/app/shared/components/filtersafe/filtersafe.module';
+import { SectionWhyChooseUsComponent } from './section-why-choose-us/section-why-choose-us.component';
+import { SectionBoletinComponent } from './section-boletin/section-boletin.component';
+import { ButtonModule } from 'src/app/shared/components/button/button.module';
+import { ModalBoletinComponent } from './section-boletin/modal-boletin/modal-boletin.component';
+import { SectionBlogComponent } from './section-blog/section-blog.component';
+import { SectionPackagesComponent } from './section-packages/section-packages.component';
+import { SectionSuperOffersComponent } from './section-super-offers/section-super-offers.component';
+import { SectionCarruselComponent } from './section-carrusel/section-carrusel.component';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [HomeComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
+  declarations: [
+    HomeComponent, 
+    SectionWhyChooseUsComponent, 
+    SectionBoletinComponent, 
+    ModalBoletinComponent, 
+    SectionBlogComponent, 
+    SectionPackagesComponent, 
+    SectionSuperOffersComponent, 
+    SectionCarruselComponent
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -52,10 +70,12 @@ import { FiltersafeModule } from 'src/app/shared/components/filtersafe/filtersaf
     TimerBannerModule,
     NewTabsFilterModule,
     FilterTabsModule,
-    FiltersafeModule
+    FiltersafeModule,
+    ButtonModule,
+    SwiperModule
   ],
   exports: [HomeComponent],
-  providers: [DestinyService, AsidePresenterService, BusinessUnitService]
+  providers: [DestinyService, AsidePresenterService, BusinessUnitService],
 
 })
 export class HomeModule { }
