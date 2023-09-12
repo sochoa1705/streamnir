@@ -23,30 +23,29 @@ export class SectionSuperOffersComponent implements OnInit {
 
 	internationalFlights: any[] = [];
 	nationalFlights: any[] = [];
-	itineraries: any[] = [];
+	packages: any[] = [];
 
   internationalFlightsPag: any[] = [];
 	nationalFlightsPag: any[] = [];
-	itinerariesPag: any[] = [];
+	packagesPag: any[] = [];
 
 	bannerSubscription = new Subscription();
 	offersSubscription = new Subscription();
 
-  pagination=4;
+    pagination=4;
+
+	showPackages=false;
 
 	constructor(private offersService: OffersService) {}
 
 	ngOnInit(): void {
-		this.getOffers();
+		this.getPackages();
 	}
 
 
-	getOffers() {
+	getPackages() {
 		this.offersSubscription = this.offersService.getFlightsOffers().pipe(
-				map(offers => {
-          console.log(offers,'seee')
-          return offers.filter(o => o.mostrar)
-        })
+				map(offers => offers.filter(o => o.mostrar))
 		).subscribe({
 			next: (flights: Offers[]) => {
 				const parsed = flights
@@ -66,13 +65,11 @@ export class SectionSuperOffersComponent implements OnInit {
 								accommodationType: f.tipoAlojamiento
 							}
 						});
-				this.internationalFlights = [ ...parsed ].filter(f => f.type == 1 && !f.isDomestic);
-				this.nationalFlights = [ ...parsed ].filter(f => f.type == 1 && f.isDomestic);
-				this.itineraries = [ ...parsed ].filter(f => f.type == 2);
-
-        console.log(this.internationalFlights, this.nationalFlights)
+				this.packages = [ ...parsed ].filter(f => f.type == 2);
+				console.log(this.packages,'áquetes')
+				if(this.packages.length==0) this.showPackages=false;
 			},
-			error: (err: any) => console.error(err)
+			error: (err: any) =>  this.showPackages=false
 		});
 	}
 

@@ -11,11 +11,11 @@
             <div class="container__offers__section__tabs__tab" [class.active]="indexTab==1" (click)="indexTab=1">
                 <span>Internacional</span>
             </div>
-            <div class="container__offers__section__tabs__tab" [class.active]="indexTab==2"  (click)="indexTab=2">
+            <div class="container__offers__section__tabs__tab" *ngIf="!showPackages" [class.active]="indexTab==2"  (click)="indexTab=2">
                 <span>Paquetes</span>
             </div>
         </div>
-        <div class="container__offers__section__cards">
+        <div class="container__offers__section__cards" *ngIf="indexTab==0">
             <div class="container__offers__section__cards__card">
                 <img src="https://images.unsplash.com/photo-1693491012999-09a3764eab33?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80" alt="">
                 <div class="container__offers__section__cards__card__body">
@@ -48,6 +48,18 @@
                 <div class="container__offers__section__cards__card__body">
                     <span class="block title">Madrid</span>
                     <span class="block">Desde Lima</span>
+                    <span class="regular">Precio desde <span class="title price">$840</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container__offers__section__cards" *ngIf="indexTab==2">
+            <div class="container__offers__section__cards__card" *ngFor="let package of packages">
+                <img src="https://images.unsplash.com/photo-1693491012999-09a3764eab33?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80" alt="">
+                <div class="container__offers__section__cards__card__body">
+                    <span class="block title">{{package.destination}}</span>
+                    <span class="block">{{package.condition}}</span>
+                    <span class="block">{{package.packageIncludes}}</span>
                     <span class="regular">Precio desde <span class="title price">$840</span></span>
                 </div>
             </div>

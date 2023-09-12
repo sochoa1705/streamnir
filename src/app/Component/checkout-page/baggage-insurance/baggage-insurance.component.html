@@ -71,11 +71,11 @@
 									<app-baggage [active]="true"></app-baggage>
 									<app-baggage
 										[type]="'hand-luggage'"
-										[active]="detailFlight.departure[i].segments[0].equipaje.cabina ? true : false"
+										[active]="detailFlight.departure[i].segments[0].equipaje?.cabina ? true : false"
 									></app-baggage>
 									<app-baggage
 										[type]="'hold-luggage'"
-										[active]="detailFlight.departure[i].segments[0].equipaje.piezas > 0 ? true : false"
+										[active]="detailFlight.departure[i].segments[0].equipaje?.piezas ?? 0 > 0 ? true : false"
 									></app-baggage>
 								</div>
 								<ng-container *ngIf="detailFlight.returns && detailFlight.returns !== null">
@@ -85,11 +85,11 @@
 										<app-baggage [active]="true"></app-baggage>
 										<app-baggage
 											[type]="'hand-luggage'"
-											[active]="detailFlight.returns.segments[0].equipaje.cabina ? true : false"
+											[active]="detailFlight.returns.segments[0].equipaje?.cabina ? true : false"
 										></app-baggage>
 										<app-baggage
 											[type]="'hold-luggage'"
-											[active]="detailFlight.returns.segments[0].equipaje.piezas > 0 ? true : false"
+											[active]="detailFlight.returns.segments[0].equipaje?.piezas ?? 0 > 0 ? true : false"
 										></app-baggage>
 									</div>
 								</ng-container>

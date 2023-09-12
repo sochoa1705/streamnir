@@ -73,20 +73,8 @@
 					<div class="modal__flight__body__flight__info__bags">
 						<span>Equipaje incluido:</span>
 						<img src="./assets/svg/backpack.svg" />
-						<img
-							[src]="
-								departure.segments[indexSegmentDeparture[i]].equipaje.cabina
-									? './assets/svg/hand-luggage.svg'
-									: './assets/svg/no-hand-luggage.svg'
-							"
-						/>
-						<img
-							[src]="
-								departure.segments[indexSegmentDeparture[i]].equipaje.piezas > 0
-									? './assets/svg/hold-luggage.svg'
-									: './assets/svg/no-hold-luggage.svg'
-							"
-						/>
+						<img [src]="(departure.segments[indexSegmentDeparture[i]].equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
+						<img [src]="(departure.segments[indexSegmentDeparture[i]].equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
 					</div>
 				</div>
 			</div>
@@ -162,20 +150,8 @@
 					<div class="modal__flight__body__flight__info__bags">
 						<span>Equipaje incluido:</span>
 						<img src="./assets/svg/backpack.svg" />
-						<img
-							[src]="
-								returns.segments[indexSegmentReturn].equipaje.cabina
-									? './assets/svg/hand-luggage.svg'
-									: './assets/svg/no-hand-luggage.svg'
-							"
-						/>
-						<img
-							[src]="
-								returns.segments[indexSegmentReturn].equipaje.piezas > 0
-									? './assets/svg/hold-luggage.svg'
-									: './assets/svg/no-hold-luggage.svg'
-							"
-						/>
+						<img [src]="(returns.segments[indexSegmentReturn].equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
+						<img [src]="(returns.segments[indexSegmentReturn].equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
 					</div>
 				</div>
 			</div>

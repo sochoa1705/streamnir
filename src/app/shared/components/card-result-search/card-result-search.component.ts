@@ -27,11 +27,14 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
 	indexHoverReturn: number;
 	indexHoverDeparture: number;
 
-	ngOnInit() {}
+	ngOnInit() {
+		
+	}
 
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['flight']) {
 			if (changes['flight'].currentValue) {
+				console.log(changes['flight'].currentValue,'seeee')
 				if (this.flight.returns) {
 					this.segmentReturn = this.flight.returns.segments[0].segmentId;
 					this.indexSegmentReturn = 0;

@@ -117,51 +117,6 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 
-	resetData(){
-		this.isLoader = true;
-		this.dataBagFilter = dataBagFilterInit.map((item) => {
-			item.total = 0;
-			return item;
-		});
-		this.dataScaleFilter = dataScaleFilterInit.map((item) => {
-			item.total = 0;
-			return item;
-		});
-		this.allDataGroups = [];
-		this.dataGroupsPaginate = [];
-		this.dataFilterGroups = [];
-		this.dataPreviewFilter = [];
-
-		this.theCheapest=null;
-		this.betterOption=null;
-		this.shorterDuration=null;
-
-		this.indexPaginate = 8;
-		this.dataAirlines = [];
-		this.dataBagTemp = [...this.dataBagFilter];
-		this.dataScaleTemp = [...this.dataScaleFilter];
-		this._loadingService.requestSearchCount = 0;
-		this.minPrice = 0;
-		this.maxPrice = 0;
-		this.totalMultiticket = 0;
-		this.sortBy = 0;
-		this.arrayMoreOptionsSort = [];
-		this.exchangeRate=0;
-		this.showError = false;
-		this.showNotResults = false;
-		this.filters={
-			arrayAirline:[],
-			arrayBaggage:[],
-			arrayScales:[],
-			minPrice:0,
-			maxPrice:0,
-			isMultiticket:false,
-			isPrices:false,
-			isDuration:false
-		}
-		this.getToken();
-	}
-
 	getToken() {
 		this.showNotResults = false;
 		this._tokenService.getAndSaveToken('Chrome').subscribe({
@@ -284,12 +239,14 @@ export class ResultsSearchPageComponent implements OnInit {
 			if (item.airlineCodeFilter == 'MT') this.totalMultiticket++;
 
 			const isBagHold =
-				item.departure.every((departure) => departure.segments[0].equipaje.piezas > 0) &&
-				(item.returns ? item.returns.segments[0].equipaje.piezas > 0 : true);
+			item.departure.every((departure) => departure.segments[0]?.equipaje?.piezas > 0) &&
+			(!item.returns || item.returns.segments[0]?.equipaje?.piezas > 0);
+
 			const isBagHand =
-				item.departure.every((departure) => departure.segments[0].equipaje.cabina || false) &&
-				(item.returns ? item.returns.segments[0].equipaje.cabina || false : true) &&
-				!isBagHold;
+			item.departure.every((departure) => departure.segments[0]?.equipaje?.cabina || false) &&
+			(!item.returns || item.returns.segments[0]?.equipaje?.cabina || false) &&
+			!isBagHold;
+
 
 			item.typeBag = isBagHold ? 'holdbag' : isBagHand ? 'handbag' : 'backpack';
 			if (isBagHand) this.dataBagTemp[0].total++;
@@ -349,6 +306,7 @@ export class ResultsSearchPageComponent implements OnInit {
 			item.flightDurationProm = this.calcAverageFlightDuration(durationSegments);
 			item.dateOrder = [getDatesBySegment(item.departure[0].segments)];
 			if (item.returns) item.dateOrder.push(getDatesBySegment(item.returns.segments));
+			console.log(item)
 		});
 		if (this._loadingService.requestSearchCount == 9) 
 			this.dataAirlinesTemp.push({ ...dataAirlineMulti, total: this.totalMultiticket });
