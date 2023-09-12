@@ -32,17 +32,18 @@
 		}
 	}
 
-	&.neutral{
+	&.neutral {
 		background: white;
-		color:colors.$neutral-700;
-		border:1px solid colors.$neutral-200;
+		color: colors.$neutral-700;
+		border: 1px solid colors.$neutral-200;
+
 		&:hover {
 			background: white;
-			color:colors.$neutral-900;
+			color: colors.$neutral-900;
 		}
 	}
 
-	&.w-100{
+	&.w-100 {
 		width: 100%;
 	}
 
@@ -61,15 +62,16 @@
 		}
 	}
 
-	&.btn__xs{
+	&.btn__xs {
 		height: 40px !important;
 		font-size: 14px;
 		line-height: 20px;
 	}
 
-	&.dark{
+	&.dark {
 		background: colors.$gris-800;
 		color: white;
+
 		&:hover {
 			background: colors.$gris-900;
 			color: white;
@@ -126,6 +128,14 @@
 
 		&:disabled {
 			color: colors.$blue-300;
+		}
+	}
+
+	&.isMobile {
+		@media (max-width: 678px) {
+			height: 40px !important;
+			font-size: 14px;
+			line-height: 20px;
 		}
 	}
 }

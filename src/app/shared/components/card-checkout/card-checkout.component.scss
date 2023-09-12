@@ -14,4 +14,10 @@
       padding: 24px 16px;
     }
   }
+  @media (max-width: 768px){
+    &.padding{
+      padding: 18px 14px;
+    }
+  }
 }
+
