@@ -24,6 +24,9 @@
 				letter-spacing: -0.02em;
 				text-align: left;
 				color: colors.$neutral-900;
+				@media (max-width: 550px) {
+					font-size: 20px;
+				}
 			}
 
 			&__secondary {
@@ -34,6 +37,9 @@
 				letter-spacing: 0em;
 				text-align: left;
 				color: colors.$neutral-900;
+				@media (max-width: 550px) {
+					font-size: 14px;
+				}
 			}
 		}
 
@@ -108,6 +114,7 @@
 					display: grid;
 					column-gap: 20px;
 					grid-template-columns: repeat(2, 1fr);
+					
 				}
 				&__adress {
 					width: 100%;
