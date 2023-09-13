@@ -6,7 +6,9 @@
 	width: 100%;
 	flex-direction: column;
 	padding-bottom: 40%;
-
+	@media (max-width: 551px) {
+		padding-bottom: 30px;
+	}
 	&__section {
 		display: flex;
 		flex-direction: column;

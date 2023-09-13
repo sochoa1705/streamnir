@@ -3,6 +3,9 @@
 .container__page {
 	width: 100%;
 	padding-bottom: 40%;
+	@media (max-width: 551px) {
+		padding-bottom: 30px;
+	}
 
 	&__section {
 		display: flex;
@@ -251,6 +254,9 @@
 			width: 100%;
 			display: flex;
 			justify-content: flex-end;
+			@media (max-width: 551px) {
+				display: none;
+			}
 		}
 	}
 }

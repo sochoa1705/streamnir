@@ -4,18 +4,23 @@
 			<div class="container__page__section__title">
 				<span class="container__page__section__title__primary">Métodos de pago</span>
 				<span class="container__page__section__title__secondary">
-					Selecciona tu método de pago (el pago se llevará a cabo una vez presiones el botón pagar al final del
+					Selecciona tu método de pago (el pago se llevará a cabo una vez presiones el botón pagar al final
+					del
 					formulario).
 				</span>
 			</div>
 			<div class="container__page__section__pay">
 				<div class="container__page__section__pay_header">
-					<div class="container__page__section__pay_header__tab" [class.active]="isPayCard" (click)="clickTab()">
-						<img [src]="isPayCard ? './assets/svg/credit-red.svg' : './assets/svg/credit.svg'" />
+					<div class="container__page__section__pay_header__tab" [class.active]="isPayCard"
+						(click)="clickTab()">
+						<img alt="pay_img"
+							[src]="isPayCard ? './assets/svg/credit-red.svg' : './assets/svg/credit.svg'" />
 						<span>Tarjeta de crédito o débito</span>
 					</div>
-					<div class="container__page__section__pay_header__tab" [class.active]="!isPayCard" (click)="clickTab()">
-						<img [src]="isPayCard ? './assets/svg/store.svg' : './assets/svg/store-red.svg'" />
+					<div class="container__page__section__pay_header__tab" [class.active]="!isPayCard"
+						(click)="clickTab()">
+						<img alt="pay_img"
+							[src]="isPayCard ? './assets/svg/store.svg' : './assets/svg/store-red.svg'" />
 						<span>Banca por internet / Agencias</span>
 					</div>
 				</div>
@@ -23,17 +28,14 @@
 				<ng-container *ngIf="isPayCard">
 					<div class="container__page__section__pay__cards">
 						<div class="container__page__section__pay__cards__bank" *ngFor="let card of listCreditCard">
-							<img [src]="card.image" />
+							<img alt="pay_img" [src]="card.image" />
 							<span>{{ card.name }}</span>
 						</div>
 					</div>
 					<form class="container__page__section__pay__form" [formGroup]="formGroupCard" autocomplete="off">
 						<div class="container__page__section__pay__form__row">
-							<app-input-credit-card
-								[label]="'Número de tarjeta'"
-								[placeholder]="'Ingresar tarjeta'"
-								[name]="'cardNumber'"
-								[isRequired]="true"
+							<app-input-credit-card [label]="'Número de tarjeta'" [placeholder]="'Ingresar tarjeta'"
+								[name]="'cardNumber'" [isRequired]="true"
 								[class]="cardNumberField.touched && cardNumberField!.invalid ? 'error' : ''"
 								[labelError]="
 									cardNumberField.touched && cardNumberField!.hasError('required')
@@ -41,15 +43,10 @@
 										: cardNumberField.touched && cardNumberField!.hasError('pattern')
 										? 'Numero de tarjeta inválido'
 										: ''
-								"
-							></app-input-credit-card>
+								"></app-input-credit-card>
 							<div class="container__page__section__pay__form__colum">
-								<app-input-credit-card
-									[label]="'Vencimiento'"
-									[placeholder]="'mm/yy'"
-									[isCreditCard]="false"
-									[name]="'expiration'"
-									[isRequired]="true"
+								<app-input-credit-card [label]="'Vencimiento'" [placeholder]="'mm/yy'"
+									[isCreditCard]="false" [name]="'expiration'" [isRequired]="true"
 									[class]="expirationField.touched && expirationField!.invalid ? 'error' : ''"
 									[labelError]="
 										expirationField.touched && expirationField!.hasError('required')
@@ -57,57 +54,32 @@
 											: expirationField.touched && expirationField!.hasError('pattern')
 											? 'Vencimiento inválido'
 											: ''
-									"
-								></app-input-credit-card>
-								<app-input
-									[label]="'CVV'"
-									[placeholder]="'123'"
-									[name]="'cvv'"
-									[isPassword]="true"
-									[isRequired]="true"
-									[maxLenght]="3"
-									[isCVV]="true"
-									[isOnlyNumber]="true"
-									[class]="cvvField.touched && cvvField!.invalid ? 'error' : ''"
-									[labelError]="
+									"></app-input-credit-card>
+								<app-input [label]="'CVV'" [placeholder]="'123'" [name]="'cvv'" [isPassword]="true"
+									[isRequired]="true" [maxLenght]="3" [isCVV]="true" [isOnlyNumber]="true"
+									[class]="cvvField.touched && cvvField!.invalid ? 'error' : ''" [labelError]="
 										cvvField.touched && cvvField!.hasError('required')
 											? 'CVV es obligatorio'
 											: cvvField.touched && cvvField!.hasError('pattern')
 											? 'CVV inválido'
 											: ''
-									"
-								></app-input>
+									"></app-input>
 							</div>
 						</div>
 						<div class="container__page__section__pay__form__row">
-							<app-input
-								[label]="'Titular de la tarjeta'"
-								[placeholder]="'Ingrese nombre y apellido'"
-								[name]="'cardOwner'"
-								[isRequired]="true"
-								[isOnlyText]="true"
-								[class]="cardOwnerField.touched && cardOwnerField!.invalid ? 'error' : ''"
-								[labelError]="
+							<app-input [label]="'Titular de la tarjeta'" [placeholder]="'Ingrese nombre y apellido'"
+								[name]="'cardOwner'" [isRequired]="true" [isOnlyText]="true"
+								[class]="cardOwnerField.touched && cardOwnerField!.invalid ? 'error' : ''" [labelError]="
 									cardOwnerField.touched && cardOwnerField!.hasError('required') ? 'Titular es obligatorio' : ''
-								"
-							></app-input>
+								"></app-input>
 							<div class="container__page__section__pay__form__colum">
-								<app-select
-									[label]="'Tipo de documento'"
-									[placeholder]="'Seleccionar'"
-									[name]="'documentType'"
-									[isRequired]="true"
-									[listItems]="listTypeDocument"
+								<app-select [label]="'Tipo de documento'" [placeholder]="'Seleccionar'"
+									[name]="'documentType'" [isRequired]="true" [listItems]="listTypeDocument"
 									[labelError]="
 										documentTypeField.touched && documentTypeField!.hasError('required') ? 'Tipo es obligatorio' : ''
-									"
-								></app-select>
-								<app-input
-									[label]="'N° de documento'"
-									[placeholder]="'Ingresar número'"
-									[name]="'documentNumber'"
-									[isRequired]="true"
-									#InputDocumentNumber
+									"></app-select>
+								<app-input [label]="'N° de documento'" [placeholder]="'Ingresar número'"
+									[name]="'documentNumber'" [isRequired]="true" #InputDocumentNumber
 									[maxLenght]="documentTypeField.value == 0 || documentTypeField.value== '0' ? 8 : 12"
 									[isOnlyNumber]="documentTypeField.value == 0 ? true : false"
 									[class]="documentNumberField.touched && documentNumberField!.invalid ? 'error' : ''"
@@ -117,72 +89,49 @@
 											: documentNumberField.touched && documentNumberField!.hasError('pattern')
 											? 'Número inválido'
 											: ''
-									"
-								></app-input>
+									"></app-input>
 							</div>
 						</div>
 						<div class="container__page__section__pay__form__row">
-							<app-select
-								[label]="'Cuotas'"
-								[placeholder]="'Sin cuotas'"
-								[isRequired]="true"
-								[listItems]="arrayCuotas"
-								[name]="'numberQuotes'"
-								[value]="numberQuotesField.value"
-							></app-select>
-							<app-input
-								[label]="'Ciudad de Facturación'"
-								[placeholder]="'Del titular de la tarjeta'"
-								[name]="'city'"
-								[isRequired]="true"
-								[maxLenght]="50"
+							<app-select [label]="'Cuotas'" [placeholder]="'Sin cuotas'" [isRequired]="true"
+								[listItems]="arrayCuotas" [name]="'numberQuotes'"
+								[value]="numberQuotesField.value"></app-select>
+							<app-input [label]="'Ciudad de Facturación'" [placeholder]="'Del titular de la tarjeta'"
+								[name]="'city'" [isRequired]="true" [maxLenght]="50"
 								[class]="cityField.touched && cityField!.invalid ? 'error' : ''"
-								[labelError]="cityField.touched && cityField!.hasError('required') ? 'Ciudad es obligatorio' : ''"
-							></app-input>
+								[labelError]="cityField.touched && cityField!.hasError('required') ? 'Ciudad es obligatorio' : ''"></app-input>
 						</div>
 						<div class="container__page__section__pay__form__adress">
-							<app-input
-								[label]="'Dirección'"
-								[placeholder]="'Ingresar Dirección'"
-								[name]="'address'"
-								[isRequired]="true"
-								[maxLenght]="100"
-								[class]="addressField.touched && addressField!.invalid ? 'error' : ''"
-								[labelError]="
+							<app-input [label]="'Dirección'" [placeholder]="'Ingresar Dirección'" [name]="'address'"
+								[isRequired]="true" [maxLenght]="100"
+								[class]="addressField.touched && addressField!.invalid ? 'error' : ''" [labelError]="
 									addressField.touched && addressField!.hasError('required') ? 'Dirección es obligatorio' : ''
-								"
-							></app-input>
+								"></app-input>
 						</div>
 					</form>
 				</ng-container>
 				<!------------------------SecondTab------------------------------->
 				<ng-container *ngIf="!isPayCard">
 					<div class="container__page__section__pay__subTabs">
-						<div
-							class="container__page__section__pay__subTabs__button"
-							[class.active]="isPayBank"
-							(click)="isPayBank = !isPayBank"
-						>
+						<div class="container__page__section__pay__subTabs__button" [class.active]="isPayBank"
+							(click)="isPayBank = !isPayBank">
 							<span>Banca por internet</span>
 						</div>
-						<div
-							class="container__page__section__pay__subTabs__button"
-							[class.active]="!isPayBank"
-							(click)="isPayBank = !isPayBank"
-						>
+						<div class="container__page__section__pay__subTabs__button" [class.active]="!isPayBank"
+							(click)="isPayBank = !isPayBank">
 							<span>Agencias / Agentes</span>
 						</div>
 					</div>
 
 					<div class="container__page__section__pay__cards">
 						<div class="container__page__section__pay__cards__bank" *ngFor="let bank of listBanksInternet">
-							<img [src]="bank.image" />
+							<img alt="pay_img" [src]="bank.image" />
 							<span>{{ bank.name }}</span>
 						</div>
 
 						<ng-container *ngIf="!isPayBank">
 							<div class="container__page__section__pay__cards__bank" *ngFor="let agency of listAgencies">
-								<img [src]="agency.image" />
+								<img alt="pay_img" [src]="agency.image" />
 								<span>{{ agency.name }}</span>
 							</div>
 						</ng-container>
@@ -190,10 +139,12 @@
 
 					<div class="container__page__section__pay__links" [class.end]="!isPayBank">
 						<div class="container__page__section__pay__links__button" *ngIf="isPayBank">
-							<app-button [text]="'Emisión automática después del pago.'" [color]="'link-secondary'"></app-button>
+							<app-button [text]="'Emisión automática después del pago.'"
+								[color]="'link-secondary'"></app-button>
 						</div>
 						<div class="container__page__section__pay__links__button">
-							<app-button [text]="'¿Cómo pagar con SafetyPay online?'" [color]="'link-secondary'"></app-button>
+							<app-button [text]="'¿Cómo pagar con SafetyPay online?'"
+								[color]="'link-secondary'"></app-button>
 						</div>
 					</div>
 
@@ -201,10 +152,8 @@
 						<div class="container__page__section__pay__alert__contend">
 							<div class="container__page__section__pay__alert__contend__text">
 								<img src="./assets/checkout/info.svg" alt="i" />
-								<span
-									>Recuerda que una vez generado tu código SafetyPay, debería pagar dentro de las
-									<strong>próximas 2 horas</strong>. De lo contrario la reserva será cancelada</span
-								>
+								<span>Recuerda que una vez generado tu código SafetyPay, debería pagar dentro de las
+									<strong>próximas 2 horas</strong>. De lo contrario la reserva será cancelada</span>
 							</div>
 						</div>
 					</div>
@@ -220,19 +169,13 @@
 
 			<app-card-checkout>
 				<div class="container__page__section__cupon" [formGroup]="formGroupBooking">
-					<app-input
-						[label]="'Código'"
-						[placeholder]="'Ingresar código'"
-						[name]="'CuponPromoWeb'"
-						[isCheck]="isValidPromotionalCode && isApplyCupon"
-						[maxLenght]="6"
-						[class]="cuponPromoWebField.touched && cuponPromoWebField!.invalid ? 'error' : ''"
-						[labelError]="
+					<app-input [label]="'Código'" [placeholder]="'Ingresar código'" [name]="'CuponPromoWeb'"
+						[isCheck]="isValidPromotionalCode && isApplyCupon" [maxLenght]="6"
+						[class]="cuponPromoWebField.touched && cuponPromoWebField!.invalid ? 'error' : ''" [labelError]="
 							cuponPromoWebField.touched && !isValidPromotionalCode && discountCupon === null && cuponPromoWebField.value.length > 1
 								? 'Código inválido'
 								: ''
-						"
-					></app-input>
+						"></app-input>
 					<app-button [text]="'Aplicar'" [color]="'outline-secondary'" (click)="applyCupon()"></app-button>
 				</div>
 			</app-card-checkout>
@@ -240,32 +183,19 @@
 
 		<article>
 			<form [formGroup]="formGroupPolitics" class="container__page__section__politics">
-				<app-input-check
-					[label]="'Autorizo el uso de mi información para la publicidad.'"
-					[name]="'acceptAdvertising'"
-				></app-input-check>
-				<span
-					>Al realizar esta compra, acepto los
-					<a [href]="urlsTermsAndConditions.urlTermsConditions" target="_blank">términos y condiciones de compra</a
-					>.</span
-				>
+				<app-input-check [label]="'Autorizo el uso de mi información para la publicidad.'"
+					[name]="'acceptAdvertising'"></app-input-check>
+				<span>Al realizar esta compra, acepto los
+					<a [href]="urlsTermsAndConditions.urlTermsConditions" target="_blank">términos y condiciones de
+						compra</a>.</span>
 			</form>
 		</article>
 
 		<div class="container__page__section__button">
-			<app-button
-				[text]="'Realizar compra'"
-				[color]="'primary'"
-				[disabled]="!formGroupCard.valid || !formGroupPolitics.valid"
-				(onClick)="sendPayment()"
-			></app-button>
+			<app-button [text]="'Realizar compra'" [color]="'primary'"
+				[disabled]="!formGroupCard.valid || !formGroupPolitics.valid" (onClick)="sendPayment()"></app-button>
 		</div>
 	</div>
 </div>
-<app-message-pay
-	*ngIf="showMessagePay"
-	[listBanksInternet]="listBanksInternet"
-	[codeSafetyPay]="codeSafetyPay"
-	[isPayCard]="isPayCard"
-	[transactionId]="transactionId"
-></app-message-pay>
+<app-message-pay *ngIf="showMessagePay" [listBanksInternet]="listBanksInternet" [codeSafetyPay]="codeSafetyPay"
+	[isPayCard]="isPayCard" [transactionId]="transactionId"></app-message-pay>

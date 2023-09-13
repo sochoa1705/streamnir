@@ -13,7 +13,8 @@ import { GlobalComponent } from 'src/app/shared/global';
 import { dataSteps } from 'src/app/shared/constant-init';
 import { Result, ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
 import { PayComponent } from './pay/pay.component';
-
+import { BaggageInsuranceComponent } from './baggage-insurance/baggage-insurance.component';
+import { PassengersComponent } from './passengers/passengers.component';
 @Component({
 	selector: 'app-checkout-page',
 	templateUrl: './checkout-page.component.html',
@@ -41,15 +42,57 @@ export class CheckoutPageComponent implements OnInit {
 	codeSafetyPay = 0;
 
 	indexStepActive = 0;
-	isSafetyPay=false;
-	discount:Result;
-	totalDiscountCupon=0;
-	isShowDiscount=false;
-	isShowDiscountCupon=false;
+	isSafetyPay = false;
+	discount: Result;
+	totalDiscountCupon = 0;
+	isShowDiscount = false;
+	isShowDiscountCupon = false;
 
 
 	@ViewChild('childPagePay')
 	childPagePay!: PayComponent;
+	@ViewChild(BaggageInsuranceComponent)
+	private baggageInsuranceComponent: BaggageInsuranceComponent;
+
+	triggerChildFunction() {
+		if (this.baggageInsuranceComponent) {
+			this.baggageInsuranceComponent.nextPage();
+		}
+	}
+	@ViewChild(PassengersComponent)
+	private PassengersComponent: PassengersComponent;
+
+	checkAdditionalButtonDisabled(): boolean {
+		return (
+			this.PassengersComponent &&
+			(this.PassengersComponent.dataStatusCards.includes(false) ||
+				!this.PassengersComponent.formGroup.valid ||
+				!this.PassengersComponent.formBillingGroup.valid ||
+				!this.PassengersComponent.formPoliticsGroup.valid)
+		);
+	}
+	triggerChildFunctionPassenger() {
+		if (this.PassengersComponent) {
+			this.PassengersComponent.setInfoPassengersInformation();
+		}
+	}
+
+	@ViewChild(PayComponent)
+	private PayComponent: PayComponent;
+
+
+	triggerChildFunctionPayComponent() {
+		if (this.PayComponent) {
+			this.PayComponent.sendPayment();
+		}
+	}
+	checkAdditionalButtonDisabledPayComponent(): boolean {
+		return (
+			this.PayComponent &&
+			(!this.PayComponent.formGroupCard.valid ||
+				!this.PayComponent.formGroupPolitics.valid)
+		);
+	}
 
 	constructor(
 		private _checkoutService: CheckoutService,
@@ -64,23 +107,23 @@ export class CheckoutPageComponent implements OnInit {
 			}
 		});
 		this._checkoutService.isFinishedPay.subscribe({
-			next: (res:any) => {
-				this.codeSafetyPay=res.transactionId;
-				this.isSafetyPay=!res.isPayCard;
+			next: (res: any) => {
+				this.codeSafetyPay = res.transactionId;
+				this.isSafetyPay = !res.isPayCard;
 				this.showButtonReturn = true;
 			}
 		});
 		this._checkoutService.applyCupon.subscribe({
-			next: (res:ResultCupon | null) => {
-				this.isShowDiscount=false;
-				if(res){
-					this.isShowDiscountCupon=true;
-					this.totalDiscountCupon=res.montoDescuento;
-				}else{
-					this.isShowDiscountCupon=false;
-					this.totalDiscountCupon=0;
-					if(GlobalComponent.discountCampaing){
-						this.isShowDiscount=true;
+			next: (res: ResultCupon | null) => {
+				this.isShowDiscount = false;
+				if (res) {
+					this.isShowDiscountCupon = true;
+					this.totalDiscountCupon = res.montoDescuento;
+				} else {
+					this.isShowDiscountCupon = false;
+					this.totalDiscountCupon = 0;
+					if (GlobalComponent.discountCampaing) {
+						this.isShowDiscount = true;
 					}
 				}
 			}
@@ -93,9 +136,9 @@ export class CheckoutPageComponent implements OnInit {
 		this.classFligh = GlobalComponent.classFligh;
 		this.nameUpSellSelect = GlobalComponent.upSellSeleted?.description || '';
 		this._checkoutService.totalDaysTravel();
-		dataSteps.forEach((step, index)=>{
-			step.active=index==0 ? true : false;
-			step.check=false;
+		dataSteps.forEach((step, index) => {
+			step.active = index == 0 ? true : false;
+			step.check = false;
 		})
 		this.getDiscounts();
 	}
@@ -114,21 +157,21 @@ export class CheckoutPageComponent implements OnInit {
 		}
 	}
 
-	getDiscounts(){
+	getDiscounts() {
 		this._checkoutService.getDiscountByCampaing().subscribe({
-			next:(res)=>{
-				if(res.result.isSuccess){
-					GlobalComponent.discountCampaing=res;
-					this.discount=res.result;
-					this.isShowDiscount=true;
-					if(this.isShowDiscountCupon){
-						this.isShowDiscountCupon=false;
-						this.totalDiscountCupon=0;
+			next: (res) => {
+				if (res.result.isSuccess) {
+					GlobalComponent.discountCampaing = res;
+					this.discount = res.result;
+					this.isShowDiscount = true;
+					if (this.isShowDiscountCupon) {
+						this.isShowDiscountCupon = false;
+						this.totalDiscountCupon = 0;
 						this.childPagePay.cleanInputCodeCupon();
 					}
-				}else this.isShowDiscount=false;
-			},error:()=>{
-				this.isShowDiscount=false;
+				} else this.isShowDiscount = false;
+			}, error: () => {
+				this.isShowDiscount = false;
 			}
 		})
 	}
