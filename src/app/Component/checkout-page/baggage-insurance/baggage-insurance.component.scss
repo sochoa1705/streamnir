@@ -22,6 +22,8 @@
 				letter-spacing: -0.02em;
 				text-align: left;
 				color: colors.$neutral-900;
+
+				
 			}
 
 			&__secondary {
@@ -32,6 +34,10 @@
 				letter-spacing: 0em;
 				text-align: left;
 				color: colors.$neutral-900;
+
+				@media (max-width: 550px) {
+					font-size: 14px;
+				}
 			}
 		}
 
@@ -81,6 +87,10 @@
 					line-height: 32px;
 					letter-spacing: -0.02em;
 					margin: 0;
+
+					@media (max-width: 550px) {
+						font-size: 18px;
+					}
 				}
 
 				span {
@@ -381,7 +391,8 @@
 
 	@media (max-width: 670px) {
 		padding-bottom: 24px;
-		.xs_button_100{
+
+		.xs_button_100 {
 			width: 100%;
 		}
 	}
@@ -401,4 +412,14 @@ span {
 	letter-spacing: -0.02em;
 	text-align: left;
 }
-
+@media (max-width: 550px) {
+	.container__page__section__title__primary{
+		font-size: 18px;
+	}
+	.container__page__section__title__secondary{
+		font-size: 14px;
+	}
+	.container__page__section__insurance__body__checks__option{
+		padding: 0px;
+	}
+}

@@ -210,7 +210,9 @@
 	@media (max-width: 1304px) {
 		padding: 242px 60px 0px 60px;
 	}
-
+	@media (max-width: 550px) {
+		padding: 190px 10px 0px 10px !important;
+	}
 	@media (max-width: 1199px) {
 		padding: 232px 24px 0px 24px;
 

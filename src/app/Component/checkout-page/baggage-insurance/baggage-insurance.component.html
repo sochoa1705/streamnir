@@ -21,8 +21,9 @@
 					<app-button *ngIf="itsIncludeUpSell && getScreenWidth <=950 && getScreenWidth > 550"
 						[text]="'Ampliar'" [color]="'outline-secondary'" (click)="openModalFee()"
 						[size]="'md'"></app-button>
-					<app-button *ngIf="itsIncludeUpSell && getScreenWidth <=550" class="xs_button_100" [text]="'Ampliar beneficios'"
-						[color]="'outline-secondary'" (click)="openModalFee()" [w100]=true [size]="'md'"></app-button>
+					<app-button *ngIf="itsIncludeUpSell && getScreenWidth <=550" class="xs_button_100"
+						[text]="'Ampliar beneficios'" [color]="'outline-secondary'" (click)="openModalFee()" [w100]=true
+						[size]="'md'"></app-button>
 
 				</div>
 
@@ -133,8 +134,9 @@
 									<span class="price"> <span class="usd">USD</span> {{ isDomestic ? '1.50' : '2.50' }}
 									</span> por
 									persona y por día</span>
-								<app-button class="xs_button_100" [text]="'Agregar seguro'" [color]="'outline-secondary'" [left]="true"
-									[icon]="'plusBlue.svg'" (click)="updateInsurance()" [isMobile]="true" [w100]="true" ></app-button>
+								<app-button class="xs_button_100" [text]="'Agregar seguro'"
+									[color]="'outline-secondary'" [left]="true" [icon]="'plusBlue.svg'"
+									(click)="updateInsurance()" [isMobile]="true" [w100]="true"></app-button>
 							</div>
 						</ng-container>
 					</div>
