@@ -6,6 +6,7 @@
 	[class.isLoader]="isLoader"
 	(click)="clickButton()"
 	[class.w-100]="w100"
+	[class.isMobile]="isMobile"
 >
 	{{ isLoader ? '' : text }}
 	<img *ngIf="!isSucess && !isLoader" [src]="'./assets/svg/' + icon" />
@@ -14,14 +15,16 @@
 </button>
 
 <button
+
 	*ngIf="left && icon && icon!==''"
 	[class]="color + ' btn'"
 	[disabled]="disabled"
 	(click)="clickButton()"
 	[class.w-100]="w100"
 	[class.btn__xs]="size=='xs'"
+	[class.isMobile]="isMobile"
 >
-	<img [src]="'./assets/svg/' + icon" />
+	<img alt="img_btn" [src]="'./assets/svg/' + icon" />
 	{{ text }}
 </button>
 
@@ -32,6 +35,7 @@
 	(click)="clickButton()"
 	[class.w-100]="w100"
 	[class.btn__xs]="size=='xs'"
+	[class.isMobile]="isMobile"
 >
 	{{ text }}
 </button>

@@ -161,4 +161,12 @@
 			}
 		}
 	}
+	@media (max-width: 768px) {
+		&__info {
+		  .flightaeroline {
+			display: none;
+		  }
+		}
+	  }
+	
 }

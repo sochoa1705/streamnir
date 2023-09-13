@@ -7,6 +7,10 @@
 	flex-direction: column;
 	padding-bottom: 40%;
 
+	@media (max-width: 551px) {
+		padding-bottom: 30px;
+	}
+
 	&__section {
 		display: flex;
 		flex-direction: column;
@@ -22,11 +26,13 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				&__text{
+
+				&__text {
 					display: flex;
 					align-items: center;
-					gap:16px;
-					h1{
+					gap: 16px;
+
+					h1 {
 						font-family: Open Sans;
 						font-size: 28px;
 						font-weight: 600;
@@ -35,13 +41,18 @@
 						text-align: left;
 						color: colors.$neutral-900;
 						margin-bottom: 0;
+
+						@media (max-width: 551px) {
+							font-size: 18px !important;
+						}
 					}
-					span{
+
+					span {
 						font-family: Montserrat;
 						font-size: 16px;
 						font-weight: 500;
 						line-height: 24px;
-						color:colors.$blue-500;
+						color: colors.$blue-500;
 						margin-top: 3px;
 					}
 				}
@@ -59,35 +70,58 @@
 			}
 		}
 
-		&__cards, &__contact{
-			display:flex;
+		&__cards,
+		&__contact {
+			display: flex;
 			flex-direction: column;
-			gap:24px;
+			gap: 24px;
 		}
 
-		&__contact{
+		&__contact {
 			margin-top: 46px;
-			&__form{
+
+			&__form {
 				display: flex;
 				flex-direction: column;
-				gap:24px;
-				&__name{
+				gap: 24px;
+
+
+				&__name {
 					display: grid;
 					column-gap: 20px;
-					grid-template-columns: repeat(3,1fr);
+					grid-template-columns: repeat(3, 1fr);
+
+					@media (max-width: 900px) {
+						grid-template-columns: repeat(1, 1fr);
+					}
 				}
-				section{
+
+				section {
 					width: 100%;
 					display: flex;
 					flex-direction: row;
-					gap:20px;
+					gap: 20px;
+					@media (max-width: 900px) {
+						display: block;
+					}
 				}
-				&__email{
+
+				&__email {
 					width: 50%;
+
+					@media (max-width: 900px) {
+						width: 100%;
+					}
 				}
-				&__phone{
+
+				&__phone {
 					padding-left: 3px;
 					width: 50%;
+
+					@media (max-width: 900px) {
+						width: 100%;
+					}
+
 					span {
 						color: colors.$neutral-900;
 						margin-left: 3px;
@@ -95,14 +129,17 @@
 						font-family: 'Montserrat';
 						font-size: 14px;
 						line-height: 20px;
+
 						.required {
 							color: colors.$red-400;
 						}
+
 						.text-left {
 							margin-left: 67px;
 						}
 					}
-					.error{
+
+					.error {
 						font-weight: 400;
 						font-size: 12px;
 						line-height: 14px;
@@ -114,14 +151,16 @@
 			}
 		}
 
-		&__check{
+		&__check {
 			display: flex;
 			flex-direction: column;
 			gap: 24px;
+
 			.check__container {
 				display: flex;
 				gap: 4px;
 				align-items: center;
+
 				span {
 					font-family: Montserrat;
 					font-size: 18px;
@@ -133,7 +172,7 @@
 			}
 		}
 
-		&__button{
+		&__button {
 			display: flex;
 			justify-content: flex-end;
 			margin-top: 36px;
@@ -143,11 +182,17 @@
 			display: flex;
 			flex-direction: column;
 			gap: 24px;
+
 			&__row {
 				display: grid;
 				column-gap: 20px;
 				grid-template-columns: repeat(2, 1fr);
+
+				@media (max-width: 900px) {
+					grid-template-columns: repeat(1, 1fr);
+				}
 			}
+
 			&__address {
 				margin-top: 24px;
 				width: 100%;
@@ -158,6 +203,7 @@
 			display: flex;
 			gap: 4px;
 			align-items: center;
+
 			span {
 				font-family: Montserrat;
 				font-size: 18px;
@@ -167,6 +213,27 @@
 				color: colors.$neutral-900;
 			}
 		}
-		
+
+	}
+}
+
+@media (max-width: 551px) {
+
+	.container__page__section__title__primary__text,
+	.container__page__section__title__primary {
+		font-size: 18px;
+	}
+
+	.container__page__section__title__secondary {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 900px) {
+	.container__page__section__contact__form {
+		display: block;
+	}
+	.label_input{
+		padding-top: 8px;
 	}
 }

@@ -4,7 +4,7 @@
             <div class="container__steps__step" [class.end]="step.id==0">
                 <div class="container__steps__step__number" [class.active]="step.active" [class.check]="step.check" (click)="clickStep(step.id)">
                     <span *ngIf="!step.check">{{step.id + 1}}</span>
-                    <img *ngIf="step.check" src="./assets/svg/check-red-step.svg" >
+                    <img alt="" *ngIf="step.check" src="./assets/svg/check-red-step.svg" >
                 </div>
                 <span class="container__steps__step__text"  [class.active]="step.active">{{step.name}}</span>
             </div>

@@ -2,11 +2,11 @@
 	<div class="card__passenger">
 		<div class="card__passenger__header" [class.check]="!active">
 			<div class="card__passenger__header__title">
-				<img src="./assets/svg/passenger.svg" />
+				<img alt="img_passenger" src="./assets/svg/passenger.svg" />
 				<span>{{ type == 'ADT' ? 'Adulto ' : type == 'CNN' ? ' Menor' : ' Infante' }} {{ index }}</span>
-				<img *ngIf="validForm" src="./assets/svg/checkSuccess.svg" />
+				<img alt="img_passenger" *ngIf="validForm" src="./assets/svg/checkSuccess.svg" />
 			</div>
-			<img
+			<img alt="img_passenger"
 				class="arrow"
 				[src]="active ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'"
 				(click)="active = !active"
@@ -95,6 +95,44 @@
 							"
 						></app-input>
 					</div>
+				</div>
+				<div class="card__passenger__body__row">
+					<app-input
+						[label]="'Nombres'"
+						[placeholder]="'Ingresar nombres'"
+						[name]="'name'"
+						[isRequired]="true"
+						[isOnlyText]="true"
+						[class]="nameField.touched && nameField!.invalid ? 'error' : ''"
+						[labelError]="
+							nameField.touched && nameField!.hasError('required')
+								? 'Nombre es obligatorio'
+								: nameField.touched && nameField!.hasError('maxlength')
+								? 'Debe tener max. 50 caracteres'
+								: nameField.touched && nameField!.hasError('whitespace')
+								? 'Nombre no válido'
+								: ''
+						"
+					></app-input>
+					<app-input
+						[label]="'Apellidos'"
+						[placeholder]="'Ingresar apellidos'"
+						[name]="'lastName'"
+						[isOnlyText]="true"
+						[isRequired]="true"
+						[class]="lastNameField.touched && lastNameField!.invalid ? 'error' : ''"
+						[labelError]="
+							lastNameField.touched && lastNameField!.hasError('required')
+								? 'Apellidos es obligatorio'
+								: lastNameField.touched && lastNameField!.hasError('maxlength')
+								? 'Debe tener max. 50 caracteres'
+								: lastNameField.touched && lastNameField!.hasError('whitespace')
+								? 'Apellidos no válido'
+								: ''
+						"
+					></app-input>
+				</div>
+				<div class="card__passenger__body__row">				
 					<div class="card__passenger__body__group">
 						<span>Fecha de nacimiento <span class="required">*</span></span>
 						<div class="card__passenger__body__group__selects">
@@ -122,9 +160,6 @@
 							></app-select>
 						</div>
 					</div>
-				</div>
-
-				<div class="card__passenger__body__row">
 					<app-select
 						[label]="'Nacionalidad'"
 						[placeholder]="'Seleccionar'"
@@ -136,6 +171,8 @@
 							nationalityField.touched && nationalityField!.hasError('required') ? 'Nacionalidad es obligatorio' : ''
 						"
 					></app-select>
+				</div>
+				<div class="card__passenger__body__row">
 					<app-select
 						[label]="'Género'"
 						[placeholder]="'Seleccionar'"
@@ -153,25 +190,25 @@
 						]"
 						[labelError]="genderField.touched && genderField!.hasError('required') ? 'Género es obligatorio' : ''"
 					></app-select>
+					<app-input  [hidden]="type=='INF'"
+					[label]="'Correo electrónico'"
+					[placeholder]="'Ingresar correo electrónico'"
+					[name]="'email'"
+					[class]="emailField.touched && emailField!.invalid ? 'error' : ''"
+					[maxLenght]="50"
+					[labelError]="
+						emailField.touched && emailField!.hasError('email')
+							? 'Email no válido'
+							: emailField.touched && emailField!.hasError('maxlength')
+							? 'Debe tener max. 50 caracteres'
+							: ''
+					"
+				></app-input>
 				</div>
 
 				<div class="card__passenger__body__row" [hidden]="type=='INF'">
-					<app-input
-						[label]="'Correo electrónico'"
-						[placeholder]="'Ingresar correo electrónico'"
-						[name]="'email'"
-						[class]="emailField.touched && emailField!.invalid ? 'error' : ''"
-						[maxLenght]="50"
-						[labelError]="
-							emailField.touched && emailField!.hasError('email')
-								? 'Email no válido'
-								: emailField.touched && emailField!.hasError('maxlength')
-								? 'Debe tener max. 50 caracteres'
-								: ''
-						"
-					></app-input>
 					<div class="card__passenger__body__group">
-						<span>Código <span class="text-left">Número de teléfono</span></span>
+						<span>Código <span class="text-left">Número de celular</span></span>
 						<ngx-intl-tel-input
 							[cssClass]="phoneField.touched && phoneField!.invalid ? 'custom':''" 
 							[preferredCountries]="preferredCountries"

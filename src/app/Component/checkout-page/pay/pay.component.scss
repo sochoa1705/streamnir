@@ -3,6 +3,9 @@
 .container__page {
 	width: 100%;
 	padding-bottom: 40%;
+	@media (max-width: 551px) {
+		padding-bottom: 30px;
+	}
 
 	&__section {
 		display: flex;
@@ -21,6 +24,9 @@
 				letter-spacing: -0.02em;
 				text-align: left;
 				color: colors.$neutral-900;
+				@media (max-width: 550px) {
+					font-size: 20px;
+				}
 			}
 
 			&__secondary {
@@ -31,6 +37,9 @@
 				letter-spacing: 0em;
 				text-align: left;
 				color: colors.$neutral-900;
+				@media (max-width: 550px) {
+					font-size: 14px;
+				}
 			}
 		}
 
@@ -105,6 +114,7 @@
 					display: grid;
 					column-gap: 20px;
 					grid-template-columns: repeat(2, 1fr);
+					
 				}
 				&__adress {
 					width: 100%;
@@ -251,6 +261,9 @@
 			width: 100%;
 			display: flex;
 			justify-content: flex-end;
+			@media (max-width: 551px) {
+				display: none;
+			}
 		}
 	}
 }
