@@ -11,7 +11,9 @@
 .container__page {
 	padding: 242px 96px 0px 96px;
 	min-height: calc(100% - 80px);
-
+	@media (max-width: 550px) {
+		padding: 190px 10px 0px 10px !important;
+	}
 	section {
 		max-width: 1248px;
 		margin: 0 auto;
