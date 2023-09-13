@@ -111,6 +111,10 @@
 							background: colors.$blue-500;
 							span {
 								@extend .paragraph;
+								text-transform: lowercase;
+								&::first-letter{
+									text-transform: uppercase;
+								}
 							}
 						}
 					}
@@ -129,6 +133,10 @@
 						letter-spacing: -0.02em;
 						text-align: left;
 						color: white;
+						&.small{
+							font-size: 24px;
+							line-height: 32px;
+						}
 					}
 					section {
 						height: 0;

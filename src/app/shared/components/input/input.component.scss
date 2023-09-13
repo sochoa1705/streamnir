@@ -35,16 +35,17 @@
 		font-family: 'Montserrat';
 		padding: 8px 12px;
 		border-radius: 4px;
+		caret-color: colors.$red-500;
 		&::placeholder{
 			color:colors.$neutral-400;
 		}
 		&:focus {
 			outline: none;
-   			border:1px solid colors.$blue-300;
+   			border:1px solid colors.$red-500;
 		}
 		&.error{
-			border:1px solid colors.$red-400;
-			caret-color:colors.$red-400;
+			border:1px solid colors.$red-200;
+			caret-color:colors.$red-200;
 		}
 		&.icon{
 			padding-left: 27px;
@@ -117,5 +118,5 @@
 	line-height: 14px;
 	margin-left:5px;
 	top: -3px;
-	color:colors.$red-400;
+	color:colors.$red-200;
 }

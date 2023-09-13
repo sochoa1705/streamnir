@@ -18,7 +18,7 @@
           </div>
       </div>
   </div>
-  <app-section-carrusel [slidersJoin]="slidersJoin"></app-section-carrusel>
+  <app-section-carrusel [slidersWeb]="bannersDestacadosWeb" [isDinamic]="bannersDestacadosWeb.length > 4"></app-section-carrusel>
   <app-section-super-offers></app-section-super-offers>
   <app-section-packages></app-section-packages>
   <app-section-why-choose-us [dataSection]="dataPagePresenterService.data.sections[4].card"></app-section-why-choose-us>

@@ -1,5 +1,6 @@
 $primary-color: #DF0C30;
 $red-50:#FCCDD5;
+$red-200:#EF4444;
 $red-300:#F43556;
 $red-400:#E70D32;
 $red-500:#B50A27;
@@ -38,6 +39,7 @@ $bg-warning:#F297041A;
 
 $purple:#664287;
 $purple-bg:#D7C6EC;
+$green:#22C55E;
 
 ////Phone Input
 ::ng-deep .iti {
@@ -66,9 +68,10 @@ $purple-bg:#D7C6EC;
 	font-size: 14px;
 	line-height: 20px;
 	font-family: 'Montserrat';
+	caret-color: $red-500;
 	&:focus {
 		outline: none;
-		border: 1px solid $blue-300;
+		border: 1px solid $red-500;
 	}
 	&::placeholder {
 		color: $neutral-400;

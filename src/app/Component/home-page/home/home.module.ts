@@ -35,6 +35,7 @@ import { SectionPackagesComponent } from './section-packages/section-packages.co
 import { SectionSuperOffersComponent } from './section-super-offers/section-super-offers.component';
 import { SectionCarruselComponent } from './section-carrusel/section-carrusel.component';
 import { SwiperModule } from 'swiper/angular';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
@@ -72,7 +73,9 @@ import { SwiperModule } from 'swiper/angular';
     FilterTabsModule,
     FiltersafeModule,
     ButtonModule,
-    SwiperModule
+    SwiperModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   exports: [HomeComponent],
   providers: [DestinyService, AsidePresenterService, BusinessUnitService],

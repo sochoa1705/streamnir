@@ -32,6 +32,28 @@
 		}
 	}
 
+	&.primary-green{
+		background: colors.$red-500;
+		color: white;
+
+		&:hover {
+			background: colors.$red-600;
+			color: white;
+		}
+
+		&:disabled {
+			background: colors.$green;
+			color: white;
+			opacity: 1 !important;
+			min-width:139px;
+		}
+		&.isLoader{
+			&:disabled {
+				background: colors.$red-500;
+			}
+		}
+	}
+
 	&.neutral{
 		background: white;
 		color:colors.$neutral-700;
@@ -129,3 +151,33 @@
 		}
 	}
 }
+
+
+
+.spinner {
+	display: grid;
+	place-items: center;
+	width: 28px;
+	height:  28px;
+	border-radius: 50%;
+	background: conic-gradient(
+	  from 180deg at 50% 50%,
+	  colors.$red-500 0deg,
+	  white 360deg
+	);
+	animation: spin 2s infinite linear;
+  }
+  .spinner::before {
+	content: "";
+	border-radius: 50%;
+	width: 80%;
+	height: 80%;
+	background-color: colors.$red-500;
+  }
+  
+  @keyframes spin {
+	to {
+	  transform: rotate(1turn);
+	}
+  }
+  

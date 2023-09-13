@@ -5,57 +5,28 @@
             <span>Sumérgete en nuestro apasionante blog de viajes, lleno de consejos, inspiración y destinos fascinantes.</span>
         </div>
         <div class="container__blog__section__cards">
-            <div class="container__blog__section__cards__card card1">
-                <img [src]="'https://cdn.pixabay.com/photo/2023/06/16/13/46/surfing-8068052_1280.jpg'" alt="">
-                <div class="container__blog__section__cards__card__bg"></div>
-                <div class="container__blog__section__cards__card__info">
-                    <div  class="container__blog__section__cards__card__info__tags">
-                        <div class="container__blog__section__cards__card__info__tags__tag">
-                            <span>Celebraciones</span>
-                        </div>
-                        <div class="container__blog__section__cards__card__info__tags__tag">
-                            <span>Fiestas Locales</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="container__blog__section__cards__card__contend">
-                        <h4>Día de la Madre: 4 destinos para viajar con mamá según el estilo</h4>
-                        <section>A pocas semanas del Día de la Madre es probable que estés en busca del regalo ideal para mamá y viajar es una de las mejores formas de celebrarlo. Haz que este día sea muy especial para... </section>
-                </div>
-            </div>
-            <div class="container__blog__section__cards__card card2">
-                <img [src]="'https://cdn.pixabay.com/photo/2023/07/19/04/56/european-shorthair-8136065_1280.jpg'" alt="">
-                <div class="container__blog__section__cards__card__bg"></div>
-                <div class="container__blog__section__cards__card__info">
-                    <div  class="container__blog__section__cards__card__info__tags">
-                        <div class="container__blog__section__cards__card__info__tags__tag">
-                            <span>Celebraciones</span>
+            <ng-container *ngFor="let blog of dataBlog; let i=index">
+                <a [href]="blog.link" target="_blank" class="container__blog__section__cards__card" [ngClass]="i == 0 ? 'card1' : i == 1 ? 'card2' :'card3'">
+                    <img [src]="blog.image" [alt]="blog.title" />
+                    <div class="container__blog__section__cards__card__bg"></div>
+                    <div class="container__blog__section__cards__card__info">
+                        <div  class="container__blog__section__cards__card__info__tags">
+                            <div class="container__blog__section__cards__card__info__tags__tag" *ngFor="let tag of blog.categories | slice:0:2">
+                                <span>{{tag}}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="container__blog__section__cards__card__contend">
-                        <h4>¿En busca del invierno? 4 destinos en el mundo ideales para esquiar</h4>
-                        <section>Si eres de las personas que disfruta del frío y los deportes de aventura, es probable que un destino en el que puedas practi...</section>
-                </div>
-            </div>
-            <div class="container__blog__section__cards__card card3">
-                <img [src]="'https://cdn.pixabay.com/photo/2023/08/16/21/10/cairn-8195026_1280.jpg'" alt="">
-                <div class="container__blog__section__cards__card__bg"></div>
-                <div class="container__blog__section__cards__card__info">
-                    <div  class="container__blog__section__cards__card__info__tags">
-                        <div class="container__blog__section__cards__card__info__tags__tag">
-                            <span>Experiencias</span>
-                        </div>
+                    <div class="container__blog__section__cards__card__contend">
+                            <h4 [class.small]="i!==0">{{blog.title}}</h4>
+                            <section>{{blog.contentExtract}}...</section>
                     </div>
-                </div>
-                <div class="container__blog__section__cards__card__contend">
-                        <h4>Destinos exóticos: 5 ciudades que debes visitar para vivir una experiencia mágica</h4>
-                        <section>Playas paradisíacas, selvas tropicales, montañas y nieve. La naturaleza nos regala paisajes increíbles y únicos en diversos ri...</section>
-                </div>
-            </div>
+                </a>  
+            </ng-container>
         </div>
         <div  class="container__blog__section__button">
-            <app-button [text]="'Ver más noticias'" [color]="'outline-primary'"></app-button>
+            <a href="https://blog.nmviajes.com" target="_blank">
+                <app-button [text]="'Ver más noticias'" [color]="'outline-primary'"></app-button>
+            </a>
         </div>
     </div>
 </div>

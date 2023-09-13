@@ -33,19 +33,19 @@
 }
 
 .swiper-pagination-bullet{
-    /*width: 40px;
+    width: 40px;
     height: 8px;
     border-radius: 8px;
     background: colors.$gris-400;
-    margin: 0 12px !important;*/
+    margin: 0 12px !important;
     opacity: 1;
 }
 
 .swiper-pagination-bullet-active{
     background: colors.$gris-700;
-    /*width: 80px;
+    width: 80px;
     height: 12px;
-    margin: -2px 12px !important*/
+    margin: -2px 12px !important
 }
 
 
@@ -61,25 +61,27 @@
 		gap: 48px;
         &__swiper{
             &__card{
-                height: 320px;
+                max-height: 320px;
                 border-radius: 16px;
                 cursor: pointer;
                 img {			
-                    max-width: 100%;
+                    width: 100%;
 					display: block;
-					width: 100%;
-                    border-radius: 16px;
 					height: 100%;
+                    border-radius: 16px;
 					object-fit: cover;
 					object-position: center;
 					-o-object-fit: cover;
 					-o-object-position: center;
+                    align-self: center;
 				}
                 &.square{
-                    width: 30%;
+                    max-width: 320px;
+                    aspect-ratio: 1/1;
                 }
-                &.banner{
-                    width: 70%;
+                &.fullbanner{
+                    max-width: 880px;
+                    aspect-ratio: 11 / 4;
                 }
             }
         }

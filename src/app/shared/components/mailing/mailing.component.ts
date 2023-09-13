@@ -62,9 +62,6 @@ export class MailingComponent implements OnInit {
 
 	subscribe() {
 		if (this.validForm()) {
-			const textSend = 'Validando suscripción';
-			this.loaderSubjectService.showText(textSend);
-			this.loaderSubjectService.showLoader();
 			let data = {
 				name: this.formMAiling.value.nombreMail,
 				email: this.formMAiling.value.correoMail,

@@ -13,3 +13,19 @@ export interface Offers {
 	noches: number,
 	tipoAlojamiento: string
 }
+
+
+export interface Offer {
+
+	DestinationCode: string,
+	Destination: string,
+	Type: string,
+	Rate: number,
+	Image: string
+}
+
+export interface OffersNacInt{
+	Result:Offer[],
+	TrackingCode: string,
+	State:any
+}

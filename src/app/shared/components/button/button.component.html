@@ -3,11 +3,14 @@
 	[class]="color + ' btn'"
 	[disabled]="disabled"
 	[class.btn__xs]="size=='xs'"
+	[class.isLoader]="isLoader"
 	(click)="clickButton()"
 	[class.w-100]="w100"
 >
-	{{ text }}
-	<img [src]="'./assets/svg/' + icon" />
+	{{ isLoader ? '' : text }}
+	<img *ngIf="!isSucess && !isLoader" [src]="'./assets/svg/' + icon" />
+	<img *ngIf="isSucess && disabled && !isLoader" [src]="'./assets/svg/'+ icon" />
+	<div class="spinner" *ngIf="disabled && isLoader"></div>
 </button>
 
 <button

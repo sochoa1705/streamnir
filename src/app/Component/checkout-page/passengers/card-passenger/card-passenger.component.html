@@ -21,6 +21,7 @@
 						[name]="'name'"
 						[isRequired]="true"
 						[isOnlyText]="true"
+						[maxLenght]="50"
 						[class]="nameField.touched && nameField!.invalid ? 'error' : ''"
 						[labelError]="
 							nameField.touched && nameField!.hasError('required')
@@ -38,6 +39,7 @@
 						[name]="'lastName'"
 						[isOnlyText]="true"
 						[isRequired]="true"
+						[maxLenght]="50"
 						[class]="lastNameField.touched && lastNameField!.invalid ? 'error' : ''"
 						[labelError]="
 							lastNameField.touched && lastNameField!.hasError('required')

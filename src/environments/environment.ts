@@ -78,6 +78,7 @@ export const environment = {
   urlBookingConditions: 'https://www.nmviajes.com/condiciones-de-reserva',
   urlTravelDocuments: 'https://www.nmviajes.com/documentacion-viaje',
   
+  urlBlog:'https://blog.nmviajes.com',
   GDS:{
       AMADEUS: 0,
       SABRE: 1,

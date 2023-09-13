@@ -57,7 +57,7 @@ export class TabVueloHotelComponent {
 	}
 
 	navigateToResponseUrl(url: string): void {
-		window.location.href = url;
+		//window.location.href = url;
 	}
 
 	validateForm(field: string) {
