@@ -1,4 +1,4 @@
-<div class="dropdown__filter">
+<div class="dropdown__filter" *ngIf="valueDurationDep > 0 && highValueDurationDep > 0">
 	<div class="dropdown__filter__header" (click)="dropdownActive = !dropdownActive">
 		<h4>Duración</h4>
 		<img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
@@ -18,18 +18,18 @@
 			></app-button>
 		</div>
 		<section>
-			<span class="dropdown__filter__body__name">Salida a LAX</span>
+			<span class="dropdown__filter__body__name">Salida a {{codesFlight[0]}}</span>
 			<div class="dropdown__filter__body__slider">
 				<ng5-slider
-					[(value)]="value"
-					[(highValue)]="highValue"
-					[options]="options"
+					[(value)]="valueDurationDep"
+					[(highValue)]="highValueDurationDep"
+					[options]="optionsDurationDep"
 					(userChangeEnd)="filterDuration($event)"
 				></ng5-slider>
 			</div>
 			<div class="dropdown__filter__body__values">
-				<span>1h 20m</span>
-				<span>15h 26m</span>
+				<span>{{valueDurationDep}}</span>
+				<span>{{highValueDurationDep}}</span>
 			</div>
 		</section>
 		<section class="section-scale">
@@ -48,4 +48,10 @@
 			</div>
 		</section>
 	</div>
+</div>
+
+<div class="dropdown__loader" *ngIf="valueDurationDep == 0 || highValueDurationDep == 0">
+	<div class="skeleton dropdown__loader__skeleton_1"></div>
+	<div class="skeleton dropdown__loader__skeleton_2"></div>
+	<div class="skeleton dropdown__loader__skeleton_3"></div>
 </div>

@@ -20,10 +20,8 @@ export const getBodyEmail = (purchare: RPurchare, montoTotalDsto: number = 0) =>
 			pnrMultiticket += pnrMultiticket == '' ? element.pnr : '/' + element.pnr;
 		});
 	}
-	//ver en caso que la reserva se para otra persona u.u
-	let subject = purchare.esMultiticket
-		? `Felicidades tus reservas ${pnrMultiticket} se han generado correctamente`
-		: `Solicitud de Compra Nro. ${purchare.idCotizacion} para ${dataBooking.contact.name} ${dataBooking.contact.lastName}`;
+
+	let subject = `Solicitud de Compra Nro. ${purchare.idCotizacion} para ${dataBooking.contact.name} ${dataBooking.contact.lastName}`;
 
 	let messageConfirm = `Tu solicitud de compra ${purchare.idCotizacion} ha sido recibida y está siendo procesada.`;
 

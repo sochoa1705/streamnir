@@ -32,7 +32,7 @@
         &__options{
             display: flex;
             gap:48px;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             &__option{
                 padding:24px 0;

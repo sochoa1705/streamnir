@@ -28,7 +28,9 @@ export interface Group {
 	detailPricing?:IDetailPricing;
 	flightDurationProm?:number;
 	orderByScales?:number;
-	dateOrder?:DateOrder[]
+	dateOrder?:DateOrder[];
+	durationDeparture?:number;
+	durationReturn?:number
 }
 
 export interface DateOrder {

@@ -26,13 +26,11 @@ export class PriceFilterComponent implements OnInit, OnChanges {
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['minPrice']) {
 			this.value = this.minPrice;
-			console.log(this.value,'value')
 			this.options.floor = this.minPrice;
 		}
 
 		if (changes['maxPrice']) {
 			this.highValue = this.maxPrice;
-			console.log(this.highValue,'value')
 			this.options.ceil = this.maxPrice;
 		}
 	}

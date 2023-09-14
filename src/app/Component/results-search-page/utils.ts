@@ -50,5 +50,6 @@ export const dataFiltersInit = {
 	maxPrice:0,
 	isMultiticket:false,
 	isPrices:false,
-    isDuration:false
+    isDurationDeparture: false,
+	isDurationReturn: false
 }
