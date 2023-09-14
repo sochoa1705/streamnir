@@ -1,56 +1,101 @@
-<div class="container__offers">
-    <div  class="container__offers__section">
-        <div class="container__offers__section__title">
-            <h3>Super ofertas</h3>
-            <span>Descubre nuestras increíbles ofertas y ahorra en tus próximas aventuras. ¡No te las puedes perder!</span>
-        </div>
-        <div class="container__offers__section__tabs">
-            <div class="container__offers__section__tabs__tab" [class.active]="indexTab==0" (click)="indexTab=0">
-                <span>Nacional</span>
-            </div>
-            <div class="container__offers__section__tabs__tab" [class.active]="indexTab==1" (click)="indexTab=1">
-                <span>Internacional</span>
-            </div>
-            <div class="container__offers__section__tabs__tab" [class.active]="indexTab==2"  (click)="indexTab=2">
-                <span>Paquetes</span>
-            </div>
-        </div>
-        <div class="container__offers__section__cards">
-            <div class="container__offers__section__cards__card">
-                <img src="https://images.unsplash.com/photo-1693491012999-09a3764eab33?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80" alt="">
-                <div class="container__offers__section__cards__card__body">
-                    <span class="block title">Madrid</span>
-                    <span class="block">Desde Lima</span>
-                    <span class="regular">Precio desde <span class="title price">$840</span></span>
-                </div>
-            </div>
+<div class="container__offers" *ngIf="!hiddenSection">
+	<div class="container__offers__section">
+		<div class="container__offers__section__title">
+			<h3>Super ofertas</h3>
+			<span>Descubre nuestras increíbles ofertas y ahorra en tus próximas aventuras. ¡No te las puedes perder!</span>
+		</div>
+		<div class="container__offers__section__tabs">
+			<div
+				class="container__offers__section__tabs__tab"
+				*ngIf="showOffersNac"
+				[class.active]="indexTab == 0"
+				(click)="indexTab = 0"
+			>
+				<span>Nacional</span>
+			</div>
+			<div
+				class="container__offers__section__tabs__tab"
+				*ngIf="showOffersInt"
+				[class.active]="indexTab == 1"
+				(click)="indexTab = 1"
+			>
+				<span>Internacional</span>
+			</div>
+			<div
+				class="container__offers__section__tabs__tab"
+				*ngIf="showPackages"
+				[class.active]="indexTab == 2"
+				(click)="indexTab = 2"
+			>
+				<span>Paquetes</span>
+			</div>
+		</div>
+		<ng-container *ngIf="indexTab == 0">
+			<div class="container__offers__section__cards">
+				<div class="container__offers__section__cards__card" *ngFor="let national of nationalFlightsPag">
+					<img [src]="national.Image" alt="" />
+					<div class="container__offers__section__cards__card__body">
+						<span class="block title">{{ national.Destination | titlecase}}</span>
+						<span class="block">Desde Lima</span>
+						<span class="regular"
+							>Precio desde <span class="title price">${{ national.Rate }}</span></span
+						>
+					</div>
+				</div>
+			</div>
+			<div class="container__offers__section__button" *ngIf="nationalFlights.length > 4">
+				<app-button
+					[text]="nationalFlightsPag.length >= nationalFlights.length ? 'Ver menos' : 'Ver más ofertas'"
+					(onClick)="showMore()"
+					[color]="'outline-primary'"
+				></app-button>
+			</div>
+		</ng-container>
 
-            <div class="container__offers__section__cards__card">
-                <img src="https://images.unsplash.com/photo-1694024682316-521340fc1bad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="">
-                <div class="container__offers__section__cards__card__body">
-                    <span class="block title">Madrid</span>
-                    <span class="block">Desde Lima</span>
-                    <span class="regular">Precio desde <span class="title price">$840</span></span>
-                </div>
-            </div>
+		<ng-container *ngIf="indexTab == 1">
+			<div class="container__offers__section__cards">
+				<div class="container__offers__section__cards__card" *ngFor="let national of internationalFlightsPag">
+					<img [src]="national.Image" alt="" />
+					<div class="container__offers__section__cards__card__body">
+						<span class="block title">{{ national.Destination | titlecase }}</span>
+						<span class="block">Desde Lima</span>
+						<span class="regular"
+							>Precio desde <span class="title price">${{ national.Rate }}</span></span
+						>
+					</div>
+				</div>
+			</div>
+			<div class="container__offers__section__button" *ngIf="internationalFlights.length > 4">
+				<app-button 
+                    [text]="internationalFlightsPag.length >= internationalFlights.length ? 'Ver menos' : 'Ver más ofertas'"
+                    (onClick)="showMore()" [color]="'outline-primary'">
+                </app-button>
+			</div>
+		</ng-container>
 
-            <div class="container__offers__section__cards__card">
-                <img src="https://plus.unsplash.com/premium_photo-1680543345312-e5f25a1557ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" alt="">
-                <div class="container__offers__section__cards__card__body">
-                    <span class="block title">Madrid</span>
-                    <span class="block">Desde Lima</span>
-                    <span class="regular">Precio desde <span class="title price">$840</span></span>
-                </div>
-            </div>
-
-            <div class="container__offers__section__cards__card">
-                <img src="https://images.unsplash.com/photo-1682687220566-5599dbbebf11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1975&q=80" alt="">
-                <div class="container__offers__section__cards__card__body">
-                    <span class="block title">Madrid</span>
-                    <span class="block">Desde Lima</span>
-                    <span class="regular">Precio desde <span class="title price">$840</span></span>
-                </div>
-            </div>
-        </div>
-    </div>
+		<ng-container *ngIf="indexTab == 2">
+			<div class="container__offers__section__cards">
+				<a *ngFor="let package of packages" [href]="package.link" target="_blank">
+					<div class="container__offers__section__cards__card">
+						<img [src]="package.image" alt="" />
+						<div class="container__offers__section__cards__card__body">
+							<section>
+								<span class="block title ft-16">{{ package.destination }}</span>
+								<span class="block">{{ package.nights }} noches - alojamiento {{ package.accommodationType }}</span>
+								<span class="block">{{ package.packageIncludes }}</span>
+							</section>
+							<span class="regular"
+								>Precio desde <span class="title price">${{ package.price }}</span></span
+							>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="container__offers__section__button">
+				<a [href]="'https://vacaciones.nmviajes.com/'" target="_blank">
+					<app-button [text]="'Ver más ofertas'" [color]="'outline-primary'"></app-button>
+				</a>
+			</div>
+		</ng-container>
+	</div>
 </div>

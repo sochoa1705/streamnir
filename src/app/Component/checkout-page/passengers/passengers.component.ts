@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { ContryService } from 'src/app/api/api-nmviajes/services/country-list.service';
 import { months, days } from './utils';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
@@ -36,7 +36,7 @@ export class PassengersComponent implements OnInit {
 	totalPassenger = 0;
 	dataPassengers: Passenger[] = [];
 	dataStatusCards: boolean[] = [];
-
+	getScreenWidth=0;
 	separateDialCode = true;
 	SearchCountryField = SearchCountryField;
 	CountryISO = CountryISO;
@@ -106,8 +106,15 @@ export class PassengersComponent implements OnInit {
 		this.setIndexValidCard();
 		const userStorage = this._accountService.getUserStorage();
 		if (userStorage.email) this.getDataContact(userStorage.email);
+	
+		this.getScreenWidth = window.innerWidth;
 	}
-
+	@HostListener('window:resize', ['$event'])
+	onResize(){
+		if (this.getScreenWidth !== window.innerWidth) {
+			this.getScreenWidth = window.innerWidth;
+		}
+	}
 	setArrayDate() {
 		this.arrayMonths = months;
 		for (let index = 0; index < 3; index++) {

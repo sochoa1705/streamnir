@@ -15,7 +15,7 @@ import { CardInfoModule } from 'src/app/shared/components/card-info/card-info.mo
 import { MailingModule } from 'src/app/shared/components/mailing/mailing.module';
 import { BusinessUnitService } from 'src/app/Services/businessUnit/business-unit.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
-import { FlightDealsModule } from '../flightdeals/flightdeals.module';
+import { FlightDealsModule } from '../flight-deals/flight-deals.module';
 import { PackagesModule } from '../packages/packages.module';
 import { BuildYourTripModule } from '../build-your-trip/build-your-trip.module';
 import { HotelsModule } from '../hotels/hotels.module';
@@ -35,6 +35,7 @@ import { SectionPackagesComponent } from './section-packages/section-packages.co
 import { SectionSuperOffersComponent } from './section-super-offers/section-super-offers.component';
 import { SectionCarruselComponent } from './section-carrusel/section-carrusel.component';
 import { SwiperModule } from 'swiper/angular';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
@@ -72,7 +73,9 @@ import { SwiperModule } from 'swiper/angular';
     FilterTabsModule,
     FiltersafeModule,
     ButtonModule,
-    SwiperModule
+    SwiperModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   exports: [HomeComponent],
   providers: [DestinyService, AsidePresenterService, BusinessUnitService],

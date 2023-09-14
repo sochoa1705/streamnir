@@ -5,11 +5,11 @@ export const listTypeDocument = [
     },
     {
         value: '1',
-        name: 'C. EXTRANJERIA'
+        name: 'CE'
     },
     {
         value: '2',
-        name: 'PASAPORTE'
+        name: 'PAS'
     }
 ]
 

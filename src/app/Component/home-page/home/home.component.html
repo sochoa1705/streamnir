@@ -4,7 +4,8 @@
       <div class="search__container__metasearch">
           <h3>Encuentra vuelos para tu próximo viaje</h3>
           <div  class="search__container__metasearch__form">
-              <app-tab-vuelos [hidden]="indexSelectedTab!==0" [isBgWhite]="false"></app-tab-vuelos>
+            <!-- <app-tab-vuelos-v2 [hidden]="indexSelectedTab!==0"></app-tab-vuelos-v2>-->
+             <app-tab-vuelos [hidden]="indexSelectedTab!==0" [isBgWhite]="false"></app-tab-vuelos>
               <app-tab-paquetes [hidden]="indexSelectedTab!==1"></app-tab-paquetes>
               <app-tab-arma-paquetes [hidden]="indexSelectedTab!==2"></app-tab-arma-paquetes>
               <app-tab-vuelo-hotel [hidden]="indexSelectedTab!==3"></app-tab-vuelo-hotel>
@@ -17,7 +18,7 @@
           </div>
       </div>
   </div>
-  <app-section-carrusel [slidersJoin]="slidersJoin"></app-section-carrusel>
+  <app-section-carrusel [slidersWeb]="bannersDestacadosWeb" [isDinamic]="bannersDestacadosWeb.length > 4"></app-section-carrusel>
   <app-section-super-offers></app-section-super-offers>
   <app-section-packages></app-section-packages>
   <app-section-why-choose-us [dataSection]="dataPagePresenterService.data.sections[4].card"></app-section-why-choose-us>
@@ -52,7 +53,7 @@
       </div>
     </div>
 
-    <app-flightdeals></app-flightdeals>
+    <app-flight-deals></app-flight-deals>
   </div>
 
 

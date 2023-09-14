@@ -23,9 +23,8 @@ export class HomeComponent implements OnInit {
 
 	airfare: any;
 
-	sliderDestacados: IGalleryImage[] = [];
-	sliderBanners: IGalleryImage[] = [];
-	slidersJoin: any[] = [];
+	bannersDestacadosWeb:any[] = [];
+	
 
 	bannersDestacados: IGalleryImage[] = [];
 	bannersCorporativos: IGalleryImage[] = [];
@@ -134,76 +133,13 @@ export class HomeComponent implements OnInit {
 
 	getGallery() {
 		this.dataPagePresenterService.getDataGallery().subscribe((data) => {
-			let sliderDestacados = data
-				.filter((item) => item.Code == EGalleryCode.slider_destacados)
-				.map((item) => item.Images)[0];
-			sliderDestacados = this.deleteDuplicateSlider(sliderDestacados);
-
-			const bannersDestacados = data
-				.filter((item) => item.Code === EGalleryCode.banners_destacados)
-				.map((item) => item.Images)[0];
-			const bannersCorporativos = data
-				.filter((item) => item.Code === EGalleryCode.banners_corporativos)
-				.map((item) => item.Images)[0];
-			const bannersCita = data.filter((item) => item.Code === EGalleryCode.banner_cita).map((item) => item.Images)[0];
-			const sliderBanners = [...bannersDestacados, ...bannersCorporativos, ...bannersCita];
-			this.sliderDestacados = sliderDestacados;
-			this.sliderBanners = sliderBanners;
-
-			if (sliderDestacados.length == sliderBanners.length) {
-				const slidersJoin: any[] = [];
-				sliderBanners.forEach((element, index) => {
-					slidersJoin.push({
-						slider: sliderDestacados[index],
-						banner: element
-					});
-				});
-				this.slidersJoin = slidersJoin;
-			} else {
-				this.fillArraySliders();
-			}
+			console.log(data)
+		    this.bannersDestacadosWeb = data
+				.filter((item) => item.Code == 'BANNERS_DESTACADOS_1' || item.Code == 'BANNERS_DESTACADOS_2' || item.Code == 'BANNERS_DESTACADOS_3' )
+				.map((item) => item.Images);
 		});
 	}
 
-	deleteDuplicateSlider(gallery: IGalleryImage[]) {
-		const names: any = {};
-		const resultado = [];
-		for (const objeto of gallery) {
-			if (!names[objeto.NameImage]) {
-				names[objeto.NameImage] = true;
-				resultado.push(objeto);
-			}
-		}
-		return resultado;
-	}
-
-	fillArraySliders() {
-		let sliderDestacados = this.sliderDestacados;
-		let sliderBanners = this.sliderBanners;
-		const newArrayFill: IGalleryImage[] = [];
-		if (this.sliderDestacados.length < this.sliderBanners.length) {
-			for (let i = 0; i < this.sliderBanners.length; i++) {
-				const valor = sliderDestacados[i % sliderDestacados.length];
-				newArrayFill.push(valor);
-			}
-			sliderDestacados = newArrayFill;
-		} else {
-			for (let i = 0; i < this.sliderDestacados.length; i++) {
-				const valor = sliderBanners[i % sliderBanners.length];
-				newArrayFill.push(valor);
-			}
-			sliderBanners = newArrayFill;
-		}
-
-		const slidersJoin: any[] = [];
-		sliderBanners.forEach((element, index) => {
-			slidersJoin.push({
-				slider: sliderDestacados[index],
-				banner: element
-			});
-		});
-		this.slidersJoin = slidersJoin;
-	}
 
 	aceptConfirm() {
 		this.toggleConfirmation();

@@ -2,18 +2,62 @@
 	<div class="card__passenger">
 		<div class="card__passenger__header" [class.check]="!active">
 			<div class="card__passenger__header__title">
-				<img src="./assets/svg/passenger.svg" />
+				<img alt="img_passenger" src="./assets/svg/passenger.svg" />
 				<span>{{ type == 'ADT' ? 'Adulto ' : type == 'CNN' ? ' Menor' : ' Infante' }} {{ index }}</span>
-				<img *ngIf="validForm" src="./assets/svg/checkSuccess.svg" />
+				<img alt="img_passenger" *ngIf="validForm" src="./assets/svg/checkSuccess.svg" />
 			</div>
-			<img
+			<img alt="img_passenger"
 				class="arrow"
 				[src]="active ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'"
 				(click)="active = !active"
 			/>
 		</div>
-		<form [formGroup]="formGroup" autocomplete="off" [hidden]="!active">
+		<form [formGroup]="formGroup" [hidden]="!active">
 			<div class="card__passenger__body">
+				<div class="card__passenger__body__row">
+					<div class="card__passenger__body__column">
+						<app-select
+							[label]="'Tipo de documento'"
+							[placeholder]="'Seleccionar'"
+							[name]="'documentType'"
+							[isRequired]="true"
+							[listItems]="[
+								{
+									value: '0',
+									name: 'DNI'
+								},
+								{
+									value: '1',
+									name: 'CE'
+								},
+								{
+									value: '2',
+									name: 'PAS'
+								}
+							]"
+							[labelError]="
+								documentTypeField.touched && documentTypeField!.hasError('required') ? 'Tipo es obligatorio' : ''
+							"
+						></app-select>
+						<app-input
+							[label]="'N° de documento'"
+							[placeholder]="'Ingresar número'"
+							[name]="'documentNumber'"
+							[isRequired]="true"
+							[isOnlyText]="false"
+							[maxLenght]="documentTypeField.value == 0 || documentTypeField.value== '0' ? 8 : 12"
+							[isOnlyNumber]="documentTypeField.value == 0 || documentTypeField.value== '0' ? true : false"
+							[class]="documentNumberField.touched && documentNumberField!.invalid ? 'error' : ''"
+							[labelError]="
+								documentNumberField.touched && documentNumberField!.hasError('required')
+									? 'Número es obligatorio'
+									: documentNumberField.touched && documentNumberField!.hasError('pattern')
+									? 'Número inválido'
+									: ''
+							"
+						></app-input>
+					</div>
+				</div>
 				<div class="card__passenger__body__row">
 					<app-input
 						[label]="'Nombres'"
@@ -50,49 +94,7 @@
 						"
 					></app-input>
 				</div>
-				<div class="card__passenger__body__row">
-					<div class="card__passenger__body__column">
-						<app-select
-							[label]="'Tipo de documento'"
-							[placeholder]="'Seleccionar'"
-							[name]="'documentType'"
-							[isRequired]="true"
-							[listItems]="[
-								{
-									value: '0',
-									name: 'DNI'
-								},
-								{
-									value: '1',
-									name: 'C. EXTRANJERIA'
-								},
-								{
-									value: '2',
-									name: 'PASAPORTE'
-								}
-							]"
-							[labelError]="
-								documentTypeField.touched && documentTypeField!.hasError('required') ? 'Tipo es obligatorio' : ''
-							"
-						></app-select>
-						<app-input
-							[label]="'N° de documento'"
-							[placeholder]="'Ingresar número'"
-							[name]="'documentNumber'"
-							[isRequired]="true"
-							[isOnlyText]="false"
-							[maxLenght]="documentTypeField.value == 0 || documentTypeField.value== '0' ? 8 : 12"
-							[isOnlyNumber]="documentTypeField.value == 0 || documentTypeField.value== '0' ? true : false"
-							[class]="documentNumberField.touched && documentNumberField!.invalid ? 'error' : ''"
-							[labelError]="
-								documentNumberField.touched && documentNumberField!.hasError('required')
-									? 'Número es obligatorio'
-									: documentNumberField.touched && documentNumberField!.hasError('pattern')
-									? 'Número inválido'
-									: ''
-							"
-						></app-input>
-					</div>
+				<div class="card__passenger__body__row">				
 					<div class="card__passenger__body__group">
 						<span>Fecha de nacimiento <span class="required">*</span></span>
 						<div class="card__passenger__body__group__selects">
@@ -120,9 +122,6 @@
 							></app-select>
 						</div>
 					</div>
-				</div>
-
-				<div class="card__passenger__body__row">
 					<app-select
 						[label]="'Nacionalidad'"
 						[placeholder]="'Seleccionar'"
@@ -134,6 +133,8 @@
 							nationalityField.touched && nationalityField!.hasError('required') ? 'Nacionalidad es obligatorio' : ''
 						"
 					></app-select>
+				</div>
+				<div class="card__passenger__body__row">
 					<app-select
 						[label]="'Género'"
 						[placeholder]="'Seleccionar'"
@@ -151,25 +152,25 @@
 						]"
 						[labelError]="genderField.touched && genderField!.hasError('required') ? 'Género es obligatorio' : ''"
 					></app-select>
+					<app-input  [hidden]="type=='INF'"
+					[label]="'Correo electrónico'"
+					[placeholder]="'Ingresar correo electrónico'"
+					[name]="'email'"
+					[class]="emailField.touched && emailField!.invalid ? 'error' : ''"
+					[maxLenght]="50"
+					[labelError]="
+						emailField.touched && emailField!.hasError('email')
+							? 'Email no válido'
+							: emailField.touched && emailField!.hasError('maxlength')
+							? 'Debe tener max. 50 caracteres'
+							: ''
+					"
+				></app-input>
 				</div>
 
 				<div class="card__passenger__body__row" [hidden]="type=='INF'">
-					<app-input
-						[label]="'Correo electrónico'"
-						[placeholder]="'Ingresar correo electrónico'"
-						[name]="'email'"
-						[class]="emailField.touched && emailField!.invalid ? 'error' : ''"
-						[maxLenght]="50"
-						[labelError]="
-							emailField.touched && emailField!.hasError('email')
-								? 'Email no válido'
-								: emailField.touched && emailField!.hasError('maxlength')
-								? 'Debe tener max. 50 caracteres'
-								: ''
-						"
-					></app-input>
 					<div class="card__passenger__body__group">
-						<span>Código <span class="text-left">Número de teléfono</span></span>
+						<span>Código <span class="text-left">Número de celular</span></span>
 						<ngx-intl-tel-input
 							[cssClass]="phoneField.touched && phoneField!.invalid ? 'custom':''" 
 							[preferredCountries]="preferredCountries"

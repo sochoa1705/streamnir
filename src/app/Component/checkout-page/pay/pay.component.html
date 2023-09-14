@@ -10,12 +10,12 @@
 			</div>
 			<div class="container__page__section__pay">
 				<div class="container__page__section__pay_header">
-					<div class="container__page__section__pay_header__tab" [class.active]="isPayCard" (click)="clickTab()">
-						<img [src]="isPayCard ? './assets/svg/credit-red.svg' : './assets/svg/credit.svg'" />
+					<div class="container__page__section__pay_header__tab" [class.inactive]="counter >= 4" [class.active]="isPayCard" (click)="clickTab()">
+						<img alt="pay_img" [src]="isPayCard ? './assets/svg/credit-red.svg' : counter >=4 ? './assets/svg/credit-disbled.svg':'./assets/svg/credit.svg'" />
 						<span>Tarjeta de crédito o débito</span>
 					</div>
 					<div class="container__page__section__pay_header__tab" [class.active]="!isPayCard" (click)="clickTab()">
-						<img [src]="isPayCard ? './assets/svg/store.svg' : './assets/svg/store-red.svg'" />
+						<img alt="pay_img" [src]="isPayCard ? './assets/svg/store.svg' : './assets/svg/store-red.svg'" />
 						<span>Banca por internet / Agencias</span>
 					</div>
 				</div>
@@ -23,7 +23,7 @@
 				<ng-container *ngIf="isPayCard">
 					<div class="container__page__section__pay__cards">
 						<div class="container__page__section__pay__cards__bank" *ngFor="let card of listCreditCard">
-							<img [src]="card.image" />
+							<img alt="pay_img" [src]="card.image" />
 							<span>{{ card.name }}</span>
 						</div>
 					</div>
@@ -176,13 +176,13 @@
 
 					<div class="container__page__section__pay__cards">
 						<div class="container__page__section__pay__cards__bank" *ngFor="let bank of listBanksInternet">
-							<img [src]="bank.image" />
+							<img alt="pay_img" [src]="bank.image" />
 							<span>{{ bank.name }}</span>
 						</div>
 
 						<ng-container *ngIf="!isPayBank">
 							<div class="container__page__section__pay__cards__bank" *ngFor="let agency of listAgencies">
-								<img [src]="agency.image" />
+								<img alt="pay_img" [src]="agency.image" />
 								<span>{{ agency.name }}</span>
 							</div>
 						</ng-container>

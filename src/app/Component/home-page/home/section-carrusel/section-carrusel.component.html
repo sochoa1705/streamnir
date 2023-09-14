@@ -1,12 +1,12 @@
-<div class="container__carrusel" *ngIf="slidersJoin.length > 0">
+<div class="container__carrusel" *ngIf="slidersWeb.length > 0">
     <div class="container__carrusel__section">
             <swiper [config]="config" class="" #swiperCarrusel>
-                    <ng-template swiperSlide *ngFor="let item of slidersJoin">
+                    <ng-template swiperSlide *ngFor="let item of slidersWeb">
                         <div class="container__carrusel__section__swiper__card square">
-                            <img [src]="item.slider.PathImage" alt="">
+                            <img [src]="item[0].PathImage" alt="">
                         </div>
-                        <div class="container__carrusel__section__swiper__card banner">
-                            <img [src]="item.banner.PathImage" alt="">
+                        <div class="container__carrusel__section__swiper__card fullbanner">
+                            <img [src]="item[1].PathImage" alt="">
                         </div>
                     </ng-template>
             </swiper>

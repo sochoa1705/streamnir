@@ -14,12 +14,16 @@ export class ButtonComponent implements OnInit {
 	@Input() right?: boolean;
 	@Input() left?: boolean;
     @Input() w100=false;
+    @Input() size='md';
+    @Input() isSucess = false;
+    @Input() isLoader = false;
+    @Input() isMobile = false;
     @Output() onClick = new EventEmitter<MouseEvent>();
 
     constructor() { }
     ngOnInit() { }
 
-    clickButton(){
+    clickButton() {
         this.onClick.emit()
     }
 }

@@ -69,8 +69,8 @@ export const environment = {
 
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
   
-  //https://qa-bffdelfosti.nmviajes-it.com 
-  urlApiMotorVuelos: "https://qa-bffdelfosti.nmviajes-it.com",
+  //https://qa-bffdelfosti.nmviajes-it.com https://motorvuelos.expertiatravel.com
+  urlApiMotorVuelos: "https://motorvuelos.expertiatravel.com",
 
     //url Terms and Conditions - Checkout
 
@@ -78,6 +78,7 @@ export const environment = {
   urlBookingConditions: 'https://www.nmviajes.com/condiciones-de-reserva',
   urlTravelDocuments: 'https://www.nmviajes.com/documentacion-viaje',
   
+  urlBlog:'https://blog.nmviajes.com',
   GDS:{
       AMADEUS: 0,
       SABRE: 1,

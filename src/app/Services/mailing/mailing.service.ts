@@ -7,11 +7,9 @@ import { Observable } from 'rxjs';
 	providedIn: 'root'
 })
 export class MailingService {
+	constructor(private http: HttpClient) {}
 
-	constructor(private http: HttpClient) {
-	}
-
-	createContact(data: any): Observable<any> {
+	createContact(data: any, isNewBoletin = false): Observable<any> {
 		const nameArr: string[] = data.name.trim().split(' ');
 		let firstname = nameArr[0];
 		let lastname = '';
@@ -27,12 +25,13 @@ export class MailingService {
 				lastname = `${nameArr[2]} ${nameArr[3]}`;
 				break;
 		}
+
 		const payload: any = {
 			email: data.email,
 			attributes: {
 				EMAIL: data.email,
-				APELLIDOS: lastname,
-				NOMBRE: firstname,
+				APELLIDOS: !isNewBoletin ? lastname : data.lastname,
+				NOMBRE: !isNewBoletin ? firstname : data.name,
 				SMS: '',
 				TIPO_DOCUMENTO: '',
 				NUM_DOCUMENTO: '',
@@ -48,12 +47,9 @@ export class MailingService {
 			},
 			emailBlacklisted: false,
 			smsBlacklisted: false,
-			listIds: [ 7 ],
+			listIds: [7],
 			updateEnabled: false,
-			smtpBlacklistSender: [
-				'5l5on@XCyTwNVlbFYMuZJRtYQifJ.mvm',
-				'AHzfzNXj0fQ@ogSExyrBXmIaCyjopMPfNgGdxE.siws'
-			]
+			smtpBlacklistSender: ['5l5on@XCyTwNVlbFYMuZJRtYQifJ.mvm', 'AHzfzNXj0fQ@ogSExyrBXmIaCyjopMPfNgGdxE.siws']
 		};
 
 		let url = `${environment.brevoBaseUrl}/contacts`;

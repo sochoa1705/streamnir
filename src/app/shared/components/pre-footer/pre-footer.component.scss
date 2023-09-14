@@ -1,8 +1,23 @@
-.container__footer{
-    padding: 24px 96px;
-	background: white;
+@use '/src/scss/colors';
+section{
     width: 100%;
-	section{
+    background: white;
+    margin: 0;
+    .line__divider{
+        margin: 0 auto;
+        padding: 0px 48px;
+        max-width: 1590px;
+        hr{
+            width: 100%;
+            margin: 0;
+            border-top: 1px solid colors.$gris-600;
+        }
+    }
+}
+.container__footer{
+    padding: 40px 96px;
+    width: 100%;
+	article{
         max-width: 1440px;
 		margin: 0 auto;
         display: flex;

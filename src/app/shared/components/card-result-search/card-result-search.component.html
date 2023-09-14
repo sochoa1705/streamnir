@@ -49,20 +49,10 @@
 
 					<div class="card__result__flights__section__segment__bags">
 						<img src="./assets/svg/backpack.svg" />
-						<img
-							[src]="
-								departure.segments[indexSegmentDeparture[i]].equipaje.cabina
-									? './assets/svg/hand-luggage.svg'
-									: './assets/svg/no-hand-luggage.svg'
-							"
-						/>
-						<img
-							[src]="
-								departure.segments[indexSegmentDeparture[i]].equipaje.piezas > 0
-									? './assets/svg/hold-luggage.svg'
-									: './assets/svg/no-hold-luggage.svg'
-							"
-						/>
+
+						<img [src]="(departure.segments[indexSegmentDeparture[i]].equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
+  						<img [src]="(departure.segments[indexSegmentDeparture[i]].equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
+
 					</div>
 				</div>
 
@@ -134,6 +124,7 @@
 				<h4 class="fly2">{{ returns.destinationCity.code }}</h4>
 				<div class="date">{{ (returns.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</div>
 			</div>
+
 			<div class="card__result__flights__section__segment" [hidden]="showHoursReturn">
 				<div class="card__result__flights__section__segment__hours">
 					<span class="hour"
@@ -159,22 +150,11 @@
 					<span class="scala" *ngSwitchCase="1">1 escala</span>
 					<span class="scala" *ngSwitchDefault>{{ returns.segments[indexSegmentReturn].stops + ' escalas' }}</span>
 				</ng-container>
+				
 				<div class="card__result__flights__section__segment__bags">
 					<img src="./assets/svg/backpack.svg" />
-					<img
-						[src]="
-							returns.segments[indexSegmentReturn].equipaje.cabina
-								? './assets/svg/hand-luggage.svg'
-								: './assets/svg/no-hand-luggage.svg'
-						"
-					/>
-					<img
-						[src]="
-							returns.segments[indexSegmentReturn].equipaje.piezas > 0
-								? './assets/svg/hold-luggage.svg'
-								: './assets/svg/no-hold-luggage.svg'
-						"
-					/>
+					<img [src]="(returns.segments[indexSegmentReturn].equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
+  					<img [src]="(returns.segments[indexSegmentReturn].equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
 				</div>
 			</div>
 			<ng-container *ngIf="returns.segments.length > 1">
@@ -202,14 +182,8 @@
 						</ng-container>
 						<div class="card__result__flights__section__segment__bags">
 							<img src="./assets/svg/backpack.svg" />
-							<img
-								[src]="segment.equipaje.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg'"
-							/>
-							<img
-								[src]="
-									segment.equipaje.piezas > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg'
-								"
-							/>
+							<img [src]="(segment.equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
+							  <img [src]="(segment.equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
 						</div>
 					</div>
 				</div>

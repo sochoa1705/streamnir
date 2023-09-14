@@ -18,11 +18,12 @@ export class SectionCarruselComponent implements OnInit {
   /*pagination:{
     dynamicBullets: true,
   }*/
-  sliderDestacados: IGalleryImage[] = [];
-  bannersDestacados: IGalleryImage[] = [];
-  bannersCorporativos: IGalleryImage[] = [];
-  @Input() slidersJoin:any[]=[];
-  
+
+  @Input() slidersWeb:any[]=[];
+  @Input() slidersTablet:any[]=[];
+  @Input() slidersMobil:any[]=[];
+
+  @Input() isDinamic = false;
   config: SwiperOptions = {
     slidesPerView:1,
     slidesPerGroup:1,
@@ -31,6 +32,7 @@ export class SectionCarruselComponent implements OnInit {
     spaceBetween:48,
     pagination:{
       clickable: true,
+      dynamicBullets: this.isDinamic,
     },
     autoplay:{
       delay: 5000,
