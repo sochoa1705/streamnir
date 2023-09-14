@@ -12,46 +12,8 @@
 				(click)="active = !active"
 			/>
 		</div>
-		<form [formGroup]="formGroup" autocomplete="off" [hidden]="!active">
+		<form [formGroup]="formGroup" [hidden]="!active">
 			<div class="card__passenger__body">
-				<div class="card__passenger__body__row">
-					<app-input
-						[label]="'Nombres'"
-						[placeholder]="'Ingresar nombres'"
-						[name]="'name'"
-						[isRequired]="true"
-						[isOnlyText]="true"
-						[maxLenght]="50"
-						[class]="nameField.touched && nameField!.invalid ? 'error' : ''"
-						[labelError]="
-							nameField.touched && nameField!.hasError('required')
-								? 'Nombre es obligatorio'
-								: nameField.touched && nameField!.hasError('maxlength')
-								? 'Debe tener max. 50 caracteres'
-								: nameField.touched && nameField!.hasError('whitespace')
-								? 'Nombre no válido'
-								: ''
-						"
-					></app-input>
-					<app-input
-						[label]="'Apellidos'"
-						[placeholder]="'Ingresar apellidos'"
-						[name]="'lastName'"
-						[isOnlyText]="true"
-						[isRequired]="true"
-						[maxLenght]="50"
-						[class]="lastNameField.touched && lastNameField!.invalid ? 'error' : ''"
-						[labelError]="
-							lastNameField.touched && lastNameField!.hasError('required')
-								? 'Apellidos es obligatorio'
-								: lastNameField.touched && lastNameField!.hasError('maxlength')
-								? 'Debe tener max. 50 caracteres'
-								: lastNameField.touched && lastNameField!.hasError('whitespace')
-								? 'Apellidos no válido'
-								: ''
-						"
-					></app-input>
-				</div>
 				<div class="card__passenger__body__row">
 					<div class="card__passenger__body__column">
 						<app-select
@@ -66,11 +28,11 @@
 								},
 								{
 									value: '1',
-									name: 'C. EXTRANJERIA'
+									name: 'CE'
 								},
 								{
 									value: '2',
-									name: 'PASAPORTE'
+									name: 'PAS'
 								}
 							]"
 							[labelError]="

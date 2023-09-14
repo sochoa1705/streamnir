@@ -78,6 +78,12 @@
 							color: colors.$red-500;
 						}
 					}
+					&.inactive{
+						cursor: not-allowed;
+						span{
+							color:colors.$gris-600;
+						}
+					}
 				}
 			}
 			&__cards {

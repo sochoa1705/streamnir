@@ -2,7 +2,7 @@
 	<div class="footer__section">
 		<div class="footer__section__logo">
 			<div class="footer__section__logo__header">
-				<img src="./assets/logo_red_gray.svg" alt="NMVIAJES" />
+				<a [href]="'/'"><img src="./assets/logo_red_gray.svg" alt="NMVIAJES" /></a>
 				<span>Copyright 2021 <span class="red">nmviajes</span> All Rights Reserved.</span>
 			</div>
 			<div class="footer__section__logo__body">
@@ -36,6 +36,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="footer__section__links products">
 			<div class="footer__section__links__header">
 				{{ title1 }}
@@ -52,17 +53,49 @@
 			</div>
 		</div>
 
-    <div class="footer__section__links knowus">
+		<div class="footer__section__links knowus">
 			<div class="footer__section__links__header">
 				{{ title2 }}
 			</div>
 			<div class="footer__section__links__body">
 				<ng-container *ngFor="let option of list2">
-          <a [href]="option.link" [target]="'_blank'">{{ option.text }}</a>
+					<a [href]="option.link" [target]="'_blank'">{{ option.text }}</a>
 				</ng-container>
 			</div>
 		</div>
 
-		<div class="footer__section__contactus">Av. José Pardo 801, Miraflores - Lima 18, Perú</div>
+		<div class="footer__section__contactus">
+			<div class="footer__section__contactus__info">
+				<div class="footer__section__contactus__info__header">Contáctanos</div>
+				<div class="footer__section__contactus__info__body">
+					<div class="footer__section__contactus__info__body__item">
+						<img src="./assets/social/location.svg" alt="lo" />
+						<span>Av. José Pardo 801, Miraflores - Lima 18, Perú</span>
+					</div>
+					<div class="footer__section__contactus__info__body__item">
+						<img src="./assets/social/book.svg" alt="bo" />
+						<span>Libro de reclamaciones</span>
+					</div>
+				</div>
+				<section>
+					<a [href]="'/nuestras-agencias'"
+						><app-button [text]="'Tiendas'" [size]="'xs'" [color]="'outline-primary'" [w100]="true"></app-button
+					></a>
+				</section>
+			</div>
+			<div class="footer__section__contactus__info">
+				<div class="footer__section__contactus__info__header">Habla con nosotros</div>
+				<div class="footer__section__contactus__info__body">
+					<div class="footer__section__contactus__info__body__item">
+						<img src="./assets/social/phone.svg" alt="ph" />
+						<span class="bold">Perú <span>+51 987 654 321</span></span>
+					</div>
+					<div class="footer__section__contactus__info__body__item">
+						<img src="./assets/social/phone.svg" alt="ph" />
+						<span class="bold">Estados Unidos <span>+51 987 654 321</span></span>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </footer>

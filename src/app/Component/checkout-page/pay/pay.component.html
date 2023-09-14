@@ -10,8 +10,8 @@
 			</div>
 			<div class="container__page__section__pay">
 				<div class="container__page__section__pay_header">
-					<div class="container__page__section__pay_header__tab" [class.active]="isPayCard" (click)="clickTab()">
-						<img alt="pay_img" [src]="isPayCard ? './assets/svg/credit-red.svg' : './assets/svg/credit.svg'" />
+					<div class="container__page__section__pay_header__tab" [class.inactive]="counter >= 4" [class.active]="isPayCard" (click)="clickTab()">
+						<img alt="pay_img" [src]="isPayCard ? './assets/svg/credit-red.svg' : counter >=4 ? './assets/svg/credit-disbled.svg':'./assets/svg/credit.svg'" />
 						<span>Tarjeta de crédito o débito</span>
 					</div>
 					<div class="container__page__section__pay_header__tab" [class.active]="!isPayCard" (click)="clickTab()">

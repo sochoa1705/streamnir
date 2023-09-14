@@ -16,6 +16,7 @@
 }
 section{
     margin: 0;
+    width: 100%;
 }
 
 .footer{
@@ -39,7 +40,7 @@ section{
                 }
                 span{
                     @extend .paragraph;
-                    font-weight: 500;
+                    font-weight: 600;
                     &.red{
                         color:colors.$red-500;
                     }
@@ -108,7 +109,7 @@ section{
             gap:24px;
             &__info{
                 @extend .flex-column;
-                gap:16px;
+                gap:18px;
                 &__header{
                     @extend .paragraph;
                     font-weight: 600;
@@ -117,9 +118,21 @@ section{
                 &__body{
                     @extend .flex-column;
                     gap:12px;
+                    &__item{
+                       display: flex;
+                       gap:12px;
+                       justify-content: flex-start;
+                       align-items: center;
+                       span{
+                         display: block;
+                         @extend .paragraph;
+                         &.bold{
+                            font-weight: 600;
+                         }
+                       }
+                    }
                 }
             }
         }
     }
 }
-
