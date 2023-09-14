@@ -3,7 +3,7 @@
 .container__page {
 	width: 100%;
 	padding-bottom: 40%;
-	@media (max-width: 551px) {
+	@media (max-width: 575px) {
 		padding-bottom: 30px;
 	}
 
@@ -261,7 +261,7 @@
 			width: 100%;
 			display: flex;
 			justify-content: flex-end;
-			@media (max-width: 551px) {
+			@media (max-width: 575px) {
 				display: none;
 			}
 		}

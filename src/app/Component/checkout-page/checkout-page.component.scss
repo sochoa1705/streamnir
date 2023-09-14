@@ -11,7 +11,7 @@
 .container__page {
 	padding: 242px 96px 0px 96px;
 	min-height: calc(100% - 80px);
-	@media (max-width: 550px) {
+	@media (max-width: 575px) {
 		padding: 190px 10px 0px 10px !important;
 	}
 	section {
@@ -212,7 +212,7 @@
 	@media (max-width: 1304px) {
 		padding: 242px 60px 0px 60px;
 	}
-	@media (max-width: 550px) {
+	@media (max-width:575px) {
 		padding: 190px 10px 0px 10px !important;
 	}
 	@media (max-width: 1199px) {
@@ -314,7 +314,7 @@
 		}
 	}
 
-	@media (max-width: 551px) {
+	@media (max-width: 575px) {
 		.container__page__section__button__footer {
 			padding: 0px 0px 40px 0px;
 			display: flex;
