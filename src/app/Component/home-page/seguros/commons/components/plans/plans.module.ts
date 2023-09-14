@@ -6,7 +6,7 @@ import { PlansACService } from '../../../../../../Services/plansAC/plans-ac.serv
 import { CoverageService } from '../../../../../../Services/coverage/coverage.service';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../../../../../../shared/material.module';
-import { FlightDealsModule } from 'src/app/Component/home-page/flightdeals/flightdeals.module';
+import { FlightDealsModule } from 'src/app/Component/home-page/flight-deals/flight-deals.module';
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [PlansComponent],
