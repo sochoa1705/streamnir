@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,HostListener,ViewChild, ElementRef} from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { cuotas } from '../passengers/utils';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
@@ -27,12 +27,14 @@ declare let window: any;
 export class PayComponent implements OnInit {
 	isPayCard = true;
 	isPayBank = true;
+	getScreenWidth=0;
 	totalCounter = 1;
 	formGroupCard: FormGroup;
 	formGroupBooking: FormGroup;
 	formGroupPolitics: FormGroup;
 	formInit: any;
 	formInitBilling: any;
+	panelOpenState = false;
 	urlsTermsAndConditions: any;
 	arrayCuotas: Item[] = [];
 	isValidCupon = false;
@@ -41,13 +43,15 @@ export class PayComponent implements OnInit {
 	listBanksInternet = listBanksInternet;
 	listAgencies = listAgencies;
 	codeSafetyPay = 0;
-	showMessagePay = false;
+	showMessagePay = false;//quitar a false
 	isValidPromotionalCode = false;
 	isApplyCupon = false;
 	transactionId = 0;
 	discountCupon: ResultCupon | null = null;
 	counter = 0;
 	errorMessDefault='Al parecer hubo un error en su reserva, por favor intentelo más tarde'
+	@ViewChild('acoordio1') acoordio1: ElementRef;
+
 
 	private destroy$ = new Subject<unknown>();
 	formCreditCard = {
@@ -72,7 +76,12 @@ export class PayComponent implements OnInit {
 		paymentType: new FormControl(0),
 		deviceSessionId: new FormControl('')
 	};
-
+	@HostListener('window:resize', ['$event'])
+	onResize(){
+		if (this.getScreenWidth !== window.innerWidth) {
+			this.getScreenWidth = window.innerWidth;
+		}
+	}
 	formPolitics = {
 		acceptAdvertising: new FormControl(false)
 	};
@@ -94,6 +103,7 @@ export class PayComponent implements OnInit {
 		this.changeCupon();
 		this.initConfigurationOpenPay();
 		this.setValidatorsCreditCard();
+		this.getScreenWidth = window.innerWidth;
 	}
 
 	changeCupon() {

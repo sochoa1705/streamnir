@@ -4,7 +4,7 @@
 			<app-card-checkout>
 				<div class="container__page__section__message">
 					<h3 class="container__page__section__message__title">¡Todo listo para tu vuelo!</h3>
-					<img src="./assets/checkout/success_booking.svg" alt="" />
+					<img src="./assets/checkout/success_booking.svg" alt=""  class="container__page__section__message__img"/>
 					<span class="container__page__section__message__description" *ngIf="isPayCard"
 						>Su solicitud de compra ha sido procesada con éxito. N° de orden: <strong>{{transactionId}}</strong></span
 					>
@@ -14,20 +14,19 @@
 				</div>
 			</app-card-checkout>
 		</article>
-
-		<article *ngIf="!isPayCard">
+		<article *ngIf="!isPayCard">	
 			<div class="container__page__section__safetypay">
 				<div class="container__page__section__safetypay__title">
 					<h4>¿Cómo pagar con SafetyPay?</h4>
 					<span>Ingresa a la banca por Internet de tu preferencia y sigue las instrucciones.</span>
 				</div>
-				<img src="./assets/checkout/pay/safetypay.png" alt="sf" />
+				<img src="./assets/checkout/pay/safetypay.png" alt="sf" class="container__page__section__safetypay__img" />
 			</div>
 			<app-card-checkout>
 				<div class="container__page__section__safetypay__card">
 					<div class="container__page__section__safetypay__card__banks">
 						<div class="container__page__section__safetypay__card__banks__bank" *ngFor="let bank of listBanksInternet">
-							<img [src]="bank.image" />
+							<img [src]="bank.image" alt="safetypay" class="container__page__section__safetypay__card__banks__img"/>
 							<p>{{ bank.name }}</p>
 						</div>
 					</div>
@@ -70,13 +69,12 @@
 			<app-card-checkout *ngFor="let item of dataPassengers">
 				<div class="container__page__section__row">
 					<div class="container__page__section__row__colum">
-						<img src="./assets/checkout/pay/user.svg" />
+						<img alt="" class="container__page__section__row__colum__img"src="./assets/checkout/pay/user.svg" />
 						<span class="item">Nombres y apellidos</span>
 						<span class="info">{{ item.name + ' ' + item.lastName }}</span>
 					</div>
 					<div class="container__page__section__row__colum">
-						<img src="./assets/checkout/pay/credit.svg" />
-						<span class="item">Tipo de documento</span>
+						<img alt="" class="container__page__section__row__colum__img"src="./assets/checkout/pay/credit.svg" />
 						<span class="info">{{
 							item.documentType == 0
 								? 'DNI '
@@ -86,22 +84,22 @@
 						}}{{item.documentNumber}}</span>
 					</div>
 					<div class="container__page__section__row__colum">
-						<img src="./assets/checkout/pay/date.svg" />
+						<img alt="" class="container__page__section__row__colum__img"src="./assets/checkout/pay/date.svg" />
 						<span class="item">Fecha de nacimiento</span>
 						<span class="info">{{ item.birthday | date: 'dd/MM/yyyy' }}</span>
 					</div>
 					<div class="container__page__section__row__colum">
-						<img src="./assets/checkout/pay/nationality.svg" />
+						<img alt="" class="container__page__section__row__colum__img"src="./assets/checkout/pay/nationality.svg" />
 						<span class="item">Nacionalidad</span>
 						<span class="info">{{ item.nationality | nationality }}</span>
 					</div>
 					<div class="container__page__section__row__colum">
-						<img src="./assets/checkout/pay/gender.svg" />
+						<img alt="" class="container__page__section__row__colum__img"src="./assets/checkout/pay/gender.svg" />
 						<span class="item">Género</span>
 						<span class="info">{{ item.gender == 'M' ? 'Masculino' : 'Femenino' }}</span>
 					</div>
 					<div class="container__page__section__row__colum" *ngIf="item.email!==''">
-						<img src="./assets/checkout/pay/email.svg" />
+						<img alt="" class="container__page__section__row__colum__img"src="./assets/checkout/pay/email.svg" />
 						<span class="item">Correo</span>
 						<span class="info">{{ item.email }}</span>
 					</div>
@@ -114,23 +112,24 @@
 			<app-card-checkout>
 				<div class="container__page__section__row">
 					<div class="container__page__section__row__colum">
-						<img src="./assets/checkout/pay/user.svg" />
+						<img alt="" class="container__page__section__row__colum__img"src="./assets/checkout/pay/user.svg" />
 						<span class="item">Nombres y apellidos</span>
 						<span class="info">{{
 							dataContact.name + ' ' + dataContact.lastName + ' ' + dataContact.motherLastname
 						}}</span>
 					</div>
 					<div class="container__page__section__row__colum">
-						<img src="./assets/checkout/pay/phone.svg" />
+						<img alt="" class="container__page__section__row__colum__img"src="./assets/checkout/pay/phone.svg" />
 						<span class="item">Télefono</span>
 						<span class="info">{{
 							'+' + dataContact.phones[0].countryCode + ' ' + dataContact.phones[0].phoneNumber
-						}}</span>
+						}}</span> 
+					
 					</div>
 					<div class="container__page__section__row__colum">
-						<img src="./assets/checkout/pay/email.svg" />
+						<img alt="" class="container__page__section__row__colum__img"src="./assets/checkout/pay/email.svg" />
 						<span class="item">Correo</span>
-						<span class="info">{{ dataContact.email}}</span>
+						<span class="info">{{ dataContact.email}}</span>						
 					</div>
 				</div>
 			</app-card-checkout>

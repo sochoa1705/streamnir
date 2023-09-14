@@ -4,7 +4,7 @@
 	<section>
 		<!--[hidden]="!detailFlight" <app-pay  [hidden]="indexStepActive !== 2"></app-pay>-->
 		<div [hidden]="!detailFlight">
-			<app-baggage-insurance [hidden]="indexStepActive !== 2"
+			<app-baggage-insurance [hidden]="indexStepActive !== 1"
 				(changeStep)="clickedStep($event)"></app-baggage-insurance>
 			<app-passengers [hidden]="indexStepActive !== 1" (changeStep)="clickedStep($event)"></app-passengers>
 			<app-pay [hidden]="indexStepActive !== 0" #childPagePay></app-pay>
