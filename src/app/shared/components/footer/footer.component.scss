@@ -1,138 +1,144 @@
 @use '/src/scss/colors';
-.paragraph{
-    font-family: Montserrat;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0em;
-    text-align: left;
-    color:colors.$gris-700;
+.paragraph {
+	font-family: Montserrat;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: colors.$gris-700;
 }
-.flex-column{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+.flex-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
 }
-section{
-    margin: 0;
-    width: 100%;
+section {
+	margin: 0;
+	width: 100%;
 }
 
-.footer{
-    background: white;
-    padding: 40px 96px;
-    &__section{
-        max-width: 1440px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        &__logo{
-            max-width: 320px;
-            display: flex;
-            flex-direction: column;
-            gap:24px;
-            &__header{
-                @extend .flex-column;
-                gap:8px;
-                img{
-                    height: 48px;
-                }
-                span{
-                    @extend .paragraph;
-                    font-weight: 600;
-                    &.red{
-                        color:colors.$red-500;
-                    }
-                }
-            }
-            &__body{
-                @extend .flex-column;
-                gap:8px;
-                span{
-                    @extend .paragraph;
-                    display: block;
-                    font-size: 12px;
-                    &.bold{
-                        font-weight: 600;
-                    }
-                }
-            }
-            &__social{
-                @extend .flex-column;
-                gap:8px;
-                span{
-                    @extend .paragraph;
-                    font-weight: 600;
-                    color:colors.$gris-900;
-                }
-                &__icons{
-                    display: flex;
-                    gap:24px;
-                    justify-content: flex-start;
-                    align-items: center;
-                }
-            }
-        }
-        &__links{
-            @extend .flex-column;
-            gap:16px;
-            &.products{
-                max-width: 140px;
-            }
-            &.knowus{
-                max-width: 170px;
-            }
-            &__header{
-                @extend .paragraph;
-                font-weight: 600;
-                color:colors.$gris-900;
-            }
-            &__body{
-                @extend .flex-column;
-                gap:12px;
-                a{
-                    @extend .paragraph;
-                    text-decoration: none;
-                    cursor: pointer;
-                    &:hover{
-                        color: colors.$red-500;
-                    }
-                }
-            }
-
-        }
-        &__contactus{
-            max-width: 264px;
-            display: flex;
-            flex-direction: column;
-            gap:24px;
-            &__info{
-                @extend .flex-column;
-                gap:18px;
-                &__header{
-                    @extend .paragraph;
-                    font-weight: 600;
-                    color:colors.$gris-900;
-                }
-                &__body{
-                    @extend .flex-column;
-                    gap:12px;
-                    &__item{
-                       display: flex;
-                       gap:12px;
-                       justify-content: flex-start;
-                       align-items: center;
-                       span{
-                         display: block;
-                         @extend .paragraph;
-                         &.bold{
-                            font-weight: 600;
-                         }
-                       }
-                    }
-                }
-            }
-        }
-    }
+.footer {
+	background: white;
+	padding: 40px 96px;
+	&__section {
+		max-width: 1440px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		&__logo {
+			max-width: 320px;
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+			&__header {
+				@extend .flex-column;
+				gap: 8px;
+				img {
+					height: 48px;
+				}
+				span {
+					@extend .paragraph;
+					font-weight: 600;
+					&.red {
+						color: colors.$red-500;
+					}
+				}
+			}
+			&__body {
+				@extend .flex-column;
+				gap: 8px;
+				span {
+					@extend .paragraph;
+					display: block;
+					font-size: 12px;
+					&.bold {
+						font-weight: 600;
+					}
+				}
+			}
+			&__social {
+				@extend .flex-column;
+				gap: 8px;
+				span {
+					@extend .paragraph;
+					font-weight: 600;
+					color: colors.$gris-900;
+				}
+				&__icons {
+					display: flex;
+					gap: 24px;
+					justify-content: flex-start;
+					align-items: center;
+				}
+			}
+		}
+		&__links {
+			@extend .flex-column;
+			gap: 16px;
+			&.products {
+				max-width: 140px;
+			}
+			&.knowus {
+				max-width: 170px;
+			}
+			&__header {
+				@extend .paragraph;
+				font-weight: 600;
+				color: colors.$gris-900;
+			}
+			&__body {
+				@extend .flex-column;
+				gap: 12px;
+				a {
+					@extend .paragraph;
+					text-decoration: none;
+					cursor: pointer;
+					&:hover {
+						color: colors.$red-500;
+					}
+				}
+			}
+		}
+		&__contactus {
+			max-width: 264px;
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+			&__info {
+				@extend .flex-column;
+				gap: 18px;
+				&__header {
+					@extend .paragraph;
+					font-weight: 600;
+					color: colors.$gris-900;
+				}
+				&__body {
+					@extend .flex-column;
+					gap: 12px;
+					&__item {
+						display: flex;
+						gap: 12px;
+						justify-content: flex-start;
+						align-items: center;
+						a,
+						span {
+							display: block;
+							text-decoration: none;
+							@extend .paragraph;
+							&.bold {
+								font-weight: 600;
+							}
+						}
+						a {
+							&:hover {
+								color: colors.$red-500;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

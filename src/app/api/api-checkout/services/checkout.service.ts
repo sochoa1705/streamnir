@@ -191,6 +191,7 @@ export class CheckoutService {
 		const url = `${environment.urlApiMotorVuelos}/mv/send-booking`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
+			.set('not-loading', 'true')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
 		return this._httpClient.post<any>(url, data, { headers });
 	}

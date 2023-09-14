@@ -8,6 +8,13 @@ interface Item {
   total:number;
 }
 
+interface IFilterDuration{
+	minDurationDeparture:number,
+	maxDurationDeparture:number,
+	minDurationReturn:number,
+	maxDurationReturn:number
+}
+
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
@@ -21,7 +28,7 @@ export class FiltersComponent implements OnInit {
   @Input() totalResultsFilter:number;
   @Input() exchangeRate:number;
   @Input() isNotResult=false;
-
+  @Input() valuesFilterDuration:IFilterDuration;
   @Input() minPrice=0;
   @Input() maxPrice=0;
 

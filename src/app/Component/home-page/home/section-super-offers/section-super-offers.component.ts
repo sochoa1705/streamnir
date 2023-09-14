@@ -79,7 +79,6 @@ export class SectionSuperOffersComponent implements OnInit {
 					});
 					this.packages = [...parsed].filter((f) => f.type == 2);
 					if (this.packages.length == 0) this.showPackages = false;
-					console.log(this.packages)
 					this.verifyHiddenSection();
 				},
 				error: (err: any) => {

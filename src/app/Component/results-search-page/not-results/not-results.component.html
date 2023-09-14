@@ -26,7 +26,7 @@
 				<span>Precio</span>
 				<img src="./assets/svg/close-tag.svg" (click)="resetFilters('3')"/>
 			</div>
-            <div class="page__notresults__filters__tags__tag"  *ngIf="filters.isDuration">
+            <div class="page__notresults__filters__tags__tag"  *ngIf="filters.isDurationDeparture || filters.isDurationReturn">
 				<span>Duración</span>
 				<img src="./assets/svg/close-tag.svg" (click)="resetFilters('4')"/>
 			</div>

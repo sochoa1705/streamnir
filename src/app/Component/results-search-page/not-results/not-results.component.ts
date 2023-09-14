@@ -8,7 +8,8 @@ interface Filter {
 	maxPrice: number;
 	isMultiticket: boolean;
 	isPrices: boolean;
-	isDuration: boolean;
+	isDurationDeparture: boolean;
+	isDurationReturn: boolean;
 }
 @Component({
 	selector: 'app-not-results',
@@ -46,7 +47,8 @@ export class NotResultsComponent implements OnInit {
 				currentFilters.isPrices = false;
 				break;
 			case '4':
-				currentFilters.isDuration = false;
+				currentFilters.isDurationDeparture = false;
+				currentFilters.isDurationReturn= false;
 				break;
 			default:
 				currentFilters = dataFiltersInit;

@@ -256,7 +256,7 @@ export class PayComponent implements OnInit {
 				console.log(res,'res')
 				if (res.confirmed) {
 					this.showMessagePay = true;
-					this.codeSafetyPay = res.ciP_SafetyPAY;
+					this.codeSafetyPay = Number(res.resultPasarela?.Transaction_id || res.ciP_SafetyPAY);
 					this.transactionId = res.idCotizacion;
 					this.sendEmail(res);
 				} else  this.openModalError(this.errorMessDefault)
