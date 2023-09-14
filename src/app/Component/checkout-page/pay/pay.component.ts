@@ -163,8 +163,13 @@ export class PayComponent implements OnInit {
 	}
 
 	clickTab() {
-		this.isPayCard = !this.isPayCard;
-		this.paymentTypeField.setValue(this.isPayCard ? 0 : 1);
+		if(this.counter < 4){
+			this.isPayCard = !this.isPayCard;
+			this.paymentTypeField.setValue(this.isPayCard ? 0 : 1);
+		}else{
+			this.isPayCard=false;
+			this.paymentTypeField.setValue(1)
+		}
 		this.setValidatorsCreditCard();
 	}
 
@@ -203,9 +208,19 @@ export class PayComponent implements OnInit {
 	}
 
 	sendPayment() {
-		this.counter++;
+		if(this.paymentTypeField.value==0) this.counter++;
+		if(this.counter == 4){
+			this.openModalError('Has alcanzado el límite máximo de intentos con tu Tarjeta. A continuación, podrás completar tu pago utilizando nuestro método de pago Safetypay.')
+			this.paymentTypeField.setValue(1);
+			this.isPayCard=false;
+		}else{
+			this.proccessPayment();
+		}
+	}
+
+	proccessPayment(){
 		const dataFormCredit: any =
-			this.isPayCard && this.counter <= 4
+			this.isPayCard
 				? {
 						...this.formGroupCard.value,
 						documentType: Number(this.documentTypeField.value),
@@ -219,10 +234,6 @@ export class PayComponent implements OnInit {
 						numberQuotes: Number(this.numberQuotesField.value),
 						counter: this.counter
 				  };
-		if(this.counter > 4){
-			this.paymentTypeField.setValue(1);
-		}
-
 		const previewData = GlobalComponent.appBooking;
 		GlobalComponent.appBooking = {
 			...previewData,
@@ -251,8 +262,7 @@ export class PayComponent implements OnInit {
 				} else  this.openModalError(this.errorMessDefault)
 			},
 			error: (err) => {
-				console.log(err,'see')
-				this.openModalError(err.messages.length > 0 ? err.messages[0] : this.errorMessDefault);
+				this.openModalError(this.getMessageErrorClient(err));
 			}
 		});
 	}
@@ -271,16 +281,42 @@ export class PayComponent implements OnInit {
 	}
 
 	openModalError(message: string) {
-		console.log('openModal')
 		const modalRef=this._modalService.open(ModalErrorComponent,{
 			centered: true,
 			backdrop: 'static',
 			windowClass: 'modal-detail-error'
 		})
 		modalRef.componentInstance.message = message;
-		modalRef.componentInstance.isRedirect = true;
-		modalRef.componentInstance.txtButton = 'Volver al inicio';
+		modalRef.componentInstance.isRedirect =  this.counter == 4 ? false: true;
+		modalRef.componentInstance.txtButton =  this.counter == 4 ? 'Aceptar':'Volver al inicio';
 	}
+
+	getMessageErrorClient(error: any): string {
+		switch (error.errorCode) {
+		  case 1001:
+			return 'No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.';
+		  case 1002:
+			return 'La tarifa ya no se encuentra disponible, favor de realizar una nueva búsqueda.';
+	
+		  case 2001:
+			return 'La tarjeta de crédito no es válida.';
+		  case 2002:
+			return 'La fecha de expiración de la tarjeta de crédito no es válida.';
+		  case 2003:
+			return 'El código de seguridad o la fecha de expiración estaba inválido.';
+		  case 2004:
+			return 'La cuenta no tenía fondos suficientes.';
+		  case 2100:
+			if (error.messages != null && error.messages.length > 0) {
+			  return error.messages[0];
+			} else
+			  return 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados o de lo contrario selecciona otra forma de pago.';
+		  case 2101:
+			return 'No se puede realizar el pago correctamente.';
+		  default:
+			return (error.messages?.map((c: any) => c) ?? ['No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.']).join(' - ');
+		}
+	  }
 
 	get cardNumberField(): AbstractControl {
 		return this.formGroupCard.get('cardNumber')!;

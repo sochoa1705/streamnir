@@ -101,6 +101,7 @@
                     flex-direction: column;
                     justify-content: space-between;
                     gap:8px;
+                    background: white;
                     section{
                         margin: 0;
                     }
@@ -120,6 +121,9 @@
                             font-weight: 600;
                             line-height: 28px;
                             color:colors.$gris-900;
+                        }
+                        &.ft-16{
+                            font-size: 16px;
                         }
                         &.regular{
                             font-size: 14px;
