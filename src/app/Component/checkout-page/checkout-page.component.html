@@ -4,10 +4,10 @@
 	<section>
 		<!--[hidden]="!detailFlight" <app-pay  [hidden]="indexStepActive !== 2"></app-pay>-->
 		<div [hidden]="!detailFlight">
-			<app-baggage-insurance [hidden]="indexStepActive !== 0"
+			<app-baggage-insurance [hidden]="indexStepActive !== 2"
 				(changeStep)="clickedStep($event)"></app-baggage-insurance>
 			<app-passengers [hidden]="indexStepActive !== 1" (changeStep)="clickedStep($event)"></app-passengers>
-			<app-pay [hidden]="indexStepActive !== 2" #childPagePay></app-pay>
+			<app-pay [hidden]="indexStepActive !== 0" #childPagePay></app-pay>
 		</div>
 		<div class="container__page__detail" *ngIf="detailFlight">
 			<div class="container__page__detail__saftyPay" *ngIf="isSafetyPay">
