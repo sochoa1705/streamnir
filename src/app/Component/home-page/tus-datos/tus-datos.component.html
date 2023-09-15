@@ -1,0 +1,59 @@
+<section class="container">
+	<form novalidate class="row" [formGroup]="form" (ngSubmit)="onSubmit()">
+		<div class="col-12 col-lg-6 col-xl-7">
+			<h4 class="inter-bold mt-3 mt-lg-4">Formulario Pre-Registro</h4>
+			<ng-container #passengersContainer></ng-container>
+			<hr class="my-4 my-lg-5 bg-secondary">
+			<div class="row gy-3">
+				<div class="col-12">
+					<select class="form-select"
+					        formControlName="store"
+					        [class.is-invalid]="store.invalid && (store.touched || showErrors)">
+						<option value="" disabled>¿En qu&eacute; tienda planeas visitarnos?</option>
+					</select>
+				</div>
+				<div class="col-12">
+					<select class="form-select"
+					        formControlName="medium"
+					        [class.is-invalid]="medium.invalid && (medium.touched || showErrors)">
+						<option value="" disabled>¿A trav&eacute;s de qu&eacute; medio te enteraste del evento?</option>
+					</select>
+				</div>
+				<div class="col-12">
+					<mat-checkbox formControlName="privacyPolicy">
+						<span class="x-small fw-normal text-wrap">
+							He le&iacute;do y acepto la pol&iacute;tica de protecci&oacute;n de datos personales.
+							<a href="https://www.nmviajes.com/politicas" target="_blank" class="x-small">
+								Leer Pol&iacute;tica de Privacidad.
+							</a>
+						</span>
+					</mat-checkbox>
+					<p class="text-danger small" *ngIf="privacyPolicy.invalid && showErrors">
+						Debes aceptar las Pol&iacute;ticas de Privacidad
+					</p>
+				</div>
+				<div class="col-12">
+					<mat-checkbox formControlName="dataPolicy">
+						<span class="x-small fw-normal text-wrap">
+							Acepto el uso de mis datos personales para recibir comunicaciones sobre ofertas de nmviajes.
+						</span>
+					</mat-checkbox>
+					<p class="text-danger small" *ngIf="dataPolicy.invalid && showErrors">
+						Debes aceptar el tratamiento de tus datos personales.
+					</p>
+				</div>
+				<div class="col-12">
+					<p class="x-small fw-normal">
+						Los datos ingresados son correctos, cualquier error u omisi&oacute;n queda bajo mi responsabilidad. Adem&aacute;s,
+						confirmo haber le&iacute;do las RECOMENDACIONES para el evento.
+					</p>
+				</div>
+				<div class="col-12 mt-4">
+					<button type="submit" class="btn-agencias activa inter-semi-bold fs-6 w-auto py-2 px-5" style="height: 45px">
+						Enviar
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>

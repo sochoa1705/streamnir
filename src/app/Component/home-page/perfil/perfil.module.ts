@@ -45,7 +45,7 @@ import { DetalleSecureComponent } from './modal/detalle-secure/detalle-secure.co
     FileModule,
 
   ],
-  exports: [PerfilComponent, PreferenciasComponent],
+	exports: [ PerfilComponent, PreferenciasComponent, PassengerComponent ],
   providers: [DataPagePresenterService, PreferenceService, ContactoService, PassengersService, PasswordService]
 
 })

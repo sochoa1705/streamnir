@@ -1,0 +1,35 @@
+h6 {
+	color: #B50A27;
+}
+
+.btn-agencias.activa {
+	background-color: #B50A27;
+}
+
+.form-control, .form-select {
+	border: 1px solid #e4e5e7;
+	border-radius: 5px;
+	height: 45px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+	background-color: #DF0C30FF;
+}
+
+::ng-deep .mat-checkbox {
+	label {
+		padding-bottom: 0 !important;
+	}
+}
+
+.x-small {
+	font-size: .75rem !important;
+	font-family: Open Sans, sans-serif !important;
+	margin-bottom: .25rem !important;
+
+	@media (min-width: 1441px) {
+		font-size: .875rem !important;
+		margin-bottom: .5rem !important;
+	}
+}
