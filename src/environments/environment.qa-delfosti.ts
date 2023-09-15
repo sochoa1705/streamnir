@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   // urlBase: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',  // PRODUCCIÓN
   muteExceptions: false,                 // DESARROLLO
   nameAppAC: 'Intranet',
