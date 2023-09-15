@@ -51,7 +51,17 @@ export class NotResultsComponent implements OnInit {
 				currentFilters.isDurationReturn= false;
 				break;
 			default:
-				currentFilters = dataFiltersInit;
+				currentFilters={
+					arrayAirline:[],
+					arrayBaggage:[],
+					arrayScales:[],
+					minPrice:0,
+					maxPrice:0,
+					isMultiticket:false,
+					isPrices:false,
+					isDurationDeparture: false,
+					isDurationReturn: false
+				}
 				break;
 		}
 		this.cleanFilters.emit(currentFilters);

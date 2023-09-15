@@ -107,7 +107,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		maxDurationReturn: 0
 	};
 
-	valuesFilterDurationInit: IFilterDuration = {...this.valuesFilterDuration};
+	valuesFilterDurationInit: IFilterDuration = { ...this.valuesFilterDuration };
 
 	showError = false;
 	showNotResults = false;
@@ -184,7 +184,7 @@ export class ResultsSearchPageComponent implements OnInit {
 						this.filters.minPrice = this.minPrice;
 						this.filters.maxPrice = this.maxPrice;
 						this.getValuesByFilterDuration();
-						this.valuesFilterDurationInit = this.valuesFilterDuration;
+						this.valuesFilterDurationInit = { ...this.valuesFilterDuration };
 					}
 				}
 				if (!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate = res.exchangeRate;
@@ -222,7 +222,7 @@ export class ResultsSearchPageComponent implements OnInit {
 					this.filters.minPrice = this.minPrice;
 					this.filters.maxPrice = this.maxPrice;
 					this.getValuesByFilterDuration();
-					this.valuesFilterDurationInit = this.valuesFilterDuration;
+					this.valuesFilterDurationInit = { ...this.valuesFilterDuration };
 				} else this.showNotResults = true;
 			},
 			error: (err) => {
@@ -399,7 +399,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		}
 		this.dataGroupsPaginate = [...this.dataFilterGroups.slice(0, 8)];
 		this.indexPaginate = 8;
-		this.getValuesTabsSort();
+		if (this.dataGroupsPaginate.length > 0) this.getValuesTabsSort();
 	}
 
 	orderByDate(isEarly: boolean, isStartDate: boolean, index: number) {
@@ -655,9 +655,6 @@ export class ResultsSearchPageComponent implements OnInit {
 			this.filters.isDurationDeparture =
 				$event.value !== this.valuesFilterDurationInit.minDurationDeparture ||
 				$event.highValue !== this.valuesFilterDurationInit.maxDurationDeparture;
-			console.log(this.filters.isDurationDeparture,'isDurationFilter')
-			console.log($event.value, $event.highValue)
-			console.log(this.valuesFilterDurationInit)
 		} else {
 			this.valuesFilterDuration.minDurationReturn = $event.value;
 			this.valuesFilterDuration.maxDurationReturn = $event.highValue;
@@ -669,38 +666,32 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	cleanFilters($event: Filter) {
-		this.filters = $event;
+		this.filters = { ...$event };
 		if (!this.filters.isPrices) {
 			this.filters.minPrice = this.minPrice;
 			this.filters.maxPrice = this.maxPrice;
 			this._searchFiltersService.isResetFilterPrice.emit();
 		}
-		if (!this.filters.isDurationDeparture) {
-			this.valuesFilterDuration = { ...this.valuesFilterDurationInit };
-			this._searchFiltersService.isResetFilterDuration.emit();
-		}
+		if (!this.filters.isDurationDeparture) this.valuesFilterDuration = { ...this.valuesFilterDurationInit };
 
-		if (this.filters.arrayBaggage.length == 0) {
+		if (this.filters.arrayBaggage.length == 0)
 			this.dataBagFilter = this.dataBagFilter.map((item) => {
 				item.active = false;
 				return item;
 			});
-			this._searchFiltersService.isResetFilterBaggage.emit();
-		}
-		if (this.filters.arrayScales.length == 0) {
+
+		if (this.filters.arrayScales.length == 0)
 			this.dataScaleFilter = this.dataScaleFilter.map((item) => {
 				item.active = false;
 				return item;
 			});
-			this._searchFiltersService.isResetFilterScales.emit();
-		}
-		if (this.filters.arrayAirline.length == 0) {
+
+		if (this.filters.arrayAirline.length == 0)
 			this.dataAirlines = this.dataAirlines.map((item) => {
 				item.active = false;
 				return item;
 			});
-			this._searchFiltersService.isResetFilterAirlines.emit();
-		}
+
 		this.applyFilters();
 	}
 	clickTabSort($event: any) {
