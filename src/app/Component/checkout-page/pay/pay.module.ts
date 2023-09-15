@@ -13,6 +13,7 @@ import { InputCreditCardModule } from 'src/app/shared/components/input-credit-ca
 import { MessagePayComponent } from './message-pay/message-pay.component';
 import { ModalErrorModule } from 'src/app/shared/components/modal-error/modal-error.module';
 import { NationalityPipe } from 'src/app/shared/pipes/nationality.pipe';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import { NationalityPipe } from 'src/app/shared/pipes/nationality.pipe';
         InputCheckModule,
         InputToggleModule,
         InputCreditCardModule,
-        ModalErrorModule
+        ModalErrorModule,
+        MatExpansionModule
     ],
     exports: [PayComponent],
     declarations: [PayComponent, MessagePayComponent,  NationalityPipe],
