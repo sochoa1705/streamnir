@@ -149,7 +149,7 @@
 			</article>
 		</ng-container>
 		<article>
-			<div class="container__page__section__button" *ngIf="getScreenWidth > 550">
+			<div class="container__page__section__button" *ngIf="itsIncludeUpSell && getScreenWidth > 574">
 				<app-button [text]="'Continuar a pasajeros'" [color]="'primary'" (click)="nextPage()"></app-button>
 			</div>
 		</article>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Options } from 'ng5-slider';
+import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 
 @Component({
 	selector: 'app-price-filter',
@@ -7,7 +8,16 @@ import { Options } from 'ng5-slider';
 	styleUrls: ['./price-filter.component.scss']
 })
 export class PriceFilterComponent implements OnInit, OnChanges {
-	constructor() {}
+	constructor(private _searchFiltersService: SearchFiltersService) {
+		this._searchFiltersService.isResetFilterPrice.subscribe({
+			next: () => {
+				this.value = this.minPrice;
+				this.options.floor = this.minPrice;
+				this.highValue = this.maxPrice;
+				this.options.ceil = this.maxPrice;
+			}
+		});
+	}
 	@Input() currency = 'USD';
 	@Input() minPrice = 0;
 	@Input() maxPrice = 0;

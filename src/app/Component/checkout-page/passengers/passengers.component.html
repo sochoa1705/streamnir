@@ -54,8 +54,9 @@
 										? 'Nombre no válido'
 										: ''
 								"></app-input>
-							<app-input class="label_input" [label]="'Apellido Paterno'" [placeholder]="'Ingresar apellido paterno'"
-								[name]="'lastName'" [isOnlyText]="true" [isRequired]="true" [maxLenght]="50"
+							<app-input class="label_input" [label]="'Apellido Paterno'"
+								[placeholder]="'Ingresar apellido paterno'" [name]="'lastName'" [isOnlyText]="true"
+								[isRequired]="true" [maxLenght]="50"
 								[class]="lastNameField.touched && lastNameField!.invalid ? 'error' : ''" [labelError]="
 									lastNameField.touched && lastNameField!.hasError('required')
 										? 'Apellido paterno es obligatorio'
@@ -65,8 +66,9 @@
 										? 'Apellido paterno no válido'
 										: ''
 								"></app-input>
-							<app-input  class="label_input"  [label]="'Apellido Materno'" [placeholder]="'Ingresar apellido materno'"
-								[name]="'motherLastname'" [isOnlyText]="true" [maxLenght]="50" [isRequired]="true"
+							<app-input class="label_input" [label]="'Apellido Materno'"
+								[placeholder]="'Ingresar apellido materno'" [name]="'motherLastname'"
+								[isOnlyText]="true" [maxLenght]="50" [isRequired]="true"
 								[class]="motherLastnameField.touched && motherLastnameField!.invalid ? 'error' : ''"
 								[labelError]="
 									motherLastnameField.touched && motherLastnameField!.hasError('required')
@@ -96,8 +98,8 @@
 									inválido</span>
 							</div>
 							<div class="container__page__section__contact__form__email">
-								<app-input class="label_input"  [label]="'Correo '" [placeholder]="'Ingresar correo'" [name]="'email'"
-									[isRequired]="true" [maxLenght]="50"
+								<app-input class="label_input" [label]="'Correo '" [placeholder]="'Ingresar correo'"
+									[name]="'email'" [isRequired]="true" [maxLenght]="50"
 									[class]="emailField.touched && emailField!.invalid ? 'error' : ''" [labelError]="
 										emailField.touched && emailField!.hasError('required')
 											? 'Email es obligatorio'
@@ -155,7 +157,7 @@
 					"></app-input-check>
 			</div>
 		</form>
-		<div class="container__page__section__button" *ngIf=" getScreenWidth > 550">
+		<div class="container__page__section__button" *ngIf=" getScreenWidth > 574">
 			<app-button
 				[disabled]="dataStatusCards.includes(false) || !formGroup.valid || !formBillingGroup.valid || !formPoliticsGroup.valid"
 				[text]="'Continuar a pagar'" [color]="'primary'"
