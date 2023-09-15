@@ -36,6 +36,7 @@ export class FiltersComponent implements OnInit {
   @Output() updateArrayAirlinesFilter=new EventEmitter();
   @Output() changeExchangeRate=new EventEmitter();
   @Output() filterByPrice=new EventEmitter();
+  @Output() filterByDuration = new EventEmitter();
 
   formGroup: FormGroup;
   currency='USD'
@@ -76,6 +77,10 @@ export class FiltersComponent implements OnInit {
 
   filterPriceRange($event:any){
     this.filterByPrice.emit($event);
+  }
+
+  filterDurationRange($event:any){
+    this.filterByDuration.emit($event);
   }
 
   get currencyField(): AbstractControl {

@@ -38,7 +38,7 @@ registerLocaleData(localeEs, "es");
         DurationFilterModule,
         CardLoaderResultModule
     ],
-    declarations:[ResultsSearchPageComponent, FiltersComponent, SortByComponent, MinutesFormatPipe, NotResultsComponent],
+    declarations:[ResultsSearchPageComponent, FiltersComponent, SortByComponent, NotResultsComponent],
     exports: [ResultsSearchPageComponent],
     providers: [{ provide: LOCALE_ID, useValue: "es" }],
 })

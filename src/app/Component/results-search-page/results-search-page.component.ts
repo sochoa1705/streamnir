@@ -218,6 +218,7 @@ export class ResultsSearchPageComponent implements OnInit {
 					this.maxPrice = this.dataFilterGroups[this.dataFilterGroups.length - 1].detailPricing?.totalPay || 0;
 					this.filters.minPrice = this.minPrice;
 					this.filters.maxPrice = this.maxPrice;
+					this.getValuesByFilterDuration();
 				} else this.showNotResults = true;
 			},
 			error: (err) => {
@@ -594,7 +595,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.valuesFilterDuration={
 			...this.valuesFilterDuration,
 			minDurationDeparture:dataFilterDep[0].durationDeparture || 0,
-			maxDurationDeparture:dataFilterDep[dataFilterDep.length-1].durationReturn || 0,
+			maxDurationDeparture:dataFilterDep[dataFilterDep.length-1].durationDeparture || 0,
 		}
 
 		if(this.flightType==0){
@@ -607,7 +608,7 @@ export class ResultsSearchPageComponent implements OnInit {
 			});	
 			this.valuesFilterDuration={
 				...this.valuesFilterDuration,
-				minDurationReturn:dataFilterRet[0].durationDeparture || 0,
+				minDurationReturn:dataFilterRet[0].durationReturn || 0,
 				maxDurationReturn:dataFilterRet[dataFilterRet.length-1].durationReturn || 0,
 			}
 		}
@@ -628,6 +629,22 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.filters.isPrices = this.filters.minPrice !== this.minPrice || this.filters.maxPrice !== this.maxPrice;
 		this.applyFilters();
 	}
+
+	filterByDuration($event: any){
+		if($event.isDeparture){
+			this.valuesFilterDuration.minDurationDeparture = $event.value;
+			this.valuesFilterDuration.maxDurationDeparture = $event.highValue;
+			this.filters.isDurationDeparture=true;
+			this.filters.isDurationReturn=false;
+		}else{
+			this.valuesFilterDuration.minDurationReturn = $event.value;
+			this.valuesFilterDuration.maxDurationReturn = $event.highValue;
+			this.filters.isDurationDeparture=false;
+			this.filters.isDurationReturn=true;
+		}
+		this.applyFilters();
+	}
+
 	cleanFilters($event: Filter) {
 		this.filters = $event;
 		if (!this.filters.isPrices) {

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Options } from 'ng5-slider';
 import { GlobalComponent } from '../../global';
 
@@ -17,6 +17,7 @@ interface IFilterDuration{
 export class DurationFilterComponent implements OnInit, OnChanges {
 
   @Input() valuesFilterDuration:IFilterDuration;
+  @Output() filterDurationRange = new EventEmitter();
   flightType=0;
   codesFlight:string[]=[];
 
@@ -64,14 +65,16 @@ export class DurationFilterComponent implements OnInit, OnChanges {
 			this.optionsDurationRet.floor = this.valuesFilterDuration.minDurationReturn;
       this.highValueDurationRet = this.valuesFilterDuration.maxDurationReturn;
       this.optionsDurationRet.ceil = this.valuesFilterDuration.maxDurationReturn;
+
+      const paramsSearch=GlobalComponent.paramsSearch;
+      console.log(paramsSearch,'see params')
+      this.flightType=paramsSearch.flightType;
+      if(this.flightType !== 2) this.codesFlight.push(paramsSearch.arrivalLocation,paramsSearch.departureLocation)
+        else this.codesFlight.push(paramsSearch.multicity[0].arrivalLocation)
 		}
 	}
 
   ngOnInit(): void {
-    const paramsSearch=GlobalComponent.paramsSearch;
-    this.flightType=paramsSearch.flightType;
-    if(this.flightType !== 2) this.codesFlight.push(paramsSearch.departureLocation,paramsSearch.arrivalLocation)
-			else this.codesFlight.push(paramsSearch.multicity[0].departureLocation)
   }
   
 
@@ -79,8 +82,8 @@ export class DurationFilterComponent implements OnInit, OnChanges {
 
   }
 
-  filterDuration($event:any){
-
+  filterDuration($event:any,isDeparture:boolean){
+     this.filterDurationRange.emit({...$event,isDeparture});
   }
 
   filterScale($event:any){
