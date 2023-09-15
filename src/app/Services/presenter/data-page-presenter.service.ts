@@ -185,12 +185,6 @@ export class DataPagePresenterService {
             target: "_self"
           },
           {
-            id: 1,
-            text: "Nuestras tiendas",
-            link: "/nuestras-agencias/",
-            target: "_self"
-          },
-          {
             id: 2,
             text: "Trabaja con nosotros",
             link: "https://expertiatravel.hiringroom.com/jobs",
