@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Options } from 'ng5-slider';
 import { GlobalComponent } from '../../global';
+import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 
 interface IFilterDuration{
 	minDurationDeparture:number,
@@ -21,7 +22,21 @@ export class DurationFilterComponent implements OnInit, OnChanges {
   flightType=0;
   codesFlight:string[]=[];
 
-  constructor() { }
+  constructor(private _searchFiltersService: SearchFiltersService) {
+		this._searchFiltersService.isResetFilterDuration.subscribe({
+			next: () => {
+        this.valueDurationDep = this.valuesFilterDuration.minDurationDeparture;
+        this.optionsDurationDep.floor = this.valuesFilterDuration.minDurationDeparture;
+        this.highValueDurationDep = this.valuesFilterDuration.maxDurationDeparture;
+        this.optionsDurationDep.ceil = this.valuesFilterDuration.maxDurationDeparture;
+  
+        this.valueDurationRet = this.valuesFilterDuration.minDurationReturn;
+        this.optionsDurationRet.floor = this.valuesFilterDuration.minDurationReturn;
+        this.highValueDurationRet = this.valuesFilterDuration.maxDurationReturn;
+        this.optionsDurationRet.ceil = this.valuesFilterDuration.maxDurationReturn;
+			}
+		});
+	}
   
   dropdownActive=true;
 
@@ -67,7 +82,6 @@ export class DurationFilterComponent implements OnInit, OnChanges {
       this.optionsDurationRet.ceil = this.valuesFilterDuration.maxDurationReturn;
 
       const paramsSearch=GlobalComponent.paramsSearch;
-      console.log(paramsSearch,'see params')
       this.flightType=paramsSearch.flightType;
       if(this.flightType !== 2) this.codesFlight.push(paramsSearch.arrivalLocation,paramsSearch.departureLocation)
         else this.codesFlight.push(paramsSearch.multicity[0].arrivalLocation)

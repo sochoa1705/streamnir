@@ -80,7 +80,6 @@ export class FiltersComponent implements OnInit {
   }
 
   filterDurationRange($event:any){
-    console.log('Emit Filter Component')
     this.filterByDuration.emit($event);
   }
 

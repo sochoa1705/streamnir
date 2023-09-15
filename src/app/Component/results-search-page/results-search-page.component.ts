@@ -12,6 +12,7 @@ import { LoadingService } from 'src/app/Services/intermediary/loading.service';
 import { getMoreOptionsFilter } from 'src/app/shared/utils/getMoreOptionsFilter';
 import { getDatesBySegment } from 'src/app/shared/utils/getDatesBySort';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
+import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 
 interface Item {
 	value: any;
@@ -61,7 +62,8 @@ export class ResultsSearchPageComponent implements OnInit {
 		private _searchService: SearchService,
 		private _tokenService: TokenService,
 		private route: ActivatedRoute,
-		private _loadingService: LoadingService
+		private _loadingService: LoadingService,
+		private _searchFiltersService: SearchFiltersService
 	) {
 		/*this.route.queryParamMap.subscribe((params) => {
 			this.resetData()
@@ -104,6 +106,8 @@ export class ResultsSearchPageComponent implements OnInit {
 		minDurationReturn: 0,
 		maxDurationReturn: 0
 	};
+
+	valuesFilterDurationInit: IFilterDuration = {...this.valuesFilterDuration};
 
 	showError = false;
 	showNotResults = false;
@@ -180,6 +184,7 @@ export class ResultsSearchPageComponent implements OnInit {
 						this.filters.minPrice = this.minPrice;
 						this.filters.maxPrice = this.maxPrice;
 						this.getValuesByFilterDuration();
+						this.valuesFilterDurationInit = this.valuesFilterDuration;
 					}
 				}
 				if (!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate = res.exchangeRate;
@@ -217,6 +222,7 @@ export class ResultsSearchPageComponent implements OnInit {
 					this.filters.minPrice = this.minPrice;
 					this.filters.maxPrice = this.maxPrice;
 					this.getValuesByFilterDuration();
+					this.valuesFilterDurationInit = this.valuesFilterDuration;
 				} else this.showNotResults = true;
 			},
 			error: (err) => {
@@ -492,6 +498,21 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.dataFilterGroups = [];
 		this.dataGroupsPaginate = [];
 		const dataFilter = this.allDataGroups.filter((item) => {
+			let isDurationDepartureValid = true;
+			let isDurationReturnValid = true;
+
+			if (item.durationDeparture) {
+				isDurationDepartureValid =
+					item.durationDeparture >= this.valuesFilterDuration.minDurationDeparture &&
+					item.durationDeparture <= this.valuesFilterDuration.maxDurationDeparture;
+			}
+
+			if (this.flightType == 0 && item.durationReturn) {
+				isDurationReturnValid =
+					item.durationReturn >= this.valuesFilterDuration.minDurationReturn &&
+					item.durationReturn <= this.valuesFilterDuration.maxDurationReturn;
+			}
+
 			return (
 				(this.filters.isMultiticket ? item.airlineCodeFilter == 'MT' : true) &&
 				(this.filters.arrayAirline.length > 0
@@ -508,7 +529,9 @@ export class ResultsSearchPageComponent implements OnInit {
 				(this.filters.arrayScales.includes('isOneScale') ? item.isOneScale : true) &&
 				(this.filters.arrayScales.includes('isMultiScale') ? item.isMultiScale : true) &&
 				(item.detailPricing?.totalPay || 0) >= this.filters.minPrice &&
-				(item.detailPricing?.totalPay || 0) <= this.filters.maxPrice 
+				(item.detailPricing?.totalPay || 0) <= this.filters.maxPrice &&
+				isDurationDepartureValid &&
+				isDurationReturnValid
 			);
 		});
 		this.dataFilterGroups = [...dataFilter];
@@ -629,13 +652,18 @@ export class ResultsSearchPageComponent implements OnInit {
 		if ($event.isDeparture) {
 			this.valuesFilterDuration.minDurationDeparture = $event.value;
 			this.valuesFilterDuration.maxDurationDeparture = $event.highValue;
-			this.filters.isDurationDeparture = true;
-			this.filters.isDurationReturn = false;
+			this.filters.isDurationDeparture =
+				$event.value !== this.valuesFilterDurationInit.minDurationDeparture ||
+				$event.highValue !== this.valuesFilterDurationInit.maxDurationDeparture;
+			console.log(this.filters.isDurationDeparture,'isDurationFilter')
+			console.log($event.value, $event.highValue)
+			console.log(this.valuesFilterDurationInit)
 		} else {
 			this.valuesFilterDuration.minDurationReturn = $event.value;
 			this.valuesFilterDuration.maxDurationReturn = $event.highValue;
-			this.filters.isDurationDeparture = false;
-			this.filters.isDurationReturn = true;
+			this.filters.isDurationReturn =
+				$event.value !== this.valuesFilterDurationInit.minDurationReturn ||
+				$event.highValue !== this.valuesFilterDurationInit.maxDurationReturn;
 		}
 		this.applyFilters();
 	}
@@ -645,22 +673,34 @@ export class ResultsSearchPageComponent implements OnInit {
 		if (!this.filters.isPrices) {
 			this.filters.minPrice = this.minPrice;
 			this.filters.maxPrice = this.maxPrice;
+			this._searchFiltersService.isResetFilterPrice.emit();
 		}
-		if (this.filters.arrayBaggage.length == 0)
+		if (!this.filters.isDurationDeparture) {
+			this.valuesFilterDuration = { ...this.valuesFilterDurationInit };
+			this._searchFiltersService.isResetFilterDuration.emit();
+		}
+
+		if (this.filters.arrayBaggage.length == 0) {
 			this.dataBagFilter = this.dataBagFilter.map((item) => {
 				item.active = false;
 				return item;
 			});
-		if (this.filters.arrayScales.length == 0)
+			this._searchFiltersService.isResetFilterBaggage.emit();
+		}
+		if (this.filters.arrayScales.length == 0) {
 			this.dataScaleFilter = this.dataScaleFilter.map((item) => {
 				item.active = false;
 				return item;
 			});
-		if (this.filters.arrayAirline.length == 0)
+			this._searchFiltersService.isResetFilterScales.emit();
+		}
+		if (this.filters.arrayAirline.length == 0) {
 			this.dataAirlines = this.dataAirlines.map((item) => {
 				item.active = false;
 				return item;
 			});
+			this._searchFiltersService.isResetFilterAirlines.emit();
+		}
 		this.applyFilters();
 	}
 	clickTabSort($event: any) {
