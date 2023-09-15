@@ -512,9 +512,11 @@ export class ResultsSearchPageComponent implements OnInit {
 				(this.filters.arrayScales.includes('isMultiScale') ? item.isMultiScale : true) &&
 				(item.detailPricing?.totalPay || 0) >= this.filters.minPrice &&
 				(item.detailPricing?.totalPay || 0) <= this.filters.maxPrice &&
-				(this.filters.isDurationDeparture ? item.durationDeparture || 0 >= this.valuesFilterDuration.minDurationDeparture && item.durationDeparture || 0 <=this.valuesFilterDuration.maxDurationDeparture:true) && 
-				(this.filters.isDurationReturn ? item.durationReturn || 0 >= this.valuesFilterDuration.minDurationReturn && item.durationReturn || 0 <=this.valuesFilterDuration.maxDurationReturn:true)
+				(this.filters.isDurationDeparture ? item.durationDeparture || 0 <=this.valuesFilterDuration.maxDurationDeparture:true) &&
+				(this.filters.isDurationReturn ? item.durationReturn || 0 <=this.valuesFilterDuration.maxDurationReturn:true)
 		);
+		console.log('filters aply', this.filters)
+		console.log(this.valuesFilterDuration,'valuesDuration')
 		this.dataFilterGroups = [...dataFilter];
 		this.indexPaginate = 8;
 		this.sortData();
@@ -612,7 +614,6 @@ export class ResultsSearchPageComponent implements OnInit {
 				maxDurationReturn:dataFilterRet[dataFilterRet.length-1].durationReturn || 0,
 			}
 		}
-		console.log(this.valuesFilterDuration,'values duration')
 	}
 
 	showMoreResults() {
