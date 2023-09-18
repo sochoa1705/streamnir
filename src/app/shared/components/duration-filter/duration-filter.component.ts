@@ -19,10 +19,11 @@ export class DurationFilterComponent implements OnInit, OnChanges {
 
   @Input() valuesFilterDuration:IFilterDuration;
   @Output() filterDurationRange = new EventEmitter();
+  @Output() resetFilterDuration  = new EventEmitter();
   flightType=0;
   codesFlight:string[]=[];
 
-  constructor(private _searchFiltersService: SearchFiltersService) {
+  constructor(private _searchFiltersService: SearchFiltersService){
 		this._searchFiltersService.isResetFilterDuration.subscribe({
 			next: () => {
         this.valueDurationDep = this.valuesFilterDuration.minDurationDeparture;
@@ -68,20 +69,21 @@ export class DurationFilterComponent implements OnInit, OnChanges {
 	};
 
   isFilterDeparture=true;
+
   
   ngOnChanges(changes: SimpleChanges) {
 		if (changes['valuesFilterDuration']) {
-			this.valueDurationDep = this.valuesFilterDuration.minDurationDeparture;
-			this.optionsDurationDep.floor = this.valuesFilterDuration.minDurationDeparture;
+      const paramsSearch={...GlobalComponent.paramsSearch};
+      this.valueDurationDep = this.valuesFilterDuration.minDurationDeparture;
+      this.optionsDurationDep.floor = this.valuesFilterDuration.minDurationDeparture;
       this.highValueDurationDep = this.valuesFilterDuration.maxDurationDeparture;
       this.optionsDurationDep.ceil = this.valuesFilterDuration.maxDurationDeparture;
-
+  
       this.valueDurationRet = this.valuesFilterDuration.minDurationReturn;
-			this.optionsDurationRet.floor = this.valuesFilterDuration.minDurationReturn;
+      this.optionsDurationRet.floor = this.valuesFilterDuration.minDurationReturn;
       this.highValueDurationRet = this.valuesFilterDuration.maxDurationReturn;
       this.optionsDurationRet.ceil = this.valuesFilterDuration.maxDurationReturn;
 
-      const paramsSearch=GlobalComponent.paramsSearch;
       this.flightType=paramsSearch.flightType;
       if(this.flightType !== 2) this.codesFlight.push(paramsSearch.arrivalLocation,paramsSearch.departureLocation)
         else this.codesFlight.push(paramsSearch.multicity[0].arrivalLocation)
@@ -92,9 +94,11 @@ export class DurationFilterComponent implements OnInit, OnChanges {
   }
   
 
-  resetFilter(){
+  resetFilter() {
+      this.resetFilterDuration.emit();
+	}
 
-  }
+
 
   filterDuration($event:any,isDeparture:boolean){
      this.filterDurationRange.emit({...$event,isDeparture});

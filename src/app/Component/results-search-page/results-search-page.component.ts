@@ -157,7 +157,7 @@ export class ResultsSearchPageComponent implements OnInit {
 			this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
 			GlobalComponent.classFligh =
 				objParams.flightClass == 0 ? 'Economy' : objParams.flightClass == 1 ? 'Business' : 'First Class';
-			GlobalComponent.paramsSearch = objParams;
+			GlobalComponent.paramsSearch = {...objParams};
 			this.flightType = objParams.flightType;
 			this.titleNotResults =
 				objParams.flightType !== 2
@@ -696,6 +696,12 @@ export class ResultsSearchPageComponent implements OnInit {
 
 		this.applyFilters();
 	}
+
+	resetFilterByDuration(){
+		this.valuesFilterDuration = { ...this.valuesFilterDurationInit }
+		this.applyFilters();
+	}
+	
 	clickTabSort($event: any) {
 		this.sortBy = $event;
 		this.sortData();

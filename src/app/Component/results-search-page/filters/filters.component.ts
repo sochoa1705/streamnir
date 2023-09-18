@@ -37,6 +37,7 @@ export class FiltersComponent implements OnInit {
   @Output() changeExchangeRate=new EventEmitter();
   @Output() filterByPrice=new EventEmitter();
   @Output() filterByDuration = new EventEmitter();
+  @Output() resetFilterByDuration = new EventEmitter();
 
   formGroup: FormGroup;
   currency='USD'
@@ -82,6 +83,10 @@ export class FiltersComponent implements OnInit {
 
   filterDurationRange($event:any){
     this.filterByDuration.emit($event);
+  }
+
+  resetFilterDuration(){
+    this.resetFilterByDuration.emit();
   }
 
   get currencyField(): AbstractControl {
