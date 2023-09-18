@@ -176,9 +176,11 @@ export class ResultsSearchPageComponent implements OnInit {
 					this.isLoader = false;
 					if (this.exchangeRate == 0) this.exchangeRate = res.exchangeRate.amount;
 					this.getDataFilters(res);
-					if (this._loadingService.requestSearchCount == 9) {
+				}
+				if (this._loadingService.requestSearchCount == 9) {
+					this.showNotResults = this.dataFilterGroups.length == 0 ? true : false;
+					if(!this.showNotResults){
 						this.endsearch();
-						this.showNotResults = this.dataFilterGroups.length == 0 ? true : false;
 						this.minPrice = this.dataFilterGroups[0].detailPricing?.totalPay || 0;
 						this.maxPrice = this.dataFilterGroups[this.dataFilterGroups.length - 1].detailPricing?.totalPay || 0;
 						this.filters.minPrice = this.minPrice;
@@ -197,10 +199,10 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	endsearch() {
-		console.log(this.allDataGroups, 'alldatagrups');
 		this._searchService.endSearch().subscribe({
 			next: (res) => {
 				console.log(res, 'end Results gneral');
+				this._searchFiltersService.isFinishGDS.emit();
 			},
 			error: (err) => {
 				this.showError = true;

@@ -44,9 +44,11 @@
 	</div>
 
 	<app-dropdown-filter
+		*ngIf="!hiddenBaggage"
 		[title]="'Equipaje'"
 		[listOptions]="dataBagFilter"
 		(clickedOption)="clickedOption($event, 'typeBag')"
+		(hiddenSection)="hiddenBaggage=true"
 	></app-dropdown-filter>
 	<app-dropdown-filter
 		[title]="'Escalas'"

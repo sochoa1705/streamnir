@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 
 interface Item {
 	value: any;
@@ -12,7 +13,19 @@ interface Item {
 	styleUrls: ['./dropdown-filter.component.scss']
 })
 export class DropdownFilterComponent implements OnInit, OnChanges {
-	constructor() {}
+	constructor(private _searchFiltersService: SearchFiltersService) {
+		this._searchFiltersService.isFinishGDS.subscribe({
+			next: () => {
+			   setTimeout(() => {
+				 if(this.showLoader){
+					this.showLoader=false;
+					this.notFilter = this.listOptions.some(item=>item.total > 0) ? false : true;
+					if(this.notFilter) this.hiddenSection.emit();
+				 }
+			   }, 200);
+			}
+		});
+	}
 
 	dropdownActive = true;
 	@Input() title = '';
@@ -20,10 +33,12 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 	@Input() isAirlines = false;
 	@Output() clickedOption = new EventEmitter();
 	@Output() selectedAirlines = new EventEmitter();
+	@Output() hiddenSection = new EventEmitter();
 	isShowMoreAirlines = false;
 	listOptionsAirlines: Item[] = [];
 	countRestAirlines = 0;
 	showLoader=true;
+	notFilter=false;
 
 	ngOnInit(): void {}
 
