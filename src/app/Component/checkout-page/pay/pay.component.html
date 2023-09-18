@@ -77,11 +77,11 @@
 					<app-input [label]="'Código'" [placeholder]="'Ingresar código'" [name]="'CuponPromoWeb'"
 						[isCheck]="isValidPromotionalCode && isApplyCupon" [maxLenght]="6"
 						[class]="cuponPromoWebField.touched && cuponPromoWebField!.invalid ? 'error' : ''" [labelError]="
-							cuponPromoWebField.touched && !isValidPromotionalCode && discountCupon === null && cuponPromoWebField.value.length > 1
-								? 'Código inválido'
+							cuponPromoWebField.touched && !isValidPromotionalCode && discountCupon === null && cuponPromoWebField.invalid
+								? textErrorCupon
 								: ''
 						"></app-input>
-					<app-button [text]="'Aplicar'" [color]="'outline-secondary'" (click)="applyCupon()"></app-button>
+					<app-button [text]="'Aplicar'" [color]="'outline-secondary'" (click)="validCuponWeb()"></app-button>
 				</div>
 			</app-card-checkout>
 		</article>
@@ -180,19 +180,17 @@
 							"></app-input>
 			</div>
 		</div>
-		<div class="row-sm-12 row-xl-12 row-lg-12">
-			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-5">
+		<div class="row row-sm-12 row-xl-12 row-lg-12">
+			<div class="col-sm-12 col-md-6 col-lg-12 col-xl-6">
 				<app-select [label]="'Cuotas'" [placeholder]="'Sin cuotas'" [isRequired]="true"
 					[listItems]="arrayCuotas" [name]="'numberQuotes'" [value]="numberQuotesField.value"></app-select>
 			</div>
-			<div class="col_pay col-md-12  col-sm-12 col-lg-12 col-xl-5">
+			<div class="col_pay col-md-6 col-sm-12 col-lg-12 col-xl-6">
 				<app-input [label]="'Ciudad de Facturación'" [placeholder]="'Del titular de la tarjeta'" [name]="'city'"
 					[isRequired]="true" [maxLenght]="50"
 					[class]="cityField.touched && cityField!.invalid ? 'error' : ''"
 					[labelError]="cityField.touched && cityField!.hasError('required') ? 'Ciudad es obligatorio' : ''"></app-input>
 			</div>
-
-
 		</div>
 		<div class="row-xs-12 row-lg-12 row-xl-12">
 			<div class="col-sm-12 col-lg-12 col-xl-12">

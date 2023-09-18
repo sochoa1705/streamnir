@@ -46,6 +46,8 @@ export class PayComponent implements OnInit {
 	showMessagePay = false;//quitar a false
 	isValidPromotionalCode = false;
 	isApplyCupon = false;
+	isClickButtonCode=false;
+	textErrorCupon='Código inválido';
 	transactionId = 0;
 	discountCupon: ResultCupon | null = null;
 	counter = 0;
@@ -69,9 +71,9 @@ export class PayComponent implements OnInit {
 	};
 
 	credentials = localStorage.getItem('usuario');
-
+	
 	formBooking = {
-		CuponPromoWeb: new FormControl(''),
+		CuponPromoWeb: new FormControl('',Validators.minLength(6)),
 		generateTicket: new FormControl(false),
 		paymentType: new FormControl(0),
 		deviceSessionId: new FormControl('')
@@ -100,8 +102,8 @@ export class PayComponent implements OnInit {
 		this.setCuotas();
 		this.chageTypeDocument();
 		this.urlsTermsAndConditions = this._checkoutService.getLinksTermsAndConditions();
-		this.changeCupon();
 		this.initConfigurationOpenPay();
+		this.changeCupon();
 		this.setValidatorsCreditCard();
 		this.getScreenWidth = window.innerWidth;
 	}
@@ -109,11 +111,19 @@ export class PayComponent implements OnInit {
 	changeCupon() {
 		this.cuponPromoWebField.valueChanges
 			.pipe(
-				map((search) => search?.toLowerCase().trim()),
-				filter((search) => search !== '' && search !== undefined && search?.length > 1),
-				debounceTime(500),
-				tap((search) => this.validCuponWeb(search)),
-				takeUntil(this.destroy$)
+				map((search) => {
+					this.textErrorCupon='Código inválido';
+					search?.toLowerCase().trim();
+					if(this.isClickButtonCode){
+						this.resetDiscountByCupon();
+						this.discountCupon = null;
+						if (this.isApplyCupon) {
+							this.isApplyCupon = false;
+							this._checkoutService.applyCupon.emit(null);
+						}
+						this.isClickButtonCode=false;
+					}
+				}),
 			)
 			.subscribe();
 	}
@@ -129,23 +139,37 @@ export class PayComponent implements OnInit {
 		}
 	}
 
-	validCuponWeb(search: string) {
-		this._checkoutService.getPromocionalCode(search).subscribe({
-			next: (response) => {
-				console.log(response);
-				if (response.result.isSuccess) {
-					this.isValidPromotionalCode = true;
-					this.discountCupon = response.result;
-				} else this.resetDiscountByCupon();
-			},
-			error: (err) => {
-				this.resetDiscountByCupon();
-			}
-		});
+	validCuponWeb() {
+		const search= this.cuponPromoWebField.value.trim();
+		this.isClickButtonCode=true;
+		this.textErrorCupon='Código inválido';
+		if(search.length < 6){
+			this.cuponPromoWebField.setErrors({'incorrect': true})
+		}else{
+			this._checkoutService.getPromocionalCode(search).subscribe({
+				next: (response) => {
+					if (response.result.isSuccess) {
+						this.isValidPromotionalCode = true;
+						this.discountCupon = response.result;
+						if (this.discountCupon && this.isValidPromotionalCode) {
+							this.isApplyCupon = true;
+							this._checkoutService.applyCupon.emit(this.discountCupon);
+						}else this.resetDiscountByCupon();
+					} else{
+						this.textErrorCupon=response.result.message;
+						this.cuponPromoWebField.setErrors({'incorrect': true});
+						this.resetDiscountByCupon();
+					}
+				},
+				error: (err) => {
+					this.resetDiscountByCupon();
+				}
+			});
+		}
 	}
 
 	resetDiscountByCupon() {
-		this.isValidPromotionalCode = false;
+		this.isValidPromotionalCode=false;
 		this.discountCupon = null;
 		if (this.isApplyCupon) {
 			this.isApplyCupon = false;
@@ -163,13 +187,6 @@ export class PayComponent implements OnInit {
 		this.arrayCuotas = cuotas.map((item) => {
 			return { name: item == 0 ? 'Sin cuotas' : item.toString(), value: item };
 		});
-	}
-
-	applyCupon() {
-		if (this.discountCupon && this.isValidPromotionalCode) {
-			this.isApplyCupon = true;
-			this._checkoutService.applyCupon.emit(this.discountCupon);
-		}
 	}
 
 	clickTab() {
