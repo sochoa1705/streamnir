@@ -1,12 +1,14 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TusDatosService } from '../../../../Services/tus-datos/tus-datos.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-passenger',
 	templateUrl: './passenger.component.html',
 	styleUrls: [ './passenger.component.scss' ]
 })
-export class PassengerComponent implements OnChanges {
+export class PassengerComponent {
 	@ViewChild('dateInput') private dateInput: ElementRef;
 
 	@Input() indexToDisplay: number;
@@ -15,15 +17,33 @@ export class PassengerComponent implements OnChanges {
 	@Output() removePassenger: EventEmitter<void> = new EventEmitter();
 
 	form: FormGroup;
+	docInputMaxLength = 15;
+	docInputType = 'tel';
+	showDocErrors = false;
+	docPrevValue: string;
 
-	constructor(private formBuilder: FormBuilder) {
+	constructor(private formBuilder: FormBuilder,
+	            private tusDatosService: TusDatosService,
+	            public _snackBar: MatSnackBar) {
 		this.form = this.formBuilder.group({
 			docType: new FormControl('', Validators.required),
 			docNumber: new FormControl('', Validators.required),
-			firstName: new FormControl('', Validators.required),
-			middleName: new FormControl('', Validators.required),
-			lastName: new FormControl('', Validators.required),
-			birthDate: new FormControl('', Validators.required),
+			firstName: new FormControl('', Validators.compose([
+				Validators.required,
+				Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ ',-.]+$/)
+			])),
+			middleName: new FormControl('', Validators.compose([
+				Validators.required,
+				Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ ',-.]+$/)
+			])),
+			lastName: new FormControl('', Validators.compose([
+				Validators.required,
+				Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ ',-.]+$/)
+			])),
+			birthDate: new FormControl('', Validators.compose([
+				Validators.required,
+				Validators.pattern(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/)
+			])),
 			email: new FormControl('', Validators.compose([
 				Validators.required,
 				Validators.email
@@ -32,8 +52,67 @@ export class PassengerComponent implements OnChanges {
 		});
 	}
 
-	ngOnChanges(changes: SimpleChanges) {
-		console.log(changes);
+	onDocTypeChange(event: Event) {
+		this.docNumber.clearValidators();
+
+		const srcElement = event.target as HTMLSelectElement;
+		const selectedValue = srcElement.value;
+
+		if (selectedValue === 'DNI') {
+			this.docInputType = 'tel';
+			this.docInputMaxLength = 8;
+			this.docNumber.setValidators(Validators.compose([
+				Validators.required,
+				Validators.maxLength(8),
+				Validators.minLength(8),
+				Validators.pattern(/^[0-9]*$/)
+			]));
+		} else {
+			this.docInputType = 'text';
+			this.docInputMaxLength = 12;
+			this.docNumber.setValidators(Validators.compose([
+				Validators.required,
+				Validators.maxLength(12),
+				Validators.pattern(/^[a-zA-Z0-9]*$/)
+			]));
+		}
+
+		this.docNumber.updateValueAndValidity();
+	}
+
+	onSearchByDocument() {
+		if (this.docType.invalid || this.docNumber.invalid) {
+			this.showDocErrors = true;
+			return;
+		}
+
+		if (this.docPrevValue === this.docNumber.value)
+			return;
+
+		this.tusDatosService.search(this.docType.value, this.docNumber.value).subscribe({
+			next: (response: any) => {
+				if (response && response.resultados && response.resultados.length > 0) {
+					const result = response.resultados[0];
+					this.firstName.setValue(result.Nombres);
+					this.middleName.setValue(result.ApePaterno);
+					this.lastName.setValue(result.ApeMaterno);
+					this.birthDate.setValue(result.FechaNacimiento);
+					this.email.setValue(result.Email);
+					this.phone.setValue(result.Telefono);
+				} else {
+					this.firstName.reset();
+					this.middleName.reset();
+					this.lastName.reset();
+					this.birthDate.reset();
+					this.email.reset();
+					this.phone.reset();
+					this._snackBar.open(`No se encontró pasajero con documento: ${this.docNumber.value}`, 'OK', {
+						duration: 5000
+					});
+				}
+			}
+		});
+		this.docPrevValue = this.docNumber.value;
 	}
 
 	formatDate() {

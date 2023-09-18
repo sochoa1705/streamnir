@@ -1,22 +1,38 @@
-import { AfterViewInit, Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	ComponentFactoryResolver,
+	EventEmitter, OnDestroy, OnInit,
+	ViewChild,
+	ViewContainerRef
+} from '@angular/core';
 import { PassengerComponent } from './passenger/passenger.component';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DataPagePresenterService } from '../../../Services/presenter/data-page-presenter.service';
+import { EGalleryCode, IGalleryImage } from '../../../Services/presenter/data-page-presenter.models';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-tus-datos',
 	templateUrl: './tus-datos.component.html',
 	styleUrls: [ './tus-datos.component.scss' ]
 })
-export class TusDatosComponent implements AfterViewInit {
+export class TusDatosComponent implements OnInit, AfterViewInit, OnDestroy {
 	@ViewChild('passengersContainer', { read: ViewContainerRef }) passengersContainer: ViewContainerRef;
 
 	private childComponents: { id: number, componentRef: any }[] = [];
 	private currentId = 0;
+	private isAlive = true;
 
 	form: FormGroup;
-	showErrors: boolean = false;
+	onShowErrors: EventEmitter<boolean> = new EventEmitter();
+	errorsDisplayed = false;
 
-	constructor(private componentFactoryResolver: ComponentFactoryResolver, private formBuilder: FormBuilder) {
+	banner: IGalleryImage;
+
+	constructor(private componentFactoryResolver: ComponentFactoryResolver,
+	            private formBuilder: FormBuilder,
+	            private dataPageService: DataPagePresenterService) {
 		this.form = this.formBuilder.group({
 			passengers: this.formBuilder.array([]),
 			store: new FormControl('', Validators.required),
@@ -26,8 +42,18 @@ export class TusDatosComponent implements AfterViewInit {
 		});
 	}
 
+	ngOnInit() {
+		this.getBanner();
+	}
+
 	ngAfterViewInit() {
 		this.addPassenger();
+	}
+
+	private getBanner() {
+		this.dataPageService.getDataGallery().subscribe(data => {
+			this.banner = data.filter(item => item.Code === EGalleryCode.banner_principal)[0].Images[0];
+		});
 	}
 
 	addPassenger() {
@@ -43,10 +69,14 @@ export class TusDatosComponent implements AfterViewInit {
 
 		const id = this.currentId++;
 		childComponentRef.instance.indexToDisplay = this.passengersContainer.length;
-		childComponentRef.instance.showErrors = this.showErrors;
 
-		childComponentRef.instance.addNewPassenger.subscribe(() => this.addPassenger());
-		childComponentRef.instance.removePassenger.subscribe(() => this.removePassenger(id));
+		this.onShowErrors.pipe(takeWhile(() => this.isAlive))
+				.subscribe((value: boolean) => childComponentRef.instance.showErrors = value);
+
+		childComponentRef.instance.addNewPassenger.pipe(takeWhile(() => this.isAlive))
+				.subscribe(() => this.addPassenger());
+		childComponentRef.instance.removePassenger.pipe(takeWhile(() => this.isAlive))
+				.subscribe(() => this.removePassenger(id));
 
 
 		this.passengersContainer.insert(childComponentRef.hostView);
@@ -66,7 +96,8 @@ export class TusDatosComponent implements AfterViewInit {
 
 	onSubmit() {
 		console.log(this.passengers);
-		this.showErrors = true;
+		this.errorsDisplayed = true;
+		this.onShowErrors.emit(true);
 	}
 
 	get passengers() {
@@ -87,5 +118,9 @@ export class TusDatosComponent implements AfterViewInit {
 
 	get dataPolicy() {
 		return this.form.controls['dataPolicy'];
+	}
+
+	ngOnDestroy() {
+		this.isAlive = false;
 	}
 }

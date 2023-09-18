@@ -3,7 +3,8 @@
 		<h6 class="inter-semi-bold" [class.mb-0]="indexToDisplay !== 0">
 			<img src="assets/svg/people-red.svg" alt="Pasajero" class="me-2">Pasajero #{{indexToDisplay + 1}}
 		</h6>
-		<p class="inter-semi-bold" *ngIf="indexToDisplay === 0">Este pasajero es el &uacute;nico que recibe el correo de
+		<p class="inter-semi-bold small" *ngIf="indexToDisplay === 0">Este pasajero es el &uacute;nico que recibe el correo
+			de
 			confirmaci&oacute;n</p>
 	</div>
 	<div class="col-auto">
@@ -25,19 +26,24 @@
 	<div class="col-12 col-md-6">
 		<select class="form-select"
 		        formControlName="docType"
-		        [class.is-invalid]="docType.invalid && (docType.touched || showErrors)">
+		        [class.is-invalid]="docType.invalid && (docType.touched || showErrors || showDocErrors)"
+		        (change)="onDocTypeChange($event)">
 			<option value="" disabled>Tipo de documento</option>
+			<option value="CE">C. extranjer&iacute;a</option>
+			<option value="DNI">DNI</option>
+			<option value="PAS">Pasaporte</option>
 		</select>
 	</div>
 	<div class="col">
-		<input type="tel"
-		       class="form-control"
+		<input class="form-control"
 		       formControlName="docNumber"
 		       placeholder="N° de documento"
-		       [class.is-invalid]="docNumber.invalid && (docNumber.touched || showErrors)">
+		       [type]="docInputType"
+		       [maxLength]="docInputMaxLength"
+		       [class.is-invalid]="docNumber.invalid && (docNumber.touched || showErrors || showDocErrors)">
 	</div>
 	<div class="col-auto">
-		<button type="button" class="btn-agencias activa w-auto p-2">
+		<button type="button" class="btn-agencias activa w-auto p-2" (click)="onSearchByDocument()">
 			<img src="assets/svg/search.svg" alt="Buscar">
 		</button>
 	</div>
