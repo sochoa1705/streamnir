@@ -108,7 +108,7 @@
 							></app-select>
 							<app-select
 								[placeholder]="'Mes'"
-								[listItems]="arrayMonths"
+								[listItems]="monthsFilter"
 								[name]="'month'"
 								[labelError]="monthField.touched && monthField!.hasError('required') ? 'Mes inválido' : ''"
 								[value]="monthField.value"

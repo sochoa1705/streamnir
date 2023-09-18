@@ -9,5 +9,6 @@ export class SearchFiltersService {
     isResetFilterBaggage = new EventEmitter();
     isResetFilterAirlines = new EventEmitter();
     isResetFilterScales = new EventEmitter();
+    isFinishGDS = new EventEmitter()
 
 }

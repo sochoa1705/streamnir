@@ -44,6 +44,7 @@ export class FiltersComponent implements OnInit {
   formObject = {
 		currency: new FormControl('0'),
 	};
+  hiddenBaggage=false;
 
   constructor() { 
     this.formGroup = new FormGroup(this.formObject);

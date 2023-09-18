@@ -57,6 +57,7 @@ export class CardPassengerComponent implements OnInit {
 	active = true; 
 	regexNroDocument!: RegExp;
 	daysFilter: Item[] = [];
+	monthsFilter:Item[] = [];
 	validForm = false;
 	numberDocument=0;
 	constructor() {
@@ -66,6 +67,7 @@ export class CardPassengerComponent implements OnInit {
 	ngOnInit() {
 		this.typeField.setValue(this.type);
 		this.daysFilter = this.arrayDays;
+		this.monthsFilter = this.arrayMonths;
 		this.setRegex();
 		this.onChangesForm();
 	}
@@ -147,6 +149,17 @@ export class CardPassengerComponent implements OnInit {
 			if (years >= 2) {
 				this.dayField.setValue('');
 				this.dayField.markAsTouched();
+			}
+		}
+
+		if(this.type== 'INF'){
+			const currentDate = new Date();
+        	const currentYear =  currentDate.getFullYear();
+			const currentMonth =  currentDate.getMonth() + 1;
+			this.monthsFilter = Number(year) == currentYear ?  this.arrayMonths.filter(item=>item.value<=currentMonth):this.arrayMonths;
+			if(Number(year) == currentYear && Number(month) > currentMonth){
+				this.monthField.setValue('');
+				this.monthField.markAsTouched();
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-<div class="dropdown__filter" *ngIf="!showLoader">
+<div class="dropdown__filter" *ngIf="!showLoader && !notFilter">
     <div class="dropdown__filter__header" (click)="dropdownActive=!dropdownActive">
         <h4>{{title}}</h4>
         <img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />

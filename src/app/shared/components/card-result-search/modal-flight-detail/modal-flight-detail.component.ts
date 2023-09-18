@@ -18,6 +18,11 @@ import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.serv
 	templateUrl: './modal-flight-detail.component.html',
 	styleUrls: ['./modal-flight-detail.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	host: {
+		'[style.display]': '"flex"',
+		'[style.flex-direction]': '"column"',
+		'[style.overflow]': '"auto"'
+	}
 })
 export class ModalFlightDetailComponent implements OnInit {
 	@Input() flight: Group;
