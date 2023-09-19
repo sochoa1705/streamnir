@@ -34,7 +34,7 @@ export const environment = {
   reCaptchaPublicKey: '6Lc9CbsmAAAAANpAUZ5Ubxl2s25BwmhZVgp7Yrev',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
-  //urlNmviajes: "http://localhost:12639/v1/api",
+  urlMeta: "https://meta.nmviajes.com",
 
   urlLibro: "https://servicio.nmviajes.com:9443/libroreclamacion",
   urlApiTickets: "https://servicios.expertiatravel.com/widgetactividades",

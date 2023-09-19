@@ -1,0 +1,74 @@
+section.principal-banner {
+	img.img-fluid {
+		margin-right: -5rem;
+		margin-left: -5rem;
+		//noinspection CssInvalidPropertyValue
+		max-width: -webkit-fill-available !important;
+
+		@media (min-width: 768px) {
+			max-height: 45vh;
+			width: 100vw;
+			object-fit: cover;
+			margin-right: 0;
+			margin-left: 0;
+			max-width: 100% !important;
+		}
+	}
+}
+
+h6 {
+	color: #B50A27;
+}
+
+.btn-agencias.activa {
+	background-color: #B50A27;
+}
+
+.form-control, .form-select {
+	border: 1px solid #e4e5e7;
+	border-radius: 5px;
+	height: 45px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+	background-color: #DF0C30FF;
+}
+
+::ng-deep .mat-checkbox {
+	label {
+		padding-bottom: 0 !important;
+	}
+}
+
+hr {
+	color: #e4e5e7;
+	opacity: 1;
+}
+
+.x-small {
+	font-size: .75rem !important;
+	font-family: Open Sans, sans-serif !important;
+	margin-bottom: .25rem !important;
+
+	@media (min-width: 1441px) {
+		font-size: .875rem !important;
+		margin-bottom: .5rem !important;
+	}
+}
+
+.card {
+	.card-header {
+		border-radius: 10px 10px 0 0;
+	}
+
+	ul {
+		list-style: none;
+		padding-left: 0;
+
+		li::before {
+			content: "-";
+			margin-right: 5px;
+		}
+	}
+}
