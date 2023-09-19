@@ -48,7 +48,7 @@ export class MailingService {
 			},
 			emailBlacklisted: false,
 			smsBlacklisted: false,
-			listIds: [ 7 ],
+			listIds: [ 33 ],
 			updateEnabled: false,
 			smtpBlacklistSender: [
 				'5l5on@XCyTwNVlbFYMuZJRtYQifJ.mvm',
