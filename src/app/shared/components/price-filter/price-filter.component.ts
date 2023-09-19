@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Options } from 'ng5-slider';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
+
 
 @Component({
 	selector: 'app-price-filter',
 	templateUrl: './price-filter.component.html',
 	styleUrls: ['./price-filter.component.scss']
 })
-export class PriceFilterComponent implements OnInit, OnChanges {
+export class PriceFilterComponent implements OnInit, OnChanges{
 	constructor(private _searchFiltersService: SearchFiltersService) {
 		this._searchFiltersService.isResetFilterPrice.subscribe({
 			next: () => {
@@ -18,6 +19,7 @@ export class PriceFilterComponent implements OnInit, OnChanges {
 			}
 		});
 	}
+	
 	@Input() currency = 'USD';
 	@Input() minPrice = 0;
 	@Input() maxPrice = 0;
@@ -27,21 +29,24 @@ export class PriceFilterComponent implements OnInit, OnChanges {
 	dropdownActive = true;
 	value: number = 0;
 	highValue: number = 0;
+	hidden=false;
 	options: Options = {
 		floor: 0,
 		ceil: 0,
-		step: 10
+		step: 10,
+		enforceRange:false,
+		enforceStep:false
 	};
 
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['minPrice']) {
-			this.value = this.minPrice;
 			this.options.floor = this.minPrice;
+			this.value = this.minPrice;
 		}
 
 		if (changes['maxPrice']) {
+			this.options.ceil =  this.maxPrice;
 			this.highValue = this.maxPrice;
-			this.options.ceil = this.maxPrice;
 		}
 	}
 

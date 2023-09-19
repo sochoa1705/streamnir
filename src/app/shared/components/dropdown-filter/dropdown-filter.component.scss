@@ -43,12 +43,23 @@
             cursor: pointer;
             img {
                 margin-right: 12px;
+                width: 18px;
+                height: 24px;
             }
             span {
                 @extend .paragraph;
                 font-weight: 400;
                 &.count {
                     color: colors.$gris-600;
+                }
+            }
+            &.disabled{
+                cursor: default;
+                span {
+                    color:colors.$gris-600;
+                    &.count {
+                       visibility: hidden
+                    }
                 }
             }
         }

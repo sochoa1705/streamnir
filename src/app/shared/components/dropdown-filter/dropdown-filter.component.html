@@ -1,4 +1,4 @@
-<div class="dropdown__filter" *ngIf="!showLoader && !notFilter">
+<div class="dropdown__filter" *ngIf="!showLoader">
     <div class="dropdown__filter__header" (click)="dropdownActive=!dropdownActive">
         <h4>{{title}}</h4>
         <img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
@@ -8,8 +8,8 @@
             <span class="link" (click)="clickSelectedAirlines(false)">Seleccionar todo</span><span>|</span><span class="link" (click)="clickSelectedAirlines(true)">Borrar todo</span>
         </div>
         <ng-container *ngFor="let option of (isAirlines ? listOptionsAirlines : listOptions)">
-            <div class="dropdown__filter__body__option" (click)="clickOption(option)" *ngIf="option.total > 0">
-                <img [src]="option.active ? 'assets/svg/checkbox-fill.svg' : './assets/svg/checkbox-box.svg'" />
+            <div class="dropdown__filter__body__option" (click)="clickOption(option)" [@fadeInOut] [class.disabled]="option.total==0">
+                <img [src]="option.total==0 ? './assets/svg/checkbox-dis.svg' : option.active ? './assets/svg/checkbox-fill.svg' : './assets/svg/checkbox-box.svg'" />
                 <span>{{option.name}} <span class="count">({{option.total}})</span></span>
             </div>
         </ng-container>
