@@ -24,6 +24,8 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
 	@Input() currency = 'USD';
 	@Input() sortBy = 0;
 	@Input() filters:Filter;
+	@Input() idCheap:string;
+	@Input() idBest:string;
 
 	constructor(private _modalService: NgbModal) {}
 	indexSegmentDeparture: number[];

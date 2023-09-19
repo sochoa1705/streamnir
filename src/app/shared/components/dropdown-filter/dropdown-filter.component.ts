@@ -40,21 +40,30 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 	showLoader=true;
 	notFilter=false;
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.listOptions=[];
+		this.listOptionsAirlines=[];
+	}
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['listOptions'] && !this.isShowMoreAirlines) {
 			if(changes['listOptions'].currentValue.length > 8){
 				this.listOptionsAirlines = this.listOptions.slice(0, 8);
 				this.countRestAirlines = this.listOptions.filter((item) => item.total > 0).length - 8;
-				this.showLoader=this.listOptions.some(item=>item.total > 0) ? false : true;
+				if(this.listOptions.some(item=>item.total > 0)){
+					this.showLoader=false;
+				}
 			}else{
 				this.listOptionsAirlines = this.listOptions;
-				this.showLoader=this.listOptions.some(item=>item.total > 0) ? false : true;
+				if(this.listOptions.some(item=>item.total > 0)){
+					this.showLoader=false;
+				}
 			}
 		} else {
 			this.listOptionsAirlines = this.listOptions;
-			this.showLoader=this.listOptions.some(item=>item.total > 0) ? false : true;
+			if(this.listOptions.some(item=>item.total > 0)){
+				this.showLoader=false;
+			}
 		}
 	}
 	clickOption(item: Item) {

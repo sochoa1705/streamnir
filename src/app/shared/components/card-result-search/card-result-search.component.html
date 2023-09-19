@@ -1,80 +1,182 @@
-<div class="card__result" *ngIf="flight">
-	<div class="card__result__flights">
-		<!--------------Section Departure (pueden ser varios | multivuelo)------------------->
-		<ng-container *ngFor="let departure of flight.departure; index as i">
-			<div class="card__result__flights__section">
+<section *ngIf="flight">
+	<div class="tags" *ngIf="idCheap==flight.id || idBest==flight.id">
+		<img *ngIf="idCheap==flight.id" src="./assets/svg/badge_best.svg" alt="mas_barato" >
+		<img *ngIf="idBest==flight.id" src="./assets/svg/badge_cheap.svg" alt="mejor_opcion">
+	</div>
+	<div class="card__result">
+		<div class="card__result__flights">
+			<!--------------Section Departure (pueden ser varios | multivuelo)------------------->
+			<ng-container *ngFor="let departure of flight.departure; index as i">
+				<div class="card__result__flights__section">
+					<div class="card__result__flights__section__header">
+						<img
+							class="img"
+							[src]="departure.segments[indexSegmentDeparture[i]].flightSegments[0].marketingAirline.imageUrl"
+							onerror="this.src='https://www.nmviajes.com/resources/images/airlines/MULT.gif'"
+						/>
+						<h4 class="fly">{{ departure.originCity.code }}</h4>
+						<img class="arrow" src="./assets/result-search/arrow.svg" />
+						<h4 class="fly2">{{ departure.destinationCity.code }}</h4>
+						<div class="date">
+							{{ (departure.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}
+						</div>
+					</div>
+					<div class="card__result__flights__section__segment" [hidden]="showHoursDeparture">
+						<div class="card__result__flights__section__segment__hours">
+							<span class="hour"
+								>{{ departure.segments[indexSegmentDeparture[i]].startDateTime | date: 'HH:mm' }} -
+								{{ departure.segments[indexSegmentDeparture[i]].endDateTime | date: 'HH:mm' }}
+								<span
+									class="plus"
+									*ngIf="
+										(departure.segments[indexSegmentDeparture[i]].startDateTime
+											| getDays: departure.segments[indexSegmentDeparture[i]].endDateTime) > 0
+									"
+									>+
+									{{
+										departure.segments[indexSegmentDeparture[i]].startDateTime
+											| getDays: departure.segments[indexSegmentDeparture[i]].endDateTime
+									}}</span
+								></span
+							>
+							<span class="duration">{{
+								departure.segments[indexSegmentDeparture[i]].flightDuration | flightDuration
+							}}</span>
+						</div>
+	
+						<ng-container [ngSwitch]="departure.segments[indexSegmentDeparture[i]].stops">
+							<span class="scala" *ngSwitchCase="0">Directo</span>
+							<span class="scala" *ngSwitchCase="1">1 escala</span>
+							<span class="scala" *ngSwitchDefault>{{
+								departure.segments[indexSegmentDeparture[i]].stops + ' escalas'
+							}}</span>
+						</ng-container>
+	
+						<div class="card__result__flights__section__segment__bags">
+							<img src="./assets/svg/backpack.svg" />
+	
+							<img [src]="(departure.segments[indexSegmentDeparture[i]].equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
+							  <img [src]="(departure.segments[indexSegmentDeparture[i]].equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
+	
+						</div>
+					</div>
+	
+					<ng-container *ngIf="departure.segments.length > 1">
+						<!--------Others options hours-------->
+						<div class="card__result__flights__section__options" [hidden]="!showHoursDeparture">
+							<div
+								class="card__result__flights__section__segment no-margin"
+								*ngFor="let segment of departure.segments; index as i2"
+							>
+								<div class="card__result__flights__section__segment__hours">
+									<img
+										[src]="
+											i2 == indexSegmentDeparture[i] ? 'assets/svg/radio-check.svg' : './assets/svg/radio-circle.svg'
+										"
+										(click)="changeSegmentDeparture(i, i2, segment.segmentId)"
+									/>
+									<span class="hour"
+										>{{ segment.startDateTime | date: 'HH:mm' }} - {{ segment.endDateTime | date: 'HH:mm'
+										}}<span class="plus" *ngIf="(segment.startDateTime | getDays: segment.endDateTime) > 0">
+											+ {{ segment.startDateTime | getDays: segment.endDateTime }}</span
+										></span
+									>
+									<span class="duration">{{ segment.flightDuration | flightDuration }}</span>
+								</div>
+								<ng-container [ngSwitch]="segment.stops">
+									<span class="scala" *ngSwitchCase="0">Directo</span>
+									<span class="scala" *ngSwitchCase="1">1 escala</span>
+									<span class="scala" *ngSwitchDefault>{{ segment.stops + ' escalas' }}</span>
+								</ng-container>
+								<div class="card__result__flights__section__segment__bags">
+									<img src="./assets/svg/backpack.svg" />
+									<img
+										[src]="segment.equipaje.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg'"
+									/>
+									<img
+										[src]="
+											segment.equipaje.piezas > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg'
+										"
+									/>
+								</div>
+							</div>
+						</div>
+						<!--------End Others options hours-------->
+						<div class="card__result__flights__section__more" (click)="showHoursDeparture = !showHoursDeparture">
+							<span
+								><span>{{ !showHoursDeparture ? 'Ver más horarios' : 'Ver menos horarios' }}</span></span
+							>
+							<img
+								[src]="!showHoursDeparture ? './assets/result-search/dropdown.svg' : './assets/result-search/dropup.svg'"
+								alt="v"
+							/>
+						</div>
+					</ng-container>
+				</div>
+				<div class="card__result__flights__line" *ngIf="i < flight.departure.length - 1"></div>
+			</ng-container>
+			<!---------------------Section Return--------------------------------------------------->
+			<div class="card__result__flights__section" *ngIf="flight.returns as returns">
+				<div class="card__result__flights__line"></div>
 				<div class="card__result__flights__section__header">
 					<img
 						class="img"
-						[src]="departure.segments[indexSegmentDeparture[i]].flightSegments[0].marketingAirline.imageUrl"
+						[src]="returns.segments[indexSegmentReturn].flightSegments[0].marketingAirline.imageUrl"
 						onerror="this.src='https://www.nmviajes.com/resources/images/airlines/MULT.gif'"
 					/>
-					<h4 class="fly">{{ departure.originCity.code }}</h4>
+					<h4 class="fly">{{ returns.originCity.code }}</h4>
 					<img class="arrow" src="./assets/result-search/arrow.svg" />
-					<h4 class="fly2">{{ departure.destinationCity.code }}</h4>
-					<div class="date">
-						{{ (departure.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}
-					</div>
+					<h4 class="fly2">{{ returns.destinationCity.code }}</h4>
+					<div class="date">{{ (returns.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</div>
 				</div>
-				<div class="card__result__flights__section__segment" [hidden]="showHoursDeparture">
+	
+				<div class="card__result__flights__section__segment" [hidden]="showHoursReturn">
 					<div class="card__result__flights__section__segment__hours">
 						<span class="hour"
-							>{{ departure.segments[indexSegmentDeparture[i]].startDateTime | date: 'HH:mm' }} -
-							{{ departure.segments[indexSegmentDeparture[i]].endDateTime | date: 'HH:mm' }}
+							>{{ returns.segments[indexSegmentReturn].startDateTime | date: 'HH:mm' }} -
+							{{ returns.segments[indexSegmentReturn].endDateTime | date: 'HH:mm' }}
 							<span
 								class="plus"
 								*ngIf="
-									(departure.segments[indexSegmentDeparture[i]].startDateTime
-										| getDays: departure.segments[indexSegmentDeparture[i]].endDateTime) > 0
+									(returns.segments[indexSegmentReturn].startDateTime
+										| getDays: returns.segments[indexSegmentReturn].endDateTime) > 0
 								"
 								>+
 								{{
-									departure.segments[indexSegmentDeparture[i]].startDateTime
-										| getDays: departure.segments[indexSegmentDeparture[i]].endDateTime
+									returns.segments[indexSegmentReturn].startDateTime
+										| getDays: returns.segments[indexSegmentReturn].endDateTime
 								}}</span
-							></span
-						>
-						<span class="duration">{{
-							departure.segments[indexSegmentDeparture[i]].flightDuration | flightDuration
-						}}</span>
+							>
+						</span>
+						<span class="duration">{{ returns.segments[indexSegmentReturn].flightDuration | flightDuration }}</span>
 					</div>
-
-					<ng-container [ngSwitch]="departure.segments[indexSegmentDeparture[i]].stops">
+					<ng-container [ngSwitch]="returns.segments[indexSegmentReturn].stops">
 						<span class="scala" *ngSwitchCase="0">Directo</span>
 						<span class="scala" *ngSwitchCase="1">1 escala</span>
-						<span class="scala" *ngSwitchDefault>{{
-							departure.segments[indexSegmentDeparture[i]].stops + ' escalas'
-						}}</span>
+						<span class="scala" *ngSwitchDefault>{{ returns.segments[indexSegmentReturn].stops + ' escalas' }}</span>
 					</ng-container>
-
+					
 					<div class="card__result__flights__section__segment__bags">
 						<img src="./assets/svg/backpack.svg" />
-
-						<img [src]="(departure.segments[indexSegmentDeparture[i]].equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
-  						<img [src]="(departure.segments[indexSegmentDeparture[i]].equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
-
+						<img [src]="(returns.segments[indexSegmentReturn].equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
+						  <img [src]="(returns.segments[indexSegmentReturn].equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
 					</div>
 				</div>
-
-				<ng-container *ngIf="departure.segments.length > 1">
+				<ng-container *ngIf="returns.segments.length > 1">
 					<!--------Others options hours-------->
-					<div class="card__result__flights__section__options" [hidden]="!showHoursDeparture">
+					<div class="card__result__flights__section__options" [hidden]="!showHoursReturn">
 						<div
 							class="card__result__flights__section__segment no-margin"
-							*ngFor="let segment of departure.segments; index as i2"
+							*ngFor="let segment of returns.segments; index as i"
 						>
 							<div class="card__result__flights__section__segment__hours">
 								<img
-									[src]="
-										i2 == indexSegmentDeparture[i] ? 'assets/svg/radio-check.svg' : './assets/svg/radio-circle.svg'
-									"
-									(click)="changeSegmentDeparture(i, i2, segment.segmentId)"
+									[src]="i == indexSegmentReturn ? './assets/svg/radio-check.svg' : './assets/svg/radio-circle.svg'"
+									(click)="changeSegmentReturn(i, segment.segmentId)"
 								/>
 								<span class="hour"
 									>{{ segment.startDateTime | date: 'HH:mm' }} - {{ segment.endDateTime | date: 'HH:mm'
-									}}<span class="plus" *ngIf="(segment.startDateTime | getDays: segment.endDateTime) > 0">
-										+ {{ segment.startDateTime | getDays: segment.endDateTime }}</span
-									></span
+									}}<span class="plus" *ngIf="(segment.startDateTime | getDays: segment.endDateTime) > 0">+ {{segment.startDateTime | getDays: segment.endDateTime}}</span></span
 								>
 								<span class="duration">{{ segment.flightDuration | flightDuration }}</span>
 							</div>
@@ -85,159 +187,64 @@
 							</ng-container>
 							<div class="card__result__flights__section__segment__bags">
 								<img src="./assets/svg/backpack.svg" />
-								<img
-									[src]="segment.equipaje.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg'"
-								/>
-								<img
-									[src]="
-										segment.equipaje.piezas > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg'
-									"
-								/>
+								<img [src]="(segment.equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
+								  <img [src]="(segment.equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
 							</div>
 						</div>
 					</div>
 					<!--------End Others options hours-------->
-					<div class="card__result__flights__section__more" (click)="showHoursDeparture = !showHoursDeparture">
-						<span
-							><span>{{ !showHoursDeparture ? 'Ver más horarios' : 'Ver menos horarios' }}</span></span
-						>
+					<div class="card__result__flights__section__more" (click)="showHoursReturn = !showHoursReturn">
+						<span>{{ !showHoursReturn ? 'Ver más horarios' : 'Ver menos horarios' }}</span>
 						<img
-							[src]="!showHoursDeparture ? './assets/result-search/dropdown.svg' : './assets/result-search/dropup.svg'"
+							[src]="!showHoursReturn ? './assets/result-search/dropdown.svg' : './assets/result-search/dropup.svg'"
 							alt="v"
 						/>
 					</div>
 				</ng-container>
 			</div>
-			<div class="card__result__flights__line" *ngIf="i < flight.departure.length - 1"></div>
-		</ng-container>
-		<!---------------------Section Return--------------------------------------------------->
-		<div class="card__result__flights__section" *ngIf="flight.returns as returns">
-			<div class="card__result__flights__line"></div>
-			<div class="card__result__flights__section__header">
-				<img
-					class="img"
-					[src]="returns.segments[indexSegmentReturn].flightSegments[0].marketingAirline.imageUrl"
-					onerror="this.src='https://www.nmviajes.com/resources/images/airlines/MULT.gif'"
-				/>
-				<h4 class="fly">{{ returns.originCity.code }}</h4>
-				<img class="arrow" src="./assets/result-search/arrow.svg" />
-				<h4 class="fly2">{{ returns.destinationCity.code }}</h4>
-				<div class="date">{{ (returns.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</div>
-			</div>
-
-			<div class="card__result__flights__section__segment" [hidden]="showHoursReturn">
-				<div class="card__result__flights__section__segment__hours">
-					<span class="hour"
-						>{{ returns.segments[indexSegmentReturn].startDateTime | date: 'HH:mm' }} -
-						{{ returns.segments[indexSegmentReturn].endDateTime | date: 'HH:mm' }}
-						<span
-							class="plus"
-							*ngIf="
-								(returns.segments[indexSegmentReturn].startDateTime
-									| getDays: returns.segments[indexSegmentReturn].endDateTime) > 0
-							"
-							>+
-							{{
-								returns.segments[indexSegmentReturn].startDateTime
-									| getDays: returns.segments[indexSegmentReturn].endDateTime
-							}}</span
+		</div>
+		<!-------------------Section Pricing-------------------->
+		<div class="card__result__price">
+			<ng-container *ngIf="flight.detailPricing">
+				<h4><span>{{currency}}</span> {{ flight.detailPricing.totalPay | changeCurrency:currency | number: '1.2-2' }}</h4>
+				<div class="card__result__price__detail">
+					<div class="card__result__price__detail__row">
+						<span>{{ flight.detailPricing.totalADT }} {{ flight.detailPricing.totalADT > 1 ? 'ADULTOS' : 'ADULTO' }}</span>
+						<span class="total"
+							><span class="usd">{{currency}}</span>{{ flight.detailPricing.baseFareADT * flight.detailPricing.totalADT | changeCurrency:currency | number: '1.2-2' }}
+						</span>
+					</div>
+	
+					<div class="card__result__price__detail__row" *ngIf="flight.detailPricing.totalCNN > 0">
+						<span>{{ flight.detailPricing.totalCNN }} {{ flight.detailPricing.totalCNN > 1 ? 'NIÑOS' : 'NIÑO' }}</span>
+						<span class="total"
+							><span class="usd">{{currency}}</span>{{ flight.detailPricing.baseFareCNN * flight.detailPricing.totalCNN | changeCurrency:currency | number: '1.2-2' }}
+						</span>
+					</div>
+	
+					<div class="card__result__price__detail__row" *ngIf="flight.detailPricing.totalINF > 0">
+						<span>{{ flight.detailPricing.totalINF }} {{ flight.detailPricing.totalINF > 1 ? 'INFANTES' : 'INFANTE' }}</span>
+						<span class="total"
+							><span class="usd">{{currency}}</span>{{ flight.detailPricing.baseFareINF * flight.detailPricing.totalINF | changeCurrency:currency | number: '1.2-2' }}
+						</span>
+					</div>
+	
+					<div class="card__result__price__detail__row">
+						<span>IMPUESTOS</span>
+						<span class="total"><span class="usd">{{currency}}</span>{{ flight.detailPricing.taxes | changeCurrency:currency | number: '1.2-2' }}</span>
+					</div>
+					<div class="card__result__price__detail__row">
+						<span>CARGOS</span>
+						<span class="total"
+							><span class="usd">{{currency}}</span>{{ flight.detailPricing.feeNMV + flight.detailPricing.feePTA | changeCurrency:currency | number: '1.2-2' }}</span
 						>
-					</span>
-					<span class="duration">{{ returns.segments[indexSegmentReturn].flightDuration | flightDuration }}</span>
-				</div>
-				<ng-container [ngSwitch]="returns.segments[indexSegmentReturn].stops">
-					<span class="scala" *ngSwitchCase="0">Directo</span>
-					<span class="scala" *ngSwitchCase="1">1 escala</span>
-					<span class="scala" *ngSwitchDefault>{{ returns.segments[indexSegmentReturn].stops + ' escalas' }}</span>
-				</ng-container>
-				
-				<div class="card__result__flights__section__segment__bags">
-					<img src="./assets/svg/backpack.svg" />
-					<img [src]="(returns.segments[indexSegmentReturn].equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
-  					<img [src]="(returns.segments[indexSegmentReturn].equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
-				</div>
-			</div>
-			<ng-container *ngIf="returns.segments.length > 1">
-				<!--------Others options hours-------->
-				<div class="card__result__flights__section__options" [hidden]="!showHoursReturn">
-					<div
-						class="card__result__flights__section__segment no-margin"
-						*ngFor="let segment of returns.segments; index as i"
-					>
-						<div class="card__result__flights__section__segment__hours">
-							<img
-								[src]="i == indexSegmentReturn ? './assets/svg/radio-check.svg' : './assets/svg/radio-circle.svg'"
-								(click)="changeSegmentReturn(i, segment.segmentId)"
-							/>
-							<span class="hour"
-								>{{ segment.startDateTime | date: 'HH:mm' }} - {{ segment.endDateTime | date: 'HH:mm'
-								}}<span class="plus" *ngIf="(segment.startDateTime | getDays: segment.endDateTime) > 0">+ {{segment.startDateTime | getDays: segment.endDateTime}}</span></span
-							>
-							<span class="duration">{{ segment.flightDuration | flightDuration }}</span>
-						</div>
-						<ng-container [ngSwitch]="segment.stops">
-							<span class="scala" *ngSwitchCase="0">Directo</span>
-							<span class="scala" *ngSwitchCase="1">1 escala</span>
-							<span class="scala" *ngSwitchDefault>{{ segment.stops + ' escalas' }}</span>
-						</ng-container>
-						<div class="card__result__flights__section__segment__bags">
-							<img src="./assets/svg/backpack.svg" />
-							<img [src]="(segment.equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
-							  <img [src]="(segment.equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
-						</div>
 					</div>
 				</div>
-				<!--------End Others options hours-------->
-				<div class="card__result__flights__section__more" (click)="showHoursReturn = !showHoursReturn">
-					<span>{{ !showHoursReturn ? 'Ver más horarios' : 'Ver menos horarios' }}</span>
-					<img
-						[src]="!showHoursReturn ? './assets/result-search/dropdown.svg' : './assets/result-search/dropup.svg'"
-						alt="v"
-					/>
+				<div class="card__result__price__button">
+					<app-button [text]="'Ver Detalle'" [w100]="true" (onClick)="openModalDetail()"></app-button>
 				</div>
 			</ng-container>
 		</div>
 	</div>
-	<!-------------------Section Pricing-------------------->
-	<div class="card__result__price">
-		<ng-container *ngIf="flight.detailPricing">
-			<h4><span>{{currency}}</span> {{ flight.detailPricing.totalPay | changeCurrency:currency | number: '1.2-2' }}</h4>
-			<div class="card__result__price__detail">
-				<div class="card__result__price__detail__row">
-					<span>{{ flight.detailPricing.totalADT }} {{ flight.detailPricing.totalADT > 1 ? 'ADULTOS' : 'ADULTO' }}</span>
-					<span class="total"
-						><span class="usd">{{currency}}</span>{{ flight.detailPricing.baseFareADT * flight.detailPricing.totalADT | changeCurrency:currency | number: '1.2-2' }}
-					</span>
-				</div>
+</section>
 
-				<div class="card__result__price__detail__row" *ngIf="flight.detailPricing.totalCNN > 0">
-					<span>{{ flight.detailPricing.totalCNN }} {{ flight.detailPricing.totalCNN > 1 ? 'NIÑOS' : 'NIÑO' }}</span>
-					<span class="total"
-						><span class="usd">{{currency}}</span>{{ flight.detailPricing.baseFareCNN * flight.detailPricing.totalCNN | changeCurrency:currency | number: '1.2-2' }}
-					</span>
-				</div>
-
-				<div class="card__result__price__detail__row" *ngIf="flight.detailPricing.totalINF > 0">
-					<span>{{ flight.detailPricing.totalINF }} {{ flight.detailPricing.totalINF > 1 ? 'INFANTES' : 'INFANTE' }}</span>
-					<span class="total"
-						><span class="usd">{{currency}}</span>{{ flight.detailPricing.baseFareINF * flight.detailPricing.totalINF | changeCurrency:currency | number: '1.2-2' }}
-					</span>
-				</div>
-
-				<div class="card__result__price__detail__row">
-					<span>IMPUESTOS</span>
-					<span class="total"><span class="usd">{{currency}}</span>{{ flight.detailPricing.taxes | changeCurrency:currency | number: '1.2-2' }}</span>
-				</div>
-				<div class="card__result__price__detail__row">
-					<span>CARGOS</span>
-					<span class="total"
-						><span class="usd">{{currency}}</span>{{ flight.detailPricing.feeNMV + flight.detailPricing.feePTA | changeCurrency:currency | number: '1.2-2' }}</span
-					>
-				</div>
-			</div>
-			<div class="card__result__price__button">
-				<app-button [text]="'Ver Detalle'" [w100]="true" (onClick)="openModalDetail()"></app-button>
-			</div>
-		</ng-container>
-	</div>
-</div>

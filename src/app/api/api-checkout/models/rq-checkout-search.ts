@@ -30,7 +30,9 @@ export interface Group {
 	orderByScales?:number;
 	dateOrder?:DateOrder[];
 	durationDeparture?:number;
-	durationReturn?:number
+	durationReturn?:number;
+	maxWaitingTimeDep?:number;
+	maxWaitingTimeRet?:number;
 }
 
 export interface DateOrder {
@@ -77,7 +79,8 @@ export interface Segment {
 	flightDuration: string;
 	equipaje: Equipaje;
 	flightSegments: FlightSegment[];
-	flightDurationMin?:number
+	flightDurationMin?:number;
+	waitingTime?:number;
 }
 
 export interface Equipaje {
@@ -170,7 +173,8 @@ export interface Segment2 {
 	flightDuration: string;
 	equipaje: Equipaje2;
 	flightSegments: FlightSegment2[];
-	flightDurationMin?:number
+	flightDurationMin?:number;
+	waitingTime?:number;
 }
 
 export interface Equipaje2 {
