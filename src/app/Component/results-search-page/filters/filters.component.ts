@@ -12,7 +12,11 @@ interface IFilterDuration{
 	minDurationDeparture:number,
 	maxDurationDeparture:number,
 	minDurationReturn:number,
-	maxDurationReturn:number
+	maxDurationReturn:number,
+  waitingTimeDep:number,
+	waitingTimeRet:number,
+  minWaitingTimeDep:number,
+	minWaitingTimeRet:number
 }
 
 @Component({
@@ -37,6 +41,8 @@ export class FiltersComponent implements OnInit {
   @Output() changeExchangeRate=new EventEmitter();
   @Output() filterByPrice=new EventEmitter();
   @Output() filterByDuration = new EventEmitter();
+  @Output() filterByDurationScale = new EventEmitter();
+  @Output() resetFilterByDuration = new EventEmitter();
 
   formGroup: FormGroup;
   currency='USD'
@@ -82,6 +88,14 @@ export class FiltersComponent implements OnInit {
 
   filterDurationRange($event:any){
     this.filterByDuration.emit($event);
+  }
+
+  filterDurationScale($event:any){
+    this.filterByDurationScale.emit($event);
+  }
+
+  resetFilterDuration(){
+    this.resetFilterByDuration.emit();
   }
 
   get currencyField(): AbstractControl {

@@ -47,21 +47,38 @@
 				<span>{{highValueDurationRet | minutesFormat}}</span>
 			</div>
 		</section>
-		<section class="section-scale">
+		<section class="section-scale"  *ngIf="isFilterDeparture">
 			<span class="dropdown__filter__body__name">Escala</span>
 			<div class="dropdown__filter__body__slider">
 				<ng5-slider
-					[(value)]="valueScale"
-					[(highValue)]="highValueScale"
-					[options]="optionsScale"
-					(userChangeEnd)="filterScale($event)"
+					[(value)]="valueScaleDep"
+					[(highValue)]="highValueScaleDep"
+					[options]="optionsScaleDep"
+					(userChangeEnd)="filterScale($event,true)"
 				></ng5-slider>
 			</div>
 			<div class="dropdown__filter__body__values">
-				<span>1h 20m</span>
-				<span>15h 26m</span>
+				<span>{{valueScaleDep | minutesFormat}}</span>
+				<span>{{highValueScaleDep | minutesFormat}}</span>
 			</div>
 		</section>
+
+		<section class="section-scale"  *ngIf="!isFilterDeparture && flightType==0">
+			<span class="dropdown__filter__body__name">Escala</span>
+			<div class="dropdown__filter__body__slider">
+				<ng5-slider
+					[(value)]="valueScaleRet"
+					[(highValue)]="highValueScaleRet"
+					[options]="optionsScaleRet"
+					(userChangeEnd)="filterScale($event, false)"
+				></ng5-slider>
+			</div>
+			<div class="dropdown__filter__body__values">
+				<span>{{valueScaleRet | minutesFormat}}</span>
+				<span>{{highValueScaleRet | minutesFormat}}</span>
+			</div>
+		</section>
+
 	</div>
 </div>
 

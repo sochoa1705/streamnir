@@ -21,6 +21,8 @@
 			[maxPrice]="maxPrice"
 			[isNotResult]="showNotResults"
 			[valuesFilterDuration]="valuesFilterDuration"
+			(resetFilterByDuration)="resetFilterByDuration()"
+			(filterByDurationScale)="filterByDurationScale($event)"
 		></app-filters>
 		<div class="container__page__results">
 			<app-sort-by
@@ -39,7 +41,7 @@
 			<ng-container *ngIf="dataFilterGroups.length > 0">
 				<div class="container__page__results__cards" *ngIf="dataGroupsPaginate.length > 0">
 					<ng-container *ngFor="let item of dataGroupsPaginate">
-						<app-card-result-search [flight]="item" [currency]="currency" [sortBy]="sortBy"></app-card-result-search>
+						<app-card-result-search [idCheap]="idCheap" [idBest]="idBest" [flight]="item" [currency]="currency" [sortBy]="sortBy"></app-card-result-search>
 					</ng-container>
 				</div>
 				<div class="container__page__results__button" *ngIf="dataGroupsPaginate.length !== dataFilterGroups.length">
