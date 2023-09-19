@@ -33,6 +33,7 @@ export class DurationFilterComponent implements OnInit, OnChanges {
   constructor(private _searchFiltersService: SearchFiltersService){
 		this._searchFiltersService.isResetFilterDuration.subscribe({
 			next: () => {
+        this.hidden=true;
         this.valueDurationDep = this.valuesFilterDuration.minDurationDeparture;
         this.optionsDurationDep.floor = this.valuesFilterDuration.minDurationDeparture;
         this.highValueDurationDep = this.valuesFilterDuration.maxDurationDeparture;
@@ -51,6 +52,9 @@ export class DurationFilterComponent implements OnInit, OnChanges {
         this.optionsScaleRet.floor = 0;
         this.optionsScaleDep.ceil = this.valuesFilterDuration.waitingTimeDep;
         this.optionsScaleRet.ceil = this.valuesFilterDuration.waitingTimeRet;
+        setTimeout(() => {
+          this.hidden=false;
+        }, 80);
 			}
 		});
 
@@ -142,9 +146,9 @@ export class DurationFilterComponent implements OnInit, OnChanges {
     this.optionsScaleDep.floor = 0;
     this.optionsScaleRet.floor = 0;
 
-    /*setTimeout(() => {
+    setTimeout(() => {
       this.hidden=false;
-    }, 100);*/
+    }, 80);
     
     const paramsSearch={...GlobalComponent.paramsSearch};
     if(Object.keys(paramsSearch).length !== 0){

@@ -3,7 +3,7 @@
 		<h4>Precio</h4>
 		<img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
 	</div>
-	<div class="dropdown__filter__body" *ngIf="dropdownActive">
+	<div class="dropdown__filter__body" *ngIf="dropdownActive && !hidden">
 		<ng-container>
 			<span class="dropdown__filter__body__reset" (click)="resetFilter()">Restablecer</span>
 			<div class="dropdown__filter__body__slider">

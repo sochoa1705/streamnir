@@ -3,7 +3,7 @@
 		<h4>Duración</h4>
 		<img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
 	</div>
-	<div class="dropdown__filter__body" *ngIf="dropdownActive">
+	<div class="dropdown__filter__body" *ngIf="dropdownActive && !hidden">
 		<span class="dropdown__filter__body__reset" (click)="resetFilter()">Restablecer</span>
 		<div class="dropdown__filter__body__actions" *ngIf="flightType==0">
 			<app-button

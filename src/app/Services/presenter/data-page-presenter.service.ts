@@ -142,7 +142,7 @@ export class DataPagePresenterService {
 
             id: 1,
             text: "Vuelos",
-            link: "vuelos"
+            link: "/vuelos"
           },
           {
 

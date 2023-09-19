@@ -18,6 +18,19 @@ export class PriceFilterComponent implements OnInit, OnChanges{
 				this.options.ceil = this.maxPrice;
 			}
 		});
+
+		this._searchFiltersService.isSetValuesPrices.subscribe({
+			next: (res:any) => {
+				this.hidden=true;
+				this.value = res.minPrice;
+				this.options.floor = res.minPrice;
+				this.highValue = res.maxPrice;
+				this.options.ceil = res.maxPrice;
+				setTimeout(() => {
+					this.hidden=false;
+				}, 80);
+			}
+		})
 	}
 	
 	@Input() currency = 'USD';
