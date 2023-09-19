@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TusDatosService } from '../../../../Services/tus-datos/tus-datos.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { GetTusDatos } from '../../../../Models/tus-datos/get-tus-datos.interface';
 
 @Component({
 	selector: 'app-passenger',
@@ -22,6 +23,8 @@ export class PassengerComponent {
 	showDocErrors = false;
 	docPrevValue: string;
 
+	isSearchLoading = false;
+
 	constructor(private formBuilder: FormBuilder,
 	            private tusDatosService: TusDatosService,
 	            public _snackBar: MatSnackBar) {
@@ -32,11 +35,11 @@ export class PassengerComponent {
 				Validators.required,
 				Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ ',-.]+$/)
 			])),
-			middleName: new FormControl('', Validators.compose([
+			lastName: new FormControl('', Validators.compose([
 				Validators.required,
 				Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ ',-.]+$/)
 			])),
-			lastName: new FormControl('', Validators.compose([
+			mLastName: new FormControl('', Validators.compose([
 				Validators.required,
 				Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ ',-.]+$/)
 			])),
@@ -48,7 +51,10 @@ export class PassengerComponent {
 				Validators.required,
 				Validators.email
 			])),
-			phone: new FormControl('', Validators.required)
+			phone: new FormControl('', Validators.compose([
+				Validators.required,
+				Validators.maxLength(15)
+			]))
 		});
 	}
 
@@ -86,23 +92,27 @@ export class PassengerComponent {
 			return;
 		}
 
+		this.showDocErrors = false;
+
 		if (this.docPrevValue === this.docNumber.value)
 			return;
 
+		this.isSearchLoading = true;
+
 		this.tusDatosService.search(this.docType.value, this.docNumber.value).subscribe({
-			next: (response: any) => {
+			next: (response: GetTusDatos) => {
 				if (response && response.resultados && response.resultados.length > 0) {
 					const result = response.resultados[0];
 					this.firstName.setValue(result.Nombres);
-					this.middleName.setValue(result.ApePaterno);
-					this.lastName.setValue(result.ApeMaterno);
+					this.lastName.setValue(result.ApePaterno);
+					this.mLastName.setValue(result.ApeMaterno);
 					this.birthDate.setValue(result.FechaNacimiento);
 					this.email.setValue(result.Email);
 					this.phone.setValue(result.Telefono);
 				} else {
 					this.firstName.reset();
-					this.middleName.reset();
 					this.lastName.reset();
+					this.mLastName.reset();
 					this.birthDate.reset();
 					this.email.reset();
 					this.phone.reset();
@@ -110,7 +120,9 @@ export class PassengerComponent {
 						duration: 5000
 					});
 				}
-			}
+			},
+			error: () => this.isSearchLoading = false,
+			complete: () => this.isSearchLoading = false
 		});
 		this.docPrevValue = this.docNumber.value;
 	}
@@ -155,12 +167,12 @@ export class PassengerComponent {
 		return this.form.controls['firstName'];
 	}
 
-	get middleName() {
-		return this.form.controls['middleName'];
-	}
-
 	get lastName() {
 		return this.form.controls['lastName'];
+	}
+
+	get mLastName() {
+		return this.form.controls['mLastName'];
 	}
 
 	get birthDate() {

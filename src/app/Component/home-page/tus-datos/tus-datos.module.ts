@@ -4,16 +4,19 @@ import { TusDatosComponent } from './tus-datos.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PassengerComponent } from './passenger/passenger.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SuccessDialogModule } from '../../../shared/components/success-dialog/success-dialog.module';
 
 @NgModule({
-  declarations: [
-    TusDatosComponent,
-    PassengerComponent
-  ],
+	declarations: [
+		TusDatosComponent,
+		PassengerComponent
+	],
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,
-		MatCheckboxModule
+		MatCheckboxModule,
+		SuccessDialogModule
 	]
 })
-export class TusDatosModule { }
+export class TusDatosModule {
+}

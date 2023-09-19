@@ -3,7 +3,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MailingService } from '../../../Services/mailing/mailing.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { SuccessDialogComponent } from '../../../shared/components/success-dialog/success-dialog.component';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -62,9 +62,11 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
 			this.mailingService.createContact(data).subscribe({
 				next: (response: any) => {
 					if (response && response.id) {
-						const modalRef = this.modalService.open(ConfirmationDialogComponent, {
+						const modalRef = this.modalService.open(SuccessDialogComponent, {
 							centered: true
 						});
+						modalRef.componentInstance.title = '¡Muchas gracias por suscribirte!';
+						modalRef.componentInstance.content = 'Te mantendremos al tanto de todas nuestras novedades.';
 						this.modalSubscription = modalRef.dismissed.subscribe(() => this.form.reset());
 					}
 				},

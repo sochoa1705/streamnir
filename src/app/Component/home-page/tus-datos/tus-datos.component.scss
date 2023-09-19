@@ -1,8 +1,18 @@
 section.principal-banner {
 	img.img-fluid {
-		max-height: 45vh;
-		width: 100vw;
-		object-fit: cover;
+		margin-right: -5rem;
+		margin-left: -5rem;
+		//noinspection CssInvalidPropertyValue
+		max-width: -webkit-fill-available !important;
+
+		@media (min-width: 768px) {
+			max-height: 45vh;
+			width: 100vw;
+			object-fit: cover;
+			margin-right: 0;
+			margin-left: 0;
+			max-width: 100% !important;
+		}
 	}
 }
 
