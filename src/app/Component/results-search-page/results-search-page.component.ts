@@ -51,10 +51,10 @@ interface IFilterDuration {
 	maxDurationDeparture: number;
 	minDurationReturn: number;
 	maxDurationReturn: number;
-	waitingTimeDep:number;
-	waitingTimeRet:number;
-	minWaitingTimeDep:number;
-	minWaitingTimeRet:number;
+	waitingTimeDep: number;
+	waitingTimeRet: number;
+	minWaitingTimeDep: number;
+	minWaitingTimeRet: number;
 }
 
 @Component({
@@ -117,12 +117,12 @@ export class ResultsSearchPageComponent implements OnInit {
 	saveModel: SaveModelVuelos;
 
 	flightType = 0;
-	idBest='0';
-	idCheap='0';
+	idBest = '0';
+	idCheap = '0';
 
 	ngOnInit() {
 		//this.resetData();
-		GlobalComponent.paramsSearch={}
+		GlobalComponent.paramsSearch = {};
 		this.dataBagFilter = dataBagFilterInit.map((item) => {
 			item.total = 0;
 			item.active = false;
@@ -130,7 +130,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		});
 		this.dataScaleFilter = dataScaleFilterInit.map((item) => {
 			item.total = 0;
-			item.active=false;
+			item.active = false;
 			return item;
 		});
 		this.dataBagTemp = [...this.dataBagFilter];
@@ -143,26 +143,24 @@ export class ResultsSearchPageComponent implements OnInit {
 			maxDurationDeparture: 0,
 			minDurationReturn: 0,
 			maxDurationReturn: 0,
-			waitingTimeDep:0,
-			waitingTimeRet:0,
-			minWaitingTimeDep:0,
-			minWaitingTimeRet:0,
+			waitingTimeDep: 0,
+			waitingTimeRet: 0,
+			minWaitingTimeDep: 0,
+			minWaitingTimeRet: 0
 		};
 
-		this.filters={
-			arrayAirline:[],
-			arrayBaggage:[],
-			arrayScales:[],
-			minPrice:0,
-			maxPrice:0,
-			isMultiticket:false,
-			isPrices:false,
+		this.filters = {
+			arrayAirline: [],
+			arrayBaggage: [],
+			arrayScales: [],
+			minPrice: 0,
+			maxPrice: 0,
+			isMultiticket: false,
+			isPrices: false,
 			isDurationDeparture: false,
 			isDurationReturn: false
-		}
+		};
 
-
-	
 		this.getToken();
 	}
 
@@ -333,7 +331,7 @@ export class ResultsSearchPageComponent implements OnInit {
 
 			const durationSegments: number[] = [];
 
-			item.departure.forEach((departure,indexDep) => {
+			item.departure.forEach((departure, indexDep) => {
 				let shortDuration = 0;
 				let longDuration = 0;
 				let waitingTime = 0;
@@ -353,13 +351,13 @@ export class ResultsSearchPageComponent implements OnInit {
 								: segment.flightDurationMin > longDuration
 								? segment.flightDurationMin
 								: longDuration;
-					    
+
 						waitingTime =
 							index == 0 ? segment.waitingTime : segment.waitingTime > waitingTime ? segment.waitingTime : waitingTime;
 					}
 				});
 				item.durationDeparture = longDuration;
-				item.maxWaitingTimeDep =  waitingTime;
+				item.maxWaitingTimeDep = waitingTime;
 				durationSegments.push(shortDuration);
 			});
 
@@ -496,7 +494,7 @@ export class ResultsSearchPageComponent implements OnInit {
 			duration: groupsSortByPrice[0].flightDurationProm || 0
 		};
 
-		this.idCheap=groupsSortByPrice[0].id;
+		this.idCheap = groupsSortByPrice[0].id;
 
 		const groupsSortByBest = this.orderByBestOption();
 
@@ -505,7 +503,7 @@ export class ResultsSearchPageComponent implements OnInit {
 			duration: groupsSortByBest[0].flightDurationProm || 0
 		};
 
-		this.idBest=groupsSortByBest[0].id;
+		this.idBest = groupsSortByBest[0].id;
 
 		const groupsSortByDuration = this.orderByDuration();
 
@@ -515,11 +513,13 @@ export class ResultsSearchPageComponent implements OnInit {
 		};
 	}
 
-	resetCounters(){
-		this.totalMultiticket=0;
-		this.dataAirlinesTemp.forEach(airline=>{
-			airline.total=0;
-		});
+	resetCounters(isResetAirlines: boolean) {
+		if (isResetAirlines) {
+			this.totalMultiticket = 0;
+			this.dataAirlinesTemp.forEach((airline) => {
+				airline.total = 0;
+			});
+		}
 		this.dataBagTemp = dataBagFilterInit.map((item) => {
 			item.total = 0;
 			return item;
@@ -528,41 +528,41 @@ export class ResultsSearchPageComponent implements OnInit {
 			item.total = 0;
 			return item;
 		});
-		const dataFilter  = [...this.dataFilterGroups];
-		dataFilter.forEach(item=>{
-			if(item.airlineCodeFilter=='MT'){
-				this.totalMultiticket++;
-			}else{
+		const dataFilter = [...this.dataFilterGroups];
+		dataFilter.forEach((item) => {
+			if (isResetAirlines) {
 				const indexAirline = this.dataAirlinesTemp.findIndex((obj) => {
 					return obj.value === item.airlineCodeFilter;
 				});
 				if (indexAirline !== -1) this.dataAirlinesTemp[indexAirline].total++;
+
+				this.dataAirlines = [...this.dataAirlinesTemp];
 			}
 
-			if (item.typeBag=='handbag') this.dataBagTemp[0].total++;
-			if (item.typeBag=='holdbag') this.dataBagTemp[1].total++;
+			if (item.typeBag == 'handbag') this.dataBagTemp[0].total++;
+			if (item.typeBag == 'holdbag') this.dataBagTemp[1].total++;
 			if (item.isDirect) this.dataScaleTemp[0].total++;
 			if (item.isOneScale) this.dataScaleTemp[1].total++;
 			if (item.isMultiScale) this.dataScaleTemp[2].total++;
 
 			this.dataBagFilter = [...this.dataBagTemp];
 			this.dataScaleFilter = [...this.dataScaleTemp];
-			this.dataAirlines = [...this.dataAirlinesTemp];
-	
-		})
-		
+		});
+		//this.getValuesByFilterDuration();
 	}
 
 	updateArrayAirlinesFilter($event: string[]) {
 		this.filters.arrayAirline = $event;
-		this.applyFilters();
+		this.applyFilters(false);
 	}
 
 	changeArrayFilters($event: any) {
 		const item = $event.item;
 		const key = $event.key;
+		let isResetAirlines = true;
 		switch (key) {
 			case 'multiticket':
+				isResetAirlines = false;
 				this.filters.isMultiticket = item.active;
 				break;
 			case 'typeBag':
@@ -570,6 +570,7 @@ export class ResultsSearchPageComponent implements OnInit {
 				else this.filters.arrayBaggage = this.filters.arrayBaggage.filter((bag) => bag !== item.value);
 				break;
 			case 'airlineCodeFilter':
+				isResetAirlines = false;
 				if (item.active) this.filters.arrayAirline.push(item.value);
 				else this.filters.arrayAirline = this.filters.arrayAirline.filter((airline) => airline !== item.value);
 				break;
@@ -578,39 +579,40 @@ export class ResultsSearchPageComponent implements OnInit {
 				else this.filters.arrayScales = this.filters.arrayScales.filter((bag) => bag !== item.value);
 				break;
 		}
-		this.applyFilters();
+		this.applyFilters(isResetAirlines);
 	}
 
-	applyFilters() {
+	applyFilters(isResetAirlines = true) {
 		this.dataFilterGroups = [];
 		this.dataGroupsPaginate = [];
-		const dataFilter = [...this.allDataGroups].filter((item,index) => {
+		const dataFilter = [...this.allDataGroups].filter((item) => {
 			let isDurationDepartureValid = true;
 			let isDurationReturnValid = true;
 			let isDurationScaleDep = true;
 			let isDurationScaleRet = true;
 
-			if (item.durationDeparture) {
+			if (item.durationDeparture || item.durationDeparture == 0) {
 				isDurationDepartureValid =
 					item.durationDeparture >= this.valuesFilterDuration.minDurationDeparture &&
 					item.durationDeparture <= this.valuesFilterDuration.maxDurationDeparture;
 			}
 
-			if (this.flightType == 0 && item.durationReturn) {
+			if (this.flightType == 0 && (item.durationReturn || item.durationReturn==0)) {
 				isDurationReturnValid =
 					item.durationReturn >= this.valuesFilterDuration.minDurationReturn &&
 					item.durationReturn <= this.valuesFilterDuration.maxDurationReturn;
 			}
 
-			if(item.maxWaitingTimeDep || item.maxWaitingTimeDep==0){
+			if (item.maxWaitingTimeDep || item.maxWaitingTimeDep == 0) {
 				isDurationScaleDep =
 					item.maxWaitingTimeDep >= this.valuesFilterDuration.minWaitingTimeDep &&
 					item.maxWaitingTimeDep <= this.valuesFilterDuration.waitingTimeDep;
 			}
-			
-			if(this.flightType == 0 && (item.maxWaitingTimeRet || item.maxWaitingTimeRet==0)){
-				isDurationScaleRet = item.maxWaitingTimeRet >= this.valuesFilterDuration.minWaitingTimeRet &&
-				item.maxWaitingTimeRet <= this.valuesFilterDuration.waitingTimeRet;
+
+			if (this.flightType == 0 && (item.maxWaitingTimeRet || item.maxWaitingTimeRet == 0)) {
+				isDurationScaleRet =
+					item.maxWaitingTimeRet >= this.valuesFilterDuration.minWaitingTimeRet &&
+					item.maxWaitingTimeRet <= this.valuesFilterDuration.waitingTimeRet;
 			}
 
 			return (
@@ -631,15 +633,15 @@ export class ResultsSearchPageComponent implements OnInit {
 				(item.detailPricing?.totalPay || 0) >= this.filters.minPrice &&
 				(item.detailPricing?.totalPay || 0) <= this.filters.maxPrice &&
 				isDurationDepartureValid &&
-				isDurationReturnValid && 
-				isDurationScaleDep && 
+				isDurationReturnValid &&
+				isDurationScaleDep &&
 				isDurationScaleRet
 			);
 		});
 		this.dataFilterGroups = [...dataFilter];
 		this.indexPaginate = 8;
 		this.sortData();
-		this.resetCounters();
+		this.resetCounters(isResetAirlines);
 	}
 
 	changeExchangeRate($event: string) {
@@ -706,27 +708,19 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	getValuesByFilterDuration() {
-		const dataFilterDep = [...this.dataFilterGroups];
-		dataFilterDep.sort((a, b) => {
-			if (a.durationDeparture && b.durationDeparture) return a.durationDeparture - b.durationDeparture;
-			if (!a.durationDeparture) return 1;
-			if (!b.durationDeparture) return -1;
-			return 0;
-		});
+		const dataFilterDep = [...this.dataFilterGroups].sort(
+			(a, b) => (a.durationDeparture || 0) - (b.durationDeparture || 0)
+		);
 		this.valuesFilterDuration = {
 			...this.valuesFilterDuration,
 			minDurationDeparture: dataFilterDep[0].durationDeparture || 0,
 			maxDurationDeparture: dataFilterDep[dataFilterDep.length - 1].durationDeparture || 0
 		};
 
-		if (this.flightType == 0) {
-			const dataFilterRet = [...this.dataFilterGroups];
-			dataFilterRet.sort((a, b) => {
-				if (a.durationReturn && b.durationReturn) return a.durationReturn - b.durationReturn;
-				if (!a.durationReturn) return 1;
-				if (!b.durationReturn) return -1;
-				return 0;
-			});
+		if (this.flightType === 0) {
+			const dataFilterRet = [...this.dataFilterGroups].sort(
+				(a, b) => (a.durationReturn || 0) - (b.durationReturn || 0)
+			);
 			this.valuesFilterDuration = {
 				...this.valuesFilterDuration,
 				minDurationReturn: dataFilterRet[0].durationReturn || 0,
@@ -736,8 +730,10 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.getValuesByFilterScales();
 	}
 
-	getValuesByFilterScales(){
-		const dataFilterDep1 = [...this.dataFilterGroups].sort((a, b) => (b.maxWaitingTimeDep || 0) - (a.maxWaitingTimeDep || 0));
+	getValuesByFilterScales() {
+		const dataFilterDep1 = [...this.dataFilterGroups].sort(
+			(a, b) => (b.maxWaitingTimeDep || 0) - (a.maxWaitingTimeDep || 0)
+		);
 
 		this.valuesFilterDuration = {
 			...this.valuesFilterDuration,
@@ -745,12 +741,15 @@ export class ResultsSearchPageComponent implements OnInit {
 		};
 
 		if (this.flightType === 0) {
-			const dataFilterRet1 = [...this.dataFilterGroups].sort((a, b) => (b.maxWaitingTimeRet || 0) - (a.maxWaitingTimeRet || 0));
+			const dataFilterRet1 = [...this.dataFilterGroups].sort(
+				(a, b) => (b.maxWaitingTimeRet || 0) - (a.maxWaitingTimeRet || 0)
+			);
 			this.valuesFilterDuration = {
-			...this.valuesFilterDuration,
-			waitingTimeRet: dataFilterRet1[0].maxWaitingTimeRet || 0
+				...this.valuesFilterDuration,
+				waitingTimeRet: dataFilterRet1[0].maxWaitingTimeRet || 0
 			};
 		}
+		this._searchFiltersService.isSetValuesDuration.emit(this.valuesFilterDuration);
 	}
 
 	showMoreResults() {
@@ -780,25 +779,22 @@ export class ResultsSearchPageComponent implements OnInit {
 			this.valuesFilterDuration.maxDurationReturn = $event.highValue;
 			this.filters.isDurationReturn =
 				$event.value !== this.valuesFilterDurationInit.minDurationReturn ||
-
 				$event.highValue !== this.valuesFilterDurationInit.maxDurationReturn;
 		}
 		this.applyFilters();
 	}
 
-	filterByDurationScale($event: any){
+	filterByDurationScale($event: any) {
 		if ($event.isDeparture) {
 			this.valuesFilterDuration.waitingTimeDep = $event.highValue;
 			this.valuesFilterDuration.minWaitingTimeDep = $event.value;
 			this.filters.isDurationDeparture =
-				$event.value !== 0 ||
-				$event.highValue !== this.valuesFilterDurationInit.waitingTimeDep;
+				$event.value !== 0 || $event.highValue !== this.valuesFilterDurationInit.waitingTimeDep;
 		} else {
 			this.valuesFilterDuration.waitingTimeRet = $event.highValue;
 			this.valuesFilterDuration.minWaitingTimeRet = $event.value;
 			this.filters.isDurationReturn =
-				$event.value !== 0 ||
-				$event.highValue !== this.valuesFilterDurationInit.waitingTimeRet;
+				$event.value !== 0 || $event.highValue !== this.valuesFilterDurationInit.waitingTimeRet;
 		}
 		this.applyFilters();
 	}

@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 
@@ -10,7 +11,13 @@ interface Item {
 @Component({
 	selector: 'app-dropdown-filter',
 	templateUrl: './dropdown-filter.component.html',
-	styleUrls: ['./dropdown-filter.component.scss']
+	styleUrls: ['./dropdown-filter.component.scss'],
+	animations: [
+		trigger('fadeInOut', [
+			transition('void => *', [style({ opacity: 0 }), animate(270, style({ opacity: 1 }))]),
+			transition('* => void', [animate(270, style({ opacity: 0 }))])
+		])
+	]
 })
 export class DropdownFilterComponent implements OnInit, OnChanges {
 	constructor(private _searchFiltersService: SearchFiltersService) {
@@ -19,8 +26,6 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 			   setTimeout(() => {
 				 if(this.showLoader){
 					this.showLoader=false;
-					this.notFilter = this.listOptions.some(item=>item.total > 0) ? false : true;
-					if(this.notFilter) this.hiddenSection.emit();
 				 }
 			   }, 200);
 			}
@@ -38,7 +43,6 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 	listOptionsAirlines: Item[] = [];
 	countRestAirlines = 0;
 	showLoader=true;
-	notFilter=false;
 
 	ngOnInit(): void {
 		this.listOptions=[];
@@ -49,7 +53,7 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 		if (changes['listOptions'] && !this.isShowMoreAirlines) {
 			if(changes['listOptions'].currentValue.length > 8){
 				this.listOptionsAirlines = this.listOptions.slice(0, 8);
-				this.countRestAirlines = this.listOptions.filter((item) => item.total > 0).length - 8;
+				this.countRestAirlines = this.listOptions.length - 8;
 				if(this.listOptions.some(item=>item.total > 0)){
 					this.showLoader=false;
 				}
@@ -67,8 +71,10 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 		}
 	}
 	clickOption(item: Item) {
-		item.active = !item.active;
-		this.clickedOption.emit(item);
+		if(item.total>0){
+			item.active = !item.active;
+		    this.clickedOption.emit(item);
+		}
 	}
 
 	showMoreOptions() {
