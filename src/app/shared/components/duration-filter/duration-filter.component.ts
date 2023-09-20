@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Options } from 'ng5-slider';
 import { GlobalComponent } from '../../global';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 interface IFilterDuration{
 	minDurationDeparture:number,
@@ -17,9 +18,15 @@ interface IFilterDuration{
 @Component({
   selector: 'app-duration-filter',
   templateUrl: './duration-filter.component.html',
-  styleUrls: ['./duration-filter.component.scss']
+  styleUrls: ['./duration-filter.component.scss'],
+  animations: [
+		trigger('fadeInOut', [
+			transition('void => *', [style({ opacity: 0 }), animate(80, style({ opacity: 1 }))]),
+			transition('* => void', [animate(80, style({ opacity: 0 }))])
+		])
+	]
 })
-export class DurationFilterComponent implements OnInit, OnChanges {
+export class DurationFilterComponent implements OnInit{
 
   @Input() valuesFilterDuration:IFilterDuration;
   @Output() filterDurationRange = new EventEmitter();
@@ -30,7 +37,7 @@ export class DurationFilterComponent implements OnInit, OnChanges {
   codesFlight:string[]=[];
   hidden=false;
 
-  constructor(private _searchFiltersService: SearchFiltersService){
+  constructor(private _searchFiltersService: SearchFiltersService,private cdr: ChangeDetectorRef){
 		this._searchFiltersService.isResetFilterDuration.subscribe({
 			next: () => {
         this.hidden=true;
@@ -54,13 +61,14 @@ export class DurationFilterComponent implements OnInit, OnChanges {
         this.optionsScaleRet.ceil = this.valuesFilterDuration.waitingTimeRet;
         setTimeout(() => {
           this.hidden=false;
-        }, 80);
+        }, 10);
+        //this.toggleCollapsed();
 			}
 		});
 
     this._searchFiltersService.isSetValuesDuration.subscribe({
       next:(res:any) =>{
-        this.hidden=true;
+         this.hidden=true;
          this.setValues(res);
       }
     })
@@ -114,11 +122,6 @@ export class DurationFilterComponent implements OnInit, OnChanges {
 
   isFilterDeparture=true;
 
-  
-  ngOnChanges(changes: SimpleChanges) {
-
-	}
-
   setValues(res:any){
     this.valueDurationDep = res.minDurationDeparture;
     this.optionsDurationDep.floor = res.minDurationDeparture;
@@ -145,10 +148,9 @@ export class DurationFilterComponent implements OnInit, OnChanges {
     this.valueScaleRet=0;
     this.optionsScaleDep.floor = 0;
     this.optionsScaleRet.floor = 0;
-
     setTimeout(() => {
       this.hidden=false;
-    }, 80);
+    }, 10);
     
     const paramsSearch={...GlobalComponent.paramsSearch};
     if(Object.keys(paramsSearch).length !== 0){
@@ -160,13 +162,10 @@ export class DurationFilterComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
   }
-  
 
   resetFilter() {
       this.resetFilterDuration.emit();
 	}
-
-
 
   filterDuration($event:any,isDeparture:boolean){
      this.filterDurationRange.emit({...$event,isDeparture});
