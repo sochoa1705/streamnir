@@ -397,8 +397,8 @@ export class ResultsSearchPageComponent implements OnInit {
 
 		this.dataBagFilter = [...this.dataBagTemp];
 		this.dataScaleFilter = [...this.dataScaleTemp];
+		this.dataAirlinesTemp = this.dataAirlinesTemp.filter(airline=>airline.total>0);
 		this.dataAirlines = [...this.dataAirlinesTemp];
-
 		this.allDataGroups = [...this.allDataGroups, ...res.groups];
 		this.dataFilterGroups = [...this.allDataGroups];
 		this.sortData();
@@ -495,6 +495,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		};
 
 		this.idCheap = groupsSortByPrice[0].id;
+		console.log(this.idCheap,'see')
 
 		const groupsSortByBest = this.orderByBestOption();
 
@@ -504,6 +505,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		};
 
 		this.idBest = groupsSortByBest[0].id;
+		console.log(this.idBest,'see')
 
 		const groupsSortByDuration = this.orderByDuration();
 

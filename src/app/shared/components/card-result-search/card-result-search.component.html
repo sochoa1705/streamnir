@@ -1,7 +1,7 @@
 <section *ngIf="flight">
 	<div class="tags" *ngIf="idCheap==flight.id || idBest==flight.id">
-		<img *ngIf="idCheap==flight.id" src="./assets/svg/badge_best.svg" alt="mas_barato" >
-		<img *ngIf="idBest==flight.id" src="./assets/svg/badge_cheap.svg" alt="mejor_opcion">
+		<img *ngIf="idCheap==flight.id" src="./assets/svg/badge_cheap.svg" alt="mas_barato" >
+		<img *ngIf="idBest==flight.id" src="./assets/svg/badge_best.svg" alt="mejor_opcion">
 	</div>
 	<div class="card__result">
 		<div class="card__result__flights">
