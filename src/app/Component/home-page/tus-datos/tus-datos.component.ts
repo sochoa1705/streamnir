@@ -147,7 +147,7 @@ export class TusDatosComponent implements OnInit, AfterViewInit, OnDestroy {
 		});
 		modalRef.componentInstance.title = '¡Muchas gracias por registrarte!';
 		modalRef.componentInstance.content =
-				`En breve te llegará un correo de confirmación al correo <strong>${this.passengers.at(0).get('email')?.value}</strong>`;
+				`En breve te llegará un e-mail de confirmación al correo <strong>${this.passengers.at(0).get('email')?.value}</strong>`;
 		modalRef.dismissed.pipe(takeWhile(() => this.isAlive))
 				.subscribe(() => this.resetForms());
 	}
