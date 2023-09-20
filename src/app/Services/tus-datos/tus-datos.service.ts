@@ -37,9 +37,9 @@ export class TusDatosService {
 			formData.append(`${detailsIndex}.Nacionalidad`, 'PE');
 			formData.append(`${detailsIndex}.FechaNacimiento`, passenger.birthDate);
 			formData.append(`${detailsIndex}.Genero`, '1');
-			formData.append(`${detailsIndex}.Direccion`, 'Placeholder');
+			formData.append(`${detailsIndex}.Direccion`, '-');
 			formData.append(`${detailsIndex}.Telefono`, passenger.phone);
-			formData.append(`${detailsIndex}.Distrito`, 'Placeholder');
+			formData.append(`${detailsIndex}.Distrito`, '-');
 		});
 		formData.append('idCampania', '');
 		formData.append('IdDiaCampania', '1');
