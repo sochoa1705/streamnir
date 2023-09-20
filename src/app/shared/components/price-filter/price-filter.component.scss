@@ -40,6 +40,7 @@
     &__body {
         @extend .flex-24;
         gap: 5px;
+        min-height: 80px;
         &__reset{
             @extend .paragraph;
             font-weight: 600;

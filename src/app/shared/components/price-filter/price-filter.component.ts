@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Options } from 'ng5-slider';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 
@@ -6,7 +6,7 @@ import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-f
 @Component({
 	selector: 'app-price-filter',
 	templateUrl: './price-filter.component.html',
-	styleUrls: ['./price-filter.component.scss']
+	styleUrls: ['./price-filter.component.scss'],
 })
 export class PriceFilterComponent implements OnInit, OnChanges{
 	constructor(private _searchFiltersService: SearchFiltersService) {
@@ -18,6 +18,19 @@ export class PriceFilterComponent implements OnInit, OnChanges{
 				this.options.ceil = this.maxPrice;
 			}
 		});
+
+		this._searchFiltersService.isSetValuesPrices.subscribe({
+			next: (res:any) => {
+				this.hidden=true;
+				this.value = res.minPrice;
+				this.options.floor = res.minPrice;
+				this.highValue = res.maxPrice;
+				this.options.ceil = res.maxPrice;
+				setTimeout(() => {
+					this.hidden=false;
+				}, 10);
+			}
+		})
 	}
 	
 	@Input() currency = 'USD';

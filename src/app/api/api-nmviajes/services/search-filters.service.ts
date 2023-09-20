@@ -12,4 +12,5 @@ export class SearchFiltersService {
     isFinishGDS = new EventEmitter();
     isCounterDinamic = new EventEmitter();
     isSetValuesDuration = new EventEmitter();
+    isSetValuesPrices = new EventEmitter();
 }

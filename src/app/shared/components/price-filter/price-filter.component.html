@@ -4,11 +4,10 @@
 		<img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
 	</div>
 	<div class="dropdown__filter__body" *ngIf="dropdownActive">
-		<ng-container>
-			<span class="dropdown__filter__body__reset" (click)="resetFilter()">Restablecer</span>
+		<span class="dropdown__filter__body__reset" (click)="resetFilter()">Restablecer</span>
+		<ng-container *ngIf="!hidden">
 			<div class="dropdown__filter__body__slider">
 				<ng5-slider
-				    [id]="123"
 					[(value)]="value"
 					[(highValue)]="highValue"
 					[options]="options"

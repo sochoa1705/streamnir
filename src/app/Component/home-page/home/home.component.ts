@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit {
 				this.selectedTab = 'hoteles';
 				break;
 			case 'autos':
-				this.selectedTab = 'autos';
+				this.indexSelectedTab=5
 				break;
 			case 'actividades':
 				this.selectedTab = 'actividades';
@@ -133,7 +133,7 @@ export class HomeComponent implements OnInit {
 
 	getGallery() {
 		this.dataPagePresenterService.getDataGallery().subscribe((data) => {
-			console.log(data)
+			console.log(data,'banners')
 		    this.bannersDestacadosWeb = data
 				.filter((item) => item.Code == 'BANNERS_DESTACADOS_1' || item.Code == 'BANNERS_DESTACADOS_2' || item.Code == 'BANNERS_DESTACADOS_3' )
 				.map((item) => item.Images);
