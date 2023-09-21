@@ -87,16 +87,17 @@
                 gap:12px;
                 align-items: center;
                 justify-content: flex-start;
-                cursor: pointer;
                 border-radius: 4px;
+                padding: 4px 8px;
                 &:hover{
                     background: colors.$gris-50;
                 }
                 &.primary-item{
-                    padding: 4px 8px;
+                    cursor: pointer;
                 }
                 &.secondary-item{
                     padding: 4px 24px;
+                    cursor: pointer;
                 }
                 span{
                     display: block;

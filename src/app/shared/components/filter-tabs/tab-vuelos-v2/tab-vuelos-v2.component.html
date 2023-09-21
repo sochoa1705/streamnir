@@ -16,17 +16,18 @@
             </div>
         </div>
         <div class="section__search__options__dropdowns">
-            <app-input-passengers></app-input-passengers>
-            <app-input-class></app-input-class>
+            <app-input-passengers #childPassengers></app-input-passengers>
+            <app-input-class #childClass></app-input-class>
         </div>
     </div>
     <div  class="section__search__inputs">
-        <app-input-search-flight></app-input-search-flight>
-        <app-input-range></app-input-range>
+        <app-input-search-flight #childInputs></app-input-search-flight>
+        <app-input-range #childDates></app-input-range>
         <app-button
 			[text]="'Buscar'"
 			[left]="true"
 			[icon]="'search.svg'"
+            (onClick)="search()"
 		></app-button>
     </div>
 </div>

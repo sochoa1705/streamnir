@@ -63,4 +63,12 @@ export class InputPassengersComponent implements OnInit {
     this.totalINF=this.totalINFTemp;
   }
 
+  getValues(){
+	 return {
+		adults: this.totalADT,
+		children: this.totalCNN,
+		infants:  this.totalINF
+	 }
+  }
+
 }
