@@ -14,7 +14,7 @@ export interface Search {
   arrivalLocation: string | null
   departureLocation: string | null
   arrivalDate: string
-  departureDate: string
+  departureDate?: string
 }
 
 @Component({
@@ -64,6 +64,10 @@ export class TabVuelosV2Component implements OnInit {
      const userStorage = this._accountService.getUserStorage();
      const email=userStorage.email || ''
      return `/resultados${random}&departureLocation=${data.departureLocation}&arrivalLocation=${data.arrivalLocation}&departureDate=${data.departureDate}&arrivalDate=${data.arrivalDate}&adults=${data.adults}&children=${data.children}&infants=${data.infants}&flightType=${this.typeFlight}&flightClass=${data.flightClass}&lang=ES&email=${email}`
+  }
+
+  changeType(index:number){
+      this.typeFlight=index;
   }
 
 }

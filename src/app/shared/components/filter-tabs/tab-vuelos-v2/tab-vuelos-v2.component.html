@@ -2,16 +2,16 @@
 <div class="section__search">
     <div class="section__search__options">
         <div class="section__search__options__radios">
-            <div class="section__search__options__radios__radio">
-                <img src="./assets/svg/radio-circle.svg" alt="o">
+            <div class="section__search__options__radios__radio" (click)="changeType(0)">
+                <img [src]="typeFlight == 0 ? 'assets/svg/radio-check.svg':'./assets/svg/radio-circle.svg'" alt="o">
                 <span>Ida y vuelta</span>
             </div>
-            <div class="section__search__options__radios__radio">
-                <img src="./assets/svg/radio-circle.svg" alt="o">
+            <div class="section__search__options__radios__radio" (click)="changeType(1)">
+                <img [src]="typeFlight == 1 ? 'assets/svg/radio-check.svg':'./assets/svg/radio-circle.svg'" alt="o">
                 <span>Solo ida</span>
             </div>
-            <div class="section__search__options__radios__radio">
-                <img src="./assets/svg/radio-circle.svg" alt="o">
+            <div class="section__search__options__radios__radio" (click)="changeType(2)">
+                <img [src]="typeFlight == 2 ? 'assets/svg/radio-check.svg':'./assets/svg/radio-circle.svg'" alt="o">
                 <span>Multidestino</span>
             </div>
         </div>
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div  class="section__search__inputs">
-        <app-input-search-flight #childInputs></app-input-search-flight>
+        <app-input-search-flight #childInputs [typeFlight]="typeFlight"></app-input-search-flight>
         <app-input-range #childDates></app-input-range>
         <app-button
 			[text]="'Buscar'"
