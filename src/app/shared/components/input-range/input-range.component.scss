@@ -52,6 +52,11 @@ ngb-datepicker{
     }
 }
 
+::ng-deep .ngb-dp-week [role=gridcell].disabled{
+    background: none;
+    color:colors.$gris-600;
+}
+
 
 .container__range{
     display: flex;
@@ -92,9 +97,18 @@ ngb-datepicker{
             }
         }
     }
-    &__datepicker{
+
+    section{
+        margin:0;
         position: absolute;
-        width: 536px;
+        z-index: 3;
+        top: calc(100% + 20px);
+        left: 0;
+        width: fit-content;
+    }
+
+    &__datepicker{
+        width: fit-content;
         background: white;
         border-radius: 8px;
         border:1px solid colors.$gris-200;
@@ -103,14 +117,6 @@ ngb-datepicker{
         display: flex;
         flex-direction: column;
         gap:12px;
-        z-index: 4;
-        right: -52px;
-        top:75px;
-        &__calendars{
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap:40px;
-        }
         &__buttons{
             display: flex;
             justify-content: space-between;
@@ -118,23 +124,20 @@ ngb-datepicker{
             padding: 0 5px;
         }
     }
-    &__arrows{
-        display: flex;
-        justify-content: space-between;
+
+    &__arrow{
         position: absolute;
-        width: 365px;
-        left: 40px;
-        top:65px;
-        &__arrow{
-            width: 20px;
-            height: 20px;
-            border-radius: 0px 4px 0px 0px;
-            transform: rotate(-45deg);
-            z-index: 5;
-            background: white;
-            border: solid;
-            border-width: 1px 1px 0px 0px;
-            border-color: colors.$gris-200;
-        }
+        margin-top: -10px;
+        left: 18px;
+        width: 20px;
+        height: 20px;
+        border-radius: 0px 4px 0px 0px;
+        transform: rotate(-45deg);
+        z-index: 5;
+        background: white;
+        border: solid;
+        border-width: 1px 1px 0px 0px;
+        border-color: colors.$gris-200;
     }
+    
 }

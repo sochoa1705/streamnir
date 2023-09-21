@@ -1,50 +1,38 @@
 <div class="inputs__search">
 	<div class="inputs__search__group">
 		<input type="text" placeholder="Origen" autocomplete="off" />
-		<img src="./assets/svg/location-red.svg" alt="o" />
-
-		<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path
-				d="M6.66699 13.3327L13.3337 6.66602"
-				stroke="#A3A3A3"
-				stroke-width="1.5"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			/>
-			<path
-				d="M13.3337 13.3327L6.66699 6.66602"
-				stroke="#A3A3A3"
-				stroke-width="1.5"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			/>
-		</svg>
+		<img class="icon" src="./assets/svg/location-red.svg" alt="o" />
+		<img class="svg_icon" src="./assets/svg/close-search.svg" alt="x" />
+		<div class="inputs__search__group__resultBox">
+			<ul>
+				<li class="primary-item">
+					<img src="./assets/svg/airplane-line.svg" alt="icon" />
+					<section><span>Lima</span><span class="description">Lim - Perú</span></section>
+				</li>
+				<li class="primary-item">
+					<img src="./assets/svg/airplane-line.svg" alt="icon" />
+					<section><span>Kilimanjaro</span><span class="description">JRO - Tanzania</span></section>
+				</li>
+				<li class="primary-item">
+					<img src="./assets/svg/airplane-line.svg" alt="icon" />
+					<section><span>Colima</span><span class="description">CLQ - México</span></section>
+				</li>
+				<li class="secondary-item">
+					<img src="./assets/svg/map.svg" alt="icon" />
+					<section><span>John F. Kennedy - NY - Estados Unidos</span></section>
+				</li>
+			</ul>
+		</div>
 	</div>
 
-    <div class="inputs__search__arrow" (click)="rotate=!rotate">
-        <img src="./assets/svg/arrow-left-right.svg"  [ngClass]="rotate ? 'rotate' : 'not-rotate'"  alt="->">
-    </div>
+	<div class="inputs__search__arrow" (click)="rotate = !rotate">
+		<img src="./assets/svg/arrow-left-right.svg" [ngClass]="rotate ? 'rotate' : 'not-rotate'" alt="->" />
+	</div>
 
-    <div class="inputs__search__group">
+	<div class="inputs__search__group">
 		<input type="text" placeholder="Destino" autocomplete="off" />
-		<img src="./assets/svg/location-red.svg" alt="o" />
-
-		<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path
-				d="M6.66699 13.3327L13.3337 6.66602"
-				stroke="#A3A3A3"
-				stroke-width="1.5"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			/>
-			<path
-				d="M13.3337 13.3327L6.66699 6.66602"
-				stroke="#A3A3A3"
-				stroke-width="1.5"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			/>
-		</svg>
+		<img class="icon" src="./assets/svg/location-red.svg" alt="o" />
+		<img class="svg_icon" src="./assets/svg/close-search.svg" alt="x" />
 	</div>
-
 </div>
+<!--<img class="svg_loader" src="./assets/svg/loader_input.svg"alt="..">-->

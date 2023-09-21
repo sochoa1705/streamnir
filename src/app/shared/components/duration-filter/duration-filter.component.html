@@ -1,4 +1,4 @@
-<div class="dropdown__filter" *ngIf="valueDurationDep > 0 && highValueDurationDep > 0">
+<div class="dropdown__filter" *ngIf="valueDurationDep > 0">
 	<div class="dropdown__filter__header" (click)="dropdownActive = !dropdownActive">
 		<h4>Duración</h4>
 		<img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
@@ -84,7 +84,7 @@
 	</div>
 </div>
 
-<div class="dropdown__loader" *ngIf="valueDurationDep == 0 || highValueDurationDep == 0">
+<div class="dropdown__loader" *ngIf="valueDurationDep == 0">
 	<div class="skeleton dropdown__loader__skeleton_1"></div>
 	<div class="skeleton dropdown__loader__skeleton_2"></div>
 	<div class="skeleton dropdown__loader__skeleton_3"></div>

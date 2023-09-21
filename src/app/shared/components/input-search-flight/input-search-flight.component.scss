@@ -8,18 +8,23 @@
     &__group{
         width: 46%;
         position: relative;
-        img{
+        .icon{
             position: absolute;
             left: 12px;
             top: 8px;
             padding: 10px 0px;
         } 
 
-        svg{
+        .svg_icon{
             position: absolute;
             top: 19px;
             left: calc(100% - 32px);
             cursor:pointer;
+        }
+        .svg_loader{
+            position: absolute;
+            top: 19px;
+            left: calc(100% - 35px);
         }
         input {
             width: 100%;
@@ -54,42 +59,66 @@
             }
         }
 
-       /* &__resultBox{
-            padding: 0;
+       &__resultBox{
             position:absolute;
-            width: 100%;
+            width: 420px;
             background: white;
-            padding: 8px 16px;
-            padding-bottom: 22px;
-            margin-top: 8px;
-            border: 1px solid #D4D4D4;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-            border-bottom: 5px solid colors.$neutral-900;
+            padding:8px 12px;
+            border-radius: 8px;
+            border: 1px solid colors.$gris-200;
+            box-shadow: 0px 1px 3px 0px #1018281A;
             z-index: 4;
+            top: 68px;
+            left:0;
             ul{
                 padding: 0px;
                 margin: 0px;
-                max-height: 246px;
+                max-height: 308px;
                 overflow-y: auto;
-                //padding-right: 8px;
+                display: flex;
+                flex-direction: column;
+                gap:16px;
+                padding-right: 5px;
             }
             li{
                 list-style: none;
-                padding: 6px 0px;
                 width: 100%;
-                font-size: 16px;
-                border-bottom:1px solid colors.$neutral-300;
-                cursor:pointer;
-                pointer-events: auto;
-                color:colors.$neutral;
+                display: flex;
+                gap:12px;
+                align-items: center;
+                justify-content: flex-start;
+                cursor: pointer;
+                border-radius: 4px;
+                &:hover{
+                    background: colors.$gris-50;
+                }
+                &.primary-item{
+                    padding: 4px 8px;
+                }
+                &.secondary-item{
+                    padding: 4px 24px;
+                }
                 span{
-                    &.all{
-                        color:colors.$neutral-450;
+                    display: block;
+                    font-family: Montserrat;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 24px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    color:colors.$gris-900;
+                    &.description{
+                        color:colors.$gris-700;
+                        font-size: 14px;
+                        line-height: 20px;
                     }
-        
                 }
             }
-        }*/
+        }
+    }
+
+    section{
+        margin: 0;
     }
 
     &__arrow{
