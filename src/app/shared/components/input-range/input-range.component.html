@@ -3,11 +3,11 @@
 		<img src="./assets/svg/calendar.svg" alt="" />
 		<span [class.inactive]="dateDeparture==''">{{dateDeparture=='' ? 'Salida': dateDeparture}}</span>
 	</div>
-	<div class="container__range__date" (click)="openCalendar()">
-		<img src="./assets/svg/calendar.svg" alt="" />
+	<div class="container__range__date" (click)="openCalendar()" [class.inactive]="typeFlight!==0">
+		<img [src]="typeFlight!==0 ? './assets/svg/calendar-inactive.svg':'./assets/svg/calendar.svg'" alt="" />
 		<span [class.inactive]="dateReturn==''">{{dateReturn=='' ? 'Retorno': dateReturn}}</span>
 	</div>
-	<section *ngIf="showCalendar">
+	<section *ngIf="showCalendar && typeFlight==0">
 		<div class="container__range__arrow"></div>
 		<div class="container__range__datepicker">
 			<div class="container__range__datepicker__calendars">
@@ -33,6 +33,35 @@
 						{{ date.day }}
 					</span>
 				</ng-template>
+			</div>
+			<div class="container__range__datepicker__buttons">
+				<app-button [text]="'Cancelar'" [size]="'xs'" [color]="'neutral'" (onClick)="openCalendar(true)"></app-button>
+				<app-button [text]="'Aplicar'" [size]="'xs'" [color]="'outline-primary'" (onClick)="applyRange()"></app-button>
+			</div>
+		</div>
+	</section>
+
+	<section *ngIf="showCalendar && typeFlight!==0">
+		<div class="container__range__arrow"></div>
+		<div class="container__range__datepicker">
+			<div class="container__range__datepicker__calendars">
+				<ngb-datepicker
+					outsideDays="hidden"
+					#dp
+  					bsDatepicker
+					(dateSelect)="onDateSelection($event)"
+					[dayTemplate]="customDay"
+                    [minDate]="minDate"
+				>
+				</ngb-datepicker>
+
+				<ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused"
+					>
+					<span class="custom-day" [class.selected]="selected">
+						{{ date.day }}
+					</span>
+				</ng-template>
+
 			</div>
 			<div class="container__range__datepicker__buttons">
 				<app-button [text]="'Cancelar'" [size]="'xs'" [color]="'neutral'" (onClick)="openCalendar(true)"></app-button>

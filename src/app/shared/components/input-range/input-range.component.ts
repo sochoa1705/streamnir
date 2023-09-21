@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -6,7 +6,7 @@ import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap'
   templateUrl: './input-range.component.html',
   styleUrls: ['./input-range.component.scss']
 })
-export class InputRangeComponent implements OnInit {
+export class InputRangeComponent implements OnInit,OnChanges {
 
   @Output() inputDates = new EventEmitter<any>();
   @Input() typeFlight = 0;
@@ -20,7 +20,7 @@ export class InputRangeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  hoveredDate: NgbDate | null = null;
+    hoveredDate: NgbDate | null = null;
 
 	fromDate: NgbDate | null = null;
 	toDate: NgbDate | null = null;
@@ -28,9 +28,25 @@ export class InputRangeComponent implements OnInit {
 	fromDateSeleted: NgbDate | null = null;
 	toDateSeleted: NgbDate | null = null;
 
+	model: NgbDateStruct;
+
 	constructor(calendar: NgbCalendar) {
 	}
+	
+	ngOnChanges(changes: SimpleChanges): void {
+		if (changes['typeFlight'].currentValue==0) {
+			document.documentElement.style.setProperty('--visibility', 'hidden');
+		}
 
+		if (changes['typeFlight'].currentValue==1 || changes['typeFlight'].currentValue==2) {
+			document.documentElement.style.setProperty('--visibility', 'visible');
+			this.toDate=null;
+			this.dateReturn='';
+			this.toDateSeleted=null;
+		}
+		
+	}
+	
 	onDateSelection(date: NgbDate) {
 		if (!this.fromDate && !this.toDate) {
 			this.fromDate = date;
@@ -40,6 +56,12 @@ export class InputRangeComponent implements OnInit {
 			this.toDate = null;
 			this.fromDate = date;
 		}
+	}
+
+	onDateSelectionOnly(date: NgbDate){
+		if(!this.fromDate){
+			this.fromDate = date;
+		} 	
 	}
 
 	isHovered(date: NgbDate) {

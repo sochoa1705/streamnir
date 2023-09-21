@@ -69,5 +69,4 @@ export class TabVuelosV2Component implements OnInit {
   changeType(index:number){
       this.typeFlight=index;
   }
-
 }

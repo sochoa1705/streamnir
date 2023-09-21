@@ -5,10 +5,11 @@ import { NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n, NgbDatepicke
 import { CustomAdapter, CustomDateParserFormatter } from '../filtersafe/filtersafe.component';
 import { CustomDatepickerI18nService, I18n } from 'src/app/Services/datepicker/customDatepickerI18n.service';
 import { ButtonModule } from '../button/button.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-    imports: [CommonModule,NgbModule, NgbDatepickerModule, ButtonModule],
+    imports: [CommonModule,NgbModule, NgbDatepickerModule, ButtonModule,FormsModule],
     exports: [InputRangeComponent],
     declarations: [
     InputRangeComponent,

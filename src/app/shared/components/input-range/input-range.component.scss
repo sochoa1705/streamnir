@@ -1,5 +1,9 @@
 @use '/src/scss/colors';
 
+:root {
+	--visibility: hidden;
+}
+
 ngb-datepicker{
     border: none !important;
 }
@@ -28,9 +32,8 @@ ngb-datepicker{
 }
 
 ::ng-deep .ngb-dp-navigation-select{
-  visibility: hidden !important;
+    visibility: var(--visibility) !important;
 }
-
 
 ::ng-deep.custom-day.range,
 ::ng-deep.custom-day:hover {
@@ -51,6 +54,12 @@ ngb-datepicker{
         text-transform: uppercase;
     }
 }
+
+::ng-deep .custom-day.selected {
+    background-color:colors.$red-500;
+    color: #fff;
+    border-radius: 5px;
+  }
 
 ::ng-deep .ngb-dp-week [role=gridcell].disabled{
     background: none;
@@ -82,6 +91,10 @@ ngb-datepicker{
         align-items: center;
         gap:8px;
         width: 50%;
+        &.inactive{
+            background: colors.$gris-50;
+            cursor: default;
+        }
         span{
             font-family: Montserrat;
             font-size: 18px;
