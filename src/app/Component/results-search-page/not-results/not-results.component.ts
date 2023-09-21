@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { dataFiltersInit } from '../utils';
+import { Router } from '@angular/router';
 interface Filter {
 	arrayAirline: string[];
 	arrayBaggage: string[];
@@ -10,6 +11,7 @@ interface Filter {
 	isPrices: boolean;
 	isDurationDeparture: boolean;
 	isDurationReturn: boolean;
+	
 }
 @Component({
 	selector: 'app-not-results',
@@ -17,18 +19,14 @@ interface Filter {
 	styleUrls: ['./not-results.component.scss']
 })
 export class NotResultsComponent implements OnInit {
-	constructor() {}
+	constructor(private router: Router) {}
 	@Input() title = 'Se produjo un error.';
 	@Input() subtitle = 'Intenta buscar de nuevo más tarde.';
 	@Input() type = 'error'; //not-result //not-result-filter
 	@Input() filters: Filter;
 	@Output() cleanFilters = new EventEmitter();
-
 	ngOnInit(): void {}
 
-	reloadPage() {
-		window.location.reload();
-	}
 
 	resetFilters(indexFilter: string) {
 		let currentFilters = this.filters;

@@ -123,6 +123,7 @@ export class DurationFilterComponent implements OnInit{
   isFilterDeparture=true;
 
   setValues(res:any){
+    console.log(res.highValueDurationDep, res.valueDurationDep)
     this.valueDurationDep = res.minDurationDeparture;
     this.optionsDurationDep.floor = res.minDurationDeparture;
     this.highValueDurationDep = res.maxDurationDeparture;
