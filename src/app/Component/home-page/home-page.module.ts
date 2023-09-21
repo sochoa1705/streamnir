@@ -34,6 +34,7 @@ import { ItineraryModule } from './itinerary/itinerary.module';
 import { RetailModule } from './retail/retail.module';
 import { OffersModule } from './offers/offers.module';
 import { SubscriptionModule } from './subscription/subscription.module';
+import { TusDatosModule } from './tus-datos/tus-datos.module';
 
 @NgModule({
 	declarations: [ HomePageComponent, PageNotFoundComponent ],
@@ -63,7 +64,8 @@ import { SubscriptionModule } from './subscription/subscription.module';
 		ComprarModule,
 		RetailModule,
 		OffersModule,
-		SubscriptionModule
+		SubscriptionModule,
+		TusDatosModule
 	],
 	exports: [ HomePageComponent ],
 	providers: [
