@@ -81,8 +81,23 @@ export class InputRangeComponent implements OnInit {
 		return `${this.formatNumber(date.day)}/${this.formatNumber(date.month)}/${date.year}`
 	}
 
+	convertDateToParam(date:string){
+		if(date!==''){
+			const arrayDate = date.split("/");
+			return arrayDate[2] + "-" + arrayDate[1] + "-" + arrayDate[0];
+		}
+		return date
+	}
+
 	formatNumber(numberDate:number){
 		if(numberDate < 10) return `0${numberDate}`
 		return numberDate
+	}
+
+	getValues(){
+		return {
+			arrivalDate:this.dateReturn,
+			departureDate:this.dateDeparture
+		}
 	}
 }

@@ -349,6 +349,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
       //this.navigateToResponseUrl(url);
       //window.location.href = this.getUrl();
+      console.log(this.getUrl().split('search')[1], 'routessss')
       localStorage.setItem('searchParams',this.getUrl().split('search')[1]);
       this.router.navigateByUrl(this.getUrl().split('search')[1]);
     }

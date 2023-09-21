@@ -32,4 +32,10 @@ export class InputClassComponent implements OnInit {
     if(this.inside && this.counterClik > 1) this.showOptions=false;
   }*/
 
+  getValues(){
+    return {
+      flightClass: this.indexClass,
+    }
+   }
+
 }

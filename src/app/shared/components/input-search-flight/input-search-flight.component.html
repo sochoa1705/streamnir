@@ -1,26 +1,22 @@
 <div class="inputs__search">
 	<div class="inputs__search__group">
-		<input type="text" placeholder="Origen" autocomplete="off" />
+		<input type="text" [formControl]="valueSearchDeparture"placeholder="Origen" autocomplete="off" />
 		<img class="icon" src="./assets/svg/location-red.svg" alt="o" />
-		<img class="svg_icon" src="./assets/svg/close-search.svg" alt="x" />
-		<div class="inputs__search__group__resultBox">
+		<img *ngIf="valueSearchDeparture.value!=='' && !showLoaderDep" class="svg_icon" src="./assets/svg/close-search.svg" alt="x" (click)="resetInput()"/>
+		<img *ngIf="showLoaderDep" class="svg_loader" src="./assets/svg/loader_input.svg"alt="..">
+		<div class="inputs__search__group__resultBox" *ngIf="listResultDep.length > 0 || notResultDep">
 			<ul>
-				<li class="primary-item">
-					<img src="./assets/svg/airplane-line.svg" alt="icon" />
-					<section><span>Lima</span><span class="description">Lim - Perú</span></section>
-				</li>
-				<li class="primary-item">
-					<img src="./assets/svg/airplane-line.svg" alt="icon" />
-					<section><span>Kilimanjaro</span><span class="description">JRO - Tanzania</span></section>
-				</li>
-				<li class="primary-item">
-					<img src="./assets/svg/airplane-line.svg" alt="icon" />
-					<section><span>Colima</span><span class="description">CLQ - México</span></section>
-				</li>
-				<li class="secondary-item">
-					<img src="./assets/svg/map.svg" alt="icon" />
-					<section><span>John F. Kennedy - NY - Estados Unidos</span></section>
-				</li>
+				<ng-container *ngFor="let item of listResultDep">
+					<li class="primary-item" (click)="clickItemDep(item)">
+						<img src="./assets/svg/airplane-line.svg" alt="icon" />
+						<section><span>{{item.title}}</span><span class="description">{{item.codigo | titlecase}} - {{item.country}}</span></section>
+					</li>
+					<li class="secondary-item" *ngFor="let subitem of item.children"  (click)="clickItemDep(subitem)">
+						<img src="./assets/svg/map.svg" alt="icon" />
+						<section><span>{{subitem.title}}</span></section>
+					</li>
+				</ng-container>
+				<li  *ngIf="notResultDep"><section><span class="description">No se encontro resultados</span></section></li>
 			</ul>
 		</div>
 	</div>
@@ -30,9 +26,25 @@
 	</div>
 
 	<div class="inputs__search__group">
-		<input type="text" placeholder="Destino" autocomplete="off" />
+		<input type="text" placeholder="Destino" autocomplete="off" [formControl]="valueSearchArrival" />
 		<img class="icon" src="./assets/svg/location-red.svg" alt="o" />
-		<img class="svg_icon" src="./assets/svg/close-search.svg" alt="x" />
+		<img *ngIf="valueSearchArrival.value!=='' && !showLoaderRet" class="svg_icon" src="./assets/svg/close-search.svg" alt="x" (click)="resetInput2()"/>
+		<img *ngIf="showLoaderRet" class="svg_loader" src="./assets/svg/loader_input.svg"alt="..">
+		<div class="inputs__search__group__resultBox" *ngIf="listResultRet.length > 0 || notResultRet">
+			<ul>
+				<ng-container *ngFor="let item of listResultRet">
+					<li class="primary-item" (click)="clickItemRet(item)">
+						<img src="./assets/svg/airplane-line.svg" alt="icon" />
+						<section><span>{{item.title}}</span><span class="description">{{item.codigo | titlecase}} - {{item.country}}</span></section>
+					</li>
+					<li class="secondary-item" *ngFor="let subitem of item.children"  (click)="clickItemRet(subitem)">
+						<img src="./assets/svg/map.svg" alt="icon" />
+						<section><span>{{subitem.title}}</span></section>
+					</li>
+				</ng-container>
+				<li  *ngIf="notResultRet"><section><span class="description">No se encontro resultados</span></section></li>
+			</ul>
+		</div>
 	</div>
 </div>
 <!--<img class="svg_loader" src="./assets/svg/loader_input.svg"alt="..">-->
