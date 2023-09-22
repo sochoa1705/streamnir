@@ -44,6 +44,7 @@ export class InputSearchFlightComponent implements OnInit {
 	ngOnInit(): void {
 		this.onChangeSearchDep();
     this.onChangeSearchRet();
+    if(this.typeFlight==2) this.resetInput();
 	}
 
 	private onChangeSearchDep(): void {

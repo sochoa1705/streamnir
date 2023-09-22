@@ -14,12 +14,13 @@ interface CustomDate {
 	styleUrls: ['./input-range.component.scss']
 })
 export class InputRangeComponent implements OnChanges {
+	now = new Date();
 	@Output() inputDates = new EventEmitter<any>();
 	@Input() typeFlight = 0;
-
+	@Input() idRowMulti=0;
+	@Input() minDate: NgbDateStruct = { year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate() };
+	
 	showCalendar = false;
-	now = new Date();
-	minDate: NgbDateStruct = { year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate() };
 	dateDeparture = '';
 	dateReturn = '';
 
@@ -56,7 +57,6 @@ export class InputRangeComponent implements OnChanges {
 			if(this.fromDate) {
 				this.selectedDateOneWay = new NgbDate(this.fromDate.year, this.fromDate.month, this.fromDate.day);
 				this.dateOneWay = { year: this.selectedDateOneWay.year, month: this.selectedDateOneWay.month };
-				//this.dp2.navigateTo({ ... })
 			}
 			document.documentElement.style.setProperty('--visibility', 'none');
 		}
@@ -148,6 +148,12 @@ export class InputRangeComponent implements OnChanges {
 	formatNumber(numberDate: number) {
 		if (numberDate < 10) return `0${numberDate}`;
 		return numberDate;
+	}
+
+	resetDateMulti(){
+		this.fromDate=null;
+		this.fromDateSeleted = null;
+		this.dateDeparture = '';
 	}
 
 	getValues() {

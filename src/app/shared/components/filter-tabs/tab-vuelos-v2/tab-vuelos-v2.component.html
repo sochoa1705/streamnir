@@ -25,5 +25,5 @@
 		<app-input-range #childDates [typeFlight]="typeFlight"></app-input-range>
 		<app-button [text]="'Buscar'" [left]="true" [icon]="'search.svg'" (onClick)="search()"></app-button>
 	</div>
-    <app-multivuelo *ngIf="typeFlight == 2"></app-multivuelo>
+    <app-multivuelo *ngIf="typeFlight == 2" (searchDataMulti)="searchDataMulti($event)"></app-multivuelo>
 </div>

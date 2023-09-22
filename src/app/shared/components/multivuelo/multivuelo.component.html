@@ -1,9 +1,9 @@
 <div class="section__search">
     <section>
         <div class="section__search__multi" *ngFor="let item of arrayMulti" [class.more-row]="arrayMulti.length > 1">
-            <app-input-search-flight #childInputMulti  [typeFlight]="2"></app-input-search-flight>
-            <app-input-range #childDateMulti [typeFlight]="2"></app-input-range>
-            <img *ngIf="arrayMulti.length > 1" src="./assets/svg/deleteMulti.svg" alt="de" (click)="deleteRow(item)"/>
+            <app-input-search-flight  [typeFlight]="2"></app-input-search-flight>
+            <app-input-range [idRowMulti]="item.index" [minDate]="item.minDate" [typeFlight]="2"></app-input-range>
+            <img *ngIf="arrayMulti.length > 1" src="./assets/svg/deleteMulti.svg" alt="de" (click)="deleteRow(item.index)"/>
         </div>
     </section>
 
