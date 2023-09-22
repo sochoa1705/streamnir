@@ -5,7 +5,6 @@ import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ICardAutocomplete } from '../card-autocomplete/card-autocomplete.interface';
 import { IGeoTree } from '../filter-tabs/tab-vuelos/tab-vuelos.interfaces';
-import { newArray } from '@angular/compiler/src/util';
 
 @Component({
 	selector: 'app-input-search-flight',
@@ -39,6 +38,8 @@ export class InputSearchFlightComponent implements OnInit {
 
   notResultDep=false;
   notResultRet=false;
+
+  isReverse=false;
 
 	ngOnInit(): void {
 		this.onChangeSearchDep();
@@ -86,7 +87,7 @@ export class InputSearchFlightComponent implements OnInit {
 	}
 
 	onSearchServiceDep(word: string) {
-    if (!this.isClickSuggestionDep) {
+    if (!this.isClickSuggestionDep && !this.isReverse) {
       this.listResultDep = [];
       this.showLoaderDep=true;
       this.origin=null;
@@ -104,7 +105,7 @@ export class InputSearchFlightComponent implements OnInit {
 
 
   onSearchServiceRet(word: string) {
-    if (!this.isClickSuggestionArr) {
+    if (!this.isClickSuggestionArr && !this.isReverse) {
       this.listResultRet = [];
       this.showLoaderRet=true;
       this.destination=null;
@@ -117,6 +118,7 @@ export class InputSearchFlightComponent implements OnInit {
       });
     }else{
       this.isClickSuggestionArr = false;
+      this.isReverse=false;
     }
 	}
 
@@ -161,6 +163,23 @@ export class InputSearchFlightComponent implements OnInit {
         });
     });
     return nuevoArray;
+  }
+
+  reverseInputs(){
+    if(this.origin && this.destination){
+      this.isReverse=true;
+      this.rotate = !this.rotate;
+      const valueSearchDeparture =   this.valueSearchDeparture.value;
+      const valueSearchArrival = this.valueSearchArrival.value;
+      const origin = this.origin;
+      const destination = this.destination;
+
+      this.valueSearchDeparture.setValue(valueSearchArrival);
+      this.valueSearchArrival.setValue(valueSearchDeparture);
+
+      this.origin=destination;
+      this.destination=origin;
+    }
   }
 
 

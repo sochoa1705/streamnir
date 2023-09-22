@@ -1,5 +1,5 @@
 <div class="inputs__search">
-	<div class="inputs__search__group">
+	<div class="inputs__search__group" [class.multi]="typeFlight==2">
 		<input type="text" [formControl]="valueSearchDeparture"placeholder="Origen" autocomplete="off" />
 		<img class="icon" src="./assets/svg/location-red.svg" alt="o" />
 		<img *ngIf="valueSearchDeparture.value!=='' && !showLoaderDep" class="svg_icon" src="./assets/svg/close-search.svg" alt="x" (click)="resetInput()"/>
@@ -21,11 +21,11 @@
 		</div>
 	</div>
 
-	<div class="inputs__search__arrow" (click)="rotate = !rotate">
+	<div class="inputs__search__arrow" (click)="reverseInputs()">
 		<img src="./assets/svg/arrow-left-right.svg" [ngClass]="rotate ? 'rotate' : 'not-rotate'" alt="->" />
 	</div>
 
-	<div class="inputs__search__group">
+	<div class="inputs__search__group" [class.multi]="typeFlight==2">
 		<input type="text" placeholder="Destino" autocomplete="off" [formControl]="valueSearchArrival" />
 		<img class="icon" src="./assets/svg/location-red.svg" alt="o" />
 		<img *ngIf="valueSearchArrival.value!=='' && !showLoaderRet" class="svg_icon" src="./assets/svg/close-search.svg" alt="x" (click)="resetInput2()"/>

@@ -1,0 +1,33 @@
+@use '/src/scss/colors';
+.section__search {
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	section {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+    &__multi {
+		display: grid;
+		grid-template-columns: auto 192px;
+		gap: 16px;
+		align-items: center;
+		img {
+			cursor: pointer;
+		}
+        &.more-row{
+            grid-template-columns: auto 192px 24px;
+        }
+	}
+
+	&__actions {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}

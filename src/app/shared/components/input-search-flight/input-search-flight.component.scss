@@ -7,6 +7,9 @@
     align-items: center;
     &__group{
         width: 46%;
+        &.multi{
+            width: 100%;
+        }
         position: relative;
         .icon{
             position: absolute;

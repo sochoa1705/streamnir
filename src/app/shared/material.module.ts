@@ -67,6 +67,8 @@ import {
   ],
   providers: [
     { provide: MAT_DRAWER_DEFAULT_AUTOSIZE, useValue: { autosize: true } }
+  ],
+  declarations: [
   ]
 })
 export class MaterialModule { }
