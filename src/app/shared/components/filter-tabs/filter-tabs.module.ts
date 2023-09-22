@@ -28,6 +28,7 @@ import { InputRangeModule } from '../input-range/input-range.module';
 import { ButtonModule } from '../button/button.module';
 import { InputClassModule } from '../input-class/input-class.module';
 import { InputPassengersModule } from '../input-passengers/input-passengers.module';
+import { MultivueloModule } from '../multivuelo/multivuelo.module';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { InputPassengersModule } from '../input-passengers/input-passengers.modu
     InputClassModule,
     InputPassengersModule,
     NgxMaskModule.forRoot(),
+    MultivueloModule
   ],
   providers: [
     MatSnackBar,

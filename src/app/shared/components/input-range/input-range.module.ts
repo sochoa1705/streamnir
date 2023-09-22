@@ -5,14 +5,15 @@ import { NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n, NgbDatepicke
 import { CustomAdapter, CustomDateParserFormatter } from '../filtersafe/filtersafe.component';
 import { CustomDatepickerI18nService, I18n } from 'src/app/Services/datepicker/customDatepickerI18n.service';
 import { ButtonModule } from '../button/button.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MonthToTextPipe } from '../../pipes/month.pipe';
 
 
 @NgModule({
-    imports: [CommonModule,NgbModule, NgbDatepickerModule, ButtonModule,FormsModule],
+    imports: [CommonModule,NgbModule, NgbDatepickerModule, ButtonModule,FormsModule, ReactiveFormsModule],
     exports: [InputRangeComponent],
     declarations: [
-    InputRangeComponent,
+    InputRangeComponent,MonthToTextPipe
   ],
   providers:[
     { provide: NgbDateAdapter, useClass: CustomAdapter },

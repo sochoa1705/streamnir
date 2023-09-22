@@ -1,38 +1,25 @@
 <div class="container__range">
-	<div class="container__range__date" (click)="openCalendar()">
+	<div class="container__range__date" (click)="openCalendar()" [class.multi]="typeFlight==2">
 		<img src="./assets/svg/calendar.svg" alt="" />
-		<span [class.inactive]="dateDeparture==''">{{dateDeparture=='' ? 'Salida': dateDeparture}}</span>
+		<span [class.inactive]="dateDeparture == ''">{{ dateDeparture == '' ? 'Salida' : dateDeparture }}</span>
 	</div>
-	<div class="container__range__date" (click)="openCalendar()" [class.inactive]="typeFlight!==0">
-		<img [src]="typeFlight!==0 ? './assets/svg/calendar-inactive.svg':'./assets/svg/calendar.svg'" alt="" />
-		<span [class.inactive]="dateReturn==''">{{dateReturn=='' ? 'Retorno': dateReturn}}</span>
+	<div *ngIf="typeFlight!==2" class="container__range__date" (click)="typeFlight == 0 ? openCalendar() : null" [class.inactive]="typeFlight !== 0">
+		<img [src]="typeFlight !== 0 ? './assets/svg/calendar-inactive.svg' : './assets/svg/calendar.svg'" alt="" />
+		<span [class.inactive]="dateReturn == ''">{{ dateReturn == '' ? 'Retorno' : dateReturn }}</span>
 	</div>
-	<section *ngIf="showCalendar && typeFlight==0">
+	<section *ngIf="showCalendar && typeFlight == 0">
 		<div class="container__range__arrow"></div>
 		<div class="container__range__datepicker">
 			<div class="container__range__datepicker__calendars">
 				<ngb-datepicker
-					outsideDays="hidden"
+					[outsideDays]="'collapsed'"
 					#dp
 					(dateSelect)="onDateSelection($event)"
 					[displayMonths]="2"
 					[dayTemplate]="t"
-					outsideDays="hidden"
-                    [minDate]="minDate"
+					[minDate]="minDate"
 				>
 				</ngb-datepicker>
-				<ng-template #t let-date let-focused="focused">
-					<span
-						class="custom-day"
-						[class.focused]="focused"
-						[class.range]="isRange(date)"
-						[class.faded]="isHovered(date) || isInside(date)"
-						(mouseenter)="hoveredDate = date"
-						(mouseleave)="hoveredDate = null"
-					>
-						{{ date.day }}
-					</span>
-				</ng-template>
 			</div>
 			<div class="container__range__datepicker__buttons">
 				<app-button [text]="'Cancelar'" [size]="'xs'" [color]="'neutral'" (onClick)="openCalendar(true)"></app-button>
@@ -41,32 +28,55 @@
 		</div>
 	</section>
 
-	<section *ngIf="showCalendar && typeFlight!==0">
+	<section *ngIf="showCalendar && typeFlight !== 0">
 		<div class="container__range__arrow"></div>
 		<div class="container__range__datepicker">
-			<div class="container__range__datepicker__calendars">
+			<div class="container__range__datepicker__calendar">
+				<div class="container__range__datepicker__calendar__actions">
+					<div class="ngb-dp-arrow">
+						<button type="button" class="btn btn-link ngb-dp-arrow-btn" (click)="changeMonth(-1)" [disabled]="disabledPrevMonth">
+							<span class="ngb-dp-navigation-chevron"></span>
+						</button>
+					</div>
+					<span>{{ dateOneWay.month | monthToText}} {{ dateOneWay.year }}</span>
+					<div class="ngb-dp-arrow right">
+						<button type="button" class="btn btn-link ngb-dp-arrow-btn" (click)="changeMonth(1)">
+							<span class="ngb-dp-navigation-chevron"></span>
+						</button>
+					</div>
+				</div>
 				<ngb-datepicker
-					outsideDays="hidden"
-					#dp
-  					bsDatepicker
-					(dateSelect)="onDateSelection($event)"
+					#dp2
+					[(ngModel)]="selectedDateOneWay"
+					(navigate)="dateOneWay = $event.next"
 					[dayTemplate]="customDay"
-                    [minDate]="minDate"
-				>
-				</ngb-datepicker>
-
-				<ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused"
-					>
-					<span class="custom-day" [class.selected]="selected">
-						{{ date.day }}
-					</span>
-				</ng-template>
-
+					[minDate]="minDate"
+					[outsideDays]="'collapsed'"
+				></ngb-datepicker>
 			</div>
 			<div class="container__range__datepicker__buttons">
 				<app-button [text]="'Cancelar'" [size]="'xs'" [color]="'neutral'" (onClick)="openCalendar(true)"></app-button>
-				<app-button [text]="'Aplicar'" [size]="'xs'" [color]="'outline-primary'" (onClick)="applyRange()"></app-button>
+				<app-button [text]="'Aplicar'" [size]="'xs'" [color]="'outline-primary'" (onClick)="applyDate()"></app-button>
 			</div>
 		</div>
 	</section>
 </div>
+
+<ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
+	<span class="custom-day" [class.selected]="selected">
+		{{ date.day }}
+	</span>
+</ng-template>
+
+<ng-template #t let-date let-focused="focused">
+	<span
+		class="custom-day"
+		[class.focused]="focused"
+		[class.range]="isRange(date)"
+		[class.faded]="isHovered(date) || isInside(date)"
+		(mouseenter)="hoveredDate = date"
+		(mouseleave)="hoveredDate = null"
+	>
+		{{ date.day }}
+	</span>
+</ng-template>
