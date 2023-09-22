@@ -8,7 +8,7 @@
     </section>
 
 	<div class="section__search__actions">
-		<app-button [text]="'Añadir destino'" [color]="'outline-primary'" [left]="true" [icon]="'plusRed.svg'" (onClick)="addMulti()"></app-button>
+		<app-button [text]="'Añadir destino'" [disabled]="arrayMulti.length > 4" [color]="'outline-primary'" [left]="true" [icon]="'plusRed.svg'" (onClick)="addMulti()"></app-button>
 		<app-button [text]="'Buscar'" [left]="true" [icon]="'search.svg'"  (onClick)="searchMulti()"></app-button>
 	</div>
 </div>

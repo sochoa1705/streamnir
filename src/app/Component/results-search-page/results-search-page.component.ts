@@ -254,9 +254,9 @@ export class ResultsSearchPageComponent implements OnInit {
 					this.maxPrice = this.dataFilterGroups[this.dataFilterGroups.length - 1].detailPricing?.totalPay || 0;
 					this.filters.minPrice = this.minPrice;
 					this.filters.maxPrice = this.maxPrice;
-					console.log('end')
 					this.getValuesByFilterDuration();
 					this.valuesFilterDurationInit = { ...this.valuesFilterDuration };
+					this._searchFiltersService.isFinishGDS.emit();
 				} else this.showNotResults = true;
 			},
 			error: (err) => {
@@ -357,10 +357,10 @@ export class ResultsSearchPageComponent implements OnInit {
 
 						waitingTime =
 							index == 0 ? segment.waitingTime : segment.waitingTime > waitingTime ? segment.waitingTime : waitingTime;
+						item.durationDeparture = longDuration;
+						item.maxWaitingTimeDep = waitingTime;
 					}
 				});
-				item.durationDeparture = longDuration;
-				item.maxWaitingTimeDep = waitingTime;
 				durationSegments.push(shortDuration);
 			});
 
@@ -397,7 +397,6 @@ export class ResultsSearchPageComponent implements OnInit {
 		});
 		if (this._loadingService.requestSearchCount == 9)
 			this.dataAirlinesTemp.push({ ...dataAirlineMulti, total: this.totalMultiticket });
-
 		this.dataBagFilter = [...this.dataBagTemp];
 		this.dataScaleFilter = [...this.dataScaleTemp];
 		this.dataAirlinesTemp = this.dataAirlinesTemp.filter(airline=>airline.total>0);
@@ -405,6 +404,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.dataAirlinesInit = [...this.dataAirlinesTemp];
 		this.allDataGroups = [...this.allDataGroups, ...res.groups];
 		this.dataFilterGroups = [...this.allDataGroups];
+		console.log(this.allDataGroups, 'seeeeeee')
 		this.sortData();
 	}
 
