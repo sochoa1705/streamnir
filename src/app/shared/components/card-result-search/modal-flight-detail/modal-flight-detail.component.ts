@@ -84,7 +84,11 @@ export class ModalFlightDetailComponent implements OnInit {
 
 	openModalUpsell() {
 		const segmentArray: number[] = this.segmentDeparture.map((item) => item);
-		if (this.segmentReturn >= 0) segmentArray.push(this.segmentReturn);
+		const segmentIndex: number[] = this.indexSegmentDeparture.map((item) => item);
+		if (this.segmentReturn >= 0) {
+			segmentArray.push(this.segmentReturn);
+			segmentIndex.push(this.indexSegmentReturn);
+		};
 		GlobalComponent.segmentSelected =
 			this.flight.ndcInfo
 				? this.flight.ndcInfo.segmentInfo[0].segments
@@ -92,6 +96,8 @@ export class ModalFlightDetailComponent implements OnInit {
 
 		GlobalComponent.appBooking=dataInitBooking;
 		GlobalComponent.appBooking.segmentSelected=GlobalComponent.segmentSelected;
+		//GlobalComponent.indexSegmentSeleted=segmentIndex;
+
 		GlobalComponent.appGroupSeleted = this.flight;
 		this._checkoutService.setIsDomestic();
 		GlobalComponent.detailPricing = this.detailPricing;

@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="container__card__info" [hidden]="!showDropdown">
-		<ng-container  *ngFor="let scala of item.segments[0].flightSegments as fligh; let i = index">
+		<ng-container  *ngFor="let scala of item.segments[indexSegment].flightSegments as fligh; let i = index">
 			
 			<div class="container__card__info__tag" *ngIf="i > 0 && i <= fligh.length - 1">
 				<span class="hour bold">{{
@@ -75,8 +75,8 @@
 		<div class="container__card__info__luggage">
 			<span>Equipaje incluido:</span>
 			<img alt="av" [src]="'./assets/svg/backpack-green.svg'" />
-			<img alt="av" [src]="(item.segments[0].equipaje?.cabina ? './assets/svg/hand-luggage-green.svg' : './assets/svg/not-hand-luggage-green.svg')" />
-  			<img alt="av" [src]="(item.segments[0].equipaje?.piezas ?? 0 > 0 ? '/assets/svg/hold-luggage-green.svg' : './assets/svg/not-hold-luggage-green.svg')" />
+			<img alt="av" [src]="(item.segments[indexSegment].equipaje?.cabina ? './assets/svg/hand-luggage-green.svg' : './assets/svg/not-hand-luggage-green.svg')" />
+  			<img alt="av" [src]="(item.segments[indexSegment].equipaje?.piezas ?? 0 > 0 ? '/assets/svg/hold-luggage-green.svg' : './assets/svg/not-hold-luggage-green.svg')" />
 		</div>
 	</div>
 </div>

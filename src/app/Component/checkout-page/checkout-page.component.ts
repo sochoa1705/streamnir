@@ -1,11 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
-	Departure,
 	FareBreakDown,
 	Group,
 	PricingDetail,
-	Returns,
-	Segment
 } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { Router } from '@angular/router';
@@ -34,9 +31,6 @@ export class CheckoutPageComponent implements OnInit {
 
 	//Detalle Vuelo
 
-	segmentDeparture: any[] = [];
-	segmentReturn: any;
-
 	pricing: PricingDetail;
 	showButtonReturn = false;
 	codeSafetyPay = 0;
@@ -47,6 +41,7 @@ export class CheckoutPageComponent implements OnInit {
 	totalDiscountCupon = 0;
 	isShowDiscount = false;
 	isShowDiscountCupon = false;
+	segmentSelected:number[]=[]
 
 
 	@ViewChild('childPagePay')
@@ -131,6 +126,7 @@ export class CheckoutPageComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.segmentSelected = GlobalComponent.indexSegmentSeleted;
 		this.detailFlight = GlobalComponent.appGroupSeleted;
 		this.pricing = GlobalComponent.detailPricing;
 		this.classFligh = GlobalComponent.classFligh;

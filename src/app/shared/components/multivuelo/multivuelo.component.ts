@@ -43,15 +43,17 @@ export class MultivueloComponent implements OnInit {
 	}
 
 	addMulti() {
-		this.indexCounter++;
-		 const childrenArray = this.datesComponent.toArray();
-		 if (childrenArray.length > 0) {
-			const lastDate = childrenArray[childrenArray.length - 1].getValues().departureDate;
-			this.arrayMulti.push({
-				index:this.indexCounter,
-				minDate:lastDate== '' ? this.minDateDefault:this.convertMinDate(lastDate)
-			})
-		  }
+		if(this.arrayMulti.length < 5){
+			this.indexCounter++;
+			const childrenArray = this.datesComponent.toArray();
+			if (childrenArray.length > 0) {
+				const lastDate = childrenArray[childrenArray.length - 1].getValues().departureDate;
+				this.arrayMulti.push({
+					index:this.indexCounter,
+					minDate:lastDate== '' ? this.minDateDefault:this.convertMinDate(lastDate)
+				})
+			}
+		}
 	}
 
 	convertMinDate(date:string):NgbDateStruct{

@@ -15,6 +15,7 @@ export class CardDetailFlyComponent implements OnInit {
     @Input() totalINF=0;
     @Input() classFligh='';
     @Input() nameUpSellSelect='';
+    @Input() indexSegment=0;
     showDropdown=false;
 
     ngOnInit() {}
