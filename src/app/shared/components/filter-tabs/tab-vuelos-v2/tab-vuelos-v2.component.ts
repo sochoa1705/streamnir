@@ -1,11 +1,11 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { InputPassengersComponent } from '../../input-passengers/input-passengers.component';
 import { InputRangeComponent } from '../../input-range/input-range.component';
 import { InputSearchFlightComponent } from '../../input-search-flight/input-search-flight.component';
 import { InputClassComponent } from '../../input-class/input-class.component';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { AccountsService } from 'src/app/Services/accounts.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 
@@ -21,6 +21,7 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 		private _accountService: AccountsService,
 		private router: Router,
 		private _searchFiltersService:SearchFiltersService,
+		private route: ActivatedRoute
 	) {
 	}
 
@@ -30,19 +31,24 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 	@ViewChild('childDates') childDates!: InputRangeComponent;
 	@Input() typeFlight = 0;
 	@Input() params:Params;
+	@Output() reloadPageResult=new EventEmitter();
 
 	ngOnInit(): void {}
 
 	ngOnChanges(changes: SimpleChanges):void{
 		if(changes.params && changes.params.currentValue){
-			this._searchFiltersService.isSetParams.emit(this.params);
+			if(this.counterSearch==0){
+				this._searchFiltersService.isSetParams.emit(this.params);
+			}
 		}
 	}
 
 	arrayMulti = [0];
 	indexCounter = 0;
+	counterSearch=0;
 
 	search() {
+		this.counterSearch++;
 		const valuesPassengers = this.childPassengers.getValues();
 		const valuesClass = this.childClass.getValues();
 		const valuesInputs = this.childInputs.getValues();
@@ -63,6 +69,7 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 			const route = this.getRoute({ ...valuesClass, ...valuesPassengers, ...valuesInputs, ...valuesDates });
 			localStorage.setItem('searchParams', route);
 			this.router.navigateByUrl(route);
+			this.reloadPageResult.emit();
 		}
 	}
 
@@ -74,6 +81,7 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 	}
 
 	searchDataMulti($event: any) {
+		this.counterSearch++;
 		let messageError = '';
 
 		$event.forEach((item: any) => {
@@ -114,6 +122,7 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 		const route = `/resultados${random}&adults=${dataGral.adults}&children=${dataGral.children}&infants=${dataGral.infants}&selected_cabins=&excludedAirlines=null&multicity=null&json=${JSON.stringify(json)}&email=${email}&flightType=2&flightClass=${dataGral.flightClass}`;
 		localStorage.setItem('searchParams', route);
 		this.router.navigateByUrl(route);
+		this.reloadPageResult.emit();
 	}
 
 	changeType(index: number) {

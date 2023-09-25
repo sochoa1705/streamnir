@@ -4,18 +4,12 @@ import { NgbCalendar, NgbDate, NgbDateStruct, NgbDatepicker } from '@ng-bootstra
 import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 
-interface CustomDate {
-	year: number;
-	month: number;
-	day: number;
-	monthName: string;
-}
 @Component({
 	selector: 'app-input-range',
 	templateUrl: './input-range.component.html',
 	styleUrls: ['./input-range.component.scss']
 })
-export class InputRangeComponent implements OnChanges {
+export class InputRangeComponent implements OnChanges,OnInit {
 	now = new Date();
 	@Output() inputDates = new EventEmitter<any>();
 	@Input() typeFlight = 0;
@@ -68,6 +62,9 @@ export class InputRangeComponent implements OnChanges {
 				}
 			}
 		});
+	}
+	ngOnInit(): void {
+		document.documentElement.style.setProperty('--visibility', 'block');
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {

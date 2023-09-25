@@ -1,7 +1,7 @@
 <div class="container__page">
 	<div class="container__page__metasearch">
 		<div class="container__page__metasearch__section">
-			<app-tab-vuelos-v2 [typeFlight]="flightType" [params]="params"></app-tab-vuelos-v2>
+			<app-tab-vuelos-v2 [typeFlight]="flightType" [params]="params" (reloadPageResult)="reloadPageResult()"></app-tab-vuelos-v2>
 		</div>
 	</div>
 	<section *ngIf="!showError && !showNotResults">
