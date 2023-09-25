@@ -46,6 +46,7 @@
 						</button>
 					</div>
 				</div>
+				<!--[startDate]="{year: 2023, month: 12, day:15}"-->
 				<ngb-datepicker
 					#dp2
 					[(ngModel)]="selectedDateOneWay"
@@ -53,6 +54,7 @@
 					[dayTemplate]="customDay"
 					[minDate]="minDate"
 					[outsideDays]="'collapsed'"
+					[startDate]="selectedDateOneWay"
 				></ngb-datepicker>
 			</div>
 			<div class="container__range__datepicker__buttons">
@@ -64,7 +66,7 @@
 </div>
 
 <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
-	<span class="custom-day" [class.selected]="selected">
+	<span class="custom-day" [class.range]="selected || ( selectedDateOneWay ? selectedDateOneWay.year==date.year && selectedDateOneWay.day==date.day && selectedDateOneWay.month==date.month : false)">
 		{{ date.day }}
 	</span>
 </ng-template>

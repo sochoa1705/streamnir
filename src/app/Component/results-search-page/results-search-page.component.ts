@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { Group, ISearchResponse } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
@@ -14,6 +14,7 @@ import { getDatesBySegment } from 'src/app/shared/utils/getDatesBySort';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
+import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 
 interface Item {
 	value: any;
@@ -121,10 +122,27 @@ export class ResultsSearchPageComponent implements OnInit {
 	flightType = 0;
 	idBest = '0';
 	idCheap = '0';
+	params:Params;
+	isReload=false;
 
 	ngOnInit() {
-		//this.resetData();
+		this.reloadPageResult(); 
+		//esta reseteando 2 veces por el 
+	}
+	
+	reloadPageResult(){
+		console.log('reloaddd')
+		this.isReload=true;
 		GlobalComponent.paramsSearch = {};
+		this.isLoader=true;
+		this.allDataGroups=[];
+		this.dataFilterGroups=[];
+		this.dataGroupsPaginate=[];
+
+		this.theCheapest=null;
+		this.betterOption=null;
+		this.shorterDuration=null;
+
 		this.dataBagFilter = dataBagFilterInit.map((item) => {
 			item.total = 0;
 			item.active = false;
@@ -162,7 +180,6 @@ export class ResultsSearchPageComponent implements OnInit {
 			isDurationDeparture: false,
 			isDurationReturn: false
 		};
-
 		this.getToken();
 	}
 
@@ -184,25 +201,32 @@ export class ResultsSearchPageComponent implements OnInit {
 
 	getObjectParams() {
 		this.route.queryParamMap.subscribe((params) => {
-			const objParams = getParams(params);
-			this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
-			GlobalComponent.classFligh =
-				objParams.flightClass == 0 ? 'Economy' : objParams.flightClass == 1 ? 'Business' : 'First Class';
-			GlobalComponent.paramsSearch = { ...objParams };
-			this.flightType = objParams.flightType;
-			this.titleNotResults =
-				objParams.flightType !== 2
-					? `No encontramos vuelos coincidentes entre ${objParams.departureLocation} y ${objParams.arrivalLocation} para estas fechas.`
-					: `No encontramos vuelos coincidentes para esas fechas.`;
-			if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
-			else this.getAllDataAnterior(objParams);
+			if(this.isReload){
+				const objParams = getParams(params);
+				this.params=objParams;
+				this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
+				GlobalComponent.classFligh =
+					objParams.flightClass == 0 ? 'Economy' : objParams.flightClass == 1 ? 'Business' : 'First Class';
+				GlobalComponent.paramsSearch = { ...objParams };
+				this.flightType = objParams.flightType;
+				this.titleNotResults =
+					objParams.flightType !== 2
+						? `No encontramos vuelos coincidentes entre ${objParams.departureLocation} y ${objParams.arrivalLocation} para estas fechas.`
+						: `No encontramos vuelos coincidentes para esas fechas.`;
+				if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
+				else this.getAllDataAnterior(objParams);
+				this.isReload=false;
+			}
 		});
+	
 	}
 
 	getAllDataSearch(objSearch: any) {
+		console.log(this._loadingService.requestSearchCount, 'couter')
 		this._searchService.getAllDataSearch(objSearch).subscribe({
 			next: (res) => {
 				this._loadingService.requestSearchCount++;
+				console.log(this._loadingService.requestSearchCount, 'newwwcouter')
 				if (res.groups) {
 					this.isLoader = false;
 					if (this.exchangeRate == 0) this.exchangeRate = res.exchangeRate.amount;
@@ -404,7 +428,6 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.dataAirlinesInit = [...this.dataAirlinesTemp];
 		this.allDataGroups = [...this.allDataGroups, ...res.groups];
 		this.dataFilterGroups = [...this.allDataGroups];
-		console.log(this.allDataGroups, 'seeeeeee')
 		this.sortData();
 	}
 
@@ -714,7 +737,6 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	getValuesByFilterDuration() {
-		console.log('getValuesfiltres',this.dataFilterGroups)
 		const dataFilterDep = [...this.dataFilterGroups].sort(
 			(a, b) => (a.durationDeparture || 0) - (b.durationDeparture || 0)
 		);
@@ -756,8 +778,6 @@ export class ResultsSearchPageComponent implements OnInit {
 				waitingTimeRet: dataFilterRet1[0].maxWaitingTimeRet || 0
 			};
 		}
-
-		console.log(this.valuesFilterDuration,'valuesDuration')
 		this._searchFiltersService.isSetValuesDuration.emit(this.valuesFilterDuration);
 	}
 

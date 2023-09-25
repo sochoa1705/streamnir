@@ -1,25 +1,25 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbCalendar, NgbDate, NgbDateStruct, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
+import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 
-interface CustomDate {
-	year: number;
-	month: number;
-	day: number;
-	monthName: string;
-}
 @Component({
 	selector: 'app-input-range',
 	templateUrl: './input-range.component.html',
 	styleUrls: ['./input-range.component.scss']
 })
-export class InputRangeComponent implements OnChanges {
+export class InputRangeComponent implements OnChanges,OnInit {
 	now = new Date();
 	@Output() inputDates = new EventEmitter<any>();
 	@Input() typeFlight = 0;
-	@Input() idRowMulti=0;
-	@Input() minDate: NgbDateStruct = { year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate() };
-	
+	@Input() idRowMulti = 0;
+	@Input() minDate: NgbDateStruct = {
+		year: this.now.getFullYear(),
+		month: this.now.getMonth() + 1,
+		day: this.now.getDate()
+	};
+
 	showCalendar = false;
 	dateDeparture = '';
 	dateReturn = '';
@@ -34,30 +34,51 @@ export class InputRangeComponent implements OnChanges {
 
 	selectedDateOneWay: NgbDateStruct;
 	dateOneWay: { year: number; month: number };
-	disabledPrevMonth=true;
+	disabledPrevMonth = true;
 
 	@ViewChild('dp2') dp2: NgbDatepicker;
 
-	constructor(public calendar: NgbCalendar) {
+	constructor(
+		public calendar: NgbCalendar,
+		private _searchFiltersService: SearchFiltersService
+	) {
 		const today = this.calendar.getToday();
 		this.dateOneWay = { year: today.year, month: today.month };
+
+		this._searchFiltersService.isSetParams.subscribe({
+			next: (res: Params) => {
+				if (res.flightType !== 2) {
+					if (res.departureDate) this.setParamDeparture(res.departureDate)
+					if (res.arrivalDate) this.setParamArrival(res.arrivalDate)
+				}
+			}
+		});
+
+		this._searchFiltersService.isSetParamsMulti.subscribe({
+			next: (res: Params) => {
+				if (res.multicity) {
+					const dateDeparture=res.multicity[this.idRowMulti].departureDate;
+					if(dateDeparture) this.setParamDeparture(dateDeparture);
+				}
+			}
+		});
+	}
+	ngOnInit(): void {
+		document.documentElement.style.setProperty('--visibility', 'block');
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['typeFlight'].currentValue == 0) {
-			this.showCalendar=false;
+			this.showCalendar = false;
 			document.documentElement.style.setProperty('--visibility', 'block');
 		}
 
 		if (changes['typeFlight'].currentValue == 1 || changes['typeFlight'].currentValue == 2) {
-			this.showCalendar=false;
+			this.showCalendar = false;
 			this.toDate = null;
 			this.dateReturn = '';
 			this.toDateSeleted = null;
-			if(this.fromDate) {
-				this.selectedDateOneWay = new NgbDate(this.fromDate.year, this.fromDate.month, this.fromDate.day);
-				this.dateOneWay = { year: this.selectedDateOneWay.year, month: this.selectedDateOneWay.month };
-			}
+			this.setDateOneWay();
 			document.documentElement.style.setProperty('--visibility', 'none');
 		}
 	}
@@ -73,15 +94,20 @@ export class InputRangeComponent implements OnChanges {
 		}
 	}
 
-	changeMonth(month: number) { //12-10-2023
+	changeMonth(month: number) {
+		//12-10-2023
 		const currentDate = new Date();
 		const newDate = { year: this.dateOneWay.year, month: this.dateOneWay.month + month };
-		if (newDate.year < currentDate.getFullYear() || (newDate.year === currentDate.getFullYear() && newDate.month < currentDate.getMonth() + 1))
-		    this.disabledPrevMonth=true; 
-		else{
-			this.disabledPrevMonth=false;
+		if (
+			newDate.year < currentDate.getFullYear() ||
+			(newDate.year === currentDate.getFullYear() && newDate.month < currentDate.getMonth() + 1)
+		)
+			this.disabledPrevMonth = true;
+		else {
+			this.disabledPrevMonth = false;
 			if (this.dateOneWay.month === 12 && month === 1) this.dateOneWay = { year: this.dateOneWay.year + 1, month: 1 };
-			else if (this.dateOneWay.month === 1 && month === -1) this.dateOneWay = { year: this.dateOneWay.year - 1, month: 12 };
+			else if (this.dateOneWay.month === 1 && month === -1)
+				this.dateOneWay = { year: this.dateOneWay.year - 1, month: 12 };
 			else this.dateOneWay = { year: this.dateOneWay.year, month: this.dateOneWay.month + month };
 			this.dp2.navigateTo({ year: this.dateOneWay.year, month: this.dateOneWay.month });
 		}
@@ -122,12 +148,12 @@ export class InputRangeComponent implements OnChanges {
 		this.toDateSeleted = this.toDate;
 	}
 
-	applyDate(){
+	applyDate() {
 		this.showCalendar = false;
-		if(this.selectedDateOneWay){
+		if (this.selectedDateOneWay) {
 			const split = this.selectedDateOneWay.toString().split('-');
-			const dateFormat=new NgbDate(parseInt(split[2], 10),parseInt(split[1], 10),parseInt(split[0], 10));
-			this.fromDate=dateFormat;
+			const dateFormat = new NgbDate(parseInt(split[2], 10), parseInt(split[1], 10), parseInt(split[0], 10));
+			this.fromDate = dateFormat;
 			this.fromDateSeleted = this.fromDate;
 			this.dateDeparture = this.convertDateToString(dateFormat);
 		}
@@ -150,10 +176,32 @@ export class InputRangeComponent implements OnChanges {
 		return numberDate;
 	}
 
-	resetDateMulti(){
-		this.fromDate=null;
+	resetDateMulti() {
+		this.fromDate = null;
 		this.fromDateSeleted = null;
 		this.dateDeparture = '';
+	}
+
+	setParamDeparture(departureDate: string) {
+		const dateDep = departureDate?.split('-');
+		this.fromDate = new NgbDate(Number(dateDep[0]), Number(dateDep[1]), Number(dateDep[2]));
+		this.dateDeparture = this.convertDateToString(this.fromDate);
+		this.fromDateSeleted = this.fromDate;
+		this.setDateOneWay();
+	}
+
+	setParamArrival(arrivalDate: string) {
+		const dateRet = arrivalDate?.split('-');
+		this.toDate = new NgbDate(Number(dateRet[0]), Number(dateRet[1]), Number(dateRet[2]));
+		this.dateReturn = this.convertDateToString(this.toDate);
+		this.toDateSeleted = this.toDate;
+	}
+
+	setDateOneWay(){
+		if(this.fromDate){
+			this.selectedDateOneWay = new NgbDate(this.fromDate.year, this.fromDate.month, this.fromDate.day);
+		    this.dateOneWay = { year: this.selectedDateOneWay.year, month: this.selectedDateOneWay.month };
+		}
 	}
 
 	getValues() {
