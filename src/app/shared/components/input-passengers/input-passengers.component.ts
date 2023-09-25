@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'src/app/Services/notification.service';
+import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
+import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 
 @Component({
 	selector: 'app-input-passengers',
@@ -7,7 +9,20 @@ import { NotificationService } from 'src/app/Services/notification.service';
 	styleUrls: ['./input-passengers.component.scss']
 })
 export class InputPassengersComponent implements OnInit {
-	constructor(private _notification: NotificationService,) {}
+	constructor(private _notification: NotificationService,private _searchFiltersService: SearchFiltersService) {
+		this._searchFiltersService.isSetParams.subscribe({
+			next: (res:Params) => {
+				this.totalADT = res.adults;
+				this.totalINF = res.infants;
+				this.totalCNN = res.children;
+				this.totalPassengers = res.children + res.adults;
+				this.totalPassengersTemp = res.children + res.adults + res.infants;
+				this.totalADTTemp = res.adults;
+				this.totalINFTemp = res.infants;
+				this.totalCNNTemp = res.children;
+			}
+		}); 
+	}
 	showOptions = false;
 	totalADT = 1;
 	totalINF = 0;

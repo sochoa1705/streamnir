@@ -1,11 +1,12 @@
 <div class="container__page">
-	<div class="container__page__search">
-		<div class="container__page__search__metasearch">
-			<app-tab-vuelos [isBgWhite]="false" [isPageResults]="true"></app-tab-vuelos>
+	<div class="container__page__metasearch">
+		<div class="container__page__metasearch__section">
+			<app-tab-vuelos-v2 [typeFlight]="flightType" [params]="params"></app-tab-vuelos-v2>
 		</div>
 	</div>
-	<section class="section"  *ngIf="!showError && !showNotResults">
-		<app-filters
+	<section *ngIf="!showError && !showNotResults">
+		<article>
+			<app-filters
 			[dataAirlines]="dataAirlines"
 			[dataScaleFilter]="dataScaleFilter"
 			[dataBagFilter]="dataBagFilter"
@@ -57,6 +58,7 @@
 				(cleanFilters)="cleanFilters($event)"
 			></app-not-results>
 		</div>
+		</article>
 	</section>
 
 	<app-not-results *ngIf="showError"></app-not-results>

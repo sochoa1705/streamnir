@@ -5,6 +5,8 @@ import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ICardAutocomplete } from '../card-autocomplete/card-autocomplete.interface';
 import { IGeoTree } from '../filter-tabs/tab-vuelos/tab-vuelos.interfaces';
+import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
+import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 
 @Component({
 	selector: 'app-input-search-flight',
@@ -15,7 +17,29 @@ export class InputSearchFlightComponent implements OnInit {
 	private destroyDep$ = new Subject<unknown>();
 	private destroyArr$ = new Subject<unknown>();
   @Input() typeFlight=0;
-	constructor(private _destinyService: DestinyService) {}
+  @Input() indexRowMulti=0;
+	constructor(private _destinyService: DestinyService,private _searchFiltersService: SearchFiltersService) {
+    this._searchFiltersService.isSetParams.subscribe({
+			next: (res:Params) => {
+         if(res.flightType!==2){
+            this.isParamsDep=true;
+            this.isParamsRet=true;
+            this.valueSearchDeparture.setValue(res.departureLocation);
+            this.valueSearchArrival.setValue(res.arrivalLocation);
+         }
+			}
+		}); 
+    this._searchFiltersService.isSetParamsMulti.subscribe({
+			next: (res:Params) => {
+        if(res.multicity){
+          this.isParamsDep=true;
+          this.isParamsRet=true;
+          this.valueSearchDeparture.setValue(res.multicity[this.indexRowMulti].departureLocation);
+          this.valueSearchArrival.setValue(res.multicity[this.indexRowMulti].arrivalLocation);
+        }
+			}
+		}); 
+  }
 
 	rotate = false;
 	valueSearchDeparture = new FormControl('Lima');
@@ -26,6 +50,8 @@ export class InputSearchFlightComponent implements OnInit {
 
 	isClickSuggestionDep = false;
 	isClickSuggestionArr = false;
+  isParamsRet=false;
+  isParamsDep=false;
 
   origin: string | null = 'LIM%20Lima,%20Perú';
   destination:string | null;
@@ -95,8 +121,14 @@ export class InputSearchFlightComponent implements OnInit {
       this._destinyService.getGeoTree(word).subscribe({
         next: (res) => {
           this.showLoaderDep=false;
-          this.listResultDep=this.formatArrayResult(res);
-          this.notResultDep=this.listResultDep.length > 0 ? false:true;
+          if(!this.isParamsDep){
+            this.listResultDep=this.formatArrayResult(res);
+            this.notResultDep=this.listResultDep.length > 0 ? false:true;
+          }else{
+             const listResult=this.formatArrayResult(res);
+             this.clickItemDep(listResult[0]);
+             this.isParamsDep=false;
+          }
         }
       });
     }else{
@@ -113,8 +145,15 @@ export class InputSearchFlightComponent implements OnInit {
       this._destinyService.getGeoTree(word).subscribe({
         next: (res) => {
           this.showLoaderRet=false;
-          this.listResultRet=this.formatArrayResult(res);
-          this.notResultRet=this.listResultRet.length > 0 ? false:true;
+          if(!this.isParamsRet){
+            this.listResultRet=this.formatArrayResult(res);
+            this.notResultRet=this.listResultRet.length > 0 ? false:true;
+          }else{
+             const listResult=this.formatArrayResult(res);
+             this.clickItemRet(listResult[0]);
+             this.isParamsRet=false;
+          }
+
         }
       });
     }else{

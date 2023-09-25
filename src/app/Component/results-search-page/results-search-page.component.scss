@@ -15,30 +15,28 @@
 .container__page {
 	min-height: calc(100% - 80px);
 	background: white;
-	.section {
-		max-width: 1440px;
-		margin: 0 auto;
-		padding: 40px 112px;
-		display: grid;
-		column-gap: 24px;
-		grid-template-columns: 312px auto;
-		min-height: 50vh;
-		@media (max-width: 1391px) {
-			padding: 40px 60px;
+	section {
+		width: 100%;
+		padding: 40px 96px;
+		article{
+			max-width: 1440px;
+			margin: 0 auto;
+			display: grid;
+			column-gap: 24px;
+			grid-template-columns: 312px auto;
+			min-height: 50vh;
 		}
 	}
-	&__search {
+
+	&__metasearch {
 		width: 100%;
-		padding: 40px 0px;
+		padding: 40px 96px;
 		min-height: 184px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
 		background: colors.$gris-50;
-		box-shadow: 0px 1px 2px -1px #1018281a;
 		box-shadow: 0px 1px 3px 0px #1018281a;
-		&__metasearch {
-			max-width: 1218px;
+		&__section{
+			max-width: 1440px;
+			margin: 0 auto;
 		}
 	}
 

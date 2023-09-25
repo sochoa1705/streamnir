@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { InputPassengersComponent } from '../../input-passengers/input-passengers.component';
 import { InputRangeComponent } from '../../input-range/input-range.component';
 import { InputSearchFlightComponent } from '../../input-search-flight/input-search-flight.component';
@@ -6,37 +6,38 @@ import { InputClassComponent } from '../../input-class/input-class.component';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { AccountsService } from 'src/app/Services/accounts.service';
 import { Router } from '@angular/router';
-export interface Search {
-	flightClass: number;
-	adults: number;
-	children: number;
-	infants: number;
-	arrivalLocation: string | null;
-	departureLocation: string | null;
-	arrivalDate: string;
-	departureDate?: string;
-}
+import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
+import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
+
 
 @Component({
 	selector: 'app-tab-vuelos-v2',
 	templateUrl: './tab-vuelos-v2.component.html',
 	styleUrls: ['./tab-vuelos-v2.component.scss']
 })
-export class TabVuelosV2Component implements OnInit {
+export class TabVuelosV2Component implements OnInit, OnChanges {
 	constructor(
 		private _notification: NotificationService,
 		private _accountService: AccountsService,
-		private router: Router
-	) {}
+		private router: Router,
+		private _searchFiltersService:SearchFiltersService,
+	) {
+	}
 
 	@ViewChild('childPassengers') childPassengers!: InputPassengersComponent;
 	@ViewChild('childClass') childClass!: InputClassComponent;
 	@ViewChild('childInputs') childInputs!: InputSearchFlightComponent;
 	@ViewChild('childDates') childDates!: InputRangeComponent;
+	@Input() typeFlight = 0;
+	@Input() params:Params;
 
 	ngOnInit(): void {}
 
-	typeFlight = 0;
+	ngOnChanges(changes: SimpleChanges):void{
+		if(changes.params && changes.params.currentValue){
+			this._searchFiltersService.isSetParams.emit(this.params);
+		}
+	}
 
 	arrayMulti = [0];
 	indexCounter = 0;

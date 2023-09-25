@@ -13,4 +13,6 @@ export class SearchFiltersService {
     isCounterDinamic = new EventEmitter();
     isSetValuesDuration = new EventEmitter();
     isSetValuesPrices = new EventEmitter();
+    isSetParams = new EventEmitter();
+    isSetParamsMulti = new EventEmitter();
 }

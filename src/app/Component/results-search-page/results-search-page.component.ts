@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { Group, ISearchResponse } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
@@ -14,6 +14,7 @@ import { getDatesBySegment } from 'src/app/shared/utils/getDatesBySort';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
+import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 
 interface Item {
 	value: any;
@@ -121,6 +122,7 @@ export class ResultsSearchPageComponent implements OnInit {
 	flightType = 0;
 	idBest = '0';
 	idCheap = '0';
+	params:Params;
 
 	ngOnInit() {
 		//this.resetData();
@@ -185,6 +187,7 @@ export class ResultsSearchPageComponent implements OnInit {
 	getObjectParams() {
 		this.route.queryParamMap.subscribe((params) => {
 			const objParams = getParams(params);
+			this.params=objParams;
 			this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
 			GlobalComponent.classFligh =
 				objParams.flightClass == 0 ? 'Economy' : objParams.flightClass == 1 ? 'Business' : 'First Class';
@@ -404,7 +407,6 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.dataAirlinesInit = [...this.dataAirlinesTemp];
 		this.allDataGroups = [...this.allDataGroups, ...res.groups];
 		this.dataFilterGroups = [...this.allDataGroups];
-		console.log(this.allDataGroups, 'seeeeeee')
 		this.sortData();
 	}
 
@@ -714,7 +716,6 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	getValuesByFilterDuration() {
-		console.log('getValuesfiltres',this.dataFilterGroups)
 		const dataFilterDep = [...this.dataFilterGroups].sort(
 			(a, b) => (a.durationDeparture || 0) - (b.durationDeparture || 0)
 		);
@@ -756,8 +757,6 @@ export class ResultsSearchPageComponent implements OnInit {
 				waitingTimeRet: dataFilterRet1[0].maxWaitingTimeRet || 0
 			};
 		}
-
-		console.log(this.valuesFilterDuration,'valuesDuration')
 		this._searchFiltersService.isSetValuesDuration.emit(this.valuesFilterDuration);
 	}
 
