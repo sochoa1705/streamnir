@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Group, ISearchResponse } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
@@ -70,9 +70,8 @@ export class ResultsSearchPageComponent implements OnInit {
 		private route: ActivatedRoute,
 		private _loadingService: LoadingService,
 		private _searchFiltersService: SearchFiltersService,
-		private _router:Router
-	) {
-	}
+		private _router: Router
+	) {}
 
 	allDataGroups: Group[] = [];
 	dataGroupsPaginate: Group[] = [];
@@ -119,27 +118,30 @@ export class ResultsSearchPageComponent implements OnInit {
 	flightType = 0;
 	idBest = '0';
 	idCheap = '0';
-	params:Params;
-	isReload=false;
+	params: Params;
+	isReload = false;
 
 	ngOnInit() {
-		this.reloadPageResult(); 
-		//esta reseteando 2 veces por el 
+		this.reloadPageResult();
+		//esta reseteando 2 veces por el
 	}
-	
-	reloadPageResult(){
-		console.log('reloaddd')
-		this.isReload=true;
-		GlobalComponent.paramsSearch = {};
-		GlobalComponent.tokenMotorVuelo='';
-		this.isLoader=true;
-		this.allDataGroups=[];
-		this.dataFilterGroups=[];
-		this.dataGroupsPaginate=[];
 
-		this.theCheapest=null;
-		this.betterOption=null;
-		this.shorterDuration=null;
+	reloadPageResult() {
+		console.log('reloaddd');
+		this.isReload = true;
+		GlobalComponent.paramsSearch = {};
+		GlobalComponent.tokenMotorVuelo = '';
+		this.isLoader = true;
+		this.allDataGroups = [];
+		this.dataFilterGroups = [];
+		this.dataGroupsPaginate = [];
+
+		this.dataAirlinesTemp = [];
+		this.dataAirlinesInit = [];
+
+		this.theCheapest = null;
+		this.betterOption = null;
+		this.shorterDuration = null;
 
 		this.dataBagFilter = dataBagFilterInit.map((item) => {
 			item.total = 0;
@@ -178,7 +180,7 @@ export class ResultsSearchPageComponent implements OnInit {
 			isDurationDeparture: false,
 			isDurationReturn: false
 		};
-		this.currency='USD';
+		this.currency = 'USD';
 		this.getToken();
 	}
 
@@ -200,9 +202,9 @@ export class ResultsSearchPageComponent implements OnInit {
 
 	getObjectParams() {
 		this.route.queryParamMap.subscribe((params) => {
-			if(this.isReload && GlobalComponent.tokenMotorVuelo!==''){
+			if (this.isReload && GlobalComponent.tokenMotorVuelo !== '') {
 				const objParams = getParams(params);
-				this.params=objParams;
+				this.params = objParams;
 				this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
 				GlobalComponent.classFligh =
 					objParams.flightClass == 0 ? 'Economy' : objParams.flightClass == 1 ? 'Business' : 'First Class';
@@ -214,10 +216,9 @@ export class ResultsSearchPageComponent implements OnInit {
 						: `No encontramos vuelos coincidentes para esas fechas.`;
 				if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
 				else this.getAllDataAnterior(objParams);
-				this.isReload=false;
+				this.isReload = false;
 			}
 		});
-	
 	}
 
 	getAllDataSearch(objSearch: any) {
@@ -237,6 +238,10 @@ export class ResultsSearchPageComponent implements OnInit {
 						this.maxPrice = this.dataFilterGroups[this.dataFilterGroups.length - 1].detailPricing?.totalPay || 0;
 						this.filters.minPrice = this.minPrice;
 						this.filters.maxPrice = this.maxPrice;
+						this._searchFiltersService.isSetValuesPrices.emit({
+							minPrice: this.minPrice,
+							maxPrice: this.maxPrice
+						});
 						this.getValuesByFilterDuration();
 						this.valuesFilterDurationInit = { ...this.valuesFilterDuration };
 					}
@@ -419,7 +424,7 @@ export class ResultsSearchPageComponent implements OnInit {
 			this.dataAirlinesTemp.push({ ...dataAirlineMulti, total: this.totalMultiticket });
 		this.dataBagFilter = [...this.dataBagTemp];
 		this.dataScaleFilter = [...this.dataScaleTemp];
-		this.dataAirlinesTemp = this.dataAirlinesTemp.filter(airline=>airline.total>0);
+		this.dataAirlinesTemp = this.dataAirlinesTemp.filter((airline) => airline.total > 0);
 		this.dataAirlines = [...this.dataAirlinesTemp];
 		this.dataAirlinesInit = [...this.dataAirlinesTemp];
 		this.allDataGroups = [...this.allDataGroups, ...res.groups];
@@ -537,7 +542,7 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	resetCounters() {
-		if (this.filters.arrayAirline.length==0) {
+		if (this.filters.arrayAirline.length == 0) {
 			this.totalMultiticket = 0;
 			this.dataAirlinesTemp.forEach((airline) => {
 				airline.total = 0;
@@ -553,7 +558,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		});
 		const dataFilter = [...this.dataFilterGroups];
 		dataFilter.forEach((item) => {
-			if (this.filters.arrayAirline.length==0) {
+			if (this.filters.arrayAirline.length == 0) {
 				const indexAirline = this.dataAirlinesTemp.findIndex((obj) => {
 					return obj.value === item.airlineCodeFilter;
 				});
@@ -598,14 +603,13 @@ export class ResultsSearchPageComponent implements OnInit {
 				else this.filters.arrayScales = this.filters.arrayScales.filter((bag) => bag !== item.value);
 				break;
 		}
-		///ver cuando todas las air. vacio 
+		///ver cuando todas las air. vacio
 		this.applyFilters();
 	}
 
-	applyFilters(isBoolean=false) {
-		//console.log(isBoolean, 'pase apply filtersss')
-		if(this.filters.arrayAirline.length==0){
-			this.dataAirlines={...this.dataAirlinesInit}
+	applyFilters() {
+		if (this.filters.arrayAirline.length == 0) {
+			this.dataAirlines = { ...this.dataAirlinesInit };
 		}
 
 		this.dataFilterGroups = [];
@@ -622,7 +626,7 @@ export class ResultsSearchPageComponent implements OnInit {
 					item.durationDeparture <= this.valuesFilterDuration.maxDurationDeparture;
 			}
 
-			if (this.flightType == 0 && (item.durationReturn || item.durationReturn==0)) {
+			if (this.flightType == 0 && (item.durationReturn || item.durationReturn == 0)) {
 				isDurationReturnValid =
 					item.durationReturn >= this.valuesFilterDuration.minDurationReturn &&
 					item.durationReturn <= this.valuesFilterDuration.maxDurationReturn;
@@ -826,42 +830,37 @@ export class ResultsSearchPageComponent implements OnInit {
 
 	cleanFilters($event: Filter) {
 		this.filters = { ...$event };
-		console.log(this.filters,'filtersss clearrrr')
 		if (!this.filters.isPrices) {
 			this.filters.minPrice = this.minPrice;
 			this.filters.maxPrice = this.maxPrice;
 			this._searchFiltersService.isResetFilterPrice.emit();
 		}
 
-		if (!this.filters.isDurationDeparture || !this.filters.isDurationReturn) {
-			this.valuesFilterDuration = { ...this.valuesFilterDurationInit }
-			this._searchFiltersService.isSetValuesDuration.emit(this.valuesFilterDurationInit)
+		if (!this.filters.isDurationDeparture) {
+			this.valuesFilterDuration = { ...this.valuesFilterDurationInit };
+			this._searchFiltersService.isSetValuesDuration.emit(this.valuesFilterDurationInit);
 		}
 
-		if (this.filters.arrayBaggage.length == 0){
+		if (this.filters.arrayBaggage.length == 0)
 			this.dataBagFilter = this.dataBagFilter.map((item) => {
 				item.active = false;
 				return item;
 			});
-		}
-		if (this.filters.arrayScales.length == 0){
+
+		if (this.filters.arrayScales.length == 0)
 			this.dataScaleFilter = this.dataScaleFilter.map((item) => {
 				item.active = false;
 				return item;
 			});
-		}
 
-		if (this.filters.arrayAirline.length == 0){
-			this.dataAirlines = this.dataAirlines.map((item) => {
-				item.active = false;
-				return item;
-			});
-		}
-		this.applyFilters(true);
+		if (this.filters.arrayAirline.length == 0) this._searchFiltersService.isResetFilterAirlines.emit();
+
+		this.applyFilters();
 	}
 
 	resetFilterByDuration() {
 		this.valuesFilterDuration = { ...this.valuesFilterDurationInit };
+		this._searchFiltersService.isSetValuesDuration.emit(this.valuesFilterDurationInit);
 		this.applyFilters();
 	}
 
