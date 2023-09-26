@@ -1,4 +1,4 @@
-:host {
+/*:host {
     position: relative;
     @media (max-width: 640px) {
         position: initial;
@@ -8,4 +8,34 @@
 .disable {
     background: #c4c4c4;
     pointer-events: none;
+}*/
+@use '/src/scss/colors';
+.container__tag{
+    position: relative;
+    &__name{
+        min-width: 128px;
+        height: 36px;
+        padding: 8px 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:8px;
+        border: 1px solid colors.$gris-200;
+        box-shadow: 0px 1px 2px 0px #1018280D;
+        border-radius: 4px;
+        cursor: pointer;
+        background: white;
+        span{
+            font-family: Montserrat;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+            letter-spacing: 0em;
+            text-align: left;
+        }
+    }
+}
+
+.boxFlotante{
+    top:45px;
 }

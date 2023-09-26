@@ -13,6 +13,7 @@ import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.co
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { ParamsHoteles, URLHotel } from '../../tabs/tabs.models';
 import * as moment from 'moment';
+import { InputRangeComponent } from '../../input-range/input-range.component';
 
 @Component({
   selector: 'app-tab-hotel',
@@ -21,6 +22,8 @@ import * as moment from 'moment';
 })
 export class TabHotelComponent {
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
+  @ViewChild('childDates') childDates!: InputRangeComponent;
+
 
   form!: FormGroup;
   fromDate: NgbDate | null
@@ -92,12 +95,15 @@ export class TabHotelComponent {
   }
 
   navigateToResponseUrl(url: string): void {
-    window.location.href = url;
+    window.open(url, '_blank');
   }
 
   public async searchAlojamiento() {
     this.isSubmit = true;
-
+    const valuesDateRange=this.childDates.getValuesByHotel();
+		this.toDate=valuesDateRange.arrivalDate;
+		this.fromDate=valuesDateRange.departureDate;
+    
     let errosInputs = this.getErrorsForm(this.form);
 
     if (errosInputs.length > 0) {

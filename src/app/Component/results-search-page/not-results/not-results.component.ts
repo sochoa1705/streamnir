@@ -11,7 +11,6 @@ interface Filter {
 	isPrices: boolean;
 	isDurationDeparture: boolean;
 	isDurationReturn: boolean;
-	
 }
 @Component({
 	selector: 'app-not-results',
@@ -27,7 +26,6 @@ export class NotResultsComponent implements OnInit {
 	@Output() cleanFilters = new EventEmitter();
 	ngOnInit(): void {}
 
-
 	resetFilters(indexFilter: string) {
 		let currentFilters = this.filters;
 		switch (indexFilter) {
@@ -37,30 +35,34 @@ export class NotResultsComponent implements OnInit {
 			case '1':
 				currentFilters.arrayScales = [];
 				break;
-			case '2':
+			case '2': {
 				currentFilters.arrayAirline = [];
 				currentFilters.isMultiticket = false;
 				break;
+			}
 			case '3':
 				currentFilters.isPrices = false;
 				break;
-			case '4':
+			case '4': {
 				currentFilters.isDurationDeparture = false;
-				currentFilters.isDurationReturn= false;
+				currentFilters.isDurationReturn = false;
 				break;
-			default:
-				currentFilters={
-					arrayAirline:[],
-					arrayBaggage:[],
-					arrayScales:[],
-					minPrice:0,
-					maxPrice:0,
-					isMultiticket:false,
-					isPrices:false,
+			}
+			default: {
+				console.log('defaulttt')
+				currentFilters = {
+					arrayAirline: [],
+					arrayBaggage: [],
+					arrayScales: [],
+					minPrice: 0,
+					maxPrice: 0,
+					isMultiticket: false,
+					isPrices: false,
 					isDurationDeparture: false,
 					isDurationReturn: false
-				}
+				};
 				break;
+			}
 		}
 		this.cleanFilters.emit(currentFilters);
 	}

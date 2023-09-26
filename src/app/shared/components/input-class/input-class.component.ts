@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 
@@ -8,7 +8,8 @@ import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-f
   styleUrls: ['./input-class.component.scss']
 })
 export class InputClassComponent implements OnInit {
-
+  @Input() isLeft=false;
+  @Input() includeFirtClass=true;
   constructor(private _searchFiltersService: SearchFiltersService) {
 		this._searchFiltersService.isSetParams.subscribe({
 			next: (res:Params) => {

@@ -1,48 +1,55 @@
 <form name="form" [formGroup]="form">
-  <div class="gridTab">
-    <div class="rowGrid">
-      <div class="colGrid">
-        <div class="colElement">
-          <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino"
+   <div class="row gx-3 gy-3">
+      <div class="col-md-6">
+          <div class="group__input">
+            <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino"
             (keyup)="autoComplete($event)" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)"
-            class="form-control animated fadeIn" placeholder="¿A que país le gustaría ir?" (click)="autoCompleteInit()">
+            placeholder="¿A que país le gustaría ir?" (click)="autoCompleteInit()">
+            <img src="./assets/svg/location-red.svg" alt="o" />
+          </div>
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let state of countriesPackageSearch" [value]="state.label">
-              <img class="example-option-img" aria-hidden src="./assets/origen.png">
+              <img class="example-option-img" aria-hidden src="./assets/svg/airplane-line.svg">
               <span>{{state.label}}</span>
             </mat-option>
           </mat-autocomplete>
-        </div>
-        <div class="colElement">
-          <select formControlName="noches" class="form-select selectSeguro">
-            <option value="" selected>Número de noches</option>
-            <option *ngFor="let elem of noches" [value]="elem.code">
-              {{ elem.name }}
-            </option>
-          </select>
-        </div>
       </div>
-      <div class="colGrid">
-        <div class="colElement">
-          <select formControlName="months" class="form-select selectSeguro">
-            <option value="" selected>Todos los meses</option>
-            <option *ngFor="let elem of months" [value]="elem.code">
-              {{ elem.label }}
-            </option>
-          </select>
-        </div>
-        <div class="colElement">
-          <select formControlName="themes" class="form-select selectSeguro">
-            <option value="" selected>Temas</option>
+      <div class="col-md-6">
+        <div class="group__input">
+          <select formControlName="themes" [class.first-option]="form.controls.themes.value==''">
+            <option value="" disabled selected hidden>Seleccionar tema</option>
             <option *ngFor="let elem of themes" [value]="elem.code">
               {{ elem.name }}
             </option>
           </select>
         </div>
       </div>
-      <div class="colGrid fullWidht">
-        <button (click)="searchPaquete()">Buscar</button>
+      <div class="col-md-6">
+        <div class="group__input">
+          <select formControlName="months" [class.first-option]="form.controls.months.value==''">
+            <option value="" disabled selected hidden>Seleccionar mes</option>
+            <option *ngFor="let elem of months" [value]="elem.code">
+              {{ elem.label }}
+            </option>
+          </select>
+        </div>
       </div>
-    </div>
-  </div>
+      <div class="col-md-6">
+         <div class="row gx-3 gy-3 d-flex align-items-center">
+             <div class="col-md-9">
+                <div class="group__input">
+                  <select formControlName="noches" [class.first-option]="form.controls.noches.value==''">
+                    <option value="" disabled selected hidden >Seleccionar número de noches</option>
+                    <option *ngFor="let elem of noches" [value]="elem.code">
+                      {{ elem.name }}
+                    </option>
+                  </select>
+                </div>
+             </div>
+             <div class="col-md-3">
+                 <app-button [left]="true" [icon]="'search.svg'" [text]="'Buscar'" [w100]="true" (onClick)="searchPaquete()"></app-button>
+             </div>
+         </div>
+      </div>
+   </div>
 </form>

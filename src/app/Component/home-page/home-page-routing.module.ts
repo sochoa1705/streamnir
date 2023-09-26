@@ -80,31 +80,31 @@ const routes: Routes = [
       },
       {
         path: 'vuelos',
-        loadChildren: () => import('./vuelos/vuelos.module').then(m => m.VuelosModule)
+        component: HomeComponent
       },
       {
         path: 'paquetes',
-        loadChildren: () => import('./paquetes/paquetes.module').then(m => m.PaquetesModule)
+        component: HomeComponent
       },
       {
         path: 'armapaquete',
-        loadChildren: () => import('./build-your-trip/build-your-trip.module').then(m => m.BuildYourTripModule)
+        component: HomeComponent
       },
       {
         path: 'vuelohotel',
-        loadChildren: () => import('./flights-plus-hotel/flights-plus-hotel.module').then(m => m.FlightsPlusHotelModule)
+        component: HomeComponent
       },
       {
         path: 'hoteles',
-        loadChildren: () => import('./hotels/hotels.module').then(m => m.HotelsModule)
+        component: HomeComponent
       },
       {
         path: 'autos',
-        loadChildren: () => import('./cars/cars.module').then(m => m.CarsModule)
+        component: HomeComponent
       },
       {
         path: 'actividades',
-        loadChildren: () => import('./activities/activities.module').then(m => m.ActivitiesModule)
+        component: HomeComponent
       },
       {
         path: 'seguros',

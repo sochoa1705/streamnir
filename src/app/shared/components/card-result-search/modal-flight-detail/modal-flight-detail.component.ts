@@ -89,11 +89,12 @@ export class ModalFlightDetailComponent implements OnInit {
 			segmentArray.push(this.segmentReturn);
 			segmentIndex.push(this.indexSegmentReturn);
 		};
-		GlobalComponent.segmentSelected =
+		/*GlobalComponent.segmentSelected =
 			this.flight.ndcInfo
 				? this.flight.ndcInfo.segmentInfo[0].segments
-				: segmentArray;
-
+				: segmentArray;*/
+		
+		GlobalComponent.segmentSelected=segmentArray;
 		GlobalComponent.appBooking=dataInitBooking;
 		GlobalComponent.appBooking.segmentSelected=GlobalComponent.segmentSelected;
 		//GlobalComponent.indexSegmentSeleted=segmentIndex;

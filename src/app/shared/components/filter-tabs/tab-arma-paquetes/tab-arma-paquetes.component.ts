@@ -13,6 +13,8 @@ import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { AccountsService } from 'src/app/Services/accounts.service';
 import * as moment from 'moment';
+import { InputClassComponent } from '../../input-class/input-class.component';
+import { NewCalendarComponent } from '../../new-calendar/new-calendar.component';
 
 @Component({
   selector: 'app-tab-arma-paquetes',
@@ -22,6 +24,8 @@ import * as moment from 'moment';
 export class TabArmaPaquetesComponent {
 
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
+  @ViewChild('childClass') childClass!: InputClassComponent;
+  @ViewChild('childDate') childDate!: NewCalendarComponent;
 
   form!: FormGroup;
   fromDate: NgbDate | null
@@ -90,7 +94,7 @@ export class TabArmaPaquetesComponent {
   }
 
   navigateToResponseUrl(url: string): void {
-    window.location.href = url;
+    window.open(url, '_blank');
   }
 
   getErrorsForm(form: FormGroup): string[] {
@@ -109,6 +113,11 @@ export class TabArmaPaquetesComponent {
 
   public async searchPaquete() {
     this.isSubmit = true;
+    const valueClass=this.childClass.getValues();
+    const newValue=valueClass.flightClass==0 ? EnumCabins.economico : EnumCabins.business
+    this.form.controls.clase.setValue(newValue);
+    const valueDate=this.childDate.getValues();
+    this.fromDate=valueDate;
 
     let errosInputs = this.getErrorsForm(this.form);
 

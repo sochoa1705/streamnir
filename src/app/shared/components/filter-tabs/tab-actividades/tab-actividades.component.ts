@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AccountsService } from 'src/app/Services/accounts.service';
@@ -12,11 +12,13 @@ import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.co
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { ParamsActividades, URLActividades } from '../../tabs/tabs.models';
 import * as moment from 'moment';
+import { InputRangeComponent } from '../../input-range/input-range.component';
+import { NotificationService } from 'src/app/Services/notification.service';
 
 @Component({
   selector: 'app-tab-actividades',
   templateUrl: './tab-actividades.component.html',
-  styleUrls: ['./tab-actividades.component.scss']
+  styleUrls: ['../tab-hotel/tab-hotel.component.scss']
 })
 export class TabActividadesComponent {
   form!: FormGroup;
@@ -32,16 +34,18 @@ export class TabActividadesComponent {
   distributionObject: DistributionObjectA;
 
   @ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
+  @ViewChild('childDates') childDates!: InputRangeComponent;
 
   constructor(
     private destineService: DestinyService,
     public formatter: NgbDateParserFormatter,
     private _snackBar: MatSnackBar,
     public inputValidator: InputValidationService,
-    private _accountsService: AccountsService
+    private _accountsService: AccountsService,
+    private notification: NotificationService,
   ) {
     this.form = new FormGroup({
-      destino: new FormControl(''),
+      destino: new FormControl('',Validators.required),
     });
   }
 
@@ -70,7 +74,7 @@ export class TabActividadesComponent {
   }
 
   navigateToResponseUrl(url: string): void {
-    window.location.href = url;
+    window.open(url, '_blank');
   }
 
   openSnackBar(message: string) {
@@ -81,8 +85,24 @@ export class TabActividadesComponent {
   }
 
   public async search() {
+    const valuesDateRange=this.childDates.getValuesByHotel();
+		this.toDate=valuesDateRange.arrivalDate;
+		this.fromDate=valuesDateRange.departureDate;
+    
+    let errors: any[] = [];
+   
+    if (this.form.controls["destino"].invalid) {
+      this.notification.showNotificacion("Error",'El campo destino es obligatorio', 10);
+      return;
+    }
+
+    if (!this.fromDate || !this.toDate) {
+      this.notification.showNotificacion("Error",'La fecha de inicio y fin es requerido', 10);
+      return;
+    }
+
     if (!this.isValidate()) {
-      this.openSnackBar("Error de validacion")
+      this.notification.showNotificacion("Error",'El campo de pasajeros es inválido', 10);
       return;
     }
 
