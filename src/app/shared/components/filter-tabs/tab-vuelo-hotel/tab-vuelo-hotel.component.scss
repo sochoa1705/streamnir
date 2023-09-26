@@ -1,0 +1,68 @@
+@use '/src/scss/colors';
+.section__flightHotel {
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	&__tags{
+        display:flex;
+        gap:16px;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 24px;
+    }
+
+	&__inputs {
+		display: grid;
+		grid-template-columns: 1fr 1fr  2fr 126px;
+		column-gap: 16px;
+		align-items: center;
+        &__group{
+                width: 100%;
+                position: relative;
+                img {
+                    position: absolute;
+                    left: 12px;
+                    top: 8px;
+                    padding: 10px 0px;
+                }
+                input{
+                    width: 100%;
+                    padding: 11.3px 25px 11.3px 42px;
+                    margin: 0px;
+                    border: none;
+                    background: white;
+                    border: 1px solid colors.$neutral-200;
+                    box-sizing: border-box;
+                    color: colors.$neutral-900;
+                    font-weight: 400;
+                    line-height: 20px;
+                    font-family: 'Montserrat';
+                    border-radius: 8px;
+                    caret-color: colors.$red-500;
+                    box-shadow: 0px 1px 2px 0px #1018280d;
+                    height: 59.6px;
+                    &::placeholder {
+                        color: colors.$gris-600;
+                    }
+                    &:focus {
+                        outline: none;
+                        border: 1px solid colors.$red-500 !important;
+                    }
+                    &.error {
+                        border: 1px solid colors.$red-200;
+                        caret-color: colors.$red-200;
+                    }
+                    &.icon {
+                        padding-left: 27px;
+                    }
+                }
+                
+        }
+	}    
+}
+
+.single-autocomplete {
+    max-height: 350px !important;
+}

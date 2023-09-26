@@ -49,7 +49,7 @@ export class PopUpPasajeroComponent implements OnInit,OnChanges {
   numMaxNroNinos = 4;
   numMaxHabitaciones = 4;
 
-  showOption: Boolean = true;
+  showOption: Boolean = false;
 
   pasajeros = 0;
   validPasajeros = false;
@@ -59,6 +59,9 @@ export class PopUpPasajeroComponent implements OnInit,OnChanges {
   idStateOpen: string = '';
 
   habitaciones: DistributionObject[] = [];
+
+  totalHabitacion=1;
+  totalPasajeros=2;
 
   @Input() onlyPasajeros = false;
   @Input() habitacionDisabled = true;
@@ -151,8 +154,9 @@ export class PopUpPasajeroComponent implements OnInit,OnChanges {
   }
 
   showPasajero() {
-    this.popupService.openPopUp(this.idContent);
-    // this.showOption = this.showOption ? false : true;
+    this.showOption = !this.showOption;
+    if(this.showOption) this.popupService.openPopUp(this.idContent);
+    if(!this.showOption) this.closePopUp();
   }
 
   closePopUp() {
@@ -225,6 +229,9 @@ export class PopUpPasajeroComponent implements OnInit,OnChanges {
 
   savePasajeros() {
     this.popupService.closePopUp(this.idContent);
+    const currentData=this.distributionObject(this.habitaciones);
+    this.totalHabitacion=currentData.habitacion;
+    this.totalPasajeros=currentData.pasajeros;
   }
 
 

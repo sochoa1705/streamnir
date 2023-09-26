@@ -11,11 +11,18 @@ import { FlightService } from 'src/app/api/api-nmviajes/services';
 import { EGalleryCode, IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 import { CryptoService } from 'src/app/Services/util/crypto.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+	styleUrls: ['./home.component.scss'],
+	animations: [
+		trigger('fadeInOut', [
+			transition('void => *', [style({ opacity: 0 }), animate(300, style({ opacity: 1 }))]),
+			transition('* => void', [style({ opacity: 0 })])
+		])
+	]
 })
 export class HomeComponent implements OnInit {
 	destiny: any = [];
@@ -71,11 +78,9 @@ export class HomeComponent implements OnInit {
 				virtualPagePath: `/confirmacion/${product.tab}`,
 				virtualPageTitle: 'NMV: Confirmacion'
 			});
-
-			this.casos(product.tab);
 		});
-
-		this.listDestiny();
+		this.casos();
+		//this.listDestiny();
 		this.getConfirmacion();
 		this.getGallery();
 		//this.getAirfare();
@@ -83,30 +88,34 @@ export class HomeComponent implements OnInit {
 		localStorage.removeItem('filters');
 	}
 
-	casos(tab: any) {
-		switch (tab) {
-			case 'paquetes':
-				this.selectedTab = 'paquetes';
-				break;
-			case 'armapaquete':
-				this.selectedTab = 'armapaquete';
-				break;
-			case 'vuelohotel':
-				this.selectedTab = 'vuelohotel';
-				break;
-			case 'hoteles':
-				this.selectedTab = 'hoteles';
-				break;
-			case 'autos':
-				this.indexSelectedTab=5
-				break;
-			case 'actividades':
-				this.selectedTab = 'actividades';
-				break;
-			default:
-				this.selectedTab = 'home';
-				break;
-		}
+	casos(){
+		this._activatedRoute.url.subscribe(urlSegments => {
+			const tab = urlSegments.map(segment => segment.path)[0];
+			switch (tab) {
+				case 'paquetes':
+					this.indexSelectedTab=1;
+					break;
+				case 'armapaquete':
+					this.indexSelectedTab=2;
+					break;
+				case 'vuelohotel':
+					this.indexSelectedTab=3;
+					break;
+				case 'hoteles':
+					this.indexSelectedTab=4;
+					break;
+				case 'autos':
+					this.indexSelectedTab=5
+					break;
+				case 'actividades':
+					this.indexSelectedTab=6;
+					break;
+				default:
+					this.indexSelectedTab=0;
+					break;
+			}
+		});
+
 	}
 
 	getConfirmacion() {
@@ -133,7 +142,6 @@ export class HomeComponent implements OnInit {
 
 	getGallery() {
 		this.dataPagePresenterService.getDataGallery().subscribe((data) => {
-			console.log(data,'banners')
 		    this.bannersDestacadosWeb = data
 				.filter((item) => item.Code == 'BANNERS_DESTACADOS_1' || item.Code == 'BANNERS_DESTACADOS_2' || item.Code == 'BANNERS_DESTACADOS_3' )
 				.map((item) => item.Images);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { Group, ISearchResponse } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
@@ -69,12 +69,9 @@ export class ResultsSearchPageComponent implements OnInit {
 		private _tokenService: TokenService,
 		private route: ActivatedRoute,
 		private _loadingService: LoadingService,
-		private _searchFiltersService: SearchFiltersService
+		private _searchFiltersService: SearchFiltersService,
+		private _router:Router
 	) {
-		/*this.route.queryParamMap.subscribe((params) => {
-			this.resetData()
-			
-		});*/
 	}
 
 	allDataGroups: Group[] = [];
@@ -134,6 +131,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		console.log('reloaddd')
 		this.isReload=true;
 		GlobalComponent.paramsSearch = {};
+		GlobalComponent.tokenMotorVuelo='';
 		this.isLoader=true;
 		this.allDataGroups=[];
 		this.dataFilterGroups=[];
@@ -180,6 +178,7 @@ export class ResultsSearchPageComponent implements OnInit {
 			isDurationDeparture: false,
 			isDurationReturn: false
 		};
+		this.currency='USD';
 		this.getToken();
 	}
 
@@ -201,7 +200,7 @@ export class ResultsSearchPageComponent implements OnInit {
 
 	getObjectParams() {
 		this.route.queryParamMap.subscribe((params) => {
-			if(this.isReload){
+			if(this.isReload && GlobalComponent.tokenMotorVuelo!==''){
 				const objParams = getParams(params);
 				this.params=objParams;
 				this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
@@ -222,11 +221,9 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	getAllDataSearch(objSearch: any) {
-		console.log(this._loadingService.requestSearchCount, 'couter')
 		this._searchService.getAllDataSearch(objSearch).subscribe({
 			next: (res) => {
 				this._loadingService.requestSearchCount++;
-				console.log(this._loadingService.requestSearchCount, 'newwwcouter')
 				if (res.groups) {
 					this.isLoader = false;
 					if (this.exchangeRate == 0) this.exchangeRate = res.exchangeRate.amount;
@@ -256,7 +253,6 @@ export class ResultsSearchPageComponent implements OnInit {
 	endsearch() {
 		this._searchService.endSearch().subscribe({
 			next: (res) => {
-				console.log(res, 'end Results gneral');
 				this._searchFiltersService.isFinishGDS.emit();
 			},
 			error: (err) => {
@@ -606,8 +602,8 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.applyFilters();
 	}
 
-	applyFilters() {
-		
+	applyFilters(isBoolean=false) {
+		//console.log(isBoolean, 'pase apply filtersss')
 		if(this.filters.arrayAirline.length==0){
 			this.dataAirlines={...this.dataAirlinesInit}
 		}
@@ -830,34 +826,38 @@ export class ResultsSearchPageComponent implements OnInit {
 
 	cleanFilters($event: Filter) {
 		this.filters = { ...$event };
+		console.log(this.filters,'filtersss clearrrr')
 		if (!this.filters.isPrices) {
 			this.filters.minPrice = this.minPrice;
 			this.filters.maxPrice = this.maxPrice;
 			this._searchFiltersService.isResetFilterPrice.emit();
 		}
-		if (!this.filters.isDurationDeparture) {
+
+		if (!this.filters.isDurationDeparture || !this.filters.isDurationReturn) {
 			this.valuesFilterDuration = { ...this.valuesFilterDurationInit }
 			this._searchFiltersService.isSetValuesDuration.emit(this.valuesFilterDurationInit)
-		};
-		if (this.filters.arrayBaggage.length == 0)
+		}
+
+		if (this.filters.arrayBaggage.length == 0){
 			this.dataBagFilter = this.dataBagFilter.map((item) => {
 				item.active = false;
 				return item;
 			});
-
-		if (this.filters.arrayScales.length == 0)
+		}
+		if (this.filters.arrayScales.length == 0){
 			this.dataScaleFilter = this.dataScaleFilter.map((item) => {
 				item.active = false;
 				return item;
 			});
+		}
 
-		if (this.filters.arrayAirline.length == 0)
+		if (this.filters.arrayAirline.length == 0){
 			this.dataAirlines = this.dataAirlines.map((item) => {
 				item.active = false;
 				return item;
 			});
-
-		this.applyFilters();
+		}
+		this.applyFilters(true);
 	}
 
 	resetFilterByDuration() {

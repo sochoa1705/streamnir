@@ -29,6 +29,7 @@ import { ButtonModule } from '../button/button.module';
 import { InputClassModule } from '../input-class/input-class.module';
 import { InputPassengersModule } from '../input-passengers/input-passengers.module';
 import { MultivueloModule } from '../multivuelo/multivuelo.module';
+import { NewCalendarModule } from '../new-calendar/new-calendar.module';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { MultivueloModule } from '../multivuelo/multivuelo.module';
     InputRangeModule,
     ButtonModule,
     InputClassModule,
+    NewCalendarModule,
     InputPassengersModule,
     NgxMaskModule.forRoot(),
     MultivueloModule

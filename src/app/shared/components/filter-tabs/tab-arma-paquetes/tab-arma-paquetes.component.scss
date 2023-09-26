@@ -1,0 +1,14 @@
+.container__tags{
+    display:flex;
+    gap:16px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.container__date{
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    column-gap: 16px;
+    align-items: center;
+    justify-content: flex-start;
+}

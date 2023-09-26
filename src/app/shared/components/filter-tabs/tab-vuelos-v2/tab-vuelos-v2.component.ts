@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { InputPassengersComponent } from '../../input-passengers/input-passengers.component';
 import { InputRangeComponent } from '../../input-range/input-range.component';
 import { InputSearchFlightComponent } from '../../input-search-flight/input-search-flight.component';
@@ -15,7 +15,7 @@ import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-f
 	templateUrl: './tab-vuelos-v2.component.html',
 	styleUrls: ['./tab-vuelos-v2.component.scss']
 })
-export class TabVuelosV2Component implements OnInit, OnChanges {
+export class TabVuelosV2Component implements OnInit, OnChanges,OnDestroy {
 	constructor(
 		private _notification: NotificationService,
 		private _accountService: AccountsService,
@@ -53,18 +53,18 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 		const valuesClass = this.childClass.getValues();
 		const valuesInputs = this.childInputs.getValues();
 		const valuesDates = this.childDates.getValues();
-		let messageError = '';
 
-		if (!valuesInputs.arrivalLocation) messageError = 'El destino es requerido';
+		const errors = [];
 
-		if (!valuesInputs.departureLocation) messageError = messageError + ' - La salida es requerido';
+		if (!valuesInputs.arrivalLocation)  errors.push("El destino es requerido");
 
-		if (valuesDates.departureDate == '') messageError = messageError + ' - La fecha de salida es requerido';
+		if (!valuesInputs.departureLocation) errors.push("La salida es requerido");
 
-		if (valuesDates.arrivalDate == '' && this.typeFlight == 0)
-			messageError = messageError + ' - La fecha de llegada es requerido';
+		if (valuesDates.departureDate == '') errors.push("La fecha de salida es requerido");
 
-		if (messageError !== '') this._notification.showNotificacion('Datos obligatorios sin completar', messageError);
+		if (valuesDates.arrivalDate == '' && this.typeFlight == 0) errors.push("La fecha de llegada es requerido")
+
+		if (errors.length > 0) this._notification.showNotificacion('Datos obligatorios sin completar',errors.join(" - "),7);
 		else {
 			const route = this.getRoute({ ...valuesClass, ...valuesPassengers, ...valuesInputs, ...valuesDates });
 			localStorage.setItem('searchParams', route);
@@ -82,31 +82,18 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 
 	searchDataMulti($event: any) {
 		this.counterSearch++;
-		let messageError = '';
+		const errors = [];
+		
 
 		$event.forEach((item: any) => {
 			item = { ...item };
 		});
 
-		if ($event.some((item: any) => !item.departureLocation)) {
-			messageError = messageError + ' salidas';
-		}
-
-		if ($event.some((item: any) => !item.arrivalLocation)) {
-			const separate = messageError !== '' ? ',' : '';
-			messageError = messageError + separate + ' destinos';
-		}
-
-		if ($event.some((item: any) => item.departureDate == '')) {
-			const separate = messageError !== '' ? ',' : '';
-			messageError = messageError + separate + ' fechas';
-		}
-
-		if (messageError !== '')
-			this._notification.showNotificacion(
-				'Datos obligatorios sin completar',
-				'Todos los campos de' + messageError + ' son requeridos'
-			);
+		if ($event.some((item: any) => !item.departureLocation)) errors.push("La salidas son requeridos")
+		if ($event.some((item: any) => !item.arrivalLocation))  errors.push("Los destinos son requeridos")
+		if ($event.some((item: any) => item.departureDate == '')) errors.push("Las fechas de salidas son requeridos")
+		
+		if (errors.length > 0) this._notification.showNotificacion('Datos obligatorios sin completar',errors.join(" - "),7)
 		else this.getRouteMulti($event);
 	}
 
@@ -127,5 +114,9 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 
 	changeType(index: number) {
 		this.typeFlight = index;
+	}
+
+	ngOnDestroy(): void {
+		document.documentElement.style.setProperty('--visibility', 'block');
 	}
 }

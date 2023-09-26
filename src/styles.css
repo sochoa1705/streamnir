@@ -4195,7 +4195,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       .rowBoxTab .colBoxtab input.icono {
         text-indent: 40px;
         padding-right: 33px !important;
-        background: url("./assets/origen.png") no-repeat 10px center; }
+        background: url("./assets/svg/airplane-line.svg") no-repeat 10px center; }
         .rowBoxTab .colBoxtab input.icono-no {
           text-indent: 10px;
           background: none; }
@@ -8559,7 +8559,7 @@ app-flight-deals button {
           background: white;
           border: 0.5px solid #e4e5e7;
           border-radius: 5px;
-          height: 48px;
+          min-height: 48px;
           padding: 0 10px; }
     @media (max-width: 640px) {
       .gridTab .rowGrid {

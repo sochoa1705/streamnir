@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbCalendar, NgbDate, NgbDateStruct, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
@@ -12,7 +11,7 @@ import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-f
 export class InputRangeComponent implements OnChanges,OnInit {
 	now = new Date();
 	@Output() inputDates = new EventEmitter<any>();
-	@Input() typeFlight = 0;
+	@Input() typeFlight = 0; // si es -1 => vuelo + hotel
 	@Input() idRowMulti = 0;
 	@Input() minDate: NgbDateStruct = {
 		year: this.now.getFullYear(),
@@ -47,7 +46,7 @@ export class InputRangeComponent implements OnChanges,OnInit {
 
 		this._searchFiltersService.isSetParams.subscribe({
 			next: (res: Params) => {
-				if (res.flightType !== 2) {
+				if (res.flightType !== 2 && this.typeFlight!==-1) {
 					if (res.departureDate) this.setParamDeparture(res.departureDate)
 					if (res.arrivalDate) this.setParamArrival(res.arrivalDate)
 				}
@@ -56,7 +55,7 @@ export class InputRangeComponent implements OnChanges,OnInit {
 
 		this._searchFiltersService.isSetParamsMulti.subscribe({
 			next: (res: Params) => {
-				if (res.multicity) {
+				if (res.multicity && this.typeFlight!==-1) {
 					const dateDeparture=res.multicity[this.idRowMulti].departureDate;
 					if(dateDeparture) this.setParamDeparture(dateDeparture);
 				}
@@ -68,7 +67,7 @@ export class InputRangeComponent implements OnChanges,OnInit {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if (changes['typeFlight'].currentValue == 0) {
+		if (changes['typeFlight'].currentValue == 0 || changes['typeFlight'].currentValue == -1) {
 			this.showCalendar = false;
 			document.documentElement.style.setProperty('--visibility', 'block');
 		}
@@ -137,6 +136,7 @@ export class InputRangeComponent implements OnChanges,OnInit {
 		if (this.showCalendar) {
 			this.fromDate = this.fromDateSeleted;
 			this.toDate = this.toDateSeleted;
+			this.scrollReset();
 		}
 	}
 
@@ -204,10 +204,25 @@ export class InputRangeComponent implements OnChanges,OnInit {
 		}
 	}
 
+	scrollReset(){
+		const scrollPercentage = 4; // Porcentaje de desplazamiento
+		const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+		const documentHeight = document.documentElement.scrollHeight;
+		const scrollTo = (documentHeight - windowHeight) * (scrollPercentage / 100);
+		window.scroll({ top: scrollTo, behavior: 'smooth' });
+	}
+
 	getValues() {
 		return {
 			arrivalDate: this.dateReturn,
 			departureDate: this.dateDeparture
+		};
+	}
+
+	getValuesByHotel() {
+		return {
+			arrivalDate: this.toDate,
+			departureDate: this.fromDate
 		};
 	}
 }

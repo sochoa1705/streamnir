@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
-import { ParamsVueloHotel, URLVueloHotel } from '../../tabs/tabs.models';
+import { EnumCabins, ParamsVueloHotel, URLVueloHotel } from '../../tabs/tabs.models';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { ModelTaggingVuelosHoteles, SearchFlightHotel } from 'src/app/Services/analytics/tagging.models';
 import * as moment from 'moment';
@@ -12,6 +12,8 @@ import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { InputValidationService } from '../../../../Services/inputValidation.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { AccountsService } from 'src/app/Services/accounts.service';
+import { InputRangeComponent } from '../../input-range/input-range.component';
+import { InputClassComponent } from '../../input-class/input-class.component';
 
 moment.locale('es')
 
@@ -23,6 +25,8 @@ moment.locale('es')
 export class TabVueloHotelComponent {
 
 	@ViewChild('popUp') popUpElement: PopUpPasajeroComponent | undefined;
+	@ViewChild('childDates') childDates!: InputRangeComponent;
+	@ViewChild('childClass') childClass!: InputClassComponent;
 
 	form!: FormGroup;
 	fromDate: NgbDate | null
@@ -57,7 +61,7 @@ export class TabVueloHotelComponent {
 	}
 
 	navigateToResponseUrl(url: string): void {
-		//window.location.href = url;
+		window.open(url, '_blank');
 	}
 
 	validateForm(field: string) {
@@ -88,7 +92,13 @@ export class TabVueloHotelComponent {
 
 	public async searchVueloHotel() {
 		this.isSubmit = true;
-
+		const valueClass=this.childClass.getValues();
+        const newValue=valueClass.flightClass==0 ? 'economy' : 'business';
+		const valuesDateRange=this.childDates.getValuesByHotel();
+		this.form.controls.clase.setValue(newValue);
+		this.toDate=valuesDateRange.arrivalDate;
+		this.fromDate=valuesDateRange.departureDate;
+		
 		let errosInputs = this.getErrorsForm(this.form);
 
 		if (errosInputs.length > 0) {
@@ -104,7 +114,7 @@ export class TabVueloHotelComponent {
 		}
 
 		let url = this.getUrlVueloHotel();
-
+	
 		const result = await this._accountsService.getAccountToken();
 		if (result) {
 			if (result.Result.IsSuccess) {

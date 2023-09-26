@@ -6,7 +6,7 @@
         height: 36px;
         padding: 8px 12px;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         gap:8px;
         border: 1px solid colors.$gris-200;
@@ -27,10 +27,13 @@
         position: absolute;
         top: 37px;
         right: 0;
+        &.is-left{
+            left:0;
+            right: auto;
+        }
         z-index: 3;
         &__options{
             width: 160px;
-            height: 156px;
             padding: 8px 12px;
             padding-bottom: 16px;
             border-radius: 8px;
@@ -92,6 +95,10 @@
             border: solid;
             border-width: 1px 1px 0px 0px;
             border-color: colors.$gris-200;
+            &.is-left{
+                left:15px;
+                right: auto;
+            }
         }
     }
 }

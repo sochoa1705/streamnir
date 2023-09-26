@@ -1,35 +1,9 @@
 <div class="container__range">
-	<div class="container__range__date" (click)="openCalendar()" [class.multi]="typeFlight==2">
+	<div class="container__range__date multi" (click)="openCalendar()">
 		<img src="./assets/svg/calendar.svg" alt="" />
 		<span [class.inactive]="dateDeparture == ''">{{ dateDeparture == '' ? 'Salida' : dateDeparture }}</span>
 	</div>
-	<div *ngIf="typeFlight!==2" class="container__range__date" (click)="typeFlight < 1 ? openCalendar() : null" [class.inactive]="typeFlight >= 1">
-		<img [src]="typeFlight >=1 ? './assets/svg/calendar-inactive.svg' : './assets/svg/calendar.svg'" alt="" />
-		<span [class.inactive]="dateReturn == ''">{{ dateReturn == '' ? 'Retorno' : dateReturn }}</span>
-	</div>
-	<section *ngIf="showCalendar && typeFlight < 1">
-		<div class="container__range__arrow"></div>
-		<div class="container__range__datepicker">
-			<div class="container__range__datepicker__calendars">
-				<ngb-datepicker
-					[outsideDays]="'collapsed'"
-					#dp
-					(dateSelect)="onDateSelection($event)"
-					[displayMonths]="2"
-					[dayTemplate]="t"
-					[minDate]="minDate"
-					[startDate]="fromDate ? fromDate : minDate"
-				>
-				</ngb-datepicker>
-			</div>
-			<div class="container__range__datepicker__buttons">
-				<app-button [text]="'Cancelar'" [size]="'xs'" [color]="'neutral'" (onClick)="openCalendar(true)"></app-button>
-				<app-button [text]="'Aplicar'" [size]="'xs'" [color]="'outline-primary'" (onClick)="applyRange()"></app-button>
-			</div>
-		</div>
-	</section>
-
-	<section *ngIf="showCalendar && typeFlight > 0">
+	<section [hidden]="!showCalendar">
 		<div class="container__range__arrow"></div>
 		<div class="container__range__datepicker">
 			<div class="container__range__datepicker__calendar">
@@ -39,7 +13,7 @@
 							<span class="ngb-dp-navigation-chevron"></span>
 						</button>
 					</div>
-					<span>{{ dateOneWay.month | monthToText}} {{ dateOneWay.year }}</span>
+					<span>{{ nameCurrentMonth }} {{ dateOneWay.year }}</span>
 					<div class="ngb-dp-arrow right">
 						<button type="button" class="btn btn-link ngb-dp-arrow-btn" (click)="changeMonth(1)">
 							<span class="ngb-dp-navigation-chevron"></span>
@@ -54,7 +28,6 @@
 					[dayTemplate]="customDay"
 					[minDate]="minDate"
 					[outsideDays]="'collapsed'"
-					[startDate]="selectedDateOneWay"
 				></ngb-datepicker>
 			</div>
 			<div class="container__range__datepicker__buttons">
@@ -67,19 +40,6 @@
 
 <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
 	<span class="custom-day" [class.range]="selected || ( selectedDateOneWay ? selectedDateOneWay.year==date.year && selectedDateOneWay.day==date.day && selectedDateOneWay.month==date.month : false)">
-		{{ date.day }}
-	</span>
-</ng-template>
-
-<ng-template #t let-date let-focused="focused">
-	<span
-		class="custom-day"
-		[class.focused]="focused"
-		[class.range]="isRange(date)"
-		[class.faded]="isHovered(date) || isInside(date)"
-		(mouseenter)="hoveredDate = date"
-		(mouseleave)="hoveredDate = null"
-	>
 		{{ date.day }}
 	</span>
 </ng-template>
