@@ -41,6 +41,11 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 				})
 			 }
 		});
+		this._searchFiltersService.isLoader.subscribe({
+			next: () => {
+				this.showLoader=true;
+			}
+		});
 	}
 
 	dropdownActive = true;

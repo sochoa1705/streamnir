@@ -30,7 +30,7 @@ export class FiltersComponent implements OnInit {
   @Input() dataBagFilter:Item[]=[];
   @Input() totalResults:number;
   @Input() totalResultsFilter:number;
-  @Input() exchangeRate:number;
+  @Input() exchangeRate:number | null;
   @Input() isNotResult=false;
   @Input() valuesFilterDuration:IFilterDuration;
   @Input() minPrice=0;

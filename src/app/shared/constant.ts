@@ -96,3 +96,15 @@ export const CALLER_TYPE = {
   company: 'Expertia',
   application: 'NMViajes'
 }
+
+
+export const WHATSAPPCONSTANT = {
+  text : "Contáctanos",
+  cellphone: "51919294628",
+  message: "Hola, me gustaría solicitar información sobre..."
+}
+
+
+export enum IdlePopupConstants {
+  SEND_EMAIL
+}
