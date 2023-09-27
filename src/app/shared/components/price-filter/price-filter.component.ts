@@ -31,6 +31,13 @@ export class PriceFilterComponent implements OnInit, OnChanges{
 				}, 10);
 			}
 		})
+
+		this._searchFiltersService.isLoader.subscribe({
+			next: () => {
+				this.value = 0;
+				this.highValue = 0;
+			}
+		});
 	}
 	
 	@Input() currency = 'USD';
@@ -43,6 +50,7 @@ export class PriceFilterComponent implements OnInit, OnChanges{
 	value: number = 0;
 	highValue: number = 0;
 	hidden=false;
+	showLoader=false;
 	options: Options = {
 		floor: 0,
 		ceil: 0,

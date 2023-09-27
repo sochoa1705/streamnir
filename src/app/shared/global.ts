@@ -35,7 +35,8 @@ export class GlobalComponent {
     public static listCountries:ICountry[]=[];
     public static classFligh='Economy';
     public static paramsSearch:any;
-    public static indexSegmentSeleted:number[]=[]
+    public static indexSegmentSeleted:number[]=[];
+    
     //public static discountCupon:
   }
 

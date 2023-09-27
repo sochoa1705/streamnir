@@ -15,6 +15,10 @@ import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
 import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
+import { Subscription } from 'rxjs';
+import { IdlePopupComponent } from './idle-popup/idle-popup.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IdlePopupConstants } from './idle-popup/idle-popup.constants';
 
 interface Item {
 	value: any;
@@ -70,7 +74,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		private route: ActivatedRoute,
 		private _loadingService: LoadingService,
 		private _searchFiltersService: SearchFiltersService,
-		private _router: Router
+		private _modalService: NgbModal,
 	) {}
 
 	allDataGroups: Group[] = [];
@@ -89,7 +93,7 @@ export class ResultsSearchPageComponent implements OnInit {
 	dataScaleTemp: Item[] = [];
 
 	filters: Filter;
-	exchangeRate = 0;
+	exchangeRate: number | null;
 	currency = 'USD';
 
 	theCheapest: Order | null;
@@ -120,10 +124,11 @@ export class ResultsSearchPageComponent implements OnInit {
 	idCheap = '0';
 	params: Params;
 	isReload = false;
+	idleSubscriber: Subscription;
 
 	ngOnInit() {
 		this.reloadPageResult();
-		//esta reseteando 2 veces por el
+		this.configIdle();
 	}
 
 	reloadPageResult() {
@@ -132,6 +137,8 @@ export class ResultsSearchPageComponent implements OnInit {
 		GlobalComponent.paramsSearch = {};
 		GlobalComponent.tokenMotorVuelo = '';
 		this.isLoader = true;
+		this._searchFiltersService.isLoader.emit(true);
+		this.exchangeRate = null;
 		this.allDataGroups = [];
 		this.dataFilterGroups = [];
 		this.dataGroupsPaginate = [];
@@ -227,7 +234,7 @@ export class ResultsSearchPageComponent implements OnInit {
 				this._loadingService.requestSearchCount++;
 				if (res.groups) {
 					this.isLoader = false;
-					if (this.exchangeRate == 0) this.exchangeRate = res.exchangeRate.amount;
+					if (this.exchangeRate == null) this.exchangeRate = res.exchangeRate.amount;
 					this.getDataFilters(res);
 				}
 				if (this._loadingService.requestSearchCount == 9) {
@@ -280,6 +287,10 @@ export class ResultsSearchPageComponent implements OnInit {
 					this.filters.minPrice = this.minPrice;
 					this.filters.maxPrice = this.maxPrice;
 					this.getValuesByFilterDuration();
+					this._searchFiltersService.isSetValuesPrices.emit({
+						minPrice: this.minPrice,
+						maxPrice: this.maxPrice
+					});
 					this.valuesFilterDurationInit = { ...this.valuesFilterDuration };
 					this._searchFiltersService.isFinishGDS.emit();
 				} else this.showNotResults = true;
@@ -868,4 +879,8 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.sortBy = $event;
 		this.sortData();
 	}
+
+	configIdle(){
+	}
+
 }

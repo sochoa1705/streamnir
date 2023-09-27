@@ -18,6 +18,7 @@ import { PriceFilterModule } from 'src/app/shared/components/price-filter/price-
 import { DurationFilterModule } from 'src/app/shared/components/duration-filter/duration-filter.module';
 import { NotResultsComponent } from './not-results/not-results.component';
 import { CardLoaderResultModule } from 'src/app/shared/components/card-loader-result/card-loader-result.module';
+import { IdlePopupComponent } from './idle-popup/idle-popup.component';
 registerLocaleData(localeEs, "es");
 
 @NgModule({
@@ -38,7 +39,7 @@ registerLocaleData(localeEs, "es");
         DurationFilterModule,
         CardLoaderResultModule
     ],
-    declarations:[ResultsSearchPageComponent, FiltersComponent, SortByComponent, NotResultsComponent],
+    declarations:[ResultsSearchPageComponent, FiltersComponent, SortByComponent, NotResultsComponent, IdlePopupComponent],
     exports: [ResultsSearchPageComponent],
     providers: [{ provide: LOCALE_ID, useValue: "es" }],
 })

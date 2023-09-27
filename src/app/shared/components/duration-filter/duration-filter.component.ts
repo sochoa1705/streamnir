@@ -65,13 +65,18 @@ export class DurationFilterComponent implements OnInit{
         //this.toggleCollapsed();
 			}
 		});
-
     this._searchFiltersService.isSetValuesDuration.subscribe({
       next:(res:any) =>{
          this.hidden=true;
          this.setValues(res);
       }
     })
+
+    this._searchFiltersService.isLoader.subscribe({
+			next: () => {
+				 this.valueDurationDep=0;
+			}
+		});
 	}
   
   dropdownActive=true;
@@ -123,7 +128,6 @@ export class DurationFilterComponent implements OnInit{
   isFilterDeparture=true;
 
   setValues(res:any){
-    console.log(res.highValueDurationDep, res.valueDurationDep)
     this.valueDurationDep = res.minDurationDeparture;
     this.optionsDurationDep.floor = res.minDurationDeparture;
     this.highValueDurationDep = res.maxDurationDeparture;

@@ -15,4 +15,5 @@ export class SearchFiltersService {
     isSetValuesPrices = new EventEmitter();
     isSetParams = new EventEmitter();
     isSetParamsMulti = new EventEmitter();
+    isLoader = new EventEmitter();
 }

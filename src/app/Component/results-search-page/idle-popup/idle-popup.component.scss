@@ -1,0 +1,17 @@
+::ng-deep ngb-modal-window {
+  .inactivity-dialog.modal-dialog {
+    min-width: auto !important;
+  }
+}
+
+.modal-body img {
+  width: 110px;
+}
+
+button.btn.w-75 {
+  height: 50px;
+}
+
+.modal-body input.form-control::placeholder {
+  color: #4b4b4b !important;
+}
