@@ -1,6 +1,6 @@
 <div class="dropdown__filter" *ngIf="!showLoader">
     <div class="dropdown__filter__header" (click)="dropdownActive=!dropdownActive">
-        <h4>{{title}}</h4>
+        <h4>{{title}}     {{listOptions.length}} {{listOptionsAirlines.length}}</h4>
         <img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
     </div>
     <div class="dropdown__filter__body" *ngIf="dropdownActive && listOptions.length > 0">

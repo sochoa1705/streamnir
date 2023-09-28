@@ -8,6 +8,7 @@ export class SearchFiltersService {
     isResetFilterDuration  = new EventEmitter();
     isResetFilterBaggage = new EventEmitter();
     isResetFilterAirlines = new EventEmitter();
+    isSetValuesDropdown = new EventEmitter();
     isResetFilterScales = new EventEmitter();
     isFinishGDS = new EventEmitter();
     isCounterDinamic = new EventEmitter();
