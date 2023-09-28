@@ -39,6 +39,15 @@
             padding-left: 27px;
         }
     }
+    input {
+        &:read-only{
+            background: colors.$gris-50;
+            &:focus {
+                outline: none;
+                border: 1px solid colors.$neutral-200;
+            }
+        }
+    }
     select{
         padding: 11.3px 15px;
         -webkit-appearance: none;

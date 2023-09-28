@@ -103,7 +103,7 @@ export class ModalFeeComponent implements OnInit{
 			GlobalComponent.upSellSeleted=item;
 			GlobalComponent.appBooking.brandedFareName = item.name;
 			this._checkoutService.selectUpSellModal();
-			this.router.navigateByUrl('/checkout');
+			this.router.navigateByUrl('/booking');
 		}
 
 		this.activeModal.close(item);

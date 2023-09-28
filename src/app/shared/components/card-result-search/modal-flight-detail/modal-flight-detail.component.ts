@@ -89,15 +89,11 @@ export class ModalFlightDetailComponent implements OnInit {
 			segmentArray.push(this.segmentReturn);
 			segmentIndex.push(this.indexSegmentReturn);
 		};
-		/*GlobalComponent.segmentSelected =
-			this.flight.ndcInfo
-				? this.flight.ndcInfo.segmentInfo[0].segments
-				: segmentArray;*/
-		
+
 		GlobalComponent.segmentSelected=segmentArray;
 		GlobalComponent.appBooking=dataInitBooking;
-		GlobalComponent.appBooking.segmentSelected=GlobalComponent.segmentSelected;
-		//GlobalComponent.indexSegmentSeleted=segmentIndex;
+		GlobalComponent.appBooking.segmentSelected=segmentArray;
+		GlobalComponent.indexSegmentSeleted=segmentIndex;
 
 		GlobalComponent.appGroupSeleted = this.flight;
 		this._checkoutService.setIsDomestic();
@@ -155,7 +151,7 @@ export class ModalFlightDetailComponent implements OnInit {
 
 	redirectCheckout(){
 		this._loadingService.idle();
-		this.router.navigateByUrl('/checkout');
+		this.router.navigateByUrl('/booking');
 		this.activeModal.close();
 	}
 }

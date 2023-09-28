@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TokenService {
-	constructor(private _httpClient: HttpClient) {}
+	constructor(private _httpClient: HttpClient,) {}
 	
 	getAndSaveToken(browser: string): Observable<RToken> {
 		const credentials = localStorage.getItem('usuario');
@@ -40,5 +40,14 @@ export class TokenService {
 				v = c == 'x' ? r : (r & 0x3) | 0x8;
 			return v.toString(16);
 		});
+	}
+    //auth/api/auth/meta-token/{transactionId:Guid}/{ipAddress}
+	getTokenByTransactionId(transactionId:string, ipAddress:string){
+		let url = `${environment.urlApiMotorVuelos}/auth/api/auth/meta-token/${transactionId}/${ipAddress}`;
+		return this._httpClient.post<RToken>(url,{});
+	}
+
+	public getIPAddress(){
+	  return this._httpClient.get<any>("http://api.ipify.org/?format=json");
 	}
 }

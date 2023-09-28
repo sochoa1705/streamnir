@@ -14,12 +14,12 @@ export class InputClassComponent implements OnInit {
 		this._searchFiltersService.isSetParams.subscribe({
 			next: (res:Params) => {
         this.indexClass=res.flightClass;
-        this.nameClass=this.indexClass==0 ? 'Económico' : this.indexClass==1 ? 'Negocios':'Primera clase';
+        this.nameClass=this.indexClass==0 ? 'Económica' : this.indexClass==1 ? 'Negocios':'Primera clase';
 			}
 		}); 
   }
   showOptions=false;
-  nameClass='Económico'
+  nameClass='Económica'
   indexClass=0;
   inside=false;
   counterClik=0;

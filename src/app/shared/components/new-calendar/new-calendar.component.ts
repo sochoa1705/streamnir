@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbCalendar, NgbDate, NgbDateStruct, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -30,6 +30,7 @@ export class NewCalendarComponent implements OnInit {
 	nameCurrentMonth = 'Enero';
 
 	@ViewChild('dp2') dp2: NgbDatepicker;
+	@Input() placeholder='Salida';
 
 	ngOnInit(): void {
 		this.setNameMonth(this.now.getMonth() + 1);

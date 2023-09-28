@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ICountry } from '../models/rq-contries-get';
 
@@ -11,6 +11,9 @@ export class ContryService {
 
     getContryList(){
         const url = `${this.URL_API}/ubigeo/country-list`;
-		return this._httpClient.get<ICountry[]>(url);
+        const headers = new HttpHeaders()
+			.set('Content-Type', 'application/json')
+			.set('not-loading', 'true')
+		return this._httpClient.get<ICountry[]>(url,{headers});
     }
 }

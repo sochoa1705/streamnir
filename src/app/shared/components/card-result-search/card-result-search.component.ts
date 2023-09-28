@@ -149,7 +149,6 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
 	changeSegmentDeparture(index: number, indexSegment: number, idSegment: number) {
 		this.indexSegmentDeparture[index] = indexSegment;
 		this.segmentDeparture[index] = idSegment;
-		console.log(this.segmentDeparture);
 	}
 
 	changeSegmentReturn(index: number, idSegment: number) {

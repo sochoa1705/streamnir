@@ -48,7 +48,7 @@ const routes: Routes = [
       },
       {
         path: 'booking/itinerary/:transactionId/:idGroup/:segments/:flightType/:departureLocation/:arrivalLocation/:departureDate/:arrivalDate/:adults/:children/:infants/:flightClass',
-        component: ItineraryComponent
+        loadChildren: () => import('../../../app/Component/checkout-page/checkout.module').then(m => m.CheckoutPageModule),
       },
       {
         path: 'conformidad',
@@ -201,7 +201,7 @@ const routes: Routes = [
     loadChildren: () => import('../../../app/Component/home-page/tuscitas/tuscitas.module').then(m => m.TuscitasModule)
   },
   {
-    path: 'checkout',
+    path: 'booking',
     loadChildren: () => import('../../../app/Component/checkout-page/checkout.module').then(m => m.CheckoutPageModule),
     canActivate: [CanActivateCheckoutGuard]
   },
