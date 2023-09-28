@@ -43,11 +43,12 @@ export class TokenService {
 	}
     //auth/api/auth/meta-token/{transactionId:Guid}/{ipAddress}
 	getTokenByTransactionId(transactionId:string, ipAddress:string){
-		let url = `${environment.urlApiMotorVuelos}/auth/api/auth/meta-token/${transactionId}/${ipAddress}`;
+		const api = 'https://motorvuelos.expertiatravel.com';
+		let url = `${api}/auth/api/auth/meta-token/${transactionId}/${ipAddress}`;
 		return this._httpClient.post<RToken>(url,{});
 	}
 
 	public getIPAddress(){
-	  return this._httpClient.get<any>("https://jsonip.com/");
+	  return this._httpClient.get<any>("https://api.ipify.org/?format=json");
 	}
 }
