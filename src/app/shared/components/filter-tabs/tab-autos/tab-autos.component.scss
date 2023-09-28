@@ -1,35 +1,41 @@
-input#initHour {
-    display: inline-block;
-    position: relative;
-}
-
-input#initHour::-webkit-calendar-picker-indicator {
-    background: transparent;
-    bottom: 0;
-    color: transparent;
+.checkbox__line{
+    display: flex;
+    gap:8px;
+    align-items: center;
+    justify-content: flex-start;
+    width: fit-content;
     cursor: pointer;
-    height: auto;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: auto;
+    span{
+        img{
+            width: 24px;
+        }
+        font-family: Montserrat;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
 }
 
-input#lastHour {
-    display: inline-block;
-    position: relative;
+.inputs__date{
+    display: grid;
+    grid-template-columns: repeat(4,1fr) 126px;
+    gap:16px;
 }
 
-input#lastHour::-webkit-calendar-picker-indicator {
-    background: transparent;
-    bottom: 0;
-    color: transparent;
-    cursor: pointer;
-    height: auto;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: auto;
+input[type="time"].custom-time-input {
+    appearance: none;
+    -webkit-appearance: none;
+    &::-webkit-calendar-picker-indicator{
+        background: transparent;
+        width: 90%;
+        height: 30px;
+        position: absolute;
+        top: 18px;
+        left:3px;
+        cursor: pointer; 
+        background-image: url("/assets/svg/hour.svg");
+        background-repeat: no-repeat;
+    }
 }

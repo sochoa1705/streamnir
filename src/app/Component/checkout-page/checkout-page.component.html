@@ -3,7 +3,7 @@
 <div class="container__page">
 	<section>
 		<!--[hidden]="!detailFlight" <app-pay  [hidden]="indexStepActive !== 2"></app-pay>-->
-		<div [hidden]="!detailFlight">
+		<div *ngIf="detailFlight">
 			<app-baggage-insurance [hidden]="indexStepActive !== 0"
 				(changeStep)="clickedStep($event)"></app-baggage-insurance>
 			<app-passengers [hidden]="indexStepActive !== 1" (changeStep)="clickedStep($event)"></app-passengers>
@@ -105,7 +105,7 @@
 							<ng-container *ngFor="let item of detailFlight.departure as departure; let i = index">
 								<app-card-detail-fly [item]="item" [classFligh]="classFligh"
 									[nameUpSellSelect]="nameUpSellSelect" [totalADT]="pricing.totalADT"
-									[totalCNN]="pricing.totalCNN" [totalINF]="pricing.totalINF"></app-card-detail-fly>
+									[totalCNN]="pricing.totalCNN" [totalINF]="pricing.totalINF" [indexSegment]="indexSegmentSelected[i]"></app-card-detail-fly>
 								<div class="container__page__detail__flight__contend__line"
 									*ngIf="i < departure.length - 1"></div>
 							</ng-container>
@@ -114,7 +114,7 @@
 								<div class="container__page__detail__flight__contend__line"></div>
 								<app-card-detail-fly [item]="detailFlight.returns" [classFligh]="classFligh"
 									[nameUpSellSelect]="nameUpSellSelect" [totalADT]="pricing.totalADT"
-									[totalCNN]="pricing.totalCNN" [totalINF]="pricing.totalINF"></app-card-detail-fly>
+									[totalCNN]="pricing.totalCNN" [totalINF]="pricing.totalINF" [indexSegment]="indexSegmentSelected[indexSegmentSelected.length-1]"></app-card-detail-fly>
 							</ng-container>
 						</app-card-checkout>
 					</div>

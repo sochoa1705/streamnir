@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ISuggest } from '../tab-vuelos/tab-vuelos.interfaces';
@@ -14,7 +14,7 @@ import * as moment from 'moment';
 @Component({
     selector: 'app-tab-autos',
     templateUrl: './tab-autos.component.html',
-    styleUrls: ['./tab-autos.component.scss']
+    styleUrls: ['../tab-paquetes/tab-paquetes.component.scss', './tab-autos.component.scss']
   })
   export class TabAutosComponent {
 
@@ -26,6 +26,7 @@ import * as moment from 'moment';
     viewInputRecojo = false;
     conductor: Array<any> = [{code: '21', name: '21'},{code: '22', name: '22'},{code: '23', name: '23'},{code: '24', name: '24'},{code: '25', name: '25+'}];
     dateLimit: NgbDate;
+    isChecked=true;
 
     constructor(private destineService: DestinyService, private _snackBar: MatSnackBar, public inputValidator : InputValidationService, private calendar: NgbCalendar) {
       this.form = new FormGroup({
@@ -201,7 +202,13 @@ import * as moment from 'moment';
   }
 
   changeChecked(): void {
+    this.isChecked=!this.isChecked;
+    this.form.controls.checkDevolver.setValue(this.isChecked);
     this.viewInputRecojo = !this.form.controls['checkDevolver'].value;
+  }
+
+  setFocusTime(inputElement: any){
+    inputElement.nativeElement.focus();
   }
 
   }

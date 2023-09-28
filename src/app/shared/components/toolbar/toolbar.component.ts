@@ -39,7 +39,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 		public accountService: AccountsService
 	) {
 		this.route.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: any) => {
-			if (event.url.includes('/checkout')) {
+			if ((event.url).toString().includes('booking')) {
 				this.isShowMenu = false;
 			}
 		});

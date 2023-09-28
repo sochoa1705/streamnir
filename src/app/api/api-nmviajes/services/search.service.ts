@@ -7,6 +7,7 @@ import { Observable, from, of } from 'rxjs';
 import { ISearchResponse } from '../../api-checkout/models/rq-checkout-search';
 import { map, mergeMap } from 'rxjs/operators';
 import { IUpSell } from '../../api-checkout/models/rq-checkout-up-sell';
+import { IBookingKayak } from '../../api-checkout/models/rq-checkout-kayak';
 
 @Injectable({ providedIn: 'root' })
 export class SearchService {
@@ -116,5 +117,11 @@ export class SearchService {
 		let url = `${environment.urlApiMotorVuelos}/mv/search-nm-finish`;
 		return this._httpClient.post<any>(url,{}, { headers });
 	}
+    //mv/meta-search/{transactionId:Guid}/{groupId}
+	getGroupByTransactionId(transactionId:string,groupId:string ){
+		let url = `${environment.urlApiMotorVuelos}/mv/meta-search/${transactionId}/${groupId}`;
+		return this._httpClient.get<IBookingKayak>(url);
+	}
+
 
 }

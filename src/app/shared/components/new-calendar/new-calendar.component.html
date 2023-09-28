@@ -1,7 +1,7 @@
 <div class="container__range">
 	<div class="container__range__date multi" (click)="openCalendar()">
 		<img src="./assets/svg/calendar.svg" alt="" />
-		<span [class.inactive]="dateDeparture == ''">{{ dateDeparture == '' ? 'Salida' : dateDeparture }}</span>
+		<span [class.inactive]="dateDeparture == ''">{{ dateDeparture == '' ? placeholder : dateDeparture }}</span>
 	</div>
 	<section [hidden]="!showCalendar">
 		<div class="container__range__arrow"></div>
