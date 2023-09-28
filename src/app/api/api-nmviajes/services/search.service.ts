@@ -119,7 +119,8 @@ export class SearchService {
 	}
     //mv/meta-search/{transactionId:Guid}/{groupId}
 	getGroupByTransactionId(transactionId:string,groupId:string ){
-		let url = `${environment.urlApiMotorVuelos}/mv/meta-search/${transactionId}/${groupId}`;
+		const api = 'https://motorvuelos.expertiatravel.com'
+		let url = `${api}/mv/meta-search/${transactionId}/${groupId}`;
 		return this._httpClient.get<IBookingKayak>(url);
 	}
 

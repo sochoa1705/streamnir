@@ -16,9 +16,7 @@ import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-f
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
 import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { Subscription } from 'rxjs';
-import { IdlePopupComponent } from './idle-popup/idle-popup.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { IdlePopupConstants } from './idle-popup/idle-popup.constants';
 
 interface Item {
 	value: any;
@@ -127,6 +125,7 @@ export class ResultsSearchPageComponent implements OnInit {
 	idleSubscriber: Subscription;
 
 	ngOnInit() {
+		GlobalComponent.isKayak=false;
 		this.reloadPageResult();
 		this.configIdle();
 	}
@@ -619,10 +618,6 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	applyFilters() {
-		if (this.filters.arrayAirline.length == 0) {
-			this.dataAirlines = { ...this.dataAirlinesInit };
-		}
-
 		this.dataFilterGroups = [];
 		this.dataGroupsPaginate = [];
 		const dataFilter = [...this.allDataGroups].filter((item) => {

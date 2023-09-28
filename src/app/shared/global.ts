@@ -1,3 +1,4 @@
+import { ParamMap } from "@angular/router";
 import { IBooking, Secure } from "../api/api-checkout/models/rq-checkout-booking";
 import { RDiscount } from "../api/api-checkout/models/rq-checkout-discount";
 import { ExchangeRate, Group, PricingDetail } from "../api/api-checkout/models/rq-checkout-search";
@@ -36,7 +37,8 @@ export class GlobalComponent {
     public static classFligh='Economy';
     public static paramsSearch:any;
     public static indexSegmentSeleted:number[]=[];
-    
+    public static isKayak=false;
+
     //public static discountCupon:
   }
 

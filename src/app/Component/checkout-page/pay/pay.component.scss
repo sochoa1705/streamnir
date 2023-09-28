@@ -66,6 +66,9 @@
 				height: 80px;
 				display: grid;
 				grid-template-columns: repeat(2, 1fr);
+				&.is-kayak{
+					grid-template-columns: 1fr;
+				}
 
 				@media (max-width: 1199px) {
 					height: 150px;
@@ -217,7 +220,7 @@
 						margin: 10px;
 					}
 
-					@media (max-width: 5709px) {
+					@media (max-width: 570px) {
 						height: 37px;
 						padding: 8px 12px 8px 12px;
 						border-radius: 8px;
@@ -231,7 +234,7 @@
 						line-height: 28px;
 						color: colors.$blue-500;
 
-						@media (max-width: 5709px) {
+						@media (max-width: 570px) {
 							font-size: 12px;
 						}
 					}

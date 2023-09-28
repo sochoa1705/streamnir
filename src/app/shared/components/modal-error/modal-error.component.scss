@@ -25,6 +25,9 @@
             letter-spacing: 0em;
             text-align: center;
             color:colors.$neutral-900;
+            &.top-20{
+                margin-top: 20px;
+            }
         }
         &__actions{
             display: flex;

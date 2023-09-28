@@ -32,7 +32,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatExpansionModule
     ],
     exports: [PayComponent],
-    declarations: [PayComponent, MessagePayComponent,  NationalityPipe],
+    declarations: [PayComponent, MessagePayComponent, NationalityPipe],
     providers: [],
 })
 export class PayModule { }

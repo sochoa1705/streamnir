@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RToken } from '../models/rq-token-ce-request';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -43,11 +43,12 @@ export class TokenService {
 	}
     //auth/api/auth/meta-token/{transactionId:Guid}/{ipAddress}
 	getTokenByTransactionId(transactionId:string, ipAddress:string){
-		let url = `${environment.urlApiMotorVuelos}/auth/api/auth/meta-token/${transactionId}/${ipAddress}`;
+		const api = 'https://motorvuelos.expertiatravel.com';
+		let url = `${api}/auth/api/auth/meta-token/${transactionId}/${ipAddress}`;
 		return this._httpClient.post<RToken>(url,{});
 	}
 
 	public getIPAddress(){
-	  return this._httpClient.get<any>("http://api.ipify.org/?format=json");
+	  return this._httpClient.get<any>("https://api.ipify.org/?format=json");
 	}
 }
