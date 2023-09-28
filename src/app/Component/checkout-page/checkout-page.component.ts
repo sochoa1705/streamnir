@@ -156,7 +156,6 @@ export class CheckoutPageComponent implements OnInit {
 	}
 
 	getParamsKayak(paramMap:ParamMap){
-		console.log(paramMap,'params')
 		const transactionId=paramMap.get('transactionId') || '';
 		const idGroup=paramMap.get('idGroup') || '';
 		this._searchService.getGroupByTransactionId(transactionId, idGroup).subscribe({
@@ -206,7 +205,7 @@ export class CheckoutPageComponent implements OnInit {
 		console.log('getIpAdres')
 		this._tokenService.getIPAddress().subscribe({
 		   next:(res)=>{
-				console.log('ip',res)
+				console.log('ip',res.ip)
 		   }
 		});
 	}
