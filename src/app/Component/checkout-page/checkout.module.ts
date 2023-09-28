@@ -11,6 +11,7 @@ import { CardDetailFlyModule } from 'src/app/shared/components/card-detail-fly/c
 import { BaggageAndInsuranceModule } from './baggage-insurance/baggage-insurance.module';
 import { PassengersModule } from './passengers/passengers.module';
 import { PayModule } from './pay/pay.module';
+import { ModalErrorKayakComponent } from './modal-error-kayak/modal-error-kayak.component';
 
 @NgModule({
     imports: [
@@ -28,6 +29,6 @@ import { PayModule } from './pay/pay.module';
     ],
     providers: [],
     exports: [CheckoutPageComponent],
-    declarations: [CheckoutPageComponent],
+    declarations: [CheckoutPageComponent,ModalErrorKayakComponent],
 })
 export class CheckoutPageModule { }

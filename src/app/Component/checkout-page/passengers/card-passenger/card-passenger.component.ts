@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import moment from 'moment';
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
@@ -21,7 +21,7 @@ export class CardPassengerComponent implements OnInit {
 	@Input() arrayMonths: Item[] = [];
 	@Input() arrayYears: Item[] = [];
 	@Output() updateValidForm = new EventEmitter();
-
+	@ViewChild('cardPassenger') cardPassenger: ElementRef;
 
 	formGroup: FormGroup;
 	formObject = {
@@ -99,7 +99,8 @@ export class CardPassengerComponent implements OnInit {
 		if (this.formGroup.valid) {
 			this.validForm = true;
 			this.active = false;
-			window.scroll({ top: 0, behavior: 'smooth' });
+			const cardPassenger = this.cardPassenger.nativeElement;
+    		cardPassenger.scrollTop = cardPassenger.scrollHeight;
 		} else {
 			this.validForm = false;
 			this.formGroup.markAllAsTouched();

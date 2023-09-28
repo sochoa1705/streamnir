@@ -365,3 +365,42 @@ export interface IDetailPricing{
     totalCNN:number
     totalPay:number
   }
+
+
+  export interface SearchFlightRequest {
+	flightType: FlightTypeEnum;
+	departureLocation?: string;
+	arrivalLocation?: string;
+	departureDate?: any;
+	arrivalDate?: any;
+	adults?: number;
+	children?: number;
+	infants?: number;
+	selected_Cabins?: string;
+	excludedAirlines?: string[];
+	multicity?: Multicity[];
+	flightClass: FlightClassEnum;
+	json?: string;
+	email?: string;
+	departureLocationShort?: string;
+	arrivalLocationShort?: string;
+  }
+
+  export enum FlightTypeEnum {
+	RoundTrip = 0,
+	OneWay = 1,
+	MultiCity = 2,
+  }
+
+  
+  export interface Multicity {
+	departureLocation?: string;
+	arrivalLocation?: string;
+	departureDate?: any;
+  }
+
+  export enum FlightClassEnum {
+    Economy = 0,
+    Business = 1,
+    FirstClass = 2,
+  }

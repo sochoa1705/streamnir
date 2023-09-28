@@ -1,4 +1,4 @@
-import { Component, OnInit ,HostListener,ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit ,HostListener,ViewChild, ElementRef, Input} from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { cuotas } from '../passengers/utils';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
@@ -12,6 +12,8 @@ import { RPurchare } from 'src/app/api/api-checkout/models/rq-checkout-save-book
 import { getBodyEmail } from 'src/app/shared/utils/bodyEmail';
 import { ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalErrorKayakComponent } from '../modal-error-kayak/modal-error-kayak.component';
+import { ParamMap } from '@angular/router';
 
 interface Item {
 	value: any;
@@ -51,9 +53,10 @@ export class PayComponent implements OnInit {
 	transactionId = 0;
 	discountCupon: ResultCupon | null = null;
 	counter = 0;
-	errorMessDefault='Al parecer hubo un error en su reserva, por favor intentelo más tarde'
+	errorMessDefault='Al parecer hubo un error en su reserva, por favor intentelo más tarde';
+	isKayak=false;
 	@ViewChild('acoordio1') acoordio1: ElementRef;
-
+	@Input() paramMap:ParamMap;
 
 	private destroy$ = new Subject<unknown>();
 	formCreditCard = {
@@ -99,6 +102,8 @@ export class PayComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.isKayak=GlobalComponent.isKayak;
+		this.counter=0;
 		this.setCuotas();
 		this.chageTypeDocument();
 		this.urlsTermsAndConditions = this._checkoutService.getLinksTermsAndConditions();
@@ -190,13 +195,15 @@ export class PayComponent implements OnInit {
 	}
 
 	clickTab() {
-		if(this.counter < 4){
-			this.isPayCard = !this.isPayCard;
-			this.paymentTypeField.setValue(this.isPayCard ? 0 : 1);
-		}else{
-			this.isPayCard=false;
-			this.paymentTypeField.setValue(1)
-		}
+
+			if(this.counter < 4){
+				if(!this.isKayak) this.isPayCard = !this.isPayCard;
+				this.paymentTypeField.setValue(this.isPayCard ? 0 : 1);
+			}else{
+				this.isPayCard=false;
+				this.paymentTypeField.setValue(1)
+			}
+		
 		this.setValidatorsCreditCard();
 	}
 
@@ -235,7 +242,8 @@ export class PayComponent implements OnInit {
 	}
 
 	sendPayment() {
-		if(this.paymentTypeField.value==0) this.counter++;
+		//fix contador debe aumentar cuando sea 4 ver como :v
+		if(this.paymentTypeField.value==0 || this.counter >=4) this.counter++;
 		if(this.counter == 4){
 			this.openModalError('Has alcanzado el límite máximo de intentos con tu Tarjeta. A continuación, podrás completar tu pago utilizando nuestro método de pago Safetypay.')
 			this.paymentTypeField.setValue(1);
@@ -280,10 +288,10 @@ export class PayComponent implements OnInit {
 
 		this._checkoutService.sendAndSavePay().subscribe({
 			next: (res) => {
-				console.log(res,'res')
 				if (res.confirmed) {
 					this.showMessagePay = true;
 					this.codeSafetyPay = Number(res.resultPasarela?.Transaction_id || res.ciP_SafetyPAY);
+					window.scroll({ top: 0, behavior: 'smooth' });
 					this.transactionId = res.idCotizacion;
 					this.sendEmail(res);
 				} else  this.openModalError(this.errorMessDefault)
@@ -308,14 +316,27 @@ export class PayComponent implements OnInit {
 	}
 
 	openModalError(message: string) {
-		const modalRef=this._modalService.open(ModalErrorComponent,{
+		if(this.isKayak)
+			this.showModalErrorKayak();
+		else{
+			const modalRef=this._modalService.open(ModalErrorComponent,{
+				centered: true,
+				backdrop: 'static',
+				windowClass: 'modal-detail-error'
+			})
+			modalRef.componentInstance.message = message;
+			modalRef.componentInstance.isRedirect =  this.counter == 4 ? false: true;
+			modalRef.componentInstance.txtButton =  this.counter == 4 ? 'Aceptar':'Volver al inicio';
+		}
+	}
+
+	showModalErrorKayak() {
+		const modalRef=this._modalService.open(ModalErrorKayakComponent,{
 			centered: true,
 			backdrop: 'static',
 			windowClass: 'modal-detail-error'
 		})
-		modalRef.componentInstance.message = message;
-		modalRef.componentInstance.isRedirect =  this.counter == 4 ? false: true;
-		modalRef.componentInstance.txtButton =  this.counter == 4 ? 'Aceptar':'Volver al inicio';
+		modalRef.componentInstance.params = this.paramMap;
 	}
 
 	getMessageErrorClient(error: any): string {

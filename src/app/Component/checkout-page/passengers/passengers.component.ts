@@ -247,6 +247,7 @@ export class PassengersComponent implements OnInit {
 					dataSteps[1].check = true;
 					dataSteps[2].active = true;
 					this.changeStep.emit(2);
+					window.scroll({ top: 0, behavior: 'smooth' });
 				} else {
 					if (res.isChurning) {
 						this.openModalError(

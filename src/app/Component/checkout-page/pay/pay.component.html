@@ -48,7 +48,7 @@
 			</mat-accordion>
 
 			<div *ngIf="getScreenWidth > 1200" class="container__page__section__pay">
-				<div class="container__page__section__pay_header">
+				<div class="container__page__section__pay_header" [class.is-kayak]="isKayak && counter < 4">
 					<div
 						class="container__page__section__pay_header__tab"
 						[class.inactive]="counter >= 4"
@@ -67,7 +67,11 @@
 						/>
 						<span>Tarjeta de crédito o débito</span>
 					</div>
-					<div class="container__page__section__pay_header__tab" [class.active]="!isPayCard" (click)="clickTab()">
+					<div *ngIf="!isKayak" class="container__page__section__pay_header__tab" [class.active]="!isPayCard" (click)="clickTab()">
+						<img alt="pay_img" [src]="isPayCard ? './assets/svg/store.svg' : './assets/svg/store-red.svg'" />
+						<span>Banca por internet / Agencias</span>
+					</div>
+					<div *ngIf="isKayak && counter >= 4" class="container__page__section__pay_header__tab" [class.active]="!isPayCard" (click)="clickTab()">
 						<img alt="pay_img" [src]="isPayCard ? './assets/svg/store.svg' : './assets/svg/store-red.svg'" />
 						<span>Banca por internet / Agencias</span>
 					</div>

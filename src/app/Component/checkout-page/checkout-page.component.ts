@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
 	FareBreakDown,
 	Group,
@@ -15,6 +15,10 @@ import { PassengersComponent } from './passengers/passengers.component';
 import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { getPricingFareBreakDowns } from 'src/app/shared/utils/fareBreakDowns';
+import { getIndexsSegments } from 'src/app/shared/utils/getIndexSegment';
+import { Subject } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalErrorKayakComponent } from './modal-error-kayak/modal-error-kayak.component';
 @Component({
 	selector: 'app-checkout-page',
 	templateUrl: './checkout-page.component.html',
@@ -44,8 +48,10 @@ export class CheckoutPageComponent implements OnInit {
 	totalDiscountCupon = 0;
 	isShowDiscount = false;
 	isShowDiscountCupon = false;
-	indexSegmentSelected:number[]=[]
+	indexSegmentSelected:number[]=[];
 
+	paramMap:ParamMap;
+  	
 
 	@ViewChild('childPagePay')
 	childPagePay!: PayComponent;
@@ -98,6 +104,7 @@ export class CheckoutPageComponent implements OnInit {
 		private _routeActivate: ActivatedRoute,
 		private _tokenService: TokenService,
 		private _searchService: SearchService,
+		private _modalService:NgbModal
 	) {
 		this._checkoutService.selectUpSell.subscribe({
 			next: () => {
@@ -134,11 +141,12 @@ export class CheckoutPageComponent implements OnInit {
 	ngOnInit() {
 		const paramMap = this._routeActivate.snapshot.paramMap;
 		if(paramMap.keys.length > 2){
-			this.getParamsKayak(paramMap);
-			this.getIPAdress(paramMap);
+			this.paramMap=paramMap;
+			GlobalComponent.isKayak=true;
+			this.getParamsKayak();
+			this.getIPAdress();
 		}
 		else this.initCheckout();
-		
 	}
 
 	initCheckout(){
@@ -155,14 +163,14 @@ export class CheckoutPageComponent implements OnInit {
 		this.getDiscounts();
 	}
 
-	getParamsKayak(paramMap:ParamMap){
-		const transactionId=paramMap.get('transactionId') || '';
-		const idGroup=paramMap.get('idGroup') || '';
+	getParamsKayak(){
+		const transactionId=this.paramMap.get('transactionId') || '';
+		const idGroup=this.paramMap.get('idGroup') || '';
 		this._searchService.getGroupByTransactionId(transactionId, idGroup).subscribe({
 			next:(res)=>{
 				const detailPricing= getPricingFareBreakDowns(res.group.pricingInfo.itinTotalFare.fareBreakDowns);
-				const segments = paramMap.get('segments');
-				const flightClass = paramMap.get('flightClass');
+				const segments = this.paramMap.get('segments');
+				const flightClass = this.paramMap.get('flightClass');
 				res.group.detailPricing=detailPricing;
 				GlobalComponent.appGroupSeleted = res.group;
 				GlobalComponent.detailPricing = detailPricing;
@@ -171,7 +179,7 @@ export class CheckoutPageComponent implements OnInit {
 					const segmentArray = segments.split("-").map(Number);
 					GlobalComponent.segmentSelected = segmentArray;
 					GlobalComponent.appBooking.segmentSelected = segmentArray;
-					GlobalComponent.indexSegmentSeleted=this.getIndexsSegments(segmentArray);
+					GlobalComponent.indexSegmentSeleted=getIndexsSegments(segmentArray);
 					GlobalComponent.upSellGroup = [];
 					GlobalComponent.upSellSeleted = null;
 				}
@@ -181,45 +189,27 @@ export class CheckoutPageComponent implements OnInit {
 		})
 	}
 
-	getIndexsSegments(segments:number[]){
-		const group=GlobalComponent.appGroupSeleted;
-		const arrayIndex:number[]=[];
-		if(group.departure.length > 1){
-			group.departure.forEach(departure=>{
-				arrayIndex.push(departure.segments[0].segmentId)
-			})
-		}else{
-			const indexDep=group.departure[0].segments.findIndex(segment => segment.segmentId == segments[0]);
-			arrayIndex.push(indexDep);
-		}
-
-		if(group.returns){
-			const indexRet=group.returns.segments.findIndex(segment => segment.segmentId == segments[1]);
-			arrayIndex.push(indexRet);
-		}
-
-		return arrayIndex;
-	}
-
-	getIPAdress(paramMap:ParamMap) {
-		console.log('getIpAdres')
+	getIPAdress() {
+		const transactionId=this.paramMap.get('transactionId') || '';
 		this._tokenService.getIPAddress().subscribe({
 		   next:(res)=>{
-				console.log('ip',res.ip)
+				this.getToken(res.ip, transactionId)
+		   },
+		   error:()=>{
+			  this.showModalErrorKayak();
 		   }
 		});
 	}
 
 	getToken(ipAddress:string, transactionId:string){
-       this._tokenService.getTokenByTransactionId(ipAddress,transactionId).subscribe({
+       this._tokenService.getTokenByTransactionId(transactionId,ipAddress).subscribe({
 		next:(res)=>{
-			console.log(res,'token')
 			GlobalComponent.tokenMotorVuelo = res.accessToken;
 			GlobalComponent.appReglasVentaAnticipada = res.reglasVentaAnticipada;
 			GlobalComponent.appConfigurations = res.configuraciones;
 	    },
 		error:()=>{
-			alert('Error Token');
+			this.showModalErrorKayak();
 		}
 	   })
 	}
@@ -255,6 +245,15 @@ export class CheckoutPageComponent implements OnInit {
 				this.isShowDiscount = false;
 			}
 		})
+	}
+
+	showModalErrorKayak() {
+		const modalRef=this._modalService.open(ModalErrorKayakComponent,{
+			centered: true,
+			backdrop: 'static',
+			windowClass: 'modal-detail-error'
+		})
+		modalRef.componentInstance.params = this.paramMap;
 	}
 
 	redirectHome() {

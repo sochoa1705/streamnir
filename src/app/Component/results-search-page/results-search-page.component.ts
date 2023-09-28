@@ -127,6 +127,7 @@ export class ResultsSearchPageComponent implements OnInit {
 	idleSubscriber: Subscription;
 
 	ngOnInit() {
+		GlobalComponent.isKayak=false;
 		this.reloadPageResult();
 		this.configIdle();
 	}
