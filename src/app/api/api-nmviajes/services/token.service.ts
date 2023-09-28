@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RToken } from '../models/rq-token-ce-request';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -48,6 +48,6 @@ export class TokenService {
 	}
 
 	public getIPAddress(){
-	  return this._httpClient.get<any>("http://api.ipify.org/?format=json");
+	  return this._httpClient.get<any>("https://jsonip.com/");
 	}
 }
