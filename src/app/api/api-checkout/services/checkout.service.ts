@@ -26,6 +26,7 @@ export class CheckoutService {
 
 	itsIncludeInsurance = false;
 	upSellSelect: IUpSell = dataUpSell[0];
+	API_KAYAK = 'https://motorvuelos.expertiatravel.com';
 
 	selectUpSellModal() {
 		this.setPricingValuesByUpSell();
@@ -154,7 +155,7 @@ export class CheckoutService {
 	}
 
 	sendAndSavePay() {
-		const url = `${environment.urlApiMotorVuelos}/mv/save-booking`;
+		const url = `${GlobalComponent.isKayak ? this.API_KAYAK : environment.urlApiMotorVuelos}/mv/save-booking`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
@@ -163,7 +164,7 @@ export class CheckoutService {
 
 	getPromocionalCode(code: string) {
 		const credentials = localStorage.getItem('usuario');
-		const url = `${environment.urlApiMotorVuelos}/mv/payment/get-promotional-code-by-code?Code=${code}&GroupId=${
+		const url = `${GlobalComponent.isKayak ? this.API_KAYAK : environment.urlApiMotorVuelos}/mv/payment/get-promotional-code-by-code?Code=${code}&GroupId=${
 			GlobalComponent.appGroupSeleted.id
 		}&Email=${credentials ? JSON.parse(credentials).email : ''}&BrandedFareName=${
 			GlobalComponent.upSellSeleted?.name || ''
@@ -176,7 +177,7 @@ export class CheckoutService {
 	}
 
 	getDiscountByCampaing(bin = '') {
-		const url = `${environment.urlApiMotorVuelos}/mv/payment/get-discounts?Bin=${bin}&GroupId=${
+		const url = `${GlobalComponent.isKayak ? this.API_KAYAK : environment.urlApiMotorVuelos}/mv/payment/get-discounts?Bin=${bin}&GroupId=${
 			GlobalComponent.appGroupSeleted.id
 		}&IncludeSecure=${GlobalComponent.appBooking.secure ? true : false}&PromotionalCode=&BrandedFareName=${
 			GlobalComponent.upSellSeleted?.name || ''
@@ -188,7 +189,7 @@ export class CheckoutService {
 	}
 
 	sendEmailBooking(data: REmail) {
-		const url = `${environment.urlApiMotorVuelos}/mv/send-booking`;
+		const url = `${GlobalComponent.isKayak ? this.API_KAYAK : environment.urlApiMotorVuelos}/mv/send-booking`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
 			.set('not-loading', 'true')
@@ -197,7 +198,7 @@ export class CheckoutService {
 	}
 
 	getDataContactByLogin(email:string){
-		const url = `${environment.urlApiMotorVuelos}/mv/account/get-by-email?email=${email}`;
+		const url = `${GlobalComponent.isKayak ? this.API_KAYAK : environment.urlApiMotorVuelos}/mv/account/get-by-email?email=${email}`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
@@ -205,7 +206,7 @@ export class CheckoutService {
 	}
 
 	validateBooking(data:IValidateBooking){
-		const url = `${environment.urlApiMotorVuelos}/mv/validate-booking`;
+		const url = `${GlobalComponent.isKayak ? this.API_KAYAK : environment.urlApiMotorVuelos}/mv/validate-booking`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
@@ -213,7 +214,7 @@ export class CheckoutService {
 	}
 
 	cancelBooking(cancelBookingRQ:any){
-		let url = `${environment.urlApiMotorVuelos}/cancel-booking`;
+		let url = `${GlobalComponent.isKayak ? this.API_KAYAK : environment.urlApiMotorVuelos}/cancel-booking`;
 		const headers = new HttpHeaders()
 		.set('Content-Type', 'application/json')
 		.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
