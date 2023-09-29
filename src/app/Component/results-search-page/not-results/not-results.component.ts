@@ -49,7 +49,6 @@ export class NotResultsComponent implements OnInit {
 				break;
 			}
 			default: {
-				console.log('defaulttt')
 				currentFilters = {
 					arrayAirline: [],
 					arrayBaggage: [],

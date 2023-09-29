@@ -68,7 +68,7 @@ export class FiltersComponent implements OnInit {
             this.changeArrayFilters.emit({key:$event.value,item:$event })
             break;
         default://default es filtro aerolineas
-        this.changeArrayFilters.emit({key:$event.value=='MT' ? 'multiticket' : 'airlineCodeFilter',item:$event })
+        this.changeArrayFilters.emit({key:'airlineCodeFilter',item:$event })
         break;
       }
   }

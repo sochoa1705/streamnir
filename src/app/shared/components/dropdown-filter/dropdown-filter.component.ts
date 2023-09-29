@@ -32,9 +32,11 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 		});
 		this._searchFiltersService.isResetFilterAirlines.subscribe({
 			next: () => {
-				this.listOptionsAirlines.forEach(item=>{
-					item.active=false;
-				})
+				if(this.isAirlines){
+					this.listOptionsAirlines.forEach(item=>{
+						item.active=false;
+					})
+				}
 			 }
 		});
 		this._searchFiltersService.isLoader.subscribe({

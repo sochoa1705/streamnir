@@ -597,9 +597,6 @@ export class ResultsSearchPageComponent implements OnInit {
 		const item = $event.item;
 		const key = $event.key;
 		switch (key) {
-			case 'multiticket':
-				this.filters.isMultiticket = item.active;
-				break;
 			case 'typeBag':
 				if (item.active) this.filters.arrayBaggage.push(item.value);
 				else this.filters.arrayBaggage = this.filters.arrayBaggage.filter((bag) => bag !== item.value);
@@ -651,7 +648,6 @@ export class ResultsSearchPageComponent implements OnInit {
 			}
 
 			return (
-				(this.filters.isMultiticket ? item.airlineCodeFilter == 'MT' : true) &&
 				(this.filters.arrayAirline.length > 0
 					? this.filters.arrayAirline.includes(item.airlineCodeFilter || '')
 						? true
