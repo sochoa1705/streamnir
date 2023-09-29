@@ -16,9 +16,7 @@ import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-f
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
 import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { Subscription } from 'rxjs';
-import { IdlePopupComponent } from './idle-popup/idle-popup.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { IdlePopupConstants } from './idle-popup/idle-popup.constants';
 
 interface Item {
 	value: any;
@@ -599,9 +597,6 @@ export class ResultsSearchPageComponent implements OnInit {
 		const item = $event.item;
 		const key = $event.key;
 		switch (key) {
-			case 'multiticket':
-				this.filters.isMultiticket = item.active;
-				break;
 			case 'typeBag':
 				if (item.active) this.filters.arrayBaggage.push(item.value);
 				else this.filters.arrayBaggage = this.filters.arrayBaggage.filter((bag) => bag !== item.value);
@@ -620,10 +615,6 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	applyFilters() {
-		if (this.filters.arrayAirline.length == 0) {
-			this.dataAirlines = { ...this.dataAirlinesInit };
-		}
-
 		this.dataFilterGroups = [];
 		this.dataGroupsPaginate = [];
 		const dataFilter = [...this.allDataGroups].filter((item) => {
@@ -657,7 +648,6 @@ export class ResultsSearchPageComponent implements OnInit {
 			}
 
 			return (
-				(this.filters.isMultiticket ? item.airlineCodeFilter == 'MT' : true) &&
 				(this.filters.arrayAirline.length > 0
 					? this.filters.arrayAirline.includes(item.airlineCodeFilter || '')
 						? true
