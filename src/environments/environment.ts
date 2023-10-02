@@ -70,7 +70,7 @@ export const environment = {
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
   
   //https://qa-bffdelfosti.nmviajes-it.com https://motorvuelos.expertiatravel.com
-  urlApiMotorVuelos: "https://motorvuelos.expertiatravel.com",
+  urlApiMotorVuelos: "https://qa-bffdelfosti.nmviajes-it.com",
 
     //url Terms and Conditions - Checkout
 
@@ -98,6 +98,8 @@ export const environment = {
   },
   
   resultsInactivityTime: 60,
+  tagManagerCode_NM: 'GTM-KD6QHFT',
+  tagManagerCode_Motor: 'GTM-WMMCBK8',
   SEO: {
     home: {
       url: 'https://www.nmviajes.com/',

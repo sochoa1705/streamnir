@@ -14,9 +14,11 @@ import { getDatesBySegment } from 'src/app/shared/utils/getDatesBySort';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
-import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
+import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { getBodyGTMSearch } from 'src/app/shared/utils/GTMSearch';
+import { GoogleTagManagerService } from 'angular-google-tag-manager';
 
 interface Item {
 	value: any;
@@ -73,6 +75,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		private _loadingService: LoadingService,
 		private _searchFiltersService: SearchFiltersService,
 		private _modalService: NgbModal,
+		private _gtmService: GoogleTagManagerService
 	) {}
 
 	allDataGroups: Group[] = [];
@@ -131,7 +134,6 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	reloadPageResult() {
-		console.log('reloaddd');
 		this.isReload = true;
 		GlobalComponent.paramsSearch = {};
 		GlobalComponent.tokenMotorVuelo = '';
@@ -197,6 +199,7 @@ export class ResultsSearchPageComponent implements OnInit {
 				GlobalComponent.tokenMotorVuelo = response.accessToken;
 				GlobalComponent.appReglasVentaAnticipada = response.reglasVentaAnticipada;
 				GlobalComponent.appConfigurations = response.configuraciones;
+				GlobalComponent.transactionId=response.transactionId;
 				this.getObjectParams();
 			},
 			error: () => {
@@ -204,6 +207,18 @@ export class ResultsSearchPageComponent implements OnInit {
 				this.showError = true;
 			}
 		});
+	}
+
+
+	
+	pushToGTMSearch(){
+		try {
+			const bodyGTMSearch=getBodyGTMSearch();
+			this._gtmService.pushTag(bodyGTMSearch);
+		} 
+		catch (error) {
+			console.log('error tag nmv_vuelos_buscar ', error);
+		}
 	}
 
 	getObjectParams() {
@@ -222,6 +237,7 @@ export class ResultsSearchPageComponent implements OnInit {
 						: `No encontramos vuelos coincidentes para esas fechas.`;
 				if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
 				else this.getAllDataAnterior(objParams);
+				if(GlobalComponent.GTMSearchData) this.pushToGTMSearch()
 				this.isReload = false;
 			}
 		});
