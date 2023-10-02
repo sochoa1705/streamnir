@@ -12,7 +12,6 @@ import { RPurchare } from 'src/app/api/api-checkout/models/rq-checkout-save-book
 import { getBodyEmail } from 'src/app/shared/utils/bodyEmail';
 import { ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalErrorKayakComponent } from '../modal-error-kayak/modal-error-kayak.component';
 import { ParamMap } from '@angular/router';
 
 interface Item {
