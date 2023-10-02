@@ -9,6 +9,7 @@ export interface Search {
 	departureDate?: string;
 }
 
+
 export interface Params {
 	flightType: number
 	flightClass: number

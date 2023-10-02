@@ -32,7 +32,7 @@ ngb-datepicker{
 }
 
 ::ng-deep .ngb-dp-header{
-    display:  var(--visibility) !important;
+    display:  var(--visibility);
 }
 
 ::ng-deep.custom-day.range,

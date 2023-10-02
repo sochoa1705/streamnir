@@ -20,10 +20,10 @@
 			<app-input-class #childClass></app-input-class>
 		</div>
 	</div>
-	<div class="section__search__inputs" [hidden]="typeFlight == 2">
+	<div class="section__search__inputs" *ngIf="typeFlight !== 2">
 		<app-input-search-flight #childInputs></app-input-search-flight>
 		<app-input-range #childDates [typeFlight]="typeFlight"></app-input-range>
 		<app-button [text]="'Buscar'" [left]="true" [icon]="'search.svg'" (onClick)="search()"></app-button>
 	</div>
-    <app-multivuelo [hidden]="typeFlight !== 2" [params]="params" (searchDataMulti)="searchDataMulti($event)"></app-multivuelo>
+    <app-multivuelo *ngIf="typeFlight == 2" [params]="params" (searchDataMulti)="searchDataMulti($event)"></app-multivuelo>
 </div>

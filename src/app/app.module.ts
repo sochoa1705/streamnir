@@ -31,8 +31,10 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { initializeAppCheck, provideAppCheck, ReCaptchaV3Provider } from '@angular/fire/app-check';
 import { environment } from '../environments/environment';
 import { CanActivateCheckoutGuard } from './Guards/checkout.guard';
+import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 
 if (!environment.production) (<any>window).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+var GTMKey = window.location.href.indexOf('nmviajes') > -1 ? environment.tagManagerCode_NM : environment.tagManagerCode_Motor;
 
 @NgModule({
 	schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -70,6 +72,7 @@ if (!environment.production) (<any>window).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 		{ provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
 		{ provide: LocationStrategy, useClass: PathLocationStrategy },
+		{ provide: 'googleTagManagerId', useValue: GTMKey},
 		{
 			provide: 'SocialAuthServiceConfig',
 			useValue: {

@@ -63,7 +63,7 @@ export class InputRangeComponent implements OnChanges,OnInit {
 		});
 	}
 	ngOnInit(): void {
-		document.documentElement.style.setProperty('--visibility', 'block');
+		document.documentElement.style.setProperty('--visibility', this.typeFlight == 2 || this.typeFlight == 1 ? 'none' : 'block');
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
@@ -72,13 +72,12 @@ export class InputRangeComponent implements OnChanges,OnInit {
 			document.documentElement.style.setProperty('--visibility', 'block');
 		}
 
-		if (changes['typeFlight'].currentValue == 1 || changes['typeFlight'].currentValue == 2) {
+		if (changes['typeFlight'].currentValue == 1) {
 			this.showCalendar = false;
 			this.toDate = null;
 			this.dateReturn = '';
 			this.toDateSeleted = null;
 			this.setDateOneWay();
-			document.documentElement.style.setProperty('--visibility', 'none');
 		}
 	}
 

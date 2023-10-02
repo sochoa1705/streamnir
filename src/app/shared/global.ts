@@ -7,6 +7,7 @@ import { RAdvanceSaleRule } from "../api/api-nmviajes/models/rq-advance-sale-rul
 import { ICountry } from "../api/api-nmviajes/models/rq-contries-get";
 import { Configuraciones } from "../api/api-nmviajes/models/rq-token-ce-request";
 import { dataInitBooking, detailPricingInit, detailSecureInit } from "./constant-init";
+import { Search } from "../api/api-nmviajes/models/ce-metasearch";
 
 
 export class GlobalComponent {
@@ -25,6 +26,7 @@ export class GlobalComponent {
     public static isB2B: boolean = false;
     public static viajala: boolean = false;
     public static tokenMotorVuelo:string='';
+    public static transactionId='';
     public static appReglasVentaAnticipada: RAdvanceSaleRule[]=[];
     public static segmentSelected:number[]=[];
     public static upSellGroup:IUpSell[]=[];
@@ -38,6 +40,7 @@ export class GlobalComponent {
     public static paramsSearch:any;
     public static indexSegmentSeleted:number[]=[];
     public static isKayak=false;
+    public static GTMSearchData:Search;
 
     //public static discountCupon:
   }
