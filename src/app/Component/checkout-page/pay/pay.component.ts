@@ -12,7 +12,6 @@ import { RPurchare } from 'src/app/api/api-checkout/models/rq-checkout-save-book
 import { getBodyEmail } from 'src/app/shared/utils/bodyEmail';
 import { ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalErrorKayakComponent } from '../modal-error-kayak/modal-error-kayak.component';
 import { ParamMap } from '@angular/router';
 
 interface Item {
@@ -316,27 +315,15 @@ export class PayComponent implements OnInit {
 	}
 
 	openModalError(message: string) {
-		if(this.isKayak)
-			this.showModalErrorKayak();
-		else{
-			const modalRef=this._modalService.open(ModalErrorComponent,{
-				centered: true,
-				backdrop: 'static',
-				windowClass: 'modal-detail-error'
-			})
-			modalRef.componentInstance.message = message;
-			modalRef.componentInstance.isRedirect =  this.counter == 4 ? false: true;
-			modalRef.componentInstance.txtButton =  this.counter == 4 ? 'Aceptar':'Volver al inicio';
-		}
-	}
-
-	showModalErrorKayak() {
-		const modalRef=this._modalService.open(ModalErrorKayakComponent,{
+		const modalRef=this._modalService.open(ModalErrorComponent,{
 			centered: true,
 			backdrop: 'static',
 			windowClass: 'modal-detail-error'
 		})
-		modalRef.componentInstance.params = this.paramMap;
+		modalRef.componentInstance.message = message;
+		modalRef.componentInstance.isRedirect =  this.counter == 4 ? false: true;
+		modalRef.componentInstance.txtButton =  this.counter == 4 ? 'Aceptar':'Volver al inicio';
+		
 	}
 
 	getMessageErrorClient(error: any): string {
