@@ -63,7 +63,7 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 		else {
 			const route = this.getRoute({ ...valuesClass, ...valuesPassengers, ...valuesInputs, ...valuesDates });
 			localStorage.setItem('searchParams', route);
-			GlobalComponent.GTMSearchData={ ...valuesClass, ...valuesPassengers, ...valuesInputs, ...valuesDates };
+			GlobalComponent.searchFlightParams={ ...valuesClass, ...valuesPassengers, ...valuesInputs, ...valuesDates };
 			this.router.navigateByUrl(route);
 			this.reloadPageResult.emit();
 		}
@@ -103,7 +103,7 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 
 		const route = `/resultados${random}&adults=${dataGral.adults}&children=${dataGral.children}&infants=${dataGral.infants}&selected_cabins=&excludedAirlines=null&multicity=null&json=${JSON.stringify(json)}&email=${email}&flightType=2&flightClass=${dataGral.flightClass}`;
 		localStorage.setItem('searchParams', route);
-		GlobalComponent.GTMSearchData={...dataGral, ...json[0]}
+		GlobalComponent.searchFlightParams={...dataGral, ...json[0]}
 		this.router.navigateByUrl(route);
 		this.reloadPageResult.emit();
 	}

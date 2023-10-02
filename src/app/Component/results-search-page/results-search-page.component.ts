@@ -19,6 +19,9 @@ import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { getBodyGTMSearch } from 'src/app/shared/utils/GTMSearch';
 import { GoogleTagManagerService } from 'angular-google-tag-manager';
+import { FlightSearchGtmModel } from 'src/app/Models/analytics-flights/flight-search-gtm.model';
+import { ResultadosGtmModel } from 'src/app/Models/analytics-flights/resultados-gtm.model';
+import { getBodyGTMSearchResult } from 'src/app/shared/utils/GMTSearchResult';
 
 interface Item {
 	value: any;
@@ -74,7 +77,6 @@ export class ResultsSearchPageComponent implements OnInit {
 		private route: ActivatedRoute,
 		private _loadingService: LoadingService,
 		private _searchFiltersService: SearchFiltersService,
-		private _modalService: NgbModal,
 		private _gtmService: GoogleTagManagerService
 	) {}
 
@@ -210,17 +212,6 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 
-	
-	pushToGTMSearch(){
-		try {
-			const bodyGTMSearch=getBodyGTMSearch();
-			this._gtmService.pushTag(bodyGTMSearch);
-		} 
-		catch (error) {
-			console.log('error tag nmv_vuelos_buscar ', error);
-		}
-	}
-
 	getObjectParams() {
 		this.route.queryParamMap.subscribe((params) => {
 			if (this.isReload && GlobalComponent.tokenMotorVuelo !== '') {
@@ -237,7 +228,7 @@ export class ResultsSearchPageComponent implements OnInit {
 						: `No encontramos vuelos coincidentes para esas fechas.`;
 				if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
 				else this.getAllDataAnterior(objParams);
-				if(GlobalComponent.GTMSearchData) this.pushToGTMSearch()
+				if(GlobalComponent.searchFlightParams) this.pushToGTMSearch()
 				this.isReload = false;
 			}
 		});
@@ -254,6 +245,7 @@ export class ResultsSearchPageComponent implements OnInit {
 				}
 				if (this._loadingService.requestSearchCount == 9) {
 					this.showNotResults = this.dataFilterGroups.length == 0 ? true : false;
+					if(GlobalComponent.searchFlightParams) this.pushToGTMSearchResult()
 					if (!this.showNotResults) {
 						this.endsearch();
 						this.minPrice = this.dataFilterGroups[0].detailPricing?.totalPay || 0;
@@ -888,6 +880,28 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	configIdle(){
+	}
+
+	pushToGTMSearch(){
+		try {
+			const bodyGTMSearch:FlightSearchGtmModel=getBodyGTMSearch();
+			GlobalComponent.GMTSearch=bodyGTMSearch;
+			this._gtmService.pushTag(bodyGTMSearch);
+		} 
+		catch (error) {
+			console.log('error tag nmv_vuelos_buscar ', error);
+		}
+	}
+
+	pushToGTMSearchResult(){
+		const results = [...this.dataFilterGroups].slice(0, this.dataFilterGroups.length < 5 ? this.dataFilterGroups.length - 1 : 5)
+		try {
+			const bodyGTMSearchResult:ResultadosGtmModel=getBodyGTMSearchResult(results);
+			this._gtmService.pushTag(bodyGTMSearchResult);
+		} 
+		catch (error) {
+			console.log('error tag nmv_vuelos_verResultados ',error);
+		}
 	}
 
 }

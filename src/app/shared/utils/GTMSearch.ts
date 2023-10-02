@@ -1,8 +1,9 @@
 import moment from "moment";
 import { GlobalComponent } from "../global";
+import { FlightSearchGtmModel } from "src/app/Models/analytics-flights/flight-search-gtm.model";
 
-export const getBodyGTMSearch = () => {
-  const data=GlobalComponent.GTMSearchData;
+export const getBodyGTMSearch = ():FlightSearchGtmModel => {
+  const data=GlobalComponent.searchFlightParams;
   const typeFlight=GlobalComponent.paramsSearch.flightType;
   const transactionId = GlobalComponent.transactionId;
   const origin = data.departureLocation?.split('%20');

@@ -8,6 +8,7 @@ import { ICountry } from "../api/api-nmviajes/models/rq-contries-get";
 import { Configuraciones } from "../api/api-nmviajes/models/rq-token-ce-request";
 import { dataInitBooking, detailPricingInit, detailSecureInit } from "./constant-init";
 import { Search } from "../api/api-nmviajes/models/ce-metasearch";
+import { FlightSearchGtmModel } from "../Models/analytics-flights/flight-search-gtm.model";
 
 
 export class GlobalComponent {
@@ -40,7 +41,8 @@ export class GlobalComponent {
     public static paramsSearch:any;
     public static indexSegmentSeleted:number[]=[];
     public static isKayak=false;
-    public static GTMSearchData:Search;
+    public static searchFlightParams:Search;
+    public static GMTSearch:FlightSearchGtmModel;
 
     //public static discountCupon:
   }
