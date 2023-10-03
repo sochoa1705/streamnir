@@ -1,7 +1,6 @@
 import { registerLocaleData } from '@angular/common';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Group, PricingDetail } from 'src/app/api/api-checkout/models/rq-checkout-search';
-import localeEs from '@angular/common/locales/es';
 import { GlobalComponent } from 'src/app/shared/global';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { ModalFeeComponent } from 'src/app/Component/checkout-page/modal-fee/modal-fee.component';
@@ -10,8 +9,10 @@ import { ModalErrorComponent } from '../../modal-error/modal-error.component';
 import { dataInitBooking } from 'src/app/shared/constant-init';
 import { LoadingService } from 'src/app/Services/intermediary/loading.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FareBreakDown } from 'src/app/api/api-checkout/models/rq-checkout-up-sell';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
+import { GoogleTagManagerService } from 'angular-google-tag-manager';
+import { getBodyGTMAddCart } from 'src/app/shared/utils/GMTAddCart';
+import localeEs from '@angular/common/locales/es';
 
 @Component({
 	selector: 'app-modal-flight-detail',
@@ -34,6 +35,7 @@ export class ModalFlightDetailComponent implements OnInit {
 		private router: Router,
 		private _loadingService: LoadingService,
 		private _checkoutService: CheckoutService,
+		private _gtmService: GoogleTagManagerService
 	) {
 	}
 
@@ -81,7 +83,7 @@ export class ModalFlightDetailComponent implements OnInit {
 				}
 			});
 	}
-
+	//button continuar
 	openModalUpsell() {
 		const segmentArray: number[] = this.segmentDeparture.map((item) => item);
 		const segmentIndex: number[] = this.indexSegmentDeparture.map((item) => item);
@@ -100,6 +102,7 @@ export class ModalFlightDetailComponent implements OnInit {
 		GlobalComponent.detailPricing = this.detailPricing;
 		GlobalComponent.upSellGroup = [];
 		GlobalComponent.upSellSeleted = null;
+		this.pushToGTMAddCart();
 		this.processValidateUpsell();
 	}
   
@@ -153,5 +156,15 @@ export class ModalFlightDetailComponent implements OnInit {
 		this._loadingService.idle();
 		this.router.navigateByUrl('/booking');
 		this.activeModal.close();
+	}
+
+	pushToGTMAddCart(){
+		try {
+			const bodyGTMAddCart=getBodyGTMAddCart();
+			this._gtmService.pushTag(bodyGTMAddCart);
+		} 
+		catch (error) {
+			console.log('error tag nmv_vuelos_seleccionarProducto ',error);
+		}
 	}
 }

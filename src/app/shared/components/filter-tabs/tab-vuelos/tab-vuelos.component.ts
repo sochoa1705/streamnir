@@ -28,7 +28,6 @@ import { IntermediaryService } from '../../../../Services/intermediary.service';
 import { AccountsService, UserStorage } from '../../../../Services/accounts.service';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
-import { getParamsSearch } from 'src/app/shared/utils/getParams';
 
 @Component({
   selector: 'app-tab-vuelos',
@@ -119,21 +118,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.logicPathVuelos();
     this.userStorage = this.accountService.getUserStorage();
-    
-    this.route.queryParamMap.subscribe((params) => {
-      if(window.location.pathname.includes('resultados')){
-        const data=getParamsSearch(params);
-        this.tipoVuelo=data.flightType;
-        this.form.controls["rdoVuelo"].patchValue(data.flightType.toString())
-        this.form.controls["departureDate"].patchValue(data.departureDate)
-        this.initCiudadDestino(data.departureLocation, true)
-        this.initCiudadDestino(data.arrivalLocation, true,'destino')  
-        if(data.flightType==0){
-          this.form.controls["arrivalDate"].patchValue(data.arrivalDate) 
-        }
-        console.log(data)
-      }
-    });
+  
   }
 
   ngAfterViewInit() {
