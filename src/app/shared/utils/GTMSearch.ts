@@ -4,16 +4,14 @@ import { FlightSearchGtmModel } from "src/app/Models/analytics-flights/flight-se
 
 export const getBodyGTMSearch = ():FlightSearchGtmModel => {
   const data=GlobalComponent.searchFlightParams;
-  const typeFlight=GlobalComponent.paramsSearch.flightType;
   const transactionId = GlobalComponent.transactionId;
-  const origin = data.departureLocation?.split('%20');
-  const arrival = data.arrivalLocation?.split('%20');
-
+  const origin = data.departureLocation?.split(' ');
+  const arrival = data.arrivalLocation?.split(' ');
     return {
         event: "nmv_vuelos_buscar",
         operacion:{
           id:transactionId,
-          dias_anticipacion: moment(data.departureDate, 'DD/MM/YYYY').diff(moment(), 'days'), //
+          dias_anticipacion: moment(data.departureDate, 'YYYY-MM-DD').diff(moment(), 'days'), //
         },
         origen: {
           nombre: origin ? origin[1].slice(0, -1) : '',
@@ -27,7 +25,7 @@ export const getBodyGTMSearch = ():FlightSearchGtmModel => {
         },
         vuelo: {
           clase: data.flightClass == 0 ? 'economic' :  data.flightClass == 1 ? 'business' : 'first class', 
-          tipo: typeFlight== 0 ? 'ida y vuelta': typeFlight == 1 ? 'ida' : 'multidestino',
+          tipo: data.flightType== 0 ? 'ida y vuelta': data.flightType == 1 ? 'ida' : 'multidestino',
         },
         pasajeros: {
           adultos: data.adults,
@@ -36,15 +34,9 @@ export const getBodyGTMSearch = ():FlightSearchGtmModel => {
           total: data.adults + data.children + data.infants,
         },
         fechas: {
-          salida: convertDateDDMMYYY(data.departureDate || ''), //Año-mes-día
-          retorno:  convertDateDDMMYYY(data.arrivalDate || ''), //Año-mes-día
-          estadia: typeFlight == 0 ? moment(data.arrivalDate, 'DD/MM/YYYY').diff(moment(data.departureDate, 'DD/MM/YYYY'), 'days') : 0, //número de noches
+          salida: data.departureDate || '', //Año-mes-día
+          retorno:  data.arrivalDate || '', //Año-mes-día
+          estadia: data.flightType == 0 ? moment(data.arrivalDate, 'YYYY-MM-DD').diff(moment(data.departureDate, 'YYYY-MM-DD'), 'days') : 0, //número de noches
         },
       }
-}
-
-export const convertDateDDMMYYY=(date:string)=>{
-  const splitDate=date.split('/');
-  if(date!=='') return `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`
-  return date
 }

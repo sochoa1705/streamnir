@@ -8,7 +8,6 @@ import { AccountsService } from 'src/app/Services/accounts.service';
 import { Router } from '@angular/router';
 import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
-import { GlobalComponent } from 'src/app/shared/global';
 
 @Component({
 	selector: 'app-tab-vuelos-v2',
@@ -63,7 +62,6 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 		else {
 			const route = this.getRoute({ ...valuesClass, ...valuesPassengers, ...valuesInputs, ...valuesDates });
 			localStorage.setItem('searchParams', route);
-			GlobalComponent.searchFlightParams={ ...valuesClass, ...valuesPassengers, ...valuesInputs, ...valuesDates };
 			this.router.navigateByUrl(route);
 			this.reloadPageResult.emit();
 		}
@@ -103,7 +101,6 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 
 		const route = `/resultados${random}&adults=${dataGral.adults}&children=${dataGral.children}&infants=${dataGral.infants}&selected_cabins=&excludedAirlines=null&multicity=null&json=${JSON.stringify(json)}&email=${email}&flightType=2&flightClass=${dataGral.flightClass}`;
 		localStorage.setItem('searchParams', route);
-		GlobalComponent.searchFlightParams={...dataGral, ...json[0]}
 		this.router.navigateByUrl(route);
 		this.reloadPageResult.emit();
 	}

@@ -7,6 +7,7 @@ export interface Search {
 	departureLocation: string | null;
 	arrivalDate: string;
 	departureDate?: string;
+	flightType?:number
 }
 
 

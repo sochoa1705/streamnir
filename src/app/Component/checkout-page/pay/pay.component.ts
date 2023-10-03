@@ -338,7 +338,6 @@ export class PayComponent implements OnInit {
 			return 'No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.';
 		  case 1002:
 			return 'La tarifa ya no se encuentra disponible, favor de realizar una nueva búsqueda.';
-	
 		  case 2001:
 			return 'La tarjeta de crédito no es válida.';
 		  case 2002:

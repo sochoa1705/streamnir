@@ -228,7 +228,7 @@ export class ResultsSearchPageComponent implements OnInit {
 						: `No encontramos vuelos coincidentes para esas fechas.`;
 				if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
 				else this.getAllDataAnterior(objParams);
-				if(GlobalComponent.searchFlightParams) this.pushToGTMSearch()
+				this.pushToGTMSearch();
 				this.isReload = false;
 			}
 		});
@@ -245,7 +245,7 @@ export class ResultsSearchPageComponent implements OnInit {
 				}
 				if (this._loadingService.requestSearchCount == 9) {
 					this.showNotResults = this.dataFilterGroups.length == 0 ? true : false;
-					if(GlobalComponent.searchFlightParams) this.pushToGTMSearchResult()
+					this.pushToGTMSearchResult();
 					if (!this.showNotResults) {
 						this.endsearch();
 						this.minPrice = this.dataFilterGroups[0].detailPricing?.totalPay || 0;
