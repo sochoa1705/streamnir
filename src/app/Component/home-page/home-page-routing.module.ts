@@ -47,10 +47,6 @@ const routes: Routes = [
         component: ResultadosComponent
       },
       {
-        path: 'booking/itinerary/:transactionId/:idGroup/:segments/:flightType/:departureLocation/:arrivalLocation/:departureDate/:arrivalDate/:adults/:children/:infants/:flightClass',
-        loadChildren: () => import('../../../app/Component/checkout-page/checkout.module').then(m => m.CheckoutPageModule),
-      },
-      {
         path: 'conformidad',
         component: ConformidadComponent
       },
@@ -204,6 +200,10 @@ const routes: Routes = [
     path: 'booking',
     loadChildren: () => import('../../../app/Component/checkout-page/checkout.module').then(m => m.CheckoutPageModule),
     canActivate: [CanActivateCheckoutGuard]
+  },
+  {
+    path: 'booking/itinerary/:transactionId/:idGroup/:segments/:flightType/:departureLocation/:arrivalLocation/:departureDate/:arrivalDate/:adults/:children/:infants/:flightClass',
+    loadChildren: () => import('../../../app/Component/checkout-page/checkout.module').then(m => m.CheckoutPageModule),
   },
   {
     path: '404',

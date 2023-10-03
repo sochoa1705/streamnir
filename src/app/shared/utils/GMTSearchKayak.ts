@@ -2,6 +2,7 @@ import { ParamMap } from '@angular/router';
 import { GlobalComponent } from '../global';
 import { Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { countries } from '../code-countries';
+import { getBodyGTMSearch } from './GTMSearch';
 
 export const setParamsByKayak = (paramMap: ParamMap) => {
 	const groupSelected = GlobalComponent.appGroupSeleted;
@@ -19,11 +20,12 @@ export const setParamsByKayak = (paramMap: ParamMap) => {
 			origin.country == 'PE' ? 'Perú' : getNameCountry(origin.country)
 		}`,
 		flightType: Number(paramMap.get('flightType')) || 0,
-		arrivalDate: '',
+		arrivalDate: paramMap.get('arrivalDate') || '',
 		departureDate: paramMap.get('departureDate') || ''
 	};
-	console.log(searchToTagManager, 'dataTagmanager')
 	GlobalComponent.searchFlightParams = searchToTagManager;
+	const bodyGTMSearch=getBodyGTMSearch();
+	GlobalComponent.GMTSearch=bodyGTMSearch;
 };
 
 export const getNameCountry = (code: string): string => {

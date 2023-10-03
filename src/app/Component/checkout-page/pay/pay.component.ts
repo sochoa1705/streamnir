@@ -289,6 +289,8 @@ export class PayComponent implements OnInit {
 			card: dataFormCredit
 		};
 
+		console.log(GlobalComponent.appBooking, 'Global')
+
 		this._checkoutService.sendAndSavePay().subscribe({
 			next: (res) => {
 				if (res.confirmed) {
@@ -332,7 +334,7 @@ export class PayComponent implements OnInit {
 
 	getMessageErrorClient(error: any): string {
 		switch (error.errorCode) {
-		  case 1000:
+		  case 10000:
 			return 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.'
 		  case 1001:
 			return 'No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.';
