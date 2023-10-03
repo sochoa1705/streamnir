@@ -332,6 +332,8 @@ export class PayComponent implements OnInit {
 
 	getMessageErrorClient(error: any): string {
 		switch (error.errorCode) {
+		  case 1000:
+			return 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.'
 		  case 1001:
 			return 'No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.';
 		  case 1002:
@@ -349,7 +351,7 @@ export class PayComponent implements OnInit {
 			if (error.messages != null && error.messages.length > 0) {
 			  return error.messages[0];
 			} else
-			  return 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados o de lo contrario selecciona otra forma de pago.';
+			  return 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.';
 		  case 2101:
 			return 'No se puede realizar el pago correctamente.';
 		  default:

@@ -12,6 +12,8 @@ import { LoadingService } from 'src/app/Services/intermediary/loading.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FareBreakDown } from 'src/app/api/api-checkout/models/rq-checkout-up-sell';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
+import { GoogleTagManagerService } from 'angular-google-tag-manager';
+import { getBodyGTMAddCart } from 'src/app/shared/utils/GMTAddCart';
 
 @Component({
 	selector: 'app-modal-flight-detail',
@@ -34,6 +36,7 @@ export class ModalFlightDetailComponent implements OnInit {
 		private router: Router,
 		private _loadingService: LoadingService,
 		private _checkoutService: CheckoutService,
+		private _gtmService: GoogleTagManagerService
 	) {
 	}
 
@@ -100,6 +103,7 @@ export class ModalFlightDetailComponent implements OnInit {
 		GlobalComponent.detailPricing = this.detailPricing;
 		GlobalComponent.upSellGroup = [];
 		GlobalComponent.upSellSeleted = null;
+		if(GlobalComponent.searchFlightParams) this.pushToGTMAddCart();
 		this.processValidateUpsell();
 	}
   
@@ -153,5 +157,15 @@ export class ModalFlightDetailComponent implements OnInit {
 		this._loadingService.idle();
 		this.router.navigateByUrl('/booking');
 		this.activeModal.close();
+	}
+
+	pushToGTMAddCart(){
+		try {
+			const bodyGTMAddCart=getBodyGTMAddCart();
+			this._gtmService.pushTag(bodyGTMAddCart);
+		} 
+		catch (error) {
+			console.log('error tag nmv_vuelos_seleccionarProducto ',error);
+		}
 	}
 }
