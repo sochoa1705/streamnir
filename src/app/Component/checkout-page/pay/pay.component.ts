@@ -152,24 +152,28 @@ export class PayComponent implements OnInit {
 		}else{
 			this._checkoutService.getPromocionalCode(search).subscribe({
 				next: (response) => {
-					if (response.result.isSuccess) {
-						this.isValidPromotionalCode = true;
-						this.discountCupon = response.result;
-						if (this.discountCupon && this.isValidPromotionalCode) {
-							this.isApplyCupon = true;
-							this._checkoutService.applyCupon.emit(this.discountCupon);
-						}else this.resetDiscountByCupon();
-					} else{
-						this.textErrorCupon=response.result.message;
-						this.cuponPromoWebField.setErrors({'incorrect': true});
-						this.resetDiscountByCupon();
-					}
+					if (response.result) {
+						if(response.result.isSuccess){
+							this.isValidPromotionalCode = true;
+							this.discountCupon = response.result;
+							if (this.discountCupon && this.isValidPromotionalCode) {
+								this.isApplyCupon = true;
+								this._checkoutService.applyCupon.emit(this.discountCupon);
+							}else this.resetDiscountByCupon();
+						}else this.setErrorCupon(response.result.message)
+					} else this.setErrorCupon('Código inválido')
 				},
 				error: (err) => {
 					this.resetDiscountByCupon();
 				}
 			});
 		}
+	}
+
+	setErrorCupon(message:string){
+		this.textErrorCupon=message;
+		this.cuponPromoWebField.setErrors({'incorrect': true});
+		this.resetDiscountByCupon();
 	}
 
 	resetDiscountByCupon() {
