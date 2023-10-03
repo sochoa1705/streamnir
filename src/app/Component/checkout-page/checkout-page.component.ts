@@ -164,7 +164,7 @@ export class CheckoutPageComponent implements OnInit {
 			step.check = false;
 		})
 		this.getDiscounts();
-		this.pushToGTMLoadCheckout();
+		//this.pushToGTMLoadCheckout();
 	}
 
 
@@ -201,7 +201,7 @@ export class CheckoutPageComponent implements OnInit {
 					GlobalComponent.upSellSeleted = null;
 				}
 				this._checkoutService.setIsDomestic();
-				setParamsByKayak(this.paramMap); //para inicializar los valores para GMT
+				//setParamsByKayak(this.paramMap); //para inicializar los valores para GMT
 				this.initCheckout();
 			}
 		})
