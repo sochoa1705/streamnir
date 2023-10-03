@@ -10,7 +10,7 @@
 
 .container__page {
 	padding: 242px 96px 0px 96px;
-	min-height: calc(100% - 80px);
+	min-height:90vh;
 
 	@media (max-width: 575px) {
 		padding: 190px 10px 0px 10px !important;

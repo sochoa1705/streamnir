@@ -146,7 +146,6 @@ export class CheckoutPageComponent implements OnInit {
 		if(paramMap.keys.length > 2){
 			this.paramMap=paramMap;
 			GlobalComponent.isKayak=true;
-			this.getParamsKayak();
 			this.getIPAdress();
 		}
 		else this.initCheckout();
@@ -164,22 +163,21 @@ export class CheckoutPageComponent implements OnInit {
 			step.check = false;
 		})
 		this.getDiscounts();
-		//this.pushToGTMLoadCheckout();
+		this.pushToGTMLoadCheckout()
 	}
 
 
 	pushToGTMLoadCheckout(){
 		try {
 			const bodyGTMLoadCheckout=getBodyGTMLoadCheckout();
-			console.log(bodyGTMLoadCheckout,'bodyGMT CHECKOUR')
-			//this._gtmService.pushTag(bodyGTMLoadCheckout);
+			this._gtmService.pushTag(bodyGTMLoadCheckout);
 		} 
 		catch (error) {
 			console.log('error tag nmv_vuelos_checkout_cargarCheckout ',error);
 		}
 	}
 
-	getParamsKayak(){
+	getDataByKayak(){
 		const transactionId=this.paramMap.get('transactionId') || '';
 		const idGroup=this.paramMap.get('idGroup') || '';
 		this._searchService.getGroupByTransactionId(transactionId, idGroup).subscribe({
@@ -201,7 +199,7 @@ export class CheckoutPageComponent implements OnInit {
 					GlobalComponent.upSellSeleted = null;
 				}
 				this._checkoutService.setIsDomestic();
-				//setParamsByKayak(this.paramMap); //para inicializar los valores para GMT
+				setParamsByKayak(this.paramMap); //para inicializar los valores para GMT
 				this.initCheckout();
 			}
 		})
@@ -225,6 +223,8 @@ export class CheckoutPageComponent implements OnInit {
 			GlobalComponent.tokenMotorVuelo = res.accessToken;
 			GlobalComponent.appReglasVentaAnticipada = res.reglasVentaAnticipada;
 			GlobalComponent.appConfigurations = res.configuraciones;
+			GlobalComponent.transactionId=res.transactionId;
+			this.getDataByKayak();
 	    },
 		error:()=>{
 			this.showModalErrorKayak();

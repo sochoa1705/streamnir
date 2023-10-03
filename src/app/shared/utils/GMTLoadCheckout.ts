@@ -8,14 +8,13 @@ export const getBodyGTMLoadCheckout = (): AddToCardGtmModel => {
     const groupSelected=GlobalComponent.appGroupSeleted;
 	const upSellSeleted=GlobalComponent.upSellSeleted;
 	const priceNormal=Number((groupSelected.detailPricing?.totalPay)?.toFixed(2)) || 0;
-
 	return {
 		...dataGTMSearch,
 		event: 'nmv_vuelos_checkout_cargarCheckout',
 		precio: {
 			moneda: 'USD',
 			precioNormal: priceNormal,
-			precioFinal: Number((upSellSeleted?.totalPay)?.toFixed(2)) || priceNormal
+			precioFinal: Number((upSellSeleted?.totalPay || 0)?.toFixed(2)) || priceNormal
 		},
 		vuelo: {
 			clase: dataGTMSearch.vuelo.clase, //business, first class
