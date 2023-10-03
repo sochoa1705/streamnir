@@ -289,8 +289,6 @@ export class PayComponent implements OnInit {
 			card: dataFormCredit
 		};
 
-		console.log(GlobalComponent.appBooking, 'Global')
-
 		this._checkoutService.sendAndSavePay().subscribe({
 			next: (res) => {
 				if (res.confirmed) {
