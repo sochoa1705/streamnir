@@ -1,16 +1,11 @@
-import { ParamMap } from "@angular/router";
-import { IBooking, Secure } from "../api/api-checkout/models/rq-checkout-booking";
+import { IBooking } from "../api/api-checkout/models/rq-checkout-booking";
 import { RDiscount } from "../api/api-checkout/models/rq-checkout-discount";
 import { ExchangeRate, Group, PricingDetail } from "../api/api-checkout/models/rq-checkout-search";
 import { IUpSell } from "../api/api-checkout/models/rq-checkout-up-sell";
 import { RAdvanceSaleRule } from "../api/api-nmviajes/models/rq-advance-sale-rule.request";
 import { ICountry } from "../api/api-nmviajes/models/rq-contries-get";
 import { Configuraciones } from "../api/api-nmviajes/models/rq-token-ce-request";
-import { dataInitBooking, detailPricingInit, detailSecureInit } from "./constant-init";
-import { Search } from "../api/api-nmviajes/models/ce-metasearch";
-import { FlightSearchGtmModel } from "../Models/analytics-flights/flight-search-gtm.model";
-import { ContactGtmModel } from "../Models/analytics-flights/contact-gtm.model";
-
+import { dataInitBooking, detailPricingInit } from "./constant-init";
 
 export class GlobalComponent {
     public static appTrackingCode: string = '';
@@ -42,10 +37,6 @@ export class GlobalComponent {
     public static paramsSearch:any;
     public static indexSegmentSeleted:number[]=[];
     public static isKayak=false;
-    public static searchFlightParams:Search;
-    public static GMTSearch:FlightSearchGtmModel;
-    public static GMTContact:ContactGtmModel;
-    //public static discountCupon:
   }
 
 

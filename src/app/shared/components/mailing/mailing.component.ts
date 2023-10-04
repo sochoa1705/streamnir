@@ -4,8 +4,6 @@ import { MailingService } from '../../../Services/mailing/mailing.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
-import { ModelTaggingSubscripcionOfertas } from 'src/app/Services/analytics/tagging.models';
 
 @Component({
 	selector: 'app-mailing',
@@ -70,8 +68,6 @@ export class MailingComponent implements OnInit {
 			}
 			this.mailingService.createContact(data).subscribe({
 				next: (response: any) => {
-					this.addTag();
-
 					this.validate = true;
 					this.imgMailing = response.id;
 					this.message = 'Se registró correctamente a nuestro boletín.';
@@ -122,10 +118,5 @@ export class MailingComponent implements OnInit {
 	getMessage(messageKey: any) {
 		return this.errors.filter((item: any) => item.name === messageKey).length > 0
 				? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY;
-	}
-
-	addTag() {
-		const model = new ModelTaggingSubscripcionOfertas();
-		TaggingService.tagSubscripcionOfertas(model);
 	}
 }

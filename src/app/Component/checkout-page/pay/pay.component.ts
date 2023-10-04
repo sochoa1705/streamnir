@@ -4,7 +4,7 @@ import { cuotas } from '../passengers/utils';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { listAgencies, listBanksInternet, listCreditCard, listTypeDocument } from './utils';
 import { GlobalComponent } from 'src/app/shared/global';
-import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
 import { environment } from 'src/environments/environment';
@@ -13,8 +13,7 @@ import { getBodyEmail } from 'src/app/shared/utils/bodyEmail';
 import { ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ParamMap } from '@angular/router';
-import { getBodyGTMPayment } from 'src/app/shared/utils/GMTPayment';
-import { GoogleTagManagerService } from 'angular-google-tag-manager';
+
 
 interface Item {
 	value: any;
@@ -83,8 +82,6 @@ export class PayComponent implements OnInit {
 		deviceSessionId: new FormControl('')
 	};
 
-	isChangesFormCreditCard=false;
-
 	@HostListener('window:resize', ['$event'])
 	onResize(){
 		if (this.getScreenWidth !== window.innerWidth) {
@@ -97,8 +94,7 @@ export class PayComponent implements OnInit {
 
 	constructor(
 		private _checkoutService: CheckoutService,
-		private _modalService:NgbModal,
-		private _gtmService: GoogleTagManagerService
+		private _modalService:NgbModal
 	) {
 		this.formGroupCard = new FormGroup(this.formCreditCard);
 		this.formGroupBooking = new FormGroup(this.formBooking);
@@ -115,17 +111,7 @@ export class PayComponent implements OnInit {
 		this.initConfigurationOpenPay();
 		this.changeCupon();
 		this.setValidatorsCreditCard();
-		this.onChangesCreditCard();
 		this.getScreenWidth = window.innerWidth;
-	}
-
-	onChangesCreditCard(){
-		this.formGroupCard.valueChanges.subscribe(val => {
-			if(!this.isChangesFormCreditCard){
-				this.pushToGTMPayment();
-				this.isChangesFormCreditCard=true;
-			}
-		});
 	}
 
 	changeCupon() {
@@ -221,7 +207,6 @@ export class PayComponent implements OnInit {
 				this.isPayCard=false;
 				this.paymentTypeField.setValue(1)
 			}
-			if(!this.isPayCard)	this.pushToGTMPayment(); // eligio safetyPay
 		this.setValidatorsCreditCard();
 	}
 
@@ -235,7 +220,6 @@ export class PayComponent implements OnInit {
 			this.addressField.setValidators([Validators.required]);
 			this.documentTypeField.setValidators([Validators.required]);
 			this.documentNumberField.setValidators([Validators.required]);
-			this.isChangesFormCreditCard=false;
 		} else {
 			this.cardNumberField.clearValidators();
 			this.expirationField.clearValidators();
@@ -344,15 +328,6 @@ export class PayComponent implements OnInit {
 		modalRef.componentInstance.txtButton =  this.counter == 4 ? 'Aceptar':'Volver al inicio';
 	}
 
-	pushToGTMPayment(){
-		try {
-			const bodyGTMPayment=getBodyGTMPayment(this.paymentTypeField.value);
-			this._gtmService.pushTag(bodyGTMPayment);
-		} 
-		catch (error) {
-			console.log('error tag nmv_vuelos_checkout_seleccionarPago ',error);
-		}
-	}
 
 	getMessageErrorClient(error: any): string {
 		switch (error.errorCode) {

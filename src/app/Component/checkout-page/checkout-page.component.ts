@@ -18,9 +18,7 @@ import { getPricingFareBreakDowns } from 'src/app/shared/utils/fareBreakDowns';
 import { getIndexsSegments } from 'src/app/shared/utils/getIndexSegment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalErrorKayakComponent } from './modal-error-kayak/modal-error-kayak.component';
-import { getBodyGTMLoadCheckout } from 'src/app/shared/utils/GMTLoadCheckout';
-import { GoogleTagManagerService } from 'angular-google-tag-manager';
-import { setParamsByKayak } from 'src/app/shared/utils/GMTSearchKayak';
+
 @Component({
 	selector: 'app-checkout-page',
 	templateUrl: './checkout-page.component.html',
@@ -106,8 +104,7 @@ export class CheckoutPageComponent implements OnInit {
 		private _routeActivate: ActivatedRoute,
 		private _tokenService: TokenService,
 		private _searchService: SearchService,
-		private _modalService:NgbModal,
-		private _gtmService: GoogleTagManagerService
+		private _modalService:NgbModal
 	) {
 		this._checkoutService.selectUpSell.subscribe({
 			next: () => {
@@ -163,19 +160,8 @@ export class CheckoutPageComponent implements OnInit {
 			step.check = false;
 		})
 		this.getDiscounts();
-		this.pushToGTMLoadCheckout()
 	}
 
-
-	pushToGTMLoadCheckout(){
-		try {
-			const bodyGTMLoadCheckout=getBodyGTMLoadCheckout();
-			this._gtmService.pushTag(bodyGTMLoadCheckout);
-		} 
-		catch (error) {
-			console.log('error tag nmv_vuelos_checkout_cargarCheckout ',error);
-		}
-	}
 
 	getDataByKayak(){
 		const transactionId=this.paramMap.get('transactionId') || '';
@@ -199,7 +185,6 @@ export class CheckoutPageComponent implements OnInit {
 					GlobalComponent.upSellSeleted = null;
 				}
 				this._checkoutService.setIsDomestic();
-				setParamsByKayak(this.paramMap); //para inicializar los valores para GMT
 				this.initCheckout();
 			}
 		})

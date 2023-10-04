@@ -14,13 +14,8 @@ import { getDatesBySegment } from 'src/app/shared/utils/getDatesBySort';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
-import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
+import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { Subscription } from 'rxjs';
-import { getBodyGTMSearch } from 'src/app/shared/utils/GTMSearch';
-import { GoogleTagManagerService } from 'angular-google-tag-manager';
-import { FlightSearchGtmModel } from 'src/app/Models/analytics-flights/flight-search-gtm.model';
-import { ResultadosGtmModel } from 'src/app/Models/analytics-flights/resultados-gtm.model';
-import { getBodyGTMSearchResult } from 'src/app/shared/utils/GMTSearchResult';
 
 interface Item {
 	value: any;
@@ -75,8 +70,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		private _tokenService: TokenService,
 		private route: ActivatedRoute,
 		private _loadingService: LoadingService,
-		private _searchFiltersService: SearchFiltersService,
-		private _gtmService: GoogleTagManagerService
+		private _searchFiltersService: SearchFiltersService
 	) {}
 
 	allDataGroups: Group[] = [];
@@ -227,7 +221,6 @@ export class ResultsSearchPageComponent implements OnInit {
 						: `No encontramos vuelos coincidentes para esas fechas.`;
 				if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
 				else this.getAllDataAnterior(objParams);
-				this.pushToGTMSearch();
 				this.isReload = false;
 			}
 		});
@@ -244,7 +237,6 @@ export class ResultsSearchPageComponent implements OnInit {
 				}
 				if (this._loadingService.requestSearchCount == 9) {
 					this.showNotResults = this.dataFilterGroups.length == 0 ? true : false;
-					this.pushToGTMSearchResult();
 					if (!this.showNotResults) {
 						this.endsearch();
 						this.minPrice = this.dataFilterGroups[0].detailPricing?.totalPay || 0;
@@ -880,27 +872,4 @@ export class ResultsSearchPageComponent implements OnInit {
 
 	configIdle(){
 	}
-
-	pushToGTMSearch(){
-		try {
-			const bodyGTMSearch:FlightSearchGtmModel=getBodyGTMSearch();
-			GlobalComponent.GMTSearch=bodyGTMSearch;
-			this._gtmService.pushTag(bodyGTMSearch);
-		} 
-		catch (error) {
-			console.log('error tag nmv_vuelos_buscar ', error);
-		}
-	}
-
-	pushToGTMSearchResult(){
-		const results = [...this.dataFilterGroups].slice(0, this.dataFilterGroups.length < 5 ? this.dataFilterGroups.length - 1 : 5)
-		try {
-			const bodyGTMSearchResult:ResultadosGtmModel=getBodyGTMSearchResult(results);
-			this._gtmService.pushTag(bodyGTMSearchResult);
-		} 
-		catch (error) {
-			console.log('error tag nmv_vuelos_verResultados ',error);
-		}
-	}
-
 }

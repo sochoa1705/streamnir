@@ -3,12 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
-import { EnumCabins, ParamsVueloHotel, URLVueloHotel } from '../../tabs/tabs.models';
+import { ParamsVueloHotel, URLVueloHotel } from '../../tabs/tabs.models';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
-import { ModelTaggingVuelosHoteles, SearchFlightHotel } from 'src/app/Services/analytics/tagging.models';
 import * as moment from 'moment';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { InputValidationService } from '../../../../Services/inputValidation.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { AccountsService } from 'src/app/Services/accounts.service';
@@ -126,75 +124,7 @@ export class TabVueloHotelComponent {
 		this.navigateToResponseUrl(url);
 	}
 
-	insertTag(params: any) {
-
-		const getCodigoIata = (id: string) => {
-			return id.split('::')[1];
-		}
-
-		//const nombre = `${getCodigoIata(params.idOrigen)}_${getCodigoIata(params.idDestino)}_${params.businessClass ? 'BS' : 'EC'}`;
-		const nombre = `${getCodigoIata(params.idOrigen)}_${getCodigoIata(params.idDestino)}`;
-		const diasAnticipacion = moment(params.startDate, 'DD/MM/YYYY').diff(moment(), 'days');
-		const duracionViaje = moment(params.endDate, 'DD/MM/YYYY').diff(moment(params.startDate, 'DD/MM/YYYY'), 'days');
-
-		const model = new ModelTaggingVuelosHoteles(
-				nombre,
-				params.origen,
-				params.destino,
-				params.businessClass ? 'BS' : 'EC',
-				this.distributionObject.pasajeros,
-				this.distributionObject.adultos,
-				this.distributionObject.ninos,
-				0,
-				this.distributionObject.habitacion,
-				moment(params.startDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
-				moment(params.endDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
-				diasAnticipacion,
-				duracionViaje
-		)
-
-		TaggingService.buscarVuelosHoteles(model);
-
-		const origen = this.citysOrigenSelect.find(o => o.id == params.idOrigen);
-		const destino = this.citysDestinosSelect.find(o => o.id == params.idDestino);
-		const newModel: SearchFlightHotel = {
-			event: 'nmv_vuelosMasHotel_buscar',
-			operacion: {
-				dias_anticipacion: diasAnticipacion
-			},
-			origen: {
-				nombre: origen.label,
-				codigo: getCodigoIata(origen.id),
-				pais: origen.country
-			},
-			destino: {
-				nombre: destino.label,
-				codigo: getCodigoIata(destino.id),
-				pais: destino.country
-			},
-			hotel: {
-				habitaciones: this.distributionObject.habitacion
-			},
-			vuelo: {
-				clase: params.businessClass ? 'business' : 'economy',
-				tipo: ''
-			},
-			pasajeros: {
-				adultos: this.distributionObject.adultos,
-				ninos: this.distributionObject.ninos,
-				infantes: 0,
-				total: this.distributionObject.pasajeros
-			},
-			fechas: {
-				salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-				retorno: moment(params.endDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-				estadia: duracionViaje
-			}
-		};
-
-		TaggingService.tagSearchFlightHotel(newModel);
-	}
-
+	
 	getParamsVueloHotel() {
 		return new ParamsVueloHotel(
 				this.fromDate,
@@ -208,8 +138,7 @@ export class TabVueloHotelComponent {
 	public getUrlVueloHotel(): string {
 		let url: string;
 		let params = this.getParamsVueloHotel();
-		this.insertTag(params);
-
+		
 		url = new URLVueloHotel(params, this.distribution).getUrl();
 		return url;
 	}

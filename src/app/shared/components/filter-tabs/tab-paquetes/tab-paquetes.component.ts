@@ -2,8 +2,6 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { SearchItineraries } from 'src/app/Services/analytics/tagging.models';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
@@ -167,28 +165,8 @@ export class TabPaquetesComponent {
   public getUrlPaquete() {
     let url: string;
     let params = this.getParamsAlojamiento();
-    this.insertNewTag(params);
     url = new URLPaquete(params, params.idDestino).getUrl();
     return url;
-  }
-
-  insertNewTag(params: any) {
-    const daysFromNow = moment(params.idMonth, "YYYY-MM").diff(new Date(), 'days');
-    const model: SearchItineraries = {
-      event: 'nmv_paquetes_buscar',
-      operacion: {
-        dias_anticipacion: daysFromNow
-      },
-      destino: {
-        pais: params.destino || ''
-      },
-      paquete: {
-        fecha_salida: this.months.find(m => m.code == params.idMonth)?.label || '',
-        tema: this.themes.find(t => t.code == params.idTheme)?.label || '',
-        noches: this.noches.find(n => n.code == params.idNoche)?.name || ''
-      }
-    };
-    TaggingService.tagSearchItineraries(model);
   }
 
   getParamsAlojamiento() {
