@@ -9,7 +9,6 @@ export interface FlightSearchGtmModel {
 }
 
 export interface Operacion {
-	id:string,
 	dias_anticipacion: number
 }
 

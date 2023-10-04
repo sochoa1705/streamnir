@@ -2,13 +2,12 @@ import { PaymentMethodGtmModel } from 'src/app/Models/analytics-flights/payment-
 import { GlobalComponent } from '../global';
 
 
-export const getBodyGTMPayment = (): PaymentMethodGtmModel => {
-    const dataBooking=GlobalComponent.appBooking;
+export const getBodyGTMPayment = (paymentType:number): PaymentMethodGtmModel => {
 	return {
         ...GlobalComponent.GMTContact,
         event: 'nmv_vuelos_checkout_seleccionarPago',
         metodo_pago:{
-            opcion: dataBooking.paymentType==0 ? "CreditCard" : "SafetyPay",
+            opcion: paymentType==0 ? "CreditCard" : "SafetyPay",
         }
 	};
 };

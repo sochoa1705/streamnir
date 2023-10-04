@@ -70,7 +70,7 @@ export const environment = {
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
   
   //https://qa-bffdelfosti.nmviajes-it.com https://motorvuelos.expertiatravel.com
-  urlApiMotorVuelos: "https://motorvuelos.expertiatravel.com",
+  urlApiMotorVuelos: "https://qa-bffdelfosti.nmviajes-it.com",
 
     //url Terms and Conditions - Checkout
 

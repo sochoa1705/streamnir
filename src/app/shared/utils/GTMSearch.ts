@@ -4,13 +4,11 @@ import { FlightSearchGtmModel } from "src/app/Models/analytics-flights/flight-se
 
 export const getBodyGTMSearch = ():FlightSearchGtmModel => {
   const data=GlobalComponent.searchFlightParams;
-  const transactionId = GlobalComponent.transactionId;
   const origin = data.departureLocation?.split(' ');
   const arrival = data.arrivalLocation?.split(' ');
     return {
         event: "nmv_vuelos_buscar",
         operacion:{
-          id:transactionId,
           dias_anticipacion: moment(data.departureDate, 'YYYY-MM-DD').diff(moment(), 'days'), //
         },
         origen: {

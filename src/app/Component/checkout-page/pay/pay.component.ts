@@ -121,7 +121,10 @@ export class PayComponent implements OnInit {
 
 	onChangesCreditCard(){
 		this.formGroupCard.valueChanges.subscribe(val => {
-			this.isChangesFormCreditCard
+			if(!this.isChangesFormCreditCard){
+				this.pushToGTMPayment();
+				this.isChangesFormCreditCard=true;
+			}
 		});
 	}
 
@@ -232,6 +235,7 @@ export class PayComponent implements OnInit {
 			this.addressField.setValidators([Validators.required]);
 			this.documentTypeField.setValidators([Validators.required]);
 			this.documentNumberField.setValidators([Validators.required]);
+			this.isChangesFormCreditCard=false;
 		} else {
 			this.cardNumberField.clearValidators();
 			this.expirationField.clearValidators();
@@ -342,7 +346,7 @@ export class PayComponent implements OnInit {
 
 	pushToGTMPayment(){
 		try {
-			const bodyGTMPayment=getBodyGTMPayment();
+			const bodyGTMPayment=getBodyGTMPayment(this.paymentTypeField.value);
 			this._gtmService.pushTag(bodyGTMPayment);
 		} 
 		catch (error) {
