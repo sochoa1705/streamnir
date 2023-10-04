@@ -83,8 +83,7 @@ export class PayComponent implements OnInit {
 		deviceSessionId: new FormControl('')
 	};
 
-	isSendGMTSafety=false;
-	isSendGMTCreditCard=false;
+	isChangesFormCreditCard=false;
 
 	@HostListener('window:resize', ['$event'])
 	onResize(){
@@ -116,7 +115,14 @@ export class PayComponent implements OnInit {
 		this.initConfigurationOpenPay();
 		this.changeCupon();
 		this.setValidatorsCreditCard();
+		this.onChangesCreditCard();
 		this.getScreenWidth = window.innerWidth;
+	}
+
+	onChangesCreditCard(){
+		this.formGroupCard.valueChanges.subscribe(val => {
+			this.isChangesFormCreditCard
+		});
 	}
 
 	changeCupon() {
@@ -211,7 +217,8 @@ export class PayComponent implements OnInit {
 			}else{
 				this.isPayCard=false;
 				this.paymentTypeField.setValue(1)
-			}		
+			}
+			if(!this.isPayCard)	this.pushToGTMPayment(); // eligio safetyPay
 		this.setValidatorsCreditCard();
 	}
 
@@ -257,8 +264,6 @@ export class PayComponent implements OnInit {
 			this.isPayCard=false;
 		}else{
 			this.proccessPayment();
-			if(!this.isSendGMTCreditCard && this.paymentTypeField.value==0) this.pushToGTMPayment();
-			if(!this.isSendGMTSafety && this.paymentTypeField.value==1) this.pushToGTMPayment();
 		}
 	}
 
@@ -337,9 +342,6 @@ export class PayComponent implements OnInit {
 
 	pushToGTMPayment(){
 		try {
-			if(this.paymentTypeField.value==0) this.isSendGMTCreditCard=true
-			else this.isSendGMTSafety=true
-			
 			const bodyGTMPayment=getBodyGTMPayment();
 			this._gtmService.pushTag(bodyGTMPayment);
 		} 
