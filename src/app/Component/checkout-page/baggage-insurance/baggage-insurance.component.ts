@@ -43,6 +43,7 @@ export class BaggageInsuranceComponent implements OnInit {
 
 	ngOnInit() {
 		//es para ver si mostrar el button de ampliar beneficios
+		window.scroll({ top: 0, behavior: 'smooth' });
 		this.detailFlight = GlobalComponent.appGroupSeleted;
 		this.activeArrowRight = this.detailFlight.departure.length > 1 ? true : false;
 		this.isDomestic = GlobalComponent.isDomestic;
@@ -55,6 +56,7 @@ export class BaggageInsuranceComponent implements OnInit {
 			);
 		}
 		this.showSecure = GlobalComponent.appGroupSeleted.returns ? true : false;
+		if(!this.showSecure) this.showBaggageDropdown = true;
 		this.getScreenWidth = window.innerWidth;
 	}
 

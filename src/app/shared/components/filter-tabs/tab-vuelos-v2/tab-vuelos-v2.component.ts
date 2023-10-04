@@ -5,23 +5,21 @@ import { InputSearchFlightComponent } from '../../input-search-flight/input-sear
 import { InputClassComponent } from '../../input-class/input-class.component';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { AccountsService } from 'src/app/Services/accounts.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
-
 
 @Component({
 	selector: 'app-tab-vuelos-v2',
 	templateUrl: './tab-vuelos-v2.component.html',
 	styleUrls: ['./tab-vuelos-v2.component.scss']
 })
-export class TabVuelosV2Component implements OnInit, OnChanges,OnDestroy {
+export class TabVuelosV2Component implements OnInit, OnChanges {
 	constructor(
 		private _notification: NotificationService,
 		private _accountService: AccountsService,
 		private router: Router,
 		private _searchFiltersService:SearchFiltersService,
-		private route: ActivatedRoute
 	) {
 	}
 
@@ -57,13 +55,9 @@ export class TabVuelosV2Component implements OnInit, OnChanges,OnDestroy {
 		const errors = [];
 
 		if (!valuesInputs.arrivalLocation)  errors.push("El destino es requerido");
-
 		if (!valuesInputs.departureLocation) errors.push("La salida es requerido");
-
 		if (valuesDates.departureDate == '') errors.push("La fecha de salida es requerido");
-
 		if (valuesDates.arrivalDate == '' && this.typeFlight == 0) errors.push("La fecha de llegada es requerido")
-
 		if (errors.length > 0) this._notification.showNotificacion('Datos obligatorios sin completar',errors.join(" - "),7);
 		else {
 			const route = this.getRoute({ ...valuesClass, ...valuesPassengers, ...valuesInputs, ...valuesDates });
@@ -83,8 +77,7 @@ export class TabVuelosV2Component implements OnInit, OnChanges,OnDestroy {
 	searchDataMulti($event: any) {
 		this.counterSearch++;
 		const errors = [];
-		
-
+	
 		$event.forEach((item: any) => {
 			item = { ...item };
 		});
@@ -114,9 +107,5 @@ export class TabVuelosV2Component implements OnInit, OnChanges,OnDestroy {
 
 	changeType(index: number) {
 		this.typeFlight = index;
-	}
-
-	ngOnDestroy(): void {
-		document.documentElement.style.setProperty('--visibility', 'block');
 	}
 }

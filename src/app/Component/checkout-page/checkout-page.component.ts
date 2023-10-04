@@ -16,9 +16,9 @@ import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { getPricingFareBreakDowns } from 'src/app/shared/utils/fareBreakDowns';
 import { getIndexsSegments } from 'src/app/shared/utils/getIndexSegment';
-import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalErrorKayakComponent } from './modal-error-kayak/modal-error-kayak.component';
+
 @Component({
 	selector: 'app-checkout-page',
 	templateUrl: './checkout-page.component.html',
@@ -143,7 +143,6 @@ export class CheckoutPageComponent implements OnInit {
 		if(paramMap.keys.length > 2){
 			this.paramMap=paramMap;
 			GlobalComponent.isKayak=true;
-			this.getParamsKayak();
 			this.getIPAdress();
 		}
 		else this.initCheckout();
@@ -163,7 +162,8 @@ export class CheckoutPageComponent implements OnInit {
 		this.getDiscounts();
 	}
 
-	getParamsKayak(){
+
+	getDataByKayak(){
 		const transactionId=this.paramMap.get('transactionId') || '';
 		const idGroup=this.paramMap.get('idGroup') || '';
 		this._searchService.getGroupByTransactionId(transactionId, idGroup).subscribe({
@@ -175,6 +175,7 @@ export class CheckoutPageComponent implements OnInit {
 				GlobalComponent.appGroupSeleted = res.group;
 				GlobalComponent.detailPricing = detailPricing;
 				GlobalComponent.classFligh = flightClass == '0' ? 'Economy' : flightClass == '1' ? 'Business' : 'First Class';
+				GlobalComponent.appExchangeRate=res.exchangeRate;
 				if(segments) {
 					const segmentArray = segments.split("-").map(Number);
 					GlobalComponent.segmentSelected = segmentArray;
@@ -207,6 +208,8 @@ export class CheckoutPageComponent implements OnInit {
 			GlobalComponent.tokenMotorVuelo = res.accessToken;
 			GlobalComponent.appReglasVentaAnticipada = res.reglasVentaAnticipada;
 			GlobalComponent.appConfigurations = res.configuraciones;
+			GlobalComponent.transactionId=res.transactionId;
+			this.getDataByKayak();
 	    },
 		error:()=>{
 			this.showModalErrorKayak();

@@ -4,7 +4,7 @@ import { cuotas } from '../passengers/utils';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { listAgencies, listBanksInternet, listCreditCard, listTypeDocument } from './utils';
 import { GlobalComponent } from 'src/app/shared/global';
-import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
 import { environment } from 'src/environments/environment';
@@ -12,8 +12,8 @@ import { RPurchare } from 'src/app/api/api-checkout/models/rq-checkout-save-book
 import { getBodyEmail } from 'src/app/shared/utils/bodyEmail';
 import { ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalErrorKayakComponent } from '../modal-error-kayak/modal-error-kayak.component';
 import { ParamMap } from '@angular/router';
+
 
 interface Item {
 	value: any;
@@ -81,6 +81,7 @@ export class PayComponent implements OnInit {
 		paymentType: new FormControl(0),
 		deviceSessionId: new FormControl('')
 	};
+
 	@HostListener('window:resize', ['$event'])
 	onResize(){
 		if (this.getScreenWidth !== window.innerWidth) {
@@ -153,24 +154,28 @@ export class PayComponent implements OnInit {
 		}else{
 			this._checkoutService.getPromocionalCode(search).subscribe({
 				next: (response) => {
-					if (response.result.isSuccess) {
-						this.isValidPromotionalCode = true;
-						this.discountCupon = response.result;
-						if (this.discountCupon && this.isValidPromotionalCode) {
-							this.isApplyCupon = true;
-							this._checkoutService.applyCupon.emit(this.discountCupon);
-						}else this.resetDiscountByCupon();
-					} else{
-						this.textErrorCupon=response.result.message;
-						this.cuponPromoWebField.setErrors({'incorrect': true});
-						this.resetDiscountByCupon();
-					}
+					if (response.result) {
+						if(response.result.isSuccess){
+							this.isValidPromotionalCode = true;
+							this.discountCupon = response.result;
+							if (this.discountCupon && this.isValidPromotionalCode) {
+								this.isApplyCupon = true;
+								this._checkoutService.applyCupon.emit(this.discountCupon);
+							}else this.resetDiscountByCupon();
+						}else this.setErrorCupon(response.result.message)
+					} else this.setErrorCupon('Código inválido')
 				},
 				error: (err) => {
 					this.resetDiscountByCupon();
 				}
 			});
 		}
+	}
+
+	setErrorCupon(message:string){
+		this.textErrorCupon=message;
+		this.cuponPromoWebField.setErrors({'incorrect': true});
+		this.resetDiscountByCupon();
 	}
 
 	resetDiscountByCupon() {
@@ -195,7 +200,6 @@ export class PayComponent implements OnInit {
 	}
 
 	clickTab() {
-
 			if(this.counter < 4){
 				if(!this.isKayak) this.isPayCard = !this.isPayCard;
 				this.paymentTypeField.setValue(this.isPayCard ? 0 : 1);
@@ -203,7 +207,6 @@ export class PayComponent implements OnInit {
 				this.isPayCard=false;
 				this.paymentTypeField.setValue(1)
 			}
-		
 		this.setValidatorsCreditCard();
 	}
 
@@ -242,7 +245,6 @@ export class PayComponent implements OnInit {
 	}
 
 	sendPayment() {
-		//fix contador debe aumentar cuando sea 4 ver como :v
 		if(this.paymentTypeField.value==0 || this.counter >=4) this.counter++;
 		if(this.counter == 4){
 			this.openModalError('Has alcanzado el límite máximo de intentos con tu Tarjeta. A continuación, podrás completar tu pago utilizando nuestro método de pago Safetypay.')
@@ -316,28 +318,16 @@ export class PayComponent implements OnInit {
 	}
 
 	openModalError(message: string) {
-		if(this.isKayak)
-			this.showModalErrorKayak();
-		else{
-			const modalRef=this._modalService.open(ModalErrorComponent,{
-				centered: true,
-				backdrop: 'static',
-				windowClass: 'modal-detail-error'
-			})
-			modalRef.componentInstance.message = message;
-			modalRef.componentInstance.isRedirect =  this.counter == 4 ? false: true;
-			modalRef.componentInstance.txtButton =  this.counter == 4 ? 'Aceptar':'Volver al inicio';
-		}
-	}
-
-	showModalErrorKayak() {
-		const modalRef=this._modalService.open(ModalErrorKayakComponent,{
+		const modalRef=this._modalService.open(ModalErrorComponent,{
 			centered: true,
 			backdrop: 'static',
 			windowClass: 'modal-detail-error'
 		})
-		modalRef.componentInstance.params = this.paramMap;
+		modalRef.componentInstance.message = message;
+		modalRef.componentInstance.isRedirect =  this.counter == 4 ? false: true;
+		modalRef.componentInstance.txtButton =  this.counter == 4 ? 'Aceptar':'Volver al inicio';
 	}
+
 
 	getMessageErrorClient(error: any): string {
 		switch (error.errorCode) {
@@ -345,7 +335,6 @@ export class PayComponent implements OnInit {
 			return 'No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.';
 		  case 1002:
 			return 'La tarifa ya no se encuentra disponible, favor de realizar una nueva búsqueda.';
-	
 		  case 2001:
 			return 'La tarjeta de crédito no es válida.';
 		  case 2002:
@@ -355,10 +344,11 @@ export class PayComponent implements OnInit {
 		  case 2004:
 			return 'La cuenta no tenía fondos suficientes.';
 		  case 2100:
-			if (error.messages != null && error.messages.length > 0) {
-			  return error.messages[0];
-			} else
-			  return 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados o de lo contrario selecciona otra forma de pago.';
+			if (error.messages !== null && error.messages.length > 0 && error.messages[0]!==null) 
+				return error.messages[0];
+			else return this.paymentTypeField.value== 0 ? 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.':'Al parecer ocurrio un error, por favor intentelo más tarde.';
+		  case 10000:
+			return this.paymentTypeField.value== 0 ? 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.':'Al parecer ocurrio un error, por favor intentelo más tarde.';
 		  case 2101:
 			return 'No se puede realizar el pago correctamente.';
 		  default:

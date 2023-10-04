@@ -16,17 +16,6 @@ import { CardService, PaymentService } from 'src/app/api/api-payment/services';
 import { PaymentMethodEnum, RqPaymentCeRequest1 } from 'src/app/api/api-payment/models';
 import { PreferenceService } from 'src/app/Services/preference/preference.service';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
-import {
-  ActionFieldCheckout,
-  Checkout,
-  EcommerceCheckout,
-  ModelTaggingCheckout,
-  ProductAddToCart,
-  TravelInsuranceCheckout,
-  TravelInsurancePassengerInfo,
-  TravelInsurancePaymentMethodSelected
-} from 'src/app/Services/analytics/tagging.models';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { MessageService } from 'src/app/api/api-correos/services';
 import {
@@ -317,9 +306,6 @@ export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getCountries();
 
     if (this.current['filter'] !== 'filter') this.listCoverage();
-
-    this.dataLayerPushCheckout(this.safe0Json, this.resultJson);
-    this.sendEventOnLoad(this.safe0Json, this.resultJson)
     this.listenFormCustomers();
   }
 
@@ -486,33 +472,6 @@ export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   startContactDetails(): void {
     const option: string = this.selectedPay === 'tarjeta' ? 'Tarjeta de Credito o Debito' : `SafetyPay - ${this.banca ? 'Banca por Internet' : 'Agencias/Agentes'}`;
-
-    const model = {
-      event: 'nmv.seguros_eecga3_checkoutOption',
-      ecommerce: {
-        checkout_option: {
-          actionField: {
-            step: 2,
-            option: option
-          }
-        }
-      }
-    }
-
-    TaggingService.tagSelectionOfPaymentMethod(model);
-
-    const model2 = {
-      event: 'nmv.seguros_eecga3_checkout',
-      ecommerce: {
-        checkout: {
-          actionField: {
-            step: 3
-          }
-        }
-      }
-    }
-
-    TaggingService.tagStartOfContactData(model2);
   }
 
   showDataContacto: Boolean = true;
@@ -560,38 +519,10 @@ export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
     else {
-      const model1 = {
-        event: 'nmv.seguros_eecga3_checkoutOption',
-        ecommerce: {
-          checkout_option: {
-            actionField: {
-              step: 1,
-              option: nationality
-            }
-          }
-        }
-      }
-
-      TaggingService.tagNationalitySelection(model1);
-      const model = {
-        event: 'nmv.seguros_eecga3_checkout',
-        ecommerce: {
-          checkout: {
-            actionField: {
-              step: 2
-            }
-          }
-        }
-      }
-
-      TaggingService.tagStartOfPaymentMethods(model);
-
       if (e === 'optionm-1' || e === 'option-1')
         this.selectedPay = 'tarjeta';
       else
         this.selectedPay = 'safety'
-
-      this.sendPaymentMethodSelectEvent(this.selectedPay.toUpperCase());
     }
   }
 
@@ -605,33 +536,6 @@ export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
     if (nationality === undefined) {
       this._notification.showNotificacion("Error", "Debe ingresar previamente los datos del pasajero");
       return;
-    }
-    else {
-      const model1 = {
-        event: 'nmv.seguros_eecga3_checkoutOption',
-        ecommerce: {
-          checkout_option: {
-            actionField: {
-              step: 1,
-              option: nationality
-            }
-          }
-        }
-      };
-      TaggingService.tagNationalitySelection(model1);
-
-      const model = {
-        event: 'nmv.seguros_eecga3_checkout',
-        ecommerce: {
-          checkout: {
-            actionField: {
-              step: 2
-            }
-          }
-        }
-      };
-      TaggingService.tagStartOfPaymentMethods(model);
-      this.sendPaymentMethodSelectEvent(this.selectedPay.toUpperCase());
     }
   }
 
@@ -669,102 +573,9 @@ export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.genderSubscription = this.formShop
 				.get([ 'customers', (<FormArray>this.formShop.get('customers')).length - 1, 'sexCustomer' ])!.valueChanges
 				.subscribe(() => {
-					setTimeout(() => {
-						if (this.validateFormCustomers(true))
-							this.sendPassengerInfoEvent();
-					}, 500);
 				});
 	}
 
-  sendPassengerInfoEvent() {
-    const model: TravelInsurancePassengerInfo = {
-      event: 'nmv_seguros_checkout_ingresarDatos',
-      precio: {
-        moneda: this.safe0Json.monedaLocal,
-        precioFinal: Number(this.totalToPay),
-        precioNormal: Number(this.safe0Json.precioBrutoLocal)
-      },
-      usuario: this.getGenericCheckoutDataForEvent().usuario,
-      origen: this.getGenericCheckoutDataForEvent().origen,
-      destino: this.getGenericCheckoutDataForEvent().destino,
-      seguro: this.getGenericCheckoutDataForEvent().seguro,
-      pasajeros: this.getGenericCheckoutDataForEvent().pasajeros,
-      fechas: this.getGenericCheckoutDataForEvent().fechas
-    };
-    TaggingService.tagTravelInsurancePassengerInfo(model);
-  }
-
-  sendPaymentMethodSelectEvent(paymentMethod: string) {
-    const model: TravelInsurancePaymentMethodSelected = {
-      event: 'nmv_seguros_checkout_seleccionarPago',
-      precio: {
-        moneda: this.safe0Json.monedaLocal,
-        precioFinal: Number(this.totalToPay),
-        precioNormal: Number(this.safe0Json.precioBrutoLocal)
-      },
-      metodo_pago: {
-        opcion: paymentMethod == 'SAFETY' ? 'SAFETYPAY' : paymentMethod
-      },
-      usuario: this.getGenericCheckoutDataForEvent().usuario,
-      origen: this.getGenericCheckoutDataForEvent().origen,
-      destino: this.getGenericCheckoutDataForEvent().destino,
-      seguro: this.getGenericCheckoutDataForEvent().seguro,
-      pasajeros: this.getGenericCheckoutDataForEvent().pasajeros,
-      fechas: this.getGenericCheckoutDataForEvent().fechas
-    };
-    TaggingService.tagTravelInsurancePaymentMethodSelected(model);
-  }
-
-  private getGenericCheckoutDataForEvent() {
-    const firstCustomer = (<FormArray>this.formShop.controls['customers']).controls[0];
-    const fechaNacimiento = `${firstCustomer.get('yearCustomer')!.value}-${firstCustomer.get('monthCustomer')!.value}-${firstCustomer.get('dayCustomer')!.value}`;
-    return {
-      usuario: {
-        email: this.contactForm.get('mailContacto')?.value || '',
-        primerNombre: firstCustomer.get('nameCustomer')!.value,
-        primerApellido: firstCustomer.get('lastNameCustomer')!.value,
-        fechaNacimiento: moment(fechaNacimiento, 'YYYY-MM-D').format('YYYY-MM-DD'),
-        nacionalidad: firstCustomer.get('nationalityCustomer')!.value,
-        genero: firstCustomer.get('sexCustomer')!.value,
-        documento_tipo: firstCustomer.get('typeDocCustomer')!.value,
-        documento_numero: firstCustomer.get('numDocCustomer')!.value,
-        telefono_tipo: this.contactForm.get('typePhone0')?.value || '',
-        telefono_codigo: this.contactForm.get('code0')?.value || '',
-        telefono_numero: this.contactForm.get('numberPhone0')?.value || '',
-        frecuencia: firstCustomer.get('typeCustomer')!.value
-      },
-      origen: {
-        nombre: 'Perú',
-        codigo: 'PE',
-        pais: 'Perú'
-      },
-      destino: {
-        nombre: this.resultJson.destinyString.descripcion_destino,
-        codigo: this.resultJson.destinyString.id_destino,
-        pais: ''
-      },
-      seguro: {
-        plan: this.safe0Json.nombreProducto,
-        codigo: this.safe0Json.codProducto,
-        opcion: this.safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-        emisor: 'AssistCard',
-        monto_asistencia: this.asistenciaMedicaMonto,
-        precioFinal: Number(this.totalToPay),
-        posicion: 0
-      },
-      pasajeros: {
-        adultos: this.countAdulto,
-        ninos: this.countNinio,
-        infantes: this.countInfante,
-        total: this.resultJson.passengers.length
-      },
-      fechas: {
-        salida: moment(this.resultJson.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-        retorno: moment(this.resultJson.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-        estadia: Number(this.resultJson.days)
-      }
-    }
-  }
 
   validateForm(): boolean {
     const dataShop = this.formShop.value;
@@ -1053,45 +864,6 @@ export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
 
             const fechasalida = this.resultJson.fromDate.split('/');
             const fecharetorno = this.resultJson.toDate.split('/');
-
-            const currentDate = moment();
-            const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
-
-            const missingDays = fromDate.diff(currentDate, 'days');
-
-            const model = {
-              event: 'nmv.seguros_eecga3_purchase',
-              ecommerce: {
-                currencyCode: this.safe0Json.monedaLista,
-                purchase: {
-                  actionField: {
-                    id: String(result.Result.QuoteId),
-                    revenue: this.safe0Json.precioEmisionLocal,
-                    cupon: ''
-                  },
-                  products: [{
-                    name: this.safe0Json.producto,
-                    id: this.safe0Json.idProducto,
-                    price: this.safe0Json.precioEmisionLocal,
-                    brand: 'AssistCard',
-                    category: 'Seguros',
-                    category2: this.safe0Json.clase === 'best' ? 'El mejor plan' : 'Fecha flexible',
-                    variant: this.resultJson.destinyString.descripcion_destino,
-                    quantity: this.resultJson.passengers.length,
-                    metric10: this.getPromedioEdades(this.resultJson),
-                    dimension9: String(this.asistenciaMedicaMonto),
-                    dimension11: `${fechasalida[2]}/${fechasalida[1]}/${fechasalida[0]}`,
-                    dimension12: `${fecharetorno[2]}/${fecharetorno[1]}/${fecharetorno[0]}`,
-                    metric11: missingDays,
-                    metric12: Number(this.resultJson.days),
-                    dimension16: 'Perú',
-                    dimension17: this.resultJson.destinyString.descripcion_destino
-                  }]
-                }
-              }
-            }
-
-            TaggingService.tagTransactionCompleted(model);
 
             const asegurados: any = [];
 
@@ -1384,141 +1156,6 @@ export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.count++;
   }
 
-  dataLayerPushCheckout(safe0Json: any, resultJson: any) {
-    let actionField: ActionFieldCheckout = {
-      step: 1
-    }
-    let products: ProductAddToCart[] = [];
-    let pp: ProductAddToCart = {
-      name: '',
-      id: '',
-      price: '',
-      brand: '',
-      category: '',
-      category2: '',
-      variant: '',
-      quantity: 0,
-      metric10: 0,
-      dimension9: '',
-      dimension11: '',
-      dimension12: '',
-      metric11: 0,
-      metric12: 0,
-      dimension16: '',
-      dimension17: ''
-    }
-
-    let checkout: Checkout = {
-      actionField: actionField,
-      products: products
-    }
-    let ecommerce: EcommerceCheckout = {
-      checkout: checkout
-    }
-    let modelTaggingCheckout: ModelTaggingCheckout = {
-      event: 'nmv.seguros_eecga3_checkout',
-      ecommerce: ecommerce
-    }
-
-    for (let index = 0; index < parseInt(resultJson.passengers.length); index++) {
-      const element = resultJson.passengers[index];
-      if (element.edad < 6) {//infante
-        this.countInfante++;
-
-      } else if (element.edad >= 6 && element.edad < 18) {//nuño
-        this.countNinio++;
-      } else if (element.edad >= 18) {// adulto
-        this.countAdulto++;
-
-      }
-    }
-    if (this.countInfante > 0) {
-      pp = this.llenarProduct(safe0Json, resultJson);
-      products.push(pp);
-    }
-    if (this.countNinio > 0) {
-      pp = this.llenarProduct(safe0Json, resultJson);
-      products.push(pp);
-    }
-    if (this.countAdulto > 0) {
-      pp = this.llenarProduct(safe0Json, resultJson);
-      products.push(pp);
-    }
-    console.log("modelTaggingCheckout:", modelTaggingCheckout)
-    TaggingService.tagMostrarCheckout(modelTaggingCheckout);
-  }
-
-  sendEventOnLoad(safe0Json: any, resultJson: any) {
-	  const fromDate = moment(resultJson.fromDate, 'DD/MM/YYYY');
-	  const daysFromNow = fromDate.diff(moment(), 'days');
-    const model: TravelInsuranceCheckout = {
-      event: 'nmv_seguros_checkout_cargarCheckout',
-      operacion: {
-        dias_anticipacion: daysFromNow
-      },
-      precio: {
-        moneda: safe0Json.monedaLocal,
-        precioFinal: safe0Json.precioEmisionLocal,
-        precioNormal: safe0Json.precioEmisionLocal
-      },
-      origen: {
-        nombre: 'Peru',
-        codigo: 'PE',
-        pais: 'Peru'
-      },
-      destino: {
-        nombre: resultJson.destinyString.descripcion_destino,
-        codigo: resultJson.destinyString.id_destino,
-        pais: ''
-      },
-      seguro: {
-        codigo: safe0Json.codProducto,
-        opcion: safe0Json.clase === 'best' ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-        precioFinal: safe0Json.precioEmisionLocal,
-        plan: safe0Json.nombreProducto,
-        emisor: 'AssistCard',
-        monto_asistencia: 0,
-        posicion: 0
-      },
-      pasajeros: {
-        adultos: resultJson.passengers.filter((p: any) => Number(p.edad) >= 18).length,
-        infantes: resultJson.passengers.filter((p: any) => Number(p.edad) <= 5).length,
-        ninos: resultJson.passengers.filter((p: any) => Number(p.edad) > 5 && Number(p.edad) < 18).length,
-        total: resultJson.passengers.length
-      },
-      fechas: {
-        estadia: Number(resultJson.days),
-        salida: moment(resultJson.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-        retorno: moment(resultJson.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
-      }
-    };
-    TaggingService.tagTravelInsuranceCheckout(model);
-  }
-
-  llenarProduct(safe0Json: any, resultJson: any): ProductAddToCart {
-    const currentDate = moment();
-    const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
-    const missingDays = fromDate.diff(currentDate, 'days');
-    return {
-      name: safe0Json.nombreProducto,
-      id: safe0Json.idProducto,
-      price: safe0Json.precioBrutochange,
-      brand: 'AssistCard',
-      category: 'Seguros',
-      category2: 'Fecha Flexible',
-      variant: resultJson.destinyString.descripcion_destino,
-      quantity: parseInt(resultJson.passengers.length),
-      metric10: this.getPromedioEdades(resultJson),
-      dimension9: this.asistMedic,
-      dimension11: resultJson.fromDate,
-      dimension12: resultJson.toDate,
-      metric11: missingDays,
-      metric12: Number(this.resultJson.days),
-      dimension16: 'PERU',
-      dimension17: resultJson.destinyString.descripcion_destino,
-    };
-  }
-
   allowNumeric(event: KeyboardEvent) {
     const pattern = /[0-9]/;
 
@@ -1591,33 +1228,6 @@ export class ComprarComponent implements OnInit, AfterViewInit, OnDestroy {
     if (nationality === undefined) {
       this._notification.showNotificacion('Error', 'Debe ingresar previamente los datos del pasajero');
       return;
-    } else {
-      const model1 = {
-        event: 'nmv.seguros_eecga3_checkoutOption',
-        ecommerce: {
-          checkout_option: {
-            actionField: {
-              step: 1,
-              option: nationality
-            }
-          }
-        }
-      };
-      TaggingService.tagNationalitySelection(model1);
-
-      const model = {
-        event: 'nmv.seguros_eecga3_checkout',
-        ecommerce: {
-          checkout: {
-            actionField: {
-              step: 2
-            }
-          }
-        }
-      };
-      TaggingService.tagStartOfPaymentMethods(model);
-
-      this.sendPaymentMethodSelectEvent(this.selectedPay.toUpperCase());
     }
   }
 

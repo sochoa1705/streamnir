@@ -3,8 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AccountsService } from 'src/app/Services/accounts.service';
-import { ModelTaggingHoteles, SearchHotels } from 'src/app/Services/analytics/tagging.models';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
 import { NotificationService } from 'src/app/Services/notification.service';
@@ -12,7 +10,6 @@ import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { ParamsHoteles, URLHotel } from '../../tabs/tabs.models';
-import * as moment from 'moment';
 import { InputRangeComponent } from '../../input-range/input-range.component';
 
 @Component({
@@ -134,63 +131,8 @@ export class TabHotelComponent {
   public getUrlAlojamiento() {
     let url: string;
     let params = this.getParamsAlojamiento();
-    this.insertTag(params);
     url = new URLHotel(params, this.distribution).getUrl();
     return url;
-  }
-
-  insertTag(params: any) {
-    const getCodigoIata = (id: string) => {
-      return id.split("::")[1];
-    }
-
-    const nombre = getCodigoIata(params.idDestino);
-    const diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
-    const duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
-
-    const model = new ModelTaggingHoteles(
-      nombre,
-      params.destino,
-      this.distributionObject.pasajeros,
-      this.distributionObject.adultos,
-      this.distributionObject.ninos,
-      0,
-      this.distributionObject.habitacion,
-      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      diasAnticipacion,
-      duracionViaje
-    )
-
-    TaggingService.buscarHoteles(model);
-
-    const newModel: SearchHotels = {
-      event: 'nmv_hoteles_buscar',
-      operacion: {
-        dias_anticipacion: diasAnticipacion
-      },
-      destino: {
-        nombre: params.destino,
-        codigo: nombre,
-        pais: this.citys[0].country
-      },
-      hotel: {
-        habitaciones: this.distributionObject.habitacion
-      },
-      pasajeros: {
-        adultos: this.distributionObject.adultos,
-        ninos: this.distributionObject.ninos,
-        infantes: 0,
-        total: this.distributionObject.pasajeros
-      },
-      fechas: {
-        salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-        retorno: moment(params.endDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-        estadia: duracionViaje
-      }
-    };
-
-    TaggingService.tagSearchHotels(newModel);
   }
 
   getParamsAlojamiento() {

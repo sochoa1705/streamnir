@@ -3,15 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AccountsService } from 'src/app/Services/accounts.service';
-import { ModelTaggingActividades, SearchExperiences } from 'src/app/Services/analytics/tagging.models';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
 import { DistributionObjectA } from '../../pop-up-pasajero/pop-up-pasajero.model';
 import { ParamsActividades, URLActividades } from '../../tabs/tabs.models';
-import * as moment from 'moment';
 import { InputRangeComponent } from '../../input-range/input-range.component';
 import { NotificationService } from 'src/app/Services/notification.service';
 
@@ -125,61 +122,9 @@ export class TabActividadesComponent {
     let url: string;
     let params = this.getParamsActividades();
     if (params) {
-      this.insertTag(params);
       url = new URLActividades(params, this.distribution).getUrl();
       return url;
     } else return '';
-  }
-
-  insertTag(params: any) {
-    const getCodigoIata = (id: string) => {
-      return id.split('::')[1];
-    }
-
-    const nombre = `${getCodigoIata(params.idDestino)}`;
-    const diasAnticipacion = moment(params.startDate, 'DD/MM/YYYY').diff(moment(), 'days');
-    const duracionViaje = moment(params.endDate, 'DD/MM/YYYY').diff(moment(params.startDate, 'DD/MM/YYYY'), 'days');
-
-    const model = new ModelTaggingActividades(
-        nombre,
-        params.destino,
-        this.distributionObject.pasajeros,
-        this.distributionObject.adultos,
-        this.distributionObject.ninos,
-        0,
-        this.distributionObject.habitacion,
-        moment(params.startDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
-        moment(params.endDate, 'DD/MM/YYYY').format('YYYY/MM/DD'),
-        diasAnticipacion,
-        duracionViaje
-    )
-
-    TaggingService.buscarActividades(model);
-
-    const newModel: SearchExperiences = {
-      event: 'nmv_actividades_buscar',
-      operacion: {
-        dias_anticipacion: diasAnticipacion
-      },
-      destino: {
-        nombre: params.destino,
-        codigo: nombre,
-        pais: this.citys[0].country
-      },
-      pasajeros: {
-        adultos: this.distributionObject.adultos,
-        ninos: this.distributionObject.ninos,
-        infantes: 0,
-        total: this.distributionObject.pasajeros
-      },
-      fechas: {
-        salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-        retorno: moment(params.endDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-        estadia: duracionViaje
-      }
-    };
-
-    TaggingService.tagSearchExperiences(newModel);
   }
 
   getParamsActividades() {

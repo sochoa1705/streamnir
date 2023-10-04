@@ -10,8 +10,6 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from 'src/app/Services/notification.service';
 import * as moment from 'moment';
-import { ModelTaggingBuscarSeguros, SearchTravelInsurance } from 'src/app/Services/analytics/tagging.models';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 
 export interface IFormSeguros {
   origenSafe: string;
@@ -331,58 +329,6 @@ export class FiltersafeComponent implements OnInit {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
   }
 
-  insertTag(form: IFormSeguros) {
-    const edades = form.Edades.split(';');
-    const sum = edades.reduce((acc, el) => (Number(el) + acc), 0);
-    const promEdades = sum / edades.length;
-
-    const tag = new ModelTaggingBuscarSeguros(
-      form.destinyString.descripcion_destino,
-      form.destinyString.id_destino,
-      form.passengers.length,
-      promEdades,
-      form.fromDate,
-      form.toDate,
-      "PE",
-      "Peru",
-      Number(this.diffDays())
-    )
-
-    TaggingService.tagBuscarSeguros(tag);
-
-    const daysFromNow = moment(form.fromDate, 'DD/MM/YYYY').diff(moment(), 'days');
-
-    const model: SearchTravelInsurance = {
-      event: 'nmv_seguros_buscar',
-      operacion: {
-        dias_anticipacion: daysFromNow
-      },
-      origen: {
-        nombre: 'Peru',
-        codigo: 'PE',
-        pais: 'Peru'
-      },
-      destino: {
-        nombre: form.destinyString.descripcion_destino,
-        codigo: form.destinyString.id_destino,
-        pais: ''
-      },
-      pasajeros: {
-        total: form.passengers.length,
-        infantes: form.passengers.filter(p => Number(p.edad) <= 5).length,
-        ninos: form.passengers.filter(p => Number(p.edad) > 5 && Number(p.edad) < 18).length,
-        adultos: form.passengers.filter(p => Number(p.edad) >= 18).length
-      },
-      fechas: {
-        salida: moment(form.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-        retorno: moment(form.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-        estadia: Number(this.diffDays())
-      }
-    };
-
-    TaggingService.tagSearchTravelInsurance(model);
-  }
-
   quoteNow() {
     if (this.validForm()) {
       let fechaSalida = this.FromDate2.nativeElement.value
@@ -413,8 +359,6 @@ export class FiltersafeComponent implements OnInit {
 
       let form = this.insuranceQuoteForm.value;
       localStorage.removeItem('Datasafe');
-
-      this.insertTag(form);
 
       localStorage.setItem('Datasafe', JSON.stringify(form));
 

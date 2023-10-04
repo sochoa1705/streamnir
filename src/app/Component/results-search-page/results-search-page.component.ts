@@ -16,7 +16,6 @@ import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-f
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
 import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { Subscription } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 interface Item {
 	value: any;
@@ -71,8 +70,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		private _tokenService: TokenService,
 		private route: ActivatedRoute,
 		private _loadingService: LoadingService,
-		private _searchFiltersService: SearchFiltersService,
-		private _modalService: NgbModal,
+		private _searchFiltersService: SearchFiltersService
 	) {}
 
 	allDataGroups: Group[] = [];
@@ -131,7 +129,6 @@ export class ResultsSearchPageComponent implements OnInit {
 	}
 
 	reloadPageResult() {
-		console.log('reloaddd');
 		this.isReload = true;
 		GlobalComponent.paramsSearch = {};
 		GlobalComponent.tokenMotorVuelo = '';
@@ -197,6 +194,7 @@ export class ResultsSearchPageComponent implements OnInit {
 				GlobalComponent.tokenMotorVuelo = response.accessToken;
 				GlobalComponent.appReglasVentaAnticipada = response.reglasVentaAnticipada;
 				GlobalComponent.appConfigurations = response.configuraciones;
+				GlobalComponent.transactionId=response.transactionId;
 				this.getObjectParams();
 			},
 			error: () => {
@@ -205,6 +203,7 @@ export class ResultsSearchPageComponent implements OnInit {
 			}
 		});
 	}
+
 
 	getObjectParams() {
 		this.route.queryParamMap.subscribe((params) => {
@@ -873,5 +872,4 @@ export class ResultsSearchPageComponent implements OnInit {
 
 	configIdle(){
 	}
-
 }

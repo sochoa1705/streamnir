@@ -1,7 +1,6 @@
 import { registerLocaleData } from '@angular/common';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Group, PricingDetail } from 'src/app/api/api-checkout/models/rq-checkout-search';
-import localeEs from '@angular/common/locales/es';
 import { GlobalComponent } from 'src/app/shared/global';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { ModalFeeComponent } from 'src/app/Component/checkout-page/modal-fee/modal-fee.component';
@@ -10,8 +9,8 @@ import { ModalErrorComponent } from '../../modal-error/modal-error.component';
 import { dataInitBooking } from 'src/app/shared/constant-init';
 import { LoadingService } from 'src/app/Services/intermediary/loading.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FareBreakDown } from 'src/app/api/api-checkout/models/rq-checkout-up-sell';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
+import localeEs from '@angular/common/locales/es';
 
 @Component({
 	selector: 'app-modal-flight-detail',
@@ -81,7 +80,7 @@ export class ModalFlightDetailComponent implements OnInit {
 				}
 			});
 	}
-
+	//button continuar
 	openModalUpsell() {
 		const segmentArray: number[] = this.segmentDeparture.map((item) => item);
 		const segmentIndex: number[] = this.indexSegmentDeparture.map((item) => item);

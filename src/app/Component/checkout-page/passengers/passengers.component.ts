@@ -14,6 +14,8 @@ import { getBodyValidateBooking } from 'src/app/shared/utils/bodyValidateBooking
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
 import { ModalValidateComponent } from './modal-validate/modal-validate.component';
+
+
 interface Item {
 	value: any;
 	name: string;
@@ -88,7 +90,7 @@ export class PassengersComponent implements OnInit {
 		private _contryService: ContryService,
 		private _checkoutService: CheckoutService,
 		private _accountService: AccountsService,
-		private _modalService: NgbModal
+		private _modalService: NgbModal,
 	) {
 		this.formGroup = new FormGroup(this.formContact);
 		this.formBillingGroup = new FormGroup(this.formBilling);
