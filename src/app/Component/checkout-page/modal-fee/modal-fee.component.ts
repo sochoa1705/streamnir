@@ -105,7 +105,6 @@ export class ModalFeeComponent implements OnInit{
 			this._checkoutService.selectUpSellModal();
 			this.router.navigateByUrl('/booking');
 		}
-
 		this.activeModal.close(item);
 	}
 }

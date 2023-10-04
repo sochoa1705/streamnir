@@ -26,7 +26,7 @@ export const convertGroupToResult=( results: Group[]):Resultado[]=>{
               aerolinea_salida: flight.departure[0].segments[0].flightSegments[0].marketingAirline.code || '',
               aerolinea_regreso: flight.returns?.segments[0].flightSegments[0].marketingAirline.code || '',
               equipaje_categoria: flight.typeBag=='holdbag' ? 'sí incluye equipaje de bodega': 'no incluye equipaje de bodega',
-              escalas: flight.departure[0].segments[0].stops === 0 ? 'Directo' :
+              escalas: flight.departure[0].segments[0].stops === 0 ? 'directo' :
                 `${flight.departure[0].segments[0].stops} escala`
             }
     })

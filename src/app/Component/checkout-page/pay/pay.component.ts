@@ -13,6 +13,8 @@ import { getBodyEmail } from 'src/app/shared/utils/bodyEmail';
 import { ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ParamMap } from '@angular/router';
+import { getBodyGTMPayment } from 'src/app/shared/utils/GMTPayment';
+import { GoogleTagManagerService } from 'angular-google-tag-manager';
 
 interface Item {
 	value: any;
@@ -80,6 +82,9 @@ export class PayComponent implements OnInit {
 		paymentType: new FormControl(0),
 		deviceSessionId: new FormControl('')
 	};
+
+	isChangesFormCreditCard=false;
+
 	@HostListener('window:resize', ['$event'])
 	onResize(){
 		if (this.getScreenWidth !== window.innerWidth) {
@@ -92,7 +97,8 @@ export class PayComponent implements OnInit {
 
 	constructor(
 		private _checkoutService: CheckoutService,
-		private _modalService:NgbModal
+		private _modalService:NgbModal,
+		private _gtmService: GoogleTagManagerService
 	) {
 		this.formGroupCard = new FormGroup(this.formCreditCard);
 		this.formGroupBooking = new FormGroup(this.formBooking);
@@ -109,7 +115,14 @@ export class PayComponent implements OnInit {
 		this.initConfigurationOpenPay();
 		this.changeCupon();
 		this.setValidatorsCreditCard();
+		this.onChangesCreditCard();
 		this.getScreenWidth = window.innerWidth;
+	}
+
+	onChangesCreditCard(){
+		this.formGroupCard.valueChanges.subscribe(val => {
+			this.isChangesFormCreditCard
+		});
 	}
 
 	changeCupon() {
@@ -198,7 +211,6 @@ export class PayComponent implements OnInit {
 	}
 
 	clickTab() {
-
 			if(this.counter < 4){
 				if(!this.isKayak) this.isPayCard = !this.isPayCard;
 				this.paymentTypeField.setValue(this.isPayCard ? 0 : 1);
@@ -206,7 +218,7 @@ export class PayComponent implements OnInit {
 				this.isPayCard=false;
 				this.paymentTypeField.setValue(1)
 			}
-		
+			if(!this.isPayCard)	this.pushToGTMPayment(); // eligio safetyPay
 		this.setValidatorsCreditCard();
 	}
 
@@ -245,7 +257,6 @@ export class PayComponent implements OnInit {
 	}
 
 	sendPayment() {
-		//fix contador debe aumentar cuando sea 4 ver como :v
 		if(this.paymentTypeField.value==0 || this.counter >=4) this.counter++;
 		if(this.counter == 4){
 			this.openModalError('Has alcanzado el límite máximo de intentos con tu Tarjeta. A continuación, podrás completar tu pago utilizando nuestro método de pago Safetypay.')
@@ -327,13 +338,20 @@ export class PayComponent implements OnInit {
 		modalRef.componentInstance.message = message;
 		modalRef.componentInstance.isRedirect =  this.counter == 4 ? false: true;
 		modalRef.componentInstance.txtButton =  this.counter == 4 ? 'Aceptar':'Volver al inicio';
-		
+	}
+
+	pushToGTMPayment(){
+		try {
+			const bodyGTMPayment=getBodyGTMPayment();
+			this._gtmService.pushTag(bodyGTMPayment);
+		} 
+		catch (error) {
+			console.log('error tag nmv_vuelos_checkout_seleccionarPago ',error);
+		}
 	}
 
 	getMessageErrorClient(error: any): string {
 		switch (error.errorCode) {
-		  case 10000:
-			return 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.'
 		  case 1001:
 			return 'No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.';
 		  case 1002:
@@ -347,10 +365,11 @@ export class PayComponent implements OnInit {
 		  case 2004:
 			return 'La cuenta no tenía fondos suficientes.';
 		  case 2100:
-			if (error.messages != null && error.messages.length > 0) {
-			  return error.messages[0];
-			} else
-			  return 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.';
+			if (error.messages !== null && error.messages.length > 0 && error.messages[0]!==null) 
+				return error.messages[0];
+			else return this.paymentTypeField.value== 0 ? 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.':'Al parecer ocurrio un error, por favor intentelo más tarde.';
+		  case 10000:
+			return this.paymentTypeField.value== 0 ? 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.':'Al parecer ocurrio un error, por favor intentelo más tarde.';
 		  case 2101:
 			return 'No se puede realizar el pago correctamente.';
 		  default:

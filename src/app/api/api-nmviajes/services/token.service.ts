@@ -49,6 +49,6 @@ export class TokenService {
 	}
 
 	public getIPAddress(){
-	  return this._httpClient.get<any>("https://jsonip.com/");
+	  return this._httpClient.get<any>("https://api.ipify.org/?format=json");
 	}
 }

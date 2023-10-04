@@ -9,6 +9,7 @@ import { Configuraciones } from "../api/api-nmviajes/models/rq-token-ce-request"
 import { dataInitBooking, detailPricingInit, detailSecureInit } from "./constant-init";
 import { Search } from "../api/api-nmviajes/models/ce-metasearch";
 import { FlightSearchGtmModel } from "../Models/analytics-flights/flight-search-gtm.model";
+import { ContactGtmModel } from "../Models/analytics-flights/contact-gtm.model";
 
 
 export class GlobalComponent {
@@ -43,7 +44,7 @@ export class GlobalComponent {
     public static isKayak=false;
     public static searchFlightParams:Search;
     public static GMTSearch:FlightSearchGtmModel;
-
+    public static GMTContact:ContactGtmModel;
     //public static discountCupon:
   }
 

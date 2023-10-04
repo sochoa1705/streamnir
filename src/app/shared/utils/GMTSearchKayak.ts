@@ -13,12 +13,8 @@ export const setParamsByKayak = (paramMap: ParamMap) => {
 		adults: GlobalComponent.detailPricing.totalADT,
 		children: GlobalComponent.detailPricing.totalCNN,
 		infants: GlobalComponent.detailPricing.totalINF,
-		arrivalLocation: `${destination.code} ${destination.name}, ${
-			destination.country == 'PE' ? 'Perú' : getNameCountry(destination.country)
-		}`,
-		departureLocation: `${origin.code} ${origin.name}, ${
-			origin.country == 'PE' ? 'Perú' : getNameCountry(origin.country)
-		}`,
+		arrivalLocation: `${destination.code} ${destination.name}, ${destination.country == 'PE' ? 'Perú' : getNameCountry(destination.country)}`,
+		departureLocation: `${origin.code} ${origin.name}, ${origin.country == 'PE' ? 'Perú' : getNameCountry(origin.country)}`,
 		flightType: Number(paramMap.get('flightType')) || 0,
 		arrivalDate: paramMap.get('arrivalDate') || '',
 		departureDate: paramMap.get('departureDate') || ''

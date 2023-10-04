@@ -7,6 +7,8 @@ export const getBodyGTMAddCart = (): AddToCardGtmModel => {
 	const dataGTMSearch: FlightSearchGtmModel = GlobalComponent.GMTSearch;
     const groupSelected=GlobalComponent.appGroupSeleted;
 	const priceNormal=Number((groupSelected.detailPricing?.totalPay)?.toFixed(2)) || 0;
+	const departure = groupSelected.departure[0].segments[0];
+    const returns = groupSelected.returns?.segments[0] || '';
 
 	return {
 		...dataGTMSearch,
@@ -23,11 +25,11 @@ export const getBodyGTMAddCart = (): AddToCardGtmModel => {
 			equipaje_label: '',
 			group_id: groupSelected.id,
 			gds: getGdsName(groupSelected.gds.idGDS),
-			escalas: groupSelected.departure[0].segments[0].stops === 0 ? 'Directo' : `${groupSelected.departure[0].segments[0].stops} escala`
+			escalas: groupSelected.departure[0].segments[0].stops === 0 ? 'directo' : `${groupSelected.departure[0].segments[0].stops} escala`
 		},
 		ruta: {
-			aerolinea_salida: groupSelected.departure[0].segments[0].flightSegments[0].marketingAirline.code || '',
-			aerolinea_regreso: groupSelected.returns?.segments[0].flightSegments[0].marketingAirline.code || ''
+			aerolinea_salida: `${departure.flightSegments[0].marketingAirline.code} - ${departure.flightSegments[0].marketingAirline.name}`  || '',
+			aerolinea_regreso: returns!=='' ? `${returns.flightSegments[0].marketingAirline.code} - ${returns.flightSegments[0].marketingAirline.name}` : ''
 		}
 	};
 };
