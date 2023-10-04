@@ -16,7 +16,6 @@ import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-f
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
 import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { Subscription } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { getBodyGTMSearch } from 'src/app/shared/utils/GTMSearch';
 import { GoogleTagManagerService } from 'angular-google-tag-manager';
 import { FlightSearchGtmModel } from 'src/app/Models/analytics-flights/flight-search-gtm.model';
