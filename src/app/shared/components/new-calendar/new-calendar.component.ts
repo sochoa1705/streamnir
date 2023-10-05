@@ -61,7 +61,6 @@ export class NewCalendarComponent implements OnInit {
 		this.showCalendar = isClose ? false : !this.showCalendar;
 		if (this.showCalendar) {
 			this.fromDate = this.fromDateSeleted;
-			this.scrollReset();
 		}
 	}
 
@@ -104,14 +103,6 @@ export class NewCalendarComponent implements OnInit {
 		if (monthNumber >= 1 && monthNumber <= 12) {
 			this.nameCurrentMonth = months[monthNumber - 1];
 		}
-	}
-
-	scrollReset(){
-		const scrollPercentage = 3.7; // Porcentaje de desplazamiento
-		const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-		const documentHeight = document.documentElement.scrollHeight;
-		const scrollTo = (documentHeight - windowHeight) * (scrollPercentage / 100);
-		window.scroll({ top: scrollTo, behavior: 'smooth' });
 	}
 
 	getValues() {

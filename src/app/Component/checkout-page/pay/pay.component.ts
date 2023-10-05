@@ -53,7 +53,7 @@ export class PayComponent implements OnInit {
 	transactionId = 0;
 	discountCupon: ResultCupon | null = null;
 	counter = 0;
-	errorMessDefault='Al parecer hubo un error en su reserva, por favor intentelo más tarde';
+	errorMessDefault='No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.';
 	isKayak=false;
 	@ViewChild('acoordio1') acoordio1: ElementRef;
 	@Input() paramMap:ParamMap;
@@ -346,13 +346,13 @@ export class PayComponent implements OnInit {
 		  case 2100:
 			if (error.messages !== null && error.messages.length > 0 && error.messages[0]!==null) 
 				return error.messages[0];
-			else return this.paymentTypeField.value== 0 ? 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.':'Al parecer ocurrio un error, por favor intentelo más tarde.';
+			else return this.paymentTypeField.value== 0 ? 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.':this.errorMessDefault;
 		  case 10000:
-			return this.paymentTypeField.value== 0 ? 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.':'Al parecer ocurrio un error, por favor intentelo más tarde.';
+			return this.paymentTypeField.value== 0 ? 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.':this.errorMessDefault;
 		  case 2101:
 			return 'No se puede realizar el pago correctamente.';
 		  default:
-			return (error.messages?.map((c: any) => c) ?? ['No se puede generar la compra de los itinerarios seleccionados, favor de seleccionar otro itinerario.']).join(' - ');
+			return (error.messages?.map((c: any) => c) ?? [this.errorMessDefault]).join(' - ');
 		}
 	  }
 
