@@ -4,11 +4,9 @@ import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Guid } from '../../shared/utils';
 import { environment } from '../../../environments/environment';
-import { ModelTaggingLogin } from '../../Services/analytics/tagging.models';
 import * as bootstrap from 'bootstrap';
 import { AccountsService } from '../../Services/accounts.service';
 import { ValidatorsService } from '../../shared/validators/validators.service';
-import { TaggingService } from '../../Services/analytics/tagging.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationService } from '../../Services/notification.service';
 import { LoaderSubjectService } from '../../shared/components/loader/service/loader-subject.service';
@@ -133,8 +131,6 @@ export class NewAccountComponent implements OnInit {
 			this._accountService.saveAccount(payload).subscribe({
 				next: (response) => {
 					if (response.Result.IsSuccess) {
-						const modelTag = new ModelTaggingLogin('Signup', 'Cuenta Empresa', 'Password', response.Result.Email, response.Result.Id);
-						this.tagging(modelTag);
 						this._matSnackBar.open(`Gracias por registrar su empresa ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
 							verticalPosition: 'top',
 							duration: 2000
@@ -179,8 +175,6 @@ export class NewAccountComponent implements OnInit {
 					this.closeLoading();
 					const isSuccess = response.Result.IsSuccess;
 					if (isSuccess) {
-						const modelTag = new ModelTaggingLogin('Signup', 'Cuenta Personal', 'Password', response.Result.Email, response.Result.Id);
-						this.tagging(modelTag);
 						this.toggleModalVerificaCorreo();
 						this.personalAccountForm.reset();
 						this._matSnackBar.open(`Gracias por registrarte ${response.Result.Firstname} ${response.Result.FatherLastname}`, 'OK', {
@@ -203,10 +197,6 @@ export class NewAccountComponent implements OnInit {
 		const modal = document.getElementById('ModalVerificaCorreo');
 		if (!modal) return;
 		bootstrap.Modal.getOrCreateInstance(modal).toggle();
-	}
-
-	tagging(model: ModelTaggingLogin) {
-		TaggingService.tagLoginSignup(model);
 	}
 
 	openLoginModal() {

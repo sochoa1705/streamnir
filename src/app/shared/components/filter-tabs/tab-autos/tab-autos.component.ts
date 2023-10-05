@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ISuggest } from '../tab-vuelos/tab-vuelos.interfaces';
@@ -7,9 +7,8 @@ import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ParamsAutos, URLAutos } from '../../tabs/tabs.models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
-import { SearchCarRent } from '../../../../Services/analytics/tagging.models';
-import { TaggingService } from '../../../../Services/analytics/tagging.service';
 import * as moment from 'moment';
+import { NewCalendarComponent } from '../../new-calendar/new-calendar.component';
 
 @Component({
     selector: 'app-tab-autos',
@@ -17,6 +16,8 @@ import * as moment from 'moment';
     styleUrls: ['../tab-paquetes/tab-paquetes.component.scss', './tab-autos.component.scss']
   })
   export class TabAutosComponent {
+    @ViewChild('calendarDeparture') calendarDeparture!: NewCalendarComponent;
+    @ViewChild('calendarReturn') calendarReturn!: NewCalendarComponent;
 
     form!: FormGroup;
     fromDate: NgbDate | null;
@@ -109,7 +110,11 @@ import * as moment from 'moment';
         return params;
       }
 
-  searchAuto(): void {
+  searchAuto(): void {    
+    const dateDeparture=this.calendarDeparture.getValues();
+    const dateReturn=this.calendarReturn.getValues();
+    this.fromDate=dateDeparture;
+    this.toDate=dateReturn;
     const errors = this.validateTab();
 
     if (errors.length > 0) {
@@ -161,49 +166,20 @@ import * as moment from 'moment';
   }
 
   navigateToResponseUrl(url: string): void {
-    window.location.href = url;
+    window.open(url, '_blank');
   }
 
   public getUrlAutos() {
     let url: string;
     let params = this.getParamsAutos();
     url = new URLAutos(params).getUrl();
-    this.insertTag(params);
     return url;
-  }
-
-  insertTag(params: any) {
-    const daysFromNow = moment(params.startDate, "YYYY-MM-DD").diff(moment(), 'days');
-    const duracionViaje = moment(params.endDate, "YYYY-MM-DD")
-        .diff(moment(params.startDate, "YYYY-MM-DD"), 'days');
-
-    const model: SearchCarRent = {
-      event: 'nmv_autos_buscar',
-      operacion: {
-        dias_anticipacion: daysFromNow
-      },
-      destino: {
-        nombre: params.destino,
-        codigo: params.idDestino,
-        pais: params.countryCode
-      },
-      autos: {
-        edad_conductor: this.form.get('conductor')!.value,
-        lugar_devolucion: this.form.get('recojo')!.value
-      },
-      fechas: {
-        salida: moment(params.startDate, 'YYYY-MM-DD').format('YYYY-MM-DD'),
-        retorno: moment(params.endDate, 'YYYY-MM-DD').format('YYYY-MM-DD'),
-        estadia: duracionViaje
-      }
-    };
-
-    TaggingService.tagSearchCarRent(model);
   }
 
   changeChecked(): void {
     this.isChecked=!this.isChecked;
     this.form.controls.checkDevolver.setValue(this.isChecked);
+    this.form.controls.recojo.setValue('');
     this.viewInputRecojo = !this.form.controls['checkDevolver'].value;
   }
 

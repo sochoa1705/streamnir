@@ -26,10 +26,10 @@
             <div class="row gx-3">
                 <div class="col-md-6">
                     <div class="group__input">
-                        <input [readonly]="isChecked" matInput aria-label="State3" [matAutocomplete]="auto" formControlName="recojo" (keyup)="autocompleteRecojo($event)" placeholder="Lugar de devolución">
+                        <input [readonly]="isChecked" matInput aria-label="State3" [matAutocomplete]="auto2" formControlName="recojo" (keyup)="autocompleteRecojo($event)" placeholder="Lugar de devolución">
                         <img [src]="isChecked ? './assets/svg/location-marker-disabled.svg':'./assets/svg/location-red.svg'" alt="o" />
                      </div>
-                     <mat-autocomplete #auto="matAutocomplete">
+                     <mat-autocomplete #auto2="matAutocomplete">
                         <mat-option *ngFor="let state of countriesSearchRecojo" [value]="state.value" [attr.data-tag]="state.value">
                             <img class="example-option-img" aria-hidden src="./assets/origen.png">
                             <span>{{state.value}}</span>
@@ -50,11 +50,11 @@
         </div>
         <div class="col-md-12">
             <div class="inputs__date">
-                <app-new-calendar></app-new-calendar>
+                <app-new-calendar #calendarDeparture></app-new-calendar>
                 <div class="group__input">
                     <input class="custom-time-input" id="initHour"  name="initHour" formControlName="initHour" type="time" placeholder="Hora de recogida">
                 </div>
-                <app-new-calendar [placeholder]="'Retorno'"></app-new-calendar>
+                <app-new-calendar #calendarReturn [placeholder]="'Retorno'"></app-new-calendar>
                 <div class="group__input">
                     <input class="custom-time-input" id="lastHour" name="lastHour" formControlName="lastHour" type="time" placeholder="Hora de llegada">
                 </div>

@@ -1,6 +1,3 @@
-import { Search } from "src/app/api/api-nmviajes/models/ce-metasearch";
-import { GlobalComponent } from "../global";
-
 export const getParams = (params: any) => {
 	let departureLocation='';
 	let arrivalLocation='';
@@ -36,19 +33,5 @@ export const getParams = (params: any) => {
 			if (date2) objSearch.arrivalDate = date2[2] + '-' + date2[1] + '-' + date2[0];
 		}
 	}
-
-	const searchToTagManager:Search = {
-		flightClass: objSearch.flightClass,
-		adults: objSearch.adults,
-		children: objSearch.children,
-		infants: objSearch.infants,
-		arrivalLocation,
-		departureLocation,
-		flightType:objSearch.flightType,
-		arrivalDate: objSearch.flightType==0 ? objSearch.arrivalDate : '',
-		departureDate: objSearch.flightType!==2 ? objSearch.departureDate : objSearch.multicity[0].departureDate
-	}
-
-	GlobalComponent.searchFlightParams=searchToTagManager;
 	return objSearch;
 };

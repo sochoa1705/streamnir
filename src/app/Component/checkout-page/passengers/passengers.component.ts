@@ -14,8 +14,8 @@ import { getBodyValidateBooking } from 'src/app/shared/utils/bodyValidateBooking
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
 import { ModalValidateComponent } from './modal-validate/modal-validate.component';
-import { getBodyGTMContact } from 'src/app/shared/utils/GMTContact';
-import { GoogleTagManagerService } from 'angular-google-tag-manager';
+
+
 interface Item {
 	value: any;
 	name: string;
@@ -91,7 +91,6 @@ export class PassengersComponent implements OnInit {
 		private _checkoutService: CheckoutService,
 		private _accountService: AccountsService,
 		private _modalService: NgbModal,
-		private _gtmService: GoogleTagManagerService
 	) {
 		this.formGroup = new FormGroup(this.formContact);
 		this.formBillingGroup = new FormGroup(this.formBilling);
@@ -250,7 +249,6 @@ export class PassengersComponent implements OnInit {
 					dataSteps[1].check = true;
 					dataSteps[2].active = true;
 					this.changeStep.emit(2);
-					this.pushToGTMContact();
 					window.scroll({ top: 0, behavior: 'smooth' });
 				} else {
 					if (res.isChurning) {
@@ -312,17 +310,6 @@ export class PassengersComponent implements OnInit {
 				this.openModalError('Su reserva anterior, fue cancelada exitosamente', true);
 			}
 		});
-	}
-
-	pushToGTMContact(){
-		try {
-			const bodyGTMContact=getBodyGTMContact();
-			GlobalComponent.GMTContact=bodyGTMContact;
-			this._gtmService.pushTag(bodyGTMContact);
-		} 
-		catch (error) {
-			console.log('error tag nmv_vuelos_checkout_ingresarDatos ',error);
-		}
 	}
 
 	get nameField(): AbstractControl {

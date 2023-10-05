@@ -2,8 +2,6 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { SearchAssemblePackages } from 'src/app/Services/analytics/tagging.models';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
 import { PopUpPasajeroComponent } from '../../pop-up-pasajero/pop-up-pasajero.component';
@@ -149,40 +147,8 @@ export class TabArmaPaquetesComponent {
   public getUrlPaquete() {
     let url: string;
     let params = this.getParamsAlojamiento();
-    this.newInsertTag(params);
     url = new URLArmaTuViaje(params, this.distribution).getUrl();
     return url;
-  }
-
-  newInsertTag(params: any) {
-    const daysFromNow = moment(params.startDate, 'DD/MM/YYYY').diff(moment(), 'days');
-
-    const model: SearchAssemblePackages = {
-      event: 'nmv_armaTuViaje_buscar',
-      operacion: {
-        dias_anticipacion: daysFromNow
-      },
-      vuelo: {
-        clase: params.businessClass ? 'business' : 'economy',
-        tipo: ''
-      },
-      hotel: {
-        habitaciones: this.distributionObject.habitacion
-      },
-      pasajeros: {
-        adultos: this.distributionObject.adultos,
-        ninos: this.distributionObject.ninos,
-        infantes: 0,
-        total: this.distributionObject.pasajeros
-      },
-      fechas: {
-        salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-        retorno: '',
-        estadia: 0
-      }
-    };
-
-    TaggingService.tagSearchAssemblePackages(model);
   }
 
   getParamsAlojamiento() {

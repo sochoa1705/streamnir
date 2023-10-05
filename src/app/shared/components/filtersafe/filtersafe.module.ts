@@ -5,6 +5,8 @@ import { MaterialModule } from '../../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { ButtonModule } from '../button/button.module';
+import { InputRangeModule } from '../input-range/input-range.module';
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [ FiltersafeComponent ],
@@ -15,6 +17,8 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
     FormsModule,
     NgbModule,
     NgxMaskModule.forRoot(),
+    ButtonModule,
+    InputRangeModule
   ],
   exports: [ FiltersafeComponent ],
   bootstrap: [FiltersafeComponent]

@@ -3,8 +3,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { toUp } from '../../../shared/utils';
 import { LibroReclamacionesService } from '../../../Services/libro/libro-reclamaciones.service';
 import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
-import { ModelTaggingLibroReclamaciones } from 'src/app/Services/analytics/tagging.models';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { InputValidationService } from 'src/app/Services/inputValidation.service';
 import { CryptoService } from 'src/app/Services/util/crypto.service';
 
@@ -169,9 +167,6 @@ export class LibroReclamacionesComponent implements OnInit {
       }
       // console.log(payload)
 
-      const taggModel = new ModelTaggingLibroReclamaciones(data.bienContratado === "S" ? "Servicio" : "Producto", data.descripcionBienContratado, data.tipoReclamo === "R" ? "Reclamo" : "Queja");
-      this.addTag(taggModel);
-
       this.libroService.libroData(payload).subscribe({
         next: response => {
           this.numCode = response['Result']['Code']
@@ -184,11 +179,6 @@ export class LibroReclamacionesComponent implements OnInit {
       })
 
     }
-  }
-
-
-  addTag(model: ModelTaggingLibroReclamaciones) {
-    TaggingService.tagLibroReclamaciones(model);
   }
 
   validForm() {

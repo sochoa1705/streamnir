@@ -8,8 +8,6 @@ import { catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUnt
 import {
   DestinosService
 } from 'src/app/Component/home-page/vuelos/commons/components/destinos/services/destinos.service';
-import { ModelTaggingVuelos, SearchFlights } from 'src/app/Services/analytics/tagging.models';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
@@ -340,140 +338,6 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-
-  insertTag(params: any) {
-    const getTipoTag = ((tipo: EnumFlightType) => {
-
-      if (tipo == EnumFlightType.ida) {
-        return {
-          codigo: 'SI',
-          descripcion: 'Solo Ida'
-        }
-      } else if (tipo == EnumFlightType.ida_vuelta) {
-        return {
-          codigo: 'IV',
-          descripcion: 'Ida y Vuelta'
-        }
-      } else if (tipo == EnumFlightType.multy_city) {
-        return {
-          codigo: 'MC',
-          descripcion: 'Multi City'
-        }
-      } else {
-        return {
-          codigo: '',
-          descripcion: ''
-        }
-      }
-    })
-
-    const getCabinsVuelosCode = (cabin: string) => {
-      switch (cabin) {
-        case EnumCabinsVuelos.economy:
-          return "EC"
-        case EnumCabinsVuelos.business:
-          return "BS"
-        case EnumCabinsVuelos.first_class:
-          return "FC"
-        default:
-          return ""
-      }
-    }
-
-    //const nombre = `${params.idOrigen}_${params.idDestino}_${params.businessClass ? 'BS' : 'EC'}_${getTipoTag(params.flightType).codigo}`;
-    const nombre = `${params.idOrigen}_${params.idDestino}`;
-
-    let diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
-    let duracionViaje = 0;
-
-    let fechaRegreso = '';
-
-    if (params.flightType === EnumFlightType.ida_vuelta) {
-      duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
-      fechaRegreso = moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD");
-    }
-
-    const model = new ModelTaggingVuelos(
-      nombre,
-      params.origen.title,
-      params.destino.title,
-      getCabinsVuelosCode(params.cabinsVuelos),
-      getTipoTag(params.flightType).descripcion,
-      this.distributionObject.adultos + this.distributionObject.ninos + this.distributionObject.infantes,
-      this.distributionObject.adultos,
-      this.distributionObject.ninos,
-      this.distributionObject.infantes,
-      0,
-      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      fechaRegreso,
-      diasAnticipacion,
-      duracionViaje
-    );
-
-    TaggingService.buscarVuelos(model);
-
-    let flightType = '';
-    switch (params.flightType) {
-      case 0:
-        flightType = 'ida y vuelta';
-        break;
-      case 1:
-        flightType = 'solo ida';
-        break;
-      case 2:
-        flightType = 'multidestino';
-        break;
-      default:
-        break;
-    }
-    let flightClass = '';
-    switch (Number(this.distributionObject['clase'])) {
-      case 0:
-        flightClass = 'economy';
-        break;
-      case 1:
-        flightClass = 'business';
-        break;
-      case 2:
-        flightClass = 'first class';
-        break;
-      default:
-        break;
-    }
-    const newModel: SearchFlights = {
-      event: 'nmv_vuelos_buscar',
-      operacion: {
-        dias_anticipacion: diasAnticipacion
-      },
-      origen: {
-        nombre: params.origen.title,
-        codigo: params.origen.codigo,
-        pais: params.destino.country
-      },
-      destino: {
-        nombre: params.destino.title,
-        codigo: params.destino.codigo,
-        pais: params.destino.country
-      },
-      vuelo: {
-        clase: flightClass,
-        tipo: flightType
-      },
-      pasajeros: {
-        adultos: this.distributionObject.adultos,
-        ninos: this.distributionObject.ninos,
-        infantes: this.distributionObject.infantes,
-        total: this.distributionObject.adultos + this.distributionObject.ninos + this.distributionObject.infantes
-      },
-      fechas: {
-        salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-        retorno: fechaRegreso.replace(/\//g, '-'),
-        estadia: duracionViaje
-      }
-    };
-    TaggingService.tagSearchFlights(newModel);
-  }
-
   getParams() {
     return new ParamsVuelos({
       fromDate: this.fromDate || null,
@@ -514,8 +378,6 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
     if (infantesCount > 0)
       for (let i = 0; i < infantesCount; i++)
         pasajeros.push(infantesN);
-
-    this.insertTag(params);
 
     let vuelo = { ...params, ...this.distributionObject };
 
