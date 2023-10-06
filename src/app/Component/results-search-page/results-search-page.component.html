@@ -3,28 +3,31 @@
 		<div class="container__page__metasearch__section">
 			<app-tab-vuelos-v2 [typeFlight]="flightType" [params]="params" (reloadPageResult)="reloadPageResult()"></app-tab-vuelos-v2>
 		</div>
+		<div class="container__page__metasearch__mobile">
+			<div class="d-flex justify-content-between align-items-start">
+				<div class="sumary">
+					<div class="sumary__destination">
+						<span>Los Angeles</span>
+						<img src="./assets/svg/arrow-destination.svg" alt="->">
+						<span>Lima</span>
+					</div>
+					<div class="sumary__date">
+						<span>Sábado 26 de mayo</span> <span>-</span> <span>Sábado 09 junio</span>
+					</div>
+				</div>
+				<div class="actions">
+					<img src="./assets/svg/pencil.svg" alt="icon">
+					<span>Editar</span>
+				</div>
+			</div>
+			<div  class="container__page__metasearch__mobile__filters">
+				<ng-container *ngTemplateOutlet="appfilters"></ng-container>
+			</div>
+		</div>
 	</div>
 	<section *ngIf="!showError && !showNotResults">
 		<article>
-			<app-filters
-			[dataAirlines]="dataAirlines"
-			[dataScaleFilter]="dataScaleFilter"
-			[dataBagFilter]="dataBagFilter"
-			[totalResults]="allDataGroups.length || 0"
-			[totalResultsFilter]="dataFilterGroups.length || 0"
-			[exchangeRate]="exchangeRate"
-			(changeArrayFilters)="changeArrayFilters($event)"
-			(updateArrayAirlinesFilter)="updateArrayAirlinesFilter($event)"
-			(changeExchangeRate)="changeExchangeRate($event)"
-			(filterByPrice)="filterByPrice($event)"
-			(filterByDuration)="filterByDuration($event)"
-			[minPrice]="minPrice"
-			[maxPrice]="maxPrice"
-			[isNotResult]="showNotResults"
-			[valuesFilterDuration]="valuesFilterDuration"
-			(resetFilterByDuration)="resetFilterByDuration()"
-			(filterByDurationScale)="filterByDurationScale($event)"
-		></app-filters>
+		<ng-container *ngTemplateOutlet="appfilters"></ng-container>
 		<div class="container__page__results">
 			<app-sort-by
 				[hidden]="dataFilterGroups.length == 0"
@@ -64,3 +67,26 @@
 	<app-not-results *ngIf="showError"></app-not-results>
 	<app-not-results *ngIf="showNotResults" [title]="titleNotResults" [type]="'not-result'"></app-not-results>
 </div>
+
+
+<ng-template #appfilters>
+	<app-filters
+	[dataAirlines]="dataAirlines"
+	[dataScaleFilter]="dataScaleFilter"
+	[dataBagFilter]="dataBagFilter"
+	[totalResults]="allDataGroups.length || 0"
+	[totalResultsFilter]="dataFilterGroups.length || 0"
+	[exchangeRate]="exchangeRate"
+	(changeArrayFilters)="changeArrayFilters($event)"
+	(updateArrayAirlinesFilter)="updateArrayAirlinesFilter($event)"
+	(changeExchangeRate)="changeExchangeRate($event)"
+	(filterByPrice)="filterByPrice($event)"
+	(filterByDuration)="filterByDuration($event)"
+	[minPrice]="minPrice"
+	[maxPrice]="maxPrice"
+	[isNotResult]="showNotResults"
+	[valuesFilterDuration]="valuesFilterDuration"
+	(resetFilterByDuration)="resetFilterByDuration()"
+	(filterByDurationScale)="filterByDurationScale($event)"
+></app-filters>
+</ng-template>

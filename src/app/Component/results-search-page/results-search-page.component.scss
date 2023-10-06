@@ -12,6 +12,20 @@
 	gap: 40px;
 }
 
+.flex-row{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.paragraph{
+	font-family: Montserrat;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+	letter-spacing: 0em;
+}
+
 .container__page {
 	min-height: calc(100% - 80px);
 	background: white;
@@ -23,7 +37,7 @@
 			margin: 0 auto;
 			display: grid;
 			column-gap: 24px;
-			grid-template-columns: 312px auto;
+			grid-template-columns: 0.35fr 1fr;
 			min-height: 50vh;
 		}
 	}
@@ -38,6 +52,45 @@
 			max-width: 1440px;
 			margin: 0 auto;
 		}
+		&__mobile{
+			display: none;
+			.sumary{
+				display: flex;
+				flex-direction: column;
+				gap:2px;
+				span{
+					@extend .paragraph;
+				}
+				&__destination{
+					@extend .flex-row;
+					gap:10px;
+				}
+				&__date{
+					@extend .flex-row;
+					gap:5px;
+				}
+				&__date span{
+					color:colors.$gris-700;
+					font-size: 12px;
+				}
+
+			}
+			.actions{
+				@extend .flex-row;
+				gap:10px;
+				span{
+					cursor: pointer;
+					@extend .paragraph;
+					color:colors.$red-500;
+				}
+			}
+
+			&__filters{
+				@extend .flex-row;
+				gap:18px;
+				padding: 10px 0px;
+			}
+		}
 	}
 
 	/////ColumnResults
@@ -50,6 +103,39 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+		}
+	}
+
+	@media (max-width: 1368px){
+		section, &__metasearch{
+			padding: 24px 60px;
+		}
+	}
+
+	@media (max-width: 1199px){
+		&__metasearch{
+			padding: 12px 32px;
+			background: white;
+			min-height: 127px;
+			&__section{
+				display: none;
+			}
+			&__mobile{
+				display: block;
+				display: flex;
+				flex-direction: column;
+				gap:7px;
+			}
+		}
+		section{
+			padding: 40px 32px;
+
+		}
+		section article{
+			grid-template-columns: 1fr;
+			app-filters,app-sort-by{
+				display: none;
+			}
 		}
 	}
 }

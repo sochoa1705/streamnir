@@ -50,6 +50,7 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 	@Input() title = '';
 	@Input() listOptions: Item[]=[];
 	@Input() isAirlines = false;
+	@Input() isMobile=false;
 	@Output() clickedOption = new EventEmitter();
 	@Output() selectedAirlines = new EventEmitter();
 	@Output() hiddenSection = new EventEmitter();
@@ -59,8 +60,7 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 	showLoader=true;
 
 	ngOnInit(): void {
-		this.listOptions=[];
-		this.listOptionsAirlines=[];
+		if(this.isMobile) this.showLoader=false;
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
