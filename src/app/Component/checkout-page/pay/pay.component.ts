@@ -1,4 +1,4 @@
-import { Component, OnInit ,HostListener,ViewChild, ElementRef, Input} from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { cuotas } from '../passengers/utils';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
@@ -13,6 +13,8 @@ import { getBodyEmail } from 'src/app/shared/utils/bodyEmail';
 import { ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ParamMap } from '@angular/router';
+import { Guid } from '../../../shared/utils';
+import { PasarelaService } from '../../../api/api-checkout/services/pasarela.service';
 
 
 interface Item {
@@ -74,13 +76,15 @@ export class PayComponent implements OnInit {
 	};
 
 	credentials = localStorage.getItem('usuario');
-	
+
 	formBooking = {
 		CuponPromoWeb: new FormControl('',Validators.minLength(6)),
 		generateTicket: new FormControl(false),
 		paymentType: new FormControl(0),
 		deviceSessionId: new FormControl('')
 	};
+
+	private disabledCuotes = true;
 
 	@HostListener('window:resize', ['$event'])
 	onResize(){
@@ -94,6 +98,7 @@ export class PayComponent implements OnInit {
 
 	constructor(
 		private _checkoutService: CheckoutService,
+		private _pasarelaService: PasarelaService,
 		private _modalService:NgbModal
 	) {
 		this.formGroupCard = new FormGroup(this.formCreditCard);
@@ -103,12 +108,12 @@ export class PayComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.initConfigurationOpenPay();
 		this.isKayak=GlobalComponent.isKayak;
 		this.counter=0;
 		this.setCuotas();
 		this.chageTypeDocument();
 		this.urlsTermsAndConditions = this._checkoutService.getLinksTermsAndConditions();
-		this.initConfigurationOpenPay();
 		this.changeCupon();
 		this.setValidatorsCreditCard();
 		this.getScreenWidth = window.innerWidth;
@@ -135,14 +140,38 @@ export class PayComponent implements OnInit {
 	}
 
 	private initConfigurationOpenPay() {
-		try {
-			window.OpenPay.setId(environment.openPayConfiguration.Id);
-			window.OpenPay.setApiKey(environment.openPayConfiguration.ApiKey);
-			let data = window.OpenPay.deviceData.setup();
-			this.deviceSessionIdField.setValue(data);
-		} catch (error) {
-			this.deviceSessionIdField.setValue('');
-		}
+		let data: any = {
+			MuteExceptions: false,
+			TrackingCode: Guid(),
+			Caller: {
+				Company: GlobalComponent.appCompany,
+				Application: GlobalComponent.appApplication
+			},
+			Parameter: {
+				Currency: 'USD', // TODO: cambiar a valor dinámico
+				Company: GlobalComponent.appCompany,
+				Application: GlobalComponent.appApplication
+			}
+		};
+		this._pasarelaService.getInfoTypePayment(data).subscribe(res => {
+			if(res.State?.Ok) {
+				try {
+					this.disabledCuotes = !res.Result?.ResponseProcessInfoPaymentOptions?.IsActiveCuote || false;
+
+					if(res.Result?.ResponseProcessInfoPaymentOpenPay) {
+						window.OpenPay.setId(res.Result?.ResponseProcessInfoPaymentOpenPay?.ID);
+						window.OpenPay.setApiKey(res.Result?.ResponseProcessInfoPaymentOpenPay?.Username);
+						window.OpenPay.setSandboxMode(environment.openPayConfiguration.isProduction);
+						let data = window.OpenPay.deviceData.setup();
+						this.deviceSessionIdField.setValue(data);
+						console.log('deviceSessionId ', data);
+					}
+				} catch (error) {
+					this.deviceSessionIdField.setValue('');
+					console.log('error Open pay ', error);
+				}
+			}
+		});
 	}
 
 	validCuponWeb() {
@@ -251,6 +280,7 @@ export class PayComponent implements OnInit {
 			this.paymentTypeField.setValue(1);
 			this.isPayCard=false;
 		}else{
+			this.initConfigurationOpenPay();
 			this.proccessPayment();
 		}
 	}
@@ -344,7 +374,7 @@ export class PayComponent implements OnInit {
 		  case 2004:
 			return 'La cuenta no tenía fondos suficientes.';
 		  case 2100:
-			if (error.messages !== null && error.messages.length > 0 && error.messages[0]!==null) 
+			if (error.messages !== null && error.messages.length > 0 && error.messages[0]!==null)
 				return error.messages[0];
 			else return this.paymentTypeField.value== 0 ? 'La tarjeta no ha podido ser procesada. Por favor, verifica los datos ingresados.':this.errorMessDefault;
 		  case 10000:
