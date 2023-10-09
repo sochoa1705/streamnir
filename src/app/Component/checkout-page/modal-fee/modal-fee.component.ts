@@ -85,8 +85,14 @@ export class ModalFeeComponent implements OnInit{
 	}
 
 	conditionIncludeBag(elemento:InformationService) {
-		return elemento.description.includes('BAG') ||  elemento.description.includes('BAGGAGE') || elemento.description.includes('equipaje');
+		const word=elemento.description.toLocaleLowerCase();
+		return word.includes('bag') ||  word.includes('baggage') || word.includes('equipaje') || word.includes('mano') || word.includes('carry') || word.includes('upto') || word.includes('bodega');
 	}
+
+	/*conditionChangeBag(elemento:InformationService){
+		const word=elemento.description.toLocaleLowerCase();
+		return word.includes('mano') || word.includes('carry') || word.includes('upto') || word.includes('bodega');
+	}*/
 
 	@ViewChild('swiperFee', { static: false }) swiperFee?: SwiperComponent;
 

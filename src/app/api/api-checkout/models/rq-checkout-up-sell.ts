@@ -9,7 +9,9 @@ export interface IUpSell {
   informationServices: InformationService[],
   dataBags?:InformationService[],
   dataExtras?:InformationService[],
-  totalPay?:number
+  totalPay?:number,
+  includeHandBag?:boolean,
+  includesHoldBag?:boolean
 }
 
 export interface FareBreakDown {

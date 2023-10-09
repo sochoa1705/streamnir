@@ -26,6 +26,10 @@
 	letter-spacing: 0em;
 }
 
+section{
+	margin: 0;
+}
+
 .container__page {
 	min-height: calc(100% - 80px);
 	background: white;
@@ -136,6 +140,13 @@
 			app-filters,app-sort-by{
 				display: none;
 			}
+		}
+	}
+
+	@media (max-width: 575px) {
+		section{
+			padding: 14px;
+
 		}
 	}
 }

@@ -1,0 +1,9 @@
+@use '/src/scss/colors';
+
+.tag__card{
+    width: fit-content;
+    padding:6px 16px;
+    border-radius: 24px;
+    gap:6px;
+    height: 32px;
+}
