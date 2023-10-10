@@ -35,6 +35,8 @@ export class InputRangeComponent implements OnChanges,OnInit {
 	dateOneWay: { year: number; month: number };
 	disabledPrevMonth = true;
 
+	maxDateRange:NgbDateStruct;
+
 	@ViewChild('dp2') dp2: NgbDatepicker;
 
 	constructor(
@@ -73,6 +75,7 @@ export class InputRangeComponent implements OnChanges,OnInit {
 		}
 
 		if (changes['typeFlight'].currentValue == 1) {
+			document.documentElement.style.setProperty('--visibility', 'none');
 			this.showCalendar = false;
 			this.toDate = null;
 			this.dateReturn = '';
@@ -89,6 +92,17 @@ export class InputRangeComponent implements OnChanges,OnInit {
 		} else {
 			this.toDate = null;
 			this.fromDate = date;
+		}
+
+		if(this.fromDate){
+			const sumMonth=this.fromDate.month + 6;
+			const year = sumMonth >= 12 ? this.fromDate.year + 1 : this.fromDate.year;
+			const month = sumMonth >= 12 ? sumMonth - 12 : this.fromDate.month + 6;
+			this.maxDateRange={
+				year,
+				month,
+				day:this.fromDate.day
+			}
 		}
 	}
 
@@ -135,7 +149,7 @@ export class InputRangeComponent implements OnChanges,OnInit {
 		if (this.showCalendar) {
 			this.fromDate = this.fromDateSeleted;
 			this.toDate = this.toDateSeleted;
-			this.scrollReset();
+			if(this.typeFlight!==2) this.scrollReset();
 		}
 	}
 

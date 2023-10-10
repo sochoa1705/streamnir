@@ -365,7 +365,6 @@ export class ResultsSearchPageComponent implements OnInit {
 					? 2
 					: 3;
 			item.detailPricing = getPricingFareBreakDowns(item.pricingInfo.itinTotalFare.fareBreakDowns);
-
 			const durationSegments: number[] = [];
 
 			item.departure.forEach((departure, indexDep) => {
@@ -480,6 +479,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.dataGroupsPaginate = [...this.dataFilterGroups.slice(0, 8)];
 		this.indexPaginate = 8;
 		if (this.dataGroupsPaginate.length > 0) this.getValuesTabsSort();
+		console.log(this.dataGroupsPaginate,'dataaaa')
 	}
 
 	orderByDate(isEarly: boolean, isStartDate: boolean, index: number) {
