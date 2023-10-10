@@ -60,9 +60,8 @@ export const environment = {
 
   url_autos: 'https://autos.nmviajes.com/es/site/',
 
-
   urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela",
-  urlApiPasarela: 'https://pasarella.expertiatravel.com/serviciopasareladev/v1/api/',
+  urlApiPasarela: 'https://pasarella.expertiatravel.com/serviciopasarela/v1/api/',
   //urlApiPayment: "http://10.75.102.23:15001/pasarelaservicio",
   //urlApiPayment: 'http://localhost:30850',
 
@@ -71,7 +70,7 @@ export const environment = {
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
   
   //https://qa-bffdelfosti.nmviajes-it.com https://motorvuelos.expertiatravel.com
-  urlApiMotorVuelos: "https://motorvuelos.expertiatravel.com",
+  urlApiMotorVuelos: "https://qa-bffdelfosti.nmviajes-it.com",
 
     //url Terms and Conditions - Checkout
 
