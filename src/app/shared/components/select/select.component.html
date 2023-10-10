@@ -1,9 +1,9 @@
 <span *ngIf="label" class="span__label" [class.full_label]="fullLabel" [class.disabled]="disabled"
-	>{{ label }} <span *ngIf="isRequired" class="span__label__required">*</span></span
+	>{{ label }} <span *ngIf="isRequired && !disabled" class="span__label__required">*</span></span
 >
 
 <div class="select__box">
-	<div class="select__box__select" [class.left-3px]="isLeft" [class.error]="labelError !== ''" (click)="isVisibleOptions = !isVisibleOptions">
+	<div class="select__box__select" [class.disabled]="disabled" [class.left-3px]="isLeft" [class.error]="labelError !== ''" (click)="clickSelect()">
 		<span *ngIf="valueName !== ''">{{ valueName }}</span>
 		<span class="select__box__select__placeholder" *ngIf="valueName == ''">{{ placeholder }}</span>
 		<img [src]="isFilter ? './assets/svg/Right.svg':'./assets/svg/icon-select.svg'" alt="v" width="20" height="20"/>
