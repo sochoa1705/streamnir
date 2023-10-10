@@ -113,7 +113,6 @@ export class PayComponent implements OnInit {
 		this.counter=0;
 		this.setCuotas();
 		this.chageTypeDocument();
-		this.urlsTermsAndConditions = this._checkoutService.getLinksTermsAndConditions();
 		this.changeCupon();
 		this.setValidatorsCreditCard();
 		this.getScreenWidth = window.innerWidth;
@@ -286,7 +285,7 @@ export class PayComponent implements OnInit {
 	}
 
 	proccessPayment(){
-		const dataFormCredit: any =23
+		const dataFormCredit: any =
 			this.isPayCard
 				? {
 						...this.formGroupCard.value,

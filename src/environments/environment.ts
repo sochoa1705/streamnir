@@ -99,8 +99,6 @@ export const environment = {
   },
   
   resultsInactivityTime: 60,
-  tagManagerCode_NM: 'GTM-KD6QHFT',
-  tagManagerCode_Motor: 'GTM-WMMCBK8',
   SEO: {
     home: {
       url: 'https://www.nmviajes.com/',

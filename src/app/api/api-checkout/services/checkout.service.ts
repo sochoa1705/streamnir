@@ -73,14 +73,6 @@ export class CheckoutService {
 		};
 	}
 
-	getLinksTermsAndConditions() {
-		return {
-			urlTermsConditions: environment.urlTermsConditions,
-			urlBookingConditions: environment.urlBookingConditions,
-			urlTravelDocuments: environment.urlTravelDocuments
-		};
-	}
-
 	totalDaysTravel() {
 		const departure = GlobalComponent.appGroupSeleted.departure;
 		const returnFlight = GlobalComponent.appGroupSeleted.returns || null;

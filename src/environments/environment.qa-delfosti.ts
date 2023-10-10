@@ -71,10 +71,6 @@ export const environment = {
 
   urlApiMotorVuelos: "https://qa-bffdelfosti.nmviajes-it.com",
 
-  urlTermsConditions: 'https://www.nmviajes.com/terminos-condiciones',
-  urlBookingConditions: 'https://www.nmviajes.com/condiciones-de-reserva',
-  urlTravelDocuments: 'https://www.nmviajes.com/documentacion-viaje',
-
   urlBlog:'https://blog.nmviajes.com',
   
   GDS:{
@@ -94,8 +90,6 @@ export const environment = {
     ApiKey: 'pk_c74367b872364e91b3143c5d87d64bb8'
   },
   resultsInactivityTime: 300,
-  tagManagerCode_NM: 'GTM-KD6QHFT',
-  tagManagerCode_Motor: 'GTM-WMMCBK8',
   SEO: {
     home: {
       url: 'https://www.nmviajes.com/',
