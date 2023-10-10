@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { GlobalComponent } from 'src/app/shared/global';
 
 interface Item {
 	value: any;
@@ -75,6 +76,7 @@ export class FiltersComponent implements OnInit {
 
   seletedItemCurrency($event:string){
      this.currency = $event == 'Soles' ? 'PEN' : 'USD';
+     GlobalComponent.currency=this.currency;
      this.changeExchangeRate.emit($event);
   }
 

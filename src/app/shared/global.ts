@@ -37,6 +37,7 @@ export class GlobalComponent {
     public static paramsSearch:any;
     public static indexSegmentSeleted:number[]=[];
     public static isKayak=false;
+    public static currency='USD';
   }
 
 

@@ -84,7 +84,7 @@ export class PayComponent implements OnInit {
 		deviceSessionId: new FormControl('')
 	};
 
-	private disabledCuotes = true;
+	disabledCuotes = true;
 
 	@HostListener('window:resize', ['$event'])
 	onResize(){
@@ -108,7 +108,7 @@ export class PayComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.initConfigurationOpenPay();
+		this.initConfigurationOpenPay(false);
 		this.isKayak=GlobalComponent.isKayak;
 		this.counter=0;
 		this.setCuotas();
@@ -139,7 +139,7 @@ export class PayComponent implements OnInit {
 			.subscribe();
 	}
 
-	private initConfigurationOpenPay() {
+	private initConfigurationOpenPay(isSubmit:boolean) {
 		let data: any = {
 			MuteExceptions: false,
 			TrackingCode: Guid(),
@@ -148,7 +148,7 @@ export class PayComponent implements OnInit {
 				Application: GlobalComponent.appApplication
 			},
 			Parameter: {
-				Currency: 'USD', // TODO: cambiar a valor dinámico
+				Currency: GlobalComponent.currency,
 				Company: GlobalComponent.appCompany,
 				Application: GlobalComponent.appApplication
 			}
@@ -165,6 +165,7 @@ export class PayComponent implements OnInit {
 						let data = window.OpenPay.deviceData.setup();
 						this.deviceSessionIdField.setValue(data);
 						console.log('deviceSessionId ', data);
+						if(isSubmit) this.proccessPayment();
 					}
 				} catch (error) {
 					this.deviceSessionIdField.setValue('');
@@ -280,13 +281,12 @@ export class PayComponent implements OnInit {
 			this.paymentTypeField.setValue(1);
 			this.isPayCard=false;
 		}else{
-			this.initConfigurationOpenPay();
-			this.proccessPayment();
+			this.initConfigurationOpenPay(true);
 		}
 	}
 
 	proccessPayment(){
-		const dataFormCredit: any =
+		const dataFormCredit: any =23
 			this.isPayCard
 				? {
 						...this.formGroupCard.value,
