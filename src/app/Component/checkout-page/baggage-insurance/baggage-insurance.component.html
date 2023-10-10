@@ -105,7 +105,7 @@
 							</a>
 							<div class="container__page__section__insurance__body__checks">
 								<div class="container__page__section__insurance__body__checks__option"
-									*ngFor="let option of dataInsurance.principal">
+									*ngFor="let option of (isDomestic ? dataInsurance.national : dataInsurance.international)">
 									<img src="./assets/svg/checkGreen.svg" alt="v" />
 									<span>{{ option }}</span>
 								</div>

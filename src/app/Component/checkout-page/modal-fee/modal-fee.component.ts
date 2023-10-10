@@ -89,11 +89,6 @@ export class ModalFeeComponent implements OnInit{
 		return word.includes('bag') ||  word.includes('baggage') || word.includes('equipaje') || word.includes('mano') || word.includes('carry') || word.includes('upto') || word.includes('bodega');
 	}
 
-	/*conditionChangeBag(elemento:InformationService){
-		const word=elemento.description.toLocaleLowerCase();
-		return word.includes('mano') || word.includes('carry') || word.includes('upto') || word.includes('bodega');
-	}*/
-
 	@ViewChild('swiperFee', { static: false }) swiperFee?: SwiperComponent;
 
 	slideNext() {
@@ -105,6 +100,8 @@ export class ModalFeeComponent implements OnInit{
 
 	clickSelectUpSell(item:IUpSell){
 		const route=this.router.routerState.snapshot.url;
+		item.includeHandBag = item.dataBags?.some(bag=>bag.description.toLocaleLowerCase().includes('mano') || bag.description.toLocaleLowerCase().includes('carry'));
+		item.includesHoldBag = item.dataBags?.some(bag=>(bag.description.toLocaleLowerCase().includes('upto') || bag.description.toLocaleLowerCase().includes('bodega')) && !bag.description.toLocaleLowerCase().includes('carry'));
 		if(route.includes('resultados')){
 			GlobalComponent.upSellSeleted=item;
 			GlobalComponent.appBooking.brandedFareName = item.name;

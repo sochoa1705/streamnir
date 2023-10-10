@@ -75,8 +75,8 @@
 		<div class="container__card__info__luggage">
 			<span>Equipaje incluido:</span>
 			<img alt="av" [src]="'./assets/svg/backpack-green.svg'" />
-			<img alt="av" [src]="(item.segments[indexSegment].equipaje?.cabina ? './assets/svg/hand-luggage-green.svg' : './assets/svg/not-hand-luggage-green.svg')" />
-  			<img alt="av" [src]="(item.segments[indexSegment].equipaje?.piezas ?? 0 > 0 ? '/assets/svg/hold-luggage-green.svg' : './assets/svg/not-hold-luggage-green.svg')" />
+			<img alt="av" [src]="(includeHandLuggage ? './assets/svg/hand-luggage-green.svg' : './assets/svg/not-hand-luggage-green.svg')" />
+  			<img alt="av" [src]="( includeHoldLuggage ? '/assets/svg/hold-luggage-green.svg' : './assets/svg/not-hold-luggage-green.svg')" />
 		</div>
 	</div>
 </div>
