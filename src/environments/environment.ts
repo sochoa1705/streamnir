@@ -97,7 +97,7 @@ export const environment = {
     ApiKey: 'pk_c74367b872364e91b3143c5d87d64bb8'
   },
   
-  resultsInactivityTime: 60,
+  resultsInactivityTime: 60000,
   tagManagerCode_NM: 'GTM-KD6QHFT',
   tagManagerCode_Motor: 'GTM-WMMCBK8',
   SEO: {

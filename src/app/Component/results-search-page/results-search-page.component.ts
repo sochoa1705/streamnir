@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group, ISearchResponse } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
@@ -16,6 +16,8 @@ import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-f
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
 import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { Subscription } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IdlePopupComponent } from './idle-popup/idle-popup.component';
 
 interface Item {
 	value: any;
@@ -70,7 +72,8 @@ export class ResultsSearchPageComponent implements OnInit {
 		private _tokenService: TokenService,
 		private route: ActivatedRoute,
 		private _loadingService: LoadingService,
-		private _searchFiltersService: SearchFiltersService
+		private _searchFiltersService: SearchFiltersService,
+		private _modalService: NgbModal,
 	) {}
 
 	allDataGroups: Group[] = [];
@@ -120,12 +123,27 @@ export class ResultsSearchPageComponent implements OnInit {
 	idCheap = '0';
 	params: Params;
 	isReload = false;
-	idleSubscriber: Subscription;
+
+	private inactivityTimer: any;
+	private inactivityDuration: number = environment.resultsInactivityTime;
 
 	ngOnInit() {
-		GlobalComponent.isKayak=false;
+		GlobalComponent.isKayak = false;
+		this.inactivityTimer = setTimeout(() => this.onInactivity(), this.inactivityDuration);
 		this.reloadPageResult();
 		this.configIdle();
+	}
+
+	private onInactivity(): void {
+		this._modalService.open(IdlePopupComponent);
+	}
+
+	// Reiniciar el temporizador cuando se detecta actividad
+	@HostListener('document:mousemove', ['$event'])
+	@HostListener('document:keydown', ['$event'])
+	resetTimer(): void {
+		clearTimeout(this.inactivityTimer);
+		this.inactivityTimer = setTimeout(() => this.onInactivity(), this.inactivityDuration);
 	}
 
 	reloadPageResult() {
@@ -194,7 +212,7 @@ export class ResultsSearchPageComponent implements OnInit {
 				GlobalComponent.tokenMotorVuelo = response.accessToken;
 				GlobalComponent.appReglasVentaAnticipada = response.reglasVentaAnticipada;
 				GlobalComponent.appConfigurations = response.configuraciones;
-				GlobalComponent.transactionId=response.transactionId;
+				GlobalComponent.transactionId = response.transactionId;
 				this.getObjectParams();
 			},
 			error: () => {
@@ -203,7 +221,6 @@ export class ResultsSearchPageComponent implements OnInit {
 			}
 		});
 	}
-
 
 	getObjectParams() {
 		this.route.queryParamMap.subscribe((params) => {
@@ -479,7 +496,7 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.dataGroupsPaginate = [...this.dataFilterGroups.slice(0, 8)];
 		this.indexPaginate = 8;
 		if (this.dataGroupsPaginate.length > 0) this.getValuesTabsSort();
-		console.log(this.dataGroupsPaginate,'dataaaa')
+		console.log(this.dataGroupsPaginate, 'dataaaa');
 	}
 
 	orderByDate(isEarly: boolean, isStartDate: boolean, index: number) {
@@ -870,6 +887,5 @@ export class ResultsSearchPageComponent implements OnInit {
 		this.sortData();
 	}
 
-	configIdle(){
-	}
+	configIdle() {}
 }
