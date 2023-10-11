@@ -24,7 +24,7 @@
 
 						<div class="modal__flight__body__flight__info__segment">
 							<div class="modal__flight__body__flight__info__segment__row">
-								<span class="bold right">{{ scala.departureDateTime | date: 'HH:mm' }}</span>
+								<span class="bold right">{{ scala.departureDateTime | date: "HH:mm" }} {{scala.departureDateTime | ampm}}</span>
 								<img src="./assets/svg/ellipse2.svg" />
 								<span
 									><span class="bold">{{ scala.departureAirport.name | titlecase }}</span
@@ -47,7 +47,7 @@
 							<img class="modal__flight__body__flight__info__segment__dots" src="./assets/svg/dots.svg" />
 
 							<div class="modal__flight__body__flight__info__segment__row">
-								<span class="bold right">{{ scala.arrivalDateTime | date: 'HH:mm' }}</span>
+								<span class="bold right">{{ scala.arrivalDateTime | date: "HH:mm" }} {{scala.arrivalDateTime | ampm}}</span>
 								<img src="./assets/svg/arrival.svg" />
 								<span
 									><span class="bold">{{ scala.arrivalAirport.name | titlecase }}</span
@@ -101,7 +101,7 @@
 
 						<div class="modal__flight__body__flight__info__segment">
 							<div class="modal__flight__body__flight__info__segment__row">
-								<span class="bold right">{{ scala.departureDateTime | date: 'HH:mm' }}</span>
+								<span class="bold right">{{ scala.departureDateTime | date: "HH:mm" }} {{scala.departureDateTime | ampm}}</span>
 								<img src="./assets/svg/ellipse2.svg" />
 								<span
 									><span class="bold">{{ scala.departureAirport.name | titlecase }}</span
@@ -124,7 +124,7 @@
 							<img class="modal__flight__body__flight__info__segment__dots" src="./assets/svg/dots.svg" />
 
 							<div class="modal__flight__body__flight__info__segment__row">
-								<span class="bold right">{{ scala.arrivalDateTime | date: 'HH:mm' }}</span>
+								<span class="bold right">{{ scala.arrivalDateTime | date: "HH:mm" }} {{scala.arrivalDateTime | ampm}}</span>
 								<img src="./assets/svg/arrival.svg" />
 								<span
 									><span class="bold">{{ scala.arrivalAirport.name | titlecase }}</span

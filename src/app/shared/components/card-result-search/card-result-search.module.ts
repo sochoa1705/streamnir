@@ -10,11 +10,12 @@ import { GetDaysPipe } from '../../pipes/get-days.pipe';
 import { ModalFlightDetailComponent } from './modal-flight-detail/modal-flight-detail.component';
 import { SwiperModule } from 'swiper/angular';
 import { ChangeCurrencyPipe } from '../../pipes/change-currency.pipe';
+import { AmPmPipe } from '../../pipes/hour.pipe';
 registerLocaleData(localeEs, "es");
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ CardResultSearchComponent, GetDaysPipe,ModalFlightDetailComponent, ChangeCurrencyPipe],
+  declarations: [ CardResultSearchComponent, GetDaysPipe,ModalFlightDetailComponent, ChangeCurrencyPipe, AmPmPipe],
   imports: [
     CommonModule, 
     ButtonModule,
