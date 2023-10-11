@@ -37,7 +37,7 @@ export class ModalFlightDetailComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		registerLocaleData(localeEs, 'es');
+		
 	}
 
 	isHoursNocturne(dateDeparture: any) {
