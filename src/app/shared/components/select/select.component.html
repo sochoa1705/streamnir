@@ -30,6 +30,7 @@
 						[name]="name"
 						[value]="item.value"
 						[id]="'inline-' + i + idRand"
+						#inputRef
 						hidden
 					/>
 					<label [for]="'inline-' + i + idRand" (click)="clickItem(item)">{{ item.name }}</label>

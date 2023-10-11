@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group, ISearchResponse } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
@@ -17,6 +17,7 @@ import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
 import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IdlePopupComponent } from './idle-popup/idle-popup.component';
+import { SortByComponent } from './sort-by/sort-by.component';
 
 interface Item {
 	value: any;
@@ -126,6 +127,8 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 	inactivityTimer: any;
 	inactivityDuration: number = environment.resultsInactivityTime;
 	isOpenModalInactivity=false;
+	
+	@ViewChild('childSort') childSort!: SortByComponent;
 
 	ngOnInit() {
 		GlobalComponent.isKayak = false;
@@ -188,6 +191,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 			isDurationReturn: false
 		};
 		this.currency = 'USD';
+		GlobalComponent.currency='USD';
 		this.getToken();
 	}
 
@@ -253,6 +257,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 						this.getValuesByFilterDuration();
 						this.valuesFilterDurationInit = { ...this.valuesFilterDuration };
 						this.initIdle();
+						this.childSort.resetSort();
 					}
 				}
 				if (!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate = res.exchangeRate;
@@ -296,6 +301,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 					this.valuesFilterDurationInit = { ...this.valuesFilterDuration };
 					this._searchFiltersService.isFinishGDS.emit();
 					this.initIdle();
+					this.childSort.resetSort();
 				} else this.showNotResults = true;
 			},
 			error: (err) => {
@@ -875,19 +881,21 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 		this.sortData();
 	}
 
+	resetTabsSort(){
+
+	}
+
 	initIdle(){
 		this.inactivityTimer = setTimeout(() => this.onInactivity(), this.inactivityDuration);
 	}
 
 	onInactivity(): void {
-		if(!this.isOpenModalInactivity){
+		if(!this.isOpenModalInactivity && this.allDataGroups.length > 1 && !GlobalComponent.appGroupSeleted){
+			this._modalService.dismissAll();
 			const modalRef = this._modalService.open(IdlePopupComponent,{
 				centered: true,
-				size: 'auto',
-				backdrop:'static',
 				modalDialogClass: 'inactivity-dialog',
 				windowClass: 'upSellModalClass',
-				scrollable: true
 			  });
 			modalRef.componentInstance.firstTwoFlights=[...this.allDataGroups].slice(0, this.allDataGroups.length < 2 ? this.allDataGroups.length : 2);
 			this.isOpenModalInactivity=true;
@@ -907,5 +915,6 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 
 	ngOnDestroy() {
 		clearTimeout(this.inactivityTimer);
+		this.allDataGroups=[];
 	}
 }

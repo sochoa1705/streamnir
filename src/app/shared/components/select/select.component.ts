@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
 import { ControlContainer, FormControl, FormGroupDirective } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
@@ -35,6 +35,7 @@ export class SelectComponent implements OnInit, OnChanges {
 	@Input() tabIndex=0;
 	@Output() seletedItem = new EventEmitter();
 	@Output() setErrorSelect = new EventEmitter();
+	@ViewChildren('inputRef') inputRefs: QueryList<ElementRef>;
 
 	isVisibleOptions=false;
 	valueName='';
@@ -43,6 +44,7 @@ export class SelectComponent implements OnInit, OnChanges {
 	listFilter: Item[] = [];
 	valueSearch = new FormControl('');
 	idRand=Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+	isClickItem=false;
 	private destroy$ = new Subject<unknown>();
 
 	constructor(){}
@@ -70,6 +72,8 @@ export class SelectComponent implements OnInit, OnChanges {
 	onKeyUp($event:KeyboardEvent){
 			const itemFind= this.listItems.find(opcion => opcion.name.charAt(0).toLowerCase() === $event.key.toLowerCase())
 			if(itemFind){
+				const inputRef = this.inputRefs.toArray()[this.listItems.indexOf(itemFind)];
+				inputRef.nativeElement.click();
 				this.clickItem(itemFind);
 			}
 		
@@ -79,14 +83,17 @@ export class SelectComponent implements OnInit, OnChanges {
 	}
 
 	onBlurEvent(){
-		if (this.valueName=='' && this.isRequired) {
-			this.setErrorSelect.emit();
-		}
+		setTimeout(() => {
+			if (this.valueName=='' && this.isRequired && !this.isClickItem) {
+				this.setErrorSelect.emit();
+			}
+		}, 100);
 	}
 
 	clickItem(item:Item){
 		this.valueName=item.name;
 		this.isVisibleOptions=false;
+		this.isClickItem=true;
 		if(this.isEmitChanges)  this.seletedItem.emit(item.name);
 		this.valueSearch.setValue('');
 	}

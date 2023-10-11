@@ -31,6 +31,7 @@ export class SortByComponent implements OnInit {
   @Input() currency:string = 'USD';
   @Input() arrayMoreOptionsSort:IOption[] = [];
   @Output() clickTabSort= new EventEmitter();
+
   ngOnInit(): void {
   }
 
@@ -50,6 +51,14 @@ export class SortByComponent implements OnInit {
     this.textOptionSeleted='Más opciones';
     this.textOptionSortBy='';
     this.clickTabSort.emit(index);
+  }
+
+  resetSort(){
+    this.indexTabSelect=0;
+    this.showMoreOptions=false;
+    this.selectedOptionFilter = -1;
+    this.textOptionSeleted='Más opciones';
+    this.textOptionSortBy='';
   }
 
 }

@@ -10,8 +10,10 @@ export interface IUpSell {
   dataBags?:InformationService[],
   dataExtras?:InformationService[],
   totalPay?:number,
-  includeHandBag?:boolean,
-  includesHoldBag?:boolean
+  includeHandBagDep?:boolean,
+  includesHoldBagDep?:boolean
+  includeHandBagRet?:boolean,
+  includesHoldBagRet?:boolean
 }
 
 export interface FareBreakDown {
@@ -39,7 +41,11 @@ export interface Equipaje {
 
 export interface Equipaje2 {
   segmentos: Segmento[]
-  piezas: number
+  piezas: number,
+  cabina?: {
+		piezas: number;
+	},
+  peso?:number
 }
 
 export interface Segmento {

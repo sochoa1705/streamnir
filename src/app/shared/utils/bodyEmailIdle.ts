@@ -39,7 +39,7 @@ export const emailRequestIdle = (email: string, nombres: string, groups: Group[]
 						},
 						DesgloseTarifa: flight.pricingInfo.itinTotalFare.fareBreakDowns.map((fare) => {
 							return {
-								CodigoTipoPasajero: fare.passengerType.code,
+								CodigoTipoPasajero: fare.passengerType.equivalentCode,
 								TarifaPasajero: (fare.passengerFare.baseFare * fare.passengerType.quantity).toFixed(2),
 								CantidadTipoPasajero: fare.passengerType.quantity
 							};

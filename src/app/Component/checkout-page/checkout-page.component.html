@@ -112,7 +112,7 @@
 							<!----------------------------Return----------------------------->
 							<ng-container *ngIf="detailFlight.returns">
 								<div class="container__page__detail__flight__contend__line"></div>
-								<app-card-detail-fly [item]="detailFlight.returns" [classFligh]="classFligh"
+								<app-card-detail-fly [isDeparture]="false" [item]="detailFlight.returns" [classFligh]="classFligh"
 									[nameUpSellSelect]="nameUpSellSelect" [totalADT]="pricing.totalADT"
 									[totalCNN]="pricing.totalCNN" [totalINF]="pricing.totalINF" [indexSegment]="indexSegmentSelected[indexSegmentSelected.length-1]"></app-card-detail-fly>
 							</ng-container>

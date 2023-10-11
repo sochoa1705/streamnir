@@ -30,6 +30,7 @@
 		<ng-container *ngTemplateOutlet="appfilters"></ng-container>
 		<div class="container__page__results">
 			<app-sort-by
+				#childSort
 				[hidden]="dataFilterGroups.length == 0"
 				[theCheapest]="theCheapest"
 				[betterOption]="betterOption"

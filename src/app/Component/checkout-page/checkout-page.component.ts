@@ -275,14 +275,13 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 	}
 
 	onInactivity(): void {
-		if(!this.isOpenModalInactivity){
+		if(!this.isOpenModalInactivity && this.pricing){
+			this._modalService.dismissAll();
 			const modalRef = this._modalService.open(ModalInactivityComponent,{
 				centered: true,
 				size: 'auto',
-				backdrop:'static',
 				modalDialogClass: 'inactivity-dialog',
 				windowClass: 'upSellModalClass',
-				scrollable: true
 			});
 			modalRef.result.then(() => {
 				this.isOpenModalInactivity=false;
