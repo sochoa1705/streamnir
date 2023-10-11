@@ -1,5 +1,5 @@
 <span *ngIf="label" class="span__label" [class.full_label]="fullLabel" [class.disabled]="disabled"
-	>{{ label }} <span *ngIf="isRequired" class="span__label__required">*</span></span
+	>{{ label }} <span *ngIf="isRequired && !disabled" class="span__label__required">*</span></span
 >
 <div class="select__box">
 	<div

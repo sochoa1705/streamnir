@@ -22,7 +22,7 @@ export class SelectComponent implements OnInit, OnChanges {
 	@Input() name?: any = 'select';
 	@Input() isGroup = false;
 	@Input() labelStroke = false;
-	@Input() disabled = false;
+	@Input() disabled =  false;
 	@Input() isRequired = false;
 	@Input() notSelect = true;
 	@Input() value:any = '';
@@ -89,6 +89,10 @@ export class SelectComponent implements OnInit, OnChanges {
 		this.isVisibleOptions=false;
 		if(this.isEmitChanges)  this.seletedItem.emit(item.name);
 		this.valueSearch.setValue('');
+	}
+
+	clickSelect(){
+		if(!this.disabled) this.isVisibleOptions = !this.isVisibleOptions
 	}
 
 	clickOutside(){

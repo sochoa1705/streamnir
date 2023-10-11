@@ -60,8 +60,8 @@ export const environment = {
 
   url_autos: 'https://autos.nmviajes.com/es/site/',
 
-
   urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela",
+  urlApiPasarela: 'https://pasarella.expertiatravel.com/serviciopasarela/v1/api/',
   //urlApiPayment: "http://10.75.102.23:15001/pasarelaservicio",
   //urlApiPayment: 'http://localhost:30850',
 
@@ -95,11 +95,8 @@ export const environment = {
     Id: 'mqxn16kmicqj2fde6fhi',
     ApiKey: 'pk_c74367b872364e91b3143c5d87d64bb8'
   },
-  
-  resultsInactivityTime: 300000,
   urlApiDatosCliente: 'https://servicio.nmviajes.com:9443/Ecommerce',
-  tagManagerCode_NM: 'GTM-KD6QHFT',
-  tagManagerCode_Motor: 'GTM-WMMCBK8',
+  resultsInactivityTime: 300000,
   SEO: {
     home: {
       url: 'https://www.nmviajes.com/',

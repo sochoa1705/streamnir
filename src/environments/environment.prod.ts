@@ -62,10 +62,6 @@ export const environment = {
 
   urlApiMotorVuelos: "https://motorvuelos.expertiatravel.com/mv/",
 
-  urlTermsConditions: 'https://www.nmviajes.com/terminos-condiciones',
-  urlBookingConditions: 'https://www.nmviajes.com/condiciones-de-reserva',
-  urlTravelDocuments: 'https://www.nmviajes.com/documentacion-viaje',
-
   GDS:{
     AMADEUS: 0,
     SABRE: 1,

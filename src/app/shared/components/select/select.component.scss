@@ -39,6 +39,10 @@
 		display: flex;
 		justify-content: space-between;
 		cursor: pointer;
+		&.disabled{
+			cursor: default;
+			background: colors.$gris-50;
+		}
 		&__placeholder{
 			color:colors.$neutral-400;
 		}

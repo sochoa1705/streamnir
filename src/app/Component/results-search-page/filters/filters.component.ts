@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DropdownFilterComponent } from 'src/app/shared/components/dropdown-filter/dropdown-filter.component';
+import { GlobalComponent } from 'src/app/shared/global';
 
 interface Item {
 	value: any;
@@ -101,10 +102,11 @@ export class FiltersComponent implements OnInit {
 		}
 	}
 
-	seletedItemCurrency($event: string) {
+	seletedItemCurrency($event:string){
 		this.currency = $event == 'Soles' ? 'PEN' : 'USD';
+		GlobalComponent.currency=this.currency;
 		this.changeExchangeRate.emit($event);
-	}
+	 }
 
 	selectedAirlines($event: string[]) {
 		this.updateArrayAirlinesFilter.emit($event);
