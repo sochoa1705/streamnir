@@ -10,6 +10,7 @@ import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.serv
 export class BaggageComponent implements OnInit {
 	@Input() type: String = 'backpack';
 	@Input() active = true;
+	@Input() isDeparture=true;
 	title = '';
 	description = '';
 	img = '';
@@ -27,8 +28,18 @@ export class BaggageComponent implements OnInit {
 	}
 	changeBaggage() {
     if(GlobalComponent.upSellSeleted){
-      if(this.type == 'hand-luggage') this.active=GlobalComponent.upSellSeleted?.includeHandBag || false;
-      if(this.type == 'hold-luggage') this.active=GlobalComponent.upSellSeleted?.includesHoldBag || false;
+      if(this.type == 'hand-luggage' && this.isDeparture) 
+		this.active=GlobalComponent.upSellSeleted?.includeHandBagDep || false
+	  
+	  if(this.type == 'hand-luggage' && !this.isDeparture) 
+		this.active=GlobalComponent.upSellSeleted?.includeHandBagRet || false
+	  
+      if(this.type == 'hold-luggage' && this.isDeparture) 
+		this.active=GlobalComponent.upSellSeleted?.includesHoldBagDep || false;
+
+		if(this.type == 'hold-luggage' && !this.isDeparture) 
+		this.active=GlobalComponent.upSellSeleted?.includesHoldBagRet || false;
+	  
     }
 		switch (this.type) {
 			case 'backpack':

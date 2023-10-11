@@ -81,6 +81,7 @@ export interface Segment {
 	flightSegments: FlightSegment[];
 	flightDurationMin?:number;
 	waitingTime?:number;
+	isDeparture?:boolean;
 }
 
 export interface Equipaje {
@@ -175,6 +176,7 @@ export interface Segment2 {
 	flightSegments: FlightSegment2[];
 	flightDurationMin?:number;
 	waitingTime?:number;
+	isDeparture?:boolean;
 }
 
 export interface Equipaje2 {

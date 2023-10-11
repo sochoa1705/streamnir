@@ -48,6 +48,7 @@ export const getBodyEmail = (purchare: RPurchare, montoTotalDsto: number = 0) =>
 	groupSeleted.departure.map((item) => {
 		item.segments.map((segment) => {
 			if (segmentDeparture.includes(segment.segmentId)) {
+				segment.isDeparture=true;
 				flightDetail.push(segment);
 			}
 		});
@@ -56,6 +57,7 @@ export const getBodyEmail = (purchare: RPurchare, montoTotalDsto: number = 0) =>
 	if (groupSeleted.returns) {
 		const segmentReturn = GlobalComponent.segmentSelected[GlobalComponent.segmentSelected.length - 1];
 		groupSeleted.returns.segments.map((segment) => {
+			segment.isDeparture=false;
 			if (segmentReturn == segment.segmentId) {
 				flightDetail.push(segment);
 			}
@@ -78,8 +80,8 @@ export const getBodyEmail = (purchare: RPurchare, montoTotalDsto: number = 0) =>
 			vuelos: vuelos,
 			operadorPor: item.flightSegments[0].marketingAirline.name,
 			escalas: item.flightSegments.length,
-			equipajeMano: GlobalComponent.upSellSeleted ? GlobalComponent.upSellSeleted?.includeHandBag || false : item.equipaje?.cabina == 1,
-			equipajeBodega: GlobalComponent.upSellSeleted ? GlobalComponent.upSellSeleted?.includesHoldBag || false : item.equipaje?.piezas == 1,
+			equipajeMano: GlobalComponent.upSellSeleted ? GlobalComponent.upSellSeleted?.[item.isDeparture ? 'includeHandBagDep':'includeHandBagRet'] || false : item.equipaje?.cabina == 1,
+			equipajeBodega: GlobalComponent.upSellSeleted ? GlobalComponent.upSellSeleted?.[item.isDeparture ? 'includeHandBagDep':'includeHandBagRet'] || false : item.equipaje?.piezas == 1,
 			adicionales: []
 		});
 	});

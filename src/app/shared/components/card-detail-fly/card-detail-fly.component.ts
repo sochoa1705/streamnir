@@ -24,6 +24,7 @@ export class CardDetailFlyComponent implements OnInit {
     @Input() classFligh='';
     @Input() nameUpSellSelect='';
     @Input() indexSegment=0;
+    @Input() isDeparture=true;
     showDropdown=false;
     includeHandLuggage=false; 
     includeHoldLuggage=false;
@@ -38,8 +39,13 @@ export class CardDetailFlyComponent implements OnInit {
 
     changeBaggage(){
         const upsell=GlobalComponent.upSellSeleted;
-        this.includeHandLuggage=upsell?.includeHandBag || false;
-        this.includeHoldLuggage=upsell?.includesHoldBag || false;
+        if(this.isDeparture){
+            this.includeHandLuggage=upsell?.includeHandBagDep || false;
+            this.includeHoldLuggage=upsell?.includesHoldBagDep || false;
+        }else{
+            this.includeHandLuggage=upsell?.includeHandBagRet || false;
+            this.includeHoldLuggage=upsell?.includesHoldBagRet || false;
+        }
     }
 
     calcDurationScale(previousDate:string, currentDate:string){

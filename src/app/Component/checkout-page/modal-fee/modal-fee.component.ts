@@ -100,8 +100,16 @@ export class ModalFeeComponent implements OnInit{
 
 	clickSelectUpSell(item:IUpSell){
 		const route=this.router.routerState.snapshot.url;
-		item.includeHandBag = item.dataBags?.some(bag=>bag.description.toLocaleLowerCase().includes('mano') || bag.description.toLocaleLowerCase().includes('carry'));
-		item.includesHoldBag = item.dataBags?.some(bag=>(bag.description.toLocaleLowerCase().includes('upto') || bag.description.toLocaleLowerCase().includes('bodega')) && !bag.description.toLocaleLowerCase().includes('carry'));
+		item.includeHandBagDep = item.fareBreakDowns[0].equipaje.equipaje[0].cabina ? true : false;
+		item.includesHoldBagDep = item.fareBreakDowns[0].equipaje.equipaje[0].piezas ?? 0 > 0 ? true : false;
+
+		if(GlobalComponent.appGroupSeleted.returns){
+			item.includeHandBagRet = item.fareBreakDowns[0].equipaje.equipaje[1].cabina ? true : false;
+		    item.includesHoldBagRet = item.fareBreakDowns[0].equipaje.equipaje[1].piezas ?? 0 > 0 ? true : false;
+		}else{
+			item.includeHandBagRet=false;
+			item.includesHoldBagRet=false;
+		}
 		if(route.includes('resultados')){
 			GlobalComponent.upSellSeleted=item;
 			GlobalComponent.appBooking.brandedFareName = item.name;
