@@ -67,7 +67,6 @@ export const getBodyEmail = (purchare: RPurchare, montoTotalDsto: number = 0) =>
 		item.flightSegments.forEach((segment: any) => {
 			vuelos.push(segment.flightNumber.toString());
 		});
-
 		itinerarios.push({
 			ciudadOrigen: item.flightSegments[0].departureAirport.name,
 			ciudadDestino: item.flightSegments[item.flightSegments.length - 1].arrivalAirport.name,
@@ -79,8 +78,8 @@ export const getBodyEmail = (purchare: RPurchare, montoTotalDsto: number = 0) =>
 			vuelos: vuelos,
 			operadorPor: item.flightSegments[0].marketingAirline.name,
 			escalas: item.flightSegments.length,
-			equipajeMano: item.equipaje?.cabina == 1,
-			equipajeBodega: item.equipaje?.piezas == 1,
+			equipajeMano: GlobalComponent.upSellSeleted ? GlobalComponent.upSellSeleted?.includeHandBag || false : item.equipaje?.cabina == 1,
+			equipajeBodega: GlobalComponent.upSellSeleted ? GlobalComponent.upSellSeleted?.includesHoldBag || false : item.equipaje?.piezas == 1,
 			adicionales: []
 		});
 	});

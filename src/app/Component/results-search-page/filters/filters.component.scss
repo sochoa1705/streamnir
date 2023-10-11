@@ -78,6 +78,41 @@
 			line-height: 28px;
 		}
 	}
+
+	@media (max-width: 1199px){
+		display: none;
+	}
+}
+
+.filters__mobile{
+	display: none;
+	overflow-x: auto;
+	&__tag{
+		height: 34px;
+		padding: 5px 10px;
+		border-radius: 5px;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		width: fit-content;
+		background: colors.$gris-500;
+		span{
+			font-family: Montserrat;
+			font-size: 14px;
+			font-weight: 600;
+			line-height: 20px;
+			letter-spacing: 0em;
+		}
+	}
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	@media (max-width: 1199px){
+		display: block;
+		display: flex;
+		gap:18px;
+		align-items: center;
+	}
 }
 
 

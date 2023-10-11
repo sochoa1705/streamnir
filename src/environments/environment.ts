@@ -70,7 +70,7 @@ export const environment = {
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
   
   //https://qa-bffdelfosti.nmviajes-it.com https://motorvuelos.expertiatravel.com
-  urlApiMotorVuelos: "https://qa-bffdelfosti.nmviajes-it.com",
+  urlApiMotorVuelos: "https://motorvuelos.expertiatravel.com",
 
     //url Terms and Conditions - Checkout
 
@@ -90,14 +90,13 @@ export const environment = {
       AMADEUS_NDC: 21,
       LATAM:22
   },
-
   openPayConfiguration: {
     isProduction: false,
     Id: 'mqxn16kmicqj2fde6fhi',
     ApiKey: 'pk_c74367b872364e91b3143c5d87d64bb8'
   },
-  
-  resultsInactivityTime: 60,
+  urlApiDatosCliente: 'https://servicio.nmviajes.com:9443/Ecommerce',
+  resultsInactivityTime: 300000,
   SEO: {
     home: {
       url: 'https://www.nmviajes.com/',

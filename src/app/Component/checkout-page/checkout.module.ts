@@ -12,6 +12,7 @@ import { BaggageAndInsuranceModule } from './baggage-insurance/baggage-insurance
 import { PassengersModule } from './passengers/passengers.module';
 import { PayModule } from './pay/pay.module';
 import { ModalErrorKayakComponent } from './modal-error-kayak/modal-error-kayak.component';
+import { ModalInactivityComponent } from './modal-inactivity/modal-inactivity.component';
 
 @NgModule({
     imports: [
@@ -29,6 +30,6 @@ import { ModalErrorKayakComponent } from './modal-error-kayak/modal-error-kayak.
     ],
     providers: [],
     exports: [CheckoutPageComponent],
-    declarations: [CheckoutPageComponent,ModalErrorKayakComponent],
+    declarations: [CheckoutPageComponent,ModalErrorKayakComponent, ModalInactivityComponent],
 })
 export class CheckoutPageModule { }

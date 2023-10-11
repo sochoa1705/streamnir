@@ -52,6 +52,12 @@
 		&.left-3px{
 			margin-left: 3px;
 		}
+		&[tabindex] {
+			outline: none !important;
+		}
+		&:focus,&:active{
+			border: 1px solid colors.$red-500;
+		}
 	}
 	&__options{
 		width: 100%;

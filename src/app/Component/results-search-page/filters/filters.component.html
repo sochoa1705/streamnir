@@ -73,5 +73,13 @@
 		(filterDurationScale)="filterDurationScale($event)"
 	>
 	</app-duration-filter>
-	<div></div>
+	
 </form>
+
+<div class="filters__mobile">
+	<div class="filters__mobile__tag" *ngFor="let item of filtersMobile" (click)="openModalFilter(item.id)">
+		<span>{{item.name}}</span>
+		<img src="./assets/svg/arrow-down-filter.svg" alt="v">
+	</div>
+</div>
+

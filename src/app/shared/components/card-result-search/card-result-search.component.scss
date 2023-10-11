@@ -1,7 +1,7 @@
 @use '/src/scss/colors';
 
 ::ng-deep {
-	.custom-dialog-flight > mat-dialog-container{
+	.custom-dialog-flight > mat-dialog-container {
 		padding: 0 !important;
 	}
 }
@@ -23,21 +23,41 @@
 	line-height: 20px;
 	letter-spacing: 0em;
 }
-section{
+section {
 	padding: 36px;
 	border-radius: 10px;
 	border: 1px solid colors.$gris-300;
-	margin:0;
+	margin: 0;
 	display: flex;
 	flex-direction: column;
-	gap:16px;
+	gap: 16px;
 }
-.tags{
+.tags {
 	@extend .flex-row;
 	align-items: flex-start;
 	justify-content: flex-start;
 	gap: 15px;
 }
+
+h4 {
+	font-family: Open Sans;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 32px;
+	letter-spacing: -0.02em;
+	margin-bottom: 0;
+	color: colors.$neutral-900;
+	text-align: center;
+
+	span {
+		font-family: Open Sans;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 32px;
+		letter-spacing: -0.02em;
+	}
+}
+
 .card__result {
 	@extend .flex-row;
 	align-items: flex-start;
@@ -86,75 +106,82 @@ section{
 					margin-bottom: 0px;
 				}
 			}
-			&__segment {
-				padding: 8px 8px 8px 54px;
-				@extend .flex-row;
-				align-items: center;
-				span{
-					font-family: Montserrat;
-					letter-spacing: 0em;
-					color:colors.$neutral-900;
-					display: flex;
-					align-items: flex-start;
-					&.scala{
-						font-size: 12px;
-						font-weight: 600;
-						line-height: 25px;
-					}
-					&.duration{
-						font-size: 13px;
-						font-weight: 400;
-						line-height: 14px;
-						color:colors.$gris-700;
-					}
-					&.hour{
-						font-size: 16px;
-						font-weight: 600;
-						min-width: 119.23px;
-						line-height: 24px;
-					}
-					&.plus{
-						font-size: 11px;
-						font-weight: 450;
-						line-height: 11px;
-						color:colors.$red-400;
-					}
-				}
-				&__hours{
-					@extend .flex-row;
-					gap:20px;
-					img{
+			&__options {
+				padding: 8px;
+				@extend .flex-column;
+				gap: 16px;
+				.segment{
+					display: grid;
+					grid-template-columns: 24px 1fr;
+					grid-template-rows: auto auto;
+					column-gap: 20px;
+					&__radio {
 						cursor: pointer;
 					}
-				}
-				&__bags{
-					@extend .flex-row;
-					position: relative;
-					gap:8px;
-					img{
-						width: 20px;
-						height: 20px;
+					&__detail {
+						display: flex;
+						flex-wrap: wrap;
+						@extend .flex-row;
+						align-items: center;
+						column-gap: 40px;
+						row-gap: 8px;
+						span {
+							font-family: Montserrat;
+							letter-spacing: 0em;
+							color: colors.$neutral-900;
+							display: flex;
+							align-items: flex-start;
+							&.scala {
+								font-size: 12px;
+								font-weight: 600;
+								line-height: 25px;
+							}
+							&.duration {
+								font-size: 13px;
+								font-weight: 400;
+								line-height: 14px;
+								color: colors.$gris-700;
+							}
+							&.hour {
+								font-size: 16px;
+								font-weight: 600;
+								min-width: 120px;
+								line-height: 24px;
+							}
+							&.plus {
+								font-size: 11px;
+								font-weight: 450;
+								line-height: 11px;
+								color: colors.$red-400;
+							}
+						}
+						&__bags {
+							@extend .flex-row;
+							gap: 8px;
+							img {
+								width: 20px;
+								height: 20px;
+							}
+						}
+						&__hours {
+							@extend .flex-row;
+							img {
+								cursor: pointer;
+								margin-right: 20px;
+							}
+						}
 					}
-				}
-				&.no-margin{
-					padding: 0px;
-					padding-left: 3px;
 				}
 			}
 			&__more {
 				width: fit-content;
 				@extend .flex-row;
-				gap:8px;
+				gap: 8px;
 				cursor: pointer;
-				span{
+				span {
 					@extend .paragraph;
-					color:colors.$gris-600;
+					color: colors.$gris-600;
 				}
-			}
-			&__options{
-				padding: 8px;
-				@extend .flex-column;
-				gap:16px;
 			}
 		}
 		&__line {
@@ -164,29 +191,40 @@ section{
 		}
 	}
 
+	&__pricemobile {
+		display: none;
+		width: 100%;
+		&__actions{
+			display: grid;
+			grid-template-columns: auto 130px;
+			gap:32px;
+			justify-content: space-between;
+			h4{
+				font-size: 16px;
+				line-height: 24px;
+				span{
+					font-size: 12px;
+					line-height: 20px;
+				}
+			}
+		}
+		&__detail {
+			font-family: Montserrat;
+			font-size: 12px;
+			font-weight: 600;
+			line-height: 20px;
+			letter-spacing: 0em;
+			color: colors.$red-500;
+			margin-top: 4px;
+    		display: block;
+		}
+	}
+
 	&__price {
 		min-width: 266px;
 		@extend .flex-column;
 		gap: 15px;
 		justify-content: center;
-		h4 {
-			font-family: Open Sans;
-			font-size: 24px;
-			font-weight: 700;
-			line-height: 32px;
-			letter-spacing: -0.02em;
-			margin-bottom: 0;
-			color: colors.$neutral-900;
-			text-align: center;
-
-			span{
-				font-family: Open Sans;
-				font-size: 16px;
-				font-weight: 400;
-				line-height: 32px;
-				letter-spacing: -0.02em;
-			}
-		}
 		&__detail {
 			@extend .flex-column;
 			gap: 8px;
@@ -214,4 +252,83 @@ section{
 			margin-top: 9px;
 		}
 	}
+}
+
+@media (max-width: 1199px) {
+	.card__result__price {
+		min-width: 220px;
+	}
+}
+
+@media (max-width: 738px) {
+	section {
+		padding: 36px 24px;
+	}
+}
+
+@media (max-width: 625px) {
+	.card__result{
+		gap:33px;
+	}
+	.card__result__price {
+		min-width: 190px;
+	}
+}
+
+
+@media (max-width: 575px) {
+	.card__result {
+		flex-direction: column;
+		gap: 24px;
+		&__pricemobile {
+			display: block;
+		}
+	}
+	.card__result__price {
+		display: none;
+	}
+
+	.tags img {
+		height: 24px;
+	}
+	.card__result__flights__section{
+		gap:8px;
+		&__header h4{
+			font-size: 20px;
+			line-height: 28px;
+		}
+		&__more span{
+			font-size: 12px;
+			line-height: 20px;
+		}
+		&__header span.date{
+			display: none;
+		}
+		&__more img{
+			height: 16px;
+		}
+	}
+	.segment{
+		column-gap: 12px !important;
+		.segment__detail {
+			column-gap: 10px;
+			row-gap: 10px;
+			span.scala,
+			span.duration {
+				font-size: 10px;
+				line-height: 20px;
+			}
+			span.hour {
+				font-size: 12px;
+				line-height: 20px;
+				min-width: 110px;
+			}
+			span.plus {
+				font-size: 8px;
+				line-height: 11.24px;
+			}
+		}
+
+	}
+
 }

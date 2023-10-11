@@ -1,7 +1,10 @@
 <div class="dropdown__filter" *ngIf="!showLoader">
-    <div class="dropdown__filter__header" (click)="dropdownActive=!dropdownActive">
+    <div *ngIf="isMobile" class="dropdown__filter__close">
+        <img src="./assets/svg/close-modal.svg" alt="x">
+    </div>
+    <div class="dropdown__filter__header" (click)="!isMobile ? dropdownActive=!dropdownActive : null">
         <h4>{{title}}</h4>
-        <img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
+        <img *ngIf="!isMobile" [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
     </div>
     <div class="dropdown__filter__body" *ngIf="dropdownActive && listOptions.length > 0">
         <div class="dropdown__filter__body__select" *ngIf="isAirlines">
@@ -15,6 +18,11 @@
         </ng-container>
         <span class="dropdown__filter__body__showMore" *ngIf="isAirlines && listOptions.length > 8" (click)="showMoreOptions()">{{isShowMoreAirlines ? 'Ver menos':'Ver ' +countRestAirlines+ ' aerolínea(s) más'}}</span>
     </div>
+</div>
+
+<div *ngIf="isMobile" class="dropdown__footer">
+    <app-button [text]="'Cancelar'" [size]="'xs'" [color]="'neutral'"></app-button>
+    <app-button [text]="'Confirmar'" [size]="'xs'"></app-button>
 </div>
 
 <div class="dropdown__loader" *ngIf="showLoader">

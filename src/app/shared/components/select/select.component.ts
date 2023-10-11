@@ -32,7 +32,9 @@ export class SelectComponent implements OnInit, OnChanges {
 	@Input() default:any;
 	@Input() isFilter = false;
 	@Input() isEmitChanges = false;
-	@Output() seletedItem = new EventEmitter()
+	@Input() tabIndex=0;
+	@Output() seletedItem = new EventEmitter();
+	@Output() setErrorSelect = new EventEmitter();
 
 	isVisibleOptions=false;
 	valueName='';
@@ -62,6 +64,23 @@ export class SelectComponent implements OnInit, OnChanges {
 
 		if (changes['default'] && changes['default'].currentValue) {
 			this.valueName=this.listItems.filter(item=>item.value=changes['default'].currentValue)[0].name;
+		}
+	}
+
+	onKeyUp($event:KeyboardEvent){
+			const itemFind= this.listItems.find(opcion => opcion.name.charAt(0).toLowerCase() === $event.key.toLowerCase())
+			if(itemFind){
+				this.clickItem(itemFind);
+			}
+		
+			if($event.key == 'Enter'){
+				this.isVisibleOptions=!this.isVisibleOptions;
+			}
+	}
+
+	onBlurEvent(){
+		if (this.valueName=='' && this.isRequired) {
+			this.setErrorSelect.emit();
 		}
 	}
 

@@ -92,16 +92,11 @@ export class FilterResultComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('entra a cambio');
-    console.log(changes);
-
+ 
     const fil = changes.filters.currentValue;
 
     this.minValuePriceFilter = fil.price.min;
     this.maxValuePriceFilter = fil.price.max;
-
-    console.log(this.minValuePriceFilter);
-    console.log(this.maxValuePriceFilter);
 
     this.minValuePrice = Math.floor(this.minValuePriceFilter);
     this.maxValuePrice = Math.ceil(this.maxValuePriceFilter);
