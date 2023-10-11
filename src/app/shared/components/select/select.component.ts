@@ -133,4 +133,8 @@ export class SelectComponent implements OnInit, OnChanges {
 		this.destroy$.next({});
 		this.destroy$.complete();
 	}
+
+	resetValue(){
+		this.valueName='';
+	}
 }
