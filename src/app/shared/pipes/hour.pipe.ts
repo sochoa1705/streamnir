@@ -8,10 +8,7 @@ export class AmPmPipe implements PipeTransform {
     if (!value) {
       return '';
     }
-    console.log(value)
-
     const hour = +value.split('T')[1].slice(0,2);
-    console.log(hour)
     return hour >= 12 ? 'PM' : 'AM';
   }
 }
