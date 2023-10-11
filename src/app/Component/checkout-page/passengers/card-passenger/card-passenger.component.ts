@@ -3,6 +3,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import moment from 'moment';
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
 import { InputComponent } from 'src/app/shared/components/input/input.component';
+import { SelectComponent } from 'src/app/shared/components/select/select.component';
 interface Item {
 	value: any;
 	name: string;
@@ -22,6 +23,7 @@ export class CardPassengerComponent implements OnInit {
 	@Input() arrayYears: Item[] = [];
 	@Output() updateValidForm = new EventEmitter();
 	@ViewChild('cardPassenger') cardPassenger: ElementRef;
+	@ViewChild('inputDay') inputDay: SelectComponent;
 
 	formGroup: FormGroup;
 	formObject = {
@@ -84,6 +86,11 @@ export class CardPassengerComponent implements OnInit {
 				this.documentNumberField.clearValidators();
 				this.setRegex();
 			}
+		});
+
+		
+		this.dayField.valueChanges.subscribe((res) => {
+			if (res !== '') this.validateDays();
 		});
 
 		this.monthField.valueChanges.subscribe((res) => {
@@ -149,6 +156,7 @@ export class CardPassengerComponent implements OnInit {
 			const years = moment().diff(moment(birthday, 'DD/MM/YYYY'), 'years');
 			if (years >= 2) {
 				this.dayField.setValue('');
+				this.inputDay.resetValue();
 				this.dayField.markAsTouched();
 			}
 		}

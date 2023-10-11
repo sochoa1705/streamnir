@@ -107,6 +107,7 @@
 								[value]="dayField.value"
 								[labelError]="dayField.touched && dayField!.hasError('required') ? 'Dia inválido' : ''"
 								(setErrorSelect)="dayField.markAsTouched()"
+								#inputDay
 							></app-select>
 							<app-select
 								[placeholder]="'Mes'"
