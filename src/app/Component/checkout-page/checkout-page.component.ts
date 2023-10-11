@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
 	FareBreakDown,
 	Group,
@@ -18,13 +18,15 @@ import { getPricingFareBreakDowns } from 'src/app/shared/utils/fareBreakDowns';
 import { getIndexsSegments } from 'src/app/shared/utils/getIndexSegment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalErrorKayakComponent } from './modal-error-kayak/modal-error-kayak.component';
+import { environment } from 'src/environments/environment';
+import { ModalInactivityComponent } from './modal-inactivity/modal-inactivity.component';
 
 @Component({
 	selector: 'app-checkout-page',
 	templateUrl: './checkout-page.component.html',
 	styleUrls: ['./checkout-page.component.scss']
 })
-export class CheckoutPageComponent implements OnInit {
+export class CheckoutPageComponent implements OnInit,OnDestroy {
 	showGoingDropdown = false;
 	showLapDropdown = false;
 	classFligh = 'Economy';
@@ -51,6 +53,10 @@ export class CheckoutPageComponent implements OnInit {
 	indexSegmentSelected:number[]=[];
 
 	paramMap:ParamMap;
+	
+	inactivityTimer: any;
+	inactivityDuration: number = environment.resultsInactivityTime;
+	isOpenModalInactivity=false;
   	
 
 	@ViewChild('childPagePay')
@@ -160,6 +166,7 @@ export class CheckoutPageComponent implements OnInit {
 			step.check = false;
 		})
 		this.getDiscounts();
+		this.initIdle();
 	}
 
 
@@ -261,5 +268,37 @@ export class CheckoutPageComponent implements OnInit {
 
 	redirectHome() {
 		this._router.navigateByUrl('/');
+	}
+
+	initIdle(){
+		this.inactivityTimer = setTimeout(() => this.onInactivity(), this.inactivityDuration);
+	}
+
+	onInactivity(): void {
+		if(!this.isOpenModalInactivity){
+			const modalRef = this._modalService.open(ModalInactivityComponent,{
+				centered: true,
+				size: 'auto',
+				backdrop:'static',
+				modalDialogClass: 'inactivity-dialog',
+				windowClass: 'upSellModalClass',
+				scrollable: true
+			});
+			modalRef.result.then(() => {
+				this.isOpenModalInactivity=false;
+			})
+		}
+	}
+
+	// Reiniciar el temporizador cuando se detecta actividad
+	@HostListener('document:mousemove', ['$event'])
+	@HostListener('document:keydown', ['$event'])
+	resetTimer(): void {
+		clearTimeout(this.inactivityTimer);
+		this.inactivityTimer = setTimeout(() => this.onInactivity(), this.inactivityDuration);
+	}
+
+	ngOnDestroy() {
+		clearTimeout(this.inactivityTimer);
 	}
 }

@@ -38,6 +38,7 @@
 							[labelError]="
 								documentTypeField.touched && documentTypeField!.hasError('required') ? 'Tipo es obligatorio' : ''
 							"
+							(setErrorSelect)="documentTypeField.markAsTouched()"
 						></app-select>
 						<app-input
 							[label]="'N° de documento'"
@@ -105,20 +106,25 @@
 								[name]="'day'"
 								[value]="dayField.value"
 								[labelError]="dayField.touched && dayField!.hasError('required') ? 'Dia inválido' : ''"
+								(setErrorSelect)="dayField.markAsTouched()"
 							></app-select>
 							<app-select
 								[placeholder]="'Mes'"
 								[listItems]="monthsFilter"
+								[isRequired]="true"
 								[name]="'month'"
 								[labelError]="monthField.touched && monthField!.hasError('required') ? 'Mes inválido' : ''"
 								[value]="monthField.value"
+								(setErrorSelect)="monthField.markAsTouched()"
 							></app-select>
 							<app-select
 								[placeholder]="'Año'"
 								[listItems]="arrayYears"
 								[name]="'year'"
+								[isRequired]="true"
 								[value]="yearField.value"
 								[labelError]="yearField.touched && yearField!.hasError('required') ? 'Año inválido' : ''"
+								(setErrorSelect)="yearField.markAsTouched()"
 							></app-select>
 						</div>
 					</div>
@@ -132,6 +138,7 @@
 						[labelError]="
 							nationalityField.touched && nationalityField!.hasError('required') ? 'Nacionalidad es obligatorio' : ''
 						"
+						(setErrorSelect)="nationalityField.markAsTouched()"
 					></app-select>
 				</div>
 				<div class="card__passenger__body__row">
@@ -151,46 +158,8 @@
 							}
 						]"
 						[labelError]="genderField.touched && genderField!.hasError('required') ? 'Género es obligatorio' : ''"
+						(setErrorSelect)="genderField.markAsTouched()"
 					></app-select>
-					<app-input  [hidden]="type=='INF'"
-					[label]="'Correo electrónico'"
-					[placeholder]="'Ingresar correo electrónico'"
-					[name]="'email'"
-					[class]="emailField.touched && emailField!.invalid ? 'error' : ''"
-					[maxLenght]="50"
-					[labelError]="
-						emailField.touched && emailField!.hasError('email')
-							? 'Email no válido'
-							: emailField.touched && emailField!.hasError('maxlength')
-							? 'Debe tener max. 50 caracteres'
-							: ''
-					"
-				></app-input>
-				</div>
-
-				<div class="card__passenger__body__row" [hidden]="type=='INF'">
-					<div class="card__passenger__body__group">
-						<span>Código <span class="text-left">Número de celular</span></span>
-						<ngx-intl-tel-input
-							[cssClass]="phoneField.touched && phoneField!.invalid ? 'custom':''" 
-							[preferredCountries]="preferredCountries"
-							[enableAutoCountrySelect]="true"
-							[enablePlaceholder]="true"
-							[customPlaceholder]="'Ingresar número'"
-							[searchCountryFlag]="true"
-							[searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
-							[selectFirstCountry]="false"
-							[selectedCountryISO]="CountryISO.Peru"
-							[maxLength]="12"
-							[phoneValidation]="true"
-							[separateDialCode]="separateDialCode"
-							[numberFormat]="PhoneNumberFormat.National"
-							name="fullPhone"
-							formControlName="fullPhone"
-						>
-						</ngx-intl-tel-input>
-						<span class="error" *ngIf="fullPhoneField.touched && fullPhoneField!.invalid">Número inválido</span>
-					</div>
 				</div>
 
 				<div class="card__passenger__body__actions">

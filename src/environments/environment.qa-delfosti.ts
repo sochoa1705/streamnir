@@ -93,7 +93,8 @@ export const environment = {
     Id: 'mqxn16kmicqj2fde6fhi',
     ApiKey: 'pk_c74367b872364e91b3143c5d87d64bb8'
   },
-  resultsInactivityTime: 300,
+  urlApiDatosCliente: 'https://servicio.nmviajes.com:9443/Ecommerce',
+  resultsInactivityTime: 300000,
   tagManagerCode_NM: 'GTM-KD6QHFT',
   tagManagerCode_Motor: 'GTM-WMMCBK8',
   SEO: {

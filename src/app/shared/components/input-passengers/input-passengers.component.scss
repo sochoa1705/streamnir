@@ -27,6 +27,9 @@
         align-items: center;
         gap:12px;
         cursor: pointer;
+        &[tabindex] {
+			outline: none !important;
+		}
         span{
             font-family: Montserrat;
             font-size: 14px;

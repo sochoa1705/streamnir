@@ -236,6 +236,7 @@
 					[labelError]="
 						documentTypeField.touched && documentTypeField!.hasError('required') ? 'Tipo es obligatorio' : ''
 					"
+					(setErrorSelect)="documentTypeField.markAsTouched()"
 				></app-select>
 			</div>
 
@@ -268,6 +269,7 @@
 					[listItems]="arrayCuotas"
 					[name]="'numberQuotes'"
 					[value]="numberQuotesField.value"
+					(setErrorSelect)="numberQuotesField.markAsTouched()"
 				></app-select>
 			</div>
 			<div class="col_pay col-md-6 col-sm-12 col-lg-12 col-xl-6">

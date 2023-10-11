@@ -102,6 +102,9 @@
 				display: flex;
 				gap: 16px;
 				align-items: center;
+				&[tabindex] {
+					outline: none !important;
+				}
 				&__image {
 					border-radius: 50%;
 					width: 48px;

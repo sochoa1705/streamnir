@@ -26,4 +26,10 @@ export class ButtonComponent implements OnInit {
     clickButton() {
         this.onClick.emit()
     }
+
+    onKeyUp($event:KeyboardEvent){
+        if($event.key == 'Enter'){
+            this.clickButton();
+        }
+    }
 }

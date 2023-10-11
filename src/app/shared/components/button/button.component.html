@@ -7,6 +7,8 @@
 	(click)="clickButton()"
 	[class.w-100]="w100"
 	[class.isMobile]="isMobile"
+	tabindex="0"
+	(keyup)="onKeyUp($event)"
 >
 	{{ isLoader ? '' : text }}
 	<img *ngIf="!isSucess && !isLoader" [src]="'./assets/svg/' + icon" />
@@ -23,6 +25,7 @@
 	[class.w-100]="w100"
 	[class.btn__xs]="size=='xs'"
 	[class.isMobile]="isMobile"
+	tabindex="0"
 >
 	<img alt="img_btn" [src]="'./assets/svg/' + icon" />
 	{{ text }}
@@ -36,6 +39,7 @@
 	[class.w-100]="w100"
 	[class.btn__xs]="size=='xs'"
 	[class.isMobile]="isMobile"
+	tabindex="0"
 >
 	{{ text }}
 </button>
