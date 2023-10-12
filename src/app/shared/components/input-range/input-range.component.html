@@ -1,9 +1,9 @@
 <div class="container__range">
-	<div class="container__range__date" (click)="openCalendar()" [class.multi]="typeFlight==2">
+	<div class="container__range__date" tabindex="0" (click)="openCalendar()" [class.multi]="typeFlight==2" [class.active]="showCalendar">
 		<img src="./assets/svg/calendar.svg" alt="" />
 		<span [class.inactive]="dateDeparture == ''">{{ dateDeparture == '' ? 'Salida' : dateDeparture }}</span>
 	</div>
-	<div *ngIf="typeFlight!==2" class="container__range__date" (click)="typeFlight < 1 ? openCalendar() : null" [class.inactive]="typeFlight >= 1">
+	<div *ngIf="typeFlight!==2" tabindex="0" class="container__range__date" (click)="typeFlight < 1 ? openCalendar() : null" [class.inactive]="typeFlight >= 1" [class.active]="showCalendar && typeFlight==0">
 		<img [src]="typeFlight >=1 ? './assets/svg/calendar-inactive.svg' : './assets/svg/calendar.svg'" alt="" />
 		<span [class.inactive]="dateReturn == ''">{{ dateReturn == '' ? 'Retorno' : dateReturn }}</span>
 	</div>

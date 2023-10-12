@@ -1,5 +1,6 @@
 <div class="toolbar" [class.fixed]="!isShowMenu">
 	<div class="toolbar__section">
+		<img  *ngIf="isShowMenu" class="toolbar__section__bars" alt="icon" [src]="'./assets/svg/bars.svg'">
 		<img
 			class="toolbar__section__logo"
 			[src]="!isShowMenu ? './assets/svg/logoRed.svg' : './assets/svg/Logo_nmviajes.svg'"
@@ -34,10 +35,11 @@
 					[default]="'./assets/user-conect.svg'"
 					[src]="userStorage.image"
 					class="toolbar__section__actions__profile__image"
+					(click)="showOptionsProfile = !showOptionsProfile"
 				/>
 				<div class="toolbar__section__actions__profile__dropdown" (click)="showOptionsProfile = !showOptionsProfile">
 					<span>{{ userStorage.name.split(' ')[0] }}</span>
-					<img src="./assets/svg/dropdown_login.svg" alt="" />
+					<img src="./assets/svg/dropdown_login.svg" alt="" class="dropdown_img" />
 					<ng-container *ngIf="showOptionsProfile">
 						<div class="toolbar__section__actions__profile__dropdown__arrow"></div>
 						<div class="toolbar__section__actions__profile__dropdown__options">

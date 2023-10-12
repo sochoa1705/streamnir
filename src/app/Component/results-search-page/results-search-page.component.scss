@@ -64,6 +64,9 @@ section{
 				gap:2px;
 				span{
 					@extend .paragraph;
+					&::first-letter{
+						text-transform: uppercase;
+					}
 				}
 				&__destination{
 					@extend .flex-row;

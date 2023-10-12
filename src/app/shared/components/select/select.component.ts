@@ -88,6 +88,7 @@ export class SelectComponent implements OnInit, OnChanges {
 				this.setErrorSelect.emit();
 			}
 		}, 100);
+		this.isVisibleOptions=false;
 	}
 
 	clickItem(item:Item){

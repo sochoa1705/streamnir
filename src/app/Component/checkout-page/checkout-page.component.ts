@@ -284,6 +284,7 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 				windowClass: 'upSellModalClass',
 			});
 			modalRef.result.then(() => {
+				this.resetTimer();
 				this.isOpenModalInactivity=false;
 			})
 		}

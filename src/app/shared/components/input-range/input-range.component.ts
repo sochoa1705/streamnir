@@ -149,7 +149,6 @@ export class InputRangeComponent implements OnChanges,OnInit {
 		if (this.showCalendar) {
 			this.fromDate = this.fromDateSeleted;
 			this.toDate = this.toDateSeleted;
-			if(this.typeFlight!==2) this.scrollReset();
 		}
 	}
 

@@ -73,10 +73,10 @@ ngb-datepicker{
     gap:16px;
     width: 100%;
     position: relative;
-    &:focus{
-       &__date{
-          border: 1px solid colors.$red-500;
-       }
+    &__date{
+        &[tabindex] {
+            outline: none !important;
+        }
     }
     &__date{
         cursor: pointer;
@@ -93,6 +93,9 @@ ngb-datepicker{
         width: 50%;
         &.multi{
             width: 100%;
+        }
+        &.active{
+            border: 1px solid colors.$red-500;
         }
         &.inactive{
             background: colors.$gris-50;
