@@ -32,6 +32,10 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		&__bars{
+			width: 24px;
+			display: none;
+		}
 		&__logo {
 			cursor: pointer;
 		}
@@ -128,7 +132,6 @@
 					&__options {
 						position: absolute;
 						width: 234px;
-						height: 104px;
 						background: white;
 						border-radius: 8px;
 						padding: 8px 11px;
@@ -174,5 +177,59 @@
 	}
 	@media (max-width: 1368px){
 		padding: 24px 60px;
+	}
+
+	@media (max-width: 1199px){
+		min-height: 56px;
+		padding: 16px 24px;
+		&__section{
+			&__logo{
+				height: 40px;
+			}
+			&__actions {
+				gap: 20px;
+				&__icon img{
+					width: 24px;
+				}
+				&__profile{
+					display: block;
+					&__image{
+						width: 28px;
+						height: 28px;
+					}
+					&__dropdown span:first-child, &__dropdown .dropdown_img{
+						display: none;
+					}
+					&__dropdown {
+						&__options{
+							top: 20px;
+							right: -5px;
+							gap:5px;
+							.option span{
+								font-size: 14px;
+								line-height: 20px;
+							}
+						}
+						&__arrow{
+							right: 5px;
+							top:11px;
+						}
+					}
+				}
+			}
+		}
+	}
+	@media (max-width: 575px){
+		padding: 8px 24px;
+		&__section{
+			&__bars{
+				display: block;
+			}
+			&__actions {
+				&__icon{
+					display: none;
+				}
+			}
+		}
 	}
 }

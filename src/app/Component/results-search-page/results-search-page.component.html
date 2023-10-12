@@ -3,16 +3,19 @@
 		<div class="container__page__metasearch__section">
 			<app-tab-vuelos-v2 [typeFlight]="flightType" [params]="params" (reloadPageResult)="reloadPageResult()"></app-tab-vuelos-v2>
 		</div>
-		<div class="container__page__metasearch__mobile">
+		<div class="container__page__metasearch__mobile" *ngIf="dataSearch">
 			<div class="d-flex justify-content-between align-items-start">
 				<div class="sumary">
 					<div class="sumary__destination">
-						<span>Los Angeles</span>
+						<span>{{dataSearch.departureLocation | slice:0:-1}}</span>
 						<img src="./assets/svg/arrow-destination.svg" alt="->">
-						<span>Lima</span>
+						<span>{{dataSearch.arrivalLocation | slice:0:-1}}</span>
 					</div>
 					<div class="sumary__date">
-						<span>Sábado 26 de mayo</span> <span>-</span> <span>Sábado 09 junio</span>
+						<span>{{(dataSearch.departureDate | date: 'EE d MMM')?.split('.')?.join(' ')}}</span>
+						<ng-container *ngIf="dataSearch.arrivalDate!==''">
+							<span>-</span> <span>{{dataSearch.arrivalDate | date: 'EE d MMM'}}</span>
+						</ng-container>
 					</div>
 				</div>
 				<div class="actions">

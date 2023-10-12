@@ -2,6 +2,7 @@ import { IBooking } from "../api/api-checkout/models/rq-checkout-booking";
 import { RDiscount } from "../api/api-checkout/models/rq-checkout-discount";
 import { ExchangeRate, Group, PricingDetail } from "../api/api-checkout/models/rq-checkout-search";
 import { IUpSell } from "../api/api-checkout/models/rq-checkout-up-sell";
+import { Search } from "../api/api-nmviajes/models/ce-metasearch";
 import { RAdvanceSaleRule } from "../api/api-nmviajes/models/rq-advance-sale-rule.request";
 import { ICountry } from "../api/api-nmviajes/models/rq-contries-get";
 import { Configuraciones } from "../api/api-nmviajes/models/rq-token-ce-request";
@@ -38,6 +39,7 @@ export class GlobalComponent {
     public static indexSegmentSeleted:number[]=[];
     public static isKayak=false;
     public static currency='USD';
+    public static searchData:Search;
   }
 
 

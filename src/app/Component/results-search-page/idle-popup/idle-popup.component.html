@@ -5,11 +5,11 @@
   <img src="./assets/svg/asesora.svg" alt="Asesora" class="marginLeft10"/>
   <h2 class="mt-4 fw-bold text-danger">Te Ayudamos</h2>
   <p class="fw-bold text-black">¿Quieres guardar esta oferta? ingresa tu email y te la enviamos</p>
-  <form novalidate [formGroup]="form" (submit)="onSubmit()">
+  <form novalidate [formGroup]="form">
     <input type="text" class="form-control mt-3 text-center" placeholder="Nombres y apellidos" formControlName="nombres" required/>
     <input type="email" class="form-control mt-2 text-center" placeholder="email" formControlName="email" required/>
     <div class="d-grid">
-      <button type="submit" class="btn btn-danger w-75 mx-auto">Enviar oferta</button>
+      <button type="button" (click)="onSubmit()" class="btn btn-danger w-75 mx-auto">Enviar oferta</button>
       <div class="invalid-feedback d-block" *ngIf="submitted && form!.invalid">
         Complete correctamente la información solicitada
       </div>

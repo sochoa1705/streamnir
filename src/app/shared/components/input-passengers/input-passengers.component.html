@@ -1,4 +1,4 @@
-<div class="container__passenger">
+<div class="container__passenger" tabindex="0" (blur)="resetTotal();showOptions=false">
 	<div class="container__passenger__name" (click)="showOptions = !showOptions">
 		<img src="./assets/svg/people-red.svg" alt="" />
 		<span>{{ totalPassengers }} pasajero{{ totalPassengers > 1 ? 's' : '' }}</span>
@@ -42,8 +42,8 @@
 				</div>
 			</div>
 			<div class="container__passenger__floating__body__actions">
-				<app-button [text]="'Cancelar'" [size]="'xs'" [color]="'neutral'" (onClick)="resetTotal()"></app-button>
-				<app-button [text]="'Aplicar'" [size]="'xs'" [color]="'outline-primary'" (onClick)="updateTotal()"></app-button>
+                <div class="btn cancel" (click)="resetTotal()">Cancelar</div>
+				<div class="btn apply" (click)="updateTotal()">Aplicar</div>
 			</div>
 		</div>
 	</div>

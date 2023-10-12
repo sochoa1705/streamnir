@@ -21,6 +21,9 @@
 .select__box{
     margin-top: 5px;
 	position: relative;
+	&[tabindex] {
+		outline: none !important;
+	}
 	&__select{
 		width: 100%;
         padding:8px 12px;
@@ -51,9 +54,6 @@
 		}
 		&.left-3px{
 			margin-left: 3px;
-		}
-		&[tabindex] {
-			outline: none !important;
 		}
 		&:focus,&:active{
 			border: 1px solid colors.$red-500;

@@ -1,35 +1,34 @@
 @use '/src/scss/colors';
-.flex-column{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-.paragraph{
-    font-family: Montserrat;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    letter-spacing: 0em;
-    color:colors.$neutral-900;
-}
 .container__passenger{
-    min-width: 118px;
-    height: 36px;
-    border: 1px solid colors.$gris-200;
-    box-shadow: 0px 1px 2px 0px #1018280D;
-    border-radius: 4px;
-    background: white;
+    .flex-column{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .paragraph{
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0em;
+        color:colors.$neutral-900;
+    }
     position: relative;
+    &[tabindex] {
+        outline: none !important;
+    }
     &__name{
+        min-width: 118px;
+        border: 1px solid colors.$gris-200;
+        box-shadow: 0px 1px 2px 0px #1018280D;
+        border-radius: 4px;
+        background: white;
         padding: 8px 12px;
         display: flex;
         justify-content: center;
         align-items: center;
         gap:12px;
         cursor: pointer;
-        &[tabindex] {
-			outline: none !important;
-		}
         span{
             font-family: Montserrat;
             font-size: 14px;
@@ -44,8 +43,8 @@
         position: absolute;
         z-index: 3;
         right: 0;
-        width: 340px;
         &__body{
+            width: 340px;
             padding: 8px 12px;
             padding-bottom: 16px;
             border-radius: 8px;
@@ -101,6 +100,39 @@
                 display: flex;
                 justify-content: space-between;
                 padding: 0px 12px;
+                .btn{
+                    height: 40px;
+                    padding: 10px 16px;
+                    border-radius: 6px;
+                    border: none;
+                    box-shadow: none;
+                    text-transform: none;
+                    font-family: Montserrat;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 20px;
+                    letter-spacing: 0em;
+                    text-align: center;
+                    &.cancel {
+                        background: white;
+                        color: colors.$neutral-700;
+                        border: 1px solid colors.$neutral-200;
+                        &:hover,&:focus {
+                            background: white;
+                            color: colors.$neutral-900;
+                        }
+                    }
+                    &.apply{
+                        font-weight: 500;
+                        border: 1px solid colors.$red-500;
+                        color: colors.$red-500;
+                        &:hover,&:focus {
+                            background: colors.$red-500;
+                            color: white;
+                        }
+                    }
+
+                }
             }
         }
         &__arrow{

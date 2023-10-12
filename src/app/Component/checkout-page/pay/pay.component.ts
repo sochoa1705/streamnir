@@ -156,7 +156,6 @@ export class PayComponent implements OnInit {
 			if(res.State?.Ok) {
 				try {
 					this.disabledCuotes = !res.Result?.ResponseProcessInfoPaymentOptions?.IsActiveCuote || false;
-
 					if(res.Result?.ResponseProcessInfoPaymentOpenPay) {
 						window.OpenPay.setId(res.Result?.ResponseProcessInfoPaymentOpenPay?.ID);
 						window.OpenPay.setApiKey(res.Result?.ResponseProcessInfoPaymentOpenPay?.Username);
@@ -168,6 +167,7 @@ export class PayComponent implements OnInit {
 					}
 				} catch (error) {
 					this.deviceSessionIdField.setValue('');
+					if(isSubmit) this.proccessPayment();
 					console.log('error Open pay ', error);
 				}
 			}

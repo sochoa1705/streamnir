@@ -14,7 +14,7 @@ import { getDatesBySegment } from 'src/app/shared/utils/getDatesBySort';
 import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
-import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
+import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IdlePopupComponent } from './idle-popup/idle-popup.component';
 import { SortByComponent } from './sort-by/sort-by.component';
@@ -127,7 +127,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 	inactivityTimer: any;
 	inactivityDuration: number = environment.resultsInactivityTime;
 	isOpenModalInactivity=false;
-	
+	dataSearch:Search;
 	@ViewChild('childSort') childSort!: SortByComponent;
 
 	ngOnInit() {
@@ -192,6 +192,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 		};
 		this.currency = 'USD';
 		GlobalComponent.currency='USD';
+		
 		this.getToken();
 	}
 
@@ -217,6 +218,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 			if (this.isReload && GlobalComponent.tokenMotorVuelo !== '') {
 				const objParams = getParams(params);
 				this.params = objParams;
+				this.dataSearch=GlobalComponent.searchData;
 				this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
 				GlobalComponent.classFligh =
 					objParams.flightClass == 0 ? 'Economy' : objParams.flightClass == 1 ? 'Business' : 'First Class';
@@ -890,7 +892,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 	}
 
 	onInactivity(): void {
-		if(!this.isOpenModalInactivity && this.allDataGroups.length > 1 && !GlobalComponent.appGroupSeleted){
+		if(!this.isOpenModalInactivity && this.allDataGroups.length > 1){
 			this._modalService.dismissAll();
 			const modalRef = this._modalService.open(IdlePopupComponent,{
 				centered: true,
@@ -900,6 +902,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 			modalRef.componentInstance.firstTwoFlights=[...this.allDataGroups].slice(0, this.allDataGroups.length < 2 ? this.allDataGroups.length : 2);
 			this.isOpenModalInactivity=true;
 			modalRef.result.then(() => {
+				this.resetTimer();
 				this.isOpenModalInactivity=false;
 			})
 		}
