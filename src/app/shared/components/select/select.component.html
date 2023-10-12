@@ -1,13 +1,16 @@
 <span *ngIf="label" class="span__label" [class.full_label]="fullLabel" [class.disabled]="disabled"
 	>{{ label }} <span *ngIf="isRequired && !disabled" class="span__label__required">*</span></span
 >
-<div class="select__box" [tabIndex]="tabIndex" (blur)="onBlurEvent()" (keyup)="onKeyUp($event)">
+<div class="select__box">
 	<div
 		class="select__box__select"
 		[class.left-3px]="isLeft"
 		[class.error]="labelError !== ''"
 		[class.is-active]="isVisibleOptions"
 		(click)="isVisibleOptions = !isVisibleOptions"
+		[tabIndex]="tabIndex"
+		(keyup)="onKeyUp($event)"
+		(blur)="onBlurEvent()"
 	>
 		<span *ngIf="valueName !== ''">{{ valueName }}</span>
 		<span class="select__box__select__placeholder" *ngIf="valueName == ''">{{ placeholder }}</span>
