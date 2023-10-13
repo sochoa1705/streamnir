@@ -11,11 +11,17 @@
 						>Salida a {{ departure.destinationCity.name | titlecase }} •
 						<span>{{ (departure.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</span></span
 					>
-					<span class="duration"> Duración total: <strong>{{ departure.segments[indexSegmentDeparture[i]].flightDuration | flightDuration }}</strong></span>
+					<span class="duration">
+						Duración total:
+						<strong>{{ departure.segments[indexSegmentDeparture[i]].flightDuration | flightDuration }}</strong></span
+					>
 				</div>
 				<div class="modal__flight__body__flight__info">
 					<ng-container
-						*ngFor="let scala of departure.segments[indexSegmentDeparture[i]].flightSegments as flightSegment; index as i2"
+						*ngFor="
+							let scala of departure.segments[indexSegmentDeparture[i]].flightSegments as flightSegment;
+							index as i2
+						"
 					>
 						<div class="modal__flight__body__flight__info__airline">
 							<img [src]="scala.marketingAirline.imageUrl" alt="" />
@@ -24,7 +30,9 @@
 
 						<div class="modal__flight__body__flight__info__segment">
 							<div class="modal__flight__body__flight__info__segment__row">
-								<span class="bold right">{{ scala.departureDateTime | date: "HH:mm" }} {{scala.departureDateTime | ampm}}</span>
+								<span class="bold right"
+									>{{ scala.departureDateTime | date: 'HH:mm' }} {{ scala.departureDateTime | ampm }}</span
+								>
 								<img src="./assets/svg/ellipse2.svg" />
 								<span
 									><span class="bold">{{ scala.departureAirport.name | titlecase }}</span
@@ -39,22 +47,35 @@
 							<div class="modal__flight__body__flight__info__segment__row">
 								<span class="right">{{ scala.elapsedTime | flightDuration }}</span>
 								<img src="./assets/svg/airplane.svg" />
-								<div class="tag" *ngIf="isHoursNocturne(scala.departureDateTime)">
-									Vuelo nocturno
-								</div>
+								<div class="tag" *ngIf="isHoursNocturne(scala.departureDateTime)">Vuelo nocturno</div>
 							</div>
 
 							<img class="modal__flight__body__flight__info__segment__dots" src="./assets/svg/dots.svg" />
 
 							<div class="modal__flight__body__flight__info__segment__row">
-								<span class="bold right">{{ scala.arrivalDateTime | date: "HH:mm" }} {{scala.arrivalDateTime | ampm}}</span>
+								<span class="bold right"
+									>{{ scala.arrivalDateTime | date: 'HH:mm' }} {{ scala.arrivalDateTime | ampm }}</span
+								>
 								<img src="./assets/svg/arrival.svg" />
 								<span
 									><span class="bold">{{ scala.arrivalAirport.name | titlecase }}</span
 									><span class="regular"
 										>{{ scala.arrivalAirport.airport | airport }} ({{ scala.arrivalAirport.code }})</span
-									></span
-								>
+									>
+									<span
+										class="arrival"
+										*ngIf="
+											!isEqualDates(
+												scala.arrivalDateTime,
+												i2 == 0
+													? departure.departureDate
+													: departure.segments[indexSegmentDeparture[i]].flightSegments[i2 - 1].arrivalDateTime,
+												i2
+											)
+										"
+										>Llega el {{ (scala.arrivalDateTime | date: 'EE d MMM')?.split('.')?.join(' ') }}</span
+									>
+								</span>
 							</div>
 						</div>
 						<div
@@ -72,9 +93,12 @@
 					</ng-container>
 					<div class="modal__flight__body__flight__info__bags">
 						<span>Equipaje incluido:</span>
-						<img src="./assets/svg/backpack.svg" />
-						<img [src]="(departure.segments[indexSegmentDeparture[i]].equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
-						<img [src]="(departure.segments[indexSegmentDeparture[i]].equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
+						<app-tooltip
+							[isTop]="!flight.returns && flight.departure.length - 1 == i"
+							[isRight]="false"
+							[isHandLuggage]="departure.segments[indexSegmentDeparture[i]].equipaje?.cabina ? true : false"
+							[isHoldLuggage]="departure.segments[indexSegmentDeparture[i]].equipaje?.piezas ?? 0 > 0 ? true : false"
+						></app-tooltip>
 					</div>
 				</div>
 			</div>
@@ -88,7 +112,10 @@
 						>Vuelta a {{ returns.destinationCity.name | titlecase }} •
 						<span>{{ (returns.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</span></span
 					>
-					<span class="duration"> Duración total: <strong>{{ returns.segments[indexSegmentReturn].flightDuration | flightDuration }}</strong></span>
+					<span class="duration">
+						Duración total:
+						<strong>{{ returns.segments[indexSegmentReturn].flightDuration | flightDuration }}</strong></span
+					>
 				</div>
 				<div class="modal__flight__body__flight__info">
 					<ng-container
@@ -101,7 +128,9 @@
 
 						<div class="modal__flight__body__flight__info__segment">
 							<div class="modal__flight__body__flight__info__segment__row">
-								<span class="bold right">{{ scala.departureDateTime | date: "HH:mm" }} {{scala.departureDateTime | ampm}}</span>
+								<span class="bold right"
+									>{{ scala.departureDateTime | date: 'HH:mm' }} {{ scala.departureDateTime | ampm }}</span
+								>
 								<img src="./assets/svg/ellipse2.svg" />
 								<span
 									><span class="bold">{{ scala.departureAirport.name | titlecase }}</span
@@ -116,22 +145,36 @@
 							<div class="modal__flight__body__flight__info__segment__row">
 								<span class="right">{{ scala.elapsedTime | flightDuration }}</span>
 								<img src="./assets/svg/airplane.svg" />
-								<div class="tag" *ngIf="isHoursNocturne(scala.departureDateTime)">
-									Vuelo nocturno
-								</div>
+								<div class="tag" *ngIf="isHoursNocturne(scala.departureDateTime)">Vuelo nocturno</div>
 							</div>
 
 							<img class="modal__flight__body__flight__info__segment__dots" src="./assets/svg/dots.svg" />
 
 							<div class="modal__flight__body__flight__info__segment__row">
-								<span class="bold right">{{ scala.arrivalDateTime | date: "HH:mm" }} {{scala.arrivalDateTime | ampm}}</span>
+								<span class="bold right"
+									>{{ scala.arrivalDateTime | date: 'HH:mm' }} {{ scala.arrivalDateTime | ampm }}</span
+								>
 								<img src="./assets/svg/arrival.svg" />
 								<span
 									><span class="bold">{{ scala.arrivalAirport.name | titlecase }}</span
 									><span class="regular"
 										>{{ scala.arrivalAirport.airport | airport }} ({{ scala.arrivalAirport.code }})</span
-									></span
-								>
+									>
+
+									<span
+										class="arrival"
+										*ngIf="
+											!isEqualDates(
+												scala.arrivalDateTime,
+												i3 == 0
+													? returns.departureDate
+													: returns.segments[indexSegmentReturn].flightSegments[i3 - 1].arrivalDateTime,
+												i3
+											)
+										"
+										>Llega el {{ (scala.arrivalDateTime | date: 'EE d MMM')?.split('.')?.join(' ') }}</span
+									>
+								</span>
 							</div>
 						</div>
 						<div
@@ -149,9 +192,12 @@
 					</ng-container>
 					<div class="modal__flight__body__flight__info__bags">
 						<span>Equipaje incluido:</span>
-						<img src="./assets/svg/backpack.svg" />
-						<img [src]="(returns.segments[indexSegmentReturn].equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg')" />
-						<img [src]="(returns.segments[indexSegmentReturn].equipaje?.piezas ?? 0 > 0 ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg')" />
+						<app-tooltip
+							[isTop]="true"
+							[isRight]="false"
+							[isHandLuggage]="returns.segments[indexSegmentReturn].equipaje?.cabina ? true : false"
+							[isHoldLuggage]="returns.segments[indexSegmentReturn].equipaje?.piezas ?? 0 > 0 ? true : false"
+						></app-tooltip>
 					</div>
 				</div>
 			</div>

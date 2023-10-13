@@ -37,6 +37,7 @@ export class SelectComponent implements OnInit, OnChanges {
 	@Output() setErrorSelect = new EventEmitter();
 	@ViewChildren('inputRef') inputRefs: QueryList<ElementRef>;
 
+	isSearcherFocus = false;
 	isVisibleOptions=false;
 	valueName='';
 
@@ -45,6 +46,7 @@ export class SelectComponent implements OnInit, OnChanges {
 	valueSearch = new FormControl('');
 	idRand=Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 	isClickItem=false;
+	isFocus=false;
 	private destroy$ = new Subject<unknown>();
 
 	constructor(){}
@@ -70,6 +72,7 @@ export class SelectComponent implements OnInit, OnChanges {
 	}
 
 	onKeyUp($event:KeyboardEvent){
+		if(!this.isSearcherFocus) {
 			const itemFind= this.listItems.find(opcion => opcion.name.charAt(0).toLowerCase() === $event.key.toLowerCase())
 			if(itemFind){
 				const inputRef = this.inputRefs.toArray()[this.listItems.indexOf(itemFind)];
@@ -80,15 +83,16 @@ export class SelectComponent implements OnInit, OnChanges {
 			if($event.key == 'Enter'){
 				this.isVisibleOptions=!this.isVisibleOptions;
 			}
+		}
 	}
 
 	onBlurEvent(){
-		setTimeout(() => {
+		if(this.isFocus){
 			if (this.valueName=='' && this.isRequired && !this.isClickItem) {
 				this.setErrorSelect.emit();
 			}
-		}, 100);
-		this.isVisibleOptions=false;
+			this.isVisibleOptions=false;
+		}
 	}
 
 	clickItem(item:Item){
@@ -105,6 +109,12 @@ export class SelectComponent implements OnInit, OnChanges {
 
 	clickOutside(){
 		this.isVisibleOptions = false;
+	}
+
+	changeFocus(){
+		setTimeout(() => {
+			this.isFocus=false
+		}, 100);
 	}
 
 	private onChangeSearch(): void {

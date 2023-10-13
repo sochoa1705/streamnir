@@ -111,6 +111,12 @@
 								line-height: 20px;
 								color: colors.$gris-800;
 							}
+							&.arrival{
+								font-size: 12px;
+								font-weight: 400;
+								line-height: 20px;
+								color:colors.$red-300;
+							}
 						}
 						.tag {
 							padding: 0px 10px;

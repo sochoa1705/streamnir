@@ -30,7 +30,7 @@
 			<div class="container__card__info__plane">
 				<div class="text">
 					<span>Salida:</span>
-					<span class="bold">{{ scala.departureDateTime | date: 'HH:mm' }}</span>
+					<span class="bold">{{ scala.departureDateTime | date: 'HH:mm' }} {{isAmPm(scala.departureDateTime)}}</span>
 				</div>
 				<img alt="av" [src]="'./assets/svg/ellipse2.svg'" />
 				<div class="text">
@@ -61,22 +61,28 @@
 			<div class="container__card__info__plane">
 				<div class="text">
 					<span>Llegada:</span>
-					<span class="bold">{{ scala.arrivalDateTime | date: 'HH:mm' }}</span>
+					<span class="bold">{{ scala.arrivalDateTime | date: 'HH:mm' }} {{isAmPm(scala.arrivalDateTime)}}</span>
 				</div>
 				<img alt="av" [src]="'./assets/svg/location-marker.svg'" />
 				<div class="text">
 					<span class="bold left"
 						>{{ scala.arrivalAirport.airport | airport }} ({{ scala.arrivalAirport.code }})</span
 					>
+					<span class="arrival left" *ngIf="
+					!isEqualDates( scala.arrivalDateTime, i == 0 ? item.departureDate : item.segments[indexSegment].flightSegments[i - 1].arrivalDateTime, i)
+			        ">Llega el {{(scala.arrivalDateTime | date: 'EE d MMM')?.split('.')?.join(' ')}} </span>
 				</div>
 			</div>
 
 		</ng-container>
 		<div class="container__card__info__luggage">
 			<span>Equipaje incluido:</span>
-			<img alt="av" [src]="'./assets/svg/backpack-green.svg'" />
-			<img alt="av" [src]="(includeHandLuggage ? './assets/svg/hand-luggage-green.svg' : './assets/svg/not-hand-luggage-green.svg')" />
-  			<img alt="av" [src]="( includeHoldLuggage ? '/assets/svg/hold-luggage-green.svg' : './assets/svg/not-hold-luggage-green.svg')" />
+			<app-tooltip
+				[isTop]="isLast"
+				[isRight]="false"
+				[isHandLuggage]="includeHandLuggage"
+				[isHoldLuggage]="includeHoldLuggage"
+		    ></app-tooltip>
 		</div>
 	</div>
 </div>

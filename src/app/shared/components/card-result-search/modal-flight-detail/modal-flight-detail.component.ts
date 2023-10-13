@@ -11,6 +11,7 @@ import { LoadingService } from 'src/app/Services/intermediary/loading.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import localeEs from '@angular/common/locales/es';
+import moment from 'moment';
 
 @Component({
 	selector: 'app-modal-flight-detail',
@@ -42,7 +43,25 @@ export class ModalFlightDetailComponent implements OnInit {
 
 	isHoursNocturne(dateDeparture: any) {
 		const hourDeparture = Number(dateDeparture.slice(11, 13));
-		return hourDeparture <= 5 || hourDeparture >= 19;
+			if (hourDeparture >= 19) {
+				return true;
+			} else if (hourDeparture === 5) {
+				const minutes = Number(dateDeparture.slice(14, 16));
+				return minutes <= 0;
+			} else {
+				return false;
+			}
+	}
+
+	isEqualDates(dateOne:string,dateSecond:string,index:number){
+		const momentdateOne = moment(dateOne, index==0 ? 'DD-MM-YYYY': 'YYYY-MM-DD');
+		const momentdateSecond = moment(dateSecond,'YYYY-MM-DD');
+	
+		const sameYear = momentdateOne.year() === momentdateSecond.year();
+		const sameMonth = momentdateOne.month() === momentdateSecond.month();
+		const sameDay = momentdateOne.date() === momentdateSecond.date();
+
+		return sameYear && sameMonth && sameDay;
 	}
 
 	calcDurationScale(previousDate: string, currentDate: string) {
