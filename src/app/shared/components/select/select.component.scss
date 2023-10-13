@@ -21,14 +21,6 @@
 .select__box{
     margin-top: 5px;
 	position: relative;
-	&[tabindex] {
-		outline: none !important;
-	}
-	&:focus{
-		.select__box__select{
-			border: 1px solid colors.$red-500;
-		}
-	}
 	&__select{
 		width: 100%;
         padding:8px 12px;
@@ -47,9 +39,6 @@
 		display: flex;
 		justify-content: space-between;
 		cursor: pointer;
-		&.active{
-			border: 1px solid colors.$neutral-200;
-		}
 		&.disabled{
 			cursor: default;
 			background: colors.$gris-50;
@@ -62,6 +51,12 @@
 		}
 		&.left-3px{
 			margin-left: 3px;
+		}
+		&[tabindex] {
+			outline: none !important;
+		}
+		&:focus,&:active{
+			border: 1px solid colors.$red-500;
 		}
 	}
 	&__options{

@@ -37,7 +37,7 @@
 					class="toolbar__section__actions__profile__image"
 					(click)="showOptionsProfile = !showOptionsProfile"
 				/>
-				<div class="toolbar__section__actions__profile__dropdown" (click)="showOptionsProfile = !showOptionsProfile">
+				<div class="toolbar__section__actions__profile__dropdown" #dropdown (click)="showOptionsProfile = !showOptionsProfile">
 					<span>{{ userStorage.name.split(' ')[0] }}</span>
 					<img src="./assets/svg/dropdown_login.svg" alt="" class="dropdown_img" />
 					<ng-container *ngIf="showOptionsProfile">

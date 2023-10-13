@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AccountsService, UserStorage } from 'src/app/Services/accounts.service';
 import { FileService } from 'src/app/Services/file.service';
@@ -178,6 +178,14 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
 	close() {
 		this.sidenav.close();
+	}
+
+	@ViewChild('dropdown') miDiv: ElementRef;
+	@HostListener('document:click', ['$event'])
+	blurRange(event: MouseEvent) {
+		if (this.miDiv && !this.miDiv.nativeElement.contains(event.target)) {
+			this.showOptionsProfile=false;
+		  }
 	}
 
 	ngOnDestroy() {
