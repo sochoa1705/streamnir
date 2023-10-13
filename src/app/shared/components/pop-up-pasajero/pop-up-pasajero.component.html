@@ -1,5 +1,5 @@
 <!--<button class="customers" (click)="showPasajero()">{{onlyPasajeros | getNombrePipe}}</button>-->
-<div class="container__tag">
+<div class="container__tag" #passengerHotel>
 	<div class="container__tag__name" (click)="showPasajero()">
 		<img src="./assets/svg/people-red.svg" alt="" />
 		<span *ngIf="!onlyPasajeros">{{totalHabitacion}} Habitaci{{totalHabitacion > 1 ? 'ones':'ón'}} - {{totalPasajeros}} Pasajero{{totalPasajeros > 1 ? 's':''}}</span>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Injectable, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Injectable, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
@@ -10,6 +10,10 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from 'src/app/Services/notification.service';
 import * as moment from 'moment';
+import { NMRequest } from 'src/app/Models/base/NMRequest';
+import { take } from 'rxjs/operators';
+import { DestinyService } from 'src/app/Services/destiny/destiny.service';
+import { InputRangeComponent } from '../input-range/input-range.component';
 
 export interface IFormSeguros {
   origenSafe: string;
@@ -103,7 +107,7 @@ export class FiltersafeComponent implements OnInit {
 
   @Input() options: any;
   @Input() plan: any;
-
+  @ViewChild('childDates') childDates!: InputRangeComponent;
   insuranceQuoteForm: FormGroup;
 
   model!: NgbDateStruct;
@@ -162,7 +166,8 @@ export class FiltersafeComponent implements OnInit {
     private dateAdapter: NgbDateAdapter<string>,
     private renderer: Renderer2,
     private notification: NotificationService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private coreService: DestinyService,
   ) {
     this.fromDate = null
     this.toDate = null
@@ -174,13 +179,28 @@ export class FiltersafeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.insuranceQuoteForm = this.createInsuranceQuoteForm();
 
     if (this.filtersJSON)
       this.getPassengers();
     else
       this.addPassenger();
+      this.listDestiny(); 
   }
+
+  listDestiny() {
+    let payload = new NMRequest();
+    this.coreService.getDestiny(payload).pipe(take(1)).subscribe({
+      next: (response) => {
+        const destiny = response['Resultado']
+        this.options=destiny;
+      },
+      error: error => console.log(error),
+    }
+    )
+  }
+
 
   createInsuranceQuoteForm(): FormGroup {
     return this._formBuilder.group({
@@ -330,6 +350,10 @@ export class FiltersafeComponent implements OnInit {
   }
 
   quoteNow() {
+    const valuesDateRange=this.childDates.getValuesByHotel();
+		this.toDate=valuesDateRange.arrivalDate;
+		this.fromDate=valuesDateRange.departureDate;
+
     if (this.validForm()) {
       let fechaSalida = this.FromDate2.nativeElement.value
       let fechaVuelta = this.ToDate2.nativeElement.value
@@ -361,7 +385,7 @@ export class FiltersafeComponent implements OnInit {
       localStorage.removeItem('Datasafe');
 
       localStorage.setItem('Datasafe', JSON.stringify(form));
-
+      console.log('DataSafe', form)
       const filters = {
         destination: this.insuranceQuoteForm.getRawValue()['destinoSafe'],
         fromDate: startDate,
@@ -370,9 +394,7 @@ export class FiltersafeComponent implements OnInit {
       };
 
       localStorage.setItem('filters', JSON.stringify(filters));
-
-      this._router.navigateByUrl('/seguros', { skipLocationChange: true }).then(() =>
-        this._router.navigate(["/seguros/planes"]));
+      this._router.navigateByUrl('/seguros');
     }
   }
 
@@ -434,4 +456,13 @@ export class FiltersafeComponent implements OnInit {
   denyDrop(event: DragEvent) {
     event.preventDefault();
   }
+
+  @ViewChild('tagSecure') miDiv: ElementRef;
+	@HostListener('document:click', ['$event'])
+	blurTagSafe(event: MouseEvent) {
+		if (this.miDiv && !this.miDiv.nativeElement.contains(event.target)) {
+			this.showPassengerBox=false;
+		}
+	}
+
 }

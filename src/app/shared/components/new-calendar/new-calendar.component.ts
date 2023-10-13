@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbCalendar, NgbDate, NgbDateStruct, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -107,5 +107,13 @@ export class NewCalendarComponent implements OnInit {
 
 	getValues() {
 		return this.fromDateSeleted;
+	}
+
+	@ViewChild('newcalendar') miDiv: ElementRef;
+	@HostListener('document:click', ['$event'])
+	blurTagSafe(event: MouseEvent) {
+		if (this.miDiv && !this.miDiv.nativeElement.contains(event.target)) {
+			this.showCalendar=false;
+		}
 	}
 }

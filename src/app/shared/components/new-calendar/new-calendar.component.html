@@ -1,5 +1,5 @@
-<div class="container__range">
-	<div class="container__range__date multi" (click)="openCalendar()">
+<div class="container__range" #newcalendar>
+	<div class="container__range__date multi" [tabIndex]="0" (click)="openCalendar()">
 		<img src="./assets/svg/calendar.svg" alt="" />
 		<span [class.inactive]="dateDeparture == ''">{{ dateDeparture == '' ? placeholder : dateDeparture }}</span>
 	</div>

@@ -2,7 +2,7 @@
 	<div class="row gx-3 gy-4">
 		<div class="col-md-12">
 			<section>
-				<div class="tag__passenger">
+				<div class="tag__passenger" #tagSecure>
 					<div class="tag__passenger__name" (click)="showPassengerBox = !showPassengerBox">
 						<img src="./assets/svg/people-red.svg" alt="" />
 						<span>{{ limit }} pasajero{{ limit > 1 ? 's' : '' }}</span>

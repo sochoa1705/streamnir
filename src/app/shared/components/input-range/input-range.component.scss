@@ -91,11 +91,11 @@ ngb-datepicker{
         align-items: center;
         gap:8px;
         width: 50%;
+        &:focus,&:active,&.active{
+            border: 1px solid colors.$red-500;
+        }
         &.multi{
             width: 100%;
-        }
-        &.active{
-            border: 1px solid colors.$red-500;
         }
         &.inactive{
             background: colors.$gris-50;
