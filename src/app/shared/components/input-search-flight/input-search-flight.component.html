@@ -1,5 +1,5 @@
 <div class="inputs__search">
-	<div class="inputs__search__group" [class.multi]="typeFlight==2">
+	<div class="inputs__search__group" [class.multi]="typeFlight==2" #inputOrigin>
 		<input type="text" [formControl]="valueSearchDeparture"placeholder="Origen" autocomplete="off" [class.params]="isParamsDep"/>
 		<img class="icon" src="./assets/svg/location-red.svg" alt="o" />
 		<img *ngIf="valueSearchDeparture.value!=='' && !showLoaderDep" class="svg_icon" src="./assets/svg/close-search.svg" alt="x" (click)="resetInput()"/>
@@ -25,7 +25,7 @@
 		<img src="./assets/svg/arrow-left-right.svg" [ngClass]="rotate ? 'rotate' : 'not-rotate'" alt="->" />
 	</div>
 
-	<div class="inputs__search__group" [class.multi]="typeFlight==2">
+	<div class="inputs__search__group" [class.multi]="typeFlight==2" #inputDestiny>
 		<input type="text" placeholder="Destino" autocomplete="off" [formControl]="valueSearchArrival" [class.params]="isParamsRet"/>
 		<img class="icon" src="./assets/svg/location-red.svg" alt="o" />
 		<img *ngIf="valueSearchArrival.value!=='' && !showLoaderRet" class="svg_icon" src="./assets/svg/close-search.svg" alt="x" (click)="resetInput2()"/>

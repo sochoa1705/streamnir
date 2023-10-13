@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgbCalendar, NgbDate, NgbDateStruct, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
@@ -216,14 +216,6 @@ export class InputRangeComponent implements OnChanges,OnInit {
 		}
 	}
 
-	scrollReset(){
-		const scrollPercentage = 4; // Porcentaje de desplazamiento
-		const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-		const documentHeight = document.documentElement.scrollHeight;
-		const scrollTo = (documentHeight - windowHeight) * (scrollPercentage / 100);
-		window.scroll({ top: scrollTo, behavior: 'smooth' });
-	}
-
 	getValues() {
 		return {
 			arrivalDate: this.dateReturn,
@@ -236,5 +228,13 @@ export class InputRangeComponent implements OnChanges,OnInit {
 			arrivalDate: this.toDate,
 			departureDate: this.fromDate
 		};
+	}
+
+	@ViewChild('calendar') miDiv: ElementRef;
+	@HostListener('document:click', ['$event'])
+	blurRange(event: MouseEvent) {
+		if (this.miDiv && !this.miDiv.nativeElement.contains(event.target)) {
+			this.showCalendar=false;
+		  }
 	}
 }

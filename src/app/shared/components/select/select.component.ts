@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { ControlContainer, FormControl, FormGroupDirective } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
@@ -37,7 +37,6 @@ export class SelectComponent implements OnInit, OnChanges {
 	@Output() setErrorSelect = new EventEmitter();
 	@ViewChildren('inputRef') inputRefs: QueryList<ElementRef>;
 
-	isSearcherFocus = false;
 	isVisibleOptions=false;
 	valueName='';
 
@@ -72,7 +71,6 @@ export class SelectComponent implements OnInit, OnChanges {
 	}
 
 	onKeyUp($event:KeyboardEvent){
-		if(!this.isSearcherFocus) {
 			const itemFind= this.listItems.find(opcion => opcion.name.charAt(0).toLowerCase() === $event.key.toLowerCase())
 			if(itemFind){
 				const inputRef = this.inputRefs.toArray()[this.listItems.indexOf(itemFind)];
@@ -83,16 +81,17 @@ export class SelectComponent implements OnInit, OnChanges {
 			if($event.key == 'Enter'){
 				this.isVisibleOptions=!this.isVisibleOptions;
 			}
-		}
+
+			this.isFocus=true
 	}
 
 	onBlurEvent(){
-		if(this.isFocus){
+		setTimeout(() => {
 			if (this.valueName=='' && this.isRequired && !this.isClickItem) {
 				this.setErrorSelect.emit();
 			}
-			this.isVisibleOptions=false;
-		}
+		}, 100);
+		this.isVisibleOptions=false;
 	}
 
 	clickItem(item:Item){
@@ -109,12 +108,6 @@ export class SelectComponent implements OnInit, OnChanges {
 
 	clickOutside(){
 		this.isVisibleOptions = false;
-	}
-
-	changeFocus(){
-		setTimeout(() => {
-			this.isFocus=false
-		}, 100);
 	}
 
 	private onChangeSearch(): void {
@@ -147,5 +140,20 @@ export class SelectComponent implements OnInit, OnChanges {
 
 	resetValue(){
 		this.valueName='';
+	}
+
+	@ViewChild('selectBox') selectBox: ElementRef;
+	@HostListener('document:click', ['$event'])
+	blurSelect(event: MouseEvent) {
+		if (this.selectBox && !this.selectBox.nativeElement.contains(event.target)) {
+			this.isVisibleOptions=false;
+		}
+	}
+	@HostListener('document:keydown', ['$event'])
+	onTabKey(event: KeyboardEvent) {
+		if (this.selectBox && event.key=='Tab' && this.selectBox.nativeElement.contains(event.target) && this.isFocus) {
+			this.setErrorSelect.emit();
+			this.isFocus=false;
+		}
 	}
 }

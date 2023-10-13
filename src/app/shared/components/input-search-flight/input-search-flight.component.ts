@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
@@ -226,11 +226,13 @@ export class InputSearchFlightComponent implements OnInit {
 	resetInput() {
 		this.valueSearchDeparture.setValue('');
     this.origin=null;
+    this.notResultDep=false;
 	}
 
   resetInput2(){
     this.valueSearchArrival.setValue('');
     this.destination=null;
+    this.notResultRet=false;
   }
 
   clickItemDep(item:ICardAutocomplete){
@@ -255,4 +257,18 @@ export class InputSearchFlightComponent implements OnInit {
         arrivalLocation:this.destination
     }
   }
+
+  
+	@ViewChild('inputOrigin') inputOrigin: ElementRef;
+  @ViewChild('inputDestiny') inputDestiny: ElementRef;
+	@HostListener('document:click', ['$event'])
+	blurRange(event: MouseEvent) {
+		if (this.inputOrigin && !this.inputOrigin.nativeElement.contains(event.target) && (this.listResultDep.length > 0  || this.notResultDep) ) {
+        this.resetInput();
+		}
+
+    if(this.inputDestiny && !this.inputDestiny.nativeElement.contains(event.target) && (this.listResultRet.length > 0 || this.notResultRet)){
+      this.resetInput2();
+    }
+	}
 }
