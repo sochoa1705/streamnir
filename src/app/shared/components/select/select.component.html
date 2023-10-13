@@ -1,16 +1,20 @@
 <span *ngIf="label" class="span__label" [class.full_label]="fullLabel" [class.disabled]="disabled"
 	>{{ label }} <span *ngIf="isRequired && !disabled" class="span__label__required">*</span></span
 >
-<div class="select__box">
+<div class="select__box" 	
+[tabIndex]="tabIndex"
+(keyup)="onKeyUp($event)"
+(focus)="isFocus=true"
+(blur)="isFocus=false"
+(mouseleave)="onBlurEvent()"
+>
 	<div
 		class="select__box__select"
 		[class.left-3px]="isLeft"
 		[class.error]="labelError !== ''"
 		[class.is-active]="isVisibleOptions"
 		(click)="isVisibleOptions = !isVisibleOptions"
-		[tabIndex]="tabIndex"
-		(keyup)="onKeyUp($event)"
-		
+		[class.active]="valueName !== ''"
 	>
 		<span *ngIf="valueName !== ''">{{ valueName }}</span>
 		<span class="select__box__select__placeholder" *ngIf="valueName == ''">{{ placeholder }}</span>
@@ -19,7 +23,9 @@
 	<div class="select__box__options" [class.left-3px]="isLeft" [hidden]="!isVisibleOptions">
 		<div class="select__box__options__list">
 			<div class="select__box__options__list__input" *ngIf="isSearch">
-				<input type="text" placeholder="Buscar Nacionalidad..." [formControl]="valueSearch" />
+				<input type="text" placeholder="Buscar Nacionalidad..." [formControl]="valueSearch"
+				(blur)="isSearcherFocus = false"
+				(focus)="isSearcherFocus = true" />
 			</div>
 
 			<ng-container *ngIf="listFilter.length > 0">

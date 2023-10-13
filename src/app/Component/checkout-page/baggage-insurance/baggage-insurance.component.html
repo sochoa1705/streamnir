@@ -28,7 +28,7 @@
 					></app-button>
 					<app-button
 						*ngIf="itsIncludeUpSell && getScreenWidth <= 950 && getScreenWidth > 550"
-						[text]="'Ampliar'"
+						[text]="'Modificar'"
 						[color]="'outline-secondary'"
 						(click)="openModalFee()"
 						[size]="'md'"
@@ -36,7 +36,7 @@
 					<app-button
 						*ngIf="itsIncludeUpSell && getScreenWidth <= 550"
 						class="xs_button_100"
-						[text]="'Ampliar beneficios'"
+						[text]="'Modificar beneficios'"
 						[color]="'outline-secondary'"
 						(click)="openModalFee()"
 						[w100]="true"

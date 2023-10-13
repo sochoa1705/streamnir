@@ -11,17 +11,19 @@ import { ModalFlightDetailComponent } from './modal-flight-detail/modal-flight-d
 import { SwiperModule } from 'swiper/angular';
 import { ChangeCurrencyPipe } from '../../pipes/change-currency.pipe';
 import { AmPmPipe } from '../../pipes/hour.pipe';
+import { ToolTipArrivalModule } from '../tooltip-arrival/tooltip-arrival.module';
 registerLocaleData(localeEs, "es");
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ CardResultSearchComponent, GetDaysPipe,ModalFlightDetailComponent, ChangeCurrencyPipe, AmPmPipe],
+  declarations: [ CardResultSearchComponent,ModalFlightDetailComponent, ChangeCurrencyPipe, AmPmPipe],
   imports: [
     CommonModule, 
     ButtonModule,
     CardDetailFlyModule,
     ToolTipModule,
-    SwiperModule
+    SwiperModule,
+    ToolTipArrivalModule
   ],
   exports: [ CardResultSearchComponent,ModalFlightDetailComponent,ChangeCurrencyPipe ],
   providers: [{ provide: LOCALE_ID, useValue: "es" }],

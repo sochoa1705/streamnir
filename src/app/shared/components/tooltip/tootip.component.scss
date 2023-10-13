@@ -1,33 +1,82 @@
-.tooltip-container {
+@use '/src/scss/colors';
+
+.luggage {
 	position: relative;
-	display: inline-block;
-}
-
-.tooltip {
-	position: absolute;
-	background-color: #333;
-	color: #fff;
-	padding: 5px 10px;
-	border-radius: 5px;
-	font-size: 14px;
-	opacity: 0;
-	visibility: hidden;
-	white-space: nowrap;
-	z-index: 1;
-}
-
-.tooltip-container:hover .tooltip {
-	opacity: 1;
-	visibility: visible;
-}
-
-.tooltip::before {
-	content: '';
-	position: absolute;
-	border: 8px solid transparent;
-	border-bottom-color: #333;
-	left: 50%;
-	bottom: calc(100% + 5px);
-	transform: translateX(-50%);
-	border-radius: 2px;
+	&__section {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 8px;
+		margin: 0;
+		img {
+			width: 20px;
+			height: 20px;
+		}
+	}
+	&__floating {
+		position: absolute;
+		width: max-content;
+		z-index: 1000;
+		opacity: 0;
+		transition: all 200ms ease;
+		top: 35px;
+		right: 0;
+		&.no-right {
+			left: 0;
+		}
+		&.top{
+			top: -105px;
+		}
+		&.show {
+			opacity: 1;
+		}
+		&__options {
+			padding: 8px 16px;
+			box-shadow: 0px 1px 3px 0px #1018281a;
+			background: white;
+			border-radius: 8px;
+			border: 1px solid colors.$gris-200;
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+			&__option {
+				display: flex;
+				gap: 8px;
+				img {
+					width: 20px;
+				}
+				span {
+					font-family: Montserrat;
+					font-size: 12px;
+					font-weight: 400;
+					line-height: 20px;
+					letter-spacing: 0em;
+					text-align: left;
+				}
+			}
+		}
+		&__arrow {
+			width: 19.9px;
+			height: 19.9px;
+			border-radius: 0px 4px 0px 0px;
+			transform: rotate(-45deg);
+			z-index: 4;
+			background: white;
+			position: absolute;
+			border: solid;
+			border-width: 1px 1px 0px 0px;
+			border-color: colors.$gris-200;
+			right: 28px;
+			top: -9px;
+			&.no-right {
+				left: 28px;
+				right: auto;
+			}
+			&.top{
+				bottom: -9px;
+				top:unset;
+				transform: rotate(135deg);
+			}
+		}
+	}
 }

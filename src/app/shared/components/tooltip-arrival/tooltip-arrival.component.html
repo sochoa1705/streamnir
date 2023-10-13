@@ -1,0 +1,21 @@
+<span *ngIf="segment" class="hours hour"
+	>{{ segment.startDateTime | date: 'HH:mm' }} -{{ segment.endDateTime | date: 'HH:mm' }}
+	<span (mouseenter)="isHover = true" (mouseleave)="isHover = false" class="hours plus" *ngIf="(segment.startDateTime | getDays: segment.endDateTime) > 0"
+		>+ {{ segment.startDateTime | getDays: segment.endDateTime }}
+	</span>
+    <div class="plus__floating" [class.show]="isHover">
+        <div class="plus__floating__arrow"></div>
+        <div class="plus__floating__options">
+            Llega el
+            <strong>{{
+              segment.endDateTime | formatPipe : "D MMM"
+              }}</strong>
+              a las 
+           <strong>
+                {{
+                (segment.endDateTime | formatPipe : "HH:mm a" | uppercase)
+                }}
+           </strong>
+        </div>
+    </div>
+</span>

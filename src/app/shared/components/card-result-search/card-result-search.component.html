@@ -28,22 +28,7 @@
 							<img class="segment__radio" src="./assets/svg/radio-check.svg" style="visibility: hidden" />
 							<div class="segment__detail">
 								<div class="segment__detail__hours">
-									<span class="hour"
-										>{{ departure.segments[indexSegmentDeparture[i]].startDateTime | date: 'HH:mm' }} -
-										{{ departure.segments[indexSegmentDeparture[i]].endDateTime | date: 'HH:mm' }}
-										<span
-											class="plus"
-											*ngIf="
-												(departure.segments[indexSegmentDeparture[i]].startDateTime
-													| getDays: departure.segments[indexSegmentDeparture[i]].endDateTime) > 0
-											"
-											>+
-											{{
-												departure.segments[indexSegmentDeparture[i]].startDateTime
-													| getDays: departure.segments[indexSegmentDeparture[i]].endDateTime
-											}}</span
-										></span
-									>
+									<app-tooltip-arrival [segment]="departure.segments[indexSegmentDeparture[i]]"></app-tooltip-arrival>
 									<span class="duration">{{
 										departure.segments[indexSegmentDeparture[i]].flightDuration | flightDuration
 									}}</span>
@@ -55,25 +40,12 @@
 										departure.segments[indexSegmentDeparture[i]].stops + ' escalas'
 									}}</span>
 								</ng-container>
-
-								<div class="segment__detail__bags">
-									<img src="./assets/svg/backpack.svg" />
-
-									<img
-										[src]="
-											departure.segments[indexSegmentDeparture[i]].equipaje?.cabina
-												? './assets/svg/hand-luggage.svg'
-												: './assets/svg/no-hand-luggage.svg'
-										"
-									/>
-									<img
-										[src]="
-											departure.segments[indexSegmentDeparture[i]].equipaje?.piezas ?? 0 > 0
-												? './assets/svg/hold-luggage.svg'
-												: './assets/svg/no-hold-luggage.svg'
-										"
-									/>
-								</div>
+								<app-tooltip
+									[isHandLuggage]="departure.segments[indexSegmentDeparture[i]].equipaje?.cabina ? true : false"
+									[isHoldLuggage]="
+										departure.segments[indexSegmentDeparture[i]].equipaje?.piezas ?? 0 > 0 ? true : false
+									"
+								></app-tooltip>
 							</div>
 						</div>
 					</div>
@@ -91,12 +63,7 @@
 								/>
 								<div class="segment__detail">
 									<div class="segment__detail__hours">
-										<span class="hour"
-											>{{ segment.startDateTime | date: 'HH:mm' }} - {{ segment.endDateTime | date: 'HH:mm'
-											}}<span class="plus" *ngIf="(segment.startDateTime | getDays: segment.endDateTime) > 0">
-												+ {{ segment.startDateTime | getDays: segment.endDateTime }}</span
-											></span
-										>
+										<app-tooltip-arrival [segment]="segment"></app-tooltip-arrival>
 										<span class="duration">{{ segment.flightDuration | flightDuration }}</span>
 									</div>
 									<ng-container [ngSwitch]="segment.stops">
@@ -104,22 +71,10 @@
 										<span class="scala" *ngSwitchCase="1">1 escala</span>
 										<span class="scala" *ngSwitchDefault>{{ segment.stops + ' escalas' }}</span>
 									</ng-container>
-
-									<div class="segment__detail__bags">
-										<img src="./assets/svg/backpack.svg" />
-										<img
-											[src]="
-												segment.equipaje.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg'
-											"
-										/>
-										<img
-											[src]="
-												segment.equipaje.piezas > 0
-													? './assets/svg/hold-luggage.svg'
-													: './assets/svg/no-hold-luggage.svg'
-											"
-										/>
-									</div>
+									<app-tooltip
+										[isHandLuggage]="segment.equipaje.cabina ? true : false"
+										[isHoldLuggage]="segment.equipaje.piezas > 0 ? true : false"
+									></app-tooltip>
 								</div>
 							</div>
 						</div>
@@ -160,22 +115,7 @@
 						<img class="segment__radio" src="./assets/svg/radio-check.svg" style="visibility: hidden" />
 						<div class="segment__detail">
 							<div class="segment__detail__hours">
-								<span class="hour"
-									>{{ returns.segments[indexSegmentReturn].startDateTime | date: 'HH:mm' }} -
-									{{ returns.segments[indexSegmentReturn].endDateTime | date: 'HH:mm' }}
-									<span
-										class="plus"
-										*ngIf="
-											(returns.segments[indexSegmentReturn].startDateTime
-												| getDays: returns.segments[indexSegmentReturn].endDateTime) > 0
-										"
-										>+
-										{{
-											returns.segments[indexSegmentReturn].startDateTime
-												| getDays: returns.segments[indexSegmentReturn].endDateTime
-										}}</span
-									>
-								</span>
+								<app-tooltip-arrival  [segment]="returns.segments[indexSegmentReturn]"></app-tooltip-arrival>
 								<span class="duration">{{ returns.segments[indexSegmentReturn].flightDuration | flightDuration }}</span>
 							</div>
 
@@ -187,23 +127,10 @@
 								}}</span>
 							</ng-container>
 
-							<div class="segment__detail__bags">
-								<img src="./assets/svg/backpack.svg" />
-								<img
-									[src]="
-										returns.segments[indexSegmentReturn].equipaje?.cabina
-											? './assets/svg/hand-luggage.svg'
-											: './assets/svg/no-hand-luggage.svg'
-									"
-								/>
-								<img
-									[src]="
-										returns.segments[indexSegmentReturn].equipaje?.piezas ?? 0 > 0
-											? './assets/svg/hold-luggage.svg'
-											: './assets/svg/no-hold-luggage.svg'
-									"
-								/>
-							</div>
+							<app-tooltip
+								[isHandLuggage]="returns.segments[indexSegmentReturn].equipaje?.cabina ? true : false"
+								[isHoldLuggage]="returns.segments[indexSegmentReturn].equipaje?.piezas ?? 0 > 0 ? true : false"
+							></app-tooltip>
 						</div>
 					</div>
 				</div>
@@ -220,12 +147,7 @@
 							/>
 							<div class="segment__detail">
 								<div class="segment__detail__hours">
-									<span class="hour"
-										>{{ segment.startDateTime | date: 'HH:mm' }} - {{ segment.endDateTime | date: 'HH:mm'
-										}}<span class="plus" *ngIf="(segment.startDateTime | getDays: segment.endDateTime) > 0"
-											>+ {{ segment.startDateTime | getDays: segment.endDateTime }}</span
-										></span
-									>
+									<app-tooltip-arrival  [segment]="segment"></app-tooltip-arrival>
 									<span class="duration">{{ segment.flightDuration | flightDuration }}</span>
 								</div>
 
@@ -235,21 +157,10 @@
 									<span class="scala" *ngSwitchDefault>{{ segment.stops + ' escalas' }}</span>
 								</ng-container>
 
-								<div class="segment__detail__bags">
-									<img src="./assets/svg/backpack.svg" />
-									<img
-										[src]="
-											segment.equipaje?.cabina ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg'
-										"
-									/>
-									<img
-										[src]="
-											segment.equipaje?.piezas ?? 0 > 0
-												? './assets/svg/hold-luggage.svg'
-												: './assets/svg/no-hold-luggage.svg'
-										"
-									/>
-								</div>
+								<app-tooltip
+									[isHandLuggage]="segment.equipaje?.cabina ? true : false"
+									[isHoldLuggage]="segment.equipaje?.piezas ?? 0 > 0 ? true : false"
+								></app-tooltip>
 							</div>
 						</div>
 					</div>
