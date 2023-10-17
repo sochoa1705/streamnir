@@ -1,9 +1,13 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import moment from 'moment';
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
-import { InputComponent } from 'src/app/shared/components/input/input.component';
+import { Subscription } from 'rxjs';
+import { passengerInfoInit } from 'src/app/api/api-checkout/models/rq-checkout-passengers';
+import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { SelectComponent } from 'src/app/shared/components/select/select.component';
+import { GlobalComponent } from 'src/app/shared/global';
+
 interface Item {
 	value: any;
 	name: string;
@@ -13,7 +17,7 @@ interface Item {
 	templateUrl: 'card-passenger.component.html',
 	styleUrls: ['./card-passenger.component.scss']
 })
-export class CardPassengerComponent implements OnInit {
+export class CardPassengerComponent implements OnInit, OnDestroy, AfterViewInit {
 	@Input() type: string = 'ADT';
 	@Input() index = 1;
 	@Input() indexCard = 0;
@@ -22,6 +26,7 @@ export class CardPassengerComponent implements OnInit {
 	@Input() arrayMonths: Item[] = [];
 	@Input() arrayYears: Item[] = [];
 	@Output() updateValidForm = new EventEmitter();
+	@Output() verifyAllSave = new EventEmitter();
 	@ViewChild('cardPassenger') cardPassenger: ElementRef;
 	@ViewChild('inputDay') inputDay: SelectComponent;
 
@@ -35,13 +40,14 @@ export class CardPassengerComponent implements OnInit {
 		documentType: new FormControl('', [Validators.required]),
 		documentNumber: new FormControl(''),
 		fullPhone: new FormControl(''),
-		phone: new FormControl(''),
+		phone: new FormControl({number:'',internationalNumber:'',nationalNumber:'',e164Number:'',countryCode:'PE',dialCode:'+51'}),
 		email: new FormControl('', [Validators.email, Validators.maxLength(50)]),
 		gender: new FormControl('', [Validators.required]),
 		isFrecuently: new FormControl(true),
 		day: new FormControl('', Validators.required),
 		month: new FormControl('', Validators.required),
-		year: new FormControl('', Validators.required)
+		year: new FormControl('', Validators.required),
+		index: new FormControl(0)
 	};
 
 	separateDialCode = true;
@@ -56,14 +62,19 @@ export class CardPassengerComponent implements OnInit {
 		CountryISO.Argentina,
 		CountryISO.Colombia
 	];
-	active = true; 
+	active = true;
 	regexNroDocument!: RegExp;
 	daysFilter: Item[] = [];
-	monthsFilter:Item[] = [];
+	monthsFilter: Item[] = [];
 	validForm = false;
-	numberDocument=0;
-	constructor() {
+	numberDocument = 0;
+	isSaveChanges = true;
+	formSubscription: Subscription;
+	dataFormPrev: any;
+	initialValues:any;
+	constructor(private _checkoutService: CheckoutService) {
 		this.formGroup = new FormGroup(this.formObject);
+		this.initialValues=this.formGroup.value;
 	}
 
 	ngOnInit() {
@@ -72,6 +83,29 @@ export class CardPassengerComponent implements OnInit {
 		this.monthsFilter = this.arrayMonths;
 		this.setRegex();
 		this.onChangesForm();
+		this.indexField.setValue(this.indexCard);
+		if (GlobalComponent.appBooking.passengers.length > 0) {
+			this.setValuesInit();
+		}
+	}
+
+	ngAfterViewInit(){
+		this.formSubscription = this.formGroup.valueChanges.subscribe(() => {
+			const isChange = JSON.stringify(this.initialValues) !==  JSON.stringify(this.formGroup.value)
+			if(isChange) {
+				this._checkoutService.isSaveDataPassenger=false;
+				this.isSaveChanges=false;
+			}
+		});
+	}
+
+	setValuesInit() {
+		this.dataFormPrev = this._checkoutService.dataInfoPassengers.passengers[this.indexCard];
+		this.initialValues=this.dataFormPrev;
+		this.formGroup.setValue(this.dataFormPrev);
+		this.numberDocument = this.documentNumberField.value;
+		this.isSaveChanges = true;
+		this.validForm=true;
 	}
 
 	setRegex() {
@@ -82,13 +116,11 @@ export class CardPassengerComponent implements OnInit {
 	onChangesForm() {
 		this.documentTypeField.valueChanges.subscribe((res) => {
 			if (res !== '') {
-				this.documentNumberField.setValue('');
 				this.documentNumberField.clearValidators();
 				this.setRegex();
 			}
 		});
 
-		
 		this.dayField.valueChanges.subscribe((res) => {
 			if (res !== '') this.validateDays();
 		});
@@ -106,25 +138,35 @@ export class CardPassengerComponent implements OnInit {
 		if (this.formGroup.valid) {
 			this.validForm = true;
 			this.active = false;
+			this.isSaveChanges = true;
+			this._checkoutService.updateDataPassenger({ ...this.formGroup.value });
 			const cardPassenger = this.cardPassenger.nativeElement;
-    		cardPassenger.scrollTop = cardPassenger.scrollHeight;
+			cardPassenger.scrollTop = cardPassenger.scrollHeight;
+			if (GlobalComponent.appBooking.passengers.length > 0) {
+				GlobalComponent.appBooking.passengers[this.indexCard] = { ...this.getDataForm() };
+			}
 		} else {
 			this.validForm = false;
+			this.isSaveChanges = false;
 			this.formGroup.markAllAsTouched();
 		}
-		this.numberDocument=this.formGroup.value.documentNumber;
+		this.numberDocument = this.formGroup.value.documentNumber;
 		this.updateValidForm.emit({ index: this.indexCard, isValid: this.validForm });
 	}
 
 	getDataForm() {
 		const dateBirthday = new Date(this.yearField.value, this.monthField.value - 1, this.dayField.value).toISOString();
-		const phoneNumber = this.fullPhoneField.value ? this.fullPhoneField.value.dialCode + '.' + this.fullPhoneField.value.number.replace(/\s+/g, '') : '';
-		this.birthdayField.setValue(dateBirthday);
-		this.phoneField.setValue(phoneNumber);
-		this.documentTypeField.setValue(Number(this.documentTypeField.value));
-	    this.documentNumberField.setValue(this.numberDocument.toString());
-		const dataPassenger = this.formGroup.value;
-		const keysToRemove = ['year', 'month', 'day', 'fullPhone'];
+		const phoneNumber = this.fullPhoneField.value
+			? this.fullPhoneField.value.dialCode + '.' + this.fullPhoneField.value.number.replace(/\s+/g, '')
+			: '';
+		const dataPassenger = {
+			...this.formGroup.value,
+			birthday: dateBirthday,
+			phone: phoneNumber,
+			documentType: Number(this.documentTypeField.value),
+			documentNumber: this.numberDocument.toString()
+		};
+		const keysToRemove = ['year', 'month', 'day', 'fullPhone', 'index'];
 		keysToRemove.forEach((key) => delete dataPassenger[key]);
 		return dataPassenger;
 	}
@@ -161,16 +203,21 @@ export class CardPassengerComponent implements OnInit {
 			}
 		}
 
-		if(this.type== 'INF'){
+		if (this.type == 'INF') {
 			const currentDate = new Date();
-        	const currentYear =  currentDate.getFullYear();
-			const currentMonth =  currentDate.getMonth() + 1;
-			this.monthsFilter = Number(year) == currentYear ?  this.arrayMonths.filter(item=>item.value<=currentMonth):this.arrayMonths;
-			if(Number(year) == currentYear && Number(month) > currentMonth){
+			const currentYear = currentDate.getFullYear();
+			const currentMonth = currentDate.getMonth() + 1;
+			this.monthsFilter =
+				Number(year) == currentYear ? this.arrayMonths.filter((item) => item.value <= currentMonth) : this.arrayMonths;
+			if (Number(year) == currentYear && Number(month) > currentMonth) {
 				this.monthField.setValue('');
 				this.monthField.markAsTouched();
 			}
 		}
+	}
+
+	ngOnDestroy() {
+		this.formSubscription.unsubscribe();
 	}
 
 	get typeField(): AbstractControl {
@@ -226,5 +273,9 @@ export class CardPassengerComponent implements OnInit {
 
 	get yearField(): AbstractControl {
 		return this.formGroup.get('year')!;
+	}
+
+	get indexField(): AbstractControl {
+		return this.formGroup.get('index')!;
 	}
 }

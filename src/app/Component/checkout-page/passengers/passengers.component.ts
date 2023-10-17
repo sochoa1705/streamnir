@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ContryService } from 'src/app/api/api-nmviajes/services/country-list.service';
 import { months, days } from './utils';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
@@ -14,7 +14,10 @@ import { getBodyValidateBooking } from 'src/app/shared/utils/bodyValidateBooking
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
 import { ModalValidateComponent } from './modal-validate/modal-validate.component';
-
+import { NotificationService } from 'src/app/Services/notification.service';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { ModalUnsavedComponent } from '../../../shared/components/modal-unsaved/modal-unsaved.component';
 
 interface Item {
 	value: any;
@@ -25,7 +28,7 @@ interface Item {
 	templateUrl: './passengers.component.html',
 	styleUrls: ['./passengers.component.scss']
 })
-export class PassengersComponent implements OnInit {
+export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 	contryList: Item[] = [];
 	arrayDays: Item[] = [];
 	arrayMonths: Item[] = [];
@@ -38,7 +41,7 @@ export class PassengersComponent implements OnInit {
 	totalPassenger = 0;
 	dataPassengers: Passenger[] = [];
 	dataStatusCards: boolean[] = [];
-	getScreenWidth=0;
+	getScreenWidth = 0;
 	separateDialCode = true;
 	SearchCountryField = SearchCountryField;
 	CountryISO = CountryISO;
@@ -51,7 +54,6 @@ export class PassengersComponent implements OnInit {
 		CountryISO.Argentina,
 		CountryISO.Colombia
 	];
-	@Output() changeStep = new EventEmitter();
 	formGroup: FormGroup;
 	formBillingGroup: FormGroup;
 	formPoliticsGroup: FormGroup;
@@ -62,7 +64,7 @@ export class PassengersComponent implements OnInit {
 		lastName: new FormControl('', Validators.required),
 		motherLastname: new FormControl('', Validators.required),
 		phones: new FormControl([]),
-		fullPhone: new FormControl('', Validators.required),
+		fullPhone: new FormControl(null, Validators.required),
 		email: new FormControl('', [Validators.required, Validators.email]),
 		isBilling: new FormControl(false),
 		subCode: new FormControl(0),
@@ -82,7 +84,14 @@ export class PassengersComponent implements OnInit {
 	};
 
 	initialValues: any;
+	initialValuesPassengers: any;
 	errorDefault = 'Al parecer hubo un error al validar su itinerario, por favor intentelo nuevamente';
+	isSavePassengerInfo = false;
+
+	formSubscription: Subscription;
+	formSubscriptionPolitics: Subscription;
+	formSubscriptionBilling: Subscription;
+	openModalSubscription: Subscription;
 
 	@ViewChildren(CardPassengerComponent) passengersComponent: QueryList<CardPassengerComponent>;
 
@@ -91,11 +100,19 @@ export class PassengersComponent implements OnInit {
 		private _checkoutService: CheckoutService,
 		private _accountService: AccountsService,
 		private _modalService: NgbModal,
+		private _notification: NotificationService,
+		private _router: Router
 	) {
 		this.formGroup = new FormGroup(this.formContact);
 		this.formBillingGroup = new FormGroup(this.formBilling);
 		this.formPoliticsGroup = new FormGroup(this.formPolitics);
 		this.initialValues = this.formBillingGroup.value;
+
+		this.openModalSubscription = this._checkoutService.openModalUnSavedPassenger.subscribe({
+			next: () => {
+				this.openModalUnsaved();
+			}
+		});
 	}
 
 	ngOnInit() {
@@ -108,28 +125,65 @@ export class PassengersComponent implements OnInit {
 		this.setIndexValidCard();
 		const userStorage = this._accountService.getUserStorage();
 		if (userStorage.email) this.getDataContact(userStorage.email);
-	
 		this.getScreenWidth = window.innerWidth;
+		this._checkoutService.isSaveDataPassenger = true;
+		this.initialValuesPassengers = { ...this._checkoutService.dataInfoPassengers };
+		if (GlobalComponent.appBooking.passengers.length > 0) {
+			this.setValuesInit();
+		}
 	}
+
+	ngAfterViewInit() {
+		this.formSubscription = this.formGroup.valueChanges.subscribe(() => {
+			this.isChangeForms('contact');
+		});
+
+		this.formSubscriptionBilling = this.formBillingGroup.valueChanges.subscribe(() => {
+			this.isChangeForms('billing');
+		});
+
+		this.formSubscriptionPolitics = this.formPoliticsGroup.valueChanges.subscribe(() => {
+			this.isChangeForms('acceptPolitics');
+		});
+	}
+
 	@HostListener('window:resize', ['$event'])
-	onResize(){
+	onResize() {
 		if (this.getScreenWidth !== window.innerWidth) {
 			this.getScreenWidth = window.innerWidth;
 		}
 	}
+
+	isChangeForms(form: string) {
+		const data = this.initialValuesPassengers;
+		let isChange = false;
+		if (form == 'acceptPolitics') isChange = data.acceptPolitics !== this.acceptPoliticsField.value;
+		if (form == 'contact') isChange = JSON.stringify(data.contact) !== JSON.stringify(this.formGroup.value);
+		if (form == 'billing') isChange = JSON.stringify(data.billing) !== JSON.stringify(this.formBillingGroup.value);
+		if (isChange) this._checkoutService.isSaveDataPassenger = false;
+	}
+
+	setValuesInit() {
+		const data = this._checkoutService.dataInfoPassengers;
+		this.formGroup.setValue(data.contact);
+		this.acceptPoliticsField.setValue(data.acceptPolitics);
+		this.formBillingGroup.setValue(data.billing);
+		this._checkoutService.isSaveDataPassenger = true;
+	}
+
 	setArrayDate() {
 		this.arrayMonths = months;
 		for (let index = 0; index < 3; index++) {
 			let yearMin = new Date().getFullYear() - (index == 0 ? 100 : index == 1 ? 11 : 2);
 			let yearMax = new Date().getFullYear() - (index == 0 ? 12 : index == 1 ? 2 : 0);
 
-			for (let i = yearMax ; i >= yearMin; i--) {
+			for (let i = yearMax; i >= yearMin; i--) {
 				if (index == 0) this.arrayYearsADT.push({ name: i.toString(), value: i });
 				if (index == 1) this.arrayYearsCNN.push({ name: i.toString(), value: i });
 				if (index == 2) this.arrayYearsINF.push({ name: i.toString(), value: i });
 			}
 		}
-		this.arrayDays = days.map((item:any) => {
+		this.arrayDays = days.map((item: any) => {
 			return { name: item.toString(), value: item };
 		});
 	}
@@ -185,7 +239,7 @@ export class PassengersComponent implements OnInit {
 		return isValid ? null : { whitespace: true };
 	}
 
-	setInfoPassengersInformation() {
+	validForms() {
 		let isValidCards = false;
 		this.passengersComponent.forEach((item: CardPassengerComponent) => {
 			item.clickButtonSave();
@@ -198,8 +252,14 @@ export class PassengersComponent implements OnInit {
 			});
 			isValidCards = true;
 		}
+		const isValidAll =
+			this.formGroup.valid && isValidCards && this.formBillingGroup.valid && this.formPoliticsGroup.valid;
+		return isValidAll;
+	}
 
-		if (this.formGroup.valid && isValidCards) {
+	setInfoPassengersInformation(isRedirect = false) {
+		if(!isRedirect) this._checkoutService.currentIndexStep=2;
+		if (this.validForms()) {
 			this.companyField.setValue({
 				companyName: this.companyNameField.value,
 				companyAddress: this.companyAddressField.value
@@ -216,6 +276,11 @@ export class PassengersComponent implements OnInit {
 				this.phonesField.setValue(phoneNumber);
 			}
 			const dataContact = { ...this.formGroup.value, ...this.formBillingGroup.value };
+			this._checkoutService.updateDataContact(
+				this.formGroup.value,
+				this.formBillingGroup.value,
+				this.acceptPoliticsField.value
+			);
 			const keysToRemove = ['acceptPolitics', 'fullPhone', 'companyAddress', 'companyName'];
 			keysToRemove.forEach((key) => delete dataContact[key]);
 			GlobalComponent.appBooking = {
@@ -223,32 +288,47 @@ export class PassengersComponent implements OnInit {
 				contact: dataContact,
 				passengers: this.dataPassengers
 			};
-			this.validateBooking();
+			this.isSavePassengerInfo = true;
+			this._checkoutService.isSaveDataPassenger = true;
+			this.validateBooking(isRedirect);
 		} else {
 			this.phonesField.setValue([]);
+			this.formBillingGroup.markAllAsTouched();
+			this.formPoliticsGroup.markAllAsTouched();
 			this.formGroup.markAllAsTouched();
+			window.scroll({ top: 0, behavior: 'smooth' });
+			this._notification.showNotificacion(
+				'Datos sin completar',
+				'Parece que algunos de tus datos son inválidos. Por favor, inténtalo nuevamente.',
+				7
+			);
 		}
 	}
 
-	//Se Inicializa la validacion de cada formulario
+	//Se Inicializa la validacion de cada formulario y su guardado
 	setIndexValidCard() {
+		const value = GlobalComponent.appBooking.passengers.length > 0 ? true : false;
 		for (let i = 0; i < this.totalPassenger; i++) {
-			this.dataStatusCards.push(false);
+			this.dataStatusCards.push(value);
 		}
 	}
 	//Actualiza el estado de cada formulario
 	updateValidForm($event: any) {
 		this.dataStatusCards[$event.index] = $event.isValid;
+		if (this.dataStatusCards.every((status) => status == true)) {
+			this._checkoutService.isSaveDataPassenger = true;
+		}
 	}
 
-	validateBooking() {
+	validateBooking(isRedirect = false) {
 		const bodyValidateBooking: IValidateBooking = getBodyValidateBooking();
 		this._checkoutService.validateBooking(bodyValidateBooking).subscribe({
 			next: (res) => {
 				if (res.success) {
 					dataSteps[1].check = true;
 					dataSteps[2].active = true;
-					this.changeStep.emit(2);
+					if (isRedirect) this.nextNavigate();
+					else this._checkoutService.changeStep.emit(2);
 					window.scroll({ top: 0, behavior: 'smooth' });
 				} else {
 					if (res.isChurning) {
@@ -272,7 +352,11 @@ export class PassengersComponent implements OnInit {
 		if (res.isDuplicate) {
 			if (res.isMT)
 				return (
-					'Ya ha realizado una reserva con las mismas fechas y horarios (Códigos ' + res.bookings[0].pnrDuplicate + ',' + res.bookings[1].pnrDuplicate +')'
+					'Ya ha realizado una reserva con las mismas fechas y horarios (Códigos ' +
+					res.bookings[0].pnrDuplicate +
+					',' +
+					res.bookings[1].pnrDuplicate +
+					')'
 				);
 			else
 				return (
@@ -297,7 +381,7 @@ export class PassengersComponent implements OnInit {
 		const modalRef = this._modalService.open(ModalValidateComponent, {
 			centered: true,
 			backdrop: 'static',
-			size:'lg',
+			size: 'lg',
 			windowClass: 'modal-detail-validate'
 		});
 		modalRef.componentInstance.message = message;
@@ -306,10 +390,38 @@ export class PassengersComponent implements OnInit {
 			if (result == 'success') {
 				dataSteps[1].check = true;
 				dataSteps[2].active = true;
-				this.changeStep.emit(2);
+				this._checkoutService.changeStep.emit(2);
 				this.openModalError('Su reserva anterior, fue cancelada exitosamente', true);
 			}
 		});
+	}
+
+	openModalUnsaved() {
+		const modalRef = this._modalService.open(ModalUnsavedComponent, {
+			centered: true,
+			backdrop: 'static',
+			size: 'md'
+		});
+		modalRef.result.then((result) => {
+			if (result == 'saved') {
+				this.setInfoPassengersInformation(true);
+			} else {
+				this._checkoutService.isSaveDataPassenger = true;
+				this.nextNavigate();
+			}
+		});
+	}
+
+	nextNavigate() {
+		const index = this._checkoutService.currentIndexStep;
+		this._router.navigateByUrl(index == 0 ? '/booking' : index == -1 ? '/' : '/booking/pago');
+	}
+
+	ngOnDestroy() {
+		this.formSubscription.unsubscribe();
+		this.formSubscriptionBilling.unsubscribe();
+		this.formSubscriptionPolitics.unsubscribe();
+		this.openModalSubscription.unsubscribe();
 	}
 
 	get nameField(): AbstractControl {

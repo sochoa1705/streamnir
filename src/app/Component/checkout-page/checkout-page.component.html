@@ -1,14 +1,10 @@
 <app-toolbar></app-toolbar>
-<app-steps (clickedStep)="clickedStep($event)"></app-steps>
+<app-steps></app-steps>
 <div class="container__page">
 	<section>
-		<!--[hidden]="!detailFlight" <app-pay  [hidden]="indexStepActive !== 2"></app-pay>-->
-		<div *ngIf="detailFlight">
-			<app-baggage-insurance [hidden]="indexStepActive !== 0"
-				(changeStep)="clickedStep($event)"></app-baggage-insurance>
-			<app-passengers [hidden]="indexStepActive !== 1" (changeStep)="clickedStep($event)"></app-passengers>
-			<app-pay [paramMap]="paramMap" [hidden]="indexStepActive !== 2" #childPagePay></app-pay>
-		</div>
+		<article>
+			<router-outlet></router-outlet>
+		</article>
 		<div class="container__page__detail" *ngIf="detailFlight">
 			<div class="container__page__detail__saftyPay" *ngIf="isSafetyPay">
 				<span>Información para el pago a través de</span>

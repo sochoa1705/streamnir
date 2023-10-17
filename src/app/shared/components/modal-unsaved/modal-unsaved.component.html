@@ -1,0 +1,12 @@
+<div class="modal__cancel">
+    <div class="modal__cancel__header"></div>
+    <div class="modal__cancel__body">
+        <h5>Parece que tienes cambios pendientes. ¿Deseas mantenerlos antes de salir?</h5>
+        <section>
+        </section>
+        <div  class="modal__cancel__body__actions"><!---Es duplicate-->
+            <app-button  [text]="'No, descartar'" [isTabIndex]="false" [w100]="true" [color]="'outline-primary'" (onClick)="activeModal.close()"></app-button>
+            <app-button  [text]="'Si, guardar'" [w100]="true" [isTabIndex]="false" (onClick)="closeSave()"></app-button>
+        </div>
+    </div>
+</div>

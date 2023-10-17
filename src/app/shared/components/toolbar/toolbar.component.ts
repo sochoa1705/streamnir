@@ -11,6 +11,7 @@ import { NewAccountComponent } from '../../../components/new-account/new-account
 import { ForgotPasswordComponent } from '../../../components/forgot-password/forgot-password.component';
 import { SocialAuthService } from 'angularx-social-login';
 import { filter } from 'rxjs/operators';
+import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 
 @Component({
 	selector: 'app-toolbar',
@@ -36,7 +37,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 		private _authService: SocialAuthService,
 		private modalService: NgbModal,
 		public route: Router,
-		public accountService: AccountsService
+		public accountService: AccountsService,
+		private _checkoutService:CheckoutService
 	) {
 		this.route.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: any) => {
 			if ((event.url).toString().includes('booking')) this.isShowMenu = false;
@@ -69,6 +71,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	}
 
 	toHome() {
+		this._checkoutService.currentIndexStep=-1;
 		this.route.navigateByUrl('/');
 
 		// Renombrando valores para SEO - Inicio

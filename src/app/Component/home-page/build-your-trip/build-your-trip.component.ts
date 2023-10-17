@@ -47,10 +47,12 @@ export class BuildYourTripComponent implements OnInit {
   }
 
   listDestiny() {
+
     let payload = new NMRequest();
     this.coreService.getDestiny(payload).pipe(take(1)).subscribe({
       next: (response) => {
         this.destiny = response['Resultado']
+        console.log(this.destiny,'ar')
         localStorage.setItem('destiny', JSON.stringify(this.destiny));
       },
       error: error => console.log(error),

@@ -19,6 +19,7 @@ export class MessagePayComponent implements OnInit {
     @Input() transactionId = 0;
     @Input() isPayCard=true;
     ngOnInit() {
+        this._checkoutService.isChangesPayment=false;
         dataSteps[2].check = true;
         window.scroll({ top: 0, behavior: 'smooth' });
         this._checkoutService.isFinishedPay.emit({transactionId:this.codeSafetyPay, isPayCard:this.isPayCard});

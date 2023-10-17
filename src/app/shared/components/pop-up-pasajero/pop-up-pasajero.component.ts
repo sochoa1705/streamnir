@@ -10,6 +10,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   OnChanges,
   OnInit,
@@ -314,4 +315,12 @@ export class PopUpPasajeroComponent implements OnInit,OnChanges {
 
     return urlDistributon;
   }
+
+  @ViewChild('passengerHotel') miDiv: ElementRef;
+	@HostListener('document:click', ['$event'])
+	blurTag(event: MouseEvent) {
+		if (this.miDiv && !this.miDiv.nativeElement.contains(event.target)) {
+			this.showOption=false;
+		}
+	}
 }

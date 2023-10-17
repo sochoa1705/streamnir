@@ -14,9 +14,13 @@ import { MessagePayComponent } from './message-pay/message-pay.component';
 import { ModalErrorModule } from 'src/app/shared/components/modal-error/modal-error.module';
 import { NationalityPipe } from 'src/app/shared/pipes/nationality.pipe';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { RouterModule, Routes } from '@angular/router';
+
+export const routes: Routes = [{ path: '', component: PayComponent }];
 
 @NgModule({
     imports: [
+        RouterModule.forChild(routes),
         CommonModule, 
         CardCheckoutModule, 
         InputModule, 

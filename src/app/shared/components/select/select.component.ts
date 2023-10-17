@@ -3,6 +3,7 @@ import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, On
 import { ControlContainer, FormControl, FormGroupDirective } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
+import { GlobalComponent } from '../../global';
 
 interface Item {
 	value: any;
@@ -32,6 +33,7 @@ export class SelectComponent implements OnInit, OnChanges {
 	@Input() default:any;
 	@Input() isFilter = false;
 	@Input() isEmitChanges = false;
+	@Input() isNationality = false;
 	@Input() tabIndex=0;
 	@Output() seletedItem = new EventEmitter();
 	@Output() setErrorSelect = new EventEmitter();
@@ -54,6 +56,14 @@ export class SelectComponent implements OnInit, OnChanges {
 		if (this.isSearch) {
 			this.onChangeSearch();
 		}
+		if(this.default!==''){
+			if(this.isNationality){
+				const nameCountry = GlobalComponent.listCountries.find(item=>item.code==this.default)?.name;
+				this.valueName= nameCountry || ''; 
+			}else{
+				this.valueName=this.listItems.filter(item=>item.value=this.default)[0].name;
+			}
+		}
 	}
 
 	ngOnChanges(changes: SimpleChanges):void{
@@ -63,10 +73,6 @@ export class SelectComponent implements OnInit, OnChanges {
 
 		if (changes['value'] && changes['value'].currentValue == '') {
 			this.valueName=''
-		}
-
-		if (changes['default'] && changes['default'].currentValue) {
-			this.valueName=this.listItems.filter(item=>item.value=changes['default'].currentValue)[0].name;
 		}
 	}
 

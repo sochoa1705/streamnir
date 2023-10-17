@@ -20,7 +20,6 @@ import { CondicionesDeReservaComponent } from './condiciones-de-reserva/condicio
 import { CierrapuertasComponent } from './cierrapuertas/cierrapuertas.component';
 import { CierrapuertasOfertasComponent } from './cierrapuertas-ofertas/cierrapuertas-ofertas.component';
 import { TusdatosComponent } from './tusdatos/tusdatos.component';
-import { ItineraryComponent } from './itinerary/itinerary.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { GifCardComponent } from './gif-card/gif-card.component';
 import { RetailComponent } from './retail/retail.component';

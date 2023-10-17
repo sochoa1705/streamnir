@@ -7,7 +7,6 @@ import {
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { GlobalComponent } from 'src/app/shared/global';
-import { dataSteps } from 'src/app/shared/constant-init';
 import { Result, ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
 import { PayComponent } from './pay/pay.component';
 import { BaggageInsuranceComponent } from './baggage-insurance/baggage-insurance.component';
@@ -146,6 +145,7 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 
 	ngOnInit() {
 		const paramMap = this._routeActivate.snapshot.paramMap;
+		this._modalService.dismissAll();
 		if(paramMap.keys.length > 2){
 			this.paramMap=paramMap;
 			GlobalComponent.isKayak=true;
@@ -161,10 +161,6 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 		this.classFligh = GlobalComponent.classFligh;
 		this.nameUpSellSelect = GlobalComponent.upSellSeleted?.description || '';
 		this._checkoutService.totalDaysTravel();
-		dataSteps.forEach((step, index) => {
-			step.active = index == 0 ? true : false;
-			step.check = false;
-		})
 		this.getDiscounts();
 		this.initIdle();
 	}
@@ -224,20 +220,6 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 	   })
 	}
 
-	clickedStep($event: any) {
-		switch ($event) {
-			case 0:
-				this.indexStepActive = 0;
-				break;
-			case 1:
-				if (dataSteps[1].active == true && dataSteps[0].check) this.indexStepActive = 1;
-				break;
-			default:
-				if (dataSteps[2].active == true && dataSteps[1].check && dataSteps[0].check) this.indexStepActive = 2;
-				break;
-		}
-	}
-
 	getDiscounts() {
 		this._checkoutService.getDiscountByCampaing().subscribe({
 			next: (res) => {
@@ -293,6 +275,7 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 	// Reiniciar el temporizador cuando se detecta actividad
 	@HostListener('document:mousemove', ['$event'])
 	@HostListener('document:keydown', ['$event'])
+	@HostListener('window:scroll', ['$event'])
 	resetTimer(): void {
 		clearTimeout(this.inactivityTimer);
 		this.inactivityTimer = setTimeout(() => this.onInactivity(), this.inactivityDuration);

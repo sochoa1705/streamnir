@@ -7,7 +7,7 @@
 	(click)="clickButton()"
 	[class.w-100]="w100"
 	[class.isMobile]="isMobile"
-	tabindex="0"
+	[attr.tabIndex]="isTabIndex ? 0: -1"
 	(keyup)="onKeyUp($event)"
 >
 	{{ isLoader ? '' : text }}
@@ -25,7 +25,7 @@
 	[class.w-100]="w100"
 	[class.btn__xs]="size=='xs'"
 	[class.isMobile]="isMobile"
-	tabindex="0"
+	[attr.tabIndex]="isTabIndex ? 0: -1"
 >
 	<img alt="img_btn" [src]="'./assets/svg/' + icon" />
 	{{ text }}
@@ -39,7 +39,7 @@
 	[class.w-100]="w100"
 	[class.btn__xs]="size=='xs'"
 	[class.isMobile]="isMobile"
-	tabindex="0"
+	[attr.tabIndex]="isTabIndex ? 0: -1"
 >
 	{{ text }}
 </button>

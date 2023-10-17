@@ -15,7 +15,7 @@
 		class="container__range__date"
 		(focus)="typeFlight < 1 ? openCalendar() : null"
 		[class.inactive]="typeFlight >= 1"
-		[class.active]="showCalendar && typeFlight == 0"
+		[class.active]="showCalendar && typeFlight <= 0"
 	>
 		<img [src]="typeFlight >= 1 ? './assets/svg/calendar-inactive.svg' : './assets/svg/calendar.svg'" alt="" />
 		<span [class.inactive]="dateReturn == ''">{{ dateReturn == '' ? 'Retorno' : dateReturn }}</span>
