@@ -12,9 +12,13 @@ import { InputCheckModule } from 'src/app/shared/components/input-check/input-ch
 import { InputToggleModule } from 'src/app/shared/components/input-toggle/input-toggle.module';
 import { ModalValidateComponent } from './modal-validate/modal-validate.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { RouterModule, Routes } from '@angular/router';
+import { ModalUnsavedModule } from '../../../shared/components/modal-unsaved/modal-unsaved.module';
 
+export const routes: Routes = [{ path: '', component: PassengersComponent }];
 @NgModule({
     imports: [
+        RouterModule.forChild(routes),
         CommonModule, 
         CardCheckoutModule, 
         InputModule, 
@@ -25,7 +29,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         NgxIntlTelInputModule,
         InputCheckModule,
         InputToggleModule,
-        ScrollingModule
+        ScrollingModule,
+        ModalUnsavedModule
     ],
     exports: [PassengersComponent],
     declarations: [PassengersComponent, CardPassengerComponent, ModalValidateComponent],

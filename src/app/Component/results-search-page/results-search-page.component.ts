@@ -18,6 +18,9 @@ import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IdlePopupComponent } from './idle-popup/idle-popup.component';
 import { SortByComponent } from './sort-by/sort-by.component';
+import { dataInitBooking } from 'src/app/shared/constant-init';
+import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
+import { passengerInfoInit } from 'src/app/api/api-checkout/models/rq-checkout-passengers';
 
 interface Item {
 	value: any;
@@ -74,6 +77,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 		private _loadingService: LoadingService,
 		private _searchFiltersService: SearchFiltersService,
 		private _modalService: NgbModal,
+		private _checkoutService:CheckoutService
 	) {}
 
 	allDataGroups: Group[] = [];
@@ -139,6 +143,9 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 		this.isReload = true;
 		GlobalComponent.paramsSearch = {};
 		GlobalComponent.tokenMotorVuelo = '';
+		GlobalComponent.appBooking={...dataInitBooking};
+		this._checkoutService.isSaveDataPassenger=true;
+		this._checkoutService.dataInfoPassengers={...passengerInfoInit};
 		this.isLoader = true;
 		this._searchFiltersService.isLoader.emit(true);
 		this.exchangeRate = null;

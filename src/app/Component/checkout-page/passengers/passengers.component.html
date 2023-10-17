@@ -7,23 +7,43 @@
 				</div>
 			</div>
 			<div class="container__page__section__title__secondary">
-				Verifica que los datos ingresados sean correctos ya que una vez emitido el boleto, este no puede ser
-				cambiado.
+				Verifica que los datos ingresados sean correctos ya que una vez emitido el boleto, este no puede ser cambiado.
 			</div>
 		</div>
 		<div class="container__page__section__cards">
-			<card-passenger *ngFor="let item of numberReturn(totalADT); let index = index" [type]="'ADT'"
-				[arrayDays]="arrayDays" [arrayMonths]="arrayMonths" [arrayYears]="arrayYearsADT" [index]="index + 1"
-				[contryList]="contryList" [indexCard]="index"
-				(updateValidForm)="updateValidForm($event)"></card-passenger>
-			<card-passenger *ngFor="let item of numberReturn(totalCNN); let index = index" [type]="'CNN'"
-				[arrayDays]="arrayDays" [arrayMonths]="arrayMonths" [arrayYears]="arrayYearsCNN" [index]="index + 1"
-				[contryList]="contryList" [indexCard]="index + totalADT"
-				(updateValidForm)="updateValidForm($event)"></card-passenger>
-			<card-passenger *ngFor="let item of numberReturn(totalINF); let index = index" [type]="'INF'"
-				[arrayDays]="arrayDays" [arrayMonths]="arrayMonths" [arrayYears]="arrayYearsINF" [index]="index + 1"
-				[contryList]="contryList" [indexCard]="index + totalADT + totalCNN"
-				(updateValidForm)="updateValidForm($event)"></card-passenger>
+			<card-passenger
+				*ngFor="let item of numberReturn(totalADT); let index = index"
+				[type]="'ADT'"
+				[arrayDays]="arrayDays"
+				[arrayMonths]="arrayMonths"
+				[arrayYears]="arrayYearsADT"
+				[index]="index + 1"
+				[contryList]="contryList"
+				[indexCard]="index"
+				(updateValidForm)="updateValidForm($event)"
+			></card-passenger>
+			<card-passenger
+				*ngFor="let item of numberReturn(totalCNN); let index = index"
+				[type]="'CNN'"
+				[arrayDays]="arrayDays"
+				[arrayMonths]="arrayMonths"
+				[arrayYears]="arrayYearsCNN"
+				[index]="index + 1"
+				[contryList]="contryList"
+				[indexCard]="index + totalADT"
+				(updateValidForm)="updateValidForm($event)"
+			></card-passenger>
+			<card-passenger
+				*ngFor="let item of numberReturn(totalINF); let index = index"
+				[type]="'INF'"
+				[arrayDays]="arrayDays"
+				[arrayMonths]="arrayMonths"
+				[arrayYears]="arrayYearsINF"
+				[index]="index + 1"
+				[contryList]="contryList"
+				[indexCard]="index + totalADT + totalCNN"
+				(updateValidForm)="updateValidForm($event)"
+			></card-passenger>
 		</div>
 
 		<form [formGroup]="formGroup" autocomplete="off">
@@ -35,17 +55,22 @@
 						</div>
 					</div>
 					<div class="container__page__section__title__secondary">
-						La persona que recibe el comprobante será fundamental para gestionar la reserva y recibirá
-						información
+						La persona que recibe el comprobante será fundamental para gestionar la reserva y recibirá información
 						importante sobre el viaje.
 					</div>
 				</div>
 				<app-card-checkout>
 					<div class="container__page__section__contact__form">
 						<div class="container__page__section__contact__form__name">
-							<app-input [label]="'Nombre'" [placeholder]="'Ingresar nombre'" [name]="'name'"
-								[isRequired]="true" [isOnlyText]="true" [maxLenght]="50"
-								[class]="nameField.touched && nameField!.invalid ? 'error' : ''" [labelError]="
+							<app-input
+								[label]="'Nombre'"
+								[placeholder]="'Ingresar nombre'"
+								[name]="'name'"
+								[isRequired]="true"
+								[isOnlyText]="true"
+								[maxLenght]="50"
+								[class]="nameField.touched && nameField!.invalid ? 'error' : ''"
+								[labelError]="
 									nameField.touched && nameField!.hasError('required')
 										? 'Nombre es obligatorio'
 										: nameField.touched && nameField!.hasError('maxlength')
@@ -53,11 +78,18 @@
 										: nameField.touched && nameField!.hasError('whitespace')
 										? 'Nombre no válido'
 										: ''
-								"></app-input>
-							<app-input class="label_input" [label]="'Apellido Paterno'"
-								[placeholder]="'Ingresar apellido paterno'" [name]="'lastName'" [isOnlyText]="true"
-								[isRequired]="true" [maxLenght]="50"
-								[class]="lastNameField.touched && lastNameField!.invalid ? 'error' : ''" [labelError]="
+								"
+							></app-input>
+							<app-input
+								class="label_input"
+								[label]="'Apellido Paterno'"
+								[placeholder]="'Ingresar apellido paterno'"
+								[name]="'lastName'"
+								[isOnlyText]="true"
+								[isRequired]="true"
+								[maxLenght]="50"
+								[class]="lastNameField.touched && lastNameField!.invalid ? 'error' : ''"
+								[labelError]="
 									lastNameField.touched && lastNameField!.hasError('required')
 										? 'Apellido paterno es obligatorio'
 										: lastNameField.touched && lastNameField!.hasError('maxlength')
@@ -65,10 +97,16 @@
 										: lastNameField.touched && lastNameField!.hasError('whitespace')
 										? 'Apellido paterno no válido'
 										: ''
-								"></app-input>
-							<app-input class="label_input" [label]="'Apellido Materno'"
-								[placeholder]="'Ingresar apellido materno'" [name]="'motherLastname'"
-								[isOnlyText]="true" [maxLenght]="50" [isRequired]="true"
+								"
+							></app-input>
+							<app-input
+								class="label_input"
+								[label]="'Apellido Materno'"
+								[placeholder]="'Ingresar apellido materno'"
+								[name]="'motherLastname'"
+								[isOnlyText]="true"
+								[maxLenght]="50"
+								[isRequired]="true"
 								[class]="motherLastnameField.touched && motherLastnameField!.invalid ? 'error' : ''"
 								[labelError]="
 									motherLastnameField.touched && motherLastnameField!.hasError('required')
@@ -78,90 +116,135 @@
 										: motherLastnameField.touched && motherLastnameField!.hasError('whitespace')
 										? 'Apellido materno no válido'
 										: ''
-								"></app-input>
+								"
+							></app-input>
 						</div>
 						<section>
 							<div class="container__page__section__contact__form__phone label_input">
-								<span>Código <span class="required">*</span>
-									<span class="text-left">Número de celular <span
-											class="required">*</span></span></span>
-								<ngx-intl-tel-input [preferredCountries]="preferredCountries"
-									[enableAutoCountrySelect]="true" [enablePlaceholder]="true"
-									[customPlaceholder]="'Ingresar número'" [searchCountryFlag]="true"
+								<span
+									>Código <span class="required">*</span>
+									<span class="text-left">Número de celular <span class="required">*</span></span></span
+								>
+								<ngx-intl-tel-input
+									[preferredCountries]="preferredCountries"
+									[enableAutoCountrySelect]="true"
+									[enablePlaceholder]="true"
+									[customPlaceholder]="'Ingresar número'"
+									[searchCountryFlag]="true"
 									[searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
-									[selectFirstCountry]="false" [selectedCountryISO]="CountryISO.Peru" [maxLength]="12"
-									[phoneValidation]="true" [separateDialCode]="separateDialCode"
-									[numberFormat]="PhoneNumberFormat.National" name="fullPhone"
-									formControlName="fullPhone">
+									[selectFirstCountry]="false"
+									[selectedCountryISO]="CountryISO.Peru"
+									[maxLength]="12"
+									[phoneValidation]="true"
+									[separateDialCode]="separateDialCode"
+									[numberFormat]="PhoneNumberFormat.National"
+									name="fullPhone"
+									formControlName="fullPhone"
+								>
 								</ngx-intl-tel-input>
-								<span class="error" *ngIf="fullPhoneField.touched && fullPhoneField!.invalid">Número
-									inválido</span>
+								<span class="error" *ngIf="fullPhoneField.touched && fullPhoneField!.invalid">Número inválido</span>
 							</div>
 							<div class="container__page__section__contact__form__email">
-								<app-input class="label_input" [label]="'Correo '" [placeholder]="'Ingresar correo'"
-									[name]="'email'" [isRequired]="true" [maxLenght]="50"
-									[class]="emailField.touched && emailField!.invalid ? 'error' : ''" [labelError]="
+								<app-input
+									class="label_input"
+									[label]="'Correo '"
+									[placeholder]="'Ingresar correo'"
+									[name]="'email'"
+									[isRequired]="true"
+									[maxLenght]="50"
+									[class]="emailField.touched && emailField!.invalid ? 'error' : ''"
+									[labelError]="
 										emailField.touched && emailField!.hasError('required')
 											? 'Email es obligatorio'
 											: emailField.touched && emailField!.hasError('email')
 											? 'Email inválido'
 											: ''
-									"></app-input>
+									"
+								></app-input>
 							</div>
 						</section>
 					</div>
 				</app-card-checkout>
 			</div>
-			<br>
+			<br />
 			<div class="check__container">
 				<span>¿Necesitas factura?</span>
-				<app-input-toogle [isSmall]="true" [name]="'toogle-billing'"
-					(clickChecked)="changeToogle($event)"></app-input-toogle>
+				<app-input-toogle
+					[isSmall]="true"
+					[name]="'toogle-billing'"
+					(clickChecked)="changeToogle($event)"
+					[checked]="isBillingField.value"
+				></app-input-toogle>
 			</div>
 		</form>
 		<form [formGroup]="formBillingGroup" autocomplete="off">
 			<app-card-checkout [hidden]="!isBillingField.value">
 				<div class="container__page__section__billing__row">
-					<app-input [label]="'RUC'" [placeholder]="'Ingresar RUC'" [name]="'ruc'" [maxLenght]="11"
-						[isRequired]="true" [isOnlyNumber]="true"
-						[class]="rucField.touched && rucField!.invalid ? 'error' : ''" [labelError]="
+					<app-input
+						[label]="'RUC'"
+						[placeholder]="'Ingresar RUC'"
+						[name]="'ruc'"
+						[maxLenght]="11"
+						[isRequired]="true"
+						[isOnlyNumber]="true"
+						[class]="rucField.touched && rucField!.invalid ? 'error' : ''"
+						[labelError]="
 							rucField.touched && rucField!.hasError('required')
 								? 'RUC es obligatorio'
 								: rucField.touched && rucField.hasError('pattern')
 								? 'RUC inválido'
 								: ''
-						"></app-input>
-					<app-input [label]="'Razón Social'" [placeholder]="'Ingresar razón social'" [name]="'companyName'"
-						[isRequired]="true" [maxLenght]="100"
-						[class]="companyNameField.touched && companyNameField!.invalid ? 'error' : ''" [labelError]="
+						"
+					></app-input>
+					<app-input
+						[label]="'Razón Social'"
+						[placeholder]="'Ingresar razón social'"
+						[name]="'companyName'"
+						[isRequired]="true"
+						[maxLenght]="100"
+						[class]="companyNameField.touched && companyNameField!.invalid ? 'error' : ''"
+						[labelError]="
 							companyNameField.touched && companyNameField!.hasError('required') ? 'Razón social es obligatorio' : ''
-						"></app-input>
+						"
+					></app-input>
 				</div>
 				<div class="container__page__section__billing__address">
-					<app-input [label]="'Dirección razón social'" [placeholder]="'Ingresar dirección'"
-						[name]="'companyAddress'" [maxLenght]="100" [isRequired]="true"
+					<app-input
+						[label]="'Dirección razón social'"
+						[placeholder]="'Ingresar dirección'"
+						[name]="'companyAddress'"
+						[maxLenght]="100"
+						[isRequired]="true"
 						[class]="companyAddressField.touched && companyAddressField!.invalid ? 'error' : ''"
 						[labelError]="
 							companyAddressField.touched && companyAddressField!.hasError('required') ? 'Dirección es obligatorio' : ''
-						"></app-input>
+						"
+					></app-input>
 				</div>
 			</app-card-checkout>
 		</form>
 		<form [formGroup]="formPoliticsGroup" autocomplete="off">
 			<div class="container__page__section__check">
-				<app-input-check [label]="'He leído y aceptado la'" [name]="'acceptPolitics'"
-					[textLink]="'política de protección de datos personales.'" [url]="'/politicas'" [labelError]="
+				<app-input-check
+					[label]="'He leído y aceptado la'"
+					[name]="'acceptPolitics'"
+					[textLink]="'política de protección de datos personales.'"
+					[url]="'/politicas'"
+					[labelError]="
 						acceptPoliticsField.touched && acceptPoliticsField!.invalid
 							? 'Favor de aceptar la política de protección de datos personales.'
 							: ''
-					"></app-input-check>
+					"
+				></app-input-check>
 			</div>
 		</form>
-		<div class="container__page__section__button" *ngIf=" getScreenWidth > 574">
+		<div class="container__page__section__button" *ngIf="getScreenWidth > 574">
 			<app-button
-				[disabled]="dataStatusCards.includes(false) || !formGroup.valid || !formBillingGroup.valid || !formPoliticsGroup.valid"
-				[text]="'Continuar a pagar'" [color]="'primary'"
-				(onClick)="setInfoPassengersInformation()"></app-button>
+				[disabled]="!formGroup.valid || !formBillingGroup.valid || !formPoliticsGroup.valid"
+				[text]="'Continuar a pagar'"
+				[color]="'primary'"
+				(click)="setInfoPassengersInformation()"
+			></app-button>
 		</div>
 	</div>
 </div>

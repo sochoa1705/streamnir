@@ -9,8 +9,8 @@
             <span>Caso contrario, si deseas <strong>mantener las reservas anteriores</strong> y no generar una nueva, por favor pulsa el botón <strong>“Mantener”</strong>.</span>
         </section>
         <div  class="modal__cancel__body__actions"><!---Es duplicate-->
-            <app-button  [text]="'Mantener'" [w100]="true" [color]="'outline-primary'" (onClick)="goHome()"></app-button>
-            <app-button  [text]="'Cancelar'" [w100]="true"  (onClick)="cancelBooking()"></app-button>
+            <app-button  [text]="'Mantener'" [isTabIndex]="false" [w100]="true" [color]="'outline-primary'" (onClick)="goHome()"></app-button>
+            <app-button  [text]="'Cancelar'" [isTabIndex]="false" [w100]="true"  (onClick)="cancelBooking()"></app-button>
         </div>
     </div>
 </div>

@@ -135,8 +135,8 @@
 			<app-button
 				[text]="'Realizar compra'"
 				[color]="'primary'"
-				[disabled]="!formGroupCard.valid || !formGroupPolitics.valid"
-				(onClick)="sendPayment()"
+				[disabled]="!formGroupCard.valid"
+				(click)="sendPayment()"
 			></app-button>
 		</div>
 	</div>
@@ -233,6 +233,7 @@
 					[name]="'documentType'"
 					[isRequired]="true"
 					[listItems]="listTypeDocument"
+					[default]="documentTypeField.value"
 					[labelError]="
 						documentTypeField.touched && documentTypeField!.hasError('required') ? 'Tipo es obligatorio' : ''
 					"
@@ -271,6 +272,7 @@
 					[value]="numberQuotesField.value"
 					(setErrorSelect)="numberQuotesField.markAsTouched()"
 					[disabled]="disabledCuotes"
+					[default]="numberQuotesField.value"
 				></app-select>
 			</div>
 			<div class="col_pay col-md-6 col-sm-12 col-lg-12 col-xl-6">

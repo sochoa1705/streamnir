@@ -331,14 +331,14 @@ export class FiltersafeComponent implements OnInit {
     }
 
     // let fromDate: string = this.form.getRawValue()['fromDate']
-    let fromDate: string = this.FromDate2.nativeElement.value
-    if (fromDate === undefined || fromDate === null || fromDate.trim() === '') {
+    //let fromDate: string = this.FromDate2.nativeElement.value
+    if (this.fromDate === undefined || this.fromDate === null) {
       this.errors.push({ name: this.MSG_OUTFLY, message: 'Elija La fecha' })
     }
 
     // let fromDate: string = this.form.getRawValue()['fromDate']
-    let toDate: string = this.ToDate2.nativeElement.value
-    if (toDate === undefined || toDate === null || toDate.trim() === '') {
+    //let toDate: string = this.ToDate2.nativeElement.value
+    if (this.toDate === undefined || this.toDate === null) {
       this.errors.push({ name: this.MSG_INFLY, message: 'Elija la fecha de llegada' })
     }
 
@@ -354,13 +354,17 @@ export class FiltersafeComponent implements OnInit {
 		this.toDate=valuesDateRange.arrivalDate;
 		this.fromDate=valuesDateRange.departureDate;
 
+    console.log(valuesDateRange,'seee ')
+    console.log('quotes')
     if (this.validForm()) {
-      let fechaSalida = this.FromDate2.nativeElement.value
+      console.log('valid ok')
+      this.confirmPassengers();
+      /*let fechaSalida = this.FromDate2.nativeElement.value
       let fechaVuelta = this.ToDate2.nativeElement.value
       let startDate = moment(fechaSalida, 'D/M/YYYY').format('DD/MM/YYYY')
-      let endDate = moment(fechaVuelta, 'D/M/YYYY').format('DD/MM/YYYY')
+      let endDate = moment(fechaVuelta, 'D/M/YYYY').format('DD/MM/YYYY')*/
 
-      this.insuranceQuoteForm.removeControl('fromDate')
+     /* this.insuranceQuoteForm.removeControl('fromDate')
       this.insuranceQuoteForm.removeControl('toDate')
       this.insuranceQuoteForm.addControl('ClienteCotizacion', new FormControl(this.ClienteCotizacion))
       this.insuranceQuoteForm.addControl('countCustomers', new FormControl(this.ClienteCotizacion.length))
@@ -372,29 +376,65 @@ export class FiltersafeComponent implements OnInit {
       this.insuranceQuoteForm.removeControl('destinyString')
       this.insuranceQuoteForm.addControl('destinyString', new FormControl(this.destinyString()))
       //validacion fecha de nacimiento ▼
-      this.insuranceQuoteForm.addControl('aniosNacimiento', new FormControl(this.anios))
+      this.insuranceQuoteForm.addControl('aniosNacimiento', new FormControl(this.anios))*/
 
       //console.log(this.fromDate);
 
-      for (let i in this.insuranceQuoteForm.controls['passengers'].value) {
+      /*for (let i in this.insuranceQuoteForm.controls['passengers'].value) {
         let age = Number(this.insuranceQuoteForm.controls['passengers'].value[i].edad);
         this.insuranceQuoteForm.controls['passengers'].value[i].fechaNacimiento = moment().subtract(age, 'years').format('DD/MM/YYYY');
+      }*/
+
+      //let form = this.insuranceQuoteForm.value;
+      //localStorage.removeItem('Datasafe');
+
+      //localStorage.setItem('Datasafe', JSON.stringify(form));
+      //console.log('DataSafe', form)
+
+      //16/10/2023
+      const passengers=[];
+      for (let i in this.insuranceQuoteForm.controls['passengers'].value) {
+        let age = Number(this.insuranceQuoteForm.controls['passengers'].value[i].edad);
+        passengers.push({edad:age, fechaNacimiento:moment().subtract(age, 'years').format('DD/MM/YYYY')});
       }
 
-      let form = this.insuranceQuoteForm.value;
-      localStorage.removeItem('Datasafe');
+      console.log(this.insuranceQuoteForm.controls['passengers'].value, 'passenger age')
+      console.log(this.anios,'anios')
+      console.log(this.ageCustomers,'anios customer')
 
-      localStorage.setItem('Datasafe', JSON.stringify(form));
-      console.log('DataSafe', form)
+      const dataInsuranceQuote={
+        origenSafe: "510",
+        destinoSafe:  this.insuranceQuoteForm.getRawValue()['destinoSafe'],
+        passengers,
+        ClienteCotizacion: [],
+        countCustomers: 0,
+        "Edades": "25",
+        fromDate: `${this.fromDate?.day}/${this.fromDate?.month}/${this.fromDate?.year}`,
+        toDate: `${this.toDate?.day}/${this.toDate?.month}/${this.toDate?.year}`,
+        "days": "7",
+        "destinyString": {
+            "id_destino": "EUROP",
+            "descripcion_destino": "Europa",
+            "es_nacional": 0,
+            "ref_assistcard": 2
+        },
+        "aniosNacimiento": [
+            {
+                "anio": 1998,
+                "edad": 25
+            }
+        ]
+    }
       const filters = {
         destination: this.insuranceQuoteForm.getRawValue()['destinoSafe'],
-        fromDate: startDate,
-        toDate: endDate,
+        fromDate: `${this.fromDate?.day}/${this.fromDate?.month}/${this.fromDate?.year}`,
+        toDate: `${this.toDate?.day}/${this.toDate?.month}/${this.toDate?.year}`,
         passengers: this.insuranceQuoteForm.getRawValue()['passengers']
       };
 
-      localStorage.setItem('filters', JSON.stringify(filters));
-      this._router.navigateByUrl('/seguros');
+      console.log('DataFilters', filters)
+      //localStorage.setItem('filters', JSON.stringify(filters));
+      //this._router.navigateByUrl('/seguros');
     }
   }
 

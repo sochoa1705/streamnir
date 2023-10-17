@@ -4,7 +4,7 @@
 			<div class="card__passenger__header__title">
 				<img alt="img_passenger" src="./assets/svg/passenger.svg" />
 				<span>{{ type == 'ADT' ? 'Adulto ' : type == 'CNN' ? ' Menor' : ' Infante' }} {{ index }}</span>
-				<img alt="img_passenger" *ngIf="validForm" src="./assets/svg/checkSuccess.svg" />
+				<img alt="img_passenger" *ngIf="isSaveChanges && validForm" src="./assets/svg/checkSuccess.svg" />
 			</div>
 			<img alt="img_passenger"
 				class="arrow"
@@ -21,6 +21,7 @@
 							[placeholder]="'Seleccionar'"
 							[name]="'documentType'"
 							[isRequired]="true"
+							[default]="documentTypeField.value"
 							[listItems]="[
 								{
 									value: '0',
@@ -103,6 +104,7 @@
 								[placeholder]="'Día'"
 								[isRequired]="true"
 								[listItems]="daysFilter"
+								[default]="dayField.value"
 								[name]="'day'"
 								[value]="dayField.value"
 								[labelError]="dayField.touched && dayField!.hasError('required') ? 'Dia inválido' : ''"
@@ -114,6 +116,7 @@
 								[listItems]="monthsFilter"
 								[isRequired]="true"
 								[name]="'month'"
+								[default]="monthField.value"
 								[labelError]="monthField.touched && monthField!.hasError('required') ? 'Mes inválido' : ''"
 								[value]="monthField.value"
 								(setErrorSelect)="monthField.markAsTouched()"
@@ -124,6 +127,7 @@
 								[name]="'year'"
 								[isRequired]="true"
 								[value]="yearField.value"
+								[default]="yearField.value"
 								[labelError]="yearField.touched && yearField!.hasError('required') ? 'Año inválido' : ''"
 								(setErrorSelect)="yearField.markAsTouched()"
 							></app-select>
@@ -135,7 +139,9 @@
 						[isRequired]="true"
 						[listItems]="contryList"
 						[name]="'nationality'"
+						[default]="nationalityField.value"
 						[isSearch]="true"
+						[isNationality]="true"
 						[labelError]="
 							nationalityField.touched && nationalityField!.hasError('required') ? 'Nacionalidad es obligatorio' : ''
 						"
@@ -158,6 +164,7 @@
 								name: 'Femenino'
 							}
 						]"
+						[default]="genderField.value"
 						[labelError]="genderField.touched && genderField!.hasError('required') ? 'Género es obligatorio' : ''"
 						(setErrorSelect)="genderField.markAsTouched()"
 					></app-select>

@@ -9,6 +9,7 @@ import { GlobalComponent } from 'src/app/shared/global';
 import { dataSteps } from 'src/app/shared/constant-init';
 import { ModalInsuranceComponent } from './modal-insurance/modal-insurance.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-baggage-insurance',
@@ -19,6 +20,7 @@ export class BaggageInsuranceComponent implements OnInit {
 	constructor(
 		private _modalService: NgbModal,
 		private _checkoutService: CheckoutService,
+		private _router:Router
 	) {}
 	showBaggageDropdown = true;
 	showDropdownExtras = false;
@@ -105,7 +107,7 @@ export class BaggageInsuranceComponent implements OnInit {
 	nextPage() {
 		dataSteps[0].check = true;
 		dataSteps[1].active = true;
-		this.changeStep.emit(1);
+		this._checkoutService.changeStep.emit(1);
 		window.scroll({ top: 0, behavior: 'smooth' });
 	}
 

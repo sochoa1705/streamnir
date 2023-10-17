@@ -13,19 +13,31 @@ import { RPurchare } from '../models/rq-checkout-save-booking';
 import { RDiscount, RDiscountCupon } from '../models/rq-checkout-discount';
 import { RContact } from '../models/rq-checkout-contact';
 import { IValidateBooking, RValidateBooking } from '../models/rq-checkout-validate-booking';
+import { Billing, Contact, Passenger, PassengersInfo, passengerInfoInit } from '../models/rq-checkout-passengers';
+import { Payment, paymentInit } from '../models/rq-checkout-payment';
+
 @Injectable({ providedIn: 'root' })
 export class CheckoutService {
 	constructor(
-		private _router: Router,
 		private _httpClient: HttpClient
 	) {}
 	selectUpSell = new EventEmitter();
 	changeStep = new EventEmitter();
 	isFinishedPay = new EventEmitter();
 	applyCupon = new EventEmitter();
+	
+	openModalUnSavedPassenger = new EventEmitter();
+	openModalUnSavedPayment = new EventEmitter();
 
+	dataInfoPassengers:PassengersInfo = {...passengerInfoInit};
+	dataInfoPayment:Payment = {...paymentInit}
+	isSaveDataPassenger=true;
+	isSaveDataPayment=true;
+	isChangesPayment=false;
+	
 	itsIncludeInsurance = false;
 	upSellSelect: IUpSell = dataUpSell[0];
+	currentIndexStep=0;
 	API_KAYAK = 'https://motorvuelos.expertiatravel.com';
 
 	selectUpSellModal() {
@@ -37,6 +49,25 @@ export class CheckoutService {
 		dataSteps[index + 1].active = true;
 		dataSteps[index].check = status;
 		this.changeStep.emit();
+	}
+
+	updateDataPassenger(passenger:Passenger){
+		const indexPassenger = this.dataInfoPassengers.passengers.findIndex(object => object.index === passenger.index);
+		if(indexPassenger==-1) {
+			this.dataInfoPassengers.passengers.push({...passenger});
+			this.dataInfoPassengers.passengers.sort((a, b) => a.index - b.index);
+		}
+		else {
+			this.dataInfoPassengers.passengers[indexPassenger]={...passenger}
+		}
+	}
+
+	editSaveFormContact(){
+		
+	}
+
+	updateDataContact(contact:Contact, billing:Billing, acceptPolitics:boolean){
+		this.dataInfoPassengers={...this.dataInfoPassengers, contact, billing,acceptPolitics}
 	}
 
 	setPricingValuesByUpSell() {
