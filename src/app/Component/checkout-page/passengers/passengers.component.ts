@@ -401,12 +401,14 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 		const modalRef = this._modalService.open(ModalUnsavedComponent, {
 			centered: true,
 			backdrop: 'static',
-			size: 'md'
+			size: 'lg'
 		});
 		modalRef.result.then((result) => {
 			if (result == 'saved') {
 				this.setInfoPassengersInformation(true);
-			} else {
+			}
+			
+			if(result == 'dont-save') {
 				this._checkoutService.isSaveDataPassenger = true;
 				this.nextNavigate();
 			}

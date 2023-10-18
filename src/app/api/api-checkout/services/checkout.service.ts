@@ -56,6 +56,7 @@ export class CheckoutService {
 		GlobalComponent.paramsSearch = {};
 		GlobalComponent.tokenMotorVuelo = '';
 		GlobalComponent.appBooking={...dataInitBooking};
+		this.currentIndexStep=0;
 	}
 
 	setValueChangeStep(index: number, status: boolean, next = true) {

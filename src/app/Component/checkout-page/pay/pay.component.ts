@@ -462,7 +462,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		const modalRef = this._modalService.open(ModalUnsavedComponent, {
 			centered: true,
 			backdrop: 'static',
-			size: 'md'
+			size: 'lg'
 		});
 		modalRef.result.then((result) => {
 			if (result == 'saved') {
@@ -475,7 +475,9 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 					};
 					this.nextNavigate();
 				}else this.showErrorForm();
-			} else this.nextNavigate();
+			}
+
+			if(result=='dont-save') this.nextNavigate();
 		});
 	}
 
