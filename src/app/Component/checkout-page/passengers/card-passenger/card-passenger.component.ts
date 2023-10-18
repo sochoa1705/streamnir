@@ -83,7 +83,7 @@ export class CardPassengerComponent implements OnInit, OnDestroy, AfterViewInit 
 		this.setRegex();
 		this.onChangesForm();
 		this.indexField.setValue(this.indexCard);
-		if (GlobalComponent.appBooking.passengers.length > 0) {
+		if (this._checkoutService.dataInfoPassengers.passengers.length > 0) {
 			this.setValuesInit();
 		}
 	}
@@ -102,7 +102,6 @@ export class CardPassengerComponent implements OnInit, OnDestroy, AfterViewInit 
 		this.dataFormPrev = this._checkoutService.dataInfoPassengers.passengers[this.indexCard];
 		this.initialValues=this.dataFormPrev;
 		this.formGroup.setValue(this.dataFormPrev);
-		console.log(this.dataFormPrev, 'pasajerooo')
 		this.numberDocument = this.documentNumberField.value;
 		this.isSaveChanges = true;
 		this.validForm=true;
