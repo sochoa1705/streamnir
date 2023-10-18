@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { dataUpSell } from 'src/app/Component/checkout-page/utils';
 import { GlobalComponent } from 'src/app/shared/global';
-import { dataSteps } from 'src/app/shared/constant-init';
+import { dataInitBooking, dataSteps } from 'src/app/shared/constant-init';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import moment from 'moment';
 import { REmail } from '../models/rq-checkout-email';
@@ -44,6 +44,18 @@ export class CheckoutService {
 	selectUpSellModal() {
 		this.setPricingValuesByUpSell();
 		this.selectUpSell.emit();
+	}
+
+	resetValuesForms(){
+		this.isSaveDataPassenger=true;
+		this.dataInfoPassengers={...passengerInfoInit};
+		this.dataInfoPayment={...paymentInit};
+		this.isSaveDataPayment=true;
+		this.isChangesPayment=false;
+		delete GlobalComponent.appBooking.secure;
+		GlobalComponent.paramsSearch = {};
+		GlobalComponent.tokenMotorVuelo = '';
+		GlobalComponent.appBooking={...dataInitBooking};
 	}
 
 	setValueChangeStep(index: number, status: boolean, next = true) {
