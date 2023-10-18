@@ -23,6 +23,7 @@ import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.serv
 import { passengerInfoInit } from 'src/app/api/api-checkout/models/rq-checkout-passengers';
 import { UserIdleService } from "angular-user-idle";
 import { Subscription } from 'rxjs';
+import { paymentInit } from 'src/app/api/api-checkout/models/rq-checkout-payment';
 
 interface Item {
 	value: any;
@@ -142,11 +143,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 
 	reloadPageResult() {
 		this.isReload = true;
-		GlobalComponent.paramsSearch = {};
-		GlobalComponent.tokenMotorVuelo = '';
-		GlobalComponent.appBooking={...dataInitBooking};
-		this._checkoutService.isSaveDataPassenger=true;
-		this._checkoutService.dataInfoPassengers={...passengerInfoInit};
+		this._checkoutService.resetValuesForms();
 		this.isLoader = true;
 		this._searchFiltersService.isLoader.emit(true);
 		this.exchangeRate = null;
@@ -903,6 +900,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 				modalDialogClass: 'inactivity-dialog',
 				windowClass: 'upSellModalClass',
 			});
+			modalRef.componentInstance.firstTwoFlights=[...this.allDataGroups].slice(0, this.allDataGroups.length < 2 ? this.allDataGroups.length : 2);
 			modalRef.result.finally(() => this.userIdle.startWatching())
 		  }
 		})

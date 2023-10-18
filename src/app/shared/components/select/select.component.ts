@@ -61,7 +61,7 @@ export class SelectComponent implements OnInit, OnChanges {
 				const nameCountry = GlobalComponent.listCountries.find(item=>item.code==this.default)?.name;
 				this.valueName= nameCountry || ''; 
 			}else{
-				this.valueName=this.listItems.filter(item=>item.value=this.default)[0].name;
+				this.valueName=this.listItems.filter(item=>item.value==this.default)[0].name;
 			}
 		}
 	}

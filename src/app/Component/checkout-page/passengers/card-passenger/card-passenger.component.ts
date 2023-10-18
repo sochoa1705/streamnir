@@ -3,7 +3,6 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import moment from 'moment';
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
 import { Subscription } from 'rxjs';
-import { passengerInfoInit } from 'src/app/api/api-checkout/models/rq-checkout-passengers';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { SelectComponent } from 'src/app/shared/components/select/select.component';
 import { GlobalComponent } from 'src/app/shared/global';
@@ -103,6 +102,7 @@ export class CardPassengerComponent implements OnInit, OnDestroy, AfterViewInit 
 		this.dataFormPrev = this._checkoutService.dataInfoPassengers.passengers[this.indexCard];
 		this.initialValues=this.dataFormPrev;
 		this.formGroup.setValue(this.dataFormPrev);
+		console.log(this.dataFormPrev, 'pasajerooo')
 		this.numberDocument = this.documentNumberField.value;
 		this.isSaveChanges = true;
 		this.validForm=true;

@@ -230,7 +230,7 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 					if (this.isShowDiscountCupon) {
 						this.isShowDiscountCupon = false;
 						this.totalDiscountCupon = 0;
-						this.childPagePay.cleanInputCodeCupon();
+						this._checkoutService.dataInfoPayment.booking.CuponPromoWeb='';
 					}
 				} else this.isShowDiscount = false;
 			}, error: () => {
