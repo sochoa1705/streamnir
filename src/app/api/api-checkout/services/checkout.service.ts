@@ -31,6 +31,7 @@ export class CheckoutService {
 
 	dataInfoPassengers:PassengersInfo = {...passengerInfoInit};
 	dataInfoPayment:Payment = {...paymentInit}
+
 	isSaveDataPassenger=true;
 	isSaveDataPayment=true;
 	isChangesPayment=false;
@@ -60,10 +61,6 @@ export class CheckoutService {
 		else {
 			this.dataInfoPassengers.passengers[indexPassenger]={...passenger}
 		}
-	}
-
-	editSaveFormContact(){
-		
 	}
 
 	updateDataContact(contact:Contact, billing:Billing, acceptPolitics:boolean){

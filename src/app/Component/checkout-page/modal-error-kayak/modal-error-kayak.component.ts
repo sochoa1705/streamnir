@@ -14,6 +14,7 @@ export class ModalErrorKayakComponent implements OnInit {
   constructor(private activeModal: NgbActiveModal,private _accountService: AccountsService,private router: Router) { }
   
   ngOnInit(): void {
+    
   }
 
   redirectSearch(){
@@ -35,6 +36,7 @@ export class ModalErrorKayakComponent implements OnInit {
       this.router.navigateByUrl(url);
     }
     this.activeModal.close();
+    
   }
 
   convertToDDMMYYYY(date:string): any{

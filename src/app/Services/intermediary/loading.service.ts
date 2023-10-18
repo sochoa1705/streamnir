@@ -18,7 +18,6 @@ export class LoadingService {
       size: "large",
       bdColor: 'rgba(0, 0, 0, 0.8)',
       color: "#051977",
-
     });
   }
 

@@ -16,6 +16,7 @@ export class ModalErrorComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private _router:Router) { }
 
   ngOnInit(): void {
+    
   }
 
   goHome(){

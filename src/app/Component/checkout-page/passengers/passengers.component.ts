@@ -366,7 +366,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 		return '';
 	}
 
-	openModalError(message: string, isSuccessCancel = false) {
+	openModalError(message: string, isSuccessCancel = false) {		
 		const modalRef = this._modalService.open(ModalErrorComponent, {
 			centered: true,
 			backdrop: 'static',
@@ -387,6 +387,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 		modalRef.componentInstance.message = message;
 		modalRef.componentInstance.validateBooking = validateBooking;
 		modalRef.result.then((result) => {
+			
 			if (result == 'success') {
 				dataSteps[1].check = true;
 				dataSteps[2].active = true;

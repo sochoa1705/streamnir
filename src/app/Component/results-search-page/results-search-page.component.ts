@@ -903,6 +903,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 				modalDialogClass: 'inactivity-dialog',
 				windowClass: 'upSellModalClass',
 			});
+			modalRef.componentInstance.firstTwoFlights=[...this.allDataGroups].slice(0, this.allDataGroups.length < 2 ? this.allDataGroups.length : 2);
 			modalRef.result.finally(() => this.userIdle.startWatching())
 		  }
 		})

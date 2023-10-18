@@ -103,7 +103,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	}
 	formPolitics = {
 		acceptAdvertising: new FormControl(false)
-	};
+	}
 
 	constructor(
 		private _checkoutService: CheckoutService,
@@ -134,6 +134,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.getScreenWidth = window.innerWidth;
 		if (this._checkoutService.isChangesPayment) {
 			this.setValuesInit();
+			this.setValidatorsCreditCard();
 		}
 	}
 
@@ -167,6 +168,10 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.formGroupBooking.setValue(data.booking);
 		this.acceptPoliticsField.setValue(data.acceptAdvertising);
 		this.isPayCard = data.booking.paymentType == 0 ? true : false;
+		if(this.cuponPromoWebField.value!==''){
+			this.isValidPromotionalCode=true; 
+			this.isApplyCupon=true;
+		}
 	}
 
 	changeCupon() {
@@ -259,6 +264,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	resetDiscountByCupon() {
 		this.isValidPromotionalCode = false;
 		this.discountCupon = null;
+		this._checkoutService.dataInfoPayment.booking.CuponPromoWeb='';
 		if (this.isApplyCupon) {
 			this.isApplyCupon = false;
 			this._checkoutService.applyCupon.emit(null);
@@ -314,7 +320,6 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	chageTypeDocument() {
 		this.documentTypeField.valueChanges.subscribe((res) => {
 			if (res !== '' && this.isPayCard) {
-				this.documentNumberField.setValue('');
 				this.documentNumberField.clearValidators();
 				const regexNroDocument = this.documentTypeField.value == 0 ? /^\d{8}(?:[-\s]\d{4})?$/ : /^[A-Za-z0-9]{7,12}$/;
 				this.documentNumberField.setValidators([Validators.required, Validators.pattern(regexNroDocument)]);
@@ -332,18 +337,19 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 				);
 				this.paymentTypeField.setValue(1);
 				this.isPayCard = false;
-			} else {
-				this.initConfigurationOpenPay(true);
-			}
-		} else {
-			this.formGroupCard.markAllAsTouched();
+			} else this.initConfigurationOpenPay(true);
+		} else this.showErrorForm();
+		
+	}
+
+	showErrorForm(){
+		this.formGroupCard.markAllAsTouched();
 			window.scroll({ top: 0, behavior: 'smooth' });
 			this._notification.showNotificacion(
 				'Datos sin completar',
 				'Parece que algunos de tus datos son inválidos. Por favor, inténtalo nuevamente.',
 				7
 			);
-		}
 	}
 
 	proccessPayment() {
@@ -460,20 +466,22 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		});
 		modalRef.result.then((result) => {
 			if (result == 'saved') {
-				this._checkoutService.isChangesPayment = true;
-				this._checkoutService.dataInfoPayment = {
-					booking: this.formGroupBooking.value,
-					creditCard: this.formGroupCard.value,
-					acceptAdvertising: this.acceptPoliticsField.value
-				};
-			} else {
-				this._checkoutService.isSaveDataPassenger = true;
-				this.nextNavigate();
-			}
+				if (this.formGroupCard.valid) {
+					const cuponWeb=this.isValidPromotionalCode?this.cuponPromoWebField.value:''
+					this._checkoutService.dataInfoPayment = {
+						booking: {...this.formGroupBooking.value, CuponPromoWeb:cuponWeb},
+						creditCard: {...this.formGroupCard.value},
+						acceptAdvertising:this.acceptPoliticsField.value
+					};
+					this.nextNavigate();
+				}else this.showErrorForm();
+			} else this.nextNavigate();
 		});
 	}
 
 	nextNavigate() {
+		this._checkoutService.isSaveDataPayment=true;
+		this._checkoutService.isChangesPayment=true;
 		const index = this._checkoutService.currentIndexStep;
 		this._router.navigateByUrl(index == 0 ? '/booking' : index == -1 ? '/' : '/booking/pasajeros');
 	}
@@ -539,6 +547,6 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	}
 
 	get acceptPoliticsField(): AbstractControl {
-		return this.formGroupPolitics.get('acceptPolitics')!;
+		return this.formGroupPolitics.get('acceptAdvertising')!;
 	}
 }
