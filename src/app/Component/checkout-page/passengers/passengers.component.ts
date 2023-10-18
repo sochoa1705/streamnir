@@ -400,8 +400,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 	openModalUnsaved() {
 		const modalRef = this._modalService.open(ModalUnsavedComponent, {
 			centered: true,
-			backdrop: 'static',
-			size: 'lg'
+			backdrop: 'static'
 		});
 		modalRef.result.then((result) => {
 			if (result == 'saved') {

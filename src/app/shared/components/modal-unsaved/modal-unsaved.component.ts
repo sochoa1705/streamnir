@@ -14,7 +14,6 @@ export class ModalUnsavedComponent implements OnInit {
   isRedirectHome=false;
   ngOnInit(): void {
     this.isRedirectHome=this._checkoutService.currentIndexStep==-1 ? true:false;
-    console.log(this.isRedirectHome,'is redirect')
   }
 
   closeSave(isSaved:boolean){
@@ -22,7 +21,10 @@ export class ModalUnsavedComponent implements OnInit {
   }
 
   redirectHome(){
-     this._router.navigateByUrl('/');
+    this._checkoutService.isChangesPayment=false;
+    this._checkoutService.isSaveDataPassenger=true;
+    this._checkoutService.isSaveDataPayment=true;
+    this._router.navigateByUrl('/');
   }
 
 }

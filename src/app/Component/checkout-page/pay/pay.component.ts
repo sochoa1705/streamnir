@@ -462,7 +462,6 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		const modalRef = this._modalService.open(ModalUnsavedComponent, {
 			centered: true,
 			backdrop: 'static',
-			size: 'lg'
 		});
 		modalRef.result.then((result) => {
 			if (result == 'saved') {

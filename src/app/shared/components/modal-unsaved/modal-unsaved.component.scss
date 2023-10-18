@@ -47,5 +47,16 @@
     section{
         margin: 0;
     }
+
+	@media (min-width: 1199px){
+		min-width: 500px;
+		margin-left: -20px;
+		border-radius: 12px;
+		background: white;
+		&.isHome{
+			min-width: 590px;
+			margin-left: -20px;
+		}
+	}
 }
 
