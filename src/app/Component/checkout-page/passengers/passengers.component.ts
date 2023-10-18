@@ -422,6 +422,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.formSubscriptionBilling.unsubscribe();
 		this.formSubscriptionPolitics.unsubscribe();
 		this.openModalSubscription.unsubscribe();
+		this._modalService.dismissAll();
 	}
 
 	get nameField(): AbstractControl {

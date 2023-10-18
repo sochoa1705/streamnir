@@ -48,6 +48,7 @@ export class BaggageInsuranceComponent implements OnInit {
 		this.detailFlight = GlobalComponent.appGroupSeleted;
 		this.activeArrowRight = this.detailFlight.departure.length > 1 ? true : false;
 		this.isDomestic = GlobalComponent.isDomestic;
+		if(GlobalComponent.appBooking.secure) this.itsIncludeInsurance=true;
 		if (GlobalComponent.upSellSeleted) {
 			this.itsIncludeUpSell = true;
 			this.showBaggageDropdown = false;
@@ -114,5 +115,9 @@ export class BaggageInsuranceComponent implements OnInit {
 	changeSlide($event:any){
 		this.activeArrowLeft= $event==0 ? false : true;
 		this.activeArrowRight = $event==this.detailFlight.departure.length-1 ? false : true;
+	}
+
+	ngOnDestroy() {
+		this._modalService.dismissAll();
 	}
 }

@@ -21,6 +21,8 @@ import { SortByComponent } from './sort-by/sort-by.component';
 import { dataInitBooking } from 'src/app/shared/constant-init';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { passengerInfoInit } from 'src/app/api/api-checkout/models/rq-checkout-passengers';
+import { UserIdleService } from "angular-user-idle";
+import { Subscription } from 'rxjs';
 
 interface Item {
 	value: any;
@@ -77,7 +79,8 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 		private _loadingService: LoadingService,
 		private _searchFiltersService: SearchFiltersService,
 		private _modalService: NgbModal,
-		private _checkoutService:CheckoutService
+		private _checkoutService:CheckoutService,
+		private userIdle: UserIdleService
 	) {}
 
 	allDataGroups: Group[] = [];
@@ -128,9 +131,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 	params: Params;
 	isReload = false;
 
-	inactivityTimer: any;
-	inactivityDuration: number = environment.resultsInactivityTime;
-	isOpenModalInactivity=false;
+	idleSubscriber: Subscription;
 	dataSearch:Search;
 	@ViewChild('childSort') childSort!: SortByComponent;
 
@@ -265,7 +266,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 						});
 						this.getValuesByFilterDuration();
 						this.valuesFilterDurationInit = { ...this.valuesFilterDuration };
-						this.initIdle();
+						this.configIdlePopup();
 						this.childSort.resetSort();
 					}
 				}
@@ -309,7 +310,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 					});
 					this.valuesFilterDurationInit = { ...this.valuesFilterDuration };
 					this._searchFiltersService.isFinishGDS.emit();
-					this.initIdle();
+					this.configIdlePopup();
 					this.childSort.resetSort();
 				} else this.showNotResults = true;
 			},
@@ -890,41 +891,27 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 		this.sortData();
 	}
 
-	resetTabsSort(){
-
-	}
-
-	initIdle(){
-		this.inactivityTimer = setTimeout(() => this.onInactivity(), this.inactivityDuration);
-	}
-
-	onInactivity(): void {
-		if(!this.isOpenModalInactivity && this.allDataGroups.length > 1){
+	configIdlePopup() {
+		this.userIdle.setConfigValues({ idle: environment.resultsInactivityTime })
+		this.userIdle.startWatching()
+		this.idleSubscriber = this.userIdle.onTimerStart().subscribe((count: any) => {
+		  if (count) {
 			this._modalService.dismissAll();
+			this.userIdle.stopWatching()
 			const modalRef = this._modalService.open(IdlePopupComponent,{
 				centered: true,
 				modalDialogClass: 'inactivity-dialog',
 				windowClass: 'upSellModalClass',
-			  });
-			modalRef.componentInstance.firstTwoFlights=[...this.allDataGroups].slice(0, this.allDataGroups.length < 2 ? this.allDataGroups.length : 2);
-			this.isOpenModalInactivity=true;
-			modalRef.result.then(() => {
-				this.resetTimer();
-				this.isOpenModalInactivity=false;
-			})
-		}
+			});
+			modalRef.result.finally(() => this.userIdle.startWatching())
+		  }
+		})
 	}
 
-	// Reiniciar el temporizador cuando se detecta actividad
-	@HostListener('document:mousemove', ['$event'])
-	@HostListener('document:keydown', ['$event'])
-	resetTimer(): void {
-		clearTimeout(this.inactivityTimer);
-		this.inactivityTimer = setTimeout(() => this.onInactivity(), this.inactivityDuration);
-	}
 
 	ngOnDestroy() {
-		clearTimeout(this.inactivityTimer);
-		this.allDataGroups=[];
+		this._modalService.dismissAll();
+		this.userIdle.stopWatching();
+		this.idleSubscriber.unsubscribe();
 	}
 }

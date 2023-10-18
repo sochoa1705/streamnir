@@ -96,7 +96,7 @@ export const environment = {
     ApiKey: 'pk_c74367b872364e91b3143c5d87d64bb8'
   },
   urlApiDatosCliente: 'https://servicio.nmviajes.com:9443/Ecommerce',
-  resultsInactivityTime: 300000,
+  resultsInactivityTime: 300,
   SEO: {
     home: {
       url: 'https://www.nmviajes.com/',

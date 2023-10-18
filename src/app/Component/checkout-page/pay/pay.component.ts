@@ -483,6 +483,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.formSubscriptionCreditCard.unsubscribe();
 		this.formSubscriptionPolitics.unsubscribe();
 		this.openModalSubscription.unsubscribe();
+		this._modalService.dismissAll();
 	}
 
 	get cardNumberField(): AbstractControl {
