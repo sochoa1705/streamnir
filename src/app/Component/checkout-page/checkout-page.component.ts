@@ -19,6 +19,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalErrorKayakComponent } from './modal-error-kayak/modal-error-kayak.component';
 import { environment } from 'src/environments/environment';
 import { ModalInactivityComponent } from './modal-inactivity/modal-inactivity.component';
+import { Subscription } from 'rxjs';
+import { UserIdleService } from 'angular-user-idle';
 
 @Component({
 	selector: 'app-checkout-page',
@@ -53,10 +55,7 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 
 	paramMap:ParamMap;
 	
-	inactivityTimer: any;
-	inactivityDuration: number = environment.resultsInactivityTime;
-	isOpenModalInactivity=false;
-  	
+	idleSubscriber: Subscription;
 
 	@ViewChild('childPagePay')
 	childPagePay!: PayComponent;
@@ -109,7 +108,8 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 		private _routeActivate: ActivatedRoute,
 		private _tokenService: TokenService,
 		private _searchService: SearchService,
-		private _modalService:NgbModal
+		private _modalService:NgbModal,
+		private userIdle: UserIdleService
 	) {
 		this._checkoutService.selectUpSell.subscribe({
 			next: () => {
@@ -162,7 +162,7 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 		this.nameUpSellSelect = GlobalComponent.upSellSeleted?.description || '';
 		this._checkoutService.totalDaysTravel();
 		this.getDiscounts();
-		this.initIdle();
+		this.configIdlePopup();
 	}
 
 
@@ -248,16 +248,12 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 		modalRef.componentInstance.params = this.paramMap;
 	}
 
-	redirectHome() {
-		this._router.navigateByUrl('/');
-	}
-
-	initIdle(){
-		this.inactivityTimer = setTimeout(() => this.onInactivity(), this.inactivityDuration);
-	}
-
-	onInactivity(): void {
-		if(!this.isOpenModalInactivity && this.pricing){
+	configIdlePopup() {
+		this.userIdle.setConfigValues({ idle: environment.resultsInactivityTime })
+		this.userIdle.startWatching()
+		this.idleSubscriber = this.userIdle.onTimerStart().subscribe((count: any) => {
+		  if (count) {
+			this.userIdle.stopWatching()
 			this._modalService.dismissAll();
 			const modalRef = this._modalService.open(ModalInactivityComponent,{
 				centered: true,
@@ -265,23 +261,17 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 				modalDialogClass: 'inactivity-dialog',
 				windowClass: 'upSellModalClass',
 			});
-			modalRef.result.then(() => {
-				this.resetTimer();
-				this.isOpenModalInactivity=false;
-			})
-		}
+			modalRef.result.finally(() => this.userIdle.startWatching())
+		  }
+		})
 	}
 
-	// Reiniciar el temporizador cuando se detecta actividad
-	@HostListener('document:mousemove', ['$event'])
-	@HostListener('document:keydown', ['$event'])
-	@HostListener('window:scroll', ['$event'])
-	resetTimer(): void {
-		clearTimeout(this.inactivityTimer);
-		this.inactivityTimer = setTimeout(() => this.onInactivity(), this.inactivityDuration);
+	redirectHome(){
+		this._router.navigateByUrl('/')
 	}
 
 	ngOnDestroy() {
-		clearTimeout(this.inactivityTimer);
+		this.userIdle.stopWatching();
+		this.idleSubscriber.unsubscribe();
 	}
 }

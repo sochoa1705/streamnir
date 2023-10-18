@@ -43,14 +43,10 @@ export class ModalFlightDetailComponent implements OnInit {
 
 	isHoursNocturne(dateDeparture: any) {
 		const hourDeparture = Number(dateDeparture.slice(11, 13));
-			if (hourDeparture >= 19) {
-				return true;
-			} else if (hourDeparture === 5) {
-				const minutes = Number(dateDeparture.slice(14, 16));
-				return minutes <= 0;
-			} else {
-				return false;
-			}
+		const minutes = Number(dateDeparture.slice(14, 16));
+		if (hourDeparture >= 19 || (hourDeparture === 5 && minutes <= 0) || (hourDeparture>=0 && hourDeparture<=4)) 
+		return true;
+		return false;
 	}
 
 	isEqualDates(dateOne:string,dateSecond:string,index:number){
