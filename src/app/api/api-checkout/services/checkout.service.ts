@@ -35,6 +35,8 @@ export class CheckoutService {
 	isSaveDataPassenger=true;
 	isSaveDataPayment=true;
 	isChangesPayment=false;
+	isFinishPayment=false;
+
 	
 	itsIncludeInsurance = false;
 	upSellSelect: IUpSell = dataUpSell[0];
@@ -52,11 +54,14 @@ export class CheckoutService {
 		this.dataInfoPayment={...paymentInit};
 		this.isSaveDataPayment=true;
 		this.isChangesPayment=false;
-		delete GlobalComponent.appBooking.secure;
 		GlobalComponent.paramsSearch = {};
 		GlobalComponent.tokenMotorVuelo = '';
+		delete dataInitBooking.secure;
 		GlobalComponent.appBooking={...dataInitBooking};
+		console.log(GlobalComponent.appBooking,'vamosso')
+		console.log(dataInitBooking, 'kana init')
 		this.currentIndexStep=0;
+		this.isFinishPayment=false;
 	}
 
 	setValueChangeStep(index: number, status: boolean, next = true) {

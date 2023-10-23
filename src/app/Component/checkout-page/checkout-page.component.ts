@@ -109,7 +109,7 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 		private _tokenService: TokenService,
 		private _searchService: SearchService,
 		private _modalService:NgbModal,
-		private userIdle: UserIdleService
+		private userIdle: UserIdleService,
 	) {
 		this._checkoutService.selectUpSell.subscribe({
 			next: () => {
