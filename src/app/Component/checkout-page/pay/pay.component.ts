@@ -119,6 +119,12 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.openModalSubscription = this._checkoutService.openModalUnSavedPayment.subscribe({
 			next: () => this.openModalUnsaved()
 		});
+
+		this._checkoutService.nextPaymentMobile.subscribe({
+			next:()=>{
+				this.sendPayment();
+			}
+		})
 	}
 
 	ngOnInit() {
@@ -462,7 +468,6 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		const modalRef = this._modalService.open(ModalUnsavedComponent, {
 			centered: true,
 			backdrop: 'static',
-			size: 'lg'
 		});
 		modalRef.result.then((result) => {
 			if (result == 'saved') {

@@ -61,108 +61,127 @@
 				</div>
 				<app-card-checkout>
 					<div class="container__page__section__contact__form">
-						<div class="container__page__section__contact__form__name">
-							<app-input
-								[label]="'Nombre'"
-								[placeholder]="'Ingresar nombre'"
-								[name]="'name'"
-								[isRequired]="true"
-								[isOnlyText]="true"
-								[maxLenght]="50"
-								[class]="nameField.touched && nameField!.invalid ? 'error' : ''"
-								[labelError]="
-									nameField.touched && nameField!.hasError('required')
-										? 'Nombre es obligatorio'
-										: nameField.touched && nameField!.hasError('maxlength')
-										? 'Debe tener max. 50 caracteres'
-										: nameField.touched && nameField!.hasError('whitespace')
-										? 'Nombre no válido'
-										: ''
-								"
-							></app-input>
-							<app-input
-								class="label_input"
-								[label]="'Apellido Paterno'"
-								[placeholder]="'Ingresar apellido paterno'"
-								[name]="'lastName'"
-								[isOnlyText]="true"
-								[isRequired]="true"
-								[maxLenght]="50"
-								[class]="lastNameField.touched && lastNameField!.invalid ? 'error' : ''"
-								[labelError]="
-									lastNameField.touched && lastNameField!.hasError('required')
-										? 'Apellido paterno es obligatorio'
-										: lastNameField.touched && lastNameField!.hasError('maxlength')
-										? 'Debe tener max. 50 caracteres'
-										: lastNameField.touched && lastNameField!.hasError('whitespace')
-										? 'Apellido paterno no válido'
-										: ''
-								"
-							></app-input>
-							<app-input
-								class="label_input"
-								[label]="'Apellido Materno'"
-								[placeholder]="'Ingresar apellido materno'"
-								[name]="'motherLastname'"
-								[isOnlyText]="true"
-								[maxLenght]="50"
-								[isRequired]="true"
-								[class]="motherLastnameField.touched && motherLastnameField!.invalid ? 'error' : ''"
-								[labelError]="
-									motherLastnameField.touched && motherLastnameField!.hasError('required')
-										? 'Apellido materno es obligatorio'
-										: motherLastnameField.touched && motherLastnameField!.hasError('maxlength')
-										? 'Debe tener max. 50 caracteres'
-										: motherLastnameField.touched && motherLastnameField!.hasError('whitespace')
-										? 'Apellido materno no válido'
-										: ''
-								"
-							></app-input>
+						<div class="row gy-3">
+							<div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+								<article>
+									<app-input
+										[label]="'Nombre'"
+										[placeholder]="'Ingresar nombre'"
+										[name]="'name'"
+										[isRequired]="true"
+										[isOnlyText]="true"
+										[maxLenght]="50"
+										[class]="nameField.touched && nameField!.invalid ? 'error' : ''"
+										[labelError]="
+											nameField.touched && nameField!.hasError('required')
+												? 'Nombre es obligatorio'
+												: nameField.touched && nameField!.hasError('maxlength')
+												? 'Debe tener max. 50 caracteres'
+												: nameField.touched && nameField!.hasError('whitespace')
+												? 'Nombre no válido'
+												: ''
+										"
+									></app-input>
+								</article>
+							</div>
+
+							<div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+								<article>
+									<app-input
+										class="label_input"
+										[label]="'Apellido Paterno'"
+										[placeholder]="'Ingresar apellido paterno'"
+										[name]="'lastName'"
+										[isOnlyText]="true"
+										[isRequired]="true"
+										[maxLenght]="50"
+										[class]="lastNameField.touched && lastNameField!.invalid ? 'error' : ''"
+										[labelError]="
+											lastNameField.touched && lastNameField!.hasError('required')
+												? 'Apellido paterno es obligatorio'
+												: lastNameField.touched && lastNameField!.hasError('maxlength')
+												? 'Debe tener max. 50 caracteres'
+												: lastNameField.touched && lastNameField!.hasError('whitespace')
+												? 'Apellido paterno no válido'
+												: ''
+										"
+									></app-input>
+								</article>
+							</div>
+
+							<div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+								<article>
+									<app-input
+										class="label_input"
+										[label]="'Apellido Materno'"
+										[placeholder]="'Ingresar apellido materno'"
+										[name]="'motherLastname'"
+										[isOnlyText]="true"
+										[maxLenght]="50"
+										[isRequired]="true"
+										[class]="motherLastnameField.touched && motherLastnameField!.invalid ? 'error' : ''"
+										[labelError]="
+											motherLastnameField.touched && motherLastnameField!.hasError('required')
+												? 'Apellido materno es obligatorio'
+												: motherLastnameField.touched && motherLastnameField!.hasError('maxlength')
+												? 'Debe tener max. 50 caracteres'
+												: motherLastnameField.touched && motherLastnameField!.hasError('whitespace')
+												? 'Apellido materno no válido'
+												: ''
+										"
+									></app-input>
+								</article>
+							</div>
+
+							<div class="col-xl-6 col-md-12 col-sm-12">
+								<article>
+									<div class="container__page__section__contact__form__phone label_input">
+										<span
+											>Código <span class="required">*</span>
+											<span class="text-left">Número de celular <span class="required">*</span></span></span
+										>
+										<ngx-intl-tel-input
+											[preferredCountries]="preferredCountries"
+											[enableAutoCountrySelect]="true"
+											[enablePlaceholder]="true"
+											[customPlaceholder]="'Ingresar número'"
+											[searchCountryFlag]="true"
+											[searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+											[selectFirstCountry]="false"
+											[selectedCountryISO]="CountryISO.Peru"
+											[maxLength]="12"
+											[phoneValidation]="true"
+											[separateDialCode]="separateDialCode"
+											[numberFormat]="PhoneNumberFormat.National"
+											name="fullPhone"
+											formControlName="fullPhone"
+										>
+										</ngx-intl-tel-input>
+										<span class="error" *ngIf="fullPhoneField.touched && fullPhoneField!.invalid">Número inválido</span>
+									</div>
+								</article>
+							</div>
+							<div class="col-xl-6 col-md-12 col-sm-12">
+								<article>
+									<app-input
+										class="label_input"
+										[label]="'Correo '"
+										[placeholder]="'Ingresar correo'"
+										[name]="'email'"
+										[isRequired]="true"
+										[maxLenght]="50"
+										[class]="emailField.touched && emailField!.invalid ? 'error' : ''"
+										[labelError]="
+											emailField.touched && emailField!.hasError('required')
+												? 'Email es obligatorio'
+												: emailField.touched && emailField!.hasError('email')
+												? 'Email inválido'
+												: ''
+										"
+									></app-input>
+								</article>
+							</div>
 						</div>
-						<section>
-							<div class="container__page__section__contact__form__phone label_input">
-								<span
-									>Código <span class="required">*</span>
-									<span class="text-left">Número de celular <span class="required">*</span></span></span
-								>
-								<ngx-intl-tel-input
-									[preferredCountries]="preferredCountries"
-									[enableAutoCountrySelect]="true"
-									[enablePlaceholder]="true"
-									[customPlaceholder]="'Ingresar número'"
-									[searchCountryFlag]="true"
-									[searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
-									[selectFirstCountry]="false"
-									[selectedCountryISO]="CountryISO.Peru"
-									[maxLength]="12"
-									[phoneValidation]="true"
-									[separateDialCode]="separateDialCode"
-									[numberFormat]="PhoneNumberFormat.National"
-									name="fullPhone"
-									formControlName="fullPhone"
-								>
-								</ngx-intl-tel-input>
-								<span class="error" *ngIf="fullPhoneField.touched && fullPhoneField!.invalid">Número inválido</span>
-							</div>
-							<div class="container__page__section__contact__form__email">
-								<app-input
-									class="label_input"
-									[label]="'Correo '"
-									[placeholder]="'Ingresar correo'"
-									[name]="'email'"
-									[isRequired]="true"
-									[maxLenght]="50"
-									[class]="emailField.touched && emailField!.invalid ? 'error' : ''"
-									[labelError]="
-										emailField.touched && emailField!.hasError('required')
-											? 'Email es obligatorio'
-											: emailField.touched && emailField!.hasError('email')
-											? 'Email inválido'
-											: ''
-									"
-								></app-input>
-							</div>
-						</section>
 					</div>
 				</app-card-checkout>
 			</div>

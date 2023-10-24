@@ -1,5 +1,4 @@
-import { registerLocaleData } from '@angular/common';
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Group, PricingDetail } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { GlobalComponent } from 'src/app/shared/global';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
@@ -10,7 +9,6 @@ import { dataInitBooking } from 'src/app/shared/constant-init';
 import { LoadingService } from 'src/app/Services/intermediary/loading.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
-import localeEs from '@angular/common/locales/es';
 import moment from 'moment';
 
 @Component({
@@ -36,6 +34,8 @@ export class ModalFlightDetailComponent implements OnInit {
 		private _checkoutService: CheckoutService,
 	) {
 	}
+
+	getScreenWidth = window.innerWidth;
 
 	ngOnInit() {
 		
@@ -83,7 +83,8 @@ export class ModalFlightDetailComponent implements OnInit {
 							this._modalService.open(ModalFeeComponent, {
 								centered: true,
 								backdrop: 'static',
-								windowClass: res.length <= 3 ? 'modal-detail-fee' :'modal-detail-fee-swiper'
+								size: this.getScreenWidth <= 1199 ? 'lg':'',
+								windowClass: this.getScreenWidth <= 1199 ? '' : res.length <= 3 ? 'modal-detail-fee':'modal-detail-fee-swiper'
 							});
 
 						} else this.redirectCheckout();
@@ -167,5 +168,12 @@ export class ModalFlightDetailComponent implements OnInit {
 		this._loadingService.idle();
 		this.router.navigateByUrl('/booking');
 		this.activeModal.close();
+	}
+
+	@HostListener('window:resize', ['$event'])
+	onResize(){
+		if (this.getScreenWidth !== window.innerWidth) {
+			this.getScreenWidth = window.innerWidth;
+		}
 	}
 }

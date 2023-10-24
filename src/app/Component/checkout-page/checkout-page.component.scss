@@ -215,6 +215,10 @@
 		}
 	}
 
+	&__actions{
+		display: none;
+	}
+
 	@media (max-width: 1304px) {
 		padding: 242px 60px 0px 60px;
 	}
@@ -329,7 +333,9 @@
 			justify-content: center;
 			display: flex !important;
 		}
-
+		&__actions{
+			display: block;
+		}
 	}
 
 	.container__page__section__button__footer {

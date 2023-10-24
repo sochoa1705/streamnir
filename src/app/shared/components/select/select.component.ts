@@ -35,6 +35,7 @@ export class SelectComponent implements OnInit, OnChanges {
 	@Input() isEmitChanges = false;
 	@Input() isNationality = false;
 	@Input() tabIndex=0;
+	@Input() isMonth=false;
 	@Output() seletedItem = new EventEmitter();
 	@Output() setErrorSelect = new EventEmitter();
 	@ViewChildren('inputRef') inputRefs: QueryList<ElementRef>;
@@ -48,6 +49,8 @@ export class SelectComponent implements OnInit, OnChanges {
 	idRand=Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 	isClickItem=false;
 	isFocus=false;
+	getScreenWidth = window.innerWidth;
+
 	private destroy$ = new Subject<unknown>();
 
 	constructor(){}
@@ -160,6 +163,13 @@ export class SelectComponent implements OnInit, OnChanges {
 		if (this.selectBox && event.key=='Tab' && this.selectBox.nativeElement.contains(event.target) && this.isFocus) {
 			this.setErrorSelect.emit();
 			this.isFocus=false;
+		}
+	}
+
+	@HostListener('window:resize', ['$event'])
+	onResize() {
+		if (this.getScreenWidth !== window.innerWidth) {
+			this.getScreenWidth = window.innerWidth;
 		}
 	}
 }

@@ -25,6 +25,8 @@ export class CheckoutService {
 	changeStep = new EventEmitter();
 	isFinishedPay = new EventEmitter();
 	applyCupon = new EventEmitter();
+	nextPassengerMobile  = new EventEmitter();
+	nextPaymentMobile = new EventEmitter();
 	
 	openModalUnSavedPassenger = new EventEmitter();
 	openModalUnSavedPayment = new EventEmitter();
@@ -35,6 +37,8 @@ export class CheckoutService {
 	isSaveDataPassenger=true;
 	isSaveDataPayment=true;
 	isChangesPayment=false;
+	isFinishPayment=false;
+
 	
 	itsIncludeInsurance = false;
 	upSellSelect: IUpSell = dataUpSell[0];
@@ -52,11 +56,12 @@ export class CheckoutService {
 		this.dataInfoPayment={...paymentInit};
 		this.isSaveDataPayment=true;
 		this.isChangesPayment=false;
-		delete GlobalComponent.appBooking.secure;
 		GlobalComponent.paramsSearch = {};
 		GlobalComponent.tokenMotorVuelo = '';
+		delete dataInitBooking.secure;
 		GlobalComponent.appBooking={...dataInitBooking};
 		this.currentIndexStep=0;
+		this.isFinishPayment=false;
 	}
 
 	setValueChangeStep(index: number, status: boolean, next = true) {

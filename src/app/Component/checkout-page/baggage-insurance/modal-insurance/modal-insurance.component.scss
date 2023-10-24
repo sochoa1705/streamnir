@@ -21,49 +21,11 @@
 		}
 	}
 	&__body {
-		.boxTableMod {
-			display: flex;
-			flex-wrap: wrap;
-			width: 100%;
-			font-family: 'Montserrat';
-			font-weight: 500;
-			font-size: 14px;
-			line-height: 21px;
-			letter-spacing: 0.1px;
-			color: colors.$gris-750;
-			max-height: 550px;
-			overflow-y: auto;
-
-			.rowMod {
-				display: flex;
-				width: 100%;
-				border-bottom: 1px solid colors.$gris-300;
-				padding: 10px;
-
-				&.lessBorder {
-					border: none;
-				}
-
-				.colMod {
-					flex: 1 1 auto;
-					text-align: right;
-
-					&.bold {
-						font-weight: bold;
-					}
-
-					&.w60 {
-						flex: 1 1 auto;
-						text-align: left;
-					}
-
-					&.w20 {
-						width: 160px;
-						min-width: 160px;
-						max-width: 160px;
-					}
-				}
-			}
+		table{
+			border-collapse: inherit;
+		}
+		.text-end, .text-start, col{
+			font-size: 14px !important;
 		}
 	}
 }

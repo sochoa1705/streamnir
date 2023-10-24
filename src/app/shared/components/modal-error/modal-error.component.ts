@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 
 @Component({
   selector: 'app-modal-error',
@@ -13,7 +14,7 @@ export class ModalErrorComponent implements OnInit {
   @Input() isRedirect=true;
   @Input() txtButton='Volver al inicio';
 
-  constructor(public activeModal: NgbActiveModal, private _router:Router) { }
+  constructor(public activeModal: NgbActiveModal, private _router:Router, private _checkoutService:CheckoutService) { }
 
   ngOnInit(): void {
     
@@ -22,7 +23,10 @@ export class ModalErrorComponent implements OnInit {
   goHome(){
     this.activeModal.close();
     window.scroll({ top: 0, behavior: 'smooth' });
-    if(this.isRedirect)  this._router.navigateByUrl('/');
+    if(this.isRedirect) {
+      this._checkoutService.resetValuesForms();
+      this._router.navigateByUrl('/');
+    }
   }
 
 }
