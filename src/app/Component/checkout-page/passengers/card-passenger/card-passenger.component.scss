@@ -35,15 +35,7 @@
         flex-direction: column;
         gap: 24px;
         @media (max-width: 900px) {
-            padding: 0px 15px 15px 15px;    }
-        &__row,
-        &__column {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            column-gap: 20px;
-            @media (max-width: 900px) {
-                grid-template-columns: repeat(1, 1fr);            }
+            padding: 0px 15px 15px 15px;    
         }
         &__group {
             display: flex;
@@ -54,15 +46,21 @@
             span {
                 color: colors.$neutral-900;
                 margin-left: 3px;
-                font-weight: 500;
+                font-weight: 600;
                 font-family: 'Montserrat';
                 font-size: 14px;
                 line-height: 20px;
+                margin-bottom: 2px;
                 .required {
                     color: colors.$red-400;
                 }
                 .text-left {
                     margin-left: 75px;
+                }
+
+                @media (max-width: 575px) {
+                    font-size: 12px;
+                    line-height: 20px;
                 }
             }
             .error{
@@ -78,6 +76,9 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
                 column-gap: 20px;
+                @media (max-width: 575px) {
+                    column-gap: 8px;
+                }
             }
             &.phone {
                 width: 50%;
@@ -88,6 +89,19 @@
             width: 100%;
             display: flex;
             justify-content: flex-end;
+            @media (max-width: 575px) {
+                display: none;
+            }
         }
+        &__mobile{
+            display: none;
+            @media (max-width: 575px) {
+                display: block;
+            }
+        }
+    }
+    section{
+        margin:0;
+        width: 100%;
     }
 }

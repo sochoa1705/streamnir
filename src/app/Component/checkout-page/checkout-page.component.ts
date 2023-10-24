@@ -5,7 +5,7 @@ import {
 	PricingDetail,
 } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router';
 import { GlobalComponent } from 'src/app/shared/global';
 import { Result, ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
 import { PayComponent } from './pay/pay.component';
@@ -21,6 +21,7 @@ import { environment } from 'src/environments/environment';
 import { ModalInactivityComponent } from './modal-inactivity/modal-inactivity.component';
 import { Subscription } from 'rxjs';
 import { UserIdleService } from 'angular-user-idle';
+import { filter } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-checkout-page',
@@ -56,52 +57,9 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 	paramMap:ParamMap;
 	
 	idleSubscriber: Subscription;
+	currentUrl='/booking';
 
-	@ViewChild('childPagePay')
-	childPagePay!: PayComponent;
-	@ViewChild(BaggageInsuranceComponent)
-	private baggageInsuranceComponent: BaggageInsuranceComponent;
-
-	triggerChildFunction() {
-		if (this.baggageInsuranceComponent) {
-			this.baggageInsuranceComponent.nextPage();
-		}
-	}
-	@ViewChild(PassengersComponent)
-	private PassengersComponent: PassengersComponent;
-
-	checkAdditionalButtonDisabled(): boolean {
-		return (
-			this.PassengersComponent &&
-			(this.PassengersComponent.dataStatusCards.includes(false) ||
-				!this.PassengersComponent.formGroup.valid ||
-				!this.PassengersComponent.formBillingGroup.valid ||
-				!this.PassengersComponent.formPoliticsGroup.valid)
-		);
-	}
-	triggerChildFunctionPassenger() {
-		if (this.PassengersComponent) {
-			this.PassengersComponent.setInfoPassengersInformation();
-		}
-	}
-
-	@ViewChild(PayComponent)
-	private PayComponent: PayComponent;
-
-
-	triggerChildFunctionPayComponent() {
-		if (this.PayComponent) {
-			this.PayComponent.sendPayment();
-		}
-	}
-	checkAdditionalButtonDisabledPayComponent(): boolean {
-		return (
-			this.PayComponent &&
-			(!this.PayComponent.formGroupCard.valid ||
-				!this.PayComponent.formGroupPolitics.valid)
-		);
-	}
-
+	
 	constructor(
 		private _checkoutService: CheckoutService,
 		private _router: Router,
@@ -141,6 +99,10 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 				}
 			}
 		})
+
+		this._router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: any) => {
+			this.currentUrl=event.url;
+		});
 	}
 
 	ngOnInit() {
@@ -268,6 +230,18 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 
 	redirectHome(){
 		this._router.navigateByUrl('/')
+	}
+
+	nextPassenger(){
+		this._router.navigateByUrl('/booking/pasajeros');
+	}
+
+	nextPayment(){
+		this._checkoutService.nextPassengerMobile.emit();
+	}
+
+	nextPurchare(){
+		this._checkoutService.nextPaymentMobile.emit();
 	}
 
 	ngOnDestroy() {

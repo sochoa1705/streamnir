@@ -3,206 +3,215 @@
 		<h4>Detalle de cobertura</h4>
 		<img src="./assets/svg/close-modal.svg" (click)="activeModal.close()" />
 	</div>
-	<div class="modal__insurance__body">
-		<div *ngIf="!isDomestic" class="boxTableMod">
-			<div class="rowMod lessBorder">
-				<div class="colMod w60"></div>
-				<div class="colMod w20 bold">EUROPA</div>
-				<div class="colMod w20 bold">RESTO DEL MUNDO</div>
-			</div>
-			<div class="rowMod lessBorder">
-				<div class="colMod w60 bold">Monto Máximo Global</div>
-				<div class="colMod w20 bold">€ 30,000</div>
-				<div class="colMod w20 bold">USD 30,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Asistencia Médica en caso de Accidente *</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-				<div class="colMod w20">Hasta USD 30,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Asistencia Médica en caso de Enfermedad no preexistente *</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-				<div class="colMod w20">Hasta USD 30,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Primera Atención Médica en caso de Enfermedad preexistente *</div>
-				<div class="colMod w20">Hasta EUR 300</div>
-				<div class="colMod w20">Hasta EUR 300</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Odontología de urgencia</div>
-				<div class="colMod w20">Hasta USD 500</div>
-				<div class="colMod w20">Hasta USD 500</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Medicamentos ambulatorios</div>
-				<div class="colMod w20">Hasta EUR 800</div>
-				<div class="colMod w20">Hasta EUR 800</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Medicamentos en caso de hospitalización</div>
-				<div class="colMod w20">Incluido</div>
-				<div class="colMod w20">Incluido</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Práctica de deportes*</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Estado de embarazo *</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Prótesis y ortesis</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Traslados Sanitarios</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Repatriaciones (Sanitaria o funeraria)</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Regreso de Acompañante del titular repatriado</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Traslado de un familiar</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">Estancia de un familiar - Limite Diario</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-				<div class="colMod w20">Hasta EUR 30,000</div>
-			</div>
-		</div>
-		<div *ngIf="isDomestic" class="boxTableMod">
-			<div class="rowMod lessBorder">
-				<div class="colMod w60"></div>
-				<div class="colMod w20 bold">CÓDIGO</div>
-				<div class="colMod w20 bold">PERÚ</div>
-			</div>
-			<div class="rowMod lessBorder">
-				<div class="colMod w60 bold">MONTO MÁXIMO GLOBAL</div>
-				<div class="colMod w20 bold">C.4</div>
-				<div class="colMod w20 bold">USD 5,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">ASISTENCIA MÉDICA EN CASO DE ACCIDENTE:</div>
-				<div class="colMod w20">C.4.1.10.1</div>
-				<div class="colMod w20">Hasta USD 5.000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">ASISTENCIA MÉDICA EN CASO DE ENFERMEDAD NO PREEXISTENTE (INCLUIDO COVID-19):</div>
-				<div class="colMod w20">C.4.1.10.2</div>
-				<div class="colMod w20">Hasta USD 5,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">MEDICAMENTOS EN ASISTENCIAS AMBULATORIAS:</div>
-				<div class="colMod w20">C.4.1.5.1</div>
-				<div class="colMod w20">USD 100</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">ODONTOLOGÍA DE URGENCIA/ASISTENCIAS EN EL PAÍS DE EMISIÓN DE LA TARJETA</div>
-				<div class="colMod w20">C.4.1.6.2</div>
-				<div class="colMod w20">Hasta USD 100</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">PRÁCTICA DE DEPORTES</div>
-				<div class="colMod w20">C.4.21</div>
-				<div class="colMod w20">Hasta EUR 1,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">ESTADO DE EMBARAZO</div>
-				<div class="colMod w20">C.4.22</div>
-				<div class="colMod w20">Hasta EUR 1,000</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">TRASLADOS SANITARIOS</div>
-				<div class="colMod w20"></div>
-				<div class="colMod w20">INCLUIDO C.4</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">REPATRIACIÓN SANITARIA</div>
-				<div class="colMod w20"></div>
-				<div class="colMod w20">INCLUIDO C.4</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">ACOMPAÑAMIENTO DE MENORES Y MAYORES</div>
-				<div class="colMod w20"></div>
-				<div class="colMod w20">INCLUIDO C.4</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">TRASLADO DE UN FAMILIAR</div>
-				<div class="colMod w20"></div>
-				<div class="colMod w20">INCLUIDO C.4</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">DIFERENCIA DE TARIFA POR VIAJE DE REGRESO RETRASADO O ANTICIPADO</div>
-				<div class="colMod w20"></div>
-				<div class="colMod w20">INCLUIDO C.4</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">ASISTENCIA EN CASO DE ROBO O EXTRAVÍO DE DOCUMENTOS</div>
-				<div class="colMod w20"></div>
-				<div class="colMod w20">INCLUIDO C.4</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">REGRESO ANTICIPADO POR SINIESTRO GRAVE EN EL DOMICILIO</div>
-				<div class="colMod w20"></div>
-				<div class="colMod w20">INCLUIDO C.4</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">REPATRIACIÓN O TRASLADOS FUNERARIOS</div>
-				<div class="colMod w20"></div>
-				<div class="colMod w20">INCLUIDO C.4</div>
-			</div>
+	<div class="modal__insurance__body table-responsive">
+		<table *ngIf="!isDomestic" class="table">
+			<thead>
+				<tr style="text-align: end">
+				  <th scope="col"></th>
+				  <th scope="col text-end">EUROPA</th>
+				  <th scope="col text-end" style="white-space:nowrap">RESTO DEL MUNDO</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				  <td class="text-start"><strong>Monto Máximo Global</strong></td>
+				  <td class="text-end"><strong>€ 30,000</strong></td>
+				  <td class="text-end"><strong>USD 30,000</strong></td>
+				</tr>
+				<tr>
+					<td class="text-start">Asistencia Médica en caso de Accidente *</td>
+					<td class="text-end" style="white-space:nowrap">Hasta EUR 30,000</td>
+					<td class="text-end">Hasta USD 30,000</td>
+				</tr>
+				<tr>
+					<td class="text-start">Asistencia Médica en caso de Enfermedad no preexistente *</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+					<td class="text-end">Hasta USD 30,000</td>
+				</tr>
+				<tr>
+					<td class="text-start">Primera Atención Médica en caso de Enfermedad preexistente *</td>
+					<td class="text-end">Hasta EUR 300</td>
+					<td class="text-end">Hasta EUR 300</td>
+				</tr>
+				<tr>
+					<td class="text-start">Odontología de urgencia</td>
+					<td class="text-end">Hasta USD 500</td>
+					<td class="text-end">Hasta USD 500</td>
+				</tr>
+				<tr>
+					<td class="text-start">Medicamentos ambulatorios</td>
+					<td class="text-end">Hasta EUR 800</td>
+					<td class="text-end">Hasta EUR 800</td>
+				</tr>
+				<tr>
+					<td class="text-start">Medicamentos en caso de hospitalización</td>
+					<td class="text-end">Incluido</td>
+					<td class="text-end">Incluido</td>
+				</tr>
+				<tr>
+					<td class="text-start">Práctica de deportes*</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+				</tr>
+				<tr>
+					<td class="text-start">Estado de embarazo *</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+				</tr>
+				<tr>
+					<td class="text-start">Prótesis y ortesis</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+				</tr>
+				<tr>
+					<td class="text-start">Traslados Sanitarios</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+				</tr>
+				<tr>
+					<td class="text-start">Repatriaciones (Sanitaria o funeraria)</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+				</tr>
+				<tr>
+					<td class="text-start">Regreso de Acompañante del titular repatriado</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+				</tr>
+				<tr>
+					<td class="text-start">Traslado de un familiar</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+				</tr>
+				<tr>
+					<td class="text-start">Estancia de un familiar - Limite Diario</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+					<td class="text-end">Hasta EUR 30,000</td>
+				</tr>
+			</tbody>
+		</table>
 
-			<div class="rowMod">
-				<div class="colMod w60">LOCALIZACIÓN DE EQUIPAJES</div>
-				<div class="colMod w20"></div>
-				<div class="colMod w20">INCLUIDO</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">ASISTENCIA LEGAL/ADELANTO EN CONCEPTO DE PRÉSTAMO</div>
-				<div class="colMod w20">C.4.17.1</div>
-				<div class="colMod w20">USD 100</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">ANTICIPO DE FONDOS PARA FIANZAS POR RESPONSABILIDAD EN UN ACCIDENTE</div>
-				<div class="colMod w20">C.4.18</div>
-				<div class="colMod w20">USD 150</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">ASISTENCIA LEGAL PARA REALIZAR RECLAMOS A RAÍZ DE ACCIDENTES</div>
-				<div class="colMod w20">C.4.19</div>
-				<div class="colMod w20">INCLUIDO</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">VALIDEZ TERRITORIAL</div>
-				<div class="colMod w20">NACIONAL</div>
-				<div class="colMod w20">A PARTIR DE LOS 100 KM</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">DIAS CONSECUTIVOS DE VIAJE/DENTRO DEL PAÍS DE EMISIÓN DE LA TARJETA</div>
-				<div class="colMod w20"></div>
-				<div class="colMod w20">HASTA 60 DÍAS</div>
-			</div>
-			<div class="rowMod">
-				<div class="colMod w60">LIMITACIONES Y EXCLUSIONES ESPECIALES POR EDAD</div>
-				<div class="colMod w20"></div>
-				<div class="colMod w20">NO APLICAN</div>
-			</div>
-		</div>
+		<table *ngIf="isDomestic" class="table">
+			<thead>
+				<tr style="text-align: end">
+				  <th scope="col"></th>
+				  <th scope="col text-end">CÓDIGO</th>
+				  <th scope="col text-end" style="white-space:nowrap">PERÚ</th>
+				</tr>
+			</thead>
+		    <tbody>
+				<tr>
+					<td class="text-start"><strong>MONTO MÁXIMO GLOBAL</strong></td>
+					<td class="text-end"><strong>C.4</strong></td>
+					<td class="text-end"><strong>USD 5,000</strong></td>
+				</tr>
+				<tr>
+					<td class="text-start">ASISTENCIA MÉDICA EN CASO DE ACCIDENTE:</td>
+					<td class="text-end">C.4.1.10.1</td>
+					<td class="text-end" style="white-space:nowrap">Hasta USD 5.000</td>
+				</tr>
+				<tr>
+					<td class="text-start">ASISTENCIA MÉDICA EN CASO DE ENFERMEDAD NO PREEXISTENTE (INCLUIDO COVID-19):</td>
+					<td class="text-end">C.4.1.10.2</td>
+					<td class="text-end">Hasta USD 5,000</td>
+				</tr>
+				<tr>
+					<td class="text-start">MEDICAMENTOS EN ASISTENCIAS AMBULATORIAS:</td>
+					<td class="text-end">C.4.1.5.1</td>
+					<td class="text-end">USD 100</td>
+				</tr>
+				<tr>
+					<td class="text-start">ODONTOLOGÍA DE URGENCIA/ASISTENCIAS EN EL PAÍS DE EMISIÓN DE LA TARJETA</td>
+					<td class="text-end">C.4.1.6.2</td>
+					<td class="text-end">Hasta USD 100</td>
+				</tr>
+				<tr>
+					<td class="text-start">PRÁCTICA DE DEPORTES</td>
+					<td class="text-end">C.4.21</td>
+					<td class="text-end">Hasta EUR 1,000</td>
+				</tr>
+				<tr>
+					<td class="text-start">ESTADO DE EMBARAZO</td>
+					<td class="text-end">C.4.22</td>
+					<td class="text-end">Hasta EUR 1,000</td>
+				</tr>
+				<tr>
+					<td class="text-start">TRASLADOS SANITARIOS</td>
+					<td class="text-end"></td>
+					<td class="text-end">INCLUIDO C.4</td>
+				</tr>
+				<tr>
+					<td class="text-start">REPATRIACIÓN SANITARIA</td>
+					<td class="text-end"></td>
+					<td class="text-end">INCLUIDO C.4</td>
+				</tr>
+				<tr>
+					<td class="text-start">ACOMPAÑAMIENTO DE MENORES Y MAYORES</td>
+					<td class="text-end"></td>
+					<td class="text-end">INCLUIDO C.4</td>
+				</tr>
+				<tr>
+					<td class="text-start">TRASLADO DE UN FAMILIAR</td>
+					<td class="text-end"></td>
+					<td class="text-end">INCLUIDO C.4</td>
+				</tr>
+				<tr>
+					<td class="text-start">DIFERENCIA DE TARIFA POR VIAJE DE REGRESO RETRASADO O ANTICIPADO</td>
+					<td class="text-end"></td>
+					<td class="text-end">INCLUIDO C.4</td>
+				</tr>
+				<tr>
+					<td class="text-start">ASISTENCIA EN CASO DE ROBO O EXTRAVÍO DE DOCUMENTOS</td>
+					<td class="text-end"></td>
+					<td class="text-end">INCLUIDO C.4</td>
+				</tr>
+				<tr>
+					<td class="text-start">REGRESO ANTICIPADO POR SINIESTRO GRAVE EN EL DOMICILIO</td>
+					<td class="text-end"></td>
+					<td class="text-end">INCLUIDO C.4</td>
+				</tr>
+				<tr>
+					<td class="text-start">REPATRIACIÓN O TRASLADOS FUNERARIOS</td>
+					<td class="text-end"></td>
+					<td class="text-end">INCLUIDO C.4</td>
+				</tr>
+	
+				<tr>
+					<td class="text-start">LOCALIZACIÓN DE EQUIPAJES</td>
+					<td class="text-end"></td>
+					<td class="text-end">INCLUIDO</td>
+				</tr>
+				<tr>
+					<td class="text-start">ASISTENCIA LEGAL/ADELANTO EN CONCEPTO DE PRÉSTAMO</td>
+					<td class="text-end">C.4.17.1</td>
+					<td class="text-end">USD 100</td>
+				</tr>
+				<tr>
+					<td class="text-start">ANTICIPO DE FONDOS PARA FIANZAS POR RESPONSABILIDAD EN UN ACCIDENTE</td>
+					<td class="text-end">C.4.18</td>
+					<td class="text-end">USD 150</td>
+				</tr>
+				<tr>
+					<td class="text-start">ASISTENCIA LEGAL PARA REALIZAR RECLAMOS A RAÍZ DE ACCIDENTES</td>
+					<td class="text-end">C.4.19</td>
+					<td class="text-end">INCLUIDO</td>
+				</tr>
+				<tr>
+					<td class="text-start">VALIDEZ TERRITORIAL</td>
+					<td class="text-end">NACIONAL</td>
+					<td class="text-end">A PARTIR DE LOS 100 KM</td>
+				</tr>
+				<tr>
+					<td class="text-start">DIAS CONSECUTIVOS DE VIAJE/DENTRO DEL PAÍS DE EMISIÓN DE LA TARJETA</td>
+					<td class="text-end"></td>
+					<td class="text-end">HASTA 60 DÍAS</td>
+				</tr>
+				<tr>
+					<td class="text-start">LIMITACIONES Y EXCLUSIONES ESPECIALES POR EDAD</td>
+					<td class="text-end"></td>
+					<td class="text-end">NO APLICAN</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>

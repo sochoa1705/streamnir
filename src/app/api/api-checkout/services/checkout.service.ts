@@ -25,6 +25,8 @@ export class CheckoutService {
 	changeStep = new EventEmitter();
 	isFinishedPay = new EventEmitter();
 	applyCupon = new EventEmitter();
+	nextPassengerMobile  = new EventEmitter();
+	nextPaymentMobile = new EventEmitter();
 	
 	openModalUnSavedPassenger = new EventEmitter();
 	openModalUnSavedPayment = new EventEmitter();
@@ -58,8 +60,6 @@ export class CheckoutService {
 		GlobalComponent.tokenMotorVuelo = '';
 		delete dataInitBooking.secure;
 		GlobalComponent.appBooking={...dataInitBooking};
-		console.log(GlobalComponent.appBooking,'vamosso')
-		console.log(dataInitBooking, 'kana init')
 		this.currentIndexStep=0;
 		this.isFinishPayment=false;
 	}

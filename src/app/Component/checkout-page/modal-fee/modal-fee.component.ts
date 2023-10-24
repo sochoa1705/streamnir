@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PricingDetail } from 'src/app/api/api-checkout/models/rq-checkout-search';
@@ -27,6 +27,7 @@ export class ModalFeeComponent implements OnInit{
 	isDomestic=GlobalComponent.isDomestic;
 
 	pricingDetail:PricingDetail;
+	getScreenWidth = window.innerWidth;
 	config: SwiperOptions = {
 		slidesPerView: 3.2,
 		slidesPerGroup: 1,
@@ -70,7 +71,7 @@ export class ModalFeeComponent implements OnInit{
 			if (!b.totalPay) return -1;
 			return 0;
 		})
-		this.isNavigate= this.dataUpSell.length > 3 ? true : false;
+		this.isNavigate= this.getScreenWidth <= 575 ? false : this.dataUpSell.length > 3 ? true : false;
 	}
 
 	getTotalByUpSell(fareBreakDowns:FareBreakDown[]){
@@ -117,5 +118,12 @@ export class ModalFeeComponent implements OnInit{
 			this.router.navigateByUrl('/booking');
 		}
 		this.activeModal.close(item);
+	}
+
+	@HostListener('window:resize', ['$event'])
+	onResize(){
+		if (this.getScreenWidth !== window.innerWidth) {
+			this.getScreenWidth = window.innerWidth;
+		}
 	}
 }

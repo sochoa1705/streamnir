@@ -11,7 +11,7 @@
 		[tabIndex]="tabIndex"
 		(keyup)="onKeyUp($event)"
 	>
-		<span *ngIf="valueName !== ''">{{ valueName }}</span>
+		<span *ngIf="valueName !== ''">{{ getScreenWidth < 370 && isMonth ? valueName.slice(0,3) : valueName }}</span>
 		<span class="select__box__select__placeholder" *ngIf="valueName == ''">{{ placeholder }}</span>
 		<img [src]="isFilter ? './assets/svg/Right.svg' : './assets/svg/icon-select.svg'" alt="v" width="20" height="20" />
 	</div>

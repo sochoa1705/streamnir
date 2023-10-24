@@ -119,6 +119,12 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.openModalSubscription = this._checkoutService.openModalUnSavedPayment.subscribe({
 			next: () => this.openModalUnsaved()
 		});
+
+		this._checkoutService.nextPaymentMobile.subscribe({
+			next:()=>{
+				this.sendPayment();
+			}
+		})
 	}
 
 	ngOnInit() {

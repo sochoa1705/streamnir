@@ -113,6 +113,12 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 				this.openModalUnsaved();
 			}
 		});
+
+		this._checkoutService.nextPassengerMobile.subscribe({
+			next:()=>{
+				this.setInfoPassengersInformation();
+			}
+		})
 	}
 
 	ngOnInit() {
@@ -300,7 +306,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 			this._notification.showNotificacion(
 				'Datos sin completar',
 				'Parece que algunos de tus datos son inválidos. Por favor, inténtalo nuevamente.',
-				7
+				60
 			);
 		}
 	}

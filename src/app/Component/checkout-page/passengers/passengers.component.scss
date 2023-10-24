@@ -88,47 +88,12 @@
 				flex-direction: column;
 				gap: 24px;
 
-
-				&__name {
-					display: grid;
-					column-gap: 20px;
-					grid-template-columns: repeat(3, 1fr);
-
-					@media (max-width: 900px) {
-						grid-template-columns: repeat(1, 1fr);
-					}
-				}
-
-				section {
-					width: 100%;
-					display: flex;
-					flex-direction: row;
-					gap: 20px;
-					@media (max-width: 900px) {
-						display: block;
-					}
-				}
-
-				&__email {
-					width: 50%;
-
-					@media (max-width: 900px) {
-						width: 100%;
-					}
-				}
-
 				&__phone {
 					padding-left: 3px;
-					width: 50%;
-
-					@media (max-width: 900px) {
-						width: 100%;
-					}
-
 					span {
 						color: colors.$neutral-900;
 						margin-left: 3px;
-						font-weight: 500;
+						font-weight: 600;
 						font-family: 'Montserrat';
 						font-size: 14px;
 						line-height: 20px;
@@ -139,6 +104,11 @@
 
 						.text-left {
 							margin-left: 67px;
+						}
+
+						@media (max-width: 575px) {
+							font-size: 12px;
+							line-height: 20px;
 						}
 					}
 
@@ -167,10 +137,14 @@
 				span {
 					font-family: Montserrat;
 					font-size: 18px;
-					font-weight: 500;
+					font-weight: 600;
 					line-height: 28px;
 					letter-spacing: 0em;
 					color: colors.$neutral-900;
+					@media (max-width: 575px) {
+						font-size: 14px;
+						line-height: 20px;
+					}
 				}
 			}
 		}
@@ -217,6 +191,10 @@
 			}
 		}
 
+	}
+	article{
+		width: 100%;
+		margin:0;
 	}
 }
 

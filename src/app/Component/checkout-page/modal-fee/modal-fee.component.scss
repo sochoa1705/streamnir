@@ -123,6 +123,11 @@ section {
 						letter-spacing: -0.02em;
 						color: colors.$gris-900;
 						margin-bottom: 0rem;
+						span{
+							color: colors.$gris-900;
+							font-size: 16px;
+							line-height: 24px;
+						}
 					}
 					span {
 						font-family: Montserrat;
@@ -165,7 +170,44 @@ section {
 	.swiper-wrapper {
 		gap:15px !important;
 	}
+	@media (max-width: 1199px) {
+		padding: 40px 24px;
+	}
+	@media (max-width: 575px) {
+		padding: 24px 20px;
+		&__header h4{
+			font-size: 20px;
+			line-height: 28px;
+		}
+		&__body{
+			.modal__contend__body__card__options {
+				&__title, &__check span{
+					font-size: 12px;
+					line-height: 20px;
+				}
+			}
+
+			&__card{
+				width: 260px;
+				min-height: 480px;
+				&__options{
+					gap:8px;
+				}
+				&__price{
+					h5{
+						font-size: 20px;
+						line-height: 18px;
+					}
+					span, h5>span{
+						font-size: 14px;
+						line-height: 20px;
+					}
+				}
+			}
+		}
+	}
 }
+
 
 @media (min-width: 1300px) {
 	.modal-detail-fee-swiper .modal-dialog-centered {
