@@ -46,7 +46,7 @@ export class TusDatosComponent implements OnInit, AfterViewInit, OnDestroy {
 	            public _snackBar: MatSnackBar) {
 		this.form = this.formBuilder.group({
 			passengers: this.formBuilder.array([]),
-			store: new FormControl('', Validators.required),
+			store: new FormControl('', Validators.nullValidator), // Validators.required
 			medium: new FormControl('', Validators.required),
 			privacyPolicy: new FormControl('', Validators.requiredTrue),
 			dataPolicy: new FormControl('', Validators.requiredTrue)
@@ -122,7 +122,7 @@ export class TusDatosComponent implements OnInit, AfterViewInit, OnDestroy {
 					};
 				}),
 				idMedium: this.medium.value.toString(),
-				idStore: this.store.value.toString(),
+				idStore: 0, //this.store.value.toString(),
 				dataPolicy: this.dataPolicy.value ? 1 : 0,
 				privacyPolicy: this.privacyPolicy.value ? 1 : 0
 			};
