@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SubscriptionComponent } from './subscription.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { TusDatosComponent } from './tus-datos.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { PassengerComponent } from './passenger/passenger.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SuccessDialogModule } from '../../../shared/components/success-dialog/success-dialog.module';
 
 @NgModule({
 	declarations: [
-		SubscriptionComponent
+		TusDatosComponent,
+		PassengerComponent
 	],
 	imports: [
 		CommonModule,
-		MatCheckboxModule,
 		ReactiveFormsModule,
-		NgbModalModule,
+		MatCheckboxModule,
 		SuccessDialogModule
 	]
 })
-export class SubscriptionModule {
+export class TusDatosModule {
 }

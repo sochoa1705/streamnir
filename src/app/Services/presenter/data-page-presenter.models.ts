@@ -22,5 +22,5 @@ export enum EGalleryCode {
   banner_destacados_1 = 'BANNERS_DESTACADOS_1',
   banner_destacados_2 = 'BANNERS_DESTACADOS_2',
   banner_destacados_3 = 'BANNERS_DESTACADOS_3',
-  
+	banner_tus_datos_cp = 'TUS_DATOS'
 } 

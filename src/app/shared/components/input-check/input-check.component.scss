@@ -23,6 +23,13 @@ label{
 			outline: none !important;
 		}
     }
+
+    @media (max-width: 575px){
+        font-size: 12px;
+        >a{
+            font-size: 12px;
+        }
+    }
 }
 
 .span__error{

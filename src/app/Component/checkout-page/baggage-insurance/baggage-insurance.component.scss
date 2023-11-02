@@ -1,8 +1,9 @@
 @use '/src/scss/colors';
-
 .container__page {
 	padding-bottom: 10%;
-
+	section{
+		width: 100%;
+	}
 	&__section {
 		display: flex;
 		flex-direction: column;
@@ -22,7 +23,6 @@
 				letter-spacing: -0.02em;
 				text-align: left;
 				color: colors.$neutral-900;
-
 				
 			}
 
@@ -32,7 +32,6 @@
 				font-weight: 400;
 				line-height: 28px;
 				letter-spacing: 0em;
-				text-align: left;
 				color: colors.$neutral-900;
 
 				@media (max-width: 575px) {
@@ -53,6 +52,13 @@
 				gap: 8px;
 				align-items: center;
 				cursor: pointer;
+				span {
+					font-family: Open Sans;
+					font-size: 20px;
+					font-weight: 600;
+					line-height: 28px;
+					letter-spacing: -0.02em;
+				}
 			}
 		}
 
@@ -299,15 +305,15 @@
 
 		@media (max-width: 950px) {
 			gap: 32px;
+			&__header__fee span, &__insurance__success__title {
+				font-size: 18px;
+				line-height: 24px;
+			}
 
+			&__header__fee img {
+				width: 28px;
+			}
 			&__insurance {
-				&__header {
-					&__fee span {
-						font-size: 18px;
-						line-height: 24px;
-					}
-				}
-
 				&__body {
 					flex-direction: column !important;
 					padding: 24px 16px;
@@ -318,13 +324,6 @@
 
 					#assist_card_mob {
 						display: block;
-					}
-				}
-
-				&__success {
-					&__title {
-						font-size: 18px;
-						line-height: 20px;
 					}
 				}
 
@@ -387,6 +386,39 @@
 				}
 			}
 		}
+
+		@media (max-width: 575px){
+			&__header__fee span, &__insurance__success__title{
+				font-size: 16px;
+				line-height: 20px;
+			}
+
+			&__header__fee img{
+				width: 24px;
+			}
+
+			#assist_card_mob {
+				height: 32px;
+			}
+			&__insurance__body__checks__option{
+				padding: 0px;
+				span{
+					font-size: 14px;
+					line-height: 20px;
+				}
+				img{ height: 16px;}
+			}
+
+			&__body__extras__items__row label{
+				font-size: 14px;
+				line-height: 20px;
+			}
+			&__actions{
+				margin-left: 0px;
+			}
+		}
+
+
 	}
 
 	@media (max-width: 670px) {
@@ -404,22 +436,11 @@ article {
 	gap: 12px;
 }
 
-span {
-	font-family: Open Sans;
-	font-size: 20px;
-	font-weight: 600;
-	line-height: 28px;
-	letter-spacing: -0.02em;
-	text-align: left;
-}
 @media (max-width: 575px) {
 	.container__page__section__title__primary{
 		font-size: 18px;
 	}
 	.container__page__section__title__secondary{
 		font-size: 14px;
-	}
-	.container__page__section__insurance__body__checks__option{
-		padding: 0px;
 	}
 }

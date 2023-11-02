@@ -21,6 +21,15 @@
                 letter-spacing: -0.02em;
                 color: black;
             }
+            @media (max-width: 1199px) {
+               img{
+                  width: 32px;
+               }
+               span{
+                 font-size: 18px;
+                 line-height: 24px;
+               }
+            }
         }
         &.check {
             border-bottom: none;
