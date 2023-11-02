@@ -55,7 +55,7 @@
 		&__plane {
 			display: grid;
 			align-items: center;
-			column-gap: 24px;
+			column-gap: 23px;
 			grid-template-columns: 68px auto auto;
 			justify-content: flex-start;
 			.flightNumber{
@@ -116,8 +116,8 @@
 				color:colors.$neutral-900;
 				max-width: 100%;
 				white-space: nowrap; 
-			overflow: hidden; 
-			text-overflow: ellipsis; 
+				overflow: hidden; 
+				text-overflow: ellipsis; 
 				&.bold{
 					font-weight: 600;
 				}
@@ -139,7 +139,7 @@
 			}
 		}
 		&__img {
-			margin-left: 101px;
+			margin-left: 100px;
 		}
 	}
 	@media (max-width: 950px) {

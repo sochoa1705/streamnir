@@ -51,7 +51,7 @@
 						<h5><span>USD </span>{{getTotalByUpSell(item.fareBreakDowns) | number : '1.2-2'}}</h5>
 						<span>{{pricingDetail.passengersCount > 1 ? 'Por los '+pricingDetail.passengersCount+' pasajeros':'Por un pasajero'}} </span>
 					</section>
-					<app-button (onClick)="clickSelectUpSell(item)" [text]="'Seleccionar'"></app-button>
+					<app-button (onClick)="clickSelectUpSell(item)" [isMobile]="true" [text]="'Seleccionar'"></app-button>
 				</div>
 			</div>
 		</ng-container>
@@ -96,7 +96,7 @@
 							<h5><span>USD </span>{{item.totalPay | number : '1.2-2'}}</h5>
 							<span>{{pricingDetail.passengersCount > 1 ? 'Por los '+pricingDetail.passengersCount+' pasajeros':'Por un pasajero'}} </span>
 						</section>
-						<app-button (onClick)="clickSelectUpSell(item)" [text]="'Seleccionar'"></app-button>
+						<app-button (onClick)="clickSelectUpSell(item)" [isMobile]="true" [text]="'Seleccionar'"></app-button>
 					</div>
 				</div>
 			</ng-template>

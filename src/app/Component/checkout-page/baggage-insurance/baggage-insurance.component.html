@@ -18,29 +18,23 @@
 							[src]="showBaggageDropdown ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'"
 						/>
 					</div>
-					<app-button
-						*ngIf="itsIncludeUpSell && getScreenWidth > 950"
-						[text]="'Modificar beneficios'"
-						[color]="'outline-secondary'"
-						[left]="true"
-						[icon]="'plusBlue.svg'"
-						(click)="openModalFee()"
-					></app-button>
+					<div [class.w-100]="getScreenWidth <= 550" *ngIf="itsIncludeUpSell && (getScreenWidth > 950 || getScreenWidth <= 550)">
+						<app-button
+							[text]="'Modificar beneficios'"
+							[color]="'outline-secondary'"
+							[left]="true"
+							[icon]="'plusBlue.svg'"
+							[isMobile]="true"
+							(click)="openModalFee()"
+							[w100]="getScreenWidth > 950 ? false : true"
+						></app-button>
+					</div>
 					<app-button
 						*ngIf="itsIncludeUpSell && getScreenWidth <= 950 && getScreenWidth > 550"
 						[text]="'Modificar'"
 						[color]="'outline-secondary'"
 						(click)="openModalFee()"
-						[size]="'md'"
-					></app-button>
-					<app-button
-						*ngIf="itsIncludeUpSell && getScreenWidth <= 550"
-						class="xs_button_100"
-						[text]="'Modificar beneficios'"
-						[color]="'outline-secondary'"
-						(click)="openModalFee()"
-						[w100]="true"
-						[size]="'md'"
+						[isMobile]="true"
 					></app-button>
 				</div>
 
@@ -162,13 +156,17 @@
 									<span>{{ option }}</span>
 								</div>
 								<div class="container__page__section__insurance__body__checks__option">
-									<app-button
-										[text]="'Ver cobertura del seguro'"
-										[color]="'link-secondary'"
-										[left]="true"
-										[icon]="'insurance.svg'"
-										(onClick)="openModalCoverage()"
-									></app-button>
+									<section>
+										<app-button
+											[text]="'Ver cobertura del seguro'"
+											[color]="'link-secondary'"
+											[left]="true"
+											[icon]="'insurance.svg'"
+											(onClick)="openModalCoverage()"
+											[isMobile]="true"
+											[w100]="getScreenWidth > 950 ? false : true"
+										></app-button>
+									</section>
 								</div>
 							</div>
 						</div>
@@ -211,6 +209,7 @@
 						[text]="'Eliminar asistencia al viajero'"
 						[color]="'link-secondary'"
 						(click)="updateInsurance()"
+						[isMobile]="true"
 					></app-button>
 				</div>
 			</article>

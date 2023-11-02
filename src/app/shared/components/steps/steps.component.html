@@ -6,7 +6,7 @@
                     <span *ngIf="!step.check">{{step.id + 1}}</span>
                     <img alt="" *ngIf="step.check" src="./assets/svg/check-red-step.svg" >
                 </div>
-                <span class="container__steps__step__text"  [class.active]="step.active">{{step.name}}</span>
+                <label [class.active]="step.active">{{step.name}}</label>
             </div>
             <div class="container__steps__line" *ngIf="step.id!==2"></div>
         </ng-container>

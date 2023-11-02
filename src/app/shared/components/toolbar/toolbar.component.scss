@@ -218,9 +218,21 @@
 				}
 			}
 		}
+		&.fixed{
+			padding: 16px 24px;
+			.toolbar__section__logo{
+				height: 27px;
+			}
+		}
 	}
 	@media (max-width: 575px){
 		padding: 8px 24px;
+		&.fixed{
+			min-height: 48px;
+			.toolbar__section__logo{
+				height: 23px;
+			}
+		}
 		&__section{
 			&__bars{
 				display: block;

@@ -22,6 +22,7 @@ import { ModalInactivityComponent } from './modal-inactivity/modal-inactivity.co
 import { Subscription } from 'rxjs';
 import { UserIdleService } from 'angular-user-idle';
 import { filter } from 'rxjs/operators';
+import { dataSteps } from 'src/app/shared/constant-init';
 
 @Component({
 	selector: 'app-checkout-page',
@@ -233,7 +234,10 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 	}
 
 	nextPassenger(){
-		this._router.navigateByUrl('/booking/pasajeros');
+		dataSteps[0].check = true;
+		dataSteps[1].active = true;
+		this._checkoutService.changeStep.emit(1);
+		window.scroll({ top: 0, behavior: 'smooth' });
 	}
 
 	nextPayment(){
