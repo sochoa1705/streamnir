@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { toUp } from '../../../shared/utils';
 import { LibroReclamacionesService } from '../../../Services/libro/libro-reclamaciones.service';
 import { LoaderSubjectService } from '../../../shared/components/loader/service/loader-subject.service';
@@ -47,7 +47,6 @@ export class LibroReclamacionesComponent implements OnInit {
   MSG_PEDIDO: string = 'pedido'
   MSG_OBSERVACIONES: string = 'observaciones'
   MSG_POLITICA: string = 'politica'
-  MSG_AUTORIZO: string = 'autorizo'
 
   constructor(
     public libroService: LibroReclamacionesService,
@@ -116,9 +115,8 @@ export class LibroReclamacionesComponent implements OnInit {
       detalleReclamo: new FormControl(),
       pedido: new FormControl(),
       observaciones: new FormControl(),
-      politica: new FormControl(),
-      autorizo: new FormControl(),
-    })
+      politica: new FormControl()
+    });
   }
 
   enviar() {
@@ -193,10 +191,7 @@ export class LibroReclamacionesComponent implements OnInit {
 
   validForm() {
     this.errors = []
-    const letter = new RegExp('^[a-zA-Z ]+$', 'i')
     const number = new RegExp('^[0-9]+$', 'i')
-    const alphanumeric = new RegExp('^[a-zA-Z0-9 ]+$', 'i')
-    const mail = new RegExp('^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$', 'i')
 
     let puntoVenta: string = this.formLibro.getRawValue()['puntoVenta']
     if (puntoVenta === undefined || puntoVenta === null || puntoVenta.trim() === '') {
@@ -241,7 +236,7 @@ export class LibroReclamacionesComponent implements OnInit {
     let menor: boolean = this.formLibro.getRawValue()['menor']
     console.log(menor)
 
-    if (menor === true) {
+    if (menor) {
       let nombreMenor: string = this.formLibro.getRawValue()['nombreMenor']
       if (nombreMenor === undefined || nombreMenor === null || nombreMenor.trim() === '') {
         this.errors.push({ name: this.MSG_NOMBRE_MENOR, message: 'Campo requerido' })
@@ -277,7 +272,7 @@ export class LibroReclamacionesComponent implements OnInit {
       this.errors.push({ name: this.MSG_MONTO_RECLAMO, message: 'Campo es requerido' })
     }
     let tipoReclamo: boolean = this.formLibro.getRawValue()['tipoReclamo']
-    if (tipoReclamo === undefined || tipoReclamo === null || tipoReclamo === false) {
+    if (tipoReclamo === undefined || tipoReclamo === null || !tipoReclamo) {
       this.errors.push({ name: this.MSG_TIPO_RECLAMO, message: 'tipo es requerido' })
     }
     let detalleReclamo: string = this.formLibro.getRawValue()['detalleReclamo']
@@ -293,20 +288,13 @@ export class LibroReclamacionesComponent implements OnInit {
       this.errors.push({ name: this.MSG_OBSERVACIONES, message: 'Campo es requerido' })
     }
     let politica: boolean = this.formLibro.getRawValue()['politica']
-    if (politica === undefined || politica === null || politica == false) {
+    if (politica === undefined || politica === null || !politica) {
       this.errors.push({ name: this.MSG_POLITICA, message: 'Políticas es requerido' })
-    }
-    let autorizo: boolean = this.formLibro.getRawValue()['autorizo']
-    if (autorizo === undefined || autorizo === null || autorizo == false) {
-      this.errors.push({ name: this.MSG_AUTORIZO, message: 'Campo requerido' })
     }
     return this.errors.length === 0
   }
   getMessage(messageKey: any) {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
-  }
-  getMessageArray(index: any, messageKey: any) {
-    return this.errors.filter((item: any) => item.indice === index && item.name === messageKey).length > 0;
   }
   reenviar() {
     this.numCode = undefined
@@ -317,9 +305,8 @@ export class LibroReclamacionesComponent implements OnInit {
   checkSelect(value: boolean) {
     this.isChecked = value;
   }
-  aAyuda() {
-    let link = 'https://ayuda.nmviajes.com/support/home'
-    window.location.href = link;
-  }
 
+  aAyuda() {
+    window.location.href = 'https://ayuda.nmviajes.com/support/home';
+  }
 }
