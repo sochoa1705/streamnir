@@ -16,37 +16,35 @@ export class MainService {
     },
     {
       id: 1,
-      text: "Paquetes",
-      //link: "paquetes",
-      link: "https://vacaciones.nmviajes.com/ES/holidays/search",
+      text: 'Paquetes',
+      link: 'https://nm-viajes.paquetedinamico.com/?tripType=HOLIDAYS',
       tab: '',
       icon: '/assets/menu/paquetes.svg',
       external: true
     },
     {
       id: 2,
-      text: "Arma tu viaje",
-      //link: "armapaquete",
-      link: "https://vacaciones.nmviajes.com/multidestination/",
+      text: 'Arma tu viaje',
+      link: 'https://nm-viajes.paquetedinamico.com/?tripType=MULTI',
       tab: '',
       icon: '/assets/menu/paquetes.svg',
-      external: true,
+      external: true
     },
     {
       id: 3,
-      text: "Vuelos + Hotel",
-      //link: "vuelohotel",
-      link: "https://vacaciones.nmviajes.com/flight+hotel/",
+      text: 'Vuelos + Hotel',
+      link: 'https://nm-viajes.paquetedinamico.com/?tripType=FLIGHT_HOTEL',
       tab: '',
       icon: '/assets/menu/vuelo-hotel.svg',
-      external: true,
+      external: true
     },
     {
       id: 4,
-      text: "Hoteles",
-      link: "hoteles",
+      text: 'Hoteles',
+      link: 'https://nm-viajes.paquetedinamico.com/?tripType=ONLY_HOTEL',
       tab: '',
-      icon: '/assets/menu/hoteles.svg'
+      icon: '/assets/menu/hoteles.svg',
+      external: true
     },
     {
       id: 5,
@@ -64,10 +62,11 @@ export class MainService {
     },
     {
       id: 7,
-      text: "Actividades",
-      link: "actividades",
+      text: 'Actividades',
+      link: 'https://nm-viajes.paquetedinamico.com/?tripType=ONLY_TICKET',
       tab: '',
-      icon: '/assets/menu/actividad.svg'
+      icon: '/assets/menu/actividad.svg',
+      external: true
     },
     {
       id: 8,
