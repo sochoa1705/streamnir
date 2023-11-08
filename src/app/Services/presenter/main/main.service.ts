@@ -16,44 +16,42 @@ export class MainService {
     },
     {
       id: 1,
-      text: "Arma tu viaje",
-      //link: "armapaquete",
-      link: "https://vacaciones.nmviajes.com/multidestination/",
-      tab: '',
-      icon: '/assets/menu/paquetes.svg',
-      external: true,
-    },
-    {
-      id: 2,
-      text: "Hoteles",
-      link: "hoteles",
-      tab: '',
-      icon: '/assets/menu/hoteles.svg'
-    },
-    {
-      id: 3,
-      text: "Actividades",
-      link: "actividades",
-      tab: '',
-      icon: '/assets/menu/actividad.svg'
-    },
-    {
-      id: 4,
-      text: "Paquetes",
-      //link: "paquetes",
-      link: "https://vacaciones.nmviajes.com/ES/holidays/search",
+      text: 'Paquetes',
+      link: 'https://nm-viajes.paquetedinamico.com/?tripType=HOLIDAYS',
       tab: '',
       icon: '/assets/menu/paquetes.svg',
       external: true
     },
     {
-      id: 5,
-      text: "Vuelos + Hotel",
-      //link: "vuelohotel",
-      link: "https://vacaciones.nmviajes.com/flight+hotel/",
+      id: 2,
+      text: 'Arma tu viaje',
+      link: 'https://nm-viajes.paquetedinamico.com/?tripType=MULTI',
+      tab: '',
+      icon: '/assets/menu/paquetes.svg',
+      external: true
+    },
+    {
+      id: 3,
+      text: 'Vuelos + Hotel',
+      link: 'https://nm-viajes.paquetedinamico.com/?tripType=FLIGHT_HOTEL',
       tab: '',
       icon: '/assets/menu/vuelo-hotel.svg',
-      external: true,
+      external: true
+    },
+    {
+      id: 4,
+      text: 'Hoteles',
+      link: 'https://nm-viajes.paquetedinamico.com/?tripType=ONLY_HOTEL',
+      tab: '',
+      icon: '/assets/menu/hoteles.svg',
+      external: true
+    },
+    {
+      id: 5,
+      text: 'Ofertas',
+      link: 'ofertas',
+      tab: '',
+      icon: '/assets/menu/ofertas.svg'
     },
     {
       id: 6,
@@ -64,11 +62,33 @@ export class MainService {
     },
     {
       id: 7,
+      text: 'Actividades',
+      link: 'https://nm-viajes.paquetedinamico.com/?tripType=ONLY_TICKET',
+      tab: '',
+      icon: '/assets/menu/actividad.svg',
+      external: true
+    },
+    {
+      id: 8,
       text: "Seguros",
       link: "/seguros",
-      header: false,
+      header: true,
       tab: '',
       icon: '/assets/menu/seguros.svg'
+    },
+    {
+      id: 9,
+      text: "Descubre",
+      link: "https://descubre.nmviajes.com/",
+      footer: true,
+      external: true
+    },
+    {
+      id: 10,
+      text: "Blog: Mundo Viajero",
+      link: "https://blog.nmviajes.com/",
+      footer: true,
+      external: true
     }
   ]
   constructor() { }
