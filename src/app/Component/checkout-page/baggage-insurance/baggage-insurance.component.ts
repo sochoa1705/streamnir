@@ -21,7 +21,13 @@ export class BaggageInsuranceComponent implements OnInit {
 		private _modalService: NgbModal,
 		private _checkoutService: CheckoutService,
 		private _router:Router
-	) {}
+	) {
+		this._checkoutService.updateDataKayak.subscribe({
+			next:()=>{
+				this.setValues();
+			}
+		})
+	}
 	showBaggageDropdown = true;
 	showDropdownExtras = false;
 	dataInsurance = data_insurance;
@@ -45,21 +51,27 @@ export class BaggageInsuranceComponent implements OnInit {
 	ngOnInit() {
 		//es para ver si mostrar el button de ampliar beneficios
 		window.scroll({ top: 0, behavior: 'smooth' });
-		this.detailFlight = GlobalComponent.appGroupSeleted;
-		this.activeArrowRight = this.detailFlight.departure.length > 1 ? true : false;
-		this.isDomestic = GlobalComponent.isDomestic;
-		if(GlobalComponent.appBooking.secure) this.itsIncludeInsurance=true;
-		if (GlobalComponent.upSellSeleted) {
-			this.itsIncludeUpSell = true;
-			this.showBaggageDropdown = false;
-			this.nameSelectUpSell = GlobalComponent.upSellSeleted.description;
-			this.listBenefitsUpSellSelect = GlobalComponent.upSellSeleted.informationServices.filter(
-				(item: InformationService) => item.itsInclude
-			);
-		}
-		this.showSecure = GlobalComponent.appGroupSeleted.returns ? true : false;
-		if(!this.showSecure) this.showBaggageDropdown = true;
 		this.getScreenWidth = window.innerWidth;
+		this.setValues()
+	}
+
+	setValues(){
+		this.detailFlight = GlobalComponent.appGroupSeleted;
+		if(this.detailFlight){
+			this.activeArrowRight = this.detailFlight.departure.length > 1 ? true : false;
+			this.isDomestic = GlobalComponent.isDomestic;
+			if(GlobalComponent.appBooking.secure) this.itsIncludeInsurance=true;
+			if (GlobalComponent.upSellSeleted) {
+				this.itsIncludeUpSell = true;
+				this.showBaggageDropdown = false;
+				this.nameSelectUpSell = GlobalComponent.upSellSeleted.description;
+				this.listBenefitsUpSellSelect = GlobalComponent.upSellSeleted.informationServices.filter(
+					(item: InformationService) => item.itsInclude
+				);
+			}
+			this.showSecure = GlobalComponent.appGroupSeleted.returns ? true : false;
+			if(!this.showSecure) this.showBaggageDropdown = true;
+		}
 	}
 
 	openModalFee() {
@@ -106,8 +118,6 @@ export class BaggageInsuranceComponent implements OnInit {
 	}
 
 	nextPage() {
-		dataSteps[0].check = true;
-		dataSteps[1].active = true;
 		this._checkoutService.changeStep.emit(1);
 		window.scroll({ top: 0, behavior: 'smooth' });
 	}

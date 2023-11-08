@@ -150,15 +150,15 @@
 					</div>
 				</div>
 				<div class="container__page__detail__button" *ngIf="showButtonReturn">
-					<app-button [text]="'Volver al inicio'" [color]="'outline-primary'" (click)="redirectHome()"></app-button>
+					<app-button [text]="'Volver al inicio'" [isMobile]="true" [color]="'outline-primary'" (click)="redirectHome()"></app-button>
 				</div>
 			</ng-container>
 		</div>
-		<div class="container__page__actions">
+		<div class="container__page__actions" [hidden]="!detailFlight">
 			<app-button
 				class="container__page__section__button__footer"
 				[text]="'Continuar a pasajeros'"
-				*ngIf="currentUrl == '/booking'"
+				*ngIf="currentUrl == '/booking' || currentUrl.includes('itinerary')"
 				[color]="'primary'"
 				(click)="nextPassenger()"
 				[size]="'md'"
@@ -179,7 +179,7 @@
 				class="container__page__section__button__footer"
 				[text]="'Realizar compra'"
 				[color]="'primary'"
-				*ngIf="currentUrl == '/booking/pago'"
+				*ngIf="currentUrl == '/booking/pago' && !showButtonReturn"
 				(click)="nextPurchare()"
 				[size]="'md'"
 				[w100]="true"

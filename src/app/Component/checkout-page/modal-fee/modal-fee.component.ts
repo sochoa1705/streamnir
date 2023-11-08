@@ -29,8 +29,6 @@ export class ModalFeeComponent implements OnInit{
 	pricingDetail:PricingDetail;
 	getScreenWidth = window.innerWidth;
 	config: SwiperOptions = {
-		slidesPerView: 3.2,
-		slidesPerGroup: 1,
 		navigation: false,
 		loop: false,
 		pagination: false,
@@ -39,7 +37,18 @@ export class ModalFeeComponent implements OnInit{
 				this.activeArrowLeft = !swiper.isBeginning;
 				this.activeArrowRight = !swiper.isEnd;
 			}
-		}
+		},
+		breakpoints: {
+			575:{
+				slidesPerView: 1.25,
+			},
+			1024: {
+                slidesPerView: 2.2,
+            },
+			1200: {
+                slidesPerView: 3.2,
+            }
+        }
 	};
 	constructor(
 		public activeModal: NgbActiveModal,

@@ -36,6 +36,20 @@
             align-items: center;
         }
     }
+
+    @media (max-width: 578px){
+		padding: 20px;
+		&__body{
+			padding: 10px;
+		}
+		&__body span{
+			font-size: 14px;
+			line-height: 20px;
+		}
+		&__body__actions{
+			gap:8px;
+		}
+	}
 }
 
 .modal-detail-error .modal-dialog-centered{

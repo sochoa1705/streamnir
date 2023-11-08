@@ -7,7 +7,6 @@ import { CardPassengerComponent } from './card-passenger/card-passenger.componen
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
 import { GlobalComponent } from 'src/app/shared/global';
-import { dataSteps } from 'src/app/shared/constant-init';
 import { AccountsService } from 'src/app/Services/accounts.service';
 import { IValidateBooking, RValidateBooking } from 'src/app/api/api-checkout/models/rq-checkout-validate-booking';
 import { getBodyValidateBooking } from 'src/app/shared/utils/bodyValidateBooking';
@@ -331,8 +330,6 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 		this._checkoutService.validateBooking(bodyValidateBooking).subscribe({
 			next: (res) => {
 				if (res.success) {
-					dataSteps[1].check = true;
-					dataSteps[2].active = true;
 					if (isRedirect) this.nextNavigate();
 					else this._checkoutService.changeStep.emit(2);
 					window.scroll({ top: 0, behavior: 'smooth' });
@@ -395,8 +392,8 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 		modalRef.result.then((result) => {
 			
 			if (result == 'success') {
-				dataSteps[1].check = true;
-				dataSteps[2].active = true;
+				GlobalComponent.dataSteps[1].check = true;
+				GlobalComponent.dataSteps[2].active = true;
 				this._checkoutService.changeStep.emit(2);
 				this.openModalError('Su reserva anterior, fue cancelada exitosamente', true);
 			}

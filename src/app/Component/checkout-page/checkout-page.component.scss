@@ -177,7 +177,6 @@
 		}
 
 		&__saftyPay {
-			height: 180px;
 			padding: 24px;
 			border-radius: 12px;
 			display: flex;
@@ -195,6 +194,7 @@
 					font-size: 16px;
 					line-height: 24px;
 					margin-bottom: 4px;
+					font-weight: 500;
 				}
 
 				&:nth-child(2) {
@@ -236,9 +236,30 @@
 		}
 	}
 
-	@media (max-width: 950px) {
+	@media (max-width: 1199px) {
 		section {
 			grid-template-columns: 1fr 0.67fr;
+		}
+
+		.container__page__detail__saftyPay{
+			padding: 12px;
+			span {
+				&:nth-child(1) {
+					font-size: 14px;
+					line-height: 20px;
+				}
+
+				&:nth-child(2) {
+					font-size: 20px;
+					line-height: 28px;
+					margin-bottom: 10px;
+				}
+
+				&:nth-child(3) {
+					font-size: 34px;
+					line-height: 38px;
+				}
+			}
 		}
 
 		&__detail {
@@ -324,6 +345,10 @@
 		section {
 			grid-template-columns: 1fr;
 		}
+		
+		&__actions{
+			display: block;
+		}
 	}
 
 	@media (max-width: 575px) {
@@ -333,12 +358,5 @@
 			justify-content: center;
 			display: flex !important;
 		}
-		&__actions{
-			display: block;
-		}
-	}
-
-	.container__page__section__button__footer {
-		display: none;
 	}
 }

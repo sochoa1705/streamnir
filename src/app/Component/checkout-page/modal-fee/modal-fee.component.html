@@ -4,7 +4,7 @@
 		<h4 *ngIf="getScreenWidth <= 575">Tarifas disponibles</h4>
 		<img src="./assets/svg/close-modal.svg" (click)="activeModal.close(true)" />
 	</div>
-	<div class="modal__contend__body" [class.not-swiper]="!isNavigate">
+	<div class="modal__contend__body" [class.not-swiper]="!isNavigate"  [style.grid-template-columns]="'repeat(' + dataUpSell.length+ ', auto)'">
 		<img
 			*ngIf="isNavigate"
 			[src]="activeArrowLeft ? './assets/svg/arrow-circle-left-red.svg' : './assets/svg/arrow-circle-left.svg'"

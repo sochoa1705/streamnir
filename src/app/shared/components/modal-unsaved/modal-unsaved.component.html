@@ -14,8 +14,15 @@
 				[w100]="true"
 				[color]="'outline-primary'"
 				(onClick)="closeSave(false)"
+				[isMobile]="true"
 			></app-button>
-			<app-button [text]="'Si, guardar'" [w100]="true" [isTabIndex]="false" (onClick)="closeSave(true)"></app-button>
+			<app-button
+				[text]="'Si, guardar'"
+				[isMobile]="true"
+				[w100]="true"
+				[isTabIndex]="false"
+				(onClick)="closeSave(true)"
+			></app-button>
 		</div>
 	</div>
 
@@ -31,12 +38,14 @@
 				[w100]="true"
 				[color]="'outline-primary'"
 				(onClick)="redirectHome()"
+				[isMobile]="true"
 			></app-button>
 			<app-button
 				[text]="'Continuar compra'"
 				[w100]="true"
 				[isTabIndex]="false"
 				(onClick)="activeModal.close()"
+				[isMobile]="true"
 			></app-button>
 		</div>
 	</div>

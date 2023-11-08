@@ -171,6 +171,17 @@
 			padding: 6px 12px;
 		}
 	}
+
+	&.isLink {
+		@media (max-width: 575px) {
+			font-size: 12px;
+			line-height: 20px;
+			height: 30px !important;
+		}
+		@media (max-width: 302px){
+			margin-bottom: 8px;
+		}
+	}
 }
 
 

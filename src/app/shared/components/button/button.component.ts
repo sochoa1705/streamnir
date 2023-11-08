@@ -19,6 +19,7 @@ export class ButtonComponent implements OnInit {
     @Input() isLoader = false;
     @Input() isMobile = false;
     @Input() isTabIndex = true;
+    @Input() isLink = false;
     @Output() onClick = new EventEmitter<MouseEvent>();
 
     constructor() { }

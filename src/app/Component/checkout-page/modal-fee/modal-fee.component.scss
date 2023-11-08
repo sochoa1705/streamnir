@@ -22,6 +22,11 @@ section {
 			line-height: 36px;
 			letter-spacing: -0.02em;
 			color: colors.$neutral-900;
+			
+			@media (max-width:1199px){
+				font-size: 24px;
+				line-height: 32px;
+			}
 		}
 		img {
 			cursor: pointer;
@@ -40,7 +45,6 @@ section {
 		}
 
 		&.not-swiper{
-			grid-template-columns:repeat(3,auto);
 			justify-content: flex-start;
 		}
 
@@ -151,7 +155,6 @@ section {
 	.swiper-slide {
 		font-size: 18px;
 		background: transparent;
-		/* Center slide text vertically */
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: -webkit-flex;
@@ -172,6 +175,9 @@ section {
 	}
 	@media (max-width: 1199px) {
 		padding: 40px 24px;
+		.modal__contend__body__card{
+			width: 273px;
+		}
 	}
 	@media (max-width: 575px) {
 		padding: 24px 20px;
@@ -218,5 +224,12 @@ section {
 @media (min-width: 1199px){
 	.modal-detail-fee .modal-dialog-centered {
 		min-width: 1070px;
+	}
+}
+
+
+@media (min-width: 575px){
+	.modal-detail-fee .modal-dialog-centered {
+		min-width: 774px !important;
 	}
 }
