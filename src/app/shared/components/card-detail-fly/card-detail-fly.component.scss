@@ -10,6 +10,7 @@
 			display: flex;
 			gap: 16px;
 			align-items: center;
+			
 			h6 {
 				font-family: Open Sans;
 				font-size: 20px;
@@ -19,6 +20,9 @@
 				text-align: left;
 				color: colors.$neutral-900;
 				margin-bottom: 0;
+			}
+			@media (max-width: 1199px) {
+				img{width: 28px;}
 			}
 		}
 		.dropdown {
@@ -153,7 +157,7 @@
 			font-size: 12px;
 			line-height: 20px;
 			&.bold-16{
-				font-size: 16px;
+				font-size: 14px;
 				line-height: 20px;
 			}
 		}

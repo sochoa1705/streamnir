@@ -49,7 +49,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	listBanksInternet = listBanksInternet;
 	listAgencies = listAgencies;
 	codeSafetyPay = 0;
-	showMessagePay = false; //quitar a false
+	showMessagePay = false;
 	isValidPromotionalCode = false;
 	isApplyCupon = false;
 	isClickButtonCode = false;
@@ -94,6 +94,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	formSubscriptionBooking: Subscription;
 	formSubscriptionCreditCard: Subscription;
 	openModalSubscription: Subscription;
+	isSendPayment=false;
 
 	@HostListener('window:resize', ['$event'])
 	onResize() {
@@ -122,7 +123,10 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 
 		this._checkoutService.nextPaymentMobile.subscribe({
 			next:()=>{
-				this.sendPayment();
+				if(!this.isSendPayment){
+					this.isSendPayment=true;
+					this.sendPayment();
+				}
 			}
 		})
 	}
@@ -343,9 +347,12 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 				);
 				this.paymentTypeField.setValue(1);
 				this.isPayCard = false;
+				this.isSendPayment=false;
 			} else this.initConfigurationOpenPay(true);
-		} else this.showErrorForm();
-		
+		} else{
+			this.showErrorForm();
+			this.isSendPayment=false;
+		}
 	}
 
 	showErrorForm(){
@@ -400,9 +407,11 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 					this.transactionId = res.idCotizacion;
 					this.sendEmail(res);
 				} else this.openModalError(this.errorMessDefault);
+				this.isSendPayment=false;
 			},
 			error: (err) => {
 				this.openModalError(this.getMessageErrorClient(err));
+				this.isSendPayment=false;
 			}
 		});
 	}

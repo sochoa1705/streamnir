@@ -1,12 +1,10 @@
-<div class="notifyBox show" *ngIf="isShow">
-    <div class="iconNotify">
-        <img src="./assets/svg/warning.svg" alt="">
+<div class="container__notify" *ngIf="isShow">
+    <div class="container__notify__contend">
+        <img src="./assets/svg/warning.svg" alt="!">
+        <div class="d-flex flex-column">
+            <span><strong>{{title}}</strong></span>
+            <span>{{message}}</span>
+        </div>
     </div>
-    <div class="groupText">
-        <div class="titulo">{{title}}</div>
-        <div class="descripcion">{{message}}</div>
-    </div>
-    <div class="iconClose" (click)="isShow = false">
-        <img src="./assets/svg/close-notification.svg" alt="">
-    </div>
+    <img (click)="isShow = false" src="./assets/svg/close-notification.svg" alt="">
 </div>

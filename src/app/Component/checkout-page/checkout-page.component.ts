@@ -8,9 +8,6 @@ import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.serv
 import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router';
 import { GlobalComponent } from 'src/app/shared/global';
 import { Result, ResultCupon } from 'src/app/api/api-checkout/models/rq-checkout-discount';
-import { PayComponent } from './pay/pay.component';
-import { BaggageInsuranceComponent } from './baggage-insurance/baggage-insurance.component';
-import { PassengersComponent } from './passengers/passengers.component';
 import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { getPricingFareBreakDowns } from 'src/app/shared/utils/fareBreakDowns';
@@ -22,7 +19,6 @@ import { ModalInactivityComponent } from './modal-inactivity/modal-inactivity.co
 import { Subscription } from 'rxjs';
 import { UserIdleService } from 'angular-user-idle';
 import { filter } from 'rxjs/operators';
-import { dataSteps } from 'src/app/shared/constant-init';
 
 @Component({
 	selector: 'app-checkout-page',
@@ -151,6 +147,7 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 					GlobalComponent.upSellSeleted = null;
 				}
 				this._checkoutService.setIsDomestic();
+				this._checkoutService.updateDataKayak.emit();
 				this.initCheckout();
 			}
 		})
@@ -234,8 +231,6 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 	}
 
 	nextPassenger(){
-		dataSteps[0].check = true;
-		dataSteps[1].active = true;
 		this._checkoutService.changeStep.emit(1);
 		window.scroll({ top: 0, behavior: 'smooth' });
 	}
@@ -249,7 +244,9 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.userIdle.stopWatching();
-		this.idleSubscriber.unsubscribe();
+		if(this.userIdle && this.idleSubscriber){
+			this.userIdle.stopWatching();
+			this.idleSubscriber.unsubscribe();
+		}
 	}
 }

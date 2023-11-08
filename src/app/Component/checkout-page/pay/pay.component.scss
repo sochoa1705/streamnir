@@ -4,12 +4,14 @@
 	width: 100%;
 	padding-bottom: 10%;
 
-	@media (max-width: 575px) {
+	@media (max-width: 1199px) {
 		padding-bottom: 30px;
 	}
 
-	@media (max-width: 1199px) {
-		padding-bottom: 50px;
+	.line {
+		width: 100%;
+		height: 0;
+		border-top: 1px solid colors.$neutral-100;
 	}
 
 	&__section {
@@ -31,7 +33,9 @@
 				letter-spacing: -0.02em;
 				text-align: left;
 				color: colors.$neutral-900;
-
+				@media (max-width: 1199px) {
+					font-size: 24px;
+				}
 				@media (max-width: 550px) {
 					font-size: 20px;
 				}
@@ -45,10 +49,6 @@
 				letter-spacing: 0em;
 				text-align: left;
 				color: colors.$neutral-900;
-
-				@media (max-width: 570px) {
-					font-size: 14px;
-				}
 			}
 		}
 
@@ -56,7 +56,7 @@
 			padding: 0px 0px 24px 0px;
 			display: flex;
 			flex-direction: column;
-			gap: 45px;
+			gap: 32px;
 			background: white;
 			border-radius: 12px;
 
@@ -66,7 +66,7 @@
 				height: 80px;
 				display: grid;
 				grid-template-columns: repeat(2, 1fr);
-				&.is-kayak{
+				&.is-kayak {
 					grid-template-columns: 1fr;
 				}
 
@@ -94,9 +94,7 @@
 
 						@media (max-width: 470px) {
 							font-size: 14px;
-
 						}
-
 					}
 
 					&.active {
@@ -127,49 +125,50 @@
 
 			&__cards {
 				display: flex;
-				gap: 64px;
+				column-gap: 64px;
 				justify-content: center;
-				flex-wrap: wrap;
-				align-items: center;
-				max-width: 670px;
 				margin: 0 auto;
+				justify-items: center;
 				row-gap: 32px;
+				flex-wrap: wrap;
 
 				@media (max-width: 1199px) {
-
-					grid-gap: 10px;
-					gap: 10px;
+					column-gap: 10px;
+					row-gap: 16px;
 				}
 
 				&__bank {
 					display: flex;
 					flex-direction: column;
-					justify-content: center;
+					justify-content: flex-start;
 					align-items: center;
 					gap: 8px;
-
+					max-width: 112px;
+					img {
+						max-width: 112px;
+						width: 100%;
+					}
 					span {
 						font-family: Montserrat;
 						font-size: 12px;
 						font-weight: 600;
 						line-height: 20px;
 						letter-spacing: 0em;
+						text-align: center;
 					}
 
-					&__img {
-						@media (max-width: 1199px) {
-							width: 100px;
+					@media (max-width: 1199px) {
+						gap: 2px;
+						width: 20%;
+					}
 
-						}
-
-						@media (max-width: 470px) {
-							width: 70px;
-
+					@media (max-width: 575px) {
+						span {
+							font-size: 10px;
+							line-height: 16px;
 						}
 					}
 				}
-
-
 			}
 
 			&__form {
@@ -178,16 +177,8 @@
 				padding: 24px 24px 0px 24px;
 				flex-direction: column;
 
-				&__row,
-				&__colum {
-					display: grid;
-					column-gap: 20px;
-					grid-template-columns: repeat(2, 1fr);
-
-				}
-
-				&__adress {
-					width: 100%;
+				@media (max-width: 1199px) {
+					padding: 24px 0;
 				}
 			}
 
@@ -195,17 +186,17 @@
 				display: flex;
 				justify-content: center;
 				gap: 40px;
-
+				padding: 0 25px;
 				@media (max-width: 1199px) {
 					display: grid;
 					width: 100%;
 					justify-content: initial;
 					grid-gap: 0px;
 					gap: 0px;
+					padding: 20px 0px 14px;
 				}
 
 				&__button {
-					width: 348px;
 					height: 56px;
 					padding: 8px 12px 8px 12px;
 					border-radius: 8px;
@@ -214,10 +205,11 @@
 					justify-content: center;
 					align-items: center;
 					cursor: pointer;
+					width: 100%;
 
 					@media (max-width: 1199px) {
 						width: auto;
-						margin: 10px;
+						margin-bottom: 10px;
 					}
 
 					@media (max-width: 570px) {
@@ -249,57 +241,24 @@
 				}
 			}
 
-			&__links {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				padding: 0px 20px;
-
-				@media (max-width:570px) {
-					display: none;
-				}
-				&__button {
-					height: 48px;
-					padding: 12px 16px;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-
-					@media (max-width:570px) {
-						width: 100%;
-						height: auto;
-						margin: 50px 0px 40px 0px;
-					}
-				}
-
-				&.end {
-					justify-content: flex-end;
-				}
-			}
-
 			&__alert {
 				padding: 0px 25px;
 				margin: 0 auto;
-				@media (max-width: 575px) {
-					display: none;
+				@media (max-width: 1199px) {
+					padding: 0px;
 				}
 
 				&__contend {
 					width: 100%;
-					height: 72px;
-					padding: 12px 16px 0px 16px;
+					height: auto;
+					padding: 12px 16px;
 					border-radius: 8px;
 					background: colors.$bg-warning;
-
-					@media (max-width: 999px) {
-						height: 152px;
-					}
-
 
 					&__text {
 						display: flex;
 						gap: 16px;
-						align-items: center;
+						align-items: flex-start;
 						justify-content: flex-start;
 
 						span {
@@ -308,11 +267,20 @@
 							font-weight: 400;
 							line-height: 24px;
 							letter-spacing: 0em;
-
-							@media (max-width: 570px) {
-								font-size: 12px;
-							}
 						}
+					}
+					@media (max-width: 1199px) {
+						&__text span {
+							font-size: 14px;
+						}
+						gap: 10px;
+					}
+					@media (max-width: 575px) {
+						&__text span {
+							font-size: 12px;
+						}
+						padding: 8px 12px;
+						gap: 8px;
 					}
 				}
 			}
@@ -323,6 +291,13 @@
 			grid-template-columns: auto 100px;
 			align-items: center;
 			column-gap: 24px;
+			row-gap: 12px;
+			@media (max-width: 575px) {
+				grid-template-columns: 1fr;
+				&__button {
+					padding-left: 3px;
+				}
+			}
 		}
 
 		article,
@@ -374,7 +349,7 @@
 				text-align: left;
 				font-weight: 400;
 
-				>a {
+				> a {
 					font-family: Montserrat;
 					color: colors.$blue-500;
 					font-size: 14px;
@@ -392,7 +367,7 @@
 			display: flex;
 			justify-content: flex-end;
 
-			@media (max-width: 575px) {
+			@media (max-width: 670px) {
 				display: none;
 			}
 		}
@@ -400,41 +375,35 @@
 }
 
 @media (max-width: 1199px) {
-	.col_pay {
-		margin-top: 20px !important;
+	.container__page__section {
+		gap: 32px;
+	}
+	.container__page__section__title__primary__text h1 {
+		font-size: 24px;
+	}
+	.container__page__section__title__secondary {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.links {
+		padding: 16px 0px;
 	}
 }
 
-.mat-expansion-panel-spacing {
-	margin: 0px !important;
-}
+@media (max-width: 575px) {
+	.container__page__section {
+		gap: 24px;
+	}
 
-.mat-expansion-panel:not([class*=mat-elevation-z]) {
-	box-shadow: none !important;
-}
+	.container__page__section__politics span,
+	.container__page__section__politics span a {
+		font-size: 12px;
+		line-height: 20px;
+	}
 
-.mat-expansion-panel-header-title,
-.mat-expansion-panel-header-description {
-	display: flow-root;
-	/* flex-grow: 1; */
-	width: 100%;
-	// @media (max-width: 1199px) {
-	// 	color: rgba(215, 217, 218, 1);
-	// }
-}
-
-::ng-deep .mat-expansion-indicator:after {
-	color: #bc342e !important;
-}
-
-::ng-deep .mat-expansion-panel-header-description {
-	color: #bc342e !important;
-}
-
-.mat-expansion-panel-header:not([aria-disabled=true]) {
-	padding: 30px;
-}
-
-.mat-expansion-panel-body {
-	padding: 20px 24px 16px;
+	.container__page__section__title__secondary {
+		font-size: 14px;
+		line-height: 20px;
+	}
 }

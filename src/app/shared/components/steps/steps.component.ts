@@ -1,8 +1,8 @@
-import { Component, EventEmitter, OnInit, Output, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { Step } from 'src/app/api/api-checkout/models/rq-checkout-up-sell';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
-import { dataSteps } from '../../constant-init';
+import { GlobalComponent } from '../../global';
 
 @Component({
 	selector: 'app-steps',
@@ -10,10 +10,28 @@ import { dataSteps } from '../../constant-init';
 	styleUrls: ['./steps.component.scss']
 })
 export class StepsComponent implements OnInit {
-	dataSteps: Step[] = dataSteps;
+	steps: Step[] = [
+		{
+			id: 0,
+			name: 'Beneficios',
+			active: true,
+			check: false
+		},
+		{
+			id: 1,
+			name: 'Pasajeros',
+			active: false,
+			check: false
+		},
+		{
+			id: 2,
+			name: 'Revisar y pagar',
+			active: false,
+			check: false
+		}
+	];
 	isDisabled = false;
 
-	@Output() clickedStep = new EventEmitter();
 	constructor(
 		private _checkoutService: CheckoutService,
 		private _router: Router
@@ -21,23 +39,32 @@ export class StepsComponent implements OnInit {
 		this.updateStepName();
 		this._checkoutService.changeStep.subscribe({
 			next: (res: number) => {
-				this.dataSteps = [...dataSteps];
+				this.updateValues(res);
 				this.clickStep(res);
 			}
 		});
 		this._checkoutService.isFinishedPay.subscribe({
 			next: () => {
-				this.dataSteps = [...dataSteps];
+				this.steps[2].check = true;
 				this.isDisabled = true;
 			}
 		});
 	}
+
+	updateValues(index:number){
+		let currentValue=[...this.steps]
+		if (index == 1 || index == 2) {
+			currentValue[index - 1].check = true;
+			currentValue[index].active = true;
+		}
+		this.steps=[...currentValue]
+		GlobalComponent.dataSteps=this.steps;
+	}
+
 	ngOnInit(): void {
-		this.isDisabled = false;
-		dataSteps.forEach((step, index) => {
-			step.active = index == 0 ? true : false;
-			step.check = false;
-		});
+		if(GlobalComponent.dataSteps.length > 0)
+			this.steps=[...GlobalComponent.dataSteps]
+		else this.isDisabled = false;
 	}
 
 	clickStep(index: number) {
@@ -48,10 +75,11 @@ export class StepsComponent implements OnInit {
 					this._router.navigateByUrl('/booking');
 					break;
 				case 1:
-					if (dataSteps[1].active == true && dataSteps[0].check) this._router.navigateByUrl('/booking/pasajeros');
+					if (this.steps[1].active == true && this.steps[0].check)
+						this._router.navigateByUrl('/booking/pasajeros');
 					break;
 				default:
-					if (dataSteps[2].active == true && dataSteps[1].check && dataSteps[0].check)
+					if (this.steps[2].active == true && this.steps[1].check && this.steps[0].check)
 						this._router.navigateByUrl('/booking/pago');
 					break;
 			}
@@ -64,12 +92,7 @@ export class StepsComponent implements OnInit {
 	}
 
 	private updateStepName() {
-		if (window.innerWidth < 575) {
-			const stepIndex = 2;
-			this.dataSteps[stepIndex].name = 'Pagos';
-		} else {
-			const stepIndex = 2;
-			this.dataSteps[stepIndex].name = 'Revisar y pagar';
-		}
+		if (window.innerWidth < 575) this.steps[2].name = 'Pagos';
+		else this.steps[2].name = 'Revisar y pagar';
 	}
 }

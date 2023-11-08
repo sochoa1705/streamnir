@@ -27,6 +27,7 @@ export class CheckoutService {
 	applyCupon = new EventEmitter();
 	nextPassengerMobile  = new EventEmitter();
 	nextPaymentMobile = new EventEmitter();
+	updateDataKayak = new EventEmitter();
 	
 	openModalUnSavedPassenger = new EventEmitter();
 	openModalUnSavedPayment = new EventEmitter();
@@ -53,6 +54,7 @@ export class CheckoutService {
 	resetValuesForms(){
 		this.isSaveDataPassenger=true;
 		this.dataInfoPassengers={...passengerInfoInit};
+		this.dataInfoPassengers.passengers=[]
 		this.dataInfoPayment={...paymentInit};
 		this.isSaveDataPayment=true;
 		this.isChangesPayment=false;
@@ -62,6 +64,7 @@ export class CheckoutService {
 		GlobalComponent.appBooking={...dataInitBooking};
 		this.currentIndexStep=0;
 		this.isFinishPayment=false;
+		GlobalComponent.dataSteps=[]
 	}
 
 	setValueChangeStep(index: number, status: boolean, next = true) {

@@ -27,7 +27,7 @@ export const routes: Routes = [
 				loadChildren: () => import('./pay/pay.module').then((m) => m.PayModule),
                 canActivate:[CanActivateCheckoutGuard],
                 canDeactivate:[DeactivatePaymentGuard]
-			},
+			}
         ]
     }
 ]

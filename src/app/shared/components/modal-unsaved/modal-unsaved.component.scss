@@ -58,5 +58,26 @@
 			margin-left: -20px;
 		}
 	}
+
+	@media (max-width: 578px){
+		padding: 20px;
+		h5{
+			font-size: 18px;
+			line-height: 24px;
+			margin: 0;
+		}
+		&__body{
+			padding: 10px;
+		}
+		&__body span{
+			font-size: 14px;
+			line-height: 20px;
+		}
+		&__body__actions{
+			grid-template-columns: 1fr;
+			gap:8px;
+		}
+	}
+
 }
 

@@ -37,6 +37,9 @@
         .arrow {
             cursor: pointer;
         }
+        @media (max-width:575px){
+            padding: 16px;
+        }
     }
     &__body {
         padding: 0px 24px 24px 24px;

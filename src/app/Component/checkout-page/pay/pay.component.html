@@ -3,49 +3,52 @@
 		<article>
 			<div class="container__page__section__title">
 				<span class="container__page__section__title__primary">Métodos de pago</span>
-				<span class="container__page__section__title__secondary">
+				<span class="container__page__section__title__secondary" *ngIf="!isKayak">
 					Selecciona tu método de pago (el pago se llevará a cabo una vez presiones el botón pagar al final del
 					formulario).
 				</span>
 			</div>
-			<mat-accordion *ngIf="getScreenWidth < 1200">
-				<mat-expansion-panel [expanded]="true">
-					<mat-expansion-panel-header>
-						<mat-panel-title>
-							<div
-								class="container__page__section__pay_header__tab"
-								[class.inactive]="counter >= 4"
-								[class.active]="isPayCard"
-								(click)="clickTab()"
-							>
-								<img
-									alt="pay_img"
-									[src]="
-										isPayCard
-											? './assets/svg/credit-red.svg'
-											: counter >= 4
-											? './assets/svg/credit-disbled.svg'
-											: './assets/svg/credit.svg'
-									"
-								/>
-								<span>Tarjeta de crédito o débito</span>
-							</div>
-						</mat-panel-title>
-					</mat-expansion-panel-header>
-					<ng-container *ngTemplateOutlet="tab1"></ng-container>
-				</mat-expansion-panel>
-				<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-					<mat-expansion-panel-header>
-						<mat-panel-title>
-							<div class="container__page__section__pay_header__tab" [class.active]="!isPayCard" (click)="clickTab()">
-								<img alt="pay_img" [src]="isPayCard ? './assets/svg/store.svg' : './assets/svg/store-red.svg'" />
-								<span>Banca por internet / Agencias</span>
-							</div>
-						</mat-panel-title>
-					</mat-expansion-panel-header>
-					<ng-container *ngTemplateOutlet="tab2"></ng-container>
-				</mat-expansion-panel>
-			</mat-accordion>
+
+			<app-card-checkout *ngIf="getScreenWidth < 1200">
+				<app-accordion
+					[icon]="
+						isPayCard
+							? './assets/svg/credit-red.svg'
+							: counter >= 4
+							? './assets/svg/credit-disbled.svg'
+							: './assets/svg/credit.svg'
+					"
+					[isDisabled]="counter >= 4"
+					[title]="'Tarjeta de crédito o débito'"
+					[showDropdown]="isPayCard"
+					(clickTab)="clickTab()"
+				>
+					<div><ng-container *ngTemplateOutlet="tab1"></ng-container></div>
+				</app-accordion>
+				<div class="line" *ngIf="(isKayak && counter >= 4) || !isKayak"></div>
+				<app-accordion
+					*ngIf="!isKayak"
+					[showDropdown]="!isPayCard"
+					[title]="'Banca por internet / Agencias'"
+					(clickTab)="clickTab()"
+					[icon]="isPayCard ? './assets/svg/store.svg' : './assets/svg/store-red.svg'"
+					[type]="'bank'"
+				>
+				<div><ng-container *ngTemplateOutlet="tab2"></ng-container></div>
+				</app-accordion>
+
+				<app-accordion
+					*ngIf="isKayak && counter >= 4"
+					[showDropdown]="!isPayCard"
+					[title]="'Banca por internet / Agencias'"
+					(clickTab)="clickTab()"
+					[icon]="isPayCard ? './assets/svg/store.svg' : './assets/svg/store-red.svg'"
+					[type]="'bank'"
+				>
+				<div><ng-container *ngTemplateOutlet="tab2"></ng-container></div>
+				</app-accordion>
+
+			</app-card-checkout>
 
 			<div *ngIf="getScreenWidth > 1200" class="container__page__section__pay">
 				<div class="container__page__section__pay_header" [class.is-kayak]="isKayak && counter < 4">
@@ -67,11 +70,21 @@
 						/>
 						<span>Tarjeta de crédito o débito</span>
 					</div>
-					<div *ngIf="!isKayak" class="container__page__section__pay_header__tab" [class.active]="!isPayCard" (click)="clickTab()">
+					<div
+						*ngIf="!isKayak"
+						class="container__page__section__pay_header__tab"
+						[class.active]="!isPayCard"
+						(click)="clickTab()"
+					>
 						<img alt="pay_img" [src]="isPayCard ? './assets/svg/store.svg' : './assets/svg/store-red.svg'" />
 						<span>Banca por internet / Agencias</span>
 					</div>
-					<div *ngIf="isKayak && counter >= 4" class="container__page__section__pay_header__tab" [class.active]="!isPayCard" (click)="clickTab()">
+					<div
+						*ngIf="isKayak && counter >= 4"
+						class="container__page__section__pay_header__tab"
+						[class.active]="!isPayCard"
+						(click)="clickTab()"
+					>
 						<img alt="pay_img" [src]="isPayCard ? './assets/svg/store.svg' : './assets/svg/store-red.svg'" />
 						<span>Banca por internet / Agencias</span>
 					</div>
@@ -95,7 +108,7 @@
 
 			<app-card-checkout>
 				<div class="container__page__section__cupon" [formGroup]="formGroupBooking">
-					<app-input
+						<app-input
 						[label]="'Código'"
 						[placeholder]="'Ingresar código'"
 						[name]="'CuponPromoWeb'"
@@ -111,7 +124,7 @@
 								: ''
 						"
 					></app-input>
-					<app-button [text]="'Aplicar'" [color]="'outline-secondary'" (click)="validCuponWeb()"></app-button>
+					<div class="container__page__section__cupon__button"><app-button [w100]="true" [text]="'Aplicar'" [color]="'outline-secondary'" [isMobile]="true" (click)="validCuponWeb()"></app-button></div>
 				</div>
 			</app-card-checkout>
 		</article>
@@ -137,6 +150,7 @@
 				[color]="'primary'"
 				[disabled]="!formGroupCard.valid"
 				(click)="sendPayment()"
+				[isMobile]="true"
 			></app-button>
 		</div>
 	</div>
@@ -157,7 +171,7 @@
 		</div>
 	</div>
 	<form class="container__page__section__pay__form" [formGroup]="formGroupCard" autocomplete="off">
-		<div class="row row-xl-12 row-sm-12 row-lg-12">
+		<div class="row gy-3">
 			<div class="col-sm-12 col-lg-12 col-xl-6">
 				<app-input-credit-card
 					[label]="'Número de tarjeta'"
@@ -174,7 +188,7 @@
 					"
 				></app-input-credit-card>
 			</div>
-			<div class="col_pay col-sm-6 col-lg-6 col-xl-3">
+			<div class="col-sm-6 col-lg-6 col-xl-3">
 				<app-input-credit-card
 					[label]="'Vencimiento'"
 					[placeholder]="'mm/yy'"
@@ -191,7 +205,7 @@
 					"
 				></app-input-credit-card>
 			</div>
-			<div class="col_pay col-sm-6 col-lg-6 col-xl-3">
+			<div class="col-sm-6 col-lg-6 col-xl-3">
 				<app-input
 					[label]="'CVV'"
 					[placeholder]="'123'"
@@ -211,9 +225,6 @@
 					"
 				></app-input>
 			</div>
-		</div>
-
-		<div class="row row-xl-12 sm-12">
 			<div class="col-sm-12 col-lg-12 col-xl-6">
 				<app-input
 					[label]="'Titular de la tarjeta'"
@@ -226,7 +237,7 @@
 				></app-input>
 			</div>
 
-			<div class="col_pay col-sm-12 col-lg-12 col-xl-3">
+			<div class="col-sm-12 col-lg-12 col-xl-3">
 				<app-select
 					[label]="'Tipo de documento'"
 					[placeholder]="'Seleccionar'"
@@ -241,7 +252,7 @@
 				></app-select>
 			</div>
 
-			<div class="col_pay col-sm-12 col-lg-12 col-xl-3">
+			<div class="col-sm-12 col-lg-12 col-xl-3">
 				<app-input
 					[label]="'N° de documento'"
 					[placeholder]="'Ingresar número'"
@@ -259,9 +270,8 @@
 					"
 				></app-input>
 			</div>
-		</div>
-		<div class="row row-sm-12 row-xl-12 row-lg-12">
-			<div class="col-sm-12 col-md-6 col-lg-12 col-xl-6">
+
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
 				<app-select
 					[label]="'Cuotas'"
 					[placeholder]="'Sin cuotas'"
@@ -274,7 +284,7 @@
 					[default]="numberQuotesField.value"
 				></app-select>
 			</div>
-			<div class="col_pay col-md-6 col-sm-12 col-lg-12 col-xl-6">
+			<div class="col-md-12 col-sm-12 col-lg-12 col-xl-6">
 				<app-input
 					[label]="'Ciudad de Facturación'"
 					[placeholder]="'Del titular de la tarjeta'"
@@ -285,8 +295,6 @@
 					[labelError]="cityField.touched && cityField!.hasError('required') ? 'Ciudad es obligatorio' : ''"
 				></app-input>
 			</div>
-		</div>
-		<div class="row-xs-12 row-lg-12 row-xl-12">
 			<div class="col-sm-12 col-lg-12 col-xl-12">
 				<app-input
 					[label]="'Dirección'"
@@ -325,25 +333,24 @@
 				<img
 					alt="pay_imgcontainer__page__section__pay__cards__bank"
 					[src]="bank.image"
-					class="container__page__section__pay__cards__bank__img"
 				/>
 				<span>{{ bank.name }}</span>
 			</div>
 
 			<ng-container *ngIf="!isPayBank">
 				<div class="container__page__section__pay__cards__bank" *ngFor="let agency of listAgencies">
-					<img alt="pay_img" [src]="agency.image" class="container__page__section__pay__cards__bank__img" />
+					<img alt="pay_img" [src]="agency.image" />
 					<span>{{ agency.name }}</span>
 				</div>
 			</ng-container>
 		</div>
 
-		<div class="container__page__section__pay__links" [class.end]="!isPayBank">
-			<div class="container__page__section__pay__links__button" *ngIf="isPayBank">
-				<app-button [text]="'Emisión automática después del pago.'" [color]="'link-secondary'"></app-button>
+		<div class="row links">
+			<div class="col-lg-12 col-xl-6 col-md-12 col-sm-12 d-flex justify-content-xl-center justify-content-lg-start">
+				<app-button [text]="'Emisión automática después del pago.'" [isLink]="true" [color]="'link-secondary'" [isMobile]="true"></app-button>
 			</div>
-			<div class="container__page__section__pay__links__button">
-				<app-button [text]="'¿Cómo pagar con SafetyPay online?'" [color]="'link-secondary'"></app-button>
+			<div class="col-lg-12 col-xl-6 col-md-12 col-sm-12 d-flex justify-content-xl-center justify-content-lg-start">
+				<app-button [text]="'¿Cómo pagar con SafetyPay online?'"  [isLink]="true" [color]="'link-secondary'" [isMobile]="true"></app-button>
 			</div>
 		</div>
 

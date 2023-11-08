@@ -15,6 +15,7 @@ import { ModalErrorModule } from 'src/app/shared/components/modal-error/modal-er
 import { NationalityPipe } from 'src/app/shared/pipes/nationality.pipe';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { RouterModule, Routes } from '@angular/router';
+import { AccordionComponent } from './accordion/accordion.component';
 
 export const routes: Routes = [{ path: '', component: PayComponent }];
 
@@ -36,7 +37,7 @@ export const routes: Routes = [{ path: '', component: PayComponent }];
         MatExpansionModule
     ],
     exports: [PayComponent],
-    declarations: [PayComponent, MessagePayComponent, NationalityPipe],
+    declarations: [PayComponent, MessagePayComponent, NationalityPipe, AccordionComponent],
     providers: [],
 })
 export class PayModule { }
