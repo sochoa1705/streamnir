@@ -45,32 +45,37 @@
 
   <!-- <a href="https://www.nmviajes.com/tuscitas/index.html" target="_blank" class="ps-3"> -->
   <a routerLink="/canales-de-atencion" class="ps-3">
-    <img style="width: 24px" src="assets/svg/iconContact.svg" alt="">
+    <img style="width: 24px" src="assets/svg/iconContact.svg" alt="Cont&aacute;ctanos" loading="lazy">
     <span>Contactanos</span>
   </a>
 
   <a href="https://ayuda.nmviajes.com/support/home" target="_blank">
-    <img src="assets/svg/help.svg" alt="">
+    <img src="assets/svg/help.svg" alt="Ayuda" loading="lazy">
     <span>Ayuda</span>
   </a>
 
   <ng-container *ngIf="!isLogged">
     <a (click)="openLoginModal()">
-      <img src="assets/svg/login.svg" alt="">&nbsp;<span>Iniciar sesión</span>
+      <img src="assets/svg/login.svg" alt="Login" loading="lazy">&nbsp;<span>Iniciar sesión</span>
     </a>
   </ng-container>
 
   <ng-container *ngIf="isLogged">
     <div class="boxUser">
       <div class="userlogged" (click)="showOption()">
-        <img class="img-perfil" appImgDefault [default]="'./assets/user-conect.svg'" [src]="userStorage.image" alt="">
+        <img class="img-perfil"
+             appImgDefault
+             [default]="'./assets/user-conect.svg'"
+             [src]="userStorage.image"
+             alt="Usuario"
+             loading="lazy">
       </div>
       <div class="divFlotante" *ngIf="showOptionUser">
         <div class="option" routerLink="/perfil/mi-perfil">Mi Perfil</div>
         <div class="line"></div>
         <div class="option red" (click)="logout()">Cerrar sesión</div>
         <div class="correo">
-          <img src="./assets/usuario.svg" alt=""> {{userStorage.email}}
+          <img src="./assets/usuario.svg" alt="Usuario" loading="lazy"> {{userStorage.email}}
         </div>
       </div>
     </div>
@@ -88,7 +93,7 @@
     <a class="m-3 close" (keydown.escape)="close()" (click)="drawer.toggle()">x</a>
     <ul>
       <li *ngFor="let m of menu" [ngClass]="m.footer ? 'd-none' : ''">
-        <img [src]="m.icon" alt="">
+        <img [src]="m.icon" [alt]="m.text" loading="lazy">
         <a routerLinkActive="active" [routerLink]="[m.link]" *ngIf="!m.footer && !m.external">{{ m.text }}</a>
         <a (click)="redirect(m.link)" *ngIf="!m.footer && m.external" routerLinkActive="active">{{ m.text }}</a>
         <hr>

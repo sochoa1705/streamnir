@@ -24,7 +24,7 @@
         
     
         <label *ngIf="archivo64" class="pointer"  for="file-upload">
-            <img style="width: 90px; height: auto;" [src]="archivo64" alt="">
+            <img style="width: 90px; height: auto;" [src]="archivo64" alt="Subir foto de perfil" loading="lazy">
         </label>
 
         <input id="file-upload" (change)="getFile($event)" type="file" name="myInputFile" style="display:none;" />
@@ -33,7 +33,11 @@
 
     <ng-container *ngIf="socialNetwork">
         <label (click)="showNotification()" *ngIf="imagenUrl">
-            <img class="pointer" style="width: 90px; height: auto;" [src]="imagenUrl" alt="">
+            <img class="pointer"
+                 style="width: 90px; height: auto;"
+                 [src]="imagenUrl"
+                 alt="Foto de perfil"
+                 loading="lazy">
         </label>
     </ng-container>
 

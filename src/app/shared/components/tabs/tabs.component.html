@@ -1,8 +1,7 @@
 <div class="banner" [ngClass]="show ? 'bannerHide' : ' ' ">
   <div class="content" [ngClass]="show ? 'd-none' : ' ' ">
-    <img class="onlydesktop" [src]="banner?.PathImage" alt="Banner">
-    <img class="onlyMovTablet" [src]="banner?.PathImage" alt="Banner">
-    <img class="onlyMovil" [src]="bannerMobile?.PathImage" alt="Banner">
+    <img class="d-none d-md-block" [src]="banner?.PathImage" alt="Banner" loading="eager">
+    <img class="d-md-none" [src]="bannerMobile?.PathImage" alt="Banner" loading="eager">
   </div>
   <article class="container-fluid margin-filter-">
     <div class="row">
