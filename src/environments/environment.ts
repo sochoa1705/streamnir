@@ -34,6 +34,7 @@ export const environment = {
   reCaptchaPublicKey: '6Lc9CbsmAAAAANpAUZ5Ubxl2s25BwmhZVgp7Yrev',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
+  urlNmViajesCountries: "https://servicio.nmviajes.com:9443/ZonaPrivada/v1/api/Master/Soap/Countries",
   urlMeta: "https://meta.nmviajes.com",
   //urlNmviajes: "http://localhost:12639/v1/api",
 

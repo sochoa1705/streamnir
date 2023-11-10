@@ -27,6 +27,7 @@ import { RetailComponent } from './retail/retail.component';
 import { OffersComponent } from './offers/offers.component';
 import { BenefitsComponent } from './retail/benefits/benefits.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { EventosV2Component } from './eventos-v2/eventos-v2.component';
 
 const routes: Routes = [
   {
@@ -143,8 +144,12 @@ const routes: Routes = [
       },
       {
         path: 'eventos',
-        component: EventosComponent,
+        component: EventosV2Component,
       },
+      // {
+      //   path: 'eventos',
+      //   component: EventosComponent,
+      // },
       {
         path: 'agenda-tu-cita',
         component: CitaComponent
