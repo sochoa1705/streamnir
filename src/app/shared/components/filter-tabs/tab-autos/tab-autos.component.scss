@@ -20,8 +20,14 @@
 
 .inputs__date{
     display: grid;
-    grid-template-columns: repeat(4,1fr) 126px;
+    grid-template-columns: repeat(2,1fr) 126px;
     gap:16px;
+    section{
+        margin: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap:16px;
+    }
 }
 
 input[type="time"].custom-time-input {
@@ -37,5 +43,39 @@ input[type="time"].custom-time-input {
         cursor: pointer; 
         background-image: url("/assets/svg/hour.svg");
         background-repeat: no-repeat;
+    }
+}
+
+@media(max-width:1199px){
+    .inputs__date{
+        grid-template-columns: 1fr;
+    }
+    .checkbox__line span{
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
+
+@media(max-width:575px){
+    .inputs__date{
+        gap:8px;
+    }
+    .inputs__date section{
+        grid-template-columns: 1fr;
+        gap:8px;
+    }
+    .checkbox__line > img{
+        width: 15px;
+    }
+
+    input[type="time"].custom-time-input {
+        &::-webkit-calendar-picker-indicator{
+            top:15px;
+            background-size: 16px;
+            font-size: 14px;
+        }
+    }
+    app-button{
+        margin-top: 8px;
     }
 }

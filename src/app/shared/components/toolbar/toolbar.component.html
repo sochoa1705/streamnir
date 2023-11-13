@@ -1,17 +1,19 @@
-<div class="toolbar" [class.fixed]="!isShowMenu">
+<div class="toolbar" [class.booking]="!isWhiteMenu">
 	<div class="toolbar__section">
-		<img  *ngIf="isShowMenu" class="toolbar__section__bars" alt="icon" [src]="'./assets/svg/bars.svg'">
+		<div class="toolbar__section__bars" *ngIf="isWhiteMenu" (click)="clickMenuMobile()">
+			<app-burger-menu [showMenu]="showMenuMobile"></app-burger-menu>
+		</div>
 		<img
 			class="toolbar__section__logo"
-			[src]="!isShowMenu ? './assets/svg/logoRed.svg' : './assets/svg/Logo_nmviajes.svg'"
+			[src]="!isWhiteMenu ? './assets/svg/logoRed.svg' : './assets/svg/Logo_nmviajes.svg'"
 			alt=""
 			(click)="toHome()"
 		/>
-		<div class="toolbar__section__actions" *ngIf="isShowMenu">
+		<div class="toolbar__section__actions" *ngIf="isWhiteMenu">
 			<div class="toolbar__section__actions__icon">
 				<img
 					src="./assets/svg/bi_question-circle.svg"
-					alt=""
+					alt="i"
 					(click)="redirect('https://ayuda.nmviajes.com/support/home')"
 				/>
 				<div class="toolbar__section__actions__icon__arrow"></div>
@@ -20,24 +22,28 @@
 				</div>
 			</div>
 			<div class="toolbar__section__actions__icon">
-				<img src="./assets/svg/ph_headset.svg" alt="" routerLink="/canales-de-atencion" />
+				<img src="./assets/svg/ph_headset.svg" alt="i" routerLink="/canales-de-atencion" />
 				<div class="toolbar__section__actions__icon__arrow"></div>
 				<div class="toolbar__section__actions__icon__tooltip contact">
 					<span>Contáctanos</span>
 				</div>
 			</div>
-			<ng-container *ngIf="!isLogged">
-				<app-button [text]="'Iniciar sesión'" [color]="'outline-primary'" (click)="openLoginModal()"></app-button>
-			</ng-container>
-			<div class="toolbar__section__actions__profile" *ngIf="isLogged">
+			<app-button
+				*ngIf="!isLogged"
+				[text]="'Iniciar sesión'"
+				[isMobile]="true"
+				[color]="'outline-primary'"
+				(click)="openLoginModal()"
+			></app-button>
+
+			<div class="toolbar__section__actions__profile" *ngIf="isLogged" #dropdown>
 				<img
-					appImgDefault
-					[default]="'./assets/user-conect.svg'"
 					[src]="userStorage.image"
+					onerror="this.src='./assets/svg/profile-red.svg'"
 					class="toolbar__section__actions__profile__image"
 					(click)="showOptionsProfile = !showOptionsProfile"
 				/>
-				<div class="toolbar__section__actions__profile__dropdown" #dropdown (click)="showOptionsProfile = !showOptionsProfile">
+				<div class="toolbar__section__actions__profile__dropdown" (click)="showOptionsProfile = !showOptionsProfile">
 					<span>{{ userStorage.name.split(' ')[0] }}</span>
 					<img src="./assets/svg/dropdown_login.svg" alt="" class="dropdown_img" />
 					<ng-container *ngIf="showOptionsProfile">
@@ -56,5 +62,28 @@
 				</div>
 			</div>
 		</div>
+
+		<img
+			*ngIf="!isLogged && isWhiteMenu"
+			src="./assets/svg/profile-red.svg"
+			alt="img"
+			class="profile-mobile"
+			(click)="openLoginModal()"
+		/>
+
+		<img
+			*ngIf="isLogged && isWhiteMenu"
+			routerLink="/perfil/mi-perfil"
+			onerror="this.src='./assets/svg/profile-red.svg'"
+			[src]="userStorage.image"
+			alt="img"
+			class="profile-mobile"
+		/>
 	</div>
 </div>
+<app-toolbar-mobile
+	[showItems]="showMenuMobile"
+	[isLogged]="isLogged"
+	(clickButton)="isLogged ? logout() : openLoginModal()"
+	(clickInfo)="clickMenuMobile(true)"
+></app-toolbar-mobile>

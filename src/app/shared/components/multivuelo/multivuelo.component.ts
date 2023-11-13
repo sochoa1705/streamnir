@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
-import { InputPassengersComponent } from '../input-passengers/input-passengers.component';
-import { InputClassComponent } from '../input-class/input-class.component';
 import { InputSearchFlightComponent } from '../input-search-flight/input-search-flight.component';
 import { InputRangeComponent } from '../input-range/input-range.component';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';

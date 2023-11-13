@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
 
 	selectedTab: string;
 	indexSelectedTab = 0;
+	backgroundSearch='';
 
 	constructor(
 		public dataPagePresenterService: DataPagePresenterService,
@@ -142,6 +143,7 @@ export class HomeComponent implements OnInit {
 
 	getGallery() {
 		this.dataPagePresenterService.getDataGallery().subscribe((data) => {
+			this.backgroundSearch=data.filter((item) => item.Code == 'BANNER_PRINCIPAL')[0].Images[0].PathImage.replace(/ /g, "%20") ?? '/assets/banner/home_search.png'
 		    this.bannersDestacadosWeb = data
 				.filter((item) => item.Code == 'BANNERS_DESTACADOS_1' || item.Code == 'BANNERS_DESTACADOS_2' || item.Code == 'BANNERS_DESTACADOS_3' )
 				.map((item) => item.Images);

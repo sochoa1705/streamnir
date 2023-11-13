@@ -27,7 +27,6 @@
     width: 100%;
     min-height: 368px;
 	padding: 48px 96px;
-	background-image: url("/assets/banner/home_search.png");
     background-repeat:no-repeat;
     background-size:cover;
     background-position:center;
@@ -49,10 +48,33 @@
         }
         &__form{
             width: 100%;
-            min-height: 184px;
             padding: 32px;
             border-radius: 8px;
             background: colors.$gris-50;
+        }
+    }
+    @media(max-width: 1199px){
+        padding: 24px 24px 32px 24px;
+        min-height: auto;
+        &__metasearch{
+            gap:24px;
+            &__form{
+                padding: 24px;
+            }
+        }
+        &__metasearch h3 {
+            font-size: 28px;
+            line-height: 36px;
+        }
+    }
+
+    @media(max-width: 575px){
+        &__metasearch h3{
+            font-size: 24px;
+            line-height: 32px;
+        }
+        &__metasearch__form{
+            padding: 16px;
         }
     }
 }

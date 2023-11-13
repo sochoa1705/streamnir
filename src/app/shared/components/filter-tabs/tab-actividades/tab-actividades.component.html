@@ -21,6 +21,6 @@
             </mat-option>
         </mat-autocomplete>
         <app-input-range #childDates [typeFlight]="-1"></app-input-range>
-        <app-button [text]="'Buscar'" [left]="true" [icon]="'search.svg'" (onClick)="search()"></app-button>
+        <app-button [text]="'Buscar'" [isMobile]="true" [fullWidth]="true"[left]="true" [icon]="'search.svg'" (onClick)="search()"></app-button>
     </div>
 </form>

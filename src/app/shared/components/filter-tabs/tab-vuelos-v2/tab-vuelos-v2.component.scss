@@ -42,7 +42,66 @@
 	&__inputs {
 		display: grid;
 		grid-template-columns: 1fr 0.64fr 126px;
-		column-gap: 16px;
+		gap:16px;
 		align-items: center;
+	}
+
+	@media(max-width: 1199px){
+		&__inputs{
+			grid-template-columns: 1fr;
+		}
+		app-button{
+			margin-top: 8px;
+		}
+		&__options__dropdowns{
+			gap:8px;
+		}
+	}
+
+	@media(max-width: 600px){
+		&__options__radios{
+			gap:16px;
+			&__radio img {
+				margin-right: 8px;
+			}
+		}
+	}
+
+	@media(max-width: 575px){
+		gap:16px;
+		&__options{
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 12px;
+		}
+
+		&__options__radios{
+			position: relative;
+			width: 100%;
+			overflow-x:auto;
+			overflow-y: hidden;
+			white-space: nowrap;
+			transition: all 0.2s;
+			will-change: transform;
+			&::-webkit-scrollbar-thumb {
+				background: transparent !important;
+			}
+			&__radio img {
+				width: 14px;
+			}
+			&__radio span{
+				font-size: 14px;
+				line-height: 20px;
+			}
+		}
+		&__options__dropdowns{
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			justify-content: center;
+			width: 100%;
+		}
+		&__inputs{
+			gap:8px;
+		}
 	}
 }

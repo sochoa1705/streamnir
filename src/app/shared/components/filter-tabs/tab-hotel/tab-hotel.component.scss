@@ -4,7 +4,7 @@
 	margin: 0;
 	display: flex;
 	flex-direction: column;
-	gap: 24px;
+	gap: 16px;
 	&__tags{
         display:flex;
         gap:16px;
@@ -15,7 +15,7 @@
 	&__inputs {
 		display: grid;
 		grid-template-columns: 1fr 2fr 126px;
-		column-gap: 16px;
+		gap: 16px;
 		align-items: center;
         &__group{
                 width: 100%;
@@ -59,5 +59,38 @@
                 }
                 
         }
-	}    
+	}   
+    
+    @media(max-width:1199px){
+        &__inputs {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+    }
+
+    @media(max-width:575px){
+        gap:8px;
+        &__inputs{
+            gap:8px;
+            app-button{
+                margin-top: 8px;
+            }
+            &__group {
+				input {
+					font-size: 14px;
+					line-height: 20px;
+					height: auto;
+					padding: 12px 20px 12px 33px;
+				}
+				img {
+					width: 16px;
+					top: 6px;
+				}
+			}
+        }
+        &__tags{
+            width:100%;
+            display: flow;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { dataTabs } from './data';
 
 @Component({
@@ -9,6 +9,11 @@ import { dataTabs } from './data';
 export class NewTabsFiltersComponent implements OnInit {
   @Input() indexSelectedTab=0;
   @Output() clickedTab=new EventEmitter();
+  @ViewChild('slider', { static: false }) slider: ElementRef;
+  isDown = false;
+  startX: number;
+  scrollLeft: number;
+
   constructor() { }
   dataTabs=dataTabs;
   indexActive=0;
@@ -19,6 +24,37 @@ export class NewTabsFiltersComponent implements OnInit {
   clickTab(index:number){
       this.indexActive=index;
       this.clickedTab.emit(index);
+  }
+
+  
+  @HostListener('mousedown', ['$event'])
+  onMouseDown(e: MouseEvent) {
+    this.isDown = true;
+    this.slider.nativeElement.classList.add('active');
+    this.startX = e.pageX - this.slider.nativeElement.offsetLeft;
+    this.scrollLeft = this.slider.nativeElement.scrollLeft;
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.isDown = false;
+    this.slider.nativeElement.classList.remove('active');
+  }
+
+  @HostListener('mouseup')
+  onMouseUp() {
+    this.isDown = false;
+    this.slider.nativeElement.classList.remove('active');
+  }
+
+  @HostListener('mousemove', ['$event'])
+  onMouseMove(e: MouseEvent) {
+    if (!this.isDown) return;
+    e.preventDefault();
+    const x = e.pageX - this.slider.nativeElement.offsetLeft;
+    const walk = (x - this.startX) * 3; // scroll-fast
+    this.slider.nativeElement.scrollLeft = this.scrollLeft - walk;
+    console.log(walk);
   }
 
 }

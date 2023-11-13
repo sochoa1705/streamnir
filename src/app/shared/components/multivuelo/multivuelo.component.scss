@@ -12,15 +12,21 @@
 		gap: 16px;
 	}
 
+	article{
+		margin: 0;
+	}
+
     &__multi {
 		display: grid;
 		grid-template-columns: auto 192px;
 		gap: 16px;
 		align-items: center;
+		position: relative;
 		img {
 			cursor: pointer;
 		}
         &.more-row{
+			position: relative;
             grid-template-columns: auto 192px 24px;
         }
 	}
@@ -29,5 +35,45 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		gap:16px;
+	}
+
+	@media(max-width:1199px){
+		&__multi{
+			grid-template-columns: 1fr;
+			&.more-row{
+				grid-template-columns: 1fr;
+			}
+			img{
+				position: absolute;
+				right: 10px;
+				padding: 5px;
+				border-radius: 4px;
+				border: 1px solid colors.$gris-200;
+				background: colors.$gris-50;
+				width: 30px;
+			}
+		}
+		&__actions {
+			flex-direction: column;
+			width: 100%;
+			article{
+				width: 100%;
+			}
+		}
+	}
+
+	@media(max-width:575px){
+		gap:16px;
+		&__multi{
+			gap:8px;
+		}
+		&__multi img{
+			top: 25%;
+			width: 25px;
+		}
+		&__actions{
+			gap:8px;
+		}
 	}
 }

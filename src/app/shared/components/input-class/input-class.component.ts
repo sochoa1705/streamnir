@@ -10,6 +10,7 @@ import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-f
 export class InputClassComponent implements OnInit {
   @Input() isLeft=false;
   @Input() includeFirtClass=true;
+  @Input() isSearchFlight=false;
   constructor(private _searchFiltersService: SearchFiltersService) {
 		this._searchFiltersService.isSetParams.subscribe({
 			next: (res:Params) => {
