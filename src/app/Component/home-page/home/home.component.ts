@@ -7,7 +7,6 @@ import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountsService } from 'src/app/Services/accounts.service';
 import * as bootstrap from 'bootstrap';
-import { FlightService } from 'src/app/api/api-nmviajes/services';
 import { EGalleryCode, IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 import { CryptoService } from 'src/app/Services/util/crypto.service';
@@ -30,8 +29,9 @@ export class HomeComponent implements OnInit {
 
 	airfare: any;
 
-	bannersDestacadosWeb:any[] = [];
-	
+	bannersDestacadosWeb: any[] = [];
+	bannersDestacadosTablet: any[] = [];
+	bannersDestacadosMobile: any[] = [];
 
 	bannersDestacados: IGalleryImage[] = [];
 	bannersCorporativos: IGalleryImage[] = [];
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
 
 	selectedTab: string;
 	indexSelectedTab = 0;
-	backgroundSearch='';
+	backgroundSearch = '';
 
 	constructor(
 		public dataPagePresenterService: DataPagePresenterService,
@@ -89,34 +89,33 @@ export class HomeComponent implements OnInit {
 		localStorage.removeItem('filters');
 	}
 
-	casos(){
-		this._activatedRoute.url.subscribe(urlSegments => {
-			const tab = urlSegments.map(segment => segment.path)[0];
+	casos() {
+		this._activatedRoute.url.subscribe((urlSegments) => {
+			const tab = urlSegments.map((segment) => segment.path)[0];
 			switch (tab) {
 				case 'paquetes':
-					this.indexSelectedTab=1;
+					this.indexSelectedTab = 1;
 					break;
 				case 'armapaquete':
-					this.indexSelectedTab=2;
+					this.indexSelectedTab = 2;
 					break;
 				case 'vuelohotel':
-					this.indexSelectedTab=3;
+					this.indexSelectedTab = 3;
 					break;
 				case 'hoteles':
-					this.indexSelectedTab=4;
+					this.indexSelectedTab = 4;
 					break;
 				case 'autos':
-					this.indexSelectedTab=5
+					this.indexSelectedTab = 5;
 					break;
 				case 'actividades':
-					this.indexSelectedTab=6;
+					this.indexSelectedTab = 6;
 					break;
 				default:
-					this.indexSelectedTab=0;
+					this.indexSelectedTab = 0;
 					break;
 			}
 		});
-
 	}
 
 	getConfirmacion() {
@@ -143,13 +142,36 @@ export class HomeComponent implements OnInit {
 
 	getGallery() {
 		this.dataPagePresenterService.getDataGallery().subscribe((data) => {
-			this.backgroundSearch=data.filter((item) => item.Code == 'BANNER_PRINCIPAL')[0].Images[0].PathImage.replace(/ /g, "%20") ?? '/assets/banner/home_search.png'
-		    this.bannersDestacadosWeb = data
-				.filter((item) => item.Code == 'BANNERS_DESTACADOS_1' || item.Code == 'BANNERS_DESTACADOS_2' || item.Code == 'BANNERS_DESTACADOS_3' )
+			this.backgroundSearch =
+				data.filter((item) => item.Code == 'BANNER_PRINCIPAL')[0].Images[0].PathImage.replace(/ /g, '%20') ??
+				'/assets/banner/home_search.png';
+			this.bannersDestacadosWeb = data
+				.filter(
+					(item) =>
+						item.Code == 'BANNERS_DESTACADOS_1' ||
+						item.Code == 'BANNERS_DESTACADOS_2' ||
+						item.Code == 'BANNERS_DESTACADOS_3'
+				)
+				.map((item) => item.Images);
+			this.bannersDestacadosTablet = data
+				.filter(
+					(item) =>
+						item.Code == 'BANNERS_DESTACADOS_TABLET_1' ||
+						item.Code == 'BANNERS_DESTACADOS_TABLET_2' ||
+						item.Code == 'BANNERS_DESTACADOS_TABLET_3'
+				)
+				.map((item) => item.Images);
+
+			this.bannersDestacadosMobile = data
+				.filter(
+					(item) =>
+						item.Code == 'BANNERS_DESTACADOS_MOBILE_1' ||
+						item.Code == 'BANNERS_DESTACADOS_MOBILE_2' ||
+						item.Code == 'BANNERS_DESTACADOS_MOBILE_3'
+				)
 				.map((item) => item.Images);
 		});
 	}
-
 
 	aceptConfirm() {
 		this.toggleConfirmation();

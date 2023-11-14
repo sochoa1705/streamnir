@@ -126,7 +126,7 @@ export class SectionSuperOffersComponent implements OnInit {
 	}
 
 	scrollReset(){
-		const scrollPercentage = 21; // Porcentaje de desplazamiento
+		const scrollPercentage = window.innerWidth >= 665 ? 21 : 16; // Porcentaje de desplazamiento
 		const windowHeight = window.innerHeight || document.documentElement.clientHeight;
 		const documentHeight = document.documentElement.scrollHeight;
 		const scrollTo = (documentHeight - windowHeight) * (scrollPercentage / 100);

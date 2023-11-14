@@ -7,6 +7,10 @@
 	padding: 64px 96px 40px 96px;
 	width: 100%;
 	background: colors.$gris-50;
+	&.tablet,
+	&.mobile {
+		display: none;
+	}
 	&__section {
 		max-width: 1440px;
 		margin: 0 auto;
@@ -17,7 +21,9 @@
 			&__card {
 				max-height: 320px;
 				border-radius: 16px;
-				cursor: pointer;
+				&.pointer{
+					cursor: pointer;
+				}
 				img {
 					width: 100%;
 					display: block;
@@ -84,5 +90,50 @@
 		width: 80px;
 		height: 12px;
 		margin: -2px 12px !important;
+	}
+
+	@media (max-width: 1199px) {
+		padding: 32px 24px 24px 24px;
+		&.web {
+			display: none;
+		}
+		&.tablet {
+			display: flex;
+		}
+
+		&__section__swiper__card.fullbanner {
+			max-width: 1150px;
+			aspect-ratio: 2.88/1;
+		}
+
+		.swiper {
+			padding-bottom: 40px !important;
+		}
+	}
+
+	@media (max-width: 575px) {
+		padding: 40px 24px 24px 24px;
+		&.tablet {
+			display: none;
+		}
+		&.mobile {
+			display: flex;
+		}
+
+		.swiper-pagination-bullet {
+			width: 20px;
+			height: 4px;
+			margin: 0 7px !important;
+		}
+
+		.swiper-pagination-bullet-active {
+			width: 40px;
+			height: 6px;
+			margin: -2px 7px !important;
+		}
+
+		.swiper {
+			padding-bottom: 35px !important;
+		}
 	}
 }

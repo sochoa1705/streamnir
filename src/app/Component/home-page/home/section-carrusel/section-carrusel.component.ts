@@ -1,6 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { EGalleryCode, IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
-import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
+import { Component, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import SwiperCore, { Pagination, Navigation, SwiperOptions, Autoplay } from 'swiper';
 
 
@@ -14,16 +12,11 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
 export class SectionCarruselComponent implements OnInit {
 
   constructor() { }
-  
-  /*pagination:{
-    dynamicBullets: true,
-  }*/
 
   @Input() slidersWeb:any[]=[];
   @Input() slidersTablet:any[]=[];
   @Input() slidersMobil:any[]=[];
 
-  @Input() isDinamic = false;
   config: SwiperOptions = {
     slidesPerView:1,
     slidesPerGroup:1,
@@ -32,7 +25,39 @@ export class SectionCarruselComponent implements OnInit {
     spaceBetween:48,
     pagination:{
       clickable: true,
-      dynamicBullets: this.isDinamic,
+      dynamicBullets: this.slidersWeb.length > 4 ? true : false,
+    },
+    autoplay:{
+      delay: 5000,
+      disableOnInteraction: false,
+    }
+	};
+
+  configTablet: SwiperOptions = {
+    slidesPerView:1,
+    slidesPerGroup:1,
+		navigation: false,
+		loop: true,
+    spaceBetween:48,
+    pagination:{
+      clickable: true,
+      dynamicBullets: this.slidersTablet.length > 4 ? true : false,
+    },
+    autoplay:{
+      delay: 5000,
+      disableOnInteraction: false,
+    }
+	};
+
+  configMobile: SwiperOptions = {
+    slidesPerView:1,
+    slidesPerGroup:1,
+		navigation: false,
+		loop: true,
+    spaceBetween:40,
+    pagination:{
+      clickable: true,
+      dynamicBullets: this.slidersMobil.length > 4 ? true : false,
     },
     autoplay:{
       delay: 5000,
@@ -42,6 +67,10 @@ export class SectionCarruselComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+
+  redirectLink(link:string){
+    if(link!=='' && link.includes('http')) window.open(link, '_blank');
   }
 
 }
