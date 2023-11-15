@@ -38,6 +38,7 @@
 					[title]="national.Destination | titlecase"
 					[description]="'Desde Lima'"
 					[price]="national.Rate"
+					(click)="viewRates(national.DestinationCode)"
 				></app-newcard-offer>
 			</div>
 			<div class="container__offers__section__button" *ngIf="nationalFlights.length > 4">
@@ -59,6 +60,7 @@
 					[title]="international.Destination | titlecase"
 					[description]="'Desde Lima'"
 					[price]="international.Rate"
+					(click)="viewRates(international.DestinationCode)"
 				></app-newcard-offer>
 
 			</div>

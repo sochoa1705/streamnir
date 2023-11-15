@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Offer, Offers } from 'src/app/Models/offers/offers.model';
@@ -29,7 +30,7 @@ export class SectionSuperOffersComponent implements OnInit {
 	showOffersInt = true;
 	hiddenSection = false;
 
-	constructor(private offersService: OffersService) {}
+	constructor(private offersService: OffersService, private _router:Router) {}
 
 	ngOnInit(): void {
 		this.offersNacInt();
@@ -118,6 +119,10 @@ export class SectionSuperOffersComponent implements OnInit {
 			this.internationalFlightsPag = this.internationalFlights.slice(0, currentPagInc);
 			this.currentPagInc = currentPagInc;
 		}
+	}
+
+	viewRates(destinationCode:string): void {
+		this._router.navigateByUrl(`/vuelos/destino/LIM/${destinationCode}`);
 	}
 
 	ngOnDestroy() {

@@ -91,17 +91,21 @@
 			</ng-container>
 		</div>
 		<div class="container__suscription__contend__actions">
-			<app-button
-				[text]="showMessageClose ? 'Suscrito':'Suscribirme'"
-				(onClick)="submitForm()"
-				[right]="true"
-				[isSucess]="true"
-				[disabled]="showMessageClose || isLoader"
-				[color]="'primary-green'"
-                [icon]="'check-white.svg'"
-                [isLoader]="isLoader"
-			></app-button>
-			<span [style.visibility]="(showMessageClose) ? 'visible' : 'hidden'" >Esta ventana se cerrará en 5 segundos...</span>
+			<article>
+				<app-button
+					[text]="showMessageClose ? 'Suscrito' : 'Suscribirme'"
+					(onClick)="submitForm()"
+					[right]="true"
+					[isSucess]="true"
+					[disabled]="showMessageClose || isLoader"
+					[color]="'primary-green'"
+					[icon]="'check-white.svg'"
+					[fullWidth]="true"
+					[isMobile]="true"
+					[isLoader]="isLoader"
+				></app-button>
+			</article>
+			<span [style.visibility]="showMessageClose ? 'visible' : 'hidden'">Esta ventana se cerrará en 5 segundos...</span>
 		</div>
 	</div>
 </div>

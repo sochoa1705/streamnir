@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
 	ngOnInit(): void {
 		setTimeout(() => {
 			this.matTooltip.show(1000);
-		}, 1000);
+		}, 5000);
 	}
 
 	cerrarBoxClicFuera() {

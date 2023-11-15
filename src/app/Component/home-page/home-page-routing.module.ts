@@ -28,6 +28,7 @@ import { OffersComponent } from './offers/offers.component';
 import { BenefitsComponent } from './retail/benefits/benefits.component';
 import { CanActivateCheckoutGuard } from 'src/app/Guards/checkout.guard';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { DestinosComponent } from './vuelos/commons/components/destinos/destinos.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,10 @@ const routes: Routes = [
       {
         path: 'vuelos',
         component: HomeComponent
+      },
+      {
+        path: 'vuelos/destino/LIM/:codigoCiudad',
+        component:DestinosComponent
       },
       {
         path: 'paquetes',
