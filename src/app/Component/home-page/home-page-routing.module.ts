@@ -20,8 +20,6 @@ import { CondicionesDeReservaComponent } from './condiciones-de-reserva/condicio
 import { CierrapuertasComponent } from './cierrapuertas/cierrapuertas.component';
 import { CierrapuertasOfertasComponent } from './cierrapuertas-ofertas/cierrapuertas-ofertas.component';
 import { TusDatosComponent } from './tus-datos/tus-datos.component';
-import { ItineraryComponent } from './itinerary/itinerary.component';
-import { EventosComponent } from './eventos/eventos.component';
 import { GifCardComponent } from './gif-card/gif-card.component';
 import { RetailComponent } from './retail/retail.component';
 import { OffersComponent } from './offers/offers.component';
@@ -29,6 +27,7 @@ import { BenefitsComponent } from './retail/benefits/benefits.component';
 import { CanActivateCheckoutGuard } from 'src/app/Guards/checkout.guard';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { DestinosComponent } from './vuelos/commons/components/destinos/destinos.component';
+import { EventosV2Component } from './eventos-v2/eventos-v2.component';
 
 const routes: Routes = [
   {
@@ -145,8 +144,12 @@ const routes: Routes = [
       },
       {
         path: 'eventos',
-        component: EventosComponent,
+        component: EventosV2Component,
       },
+      // {
+      //   path: 'eventos',
+      //   component: EventosComponent,
+      // },
       {
         path: 'agenda-tu-cita',
         component: CitaComponent
@@ -189,7 +192,7 @@ const routes: Routes = [
       },
       { 
         path: 'resultados',
-        loadChildren:() => import('../../../app/Component/results-search-page/results-search-page.module').then(m=>m.ResultsSearchPageModule)
+        loadChildren:() => import('../results-search-page/results-search-page.module').then(m=>m.ResultsSearchPageModule)
       }
     ],
   },
@@ -203,12 +206,12 @@ const routes: Routes = [
   },
   {
     path: 'booking',
-    loadChildren: () => import('../../../app/Component/checkout-page/checkout.module').then(m => m.CheckoutPageModule),
+    loadChildren: () => import('../checkout-page/checkout.module').then(m => m.CheckoutPageModule),
     canActivate: [CanActivateCheckoutGuard]
   },
   {
     path: 'booking/itinerary/:transactionId/:idGroup/:segments/:flightType/:departureLocation/:arrivalLocation/:departureDate/:arrivalDate/:adults/:children/:infants/:flightClass',
-    loadChildren: () => import('../../../app/Component/checkout-page/checkout.module').then(m => m.CheckoutPageModule),
+    loadChildren: () => import('../checkout-page/checkout.module').then(m => m.CheckoutPageModule),
   },
   {
     path: '404',

@@ -15,9 +15,9 @@ export const environment = {
   today: (hoy: any) => {
     return `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
   },
-  offerText: '¡Apúrate que se acaban las ofertas!',
-  offerExpireDate: '2023-10-27 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
-  offerLink: 'https://vacaciones.nmviajes.com/ES/holidays/availability?utm_source=web&utm_medium=reloj&utm_campaign=cyberwowoct&utm_id=cyberwowoct&utm_term=reloj&utm_content=reloj',
+  offerText: '¡No dejes pasar las ofertas!',
+  offerExpireDate: '2023-11-17 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
+  offerLink: 'https://vacaciones.nmviajes.com/ES/holidays/availability?utm_source=web&utm_medium=reloj&utm_campaign=cybernmviajes&utm_id=cybernmviajesnov&utm_term=reloj&utm_content=reloj',
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
   urlAutosNmViajes: 'https://autos.nmviajes.com/',

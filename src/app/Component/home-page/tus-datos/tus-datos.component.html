@@ -1,5 +1,5 @@
 <section class="mt-0 principal-banner">
-	<img class="img-fluid" [src]="banner?.PathImage" alt="Banner">
+	<img class="img-fluid" [src]="banner?.PathImage" alt="Banner Tus Datos" loading="eager">
 </section>
 <section class="container">
 	<form novalidate class="row" [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -8,23 +8,6 @@
 			<ng-container #passengersContainer></ng-container>
 			<hr class="my-4 my-lg-5">
 			<div class="row gy-3">
-				<!--<div class="col-12">
-					<select class="form-select"
-					        formControlName="store"
-					        [class.is-invalid]="store.invalid && (store.touched || errorsDisplayed)">
-						<option value="" disabled>¿En qu&eacute; tienda planeas visitarnos?</option>
-						<option value="1">NM 28 de julio - Av. 28 de julio 1136, Miraflores</option>
-						<option value="2">NM Pardo - Av. Jos&eacute; Pardo 801, Miraflores</option>
-						<option value="3">NM San Isidro - Av. Navarrete 723, San Isidro</option>
-						<option value="4">NM Mega Plaza - Av. Alfredo Mendiola 3698 Tienda L140-B 2do nivel, Independencia</option>
-						<option value="5">
-							NM Plaza San Miguel - Av. La Marina N° 2000 - Tienda 236 y 237, 2do nivel, San Miguel
-						</option>
-						<option value="6">NM La Fontana - Av. Javier Prado Este 5268 Tienda 213, La Molina</option>
-						<option value="7">NM Caminos del Inca - Av. Caminos del Inca 257 Tienda 215 - Chacarilla, Surco</option>
-						<option value="8">NM Primavera - Av. Primavera 1352 - Monterrico, Surco</option>
-					</select>
-				</div>-->
 				<div class="col-12">
 					<select class="form-select"
 					        formControlName="medium"

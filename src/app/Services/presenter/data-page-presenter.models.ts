@@ -30,3 +30,16 @@ export enum EGalleryCode {
   banner_destacados_mobile_3 = 'BANNERS_DESTACADOS_MOBILE_3',
 	banner_tus_datos_cp = 'TUS_DATOS'
 } 
+export interface IGalleryService {
+  Code: EGalleryCode,
+  Name: string,
+  Status: boolean,
+  Images: IGalleryImage[]
+}
+
+export interface IGalleryImage {
+  PathImage: string,
+  RedirectLink: string,
+  NameImage: string
+}
+

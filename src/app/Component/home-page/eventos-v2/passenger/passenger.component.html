@@ -1,0 +1,146 @@
+<div class="row mt-3 mt-lg-4">
+  <div class="col align-self-center">
+    <h6 class="inter-semi-bold" [class.mb-0]="indexToDisplay !== 0">
+      <img src="assets/svg/people-red.svg" alt="Pasajero" class="me-2">Pasajero #{{indexToDisplay + 1}}
+    </h6>
+    <p class="inter-semi-bold small" *ngIf="indexToDisplay === 0">Este pasajero es el &uacute;nico que recibe el correo
+      de
+      confirmaci&oacute;n</p>
+  </div>
+  <div class="col-auto">
+    <button type="button" class="btn-agencias activa inter-medium fs-6 w-auto py-2 px-3"
+      (click)="emmitAddNewPassenger()" *ngIf="indexToDisplay === 0">
+      Agregar<img src="assets/svg/people-white.svg" alt="Agregar" class="ms-2">
+    </button>
+    <button type="button" class="btn-agencias activa inter-medium fs-6 w-auto py-2 px-3" (click)="emitRemovePassenger()"
+      *ngIf="indexToDisplay !== 0">
+      Eliminar<img src="assets/svg/remove-circle.svg" alt="Eliminar" class="ms-2">
+    </button>
+  </div>
+</div>
+<form novalidate class="row g-3" [formGroup]="form" [ngClass]="{'pt-2 pt-lg-3': indexToDisplay !== 0}">
+  <div class="col-12 col-md-6">
+    <select class="form-select" formControlName="docType" [disabled]="isSearchLoading"
+      [class.is-invalid]="docType.invalid && (docType.touched || showErrors || showDocErrors)"
+      (change)="onDocTypeChange($event)">
+      <option value="" disabled>Tipo de documento</option>
+      <option value="CE">C. extranjer&iacute;a</option>
+      <option value="DNI">DNI</option>
+      <option value="PAS">Pasaporte</option>
+    </select>
+  </div>
+  <div class="col">
+    <input class="form-control" formControlName="docNumber" placeholder="N° de documento" [type]="docInputType"
+      [maxLength]="docInputMaxLength" [disabled]="isSearchLoading"
+      [class.is-invalid]="docNumber.invalid && (docNumber.touched || showErrors || showDocErrors)">
+  </div>
+  <div class="col-auto">
+    <button type="button" class="btn-agencias activa w-auto p-2" [disabled]="isSearchLoading"
+      (click)="onSearchByDocument()">
+      <img src="assets/svg/search.svg" alt="Buscar">
+    </button>
+  </div>
+  <div class="col-12 col-md-6 mt-lg-4">
+    <input type="text" class="form-control" formControlName="firstName" placeholder="Nombres"
+      [class.is-invalid]="firstName.invalid && (firstName.touched || showErrors)">
+  </div>
+  <div class="col-12 col-md-6 mt-lg-4">
+    <input type="text" class="form-control" formControlName="lastName" placeholder="Apellido paterno"
+      [class.is-invalid]="lastName.invalid && (lastName.touched || showErrors)">
+  </div>
+  <div class="col-12 col-md-6">
+    <input type="text" class="form-control" formControlName="mLastName" placeholder="Apellido materno"
+      [class.is-invalid]="mLastName.invalid && (mLastName.touched || showErrors)">
+  </div>
+  <div class="col-12 col-md-6">
+    <input #dateInput type="tel" maxlength="10" class="form-control" formControlName="birthDate"
+      placeholder="Fecha de nacimiento (DD/MM/AAAA)"
+      [class.is-invalid]="birthDate.invalid && (birthDate.touched || showErrors)" (input)="formatDate()">
+  </div>
+  <div class="col-12 col-md-6">
+    <input type="email" class="form-control" formControlName="email" placeholder="Email"
+      [class.is-invalid]="email.invalid && (email.touched || showErrors)">
+  </div>
+  <div class="col-12 col-md-6">
+    <input type="tel" class="form-control" formControlName="phone" maxlength="15" placeholder="Tel&eacute;fono"
+      [class.is-invalid]="phone.invalid && (phone.touched || showErrors)">
+  </div>
+
+  <div class="col-12 col-md-6 mt-lg-4">
+    <select class="form-select" formControlName="country" [disabled]="isSearchLoading"
+      [class.is-invalid]="docType.invalid && (docType.touched || showErrors || showDocErrors)"
+      (change)="onDocTypeChange($event)">
+      <option value="">Nacionalidad</option>
+    </select>
+  </div>
+
+  <div class="col-12 col-md-6 mt-lg-4">
+    <select class="form-select" formControlName="gender" [disabled]="isSearchLoading"
+      [class.is-invalid]="docType.invalid && (docType.touched || showErrors || showDocErrors)"
+      (change)="onDocTypeChange($event)">
+      <option value="">Genero</option>
+    </select>
+  </div>
+
+  <div class="col-12 col-md-6 mt-lg-4">
+    <select class="form-select" formControlName="district" [disabled]="isSearchLoading"
+      [class.is-invalid]="docType.invalid && (docType.touched || showErrors || showDocErrors)"
+      (change)="onDocTypeChange($event)">
+      <option value="">Distrito</option>
+      <option value="BELLAVISTA">BELLAVISTA</option>
+      <option value="CARMEN DE LA LEGUA">CARMEN DE LA LEGUA</option>
+      <option value="LA PERLA">LA PERLA</option>
+      <option value="LA PUNTA">LA PUNTA</option>
+      <option value="VENTANILLA">VENTANILLA</option>
+      <option value="HUARAL">HUARAL</option>
+      <option value="CERCADO DE LIMA">CERCADO DE LIMA</option>
+      <option value="ANCON">ANCON</option>
+      <option value="ATE">ATE</option>
+      <option value="BARRANCO">BARRANCO</option>
+      <option value="BREÑA">BREÑA</option>
+      <option value="CARABAYLLO">CARABAYLLO</option>
+      <option value="COMAS">COMAS</option>
+      <option value="CHACLACAYO">CHACLACAYO</option>
+      <option value="CHORRILLOS">CHORRILLOS</option>
+      <option value="EL AGUSTINO">EL AGUSTINO</option>
+      <option value="JESUS MARIA">JESUS MARIA</option>
+      <option value="LA MOLINA">LA MOLINA</option>
+      <option value="LA VICTORIA">LA VICTORIA</option>
+      <option value="LINCE">LINCE</option>
+      <option value="SAN JUAN DE LURIGANCHO">SAN JUAN DE LURIGANCHO</option>
+      <option value="LURIN">LURIN</option>
+      <option value="MAGDALENA DEL MAR">MAGDALENA DEL MAR</option>
+      <option selected="selected" value="MIRAFLORES">MIRAFLORES</option>
+      <option value="PACHACAMAC">PACHACAMAC</option>
+      <option value="PUCUSANA">PUCUSANA</option>
+      <option value="PUEBLO LIBRE">PUEBLO LIBRE</option>
+      <option value="PUENTE PIEDRA">PUENTE PIEDRA</option>
+      <option value="PUNTA NEGRA">PUNTA NEGRA</option>
+      <option value="PUNTA HERMOSA">PUNTA HERMOSA</option>
+      <option value="RIMAC">RIMAC</option>
+      <option value="SAN BARTOLO">SAN BARTOLO</option>
+      <option value="SAN ISIDRO">SAN ISIDRO</option>
+      <option value="INDEPENDENCIA">INDEPENDENCIA</option>
+      <option value="SAN J. DE MIRAFLORES">SAN J. DE MIRAFLORES</option>
+      <option value="SAN LUIS">SAN LUIS</option>
+      <option value="SAN M. DE PORRES">SAN M. DE PORRES</option>
+      <option value="SAN MIGUEL">SAN MIGUEL</option>
+      <option value="SANTIAGO DE SURCO">SANTIAGO DE SURCO</option>
+      <option value="SURQUILLO">SURQUILLO</option>
+      <option value="VILLA M. DEL TRIUNFO">VILLA M. DEL TRIUNFO</option>
+      <option value="LURIGANCHO-CHOSICA">LURIGANCHO-CHOSICA</option>
+      <option value="SANTA MARIA DEL MAR">SANTA MARIA DEL MAR</option>
+      <option value="SANTA ROSA">SANTA ROSA</option>
+      <option value="LOS OLIVOS">LOS OLIVOS</option>
+      <option value="CIENEGUILLA">CIENEGUILLA</option>
+      <option value="SAN BORJA">SAN BORJA</option>
+      <option value="VILLA EL SALVADOR">VILLA EL SALVADOR</option>
+      <option value="SANTA ANITA">SANTA ANITA</option>
+    </select>
+  </div>
+
+  <div class="col-12 col-md-6 mt-lg-4">
+    <input type="text" class="form-control" formControlName="address" placeholder="Dirección"
+      [class.is-invalid]="lastName.invalid && (lastName.touched || showErrors)">
+  </div>
+</form>
