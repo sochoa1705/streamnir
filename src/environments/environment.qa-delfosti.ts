@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   // urlBase: 'https://gds.webfarefinder.com/ServiciosTarjetaAsistencia/api/',  // PRODUCCIÓN
   muteExceptions: false,                 // DESARROLLO
   nameAppAC: 'Intranet',
@@ -15,9 +15,9 @@ export const environment = {
   today: (hoy: any) => {
     return `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
   },
-  offerText: '¡Apúrate que se acaban las ofertas!',
-  offerExpireDate: '2023-07-21 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
-  offerLink: 'https://nam02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fvacaciones.nmviajes.com%2FES%2Fholidays%2Favailability%3Futm_source%3Dweb%26utm_medium%3Dreloj%26utm_campaign%3Dcybernm%26utm_id%3Dcybwernm%26utm_term%3Dreloj%26utm_content%3Dreloj&data=05%7C01%7Csamuel.huaman%40expertiatravel.com%7C0893aa74d8fe4b8bc2ad08db84968562%7Cf47010b409cd41ffa9ca7e9b411249f6%7C0%7C0%7C638249554253218709%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=LeUv5FjKl79M0JDbVUIeN3fgkbnL2nxMCnNXzYwFRxI%3D&reserved=0',
+  offerText: '¡No dejes pasar las ofertas!',
+  offerExpireDate: '2023-11-17 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
+  offerLink: 'https://vacaciones.nmviajes.com/ES/holidays/availability?utm_source=web&utm_medium=reloj&utm_campaign=cybernmviajes&utm_id=cybernmviajesnov&utm_term=reloj&utm_content=reloj',
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
   urlAutosNmViajes: 'https://autos.nmviajes.com/',
@@ -34,6 +34,7 @@ export const environment = {
   reCaptchaPublicKey: '6Lc9CbsmAAAAANpAUZ5Ubxl2s25BwmhZVgp7Yrev',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
+  urlNmViajesCountries: "https://servicio.nmviajes.com:9443/ZonaPrivada/v1/api/Master/Soap/Countries",
   urlMeta: "https://meta.nmviajes.com",
   //urlNmviajes: "http://localhost:12639/v1/api",
 
@@ -49,7 +50,7 @@ export const environment = {
   //urlGeo: "https://motorvuelos-dev.expertiatravel.com/mv",
   urlGeo: "https://motorvuelos.expertiatravel.com/mv",
   //urlIframeMotorVuelos: "https://vuelos-dev.nmviajes.com/#/nmviajes/search/resultados",
-  urlIframeMotorVuelos: "https://qa-motorwl.nmviajes-it.com/#/nmviajes/search/resultados",
+  urlIframeMotorVuelos: "https://dev-motorwl.nmviajes-it.com/#/nmviajes/search/resultados",
   //urlIframeMotorVuelos: "http://localhost:4200/#/nmviajes/search/resultados",
 
   urlIframeMotorVuelosItinerary: "https://vuelos.nmviajes.com/#/nmviajes/booking/itinerary",
@@ -61,7 +62,6 @@ export const environment = {
 
   url_autos: 'https://autos.nmviajes.com/es/site/',
 
-
   urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela",
   urlApiPasarela: 'https://pasarella.expertiatravel.com/serviciopasarela/v1/api/',
   //urlApiPayment: "http://10.75.102.23:15001/pasarelaservicio",
@@ -70,29 +70,36 @@ export const environment = {
   urlSuggest: "https://suggest.agentcars.com/suggest/",
 
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
-
-  urlApiMotorVuelos: "https://qa-bffdelfosti.nmviajes-it.com",
-
-  urlBlog:'https://blog.nmviajes.com',
   
+  //https://qa-bffdelfosti.nmviajes-it.com https://motorvuelos.expertiatravel.com
+  urlApiMotorVuelos: "https://qa-bffdelfosti.nmviajes-it.com",
+  
+
+    //url Terms and Conditions - Checkout
+
+  urlTermsConditions: 'https://www.nmviajes.com/terminos-condiciones',
+  urlBookingConditions: 'https://www.nmviajes.com/condiciones-de-reserva',
+  urlTravelDocuments: 'https://www.nmviajes.com/documentacion-viaje',
+  
+  urlBlog:'https://blog.nmviajes.com',
   GDS:{
-    AMADEUS: 0,
-    SABRE: 1,
-    KIU: 2,
-    VIVAAIR: 4,
-    KIWI: 5,
-    SKY: 6,
-    MULTITICKET: 7,
-    AMADEUS_NDC: 21,
-    LATAM:22
+      AMADEUS: 0,
+      SABRE: 1,
+      KIU: 2,
+      VIVAAIR: 4,
+      KIWI: 5,
+      SKY: 6,
+      MULTITICKET: 7,
+      AMADEUS_NDC: 21,
+      LATAM:22
   },
   openPayConfiguration: {
     isProduction: false,
     Id: 'mqxn16kmicqj2fde6fhi',
     ApiKey: 'pk_c74367b872364e91b3143c5d87d64bb8'
   },
-  resultsInactivityTime: 300,
   urlApiDatosCliente: 'https://servicio.nmviajes.com:9443/Ecommerce',
+  resultsInactivityTime: 300,
   SEO: {
     home: {
       url: 'https://www.nmviajes.com/',
