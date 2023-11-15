@@ -1,5 +1,5 @@
 <div class="container__packages" *ngIf="dataPackages.length > 0">
-	<div class="container__packages__section">
+	<div class="container__packages__section" id="sectionPackage">
 		<div class="container__packages__section__title">
 			<h3>Paquetes creados para ti</h3>
 			<span>Explora nuestros paquetes personalizados y elige la opción perfecta para tus vacaciones de ensueño.</span>
@@ -40,7 +40,7 @@
 		<div class="container__packages__section__button">
 			<app-button 
                     [text]="dataPackagesPag.length >= dataPackages.length ? 'Ver menos' : 'Ver más paquetes'"
-                    (onClick)="updateDisplayedData()" [color]="'outline-primary'">
+                    (onClick)="updateDisplayedData()" [color]="'outline-primary'" [isMobile]="true">
             </app-button>
 		</div>
 	</div>

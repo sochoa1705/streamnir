@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GalleryItem } from 'src/app/Models/gallery/gallery-item.model';
 import { Offer, Offers } from 'src/app/Models/offers/offers.model';
 import { OffersService } from 'src/app/Services/offers/offers.service';
 
@@ -126,10 +125,6 @@ export class SectionSuperOffersComponent implements OnInit {
 	}
 
 	scrollReset(){
-		const scrollPercentage = window.innerWidth >= 665 ? 21 : 16; // Porcentaje de desplazamiento
-		const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-		const documentHeight = document.documentElement.scrollHeight;
-		const scrollTo = (documentHeight - windowHeight) * (scrollPercentage / 100);
-		window.scroll({ top: scrollTo, behavior: 'smooth' });
+		document.querySelector('#sectionOffers')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	}
 }

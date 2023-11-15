@@ -78,9 +78,11 @@
                     flex-direction: column;
                     gap:24px;
                     &__header{
-                        display: flex;
+                        display: grid;
+                        grid-template-columns: auto 48px;
                         justify-content: space-between;
                         align-items: flex-start;
+                        gap:10px;
                         span{
                             font-family: Open Sans;
                             font-size: 28px;
@@ -92,8 +94,10 @@
                             color:white;
                         }
                         svg{
+                            margin-top: -5px;
                             transition: opacity 200ms ease-in-out;
                             opacity: 0;
+                            width: 48px;
                         }
                     }
                     &__line{
@@ -137,5 +141,86 @@
             align-items: center;
         }
 
+    }
+
+	@media (max-width: 1440px) {
+		padding: 40px 60px;
+	}
+	@media (max-width: 1240px) {
+		&__section__cards {
+			gap: 32px;
+		}
+	}
+	@media (max-width: 1199px) {
+		padding: 32px 24px;
+		&__section,&__section__cards {
+			gap: 24px;
+		}
+        &__section__cards  .card-30{
+            grid-column: span 3;
+        }
+        &__section__cards__card__info{
+            padding: 32px;
+        }
+        &__section__cards__card__info__header span{
+            font-size: 24px;
+            line-height: 32px;
+        }
+        &__section__cards__card__info__description{
+            font-size: 16px;
+            line-height: 24px;
+        }
+        &__section__title h3 {
+			font-size: 28px;
+			line-height: 36px;
+		}
+		&__section__title span {
+			font-size: 16px;
+			line-height: 24px;
+		}
+    }
+    @media (max-width: 665px){
+        &__section__cards{
+            .card-50,.card-30{
+                grid-column: span 6;
+            }
+        }
+    }
+    @media (max-width: 575px){
+        padding: 24px;
+		&__section__cards {
+			gap: 16px;
+            &__card{
+                height: 320px;
+            }
+		}
+		&__section__title h3 {
+			font-size: 24px;
+			line-height: 32px;
+            padding: 0 8px;
+		}
+		&__section__title span {
+			font-size: 14px;
+			line-height: 20px;
+		}
+        &__section__cards__card__info{
+            padding: 24px;
+            gap: 16px;
+        }
+        &__section__cards__card__info__header{
+            grid-template-columns: auto 32px;
+            span{
+                font-size: 20px;
+                line-height: 28px;
+            }
+            svg{
+                width: 32px;
+                height: 32px;
+            }
+        }
+        &__section__cards__card__info__description{
+            font-size: 14px;
+            line-height: 20px;
+        }
     }
 }
