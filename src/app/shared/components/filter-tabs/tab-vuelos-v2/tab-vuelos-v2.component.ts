@@ -1,4 +1,16 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+	Component,
+	ElementRef,
+	EventEmitter,
+	HostListener,
+	Input,
+	OnChanges,
+	OnDestroy,
+	OnInit,
+	Output,
+	SimpleChanges,
+	ViewChild
+} from '@angular/core';
 import { InputPassengersComponent } from '../../input-passengers/input-passengers.component';
 import { InputRangeComponent } from '../../input-range/input-range.component';
 import { InputSearchFlightComponent } from '../../input-search-flight/input-search-flight.component';
@@ -19,23 +31,26 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 		private _notification: NotificationService,
 		private _accountService: AccountsService,
 		private router: Router,
-		private _searchFiltersService:SearchFiltersService,
-	) {
-	}
-
+		private _searchFiltersService: SearchFiltersService
+	) {}
+	@ViewChild('sliderRadios', { static: false }) sliderRadios: ElementRef;
 	@ViewChild('childPassengers') childPassengers!: InputPassengersComponent;
 	@ViewChild('childClass') childClass!: InputClassComponent;
 	@ViewChild('childInputs') childInputs!: InputSearchFlightComponent;
 	@ViewChild('childDates') childDates!: InputRangeComponent;
 	@Input() typeFlight = 0;
-	@Input() params:Params;
-	@Output() reloadPageResult=new EventEmitter();
+	@Input() params: Params;
+	@Output() reloadPageResult = new EventEmitter();
+
+	isDown = false;
+	startX: number;
+	scrollLeft: number;
 
 	ngOnInit(): void {}
 
-	ngOnChanges(changes: SimpleChanges):void{
-		if(changes.params && changes.params.currentValue){
-			if(this.counterSearch==0){
+	ngOnChanges(changes: SimpleChanges): void {
+		if (changes.params && changes.params.currentValue) {
+			if (this.counterSearch == 0) {
 				this._searchFiltersService.isSetParams.emit(this.params);
 			}
 		}
@@ -43,7 +58,7 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 
 	arrayMulti = [0];
 	indexCounter = 0;
-	counterSearch=0;
+	counterSearch = 0;
 
 	search() {
 		this.counterSearch++;
@@ -54,11 +69,12 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 
 		const errors = [];
 
-		if (!valuesInputs.arrivalLocation)  errors.push("El destino es requerido");
-		if (!valuesInputs.departureLocation) errors.push("La salida es requerido");
-		if (valuesDates.departureDate == '') errors.push("La fecha de salida es requerido");
-		if (valuesDates.arrivalDate == '' && this.typeFlight == 0) errors.push("La fecha de llegada es requerido")
-		if (errors.length > 0) this._notification.showNotificacion('Datos obligatorios sin completar',errors.join(" - "),7);
+		if (!valuesInputs.arrivalLocation) errors.push('El destino es requerido');
+		if (!valuesInputs.departureLocation) errors.push('La salida es requerido');
+		if (valuesDates.departureDate == '') errors.push('La fecha de salida es requerido');
+		if (valuesDates.arrivalDate == '' && this.typeFlight == 0) errors.push('La fecha de llegada es requerido');
+		if (errors.length > 0)
+			this._notification.showNotificacion('Datos obligatorios sin completar', errors.join(' - '), 7);
 		else {
 			const route = this.getRoute({ ...valuesClass, ...valuesPassengers, ...valuesInputs, ...valuesDates });
 			localStorage.setItem('searchParams', route);
@@ -77,16 +93,17 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 	searchDataMulti($event: any) {
 		this.counterSearch++;
 		const errors = [];
-	
+
 		$event.forEach((item: any) => {
 			item = { ...item };
 		});
 
-		if ($event.some((item: any) => !item.departureLocation)) errors.push("La salidas son requeridos")
-		if ($event.some((item: any) => !item.arrivalLocation))  errors.push("Los destinos son requeridos")
-		if ($event.some((item: any) => item.departureDate == '')) errors.push("Las fechas de salidas son requeridos")
-		
-		if (errors.length > 0) this._notification.showNotificacion('Datos obligatorios sin completar',errors.join(" - "),7)
+		if ($event.some((item: any) => !item.departureLocation)) errors.push('La salidas son requeridos');
+		if ($event.some((item: any) => !item.arrivalLocation)) errors.push('Los destinos son requeridos');
+		if ($event.some((item: any) => item.departureDate == '')) errors.push('Las fechas de salidas son requeridos');
+
+		if (errors.length > 0)
+			this._notification.showNotificacion('Datos obligatorios sin completar', errors.join(' - '), 7);
 		else this.getRouteMulti($event);
 	}
 
@@ -99,7 +116,11 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 		const userStorage = this._accountService.getUserStorage();
 		const email = userStorage.email || '';
 
-		const route = `/resultados${random}&adults=${dataGral.adults}&children=${dataGral.children}&infants=${dataGral.infants}&selected_cabins=&excludedAirlines=null&multicity=null&json=${JSON.stringify(json)}&email=${email}&flightType=2&flightClass=${dataGral.flightClass}`;
+		const route = `/resultados${random}&adults=${dataGral.adults}&children=${dataGral.children}&infants=${
+			dataGral.infants
+		}&selected_cabins=&excludedAirlines=null&multicity=null&json=${JSON.stringify(
+			json
+		)}&email=${email}&flightType=2&flightClass=${dataGral.flightClass}`;
 		localStorage.setItem('searchParams', route);
 		this.router.navigateByUrl(route);
 		this.reloadPageResult.emit();

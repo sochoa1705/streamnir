@@ -25,10 +25,11 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	isLogged = false;
 	userStorage: UserStorage;
 	img: string;
-	isShowMenu = true;
-	showOptionsProfile=false;
-	showToolTipInfo=false;
-	showToolTipSupport=false;
+	isWhiteMenu = true;
+	showOptionsProfile = false;
+	showToolTipInfo = false;
+	showToolTipSupport = false;
+	showMenuMobile = false;
 
 	loginModalSubscription = new Subscription();
 
@@ -38,11 +39,11 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 		private modalService: NgbModal,
 		public route: Router,
 		public accountService: AccountsService,
-		private _checkoutService:CheckoutService
+		private _checkoutService: CheckoutService
 	) {
 		this.route.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: any) => {
-			if ((event.url).toString().includes('booking')) this.isShowMenu = false;
-			else this.isShowMenu = true;
+			if (event.url.toString().includes('booking')) this.isWhiteMenu = false;
+			else this.isWhiteMenu = true;
 		});
 	}
 
@@ -71,7 +72,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	}
 
 	toHome() {
-		this._checkoutService.currentIndexStep=-1;
+		this._checkoutService.currentIndexStep = -1;
+		this.showMenuMobile=false;
 		this.route.navigateByUrl('/');
 		// Renombrando valores para SEO - Inicio
 		document.getElementsByTagName('title')[0].innerHTML = environment.SEO.home.title;
@@ -110,6 +112,12 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 		window.open(e, '_blank');
 	}
 
+	clickMenuMobile(isClose=false) {
+		this.showMenuMobile = isClose ? false : !this.showMenuMobile;
+		if (this.showMenuMobile) document.body.style.overflow = 'hidden';
+		else document.body.style.overflow = 'auto';
+	}
+
 	showOptionUser: Boolean = false;
 	showOption() {
 		this.showOptionUser = !this.showOptionUser;
@@ -130,6 +138,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	}
 
 	openLoginModal() {
+		this.clickMenuMobile(true);
 		const loginModalRef = this.modalService.open(LoginComponent, {
 			backdrop: 'static'
 		});
@@ -174,7 +183,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	logout() {
 		this._authService.signOut();
 		this.accountService.signOut();
-		this.showOptionsProfile=false;
+		this.showOptionsProfile = false;
+		this.clickMenuMobile(true);
 		this.route.navigateByUrl('/');
 	}
 
@@ -186,8 +196,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	@HostListener('document:click', ['$event'])
 	blurRange(event: MouseEvent) {
 		if (this.miDiv && !this.miDiv.nativeElement.contains(event.target)) {
-			this.showOptionsProfile=false;
-		  }
+			this.showOptionsProfile = false;
+		}
 	}
 
 	ngOnDestroy() {

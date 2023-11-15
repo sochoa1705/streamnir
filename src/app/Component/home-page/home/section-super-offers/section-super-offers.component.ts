@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GalleryItem } from 'src/app/Models/gallery/gallery-item.model';
 import { Offer, Offers } from 'src/app/Models/offers/offers.model';
 import { OffersService } from 'src/app/Services/offers/offers.service';
 
@@ -30,7 +30,7 @@ export class SectionSuperOffersComponent implements OnInit {
 	showOffersInt = true;
 	hiddenSection = false;
 
-	constructor(private offersService: OffersService) {}
+	constructor(private offersService: OffersService, private _router:Router) {}
 
 	ngOnInit(): void {
 		this.offersNacInt();
@@ -121,15 +121,15 @@ export class SectionSuperOffersComponent implements OnInit {
 		}
 	}
 
+	viewRates(destinationCode:string): void {
+		this._router.navigateByUrl(`/vuelos/destino/LIM/${destinationCode}`);
+	}
+
 	ngOnDestroy() {
 		this.offersSubscription.unsubscribe();
 	}
 
 	scrollReset(){
-		const scrollPercentage = 21; // Porcentaje de desplazamiento
-		const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-		const documentHeight = document.documentElement.scrollHeight;
-		const scrollTo = (documentHeight - windowHeight) * (scrollPercentage / 100);
-		window.scroll({ top: scrollTo, behavior: 'smooth' });
+		document.querySelector('#sectionOffers')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	}
 }

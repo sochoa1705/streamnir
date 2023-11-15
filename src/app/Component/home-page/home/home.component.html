@@ -1,27 +1,40 @@
 <mat-drawer-container class="example-container">
-  <app-new-tabs-filters (clickedTab)="indexSelectedTab=$event" [indexSelectedTab]="indexSelectedTab"></app-new-tabs-filters>
-  <div class="search__container">
-      <div class="search__container__metasearch">
-          <h3>Encuentra vuelos para tu próximo viaje</h3>
-          <div  class="search__container__metasearch__form">
-              <app-tab-vuelos-v2 *ngIf="indexSelectedTab==0" [@fadeInOut]></app-tab-vuelos-v2>
-              <app-tab-paquetes *ngIf="indexSelectedTab==1" [@fadeInOut]></app-tab-paquetes>
-              <app-tab-arma-paquetes *ngIf="indexSelectedTab==2" [@fadeInOut]></app-tab-arma-paquetes>
-              <app-tab-vuelo-hotel *ngIf="indexSelectedTab==3" [@fadeInOut]></app-tab-vuelo-hotel>
-              <app-tab-hotel *ngIf="indexSelectedTab==4" [@fadeInOut]></app-tab-hotel>
-              <app-tab-autos  *ngIf="indexSelectedTab==5" [@fadeInOut]></app-tab-autos>
-              <app-tab-actividades *ngIf="indexSelectedTab==6" [@fadeInOut]></app-tab-actividades>
-              <app-filtersafe  *ngIf="indexSelectedTab==7" [@fadeInOut]></app-filtersafe> 
-          </div>
-      </div>
-  </div>
-  <app-section-carrusel [slidersWeb]="bannersDestacadosWeb" [isDinamic]="bannersDestacadosWeb.length > 4"></app-section-carrusel>
-  <app-section-super-offers></app-section-super-offers>
-  <app-section-packages></app-section-packages>
-  <app-section-why-choose-us [dataSection]="dataPagePresenterService.data.sections[4].card"></app-section-why-choose-us>
-  <app-section-blog></app-section-blog>
-  <app-section-boletin></app-section-boletin>
-  <!--<ng-container [ngSwitch]="selectedTab">
+	<app-new-tabs-filters
+		(clickedTab)="indexSelectedTab = $event"
+		[indexSelectedTab]="indexSelectedTab"
+	></app-new-tabs-filters>
+	<div
+		class="search__container"
+		[ngStyle]="{
+			background:
+				'linear-gradient(0deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.60) 100%), url(' + backgroundSearch + ')'
+		}"
+	>
+		<div class="search__container__metasearch">
+			<h3>Encuentra vuelos para tu próximo viaje</h3>
+			<div class="search__container__metasearch__form">
+				<app-tab-vuelos-v2 *ngIf="indexSelectedTab == 0" [@fadeInOut]></app-tab-vuelos-v2>
+				<app-tab-paquetes *ngIf="indexSelectedTab == 1" [@fadeInOut]></app-tab-paquetes>
+				<app-tab-arma-paquetes *ngIf="indexSelectedTab == 2" [@fadeInOut]></app-tab-arma-paquetes>
+				<app-tab-vuelo-hotel *ngIf="indexSelectedTab == 3" [@fadeInOut]></app-tab-vuelo-hotel>
+				<app-tab-hotel *ngIf="indexSelectedTab == 4" [@fadeInOut]></app-tab-hotel>
+				<app-tab-autos *ngIf="indexSelectedTab == 5" [@fadeInOut]></app-tab-autos>
+				<app-tab-actividades *ngIf="indexSelectedTab == 6" [@fadeInOut]></app-tab-actividades>
+				<app-filtersafe *ngIf="indexSelectedTab == 7" [@fadeInOut]></app-filtersafe>
+			</div>
+		</div>
+	</div>
+	<app-section-carrusel
+		[slidersWeb]="bannersDestacadosWeb"
+		[slidersTablet]="bannersDestacadosTablet"
+		[slidersMobil]="bannersDestacadosMobile"
+	></app-section-carrusel>
+	<app-section-super-offers></app-section-super-offers>
+	<app-section-packages></app-section-packages>
+	<app-section-why-choose-us [dataSection]="dataPagePresenterService.data.sections[4].card"></app-section-why-choose-us>
+	<app-section-blog></app-section-blog>
+	<app-section-boletin></app-section-boletin>
+	<!--<ng-container [ngSwitch]="selectedTab">
     <ng-container *ngSwitchCase="'home'">
       <app-aside *ngIf="loadedGallery" [slider]="sliderDestacados" [images]="bannersDestacados"
         [banners_corps]="bannersCorporativos" [selectedTab]="selectedTab"></app-aside>
@@ -77,26 +90,31 @@
 
 </mat-drawer-container>-->
 
-<!-- Modal Usuario Verificado -->
-<div class="modal" data-backdrop="false" id="ModalUsuarioVerificado" tabindex="-1"
-  aria-labelledby="ModalUsuarioVerificadoLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="iconCenter">
-          <img src="./assets/modal/usuario-verificado.svg" alt="">
-        </div>
-        <div class="titleVerifica">¡Perfecto!</div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="descripText">
-          Su usuario fue activado con éxito.
-        </div>
-        <div class="action">
-          <button (click)="aceptConfirm()" type="button" class="">Aceptar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+	<!-- Modal Usuario Verificado -->
+	<div
+		class="modal"
+		data-backdrop="false"
+		id="ModalUsuarioVerificado"
+		tabindex="-1"
+		aria-labelledby="ModalUsuarioVerificadoLabel"
+		aria-hidden="true"
+	>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="iconCenter">
+						<img src="./assets/modal/usuario-verificado.svg" alt="" />
+					</div>
+					<div class="titleVerifica">¡Perfecto!</div>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="descripText">Su usuario fue activado con éxito.</div>
+					<div class="action">
+						<button (click)="aceptConfirm()" type="button" class="">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</mat-drawer-container>

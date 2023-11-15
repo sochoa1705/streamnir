@@ -2,8 +2,6 @@
 .container__class{
     position: relative;
     &__name{
-        min-width: 128px;
-        height: 36px;
         padding: 8px 12px;
         display: flex;
         justify-content: flex-start;
@@ -34,7 +32,7 @@
             left:0;
             right: auto;
         }
-        z-index: 3;
+        z-index: 4;
         &__options{
             width: 160px;
             padding: 8px 12px;
@@ -102,6 +100,32 @@
                 left:15px;
                 right: auto;
             }
+        }
+    }
+    @media(max-width: 1199px){
+        &__name.isSearchFlight span{
+            display: none;
+        }
+    }
+    @media(max-width: 575px){
+        &__name.isSearchFlight{
+            flex-direction: column;
+            padding: 8px 4px;
+            gap: 4px;
+            width: 100%;
+        }
+
+        &__name span{
+            font-size: 12px;
+            line-height: 20px;
+            font-weight: 400;
+        }
+
+        &__name.isSearchFlight span{
+            display: block;
+        }
+        &__floating{
+            top:59px;
         }
     }
 }

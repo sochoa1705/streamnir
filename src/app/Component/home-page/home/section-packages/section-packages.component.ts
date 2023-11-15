@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Package } from 'src/app/Models/packages/packages.interface';
 import { PackageService } from 'src/app/Services/packages/packages.service';
 
@@ -29,10 +29,11 @@ export class SectionPackagesComponent implements OnInit {
 	}
 
 	updateDisplayedData() {
-		const currentPag = this.currentPag == 0 ? this.currentPag + 5 : this.currentPag + 3;
+		const number_responsive = window.innerWidth <= 1199 ? 1 : 0
+		const currentPag = this.currentPag == 0 ? this.currentPag + (5 - number_responsive) : this.currentPag + (3 - number_responsive);
 		if (currentPag > this.dataPackages.length) {
-			this.dataPackagesPag = this.dataPackages.slice(0, 5);
-			this.currentPag = 5;
+			this.dataPackagesPag = this.dataPackages.slice(0, (5 - number_responsive));
+			this.currentPag = (5 - number_responsive);
 			this.scrollReset();
 		} else {
 			this.dataPackagesPag = this.dataPackages.slice(0, currentPag);
@@ -41,10 +42,21 @@ export class SectionPackagesComponent implements OnInit {
 	}
 
 	scrollReset() {
-		const scrollPercentage = 38; // Porcentaje de desplazamiento
-		const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-		const documentHeight = document.documentElement.scrollHeight;
-		const scrollTo = (documentHeight - windowHeight) * (scrollPercentage / 100);
-		window.scroll({ top: scrollTo, behavior: 'smooth' });
+		document.querySelector('#sectionPackage')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}
+
+	@HostListener('window:resize', ['$event'])
+	onResize(event: any) {
+		if (window.innerWidth < 1199) {
+			if(this.dataPackages.length!==4){
+				this.currentPag=0
+				this.updateDisplayedData()
+			}
+		}else{
+			if(this.dataPackages.length!==5){
+				this.currentPag=0
+				this.updateDisplayedData()
+			}
+		}
 	}
 }

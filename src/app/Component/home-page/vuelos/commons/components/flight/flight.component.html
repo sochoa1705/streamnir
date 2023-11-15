@@ -73,16 +73,16 @@
       <div class="boxImgVuelo">
         <div class="gridVuelo">
           <div class="gridItem1">
-            <img src="./assets/vuelos/img-01.webp" alt="">
+            <img src="./assets/vuelos/img-01.webp" alt="Huacachina" loading="lazy">
           </div>
           <div class="gridItem2">
-            <img src="./assets/vuelos/img-02.webp" alt="">
+            <img src="./assets/vuelos/img-02.webp" alt="Amazonas" loading="lazy">
           </div>
           <div class="gridItem3">
-            <img src="./assets/vuelos/img-03.webp" alt="">
+            <img src="./assets/vuelos/img-03.webp" alt="Machu Picchu" loading="lazy">
           </div>
           <div class="gridItem4">
-            <img src="./assets/vuelos/img-04.webp" alt="">
+            <img src="./assets/vuelos/img-04.webp" alt="Arequipa" loading="lazy">
           </div>
         </div>
       </div>
@@ -94,7 +94,7 @@
   <div class="container-fluid">
     <div class="row mnuViaja">
       <div class="col-md-5 padLeft70">
-        <img src="./assets/vuelos/viaja.png" alt="">
+        <img src="./assets/vuelos/viaja.png" alt="Viaja al Per&uacute; y al mundo" loading="lazy">
       </div>
       <div class="col-md-7 vuelos" *ngIf="$vuelos">
         <div (click)="redirigirVuelo(item)" class="subMenu vuelos__vuelo" *ngFor="let item of $vuelos | async">

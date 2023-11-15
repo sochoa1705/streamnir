@@ -8,20 +8,20 @@
 	<div class="carousel-inner">
 		<div class="carousel-item" [attr.data-interval]="interval" [class.active]="i === 0"
 		     *ngFor="let imgSrc of images let i = index">
-			<img [src]="imgSrc" alt="" class="d-block w-100 img-fluid rounded-1">
+			<img [src]="imgSrc" alt="" class="d-block w-100 img-fluid rounded-1" loading="lazy">
 		</div>
 	</div>
 	<button class="carousel-control-prev d-none d-lg-flex" type="button" data-bs-slide="prev"
 	        [attr.data-bs-target]="getIdXmlFormatted()">
 		<span class="carousel-prev-icon" aria-hidden="true">
-		  <img src="./assets/icon-left.svg" alt="">
+		  <img src="./assets/icon-left.svg" alt="Anterior">
 		</span>
 		<span class="visually-hidden">Previous</span>
 	</button>
 	<button class="carousel-control-next d-none d-lg-flex" type="button" data-bs-slide="next"
 	        [attr.data-bs-target]="getIdXmlFormatted()">
 		<span class="carousel-next-icon" aria-hidden="true">
-		  <img src="./assets/icon-right.svg" alt="">
+		  <img src="./assets/icon-right.svg" alt="Siguiente">
 		</span>
 		<span class="visually-hidden">Next</span>
 	</button>

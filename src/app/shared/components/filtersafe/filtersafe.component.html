@@ -1,7 +1,7 @@
 <form [formGroup]="insuranceQuoteForm" novalidate>
-	<div class="row gx-3 gy-4">
+	<div class="row gx-3 gy-md-3 gy-sm-3 gy-xs-2 gy-2">
 		<div class="col-md-12">
-			<section>
+			<article>
 				<div class="tag__passenger" #tagSecure>
 					<div class="tag__passenger__name" (click)="showPassengerBox = !showPassengerBox">
 						<img src="./assets/svg/people-red2.svg" alt="" />
@@ -52,35 +52,37 @@
 					<img src="./assets/svg/arrow-left-info.svg" alt="<-" />
 					<span>Ingresa aquí la información de los pasajeros</span>
 				</div>
-			</section>
+			</article>
 		</div>
 		<div class="col-md-12">
 			<div class="inputs__form">
-				<div class="columnFiltro flexCero width110 boxHideM">
-					<div class="iconBandera">
-						<img src="./assets/svg/flag-peru.svg" alt="" />
+				<section>
+					<div class="columnFiltro flexCero width110 boxHideM">
+						<div class="iconBandera">
+							<img src="./assets/svg/flag-peru.svg" alt="" />
+						</div>
+						<select
+							class="form-select selectSeguro"
+							formControlName="origenSafe"
+							aria-label="Default select example"
+						>
+							<option selected value="510">PE</option>
+						</select>
 					</div>
 					<select
+						#destino
 						class="form-select selectSeguro"
-						formControlName="origenSafe"
+						formControlName="destinoSafe"
 						aria-label="Default select example"
+						required
+			  [class.first-option]="insuranceQuoteForm.controls.destinoSafe.value==''"
 					>
-						<option selected value="510">PE</option>
+			  <option value="" disabled selected hidden>Seleccionar destino</option>
+						<option *ngFor="let o of options" value="{{ o.ref_assistcard }}">{{ o.descripcion_destino }}</option>
 					</select>
-				</div>
-				<select
-					#destino
-					class="form-select selectSeguro"
-					formControlName="destinoSafe"
-					aria-label="Default select example"
-					required
-          [class.first-option]="insuranceQuoteForm.controls.destinoSafe.value==''"
-				>
-          <option value="" disabled selected hidden>Seleccionar destino</option>
-					<option *ngFor="let o of options" value="{{ o.ref_assistcard }}">{{ o.descripcion_destino }}</option>
-				</select>
+				</section>
         <app-input-range #childDates [typeFlight]="-1"></app-input-range>
-        <app-button [text]="'Cotizar ahora'" (onClick)="quoteNow()"></app-button>
+        <app-button [isMobile]="true" [fullWidth]="true" [text]="'Cotizar ahora'" (onClick)="quoteNow()"></app-button>
 			</div>
 		</div>
 	</div>

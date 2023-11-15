@@ -13,7 +13,6 @@ export class DeactivateGuard implements CanDeactivate<unknown> {
 	constructor(private _checkoutService: CheckoutService) {}
 
 	canDeactivate(): CanDeactivateType {
-		if(GlobalComponent.isKayak) return true
 		if(!this._checkoutService.isSaveDataPassenger){
 			this._checkoutService.openModalUnSavedPassenger.emit();
 			return false

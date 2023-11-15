@@ -14,6 +14,8 @@
 		width: 100%;
 		height: 100%;
 		border-radius: 8px 0px 0px 8px;
+		object-fit: cover;
+    	object-position: center;
 	}
 	&__contend {
 		padding: 32px 32px 48px 32px;
@@ -113,7 +115,7 @@
 		&__checks{
 			display: flex;
 			flex-direction: column;
-			gap:14px;
+			gap:12px;
 			&__row{
 				display: grid;
 				grid-template-columns: 18px auto;
@@ -122,12 +124,13 @@
 				img{
 					width: 18px;
 					cursor: pointer;
+					margin-top: 4px;
 				}
 				section{
 					margin: 0;
-					display: flex;
-					gap:3px;
-					flex-direction: row;
+					a{
+						margin-left: 5px;
+					}
 				}
 				a,span{
 					@extend .paragraph;
@@ -152,6 +155,9 @@
 			align-items: center;
 			gap: 12px;
 			width: 100%;
+			article{
+				margin:0;
+			}
 			span{
 				@extend .paragraph;
 			}
@@ -163,6 +169,76 @@
 		border-radius: 12px;
 		margin-left: -280px;
 		min-height: 535px;
+	}
+
+	@media (max-width: 1199px){
+		min-width: 720px;
+		background: white;
+		border-radius: 12px;
+		margin-left: -110px;
+		min-height: 535px;
+		grid-template-columns: .55fr 1fr;
+		&__contend{
+			padding: 24px;
+		}
+		&__contend__header__text{
+			h3{
+				font-size: 28px;
+				line-height: 36px;
+			}
+			span{
+				font-size: 14px;
+				line-height: 20px;
+			}
+			img{
+				width: 24px;
+			}
+		}
+		&__contend__checks__row a, 
+		&__contend__checks__row span,
+		&__contend__actions span{
+			font-size: 12px;
+			line-height: 20px;
+		}
+	}
+
+	@media (max-width: 760px){
+		grid-template-columns: 1fr;
+		min-width: auto;
+		min-height: auto;
+		margin-left: auto;
+		&__image{
+			display: none;
+		}
+	}
+
+	@media (max-width:575px){
+		&__contend{
+			gap:20px;
+		}
+		&__contend__form {
+			grid-template-columns: 1fr;
+			grid-template-rows: auto auto auto;
+			gap:8px;
+			&__group,&__group.w-100{
+				grid-column: 1;
+				grid-row: auto;
+			}
+		}
+		//container__suscription__contend__actions
+		//container__suscription__contend__actions
+		&__contend__actions > article{
+			width: 100%;
+		}
+		&__contend__header__text{
+			padding-left: 0;
+		}
+		&__contend__header__close{
+			width: 24px;
+		}
+		&__contend__checks{
+			gap:6px;
+		}
 	}
 }
 

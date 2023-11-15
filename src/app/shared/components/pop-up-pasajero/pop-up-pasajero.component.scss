@@ -32,6 +32,38 @@
             line-height: 20px;
             letter-spacing: 0em;
             text-align: left;
+            text-overflow: ellipsis;
+            overflow: hidden; 
+            white-space: nowrap;
+        }
+    }
+
+    @media(max-width: 990px) and (min-width: 640px){
+        .boxFlotante{
+            left: 0 !important;
+        }
+    }
+    @media(max-width:575px){
+        &__name{
+            width: 100%;
+            justify-content: flex-start;
+        }
+        &__name span{
+            font-size: 12px;
+            font-weight: 400;
+        }
+        .boxFlotante{
+            left:0;
+            top: 40px;
+            width: 100%;
+            .boxTwoPasajero .groupItem.inLine{
+                flex-direction: column;
+            }
+        }
+    }
+    @media(max-width:320px){
+        .boxTwoPasajero,.btnPasajero {
+            padding: 10px !important;
         }
     }
 }

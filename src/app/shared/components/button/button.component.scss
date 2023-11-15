@@ -158,6 +158,9 @@
 		}
 	}
 	&.isMobile {
+		&.fullwidth{
+			width: 100%;
+		}
 		@media (max-width: 1199px) {
 			height: 40px !important;
 			font-size: 14px;

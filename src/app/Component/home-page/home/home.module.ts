@@ -36,6 +36,7 @@ import { SectionSuperOffersComponent } from './section-super-offers/section-supe
 import { SectionCarruselComponent } from './section-carrusel/section-carrusel.component';
 import { SwiperModule } from 'swiper/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NewCardOfferModule } from 'src/app/shared/components/newcard-offer/newcard.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
@@ -75,7 +76,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ButtonModule,
     SwiperModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NewCardOfferModule
   ],
   exports: [HomeComponent],
   providers: [DestinyService, AsidePresenterService, BusinessUnitService],

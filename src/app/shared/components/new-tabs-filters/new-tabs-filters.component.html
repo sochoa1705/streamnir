@@ -1,5 +1,5 @@
 <div class="new__tabs" >
-   <div class="new__tabs__section">
+   <div class="new__tabs__section" #slider>
     <ng-container *ngFor="let tab of dataTabs; let i=index">
         <div class="new__tabs__section__tab" [class.active]="indexActive==i" (click)="clickTab(i)">
             <img [src]="indexActive==i ? tab.active: tab.icon" alt="" >

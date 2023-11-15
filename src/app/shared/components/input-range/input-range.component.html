@@ -37,8 +37,8 @@
 				</ngb-datepicker>
 			</div>
 			<div class="container__range__datepicker__buttons">
-				<app-button [text]="'Cancelar'" [size]="'xs'" [color]="'neutral'" (onClick)="openCalendar(true)"></app-button>
-				<app-button [text]="'Aplicar'" [size]="'xs'" [color]="'outline-primary'" (onClick)="applyRange()"></app-button>
+				<app-button [text]="'Cancelar'" [size]="'xs'" [isMobile]="true" [color]="'neutral'" (onClick)="openCalendar(true)"></app-button>
+				<app-button [text]="'Aplicar'" [size]="'xs'" [isMobile]="true" [color]="'outline-primary'" (onClick)="applyRange()"></app-button>
 			</div>
 		</div>
 		<ng-template #t let-date let-focused="focused">

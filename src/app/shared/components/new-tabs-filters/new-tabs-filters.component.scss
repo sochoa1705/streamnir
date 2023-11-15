@@ -5,12 +5,24 @@
 	padding: 24px 96px;
 	background: white;
 	width: 100%;
+    margin-top: 100px;
 	&__section {
 		max-width: 1440px;
 		margin: 0 auto;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+        position: relative;
+        width: 100%;
+        overflow-x:auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        transition: all 0.2s;
+        will-change: transform;
+        gap: 32px;
+        &::-webkit-scrollbar-thumb {
+            background: transparent !important;
+        }
         &__tab{
             padding: 4px 8px 4px 8px;
             display: flex;
@@ -56,4 +68,26 @@
             }
         }
 	}
+    @media(max-width: 1199px){
+        margin-top: 70px;
+        padding: 16px 24px;
+        
+        &__section__tab img{
+            width: 28px;
+        }
+        &__section__tab span{
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+    @media(max-width: 575px){
+        margin-top: 50px;
+        padding: 12px 24px;
+        &__section{
+            gap:24px
+        }
+        &__section__tab span{
+            font-size: 12px;
+        }
+    }
 }

@@ -1,7 +1,7 @@
 <!--assets/svg/radio-check.svg-->
 <div class="section__search">
 	<div class="section__search__options">
-		<div class="section__search__options__radios">
+		<div class="section__search__options__radios" #sliderRadios>
 			<div class="section__search__options__radios__radio" (click)="changeType(0)">
 				<img [src]="typeFlight == 0 ? 'assets/svg/radio-check.svg' : './assets/svg/radio-circle.svg'" alt="o" />
 				<span>Ida y vuelta</span>
@@ -17,13 +17,13 @@
 		</div>
 		<div class="section__search__options__dropdowns">
 			<app-input-passengers #childPassengers></app-input-passengers>
-			<app-input-class #childClass></app-input-class>
+			<app-input-class #childClass [isSearchFlight]="true"></app-input-class>
 		</div>
 	</div>
 	<div class="section__search__inputs" *ngIf="typeFlight !== 2">
 		<app-input-search-flight #childInputs></app-input-search-flight>
 		<app-input-range #childDates [typeFlight]="typeFlight"></app-input-range>
-		<app-button [text]="'Buscar'" [left]="true" [icon]="'search.svg'" (onClick)="search()"></app-button>
+		<app-button [text]="'Buscar'" [isMobile]="true" [fullWidth]="true"  [left]="true" [icon]="'search.svg'" (onClick)="search()"></app-button>
 	</div>
     <app-multivuelo *ngIf="typeFlight == 2" [params]="params" (searchDataMulti)="searchDataMulti($event)"></app-multivuelo>
 </div>

@@ -36,11 +36,15 @@
             justify-content: center;
             &__option{
                 padding:24px 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;    
                 text-align: center;
+                align-items: center;
+                gap:16px;
                 max-width: 384px;
                 img{
                     width: 96px;
-                    margin-bottom: 16px;
                 }
                 &__info{
                     display: flex;
@@ -63,6 +67,85 @@
                         text-align: center;
                         color:colors.$neutral-500;
                     }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 1368px) {
+		padding: 24px 60px;
+	}
+
+	@media (max-width: 1199px) {
+		padding: 32px 24px;
+        &__section{
+			gap: 24px;
+		}
+        &__section__title h3 {
+			font-size: 28px;
+			line-height: 36px;
+		}
+		&__section__title span {
+			font-size: 16px;
+			line-height: 24px;
+		}
+        &__section__options{
+            flex-direction: column;
+            gap: 0;
+            margin: 0 auto;
+            padding: 0 24px;
+            &__option{
+                max-width: fit-content;
+                flex-direction: row;
+                padding: 12px 0;
+                gap: 32px;
+                &__info{
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    gap: 2px;
+                    span{
+                        font-size: 14px;
+                        line-height: 20px;
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 575px){
+        padding: 24px;
+		&__section__title h3 {
+			font-size: 24px;
+			line-height: 32px;
+            padding: 0 8px;
+		}
+		&__section__title span {
+			font-size: 14px;
+			line-height: 20px;
+		}
+        &__section__options{
+            padding: 0 10px;
+        }
+        &__section__options__option{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 0;
+            img{
+                width: 64px;
+            }
+            &__info{
+                align-items: center;
+                h6{
+                    font-size: 18px;
+                    padding: 0 8px;
+                }
+                span{
+                    text-align: center;
+                    font-size: 12px;
+                    line-height: 20px;
                 }
             }
         }

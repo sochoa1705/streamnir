@@ -12,10 +12,11 @@
     transition: 300ms ease;
     & .d-flex {
         height: 281px;
+        z-index: 2;
     }
     & img {
         position: absolute;
-        z-index: -1;
+        z-index: 1;
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -45,9 +46,9 @@
         top: 0;
         bottom: 0;
         z-index: 0;
-        background: rgba(33, 55, 67, 0.6);
-        z-index: -1;
-        transition: all 300ms ease-in-out;
+        background: #00000026;
+        z-index: 1;
+        transition: all 150ms ease;
     }
     h {
         &1 {
@@ -113,6 +114,7 @@
     }
     .show {
         width: 100%;
+        z-index: 2;
     }
     & .hidden {
         display: none;
