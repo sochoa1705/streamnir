@@ -16,6 +16,7 @@
 .container__blog {
 	padding: 40px 96px;
 	width: 100%;
+	background: white;
 	&__section {
 		max-width: 1440px;
 		margin: 0 auto;
@@ -247,8 +248,8 @@
 		margin: -2px 7px !important;
 	}
 
-	@media (max-width: 1440px) {
-		padding: 40px 60px;
+	@media (max-width: 1368px) {
+		padding: 24px 60px;
 	}
 
 	@media (max-width: 1199px) {

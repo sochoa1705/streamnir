@@ -143,9 +143,10 @@
 
     }
 
-	@media (max-width: 1440px) {
-		padding: 40px 60px;
+    @media (max-width: 1368px) {
+		padding: 24px 60px;
 	}
+
 	@media (max-width: 1240px) {
 		&__section__cards {
 			gap: 32px;

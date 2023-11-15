@@ -1,47 +1,94 @@
 @use '/src/scss/colors';
-.container__boletin{
-    width: 100%;
-    background: colors.$gris-50;
-    padding: 40px 112px;
-    &__section{
-        max-width: 1440px;
+.container__boletin {
+	width: 100%;
+	background: colors.$gris-50;
+	padding: 40px 112px;
+    section{
+        margin: 0;
+    }
+	&__section {
+		max-width: 1440px;
 		margin: 0 auto;
-        display: flex;
-        gap:48px;
-        justify-content: center;
-        align-items: center;
-        &__info{
-            display: flex;
-            justify-content: flex-start;
+		display: flex;
+		gap: 48px;
+		justify-content: center;
+		align-items: center;
+		&__info {
+			display: flex;
+			justify-content: flex-start;
+			flex-direction: column;
+			gap: 8px;
+			padding-right: 118px;
+			h4 {
+				font-family: Open Sans;
+				font-size: 28px;
+				font-weight: 600;
+				line-height: 36px;
+				letter-spacing: -0.02em;
+				text-align: left;
+				margin: 0;
+				color: colors.$red-500;
+			}
+			article {
+				margin: 0;
+			}
+			span {
+				font-family: Montserrat;
+				font-size: 16px;
+				font-weight: 500;
+				line-height: 24px;
+				letter-spacing: 0em;
+				text-align: left;
+				color: colors.$gris-800;
+				&.bold {
+					font-weight: 600;
+					color: colors.$gris-900;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 1368px) {
+		padding: 24px 60px;
+	}
+
+	@media (max-width: 1199px) {
+		padding: 32px 40px;
+        &__section__info{
+            padding-right: 0;
+        }
+		&__section__info h4 {
+			font-size: 24px;
+			line-height: 32px;
+		}
+		&__section__info span {
+			font-size: 14px;
+			line-height: 20px;
+		}
+	}
+
+    @media (max-width: 575px){
+        padding: 20px 24px;
+        &__section{
             flex-direction: column;
-            gap:8px;
-            padding-right: 118px;
-            h4{
-                font-family: Open Sans;
-                font-size: 28px;
-                font-weight: 600;
-                line-height: 36px;
-                letter-spacing: -0.02em;
-                text-align: left;
-                margin:0;
-                color:colors.$red-500;
-            }
-            article{
-                margin: 0;
-            }
-            span{
-                font-family: Montserrat;
-                font-size: 16px;
-                font-weight: 500;
-                line-height: 24px;
-                letter-spacing: 0em;
-                text-align: left;
-                color:colors.$gris-800;
-                &.bold{
-                    font-weight: 600;  
-                    color:colors.$gris-900;
-                }
-            }
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+        }
+        &__section__info{
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        &__section__info h4 {
+			font-size: 20px;
+			line-height: 28px;
+		}
+		&__section__info span {
+			font-size: 12px;
+		}
+        section{
+            width: 100%;
         }
     }
 }
