@@ -122,6 +122,7 @@ export class SectionSuperOffersComponent implements OnInit {
 	}
 
 	viewRates(destinationCode:string): void {
+		window.scroll({ top: 0, behavior: 'smooth' });
 		this._router.navigateByUrl(`/vuelos/destino/LIM/${destinationCode}`);
 	}
 

@@ -12,10 +12,6 @@
 	padding: 242px 96px 0px 96px;
 	min-height:90vh;
 
-	@media (max-width: 575px) {
-		padding: 190px 10px 0px 10px !important;
-	}
-
 	section {
 		max-width: 1248px;
 		margin: 0 auto;
@@ -223,22 +219,11 @@
 		padding: 242px 60px 0px 60px;
 	}
 
-	@media (max-width:575px) {
-		padding: 190px 10px 0px 10px !important;
-	}
-
 	@media (max-width: 1199px) {
 		padding: 232px 24px 0px 24px;
-
-		section {
-			grid-template-columns: 1fr 0.57fr;
-			column-gap: 24px;
-		}
-	}
-
-	@media (max-width: 1199px) {
 		section {
 			grid-template-columns: 1fr 0.67fr;
+			column-gap: 24px;
 		}
 
 		.container__page__detail__saftyPay{
@@ -352,6 +337,7 @@
 	}
 
 	@media (max-width: 575px) {
+		padding: 190px 24px 0px 24px;
 		.container__page__section__button__footer {
 			padding: 0px 0px 40px 0px;
 			display: flex;

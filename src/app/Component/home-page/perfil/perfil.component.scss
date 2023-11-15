@@ -26,20 +26,8 @@
   margin-top: 4px;
 }
 
-@media (max-width: 1199px) {
-  .box-perfil{
-    margin-top: 74px;
-  }
-}
-
 @media (max-width: 767px) {
   ::ng-deep.rowContent .btnPerfil.primary {
     display: block !important;
-  }
-}
-
-@media (max-width: 575px) {
-  .box-perfil{
-    margin-top: 55px;
   }
 }

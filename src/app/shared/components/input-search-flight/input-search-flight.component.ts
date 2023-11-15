@@ -39,6 +39,14 @@ export class InputSearchFlightComponent implements OnInit {
         }
 			}
 		}); 
+    this._searchFiltersService.isSetValuesSearch.subscribe({
+        next: (res:any) => {
+            this.isParamsDep=true;
+            this.isParamsRet=true;
+            this.valueSearchDeparture.setValue(res.departure);
+            this.valueSearchArrival.setValue(res.destination);
+      }
+    })
   }
 
 	rotate = false;
