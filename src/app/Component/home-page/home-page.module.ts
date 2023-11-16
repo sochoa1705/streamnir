@@ -35,7 +35,6 @@ import { RetailModule } from './retail/retail.module';
 import { OffersModule } from './offers/offers.module';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { TusDatosModule } from './tus-datos/tus-datos.module';
-import { EventosV2Module } from './eventos-v2/eventos-v2.module';
 
 @NgModule({
 	declarations: [ HomePageComponent, PageNotFoundComponent ],
@@ -66,8 +65,7 @@ import { EventosV2Module } from './eventos-v2/eventos-v2.module';
 		RetailModule,
 		OffersModule,
 		SubscriptionModule,
-		TusDatosModule,
-    EventosV2Module
+		TusDatosModule
 	],
 	exports: [ HomePageComponent ],
 	providers: [
