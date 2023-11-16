@@ -183,7 +183,7 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 	getDiscounts() {
 		this._checkoutService.getDiscountByCampaing().subscribe({
 			next: (res) => {
-				if (res.result.isSuccess) {
+				if (res.result.isSuccess) {			
 					GlobalComponent.discountCampaing = res;
 					this.discount = res.result;
 					this.isShowDiscount = true;

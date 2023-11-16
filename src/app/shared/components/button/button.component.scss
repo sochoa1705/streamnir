@@ -20,6 +20,7 @@
 	&.primary {
 		background: colors.$red-500;
 		color: white;
+		font-weight: 600 !important;
 
 		&:hover,&:focus {
 			background: colors.$red-600;
@@ -35,7 +36,6 @@
 	&.primary-green{
 		background: colors.$red-500;
 		color: white;
-
 		&:hover,&:focus {
 			background: colors.$red-600;
 			color: white;
@@ -73,7 +73,7 @@
 	&.secondary {
 		background: colors.$blue-500;
 		color: white;
-
+		font-weight: 600 !important;
 		&:hover,&:focus {
 			background: colors.$blue-600;
 			color: white;
@@ -94,7 +94,7 @@
 	&.dark {
 		background: colors.$gris-800;
 		color: white;
-
+		font-weight: 600 !important;
 		&:hover,&:focus {
 			background: colors.$gris-900;
 			color: white;

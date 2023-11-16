@@ -84,6 +84,7 @@ export class ModalBoletinComponent implements OnInit {
 				error: (err) => {
 					this.isLoader=false;
 					this.showMessageClose=false;
+					window.scroll({ top: 0, behavior: 'smooth' });
 					this._notification.showNotificacion('Error', err.error.code =='duplicate_parameter' ? 'Al parecer usted ya se encuentra suscrito':'Al parecer hubo un error al enviar su suscripción', 5)
 				}
 			});

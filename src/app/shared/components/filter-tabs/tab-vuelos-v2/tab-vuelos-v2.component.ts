@@ -73,9 +73,10 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 		if (!valuesInputs.departureLocation) errors.push('La salida es requerido');
 		if (valuesDates.departureDate == '') errors.push('La fecha de salida es requerido');
 		if (valuesDates.arrivalDate == '' && this.typeFlight == 0) errors.push('La fecha de llegada es requerido');
-		if (errors.length > 0)
-			this._notification.showNotificacion('Datos obligatorios sin completar', errors.join(' - '), 7);
-		else {
+		if (errors.length > 0){
+			    window.scroll({ top: 0, behavior: 'smooth' });
+				this._notification.showNotificacion('Datos obligatorios sin completar', errors.join(' - '), 7);
+		} else {
 			const route = this.getRoute({ ...valuesClass, ...valuesPassengers, ...valuesInputs, ...valuesDates });
 			localStorage.setItem('searchParams', route);
 			this.router.navigateByUrl(route);
@@ -102,8 +103,10 @@ export class TabVuelosV2Component implements OnInit, OnChanges {
 		if ($event.some((item: any) => !item.arrivalLocation)) errors.push('Los destinos son requeridos');
 		if ($event.some((item: any) => item.departureDate == '')) errors.push('Las fechas de salidas son requeridos');
 
-		if (errors.length > 0)
+		if (errors.length > 0){
+			window.scroll({ top: 0, behavior: 'smooth' });
 			this._notification.showNotificacion('Datos obligatorios sin completar', errors.join(' - '), 7);
+		}
 		else this.getRouteMulti($event);
 	}
 

@@ -7,7 +7,7 @@ import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountsService } from 'src/app/Services/accounts.service';
 import * as bootstrap from 'bootstrap';
-import { EGalleryCode, IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
+import { IGalleryImage } from 'src/app/Services/presenter/data-page-presenter.models';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 import { CryptoService } from 'src/app/Services/util/crypto.service';
 import { animate, style, transition, trigger } from '@angular/animations';
