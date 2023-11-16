@@ -100,7 +100,7 @@
 									<span class="usd-total">USD </span>
 									{{
 										(isShowDiscount
-											? discount.totalWithDiscount
+											? pricing.totalPay + totalInsurance - discount.amountDiscount
 											: isShowDiscountCupon
 											? pricing.totalPay + totalInsurance - totalDiscountCupon
 											: pricing.totalPay + totalInsurance

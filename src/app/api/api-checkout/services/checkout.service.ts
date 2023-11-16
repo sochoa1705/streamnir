@@ -1,7 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { IUpSell } from '../models/rq-checkout-up-sell';
 import { FareBreakDown as FareBreakDownUpSell } from '../models/rq-checkout-up-sell';
-import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { dataUpSell } from 'src/app/Component/checkout-page/utils';
 import { GlobalComponent } from 'src/app/shared/global';
@@ -149,7 +148,6 @@ export class CheckoutService {
 		totalDaysTravel =
 			this.getDiffDays(moment(dateDeparture).format('MM/DD/yyyy'), moment(dateArrival).format('MM/DD/yyyy')) + 1;
 		GlobalComponent.totalDaysTravel = totalDaysTravel - 1;
-		console.log(GlobalComponent.totalDaysTravel, 'total days')
 	}
 
 	updateTotalInsurance(status: boolean) {

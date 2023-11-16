@@ -5,7 +5,6 @@
 	padding: 24px 96px;
 	background: white;
 	width: 100%;
-    margin-top: 100px;
 	&__section {
 		max-width: 1440px;
 		margin: 0 auto;
@@ -69,7 +68,6 @@
         }
 	}
     @media(max-width: 1199px){
-        margin-top: 70px;
         padding: 16px 24px;
         
         &__section__tab img{
@@ -81,7 +79,6 @@
         }
     }
     @media(max-width: 575px){
-        margin-top: 50px;
         padding: 12px 24px;
         &__section{
             gap:24px

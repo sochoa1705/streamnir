@@ -848,7 +848,6 @@ section {
   justify-content: center;
   width: 100%;
   flex-direction: column;
-  margin-top: 100px;
   z-index: 10; }
 
 .box-container .box-perfil .perfilName {
