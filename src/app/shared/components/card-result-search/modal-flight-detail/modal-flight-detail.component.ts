@@ -83,8 +83,7 @@ export class ModalFlightDetailComponent implements OnInit {
 							this._modalService.open(ModalFeeComponent, {
 								centered: true,
 								backdrop: 'static',
-								size: this.getScreenWidth <= 1199 ? 'lg':'',
-								windowClass: this.getScreenWidth <= 1199 ? '' : res.length <= 3 ? 'modal-detail-fee':'modal-detail-fee-swiper'
+								windowClass: res.length <= 3 ? 'modal-detail-fee':'modal-detail-fee-swiper'
 							});
 
 						} else this.redirectCheckout();

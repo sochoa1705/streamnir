@@ -102,10 +102,24 @@
 						.text-left {
 							margin-left: 67px;
 						}
+						&#num_2{
+							display: none;
+						}
 
 						@media (max-width: 575px) {
 							font-size: 12px;
 							line-height: 20px;
+							.text-left{
+								margin-left: 52px;
+							}
+						}
+						@media (max-width: 319px){
+							&#num_1{
+								display: none;
+							}
+							&#num_2{
+								display: block;
+							}
 						}
 					}
 

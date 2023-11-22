@@ -10,15 +10,15 @@ import { SelectModule } from 'src/app/shared/components/select/select.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FiltersComponent } from './filters/filters.component';
 import { DropdownFilterModule } from 'src/app/shared/components/dropdown-filter/dropdown-filter.module';
-export const routes: Routes = [{ path: '', component: ResultsSearchPageComponent}];
 import { NgbPopoverModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortByComponent } from './sort-by/sort-by.component';
-import { MinutesFormatPipe } from 'src/app/shared/pipes/convert-duration.pipe';
 import { PriceFilterModule } from 'src/app/shared/components/price-filter/price-filter.module';
 import { DurationFilterModule } from 'src/app/shared/components/duration-filter/duration-filter.module';
 import { NotResultsComponent } from './not-results/not-results.component';
 import { CardLoaderResultModule } from 'src/app/shared/components/card-loader-result/card-loader-result.module';
 import { IdlePopupComponent } from './idle-popup/idle-popup.component';
+import { ModalSearchComponent } from './modal-search/modal-search.component';
+export const routes: Routes = [{ path: '', component: ResultsSearchPageComponent}];
 registerLocaleData(localeEs, "es");
 
 @NgModule({
@@ -39,7 +39,7 @@ registerLocaleData(localeEs, "es");
         DurationFilterModule,
         CardLoaderResultModule
     ],
-    declarations:[ResultsSearchPageComponent, FiltersComponent, SortByComponent, NotResultsComponent, IdlePopupComponent],
+    declarations:[ResultsSearchPageComponent, FiltersComponent, SortByComponent, NotResultsComponent, IdlePopupComponent, ModalSearchComponent],
     exports: [ResultsSearchPageComponent],
     providers: [{ provide: LOCALE_ID, useValue: "es" }],
 })

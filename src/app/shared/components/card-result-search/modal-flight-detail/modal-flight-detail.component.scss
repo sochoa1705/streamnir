@@ -13,14 +13,14 @@
 }
 
 .modal__flight {
-	padding: 24px 32px;
     display: flex;
     flex-direction: column;
 	&__header {
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-start;
-        padding-bottom: 26px;
+		padding: 24px 32px;
+		box-shadow: 0px 2px 9px 0px #1018280D;
 		h4 {
 			font-family: Open Sans;
 			font-size: 20px;
@@ -34,9 +34,8 @@
 		}
 	}
 	&__body {
-		padding-right: 24px;
-        padding-top: 10px;
-		max-height: 480px;
+        padding:20px 32px 0px;
+		max-height: 64vh;
 		overflow-y: auto;
 		@extend .flex-16;
 		&__flight {
@@ -52,12 +51,17 @@
 					color: colors.$gris-900;
 					&.type-flight {
 						font-weight: 600;
+						display: flex;
+						gap:5px;
 					}
 					&.duration {
 						font-size: 14px;
 						font-weight: 500;
 						line-height: 20px;
 						color: colors.$gris-700;
+						display: flex;
+						align-items: center;
+						gap: 5px;
 					}
 				}
 			}
@@ -161,6 +165,7 @@
                         color:colors.$neutral-900;
                         &.bold{
                             font-weight: 600;
+							color:colors.$neutral-900;
                         }
                         &.hour{
                             font-size: 12px;
@@ -197,8 +202,7 @@
     &__footer{
         justify-self:flex-end;
         width: 100%;
-        padding: 16px 0px;
-        padding-bottom: 0px;
+        padding: 16px 32px;
         @extend .flex-row;
         gap: 8px;
         h4{
@@ -217,4 +221,71 @@
 	.modal-detail-flight .modal-dialog-centered {
 		min-width: 840px;
 	}
+}
+
+@media (max-width: 1199px) {
+	.modal-detail-flight .modal-dialog-centered {
+		min-width: 720px;
+	}
+}
+
+@media (max-width: 750px) {
+	.modal-detail-flight .modal-dialog-centered {
+		min-width: 560px;
+	}
+}
+
+@media (max-width: 575px){
+	.modal-detail-flight .modal-dialog-centered {
+		min-width:auto;
+		width: 100%;
+		margin:0;
+		padding: 0;
+	}
+	.modal.modal-detail-flight .modal-dialog .modal-content{
+		border-radius: 10px 10px 0px 0px;
+		margin:0;
+		bottom: 0;
+		left: 0;
+		position: fixed;
+	}
+
+	.modal__flight{
+		&__header{
+			padding: 24px 20px;
+			margin-bottom: 17px;
+		}
+		&__header>img{
+			width: 12px;
+		}
+		&__body{
+			padding: 17px 20px;
+			max-height: 60vh;
+			&__flight__header span,
+			&__flight__header span.type-flight{
+				font-size: 14px;
+				line-height: 20px;
+			}
+			&__flight__header span.duration strong,
+			&__flight__info__airline span,
+			&__flight__info__segment__row span.country{
+				font-size: 12px;
+				line-height: 17px;
+			}
+			&__flight__info__segment__row span.regular{
+				font-size: 10px;
+				line-height: 12px;
+				color:colors.$neutral-900;
+			}
+			&__flight__header span.type-flight{
+				flex-direction: column;
+				gap:0;
+				.dot{
+					display: none;
+				}
+			}
+		}
+	}
+
+
 }

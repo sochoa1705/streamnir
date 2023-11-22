@@ -1,12 +1,11 @@
-import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Group, ISearchResponse } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
 import { GlobalComponent } from 'src/app/shared/global';
-import { getParams } from 'src/app/shared/utils/getParams';
 import { environment } from 'src/environments/environment';
-import { dataAirlineMulti, dataBagFilterInit, dataFiltersInit, dataScaleFilterInit } from './utils';
+import { dataAirlineMulti, dataBagFilterInit, dataScaleFilterInit } from './utils';
 import { getPricingFareBreakDowns } from 'src/app/shared/utils/fareBreakDowns';
 import { LoadingService } from 'src/app/Services/intermediary/loading.service';
 import { getMoreOptionsFilter } from 'src/app/shared/utils/getMoreOptionsFilter';
@@ -18,12 +17,11 @@ import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IdlePopupComponent } from './idle-popup/idle-popup.component';
 import { SortByComponent } from './sort-by/sort-by.component';
-import { dataInitBooking } from 'src/app/shared/constant-init';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
-import { passengerInfoInit } from 'src/app/api/api-checkout/models/rq-checkout-passengers';
-import { UserIdleService } from "angular-user-idle";
+import { UserIdleService } from 'angular-user-idle';
 import { Subscription } from 'rxjs';
-import { paymentInit } from 'src/app/api/api-checkout/models/rq-checkout-payment';
+import { ModalSearchComponent } from './modal-search/modal-search.component';
+import { getParamsByRoute } from 'src/app/shared/utils/getParams';
 
 interface Item {
 	value: any;
@@ -72,15 +70,15 @@ interface IFilterDuration {
 	templateUrl: './results-search-page.component.html',
 	styleUrls: ['./results-search-page.component.scss']
 })
-export class ResultsSearchPageComponent implements OnInit,OnDestroy {
+export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	constructor(
 		private _searchService: SearchService,
 		private _tokenService: TokenService,
 		private route: ActivatedRoute,
-		private _loadingService: LoadingService,
+		public _loadingService: LoadingService,
 		private _searchFiltersService: SearchFiltersService,
 		private _modalService: NgbModal,
-		private _checkoutService:CheckoutService,
+		private _checkoutService: CheckoutService,
 		private userIdle: UserIdleService
 	) {}
 
@@ -131,9 +129,10 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 	idCheap = '0';
 	params: Params;
 	isReload = false;
+	progressCount = 0;
 
 	idleSubscriber: Subscription;
-	dataSearch:Search;
+	dataSearch: Search | null;
 	@ViewChild('childSort') childSort!: SortByComponent;
 
 	ngOnInit() {
@@ -150,6 +149,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 		this.allDataGroups = [];
 		this.dataFilterGroups = [];
 		this.dataGroupsPaginate = [];
+		this.progressCount = 0;
 
 		this.dataAirlinesTemp = [];
 		this.dataAirlinesInit = [];
@@ -157,6 +157,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 		this.theCheapest = null;
 		this.betterOption = null;
 		this.shorterDuration = null;
+		this.dataSearch = null
 
 		this.dataBagFilter = dataBagFilterInit.map((item) => {
 			item.total = 0;
@@ -196,8 +197,8 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 			isDurationReturn: false
 		};
 		this.currency = 'USD';
-		GlobalComponent.currency='USD';
-		
+		GlobalComponent.currency = 'USD';
+
 		this.getToken();
 	}
 
@@ -219,37 +220,37 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 	}
 
 	getObjectParams() {
-		this.route.queryParamMap.subscribe((params) => {
-			if (this.isReload && GlobalComponent.tokenMotorVuelo !== '') {
-				const objParams = getParams(params);
-				this.params = objParams;
-				this.dataSearch=GlobalComponent.searchData;
-				this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
-				GlobalComponent.classFligh =
-					objParams.flightClass == 0 ? 'Economy' : objParams.flightClass == 1 ? 'Business' : 'First Class';
-				GlobalComponent.paramsSearch = { ...objParams };
-				this.flightType = objParams.flightType;
-				this.titleNotResults =
-					objParams.flightType !== 2
-						? `No encontramos vuelos coincidentes entre ${objParams.departureLocation} y ${objParams.arrivalLocation} para estas fechas.`
-						: `No encontramos vuelos coincidentes para esas fechas.`;
-				if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
-				else this.getAllDataAnterior(objParams);
-				this.isReload = false;
-			}
-		});
+		if (this.isReload && GlobalComponent.tokenMotorVuelo !== '') {
+			const objParams = getParamsByRoute();
+			this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
+			this.dataSearch=GlobalComponent.searchData;
+			GlobalComponent.classFligh =
+				objParams.flightClass == 0 ? 'Economy' : objParams.flightClass == 1 ? 'Business' : 'First Class';
+			GlobalComponent.paramsSearch = { ...objParams };
+			this.flightType = objParams.flightType;
+			this.titleNotResults =
+				objParams.flightType !== 2
+					? `No encontramos vuelos coincidentes entre ${objParams.departureLocation} y ${objParams.arrivalLocation} para estas fechas.`
+					: `No encontramos vuelos coincidentes para esas fechas.`;
+			if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
+			else this.getAllDataAnterior(objParams);
+			this.isReload = false;
+		}
 	}
 
 	getAllDataSearch(objSearch: any) {
+		this.progressCount=3;
 		this._searchService.getAllDataSearch(objSearch).subscribe({
 			next: (res) => {
 				this._loadingService.requestSearchCount++;
+				this.progressCount = this._loadingService.requestSearchCount * 10;
 				if (res.groups) {
 					this.isLoader = false;
 					if (this.exchangeRate == null) this.exchangeRate = res.exchangeRate.amount;
 					this.getDataFilters(res);
 				}
 				if (this._loadingService.requestSearchCount == 9) {
+					this.endProgressBar();
 					this.showNotResults = this.dataFilterGroups.length == 0 ? true : false;
 					if (!this.showNotResults) {
 						this.endsearch();
@@ -276,6 +277,13 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 		});
 	}
 
+	endProgressBar() {
+		this.progressCount = 98;
+		setTimeout(() => {
+			this.progressCount = 100;
+		}, 1100);
+	}
+
 	endsearch() {
 		this._searchService.endSearch().subscribe({
 			next: (res) => {
@@ -288,6 +296,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 	}
 
 	getAllDataAnterior(objSearch: any) {
+		this.progressCount=3;
 		this._searchService.getAllDataGroups(objSearch).subscribe({
 			next: (res) => {
 				this._loadingService.requestSearchCount = 9;
@@ -295,6 +304,7 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 				if (!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate = res.exchangeRate;
 				if (res.groups && res.groups.length > 0) {
 					this.isLoader = false;
+					this.endProgressBar();
 					this.getDataFilters(res);
 					this.minPrice = this.dataFilterGroups[0].detailPricing?.totalPay || 0;
 					this.maxPrice = this.dataFilterGroups[this.dataFilterGroups.length - 1].detailPricing?.totalPay || 0;
@@ -310,9 +320,11 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 					this.configIdlePopup();
 					this.childSort.resetSort();
 				} else this.showNotResults = true;
+				
 			},
 			error: (err) => {
 				this.showError = true;
+				this.endProgressBar();
 			},
 			complete: () => {
 				if (this.dataFilterGroups.length == 0) this.showNotResults = true;
@@ -888,24 +900,39 @@ export class ResultsSearchPageComponent implements OnInit,OnDestroy {
 		this.sortData();
 	}
 
-	configIdlePopup() {
-		this.userIdle.setConfigValues({ idle: environment.resultsInactivityTime })
-		this.userIdle.startWatching()
-		this.idleSubscriber = this.userIdle.onTimerStart().subscribe((count: any) => {
-		  if (count) {
-			this._modalService.dismissAll();
-			this.userIdle.stopWatching()
-			const modalRef = this._modalService.open(IdlePopupComponent,{
-				centered: true,
-				modalDialogClass: 'inactivity-dialog',
-				windowClass: 'upSellModalClass',
-			});
-			modalRef.componentInstance.firstTwoFlights=[...this.allDataGroups].slice(0, this.allDataGroups.length < 2 ? this.allDataGroups.length : 2);
-			modalRef.result.finally(() => this.userIdle.startWatching())
-		  }
-		})
+	openModalSearch() {
+		const modalRef = this._modalService.open(ModalSearchComponent, {
+			centered: true,
+			backdrop: 'static',
+			windowClass: 'modal-search'
+		});
+		modalRef.componentInstance.params = this.params;
+		modalRef.componentInstance.flightType = this.flightType;
+		modalRef.componentInstance.reloadPageResult.subscribe((resultado: string) => {
+			this.reloadPageResult();
+		});
 	}
 
+	configIdlePopup() {
+		this.userIdle.setConfigValues({ idle: environment.resultsInactivityTime });
+		this.userIdle.startWatching();
+		this.idleSubscriber = this.userIdle.onTimerStart().subscribe((count: any) => {
+			if (count) {
+				this._modalService.dismissAll();
+				this.userIdle.stopWatching();
+				const modalRef = this._modalService.open(IdlePopupComponent, {
+					centered: true,
+					modalDialogClass: 'inactivity-dialog',
+					windowClass: 'upSellModalClass'
+				});
+				modalRef.componentInstance.firstTwoFlights = [...this.allDataGroups].slice(
+					0,
+					this.allDataGroups.length < 2 ? this.allDataGroups.length : 2
+				);
+				modalRef.result.finally(() => this.userIdle.startWatching());
+			}
+		});
+	}
 
 	ngOnDestroy() {
 		this._modalService.dismissAll();

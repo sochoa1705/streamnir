@@ -110,7 +110,7 @@
 		}
 
 		&__body {
-			padding: 16px 16px 0px 16px;
+			padding: 16px 0px 16px;
 			max-width: 780px;
 
 			&__baggage {
@@ -393,6 +393,10 @@
 				line-height: 20px;
 			}
 
+			&__insurance__success__title img{
+				margin-left: 3px;
+			}
+
 			&__header__fee img{
 				width: 24px;
 			}
@@ -438,7 +442,7 @@ article {
 
 @media (max-width: 575px) {
 	.container__page__section__title__primary{
-		font-size: 18px;
+		font-size: 20px;
 	}
 	.container__page__section__title__secondary{
 		font-size: 14px;

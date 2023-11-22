@@ -68,7 +68,7 @@
 
 		&__resultBox {
 			position: absolute;
-			width: 420px;
+			width: 100%;
 			background: white;
 			padding: 8px 12px;
 			border-radius: 8px;
@@ -194,7 +194,6 @@
 				top: 12px;
 			}
 			&__resultBox {
-				width: 255px;
 				top: 50px;
 				padding: 8px;
 				ul {

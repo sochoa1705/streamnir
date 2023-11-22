@@ -39,14 +39,17 @@ export class ModalFeeComponent implements OnInit{
 			}
 		},
 		breakpoints: {
-			575:{
-				slidesPerView: 1.25,
+			0:{
+				slidesPerView: 1.2,
 			},
-			1024: {
-                slidesPerView: 2.2,
+			597:{
+				slidesPerView: 1.5,
+			},
+			768: {
+                slidesPerView: 2.1,
             },
 			1200: {
-                slidesPerView: 3.2,
+                slidesPerView: 2.45,
             }
         }
 	};

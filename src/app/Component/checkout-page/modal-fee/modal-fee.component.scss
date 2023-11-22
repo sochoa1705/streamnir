@@ -43,11 +43,12 @@ section {
 		.active__arrow{
 			cursor: pointer;
 		}
-
+		&::-webkit-scrollbar-thumb {
+            background: transparent !important;
+        }
 		&.not-swiper{
 			justify-content: flex-start;
 		}
-
 			&__card {
 				border-radius: 10px;
 				min-height: 500px;
@@ -175,12 +176,30 @@ section {
 	}
 	@media (max-width: 1199px) {
 		padding: 40px 24px;
+		width: 754px;
+		margin-left: -25.6%;
 		.modal__contend__body__card{
 			width: 273px;
 		}
 	}
+
+	@media (max-width: 767px){
+		width: 575px;
+    	margin-left: -8%;
+	}
+
+	@media (max-width: 596px){
+		width: auto;
+		margin-left: 0;
+	}
+
 	@media (max-width: 575px) {
-		padding: 24px 20px;
+		padding: 20px 14px;
+		overflow-y: auto;
+		max-height: 90vh;
+		&__body{
+			column-gap: 10px;
+		}
 		&__header h4{
 			font-size: 20px;
 			line-height: 28px;
@@ -195,7 +214,8 @@ section {
 
 			&__card{
 				width: 260px;
-				min-height: 480px;
+				min-height: 430px;
+				max-height: 435px;
 				&__options{
 					gap:8px;
 				}
@@ -214,22 +234,34 @@ section {
 	}
 }
 
+@media (max-width: 575px){
+	.modal.modal-detail-fee .modal-dialog.modal-dialog-centered , 
+	.modal-detail-fee-swiper .modal-dialog.modal-dialog-centered{
+		min-width:auto;
+		width: 100%;
+		margin:0;
+		padding: 0;
+	}
+	.modal.modal-detail-fee .modal-dialog.modal-dialog-centered .modal-content, 
+	.modal.modal-detail-fee-swiper > .modal-dialog.modal-dialog-centered > .modal-content{
+		border-radius: 10px 10px 0px 0px;
+		margin:0;
+		bottom: 0;
+		left: 0;
+		position: fixed;
+	}
+}
 
 @media (min-width: 1300px) {
-	.modal-detail-fee-swiper .modal-dialog-centered {
+	.modal-detail-fee-swiper 
+	.modal-dialog-centered {
 		min-width: 1212px;
 	}
 }
 
 @media (min-width: 1199px){
-	.modal-detail-fee .modal-dialog-centered {
+	.modal-detail-fee .modal-dialog-centered, 
+	.modal-detail-fee-swiper .modal-dialog-centered{
 		min-width: 1070px;
-	}
-}
-
-
-@media (min-width: 575px){
-	.modal-detail-fee .modal-dialog-centered {
-		min-width: 774px !important;
 	}
 }

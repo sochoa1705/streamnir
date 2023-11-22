@@ -54,7 +54,6 @@ export class NewTabsFiltersComponent implements OnInit {
     const x = e.pageX - this.slider.nativeElement.offsetLeft;
     const walk = (x - this.startX) * 3; // scroll-fast
     this.slider.nativeElement.scrollLeft = this.scrollLeft - walk;
-    console.log(walk);
   }
 
 }

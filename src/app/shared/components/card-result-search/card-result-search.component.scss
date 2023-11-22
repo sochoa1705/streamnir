@@ -37,6 +37,9 @@ section {
 	align-items: flex-start;
 	justify-content: flex-start;
 	gap: 15px;
+	&.mobile{
+		display: none;
+	}
 }
 
 h4 {
@@ -142,16 +145,6 @@ h4 {
 								line-height: 14px;
 								color: colors.$gris-700;
 							}
-						}
-						&__bags {
-							@extend .flex-row;
-							gap: 8px;
-							position: relative;
-							img {
-								width: 20px;
-								height: 20px;
-							}
-							border: 1px solid pink;
 						}
 						&__hours {
 							@extend .flex-row;
@@ -277,11 +270,22 @@ h4 {
 		display: none;
 	}
 
-	.tags img {
-		height: 24px;
+	.tags{
+		&.web{
+			display: none;
+		}
+		&.mobile{
+			display: flex;
+		}
+		img{
+			height: 24px;
+		}
 	}
 	.card__result__flights__section {
 		gap: 8px;
+		&__header{
+			grid-template-rows: auto;
+		}
 		&__header h4 {
 			font-size: 20px;
 			line-height: 28px;

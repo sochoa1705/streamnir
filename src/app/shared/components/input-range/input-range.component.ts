@@ -1,7 +1,6 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { NgbCalendar, NgbDate, NgbDateStruct, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
-import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
+import { NgbCalendar, NgbDate, NgbDateStruct, NgbDatepicker, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { GlobalComponent } from '../../global';
 
 @Component({
 	selector: 'app-input-range',
@@ -11,6 +10,7 @@ import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-f
 export class InputRangeComponent implements OnChanges,OnInit {
 	now = new Date();
 	@Output() inputDates = new EventEmitter<any>();
+	@Output() openDatepicker = new EventEmitter<boolean>();
 	@Input() typeFlight = 0; // si es -1 => vuelo + hotel
 	@Input() idRowMulti = 0;
 	@Input() minDate: NgbDateStruct = {
@@ -37,35 +37,30 @@ export class InputRangeComponent implements OnChanges,OnInit {
 
 	maxDateRange:NgbDateStruct;
 
+	isOpenMobile=false;
+
 	@ViewChild('dp2') dp2: NgbDatepicker;
 
 	constructor(
 		public calendar: NgbCalendar,
-		private _searchFiltersService: SearchFiltersService
+		private _modalService: NgbModal
 	) {
 		const today = this.calendar.getToday();
 		this.dateOneWay = { year: today.year, month: today.month };
-
-		this._searchFiltersService.isSetParams.subscribe({
-			next: (res: Params) => {
-				if (res.flightType !== 2 && this.typeFlight!==-1) {
-					if (res.departureDate) this.setParamDeparture(res.departureDate)
-					if (res.arrivalDate) this.setParamArrival(res.arrivalDate)
-				}
-			}
-		});
-
-		this._searchFiltersService.isSetParamsMulti.subscribe({
-			next: (res: Params) => {
-				if (res.multicity && this.typeFlight!==-1) {
-					const dateDeparture=res.multicity[this.idRowMulti].departureDate;
-					if(dateDeparture) this.setParamDeparture(dateDeparture);
-				}
-			}
-		});
 	}
 	ngOnInit(): void {
 		document.documentElement.style.setProperty('--visibility', this.typeFlight == 2 || this.typeFlight == 1 ? 'none' : 'block');
+		if (window.location.href.includes('resultados')) {
+			const dataSearch = GlobalComponent.searchData;
+			if (dataSearch.flightType !== 2 && this.typeFlight!==-1 && this.idRowMulti==0) {
+				if (dataSearch.departureDate) this.setParamDeparture(dataSearch.departureDate)
+				if (dataSearch.arrivalDate) this.setParamArrival(dataSearch.arrivalDate)
+			}
+			if (dataSearch.multicity && this.typeFlight!==-1) {
+				const dateDeparture=dataSearch.multicity[this.idRowMulti].departureDate;
+				if(dateDeparture) this.setParamDeparture(dateDeparture);
+			}
+		}
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
@@ -77,9 +72,6 @@ export class InputRangeComponent implements OnChanges,OnInit {
 		if (changes['typeFlight'].currentValue == 1) {
 			document.documentElement.style.setProperty('--visibility', 'none');
 			this.showCalendar = false;
-			this.toDate = null;
-			this.dateReturn = '';
-			this.toDateSeleted = null;
 			this.setDateOneWay();
 		}
 	}
@@ -146,10 +138,19 @@ export class InputRangeComponent implements OnChanges,OnInit {
 
 	openCalendar(isClose = false) {
 		this.showCalendar = isClose ? false : !this.showCalendar;
+		this.isOpenMobile=true;
+		this.openDatepicker.emit(this.showCalendar)
 		if (this.showCalendar) {
 			this.fromDate = this.fromDateSeleted;
 			this.toDate = this.toDateSeleted;
 		}
+	}
+
+	openCalendarModal(content: TemplateRef<any>){
+		this._modalService.open(content, {
+			centered: true,
+			windowClass:'modal-datepicker'
+		})
 	}
 
 	applyRange() {
@@ -169,6 +170,7 @@ export class InputRangeComponent implements OnChanges,OnInit {
 			this.fromDateSeleted = this.fromDate;
 			this.dateDeparture = this.convertDateToString(dateFormat);
 		}
+		this.openDatepicker.emit(false)
 	}
 
 	convertDateToString(date: NgbDate) {
@@ -218,7 +220,7 @@ export class InputRangeComponent implements OnChanges,OnInit {
 
 	getValues() {
 		return {
-			arrivalDate: this.dateReturn,
+			arrivalDate: this.typeFlight==1 ? '' : this.dateReturn,
 			departureDate: this.dateDeparture
 		};
 	}
@@ -233,8 +235,9 @@ export class InputRangeComponent implements OnChanges,OnInit {
 	@ViewChild('calendar') miDiv: ElementRef;
 	@HostListener('document:click', ['$event'])
 	blurRange(event: MouseEvent) {
-		if (this.miDiv && !this.miDiv.nativeElement.contains(event.target)) {
+		if (this.miDiv && !this.miDiv.nativeElement.contains(event.target) && this.showCalendar) {
 			this.showCalendar=false;
-		  }
+			this.openDatepicker.emit(false);
+		}
 	}
 }

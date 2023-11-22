@@ -58,6 +58,41 @@
 			}
 		}
 	}
+	&__price-mob{
+		display: none;
+		width: 100%;
+		justify-content: flex-start;
+		gap:36px;
+		margin-top: 30px;
+		&__skeleton {
+			max-width: 100px;
+			animation: skeleton-loading 1s linear infinite alternate;
+			height: 16px;
+			border-radius: 15px;
+			width: 100%;
+		}
+	}
+
+	@media(max-width:1199px){
+		gap:20px;
+		&__price{
+			align-items: end;
+		}
+	}
+	@media(max-width:576px){
+		padding: 39px 28px;
+		flex-direction: column;
+		gap: 83px;
+		&__price{
+			display: none;
+		}
+		&__price-mob{
+			display: flex;
+		}
+		&__flight{
+			row-gap: 64px;
+		}
+	}
 }
 
 @keyframes skeleton-loading {

@@ -46,6 +46,16 @@ section{
 		}
 	}
 
+	.progress {
+		border-radius: 0;
+		height: 10px;
+		background:transparent;
+	}
+	.progress-bar {
+		background: colors.$red-500;
+		border-radius: 0;
+	}
+
 	&__metasearch {
 		width: 100%;
 		padding: 40px 96px;
@@ -75,6 +85,9 @@ section{
 				&__date{
 					@extend .flex-row;
 					gap:5px;
+					&.mobile{
+						display: none;
+					}
 				}
 				&__date span{
 					color:colors.$gris-700;
@@ -96,6 +109,16 @@ section{
 				@extend .flex-row;
 				gap:18px;
 				padding: 10px 0px;
+				position: relative;
+				width: 100%;
+				overflow-x:auto;
+				overflow-y: hidden;
+				white-space: nowrap;
+				transition: all 0.2s;
+				will-change: transform;
+				&::-webkit-scrollbar-thumb {
+					background: transparent !important;
+				}
 			}
 		}
 	}
@@ -120,22 +143,29 @@ section{
 	}
 
 	@media (max-width: 1199px){
+		.progress{
+			position: fixed;
+			top: 209px;
+			width: 100%;
+		}
 		&__metasearch{
-			padding: 12px 32px;
+			padding:24px 32px 12px;
 			background: white;
-			min-height: 127px;
+			min-height: 83px;
+			position: fixed;
+			z-index: 3;
 			&__section{
 				display: none;
 			}
 			&__mobile{
-				display: block;
 				display: flex;
 				flex-direction: column;
 				gap:7px;
 			}
 		}
+
 		section{
-			padding: 40px 32px;
+			padding: 175px 32px 40px;
 
 		}
 		section article{
@@ -147,9 +177,42 @@ section{
 	}
 
 	@media (max-width: 575px) {
+		&__metasearch{
+			padding: 12px 16px;
+			min-height: auto;
+		}
+		&__metasearch__mobile__filters{
+			padding: 12px 0 0;
+		}
+		.sumary__destination{
+			gap:4px;
+			flex-wrap: wrap;
+		}
+		.sumary__destination span,
+		.sumary__date span,
+		&__metasearch__mobile .actions > span{
+			font-size: 12px;
+			line-height: 20px;
+		}
+		&__metasearch__mobile .actions{
+			align-items: end;
+			justify-content: end;
+			width: 100%;
+		}
 		section{
-			padding: 14px;
-
+			padding: 157px 14px 40px;
+		}
+		.progress {
+			height: 5px;
+			top:193px;
+		}
+		&__metasearch__mobile .sumary{
+			&__date.tablet{
+				display: none;
+			}
+			&__date.mobile{
+				display:  flex;
+			}
 		}
 	}
 }

@@ -1,4 +1,4 @@
-<div class="toolbar" [class.booking]="!isWhiteMenu">
+<div class="toolbar" [class.booking]="!isWhiteMenu" [class.page-results]="isPageResult">
 	<div class="toolbar__section">
 		<div class="toolbar__section__bars" *ngIf="isWhiteMenu" (click)="clickMenuMobile()">
 			<app-burger-menu [showMenu]="showMenuMobile"></app-burger-menu>
