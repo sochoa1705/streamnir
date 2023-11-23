@@ -67,7 +67,7 @@
     </div>
     <div class="texto">Mejor precio garantizado</div>
   </div>
-  <!-- solo para version movile -->
+  <!-- Solo para versión móvil -->
   <div class="packageMov">
     <div class="contentBox">
       <div class="icono">
@@ -110,33 +110,30 @@
     </div>
   </div>
 
-  <p-carousel [value]="tickets" [numVisible]="3" [numScroll]="3" [responsiveOptions]="responsiveOptions">
-    <ng-template let-product pTemplate="item">
-      <div class="product-item">
-        <div class="product-item-content">
-
-          <p-galleria [(value)]="product.ImageUrls" [responsiveOptions]="responsiveOptions"
-            [containerStyle]="{'max-width': '640px'}" [numVisible]="1" [showThumbnails]="false" [showIndicators]="true"
-            [showIndicatorsOnItem]="true">
-
-            <ng-template pTemplate="item" let-item>
-              <img [src]="item" [title]="product.Name" style="width: 100%; display: block;" />
-            </ng-template>
-          </p-galleria>
-
-        </div>
-
-        <div class="contCardDest">
-          <div class="cardTitulo">{{ product.Name }}</div>
-          <div class="cardDuracion" *ngIf="product.Duration">
-            <mat-icon>restore</mat-icon> Duración: {{ product.Duration }}
-          </div>
-          <div class="cardActividad">
-            {{product.ActivityType}}
-          </div>
-        </div>
-
-      </div>
-    </ng-template>
-  </p-carousel>
+	<ngu-carousel #carousel [inputs]="tileConfig" [dataSource]="tickets" *ngIf="tickets">
+		<ngu-tile class="px-3 px-lg-4" *nguCarouselDef="let item">
+			<ngu-carousel #tile [inputs]="carouselConfig" [dataSource]="item.ImageUrls">
+				<ngu-tile NguCarouselItem class="slide" *nguCarouselDef="let imageUrl">
+					<img class="img-fluid" loading="lazy" [src]="imageUrl" [alt]="item.Name">
+				</ngu-tile>
+			</ngu-carousel>
+			<p class="fs-6 fw-bold fontOpen px-2">{{ item.Name }}</p>
+			<p class="small d-flex align-items-center px-2" *ngIf="item.Duration">
+				<mat-icon>restore</mat-icon>
+				Duración: {{ item.Duration }}
+			</p>
+			<p class="small px-2 mb-1">{{ item.ActivityType }}</p>
+			<ul class="dots mt-md-auto" NguCarouselPoint>
+				<li [class.active]="i === tile.activePoint"
+				    (click)="tile.moveTo(i)"
+				    *ngFor="let i of tile.pointNumbers; let j = index"></li>
+			</ul>
+		</ngu-tile>
+		<button NguCarouselPrev
+		        class="p-carousel-prev position-absolute start-0"
+		        [style.opacity]="carousel.isFirst ? .5 : 1"></button>
+		<button NguCarouselNext
+		        class="p-carousel-next position-absolute end-0"
+		        [style.opacity]="carousel.isLast ? .5 : 1"></button>
+	</ngu-carousel>
 </div>
