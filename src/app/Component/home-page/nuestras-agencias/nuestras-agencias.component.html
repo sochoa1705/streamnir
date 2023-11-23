@@ -75,7 +75,7 @@
         </div>
         <div class="row">
           <div class="col-12 d-flex position-relative">
-            <img class="img-fluid" [src]="imagen" alt="{{direccion}} {{distrito}}">
+            <img class="img-fluid" loading="lazy" [src]="imagen" [alt]="direccion + ' ' + distrito">
             <button class="btn-agencias activa position-absolute text-uppercase" (click)="onVerMasClick()"
                     *ngIf="btnActivo === 1">
               Ver m&aacute;s
@@ -141,7 +141,7 @@
   </div>
   <div class="row pb-5">
     <div class="col-12 col-md-7 text-center">
-      <img class="vidthMobile" src="./assets/seguros/ayuda.svg" alt="">
+      <img class="vidthMobile" src="./assets/seguros/ayuda.svg" alt="Ayuda" loading="lazy">
     </div>
     <div class="col-md-4 col-12 text-center mt-5">
       <p class="text-justify mt-sm-3">En <strong>Nmviajes</strong> queremos brindarte el mejor de los servicios.
