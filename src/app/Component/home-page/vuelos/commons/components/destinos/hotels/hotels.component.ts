@@ -4,6 +4,7 @@ import { HotelService } from 'src/app/api/api-hotels/services';
 import { GalleryService } from 'src/app/api/api-nmviajes/services';
 import { Guid } from 'src/app/shared/utils';
 import { environment } from 'src/environments/environment';
+import { NguCarouselConfig } from '@ngu/carousel';
 
 @Component({
   selector: 'app-hotels',
@@ -11,59 +12,52 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./hotels.component.scss']
 })
 export class HotelsComponent implements OnInit {
+	@Input() city: any;
+	@Input() site: any;
+	@Input() isFlight: any;
 
-  hotels: Array<any>;
-  images: Array<any>;
+	hotels: Array<any>;
+	images: Array<any>;
 
-  @Input()
-  city: any;
+	dynamicPackageUrl: string = '';
 
-  @Input()
-  site: any;
+	tileConfig: NguCarouselConfig = {
+		grid: { xs: 1, sm: 1, md: 2, lg: 3, xl: 3, all: 0 },
+		speed: 500,
+		point: { visible: false },
+		load: 3,
+		touch: false,
+		loop: false,
+		easing: 'cubic-bezier(0, 0, 0.2, 1)'
+	};
 
-  @Input()
-  isflight: any;
+	carouselConfig: NguCarouselConfig = {
+		grid: { xs: 1, sm: 1, md: 1, lg: 1, xl: 1, all: 0 },
+		speed: 250,
+		point: { visible: true, hideOnSingleSlide: true },
+		touch: true,
+		loop: true,
+		interval: { timing: 3000 },
+		animation: 'lazy'
+	};
 
-  responsiveOptions: any[];
+	constructor(private _hotelsService: HotelService,
+	            private _activatedRoute: ActivatedRoute,
+	            private _galleryService: GalleryService) {
+	}
 
-  urlPaqueteDinamico: string = '';
+	ngOnInit(): void {
+		this.dynamicPackageUrl = environment.urlPaqueteDinamico;
 
-  constructor(
-    private _hotelsService: HotelService,
-    private _activatedRoute: ActivatedRoute,
-    private _galleryService: GalleryService
-  ) {
-    this.responsiveOptions = [
-      {
-        breakpoint: '1024px',
-        numVisible: 3,
-        numScroll: 3
-      },
-      {
-        breakpoint: '768px',
-        numVisible: 2,
-        numScroll: 2
-      },
-      {
-        breakpoint: '560px',
-        numVisible: 1,
-        numScroll: 1
-      }
-    ];
-  }
+		this._activatedRoute.params.subscribe(params => {
+			let city: string = this.city || params.city;
+			let site: string = this.site || params.site;
+			let isFlight: boolean = this.isFlight === undefined ? params.isflight : this.isFlight;
+			this.getAllHotels(city, site, isFlight);
+		});
 
-  ngOnInit(): void {
-    this.urlPaqueteDinamico = environment.urlPaqueteDinamico;
-
-    this._activatedRoute.params.subscribe(params => {
-      let city: string = this.city || params.city;
-      let site: string = this.site || params.site;
-      let isFlight: boolean = this.isflight === undefined ? params.isflight : this.isflight;
-      this.getAllHotels(city, site, isFlight);
-    });
-
-    this.hideWhatsappBtn();
-  }
+		this.hideWhatsappBtn();
+	}
 
   hideWhatsappBtn() {
     const url = window.location.href;
