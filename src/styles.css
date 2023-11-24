@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400;500;600;700;800;900");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 /** Media Queries **/
 .animated {
   animation-duration: 1s !important;
@@ -36,6 +34,7 @@ html {
   height: 100%;
 }
 
+html,
 body {
   min-height: 100%;
   background: #f6f7f9 !important;
@@ -44,10 +43,7 @@ body {
   color: #4b4b4b;
   transition: 300ms ease;
   overflow-x: hidden !important;
-}
-
-body.modal-open {
-  overflow-y: hidden !important;
+  overflow-y: auto !important;
 }
 
 /** FONTS **/
@@ -4192,12 +4188,11 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
       color: #4b4b4b;
       text-indent: 40px;
       border: 0.5px solid #e4e5e7;
-      background: white;
       border-radius: 3px; }
       .rowBoxTab .colBoxtab input.icono {
         text-indent: 40px;
         padding-right: 33px !important;
-        background: url("./assets/svg/airplane-line.svg") no-repeat 10px center; }
+        background: url("./assets/origen.png") no-repeat 10px center; }
         .rowBoxTab .colBoxtab input.icono-no {
           text-indent: 10px;
           background: none; }
@@ -5814,6 +5809,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .newBoxTab {
   display: flex;
   flex-wrap: wrap;
+  padding-right: 23px;
   font-family: 'Montserrat'; }
   .newBoxTab .sectionTab {
     display: flex;
@@ -5857,7 +5853,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             flex: 1 1 100%;
             max-width: 100%; } }
       .newBoxTab .sectionTab .columnBox .boxFlotante {
-        top: 390px }
+        top: 130px; }
         @media (max-width: 640px) {
           .newBoxTab .sectionTab .columnBox .boxFlotante {
             top: 50px;
@@ -7337,7 +7333,7 @@ button.customers {
   font-size: 14px;
   color: #222;
   margin-top: 7px;
-  background-color: transparent;
+  background-color: #fff;
   padding-left: 0;
   text-align: left;
   font-family: "Montserrat";
@@ -8111,37 +8107,36 @@ button.customers {
       flex-direction: column; } }
 
 .notifyBox {
-  min-width: 700px;
+  min-width: 500px;
   display: none;
-  align-items: flex-start;
+  align-items: center;
   top: 20px;
   z-index: 2000;
-  left: 25%;
+  left: calc(50% - 258px);
   gap: 15px;
   border-radius: 5px;
   box-shadow: 0 1rem 3rem rgba(244, 106, 106, 0.18);
   position: fixed;
   background: #ffffff;
   padding: 20px;
-  background-color: #EF4444;
-  border-color: #EF4444; }
+  background-color: #f46a6a;
+  border-color: #f46a6a; }
   .notifyBox.show {
-    display: flex; 
-  }
+    display: flex; }
   .notifyBox .groupText {
     color: #ffffff;
     flex: 1 1 auto; }
     .notifyBox .groupText .titulo {
       font-size: 16px;
-      margin-bottom: 4px;
       font-weight: bold; }
     .notifyBox .groupText .descripcion {
       font-size: 14px; }
   .notifyBox .iconClose {
-    width: 24px;
+    width: 48px;
+    height: 48px;
     display: flex;
-    justify-content: flex-end;
-    margin-top: -8px;
+    align-items: center;
+    justify-content: center;
     cursor: pointer; }
   @media (max-width: 640px) {
     .notifyBox {
@@ -8558,10 +8553,9 @@ app-flight-deals button {
         display: flex;
         width: 100%; }
         .gridTab .rowGrid .colGrid .colElement input {
-          background: white;
           border: 0.5px solid #e4e5e7;
           border-radius: 5px;
-          min-height: 48px;
+          height: 48px;
           padding: 0 10px; }
     @media (max-width: 640px) {
       .gridTab .rowGrid {
@@ -8798,7 +8792,8 @@ app-flight-deals button {
   width: 600px;
   padding: 20px;
   position: absolute;
-  z-index: 100;  
+  z-index: 100;
+  top: 130px;
   left: 36.5% !important; }
   .boxCalendar .groupCalendario {
     display: flex;
@@ -9485,58 +9480,3 @@ app-flight-deals button {
     height: 100%; }
     .boxVideo .row .col-12 .videoYoutube {
       height: 100%; }
-
-
-
-/********************************Scroll*****************************************/
-
-::-webkit-scrollbar-thumb {
-  background: #CFD1D3 !important;
-  padding: 0px 4px;
-  border-radius: 5px;
-}
-::-webkit-scrollbar {
-  height: 4px;
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent !important;
-}
-
-/********************************Slider NG5 custom*****************************************/
-.ng5-slider{
-  margin: 20px 0px 0px 0px !important;
-}
-.ng5-slider .ng5-slider-bar {
-  background: #DFE0E2 !important;
-  height: 4px !important;
-}
-.ng5-slider .ng5-slider-selection {
-  background: #6D0617 !important;
-}
-
-.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-min,
-.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-max {
-  width: 20px !important;
-  height: 20px !important;
-  background-color: #B50A27 !important;
-  border-radius: 50% !important;
-  top: -8px!important;
-}
-
-.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-min:active,
-.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-max:active{
-  border:none !important;
-}
-
-.ng5-slider .ng5-slider-bubble{
-  display: none !important;
-}
-.ng5-slider .ng5-slider-tick {
-  background: transparent !important;
-}
-
-.ng5-slider .ng5-slider-tick.ng5-slider-selected {
-  background: transparent !important;
-}

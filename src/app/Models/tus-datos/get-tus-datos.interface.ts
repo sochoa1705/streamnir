@@ -9,8 +9,4 @@ interface PassengerData {
 	FechaNacimiento: string;
 	Email: string;
 	Telefono: string;
-  gender: string;
-  country: string;
-  district: string;
-  address: string;
 }

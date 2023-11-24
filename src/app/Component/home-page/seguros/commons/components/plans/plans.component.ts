@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { PlansACService } from '../../../../../../Services/plansAC/plans-ac.service';
 import { LoaderSubjectService } from '../../../../../../shared/components/loader/service/loader-subject.service';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { CoverageService } from '../../../../../../Services/coverage/coverage.service';
 import { NMRequestBy } from 'src/app/Models/base/NMRequestBy';
 import { CotizarSeguroRQ } from 'src/app/Models/seguros/cotizacionRQ.interface';
@@ -116,40 +116,37 @@ export class PlansComponent implements OnInit {
       this.callFirstService = true;
     }, 500);
 
-    this.plansACService.plansAC(payload).pipe(take(1)).subscribe({
-      next: (response) => {
-
+    this.plansACService.plansAC(payload).pipe(
+        map((data: any[]) => data.filter((value: any) => value.codProducto !== 'A38')),
+        take(1)
+    ).subscribe({
+      next: (response: any) => {
         if (response.length > 0) {
           this.existPlans = true;
-
           this.plansAC = response.map((elem: any) => {
-            elem.change = Number(elem.precioEmisionLocal ? elem.precioEmisionLocal : 0).toFixed(2)
-            elem.precioBrutochange = Number(elem.precioBrutoLocal ? elem.precioBrutoLocal : 0).toFixed(2)
+            elem.change = Number(elem.precioEmisionLocal ? elem.precioEmisionLocal : 0).toFixed(2);
+            elem.precioBrutochange = Number(elem.precioBrutoLocal ? elem.precioBrutoLocal : 0).toFixed(2);
             return elem;
-          })
-
-          let maxi = this.bestPlan()
-          let clase = { clase: 'best' }
-          this.plans = { ...this.plansAC[maxi], ...clase }
-          this.plansAC.splice(maxi, 1)
-          this.plansAC.unshift(this.plans)
-          localStorage.setItem('planes', JSON.stringify(this.plansAC))
-        }
-        else {
-          this.existPlans = false;
-        }
+          });
+          let maxi = this.bestPlan();
+          let clase = { clase: 'best' };
+          this.plans = { ...this.plansAC[maxi], ...clase };
+          this.plansAC.splice(maxi, 1);
+          this.plansAC.unshift(this.plans);
+          localStorage.setItem('planes', JSON.stringify(this.plansAC));
+        } else this.existPlans = false;
 
         this.loaderSubjectService.closeLoader();
         this.callFirstService = false;
       },
-      error: error => {
+      error: (error: any) => {
         console.error(error);
-        this.notification.showNotificacion("Error", "Error de autenticación", 10);
-        this.loaderSubjectService.closeLoader()
+        this.notification.showNotificacion('Error', 'Error de autenticación', 10);
+        this.loaderSubjectService.closeLoader();
         this.route.navigateByUrl('/seguros');
         this.callFirstService = false;
       }
-    })
+    });
   }
 
   listCoverage(data: any) {

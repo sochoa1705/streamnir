@@ -15,9 +15,9 @@ export const environment = {
   today: (hoy: any) => {
     return `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
   },
-  offerText: '¡No dejes pasar las ofertas!',
-  offerExpireDate: '2023-11-17 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
-  offerLink: 'https://vacaciones.nmviajes.com/ES/holidays/availability?utm_source=web&utm_medium=reloj&utm_campaign=cybernmviajes&utm_id=cybernmviajesnov&utm_term=reloj&utm_content=reloj',
+  offerText: ' ¡Apúrate que las ofertas vuelan!',
+  offerExpireDate: '2023-11-26 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
+  offerLink: 'https://www.nmviajes.com/vuelos?utm_source=web&utm_medium=reloj&utm_campaign=blackweek&utm_id=blackweek&utm_term=reloj&utm_content=reloj',
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
   urlAutosNmViajes: 'https://autos.nmviajes.com/',
@@ -34,7 +34,6 @@ export const environment = {
   reCaptchaPublicKey: '6Lc9CbsmAAAAANpAUZ5Ubxl2s25BwmhZVgp7Yrev',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
-  urlNmViajesCountries: "https://servicio.nmviajes.com:9443/ZonaPrivada/v1/api/Master/Soap/Countries",
   urlMeta: "https://meta.nmviajes.com",
   //urlNmviajes: "http://localhost:12639/v1/api",
 

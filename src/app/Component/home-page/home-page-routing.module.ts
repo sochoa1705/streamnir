@@ -27,7 +27,8 @@ import { BenefitsComponent } from './retail/benefits/benefits.component';
 import { CanActivateCheckoutGuard } from 'src/app/Guards/checkout.guard';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { DestinosComponent } from './vuelos/commons/components/destinos/destinos.component';
-import { EventosV2Component } from './eventos-v2/eventos-v2.component';
+import { EventosComponent } from './eventos/eventos.component';
+
 
 const routes: Routes = [
   {
@@ -144,12 +145,8 @@ const routes: Routes = [
       },
       {
         path: 'eventos',
-        component: EventosV2Component,
+        component: EventosComponent,
       },
-      // {
-      //   path: 'eventos',
-      //   component: EventosComponent,
-      // },
       {
         path: 'agenda-tu-cita',
         component: CitaComponent
