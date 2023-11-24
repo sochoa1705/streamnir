@@ -204,6 +204,9 @@ section {
 			font-size: 20px;
 			line-height: 28px;
 		}
+		&__header img{
+			width: 12px;
+		}
 		&__body{
 			.modal__contend__body__card__options {
 				&__title, &__check span{

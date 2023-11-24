@@ -115,7 +115,8 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 
 		this._checkoutService.nextPassengerMobile.subscribe({
 			next:()=>{
-				this.setInfoPassengersInformation();
+				console.log('pasee kura')
+				//this.setInfoPassengersInformation();
 			}
 		})
 	}
@@ -129,7 +130,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.totalPassenger = GlobalComponent.detailPricing.passengersCount;
 		this.setIndexValidCard();
 		const userStorage = this._accountService.getUserStorage();
-		if (userStorage.email) this.getDataContact(userStorage.email);
+		if (userStorage.email && GlobalComponent.appBooking.passengers.length==0) this.getDataContact(userStorage.email);
 		this.getScreenWidth = window.innerWidth;
 		this._checkoutService.isSaveDataPassenger = true;
 		this.initialValuesPassengers = { ...this._checkoutService.dataInfoPassengers };
@@ -174,6 +175,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.acceptPoliticsField.setValue(data.acceptPolitics);
 		this.formBillingGroup.setValue(data.billing);
 		this._checkoutService.isSaveDataPassenger = true;
+		console.log(this.formGroup.value, 'valueee form :c')
 	}
 
 	setArrayDate() {

@@ -109,6 +109,19 @@
 		gap:18px;
 		width: 100%;
 	}
+	@media (max-width: 575px){
+		gap:6px;
+		&__tag{
+			height: 30px;
+			padding: 5px 10px;
+			span{
+				font-size: 12px;
+			}
+			img{
+				width: 18px;
+			}
+		}
+	}
 }
 
 

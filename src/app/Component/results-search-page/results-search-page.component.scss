@@ -178,7 +178,7 @@ section{
 
 	@media (max-width: 575px) {
 		&__metasearch{
-			padding: 12px 16px;
+			padding: 20px 16px 12px;
 			min-height: auto;
 		}
 		&__metasearch__mobile__filters{
@@ -200,11 +200,12 @@ section{
 			width: 100%;
 		}
 		section{
-			padding: 157px 14px 40px;
+			padding: 165px 14px 40px;
 		}
+
 		.progress {
 			height: 5px;
-			top:193px;
+			top:196px;
 		}
 		&__metasearch__mobile .sumary{
 			&__date.tablet{

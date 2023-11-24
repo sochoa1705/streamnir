@@ -125,7 +125,7 @@
 						.tag {
 							padding: 0px 10px;
 							border-radius: 50px;
-							height: 20px;
+							min-height: 20px;
 							color: colors.$purple;
 							font-family: Montserrat;
 							font-size: 12px;
@@ -134,6 +134,9 @@
 							letter-spacing: 0em;
 							background: colors.$purple-bg;
 							width: fit-content;
+							text-overflow: ellipsis;
+							overflow: hidden;
+							white-space: nowrap;
 						}
 					}
 					&__dots {
@@ -255,6 +258,7 @@
 			padding: 24px 20px;
 			margin-bottom: 17px;
 		}
+		
 		&__header>img{
 			width: 12px;
 		}
@@ -265,6 +269,13 @@
 			&__flight__header span.type-flight{
 				font-size: 14px;
 				line-height: 20px;
+			}
+			&__flight__info__change__plane{
+				column-gap: 12px;
+				padding: 8px 10px;
+				span, span.bold{
+					font-size: 12px;
+				}
 			}
 			&__flight__header span.duration strong,
 			&__flight__info__airline span,
@@ -284,6 +295,14 @@
 					display: none;
 				}
 			}
+		}
+		&__footer{
+			padding: 16px 20px;
+			h4{
+				font-size: 16px;
+				line-height: 24px;
+			}
+			
 		}
 	}
 

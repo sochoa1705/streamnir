@@ -18,7 +18,7 @@
 		[class.active]="showCalendar && typeFlight <= 0"
 	>
 		<img [src]="typeFlight >= 1 ? './assets/svg/calendar-inactive.svg' : './assets/svg/calendar.svg'" alt="" />
-		<span *ngIf="typeFlight == 0" [class.inactive]="dateReturn == ''">{{
+		<span *ngIf="typeFlight <= 0" [class.inactive]="dateReturn == ''">{{
 			dateReturn == '' ? 'Retorno' : dateReturn
 		}}</span>
 		<span *ngIf="typeFlight == 1" class="inactive">Retorno</span>

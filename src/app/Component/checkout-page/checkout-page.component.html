@@ -23,7 +23,7 @@
 										>{{ pricing.totalADT }} {{ pricing.totalADT > 1 ? 'Adultos' : 'Adulto' }}</span
 									></span
 								>
-								<span class="font-12"
+								<span class="font-small text-end"
 									>USD <span class="bold-15">{{ pricing.baseFareADT * pricing.totalADT | number: '1.2-2' }}</span></span
 								>
 							</div>
@@ -33,7 +33,7 @@
 									>Vuelo para
 									<span class="bold">{{ pricing.totalCNN }} {{ pricing.totalCNN > 1 ? 'Niños' : 'Niño' }}</span></span
 								>
-								<span class="font-12"
+								<span class="font-small text-end"
 									>USD <span class="bold-15">{{ pricing.baseFareCNN * pricing.totalCNN | number: '1.2-2' }}</span></span
 								>
 							</div>
@@ -45,20 +45,20 @@
 										>{{ pricing.totalINF }} {{ pricing.totalINF > 1 ? 'Infantes' : 'Infante' }}</span
 									></span
 								>
-								<span class="font-12"
+								<span class="font-small text-end"
 									>USD <span class="bold-15">{{ pricing.baseFareINF * pricing.totalINF | number: '1.2-2' }}</span></span
 								>
 							</div>
 
 							<div class="container__page__detail__pay__contend__body__row" *ngIf="totalInsurance !== 0">
 								<span>Asistencia al viajero</span>
-								<span class="font-12"
+								<span class="font-small text-end"
 									>USD <span class="bold-15">{{ totalInsurance | number: '1.2-2' }}</span></span
 								>
 							</div>
 							<div class="container__page__detail__pay__contend__body__row">
 								<span>Impuestos, tasas y cargos</span>
-								<span class="font-12"
+								<span class="font-small text-end"
 									>USD
 									<span class="bold-15">{{
 										pricing.feeNMV + pricing.feePTA + pricing.taxes | number: '1.2-2'
@@ -67,17 +67,17 @@
 							</div>
 							<div class="container__page__detail__pay__contend__body__row" *ngIf="isShowDiscount">
 								<span class="discount"
-									>Descuento {{ discount.discount.value }}% (máx. <span class="font-12 discount">USD</span>
+									>Descuento {{ discount.discount.value }}% (máx. <span class="font-small discount">USD</span>
 									{{ discount.discount.max }})</span
 								>
-								<span class="font-12 discount"
+								<span class="font-small discount text-end"
 									>USD <span class="bold-15 discount"> -{{ discount.amountDiscount | number: '1.2-2' }}</span></span
 								>
 							</div>
 
 							<div class="container__page__detail__pay__contend__body__row" *ngIf="isShowDiscountCupon">
 								<span class="discount">Código de descuento</span>
-								<span class="font-12 discount"
+								<span class="font-small discount text-end"
 									>USD <span class="bold-15 discount"> -{{ totalDiscountCupon | number: '1.2-2' }}</span></span
 								>
 							</div>
@@ -89,15 +89,15 @@
 								*ngIf="isShowDiscount || isShowDiscountCupon"
 							>
 								<span>Precio sin descuento</span>
-								<span
-									><span class="font-12">USD </span
+								<span class="text-end"
+									><span class="font-small">USD </span
 									><span class="through">{{ pricing.totalPay + totalInsurance | number: '1.2-2' }}</span></span
 								>
 							</div>
 							<div class="container__page__detail__pay__contend__footer__row">
 								<h6>Total</h6>
 								<h6>
-									<span class="usd-total">USD </span>
+									<span class="usd-total text-end">USD </span>
 									{{
 										(isShowDiscount
 											? pricing.totalPay + totalInsurance - discount.amountDiscount

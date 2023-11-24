@@ -18,6 +18,7 @@ export class ButtonComponent implements OnInit {
     @Input() isSucess = false;
     @Input() isLoader = false;
     @Input() isMobile = false;
+    @Input() isMobile2 = false;
     @Input() isTabIndex = true;
     @Input() isLink = false;
     @Input() fullWidth = false;
