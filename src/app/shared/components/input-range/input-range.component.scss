@@ -97,10 +97,6 @@ ngb-datepicker{
         &.multi{
             width: 100%;
         }
-        &.inactive{
-            background: colors.$gris-50;
-            cursor: default;
-        }
         span{
             font-family: Montserrat;
             font-size: 18px;
@@ -115,6 +111,10 @@ ngb-datepicker{
                 color:colors.$gris-900;
             }
         }
+        &.inactive{
+            background: colors.$gris-50;
+            cursor: default;
+        }
     }
 
     section{
@@ -124,6 +124,9 @@ ngb-datepicker{
         top: calc(100% + 20px);
         left: 0;
         width: fit-content;
+    }
+    section.multi{
+        top: -350px;
     }
 
     &__datepicker{
@@ -160,6 +163,16 @@ ngb-datepicker{
         }
     }
 
+    section.modal{
+        margin:0 auto;
+        padding: 12px 0;
+        .container__range__datepicker{
+            border: none;
+            box-shadow: none;
+        }
+    }
+
+
 
     &__arrow{
         position: absolute;
@@ -174,6 +187,10 @@ ngb-datepicker{
         border: solid;
         border-width: 1px 1px 0px 0px;
         border-color: colors.$gris-200;
+        &.multi{
+            bottom: -5px;
+            margin-top: 10px;
+        }
     }
 
     @media(max-width:575px){
@@ -190,29 +207,52 @@ ngb-datepicker{
                 font-size: 14px;
                 line-height: 20px;
             }
-            &.inactive{
-                display: none;
-            }
         }
         section{
-            top: 65px;
+            top: -302px;
+            &.only{
+                top:-314px;
+            }
         }
         ::ng-deep .ngb-dp-month-name{
             font-size: 13px !important;
         }
         &__datepicker{
             padding: 14px;
-            gap: 8px;
+            gap: 4px;
+        }
+        &__arrow{
+            display: none;
         }
     }
 
-    @media(max-width:318px){
+    @media(max-width:325px){
         section{
-            left: -25px;
+            transform: translateX(-50%);
+            left: 50%;
+            top:-297px; 
+          &.only{
+                top:-297px;
+            }
         }
         &__datepicker{
             padding: 12px 5px;
         }
     }
     
+}
+
+ ::ng-deep.modal-datepicker .modal-dialog.modal-dialog-centered {
+		min-width:auto;
+		width: 100%;
+		margin:0;
+		padding: 0;
+        background: rgba(0, 0, 0, 0.5);
+	}
+    ::ng-deep.modal.modal-datepicker .modal-dialog .modal-content{
+		border-radius: 10px 10px 0px 0px;
+		margin:0;
+		bottom: 0;
+		left: 0;
+		position: fixed;
 }

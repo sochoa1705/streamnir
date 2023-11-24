@@ -2,13 +2,9 @@ import {
 	Component,
 	ElementRef,
 	EventEmitter,
-	HostListener,
 	Input,
-	OnChanges,
-	OnDestroy,
 	OnInit,
 	Output,
-	SimpleChanges,
 	ViewChild
 } from '@angular/core';
 import { InputPassengersComponent } from '../../input-passengers/input-passengers.component';
@@ -20,39 +16,34 @@ import { AccountsService } from 'src/app/Services/accounts.service';
 import { Router } from '@angular/router';
 import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
+import { GlobalComponent } from 'src/app/shared/global';
 
 @Component({
 	selector: 'app-tab-vuelos-v2',
 	templateUrl: './tab-vuelos-v2.component.html',
 	styleUrls: ['./tab-vuelos-v2.component.scss']
 })
-export class TabVuelosV2Component implements OnInit, OnChanges {
+export class TabVuelosV2Component implements OnInit{
 	constructor(
 		private _notification: NotificationService,
 		private _accountService: AccountsService,
-		private router: Router,
-		private _searchFiltersService: SearchFiltersService
+		private router: Router
 	) {}
 	@ViewChild('sliderRadios', { static: false }) sliderRadios: ElementRef;
 	@ViewChild('childPassengers') childPassengers!: InputPassengersComponent;
 	@ViewChild('childClass') childClass!: InputClassComponent;
 	@ViewChild('childInputs') childInputs!: InputSearchFlightComponent;
 	@ViewChild('childDates') childDates!: InputRangeComponent;
-	@Input() typeFlight = 0;
-	@Input() params: Params;
 	@Output() reloadPageResult = new EventEmitter();
 
 	isDown = false;
 	startX: number;
 	scrollLeft: number;
+	typeFlight = 0;
 
-	ngOnInit(): void {}
-
-	ngOnChanges(changes: SimpleChanges): void {
-		if (changes.params && changes.params.currentValue) {
-			if (this.counterSearch == 0) {
-				this._searchFiltersService.isSetParams.emit(this.params);
-			}
+	ngOnInit(): void {
+		if(window.location.href.includes('resultados')){
+			this.typeFlight=GlobalComponent.searchData.flightType || 0
 		}
 	}
 

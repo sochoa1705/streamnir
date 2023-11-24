@@ -5,6 +5,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
+import { GlobalComponent } from '../../global';
 
 export interface Search {
 	arrivalLocation: string | null;
@@ -18,7 +19,7 @@ export interface Search {
 	templateUrl: './multivuelo.component.html',
 	styleUrls: ['./multivuelo.component.scss']
 })
-export class MultivueloComponent implements OnInit, OnChanges {
+export class MultivueloComponent implements OnInit{
 	now = new Date();
 	minDateDefault: NgbDateStruct = {
 		year: this.now.getFullYear(),
@@ -28,6 +29,7 @@ export class MultivueloComponent implements OnInit, OnChanges {
 	arrayMulti = [{ index: 0, minDate: this.minDateDefault }];
 	indexCounter = 0;
 	@Input() params:Params;
+	showDatepicker=false;
 
 	constructor(private _searchFiltersService: SearchFiltersService) {
 	}
@@ -36,23 +38,28 @@ export class MultivueloComponent implements OnInit, OnChanges {
 	@ViewChildren(InputRangeComponent) datesComponent: QueryList<InputRangeComponent>;
 	@Output() searchDataMulti = new EventEmitter();
 	
-	ngOnInit(): void {}
-
-	ngOnChanges(changes: SimpleChanges): void {
-		if(changes.params && changes.params.currentValue){
-			if (this.params.multicity) {
+	ngOnInit(): void {
+		if (window.location.href.includes('resultados')) {
+			const dataSearch = GlobalComponent.searchData;
+			if (dataSearch.multicity){
 				this.arrayMulti=[];
-				for (let index = 0; index < this.params.multicity.length; index++) {
-					const date=this.params.multicity[index == 0 ? 0 : index - 1].departureDate.split('-');
+				for (let index = 0; index < dataSearch.multicity.length; index++) {
+					const date=dataSearch.multicity[index == 0 ? 0 : index - 1].departureDate.split('-');
 					this.arrayMulti.push({
 						index,
 						minDate: index==0 ? this.minDateDefault : {year:Number(date[0]), month:Number(date[1]), day:Number(date[2])}
 					})
 				}
-				setTimeout(() => {
-					this._searchFiltersService.isSetParamsMulti.emit(this.params);
-				}, 100);
 			}
+
+			if(dataSearch.flightType!==2 && this.arrayMulti.length==0){
+				this.arrayMulti=[];
+				this.arrayMulti.push({
+					index:0,
+					minDate: this.minDateDefault
+				})
+			}
+			this.indexCounter=this.arrayMulti.length-1;
 		}
 	}
 
@@ -71,7 +78,6 @@ export class MultivueloComponent implements OnInit, OnChanges {
 		const childrenArray = this.datesComponent.toArray();
 		this.indexCounter++;
 		if (childrenArray.length > 0) {
-			console.log(childrenArray.length)
 			const lastDate = childrenArray[childrenArray.length - 1].getValues().departureDate;
 			this.arrayMulti.push({
 				index: this.indexCounter,
@@ -109,5 +115,9 @@ export class MultivueloComponent implements OnInit, OnChanges {
 			}
 			prevComponent = component;
 		});
+	}
+	openDatepicker($event:boolean){
+		console.log($event,'evnettt')
+		this.showDatepicker=$event;
 	}
 }

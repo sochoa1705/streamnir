@@ -1,8 +1,16 @@
 <section *ngIf="flight">
 	<div class="tags" *ngIf="idCheap == flight.id || idBest == flight.id">
-		<img *ngIf="idCheap == flight.id" src="./assets/svg/badge_cheap.svg" alt="mas_barato" />
-		<img *ngIf="idBest == flight.id" src="./assets/svg/badge_best.svg" alt="mejor_opcion" />
+		<picture *ngIf="idCheap == flight.id">
+			<source srcset="./assets/svg/badge_cheap.svg" media="(min-width: 575px)">
+			<img src="./assets/svg/best-cheap-mob.svg" alt="mas_barato">
+		</picture>
+
+		<picture *ngIf="idBest == flight.id">
+			<source srcset="./assets/svg/badge_best.svg" media="(min-width: 575px)">
+			<img src="./assets/svg/best-option-mob.svg" alt="mejor_opcion">
+		</picture>
 	</div>
+
 	<div class="card__result">
 		<div class="card__result__flights">
 			<!--------------Section Departure (pueden ser varios | multivuelo)------------------->
@@ -17,7 +25,7 @@
 						<h4 class="fly">{{ departure.originCity.code }}</h4>
 						<img class="arrow" src="./assets/result-search/arrow.svg" />
 						<h4 class="fly2">{{ departure.destinationCity.code }}</h4>
-						<div class="date">
+						<div class="date date d-none d-sm-block">
 							{{ (departure.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}
 						</div>
 					</div>
@@ -107,7 +115,7 @@
 					<h4 class="fly">{{ returns.originCity.code }}</h4>
 					<img class="arrow" src="./assets/result-search/arrow.svg" />
 					<h4 class="fly2">{{ returns.destinationCity.code }}</h4>
-					<div class="date">{{ (returns.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</div>
+					<div class="date date d-none d-sm-block">{{ (returns.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</div>
 				</div>
 
 				<div class="card__result__flights__section__options" [hidden]="showHoursReturn">
@@ -183,7 +191,7 @@
 				<h4>
 					<span>{{ currency }}</span> {{ flight.detailPricing.totalPay | changeCurrency: currency | number: '1.2-2' }}
 				</h4>
-				<app-button [text]="'Ver Detalle'" [isMobile]="true" [w100]="true" (onClick)="openModalDetail()"></app-button>
+				<article><app-button [text]="'Ver Detalle'" [isMobile2]="true" [w100]="true" (onClick)="openModalDetail()"></app-button></article>
 			</div>
 			<span class="card__result__pricemobile__detail">¿Que incluye este precio?</span>
 		</div>
@@ -253,7 +261,7 @@
 					</div>
 				</div>
 				<div class="card__result__price__button">
-					<app-button [text]="'Ver Detalle'" [isMobile]="true" [w100]="true" (onClick)="openModalDetail()"></app-button>
+					<app-button [text]="'Ver Detalle'" [w100]="true" [isMobile2]="true"  (onClick)="openModalDetail()"></app-button>
 				</div>
 			</ng-container>
 		</div>

@@ -143,16 +143,6 @@ h4 {
 								color: colors.$gris-700;
 							}
 						}
-						&__bags {
-							@extend .flex-row;
-							gap: 8px;
-							position: relative;
-							img {
-								width: 20px;
-								height: 20px;
-							}
-							border: 1px solid pink;
-						}
 						&__hours {
 							@extend .flex-row;
 							img {
@@ -185,10 +175,11 @@ h4 {
 		display: none;
 		width: 100%;
 		&__actions {
-			display: grid;
-			grid-template-columns: auto 130px;
-			gap: 32px;
+			display: flex;
 			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			gap:12px;
 			h4 {
 				font-size: 16px;
 				line-height: 24px;
@@ -196,6 +187,10 @@ h4 {
 					font-size: 12px;
 					line-height: 20px;
 				}
+			}
+			article{
+				margin:0;
+				width: 130px;
 			}
 		}
 		&__detail {
@@ -205,7 +200,7 @@ h4 {
 			line-height: 20px;
 			letter-spacing: 0em;
 			color: colors.$red-500;
-			margin-top: 4px;
+			margin-top: 10px;
 			display: block;
 		}
 	}
@@ -277,11 +272,14 @@ h4 {
 		display: none;
 	}
 
-	.tags img {
+	.tags img{
 		height: 24px;
 	}
 	.card__result__flights__section {
 		gap: 8px;
+		&__header{
+			grid-template-rows: auto;
+		}
 		&__header h4 {
 			font-size: 20px;
 			line-height: 28px;
@@ -308,5 +306,11 @@ h4 {
 				line-height: 20px;
 			}
 		}
+	}
+}
+
+@media (max-width: 310px){
+	section{
+		padding: 36px 20px;
 	}
 }

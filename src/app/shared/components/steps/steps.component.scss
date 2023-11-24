@@ -122,6 +122,9 @@
 			grid-template-columns: 28px auto 28px auto 26px;
 			gap: 5px;
 			padding: 16px 30px 10px 30px;
+			img{
+				width: 20px;
+			}
 		}
 		&__step {
 			flex-direction: column;

@@ -30,6 +30,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	showToolTipInfo = false;
 	showToolTipSupport = false;
 	showMenuMobile = false;
+	isPageResult=false;
 
 	loginModalSubscription = new Subscription();
 
@@ -44,6 +45,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 		this.route.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: any) => {
 			if (event.url.toString().includes('booking')) this.isWhiteMenu = false;
 			else this.isWhiteMenu = true;
+
+			if (event.url.toString().includes('resultados')) this.isPageResult = true;
+			else this.isPageResult = false;
 		});
 	}
 

@@ -82,6 +82,9 @@
                 color:colors.$red-200;
                 margin-top: 8px;
                 margin-left: 135px;
+                @media (max-width: 575px) {
+                    margin-left: 110px;
+                }
             }
             &__selects {
                 width: 100%;

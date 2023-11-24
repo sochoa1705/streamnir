@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PassengerComponent } from './passenger.component';
+import { ModalSearchComponent } from './modal-search.component';
 
-describe('PassengerComponent', () => {
-  let component: PassengerComponent;
-  let fixture: ComponentFixture<PassengerComponent>;
+describe('ModalSearchComponent', () => {
+  let component: ModalSearchComponent;
+  let fixture: ComponentFixture<ModalSearchComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PassengerComponent ]
+      declarations: [ ModalSearchComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PassengerComponent);
+    fixture = TestBed.createComponent(ModalSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

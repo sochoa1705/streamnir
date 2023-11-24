@@ -1,58 +1,75 @@
-import { Search } from "src/app/api/api-nmviajes/models/ce-metasearch";
-import { GlobalComponent } from "../global";
+import { Multicity, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
+import { GlobalComponent } from '../global';
 
-export const getParams = (params: any) => {
-	let departureLocation='';
-	let arrivalLocation='';
-	let lastDateMulti='';
-	const objSearch: any = {
-		flightType: Number(params.get('flightType')),
-		flightClass: Number(params.get('flightClass')),
-		adults: Number(params.get('adults')),
-		children: Number(params.get('children')),
-		infants: Number(params.get('infants')),
-		email: params.get('email')
-	};
-	if (objSearch.flightType == 2) {
-		const json=JSON.parse(params.get('json')?.replace(/\\/g, '') || '');
-		objSearch.multicity = json.map((item: any,index:number) => {
-			if(index==0) departureLocation=item.departureLocation.split(' ')[1];
-			if(index==json.length - 1) arrivalLocation=item.arrivalLocation.split(' ')[1];
-			
-			item.departureLocation = item.departureLocation.split(' ')[0];
-			item.arrivalLocation = item.arrivalLocation.split(' ')[0];
-			const date = item.departureDate.split('/');
-			item.departureDate = date[2] + '-' + date[1] + '-' + date[0];
-			if(index==json.length - 1) lastDateMulti=item.departureDate;
-			return item;
-		});
-	} else {
-		departureLocation=params.get('departureLocation').split(' ')[1];
-		arrivalLocation=params.get('arrivalLocation').split(' ')[1];
-		objSearch.departureLocation = params.get('departureLocation')?.split(' ')[0];
-		objSearch.arrivalLocation = params.get('arrivalLocation')?.split(' ')[0];
-		const date = params.get('departureDate')?.split('/');
-		if (date) objSearch.departureDate = date[2] + '-' + date[1] + '-' + date[0];
-		if (objSearch.flightType == 0) {
-			const date2 = params.get('arrivalDate')?.split('/');
-			if (date2) objSearch.arrivalDate = date2[2] + '-' + date2[1] + '-' + date2[0];
+export const getParamsByRoute = () => {
+	const urlParamsString = localStorage.getItem('searchParams')!;
+	const urlParams = new URLSearchParams(urlParamsString)!;
+	if(!urlParams) return null
+	if (window.location.href.includes('resultados') && urlParams) {
+		let departureLocation = '';
+		let arrivalLocation = '';
+		let lastDateMulti = '';
+		let multicity:Multicity[] = [];
+		
+		const objSearch: any = {
+			flightType: Number(urlParams.get('flightType')),
+			flightClass: Number(urlParams.get('flightClass')),
+			adults: Number(urlParams.get('adults')),
+			children: Number(urlParams.get('children')),
+			infants: Number(urlParams.get('infants')),
+			email: urlParams.get('email')
+		};
+
+		if (objSearch.flightType == 2) {
+			const json = JSON.parse(urlParams.get('json')?.replace(/\\/g, '') || '');
+			objSearch.multicity = json.map((item: any, index: number) => {
+				if (index == 0) departureLocation = item.departureLocation.split(' ')[1];
+				if (index == json.length - 1) arrivalLocation = item.arrivalLocation.split(' ')[1];
+				const date = item.departureDate.split('/');
+				item.departureDate = date[2] + '-' + date[1] + '-' + date[0];
+				if (index == json.length - 1) lastDateMulti = item.departureDate;
+
+				multicity.push({
+					departureLocation:item.departureLocation.split(' ')[1],
+					arrivalLocation:item.arrivalLocation.split(' ')[1],
+					departureDate:item.departureDate,
+					fullArrivalLocation:item.arrivalLocation,
+					fullDepartureLocation:item.departureLocation,
+					arrivalDate:''
+				})
+
+				item.departureLocation = item.departureLocation.split(' ')[0];
+				item.arrivalLocation = item.arrivalLocation.split(' ')[0];
+				return item;
+			});
+		} else {
+			departureLocation = urlParams.get('departureLocation')?.split(' ')[1] || '';
+			arrivalLocation = urlParams.get('arrivalLocation')?.split(' ')[1] || '';
+			objSearch.departureLocation = urlParams.get('departureLocation')?.split(' ')[0];
+			objSearch.arrivalLocation = urlParams.get('arrivalLocation')?.split(' ')[0];
+			const date = urlParams.get('departureDate')?.split('/');
+			if (date) objSearch.departureDate = date[2] + '-' + date[1] + '-' + date[0];
+			if (objSearch.flightType == 0) {
+				const date2 = urlParams.get('arrivalDate')?.split('/');
+				if (date2) objSearch.arrivalDate = date2[2] + '-' + date2[1] + '-' + date2[0];
+			}
 		}
+		const searchData: Search = {
+			flightClass: objSearch.flightClass,
+			adults: objSearch.adults,
+			children: objSearch.children,
+			infants: objSearch.infants,
+			arrivalLocation,
+			departureLocation,
+			multicity,
+			flightType: objSearch.flightType,
+			arrivalDate: objSearch.flightType == 0 ? objSearch.arrivalDate : objSearch.flightType == 2 ? lastDateMulti : '',
+			departureDate: objSearch.flightType !== 2 ? objSearch.departureDate : objSearch.multicity[0].departureDate,
+			fullArrivalLocation:urlParams.get('arrivalLocation') || multicity[multicity.length-1].fullArrivalLocation,
+			fullDepartureLocation:urlParams.get('departureLocation') ||  multicity[0].fullDepartureLocation,
+		};
+		GlobalComponent.searchData = searchData;
+		return objSearch;
 	}
-
-	const searchData:Search = {
-		flightClass: objSearch.flightClass,
-		adults: objSearch.adults,
-		children: objSearch.children,
-		infants: objSearch.infants,
-		arrivalLocation,
-		departureLocation,
-		flightType:objSearch.flightType,
-		arrivalDate: objSearch.flightType==0 ? objSearch.arrivalDate : objSearch.flightType==2 ? lastDateMulti : '',
-		departureDate: objSearch.flightType!==2 ? objSearch.departureDate : objSearch.multicity[0].departureDate
-	}
-
-	console.log(searchData,'dat')
-
-	GlobalComponent.searchData=searchData;
-	return objSearch;
+	return null;
 };

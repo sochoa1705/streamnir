@@ -9,6 +9,7 @@
 	[class.isMobile]="isMobile"
 	[class.isLink]="isLink"
 	[class.fullwidth]="fullWidth"
+	[class.isMobile2]="isMobile2"
 	[attr.tabIndex]="isTabIndex ? 0: -1"
 	(keyup)="onKeyUp($event)"
 >
@@ -29,6 +30,7 @@
 	[class.isMobile]="isMobile"
 	[attr.tabIndex]="isTabIndex ? 0: -1"
 	[class.isLink]="isLink"
+	[class.isMobile2]="isMobile2"
 	[class.fullwidth]="fullWidth"
 >
 	<img alt="img_btn" [src]="'./assets/svg/' + icon" />
@@ -45,6 +47,7 @@
 	[class.isMobile]="isMobile"
 	[class.isLink]="isLink"
 	[attr.tabIndex]="isTabIndex ? 0: -1"
+	[class.isMobile2]="isMobile2"
 	[class.fullwidth]="fullWidth"
 >
 	{{ text }}

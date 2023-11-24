@@ -63,7 +63,8 @@ $green:#22C55E;
 	gap: 8px;
 
 	@media (max-width: 575px) {
-		width: 100px !important;
+		width: 97px !important;
+		padding: 8px 10px !important;
 	}
 }
 ::ng-deep .iti.separate-dial-code input {
@@ -76,8 +77,8 @@ $green:#22C55E;
 	font-family: 'Montserrat';
 	caret-color: $red-500;
 	&:focus {
-		outline: none;
-		border: 1px solid $red-500;
+		outline: none !important;
+		border: 1px solid $red-500 !important;
 	}
 	&::placeholder {
 		color: $neutral-400;
@@ -87,8 +88,12 @@ $green:#22C55E;
 	margin-left: 133px;
 	width: 100%;
 	margin-right: -3px;
+	&:focus{
+		outline: none;
+		border: 1px solid $red-500;
+	}
 	@media (max-width: 575px) {
-		margin-left: 113px;
+		margin-left: 108px;
 	}
 }
 
@@ -99,6 +104,7 @@ $green:#22C55E;
 	border: 1px solid $neutral-200;
 	box-shadow: 0px 4px 6px -4px #1018281a;
 	box-shadow: 0px 10px 15px -3px #1018281a;
+	transform: translateY(0px) !important;
 	.search-container > input {
 		border-radius: 0px;
 		border-bottom: 1px solid $neutral-200;

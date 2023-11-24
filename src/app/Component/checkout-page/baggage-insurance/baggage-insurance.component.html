@@ -83,7 +83,7 @@
 							<div class="container__page__section__body">
 								<div class="container__page__section__body__baggage">
 									<div class="container__page__section__body__baggage__column">
-										<span>Ida</span>
+										<span><strong>Ida</strong></span>
 										<app-baggage [active]="true"></app-baggage>
 										<app-baggage
 											[type]="'hand-luggage'"
@@ -97,7 +97,7 @@
 									<ng-container *ngIf="detailFlight.returns && detailFlight.returns !== null">
 										<div class="container__page__section__body__baggage__line"></div>
 										<div class="container__page__section__body__baggage__column">
-											<span>Vuelta</span>
+											<span><strong>Vuelta</strong></span>
 											<app-baggage [active]="true" [isDeparture]="false"></app-baggage>
 											<app-baggage
 												[type]="'hand-luggage'"
@@ -222,7 +222,7 @@
 			</ng-container>
 			<article>
 				<div class="container__page__section__button" *ngIf="getScreenWidth > 670">
-					<app-button [text]="'Continuar a pasajeros'" [color]="'primary'" (click)="nextPage()"></app-button>
+					<app-button [text]="'Continuar a pasajeros'" [isMobile]="true" [color]="'primary'" (click)="nextPage()"></app-button>
 				</div>
 			</article>
 		</ng-container>

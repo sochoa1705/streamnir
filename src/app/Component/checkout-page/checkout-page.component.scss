@@ -51,18 +51,18 @@
 					padding: 24px;
 
 					&__row {
-						display: flex;
-						align-items: center;
+						display: grid;
+						grid-template-columns: 1fr 1fr;
 						justify-content: space-between;
-
+						align-items: flex-start;
+						gap:10px;
 						span {
 							@extend .paragraph;
 							color: colors.$neutral-900;
-
-							.font-12 {
+							text-align: left;
+							.font-small {
 								font-size: 12px;
 							}
-
 							.bold {
 								font-weight: 600;
 
@@ -131,8 +131,9 @@
 								font-weight: 600;
 							}
 
-							&.font-12 {
+							&.font-small {
 								font-size: 12px;
+								text-align: end !important;
 							}
 
 							&.through {
@@ -337,7 +338,7 @@
 	}
 
 	@media (max-width: 575px) {
-		padding: 190px 24px 0px 24px;
+		padding: 190px 10px 0px 10px;
 		.container__page__section__button__footer {
 			padding: 0px 0px 40px 0px;
 			display: flex;

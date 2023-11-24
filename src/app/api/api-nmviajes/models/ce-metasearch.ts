@@ -5,9 +5,12 @@ export interface Search {
 	infants: number;
 	arrivalLocation: string | null;
 	departureLocation: string | null;
+	fullArrivalLocation?: string | null;
+	fullDepartureLocation?: string | null;
 	arrivalDate: string;
 	departureDate?: string;
 	flightType?:number
+	multicity?:Multicity[]
 }
 
 
@@ -30,4 +33,6 @@ export interface Multicity {
 	arrivalLocation: string
 	arrivalDate: string
 	departureDate: string
+	fullDepartureLocation?: string
+	fullArrivalLocation?: string
 }

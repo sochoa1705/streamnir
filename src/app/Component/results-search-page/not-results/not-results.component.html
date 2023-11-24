@@ -1,11 +1,15 @@
 <div class="page__notresults">
-	<img src="./assets/checkout/success_booking.svg"/>
+	<div class="row">
+		<div class="col-md-12">
+			<img class="bg-result" src="./assets/checkout/success_booking.svg"/>
+		</div>
+	</div>
 	<div class="page__notresults__title">
 		<h5>{{ title }}</h5>
 		<span *ngIf="type == 'error'">{{ subtitle }}</span>
 	</div>
 	<div class="page__notresults__actions" *ngIf="type == 'error'">
-		<app-button [text]="'Reintentar'" [color]="'dark'" (onClick)="resetFilters('-1')"></app-button>
+		<app-button [text]="'Reintentar'" [isMobile]="true" [color]="'dark'" (onClick)="resetFilters('-1')"></app-button>
 	</div>
 	<div class="page__notresults__filters" *ngIf="type == 'not-result-filter'">
         <span>Elimina algunos filtros para ver más resultados.</span>
@@ -32,7 +36,7 @@
 			</div>
 		</div>
         <div  class="page__notresults__filters__actions">
-            <app-button [text]="'Restablecer'" [color]="'dark'" (onClick)="resetFilters('all')"></app-button>
+            <app-button [text]="'Restablecer'" [isMobile]="true" [color]="'dark'" (onClick)="resetFilters('all')"></app-button>
         </div>
 	</div>
 </div>
