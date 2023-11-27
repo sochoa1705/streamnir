@@ -60,8 +60,8 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
 				...this.form.value
 			};
 			this.mailingService.createContact(data).subscribe({
-				next: (response: any) => {
-					if (response && response.id) {
+				next: (response: boolean) => {
+					if (response) {
 						const modalRef = this.modalService.open(SuccessDialogComponent, {
 							centered: true
 						});
@@ -71,7 +71,7 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
 					}
 				},
 				error: (error: any) => {
-					if (error && error.error && error.error.code === 'duplicate_parameter')
+					if (error?.error && error.error.code === 'duplicate_parameter')
 						this._snackBar.open('El correo ingresado ya fue registrado', 'Entendido', {
 							duration: 5000
 						});
