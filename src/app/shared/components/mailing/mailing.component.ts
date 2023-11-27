@@ -25,7 +25,7 @@ export class MailingComponent implements OnInit {
 	ipCliente: any;
 	validate: boolean;
 	message: string;
-	imgMailing: number;
+	imgMailing: boolean;
 
 	constructor(
 			private mailingService: MailingService,
@@ -69,7 +69,7 @@ export class MailingComponent implements OnInit {
 			this.mailingService.createContact(data).subscribe({
 				next: (response: any) => {
 					this.validate = true;
-					this.imgMailing = response.id;
+					this.imgMailing = response;
 					this.message = 'Se registró correctamente a nuestro boletín.';
 
 					this.timeMAiling();

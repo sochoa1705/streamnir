@@ -115,8 +115,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 
 		this._checkoutService.nextPassengerMobile.subscribe({
 			next:()=>{
-				console.log('pasee kura')
-				//this.setInfoPassengersInformation();
+				this.setInfoPassengersInformation();
 			}
 		})
 	}
