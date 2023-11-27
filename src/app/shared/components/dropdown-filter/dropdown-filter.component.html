@@ -1,6 +1,6 @@
 <div class="dropdown__filter" *ngIf="!showLoader">
     <div *ngIf="isMobile" class="dropdown__filter__close">
-        <img src="./assets/svg/close-modal.svg" alt="x">
+        <img src="./assets/svg/close-modal.svg" alt="x" (click)="clickCloseModal()">
     </div>
     <div class="dropdown__filter__header" (click)="!isMobile ? dropdownActive=!dropdownActive : null">
         <h4>{{title}}</h4>
@@ -21,7 +21,7 @@
 </div>
 
 <div *ngIf="isMobile" class="dropdown__footer">
-    <app-button [text]="'Cancelar'" [size]="'xs'" [color]="'neutral'"></app-button>
+    <app-button [text]="'Cancelar'"  (click)="clickCloseModal()" [size]="'xs'" [color]="'neutral'" ></app-button>
     <app-button [text]="'Confirmar'" [size]="'xs'"></app-button>
 </div>
 
