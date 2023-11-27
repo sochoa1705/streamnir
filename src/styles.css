@@ -9480,3 +9480,60 @@ app-flight-deals button {
     height: 100%; }
     .boxVideo .row .col-12 .videoYoutube {
       height: 100%; }
+
+
+      
+/********************************Slider NG5 custom*****************************************/
+.ng5-slider{
+  margin: 20px 0px 0px 0px !important;
+}
+.ng5-slider .ng5-slider-bar {
+  background: #DFE0E2 !important;
+  height: 4px !important;
+}
+.ng5-slider .ng5-slider-selection {
+  background: #6D0617 !important;
+}
+
+.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-min,
+.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-max {
+  width: 20px !important;
+  height: 20px !important;
+  background-color: #B50A27 !important;
+  border-radius: 50% !important;
+  top: -8px!important;
+}
+
+.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-min:active,
+.ng5-slider-span.ng5-slider-pointer.ng5-slider-pointer-max:active{
+  border:none !important;
+}
+
+.ng5-slider .ng5-slider-bubble{
+  display: none !important;
+}
+.ng5-slider .ng5-slider-tick {
+  background: transparent !important;
+}
+
+.ng5-slider .ng5-slider-tick.ng5-slider-selected {
+  background: transparent !important;
+}
+
+
+/********************************Scroll****************************************************/
+
+::-webkit-scrollbar-thumb {
+  background: #CFD1D3 !important;
+  padding: 0px 4px;
+  border-radius: 5px;
+}
+::-webkit-scrollbar {
+  height: 4px;
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+

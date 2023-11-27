@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 interface Item {
 	value: any;
@@ -11,13 +12,7 @@ interface Item {
 @Component({
 	selector: 'app-dropdown-filter',
 	templateUrl: './dropdown-filter.component.html',
-	styleUrls: ['./dropdown-filter.component.scss'],
-	animations: [
-		trigger('fadeInOut', [
-			transition('void => *', [style({ opacity: 0 }), animate(270, style({ opacity: 1 }))]),
-			transition('* => void', [animate(270, style({ opacity: 0 }))])
-		])
-	]
+	styleUrls: ['./dropdown-filter.component.scss']
 })
 export class DropdownFilterComponent implements OnInit, OnChanges {
 	constructor(private _searchFiltersService: SearchFiltersService) {
@@ -54,6 +49,8 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 	@Output() clickedOption = new EventEmitter();
 	@Output() selectedAirlines = new EventEmitter();
 	@Output() hiddenSection = new EventEmitter();
+	@Output() closeModal = new EventEmitter();
+
 	isShowMoreAirlines = false;
 	listOptionsAirlines: Item[] = [];
 	countRestAirlines = 0;
@@ -108,5 +105,9 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 		this.listOptions=[...listOptionsAirlines];
 		this.listOptionsAirlines = this.isShowMoreAirlines ? listOptionsAirlines : listOptionsAirlines.slice(0, 8);
 		this.selectedAirlines.emit(arrayAirlines);
+	}
+
+	clickCloseModal(){
+		this.closeModal.emit();
 	}
 }

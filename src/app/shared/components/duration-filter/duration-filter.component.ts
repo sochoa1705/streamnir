@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Options } from 'ng5-slider';
 import { GlobalComponent } from '../../global';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 interface IFilterDuration{
 	minDurationDeparture:number,
@@ -37,7 +38,7 @@ export class DurationFilterComponent implements OnInit{
   codesFlight:string[]=[];
   hidden=false;
 
-  constructor(private _searchFiltersService: SearchFiltersService,private cdr: ChangeDetectorRef){
+  constructor(private _searchFiltersService: SearchFiltersService){
 		this._searchFiltersService.isResetFilterDuration.subscribe({
 			next: () => {
         this.hidden=true;
