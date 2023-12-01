@@ -2,16 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class MailingService {
+	private cookieLifeTime = 60;
 
 	constructor(private http: HttpClient) {
 	}
 
-	createContact(data: any): Observable<any> {
+	createContact(data: any): Observable<boolean> {
 		const nameArr: string[] = data.name.trim().split(' ');
 		let firstname = nameArr[0];
 		let lastname = '';
@@ -57,6 +59,22 @@ export class MailingService {
 		};
 
 		let url = `${environment.brevoBaseUrl}/contacts`;
-		return this.http.post(url, payload, { headers: { 'api-key': environment.brevoApiKey } });
+		return this.http.post<boolean>(url, payload, { headers: { 'api-key': environment.brevoApiKey } })
+				.pipe(
+						map((res: any) => {
+							if (res?.id) {
+								this.saveContactIdInCookie(res.id);
+								return true;
+							}
+							return false;
+						})
+				);
+	}
+
+	private saveContactIdInCookie(contactId: string) {
+		const expirationDate = new Date();
+		expirationDate.setSeconds(expirationDate.getSeconds() + this.cookieLifeTime);
+		const expires = `expires="${expirationDate.toUTCString()}"`;
+		document.cookie = `subscriptionId=${contactId.toString()}; ${expires}; path=/`;
 	}
 }

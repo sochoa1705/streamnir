@@ -12,7 +12,7 @@
         <div class="carousel-inner">
           <ng-container *ngFor="let image of slider; let first = first; let i = index">
             <div class="aside__content carousel-item" [ngClass]="{'active': first}">
-              <img class="d-block w-100" [src]="image.PathImage" [ngClass]="{'pointer': image.RedirectLink}"
+              <img class="d-block w-100" loading="lazy" [src]="image.PathImage" [ngClass]="{'pointer': image.RedirectLink}"
                    [alt]="image.NameImage" (click)="toSlider(image,'slider',i,slider.length)" />
             </div>
           </ng-container>
@@ -20,14 +20,14 @@
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
           data-bs-slide="prev">
           <span class="carousel-prev-icon" aria-hidden="true">
-            <img src="./assets/icon-left.svg" alt="">
+            <img src="./assets/icon-left.svg" alt="anterior">
           </span>
           <span class="visually-hidden">Previous</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
           data-bs-slide="next">
           <span class="carousel-next-icon" aria-hidden="true">
-            <img src="./assets/icon-right.svg" alt="">
+            <img src="./assets/icon-right.svg" alt="siguiente">
           </span>
           <span class="visually-hidden">Next</span>
         </button>
@@ -38,9 +38,9 @@
         <div class="col-12">
           <ng-container *ngFor="let image of images; let i = index">
             <div class="aside__content_2">
-              <img class="pointer" [src]="image.PathImage" [alt]="image.NameImage" (click)="onImageClicked()"
+              <img class="pointer" loading="lazy" [src]="image.PathImage" [alt]="image.NameImage" (click)="onImageClicked()"
                     *ngIf="!image.RedirectLink">
-              <img class="pointer" [src]="image.PathImage" [alt]="image.NameImage"
+              <img class="pointer" loading="lazy" [src]="image.PathImage" [alt]="image.NameImage"
                     (click)="toSlider(image, 'banner', i, images.length)" *ngIf="image.RedirectLink">
             </div>
           </ng-container>
@@ -64,14 +64,13 @@
   <div class="boxItemPackages">
     <div class="boxItem" *ngFor="let elem of themes">
       <div class="groupCardTour">
-        <!-- <div class="priceCard">desde ${{elem.Price}}</div> -->
         <div class="cardTour">
           <div class="titleCard">{{elem.Name}}</div>
           <div class="descripCard">{{elem.Description}}</div>
           <a class="btnSearch" href="{{elem.RedirectUrl}}" target="_blank">Click aquí</a>
         </div>
       </div>
-      <img [src]="elem.ImageUrl" alt="...">
+      <img loading="lazy" [src]="elem.ImageUrl" [alt]="elem.Name">
     </div>
   </div>
 </div>
@@ -87,7 +86,7 @@
 <div class="container-fluid">
   <div class="row mb-md-5 ">
     <div *ngFor="let img of banners_corps; let i = index" class="col-md-6 col-12 publicidad">
-      <img [ngClass]="{'pointer': img.RedirectLink}" (click)="toSlider(img, 'banner', i, banners_corps.length)"
+      <img loading="lazy" [ngClass]="{'pointer': img.RedirectLink}" (click)="toSlider(img, 'banner', i, banners_corps.length)"
         [src]="img.PathImage" [alt]="img.NameImage">
     </div>
   </div>

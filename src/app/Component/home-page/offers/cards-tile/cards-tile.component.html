@@ -3,7 +3,7 @@
 		<div class="card-wrapper" [id]="id + '-wrapper'" *ngFor="let item of list">
 			<div class="card h-100">
 				<div class="card-img-top" (click)="onClick(item.link)">
-					<img class="img-fluid" [src]="item.image" [alt]="item.destination">
+					<img class="img-fluid" loading="lazy" style="width: 100%" [src]="item.image" [alt]="item.destination">
 				</div>
 				<div class="card-body position-relative">
 					<img src="./assets/svg/diagonal-plane.svg" alt="Vuelo" class="img-fluid position-absolute"
