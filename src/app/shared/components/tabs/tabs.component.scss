@@ -4,22 +4,23 @@ article {
 }
 
 .banner {
-    z-index: 1;
-}
+  z-index: 1;
 
-::ng-deep .content img.onlyMovil {
-  height: auto;
-  max-height: 110px;
+  .content img.d-md-none {
+    height: auto;
+    max-height: 110px;
+  }
 }
 
 @media (min-width: 641px) {
   .banner {
     max-height: 60vh;
+
+    .content img.d-md-none {
+      max-height: 22vh !important;
+    }
   }
 
-  ::ng-deep .content {
-    max-height: 22vh;
-  }
   ::ng-deep div.mat-tab-label.mat-focus-indicator {
     box-shadow: 0 0 8px 1px rgb(0, 0, 0, 0.08);
 
