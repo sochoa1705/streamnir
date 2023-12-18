@@ -182,6 +182,7 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
 		modalRef.componentInstance.segmentReturn = this.segmentReturn;
 		modalRef.componentInstance.indexSegmentDeparture = this.indexSegmentDeparture;
 		modalRef.componentInstance.indexSegmentReturn = this.indexSegmentReturn;
+		modalRef.componentInstance.currency = this.currency;
 		if (this.flight.detailPricing) modalRef.componentInstance.detailPricing = this.flight.detailPricing;
 	}
 }

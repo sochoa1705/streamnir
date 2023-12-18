@@ -19,14 +19,14 @@ export const routes: Routes = [
             {
 				path: 'pasajeros',
 				loadChildren: () => import('./passengers/passengers.module').then((m) => m.PassengersModule),
-                canActivate:[CanActivateCheckoutGuard],
+                // canActivate:[CanActivateCheckoutGuard],
                 canDeactivate: [DeactivateGuard]
 			},
             {
 				path: 'pago',
 				loadChildren: () => import('./pay/pay.module').then((m) => m.PayModule),
-                canActivate:[CanActivateCheckoutGuard],
-                canDeactivate:[DeactivatePaymentGuard]
+                // canActivate:[CanActivateCheckoutGuard],
+                // canDeactivate:[DeactivatePaymentGuard]
 			}
         ]
     }

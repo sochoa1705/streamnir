@@ -13,14 +13,14 @@
 }
 
 .modal__flight {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 	&__header {
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-start;
 		padding: 24px 32px;
-		box-shadow: 0px 2px 9px 0px #1018280D;
+		box-shadow: 0px 2px 9px 0px #1018280d;
 		h4 {
 			font-family: Open Sans;
 			font-size: 20px;
@@ -34,7 +34,7 @@
 		}
 	}
 	&__body {
-        padding:20px 32px 0px;
+		padding: 20px 32px 0px;
 		max-height: 64vh;
 		overflow-y: auto;
 		@extend .flex-16;
@@ -52,7 +52,7 @@
 					&.type-flight {
 						font-weight: 600;
 						display: flex;
-						gap:5px;
+						gap: 5px;
 					}
 					&.duration {
 						font-size: 14px;
@@ -86,12 +86,12 @@
 					gap: 0px;
 					&__row {
 						display: grid;
-                        column-gap: 26px;
-                        grid-template-columns: 69px 24px auto;
-                        align-items: center;
-                        img {
-                            justify-self: center;
-                        }
+						column-gap: 26px;
+						grid-template-columns: 69px 24px auto;
+						align-items: center;
+						img {
+							justify-self: center;
+						}
 						min-height: 34px;
 						span {
 							font-family: Montserrat;
@@ -115,11 +115,11 @@
 								line-height: 20px;
 								color: colors.$gris-800;
 							}
-							&.arrival{
+							&.arrival {
 								font-size: 12px;
 								font-weight: 400;
 								line-height: 20px;
-								color:colors.$red-300;
+								color: colors.$red-300;
 							}
 						}
 						.tag {
@@ -147,52 +147,52 @@
 				}
 
 				&__change__plane {
-                    display: grid;
-                    column-gap: 24px;
-                    grid-template-columns: auto 40px auto;
-                    align-items: center;
-                    background: colors.$gris-100;
-                    width: fit-content;
-                    min-height: 36px;
-                    padding: 8px 15px;
-                    border-radius: 12px;
-                    img {
-                        justify-self: center;
-                    }
-                    span{
-                        font-family: Montserrat;
-                        font-size: 14px;
-                        font-weight: 400;
-                        line-height: 20px;
-                        letter-spacing: 0em;
-                        color:colors.$neutral-900;
-                        &.bold{
-                            font-weight: 600;
-							color:colors.$neutral-900;
-                        }
-                        &.hour{
-                            font-size: 12px;
-                        }
-                    }
+					display: grid;
+					column-gap: 24px;
+					grid-template-columns: auto 40px auto;
+					align-items: center;
+					background: colors.$gris-100;
+					width: fit-content;
+					min-height: 36px;
+					padding: 8px 15px;
+					border-radius: 12px;
+					img {
+						justify-self: center;
+					}
+					span {
+						font-family: Montserrat;
+						font-size: 14px;
+						font-weight: 400;
+						line-height: 20px;
+						letter-spacing: 0em;
+						color: colors.$neutral-900;
+						&.bold {
+							font-weight: 600;
+							color: colors.$neutral-900;
+						}
+						&.hour {
+							font-size: 12px;
+						}
+					}
 				}
 
-                &__bags{
-                    padding: 0px 8px;
-                    display: flex;
-                    align-items: center;
-                    gap:8px;
-                    span{
-                        font-family: Montserrat;
-                        font-size: 12px;
-                        font-weight: 500;
-                        line-height: 20px;
-                        letter-spacing: 0em;
-                    }
-                    img{
-                        width: 20px;
-                        height: 20px;
-                    }
-                }
+				&__bags {
+					padding: 0px 8px;
+					display: flex;
+					align-items: center;
+					gap: 8px;
+					span {
+						font-family: Montserrat;
+						font-size: 12px;
+						font-weight: 500;
+						line-height: 20px;
+						letter-spacing: 0em;
+					}
+					img {
+						width: 20px;
+						height: 20px;
+					}
+				}
 			}
 		}
 		&__line {
@@ -202,22 +202,30 @@
 		}
 	}
 
-    &__footer{
-        justify-self:flex-end;
-        width: 100%;
-        padding: 16px 32px;
-        @extend .flex-row;
-        gap: 8px;
-        h4{
-            font-family: Open Sans;
-            font-size: 24px;
-            font-weight: 700;
-            line-height: 32px;
-            letter-spacing: -0.02em;
-            color:colors.$neutral-900;
-            margin-bottom: 0px;
-        }
-    }
+	&__footer {
+		justify-self: flex-end;
+		width: 100%;
+		padding: 16px 32px;
+		@extend .flex-row;
+		gap: 8px;
+		h4 {
+			font-family: Open Sans;
+			font-size: 24px;
+			font-weight: 700;
+			line-height: 32px;
+			letter-spacing: -0.02em;
+			color: colors.$neutral-900;
+			margin-bottom: 0px;
+
+			span {
+				font-family: Open Sans;
+				font-size: 18px;
+				font-weight: 400;
+				line-height: 32px;
+				letter-spacing: -0.02em;
+			}
+		}
+	}
 }
 
 @media (min-width: 1199px) {
@@ -238,73 +246,71 @@
 	}
 }
 
-@media (max-width: 575px){
+@media (max-width: 575px) {
 	.modal-detail-flight .modal-dialog-centered {
-		min-width:auto;
+		min-width: auto;
 		width: 100%;
-		margin:0;
+		margin: 0;
 		padding: 0;
 	}
-	.modal.modal-detail-flight .modal-dialog .modal-content{
+	.modal.modal-detail-flight .modal-dialog .modal-content {
 		border-radius: 10px 10px 0px 0px;
-		margin:0;
+		margin: 0;
 		bottom: 0;
 		left: 0;
 		position: fixed;
 	}
 
-	.modal__flight{
-		&__header{
+	.modal__flight {
+		&__header {
 			padding: 24px 20px;
 			margin-bottom: 17px;
 		}
-		
-		&__header>img{
+
+		&__header > img {
 			width: 12px;
 		}
-		&__body{
+		&__body {
 			padding: 17px 20px;
 			max-height: 60vh;
 			&__flight__header span,
-			&__flight__header span.type-flight{
+			&__flight__header span.type-flight {
 				font-size: 14px;
 				line-height: 20px;
 			}
-			&__flight__info__change__plane{
+			&__flight__info__change__plane {
 				column-gap: 12px;
 				padding: 8px 10px;
-				span, span.bold{
+				span,
+				span.bold {
 					font-size: 12px;
 				}
 			}
 			&__flight__header span.duration strong,
 			&__flight__info__airline span,
-			&__flight__info__segment__row span.country{
+			&__flight__info__segment__row span.country {
 				font-size: 12px;
 				line-height: 17px;
 			}
-			&__flight__info__segment__row span.regular{
+			&__flight__info__segment__row span.regular {
 				font-size: 10px;
 				line-height: 12px;
-				color:colors.$neutral-900;
+				color: colors.$neutral-900;
 			}
-			&__flight__header span.type-flight{
+			&__flight__header span.type-flight {
 				flex-direction: column;
-				gap:0;
-				.dot{
+				gap: 0;
+				.dot {
 					display: none;
 				}
 			}
 		}
-		&__footer{
+		&__footer {
 			padding: 16px 20px;
-			h4{
+			h4 {
 				font-size: 16px;
 				line-height: 24px;
 			}
-			
 		}
 	}
-
-
 }

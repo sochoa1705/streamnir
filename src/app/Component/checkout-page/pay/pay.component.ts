@@ -247,7 +247,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		} else {
 			this._checkoutService.getPromocionalCode(search).subscribe({
 				next: (response) => {
-					if (response.result) {
+					if (response.result || !!response) {
 						if (response.result.isSuccess) {
 							this.isValidPromotionalCode = true;
 							this.discountCupon = response.result;
@@ -259,7 +259,8 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 					} else this.setErrorCupon('Código inválido');
 				},
 				error: (err) => {
-					this.resetDiscountByCupon();
+					console.log(err);
+					this.setErrorCupon('Código inválido');
 				}
 			});
 		}

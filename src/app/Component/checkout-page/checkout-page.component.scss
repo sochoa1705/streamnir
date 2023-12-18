@@ -10,7 +10,7 @@
 
 .container__page {
 	padding: 242px 96px 0px 96px;
-	min-height:90vh;
+	min-height: 90vh;
 
 	section {
 		max-width: 1248px;
@@ -18,10 +18,6 @@
 		display: grid;
 		grid-template-columns: 1fr 0.47fr;
 		column-gap: 48px;
-
-		// @media (max-width: 1200px) {
-		// 	display: contents;
-		// }
 	}
 
 	&__detail {
@@ -55,7 +51,7 @@
 						grid-template-columns: 1fr 1fr;
 						justify-content: space-between;
 						align-items: flex-start;
-						gap:10px;
+						gap: 10px;
 						span {
 							@extend .paragraph;
 							color: colors.$neutral-900;
@@ -212,7 +208,7 @@
 		}
 	}
 
-	&__actions{
+	&__actions {
 		display: none;
 	}
 
@@ -227,7 +223,7 @@
 			column-gap: 24px;
 		}
 
-		.container__page__detail__saftyPay{
+		.container__page__detail__saftyPay {
 			padding: 12px;
 			span {
 				&:nth-child(1) {
@@ -331,14 +327,18 @@
 		section {
 			grid-template-columns: 1fr;
 		}
-		
-		&__actions{
+
+		&__actions {
 			display: block;
 		}
 	}
 
 	@media (max-width: 575px) {
 		padding: 190px 10px 0px 10px;
+
+		.container__page__detail__saftyPay {
+			display: none;
+		}
 		.container__page__section__button__footer {
 			padding: 0px 0px 40px 0px;
 			display: flex;

@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewEncapsulation, NgZone, Renderer2 } from '@angular/core';
 import { Group, PricingDetail } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { GlobalComponent } from 'src/app/shared/global';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
@@ -18,12 +18,13 @@ import moment from 'moment';
 	encapsulation: ViewEncapsulation.None,
 })
 export class ModalFlightDetailComponent implements OnInit {
+	@Input() currency = 'USD';
+	@Input() detailPricing: PricingDetail;
 	@Input() flight: Group;
-	@Input() segmentDeparture: number[];
-	@Input() segmentReturn: number;
 	@Input() indexSegmentDeparture: number[];
 	@Input() indexSegmentReturn: number;
-	@Input() detailPricing: PricingDetail;
+	@Input() segmentDeparture: number[];
+	@Input() segmentReturn: number;
 	messageError='El itinerario seleccionado ya no se encuentra disponible, favor de seleccionar un nuevo itinerario'
 	constructor(
 		public activeModal: NgbActiveModal,
@@ -32,14 +33,19 @@ export class ModalFlightDetailComponent implements OnInit {
 		private router: Router,
 		private _loadingService: LoadingService,
 		private _checkoutService: CheckoutService,
+		private renderer: Renderer2
 	) {
 	}
 
 	getScreenWidth = window.innerWidth;
 
 	ngOnInit() {
-		
+		this.renderer.setStyle(document.documentElement, 'overflow-y', 'hidden');
 	}
+
+	ngOnDestroy() {
+		this.renderer.setStyle(document.documentElement, 'overflow-y', 'auto');
+  }
 
 	isHoursNocturne(dateDeparture: any) {
 		const hourDeparture = Number(dateDeparture.slice(11, 13));

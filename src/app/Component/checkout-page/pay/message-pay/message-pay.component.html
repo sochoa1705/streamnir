@@ -15,6 +15,11 @@
 			</app-card-checkout>
 		</article>
 		<article *ngIf="!isPayCard">
+			<div class="container__page__detail__saftyPay">
+				<span>Información para el pago a través de</span>
+				<span>Banca por Internet</span>
+				<span>{{ codeSafetyPay }}</span>
+			</div>
 			<div class="container__page__section__safetypay">
 				<div class="container__page__section__safetypay__title">
 					<h4>¿Cómo pagar con SafetyPay?</h4>
@@ -32,8 +37,7 @@
 					</div>
 					<div class="container__page__section__safetypay__card__alert">
 						<img src="./assets/checkout/info2.svg" alt="i" />
-						<span
-							class="toast-info"
+						<span class="toast-info"
 							>Para efectuar la transferencia ingresa a la versión en línea de
 							<strong>Banco de Crédito del Perú</strong> y sigue las instrucciones. (Ten en cuenta que el código de pago
 							puede usarse para pagar en cualquiera de los otros bancos habilitados).</span

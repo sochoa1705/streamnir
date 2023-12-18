@@ -7,12 +7,13 @@
 		<ng-container *ngFor="let departure of flight.departure; index as i">
 			<div class="modal__flight__body__flight">
 				<div class="modal__flight__body__flight__header">
-					<span class="type-flight">Salida a {{ departure.destinationCity.name | titlecase }} 
+					<span class="type-flight"
+						>Salida a {{ departure.destinationCity.name | titlecase }}
 						<span class="dot">•</span>
 						<span>{{ (departure.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</span></span
 					>
 					<span class="duration">
-					    <span class="d-none d-sm-block">Duración total:</span>
+						<span class="d-none d-sm-block">Duración total:</span>
 						<strong>{{ departure.segments[indexSegmentDeparture[i]].flightDuration | flightDuration }}</strong></span
 					>
 				</div>
@@ -109,7 +110,7 @@
 			<div class="modal__flight__body__flight">
 				<div class="modal__flight__body__flight__header">
 					<span class="type-flight"
-						>Vuelta a {{ returns.destinationCity.name | titlecase }} 
+						>Vuelta a {{ returns.destinationCity.name | titlecase }}
 						<span class="dot">•</span>
 						<span>{{ (returns.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</span></span
 					>
@@ -205,7 +206,10 @@
 		</ng-container>
 	</div>
 	<div class="modal__flight__footer" *ngIf="detailPricing">
-		<h4>$ {{ detailPricing.totalPay | number: '1.2-2' }}</h4>
+		<h4>
+			<span>{{ currency }}</span>
+			{{ detailPricing.totalPay | changeCurrency: currency | number: '1.2-2' }}
+		</h4>
 		<app-button [text]="'Continuar'" [isMobile2]="true" (click)="openModalUpsell()"></app-button>
 	</div>
 </div>

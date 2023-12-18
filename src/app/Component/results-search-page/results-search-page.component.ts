@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { Group, ISearchResponse } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
@@ -19,9 +20,10 @@ import { IdlePopupComponent } from './idle-popup/idle-popup.component';
 import { SortByComponent } from './sort-by/sort-by.component';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { UserIdleService } from 'angular-user-idle';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { ModalSearchComponent } from './modal-search/modal-search.component';
 import { getParamsByRoute } from 'src/app/shared/utils/getParams';
+import { takeUntil } from 'rxjs/operators';
 
 interface Item {
 	value: any;
@@ -74,13 +76,16 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	constructor(
 		private _searchService: SearchService,
 		private _tokenService: TokenService,
-		private route: ActivatedRoute,
+		private router: Router,
 		public _loadingService: LoadingService,
 		private _searchFiltersService: SearchFiltersService,
 		private _modalService: NgbModal,
 		private _checkoutService: CheckoutService,
-		private userIdle: UserIdleService
+		private userIdle: UserIdleService,
+		private location: Location
 	) {}
+
+	private unsubscribeSearch$ = new Subject<void>();
 
 	allDataGroups: Group[] = [];
 	dataGroupsPaginate: Group[] = [];
@@ -136,6 +141,9 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	@ViewChild('childSort') childSort!: SortByComponent;
 
 	ngOnInit() {
+		this.location.subscribe((change) => {
+			this.renderCorrectPage();
+    });
 		GlobalComponent.isKayak = false;
 		this.reloadPageResult();
 	}
@@ -240,8 +248,9 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 
 	getAllDataSearch(objSearch: any) {
 		this.progressCount=3;
-		this._searchService.getAllDataSearch(objSearch).subscribe({
-			next: (res) => {
+		this._searchService.getAllDataSearch(objSearch).pipe(
+    takeUntil(this.unsubscribeSearch$)).subscribe({
+			next: (res) => {				
 				this._loadingService.requestSearchCount++;
 				this.progressCount = this._loadingService.requestSearchCount * 10;
 				if (res.groups) {
@@ -934,9 +943,25 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		});
 	}
 
+	renderCorrectPage() {
+		const hasPreviousPage = this.location.getState() !== null;
+		this.unsubscribeSearch$.next();
+		this.unsubscribeSearch$.complete();
+
+		if (hasPreviousPage) {
+      this.router.navigate(['home'], {
+        replaceUrl: true,
+      });
+    } else {
+			this.router.navigateByUrl('/');
+    }
+	}
+
 	ngOnDestroy() {
 		this._modalService.dismissAll();
 		this.userIdle.stopWatching();
 		this.idleSubscriber.unsubscribe();
+		this.unsubscribeSearch$.next();
+		this.unsubscribeSearch$.complete();
 	}
 }

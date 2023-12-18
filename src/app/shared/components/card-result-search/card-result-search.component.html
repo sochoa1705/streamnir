@@ -1,13 +1,13 @@
 <section *ngIf="flight">
 	<div class="tags" *ngIf="idCheap == flight.id || idBest == flight.id">
 		<picture *ngIf="idCheap == flight.id">
-			<source srcset="./assets/svg/badge_cheap.svg" media="(min-width: 575px)">
-			<img src="./assets/svg/best-cheap-mob.svg" alt="mas_barato">
+			<source srcset="./assets/svg/badge_cheap.svg" media="(min-width: 575px)" />
+			<img src="./assets/svg/best-cheap-mob.svg" alt="mas_barato" />
 		</picture>
 
 		<picture *ngIf="idBest == flight.id">
-			<source srcset="./assets/svg/badge_best.svg" media="(min-width: 575px)">
-			<img src="./assets/svg/best-option-mob.svg" alt="mejor_opcion">
+			<source srcset="./assets/svg/badge_best.svg" media="(min-width: 575px)" />
+			<img src="./assets/svg/best-option-mob.svg" alt="mejor_opcion" />
 		</picture>
 	</div>
 
@@ -115,7 +115,9 @@
 					<h4 class="fly">{{ returns.originCity.code }}</h4>
 					<img class="arrow" src="./assets/result-search/arrow.svg" />
 					<h4 class="fly2">{{ returns.destinationCity.code }}</h4>
-					<div class="date date d-none d-sm-block">{{ (returns.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}</div>
+					<div class="date date d-none d-sm-block">
+						{{ (returns.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}
+					</div>
 				</div>
 
 				<div class="card__result__flights__section__options" [hidden]="showHoursReturn">
@@ -123,7 +125,7 @@
 						<img class="segment__radio" src="./assets/svg/radio-check.svg" style="visibility: hidden" />
 						<div class="segment__detail">
 							<div class="segment__detail__hours">
-								<app-tooltip-arrival  [segment]="returns.segments[indexSegmentReturn]"></app-tooltip-arrival>
+								<app-tooltip-arrival [segment]="returns.segments[indexSegmentReturn]"></app-tooltip-arrival>
 								<span class="duration">{{ returns.segments[indexSegmentReturn].flightDuration | flightDuration }}</span>
 							</div>
 
@@ -155,7 +157,7 @@
 							/>
 							<div class="segment__detail">
 								<div class="segment__detail__hours">
-									<app-tooltip-arrival  [segment]="segment"></app-tooltip-arrival>
+									<app-tooltip-arrival [segment]="segment"></app-tooltip-arrival>
 									<span class="duration">{{ segment.flightDuration | flightDuration }}</span>
 								</div>
 
@@ -191,7 +193,14 @@
 				<h4>
 					<span>{{ currency }}</span> {{ flight.detailPricing.totalPay | changeCurrency: currency | number: '1.2-2' }}
 				</h4>
-				<article><app-button [text]="'Ver Detalle'" [isMobile2]="true" [w100]="true" (onClick)="openModalDetail()"></app-button></article>
+				<article>
+					<app-button
+						[text]="'Ver Detalle'"
+						[isMobile2]="true"
+						[w100]="true"
+						(onClick)="openModalDetail()"
+					></app-button>
+				</article>
 			</div>
 			<span class="card__result__pricemobile__detail">¿Que incluye este precio?</span>
 		</div>
@@ -199,7 +208,8 @@
 		<div class="card__result__price">
 			<ng-container *ngIf="flight.detailPricing">
 				<h4>
-					<span>{{ currency }}</span> {{ flight.detailPricing.totalPay | changeCurrency: currency | number: '1.2-2' }}
+					<span>{{ currency }}</span>
+					{{ flight.detailPricing.totalPay | changeCurrency: currency | number: '1.2-2' }}
 				</h4>
 				<div class="card__result__price__detail">
 					<div class="card__result__price__detail__row">
@@ -261,7 +271,12 @@
 					</div>
 				</div>
 				<div class="card__result__price__button">
-					<app-button [text]="'Ver Detalle'" [w100]="true" [isMobile2]="true"  (onClick)="openModalDetail()"></app-button>
+					<app-button
+						[text]="'Ver Detalle'"
+						[w100]="true"
+						[isMobile2]="true"
+						(onClick)="openModalDetail()"
+					></app-button>
 				</div>
 			</ng-container>
 		</div>
