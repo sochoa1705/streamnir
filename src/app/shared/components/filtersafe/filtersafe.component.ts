@@ -8,40 +8,43 @@ import {
   NgbDateParserFormatter,
   NgbDateStruct
 } from '@ng-bootstrap/ng-bootstrap';
-import { NotificationService } from 'src/app/Services/notification.service';
 import * as moment from 'moment';
-import { NMRequest } from 'src/app/Models/base/NMRequest';
 import { take } from 'rxjs/operators';
+
+import { NotificationService } from 'src/app/Services/notification.service';
+import { ModelTaggingBuscarSeguros, SearchTravelInsurance } from 'src/app/Services/analytics/tagging.models';
+import { NMRequest } from 'src/app/Models/base/NMRequest';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { InputRangeComponent } from '../input-range/input-range.component';
+import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 
 export interface IFormSeguros {
   origenSafe: string;
   destinoSafe: string;
-  passengers: Passenger[];
+  passengers: IPassenger[];
   ClienteCotizacion: any[];
   countCustomers: number;
   Edades: string;
   fromDate: string;
   toDate: string;
   days: string;
-  destinyString: DestinyString;
-  aniosNacimiento: AniosNacimiento[];
+  destinyString: IDestinyString;
+  aniosNacimiento: IAniosNacimiento[];
 }
 
-export interface AniosNacimiento {
+export interface IAniosNacimiento {
   anio: number;
   edad: number;
 }
 
-export interface DestinyString {
+export interface IDestinyString {
   id_destino: string;
   descripcion_destino: string;
   es_nacional: number;
   ref_assistcard: number;
 }
 
-export interface Passenger {
+export interface IPassenger {
   edad: string;
   fechaNacimiento: string;
 }
@@ -155,8 +158,6 @@ export class FiltersafeComponent implements OnInit {
   @ViewChild('adulto', { static: false }) adulto!: ElementRef<HTMLInputElement>;
   @ViewChild('mayor', { static: false }) mayor!: ElementRef<HTMLInputElement>;
   @ViewChild('destino', { static: false }) destino!: ElementRef<HTMLInputElement>;
-  // @ViewChild('dpFromDate', { static: false }) dpFromDate!: ElementRef<HTMLInputElement>;
-  // @ViewChild('dpToDate', { static: false }) dpToDate!: ElementRef<HTMLInputElement>;
 
   constructor(
     public _router: Router,
@@ -175,42 +176,34 @@ export class FiltersafeComponent implements OnInit {
     // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
 
     this.filters = localStorage.getItem('filters');
-    this.filtersJSON = JSON.parse(this.filters);
+    this.filtersJSON = JSON.parse(this.filters) || [];
   }
 
   ngOnInit(): void {
-
-    this.insuranceQuoteForm = this.createInsuranceQuoteForm();
-
-    if (this.filtersJSON)
-      this.getPassengers();
-    else
-      this.addPassenger();
-      this.listDestiny(); 
-  }
-
-  listDestiny() {
-    let payload = new NMRequest();
-    this.coreService.getDestiny(payload).pipe(take(1)).subscribe({
-      next: (response) => {
-        const destiny = response['Resultado']
-        this.options=destiny;
-      },
-      error: error => console.log(error),
-    }
-    )
-  }
-
-
-  createInsuranceQuoteForm(): FormGroup {
-    return this._formBuilder.group({
+    this.insuranceQuoteForm = this._formBuilder.group({
       origenSafe: ['510'],
       destinoSafe: [this.filtersJSON ? this.filtersJSON.destination : '', [Validators.required]],
       fromDate: [this.filtersJSON ? this.filtersJSON.fromDate : ''],
       toDate: [this.filtersJSON ? this.filtersJSON.toDate : ''],
       passengers: this._formBuilder.array([])
     });
+
+    this.filtersJSON.length ? this.getPassengers() : this.addPassenger();
+
+    if (this.options.length === 0) this.listDestiny();
   }
+
+  listDestiny() {
+    let payload = new NMRequest();
+    this.coreService.getDestiny(payload).pipe(take(1)).subscribe({
+      next: (response) => {
+        const arrDestiny = response['Resultado']
+        this.options = arrDestiny;
+      },
+    }
+    )
+  }
+
 
   get passengers() {
     return this.insuranceQuoteForm.get('passengers') as FormArray;
@@ -265,10 +258,10 @@ export class FiltersafeComponent implements OnInit {
   confirmPassengers(): void {
     this.showPassengerBox = !this.showPassengerBox;
 
-    let array = this.insuranceQuoteForm.controls['passengers'].value;
-    let Ages = []
+    const arrPassengers = this.insuranceQuoteForm.controls['passengers'].value;
+    const arrAges = []
 
-    for (let i in array) {
+    for (let i in arrPassengers) {
       Number(i);
 
       let age = Number(this.insuranceQuoteForm.controls['passengers'].value[i].edad);
@@ -278,9 +271,9 @@ export class FiltersafeComponent implements OnInit {
       let fecha = this.insuranceQuoteForm.controls['passengers'].value[i].fechaNacimiento;
       let anioNacio: any = moment(fecha, 'DD/MM/YYYY').year();
 
-      Ages.push(age);
-      this.ageCustomers = Ages.join(';');
+      arrAges.push(age);
 
+      this.ageCustomers = arrAges.join(';');
       this.anios.push({ anio: Number(anioNacio), edad: age });
     }
   }
@@ -314,14 +307,13 @@ export class FiltersafeComponent implements OnInit {
   }
 
   validForm() {
-
     this.errors = []
 
     let age: string = this.insuranceQuoteForm.getRawValue()['passengers'][0]['edad']
+    
     if (age === undefined || age === null || age.trim() === '') {
       this.notification.showNotificacion("Error", "Debe ingresar la edad del pasajero", 10)
       this.errors.push({ name: this.MSG_CUSTOMERS, message: 'Debe ingresar la edad' })
-
       this.showPassengerBox = true;
     }
 
@@ -330,14 +322,11 @@ export class FiltersafeComponent implements OnInit {
       this.errors.push({ name: this.MSG_DESTINO, message: 'Elija el Destino' })
     }
 
-    // let fromDate: string = this.form.getRawValue()['fromDate']
-    //let fromDate: string = this.FromDate2.nativeElement.value
+    
     if (this.fromDate === undefined || this.fromDate === null) {
       this.errors.push({ name: this.MSG_OUTFLY, message: 'Elija La fecha' })
     }
 
-    // let fromDate: string = this.form.getRawValue()['fromDate']
-    //let toDate: string = this.ToDate2.nativeElement.value
     if (this.toDate === undefined || this.toDate === null) {
       this.errors.push({ name: this.MSG_INFLY, message: 'Elija la fecha de llegada' })
     }
@@ -349,23 +338,67 @@ export class FiltersafeComponent implements OnInit {
     return this.errors.filter((item: any) => item.name === messageKey).length > 0 ? this.errors.filter((item: any) => item.name === messageKey)[0].message : this.MSG_EMPTY
   }
 
+insertTag(form: IFormSeguros) {
+    const edades = form.Edades.split(';');
+    const sum = edades.reduce((acc, el) => (Number(el) + acc), 0);
+    const promEdades = sum / edades.length;
+
+    const tag = new ModelTaggingBuscarSeguros(
+      form.destinyString.descripcion_destino,
+      form.destinyString.id_destino,
+      form.passengers.length,
+      promEdades,
+      form.fromDate,
+      form.toDate,
+      "PE",
+      "Peru",
+      Number(this.diffDays())
+    )
+
+    TaggingService.tagBuscarSeguros(tag);
+
+    const daysFromNow = moment(form.fromDate, 'DD/MM/YYYY').diff(moment(), 'days');
+
+    const model: SearchTravelInsurance = {
+      event: 'nmv_seguros_buscar',
+      operacion: {
+        dias_anticipacion: daysFromNow
+      },
+      origen: {
+        nombre: 'Peru',
+        codigo: 'PE',
+        pais: 'Peru'
+      },
+      destino: {
+        nombre: form.destinyString.descripcion_destino,
+        codigo: form.destinyString.id_destino,
+        pais: ''
+      },
+      pasajeros: {
+        total: form.passengers.length,
+        infantes: form.passengers.filter(p => Number(p.edad) <= 5).length,
+        ninos: form.passengers.filter(p => Number(p.edad) > 5 && Number(p.edad) < 18).length,
+        adultos: form.passengers.filter(p => Number(p.edad) >= 18).length
+      },
+      fechas: {
+        salida: moment(form.fromDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        retorno: moment(form.toDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        estadia: Number(this.diffDays())
+      }
+    };
+
+    TaggingService.tagSearchTravelInsurance(model);
+  }
+
   quoteNow() {
-    const valuesDateRange=this.childDates.getValuesByHotel();
-		this.toDate=valuesDateRange.arrivalDate;
-		this.fromDate=valuesDateRange.departureDate;
+    const { arrivalDate, departureDate } = this.childDates.getValuesByHotel();
+    this.fromDate = departureDate;
+    this.toDate = arrivalDate;
 
-    console.log(valuesDateRange,'seee ')
-    console.log('quotes')
+    
     if (this.validForm()) {
-      console.log('valid ok')
-      this.confirmPassengers();
-      /*let fechaSalida = this.FromDate2.nativeElement.value
-      let fechaVuelta = this.ToDate2.nativeElement.value
-      let startDate = moment(fechaSalida, 'D/M/YYYY').format('DD/MM/YYYY')
-      let endDate = moment(fechaVuelta, 'D/M/YYYY').format('DD/MM/YYYY')*/
-
-     /* this.insuranceQuoteForm.removeControl('fromDate')
-      this.insuranceQuoteForm.removeControl('toDate')
+      let startDate = `${this.fromDate!.day}/${this.fromDate!.month}/${this.fromDate!.year}`;
+      let endDate = `${this.toDate!.day}/${this.toDate!.month}/${this.toDate!.year}`;
       this.insuranceQuoteForm.addControl('ClienteCotizacion', new FormControl(this.ClienteCotizacion))
       this.insuranceQuoteForm.addControl('countCustomers', new FormControl(this.ClienteCotizacion.length))
       this.insuranceQuoteForm.addControl('Edades', new FormControl(this.ageCustomers))
@@ -376,65 +409,31 @@ export class FiltersafeComponent implements OnInit {
       this.insuranceQuoteForm.removeControl('destinyString')
       this.insuranceQuoteForm.addControl('destinyString', new FormControl(this.destinyString()))
       //validacion fecha de nacimiento ▼
-      this.insuranceQuoteForm.addControl('aniosNacimiento', new FormControl(this.anios))*/
+      this.insuranceQuoteForm.addControl('aniosNacimiento', new FormControl(this.anios))
 
-      //console.log(this.fromDate);
-
-      /*for (let i in this.insuranceQuoteForm.controls['passengers'].value) {
-        let age = Number(this.insuranceQuoteForm.controls['passengers'].value[i].edad);
-        this.insuranceQuoteForm.controls['passengers'].value[i].fechaNacimiento = moment().subtract(age, 'years').format('DD/MM/YYYY');
-      }*/
-
-      //let form = this.insuranceQuoteForm.value;
-      //localStorage.removeItem('Datasafe');
-
-      //localStorage.setItem('Datasafe', JSON.stringify(form));
-      //console.log('DataSafe', form)
-
-      //16/10/2023
-      const passengers=[];
       for (let i in this.insuranceQuoteForm.controls['passengers'].value) {
         let age = Number(this.insuranceQuoteForm.controls['passengers'].value[i].edad);
-        passengers.push({edad:age, fechaNacimiento:moment().subtract(age, 'years').format('DD/MM/YYYY')});
+        this.insuranceQuoteForm.controls['passengers'].value[i].fechaNacimiento = moment().subtract(age, 'years').format('DD/MM/YYYY');
       }
 
-      console.log(this.insuranceQuoteForm.controls['passengers'].value, 'passenger age')
-      console.log(this.anios,'anios')
-      console.log(this.ageCustomers,'anios customer')
+      let form = this.insuranceQuoteForm.value;
+      localStorage.removeItem('Datasafe');
 
-      const dataInsuranceQuote={
-        origenSafe: "510",
-        destinoSafe:  this.insuranceQuoteForm.getRawValue()['destinoSafe'],
-        passengers,
-        ClienteCotizacion: [],
-        countCustomers: 0,
-        "Edades": "25",
-        fromDate: `${this.fromDate?.day}/${this.fromDate?.month}/${this.fromDate?.year}`,
-        toDate: `${this.toDate?.day}/${this.toDate?.month}/${this.toDate?.year}`,
-        "days": "7",
-        "destinyString": {
-            "id_destino": "EUROP",
-            "descripcion_destino": "Europa",
-            "es_nacional": 0,
-            "ref_assistcard": 2
-        },
-        "aniosNacimiento": [
-            {
-                "anio": 1998,
-                "edad": 25
-            }
-        ]
-    }
+      this.insertTag(form);
+
+      localStorage.setItem('Datasafe', JSON.stringify(form));
+
       const filters = {
         destination: this.insuranceQuoteForm.getRawValue()['destinoSafe'],
-        fromDate: `${this.fromDate?.day}/${this.fromDate?.month}/${this.fromDate?.year}`,
-        toDate: `${this.toDate?.day}/${this.toDate?.month}/${this.toDate?.year}`,
+        fromDate: startDate,
+        toDate: endDate,
         passengers: this.insuranceQuoteForm.getRawValue()['passengers']
       };
 
-      console.log('DataFilters', filters)
-      //localStorage.setItem('filters', JSON.stringify(filters));
-      //this._router.navigateByUrl('/seguros');
+      localStorage.setItem('filters', JSON.stringify(filters));
+
+      this._router.navigateByUrl('/seguros', { skipLocationChange: true }).then(() =>
+        this._router.navigate(["/seguros/planes"]));
     }
   }
 
