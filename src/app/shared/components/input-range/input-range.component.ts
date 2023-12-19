@@ -18,15 +18,14 @@ export class InputRangeComponent implements OnChanges,OnInit {
 		month: this.now.getMonth() + 1,
 		day: this.now.getDate()
 	};
+	@Input() fromDate: NgbDate | null = null;
+	@Input() toDate: NgbDate | null = null;
 
 	showCalendar = false;
 	dateDeparture = '';
 	dateReturn = '';
 
 	hoveredDate: NgbDate | null = null;
-
-	fromDate: NgbDate | null = null;
-	toDate: NgbDate | null = null;
 
 	fromDateSeleted: NgbDate | null = null;
 	toDateSeleted: NgbDate | null = null;
@@ -64,6 +63,8 @@ export class InputRangeComponent implements OnChanges,OnInit {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
+		console.log({changes});
+		
 		if (changes['typeFlight'].currentValue == 0 || changes['typeFlight'].currentValue == -1) {
 			this.showCalendar = false;
 			document.documentElement.style.setProperty('--visibility', 'block');
@@ -73,6 +74,10 @@ export class InputRangeComponent implements OnChanges,OnInit {
 			document.documentElement.style.setProperty('--visibility', 'none');
 			this.showCalendar = false;
 			this.setDateOneWay();
+		}
+
+		if (changes['fromDate'].currentValue !== null && changes['toDate'].currentValue !== null) {
+			this.applyRange();
 		}
 	}
 

@@ -26,8 +26,6 @@ export class NewTabsFiltersComponent implements OnInit {
   clickTab(index:number){
       this.indexActive=index;
       this.clickedTab.emit(index);
-      // redirect to insurances page
-      if(index === 7) this.router.navigate(['/seguros']);
   }
 
   

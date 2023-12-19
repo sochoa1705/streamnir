@@ -66,17 +66,6 @@
 							<option selected value="510">PE</option>
 						</select>
 					</div>
-					<!-- <select
-						#destino
-						class="form-select selectSeguro"
-						formControlName="destinoSafe"
-						aria-label="Default select example"
-						required
-						[class.first-option]="insuranceQuoteForm.controls.destinoSafe.value == ''"
-					>
-						<option value="" disabled selected>Seleccionar destino</option>
-						<option *ngFor="let o of options" value="{{ o.ref_assistcard }}">{{ o.descripcion_destino }}</option>
-					</select> -->
 
 					<select
 						#destino
@@ -90,7 +79,12 @@
 						<option *ngFor="let o of options" value="{{ o.ref_assistcard }}">{{ o.descripcion_destino }}</option>
 					</select>
 				</section>
-				<app-input-range #childDates [typeFlight]="-1"></app-input-range>
+				<app-input-range
+					#childDates
+					[fromDate]="insuranceQuoteForm.get('fromDate')?.value"
+					[toDate]="insuranceQuoteForm.get('toDate')?.value"
+					[typeFlight]="-1"
+				></app-input-range>
 				<app-button [isMobile]="true" [fullWidth]="true" [text]="'Cotizar ahora'" (onClick)="quoteNow()"></app-button>
 			</div>
 		</div>
