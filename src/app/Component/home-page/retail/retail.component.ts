@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-retail',
@@ -13,13 +14,6 @@ export class RetailComponent {
       'assets/retail/slider1/image-3.webp',
       'assets/retail/slider1/image-4.webp',
       'assets/retail/slider1/image-5.webp'
-  ];
-  slider2Images = [
-    'assets/retail/slider2/image-1.webp',
-    'assets/retail/slider2/image-2.webp',
-    'assets/retail/slider2/image-3.webp',
-    'assets/retail/slider2/image-4.webp',
-    'assets/retail/slider2/image-5.webp'
   ];
   slider3Images = [
     'assets/retail/slider3/image-1.webp',
@@ -35,7 +29,7 @@ export class RetailComponent {
     'assets/retail/slider4/image-4.webp'
   ];
 
-  constructor(private carouselConfig: NgbCarouselConfig) {
+  constructor(private carouselConfig: NgbCarouselConfig, private router: Router) {
     this.carouselConfig.showNavigationIndicators = true;
     this.carouselConfig.interval = 3000;
     this.carouselConfig.pauseOnHover = false;
@@ -43,7 +37,6 @@ export class RetailComponent {
   }
 
   onRegistrationClick() {
-    location.href = 'https://www.nmviajes.com/tusdatos';
+    this.router.navigate(['/eventos']);
   }
-
 }
