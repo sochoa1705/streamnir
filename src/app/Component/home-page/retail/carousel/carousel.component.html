@@ -8,7 +8,7 @@
 	<div class="carousel-inner">
 		<div class="carousel-item" [attr.data-interval]="interval" [class.active]="i === 0"
 		     *ngFor="let imgSrc of images let i = index">
-			<img [src]="imgSrc" alt="" class="d-block w-100 img-fluid rounded-1" loading="lazy">
+			<img [src]="imgSrc" alt="" class="d-block w-100 img-fluid rounded-1" [style.height]="imgHeight" loading="lazy">
 		</div>
 	</div>
 	<button class="carousel-control-prev d-none d-lg-flex" type="button" data-bs-slide="prev"

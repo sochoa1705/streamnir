@@ -1,5 +1,8 @@
-.carousel-indicators {
+.carousel-item img {
+	object-fit: cover;
+}
 
+.carousel-indicators {
 	button {
 		opacity: 1 !important;
 		border: 1px solid transparent;
