@@ -589,6 +589,11 @@ section {
     color: #4b4b4b; }
     #carouselSeguros h2 span {
       color: #b50a27; }
+  #carouselSeguros h3 {
+    font-size: 24px;
+    color: #4b4b4b; }
+    #carouselSeguros h3 span {
+      color: #b50a27; }
   #carouselSeguros .carousel-control-prev-icon,
   #carouselSeguros .carousel-control-next-icon {
     display: none !important; }
