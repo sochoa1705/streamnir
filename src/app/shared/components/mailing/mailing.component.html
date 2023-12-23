@@ -3,23 +3,23 @@
     <div class="col-12 offset-0 col-md-10 offset-md-1">
       <img class="iconMailing" src="./assets/mailing.webp" alt="Mailing" loading="lazy">
 
-      <div class="row" *ngIf="validate">
-        <div class="msgBoxBoletin {{ imgMailing > 0 ? 'success' : 'error'}} ">
-          <div class="iconBoletin">
-	          <img src="./assets/svg/success-boletin.svg" alt="Registro exitoso" loading="lazy" *ngIf="imgMailing > 0">
-	          <img src="./assets/svg/error-boletin.svg"
-	               alt="Registro err&oacute;neo"
-	               loading="lazy"
-	               *ngIf="imgMailing <= 0">
-          </div>
-          <div class="titleBol" *ngIf="imgMailing > 0">
-            ¡Gracias por suscribirte!
-          </div>
-          <div class="descripBol">
-            {{ message }}
-          </div>
-        </div>
-      </div>
+	    <div class="row" *ngIf="validate">
+		    <div class="msgBoxBoletin {{ imgMailing ? 'success' : 'error'}} ">
+			    <div class="iconBoletin">
+				    <img src="./assets/svg/success-boletin.svg" alt="Registro exitoso" loading="lazy" *ngIf="imgMailing">
+				    <img src="./assets/svg/error-boletin.svg"
+				         alt="Registro err&oacute;neo"
+				         loading="lazy"
+				         *ngIf="!imgMailing">
+			    </div>
+			    <div class="titleBol" *ngIf="imgMailing">
+				    ¡Gracias por suscribirte!
+			    </div>
+			    <div class="descripBol">
+				    {{ message }}
+			    </div>
+		    </div>
+	    </div>
 
       <h3 class="mt-5 titleBold" *ngIf="!validate">{{ title }}</h3>
       <h4 class="mb-5 subtitleHome" *ngIf="!validate">{{ span }}</h4>

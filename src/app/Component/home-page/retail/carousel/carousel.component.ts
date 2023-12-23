@@ -1,19 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss']
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent {
   @Input() carouselId: string = '';
   @Input() images: string[] = [];
   @Input() interval: number = 5000;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Input() imgHeight: string = 'auto';
 
   getIdXmlFormatted(): string {
     return `#${this.carouselId}`;
