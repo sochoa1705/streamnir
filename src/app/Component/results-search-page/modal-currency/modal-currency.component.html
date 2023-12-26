@@ -1,0 +1,21 @@
+<div class="filter">
+    <div class="filter__close">
+        <img src="./assets/svg/close-modal.svg" alt="x" (click)="clickCloseModal()">
+    </div>
+    
+    <div class="filter__header">
+        <h4>Moneda</h4>
+        <span>Tipo de cambio: S/. {{exchangeRate.amount}}</span>
+    </div>
+    <div class="filter__body">
+        <div *ngFor="let option of listCurrency; index as i" class="filter__body__option" (click)="clickOption(option.name, i)">
+            <img [src]="option.checked ? './assets/svg/radio-check.svg' :  './assets/svg/radio-circle.svg'" alt="radio" />
+            <span>{{option.name}}</span>
+        </div>
+    </div>
+</div>
+
+<div class="filter__footer">
+    <app-button [text]="'Cancelar'"  (click)="clickCloseModal()" [size]="'xs'" [color]="'neutral'" ></app-button>
+    <app-button [text]="'Confirmar'" [size]="'xs'" (click)="confirmSelected()"></app-button>
+</div>

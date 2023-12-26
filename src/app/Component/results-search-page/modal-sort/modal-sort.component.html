@@ -1,0 +1,17 @@
+<div class="filter">
+    <div class="filter__close">
+        <img src="./assets/svg/close-modal.svg" alt="x" (click)="clickCloseModal()">
+    </div>
+    
+    <div class="filter__header">
+        <h4>Moneda</h4>
+    </div>
+    <div class="filter__body">
+       
+    </div>
+</div>
+
+<div class="filter__footer">
+    <app-button [text]="'Cancelar'"  (click)="clickCloseModal()" [size]="'xs'" [color]="'neutral'" ></app-button>
+    <app-button [text]="'Confirmar'" [size]="'xs'"></app-button>
+</div>
