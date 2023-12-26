@@ -2,7 +2,6 @@ import {
 	Component,
 	ElementRef,
 	EventEmitter,
-	Input,
 	OnInit,
 	Output,
 	ViewChild
@@ -14,8 +13,7 @@ import { InputClassComponent } from '../../input-class/input-class.component';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { AccountsService } from 'src/app/Services/accounts.service';
 import { Router } from '@angular/router';
-import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
-import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
+import { Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { GlobalComponent } from 'src/app/shared/global';
 
 @Component({

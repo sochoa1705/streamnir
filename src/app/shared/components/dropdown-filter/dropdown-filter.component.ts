@@ -1,5 +1,4 @@
-import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Optional, Output, SimpleChanges } from '@angular/core';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,8 +13,9 @@ interface Item {
 	templateUrl: './dropdown-filter.component.html',
 	styleUrls: ['./dropdown-filter.component.scss']
 })
+
 export class DropdownFilterComponent implements OnInit, OnChanges {
-	constructor(private _searchFiltersService: SearchFiltersService) {
+	constructor(private _searchFiltersService: SearchFiltersService, @Optional() private _activeModal?: NgbActiveModal) {
 		this._searchFiltersService.isFinishGDS.subscribe({
 			next: () => {
 			   setTimeout(() => {
@@ -49,7 +49,6 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 	@Output() clickedOption = new EventEmitter();
 	@Output() selectedAirlines = new EventEmitter();
 	@Output() hiddenSection = new EventEmitter();
-	@Output() closeModal = new EventEmitter();
 
 	isShowMoreAirlines = false;
 	listOptionsAirlines: Item[] = [];
@@ -108,6 +107,8 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 	}
 
 	clickCloseModal(){
-		this.closeModal.emit();
+		if (this._activeModal) {
+			this._activeModal.close();
+		}
 	}
 }
