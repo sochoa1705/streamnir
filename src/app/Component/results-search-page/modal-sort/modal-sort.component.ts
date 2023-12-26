@@ -7,7 +7,7 @@ interface Order {
 @Component({
   selector: 'app-modal-sort',
   templateUrl: './modal-sort.component.html',
-  styleUrls: ['./modal-sort.component.scss']
+  styleUrls: ['../modal-currency/modal-currency.component.scss']
 })
 export class ModalSortComponent implements OnInit {
 
