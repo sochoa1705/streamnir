@@ -69,6 +69,21 @@
     }
 }
 
+.option-name,.option-description{
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    color:black;
+}
+
+.option-description{
+    font-weight: 400;
+    font-size: 12px;
+}
+
 .filter__footer{
     padding: 16px 40px;
     display: flex;

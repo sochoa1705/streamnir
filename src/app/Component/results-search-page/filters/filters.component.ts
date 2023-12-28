@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DropdownFilterComponent } from 'src/app/shared/components/dropdown-filter/dropdown-filter.component';
 import { GlobalComponent } from 'src/app/shared/global';
 import { ModalCurrencyComponent } from '../modal-currency/modal-currency.component';
@@ -42,6 +42,9 @@ export class FiltersComponent implements OnInit {
 	@Input() valuesFilterDuration: IFilterDuration;
 	@Input() minPrice = 0;
 	@Input() maxPrice = 0;
+	@Input() theCheapest:any;
+	@Input() betterOption:any;
+	@Input() shorterDuration:any;
 
 	@Output() changeArrayFilters = new EventEmitter();
 	@Output() updateArrayAirlinesFilter = new EventEmitter();
@@ -142,7 +145,7 @@ export class FiltersComponent implements OnInit {
 		if (this.minPrice !== 0) {
 			switch (id) {
 				case 0:
-					//this.openModalSortBy();
+					this.openModalSortBy();
 					break;
 				case 1:
 					this.openModalCurrency();
@@ -234,6 +237,10 @@ export class FiltersComponent implements OnInit {
 		const modalRef = this._modalService.open(ModalSortComponent, {
 			centered: true
 		});
+		modalRef.componentInstance.theCheapest=this.theCheapest;
+		modalRef.componentInstance.betterOption = this.betterOption;
+		modalRef.componentInstance.shorterDuration = this.shorterDuration;
+		modalRef.componentInstance.currency = this.currency;
 	}
 
 	@HostListener('window:resize', ['$event'])
