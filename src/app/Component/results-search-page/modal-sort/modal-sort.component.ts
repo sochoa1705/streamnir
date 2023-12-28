@@ -19,21 +19,29 @@ export class ModalSortComponent implements OnInit {
   
   listSort=[
     {
-      value: 'USD',
-      name: 'Dólares',
-      checked:false
+      value: 1,
+      name: 'Mejor Opción',
+      checked:false,
     },
     {
-      value: 'PEN',
-      name: 'Soles',
-      checked:false
+      value: 0,
+      name: 'Precio más bajo',
+      checked:false,
+    },
+    {
+      value: 2,
+      name: 'Más rápido',
+      checked:false,
     }
   ]
 
   ngOnInit(): void {
+      this.listSort.forEach(item=>{
+        
+      })
   }
 
-  clickOption(){
+  clickOption(value:number, index:number){
 
   }
 
