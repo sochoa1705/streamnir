@@ -121,7 +121,10 @@ export class SearchService {
 	getGroupByTransactionId(transactionId:string,groupId:string ){
 		const api = 'https://motorvuelos.expertiatravel.com'
 		let url = `${api}/mv/meta-search/${transactionId}/${groupId}`;
-		return this._httpClient.get<IBookingKayak>(url);
+		const headers = new HttpHeaders()
+		.set('Content-Type', 'application/json')
+		.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+		return this._httpClient.get<IBookingKayak>(url,{ headers });
 	}
 
 
