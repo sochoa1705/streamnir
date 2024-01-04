@@ -1,8 +1,0 @@
-export class ListaUltimasBusquedaCiudadesRequest{
-   
-
-    constructor (){
-       
-    }
-
-}
