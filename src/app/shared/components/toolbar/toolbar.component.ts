@@ -78,7 +78,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	toHome() {
 		this._checkoutService.currentIndexStep = -1;
 		this.showMenuMobile=false;
-		this.route.navigateByUrl('/');
+		this.route.navigate(['/'], {
+        replaceUrl: true,
+      });
 		// Renombrando valores para SEO - Inicio
 		document.getElementsByTagName('title')[0].innerHTML = environment.SEO.home.title;
 

@@ -59,9 +59,12 @@ export class InputSearchFlightComponent implements OnInit {
 		const dataSearch = GlobalComponent.searchData;
 		this.isParamsDep = true;
 		this.isParamsRet = true;
-		if (dataSearch.flightType !== 2 && this.indexRowMulti==0) {
-			this.valueSearchDeparture.setValue(dataSearch.departureLocation?.replace(/,\s*$/, ''));
-			this.valueSearchArrival.setValue(dataSearch.arrivalLocation?.replace(/,\s*$/, ''));
+		if (dataSearch.flightType !== 2 && this.indexRowMulti == 0) {
+			console.log('dataSearch', dataSearch);
+			this.valueSearchDeparture.setValue(this.extractCityName(dataSearch.fullDepartureLocation!));
+			this.valueSearchArrival.setValue(this.extractCityName(dataSearch.fullArrivalLocation!));
+			console.log('this.valueSearchArrival', this.valueSearchArrival.value);
+			
 			this.origin = dataSearch.fullDepartureLocation?.replace(/ /g,"%20") || '';
 			this.destination = dataSearch.fullArrivalLocation?.replace(/ /g,"%20") || '';
 		}
@@ -279,4 +282,19 @@ export class InputSearchFlightComponent implements OnInit {
 			this.resetInput2();
 		}
 	}
+
+	private extractCityName(inputString: string) {
+		let parts = inputString.split(',');
+		parts = parts[0].split(' ');
+
+		// slice first part ex: LIM, LBP
+		if (parts.length) parts = parts.slice(1, parts.length);
+		console.log(parts);
+
+		const cityName = parts.join(' ').trim();
+		console.log('cityName', cityName);
+    const capitalizedCityName = cityName.replace(/\b\w/g, char => char.toUpperCase());
+
+    return capitalizedCityName;
+}
 }

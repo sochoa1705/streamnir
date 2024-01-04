@@ -76,7 +76,7 @@ export class InputRangeComponent implements OnChanges,OnInit {
 			this.setDateOneWay();
 		}
 
-		if (changes['fromDate'].currentValue !== null && changes['toDate'].currentValue !== null) {
+		if (changes['fromDate']?.currentValue !== null && changes['toDate']?.currentValue !== null) {
 			this.applyRange();
 		}
 	}

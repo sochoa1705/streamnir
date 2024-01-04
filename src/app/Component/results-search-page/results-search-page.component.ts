@@ -86,6 +86,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	) {}
 
 	private unsubscribeSearch$ = new Subject<void>();
+	private idleSubscriber: Subscription;
 
 	allDataGroups: Group[] = [];
 	dataGroupsPaginate: Group[] = [];
@@ -136,7 +137,6 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	isReload = false;
 	progressCount = 0;
 
-	idleSubscriber: Subscription;
 	dataSearch: Search | null;
 	@ViewChild('childSort') childSort!: SortByComponent;
 
@@ -949,7 +949,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		this.unsubscribeSearch$.complete();
 
 		if (hasPreviousPage) {
-      this.router.navigate(['home'], {
+      this.router.navigate(['/'], {
         replaceUrl: true,
       });
     } else {
@@ -960,7 +960,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 		this._modalService.dismissAll();
 		this.userIdle.stopWatching();
-		this.idleSubscriber.unsubscribe();
+		if(this.idleSubscriber) this.idleSubscriber.unsubscribe();
 		this.unsubscribeSearch$.next();
 		this.unsubscribeSearch$.complete();
 	}
