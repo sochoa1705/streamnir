@@ -11,7 +11,7 @@
             <span class="link" (click)="clickSelectedAirlines(false)">Seleccionar todo</span><span>|</span><span class="link" (click)="clickSelectedAirlines(true)">Borrar todo</span>
         </div>
         <ng-container *ngFor="let option of (isAirlines ? listOptionsAirlines : listOptions)">
-            <div class="dropdown__filter__body__option" (click)="clickOption(option)" [class.disabled]="option.total==0">
+            <div class="dropdown__filter__body__option" (click)="clickOption(option)" [@fadeInOut] [class.disabled]="option.total==0">
                 <img [src]="option.total==0 ? './assets/svg/checkbox-dis.svg' : option.active ? './assets/svg/checkbox-fill.svg' : './assets/svg/checkbox-box.svg'" />
                 <span>{{option.name}} <span class="count">({{option.total}})</span></span>
             </div>

@@ -1,10 +1,7 @@
 <div class="dropdown__filter" *ngIf="valueDurationDep > 0">
-	<div *ngIf="isMobile" class="dropdown__filter__close">
-        <img src="./assets/svg/close-modal.svg" alt="x" (click)="clickCloseModal()">
-    </div>
-	<div class="dropdown__filter__header" (click)="!isMobile ? dropdownActive=!dropdownActive : null">
+	<div class="dropdown__filter__header" (click)="dropdownActive = !dropdownActive">
 		<h4>Duración</h4>
-		<img *ngIf="!isMobile" [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
+		<img [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
 	</div>
 	<div class="dropdown__filter__body" *ngIf="dropdownActive">
 		<span class="dropdown__filter__body__reset" (click)="resetFilter()">Restablecer</span>
@@ -86,10 +83,7 @@
 
 	</div>
 </div>
-<div *ngIf="isMobile" class="dropdown__footer">
-    <app-button [text]="'Cancelar'"  (click)="clickCloseModal()" [size]="'xs'" [color]="'neutral'" ></app-button>
-    <app-button [text]="'Confirmar'" [size]="'xs'"></app-button>
-</div>
+
 <div class="dropdown__loader" *ngIf="valueDurationDep == 0">
 	<div class="skeleton dropdown__loader__skeleton_1"></div>
 	<div class="skeleton dropdown__loader__skeleton_2"></div>
