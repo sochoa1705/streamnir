@@ -1,8 +1,12 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DropdownFilterComponent } from 'src/app/shared/components/dropdown-filter/dropdown-filter.component';
 import { GlobalComponent } from 'src/app/shared/global';
+import { ModalCurrencyComponent } from '../modal-currency/modal-currency.component';
+import { PriceFilterComponent } from 'src/app/shared/components/price-filter/price-filter.component';
+import { DurationFilterComponent } from 'src/app/shared/components/duration-filter/duration-filter.component';
+import { ModalSortComponent } from '../modal-sort/modal-sort.component';
 
 interface Item {
 	value: any;
@@ -38,6 +42,9 @@ export class FiltersComponent implements OnInit {
 	@Input() valuesFilterDuration: IFilterDuration;
 	@Input() minPrice = 0;
 	@Input() maxPrice = 0;
+	@Input() theCheapest: any;
+	@Input() betterOption: any;
+	@Input() shorterDuration: any;
 
 	@Output() changeArrayFilters = new EventEmitter();
 	@Output() updateArrayAirlinesFilter = new EventEmitter();
@@ -86,7 +93,7 @@ export class FiltersComponent implements OnInit {
 		}
 	];
 
-	constructor(private _modalService: NgbModal){
+	constructor(private _modalService: NgbModal) {
 		this.formGroup = new FormGroup(this.formObject);
 	}
 
@@ -135,24 +142,46 @@ export class FiltersComponent implements OnInit {
 	}
 
 	openModalFilter(id: number) {
-		switch (id) {
-			case 2:
-				this.openModalBaggage();
-				break;
-			case 3:
-				this.openModalScale();
-				break;
-			case 4:
-				this.openModalAirline();
-				break;
-			default:
-				break;
+		if (this.minPrice !== 0) {
+			switch (id) {
+				case 0:
+					this.openModalSortBy();
+					break;
+				case 1:
+					this.openModalCurrency();
+					break;
+				case 2:
+					this.openModalBaggage();
+					break;
+				case 3:
+					this.openModalScale();
+					break;
+				case 4:
+					this.openModalAirline();
+					break;
+				case 5:
+					this.openModalPrice();
+					break;
+				default:
+					this.openModalDuration();
+					break;
+			}
 		}
+	}
+
+	openModalCurrency() {
+		const modalRef = this._modalService.open(ModalCurrencyComponent, {
+			centered: true
+		});
+		modalRef.componentInstance.currencySelected = this.currency;
+		modalRef.componentInstance.changeCurrency.subscribe(($event: any) => {
+			this.seletedItemCurrency($event);
+		});
 	}
 
 	openModalBaggage() {
 		const modalRef = this._modalService.open(DropdownFilterComponent, {
-			centered: true,
+			centered: true
 		});
 		modalRef.componentInstance.title = 'Equipaje';
 		modalRef.componentInstance.listOptions = this.dataBagFilter;
@@ -164,7 +193,7 @@ export class FiltersComponent implements OnInit {
 
 	openModalScale() {
 		const modalRef = this._modalService.open(DropdownFilterComponent, {
-			centered: true,
+			centered: true
 		});
 		modalRef.componentInstance.title = 'Escalas';
 		modalRef.componentInstance.listOptions = this.dataScaleFilter;
@@ -184,6 +213,34 @@ export class FiltersComponent implements OnInit {
 		modalRef.componentInstance.clickedOption.subscribe(($event: any) => {
 			//this.clickedOption($event, 'typeBag');
 		});
+	}
+
+	openModalPrice() {
+		const modalRef = this._modalService.open(PriceFilterComponent, {
+			centered: true
+		});
+		modalRef.componentInstance.isMobile = true;
+		modalRef.componentInstance.currency = this.currency;
+		modalRef.componentInstance.minPrice = this.minPrice;
+		modalRef.componentInstance.maxPrice = this.maxPrice;
+	}
+
+	openModalDuration() {
+		const modalRef = this._modalService.open(DurationFilterComponent, {
+			centered: true
+		});
+		modalRef.componentInstance.isMobile = true;
+		modalRef.componentInstance.valuesFilterDuration = this.valuesFilterDuration;
+	}
+
+	openModalSortBy() {
+		const modalRef = this._modalService.open(ModalSortComponent, {
+			centered: true
+		});
+		modalRef.componentInstance.theCheapest = this.theCheapest;
+		modalRef.componentInstance.betterOption = this.betterOption;
+		modalRef.componentInstance.shorterDuration = this.shorterDuration;
+		modalRef.componentInstance.currency = this.currency;
 	}
 
 	@HostListener('window:resize', ['$event'])

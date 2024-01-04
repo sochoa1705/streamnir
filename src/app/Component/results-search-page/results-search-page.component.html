@@ -1,10 +1,7 @@
 <div class="container__page">
 	<div class="container__page__metasearch" *ngIf="!showNotResults">
 		<div class="container__page__metasearch__section">
-			<app-tab-vuelos-v2
-				*ngIf="dataSearch"
-				(reloadPageResult)="reloadPageResult()"
-			></app-tab-vuelos-v2>
+			<app-tab-vuelos-v2 *ngIf="dataSearch" (reloadPageResult)="reloadPageResult()"></app-tab-vuelos-v2>
 		</div>
 		<div class="container__page__metasearch__mobile" *ngIf="dataSearch">
 			<div class="d-flex justify-content-between align-items-start flex-sm-row flex-column-reverse">
@@ -27,10 +24,9 @@
 							<span>-</span> <span>{{ (dataSearch.arrivalDate | date: 'EEE d MMM')?.split('.')?.join(' ') }}</span>
 						</ng-container>
 					</div>
-
 				</div>
 				<div class="actions">
-					<img src="./assets/svg/pencil.svg" alt="icon" class="d-none d-sm-block"/>
+					<img src="./assets/svg/pencil.svg" alt="icon" class="d-none d-sm-block" />
 					<span (click)="openModalSearch()">Editar</span>
 				</div>
 			</div>
@@ -44,7 +40,7 @@
 			class="progress-bar"
 			role="progressbar"
 			[ngStyle]="{
-				'width.%':progressCount
+				'width.%': progressCount
 			}"
 			[attr.aria-valuenow]="progressCount"
 			aria-valuemin="0"
@@ -125,5 +121,8 @@
 		[valuesFilterDuration]="valuesFilterDuration"
 		(resetFilterByDuration)="resetFilterByDuration()"
 		(filterByDurationScale)="filterByDurationScale($event)"
+		[theCheapest]="theCheapest"
+		[betterOption]="betterOption"
+		[shorterDuration]="shorterDuration"
 	></app-filters>
 </ng-template>

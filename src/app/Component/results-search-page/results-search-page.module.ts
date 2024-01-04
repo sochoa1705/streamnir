@@ -18,6 +18,8 @@ import { NotResultsComponent } from './not-results/not-results.component';
 import { CardLoaderResultModule } from 'src/app/shared/components/card-loader-result/card-loader-result.module';
 import { IdlePopupComponent } from './idle-popup/idle-popup.component';
 import { ModalSearchComponent } from './modal-search/modal-search.component';
+import { ModalCurrencyComponent } from './modal-currency/modal-currency.component';
+import { ModalSortComponent } from './modal-sort/modal-sort.component';
 export const routes: Routes = [{ path: '', component: ResultsSearchPageComponent}];
 registerLocaleData(localeEs, "es");
 
@@ -39,7 +41,16 @@ registerLocaleData(localeEs, "es");
         DurationFilterModule,
         CardLoaderResultModule
     ],
-    declarations:[ResultsSearchPageComponent, FiltersComponent, SortByComponent, NotResultsComponent, IdlePopupComponent, ModalSearchComponent],
+    declarations:[
+        ResultsSearchPageComponent, 
+        FiltersComponent, 
+        SortByComponent, 
+        NotResultsComponent, 
+        IdlePopupComponent, 
+        ModalSearchComponent,
+        ModalCurrencyComponent, 
+        ModalSortComponent
+    ],
     exports: [ResultsSearchPageComponent],
     providers: [{ provide: LOCALE_ID, useValue: "es" }],
 })

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Optional, Output, SimpleChanges } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Options } from 'ng5-slider';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 
@@ -9,7 +10,7 @@ import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-f
 	styleUrls: ['./price-filter.component.scss'],
 })
 export class PriceFilterComponent implements OnInit, OnChanges{
-	constructor(private _searchFiltersService: SearchFiltersService) {
+	constructor(private _searchFiltersService: SearchFiltersService, @Optional() private _activeModal?: NgbActiveModal) {
 		this._searchFiltersService.isResetFilterPrice.subscribe({
 			next: () => {
 				this.value = this.minPrice;
@@ -45,6 +46,7 @@ export class PriceFilterComponent implements OnInit, OnChanges{
 	@Input() maxPrice = 0;
 	@Output() resetPrice = new EventEmitter();
 	@Output() filterPriceRange = new EventEmitter();
+	@Input() isMobile=false;
 
 	dropdownActive = true;
 	value: number = 0;
@@ -71,7 +73,15 @@ export class PriceFilterComponent implements OnInit, OnChanges{
 		}
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		if(this.isMobile) {
+			this.showLoader=false;
+			this.options.floor = this.minPrice;
+			this.value = this.minPrice;
+			this.options.ceil =  this.maxPrice;
+			this.highValue = this.maxPrice;
+		}
+	}
 
 	filterPrice($event: any) {
 		this.filterPriceRange.emit($event);
@@ -84,5 +94,11 @@ export class PriceFilterComponent implements OnInit, OnChanges{
 			value: this.value,
 			highValue: this.highValue
 		});
+	}
+
+	clickCloseModal(){
+		if (this._activeModal) {
+			this._activeModal.close();
+		}
 	}
 }
