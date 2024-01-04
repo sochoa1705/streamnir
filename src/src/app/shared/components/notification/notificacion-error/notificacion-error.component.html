@@ -1,0 +1,10 @@
+<div class="container__notify" *ngIf="isShow">
+    <div class="container__notify__contend">
+        <img src="./assets/svg/warning.svg" alt="!">
+        <div class="d-flex flex-column">
+            <span><strong>{{title}}</strong></span>
+            <span>{{message}}</span>
+        </div>
+    </div>
+    <img (click)="isShow = false" src="./assets/svg/close-notification.svg" alt="">
+</div>

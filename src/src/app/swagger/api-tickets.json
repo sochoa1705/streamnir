@@ -1,0 +1,372 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "expertia.api.ticket 1.0",
+    "description": "",
+    "version": "1.0"
+  },
+  "paths": {
+    "/v1/api/Tickets": {
+      "get": {
+        "tags": [
+          "Tickets"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.Country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Parameter.City",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Parameter.Site",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Parameter.IsFlight",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tickets"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_TicketFullGetCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_TicketFullGetCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_TicketFullGetCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Tickets/{id}": {
+      "get": {
+        "tags": [
+          "Tickets"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tickets"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_TicketFullGetCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_TicketFullGetCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_TicketFullGetCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tickets"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_TicketDeleteCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_TicketDeleteCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_TicketDeleteCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CE_RequestCaller": {
+        "required": [
+          "Application",
+          "Company"
+        ],
+        "type": "object",
+        "properties": {
+          "Company": {
+            "type": "string"
+          },
+          "Application": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_TicketDelete": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_TicketDeleteCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_TicketDelete"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_TicketFullGet": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ActivityId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Country": {
+            "type": "string",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "nullable": true
+          },
+          "Microsite": {
+            "type": "string",
+            "nullable": true
+          },
+          "Flights": {
+            "type": "boolean"
+          },
+          "Status": {
+            "type": "boolean"
+          },
+          "Created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Updated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_TicketFullGetCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_TicketFullGet"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

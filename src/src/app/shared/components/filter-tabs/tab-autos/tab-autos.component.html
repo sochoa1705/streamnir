@@ -1,0 +1,70 @@
+<form  name="form" [formGroup]="form">
+    <div class="row  gx-3 gy-md-3 gy-sm-3 gy-xs-2 gy-2">
+        <div class="col-md-12">
+            <div class="row gx-3 gy-2 d-flex align-items-center">
+                <div class="col-xl-9 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="group__input">
+                        <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)" placeholder="Ingrese su destino" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+                        <img src="./assets/svg/location-red.svg" alt="o" />
+                     </div>
+                     <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let state of countriesSearch" [value]="state.value" [attr.data-tag]="state.value">
+                            <img class="example-option-img" aria-hidden src="./assets/svg/airplane-line.svg">
+                            <span>{{state.value}}</span>
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="checkbox__line" (click)="changeChecked()">
+                        <img [src]="!isChecked ? './assets/svg/checkbox-box.svg':'./assets/svg/checkbox-fill.svg'" alt="ck">
+                        <span>Devolver en el mismo lugar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row gx-3 gy-2">
+                <div class="col-md-6 col-sm-6">
+                    <div class="group__input">
+                        <input [readonly]="isChecked" matInput aria-label="State3" [matAutocomplete]="auto2" formControlName="recojo" (keyup)="autocompleteRecojo($event)" placeholder="Lugar de devolución">
+                        <img [src]="isChecked ? './assets/svg/location-marker-disabled.svg':'./assets/svg/location-red.svg'" alt="o" />
+                     </div>
+                     <mat-autocomplete #auto2="matAutocomplete">
+                        <mat-option *ngFor="let state of countriesSearchRecojo" [value]="state.value" [attr.data-tag]="state.value">
+                            <img class="example-option-img" aria-hidden src="./assets/origen.png">
+                            <span>{{state.value}}</span>
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="group__input">
+                        <select formControlName="conductor" [class.first-option]="form.controls.conductor.value==''">
+                            <option value="" disabled selected hidden>Seleccione edad conductor</option>
+                            <option *ngFor="let elem of conductor" [value]="elem.code">
+                              {{ elem.name }}
+                            </option>
+                        </select>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="inputs__date">
+                <section>
+                    <app-new-calendar #calendarDeparture></app-new-calendar>
+                    <div class="group__input">
+                        <input class="custom-time-input" id="initHour"  name="initHour" formControlName="initHour" type="time" placeholder="Hora de recogida">
+                    </div>
+                </section>
+                <section>
+                    <app-new-calendar #calendarReturn [placeholder]="'Retorno'"></app-new-calendar>
+                    <div class="group__input">
+                        <input class="custom-time-input" id="lastHour" name="lastHour" formControlName="lastHour" type="time" placeholder="Hora de llegada">
+                    </div>
+                </section>
+              
+                <app-button [left]="true"  [isMobile]="true" [icon]="'search.svg'" [text]="'Buscar'" [w100]="true" (onClick)="searchAuto()"></app-button>
+            </div>
+        </div>
+    </div>
+</form>

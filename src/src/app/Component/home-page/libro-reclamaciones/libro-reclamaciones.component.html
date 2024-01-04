@@ -1,0 +1,368 @@
+<div class="boxReclamaciones">
+    <div class="contLeft">
+        <div class="virtual">
+            <div class="titleVirtual">
+                Libro de
+                <span>Reclamaciones Virtual</span>
+            </div>
+            <div class="contentVirtual">
+                Estimados(as) usuarios, el Libro de Reclamaciones es exclusivamente a la insatisfacción o disconformidad del usuario respecto a un servicio brindado por
+                <strong>NUEVO MUNDO VIAJES.</strong> Los campos que se presentan son obligatorios para poder realizar su reclamo.
+            </div>
+            <div class="marcaOrange"></div>
+            <div class="boxImg">
+                <img src="./assets/reclamos/Imagen.png" alt="Reclamos" loading="lazy">
+            </div>
+
+            <div class="text">
+                ¿Necesitas ayuda con tu vuelo o paquete?
+            </div>
+            <div class="btnHelp" (click)="aAyuda()">
+                Portal de ayuda
+            </div>
+        </div>
+    </div>
+    <div class="contRight text-center" *ngIf="numCode">
+        Gracias por su comentario. Su {{(tipoReclamo === 'R') ? 'reclamo' : 'queja'}} ha sido registrado
+        <br>
+        <strong> N° {{numCode }}</strong>
+        <hr> Estaremos en contacto.
+        <br>
+        <br>
+        <button (click)="reenviar()" class="btnEnviar">
+            Volver al formulario
+        </button>
+    </div>
+
+    <div class="contRight" *ngIf="numCode === undefined">
+        <form [formGroup]="formLibro">
+            <div class="rowGroup">
+                <div class="colLeft">Razón Social:</div>
+                <div class="colRight">PROMOTORA DE TURISMO NUEVO MUNDO S.A.C.</div>
+            </div>
+            <div class="rowGroup">
+                <div class="colLeft">R.U.C.</div>
+                <div class="colRight">20106785288</div>
+            </div>
+            <div class="rowGroup">
+                <div class="colLeft">Dirección:</div>
+                <div class="colRight">Av. José Pardo 801 - Miraflores</div>
+            </div>
+            <div class="rowGroup">
+                <label class="colLeft">Punto de Venta:</label>
+                <div class="colRight">
+                    <input formControlName="puntoVenta" class="form-control" type="text" name="" [ngClass]="getMessage(MSG_PUNTO_VENTA) !== MSG_EMPTY ? 'isvalid' : ''" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+                    <span class="valid" *ngIf="getMessage(MSG_PUNTO_VENTA) !== MSG_EMPTY">{{ getMessage(MSG_PUNTO_VENTA) }}</span>
+
+                </div>
+            </div>
+            <div class="rowGroup">
+                <div class="colLeft">Nombre Asesora:</div>
+                <div class="colRight">
+                    <input formControlName="asesora" class="form-control" type="text" name="" [ngClass]="getMessage(MSG_ASESORA) !== MSG_EMPTY ? 'isvalid' : ''" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+                    <span class="valid" *ngIf="getMessage(MSG_ASESORA) !== MSG_EMPTY">{{ getMessage(MSG_ASESORA) }}</span>
+                </div>
+            </div>
+            <div class="rowGroup">
+                <div class="colLeft">Fecha:</div>
+                <div class="colRight">{{ today }}</div>
+            </div>
+
+            <div class="separador"></div>
+
+            <div class="title">
+                Datos del cliente o apoderado:
+            </div>
+
+            <div class="rowGroup columna">
+                <div class="col">Nombres:</div>
+                <div class="col">
+                    <input formControlName="nombre" class="form-control" type="text" name="" [ngClass]="getMessage(MSG_NOMBRE) !== MSG_EMPTY ? 'isvalid' : ''" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+                    <span class="valid" *ngIf="getMessage(MSG_NOMBRE) !== MSG_EMPTY">{{ getMessage(MSG_NOMBRE) }}</span>
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="col">Apellidos:</div>
+                <div class="col">
+                    <input formControlName="apellido" class="form-control" type="text" name="" [ngClass]="getMessage(MSG_APELLIDO) !== MSG_EMPTY ? 'isvalid' : ''" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+                    <span class="valid" *ngIf="getMessage(MSG_APELLIDO) !== MSG_EMPTY">{{ getMessage(MSG_APELLIDO) }}</span>
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="twoCol">
+                    <div class="tipo">
+                        <div class="text">Tipo de documento:</div>
+                        <div class="campo">
+                            <div class="select-box">
+                                <div class="select-box__current" tabindex="1">
+                                    <div class="select-box__value">
+                                        <input class="select-box__input" formControlName="tipoDoc" type="radio" id="selectDoc1" value="DNI" name="tipoDoc" checked="checked" />
+                                        <label class="select-box__input-text">D.N.I.</label>
+                                    </div>
+                                    <div class="select-box__value">
+                                        <input class="select-box__input" formControlName="tipoDoc" type="radio" id="selectDoc2" value="CEX" name="tipoDoc" />
+                                        <label class="select-box__input-text">C.E.</label>
+                                    </div>
+                                    <div class="select-box__value">
+                                        <input class="select-box__input" formControlName="tipoDoc" type="radio" id="selectDoc3" value="LM" name="tipoDoc" />
+                                        <label class="select-box__input-text">L.M.</label>
+                                    </div>
+                                    <div class="select-box__value">
+                                        <input class="select-box__input" formControlName="tipoDoc" type="radio" id="selectDoc4" value="RUC" name="tipoDoc" />
+                                        <label class="select-box__input-text">R.U.C.</label>
+                                    </div>
+                                    <div class="select-box__value">
+                                        <input class="select-box__input" formControlName="tipoDoc" type="radio" id="selectDoc5" value="Otro" name="tipoDoc" />
+                                        <label class="select-box__input-text">Otro</label>
+                                    </div>
+                                    <svg class="select-box__icon" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4.49998 6.0658C4.33868 6.0658 4.1774 6.00421 4.05442 5.8813L0.184627 2.01146C-0.0615424 1.76529 -0.0615424 1.36617 0.184627 1.1201C0.430697 0.874029 0.829739 0.874029 1.07593 1.1201L4.49998 4.54435L7.92404 1.12022C8.17021 0.874149 8.56921 0.874149 8.81526 1.12022C9.06155 1.36629 9.06155 1.76541 8.81526 2.01158L4.94553 5.88142C4.82249 6.00435 4.66121 6.0658 4.49998 6.0658Z"
+                                            fill="#D40E2D" />
+                                    </svg>
+                                </div>
+                                <ul class="select-box__list">
+                                    <li>
+                                        <label class="select-box__option" for="selectDoc1" aria-hidden="aria-hidden">D.N.I.</label>
+                                    </li>
+                                    <li>
+                                        <label class="select-box__option" for="selectDoc2" aria-hidden="aria-hidden">C.E.</label>
+                                    </li>
+                                    <li>
+                                        <label class="select-box__option" for="selectDoc3" aria-hidden="aria-hidden">L.M.</label>
+                                    </li>
+                                    <li>
+                                        <label class="select-box__option" for="selectDoc4" aria-hidden="aria-hidden">R.U.C.</label>
+                                    </li>
+                                    <li>
+                                        <label class="select-box__option" for="selectDoc5" aria-hidden="aria-hidden">Otro</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <span class="valid" *ngIf="getMessage(MSG_TIPO_DOC) !== MSG_EMPTY">{{ getMessage(MSG_TIPO_DOC) }}</span>
+                    </div>
+                    <div class="numero">
+                        <div class="text">N° de documento</div>
+                        <div class="campo">
+                            <input formControlName="numDoc" class="form-control" type="text" name="" [ngClass]="getMessage(MSG_NOMBRE) !== MSG_EMPTY ? 'isvalid' : ''" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NUM_DOC)">
+                            <span class="valid" *ngIf="getMessage(MSG_NUM_DOC) !== MSG_EMPTY">{{ getMessage(MSG_NUM_DOC) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="col">Teléfono:</div>
+                <div class="col">
+                    <input formControlName="telefono" class="form-control" type="text" name="" [ngClass]="getMessage(MSG_TELEFONO) !== MSG_EMPTY ? 'isvalid' : ''" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_TEL)">
+                    <span class="valid" *ngIf="getMessage(MSG_TELEFONO) !== MSG_EMPTY">{{ getMessage(MSG_TELEFONO) }}</span>
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="col">Dirección:</div>
+                <div class="col">
+                    <input formControlName="direccion" class="form-control" type="text" name="" [ngClass]="getMessage(MSG_DIRECCION) !== MSG_EMPTY ? 'isvalid' : ''" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_ADDRESS)">
+                    <span class="valid" *ngIf="getMessage(MSG_DIRECCION) !== MSG_EMPTY">{{ getMessage(MSG_DIRECCION) }}</span>
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="col">Email:</div>
+                <div class="col">
+                    <input formControlName="email" class="form-control" type="text" name="" [ngClass]="getMessage(MSG_EMAIL) !== MSG_EMPTY ? 'isvalid' : ''" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_MAIL)">
+                    <span class="valid" *ngIf="getMessage(MSG_EMAIL) !== MSG_EMPTY">{{ getMessage(MSG_EMAIL) }}</span>
+                </div>
+            </div>
+
+            <div class="rowGroup">
+                <div class="form-check form-check-inline ">
+                    <input #menorEdad id="menorEdad" [checked]="isChecked" (change)="checkSelect(menorEdad.checked)" formControlName="menor" class="form-check-input cursorPointer" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                    <label class="form-check-label cursorPointer" for="inlineRadio1">Soy menor de edad </label>
+                </div>
+            </div>
+            <!-- Datos Padre -->
+            <div *ngIf="isChecked">
+                <div class="title">
+                    Datos del padre o representante legal
+                </div>
+                <div class="rowGroup columna">
+                    <div class="col">Nombre:</div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="" formControlName="nombreMenor" [ngClass]="getMessage(MSG_NOMBRE_MENOR) !== MSG_EMPTY ? 'isvalid' : ''" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+                        <span class="valid" *ngIf="getMessage(MSG_NOMBRE_MENOR) !== MSG_EMPTY">{{ getMessage(MSG_NOMBRE_MENOR) }}</span>
+                    </div>
+                </div>
+                <div class="rowGroup columna">
+                    <div class="col">Apellidos:</div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="" formControlName="apellidoMenor" [ngClass]="getMessage(MSG_APELLIDO_MENOR) !== MSG_EMPTY ? 'isvalid' : ''"  (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+                        <span class="valid" *ngIf="getMessage(MSG_APELLIDO_MENOR) !== MSG_EMPTY">{{ getMessage(MSG_APELLIDO_MENOR) }}</span>
+                    </div>
+                </div>
+                <div class="rowGroup columna">
+                    <div class="col">Teléfono:</div>
+                    <div class="col">
+                        <!-- <input class="form-control" type="text" name="" formControlName="telefonoMenor" [ngClass]="getMessage(MSG_TELEFONO_MENOR) != MSG_EMPTY ? 'isvalid' : ''"> -->
+                        <input class="form-control" type="text" name="" formControlName="telefonoMenor"  (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_TEL)">
+                        <!-- <span class="valid" *ngIf="getMessage(MSG_TELEFONO_MENOR) != MSG_EMPTY">{{ getMessage(MSG_TELEFONO_MENOR) }}</span> -->
+                    </div>
+                </div>
+                <div class="rowGroup columna">
+                    <div class="col">Dirección:</div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="" formControlName="direccionMenor" [ngClass]="getMessage(MSG_DIRECCION_MENOR) !== MSG_EMPTY ? 'isvalid' : ''"  (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_ADDRESS)">
+                        <span class="valid" *ngIf="getMessage(MSG_DIRECCION_MENOR) !== MSG_EMPTY">{{ getMessage(MSG_DIRECCION_MENOR) }}</span>
+                    </div>
+                </div>
+                <div class="rowGroup columna">
+                    <div class="col">E-mail:</div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="" formControlName="emailMenor" [ngClass]="getMessage(MSG_EMAIL_MENOR) !== MSG_EMPTY ? 'isvalid' : ''"  (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_MAIL)">
+                        <span class="valid" *ngIf="getMessage(MSG_EMAIL_MENOR) !== MSG_EMPTY">{{ getMessage(MSG_EMAIL_MENOR) }}</span>
+                    </div>
+                </div>
+                <div class="separador"></div>
+            </div>
+            <!-- END Datos Padre -->
+
+
+            <div class="rowGroup">
+                <div class="texto">
+                    En caso de menores de edad indicar Nombre, Domicilio, Teléfono y correo electrónico de uno de los padres o representantes del consumidor o apoderado.
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="twoCol onlyMovil">
+                    <div class="numero">
+                        <div class="text">
+                            Identificación del bien contratado:
+                        </div>
+                        <span class="valid" *ngIf="getMessage(MSG_BIEN_CONTRATADO) !== MSG_EMPTY">{{ getMessage(MSG_BIEN_CONTRATADO) }}</span>
+                    </div>
+                    <div class="numero dFlex">
+                        <div class="form-check  form-check-inline">
+                            <input class="form-check-input" formControlName="bienContratado" type="radio" value="S" name="bienContratado" id="ServRadio1">
+                            <label class="form-radio-label" for="ServRadio1">Servicio</label>
+                        </div>
+                        <div class="form-check  form-check-inline">
+                            <input class="form-check-input" formControlName="bienContratado" type="radio" value="P" name="bienContratado" id="ServRadio2">
+                            <label class="form-radio-label" for="ServRadio2">Producto</label>
+                        </div>
+                        <span class="valid" *ngIf="getMessage(MSG_BIEN_CONTRATADO) !== MSG_EMPTY">{{ getMessage(MSG_BIEN_CONTRATADO) }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="col">Descripción del servicio contratado:</div>
+                <div class="col">
+                    <input formControlName="descripcionBienContratado" class="form-control" type="text" name="" [ngClass]="getMessage(MSG_DESCRIPCION_BIEN_CONTRATADO) !== MSG_EMPTY ? 'isvalid' : ''">
+                    <span class="valid" *ngIf="getMessage(MSG_DESCRIPCION_BIEN_CONTRATADO) !== MSG_EMPTY">{{ getMessage(MSG_DESCRIPCION_BIEN_CONTRATADO) }}</span>
+
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="col">Monto reclamado:</div>
+                <div class="col">
+                    <input placeholder="00.00" formControlName="montoReclamado" class="form-control" type="text" name="" [ngClass]="getMessage(MSG_MONTO_RECLAMO) !== MSG_EMPTY ? 'isvalid' : ''"  (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NUMBER)">
+                    <span class="valid" *ngIf="getMessage(MSG_MONTO_RECLAMO) !== MSG_EMPTY">{{ getMessage(MSG_MONTO_RECLAMO) }}</span>
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="subTitle">
+                    Tipo de tu reclamo:
+                </div>
+                <span class="valid" *ngIf="getMessage(MSG_TIPO_RECLAMO) !== MSG_EMPTY">{{ getMessage(MSG_TIPO_RECLAMO) }}</span>
+                <div class="twoCol">
+                    <div class="numero">
+                        <div class="text">
+                            <div class="form-check  form-check-inline">
+                                <input class="form-check-input" formControlName="tipoReclamo" type="radio" value="R" name="tipoReclamo" id="reclamoRadio1">
+                                <label class="form-radio-label" for="reclamoRadio1">Reclamo</label>
+                            </div>
+                        </div>
+                        <div class="campo">
+                            Reclamo: Disconformidad relacionada a los productos o servicios.
+                        </div>
+                    </div>
+                    <div class="numero">
+                        <div class="text">
+                            <div class="form-check  form-check-inline">
+                                <input class="form-check-input" formControlName="tipoReclamo" value="Q" type="radio" name="tipoReclamo" id="reclamoRadio2">
+                                <label class="form-radio-label" for="reclamoRadio2">Queja</label>
+                            </div>
+                        </div>
+                        <div class="campo">
+                            Queja: Descontento respecto a la atención al público.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="col">Detalle del reclamo:</div>
+                <div class="col">
+                    <textarea formControlName="detalleReclamo" name="" id="" rows="2" [ngClass]="getMessage(MSG_DETALLE_RECLAMO) !== MSG_EMPTY ? 'isvalid' : ''"></textarea>
+                    <span class="valid" *ngIf="getMessage(MSG_DETALLE_RECLAMO) !== MSG_EMPTY">{{ getMessage(MSG_DETALLE_RECLAMO) }}</span>
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="col">Pedido:</div>
+                <div class="subtitle">(Pedido concreto del consumidor respecto al hecho que motiva el reclamo o queja)</div>
+                <div class="col">
+                    <textarea formControlName="pedido"
+                              name=""
+                              rows="2"
+                              [ngClass]="getMessage(MSG_PEDIDO) !== MSG_EMPTY ? 'isvalid' : ''"></textarea>
+                    <span class="valid" *ngIf="getMessage(MSG_PEDIDO) !== MSG_EMPTY">{{ getMessage(MSG_PEDIDO) }}</span>
+                </div>
+            </div>
+            <div class="rowGroup columna">
+                <div class="col">Observaciones:</div>
+                <div class="subtitle">Espacio reservado para acciones adoptadas por el proveedor</div>
+                <div class="col">
+                    <textarea formControlName="observaciones"
+                              name=""
+                              rows="6"
+                              [ngClass]="getMessage(MSG_OBSERVACIONES) !== MSG_EMPTY ? 'isvalid' : ''"></textarea>
+                    <span class="valid" *ngIf="getMessage(MSG_OBSERVACIONES) !== MSG_EMPTY">{{ getMessage(MSG_OBSERVACIONES) }}</span>
+                </div>
+            </div>
+            <div class="rowGroup mb-0">
+                <div class="form-check">
+                    <input formControlName="politica" class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option1">
+                    <label class="form-check-label" for="inlineRadio2">He leído y acepto la política de protección de datos personales
+                        <a href="politicas" target="_blank">enlace</a>
+                    </label>
+                </div>
+            </div>
+            <span class="valid" *ngIf="getMessage(MSG_POLITICA) !== MSG_EMPTY">{{ getMessage(MSG_POLITICA) }}</span>
+
+            <div class="rowGroup mt-4">
+                <button (click)="enviar()" class="btnEnviar">
+                    Enviar
+                </button>
+            </div>
+            <div class="rowGroup">
+                <div class="texto mTop">
+                    <p class="text-justify">
+                        * Declaro ser titular del servicio y acepto el contenido del presente formulario manifestando bajo
+                        declaración jurada la veracidad de los hechos descritos.
+                    </p>
+                    <p class="text-justify">
+                        * La formulaci&oacute;n del Reclamo no impide acudir a otras v&iacute;as de soluci&oacute;n de controversias ni es
+                        requisito previo para interponer una denuncia ante el <strong>INDECOPI</strong>
+                    </p>
+                    <p class="text-justify">
+                        * NMViajes deber&aacute; dar respuesta al reclamo en un plazo no mayor de 15 (quince) d&iacute;as h&aacute;biles
+                        improrrogables.
+                    </p>
+                    <p class="text-justify">
+                        * Le informamos que, para efectos de procesar adecuadamente su queja o reclamo, sus datos ser&aacute;n
+                        recopilados en nuestro banco de datos de clientes, correspondiente a la empresa de nuestro grupo
+                        que oper&oacute; su vuelo o le brind&oacute; el servicio materia de queja o reclamo. Sus datos personales
+                        ser&aacute;n tratados con confidencialidad y bajo medidas de seguridad, y se almacenar&aacute;n por el tiempo
+                        necesario para atenderle.
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

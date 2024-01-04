@@ -1,0 +1,289 @@
+@use '/src/scss/colors';
+
+.paragraph {
+	font-family: Montserrat;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: colors.$gris-700;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+section {
+	margin: 0;
+	width: 100%;
+}
+
+
+.content-btn-mobile {
+	display: none;
+}
+
+.content-btn-web {
+	width: 100%;
+}
+
+.container-footer {
+	max-width: 1440px !important;
+	width: 100%;
+    margin: 0 auto;
+}
+
+.footer {
+	background: white;
+	padding: 40px 96px;
+	&__section {
+		max-width: 1440px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+
+		&__logo {
+			max-width: 320px;
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+
+			&__header {
+				@extend .flex-column;
+				gap: 8px;
+
+				img {
+					height: 48px;
+				}
+
+				span {
+					@extend .paragraph;
+					width: fit-content;
+					&.red {
+						color: colors.$red-500;
+					}
+				}
+			}
+
+			&__body {
+				@extend .flex-column;
+				gap: 8px;
+
+				span {
+					@extend .paragraph;
+					display: block;
+					font-size: 12px;
+					width: fit-content;
+					&.bold {
+						font-weight: 600;
+					}
+				}
+			}
+
+			&__social {
+				@extend .flex-column;
+				gap: 8px;
+
+				@media (max-width: 1199px) {
+					display: flex;
+					justify-content: center;
+				}
+
+				span {
+					@extend .paragraph;
+					font-weight: 600;
+					color: colors.$gris-900;
+				}
+
+				&__icons {
+					display: flex;
+					gap: 24px;
+					justify-content: flex-start;
+					align-items: center;
+					flex-wrap: wrap;
+				}
+			}
+		}
+
+		&__links {
+			@extend .flex-column;
+			gap: 16px;
+
+			&.knowus{
+				max-width: 240px;
+			}
+
+			@media (max-width: 575px) {
+				gap: 10px;
+			}
+
+			&__header {
+				@extend .paragraph;
+				font-weight: 600;
+				color: colors.$gris-900;
+			}
+
+			&__body {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 12px;
+				width: 100%;
+
+				a {
+					@extend .paragraph;
+					text-decoration: none;
+					width: fit-content;
+					cursor: pointer;
+
+					&:hover {
+						color: colors.$red-500;
+					}
+				}
+
+				
+				@media (max-width: 576px) {
+					gap: 8px;
+					&.row-product{
+						grid-template-columns: 1fr 1fr;
+					}
+					a{
+						font-size: 12px;
+						line-height: 20px;
+					}
+				}
+
+				@media (max-width: 310px){
+					&.row-product{
+						grid-template-columns: 1fr;
+					}
+				}
+			}
+		}
+
+		&__contactus {
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+
+			&__info {
+				@extend .flex-column;
+				gap: 18px;
+
+				&__header {
+					@extend .paragraph;
+					font-weight: 600;
+					color: colors.$gris-900;
+				}
+
+				&__body {
+					@extend .flex-column;
+					gap: 12px;
+
+					&__item {
+						display: flex;
+						gap: 12px;
+						justify-content: flex-start;
+						align-items: center;
+
+						a,
+						span {
+							display: block;
+							text-decoration: none;
+							width: fit-content;
+							@extend .paragraph;
+							&.bold {
+								font-weight: 600;
+							}
+						}
+
+						a {
+							&:hover {
+								color: colors.$red-500;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: 1368px) {
+		padding: 40px 60px;
+	}
+
+	@media (max-width: 1199px) {
+		padding: 40px 24px;
+		.footer__section__logo__header img {
+			height: 40px;
+		}
+		.footer__section__logo__social__icons {
+			gap: 20px;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.footer__section__logo__social__icons {
+			gap: 12px;
+		}
+		.footer__section__logo__header img {
+			height: 33px;
+		}
+	}
+
+	@media (max-width: 575px) {
+		padding: 32px 5px;
+		.footer__section__logo__header {
+			gap: 22px;
+			justify-content: center;
+			align-items: center;
+			padding: 0;
+			padding-top: 24px;
+			img {
+				height: 38px;
+			}
+			span {
+				text-align: center;
+				font-size: 12px;
+				line-height: 20px;
+			}
+		}
+		.footer__section__contactus{
+			gap:32px;
+		}
+		.footer__section__logo__social__icons {
+			gap: 24px;
+		}
+		.footer__section__contactus__info__body__item span,a{
+			font-size: 12px;
+			line-height: 20px;
+		}
+		.footer__section__contactus__info__body__item img{
+			width: 16px;
+		}
+		.container-footer {
+			padding: 0 24px;
+		}
+		.content-header-footer {
+			margin: 0px;
+		}
+
+		.content-btn-mobile {
+			display: block;
+		}
+
+		.content-btn-web {
+			display: none;
+		}
+
+		.content-col {
+			padding-top: 20px;
+		}
+		.r_social {
+			display: none !important;
+		}
+	}
+}

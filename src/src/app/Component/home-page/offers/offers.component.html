@@ -1,0 +1,49 @@
+<div class="preloader show" *ngIf="isLoading">
+	<div class="loaderSpin"></div>
+</div>
+<section class="mt-0 position-relative">
+	<img class="img-fluid"
+	     src="https://firebasestorage.googleapis.com/v0/b/nm-viajes.appspot.com/o/ofertas%2Fbanner-ofertas.webp?alt=media&token=13604ba3-1f9c-451a-adc4-5ffd80823116"
+	     alt="Banner Ofertas"
+	     loading="eager">
+	<div class="container position-absolute end-0 bottom-0 start-0">
+		<div class="row">
+			<div class="col">
+				<h1 class="text-white mb-3 mb-md-4 mb-lg-5 inter-bold">
+					Ofertas
+				</h1>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="container">
+	<div class="row">
+		<div class="col">
+			<h4 class="inter-semi-bold mt-3 mt-lg-4">
+				Disfruta promociones en vuelos nacionales e internacionales y paquetes turísticos.
+			</h4>
+			<h4 class="inter-bold mt-4 mt-lg-5 mb-3 text-uppercase text-red">VUELOS INTERNACIONALES</h4>
+		</div>
+	</div>
+	<div class="row">
+		<app-cards-tile id="international"
+		                [list]="internationalFlights"
+		                (clickCard)="onClick($event, true)"></app-cards-tile>
+	</div>
+	<div class="row">
+		<div class="col">
+			<h4 class="inter-bold mt-4 mt-lg-5 mb-3 text-uppercase text-red">VUELOS NACIONALES</h4>
+		</div>
+	</div>
+	<div class="row">
+		<app-cards-tile id="national" [list]="nationalFlights" (clickCard)="onClick($event, true)"></app-cards-tile>
+	</div>
+	<div class="row">
+		<div class="col">
+			<h4 class="inter-bold mt-4 mt-lg-5 mb-3 text-uppercase text-red">PAQUETES TUR&Iacute;STICOS</h4>
+		</div>
+	</div>
+	<div class="row">
+		<app-cards-tile id="itineraries" [list]="itineraries" (clickCard)="onClick($event, false)"></app-cards-tile>
+	</div>
+</section>

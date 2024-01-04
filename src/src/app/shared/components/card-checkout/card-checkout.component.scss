@@ -1,0 +1,23 @@
+.container__card {
+  width: 100%;
+  border-radius: 12px;
+  border: 0px 1px 1px 1px;
+  box-shadow: 0px 1px 2px -1px #1018281a;
+  box-shadow: 0px 1px 3px 0px #1018281a;
+  background: white;
+  &.padding{
+    padding: 24px;
+  }
+
+  @media (max-width: 950px){
+    &.padding{
+      padding: 24px 16px;
+    }
+  }
+  @media (max-width: 768px){
+    &.padding{
+      padding: 18px 14px;
+    }
+  }
+}
+

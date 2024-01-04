@@ -1,0 +1,96 @@
+@import "/src/scss/mixin";
+// .carousel-item {
+//     @media (min-width: 768px) {
+//         display: block;
+//         margin-right: 0;
+//         transition: none;
+//     }
+// }
+// .carousel-inner {
+//     @media (min-width: 768px) {
+//         width: auto !important;
+//     }
+// }
+// .carousel-indicators button {
+//     border: 1px solid white;
+//     background: red;
+//     border-radius: 50%;
+//     width: 10px;
+//     height: 10px;
+//     &.active {
+//         background: white;
+//     }
+// }
+:host ::ng-deep span.mat-date-range-input-separator {
+    display: none;
+    margin: 0 !important;
+    padding: 0;
+}
+
+:host ::ng-deep input {
+    border: 0.5px solid rgba(185, 188, 191, 1);
+    padding: 10px;
+    border-radius: 3px;
+    @media (max-width: 768px) {
+        margin-bottom: 15px;
+    }
+    &::placeholder {
+        color: rgba(185, 188, 191, 1);
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.25px;
+    }
+}
+
+:host ::ng-deep .mat-date-range-input-container {
+    align-items: initial;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+    @media (max-width: 768px) {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .mat-date-range-input-start-wrapper,
+    .mat-date-range-input-end-wrapper {
+        flex: 1 0 0%;
+    }
+    .mat-date-range-input-start-wrapper input {
+        border-radius: 3px 0 0 3px !important;
+        border-right: 0;
+    }
+    .mat-date-range-input-end-wrapper input {
+        border-radius: 0 3px 3px 0 !important;
+    }
+}
+
+h2 {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 36px;
+}
+
+.text-justify {
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: justify;
+    letter-spacing: 0.1px;
+}
+
+button {
+    font-family: "Montserrat";
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+}

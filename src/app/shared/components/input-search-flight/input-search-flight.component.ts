@@ -5,6 +5,8 @@ import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ICardAutocomplete } from '../card-autocomplete/card-autocomplete.interface';
 import { IGeoTree } from '../filter-tabs/tab-vuelos/tab-vuelos.interfaces';
+import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
+import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { GlobalComponent } from '../../global';
 
 @Component({

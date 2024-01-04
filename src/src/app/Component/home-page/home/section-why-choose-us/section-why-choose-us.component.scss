@@ -1,0 +1,153 @@
+@use '/src/scss/colors';
+.container__chooseus{
+	padding: 40px 96px;
+	background: colors.$gris-50;
+	width: 100%;
+	&__section {
+		max-width: 1440px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap:24px;
+        &__title{
+            h3{
+                font-family: Inter;
+                font-size: 32px;
+                font-weight: 700;
+                line-height: 40px;
+                letter-spacing: -0.02em;
+                text-align: center;
+            }
+            span{
+                font-family: Montserrat;
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 28px;
+                letter-spacing: 0em;
+                text-align: center;
+                color:colors.$gris-800;
+                display: block;
+            }
+        }
+        &__options{
+            display: flex;
+            gap:48px;
+            align-items: flex-start;
+            justify-content: center;
+            &__option{
+                padding:24px 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;    
+                text-align: center;
+                align-items: center;
+                gap:16px;
+                max-width: 384px;
+                img{
+                    width: 96px;
+                }
+                &__info{
+                    display: flex;
+                    flex-direction: column;
+                    gap:16px;
+                    h6{
+                        font-family: Open Sans;
+                        font-size: 20px;
+                        font-weight: 700;
+                        line-height: 28px;
+                        letter-spacing: -0.02em;
+                        text-align: center;
+                    }
+                    span{
+                        font-family: Montserrat;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                        letter-spacing: 0em;
+                        text-align: center;
+                        color:colors.$neutral-500;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 1368px) {
+		padding: 24px 60px;
+	}
+
+	@media (max-width: 1199px) {
+		padding: 32px 24px;
+        &__section{
+			gap: 24px;
+		}
+        &__section__title h3 {
+			font-size: 28px;
+			line-height: 36px;
+		}
+		&__section__title span {
+			font-size: 16px;
+			line-height: 24px;
+		}
+        &__section__options{
+            flex-direction: column;
+            gap: 0;
+            margin: 0 auto;
+            padding: 0 24px;
+            &__option{
+                max-width: fit-content;
+                flex-direction: row;
+                padding: 12px 0;
+                gap: 32px;
+                &__info{
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    gap: 2px;
+                    span{
+                        font-size: 14px;
+                        line-height: 20px;
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 575px){
+        padding: 24px;
+		&__section__title h3 {
+			font-size: 24px;
+			line-height: 32px;
+            padding: 0 8px;
+		}
+		&__section__title span {
+			font-size: 14px;
+			line-height: 20px;
+		}
+        &__section__options{
+            padding: 0 10px;
+        }
+        &__section__options__option{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 0;
+            img{
+                width: 64px;
+            }
+            &__info{
+                align-items: center;
+                h6{
+                    font-size: 18px;
+                    padding: 0 20px;
+                }
+                span{
+                    text-align: center;
+                    font-size: 12px;
+                    line-height: 20px;
+                }
+            }
+        }
+    }
+}

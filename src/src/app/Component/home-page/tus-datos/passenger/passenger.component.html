@@ -1,0 +1,101 @@
+<div class="row mt-3 mt-lg-4">
+	<div class="col align-self-center">
+		<h6 class="inter-semi-bold" [class.mb-0]="indexToDisplay !== 0">
+			<img src="assets/svg/people-red2.svg" alt="Pasajero" class="me-2">Pasajero #{{indexToDisplay + 1}}
+		</h6>
+		<p class="inter-semi-bold small" *ngIf="indexToDisplay === 0">Este pasajero es el &uacute;nico que recibe el correo
+			de
+			confirmaci&oacute;n</p>
+	</div>
+	<div class="col-auto">
+		<button type="button"
+		        class="btn-agencias activa inter-medium fs-6 w-auto py-2 px-3"
+		        (click)="emmitAddNewPassenger()"
+		        *ngIf="indexToDisplay === 0">
+			Agregar<img src="assets/svg/people-white.svg" alt="Agregar" class="ms-2">
+		</button>
+		<button type="button"
+		        class="btn-agencias activa inter-medium fs-6 w-auto py-2 px-3"
+		        (click)="emitRemovePassenger()"
+		        *ngIf="indexToDisplay !== 0">
+			Eliminar<img src="assets/svg/remove-circle.svg" alt="Eliminar" class="ms-2">
+		</button>
+	</div>
+</div>
+<form novalidate class="row g-3" [formGroup]="form" [ngClass]="{'pt-2 pt-lg-3': indexToDisplay !== 0}">
+	<div class="col-12 col-md-6">
+		<select class="form-select"
+		        formControlName="docType"
+		        [disabled]="isSearchLoading"
+		        [class.is-invalid]="docType.invalid && (docType.touched || showErrors || showDocErrors)"
+		        (change)="onDocTypeChange($event)">
+			<option value="" disabled>Tipo de documento</option>
+			<option value="CE">C. extranjer&iacute;a</option>
+			<option value="DNI">DNI</option>
+			<option value="PAS">Pasaporte</option>
+		</select>
+	</div>
+	<div class="col">
+		<input class="form-control"
+		       formControlName="docNumber"
+		       placeholder="N° de documento"
+		       [type]="docInputType"
+		       [maxLength]="docInputMaxLength"
+		       [disabled]="isSearchLoading"
+		       [class.is-invalid]="docNumber.invalid && (docNumber.touched || showErrors || showDocErrors)">
+	</div>
+	<div class="col-auto">
+		<button type="button"
+		        class="btn-agencias activa w-auto p-2"
+		        [disabled]="isSearchLoading"
+		        (click)="onSearchByDocument()">
+			<img src="assets/svg/search.svg" alt="Buscar">
+		</button>
+	</div>
+	<div class="col-12 col-md-6 mt-lg-4">
+		<input type="text"
+		       class="form-control"
+		       formControlName="firstName"
+		       placeholder="Nombres"
+		       [class.is-invalid]="firstName.invalid && (firstName.touched || showErrors)">
+	</div>
+	<div class="col-12 col-md-6 mt-lg-4">
+		<input type="text"
+		       class="form-control"
+		       formControlName="lastName"
+		       placeholder="Apellido paterno"
+		       [class.is-invalid]="lastName.invalid && (lastName.touched || showErrors)">
+	</div>
+	<div class="col-12 col-md-6">
+		<input type="text"
+		       class="form-control"
+		       formControlName="mLastName"
+		       placeholder="Apellido materno"
+		       [class.is-invalid]="mLastName.invalid && (mLastName.touched || showErrors)">
+	</div>
+	<div class="col-12 col-md-6">
+		<input #dateInput
+		       type="tel"
+		       maxlength="10"
+		       class="form-control"
+		       formControlName="birthDate"
+		       placeholder="Fecha de nacimiento (DD/MM/AAAA)"
+		       [class.is-invalid]="birthDate.invalid && (birthDate.touched || showErrors)"
+		       (input)="formatDate()">
+	</div>
+	<div class="col-12 col-md-6">
+		<input type="email"
+		       class="form-control"
+		       formControlName="email"
+		       placeholder="Email"
+		       [class.is-invalid]="email.invalid && (email.touched || showErrors)">
+	</div>
+	<div class="col-12 col-md-6">
+		<input type="tel"
+		       class="form-control"
+		       formControlName="phone"
+		       maxlength="15"
+		       placeholder="Tel&eacute;fono"
+		       [class.is-invalid]="phone.invalid && (phone.touched || showErrors)">
+	</div>
+</form>

@@ -1,0 +1,46 @@
+.menu-btn-1 {
+	width: 22px;
+}
+
+.menu-btn-1 span,
+.menu-btn-1 span::before,
+.menu-btn-1 span::after {
+	background: #242A2C;
+	border-radius: 3px;
+	content: '';
+	position: absolute;
+	width: 22px;
+	height: 2.5px;
+	-webkit-transition: 0.3s ease-in-out;
+	-moz-transition: 0.3s ease-in-out;
+	-o-transition: 0.3s ease-in-out;
+	transition: 0.3s ease-in-out;
+}
+
+.menu-btn-1 span::before {
+	margin-top: -6.5px;
+}
+
+.menu-btn-1 span::after {
+	margin-top: 6px;
+}
+
+.menu-btn-1.active span {
+	background: transparent;
+}
+
+.menu-btn-1.active span::before {
+	margin-top: 0;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.menu-btn-1.active span::after {
+	margin-top: 0;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}

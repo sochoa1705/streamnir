@@ -1,0 +1,82 @@
+@use '/src/scss/colors';
+section{
+    width: 100%;
+    background: white;
+    margin: 0;
+    .line__divider{
+        margin: 0 auto;
+        padding: 0px 48px;
+        max-width: 1590px;
+        hr{
+            width: 100%;
+            margin: 0;
+            border-top: 1px solid colors.$gris-600;
+        }
+        @media(max-width:1199px){
+            padding: 0px 24px;
+        }
+    }
+}
+.container__footer{
+    padding: 40px 96px;
+    width: 100%;
+	article{
+        max-width: 1440px;
+		margin: 0 auto;
+        display: flex;
+		justify-content: space-between;
+		align-items: center;
+    }
+
+    &__col1{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap:32px;
+        a img{
+            height: 60px;
+            width: 140px;
+        }
+    }
+
+    &__col2{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap:32px;
+    }
+    @media (max-width: 1368px) {
+		padding: 40px 60px;
+	}
+    @media(max-width:1199px){
+        padding: 40px 24px;
+        article{
+            flex-direction: column;
+            gap: 16px;
+        }
+        &__col2{
+            justify-content: space-around;
+            width: 100%;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+    }
+
+    @media(max-width:575px){
+        padding: 24px;
+        &__col1{
+            justify-content: center;
+            a img{
+                height: 48px;
+                width: 112px;
+            }
+        }
+        &__col2{
+           justify-content: center;
+           gap:0px;
+           img{
+             transform: scale(0.7);
+           }
+        }
+    }
+}

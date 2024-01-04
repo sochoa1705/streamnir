@@ -1,0 +1,72 @@
+
+<ng-container *ngIf="!loading">
+
+    <ng-container *ngIf="!socialNetwork">
+
+        <label  *ngIf="!archivo64  && isErrorImagenUrl" class="perfilCicle pointer" for="file-upload">
+            {{name | slice:0:1}}
+                <div class="blueIcon">
+                    <ng-container >
+                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M15.5211 4.4353H13.1781L11.8255 2.95703H6.65158V5.17442H4.43419V7.39181H2.2168V14.7831C2.2168 15.5962 2.88201 16.2614 3.69507 16.2614H15.5211C16.3342 16.2614 16.9994 15.5962 16.9994 14.7831V5.91354C16.9994 5.10052 16.3342 4.4353 15.5211 4.4353ZM9.60809 14.044C7.56809 14.044 5.91242 12.3883 5.91242 10.3483C5.91242 8.30832 7.56809 6.65269 9.60809 6.65269C11.6481 6.65269 13.3037 8.30836 13.3037 10.3484C13.3037 12.3884 11.6481 14.044 9.60809 14.044Z"
+                                fill="white" />
+                            <path
+                                d="M2.21739 6.65231H3.69566V4.43492H5.91305V2.95665H3.69566V0.739258H2.21739V2.95665H0V4.43492H2.21739V6.65231Z"
+                                fill="white" />
+                            <path
+                                d="M9.60839 7.98242C8.30013 7.98242 7.24316 9.03939 7.24316 10.3476C7.24316 11.6559 8.30013 12.7129 9.60839 12.7129C10.9167 12.7129 11.9736 11.6559 11.9736 10.3476C11.9736 9.03939 10.9167 7.98242 9.60839 7.98242Z"
+                                fill="white" />
+                        </svg>
+                    </ng-container>
+                </div>
+        </label>
+        
+    
+        <label *ngIf="archivo64" class="pointer"  for="file-upload">
+            <img style="width: 90px; height: auto;" [src]="archivo64" alt="Subir foto de perfil" loading="lazy">
+        </label>
+
+        <input id="file-upload" (change)="getFile($event)" type="file" name="myInputFile" style="display:none;" />
+    
+    </ng-container>
+
+    <ng-container *ngIf="socialNetwork">
+        <label (click)="showNotification()" *ngIf="imagenUrl">
+            <img class="pointer"
+                 style="width: 90px; height: auto;"
+                 [src]="imagenUrl"
+                 alt="Foto de perfil"
+                 loading="lazy">
+        </label>
+    </ng-container>
+
+
+</ng-container>
+
+
+
+<mat-spinner *ngIf="loading" class="green-progress"></mat-spinner>
+
+
+
+
+
+
+
+<!-- <div class="perfilCicle">
+    {{userStorage.name | slice:0:1}}
+    <div class="blueIcon">
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M15.5211 4.4353H13.1781L11.8255 2.95703H6.65158V5.17442H4.43419V7.39181H2.2168V14.7831C2.2168 15.5962 2.88201 16.2614 3.69507 16.2614H15.5211C16.3342 16.2614 16.9994 15.5962 16.9994 14.7831V5.91354C16.9994 5.10052 16.3342 4.4353 15.5211 4.4353ZM9.60809 14.044C7.56809 14.044 5.91242 12.3883 5.91242 10.3483C5.91242 8.30832 7.56809 6.65269 9.60809 6.65269C11.6481 6.65269 13.3037 8.30836 13.3037 10.3484C13.3037 12.3884 11.6481 14.044 9.60809 14.044Z"
+                fill="white" />
+            <path
+                d="M2.21739 6.65231H3.69566V4.43492H5.91305V2.95665H3.69566V0.739258H2.21739V2.95665H0V4.43492H2.21739V6.65231Z"
+                fill="white" />
+            <path
+                d="M9.60839 7.98242C8.30013 7.98242 7.24316 9.03939 7.24316 10.3476C7.24316 11.6559 8.30013 12.7129 9.60839 12.7129C10.9167 12.7129 11.9736 11.6559 11.9736 10.3476C11.9736 9.03939 10.9167 7.98242 9.60839 7.98242Z"
+                fill="white" />
+        </svg>
+    </div>
+</div> -->

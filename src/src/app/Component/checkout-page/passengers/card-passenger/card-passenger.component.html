@@ -1,0 +1,227 @@
+<app-card-checkout [padding]="false">
+	<div class="card__passenger" #cardPassenger>
+		<div class="card__passenger__header" [class.check]="!active">
+			<div class="card__passenger__header__title">
+				<img alt="img_passenger" src="./assets/svg/passenger.svg" />
+				<span>{{ type == 'ADT' ? 'Adulto ' : type == 'CNN' ? ' Menor' : ' Infante' }} {{ index }}</span>
+				<img alt="img_passenger" *ngIf="isSaveChanges && validForm" src="./assets/svg/checkSuccess.svg" />
+			</div>
+			<img
+				alt="img_passenger"
+				class="arrow"
+				[src]="active ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'"
+				(click)="active = !active"
+			/>
+		</div>
+		<form [formGroup]="formGroup" [hidden]="!active">
+			<div class="card__passenger__body">
+				<div class="row gy-3">
+					<div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+						<div class="row gy-3">
+							<div class="col-md-6">
+								<section>
+									<app-select
+										[label]="'Tipo de documento'"
+										[placeholder]="'Seleccionar'"
+										[name]="'documentType'"
+										[isRequired]="true"
+										[default]="documentTypeField.value"
+										[listItems]="[
+											{
+												value: '0',
+												name: 'DNI'
+											},
+											{
+												value: '1',
+												name: 'CE'
+											},
+											{
+												value: '2',
+												name: 'PAS'
+											}
+										]"
+										[labelError]="
+											documentTypeField.touched && documentTypeField!.hasError('required') ? 'Tipo es obligatorio' : ''
+										"
+										(setErrorSelect)="documentTypeField.markAsTouched()"
+									></app-select>
+								</section>
+							</div>
+							<div class="col-md-6">
+								<section>
+									<app-input
+										[label]="'N° de documento'"
+										[placeholder]="'Ingresar número'"
+										[name]="'documentNumber'"
+										[isRequired]="true"
+										[isOnlyText]="false"
+										[maxLenght]="documentTypeField.value == 0 || documentTypeField.value == '0' ? 8 : 12"
+										[isOnlyNumber]="documentTypeField.value == 0 || documentTypeField.value == '0' ? true : false"
+										[class]="documentNumberField.touched && documentNumberField!.invalid ? 'error' : ''"
+										[labelError]="
+											documentNumberField.touched && documentNumberField!.hasError('required')
+												? 'Número es obligatorio'
+												: documentNumberField.touched && documentNumberField!.hasError('pattern')
+												? 'Número inválido'
+												: ''
+										"
+									></app-input>
+								</section>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 d-none d-xl-block"></div>
+
+					<div class="col-md-12 col-lg-6">
+						<section>
+							<app-input
+								[label]="'Nombres'"
+								[placeholder]="'Ingresar nombres'"
+								[name]="'name'"
+								[isRequired]="true"
+								[isOnlyText]="true"
+								[class]="nameField.touched && nameField!.invalid ? 'error' : ''"
+								[labelError]="
+									nameField.touched && nameField!.hasError('required')
+										? 'Nombre es obligatorio'
+										: nameField.touched && nameField!.hasError('maxlength')
+										? 'Debe tener max. 50 caracteres'
+										: nameField.touched && nameField!.hasError('whitespace')
+										? 'Nombre no válido'
+										: ''
+								"
+							></app-input>
+						</section>
+					</div>
+					<div class="col-md-12 col-lg-6">
+						<section>
+							<app-input
+								[label]="'Apellidos'"
+								[placeholder]="'Ingresar apellidos'"
+								[name]="'lastName'"
+								[isOnlyText]="true"
+								[isRequired]="true"
+								[class]="lastNameField.touched && lastNameField!.invalid ? 'error' : ''"
+								[labelError]="
+									lastNameField.touched && lastNameField!.hasError('required')
+										? 'Apellidos es obligatorio'
+										: lastNameField.touched && lastNameField!.hasError('maxlength')
+										? 'Debe tener max. 50 caracteres'
+										: lastNameField.touched && lastNameField!.hasError('whitespace')
+										? 'Apellidos no válido'
+										: ''
+								"
+							></app-input>
+						</section>
+					</div>
+
+					<div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+						<div class="card__passenger__body__group">
+							<span>Fecha de nacimiento <span class="required">*</span></span>
+							<div class="card__passenger__body__group__selects">
+								<app-select
+									[placeholder]="'Día'"
+									[isRequired]="true"
+									[listItems]="daysFilter"
+									[default]="dayField.value"
+									[name]="'day'"
+									[value]="dayField.value"
+									[labelError]="dayField.touched && dayField!.hasError('required') ? 'Dia inválido' : ''"
+									(setErrorSelect)="dayField.markAsTouched()"
+									#inputDay
+								></app-select>
+								<app-select
+									[placeholder]="'Mes'"
+									[listItems]="monthsFilter"
+									[isRequired]="true"
+									[name]="'month'"
+									[default]="monthField.value"
+									[labelError]="monthField.touched && monthField!.hasError('required') ? 'Mes inválido' : ''"
+									[value]="monthField.value"
+									(setErrorSelect)="monthField.markAsTouched()"
+									[isMonth]="true"
+								></app-select>
+								<app-select
+									[placeholder]="'Año'"
+									[listItems]="arrayYears"
+									[name]="'year'"
+									[isRequired]="true"
+									[value]="yearField.value"
+									[default]="yearField.value"
+									[labelError]="yearField.touched && yearField!.hasError('required') ? 'Año inválido' : ''"
+									(setErrorSelect)="yearField.markAsTouched()"
+								></app-select>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+						<section>
+							<app-select
+								[label]="'Nacionalidad'"
+								[placeholder]="'Seleccionar'"
+								[isRequired]="true"
+								[listItems]="contryList"
+								[name]="'nationality'"
+								[default]="nationalityField.value"
+								[isSearch]="true"
+								[isNationality]="true"
+								[labelError]="
+									nationalityField.touched && nationalityField!.hasError('required')
+										? 'Nacionalidad es obligatorio'
+										: ''
+								"
+								(setErrorSelect)="nationalityField.markAsTouched()"
+							></app-select>
+						</section>
+					</div>
+
+					<div class="col-xl-6 col-lg-12 col-sm-12">
+						<section>
+							<app-select
+								[label]="'Género'"
+								[placeholder]="'Seleccionar'"
+								[isRequired]="true"
+								[name]="'gender'"
+								[listItems]="[
+									{
+										value: 'M',
+										name: 'Masculino'
+									},
+									{
+										value: 'F',
+										name: 'Femenino'
+									}
+								]"
+								[default]="genderField.value"
+								[labelError]="genderField.touched && genderField!.hasError('required') ? 'Género es obligatorio' : ''"
+								(setErrorSelect)="genderField.markAsTouched()"
+							></app-select>
+						</section>
+					</div>
+				</div>
+				<div class="row card__passenger__body__mobile">
+					<div class="col-md-12 col-sm-12">
+						<section>
+							<app-button
+								[text]="'Guardar'"
+								[isMobile]="true"
+								[w100]="true"
+								[color]="'outline-secondary'"
+								(click)="clickButtonSave()"
+							></app-button>
+						</section>
+					</div>
+				</div>
+				<div class="card__passenger__body__actions">
+					<app-button
+						[text]="'Guardar'"
+						[isMobile]="true"
+						[color]="'outline-secondary'"
+						(click)="clickButtonSave()"
+					></app-button>
+				</div>
+			</div>
+		</form>
+	</div>
+</app-card-checkout>

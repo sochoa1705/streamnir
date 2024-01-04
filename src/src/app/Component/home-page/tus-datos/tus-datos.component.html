@@ -1,0 +1,95 @@
+<section class="mt-0 principal-banner">
+	<img class="img-fluid" [src]="banner?.PathImage" alt="Banner Tus Datos" loading="eager">
+</section>
+<section class="container">
+	<form novalidate class="row" [formGroup]="form" (ngSubmit)="onSubmit()">
+		<div class="col-12 col-lg-6">
+			<h4 class="inter-bold mt-3 mt-lg-4">Formulario Pre-Registro</h4>
+			<ng-container #passengersContainer></ng-container>
+			<hr class="my-4 my-lg-5">
+			<div class="row gy-3">
+				<div class="col-12">
+					<select class="form-select"
+					        formControlName="medium"
+					        [class.is-invalid]="medium.invalid && (medium.touched || errorsDisplayed)">
+						<option value="" disabled>¿A trav&eacute;s de qu&eacute; medio te enteraste del evento?</option>
+						<option value="1">Correo electr&oacute;nico</option>
+						<option value="2">Facebook</option>
+						<option value="3">Instagram</option>
+						<option value="4">Pantallas en tiendas</option>
+						<option value="5">Otro</option>
+					</select>
+				</div>
+				<div class="col-12">
+					<mat-checkbox formControlName="privacyPolicy">
+						<span class="x-small fw-normal text-wrap">
+							He le&iacute;do y acepto la pol&iacute;tica de protecci&oacute;n de datos personales.
+							<a href="https://www.nmviajes.com/politicas" target="_blank" class="x-small">
+								Leer Pol&iacute;tica de Privacidad.
+							</a>
+						</span>
+					</mat-checkbox>
+					<p class="text-danger small" *ngIf="privacyPolicy.invalid && errorsDisplayed">
+						Debes aceptar las Pol&iacute;ticas de Privacidad
+					</p>
+				</div>
+				<div class="col-12">
+					<mat-checkbox formControlName="dataPolicy">
+						<span class="x-small fw-normal text-wrap">
+							Acepto el uso de mis datos personales para recibir comunicaciones sobre ofertas de nmviajes.
+						</span>
+					</mat-checkbox>
+					<p class="text-danger small" *ngIf="dataPolicy.invalid && errorsDisplayed">
+						Debes aceptar el tratamiento de tus datos personales.
+					</p>
+				</div>
+				<div class="col-12">
+					<p class="x-small fw-normal">
+						Los datos ingresados son correctos, cualquier error u omisi&oacute;n queda bajo mi responsabilidad. Adem&aacute;s,
+						confirmo haber le&iacute;do las RECOMENDACIONES para el evento.
+					</p>
+				</div>
+				<div class="col-12 mt-4">
+					<button type="submit" class="btn-agencias activa inter-semi-bold fs-6 w-auto py-2 px-5" style="height: 45px">
+						Enviar
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card text-center shadow-none mt-3 mt-lg-4 ms-lg-4 ms-xl-5">
+				<div class="card-header">
+					<h5 class="inter-bold mt-3 mt-lg-4">
+						<img src="assets/svg/idea.svg" alt="Recomendaci&oacute;n" class="me-2" style="height: 30px;">
+						Recomendaciones importantes
+					</h5>
+				</div>
+				<div class="card-body">
+					<ul class="card-text text-start mx-2 mx-lg-3 mx-xl-4 small">
+						<li class="mb-2">
+							<p class="d-inline">Completar toda la informaci&oacute;n de las personas que viajan. Los datos deben ser
+								exactos a como figuran en sus pasaportes para viaje internacional o DNI para viaje nacional. De esta
+								manera, la atención ser&aacute; m&aacute;s fluida.</p>
+						</li>
+						<li class="mb-2">
+							<p class="d-inline">Luego de completar los datos, recibir&aacute; un correo con su c&oacute;digo de
+								inscripci&oacute;n que consolida toda la informaci&oacute;n necesaria para sus reservas y deber&aacute;
+								ser entregado al momento de su atenci&oacute;n.</p>
+						</li>
+						<li class="mb-2">
+							<p class="d-inline">Revisar las condiciones legales de las ofertas que estamos ofreciendo.</p>
+						</li>
+						<li class="mb-2">
+							<p class="d-inline">La atenci&oacute;n preferencial aplica s&oacute;lo para el cliente que realice la
+								compra que cumplan las condiciones. La cola preferencial inicia dentro del recinto.</p>
+						</li>
+						<li>
+							<p class="d-inline">Este pre registro no garantiza ning&uacute;n cupo de paquete o boleto en el
+								evento.</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>

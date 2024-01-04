@@ -1,0 +1,27 @@
+.title {
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.text-justify {
+    text-align: justify;
+    font-size: 14px;
+}
+h2 {
+    font-family:Open Sans !important;
+}
+@media (max-width: 640px) {
+    .text-justify {
+        font-size: 12px;
+    }
+    h2 {
+        font-size: 14px !important;
+    }
+    .py-5 {
+        padding-top: 1rem !important;
+        padding-bottom: 0rem !important;
+    }
+    .vidthMobile {
+        width: 100%;
+    }
+}
