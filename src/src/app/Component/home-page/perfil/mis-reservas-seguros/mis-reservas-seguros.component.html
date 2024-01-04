@@ -1,0 +1,48 @@
+<!-- Mis Reservas -->
+<div class="viewDocument">
+  <div class="personalDocument">
+    <div class="headerPortlet">
+      <div class="titleBoxRight">Mis Seguros</div>
+      <div class="subtitleBoxRight">
+        A continuación, te listamos todas los vuelos asociadas a tu correo:
+        {{ userStorage.email }}
+      </div>
+    </div>
+    <form class="content mh-100">
+      <div class="rowContent gridVuelo">
+        <div class="rowVuelo" *ngFor="let item of bookings">
+          <div class="colVuelo">
+            <img src="./assets/Avion2.svg" alt="" />
+          </div>
+          <div class="colVuelo flexCol">
+            <div class="Labelseguro">{{item.plan}}</div>
+            <!-- <div class="Descrip">Travel Ace: Plan Master</div> -->
+            <div class="msgLabel success">({{!item.estado_Reserva ? 'No encontrado' : item.estado_Reserva}})</div>
+          </div>
+          <div class="colVuelo fullAuto">
+            <img src="./assets/arrow-inf.svg" alt="" /> {{item.fec_Salida}}
+          </div>
+          <div class="colVuelo fullAuto">
+            <img src="./assets/arrow-sup.svg" alt="" /> {{item.fec_Llegada}}
+          </div>
+          <div class="colVuelo">
+            <div
+              class="btn primary"
+              (click)="openDetailBooking(item)"
+            >
+              Detalles
+            </div>
+          </div>
+        </div>
+        <div
+          class="alert alert-warning"
+          role="alert"
+          *ngIf="bookings.length == 0"
+        >
+          Aún no cuenta con reservas.
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- END Mis Reservas -->

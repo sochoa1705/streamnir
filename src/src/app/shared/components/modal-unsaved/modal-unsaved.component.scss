@@ -1,0 +1,83 @@
+@use '/src/scss/colors';
+
+.modal__cancel {
+	padding: 24px;
+	&__header {
+		display: flex;
+		justify-content: flex-end;
+		img {
+			cursor: pointer;
+		}
+	}
+
+	h5 {
+		font-family: Open Sans;
+		font-size: 24px;
+		font-weight: 600;
+		line-height: 32px;
+		letter-spacing: -0.02em;
+		text-align: center;
+		margin-bottom: 16px;
+        color:colors.$neutral-900;
+	}
+
+	&__body {
+		padding: 16px 27px;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+		span {
+			font-family: Montserrat;
+			font-size: 18px;
+			font-weight: 400;
+			line-height: 28px;
+			letter-spacing: 0em;
+			text-align: center;
+			color: colors.$neutral-900;
+            display: block;
+		}
+		&__actions {
+			display: grid;
+			gap: 30px;
+			grid-template-columns: 1fr 1fr;
+            width: 100%;
+		}
+	}
+    section{
+        margin: 0;
+    }
+
+	@media (min-width: 1199px){
+		min-width: 500px;
+		margin-left: -20px;
+		border-radius: 12px;
+		background: white;
+		&.isHome{
+			min-width: 590px;
+			margin-left: -20px;
+		}
+	}
+
+	@media (max-width: 578px){
+		padding: 20px;
+		h5{
+			font-size: 18px;
+			line-height: 24px;
+			margin: 0;
+		}
+		&__body{
+			padding: 10px;
+		}
+		&__body span{
+			font-size: 14px;
+			line-height: 20px;
+		}
+		&__body__actions{
+			grid-template-columns: 1fr;
+			gap:8px;
+		}
+	}
+
+}
+

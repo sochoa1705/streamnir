@@ -1,0 +1,44 @@
+@import './variables';
+@mixin itemCard($fw, $fs, $lh, $ls, $color: #4b4b4b) {
+    font-weight: $fw;
+    font-size: $fs;
+    line-height: $lh;
+    letter-spacing: $ls;
+    @if $color !=#4b4b4b {
+        color: $color;
+    }
+}
+
+
+/** Media Queries **/
+
+@mixin telefono {
+    @media (min-width: $telefono) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: $tablet) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: $desktop) {
+        @content;
+    }
+}
+
+@mixin desktopXL {
+    @media (min-width: $desktopxl) {
+        @content;
+    }
+}
+
+@mixin spriteImg($width, $height, $posV, $posH, $ulrImg) {
+    width: $width;
+    height: $height;
+    background: transparent url($ulrImg);
+    background-position: $posV $posH;
+}

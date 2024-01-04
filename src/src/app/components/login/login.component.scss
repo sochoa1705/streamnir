@@ -1,0 +1,168 @@
+.socialMedia {
+	width: 100%;
+	display: flex;
+	font-family: Open Sans, sans-serif;
+	font-weight: bold;
+	font-size: 1em;
+	line-height: 21px;
+	letter-spacing: 0.15px;
+	color: #ffffff;
+
+	.btnGoogle {
+		width: 100%;
+		height: 47px;
+		border-radius: 5px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		background: #518ef8;
+
+		img {
+			width: 25.19px;
+			height: 25.19px;
+			margin-right: 12px;
+		}
+	}
+}
+
+hr {
+	border: 1px solid #e4e5e7;
+}
+
+.line {
+	width: 40%;
+	height: 1px;
+}
+
+.textConecta {
+	font-family: Montserrat, sans-serif;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 18px;
+	letter-spacing: 0.1px;
+	color: #4b4b4b;
+}
+
+::ng-deep.mat-tab-label {
+	width: 50%;
+}
+
+.modal-header {
+	p {
+		font-size: 14px;
+	}
+}
+
+.modal-dialog {
+	width: 490px;
+	@media (max-width: 640px) {
+		width: calc(100% - 15px);
+	}
+}
+
+.modal-body {
+	.elementRow {
+		display: flex;
+		position: relative;
+
+		&.error {
+			flex-direction: column;
+
+			.form-control {
+				margin-bottom: 0px !important;
+				border: 0.5px solid #f44336;
+			}
+
+			.msgError {
+				display: flex;
+			}
+		}
+
+		.msgError {
+			display: none;
+			margin-left: 15px;
+			//font-family: Montserrat;
+			font-weight: 300;
+			font-size: 11px;
+			line-height: 18px;
+			letter-spacing: 0.25px;
+			color: #f44336;
+			margin-bottom: 10px;
+		}
+
+		.form-control {
+			margin-bottom: 20px;
+			font-family: Montserrat;
+			font-size: 14px;
+			border-radius: 5px;
+			height: 47px;
+			border: 1px solid #ced4da;
+		}
+
+		.iconPass {
+			position: absolute;
+			cursor: pointer;
+			right: 25px;
+			top: 10px;
+		}
+	}
+
+	.subRayado {
+		text-decoration: underline;
+	}
+
+	.mat-ink-bar {
+		height: 3px;
+	}
+
+	hr {
+		border: 1px solid #e4e5e7;
+	}
+}
+
+.modal-footer {
+	padding: 0rem 2rem 0rem 2rem;
+	margin: 0 0 18px 0;
+	border-top: none;
+
+	button {
+		background: #df0c30;
+		border-radius: 5px;
+		margin: 0 0 18px 0;
+		font-family: Open Sans;
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 27px;
+		text-align: center;
+		letter-spacing: 0.18px;
+		color: #ffffff;
+	}
+
+	.account {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		gap: 10px;
+
+		.notRegister {
+			font-family: Montserrat;
+			font-weight: 300;
+			font-size: 12px;
+			line-height: 18px;
+			letter-spacing: 0.25px;
+			color: #4b4b4b;
+		}
+
+		.newAccount {
+			cursor: pointer;
+			font-family: Montserrat;
+			font-weight: 600;
+			font-size: 12px;
+			line-height: 21px;
+			letter-spacing: 0.1px;
+			color: #009aed;
+			text-decoration: underline;
+		}
+	}
+}

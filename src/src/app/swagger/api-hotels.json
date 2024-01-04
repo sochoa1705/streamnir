@@ -1,0 +1,746 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "expertia.api.hotel 1.0",
+    "description": "",
+    "version": "1.0"
+  },
+  "paths": {
+    "/v1/api/Hotel": {
+      "get": {
+        "tags": [
+          "Hotel"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.Country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Parameter.City",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Parameter.Site",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Parameter.IsFlight",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Property": {
+      "get": {
+        "tags": [
+          "Property"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.Code",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Property"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PropertyPostCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PropertyPostCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PropertyPostCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Property"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PropertyPutCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PropertyPutCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PropertyPutCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Property"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PropertyDeleteCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PropertyDeleteCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_PropertyDeleteCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Property/Id": {
+      "get": {
+        "tags": [
+          "Property"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.Id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Service": {
+      "get": {
+        "tags": [
+          "Service"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_ServicePostCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_ServicePostCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_ServicePostCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Service"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_ServicePutCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_ServicePutCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_ServicePutCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Service"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_ServiceDeleteCE_Request1"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_ServiceDeleteCE_Request1"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RQ_ServiceDeleteCE_Request1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/api/Service/Id": {
+      "get": {
+        "tags": [
+          "Service"
+        ],
+        "parameters": [
+          {
+            "name": "Parameter.Id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TrackingCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MuteExceptions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Caller.Company",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Caller.Application",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CE_RequestCaller": {
+        "required": [
+          "Application",
+          "Company"
+        ],
+        "type": "object",
+        "properties": {
+          "Company": {
+            "type": "string"
+          },
+          "Application": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PropertyDelete": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PropertyDeleteCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_PropertyDelete"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PropertyPost": {
+        "type": "object",
+        "properties": {
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "Country": {
+            "type": "string",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "nullable": true
+          },
+          "Site": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsFlight": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PropertyPostCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_PropertyPost"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PropertyPut": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "nullable": true
+          },
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "type": "boolean"
+          },
+          "Country": {
+            "type": "string",
+            "nullable": true
+          },
+          "City": {
+            "type": "string",
+            "nullable": true
+          },
+          "Site": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsFlight": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_PropertyPutCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_PropertyPut"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_ServiceDelete": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_ServiceDeleteCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_ServiceDelete"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_ServicePost": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Icon": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_ServicePostCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_ServicePost"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_ServicePut": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "type": "boolean"
+          },
+          "Icon": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RQ_ServicePutCE_Request1": {
+        "required": [
+          "Caller",
+          "MuteExceptions",
+          "Parameter",
+          "TrackingCode"
+        ],
+        "type": "object",
+        "properties": {
+          "TrackingCode": {
+            "type": "string"
+          },
+          "MuteExceptions": {
+            "type": "boolean"
+          },
+          "Caller": {
+            "$ref": "#/components/schemas/CE_RequestCaller"
+          },
+          "Parameter": {
+            "$ref": "#/components/schemas/RQ_ServicePut"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

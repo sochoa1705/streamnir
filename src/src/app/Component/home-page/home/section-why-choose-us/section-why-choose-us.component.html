@@ -1,0 +1,19 @@
+<div class="container__chooseus">
+    <div class="container__chooseus__section">
+        <div  class="container__chooseus__section__title">
+            <h3>Por qué elegirnos</h3>
+            <span>Confía en nuestra experiencia y dedicación para brindarte experiencias de viaje inolvidables.</span>
+        </div>
+        <div class="container__chooseus__section__options">
+            <ng-container *ngFor="let item of dataSection">
+                <div class="container__chooseus__section__options__option">
+                    <img [src]="item.img" alt="">
+                    <div class="container__chooseus__section__options__option__info">
+                        <h6>{{item.title}}</h6>
+                        <span>{{item.description}}</span>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

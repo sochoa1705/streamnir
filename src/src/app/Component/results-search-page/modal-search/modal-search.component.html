@@ -1,0 +1,5 @@
+<div class="modal__contend">
+	<img class="close" src="./assets/svg/close-modal.svg" (click)="activeModal.close(true)" />
+	<h4>Modificar Viaje</h4>
+	<app-tab-vuelos-v2 [typeFlight]="flightType" (reloadPageResult)="reloadPage()"></app-tab-vuelos-v2>
+</div>

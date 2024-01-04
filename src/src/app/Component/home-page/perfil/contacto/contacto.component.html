@@ -1,0 +1,208 @@
+<div class="viewDocument">
+  <div class="personalDocument">
+    <div class="headerPortlet">
+      <div class="titleBoxRight">Datos de contacto</div>
+      <div class="subtitleBoxRight">Actualiza tus datos de contacto</div>
+    </div>
+    <form class="content mh-100" name="contactInformationForm" [formGroup]="contactInformationForm">
+      <div class="rowContent">
+        <div class="inputGroup" [ngClass]="{error : validateContactInformationForm('firstName')}">
+          <span class="">Nombres</span>
+          <input type="text" class="form-control" formControlName="firstName"
+            placeholder="El que figura en el documento de viaje.">
+
+          <div class="textError" *ngIf="validateContactInformationForm('firstName')">
+            Ingresa tu(s) nombre(s)
+          </div>
+        </div>
+
+        <div class="inputGroup" [ngClass]="{error : validateContactInformationForm('fatherLastname')}">
+          <span class="">Primer apellido</span>
+          <input type="text" class="form-control" formControlName="fatherLastname"
+            placeholder="El que figura en el documento de viaje.">
+
+          <div class="textError" *ngIf="validateContactInformationForm('fatherLastname')">
+            Ingresa tu primer apellido
+          </div>
+        </div>
+
+        <div class="inputGroup" [ngClass]="{error : validateContactInformationForm('motherLastname')}">
+          <span class="">Segundo apellido</span>
+          <input type="text" class="form-control" formControlName="motherLastname"
+            placeholder="El que figura en el documento de viaje.">
+
+          <div class="textError" *ngIf="validateContactInformationForm('motherLastname')">
+            Ingresa tu segundo apellido
+          </div>
+        </div>
+      </div>
+
+      <div class="rowContent">
+        <div class="inputGroup"
+          [ngClass]="{error : validateContactInformationForm('birthDay') || validateContactInformationForm('birthMonth') || validateContactInformationForm('birthYear')}">
+          <span class="">Fecha de nacimiento</span>
+
+          <div class="rowElement">
+            <input type="text" class="form-control marginRight10" formControlName="birthDay" placeholder="Dia">
+
+            <select class="form-select marginRight10" formControlName="birthMonth" aria-label="Default select example">
+              <option value="" selected>Seleccione mes</option>
+              <option value="1">Enero</option>
+              <option value="2">Febrero</option>
+              <option value="3">Marzo</option>
+              <option value="4">Abril</option>
+              <option value="5">Mayo</option>
+              <option value="6">Junio</option>
+              <option value="7">Julio</option>
+              <option value="8">Agosto</option>
+              <option value="9">Septiembre</option>
+              <option value="10">Octubre</option>
+              <option value="11">Noviembre</option>
+              <option value="12">Diciembre</option>
+            </select>
+
+            <select class="form-select" formControlName="birthYear" aria-label="Default select example">
+              <option value="" selected>Seleccione año</option>
+              <option *ngFor="let elem of years" [value]="elem">
+                {{ elem }}
+              </option>
+            </select>
+          </div>
+
+          <div class="textError"
+            *ngIf="validateContactInformationForm('birthDay') || validateContactInformationForm('birthMonth') || validateContactInformationForm('birthYear')">
+            Ingresa una fecha de nacimiento
+          </div>
+        </div>
+        <div class="inputGroup" [ngClass]="{error : validateContactInformationForm('nationality')}">
+          <span class="">Nacionalidad</span>
+          <select class="form-select" formControlName="nationality" aria-label="Default select example">
+            <option value="" selected>Seleccione nacionalidad</option>
+            <option *ngFor="let elem of countries" [value]="elem.Id">
+              {{ elem.Name }}
+            </option>
+          </select>
+
+          <div class="textError" *ngIf="validateContactInformationForm('nationality')">
+            Selecciona una nacionalidad
+          </div>
+        </div>
+      </div>
+
+      <div class="rowContent">
+        <div class="inputGroup" [ngClass]="{error : validateContactInformationForm('documentType')}">
+          <div class="nroDoc">
+            <span class="">Tipo de documento</span>
+            <select class="form-select" formControlName="documentType" aria-label="Default select example">
+              <option value="" selected>Seleccione tipo de documento</option>
+              <option value="DNI">DNI</option>
+            </select>
+
+            <div class="textError" *ngIf="validateContactInformationForm('documentType')">
+              Selecciona un tipo de documento
+            </div>
+          </div>
+        </div>
+
+        <div class="inputGroup" [ngClass]="{error : validateContactInformationForm('documentNumber')}">
+          <div class="nroDoc">
+            <span class="">N° de documento</span>
+            <input type="text" class="form-control" formControlName="documentNumber"
+              placeholder="Ingresa Nro de documento">
+
+            <div class="textError" *ngIf="validateContactInformationForm('documentNumber')">
+              Ingresa un número de documento
+            </div>
+          </div>
+        </div>
+
+        <div class="inputGroup" [ngClass]="{error : validateContactInformationForm('phone')}">
+          <div class="nroDoc">
+            <span class="">Número de celular</span>
+            <input type="text" class="form-control" formControlName="phone" placeholder="Ingresa Nro de telefono">
+
+            <div class="textError" *ngIf="validateContactInformationForm('phone')">
+              Ingresa un Número de celular
+            </div>
+          </div>
+        </div>
+
+        <div class="inputGroup" [ngClass]="{error : validateContactInformationForm('mobilePhone')}">
+          <div class="nroDoc">
+            <span class="">Número de celular</span>
+            <input type="text" class="form-control" formControlName="mobilePhone" placeholder="IngresarNro de celular">
+
+            <div class="textError" *ngIf="validateContactInformationForm('mobilePhone')">
+              Ingresa un número de celular
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rowContent">
+        <div class="btnPerfil primary" (click)="saveContactInformation()">
+          Guardar mis datos
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div class="viewDocument marginTop40">
+  <div class="personalDocument">
+    <div class="headerPortlet">
+      <div class="titleBoxRight">Email</div>
+      <div class="subtitleBoxRight">Ingresa los correos con los que compraste para poder ver todas tus reservas.
+      </div>
+    </div>
+    <div class="content">
+      <div class="rowContent">
+        <div class="boxGrid">
+          <div class="rowGrid flex-column flex-lg-row">
+            <div class="rowElement">
+              <div class="marginRight10">
+                <svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M17.3301 0.263672H1.66992C0.750277 0.263672 0 1.01313 0 1.93359V13.0664C0 13.9838 0.746938 14.7363 1.66992 14.7363H17.3301C18.2474 14.7363 19 13.9894 19 13.0664V1.93359C19 1.01625 18.2531 0.263672 17.3301 0.263672ZM17.0995 1.37695L9.5354 8.94107L1.9059 1.37695H17.0995ZM1.11328 12.8359V2.15881L6.47481 7.47436L1.11328 12.8359ZM1.90048 13.623L7.26539 8.25814L9.14523 10.1219C9.36284 10.3376 9.71401 10.3369 9.93073 10.1201L11.7637 8.2872L17.0995 13.623H1.90048ZM17.8867 12.8358L12.5509 7.5L17.8867 2.16412V12.8358Z"
+                    fill="#DF0C30" />
+                </svg>
+              </div>
+              <div class="">
+                {{userStorage.email}}
+              </div>
+            </div>
+            <div class="rowElement">
+              <div class="marginRight10">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M11.0962 1.90379C9.8685 0.676127 8.23621 0 6.5 0C4.76376 0 3.13148 0.676127 1.90379 1.90379C0.676127 3.13148 0 4.76379 0 6.5C0 8.23621 0.676127 9.8685 1.90379 11.0962C3.13148 12.3239 4.76379 13 6.5 13C8.23621 13 9.8685 12.3239 11.0962 11.0962C12.3239 9.8685 13 8.23621 13 6.5C13 4.76379 12.3239 3.1315 11.0962 1.90379ZM9.60543 4.95303L5.97292 8.58556C5.89855 8.65993 5.80107 8.6971 5.70362 8.6971C5.60615 8.6971 5.50867 8.65993 5.4343 8.58556L3.39457 6.54586C3.24584 6.39714 3.24584 6.15601 3.39457 6.00724C3.54329 5.85851 3.78445 5.85851 3.93319 6.00724L5.70362 7.77766L9.06681 4.41441C9.21553 4.26568 9.45669 4.26568 9.60543 4.41441C9.75416 4.56315 9.75416 4.80429 9.60543 4.95303Z"
+                    fill="#DF0C30" />
+                </svg>
+              </div>
+              <div class="">
+                Verificado
+              </div>
+            </div>
+            <div class="rowElement">
+              <div class="marginRight10">
+                <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M6.5 0L7.95934 4.49139H12.6819L8.86126 7.26722L10.3206 11.7586L6.5 8.98278L2.6794 11.7586L4.13874 7.26722L0.318133 4.49139H5.04066L6.5 0Z"
+                    fill="#DF0C30" />
+                </svg>
+              </div>
+              <div class="">
+                Principal
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-password></app-password>

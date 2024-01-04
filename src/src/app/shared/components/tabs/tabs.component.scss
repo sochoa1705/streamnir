@@ -1,0 +1,235 @@
+@import '/src/scss/variables';
+article {
+    z-index: 1;
+}
+
+.banner {
+  z-index: 1;
+
+  .content img.d-md-none {
+    height: auto;
+    max-height: 110px;
+  }
+}
+
+@media (min-width: 641px) {
+  .banner {
+    max-height: 60vh;
+
+    .content img.d-md-none {
+      max-height: 22vh !important;
+    }
+  }
+
+  ::ng-deep div.mat-tab-label.mat-focus-indicator {
+    box-shadow: 0 0 8px 1px rgb(0, 0, 0, 0.08);
+
+    &.mat-tab-label-active {
+      box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @media (min-width: 991px) {
+    .banner {
+      max-height: 70vh;
+    }
+
+    ::ng-deep .content {
+      max-height: 35vh;
+    }
+
+  }
+
+  @media (min-width: 1440px) {
+    ::ng-deep mat-tab-header.mat-tab-header {
+      overflow: inherit;
+
+      .mat-tab-label-container {
+        overflow: inherit;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .banner {
+    height: auto;
+
+    .content {
+      height: auto;
+      overflow: initial;
+    }
+
+    article.container-fluid {
+      margin-top: 100px;
+    }
+  }
+}
+
+:host ::ng-deep .mat {
+    &-tab-header-pagination-chevron {
+        border-color: $red!important;
+        box-shadow: 0 0 9px 7px rgb(255 255 255 / 70%);
+    }
+
+    &-tab-label {
+        background: $white;
+        color: $gray;
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+        border-radius: 7px;
+        opacity: 1;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.5px;
+        padding: 13px 20px;
+        margin: 0 4px 4px;
+        min-width: 130px;
+        height: auto;
+        font-weight: 600;
+        font-family: "Montserrat", serif;
+        @media (max-width: 768px) {
+            min-width: 77px;
+            height: auto;
+            font-size: 10px;
+            padding: 7px;
+        }
+        & span:hover {
+            color: $red_light;
+        }
+        &:hover {
+            color: $red_light;
+        }
+        &-active {
+            border-radius: 7px 7px 0 0;
+            color: $red_light!important;
+            font-weight: bold;
+            & span {
+                color: #DF0C30;
+            }
+            &:first-child {
+                margin: 0 4px 0 0 !important;
+                border-radius: 7px 7px 7px 0;
+            }
+            .mat-tab-label-content>svg>path {
+                fill: $red_light;
+            }
+        }
+        &:hover>.mat-tab-label-content>svg>path {
+            fill: $red_light;
+        }
+        &-content,
+        &-content>a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #4B4B4B;
+            &>svg {
+                @media (max-width: 768px) {
+                    height: 12px;
+                }
+            }
+        }
+    }
+    &-ink-bar {
+        height: 4px;
+        background-color: $white !important;
+    }
+    &-tab-header {
+        border-bottom: 0;
+    }
+    &-tab-body {
+        background: $white;
+        box-shadow: 0 1px 8px rgba(122, 88, 88, 0.05);
+        padding: 35px 20px 35px 43px;
+        border-radius: 0 7px 7px 7px;
+        @media (max-width: 768px) {
+            padding: 7px;
+        }
+        &-wrapper {
+            overflow: inherit;
+            z-index: 0;
+        }
+    }
+}
+
+:host ::ng-deep .mat-select {
+    font-style: normal;
+    font-weight: 600;
+    border: 0;
+    font-size: 14px;
+    color: $gray;
+    background: $white url(../../../../assets/arrow.svg) no-repeat center right;
+    font-family: "Montserrat", serif;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    @media (max-width: 768px) {
+        font-size: 12px;
+    }
+    &:focus {
+        box-shadow: none;
+    }
+    option.sel {
+        border: 0;
+        height: 50px;
+        outline: none;
+        font-family: "Montserrat", serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 44px;
+        margin: 10px;
+        padding: 20px;
+        &:hover {
+            background: $red !important;
+        }
+    }
+    &-arrow {
+        background: url(../../../../assets/arrow.svg) no-repeat center center;
+        &-wrapper {
+            visibility: hidden;
+        }
+    }
+    &-panel {
+        position: absolute;
+        top: 32px;
+        left: 4px;
+        min-width: calc(100% + 22px) !important;
+        border-radius: 0 !important;
+        border: 1px solid blue;
+        border-top-style: none;
+        background: url(../../../../assets/arrow.svg) no-repeat center center;
+        & ng-animating {
+            visibility: hidden;
+        }
+    }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border-radius: 0 !important;
+    border: 1px solid blue !important;
+    border-right-style: none !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border-radius: 0 !important;
+    border: 1px solid blue !important;
+    border-left-style: none !important;
+}
+
+:host ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+.hideDate {
+    max-width: 0 !important;
+    width: 0 !important;
+}
+
+.valid {
+    font-size: 14px !important;
+}
+
+.bannerHide {
+    height: auto !important;
+}
