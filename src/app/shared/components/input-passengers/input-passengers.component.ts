@@ -34,21 +34,25 @@ export class InputPassengersComponent implements OnInit {
 	scopeDataSearch: Search;
 
 	ngOnInit(): void {
-		console.log('this.totalPassengersTemp', this.totalPassengersTemp);
 		if (window.location.href.includes('resultados')) {
 			
 			const dataSearch = GlobalComponent.searchData;
 			this.scopeDataSearch = dataSearch;
-
+			console.log(dataSearch, 'dataSEarch')
 			this.totalADT = dataSearch.adults;
 			this.totalINF = dataSearch.infants;
 			this.totalCNN = dataSearch.children;
 			this.totalPassengers = dataSearch.children + dataSearch.adults;
-			this.totalPassengersTemp = dataSearch.children + dataSearch.adults + dataSearch.infants;
+			this.totalPassengersTemp = dataSearch.children + dataSearch.adults;
 			this.totalADTTemp = dataSearch.adults;
 			this.totalINFTemp = dataSearch.infants;
 			this.totalCNNTemp = dataSearch.children;
 		}
+	}
+
+
+	showAlertPassenger(){
+		this.showMessageError('Límite de pasajeros excedido', 'Lo siento, no puedes seleccionar más de 9 pasajeros');
 	}
 
 	clickCounter(type: number, isPlus: boolean) {
@@ -56,7 +60,7 @@ export class InputPassengersComponent implements OnInit {
 		currentPassengers = isPlus ? currentPassengers + 1 : currentPassengers - 1;
 
 		if (currentPassengers > 9 && type !== 2) {
-			this.totalPassengersTemp = window.location.href.includes('resultados') ? this.scopeDataSearch.children + this.scopeDataSearch.adults + this.scopeDataSearch.infants : 1;
+			this.totalPassengersTemp = window.location.href.includes('resultados') ? this.scopeDataSearch.children + this.scopeDataSearch.adults : 1;
 			this.showMessageError('Límite de pasajeros excedido', 'Lo siento, no puedes seleccionar más de 9 pasajeros');
 		}
 
@@ -85,7 +89,7 @@ export class InputPassengersComponent implements OnInit {
 					else this.totalINF = totalINF;
 					break;
 			}
-			this.totalPassengersTemp = this.totalADT + this.totalINF + this.totalCNN;
+			this.totalPassengersTemp = this.totalADT + this.totalCNN;
 		}
 	}
 
@@ -95,7 +99,7 @@ export class InputPassengersComponent implements OnInit {
 	}
 
 	updateTotal() {
-		this.totalPassengers = this.totalADT + this.totalINF + this.totalCNN;
+		this.totalPassengers = this.totalADT + this.totalCNN;
 		this.totalADTTemp = this.totalADT;
 		this.totalCNNTemp = this.totalCNN;
 		this.totalINFTemp = this.totalINF;
@@ -107,6 +111,7 @@ export class InputPassengersComponent implements OnInit {
 		this.totalADT = this.totalADTTemp;
 		this.totalCNN = this.totalCNNTemp;
 		this.totalINF = this.totalINFTemp;
+		this.totalPassengersTemp = this.totalADT + this.totalCNN;
 	}
 
 	getValues() {

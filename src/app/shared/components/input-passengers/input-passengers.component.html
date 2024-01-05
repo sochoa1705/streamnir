@@ -19,7 +19,7 @@
 							(click)="clickCounter(0, false)"
 						/>
 						<span>{{ totalADT }}</span>
-						<img src="./assets/svg/plus-sm.svg" alt="+" (click)="clickCounter(0, true)" />
+						<img src="./assets/svg/plus-sm.svg" alt="+" (click)="totalPassengersTemp < 9 ? clickCounter(0, true) : showAlertPassenger()" />
 					</div>
 				</div>
 				<div class="container__passenger__floating__body__passengers__row">
@@ -34,7 +34,7 @@
 							(click)="clickCounter(1, false)"
 						/>
 						<span>{{ totalCNN }}</span>
-						<img src="./assets/svg/plus-sm.svg" alt="+" (click)="clickCounter(1, true)" />
+						<img src="./assets/svg/plus-sm.svg" alt="+" (click)="totalPassengersTemp < 9 ? clickCounter( 1, true) : showAlertPassenger()" />
 					</div>
 				</div>
 				<div class="container__passenger__floating__body__passengers__row">
