@@ -1,4 +1,4 @@
-<div class="container__passenger" tabindex="0" (blur)="resetTotal();showOptions=false">
+<div class="container__passenger" tabindex="0">
 	<div class="container__passenger__name" (click)="showOptions = !showOptions">
 		<img src="./assets/svg/people-red2.svg" alt="" />
 		<span>{{ totalPassengers }} pasajero{{ totalPassengers > 1 ? 's' : '' }}</span>
@@ -13,7 +13,11 @@
 						<span>Mayores de 12 años</span>
 					</div>
 					<div class="container__passenger__floating__body__passengers__row__counters">
-						<img [src]="totalADT == 1 ? './assets/svg/minus-sm.svg':'./assets/svg/minus-active.svg'" alt="-" (click)="clickCounter(0, false)" />
+						<img
+							[src]="totalADT == 1 ? './assets/svg/minus-sm.svg' : './assets/svg/minus-active.svg'"
+							alt="-"
+							(click)="clickCounter(0, false)"
+						/>
 						<span>{{ totalADT }}</span>
 						<img src="./assets/svg/plus-sm.svg" alt="+" (click)="clickCounter(0, true)" />
 					</div>
@@ -24,7 +28,11 @@
 						<span>De 2 a 11 años</span>
 					</div>
 					<div class="container__passenger__floating__body__passengers__row__counters">
-						<img [src]="totalCNN == 0 ? './assets/svg/minus-sm.svg':'./assets/svg/minus-active.svg'" alt="-" (click)="clickCounter(1, false)" />
+						<img
+							[src]="totalCNN == 0 ? './assets/svg/minus-sm.svg' : './assets/svg/minus-active.svg'"
+							alt="-"
+							(click)="clickCounter(1, false)"
+						/>
 						<span>{{ totalCNN }}</span>
 						<img src="./assets/svg/plus-sm.svg" alt="+" (click)="clickCounter(1, true)" />
 					</div>
@@ -35,14 +43,18 @@
 						<span>Menores de 2 años</span>
 					</div>
 					<div class="container__passenger__floating__body__passengers__row__counters">
-						<img [src]="totalINF == 0 ? './assets/svg/minus-sm.svg':'./assets/svg/minus-active.svg'" alt="-" (click)="clickCounter(2, false)" />
+						<img
+							[src]="totalINF == 0 ? './assets/svg/minus-sm.svg' : './assets/svg/minus-active.svg'"
+							alt="-"
+							(click)="clickCounter(2, false)"
+						/>
 						<span>{{ totalINF }}</span>
 						<img src="./assets/svg/plus-sm.svg" alt="+" (click)="clickCounter(2, true)" />
 					</div>
 				</div>
 			</div>
 			<div class="container__passenger__floating__body__actions">
-                <div class="btn cancel" (click)="resetTotal()">Cancelar</div>
+				<div class="btn cancel" (click)="resetTotal()">Cancelar</div>
 				<div class="btn apply" (click)="updateTotal()">Aplicar</div>
 			</div>
 		</div>

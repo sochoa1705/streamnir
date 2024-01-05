@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 import { NotificationService } from 'src/app/Services/notification.service';
-import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
+import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { GlobalComponent } from '../../global';
 
@@ -10,7 +10,18 @@ import { GlobalComponent } from '../../global';
 	styleUrls: ['./input-passengers.component.scss']
 })
 export class InputPassengersComponent implements OnInit {
-	constructor(private _notification: NotificationService) {}
+
+	constructor(private _notification: NotificationService, private elementRef: ElementRef) { }
+
+	@HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    const target = event.target as HTMLElement;
+    const clickedInside = this.elementRef.nativeElement.contains(target);
+    if (!clickedInside) {
+      this.resetTotal();
+    }
+	}
+	
 	showOptions = false;
 	totalADT = 1;
 	totalINF = 0;
@@ -20,10 +31,15 @@ export class InputPassengersComponent implements OnInit {
 	totalADTTemp = 1;
 	totalINFTemp = 0;
 	totalCNNTemp = 0;
+	scopeDataSearch: Search;
 
 	ngOnInit(): void {
+		console.log('this.totalPassengersTemp', this.totalPassengersTemp);
 		if (window.location.href.includes('resultados')) {
+			
 			const dataSearch = GlobalComponent.searchData;
+			this.scopeDataSearch = dataSearch;
+
 			this.totalADT = dataSearch.adults;
 			this.totalINF = dataSearch.infants;
 			this.totalCNN = dataSearch.children;
@@ -39,8 +55,10 @@ export class InputPassengersComponent implements OnInit {
 		let currentPassengers = this.totalPassengersTemp - this.totalINF;
 		currentPassengers = isPlus ? currentPassengers + 1 : currentPassengers - 1;
 
-		if (currentPassengers > 9 && type !== 2)
+		if (currentPassengers > 9 && type !== 2) {
+			this.totalPassengersTemp = window.location.href.includes('resultados') ? this.scopeDataSearch.children + this.scopeDataSearch.adults + this.scopeDataSearch.infants : 1;
 			this.showMessageError('Límite de pasajeros excedido', 'Lo siento, no puedes seleccionar más de 9 pasajeros');
+		}
 
 		if (currentPassengers <= 9 || type == 2) {
 			switch (type) {
@@ -77,7 +95,7 @@ export class InputPassengersComponent implements OnInit {
 	}
 
 	updateTotal() {
-		this.totalPassengers = this.totalPassengersTemp - this.totalINF;
+		this.totalPassengers = this.totalADT + this.totalINF + this.totalCNN;
 		this.totalADTTemp = this.totalADT;
 		this.totalCNNTemp = this.totalCNN;
 		this.totalINFTemp = this.totalINF;

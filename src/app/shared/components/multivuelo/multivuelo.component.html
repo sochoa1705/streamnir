@@ -1,5 +1,5 @@
 <div class="section__search">
-    <section [class.overflow-s]="!showDatepicker">
+    <section>
         <div class="section__search__multi" *ngFor="let item of arrayMulti" [class.more-row]="arrayMulti.length > 1">
             <app-input-search-flight  [typeFlight]="2" [indexRowMulti]="item.index"></app-input-search-flight>
             <app-input-range (openDatepicker)="openDatepicker($event)" [idRowMulti]="item.index" [minDate]="item.minDate" [typeFlight]="2"></app-input-range>
