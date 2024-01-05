@@ -1,0 +1,382 @@
+@use '/src/scss/colors';
+
+.paragraph {
+	font-family: Montserrat;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+	letter-spacing: 0em;
+}
+
+.container__page {
+	width: 100%;
+	padding-bottom: 40%;
+
+	article {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	&__detail {
+		display: flex;
+		padding: 60px 0px 0px 0px;
+		margin-bottom: 48px;
+		gap: 32px;
+		flex-direction: column;
+
+		&__saftyPay {
+			width: 100%;
+			padding: 24px;
+			border-radius: 12px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			background: colors.$blue-500;
+
+			span {
+				color: white;
+				font-family: Open Sans;
+				font-weight: 600;
+
+				&:nth-child(1) {
+					font-size: 16px;
+					line-height: 24px;
+					margin-bottom: 4px;
+					font-weight: 500;
+				}
+
+				&:nth-child(2) {
+					font-size: 24px;
+					color: white;
+					line-height: 32px;
+					letter-spacing: -0.48px;
+					margin-bottom: 16px;
+				}
+
+				&:nth-child(3) {
+					font-weight: 700;
+					font-size: 52px;
+					line-height: 56px;
+					letter-spacing: -1.04px;
+				}
+			}
+		}
+	}
+
+	h4 {
+		font-family: Open Sans;
+		font-size: 28px;
+		font-weight: 600;
+		line-height: 36px;
+		letter-spacing: -0.02em;
+		text-align: left;
+		color: colors.$neutral-900;
+		margin-bottom: 0;
+
+		@media (max-width: 1199px) {
+			font-size: 24px;
+		}
+
+		@media (max-width: 575px) {
+			font-size: 20px;
+		}
+	}
+
+	span {
+		font-family: Montserrat;
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 28px;
+		letter-spacing: 0em;
+		color: colors.$neutral-900;
+		&.item {
+			font-weight: 600;
+		}
+	}
+
+	.row__table {
+		margin-bottom: 22px;
+	}
+
+	&__section {
+		display: flex;
+		flex-direction: column;
+		gap: 48px;
+
+		&__message {
+			padding: 24px 0px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 48px;
+
+			&__title {
+				font-family: Open Sans;
+				font-size: 52px;
+				font-weight: 600;
+				line-height: 56px;
+				letter-spacing: -0.02em;
+				color: colors.$red-500;
+				text-align: center;
+
+				@media (max-width: 1199px) {
+					font-size: 34px;
+					line-height: 38px;
+				}
+
+				@media (max-width: 575px) {
+					font-size: 28px;
+				}
+			}
+
+			&__img {
+				@media (max-width: 1199px) {
+					height: 215px;
+				}
+
+				@media (max-width: 680px) {
+					height: 150px;
+				}
+			}
+
+			&__description {
+				text-align: center;
+				max-width: 480px;
+			}
+			@media (max-width: 1199px) {
+				padding: 8px 0;
+				gap: 32px;
+			}
+		}
+
+		&__safetypay {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			&__title {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+
+				span {
+					@media (max-width: 570px) {
+						font-size: 12px;
+					}
+				}
+			}
+
+			&__img {
+				@media (max-width: 1199px) {
+					display: none;
+				}
+			}
+		}
+
+		&__safetypay__card {
+			display: flex;
+			flex-direction: column;
+			gap: 32px;
+			&__banks {
+				display: flex;
+				justify-content: center;
+				column-gap: 64px;
+				row-gap: 16px;
+				flex-wrap: wrap;
+				padding-top: 24px;
+
+				@media (max-width: 1199px) {
+					column-gap: 20px;
+					padding-top: 0px;
+				}
+
+				@media (max-width: 575px) {
+					column-gap: 12px;
+				}
+
+				&__bank {
+					display: flex;
+					flex-direction: column;
+					gap: 8px;
+					p {
+						font-family: Montserrat;
+						font-size: 12px;
+						font-weight: 600;
+						line-height: 20px;
+						letter-spacing: 0em;
+						margin-bottom: 0px;
+						text-align: center;
+						color: colors.$neutral-900;
+
+						@media (max-width: 575px) {
+							font-size: 10px;
+						}
+					}
+				}
+
+				&__img {
+					@media (max-width: 1199px) {
+						height: 57px;
+					}
+
+					@media (max-width: 575px) {
+						height: 40px;
+					}
+				}
+			}
+
+			&__alert {
+				background: #009aed1a;
+				width: 100%;
+				padding: 12px 16px;
+				border-radius: 8px;
+				display: flex;
+				gap: 16px;
+				justify-content: center;
+				align-items: flex-start;
+				span {
+					font-family: Montserrat;
+					font-size: 16px;
+					font-weight: 400;
+					line-height: 24px;
+					letter-spacing: 0em;
+					text-align: left;
+					color: colors.$neutral-600;
+
+					@media (max-width: 1199px) {
+						font-size: 14px;
+						line-height: 20px;
+					}
+
+					@media (max-width: 390px) {
+						font-size: 11px;
+					}
+				}
+			}
+
+			&__steps {
+				display: flex;
+				flex-direction: column;
+				gap: 16px;
+				@media (max-width: 1199px) {
+					gap: 0px;
+				}
+				&__item {
+					display: flex;
+					gap: 16px;
+					justify-content: flex-start;
+					align-items: center;
+					padding: 8px 12px 8px 12px;
+
+					.circle {
+						border-radius: 50%;
+						height: 32px;
+						min-width: 32px;
+						background: colors.$blue-500;
+						color: white;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						font-family: Open Sans;
+						font-size: 16px;
+						font-weight: 700;
+						line-height: 28px;
+
+						@media (max-width: 1199px) {
+							height: 24px;
+							min-width: 24px;
+							font-size: 12px;
+						}
+
+						@media (max-width: 575px) {
+							height: 20px;
+							min-width: 20px;
+							font-size: 10px;
+						}
+					}
+
+					span {
+						color: colors.$gris-750;
+					}
+				}
+			}
+			@media (max-width: 1199px) {
+				gap: 16px;
+			}
+		}
+	}
+
+	.container__page__detail__saftyPay {
+		display: none;
+		padding: 12px;
+		span {
+			&:nth-child(1) {
+				font-size: 14px;
+				line-height: 20px;
+			}
+
+			&:nth-child(2) {
+				font-size: 20px;
+				line-height: 28px;
+				margin-bottom: 10px;
+			}
+
+			&:nth-child(3) {
+				font-size: 34px;
+				line-height: 38px;
+			}
+		}
+	}
+
+	@media (max-width: 1199px) {
+		padding-bottom: 50px;
+		span,
+		span.info,
+		span.item,
+		.container__page__section__message__description {
+			font-size: 16px;
+			line-height: 24px;
+		}
+		.img-card {
+			width: 24px;
+		}
+
+		.row__table {
+			margin-bottom: 16px;
+		}
+		.container__page__section {
+			gap: 32px;
+		}
+	}
+
+	@media (max-width: 575px) {
+		.container__page__detail__saftyPay {
+			display: flex;
+			span {
+				color: white !important;
+			}
+		}
+		padding-bottom: 30px;
+		span {
+			font-size: 14px;
+		}
+		span.toast-info {
+			font-size: 12px;
+		}
+		span.info,
+		span.item,
+		.container__page__section__message__description {
+			font-size: 14px;
+			line-height: 20px;
+		}
+		.img-card {
+			width: 20px;
+		}
+		.container__page__section {
+			gap: 24px;
+		}
+	}
+}

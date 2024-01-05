@@ -1,0 +1,172 @@
+@use '/src/scss/colors';
+
+.paragraph-gray {
+    font-family: Montserrat;
+    letter-spacing: 0em;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color:colors.$gris-700;
+}
+
+.cardoffer{
+    min-height: 100%;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px -1px #1018281A;
+    display: grid;
+    grid-template-rows: 264px auto;
+    &.package{
+        grid-template-rows: 188px auto;
+    }
+    article {
+        width: 100%;
+        height: 264px;
+        grid-row: 1/2;
+        transition: all 250ms ease;
+        overflow: hidden; 
+        &.package{
+            height: 188px;
+        }
+    }
+    article img {
+        width: 100%;			
+        object-fit: cover;
+        transition: all 250ms ease;
+        object-position: center;
+        height: -webkit-fill-available;
+    }
+    &__body{
+        grid-row: 2/3;
+        width: 100%;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap:8px;
+        background: white;
+        section{
+            margin: 0;
+        }
+        span{
+            @extend .paragraph-gray;
+            &.block{
+                display: block;
+            }
+            &.title{
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 28px;
+                color:colors.$gris-900;
+            }
+            &.ft-16{
+                font-size: 16px;
+            }
+            &.regular{
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 20px;
+                display: flex;
+                gap:8px;
+                align-items: center;
+                justify-content: flex-end;
+            }
+            &.price{
+                color:colors.$red-500;
+            }
+        }
+    }
+
+    &__body2{
+        grid-row: 2/3;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .contend{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: colors.$red-500;
+            &__item{
+                display: flex;
+                padding: 8px 0;
+                gap:8px;
+                justify-content: center;
+                span{
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 20px;
+                    letter-spacing: 0.02em;
+                    color: white;
+                }
+            }
+        }
+
+        .info{
+            padding: 24px;
+            display: flex;
+            background: white;
+            gap:8px;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+            span.bold{
+                font-family: Montserrat;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 24px;
+                letter-spacing: 0em;
+                color:colors.$gris-900;
+            }
+            span.text{
+                @extend .paragraph-gray;
+                font-size: 14px;
+            }
+            span.right{
+                text-align: right;
+            }
+            span.price{
+                font-size: 18px;
+                color:colors.$red-500;
+                font-weight: 600;
+                line-height: 28px;
+                margin-left: 5px;
+            }
+            section{
+                margin:0;
+                span{display: block;}
+            }
+        }
+
+    }
+    &:hover{
+        article img{
+            -webkit-transform: scale(1.08);
+            transform: scale(1.08);
+        }
+        box-shadow: 0px 20px 25px -5px #1018281A;
+    }
+
+    @media(max-width:575px){
+        &__body, &__body2 .info{
+            padding: 16px;
+            span.title,span.price{
+                font-size: 16px;
+                line-height: 20px;
+            }
+            span.ft-16,span.description{
+                font-size: 14px;
+                line-height: 20px;
+            }
+            span.description{
+                margin-top: -6px;
+            }
+            span.regular, 
+            span.right span.description2{
+                font-size: 12px;
+            }
+        }
+    }
+}

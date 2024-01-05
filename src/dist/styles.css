@@ -7,6 +7,10 @@
   animation-fill-mode: both !important;
 }
 
+:root {
+	--visibility: block;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -5000,7 +5004,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
 .rowBoxTab .colBoxtab input.icono {
   text-indent: 40px;
   padding-right: 33px !important;
-  background: url("./assets/origen.png") no-repeat 10px center;
+  background: url("./assets/svg/airplane-line.svg") no-repeat 10px center;
 }
 .rowBoxTab .colBoxtab input.icono-no {
   text-indent: 10px;
@@ -7086,7 +7090,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
   }
 }
 .newBoxTab .sectionTab .columnBox .boxFlotante {
-  top: 130px;
+  top: 390px !important;
 }
 @media (max-width: 640px) {
   .newBoxTab .sectionTab .columnBox .boxFlotante {
@@ -10483,8 +10487,9 @@ app-flight-deals button {
 .gridTab .rowGrid .colGrid .colElement input {
   border: 0.5px solid #e4e5e7;
   border-radius: 5px;
-  height: 48px;
+  min-height: 48px;
   padding: 0 10px;
+  background: white;
 }
 @media (max-width: 640px) {
   .gridTab .rowGrid {

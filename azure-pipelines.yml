@@ -1,0 +1,23 @@
+# Node.js with Angular
+
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'NMViajes - Producción'
+    command: 'login'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'NMViajes - Producción'
+    repository: 'nmviajes'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'

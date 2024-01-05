@@ -44,8 +44,11 @@
               "rxjs-compat"
             ],
             "styles": [
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/bootstrap.min.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -95,9 +98,30 @@
               ],
               "outputHashing": "all"
             },
+            "qa-delfosti": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kb",
+                  "maximumError": "20kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa-delfosti.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
             "development": {
-              "buildOptimizer": true,
-              "optimization": true,
+              "buildOptimizer": false,
+              "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
@@ -113,6 +137,9 @@
               "browserTarget": "NuevoMundoViajes:build:production"
             },
             "development": {
+              "browserTarget": "NuevoMundoViajes:build:development"
+            },
+            "qa-delfosti": {
               "browserTarget": "NuevoMundoViajes:build:development"
             }
           },

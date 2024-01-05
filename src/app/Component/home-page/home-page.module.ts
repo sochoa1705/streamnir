@@ -75,7 +75,7 @@ import { TusDatosModule } from './tus-datos/tus-datos.module';
 		PackagesService,
 		AsidePresenterService,
 		DataPagePresenterService,
-		FlightsService
+		FlightsService,
 	]
 })
 export class HomePageModule {

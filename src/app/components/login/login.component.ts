@@ -4,8 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import { MisReservasService } from 'src/app/Component/home-page/perfil/mis-reservas-vuelos/mis-reservas-vuelos.service';
 import { AccountsService, AuthDTO } from 'src/app/Services/accounts.service';
-import { ModelTaggingLogin } from 'src/app/Services/analytics/tagging.models';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { LoaderSubjectService } from 'src/app/shared/components/loader/service/loader-subject.service';
 import { Guid } from 'src/app/shared/utils';
@@ -124,10 +122,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	tagging(model: ModelTaggingLogin) {
-		TaggingService.tagLoginSignup(model);
-	}
-
 	openNewAccount() {
 		this.activeModal.close({
 			isLoggedIn: false,
@@ -157,8 +151,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 		if (this.isPersonLogin && validPerson) {
 			this._accountService.signIn(this.login, this.isPersonLogin).subscribe(resp => {
 				if (resp.IsSuccess) {
-					const modelTag = new ModelTaggingLogin('Login', 'Cuenta Personal', 'Password', resp.Email, resp.Id);
-					this.tagging(modelTag);
 					this._accountService.guardarStorage(resp);
 					this.getAllBookings(resp);
 					this.activeModal.close({
@@ -173,8 +165,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 		} else if (!this.isPersonLogin && validBusiness)
 			this._accountService.signIn(this.loginB, this.isPersonLogin).subscribe(resp => {
 				if (resp.IsSuccess) {
-					const modelTag = new ModelTaggingLogin('Login', 'Cuenta Empresa', 'Password', resp.Email, resp.Id);
-					this.tagging(modelTag);
 					this._accountService.guardarStorage(resp);
 					this.getAllBookings(resp);
 					this.activeModal.close({

@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
@@ -23,10 +23,33 @@ import { CarsModule } from '../cars/cars.module';
 import { ActivitiesModule } from '../activities/activities.module';
 import { FlightsPlusHotelModule } from '../flights-plus-hotel/flights-plus-hotel.module';
 import { TimerBannerModule } from '../../../shared/components/timer-banner/timer-banner.module';
+import { NewTabsFilterModule } from 'src/app/shared/components/new-tabs-filters/new-tabs-filters.module';
+import { FilterTabsModule } from 'src/app/shared/components/filter-tabs/filter-tabs.module';
+import { FiltersafeModule } from 'src/app/shared/components/filtersafe/filtersafe.module';
+import { SectionWhyChooseUsComponent } from './section-why-choose-us/section-why-choose-us.component';
+import { SectionBoletinComponent } from './section-boletin/section-boletin.component';
+import { ButtonModule } from 'src/app/shared/components/button/button.module';
+import { ModalBoletinComponent } from './section-boletin/modal-boletin/modal-boletin.component';
+import { SectionBlogComponent } from './section-blog/section-blog.component';
+import { SectionPackagesComponent } from './section-packages/section-packages.component';
+import { SectionSuperOffersComponent } from './section-super-offers/section-super-offers.component';
+import { SectionCarruselComponent } from './section-carrusel/section-carrusel.component';
+import { SwiperModule } from 'swiper/angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NewCardOfferModule } from 'src/app/shared/components/newcard-offer/newcard.module';
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [HomeComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
+  declarations: [
+    HomeComponent, 
+    SectionWhyChooseUsComponent, 
+    SectionBoletinComponent, 
+    ModalBoletinComponent, 
+    SectionBlogComponent, 
+    SectionPackagesComponent, 
+    SectionSuperOffersComponent, 
+    SectionCarruselComponent
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -46,10 +69,18 @@ import { TimerBannerModule } from '../../../shared/components/timer-banner/timer
     HotelsModule,
     CarsModule,
     ActivitiesModule,
-    TimerBannerModule
+    TimerBannerModule,
+    NewTabsFilterModule,
+    FilterTabsModule,
+    FiltersafeModule,
+    ButtonModule,
+    SwiperModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    NewCardOfferModule
   ],
   exports: [HomeComponent],
-  providers: [DestinyService, AsidePresenterService, BusinessUnitService]
+  providers: [DestinyService, AsidePresenterService, BusinessUnitService],
 
 })
 export class HomeModule { }
