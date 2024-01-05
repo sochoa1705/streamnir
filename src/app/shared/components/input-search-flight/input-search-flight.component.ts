@@ -5,8 +5,6 @@ import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { ICardAutocomplete } from '../card-autocomplete/card-autocomplete.interface';
 import { IGeoTree } from '../filter-tabs/tab-vuelos/tab-vuelos.interfaces';
-import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
-import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { GlobalComponent } from '../../global';
 
 @Component({
@@ -57,18 +55,23 @@ export class InputSearchFlightComponent implements OnInit {
 
 	setValuesInit() {
 		const dataSearch = GlobalComponent.searchData;
-		this.isParamsDep = true;
-		this.isParamsRet = true;
 		if (dataSearch.flightType !== 2 && this.indexRowMulti == 0) {
-			console.log('dataSearch', dataSearch);
-			this.valueSearchDeparture.setValue(this.extractCityName(dataSearch.fullDepartureLocation!));
-			this.valueSearchArrival.setValue(this.extractCityName(dataSearch.fullArrivalLocation!));
-			console.log('this.valueSearchArrival', this.valueSearchArrival.value);
-			
-			this.origin = dataSearch.fullDepartureLocation?.replace(/ /g,"%20") || '';
-			this.destination = dataSearch.fullArrivalLocation?.replace(/ /g,"%20") || '';
+			this.isParamsDep = true;
+			this.isParamsRet = true;
+			if(dataSearch.arrivalLocation!=='' && dataSearch.departureLocation!==''){
+				this.valueSearchDeparture.setValue(this.extractCityName(dataSearch.fullDepartureLocation!));
+				this.valueSearchArrival.setValue(this.extractCityName(dataSearch.fullArrivalLocation!));
+				this.origin = dataSearch.fullDepartureLocation?.replace(/ /g,"%20") || '';
+				this.destination = dataSearch.fullArrivalLocation?.replace(/ /g,"%20") || '';
+			}else{
+				//El link es de kayak
+				this.valueSearchDeparture.setValue(dataSearch.fullDepartureLocation!);
+				this.valueSearchArrival.setValue(dataSearch.fullArrivalLocation!);
+			}			
 		}
 		if (dataSearch.multicity) {
+				this.isParamsDep = true;
+				this.isParamsRet = true;
 				this.valueSearchDeparture.setValue(
 					dataSearch.multicity[this.indexRowMulti].departureLocation.replace(/,\s*$/, '')
 				);
@@ -160,8 +163,7 @@ export class InputSearchFlightComponent implements OnInit {
 						}
 					}
 				});
-			}
-			this.isParamsRet = false;
+			} else this.isParamsRet = false;
 		} else {
 			this.isClickSuggestionArr = false;
 			this.isReverse = false;

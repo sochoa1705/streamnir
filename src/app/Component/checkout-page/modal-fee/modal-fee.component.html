@@ -48,7 +48,7 @@
 				<!--[disabled]="indexCardSelect==i"-->
 				<div class="modal__contend__body__card__price">
 					<section>
-						<h5><span>USD </span>{{getTotalByUpSell(item.fareBreakDowns) | number : '1.2-2'}}</h5>
+						<h5><span>USD </span>{{item.totalPay | number : '1.2-2'}}</h5>
 						<span>{{pricingDetail.passengersCount > 1 ? 'Por los '+pricingDetail.passengersCount+' pasajeros':'Por un pasajero'}} </span>
 					</section>
 					<app-button (onClick)="clickSelectUpSell(item)" [isMobile2]="true" [text]="'Seleccionar'"></app-button>

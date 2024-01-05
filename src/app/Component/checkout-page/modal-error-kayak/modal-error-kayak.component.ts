@@ -33,6 +33,7 @@ export class ModalErrorKayakComponent implements OnInit {
       const flightClass = this.params.get('flightClass');
 
       const url=`/resultados${random}&departureLocation=${departureLocation}&arrivalLocation=${arrivalLocation}&departureDate=${departureDate}&arrivalDate=${arrivalDate}&adults=${adults}&children=${children}&infants=${infants}&flightType=${flightType}&flightClass=${flightClass}&lang=ES&email=${email}`;
+      localStorage.setItem('searchParams', url);
       this.router.navigateByUrl(url);
     }
     this.activeModal.close();

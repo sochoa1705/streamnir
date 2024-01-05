@@ -98,7 +98,7 @@ export class ModalFeeComponent implements OnInit{
 	}
 
 	conditionIncludeBag(elemento:InformationService) {
-		const word=elemento.description.toLocaleLowerCase();
+		const word=elemento.description?.toLocaleLowerCase() || '';
 		return word.includes('bag') ||  word.includes('baggage') || word.includes('equipaje') || word.includes('mano') || word.includes('carry') || word.includes('upto') || word.includes('bodega');
 	}
 
