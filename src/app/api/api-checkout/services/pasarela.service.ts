@@ -11,7 +11,7 @@ export class PasarelaService {
 	}
 
 	getInfoTypePayment(request: IOpenPayInfoRequest): Observable<IOpenPayInfoResponse> {
-		let url = `${environment.urlApiPasarela}Transaction/GetInfoTypePayment?Parameter.Currency=${request.Parameter?.Currency}&Parameter.Company=${request.Parameter?.Company}&Parameter.Application=${request.Parameter?.Application}&TrackingCode=${request.TrackingCode}&MuteExceptions=${request.MuteExceptions}&Caller.Company=${request.Caller?.Company}&Caller.Application=${request.Caller?.Application}`;
+		let url = `${environment.urlApiPasarela}Transaction/GetInfoTypePayment?Parameter.Currency=USD&Parameter.Company=${request.Parameter?.Company}&Parameter.Application=${request.Parameter?.Application}&TrackingCode=${request.TrackingCode}&MuteExceptions=${request.MuteExceptions}&Caller.Company=${request.Caller?.Company}&Caller.Application=${request.Caller?.Application}`;
 		return this.http.get<IOpenPayInfoResponse>(url, {
 			headers: {
 				'booking': 'true',

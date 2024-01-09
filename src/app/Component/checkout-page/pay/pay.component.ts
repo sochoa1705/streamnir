@@ -94,7 +94,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	formSubscriptionBooking: Subscription;
 	formSubscriptionCreditCard: Subscription;
 	openModalSubscription: Subscription;
-	isSendPayment=false;
+	isSendPayment = false;
 
 	@HostListener('window:resize', ['$event'])
 	onResize() {
@@ -104,7 +104,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	}
 	formPolitics = {
 		acceptAdvertising: new FormControl(false)
-	}
+	};
 
 	constructor(
 		private _checkoutService: CheckoutService,
@@ -122,13 +122,13 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		});
 
 		this._checkoutService.nextPaymentMobile.subscribe({
-			next:()=>{
-				if(!this.isSendPayment){
-					this.isSendPayment=true;
+			next: () => {
+				if (!this.isSendPayment) {
+					this.isSendPayment = true;
 					this.sendPayment();
 				}
 			}
-		})
+		});
 	}
 
 	ngOnInit() {
@@ -178,9 +178,9 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.formGroupBooking.setValue(data.booking);
 		this.acceptPoliticsField.setValue(data.acceptAdvertising);
 		this.isPayCard = data.booking.paymentType == 0 ? true : false;
-		if(this.cuponPromoWebField.value!==''){
-			this.isValidPromotionalCode=true; 
-			this.isApplyCupon=true;
+		if (this.cuponPromoWebField.value !== '') {
+			this.isValidPromotionalCode = true;
+			this.isApplyCupon = true;
 		}
 	}
 
@@ -205,6 +205,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	}
 
 	private initConfigurationOpenPay(isSubmit: boolean) {
+		console.log(GlobalComponent.currency, 'currency');
 		let data: any = {
 			MuteExceptions: false,
 			TrackingCode: Guid(),
@@ -218,22 +219,28 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 				Application: GlobalComponent.appApplication
 			}
 		};
-		this._pasarelaService.getInfoTypePayment(data).subscribe((res) => {
-			if (res.State?.Ok) {
-				try {
-					this.disabledCuotes = !res.Result?.ResponseProcessInfoPaymentOptions?.IsActiveCuote || false;
-					if (res.Result?.ResponseProcessInfoPaymentOpenPay) {
-						window.OpenPay.setId(res.Result?.ResponseProcessInfoPaymentOpenPay?.ID);
-						window.OpenPay.setApiKey(res.Result?.ResponseProcessInfoPaymentOpenPay?.Username);
-						window.OpenPay.setSandboxMode(environment.openPayConfiguration.isProduction);
-						let data = window.OpenPay.deviceData.setup();
-						this.deviceSessionIdField.setValue(data);
+		this._pasarelaService.getInfoTypePayment(data).subscribe({
+			next: (res) => {
+				if (res.State?.Ok) {
+					try {
+						this.disabledCuotes = !res.Result?.ResponseProcessInfoPaymentOptions?.IsActiveCuote || false;
+						if (res.Result?.ResponseProcessInfoPaymentOpenPay) {
+							window.OpenPay.setId(res.Result?.ResponseProcessInfoPaymentOpenPay?.ID);
+							window.OpenPay.setApiKey(res.Result?.ResponseProcessInfoPaymentOpenPay?.Username);
+							window.OpenPay.setSandboxMode(environment.openPayConfiguration.isProduction);
+							let data = window.OpenPay.deviceData.setup();
+							this.deviceSessionIdField.setValue(data);
+							if (isSubmit) this.proccessPayment();
+						}
+					} catch (error) {
+						this.deviceSessionIdField.setValue('');
 						if (isSubmit) this.proccessPayment();
 					}
-				} catch (error) {
-					this.deviceSessionIdField.setValue('');
-					if (isSubmit) this.proccessPayment();
 				}
+			},
+			error: () => {
+				this.deviceSessionIdField.setValue('');
+				if (isSubmit) this.proccessPayment();
 			}
 		});
 	}
@@ -275,7 +282,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	resetDiscountByCupon() {
 		this.isValidPromotionalCode = false;
 		this.discountCupon = null;
-		this._checkoutService.dataInfoPayment.booking.CuponPromoWeb='';
+		this._checkoutService.dataInfoPayment.booking.CuponPromoWeb = '';
 		if (this.isApplyCupon) {
 			this.isApplyCupon = false;
 			this._checkoutService.applyCupon.emit(null);
@@ -334,7 +341,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 				this.documentNumberField.clearValidators();
 				const regexNroDocument = this.documentTypeField.value == 0 ? /^\d{8}(?:[-\s]\d{4})?$/ : /^[A-Za-z0-9]{7,12}$/;
 				this.documentNumberField.setValidators([Validators.required, Validators.pattern(regexNroDocument)]);
-				this.documentTypeField.setValidators(Validators.required)
+				this.documentTypeField.setValidators(Validators.required);
 			}
 		});
 	}
@@ -348,22 +355,22 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 				);
 				this.paymentTypeField.setValue(1);
 				this.isPayCard = false;
-				this.isSendPayment=false;
+				this.isSendPayment = false;
 			} else this.initConfigurationOpenPay(true);
-		} else{
+		} else {
 			this.showErrorForm();
-			this.isSendPayment=false;
+			this.isSendPayment = false;
 		}
 	}
 
-	showErrorForm(){
+	showErrorForm() {
 		this.formGroupCard.markAllAsTouched();
-			window.scroll({ top: 0, behavior: 'smooth' });
-			this._notification.showNotificacion(
-				'Datos sin completar',
-				'Parece que algunos de tus datos son inválidos. Por favor, inténtalo nuevamente.',
-				7
-			);
+		window.scroll({ top: 0, behavior: 'smooth' });
+		this._notification.showNotificacion(
+			'Datos sin completar',
+			'Parece que algunos de tus datos son inválidos. Por favor, inténtalo nuevamente.',
+			7
+		);
 	}
 
 	proccessPayment() {
@@ -408,11 +415,11 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 					this.transactionId = res.idCotizacion;
 					this.sendEmail(res);
 				} else this.openModalError(this.errorMessDefault);
-				this.isSendPayment=false;
+				this.isSendPayment = false;
 			},
 			error: (err) => {
 				this.openModalError(this.getMessageErrorClient(err));
-				this.isSendPayment=false;
+				this.isSendPayment = false;
 			}
 		});
 	}
@@ -477,28 +484,28 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	openModalUnsaved() {
 		const modalRef = this._modalService.open(ModalUnsavedComponent, {
 			centered: true,
-			backdrop: 'static',
+			backdrop: 'static'
 		});
 		modalRef.result.then((result) => {
 			if (result == 'saved') {
 				if (this.formGroupCard.valid) {
-					const cuponWeb=this.isValidPromotionalCode?this.cuponPromoWebField.value:''
+					const cuponWeb = this.isValidPromotionalCode ? this.cuponPromoWebField.value : '';
 					this._checkoutService.dataInfoPayment = {
-						booking: {...this.formGroupBooking.value, CuponPromoWeb:cuponWeb},
-						creditCard: {...this.formGroupCard.value},
-						acceptAdvertising:this.acceptPoliticsField.value
+						booking: { ...this.formGroupBooking.value, CuponPromoWeb: cuponWeb },
+						creditCard: { ...this.formGroupCard.value },
+						acceptAdvertising: this.acceptPoliticsField.value
 					};
 					this.nextNavigate();
-				}else this.showErrorForm();
+				} else this.showErrorForm();
 			}
 
-			if(result=='dont-save') this.nextNavigate();
+			if (result == 'dont-save') this.nextNavigate();
 		});
 	}
 
 	nextNavigate() {
-		this._checkoutService.isSaveDataPayment=true;
-		this._checkoutService.isChangesPayment=true;
+		this._checkoutService.isSaveDataPayment = true;
+		this._checkoutService.isChangesPayment = true;
 		const index = this._checkoutService.currentIndexStep;
 		this._router.navigateByUrl(index == 0 ? '/booking' : index == -1 ? '/' : '/booking/pasajeros');
 	}
