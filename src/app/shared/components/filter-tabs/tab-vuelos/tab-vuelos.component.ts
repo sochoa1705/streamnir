@@ -1,15 +1,13 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { concat, Observable, of, Subject } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import {
   DestinosService
 } from 'src/app/Component/home-page/vuelos/commons/components/destinos/services/destinos.service';
-import { ModelTaggingVuelos, SearchFlights } from 'src/app/Services/analytics/tagging.models';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { ClassValueCalendar } from '../../calendar/calendar.models';
@@ -50,7 +48,9 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
       this._vuelosTab = value;
     }
   }
-
+  @Input() isBgWhite=true;
+  @Input() isPageResults=false;
+ 
   get vuelosTab() {
     return this._vuelosTab;
   }
@@ -78,7 +78,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   minLengthAutocomplete = 3;
 
-  valueInputOrigen = 'Lima';
+  valueInputOrigen = '';
   valueInputDestino = "";
 
   isSubmit = false;
@@ -92,7 +92,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
   userStorage: UserStorage;
   processOk = true;
   disabledInput = true;
-
+ 
   constructor(
       private destineService: DestinyService,
       public formatter: NgbDateParserFormatter,
@@ -103,7 +103,8 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
       public accountService: AccountsService,
       private notification: NotificationService,
       private fb: FormBuilder,
-      private intermediaryService: IntermediaryService
+      private intermediaryService: IntermediaryService,
+      private route: ActivatedRoute,
   ) {
     this.createForm();
     this.createFormMultiCity();
@@ -115,6 +116,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.logicPathVuelos();
     this.userStorage = this.accountService.getUserStorage();
+  
   }
 
   ngAfterViewInit() {
@@ -122,10 +124,12 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
     this.vuelosInput$.next('Lima');
   }
 
+
   logicPathVuelos() {
     this.destinosService.getParam().pipe(
       takeUntil(this.destroy$)
     ).subscribe(codigo => {
+      console.log(codigo)
       if (!codigo) {
         this.form.controls["origen"].patchValue(null);
         this.form.controls["destino"].patchValue(null);
@@ -134,22 +138,29 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
 
-  initCiudadDestino(codigoCiudad: string) {
-    this.form.controls["origen"].patchValue({
-      children: [],
-      codigo: "LIM",
-      id: "LIM",
-      title: "Lima"
-    })
-
-    this.valueInputOrigen = "Lima";
-
-    this.destineService.getGeoTree(codigoCiudad).subscribe(data => {
-      const ciudad = this.convertFormatAutocomplete(data);
-      this.form.controls["destino"].patchValue(ciudad[0]);
-
-      this.valueInputDestino = ciudad[0].title;
-    })
+  initCiudadDestino(codigoCiudad: string, isParams=false, key='origen') {
+    if(!isParams){
+      this.form.controls["origen"].patchValue({
+        children: [],
+        codigo: "LIM",
+        id: "LIM",
+        title: "Lima"
+      })
+      this.valueInputOrigen = "Lima";
+      this.destineService.getGeoTree(codigoCiudad).subscribe(data => {
+        const ciudad = this.convertFormatAutocomplete(data);
+        this.form.controls["destino"].patchValue(ciudad[0]);
+  
+        this.valueInputDestino = ciudad[0].title;
+      })
+    }else{
+      this.destineService.getGeoTree(codigoCiudad).subscribe(data => {
+        const ciudad = this.convertFormatAutocomplete(data,key=='origen'?true:false);
+        this.form.controls[key].patchValue(ciudad[0]);
+        if(key=='origen') this.valueInputOrigen = ciudad[0].title
+        else this.valueInputDestino = ciudad[0].title;
+      })
+    }
   }
 
   private loadVuelosOrigen() {
@@ -243,6 +254,7 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
       origenHotel: new FormControl(''),
       departureDate: new FormControl(''),
       arrivalDate: new FormControl(''),
+      rdoVuelo:new FormControl('0')
     });
   }
 
@@ -319,142 +331,11 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
       //this.navigateToResponseUrl(url);
-      window.location.href = this.getUrl();
+      //window.location.href = this.getUrl();
+      console.log(this.getUrl().split('search')[1], 'routessss')
+      localStorage.setItem('searchParams',this.getUrl().split('search')[1]);
+      this.router.navigateByUrl(this.getUrl().split('search')[1]);
     }
-  }
-
-
-  insertTag(params: any) {
-    const getTipoTag = ((tipo: EnumFlightType) => {
-
-      if (tipo == EnumFlightType.ida) {
-        return {
-          codigo: 'SI',
-          descripcion: 'Solo Ida'
-        }
-      } else if (tipo == EnumFlightType.ida_vuelta) {
-        return {
-          codigo: 'IV',
-          descripcion: 'Ida y Vuelta'
-        }
-      } else if (tipo == EnumFlightType.multy_city) {
-        return {
-          codigo: 'MC',
-          descripcion: 'Multi City'
-        }
-      } else {
-        return {
-          codigo: '',
-          descripcion: ''
-        }
-      }
-    })
-
-    const getCabinsVuelosCode = (cabin: string) => {
-      switch (cabin) {
-        case EnumCabinsVuelos.economy:
-          return "EC"
-        case EnumCabinsVuelos.business:
-          return "BS"
-        case EnumCabinsVuelos.first_class:
-          return "FC"
-        default:
-          return ""
-      }
-    }
-
-    //const nombre = `${params.idOrigen}_${params.idDestino}_${params.businessClass ? 'BS' : 'EC'}_${getTipoTag(params.flightType).codigo}`;
-    const nombre = `${params.idOrigen}_${params.idDestino}`;
-
-    let diasAnticipacion = moment(params.startDate, "DD/MM/YYYY").diff(moment(), 'days');
-    let duracionViaje = 0;
-
-    let fechaRegreso = '';
-
-    if (params.flightType === EnumFlightType.ida_vuelta) {
-      duracionViaje = moment(params.endDate, "DD/MM/YYYY").diff(moment(params.startDate, "DD/MM/YYYY"), 'days');
-      fechaRegreso = moment(params.endDate, "DD/MM/YYYY").format("YYYY/MM/DD");
-    }
-
-    const model = new ModelTaggingVuelos(
-      nombre,
-      params.origen.title,
-      params.destino.title,
-      getCabinsVuelosCode(params.cabinsVuelos),
-      getTipoTag(params.flightType).descripcion,
-      this.distributionObject.adultos + this.distributionObject.ninos + this.distributionObject.infantes,
-      this.distributionObject.adultos,
-      this.distributionObject.ninos,
-      this.distributionObject.infantes,
-      0,
-      moment(params.startDate, "DD/MM/YYYY").format("YYYY/MM/DD"),
-      fechaRegreso,
-      diasAnticipacion,
-      duracionViaje
-    );
-
-    TaggingService.buscarVuelos(model);
-
-    let flightType = '';
-    switch (params.flightType) {
-      case 0:
-        flightType = 'ida y vuelta';
-        break;
-      case 1:
-        flightType = 'solo ida';
-        break;
-      case 2:
-        flightType = 'multidestino';
-        break;
-      default:
-        break;
-    }
-    let flightClass = '';
-    switch (Number(this.distributionObject['clase'])) {
-      case 0:
-        flightClass = 'economy';
-        break;
-      case 1:
-        flightClass = 'business';
-        break;
-      case 2:
-        flightClass = 'first class';
-        break;
-      default:
-        break;
-    }
-    const newModel: SearchFlights = {
-      event: 'nmv_vuelos_buscar',
-      operacion: {
-        dias_anticipacion: diasAnticipacion
-      },
-      origen: {
-        nombre: params.origen.title,
-        codigo: params.origen.codigo,
-        pais: params.destino.country
-      },
-      destino: {
-        nombre: params.destino.title,
-        codigo: params.destino.codigo,
-        pais: params.destino.country
-      },
-      vuelo: {
-        clase: flightClass,
-        tipo: flightType
-      },
-      pasajeros: {
-        adultos: this.distributionObject.adultos,
-        ninos: this.distributionObject.ninos,
-        infantes: this.distributionObject.infantes,
-        total: this.distributionObject.adultos + this.distributionObject.ninos + this.distributionObject.infantes
-      },
-      fechas: {
-        salida: moment(params.startDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-        retorno: fechaRegreso.replace(/\//g, '-'),
-        estadia: duracionViaje
-      }
-    };
-    TaggingService.tagSearchFlights(newModel);
   }
 
   getParams() {
@@ -498,8 +379,6 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
       for (let i = 0; i < infantesCount; i++)
         pasajeros.push(infantesN);
 
-    this.insertTag(params);
-
     let vuelo = { ...params, ...this.distributionObject };
 
     localStorage.setItem('filtroVuelo', JSON.stringify(vuelo));
@@ -537,7 +416,11 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
   searchVueloHotelMulti(): void {
     let jsonArray = this.setMultiCityArray();
     const email: string = this.userStorage.email || '';
-    window.location.href = new URLVuelosMulti(this.tipoVuelo, this.distributionObject, email).getUrlMulti(jsonArray);
+    //window.location.href = new URLVuelosMulti(this.tipoVuelo, this.distributionObject, email).getUrlMulti(jsonArray);
+    const route=(new URLVuelosMulti(this.tipoVuelo, this.distributionObject, email).getUrlMulti(jsonArray)).split('search')[1];
+    console.log(route,'seeeeee')
+    localStorage.setItem('searchParams',route);
+    this.router.navigateByUrl(route);
     //this.navigateToResponseUrl(url);
   }
 
@@ -613,7 +496,6 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   changeSelect(tipoVuelo: number): void {
     this.tipoVuelo = tipoVuelo;
-
     this.form.get('departureDate')?.setValue('');
     this.form.get('arrivalDate')?.setValue('');
   }
@@ -628,4 +510,3 @@ export class TabVuelosComponent implements OnInit, AfterViewInit, OnDestroy {
       this.inputDepartureDate.nativeElement.focus();
   }
 }
-

@@ -20,8 +20,6 @@ export class NotificacionErrorComponent implements OnInit{
 
     this.notificationService.getNotification().subscribe(resp=>{
       this.isShow = resp.show;
-
-
       this.title = resp.title;
       this.message = resp.message;
 

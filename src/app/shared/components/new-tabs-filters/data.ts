@@ -1,0 +1,42 @@
+export const dataTabs = [
+    {
+        icon:'./assets/tabs/plane.svg',
+        name:'Vuelos',
+        active:'./assets/tabs/plane-red.svg',
+    },
+    {
+        icon:'./assets/tabs/bag.svg',
+        name:'Paquetes',
+        active:'./assets/tabs/bag-red.svg',
+    },
+    {
+        icon:'./assets/tabs/part.svg',
+        name:'Arma tu viaje',
+        active:'./assets/tabs/part-red.svg',
+    },
+    {
+        icon:'./assets/tabs/hotel.svg',
+        name:'Vuelo + hotel',
+        active:'./assets/tabs/hotel-red.svg',
+    },
+    {
+        icon:'./assets/tabs/room.svg',
+        name:'Hoteles',
+        active:'./assets/tabs/room-red.svg',
+    },
+    {
+        icon:'./assets/tabs/car-red.svg',
+        name:'Autos',
+        active:'./assets/tabs/car.svg',
+    },
+    {
+        icon:'./assets/tabs/activity.svg',
+        name:'Actividades',
+        active:'./assets/tabs/activity-red.svg',
+    },
+    {
+        icon:'./assets/tabs/secure.svg',
+        name:'Seguros',
+        active:'./assets/tabs/secure-red.svg',
+    }
+]

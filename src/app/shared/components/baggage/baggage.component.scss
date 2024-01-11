@@ -1,0 +1,57 @@
+@use '/src/scss/colors';
+
+.container__baggage {
+	display: flex;
+	gap: 19px;
+	font-family: Montserrat;
+	line-height: 20px;
+	align-items: center;
+
+	&__contend {
+		&__title {
+			color: colors.$gris-600;
+			font-weight: 600;
+			font-size: 18px;
+			&.active {
+				color: colors.$blue-500;
+			}
+		}
+		&__description {
+			color: colors.$gris-600;
+			font-weight: 400;
+			font-size: 16px;
+			&.active {
+				color: colors.$gris-900;
+			}
+		}
+	}
+
+	@media (max-width: 1199px) {
+		gap:14px;
+		img{
+			width: 28px;
+		}
+		&__contend__title{
+			font-size: 16px;
+		}
+
+		&__contend__description{
+			font-size: 14px;
+		}
+	}
+
+	@media (max-width: 575px) {
+		gap:12px;
+		img{
+			width: 24px;
+		}
+		&__contend__title{
+			font-size: 14px;
+		}
+
+		&__contend__description{
+			font-size: 12px;
+		}
+
+	}
+}

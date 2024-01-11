@@ -100,13 +100,10 @@ export class DestinosComponent implements OnInit {
 
   buscarVuelo(vuelo: IVueloDestino) {
     const params = this.generateParams(vuelo);
-    //this._router.navigate(['/vuelos/resultados'], { queryParams: params });
-
-    let url = environment.urlIframeMotorVuelos + '?rand=' + Math.round(Math.random() * 10000000000) + "&";
-
+    let url = '/resultados?rand=' + Math.round(Math.random() * 10000000000) + "&";
     url += `departureLocation=${params.departure}&arrivalLocation=${params.destination}&departureDate=${params.departureDate}&arrivalDate=${params.arrivalDate}&adults=${params.adults}&children=${params.children}&infants=${params.infants}&flightType=${params.flightType}&flightClass=${params.flightClass}&lang=ES&email=${params.email}`;
-
-    window.location.href = url;
+    localStorage.setItem('searchParams', url);
+    this._router.navigateByUrl(url);
   }
 
   slider() {

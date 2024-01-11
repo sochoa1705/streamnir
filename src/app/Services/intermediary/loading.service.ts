@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
@@ -6,6 +6,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LoadingService {
   busyRequestCount = 0;
+  requestSearchCount = 0;
+  endSearchGDS = new EventEmitter();
 
   constructor(private spinnerService: NgxSpinnerService) { }
 
@@ -16,7 +18,6 @@ export class LoadingService {
       size: "large",
       bdColor: 'rgba(0, 0, 0, 0.8)',
       color: "#051977",
-
     });
   }
 

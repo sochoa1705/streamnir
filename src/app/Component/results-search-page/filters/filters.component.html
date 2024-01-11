@@ -1,0 +1,85 @@
+<form class="filters" [formGroup]="formGroup">
+	<div class="filters__currency" *ngIf="exchangeRate">
+		<article>
+			<h5>Moneda</h5>
+			<span>Tipo de cambio: S/ {{exchangeRate | number: '1.2-2'}}</span>
+		</article>
+		<app-select
+			[placeholder]="'Seleccionar'"
+			[name]="'currency'"
+			[isLeft]="false"
+			[default]="'USD'"
+			[isFilter]="true"
+			[isEmitChanges]="true"
+			(seletedItem)="seletedItemCurrency($event)"
+			[listItems]="[
+				{
+					value: 'USD',
+					name: 'Dólares'
+				},
+				{
+					value: 'PEN',
+					name: 'Soles'
+				}
+			]"
+		></app-select>
+	</div>
+
+	<div class="filters__loader" *ngIf="!exchangeRate">
+		<div class="skeleton filters__loader__skeleton_1"></div>
+		<div class="skeleton filters__loader__skeleton_2"></div>
+		<div class="skeleton filters__loader__skeleton_3"></div>
+	</div>
+
+	<div class="filters__results" *ngIf="totalResultsFilter || totalResults || isNotResult==true">
+		<h3>Filtros</h3>
+		<h5>
+			{{totalResultsFilter}} <span>de {{ totalResults }} resultados</span>
+		</h5>
+	</div>
+
+	<div class="filters__loader result" *ngIf="(!totalResultsFilter || !totalResults) && isNotResult==false && totalResultsFilter>0">
+		<div class="skeleton filters__loader__skeleton_4"></div>
+		<div class="skeleton filters__loader__skeleton_4"></div>
+	</div>
+
+	<app-dropdown-filter
+		[title]="'Equipaje'"
+		[listOptions]="dataBagFilter"
+		(clickedOption)="clickedOption($event, 'typeBag')"
+	></app-dropdown-filter>
+	<app-dropdown-filter
+		[title]="'Escalas'"
+		[listOptions]="dataScaleFilter"
+		(clickedOption)="clickedOption($event, 'scales')"
+	></app-dropdown-filter>
+	<app-dropdown-filter
+		[title]="'Aerolíneas'"
+		[isAirlines]="true"
+		[listOptions]="dataAirlines"
+		(clickedOption)="clickedOption($event, 'airlines')"
+		(selectedAirlines)="selectedAirlines($event)"
+	></app-dropdown-filter>
+	<app-price-filter
+		[minPrice]="minPrice"
+		[maxPrice]="maxPrice"
+		[currency]="currency"
+		(filterPriceRange)="filterPriceRange($event)"
+	></app-price-filter>
+	<app-duration-filter 
+		[valuesFilterDuration]="valuesFilterDuration" 
+		(filterDurationRange)="filterDurationRange($event)"
+		(resetFilterDuration)="resetFilterDuration()"
+		(filterDurationScale)="filterDurationScale($event)"
+	>
+	</app-duration-filter>
+	
+</form>
+
+<div class="filters__mobile" #sliderFilter>
+	<div class="filters__mobile__tag" *ngFor="let item of filtersMobile; index as i" (click)="openModalFilter(item.id)">
+		<img *ngIf="i==0" src="./assets/svg/sort-descending.svg" alt="-">
+		<span>{{item.name}}</span>
+		<img *ngIf="i!==0" src="./assets/svg/arrow-down-filter.svg" alt="v"/>
+	</div>
+</div>

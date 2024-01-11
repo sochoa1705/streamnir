@@ -5,6 +5,9 @@ import { MaterialModule } from '../../material.module';
 import { RouterModule } from '@angular/router';
 import { DirectivesModule } from '../../directives/directives.module';
 import { MatButtonModule } from '@angular/material/button';
+import { ButtonModule } from '../button/button.module';
+import { BurgerMenuModule } from '../burger-menu/burger-menu.module';
+import { ToolbarMobileModule } from '../toolbar-mobile/toolbar-mobile.module';
 
 @NgModule({
 	schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -14,7 +17,10 @@ import { MatButtonModule } from '@angular/material/button';
 		MaterialModule,
 		MatButtonModule,
 		RouterModule,
-		DirectivesModule
+		DirectivesModule,
+		ButtonModule,
+		BurgerMenuModule,
+		ToolbarMobileModule
 	],
 	exports: [ ToolbarComponent ]
 })
