@@ -7,7 +7,7 @@ WORKDIR /app
 COPY ./ /app
 # Instala las dependencias y compila la aplicación
 RUN npm install
-RUN npm run build-qa-new
+RUN npm run build-dev
 
 # Etapa 2: Despliegue de la aplicación en un servidor web ligero
 FROM nginx:alpine
