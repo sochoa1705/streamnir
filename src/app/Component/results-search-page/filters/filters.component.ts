@@ -115,7 +115,7 @@ export class FiltersComponent implements OnInit {
 		}
 	}
 
-	seletedItemCurrency($event: string) {
+	selectedItemCurrency($event: any) {
 		this.currency = $event == 'Soles' ? 'PEN' : 'USD';
 		GlobalComponent.currency = this.currency;
 		this.changeExchangeRate.emit($event);
@@ -175,7 +175,7 @@ export class FiltersComponent implements OnInit {
 		});
 		modalRef.componentInstance.currencySelected = this.currency;
 		modalRef.componentInstance.changeCurrency.subscribe(($event: any) => {
-			this.seletedItemCurrency($event);
+			this.selectedItemCurrency($event);
 		});
 	}
 

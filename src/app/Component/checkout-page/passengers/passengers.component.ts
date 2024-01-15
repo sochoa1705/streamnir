@@ -227,7 +227,6 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 		if ($event) {
 			this.rucField.setValidators([Validators.required, Validators.pattern(/^.{11,}$/)]);
 			this.companyNameField.setValidators(Validators.required);
-			this.companyAddressField.setValidators(Validators.required);
 		} else {
 			this.rucField.clearValidators();
 			this.companyNameField.clearValidators();

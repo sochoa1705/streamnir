@@ -154,6 +154,10 @@
 	}
 }
 
+.option-active {
+	background: colors.$gris-50 !important;
+}
+
 .span__error {
 	position: relative;
 	font-weight: 400;

@@ -23,9 +23,10 @@ export class ModalErrorComponent implements OnInit {
   goHome(){
     this.activeModal.close();
     window.scroll({ top: 0, behavior: 'smooth' });
-    if(this.isRedirect) {
+    if (this.isRedirect) {
+      const searchParams = JSON.stringify(localStorage.getItem('searchParams')).replace(/['"]+/g, '');
       this._checkoutService.resetValuesForms();
-      this._router.navigateByUrl('/');
+      this._router.navigateByUrl(searchParams);
     }
   }
 

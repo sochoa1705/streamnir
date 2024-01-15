@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Params } from 'src/app/api/api-nmviajes/models/ce-metasearch';
-import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { GlobalComponent } from '../../global';
 
 @Component({
@@ -21,9 +19,10 @@ export class InputClassComponent implements OnInit {
   ngOnInit(): void {
     if(window.location.href.includes('resultados')){
       this.indexClass=GlobalComponent.searchData.flightClass;
-      this.nameClass=this.indexClass==0 ? 'Económica' : this.indexClass==1 ? 'Negocios':'Primera clase';
+      this.nameClass=this.indexClass==0 ? 'Económica' : this.indexClass==1 ? 'Business':'Primera clase';
     }
   }
+  // TODO: correos
 
   clickOption(nameClass:string, index:number){
     this.nameClass=nameClass;
@@ -37,7 +36,7 @@ export class InputClassComponent implements OnInit {
   }
 
   /*@HostListener("document:click")
-  clickedOut() {
+  clickedOut() 
     if(this.inside && this.counterClik > 1) this.showOptions=false;
   }*/
 
@@ -45,6 +44,6 @@ export class InputClassComponent implements OnInit {
     return {
       flightClass: this.indexClass,
     }
-   }
+  }
 
 }
