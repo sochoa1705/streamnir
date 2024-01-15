@@ -61,7 +61,7 @@
 		constructor() {
 			this.debounceKeyUpSubject
 					.pipe(
-						debounceTime(250),
+						debounceTime(400),
 						distinctUntilChanged()
 					)
 					.subscribe((searchTerm) => {
