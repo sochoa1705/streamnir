@@ -1,21 +1,25 @@
-<div class="container__class" tabindex="0" (blur)="showOptions=false">
-    <div class="container__class__name" (click)="clickInside()" [class.isSearchFlight]="isSearchFlight">
-        <img src="./assets/svg/ticket.svg" alt="" />
-	    <span>{{nameClass}}</span>
-    </div>
+<div class="container__class" tabindex="0" (blur)="showOptions = false">
+	<div class="container__class__name" (click)="clickInside()" [class.isSearchFlight]="isSearchFlight">
+		<img src="./assets/svg/ticket.svg" alt="" />
+		<span>{{ nameClass }}</span>
+	</div>
 	<div class="container__class__floating" *ngIf="showOptions" [class.is-left]="isLeft">
-		<div class="container__class__floating__arrow"[class.is-left]="isLeft"></div>
+		<div class="container__class__floating__arrow" [class.is-left]="isLeft"></div>
 		<div class="container__class__floating__options">
 			<div class="container__class__floating__options__title">
 				<span>Clase</span>
 			</div>
-			<div class="container__class__floating__options__option" (click)="clickOption('Económica',0)">
+			<div class="container__class__floating__options__option" (click)="clickOption('Económica', 0)">
 				<span>Económica</span>
 			</div>
-			<div class="container__class__floating__options__option"  (click)="clickOption('Negocios',1)">
-				<span>Negocios</span>
+			<div class="container__class__floating__options__option" (click)="clickOption('Business', 1)">
+				<span>Business</span>
 			</div>
-			<div *ngIf="includeFirtClass" class="container__class__floating__options__option" (click)="clickOption('Primera clase',2)">
+			<div
+				*ngIf="includeFirtClass"
+				class="container__class__floating__options__option"
+				(click)="clickOption('Primera clase', 2)"
+			>
 				<span>Primera clase</span>
 			</div>
 		</div>

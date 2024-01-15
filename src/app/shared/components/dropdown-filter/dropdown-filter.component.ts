@@ -54,6 +54,7 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 	listOptionsAirlines: Item[] = [];
 	countRestAirlines = 0;
 	showLoader=true;
+	arrayFilterMobile:Item[]=[];
 
 	ngOnInit(): void {
 		if(this.isMobile) this.showLoader=false;
@@ -83,8 +84,16 @@ export class DropdownFilterComponent implements OnInit, OnChanges {
 	clickOption(item: Item) {
 		if(item.total>0){
 			item.active = !item.active;
-		    this.clickedOption.emit(item);
+			if(this.isMobile){
+				if(item.active) this.arrayFilterMobile.push(item)
+				else this.arrayFilterMobile=this.arrayFilterMobile.filter((option)=>option.value!==item.value) 
+			}else this.clickedOption.emit(item);
 		}
+	}
+
+	applyFilterMobile(){
+		this.clickedOption.emit(this.arrayFilterMobile)
+		this.clickCloseModal();
 	}
 
 	showMoreOptions() {

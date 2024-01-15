@@ -53,6 +53,7 @@ export class FiltersComponent implements OnInit {
 	@Output() filterByDuration = new EventEmitter();
 	@Output() filterByDurationScale = new EventEmitter();
 	@Output() resetFilterByDuration = new EventEmitter();
+	@Output() changeArrayFiltersMobile = new EventEmitter();
 
 	formGroup: FormGroup;
 	currency = 'USD';
@@ -107,7 +108,7 @@ export class FiltersComponent implements OnInit {
 				this.changeArrayFilters.emit({ key: 'typeBag', item: $event });
 				break;
 			case 'scales':
-				this.changeArrayFilters.emit({ key: $event.value, item: $event });
+				this.changeArrayFilters.emit({ key: 'scale', item: $event });
 				break;
 			default: //default es filtro aerolineas
 				this.changeArrayFilters.emit({ key: 'airlineCodeFilter', item: $event });
@@ -115,7 +116,7 @@ export class FiltersComponent implements OnInit {
 		}
 	}
 
-	seletedItemCurrency($event: string) {
+	selectedItemCurrency($event: any) {
 		this.currency = $event == 'Soles' ? 'PEN' : 'USD';
 		GlobalComponent.currency = this.currency;
 		this.changeExchangeRate.emit($event);
@@ -175,7 +176,7 @@ export class FiltersComponent implements OnInit {
 		});
 		modalRef.componentInstance.currencySelected = this.currency;
 		modalRef.componentInstance.changeCurrency.subscribe(($event: any) => {
-			this.seletedItemCurrency($event);
+			this.selectedItemCurrency($event);
 		});
 	}
 
@@ -187,7 +188,7 @@ export class FiltersComponent implements OnInit {
 		modalRef.componentInstance.listOptions = this.dataBagFilter;
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.clickedOption.subscribe(($event: any) => {
-			//this.clickedOption($event, 'typeBag');
+			this.changeArrayFiltersMobile.emit({key:'typeBag',item:$event });
 		});
 	}
 
@@ -199,7 +200,7 @@ export class FiltersComponent implements OnInit {
 		modalRef.componentInstance.listOptions = this.dataScaleFilter;
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.clickedOption.subscribe(($event: any) => {
-			//this.clickedOption($event, 'typeBag');
+			this.changeArrayFiltersMobile.emit({key:'scale',item:$event });
 		});
 	}
 
@@ -211,7 +212,7 @@ export class FiltersComponent implements OnInit {
 		modalRef.componentInstance.listOptions = this.dataAirlines;
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.clickedOption.subscribe(($event: any) => {
-			//this.clickedOption($event, 'typeBag');
+			this.changeArrayFiltersMobile.emit({key:'airlineCodeFilter',item:$event });
 		});
 	}
 

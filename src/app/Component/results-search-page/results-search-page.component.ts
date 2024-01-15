@@ -355,19 +355,15 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 
 		res.groups.forEach((item) => {
 			const codeMarketing = item.departure[0].segments[0].flightSegments[0].marketingAirline.code;
-			const isAllCodeMarketing =
-				item.departure.every(
-					(departure) => departure.segments[0].flightSegments[0].marketingAirline.code == codeMarketing
-				) && (item.returns ? item.returns.segments[0].flightSegments[0].marketingAirline.code == codeMarketing : true);
-
-			if (isAllCodeMarketing) {
+			//idGds:7 ===> multiticket
+			if (item.gds.idGDS!==7) {
 				const indexAirline = this.dataAirlinesTemp.findIndex((obj) => {
 					return obj.value === codeMarketing;
 				});
 				if (indexAirline !== -1) this.dataAirlinesTemp[indexAirline].total++;
 			}
 
-			item.airlineCodeFilter = isAllCodeMarketing ? codeMarketing : 'MT';
+			item.airlineCodeFilter = item.gds.idGDS!==7 ? codeMarketing : 'MT';
 			if (item.airlineCodeFilter == 'MT') this.totalMultiticket++;
 
 			const isBagHold =
@@ -648,7 +644,23 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 				else this.filters.arrayScales = this.filters.arrayScales.filter((bag) => bag !== item.value);
 				break;
 		}
-		///ver cuando todas las air. vacio
+		this.applyFilters();
+	}
+
+	changeArrayFiltersMobile($event:{key:string, item:Item[]}){
+		const item = $event.item;
+		const key = $event.key;
+		switch (key) {
+			case 'typeBag':
+				this.filters.arrayBaggage=item.map(option=>{return option.value});
+				break;
+			case 'airlineCodeFilter':
+				this.filters.arrayAirline=item.map(option=>{return option.value});
+				break;
+			default:
+				this.filters.arrayScales=item.map(option=>{return option.value});
+				break;
+		}
 		this.applyFilters();
 	}
 
