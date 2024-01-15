@@ -147,7 +147,7 @@ export class CheckoutService {
 		dateDeparture = new Date(departure[0].segments[0].flightSegments[0].departureDateTime);
 		totalDaysTravel =
 			this.getDiffDays(moment(dateDeparture).format('MM/DD/yyyy'), moment(dateArrival).format('MM/DD/yyyy')) + 1;
-		GlobalComponent.totalDaysTravel = totalDaysTravel - 1;
+		GlobalComponent.totalDaysTravel = totalDaysTravel;
 	}
 
 	updateTotalInsurance(status: boolean) {
