@@ -27,7 +27,7 @@
 
 <div *ngIf="isMobile" class="dropdown__footer">
     <app-button [text]="'Cancelar'"  (click)="clickCloseModal()" [size]="'xs'" [color]="'neutral'" ></app-button>
-    <app-button [text]="'Confirmar'" [size]="'xs'"></app-button>
+    <app-button [text]="'Confirmar'" [size]="'xs'" (click)="applyFilterMobile()"></app-button>
 </div>
 <div class="dropdown__loader" *ngIf="value == 0 || highValue == 0">
 	<div class="skeleton dropdown__loader__skeleton_1"></div>

@@ -45,6 +45,8 @@ export class FiltersComponent implements OnInit {
 	@Input() theCheapest: any;
 	@Input() betterOption: any;
 	@Input() shorterDuration: any;
+	@Input() indexSortBy = 0;
+	@Input() currentFilters: any;
 
 	@Output() changeArrayFilters = new EventEmitter();
 	@Output() updateArrayAirlinesFilter = new EventEmitter();
@@ -54,6 +56,8 @@ export class FiltersComponent implements OnInit {
 	@Output() filterByDurationScale = new EventEmitter();
 	@Output() resetFilterByDuration = new EventEmitter();
 	@Output() changeArrayFiltersMobile = new EventEmitter();
+	@Output() clickTabSort = new EventEmitter();
+	@Output() filterDurationMobile = new EventEmitter();
 
 	formGroup: FormGroup;
 	currency = 'USD';
@@ -66,7 +70,7 @@ export class FiltersComponent implements OnInit {
 	filtersMobile = [
 		{
 			id: 0,
-			name: 'Mejor Opcion'
+			name: 'Precio más bajo'
 		},
 		{
 			id: 1,
@@ -188,7 +192,7 @@ export class FiltersComponent implements OnInit {
 		modalRef.componentInstance.listOptions = this.dataBagFilter;
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.clickedOption.subscribe(($event: any) => {
-			this.changeArrayFiltersMobile.emit({key:'typeBag',item:$event });
+			this.changeArrayFiltersMobile.emit({ key: 'typeBag', item: $event });
 		});
 	}
 
@@ -200,7 +204,7 @@ export class FiltersComponent implements OnInit {
 		modalRef.componentInstance.listOptions = this.dataScaleFilter;
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.clickedOption.subscribe(($event: any) => {
-			this.changeArrayFiltersMobile.emit({key:'scale',item:$event });
+			this.changeArrayFiltersMobile.emit({ key: 'scale', item: $event });
 		});
 	}
 
@@ -212,7 +216,7 @@ export class FiltersComponent implements OnInit {
 		modalRef.componentInstance.listOptions = this.dataAirlines;
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.clickedOption.subscribe(($event: any) => {
-			this.changeArrayFiltersMobile.emit({key:'airlineCodeFilter',item:$event });
+			this.changeArrayFiltersMobile.emit({ key: 'airlineCodeFilter', item: $event });
 		});
 	}
 
@@ -224,6 +228,11 @@ export class FiltersComponent implements OnInit {
 		modalRef.componentInstance.currency = this.currency;
 		modalRef.componentInstance.minPrice = this.minPrice;
 		modalRef.componentInstance.maxPrice = this.maxPrice;
+		modalRef.componentInstance.currentMinPrice = this.currentFilters.minPrice;
+		modalRef.componentInstance.currentMaxPrice = this.currentFilters.maxPrice;
+		modalRef.componentInstance.filterPriceRange.subscribe(($event: any) => {
+			this.filterByPrice.emit($event);
+		});
 	}
 
 	openModalDuration() {
@@ -232,6 +241,9 @@ export class FiltersComponent implements OnInit {
 		});
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.valuesFilterDuration = this.valuesFilterDuration;
+		modalRef.componentInstance.filterDurationMobile.subscribe(($event: any) => {
+			this.filterDurationMobile.emit($event);
+		});
 	}
 
 	openModalSortBy() {
@@ -242,6 +254,11 @@ export class FiltersComponent implements OnInit {
 		modalRef.componentInstance.betterOption = this.betterOption;
 		modalRef.componentInstance.shorterDuration = this.shorterDuration;
 		modalRef.componentInstance.currency = this.currency;
+		modalRef.componentInstance.currentIndexTab = this.indexSortBy;
+		modalRef.componentInstance.clickTabSort.subscribe(($event: number) => {
+			this.filtersMobile[0].name = $event == 0 ? 'Precio más bajo' : $event == 1 ? 'Mejor Opción' : 'Más rápido';
+			this.clickTabSort.emit($event);
+		});
 	}
 
 	@HostListener('window:resize', ['$event'])

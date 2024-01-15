@@ -27,6 +27,7 @@ export class DurationFilterComponent implements OnInit{
   @Output() filterDurationRange = new EventEmitter();
   @Output() filterDurationScale = new EventEmitter();
   @Output() resetFilterDuration  = new EventEmitter();
+  @Output() filterDurationMobile = new EventEmitter();
 
   flightType=0;
   codesFlight:string[]=[];
@@ -175,11 +176,25 @@ export class DurationFilterComponent implements OnInit{
 	}
 
   filterDuration($event:any,isDeparture:boolean){
-     this.filterDurationRange.emit({...$event,isDeparture});
+     if(!this.isMobile) this.filterDurationRange.emit({...$event,isDeparture});
   }
 
   filterScale($event:any,isDeparture:boolean){
-     this.filterDurationScale.emit({...$event,isDeparture})
+    if(!this.isMobile) this.filterDurationScale.emit({...$event,isDeparture})
+  }
+
+  applyFiltersMobile(){
+    this.filterDurationMobile.emit({
+			highValueDurationDep:this.highValueDurationDep,
+			valueDurationDep: this.valueDurationDep,
+      highValueDurationRet:this.highValueDurationRet,
+      valueDurationRet:this.valueDurationRet,
+      highValueScaleDep:this.highValueScaleDep,
+      valueScaleDep:this.valueScaleDep,
+      highValueScaleRet:this.highValueScaleRet,
+      valueScaleRet:this.valueScaleRet
+		})
+		this.clickCloseModal();
   }
 
   changeFilterDuration(){

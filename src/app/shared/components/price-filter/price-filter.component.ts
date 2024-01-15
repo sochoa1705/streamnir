@@ -44,6 +44,8 @@ export class PriceFilterComponent implements OnInit, OnChanges{
 	@Input() currency = 'USD';
 	@Input() minPrice = 0;
 	@Input() maxPrice = 0;
+	@Input() currentMinPrice = 0;
+	@Input() currentMaxPrice = 0;
 	@Output() resetPrice = new EventEmitter();
 	@Output() filterPriceRange = new EventEmitter();
 	@Input() isMobile=false;
@@ -77,14 +79,23 @@ export class PriceFilterComponent implements OnInit, OnChanges{
 		if(this.isMobile) {
 			this.showLoader=false;
 			this.options.floor = this.minPrice;
-			this.value = this.minPrice;
 			this.options.ceil =  this.maxPrice;
-			this.highValue = this.maxPrice;
+			this.value = this.currentMinPrice;
+			this.highValue = this.currentMaxPrice;
 		}
 	}
 
 	filterPrice($event: any) {
+		if(!this.isMobile)
 		this.filterPriceRange.emit($event);
+	}
+
+	applyFilterMobile(){
+		this.filterPriceRange.emit({
+			highValue:this.highValue,
+			value: this.value
+		})
+		this.clickCloseModal();
 	}
 
 	resetFilter() {

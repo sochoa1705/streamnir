@@ -291,12 +291,9 @@ export class InputSearchFlightComponent implements OnInit {
 
 		// slice first part ex: LIM, LBP
 		if (parts.length) parts = parts.slice(1, parts.length);
-		console.log(parts);
-
 		const cityName = parts.join(' ').trim();
-		console.log('cityName', cityName);
-    const capitalizedCityName = cityName.replace(/\b\w/g, char => char.toUpperCase());
+    	const capitalizedCityName = cityName.replace(/\b\w/g, char => char.toUpperCase());
 
-    return capitalizedCityName;
-}
+    	return capitalizedCityName;
+	}
 }
