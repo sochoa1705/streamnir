@@ -644,7 +644,23 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 				else this.filters.arrayScales = this.filters.arrayScales.filter((bag) => bag !== item.value);
 				break;
 		}
-		///ver cuando todas las air. vacio
+		this.applyFilters();
+	}
+
+	changeArrayFiltersMobile($event:{key:string, item:Item[]}){
+		const item = $event.item;
+		const key = $event.key;
+		switch (key) {
+			case 'typeBag':
+				this.filters.arrayBaggage=item.map(option=>{return option.value});
+				break;
+			case 'airlineCodeFilter':
+				this.filters.arrayAirline=item.map(option=>{return option.value});
+				break;
+			default:
+				this.filters.arrayScales=item.map(option=>{return option.value});
+				break;
+		}
 		this.applyFilters();
 	}
 
