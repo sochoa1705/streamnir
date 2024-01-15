@@ -218,6 +218,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 				GlobalComponent.appReglasVentaAnticipada = response.reglasVentaAnticipada;
 				GlobalComponent.appConfigurations = response.configuraciones;
 				GlobalComponent.transactionId = response.transactionId;
+				console.log( response.transactionId, ' transactionId')
 				this.getObjectParams();
 			},
 			error: () => {
