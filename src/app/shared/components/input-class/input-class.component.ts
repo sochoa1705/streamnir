@@ -14,15 +14,13 @@ export class InputClassComponent implements OnInit {
   showOptions=false;
   nameClass='Económica'
   indexClass=0;
-  inside=false;
-  counterClik=0;
+
   ngOnInit(): void {
     if(window.location.href.includes('resultados')){
       this.indexClass=GlobalComponent.searchData.flightClass;
       this.nameClass=this.indexClass==0 ? 'Económica' : this.indexClass==1 ? 'Business':'Primera clase';
     }
   }
-  // TODO: correos
 
   clickOption(nameClass:string, index:number){
     this.nameClass=nameClass;
@@ -32,13 +30,7 @@ export class InputClassComponent implements OnInit {
 
   clickInside(){
     this.showOptions=!this.showOptions;
-    this.counterClik++;
   }
-
-  /*@HostListener("document:click")
-  clickedOut() 
-    if(this.inside && this.counterClik > 1) this.showOptions=false;
-  }*/
 
   getValues(){
     return {
