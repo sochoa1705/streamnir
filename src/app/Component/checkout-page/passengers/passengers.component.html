@@ -140,9 +140,7 @@
 											>Código <span class="required">*</span>
 											<span class="text-left">Número de teléfono <span class="required">*</span></span></span
 										>
-										<span id="num_2">
-											Número de teléfono <span class="required">*</span>
-										</span>
+										<span id="num_2"> Número de teléfono <span class="required">*</span> </span>
 										<ngx-intl-tel-input
 											[preferredCountries]="preferredCountries"
 											[enableAutoCountrySelect]="true"
@@ -240,13 +238,6 @@
 							[placeholder]="'Ingresar dirección'"
 							[name]="'companyAddress'"
 							[maxLenght]="100"
-							[isRequired]="true"
-							[class]="companyAddressField.touched && companyAddressField!.invalid ? 'error' : ''"
-							[labelError]="
-								companyAddressField.touched && companyAddressField!.hasError('required')
-									? 'Dirección es obligatorio'
-									: ''
-							"
 						></app-input>
 					</div>
 				</div>

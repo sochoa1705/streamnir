@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RValidateBooking } from 'src/app/api/api-checkout/models/rq-checkout-validate-booking';
@@ -28,7 +28,8 @@ export class ModalValidateComponent implements OnInit {
 	goHome() {
 		this.activeModal.close();
 		window.scroll({ top: 0, behavior: 'smooth' });
-		this._router.navigateByUrl('/');
+		const searchParams = JSON.stringify(localStorage.getItem('searchParams')).replace(/['"]+/g, '');
+		this._router.navigateByUrl(searchParams);
 	}
 
 	cancelBooking() {
