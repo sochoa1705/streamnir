@@ -1,5 +1,5 @@
 # Etapa 1: Compilación de la aplicación Angular
-FROM node:14.20.0 as build
+FROM node:14.20.0 AS build
 
 WORKDIR /app
 
