@@ -6,17 +6,17 @@ import { CardDetailFlyModule } from '../card-detail-fly/card-detail-fly.module';
 import localeEs from "@angular/common/locales/es";
 import { registerLocaleData } from "@angular/common";
 import { ToolTipModule } from '../tooltip/tooltip.module';
+import { GetDaysPipe } from '../../pipes/get-days.pipe';
 import { ModalFlightDetailComponent } from './modal-flight-detail/modal-flight-detail.component';
 import { SwiperModule } from 'swiper/angular';
 import { ChangeCurrencyPipe } from '../../pipes/change-currency.pipe';
 import { AmPmPipe } from '../../pipes/hour.pipe';
 import { ToolTipArrivalModule } from '../tooltip-arrival/tooltip-arrival.module';
-import { ModalPriceMobileComponent } from './modal-price-mobile/modal-price-mobile.component';
 registerLocaleData(localeEs, "es");
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ CardResultSearchComponent,ModalFlightDetailComponent, ChangeCurrencyPipe, AmPmPipe, ModalPriceMobileComponent],
+  declarations: [ CardResultSearchComponent,ModalFlightDetailComponent, ChangeCurrencyPipe, AmPmPipe],
   imports: [
     CommonModule, 
     ButtonModule,
