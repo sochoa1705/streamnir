@@ -23,7 +23,7 @@
 							onerror="this.src='https://www.nmviajes.com/resources/images/airlines/MULT.gif'"
 						/>
 						<h4 class="fly">{{ departure.originCity.code }}</h4>
-						<img class="arrow" src="./assets/result-search/arrow.svg" />
+						<img class="arrow" width="24" height="24" src="./assets/result-search/arrow.svg" />
 						<h4 class="fly2">{{ departure.destinationCity.code }}</h4>
 						<div class="date date d-none d-sm-block">
 							{{ (departure.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}
@@ -113,7 +113,7 @@
 						onerror="this.src='https://www.nmviajes.com/resources/images/airlines/MULT.gif'"
 					/>
 					<h4 class="fly">{{ returns.originCity.code }}</h4>
-					<img class="arrow" src="./assets/result-search/arrow.svg" />
+					<img class="arrow" width="24" height="24" src="./assets/result-search/arrow.svg" />
 					<h4 class="fly2">{{ returns.destinationCity.code }}</h4>
 					<div class="date date d-none d-sm-block">
 						{{ (returns.departureDate | formdate | date: 'EE d MMM')?.split('.')?.join(' ') }}
@@ -202,7 +202,7 @@
 					></app-button>
 				</article>
 			</div>
-			<span class="card__result__pricemobile__detail">¿Que incluye este precio?</span>
+			<span class="card__result__pricemobile__detail" (click)="openModalDetailPriceMobile()">¿Que incluye este precio?</span>
 		</div>
 
 		<div class="card__result__price">
