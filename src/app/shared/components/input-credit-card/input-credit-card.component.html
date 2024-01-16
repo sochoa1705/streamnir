@@ -1,0 +1,36 @@
+<span *ngIf="label" class="span__label" [class.span__label__stroke]="labelStroke" [class.disabled]="disabled"
+	>{{ label }} <span *ngIf="isRequired" class="span__label__required">*</span></span>
+<div class="group-input">
+	<input
+		*ngIf="isCreditCard"
+		[placeholder]="placeholder"
+		[value]="value"
+		[class]="class"
+		[class.label]="label"
+		[class.icon]="icon"
+		[name]="name"
+		[maxlength]="19"
+		[id]="name"
+		[formControlName]="name"
+		appCardNumberFormat
+		(paste)="(false)"
+	/>
+
+	<input
+		*ngIf="!isCreditCard"
+		[placeholder]="placeholder"
+		[value]="value"
+		[class]="class"
+		[class.label]="label"
+		[class.icon]="icon"
+		[name]="name"
+		[maxlength]="5"
+		[id]="name"
+		[formControlName]="name"
+		appCardExpirationDate
+		(paste)="(false)"
+	/>
+
+</div>
+
+<span class="span__error" *ngIf="labelError !== ''">{{ labelError }}</span>

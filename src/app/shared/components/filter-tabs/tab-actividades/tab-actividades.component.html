@@ -1,33 +1,26 @@
-<div class="boxTab">
-    <form class="bg-white" name="form" [formGroup]="form">
-
-        <div class="rowBoxTab">
-            <div class="padRight">
-                <app-pop-up-pasajero [nroAdultos]="2" #popUp  (emitDistributionObject)="distributionObject = $event" (emitDistribution)="distribution = $event" [onlyPasajeros]="true"></app-pop-up-pasajero>
-            </div>
+<form [formGroup]="form" class="section__hotel">
+    <div class="section__hotel__tags">
+		<app-pop-up-pasajero
+			[nroAdultos]="2"
+			#popUp
+			(emitDistributionObject)="distributionObject = $event" 
+            (emitDistribution)="distribution = $event"
+            [onlyPasajeros]="true"
+		></app-pop-up-pasajero>
+    </div>
+    <div  class="section__hotel__inputs">
+        <div class="section__hotel__inputs__group">
+            <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)"
+            placeholder="¿Donde le gustaría ir?" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
+            <img src="./assets/svg/location-red.svg" alt="o" />
         </div>
-        <div class="rowBoxTab">
-            <div class="colBoxtab">
-                <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino"
-                    (keyup)="autoComplete($event)" class="form-control animated fadeIn"
-                    placeholder="¿Donde le gustaría ir?" (keypress)="inputValidator.removeNonValid($event, inputValidator.VALID_NAME)">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let state of citys" [value]="state.label">
-                        <img class="example-option-img" aria-hidden src="./assets/origen.png">
-                        <span>{{state.label}}</span>
-                    </mat-option>
-                </mat-autocomplete>
-            </div>
-
-            <app-calendar class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
-
-            <div class="colBoxtab">
-                <button class="fullWidht" (click)="search()">Buscar</button>
-            </div>
-
-        </div>
-        <!-- <div class="rowBoxTab right">
-            Haciendo click en "Buscar", acepto las Condiciones Generales
-        </div> -->
-    </form>
-</div>
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let state of citys" [value]="state.label">
+                <img class="example-option-img" aria-hidden src="./assets/svg/airplane-line.svg">
+                <span>{{state.label}}</span>
+            </mat-option>
+        </mat-autocomplete>
+        <app-input-range #childDates [typeFlight]="-1"></app-input-range>
+        <app-button [text]="'Buscar'" [isMobile]="true" [fullWidth]="true"[left]="true" [icon]="'search.svg'" (onClick)="search()"></app-button>
+    </div>
+</form>

@@ -103,19 +103,19 @@ export class DataPagePresenterService {
         card: [
           {
             id: 0,
-            img: "ofertas.svg",
+            img: "./assets/home/choose/bag.png",
             title: "Las mejores ofertas para tu viaje",
             description: "Aprovecha nuestros descuentos promociones y ofertas seleccionadas que tenemos para ti."
           },
           {
             id: 1,
-            img: "facil.svg",
+            img: "./assets/home/choose/secure.png",
             title: "Comprar es fácil y seguro",
             description: "Te ofrecemos los mejores lugares para ir de vacaciones por todo el mundo. Reserva tu viaje de forma fácil, rápida y segura."
           },
           {
             id: 2,
-            img: "expertos.svg",
+            img: "./assets/home/choose/certificate.png",
             title: "Expertos en Viajes",
             description: "Más de 40 años de experiencia, como líder en turismo, brindando servicios de calidad que hará que tu experiencia de viaje sea inolvidable."
           }
@@ -142,7 +142,7 @@ export class DataPagePresenterService {
 
             id: 1,
             text: "Vuelos",
-            link: "vuelos"
+            link: "/vuelos"
           },
           {
 
@@ -180,14 +180,8 @@ export class DataPagePresenterService {
         list2: [
           {
             id: 0,
-            text: "Nuestra Empresa NM Viajes",
+            text: "Quienes somos",
             link: "/nuestra-empresa",
-            target: "_self"
-          },
-          {
-            id: 1,
-            text: "Nuestras Agencias NM Viajes",
-            link: "/nuestras-agencias/",
             target: "_self"
           },
           {
@@ -198,26 +192,14 @@ export class DataPagePresenterService {
           },
           {
             id: 3,
-            text: "Política de Protección de datos Personales",
-            link: "politicas",
-            target: "_self"
-          },
-          {
-            id: 4,
             text: "Responsabilidad Social Corporativa",
             link: "responsabilidad-social",
             target: "_self"
           },
           {
-            id: 5,
-            text: "Mapa de Sitio",
-            link: "#",
-            target: "_self"
-          },
-          {
-            id: 6,
-            text: "Beneficios bancos",
-            link: "beneficios",
+            id: 4,
+            text: "Política de Protección de datos Personales",
+            link: "politicas",
             target: "_self"
           }
           // {

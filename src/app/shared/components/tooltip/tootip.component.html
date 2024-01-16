@@ -1,0 +1,25 @@
+<div class="luggage">
+	<div class="luggage__section" (mouseenter)="isHover = true" (mouseleave)="isHover = false">
+		<img src="./assets/svg/backpack.svg" />
+		<img [src]="isHandLuggage ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg'" />
+		<img [src]="isHoldLuggage ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg'" />
+	</div>
+	<div class="luggage__floating" *ngIf="isHover" [class.show]="isHover" [class.no-right]="!isRight" [class.top]="isTop">
+		<div class="luggage__floating__arrow" [class.top]="isTop" [class.no-right]="!isRight"></div>
+		<div class="luggage__floating__options">
+			<div class="luggage__floating__options__option">
+				<img src="./assets/svg/backpack.svg" alt="ic" />
+				<span>Incluye mochila o cartera</span>
+			</div>
+			<div class="luggage__floating__options__option">
+				<img [src]="isHandLuggage ? './assets/svg/hand-luggage.svg' : './assets/svg/no-hand-luggage.svg'" alt="ic" />
+				<span>{{ isHandLuggage ? 'Incluye equipaje de mano' : 'No incluye equipaje de mano' }}</span>
+			</div>
+			<div class="luggage__floating__options__option">
+				<img [src]="isHoldLuggage ? './assets/svg/hold-luggage.svg' : './assets/svg/no-hold-luggage.svg'" alt="ic" />
+				<span>{{ isHoldLuggage ? 'Incluye equipaje de bodega' : 'No incluye equipaje de bodega' }}</span>
+			</div>
+		</div>
+	</div>
+</div>
+

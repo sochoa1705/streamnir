@@ -1,18 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { NMRequest } from 'src/app/Models/base/NMRequest';
-import { ModelTaggingSlidersBanners } from 'src/app/Services/analytics/tagging.models';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
 import { DestinyService } from 'src/app/Services/destiny/destiny.service';
 import { IGalleryImage, EGalleryCode } from 'src/app/Services/presenter/data-page-presenter.models';
 import { DataPagePresenterService } from 'src/app/Services/presenter/data-page-presenter.service';
-import { getFileName } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-cars',
   templateUrl: './cars.component.html',
   styleUrls: ['./cars.component.scss']
 })
+
 export class CarsComponent implements OnInit {
 
   destiny: any = [];
@@ -47,7 +45,6 @@ export class CarsComponent implements OnInit {
 
   toSlider(e: IGalleryImage, nombre: "slider" | "banner", index: number, array: number) {
     if (e.RedirectLink) window.open(e.RedirectLink, '_blank');
-    if (e.PathImage) this.addTag(e, nombre, index, array)
   }
 
   getGallery() {
@@ -61,28 +58,5 @@ export class CarsComponent implements OnInit {
 
       this.loadedGallery = true;
     })
-  }
-
-  addTag(gallery: IGalleryImage, nombre: "slider" | "banner", index: number, array: number) {
-
-    let position = "";
-    let nombreTagg: "Slider Principal" | "Banner Principal";
-
-    if (nombre === "slider") {
-      nombreTagg = "Slider Principal";
-      position = `Slide ${index + 1} de ${array}`
-    } else {
-      nombreTagg = "Banner Principal";
-      position = `Card ${index + 1} de ${array}`
-    }
-
-    const tag = new ModelTaggingSlidersBanners(
-      getFileName(gallery.PathImage),
-      gallery.NameImage,
-      nombreTagg,
-      position
-    )
-
-    TaggingService.clickSliderBanners(tag);
   }
 }

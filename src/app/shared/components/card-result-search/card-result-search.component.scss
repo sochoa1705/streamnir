@@ -1,0 +1,316 @@
+@use '/src/scss/colors';
+
+::ng-deep {
+	.custom-dialog-flight > mat-dialog-container {
+		padding: 0 !important;
+	}
+}
+.flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.paragraph {
+	font-family: Montserrat;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+	letter-spacing: 0em;
+}
+section {
+	padding: 36px;
+	border-radius: 10px;
+	border: 1px solid colors.$gris-300;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+.tags {
+	@extend .flex-row;
+	align-items: flex-start;
+	justify-content: flex-start;
+	gap: 15px;
+}
+
+h4 {
+	font-family: Open Sans;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 32px;
+	letter-spacing: -0.02em;
+	margin-bottom: 0;
+	color: colors.$neutral-900;
+	text-align: center;
+
+	span {
+		font-family: Open Sans;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 32px;
+		letter-spacing: -0.02em;
+	}
+}
+
+.card__result {
+	@extend .flex-row;
+	align-items: flex-start;
+	gap: 53px;
+	&__flights {
+		@extend .flex-column;
+		gap: 20px;
+		width: 100%;
+		&__section {
+			@extend .flex-column;
+			gap: 16px;
+			&__header {
+				display: grid;
+				grid-template-columns: 42px min-content 27px min-content;
+				grid-template-rows: 36px 20px;
+				gap: 0px 12px;
+				align-items: center;
+				grid-template-areas:
+					'img fly arrow fly2'
+					'. date date date';
+				.img {
+					grid-area: img;
+					justify-self: center;
+				}
+				.fly {
+					grid-area: fly;
+				}
+				.fly2 {
+					grid-area: fly2;
+				}
+				.arrow {
+					grid-area: arrow;
+				}
+				.date {
+					grid-area: date;
+					@extend .paragraph;
+					color: colors.$gris-700;
+				}
+				h4 {
+					font-family: Montserrat;
+					font-size: 24px;
+					font-weight: 600;
+					line-height: 28px;
+					letter-spacing: 0em;
+					color: colors.$neutral-900;
+					margin-bottom: 0px;
+				}
+			}
+			&__options {
+				padding: 8px;
+				@extend .flex-column;
+				gap: 16px;
+				.segment {
+					display: grid;
+					grid-template-columns: 24px 1fr;
+					grid-template-rows: auto auto;
+					column-gap: 20px;
+					&__radio {
+						cursor: pointer;
+					}
+					&__detail {
+						display: flex;
+						flex-wrap: wrap;
+						@extend .flex-row;
+						align-items: center;
+						column-gap: 40px;
+						row-gap: 8px;
+						span {
+							font-family: Montserrat;
+							letter-spacing: 0em;
+							color: colors.$neutral-900;
+							display: flex;
+							align-items: flex-start;
+							&.scala {
+								font-size: 12px;
+								font-weight: 600;
+								line-height: 25px;
+							}
+							&.duration {
+								font-size: 13px;
+								font-weight: 400;
+								line-height: 14px;
+								color: colors.$gris-700;
+							}
+						}
+						&__hours {
+							@extend .flex-row;
+							img {
+								cursor: pointer;
+								margin-right: 20px;
+							}
+						}
+					}
+				}
+			}
+			&__more {
+				width: fit-content;
+				@extend .flex-row;
+				gap: 8px;
+				cursor: pointer;
+				span {
+					@extend .paragraph;
+					color: colors.$gris-600;
+				}
+			}
+		}
+		&__line {
+			width: 100%;
+			height: 0;
+			border-top: 1px solid colors.$gris-600;
+		}
+	}
+
+	&__pricemobile {
+		display: none;
+		width: 100%;
+		&__actions {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			gap:12px;
+			h4 {
+				font-size: 16px;
+				line-height: 24px;
+				span {
+					font-size: 12px;
+					line-height: 20px;
+				}
+			}
+			article{
+				margin:0;
+				width: 130px;
+			}
+		}
+		&__detail {
+			font-family: Montserrat;
+			font-size: 12px;
+			font-weight: 600;
+			line-height: 20px;
+			letter-spacing: 0em;
+			color: colors.$red-500;
+			margin-top: 10px;
+			display: block;
+		}
+	}
+
+	&__price {
+		min-width: 266px;
+		@extend .flex-column;
+		gap: 15px;
+		justify-content: center;
+		&__detail {
+			@extend .flex-column;
+			gap: 8px;
+			&__row {
+				@extend .flex-row;
+				align-items: center;
+				span {
+					@extend .paragraph;
+					color: colors.$neutral-900;
+					&.total {
+						font-weight: 600;
+						font-size: 16px;
+						line-height: 24px;
+						> span.usd {
+							font-size: 12px;
+							margin-right: 4px;
+							font-weight: 400;
+						}
+					}
+				}
+			}
+		}
+		&__button {
+			width: 100%;
+			margin-top: 9px;
+		}
+	}
+}
+
+@media (max-width: 1199px) {
+	.card__result__price {
+		min-width: 220px;
+	}
+}
+
+@media (max-width: 738px) {
+	section {
+		padding: 36px 24px;
+	}
+}
+
+@media (max-width: 625px) {
+	.card__result {
+		gap: 33px;
+	}
+	.card__result__price {
+		min-width: 190px;
+	}
+}
+
+@media (max-width: 575px) {
+	.card__result {
+		flex-direction: column;
+		gap: 24px;
+		&__pricemobile {
+			display: block;
+		}
+	}
+	.card__result__price {
+		display: none;
+	}
+
+	.tags img{
+		height: 24px;
+	}
+	.card__result__flights__section {
+		gap: 8px;
+		&__header{
+			grid-template-rows: auto;
+		}
+		&__header h4 {
+			font-size: 20px;
+			line-height: 28px;
+		}
+		&__more span {
+			font-size: 12px;
+			line-height: 20px;
+		}
+		&__header span.date {
+			display: none;
+		}
+		&__more img {
+			height: 16px;
+		}
+	}
+	.segment {
+		column-gap: 12px !important;
+		.segment__detail {
+			column-gap: 10px;
+			row-gap: 10px;
+			span.scala,
+			span.duration {
+				font-size: 10px;
+				line-height: 20px;
+			}
+		}
+	}
+}
+
+@media (max-width: 310px){
+	section{
+		padding: 36px 20px;
+	}
+}
