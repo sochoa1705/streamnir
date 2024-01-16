@@ -21,12 +21,12 @@
 	}
 
 	@media (max-width: 575px) {
-		.hour {
-			font-size: 12px;
+		&.hour {
+			font-size: 14px;
 			line-height: 20px;
 			min-width: 110px;
 		}
-		.plus {
+		&.plus {
 			font-size: 8px;
 			line-height: 11.24px;
 		}
