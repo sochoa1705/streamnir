@@ -1,0 +1,111 @@
+<div class="container__suscription">
+	<img src="./assets/home/boletin-woman.png" class="container__suscription__image" />
+	<div class="container__suscription__contend">
+		<div class="container__suscription__contend__header">
+			<div class="container__suscription__contend__header__text">
+				<h3>Mantente actualizado</h3>
+				<span
+					>Suscríbete a nuestro boletín y recibe ofertas exclusivas, consejos de viaje y destinos inspiradores.</span
+				>
+			</div>
+			<img
+				class="container__suscription__contend__header__close"
+				src="./assets/svg/close-boletin.svg"
+				(click)="activeModal.close()"
+			/>
+		</div>
+		<form class="container__suscription__contend__form" [formGroup]="formGroup">
+			<div class="container__suscription__contend__form__group">
+				<input
+					type="text"
+					placeholder="Nombres"
+					[name]="'nombreMail'"
+					[formControlName]="'nombreMail'"
+					[maxlength]="50"
+					[class]="nombreMailField.touched && nombreMailField!.invalid ? 'error' : ''"
+				/>
+				<img src="./assets/svg/person.svg" alt="o" />
+				<span class="span__error" *ngIf="nombreMailField.touched">{{
+					nombreMailField!.hasError('required')
+						? 'Nombre es obligatorio'
+						: nombreMailField!.hasError('maxlength')
+						? 'Debe tener max. 50 caracteres'
+						: nombreMailField!.hasError('whitespace')
+						? 'Nombre no válido'
+						: ''
+				}}</span>
+			</div>
+			<div class="container__suscription__contend__form__group">
+				<input
+					type="text"
+					placeholder="Apellidos"
+					[name]="'apellidoMail'"
+					[formControlName]="'apellidoMail'"
+					[maxlength]="50"
+					[class]="apellidoMailField.touched && apellidoMailField!.invalid ? 'error' : ''"
+				/>
+				<img src="./assets/svg/person.svg" alt="o" />
+				<span class="span__error" *ngIf="apellidoMailField.touched">{{
+					apellidoMailField!.hasError('required')
+						? 'Apellidos es obligatorio'
+						: apellidoMailField!.hasError('maxlength')
+						? 'Debe tener max. 50 caracteres'
+						: apellidoMailField!.hasError('whitespace')
+						? 'Apellidos no válido'
+						: ''
+				}}</span>
+			</div>
+			<div class="container__suscription__contend__form__group w-100">
+				<input
+					type="text"
+					placeholder="Correo electrónico"
+					[name]="'correoMail'"
+					[formControlName]="'correoMail'"
+					[maxlength]="50"
+					[class]="correoMailField.touched && correoMailField!.invalid ? 'error' : ''"
+				/>
+				<img src="./assets/svg/email.svg" alt="o" />
+				<span class="span__error" *ngIf="correoMailField.touched">{{
+					correoMailField!.hasError('required')
+						? 'Correo es obligatorio'
+						: correoMailField!.hasError('maxlength')
+						? 'Debe tener max. 50 caracteres'
+						: correoMailField!.hasError('email')
+						? 'Correo no válido'
+						: ''
+				}}</span>
+			</div>
+		</form>
+		<div class="container__suscription__contend__checks">
+			<ng-container *ngFor="let item of arrayChecks; let i = index">
+				<div class="container__suscription__contend__checks__row">
+					<img
+						[src]="item.isCheked ? './assets/svg/checkbox-fill.svg' : './assets/svg/checkbox-box.svg'"
+						(click)="checked(i)"
+					/>
+					<section>
+						<span (click)="checked(i)" [class.error]="item.isError">{{ item.text }}</span>
+						<a [href]="'/politicas'" target="_blank" *ngIf="i == 0">Política de protección de datos</a>
+					</section>
+				</div>
+			</ng-container>
+		</div>
+		<div class="container__suscription__contend__actions">
+			<article>
+				<app-button
+					[text]="showMessageClose ? 'Suscrito' : 'Suscribirme'"
+					(onClick)="submitForm()"
+					[right]="true"
+					[isSucess]="true"
+					[disabled]="showMessageClose || isLoader"
+					[color]="'primary-green'"
+					[icon]="'check-white.svg'"
+					[fullWidth]="true"
+					[isMobile]="true"
+					[isLoader]="isLoader"
+				></app-button>
+			</article>
+			<span [style.visibility]="showMessageClose ? 'visible' : 'hidden'">Esta ventana se cerrará en 5 segundos...</span>
+		</div>
+	</div>
+</div>

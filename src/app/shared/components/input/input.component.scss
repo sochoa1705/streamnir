@@ -1,0 +1,138 @@
+@use '/src/scss/colors';
+
+.text-input{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+    margin-top: -3px;
+	@media (max-width: 575px) {
+		font-size: 12px;
+		line-height: 20px;
+	}
+}
+.group-input {
+	padding-right: 4px;
+	img{
+		left: 3px;
+		top: 5px;
+		padding: 10px 0px;
+		color:colors.$neutral-400;
+	}
+
+	.icon-right{
+		left: calc(100% - 21px);
+		cursor:pointer;
+	}
+
+	input {
+		width: 100%;
+		padding:8px 12px;
+		margin: 0px;
+		border:none;
+		border: 1px solid colors.$neutral-200;
+		box-sizing: border-box;
+		color:colors.$neutral-900;
+		font-weight: 400;
+		font-size: 14px;
+		padding-left: 0px;
+		line-height: 20px;
+		font-family: 'Montserrat';
+		padding: 8px 12px;
+		border-radius: 4px;
+		caret-color: colors.$red-500;
+		&::placeholder{
+			color:colors.$neutral-400;
+		}
+		&:focus {
+			outline: none;
+   			border:1px solid colors.$red-500;
+		}
+		&.error{
+			border:1px solid colors.$red-200;
+			caret-color:colors.$red-200;
+		}
+		&.icon{
+			padding-left: 27px;
+		}
+		&.label{
+			margin: 4px;
+		}
+		&:read-only{
+			color:colors.$neutral-400;
+			border-bottom: 1px solid colors.$neutral-300;
+		}
+		@media (max-width: 575px) {
+			font-size: 12px;
+			line-height: 20px;
+		}
+	}
+	
+}
+
+.span__label{
+	color:colors.$neutral-900;
+	margin-left:5px;
+	margin-top: 5px;
+	font-weight: 600;
+	font-family: 'Montserrat';
+	font-size: 14px;
+	line-height: 20px;
+	&__required{
+		color:colors.$red-400;
+	}
+	&.disabled{
+		color:colors.$neutral-400;
+	}
+	.check{
+		width: 24px;
+		height: 24px;
+	}
+	@media (max-width: 575px) {
+		font-size: 12px;
+		line-height: 20px;
+	}
+}
+
+.info{
+	position: relative;
+	&__tootip{
+		position: absolute;
+		width: 192px;
+		height: 123px;
+		padding: 8px 16px;
+		border-radius: 8px;
+		box-shadow: 0px 1px 2px -1px #1018281A;
+		box-shadow: 0px 1px 3px 0px #1018281A;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background: white;
+		top: -130px;
+		right: -80px;
+		span{
+			font-family: Montserrat;
+			font-size: 12px;
+			font-weight: 400;
+			line-height: 20px;
+			letter-spacing: 0em;
+		}
+		img{
+			width: 47px;
+		}
+		@media (max-width: 575px) {
+			right: 0;
+		}
+	}
+}
+
+.span__error{
+	position: relative;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 14px;
+	margin-left:5px;
+	top: -3px;
+	color:colors.$red-200;
+}

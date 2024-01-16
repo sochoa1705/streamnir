@@ -51,7 +51,10 @@ export class DestinyService {
 
   getGeoTree(query: string) {
     const url = environment.urlGeo + `/ubigeo/geotree/${query}`;
-    return this.http.get<IGeoTree[]>(url);
+    const headers = new HttpHeaders()
+			.set('Content-Type', 'application/json')
+			.set('not-loading', 'true')
+    return this.http.get<IGeoTree[]>(url, {headers});
   }
 
   getDestinyCountriesPaqueteDinamico(

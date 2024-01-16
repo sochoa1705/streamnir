@@ -1,0 +1,129 @@
+<div class="container__page">
+	<div class="container__page__metasearch" *ngIf="!showNotResults">
+		<div class="container__page__metasearch__section">
+			<app-tab-vuelos-v2 *ngIf="dataSearch" (reloadPageResult)="reloadPageResult()"></app-tab-vuelos-v2>
+		</div>
+		<div class="container__page__metasearch__mobile" *ngIf="dataSearch">
+			<div class="d-flex justify-content-between align-items-start flex-sm-row flex-column-reverse">
+				<div class="sumary tablet">
+					<div class="sumary__destination">
+						<span>{{ dataSearch.departureLocation | slice: 0 : -1 }}</span>
+						<img src="./assets/svg/arrow-destination.svg" alt="->" />
+						<span>{{ dataSearch.arrivalLocation | slice: 0 : -1 }}</span>
+					</div>
+					<div class="sumary__date tablet">
+						<span>{{ (dataSearch.departureDate | date: 'EEEE d MMMM')?.split('.')?.join(' ') }}</span>
+						<ng-container *ngIf="dataSearch.arrivalDate !== ''">
+							<span>-</span> <span>{{ (dataSearch.arrivalDate | date: 'EEEE d MMMM')?.split('.')?.join(' ') }}</span>
+						</ng-container>
+					</div>
+
+					<div class="sumary__date mobile">
+						<span>{{ (dataSearch.departureDate | date: 'EEE d MMM')?.split('.')?.join(' ') }}</span>
+						<ng-container *ngIf="dataSearch.arrivalDate !== ''">
+							<span>-</span> <span>{{ (dataSearch.arrivalDate | date: 'EEE d MMM')?.split('.')?.join(' ') }}</span>
+						</ng-container>
+					</div>
+				</div>
+				<div class="actions">
+					<img src="./assets/svg/pencil.svg" alt="icon" class="d-none d-sm-block" />
+					<span (click)="openModalSearch()">Editar</span>
+				</div>
+			</div>
+			<div class="container__page__metasearch__mobile__filters" *ngIf="!showError">
+				<ng-container *ngTemplateOutlet="appfilters"></ng-container>
+			</div>
+		</div>
+	</div>
+	<div class="progress" *ngIf="progressCount < 100 && !showError && !showNotResults">
+		<div
+			class="progress-bar"
+			role="progressbar"
+			[ngStyle]="{
+				'width.%': progressCount
+			}"
+			[attr.aria-valuenow]="progressCount"
+			aria-valuemin="0"
+			aria-valuemax="100"
+		></div>
+	</div>
+	<section *ngIf="!showError && !showNotResults">
+		<article>
+			<ng-container *ngTemplateOutlet="appfilters"></ng-container>
+			<div class="container__page__results">
+				<app-sort-by
+					#childSort
+					[hidden]="dataFilterGroups.length == 0"
+					[theCheapest]="theCheapest"
+					[betterOption]="betterOption"
+					[currency]="currency"
+					[shorterDuration]="shorterDuration"
+					[arrayMoreOptionsSort]="arrayMoreOptionsSort"
+					(clickTabSort)="clickTabSort($event)"
+				></app-sort-by>
+				<div class="container__page__results__cards" *ngIf="isLoader">
+					<ng-container *ngFor="let item of [].constructor(3)">
+						<app-card-loader-result></app-card-loader-result>
+					</ng-container>
+				</div>
+				<ng-container *ngIf="dataFilterGroups.length > 0">
+					<div class="container__page__results__cards" *ngIf="dataGroupsPaginate.length > 0">
+						<ng-container *ngFor="let item of dataGroupsPaginate">
+							<app-card-result-search
+								[idCheap]="idCheap"
+								[idBest]="idBest"
+								[flight]="item"
+								[currency]="currency"
+								[sortBy]="sortBy"
+							></app-card-result-search>
+						</ng-container>
+					</div>
+					<div class="container__page__results__button" *ngIf="dataGroupsPaginate.length !== dataFilterGroups.length">
+						<app-button
+							[text]="'Mostrar más resultados'"
+							[color]="'outline-primary'"
+							[isMobile]="true"
+							(onClick)="showMoreResults()"
+						></app-button>
+					</div>
+				</ng-container>
+				<app-not-results
+					*ngIf="dataFilterGroups.length == 0 && !isLoader"
+					[filters]="filters"
+					[title]="titleNotResults"
+					[type]="'not-result-filter'"
+					(cleanFilters)="cleanFilters($event)"
+				></app-not-results>
+			</div>
+		</article>
+	</section>
+
+	<app-not-results *ngIf="showError"></app-not-results>
+	<app-not-results *ngIf="showNotResults" [title]="titleNotResults" [type]="'not-result'"></app-not-results>
+</div>
+
+<ng-template #appfilters>
+	<app-filters
+		[dataAirlines]="dataAirlines"
+		[dataScaleFilter]="dataScaleFilter"
+		[dataBagFilter]="dataBagFilter"
+		[totalResults]="allDataGroups.length || 0"
+		[totalResultsFilter]="dataFilterGroups.length || 0"
+		[exchangeRate]="exchangeRate"
+		(changeArrayFilters)="changeArrayFilters($event)"
+		(changeArrayFiltersMobile)="changeArrayFiltersMobile($event)"
+		(updateArrayAirlinesFilter)="updateArrayAirlinesFilter($event)"
+		(changeExchangeRate)="changeExchangeRate($event)"
+		(filterByPrice)="filterByPrice($event)"
+		(filterByDuration)="filterByDuration($event)"
+		[minPrice]="minPrice"
+		[maxPrice]="maxPrice"
+		[isNotResult]="showNotResults"
+		[valuesFilterDuration]="valuesFilterDuration"
+		(resetFilterByDuration)="resetFilterByDuration()"
+		(filterByDurationScale)="filterByDurationScale($event)"
+		[theCheapest]="theCheapest"
+		[betterOption]="betterOption"
+		[shorterDuration]="shorterDuration"
+	></app-filters>
+</ng-template>

@@ -1,0 +1,208 @@
+@use '/src/scss/colors';
+.container__passenger{
+    .flex-column{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .paragraph{
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0em;
+        color:colors.$neutral-900;
+    }
+    position: relative;
+    &[tabindex] {
+        outline: none !important;
+    }
+    &__name{
+        border: 1px solid colors.$gris-200;
+        box-shadow: 0px 1px 2px 0px #1018280D;
+        border-radius: 4px;
+        background: white;
+        padding: 8px 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:12px;
+        cursor: pointer;
+        span{
+            font-family: Montserrat;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+            letter-spacing: 0em;
+            text-align: left;
+        }
+    }
+
+    &__floating{
+        position: absolute;
+        z-index: 4;
+        right: 0;
+        &__body{
+            width: 340px;
+            padding: 8px 12px;
+            padding-bottom: 16px;
+            border-radius: 8px;
+            border: 1px solid colors.$gris-200;
+            gap: 16px;
+            box-shadow: 0px 1px 3px 0px #1018281A;
+            background: white;
+            @extend .flex-column;
+            margin-top: 15px;
+            gap:8px;
+            &__passengers{
+                @extend .flex-column;
+                align-items: flex-start;
+                &__row{
+                    padding:8px 16px;
+                    width: 100%;
+                    display: flex;
+                    gap:16px;
+                    justify-content: space-between;
+                    align-items: center;
+                    &__info{
+                        @extend .flex-column;
+                        span:nth-child(1){
+                            @extend .paragraph;
+                        }
+                        span:nth-child(2){
+                            font-family: Montserrat;
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 20px;
+                            letter-spacing: 0em;
+                            color:colors.$gris-700;
+                        }
+                    }
+                    &__counters{
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        gap:16px;
+                        span{
+                            @extend .paragraph;
+                            font-weight: 600;
+                            text-align: center;
+                            width: 24px;
+                        }
+                        img{
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+            &__actions{
+                display: flex;
+                justify-content: space-between;
+                padding: 0px 12px;
+                .btn{
+                    height: 40px;
+                    padding: 10px 16px;
+                    border-radius: 6px;
+                    border: none;
+                    box-shadow: none;
+                    text-transform: none;
+                    font-family: Montserrat;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 20px;
+                    letter-spacing: 0em;
+                    text-align: center;
+                    &.cancel {
+                        background: white;
+                        color: colors.$neutral-700;
+                        border: 1px solid colors.$neutral-200;
+                        &:hover,&:focus {
+                            background: white;
+                            color: colors.$neutral-900;
+                        }
+                    }
+                    &.apply{
+                        font-weight: 500;
+                        border: 1px solid colors.$red-500;
+                        color: colors.$red-500;
+                        &:hover,&:focus {
+                            background: colors.$red-500;
+                            color: white;
+                        }
+                    }
+
+                }
+            }
+        }
+        &__arrow{
+            width: 19.9px;
+            height: 19.9px;
+            border-radius: 0px 4px 0px 0px;
+            transform: rotate(-45deg);
+            z-index: 5;
+            background: white;
+            right: 15px;
+            position: absolute;
+            top: 5px;
+            border: solid;
+            border-width: 1px 1px 0px 0px;
+            border-color: colors.$gris-200;
+        }
+    }
+    @media(max-width: 1199px){
+        &__name span{
+            display: none;
+        }
+    }
+
+    @media(max-width: 575px){
+        &__floating{
+            left: 0;
+            &__arrow{
+                left:15px;
+            }
+            &__body{
+                width: 257px;                
+                padding: 4px 4px 16px;
+                padding-bottom: 16px;
+                &__passengers__row{
+                    padding: 8px 12px;
+                }
+                &__passengers__row__info{
+                    span:nth-child(1){
+                        font-size: 14px;
+                        line-height: 20px;
+                    }
+                    span:nth-child(2){
+                        font-size: 12px;
+                        line-height: 20px;
+                    }
+                }
+                &__passengers__row__counters{
+                    gap:12px;
+                    img{
+                        width: 20px;
+                    }
+                }
+                &__actions .btn{
+                    height: 35px;
+                    font-size: 12px;
+                    line-height: 20px;
+                    padding: 6px 12px;
+                }
+            }
+        }
+        &__name{
+            flex-direction: column;
+            padding: 8px 4px;
+            gap: 4px;
+            width: 100%;
+        }
+        &__name span{
+            display: block;
+            font-size: 12px;
+            line-height: 20px;
+            font-weight: 400;
+        }
+    }
+}

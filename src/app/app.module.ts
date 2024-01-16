@@ -30,6 +30,9 @@ import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { initializeAppCheck, provideAppCheck, ReCaptchaV3Provider } from '@angular/fire/app-check';
 import { environment } from '../environments/environment';
+import { CanActivateCheckoutGuard } from './Guards/checkout.guard';
+import { DeactivateGuard } from './Guards/passenger.guard';
+import { DeactivatePaymentGuard } from './Guards/payment.guard';
 
 if (!environment.production) (<any>window).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 
@@ -82,7 +85,10 @@ if (!environment.production) (<any>window).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 				onError: (err: Error) => console.error(err)
 			} as SocialAuthServiceConfig
 		},
-		CryptoService
+		CryptoService,
+		CanActivateCheckoutGuard,
+		DeactivateGuard,
+		DeactivatePaymentGuard
 	],
 	bootstrap: [ AppComponent ]
 })

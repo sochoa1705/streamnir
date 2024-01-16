@@ -20,13 +20,15 @@ import { CondicionesDeReservaComponent } from './condiciones-de-reserva/condicio
 import { CierrapuertasComponent } from './cierrapuertas/cierrapuertas.component';
 import { CierrapuertasOfertasComponent } from './cierrapuertas-ofertas/cierrapuertas-ofertas.component';
 import { TusDatosComponent } from './tus-datos/tus-datos.component';
-import { ItineraryComponent } from './itinerary/itinerary.component';
-import { EventosComponent } from './eventos/eventos.component';
 import { GifCardComponent } from './gif-card/gif-card.component';
 import { RetailComponent } from './retail/retail.component';
 import { OffersComponent } from './offers/offers.component';
 import { BenefitsComponent } from './retail/benefits/benefits.component';
+import { CanActivateCheckoutGuard } from 'src/app/Guards/checkout.guard';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { DestinosComponent } from './vuelos/commons/components/destinos/destinos.component';
+import { EventosComponent } from './eventos/eventos.component';
+
 
 const routes: Routes = [
   {
@@ -44,10 +46,6 @@ const routes: Routes = [
       {
         path: 'vuelos/resultados',
         component: ResultadosComponent
-      },
-      {
-        path: 'booking/itinerary/:transactionId/:idGroup/:segments/:flightType/:departureLocation/:arrivalLocation/:departureDate/:arrivalDate/:adults/:children/:infants/:flightClass',
-        component: ItineraryComponent
       },
       {
         path: 'conformidad',
@@ -79,31 +77,35 @@ const routes: Routes = [
       },
       {
         path: 'vuelos',
-        loadChildren: () => import('./vuelos/vuelos.module').then(m => m.VuelosModule)
+        component: HomeComponent
+      },
+      {
+        path: 'vuelos/destino/LIM/:codigoCiudad',
+        component:DestinosComponent
       },
       {
         path: 'paquetes',
-        loadChildren: () => import('./paquetes/paquetes.module').then(m => m.PaquetesModule)
+        component: HomeComponent
       },
       {
         path: 'armapaquete',
-        loadChildren: () => import('./build-your-trip/build-your-trip.module').then(m => m.BuildYourTripModule)
+        component: HomeComponent
       },
       {
         path: 'vuelohotel',
-        loadChildren: () => import('./flights-plus-hotel/flights-plus-hotel.module').then(m => m.FlightsPlusHotelModule)
+        component: HomeComponent
       },
       {
         path: 'hoteles',
-        loadChildren: () => import('./hotels/hotels.module').then(m => m.HotelsModule)
+        component: HomeComponent
       },
       {
         path: 'autos',
-        loadChildren: () => import('./cars/cars.module').then(m => m.CarsModule)
+        component: HomeComponent
       },
       {
         path: 'actividades',
-        loadChildren: () => import('./activities/activities.module').then(m => m.ActivitiesModule)
+        component: HomeComponent
       },
       {
         path: 'seguros',
@@ -185,6 +187,10 @@ const routes: Routes = [
         path: 'canales-de-atencion',
         loadChildren: () => import('../../../app/Component/home-page/canales-atencion/canales-atencion.module').then(m => m.CanalesAtencionModule)
       },
+      { 
+        path: 'resultados',
+        loadChildren:() => import('../results-search-page/results-search-page.module').then(m=>m.ResultsSearchPageModule)
+      }
     ],
   },
   {
@@ -194,6 +200,15 @@ const routes: Routes = [
   {
     path: 'tuscitas',
     loadChildren: () => import('../../../app/Component/home-page/tuscitas/tuscitas.module').then(m => m.TuscitasModule)
+  },
+  {
+    path: 'booking',
+    loadChildren: () => import('../checkout-page/checkout.module').then(m => m.CheckoutPageModule),
+    canActivate: [CanActivateCheckoutGuard]
+  },
+  {
+    path: 'booking/itinerary/:transactionId/:idGroup/:segments/:flightType/:departureLocation/:arrivalLocation/:departureDate/:arrivalDate/:adults/:children/:infants/:flightClass',
+    loadChildren: () => import('../checkout-page/checkout.module').then(m => m.CheckoutPageModule),
   },
   {
     path: '404',

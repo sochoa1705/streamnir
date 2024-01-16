@@ -72,7 +72,6 @@ export class TabsComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-
     this._activatedRoute.params.subscribe((product) => {
       const url = this._router.url;
 

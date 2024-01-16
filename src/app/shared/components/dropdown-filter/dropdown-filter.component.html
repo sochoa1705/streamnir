@@ -1,0 +1,36 @@
+<div class="dropdown__filter" *ngIf="!showLoader">
+    <div *ngIf="isMobile" class="dropdown__filter__close">
+        <img src="./assets/svg/close-modal.svg" alt="x" (click)="clickCloseModal()">
+    </div>
+    <div class="dropdown__filter__header" (click)="!isMobile ? dropdownActive=!dropdownActive : null">
+        <h4>{{title}}</h4>
+        <img *ngIf="!isMobile" [src]="dropdownActive ? './assets/svg/RightUp.svg' : './assets/svg/Right.svg'" />
+    </div>
+    <div class="dropdown__filter__body" *ngIf="dropdownActive && listOptions.length > 0">
+        <div class="dropdown__filter__body__select" *ngIf="isAirlines">
+            <span class="link" (click)="clickSelectedAirlines(false)">Seleccionar todo</span><span>|</span><span class="link" (click)="clickSelectedAirlines(true)">Borrar todo</span>
+        </div>
+        <ng-container *ngFor="let option of (isAirlines ? listOptionsAirlines : listOptions)">
+            <div class="dropdown__filter__body__option" (click)="clickOption(option)" [class.disabled]="option.total==0">
+                <img [src]="option.total==0 ? './assets/svg/checkbox-dis.svg' : option.active ? './assets/svg/checkbox-fill.svg' : './assets/svg/checkbox-box.svg'" />
+                <span>{{option.name}} <span class="count">({{option.total}})</span></span>
+            </div>
+        </ng-container>
+        <span class="dropdown__filter__body__showMore" *ngIf="isAirlines && listOptions.length > 8" (click)="showMoreOptions()">{{isShowMoreAirlines ? 'Ver menos':'Ver ' +countRestAirlines+ ' aerolínea(s) más'}}</span>
+    </div>
+</div>
+
+<div *ngIf="isMobile" class="dropdown__footer">
+    <app-button [text]="'Cancelar'"  (click)="clickCloseModal()" [size]="'xs'" [color]="'neutral'" ></app-button>
+    <app-button [text]="'Confirmar'" [size]="'xs'" (click)="applyFilterMobile()"></app-button>
+</div>
+
+<div class="dropdown__loader" *ngIf="showLoader">
+    <div class="skeleton dropdown__loader__header"></div>
+    <div class="dropdown__loader__body">
+        <div class="dropdown__loader__body__row"  *ngFor="let item of [].constructor(isAirlines ? 7 : 3)">
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+        </div>
+    </div>
+</div>
