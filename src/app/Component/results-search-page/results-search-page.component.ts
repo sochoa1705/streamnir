@@ -241,8 +241,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 				objParams.flightType !== 2
 					? `No encontramos vuelos coincidentes entre ${objParams.departureLocation} y ${objParams.arrivalLocation} para estas fechas.`
 					: `No encontramos vuelos coincidentes para esas fechas.`;
-			if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
-			else this.getAllDataAnterior(objParams);
+			this.getAllDataSearch(objParams);
 			this.isReload = false;
 		}
 	}
