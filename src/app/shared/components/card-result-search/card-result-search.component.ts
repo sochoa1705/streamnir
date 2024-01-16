@@ -3,7 +3,6 @@ import { Group, Segment } from 'src/app/api/api-checkout/models/rq-checkout-sear
 import { ModalFlightDetailComponent } from './modal-flight-detail/modal-flight-detail.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
-import { ModalPriceMobileComponent } from './modal-price-mobile/modal-price-mobile.component';
 interface Filter {
 	arrayAirline: string[];
 	arrayBaggage: string[];
@@ -99,6 +98,10 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
 		}
 	}
 
+	sortSegmentByDuration(isDeparture:true){
+
+	}
+
 	findIndexFlightDuration(segments: Segment[]) {
 		let lowestDuration = Number.POSITIVE_INFINITY;
 		let lowestDurationIndex = -1;
@@ -181,14 +184,5 @@ export class CardResultSearchComponent implements OnInit, OnChanges {
 		modalRef.componentInstance.indexSegmentReturn = this.indexSegmentReturn;
 		modalRef.componentInstance.currency = this.currency;
 		if (this.flight.detailPricing) modalRef.componentInstance.detailPricing = this.flight.detailPricing;
-	}
-
-	openModalDetailPriceMobile(){
-		const modalRef = this._modalService.open(ModalPriceMobileComponent,{
-			centered: true,
-			backdrop: 'static',
-		})
-		modalRef.componentInstance.flight=this.flight;
-		modalRef.componentInstance.currency=this.currency;
 	}
 }
