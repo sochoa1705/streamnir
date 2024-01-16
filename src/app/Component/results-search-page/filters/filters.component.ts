@@ -47,6 +47,7 @@ export class FiltersComponent implements OnInit {
 	@Input() shorterDuration: any;
 	@Input() indexSortBy = 0;
 	@Input() currentFilters: any;
+	@Input() valuesFilterDurationInit:IFilterDuration;
 
 	@Output() changeArrayFilters = new EventEmitter();
 	@Output() updateArrayAirlinesFilter = new EventEmitter();
@@ -176,7 +177,8 @@ export class FiltersComponent implements OnInit {
 
 	openModalCurrency() {
 		const modalRef = this._modalService.open(ModalCurrencyComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.currencySelected = this.currency;
 		modalRef.componentInstance.changeCurrency.subscribe(($event: any) => {
@@ -186,7 +188,8 @@ export class FiltersComponent implements OnInit {
 
 	openModalBaggage() {
 		const modalRef = this._modalService.open(DropdownFilterComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.title = 'Equipaje';
 		modalRef.componentInstance.listOptions = this.dataBagFilter;
@@ -198,7 +201,8 @@ export class FiltersComponent implements OnInit {
 
 	openModalScale() {
 		const modalRef = this._modalService.open(DropdownFilterComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.title = 'Escalas';
 		modalRef.componentInstance.listOptions = this.dataScaleFilter;
@@ -210,7 +214,8 @@ export class FiltersComponent implements OnInit {
 
 	openModalAirline() {
 		const modalRef = this._modalService.open(DropdownFilterComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.title = 'Aerolínea';
 		modalRef.componentInstance.listOptions = this.dataAirlines;
@@ -222,7 +227,8 @@ export class FiltersComponent implements OnInit {
 
 	openModalPrice() {
 		const modalRef = this._modalService.open(PriceFilterComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.currency = this.currency;
@@ -237,10 +243,12 @@ export class FiltersComponent implements OnInit {
 
 	openModalDuration() {
 		const modalRef = this._modalService.open(DurationFilterComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.valuesFilterDuration = this.valuesFilterDuration;
+		modalRef.componentInstance.valuesFilterDurationInit = this.valuesFilterDurationInit;
 		modalRef.componentInstance.filterDurationMobile.subscribe(($event: any) => {
 			this.filterDurationMobile.emit($event);
 		});
@@ -248,7 +256,8 @@ export class FiltersComponent implements OnInit {
 
 	openModalSortBy() {
 		const modalRef = this._modalService.open(ModalSortComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.theCheapest = this.theCheapest;
 		modalRef.componentInstance.betterOption = this.betterOption;

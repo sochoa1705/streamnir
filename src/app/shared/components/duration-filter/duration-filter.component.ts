@@ -23,6 +23,7 @@ interface IFilterDuration{
 export class DurationFilterComponent implements OnInit{
 
   @Input() valuesFilterDuration:IFilterDuration;
+  @Input() valuesFilterDurationInit:IFilterDuration;
   @Input() isMobile = false;
   @Output() filterDurationRange = new EventEmitter();
   @Output() filterDurationScale = new EventEmitter();
@@ -37,7 +38,6 @@ export class DurationFilterComponent implements OnInit{
 		this._searchFiltersService.isResetFilterDuration.subscribe({
 			next: () => {
         this.setValuesReset();
-        //this.toggleCollapsed();
 			}
 		});
     this._searchFiltersService.isSetValuesDuration.subscribe({
@@ -148,24 +148,28 @@ export class DurationFilterComponent implements OnInit{
 
   setValuesReset(){
     this.hidden=true;
-        this.valueDurationDep = this.valuesFilterDuration.minDurationDeparture;
-        this.optionsDurationDep.floor = this.valuesFilterDuration.minDurationDeparture;
+        this.valueDurationDep =  this.valuesFilterDuration.minDurationDeparture;
+        this.optionsDurationDep.floor = this.valuesFilterDurationInit.minDurationDeparture;
         this.highValueDurationDep = this.valuesFilterDuration.maxDurationDeparture;
-        this.optionsDurationDep.ceil = this.valuesFilterDuration.maxDurationDeparture;
+        this.optionsDurationDep.ceil = this.valuesFilterDurationInit.maxDurationDeparture;
   
         this.valueDurationRet = this.valuesFilterDuration.minDurationReturn;
-        this.optionsDurationRet.floor = this.valuesFilterDuration.minDurationReturn;
+        this.optionsDurationRet.floor = this.valuesFilterDurationInit.minDurationReturn;
         this.highValueDurationRet = this.valuesFilterDuration.maxDurationReturn;
-        this.optionsDurationRet.ceil = this.valuesFilterDuration.maxDurationReturn;
+        this.optionsDurationRet.ceil = this.valuesFilterDurationInit.maxDurationReturn;
 
         this.highValueScaleDep = this.valuesFilterDuration.waitingTimeDep;
         this.highValueScaleRet = this.valuesFilterDuration.waitingTimeRet;
-        this.valueScaleDep=0;
-        this.valueScaleRet=0;
+        
+        this.valueScaleDep= this.valuesFilterDuration.minWaitingTimeDep;
+        this.valueScaleRet= this.valuesFilterDuration.minWaitingTimeRet;
+
         this.optionsScaleDep.floor = 0;
         this.optionsScaleRet.floor = 0;
-        this.optionsScaleDep.ceil = this.valuesFilterDuration.waitingTimeDep;
-        this.optionsScaleRet.ceil = this.valuesFilterDuration.waitingTimeRet;
+
+        this.optionsScaleDep.ceil = this.valuesFilterDurationInit.waitingTimeDep;
+        this.optionsScaleRet.ceil = this.valuesFilterDurationInit.waitingTimeRet;
+
         setTimeout(() => {
           this.hidden=false;
         }, 10);

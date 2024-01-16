@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Group, ISearchResponse } from 'src/app/api/api-checkout/models/rq-checkout-search';
@@ -516,7 +516,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		this.dataGroupsPaginate = [...this.dataFilterGroups.slice(0, 8)];
 		this.indexPaginate = 8;
 		if (this.dataGroupsPaginate.length > 0) this.getValuesTabsSort();
-		//window.scroll({ top: 0, behavior: 'smooth' });
+		window.scroll({ top: 0, behavior: 'smooth' });
 	}
 
 	orderByDate(isEarly: boolean, isStartDate: boolean, index: number) {
@@ -703,7 +703,6 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 					item.maxWaitingTimeRet <= this.valuesFilterDuration.waitingTimeRet;
 			}
 
-			console.log(item.detailPricing?.totalPay, 'totalPay');
 			return (
 				(this.filters.arrayAirline.length > 0
 					? this.filters.arrayAirline.includes(item.airlineCodeFilter || '')
@@ -900,8 +899,9 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 
 		this.valuesFilterDuration.waitingTimeDep = $event.highValueScaleDep;
 		this.valuesFilterDuration.minWaitingTimeDep = $event.valueScaleDep;
-		this.filters.isDurationDeparture =
-			$event.valueScaleDep !== 0 || $event.highValueScaleDep !== this.valuesFilterDurationInit.waitingTimeDep;
+		if (!this.filters.isDurationDeparture)
+			this.filters.isDurationDeparture =
+				$event.valueScaleDep !== 0 || $event.highValueScaleDep !== this.valuesFilterDurationInit.waitingTimeDep;
 
 		if (this.flightType == 0) {
 			//Return Duration
@@ -914,8 +914,9 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 
 			this.valuesFilterDuration.waitingTimeRet = $event.highValueScaleRet;
 			this.valuesFilterDuration.minWaitingTimeRet = $event.valueScaleRet;
-			this.filters.isDurationReturn =
-				$event.valueScaleRet !== 0 || $event.highValueScaleRet !== this.valuesFilterDurationInit.waitingTimeRet;
+			if (!this.filters.isDurationReturn)
+				this.filters.isDurationReturn =
+					$event.valueScaleRet !== 0 || $event.highValueScaleRet !== this.valuesFilterDurationInit.waitingTimeRet;
 		}
 		this.applyFilters();
 	}
@@ -1006,6 +1007,14 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 			});
 		} else {
 			this.router.navigateByUrl('/');
+		}
+	}
+
+	@HostListener('window:resize', ['$event'])
+	onResize() {	
+		if (window.innerWidth >= 1100 && window.innerWidth<=1200) {
+			this._modalService.dismissAll();
+			if(!this.isReload) this.reloadPageResult();
 		}
 	}
 

@@ -1,5 +1,5 @@
 <div class="container__page">
-	<div class="container__page__metasearch" *ngIf="!showNotResults">
+	<div class="container__page__metasearch" *ngIf="!showNotResults && !showError">
 		<div class="container__page__metasearch__section">
 			<app-tab-vuelos-v2 *ngIf="dataSearch" (reloadPageResult)="reloadPageResult()"></app-tab-vuelos-v2>
 		</div>
@@ -122,6 +122,7 @@
 		[currentFilters]="filters"
 		[isNotResult]="showNotResults"
 		[valuesFilterDuration]="valuesFilterDuration"
+		[valuesFilterDurationInit]="valuesFilterDurationInit"
 		(resetFilterByDuration)="resetFilterByDuration()"
 		(filterByDurationScale)="filterByDurationScale($event)"
 		(filterDurationMobile)="filterDurationMobile($event)"
