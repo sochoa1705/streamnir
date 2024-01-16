@@ -66,7 +66,7 @@ export class SearchService {
  */
 	getAllDataSearch(body:any): Observable<any> {
 		const listGDS = Object.values(environment.GDS);
-		const endpoint = environment.urlApiMotorVuelos.includes('qa') ? 'search-nm' : 'search'
+		const endpoint = 'search-nm'
 		const url = `${environment.urlApiMotorVuelos}/mv/${endpoint}`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
