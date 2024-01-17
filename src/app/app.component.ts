@@ -1,9 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { combineLatest, fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { DestinosService } from './Component/home-page/vuelos/commons/components/destinos/services/destinos.service';
-import { TaggingService } from './Services/analytics/tagging.service';
 import { PopupService } from './Services/pop-up/popup.service';
 import { LoaderSubjectService } from './shared/components/loader/service/loader-subject.service';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -46,19 +45,9 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.taggingPageView();
 		setTimeout(() => {
 			this.matTooltip.show(1000);
-		}, 1000);
-	}
-
-	taggingPageView() {
-		this.router.events.subscribe(event => {
-			if (event instanceof NavigationEnd) {
-				this.destinosService.setParam(event.urlAfterRedirects)
-				TaggingService.pageView(event.urlAfterRedirects)
-			}
-		});
+		}, 5000);
 	}
 
 	cerrarBoxClicFuera() {

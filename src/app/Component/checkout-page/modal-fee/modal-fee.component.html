@@ -1,0 +1,112 @@
+<div class="modal__contend">
+	<div class="modal__contend__header">
+		<h4 *ngIf="getScreenWidth > 575">Contamos con {{dataUpSell.length}} tarifas disponibles:</h4>
+		<h4 *ngIf="getScreenWidth <= 575">Tarifas disponibles</h4>
+		<img src="./assets/svg/close-modal.svg" (click)="activeModal.close(true)" />
+	</div>
+	<div class="modal__contend__body" [class.not-swiper]="!isNavigate"  [style.grid-template-columns]="'repeat(' + dataUpSell.length+ ', auto)'">
+		<img
+			*ngIf="isNavigate"
+			[src]="activeArrowLeft ? './assets/svg/arrow-circle-left-red.svg' : './assets/svg/arrow-circle-left.svg'"
+			[class.active__arrow]="activeArrowLeft"
+			(click)="slidePrev()"
+		/>
+
+		<ng-container *ngIf="!isNavigate">
+			<div class="modal__contend__body__card" *ngFor="let item of dataUpSell; let i=index">
+				<section>
+					<div class="modal__contend__body__card__body">
+						<div class="modal__contend__body__card__header">
+							<span>{{item.description | titlecase}}</span>
+						</div>
+						<div class="modal__contend__body__card__options">
+							<span class="modal__contend__body__card__options__title"> {{isDomestic?'Equipaje':'Baggage'}} </span>
+								<ng-container *ngFor="let bag of item.dataBags">
+									<div class="modal__contend__body__card__options__check">
+										<img src="./assets/svg/check-blue.svg" alt="v" />
+										<span>{{bag.description}}</span>
+									</div>
+								</ng-container>
+								<div class="modal__contend__body__card__options__check" *ngIf="item.dataBags?.length==0">
+									<img src="./assets/svg/cross.svg" alt="v" />
+									<span class="muted">{{isDomestic?'No incluye equipaje':'No baggages allowed'}}</span>
+								</div>
+								<span class="modal__contend__body__card__options__title"> Extras </span>
+								<ng-container *ngFor="let extra of item.dataExtras">
+									<div class="modal__contend__body__card__options__check">
+										<img src="./assets/svg/check-blue.svg" alt="v" />
+										<span>{{extra.description}}</span>
+									</div>
+								</ng-container>
+								<div class="modal__contend__body__card__options__check" *ngIf="item.dataExtras?.length==0">
+									<img src="./assets/svg/cross.svg" alt="v" />
+									<span class="muted">{{isDomestic?'No incluye servicios extras':'No extras allowed'}}</span>
+								</div>
+						</div>
+					</div>
+				</section>
+				<!--[disabled]="indexCardSelect==i"-->
+				<div class="modal__contend__body__card__price">
+					<section>
+						<h5><span>USD </span>{{item.totalPay | number : '1.2-2'}}</h5>
+						<span>{{pricingDetail.passengersCount > 1 ? 'Por los '+pricingDetail.passengersCount+' pasajeros':'Por un pasajero'}} </span>
+					</section>
+					<app-button (onClick)="clickSelectUpSell(item)" [isMobile2]="true" [text]="'Seleccionar'"></app-button>
+				</div>
+			</div>
+		</ng-container>
+		
+		<swiper [config]="config" class="mySwiper" #swiperFee *ngIf="isNavigate">
+			<ng-template swiperSlide *ngFor="let item of dataUpSell; let i=index">
+				<div class="modal__contend__body__card">
+					<section>
+						<div class="modal__contend__body__card__body">
+							<div class="modal__contend__body__card__header">
+								<span>{{item.description | titlecase}}</span>
+							</div>
+							<div class="modal__contend__body__card__options">
+								<span class="modal__contend__body__card__options__title"> {{isDomestic?'Equipaje':'Baggage'}} </span>
+								<ng-container *ngFor="let bag of item.dataBags">
+									<div class="modal__contend__body__card__options__check">
+										<img src="./assets/svg/check-blue.svg" alt="v" />
+										<span>{{bag.description}}</span>
+									</div>
+								</ng-container>
+								<div class="modal__contend__body__card__options__check" *ngIf="item.dataBags?.length==0">
+									<img src="./assets/svg/cross.svg" alt="v" />
+									<span class="muted">No baggages allowed</span>
+								</div>
+								<span class="modal__contend__body__card__options__title"> Extras </span>
+								<ng-container *ngFor="let extra of item.dataExtras">
+									<div class="modal__contend__body__card__options__check">
+										<img src="./assets/svg/check-blue.svg" alt="v" />
+										<span>{{extra.description}}</span>
+									</div>
+								</ng-container>
+								<div class="modal__contend__body__card__options__check" *ngIf="item.dataExtras?.length==0">
+									<img src="./assets/svg/cross.svg" alt="v" />
+									<span class="muted">No extras allowed</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!--[disabled]="indexCardSelect==i"-->
+					<div class="modal__contend__body__card__price">
+						<section>
+							<h5><span>USD </span>{{item.totalPay | number : '1.2-2'}}</h5>
+							<span>{{pricingDetail.passengersCount > 1 ? 'Por los '+pricingDetail.passengersCount+' pasajeros':'Por un pasajero'}} </span>
+						</section>
+						<app-button (onClick)="clickSelectUpSell(item)" [isMobile]="true" [text]="'Seleccionar'"></app-button>
+					</div>
+				</div>
+			</ng-template>
+		</swiper>
+
+		<img
+			*ngIf="isNavigate"
+			[src]="activeArrowRight ? './assets/svg/arrow-circle-right-red.svg' : './assets/svg/arrow-circle-right.svg'"
+			[class.active__arrow]="activeArrowRight"
+			(click)="slideNext()"
+		/>
+	</div>
+</div>

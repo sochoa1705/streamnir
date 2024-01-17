@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer.component';
 import { MaterialModule } from '../../material.module';
 import { RouterModule } from '@angular/router';
+import { ButtonModule } from '../button/button.module';
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [FooterComponent],
@@ -10,6 +11,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     MaterialModule,
     RouterModule,
+    ButtonModule
   ],
   exports: [FooterComponent],
 })

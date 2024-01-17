@@ -1,42 +1,21 @@
-<form class="bg-white" name="form" [formGroup]="form">
-    <div class="boxTab">
-        <div class="rowBoxTab">
-            <div class="padRight">
-                <mat-form-field>
-                    <mat-select formControlName="clase" disableOptionCentering>
-                        <mat-option [value]="EnumCabins.economico">Economy</mat-option>
-                        <mat-option [value]="EnumCabins.business">Business</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="padRight">
-                <app-pop-up-pasajero [nroAdultos]="2" #popUp (emitDistributionObject)="distributionObject = $event" (emitDistribution)="distribution = $event"></app-pop-up-pasajero>
-            </div>
-        </div>
-        <div class="rowBoxTab">
-            <div class="colBoxtab me-md-1 w-30" style="display: none;">
-                <input matInput aria-label="State3" [matAutocomplete]="auto" formControlName="destino" (keyup)="autoComplete($event)" class="form-control animated fadeIn" placeholder="¿Donde le gustaría ir?">
-            </div>
-            <div class="colBoxtab me-md-1 w-30" style="display: none;">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let state of citys" [value]="state.label">
-                        <img class="example-option-img" aria-hidden src="./assets/origen.png">
-                        <span>{{state.label}}</span>
-                    </mat-option>
-                </mat-autocomplete>
-            </div>
-        </div>
-        <div class="rowBoxTab">
-            <app-calendar [requiredFromDate]="isSubmit" [typeValue]="1" class="ignore-template" (changeDate)="changeDate($event)"></app-calendar>
-
-            <div class="colBoxtab">
-                <button class="fullWidht" (click)="searchPaquete()">Buscar</button>
-            </div>
-
-        </div>
-        <!-- <div class="rowBoxTab">
-            
-        </div> -->
-        <!-- <div class="rowBoxTab right text">Haciendo click en "Buscar", acepto las Condiciones Generales</div> -->
-    </div>
+<form name="form" [formGroup]="form">
+	<div class="row gx-3 gy-md-3 gy-sm-3 gy-xs-2 gy-2">
+		<div class="col-md-12">
+			<div class="container__tags">
+				<app-input-class [includeFirtClass]="false" [isLeft]="true" #childClass></app-input-class>
+				<app-pop-up-pasajero
+					[nroAdultos]="2"
+					#popUp
+					(emitDistributionObject)="distributionObject = $event"
+					(emitDistribution)="distribution = $event"
+				></app-pop-up-pasajero>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="container__date">
+				<app-new-calendar #childDate></app-new-calendar>
+				<app-button [text]="'Buscar'" [isMobile]="true" [fullWidth]="true" [left]="true" [icon]="'search.svg'" (onClick)="searchPaquete()"></app-button>
+			</div>
+		</div>
+	</div>
 </form>

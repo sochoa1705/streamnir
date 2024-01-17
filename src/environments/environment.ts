@@ -61,17 +61,44 @@ export const environment = {
 
   url_autos: 'https://autos.nmviajes.com/es/site/',
 
-
   urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela",
+  urlApiPasarela: 'https://pasarella.expertiatravel.com/serviciopasarela/v1/api/',
   //urlApiPayment: "http://10.75.102.23:15001/pasarelaservicio",
   //urlApiPayment: 'http://localhost:30850',
 
   urlSuggest: "https://suggest.agentcars.com/suggest/",
 
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
+  
+  //https://qa-bffdelfosti.nmviajes-it.com https://motorvuelos.expertiatravel.com
+  urlApiMotorVuelos: "https://dev-motorvuelos.nmviajes-it.com",
+  
 
-  urlApiMotorVuelos: "https://motorvuelos-dev.expertiatravel.com/mv/",
+    //url Terms and Conditions - Checkout
 
+  urlTermsConditions: 'https://www.nmviajes.com/terminos-condiciones',
+  urlBookingConditions: 'https://www.nmviajes.com/condiciones-de-reserva',
+  urlTravelDocuments: 'https://www.nmviajes.com/documentacion-viaje',
+  
+  urlBlog:'https://blog.nmviajes.com',
+  GDS:{
+      AMADEUS: 0,
+      SABRE: 1,
+      KIU: 2,
+      VIVAAIR: 4,
+      KIWI: 5,
+      SKY: 6,
+      MULTITICKET: 7,
+      AMADEUS_NDC: 21,
+      LATAM:22
+  },
+  openPayConfiguration: {
+    isProduction: false,
+    Id: 'mqxn16kmicqj2fde6fhi',
+    ApiKey: 'pk_c74367b872364e91b3143c5d87d64bb8'
+  },
+  urlApiDatosCliente: 'https://servicio.nmviajes.com:9443/Ecommerce',
+  resultsInactivityTime: 300,
   SEO: {
     home: {
       url: 'https://www.nmviajes.com/',

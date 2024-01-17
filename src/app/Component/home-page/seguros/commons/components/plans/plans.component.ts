@@ -9,25 +9,7 @@ import { CotizarSeguroRQ } from 'src/app/Models/seguros/cotizacionRQ.interface';
 import { environment } from 'src/environments/environment';
 import { CoberturaSeguroRQ } from 'src/app/Models/seguros/coberturaRQ.interface';
 import { NotificationService } from 'src/app/Services/notification.service';
-import { TaggingService } from 'src/app/Services/analytics/tagging.service';
-import {
-  ActionField,
-  ActionFieldAddToCart,
-  Add,
-  Detail,
-  Ecommerce,
-  EcommerceAddToCart,
-  EcommerceDetalleBeneficio,
-  Impression,
-  InsuranceResult,
-  ModelTaggingAddToCart,
-  ModelTaggingDetalleBeneficio,
-  ModelTaggingMostrarResultados,
-  Product,
-  ProductAddToCart,
-  TravelInsuranceListResults,
-  TravelInsuranceSelected
-} from 'src/app/Services/analytics/tagging.models';
+
 import * as moment from 'moment';
 
 @Component({
@@ -152,9 +134,6 @@ export class PlansComponent implements OnInit {
           this.plansAC.splice(maxi, 1);
           this.plansAC.unshift(this.plans);
           localStorage.setItem('planes', JSON.stringify(this.plansAC));
-          if (response.length >= 5)
-            this.sendResultsEvent(this.plansAC, this.resultJson);
-          this.sendDataLayerMostrarResultados(this.plansAC, this.resultJson);
         } else this.existPlans = false;
 
         this.loaderSubjectService.closeLoader();
@@ -200,7 +179,6 @@ export class PlansComponent implements OnInit {
             }
           })['Valor']
           this.asistenciaMedicaMonto = this.asistMedic.includes('USD') ? Number(this.asistMedic.substring(4).replace('.', '')) : this.asistMedic;
-          this.sendDataLayerDetalleBeneficio(data, this.resultJson);
         }
       },
       error: error => console.error(error)
@@ -211,144 +189,7 @@ export class PlansComponent implements OnInit {
     this.listCoverage(id);
     this.pop = id;
   }
-
-  sendDataLayerAddToCart(plansAC: any, resultJson: any) {
-    let products: ProductAddToCart[] = [];
-    let pp: ProductAddToCart;
-    let actionField: ActionFieldAddToCart = {
-      list: 'Resultados de Seguros'
-    }
-    let add: Add = {
-      actionField: actionField,
-      products: products
-    }
-    let ecommerce: EcommerceAddToCart = {
-      currencyCode: '',
-      add: add
-    }
-    let modelTaggingAddToCart: ModelTaggingAddToCart = {
-      event: 'nmv.seguros_eecga3_addtocart',
-      ecommerce: ecommerce
-    }
-    let index: number = 0;
-    ecommerce.currencyCode = plansAC.monedaLocal;
-    //plansAC.map((element: any) => {
-    const currentDate = moment();
-    const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
-    const missingDays = fromDate.diff(currentDate, 'days');
-    pp = ({
-      name: plansAC.nombreProducto,
-      id: plansAC.codProducto,
-      price: plansAC.precioEmisionLocal,
-      brand: 'AssistCard',
-      category: 'Seguros',
-      category2: index === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-      variant: resultJson.destinyString.descripcion_destino,
-      quantity: resultJson.passengers.length,
-      metric10: this.getPromedioEdades(resultJson),
-      dimension9: this.asistenciaMedicaMonto,
-      dimension11: resultJson.fromDate,
-      dimension12: resultJson.toDate,
-      metric11: missingDays,
-      metric12: Number(this.resultJson.days),
-      dimension16: 'PERU',
-      dimension17: resultJson.destinyString.descripcion_destino,
-    });
-    products.push(pp);
-    index++;
-    //});
-    TaggingService.tagMostrarAddToCart(modelTaggingAddToCart);
-  }
-
-  sendSelectInsuranceEvent(planAC: any, resultJson: any) {
-    const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
-    const daysFromNow = fromDate.diff(moment(), 'days');
-    const model: TravelInsuranceSelected = {
-      event: 'nmv_seguros_seleccionarProducto',
-      operacion: {
-        dias_anticipacion: daysFromNow
-      },
-      precio: {
-        moneda: planAC.monedaLocal || 'USD',
-        precioNormal: Number(planAC.precioEmisionLocal || '0'),
-        precioFinal: Number(planAC.precioEmisionLocal || '0')
-      },
-      origen: {
-        nombre: 'Peru',
-        codigo: 'PE',
-        pais: 'Peru'
-      },
-      destino: {
-        nombre: resultJson.destinyString.descripcion_destino,
-        codigo: resultJson.destinyString.id_destino,
-        pais: ''
-      },
-      seguro: {
-        posicion: 0,
-        precioFinal: Number(planAC.precioEmisionLocal || '0'),
-        plan: planAC.nombreProducto || planAC,
-        codigo: planAC.codProducto || planAC,
-        opcion: '',
-        emisor: 'AssistCard',
-        monto_asistencia: 0
-      },
-      pasajeros: this.getResultJsonData(resultJson).pasajeros,
-      fechas: this.getResultJsonData(resultJson).fechas
-    };
-    TaggingService.tagTravelInsuranceSelected(model);
-  }
-
-  sendDataLayerDetalleBeneficio(plansAC: any, resultJson: any) {
-
-    let actionField: ActionField = {
-      list: 'Resultado de Seguros',
-    }
-    let products: Product[] = [];
-    let pp: Product;
-
-    let detail: Detail = {
-      actionField: actionField,
-      products: products
-    }
-    let ecommerce: EcommerceDetalleBeneficio = {
-      detail: detail
-    }
-    let modelTaggingDetalleBeneficio: ModelTaggingDetalleBeneficio = {
-      event: 'nmv.seguros_eecga3_productview',
-      ecommerce: ecommerce
-    }
-    let index: number = 0;
-    //plansAC.forEach((element: any) => {
-    const currentDate = moment();
-    const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
-    const missingDays = fromDate.diff(currentDate, 'days');
-
-    pp = {
-      name: plansAC.nombreProducto,
-      id: plansAC.codProducto,
-      price: plansAC.precioEmisionLocal,
-      brand: 'AssistCard',
-      category: 'Seguros',
-      category2: index === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-      variant: resultJson.destinyString.descripcion_destino,
-      quantity: resultJson.passengers.length,
-      metric10: this.getPromedioEdades(resultJson),
-      dimension9: String(this.asistenciaMedicaMonto),
-      dimension11: resultJson.fromDate,
-      dimension12: resultJson.toDate,
-      metric11: missingDays,
-      metric12: Number(this.resultJson.days),
-    }
-    index++;
-    products.push(pp);
-    //});
-    TaggingService.tagMostrarDetalleBeneficio(modelTaggingDetalleBeneficio);
-  }
-
   shop(card: any) {
-    this.sendDataLayerAddToCart(card, this.resultJson);
-    this.sendSelectInsuranceEvent(card, this.resultJson);
-
     let service = this.plansAC.find((e: any) => {
       if (e.idProducto === card.idProducto) return e;
     });
@@ -358,104 +199,6 @@ export class PlansComponent implements OnInit {
 
     const navigationExtras: NavigationExtras = { state: { ...this.json, ...service } };
     this.route.navigateByUrl('/comprar', navigationExtras);
-  }
-
-  sendDataLayerMostrarResultados(plansAC: any, resultJson: any) {
-    let ecommerce: Ecommerce = {
-      currencyCode: '',
-      impressions: []
-    };
-    let impressions: Impression[] = [];
-    let ii: Impression = {
-      name: '',
-      position: 0,
-      list: '',
-      id: '',
-      price: '',
-      brand: '',
-      category: '',
-      category2: '',
-      variant: '',
-      quantity: 0,
-      metric10: 0,
-      dimension9: '',
-      dimension11: '',
-      dimension12: '',
-      metric11: 0,
-      metric12: 0
-    };
-    let modelTaggingMostrarResultados: ModelTaggingMostrarResultados = {
-      event: 'nmv.seguros_eecga3_productimpression',
-      ecommerce: ecommerce
-    };
-    let index: number = 1;
-    ecommerce.currencyCode = plansAC[0].monedaLocal;
-    const currentDate = moment();
-    const fromDate = moment(this.resultJson.fromDate, 'DD/MM/YYYY');
-    const missingDays = fromDate.diff(currentDate, 'days');
-    //this.asistenciaMedicaMonto = this.asistMedic.includes('USD') ? Number(this.asistMedic.substring(4).replace('.', '')) : this.asistMedic;
-    plansAC.forEach((element: any) => {
-      ii = ({
-        name: element.nombreProducto,
-        position: index,
-        list: 'Resultados de Seguros',
-        id: element.codProducto,
-        price: element.precioEmisionLocal,
-        brand: 'AssistCard',
-        category: 'Seguros',
-        category2: index === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-        variant: resultJson.destinyString.descripcion_destino,
-        quantity: resultJson.passengers.length,
-        metric10: this.getPromedioEdades(resultJson),
-        dimension9: String(this.asistenciaMedicaMonto),
-        dimension11: resultJson.fromDate,
-        dimension12: resultJson.toDate,
-        metric11: missingDays,
-        metric12: Number(this.resultJson.days),
-      });
-      impressions.push(ii);
-      index++;
-    });
-    ecommerce.impressions = impressions;
-    modelTaggingMostrarResultados.ecommerce = ecommerce;
-    TaggingService.tagMostrarResultados(modelTaggingMostrarResultados);
-
-    localStorage.removeItem('filters');
-  }
-
-  sendResultsEvent(plansAC: any[], resultJson: any) {
-    const model: TravelInsuranceListResults = {
-      event: 'nmv_seguros_verResultados',
-      precio: {
-        moneda: plansAC[0].monedaLocal,
-        precioNormal: 0,
-        precioFinal: 0
-      },
-      origen: {
-        nombre: 'Peru',
-        codigo: 'PE',
-        pais: 'Peru'
-      },
-      destino: {
-        nombre: resultJson.destinyString.descripcion_destino,
-        codigo: resultJson.destinyString.id_destino,
-        pais: ''
-      },
-      resultados: plansAC.map((plan: any, i: number): InsuranceResult =>
-          new InsuranceResult(
-              i + 1,
-              Number(plan.precioEmisionLocal),
-              plan.nombreProducto,
-              plan.codProducto,
-              i === 0 ? 'EL MEJOR PLAN' : 'FECHA FLEXIBLE',
-              'AssistCard',
-              Number(plan.precioComision)
-          )
-      ),
-      pasajeros: this.getResultJsonData(resultJson).pasajeros,
-      fechas: this.getResultJsonData(resultJson).fechas
-    };
-    TaggingService.tagTravelInsuranceListResults(model);
   }
 
   private getResultJsonData(resultJson: any): any {

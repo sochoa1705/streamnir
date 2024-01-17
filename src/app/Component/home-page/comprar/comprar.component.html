@@ -61,7 +61,7 @@
           <!-- INFORMACION DE PASAJEROS MOVIL-->
           <div class="card pasajeros">
             <div class="card-header">
-              <h3 class="fs-4 fw-bold">Información de pasajeros</h3>
+              <h4 class="fs-4 fw-bold">Información de pasajeros</h4>
 
               <span>
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -655,13 +655,13 @@
                         </div>
 
                         <div class="col-7">
-                          <label for="numberPhone0">Número de teléfono</label>
+                          <label for="numberPhone0">Número de celular</label>
 
                           <input type="text" formControlName="numberPhone0" maxlength="10" class="form-control"
                             [ngClass]="{isvalid : validateContactForm('numberPhone0')}" placeholder="Ingresa N°">
 
                           <span class="valid" *ngIf="validateContactForm('numberPhone0')">
-                            Ingresa tu número de teléfono
+                            Ingresa tu Número de celular
                           </span>
                         </div>
                       </div>
@@ -1399,13 +1399,13 @@
                       </div>
 
                       <div class="col-7">
-                        <label for="numberPhone0">Número de teléfono</label>
+                        <label for="numberPhone0">Número de celular</label>
 
                         <input type="text" formControlName="numberPhone0" maxlength="10" class="form-control"
                           [ngClass]="{isvalid : validateContactForm('numberPhone0')}" placeholder="Ingresa N°">
 
                         <span class="valid" *ngIf="validateContactForm('numberPhone0')">
-                          Ingresa tu número de teléfono
+                          Ingresa tu Número de celular
                         </span>
                       </div>
                     </div>
@@ -1550,12 +1550,12 @@
         <!-- ACORDION SEGUROS -->
         <div class="accordion">
           <div class="accordion-item">
-            <h3 class="accordion-header">
+            <h4 class="accordion-header">
               <a class="accordion-button" (click)="showVerDetalle()">
                 Ver detalles
                 <img src="./assets/footer/flecha.webp" alt="" class="iconFlecha">
               </a>
-            </h3>
+            </h4>
 
             <div *ngIf="showDetalle === true">
               <div class="accordion-body">

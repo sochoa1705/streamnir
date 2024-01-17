@@ -55,7 +55,6 @@ body {
     font-family: "Montserrat";
     color: $gray;
     transition: 300ms ease;
-    overflow: hidden;
 }
 
 /** FONTS **/
@@ -4838,7 +4837,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
             &.icono {
                 text-indent: 40px;
                 padding-right: 33px !important;
-                background: url("./assets/origen.png") no-repeat 10px center;
+                background: url("./assets/svg/airplane-line.svg") no-repeat 10px center;
                 &-no {
                     text-indent: 10px;
                     background: none;
@@ -8677,7 +8676,7 @@ button.customers {
     font-size: 14px;
     color: #222;
     margin-top: 7px;
-    background-color: $white; // background: url(../../../../assets/arrow.svg) no-repeat center right;
+    background-color: transparent; // background: url(../../../../assets/arrow.svg) no-repeat center right;
     padding-left: 0;
     text-align: left;
     font-family: "Montserrat";

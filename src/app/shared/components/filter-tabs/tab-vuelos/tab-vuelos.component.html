@@ -1,24 +1,24 @@
-<form class="bg-white" [formGroup]="form">
-  <div class="newBoxTab">
+<form class="bg-white" [formGroup]="form" [class.bg-white]="isBgWhite">
+  <div class="newBoxTab"  [ngStyle]="{'padding-right': isBgWhite ? '23px' : '0px'}">
     <div class="sectionTab">
       <div class="columnBox gap20">
-        <div class="titleBox">Vuelos</div>
+        <div class="titleBox" *ngIf="isBgWhite">Vuelos</div>
         <div class="form-check">
-          <input class="form-check-input" (change)="changeSelect(0)" value="0" type="radio" name="rdoVuelo"
-            id="rdoVuelo1" checked>
+          <input class="form-check-input" (change)="changeSelect(0)" value="0" type="radio" formControlName="rdoVuelo" name="rdoVuelo"
+            id="rdoVuelo1">
           <label class="form-check-label" for="rdoVuelo1">
             Ida y vuelta
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" (change)="changeSelect(1)" value="1" type="radio" name="rdoVuelo"
+          <input class="form-check-input" (change)="changeSelect(1)" value="1" type="radio" name="rdoVuelo"  formControlName="rdoVuelo"
             id="rdoVuelo2">
           <label class="form-check-label" for="rdoVuelo2">
             Solo ida
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" (change)="changeSelect(2)" value="2" type="radio" name="rdoVuelo"
+          <input class="form-check-input" (change)="changeSelect(2)" value="2" type="radio" name="rdoVuelo"  formControlName="rdoVuelo"
             id="rdoVuelo3">
           <label class="form-check-label" for="rdoVuelo3">
             Multidestino
@@ -80,7 +80,7 @@
 
 
       <app-calendar-price *ngIf="displayCalendar && tipoVuelo === EnumFlightType.ida_vuelta" [flightData]="flightData"
-        (inputDates)="insertDates($event)"></app-calendar-price>
+        (inputDates)="insertDates($event)" [isPageResults]="isPageResults"></app-calendar-price>
 
       <div class="columnBox" *ngIf="tipoVuelo === EnumFlightType.ida">
         <app-calendar [requiredFromDate]="isSubmit" [requiredToDate]="isSubmit" [typeValue]="tipoVuelo"
