@@ -29,78 +29,75 @@
     </div>
   </div>
 
-  <p-carousel *ngIf="hotels?.length" [value]="hotels" [numVisible]="3" [numScroll]="3"
-    [responsiveOptions]="responsiveOptions">
-    <ng-template let-product pTemplate="item">
-      <div class="product-item">
-        <div class="product-item-content">
-
-          <p-galleria [(value)]="product.Images" [responsiveOptions]="responsiveOptions"
-            [containerStyle]="{'max-width': '640px'}" [numVisible]="1" [showThumbnails]="false" [showIndicators]="true"
-            [showIndicatorsOnItem]="true">
-            <ng-template pTemplate="item" let-item>
-              <img [src]="item" [title]="product.Name" style="width: 100%; display: block;" />
-            </ng-template>
-          </p-galleria>
-
-        </div>
-
-        <div class="cardTituloNext">
-          <div class="nameTitle">{{ product.Name }}</div>
-          <div class="btnNext">
-            <a href="{{urlPaqueteDinamico}}hotels/{{product.Id}}" target="_blank">
-              <svg class="arrow" width="11" height="18" viewBox="0 0 11 18" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M-9.24496e-08 15.885L6.79892 9L-6.94355e-07 2.115L2.09312 -9.14931e-08L11 9L2.09312 18L-9.24496e-08 15.885Z"
-                  fill="white" />
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="cardStar" style="clear:both">
-          <div class="estrellas">
-            <div [ngClass]="validateScore(1, product.Category)"></div>
-            <div [ngClass]="validateScore(2, product.Category)"></div>
-            <div [ngClass]="validateScore(3, product.Category)"></div>
-            <div [ngClass]="validateScore(4, product.Category)"></div>
-            <div [ngClass]="validateScore(5, product.Category)"></div>
-          </div>
-          <div class="iconos" *ngIf="product.Services">
-            <div *ngFor="let service of product.Services.slice(0, 4)" class="{{ service.Icon }}"></div>
-          </div>
-        </div>
-
-        <div class="cardOpinion">Evaluación de los huéspedes</div>
-
-        <div class="cardEvaluacion">
-          <div class="groupItems">
-            <div class="itemsCardEvaluacion">
-              <img src="./assets/providers/tripadvisor.svg" alt="">
-            </div>
-            <div class="itemsCardEvaluacion aRight">
-              {{product.Rating.Score}} / 10
-            </div>
-          </div>
-          <div class="groupItems">
-            <div class="itemsCardEvaluacion">
-              <img src="./assets/svg/comment.svg" alt="">
-            </div>
-            <div class="itemsCardEvaluacion aRight">
-              {{product.Rating.Review}}
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </ng-template>
-  </p-carousel>
-
-	<div class="imgLoadHotel" *ngIf="hotels?.length === 0 && (images && images.length > 0)">
-    <a href="{{ images[0].RedirectLink }}" target="_blank">
-      <img [src]="images[0].PathImage" [title]="images[0].NameImage">
-    </a>
-  </div>
-
+	<ngu-carousel #carousel [inputs]="tileConfig" [dataSource]="hotels" *ngIf="hotels">
+		<ngu-tile NguCarouselItem class="px-1 px-lg-2" *nguCarouselDef="let item">
+			<div class="card border-0 shadow-none">
+				<ngu-carousel #tile [inputs]="carouselConfig" [dataSource]="item.Images">
+					<ngu-tile NguCarouselItem class="slide p-0" *nguCarouselDef="let image">
+						<img class="card-img w-100 object-fit-cover" loading="lazy" [src]="image" [alt]="item.Name">
+					</ngu-tile>
+				</ngu-carousel>
+				<div class="card-body">
+					<div class="card-title d-flex flex-row flex-nowrap align-items-start">
+						<h5 class="fw-bold fontOpen lh-base text-wrap mb-0">{{ item.Name }}</h5>
+						<a href="{{dynamicPackageUrl}}hotels/{{item.Id}}"
+						   target="_blank"
+						   class="text-white text-decoration-none p-0 ms-auto">
+							<svg class="arrow" width="11" height="18" viewBox="0 0 11 18" fill="none"
+							     xmlns="http://www.w3.org/2000/svg">
+								<path
+										d="M-9.24496e-08 15.885L6.79892 9L-6.94355e-07 2.115L2.09312 -9.14931e-08L11 9L2.09312 18L-9.24496e-08 15.885Z"
+										fill="white" />
+							</svg>
+						</a>
+					</div>
+					<div class="card-subtitle cardStar px-0 mt-md-auto" style="clear:both">
+						<div class="estrellas">
+							<div [ngClass]="validateScore(1, item.Category)"></div>
+							<div [ngClass]="validateScore(2, item.Category)"></div>
+							<div [ngClass]="validateScore(3, item.Category)"></div>
+							<div [ngClass]="validateScore(4, item.Category)"></div>
+							<div [ngClass]="validateScore(5, item.Category)"></div>
+						</div>
+						<div class="iconos" *ngIf="item.Services">
+							<div *ngFor="let service of item.Services.slice(0, 4)" class="{{ service.Icon }}"></div>
+						</div>
+					</div>
+					<div class="card-text">
+						<div class="cardOpinion px-0">Evaluaci&oacute;n de los hu&eacute;spedes</div>
+						<div class="cardEvaluacion px-0 mt-md-auto">
+							<div class="groupItems">
+								<div class="itemsCardEvaluacion">
+									<img src="./assets/providers/tripadvisor.svg" alt="">
+								</div>
+								<div class="itemsCardEvaluacion aRight">{{ item.Rating.Score }} / 10</div>
+							</div>
+							<div class="groupItems">
+								<div class="itemsCardEvaluacion">
+									<img src="./assets/svg/comment.svg" alt="">
+								</div>
+								<div class="itemsCardEvaluacion aRight">{{ item.Rating.Review }}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="dots mt-md-auto" NguCarouselPoint>
+				<li [class.active]="i === tile.activePoint"
+				    (click)="tile.moveTo(i)"
+				    *ngFor="let i of tile.pointNumbers; let j = index"></li>
+			</ul>
+		</ngu-tile>
+		<button NguCarouselPrev
+		        class="p-carousel-prev position-absolute start-0"
+		        [style.opacity]="carousel.isFirst ? .5 : 1"></button>
+		<button NguCarouselNext
+		        class="p-carousel-next position-absolute end-0"
+		        [style.opacity]="carousel.isLast ? .5 : 1"></button>
+	</ngu-carousel>
+	<div class="imgLoadHotel" *ngIf="hotels?.length === 0">
+		<a href="{{ images[0].RedirectLink }}" target="_blank">
+			<img [src]="images[0].PathImage" [title]="images[0].NameImage" [alt]="images[0].NameImage">
+		</a>
+	</div>
 </div>

@@ -589,6 +589,11 @@ section {
     color: #4b4b4b; }
     #carouselSeguros h2 span {
       color: #b50a27; }
+  #carouselSeguros h3 {
+    font-size: 24px;
+    color: #4b4b4b; }
+    #carouselSeguros h3 span {
+      color: #b50a27; }
   #carouselSeguros .carousel-control-prev-icon,
   #carouselSeguros .carousel-control-next-icon {
     display: none !important; }
@@ -6194,7 +6199,7 @@ card-title .carousel-item .card .card-body .cotainer .row h1 {
     background: #ffffff;
     border: 1px solid #e4e5e7;
     box-sizing: border-box;
-    border-radius: 10px 0px;
+    border-radius: 10px 0;
     padding: 40px;
     gap: 30px; }
     .boxPackage .package .icono {
@@ -9481,8 +9486,39 @@ app-flight-deals button {
     .boxVideo .row .col-12 .videoYoutube {
       height: 100%; }
 
+.p-carousel-prev, .p-carousel-next {
+  height: 0;
+  top: 40%;
+  z-index: 2;
+}
 
-      
+.tile ul.dots {
+  list-style-type: none;
+  text-align: center;
+  padding: 12px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.tile ul.dots li {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: #cfd1d3;
+  cursor: pointer;
+  margin: 0 .25rem;
+  transition: background-color .25s;
+}
+
+.tile ul.dots li.active {
+  background-color: #df0c30;
+}
+
+
+
 /********************************Slider NG5 custom*****************************************/
 .ng5-slider{
   margin: 20px 0px 0px 0px !important;
