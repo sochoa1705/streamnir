@@ -6,10 +6,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { SuccessDialogModule } from '../../../shared/components/success-dialog/success-dialog.module';
 import { SubscriptionRoutingModule } from './subscription-routing.module';
+import { FormComponent } from './form/form.component';
+import { SuccessComponent } from './success/success.component';
 
 @NgModule({
 	declarations: [
-		SubscriptionComponent
+		SubscriptionComponent,
+		FormComponent,
+		SuccessComponent
 	],
 	imports: [
 		CommonModule,

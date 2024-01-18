@@ -9410,7 +9410,7 @@ app-flight-deals button {
   .container,
   .container-fluid {
     width: 85% !important;
-    max-width: 85% !important; }
+    max-width: 1440px !important; }
 
   .card__content {
     overflow: hidden;
