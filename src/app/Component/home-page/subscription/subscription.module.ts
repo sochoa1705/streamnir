@@ -5,6 +5,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { SuccessDialogModule } from '../../../shared/components/success-dialog/success-dialog.module';
+import { SubscriptionRoutingModule } from './subscription-routing.module';
 
 @NgModule({
 	declarations: [
@@ -12,6 +13,7 @@ import { SuccessDialogModule } from '../../../shared/components/success-dialog/s
 	],
 	imports: [
 		CommonModule,
+		SubscriptionRoutingModule,
 		MatCheckboxModule,
 		ReactiveFormsModule,
 		NgbModalModule,

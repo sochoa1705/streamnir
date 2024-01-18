@@ -34,7 +34,9 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
 		this.form = this.formBuilder.group({
 			'name': new FormControl('', Validators.required),
 			'email': new FormControl('', Validators.compose([ Validators.required, Validators.email ])),
-			'destination': new FormControl('', Validators.required),
+			'birthdate': new FormControl('', Validators.required),
+			'docType': new FormControl('DNI', Validators.required),
+			'docNumber': new FormControl('', Validators.required),
 			'privacyPolicy': new FormControl(false, Validators.requiredTrue),
 			'dataPolicy': new FormControl(false, Validators.requiredTrue)
 		});
@@ -91,8 +93,16 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
 		return this.form.controls['email'];
 	}
 
-	get destination() {
-		return this.form.controls['destination'];
+	get birthdate() {
+		return this.form.controls['birthdate'];
+	}
+
+	get docType() {
+		return this.form.controls['docType'];
+	}
+
+	get docNumber() {
+		return this.form.controls['docNumber'];
 	}
 
 	get privacyPolicy() {

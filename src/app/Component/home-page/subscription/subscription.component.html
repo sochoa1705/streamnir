@@ -1,79 +1,97 @@
 <section class="my-0 position-relative">
 	<img src="assets/subscription-desktop-banner.webp" alt="Banner" class="img-fluid" *ngIf="!isMobile">
 	<img src="assets/subscription-mobile-banner.webp" alt="Banner mobile" class="img-fluid vw-100" *ngIf="isMobile">
-	<div class="card form-card border-0 mx-3 my-lg-auto me-lg-auto ms-lg-4 ms-xl-5">
-		<div class="card-body">
-			<h1 class="mt-lg-2 mb-lg-3 text-center">
-				<strong>¡Suscr&iacute;bete y recibe las mejores<br>ofertas para tu pr&oacute;ximo viaje!</strong>
-			</h1>
-			<form novalidate class="row g-2 g-lg-3 mx-md-2 mx-xl-3 pb-lg-1" [formGroup]="form" (ngSubmit)="onSubmit()">
-				<div class="col-12 col-md-6">
-					<label for="name" class="form-label x-small">Nombre</label>
-					<input type="text"
-					       id="name"
-					       class="form-control"
-					       formControlName="name"
-					       maxlength="100"
-					       [class.is-invalid]="name.invalid && (name.touched || submitAttempt)">
-				</div>
-				<div class="col-12 col-md-6">
-					<label for="email" class="form-label x-small">Correo</label>
-					<input type="email"
-					       id="email"
-					       class="form-control"
-					       formControlName="email"
-					       [class.is-invalid]="email.invalid && (email.touched || submitAttempt)">
-				</div>
-				<div class="col-12">
-					<label for="destination" class="form-label x-small">¿A d&oacute;nde quieres viajar?</label>
-					<select id="destination"
-					        class="form-select"
-					        formControlName="destination"
-					        [class.is-invalid]="destination.invalid && (destination.touched || submitAttempt)">
-						<option value="" disabled>Seleccionar</option>
-						<option value="Nacional">Nacional</option>
-						<option value="Sudamérica">Sudamérica</option>
-						<option value="Caribe">Caribe</option>
-						<option value="Europa">Europa</option>
-						<option value="Norteamérica">Norteamérica</option>
-						<option value="Otros destinos">Otros destinos</option>
-					</select>
-				</div>
-				<div class="col-12 col-xl-8">
-					<div class="row">
-						<div class="col-12">
-							<mat-checkbox formControlName="privacyPolicy">
-								<span class="x-small fw-normal text-wrap lh-sm">
-									He le&iacute;do y acepto la Pol&iacute;tica de Privacidad.
-									<a href="https://www.nmviajes.com/politicas" target="_blank" class="x-small">
-										Leer Pol&iacute;tica de Privacidad.
-									</a>
-								</span>
-							</mat-checkbox>
-							<p class="text-danger small" *ngIf="privacyPolicy.invalid && submitAttempt">
-								Debes aceptar las Pol&iacute;ticas de Privacidad
-							</p>
-						</div>
-						<div class="col-12">
-							<div class="col-12 mt-lg-1">
-								<mat-checkbox formControlName="dataPolicy">
-									<span class="x-small fw-normal text-wrap">Acepto el tratamiento de mis datos personales.</span>
-								</mat-checkbox>
-								<p class="text-danger small" *ngIf="dataPolicy.invalid && submitAttempt">
-									Debes aceptar el tratamiento de tus datos personales.
-								</p>
+	<div class="container banner-container top-0 end-0 bottom-0 start-0">
+		<div class="row h-100">
+			<div class="col col-sm-11 col-lg-6 mx-auto mx-lg-0 position-relative">
+				<div class="card w-100 form-card border-0 mt-lg-5 my-lg-auto">
+					<div class="card-body">
+						<h1 class="h4 fontOpen mt-lg-2 mb-lg-3 text-center">
+							<strong>¡Suscr&iacute;bete y recibe las mejores<br>ofertas para tu pr&oacute;ximo viaje!</strong>
+						</h1>
+						<form novalidate class="row g-2 g-xl-3 mx-md-2 mx-xl-3 pb-lg-1" [formGroup]="form" (ngSubmit)="onSubmit()">
+							<div class="col-12">
+								<label for="name" class="form-label x-small">Nombres</label>
+								<input type="text"
+								       id="name"
+								       class="form-control"
+								       formControlName="name"
+								       maxlength="100"
+								       [class.is-invalid]="name.invalid && (name.touched || submitAttempt)">
 							</div>
-						</div>
+							<div class="col-12 col-md-6">
+								<label for="email" class="form-label x-small">Correo</label>
+								<input type="email"
+								       id="email"
+								       class="form-control"
+								       formControlName="email"
+								       [class.is-invalid]="email.invalid && (email.touched || submitAttempt)">
+							</div>
+							<div class="col-12 col-md-6">
+								<label for="email" class="form-label x-small">Fecha de nacimiento</label>
+								<input type="date"
+								       id="birthdate"
+								       class="form-control"
+								       formControlName="birthdate"
+								       [class.is-invalid]="birthdate.invalid && (birthdate.touched || submitAttempt)">
+							</div>
+							<div class="col-12 col-md-6">
+								<label for="email" class="form-label x-small">Tipo de documento</label>
+								<select id="docType"
+								       class="form-select"
+								       formControlName="docType"
+								       [class.is-invalid]="docType.invalid && (docType.touched || submitAttempt)">
+									<option value="DNI">DNI</option>
+									<option value="CE">CE</option>
+									<option value="PASS">Pasaporte</option>
+								</select>
+							</div>
+							<div class="col-12 col-md-6">
+								<label for="email" class="form-label x-small">N° de documento</label>
+								<input type="tel"
+								       id="document"
+								       class="form-control"
+								       formControlName="docNumber"
+								       [class.is-invalid]="docNumber.invalid && (docNumber.touched || submitAttempt)">
+							</div>
+							<div class="col-12 col-xl-8">
+								<div class="row">
+									<div class="col-12">
+										<mat-checkbox formControlName="privacyPolicy">
+											<span class="x-small fw-normal text-wrap lh-sm">
+												He le&iacute;do y acepto la Pol&iacute;tica de Privacidad.
+												<a href="https://www.nmviajes.com/politicas" target="_blank" class="x-small">
+													Leer Pol&iacute;tica de Privacidad.
+												</a>
+											</span>
+										</mat-checkbox>
+										<p class="text-danger small" *ngIf="privacyPolicy.invalid && submitAttempt">
+											Debes aceptar las Pol&iacute;ticas de Privacidad
+										</p>
+									</div>
+									<div class="col-12">
+										<div class="col-12 mt-lg-1">
+											<mat-checkbox formControlName="dataPolicy">
+												<span class="x-small fw-normal text-wrap">Acepto el tratamiento de mis datos personales.</span>
+											</mat-checkbox>
+											<p class="text-danger small" *ngIf="dataPolicy.invalid && submitAttempt">
+												Debes aceptar el tratamiento de tus datos personales.
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-xl-4 d-grid d-lg-inline-block text-xl-end align-self-xl-end">
+								<button type="submit" class="mx-5 mx-lg-0" [disabled]="isLoading">Suscribirme</button>
+							</div>
+						</form>
 					</div>
 				</div>
-				<div class="col-12 col-xl-4 d-grid d-lg-inline-block text-xl-end align-self-xl-end">
-					<button type="submit" class="mx-5 mx-lg-0" [disabled]="isLoading">Suscribirme</button>
-				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </section>
-<section class="container mt-5 text-center">
+<section class="container mt-5 pt-lg-4 pt-xl-5 text-center">
 	<h2 class="fw-bold text-dark mb-4 mb-lg-5">S&eacute; el primero en enterarte de nuestras promociones exclusivas
 		en:</h2>
 	<div class="row gy-4 gy-lg-0 gx-lg-4 gx-xl-5 mx-lg-4 mx-xl-5">
