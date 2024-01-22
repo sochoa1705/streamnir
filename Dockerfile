@@ -1,4 +1,4 @@
-FROM node:16.20.1 as node
+FROM node:16.20.1 AS node
 WORKDIR /app
 COPY . .
 RUN npm install --force
