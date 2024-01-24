@@ -36,6 +36,7 @@
     "@angular/platform-browser": "~12.1.1",
     "@angular/platform-browser-dynamic": "~12.1.1",
     "@angular/router": "~12.1.1",
+    "@hotjar/browser": "^1.0.9",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "@ngu/carousel": "^4.0.0",
     "@popperjs/core": "^2.11.8",
