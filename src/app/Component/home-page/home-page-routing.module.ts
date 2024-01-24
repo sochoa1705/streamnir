@@ -25,7 +25,6 @@ import { RetailComponent } from './retail/retail.component';
 import { OffersComponent } from './offers/offers.component';
 import { BenefitsComponent } from './retail/benefits/benefits.component';
 import { CanActivateCheckoutGuard } from 'src/app/Guards/checkout.guard';
-import { SubscriptionComponent } from './subscription/subscription.component';
 import { DestinosComponent } from './vuelos/commons/components/destinos/destinos.component';
 import { EventosComponent } from './eventos/eventos.component';
 
@@ -181,7 +180,7 @@ const routes: Routes = [
       },
       {
         path: 'suscribirse',
-        component: SubscriptionComponent
+        loadChildren: () => import('../../../app/Component/home-page/subscription/subscription.module').then(m => m.SubscriptionModule)
       },
       {
         path: 'canales-de-atencion',

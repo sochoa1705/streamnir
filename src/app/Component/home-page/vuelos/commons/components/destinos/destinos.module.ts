@@ -9,6 +9,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { GalleriaModule } from 'primeng/galleria';
 import { DestinationsComponent } from './destinations/destinations.component';
 import { AereolineasModule } from 'src/app/shared/components/aereolineas/aereolineas.module';
+import { NguCarouselModule } from '@ngu/carousel';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -24,7 +25,8 @@ import { AereolineasModule } from 'src/app/shared/components/aereolineas/aereoli
     TabsModule,
     CarouselModule,
     GalleriaModule,
-    AereolineasModule
+    AereolineasModule,
+    NguCarouselModule
   ],
   exports: [
     DestinosComponent

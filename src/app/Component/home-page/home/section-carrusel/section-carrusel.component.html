@@ -11,8 +11,8 @@
 				</div>
 				<div
 					class="container__carrusel__section__swiper__card fullbanner"
-					[class.pointer]="item[0].RedirectLink !== ''"
-					(click)="redirectLink(item[0].RedirectLink)"
+					[class.pointer]="item[1].RedirectLink !== ''"
+					(click)="redirectLink(item[1].RedirectLink)"
 				>
 					<img [src]="item[1].PathImage" alt="gallery-img" />
 				</div>

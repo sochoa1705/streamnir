@@ -47,8 +47,8 @@
           <ng-template matStepLabel>Reserva</ng-template>
 
           <!-- DETALLE DE COBERTURA -->
-          <h2 *ngIf="safe0Json.detalleCobertura && resultJson" class="titleCobertura mt-3">Detalle de cobertura
-          </h2>
+          <h3 *ngIf="safe0Json.detalleCobertura && resultJson" class="titleCobertura mt-3 fs-5">Detalle de cobertura
+          </h3>
 
           <div *ngIf="safe0Json.detalleCobertura">
             <app-coverage [txtPlan]="safe0Json?.nombreProducto" [txtDias]="resultJson?.days" [txtOrigen]=""
@@ -61,7 +61,7 @@
           <!-- INFORMACION DE PASAJEROS MOVIL-->
           <div class="card pasajeros">
             <div class="card-header">
-              <h2>Información de pasajeros</h2>
+              <h4 class="fs-4 fw-bold">Información de pasajeros</h4>
 
               <span>
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -245,7 +245,7 @@
             <div class="col-12 medioPagoMobile">
               <div class="card cardPagoMobile">
                 <div class="card-header shadow-none">
-                  <h2>Selecciona el medio de pago</h2>
+                  <h3 class="fs-4 fw-bold">Selecciona el medio de pago</h3>
                   <span>Selecciona tu método de pago (el pago se llevará a cabo una vez presiones el
                     botón pagar al final del formulario).
                   </span>
@@ -488,11 +488,11 @@
             <div class="col-12 ">
               <div class="accordion">
                 <div class="accordion-item">
-                  <h2 class="accordion-header">
+                  <h3 class="accordion-header">
                     <a class="accordion-button" (click)="showVerDetalle()">
                       Ver detalles
                     </a>
-                  </h2>
+                  </h3>
 
                   <div *ngIf="showDetalle === true">
                     <div class="accordion-body">
@@ -535,10 +535,10 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header shadow-none" (click)="showDataContact()">
-                  <h2>Datos de contacto
+                  <h3 class="fs-4 fw-bold">Datos de contacto
                     <img class="iconFlechaSup" [class.activeIcon]="!showDataContacto"
                       src="./assets/comprar/flecha-top.png" alt="">
-                  </h2>
+                  </h3>
                   <span>Ingresa tus datos actualizados, este se utilizará para avisarte en caso de
                     cambios en
                     el itinerario. </span>
@@ -793,7 +793,7 @@
         <!-- FORM PASAJEROS DESKTOP -->
         <div class="card pasajeros hideViewMobile">
           <div class="card-header">
-            <h2>Información de pasajeros</h2>
+            <h3 class="fs-4 fw-bold">Información de pasajeros</h3>
 
             <span>
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -983,7 +983,7 @@
           <div class="col-12 medioPagoMobile">
             <div class="card cardPagoMobile">
               <div class="card-header shadow-none">
-                <h2>Selecciona el medio de pago</h2>
+                <h3 class="fs-4 fw-bold">Selecciona el medio de pago</h3>
                 <span>Selecciona tu método de pago (el pago se llevará a cabo una vez presiones el botón
                   pagar
                   al final del formulario).
@@ -1279,10 +1279,10 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header shadow-none" (click)="showDataContact()">
-                <h2>Datos de contacto
+                <h3 class="fs-4 fw-bold">Datos de contacto
                   <img class="iconFlechaSup" [class.activeIcon]="!showDataContacto"
                     src="./assets/comprar/flecha-top.png" alt="">
-                </h2>
+                </h3>
                 <span>Ingresa tus datos actualizados, este se utilizará para avisarte en caso de cambios
                   en el itinerario.
                 </span>
@@ -1546,16 +1546,16 @@
 
       <!-- DERECHA -->
       <div class="col-4 viewMobileWidth order-0 order-md-0 hideViewMobile">
-        <h2 class="titleMob">Detalle de tu pago</h2>
+        <h3 class="titleMob fs-5">Detalle de tu pago</h3>
         <!-- ACORDION SEGUROS -->
         <div class="accordion">
           <div class="accordion-item">
-            <h2 class="accordion-header">
+            <h4 class="accordion-header">
               <a class="accordion-button" (click)="showVerDetalle()">
                 Ver detalles
                 <img src="./assets/footer/flecha.webp" alt="" class="iconFlecha">
               </a>
-            </h2>
+            </h4>
 
             <div *ngIf="showDetalle === true">
               <div class="accordion-body">
@@ -1585,7 +1585,7 @@
         <!-- END ACORDION SEGUROS -->
 
         <!-- DETALLE DE COBERTURA -->
-        <h2 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3">Detalle de cobertura</h2>
+        <h3 *ngIf="safe0Json.detalleCobertura" class="titleCobertura mt-3 fs-5">Detalle de cobertura</h3>
         <!-- END DETALLE DE COBERTURA -->
 
         <!-- COBERTURA -->
@@ -1746,9 +1746,9 @@
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" id="exampleModalLabel">{{safe0Json?.producto}} - {{safe0Json?.precioEmisionLocal |
+        <h3 class="modal-title" id="exampleModalLabel">{{safe0Json?.producto}} - {{safe0Json?.precioEmisionLocal |
           currency : 'USD'}}
-        </h2>
+        </h3>
         <h5 class="modal-subtitle" id="exampleModalLabel">Asistencia médica: {{ asistMedic }}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
