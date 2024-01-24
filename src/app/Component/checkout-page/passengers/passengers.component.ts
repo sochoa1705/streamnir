@@ -174,7 +174,6 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.acceptPoliticsField.setValue(data.acceptPolitics);
 		this.formBillingGroup.setValue(data.billing);
 		this._checkoutService.isSaveDataPassenger = true;
-		console.log(this.formGroup.value, 'valueee form :c')
 	}
 
 	setArrayDate() {
@@ -305,7 +304,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 			this._notification.showNotificacion(
 				'Datos sin completar',
 				'Parece que algunos de tus datos son inválidos. Por favor, inténtalo nuevamente.',
-				60
+				5
 			);
 		}
 	}

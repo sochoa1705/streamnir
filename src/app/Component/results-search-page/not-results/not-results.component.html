@@ -9,7 +9,7 @@
 		<span *ngIf="type == 'error'">{{ subtitle }}</span>
 	</div>
 	<div class="page__notresults__actions" *ngIf="type == 'error'">
-		<app-button [text]="'Reintentar'" [isMobile]="true" [color]="'dark'" (onClick)="resetFilters('-1')"></app-button>
+		<app-button [text]="'Reintentar'" [isMobile]="true" [color]="'dark'" (onClick)="reloadPage()"></app-button>
 	</div>
 	<div class="page__notresults__filters" *ngIf="type == 'not-result-filter'">
         <span>Elimina algunos filtros para ver más resultados.</span>
