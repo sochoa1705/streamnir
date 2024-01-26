@@ -11200,3 +11200,36 @@ app-flight-deals {
         }
     }
 }
+
+.p-carousel-prev, .p-carousel-next {
+    height: 0;
+    top: 40%;
+    z-index: 2;
+}
+
+ngu-tile .tile {
+    ul.dots {
+        list-style-type: none;
+        text-align: center;
+        padding: 12px;
+        margin: 0;
+        white-space: nowrap;
+        overflow: auto;
+        box-sizing: border-box;
+
+        li {
+            width: 14px;
+            height: 14px;
+            display: inline-block;
+            border-radius: 50%;
+            background-color: #cfd1d3;
+            cursor: pointer;
+            margin: 0 .25rem;
+            transition: background-color .25s;
+
+            &.active {
+                background-color: #df0c30;
+            }
+        }
+    }
+}
