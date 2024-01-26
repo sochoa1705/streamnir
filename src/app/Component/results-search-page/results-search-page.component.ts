@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Group, ISearchResponse } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
@@ -11,7 +11,6 @@ import { getPricingFareBreakDowns } from 'src/app/shared/utils/fareBreakDowns';
 import { LoadingService } from 'src/app/Services/intermediary/loading.service';
 import { getMoreOptionsFilter } from 'src/app/shared/utils/getMoreOptionsFilter';
 import { getDatesBySegment } from 'src/app/shared/utils/getDatesBySort';
-import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
 import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
@@ -20,7 +19,7 @@ import { IdlePopupComponent } from './idle-popup/idle-popup.component';
 import { SortByComponent } from './sort-by/sort-by.component';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { UserIdleService } from 'angular-user-idle';
-import { Subscription, Subject } from 'rxjs';
+import { Subject, Subscription, SubscriptionLike } from 'rxjs';
 import { ModalSearchComponent } from './modal-search/modal-search.component';
 import { getParamsByRoute } from 'src/app/shared/utils/getParams';
 import { takeUntil } from 'rxjs/operators';
@@ -73,10 +72,12 @@ interface IFilterDuration {
 	styleUrls: ['./results-search-page.component.scss']
 })
 export class ResultsSearchPageComponent implements OnInit, OnDestroy {
+
 	constructor(
 		private _searchService: SearchService,
 		private _tokenService: TokenService,
 		private router: Router,
+		private _route: ActivatedRoute,
 		public _loadingService: LoadingService,
 		private _searchFiltersService: SearchFiltersService,
 		private _modalService: NgbModal,
@@ -128,7 +129,6 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	titleNotResults = '';
 
 	isLoader = true;
-	saveModel: SaveModelVuelos;
 
 	flightType = 0;
 	idBest = '0';
@@ -140,12 +140,21 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	dataSearch: Search | null;
 	@ViewChild('childSort') childSort!: SortByComponent;
 
+	private locationSubscription$: SubscriptionLike;
+	private unsubscribeQueryParams$ = new Subject<void>();
+	private queryParams: Params;
+
 	ngOnInit() {
 		this.location.subscribe((change) => {
 			this.renderCorrectPage();
-    });
+		});
+		this._route.queryParams.pipe(takeUntil(this.unsubscribeQueryParams$)).subscribe({
+			next: (params: any) => {
+				if (params) this.queryParams = params;
+				this.reloadPageResult();
+			}
+		});
 		GlobalComponent.isKayak = false;
-		this.reloadPageResult();
 	}
 
 	reloadPageResult() {
@@ -230,7 +239,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 
 	getObjectParams() {
 		if (this.isReload && GlobalComponent.tokenMotorVuelo !== '') {
-			const objParams = getParamsByRoute();
+			const objParams = getParamsByRoute(this.queryParams);
 			this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
 			this.dataSearch=GlobalComponent.searchData;
 			GlobalComponent.classFligh =
@@ -972,7 +981,10 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 		this._modalService.dismissAll();
 		this.userIdle.stopWatching();
-		if(this.idleSubscriber) this.idleSubscriber.unsubscribe();
+		if (this.idleSubscriber) this.idleSubscriber.unsubscribe();
+		if (this.locationSubscription$) this.locationSubscription$.unsubscribe();
+		this.unsubscribeQueryParams$.next();
+		this.unsubscribeQueryParams$.complete();
 		this.unsubscribeSearch$.next();
 		this.unsubscribeSearch$.complete();
 	}
