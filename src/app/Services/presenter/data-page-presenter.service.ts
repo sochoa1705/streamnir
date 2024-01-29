@@ -180,7 +180,7 @@ export class DataPagePresenterService {
         list2: [
           {
             id: 0,
-            text: "Quienes somos",
+            text: "Quiénes somos",
             link: "/nuestra-empresa",
             target: "_self"
           },
