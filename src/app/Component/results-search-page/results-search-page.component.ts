@@ -140,6 +140,8 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	dataSearch: Search | null;
 	@ViewChild('childSort') childSort!: SortByComponent;
 
+	private newLoad = true;
+
 	private locationSubscription$: SubscriptionLike;
 	private unsubscribeQueryParams$ = new Subject<void>();
 	private queryParams: Params;
@@ -151,7 +153,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		this._route.queryParams.pipe(takeUntil(this.unsubscribeQueryParams$)).subscribe({
 			next: (params: any) => {
 				if (params) this.queryParams = params;
-				this.reloadPageResult();
+				if (this.newLoad) this.reloadPageResult();
 			}
 		});
 		GlobalComponent.isKayak = false;
@@ -227,7 +229,6 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 				GlobalComponent.appReglasVentaAnticipada = response.reglasVentaAnticipada;
 				GlobalComponent.appConfigurations = response.configuraciones;
 				GlobalComponent.transactionId = response.transactionId;
-				console.log( response.transactionId, ' transactionId')
 				this.getObjectParams();
 			},
 			error: () => {
@@ -252,6 +253,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 					: `No encontramos vuelos coincidentes para esas fechas.`;
 			this.getAllDataSearch(objParams);
 			this.isReload = false;
+			this.newLoad = false;
 		}
 	}
 
@@ -299,6 +301,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		this.progressCount = 98;
 		setTimeout(() => {
 			this.progressCount = 100;
+			this.validateQueryParams();
 		}, 1100);
 	}
 
@@ -631,8 +634,20 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		});
 	}
 
+	private validateQueryParams() {
+		if (this.queryParams.airlines) {
+			let values = this.queryParams.airlines.split(',');
+			values.forEach(value => {
+				const airline = this.dataAirlines.find(a => value === a.value);
+				if (airline) airline.active = true;
+			});
+			this.updateArrayAirlinesFilter(values);
+		}
+	}
+
 	updateArrayAirlinesFilter($event: string[]) {
 		this.filters.arrayAirline = $event;
+		this.addFilterToParams('airlines', this.filters.arrayAirline);
 		this.applyFilters();
 	}
 
@@ -647,6 +662,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 			case 'airlineCodeFilter':
 				if (item.active) this.filters.arrayAirline.push(item.value);
 				else this.filters.arrayAirline = this.filters.arrayAirline.filter((airline) => airline !== item.value);
+				this.addFilterToParams('airlines', this.filters.arrayAirline);
 				break;
 			default:
 				if (item.active) this.filters.arrayScales.push(item.value);
@@ -671,6 +687,23 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 				break;
 		}
 		this.applyFilters();
+	}
+
+	private addFilterToParams(paramKey: string, value: string | string[]) {
+		const currentParams: any = { ...this.queryParams };
+		if (value && value.length > 0)
+			currentParams[paramKey] = typeof value === 'string' ? value : value.join(',');
+		else
+			delete currentParams[paramKey];
+
+		this.queryParams = currentParams;
+		getParamsByRoute(this.queryParams);
+
+		this.newLoad = false;
+		this.router.navigate([], {
+			relativeTo: this._route,
+			queryParams: this.queryParams
+		}).then(() => null);
 	}
 
 	applyFilters() {
