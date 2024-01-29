@@ -299,9 +299,9 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 
 	endProgressBar() {
 		this.progressCount = 98;
-		this.validateQueryParams();
 		setTimeout(() => {
 			this.progressCount = 100;
+			this.validateQueryParams();
 		}, 1100);
 	}
 
