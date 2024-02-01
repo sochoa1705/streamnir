@@ -268,14 +268,16 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 					this.isLoader = false;
 					if (this.exchangeRate == null) this.exchangeRate = res.exchangeRate.amount;
 					this.getDataFilters(res);
+					this.validateQueryParams();
 				}
 				if (this._loadingService.requestSearchCount == 9) {
 					this.endProgressBar();
 					this.showNotResults = this.dataFilterGroups.length == 0 ? true : false;
 					if (!this.showNotResults) {
 						this.endsearch();
-						this.minPrice = this.dataFilterGroups[0].detailPricing?.totalPay || 0;
-						this.maxPrice = this.dataFilterGroups[this.dataFilterGroups.length - 1].detailPricing?.totalPay || 0;
+						this.allDataGroups = [...this.orderByPrincing(this.allDataGroups)];
+						this.minPrice = this.allDataGroups[0].detailPricing?.totalPay || 0;
+						this.maxPrice = this.allDataGroups[this.allDataGroups.length - 1].detailPricing?.totalPay || 0;
 						this.filters.minPrice = this.minPrice;
 						this.filters.maxPrice = this.maxPrice;
 						this._searchFiltersService.isSetValuesPrices.emit({
@@ -490,7 +492,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	sortData() {
 		switch (this.sortBy) {
 			case 0:
-				this.dataFilterGroups = [...this.orderByPrincing()];
+				this.dataFilterGroups = [...this.orderByPrincing(this.dataFilterGroups)];
 				break;
 			case 1:
 				this.dataFilterGroups = [...this.orderByBestOption()];
@@ -571,7 +573,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	}
 
 	getValuesTabsSort() {
-		const groupsSortByPrice = this.orderByPrincing();
+		const groupsSortByPrice = this.orderByPrincing(this.dataFilterGroups);
 
 		this.theCheapest = {
 			price: groupsSortByPrice[0].detailPricing?.totalPay || 0,
@@ -715,25 +717,25 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 			let isDurationScaleDep = true;
 			let isDurationScaleRet = true;
 
-			if (item.durationDeparture || item.durationDeparture == 0) {
+			if (this.valuesFilterDuration.maxDurationDeparture && (item.durationDeparture || item.durationDeparture == 0)) {
 				isDurationDepartureValid =
 					item.durationDeparture >= this.valuesFilterDuration.minDurationDeparture &&
 					item.durationDeparture <= this.valuesFilterDuration.maxDurationDeparture;
 			}
 
-			if (this.flightType == 0 && (item.durationReturn || item.durationReturn == 0)) {
+			if (this.valuesFilterDuration.maxDurationReturn && this.flightType == 0 && (item.durationReturn || item.durationReturn == 0)) {
 				isDurationReturnValid =
 					item.durationReturn >= this.valuesFilterDuration.minDurationReturn &&
 					item.durationReturn <= this.valuesFilterDuration.maxDurationReturn;
 			}
 
-			if (item.maxWaitingTimeDep || item.maxWaitingTimeDep == 0) {
+			if (this.valuesFilterDuration.waitingTimeDep && (item.maxWaitingTimeDep || item.maxWaitingTimeDep == 0)) {
 				isDurationScaleDep =
 					item.maxWaitingTimeDep >= this.valuesFilterDuration.minWaitingTimeDep &&
 					item.maxWaitingTimeDep <= this.valuesFilterDuration.waitingTimeDep;
 			}
 
-			if (this.flightType == 0 && (item.maxWaitingTimeRet || item.maxWaitingTimeRet == 0)) {
+			if (this.valuesFilterDuration.waitingTimeRet && this.flightType == 0 && (item.maxWaitingTimeRet || item.maxWaitingTimeRet == 0)) {
 				isDurationScaleRet =
 					item.maxWaitingTimeRet >= this.valuesFilterDuration.minWaitingTimeRet &&
 					item.maxWaitingTimeRet <= this.valuesFilterDuration.waitingTimeRet;
@@ -754,7 +756,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 				(this.filters.arrayScales.includes('isOneScale') ? item.isOneScale : true) &&
 				(this.filters.arrayScales.includes('isMultiScale') ? item.isMultiScale : true) &&
 				(item.detailPricing?.totalPay || 0) >= this.filters.minPrice &&
-				(item.detailPricing?.totalPay || 0) <= this.filters.maxPrice &&
+				(this.filters.maxPrice ? (item.detailPricing?.totalPay || 0) <= this.filters.maxPrice : true) &&
 				isDurationDepartureValid &&
 				isDurationReturnValid &&
 				isDurationScaleDep &&
@@ -819,8 +821,8 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		return dataFilter;
 	}
 
-	orderByPrincing() {
-		const dataFilter = [...this.dataFilterGroups];
+	orderByPrincing(groups: Group[]) {
+		const dataFilter = [...groups];
 		dataFilter.sort((a, b) => {
 			if (a.detailPricing && b.detailPricing) return a.detailPricing.totalPay - b.detailPricing.totalPay;
 			if (!a.detailPricing) return 1;
