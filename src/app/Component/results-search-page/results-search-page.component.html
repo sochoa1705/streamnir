@@ -31,7 +31,9 @@
 				</div>
 			</div>
 			<div class="container__page__metasearch__mobile__filters" *ngIf="!showError">
-				<ng-container *ngTemplateOutlet="appfilters"></ng-container>
+				<ng-container *ngIf="isMobile">
+					<ng-container *ngTemplateOutlet="appfilters"></ng-container>
+				</ng-container>
 			</div>
 		</div>
 	</div>
@@ -49,7 +51,9 @@
 	</div>
 	<section *ngIf="!showError && !showNotResults">
 		<article>
-			<ng-container *ngTemplateOutlet="appfilters"></ng-container>
+			<ng-container *ngIf="!isMobile">
+				<ng-container *ngTemplateOutlet="appfilters"></ng-container>
+			</ng-container>
 			<div class="container__page__results">
 				<app-sort-by
 					#childSort
@@ -130,5 +134,6 @@
 		[theCheapest]="theCheapest"
 		[betterOption]="betterOption"
 		[shorterDuration]="shorterDuration"
+		[isMobile]="isMobile"
 	></app-filters>
 </ng-template>

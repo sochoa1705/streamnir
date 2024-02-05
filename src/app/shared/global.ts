@@ -9,36 +9,36 @@ import { Configuraciones } from '../api/api-nmviajes/models/rq-token-ce-request'
 import { dataInitBooking, dataSteps, detailPricingInit } from './constant-init';
 
 export class GlobalComponent {
-	public static appTrackingCode: string = '';
-	public static appIP: string = '';
-	public static appCompany: string = 'Expertia';
 	public static appApplication: string = 'NMViajes';
-	public static appDevice: number = 3; // WEB
-	public static appWebId: number;
-	public static appShowGroups: number = 8;
-	public static appResponseGroups: Group[] = [];
-	public static appGroupSeleted: Group;
-	public static appExchangeRate: ExchangeRate;
-	public static appConfigurations: Configuraciones;
 	public static appBooking: IBooking = dataInitBooking;
-	public static isB2B: boolean = false;
-	public static viajala: boolean = false;
-	public static tokenMotorVuelo: string = '';
-	public static transactionId = '';
+	public static appCompany: string = 'Expertia';
+	public static appConfigurations: Configuraciones;
+	public static appDevice: number = 3; // WEB
+	public static appExchangeRate: ExchangeRate;
+	public static appGroupSeleted: Group;
+	public static appIP: string = '';
 	public static appReglasVentaAnticipada: RAdvanceSaleRule[] = [];
+	public static appResponseGroups: Group[] = [];
+	public static appShowGroups: number = 8;
+	public static appTrackingCode: string = '';
+	public static appWebId: number;
+	public static classFligh = 'Economy';
+	public static currency = 'USD';
+	public static dataSteps: Step[] = [];
+	public static detailPricing: PricingDetail = detailPricingInit;
+	public static discountCampaing: RDiscount | null = null;
+	public static indexSegmentSeleted: number[] = [];
+	public static isB2B: boolean = false;
+	public static isDomestic = false;
+	public static isKayak = false;
+	public static listCountries: ICountry[] = [];
+	public static paramsSearch: any;
+	public static searchData: Search;
 	public static segmentSelected: number[] = [];
+	public static tokenMotorVuelo: string = '';
+	public static totalDaysTravel = 0;
+	public static transactionId = '';
 	public static upSellGroup: IUpSell[] = [];
 	public static upSellSeleted: IUpSell | null = null;
-	public static detailPricing: PricingDetail = detailPricingInit;
-	public static totalDaysTravel = 0;
-	public static isDomestic = false;
-	public static discountCampaing: RDiscount | null = null;
-	public static listCountries: ICountry[] = [];
-	public static classFligh = 'Economy';
-	public static paramsSearch: any;
-	public static indexSegmentSeleted: number[] = [];
-	public static isKayak = false;
-	public static currency = 'USD';
-	public static searchData: Search;
-	public static dataSteps: Step[] = [];
+	public static viajala: boolean = false;
 }

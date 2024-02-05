@@ -24,7 +24,7 @@ export class DurationFilterComponent implements OnInit{
 
   @Input() valuesFilterDuration:IFilterDuration;
   @Input() valuesFilterDurationInit:IFilterDuration;
-  @Input() isMobile = false;
+  @Input() isMobile: boolean = false;
   @Output() filterDurationRange = new EventEmitter();
   @Output() filterDurationScale = new EventEmitter();
   @Output() resetFilterDuration  = new EventEmitter();
@@ -34,16 +34,16 @@ export class DurationFilterComponent implements OnInit{
   codesFlight:string[]=[];
   hidden=false;
 
-  constructor(private _searchFiltersService: SearchFiltersService,  @Optional() private _activeModal?: NgbActiveModal){
+  constructor(private _searchFiltersService: SearchFiltersService, @Optional() private _activeModal?: NgbActiveModal) {
 		this._searchFiltersService.isResetFilterDuration.subscribe({
 			next: () => {
         this.setValuesReset();
 			}
 		});
     this._searchFiltersService.isSetValuesDuration.subscribe({
-      next:(res:any) =>{
-         this.hidden=true;
-         this.setValues(res);
+      next: (res: any) => {
+        this.hidden = true;
+        this.setValues(res);
       }
     })
 
@@ -51,7 +51,7 @@ export class DurationFilterComponent implements OnInit{
 			next: () => {
 				 this.valueDurationDep=0;
 			}
-		});
+    });
 	}
   
   dropdownActive=true;
@@ -133,46 +133,49 @@ export class DurationFilterComponent implements OnInit{
     }, 10);
     
     const paramsSearch={...GlobalComponent.paramsSearch};
-    if(Object.keys(paramsSearch).length !== 0){
+    this.codesFlight = [];
+    if (Object.keys(paramsSearch).length !== 0) {
       this.flightType=paramsSearch.flightType;
-      if(this.flightType !== 2) this.codesFlight.push(paramsSearch.arrivalLocation,paramsSearch.departureLocation)
-        else this.codesFlight.push(paramsSearch.multicity[0].arrivalLocation)
+      if (this.flightType !== 2) {
+        this.codesFlight.push(paramsSearch.arrivalLocation, paramsSearch.departureLocation)
+      } else {
+        this.codesFlight.push(paramsSearch.multicity[0].arrivalLocation)
+      }
     }
   }
 
   ngOnInit(): void {
-    if(this.isMobile){
-        this.setValuesReset();
-    }
+    if (this.isMobile) 
+      this.setValuesReset();
   }
 
   setValuesReset(){
     this.hidden=true;
-        this.valueDurationDep =  this.valuesFilterDuration.minDurationDeparture;
-        this.optionsDurationDep.floor = this.valuesFilterDurationInit.minDurationDeparture;
-        this.highValueDurationDep = this.valuesFilterDuration.maxDurationDeparture;
-        this.optionsDurationDep.ceil = this.valuesFilterDurationInit.maxDurationDeparture;
-  
-        this.valueDurationRet = this.valuesFilterDuration.minDurationReturn;
-        this.optionsDurationRet.floor = this.valuesFilterDurationInit.minDurationReturn;
-        this.highValueDurationRet = this.valuesFilterDuration.maxDurationReturn;
-        this.optionsDurationRet.ceil = this.valuesFilterDurationInit.maxDurationReturn;
+    this.valueDurationDep =  this.valuesFilterDuration.minDurationDeparture;
+    this.optionsDurationDep.floor = this.valuesFilterDurationInit.minDurationDeparture;
+    this.highValueDurationDep = this.valuesFilterDuration.maxDurationDeparture;
+    this.optionsDurationDep.ceil = this.valuesFilterDurationInit.maxDurationDeparture;
 
-        this.highValueScaleDep = this.valuesFilterDuration.waitingTimeDep;
-        this.highValueScaleRet = this.valuesFilterDuration.waitingTimeRet;
-        
-        this.valueScaleDep= this.valuesFilterDuration.minWaitingTimeDep;
-        this.valueScaleRet= this.valuesFilterDuration.minWaitingTimeRet;
+    this.valueDurationRet = this.valuesFilterDuration.minDurationReturn;
+    this.optionsDurationRet.floor = this.valuesFilterDurationInit.minDurationReturn;
+    this.highValueDurationRet = this.valuesFilterDuration.maxDurationReturn;
+    this.optionsDurationRet.ceil = this.valuesFilterDurationInit.maxDurationReturn;
 
-        this.optionsScaleDep.floor = 0;
-        this.optionsScaleRet.floor = 0;
+    this.highValueScaleDep = this.valuesFilterDuration.waitingTimeDep;
+    this.highValueScaleRet = this.valuesFilterDuration.waitingTimeRet;
+    
+    this.valueScaleDep= this.valuesFilterDuration.minWaitingTimeDep;
+    this.valueScaleRet= this.valuesFilterDuration.minWaitingTimeRet;
 
-        this.optionsScaleDep.ceil = this.valuesFilterDurationInit.waitingTimeDep;
-        this.optionsScaleRet.ceil = this.valuesFilterDurationInit.waitingTimeRet;
+    this.optionsScaleDep.floor = 0;
+    this.optionsScaleRet.floor = 0;
 
-        setTimeout(() => {
-          this.hidden=false;
-        }, 10);
+    this.optionsScaleDep.ceil = this.valuesFilterDurationInit.waitingTimeDep;
+    this.optionsScaleRet.ceil = this.valuesFilterDurationInit.waitingTimeRet;
+
+    setTimeout(() => {
+      this.hidden=false;
+    }, 10);
   }
 
   resetFilter() {

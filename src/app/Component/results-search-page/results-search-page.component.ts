@@ -67,6 +67,10 @@ interface IFilterDuration {
 	minWaitingTimeRet: number;
 }
 
+function isMobile() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 @Component({
 	selector: 'app-results-search-page',
 	templateUrl: './results-search-page.component.html',
@@ -87,6 +91,8 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 
 	private unsubscribeSearch$ = new Subject<void>();
 	private idleSubscriber: Subscription;
+
+	isMobile = isMobile();
 
 	allDataGroups: Group[] = [];
 	dataGroupsPaginate: Group[] = [];
@@ -218,7 +224,6 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 				GlobalComponent.appReglasVentaAnticipada = response.reglasVentaAnticipada;
 				GlobalComponent.appConfigurations = response.configuraciones;
 				GlobalComponent.transactionId = response.transactionId;
-				console.log(response.transactionId, 'TransactionId');
 				this.getObjectParams();
 			},
 			error: () => {
@@ -725,7 +730,6 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 			);
 		});
 		this.dataFilterGroups = [...dataFilter];
-		console.log(this.dataFilterGroups.length, 'legth datfilter');
 		this.indexPaginate = 8;
 		this.sortData();
 		this.resetCounters();

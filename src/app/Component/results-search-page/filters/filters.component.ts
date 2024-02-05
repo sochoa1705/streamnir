@@ -47,7 +47,9 @@ export class FiltersComponent implements OnInit {
 	@Input() shorterDuration: any;
 	@Input() indexSortBy = 0;
 	@Input() currentFilters: any;
-	@Input() valuesFilterDurationInit:IFilterDuration;
+	@Input() valuesFilterDurationInit: IFilterDuration;
+	@Input() isMobile: boolean = false;
+	
 
 	@Output() changeArrayFilters = new EventEmitter();
 	@Output() updateArrayAirlinesFilter = new EventEmitter();
