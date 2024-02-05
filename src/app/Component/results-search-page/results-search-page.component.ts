@@ -1,6 +1,6 @@
 import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Group, ISearchResponse } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { SearchService } from 'src/app/api/api-nmviajes/services/search.service';
 import { TokenService } from 'src/app/api/api-nmviajes/services/token.service';
@@ -11,7 +11,6 @@ import { getPricingFareBreakDowns } from 'src/app/shared/utils/fareBreakDowns';
 import { LoadingService } from 'src/app/Services/intermediary/loading.service';
 import { getMoreOptionsFilter } from 'src/app/shared/utils/getMoreOptionsFilter';
 import { getDatesBySegment } from 'src/app/shared/utils/getDatesBySort';
-import { SaveModelVuelos } from 'src/app/shared/components/tabs/tabs.models';
 import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
 import { getWaitingTime } from 'src/app/shared/utils/waitingTimeScale';
 import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
@@ -20,10 +19,11 @@ import { IdlePopupComponent } from './idle-popup/idle-popup.component';
 import { SortByComponent } from './sort-by/sort-by.component';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { UserIdleService } from 'angular-user-idle';
-import { Subscription, Subject } from 'rxjs';
+import { Subject, Subscription, SubscriptionLike } from 'rxjs';
 import { ModalSearchComponent } from './modal-search/modal-search.component';
 import { getParamsByRoute } from 'src/app/shared/utils/getParams';
 import { takeUntil } from 'rxjs/operators';
+import { isMobile } from 'src/app/shared/utils/isMobile';
 
 interface Item {
 	value: any;
@@ -67,20 +67,18 @@ interface IFilterDuration {
 	minWaitingTimeRet: number;
 }
 
-function isMobile() {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
 @Component({
 	selector: 'app-results-search-page',
 	templateUrl: './results-search-page.component.html',
 	styleUrls: ['./results-search-page.component.scss']
 })
 export class ResultsSearchPageComponent implements OnInit, OnDestroy {
+
 	constructor(
 		private _searchService: SearchService,
 		private _tokenService: TokenService,
 		private router: Router,
+		private _route: ActivatedRoute,
 		public _loadingService: LoadingService,
 		private _searchFiltersService: SearchFiltersService,
 		private _modalService: NgbModal,
@@ -134,7 +132,6 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	titleNotResults = '';
 
 	isLoader = true;
-	saveModel: SaveModelVuelos;
 
 	flightType = 0;
 	idBest = '0';
@@ -146,12 +143,23 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	dataSearch: Search | null;
 	@ViewChild('childSort') childSort!: SortByComponent;
 
+	private newLoad = true;
+
+	private locationSubscription$: SubscriptionLike;
+	private unsubscribeQueryParams$ = new Subject<void>();
+	private queryParams: Params;
+
 	ngOnInit() {
 		this.location.subscribe((change) => {
 			this.renderCorrectPage();
 		});
+		this._route.queryParams.pipe(takeUntil(this.unsubscribeQueryParams$)).subscribe({
+			next: (params: any) => {
+				if (params) this.queryParams = params;
+				if (this.newLoad) this.reloadPageResult();
+			}
+		});
 		GlobalComponent.isKayak = false;
-		this.reloadPageResult();
 	}
 
 	reloadPageResult() {
@@ -171,7 +179,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		this.theCheapest = null;
 		this.betterOption = null;
 		this.shorterDuration = null;
-		this.dataSearch = null;
+		this.dataSearch = null
 
 		this.dataBagFilter = dataBagFilterInit.map((item) => {
 			item.total = 0;
@@ -235,9 +243,9 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 
 	getObjectParams() {
 		if (this.isReload && GlobalComponent.tokenMotorVuelo !== '') {
-			const objParams = getParamsByRoute();
+			const objParams = getParamsByRoute(this.queryParams);
 			this.arrayMoreOptionsSort = getMoreOptionsFilter(objParams);
-			this.dataSearch = GlobalComponent.searchData;
+			this.dataSearch=GlobalComponent.searchData;
 			GlobalComponent.classFligh =
 				objParams.flightClass == 0 ? 'Economy' : objParams.flightClass == 1 ? 'Business' : 'First Class';
 			GlobalComponent.paramsSearch = { ...objParams };
@@ -248,55 +256,57 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 					: `No encontramos vuelos coincidentes para esas fechas.`;
 			this.getAllDataSearch(objParams);
 			this.isReload = false;
+			this.newLoad = false;
 		}
 	}
 
 	getAllDataSearch(objSearch: any) {
-		this.progressCount = 3;
-		this._searchService
-			.getAllDataSearch(objSearch)
-			.pipe(takeUntil(this.unsubscribeSearch$))
-			.subscribe({
-				next: (res) => {
-					this._loadingService.requestSearchCount++;
-					this.progressCount = this._loadingService.requestSearchCount * 10;
-					if (res.groups) {
-						this.isLoader = false;
-						if (this.exchangeRate == null) this.exchangeRate = res.exchangeRate.amount;
-						this.getDataFilters(res);
-					}
-					if (this._loadingService.requestSearchCount == 9) {
-						this.endProgressBar();
-						this.showNotResults = this.dataFilterGroups.length == 0 ? true : false;
-						if (!this.showNotResults) {
-							this.endsearch();
-							this.minPrice = this.dataFilterGroups[0].detailPricing?.totalPay || 0;
-							this.maxPrice = this.dataFilterGroups[this.dataFilterGroups.length - 1].detailPricing?.totalPay || 0;
-							this.filters.minPrice = this.minPrice;
-							this.filters.maxPrice = this.maxPrice;
-							this._searchFiltersService.isSetValuesPrices.emit({
-								minPrice: this.minPrice,
-								maxPrice: this.maxPrice
-							});
-							this.getValuesByFilterDuration();
-							this.valuesFilterDurationInit = { ...this.valuesFilterDuration };
-							this.configIdlePopup();
-							this.childSort.resetSort();
-						}
-					}
-					if (!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate = res.exchangeRate;
-				},
-				error: (err) => {
+		this.progressCount=3;
+		this._searchService.getAllDataSearch(objSearch).pipe(
+    takeUntil(this.unsubscribeSearch$)).subscribe({
+			next: (res) => {				
+				this._loadingService.requestSearchCount++;
+				this.progressCount = this._loadingService.requestSearchCount * 10;
+				if (res.groups) {
 					this.isLoader = false;
-					this.showError = true;
+					if (this.exchangeRate == null) this.exchangeRate = res.exchangeRate.amount;
+					this.getDataFilters(res);
+					this.validateQueryParams();
 				}
-			});
+				if (this._loadingService.requestSearchCount == 9) {
+					this.endProgressBar();
+					this.showNotResults = this.dataFilterGroups.length == 0 ? true : false;
+					if (!this.showNotResults) {
+						this.endsearch();
+						this.allDataGroups = [...this.orderByPrincing(this.allDataGroups)];
+						this.minPrice = this.allDataGroups[0].detailPricing?.totalPay || 0;
+						this.maxPrice = this.allDataGroups[this.allDataGroups.length - 1].detailPricing?.totalPay || 0;
+						this.filters.minPrice = this.minPrice;
+						this.filters.maxPrice = this.maxPrice;
+						this._searchFiltersService.isSetValuesPrices.emit({
+							minPrice: this.minPrice,
+							maxPrice: this.maxPrice
+						});
+						this.getValuesByFilterDuration();
+						this.valuesFilterDurationInit = { ...this.valuesFilterDuration };
+						this.configIdlePopup();
+						this.childSort.resetSort();
+					}
+				}
+				if (!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate = res.exchangeRate;
+			},
+			error: (err) => {
+				this.isLoader = false;
+				this.showError = true;
+			}
+		});
 	}
 
 	endProgressBar() {
 		this.progressCount = 98;
 		setTimeout(() => {
 			this.progressCount = 100;
+			this.validateQueryParams();
 		}, 1100);
 	}
 
@@ -312,7 +322,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	}
 
 	getAllDataAnterior(objSearch: any) {
-		this.progressCount = 3;
+		this.progressCount=3;
 		this._searchService.getAllDataGroups(objSearch).subscribe({
 			next: (res) => {
 				this._loadingService.requestSearchCount = 9;
@@ -336,6 +346,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 					this.configIdlePopup();
 					this.childSort.resetSort();
 				} else this.showNotResults = true;
+				
 			},
 			error: (err) => {
 				this.showError = true;
@@ -362,14 +373,14 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		res.groups.forEach((item) => {
 			const codeMarketing = item.departure[0].segments[0].flightSegments[0].marketingAirline.code;
 			//idGds:7 ===> multiticket
-			if (item.gds.idGDS !== 7) {
+			if (item.gds.idGDS!==7) {
 				const indexAirline = this.dataAirlinesTemp.findIndex((obj) => {
 					return obj.value === codeMarketing;
 				});
 				if (indexAirline !== -1) this.dataAirlinesTemp[indexAirline].total++;
 			}
 
-			item.airlineCodeFilter = item.gds.idGDS !== 7 ? codeMarketing : 'MT';
+			item.airlineCodeFilter = item.gds.idGDS!==7 ? codeMarketing : 'MT';
 			if (item.airlineCodeFilter == 'MT') this.totalMultiticket++;
 
 			const isBagHold =
@@ -484,7 +495,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	sortData() {
 		switch (this.sortBy) {
 			case 0:
-				this.dataFilterGroups = [...this.orderByPrincing()];
+				this.dataFilterGroups = [...this.orderByPrincing(this.dataFilterGroups)];
 				break;
 			case 1:
 				this.dataFilterGroups = [...this.orderByBestOption()];
@@ -520,7 +531,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		this.dataGroupsPaginate = [...this.dataFilterGroups.slice(0, 8)];
 		this.indexPaginate = 8;
 		if (this.dataGroupsPaginate.length > 0) this.getValuesTabsSort();
-		window.scroll({ top: 0, behavior: 'smooth' });
+		console.log(this.dataGroupsPaginate, 'dataaaa');
 	}
 
 	orderByDate(isEarly: boolean, isStartDate: boolean, index: number) {
@@ -565,7 +576,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 	}
 
 	getValuesTabsSort() {
-		const groupsSortByPrice = this.orderByPrincing();
+		const groupsSortByPrice = this.orderByPrincing(this.dataFilterGroups);
 
 		this.theCheapest = {
 			price: groupsSortByPrice[0].detailPricing?.totalPay || 0,
@@ -613,6 +624,8 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 					return obj.value === item.airlineCodeFilter;
 				});
 				if (indexAirline !== -1) this.dataAirlinesTemp[indexAirline].total++;
+
+				this.dataAirlines = [...this.dataAirlinesTemp];
 			}
 
 			if (item.typeBag == 'handbag') this.dataBagTemp[0].total++;
@@ -620,14 +633,26 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 			if (item.isDirect) this.dataScaleTemp[0].total++;
 			if (item.isOneScale) this.dataScaleTemp[1].total++;
 			if (item.isMultiScale) this.dataScaleTemp[2].total++;
+
+			this.dataBagFilter = [...this.dataBagTemp];
+			this.dataScaleFilter = [...this.dataScaleTemp];
 		});
-		if (this.filters.arrayAirline.length == 0) this.dataAirlines = [...this.dataAirlinesTemp];
-		this.dataBagFilter = [...this.dataBagTemp];
-		this.dataScaleFilter = [...this.dataScaleTemp];
+	}
+
+	private validateQueryParams() {
+		if (this.queryParams.airlines) {
+			let values = this.queryParams.airlines.split(',');
+			values.forEach(value => {
+				const airline = this.dataAirlines.find(a => value === a.value);
+				if (airline) airline.active = true;
+			});
+			this.updateArrayAirlinesFilter(values);
+		}
 	}
 
 	updateArrayAirlinesFilter($event: string[]) {
 		this.filters.arrayAirline = $event;
+		this.addFilterToParams('airlines', this.filters.arrayAirline);
 		this.applyFilters();
 	}
 
@@ -642,6 +667,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 			case 'airlineCodeFilter':
 				if (item.active) this.filters.arrayAirline.push(item.value);
 				else this.filters.arrayAirline = this.filters.arrayAirline.filter((airline) => airline !== item.value);
+				this.addFilterToParams('airlines', this.filters.arrayAirline);
 				break;
 			default:
 				if (item.active) this.filters.arrayScales.push(item.value);
@@ -651,27 +677,38 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		this.applyFilters();
 	}
 
-	changeArrayFiltersMobile($event: { key: string; item: Item[] }) {
+	changeArrayFiltersMobile($event:{key:string, item:Item[]}){
 		const item = $event.item;
 		const key = $event.key;
 		switch (key) {
 			case 'typeBag':
-				this.filters.arrayBaggage = item.map((option) => {
-					return option.value;
-				});
+				this.filters.arrayBaggage=item.map(option=>{return option.value});
 				break;
 			case 'airlineCodeFilter':
-				this.filters.arrayAirline = item.map((option) => {
-					return option.value;
-				});
+				this.filters.arrayAirline=item.map(option=>{return option.value});
 				break;
 			default:
-				this.filters.arrayScales = item.map((option) => {
-					return option.value;
-				});
+				this.filters.arrayScales=item.map(option=>{return option.value});
 				break;
 		}
 		this.applyFilters();
+	}
+
+	private addFilterToParams(paramKey: string, value: string | string[]) {
+		const currentParams: any = { ...this.queryParams };
+		if (value && value.length > 0)
+			currentParams[paramKey] = typeof value === 'string' ? value : value.join(',');
+		else
+			delete currentParams[paramKey];
+
+		this.queryParams = currentParams;
+		getParamsByRoute(this.queryParams);
+
+		this.newLoad = false;
+		this.router.navigate([], {
+			relativeTo: this._route,
+			queryParams: this.queryParams
+		}).then(() => null);
 	}
 
 	applyFilters() {
@@ -683,25 +720,25 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 			let isDurationScaleDep = true;
 			let isDurationScaleRet = true;
 
-			if (item.durationDeparture || item.durationDeparture == 0) {
+			if (this.valuesFilterDuration.maxDurationDeparture && (item.durationDeparture || item.durationDeparture == 0)) {
 				isDurationDepartureValid =
 					item.durationDeparture >= this.valuesFilterDuration.minDurationDeparture &&
 					item.durationDeparture <= this.valuesFilterDuration.maxDurationDeparture;
 			}
 
-			if (this.flightType == 0 && (item.durationReturn || item.durationReturn == 0)) {
+			if (this.valuesFilterDuration.maxDurationReturn && this.flightType == 0 && (item.durationReturn || item.durationReturn == 0)) {
 				isDurationReturnValid =
 					item.durationReturn >= this.valuesFilterDuration.minDurationReturn &&
 					item.durationReturn <= this.valuesFilterDuration.maxDurationReturn;
 			}
 
-			if (item.maxWaitingTimeDep || item.maxWaitingTimeDep == 0) {
+			if (this.valuesFilterDuration.waitingTimeDep && (item.maxWaitingTimeDep || item.maxWaitingTimeDep == 0)) {
 				isDurationScaleDep =
 					item.maxWaitingTimeDep >= this.valuesFilterDuration.minWaitingTimeDep &&
 					item.maxWaitingTimeDep <= this.valuesFilterDuration.waitingTimeDep;
 			}
 
-			if (this.flightType == 0 && (item.maxWaitingTimeRet || item.maxWaitingTimeRet == 0)) {
+			if (this.valuesFilterDuration.waitingTimeRet && this.flightType == 0 && (item.maxWaitingTimeRet || item.maxWaitingTimeRet == 0)) {
 				isDurationScaleRet =
 					item.maxWaitingTimeRet >= this.valuesFilterDuration.minWaitingTimeRet &&
 					item.maxWaitingTimeRet <= this.valuesFilterDuration.waitingTimeRet;
@@ -722,7 +759,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 				(this.filters.arrayScales.includes('isOneScale') ? item.isOneScale : true) &&
 				(this.filters.arrayScales.includes('isMultiScale') ? item.isMultiScale : true) &&
 				(item.detailPricing?.totalPay || 0) >= this.filters.minPrice &&
-				(item.detailPricing?.totalPay || 0) <= this.filters.maxPrice &&
+				(this.filters.maxPrice ? (item.detailPricing?.totalPay || 0) <= this.filters.maxPrice : true) &&
 				isDurationDepartureValid &&
 				isDurationReturnValid &&
 				isDurationScaleDep &&
@@ -787,8 +824,8 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		return dataFilter;
 	}
 
-	orderByPrincing() {
-		const dataFilter = [...this.dataFilterGroups];
+	orderByPrincing(groups: Group[]) {
+		const dataFilter = [...groups];
 		dataFilter.sort((a, b) => {
 			if (a.detailPricing && b.detailPricing) return a.detailPricing.totalPay - b.detailPricing.totalPay;
 			if (!a.detailPricing) return 1;
@@ -890,40 +927,6 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		this.applyFilters();
 	}
 
-	filterDurationMobile($event: any) {
-		//Departure Duration
-		this.valuesFilterDuration.minDurationDeparture = $event.valueDurationDep;
-		this.valuesFilterDuration.maxDurationDeparture = $event.highValueDurationDep;
-		this.filters.isDurationDeparture =
-			$event.valueDurationDep !== this.valuesFilterDurationInit.minDurationDeparture ||
-			$event.highValueDurationDep !== this.valuesFilterDurationInit.maxDurationDeparture;
-
-		//Departure Scale
-
-		this.valuesFilterDuration.waitingTimeDep = $event.highValueScaleDep;
-		this.valuesFilterDuration.minWaitingTimeDep = $event.valueScaleDep;
-		if (!this.filters.isDurationDeparture)
-			this.filters.isDurationDeparture =
-				$event.valueScaleDep !== 0 || $event.highValueScaleDep !== this.valuesFilterDurationInit.waitingTimeDep;
-
-		if (this.flightType == 0) {
-			//Return Duration
-			this.valuesFilterDuration.minDurationReturn = $event.valueDurationRet;
-			this.valuesFilterDuration.maxDurationReturn = $event.highValueDurationRet;
-			this.filters.isDurationReturn =
-				$event.valueDurationRet !== this.valuesFilterDurationInit.minDurationReturn ||
-				$event.highValueDurationRet !== this.valuesFilterDurationInit.maxDurationReturn;
-			//Return Scale
-
-			this.valuesFilterDuration.waitingTimeRet = $event.highValueScaleRet;
-			this.valuesFilterDuration.minWaitingTimeRet = $event.valueScaleRet;
-			if (!this.filters.isDurationReturn)
-				this.filters.isDurationReturn =
-					$event.valueScaleRet !== 0 || $event.highValueScaleRet !== this.valuesFilterDurationInit.waitingTimeRet;
-		}
-		this.applyFilters();
-	}
-
 	cleanFilters($event: Filter) {
 		this.filters = { ...$event };
 		if (!this.filters.isPrices) {
@@ -999,20 +1002,42 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	renderCorrectPage() {
-		const hasPreviousPage = this.location.getState() !== null;
-		this.unsubscribeSearch$.next();
-		this.unsubscribeSearch$.complete();
+	
+	filterDurationMobile($event: any) {
+		//Departure Duration
+		this.valuesFilterDuration.minDurationDeparture = $event.valueDurationDep;
+		this.valuesFilterDuration.maxDurationDeparture = $event.highValueDurationDep;
+		this.filters.isDurationDeparture =
+			$event.valueDurationDep !== this.valuesFilterDurationInit.minDurationDeparture ||
+			$event.highValueDurationDep !== this.valuesFilterDurationInit.maxDurationDeparture;
 
-		if (hasPreviousPage) {
-			this.router.navigate(['/'], {
-				replaceUrl: true
-			});
-		} else {
-			this.router.navigateByUrl('/');
+		//Departure Scale
+
+		this.valuesFilterDuration.waitingTimeDep = $event.highValueScaleDep;
+		this.valuesFilterDuration.minWaitingTimeDep = $event.valueScaleDep;
+		if (!this.filters.isDurationDeparture)
+			this.filters.isDurationDeparture =
+				$event.valueScaleDep !== 0 || $event.highValueScaleDep !== this.valuesFilterDurationInit.waitingTimeDep;
+
+		if (this.flightType == 0) {
+			//Return Duration
+			this.valuesFilterDuration.minDurationReturn = $event.valueDurationRet;
+			this.valuesFilterDuration.maxDurationReturn = $event.highValueDurationRet;
+			this.filters.isDurationReturn =
+				$event.valueDurationRet !== this.valuesFilterDurationInit.minDurationReturn ||
+				$event.highValueDurationRet !== this.valuesFilterDurationInit.maxDurationReturn;
+			//Return Scale
+
+			this.valuesFilterDuration.waitingTimeRet = $event.highValueScaleRet;
+			this.valuesFilterDuration.minWaitingTimeRet = $event.valueScaleRet;
+			if (!this.filters.isDurationReturn)
+				this.filters.isDurationReturn =
+					$event.valueScaleRet !== 0 || $event.highValueScaleRet !== this.valuesFilterDurationInit.waitingTimeRet;
 		}
+		this.applyFilters();
 	}
 
+	
 	@HostListener('window:resize', ['$event'])
 	onResize() {	
 		if (window.innerWidth >= 1100 && window.innerWidth<=1200) {
@@ -1021,10 +1046,28 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 		}
 	}
 
+
+	renderCorrectPage() {
+		const hasPreviousPage = this.location.getState() !== null;
+		this.unsubscribeSearch$.next();
+		this.unsubscribeSearch$.complete();
+
+		if (hasPreviousPage) {
+      this.router.navigate(['/'], {
+        replaceUrl: true,
+      });
+    } else {
+			this.router.navigateByUrl('/');
+    }
+	}
+
 	ngOnDestroy() {
 		this._modalService.dismissAll();
 		this.userIdle.stopWatching();
 		if (this.idleSubscriber) this.idleSubscriber.unsubscribe();
+		if (this.locationSubscription$) this.locationSubscription$.unsubscribe();
+		this.unsubscribeQueryParams$.next();
+		this.unsubscribeQueryParams$.complete();
 		this.unsubscribeSearch$.next();
 		this.unsubscribeSearch$.complete();
 	}

@@ -26,6 +26,7 @@ export interface Params {
 	departureDate?: string
 	arrivalDate?: string
 	multicity?: Multicity[]
+	airlines?: string
 }
   
 export interface Multicity {
