@@ -133,7 +133,6 @@
 						return 0;
 					});
 					if (!currentFindItem) {
-						console.log('no existe el item');
 						return;
 					}
 				}

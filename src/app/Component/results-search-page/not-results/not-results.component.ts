@@ -65,4 +65,8 @@ export class NotResultsComponent implements OnInit {
 		}
 		this.cleanFilters.emit(currentFilters);
 	}
+
+	reloadPage(){
+		window.location.reload();
+	}
 }

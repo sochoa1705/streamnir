@@ -1,0 +1,71 @@
+<div class="filter-price">
+	<div class="filter-price__close">
+		<img src="./assets/svg/close-modal.svg" alt="x" (click)="clickCloseModal()" />
+	</div>
+
+	<div class="filter-price__header">
+		<h4>Desglosable de Precio</h4>
+	</div>
+	<div class="filter-price__body" *ngIf="flight.detailPricing">
+		<h3>
+			<span>{{ currency }}</span
+			>{{ flight.detailPricing.totalPay | changeCurrency: currency | number: '1.2-2' }}
+		</h3>
+		<div class="filter-price__body__detail">
+			<div class="d-flex justify-content-between">
+				<span>{{ flight.detailPricing.totalADT }} {{ flight.detailPricing.totalADT > 1 ? 'ADULTOS' : 'ADULTO' }}</span>
+				<span class="total"
+					><span class="usd">{{ currency }}</span
+					>{{
+						flight.detailPricing.baseFareADT * flight.detailPricing.totalADT
+							| changeCurrency: currency
+							| number: '1.2-2'
+					}}
+				</span>
+			</div>
+
+			<div class="d-flex justify-content-between" *ngIf="flight.detailPricing.totalCNN > 0">
+				<span>{{ flight.detailPricing.totalCNN }} {{ flight.detailPricing.totalCNN > 1 ? 'NIÑOS' : 'NIÑO' }}</span>
+				<span class="total"
+					><span class="usd">{{ currency }}</span
+					>{{
+						flight.detailPricing.baseFareCNN * flight.detailPricing.totalCNN
+							| changeCurrency: currency
+							| number: '1.2-2'
+					}}
+				</span>
+			</div>
+
+			<div class="d-flex justify-content-between" *ngIf="flight.detailPricing.totalINF > 0">
+				<span
+					>{{ flight.detailPricing.totalINF }} {{ flight.detailPricing.totalINF > 1 ? 'INFANTES' : 'INFANTE' }}</span
+				>
+				<span class="total"
+					><span class="usd">{{ currency }}</span
+					>{{
+						flight.detailPricing.baseFareINF * flight.detailPricing.totalINF
+							| changeCurrency: currency
+							| number: '1.2-2'
+					}}
+				</span>
+			</div>
+
+			<div class="d-flex justify-content-between">
+				<span>IMPUESTOS</span>
+				<span class="total"
+					><span class="usd">{{ currency }}</span
+					>{{ flight.detailPricing.taxes | changeCurrency: currency | number: '1.2-2' }}</span
+				>
+			</div>
+			<div class="d-flex justify-content-between">
+				<span>CARGOS</span>
+				<span class="total"
+					><span class="usd">{{ currency }}</span
+					>{{
+						flight.detailPricing.feeNMV + flight.detailPricing.feePTA | changeCurrency: currency | number: '1.2-2'
+					}}</span
+				>
+			</div>
+		</div>
+	</div>
+</div>

@@ -117,7 +117,6 @@ export class MultivueloComponent implements OnInit{
 		});
 	}
 	openDatepicker($event:boolean){
-		console.log($event,'evnettt')
 		this.showDatepicker=$event;
 	}
 }

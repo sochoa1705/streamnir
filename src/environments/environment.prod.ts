@@ -57,12 +57,13 @@ export const environment = {
   url_autos: 'https://autos.nmviajes.com/es/site/',
 
   urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela",
+  urlApiPasarela: 'https://pasarella.expertiatravel.com/serviciopasarela/v1/api/',
   urlSuggest: "https://suggest.agentcars.com/suggest/",
 
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
 
-  urlApiMotorVuelos: "https://motorvuelos.expertiatravel.com/mv/",
-
+  urlApiMotorVuelos: "https://motorvuelos.expertiatravel.com",
+  urlBlog:'https://blog.nmviajes.com',
   GDS:{
     AMADEUS: 0,
     SABRE: 1,
@@ -74,7 +75,13 @@ export const environment = {
     AMADEUS_NDC: 21,
     LATAM:22
   },
-   
+  openPayConfiguration: {
+    isProduction: true,
+    Id: 'mqxn16kmicqj2fde6fhi',
+    ApiKey: 'pk_c74367b872364e91b3143c5d87d64bb8'
+  },
+  urlApiDatosCliente: 'https://servicio.nmviajes.com:9443/Ecommerce',
+  resultsInactivityTime: 300,
   SEO: {
     home: {
       url: 'https://www.nmviajes.com/',

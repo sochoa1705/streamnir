@@ -27,7 +27,7 @@
 		<ng-container *ngTemplateOutlet="datepicker1"></ng-container>
 	</section>
 
-	<section *ngIf="typeFlight > 0" class="only" [class.multi]="idRowMulti > 0">
+	<section *ngIf="typeFlight > 0" class="only">
 		<ng-container *ngTemplateOutlet="datepicker2"></ng-container>
 	</section>
 </div>
@@ -68,8 +68,8 @@
 </ng-template>
 
 <ng-template #datepicker2>
-	<div class="container__range__arrow" [hidden]="!showCalendar" [class.multi]="idRowMulti > 0"></div>
-	<div class="container__range__datepicker" [hidden]="!showCalendar">
+	<div class="container__range__arrow" *ngIf="showCalendar"></div>
+	<div class="container__range__datepicker" *ngIf="showCalendar">
 		<div class="container__range__datepicker__calendar">
 			<div class="container__range__datepicker__calendar__actions">
 				<div class="ngb-dp-arrow">
@@ -89,7 +89,6 @@
 					</button>
 				</div>
 			</div>
-			<!--[startDate]="{year: 2023, month: 12, day:15}"-->
 			<ngb-datepicker
 				#dp2
 				[(ngModel)]="selectedDateOneWay"
@@ -119,15 +118,9 @@
 	</span>
 </ng-template>
 
-<ng-template
-	[hidden]="!showCalendar"
-	#customDay
-	let-date="date"
-	let-currentMonth="currentMonth"
-	let-selected="selected"
-	let-disabled="disabled"
->
+<ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
 	<span
+		*ngIf="showCalendar"
 		class="custom-day"
 		[class.range]="
 			selected ||
