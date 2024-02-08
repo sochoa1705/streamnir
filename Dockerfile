@@ -1,5 +1,5 @@
 # Etapa 1: Compilación de la aplicación Angular
-FROM node:14.20.0 as build
+FROM node:14.20.0 AS build
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ WORKDIR /app
 COPY ./ /app
 # Instala las dependencias y compila la aplicación
 RUN npm install
-RUN npm run build-qa-delfosti
+RUN npm run build-qa-new
 
 # Etapa 2: Despliegue de la aplicación en un servidor web ligero
 FROM nginx:alpine
