@@ -2,7 +2,7 @@
 	<div class="filters__currency" *ngIf="exchangeRate">
 		<article>
 			<h5>Moneda</h5>
-			<span>Tipo de cambio: S/ {{exchangeRate | number: '1.2-2'}}</span>
+			<span>Tipo de cambio: S/ {{ exchangeRate | number: '1.2-2' }}</span>
 		</article>
 		<app-select
 			[placeholder]="'Seleccionar'"
@@ -31,14 +31,17 @@
 		<div class="skeleton filters__loader__skeleton_3"></div>
 	</div>
 
-	<div class="filters__results" *ngIf="totalResultsFilter || totalResults || isNotResult==true">
+	<div class="filters__results" *ngIf="totalResultsFilter || totalResults || isNotResult == true">
 		<h3>Filtros</h3>
 		<h5>
-			{{totalResultsFilter}} <span>de {{ totalResults }} resultados</span>
+			{{ totalResultsFilter }} <span>de {{ totalResults }} resultados</span>
 		</h5>
 	</div>
 
-	<div class="filters__loader result" *ngIf="(!totalResultsFilter || !totalResults) && isNotResult==false && totalResultsFilter>0">
+	<div
+		class="filters__loader result"
+		*ngIf="(!totalResultsFilter || !totalResults) && isNotResult == false && totalResultsFilter > 0"
+	>
 		<div class="skeleton filters__loader__skeleton_4"></div>
 		<div class="skeleton filters__loader__skeleton_4"></div>
 	</div>
@@ -66,20 +69,20 @@
 		[currency]="currency"
 		(filterPriceRange)="filterPriceRange($event)"
 	></app-price-filter>
-	<app-duration-filter 
-		[valuesFilterDuration]="valuesFilterDuration" 
+	<app-duration-filter
+		[valuesFilterDuration]="valuesFilterDuration"
 		(filterDurationRange)="filterDurationRange($event)"
 		(resetFilterDuration)="resetFilterDuration()"
 		(filterDurationScale)="filterDurationScale($event)"
+		[isMobile]="isMobile"
 	>
 	</app-duration-filter>
-	
 </form>
 
 <div class="filters__mobile" #sliderFilter>
 	<div class="filters__mobile__tag" *ngFor="let item of filtersMobile; index as i" (click)="openModalFilter(item.id)">
-		<img *ngIf="i==0" src="./assets/svg/sort-descending.svg" alt="-">
-		<span>{{item.name}}</span>
-		<img *ngIf="i!==0" src="./assets/svg/arrow-down-filter.svg" alt="v"/>
+		<img *ngIf="i == 0" src="./assets/svg/sort-descending.svg" alt="-" />
+		<span>{{ item.name }}</span>
+		<img *ngIf="i !== 0" src="./assets/svg/arrow-down-filter.svg" alt="v" />
 	</div>
 </div>

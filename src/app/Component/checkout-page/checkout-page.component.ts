@@ -172,7 +172,7 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 			GlobalComponent.appReglasVentaAnticipada = res.reglasVentaAnticipada;
 			GlobalComponent.appConfigurations = res.configuraciones;
 			GlobalComponent.transactionId=res.transactionId;
-			console.log( res.transactionId, ' transactionId')
+			console.log(res.transactionId, 'TransactionId')
 			this.getDataByKayak();
 	    },
 		error:()=>{

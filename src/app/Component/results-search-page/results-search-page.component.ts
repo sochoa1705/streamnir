@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group, ISearchResponse } from 'src/app/api/api-checkout/models/rq-checkout-search';
@@ -23,6 +23,7 @@ import { Subject, Subscription, SubscriptionLike } from 'rxjs';
 import { ModalSearchComponent } from './modal-search/modal-search.component';
 import { getParamsByRoute } from 'src/app/shared/utils/getParams';
 import { takeUntil } from 'rxjs/operators';
+import { isMobile } from 'src/app/shared/utils/isMobile';
 
 interface Item {
 	value: any;
@@ -88,6 +89,8 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 
 	private unsubscribeSearch$ = new Subject<void>();
 	private idleSubscriber: Subscription;
+
+	isMobile = isMobile();
 
 	allDataGroups: Group[] = [];
 	dataGroupsPaginate: Group[] = [];
@@ -998,6 +1001,51 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 			}
 		});
 	}
+
+	
+	filterDurationMobile($event: any) {
+		//Departure Duration
+		this.valuesFilterDuration.minDurationDeparture = $event.valueDurationDep;
+		this.valuesFilterDuration.maxDurationDeparture = $event.highValueDurationDep;
+		this.filters.isDurationDeparture =
+			$event.valueDurationDep !== this.valuesFilterDurationInit.minDurationDeparture ||
+			$event.highValueDurationDep !== this.valuesFilterDurationInit.maxDurationDeparture;
+
+		//Departure Scale
+
+		this.valuesFilterDuration.waitingTimeDep = $event.highValueScaleDep;
+		this.valuesFilterDuration.minWaitingTimeDep = $event.valueScaleDep;
+		if (!this.filters.isDurationDeparture)
+			this.filters.isDurationDeparture =
+				$event.valueScaleDep !== 0 || $event.highValueScaleDep !== this.valuesFilterDurationInit.waitingTimeDep;
+
+		if (this.flightType == 0) {
+			//Return Duration
+			this.valuesFilterDuration.minDurationReturn = $event.valueDurationRet;
+			this.valuesFilterDuration.maxDurationReturn = $event.highValueDurationRet;
+			this.filters.isDurationReturn =
+				$event.valueDurationRet !== this.valuesFilterDurationInit.minDurationReturn ||
+				$event.highValueDurationRet !== this.valuesFilterDurationInit.maxDurationReturn;
+			//Return Scale
+
+			this.valuesFilterDuration.waitingTimeRet = $event.highValueScaleRet;
+			this.valuesFilterDuration.minWaitingTimeRet = $event.valueScaleRet;
+			if (!this.filters.isDurationReturn)
+				this.filters.isDurationReturn =
+					$event.valueScaleRet !== 0 || $event.highValueScaleRet !== this.valuesFilterDurationInit.waitingTimeRet;
+		}
+		this.applyFilters();
+	}
+
+	
+	@HostListener('window:resize', ['$event'])
+	onResize() {	
+		if (window.innerWidth >= 1100 && window.innerWidth<=1200) {
+			this._modalService.dismissAll();
+			if(!this.isReload) this.reloadPageResult();
+		}
+	}
+
 
 	renderCorrectPage() {
 		const hasPreviousPage = this.location.getState() !== null;

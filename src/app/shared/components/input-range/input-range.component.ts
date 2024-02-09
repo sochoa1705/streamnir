@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
-import { NgbCalendar, NgbDate, NgbDateStruct, NgbDatepicker, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateStruct, NgbDatepicker, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalComponent } from '../../global';
 
 @Component({
@@ -63,8 +63,6 @@ export class InputRangeComponent implements OnChanges,OnInit {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		console.log({changes});
-		
 		if (changes['typeFlight'].currentValue == 0 || changes['typeFlight'].currentValue == -1) {
 			this.showCalendar = false;
 			document.documentElement.style.setProperty('--visibility', 'block');

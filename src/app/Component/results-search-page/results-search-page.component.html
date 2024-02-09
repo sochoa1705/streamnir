@@ -1,5 +1,5 @@
 <div class="container__page">
-	<div class="container__page__metasearch" *ngIf="!showNotResults">
+	<div class="container__page__metasearch" *ngIf="!showNotResults && !showError">
 		<div class="container__page__metasearch__section">
 			<app-tab-vuelos-v2 *ngIf="dataSearch" (reloadPageResult)="reloadPageResult()"></app-tab-vuelos-v2>
 		</div>
@@ -31,7 +31,9 @@
 				</div>
 			</div>
 			<div class="container__page__metasearch__mobile__filters" *ngIf="!showError">
-				<ng-container *ngTemplateOutlet="appfilters"></ng-container>
+				<ng-container *ngIf="isMobile">
+					<ng-container *ngTemplateOutlet="appfilters"></ng-container>
+				</ng-container>
 			</div>
 		</div>
 	</div>
@@ -49,7 +51,9 @@
 	</div>
 	<section *ngIf="!showError && !showNotResults">
 		<article>
-			<ng-container *ngTemplateOutlet="appfilters"></ng-container>
+			<ng-container *ngIf="!isMobile">
+				<ng-container *ngTemplateOutlet="appfilters"></ng-container>
+			</ng-container>
 			<div class="container__page__results">
 				<app-sort-by
 					#childSort
@@ -109,6 +113,7 @@
 		[dataBagFilter]="dataBagFilter"
 		[totalResults]="allDataGroups.length || 0"
 		[totalResultsFilter]="dataFilterGroups.length || 0"
+		[indexSortBy]="sortBy"
 		[exchangeRate]="exchangeRate"
 		(changeArrayFilters)="changeArrayFilters($event)"
 		(changeArrayFiltersMobile)="changeArrayFiltersMobile($event)"
@@ -118,12 +123,17 @@
 		(filterByDuration)="filterByDuration($event)"
 		[minPrice]="minPrice"
 		[maxPrice]="maxPrice"
+		[currentFilters]="filters"
 		[isNotResult]="showNotResults"
 		[valuesFilterDuration]="valuesFilterDuration"
+		[valuesFilterDurationInit]="valuesFilterDurationInit"
 		(resetFilterByDuration)="resetFilterByDuration()"
 		(filterByDurationScale)="filterByDurationScale($event)"
+		(filterDurationMobile)="filterDurationMobile($event)"
+		(clickTabSort)="clickTabSort($event)"
 		[theCheapest]="theCheapest"
 		[betterOption]="betterOption"
 		[shorterDuration]="shorterDuration"
+		[isMobile]="isMobile"
 	></app-filters>
 </ng-template>

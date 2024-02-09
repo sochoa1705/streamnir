@@ -1,7 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { NotificationService } from 'src/app/Services/notification.service';
-import { Params, Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
-import { SearchFiltersService } from 'src/app/api/api-nmviajes/services/search-filters.service';
+import { Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { GlobalComponent } from '../../global';
 
 @Component({
@@ -38,7 +37,6 @@ export class InputPassengersComponent implements OnInit {
 			
 			const dataSearch = GlobalComponent.searchData;
 			this.scopeDataSearch = dataSearch;
-			console.log(dataSearch, 'dataSEarch')
 			this.totalADT = dataSearch.adults;
 			this.totalINF = dataSearch.infants;
 			this.totalCNN = dataSearch.children;

@@ -230,6 +230,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 							window.OpenPay.setSandboxMode(environment.openPayConfiguration.isProduction);
 							let data = window.OpenPay.deviceData.setup();
 							this.deviceSessionIdField.setValue(data);
+							console.log('deviceSessionId', data)
 							if (isSubmit) this.proccessPayment();
 						}
 					} catch (error) {

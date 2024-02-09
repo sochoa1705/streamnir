@@ -45,6 +45,11 @@ export class FiltersComponent implements OnInit {
 	@Input() theCheapest: any;
 	@Input() betterOption: any;
 	@Input() shorterDuration: any;
+	@Input() indexSortBy = 0;
+	@Input() currentFilters: any;
+	@Input() valuesFilterDurationInit: IFilterDuration;
+	@Input() isMobile: boolean = false;
+	
 
 	@Output() changeArrayFilters = new EventEmitter();
 	@Output() updateArrayAirlinesFilter = new EventEmitter();
@@ -54,6 +59,8 @@ export class FiltersComponent implements OnInit {
 	@Output() filterByDurationScale = new EventEmitter();
 	@Output() resetFilterByDuration = new EventEmitter();
 	@Output() changeArrayFiltersMobile = new EventEmitter();
+	@Output() clickTabSort = new EventEmitter();
+	@Output() filterDurationMobile = new EventEmitter();
 
 	formGroup: FormGroup;
 	currency = 'USD';
@@ -66,7 +73,7 @@ export class FiltersComponent implements OnInit {
 	filtersMobile = [
 		{
 			id: 0,
-			name: 'Mejor Opcion'
+			name: 'Precio más bajo'
 		},
 		{
 			id: 1,
@@ -172,7 +179,8 @@ export class FiltersComponent implements OnInit {
 
 	openModalCurrency() {
 		const modalRef = this._modalService.open(ModalCurrencyComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.currencySelected = this.currency;
 		modalRef.componentInstance.changeCurrency.subscribe(($event: any) => {
@@ -182,66 +190,86 @@ export class FiltersComponent implements OnInit {
 
 	openModalBaggage() {
 		const modalRef = this._modalService.open(DropdownFilterComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.title = 'Equipaje';
 		modalRef.componentInstance.listOptions = this.dataBagFilter;
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.clickedOption.subscribe(($event: any) => {
-			this.changeArrayFiltersMobile.emit({key:'typeBag',item:$event });
+			this.changeArrayFiltersMobile.emit({ key: 'typeBag', item: $event });
 		});
 	}
 
 	openModalScale() {
 		const modalRef = this._modalService.open(DropdownFilterComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.title = 'Escalas';
 		modalRef.componentInstance.listOptions = this.dataScaleFilter;
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.clickedOption.subscribe(($event: any) => {
-			this.changeArrayFiltersMobile.emit({key:'scale',item:$event });
+			this.changeArrayFiltersMobile.emit({ key: 'scale', item: $event });
 		});
 	}
 
 	openModalAirline() {
 		const modalRef = this._modalService.open(DropdownFilterComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.title = 'Aerolínea';
 		modalRef.componentInstance.listOptions = this.dataAirlines;
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.clickedOption.subscribe(($event: any) => {
-			this.changeArrayFiltersMobile.emit({key:'airlineCodeFilter',item:$event });
+			this.changeArrayFiltersMobile.emit({ key: 'airlineCodeFilter', item: $event });
 		});
 	}
 
 	openModalPrice() {
 		const modalRef = this._modalService.open(PriceFilterComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.currency = this.currency;
 		modalRef.componentInstance.minPrice = this.minPrice;
 		modalRef.componentInstance.maxPrice = this.maxPrice;
+		modalRef.componentInstance.currentMinPrice = this.currentFilters.minPrice;
+		modalRef.componentInstance.currentMaxPrice = this.currentFilters.maxPrice;
+		modalRef.componentInstance.filterPriceRange.subscribe(($event: any) => {
+			this.filterByPrice.emit($event);
+		});
 	}
 
 	openModalDuration() {
 		const modalRef = this._modalService.open(DurationFilterComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.isMobile = true;
 		modalRef.componentInstance.valuesFilterDuration = this.valuesFilterDuration;
+		modalRef.componentInstance.valuesFilterDurationInit = this.valuesFilterDurationInit;
+		modalRef.componentInstance.filterDurationMobile.subscribe(($event: any) => {
+			this.filterDurationMobile.emit($event);
+		});
 	}
 
 	openModalSortBy() {
 		const modalRef = this._modalService.open(ModalSortComponent, {
-			centered: true
+			centered: true,
+			backdrop: 'static',
 		});
 		modalRef.componentInstance.theCheapest = this.theCheapest;
 		modalRef.componentInstance.betterOption = this.betterOption;
 		modalRef.componentInstance.shorterDuration = this.shorterDuration;
 		modalRef.componentInstance.currency = this.currency;
+		modalRef.componentInstance.currentIndexTab = this.indexSortBy;
+		modalRef.componentInstance.clickTabSort.subscribe(($event: number) => {
+			this.filtersMobile[0].name = $event == 0 ? 'Precio más bajo' : $event == 1 ? 'Mejor Opción' : 'Más rápido';
+			this.clickTabSort.emit($event);
+		});
 	}
 
 	@HostListener('window:resize', ['$event'])
