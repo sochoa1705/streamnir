@@ -5,8 +5,8 @@ import { IUpSell, Step } from '../api/api-checkout/models/rq-checkout-up-sell';
 import { Search } from '../api/api-nmviajes/models/ce-metasearch';
 import { RAdvanceSaleRule } from '../api/api-nmviajes/models/rq-advance-sale-rule.request';
 import { ICountry } from '../api/api-nmviajes/models/rq-contries-get';
-import { Configuraciones } from '../api/api-nmviajes/models/rq-token-ce-request';
-import { dataInitBooking, dataSteps, detailPricingInit } from './constant-init';
+import { Configuraciones, Proveedor } from '../api/api-nmviajes/models/rq-token-ce-request';
+import { dataInitBooking, detailPricingInit } from './constant-init';
 
 export class GlobalComponent {
 	public static appTrackingCode: string = '';
@@ -19,6 +19,7 @@ export class GlobalComponent {
 	public static appResponseGroups: Group[] = [];
 	public static appGroupSeleted: Group;
 	public static appExchangeRate: ExchangeRate;
+	public static appProviders: Proveedor[] = [];
 	public static appConfigurations: Configuraciones;
 	public static appBooking: IBooking = dataInitBooking;
 	public static isB2B: boolean = false;
