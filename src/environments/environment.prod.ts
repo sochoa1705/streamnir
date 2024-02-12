@@ -63,18 +63,6 @@ export const environment = {
 
   urlApiMotorVuelos: "https://motorvuelos.expertiatravel.com/mv/",
 
-  GDS:{
-    AMADEUS: 0,
-    SABRE: 1,
-    KIU: 2,
-    VIVAAIR: 4,
-    KIWI: 5,
-    SKY: 6,
-    MULTITICKET: 7,
-    AMADEUS_NDC: 21,
-    LATAM:22
-  },
-   
   SEO: {
     home: {
       url: 'https://www.nmviajes.com/',

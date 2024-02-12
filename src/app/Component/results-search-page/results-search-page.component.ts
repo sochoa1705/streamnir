@@ -229,6 +229,8 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 				GlobalComponent.appReglasVentaAnticipada = response.reglasVentaAnticipada;
 				GlobalComponent.appConfigurations = response.configuraciones;
 				GlobalComponent.transactionId = response.transactionId;
+				GlobalComponent.appExchangeRate = response.exchangeRate;
+				GlobalComponent.appProviders = response.proveedores;
 				this.getObjectParams();
 			},
 			error: () => {
@@ -251,8 +253,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 				objParams.flightType !== 2
 					? `No encontramos vuelos coincidentes entre ${objParams.departureLocation} y ${objParams.arrivalLocation} para estas fechas.`
 					: `No encontramos vuelos coincidentes para esas fechas.`;
-			if (environment.urlApiMotorVuelos.includes('qa')) this.getAllDataSearch(objParams);
-			else this.getAllDataAnterior(objParams);
+			this.getAllDataSearch(objParams);
 			this.isReload = false;
 			this.newLoad = false;
 		}
@@ -271,7 +272,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 					this.getDataFilters(res);
 					this.validateQueryParams();
 				}
-				if (this._loadingService.requestSearchCount == 9) {
+				if (this._loadingService.requestSearchCount == GlobalComponent.appProviders.length) {
 					this.endProgressBar();
 					this.showNotResults = this.dataFilterGroups.length == 0 ? true : false;
 					if (!this.showNotResults) {
@@ -291,7 +292,6 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 						this.childSort.resetSort();
 					}
 				}
-				if (!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate = res.exchangeRate;
 			},
 			error: (err) => {
 				this.isLoader = false;
@@ -325,7 +325,6 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 			next: (res) => {
 				this._loadingService.requestSearchCount = 9;
 				this.exchangeRate = res.exchangeRate.amount;
-				if (!GlobalComponent.appExchangeRate) GlobalComponent.appExchangeRate = res.exchangeRate;
 				if (res.groups && res.groups.length > 0) {
 					this.isLoader = false;
 					this.endProgressBar();
@@ -478,7 +477,7 @@ export class ResultsSearchPageComponent implements OnInit, OnDestroy {
 			item.dateOrder = [getDatesBySegment(item.departure[0].segments)];
 			if (item.returns) item.dateOrder.push(getDatesBySegment(item.returns.segments));
 		});
-		if (this._loadingService.requestSearchCount == 9)
+		if (this._loadingService.requestSearchCount == GlobalComponent.appProviders.length)
 			this.dataAirlinesTemp.push({ ...dataAirlineMulti, total: this.totalMultiticket });
 		this.dataBagFilter = [...this.dataBagTemp];
 		this.dataScaleFilter = [...this.dataScaleTemp];
