@@ -82,6 +82,17 @@ export const environment = {
   urlTravelDocuments: 'https://www.nmviajes.com/documentacion-viaje',
   
   urlBlog:'https://blog.nmviajes.com',
+  GDS:{
+    AMADEUS: 0,
+    SABRE: 1,
+    KIU: 2,
+    VIVAAIR: 4,
+    KIWI: 5,
+    SKY: 6,
+    MULTITICKET: 7,
+    AMADEUS_NDC: 21,
+    LATAM:22
+  },
   openPayConfiguration: {
     isProduction: false,
     Id: 'mqxn16kmicqj2fde6fhi',
