@@ -76,7 +76,7 @@ export const environment = {
     LATAM:22
   },
   openPayConfiguration: {
-    isProduction: true,
+    isSandBox: false,
     Id: 'mqxn16kmicqj2fde6fhi',
     ApiKey: 'pk_c74367b872364e91b3143c5d87d64bb8'
   },
