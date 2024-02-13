@@ -137,7 +137,6 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 				GlobalComponent.appGroupSeleted = res.group;
 				GlobalComponent.detailPricing = detailPricing;
 				GlobalComponent.classFligh = flightClass == '0' ? 'Economy' : flightClass == '1' ? 'Business' : 'First Class';
-				GlobalComponent.appExchangeRate=res.exchangeRate;
 				if(segments) {
 					const segmentArray = segments.split("-").map(Number);
 					GlobalComponent.segmentSelected = segmentArray;

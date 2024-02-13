@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IAvailability, RAvailable } from '../models/rq-search-ce-request';
 import { environment } from 'src/environments/environment';
 import { GlobalComponent } from 'src/app/shared/global';
-import { Observable, from, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ISearchResponse } from '../../api-checkout/models/rq-checkout-search';
 import { map, mergeMap } from 'rxjs/operators';
 import { IUpSell } from '../../api-checkout/models/rq-checkout-up-sell';
@@ -29,20 +29,6 @@ export class SearchService {
 		return this._httpClient.post<RAvailable>(url, request, { headers });
 	}
 
-	/*validateAvailabilityGnral(){
-		const request: IAvailability = {
-			groupId: GlobalComponent.appGroupSeleted.id,
-			segmentSelected: GlobalComponent.segmentSelected,
-			gds:GlobalComponent.appGroupSeleted.gds.idGDS
-		};
-		const headers = new HttpHeaders()
-		.set('Content-Type', 'application/json')
-		.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
-
-		let url = `${environment.urlApiMotorVuelos}/mv/validate-availability`;
-		return this._httpClient.post<RAvailable>(url, request, { headers });
-	}*/
-
 	getAllDataGroups(body:any): Observable<ISearchResponse> {
 		const url = `${environment.urlApiMotorVuelos}/mv/search`;
 		const headers = new HttpHeaders()
@@ -50,12 +36,12 @@ export class SearchService {
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
 		return this._httpClient.post<ISearchResponse>(url, body, { headers }).pipe(
 			map((response) => {
-				GlobalComponent.appExchangeRate=response.exchangeRate;
 				GlobalComponent.appResponseGroups=response.groups;
 				return response;
 			})
 		);
 	}
+
 /**
  * 
  * @param body 
@@ -64,17 +50,16 @@ export class SearchService {
       }
  * @returns 
  */
-	getAllDataSearch(body:any): Observable<any> {
-		const listGDS = Object.values(environment.GDS);
-		const endpoint = 'search-nm'
-		const url = `${environment.urlApiMotorVuelos}/mv/${endpoint}`;
+	getAllDataSearch(body: any): Observable<any> {
+		const listGDS = GlobalComponent.appProviders.map(provider => provider.proveedorId);
+		const url = `${environment.urlApiMotorVuelos}/mv/search`;
 		const headers = new HttpHeaders()
-			.set('Content-Type', 'application/json')
-			.set('not-loading', 'true')
-			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
-		
+				.set('Content-Type', 'application/json')
+				.set('not-loading', 'true')
+				.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+
 		return of(...listGDS).pipe(
-				mergeMap(gds => this._httpClient.post(url, {...body, gds}, { headers }))
+				mergeMap(gds => this._httpClient.post(url, { ...body, gds }, { headers }))
 		);
 	}
 
@@ -109,15 +94,16 @@ export class SearchService {
 		);
 	}
 
-	endSearch(itsIncludeLoader=false){
+	endSearch(itsIncludeLoader = false) {
 		const headers = new HttpHeaders()
-		.set('Content-Type', 'application/json')
-		.set('not-loading', itsIncludeLoader ? 'true': 'false')
-		.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
-		let url = `${environment.urlApiMotorVuelos}/mv/search-nm-finish`;
-		return this._httpClient.post<any>(url,{}, { headers });
+				.set('Content-Type', 'application/json')
+				.set('not-loading', itsIncludeLoader ? 'true' : 'false')
+				.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+		let url = `${environment.urlApiMotorVuelos}/mv/search-finish`;
+		return this._httpClient.post<any>(url, {}, { headers });
 	}
-    //mv/meta-search/{transactionId:Guid}/{groupId}
+
+	// /mv/meta-search/{transactionId:Guid}/{groupId}
 	getGroupByTransactionId(transactionId:string,groupId:string ){
 		const api = 'https://motorvuelos.expertiatravel.com'
 		let url = `${api}/mv/meta-search/${transactionId}/${groupId}`;
