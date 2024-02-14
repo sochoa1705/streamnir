@@ -42,4 +42,5 @@ export class GlobalComponent {
 	public static currency = 'USD';
 	public static searchData: Search;
 	public static dataSteps: Step[] = [];
+	public static userGroupLab: string;
 }
