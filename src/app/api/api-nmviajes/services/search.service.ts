@@ -23,9 +23,7 @@ export class SearchService {
 		.set('Content-Type', 'application/json')
 		.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
 
-		const endpoint = 'validate-availability-nm'
-
-		let url = `${environment.urlApiMotorVuelos}/mv/${endpoint}`;
+		let url = `${environment.urlApiMotorVuelos}/mv/validate-availability`;
 		return this._httpClient.post<RAvailable>(url, request, { headers });
 	}
 
@@ -64,8 +62,7 @@ export class SearchService {
 	}
 
 	getUpSellGroup() {
-		const endpoint = 'up-sell-nm'
-		const url = `${environment.urlApiMotorVuelos}/mv/${endpoint}`;
+		const url = `${environment.urlApiMotorVuelos}/mv/up-sell`;
 		const headers = new HttpHeaders()
 			.set('Content-Type', 'application/json')
 			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
