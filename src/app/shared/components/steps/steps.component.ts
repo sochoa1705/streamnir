@@ -44,7 +44,7 @@ export class StepsComponent implements OnInit {
 		});
 		this._checkoutService.isFinishedPay.subscribe({
 			next: () => {
-				this.steps[2].check = true;
+				this.steps[GlobalComponent.userGroupLab === 'A' ? 2 : 1].check = true;
 				this.isDisabled = true;
 			}
 		});
