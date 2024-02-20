@@ -42,4 +42,5 @@ export class GlobalComponent {
 	public static upSellGroup: IUpSell[] = [];
 	public static upSellSeleted: IUpSell | null = null;
 	public static viajala: boolean = false;
+	public static userGroupLab: string;
 }
