@@ -1,17 +1,14 @@
 <div class="container__steps">
-	<section>
-		<ng-container *ngFor="let step of steps">
-			<div class="container__steps__step">
-				<div class="container__steps__step__number"
-				     [class.active]="step.active"
-				     [class.check]="step.check"
-				     (click)="clickStep(step.id)">
-					<span *ngIf="!step.check">{{ step.id + 1 }}</span>
-					<img alt="" *ngIf="step.check" src="./assets/svg/check-red-step.svg">
-				</div>
-				<label [class.active]="step.active">{{ step.name }}</label>
-			</div>
-			<div class="container__steps__line" *ngIf="step.id !== (steps.length - 1)"></div>
-		</ng-container>
-	</section>
+    <section>
+        <ng-container *ngFor="let step of steps">
+            <div class="container__steps__step" [class.end]="step.id==0">
+                <div class="container__steps__step__number" [class.active]="step.active" [class.check]="step.check" (click)="clickStep(step.id)">
+                    <span *ngIf="!step.check">{{step.id + 1}}</span>
+                    <img alt="" *ngIf="step.check" src="./assets/svg/check-red-step.svg" >
+                </div>
+                <label [class.active]="step.active">{{step.name}}</label>
+            </div>
+            <div class="container__steps__line" *ngIf="step.id!==2"></div>
+        </ng-container>
+    </section>
 </div>

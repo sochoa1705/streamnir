@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ContryService } from 'src/app/api/api-nmviajes/services/country-list.service';
-import { days, months } from './utils';
+import { months, days } from './utils';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { Passenger } from 'src/app/api/api-checkout/models/rq-checkout-booking';
 import { CardPassengerComponent } from './card-passenger/card-passenger.component';
@@ -236,20 +236,29 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.formBillingGroup.reset(this.initialValues);
 	}
 
+	noWhitespaceValidator(control: any) {
+		const isWhitespace = (control?.value || '').trim().length === 0;
+		const startWithSpace = (control?.value || '')[0] === ' ';
+		const isValid = !(isWhitespace || startWithSpace);
+		return isValid ? null : { whitespace: true };
+	}
+
 	validForms() {
 		let isValidCards = false;
 		this.passengersComponent.forEach((item: CardPassengerComponent) => {
 			item.clickButtonSave();
 		});
 
-		if (this.dataStatusCards.every((status) => status)) {
+		if (this.dataStatusCards.every((status) => status == true)) {
 			this.dataPassengers = [];
 			this.passengersComponent.forEach((item: CardPassengerComponent) => {
 				this.dataPassengers.push(item.getDataForm());
 			});
 			isValidCards = true;
 		}
-		return this.formGroup.valid && isValidCards && this.formBillingGroup.valid && this.formPoliticsGroup.valid;
+		const isValidAll =
+			this.formGroup.valid && isValidCards && this.formBillingGroup.valid && this.formPoliticsGroup.valid;
+		return isValidAll;
 	}
 
 	setInfoPassengersInformation(isRedirect = false) {
@@ -302,7 +311,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	//Se Inicializa la validacion de cada formulario y su guardado
 	setIndexValidCard() {
-		const value = GlobalComponent.appBooking.passengers.length > 0;
+		const value = GlobalComponent.appBooking.passengers.length > 0 ? true : false;
 		for (let i = 0; i < this.totalPassenger; i++) {
 			this.dataStatusCards.push(value);
 		}
@@ -310,7 +319,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 	//Actualiza el estado de cada formulario
 	updateValidForm($event: any) {
 		this.dataStatusCards[$event.index] = $event.isValid;
-		if (this.dataStatusCards.every((status) => status)) {
+		if (this.dataStatusCards.every((status) => status == true)) {
 			this._checkoutService.isSaveDataPassenger = true;
 		}
 	}
@@ -321,7 +330,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 			next: (res) => {
 				if (res.success) {
 					if (isRedirect) this.nextNavigate();
-					else this._checkoutService.changeStep.emit(GlobalComponent.userGroupLab === 'A' ? 2 : 1);
+					else this._checkoutService.changeStep.emit(2);
 					window.scroll({ top: 0, behavior: 'smooth' });
 				} else {
 					if (res.isChurning) {
@@ -335,7 +344,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 					}
 				}
 			},
-			error: () => {
+			error: (err) => {
 				this.openModalError(this.errorDefault);
 			}
 		});
@@ -366,7 +375,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 			windowClass: 'modal-detail-error'
 		});
 		modalRef.componentInstance.message = message;
-		modalRef.componentInstance.isRedirect = !isSuccessCancel;
+		modalRef.componentInstance.isRedirect = isSuccessCancel ? false : true;
 		modalRef.componentInstance.txtButton = isSuccessCancel ? 'Aceptar' : 'Volver al inicio';
 	}
 
@@ -409,7 +418,7 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	nextNavigate() {
 		const index = this._checkoutService.currentIndexStep;
-		this._router.navigateByUrl(index == 0 ? '/booking' : index == -1 ? '/' : '/booking/pago').then(() => null);
+		this._router.navigateByUrl(index == 0 ? '/booking' : index == -1 ? '/' : '/booking/pago');
 	}
 
 	ngOnDestroy() {
