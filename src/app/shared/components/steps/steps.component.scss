@@ -30,16 +30,15 @@
 	section {
 		max-width: 1222px;
 		margin: 0 auto;
-		display: flex;
-		flex-direction: row;
+		display: grid;
 		align-items: center;
+		grid-template-columns: 173px auto 125px auto 215px;
 		column-gap: 16px;
 	}
 
 	&__step {
 		display: flex;
 		align-items: center;
-		justify-content: center;
 		gap: 16px;
 		width: 100%;
 
