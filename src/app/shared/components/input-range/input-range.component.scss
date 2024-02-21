@@ -5,6 +5,7 @@ ngb-datepicker{
 }
 
 ::ng-deep .ngb-dp-header{
+    display:  var(--visibility);
     padding: 0 !important;
 }
 
@@ -29,10 +30,6 @@ ngb-datepicker{
 
 ::ng-deep .ngb-dp-navigation-select{
     visibility: hidden !important;
-}
-
-::ng-deep .ngb-dp-header{
-    display:  var(--visibility);
 }
 
 ::ng-deep.custom-day.range,
@@ -74,11 +71,6 @@ ngb-datepicker{
     width: 100%;
     position: relative;
     &__date{
-        &[tabindex] {
-            outline: none !important;
-        }
-    }
-    &__date{
         cursor: pointer;
         height: 60px;
         padding: 16px;
@@ -91,6 +83,9 @@ ngb-datepicker{
         align-items: center;
         gap:8px;
         width: 50%;
+        &[tabindex] {
+            outline: none !important;
+        }
         &:focus,&:active,&.active{
             border: 1px solid colors.$red-500;
         }
@@ -98,7 +93,7 @@ ngb-datepicker{
             width: 100%;
         }
         span{
-            font-family: Montserrat;
+            font-family: Montserrat, serif;
             font-size: 18px;
             font-weight: 400;
             line-height: 28px;
@@ -141,7 +136,7 @@ ngb-datepicker{
         gap:12px;
         &__buttons{
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             padding: 0 5px;
         }
