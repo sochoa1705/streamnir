@@ -12,9 +12,15 @@ export class ExperimentGuard implements CanActivate {
 	constructor(private experimentService: ExperimentService, private router: Router) {
 	}
 
-	canActivate(
-			_route: ActivatedRouteSnapshot,
-			_state: RouterStateSnapshot): boolean {
+	canActivate(route: ActivatedRouteSnapshot,
+							_state: RouterStateSnapshot): boolean {
+		const paramMap = route.paramMap;
+		if (paramMap.keys.length > 2) {
+			GlobalComponent.isKayak = true;
+			GlobalComponent.userGroupLab = 'A';
+			return true;
+		}
+
 		const userGroup = this.experimentService.getUserGroup();
 		GlobalComponent.userGroupLab = userGroup;
 
