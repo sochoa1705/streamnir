@@ -4,7 +4,7 @@ import { cuotas } from '../passengers/utils';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { listAgencies, listBanksInternet, listCreditCard, listTypeDocument } from './utils';
 import { GlobalComponent } from 'src/app/shared/global';
-import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
 import { environment } from 'src/environments/environment';
 import { RPurchare } from 'src/app/api/api-checkout/models/rq-checkout-save-booking';
@@ -91,6 +91,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	formSubscriptionPolitics: Subscription;
 	formSubscriptionBooking: Subscription;
 	formSubscriptionCreditCard: Subscription;
+	formSubscriptionCreditCardNumber: Subscription;
 	openModalSubscription: Subscription;
 	isSendPayment = false;
 
@@ -307,7 +308,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	setValidatorsCreditCard() {
 		if (this.isPayCard) {
-			this.cardNumberField.setValidators([Validators.required, Validators.pattern(/^.{19,}$/)]);
+			this.cardNumberField.setValidators([Validators.required, Validators.pattern(/^(?!.* {2})[\d ]{16,19}$/)]);
 			this.expirationField.setValidators([Validators.required, Validators.pattern(/^.{5,}$/)]);
 			this.cvvField.setValidators([Validators.required, Validators.pattern(/^.{3,}$/)]);
 			this.cardOwnerField.setValidators([Validators.required]);
@@ -504,7 +505,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	}
 
 	private onCardNumberChanges() {
-		this.cardNumberField.valueChanges.pipe(
+		this.formSubscriptionCreditCardNumber = this.cardNumberField.valueChanges.pipe(
 				debounceTime(500),
 				distinctUntilChanged(),
 				filter(value => !!value?.trim()),
@@ -535,7 +536,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 			}
 		};
 
-		this._pasarelaService.getDiscount(data).subscribe({
+		this._pasarelaService.getDiscount(data).pipe(take(1)).subscribe({
 			next: (res) => this.handleBinDiscountResponse(res),
 			error: () => this.handleBinDiscountError()
 		});
@@ -553,6 +554,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	ngOnDestroy() {
 		this.formSubscriptionBooking.unsubscribe();
 		this.formSubscriptionCreditCard.unsubscribe();
+		this.formSubscriptionCreditCardNumber.unsubscribe();
 		this.formSubscriptionPolitics.unsubscribe();
 		this.openModalSubscription.unsubscribe();
 		this._modalService.dismissAll();
