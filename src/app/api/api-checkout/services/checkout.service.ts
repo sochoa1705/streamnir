@@ -1,8 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { IUpSell } from '../models/rq-checkout-up-sell';
 import { FareBreakDown as FareBreakDownUpSell } from '../models/rq-checkout-up-sell';
 import { environment } from 'src/environments/environment';
-import { dataUpSell } from 'src/app/Component/checkout-page/utils';
 import { GlobalComponent } from 'src/app/shared/global';
 import { dataInitBooking, dataSteps } from 'src/app/shared/constant-init';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -12,8 +10,9 @@ import { RPurchare } from '../models/rq-checkout-save-booking';
 import { RDiscount, RDiscountCupon } from '../models/rq-checkout-discount';
 import { RContact } from '../models/rq-checkout-contact';
 import { IValidateBooking, RValidateBooking } from '../models/rq-checkout-validate-booking';
-import { Billing, Contact, Passenger, PassengersInfo, passengerInfoInit } from '../models/rq-checkout-passengers';
+import { Billing, Contact, Passenger, passengerInfoInit, PassengersInfo } from '../models/rq-checkout-passengers';
 import { Payment, paymentInit } from '../models/rq-checkout-payment';
+import { IDiscountResult } from '../models/rq-openpay-discount';
 
 @Injectable({ providedIn: 'root' })
 export class CheckoutService {
@@ -24,6 +23,7 @@ export class CheckoutService {
 	changeStep = new EventEmitter();
 	isFinishedPay = new EventEmitter();
 	applyCupon = new EventEmitter();
+	applyBinDiscount = new EventEmitter<IDiscountResult | null>();
 	nextPassengerMobile  = new EventEmitter();
 	nextPaymentMobile = new EventEmitter();
 	updateDataKayak = new EventEmitter();
@@ -39,9 +39,7 @@ export class CheckoutService {
 	isChangesPayment=false;
 	isFinishPayment=false;
 
-	
 	itsIncludeInsurance = false;
-	upSellSelect: IUpSell = dataUpSell[0];
 	currentIndexStep=0;
 	API_KAYAK = 'https://motorvuelos.expertiatravel.com';
 
@@ -64,12 +62,6 @@ export class CheckoutService {
 		this.currentIndexStep=0;
 		this.isFinishPayment=false;
 		GlobalComponent.dataSteps=[]
-	}
-
-	setValueChangeStep(index: number, status: boolean, next = true) {
-		dataSteps[index + 1].active = true;
-		dataSteps[index].check = status;
-		this.changeStep.emit();
 	}
 
 	updateDataPassenger(passenger:Passenger){

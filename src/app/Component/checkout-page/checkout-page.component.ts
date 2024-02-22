@@ -1,9 +1,5 @@
-import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import {
-	FareBreakDown,
-	Group,
-	PricingDetail,
-} from 'src/app/api/api-checkout/models/rq-checkout-search';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FareBreakDown, Group, PricingDetail } from 'src/app/api/api-checkout/models/rq-checkout-search';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router';
 import { GlobalComponent } from 'src/app/shared/global';
@@ -19,6 +15,7 @@ import { ModalInactivityComponent } from './modal-inactivity/modal-inactivity.co
 import { Subscription } from 'rxjs';
 import { UserIdleService } from 'angular-user-idle';
 import { filter } from 'rxjs/operators';
+import { IDiscountResult } from '../../api/api-checkout/models/rq-openpay-discount';
 
 @Component({
 	selector: 'app-checkout-page',
@@ -26,24 +23,20 @@ import { filter } from 'rxjs/operators';
 	styleUrls: ['./checkout-page.component.scss']
 })
 export class CheckoutPageComponent implements OnInit,OnDestroy {
-	showGoingDropdown = false;
-	showLapDropdown = false;
 	classFligh = 'Economy';
 
 	fareBreakDowns: FareBreakDown;
 	totalInsurance = 0;
-	totalDaysTravel = 0;
 
 	nameUpSellSelect = '';
 	detailFlight: Group;
 
-	//Detalle Vuelo
+	// Detalle Vuelo
 
 	pricing: PricingDetail;
 	showButtonReturn = false;
 	codeSafetyPay = 0;
 
-	indexStepActive = 0;
 	isSafetyPay = false;
 	discount: Result;
 	totalDiscountCupon = 0;
@@ -51,12 +44,14 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 	isShowDiscountCupon = false;
 	indexSegmentSelected:number[]=[];
 
+	isBinDiscountShown = false;
+	binDiscount: IDiscountResult | null;
+
 	paramMap:ParamMap;
-	
+
 	idleSubscriber: Subscription;
 	currentUrl='/booking';
 
-	
 	constructor(
 		private _checkoutService: CheckoutService,
 		private _router: Router,
@@ -96,6 +91,22 @@ export class CheckoutPageComponent implements OnInit,OnDestroy {
 				}
 			}
 		})
+
+		this._checkoutService.applyBinDiscount.subscribe({
+			next: (res: IDiscountResult | null) => {
+				this.isBinDiscountShown = false;
+				if (res) {
+					this.binDiscount = res;
+					this.isBinDiscountShown = true;
+				} else {
+					this.isBinDiscountShown = false;
+					this.binDiscount = null;
+					if (GlobalComponent.discountCampaing) {
+						this.isShowDiscount = true;
+					}
+				}
+			}
+		});
 
 		this._router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: any) => {
 			this.currentUrl=event.url;
