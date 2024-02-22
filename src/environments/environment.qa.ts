@@ -62,25 +62,25 @@ export const environment = {
 
   url_autos: 'https://autos.nmviajes.com/es/site/',
 
-  urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela",
-  urlApiPasarela: 'https://pasarella.expertiatravel.com/serviciopasarela/v1/api/',
+  urlApiPayment: "https://pasarella.expertiatravel.com/serviciopasareladev",
+  urlApiPasarela: 'https://pasarella.expertiatravel.com/serviciopasareladev/v1/api/',
   //urlApiPayment: "http://10.75.102.23:15001/pasarelaservicio",
   //urlApiPayment: 'http://localhost:30850',
 
   urlSuggest: "https://suggest.agentcars.com/suggest/",
 
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
-  
+
   //https://qa-bffdelfosti.nmviajes-it.com https://motorvuelos.expertiatravel.com
   urlApiMotorVuelos: "https://qa-motorvuelos.nmviajes-it.com",
-  
+
 
     //url Terms and Conditions - Checkout
 
   urlTermsConditions: 'https://www.nmviajes.com/terminos-condiciones',
   urlBookingConditions: 'https://www.nmviajes.com/condiciones-de-reserva',
   urlTravelDocuments: 'https://www.nmviajes.com/documentacion-viaje',
-  
+
   urlBlog:'https://blog.nmviajes.com',
   GDS:{
     AMADEUS: 0,
