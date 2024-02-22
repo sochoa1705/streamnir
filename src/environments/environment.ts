@@ -69,8 +69,8 @@ export const environment = {
   urlSuggest: "https://suggest.agentcars.com/suggest/",
 
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
-  
-  urlApiMotorVuelos: "https://dev-motorwl.nmviajes-it.com",
+
+  urlApiMotorVuelos: "https://dev-motorvuelos.nmviajes-it.com",
   
 
     //url Terms and Conditions - Checkout

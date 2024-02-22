@@ -21,7 +21,7 @@ export class PasarelaService {
 
 	getDiscount(request: IOpenPayDiscountRequest): Observable<IDiscountResult | null> {
 		const bin = request.Parameter?.Bin;
-		if (bin && bin.length >= PasarelaService.binLength) {
+		if (bin && bin.length === PasarelaService.binLength) {
 			const url = `${environment.urlApiPasarela}Discount?Parameter.Bin=${request.Parameter?.Bin}&Parameter.TypeOfOperation=${request.Parameter?.TypeOfOperation}&Parameter.Amount=${request.Parameter?.Amount}&Parameter.Destination=${request.Parameter?.Destination}&Parameter.SourceId=${request.Parameter?.SourceId}&Parameter.AirlineId=${request.Parameter?.AirlineId}&Parameter.FlightClass=${request.Parameter?.FlightClass}&Parameter.FareBasis=${request.Parameter?.FareBasis}&TrackingCode=${request.TrackingCode}&MuteExceptions=${request.MuteExceptions}&Caller.Company=${request.Caller?.Company}&Caller.Application=${request.Caller?.Application}`;
 			return this.http.get<IDiscountResult>(url)
 					.pipe(
@@ -29,7 +29,7 @@ export class PasarelaService {
 								return res.Result;
 							})
 					);
-		} else
-			return of(null);
+		}
+		return of(null);
 	}
 }
