@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { FareBreakDown as FareBreakDownUpSell } from '../models/rq-checkout-up-sell';
 import { environment } from 'src/environments/environment';
 import { GlobalComponent } from 'src/app/shared/global';
-import { dataInitBooking, dataSteps } from 'src/app/shared/constant-init';
+import { dataInitBooking } from 'src/app/shared/constant-init';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import moment from 'moment';
 import { REmail } from '../models/rq-checkout-email';
@@ -81,7 +81,7 @@ export class CheckoutService {
 
 	setPricingValuesByUpSell() {
 		let taxes = 0;
-		let totalPay = 0;
+		let totalPay: number;
 		let baseFareADT = 0;
 		let baseFareINF = 0;
 		let baseFareCNN = 0;
@@ -116,7 +116,7 @@ export class CheckoutService {
 	totalDaysTravel() {
 		const departure = GlobalComponent.appGroupSeleted.departure;
 		const returnFlight = GlobalComponent.appGroupSeleted.returns || null;
-		let totalDaysTravel = 0;
+		let totalDaysTravel: number;
 		let dateDeparture: Date;
 		let dateArrival: Date;
 
@@ -208,14 +208,11 @@ export class CheckoutService {
 	}
 
 	getDiscountByCampaing(bin = '') {
-		const url = `${GlobalComponent.isKayak ? this.API_KAYAK : environment.urlApiMotorVuelos}/mv/payment/get-discounts?Bin=${bin}&GroupId=${
-			GlobalComponent.appGroupSeleted.id
-		}&IncludeSecure=${GlobalComponent.appBooking.secure ? true : false}&PromotionalCode=&BrandedFareName=${
-			GlobalComponent.upSellSeleted?.name || ''
-		}`;
+		const url = `${GlobalComponent.isKayak ? this.API_KAYAK
+				: environment.urlApiMotorVuelos}/mv/payment/get-discounts?Bin=${bin}&GroupId=${GlobalComponent.appGroupSeleted.id}&IncludeSecure=${(!!GlobalComponent.appBooking.secure)}&PromotionalCode=&BrandedFareName=${GlobalComponent.upSellSeleted?.name || ''}`;
 		const headers = new HttpHeaders()
-			.set('Content-Type', 'application/json')
-			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+				.set('Content-Type', 'application/json')
+				.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
 		return this._httpClient.get<RDiscount>(url, { headers });
 	}
 
