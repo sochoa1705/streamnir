@@ -4,7 +4,7 @@ import { cuotas } from '../passengers/utils';
 import { CheckoutService } from 'src/app/api/api-checkout/services/checkout.service';
 import { listAgencies, listBanksInternet, listCreditCard, listTypeDocument } from './utils';
 import { GlobalComponent } from 'src/app/shared/global';
-import { map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 import { ModalErrorComponent } from 'src/app/shared/components/modal-error/modal-error.component';
 import { environment } from 'src/environments/environment';
 import { RPurchare } from 'src/app/api/api-checkout/models/rq-checkout-save-booking';
@@ -18,11 +18,13 @@ import { Payment } from 'src/app/api/api-checkout/models/rq-checkout-payment';
 import { Subscription } from 'rxjs';
 import { ModalUnsavedComponent } from 'src/app/shared/components/modal-unsaved/modal-unsaved.component';
 import { NotificationService } from 'src/app/Services/notification.service';
+import { IDiscountResult, IOpenPayDiscountRequest } from '../../../api/api-checkout/models/rq-openpay-discount';
 
 interface Item {
 	value: any;
 	name: string;
 }
+
 declare let window: any;
 
 @Component({
@@ -39,11 +41,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	formGroupBooking: FormGroup;
 	formGroupPolitics: FormGroup;
 	formInit: any;
-	formInitBilling: any;
-	panelOpenState = false;
-	urlsTermsAndConditions: any;
 	arrayCuotas: Item[] = [];
-	isValidCupon = false;
 	listTypeDocument = listTypeDocument;
 	listCreditCard = listCreditCard;
 	listBanksInternet = listBanksInternet;
@@ -93,6 +91,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 	formSubscriptionPolitics: Subscription;
 	formSubscriptionBooking: Subscription;
 	formSubscriptionCreditCard: Subscription;
+	formSubscriptionCreditCardNumber: Subscription;
 	openModalSubscription: Subscription;
 	isSendPayment = false;
 
@@ -140,6 +139,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.chageTypeDocument();
 		this.changeCupon();
 		this.setValidatorsCreditCard();
+		this.onCardNumberChanges();
 		this.initialValuesPayment = { ...this._checkoutService.dataInfoPayment };
 		this.getScreenWidth = window.innerWidth;
 		if (this._checkoutService.isChangesPayment) {
@@ -177,7 +177,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.formGroupCard.setValue(data.creditCard);
 		this.formGroupBooking.setValue(data.booking);
 		this.acceptPoliticsField.setValue(data.acceptAdvertising);
-		this.isPayCard = data.booking.paymentType == 0 ? true : false;
+		this.isPayCard = data.booking.paymentType == 0;
 		if (this.cuponPromoWebField.value !== '') {
 			this.isValidPromotionalCode = true;
 			this.isApplyCupon = true;
@@ -289,12 +289,6 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		}
 	}
 
-	cleanInputCodeCupon() {
-		//Esto se ejecuta cuando el usuario decide volver al paso 2 y cambiar de tarifa
-		this.cuponPromoWebField.setValue('');
-		this.resetDiscountByCupon();
-	}
-
 	setCuotas() {
 		this.arrayCuotas = cuotas.map((item) => {
 			return { name: item == 0 ? 'Sin cuotas' : item.toString(), value: item };
@@ -314,7 +308,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	setValidatorsCreditCard() {
 		if (this.isPayCard) {
-			this.cardNumberField.setValidators([Validators.required, Validators.pattern(/^.{19,}$/)]);
+			this.cardNumberField.setValidators([Validators.required, Validators.pattern(/^(?!.* {2})[\d ]{16,19}$/)]);
 			this.expirationField.setValidators([Validators.required, Validators.pattern(/^.{5,}$/)]);
 			this.cvvField.setValidators([Validators.required, Validators.pattern(/^.{3,}$/)]);
 			this.cardOwnerField.setValidators([Validators.required]);
@@ -410,7 +404,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 			next: (res) => {
 				if (res.confirmed) {
 					this.showMessagePay = true;
-					this.codeSafetyPay = Number(res.resultPasarela?.Transaction_id || res.ciP_SafetyPAY);
+					this.codeSafetyPay = Number(res.resultPasarela?.Transaction_id ?? res.ciP_SafetyPAY);
 					window.scroll({ top: 0, behavior: 'smooth' });
 					this.transactionId = res.idCotizacion;
 					this.sendEmail(res);
@@ -445,7 +439,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 			windowClass: 'modal-detail-error'
 		});
 		modalRef.componentInstance.message = message;
-		modalRef.componentInstance.isRedirect = this.counter == 4 ? false : true;
+		modalRef.componentInstance.isRedirect = this.counter != 4;
 		modalRef.componentInstance.txtButton = this.counter == 4 ? 'Aceptar' : 'Volver al inicio';
 	}
 
@@ -510,9 +504,57 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		this._router.navigateByUrl(index == 0 ? '/booking' : index == -1 ? '/' : '/booking/pasajeros');
 	}
 
+	private onCardNumberChanges() {
+		this.formSubscriptionCreditCardNumber = this.cardNumberField.valueChanges.pipe(
+				debounceTime(500),
+				distinctUntilChanged(),
+				filter(value => !!value?.trim()),
+				map(value => value.trim().replace(/ /g, '').slice(0, 6)),
+				distinctUntilChanged()
+		).subscribe((bin: string) => this.applyBinDiscount(bin));
+	}
+
+	private applyBinDiscount(bin: string) {
+		if (!bin) return;
+
+		const data: IOpenPayDiscountRequest = {
+			MuteExceptions: false,
+			TrackingCode: Guid(),
+			Caller: {
+				Company: GlobalComponent.appCompany,
+				Application: GlobalComponent.appApplication
+			},
+			Parameter: {
+				Bin: bin,
+				TypeOfOperation: 'VUE',
+				Amount: GlobalComponent.detailPricing.totalPay,
+				Destination: GlobalComponent.appGroupSeleted.returns?.originCity.code,
+				SourceId: GlobalComponent.appGroupSeleted.departure[0].originCity.code,
+				AirlineId: GlobalComponent.appGroupSeleted.airline.code,
+				FlightClass: GlobalComponent.appGroupSeleted.departure[0].segments[0].flightSegments[0].cabin,
+				FareBasis: GlobalComponent.appGroupSeleted.departure[0].segments[0].flightSegments[0].fareBasis
+			}
+		};
+
+		this._pasarelaService.getDiscount(data).pipe(take(1)).subscribe({
+			next: (res) => this.handleBinDiscountResponse(res),
+			error: () => this.handleBinDiscountError()
+		});
+	}
+
+	private handleBinDiscountResponse(response: IDiscountResult | null) {
+		const discount = response && response.IsSuccess ? response : null;
+		this._checkoutService.applyBinDiscount.emit(discount);
+	}
+
+	private handleBinDiscountError() {
+		this._checkoutService.applyBinDiscount.emit(null);
+	}
+
 	ngOnDestroy() {
 		this.formSubscriptionBooking.unsubscribe();
 		this.formSubscriptionCreditCard.unsubscribe();
+		this.formSubscriptionCreditCardNumber.unsubscribe();
 		this.formSubscriptionPolitics.unsubscribe();
 		this.openModalSubscription.unsubscribe();
 		this._modalService.dismissAll();
@@ -552,10 +594,6 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	get numberQuotesField(): AbstractControl {
 		return this.formGroupCard.get('numberQuotes')!;
-	}
-
-	get couterField(): AbstractControl {
-		return this.formGroupCard.get('counter')!;
 	}
 
 	get cuponPromoWebField(): AbstractControl {
