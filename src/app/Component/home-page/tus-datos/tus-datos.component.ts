@@ -48,8 +48,8 @@ export class TusDatosComponent implements OnInit, AfterViewInit, OnDestroy {
 			passengers: this.formBuilder.array([]),
 			store: new FormControl('', Validators.nullValidator), // Validators.required
 			medium: new FormControl('', Validators.required),
-			privacyPolicy: new FormControl('', Validators.requiredTrue),
-			dataPolicy: new FormControl('', Validators.requiredTrue)
+			privacyPolicy: new FormControl(false, Validators.requiredTrue),
+			dataPolicy: new FormControl(false, Validators.requiredTrue)
 		});
 	}
 
