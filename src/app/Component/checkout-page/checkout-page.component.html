@@ -81,12 +81,22 @@
 									>USD <span class="bold-15 discount"> -{{ totalDiscountCupon | number: '1.2-2' }}</span></span
 								>
 							</div>
+
+							<div class="container__page__detail__pay__contend__body__row" *ngIf="isBinDiscountShown">
+								<span class="discount">
+									Descuento {{ binDiscount!.Discount.Value }}%
+									(m&aacute;x <span class="font-small discount">USD</span> {{ binDiscount!.Discount.Max }})
+								</span>
+								<span class="font-small discount text-end">
+									USD <span class="bold-15 discount"> -{{ binDiscount?.AmountDiscount | number: '1.2-2' }}</span>
+								</span>
+							</div>
 						</div>
 						<div class="container__page__detail__pay__contend__line"></div>
 						<div class="container__page__detail__pay__contend__footer">
 							<div
 								class="container__page__detail__pay__contend__footer__row"
-								*ngIf="isShowDiscount || isShowDiscountCupon"
+								*ngIf="isShowDiscount || isShowDiscountCupon || isBinDiscountShown"
 							>
 								<span>Precio sin descuento</span>
 								<span class="text-end"
@@ -103,6 +113,8 @@
 											? pricing.totalPay + totalInsurance - discount.amountDiscount
 											: isShowDiscountCupon
 											? pricing.totalPay + totalInsurance - totalDiscountCupon
+											: isBinDiscountShown
+											? pricing.totalPay + totalInsurance - (binDiscount ? binDiscount.AmountDiscount : 0)
 											: pricing.totalPay + totalInsurance
 										) | number: '1.2-2'
 									}}
@@ -125,7 +137,7 @@
 									[nameUpSellSelect]="nameUpSellSelect"
 									[totalADT]="pricing.totalADT"
 									[totalCNN]="pricing.totalCNN"
-									[isLast]="i == departure.length - 1"
+									[isLast]="i === departure.length - 1"
 									[totalINF]="pricing.totalINF"
 									[indexSegment]="indexSegmentSelected[i]"
 								></app-card-detail-fly>
@@ -158,7 +170,7 @@
 			<app-button
 				class="container__page__section__button__footer"
 				[text]="'Continuar a pasajeros'"
-				*ngIf="currentUrl == '/booking' || currentUrl.includes('itinerary')"
+				*ngIf="currentUrl === '/booking' || currentUrl.includes('itinerary')"
 				[color]="'primary'"
 				(click)="nextPassenger()"
 				[size]="'md'"
@@ -167,7 +179,7 @@
 			></app-button>
 			<app-button
 				class="container__page__section__button__footer"
-				*ngIf="currentUrl == '/booking/pasajeros'"
+				*ngIf="currentUrl === '/booking/pasajeros'"
 				[text]="'Continuar a pagar '"
 				[color]="'primary'"
 				(click)="nextPayment()"
@@ -179,7 +191,7 @@
 				class="container__page__section__button__footer"
 				[text]="'Realizar compra'"
 				[color]="'primary'"
-				*ngIf="currentUrl == '/booking/pago' && !showButtonReturn"
+				*ngIf="currentUrl === '/booking/pago' && !showButtonReturn"
 				(click)="nextPurchare()"
 				[size]="'md'"
 				[w100]="true"

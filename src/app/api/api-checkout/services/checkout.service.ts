@@ -1,10 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { IUpSell } from '../models/rq-checkout-up-sell';
 import { FareBreakDown as FareBreakDownUpSell } from '../models/rq-checkout-up-sell';
 import { environment } from 'src/environments/environment';
-import { dataUpSell } from 'src/app/Component/checkout-page/utils';
 import { GlobalComponent } from 'src/app/shared/global';
-import { dataInitBooking, dataSteps } from 'src/app/shared/constant-init';
+import { dataInitBooking } from 'src/app/shared/constant-init';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import moment from 'moment';
 import { REmail } from '../models/rq-checkout-email';
@@ -12,8 +10,9 @@ import { RPurchare } from '../models/rq-checkout-save-booking';
 import { RDiscount, RDiscountCupon } from '../models/rq-checkout-discount';
 import { RContact } from '../models/rq-checkout-contact';
 import { IValidateBooking, RValidateBooking } from '../models/rq-checkout-validate-booking';
-import { Billing, Contact, Passenger, PassengersInfo, passengerInfoInit } from '../models/rq-checkout-passengers';
+import { Billing, Contact, Passenger, passengerInfoInit, PassengersInfo } from '../models/rq-checkout-passengers';
 import { Payment, paymentInit } from '../models/rq-checkout-payment';
+import { IDiscountResult } from '../models/rq-openpay-discount';
 
 @Injectable({ providedIn: 'root' })
 export class CheckoutService {
@@ -24,6 +23,7 @@ export class CheckoutService {
 	changeStep = new EventEmitter();
 	isFinishedPay = new EventEmitter();
 	applyCupon = new EventEmitter();
+	applyBinDiscount = new EventEmitter<IDiscountResult | null>();
 	nextPassengerMobile  = new EventEmitter();
 	nextPaymentMobile = new EventEmitter();
 	updateDataKayak = new EventEmitter();
@@ -39,9 +39,7 @@ export class CheckoutService {
 	isChangesPayment=false;
 	isFinishPayment=false;
 
-	
 	itsIncludeInsurance = false;
-	upSellSelect: IUpSell = dataUpSell[0];
 	currentIndexStep=0;
 	API_KAYAK = 'https://motorvuelos.expertiatravel.com';
 
@@ -66,12 +64,6 @@ export class CheckoutService {
 		GlobalComponent.dataSteps=[]
 	}
 
-	setValueChangeStep(index: number, status: boolean, next = true) {
-		dataSteps[index + 1].active = true;
-		dataSteps[index].check = status;
-		this.changeStep.emit();
-	}
-
 	updateDataPassenger(passenger:Passenger){
 		const indexPassenger = this.dataInfoPassengers.passengers.findIndex(object => object.index === passenger.index);
 		if(indexPassenger==-1) {
@@ -89,7 +81,7 @@ export class CheckoutService {
 
 	setPricingValuesByUpSell() {
 		let taxes = 0;
-		let totalPay = 0;
+		let totalPay: number;
 		let baseFareADT = 0;
 		let baseFareINF = 0;
 		let baseFareCNN = 0;
@@ -124,7 +116,7 @@ export class CheckoutService {
 	totalDaysTravel() {
 		const departure = GlobalComponent.appGroupSeleted.departure;
 		const returnFlight = GlobalComponent.appGroupSeleted.returns || null;
-		let totalDaysTravel = 0;
+		let totalDaysTravel: number;
 		let dateDeparture: Date;
 		let dateArrival: Date;
 
@@ -216,14 +208,11 @@ export class CheckoutService {
 	}
 
 	getDiscountByCampaing(bin = '') {
-		const url = `${GlobalComponent.isKayak ? this.API_KAYAK : environment.urlApiMotorVuelos}/mv/payment/get-discounts?Bin=${bin}&GroupId=${
-			GlobalComponent.appGroupSeleted.id
-		}&IncludeSecure=${GlobalComponent.appBooking.secure ? true : false}&PromotionalCode=&BrandedFareName=${
-			GlobalComponent.upSellSeleted?.name || ''
-		}`;
+		const url = `${GlobalComponent.isKayak ? this.API_KAYAK
+				: environment.urlApiMotorVuelos}/mv/payment/get-discounts?Bin=${bin}&GroupId=${GlobalComponent.appGroupSeleted.id}&IncludeSecure=${(!!GlobalComponent.appBooking.secure)}&PromotionalCode=&BrandedFareName=${GlobalComponent.upSellSeleted?.name || ''}`;
 		const headers = new HttpHeaders()
-			.set('Content-Type', 'application/json')
-			.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
+				.set('Content-Type', 'application/json')
+				.set('Authorization', `Bearer ${GlobalComponent.tokenMotorVuelo}`);
 		return this._httpClient.get<RDiscount>(url, { headers });
 	}
 

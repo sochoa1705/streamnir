@@ -98,27 +98,6 @@
               ],
               "outputHashing": "all"
             },
-            "qa-new": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "10kb",
-                  "maximumError": "20kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.qa-new.ts"
-                }
-              ],
-              "outputHashing": "all"
-            },
             "qa-delfosti": {
               "budgets": [
                 {
