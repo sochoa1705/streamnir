@@ -52,7 +52,7 @@ export class TusDatosService {
 		formData.append('idTienda', model.idStore.toString());
 		formData.append('tienda', model.idStore.toString());
 		formData.append('cbx_ProteccionDatos', model.privacyPolicy.toString());
-		formData.append('cbx_DatosPer', model.dataPolicy.toString());
+		formData.append('cbx_UsoDatosPer', model.dataPolicy.toString());
 		formData.append('X-Requested-With', 'XMLHttpRequest');
 
 		return this.http.post<SendTusDatosResponse>(url, formData);
