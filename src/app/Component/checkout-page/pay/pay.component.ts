@@ -304,6 +304,8 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 			this.isPayCard = false;
 			this.paymentTypeField.setValue(1);
 		}
+		if (this.paymentTypeField.value === 1)
+			this.emitBindDiscountNull();
 		this.setValidatorsCreditCard();
 	}
 
@@ -539,7 +541,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 
 		this._pasarelaService.getDiscount(data).pipe(take(1)).subscribe({
 			next: (res) => this.handleBinDiscountResponse(res),
-			error: () => this.handleBinDiscountError()
+			error: () => this.emitBindDiscountNull()
 		});
 	}
 
@@ -548,7 +550,7 @@ export class PayComponent implements OnInit, OnDestroy, AfterViewInit {
 		this._checkoutService.applyBinDiscount.emit(discount);
 	}
 
-	private handleBinDiscountError() {
+	private emitBindDiscountNull() {
 		this._checkoutService.applyBinDiscount.emit(null);
 	}
 
