@@ -15,7 +15,6 @@ import { AccountsService } from 'src/app/Services/accounts.service';
 import { Router } from '@angular/router';
 import { Search } from 'src/app/api/api-nmviajes/models/ce-metasearch';
 import { GlobalComponent } from 'src/app/shared/global';
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 
 @Component({
 	selector: 'app-tab-vuelos-v2',
@@ -35,21 +34,20 @@ export class TabVuelosV2Component implements OnInit{
 	@ViewChild('childDates') childDates!: InputRangeComponent;
 	@Output() reloadPageResult = new EventEmitter();
 
+	isDown = false;
+	startX: number;
 	scrollLeft: number;
 	typeFlight = 0;
-	dateRangeStartDate: NgbDate | null = null;
 
 	ngOnInit(): void {
 		if(window.location.href.includes('resultados')){
-			this.typeFlight=GlobalComponent.searchData.flightType ?? 0
+			this.typeFlight=GlobalComponent.searchData.flightType || 0
 		}
 	}
 
+	arrayMulti = [0];
+	indexCounter = 0;
 	counterSearch = 0;
-
-	onDateRangeChanged(event: any) {
-		this.dateRangeStartDate = event.fromDate;
-	}
 
 	search() {
 		this.counterSearch++;

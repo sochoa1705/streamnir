@@ -1,16 +1,4 @@
-import {
-	Component,
-	ElementRef,
-	EventEmitter,
-	HostListener,
-	Input,
-	OnChanges,
-	OnInit,
-	Output,
-	SimpleChanges,
-	TemplateRef,
-	ViewChild
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { NgbCalendar, NgbDate, NgbDateStruct, NgbDatepicker, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalComponent } from '../../global';
 
@@ -32,7 +20,6 @@ export class InputRangeComponent implements OnChanges,OnInit {
 	};
 	@Input() fromDate: NgbDate | null = null;
 	@Input() toDate: NgbDate | null = null;
-	@Input() startDate: NgbDate | null = null;
 
 	showCalendar = false;
 	dateDeparture = '';
@@ -47,15 +34,19 @@ export class InputRangeComponent implements OnChanges,OnInit {
 	dateOneWay: { year: number; month: number };
 	disabledPrevMonth = true;
 
+	maxDateRange:NgbDateStruct;
+
 	isOpenMobile=false;
 
 	@ViewChild('dp2') dp2: NgbDatepicker;
 
-	constructor(public calendar: NgbCalendar) {
+	constructor(
+		public calendar: NgbCalendar,
+		private _modalService: NgbModal
+	) {
 		const today = this.calendar.getToday();
 		this.dateOneWay = { year: today.year, month: today.month };
 	}
-
 	ngOnInit(): void {
 		document.documentElement.style.setProperty('--visibility', this.typeFlight == 2 || this.typeFlight == 1 ? 'none' : 'block');
 		if (window.location.href.includes('resultados')) {
@@ -91,15 +82,22 @@ export class InputRangeComponent implements OnChanges,OnInit {
 	onDateSelection(date: NgbDate) {
 		if (!this.fromDate && !this.toDate) {
 			this.fromDate = date;
-			this.setDepartureDate();
 		} else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
 			this.toDate = date;
-			this.inputDates.emit({ fromDate: this.fromDate, toDate: this.toDate });
-			this.applyRange();
 		} else {
-			this.fromDate = date;
 			this.toDate = null;
-			this.setDepartureDate();
+			this.fromDate = date;
+		}
+
+		if(this.fromDate){
+			const sumMonth=this.fromDate.month + 6;
+			const year = sumMonth >= 12 ? this.fromDate.year + 1 : this.fromDate.year;
+			const month = sumMonth >= 12 ? sumMonth - 12 : this.fromDate.month + 6;
+			this.maxDateRange={
+				year,
+				month,
+				day:this.fromDate.day
+			}
 		}
 	}
 
@@ -151,15 +149,18 @@ export class InputRangeComponent implements OnChanges,OnInit {
 		}
 	}
 
-	private setDepartureDate() {
-		this.dateDeparture = this.fromDate ? this.convertDateToString(this.fromDate) : '';
-		this.fromDateSeleted = this.fromDate;
+	openCalendarModal(content: TemplateRef<any>){
+		this._modalService.open(content, {
+			centered: true,
+			windowClass:'modal-datepicker'
+		})
 	}
 
-	private applyRange() {
+	applyRange() {
 		this.showCalendar = false;
-		this.setDepartureDate();
+		this.dateDeparture = this.fromDate ? this.convertDateToString(this.fromDate) : '';
 		this.dateReturn = this.toDate ? this.convertDateToString(this.toDate) : '';
+		this.fromDateSeleted = this.fromDate;
 		this.toDateSeleted = this.toDate;
 	}
 
@@ -179,9 +180,23 @@ export class InputRangeComponent implements OnChanges,OnInit {
 		return `${this.formatNumber(date.day)}/${this.formatNumber(date.month)}/${date.year}`;
 	}
 
+	convertDateToParam(date: string) {
+		if (date !== '') {
+			const arrayDate = date.split('/');
+			return arrayDate[2] + '-' + arrayDate[1] + '-' + arrayDate[0];
+		}
+		return date;
+	}
+
 	formatNumber(numberDate: number) {
 		if (numberDate < 10) return `0${numberDate}`;
 		return numberDate;
+	}
+
+	resetDateMulti() {
+		this.fromDate = null;
+		this.fromDateSeleted = null;
+		this.dateDeparture = '';
 	}
 
 	setParamDeparture(departureDate: string) {
