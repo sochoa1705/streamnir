@@ -380,10 +380,11 @@ export class PassengersComponent implements OnInit, OnDestroy, AfterViewInit {
 		modalRef.componentInstance.message = message;
 		modalRef.componentInstance.validateBooking = validateBooking;
 		modalRef.result.then((result) => {
+			
 			if (result == 'success') {
-				GlobalComponent.dataSteps[GlobalComponent.userGroupLab === 'A' ? 1 : 0].check = true;
-				GlobalComponent.dataSteps[GlobalComponent.userGroupLab === 'A' ? 2 : 1].active = true;
-				this._checkoutService.changeStep.emit(GlobalComponent.userGroupLab === 'A' ? 2 : 1);
+				GlobalComponent.dataSteps[1].check = true;
+				GlobalComponent.dataSteps[2].active = true;
+				this._checkoutService.changeStep.emit(2);
 				this.openModalError('Su reserva anterior, fue cancelada exitosamente', true);
 			}
 		});
