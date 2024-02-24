@@ -15,9 +15,9 @@ export const environment = {
   today: (hoy: any) => {
     return `${hoy.getDay()}/${hoy.getMonth()}/${hoy.getFullYear()}`
   },
-  offerText: ' ¡Apúrate que las ofertas vuelan!',
-  offerExpireDate: '2023-11-26 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
-  offerLink: 'https://www.nmviajes.com/vuelos?utm_source=web&utm_medium=reloj&utm_campaign=blackweek&utm_id=blackweek&utm_term=reloj&utm_content=reloj',
+  offerText: '¡No dejes pasar las ofertas!',
+  offerExpireDate: '2023-11-17 T 23:59:59', //YYYY-MM-DD T hh:mm:ss
+  offerLink: 'https://vacaciones.nmviajes.com/ES/holidays/availability?utm_source=web&utm_medium=reloj&utm_campaign=cybernmviajes&utm_id=cybernmviajesnov&utm_term=reloj&utm_content=reloj',
   urlPaqueteDinamico: 'https://vacaciones.nmviajes.com/',
   urlPaqueteDinamicoNmViajes: 'https://nmviajes.paquetedinamico.com/',
   urlAutosNmViajes: 'https://autos.nmviajes.com/',
@@ -34,7 +34,9 @@ export const environment = {
   reCaptchaPublicKey: '6Lc9CbsmAAAAANpAUZ5Ubxl2s25BwmhZVgp7Yrev',
 
   urlNmviajes: "https://servicio.nmviajes.com:9443/homevuelos/v1/api",
+  urlNmViajesCountries: "https://servicio.nmviajes.com:9443/ZonaPrivada/v1/api/Master/Soap/Countries",
   urlMeta: "https://meta.nmviajes.com",
+  //urlNmviajes: "http://localhost:12639/v1/api",
 
   urlLibro: "https://servicio.nmviajes.com:9443/libroreclamacion",
   urlApiTickets: "https://servicios.expertiatravel.com/widgetactividades",
@@ -60,9 +62,8 @@ export const environment = {
 
   url_autos: 'https://autos.nmviajes.com/es/site/',
 
-
-  urlApiPayment: "https://pasarella.expertiatravel.com/ServicioPasarela",
-  urlApiPasarela: 'https://pasarella.expertiatravel.com/serviciopasarela/v1/api/',
+  urlApiPayment: "https://pasarella.expertiatravel.com/serviciopasareladev",
+  urlApiPasarela: 'https://pasarella.expertiatravel.com/serviciopasareladev/v1/api/',
   //urlApiPayment: "http://10.75.102.23:15001/pasarelaservicio",
   //urlApiPayment: 'http://localhost:30850',
 
@@ -70,7 +71,16 @@ export const environment = {
 
   urlApiCorreos: "https://servicios.expertiatravel.com/NmViajesCorreo",
 
-  urlApiMotorVuelos: "https://motorvuelos-dev.expertiatravel.com/mv/",
+  //https://qa-bffdelfosti.nmviajes-it.com https://motorvuelos.expertiatravel.com
+  urlApiMotorVuelos: "https://qa-motorvuelos.nmviajes-it.com",
+
+
+    //url Terms and Conditions - Checkout
+
+  urlTermsConditions: 'https://www.nmviajes.com/terminos-condiciones',
+  urlBookingConditions: 'https://www.nmviajes.com/condiciones-de-reserva',
+  urlTravelDocuments: 'https://www.nmviajes.com/documentacion-viaje',
+
   urlBlog:'https://blog.nmviajes.com',
   GDS:{
     AMADEUS: 0,
@@ -84,7 +94,7 @@ export const environment = {
     LATAM:22
   },
   openPayConfiguration: {
-    isProduction: false,
+    isSandBox: false,
     Id: 'mqxn16kmicqj2fde6fhi',
     ApiKey: 'pk_c74367b872364e91b3143c5d87d64bb8'
   },

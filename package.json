@@ -7,7 +7,6 @@
     "build": "ng build",
     "build-dev": "ng build --configuration development",
     "build-qa": "ng build --configuration qa --output-hashing=all",
-    "build-qa-new": "ng build --configuration qa-new --output-hashing=all",
     "build-qa-delfosti": "ng build --configuration qa-delfosti --output-hashing=all",
     "build-prod": "ng build --output-hashing=all",
     "start-ssl": "ng serve --ssl true --ssl-key localhost-key.pem --ssl-cert localhost.pem",
