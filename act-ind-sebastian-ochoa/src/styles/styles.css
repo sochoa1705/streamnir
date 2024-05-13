@@ -1,0 +1,31 @@
+.header__nav{
+    @apply flex items-center justify-between w-full px-6 py-4 bg-white border-b border-gray-200;
+}
+
+.header__nav__title {
+    @apply text-lg font-semibold text-gray-900;
+}
+
+.header__nav__items{
+    @apply flex gap-x-6;
+}
+
+.nav__items__btn {
+    @apply text-sm font-semibold text-gray-600 hover:text-gray-900;
+}
+
+.list__main {
+    @apply grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8;
+}
+
+.list__main__container {
+    @apply text-center;
+}
+
+.main__container__head {
+    @apply text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl;
+}
+
+.main__container__text {
+    @apply mt-6 text-base leading-7 text-gray-600;
+}
