@@ -1,9 +1,0 @@
-::ng-deep.tile {
-	box-shadow: none !important;
-}
-
-:not(.slide) ::ng-deep.tile {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-}
