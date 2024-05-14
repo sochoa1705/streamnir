@@ -1,3 +1,7 @@
+.main__container {
+    @apply min-h-screen flex flex-col;
+}
+/*Header*/
 .header__nav{
     @apply flex items-center justify-between w-full px-6 py-4 bg-white border-b border-gray-200;
 }
@@ -14,6 +18,24 @@
     @apply text-sm font-semibold text-gray-600 hover:text-gray-900;
 }
 
+/*Home*/
+.home__main {
+    @apply flex-grow grid place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8;
+}
+
+.home__main__info {
+    @apply text-center;
+}
+
+.home__main__title {
+    @apply text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl;
+}
+
+.home__main__text {
+    @apply mt-6 text-base leading-7 text-gray-600;
+}
+
+/*My List*/
 .list__main {
     @apply grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8;
 }
@@ -29,3 +51,21 @@
 .main__container__text {
     @apply mt-6 text-base leading-7 text-gray-600;
 }
+
+/*Footer*/
+.footer__main {
+    @apply bg-gray-800 text-white px-6 py-4 text-center;
+}
+
+.footer__main__p {
+    @apply mb-4;
+}
+
+.footer__info {
+    @apply flex justify-center space-x-4;
+}
+
+ .footer__info__p {
+    @apply hover:underline;
+ }
+

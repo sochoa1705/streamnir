@@ -5,7 +5,7 @@ export const Header = () => {
     const navigate = useNavigate();
     return (
         <header className="header__nav">
-            <button href="/" className="header__nav__title">Streaming</button>
+            <button onClick={() => navigate("/")} className="header__nav__title">Streamnir</button>
             <nav className="header__nav__items">
                 <button onClick={() => navigate("/")} className="nav__items__btn">Inicio</button>
                 <button onClick={() => navigate("/movies")} className="nav__items__btn">Películas</button>
