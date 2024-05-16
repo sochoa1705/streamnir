@@ -5,6 +5,7 @@ import {Home} from "../views/Home";
 import {Movies} from "../views/Movies";
 import {Series} from "../views/Series";
 import {MyList} from "../views/MyList";
+import {Pricing} from "../views/Pricing";
 
 export const StreamingRouter = () => {
     return (
@@ -14,6 +15,7 @@ export const StreamingRouter = () => {
                 <Route path="/movies/" element={<Movies/>}/>
                 <Route path="/series/" element={<Series/>}/>
                 <Route path="/my-list/" element={<MyList/>}/>
+                <Route path="/pricing/" element={<Pricing/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
         </BrowserRouter>
