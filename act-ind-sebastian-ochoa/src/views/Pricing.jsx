@@ -1,43 +1,9 @@
 import React from "react";
 import {Header} from "../components/shared/Header";
-import {Footer} from "../components/shared/footer";
+import {pricingPLans} from "../utils/constants";
 
 export const Pricing = () => {
-    const pricingPLans = [
-        {
-            name: "Basic",
-            price: "4.99",
-            features: [
-                "Calidad 720p",
-                "1 Dispositivo",
-                "Peliculas Limitadas",
-                "Series Limitadas",
-                "Descarga no disponible"
-            ]
-        },
-        {
-            name: "Standard",
-            price: "9.99",
-            features: [
-                "Calidad 1080p",
-                "2 Dispositivos",
-                "Alquiler de películas de estreno",
-                "Series Ilimitadas",
-                "Descarga Disponible"
-            ]
-        },
-        {
-            name: "Premium",
-            price: "14.99",
-            features: [
-                "Calidad 4K",
-                "4 Dispositivos",
-                "Peliculas Ilimitadas",
-                "Series Ilimitadas",
-                "Descarga Disponible"
-            ]
-        }
-    ];
+    const pricings = pricingPLans;
 
     return  (
         <div className="main__container">
@@ -48,7 +14,7 @@ export const Pricing = () => {
                     <p className="mt-6 text-base leading-7 text-gray-600">Elige el plan que más se ajuste a tus necesidades.</p>
                 </div>
                 <div className="grid gap-8 mt-16 sm:grid-cols-3">
-                    {pricingPLans.map((plan, index) => (
+                    {pricings.map((plan, index) => (
                         <div key={index} className="bg-gray-50 rounded-lg p-8">
                             <h2 className="text-2xl font-bold text-gray-900">{plan.name}</h2>
                             <p className="mt-4 text-4xl font-bold text-gray-900">${plan.price}</p>

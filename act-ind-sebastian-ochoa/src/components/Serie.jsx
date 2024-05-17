@@ -1,0 +1,25 @@
+import React from "react";
+import {Card, CardContent, CardMedia, Rating, Stack, Typography} from "@mui/material";
+import {POSTER_URL} from "../utils/constants";
+
+export const Serie = ({title, poster_path, vote_average, overview, release_date}) => {
+    const maxLength = 100;
+    const trimmedOverview = overview.length > maxLength ? overview.substring(0, maxLength) + '...' : overview;
+
+    return (
+        <Card color={"yellow"}>
+            <CardMedia image={`${POSTER_URL}${poster_path}`} title={title}/>
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="div">{title}</Typography>
+                <Typography variant="body2" color="text.secondary">{release_date}</Typography>
+                <Typography variant="body2" color="text.secondary">
+                    {trimmedOverview}
+                </Typography>
+                <Stack spacing={1}>
+                    <Rating  defaultValue={vote_average} precision={0.5} readOnly/>
+                </Stack>
+            </CardContent>
+        </Card>
+
+    );
+}

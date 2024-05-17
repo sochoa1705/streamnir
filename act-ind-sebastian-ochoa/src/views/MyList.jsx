@@ -11,7 +11,6 @@ export const MyList = () => {
                     <h1 className="main__container__head">Mi Lista</h1>
                 </div>
             </main>
-            <Footer/>
         </div>
     )
 }

@@ -15,7 +15,6 @@ export const Home = () => {
                 </div>
                 <CategoriesSection/>
             </main>
-            <Footer/>
         </div>
     )
 }
