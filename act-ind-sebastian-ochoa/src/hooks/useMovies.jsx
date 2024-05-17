@@ -34,7 +34,7 @@ const getMovies = async (pageNumber = 1) => {
 
 useEffect(() => {
     getMovies();
-}, [`${API_URL}${API_ENDPOINT}`]);
+},[]);
 
 return {movies, loading};
 }
