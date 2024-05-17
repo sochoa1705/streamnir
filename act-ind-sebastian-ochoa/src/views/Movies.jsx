@@ -17,17 +17,17 @@ export const Movies = () => {
                 <div className="text-center">
                     <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Películas</h1>
                 </div>
-                <div className="pt-6">
+                <div className="pt-6 md:flex">
                     <Autocomplete
                         disablePortal
                         id="combo-box-demo"
                         options={movies}
                         getOptionLabel={(option) => option.title}
-                        sx={{ width: 600 }}
+                        sx={{ width: 350 }}
                         renderInput={(params) => <TextField {...params} label="Buscar" />}
                     />
                 </div>
-                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} className="pt-6">
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} className="pt-6 md:flex">
                     {loading ?  (<LinearProgress/>) : ((movies).slice(0,12).map((movie) => (
                         <Grid item key={movie.id} xs={6}>
                             <Movie
